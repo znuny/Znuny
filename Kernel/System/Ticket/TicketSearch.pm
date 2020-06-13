@@ -41,6 +41,7 @@ To find tickets in your system.
         TicketID     => [1234, 1235],
 
         # ticket number (optional) as STRING or as ARRAYREF
+        # The value will be treated as a SQL query expression.
         TicketNumber => '%123546%',
         TicketNumber => ['%123546%', '%123666%'],
 
@@ -89,6 +90,7 @@ To find tickets in your system.
         WatchUserIDs => [1, 12, 455, 32]
 
         # CustomerID (optional) as STRING or as ARRAYREF
+        # The value will be treated as a SQL query expression.
         CustomerID => '123',
         CustomerID => ['123', 'ABC'],
 
@@ -99,6 +101,7 @@ To find tickets in your system.
         CustomerIDRaw => ['123', 'ABC','123 && 456','ABC % efg'],
 
         # CustomerUserLogin (optional) as STRING as ARRAYREF
+        # The value will be treated as a SQL query expression.
         CustomerUserLogin => 'uid123',
         CustomerUserLogin => ['uid123', 'uid777'],
 
