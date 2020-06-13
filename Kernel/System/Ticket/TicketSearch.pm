@@ -29,10 +29,10 @@ All ticket search functions.
 To find tickets in your system.
 
     my @TicketIDs = $TicketObject->TicketSearch(
-        # result (required)
+        # result (optional, default is 'HASH')
         Result => 'ARRAY' || 'HASH' || 'COUNT',
 
-        # result limit
+        # result limit (optional, default is 10000)
         Limit => 100,
 
         # Use TicketSearch as a ticket filter on a single ticket,
@@ -134,7 +134,7 @@ To find tickets in your system.
             SmallerThanEquals => '2002-02-02 02:02:02',
         }
 
-        # User ID for searching tickets by ticket flags (defaults to UserID)
+        # User ID for searching tickets by ticket flags (optional, defaults to UserID)
         TicketFlagUserID => 1,
 
         # search for ticket flags
@@ -148,7 +148,7 @@ To find tickets in your system.
             Seen => 1,
         },
 
-        # User ID for searching tickets by article flags (defaults to UserID)
+        # User ID for searching tickets by article flags (optional, defaults to UserID)
         ArticleFlagUserID => 1,
 
 
@@ -167,16 +167,18 @@ To find tickets in your system.
         # attachment stuff (optional, applies only for ArticleStorageDB)
         AttachmentName => '%anyfile.txt%',
 
-        # use full article text index if configured (optional, default off)
+        # use full article text index if configured (optional, defaults to off)
         FullTextIndex => 1,
 
-        # article content search (AND or OR for From, To, Cc, Subject and Body) (optional)
+        # article content search (AND or OR for From, To, Cc, Subject and Body) (optional, defaults to 'AND')
         ContentSearch => 'AND',
 
-        # article content search prefix (for From, To, Cc, Subject and Body) (optional)
+        # article content search prefix (for From, To, Cc, Subject and Body) (optional, defaults to '*')
+        # For Title the default is the empty string.
         ContentSearchPrefix => '*',
 
-        # article content search suffix (for From, To, Cc, Subject and Body) (optional)
+        # article content search suffix (for From, To, Cc, Subject and Body) (optional, defaults to '*')
+        # For Title the default is the empty string.
         ContentSearchSuffix => '*',
 
         # content conditions for From,To,Cc,Subject,Body
@@ -275,8 +277,9 @@ To find tickets in your system.
         # if specified together all tickets are searched
         ArchiveFlags => ['y', 'n'],
 
-        # OrderBy and SortBy (optional)
+        # OrderBy (optional, default is 'Down')
         OrderBy => 'Down',  # Down|Up
+        # SortBy (optional, default is 'Age')
         SortBy  => 'Age',   # Created|Owner|Responsible|CustomerID|State|TicketNumber|Queue|Priority|Age|Type|Lock
                             # Changed|Title|Service|SLA|PendingTime|EscalationTime
                             # EscalationUpdateTime|EscalationResponseTime|EscalationSolutionTime
@@ -288,11 +291,11 @@ To find tickets in your system.
 
         # user search (UserID is required)
         UserID     => 123,
-        Permission => 'ro' || 'rw',
+        Permission => 'ro' || 'rw', # optional, default is 'ro'
 
         # customer search (CustomerUserID is required)
         CustomerUserID => 123,
-        Permission     => 'ro' || 'rw',
+        Permission     => 'ro' || 'rw', # optional, default is 'ro'
 
         # CacheTTL, cache search result in seconds (optional)
         CacheTTL => 60 * 15,
@@ -321,14 +324,12 @@ Result: 'COUNT'
 sub TicketSearch {
     my ( $Self, %Param ) = @_;
 
+    # default values
     my $Result  = $Param{Result}  || 'HASH';
     my $OrderBy = $Param{OrderBy} || 'Down';
     my $SortBy  = $Param{SortBy}  || 'Age';
     my $Limit   = $Param{Limit}   || 10000;
-
-    if ( !$Param{ContentSearch} ) {
-        $Param{ContentSearch} = 'AND';
-    }
+    $Param{ContentSearch} ||= 'AND';
 
     my %SortOptions = (
         Owner                  => 'st.user_id',
