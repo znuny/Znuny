@@ -46,6 +46,9 @@ To find tickets in your system.
         TicketNumber => ['%123546%', '%123666%'],
 
         # ticket title (optional) as STRING or as ARRAYREF
+        # The value will be treated as a SQL query expression.
+        # When ConditionInline is set then remaining whitespace will be treated as a && condition and
+        # and the settings of ContentSearchPrefix and ContentSearchSuffix will be honored.
         Title => '%SomeText%',
         Title => ['%SomeTest1%', '%SomeTest2%'],
 
@@ -184,8 +187,9 @@ To find tickets in your system.
         # For Title the default is the empty string.
         ContentSearchSuffix => '*',
 
-        # content conditions for From,To,Cc,Subject,Body
-        # Title,CustomerID and CustomerUserLogin (all optional)
+        # content conditions for From, To, Cc, Subject, Body,
+        # and Title (all optional)
+        # For Title it also activates ContentSearchPrefix and ContentSearchSuffix,
         ConditionInline => 1,
 
         # articles created more than 60 minutes ago (article older than 60 minutes) (optional)
