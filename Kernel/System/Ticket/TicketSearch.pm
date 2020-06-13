@@ -98,8 +98,9 @@ To find tickets in your system.
         CustomerID => ['123', 'ABC'],
 
         # CustomerIDRaw (optional) as STRING or as ARRAYREF
-        # CustomerID without QueryCondition checking
-        #The raw value will be used if is set this parameter
+        # CustomerID without QueryCondition checking.
+        # The param CustomerID will be ignored when CustomerIDRaw is set.
+        # The raw values will be quoted and combined with 'OR' for the query.
         CustomerIDRaw => '123 + 345',
         CustomerIDRaw => ['123', 'ABC','123 && 456','ABC % efg'],
 
@@ -109,7 +110,9 @@ To find tickets in your system.
         CustomerUserLogin => ['uid123', 'uid777'],
 
         # CustomerUserLoginRaw (optional) as STRING as ARRAYREF
-        #The raw value will be used if is set this parameter
+        # CustomerUserLogin without QueryCondition checking.
+        # The param CustomerUserLogin will be ignored when CustomerUserLoginRaw is set.
+        # The raw values will be quoted and combined with 'OR' for the query.
         CustomerUserLoginRaw => 'uid',
         CustomerUserLoginRaw => 'uid + 123',
         CustomerUserLoginRaw => ['uid  -  123', 'uid # 777 + 321'],
