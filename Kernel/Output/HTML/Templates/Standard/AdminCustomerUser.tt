@@ -279,7 +279,7 @@
 [% RenderBlockStart("Password") %]
                         <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]:</label>
                         <div class="Field">
-                            <input id="[% Data.Name | html %]" type="password" name="[% Data.Name | html %]" class="W50pc" value="[% Data.SelectedID | html %]" autocomplete="off" />
+                            <input id="[% Data.Name | html %]" type="password" name="[% Data.Name | html %]" class="W50pc" value="[% Data.SelectedID | html %]" autocomplete="new-password" />
                             <div>[% Translate(Data.Key) | html %]</div>
                         </div>
                         <div class="Clear"></div>
