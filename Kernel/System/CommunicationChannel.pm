@@ -486,17 +486,17 @@ sub ChannelList {
 
 Synchronize communication channels in the database with channel registration in configuration.
 
-    my $Result = $CommunicationChannelObject->ChannelSync(
+    my %Result = $CommunicationChannelObject->ChannelSync(
         UserID => 1,
     );
 
 Returns:
 
-    $Result = {
+    %Result = (
         ChannelsUpdated => [ 'Email', 'Phone' ],
         ChannelsAdded   => [ 'Chat' ],
         ChannelsInvalid => [ 'Internal' ],
-    };
+    );
 
 =cut
 
