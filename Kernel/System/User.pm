@@ -1284,7 +1284,7 @@ sub _UserCacheClear {
     my @CacheKeys;
 
     # Delete cache for all possible FirstnameLastNameOrder settings as this might be overridden by users.
-    for my $FirstnameLastNameOrder ( 0 .. 8 ) {
+    for my $FirstnameLastNameOrder ( 0 .. 9 ) {
         for my $ActiveLevel1 ( 0 .. 1 ) {
             for my $ActiveLevel2 ( 0 .. 1 ) {
                 push @CacheKeys, (
