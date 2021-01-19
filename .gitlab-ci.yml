@@ -1,0 +1,13 @@
+image: registry.znuny.com/znuny/internal/docker-centos-otrs-systemd:private-rk-filter-repo
+
+
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  variables:
+    GIT_STRATEGY: clone
+    GIT_CHECKOUT: "false"
+  script:
+    - sh /sync_repo.sh git@github.com:znuny/Znuny.git
