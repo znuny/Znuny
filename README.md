@@ -1,62 +1,59 @@
-What is ((OTRS)) Community Edition?
+Znuny LTS
 ===================================
-((OTRS)) Community Edition is one of the most flexible web-based ticketing
-systems used for Customer Service, Help Desk, IT Service Management.
-With a fast implementation and easy customization to your needs it
-helps you reducing costs and increasing the efficiency and transparency
-of your business communication. Please note that ((OTRS)) Community Edition
-offers limited [**OTRS**](https://www.otrs.com) functionality.
+Znuny LTS is a continuation of the ((OTRS)) Community Edition (Version 6.0.30) which was declared end of life (EOL) at the end of December 2020.
 
-You can find a list of features in the
-[online documentation](https://doc.otrs.com/doc/manual/admin/6.0/en/html/otrs.html#features-of-otrs).
+The primary goal for this project is to provide a maintained and stable version of the well known ticket system. 
+
+The second goal is to reestablish a connection to the community.
+
+This project will keep the compatibility with implementations and integrations built upon version 6 of ((OTRS)) Community Edition.
 
 
 License
 =======
-It is distributed under the GNU General Public License - see the
-accompanying [COPYING](COPYING) file for more details.
+The project is distributed under the GNU General Public License (GPL v3) - see the accompanying [COPYING](COPYING) file for general license information. 
+If you need more details you can have a look [here](https://snyk.io/learn/what-is-gpl-license-gplv3-explained/).
 
 
 Documentation
 =============
-You can find documentation [online](https://doc.otrs.com/). The source code of OTRS and its public extension
-modules is available on [github](https://github.com/OTRS).
+You can find documentation [here](https://doc.znuny.org/). 
+The source code of Znuny LTS is publicly available on [GitHub](https://github.com/znuny/znuny).
 
+You want to get in touch?
+- [Project website](https://www.znuny.org)
+- [Community forum](https://community.znuny.org)
+- [Commercial services](https://www.znuny.com)
 
-Professional Services for OTRS
-==============================
-
-Whether you need help in configuring or customizing OTRS or you want to be on the safe side,
-don't hesitate to contact us: We offer a wide range of professional services such as
-world-wide enterprise support, consulting and engineering including process design,
-implementation, customization, application support, and fully managed service.
-
-We offer best professional support from the OTRS team, reliable OTRS security and regular free updates as well as an
-[exclusive set of additional Business Features](https://otrs.com/how-to-buy/packages/#feature-add-ons) that you can
-flexibly activate or deactivate according to different deployment scenarios.
-
-The [OTRS Group](https://www.otrs.com/) offers specific [training programs](https://otrs.com/academy/#trainings) in
-different countries. You can either participate in one of our public OTRS Administrator training seminars which take
-place regularly, or benefit from an inhouse training seminar that covers all the specific needs of your company.
 
 Software requirements
 =====================
-Perl
+Operating system
+- Linux (Debian or Red Hat preferred)
 - Perl 5.16.0 or higher
 
-Webserver
-- Apache2 + mod_perl2 or higher (recommended)
-- Webserver with CGI support (CGI is not recommended)
+Web server
+- Apache 2 + mod_perl2 or higher (recommended)
+- Web server with CGI support (CGI is not recommended)
 
 Databases
 - MySQL 5.0 or higher (MySQL 8+ is [not supported](https://bugs.otrs.org/show_bug.cgi?id=13866))
 - MariaDB
 - PostgreSQL 9.2 or higher
-- Oracle 10g or higher (OTRS 9 will not support Oracle as application database anymore)
+- Oracle 10g or higher
 
 Browsers
-- Use a modern web browser.
 - These browsers are not supported:
-  - Internet Explorer before version 11 (OTRS 9 will not support Internet Explorer anymore)
+  - Internet Explorer before version 11
   - Firefox before version 31
   - Safari before version 6
+
+Vendor
+=======
+This project is mainly funded by Znuny GmbH, Berlin.
+If you need professional support or consulting, feel free to contact us.
+
+[Znuny Website](https://www.znuny.com)
+
+
+
