@@ -2,7 +2,7 @@ Znuny LTS
 ===================================
 Znuny LTS is a continuation of the ((OTRS)) Community Edition (Version 6.0.30) which was declared end of life (EOL) at the end of December 2020.
 
-The primary goal for this project is to provide a maintained and stable version of the well known ticket system. 
+The primary goal for this project is to provide a maintained and stable version of the well known ticket system.
 
 The second goal is to reestablish a connection to the community.
 
@@ -11,13 +11,13 @@ This project will keep the compatibility with implementations and integrations b
 
 License
 =======
-The project is distributed under the GNU General Public License (GPL v3) - see the accompanying [COPYING](COPYING) file for general license information. 
+The project is distributed under the GNU General Public License (GPL v3) - see the accompanying [COPYING](COPYING) file for general license information.
 If you need more details you can have a look [here](https://snyk.io/learn/what-is-gpl-license-gplv3-explained/).
 
 
 Documentation
 =============
-You can find documentation [here](https://doc.znuny.org/). 
+You can find documentation [here](https://doc.znuny.org/).
 The source code of Znuny LTS is publicly available on [GitHub](https://github.com/znuny/znuny).
 
 You want to get in touch?
@@ -54,6 +54,3 @@ This project is mainly funded by Znuny GmbH, Berlin.
 If you need professional support or consulting, feel free to contact us.
 
 [Znuny Website](https://www.znuny.com)
-
-
-
