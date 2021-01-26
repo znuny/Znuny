@@ -1,5 +1,6 @@
 // --
-// Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+// Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+// Copyright (C) 2012-2021 Znuny GmbH, http://znuny.com/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -171,7 +172,7 @@ Core.UI.RichTextEditor = (function (TargetNS) {
             toolbar: CheckFormID($EditorArea).length ? Core.Config.Get('RichText.Toolbar') : Core.Config.Get('RichText.ToolbarWithoutImage'),
             filebrowserBrowseUrl: '',
             filebrowserUploadUrl: UploadURL,
-            extraPlugins: 'splitquote,preventimagepaste,contextmenu_linkopen',
+            extraPlugins: 'splitquote,contextmenu_linkopen',
             entities: false,
             skin: 'moono-lisa'
         };
