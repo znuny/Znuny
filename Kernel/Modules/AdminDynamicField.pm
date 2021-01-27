@@ -196,26 +196,6 @@ sub _ShowOverview {
             }
         }
 
-        # Add disabled teaser options for OTRSBusiness dynamic fields.
-        if ( !$OTRSBusinessIsInstalled ) {
-            push @FieldList, {
-                Key      => 'Database',
-                Value    => $LayoutObject->{LanguageObject}->Translate( 'Database (%s)', 'OTRS Business Solution™' ),
-                Disabled => 1,
-            };
-            push @FieldList, {
-                Key   => 'Webservice',
-                Value => $LayoutObject->{LanguageObject}->Translate( 'Web service (%s)', 'OTRS Business Solution™' ),
-                Disabled => 1,
-            };
-            push @FieldList, {
-                Key => 'ContactWithData',
-                Value =>
-                    $LayoutObject->{LanguageObject}->Translate( 'Contact with data (%s)', 'OTRS Business Solution™' ),
-                Disabled => 1,
-            };
-        }
-
         # create the Add Dynamic Field select
         my $AddDynamicFieldStrg = $LayoutObject->BuildSelection(
             Data          => \@FieldList,
