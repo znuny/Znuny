@@ -50,7 +50,7 @@
         <Description Translatable="1">Defines the name of the application, shown in the web interface, tabs and title bar of the web browser.</Description>
         <Navigation>Core</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">OTRS 6</Item>
+            <Item ValueType="String" ValueRegex="">Znuny LTS</Item>
         </Value>
     </Setting>
     <Setting Name="SystemID" Required="1" Valid="1" ConfigLevel="200">
@@ -960,15 +960,6 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::Notification::AgentTimeZoneCheck</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Frontend::NotifyModule###8000-PackageManager-CheckNotVerifiedPackages" Required="1" Valid="1">
-        <Description Translatable="1">Defines the module to display a notification in the agent interface, if the installation of not verified packages is activated (only shown to admins).</Description>
-        <Navigation>Frontend::Agent::FrontendNotification</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Module">Kernel::Output::HTML::Notification::PackageManagerCheckNotVerifiedPackages</Item>
             </Hash>
         </Value>
     </Setting>
@@ -2759,7 +2750,7 @@
         <Description Translatable="1">If this setting is enabled, it is possible to install packages which are not verified by OTRS Group. These packages could threaten your whole system!</Description>
         <Navigation>Core::Package</Navigation>
         <Value>
-            <Item ValueType="Checkbox">0</Item>
+            <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
     <Setting Name="Package::EventModulePost###9000-SupportDataSend" Required="0" Valid="1">
@@ -6451,7 +6442,7 @@ via the Preferences button after logging in.
             </Array>
         </Value>
     </Setting>
-    <Setting Name="Frontend::NavigationModule###AdminRegistration" Required="0" Valid="1">
+    <Setting Name="Frontend::NavigationModule###AdminRegistration" Required="0" Valid="0">
         <Description Translatable="1">Admin area navigation for the agent interface.</Description>
         <Navigation>Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
         <Value>
@@ -6474,7 +6465,7 @@ via the Preferences button after logging in.
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::Module###AdminOTRSBusiness" Required="0" Valid="1">
+    <Setting Name="Frontend::Module###AdminOTRSBusiness" Required="0" Valid="0">
         <Description Translatable="1">Frontend module registration for the agent interface.</Description>
         <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
         <Value>
@@ -6701,7 +6692,7 @@ via the Preferences button after logging in.
             </Array>
         </Value>
     </Setting>
-    <Setting Name="Frontend::NavigationModule###AdminCloudServices" Required="0" Valid="1">
+    <Setting Name="Frontend::NavigationModule###AdminCloudServices" Required="0" Valid="0">
         <Description Translatable="1">Admin area navigation for the agent interface.</Description>
         <Navigation>Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
         <Value>
@@ -7384,6 +7375,7 @@ via the Preferences button after logging in.
                         <Item Key="Prio">8500</Item>
                     </Hash>
                 </Item>
+<!--
                 <Item>
                     <Hash>
                         <Item Key="Group">
@@ -7407,6 +7399,7 @@ via the Preferences button after logging in.
                         <Item Key="Prio">100</Item>
                     </Hash>
                 </Item>
+-->
                 <Item>
                     <Hash>
                         <Item Key="Group">

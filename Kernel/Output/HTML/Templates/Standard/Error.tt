@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2012-2021 Znuny GmbH, http://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,41 +19,6 @@
                 <p class="SpacingTop">
                     [% Translate(Data.Comment) | html %]
                 </p>
-
-                [% IF Data.ShowOTRSBusinessHint %]
-                <div class="MessageBox Info">
-                    <p class="SpacingTop">
-                        [% Translate("Really a bug? 5 out of 10 bug reports result from a wrong or incomplete installation of OTRS.") | html %]
-                        [% Translate("With %s, our experts take care of correct installation and cover your back with support and periodic security updates.") | html | ReplacePlaceholders('<b>OTRS Business Solution™</b>') %]
-                        <br /><br />
-                        <a class="Button" href="https://www.otrs.com/contact/" target="_blank">
-                            [% Translate("Contact our service team now.") | html %]
-                        </a>
-                    </p>
-                </div>
-                [% END %]
-
-                <form action="https://bugs.otrs.org/enter_bug.cgi" target="_blank">
-                    <input type="hidden" name="product" value="OTRS Helpdesk" />
-
-                    <textarea class="Hidden" name="comment" rows="1" cols="1">
-Message:
-[% Data.Message | html %]
-
-Comment:
-[% Data.Comment | html %]
-
-Traceback:
-[% Data.BackendTraceback | html %]
-                    </textarea>
-                    <input type="hidden" name="bug_file_loc" value="[% Env("SERVER_NAME") | html %][% Env("REQUEST_URI") | html %]"/>
-
-                    <p class="SpacingTop">
-                        <button type="submit" class="Primary CallForAction" value="[% Translate("Send a bugreport") | html %]"><span>[% Translate("Send a bugreport") | html %]</span></button>
-                        &nbsp;[% Translate("or") | html %]&nbsp;
-                        <a href="#" class="CallForAction ReturnToPreviousPage"><span>[% Translate("go back to the previous page") | html %]</span></a>
-                    </p>
-                </form>
 
                 <div id="Traceback" class="SpacingTop Notice Hidden">
                     <h4>[% Translate("Error Details") | html %]:</h4>

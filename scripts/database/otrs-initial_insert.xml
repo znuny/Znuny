@@ -340,8 +340,8 @@ Your Ticket-Team
 
     <Insert Table="system_address">
         <Data Key="id" Type="AutoIncrement">1</Data>
-        <Data Key="value0" Type="Quote">otrs@localhost</Data>
-        <Data Key="value1" Type="Quote">OTRS System</Data>
+        <Data Key="value0" Type="Quote">znuny@localhost</Data>
+        <Data Key="value1" Type="Quote">Znuny LTS System</Data>
         <Data Key="comments" Type="Quote" Translatable="1">Standard Address.</Data>
         <Data Key="valid_id">1</Data>
         <Data Key="queue_id">1</Data>
@@ -575,9 +575,9 @@ You wrote:
 
 Your email will be answered by a human ASAP
 
-Have fun with OTRS! :-)
+Have fun with Znuny! :-)
 
-Your OTRS Team
+Your Znuny Team
 </Data>
         <Data Key="text1" Type="Quote">RE: &lt;OTRS_CUSTOMER_SUBJECT[24]&gt;</Data>
         <Data Key="content_type" Type="Quote">text/plain</Data>
@@ -599,7 +599,7 @@ Your OTRS Team
 
 Please create a new ticket.
 
-Your OTRS Team
+Your Znuny Team
 </Data>
         <Data Key="text1" Type="Quote">Your email has been rejected! (RE: &lt;OTRS_CUSTOMER_SUBJECT[24]&gt;)</Data>
         <Data Key="content_type" Type="Quote">text/plain</Data>
@@ -622,9 +622,9 @@ You wrote:
 
 Your email will be answered by a human ASAP.
 
-Have fun with OTRS!
+Have fun with Znuny!
 
-Your OTRS Team
+Your Znuny Team
 </Data>
         <Data Key="text1" Type="Quote">RE: &lt;OTRS_CUSTOMER_SUBJECT[24]&gt;</Data>
         <Data Key="content_type" Type="Quote">text/plain</Data>
@@ -649,9 +649,9 @@ You wrote:
 
 Your email will be answered by a human ASAP.
 
-Have fun with OTRS!
+Have fun with Znuny!
 
-Your OTRS Team
+Your Znuny Team
 </Data>
         <Data Key="text1" Type="Quote">New ticket has been created! (RE: &lt;OTRS_CUSTOMER_SUBJECT[24]&gt;)</Data>
         <Data Key="content_type" Type="Quote">text/plain</Data>
@@ -1237,14 +1237,14 @@ Your OTRS Team
 
     <Insert Table="ticket">
         <Data Key="id" Type="AutoIncrement">1</Data>
-        <Data Key="tn" Type="Quote">2015071510123456</Data>
+        <Data Key="tn" Type="Quote">2021012710123456</Data>
         <Data Key="queue_id">2</Data>
         <Data Key="ticket_lock_id">1</Data>
         <Data Key="user_id">1</Data>
         <Data Key="responsible_user_id">1</Data>
         <Data Key="ticket_priority_id">3</Data>
         <Data Key="ticket_state_id">1</Data>
-        <Data Key="title" Type="Quote">Welcome to OTRS!</Data>
+        <Data Key="title" Type="Quote">Znuny says hi!</Data>
         <Data Key="timeout">0</Data>
         <Data Key="until_time">0</Data>
         <Data Key="escalation_time">0</Data>
@@ -1346,47 +1346,28 @@ ArticleDataTables:
     <Insert Table="article_data_mime">
         <Data Key="id" Type="AutoIncrement">1</Data>
         <Data Key="article_id">1</Data>
-        <Data Key="a_from" Type="Quote">OTRS Feedback &lt;marketing@otrs.com&gt;</Data>
-        <Data Key="a_to" Type="Quote">Your OTRS System &lt;otrs@localhost&gt;</Data>
-        <Data Key="a_subject" Type="Quote">Welcome to OTRS!</Data>
-        <Data Key="a_body" Type="Quote">Welcome to the OTRS Group’s community!
+        <Data Key="a_from" Type="Quote">Znuny LTS &lt;hello@znuny.org&gt;</Data>
+        <Data Key="a_to" Type="Quote">Your Znuny Helpdesk &lt;znuny@localhost&gt;</Data>
+        <Data Key="a_subject" Type="Quote">Znuny says hi!</Data>
+        <Data Key="a_body" Type="Quote">We welcome you to Znuny, our ticketing solution based on the well-known OTRS ((Community Edition)) which we forked to make things different.
 
-Thank you for installing ((OTRS)) Community Edition, the world’s most popular open source service management software. It’s available in 40 languages and used by more than 170,000 companies worldwide.
+We are focused on delivering a stable and community influenced software. So if you have something to contribute, whether bug reports, solutions or enhancements, let us know. We will be happy about your participation.
 
-Please be aware that we do not offer official vendor support for the ((OTRS)) Community Edition.
+You can get additional information here:
 
-Resources for ((OTRS)) Community Edition Users
+Community forum: https://community.znuny.org/
 
-You can find updates and patches for ((OTRS)) Community Edition at https://community.otrs.com/download-otrs-community-edition/.
+Documentation: https://doc.znuny.org/
 
-Find help and exchange ideas in our knowledge base at https://community.otrs.com/open-source/. Here, you’ll be able to take part of the OTRS Group’s Community and take advantage of our blog posts. You can report a bug, suggest a feature or discover online documentation.
+GitHub: https://github.com/znuny/Znuny
 
-Mailing lists are also available at https://lists.otrs.org/
+Have fun and enjoy it.
 
-Interested in OTRS? We offer professional service management solutions too.
-
-To get the most up-to-date version of OTRS and to receive the best possible support for your business, we recommend that you use our fully-managed version of OTRS: https://otrs.com/how-to-buy/.
-
-With this version, you’ll gain access to:
-
-- Exclusive features that are only available to OTRS users
-- The OTRS Feature Add-ons
-- Business process management support
-- Included professional services – training, support and consulting
-- All the latest security updates and patches
-- Implementation and configuration by our experts
-
-Find more information about OTRS support and consulting by visiting https://otrs.com/otrs-solutions/.
-
-Ready to get started with fully-managed OTRS instead? -> Contact Sales: https://otrs.com/contact/
-
-Best regards and ((enjoy)) ((OTRS)) Community Edition,
-
-Your OTRS Team
+Your Znuny Team
 </Data>
         <Data Key="a_message_id" Type="Quote">&lt;007@localhost&gt;</Data>
-        <Data Key="incoming_time">1436949030</Data>
-        <Data Key="content_path" Type="Quote">2015/07/15</Data>
+        <Data Key="incoming_time">1611745200</Data>
+        <Data Key="content_path" Type="Quote">2021/01/27</Data>
         <Data Key="create_by">1</Data>
         <Data Key="create_time">current_timestamp</Data>
         <Data Key="change_by">1</Data>
@@ -1396,46 +1377,27 @@ Your OTRS Team
     <Insert Table="article_data_mime_plain">
         <Data Key="id" Type="AutoIncrement">1</Data>
         <Data Key="article_id">1</Data>
-        <Data Key="body" Type="Quote">From: OTRS Feedback &lt;marketing@otrs.com&gt;
-To: Your OTRS System &lt;otrs@localhost&gt;
-Subject: Welcome to OTRS!
+        <Data Key="body" Type="Quote">From: Znuny LTS &lt;hello@znuny.org&gt;
+To: Your Znuny Helpdesk &lt;znuny@localhost&gt;
+Subject: Znuny says hi!
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
 
-Welcome to the OTRS Group’s community!
+We welcome you to Znuny, our ticketing solution based on the well-known OTRS ((Community Edition)) which we forked to make things different.
 
-Thank you for installing ((OTRS)) Community Edition, the world’s most popular open source service management software. It’s available in 40 languages and used by more than 170,000 companies worldwide.
+We are focused on delivering a stable and community influenced software. So if you have something to contribute, whether bug reports, solutions or enhancements, let us know. We will be happy about your participation.
 
-Please be aware that we do not offer official vendor support for the ((OTRS)) Community Edition.
+You can get additional information here:
 
-Resources for ((OTRS)) Community Edition Users
+Community forum: https://community.znuny.org/
 
-You can find updates and patches for ((OTRS)) Community Edition at https://community.otrs.com/download-otrs-community-edition/.
+Documentation: https://doc.znuny.org/
 
-Find help and exchange ideas in our knowledge base at https://community.otrs.com/open-source/. Here, you’ll be able to take part of the OTRS Group’s Community and take advantage of our blog posts. You can report a bug, suggest a feature or discover online documentation.
+GitHub: https://github.com/znuny/Znuny
 
-Mailing lists are also available at https://lists.otrs.org/
+Have fun and enjoy it.
 
-Interested in OTRS? We offer professional service management solutions too.
-
-To get the most up-to-date version of OTRS and to receive the best possible support for your business, we recommend that you use our fully-managed version of OTRS: https://otrs.com/how-to-buy/.
-
-With this version, you’ll gain access to:
-
-- Exclusive features that are only available to OTRS users
-- The OTRS Feature Add-ons
-- Business process management support
-- Included professional services – training, support and consulting
-- All the latest security updates and patches
-- Implementation and configuration by our experts
-
-Find more information about OTRS support and consulting by visiting https://otrs.com/otrs-solutions/.
-
-Ready to get started with fully-managed OTRS instead? -> Contact Sales: https://otrs.com/contact/
-
-Best regards and ((enjoy)) ((OTRS)) Community Edition,
-
-Your OTRS Team
+Your Znuny Team
 </Data>
         <Data Key="create_by">1</Data>
         <Data Key="create_time">current_timestamp</Data>
@@ -1445,7 +1407,7 @@ Your OTRS Team
 
     <Insert Table="ticket_history">
         <Data Key="id" Type="AutoIncrement">1</Data>
-        <Data Key="name" Type="Quote">New Ticket [2015071510123456] created.</Data>
+        <Data Key="name" Type="Quote">New Ticket [2021012710123456] created.</Data>
         <Data Key="history_type_id">1</Data>
         <Data Key="ticket_id">1</Data>
         <Data Key="type_id">1</Data>

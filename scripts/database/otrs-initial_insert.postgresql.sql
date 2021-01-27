@@ -212,7 +212,7 @@ Your Ticket-Team
 -- ----------------------------------------------------------
 INSERT INTO system_address (value0, value1, comments, valid_id, queue_id, create_by, create_time, change_by, change_time)
     VALUES
-    ('otrs@localhost', 'OTRS System', 'Standard Address.', 1, 1, 1, current_timestamp, 1, current_timestamp);
+    ('znuny@localhost', 'Znuny LTS System', 'Standard Address.', 1, 1, 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table follow_up_possible
 -- ----------------------------------------------------------
@@ -336,9 +336,9 @@ You wrote:
 
 Your email will be answered by a human ASAP
 
-Have fun with OTRS! :-)
+Have fun with Znuny! :-)
 
-Your OTRS Team
+Your Znuny Team
 ', 'RE: <OTRS_CUSTOMER_SUBJECT[24]>', 'text/plain', '', 1, 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table auto_response
@@ -351,7 +351,7 @@ INSERT INTO auto_response (type_id, system_address_id, name, text0, text1, conte
 
 Please create a new ticket.
 
-Your OTRS Team
+Your Znuny Team
 ', 'Your email has been rejected! (RE: <OTRS_CUSTOMER_SUBJECT[24]>)', 'text/plain', '', 1, 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table auto_response
@@ -365,9 +365,9 @@ You wrote:
 
 Your email will be answered by a human ASAP.
 
-Have fun with OTRS!
+Have fun with Znuny!
 
-Your OTRS Team
+Your Znuny Team
 ', 'RE: <OTRS_CUSTOMER_SUBJECT[24]>', 'text/plain', '', 1, 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table auto_response
@@ -383,9 +383,9 @@ You wrote:
 
 Your email will be answered by a human ASAP.
 
-Have fun with OTRS!
+Have fun with Znuny!
 
-Your OTRS Team
+Your Znuny Team
 ', 'New ticket has been created! (RE: <OTRS_CUSTOMER_SUBJECT[24]>)', 'text/plain', '', 1, 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table ticket_type
@@ -770,7 +770,7 @@ INSERT INTO article_sender_type (name, valid_id, create_by, create_time, change_
 -- ----------------------------------------------------------
 INSERT INTO ticket (tn, queue_id, ticket_lock_id, user_id, responsible_user_id, ticket_priority_id, ticket_state_id, title, timeout, until_time, escalation_time, escalation_response_time, escalation_update_time, escalation_solution_time, create_by, create_time, change_by, change_time)
     VALUES
-    ('2015071510123456', 2, 1, 1, 1, 3, 1, 'Welcome to OTRS!', 0, 0, 0, 0, 0, 0, 1, current_timestamp, 1, current_timestamp);
+    ('2021012710123456', 2, 1, 1, 1, 3, 1, 'Znuny says hi!', 0, 0, 0, 0, 0, 0, 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table communication_channel
 -- ----------------------------------------------------------
@@ -831,93 +831,55 @@ INSERT INTO article (ticket_id, communication_channel_id, article_sender_type_id
 -- ----------------------------------------------------------
 INSERT INTO article_data_mime (article_id, a_from, a_to, a_subject, a_body, a_message_id, incoming_time, content_path, create_by, create_time, change_by, change_time)
     VALUES
-    (1, 'OTRS Feedback <marketing@otrs.com>', 'Your OTRS System <otrs@localhost>', 'Welcome to OTRS!', 'Welcome to the OTRS Group’s community!
+    (1, 'Znuny LTS <hello@znuny.org>', 'Your Znuny Helpdesk <znuny@localhost>', 'Znuny says hi!', 'We welcome you to Znuny, our ticketing solution based on the well-known OTRS ((Community Edition)) which we forked to make things different.
 
-Thank you for installing ((OTRS)) Community Edition, the world’s most popular open source service management software. It’s available in 40 languages and used by more than 170,000 companies worldwide.
+We are focused on delivering a stable and community influenced software. So if you have something to contribute, whether bug reports, solutions or enhancements, let us know. We will be happy about your participation.
 
-Please be aware that we do not offer official vendor support for the ((OTRS)) Community Edition.
+You can get additional information here:
 
-Resources for ((OTRS)) Community Edition Users
+Community forum: https://community.znuny.org/
 
-You can find updates and patches for ((OTRS)) Community Edition at https://community.otrs.com/download-otrs-community-edition/.
+Documentation: https://doc.znuny.org/
 
-Find help and exchange ideas in our knowledge base at https://community.otrs.com/open-source/. Here, you’ll be able to take part of the OTRS Group’s Community and take advantage of our blog posts. You can report a bug, suggest a feature or discover online documentation.
+GitHub: https://github.com/znuny/Znuny
 
-Mailing lists are also available at https://lists.otrs.org/
+Have fun and enjoy it.
 
-Interested in OTRS? We offer professional service management solutions too.
-
-To get the most up-to-date version of OTRS and to receive the best possible support for your business, we recommend that you use our fully-managed version of OTRS: https://otrs.com/how-to-buy/.
-
-With this version, you’ll gain access to:
-
-- Exclusive features that are only available to OTRS users
-- The OTRS Feature Add-ons
-- Business process management support
-- Included professional services – training, support and consulting
-- All the latest security updates and patches
-- Implementation and configuration by our experts
-
-Find more information about OTRS support and consulting by visiting https://otrs.com/otrs-solutions/.
-
-Ready to get started with fully-managed OTRS instead? -> Contact Sales: https://otrs.com/contact/
-
-Best regards and ((enjoy)) ((OTRS)) Community Edition,
-
-Your OTRS Team
-', '<007@localhost>', 1436949030, '2015/07/15', 1, current_timestamp, 1, current_timestamp);
+Your Znuny Team
+', '<007@localhost>', 1611745200, '2021/01/27', 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table article_data_mime_plain
 -- ----------------------------------------------------------
 INSERT INTO article_data_mime_plain (article_id, body, create_by, create_time, change_by, change_time)
     VALUES
-    (1, 'From: OTRS Feedback <marketing@otrs.com>
-To: Your OTRS System <otrs@localhost>
-Subject: Welcome to OTRS!
+    (1, 'From: Znuny LTS <hello@znuny.org>
+To: Your Znuny Helpdesk <znuny@localhost>
+Subject: Znuny says hi!
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
 
-Welcome to the OTRS Group’s community!
+We welcome you to Znuny, our ticketing solution based on the well-known OTRS ((Community Edition)) which we forked to make things different.
 
-Thank you for installing ((OTRS)) Community Edition, the world’s most popular open source service management software. It’s available in 40 languages and used by more than 170,000 companies worldwide.
+We are focused on delivering a stable and community influenced software. So if you have something to contribute, whether bug reports, solutions or enhancements, let us know. We will be happy about your participation.
 
-Please be aware that we do not offer official vendor support for the ((OTRS)) Community Edition.
+You can get additional information here:
 
-Resources for ((OTRS)) Community Edition Users
+Community forum: https://community.znuny.org/
 
-You can find updates and patches for ((OTRS)) Community Edition at https://community.otrs.com/download-otrs-community-edition/.
+Documentation: https://doc.znuny.org/
 
-Find help and exchange ideas in our knowledge base at https://community.otrs.com/open-source/. Here, you’ll be able to take part of the OTRS Group’s Community and take advantage of our blog posts. You can report a bug, suggest a feature or discover online documentation.
+GitHub: https://github.com/znuny/Znuny
 
-Mailing lists are also available at https://lists.otrs.org/
+Have fun and enjoy it.
 
-Interested in OTRS? We offer professional service management solutions too.
-
-To get the most up-to-date version of OTRS and to receive the best possible support for your business, we recommend that you use our fully-managed version of OTRS: https://otrs.com/how-to-buy/.
-
-With this version, you’ll gain access to:
-
-- Exclusive features that are only available to OTRS users
-- The OTRS Feature Add-ons
-- Business process management support
-- Included professional services – training, support and consulting
-- All the latest security updates and patches
-- Implementation and configuration by our experts
-
-Find more information about OTRS support and consulting by visiting https://otrs.com/otrs-solutions/.
-
-Ready to get started with fully-managed OTRS instead? -> Contact Sales: https://otrs.com/contact/
-
-Best regards and ((enjoy)) ((OTRS)) Community Edition,
-
-Your OTRS Team
+Your Znuny Team
 ', 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table ticket_history
 -- ----------------------------------------------------------
 INSERT INTO ticket_history (name, history_type_id, ticket_id, type_id, article_id, priority_id, owner_id, state_id, queue_id, create_by, create_time, change_by, change_time)
     VALUES
-    ('New Ticket [2015071510123456] created.', 1, 1, 1, 1, 3, 1, 1, 1, 1, current_timestamp, 1, current_timestamp);
+    ('New Ticket [2021012710123456] created.', 1, 1, 1, 1, 3, 1, 1, 1, 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table notification_event
 -- ----------------------------------------------------------
