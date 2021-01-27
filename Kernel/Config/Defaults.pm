@@ -105,7 +105,7 @@ sub LoadDefaults {
 
     # ProductName
     # (Application name displayed in frontend.)
-    $Self->{ProductName} = 'OTRS 6';
+    $Self->{ProductName} = 'Znuny LTS';
 
     # --------------------------------------------------- #
     # database settings                                   #
