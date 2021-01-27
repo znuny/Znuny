@@ -21,7 +21,7 @@
 
 [% IF !Config("Secure::DisableBanner") %]
     <a href="https://www.znuny.org" title="[% Config("Product") | html %][% IF !Data.IsLoginPage %] [% Config("Version") | html %][% END %]" target="_blank">
-#        <span></span>
+        <span></span>
         [% Translate("Powered by %s", Config("Product")) | html %]
     </a>
     <div class="Clear"></div>
