@@ -91,6 +91,7 @@ The following persons contributed to OTRS:
 * Walter Souto <walter.souto@saude.go.gov.br>
 * Wojciech Kuchta <klapi85@gmail.com>
 * Wojciech Kuchta <wojciech.kuchta@allegro.pl>
+* Yuri Myasoedov <ymyasoedov@yandex.ru>
 * Zoran Ilibasic <zilibasic@s7designcreative.com>
 * anonymous <uknown@anonymous>
 * djurici <igor.djuric@muehlbauer.de>
