@@ -1,12 +1,11 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2012-2021 Znuny GmbH, http://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-
-[% SET OTRSBusinessLabel = '<strong>OTRS Business Solution</strong>™' %]
 
 [% RenderBlockStart("Uninstall") %]
 <div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
@@ -194,8 +193,6 @@
                     [% ELSIF Data.Type =='UpgradeIncompatible' %]
                     <h2>[% Translate("Package update requires a patch level update of OTRS.") | html %]</h2>
                     [% END %]
-                    <p>[% Translate("If you are a OTRS Business Solution™ customer, please visit our customer portal and file a request.") | html %]</p>
-                    <p><strong>[% Translate("Everything else will be done as part of your contract.") | html %]</strong></p>
                     <p class="SpacingTop">[% Translate("Please note that your installed OTRS version is %s.", Config("Version")) | html %]</p>
                     [% IF Data.RequiredMinimumVersion %]
                     <p><span class="MinimumRequired">[% Translate("To install this package, you need to update OTRS to version %s or newer.", Data.RequiredMinimumVersion) | html %]</span></p>
@@ -278,9 +275,6 @@
                     <h2>[% Translate(Data.Title) | html %]</h2>
                 </div>
                 <div class="Content">
-[% RenderBlockStart("OTRSVerifyLogo") %]
-                    <img src="[% Config("Frontend::ImagePath") %]/otrs-verify.png" class="OTRSVerifyLogoBig" />
-[% RenderBlockEnd("OTRSVerifyLogo") %]
                     <div class="IntroInstall [% Data.VerifyCSSClass | html %]">
                         <h3>[% Data.Name | html %] [% Data.Version | html %]</h3>
                         [% Data.Description %]
@@ -477,9 +471,9 @@
 [% RenderBlockStart("ShowLocalPackage") %]
                             <tr>
                                 <td>
-[% RenderBlockStart("ShowLocalPackageVerifyLogo") %]
-                                    <img src="[% Config("Frontend::ImagePath") %]/otrs-verify-small.png" class="OTRSVerifyLogo" alt="[% Translate("This package is verified by OTRSverify (tm)") | html %]" />
-[% RenderBlockEnd("ShowLocalPackageVerifyLogo") %]
+#[% RenderBlockStart("ShowLocalPackageVerifyLogo") %]
+#                                    <img src="[% Config("Frontend::ImagePath") %]/otrs-verify-small.png" class="OTRSVerifyLogo" alt="[% Translate("This package is verified by OTRSverify (tm)") | html %]" />
+#[% RenderBlockEnd("ShowLocalPackageVerifyLogo") %]
                                     <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=View;Name=[% Data.Name | uri %];Version=[% Data.Version | uri %]">[% Data.Name | html %]</a>
                                 </td>
                                 <td>
@@ -511,39 +505,6 @@
                     </table>
                 </div>
             </div>
-
-[% RenderBlockStart("FeatureAddonList") %]
-            <div class="WidgetSimple">
-
-                <div class="Header">
-                    <h2>
-                        [% Translate("Features for %s customers only") | html | ReplacePlaceholders(OTRSBusinessLabel) %]
-                        → <a href="mailto:sales@otrs.com">sales@otrs.com</a>
-                    </h2>
-                </div>
-                <div class="Content ">
-                    <p>
-                        [% Translate("With %s, you can benefit from the following optional features. Please make contact with %s if you need more information.") | html | ReplacePlaceholders(OTRSBusinessLabel, '<a href="mailto:sales@otrs.com">sales@otrs.com</a>') %]
-                    </p>
-                    <table class="DataTable SpacingTop">
-                        <thead>
-                            <tr>
-                                <th>[% Translate("Name") | html %]</th>
-                                <th>[% Translate("Description") | html %]</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-[% RenderBlockStart("FeatureAddonData") %]
-                            <tr>
-                                <td><a href="[% Data.Link | html %]" target="_feature_addon_details">[% Data.Title | html %]</a></td>
-                                <td>[% Data.Description | html %]</td>
-                            </tr>
-[% RenderBlockEnd("FeatureAddonData") %]
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-[% RenderBlockEnd("FeatureAddonList") %]
 
         </div>
         <div class="Clear"></div>

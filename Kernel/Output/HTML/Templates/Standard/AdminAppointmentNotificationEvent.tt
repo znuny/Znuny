@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2012-2021 Znuny GmbH, http://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -7,8 +8,6 @@
 # --
 
 ## nofilter(TidyAll::Plugin::OTRS::TT::ScriptUsage)
-
-[% SET OTRSBusinessLabel = '<strong>OTRS Business Solution</strong>™' %]
 
 [% RenderBlockStart("Overview") %]
 <div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
@@ -410,11 +409,6 @@
                             </p>
                         </div>
 [% RenderBlockEnd("TransportRowDisabled") %]
-[% RenderBlockStart("TransportRowRecommendation") %]
-                        <div class="Field Info">
-                            <a href="[% Env("Baselink") %]Action=AdminOTRSBusiness" class="Button"><i class="fa fa-angle-double-up"></i> [% Translate("Upgrade to %s") | html | ReplacePlaceholders(OTRSBusinessLabel) %]</a>
-                        </div>
-[% RenderBlockEnd("TransportRowRecommendation") %]
 [% RenderBlockStart("TransportRowNotActive") %]
                         <div class="Field Info">
                             <a href="[% Env("Baselink") %]Action=AdminCloudServices" class="Button"><i class="fa fa-angle-double-up"></i> [% Translate("Please activate this transport in order to use it.") | html %]</a>

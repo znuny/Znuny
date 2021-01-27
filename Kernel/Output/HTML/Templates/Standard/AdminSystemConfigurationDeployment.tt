@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2012-2021 Znuny GmbH, http://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -34,9 +35,11 @@
                     <li>
                         <a href="[% Env("Baselink") %]Action=AdminSystemConfiguration" class="GoBackButton CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go back") | html %]</span></a>
                     </li>
-                    <li>
-                        <a href="[% Env("Baselink") %]Action=AdminSystemConfigurationDeploymentHistory;Subaction=DeploymentHistory" class="CallForAction Fullsize Center OTRSBusinessRequired"><span><i class="fa fa-history"></i>[% Translate("History") | html %][% IF !Data.OTRSBusinessIsInstalled %] (OTRS Business Solution™)[% END %]</span></a>
-                    </li>
+                    [% IF Data.OTRSBusinessIsInstalled %]
+                        <li>
+                            <a href="[% Env("Baselink") %]Action=AdminSystemConfigurationDeploymentHistory;Subaction=DeploymentHistory" class="CallForAction Fullsize Center OTRSBusinessRequired"><span><i class="fa fa-history"></i>[% Translate("History") | html %]</span></a>
+                        </li>
+                    [% END %]
                 </ul>
             </div>
         </div>

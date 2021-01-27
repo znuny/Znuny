@@ -1,6 +1,6 @@
 <!--                                                                           -->
-<!--        OTRS: Copyright (C) 2001-2021 OTRS AG, https://otrs.com/.          -->
-<!--         Web: https://otrs.com/ - Lists: https://lists.otrs.org/           -->
+<!--        Znuny LTS: Copyright (C) 2021 Znuny GmbH, https://znuny.com/       -->
+<!--        OTRS: Copyright (C) 2001-2021 OTRS AG, https://otrs.com/           -->
 <!--    GNU General Public License: https://www.gnu.org/licenses/gpl-3.0.txt   -->
 <!--                                                                           -->
 ## nofilter(TidyAll::Plugin::OTRS::Common::HeaderlineFilename)
