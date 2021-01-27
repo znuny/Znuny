@@ -39,11 +39,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2020-04-08 06:39+0000\n"
-"PO-Revision-Date: 2020-03-11 18:03+0000\n"
+"POT-Creation-Date: 2020-07-01 07:05+0000\n"
+"PO-Revision-Date: 2020-10-01 16:30+0000\n"
 "Last-Translator: Yuri Myasoedov <myasoedovys@gmail.com>\n"
-"Language-Team: Russian <https://translate.app.otrs.com/projects/otrs-6/otrs/"
-"ru/>\n"
+"Language-Team: Russian <https://translate.otrs.com/projects/otrs-6/otrs/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,7 +51,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
-"X-Generator: Weblate 3.11.2\n"
+"X-Generator: Weblate 4.2.2\n"
 
 #. Template: AdminACL
 msgid "ACL Management"
@@ -163,7 +163,7 @@ msgstr "Экспортировать"
 
 #. Template: AdminACL
 msgid "Copy"
-msgstr "Скопировать"
+msgstr "Копировать"
 
 #. Template: AdminACL
 msgid "No data found."
@@ -1106,7 +1106,7 @@ msgstr "Журнал сеансов связи"
 
 #. Template: AdminCommunicationLog
 msgid "Time Range"
-msgstr "Временной Интервал"
+msgstr "Интервал времени"
 
 #. Template: AdminCommunicationLog
 msgid "Show only communication logs created in specific time range."
@@ -1133,7 +1133,8 @@ msgid ""
 "You can change the sort and order of the columns by clicking on the column "
 "header."
 msgstr ""
-"Вы можете поменять сортировку и порядок колонок, кликнув по заголовку. "
+"Чтобы изменить сортировку или порядок столбцов, щёлкните мышью по заголовку "
+"столбцов."
 
 #. Template: AdminCommunicationLog
 msgid ""
@@ -1328,7 +1329,7 @@ msgstr "Показывать записи только с указанным п�
 
 #. Template: AdminCommunicationLogZoom
 msgid "Communication Log Overview (%s)"
-msgstr "Просмотр журнала сеансов связи для:  (%s)"
+msgstr "Просмотр журнала сеансов связи (%s)"
 
 #. Template: AdminCommunicationLogZoom
 msgid "No communication objects found."
@@ -1344,7 +1345,7 @@ msgstr "Выберите запись из списка."
 
 #. Template: AdminCustomerCompany
 msgid "Customer Management"
-msgstr "Управление Компаниями"
+msgstr "Управление компаниями"
 
 #. Template: AdminCustomerCompany
 msgid "Add Customer"
@@ -1415,7 +1416,7 @@ msgstr "Включить функцию!"
 
 #. Template: AdminCustomerGroup
 msgid "Edit Customer Default Groups"
-msgstr "Редактировать группы клиента по-умолчанию "
+msgstr "Редактировать группы клиента по умолчанию"
 
 #. Template: AdminCustomerGroup
 msgid "These groups are automatically assigned to all customers."
@@ -1519,7 +1520,7 @@ msgid ""
 "customer panel."
 msgstr ""
 "Необходимо для наличия данных о клиенте и подключения к системе через "
-"интерфейс клиента"
+"интерфейс клиента."
 
 #. Template: AdminCustomerUser
 msgid "List (%s total)"
@@ -1539,7 +1540,7 @@ msgstr "Последний вход"
 
 #. Template: AdminCustomerUser
 msgid "Login as"
-msgstr "Зайти данным пользователем"
+msgstr "Войти как агент"
 
 #. Template: AdminCustomerUser
 msgid "Switch to customer"
@@ -1711,7 +1712,7 @@ msgstr "Управление Клиент-Сервис связями"
 
 #. Template: AdminCustomerUserService
 msgid "Edit default services"
-msgstr "Редактировать сервисы по-умолчанию"
+msgstr "Редактировать сервисы по умолчанию"
 
 #. Template: AdminCustomerUserService
 msgid "Filter for Services"
@@ -2164,7 +2165,7 @@ msgstr "Управление Заданиями Общего Агента"
 
 #. Template: AdminGenericAgent
 msgid "Edit Job"
-msgstr "Редактировать Задание"
+msgstr "Изменить задание"
 
 #. Template: AdminGenericAgent
 msgid "Add Job"
@@ -2359,8 +2360,9 @@ msgid "Dynamic fields"
 msgstr "Динамические поля"
 
 #. Template: AdminGenericAgent
+#, fuzzy
 msgid "Add dynamic field"
-msgstr ""
+msgstr "Добавить динамическое поле"
 
 #. Template: AdminGenericAgent
 msgid "Create times"
@@ -2376,7 +2378,7 @@ msgstr "Заявка создана"
 
 #. Template: AdminGenericAgent
 msgid "Ticket created between"
-msgstr "Заявка создана между "
+msgstr "Заявка создана между"
 
 #. Template: AdminGenericAgent
 msgid "and"
@@ -2384,7 +2386,7 @@ msgstr "и"
 
 #. Template: AdminGenericAgent
 msgid "Last changed times"
-msgstr "Время последнего изменения."
+msgstr "Время последнего изменения"
 
 #. Template: AdminGenericAgent
 msgid "No last changed time settings."
@@ -2416,25 +2418,21 @@ msgstr "Заявка изменена в период"
 
 #. Template: AdminGenericAgent
 #, fuzzy
-#| msgid "Last changed times"
 msgid "Last close times"
 msgstr "Время последнего изменения."
 
 #. Template: AdminGenericAgent
 #, fuzzy
-#| msgid "No close time settings."
 msgid "No last close time settings."
 msgstr "Без учета времени закрытия."
 
 #. Template: AdminGenericAgent
 #, fuzzy
-#| msgid "Ticket closed"
 msgid "Ticket last close"
 msgstr "Заявка закрыта"
 
 #. Template: AdminGenericAgent
 #, fuzzy
-#| msgid "Ticket closed between"
 msgid "Ticket last close between"
 msgstr "Заявка закрыта между"
 
@@ -2689,7 +2687,7 @@ msgstr "Отладчик"
 
 #. Template: AdminGenericInterfaceDebugger
 msgid "Go back to web service"
-msgstr "Перейти назад к веб-сервису"
+msgstr "Вернуться к веб-сервису"
 
 #. Template: AdminGenericInterfaceDebugger
 msgid "Clear"
@@ -2713,7 +2711,7 @@ msgstr "Communication ID"
 
 #. Template: AdminGenericInterfaceDebugger
 msgid "Remote IP"
-msgstr "Удаленный IP-адрес"
+msgstr "Удалённый IP-адрес"
 
 #. Template: AdminGenericInterfaceDebugger
 msgid "Loading"
@@ -2721,27 +2719,27 @@ msgstr "Загрузка"
 
 #. Template: AdminGenericInterfaceDebugger
 msgid "Select a single request to see its details."
-msgstr "Выберите одиночный запрос для просмотра деталей."
+msgstr "Выберите запрос для просмотра подробностей."
 
 #. Template: AdminGenericInterfaceDebugger
 msgid "Filter by type"
-msgstr "Фильт по типу"
+msgstr "Фильтр по типу"
 
 #. Template: AdminGenericInterfaceDebugger
 msgid "Filter from"
-msgstr "Фильтр по from"
+msgstr "Фильтр с"
 
 #. Template: AdminGenericInterfaceDebugger
 msgid "Filter to"
-msgstr "Фильтр по to"
+msgstr "Фильтр по"
 
 #. Template: AdminGenericInterfaceDebugger
 msgid "Filter by remote IP"
-msgstr "Фильтр по удаленному IP-адресу"
+msgstr "Фильтр по удалённому IP-адресу"
 
 #. Template: AdminGenericInterfaceDebugger
 msgid "Limit"
-msgstr "Лимит"
+msgstr "Ограничение"
 
 #. Template: AdminGenericInterfaceDebugger
 msgid "Refresh"
@@ -2757,7 +2755,7 @@ msgstr "Редактировать ErrorHandling"
 
 #. Template: AdminGenericInterfaceErrorHandlingDefault
 msgid "Do you really want to delete this error handling module?"
-msgstr "Вы действительно желаете удалить этот модуль обработки ошибок?"
+msgstr "Действительно удалить этот модуль обработки ошибок?"
 
 #. Template: AdminGenericInterfaceErrorHandlingDefault
 msgid "All configuration data will be lost."
@@ -2778,7 +2776,7 @@ msgstr "Укажите уникальное имя для этого веб-се
 
 #. Template: AdminGenericInterfaceErrorHandlingDefault
 msgid "Error handling module backend"
-msgstr "Error handling module backend"
+msgstr "Бэкенд-модуль обработки ошибок"
 
 #. Template: AdminGenericInterfaceErrorHandlingDefault
 msgid ""
@@ -3605,8 +3603,8 @@ msgid ""
 "The response data will be processed by this mapping, to transform it to the "
 "kind of data the remote system expects."
 msgstr ""
-"Данные ответа будут обработаны этим отображением, чтобы преобразовать его к "
-"виду данных, которые ожидает удаленная система."
+"Данные из ответа будут обработаны с помощью этого мапинга, чтобы "
+"преобразовать их к такому виду, который ожидает удалённая система."
 
 #. Template: AdminGenericInterfaceOperationDefault
 msgid "Include Ticket Data"
@@ -4060,23 +4058,23 @@ msgstr ""
 
 #. Template: AdminGenericInterfaceWebservice
 msgid "Add Web Service"
-msgstr "Добавить Веб-сервис"
+msgstr "Добавить веб-сервис"
 
 #. Template: AdminGenericInterfaceWebservice
 msgid "Edit Web Service"
-msgstr "Редактировать Веб-сервис"
+msgstr "Редактировать веб-сервис"
 
 #. Template: AdminGenericInterfaceWebservice
 msgid "Clone Web Service"
-msgstr "Клонировать Веб-сервис."
+msgstr "Клонировать веб-сервис"
 
 #. Template: AdminGenericInterfaceWebservice
 msgid "The name must be unique."
-msgstr "Имя должно быть уникальным"
+msgstr "Имя должно быть уникальным."
 
 #. Template: AdminGenericInterfaceWebservice
 msgid "Clone"
-msgstr "Скопировать"
+msgstr "Клонировать"
 
 #. Template: AdminGenericInterfaceWebservice
 msgid "Export Web Service"
@@ -4084,7 +4082,7 @@ msgstr "Экспортировать веб-сервис"
 
 #. Template: AdminGenericInterfaceWebservice
 msgid "Import web service"
-msgstr "Импорт Веб-сервиса"
+msgstr "Импортировать веб-сервис"
 
 #. Template: AdminGenericInterfaceWebservice
 msgid "Configuration File"
@@ -4108,11 +4106,11 @@ msgstr "Импорт"
 
 #. Template: AdminGenericInterfaceWebservice
 msgid "Configuration History"
-msgstr "История конфигурации."
+msgstr "История конфигурации"
 
 #. Template: AdminGenericInterfaceWebservice
 msgid "Delete web service"
-msgstr "Удалить Веб-сервис"
+msgstr "Удалить веб-сервис"
 
 #. Template: AdminGenericInterfaceWebservice
 msgid "Do you really want to delete this web service?"
@@ -4136,9 +4134,9 @@ msgid ""
 "available with certain %s contract levels (there will be a notification with "
 "further details when importing)."
 msgstr ""
-"Пожалуйста, учтите, что эти веб-сервисы могут зависеть от других модулей, "
-"доступных только для определенных уровней контракта %s (во время импорта "
-"появится уведомление с подробностями)"
+"Обратите внимание, что эти веб-сервисы могут зависеть от других модулей, "
+"доступных только для определённых уровней контракта %s (во время "
+"импортирования появится уведомление с подробностями)."
 
 #. Template: AdminGenericInterfaceWebservice
 msgid "Import Ready2Adopt web service"
@@ -4157,16 +4155,17 @@ msgid ""
 "After you save the configuration you will be redirected again to the edit "
 "screen."
 msgstr ""
-"После сохранения конфигурации вы вернетесь обратно на экран редактирования"
+"После сохранения конфигурации вы будете перенаправлены обратно на экран "
+"редактирования."
 
 #. Template: AdminGenericInterfaceWebservice
 msgid ""
 "If you want to return to overview please click the \"Go to overview\" button."
-msgstr "Если желаете вернуться к обзору, нажмите кнопку Перейти к обзору."
+msgstr "Чтобы вернуться к обзору, нажмите кнопку «Перейти к обзору»."
 
 #. Template: AdminGenericInterfaceWebservice
 msgid "Remote system"
-msgstr "Удаленная система"
+msgstr "Удалённая система"
 
 #. Template: AdminGenericInterfaceWebservice
 msgid "Provider transport"
@@ -4174,7 +4173,7 @@ msgstr "Транспорт провайдера"
 
 #. Template: AdminGenericInterfaceWebservice
 msgid "Requester transport"
-msgstr "Транспорт запрашиваюшего"
+msgstr "Транспорт запрашивающего"
 
 #. Template: AdminGenericInterfaceWebservice
 msgid "Debug threshold"
@@ -4183,13 +4182,11 @@ msgstr "Порог отладки"
 #. Template: AdminGenericInterfaceWebservice
 msgid ""
 "In provider mode, OTRS offers web services which are used by remote systems."
-msgstr ""
-"В режиме provider, OTRS предлагает веб-сервисы используемые удаленной "
-"системой."
+msgstr "В режиме провайдера OTRS предоставляет удалённым системам веб-сервисы."
 
 #. Template: AdminGenericInterfaceWebservice
 msgid "In requester mode, OTRS uses web services of remote systems."
-msgstr "В режиме requester, OTRS использует веб-сервисы удаленной системы."
+msgstr "В режиме запрашивающего OTRS использует веб-сервисы удалённых систем."
 
 #. Template: AdminGenericInterfaceWebservice
 msgid "Network transport"
@@ -4205,32 +4202,32 @@ msgid ""
 "communication. Those modules are executed in a specific order, which can be "
 "changed by drag and drop."
 msgstr ""
-"Модули обработки ошибок используются для реагирования в случае ошибок во "
-"время связи. Эти модули выполняются в определенном порядке, который можно "
-"изменить путем перетаскивания."
+"Модули обработки ошибок используются для реагирования на ошибки во время "
+"взаимодействия. Эти модули запускаются в определённом порядке, который можно "
+"изменить путём их перетаскивания с помощью мыши."
 
 #. Template: AdminGenericInterfaceWebservice
 msgid "Backend"
-msgstr ""
+msgstr "Бэкенд"
 
 #. Template: AdminGenericInterfaceWebservice
 msgid "Add error handling module"
-msgstr "Добавить модуль обработки ошибок "
+msgstr "Добавить модуль обработки ошибок"
 
 #. Template: AdminGenericInterfaceWebservice
 msgid ""
 "Operations are individual system functions which remote systems can request."
 msgstr ""
-"Операции - это отдельные системные функции которые удаленные системы могут "
-"запрашивать."
+"Операции — это отдельные системные функции, которые могут вызываться "
+"удалёнными системами."
 
 #. Template: AdminGenericInterfaceWebservice
 msgid ""
 "Invokers prepare data for a request to a remote web service, and process its "
 "response data."
 msgstr ""
-"Invokers подготавливает данные для запроса к удаленному веб-сервису и "
-"обрабатывает данные их ответа."
+"Вызывающие модули подготавливают данные для запроса к удалённому веб-сервису "
+"и обрабатывают полученные от них ответы."
 
 #. Template: AdminGenericInterfaceWebservice
 msgid "Controller"
@@ -4410,7 +4407,7 @@ msgstr "Исходящая почта может быть настроена ч�
 
 #. Template: AdminMailAccount
 msgid "System Configuration"
-msgstr "Настройка Системы"
+msgstr "Настройка системы"
 
 #. Template: AdminMailAccount
 msgid "Host"
@@ -4418,7 +4415,7 @@ msgstr "Сервер"
 
 #. Template: AdminMailAccount
 msgid "Delete account"
-msgstr "Удалить учетную запись"
+msgstr "Удалить учётную запись"
 
 #. Template: AdminMailAccount
 msgid "Fetch mail"
@@ -4426,7 +4423,7 @@ msgstr "Забрать почту"
 
 #. Template: AdminMailAccount
 msgid "Do you really want to delete this mail account?"
-msgstr "Вы действительно желаете удалить этот почтовый аккаунт?"
+msgstr "Действительно удалить эту почтовую учётную запись?"
 
 #. Template: AdminMailAccount
 msgid "Password"
@@ -4445,8 +4442,8 @@ msgid ""
 "Only modify this if you need to fetch mail from a different folder than "
 "INBOX."
 msgstr ""
-"Изменение здесь требуется только в случае необходимости забирать почту из "
-"другой папки, не из INBOX."
+"Измените только в том случае, если нужно забирать почту из папки, отличной "
+"от INBOX."
 
 #. Template: AdminMailAccount
 msgid "Trusted"
@@ -4458,7 +4455,7 @@ msgstr "Перенаправление"
 
 #. Template: AdminMailAccount
 msgid "Edit Mail Account"
-msgstr "Изменить почтовую учетную запись"
+msgstr "Изменить почтовую учётную запись"
 
 #. Template: AdminNavigationBar
 msgid "Administration Overview"
@@ -5998,11 +5995,11 @@ msgstr "Удалить этот параметр"
 
 #. Template: AdminQueue
 msgid "Queue Management"
-msgstr "Управление Очередями"
+msgstr "Управление очередями"
 
 #. Template: AdminQueue
 msgid "Add Queue"
-msgstr "Добавить Очередь"
+msgstr "Добавить очередь"
 
 #. Template: AdminQueue
 msgid "Edit Queue"
@@ -6010,11 +6007,11 @@ msgstr "Изменить очередь"
 
 #. Template: AdminQueue
 msgid "Filter for Queues"
-msgstr "Фильтр для Очередей"
+msgstr "Фильтр для очередей"
 
 #. Template: AdminQueue
 msgid "Filter for queues"
-msgstr "Фильтр для Очередей"
+msgstr "Фильтр для очередей"
 
 #. Template: AdminQueue
 msgid "A queue with this name already exists!"
@@ -6096,15 +6093,15 @@ msgstr ""
 
 #. Template: AdminQueue
 msgid "Follow up Option"
-msgstr "Параметры повторных ответов"
+msgstr "Последующие обращения"
 
 #. Template: AdminQueue
 msgid ""
 "Specifies if follow up to closed tickets would re-open the ticket, be "
 "rejected or lead to a new ticket."
 msgstr ""
-"Что делать с повторно полученными ответами клиента на уже закрытую заявку: "
-"открыть заново, отвергнуть или создать новую заявку."
+"Что делать с последующим обращением по уже закрытой заявке: переоткрывать "
+"заявку, отклонять обращение или создать новую заявку."
 
 #. Template: AdminQueue
 msgid "Ticket lock after a follow up"
@@ -6142,7 +6139,7 @@ msgstr "Приветствие"
 
 #. Template: AdminQueue
 msgid "The salutation for email answers."
-msgstr "Приветствие для писем"
+msgstr "Приветствие для ответов в электронных письмах."
 
 #. Template: AdminQueue
 msgid "Signature"
@@ -6805,15 +6802,15 @@ msgstr "Добавить приветствие"
 
 #. Template: AdminSalutation
 msgid "Edit Salutation"
-msgstr "Редактировать приветствие"
+msgstr "Изменить приветствие"
 
 #. Template: AdminSalutation
 msgid "Filter for Salutations"
-msgstr "Фильтр для Приветствий"
+msgstr "Фильтр для приветствий"
 
 #. Template: AdminSalutation
 msgid "Filter for salutations"
-msgstr "Фильтр для Приветствий"
+msgstr "Фильтр для приветствий"
 
 #. Template: AdminSalutation
 msgid "e. g."
@@ -6909,7 +6906,7 @@ msgstr "Управление сервисами"
 
 #. Template: AdminService
 msgid "Add Service"
-msgstr "Добавить Сервис"
+msgstr "Добавить сервис"
 
 #. Template: AdminService
 msgid "Edit Service"
@@ -7083,7 +7080,7 @@ msgstr ""
 
 #. Template: AdminSupportDataCollector
 msgid "Send Update"
-msgstr "Послать обновление"
+msgstr "Отправить обновление"
 
 #. Template: AdminSupportDataCollector
 msgid "Currently this data is only shown in this system."
@@ -7109,7 +7106,7 @@ msgstr "Пакет поддержки сгенерирован."
 
 #. Template: AdminSupportDataCollector
 msgid "Please choose one of the following options."
-msgstr "Пожалуйста, выберите одну из следующих опций."
+msgstr "Выберите одну из следующих опций."
 
 #. Template: AdminSupportDataCollector
 msgid "Send by Email"
@@ -7696,11 +7693,11 @@ msgstr "Последний вход"
 
 #. Template: AdminUser
 msgid "Switch to agent"
-msgstr "Переключиться на агента."
+msgstr "Переключиться на агента"
 
 #. Template: AdminUser
 msgid "Title or salutation"
-msgstr "Заголовок приветствия"
+msgstr "Заголовок или приветствие"
 
 #. Template: AdminUser
 msgid "Firstname"
@@ -7724,7 +7721,7 @@ msgstr "Мобильный телефон"
 
 #. Template: AdminUser
 msgid "Effective Permissions for Agent"
-msgstr "Действующие права для Агента"
+msgstr "Действующие права для агента"
 
 #. Template: AdminUser
 msgid "This agent has no group permissions."
@@ -7735,8 +7732,8 @@ msgid ""
 "Table above shows effective group permissions for the agent. The matrix "
 "takes into account all inherited permissions (e.g. via roles)."
 msgstr ""
-"Таблица выше показывает действующие права агентов в группах. Матрица "
-"учитывает все унаследованные разрешения (например, через Роли). "
+"Таблица показывает действующие права агентов в группах. Матрица учитывает "
+"все унаследованные разрешения (например, через роли)."
 
 #. Template: AdminUserGroup
 msgid "Manage Agent-Group Relations"
@@ -9048,7 +9045,7 @@ msgstr "Развернуть/свернуть всё"
 
 #. Template: AgentTicketHistory
 msgid "CreateTime"
-msgstr "CreateTime"
+msgstr "ВремяСоздания"
 
 #. Template: AgentTicketHistory
 msgid "Article"
@@ -10306,7 +10303,7 @@ msgstr "Адрес администратора"
 
 #. Template: InstallerSystem
 msgid "Email address of the system administrator."
-msgstr "Адрес электронной почты администратора"
+msgstr "Адрес электронной почты системного администратора."
 
 #. Template: InstallerSystem
 msgid "Organization"
@@ -11882,7 +11879,7 @@ msgstr "2 минуты"
 
 #. Perl Module: Kernel/Modules/AdminGenericInterfaceErrorHandlingRequestRetry.pm
 msgid "3 minutes"
-msgstr " 3 минуты"
+msgstr "3 минуты"
 
 #. Perl Module: Kernel/Modules/AdminGenericInterfaceErrorHandlingRequestRetry.pm
 msgid "4 minutes"
@@ -13300,7 +13297,7 @@ msgstr "Отчет не может быть импортирован"
 
 #. Perl Module: Kernel/Modules/AgentStatistics.pm
 msgid "Please upload a valid statistic file."
-msgstr "Пожалуйста загрузите правильный файл отчета."
+msgstr "Загрузите корректный файл отчёта."
 
 #. Perl Module: Kernel/Modules/AgentStatistics.pm
 msgid "Export: Need StatID!"
@@ -13324,7 +13321,7 @@ msgstr "Добавить новый отчет"
 
 #. Perl Module: Kernel/Modules/AgentStatistics.pm
 msgid "Could not create statistic."
-msgstr "Не удалось создать статистику"
+msgstr "Не удалось создать отчёт."
 
 #. Perl Module: Kernel/Modules/AgentStatistics.pm
 msgid "Run: Get no %s!"
@@ -13350,11 +13347,11 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentTicketActionCommon.pm
 msgid "Please change the owner first."
-msgstr "Пожалуйста, сначала измените владельца"
+msgstr "Сначала измените владельца."
 
 #. Perl Module: Kernel/Modules/AgentTicketActionCommon.pm
 msgid "FormDraft functionality disabled!"
-msgstr "Опция FormDraft отключена!"
+msgstr "Функция FormDraft отключена!"
 
 #. Perl Module: Kernel/Modules/AgentTicketActionCommon.pm
 msgid "Draft name is required!"
@@ -13418,27 +13415,31 @@ msgstr "Неправильный Subaction!"
 
 #. Perl Module: Kernel/Modules/AgentTicketBulk.pm
 msgid "Can't lock Tickets, no TicketIDs are given!"
-msgstr "Невозможно заблокировать заявку, не задан TicketID!"
+msgstr "Невозможно заблокировать заявки, не указаны TicketID!"
 
 #. Perl Module: Kernel/Modules/AgentTicketBulk.pm
 msgid "Ticket (%s) is not unlocked!"
-msgstr "Заявка (%s) была разблокирована!"
+msgstr "Заявка (%s) не была разблокирована!"
 
 #. Perl Module: Kernel/Modules/AgentTicketBulk.pm
 msgid ""
 "The following tickets were ignored because they are locked by another agent "
 "or you don't have write access to tickets: %s."
 msgstr ""
+"Следующие заявки были проигнорированы, потому что они были заблокированы "
+"другим агентом или у вас нет прав на изменение этих заявок: %s."
 
 #. Perl Module: Kernel/Modules/AgentTicketBulk.pm
 msgid ""
 "The following ticket was ignored because it is locked by another agent or "
 "you don't have write access to ticket: %s."
 msgstr ""
+"Следующая заявка была проигнорирована, потому что она была заблокирована "
+"другим агентом или у вас нет прав на изменение заявки: %s."
 
 #. Perl Module: Kernel/Modules/AgentTicketBulk.pm
 msgid "You need to select at least one ticket."
-msgstr "Вам нужно выбрать как минимум одну заявку."
+msgstr "Выберите хотя бы одну заявку."
 
 #. Perl Module: Kernel/Modules/AgentTicketBulk.pm
 msgid "Bulk feature is not enabled!"
@@ -13471,15 +13472,15 @@ msgstr "Текущие заявки были заблокированы: %s."
 #. Perl Module: Kernel/Modules/AgentTicketCompose.pm
 msgid ""
 "Article subject will be empty if the subject contains only the ticket hook!"
-msgstr ""
+msgstr "Тема заметки будет пустой, если тема состоит только из хука заявки!"
 
 #. Perl Module: Kernel/Modules/AgentTicketCompose.pm
 msgid "Address %s replaced with registered customer address."
-msgstr "Адрес %s заменен зарегистрированным адресом клиента"
+msgstr "Адрес %s заменён зарегистрированным адресом клиента."
 
 #. Perl Module: Kernel/Modules/AgentTicketCompose.pm
 msgid "Customer user automatically added in Cc."
-msgstr "Клиент автоматически добавлен в поле Сс"
+msgstr "Клиент автоматически добавлен копию сообщения."
 
 #. Perl Module: Kernel/Modules/AgentTicketEmail.pm
 msgid "Ticket \"%s\" created!"
@@ -13491,7 +13492,7 @@ msgstr "Нет Subaction!"
 
 #. Perl Module: Kernel/Modules/AgentTicketEmailOutbound.pm
 msgid "Got no TicketID!"
-msgstr "Не получен TicketID!"
+msgstr "Не указан TicketID!"
 
 #. Perl Module: Kernel/Modules/AgentTicketEmailOutbound.pm
 msgid "System Error!"
@@ -13499,7 +13500,7 @@ msgstr "Системная ошибка!"
 
 #. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
 msgid "No ArticleID is given!"
-msgstr "Не задан ArticleID!"
+msgstr "Не указан ArticleID!"
 
 #. Perl Module: Kernel/Modules/AgentTicketEscalationView.pm
 msgid "Next week"
@@ -14305,7 +14306,7 @@ msgstr "Проверка \"%s\" не существует!"
 
 #. Perl Module: Kernel/Modules/Installer.pm
 msgid "Enter the password for the database user."
-msgstr "Введите пароль пользователя  базы данных"
+msgstr "Введите пароль пользователя  базы данных."
 
 #. Perl Module: Kernel/Modules/Installer.pm
 msgid "Database %s"
@@ -14317,7 +14318,7 @@ msgstr "Конфигурировать MySQL"
 
 #. Perl Module: Kernel/Modules/Installer.pm
 msgid "Enter the password for the administrative database user."
-msgstr "Введите пароль администратора базы данных"
+msgstr "Введите пароль администратора базы данных."
 
 #. Perl Module: Kernel/Modules/Installer.pm
 msgid "Configure PostgreSQL"
@@ -14928,7 +14929,7 @@ msgstr "Период обслуживания системы: начало в %s
 
 #. Perl Module: Kernel/Output/HTML/Notification/DaemonCheck.pm
 msgid "OTRS Daemon is not running."
-msgstr "Служба OTRS не запущена"
+msgstr "Служба OTRS не запущена."
 
 #. Perl Module: Kernel/Output/HTML/Notification/OutofOfficeCheck.pm
 msgid "You have Out of Office enabled, would you like to disable it?"
@@ -16087,7 +16088,7 @@ msgstr "Демон работает."
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DaemonRunning.pm
 msgid "Daemon is not running."
-msgstr "Служба не запущена"
+msgstr "Служба не запущена."
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/DatabaseRecords.pm
 msgid "Database Records"
@@ -16699,206 +16700,211 @@ msgstr ""
 msgid "Action \"%s\" not found!"
 msgstr "Действие  \"%s\" не найдено!"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "invalid-temporarily"
 msgstr "временно недействительный"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Group for default access."
 msgstr "Группа доступа по умолчанию."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Group of all administrators."
 msgstr "Группа для всех администраторов."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Group for statistics access."
 msgstr "Группа для доступа к отчетам."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "new"
 msgstr "новая"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "All new state types (default: viewable)."
 msgstr "Все новые типы состояний (по умолчанию: для просмотра)."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "open"
 msgstr "открыта"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "All open state types (default: viewable)."
 msgstr "Все типы состояний \"открыта\" (по умолчанию: для просмотра)."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "closed"
 msgstr "закрыта"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "All closed state types (default: not viewable)."
 msgstr "Все типы состояний \"закрыта\" (по умолчанию: для просмотра)."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "pending reminder"
 msgstr "ожидает напоминания"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "All 'pending reminder' state types (default: viewable)."
 msgstr ""
 "Все типы состояний \"ожидает напоминания\" (по умолчанию: для просмотра)."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "pending auto"
 msgstr "ожидает автозакрытия"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "All 'pending auto *' state types (default: viewable)."
 msgstr "Все типы состояний \"ожидает авто*\" (по умолчанию: для просмотра)."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "removed"
 msgstr "удаленная"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "All 'removed' state types (default: not viewable)."
 msgstr "Все типы состояний \"удалена\" (по умолчанию: для просмотра)."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "merged"
 msgstr "объединенные"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "State type for merged tickets (default: not viewable)."
 msgstr "Все типы состояний \"объединена\" (по умолчанию: для просмотра)."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "New ticket created by customer."
 msgstr "Новая заявка созданная клиентом"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "closed successful"
 msgstr "закрыта успешно"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket is closed successful."
 msgstr "Заявка закрыта успешно."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "closed unsuccessful"
 msgstr "закрыта неуспешно"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket is closed unsuccessful."
 msgstr "Заявка закрыта не успешно."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Open tickets."
 msgstr "Открытые заявки."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Customer removed ticket."
 msgstr "Заявка удаленная клиентом."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket is pending for agent reminder."
 msgstr "Заявка ожидает напоминания агенту."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "pending auto close+"
 msgstr "ожидает автозакрытия(+)"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket is pending for automatic close."
 msgstr "Заявка ожидает автозакрытия."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "pending auto close-"
 msgstr "ожидает автозакрытия(-)"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "State for merged tickets."
 msgstr "Состояние для объединённых заявок."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "system standard salutation (en)"
 msgstr "стандартное приветствие системы (ru)"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Standard Salutation."
 msgstr "Стандартное приветствие."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "system standard signature (en)"
 msgstr "стандартная подпись системы (ru)"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Standard Signature."
 msgstr "Стандартная подпись."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Standard Address."
 msgstr "Стандартный адрес."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "possible"
-msgstr "возможно"
+msgstr "разрешено"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Follow-ups for closed tickets are possible. Ticket will be reopened."
-msgstr "Дополнения к закрытым заявкам разрешены. Заявка будет открыта заново."
+msgstr ""
+"Последующие обращения по закрытым заявкам разрешены. Заявка будет открыта "
+"заново."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "reject"
-msgstr "отвергнуть"
+msgstr "запрещено"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "Follow-ups for closed tickets are not possible. No new ticket will be "
 "created."
 msgstr ""
-"Дополнения к закрытым заявкам запрещены. Не будет создана новая заявка."
+"Последующие обращения по закрытым заявкам запрещены. Заявка создаваться не "
+"будет."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "new ticket"
 msgstr "новая заявка"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "Follow-ups for closed tickets are not possible. A new ticket will be created."
-msgstr "Дополнения к закрытым заявкам запрещены. Будет создана новая заявка."
+msgstr ""
+"Последующие обращения по закрытым заявкам запрещены. Будет создана новая "
+"заявка."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Postmaster queue."
-msgstr "Очередь PostMaster"
+msgstr "Очередь Postmaster."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "All default incoming tickets."
 msgstr "По умолчанию все входящие заявки."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "All junk tickets."
 msgstr "Все \"мусорные\" заявки."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "All misc tickets."
 msgstr "Все прочие заявки."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "auto reply"
 msgstr "автоответ"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "Automatic reply which will be sent out after a new ticket has been created."
 msgstr ""
 "Автоматический ответ, который будет выслан после создания новой заявки."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "auto reject"
 msgstr "автоотказ"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "Automatic reject which will be sent out after a follow-up has been rejected "
 "(in case queue follow-up option is \"reject\")."
@@ -16906,11 +16912,11 @@ msgstr ""
 "Автоматический отказ, который будет выслан после того, как дополнение будет "
 "отвергнуто (если установлена опция для очереди \"отвергнуть\" дополнения)"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "auto follow up"
 msgstr "автоотклик"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "Automatic confirmation which is sent out after a follow-up has been received "
 "for a ticket (in case queue follow-up option is \"possible\")."
@@ -16918,11 +16924,11 @@ msgstr ""
 "Автоматическое подтверждение, которое высылается после получения дополнения "
 "к заявке (если для очереди установлена возможность получения дополнений)."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "auto reply/new ticket"
 msgstr "авто-ответ/новая заявка"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "Automatic response which will be sent out after a follow-up has been "
 "rejected and a new ticket has been created (in case queue follow-up option "
@@ -16932,30 +16938,30 @@ msgstr ""
 "отвергнуто и была создана новая заявка (в случае, когда для очереди "
 "установлено \"новая заявка\")."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "auto remove"
 msgstr "авто-удаление"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Auto remove will be sent out after a customer removed the request."
 msgstr ""
 "Сообщение об автоудалении будет выслано после того как клиент удалит запрос."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "default reply (after new ticket has been created)"
 msgstr "Стандартный ответ (после создания новой заявки)"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "default reject (after follow-up and rejected of a closed ticket)"
 msgstr ""
 "стандартный отказ (после получения дополнения и отказа для закрытой заявки)"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "default follow-up (after a ticket follow-up has been added)"
 msgstr ""
 "стандартное сообщение о дополнении (после добавления дополнения к заявке)"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "default reject/new ticket created (after closed follow-up with new ticket "
 "creation)"
@@ -16963,59 +16969,59 @@ msgstr ""
 "Стандартное сообщение об отказе/создании новой заявки (после закрытия "
 "дополнения и создания новой заявки)"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Unclassified"
 msgstr "Неклассифицировано"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "1 very low"
 msgstr "1 very low - очень низкая"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "2 low"
 msgstr "2 low - низкая"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "3 normal"
 msgstr "3 normal - нормальная"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "4 high"
 msgstr "4 high - высокая"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "5 very high"
 msgstr "5 very high - очень высокая"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "unlock"
 msgstr "разблокировано"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "lock"
 msgstr "заблокировано"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "tmp_lock"
 msgstr "tmp_lock"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "agent"
 msgstr "агент"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "system"
 msgstr "система"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "customer"
 msgstr "клиент"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket create notification"
 msgstr "Уведомление о создании заявки"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "You will receive a notification each time a new ticket is created in one of "
 "your \"My Queues\" or \"My Services\"."
@@ -17023,11 +17029,11 @@ msgstr ""
 "Вы будете получать уведомление всякий раз при создании новой заявки в \"Моих "
 "очередях\" или \"Моих Сервисах\"."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket follow-up notification (unlocked)"
 msgstr "Уведомление об ответе по заявке (для разблокированных)"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "You will receive a notification if a customer sends a follow-up to an "
 "unlocked ticket which is in your \"My Queues\" or \"My Services\"."
@@ -17035,11 +17041,11 @@ msgstr ""
 "Вы будете получать уведомление всякий раз когда клиент посылает дополнение к "
 "разблокированной заявке в \"Моих очередях\" или \"Моих Сервисах\"."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket follow-up notification (locked)"
 msgstr "Уведомление об ответе по заявке (для заблокированных)"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "You will receive a notification if a customer sends a follow-up to a locked "
 "ticket of which you are the ticket owner or responsible."
@@ -17047,11 +17053,11 @@ msgstr ""
 "Вы будете получать уведомление когда клиент посылает дополнение к "
 "заблокированной заявке для которой вы являетесь Владельцем или Ответственным."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket lock timeout notification"
 msgstr "Уведомление об истечении срока блокировки заявки системой"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "You will receive a notification as soon as a ticket owned by you is "
 "automatically unlocked."
@@ -17059,23 +17065,23 @@ msgstr ""
 "Вы будете получать уведомление как только заявка, владельцем которой вы "
 "являетесь - будет автоматически разблокирована."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket owner update notification"
 msgstr "Уведомление об изменении владельца заявки"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket responsible update notification"
 msgstr "Уведомление об изменении ответственного за заявку"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket new note notification"
 msgstr "Уведомление о новой заметке в заявке"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket queue update notification"
 msgstr "Уведомление об изменении очереди заявки"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "You will receive a notification if a ticket is moved into one of your \"My "
 "Queues\"."
@@ -17083,29 +17089,29 @@ msgstr ""
 "Вы можете получать уведомления, если заявка перенесена в одну из ваших "
 "очередей"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket pending reminder notification (locked)"
 msgstr ""
 "Уведомление об истечении времени напоминания по заявке (для заблокированных)"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket pending reminder notification (unlocked)"
 msgstr ""
 "Уведомление об истечении времени напоминания по заявке (для разблокированных)"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket escalation notification"
 msgstr "Уведомление об эскалации заявки"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket escalation warning notification"
 msgstr "Уведомление о предупреждении по эскалации заявки"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket service update notification"
 msgstr "Уведомление об изменении сервиса заявки"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "You will receive a notification if a ticket's service is changed to one of "
 "your \"My Services\"."
@@ -17113,11 +17119,11 @@ msgstr ""
 "Вы будете получать уведомление всякий раз, когда сервис заявки будет изменен "
 "на один из ваших \"Моих Сервисов\"."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Appointment reminder notification"
 msgstr "Уведомление о напоминании о мероприятии"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "You will receive a notification each time a reminder time is reached for one "
 "of your appointments."
@@ -17125,7 +17131,7 @@ msgstr ""
 "Вы получите такое уведомление всякий раз когда наступит срок напоминания по "
 "одному из ваших мероприятий."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket email delivery failure notification"
 msgstr "Уведомление об отказе доставки электронной почты заявки"
 
@@ -17288,7 +17294,7 @@ msgstr "Удалить эту операцию"
 
 #. JS File: Core.Agent.Admin.GenericInterfaceWebservice
 msgid "Clone web service"
-msgstr "Дублировать Веб-сервис"
+msgstr "Клонировать веб-сервис"
 
 #. JS File: Core.Agent.Admin.GenericInterfaceWebservice
 msgid "Delete operation"
@@ -18274,7 +18280,7 @@ msgstr "300 (Начинающий)"
 
 #. SysConfig
 msgid "5 Minutes"
-msgstr " 5 минут"
+msgstr "5 минут"
 
 #. SysConfig
 msgid "A TicketWatcher Module."
@@ -18633,7 +18639,7 @@ msgstr "Агенты ↔ Группы"
 
 #. SysConfig
 msgid "Agents ↔ Roles"
-msgstr "Агенты <-> Роли"
+msgstr "Агенты ↔ Роли"
 
 #. SysConfig
 msgid "All CustomerIDs of a customer user."
@@ -19312,9 +19318,6 @@ msgstr ""
 
 #. SysConfig
 #, fuzzy
-#| msgid ""
-#| "Checks if an E-Mail is a followup to an existing ticket by searching the "
-#| "subject for a valid ticket number."
 msgid ""
 "Checks if an email is a follow-up to an existing ticket with external ticket "
 "number which can be found by ExternalTicketNumberRecognition filter module."
@@ -19518,11 +19521,11 @@ msgstr "Взаимодействие"
 
 #. SysConfig
 msgid "Communication & Notifications"
-msgstr "Каналы связи и Уведомления"
+msgstr "Каналы связи и уведомления"
 
 #. SysConfig
 msgid "Communication Log GUI"
-msgstr "Графический интерфейс Журнала сеансов связи"
+msgstr "Журнала сеансов связи"
 
 #. SysConfig
 msgid "Communication log limit per page for Communication Log Overview."
@@ -19542,7 +19545,7 @@ msgstr "Заявки компании."
 
 #. SysConfig
 msgid "Company name which will be included in outgoing emails as an X-Header."
-msgstr "Имя Компании, включаемое в исходящее письмо как X-Header."
+msgstr "Название компании, включаемое в исходящих письмах как X-Header."
 
 #. SysConfig
 msgid "Compat module for AgentZoom to AgentTicketZoom."
@@ -24201,7 +24204,6 @@ msgstr "Перейти в Дайджест!"
 
 #. SysConfig
 #, fuzzy
-#| msgid "Add Signature"
 msgid "Good PGP signature."
 msgstr "Добавить Подпись"
 
@@ -25607,13 +25609,11 @@ msgstr ""
 
 #. SysConfig
 #, fuzzy
-#| msgid "No ticket data found."
 msgid "No public key found."
 msgstr "Не найдено данных о заявках."
 
 #. SysConfig
 #, fuzzy
-#| msgid "No ticket data found."
 msgid "No valid OpenPGP data found."
 msgstr "Не найдено данных о заявках."
 
@@ -26421,7 +26421,7 @@ msgstr "ProcessID"
 
 #. SysConfig
 msgid "Processes & Automation"
-msgstr ""
+msgstr "Процессы и автоматизация"
 
 #. SysConfig
 msgid "Product News"
@@ -26687,7 +26687,7 @@ msgstr "Правый"
 
 #. SysConfig
 msgid "Roles ↔ Groups"
-msgstr ""
+msgstr "Роли ↔ Группы"
 
 #. SysConfig
 msgid "Romanian"
@@ -28653,7 +28653,6 @@ msgstr ""
 
 #. SysConfig
 #, fuzzy
-#| msgid "Signature updated!"
 msgid "Signature data."
 msgstr "Подпись обновлена!"
 
@@ -29079,7 +29078,6 @@ msgstr "Тайский"
 
 #. SysConfig
 #, fuzzy
-#| msgid "The signature for email answers."
 msgid "The PGP signature is expired."
 msgstr "Подпись для писем"
 
@@ -29322,7 +29320,6 @@ msgstr "Это стандартная оранжево-черная тема."
 
 #. SysConfig
 #, fuzzy
-#| msgid "There is another field with the same name."
 msgid "This key is not certified with a trusted signature!"
 msgstr "Существует другое поле с таким же именем."
 
@@ -29756,7 +29753,7 @@ msgstr "Фамилия"
 
 #. SysConfig
 msgid "Users, Groups & Roles"
-msgstr "Пользователи, Группы и Роли"
+msgstr "Пользователи, группы и роли"
 
 #. SysConfig
 msgid "Uses richtext for viewing and editing ticket notification."

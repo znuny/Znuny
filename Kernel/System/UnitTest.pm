@@ -167,7 +167,7 @@ sub Run {
     my $Duration = sprintf( '%.3f', Time::HiRes::tv_interval($StartTimeHiRes) );
 
     my $Host           = $ConfigObject->Get('FQDN');
-    my $TestCountTotal = $Self->{TestCountOk} + $Self->{TestCountNotOk};
+    my $TestCountTotal = ( $Self->{TestCountOk} // 0 ) + ( $Self->{TestCountNotOk} // 0 );
 
     print "=====================================================================\n";
 
@@ -272,7 +272,10 @@ sub _HandleFile {
         $ResultData->{TestNotOk}++;
     }
 
-    $Self->{ResultData}->{ $Param{File} } = $ResultData;
+    my $Home         = $Kernel::OM->Get('Kernel::Config')->Get('Home');
+    my $RelativeFile = substr( $Param{File}, length($Home) + 1 );
+
+    $Self->{ResultData}->{$RelativeFile} = $ResultData;
     $Self->{TestCountOk}    += $ResultData->{TestOk}    // 0;
     $Self->{TestCountNotOk} += $ResultData->{TestNotOk} // 0;
 
@@ -298,6 +301,15 @@ sub _HandleFile {
 
 sub _SubmitResults {
     my ( $Self, %Param ) = @_;
+
+    # Disable some plugins which are not useful in unit test context.
+    $Kernel::OM->Get('Kernel::Config')->Set(
+        Key   => 'SupportDataCollector::DisablePlugins',
+        Value => [
+            'Kernel::System::SupportDataCollector::Plugin::OTRS::DaemonRunning',
+            'Kernel::System::SupportDataCollector::Plugin::OTRS::DefaultUser',
+        ],
+    );
 
     my %SupportData = $Kernel::OM->Get('Kernel::System::SupportDataCollector')->Collect();
     die "Could not collect SupportData.\n" if !$SupportData{Success};
@@ -461,12 +473,15 @@ sub _SubmitResults {
     *STDOUT->flush();
     *STDERR->flush();
 
+    # Resolve wildcards in attachment paths late, when the files already exist.
+    my @AttachmentPaths = map { glob($_) } ( @{ $Param{AttachmentPath} // [] } );
+
     # Limit attachment sizes to 20MB in total.
-    my $AttachmentCount = scalar grep { -r $_ } @{ $Param{AttachmentPath} // [] };
+    my $AttachmentCount = scalar grep { -r $_ } @AttachmentPaths;
     my $AttachmentsSize = 1024 * 1024 * 20;
 
     ATTACHMENT_PATH:
-    for my $AttachmentPath ( @{ $Param{AttachmentPath} // [] } ) {
+    for my $AttachmentPath (@AttachmentPaths) {
         my $FileHandle;
         my $Content;
 

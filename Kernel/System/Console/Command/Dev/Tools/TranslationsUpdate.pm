@@ -19,6 +19,7 @@ use Lingua::Translit;
 use Pod::Strip;
 
 use Kernel::Language;
+use Kernel::System::VariableCheck qw(DataIsDifferent);
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -118,10 +119,10 @@ sub Run {
         keys %Stats
         )
     {
-        my $Strings      = $Stats{$Language}->{Total};
+        my $Strings      = $Stats{$Language}->{Total}      // 0;
         my $Translations = $Stats{$Language}->{Translated} // 0;
         $Self->Print( "\t" . sprintf( "%7s", $Language ) . ": " );
-        $Self->Print( sprintf( "%02d", int( ( $Translations / $Strings ) * 100 ) ) );
+        $Self->Print( sprintf( "%02d", int( ( $Translations / ( $Strings || 1 ) ) * 100 ) ) );
         $Self->Print( sprintf( "%% (%4d/%4d)\n", $Translations, $Strings ) );
 
     }
@@ -186,7 +187,7 @@ sub HandleLanguage {
     my $WritePOT = $Param{WritePO} || -e $TargetPOTFile;
 
     if ( !-w $TargetFile ) {
-        if ( -w $TargetPOFile ) {
+        if ( -w $TargetPOFile || $Self->GetOption('language') ) {
             $Self->Print(
                 "Creating missing file <yellow>$TargetFile</yellow>\n"
             );
@@ -364,15 +365,16 @@ sub HandleLanguage {
             push @PerlModuleList, @CustomPerlModuleList;
         }
 
-        # include var/packagesetup folder for modules
-        my $PackageSetupDir = "$ModuleDirectory/var/packagesetup";
-        if ( $IsSubTranslation && -d $PackageSetupDir ) {
-            my @PackageSetupModuleList = $Kernel::OM->Get('Kernel::System::Main')->DirectoryRead(
-                Directory => $PackageSetupDir,
-                Filter    => '*.pm',
-                Recursive => 1,
-            );
-            push @PerlModuleList, @PackageSetupModuleList;
+        # Include some additional folders for modules.
+        for my $AdditionalFolder ( 'var/packagesetup', 'var/processes/examples', 'var/webservices/examples' ) {
+            if ( $IsSubTranslation && -d "$ModuleDirectory/$AdditionalFolder" ) {
+                my @PackageSetupModuleList = $Kernel::OM->Get('Kernel::System::Main')->DirectoryRead(
+                    Directory => "$ModuleDirectory/$AdditionalFolder",
+                    Filter    => '*.pm',
+                    Recursive => 1,
+                );
+                push @PerlModuleList, @PackageSetupModuleList;
+            }
         }
 
         FILE:
@@ -391,7 +393,7 @@ sub HandleLanguage {
             }
 
             $File =~ s{^.*/(Kernel/)}{$1}smx;
-            $File =~ s{^.*/(var/packagesetup/)}{$1}smx;
+            $File =~ s{^.*/(var/)}{$1}smx;
 
             my $Content = ${$ContentRef};
 
@@ -459,27 +461,23 @@ sub HandleLanguage {
             }
 
             $File =~ s{^.*/(scripts/)}{$1}smx;
+            if ($IsSubTranslation) {
+                $File =~ s{^.*/(.+\.sopm)}{$1}smx;
+            }
 
             my $Content = ${$ContentRef};
 
             # do translation
             $Content =~ s{
-                <Data[^>]+Translatable="1"[^>]*>(.*?)</Data>
+                <(Data|Description)[^>]+Translatable="1"[^>]*>(.*?)</\1>
             }
             {
-                my $Word = $1 // '';
-
+                my $Word = $2 // '';
                 if ( $Word && !$UsedWords{$Word}++ ) {
-
-                    if ($IsSubTranslation) {
-                        $File =~ s{^.*/(.+\.sopm)}{$1}smx;
-                    }
-
                     push @OriginalTranslationStrings, {
-                        Location => "Database XML Definition: $File",
+                        Location => "Database XML / SOPM Definition: $File",
                         Source => $Word,
                     };
-
                 }
                 '';
             }egx;
@@ -816,6 +814,24 @@ sub WritePOTFile {
             -msgstr    => '',
             -automatic => $String->{Location},
         );
+    }
+
+    # Avoid writing the file if the content is the same. In this case,
+    #    only the CreationDate changes, which can cause issues in our toolchain.
+    if ( -e $Param{TargetPOTFile} ) {
+        my %PreviousPOTEntries = $Self->LoadPOFile( TargetPOFile => $Param{TargetPOTFile} );
+        my @PreviousPOTEntries = sort grep { length $_ } keys %PreviousPOTEntries;
+        my @NewPOTEntries      = sort map { $_->{Source} } @{ $Param{TranslationStrings} };
+        my $DataIsDifferent    = DataIsDifferent(
+            Data1 => \@PreviousPOTEntries,
+            Data2 => \@NewPOTEntries
+        );
+
+        if ( !$DataIsDifferent ) {
+
+            # File content is the same, don't write the file so the CreationDate stays the same.
+            return;
+        }
     }
 
     Locale::PO->save_file_fromarray( $Param{TargetPOTFile}, \@POTEntries )

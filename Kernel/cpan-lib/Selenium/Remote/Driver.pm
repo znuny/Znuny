@@ -1,5 +1,5 @@
 package Selenium::Remote::Driver;
-$Selenium::Remote::Driver::VERSION = '1.36';
+$Selenium::Remote::Driver::VERSION = '1.39';
 use strict;
 use warnings;
 
@@ -230,6 +230,11 @@ has 'firefox_profile' => (
     clearer   => 1
 );
 
+has debug => (
+    is => 'lazy',
+    default => sub { 0 },
+);
+
 has 'desired_capabilities' => (
     is        => 'lazy',
     predicate => 'has_desired_capabilities'
@@ -289,6 +294,9 @@ sub BUILD {
         my $size = $self->inner_window_size;
         $self->set_inner_window_size(@$size);
     }
+
+    #Set debug if needed
+    $self->debug_on() if $self->debug;
 
     # Setup non-croaking, parameter versions of finders
     foreach my $by ( keys %{ $self->FINDERS } ) {
@@ -404,7 +412,8 @@ sub _execute_command {
         return $self->commands->parse_response( $res, $resp );
     }
     else {
-        croak "Couldn't retrieve command settings properly\n";
+        #Tell the use about the offending setting.
+        croak "Couldn't retrieve command settings properly ".$res->{command}."\n";
     }
 }
 
@@ -418,7 +427,7 @@ sub new_session {
             'browserName'       => $self->browser_name,
             'platform'          => $self->platform,
             'javascriptEnabled' => $self->javascript,
-            'version'           => $self->version,
+            'version'           => $self->version // '',
             'acceptSslCerts'    => $self->accept_ssl_certs,
             %$extra_capabilities,
         },
@@ -1141,6 +1150,7 @@ sub switch_to_frame {
     $id = ( defined $id ) ? $id : $json_null;
 
     my $res = { 'command' => 'switchToFrame' };
+
     if ( ref $id eq $self->webelement_class ) {
         if ( $self->{is_wd3} ) {
             $params =
@@ -1655,7 +1665,8 @@ sub _get_button {
         return $button_enum->{ uc $1 };
     }
     if ( defined $button && $button =~ /(0|1|2)/ ) {
-        return $1;
+        #Handle user error sending in "1"
+        return int($1);
     }
     return 0;
 }
@@ -1671,7 +1682,7 @@ sub double_click {
     {
         $self->click( $button, 1 );
         $self->click( $button, 1 );
-        $self->general_action();
+        return $self->general_action();
     }
 
     my $res = { 'command' => 'doubleClick' };
@@ -1879,7 +1890,7 @@ Selenium::Remote::Driver - Perl Client for Selenium Remote Driver
 
 =head1 VERSION
 
-version 1.36
+version 1.39
 
 =head1 SYNOPSIS
 
@@ -2028,6 +2039,13 @@ You can get around that by passing an extra flag to the sub, or setting:
 
 When in WC3 Webdriver mode.
 
+=head2 FINDERS
+
+This constant is a hashref map of the old element finder aliases from wd2 to wd3.
+
+    use Data::Dumper;
+    print Dumper($Selenium::Remote::Driver::FINDERS);
+
 =head2 WC3 WEBDRIVER CURRENT STATUS
 
 That said, the following 'sanity tests' in the at/ (acceptance test) directory of the module passed on the following versions:
@@ -2077,6 +2095,24 @@ WD3 enabled server with chromedriver enabled.
 Also, if you instantiate the object in WC3 mode (which is the default), the remote driver will throw exceptions you have no choice but to catch,
 rather than falling back to JSONWire methods where applicable like geckodriver does.
 
+As of chrome 75 (and it's appropriate driver versions), the WC3 spec has finally been implemented.
+As such, to use chrome older than this, you will have to manually force on JSONWire mode:
+
+    $Selenium::Remote::Driver::FORCE_WD2=1;
+
+=head2 Notes on Running Selenium at Scale via selenium.jar
+
+When running many, many tests in parallel you can eventually reach resource exhaustion.
+You have to instruct the Selenium JAR to do some cleanup to avoid explosions:
+
+Inside of your selenium server's node.json (running a grid), you would put in the following:
+
+"configuration" :
+{
+"cleanUpCycle":2000
+}
+Or run the selenium jar with the -cleanupCycle parameter. Of course use whatever # of seconds is appropriate to your situation.
+
 =head1 CONSTRUCTOR
 
 =head2 new
@@ -2114,6 +2150,8 @@ Desired capabilities - HASH - Following options are accepted:
 =item B<pageLoadStrategy>   - STRING   - OPTIONAL, 'normal|eager|none'. default 'normal'. WebDriver3 only.
 
 =item B<extra_capabilities> - HASH     - Any other extra capabilities.  Accepted keys will vary by browser.  If firefox_profile is passed, the args (or profile) key will be overwritten, depending on how it was passed.
+
+=item B<debug>              - BOOL     - Turn Debug mode on from the start if true, rather than having to call debug_on().
 
 =back
 
@@ -2530,6 +2568,16 @@ Called with no arguments, it simply executes the existing action queue.
 If you are looking for pre-baked action chains that aren't currently part of L<Selenium::Remote::Driver>,
 consider L<Selenium::ActionChains>, which is shipped with this distribution instead.
 
+=head3 COMPATIBILITY
+
+Like most places, the WC3 standard is openly ignored by the driver binaries.
+Generally an "actions" object will only accept:
+
+    { type => ..., value => ... }
+
+When using the direct drivers (E.G. Selenium::Chrome, Selenium::Firefox).
+This is not documented anywhere but here, as far as I can tell.
+
 =head2 release_general_action
 
 Nukes *all* input device state (modifier key up/down, pointer button up/down, pointer location, and other device state) from orbit.
@@ -2733,7 +2781,7 @@ Synonymous with mouse_move_to_location
 
  Usage:
     my $window_size = $driver->get_window_size();
-    print $window_size->{'height'}, $window_size->('width');
+    print $window_size->{'height'}, $window_size->{'width'};
 
 =head2 get_window_position
 
@@ -2953,6 +3001,10 @@ To conveniently write the screenshot to a file, see L</capture_screenshot>.
     $driver->switch_to_frame('frame_1');
     or
     $driver->switch_to_frame($driver->find_element('iframe', 'tag_name'));
+
+=head3 COMPATIBILITY
+
+Chromedriver will vomit if you pass anything but a webElement, so you probably should do that from now on.
 
 =head2 switch_to_parent_frame
 
@@ -3705,7 +3757,7 @@ Aditya Ivaturi <ivaturi@gmail.com>
 
 =head1 CONTRIBUTORS
 
-=for stopwords Allen Lew A.MacLeay Andy Jack Bas Bloemsaat Blake GH Brian Horakh Charles Howes Chris Davies Daniel Fackrell Dave Rolsky Dmitry Karasik Doug Bell Eric Johnson Gabor Szabo George S. Baugh Gerhard Jungwirth Gordon Child GreatFlamingFoo Ivan Kurmanov Joe Higton Jon Hermansen Keita Sugama Ken Swanson lembark Luke Closs Martin Gruner Matthew Spahr Max O'Cull Michael Prokop Peter Mottram (SysPete) Phil Kania Mitchell Prateek Goyal Richard Sailer Robert Utter rouzier Tetsuya Tatsumi Tod Hagan Tom Hukins Vangelis Katsikaros Vishwanath Janmanchi Viťas Strádal Yves Lavoie
+=for stopwords Allen Lew A.MacLeay Andy Jack Bas Bloemsaat Blake GH Brian Horakh Charles Howes Chris Davies Daniel Fackrell Dave Rolsky Dmitry Karasik Doug Bell Dylan Streb Eric Johnson Gabor Szabo George S. Baugh Gerhard Jungwirth Gordon Child GreatFlamingFoo Ivan Kurmanov Joe Higton Jon Hermansen Keita Sugama Ken Swanson lembark Luke Closs Martin Gruner Matthew Spahr Max O'Cull Michael Prokop mk654321 Peter Mottram (SysPete) Phil Kania Mitchell Prateek Goyal Richard Sailer Robert Utter rouzier Tetsuya Tatsumi Tod Hagan Tom Hukins Vangelis Katsikaros Vishwanath Janmanchi Viťas Strádal Yuki Kimoto Yves Lavoie
 
 =over 4
 
@@ -3760,6 +3812,10 @@ Dmitry Karasik <dmitry@karasik.eu.org>
 =item *
 
 Doug Bell <doug@preaction.me>
+
+=item *
+
+Dylan Streb <dylan.streb@oneil.com>
 
 =item *
 
@@ -3831,6 +3887,10 @@ Michael Prokop <mprokop@sipwise.com>
 
 =item *
 
+mk654321 <kosmichal@gmail.com>
+
+=item *
+
 Peter Mottram (SysPete) <peter@sysnix.com>
 
 =item *
@@ -3884,6 +3944,10 @@ Vishwanath Janmanchi <jvishwanath@gmail.com>
 =item *
 
 Viťas Strádal <vitas@matfyz.cz>
+
+=item *
+
+Yuki Kimoto <kimoto.yuki@gmail.com>
 
 =item *
 

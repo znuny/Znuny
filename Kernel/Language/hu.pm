@@ -807,7 +807,7 @@ sub Data {
         'Enter a regular expression to restrict which error messages should cause error handling module execution.' =>
             'Egy reguláris kifejezés megadása annak korlátozásához, hogy mely hibaüzeneteknek kell hibakezelési modul végrehajtást okoznia.',
         'Error message subject and data (as seen in the debugger error entry) will considered for a match.' =>
-            'A hibaüzenet tárgya és adatai (amint a hibakereső hibabejegyzésében létható) lesznek figyelembe véve egy egyezésnél.',
+            'A hibaüzenet tárgya és adatai (amint a hibakereső hibabejegyzésében látható) lesznek figyelembe véve egy egyezésnél.',
         'Example: Enter \'^.*401 Unauthorized.*\$\' to handle only authentication related errors.' =>
             'Példa: A „^.*401 Unauthorized.*\$” megadásával csak a hitelesítéssel kapcsolatos hibák kezelhetők.',
         'Error stage filter' => 'Hibaállapot szűrő',
@@ -1631,7 +1631,7 @@ sub Data {
 
         # Template: AdminProcessManagementProcessEdit
         'Edit Process' => 'Folyamat szerkesztése',
-        'Print process information' => 'Folyamat-információk nyomtatása',
+        'Print process information' => 'Folyamatinformációk nyomtatása',
         'Delete Process' => 'Folyamat törlése',
         'Delete Inactive Process' => 'Inaktív folyamat törlése',
         'Available Process Elements' => 'Elérhető folyamatelemek',
@@ -1645,7 +1645,7 @@ sub Data {
             'Kapcsolatot létesíthet két tevékenység között, ha az átmenet elemet a kapcsolat kezdő tevékenysége fölé ejti. Ezután viheti a nyíl szabad végét a befejező tevékenységre.',
         'Actions can be assigned to a Transition by dropping the Action Element onto the label of a Transition.' =>
             'Műveletek rendelhetők egy átmenethez, ha a műveletelemet egy átmenet címkéjére ejti.',
-        'Edit Process Information' => 'Folyamat-információk szerkesztése',
+        'Edit Process Information' => 'Folyamatinformációk szerkesztése',
         'Process Name' => 'Folyamat neve',
         'The selected state does not exist.' => 'A kijelölt állapot nem létezik.',
         'Add and Edit Activities, Activity Dialogs and Transitions' => 'Tevékenységek, tevékenység párbeszédek és átmenetek hozzáadása és szerkesztése',
@@ -1729,7 +1729,7 @@ sub Data {
         'If a ticket is closed and the customer sends a follow up the ticket will be locked to the old owner.' =>
             'Ha egy jegy le van zárva, és az ügyfél egy követést küld, a jegy zárolva lesz a régi tulajdonosnak.',
         'System address' => 'Rendszercím',
-        'Will be the sender address of this queue for email answers.' => 'Lesz-e a várólista feladójának címe a válasz e-mailekhez.',
+        'Will be the sender address of this queue for email answers.' => 'A várólista küldőcíme lesz a válasz e-mailekhez.',
         'Default sign key' => 'Alapértelmezett aláíró kulcs',
         'To use a sign key, PGP keys or S/MIME certificates need to be added with identifiers for selected queue system address.' =>
             'Egy aláíró kulcs használatához azonosítókkal rendelkező PGP kulcsokat vagy S/MIME tanúsítványokat kell hozzáadni a kiválasztott várólista rendszercíméhez.',
@@ -1775,7 +1775,7 @@ sub Data {
         'Instructions' => 'Utasítások',
         'System Deregistration not Possible' => 'A rendszer regisztrációjának megszüntetése nem lehetséges',
         'Please note that you can\'t deregister your system if you\'re using the %s or having a valid service contract.' =>
-            'Ne feledje, hogy hogy nem tudja a rendszer regisztrációját megszüntetni az %s használatakor, vagy ha érvényes szolgáltatói szerződése van.',
+            'Ne feledje, hogy nem tudja a rendszer regisztrációját megszüntetni az %s használatakor, vagy ha érvényes szolgáltatói szerződése van.',
         'OTRS-ID Login' => 'OTRS-azonosító bejelentkezés',
         'Read more' => 'Olvassa tovább',
         'You need to log in with your OTRS-ID to register your system.' =>
@@ -2210,7 +2210,7 @@ sub Data {
         'Firstname' => 'Keresztnév',
         'Lastname' => 'Vezetéknév',
         'A user with this username already exists!' => 'Már létezik ilyen felhasználónevű felhasználó!',
-        'Will be auto-generated if left empty.' => 'Legyen automatikusan előállított, ha üresen van hagyva.',
+        'Will be auto-generated if left empty.' => 'Automatikusan elő lesz állítva, ha üresen van hagyva.',
         'Mobile' => 'Mobiltelefon',
         'Effective Permissions for Agent' => 'Tényleges jogosultságok az ügyintézőnél',
         'This agent has no group permissions.' => 'Ennek az ügyintézőnek nincsenek csoportjogosultságai.',
@@ -3136,7 +3136,7 @@ sub Data {
             'Üzenetek fogadása a(z) „%s” értesítéshez a(z) „%s” átviteli módszerrel.',
 
         # Template: ActivityDialogHeader
-        'Process Information' => 'Folyamat-információk',
+        'Process Information' => 'Folyamatinformációk',
         'Dialog' => 'Párbeszéd',
 
         # Template: Article
@@ -5376,7 +5376,7 @@ sub Data {
         # Perl Module: Kernel/System/Web/InterfaceInstaller.pm
         'Action "%s" not found!' => 'A(z) „%s” művelet nem található!',
 
-        # Database XML Definition: scripts/database/otrs-initial_insert.xml
+        # Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
         'invalid-temporarily' => 'átmenetileg érvénytelen',
         'Group for default access.' => 'Csoport az alapértelmezett hozzáféréshez.',
         'Group of all administrators.' => 'Az összes adminisztrátor csoportja.',
