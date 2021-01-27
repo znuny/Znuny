@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2012-2021 Znuny GmbH, https://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -11,25 +12,26 @@
 # "bin/otrs.Console.pl Dev::Tools::RPMSpecGenerate". All changes will be lost.
 #
 
-Summary:      OTRS Help Desk.
-Name:         otrs
+Summary:      Znuny LTS Help Desk
+Name:         znuny
 Version:      0.0
-Copyright:    GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
+License:      GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
 Group:        Applications/Mail
-Provides:     otrs
+Provides:     znuny
+Obsoletes:    otrs <= 6.0.30
 Requires:     bash-completion cronie httpd perl perl(Archive::Zip) perl(Date::Format) perl(DateTime) perl(DBI) perl(IO::Socket::SSL) perl(LWP::UserAgent) perl(Net::DNS) perl(Net::LDAP) perl(Template) perl(URI) perl(XML::LibXML) perl(XML::LibXSLT) perl(XML::Parser) perl-core procmail
 AutoReqProv:  no
 Release:      01
-Source0:      otrs-%{version}.tar.bz2
+Source0:      znuny-%{version}.tar.bz2
 BuildArch:    noarch
 BuildRoot:    %{_tmppath}/%{name}-%{version}-build
 
 %description
-OTRS is an Open source Ticket Request System with many features to manage
+Znuny is an Open source Ticket Request System with many features to manage
 customer telephone calls and e-mails. It is distributed under the GNU
 General Public License (GPL) and tested on Linux and Mac OS. Do you
 receive many e-mails and want to answer them with a team of agents?
-You're going to love OTRS!
+You're going to love Znuny!
 
 %prep
 %setup

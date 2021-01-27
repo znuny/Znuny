@@ -1,15 +1,16 @@
 [% INCLUDE 'includes/copyright.tt' -%]
 
-Summary:      OTRS Help Desk.
-Name:         otrs
+Summary:      Znuny LTS Help Desk.
+Name:         znuny
 Version:      0.0
-Copyright:    GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
+License:      GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
 Group:        Applications/Mail
-Provides:     otrs
+Provides:     znuny
+Obsoletes:    otrs <= 6.0.30
 Requires:     [% Requires.join(' ') %]
 AutoReqProv:  no
 Release:      01
-Source0:      otrs-%{version}.tar.bz2
+Source0:      znuny-%{version}.tar.bz2
 BuildArch:    noarch
 BuildRoot:    %{_tmppath}/%{name}-%{version}-build
 
