@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2012-2021 Znuny GmbH, http://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -53,6 +54,8 @@ my $SendEmails = sub {
     return @ToReturn;
 };
 
+# set default UserLanguage to en
+$ConfigObject->{DefaultLanguage} = 'en';
 $ConfigObject->Set(
     Key   => 'CheckEmailAddresses',
     Value => '0',
