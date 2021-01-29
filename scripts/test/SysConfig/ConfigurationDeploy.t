@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2012-2021 Znuny GmbH, http://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -15,12 +16,14 @@ use utf8;
 use vars (qw($Self));
 
 # Get needed objects
-my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
+my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
 my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $DBObject        = $Kernel::OM->Get('Kernel::System::DB');
 my $MainObject      = $Kernel::OM->Get('Kernel::System::Main');
 my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
+
+# set default UserLanguage to en
+$ConfigObject->{DefaultLanguage} = 'en';
 
 # NOTE: This test removes all settings from SysConfig tables and creates
 # own deployments, therefore we must handle DB Restore on our own
