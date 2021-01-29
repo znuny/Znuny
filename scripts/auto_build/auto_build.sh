@@ -176,10 +176,12 @@ find . -name "*$PACKAGE*" | xargs ls -lo
 echo "-----------------------------------------------------------------";
 if which md5sum >> /dev/null; then
     echo "MD5 message digest (128-bit) checksums in wiki table format";
-    find . -name "*$PACKAGE*" | xargs md5sum | sed -e "s/^/| /" -e "s/\.\//| https:\/\/download.znuny.org\/releases//" -e "s/$/ |/"
+    find . -name "*$PACKAGE*" | xargs md5sum | sed -e "s/^/| /" -e "s/\.\//| https:\/\/download.znuny.org\/releases\//" -e "s/$/ |/"
 else
     echo "No md5sum found in \$PATH!"
 fi
+ln -s $PACKAGE-$VERSION.tar.gz $PACKAGE-6.0.tar.gz
+ln -s $PACKAGE-$VERSION.tar.gz $PACKAGE-latest.tar.gz
 echo "--------------------------------------------------------------------------";
 echo "Note: You may have to tag your git tree: git tag rel-6_x_x -a -m \"6.x.x\"";
 echo "--------------------------------------------------------------------------";
