@@ -1,4 +1,5 @@
 # 6.0.33 ????-??-??
+ - 2020-02-11 Enabled automatic utilization of CSS::Minifier::XS if available.
  - 2020-02-11 Fixed return value format of user search. Thanks to Nicola Cordioli (@niccord).
 
 # 6.0.32 2021-01-29

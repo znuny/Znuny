@@ -1,6 +1,7 @@
 #!/usr/bin/env perl
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -195,6 +196,17 @@ my @NeededModules = (
             emerge => 'dev-perl/Crypt-Eksblowfish',
             zypper => 'perl-Crypt-Eksblowfish',
             ports  => 'security/p5-Crypt-Eksblowfish',
+        },
+    },
+    {
+        Module    => 'CSS::Minifier::XS',
+        Required  => 0,
+        Comment   => 'Alternative to CSS::Minifier in XS, which is slightly faster than CSS::Minifier (pure Perl).',
+        InstTypes => {
+            aptget => 'libcss-minifier-xs-perl',
+            emerge => 'dev-perl/CSS-Minifier-XS',
+            zypper => 'perl-CSS-Minifier-XS',
+            ports  => 'converters/p5-CSS-Minifier-XS',
         },
     },
     {
