@@ -1,5 +1,11 @@
-# 6.0.31 ????-??-??
- - 2020-12-07 Fixed Ticket#2020111942002059 - Improve PDF display of article fields in the customer interface.
+# 6.0.33 ????-??-??
+
+# 6.0.32 2021-01-29
+ - 2021-01-29 Updated CKEditor to version 4.16.0.
+
+# 6.0.31 2021-01-27
+ - 2021-01-27 Updated CKEditor to version 4.15.1.
+ - 2021-01-27 Switched to Znuny branding.
 
 # 6.0.30 2020-10-12
  - 2020-09-22 Updated translations, thanks to all translators.
