@@ -12,8 +12,8 @@ package Kernel::System::Loader;
 use strict;
 use warnings;
 
-use CSS::Minifier qw();    # default minifier, will only be used if CSS::Minifier:XS is not available.
-use JavaScript::Minifier qw();
+use CSS::Minifier qw(); # default minifier, will only be used if CSS::Minifier:XS is not available.
+use JavaScript::Minifier qw(); # default minifier, will only be used if JavaScript::Minifier:XS is not available.
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -396,6 +396,11 @@ sub MinifyJavaScript {
         return;
     }
 
+    my $IsJavaScriptMinifierXSAvailable = $Self->IsJavaScriptMinifierXSAvailable();
+    if ($IsJavaScriptMinifierXSAvailable) {
+        return JavaScript::Minifier::XS::minify( $Param{Code} );
+    }
+
     return JavaScript::Minifier::minify( input => $Param{Code} );
 }
 
@@ -529,6 +534,30 @@ sub CacheDelete {
     );
 
     return @Result;
+}
+
+=head2 IsJavaScriptMinifierXSAvailable()
+
+    Tries to load JavaScript::Minifier::XS if available which provides faster creation of minified JavaScript.
+
+    Returns true value if JavaScript::Minifier::XS is available and loaded.
+
+=cut
+
+sub IsJavaScriptMinifierXSAvailable {
+    my ( $Self, $Param ) = @_;
+
+    return $Self->{JavaScriptMinifierXSAvailable} if defined $Self->{JavaScriptMinifierXSAvailable};
+
+    $Self->{JavaScriptMinifierXSAvailable} = eval {
+        require JavaScript::Minifier::XS;
+        JavaScript::Minifier::XS->import();
+        1;
+    };
+
+    $Self->{JavaScriptMinifierXSAvailable} //= 0;
+
+    return $Self->{JavaScriptMinifierXSAvailable};
 }
 
 =head2 IsCSSMinifierXSAvailable()

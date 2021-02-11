@@ -170,6 +170,12 @@ o Name:    CPAN JavaScript::Minifier
   License: GNU v2 - http://www.gnu.org/licenses/gpl.html
   Note:    Copyright (C) 2007 by Peter Michaux
 
+o Name:    CPAN JavaScript::Minifier::XS
+  Web:     n/a
+  License: GNU v1 - http://www.gnu.org/licenses/old-licenses/gpl-1.0.html
+           Artistic v1 - https://opensource.org/licenses/artistic-license-1.0
+  Note:    Copyright (C) 2020 by Graham TerMarsch
+
 o Name:    CPAN YAML
   Web:     n/a
   License: GNU v2 - http://www.gnu.org/licenses/gpl.html
