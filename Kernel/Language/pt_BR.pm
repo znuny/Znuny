@@ -7802,7 +7802,6 @@ Obrigado pela ajuda!
             'Número de tickets a serem exibidos em cada página de resultado de pesquisa na interface de agente.',
         'Number of tickets to be displayed in each page of a search result in the customer interface.' =>
             '',
-        'Number of tickets to be displayed in each page.' => 'Número de tickets que serão exibidos por página.',
         'OTRS Group Services' => 'Serviços do Grupo OTRS',
         'OTRS News' => 'Notícias sobre o OTRS',
         'OTRS can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>

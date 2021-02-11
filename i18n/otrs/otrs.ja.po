@@ -24600,10 +24600,6 @@ msgid ""
 msgstr "顧客インタフェースの検索結果の各ページで表示される、チケット数です。"
 
 #. SysConfig
-msgid "Number of tickets to be displayed in each page."
-msgstr ""
-
-#. SysConfig
 msgid "OTRS Group Services"
 msgstr "OTRSグループ・サービス"
 

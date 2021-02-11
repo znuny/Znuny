@@ -7788,7 +7788,6 @@ Thanks for your help!
             'प्रतिनिधि अंतरफलक में एक खोज परिणाम के प्रत्येक पृष्ठ में प्रदर्शित होने के लिए टिकटों की संख्या।',
         'Number of tickets to be displayed in each page of a search result in the customer interface.' =>
             'ग्राहक अंतरफलक में एक खोज परिणाम के प्रत्येक पृष्ठ में प्रदर्शित होने के लिए टिकटों की संख्या।',
-        'Number of tickets to be displayed in each page.' => '',
         'OTRS Group Services' => '',
         'OTRS News' => 'OTRS समाचार',
         'OTRS can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>

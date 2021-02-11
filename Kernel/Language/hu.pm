@@ -7802,7 +7802,6 @@ Az Ön segélyszolgálat csapata
             'Egy keresési eredmény minden egyes oldalán megjelenített jegyek száma az ügyintézői felületen.',
         'Number of tickets to be displayed in each page of a search result in the customer interface.' =>
             'Egy keresési eredmény minden egyes oldalán megjelenített jegyek száma az ügyfélfelületen.',
-        'Number of tickets to be displayed in each page.' => 'Az egyes oldalakon megjelenített jegyek száma.',
         'OTRS Group Services' => 'OTRS csoport szolgáltatások',
         'OTRS News' => 'OTRS hírek',
         'OTRS can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>

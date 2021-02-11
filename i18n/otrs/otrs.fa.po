@@ -24918,10 +24918,6 @@ msgstr ""
 "تعداد بلیط در هر صفحه از یک نتیجه جستجو در رابط مشتری نمایش داده می شود."
 
 #. SysConfig
-msgid "Number of tickets to be displayed in each page."
-msgstr ""
-
-#. SysConfig
 msgid "OTRS Group Services"
 msgstr ""
 

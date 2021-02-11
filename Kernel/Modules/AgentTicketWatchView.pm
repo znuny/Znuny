@@ -281,7 +281,6 @@ sub Run {
     $HeaderColumn =~ s{\A ColumnFilter }{}msxg;
     my @OriginalViewableTickets;
     my @ViewableTickets;
-    my $ViewableTicketCount = 0;
 
     # get ticket object
     my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');

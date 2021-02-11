@@ -7808,7 +7808,6 @@ Thanks for your help!
             'Количество заявок которое показывается на каждой странице при выводе результатов поиска в интерфейсе агента.',
         'Number of tickets to be displayed in each page of a search result in the customer interface.' =>
             'Количество заявок которое показывается на каждой странице при выводе результатов поиска в интерфейсе клиента.',
-        'Number of tickets to be displayed in each page.' => 'Количество заявок, отображаемых на каждой странице.',
         'OTRS Group Services' => '',
         'OTRS News' => 'Новости OTRS',
         'OTRS can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>

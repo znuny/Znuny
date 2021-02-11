@@ -25135,10 +25135,6 @@ msgid ""
 msgstr "고객 인터페이스에서 검색 결과의 각 페이지에 표시할 티켓 수입니다."
 
 #. SysConfig
-msgid "Number of tickets to be displayed in each page."
-msgstr "각 페이지에 표시할 티켓 수입니다."
-
-#. SysConfig
 msgid "OTRS Group Services"
 msgstr "OTRS 그룹 서비스"
 

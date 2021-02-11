@@ -7801,7 +7801,6 @@ Thanks for your help!
             '服务人员界面搜索结果每页显示的工单数。',
         'Number of tickets to be displayed in each page of a search result in the customer interface.' =>
             '客户界面搜索结果每页显示的工单数。',
-        'Number of tickets to be displayed in each page.' => '每页显示的工单数量。',
         'OTRS Group Services' => 'OTRS集团服务',
         'OTRS News' => 'OTRS新闻',
         'OTRS can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>

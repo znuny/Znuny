@@ -7809,7 +7809,6 @@ El control del acceso adicional para demostrar o no demostrar éste enlace puede
             '',
         'Number of tickets to be displayed in each page of a search result in the customer interface.' =>
             '',
-        'Number of tickets to be displayed in each page.' => '',
         'OTRS Group Services' => '',
         'OTRS News' => 'Noticias de OTRS',
         'OTRS can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>

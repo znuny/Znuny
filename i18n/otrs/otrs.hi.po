@@ -23949,10 +23949,6 @@ msgstr ""
 "ग्राहक अंतरफलक में एक खोज परिणाम के प्रत्येक पृष्ठ में प्रदर्शित होने के लिए टिकटों की संख्या।"
 
 #. SysConfig
-msgid "Number of tickets to be displayed in each page."
-msgstr ""
-
-#. SysConfig
 msgid "OTRS Group Services"
 msgstr ""
 
