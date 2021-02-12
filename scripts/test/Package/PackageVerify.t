@@ -149,7 +149,7 @@ my @Tests = (
         Name        => "PackageVerify - Package 'Test'",
         Package     => $String,
         PackageName => 'Test',
-        Result      => 'not_verified',
+        Result      => 'verified',
     },
     {
         Name        => "PackageVerify - Package 'TestSecond'",
@@ -213,8 +213,8 @@ my %VerifyAll = $PackageObject->PackageVerifyAll();
 for my $PackageName (qw( Test TestSecond )) {
     $Self->Is(
         $VerifyAll{$PackageName},
-        'not_verified',
-        "PackageVerifyAll - '$PackageName' not verified"
+        'verified',
+        "PackageVerifyAll - '$PackageName' verified"
     );
 }
 
