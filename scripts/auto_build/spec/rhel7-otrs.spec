@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2012-2021 Znuny GmbH, https://znuny.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -12,7 +12,7 @@
 # "bin/otrs.Console.pl Dev::Tools::RPMSpecGenerate". All changes will be lost.
 #
 
-Summary:      Znuny LTS Help Desk
+Summary:      The Znuny LTS service desk.
 Name:         znuny
 Version:      0.0
 License:      GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
@@ -62,6 +62,7 @@ install -d -m 755 $RPM_BUILD_ROOT/etc/httpd/conf.d
 install -m 644 scripts/apache2-httpd.include.conf $RPM_BUILD_ROOT/etc/httpd/conf.d/zzz_otrs.conf
 
 # set permission
+
 export OTRSUSER=otrs
 useradd $OTRSUSER || :
 useradd apache || :
@@ -113,12 +114,13 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %config /etc/httpd/conf.d/zzz_otrs.conf
 
+%defattr(-, otrs, apache, -)
 %config(noreplace) /opt/otrs/Kernel/Config.pm
-%config(noreplace) /opt/otrs/.procmailrc
+%attr(-, otrs, root,) %config(noreplace) /opt/otrs/.procmailrc
 %config(noreplace) /opt/otrs/.fetchmailrc
 %config(noreplace) /opt/otrs/.mailfilter
 
-%dir /opt/otrs/
+%dir /opt/otrs
 /opt/otrs/RELEASE
 /opt/otrs/ARCHIVE
 /opt/otrs/.bash_completion

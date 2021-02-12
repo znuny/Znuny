@@ -1,9 +1,9 @@
 [% INCLUDE 'includes/copyright.tt' -%]
 
-Summary:      Znuny Help Desk.
+Summary:      The Znuny help desk.
 Name:         znuny
 Version:      0.0
-Copyright:    GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
+License:      GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
 Group:        Applications/Mail
 Provides:     znuny
 Obsoletes:    otrs <= 6.0.30
@@ -39,6 +39,7 @@ install -d -m 755 $RPM_BUILD_ROOT/etc/apache2/conf.d
 install -m 644 scripts/apache2-httpd.include.conf $RPM_BUILD_ROOT/etc/apache2/conf.d/zzz_otrs.conf
 
 [% '#' %] set permission
+[% webgroup = 'www' %]
 export OTRSUSER=otrs
 useradd $OTRSUSER || :
 useradd wwwrun || :

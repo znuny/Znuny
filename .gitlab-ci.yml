@@ -1,5 +1,15 @@
-image: registry.znuny.com/znuny/internal/docker-centos-otrs-systemd:stable
+stages:
+  - build
 
-include:
-  - project: 'Znuny/Internal/Znuny'
-    file: '/templates/gitlab/Znuny/default.yml'
+build:
+  stage: build
+  image: registry.znuny.com/znuny/internal/docker-centos-otrs-systemd:stable
+  artifacts:
+    paths:
+      - build/
+    expire_in:  1 hrs
+  script:
+    - yum install -y rpm-build redhat-rpm-config
+    - rm disabled-.gitlab-ci.yml
+    - scripts/auto_build/auto_build.sh "$CI_PROJECT_DIR" 6.0.32 02
+    - cp -a ../znuny-buildpackages build
