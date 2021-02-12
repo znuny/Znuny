@@ -2698,7 +2698,7 @@
         <Navigation>Core::Package</Navigation>
         <Value>
             <Array>
-                <Item>https://ftp.otrs.org/pub/otrs/misc/packages/repository.xml</Item>
+                <Item>https://download.znuny.org/releases/misc/packages/repository.xml</Item>
             </Array>
         </Value>
     </Setting>
