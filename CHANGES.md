@@ -1,5 +1,5 @@
 # 6.0.33 ????-??-??
- - 2021-02-15 Leading and trailing white space in names of uploaded files will not be removed. This prevents non-working attachment download links.
+ - 2021-02-15 Leading and trailing white space in names of uploaded files will now be removed. This prevents non-working attachment download links.
  - 2021-02-12 Fixed output of customer (user) dynamic field labels and values in PDF.
  - 2021-02-11 Removed unused SysConfig options Ticket::Frontend::AgentTicketStatusView###ViewableTicketsPage and Ticket::Frontend::AgentTicketEscalationView###ViewableTicketsPage. Thanks to Bernhard Schmalhofer (@bschmalhofer).
  - 2021-02-11 Updated to JavaScript::Minifier 1.15. Enabled automatic utilization of JavaScript::Minifier::XS if available. Thanks to Fedor A. Fetisov (@faf), @zoffixznet and Yuri Myasoedov (@ymyasoedov). See https://github.com/znuny/Znuny/issues/6.
