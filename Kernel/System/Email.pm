@@ -634,19 +634,35 @@ sub Send {
         Value         => "Queuing message for delivery.",
     );
 
-    # Save it to the queue
-    my $MailQueueObject = $Kernel::OM->Get('Kernel::System::MailQueue');
-    my $MailQueued      = $MailQueueObject->Create(
-        ArticleID => $Param{ArticleID},
-        MessageID => $Param{'Message-ID'},
-        Sender    => $RealFrom,
-        Recipient => \@ToArray,
-        Message   => {
-            Header => $Param{Header},
-            Body   => $Param{Body},
-        },
-        CommunicationLogObject => $CommunicationLogObject,
-    );
+    my $MailQueued = 1;
+
+    my $GenericModule = $Kernel::OM->Get('Kernel::Config')->Get('SendmailModule')
+        || 'Kernel::System::Email::Sendmail';
+    if ( $GenericModule eq 'Kernel::System::Email::Sendmail' ) {
+          my $SendmailModuleCMD = $Kernel::OM->Get('Kernel::Config')->Get('SendmailModule::CMD');
+          my @SendmailCMD = ( split( / +/, $SendmailModuleCMD ), $RealFrom, @ToArray );
+          if($MailQueued = open( SENDMAIL, "|-", @SendmailCMD ) ) {
+                if($MailQueued = print SENDMAIL $Param{Header}, $Param{Body} ) {
+                      $MailQueued = close( SENDMAIL );
+                }
+          }
+
+    } else {
+
+        # Save it to the queue
+        my $MailQueueObject = $Kernel::OM->Get('Kernel::System::MailQueue');
+        $MailQueued      = $MailQueueObject->Create(
+            ArticleID => $Param{ArticleID},
+            MessageID => $Param{'Message-ID'},
+            Sender    => $RealFrom,
+            Recipient => \@ToArray,
+            Message   => {
+                Header => $Param{Header},
+                Body   => $Param{Body},
+            },
+            CommunicationLogObject => $CommunicationLogObject,
+          );
+    }
 
     if ( !$MailQueued ) {
         return $SendError->(
