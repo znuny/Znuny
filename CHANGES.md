@@ -1,4 +1,5 @@
 # 6.0.33 ????-??-??
+ - 2021-02-22 Fixed article limit in generic interface operation TicketGet. Thanks to Renée Bäcker (@reneeb).
  - 2021-02-15 Leading and trailing white space in names of uploaded files will now be removed. This prevents non-working attachment download links.
  - 2021-02-12 Fixed output of customer (user) dynamic field labels and values in PDF.
  - 2021-02-11 Removed unused SysConfig options Ticket::Frontend::AgentTicketStatusView###ViewableTicketsPage and Ticket::Frontend::AgentTicketEscalationView###ViewableTicketsPage. Thanks to Bernhard Schmalhofer (@bschmalhofer).
