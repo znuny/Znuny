@@ -1,9 +1,10 @@
 # --
 # Copyright (C) 2021 Perl-Services.de
+# Copyright (C) 2021 Znuny GmbH, https://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
-# the enclosed file COPYING for license information (GPL). If you
-# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
 ## no critic (Modules::RequireExplicitPackage)
@@ -50,10 +51,10 @@ my $UserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
     UserLogin => $UserLogin,
 );
 
-my @NrOfArticles = (3, 5);
+my @NrOfArticles = ( 3, 5 );
 my $ArticleLimit = 100;
 
-my @TicketIDs = CreateTickets( @NrOfArticles );
+my @TicketIDs = CreateTickets(@NrOfArticles);
 
 # set web-service name
 my $WebserviceName = '-Test-' . $RandomID;
@@ -183,7 +184,7 @@ my $LocalResult = $LocalObject->Run(
     Invoker      => 'TicketGet',
     Data         => {
         %Auth,
-        TicketID     => (join ", ", @TicketIDs),
+        TicketID     => ( join ", ", @TicketIDs ),
         AllArticles  => 1,
         ArticleLimit => 100,
     },
@@ -200,7 +201,7 @@ for my $Index ( 0 .. $#NrOfArticles ) {
     $Self->Is(
         scalar( @{ $LocalResult->{Data}->{Ticket}->[$Index]->{Article} } ),
         $NrOfArticles[$Index],
-        "correct number of articles for ticket " . ($Index + 1)
+        "correct number of articles for ticket " . ( $Index + 1 )
     );
 }
 
@@ -244,7 +245,7 @@ sub CreateTickets {
     #ticket id container
     my @TicketIDs;
 
-    for my $NrArticles ( @RequestedArticles ) {
+    for my $NrArticles (@RequestedArticles) {
 
         # create ticket
         my $TicketID = $TicketObject->TicketCreate(
@@ -292,6 +293,5 @@ sub CreateTickets {
 
     return @TicketIDs;
 }
-
 
 1;
