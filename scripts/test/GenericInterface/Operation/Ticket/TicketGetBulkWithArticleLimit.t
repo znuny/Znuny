@@ -1,9 +1,9 @@
 # --
 # Copyright (C) 2021 Perl-Services.de
 # --
-# This software comes with ABSOLUTELY NO WARRANTY. For details, see
-# the enclosed file COPYING for license information (GPL). If you
-# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# This software comes with ABSOLUTELY NO WARRANTY.
+# It is licensed under GNU AFFERO GENERAL PUBLIC LICENSE (AGPL),
+# see https://www.gnu.org/licenses/agpl-3.0.txt.
 # --
 
 ## no critic (Modules::RequireExplicitPackage)
