@@ -31,7 +31,7 @@ sub Configure {
     $Self->AddArgument(
         Name => 'location',
         Description =>
-            "Specify a file path, a remote repository (http://ftp.otrs.org/pub/otrs/packages/:Package-1.0.0.opm) or just any online repository (online:Package).",
+            "Specify a file path, a remote repository (https://download.znuny.org/releases/packages/:Package-1.0.0.opm) or just any online repository (online:Package).",
         Required   => 1,
         ValueRegex => qr/.*/smx,
     );

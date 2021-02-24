@@ -126,7 +126,7 @@ If you need to set credentials
             User     => 'otrs_user',
             Password => 'otrs_password',
             Realm    => 'OTRS Unittests',
-            Location => 'ftp.otrs.org:80',
+            Location => 'download.znuny.org:80',
         },
         SkipSSLVerification => 1, # (optional)
         NoLog               => 1, # (optional)

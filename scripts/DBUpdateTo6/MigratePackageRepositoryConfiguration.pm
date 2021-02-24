@@ -42,12 +42,12 @@ sub Run {
     my @FrameworkVersionParts = split /\./, $ConfigObject->Get('Version');
     my $FrameworkVersion      = $FrameworkVersionParts[0];
 
-    my $CurrentITSMRepository = "http://ftp.otrs.org/pub/otrs/itsm/packages$FrameworkVersion/";
+    my $CurrentITSMRepository = "https://download.znuny.org/releases/itsm/packages$FrameworkVersion/";
 
     return 1 if $RepositoryList{$CurrentITSMRepository};
 
     # Make sure ITSM repository matches the current framework version.
-    my @Matches = grep { $_ =~ m{http://ftp\.otrs\.org/pub/otrs/itsm/packages\d+/}msxi } sort keys %RepositoryList;
+    my @Matches = grep { $_ =~ m{https://download\.znuny\.org/releases/itsm/packages\d+/}msxi } sort keys %RepositoryList;
 
     return 1 if !@Matches;
 
