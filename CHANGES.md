@@ -5,6 +5,7 @@
  - 2021-02-11 Updated to JavaScript::Minifier 1.15. Enabled automatic utilization of JavaScript::Minifier::XS if available. Thanks to Fedor A. Fetisov (@faf), @zoffixznet and Yuri Myasoedov (@ymyasoedov). See https://github.com/znuny/Znuny/issues/6.
  - 2020-02-11 Enabled automatic utilization of CSS::Minifier::XS if available.
  - 2020-02-11 Fixed return value format of user search. Thanks to Nicola Cordioli (@niccord).
+ - 2020-02-10 Fixed bug in _UserCacheClear in Kernel::System::User. Thanks to Yuri Myasoedov (@ymyasoedov) See https://github.com/znuny/Znuny/pull/1
 
 # 6.0.32 2021-01-29
  - 2021-01-29 Updated CKEditor to version 4.16.0.
