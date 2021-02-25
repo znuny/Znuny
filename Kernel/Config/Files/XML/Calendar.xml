@@ -117,6 +117,7 @@
                         <Item Key="Prio">6000</Item>
                     </Hash>
                 </Item>
+<!--
                 <Item>
                     <Hash>
                         <Item Key="Group">
@@ -138,6 +139,7 @@
                         <Item Key="Prio">7000</Item>
                     </Hash>
                 </Item>
+-->
                 <Item>
                     <Hash>
                         <Item Key="Group">

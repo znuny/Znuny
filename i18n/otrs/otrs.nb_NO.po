@@ -23824,10 +23824,6 @@ msgid ""
 msgstr "Antall saker som vises per side i et søkeresultat i kundeportalen."
 
 #. SysConfig
-msgid "Number of tickets to be displayed in each page."
-msgstr ""
-
-#. SysConfig
 msgid "OTRS Group Services"
 msgstr ""
 

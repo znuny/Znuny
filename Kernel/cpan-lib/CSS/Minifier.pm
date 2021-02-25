@@ -29,7 +29,7 @@ sub isWhitespace {
 # whitespace characters before or after these characters can be removed.
 sub isInfix {
   my $x = shift;
-  return ($x eq '{' || $x eq '}' || $x eq ';' || $x eq ':');  
+  return ($x eq '{' || $x eq '}' || $x eq ';' || $x eq ':');
 }
 
 # whitespace characters after these characters can be removed.
@@ -110,8 +110,8 @@ sub putLiteral {
   action1($s);
   do {
     while (defined($s->{a}) && $s->{a} eq '\\') { # escape character escapes only the next one character
-      action1($s);       
-      action1($s);       
+      action1($s);
+      action1($s);
     }
     action1($s);
   } until ($s->{last} eq $delimiter || !defined($s->{a}));
@@ -162,7 +162,7 @@ sub minify {
   # Immediately turn hash into a hash reference so that notation is the same in this function
   # as others. Easier refactoring.
   my $s = \%h; # hash reference for "state". This module is functional programming and the state is passed between functions.
-  
+
   # determine if the the input is a string or a file handle.
   my $ref = \$s->{input};
   if (defined($ref) && ref($ref) eq 'SCALAR'){
@@ -172,17 +172,17 @@ sub minify {
   else {
     $s->{inputType} = 'file';
   }
-  
+
   # Determine if the output is to a string or a file.
   if (!defined($s->{outfile})) {
     $s->{output} = '';
   }
-  
+
   # Print the copyright notice first
   if ($s->{copyright}) {
     _put($s, '/* ' . $s->{copyright} . ' */');
   }
-  
+
   # Initialize the buffer.
   do {
     $s->{a} = _get($s);
@@ -196,11 +196,11 @@ sub minify {
                                 # and have not yet seen a regular comment to close this like /* bar */
 
   while (defined($s->{a})) { # on this line $s->{a} should always be a non-whitespace character or undef (i.e. end of file)
-  
+
     if (isWhitespace($s->{a})) { # check that this program is running correctly
       die 'minifier bug: minify while loop starting with whitespace, stopped';
     }
-    
+
     # Each branch handles trailing whitespace and ensures $s->{a} is on non-whitespace or undef when branch finishes
     if ($s->{a} eq '/' && defined($s->{b}) && $s->{b} eq '*') { # a comment
       do {
@@ -210,8 +210,8 @@ sub minify {
            # set hack flag true
            # print /*\*/
         if ($s->{a} eq '\\' &&
-            defined($s->{b}) && $s->{b} eq '*' && 
-            defined($s->{c}) && $s->{c} eq '/' && 
+            defined($s->{b}) && $s->{b} eq '*' &&
+            defined($s->{c}) && $s->{c} eq '/' &&
             !$macIeCommentHackFlag) {
             $macIeCommentHackFlag = 1;
             _put($s, '/*\\*/');
@@ -222,14 +222,14 @@ sub minify {
            # set hack flag false
            # print /**/
         if ($s->{a} ne '\\' &&
-            defined($s->{b}) && $s->{b} eq '*' && 
-            defined($s->{c}) && $s->{c} eq '/' && 
+            defined($s->{b}) && $s->{b} eq '*' &&
+            defined($s->{c}) && $s->{c} eq '/' &&
             $macIeCommentHackFlag) {
             $macIeCommentHackFlag = 0;
             _put($s, '/**/');
             $s->{last} = '/';
         }
-           
+
       } until (!defined($s->{b}) || ($s->{a} eq '*' && $s->{b} eq '/'));
       if (defined($s->{b})) { # $s->{a} is asterisk and $s->{b} is forward slash
         action2($s); # the *
@@ -257,11 +257,11 @@ sub minify {
       }
     }
   }
-  
+
   if (!defined($s->{outfile})) {
     return $s->{output};
   }
-  
+
 }
 
 # -----------------------------------------------------------------------------
@@ -289,7 +289,7 @@ To minify a CSS file and have the output written directly to another file
 To minify a CSS string literal. Note that by omitting the outfile parameter a the minified code is returned as a string.
 
   my minifiedCSS = minify(input => 'div {font-family: serif;}');
-  
+
 To include a copyright comment at the top of the minified code.
 
   minify(input => 'div {font-family: serif;}', copyright => 'BSD License');

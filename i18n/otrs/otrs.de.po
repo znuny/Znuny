@@ -26499,10 +26499,6 @@ msgstr ""
 "Kundenoberfläche."
 
 #. SysConfig
-msgid "Number of tickets to be displayed in each page."
-msgstr "Anzahl der angezeigten Tickets pro Seite."
-
-#. SysConfig
 msgid "OTRS Group Services"
 msgstr "Dienstleistungen der OTRS Gruppe"
 

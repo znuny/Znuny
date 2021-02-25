@@ -24218,10 +24218,6 @@ msgid ""
 msgstr "客户界面搜索结果每页显示的工单数。"
 
 #. SysConfig
-msgid "Number of tickets to be displayed in each page."
-msgstr "每页显示的工单数量。"
-
-#. SysConfig
 msgid "OTRS Group Services"
 msgstr "OTRS集团服务"
 

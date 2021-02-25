@@ -1,5 +1,6 @@
 # --
-# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -34,8 +35,13 @@ my $Home = $ConfigObject->Get('Home');
 
     $CSS = ${$CSS};
 
+    my $ExpectedMinifiedFilename = 'OTRS.Reset.min_for_css_minifier.css';
+    if ( $LoaderObject->IsCSSMinifierXSAvailable() ) {
+        $ExpectedMinifiedFilename = 'OTRS.Reset.min_for_css_minifier_xs.css';
+    }
+
     my $ExpectedCSS = $MainObject->FileRead(
-        Location => $Home . '/scripts/test/sample/Loader/OTRS.Reset.min.css',
+        Location => "$Home/scripts/test/sample/Loader/$ExpectedMinifiedFilename",
     );
 
     $ExpectedCSS = ${$ExpectedCSS};
@@ -88,13 +94,22 @@ my $Home = $ConfigObject->Get('Home');
 
     my $MinifiedJS = $LoaderObject->MinifyJavaScript( Code => $JavaScript );
 
+    # Remove any trailing new lines (also from last line, therefore no chomp)
+    $MinifiedJS =~ s{\n+\z}{}ms;
+
+    my $ExpectedMinifiedFilename = 'OTRS.Agent.App.Login.min_for_javascript_minifier.js';
+    if ( $LoaderObject->IsJavaScriptMinifierXSAvailable() ) {
+        $ExpectedMinifiedFilename = 'OTRS.Agent.App.Login.min_for_javascript_minifier_xs.js';
+    }
+
     my $ExpectedJS = $MainObject->FileRead(
-        Location => $Home . '/scripts/test/sample/Loader/OTRS.Agent.App.Login.min.js',
+        Location => "$Home/scripts/test/sample/Loader/$ExpectedMinifiedFilename",
     );
     $ExpectedJS = ${$ExpectedJS};
     $ExpectedJS =~ s{\r\n}{\n}xmsg;
 
-    #chomp $ExpectedJS;
+    # Remove any trailing new lines (also from last line, therefore no chomp)
+    $ExpectedJS =~ s{\n+\z}{}ms;
 
     $Self->Is(
         $MinifiedJS || '',
@@ -141,15 +156,26 @@ my $Home = $ConfigObject->Get('Home');
     my $MinifiedJS = $MainObject->FileRead(
         Location => $ConfigObject->Get('TempDir') . "/$MinifiedJSFilename",
     );
+
     $MinifiedJS = ${$MinifiedJS};
     $MinifiedJS =~ s{\r\n}{\n}xmsg;
-    chomp $MinifiedJS;
+
+    # Remove any trailing new lines (also from last line, therefore no chomp)
+    $MinifiedJS =~ s{\n+\z}{}ms;
+
+    my $ExpectedMinifiedFilename = 'CombinedJavaScript.min_for_javascript_minifier.js';
+    if ( $LoaderObject->IsJavaScriptMinifierXSAvailable() ) {
+        $ExpectedMinifiedFilename = 'CombinedJavaScript.min_for_javascript_minifier_xs.js';
+    }
 
     my $Expected = $MainObject->FileRead(
-        Location => $Home . '/scripts/test/sample/Loader/CombinedJavaScript.min.js',
+        Location => "$Home/scripts/test/sample/Loader/$ExpectedMinifiedFilename",
     );
     $Expected = ${$Expected};
     $Expected =~ s{\r\n}{\n}xmsg;
+
+    # Remove any trailing new lines (also from last line, therefore no chomp)
+    $Expected =~ s{\n+\z}{}ms;
 
     $Self->Is(
         $MinifiedJS,

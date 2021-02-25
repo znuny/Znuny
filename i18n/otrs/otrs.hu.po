@@ -26458,10 +26458,6 @@ msgstr ""
 "ügyfélfelületen."
 
 #. SysConfig
-msgid "Number of tickets to be displayed in each page."
-msgstr "Az egyes oldalakon megjelenített jegyek száma."
-
-#. SysConfig
 msgid "OTRS Group Services"
 msgstr "OTRS csoport szolgáltatások"
 

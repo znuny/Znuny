@@ -25880,10 +25880,6 @@ msgid ""
 msgstr ""
 
 #. SysConfig
-msgid "Number of tickets to be displayed in each page."
-msgstr "Número de tickets que serão exibidos por página."
-
-#. SysConfig
 msgid "OTRS Group Services"
 msgstr "Serviços do Grupo OTRS"
 

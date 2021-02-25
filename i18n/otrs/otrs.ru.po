@@ -25670,10 +25670,6 @@ msgstr ""
 "результатов поиска в интерфейсе клиента."
 
 #. SysConfig
-msgid "Number of tickets to be displayed in each page."
-msgstr "Количество заявок, отображаемых на каждой странице."
-
-#. SysConfig
 msgid "OTRS Group Services"
 msgstr ""
 

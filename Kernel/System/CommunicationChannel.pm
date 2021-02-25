@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -486,17 +486,17 @@ sub ChannelList {
 
 Synchronize communication channels in the database with channel registration in configuration.
 
-    my $Result = $CommunicationChannelObject->ChannelSync(
+    my %Result = $CommunicationChannelObject->ChannelSync(
         UserID => 1,
     );
 
 Returns:
 
-    $Result = {
+    %Result = (
         ChannelsUpdated => [ 'Email', 'Phone' ],
         ChannelsAdded   => [ 'Chat' ],
         ChannelsInvalid => [ 'Internal' ],
-    };
+    );
 
 =cut
 

@@ -1,5 +1,18 @@
-# 6.0.31 ????-??-??
- - 2020-12-07 Fixed Ticket#2020111942002059 - Improve PDF display of article fields in the customer interface.
+# 6.0.33 ????-??-??
+ - 2021-02-15 Leading and trailing white space in names of uploaded files will now be removed. This prevents non-working attachment download links.
+ - 2021-02-12 Fixed output of customer (user) dynamic field labels and values in PDF.
+ - 2021-02-11 Removed unused SysConfig options Ticket::Frontend::AgentTicketStatusView###ViewableTicketsPage and Ticket::Frontend::AgentTicketEscalationView###ViewableTicketsPage. Thanks to Bernhard Schmalhofer (@bschmalhofer).
+ - 2021-02-11 Updated to JavaScript::Minifier 1.15. Enabled automatic utilization of JavaScript::Minifier::XS if available. Thanks to Fedor A. Fetisov (@faf), @zoffixznet and Yuri Myasoedov (@ymyasoedov). See https://github.com/znuny/Znuny/issues/6.
+ - 2020-02-11 Enabled automatic utilization of CSS::Minifier::XS if available.
+ - 2020-02-11 Fixed return value format of user search. Thanks to Nicola Cordioli (@niccord).
+ - 2020-02-10 Fixed bug in _UserCacheClear in Kernel::System::User. Thanks to Yuri Myasoedov (@ymyasoedov) See https://github.com/znuny/Znuny/pull/1
+
+# 6.0.32 2021-01-29
+ - 2021-01-29 Updated CKEditor to version 4.16.0.
+
+# 6.0.31 2021-01-27
+ - 2021-01-27 Updated CKEditor to version 4.15.1.
+ - 2021-01-27 Switched to Znuny branding.
 
 # 6.0.30 2020-10-12
  - 2020-09-22 Updated translations, thanks to all translators.

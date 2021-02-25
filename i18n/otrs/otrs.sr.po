@@ -25820,10 +25820,6 @@ msgstr ""
 "интерфејсу клијента."
 
 #. SysConfig
-msgid "Number of tickets to be displayed in each page."
-msgstr "Број тикета који ће бити приказани на свакој страни."
-
-#. SysConfig
 msgid "OTRS Group Services"
 msgstr "Сервиси OTRS групе"
 

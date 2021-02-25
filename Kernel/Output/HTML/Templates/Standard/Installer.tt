@@ -1,5 +1,6 @@
 # --
-# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2012-2021 Znuny GmbH, http://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -69,75 +70,19 @@
             </div>
             <div class="LayoutGrid Content">
                 <div class="Size1of2">
-                    <h4>[% Translate("Germany") | html %]</h4>
-                    <p>OTRS AG</p>
-                    <p>Zimmersmühlenweg 11</p>
-                    <p>61440 Oberursel</p>
-                    <p>[% Translate("Phone") | html %]: <a href="tel:+4961726819880">+49 (0) 6172 681988 0</a></p>
-                </div>
-                <div class="Size1of2">
-                    <h4>[% Translate("United States") | html %]</h4>
-                    <p>OTRS Inc.</p>
-                    <p>19925 Stevens Creek Blvd.</p>
-                    <p>Cupertino, CA 95014-2358</p>
-                    <p>[% Translate("Phone") | html %]: <a href="tel:+16692011411">+1 669 2011 411</a></p>
+                    <h4>Znuny GmbH</h4>
+                    <p>Marienstraße 18</p>
+                    <p>10117 Berlin</p>
+                    <p>Germany</p>
+                    <p>[% Translate("Phone") | html %]: <a href="tel:+4930609854180">+49 (0) 30 60 98 54 18-0</a></p>
                 </div>
             </div>
             <div class="Clear"></div>
             <div class="LayoutGrid Content">
-                <div class="Size1of2">
-                    <h4>[% Translate("Germany") | html %]</h4>
-                    <p>OTRS AG</p>
-                    <p>Bahnhofplatz 1a</p>
-                    <p>94315 Straubing</p>
-                    <p>[% Translate("Phone") | html %]: <a href="tel:+4961726819880">+49 (0) 6172 681988 0</a></p>
-                </div>
-                <div class="Size1of2">
-                    <h4>[% Translate("Mexico") | html %]</h4>
-                    <p>OTRS S.A. de C.V.</p>
-                    <p>Av. Insurgentes Sur 863, Piso 7 Of 01, Col. Nápoles</p>
-                    <p>03810 Mexico, D.F.</p>
-                    <p>[% Translate("Phone") | html %]: <a href="tel:+525511689664">+52 55 1168 9664</a></p>
-                </div>
-            </div>
-            <div class="Clear"></div>
-            <div class="LayoutGrid Content">
-                <div class="Size1of2">
-                    <h4>[% Translate("Hungary") | html %]</h4>
-                    <p>OTRS Magyarország Kft.</p>
-                    <p>Kálmán Imre utca 1.</p>
-                    <p>1054 Budapest</p>
-                    <p>[% Translate("Phone") | html %]: <a href="tel:+3614088333">+36 1 408 8333</a></p>
-                </div>
-                <div class="Size1of2">
-                    <h4>[% Translate("Brazil") | html %]</h4>
-                    <p>OTRS Do Brasil Soluções Ltda.</p>
-                    <p>Av. Paulista, 37 – 4º Andar – Bela Vista</p>
-                    <p>CEP: 01311-902, São Paulo / SP</p>
-                    <p>[% Translate("Phone") | html %]: <a href="tel:+551141308205">+55 11 41308205</a></p>
-                </div>
-            </div>
-            <div class="Clear"></div>
-            <div class="LayoutGrid Content">
-                <div class="Size1of2">
-                    <h4>[% Translate("Singapore") | html %]</h4>
-                    <p>OTRS ASIA Pte. Ltd.</p>
-                    <p>Asia Square Tower 2, 12 Marina View, #11-01</p>
-                    <p>Singapore 018961</p>
-                    <p>[% Translate("Phone") | html %]: <a href="tel:+6531636274">+65 3163 6274</a></p>
-                </div>
-                <div class="Size1of2">
-                    <h4>[% Translate("Hong Kong") | html %]</h4>
-                    <p>OTRS Asia Ltd.</p>
-                    <p>Unit 701 The Workstation, 43 Lyndhurst Terrace</p>
-                    <p>Central Hong Kong</p>
-                    <p>[% Translate("Phone") | html %]: <a href="tel:+85258035820">+852 5803 5820</a></p>
-                </div>
-            </div>
-            <div class="Clear"></div>
-            <div class="LayoutGrid Content">
-                <p>[% Translate("Web site") | html %]: <a href="http://otrs.com" target="_blank">www.otrs.com</a></p>
-                <p>[% Translate("Email") | html %]: <a href="mailto:otrsteam@otrs.com">otrsteam@otrs.com</a></p>
+                <p>[% Translate("Web site") | html %]: <a href="https://znuny.org" target="_blank">www.znuny.org</a></p>
+                <p>[% Translate("Email") | html %]: <a href="mailto:info@znuny.com">info@znuny.com</a></p>
+                <p>[% Translate("Community") | html %]: <a href="https://community.znuny.org/" target="_blank">community.znuny.org/</a></p>
+                <p>GitHub: <a href="https://github.com/znuny/Znuny" target="_blank">github.com/znuny/Znuny</a></p>
             </div>
             <div class="Clear"></div>
         </div>

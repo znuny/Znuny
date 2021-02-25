@@ -1,5 +1,6 @@
 # --
-# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2012-2021 Znuny GmbH, http://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,6 +19,9 @@ $Kernel::OM->ObjectParamAdd(
     },
 );
 my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+$ConfigObject->{DefaultLanguage} = 'en';
 
 my $TestUserLogin = $Helper->TestUserCreate(
     Groups => [ 'admin', 'users', ],
@@ -41,22 +45,6 @@ my $SystemDataObject           = $Kernel::OM->Get('Kernel::System::SystemData');
 my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
 my @Tests = (
-    {
-        Name                         => 'OB not installed',
-        CurrentTime                  => '2016-09-30 12:00:00',
-        OTRSBusinessIsInstalled      => 0,
-        SystemData                   => {},
-        AgentNotificationResultAgent => '',
-        AgentNotificationResultAdmin => '<!-- start Notify -->
-<div class="MessageBox Info">
-    <p>
-            <a href="No-$ENV{"SCRIPT_NAME"}?Action=AdminOTRSBusiness"> Upgrade to <b>OTRS Business Solution</b>™ now! </a>
-    </p>
-</div>
-<!-- end Notify -->
-',
-        CustomerNotificationResult => '',
-    },
     {
         Name                    => 'OB installed, everything ok',
         CurrentTime             => '2016-09-30 12:00:00',

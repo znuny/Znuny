@@ -1,15 +1,16 @@
 [% INCLUDE 'includes/copyright.tt' -%]
 
-Summary:      OTRS Help Desk.
-Name:         otrs
+Summary:      The Znuny help desk.
+Name:         znuny
 Version:      0.0
-Copyright:    GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
+License:      GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
 Group:        Applications/Mail
-Provides:     otrs
+Provides:     znuny
+Obsoletes:    otrs <= 6.0.30
 Requires:     [% Requires.join(' ') %]
 AutoReqProv:  no
 Release:      01
-Source0:      otrs-%{version}.tar.bz2
+Source0:      znuny-%{version}.tar.bz2
 BuildArch:    noarch
 BuildRoot:    %{_tmppath}/%{name}-%{version}-build
 
@@ -38,6 +39,7 @@ install -d -m 755 $RPM_BUILD_ROOT/etc/apache2/conf.d
 install -m 644 scripts/apache2-httpd.include.conf $RPM_BUILD_ROOT/etc/apache2/conf.d/zzz_otrs.conf
 
 [% '#' %] set permission
+[% webgroup = 'www' %]
 export OTRSUSER=otrs
 useradd $OTRSUSER || :
 useradd wwwrun || :

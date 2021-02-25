@@ -1,0 +1,5 @@
+image: registry.znuny.com/znuny/internal/docker-centos-otrs-systemd:stable
+
+include:
+  - project: 'Znuny/Internal/Znuny'
+    file: '/templates/gitlab/Znuny/default.yml'

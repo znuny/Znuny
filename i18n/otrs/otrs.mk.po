@@ -23812,10 +23812,6 @@ msgid ""
 msgstr ""
 
 #. SysConfig
-msgid "Number of tickets to be displayed in each page."
-msgstr ""
-
-#. SysConfig
 msgid "OTRS Group Services"
 msgstr ""
 
