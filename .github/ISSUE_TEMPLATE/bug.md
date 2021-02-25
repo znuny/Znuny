@@ -6,6 +6,8 @@ labels: 'Bug, Clarification'
 assignees: ''
 ---
 
+If you believe your issue is security related please follow the [security guidelines](https://github.com/znuny/Znuny/blob/rel-6_0/SECURITY.md).
+
 ### Expected behavior
 
 A clear and concise description of what you expected to happen.
