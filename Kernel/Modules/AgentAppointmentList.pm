@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -60,9 +60,16 @@ sub Run {
 
         if ( $GetParam{CalendarID} ) {
 
-            # append midnight to the timestamps
             for my $Timestamp (qw(StartTime EndTime)) {
-                if ( $GetParam{$Timestamp} && !( $GetParam{$Timestamp} =~ /\s\d{2}:\d{2}:\d{2}$/ ) ) {
+
+                if ( $GetParam{$Timestamp} && !( $GetParam{$Timestamp} =~ /T\d{2}:\d{2}\+\d{2}:\d{2}$/ ) ) {
+
+                    # Date format: 2020-07-27T00:01:10+02:00. In this case we need to set it to the midnight.
+                    $GetParam{$Timestamp} =~ s{T.*}{ 00:00:00}s;
+                }
+                elsif ( $GetParam{$Timestamp} && !( $GetParam{$Timestamp} =~ /\s\d{2}:\d{2}:\d{2}$/ ) ) {
+
+                    # Date format: 2020-07-27, missing time component. Set it to the midnight.
                     $GetParam{$Timestamp} = $GetParam{$Timestamp} . ' 00:00:00';
                 }
             }

@@ -50,7 +50,7 @@
         <Description Translatable="1">Defines the name of the application, shown in the web interface, tabs and title bar of the web browser.</Description>
         <Navigation>Core</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">OTRS 6</Item>
+            <Item ValueType="String" ValueRegex="">Znuny LTS</Item>
         </Value>
     </Setting>
     <Setting Name="SystemID" Required="1" Valid="1" ConfigLevel="200">
@@ -406,7 +406,7 @@
         <Description Translatable="1">Defines the URL rich text editor path.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Frontend::WebPath&gt;js/thirdparty/ckeditor-4.7.0/</Item>
+            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Frontend::WebPath&gt;js/thirdparty/ckeditor-4.16.0/</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::RichTextWidth" Required="1" Valid="1">
@@ -960,15 +960,6 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::Notification::AgentTimeZoneCheck</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Frontend::NotifyModule###8000-PackageManager-CheckNotVerifiedPackages" Required="1" Valid="1">
-        <Description Translatable="1">Defines the module to display a notification in the agent interface, if the installation of not verified packages is activated (only shown to admins).</Description>
-        <Navigation>Frontend::Agent::FrontendNotification</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Module">Kernel::Output::HTML::Notification::PackageManagerCheckNotVerifiedPackages</Item>
             </Hash>
         </Value>
     </Setting>
@@ -2707,7 +2698,7 @@
         <Navigation>Core::Package</Navigation>
         <Value>
             <Array>
-                <Item>https://ftp.otrs.org/pub/otrs/misc/packages/repository.xml</Item>
+                <Item>https://download.znuny.org/releases/misc/packages/repository.xml</Item>
             </Array>
         </Value>
     </Setting>
@@ -2759,7 +2750,7 @@
         <Description Translatable="1">If this setting is enabled, it is possible to install packages which are not verified by OTRS Group. These packages could threaten your whole system!</Description>
         <Navigation>Core::Package</Navigation>
         <Value>
-            <Item ValueType="Checkbox">0</Item>
+            <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
     <Setting Name="Package::EventModulePost###9000-SupportDataSend" Required="0" Valid="1">
@@ -4232,14 +4223,14 @@ via the Preferences button after logging in.
                     <Array>
                         <Item>Core.Agent.Dashboard.css</Item>
                         <Item>Core.AllocationList.css</Item>
-                        <Item>thirdparty/fullcalendar-3.4.0/fullcalendar.min.css</Item>
+                        <Item>thirdparty/fullcalendar-3.10.2/fullcalendar.min.css</Item>
                         <Item>thirdparty/nvd3-1.7.1/nv.d3.css</Item>
                     </Array>
                 </Item>
                 <Item Key="JavaScript">
                     <Array>
                         <Item>thirdparty/momentjs-2.18.1/moment.min.js</Item>
-                        <Item>thirdparty/fullcalendar-3.4.0/fullcalendar.min.js</Item>
+                        <Item>thirdparty/fullcalendar-3.10.2/fullcalendar.min.js</Item>
                         <Item>thirdparty/d3-3.5.6/d3.min.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/nvd3.min.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSLineChart.js</Item>
@@ -6451,7 +6442,7 @@ via the Preferences button after logging in.
             </Array>
         </Value>
     </Setting>
-    <Setting Name="Frontend::NavigationModule###AdminRegistration" Required="0" Valid="1">
+    <Setting Name="Frontend::NavigationModule###AdminRegistration" Required="0" Valid="0">
         <Description Translatable="1">Admin area navigation for the agent interface.</Description>
         <Navigation>Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
         <Value>
@@ -6474,7 +6465,7 @@ via the Preferences button after logging in.
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::Module###AdminOTRSBusiness" Required="0" Valid="1">
+    <Setting Name="Frontend::Module###AdminOTRSBusiness" Required="0" Valid="0">
         <Description Translatable="1">Frontend module registration for the agent interface.</Description>
         <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
         <Value>
@@ -6701,7 +6692,7 @@ via the Preferences button after logging in.
             </Array>
         </Value>
     </Setting>
-    <Setting Name="Frontend::NavigationModule###AdminCloudServices" Required="0" Valid="1">
+    <Setting Name="Frontend::NavigationModule###AdminCloudServices" Required="0" Valid="0">
         <Description Translatable="1">Admin area navigation for the agent interface.</Description>
         <Navigation>Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
         <Value>
@@ -7384,6 +7375,7 @@ via the Preferences button after logging in.
                         <Item Key="Prio">8500</Item>
                     </Hash>
                 </Item>
+<!--
                 <Item>
                     <Hash>
                         <Item Key="Group">
@@ -7407,6 +7399,7 @@ via the Preferences button after logging in.
                         <Item Key="Prio">100</Item>
                     </Hash>
                 </Item>
+-->
                 <Item>
                     <Hash>
                         <Item Key="Group">
@@ -7623,7 +7616,7 @@ via the Preferences button after logging in.
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="DashboardBackend###0000-ProductNotify" Required="0" Valid="1">
+    <Setting Name="DashboardBackend###0000-ProductNotify" Required="0" Valid="0">
         <Description Translatable="1">Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" defines the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.</Description>
         <Navigation>Frontend::Agent::View::Dashboard</Navigation>
         <Value>
@@ -7677,23 +7670,6 @@ via the Preferences button after logging in.
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="DashboardBackend###0405-News" Required="0" Valid="1">
-        <Description Translatable="1">Defines the parameters for the dashboard backend. "Limit" defines the number of entries displayed by default. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.</Description>
-        <Navigation>Frontend::Agent::View::Dashboard</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Module">Kernel::Output::HTML::Dashboard::News</Item>
-                <Item Key="Title" Translatable="1">OTRS News</Item>
-                <Item Key="Description" Translatable="1">News about OTRS.</Item>
-                <Item Key="Block">ContentSmall</Item>
-                <Item Key="Limit">6</Item>
-                <Item Key="Group"></Item>
-                <Item Key="Default">1</Item>
-                <Item Key="CacheTTL">360</Item>
-                <Item Key="Mandatory">0</Item>
-            </Hash>
-        </Value>
-    </Setting>
     <Setting Name="DashboardBackend###0410-RSS" Required="0" Valid="0">
         <Description Translatable="1">Defines the parameters for the dashboard backend. "Limit" defines the number of entries displayed by default. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.</Description>
         <Navigation>Frontend::Agent::View::Dashboard</Navigation>
@@ -7708,6 +7684,25 @@ via the Preferences button after logging in.
                 <Item Key="URL_nl">https://www.otrs.com/nl/rss.xml</Item>
                 <Item Key="URL_ru">https://www.otrs.com/ru/rss.xml</Item>
                 <Item Key="URL_zh">https://www.otrs.com/cn/rss.xml</Item>
+                <Item Key="Block">ContentSmall</Item>
+                <Item Key="Limit">6</Item>
+                <Item Key="Group"></Item>
+                <Item Key="Default">1</Item>
+                <Item Key="CacheTTL">360</Item>
+                <Item Key="Mandatory">0</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="DashboardBackend###0442-RSS" Required="0" Valid="1">
+        <Description Translatable="1">Defines the parameters for the dashboard backend. "Limit" defines the number of entries displayed by default. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.</Description>
+        <Navigation>Frontend::Agent::View::Dashboard</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::Dashboard::RSS</Item>
+                <Item Key="Title" Translatable="1">News</Item>
+                <Item Key="Description" Translatable="1">Znuny.org - News</Item>
+                <Item Key="URL">https://www.znuny.org/public/rss/en/rss.xml</Item>
+                <Item Key="URL_de">https://www.znuny.org/public/rss/de/rss.xml</Item>
                 <Item Key="Block">ContentSmall</Item>
                 <Item Key="Limit">6</Item>
                 <Item Key="Group"></Item>
@@ -7777,11 +7772,11 @@ via the Preferences button after logging in.
                 <Item Key="Title" Translatable="1">A Website</Item>
                 <Item Key="Description" Translatable="1">Some description!</Item>
                 <Item Key="Block">ContentLarge</Item>
-                <Item Key="URL">https://www.otrs.org/</Item>
+                <Item Key="URL">https://otrs.com/</Item>
                 <Item Key="Group"></Item>
                 <Item Key="Default">1</Item>
-                <Item Key="Link">https://otrs.org/</Item>
-                <Item Key="LinkTitle">OTRS.org/</Item>
+                <Item Key="Link">https://otrs.com/</Item>
+                <Item Key="LinkTitle">OTRS.com/</Item>
                 <Item Key="Width">1024</Item>
                 <Item Key="Height">800</Item>
                 <Item Key="Marginheight">5</Item>
@@ -7844,7 +7839,7 @@ via the Preferences button after logging in.
                     <Hash>
                         <Item Key="Description">US-CERT NVD</Item>
                         <Item Key="URL">https://nvd.nist.gov/nvd.cfm?cvename=&lt;MATCH1&gt;-&lt;MATCH2&gt;-&lt;MATCH3&gt;</Item>
-                        <Item Key="Image">https://nvd.nist.gov/NVD/Media/images/favicons/favicon-16x16.png</Item>
+                        <Item Key="Image">https://nvd.nist.gov/site-media/images/favicons/favicon-16x16.png</Item>
                         <Item Key="Target">_blank</Item>
                     </Hash>
                 </Item>
@@ -8072,7 +8067,7 @@ via the Preferences button after logging in.
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Array>
-                <Item>thirdparty/jquery-3.4.1/jquery.js</Item>
+                <Item>thirdparty/jquery-3.5.1/jquery.js</Item>
                 <Item>thirdparty/jquery-browser-detection/jquery-browser-detection.js</Item>
                 <Item>thirdparty/jquery-ui-1.12.1/jquery-ui.js</Item>
                 <Item>thirdparty/jquery-ui-touch-punch-0.2.3/jquery.ui.touch-punch.js</Item>
@@ -8135,7 +8130,7 @@ via the Preferences button after logging in.
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Array>
-                <Item>thirdparty/ckeditor-4.7.0/ckeditor.js</Item>
+                <Item>thirdparty/ckeditor-4.16.0/ckeditor.js</Item>
             </Array>
         </Value>
     </Setting>
@@ -8173,7 +8168,7 @@ via the Preferences button after logging in.
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Array>
-                <Item>thirdparty/jquery-3.4.1/jquery.js</Item>
+                <Item>thirdparty/jquery-3.5.1/jquery.js</Item>
                 <Item>thirdparty/jquery-browser-detection/jquery-browser-detection.js</Item>
                 <Item>thirdparty/jquery-validate-1.16.0/jquery.validate.js</Item>
                 <Item>thirdparty/jquery-ui-1.12.1/jquery-ui.js</Item>
@@ -8224,7 +8219,7 @@ via the Preferences button after logging in.
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Array>
-                <Item>thirdparty/ckeditor-4.7.0/ckeditor.js</Item>
+                <Item>thirdparty/ckeditor-4.16.0/ckeditor.js</Item>
             </Array>
         </Value>
     </Setting>

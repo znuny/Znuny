@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2020-04-08 06:39+0000\n"
+"POT-Creation-Date: 2020-07-01 07:05+0000\n"
 "PO-Revision-Date: 2020-03-14 13:10+0000\n"
 "Last-Translator: Mohsen Ebrahimi <ebrahimi.m@of.iut.ac.ir>\n"
 "Language-Team: Persian <https://translate.app.otrs.com/projects/otrs-6/otrs/"
@@ -2319,25 +2319,21 @@ msgstr "درخواست تغییر داده شده بین"
 
 #. Template: AdminGenericAgent
 #, fuzzy
-#| msgid "Last changed times"
 msgid "Last close times"
 msgstr "زمان آخرین تغییر "
 
 #. Template: AdminGenericAgent
 #, fuzzy
-#| msgid "No close time settings."
 msgid "No last close time settings."
 msgstr "زمان بستن تنظیم نشده است"
 
 #. Template: AdminGenericAgent
 #, fuzzy
-#| msgid "Ticket closed"
 msgid "Ticket last close"
 msgstr "درخواست بسته شده"
 
 #. Template: AdminGenericAgent
 #, fuzzy
-#| msgid "Ticket closed between"
 msgid "Ticket last close between"
 msgstr "درخواست بسته شده بین"
 
@@ -16259,204 +16255,204 @@ msgstr ""
 msgid "Action \"%s\" not found!"
 msgstr "اقدام \\ \" %s \" یافت نشد!"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "invalid-temporarily"
 msgstr "موقتا غیر معتبر"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Group for default access."
 msgstr "گروه برای دسترسی پیش فرض."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Group of all administrators."
 msgstr "گروه از همه مدیران."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Group for statistics access."
 msgstr "گروه برای دسترسی آمار."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "new"
 msgstr "جدید"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "All new state types (default: viewable)."
 msgstr "تمام انواع حالت جدید (به طور پیش فرض: قابل مشاهده)."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "open"
 msgstr "باز"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "All open state types (default: viewable)."
 msgstr "تمام انواع حالت باز (به طور پیش فرض: قابل مشاهده)."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "closed"
 msgstr "بسته شده"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "All closed state types (default: not viewable)."
 msgstr "تمام انواع حالت بسته (به طور پیش فرض: قابل مشاهده نیست)."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "pending reminder"
 msgstr "یادآوری حالت معلق"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "All 'pending reminder' state types (default: viewable)."
 msgstr "همه \"در انتظار یادآوری، انواع حالت (به طور پیش فرض: قابل مشاهده)."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "pending auto"
 msgstr "حالت خودکار معلق"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "All 'pending auto *' state types (default: viewable)."
 msgstr "همه \"در انتظار خودکار * انواع حالت (به طور پیش فرض: قابل مشاهده)."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "removed"
 msgstr "حذف شده"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "All 'removed' state types (default: not viewable)."
 msgstr "تمام انواع حالت حذف (به طور پیش فرض: قابل مشاهده نیست)."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "merged"
 msgstr "ادغام شد"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "State type for merged tickets (default: not viewable)."
 msgstr "نوع حالت برای درخواست ادغام (به طور پیش فرض: قابل مشاهده نیست)."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "New ticket created by customer."
 msgstr "درخواست جدید ایجاد شده توسط مشتری."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "closed successful"
 msgstr "با موفقیت بسته شد"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket is closed successful."
 msgstr "درخواست موفق بسته شده است."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "closed unsuccessful"
 msgstr "با موفقیت بسته نشد"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket is closed unsuccessful."
 msgstr "درخواست ناموفق بسته شده است."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Open tickets."
 msgstr "درخواست را باز کنید."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Customer removed ticket."
 msgstr "درخواست مشتری حذف خواهند شد."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket is pending for agent reminder."
 msgstr "درخواست برای یادآوری عامل در انتظار."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "pending auto close+"
 msgstr "حالت تعلیق-بستن خودکار(+)"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket is pending for automatic close."
 msgstr "درخواست  نزدیک اتوماتیک در انتظار."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "pending auto close-"
 msgstr "حالت تعلیق-بستن خودکار(-)"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "State for merged tickets."
 msgstr "حالت برای ادغام درخواست."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "system standard salutation (en)"
 msgstr "سیستم سلام استاندارد (FA)"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Standard Salutation."
 msgstr "سلام استاندارد."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "system standard signature (en)"
 msgstr "سیستم امضای استاندارد (FA)"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Standard Signature."
 msgstr "امضاء استاندارد."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Standard Address."
 msgstr " نشانی استاندارد."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "possible"
 msgstr "بله"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Follow-ups for closed tickets are possible. Ticket will be reopened."
 msgstr "پیگیری برای درخواست بسته امکان پذیر است. درخواست بازگشایی خواهد شد."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "reject"
 msgstr "خیر"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "Follow-ups for closed tickets are not possible. No new ticket will be "
 "created."
 msgstr ""
 "پیگیری برای درخواست بسته امکان پذیر نیست. بدون درخواست جدید ایجاد خواهد شد."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "new ticket"
 msgstr "درخواست جدید"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "Follow-ups for closed tickets are not possible. A new ticket will be created."
 msgstr ""
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Postmaster queue."
 msgstr "صف رئيس پست."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "All default incoming tickets."
 msgstr "همه به طور پیش فرض درخواست ورودی."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "All junk tickets."
 msgstr "تمام درخواست های ناخواسته."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "All misc tickets."
 msgstr "تمام درخواست متفرقه."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "auto reply"
 msgstr "پاسخ خودکار"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "Automatic reply which will be sent out after a new ticket has been created."
 msgstr "پاسخ خودکار خواهد شد که یک بلیط جدید بعد از ارسال ایجاد شده است."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "auto reject"
 msgstr "رد خودکار "
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "Automatic reject which will be sent out after a follow-up has been rejected "
 "(in case queue follow-up option is \"reject\")."
@@ -16464,11 +16460,11 @@ msgstr ""
 "به صورت خودکار رد خواهد شد که پس از پیگیری رد شده است ارسال (در صورت صف "
 "گزینه پیگیری است \\ \"رد \")."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "auto follow up"
 msgstr "پیگیری خودکار"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "Automatic confirmation which is sent out after a follow-up has been received "
 "for a ticket (in case queue follow-up option is \"possible\")."
@@ -16476,11 +16472,11 @@ msgstr ""
 "تایید خودکار است که پس از پیگیری فرستاده است یک بلیط برای دریافت شده است (در "
 "مورد صف پیگیری گزینه \\ \"ممکن \" است)."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "auto reply/new ticket"
 msgstr "پاسخ خودکار/تیکت جدید"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "Automatic response which will be sent out after a follow-up has been "
 "rejected and a new ticket has been created (in case queue follow-up option "
@@ -16489,86 +16485,86 @@ msgstr ""
 "پاسخ خودکار خواهد شد که پس از پیگیری ارسال رد شده است و یک بلیط جدید ایجاد "
 "شده است (در مورد صف پیگیری گزینه است \\ \"بلیط جدید \")."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "auto remove"
 msgstr "حذف خودکار"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Auto remove will be sent out after a customer removed the request."
 msgstr "حذف خودکار ارسال می شود پس از یک مشتری درخواست حذف شدند."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "default reply (after new ticket has been created)"
 msgstr "به طور پیش فرض پاسخ (پس از بلیط جدید ایجاد شده است)"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "default reject (after follow-up and rejected of a closed ticket)"
 msgstr "به طور پیش فرض رد (پس از پیگیری و رد یک بلیط بسته)"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "default follow-up (after a ticket follow-up has been added)"
 msgstr "به طور پیش فرض پیگیری (پس از یک بلیط پیگیری اضافه شده است)"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "default reject/new ticket created (after closed follow-up with new ticket "
 "creation)"
 msgstr ""
 "به طور پیش فرض / بلیط جدید ایجاد رد (پس از بسته پیگیری با ایجاد بلیط جدید)"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Unclassified"
 msgstr "طبقه بندی نشده"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "1 very low"
 msgstr "۱ خیلی پائین"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "2 low"
 msgstr "۲ پائین"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "3 normal"
 msgstr "۳ عادی"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "4 high"
 msgstr "۴ بالا"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "5 very high"
 msgstr "۵ خیلی بالا"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "unlock"
 msgstr "تحویل داده شده"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "lock"
 msgstr "تحویل گرفته شده"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "tmp_lock"
 msgstr "tmp_lock"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "agent"
 msgstr "کارشناس"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "system"
 msgstr "سیستم"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "customer"
 msgstr "مشترک"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket create notification"
 msgstr "درخواست ایجاد اطلاع رسانی"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "You will receive a notification each time a new ticket is created in one of "
 "your \"My Queues\" or \"My Services\"."
@@ -16576,11 +16572,11 @@ msgstr ""
 "شما اطلاع رسانی در هر زمان یک بلیط جدید در یکی از \\ شما ایجاد می شود دریافت "
 "\"صف من \" یا \\ \"سرویس های من \"."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket follow-up notification (unlocked)"
 msgstr "درخواست پیگیری اطلاع رسانی (کلیک کنید)"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "You will receive a notification if a customer sends a follow-up to an "
 "unlocked ticket which is in your \"My Queues\" or \"My Services\"."
@@ -16588,11 +16584,11 @@ msgstr ""
 "شما یک اخطار دریافت خواهید اگر یک مشتری می فرستد یک پیگیری یک بلیط باز شده "
 "است که در \\ خود را به \"صف من \" یا \\ \"سرویس های من \"."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket follow-up notification (locked)"
 msgstr "درخواست پیگیری اطلاع رسانی (قفل شده)"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "You will receive a notification if a customer sends a follow-up to a locked "
 "ticket of which you are the ticket owner or responsible."
@@ -16600,11 +16596,11 @@ msgstr ""
 "شما یک اخطار دریافت خواهید اگر یک مشتری یک پیگیری یک بلیط قفل شده که شما "
 "صاحب بلیط یا مسئول هستند به ارسال می کند."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket lock timeout notification"
 msgstr "پایان مهلت تحویل گرفتن درخواست را به من اطلاع بده"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "You will receive a notification as soon as a ticket owned by you is "
 "automatically unlocked."
@@ -16612,23 +16608,23 @@ msgstr ""
 "شما اطلاع رسانی به زودی به عنوان یک بلیط متعلق به شما به طور خودکار باز "
 "دریافت خواهید کرد."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket owner update notification"
 msgstr "درخواست  شخصی به روزرسانی اطلاعات"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket responsible update notification"
 msgstr "درخواست به روز رسانی اطلاعات مسئول"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket new note notification"
 msgstr "درخواست اطلاع رسانی یادداشت جدید"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket queue update notification"
 msgstr "درخواست به روز رسانی اطلاعات صف"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "You will receive a notification if a ticket is moved into one of your \"My "
 "Queues\"."
@@ -16636,27 +16632,27 @@ msgstr ""
 "شما یک اخطار دریافت خواهید اگر یک بلیط به یکی از \\ خود نقل مکان کرد \"صف من "
 "\"."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket pending reminder notification (locked)"
 msgstr "درخواست در انتظار آگاه شدن از طریق یادآوری (قفل شده)"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket pending reminder notification (unlocked)"
 msgstr "درخواست در انتظار آگاه شدن از طریق یادآوری (قفل)"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket escalation notification"
 msgstr "درخواست تشدید اطلاع رسانی "
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket escalation warning notification"
 msgstr "درخواست  تشدید اطلاع رسانی هشدار دهنده"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket service update notification"
 msgstr "درخواست به روز رسانی اطلاع رسانی خدمات"
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "You will receive a notification if a ticket's service is changed to one of "
 "your \"My Services\"."
@@ -16664,17 +16660,17 @@ msgstr ""
 "شما یک اخطار دریافت خواهید اگر سرویس یک بلیط به یکی از \\ خود را تغییر "
 "\"سرویس های من \"."
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Appointment reminder notification"
 msgstr ""
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid ""
 "You will receive a notification each time a reminder time is reached for one "
 "of your appointments."
 msgstr ""
 
-#. Database XML Definition: scripts/database/otrs-initial_insert.xml
+#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket email delivery failure notification"
 msgstr ""
 
@@ -18773,9 +18769,6 @@ msgstr ""
 
 #. SysConfig
 #, fuzzy
-#| msgid ""
-#| "Checks if an E-Mail is a followup to an existing ticket by searching the "
-#| "subject for a valid ticket number."
 msgid ""
 "Checks if an email is a follow-up to an existing ticket with external ticket "
 "number which can be found by ExternalTicketNumberRecognition filter module."
@@ -23479,7 +23472,6 @@ msgstr "برو به داشبورد!"
 
 #. SysConfig
 #, fuzzy
-#| msgid "Add Signature"
 msgid "Good PGP signature."
 msgstr "افزودن امضاء"
 
@@ -24869,13 +24861,11 @@ msgstr ""
 
 #. SysConfig
 #, fuzzy
-#| msgid "No ticket data found."
 msgid "No public key found."
 msgstr "اطلاعات درخواست یافت نشد."
 
 #. SysConfig
 #, fuzzy
-#| msgid "No ticket data found."
 msgid "No valid OpenPGP data found."
 msgstr "اطلاعات درخواست یافت نشد."
 
@@ -24926,10 +24916,6 @@ msgid ""
 "customer interface."
 msgstr ""
 "تعداد بلیط در هر صفحه از یک نتیجه جستجو در رابط مشتری نمایش داده می شود."
-
-#. SysConfig
-msgid "Number of tickets to be displayed in each page."
-msgstr ""
 
 #. SysConfig
 msgid "OTRS Group Services"
@@ -27705,7 +27691,6 @@ msgstr ""
 
 #. SysConfig
 #, fuzzy
-#| msgid "Signature updated!"
 msgid "Signature data."
 msgstr "امضا به روز شده!"
 
@@ -28123,7 +28108,6 @@ msgstr "تایلندی"
 
 #. SysConfig
 #, fuzzy
-#| msgid "The signature for email answers."
 msgid "The PGP signature is expired."
 msgstr "یامضاء برای پاسخ‌های ایمیل "
 
@@ -28354,7 +28338,6 @@ msgstr "پوست سیاه و سفید - این به طور پیش فرض نار�
 
 #. SysConfig
 #, fuzzy
-#| msgid "There is another field with the same name."
 msgid "This key is not certified with a trusted signature!"
 msgstr " یکی دیگر از این زمینه با همین نام وجود دارد."
 

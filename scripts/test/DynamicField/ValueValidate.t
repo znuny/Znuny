@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -21,6 +21,7 @@ my @BlacklistPerlVersions = (
     v5.30.0,
     v5.30.1,
     v5.30.2,
+    v5.30.3,
 );
 
 if ( grep { $^V eq $_ } @BlacklistPerlVersions ) {

@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -411,7 +411,7 @@ sub _PickSignKeyID {
     # Convert legacy stored default sign keys.
     if ( $SignKeyID =~ m{ (?: Inline|Detached ) }msx ) {
         my ( $Type, $SubType, $Key ) = split /::/, $SignKeyID;
-        $SignKeyID = "$Type::$Key";
+        $SignKeyID = "${Type}::${Key}";
     }
 
     # if there is a preselected key from the queue, use it.

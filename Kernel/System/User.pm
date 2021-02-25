@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -1284,7 +1284,7 @@ sub _UserCacheClear {
     my @CacheKeys;
 
     # Delete cache for all possible FirstnameLastNameOrder settings as this might be overridden by users.
-    for my $FirstnameLastNameOrder ( 0 .. 8 ) {
+    for my $FirstnameLastNameOrder ( 0 .. 9 ) {
         for my $ActiveLevel1 ( 0 .. 1 ) {
             for my $ActiveLevel2 ( 0 .. 1 ) {
                 push @CacheKeys, (

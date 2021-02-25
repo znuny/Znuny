@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -115,7 +115,7 @@ sub ToAscii {
         $Key;
     }segxmi;
     $Param{String} =~ s{
-        <div.+?type="cite"[^>]*>(.+?)</div>
+        <div[^>]+type="cite"[^>]*>(.+?)</div>
     }
     {
         my $Ascii = $Self->ToAscii(

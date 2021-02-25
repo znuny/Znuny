@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -66,7 +66,9 @@
                 <a href="#" class="Button SettingDisabled [% IF Setting.IsValid == 1 %]Hidden[% END %]" title="[% Translate("Enable this setting, so it becomes effective") | html %]"><i class="fa fa-check"></i> [% Translate("Enable") | html %]</a>
                 [% END %]
 
-                <a href="[% Env("Baselink") %]Action=AdminSystemConfigurationSettingHistory;Subaction=ShowSettingHistory;SettingName=[% Setting.Name | uri %]" class="OTRSBusinessRequired SettingHistory Button"><i class="fa fa-clock-o"></i> [% Translate("History") | html %][% IF !Data.OTRSBusinessIsInstalled %] (OTRS Business Solution™)[% END %]</a>
+                [% IF Data.OTRSBusinessIsInstalled %]
+                    <a href="[% Env("Baselink") %]Action=AdminSystemConfigurationSettingHistory;Subaction=ShowSettingHistory;SettingName=[% Setting.Name | uri %]" class="OTRSBusinessRequired SettingHistory Button"><i class="fa fa-clock-o"></i> [% Translate("History") | html %]</a>
+                [% END %]
                 <a href="#" class="ResetSetting Button" data-user-modification="[% Setting.UserModificationPossible %]" title="[% Translate("Reset this setting to its default state") | html %]">
                     <i class="fa fa-undo"></i>
                     [% Translate("Reset setting") | html %]

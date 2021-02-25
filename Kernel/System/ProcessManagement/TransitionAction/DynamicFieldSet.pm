@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -24,7 +24,7 @@ our @ObjectDependencies = (
 
 =head1 NAME
 
-Kernel::System::ProcessManagement::TransitionAction::DynamicFieldSet - A module to set a new ticket owner
+Kernel::System::ProcessManagement::TransitionAction::DynamicFieldSet - A module to set ticket dynamic field values
 
 =head1 DESCRIPTION
 

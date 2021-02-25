@@ -5,7 +5,7 @@
 # Copyright (C) 2005-2007 Jurgen Rutgers <jurgen 'at' besite.nl>
 # Copyright (C) 2005-2007 Richard Hinkamp <richard 'at' besite.nl>
 # Copyright (C) 2010 Ton van Boven <ton 'at' avebo.nl>
-# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D-%M-%Y';
     $Self->{DateInputFormat}     = '%D-%M-%Y';
     $Self->{DateInputFormatLong} = '%D-%M-%Y - %T';
-    $Self->{Completeness}        = 0.554520826278361;
+    $Self->{Completeness}        = 0.555198103623434;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -40,13 +40,13 @@ sub Data {
     $Self->{Translation} = {
 
         # Template: AdminACL
-        'ACL Management' => 'ACL beheer',
+        'ACL Management' => 'ACL-beheer',
         'Actions' => 'Acties',
-        'Create New ACL' => 'Nieuwe ACL aanmaken',
-        'Deploy ACLs' => 'ACLs activeren',
-        'Export ACLs' => 'Exporteer ACLs',
-        'Filter for ACLs' => 'Filter op ACLs',
-        'Just start typing to filter...' => 'Start met typen om te filteren',
+        'Create New ACL' => 'Maak een nieuwe ACL',
+        'Deploy ACLs' => 'ACL\'s implementeren',
+        'Export ACLs' => 'Exporteer ACL\'s',
+        'Filter for ACLs' => 'Filter voor ACL\'s',
+        'Just start typing to filter...' => 'Begin gewoon met typen om te filteren...',
         'Configuration Import' => 'Configuratie importeren',
         'Here you can upload a configuration file to import ACLs to your system. The file needs to be in .yml format as exported by the ACL editor module.' =>
             'Hier kunt u een configuratiebestand met ACLs importeren in uw systeem. Het bestand moet in .yml formaat zijn, zoals geexporteerd door de ACL module.',
@@ -3319,10 +3319,10 @@ sub Data {
         'Loading, please wait...' => '',
 
         # JS Template: UploadContainer
-        'Click to select a file for upload.' => '',
-        'Click to select files or just drop them here.' => '',
-        'Click to select a file or just drop it here.' => '',
-        'Uploading...' => '',
+        'Click to select a file for upload.' => 'Klik om een bestand te selecteren om te uploaden.',
+        'Click to select files or just drop them here.' => 'Klik om bestanden te selecteren of zet ze hier neer.',
+        'Click to select a file or just drop it here.' => 'Klik om een bestand te selecteren of zet het hier neer.',
+        'Uploading...' => 'Uploaden...',
 
         # JS Template: InformationDialog
         'Process state' => '',
@@ -5377,7 +5377,7 @@ sub Data {
         # Perl Module: Kernel/System/Web/InterfaceInstaller.pm
         'Action "%s" not found!' => '',
 
-        # Database XML Definition: scripts/database/otrs-initial_insert.xml
+        # Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
         'invalid-temporarily' => 'tijdelijk ongeldig',
         'Group for default access.' => 'Groep voor standaard toegang.',
         'Group of all administrators.' => 'Groep voor alle administrators.',
@@ -7803,7 +7803,6 @@ Het Helpdesk Team
             '',
         'Number of tickets to be displayed in each page of a search result in the customer interface.' =>
             '',
-        'Number of tickets to be displayed in each page.' => '',
         'OTRS Group Services' => 'OTRS Group diensten',
         'OTRS News' => 'OTRS Nieuws',
         'OTRS can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>

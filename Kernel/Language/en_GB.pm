@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -5374,7 +5374,7 @@ sub Data {
         # Perl Module: Kernel/System/Web/InterfaceInstaller.pm
         'Action "%s" not found!' => 'Action "%s" not found!',
 
-        # Database XML Definition: scripts/database/otrs-initial_insert.xml
+        # Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
         'invalid-temporarily' => 'invalid-temporarily',
         'Group for default access.' => 'Group for default access.',
         'Group of all administrators.' => 'Group of all administrators.',
@@ -7800,7 +7800,6 @@ Thanks for your help!
             'Number of tickets to be displayed in each page of a search result in the agent interface.',
         'Number of tickets to be displayed in each page of a search result in the customer interface.' =>
             'Number of tickets to be displayed in each page of a search result in the customer interface.',
-        'Number of tickets to be displayed in each page.' => '',
         'OTRS Group Services' => '',
         'OTRS News' => 'OTRS News',
         'OTRS can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>

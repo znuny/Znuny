@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -75,6 +75,11 @@ for my $Module (qw(DB FS)) {
         $Check || 0,
         "#$Module - Check() - $UserRand2 (with custom limit)",
     );
+}
+
+# Clean-up.
+for my $File ( glob $ConfigObject->Get('Home') . '/var/log/LoopProtection*.log' ) {
+    unlink $File;
 }
 
 1;

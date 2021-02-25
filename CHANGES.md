@@ -1,13 +1,41 @@
-# 6.0.29 ????-??-??
- - 2020-05-28 Changed shebang commandline of Perl scripts from `/usr/bin/perl` (which hardcodes the system Perl) to `/usr/bin/env perl` (which uses the first found Perl from the $PATH). This should not cause any changes on systems where there is only one Perl installed, but more predictable behaviour on systems which have an additional "custom" Perl installed.
- - 2020-05-26 Fixed bug#[15143](https://bugs.otrs.org/show_bug.cgi?id=15143) - SysConfig broken for editing array of hashes.
- - 2020-05-18 Fixed bug#[13924](https://bugs.otrs.org/show_bug.cgi?id=13924) - Error creating DateTime object.
- - 2020-05-13 Fixed bug#[15016](https://bugs.otrs.org/show_bug.cgi?id=15016) - Processing of sequence flows throws error for tickets assigned to unknown or invalid processes.
- - 2020-05-13 Fixed bug#[15075](https://bugs.otrs.org/show_bug.cgi?id=15075) - Wrong SMIME cert is selected in AgentTicketCompose.
- - 2020-05-08 Improved random number generator.
- - 2020-04-27 Fixed bug#[14997](https://bugs.otrs.org/show_bug.cgi?id=14997) - Problem with blur of RichText editor when it is left empty.
- - 2020-04-13 Fixed bug#[15035](https://bugs.otrs.org/show_bug.cgi?id=15035) - Perl Moo library missing in CheckModules script.
+# 6.0.33 ????-??-??
+ - 2021-02-15 Leading and trailing white space in names of uploaded files will now be removed. This prevents non-working attachment download links.
+ - 2021-02-12 Fixed output of customer (user) dynamic field labels and values in PDF.
+ - 2021-02-11 Removed unused SysConfig options Ticket::Frontend::AgentTicketStatusView###ViewableTicketsPage and Ticket::Frontend::AgentTicketEscalationView###ViewableTicketsPage. Thanks to Bernhard Schmalhofer (@bschmalhofer).
+ - 2021-02-11 Updated to JavaScript::Minifier 1.15. Enabled automatic utilization of JavaScript::Minifier::XS if available. Thanks to Fedor A. Fetisov (@faf), @zoffixznet and Yuri Myasoedov (@ymyasoedov). See https://github.com/znuny/Znuny/issues/6.
+ - 2020-02-11 Enabled automatic utilization of CSS::Minifier::XS if available.
+ - 2020-02-11 Fixed return value format of user search. Thanks to Nicola Cordioli (@niccord).
+ - 2020-02-10 Fixed bug in _UserCacheClear in Kernel::System::User. Thanks to Yuri Myasoedov (@ymyasoedov) See https://github.com/znuny/Znuny/pull/1
 
+# 6.0.32 2021-01-29
+ - 2021-01-29 Updated CKEditor to version 4.16.0.
+
+# 6.0.31 2021-01-27
+ - 2021-01-27 Updated CKEditor to version 4.15.1.
+ - 2021-01-27 Switched to Znuny branding.
+
+# 6.0.30 2020-10-12
+ - 2020-09-22 Updated translations, thanks to all translators.
+ - 2020-09-15 Fixed bug#[15246](https://bugs.otrs.org/show_bug.cgi?id=15246) - Default encryption setting on queue is ignored.
+  If there are more than one S/MIME keys available, the newest one is selected in AgentTicketEmail and not the one selected for this queue. Also the setting in the queue about the certification to use is ignored by the ticket notifications.
+ - 2020-09-09 Updated third party libraries: jquery to 3.5.1, fullcalendar to 3.10.2, fullcalendar-scheduler to 1.10.1 and spectrum to 1.8.1.
+ - 2020-07-27 Fixed bug#[15263](https://bugs.otrs.org/show_bug.cgi?id=15263) - Maint::Email::MailQueue adds error log entry because of using uninitialized value.
+ - 2020-07-03 Fixed bug#[15180](https://bugs.otrs.org/show_bug.cgi?id=15180) - Plain text article printing does not work well with citation.
+
+# 6.0.29 2020-07-20
+ - 2020-07-05 Fixed bug#[15227](https://bugs.otrs.org/show_bug.cgi?id=15227) - Daemon outputs subroutine redefined in logs and provoking false task failures.
+ - 2020-07-01 Updated translations, thanks to all translators.
+ - 2020-06-30 Updated Mozilla's CA certificate bundle.
+ - 2020-06-29 Improved session handling.
+ - 2020-05-28 Changed shebang command line of Perl scripts from `/usr/bin/perl` (which hardcodes the system Perl) to `/usr/bin/env perl` (which uses the first found Perl from the $PATH). This should not cause any changes on systems where there is only one Perl installed, but more predictable behavior on systems which have an additional "custom" Perl installed.
+ - 2020-05-26 Fixed bug#[15143](https://bugs.otrs.org/show_bug.cgi?id=15143) - SysConfig broken for editing array of hashes.
+ - 2020-05-18 Fixed bug#[13924](https://bugs.otrs.org/show_bug.cgi?id=13924) - `Error creating DateTime object` appears in the log during daylight saving time switch.
+ - 2020-05-13 Fixed bug#[15016](https://bugs.otrs.org/show_bug.cgi?id=15016) - Processing of sequence flows throws error for tickets assigned to unknown or invalid processes.
+ - 2020-05-13 Fixed bug#[15075](https://bugs.otrs.org/show_bug.cgi?id=15075) - Wrong S/MIME certificate is selected in AgentTicketCompose.
+ - 2020-05-08 Improved random number generator.
+ - 2020-04-27 Fixed bug#[14997](https://bugs.otrs.org/show_bug.cgi?id=14997) - RichText editor is taking focus if required validation fails.
+  After updating jQuery library, it's not possible to leave it empty.
+ - 2020-04-13 Fixed bug#[15035](https://bugs.otrs.org/show_bug.cgi?id=15035) - Missing Perl dependency in CheckModules script (Moo).
 
 # 6.0.28 2020-04-20
  - 2020-04-08 Updated translations, thanks to all translators.

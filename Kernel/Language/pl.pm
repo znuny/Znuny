@@ -5375,7 +5375,7 @@ sub Data {
         # Perl Module: Kernel/System/Web/InterfaceInstaller.pm
         'Action "%s" not found!' => '',
 
-        # Database XML Definition: scripts/database/otrs-initial_insert.xml
+        # Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
         'invalid-temporarily' => 'czasowo nieaktualne',
         'Group for default access.' => 'Grupa z podstawowymi prawami dostępu.',
         'Group of all administrators.' => 'Grupa wszystkich administratorów.',
@@ -7790,7 +7790,6 @@ Thanks for your help!
             '',
         'Number of tickets to be displayed in each page of a search result in the customer interface.' =>
             '',
-        'Number of tickets to be displayed in each page.' => '',
         'OTRS Group Services' => '',
         'OTRS News' => 'Wiadomości OTRS',
         'OTRS can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>

@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -238,7 +238,8 @@ my $Host = $Helper->GetTestHTTPHostname();
 
 # create URL
 my $ScriptAlias   = $ConfigObject->Get('ScriptAlias');
-my $ApacheBaseURL = "http://$Host/${ScriptAlias}/nph-genericinterface.pl/";
+my $HttpType      = $ConfigObject->Get('HttpType');
+my $ApacheBaseURL = "$HttpType://$Host/${ScriptAlias}/nph-genericinterface.pl/";
 my $PlackBaseURL;
 if ( $ConfigObject->Get('UnitTestPlackServerPort') ) {
     $PlackBaseURL = "http://localhost:"

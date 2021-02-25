@@ -1,10 +1,11 @@
 
+%defattr(-, otrs, [% webgroup %], -)
 %config(noreplace) /opt/otrs/Kernel/Config.pm
-%config(noreplace) /opt/otrs/.procmailrc
+%attr(-, otrs, root,) %config(noreplace) /opt/otrs/.procmailrc
 %config(noreplace) /opt/otrs/.fetchmailrc
 %config(noreplace) /opt/otrs/.mailfilter
 
-%dir /opt/otrs/
+%dir /opt/otrs
 /opt/otrs/RELEASE
 /opt/otrs/ARCHIVE
 /opt/otrs/.bash_completion

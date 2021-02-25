@@ -5376,7 +5376,7 @@ sub Data {
         # Perl Module: Kernel/System/Web/InterfaceInstaller.pm
         'Action "%s" not found!' => 'اقدام \ " %s " یافت نشد!',
 
-        # Database XML Definition: scripts/database/otrs-initial_insert.xml
+        # Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
         'invalid-temporarily' => 'موقتا غیر معتبر',
         'Group for default access.' => 'گروه برای دسترسی پیش فرض.',
         'Group of all administrators.' => 'گروه از همه مدیران.',
@@ -7802,7 +7802,6 @@ Thanks for your help!
             'تعداد بلیط در هر صفحه از یک نتیجه جستجو در رابط عامل نمایش داده شود.',
         'Number of tickets to be displayed in each page of a search result in the customer interface.' =>
             'تعداد بلیط در هر صفحه از یک نتیجه جستجو در رابط مشتری نمایش داده می شود.',
-        'Number of tickets to be displayed in each page.' => '',
         'OTRS Group Services' => '',
         'OTRS News' => 'اخبار سامانه پشتیبانی',
         'OTRS can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>

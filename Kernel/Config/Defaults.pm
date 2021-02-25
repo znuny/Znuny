@@ -1,5 +1,6 @@
 # --
-# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -105,7 +106,7 @@ sub LoadDefaults {
 
     # ProductName
     # (Application name displayed in frontend.)
-    $Self->{ProductName} = 'OTRS 6';
+    $Self->{ProductName} = 'Znuny LTS';
 
     # --------------------------------------------------- #
     # database settings                                   #
@@ -988,7 +989,7 @@ sub LoadDefaults {
 
     # Customer Common JS
     $Self->{'Loader::Customer::CommonJS'}->{'000-Framework'} = [
-        'thirdparty/jquery-3.4.1/jquery.js',
+        'thirdparty/jquery-3.5.1/jquery.js',
         'thirdparty/jquery-browser-detection/jquery-browser-detection.js',
         'thirdparty/jquery-validate-1.16.0/jquery.validate.js',
         'thirdparty/jquery-ui-1.12.1/jquery-ui.js',
@@ -1026,7 +1027,7 @@ sub LoadDefaults {
 
     # Agent Common JS
     $Self->{'Loader::Agent::CommonJS'}->{'000-Framework'} = [
-        'thirdparty/jquery-3.4.1/jquery.js',
+        'thirdparty/jquery-3.5.1/jquery.js',
         'thirdparty/jquery-browser-detection/jquery-browser-detection.js',
         'thirdparty/jquery-ui-1.12.1/jquery-ui.js',
         'thirdparty/jquery-ui-touch-punch-0.2.3/jquery.ui.touch-punch.js',
@@ -1083,7 +1084,7 @@ sub LoadDefaults {
     # Package::RepositoryRoot
     # (get online repository list, use the fist availabe result)
     $Self->{'Package::RepositoryRoot'} = [
-        'https://ftp.otrs.org/pub/otrs/misc/packages/repository.xml',
+        'https://download.znuny.org/releases/misc/packages/repository.xml',
     ];
 
     # Package::RepositoryList

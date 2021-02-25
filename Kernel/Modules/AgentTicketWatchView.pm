@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -281,7 +281,6 @@ sub Run {
     $HeaderColumn =~ s{\A ColumnFilter }{}msxg;
     my @OriginalViewableTickets;
     my @ViewableTickets;
-    my $ViewableTicketCount = 0;
 
     # get ticket object
     my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');

@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2010 Milorad Jovanovic <j.milorad at gmail.com>
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
@@ -5371,7 +5371,7 @@ sub Data {
         # Perl Module: Kernel/System/Web/InterfaceInstaller.pm
         'Action "%s" not found!' => 'Акција "%s" није пронађена!',
 
-        # Database XML Definition: scripts/database/otrs-initial_insert.xml
+        # Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
         'invalid-temporarily' => 'неважећи-привремено',
         'Group for default access.' => 'Група за подразумеван приступ.',
         'Group of all administrators.' => 'Група свих администратора.',
@@ -7797,7 +7797,6 @@ Thanks for your help!
             'Број тикета који ће бити приказани на свакој страни резултата претраге у интерфејсу оператера.',
         'Number of tickets to be displayed in each page of a search result in the customer interface.' =>
             'Број тикета који ће бити приказани на свакој страни резултата претраге у интерфејсу клијента.',
-        'Number of tickets to be displayed in each page.' => 'Број тикета који ће бити приказани на свакој страни.',
         'OTRS Group Services' => 'Сервиси OTRS групе',
         'OTRS News' => 'OTRS новости',
         'OTRS can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>

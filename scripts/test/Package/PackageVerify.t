@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -149,7 +149,7 @@ my @Tests = (
         Name        => "PackageVerify - Package 'Test'",
         Package     => $String,
         PackageName => 'Test',
-        Result      => 'not_verified',
+        Result      => 'verified',
     },
     {
         Name        => "PackageVerify - Package 'TestSecond'",
@@ -213,8 +213,8 @@ my %VerifyAll = $PackageObject->PackageVerifyAll();
 for my $PackageName (qw( Test TestSecond )) {
     $Self->Is(
         $VerifyAll{$PackageName},
-        'not_verified',
-        "PackageVerifyAll - '$PackageName' not verified"
+        'verified',
+        "PackageVerifyAll - '$PackageName' verified"
     );
 }
 

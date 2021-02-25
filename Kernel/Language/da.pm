@@ -5373,7 +5373,7 @@ Opdater venligst dit framework først!',
         # Perl Module: Kernel/System/Web/InterfaceInstaller.pm
         'Action "%s" not found!' => '',
 
-        # Database XML Definition: scripts/database/otrs-initial_insert.xml
+        # Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
         'invalid-temporarily' => 'ugyldig-midlertidigt',
         'Group for default access.' => '',
         'Group of all administrators.' => '',
@@ -7788,7 +7788,6 @@ Thanks for your help!
             'Antallet af sager i søgeresultatet, der vises på hver side i agent-interfacet.',
         'Number of tickets to be displayed in each page of a search result in the customer interface.' =>
             'Antallet af sager i søgeresultatet, der vises på hver side i kunde-interfacet.',
-        'Number of tickets to be displayed in each page.' => '',
         'OTRS Group Services' => '',
         'OTRS News' => 'OTRS-nyheder',
         'OTRS can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>

@@ -5377,7 +5377,7 @@ sub Data {
         # Perl Module: Kernel/System/Web/InterfaceInstaller.pm
         'Action "%s" not found!' => '没有找到操作“%s”！',
 
-        # Database XML Definition: scripts/database/otrs-initial_insert.xml
+        # Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
         'invalid-temporarily' => '暂时无效',
         'Group for default access.' => '具有默认权限的组。',
         'Group of all administrators.' => '所有管理员的组。',
@@ -7801,7 +7801,6 @@ Thanks for your help!
             '服务人员界面搜索结果每页显示的工单数。',
         'Number of tickets to be displayed in each page of a search result in the customer interface.' =>
             '客户界面搜索结果每页显示的工单数。',
-        'Number of tickets to be displayed in each page.' => '每页显示的工单数量。',
         'OTRS Group Services' => 'OTRS集团服务',
         'OTRS News' => 'OTRS新闻',
         'OTRS can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>

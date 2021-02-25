@@ -5371,7 +5371,7 @@ sub Data {
         # Perl Module: Kernel/System/Web/InterfaceInstaller.pm
         'Action "%s" not found!' => '',
 
-        # Database XML Definition: scripts/database/otrs-initial_insert.xml
+        # Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
         'invalid-temporarily' => 'temporalmente-inválido',
         'Group for default access.' => '',
         'Group of all administrators.' => '',
@@ -7786,7 +7786,6 @@ Thanks for your help!
             'Número de tickets desplegados en cada página del resultado de una búsqueda, en la interfaz del agente.',
         'Number of tickets to be displayed in each page of a search result in the customer interface.' =>
             'Número de tickets desplegados en cada página del resultado de una búsqueda, en la interfaz del cliente.',
-        'Number of tickets to be displayed in each page.' => '',
         'OTRS Group Services' => '',
         'OTRS News' => 'Novedades de OTRS',
         'OTRS can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>
