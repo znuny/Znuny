@@ -787,7 +787,7 @@ Check mail configuration
 sub Check {
     my ( $Self, %Param ) = @_;
 
-    my %Check = $Self->{Backend}->Check();
+    my %Check = $Self->{Backend}->Check( %Param );
 
     if ( $Check{Successful} ) {
         return ( Successful => 1 );
