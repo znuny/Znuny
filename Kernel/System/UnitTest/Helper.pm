@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -44,7 +45,7 @@ construct a helper object.
     use Kernel::System::ObjectManager;
     local $Kernel::OM = Kernel::System::ObjectManager->new(
         'Kernel::System::UnitTest::Helper' => {
-            RestoreDatabase            => 1,        # runs the test in a transaction,
+            RestoreDatabase => 1,                   # runs the test in a transaction,
                                                     # and roll it back in the destructor
                                                     #
                                                     # NOTE: Rollback does not work for
@@ -54,7 +55,7 @@ construct a helper object.
                                                     # yourself.
         },
     );
-    my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+    my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 =cut
 
@@ -155,7 +156,7 @@ creates a test user that can be used in tests. It will
 be set to invalid automatically during L</DESTROY()>. Returns
 the login name of the new user, the password is the same.
 
-    my $TestUserLogin = $Helper->TestUserCreate(
+    my $TestUserLogin = $HelperObject->TestUserCreate(
         Groups => ['admin', 'users'],           # optional, list of groups to add this user to (rw rights)
         Language => 'de'                        # optional, defaults to 'en' if not set
     );
@@ -244,7 +245,7 @@ creates a test customer user that can be used in tests. It will
 be set to invalid automatically during L</DESTROY()>. Returns
 the login name of the new customer user, the password is the same.
 
-    my $TestUserLogin = $Helper->TestCustomerUserCreate(
+    my $TestUserLogin = $HelperObject->TestCustomerUserCreate(
         Language => 'de',   # optional, defaults to 'en' if not set
     );
 
@@ -302,7 +303,7 @@ sub TestCustomerUserCreate {
 
 =head2 BeginWork()
 
-    $Helper->BeginWork()
+    $HelperObject->BeginWork()
 
 Starts a database transaction (in order to isolate the test from the static database).
 
@@ -317,7 +318,7 @@ sub BeginWork {
 
 =head2 Rollback()
 
-    $Helper->Rollback()
+    $HelperObject->Rollback()
 
 Rolls back the current database transaction.
 
@@ -612,7 +613,7 @@ This will be reset when the Helper object is destroyed.
 
 Please note that this will not work correctly in clustered environments.
 
-    $Helper->ConfigSettingChange(
+    $HelperObject->ConfigSettingChange(
         Valid => 1,            # (optional) enable or disable setting
         Key   => 'MySetting',  # setting name
         Value => { ... } ,     # setting value
@@ -687,7 +688,7 @@ All code will be removed when the Helper object is destroyed.
 
 Please note that this will not work correctly in clustered environments.
 
-    $Helper->CustomCodeActivate(
+    $HelperObject->CustomCodeActivate(
         Code => q^
 sub Kernel::Config::Files::ZZZZUnitTestIdentifier::Load {} # no-op, avoid warning logs
 use Kernel::System::WebUserAgent;
@@ -818,7 +819,7 @@ receive all calls sent over system C<DBObject>.
 
 All database contents will be automatically dropped when the Helper object is destroyed.
 
-    $Helper->ProvideTestDatabase(
+    $HelperObject->ProvideTestDatabase(
         DatabaseXMLString => $XML,      # (optional) OTRS database XML schema to execute
                                         # or
         DatabaseXMLFiles => [           # (optional) List of XML files to load and execute
@@ -966,7 +967,7 @@ order to set it up.
 
 Please note that all database contents will be dropped, USE WITH CARE!
 
-    $Helper->TestDatabaseCleanup();
+    $HelperObject->TestDatabaseCleanup();
 
 =cut
 
@@ -1051,13 +1052,13 @@ sub TestDatabaseCleanup {
 Execute supplied XML against current database. Content of supplied XML or XMLFilename parameter must be valid OTRS
 database XML schema.
 
-    $Helper->DatabaseXMLExecute(
-        XML => $XML,     # OTRS database XML schema to execute
+    $HelperObject->DatabaseXMLExecute(
+        XML => $XML,                 # OTRS database XML schema to execute
     );
 
 Alternatively, it can also load an XML file to execute:
 
-    $Helper->DatabaseXMLExecute(
+    $HelperObject->DatabaseXMLExecute(
         XMLFile => '/path/to/file',  # OTRS database XML file to execute
     );
 
