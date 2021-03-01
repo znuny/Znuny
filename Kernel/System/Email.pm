@@ -695,7 +695,16 @@ Really send the mail
 
     my $Result = $SendObject->SendExecute(
         From                   => $RealFrom,
-        ToArray                => \@ToArray,
+        To                     => \@ToArray,
+        Header                 => \$Param{Header},
+        Body                   => \$Param{Body},
+        CommunicationLogObject => $CommunicationLogObject,
+    );
+
+    # or
+    my $Result = $SendObject->SendExecute(
+        From                   => $RealFrom,
+        To                     => $To, # can be a string with comma separated mail addresses
         Header                 => \$Param{Header},
         Body                   => \$Param{Body},
         CommunicationLogObject => $CommunicationLogObject,
