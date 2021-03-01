@@ -219,15 +219,15 @@ sub _GetStorageBackends {
             Directory => $Prefix . $Base,
             Filter    => '*.pm',
             Silent    => 1,
-	);
+        );
 
         for my $File ( @Files ) {
             my $Basename = basename $File, '.pm';
 
             next if 'Base' eq $Basename;
 
-	    $Backends{$Basename} = 1;
-	}
+            $Backends{$Basename} = 1;
+        }
     }
 
     return sort keys %Backends;
