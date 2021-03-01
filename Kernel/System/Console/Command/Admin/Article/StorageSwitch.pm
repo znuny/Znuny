@@ -13,6 +13,7 @@ use warnings;
 
 use parent qw(Kernel::System::Console::BaseCommand);
 
+use File::Basename;
 use Time::HiRes qw(usleep);
 
 our @ObjectDependencies = (
@@ -25,13 +26,23 @@ our @ObjectDependencies = (
 sub Configure {
     my ( $Self, %Param ) = @_;
 
+    my @Backends     = $Self->_GetStorageBackends();
+    my $BackendRegex = join '|', @Backends;
+
     $Self->Description('Migrate article files from one storage backend to another on the fly.');
     $Self->AddOption(
         Name        => 'target',
-        Description => "Specify the target backend to migrate to (ArticleStorageDB|ArticleStorageFS).",
+        Description => "Specify the target backend to migrate to ($BackendRegex).",
         Required    => 1,
         HasValue    => 1,
-        ValueRegex  => qr/^(?:ArticleStorageDB|ArticleStorageFS)$/smx,
+        ValueRegex  => qr/^(?:$BackendRegex)$/smx,
+    );
+    $Self->AddOption(
+        Name        => 'source',
+        Description => "Specify the source backend to migrate from ($BackendRegex).",
+        Required    => 0,
+        HasValue    => 1,
+        ValueRegex  => qr/^(?:$BackendRegex)$/smx,
     );
     $Self->AddOption(
         Name        => 'tickets-closed-before-date',
@@ -153,6 +164,14 @@ sub Run {
         ArticleStorageDB => 'ArticleStorageFS',
     );
 
+    my $Source = $Target2Source{$Target} // $Self->GetOption( 'source' );
+
+    if ( !$Source ) {
+        $Self->Print("<red>Need source option.</red>\n");
+
+        return $Self->ExitCodeError();
+    }
+
     my $MicroSleep = $Self->GetOption('micro-sleep');
     my $Tolerant   = $Self->GetOption('tolerant');
 
@@ -165,7 +184,7 @@ sub Run {
 
         my $Success = $TicketObject->TicketArticleStorageSwitch(
             TicketID    => $TicketID,
-            Source      => $Target2Source{$Target},
+            Source      => $Source,
             Destination => $Target,
             UserID      => 1,
         );
@@ -185,6 +204,33 @@ sub PostRun {
     my ($Self) = @_;
 
     return $Kernel::OM->Get('Kernel::System::PID')->PIDDelete( Name => $Self->Name() );
+}
+
+sub _GetStorageBackends {
+    my ($Self) = @_;
+
+    my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+
+    my $Base = 'Kernel/System/Ticket/Article/Backend/MIMEBase';
+
+    my %Backends;
+    for my $Prefix ( '', 'Custom/' ) {
+        my @Files = $MainObject->DirectoryRead(
+            Directory => $Prefix . $Base,
+            Filter    => '*.pm',
+            Silent    => 1,
+	);
+
+        for my $File ( @Files ) {
+            my $Basename = basename $File, '.pm';
+
+            next if 'Base' eq $Basename;
+
+	    $Backends{$Basename} = 1;
+	}
+    }
+
+    return sort keys %Backends;
 }
 
 1;
