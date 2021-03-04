@@ -5342,7 +5342,7 @@ sub _ConfiguredRepositoryDefinitionGet {
     return () if !%RepositoryList;
 
     # Make sure ITSM repository matches the current framework version.
-    my @Matches = grep { $_ =~ m{http://ftp\.otrs\.org/pub/otrs/itsm/packages\d+/}msxi } sort keys %RepositoryList;
+    my @Matches = grep { $_ =~ m{https://download\.znuny\.org/releases/itsm/packages\d+/}msxi } sort keys %RepositoryList;
 
     return %RepositoryList if !@Matches;
 
