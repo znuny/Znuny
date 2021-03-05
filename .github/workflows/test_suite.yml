@@ -47,8 +47,7 @@ jobs:
         run: |
           a2dismod mpm_event mpm_worker
           a2enmod perl deflate filter headers mpm_prefork
-          useradd -d /opt/otrs -c 'OTRS user' otrs
-          usermod -G www-data otrs
+          useradd -d /opt/otrs -c 'OTRS user' -g www-data -s /bin/bash -M otrs
 
       - name: Setup OTRS
         env:
