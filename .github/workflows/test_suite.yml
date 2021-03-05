@@ -22,7 +22,7 @@ jobs:
           MYSQL_DATABASE: "otrs"
 
     steps:
-      - name: Check our repository code
+      - name: Check out repository code
         env:
           GIT_DEPTH: "1"
         uses: actions/checkout@v2
@@ -69,13 +69,13 @@ jobs:
           mysql -h mariadb -u "${MYSQL_USERNAME}" -p"${MYSQL_PASSWORD}" otrs < /opt/otrs/scripts/database/otrs-schema-post.mysql.sql
           touch /opt/otrs/installed
           /opt/otrs/bin/otrs.SetPermissions.pl
-          su -c "/opt/otrs/bin/otrs.Console.pl Maint::Config::Rebuild" -s /bin/bash otrs
-          su -c "/opt/otrs/bin/otrs.Console.pl Admin::Config::Update --setting-name CheckEmailAddresses --value 0" -s /bin/bash otrs
-          su -c "/opt/otrs/bin/otrs.CheckSum.pl -a create" -s /bin/bash otrs
+          su -c "bin/otrs.Console.pl Maint::Config::Rebuild" - otrs
+          su -c "bin/otrs.Console.pl Admin::Config::Update --setting-name CheckEmailAddresses --value 0" - otrs
+          su -c "bin/otrs.CheckSum.pl -a create" - otrs
           /opt/otrs/bin/otrs.SetPermissions.pl
 
       - name: Run test suite
         env:
           # Insert tests/options to run here if you're not interested in the whole suite
           TEST_OPTIONS: ""
-        run: su -c "/opt/otrs/bin/otrs.Console.pl Dev::UnitTest::Run ${TEST_OPTIONS}" -s /bin/bash otrs
+        run: su -c "bin/otrs.Console.pl Dev::UnitTest::Run ${TEST_OPTIONS}" - otrs
