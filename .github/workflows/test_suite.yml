@@ -45,7 +45,8 @@ jobs:
 
       - name: Setup Apache and system user
         run: |
-          a2enmod perl deflate filter headers
+          a2dismod mpm_event mpm_worker
+          a2enmod perl deflate filter headers mpm_prefork
           useradd -d /opt/otrs -c 'OTRS user' otrs
           usermod -G www-data otrs
 
