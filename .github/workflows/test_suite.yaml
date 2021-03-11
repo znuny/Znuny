@@ -1,5 +1,5 @@
 ---
-name: Test suite
+name: CI
 
 # Controls when the action will run.
 on:
@@ -74,7 +74,7 @@ jobs:
           su -c "bin/otrs.CheckSum.pl -a create" - otrs
           /opt/otrs/bin/otrs.SetPermissions.pl
 
-      - name: Run test suite
+      - name: Run UnitTests
         env:
           # Insert tests/options to run here if you're not interested in the whole suite
           TEST_OPTIONS: ""
