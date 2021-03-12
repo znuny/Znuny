@@ -123,9 +123,12 @@ The following persons contributed to OTRS:
 * Zoran Ilibasic <zilibasic@s7designcreative.com>
 * Zoran Ilibasic <zilibasic@s7desingcreative.com>
 * anonymous <uknown@anonymous>
+* b1-luettje <53084931+b1-luettje@users.noreply.github.com>
 * djurici <igor.djuric@muehlbauer.de>
 * juanmclavero <juanm.clavero@ibsalut.es>
 * otrsintern <otrsintern@gmail.com>
+* reneeb <info@perl-services.de>
+* reneeb <reb@perl-services.de>
 * s7design <otrs@s7designcreative.com>
 * sergot <filip@sergot.pl>
 * vlascoder <vlascoder@gmail.com>

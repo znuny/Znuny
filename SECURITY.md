@@ -7,7 +7,7 @@ The disclosure of security vulnerabilities helps us ensure the security and priv
 
 We require that all researchers:
 
-- Respect the rules. Operate within the rules set, or speak up if in strong 
+- Respect the rules. Operate within the rules set, or speak up if in strong
 disagreement with the rules.
 - Respect privacy. Make a good faith effort not to access or destroy
 another user's data. Avoid degradation of user experience, disruption to
@@ -30,7 +30,7 @@ If you follow these guidelines when reporting an issue to us, we commit to:
 - Not pursue or support any legal action related to your research;
 - Work with you to understand and resolve the issue quickly (including
 an initial confirmation of your report within 1 week of submission);
-- Recognize your contribution, if you are the first to report the issue 
+- Recognize your contribution, if you are the first to report the issue
 and we make a code or configuration change based on the issue.
 
 ## Scope
@@ -67,4 +67,3 @@ vulnerability (PoC scripts, screenshots, and compressed screen captures
 are all helpful to us); and
 - Your name/pseudonym for recognition of your contribution. If you prefer
 to remain anonymous, we encourage them to submit under a pseudonym.
-
