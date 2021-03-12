@@ -17,7 +17,7 @@ jobs:
         run: |
           apt-get update -y
           apt-get upgrade -y
-          apt-get install -y cpanminus make gcc npm git libxml-libxml-perl libyaml-perl
+          apt-get install -y cpanminus make gcc npm git gettext libxml-libxml-perl libyaml-perl libxml2-utils libdatetime-perl libtemplate-perl libapache-dbi-perl
 
       - name: Check out repository code
         env:
