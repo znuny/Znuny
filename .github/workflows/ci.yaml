@@ -7,9 +7,48 @@ on:
   - pull_request
 
 jobs:
-  container-job:
+  znunycodepolicy:
+    name: ZnunyCodePolicy
     runs-on: ubuntu-latest
     container: debian:10-slim
+
+    steps:
+      - name: Install dependencies
+        run: |
+          apt-get update -y
+          apt-get upgrade -y
+          apt-get install -y cpanminus make gcc npm git libxml-libxml-perl libyaml-perl
+
+      - name: Check out repository code
+        env:
+          GIT_DEPTH: "1"
+        uses: actions/checkout@v2
+        with:
+          path: znuny
+
+      - name: Check out code policy
+        env:
+          GIT_DEPTH: "1"
+        uses: actions/checkout@v2
+        with:
+          repository: znuny/ZnunyCodePolicy
+          path: codepolicy
+
+      - name: Prepare code policy
+        run: |
+          cpanm Code::TidyAll Perl::Critic
+          codepolicy/bin/otrs.CodePolicy.pl --install
+
+      - name: Run code policy
+        run: |
+          cd "${GITHUB_WORKSPACE}/znuny"
+          "${GITHUB_WORKSPACE}/codepolicy/bin/otrs.CodePolicy.pl" --all
+
+  unittests:
+    name: UnitTests
+    runs-on: ubuntu-latest
+    container: debian:10-slim
+    needs: znunycodepolicy
 
     services:
       mariadb:
