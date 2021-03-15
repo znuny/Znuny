@@ -181,6 +181,7 @@ else
     echo "No md5sum found in \$PATH!"
 fi
 ln -s $PACKAGE-$VERSION.tar.gz $PACKAGE-6.0.tar.gz
+ln -s $PACKAGE-$VERSION.tar.gz $PACKAGE-latest-6.0.tar.gz
 ln -s $PACKAGE-$VERSION.tar.gz $PACKAGE-latest.tar.gz
 echo "--------------------------------------------------------------------------";
 echo "Note: You may have to tag your git tree: git tag rel-6_x_x -a -m \"6.x.x\"";
