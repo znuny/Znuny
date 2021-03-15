@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -1004,7 +1005,7 @@ sub _GetParam {
             next DIALOGFIELD;
         }
     }
-    REQUIREDFIELDLOOP:
+
     for my $CurrentField (qw(Queue State Lock Priority)) {
         $Value = undef;
         if ( !$ValuesGotten{ $Self->{NameToID}{$CurrentField} } ) {
@@ -3447,7 +3448,6 @@ sub _StoreActivityDialog {
 
         $ActivityEntityID = $ProcessStartpoint->{Activity};
 
-        NEEDEDLOOP:
         for my $Needed (qw(Queue State Lock Priority)) {
 
             if ( !$TicketParam{ $Self->{NameToID}->{$Needed} } ) {

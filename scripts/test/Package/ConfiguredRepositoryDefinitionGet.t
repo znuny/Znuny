@@ -40,7 +40,8 @@ my @Tests = (
         ConfigSet      => {},
         Success        => 1,
         ExpectedResult => {
-            'https://download.znuny.org/releases/packages/' => 'OTRS Freebie Features'
+            'https://download.znuny.org/releases/packages/'    => 'Freebie Features',
+            'https://addons.znuny.com/api/addon_repos/public/' => 'Znuny Open Source Add-ons',
         },
     },
     {
@@ -50,64 +51,75 @@ my @Tests = (
         },
         Success        => 1,
         ExpectedResult => {
-            'https://download.znuny.org/releases/packages/' => 'OTRS Freebie Features',
-            'http://otrs.com'                        => 'Test Repository',
+            'https://download.znuny.org/releases/packages/'    => 'Freebie Features',
+            'https://addons.znuny.com/api/addon_repos/public/' => 'Znuny Open Source Add-ons',
+            'http://otrs.com'                                  => 'Test Repository',
         },
     },
     {
         Name      => 'ITSM 33 Repository',
         ConfigSet => {
-            'http://otrs.com'                               => 'Test Repository',
+            'http://otrs.com'                                      => 'Test Repository',
             'https://download.znuny.org/releases/itsm/packages33/' => 'OTRS::ITSM 3.3 Master',
         },
         Success        => 1,
         ExpectedResult => {
-            'https://download.znuny.org/releases/packages/'                       => 'OTRS Freebie Features',
-            'http://otrs.com'                                              => 'Test Repository',
-            "https://download.znuny.org/releases/itsm/packages$FrameworkVersion/" => "OTRS::ITSM $FrameworkVersion Master",
+            'https://download.znuny.org/releases/packages/'                       => 'Freebie Features',
+            'https://addons.znuny.com/api/addon_repos/public/'                    => 'Znuny Open Source Add-ons',
+            'http://otrs.com'                                                     => 'Test Repository',
+            "https://download.znuny.org/releases/itsm/packages$FrameworkVersion/" =>
+                "OTRS::ITSM $FrameworkVersion Master",
         },
     },
     {
         Name      => 'ITSM 33 and 4 Repository',
         ConfigSet => {
-            'http://otrs.com'                               => 'Test Repository',
+            'http://otrs.com'                                      => 'Test Repository',
             'https://download.znuny.org/releases/itsm/packages33/' => 'OTRS::ITSM 3.3 Master',
             'https://download.znuny.org/releases/itsm/packages4/'  => 'OTRS::ITSM 4 Master',
         },
         Success        => 1,
         ExpectedResult => {
-            'https://download.znuny.org/releases/packages/'                       => 'OTRS Freebie Features',
-            'http://otrs.com'                                              => 'Test Repository',
-            "https://download.znuny.org/releases/itsm/packages$FrameworkVersion/" => "OTRS::ITSM $FrameworkVersion Master",
+            'https://download.znuny.org/releases/packages/'                       => 'Freebie Features',
+            'https://addons.znuny.com/api/addon_repos/public/'                    => 'Znuny Open Source Add-ons',
+            'http://otrs.com'                                                     => 'Test Repository',
+            "https://download.znuny.org/releases/itsm/packages$FrameworkVersion/" =>
+                "OTRS::ITSM $FrameworkVersion Master",
         },
     },
     {
         Name      => 'ITSM 33 4 and 5 Repository',
         ConfigSet => {
-            'http://otrs.com'                               => 'Test Repository',
+            'http://otrs.com'                                      => 'Test Repository',
             'https://download.znuny.org/releases/itsm/packages33/' => 'OTRS::ITSM 3.3 Master',
             'https://download.znuny.org/releases/itsm/packages4/'  => 'OTRS::ITSM 4 Master',
             'https://download.znuny.org/releases/itsm/packages5/'  => 'OTRS::ITSM 5 Master',
         },
         Success        => 1,
         ExpectedResult => {
-            'https://download.znuny.org/releases/packages/'                       => 'OTRS Freebie Features',
-            'http://otrs.com'                                              => 'Test Repository',
-            "https://download.znuny.org/releases/itsm/packages$FrameworkVersion/" => "OTRS::ITSM $FrameworkVersion Master",
+            'https://download.znuny.org/releases/packages/'                       => 'Freebie Features',
+            'https://addons.znuny.com/api/addon_repos/public/'                    => 'Znuny Open Source Add-ons',
+            'http://otrs.com'                                                     => 'Test Repository',
+            "https://download.znuny.org/releases/itsm/packages$FrameworkVersion/" =>
+                "OTRS::ITSM $FrameworkVersion Master",
         },
     },
     {
         Name      => 'ITSM 6 Repository',
         ConfigSet => {
-            'https://download.znuny.org/releases/packages/'                       => 'OTRS Freebie Features',
-            'http://otrs.com'                                              => 'Test Repository',
-            "https://download.znuny.org/releases/itsm/packages$FrameworkVersion/" => "OTRS::ITSM $FrameworkVersion Master",
+            'https://download.znuny.org/releases/packages/'                       => 'Freebie Features',
+            'https://addons.znuny.com/api/addon_repos/public/'                    => 'Znuny Open Source Add-ons',
+            'http://otrs.com'                                                     => 'Test Repository',
+            "https://download.znuny.org/releases/itsm/packages$FrameworkVersion/" =>
+                "OTRS::ITSM $FrameworkVersion Master",
         },
         Success        => 1,
         ExpectedResult => {
-            'https://download.znuny.org/releases/packages/'                       => 'OTRS Freebie Features',
-            'http://otrs.com'                                              => 'Test Repository',
-            "https://download.znuny.org/releases/itsm/packages$FrameworkVersion/" => "OTRS::ITSM $FrameworkVersion Master",
+            'https://download.znuny.org/releases/packages/'                       => 'Freebie Features',
+            'https://addons.znuny.com/api/addon_repos/public/'                    => 'Znuny Open Source Add-ons',
+            'http://otrs.com'                                                     => 'Test Repository',
+            "https://download.znuny.org/releases/itsm/packages$FrameworkVersion/" =>
+                "OTRS::ITSM $FrameworkVersion Master",
         },
     },
 );

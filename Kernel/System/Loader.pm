@@ -6,14 +6,15 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::OTRS::Perl::Require)
 
 package Kernel::System::Loader;
 
 use strict;
 use warnings;
 
-use CSS::Minifier qw(); # default minifier, will only be used if CSS::Minifier:XS is not available.
-use JavaScript::Minifier qw(); # default minifier, will only be used if JavaScript::Minifier:XS is not available.
+use CSS::Minifier qw();           # default minifier, will only be used if CSS::Minifier:XS is not available.
+use JavaScript::Minifier qw();    # default minifier, will only be used if JavaScript::Minifier:XS is not available.
 
 our @ObjectDependencies = (
     'Kernel::Config',

@@ -6638,7 +6638,7 @@ via the Preferences button after logging in.
                 </Item>
                 <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
                 <Item Key="Name" Translatable="1">Support Data Collector</Item>
-                <Item Key="Block">OTRSGroup</Item>
+                <Item Key="Block">Administration</Item>
                 <Item Key="Description" Translatable="1">Manage support data.</Item>
                 <Item Key="IconBig">fa-search</Item>
                 <Item Key="IconSmall"></Item>

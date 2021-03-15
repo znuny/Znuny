@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -242,14 +243,14 @@ sub ActivityDialogCompletedCheck {
     }
 
     # loop over the fields of the config activity dialog to check if the required fields are filled
-    FIELDLOOP:
+    FIELD:
     for my $Field ( sort keys %{ $ActivityDialog->{Fields} } ) {
 
         # Checks if Field was invisible
-        next FIELDLOOP if ( !$ActivityDialog->{Fields}->{$Field}->{Display} );
+        next FIELD if ( !$ActivityDialog->{Fields}->{$Field}->{Display} );
 
         # Checks if Field was visible but not required
-        next FIELDLOOP if ( $ActivityDialog->{Fields}->{$Field}->{Display} == 1 );
+        next FIELD if ( $ActivityDialog->{Fields}->{$Field}->{Display} == 1 );
 
         # checks if $Data->{Field} is defined and not an empty string
         return if ( !IsStringWithData( $Param{Data}->{$Field} ) );
