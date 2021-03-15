@@ -117,4 +117,6 @@ jobs:
         env:
           # Insert tests/options to run here if you're not interested in the whole suite
           TEST_OPTIONS: ""
-        run: su -c "bin/otrs.Console.pl Dev::UnitTest::Run ${TEST_OPTIONS}" - otrs
+        run: |
+          su -c "bin/otrs.CheckSum.pl -a create" - otrs
+          su -c "bin/otrs.Console.pl Dev::UnitTest::Run ${TEST_OPTIONS}" - otrs

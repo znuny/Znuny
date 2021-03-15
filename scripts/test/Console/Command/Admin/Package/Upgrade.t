@@ -46,7 +46,7 @@ use warnings;
     sub Request {
         return (
             Status  => '200 OK',
-            Content => '{"Success":1,"Results":{"PackageManagement":[{"Operation":"PackageVerify","Data":{"Test":"not_verified","TestPackageIncompatible":"not_verified"},"Success":"1"}]},"ErrorMessage":""},
+            Content => '{"Success":1,"Results":{"PackageManagement":[{"Operation":"PackageVerify","Data":{"Test":"not_verified","TestPackageIncompatible":"not_verified"},"Success":"1"}]},"ErrorMessage":""}',
         );
     }
 }
@@ -64,8 +64,8 @@ my $ExitCode = $UpgradeCommandObject->Execute($Location);
 
 $Self->Is(
     $ExitCode,
-    1,
-    "Admin::Package::Upgrade exit code - package is not verified",
+    0,
+    "Admin::Package::Upgrade exit code - package is verified",
 );
 
 $ExitCode = $UpgradeCommandObject->Execute($Location);
@@ -73,7 +73,7 @@ $ExitCode = $UpgradeCommandObject->Execute($Location);
 $Self->Is(
     $ExitCode,
     1,
-    "Admin::Package::Upgrade exit code without arguments",
+    "Admin::Package::Upgrade exit code without arguments - Can't upgrade, package 'Test-0.0.1' already installed!",
 );
 
 1;
