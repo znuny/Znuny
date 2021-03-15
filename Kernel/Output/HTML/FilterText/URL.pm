@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -44,7 +45,7 @@ sub Pre {
         (                                            # $2
             (?:                                      # http or only www
                 (?: (?: http s? | ftp ) :\/\/) |     # http://, https:// and ftp://
-                (?: [a-z0-9\-]* \.?                  # allow for sub-domain or prefixes bug#12472
+                (?: [a-z0-9\-]{0,255} \.?            # allow for sub-domain or prefixes bug#12472; limit subdomain match to max. 255 characters because of runtime issues
                     (?: www | ftp ) \. \w+           # www.something and ftp.something
                 )
             )

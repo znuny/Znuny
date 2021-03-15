@@ -48,8 +48,9 @@ my @Tests = (
         },
         Success        => 1,
         ExpectedResult => {
-            'http://znuny.org'                                                    => 'Test Repository',
-            "https://download.znuny.org/releases/itsm/packages$FrameworkVersion/" => "OTRS::ITSM $FrameworkVersion Master",
+            'http://znuny.org' => 'Test Repository',
+            "https://download.znuny.org/releases/itsm/packages$FrameworkVersion/" =>
+                "OTRS::ITSM $FrameworkVersion Master",
         },
     },
     {
@@ -61,8 +62,9 @@ my @Tests = (
         },
         Success        => 1,
         ExpectedResult => {
-            'http://znuny.org'                                                    => 'Test Repository',
-            "https://download.znuny.org/releases/itsm/packages$FrameworkVersion/" => "OTRS::ITSM $FrameworkVersion Master",
+            'http://znuny.org' => 'Test Repository',
+            "https://download.znuny.org/releases/itsm/packages$FrameworkVersion/" =>
+                "OTRS::ITSM $FrameworkVersion Master",
         },
     },
     {
@@ -75,8 +77,9 @@ my @Tests = (
         },
         Success        => 1,
         ExpectedResult => {
-            'http://znuny.org'                                                    => 'Test Repository',
-            "https://download.znuny.org/releases/itsm/packages$FrameworkVersion/" => "OTRS::ITSM $FrameworkVersion Master",
+            'http://znuny.org' => 'Test Repository',
+            "https://download.znuny.org/releases/itsm/packages$FrameworkVersion/" =>
+                "OTRS::ITSM $FrameworkVersion Master",
         },
     },
     {
@@ -87,8 +90,9 @@ my @Tests = (
         },
         Success        => 1,
         ExpectedResult => {
-            'http://znuny.org'                                                    => 'Test Repository',
-            "https://download.znuny.org/releases/itsm/packages$FrameworkVersion/" => "OTRS::ITSM $FrameworkVersion Master",
+            'http://znuny.org' => 'Test Repository',
+            "https://download.znuny.org/releases/itsm/packages$FrameworkVersion/" =>
+                "OTRS::ITSM $FrameworkVersion Master",
         },
     },
 );

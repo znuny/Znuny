@@ -1,0 +1,122 @@
+---
+name: CI
+
+# Controls when the action will run.
+on:
+  - push
+  - pull_request
+
+jobs:
+  znunycodepolicy:
+    name: ZnunyCodePolicy
+    runs-on: ubuntu-latest
+    container: debian:10-slim
+
+    steps:
+      - name: Install dependencies
+        run: |
+          apt-get update -y
+          apt-get upgrade -y
+          apt-get install -y cpanminus make gcc npm git gettext libxml-libxml-perl libyaml-perl libxml2-utils libdatetime-perl libtemplate-perl libapache-dbi-perl
+
+      - name: Check out repository code
+        env:
+          GIT_DEPTH: "1"
+        uses: actions/checkout@v2
+        with:
+          path: znuny
+
+      - name: Check out code policy
+        env:
+          GIT_DEPTH: "1"
+        uses: actions/checkout@v2
+        with:
+          repository: znuny/ZnunyCodePolicy
+          path: codepolicy
+
+      - name: Prepare code policy
+        run: |
+          cpanm Code::TidyAll Perl::Critic
+          codepolicy/bin/otrs.CodePolicy.pl --install
+
+      - name: Run code policy
+        run: |
+          cd "${GITHUB_WORKSPACE}/znuny"
+          "${GITHUB_WORKSPACE}/codepolicy/bin/otrs.CodePolicy.pl" --all
+
+  unittests:
+    name: UnitTests
+    runs-on: ubuntu-latest
+    container: debian:10-slim
+    needs: znunycodepolicy
+
+    services:
+      mariadb:
+        image: mariadb:10
+        env:
+          MYSQL_USER: "otrs"
+          MYSQL_ROOT_PASSWORD: "secret"
+          MYSQL_PASSWORD: "secret"
+          MYSQL_DATABASE: "otrs"
+
+    steps:
+      - name: Check out repository code
+        env:
+          GIT_DEPTH: "1"
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          uname -a
+          apt-get update
+          apt-get upgrade -y
+          apt-get install -y libapache2-mod-perl2 libdbd-mysql-perl \
+            libtimedate-perl libnet-dns-perl libnet-ldap-perl \
+            libio-socket-ssl-perl libpdf-api2-perl libdbd-mysql-perl \
+            libsoap-lite-perl libtext-csv-xs-perl libjson-xs-perl \
+            libapache-dbi-perl libxml-libxml-perl libxml-libxslt-perl \
+            libyaml-perl libarchive-zip-perl libcrypt-eksblowfish-perl \
+            libencode-hanextra-perl libmail-imapclient-perl libtemplate-perl \
+            libdatetime-perl libmoo-perl apache2 mariadb-client gnupg2 \
+            cpanminus make gcc
+
+      - name: Setup Apache and system user
+        run: |
+          a2dismod mpm_event mpm_worker
+          a2enmod perl deflate filter headers mpm_prefork
+          useradd -d /opt/otrs -c 'OTRS user' -g www-data -s /bin/bash -M otrs
+
+      - name: Setup OTRS
+        env:
+          MYSQL_USER: "otrs"
+          MYSQL_ROOT_PASSWORD: "secret"
+          MYSQL_PASSWORD: "secret"
+          MYSQL_DATABASE: "otrs"
+        run: |
+          # yamllint disable rule:line-length
+          ln -sf $PWD /opt/otrs
+          ln -s /opt/otrs/scripts/apache2-httpd.include.conf /etc/apache2/sites-enabled/zzz_otrs.conf
+          apachectl start
+          cp Kernel/Config.pm.dist Kernel/Config.pm
+          sed -i 's/\(.*{DatabaseHost}.*\)127.0.0.1/\1'"mariadb"'/' /opt/otrs/Kernel/Config.pm
+          sed -i 's/\(.*{Database}.*\)otrs/\1'"${MYSQL_DATABASE}"'/' /opt/otrs/Kernel/Config.pm
+          sed -i 's/\(.*{DatabaseUser}.*\)otrs/\1'"${MYSQL_USER}"'/' /opt/otrs/Kernel/Config.pm
+          sed -i 's/\(.*{DatabasePw}.*\)some-pass/\1'"${MYSQL_PASSWORD}"'/' /opt/otrs/Kernel/Config.pm
+          mkdir -p /opt/otrs/var/tmp
+          mysql -h mariadb -u "${MYSQL_USERNAME}" -p"${MYSQL_PASSWORD}" otrs < /opt/otrs/scripts/database/otrs-schema.mysql.sql
+          mysql -h mariadb -u "${MYSQL_USERNAME}" -p"${MYSQL_PASSWORD}" otrs < /opt/otrs/scripts/database/otrs-initial_insert.mysql.sql
+          mysql -h mariadb -u "${MYSQL_USERNAME}" -p"${MYSQL_PASSWORD}" otrs < /opt/otrs/scripts/database/otrs-schema-post.mysql.sql
+          touch /opt/otrs/installed
+          /opt/otrs/bin/otrs.SetPermissions.pl
+          su -c "bin/otrs.Console.pl Maint::Config::Rebuild" - otrs
+          su -c "bin/otrs.Console.pl Admin::Config::Update --setting-name CheckEmailAddresses --value 0" - otrs
+          su -c "bin/otrs.CheckSum.pl -a create" - otrs
+          /opt/otrs/bin/otrs.SetPermissions.pl
+
+      - name: Run UnitTests
+        env:
+          # Insert tests/options to run here if you're not interested in the whole suite
+          TEST_OPTIONS: ""
+        run: |
+          su -c "bin/otrs.CheckSum.pl -a create" - otrs
+          su -c "bin/otrs.Console.pl Dev::UnitTest::Run ${TEST_OPTIONS}" - otrs

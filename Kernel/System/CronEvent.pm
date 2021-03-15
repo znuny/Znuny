@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -188,7 +189,7 @@ sub NextEventList {
 
     my @Result;
 
-    LOOP:
+    EVENTDATETIME:
     while (1) {
 
         my ( $Sec, $Min, $Hour, $Day, $Month, $Year ) = $CronObject->nextEvent();
@@ -207,8 +208,8 @@ sub NextEventList {
             },
         );
 
-        last LOOP if !$EventDateTime;
-        last LOOP if $EventDateTime > $Param{StopDateTime};
+        last EVENTDATETIME if !$EventDateTime;
+        last EVENTDATETIME if $EventDateTime > $Param{StopDateTime};
 
         if ($TimeZoneChanged) {
             $EventDateTime->ToTimeZone(

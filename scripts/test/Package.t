@@ -151,6 +151,9 @@ my $StringSecond = '<?xml version="1.0" encoding="utf-8" ?>
 </otrs_package>
 ';
 
+# make sure test package is not installed
+$PackageObject->PackageUninstall( String => $String );
+
 # check if the package is already installed - check by name
 my $PackageIsInstalledByName = $PackageObject->PackageIsInstalled( Name => 'Test' );
 $Self->True(

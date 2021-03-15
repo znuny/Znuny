@@ -1,6 +1,7 @@
 #!/usr/bin/env perl
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -245,12 +246,12 @@ sub Start {
         print STDOUT "\nDebug information is stored in the daemon log files localed under: $LogDir\n\n";
     }
 
-    LOOP:
+    DAEMONCHECKER:
     while ($DaemonChecker) {
 
         if ($DaemonSuspend) {
             sleep .5;
-            next LOOP;
+            next DAEMONCHECKER;
         }
 
         MODULE:
@@ -298,7 +299,7 @@ sub Start {
                 );
 
                 my $DaemonObject;
-                LOOP:
+                DAEMONCHECKER:
                 while ($ChildRun) {
 
                     # Create daemon object if not exists.
@@ -322,12 +323,12 @@ sub Start {
                     # Wait 10 seconds if creation of object is not possible.
                     if ( !$DaemonObject ) {
                         sleep 10;
-                        last LOOP;
+                        last DAEMONCHECKER;
                     }
 
                     METHOD:
                     for my $Method ( 'PreRun', 'Run', 'PostRun' ) {
-                        last LOOP if !eval { $DaemonObject->$Method() };
+                        last DAEMONCHECKER if !eval { $DaemonObject->$Method() };
                     }
                 }
 

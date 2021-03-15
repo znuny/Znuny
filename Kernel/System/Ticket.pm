@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -330,7 +331,7 @@ sub TicketCheckNumber {
     # do not check deeper than 10 merges
     my $Limit = 10;
     my $Count = 1;
-    MERGELOOP:
+    MERGE:
     for ( 1 .. $Limit ) {
         my %Ticket = $Self->TicketGet(
             TicketID      => $TicketID,
@@ -351,7 +352,7 @@ sub TicketCheckNumber {
             if ( $Data->{Name} =~ /^.*%%\d+?%%(\d+?)$/ ) {
                 $TicketID = $1;
                 $Count++;
-                next MERGELOOP if ( $Count <= $Limit );
+                next MERGE if ( $Count <= $Limit );
 
                 # returns no found Ticket after 10 deep-merges, so it should create a new one
                 return;

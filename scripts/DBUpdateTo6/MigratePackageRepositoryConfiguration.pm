@@ -47,7 +47,8 @@ sub Run {
     return 1 if $RepositoryList{$CurrentITSMRepository};
 
     # Make sure ITSM repository matches the current framework version.
-    my @Matches = grep { $_ =~ m{https://download\.znuny\.org/releases/itsm/packages\d+/}msxi } sort keys %RepositoryList;
+    my @Matches
+        = grep { $_ =~ m{https://download\.znuny\.org/releases/itsm/packages\d+/}msxi } sort keys %RepositoryList;
 
     return 1 if !@Matches;
 
