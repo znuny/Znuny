@@ -1,3 +1,6 @@
+# 6.0.34 2021-xx-xx
+ - 2021-03-16 Fixed bug#[14622](https://bugs.otrs.org/show_bug.cgi?id=14622) - Wrong navigation group for Frontend::Module###AdminAppointmentImport and Frontend::NavBarModule###2-AdminFavourites admin modules
+
 # 6.0.33 2021-03-10
  - 2021-03-02 Limited match for subdomain to 255 characters in Kernel::Output::HTML::FilterText::URL because of runtime issues.
  - 2021-02-24 Moved 'AdminSupportDataCollector' to 'Administration' in Admin.
