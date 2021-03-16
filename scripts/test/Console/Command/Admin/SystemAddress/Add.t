@@ -25,8 +25,8 @@ $Kernel::OM->ObjectParamAdd(
 my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $SystemAddressName = 'SystemAddress' . $Helper->GetRandomID();
-my $SystemAddress     = $SystemAddressName . '@example.com',
-    my $QueueName     = 'queue' . $Helper->GetRandomID();
+my $SystemAddress     = $SystemAddressName . '@example.com';
+my $QueueName     = 'queue' . $Helper->GetRandomID();
 
 # try to execute command without any options
 $ExitCode = $CommandObject->Execute();
