@@ -2412,7 +2412,7 @@ sub PackageBuild {
                     if ( $Tag->{TagType} eq 'Start' ) {
 
                         my $Space = '';
-                        for ( 1 .. $Counter ) {
+                        for my $Current ( 1 .. $Counter ) {
                             $Space .= '    ';
                         }
 
@@ -2467,7 +2467,7 @@ sub PackageBuild {
 
                             my $Space = '';
 
-                            for ( 1 .. $Counter ) {
+                            for my $Current ( 1 .. $Counter ) {
                                 $Space .= '    ';
                             }
 

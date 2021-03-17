@@ -2278,7 +2278,7 @@ sub _AppointmentRecurringCreate {
     elsif ( $Param{Appointment}->{RecurrenceCount} ) {
 
         COUNT:
-        for ( 1 .. $Param{Appointment}->{RecurrenceCount} - 1 ) {
+        for my $Count ( 1 .. $Param{Appointment}->{RecurrenceCount} - 1 ) {
             $Step += $Param{Appointment}->{RecurrenceInterval};
 
             # calculate recurring times

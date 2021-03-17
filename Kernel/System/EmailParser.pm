@@ -913,11 +913,11 @@ sub GetReferences {
     # get uniq
     my %Checked;
     my @References;
-    for ( reverse @ReferencesAll ) {
-        if ( !$Checked{$_} ) {
-            push @References, $_;
+    for my $Reference ( reverse @ReferencesAll ) {
+        if ( !$Checked{$Reference} ) {
+            push @References, $Reference;
         }
-        $Checked{$_} = 1;
+        $Checked{$Reference} = 1;
     }
     return @References;
 }

@@ -325,11 +325,11 @@ sub UpdateSessionID {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(SessionID Key)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(SessionID Key)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }

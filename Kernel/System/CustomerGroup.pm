@@ -82,11 +82,11 @@ sub GroupMemberAdd {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(UID GID UserID Permission)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(UID GID UserID Permission)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!",
+                Message  => "Need $Needed!",
             );
             return;
         }
@@ -970,11 +970,11 @@ sub PermissionCheck {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(UserID GroupName Type)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(UserID GroupName Type)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!",
+                Message  => "Need $Needed!",
             );
             return;
         }

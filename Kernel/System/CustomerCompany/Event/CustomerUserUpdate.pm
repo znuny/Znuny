@@ -30,20 +30,20 @@ sub Run {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw( Data Event Config UserID )) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw( Data Event Config UserID )) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
     }
-    for (qw( CustomerID OldCustomerID )) {
-        if ( !$Param{Data}->{$_} ) {
+    for my $Needed (qw( CustomerID OldCustomerID )) {
+        if ( !$Param{Data}->{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_ in Data!"
+                Message  => "Need $Needed in Data!"
             );
             return;
         }

@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -431,24 +432,22 @@ sub ArticleFlagDelete {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(TicketID ArticleID Key)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(TicketID ArticleID Key)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
     }
 
     if ( !$Param{AllUsers} && !$Param{UserID} ) {
-        if ( !$Param{$_} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Need AllUsers or UserID!"
-            );
-            return;
-        }
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Need AllUsers or UserID!"
+        );
+        return;
     }
 
     # get database object
@@ -504,11 +503,11 @@ sub ArticleFlagGet {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(ArticleID UserID)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(ArticleID UserID)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -557,11 +556,11 @@ sub ArticleFlagsOfTicketGet {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(TicketID UserID)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(TicketID UserID)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -823,11 +822,11 @@ sub ArticleSearchIndexRebuildFlagList {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Value)) {
-        if ( !defined $Param{$_} ) {
+    for my $Needed (qw(Value)) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }

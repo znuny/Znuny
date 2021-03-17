@@ -222,9 +222,9 @@ sub _CheckVersion {
 
         my @Parts = split /\./, $Param{$Type};
         $Param{$Type} = 0;
-        for ( 0 .. 4 ) {
-            if ( IsNumber( $Parts[$_] ) ) {
-                $Param{$Type} .= sprintf( "%04d", $Parts[$_] );
+        for my $Part ( 0 .. 4 ) {
+            if ( IsNumber( $Parts[$Part] ) ) {
+                $Param{$Type} .= sprintf( "%04d", $Parts[$Part] );
             }
             else {
                 $Param{$Type} .= '0000';

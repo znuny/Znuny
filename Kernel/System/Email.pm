@@ -885,10 +885,10 @@ sub Bounce {
     };
 
     # check needed stuff
-    for (qw(From To Email)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(From To Email)) {
+        if ( !$Param{$Needed} ) {
             return $SendError->(
-                ErrorMessage => "Need $_!",
+                ErrorMessage => "Need $Needed!",
             );
         }
     }
@@ -914,8 +914,8 @@ sub Bounce {
     $HeaderObject->replace( 'Resent-Date',       $DateTimeObject->ToEmailTimeStamp() );
     my $Body         = $EmailObject->body();
     my $BodyAsString = '';
-    for ( @{$Body} ) {
-        $BodyAsString .= $_ . "\n";
+    for my $String ( @{$Body} ) {
+        $BodyAsString .= $String . "\n";
     }
     my $HeaderAsString = $HeaderObject->as_string();
     my $OldMessageID   = $HeaderObject->get('Message-ID') || '??';

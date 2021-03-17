@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -85,9 +86,9 @@ sub Output {
         %{ $Self->{EnvRef} } = %ENV;
 
         # all $Self->{*}
-        for ( sort keys %{$Self} ) {
-            if ( defined $Self->{$_} && !ref $Self->{$_} ) {
-                $Self->{EnvRef}->{$_} = $Self->{$_};
+        for my $Key ( sort keys %{$Self} ) {
+            if ( defined $Self->{$Key} && !ref $Self->{$Key} ) {
+                $Self->{EnvRef}->{$Key} = $Self->{$Key};
             }
         }
     }
@@ -120,8 +121,8 @@ sub Output {
 
     # take templates from string/array
     elsif ( defined $Param{Template} && ref $Param{Template} eq 'ARRAY' ) {
-        for ( @{ $Param{Template} } ) {
-            $TemplateString .= $_;
+        for my $Key ( @{ $Param{Template} } ) {
+            $TemplateString .= $Key;
         }
     }
     elsif ( defined $Param{Template} ) {

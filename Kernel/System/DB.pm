@@ -748,7 +748,7 @@ sub FetchrowArray {
 
     # fetch first not used rows
     if ( $Self->{LimitStart} ) {
-        for ( 1 .. $Self->{LimitStart} ) {
+        for my $Row ( 1 .. $Self->{LimitStart} ) {
             if ( !$Self->{Cursor}->fetchrow_array() ) {
                 $Self->{LimitStart} = 0;
                 return ();
@@ -1154,11 +1154,11 @@ sub QueryCondition {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Key Value)) {
-        if ( !defined $Param{$_} ) {
+    for my $Needed (qw(Key Value)) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }

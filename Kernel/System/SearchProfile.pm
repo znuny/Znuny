@@ -72,11 +72,11 @@ sub SearchProfileAdd {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Base Name Key UserLogin)) {
-        if ( !defined $Param{$_} ) {
+    for my $Needed (qw(Base Name Key UserLogin)) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!",
+                Message  => "Need $Needed!",
             );
             return;
         }
@@ -145,11 +145,11 @@ sub SearchProfileGet {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Base Name UserLogin)) {
-        if ( !defined( $Param{$_} ) ) {
+    for my $Needed (qw(Base Name UserLogin)) {
+        if ( !defined( $Param{$Needed} ) ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!",
+                Message  => "Need $Needed!",
             );
             return;
         }
@@ -215,11 +215,11 @@ sub SearchProfileDelete {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Base Name UserLogin)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(Base Name UserLogin)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!",
+                Message  => "Need $Needed!",
             );
             return;
         }
@@ -271,11 +271,11 @@ sub SearchProfileList {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Base UserLogin)) {
-        if ( !defined( $Param{$_} ) ) {
+    for my $Needed (qw(Base UserLogin)) {
+        if ( !defined( $Param{$Needed} ) ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!",
+                Message  => "Need $Needed!",
             );
             return;
         }
@@ -335,11 +335,11 @@ sub SearchProfileUpdateUserLogin {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Base UserLogin NewUserLogin)) {
-        if ( !defined( $Param{$_} ) ) {
+    for my $Needed (qw(Base UserLogin NewUserLogin)) {
+        if ( !defined( $Param{$Needed} ) ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!",
+                Message  => "Need $Needed!",
             );
             return;
         }

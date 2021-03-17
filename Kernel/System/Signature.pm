@@ -64,11 +64,11 @@ sub SignatureAdd {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Name Text ContentType ValidID UserID)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(Name Text ContentType ValidID UserID)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -179,11 +179,11 @@ sub SignatureUpdate {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(ID Name Text ContentType ValidID UserID)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(ID Name Text ContentType ValidID UserID)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }

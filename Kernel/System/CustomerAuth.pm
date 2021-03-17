@@ -120,13 +120,13 @@ sub Auth {
     # use all 11 backends and return on first auth
     my $User;
     COUNT:
-    for ( '', 1 .. 10 ) {
+    for my $MainCount ( '', 1 .. 10 ) {
 
         # next on no config setting
-        next COUNT if !$Self->{"Backend$_"};
+        next COUNT if !$Self->{"Backend$MainCount"};
 
         # check auth backend
-        $User = $Self->{"Backend$_"}->Auth(%Param);
+        $User = $Self->{"Backend$MainCount"}->Auth(%Param);
 
         # next on no success
         next COUNT if !$User;
@@ -160,7 +160,7 @@ sub Auth {
         if ($User) {
             $CustomerUserObject->SetPreferences(
                 Key    => 'UserAuthBackend',
-                Value  => $_,
+                Value  => $MainCount,
                 UserID => $User,
             );
             last COUNT;
