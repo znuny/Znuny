@@ -338,7 +338,7 @@ sub TicketSearch {
     my $OrderBy = $Param{OrderBy} || 'Down';
     my $SortBy  = $Param{SortBy}  || 'Age';
     my $Limit   = $Param{Limit}   || 10000;
-    $Param{ContentSearch} ||= 'AND';
+    $Param{ContentSearch} //= 'AND';
 
     my %SortOptions = (
         Owner                  => 'st.user_id',
