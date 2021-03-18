@@ -18,6 +18,7 @@ use Time::HiRes qw(usleep);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::Main',
     'Kernel::System::DateTime',
     'Kernel::System::PID',
     'Kernel::System::Ticket',
@@ -164,7 +165,7 @@ sub Run {
         ArticleStorageDB => 'ArticleStorageFS',
     );
 
-    my $Source = $Target2Source{$Target} // $Self->GetOption( 'source' );
+    my $Source = $Target2Source{$Target} // $Self->GetOption('source');
 
     if ( !$Source ) {
         $Self->Print("<red>Need source option.</red>\n");
@@ -221,16 +222,18 @@ sub _GetStorageBackends {
             Silent    => 1,
         );
 
-        for my $File ( @Files ) {
+        FILE:
+        for my $File (@Files) {
             my $Basename = basename $File, '.pm';
 
-            next if 'Base' eq $Basename;
+            next FILE if 'Base' eq $Basename;
 
             $Backends{$Basename} = 1;
         }
     }
 
-    return sort keys %Backends;
+    my @BackendList = sort keys %Backends;
+    return @BackendList;
 }
 
 1;
