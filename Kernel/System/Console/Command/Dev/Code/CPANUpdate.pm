@@ -34,7 +34,7 @@ sub Configure {
         Required   => 1,
         HasValue   => 1,
         Multiple   => 0,
-        ValueRegex => qr/^(?:stable|single|development|check)$/smx,
+        ValueRegex => qr/^(?:stable|single|check)$/smx,
     );
 
     $Self->AddOption(
