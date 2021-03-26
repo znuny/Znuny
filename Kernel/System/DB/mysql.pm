@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -307,11 +308,11 @@ sub TableCreate {
         }
         $SQL .= "    UNIQUE INDEX $Name (";
         my @Array = @{ $Uniq{$Name} };
-        for ( 0 .. $#Array ) {
-            if ( $_ > 0 ) {
+        for my $Index ( 0 .. $#Array ) {
+            if ( $Index > 0 ) {
                 $SQL .= ', ';
             }
-            $SQL .= $Array[$_]->{Name};
+            $SQL .= $Array[$Index]->{Name};
         }
         $SQL .= ')';
     }
@@ -323,13 +324,13 @@ sub TableCreate {
         }
         $SQL .= "    INDEX $Name (";
         my @Array = @{ $Index{$Name} };
-        for ( 0 .. $#Array ) {
-            if ( $_ > 0 ) {
+        for my $Index ( 0 .. $#Array ) {
+            if ( $Index > 0 ) {
                 $SQL .= ', ';
             }
-            $SQL .= $Array[$_]->{Name};
-            if ( $Array[$_]->{Size} ) {
-                $SQL .= "($Array[$_]->{Size})";
+            $SQL .= $Array[$Index]->{Name};
+            if ( $Array[$Index]->{Size} ) {
+                $SQL .= "($Array[$Index]->{Size})";
             }
         }
         $SQL .= ')';
@@ -340,13 +341,13 @@ sub TableCreate {
     # add foreign keys
     for my $ForeignKey ( sort keys %Foreign ) {
         my @Array = @{ $Foreign{$ForeignKey} };
-        for ( 0 .. $#Array ) {
+        for my $Index ( 0 .. $#Array ) {
             push @{ $Self->{Post} },
                 $Self->ForeignKeyCreate(
                 LocalTableName   => $TableName,
-                Local            => $Array[$_]->{Local},
+                Local            => $Array[$Index]->{Local},
                 ForeignTableName => $ForeignKey,
-                Foreign          => $Array[$_]->{Foreign},
+                Foreign          => $Array[$Index]->{Foreign},
                 );
         }
     }
@@ -555,11 +556,11 @@ sub IndexCreate {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(TableName Name Data)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(TableName Name Data)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -567,13 +568,13 @@ sub IndexCreate {
 
     my $CreateIndexSQL = "CREATE INDEX $Param{Name} ON $Param{TableName} (";
     my @Array          = @{ $Param{Data} };
-    for ( 0 .. $#Array ) {
-        if ( $_ > 0 ) {
+    for my $Index ( 0 .. $#Array ) {
+        if ( $Index > 0 ) {
             $CreateIndexSQL .= ', ';
         }
-        $CreateIndexSQL .= $Array[$_]->{Name};
-        if ( $Array[$_]->{Size} ) {
-            $CreateIndexSQL .= "($Array[$_]->{Size})";
+        $CreateIndexSQL .= $Array[$Index]->{Name};
+        if ( $Array[$Index]->{Size} ) {
+            $CreateIndexSQL .= "($Array[$Index]->{Size})";
         }
     }
     $CreateIndexSQL .= ')';
@@ -596,11 +597,11 @@ sub IndexDrop {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(TableName Name)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(TableName Name)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!",
+                Message  => "Need $Needed!",
             );
             return;
         }
@@ -626,11 +627,11 @@ sub ForeignKeyCreate {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(LocalTableName Local ForeignTableName Foreign)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(LocalTableName Local ForeignTableName Foreign)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -668,11 +669,11 @@ sub ForeignKeyDrop {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(LocalTableName Local ForeignTableName Foreign)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(LocalTableName Local ForeignTableName Foreign)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -720,22 +721,22 @@ sub UniqueCreate {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(TableName Name Data)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(TableName Name Data)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
     }
     my $CreateUniqueSQL = "ALTER TABLE $Param{TableName} ADD CONSTRAINT $Param{Name} UNIQUE INDEX (";
     my @Array           = @{ $Param{Data} };
-    for ( 0 .. $#Array ) {
-        if ( $_ > 0 ) {
+    for my $Index ( 0 .. $#Array ) {
+        if ( $Index > 0 ) {
             $CreateUniqueSQL .= ', ';
         }
-        $CreateUniqueSQL .= $Array[$_]->{Name};
+        $CreateUniqueSQL .= $Array[$Index]->{Name};
     }
     $CreateUniqueSQL .= ')';
 
@@ -756,11 +757,11 @@ sub UniqueDrop {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(TableName Name)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(TableName Name)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -830,11 +831,11 @@ sub Insert {
         }
     }
     my $Key = '';
-    for (@Keys) {
+    for my $CurrentKey (@Keys) {
         if ( $Key ne '' ) {
             $Key .= ', ';
         }
-        $Key .= $_;
+        $Key .= $CurrentKey;
     }
     my $Value = '';
     for my $Tmp (@Values) {

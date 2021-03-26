@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -2079,23 +2080,23 @@ sub _TimeOutput {
             $TimeConfig{ $Element . 'StopMinute' }  = 59;
             $TimeConfig{ $Element . 'StopSecond' }  = 59;
 
-            for (qw(Start Stop)) {
+            for my $Key (qw(Start Stop)) {
                 $TimeConfig{Prefix} = $Element . $_;
 
                 # time setting if available
                 if (
-                    $Param{ 'Time' . $_ }
-                    && $Param{ 'Time' . $_ } =~ m{^(\d\d\d\d)-(\d\d)-(\d\d)\s(\d\d):(\d\d):(\d\d)$}xi
+                    $Param{ 'Time' . $Key }
+                    && $Param{ 'Time' . $Key } =~ m{^(\d\d\d\d)-(\d\d)-(\d\d)\s(\d\d):(\d\d):(\d\d)$}xi
                     )
                 {
-                    $TimeConfig{ $Element . $_ . 'Year' }   = $1;
-                    $TimeConfig{ $Element . $_ . 'Month' }  = $2;
-                    $TimeConfig{ $Element . $_ . 'Day' }    = $3;
-                    $TimeConfig{ $Element . $_ . 'Hour' }   = $4;
-                    $TimeConfig{ $Element . $_ . 'Minute' } = $5;
-                    $TimeConfig{ $Element . $_ . 'Second' } = $6;
+                    $TimeConfig{ $Element . $Key . 'Year' }   = $1;
+                    $TimeConfig{ $Element . $Key . 'Month' }  = $2;
+                    $TimeConfig{ $Element . $Key . 'Day' }    = $3;
+                    $TimeConfig{ $Element . $Key . 'Hour' }   = $4;
+                    $TimeConfig{ $Element . $Key . 'Minute' } = $5;
+                    $TimeConfig{ $Element . $Key . 'Second' } = $6;
                 }
-                $TimeOutput{ 'Time' . $_ } = $LayoutObject->BuildDateSelection(%TimeConfig);
+                $TimeOutput{ 'Time' . $Key } = $LayoutObject->BuildDateSelection(%TimeConfig);
             }
         }
 
@@ -2401,10 +2402,10 @@ sub _GetSelectedXAxisTimeScaleValue {
 
     my $SelectedXAxisTimeScaleValue;
 
-    for ( @{ $Param{Stat}->{UseAsXvalue} } ) {
+    for my $Key ( @{ $Param{Stat}->{UseAsXvalue} } ) {
 
-        if ( $_->{Selected} && $_->{Block} eq 'Time' ) {
-            $SelectedXAxisTimeScaleValue = $_->{SelectedValues}[0];
+        if ( $Key->{Selected} && $Key->{Block} eq 'Time' ) {
+            $SelectedXAxisTimeScaleValue = $Key->{SelectedValues}[0];
         }
     }
 

@@ -174,7 +174,7 @@ sub TestUserCreate {
     my $TestUserID;
     my $TestUserLogin;
     COUNT:
-    for ( 1 .. 10 ) {
+    for my $Counter ( 1 .. 10 ) {
 
         $TestUserLogin = $Self->GetRandomID();
 
@@ -261,7 +261,7 @@ sub TestCustomerUserCreate {
     # Create test user.
     my $TestUser;
     COUNT:
-    for ( 1 .. 10 ) {
+    for my $Counter ( 1 .. 10 ) {
 
         my $TestUserLogin = $Self->GetRandomID();
 
@@ -840,11 +840,11 @@ sub ProvideTestDatabase {
     my $TestDatabase = $ConfigObject->Get('TestDatabase');
     return if !$TestDatabase;
 
-    for (qw(DatabaseDSN DatabaseUser DatabasePw)) {
-        if ( !$TestDatabase->{$_} ) {
+    for my $Needed (qw(DatabaseDSN DatabaseUser DatabasePw)) {
+        if ( !$TestDatabase->{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_ in TestDatabase!",
+                Message  => "Need  $Needed in TestDatabase!",
             );
             return;
         }

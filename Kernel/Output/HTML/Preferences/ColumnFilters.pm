@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -27,8 +28,8 @@ sub new {
     my $Self = {%Param};
     bless( $Self, $Type );
 
-    for (qw(UserID ConfigItem)) {
-        die "Got no $_!" if ( !$Self->{$_} );
+    for my $Needed (qw(UserID ConfigItem)) {
+        die "Got no $Needed!" if ( !$Self->{$Needed} );
     }
 
     return $Self;

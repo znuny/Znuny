@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -226,11 +227,11 @@ Returns 1 if comparison condition is met (see Type parameter for more info).
 sub _CheckVersion {
     my ( $Self, %Param ) = @_;
 
-    for (qw(Version1 Version2 Type)) {
-        if ( !defined $Param{$_} ) {
+    for my $Needed (qw(Version1 Version2 Type)) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "$_ not defined!",
+                Message  => "$Needed not defined!",
             );
             return;
         }
@@ -239,9 +240,9 @@ sub _CheckVersion {
     for my $Type (qw(Version1 Version2)) {
         my @Parts = split( /\./, $Param{$Type} );
         $Param{$Type} = 0;
-        for ( 0 .. 4 ) {
-            if ( defined $Parts[$_] ) {
-                $Param{$Type} .= sprintf( "%04d", $Parts[$_] );
+        for my $Part ( 0 .. 4 ) {
+            if ( defined $Parts[$Part] ) {
+                $Param{$Type} .= sprintf( "%04d", $Parts[$Part] );
             }
             else {
                 $Param{$Type} .= '0000';

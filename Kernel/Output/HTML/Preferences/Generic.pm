@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -60,13 +61,13 @@ sub Run {
 
     for my $Key ( sort keys %{ $Param{GetParam} } ) {
         my @Array = @{ $Param{GetParam}->{$Key} };
-        for (@Array) {
+        for my $Value (@Array) {
 
             # check if the value needs to be validated
             if (
                 $Self->{ConfigItem}->{ValidateRegex}
                 && $Self->{ConfigItem}->{ValidateRegexMessage}
-                && $_ !~ m{$Self->{ConfigItem}->{ValidateRegex}}
+                && $Value !~ m{$Self->{ConfigItem}->{ValidateRegex}}
                 )
             {
                 $Self->{Error} = $Self->{ConfigItem}->{ValidateRegexMessage};
@@ -78,7 +79,7 @@ sub Run {
                 $Self->{UserObject}->SetPreferences(
                     UserID => $Param{UserData}->{UserID},
                     Key    => $Key,
-                    Value  => $_,
+                    Value  => $Value,
                 );
             }
             if ( $Param{UserData}->{UserID} eq $Self->{UserID} ) {
@@ -87,7 +88,7 @@ sub Run {
                 $Kernel::OM->Get('Kernel::System::AuthSession')->UpdateSessionID(
                     SessionID => $Self->{SessionID},
                     Key       => $Key,
-                    Value     => $_,
+                    Value     => $Value,
                 );
             }
         }
