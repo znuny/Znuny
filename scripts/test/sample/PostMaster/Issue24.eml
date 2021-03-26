@@ -1,0 +1,18 @@
+Date: Fri, 26 Feb 2021 06:07:52 +0100
+From: MAILER-DAEMON@master.example.com (Mail Delivery System)
+Subject: Undelivered Mail Returned to Sender
+To: irgendwas@invalid.invalid
+Message-Id: <20210218063752.D681D10299926@master.example.com>
+MIME-Version: 1.0
+Content-Type: multipart/report; report-type=delivery-status;
+    boundary="2124310299989.1613630272/master.example.com"
+Content-Transfer-Encoding: 8bit
+
+--2124310299989.1613630272/master.example.com
+Content-Description: Delivery report
+Content-Type: message/delivery-status
+
+Final-Recipient: rfc822; md@example.com
+Remote-MTA: dns; aspmx.l.google.com
+
+--2124310299989.1613630272/master.example.com--
