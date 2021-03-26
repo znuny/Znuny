@@ -91,6 +91,16 @@ sub Run {
             $Self->Print( "<$Color>$Available</$Color>" );
         }
     }
+    elsif ( $Mode eq 'single' ) {
+        my $ModulesToUpdate = $Self->GetOption('module');
+
+        for my $Module ( @{ $ModulesToUpdate || {} } ) {
+            $Self->InstallModule(
+                ModuleConfig => { Module => $Module },
+                TargetPath   => $CPANDir,
+            );
+        }
+    }
     elsif ( $Mode eq 'development' ) {
 
         my $CPAN2Dir = "$Home/Kernel/cpan-lib2";
