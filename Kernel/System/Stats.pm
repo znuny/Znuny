@@ -496,7 +496,8 @@ sub StatsUpdate {
 
                 # stetting for working with time elements
                 for my $TimeKey (
-                    qw(TimeStop TimeStart TimeRelativeUnit TimeRelativeCount TimeRelativeUpcomingCount TimeScaleCount))
+                    qw(TimeStop TimeStart TimeRelativeUnit TimeRelativeCount TimeRelativeUpcomingCount TimeScaleCount)
+                    )
                 {
                     if ( defined $Ref->{$TimeKey} ) {
                         $StatXML{$Key}->[$Index]->{$TimeKey} = $Ref->{$TimeKey};

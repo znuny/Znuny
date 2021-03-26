@@ -9,6 +9,7 @@ The following persons contributed to OTRS:
 * Balázs Úr <balazs.ur@otrs.com>
 * Balázs Úr <urbalazs@gmail.com>
 * Belnet <info@belnet.be>
+* Bernhard Schmalhofer <Bernhard.Schmalhofer@gmx.de>
 * Bernhard Schmalhofer <bernhard.schmalhofer@otrs.com>
 * Bodo Bauer <bodo.bauer@otrs.com>
 * Burchard Steinbild <burchard.steinbild@otrs.com>
