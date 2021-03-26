@@ -389,17 +389,6 @@ my @NeededModules = (
         },
     },
     {
-        Module    => 'LWP::Protocol::https',
-        Comment   => 'Required for accessing https URLs',
-        Required  => 0,
-        InstTypes => {
-            aptget => 'liblwp-protocol-https-perl',
-            emerge => 'dev-perl/LWP-Protocol-https',
-            zypper => 'perl-LWP-Protocol-https',
-            ports  => 'www/p5-LWP-Protocol-https',
-        },
-    },
-    {
         Module          => 'Mail::IMAPClient',
         VersionRequired => '3.22',
         Comment         => 'Required for IMAP TLS connections.',
