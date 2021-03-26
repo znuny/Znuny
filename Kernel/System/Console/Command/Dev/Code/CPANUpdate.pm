@@ -85,11 +85,12 @@ sub Run {
 
             my $URL       = sprintf "https://fastapi.metacpan.org/v1/download_url/%s", $Module;
             my $Available = `wget -q -O - $URL | grep version | cut -d '"' -f4`;
+            chomp $Available;
 
             $Available ||= '0';
             my $Color = $Available > $Installed ? 'yellow' : 'green';
 
-            $Self->Print("<$Color>$Available</$Color>");
+            $Self->Print("<$Color>$Available</$Color>\n");
         }
     }
     elsif ( $Mode eq 'single' ) {
