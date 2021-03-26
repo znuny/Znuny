@@ -54,7 +54,7 @@ sub Run {
         for my $ID ( sort keys %Queues ) {
             my %Queue = $QueueObject->QueueGet( ID => $ID );
 
-            $Self->Print( sprintf( "%6s", $_ ) . " $Queue{'Name'} " );
+            $Self->Print( sprintf( "%6s", $ID ) . " $Queue{'Name'} " );
             if ( $Queue{'ValidID'} == 1 ) {
                 $Self->Print("<green>$ValidList{$Queue{'ValidID'}}</green>\n");
             }
