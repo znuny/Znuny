@@ -15,6 +15,8 @@ use File::Path();
 
 use parent qw(Kernel::System::Console::BaseCommand);
 
+use Kernel::System::Environment;
+
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Main',
@@ -27,11 +29,20 @@ sub Configure {
 
     $Self->AddOption(
         Name        => 'mode',
-        Description => "Update all dependencies (development), or only critical ones (stable).",
+        Description => "Update all dependencies (development), one dependency (single), only critical ones (stable), or just check for outdated modules (check).",
         Required    => 1,
         HasValue    => 1,
         Multiple    => 0,
-        ValueRegex  => qr/^stable$/smx,
+        ValueRegex  => qr/^(?:stable|single|development|check)$/smx,
+    );
+
+    $Self->AddOption(
+        Name        => 'module',
+        Description => "Module name that should be upgraded (only used for mode 'single')",
+        Required    => 0,
+        HasValue    => 1,
+        Multiple    => 1,
+        ValueRegex  => qr/.+/,
     );
 
     return;
@@ -41,9 +52,13 @@ sub Run {
     my ( $Self, %Param ) = @_;
 
     my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
-    my $Mode = $Self->GetOption('mode');
+    my $Mode = $Self->GetOption('mode') || '';
 
     my $CPANDir = "$Home/Kernel/cpan-lib";
+
+    my %PerlInfo = Kernel::System::Environment->PerlInfoGet(
+        BundledModules => 1,
+    );
 
     if ( $Mode eq 'stable' ) {
 
@@ -56,6 +71,25 @@ sub Run {
             );
         }
 
+    }
+    elsif ( $Mode eq 'check' ) {
+        $Self->Print( sprintf "Module%sInstalled%sAvailable\n", ' ' x 30, ' ' x 5 );
+
+        for my $Module ( sort keys %{ $PerlInfo{Modules} || {} } ) {
+            my $Space          = ' ' x ( 36 - length $Module );
+            my $Installed      = $PerlInfo{Modules}->{$Module};
+            my $SpaceInstalled = ' ' x ( 14 - length $Installed );
+
+            $Self->Print( $Module . $Space . $Installed . $SpaceInstalled );
+
+            my $URL       = sprintf "https://fastapi.metacpan.org/v1/download_url/%s", $Module;
+            my $Available = `wget -q -O - $URL | grep version | cut -d '"' -f4`;
+
+            $Available ||= '0';
+            my $Color    = $Available > $Installed ? 'yellow' : 'green';
+
+            $Self->Print( "<$Color>$Available</$Color>" );
+        }
     }
     elsif ( $Mode eq 'development' ) {
 
