@@ -74,13 +74,13 @@ sub CheckPreviousRequirement {
         return;
     }
 
-    if ( $ProductName ne 'OTRS' ) {
-        print "    Error:    No OTRS system found.\n";
+    if ( $ProductName !~ m{\AZnuny} ) {
+        print "    Error:    No Znuny system found.\n";
         return;
     }
     if ( $Version !~ /^6\.0(.*)$/ ) {
 
-        print "\n    Error: You are trying to run this script on the wrong framework version $Version!\n";
+        print "\n    Error: You are trying to run this script on the wrong Znuny version $Version!\n";
         return;
     }
 
