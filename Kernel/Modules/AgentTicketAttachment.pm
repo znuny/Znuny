@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -97,9 +98,9 @@ sub Run {
     # find viewer for ContentType
     my $Viewer = '';
     if ( $Viewers && $ConfigObject->Get('MIME-Viewer') ) {
-        for ( sort keys %{ $ConfigObject->Get('MIME-Viewer') } ) {
-            if ( $Data{ContentType} =~ /^$_/i ) {
-                $Viewer = $ConfigObject->Get('MIME-Viewer')->{$_};
+        for my $Key ( sort keys %{ $ConfigObject->Get('MIME-Viewer') } ) {
+            if ( $Data{ContentType} =~ /^$Key/i ) {
+                $Viewer = $ConfigObject->Get('MIME-Viewer')->{$Key};
                 $Viewer =~ s/\<OTRS_CONFIG_(.+?)\>/$ConfigObject->{$1}/g;
             }
         }

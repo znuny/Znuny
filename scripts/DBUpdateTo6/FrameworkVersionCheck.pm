@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -73,13 +74,13 @@ sub CheckPreviousRequirement {
         return;
     }
 
-    if ( $ProductName ne 'OTRS' ) {
-        print "    Error:    No OTRS system found.\n";
+    if ( $ProductName !~ m{\AZnuny} ) {
+        print "    Error:    No Znuny system found.\n";
         return;
     }
     if ( $Version !~ /^6\.0(.*)$/ ) {
 
-        print "\n    Error: You are trying to run this script on the wrong framework version $Version!\n";
+        print "\n    Error: You are trying to run this script on the wrong Znuny version $Version!\n";
         return;
     }
 
