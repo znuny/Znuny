@@ -66,16 +66,17 @@ sub find {
     #                           did not include SMTP Reply Code value
     # @since v4.14.0
     my $class = shift;
-    my $argv1 = shift || return '';
+    my $argv1 = shift || return undef;
+    return '' if uc($argv1) =~ /X-UNIX;/;
+
     my $value = '';
-    my $ip4re = qr{\b
+    state $ip4re = qr{\b
         (?:\d|[01]?\d\d|2[0-4]\d|25[0-5])[.]
         (?:\d|[01]?\d\d|2[0-4]\d|25[0-5])[.]
         (?:\d|[01]?\d\d|2[0-4]\d|25[0-5])[.]
         (?:\d|[01]?\d\d|2[0-4]\d|25[0-5])
     \b}x;
 
-    return '' if uc($argv1) =~ /X-UNIX;/;
 
     # Convert found IPv4 addresses to '***.***.***.***' to avoid that the
     # following code detects an octet of the IPv4 adress as an SMTP reply
@@ -101,7 +102,7 @@ Sisimai::SMTP::Reply - SMTP reply code related class
 =head1 SYNOPSIS
 
     use Sisimai::SMTP::Reply;
-    print Sisimai::SMTP::Rely->find('550 5.1.1 Unknown user');  # 550
+    print Sisimai::SMTP::Reply->find('550 5.1.1 Unknown user');  # 550
 
 =head1 DESCRIPTION
 
@@ -124,7 +125,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2015-2016,2018 azumakuniyuki, All rights reserved.
+Copyright (C) 2015-2016,2018,2020 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

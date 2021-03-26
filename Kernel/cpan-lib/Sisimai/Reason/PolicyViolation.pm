@@ -13,25 +13,32 @@ sub match {
     # @since v4.22.0
     my $class = shift;
     my $argv1 = shift // return undef;
-    my $index = [
+
+    state $index = [
+        'an illegal attachment on your message',
         'because the recipient is not accepting mail with ',    # AOL Phoenix
+        'by non-member to a members-only list',
         'closed mailing list',
         'denied by policy',
+        'dmarc policy',
         'email not accepted for policy reasons',
         # http://kb.mimecast.com/Mimecast_Knowledge_Base/Administration_Console/Monitoring/Mimecast_SMTP_Error_Codes#554
         'email rejected due to security policies',
         'header are not accepted',
         'header error',
+        'local policy violation',
+        'message bounced due to organizational settings',
         'message given low priority',
         'message not accepted for policy reasons',
         'messages with multiple addresses',
         'rejected for policy reasons',
         'protocol violation',
         'the email address used to send your message is not subscribed to this group',
+        'this message was blocked because its content presents a potential',
+        'we do not accept messages containing images or other attachments',
         'you have exceeded the allowable number of posts without solving a captcha',
         'you have exceeded the the allowable number of posts without solving a captcha',
     ];
-
     return 1 if grep { rindex($argv1, $_) > -1 } @$index;
     return 0;
 }
@@ -70,9 +77,10 @@ When a header content or a format of the original message violates security poli
 or multiple addresses exist in the From: header, Sisimai will set C<policyviolation>.
 
     Action: failed
-    Status: 5.7.9
-    Remote-MTA: DNS; mx.example.co.jp
-    Diagnostic-Code: SMTP; 554 5.7.9 Header error
+    Status: 5.7.0
+    Remote-MTA: DNS; gmail-smtp-in.l.google.com
+    Diagnostic-Code: SMTP; 552-5.7.0 Our system detected an illegal attachment on your message. Please
+    Last-Attempt-Date: Tue, 28 Apr 2009 11:02:45 +0900 (JST)
 
 =head1 CLASS METHODS
 
@@ -99,7 +107,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2017-2018 azumakuniyuki, All rights reserved.
+Copyright (C) 2017-2021 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

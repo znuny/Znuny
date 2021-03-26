@@ -33,7 +33,7 @@ begins with "2" like following:
     Action: deliverable
     Status: 2.1.5
     Diagnostic-Code: SMTP; 250 2.1.5 OK
-    
+
 This class is called only Sisimai->reason method. This is NOT AN ERROR reason.
 
 =head1 CLASS METHODS
