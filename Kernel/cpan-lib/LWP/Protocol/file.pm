@@ -1,8 +1,10 @@
 package LWP::Protocol::file;
-$LWP::Protocol::file::VERSION = '6.26';
+
 use base qw(LWP::Protocol);
 
 use strict;
+
+our $VERSION = '6.53';
 
 require LWP::MediaTypes;
 require HTTP::Request;
@@ -126,17 +128,17 @@ sub request
 
     # read the file
     if ($method ne "HEAD") {
-	open(F, $path) or return new
+	open(my $fh, '<', $path) or return new
 	    HTTP::Response(HTTP::Status::RC_INTERNAL_SERVER_ERROR,
 			   "Cannot read file '$path': $!");
-	binmode(F);
+	binmode($fh);
 	$response =  $self->collect($arg, $response, sub {
 	    my $content = "";
-	    my $bytes = sysread(F, $content, $size);
+	    my $bytes = sysread($fh, $content, $size);
 	    return \$content if $bytes > 0;
 	    return \ "";
 	});
-	close(F);
+	close($fh);
     }
 
     $response;

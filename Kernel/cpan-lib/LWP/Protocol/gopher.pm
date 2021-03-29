@@ -1,5 +1,5 @@
 package LWP::Protocol::gopher;
-$LWP::Protocol::gopher::VERSION = '6.26';
+
 # Implementation of the gopher protocol (RFC 1436)
 #
 # This code is based on 'wwwgopher.pl,v 0.10 1994/10/17 18:12:34 shelden'
@@ -8,6 +8,8 @@ $LWP::Protocol::gopher::VERSION = '6.26';
 # including contributions from Marc van Heyningen and Martijn Koster.
 
 use strict;
+
+our $VERSION = '6.53';
 
 require HTTP::Response;
 require HTTP::Status;
@@ -185,7 +187,7 @@ sub gopher2url
 sub menu2html {
     my($menu) = @_;
 
-    $menu =~ s/\015//g;  # remove carriage return
+    $menu =~ tr/\015//d;  # remove carriage return
     my $tmp = <<"EOT";
 <HTML>
 <HEAD>
