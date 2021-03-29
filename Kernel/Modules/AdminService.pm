@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -60,8 +61,8 @@ sub Run {
 
         # get params
         my %GetParam;
-        for (qw(ServiceID ParentID Name ValidID Comment)) {
-            $GetParam{$_} = $ParamObject->GetParam( Param => $_ ) || '';
+        for my $Needed (qw(ServiceID ParentID Name ValidID Comment)) {
+            $GetParam{$Needed} = $ParamObject->GetParam( Param => $Needed ) || '';
         }
 
         my %Error;

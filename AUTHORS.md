@@ -9,6 +9,7 @@ The following persons contributed to OTRS:
 * Balázs Úr <balazs.ur@otrs.com>
 * Balázs Úr <urbalazs@gmail.com>
 * Belnet <info@belnet.be>
+* Bernhard Schmalhofer <Bernhard.Schmalhofer@gmx.de>
 * Bernhard Schmalhofer <bernhard.schmalhofer@otrs.com>
 * Bodo Bauer <bodo.bauer@otrs.com>
 * Burchard Steinbild <burchard.steinbild@otrs.com>
@@ -23,6 +24,7 @@ The following persons contributed to OTRS:
 * David Crimi <deathpoison.dc@gmail.com>
 * Denis Nelubin <dnelubin@gmail.com>
 * Dennis Schmelter <dennis.schmelter@otrs.com>
+* Denny Korsukéwitz <dennykorsukewitz@gmail.com>
 * Denny Korsukéwitz <dk@znuny.com>
 * Diego Selzlein <diegoselzlein@gmail.com>
 * Dietmar Berg <dietmar.berg@thalesgroup.com>
@@ -93,6 +95,7 @@ The following persons contributed to OTRS:
 * Rolf Schmidt <rolf.schmidt@otrs.com>
 * Romain THERRAT <romain42@gmail.com>
 * Roy Kaldung <rk@znuny.com>
+* Roy Kaldung <roy@kaldung.com>
 * Rui Patinha <rui.patinha@otrs.com>
 * Sanjin Vik <scik@s7designcreative.com>
 * Sanjin Vik <svik@s7designcrative.com>

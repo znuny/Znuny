@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -32,11 +33,11 @@ sub Connect {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Login Password Host Timeout Debug)) {
-        if ( !defined $Param{$_} ) {
+    for my $Needed (qw(Login Password Host Timeout Debug)) {
+        if ( !defined $Param{$Needed} ) {
             return (
                 Successful => 0,
-                Message    => "Need $_!",
+                Message    => "Need $Needed!",
             );
         }
     }

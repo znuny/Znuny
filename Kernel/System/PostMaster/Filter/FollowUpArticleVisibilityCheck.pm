@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -41,13 +42,13 @@ sub Run {
     return 1 if !$Param{TicketID};
 
     # check needed stuff
-    for (qw(JobConfig GetParam UserID)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(JobConfig GetParam UserID)) {
+        if ( !$Param{$Needed} ) {
             $Self->{CommunicationLogObject}->ObjectLog(
                 ObjectLogType => 'Message',
                 Priority      => 'Error',
                 Key           => 'Kernel::System::PostMaster::Filter::FollowUpArticleVisibilityCheck',
-                Value         => "Need $_!",
+                Value         => "Need $Needed!",
             );
             return;
         }

@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -181,11 +182,11 @@ The returned hash %Result has the following keys:
 sub Decrypt {
     my ( $Self, %Param ) = @_;
 
-    for (qw(Message)) {
-        if ( !defined( $Param{$_} ) ) {
+    for my $Needed (qw(Message)) {
+        if ( !defined( $Param{$Needed} ) ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -234,11 +235,11 @@ sign a message
 sub Sign {
     my ( $Self, %Param ) = @_;
 
-    for (qw(Message Key)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(Message Key)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -998,11 +999,11 @@ sub _Init {
 sub _DecryptPart {
     my ( $Self, %Param ) = @_;
 
-    for (qw(Key Password Filename)) {
-        if ( !defined( $Param{$_} ) ) {
+    for my $Needed (qw(Key Password Filename)) {
+        if ( !defined( $Param{$Needed} ) ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -1075,11 +1076,11 @@ Clean and build the log
 sub _HandleLog {
     my ( $Self, %Param ) = @_;
 
-    for (qw(LogString)) {
-        if ( !defined( $Param{$_} ) ) {
+    for my $Needed (qw(LogString)) {
+        if ( !defined( $Param{$Needed} ) ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }

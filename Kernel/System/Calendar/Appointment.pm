@@ -6,6 +6,7 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::CodeStyle::DollarUnderscore)
 
 package Kernel::System::Calendar::Appointment;
 
@@ -2278,7 +2279,7 @@ sub _AppointmentRecurringCreate {
     elsif ( $Param{Appointment}->{RecurrenceCount} ) {
 
         COUNT:
-        for ( 1 .. $Param{Appointment}->{RecurrenceCount} - 1 ) {
+        for my $Count ( 1 .. $Param{Appointment}->{RecurrenceCount} - 1 ) {
             $Step += $Param{Appointment}->{RecurrenceInterval};
 
             # calculate recurring times
