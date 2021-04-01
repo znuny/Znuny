@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2012-2021 Znuny GmbH, http://znuny.com/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -27,6 +28,27 @@ $Kernel::OM->ObjectParamAdd(
     },
 );
 my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+
+# Disable connecting external RSS during test.
+$Helper->ConfigSettingChange(
+    Valid => 1,
+    Key   => 'DashboardBackend',
+    Value => {
+        '0442-RSS' => {
+            'Block' => 'ContentSmall',
+            'CacheTTL' => '360',
+            'Default' => '1',
+            'Description' => '',
+            'Group' => '',
+            'Limit' => '6',
+            'Mandatory' => '0',
+            'Module' => 'Kernel::Output::HTML::Dashboard::RSS',
+            'Title' => 'News',
+            'URL' => 'http://127.0.0.1/public/rss/en/rss.xml',
+            'URL_de' => 'http://127.0.0.1/public/rss/de/rss.xml'
+        },
+    },
+);
 
 my $TestUserLogin         = $Helper->TestUserCreate();
 my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate();
