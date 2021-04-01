@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -913,11 +914,11 @@ sub GetReferences {
     # get uniq
     my %Checked;
     my @References;
-    for ( reverse @ReferencesAll ) {
-        if ( !$Checked{$_} ) {
-            push @References, $_;
+    for my $Reference ( reverse @ReferencesAll ) {
+        if ( !$Checked{$Reference} ) {
+            push @References, $Reference;
         }
-        $Checked{$_} = 1;
+        $Checked{$Reference} = 1;
     }
     return @References;
 }

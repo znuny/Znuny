@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -1450,8 +1451,8 @@ sub Run {
                 my %AllStdAttachments = $StdAttachmentObject->StdAttachmentStandardTemplateMemberList(
                     StandardTemplateID => $GetParam{StandardTemplateID},
                 );
-                for ( sort keys %AllStdAttachments ) {
-                    my %AttachmentsData = $StdAttachmentObject->StdAttachmentGet( ID => $_ );
+                for my $ID ( sort keys %AllStdAttachments ) {
+                    my %AttachmentsData = $StdAttachmentObject->StdAttachmentGet( ID => $ID );
                     $UploadCacheObject->FormIDAddFile(
                         FormID      => $Self->{FormID},
                         Disposition => 'attachment',
@@ -2982,10 +2983,10 @@ sub _GetQuotedReplyBody {
                         ": $Param{CreateTime}<br/>" . $Param{Body};
                 }
 
-                for (qw(Subject ReplyTo Reply-To Cc To From)) {
-                    if ( $Param{$_} ) {
-                        $Param{Body} = $LayoutObject->{LanguageObject}->Translate($_) .
-                            ": $Param{$_}<br/>" . $Param{Body};
+                for my $Key (qw(Subject ReplyTo Reply-To Cc To From)) {
+                    if ( $Param{$Key} ) {
+                        $Param{Body} = $LayoutObject->{LanguageObject}->Translate($Key) .
+                            ": $Param{$Key}<br/>" . $Param{Body};
                     }
                 }
 
@@ -3027,10 +3028,10 @@ sub _GetQuotedReplyBody {
                         ": $Param{CreateTime}\n" . $Param{Body};
                 }
 
-                for (qw(Subject ReplyTo Reply-To Cc To From)) {
-                    if ( $Param{$_} ) {
-                        $Param{Body} = $LayoutObject->{LanguageObject}->Translate($_) .
-                            ": $Param{$_}\n" . $Param{Body};
+                for my $Key (qw(Subject ReplyTo Reply-To Cc To From)) {
+                    if ( $Param{$Key} ) {
+                        $Param{Body} = $LayoutObject->{LanguageObject}->Translate($Key) .
+                            ": $Param{$Key}\n" . $Param{Body};
                     }
                 }
 

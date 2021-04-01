@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -93,11 +94,11 @@ sub Read {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Filename Mode)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(Filename Mode)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -177,11 +178,11 @@ sub Write {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Filename Content Mode)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(Filename Content Mode)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -259,11 +260,11 @@ sub Delete {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Filename)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(Filename)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }

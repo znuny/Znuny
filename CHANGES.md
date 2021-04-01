@@ -1,15 +1,24 @@
+# 6.0.34 2021-xx-xx
+ - 2021-03-18 Added HTML filter to output of localized date/time data which does not explicitly contain date/time values.
+ - 2021-03-18 Limited evaluation of ticket column data as date/time to specific date/time string format in Kernel/Output/HTML/TicketOverview/Small.pm.
+ - 2021-03-16 Remove duplicated code. Thanks to Renée Bäcker (@reneeb). [#33](https://github.com/znuny/Znuny/pull/33)
+ - 2021-03-16 Fix minor syntax issues: replace ',' with ';'. Thanks to Renée Bäcker (@reneeb). [#32](https://github.com/znuny/Znuny/pull/32)
+ - 2021-03-16 Fixed bug#[14622](https://bugs.otrs.org/show_bug.cgi?id=14622) - Wrong navigation group for Frontend::Module###AdminAppointmentImport and Frontend::NavBarModule###2-AdminFavourites admin modules
+ - 2021-03-15 Created missing symlink for deployment - fixed. [#30](https://github.com/znuny/Znuny/issues/30) [#31](https://github.com/znuny/Znuny/pull/31)
+ - 2021-03-15 Fix link to admin manual (shown in Admin area). Thanks to Renée Bäcker (@reneeb). [#18](https://github.com/znuny/Znuny/pull/18)
+
 # 6.0.33 2021-03-10
  - 2021-04-01 Disable connecting external RSS during unit testing.
  - 2021-03-02 Limited match for subdomain to 255 characters in Kernel::Output::HTML::FilterText::URL because of runtime issues.
  - 2021-02-24 Moved 'AdminSupportDataCollector' to 'Administration' in Admin.
- - 2021-02-22 Fixed article limit in generic interface operation TicketGet. Thanks to Renée Bäcker (@reneeb).
+ - 2021-02-22 Fixed article limit in generic interface operation TicketGet. Thanks to Renée Bäcker (@reneeb). [#16](https://github.com/znuny/Znuny/issues/16) [#17](https://github.com/znuny/Znuny/pull/17)
  - 2021-02-15 Leading and trailing white space in names of uploaded files will now be removed. This prevents non-working attachment download links.
  - 2021-02-12 Fixed output of customer (user) dynamic field labels and values in PDF.
  - 2021-02-11 Removed unused SysConfig options Ticket::Frontend::AgentTicketStatusView###ViewableTicketsPage and Ticket::Frontend::AgentTicketEscalationView###ViewableTicketsPage. Thanks to Bernhard Schmalhofer (@bschmalhofer).
- - 2021-02-11 Updated to JavaScript::Minifier 1.15. Enabled automatic utilization of JavaScript::Minifier::XS if available. Thanks to Fedor A. Fetisov (@faf), @zoffixznet and Yuri Myasoedov (@ymyasoedov). See https://github.com/znuny/Znuny/issues/6.
+ - 2021-02-11 Updated to JavaScript::Minifier 1.15. Enabled automatic utilization of JavaScript::Minifier::XS if available. Thanks to Fedor A. Fetisov (@faf), @zoffixznet and Yuri Myasoedov (@ymyasoedov). [#6](https://github.com/znuny/Znuny/issues/6)
  - 2020-02-11 Enabled automatic utilization of CSS::Minifier::XS if available.
  - 2020-02-11 Fixed return value format of user search. Thanks to Nicola Cordioli (@niccord).
- - 2020-02-10 Fixed bug in _UserCacheClear in Kernel::System::User. Thanks to Yuri Myasoedov (@ymyasoedov) See https://github.com/znuny/Znuny/pull/1
+ - 2020-02-10 Fixed bug in `_UserCacheClear` in Kernel::System::User. Thanks to Yuri Myasoedov (@ymyasoedov). [#1](https://github.com/znuny/Znuny/pull/1)
 
 # 6.0.32 2021-01-29
  - 2021-01-29 Updated CKEditor to version 4.16.0.
