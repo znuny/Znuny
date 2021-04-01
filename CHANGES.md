@@ -1,4 +1,5 @@
 # 6.0.34 2021-xx-xx
+ - 2021-04-01 Disable connecting external RSS service during unit testing.
  - 2021-03-18 Added HTML filter to output of localized date/time data which does not explicitly contain date/time values.
  - 2021-03-18 Limited evaluation of ticket column data as date/time to specific date/time string format in Kernel/Output/HTML/TicketOverview/Small.pm.
  - 2021-03-16 Remove duplicated code. Thanks to Renée Bäcker (@reneeb). [#33](https://github.com/znuny/Znuny/pull/33)
@@ -8,7 +9,6 @@
  - 2021-03-15 Fix link to admin manual (shown in Admin area). Thanks to Renée Bäcker (@reneeb). [#18](https://github.com/znuny/Znuny/pull/18)
 
 # 6.0.33 2021-03-10
- - 2021-04-01 Disable connecting external RSS during unit testing.
  - 2021-03-02 Limited match for subdomain to 255 characters in Kernel::Output::HTML::FilterText::URL because of runtime issues.
  - 2021-02-24 Moved 'AdminSupportDataCollector' to 'Administration' in Admin.
  - 2021-02-22 Fixed article limit in generic interface operation TicketGet. Thanks to Renée Bäcker (@reneeb). [#16](https://github.com/znuny/Znuny/issues/16) [#17](https://github.com/znuny/Znuny/pull/17)
