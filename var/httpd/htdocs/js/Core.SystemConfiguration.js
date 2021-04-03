@@ -189,7 +189,11 @@ var Core = Core || {};
         }
 
         $('#ConfigTree').on('click', '.OpenNodeInNewWindow', function(Event) {
-            window.open(Core.Config.Get('CGIHandle') + '?Action=AdminSystemConfigurationGroup;RootNavigation=' + $(this).data('node'), '_blank');
+            var Session = '';
+            if (!Core.Config.Get('SessionIDCookie')) {
+                Session = ';' + encodeURIComponent(Core.Config.Get('SessionName')) + '=' + encodeURIComponent(Core.Config.Get('SessionID'));
+            }
+            window.open(Core.Config.Get('CGIHandle') + '?Action=AdminSystemConfigurationGroup;RootNavigation=' + $(this).data('node') + Session, '_blank');
             Event.preventDefault;
             return false;
         });
@@ -1617,11 +1621,16 @@ var Core = Core || {};
         $('ul.BreadCrumb li:nth-child(2)').nextAll().remove();
         BreadCrumbItems = Selected.split("::");
 
+        var Session = '';
+        if (!Core.Config.Get('SessionIDCookie')) {
+            Session = ';' + encodeURIComponent(Core.Config.Get('SessionName')) + '=' + encodeURIComponent(Core.Config.Get('SessionID'));
+        }
+
         if (Core.Config.Get('Action') == 'AgentPreferences') {
-            URL += "?Action=AgentPreferences;Subaction=Group;Group=Advanced;RootNavigation=";
+            URL += "?Action=AgentPreferences;Subaction=Group;Group=Advanced" + Session + ";RootNavigation=";
         }
         else {
-            URL += "?Action=AdminSystemConfigurationGroup;RootNavigation=";
+            URL += "?Action=AdminSystemConfigurationGroup" + Session + ";RootNavigation=";
         }
         for (Index in BreadCrumbItems) {
             if (Index != 0) {

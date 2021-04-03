@@ -507,19 +507,27 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
             }
         });
 
+        var Session = {};
+        if (!Core.Config.Get('SessionIDCookie')) {
+            Session[Core.Config.Get('SessionName')] = Core.Config.Get('SessionID');
+        }
+
         $.each(CalendarConfig, function (Index, Calendar) {
             CalendarSources[Calendar.CalendarID] = {
                 id: Calendar.CalendarID,
                 url: Core.Config.Get('CGIHandle'),
                 type: 'POST',
-                data: {
-                    ChallengeToken: $("#ChallengeToken").val(),
-                    Action: 'AgentAppointmentList',
-                    Subaction: 'ListAppointments',
-                    CalendarID: Calendar.CalendarID,
-                    ResourceID: Core.Config.Get('ResourceID'),
-                    TeamID: Core.Config.Get('TeamID')
-                },
+                data: $.extend( false,
+                    {
+                        ChallengeToken: $("#ChallengeToken").val(),
+                        Action: 'AgentAppointmentList',
+                        Subaction: 'ListAppointments',
+                        CalendarID: Calendar.CalendarID,
+                        ResourceID: Core.Config.Get('ResourceID'),
+                        TeamID: Core.Config.Get('TeamID')
+                    },
+                    Session
+                ),
                 color: Calendar.Color,
                 textColor: Calendar.TextColor,
                 borderColor: 'rgba(0, 0, 0, 0.2)',
