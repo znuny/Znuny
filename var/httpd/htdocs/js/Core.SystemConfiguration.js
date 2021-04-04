@@ -1,5 +1,6 @@
 // --
 // Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+// Copyright (C) 2021 maxence GmbH, https://maxence.de/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -169,11 +170,12 @@ var Core = Core || {};
     TargetNS.InitConfigurationTree = function(RedirectAction, Category, UserModificationActive) {
 
         var Data = {
-            Action    : 'AdminSystemConfiguration',
-            Subaction : 'AJAXNavigationTree',
-            Category  : Category || $('#Category').val(),
-            UserModificationActive : UserModificationActive
-        };
+                Action    : 'AdminSystemConfiguration',
+                Subaction : 'AJAXNavigationTree',
+                Category  : Category || $('#Category').val(),
+                UserModificationActive : UserModificationActive
+            },
+            Session = '';
 
         if (Core.Config.Get('Action') == 'AgentPreferences') {
             Data.Action = 'AgentPreferences';
@@ -189,7 +191,6 @@ var Core = Core || {};
         }
 
         $('#ConfigTree').on('click', '.OpenNodeInNewWindow', function(Event) {
-            var Session = '';
             if (!Core.Config.Get('SessionIDCookie')) {
                 Session = ';' + encodeURIComponent(Core.Config.Get('SessionName')) + '=' + encodeURIComponent(Core.Config.Get('SessionID'));
             }
@@ -1613,18 +1614,18 @@ var Core = Core || {};
             BreadCrumbItems,
             ListItem,
             URL = Core.Config.Get('CGIHandle'),
-            Index;
+            Index,
+            Session = '';
+
+        if (!Core.Config.Get('SessionIDCookie')) {
+            Session = ';' + encodeURIComponent(Core.Config.Get('SessionName')) + '=' + encodeURIComponent(Core.Config.Get('SessionID'));
+        }
 
         $('.ContentColumn').html(Core.Template.Render("Agent/WidgetLoading"));
 
         // Update BreadCrumb
         $('ul.BreadCrumb li:nth-child(2)').nextAll().remove();
         BreadCrumbItems = Selected.split("::");
-
-        var Session = '';
-        if (!Core.Config.Get('SessionIDCookie')) {
-            Session = ';' + encodeURIComponent(Core.Config.Get('SessionName')) + '=' + encodeURIComponent(Core.Config.Get('SessionID'));
-        }
 
         if (Core.Config.Get('Action') == 'AgentPreferences') {
             URL += "?Action=AgentPreferences;Subaction=Group;Group=Advanced" + Session + ";RootNavigation=";

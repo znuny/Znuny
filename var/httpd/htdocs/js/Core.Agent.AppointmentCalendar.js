@@ -1,5 +1,6 @@
 // --
 // Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+// Copyright (C) 2021 maxence GmbH, https://maxence.de/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -41,7 +42,8 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
             $CalendarObj = $('#calendar'),
             $DatepickerObj,
             ClipboardJS,
-            CurrentAppointment = [];
+            CurrentAppointment = [],
+            Session = {};
 
         if (Core.Config.Get('Action') == 'AgentAppointmentAgendaOverview') {
             TargetNS.AgentAppointmentAgendaOverview();
@@ -507,7 +509,6 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
             }
         });
 
-        var Session = {};
         if (!Core.Config.Get('SessionIDCookie')) {
             Session[Core.Config.Get('SessionName')] = Core.Config.Get('SessionID');
         }
@@ -517,7 +518,7 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                 id: Calendar.CalendarID,
                 url: Core.Config.Get('CGIHandle'),
                 type: 'POST',
-                data: $.extend( false,
+                data: $.extend(false,
                     {
                         ChallengeToken: $("#ChallengeToken").val(),
                         Action: 'AgentAppointmentList',

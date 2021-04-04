@@ -1,5 +1,6 @@
 // --
 // Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+// Copyright (C) 2021 maxence GmbH, https://maxence.de/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -74,7 +75,8 @@ Core.Agent.Admin.CommunicationLog = (function (TargetNS) {
             LogEntryCount,
             ObjectSelected,
             ObjectIdElement,
-            AccountID = Core.Config.Get('AccountID');
+            AccountID = Core.Config.Get('AccountID'),
+            Session = {};
 
         TargetNS.ShowContextSettingsDialog();
 
@@ -94,7 +96,6 @@ Core.Agent.Admin.CommunicationLog = (function (TargetNS) {
         Core.UI.Table.Sort.Init($('#AccountsTable'));
         Core.UI.Table.Sort.Init($('#CommunicationLogListTable'));
 
-        var Session = {};
         if (!Core.Config.Get('SessionIDCookie')) {
             Session[Core.Config.Get('SessionName')] = Core.Config.Get('SessionID');
         }
@@ -103,7 +104,7 @@ Core.Agent.Admin.CommunicationLog = (function (TargetNS) {
         $('#TimeRange').off('change.TimeRange').on('change.TimeRange', function () {
 
             URL = Core.Config.Get('Baselink');
-            URL += SerializeData($.extend( false,
+            URL += SerializeData($.extend(false,
                 {
                     Action: 'AdminCommunicationLog',
                     StartTime: $('#TimeRange').val(),
@@ -118,7 +119,7 @@ Core.Agent.Admin.CommunicationLog = (function (TargetNS) {
         $('#TimeRangeAccounts').off('change.TimeRangeAccounts').on('change.TimeRangeAccounts', function () {
 
             URL = Core.Config.Get('Baselink');
-            URL += SerializeData($.extend( false,
+            URL += SerializeData($.extend(false,
                 {
                     Action: 'AdminCommunicationLog',
                     Subaction: 'Accounts',
@@ -133,7 +134,7 @@ Core.Agent.Admin.CommunicationLog = (function (TargetNS) {
         $('#PriorityFilter').off('change.PriorityFilter').on('change.PriorityFilter', function () {
 
             URL = Core.Config.Get('Baselink');
-            URL += SerializeData($.extend( false,
+            URL += SerializeData($.extend(false,
                 {
                     Action: 'AdminCommunicationLog',
                     Subaction: 'Zoom',
