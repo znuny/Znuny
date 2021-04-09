@@ -1,4 +1,5 @@
 # 6.0.33 2021-03-10
+ - 2021-04-09 Tasks that communicate with external services disabled by default.
  - 2021-03-02 Limited match for subdomain to 255 characters in Kernel::Output::HTML::FilterText::URL because of runtime issues.
  - 2021-02-24 Moved 'AdminSupportDataCollector' to 'Administration' in Admin.
  - 2021-02-22 Fixed article limit in generic interface operation TicketGet. Thanks to Renée Bäcker (@reneeb).
