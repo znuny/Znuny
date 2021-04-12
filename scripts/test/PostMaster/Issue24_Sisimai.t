@@ -1,9 +1,10 @@
 # --
 # Copyright (C) 2021 Perl-Services.de
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
-# This software comes with ABSOLUTELY NO WARRANTY.
-# It is licensed under GNU AFFERO GENERAL PUBLIC LICENSE (AGPL),
-# see https://www.gnu.org/licenses/agpl-3.0.txt.
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 #
 
 use strict;
@@ -14,7 +15,6 @@ use vars (qw($Self));
 
 use Kernel::System::PostMaster;
 
-# get helper object
 $Kernel::OM->ObjectParamAdd(
     'Kernel::System::UnitTest::Helper' => {
         RestoreDatabase  => 1,
@@ -26,12 +26,11 @@ my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-# Disable emails validation.
-$Kernel::OM->Get('Kernel::Config')->Set(
+# Disable email address validation.
+$ConfigObject->Set(
     Key   => 'CheckEmailAddresses',
     Value => 0,
 );
-
 
 # Read email content (from a file).
 my $Email = $MainObject->FileRead(
@@ -40,7 +39,6 @@ my $Email = $MainObject->FileRead(
     # Type            => 'Attachment',
     Result => 'ARRAY',
 );
-
 
 my $CommunicationLogObject = $Kernel::OM->Create(
     'Kernel::System::CommunicationLog',
@@ -60,7 +58,7 @@ my $PostMasterObject = Kernel::System::PostMaster->new(
 my ( $ReturnCode, $TicketID ) = $PostMasterObject->Run();
 
 $Self->True( $ReturnCode, 'Check return code' );
-$Self->True( $TicketID, 'Check if ticket was created' );
+$Self->True( $TicketID,   'Check if ticket was created' );
 
 $CommunicationLogObject->ObjectLogStop(
     ObjectLogType => 'Message',
@@ -69,8 +67,5 @@ $CommunicationLogObject->ObjectLogStop(
 $CommunicationLogObject->CommunicationStop(
     Status => 'Successful',
 );
-
-
-# cleanup is done by RestoreDatabase.
 
 1;
