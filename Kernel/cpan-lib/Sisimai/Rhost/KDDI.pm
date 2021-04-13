@@ -3,11 +3,6 @@ use feature ':5.10';
 use strict;
 use warnings;
 
-my $MessagesOf = {
-    'filtered'    => '550 : User unknown',  # The response was: 550 : User unknown
-    'userunknown' => '>: User unknown',     # The response was: 550 <...>: User unknown
-};
-
 sub get {
     # Detect bounce reason from au(KDDI)
     # @param    [Sisimai::Data] argvs   Parsed email object
@@ -15,12 +10,16 @@ sub get {
     my $class = shift;
     my $argvs = shift // return undef;
 
+    state $messagesof = {
+        'filtered'    => '550 : User unknown',  # The response was: 550 : User unknown
+        'userunknown' => '>: User unknown',     # The response was: 550 <...>: User unknown
+    };
     my $statusmesg = $argvs->diagnosticcode;
     my $reasontext = '';
 
-    for my $e ( keys %$MessagesOf ) {
+    for my $e ( keys %$messagesof ) {
         # Try to match the error message with message patterns defined in $MessagesOf
-        next unless rindex($statusmesg, $MessagesOf->{ $e }) > -1;
+        next unless rindex($statusmesg, $messagesof->{ $e }) > -1;
         $reasontext = $e;
         last;
     }
@@ -59,7 +58,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2018 azumakuniyuki, All rights reserved.
+Copyright (C) 2018,2020 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

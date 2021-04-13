@@ -1,5 +1,9 @@
 # 6.0.34 2021-xx-xx
- - 2021-04-01 Disable connecting external RSS service during unit testing.
+ - 2021-04-13 Fix visual minor - missing spacing when adding new values. Thanks to maxence (@tipue-dev) [#52](https://github.com/znuny/Znuny/pull/52)
+ - 2021-04-13 Fix URL to product in HTTP Headers. Thanks to Renée Bäcker (@reneeb) [#42](https://github.com/znuny/Znuny/pull/42)
+ - 2021-04-13 Update CPAN module Sisimai. Thanks to Renée Bäcker (@reneeb) [#37](https://github.com/znuny/Znuny/pull/37)
+ - 2021-04-13 Update libwww-perl (LWP::UserAgent et al). Thanks to Renée Bäcker (@reneeb) [#40](https://github.com/znuny/Znuny/pull/40)
+ - 2021-04-13 Update cpan-lib LWP::Protocol::https. Thanks to Renée Bäcker (@reneeb) [#39](https://github.com/znuny/Znuny/pull/39)
  - 2021-03-18 Added HTML filter to output of localized date/time data which does not explicitly contain date/time values.
  - 2021-03-18 Limited evaluation of ticket column data as date/time to specific date/time string format in Kernel/Output/HTML/TicketOverview/Small.pm.
  - 2021-03-16 Remove duplicated code. Thanks to Renée Bäcker (@reneeb). [#33](https://github.com/znuny/Znuny/pull/33)

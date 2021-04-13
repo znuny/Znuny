@@ -134,4 +134,5 @@ The following persons contributed to OTRS:
 * reneeb <reb@perl-services.de>
 * s7design <otrs@s7designcreative.com>
 * sergot <filip@sergot.pl>
+* tipue <80031303+tipue-dev@users.noreply.github.com>
 * vlascoder <vlascoder@gmail.com>

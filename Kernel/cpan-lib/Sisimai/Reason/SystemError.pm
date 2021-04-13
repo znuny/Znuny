@@ -13,7 +13,9 @@ sub match {
     # @since v4.0.0
     my $class = shift;
     my $argv1 = shift // return undef;
-    my $index = [
+
+    state $index = [
+        'aliasing/forwarding loop broken',
         "can't create user output file",
         'could not load drd for domain',
         'internal error reading data',  # Microsoft
@@ -26,13 +28,14 @@ sub match {
         'loop was found in the mail exchanger',
         'loops back to myself',
         'mail system configuration error',
+        'remote server is misconfigured',
         'server configuration error',
         'service currently unavailable',
         'system config error',
         'temporary local problem',
         'timeout waiting for input',
+        'transaction failed',
     ];
-
     return 1 if grep { rindex($argv1, $_) > -1 } @$index;
     return 0;
 }
@@ -68,7 +71,7 @@ This class is called only Sisimai::Reason class.
 This is the error that an email has bounced due to system error on the remote
 host such as LDAP connection failure or other internal system error.
 
-    <kijitora@example.net>: 
+    <kijitora@example.net>:
     Unable to contact LDAP server. (#4.4.3)I'm not going to try again; this
     message has been in the queue too long.
 
@@ -97,7 +100,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2018 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2019,2021 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

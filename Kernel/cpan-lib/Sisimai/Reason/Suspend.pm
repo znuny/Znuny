@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 sub text  { 'suspend' }
-sub description { 'Email rejected due to a recipient account is being suspended' } 
+sub description { 'Email rejected due to a recipient account is being suspended' }
 sub match {
     # Try to match that the given text and regular expressions
     # @param    [String] argv1  String to be matched with regular expressions
@@ -13,27 +13,30 @@ sub match {
     # @since v4.0.0
     my $class = shift;
     my $argv1 = shift // return undef;
-    my $index = [
+
+    state $index = [
         ' is currently suspended',
         ' temporary locked',
         'boite du destinataire archivee',
         'email account that you tried to reach is disabled',
+        'has been suspended',
         'invalid/inactive user',
         'is a deactivated mailbox', # http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=20022&&no=1000742
         'mailbox currently suspended',
+        'mailbox is frozen',
         'mailbox unavailable or access denied',
         'recipient rejected: temporarily inactive',
         'recipient suspend the service',
         'this account has been disabled or discontinued',
+        'this mailbox is disabled',
         'user suspended',   # http://mail.163.com/help/help_spam_16.htm
         'vdelivermail: account is locked email bounced',
     ];
-
     return 1 if grep { rindex($argv1, $_) > -1 } @$index;
     return 0;
 }
 
-sub true { 
+sub true {
     # The envelope recipient's mailbox is suspended or not
     # @param    [Sisimai::Data] argvs   Object to be detected the reason
     # @return   [Integer]               1: is mailbox suspended
@@ -65,10 +68,10 @@ Sisimai::Reason::Suspend - Bounce reason is C<suspend> or not.
 
 =head1 DESCRIPTION
 
-Sisimai::Reason::Suspend checks the bounce reason is C<suspend> or not. This 
+Sisimai::Reason::Suspend checks the bounce reason is C<suspend> or not. This
 class is called only Sisimai::Reason class.
 
-This is the error that a recipient account is being suspended due to unpaid or 
+This is the error that a recipient account is being suspended due to unpaid or
 other reasons.
 
 =head1 CLASS METHODS
@@ -96,7 +99,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2018 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2019,2021 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

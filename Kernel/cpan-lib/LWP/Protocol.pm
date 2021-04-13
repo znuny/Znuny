@@ -2,7 +2,7 @@ package LWP::Protocol;
 
 use base 'LWP::MemberMixin';
 
-our $VERSION = '6.26';
+our $VERSION = '6.53';
 
 use strict;
 use Carp ();
@@ -53,7 +53,7 @@ sub implementor
 
     return '' unless $scheme =~ /^([.+\-\w]+)$/;  # check valid URL schemes
     $scheme = $1; # untaint
-    $scheme =~ s/[.+\-]/_/g;  # make it a legal module name
+    $scheme =~ tr/.+-/_/;  # make it a legal module name
 
     # scheme not yet known, look for a 'use'd implementation
     $ic = "LWP::Protocol::$scheme";  # default location
@@ -100,73 +100,81 @@ sub collect
     my $content;
     my($ua, $max_size) = @{$self}{qw(ua max_size)};
 
-    try {
+    # This can't be moved to Try::Tiny due to the closures within causing
+    # leaks on any version of Perl prior to 5.18.
+    # https://perl5.git.perl.org/perl.git/commitdiff/a0d2bbd5c
+    my $error = do { #catch
+        local $@;
         local $\; # protect the print below from surprises
-        if (!defined($arg) || !$response->is_success) {
-            $response->{default_add_content} = 1;
-        }
-        elsif (!ref($arg) && length($arg)) {
-            open(my $fh, ">", $arg) or die "Can't write to '$arg': $!";
-	    binmode($fh);
-            push(@{$response->{handlers}{response_data}}, {
-                callback => sub {
-                    print $fh $_[3] or die "Can't write to '$arg': $!";
-                    1;
-                },
-            });
-            push(@{$response->{handlers}{response_done}}, {
-                callback => sub {
-		    close($fh) or die "Can't write to '$arg': $!";
-		    undef($fh);
-		},
-	    });
-        }
-        elsif (ref($arg) eq 'CODE') {
-            push(@{$response->{handlers}{response_data}}, {
-                callback => sub {
-		    &$arg($_[3], $_[0], $self);
-		    1;
-                },
-            });
-        }
-        else {
-            die "Unexpected collect argument '$arg'";
-        }
+        eval { # try
+            if (!defined($arg) || !$response->is_success) {
+                $response->{default_add_content} = 1;
+            }
+            elsif (!ref($arg) && length($arg)) {
+                open(my $fh, ">", $arg) or die "Can't write to '$arg': $!";
+                binmode($fh);
+                push(@{$response->{handlers}{response_data}}, {
+                    callback => sub {
+                        print $fh $_[3] or die "Can't write to '$arg': $!";
+                        1;
+                    },
+                });
+                push(@{$response->{handlers}{response_done}}, {
+                    callback => sub {
+                        close($fh) or die "Can't write to '$arg': $!";
+                        undef($fh);
+                    },
+                });
+            }
+            elsif (ref($arg) eq 'CODE') {
+                push(@{$response->{handlers}{response_data}}, {
+                    callback => sub {
+                        &$arg($_[3], $_[0], $self);
+                        1;
+                    },
+                });
+            }
+            else {
+                die "Unexpected collect argument '$arg'";
+            }
 
-        $ua->run_handlers("response_header", $response);
+            $ua->run_handlers("response_header", $response);
 
-        if (delete $response->{default_add_content}) {
-            push(@{$response->{handlers}{response_data}}, {
-		callback => sub {
-		    $_[0]->add_content($_[3]);
-		    1;
-		},
-	    });
-        }
+            if (delete $response->{default_add_content}) {
+                push(@{$response->{handlers}{response_data}}, {
+                    callback => sub {
+                        $_[0]->add_content($_[3]);
+                        1;
+                    },
+                });
+            }
 
 
-        my $content_size = 0;
-        my $length = $response->content_length;
-        my %skip_h;
+            my $content_size = 0;
+            my $length = $response->content_length;
+            my %skip_h;
 
-        while ($content = &$collector, length $$content) {
-            for my $h ($ua->handlers("response_data", $response)) {
-                next if $skip_h{$h};
-                unless ($h->{callback}->($response, $ua, $h, $$content)) {
-                    # XXX remove from $response->{handlers}{response_data} if present
-                    $skip_h{$h}++;
+            while ($content = &$collector, length $$content) {
+                for my $h ($ua->handlers("response_data", $response)) {
+                    next if $skip_h{$h};
+                    unless ($h->{callback}->($response, $ua, $h, $$content)) {
+                        # XXX remove from $response->{handlers}{response_data} if present
+                        $skip_h{$h}++;
+                    }
+                }
+                $content_size += length($$content);
+                $ua->progress(($length ? ($content_size / $length) : "tick"), $response);
+                if (defined($max_size) && $content_size > $max_size) {
+                    $response->push_header("Client-Aborted", "max_size");
+                    last;
                 }
             }
-            $content_size += length($$content);
-            $ua->progress(($length ? ($content_size / $length) : "tick"), $response);
-            if (defined($max_size) && $content_size > $max_size) {
-                $response->push_header("Client-Aborted", "max_size");
-                last;
-            }
-        }
-    }
-    catch {
-        my $error = $_;
+            1;
+        };
+        $@;
+    };
+
+    if ($error) {
         chomp($error);
         $response->push_header('X-Died' => $error);
         $response->push_header("Client-Aborted", "die");

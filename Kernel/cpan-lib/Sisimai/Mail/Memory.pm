@@ -2,41 +2,40 @@ package Sisimai::Mail::Memory;
 use feature ':5.10';
 use strict;
 use warnings;
-use Class::Accessor::Lite;
-
-my $roaccessors = [
-    'size',     # [Integer] data size
-];
-my $rwaccessors = [
-    'data',     # [Array] entire bounce mail message
-    'offset',   # [Integer] Index of "data"
-];
-Class::Accessor::Lite->mk_accessors(@$rwaccessors);
-Class::Accessor::Lite->mk_ro_accessors(@$roaccessors);
+use Class::Accessor::Lite (
+    'new' => 0,
+    'ro'  => [
+        'path',     # [String] Fixed string "<MEMORY>"
+        'size',     # [Integer] data size
+    ],
+    'rw'  => [
+        'payload',  # [Array] entire bounce mail message
+        'offset',   # [Integer] Index of "data"
+    ]
+);
 
 sub new {
     # Constructor of Sisimai::Mail::Memory
     # @param    [String] argv1          Entire email string
-    # @return   [Sisimai::Mail::Memory] Object or Undef if the argument is not 
-    #                                   valid email text
+    # @return   [Sisimai::Mail::Memory] Object
+    #           [Undef]                 is not a valid email text
     my $class = shift;
     my $argv1 = shift // return undef;
-    my $first = substr($$argv1, 0, 5) || '';
-    my $param = { 
-        'data'   => [],
-        'size'   => length $$argv1 || 0,
-        'offset' => 0,
+    my $param = {
+        'payload' => [],
+        'path'    => '<MEMORY>',
+        'size'    => length $$argv1 || 0,
+        'offset'  => 0,
     };
-
     return undef unless $param->{'size'};
-    if( $first eq 'From ') {
-        # UNIX mbox
-        $param->{'data'} = [split(/^From /m, $$argv1)];
-        shift @{ $param->{'data'} };
-        map { $_ = 'From '.$_ } @{ $param->{'data'} };
 
+    if( (substr($$argv1, 0, 5) || '') eq 'From ') {
+        # UNIX mbox
+        $param->{'payload'} = [split(/^From /m, $$argv1)];
+        shift @{ $param->{'payload'} };
+        $_ = 'From '.$_ for @{ $param->{'payload'} };
     } else {
-        $param->{'data'} = [$$argv1];
+        $param->{'payload'} = [$$argv1];
     }
     return bless($param, __PACKAGE__);
 }
@@ -45,10 +44,10 @@ sub read {
     # Memory reader, works as a iterator.
     # @return   [String] Contents of a bounce mail
     my $self = shift;
-    return undef unless scalar @{ $self->{'data'} };
+    return undef unless scalar @{ $self->{'payload'} };
 
     $self->{'offset'} += 1;
-    return shift @{ $self->{'data'} };
+    return shift @{ $self->{'payload'} };
 }
 
 1;
@@ -84,22 +83,28 @@ C<new()> is a constructor of Sisimai::Mail::Memory
 
 =head1 INSTANCE METHODS
 
+=head2 C<B<path()>>
+
+C<path()> returns "<MEMORY>"
+
+    print $mailbox->path;   # "<MEMORY>"
+
 =head2 C<B<size()>>
 
 C<size()> returns a memory size of the mailbox or JSON string.
 
     print $mailobj->size;   # 94515
 
-=head2 C<B<data()>>
+=head2 C<B<payload()>>
 
-C<data()> returns an array reference to each email message or JSON string
+C<payload()> returns an array reference to each email message or JSON string
 
-    print scalar @{ $mailobj->data };   # 17
+    print scalar @{ $mailobj->payload };   # 17
 
 =head2 C<B<offset()>>
 
-C<offset()> returns an offset position for seeking "data". The value of "offset"
-is an index number which have already read.
+C<offset()> returns an offset position for seeking "payload" list. The value of
+"offset" is an index number which have already read.
 
     print $mailobj->offset;   # 0
 
@@ -119,7 +124,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2018 azumakuniyuki, All rights reserved.
+Copyright (C) 2018-2020 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 
