@@ -8,6 +8,7 @@
 # Copyright (C) 2009-2010,2013 Olivier Sallou <olivier.sallou at irisa.fr>
 # Copyright (C) 2011-2013 Raphaël Doursenaud <rdoursenaud@gpcsolutions.fr>
 # Copyright (C) 2013 Dylan Oberson <dylan.oberson@epfl.ch>
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
