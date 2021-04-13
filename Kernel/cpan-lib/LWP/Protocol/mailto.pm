@@ -1,5 +1,5 @@
 package LWP::Protocol::mailto;
-$LWP::Protocol::mailto::VERSION = '6.26';
+
 # This module implements the mailto protocol.  It is just a simple
 # frontend to the Unix sendmail program except on MacOS, where it uses
 # Mail::Internet.
@@ -10,6 +10,8 @@ require HTTP::Status;
 
 use Carp;
 use strict;
+
+our $VERSION = '6.53';
 
 use base qw(LWP::Protocol);
 our $SENDMAIL;
