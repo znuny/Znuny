@@ -187,25 +187,20 @@ sub CleanUp {
     }
 }
 
-=item _GetMemcachedKeyName()
-
-Use MD5 digest of Type::Namespace::Key for memcached key (memcached key max
-length is 250). Namespace for given cache object type is taken from cache.
-New namespace is created if namespace is not found. For this algo idea see
-http://code.google.com/p/memcached/wiki/NewProgrammingTricks#Namespacing
-We use miliseconds not microseconds because overflow in the "incr" memcached
-command wraps around the 64 bit mark.
-
-Returns mamcached key name if determined or nothing on error:
-
-    my $PreparedKey = $Self->_GetMemcachedKeyName(
-        Type => 'CacheObjectTypeName',
-        Key => 'KeyName',
-        InitNamespaceOnError => 0,  # set 1 to initialize namespace if cannot be read
-    );
-
-=cut
-
+# Use MD5 digest of Type::Namespace::Key for memcached key (memcached key max
+# length is 250). Namespace for given cache object type is taken from cache.
+# New namespace is created if namespace is not found. For this algo idea see
+# http://code.google.com/p/memcached/wiki/NewProgrammingTricks#Namespacing
+# We use miliseconds not microseconds because overflow in the "incr" memcached
+# command wraps around the 64 bit mark.
+#
+# Returns mamcached key name if determined or nothing on error:
+#
+#    my $PreparedKey = $Self->_GetMemcachedKeyName(
+#        Type => 'CacheObjectTypeName',
+#        Key => 'KeyName',
+#        InitNamespaceOnError => 0,  # set 1 to initialize namespace if cannot be read
+#    );
 sub _GetMemcachedKeyName {
     my ( $Self, %Param ) = @_;
 
