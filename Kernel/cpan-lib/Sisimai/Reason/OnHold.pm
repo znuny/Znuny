@@ -5,7 +5,7 @@ use warnings;
 
 sub text  { 'onhold' }
 sub description { 'Sisimai could not decided the reason due to there is no (or less) detailed information for judging the reason' }
-sub match { 
+sub match {
     # Try to match that the given text and regular expressions
     # @param    [String] argv1  String to be matched with regular expressions
     # @return   [Integer]       0: Did not match
@@ -26,7 +26,7 @@ sub true  {
 
     return undef unless $argvs->deliverystatus;
     return 1 if $argvs->reason eq 'onhold';
-    return 1 if Sisimai::SMTP::Status->name($argvs->deliverystatus) eq 'onhold';
+    return 1 if (Sisimai::SMTP::Status->name($argvs->deliverystatus) || '') eq 'onhold';
     return 0
 }
 
@@ -49,7 +49,7 @@ Sisimai::Reason::OnHold - Bounce reason is C<onhold> or not.
 Sisimai::Reason::OnHold checks the bounce reason is C<onhold> or not. This class
 is called only Sisimai::Reason class.
 
-Sisimai will set C<onhold> to the reason of email bounce if there is no (or 
+Sisimai will set C<onhold> to the reason of email bounce if there is no (or
 less) detailed information about email bounce for judging the reason.
 
 =head1 CLASS METHODS

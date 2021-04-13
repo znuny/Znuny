@@ -13,8 +13,11 @@ sub match {
     # @since v4.0.0
     my $class = shift;
     my $argv1 = shift // return undef;
-    my $index = ['message too large'];
 
+    state $index = [
+        'message header size exceeds limit',
+        'message too large',
+    ];
     return 1 if grep { rindex($argv1, $_) > -1 } @$index;
     return 0;
 }
@@ -35,7 +38,7 @@ sub true {
     # Delivery status code points "exceedlimit".
     # Status: 5.2.3
     # Diagnostic-Code: SMTP; 552 5.2.3 Message size exceeds fixed maximum message size
-    return 1 if Sisimai::SMTP::Status->name($argvs->deliverystatus) eq 'exceedlimit';
+    return 1 if (Sisimai::SMTP::Status->name($argvs->deliverystatus) || '') eq 'exceedlimit';
 
     # Check the value of Diagnosic-Code: header with patterns
     return 1 if __PACKAGE__->match(lc $argvs->diagnosticcode);
@@ -61,8 +64,8 @@ Sisimai::Reason::ExceedLimit - Bounce reason is C<exceedlimit> or not.
 Sisimai::Reason::ExceedLimit checks the bounce reason is C<exceedlimit> or not.
 This class is called only Sisimai::Reason class.
 
-This is the error that a message was rejected due to an email exceeded the 
-limit. The value of D.S.N. is 5.2.3. This reason is almost the same as 
+This is the error that a message was rejected due to an email exceeded the
+limit. The value of D.S.N. is 5.2.3. This reason is almost the same as
 C<MesgTooBig>, we think.
 
     ... while talking to mx.example.org.:
@@ -103,7 +106,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2016,2018 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2016,2018,2021 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

@@ -13,7 +13,8 @@ sub match {
     # @since v4.1.12
     my $class = shift;
     my $argv1 = shift // return undef;
-    my $index = [
+
+    state $index = [
         'could not connect and send the mail to',
         'dns records for the destination computer could not be found',
         'hop count exceeded - possible mail loop',
@@ -30,7 +31,6 @@ sub match {
         'unable to resolve route ',
         'unrouteable mail domain',
     ];
-
     return 1 if grep { rindex($argv1, $_) > -1 } @$index;
     return 0;
 }
@@ -63,7 +63,7 @@ Sisimai::Reason::NetworkError - Bounce reason is C<networkerror> or not.
 Sisimai::Reason::NetworkError checks the bounce reason is C<networkerror> or not.
 This class is called only Sisimai::Reason class.
 
-This is the error that SMTP connection failed due to DNS look up failure or 
+This is the error that SMTP connection failed due to DNS look up failure or
 other network problems. This reason has added in Sisimai 4.1.12 and does not
 exist in any version of bounceHammer.
 

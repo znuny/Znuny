@@ -13,13 +13,15 @@ sub match {
     # @since v4.0.0
     my $class = shift;
     my $argv1 = shift // return undef;
-    my $isnot = [
+
+    state $isnot = [
         '5.1.0 address rejected',
         'recipient address rejected',
         'sender ip address rejected',
     ];
-    my $index = [
-        '<> invalid sender',
+    state $index = [
+        'access denied (in reply to mail from command)',
+        'access denied (sender blacklisted)',
         'address rejected',
         'administrative prohibition',
         'batv failed to verify',    # SoniWall
@@ -28,23 +30,29 @@ sub match {
         'bogus mail from',          # IMail - block empty sender
         'connections not accepted from servers without a valid sender domain',
         'denied [bouncedeny]',      # McAfee
+        'denied by secumail valid-address-filter',
         'delivery not authorized, message refused',
         'does not exist e2110',
         'domain of sender address ',
         'emetteur invalide',
         'empty envelope senders not allowed',
+        'envelope blocked – ',
         'error: no third-party dsns',   # SpamWall - block empty sender
         'from: domain is invalid. please provide a valid from:',
         'fully qualified email address required',   # McAfee
         'invalid domain, see <url:',
+        'invalid sender',
+        'is not a registered gateway user',
         'mail from not owned by user',
         'message rejected: email address is not verified',
         'mx records for ',
         'null sender is not allowed',
+        'recipient addresses rejected : access denied',
         'recipient not accepted. (batv: no tag',
         'returned mail not accepted here',
         'rfc 1035 violation: recursive cname records for',
         'rule imposed mailbox access for',  # MailMarshal
+        'sender address has been blacklisted',
         'sender email address rejected',
         'sender is spammer',
         'sender not pre-approved',
@@ -53,11 +61,11 @@ sub match {
         'sender verify failed', # Exim callout
         'syntax error: empty email address',
         'the message has been rejected by batv defense',
+        'this server does not accept mail from',
         'transaction failed unsigned dsn for',
         'unroutable sender address',
         'you are sending to/from an address that has been blacklisted',
     ];
-
     return 0 if grep { rindex($argv1, $_) > -1 } @$isnot;
     return 1 if grep { rindex($argv1, $_) > -1 } @$index;
     return 0;
@@ -73,18 +81,18 @@ sub true {
     my $class = shift;
     my $argvs = shift // return undef;
 
-    my $tempreason = Sisimai::SMTP::Status->name($argvs->deliverystatus) || 'undefined';
-    my $diagnostic = lc $argvs->diagnosticcode;
-
     return 1 if $argvs->reason eq 'rejected';
+    my $tempreason = Sisimai::SMTP::Status->name($argvs->deliverystatus) || 'undefined';
     return 1 if $tempreason eq 'rejected';  # Delivery status code points "rejected".
 
     # Check the value of Diagnosic-Code: header with patterns
-    if( $argvs->smtpcommand eq 'MAIL' ) {
+    my $diagnostic = lc $argvs->diagnosticcode;
+    my $commandtxt = $argvs->smtpcommand;
+    if( $commandtxt eq 'MAIL' ) {
         # The session was rejected at 'MAIL FROM' command
         return 1 if __PACKAGE__->match($diagnostic);
 
-    } elsif( $argvs->smtpcommand eq 'DATA' ) {
+    } elsif( $commandtxt eq 'DATA' ) {
         # The session was rejected at 'DATA' command
         if( $tempreason ne 'userunknown' ) {
             # Except "userunknown"
@@ -117,7 +125,7 @@ Sisimai::Reason::Rejected - Bounce reason is C<rejected> or not.
 Sisimai::Reason::Rejected checks the bounce reason is C<rejected> or not. This
 class is called only Sisimai::Reason class.
 
-This is the error that a connection to destination server was rejected by a 
+This is the error that a connection to destination server was rejected by a
 sender's email address (envelope from). Sisimai set C<rejected> to the reason
 of email bounce if the value of Status: field in a bounce email is C<5.1.8> or
 the connection has been rejected due to the argument of SMTP MAIL command.
@@ -151,7 +159,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2018 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2019,2021 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 
