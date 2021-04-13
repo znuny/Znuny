@@ -1,10 +1,9 @@
 package LWP::Protocol::https;
 
 use strict;
-our $VERSION = "6.06";
+our $VERSION = '6.10';
 
-require LWP::Protocol::http;
-our @ISA = qw(LWP::Protocol::http);
+use base qw(LWP::Protocol::http);
 require Net::HTTPS;
 
 sub socket_type
@@ -29,7 +28,7 @@ sub _extra_sock_opts
 		require Mozilla::CA;
 	    };
 	    if ($@) {
-		if ($@ =! /^Can't locate Mozilla\/CA\.pm/) {
+		if ($@ =~ /^Can't locate Mozilla\/CA\.pm/) {
 		    $@ = <<'EOT';
 Can't verify SSL peers without knowing which Certificate Authorities to trust
 
@@ -51,11 +50,11 @@ EOT
 }
 
 #------------------------------------------------------------
-# _cn_match($common_name, $san_name) 
+# _cn_match($common_name, $san_name)
 #  common_name: an IA5String
 #  san_name: subjectAltName
 # initially we were only concerned with the dNSName
-# and the 'left-most' only wildcard as noted in 
+# and the 'left-most' only wildcard as noted in
 #   https://tools.ietf.org/html/rfc6125#section-6.4.3
 # this method does not match any wildcarding in the
 # domain name as listed in section-6.4.3.3
@@ -66,7 +65,7 @@ sub _cn_match {
     # /CN has a '*.' prefix
     # MUST be an FQDN -- fishing?
     return 0 if( $common_name =~ /^\*\./ );
-    
+
     my $re = q{}; # empty string
 
      # turn a leading "*." into a regex
@@ -93,13 +92,13 @@ sub _cn_match {
 sub _in_san
 {
     my($me, $cn, $cert) = @_;
-	
+
 	  # we can return early if there are no SAN options.
 	my @sans = $cert->peer_certificate('subjectAltNames');
-	return unless scalar @sans; 
-	
+	return unless scalar @sans;
+
 	(my $common_name = $cn) =~ s/.*=//; # strip off the prefix.
-   
+
       # get the ( type-id, value ) pairwise
       # currently only the basic CN to san_name check
     while( my ( $type_id, $value ) = splice( @sans, 0, 2 ) ) {
@@ -116,7 +115,7 @@ sub _check_sock
         my $cert = $sock->get_peer_certificate ||
             die "Missing SSL certificate";
         my $subject = $cert->subject_name;
-        unless ( $subject =~ /$check/ ) {
+        unless ( defined $subject && ( $subject =~ /$check/ ) ) {
             my $ok = $self->_in_san( $check, $cert);
             die "Bad SSL certificate subject: '$subject' !~ /$check/"
                 unless $ok;
@@ -130,6 +129,9 @@ sub _get_sock_info
     my $self = shift;
     $self->SUPER::_get_sock_info(@_);
     my($res, $sock) = @_;
+    if ($sock->can('get_sslversion') and my $sslversion = $sock->get_sslversion) {
+        $res->header("Client-SSL-Version" => $sslversion);
+    }
     $res->header("Client-SSL-Cipher" => $sock->get_cipher);
     my $cert = $sock->get_peer_certificate;
     if ($cert) {
@@ -153,6 +155,7 @@ if ( $Net::HTTPS::SSL_SOCKET_CLASS->can('start_SSL')) {
 	my ($self,$sock,$url) = @_;
 	$sock = LWP::Protocol::https::Socket->start_SSL( $sock,
 	    SSL_verifycn_name => $url->host,
+	    SSL_hostname => $url->host,
 	    $self->_extra_sock_opts,
 	);
 	$@ = LWP::Protocol::https::Socket->errstr if ! $sock;
@@ -163,7 +166,7 @@ if ( $Net::HTTPS::SSL_SOCKET_CLASS->can('start_SSL')) {
 #-----------------------------------------------------------
 package LWP::Protocol::https::Socket;
 
-our @ISA = qw(Net::HTTPS LWP::Protocol::http::SocketMethods);
+use base qw(Net::HTTPS LWP::Protocol::http::SocketMethods);
 
 1;
 
@@ -180,6 +183,14 @@ LWP::Protocol::https - Provide https support for LWP::UserAgent
   $ua = LWP::UserAgent->new(ssl_opts => { verify_hostname => 1 });
   $res = $ua->get("https://www.example.com");
 
+  # specify a CA path
+  $ua = LWP::UserAgent->new(
+      ssl_opts => {
+          SSL_ca_path     => '/etc/ssl/certs',
+          verify_hostname => 1,
+      }
+  );
+
 =head1 DESCRIPTION
 
 The LWP::Protocol::https module provides support for using https schemed
@@ -189,7 +200,7 @@ to access sites using HTTP over SSL/TLS.
 
 If hostname verification is requested by LWP::UserAgent's C<ssl_opts>, and
 neither C<SSL_ca_file> nor C<SSL_ca_path> is set, then C<SSL_ca_file> is
-implied to be the one provided by Mozilla::CA.  If the Mozilla::CA module
+implied to be the one provided by L<Mozilla::CA>.  If the Mozilla::CA module
 isn't available SSL requests will fail.  Either install this module, set up an
 alternative C<SSL_ca_file> or disable hostname verification.
 
@@ -203,9 +214,11 @@ underlying modules to install.
 
 L<IO::Socket::SSL>, L<Crypt::SSLeay>, L<Mozilla::CA>
 
-=head1 COPYRIGHT
+=head1 COPYRIGHT & LICENSE
 
-Copyright 1997-2011 Gisle Aas.
+Copyright (c) 1997-2011 Gisle Aas.
 
-This library is free software; you can redistribute it and/or
-modify it under the same terms as Perl itself.
+This library is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
+
+=cut
