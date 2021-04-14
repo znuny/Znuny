@@ -4825,7 +4825,7 @@ sub Ascii2RichText {
 
     # check needed stuff
     for my $Needed (qw(String)) {
-        if ( !defined $Param{$_} ) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => "Need $Needed!"

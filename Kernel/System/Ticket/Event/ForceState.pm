@@ -32,7 +32,7 @@ sub Run {
 
     # check needed stuff
     for my $Needed (qw(Data Event Config)) {
-        if ( !$Param{$_} ) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => "Need $_!"
@@ -41,7 +41,7 @@ sub Run {
         }
     }
     for my $Needed (qw(TicketID)) {
-        if ( !$Param{Data}->{$_} ) {
+        if ( !$Param{Data}->{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => "Need $_ in Data!"
