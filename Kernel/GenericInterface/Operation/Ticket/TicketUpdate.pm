@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 maxence business consulting GmbH, http://www.maxence.de
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -112,8 +113,8 @@ if applicable the created ArticleID.
                 #},
             },
             Article => {                                                          # optional
-                CommunicationChannel            => 'Email',                    # CommunicationChannel or CommunicationChannelID must be provided.
-                CommunicationChannelID          => 1,
+                CommunicationChannel            => 'Email',                    # optional
+                CommunicationChannelID          => 1,                          # optional
                 IsVisibleForCustomer            => 1,                          # optional
                 SenderTypeID                    => 123,                        # optional
                 SenderType                      => 'some sender type name',    # optional
@@ -901,14 +902,6 @@ sub _CheckArticle {
     }
 
     # check Article->CommunicationChannel
-    if ( !$Article->{CommunicationChannel} && !$Article->{CommunicationChannelID} ) {
-
-        # return internal server error
-        return {
-            ErrorMessage => "TicketUpdate: Article->CommunicationChannelID or Article->CommunicationChannel parameter"
-                . " is required and Sysconfig CommunicationChannelID setting could not be read!"
-        };
-    }
     if ( !$Self->ValidateArticleCommunicationChannel( %{$Article} ) ) {
         return {
             ErrorCode    => 'TicketUpdate.InvalidParameter',
