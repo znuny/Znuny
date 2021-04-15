@@ -1232,7 +1232,7 @@ sub _Replace {
         $RecipientTimeZone = $Kernel::OM->Create('Kernel::System::DateTime')->OTRSTimeZoneGet();
 
         my %CustomerUser;
-        if ( IsHashRefWithData( \%Ticket ) && $Ticket{CustomerUserID} ) {
+        if ( %Ticket && $Ticket{CustomerUserID} ) {
             %CustomerUser = $CustomerUserObject->CustomerUserDataGet( User => $Ticket{CustomerUserID} );
         }
 
@@ -1256,7 +1256,7 @@ sub _Replace {
         elsif (
             $Param{AddTimezoneInfo}->{AutoResponse}
             && $Ticket{CustomerUserID}
-            && IsHashRefWithData( \%CustomerUser )
+            && %CustomerUser
             )
         {
             %UserPreferences = $CustomerUserObject->GetPreferences(
