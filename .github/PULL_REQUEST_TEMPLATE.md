@@ -12,18 +12,20 @@
   additional information section.
 -->
 
-## Type of change
 <!--
+## Type of change
   What type of change does your PR introduce to Znuny?
-  NOTE: Please check only 1 box '✖️'!
-  If your PR requires multiple boxes to be checked, you'll most likely need to
+  NOTE: Please add only one label with a starting '1 - ' to this PR!
+  If your PR requires multiple labels to be applied, you'll most likely need to
   split it into multiple PRs. This makes things easier and faster for the code review.
--->
 
-- [ ] 🆙 - Dependency upgrade (e.g. libraries) <!-- delete [ ] if not checked -->
-- [ ] 🐞 - Bugfix (non-breaking change which fixes an issue) <!-- delete [ ] if not checked -->
-- [ ] 💎 - Code quality improvements to existing code or addition of unit tests <!-- delete [ ] if not checked -->
-- [ ] 🚀 - New feature (which adds functionality to an existing integration) <!-- delete [ ] if not checked -->
+- '1 - 🆙 dependency upgrade - Dependency upgrade (e.g. libraries)
+- '1 - 🐞 bug 🐞'            - Bugfix (non-breaking change which fixes an issue)
+- '1 - 💎 code quality'      - Code quality improvements to existing code or addition of unit tests
+- '1 - 🚀 feature'           - New feature (which adds functionality to an existing integration)
+- '1 - ...'
+
+-->
 
 ## Breaking change
 <!--
@@ -39,11 +41,12 @@
   Details are important and help maintainers processing your PR.
   Please be sure to fill out additional details, if applicable.
   Note: Remove this section if not needed.
+
+  If a PR is related to an issue, please use the 'Linked issues' function on the sidebar.
 -->
 
 <!--
-- This PR is related to issue: #
-- This PR fixes issue: #
+- This PR is related to PR: #
 - ...
 -->
 
@@ -67,7 +70,7 @@
 - [ ] GitHub workflow unit tests pass.(❗)
 
 <!--
-  Thank you for contributing ❤️
+  Thank you for contributing ❤
 
   Znuny @znuny/znuny
 -->
