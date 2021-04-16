@@ -1,4 +1,5 @@
 # 6.0.34 2021-xx-xx
+ - 2021-04-14 Updated jquery-validate from version 1.16.0 to 1.19.3 (CVE-2021-21252).
  - 2021-04-13 Fix visual minor - missing spacing when adding new values. Thanks to maxence (@tipue-dev) [#52](https://github.com/znuny/Znuny/pull/52)
  - 2021-04-13 Fix URL to product in HTTP Headers. Thanks to Renée Bäcker (@reneeb) [#42](https://github.com/znuny/Znuny/pull/42)
  - 2021-04-13 Update CPAN module Sisimai. Thanks to Renée Bäcker (@reneeb) [#37](https://github.com/znuny/Znuny/pull/37)
