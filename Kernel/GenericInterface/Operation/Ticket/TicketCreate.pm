@@ -113,8 +113,8 @@ perform TicketCreate Operation. This will return the created ticket number.
                 #},
             },
             Article => {
-                CommunicationChannel            => 'Email',                    # CommunicationChannel or CommunicationChannelID must be provided.
-                CommunicationChannelID          => 1,
+                CommunicationChannel            => 'Email',                    # optional
+                CommunicationChannelID          => 1,                          # optional
                 IsVisibleForCustomer            => 1,                          # optional
                 SenderTypeID                    => 123,                        # optional
                 SenderType                      => 'some sender type name',    # optional
@@ -832,14 +832,6 @@ sub _CheckArticle {
     }
 
     # check Article->CommunicationChannel
-    if ( !$Article->{CommunicationChannel} && !$Article->{CommunicationChannelID} ) {
-
-        # return internal server error
-        return {
-            ErrorMessage => "TicketCreate: Article->CommunicationChannelID or Article->CommunicationChannel parameter"
-                . " is required and Sysconfig CommunicationChannelID setting could not be read!"
-        };
-    }
     if ( !$Self->ValidateArticleCommunicationChannel( %{$Article} ) ) {
         return {
             ErrorCode    => 'TicketCreate.InvalidParameter',
