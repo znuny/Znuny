@@ -13,7 +13,8 @@ sub match {
     # @since v4.1.26
     my $class = shift;
     my $argv1 = shift // return undef;
-    my $index = [
+
+    state $index = [
         'all available ips are at maximum connection limit',    # SendGrid
         'connection rate limit exceeded',
         'exceeds per-domain connection limit for',
@@ -24,11 +25,11 @@ sub match {
         'too many connections from your host.', # Microsoft
         'too many concurrent smtp connections', # Microsoft
         'too many errors from your ip',         # Free.fr
+        'too many recipients',                  # ntt docomo
         'too many smtp sessions for this host', # Sendmail(daemon.c)
         'trop de connexions, ',
         'we have already made numerous attempts to deliver this message',
     ];
-
     return 1 if grep { rindex($argv1, $_) > -1 } @$index;
     return 0;
 }
@@ -44,7 +45,7 @@ sub true {
     my $argvs = shift // return undef;
 
     return 1 if $argvs->reason eq 'toomanyconn';
-    return 1 if Sisimai::SMTP::Status->name($argvs->deliverystatus) eq 'toomanyconn';
+    return 1 if (Sisimai::SMTP::Status->name($argvs->deliverystatus) || '') eq 'toomanyconn';
     return 1 if __PACKAGE__->match(lc $argvs->diagnosticcode);
     return 0;
 }
@@ -100,7 +101,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2018 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2019 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

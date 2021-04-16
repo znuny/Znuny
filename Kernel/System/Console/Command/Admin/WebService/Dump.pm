@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 maxence business consulting GmbH, http://www.maxence.de
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -44,7 +45,7 @@ sub Configure {
 sub PreRun {
     my ( $Self, %Param ) = @_;
 
-    my $WebServiceList = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice')->WebserviceList();
+    my $WebServiceList = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice')->WebserviceList( Valid => 0 );
 
     my $WebServiceID = $Self->GetOption('webservice-id');
     if ( !$WebServiceList->{$WebServiceID} ) {
@@ -62,10 +63,9 @@ sub Run {
     # get current web service
     my $WebServiceID = $Self->GetOption('webservice-id');
 
-    my $WebService =
-        $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice')->WebserviceGet(
+    my $WebService = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice')->WebserviceGet(
         ID => $WebServiceID,
-        );
+    );
 
     if ( !$WebService ) {
         $Self->PrintError("Could not get a web service with the ID $WebServiceID from the database!");

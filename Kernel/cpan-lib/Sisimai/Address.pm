@@ -2,36 +2,23 @@ package Sisimai::Address;
 use feature ':5.10';
 use strict;
 use warnings;
-use Class::Accessor::Lite;
 use Sisimai::RFC5322;
+use Class::Accessor::Lite (
+    'new' => 0,
+    'ro'  => [
+        'address',  # [String] Email address
+        'user',     # [String] local part of the email address
+        'host',     # [String] domain part of the email address
+        'verp',     # [String] VERP
+        'alias',    # [String] alias of the email address
+    ],
+    'rw'  => [
+        'name',     # [String] Display name
+        'comment',  # [String] (Comment)
+    ]
+);
 
-my $Indicators = {
-    'email-address' => (1 << 0),    # <neko@example.org>
-    'quoted-string' => (1 << 1),    # "Neko, Nyaan"
-    'comment-block' => (1 << 2),    # (neko)
-};
-my $ValidEmail = qr{(?>
-    (?:([^\s]+|["].+?["]))          # local part
-    [@]
-    (?:([^@\s]+|[0-9A-Za-z:\.]+))   # domain part
-    )
-}x;
-my $undisclosed = 'libsisimai.org.invalid';
-my $roaccessors = [
-    'address',  # [String] Email address
-    'user',     # [String] local part of the email address
-    'host',     # [String] domain part of the email address
-    'verp',     # [String] VERP
-    'alias',    # [String] alias of the email address
-];
-my $rwaccessors = [
-    'name',     # [String] Display name
-    'comment',  # [String] (Comment)
-];
-Class::Accessor::Lite->mk_ro_accessors(@$roaccessors);
-Class::Accessor::Lite->mk_accessors(@$rwaccessors);
-
-sub undisclosed { 
+sub undisclosed {
     # Return pseudo recipient or sender address
     # @param    [String] atype  Address type: 'r' or 's'
     # @return   [String, Undef] Pseudo recipient address or sender address or
@@ -41,13 +28,13 @@ sub undisclosed {
 
     return undef unless $atype =~ /\A(?:r|s)\z/;
     my $local = $atype eq 'r' ? 'recipient' : 'sender';
-    return sprintf("undisclosed-%s-in-headers%s%s", $local, '@', $undisclosed);
+    return sprintf("undisclosed-%s-in-headers%slibsisimai.org.invalid", $local, '@');
 }
 
 sub new {
     # Old constructor of Sisimai::Address, wrapper method of make()
     # @param        [String] email            Email address
-    # @return       [Sisimai::Address, Undef] Object or Undef when the email 
+    # @return       [Sisimai::Address, Undef] Object or Undef when the email
     #                                         address was not valid.
     my $class = shift;
     my $email = shift // return undef;
@@ -80,17 +67,20 @@ sub make {
     return undef unless exists $argvs->{'address'};
     return undef unless $argvs->{'address'};
 
+    my $heads = ['<'];
+    my $tails = ['>', ',', '.', ';'];
+
     if( $argvs->{'address'} =~ /\A([^\s]+)[@]([^@]+)\z/ ||
         $argvs->{'address'} =~ /\A(["].+?["])[@]([^@]+)\z/ ) {
         # Get the local part and the domain part from the email address
-        my $lpart = $1;
-        my $dpart = $2;
-        my $email = __PACKAGE__->expand_verp($argvs->{'address'});
+        my $lpart = $1; for my $e ( @$heads ) { $lpart =~ s/\A$e//g if substr($lpart, 0,  1) eq $e }
+        my $dpart = $2; for my $e ( @$tails ) { $dpart =~ s/$e\z//g if substr($dpart, -1, 1) eq $e }
+        my $email = __PACKAGE__->expand_verp($argvs->{'address'}) || '';
         my $alias = 0;
 
         unless( $email ) {
             # Is not VERP address, try to expand the address as an alias
-            $email = __PACKAGE__->expand_alias($argvs->{'address'});
+            $email = __PACKAGE__->expand_alias($argvs->{'address'}) || '';
             $alias = 1 if $email;
         }
 
@@ -129,26 +119,39 @@ sub find {
     # @param    [String] argv1  String including email address
     # @param    [Boolean] addrs 0 = Returns list including all the elements
     #                           1 = Returns list including email addresses only
-    # @return   [Array, Undef]  Email address list or Undef when there is no 
+    # @return   [Array, Undef]  Email address list or Undef when there is no
     #                           email address in the argument
     # @since    v4.22.0
     my $class = shift;
     my $argv1 = shift // return undef;
     my $addrs = shift // undef;
 
-    $argv1 =~ s/[\r\n]//g;  # Remove new line codes
+    state $indicators = {
+        'email-address' => (1 << 0),    # <neko@example.org>
+        'quoted-string' => (1 << 1),    # "Neko, Nyaan"
+        'comment-block' => (1 << 2),    # (neko)
+    };
+    state $delimiters = { '<' => 1, '>' => 1, '(' => 1, ')' => 1, '"' => 1, ',' => 1 };
+    state $validemail = qr{(?>
+        (?:([^\s]+|["].+?["]))          # local part
+        [@]
+        (?:([^@\s]+|[0-9A-Za-z:\.]+))   # domain part
+        )
+    }x;
 
     my $emailtable = { 'address' => '', 'name' => '', 'comment' => '' };
     my $addrtables = [];
-    my $readbuffer = [];
+    my @readbuffer;
     my $readcursor = 0;
-
     my $v = $emailtable;   # temporary buffer
     my $p = '';            # current position
 
+    $argv1 =~ y/\r//d if index($argv1, "\r") > -1;  # Remove CR
+    $argv1 =~ y/\n//d if index($argv1, "\n") > -1;  # Remove NL
+
     for my $e ( split('', $argv1) ) {
         # Check each characters
-        if( grep { $e eq $_ } ('<', '>', '(', ')', '"', ',') ) {
+        if( $delimiters->{ $e } ) {
             # The character is a delimiter character
             if( $e eq ',' ) {
                 # Separator of email addresses or not
@@ -156,18 +159,18 @@ sub find {
                     rindex($v->{'address'}, '@') > -1 &&
                     substr($v->{'address'}, -1, 1) eq '>' ) {
                     # An email address has already been picked
-                    if( $readcursor & $Indicators->{'comment-block'} ) {
+                    if( $readcursor & $indicators->{'comment-block'} ) {
                         # The cursor is in the comment block (Neko, Nyaan)
                         $v->{'comment'} .= $e;
 
-                    } elsif( $readcursor & $Indicators->{'quoted-string'} ) {
+                    } elsif( $readcursor & $indicators->{'quoted-string'} ) {
                         # "Neko, Nyaan"
                         $v->{'name'} .= $e;
 
                     } else {
                         # The cursor is not in neither the quoted-string nor the comment block
                         $readcursor = 0;    # reset cursor position
-                        push @$readbuffer, $v;
+                        push @readbuffer, $v;
                         $v = { 'address' => '', 'name' => '', 'comment' => '' };
                         $p = '';
                     }
@@ -185,7 +188,7 @@ sub find {
 
                 } else {
                     # <neko@nyaan.example.org>
-                    $readcursor |= $Indicators->{'email-address'};
+                    $readcursor |= $indicators->{'email-address'};
                     $v->{'address'} .= $e;
                     $p = 'address';
                 }
@@ -194,9 +197,9 @@ sub find {
 
             if( $e eq '>' ) {
                 # >: The end of an email address or not
-                if( $readcursor & $Indicators->{'email-address'} ) {
+                if( $readcursor & $indicators->{'email-address'} ) {
                     # <neko@example.org>
-                    $readcursor &= ~$Indicators->{'email-address'};
+                    $readcursor &= ~$indicators->{'email-address'};
                     $v->{'address'} .= $e;
                     $p = '';
 
@@ -209,7 +212,7 @@ sub find {
 
             if( $e eq '(' ) {
                 # The beginning of a comment block or not
-                if( $readcursor & $Indicators->{'email-address'} ) {
+                if( $readcursor & $indicators->{'email-address'} ) {
                     # <"neko(nyaan)"@example.org> or <neko(nyaan)@example.org>
                     if( rindex($v->{'address'}, '"') > -1 ) {
                         # Quoted local part: <"neko(nyaan)"@example.org>
@@ -217,23 +220,23 @@ sub find {
 
                     } else {
                         # Comment: <neko(nyaan)@example.org>
-                        $readcursor |= $Indicators->{'comment-block'};
+                        $readcursor |= $indicators->{'comment-block'};
                         $v->{'comment'} .= ' ' if substr($v->{'comment'}, -1, 1) eq ')';
                         $v->{'comment'} .= $e;
                         $p = 'comment';
                     }
-                } elsif( $readcursor & $Indicators->{'comment-block'} ) {
+                } elsif( $readcursor & $indicators->{'comment-block'} ) {
                     # Comment at the outside of an email address (...(...)
                     $v->{'comment'} .= ' ' if substr($v->{'comment'}, -1, 1) eq ')';
                     $v->{'comment'} .= $e;
 
-                } elsif( $readcursor & $Indicators->{'quoted-string'} ) {
+                } elsif( $readcursor & $indicators->{'quoted-string'} ) {
                     # "Neko, Nyaan(cat)", Deal as a display name
                     $v->{'name'} .= $e;
 
                 } else {
                     # The beginning of a comment block
-                    $readcursor |= $Indicators->{'comment-block'};
+                    $readcursor |= $indicators->{'comment-block'};
                     $v->{'comment'} .= ' ' if substr($v->{'comment'}, -1, 1) eq ')';
                     $v->{'comment'} .= $e;
                     $p = 'comment';
@@ -243,7 +246,7 @@ sub find {
 
             if( $e eq ')' ) {
                 # The end of a comment block or not
-                if( $readcursor & $Indicators->{'email-address'} ) {
+                if( $readcursor & $indicators->{'email-address'} ) {
                     # <"neko(nyaan)"@example.org> OR <neko(nyaan)@example.org>
                     if( rindex($v->{'address'}, '"') > -1 ) {
                         # Quoted string in the local part: <"neko(nyaan)"@example.org>
@@ -251,19 +254,19 @@ sub find {
 
                     } else {
                         # Comment: <neko(nyaan)@example.org>
-                        $readcursor &= ~$Indicators->{'comment-block'};
+                        $readcursor &= ~$indicators->{'comment-block'};
                         $v->{'comment'} .= $e;
                         $p = 'address';
                     }
-                } elsif( $readcursor & $Indicators->{'comment-block'} ) {
+                } elsif( $readcursor & $indicators->{'comment-block'} ) {
                     # Comment at the outside of an email address (...(...)
-                    $readcursor &= ~$Indicators->{'comment-block'};
+                    $readcursor &= ~$indicators->{'comment-block'};
                     $v->{'comment'} .= $e;
                     $p = '';
 
                 } else {
                     # Deal as a display name
-                    $readcursor &= ~$Indicators->{'comment-block'};
+                    $readcursor &= ~$indicators->{'comment-block'};
                     $v->{'name'} .= $e;
                     $p = '';
                 }
@@ -277,16 +280,12 @@ sub find {
                     $v->{ $p } .= $e;
 
                 } else {
-                    # Display name
+                    # Display name like "Neko, Nyaan"
                     $v->{'name'} .= $e;
-                    if( $readcursor & $Indicators->{'quoted-string'} ) {
-                        # "Neko, Nyaan"
-                        unless( $v->{'name'} =~ /\x5c["]\z/ ) {
-                            # "Neko, Nyaan \"...
-                            $readcursor &= ~$Indicators->{'quoted-string'};
-                            $p = '';
-                        }
-                    }
+                    next unless $readcursor & $indicators->{'quoted-string'};
+                    next if $v->{'name'} =~ /\x5c["]\z/;    # "Neko, Nyaan \"...
+                    $readcursor &= ~$indicators->{'quoted-string'};
+                    $p = '';
                 }
                 next;
             } # End of if('"')
@@ -299,11 +298,11 @@ sub find {
 
     if( $v->{'address'} ) {
         # Push the latest values
-        push @$readbuffer, $v;
+        push @readbuffer, $v;
 
     } else {
         # No email address like <neko@example.org> in the argument
-        if( $v->{'name'} =~ $ValidEmail ) {
+        if( $v->{'name'} =~ $validemail ) {
             # String like an email address will be set to the value of "address"
              $v->{'address'} = $1.'@'.$2;
 
@@ -320,14 +319,13 @@ sub find {
                 $v->{'address'} = $1.$3;
                 $v->{'comment'} = $2;
             }
-            push @$readbuffer, $v;
+            push @readbuffer, $v;
         }
     }
 
-    while( my $e = shift @$readbuffer ) {
+    for my $e ( @readbuffer ) {
         # The element must not include any character except from 0x20 to 0x7e.
         next if $e->{'address'} =~ /[^\x20-\x7e]/;
-
         unless( $e->{'address'} =~ /\A.+[@].+\z/ ) {
             # Allow if the argument is MAILER-DAEMON
             next unless Sisimai::RFC5322->is_mailerdaemon($e->{'address'});
@@ -336,7 +334,7 @@ sub find {
         # Remove angle brackets, other brackets, and quotations: []<>{}'`
         # except a domain part is an IP address like neko@[192.0.2.222]
         $e->{'address'} =~ s/\A[\[<{('`]//;
-        $e->{'address'} =~ s/['`>})]\z//;
+        $e->{'address'} =~ s/[.'`>});]\z//;
         $e->{'address'} =~ s/\]\z// unless $e->{'address'} =~ /[@]\[[0-9A-Za-z:\.]+\]\z/;
 
         unless( $e->{'address'} =~ /\A["].+["][@]/ ) {
@@ -354,8 +352,8 @@ sub find {
             # Remove double-quotations, trailing spaces.
             for my $f ('name', 'comment') {
                 # Remove traliing spaces
-                $e->{ $f } =~ s/\A\s*//;
-                $e->{ $f } =~ s/\s*\z//;
+                $e->{ $f } =~ s/\A[ ]//g if index($e->{ $f }, ' ') == 0;
+                $e->{ $f } =~ s/[ ]\z//g if substr($e->{ $f }, -1, 1) eq ' ';
             }
             $e->{'comment'} = ''   unless $e->{'comment'} =~ /\A[(].+[)]\z/;
             $e->{'name'} =~ y/ //s    unless $e->{'name'} =~ /\A["].+["]\z/;
@@ -375,8 +373,6 @@ sub s3s4 {
     # @return   [String]        Email address without comment, brackets
     my $class = shift;
     my $input = shift // return undef;
-    return $input if ref $input;
-
     my $addrs = __PACKAGE__->find($input, 1) || [];
     return $input unless scalar @$addrs;
     return $addrs->[0]->{'address'};
@@ -390,13 +386,10 @@ sub expand_verp {
     my $email = shift // return undef;
     my $local = (split('@', $email, 2))[0];
 
-    if( $local =~ /\A[-_\w]+?[+](\w[-._\w]+\w)[=](\w[-.\w]+\w)\z/ ) {
-        # bounce+neko=example.org@example.org => neko@example.org
-        my $verp0 = $1.'@'.$2;
-        return $verp0 if Sisimai::RFC5322->is_emailaddress($verp0);
-    } else {
-        return '';
-    }
+    # bounce+neko=example.org@example.org => neko@example.org
+    return undef unless $local =~ /\A[-_\w]+?[+](\w[-._\w]+\w)[=](\w[-.\w]+\w)\z/;
+    my $verp0 = $1.'@'.$2;
+    return $verp0 if Sisimai::RFC5322->is_emailaddress($verp0);
 }
 
 sub expand_alias {
@@ -405,25 +398,12 @@ sub expand_alias {
     # @return   [String]        Expanded email address
     my $class = shift;
     my $email = shift // return undef;
-    return '' unless Sisimai::RFC5322->is_emailaddress($email);
+    return undef unless Sisimai::RFC5322->is_emailaddress($email);
 
+    # neko+straycat@example.org => neko@example.org
     my @local = split('@', $email);
-    my $alias = '';
-    if( $local[0] =~ /\A([-_\w]+?)[+].+\z/ ) {
-        # neko+straycat@example.org => neko@example.org
-        $alias = $1.'@'.$local[1];
-    }
-    return $alias;
-}
-
-sub is_undisclosed {
-    # Check the "address" is an undisclosed address or not
-    # @param    [None]
-    # @return   [Integer]   1: Undisclosed address
-    #                       0: Is not undisclosed address
-    my $self = shift;
-    return 1 if $self->host eq $undisclosed;
-    return 0;
+    return undef unless $local[0] =~ /\A([-_\w]+?)[+].+\z/;
+    return $1.'@'.$local[1];
 }
 
 sub TO_JSON {
@@ -577,7 +557,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2018 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2021 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

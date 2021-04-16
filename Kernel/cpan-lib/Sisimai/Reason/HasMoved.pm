@@ -13,8 +13,8 @@ sub match {
     # @since v4.1.25
     my $class = shift;
     my $argv1 = shift // return undef;
-    my $index = [' has been replaced by '];
 
+    state $index = [' has been replaced by '];
     return 1 if grep { rindex($argv1, $_) > -1 } @$index;
     return 0;
 }
@@ -53,7 +53,7 @@ Sisimai::Reason::HasMoved - Bounce reason is C<hasmoved> or not.
 Sisimai::Reason::HasMoved checks the bounce reason is C<hasmoved> or not. This
 class is called only Sisimai::Reason class.
 
-This is the error that a user's mailbox has moved (and is not forwarded 
+This is the error that a user's mailbox has moved (and is not forwarded
 automatically). Sisimai will set C<hasmoved> to the reason of email bounce if
 the value of Status: field in a bounce email is C<5.1.6>.
 

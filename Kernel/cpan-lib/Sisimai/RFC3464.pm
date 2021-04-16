@@ -2,45 +2,16 @@ package Sisimai::RFC3464;
 use feature ':5.10';
 use strict;
 use warnings;
-use Sisimai::Bite::Email;
+use Sisimai::Lhost;
 
 # http://tools.ietf.org/html/rfc3464
-my $Indicators = Sisimai::Bite::Email->INDICATORS;
-my $MarkingsOf = {
-    'command' => qr/[ ](RCPT|MAIL|DATA)[ ]+command\b/,
-    'message' => qr{\A(?>
-         content-type:[ ]*(?:
-              message/x?delivery-status
-             |message/disposition-notification
-             |text/plain;[ ]charset=
-             )
-        |the[ ]original[ ]message[ ]was[ ]received[ ]at[ ]
-        |this[ ]report[ ]relates[ ]to[ ]your[ ]message
-        |your[ ]message[ ]was[ ]not[ ]delivered[ ]to[ ]the[ ]following[ ]recipients
-        )
-    }x,
-    'error'  => qr/\A(?:[45]\d\d[ \t]+|[<][^@]+[@][^@]+[>]:?[ \t]+)/,
-    'rfc822' => qr{\A(?>
-         content-type:[ ]*(?:message/rfc822|text/rfc822-headers)
-        |return-path:[ ]*[<].+[>]\z
-        )\z
-    }x,
-};
-
 sub description { 'Fallback Module for MTAs' };
-sub smtpagent   { 'RFC3464' };
-sub scan {
+sub make {
     # Detect an error for RFC3464
-    # @param         [Hash] mhead       Message header of a bounce email
-    # @options mhead [String] from      From header
-    # @options mhead [String] date      Date header
-    # @options mhead [String] subject   Subject header
-    # @options mhead [Array]  received  Received headers
-    # @options mhead [String] others    Other required headers
-    # @param         [String] mbody     Message body of a bounce email
-    # @return        [Hash, Undef]      Bounce data list and message/rfc822 part
-    #                                   or Undef if it failed to parse or the
-    #                                   arguments are missing
+    # @param    [Hash] mhead    Message headers of a bounce email
+    # @param    [String] mbody  Message body of a bounce email
+    # @return   [Hash]          Bounce data list and message/rfc822 part
+    # @return   [Undef]         failed to parse or the arguments are missing
     my $class = shift;
     my $mhead = shift // return undef;
     my $mbody = shift // return undef;
@@ -49,12 +20,34 @@ sub scan {
     return undef unless keys %$mhead;
     return undef unless ref $mbody eq 'SCALAR';
 
-    require Sisimai::MDA;
-    my $dscontents = [Sisimai::Bite::Email->DELIVERYSTATUS];
-    my @hasdivided = split("\n", $$mbody);
-    my $scannedset = Sisimai::MDA->scan($mhead, $mbody);
-    my $rfc822part = '';    # (String) message/rfc822-headers part
-    my $rfc822list = [];    # (Array) Each line in message/rfc822 part string
+    state $indicators = Sisimai::Lhost->INDICATORS;
+    state $markingsof = {
+        'command' => qr/[ ](RCPT|MAIL|DATA)[ ]+command\b/,
+        'message' => qr{\A(?>
+             content-type:[ ]*(?:
+                  message/x?delivery-status
+                 |message/disposition-notification
+                 |text/plain;[ ]charset=
+                 )
+            |the[ ]original[ ]message[ ]was[ ]received[ ]at[ ]
+            |this[ ]report[ ]relates[ ]to[ ]your[ ]message
+            |your[ ]message[ ](?:
+                could[ ]not[ ]be[ ]delivered
+               |was[ ]not[ ]delivered[ ]to[ ]the[ ]following[ ]recipients
+               )
+            )
+        }x,
+        'error'  => qr/\A(?:[45]\d\d[ \t]+|[<][^@]+[@][^@]+[>]:?[ \t]+)/,
+        'rfc822' => qr{\A(?>
+             content-type:[ ]*(?:message/rfc822|text/rfc822-headers)
+            |return-path:[ ]*[<].+[>]
+            )\z
+        }x,
+    };
+
+    my $dscontents = [Sisimai::Lhost->DELIVERYSTATUS];
+    my $rfc822text = '';    # (String) message/rfc822 part text
+    my $maybealias = '';    # (String) Original-Recipient field
     my $blanklines = 0;     # (Integer) The number of blank lines
     my $readcursor = 0;     # (Integer) Points the current cursor position
     my $recipients = 0;     # (Integer) The number of 'Final-Recipient' header
@@ -66,44 +59,41 @@ sub scan {
     };
     my $v = undef;
     my $p = '';
-    my $d = '';
 
-    for my $e ( @hasdivided ) {
+    for my $e ( split("\n", $$mbody) ) {
         # Read each line between the start of the message and the start of rfc822 part.
-        $d = lc $e;
+        my $d = lc $e;
         unless( $readcursor ) {
-            # Beginning of the bounce message or delivery status part
-            if( $d =~ $MarkingsOf->{'message'} ) {
-                $readcursor |= $Indicators->{'deliverystatus'};
+            # Beginning of the bounce message or message/delivery-status part
+            if( $d =~ $markingsof->{'message'} ) {
+                $readcursor |= $indicators->{'deliverystatus'};
                 next;
             }
         }
 
-        unless( $readcursor & $Indicators->{'message-rfc822'} ) {
-            # Beginning of the original message part
-            if( $d =~ $MarkingsOf->{'rfc822'} ) {
-                $readcursor |= $Indicators->{'message-rfc822'};
+        unless( $readcursor & $indicators->{'message-rfc822'} ) {
+            # Beginning of the original message part(message/rfc822)
+            if( $d =~ $markingsof->{'rfc822'} ) {
+                $readcursor |= $indicators->{'message-rfc822'};
                 next;
             }
         }
 
-        if( $readcursor & $Indicators->{'message-rfc822'} ) {
-            # After "message/rfc822"
+        if( $readcursor & $indicators->{'message-rfc822'} ) {
+            # message/rfc822 OR text/rfc822-headers part
             unless( length $e ) {
-                $blanklines++;
-                last if $blanklines > 1;
+                last if ++$blanklines > 1;
                 next;
             }
-            push @$rfc822list, $e;
+            $rfc822text .= sprintf("%s\n", $e);
 
         } else {
-            # Before "message/rfc822"
-            next unless $readcursor & $Indicators->{'deliverystatus'};
+            # message/delivery-status part
+            next unless $readcursor & $indicators->{'deliverystatus'};
             next unless length $e;
 
             $v = $dscontents->[-1];
-            if( $e =~ /\A(?:Final|Original)-Recipient:[ ]*(?:RFC|rfc)822;[ ]*([^ ]+)\z/ ||
-                $e =~ /\A(?:Final|Original)-Recipient:[ ]*([^ ]+)\z/ ) {
+            if( $e =~ /\A(Original|Final)-[Rr]ecipient:[ ]*.+;[ ]*([^ ]+)\z/ ) {
                 # 2.3.2 Final-Recipient field
                 #   The Final-Recipient field indicates the recipient for which this set
                 #   of per-recipient fields applies.  This field MUST be present in each
@@ -117,23 +107,33 @@ sub scan {
                 #   The Original-Recipient field indicates the original recipient address
                 #   as specified by the sender of the message for which the DSN is being
                 #   issued.
-                # 
+                #
                 #       original-recipient-field =
                 #           "Original-Recipient" ":" address-type ";" generic-address
                 #
                 #       generic-address = *text
-                my $x = $v->{'recipienet'} || '';
-                my $y = Sisimai::Address->s3s4($1);
+                if( $1 eq 'Original' ) {
+                    # Original-Recipient: ...
+                    $maybealias = $2;
 
-                if( $x && $x ne $y ) {
-                    # There are multiple recipient addresses in the message body.
-                    push @$dscontents, Sisimai::Bite::Email->DELIVERYSTATUS;
-                    $v = $dscontents->[-1];
+                } else {
+                    # Final-Recipient: ...
+                    my $x = $v->{'recipient'} || '';
+                    my $y = Sisimai::Address->s3s4($2);
+                       $y = $maybealias unless Sisimai::RFC5322->is_emailaddress($y);
+
+                    if( $x && $x ne $y ) {
+                        # There are multiple recipient addresses in the message body.
+                        push @$dscontents, Sisimai::Lhost->DELIVERYSTATUS;
+                        $v = $dscontents->[-1];
+                    }
+                    $v->{'recipient'} = $y;
+                    $recipients++;
+                    $itisbounce ||= 1;
+
+                    $v->{'alias'} ||= $maybealias;
+                    $maybealias = '';
                 }
-                $v->{'recipient'} = $y;
-                $recipients++;
-                $itisbounce ||= 1;
-
             } elsif( $e =~ /\AX-Actual-Recipient:[ ]*(?:RFC|rfc)822;[ ]*([^ ]+)\z/ ) {
                 # X-Actual-Recipient: RFC822; |IFS=' ' && exec procmail -f- || exit 75 ...
                 # X-Actual-Recipient: rfc822; kijitora@neko.example.jp
@@ -237,7 +237,7 @@ sub scan {
                         #       mta-name = *text
                         #
                         #   The Reporting-MTA field is defined as follows:
-                        # 
+                        #
                         #   A DSN describes the results of attempts to deliver, relay, or gateway
                         #   a message to one or more recipients.  In all cases, the Reporting-MTA
                         #   is the MTA that attempted to perform the delivery, relay, or gateway
@@ -273,7 +273,7 @@ sub scan {
                     } else {
                         # Get error message
                         next if $e =~ /\A[ -]+/;
-                        next unless $e =~ $MarkingsOf->{'error'};
+                        next unless $e =~ $markingsof->{'error'};
 
                         # 500 User Unknown
                         # <kijitora@example.jp> Unknown
@@ -281,7 +281,7 @@ sub scan {
                     }
                 }
             }
-        } # End of if: rfc822
+        } # End of message/delivery-status
     } continue {
         # Save the current line for the next loop
         $p = $e;
@@ -309,7 +309,7 @@ sub scan {
         }
         last unless $match;
 
-        my $re_skip = qr{(?>
+        state $re_skip = qr{(?>
              \A[-]+=
             |\A\s+\z
             |\A\s*--
@@ -321,8 +321,7 @@ sub scan {
             |:[ ]--------
             )
         }x;
-
-        my $re_stop  = qr{(?:
+        state $re_stop  = qr{(?:
              \A[*][*][*][ ].+[ ].+[ ][*][*][*]
             |\Acontent-type:[ ]message/delivery-status
             |\Ahere[ ]is[ ]a[ ]copy[ ]of[ ]the[ ]first[ ]part[ ]of[ ]the[ ]message
@@ -344,8 +343,7 @@ sub scan {
             |your[ ]message[ ]reads[ ][(]in[ ]part[)]:
             )
         }x;
-
-        my $re_addr = qr{(?:
+        state $re_addr = qr{(?:
              \A\s*
             |\A["].+["]\s*
             |\A[ \t]*recipient:[ \t]*
@@ -376,9 +374,8 @@ sub scan {
         my $b = $dscontents->[-1];
         for my $e ( split("\n", $$mbody) ) {
             # Get the recipient's email address and error messages.
-            last if $e eq '__END_OF_EMAIL_MESSAGE__';
-            $d = lc $e;
-            last if $d =~ $MarkingsOf->{'rfc822'};
+            my $d = lc $e;
+            last if $d =~ $markingsof->{'rfc822'};
             last if $d =~ $re_stop;
 
             next unless length $e;
@@ -393,11 +390,10 @@ sub scan {
 
                 if( $x && $x ne $y ) {
                     # There are multiple recipient addresses in the message body.
-                    push @$dscontents, Sisimai::Bite::Email->DELIVERYSTATUS;
+                    push @$dscontents, Sisimai::Lhost->DELIVERYSTATUS;
                     $b = $dscontents->[-1];
                 }
                 $b->{'recipient'} = $y;
-                $b->{'agent'} = __PACKAGE__->smtpagent.'::Fallback';
                 $recipients++;
                 $itisbounce ||= 1;
 
@@ -407,31 +403,26 @@ sub scan {
             }
             $b->{'diagnosis'} .= ' '.$e;
         }
-    }
+    } # END OF BODY_PARSER_FOR_FALLBACK
     return undef unless $itisbounce;
 
-    unless( $recipients ) {
-        # Try to get a recipient address from email headers
-        for my $e ( @$rfc822list ) {
-            # Check To: header in the original message
-            if( $e =~ /\ATo:\s*(.+)\z/ ) {
-                my $r = Sisimai::Address->find($1, 1) || [];
-                my $b = undef;
-                next unless scalar @$r;
-                push @$dscontents, Sisimai::Bite::Email->DELIVERYSTATUS if scalar(@$dscontents) == $recipients;
-
-                $b = $dscontents->[-1];
-                $b->{'recipient'} = $r->[0]->{'address'};
-                $b->{'agent'} = __PACKAGE__->smtpagent.'::Fallback';
-                $recipients++;
-            }
+    if( $recipients == 0 && $rfc822text =~ /^To:[ ]*(.+)/m ) {
+        # Try to get a recipient address from "To:" header of the original message
+        if( my $r = Sisimai::Address->find($1, 1) ) {
+            # Found a recipient address
+            push @$dscontents, Sisimai::Lhost->DELIVERYSTATUS if scalar(@$dscontents) == $recipients;
+            my $b = $dscontents->[-1];
+            $b->{'recipient'} = $r->[0]->{'address'};
+            $recipients++;
         }
     }
     return undef unless $recipients;
 
+    require Sisimai::MDA;
+    my $mdabounced = Sisimai::MDA->make($mhead, $mbody);
     for my $e ( @$dscontents ) {
         # Set default values if each value is empty.
-        map { $e->{ $_ } ||= $connheader->{ $_ } || '' } keys %$connheader;
+        $e->{ $_ } ||= $connheader->{ $_ } || '' for keys %$connheader;
 
         if( exists $e->{'alterrors'} && $e->{'alterrors'} ) {
             # Copy alternative error message
@@ -444,22 +435,18 @@ sub scan {
         }
         $e->{'diagnosis'} = Sisimai::String->sweep($e->{'diagnosis'});
 
-        if( $scannedset ) {
-            # Make bounce data by the values returned from Sisimai::MDA->scan()
-            $e->{'agent'}     = $scannedset->{'mda'} || __PACKAGE__->smtpagent;
-            $e->{'reason'}    = $scannedset->{'reason'} || 'undefined';
-            $e->{'diagnosis'} = $scannedset->{'message'} if $scannedset->{'message'};
+        if( $mdabounced ) {
+            # Make bounce data by the values returned from Sisimai::MDA->make()
+            $e->{'agent'}     = $mdabounced->{'mda'} || 'RFC3464';
+            $e->{'reason'}    = $mdabounced->{'reason'} || 'undefined';
+            $e->{'diagnosis'} = $mdabounced->{'message'} if $mdabounced->{'message'};
             $e->{'command'}   = '';
-        } else {
-            # Set the value of smtpagent
-            $e->{'agent'} = __PACKAGE__->smtpagent;
         }
         $e->{'date'}   ||= $mhead->{'date'};
-        $e->{'status'} ||= Sisimai::SMTP::Status->find($e->{'diagnosis'});
-        $e->{'command'}  = $1 if $e->{'diagnosis'} =~ $MarkingsOf->{'command'};
+        $e->{'status'} ||= Sisimai::SMTP::Status->find($e->{'diagnosis'}) || '';
+        $e->{'command'}  = $1 if $e->{'diagnosis'} =~ $markingsof->{'command'};
     }
-    $rfc822part = Sisimai::RFC5322->weedout($rfc822list);
-    return { 'ds' => $dscontents, 'rfc822' => $$rfc822part };
+    return { 'ds' => $dscontents, 'rfc822' => $rfc822text };
 }
 
 1;
@@ -477,7 +464,7 @@ Sisimai::RFC3464 - bounce mail parser class for Fallback.
 =head1 DESCRIPTION
 
 Sisimai::RFC3464 is a class which called from called from only Sisimai::Message
-when other Sisimai::Bite::Email::* modules did not detected a bounce reason.
+when other Sisimai::Lhost::* modules did not detected a bounce reason.
 
 =head1 CLASS METHODS
 
@@ -487,15 +474,9 @@ C<description()> returns description string of this module.
 
     print Sisimai::RFC3464->description;
 
-=head2 C<B<smtpagent()>>
+=head2 C<B<make(I<header data>, I<reference to body string>)>>
 
-C<smtpagent()> returns MDA name or string 'RFC3464'.
-
-    print Sisimai::RFC3464->smtpagent;
-
-=head2 C<B<scan(I<header data>, I<reference to body string>)>>
-
-C<scan()> method parses a bounced email and return results as a array reference.
+C<make()> method parses a bounced email and return results as a array reference.
 See Sisimai::Message for more details.
 
 =head1 AUTHOR
@@ -504,7 +485,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2018 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2020 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 
