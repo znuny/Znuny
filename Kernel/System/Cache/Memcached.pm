@@ -33,6 +33,9 @@ sub new {
     my $Self = {};
     bless( $Self, $Type );
 
+    # 0=off; 1=writes; 2=+reads; 3=+connects;
+    $Self->{Debug} = $Param{Debug} || 0;
+
     # Get config object.
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
@@ -62,6 +65,28 @@ sub new {
 
     return $Self;
 }
+
+sub Disconnect {
+    my $Self = shift;
+
+    # Debug.
+    if ( $Self->{Debug} > 2 ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Caller   => 1,
+            Priority => 'debug',
+            Message  => 'Memcached.pm->Disconnect',
+        );
+    }
+
+    # Do disconnect.
+    if ( $Self->{MemcachedObject} ) {
+        $Self->{MemcachedObject}->disconnect_all();
+        delete $Self->{MemcachedObject};
+    }
+
+    return 1;
+}
+
 
 sub Set {
     my ( $Self, %Param ) = @_;

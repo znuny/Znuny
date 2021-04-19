@@ -121,11 +121,23 @@ sub ArticleIndexRebuild {
 
     my @ArticleIDs = keys %{ $Param{ArticleTicketIDs} };
 
+    my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+
+    # Disconnect & destroy memcached object to avoid child processes using same connection.
+    if ( $ConfigObject->Get('Cache::Module') eq 'Kernel::System::Cache::Memcached' ) {
+        $Kernel::OM->Get('Kernel::System::Cache::Memcached')->Disconnect();
+        $Kernel::OM->ObjectsDiscard(
+            Objects => [ 'Kernel::System::Cache::Memcached' ],
+            ForcePackageReload => 0,
+        );
+    }
+
     $Kernel::OM->Get('Kernel::System::DB')->Disconnect();
 
     # Destroy objects for the child processes.
     $Kernel::OM->ObjectsDiscard(
         Objects => [
+            'Kernel::System::Cache::Memcached',
             'Kernel::System::DB',
         ],
         ForcePackageReload => 0,
@@ -139,7 +151,6 @@ sub ArticleIndexRebuild {
         push @{ $ArticleChunks[ $Count++ % $Param{Children} ] }, $ArticleID;
     }
 
-    my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
     my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
     my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
