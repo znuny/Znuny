@@ -135,4 +135,5 @@ The following persons contributed to OTRS:
 * s7design <otrs@s7designcreative.com>
 * sergot <filip@sergot.pl>
 * tipue <80031303+tipue-dev@users.noreply.github.com>
+* tipue <tim.puettmanns@maxence.de>
 * vlascoder <vlascoder@gmail.com>

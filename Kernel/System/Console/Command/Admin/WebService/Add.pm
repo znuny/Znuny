@@ -51,7 +51,7 @@ sub PreRun {
         die "Source file $SourcePath does not exist / is not readable.\n";
     }
 
-    my $List             = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice')->WebserviceList( Valid => 0 );
+    my $List = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice')->WebserviceList( Valid => 0 );
     my %WebServiceLookup = reverse %{$List};
 
     my $Name = $Self->GetOption('name');
