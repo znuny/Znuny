@@ -251,4 +251,13 @@ sub _GetMemcachedKeyName {
     return $MemcachedKeyName;
 }
 
+sub DESTROY {
+    my $Self = shift;
+
+    # Disconnect before trashing object.
+    $Self->Disconnect();
+
+    return 1;
+}
+
 1;
