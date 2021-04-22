@@ -137,10 +137,10 @@ sub RunAsynchronous {
     # get AuthSession object
     my $AuthSessionObject = $Kernel::OM->Get('Kernel::System::AuthSession');
 
-    # delete the old session ids
-    my @Expired = $AuthSessionObject->GetExpiredSessionIDs();
-    for my $Try ( 0 .. 1 ) {
-        for my $SessionID ( @{ $Expired[$_] } ) {
+    # delete the old session IDs
+    my @ExpiredOrIdleSessionIDs = $AuthSessionObject->GetExpiredSessionIDs();
+    for my $ExpiredOrIdleSessionIDs (@ExpiredOrIdleSessionIDs) {
+        for my $SessionID ( @{$ExpiredOrIdleSessionIDs} ) {
             $AuthSessionObject->RemoveSessionID( SessionID => $SessionID );
         }
     }

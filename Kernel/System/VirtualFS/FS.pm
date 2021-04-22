@@ -171,7 +171,7 @@ sub Delete {
     if ( !$Param{BackendKey} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  => "Need $_!",
+            Message  => "Need BackendKey!",
         );
         return;
     }
@@ -202,7 +202,7 @@ sub _BackendKeyParse {
     if ( !$Param{BackendKey} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  => "Need $_!",
+            Message  => "Need BackendKey!",
         );
         return;
     }
@@ -225,7 +225,7 @@ sub _SplitDir {
     if ( !$Param{Filename} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  => "Need $_!",
+            Message  => "Need Filename!",
         );
         return;
     }

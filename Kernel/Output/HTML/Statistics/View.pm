@@ -2081,7 +2081,7 @@ sub _TimeOutput {
             $TimeConfig{ $Element . 'StopSecond' }  = 59;
 
             for my $Key (qw(Start Stop)) {
-                $TimeConfig{Prefix} = $Element . $_;
+                $TimeConfig{Prefix} = $Element . $Key;
 
                 # time setting if available
                 if (

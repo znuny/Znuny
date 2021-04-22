@@ -596,7 +596,7 @@ sub IndexCreate {
         $SQL .= $Array[$Index]->{Name};
         if ( $Array[$Index]->{Size} ) {
 
-            #           $SQL .= "($Array[$_]->{Size})";
+            #           $SQL .= "($Array[$Index]->{Size})";
         }
     }
     $SQL .= ')';

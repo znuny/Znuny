@@ -710,7 +710,7 @@ sub Run {
             my $Subject = $ConfigObject->Get('NotificationSubjectLostPasswordToken')
                 || 'ERROR: NotificationSubjectLostPasswordToken is missing!';
             for my $Key ( sort keys %UserData ) {
-                $Body =~ s/<OTRS_$_>/$UserData{$Key}/gi;
+                $Body =~ s/<OTRS_$Key>/$UserData{$Key}/gi;
             }
             my $Sent = $EmailObject->Send(
                 To       => $UserData{UserEmail},
@@ -769,7 +769,7 @@ sub Run {
         my $Subject = $ConfigObject->Get('NotificationSubjectLostPassword')
             || 'New Password!';
         for my $Key ( sort keys %UserData ) {
-            $Body =~ s/<OTRS_$_>/$UserData{$Key}/gi;
+            $Body =~ s/<OTRS_$Key>/$UserData{$Key}/gi;
         }
         my $Sent = $EmailObject->Send(
             To       => $UserData{UserEmail},

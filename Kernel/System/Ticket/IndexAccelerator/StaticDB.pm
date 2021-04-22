@@ -398,7 +398,7 @@ sub TicketAcceleratorIndex {
                 $SQL .= ",";
             }
 
-            $SQL .= $DBObject->Quote( $QueueIDs[$_], 'Integer' );
+            $SQL .= $DBObject->Quote( $QueueIDs[$Index], 'Integer' );
         }
 
         $SQL .= " )";

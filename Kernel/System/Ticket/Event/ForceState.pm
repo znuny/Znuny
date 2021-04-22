@@ -35,7 +35,7 @@ sub Run {
         if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -44,7 +44,7 @@ sub Run {
         if ( !$Param{Data}->{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_ in Data!"
+                Message  => "Need $Needed in Data!"
             );
             return;
         }
