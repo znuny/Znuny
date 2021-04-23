@@ -139,7 +139,6 @@ sub ArticleIndexRebuild {
     # Destroy objects for the child processes.
     $Kernel::OM->ObjectsDiscard(
         Objects => [
-            'Kernel::System::Cache::Memcached',
             'Kernel::System::DB',
         ],
         ForcePackageReload => 0,
