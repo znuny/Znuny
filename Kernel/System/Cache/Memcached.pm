@@ -12,6 +12,7 @@
 # --
 
 package Kernel::System::Cache::Memcached;
+## nofilter(TidyAll::Plugin::Znuny::Legal::UpdateZnunyCopyright)
 
 use strict;
 use warnings;
