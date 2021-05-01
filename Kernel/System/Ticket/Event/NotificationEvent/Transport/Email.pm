@@ -440,9 +440,6 @@ sub TransportSettingsDisplayGet {
 
     # security fields
 
-    # get config object
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
     my %SecuritySignEncryptOptions;
 
     if ( $ConfigObject->Get('PGP') ) {
