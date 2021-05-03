@@ -44,7 +44,7 @@ The source code of Znuny LTS is publicly available on [GitHub](https://github.co
 You want to get in touch?
 - [Project website](https://www.znuny.org)
 - [Community forum](https://community.znuny.org)
-- [Discord Server](https://discord.gg/dHSKZYpkpc)
+- [Discord Server](https://discord.gg/XTud3WWZTs)
 - [Commercial services](https://www.znuny.com)
 
 
