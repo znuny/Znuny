@@ -849,7 +849,7 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::NotifyModule###1100-OTRSBusiness" Required="1" Valid="1">
+    <Setting Name="Frontend::NotifyModule###1100-OTRSBusiness" Required="0" Valid="0">
         <Description Translatable="1">Defines the module to display a notification in different interfaces on different occasions for OTRS Business Solution™.</Description>
         <Navigation>Frontend::Agent::FrontendNotification</Navigation>
         <Value>
@@ -859,7 +859,7 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="CustomerFrontend::NotifyModule###1-OTRSBusiness" Required="1" Valid="1">
+    <Setting Name="CustomerFrontend::NotifyModule###1-OTRSBusiness" Required="0" Valid="0">
         <Description Translatable="1">Defines the module to display a notification in different interfaces on different occasions for OTRS Business Solution™.</Description>
         <Navigation>Frontend::Customer::FrontendNotification</Navigation>
         <Value>
