@@ -7375,54 +7375,6 @@ via the Preferences button after logging in.
                         <Item Key="Prio">8500</Item>
                     </Hash>
                 </Item>
-<!--
-                <Item>
-                    <Hash>
-                        <Item Key="Group">
-                            <Array>
-                                <Item>stats</Item>
-                            </Array>
-                        </Item>
-                        <Item Key="GroupRo">
-                            <Array>
-                                <Item>stats</Item>
-                            </Array>
-                        </Item>
-                        <Item Key="Description" Translatable="1">Statistic Reports overview.</Item>
-                        <Item Key="Name" Translatable="1">Reports (OTRS Business Solution™)</Item>
-                        <Item Key="Link">Action=AgentStatisticsReports;Subaction=Overview</Item>
-                        <Item Key="LinkOption">class="OTRSBusinessRequired"</Item>
-                        <Item Key="NavBar">Reports</Item>
-                        <Item Key="Type"></Item>
-                        <Item Key="Block"></Item>
-                        <Item Key="AccessKey"></Item>
-                        <Item Key="Prio">100</Item>
-                    </Hash>
-                </Item>
--->
-                <Item>
-                    <Hash>
-                        <Item Key="Group">
-                            <Array>
-                                <Item>stats</Item>
-                            </Array>
-                        </Item>
-                        <Item Key="GroupRo">
-                            <Array>
-                                <Item>stats</Item>
-                            </Array>
-                        </Item>
-                        <Item Key="Description" Translatable="1">Statistics overview.</Item>
-                        <Item Key="Name" Translatable="1">Statistics</Item>
-                        <Item Key="Link">Action=AgentStatistics;Subaction=Overview</Item>
-                        <Item Key="LinkOption"></Item>
-                        <Item Key="NavBar">Reports</Item>
-                        <Item Key="Type"></Item>
-                        <Item Key="Block"></Item>
-                        <Item Key="AccessKey"></Item>
-                        <Item Key="Prio">200</Item>
-                    </Hash>
-                </Item>
             </Array>
         </Value>
     </Setting>
