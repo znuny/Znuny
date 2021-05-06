@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -52,20 +53,22 @@ sub Run {
 
     for my $Reference (@References) {
 
-        my %Article = $ArticleBackendObject->ArticleGetByMessageID(
-            MessageID => "<$Reference>",
+        # Get ticket id containing article(s) with given message id.
+        my $TicketID = $ArticleBackendObject->ArticleGetTicketIDByMessageID(
+            MessageID              => "<$Reference>",
+            Quiet                  => $Param{Quiet},
+            CommunicationLogObject => $Self->{CommunicationLogObject},
         );
 
-        if (%Article) {
-
+        if ($TicketID) {
             $Self->{CommunicationLogObject}->ObjectLog(
                 ObjectLogType => 'Message',
                 Priority      => 'Debug',
                 Key           => 'Kernel::System::PostMaster::FollowUpCheck::References',
-                Value         => "Found valid TicketID '$Article{TicketID}' in email references.",
+                Value         => "Found valid TicketID '$TicketID' using email references.",
             );
 
-            return $Article{TicketID};
+            return $TicketID;
         }
     }
 

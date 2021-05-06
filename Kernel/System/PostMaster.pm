@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -153,7 +154,10 @@ sub Run {
     my $GetParam = $Self->GetEmailParams();
 
     # check if follow up
-    my ( $Tn, $TicketID ) = $Self->CheckFollowUp( GetParam => $GetParam );
+    my ( $Tn, $TicketID ) = $Self->CheckFollowUp(
+        GetParam => $GetParam,
+        Quiet    => 1,
+    );
 
     # get config objects
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
@@ -494,7 +498,8 @@ sub Run {
 to detect the ticket number in processing email
 
     my ($TicketNumber, $TicketID) = $PostMasterObject->CheckFollowUp(
-        Subject => 'Re: [Ticket:#123456] Some Subject',
+        GetParam => $GetParam,
+        Quiet    => 0,  # 1 = don't generate logs (i.e. in prerun)
     );
 
 =cut
@@ -511,11 +516,15 @@ sub CheckFollowUp {
     # Load CheckFollowUp Modules
     my $Jobs = $ConfigObject->Get('PostMaster::CheckFollowUpModule');
 
+    # Be loud by default.
+    if ( !defined $Param{Quiet} ) {
+        $Param{Quiet} = 0;
+    }
+
     if ( IsHashRefWithData($Jobs) ) {
         my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
         JOB:
         for my $Job ( sort keys %$Jobs ) {
-            my $Module = $Jobs->{$Job};
 
             return if !$MainObject->Require( $Jobs->{$Job}->{Module} );
 
@@ -534,7 +543,8 @@ sub CheckFollowUp {
             }
             my $TicketID = $CheckObject->Run(
                 %Param,
-                UserID => $Self->{PostmasterUserID},
+                UserID    => $Self->{PostmasterUserID},
+                JobConfig => $Jobs->{$Job},
             );
             if ($TicketID) {
                 my %Ticket = $TicketObject->TicketGet(
