@@ -13,6 +13,7 @@ use strict;
 use warnings;
 
 our @ObjectDependencies = (
+    'Kernel::System::Ticket::Article',
     'Kernel::System::Log',
     'Kernel::System::Ticket',
 );
