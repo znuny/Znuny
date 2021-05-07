@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -147,8 +148,9 @@ sub CheckEmail {
         if ($Resolver) {
 
             # it's no fun to have this hanging in the web interface
-            $Resolver->tcp_timeout(3);
-            $Resolver->udp_timeout(3);
+            my $ResolverTimeout = $ConfigObject->Get('ResolverTimeout') // 3;
+            $Resolver->tcp_timeout($ResolverTimeout);
+            $Resolver->udp_timeout($ResolverTimeout);
 
             # check if we need to use a specific name server
             my $Nameserver = $ConfigObject->Get('CheckMXRecord::Nameserver');
