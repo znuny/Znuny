@@ -266,6 +266,13 @@
             <Item ValueType="String" ValueRegex="">Example Company</Item>
         </Value>
     </Setting>
+    <Setting Name="CustomerShortcutIcon" Required="0" Valid="0">
+        <Description Translatable="1">The shortcut icon for the customer interface.</Description>
+        <Navigation>Frontend::Customer</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">/otrs-web/skins/Agent/default/img/icons/product.ico</Item>
+        </Value>
+    </Setting>
     <Setting Name="CustomerLogo" Required="0" Valid="1">
         <Description Translatable="1">The logo shown in the header of the customer interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.</Description>
         <Navigation>Frontend::Customer</Navigation>
@@ -277,6 +284,13 @@
                 <Item Key="StyleHeight">45px</Item>
                 <Item Key="StyleWidth">216px</Item>
             </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="AgentShortcutIcon" Required="0" Valid="0">
+        <Description Translatable="1">The shortcut icon for the agent interface.</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">/otrs-web/skins/Agent/default/img/icons/product.ico</Item>
         </Value>
     </Setting>
     <Setting Name="AgentLogo" Required="0" Valid="1">

@@ -17,7 +17,11 @@ X-OTRS-Login: [% Env("Baselink") %]
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     <meta http-equiv="Content-type" content="text/html;charset=utf-8" />
+[% IF Config("AgentShortcutIcon") -%]
+    <link rel="shortcut icon" href="[% Config("AgentShortcutIcon") %]" type="image/ico" />
+[% ELSE -%]
     <link rel="shortcut icon" href="[% Config("Frontend::ImagePath") %]icons/product.ico" type="image/ico" />
+[% END -%]
     <link rel="apple-touch-icon" href="[% Config("Frontend::ImagePath") %]icons/apple-touch-icon.png" />
 
 [% RenderBlockStart("CommonCSS") %]
