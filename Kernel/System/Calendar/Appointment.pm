@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -1646,11 +1647,12 @@ sub GetUniqueID {
     $StartTimeStrg =~ s/[-:]//g;
     $StartTimeStrg =~ s/\s/T/;
 
-    # get system FQDN
-    my $FQDN = $Kernel::OM->Get('Kernel::Config')->Get('FQDN');
+    # get system ExtFQDN
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $ExtFQDN = $ConfigObject->Get('ExtFQDN') || $ConfigObject->Get('FQDN');
 
     # return UniqueID
-    return "$StartTimeStrg-$Hash\@$FQDN";
+    return "$StartTimeStrg-$Hash\@$ExtFQDN";
 }
 
 =head2 AppointmentUpcomingGet()
