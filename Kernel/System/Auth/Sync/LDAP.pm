@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -267,9 +268,8 @@ sub Sync {
         # add new user
         if ( %SyncUser && !$UserID ) {
             $UserID = $UserObject->UserAdd(
-                UserTitle => 'Mr/Mrs',
                 UserLogin => $Param{User},
-                %SyncUser,
+                %SyncUser, # Must contain other parameters required by UserAdd.
                 UserType     => 'User',
                 ValidID      => 1,
                 ChangeUserID => 1,
@@ -333,17 +333,20 @@ sub Sync {
             my $AttributeChange;
             ATTRIBUTE:
             for my $Attribute ( sort keys %SyncUser ) {
-                next ATTRIBUTE if defined $SyncUser{$Attribute} && $SyncUser{$Attribute} eq $UserData{$Attribute};
+                # Treat undef and empty strings as equal.
+                my $SyncUserAttribute = $SyncUser{$Attribute} // '';
+                my $UserDataAttribute = $UserData{$Attribute} // '';
+                next ATTRIBUTE if $SyncUserAttribute eq $UserDataAttribute;
                 $AttributeChange = 1;
                 last ATTRIBUTE;
             }
 
             if ($AttributeChange) {
                 $UserObject->UserUpdate(
-                    %UserData,
+                    ValidID   => $UserData{ValidID}, # May be not present in %SyncUser and is required by UserUpdate.
                     UserID    => $UserID,
                     UserLogin => $Param{User},
-                    %SyncUser,
+                    %SyncUser, # Must contain other parameters required by UserUpdate.
                     UserType     => 'User',
                     ChangeUserID => 1,
                 );
