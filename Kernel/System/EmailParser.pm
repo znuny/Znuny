@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -425,7 +426,7 @@ sub GetReturnContentType {
     my $Self = shift;
 
     my $ContentType = $Self->GetContentType();
-    $ContentType =~ s/(charset=)(.*)/$1utf-8/ig;
+    $ContentType =~ s/charset\s*=.*/charset=utf-8/ig;
 
     # debug
     if ( $Self->{Debug} > 0 ) {
@@ -841,7 +842,7 @@ sub PartsAttachments {
 
         # Also replace charset in meta tags of HTML emails.
         if ( $MimeType eq 'text/html' ) {
-            $PartData{Content} =~ s/(<meta[^>]+charset=("|'|))\Q$OldCharset\E/$1utf-8/gi;
+            $PartData{Content} =~ s/(<meta[^>]+charset\s*=\s*("|'|))\Q$OldCharset\E/$1utf-8/gi;
         }
 
         $PartData{Filesize} = bytes::length( $PartData{Content} );

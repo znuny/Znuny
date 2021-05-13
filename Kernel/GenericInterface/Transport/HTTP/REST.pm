@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -263,7 +264,7 @@ sub ProviderProcessRequest {
 
     # Convert char-set if necessary.
     my $ContentCharset;
-    if ( $ENV{'CONTENT_TYPE'} =~ m{ \A .* charset= ["']? ( [^"']+ ) ["']? \z }xmsi ) {
+    if ( $ENV{'CONTENT_TYPE'} =~ m{ \A .* charset\s*=\s* ["']? ( [^"']+ ) ["']? \z }xmsi ) {
         $ContentCharset = $1;
     }
     if ( $ContentCharset && $ContentCharset !~ m{ \A utf [-]? 8 \z }xmsi ) {

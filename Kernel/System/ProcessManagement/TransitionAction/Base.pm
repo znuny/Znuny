@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -269,7 +270,7 @@ sub _ReplaceAdditionalAttributes {
                 );
 
                 my $Charset = $AttachmentHTML{ContentType} || '';
-                $Charset =~ s/.+?charset=("|'|)(\w+)/$2/gi;
+                $Charset =~ s/.+?charset\s*=\s*("|'|)(\w+)/$2/gi;
                 $Charset =~ s/"|'//g;
                 $Charset =~ s/(.+?);.*/$1/g;
 

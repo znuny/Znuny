@@ -2,6 +2,7 @@
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # Copyright (C) 2021 maxence business consulting GmbH, http://www.maxence.de
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -993,9 +994,9 @@ sub _CheckArticle {
 
         # check Charset part
         my $Charset = '';
-        if ( $Article->{ContentType} =~ /charset=/i ) {
+        if ( $Article->{ContentType} =~ /charset\s*=\s*/i ) {
             $Charset = $Article->{ContentType};
-            $Charset =~ s/.+?charset=("|'|)(\w+)/$2/gi;
+            $Charset =~ s/.+?charset\s*=\s*("|'|)(\w+)/$2/gi;
             $Charset =~ s/"|'//g;
             $Charset =~ s/(.+?);.*/$1/g;
         }
@@ -1253,9 +1254,9 @@ sub _CheckAttachment {
 
         # check Charset part
         my $Charset = '';
-        if ( $Attachment->{ContentType} =~ /charset=/i ) {
+        if ( $Attachment->{ContentType} =~ /charset\s*=\s*/i ) {
             $Charset = $Attachment->{ContentType};
-            $Charset =~ s/.+?charset=("|'|)(\w+)/$2/gi;
+            $Charset =~ s/.+?charset\s*=\s*("|'|)(\w+)/$2/gi;
             $Charset =~ s/"|'//g;
             $Charset =~ s/(.+?);.*/$1/g;
         }
