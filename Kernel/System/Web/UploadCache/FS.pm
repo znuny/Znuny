@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -101,6 +102,7 @@ sub FormIDAddFile {
     return if !$Self->_FormIDValidate( $Param{FormID} );
 
     $Param{Content} = '' if !defined( $Param{Content} );
+    $Param{FilenameOrig} = '' if !defined( $Param{FilenameOrig} );
 
     # create content id
     my $ContentID   = $Param{ContentID};
@@ -133,38 +135,50 @@ sub FormIDAddFile {
     # get main object
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
+    $Param{Filename} = $MainObject->FilenameCleanUp(
+        Filename => $Param{Filename},
+    );
+
     # files must readable for creator
     return if !$MainObject->FileWrite(
-        Directory  => $Directory,
-        Filename   => "$Param{Filename}",
-        Content    => \$Param{Content},
-        Mode       => 'binmode',
-        Permission => '640',
-        NoReplace  => 1,
+        Directory       => $Directory,
+        Filename        => "$Param{Filename}",
+        Content         => \$Param{Content},
+        Mode            => 'binmode',
+        Permission      => '640',
+        NoFilenameClean => 1,
     );
     return if !$MainObject->FileWrite(
-        Directory  => $Directory,
-        Filename   => "$Param{Filename}.ContentType",
-        Content    => \$Param{ContentType},
-        Mode       => 'binmode',
-        Permission => '640',
-        NoReplace  => 1,
+        Directory       => $Directory,
+        Filename        => "$Param{Filename}.ContentType",
+        Content         => \$Param{ContentType},
+        Mode            => 'binmode',
+        Permission      => '640',
+        NoFilenameClean => 1,
     );
     return if !$MainObject->FileWrite(
-        Directory  => $Directory,
-        Filename   => "$Param{Filename}.ContentID",
-        Content    => \$ContentID,
-        Mode       => 'binmode',
-        Permission => '640',
-        NoReplace  => 1,
+        Directory       => $Directory,
+        Filename        => "$Param{Filename}.ContentID",
+        Content         => \$ContentID,
+        Mode            => 'binmode',
+        Permission      => '640',
+        NoFilenameClean => 1,
     );
     return if !$MainObject->FileWrite(
-        Directory  => $Directory,
-        Filename   => "$Param{Filename}.Disposition",
-        Content    => \$Disposition,
-        Mode       => 'binmode',
-        Permission => '644',
-        NoReplace  => 1,
+        Directory       => $Directory,
+        Filename        => "$Param{Filename}.Disposition",
+        Content         => \$Disposition,
+        Mode            => 'binmode',
+        Permission      => '644',
+        NoFilenameClean => 1,
+    );
+    return if !$MainObject->FileWrite(
+        Directory       => $Directory,
+        Filename        => "$Param{Filename}.FilenameOrig",
+        Content         => \$Param{FilenameOrig},
+        Mode            => 'utf8',
+        Permission      => '644',
+        NoFilenameClean => 1,
     );
     return 1;
 }
@@ -186,10 +200,13 @@ sub FormIDRemoveFile {
 
     my @Index = @{ $Self->FormIDGetAllFilesMeta(%Param) };
 
-    # finish if files have been already removed by other process
+    # Finish if files have been already removed by other process.
     return if !@Index;
 
-    my $ID   = $Param{FileID} - 1;
+    my $ID = $Param{FileID} - 1;
+
+    return if !defined $Index[$ID];
+
     my %File = %{ $Index[$ID] };
 
     my $Directory = $Self->{TempDir} . '/' . $Param{FormID};
@@ -202,24 +219,29 @@ sub FormIDRemoveFile {
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
     $MainObject->FileDelete(
-        Directory => $Directory,
-        Filename  => "$File{Filename}",
-        NoReplace => 1,
+        Directory       => $Directory,
+        Filename        => "$File{Filename}",
+        NoFilenameClean => 1,
     );
     $MainObject->FileDelete(
-        Directory => $Directory,
-        Filename  => "$File{Filename}.ContentType",
-        NoReplace => 1,
+        Directory       => $Directory,
+        Filename        => "$File{Filename}.ContentType",
+        NoFilenameClean => 1,
     );
     $MainObject->FileDelete(
-        Directory => $Directory,
-        Filename  => "$File{Filename}.ContentID",
-        NoReplace => 1,
+        Directory       => $Directory,
+        Filename        => "$File{Filename}.ContentID",
+        NoFilenameClean => 1,
     );
     $MainObject->FileDelete(
-        Directory => $Directory,
-        Filename  => "$File{Filename}.Disposition",
-        NoReplace => 1,
+        Directory       => $Directory,
+        Filename        => "$File{Filename}.Disposition",
+        NoFilenameClean => 1,
+    );
+    $MainObject->FileDelete(
+        Directory       => $Directory,
+        Filename        => "$File{Filename}.FilenameOrig",
+        NoFilenameClean => 1,
     );
 
     return 1;
@@ -263,6 +285,7 @@ sub FormIDGetAllFilesData {
         next FILE if $File =~ /\.ContentType$/;
         next FILE if $File =~ /\.ContentID$/;
         next FILE if $File =~ /\.Disposition$/;
+        next FILE if $File =~ /\.FilenameOrig$/;
 
         $Counter++;
         my $FileSize = -s $File;
@@ -276,20 +299,23 @@ sub FormIDGetAllFilesData {
             }
         }
         my $Content = $MainObject->FileRead(
-            Location => $File,
-            Mode     => 'binmode',    # optional - binmode|utf8
+            Location        => $File,
+            Mode            => 'binmode',    # optional - binmode|utf8
+            NoFilenameClean => 1,
         );
         next FILE if !$Content;
 
         my $ContentType = $MainObject->FileRead(
-            Location => "$File.ContentType",
-            Mode     => 'binmode',             # optional - binmode|utf8
+            Location        => "$File.ContentType",
+            Mode            => 'binmode',             # optional - binmode|utf8
+            NoFilenameClean => 1,
         );
         next FILE if !$ContentType;
 
         my $ContentID = $MainObject->FileRead(
-            Location => "$File.ContentID",
-            Mode     => 'binmode',             # optional - binmode|utf8
+            Location        => "$File.ContentID",
+            Mode            => 'binmode',             # optional - binmode|utf8
+            NoFilenameClean => 1,
         );
         next FILE if !$ContentID;
 
@@ -299,23 +325,31 @@ sub FormIDGetAllFilesData {
         }
 
         my $Disposition = $MainObject->FileRead(
-            Location => "$File.Disposition",
-            Mode     => 'binmode',             # optional - binmode|utf8
+            Location        => "$File.Disposition",
+            Mode            => 'binmode',             # optional - binmode|utf8
+            NoFilenameClean => 1,
         );
         next FILE if !$Disposition;
+
+        my $FilenameOrig = $MainObject->FileRead(
+            Location        => "$File.FilenameOrig",
+            Mode            => 'utf8',                # optional - binmode|utf8
+            NoFilenameClean => 1,
+        );
 
         # strip filename
         $File =~ s/^.*\/(.+?)$/$1/;
         push(
             @Data,
             {
-                Content     => ${$Content},
-                ContentID   => ${$ContentID},
-                ContentType => ${$ContentType},
-                Filename    => $File,
-                Filesize    => $FileSize,
-                FileID      => $Counter,
-                Disposition => ${$Disposition},
+                Content      => ${$Content},
+                ContentID    => ${$ContentID},
+                ContentType  => ${$ContentType},
+                Filename     => $File,
+                FilenameOrig => ${$FilenameOrig},
+                Filesize     => $FileSize,
+                FileID       => $Counter,
+                Disposition  => ${$Disposition},
             },
         );
     }
@@ -361,6 +395,7 @@ sub FormIDGetAllFilesMeta {
         next FILE if $File =~ /\.ContentType$/;
         next FILE if $File =~ /\.ContentID$/;
         next FILE if $File =~ /\.Disposition$/;
+        next FILE if $File =~ /\.FilenameOrig$/;
 
         $Counter++;
         my $FileSize = -s $File;
@@ -375,14 +410,16 @@ sub FormIDGetAllFilesMeta {
         }
 
         my $ContentType = $MainObject->FileRead(
-            Location => "$File.ContentType",
-            Mode     => 'binmode',             # optional - binmode|utf8
+            Location        => "$File.ContentType",
+            Mode            => 'binmode',             # optional - binmode|utf8
+            NoFilenameClean => 1,
         );
         next FILE if !$ContentType;
 
         my $ContentID = $MainObject->FileRead(
-            Location => "$File.ContentID",
-            Mode     => 'binmode',             # optional - binmode|utf8
+            Location        => "$File.ContentID",
+            Mode            => 'binmode',             # optional - binmode|utf8
+            NoFilenameClean => 1,
         );
         next FILE if !$ContentID;
 
@@ -392,22 +429,30 @@ sub FormIDGetAllFilesMeta {
         }
 
         my $Disposition = $MainObject->FileRead(
-            Location => "$File.Disposition",
-            Mode     => 'binmode',             # optional - binmode|utf8
+            Location        => "$File.Disposition",
+            Mode            => 'binmode',             # optional - binmode|utf8
+            NoFilenameClean => 1,
         );
         next FILE if !$Disposition;
+
+        my $FilenameOrig = $MainObject->FileRead(
+            Location        => "$File.FilenameOrig",
+            Mode            => 'utf8',                # optional - binmode|utf8
+            NoFilenameClean => 1,
+        );
 
         # strip filename
         $File =~ s/^.*\/(.+?)$/$1/;
         push(
             @Data,
             {
-                ContentID   => ${$ContentID},
-                ContentType => ${$ContentType},
-                Filename    => $File,
-                Filesize    => $FileSize,
-                FileID      => $Counter,
-                Disposition => ${$Disposition},
+                ContentID    => ${$ContentID},
+                ContentType  => ${$ContentType},
+                Filename     => $File,
+                FilenameOrig => ${$FilenameOrig},
+                Filesize     => $FileSize,
+                FileID       => $Counter,
+                Disposition  => ${$Disposition},
             },
         );
     }

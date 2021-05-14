@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -717,7 +718,6 @@ sub PartsAttachments {
         # cleanup filename
         $PartData{Filename} = $Kernel::OM->Get('Kernel::System::Main')->FilenameCleanUp(
             Filename => $PartData{Filename},
-            Type     => 'Local',
         );
 
         $PartData{ContentDisposition} = $Part->head()->get('Content-Disposition');
@@ -747,23 +747,23 @@ sub PartsAttachments {
     elsif ( $PartData{ContentType} eq 'message/rfc822' ) {
 
         my ($SubjectString) = $Part->as_string() =~ m/^Subject: ([^\n]*(\n[ \t][^\n]*)*)/m;
-        my $Subject = $Self->_DecodeString( String => $SubjectString ) . '.eml';
+        my $Subject = $Self->_DecodeString( String => $SubjectString );
 
-        # cleanup filename
-        $Subject = $Kernel::OM->Get('Kernel::System::Main')->FilenameCleanUp(
-            Filename => $Subject,
-            Type     => 'Local',
-        );
+        if ( defined($Subject) && ( length($Subject) > 0 ) ) {
 
-        if ( $Subject eq '' ) {
-            $Self->{NoFilenamePartCounter}++;
-            $Subject = "Untitled-$Self->{NoFilenamePartCounter}" . '.eml';
+            # Convert message subject to filename if subject is not empty.
+            $PartData{Filename} = $Kernel::OM->Get('Kernel::System::Main')->FilenameCleanUp(
+                Filename => $Subject . '.eml',
+            );
         }
-        $PartData{Filename} = $Subject;
+        else {
+            $Self->{NoFilenamePartCounter}++;
+            $PartData{Filename} = 'file-' . $Self->{NoFilenamePartCounter} . '.eml';
+        }
     }
     else {
         $Self->{NoFilenamePartCounter}++;
-        $PartData{Filename} = "file-$Self->{NoFilenamePartCounter}";
+        $PartData{Filename} = 'file-' . $Self->{NoFilenamePartCounter};
     }
 
     # parse/get Content-Id, Content-Location and Disposition for html email attachments

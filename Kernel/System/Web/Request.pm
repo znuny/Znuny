@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -246,9 +247,10 @@ gets file upload data.
     );
 
     returns (
-        Filename    => 'abc.txt',
-        ContentType => 'text/plain',
-        Content     => 'Some text',
+        Filename     => 'abc_123.txt',
+        FilenameOrig => 'abc 123.txt',
+        ContentType  => 'text/plain',
+        Content      => 'Some text',
     );
 
 =cut
@@ -260,22 +262,21 @@ sub GetUploadAll {
     my $Upload = $Self->{Query}->upload( $Param{Param} );
     return if !$Upload;
 
+    my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
+
     # get real file name
     my $UploadFilenameOrig = $Self->GetParam( Param => $Param{Param} ) || 'unknown';
 
     my $NewFileName = "$UploadFilenameOrig";    # use "" to get filename of anony. object
-    $Kernel::OM->Get('Kernel::System::Encode')->EncodeInput( \$NewFileName );
+    $EncodeObject->EncodeInput( \$NewFileName );
 
-    # replace all devices like c: or d: and dirs for IE!
-    $NewFileName =~ s/.:\\(.*)/$1/g;
-    $NewFileName =~ s/.*\\(.+?)/$1/g;
+    my $NewFileNameOrig = "$UploadFilenameOrig";    # use "" to get filename of anony. object
+    $EncodeObject->EncodeInput( \$NewFileNameOrig );
 
-    # Remove leading and trailing white space from filename.
-    $Kernel::OM->Get('Kernel::System::CheckItem')->StringClean(
-        StringRef => \$NewFileName,
-        TrimLeft  => 1,
-        TrimRight => 1,
-    );
+#    # Cleanup filename.
+#    $NewFileName = $Kernel::OM->Get('Kernel::System::Main')->FilenameCleanUp(
+#        Filename => $NewFileName,
+#    );
 
     # return a string
     my $Content = '';
@@ -289,10 +290,13 @@ sub GetUploadAll {
         Header   => 'Content-Type',
     );
 
+    $Kernel::OM->Get('Kernel::System::Encode')->EncodeInput( \$UploadFilenameOrig );
+
     return (
-        Filename    => $NewFileName,
-        Content     => $Content,
-        ContentType => $ContentType,
+        Filename     => $NewFileName,
+        FilenameOrig => $NewFileNameOrig,
+        Content      => $Content,
+        ContentType  => $ContentType,
     );
 }
 

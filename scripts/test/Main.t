@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -24,108 +25,151 @@ my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
 # FilenameCleanUp - tests
 my @Tests = (
     {
-        Name         => 'FilenameCleanUp() - Local',
+        Name         => 'FilenameCleanUp() - Name',
         FilenameOrig => 'me_t o/alal.xml',
-        FilenameNew  => 'me_t_o_alal.xml',
-        Type         => 'Local',
+        FilenameNew  => 'me_t o_alal_08bff1fb2b7b3fe2d2d1c2740f39cf6d.xml',
     },
     {
-        Name         => 'FilenameCleanUp() - Local',
+        Name         => 'FilenameCleanUp() - Name',
         FilenameOrig => 'me_to/al?al"l.xml',
-        FilenameNew  => 'me_to_al_al_l.xml',
-        Type         => 'Local',
+        FilenameNew  => 'me_to_al_al_l_9460d8957d9bf198fe7267d3101e7987.xml',
     },
     {
-        Name         => 'FilenameCleanUp() - Local',
+        Name         => 'FilenameCleanUp() - Name',
         FilenameOrig => 'me_to/a\/\\lal.xml',
-        FilenameNew  => 'me_to_a___lal.xml',
-        Type         => 'Local',
+        FilenameNew  => 'me_to_a___lal_ed4522b66e255e420f7b5f5861be0a15.xml',
     },
     {
-        Name         => 'FilenameCleanUp() - Local',
+        Name         => 'FilenameCleanUp() - Name',
         FilenameOrig => 'me_to/al[al].xml',
-        FilenameNew  => 'me_to_al_al_.xml',
-        Type         => 'Local',
+        FilenameNew  => 'me_to_al_al_7331dec6b7386fcdec68885f32b364a0.xml',
     },
     {
-        Name         => 'FilenameCleanUp() - Local',
+        Name         => 'FilenameCleanUp() - Name',
         FilenameOrig => 'me_to/alal.xml',
-        FilenameNew  => 'me_to_alal.xml',
-        Type         => 'Local',
+        FilenameNew  => 'me_to_alal_f9ec91ae17c0d311cea1972621ef092b.xml',
     },
     {
-        Name         => 'FilenameCleanUp() - Long filename no extension - Local',
+        Name         => 'FilenameCleanUp() - Long filename no extension - Name',
         FilenameOrig => 'a' x 250,
-        FilenameNew  => 'a' x 220,
-        Type         => 'Local',
+        FilenameNew  => 'a' x 77 . '_1bdbdf1c9087c796394bcda5789f7206',
     },
     {
-        Name         => 'FilenameCleanUp() - Long filename short extension - Local',
+        Name         => 'FilenameCleanUp() - Long filename short extension - Name',
         FilenameOrig => 'a' x 250 . '.test',
-        FilenameNew  => 'a' x 215 . '.test',
-        Type         => 'Local',
+        FilenameNew  => 'a' x 72 . '_934489bed8c5675451bf4dda19be2a01.test',
     },
     {
-        Name         => 'FilenameCleanUp() - Short filename long extension - Local',
+        Name         => 'FilenameCleanUp() - Short filename long extension - Name',
         FilenameOrig => 'test.' . 'a' x 250,
-        FilenameNew  => 't.' . 'a' x 218,
-        Type         => 'Local',
+        FilenameNew  => 'test_5f2a12b7a37e955f02cd994884d4b4ed.' . 'a' x 72,
     },
     {
-        Name         => 'FilenameCleanUp() - Long filename no extension - 2 bytes character - Local',
+        Name         => 'FilenameCleanUp() - Long filename no extension - 2 bytes character - Name',
         FilenameOrig => 'ß' x 250,
-        FilenameNew  => 'ß' x 110,
-        Type         => 'Local',
+        FilenameNew  => 'ß' x 77 . '_7085d519eeab3d2ad3c2ea46b907f96f',
     },
     {
-        Name         => 'FilenameCleanUp() - Long filename short extension - 2 bytes character - Local',
+        Name         => 'FilenameCleanUp() - Long filename short extension - 2 bytes character - Name',
         FilenameOrig => 'ß' x 250 . '.test',
-        FilenameNew  => 'ß' x 107 . '.test',
-        Type         => 'Local',
+        FilenameNew  => 'ß' x 72 . '_dd0aa71f30e5ec4fdfc55e0947ea883c.test',
     },
     {
-        Name         => 'FilenameCleanUp() - Short filename long extension - 2 bytes character - Local',
+        Name         => 'FilenameCleanUp() - Short filename long extension - 2 bytes character - Name',
         FilenameOrig => 'test.' . 'ß' x 250,
-        FilenameNew  => 't.' . 'ß' x 109,
-        Type         => 'Local',
+        FilenameNew  => 'test_66e18964767c3f2f6a9f1dad7c977aa7.' . 'ß' x 72,
     },
     {
-        Name         => 'FilenameCleanUp() - Filename ending with period - Local',
+        Name         => 'FilenameCleanUp() - Filename ending with period - Name',
         FilenameOrig => 'abc.',
-        FilenameNew  => 'abc.',
-        Type         => 'Local',
+        FilenameNew  => 'abc_ab7e39cf071e7eb3c54bbd95df8ee9fe',
     },
     {
-        Name         => 'FilenameCleanUp() - Attachment',
+        Name         => 'FilenameCleanUp() - Name',
         FilenameOrig => 'me_to/a+la l.xml',
-        FilenameNew  => 'me_to_a+la_l.xml',
-        Type         => 'Attachment',
+        FilenameNew  => 'me_to_a+la l_147facaf4a8df44252716723eb162c9e.xml',
     },
     {
-        Name         => 'FilenameCleanUp() - Local',
+        Name         => 'FilenameCleanUp() - Name',
         FilenameOrig => 'me_to/a+lal Grüße 0.xml',
-        FilenameNew  => 'me_to_a+lal_Grüße_0.xml',
-        Type         => 'Local',
+        FilenameNew  => 'me_to_a+lal Grüße 0_08007bf44eb612276d9f94a92b9512ad.xml',
     },
     {
-        Name         => 'FilenameCleanUp() - leading dots - Local',
+        Name         => 'FilenameCleanUp() - leading dots - Name',
         FilenameOrig => '....test.xml',
-        FilenameNew  => 'test.xml',
-        Type         => 'Local',
+        FilenameNew  => 'test_95ed32a9d6faffe8a95406316590753b.xml',
     },
     {
-        Name         => 'FilenameCleanUp() - leading dots - Attachment',
-        FilenameOrig => '....test.xml',
-        FilenameNew  => 'test.xml',
-        Type         => 'Attachment',
+        Name         => 'FilenameCleanUp() - newlines - Name',
+        FilenameOrig => "this\nis\n\invalid\nfile\r\rna\tme.exe",
+        FilenameNew  => 'thisisinvalidfilena_me_e3349de85190a0d2bd91d88c11b6fbeb.exe',
     },
     {
-        Name => 'FilenameCleanUp() - Attachment',
+        Name         => 'FilenameCleanUp() - leading and trailing whitespaces and dots - Name',
+        FilenameOrig => '.  ..    .file name.log......      .  . ...      .',
+        FilenameNew  => 'file name_027ef9b51d4d8820cde98cce1f0a9fdb.log',
+    },
+    {
+        Name         => 'FilenameCleanUp() - spaces - Name',
+        FilenameOrig => 'my tricky fiLenAM e WITH s p a c e s. t x t',
+        FilenameNew  => 'my tricky fiLenAM e WITH s p a c e s. t x t',
+    },
+    {
+        Name         => 'FilenameCleanUp() - filename with blacklisted characters - Name',
+        FilenameOrig => 'Ⓜimt╗░③ⓧ⓿.e∹①x',
+        FilenameNew  => '_imt_____c8db6811855f5625f2df66b9afa23e93.e__x',
+    },
+    {
+        Name => 'FilenameCleanUp() - Name',
         FilenameOrig =>
             'me_to/a+lal123456789012345678901234567890Liebe Grüße aus Straubing123456789012345678901234567890123456789012345678901234567890.xml',
         FilenameNew =>
-            'me_to_a+lal123456789012345678901234567890Liebe_Gruesse_aus_Straubing123456789012345678901234567890123456789012345678901234567890.xml',
-        Type => 'Attachment',
+            'me_to_a+lal123456789012345678901234567890Liebe Grüße aus Straubing1234567_c5786476990dd136196348ea8d01628b.xml',
+    },
+    {
+        Name => 'FilenameCleanUp() - UTF-8 filename in limit - Name',
+        FilenameOrig =>
+            'ąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęśżź.ĘĆ',
+        FilenameNew =>
+            'ąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęśżź.ĘĆ',
+    },
+    {
+        Name => 'FilenameCleanUp() - UTF-8 filename 3 char over limit - Name',
+        FilenameOrig =>
+            'ąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęśżź.ĘĆąĄć',
+        FilenameNew =>
+            'ąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźą_37a1ea270ec452eeac2038db24e54d4b.ĘĆąĄć',
+    },
+    {
+        Name => 'FilenameCleanUp() - Too long filename UTF-8 - Name',
+        FilenameOrig =>
+            'ąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżź.bad',
+        FilenameNew =>
+            'ąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄć_59a36d4e09b4d7e015d26dc16f2bce7c.bad',
+    },
+    {
+        Name => 'FilenameCleanUp() - Too long filename UTF-8 with 30 char ext - Name',
+        FilenameOrig =>
+            'ąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżź.012345678901234567890123456789',
+        FilenameNew =>
+            'ąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃł_44ae3e8ee61809512e22ba1cc49c73f1.012345678901234567890123456789',
+    },
+    {
+        Name => 'FilenameCleanUp() - Too long filename UTF-8 with very long ext - Name',
+        FilenameOrig =>
+            '01234567890012345678900123456789001234567890.ąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżź',
+        FilenameNew =>
+            '01234567890012345678900123456789001234567890_37bd9ded4839178170effa43954f5b75.ąĄćęŃłóśżźąĄćęŃłóśżźąĄćęŃłóśżźąĄ',
+    },
+    {
+        Name         => 'FilenameCleanUp() - long similar filename 1 - Name',
+        FilenameOrig => '0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę001.txt',
+        FilenameNew  => '0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę012_c70e87af877b541afe6df64abe3f5b6c.txt',
+    },
+    {
+        Name         => 'FilenameCleanUp() - long similar filename 2 - Name',
+        FilenameOrig => '0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę002.txt',
+        FilenameNew  => '0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę0123456ąćę012_302561d63d70b2eca7ada1fd3539d9f4.txt',
     },
     {
         Name         => 'FilenameCleanUp() - md5',

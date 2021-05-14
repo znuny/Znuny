@@ -195,9 +195,7 @@ sub ArticleWriteAttachment {
     }
 
     $Param{Filename} = $Kernel::OM->Get('Kernel::System::Main')->FilenameCleanUp(
-        Filename  => $Param{Filename},
-        Type      => 'Local',
-        NoReplace => 1,
+        Filename => $Param{Filename},
     );
 
     my $NewFileName = $Param{Filename};
