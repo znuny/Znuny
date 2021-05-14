@@ -273,11 +273,6 @@ sub GetUploadAll {
     my $NewFileNameOrig = "$UploadFilenameOrig";    # use "" to get filename of anony. object
     $EncodeObject->EncodeInput( \$NewFileNameOrig );
 
-#    # Cleanup filename.
-#    $NewFileName = $Kernel::OM->Get('Kernel::System::Main')->FilenameCleanUp(
-#        Filename => $NewFileName,
-#    );
-
     # return a string
     my $Content = '';
     while (<$Upload>) {

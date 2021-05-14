@@ -101,7 +101,7 @@ my @Tests = (
     },
     {
         Name         => 'FilenameCleanUp() - newlines - Name',
-        FilenameOrig => "this\nis\n\invalid\nfile\r\rna\tme.exe",
+        FilenameOrig => "this\nis\ninvalid\nfile\r\rna\tme.exe",
         FilenameNew  => 'thisisinvalidfilena_me_e3349de85190a0d2bd91d88c11b6fbeb.exe',
     },
     {
