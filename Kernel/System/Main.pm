@@ -216,7 +216,7 @@ sub FilenameCleanUp {
 
         # Trim filename to 77 chars if longer than 110 chars (=220 bytes in case of all UTF-8 chars)
         # to avoid exceeding filesystem limits (i.e. 255 byte filename length limit in XFS) and to
-        # avoid double trimming after adding md5 suffix (33 chars) below; must leave enought space
+        # avoid double trimming after adding md5 suffix (33 chars) below; must leave enough space
         # for extra application extensions (i.e. .content_type).
         if ( length($Param{Filename}) > 110 ) {
 
