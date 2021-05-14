@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -314,10 +315,9 @@ sub ArticleWriteAttachment {
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
     # Perform FilenameCleanup here already to check for
-    #   conflicting existing attachment files correctly
+    # conflicting existing attachment files correctly
     $Param{Filename} = $MainObject->FilenameCleanUp(
         Filename => $Param{Filename},
-        Type     => 'Local',
     );
 
     my $NewFileName = $Param{Filename};

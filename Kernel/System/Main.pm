@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -161,16 +162,16 @@ sub Die {
 
 =head2 FilenameCleanUp()
 
-to clean up filenames which can be used in any case (also quoting is done)
+to clean up filenames
 
     my $Filename = $MainObject->FilenameCleanUp(
         Filename => 'me_to/alal.xml',
-        Type     => 'Local', # Local|Attachment|MD5
+        Type     => 'Name',    # Optional Name|MD5 (Name by default)
     );
 
     my $Filename = $MainObject->FilenameCleanUp(
-        Filename => 'some:file.xml',
-        Type     => 'MD5', # Local|Attachment|MD5
+        Filename        => 'some:file.xml',
+        Type            => 'MD5', # Optional Name|MD5 (Name by default)
     );
 
 =cut
@@ -186,116 +187,76 @@ sub FilenameCleanUp {
         return;
     }
 
-    # escape if cleanup is not needed
-    if ( $Param{NoFilenameClean} ) {
-        return $Param{Filename};
-    }
-
-    my $Type = lc( $Param{Type} || 'local' );
+    # Use Name type if type not specified. Lowercase type.
+    my $Type = lc( $Param{Type} || 'name' );
 
     if ( $Type eq 'md5' ) {
+
+        # For MD5 type return MD5 sum of filename.
         $Kernel::OM->Get('Kernel::System::Encode')->EncodeOutput( \$Param{Filename} );
         $Param{Filename} = md5_hex( $Param{Filename} );
     }
+    else {
 
-    # replace invalid token for attachment file names
-    elsif ( $Type eq 'attachment' ) {
+        # For other types perform filename cleanup.
 
-        # trim whitespace
-        $Param{Filename} =~ s/^\s+|\r|\n|\s+$//g;
+        my $FilenameOrig = $Param{Filename};
 
-        # strip leading dots
-        $Param{Filename} =~ s/^\.+//;
+        # Trim newlines.
+        $Param{Filename} =~ s/\r|\n//g;
 
-        # only whitelisted characters allowed in filename for security
-        $Param{Filename} =~ s/[^\w\-+.#_]/_/g;
+        # Strip leading and trailing whitespaces and dots.
+        $Param{Filename} =~ s/^[\s.]+|[\s.]+$//g;
+
+        # Only whitelisted characters allowed in filename for security.
+        $Param{Filename} =~ s/[^ \w\-+.#_]/_/g;
 
         # Enclosed alphanumerics are kept on older Perl versions, make sure to replace them too.
         $Param{Filename} =~ s/[\x{2460}-\x{24FF}]/_/g;
 
-        # replace utf8 and iso
-        $Param{Filename} =~ s/(\x{00C3}\x{00A4}|\x{00A4})/ae/g;
-        $Param{Filename} =~ s/(\x{00C3}\x{00B6}|\x{00B6})/oe/g;
-        $Param{Filename} =~ s/(\x{00C3}\x{00BC}|\x{00FC})/ue/g;
-        $Param{Filename} =~ s/(\x{00C3}\x{009F}|\x{00C4})/Ae/g;
-        $Param{Filename} =~ s/(\x{00C3}\x{0096}|\x{0096})/Oe/g;
-        $Param{Filename} =~ s/(\x{00C3}\x{009C}|\x{009C})/Ue/g;
-        $Param{Filename} =~ s/(\x{00C3}\x{009F}|\x{00DF})/ss/g;
-        $Param{Filename} =~ s/-+/-/g;
+        # Trim filename to 77 chars if longer than 110 chars (=220 bytes in case of all UTF-8 chars)
+        # to avoid exceeding filesystem limits (i.e. 255 byte filename length limit in XFS) and to
+        # avoid double trimming after adding md5 suffix (33 chars) below; must leave enought space
+        # for extra application extensions (i.e. .content_type).
+        if ( length($Param{Filename}) > 110 ) {
 
-        # separate filename and extension
-        my $FileName = $Param{Filename};
-        my $FileExt  = '';
-        if ( $Param{Filename} =~ /(.*)\.+([^.]+)$/ ) {
-            $FileName = $1;
-            $FileExt  = '.' . $2;
-        }
+            # If file extension exists and is not longer than 30 chars
+            # than leave whole extension and trim filename part before
+            # extension only; trim whole filename otherwise.
 
-        if ( length $FileName ) {
-            my $ModifiedName = $FileName . $FileExt;
-
-            while ( length encode( 'UTF-8', $ModifiedName ) > 220 ) {
-
-                # Remove character by character starting from the end of the filename string
-                #   until we get acceptable 220 byte long filename size including extension.
-                if ( length $FileName > 1 ) {
-                    chop $FileName;
+            my $FileName = $Param{Filename};
+            my $FileExt = '';
+            if ( $Param{Filename} =~ /(.*)\.+([^.]+)$/ ) {
+                if ( length($2) <= 30 ) {
+                    $FileName = $1;
+                    $FileExt = '.' . $2;
                 }
-
-                # If we reached minimum filename length, remove characters from the end of the extension string.
-                else {
-                    chop $FileExt;
-                }
-
-                $ModifiedName = $FileName . $FileExt;
             }
-            $Param{Filename} = $ModifiedName;
-        }
-    }
-    else {
-
-        # trim whitespace
-        $Param{Filename} =~ s/^\s+|\r|\n|\s+$//g;
-
-        # strip leading dots
-        $Param{Filename} =~ s/^\.+//;
-
-        # only whitelisted characters allowed in filename for security
-        if ( !$Param{NoReplace} ) {
-            $Param{Filename} =~ s/[^\w\-+.#_]/_/g;
-
-            # Enclosed alphanumerics are kept on older Perl versions, make sure to replace them too.
-            $Param{Filename} =~ s/[\x{2460}-\x{24FF}]/_/g;
+            $Param{Filename} = substr($FileName, 0, 77 - length($FileExt)) . $FileExt;
         }
 
-        # separate filename and extension
-        my $FileName = $Param{Filename};
-        my $FileExt  = '';
-        if ( $Param{Filename} =~ /(.*)\.+([^.]+)$/ ) {
-            $FileName = $1;
-            $FileExt  = '.' . $2;
-        }
+        # If filename was modified, add unique filename suffix (MD5 of original filename)
+        # to avoid name conflict with other files because filters above may generate same
+        # result for different original filenames (i.e. in the same upload
+        # form or in the same incoming e-mail article) which may cause problems.
+        if ( $Param{Filename} ne $FilenameOrig ) {
+            my $FileName = $Param{Filename};
+            my $FileExt = '';
+            if ( $Param{Filename} =~ /(.*)\.+([^.]+)$/ ) {
+                $FileName = $1;
+                $FileExt = '.' . $2;
+            }
+            $Kernel::OM->Get('Kernel::System::Encode')->EncodeOutput( \$FilenameOrig );
 
-        if ( length $FileName ) {
-            my $ModifiedName = $FileName . $FileExt;
-
-            while ( length encode( 'UTF-8', $ModifiedName ) > 220 ) {
-
-                # Remove character by character starting from the end of the filename string
-                #   until we get acceptable 220 byte long filename size including extension.
-                if ( length $FileName > 1 ) {
-                    chop $FileName;
-                }
-
-                # If we reached minimum filename length, remove characters from the end of the extension string.
-                else {
-                    chop $FileExt;
-                }
-
-                $ModifiedName = $FileName . $FileExt;
+            # Add _ before md5 if not already exists at the end.
+            if (substr($FileName, -1) ne '_') {
+                $FileName .= '_';
             }
 
-            $Param{Filename} = $ModifiedName;
+            # Add md5 suffix before file extension if file extension exists
+            # or at the end of filename if no extension present.
+            $FileName .= md5_hex($FilenameOrig);
+            $Param{Filename} = $FileName . $FileExt;
         }
     }
 
@@ -329,7 +290,7 @@ to read files from file system
         Location        => 'c:\some\location\file2read.txt',
 
         Mode            => 'binmode', # optional - binmode|utf8
-        Type            => 'Local',   # optional - Local|Attachment|MD5
+        Type            => 'Name',    # optional - Name|MD5
         Result          => 'SCALAR',  # optional - SCALAR|ARRAY
         DisableWarnings => 1,         # optional
     );
@@ -342,11 +303,13 @@ sub FileRead {
     my $FH;
     if ( $Param{Filename} && $Param{Directory} ) {
 
-        # filename clean up
-        $Param{Filename} = $Self->FilenameCleanUp(
-            Filename => $Param{Filename},
-            Type     => $Param{Type} || 'Local',    # Local|Attachment|MD5
-        );
+        # Filename clean up.
+        if (!$Param{NoFilenameClean}) {
+            $Param{Filename} = $Self->FilenameCleanUp(
+                Filename => $Param{Filename},
+                Type     => $Param{Type},
+            );
+        }
         $Param{Location} = "$Param{Directory}/$Param{Filename}";
     }
     elsif ( $Param{Location} ) {
@@ -444,7 +407,7 @@ to write data to file system
 
         Content    => \$Content,
         Mode       => 'binmode', # binmode|utf8
-        Type       => 'Local',   # optional - Local|Attachment|MD5
+        Type       => 'Name',    # optional - Name|MD5
         Permission => '644',     # optional - unix file permissions
     );
 
@@ -458,13 +421,14 @@ sub FileWrite {
 
     if ( $Param{Filename} && $Param{Directory} ) {
 
-        # filename clean up
-        $Param{Filename} = $Self->FilenameCleanUp(
-            Filename        => $Param{Filename},
-            Type            => $Param{Type} || 'Local',    # Local|Attachment|MD5
-            NoFilenameClean => $Param{NoFilenameClean},
-            NoReplace       => $Param{NoReplace},
-        );
+        # Filename clean up.
+        if (!$Param{NoFilenameClean}) {
+            $Param{Filename} = $Self->FilenameCleanUp(
+                Filename => $Param{Filename},
+                Type     => $Param{Type},
+            );
+        }
+
         $Param{Location} = "$Param{Directory}/$Param{Filename}";
     }
     elsif ( $Param{Location} ) {
@@ -561,7 +525,7 @@ to delete a file from file system
         # or Location
         Location        => 'c:\some\location\me_to\alal.xml'
 
-        Type            => 'Local',   # optional - Local|Attachment|MD5
+        Type            => 'Name',   # optional - Name|MD5
         DisableWarnings => 1, # optional
     );
 
@@ -572,12 +536,14 @@ sub FileDelete {
 
     if ( $Param{Filename} && $Param{Directory} ) {
 
-        # filename clean up
-        $Param{Filename} = $Self->FilenameCleanUp(
-            Filename  => $Param{Filename},
-            Type      => $Param{Type} || 'Local',    # Local|Attachment|MD5
-            NoReplace => $Param{NoReplace},
-        );
+        # Filename clean up.
+        if (!$Param{NoFilenameClean}) {
+            $Param{Filename} = $Self->FilenameCleanUp(
+                Filename => $Param{Filename},
+                Type     => $Param{Type},
+            );
+        }
+
         $Param{Location} = "$Param{Directory}/$Param{Filename}";
     }
     elsif ( $Param{Location} ) {
@@ -638,11 +604,14 @@ sub FileGetMTime {
     my $FH;
     if ( $Param{Filename} && $Param{Directory} ) {
 
-        # filename clean up
-        $Param{Filename} = $Self->FilenameCleanUp(
-            Filename => $Param{Filename},
-            Type     => $Param{Type} || 'Local',    # Local|Attachment|MD5
-        );
+        # Filename clean up.
+        if (!$Param{NoFilenameClean}) {
+            $Param{Filename} = $Self->FilenameCleanUp(
+                Filename => $Param{Filename},
+                Type     => $Param{Type},
+            );
+        }
+
         $Param{Location} = "$Param{Directory}/$Param{Filename}";
     }
     elsif ( $Param{Location} ) {

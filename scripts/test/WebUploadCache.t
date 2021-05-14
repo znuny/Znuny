@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -82,6 +83,11 @@ for my $Module (qw(DB FS)) {
 
         # formatted filename by FilenameCleanUp()
         my $ExpectedFilename = "UploadCache Test1äöüß.$FileExtension";
+
+        # In filesystem storage filenames will be cleaned up.
+        if ( $Module eq 'FS' ) {
+            $Filename = "UploadCache Test1äöüß.$File";
+        }
 
         $Self->True(
             $Add || '',
@@ -205,6 +211,11 @@ for my $Module (qw(DB FS)) {
 
         # formatted filename by FilenameCleanUp()
         my $ExpectedFilename = "UploadCache Test1äöüß.$FileExtension";
+
+        # In filesystem storage filenames will be cleaned up.
+        if ( $Module eq 'FS' ) {
+            $Filename = "UploadCache Test1äöüß.$File";
+        }
 
         $Self->True(
             $Add || '',

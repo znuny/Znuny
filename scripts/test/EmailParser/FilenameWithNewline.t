@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -43,7 +44,7 @@ $Self->Is(
 
 $Self->Is(
     $Attachments[2]->{'Filename'} || '',
-    'Test_testtestt_1231234_34_Testtesttes_testes_testtesttestt_-_testtesttes_dokumentów_Sprzedaż__testTE__...___TE#123123123_.eml',
+    'Test testtestt 1231234_34_Testtesttes testes testtesttestt - testtesttes _8c51a4c1d1ca2b12bb4efabe82f41428.eml',
     "Filename with multiple newlines removed",
 );
 

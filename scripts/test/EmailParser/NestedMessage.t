@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -39,7 +40,7 @@ $Self->Is(
 
 $Self->Is(
     $Attachments[2]->{Filename} || '',
-    '_Presse-Greenpeace__Morgen_wird_Greenpeace-Einspruch_gegenEmbryonen-Patent_verhandelt_-_NeueDokumentation_ueber_Patente_auf_Leben.eml',
+    '_Presse-Greenpeace_ Morgen wird Greenpeace-Einspruch gegenEmbryonen-Paten_962fb2b3711f7f233945657da34d17da.eml',
     "Nested message filename",
 );
 
