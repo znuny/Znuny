@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -221,11 +222,7 @@ for my $Backend (qw(DB FS)) {
         ArticleID => $ArticleID,
     );
 
-    my $TargetFilename = '[Terminology Guide äöß]';
-
-    if ( $Backend eq 'FS' ) {
-        $TargetFilename = '_Terminology_Guide_äöß_';
-    }
+    $TargetFilename = '_Terminology Guide äöß_a44ae7b443a1504337f5f61c8bce490b';
 
     $Self->Is(
         scalar keys %AttachmentIndex,

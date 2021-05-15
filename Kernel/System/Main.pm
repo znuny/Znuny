@@ -214,25 +214,43 @@ sub FilenameCleanUp {
         # Enclosed alphanumerics are kept on older Perl versions, make sure to replace them too.
         $Param{Filename} =~ s/[\x{2460}-\x{24FF}]/_/g;
 
-        # Trim filename to 77 chars if longer than 110 chars (=220 bytes in case of all UTF-8 chars)
-        # to avoid exceeding filesystem limits (i.e. 255 byte filename length limit in XFS) and to
-        # avoid double trimming after adding md5 suffix (33 chars) below; must leave enough space
-        # for extra application extensions (i.e. .content_type).
-        if ( length($Param{Filename}) > 110 ) {
+        # If filename occupies > 220b, trim it to valid UTF-8 string occupying no more
+        # than 187 bytes; final length with md5 part (33b) will be <= 220b; this leaves enough
+        # room for extra extensions like .content_type; total file length must not exceed
+        # 255b (many filesystems limit).
+        # This algo must avoid filename changes if FilenameCleanUp() is called more than once
+        # for the same filename variable.
 
-            # If file extension exists and is not longer than 30 chars
-            # than leave whole extension and trim filename part before
-            # extension only; trim whole filename otherwise.
+        if ( length encode( 'UTF-8', $Param{Filename} ) > 220 ) {
+
+            # Separate filename and extension.
 
             my $FileName = $Param{Filename};
-            my $FileExt = '';
+            my $FileExt  = '';
             if ( $Param{Filename} =~ /(.*)\.+([^.]+)$/ ) {
-                if ( length($2) <= 30 ) {
-                    $FileName = $1;
-                    $FileExt = '.' . $2;
-                }
+                $FileName = $1;
+                $FileExt  = '.' . $2;
             }
-            $Param{Filename} = substr($FileName, 0, 77 - length($FileExt)) . $FileExt;
+
+            my $ModifiedName = $FileName . $FileExt;
+            while ( length encode( 'UTF-8', $ModifiedName ) > 187 ) {
+
+                # Remove character by character starting from the end of the filename string
+                # until we get acceptable 187 byte long filename size including extension.
+                if ( length $FileName > 10 ) {
+                    chop $FileName;
+                }
+
+                # If we reached minimum filename length (10 chars), remove characters from
+                # the end of the extension string.
+                else {
+                    chop $FileExt;
+                }
+
+                $ModifiedName = $FileName . $FileExt;
+            }
+
+            $Param{Filename} = $ModifiedName;
         }
 
         # If filename was modified, add unique filename suffix (MD5 of original filename)
@@ -240,8 +258,8 @@ sub FilenameCleanUp {
         # result for different original filenames (i.e. in the same upload
         # form or in the same incoming e-mail article) which may cause problems.
         if ( $Param{Filename} ne $FilenameOrig ) {
-            my $FileName = $Param{Filename};
-            my $FileExt = '';
+            $FileName = $Param{Filename};
+            $FileExt = '';
             if ( $Param{Filename} =~ /(.*)\.+([^.]+)$/ ) {
                 $FileName = $1;
                 $FileExt = '.' . $2;
