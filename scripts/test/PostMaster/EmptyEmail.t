@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -110,7 +111,7 @@ for my $Backend (qw(DB FS)) {
             'ContentID'          => '',
             'ContentType'        => 'application/x-download; name="=?UTF-8?Q?=C5=81atwa_sprawa.txt?="',
             'Disposition'        => 'attachment',
-            'Filename'           => 'Łatwa_sprawa.txt',
+            'Filename'           => 'Łatwa sprawa.txt',
             'FilesizeRaw'        => 0
         },
         "$Backend - Attachment filename"
