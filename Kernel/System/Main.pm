@@ -258,8 +258,8 @@ sub FilenameCleanUp {
         # result for different original filenames (i.e. in the same upload
         # form or in the same incoming e-mail article) which may cause problems.
         if ( $Param{Filename} ne $FilenameOrig ) {
-            $FileName = $Param{Filename};
-            $FileExt = '';
+            my $FileName = $Param{Filename};
+            my $FileExt = '';
             if ( $Param{Filename} =~ /(.*)\.+([^.]+)$/ ) {
                 $FileName = $1;
                 $FileExt = '.' . $2;
