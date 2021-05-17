@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -19,6 +20,7 @@ use IO::Socket::SSL;
 use parent qw(Kernel::System::MailAccount::IMAP);
 
 our @ObjectDependencies = (
+    'Kernel::Config',
     'Kernel::System::Log',
 );
 
@@ -37,15 +39,40 @@ sub Connect {
 
     my $Type = 'IMAPS';
 
+    # Get config object.
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    # TLS verification settings
+    my $TLSVerifyPeer = $ConfigObject->Get('TLS::VerifyPeer') // 1;
+    my $TLSCAPath = $ConfigObject->Get('TLS::CAPath') || '/etc/ssl/certs';
+
+    my $SSLOptions = [
+        SSL_verify_mode     => IO::Socket::SSL::SSL_VERIFY_PEER(),
+        SSL_ca_path         => $TLSCAPath,
+        SSL_verifycn_scheme => 'default',    # Allows wildcards; see IO::Socket::SSL manual for details.
+    ];
+
+    if ($TLSVerifyPeer) {
+        if ( ( !-d $TLSCAPath ) || ( !-r $TLSCAPath ) ) {
+            return (
+                Successful => 0,
+                Message    => "$Type: Can't connect to $Param{Host} (incorrect TLS::CAPath)!"
+            );
+        }
+    }
+    else {
+        $SSLOptions = [
+            SSL_verify_mode => IO::Socket::SSL::SSL_VERIFY_NONE(),
+        ];
+    }
+
     # connect to host
     my $IMAPObject = Net::IMAP::Simple->new(
         $Param{Host},
         timeout     => $Param{Timeout},
         debug       => $Param{Debug},
         use_ssl     => 1,
-        ssl_options => [
-            SSL_verify_mode => IO::Socket::SSL::SSL_VERIFY_NONE(),
-        ],
+        ssl_options => $SSLOptions,
     );
     if ( !$IMAPObject ) {
         return (
