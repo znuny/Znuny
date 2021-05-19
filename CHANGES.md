@@ -1,5 +1,5 @@
 # 6.0.35 2021-xx-xx
- - 2021-05-18 Gavatar disabled by default and initials icon prettyfied.
+ - 2021-05-18 Gavatar disabled by default and initials icon prettified.
 
 # 6.0.34 2021-04-21
  - 2021-04-14 Updated jquery-validate from version 1.16.0 to 1.19.3 (CVE-2021-21252).
