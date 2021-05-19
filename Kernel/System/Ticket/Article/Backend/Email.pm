@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -20,6 +21,7 @@ use parent 'Kernel::System::Ticket::Article::Backend::MIMEBase';
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::CheckItem',
     'Kernel::System::CustomerUser',
     'Kernel::System::DB',
     'Kernel::System::DateTime',
@@ -227,6 +229,7 @@ sub ArticleSend {
     my ( $Self, %Param ) = @_;
 
     my $ToOrig      = $Param{To}          || '';
+    my $CcOrig      = $Param{Cc}          || '';
     my $Loop        = $Param{Loop}        || 0;
     my $HistoryType = $Param{HistoryType} || 'SendAnswer';
 
@@ -277,16 +280,26 @@ sub ArticleSend {
         AttachmentsRef => $Param{Attachment},
     );
 
-    # create article
     my $Time      = $DateTimeObject->ToEpoch();
     my $Random    = rand 999999;
     my $FQDN      = $Kernel::OM->Get('Kernel::Config')->Get('FQDN');
     my $MessageID = "<$Time.$Random\@$FQDN>";
+
+    # Create article.
     my $ArticleID = $Self->ArticleCreate(
         %Param,
         MessageID => $MessageID,
     );
-    return if !$ArticleID;
+
+    # Return if article was not created.
+    if ( !$ArticleID ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Message =>
+                "Error creating article for e-mail message to $Param{'To'} (TicketID: $Param{TicketID}, Message-ID: $MessageID). E-mail message not sent.",
+            Priority => 'error',
+        );
+        return;
+    }
 
     # Send the mail
     my $Result = $Kernel::OM->Get('Kernel::System::Email')->Send(
@@ -298,27 +311,39 @@ sub ArticleSend {
     # return if mail wasn't sent
     if ( !$Result->{Success} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Message  => "Impossible to send message to: $Param{'To'} .",
+            Message =>
+                "Error sending e-mail message to $Param{'To'} (TicketID: $Param{TicketID}, ArticleID: $ArticleID, Message-ID: $MessageID).",
             Priority => 'error',
         );
         return;
     }
 
-    # write article to file system
+    # Write plain article to file system.
     my $Plain = $Self->ArticleWritePlain(
         ArticleID => $ArticleID,
         Email     => sprintf( "%s\n%s", $Result->{Data}->{Header}, $Result->{Data}->{Body} ),
         UserID    => $Param{UserID},
     );
-    return if !$Plain;
+
+    # Return if plain article was not written.
+    if ( !$Plain ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Message =>
+                "Error writing plain article of e-mail message sent to $Param{'To'} (TicketID: $Param{TicketID}, ArticleID: $ArticleID, Message-ID: $MessageID).",
+            Priority => 'error',
+        );
+        return;
+    }
 
     # log
     $Kernel::OM->Get('Kernel::System::Log')->Log(
         Priority => 'info',
         Message  => sprintf(
-            "Queued email to '%s' from '%s'. HistoryType => %s, Subject => %s;",
+            "Queued e-mail message to '%s'%s from '%s' (Message-ID: %s). HistoryType => %s, Subject => %s;",
             $Param{To},
+            $CcOrig ? "(cc '$CcOrig') " : '',
             $Param{From},
+            $MessageID,
             $HistoryType,
             $Param{Subject},
         ),
@@ -537,20 +562,39 @@ sub SendAutoResponse {
     ADDRESS:
     for my $Address (@Addresses) {
         my $Email = $EmailParser->GetEmailAddress( Email => $Address );
-        if ( !$Email ) {
+
+        my $EmailValid   = 0;
+        my $EmailErrType = '';
+        if ($Email) {
+
+            # get check item object
+            my $CheckItemObject = $Kernel::OM->Get('Kernel::System::CheckItem');
+
+            $EmailValid = $CheckItemObject->CheckEmail(
+                Address       => $Email,
+                SkipDNSChecks => 1,        # don't skip autoresponding in case of temporary DNS problems
+            );
+
+            if ( !$EmailValid ) {
+                $EmailErrType = ' (' . $CheckItemObject->CheckErrorType() . ')';
+            }
+        }
+
+        # check email address
+        if ( !$EmailValid ) {
 
             # add it to ticket history
             $TicketObject->HistoryAdd(
                 TicketID     => $Param{TicketID},
                 CreateUserID => $Param{UserID},
                 HistoryType  => 'Misc',
-                Name         => "Sent no auto response to '$Address' - no valid email address.",
+                Name         => "Sent no auto response to invalid address '$Address'$EmailErrType",
             );
 
             # log
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'notice',
-                Message  => "Sent no auto response to '$Address' because of invalid address.",
+                Message  => "Sent no auto response to invalid address '$Address'$EmailErrType",
             );
             next ADDRESS;
 
@@ -681,33 +725,54 @@ sub SendAutoResponse {
         TicketID             => $Param{TicketID},
         HistoryType          => $HistoryType,
         HistoryComment       => "\%\%$AutoReplyAddresses",
-        From                 => $From->format(),
-        To                   => $AutoReplyAddresses,
-        Cc                   => $Cc,
-        Charset              => 'utf-8',
-        MimeType             => $AutoResponse{ContentType},
-        Subject              => $AutoResponse{Subject},
-        Body                 => $AutoResponse{Text},
-        InReplyTo            => $OrigHeader{'Message-ID'},
-        Loop                 => 1,
-        UserID               => $Param{UserID},
+        HistoryComment => "\%\%$AutoReplyAddresses" . ( $Cc ? ( $AutoReplyAddresses ? ', ' : '' ) . "cc '$Cc'" : '' ),
+        From           => $From->format(),
+        To             => $AutoReplyAddresses,
+        Cc             => $Cc,
+        Charset        => 'utf-8',
+        MimeType       => $AutoResponse{ContentType},
+        Subject        => $AutoResponse{Subject},
+        Body           => $AutoResponse{Text},
+        InReplyTo      => $OrigHeader{'Message-ID'},
+        Loop           => 1,
+        UserID         => $Param{UserID},
     );
 
-    # log
-    $Kernel::OM->Get('Kernel::System::Log')->Log(
-        Priority => 'info',
-        Message  => "Sent auto response ($HistoryType) for Ticket [$Ticket{TicketNumber}]"
-            . " (TicketID=$Param{TicketID}, ArticleID=$ArticleID) to '$AutoReplyAddresses'."
-    );
+    if ($ArticleID) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'info',
+            Message  => "Sent auto response ($HistoryType) for Ticket [$Ticket{TicketNumber}]"
+                . " (TicketID=$Param{TicketID}, ArticleID=$ArticleID) to '$AutoReplyAddresses'"
+                . ( $Cc ? " and cc '$Cc'." : '.' )
+        );
 
-    # event
-    $Self->EventHandler(
-        Event => 'ArticleAutoResponse',
-        Data  => {
-            TicketID => $Param{TicketID},
-        },
-        UserID => $Param{UserID},
-    );
+        # Send event.
+        $Self->EventHandler(
+            Event => 'ArticleAutoResponse',
+            Data  => {
+                TicketID => $Param{TicketID},
+            },
+            UserID => $Param{UserID},
+        );
+    }
+    else {
+        my $ErrorMessage = "Error sending auto response ($HistoryType) for Ticket [$Ticket{TicketNumber}]"
+            . " (TicketID=$Param{TicketID}) to '$AutoReplyAddresses'"
+            . ( $Cc ? " and cc '$Cc'." : '.' );
+
+        # Add it to ticket history.
+        $TicketObject->HistoryAdd(
+            TicketID     => $Param{TicketID},
+            CreateUserID => $Param{UserID},
+            HistoryType  => 'Misc',
+            Name         => $ErrorMessage,
+        );
+
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => $ErrorMessage,
+        );
+    }
 
     return 1;
 }

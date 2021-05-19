@@ -1,3 +1,6 @@
+# 6.5.2 ????-??-??
+ - 2023-04-21 E-mail message sending error handling enhanced.
+
 # 6.5.1 2023-03-09
  - 2023-02-28 Added options tickets-created-before-date and tickets-created-before-days to console command Admin::Article::StorageSwitch.
  - 2023-02-28 Fixed encoding of postmaster filter name in AdminPostMasterFilter.
