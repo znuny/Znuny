@@ -611,13 +611,13 @@ for my $TicketSubjectConfig ( 'Right', 'Left' ) {
 
                 if ( $File == 28 ) {
 
-                    # check body
+                    # Check body.
                     my %Article = $ArticleBackendObject->ArticleGet(
                         ArticleID     => $ArticleIDs[0],
                         DynamicFields => 1,
                     );
 
-                    # check all attachments
+                    # Check all attachments.
                     my %Index = $ArticleBackendObject->ArticleAttachmentIndex(
                         ArticleID => $ArticleIDs[0],
                         ExcludePlainText => 0,
@@ -631,8 +631,8 @@ for my $TicketSubjectConfig ( 'Right', 'Left' ) {
                         $NamePrefix . ' number of attachments check ArticleAttachmentIndex()',
                     );
 
-                    # check regular attachments
-                    my %Index = $ArticleBackendObject->ArticleAttachmentIndex(
+                    # Check regular attachments.
+                    %Index = $ArticleBackendObject->ArticleAttachmentIndex(
                         ArticleID => $ArticleIDs[0],
                         ExcludePlainText => 1,
                         ExcludeHTMLBody => 1,
