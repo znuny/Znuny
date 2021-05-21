@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -53,7 +54,7 @@ my @Tests = (
     {
         Name => '',
         Data => {
-            Content     => "<img border=\"0\" src=\"cid:1234567890ABCDEF\">",
+            Content     => "<img border=\"0\" src = \" \n\tcid:1234567890ABCDEF\">",
             ContentType => 'text/html; charset="iso-8859-1"',
         },
         URL         => 'Action=SomeAction;FileID=',
@@ -64,7 +65,7 @@ my @Tests = (
         },
         Result => {
             Content =>
-                '<img border="0" src="index.pl?Action=SomeAction;FileID=0;SessionID=123">',
+                '<img border="0" src = "index.pl?Action=SomeAction;FileID=0;SessionID=123">',
             ContentType => 'text/html; charset="utf-8"',
         },
     },
@@ -143,7 +144,7 @@ my @Tests = (
     {
         Name => '',
         Data => {
-            Content     => '<img src=\'Untitled%20Attachment\' />',
+            Content     => '<img src=\'CiD:Untitled%20Attachment\' />',
             ContentType => 'text/html; charset="iso-8859-1"',
         },
         URL         => 'Action=SomeAction;FileID=',
