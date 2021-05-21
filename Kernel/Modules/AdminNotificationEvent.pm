@@ -825,7 +825,7 @@ sub _Edit {
     );
 
     if ( !$ConfigObject->Get('CustomerNotificationsDisabled') ) {
-        $RecipientTypes{'Customer'} = Translatable('Customer user of the ticket'),
+        $RecipientTypes{'Customer'} = Translatable('Customer user of the ticket');
     }
 
     $Param{RecipientsStrg} = $LayoutObject->BuildSelection(
