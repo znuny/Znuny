@@ -1930,10 +1930,11 @@ sub Run {
             ReplyArticleID      => $GetParam{ArticleID},
             %Ticket,
             %Data,
-            InReplyTo        => $Data{MessageID},
-            References       => "$References",
-            TicketBackType   => $TicketBackType,
-            DynamicFieldHTML => \%DynamicFieldHTML,
+            InReplyTo                  => $Data{MessageID},
+            References                 => "$References",
+            TicketBackType             => $TicketBackType,
+            DynamicFieldHTML           => \%DynamicFieldHTML,
+            SourceIsVisibleForCustomer => $Data{IsVisibleForCustomer},
         );
         $Output .= $LayoutObject->Footer(
             Type => 'Small',
@@ -1986,6 +1987,9 @@ sub _Mask {
     );
 
     my $IsVisibleForCustomer = $Config->{IsVisibleForCustomerDefault};
+    if ( !$Param{SourceIsVisibleForCustomer} && $ConfigObject->Get('Ticket::Frontend::HideMessageFromCustomerByDefaultIfSourceMessageHidden') ) {
+        $IsVisibleForCustomer = 0;
+    }
     if ( $Param{GetParam}->{IsVisibleForCustomerPresent} ) {
         $IsVisibleForCustomer = $Param{GetParam}->{IsVisibleForCustomer} ? 1 : 0;
     }
