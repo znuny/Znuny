@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -729,6 +730,15 @@ sub _RecipientsGet {
             # Other packages might add other kind of recipients that are normally handled by
             #   other modules then an elsif condition here is useful.
             elsif ( $Recipient eq 'Customer' ) {
+
+                # Skip customer recipient if sending notifications to customers is disabled.
+                if ( $ConfigObject->Get('CustomerNotificationsDisabled') ) {
+                    $Kernel::OM->Get('Kernel::System::Log')->Log(
+                        Priority => 'notice',
+                        Message  => 'Send no customer notification because sending notifications to customers is disabled (see CustomerNotificationsDisabled)!',
+                    );
+                    next RECIPIENT;
+                }
 
                 # Get last article from customer.
                 my @CustomerArticles = $ArticleObject->ArticleList(

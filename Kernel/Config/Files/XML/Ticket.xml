@@ -7130,6 +7130,13 @@
             <Item ValueType="Checkbox">0</Item>
         </Value>
     </Setting>
+    <Setting Name="CustomerNotificationsDisabled" Required="1" Valid="1">
+        <Description Translatable="1">Disable sending notifications to customers.</Description>
+        <Navigation>Core::Ticket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::CustomerTicketMessage###NextScreenAfterNewTicket" Required="1" Valid="1">
         <Description Translatable="1">Determines the next screen after new customer ticket in the customer interface.</Description>
         <Navigation>Frontend::Customer::View::TicketMessage</Navigation>

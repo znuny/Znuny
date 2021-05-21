@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2023 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -809,21 +810,26 @@ sub _Edit {
         $TreeView = 1;
     }
 
+    my %RecipientTypes = (
+        AgentCreateBy             => Translatable('Agent who created the ticket'),
+        AgentOwner                => Translatable('Agent who owns the ticket'),
+        AgentResponsible          => Translatable('Agent who is responsible for the ticket'),
+        AgentWatcher              => Translatable('All agents watching the ticket'),
+        AgentWritePermissions     => Translatable('All agents with write permission for the ticket'),
+        AgentMyQueues             => Translatable('All agents subscribed to the ticket\'s queue'),
+        AgentMyServices           => Translatable('All agents subscribed to the ticket\'s service'),
+        AgentMyQueuesMyServices   => Translatable('All agents subscribed to both the ticket\'s queue and service'),
+        AllRecipientsFirstArticle => Translatable('All recipients of the first article'),
+        AllRecipientsLastArticle  => Translatable('All recipients of the last article'),
+        AllMentionedUsers         => Translatable('All agents who are mentioned in the ticket'),
+    );
+
+    if ( !$ConfigObject->Get('CustomerNotificationsDisabled') ) {
+        $RecipientTypes{'Customer'} = Translatable('Customer user of the ticket'),
+    }
+
     $Param{RecipientsStrg} = $LayoutObject->BuildSelection(
-        Data => {
-            AgentCreateBy             => Translatable('Agent who created the ticket'),
-            AgentOwner                => Translatable('Agent who owns the ticket'),
-            AgentResponsible          => Translatable('Agent who is responsible for the ticket'),
-            AgentWatcher              => Translatable('All agents watching the ticket'),
-            AgentWritePermissions     => Translatable('All agents with write permission for the ticket'),
-            AgentMyQueues             => Translatable('All agents subscribed to the ticket\'s queue'),
-            AgentMyServices           => Translatable('All agents subscribed to the ticket\'s service'),
-            AgentMyQueuesMyServices   => Translatable('All agents subscribed to both the ticket\'s queue and service'),
-            Customer                  => Translatable('Customer user of the ticket'),
-            AllRecipientsFirstArticle => Translatable('All recipients of the first article'),
-            AllRecipientsLastArticle  => Translatable('All recipients of the last article'),
-            AllMentionedUsers         => Translatable('All agents who are mentioned in the ticket'),
-        },
+        Data       => \%RecipientTypes,
         Name       => 'Recipients',
         Multiple   => 1,
         Size       => 8,
