@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -54,7 +55,7 @@ my $HTML = '<html>
 <body>
 <b>Test HTML document.</b>
 <img src="cid:1234" border="0">
-<img src="Untitled%20Attachment" border="0">
+<img src="cid:Untitled%20Attachment" border="0">
 Special case from Lotus Notes:
 <img src=cid:_1_09B1841409B1651C003EDE23C325785D border="0">
 </body>
