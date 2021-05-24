@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -381,21 +382,26 @@ sub Run {
             return;
         }
 
-        # execution in 20 seconds
-        my $ExecutionTimeObj = $Kernel::OM->Create('Kernel::System::DateTime');
-        $ExecutionTimeObj->Add( Seconds => 20 );
+        # Add a asynchronous executor scheduler task to count the concurrent user if enabled.
+        my $PluginDisabled       = $Kernel::OM->Get('Kernel::Config')->Get('SupportDataCollector::DisablePlugins') || [];
+        my %LookupPluginDisabled = map { $_ => 1 } @{$PluginDisabled};
+        if ( !$LookupPluginDisabled{'Kernel::System::SupportDataCollector::PluginAsynchronous::OTRS::ConcurrentUsers'} ) {
 
-        # add a asynchronous executor scheduler task to count the concurrent user
-        $Kernel::OM->Get('Kernel::System::Scheduler')->TaskAdd(
-            ExecutionTime            => $ExecutionTimeObj->ToString(),
-            Type                     => 'AsynchronousExecutor',
-            Name                     => 'PluginAsynchronous::ConcurrentUser',
-            MaximumParallelInstances => 1,
-            Data                     => {
-                Object   => 'Kernel::System::SupportDataCollector::PluginAsynchronous::OTRS::ConcurrentUsers',
-                Function => 'RunAsynchronous',
-            },
-        );
+            # execution in 20 seconds
+            my $ExecutionTimeObj = $Kernel::OM->Create('Kernel::System::DateTime');
+            $ExecutionTimeObj->Add( Seconds => 20 );
+
+            $Kernel::OM->Get('Kernel::System::Scheduler')->TaskAdd(
+                ExecutionTime            => $ExecutionTimeObj->ToString(),
+                Type                     => 'AsynchronousExecutor',
+                Name                     => 'PluginAsynchronous::ConcurrentUser',
+                MaximumParallelInstances => 1,
+                Data                     => {
+                    Object   => 'Kernel::System::SupportDataCollector::PluginAsynchronous::OTRS::ConcurrentUsers',
+                    Function => 'RunAsynchronous',
+                },
+            );
+        }
 
         my $UserTimeZone = $Self->_UserTimeZoneGet(%UserData);
 
