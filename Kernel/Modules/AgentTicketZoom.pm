@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -1342,7 +1343,7 @@ sub MaskAgentZoom {
     }
 
     # get MoveQueuesStrg
-    if ( $ConfigObject->Get('Ticket::Frontend::MoveType') =~ /^form$/i ) {
+    if ( $ConfigObject->Get('Ticket::Frontend::MoveType') =~ /form/i ) {
         $MoveQueues{0}         = '- ' . $LayoutObject->{LanguageObject}->Translate('Move') . ' -';
         $Param{MoveQueuesStrg} = $LayoutObject->AgentQueueListOption(
             Name           => 'DestQueueID',
@@ -1365,13 +1366,14 @@ sub MaskAgentZoom {
         );
         $Param{TicketID} = $Ticket{TicketID};
         if ($Access) {
-            if ( $ConfigObject->Get('Ticket::Frontend::MoveType') =~ /^form$/i ) {
+            if ( $ConfigObject->Get('Ticket::Frontend::MoveType') =~ /form/i ) {
                 $LayoutObject->Block(
                     Name => 'MoveLink',
                     Data => { %Param, %AclAction },
                 );
             }
-            else {
+
+            if ( $ConfigObject->Get('Ticket::Frontend::MoveType') =~ /link/i ) {
                 $LayoutObject->Block(
                     Name => 'MoveForm',
                     Data => { %Param, %AclAction },
