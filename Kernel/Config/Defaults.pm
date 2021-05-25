@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -1496,6 +1497,7 @@ via the Preferences button after logging in.
         CustomerUserSearchFields           => [ 'login', 'first_name', 'last_name', 'customer_id' ],
         CustomerUserSearchPrefix           => '*',
         CustomerUserSearchSuffix           => '*',
+        CustomerUserSearchExtended         => 0,   # 0 - normal search (space is part of search phrase), 1 - extended search (space works like +)
         CustomerUserSearchListLimit        => 250,
         CustomerUserPostMasterSearchFields => ['email'],
         CustomerUserNameFields             => [ 'title', 'first_name', 'last_name' ],
@@ -1602,6 +1604,7 @@ via the Preferences button after logging in.
 #        CustomerUserSearchFields => ['uid', 'cn', 'mail'],
 #        CustomerUserSearchPrefix => '',
 #        CustomerUserSearchSuffix => '*',
+#        CustomerUserSearchExtended => 0,   # 0 - normal search (space is part of search phrase), 1 - extended search (space works like +)
 #        CustomerUserSearchListLimit => 250,
 #        CustomerUserPostMasterSearchFields => ['mail'],
 #        CustomerUserNameFields => ['givenname', 'sn'],

@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -68,6 +69,11 @@ sub new {
     $Self->{SearchSuffix} = $Self->{CustomerUserMap}->{CustomerUserSearchSuffix};
     if ( !defined $Self->{SearchSuffix} ) {
         $Self->{SearchSuffix} = '*';
+    }
+
+    $Self->{SearchExtended} = $Self->{CustomerUserMap}->{CustomerUserSearchExtended};
+    if ( !defined $Self->{SearchExtended} ) {
+        $Self->{SearchExtended} = 0;
     }
 
     # check if CustomerKey is var or int
@@ -327,6 +333,7 @@ sub CustomerSearch {
             Value         => $Search,
             SearchPrefix  => $Self->{SearchPrefix},
             SearchSuffix  => $Self->{SearchSuffix},
+            Extended      => $Self->{SearchExtended},
             CaseSensitive => $Self->{CaseSensitive},
             BindMode      => 1,
         );

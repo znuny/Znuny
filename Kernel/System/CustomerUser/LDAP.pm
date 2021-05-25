@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -148,6 +149,11 @@ sub new {
     $Self->{SearchSuffix} = $Self->{CustomerUserMap}->{CustomerUserSearchSuffix};
     if ( !defined $Self->{SearchSuffix} ) {
         $Self->{SearchSuffix} = '*';
+    }
+
+    $Self->{SearchExtended} = $Self->{CustomerUserMap}->{CustomerUserSearchExtended};
+    if ( !defined $Self->{SearchExtended} ) {
+        $Self->{SearchExtended} = 0;
     }
 
     # charset settings
@@ -387,7 +393,13 @@ sub CustomerSearch {
     if ( $Param{Search} ) {
 
         my $Count = 0;
-        my @Parts = split( /\+/, $Param{Search}, 6 );
+        my @Parts;
+        if ( $Self->{SearchExtended} ) {
+            @Parts = split( /\+|\s/, $Param{Search}, 6 );
+        }
+        else {
+            @Parts = split( /\+/, $Param{Search}, 6 );
+        }
         for my $Part (@Parts) {
 
             $Part = $Self->{SearchPrefix} . $Part . $Self->{SearchSuffix};
