@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -490,12 +491,19 @@ sub CustomerSearch {
     # combine needed attrs
     my @Attributes = ( @CustomerUserListFieldsWithoutDynamicFields, $Self->{CustomerKey} );
 
+    # Use limit specified in function call if specified but do not
+    # go beyond source limit.
+    my $Limit = $Param{Limit} // $Self->{UserSearchListLimit};
+    if ( defined $Self->{UserSearchListLimit} && ( $Limit > $Self->{UserSearchListLimit} ) ) {
+        $Limit = $Self->{UserSearchListLimit};
+    }
+
     # perform user search
     my $Result = $Self->{LDAP}->search(
         base      => $Self->{BaseDN},
         scope     => $Self->{SScope},
         filter    => $Filter,
-        sizelimit => $Param{Limit} || $Self->{UserSearchListLimit},
+        sizelimit => $Limit,
         attrs     => \@Attributes,
     );
 
@@ -626,7 +634,7 @@ sub CustomerSearch {
                 base      => $Self->{GroupDN},
                 scope     => $Self->{SScope},
                 filter    => 'memberUid=' . escape_filter_value($Filter2),
-                sizelimit => $Param{Limit} || $Self->{UserSearchListLimit},
+                sizelimit => $Limit,
                 attrs     => ['1.1'],
             );
 

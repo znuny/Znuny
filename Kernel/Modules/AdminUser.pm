@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -540,37 +541,31 @@ sub _Overview {
     # ShownUsers limitation in AdminUser
     my $Limit = 400;
 
+    # Search users with limit (+1 to decide if "more available" must be displayed);
+    # will be trimmed to $Limit in LISTKEY loop below.
     my %List = $UserObject->UserSearch(
-        Search => $Param{Search} . '*',
-        Limit  => $Limit,
-        Valid  => 0,
-    );
-
-    my %ListAllItems = $UserObject->UserSearch(
         Search => $Param{Search} . '*',
         Limit  => $Limit + 1,
         Valid  => 0,
     );
 
-    if ( keys %ListAllItems <= $Limit ) {
-        my $ListAllItems = keys %ListAllItems;
+   my $ListSize = keys %List;
+
+    if ( $ListSize <= $Limit ) {
         $LayoutObject->Block(
             Name => 'OverviewHeader',
             Data => {
-                ListAll => $ListAllItems,
+                ListAll => $ListSize,
                 Limit   => $Limit,
             },
         );
     }
     else {
-        my $ListAllSize    = keys %ListAllItems;
-        my $SearchListSize = keys %List;
-
         $LayoutObject->Block(
             Name => 'OverviewHeader',
             Data => {
-                SearchListSize => $SearchListSize,
-                ListAll        => $ListAllSize,
+                SearchListSize => $Limit,
+                ListAll        => $ListSize,
                 Limit          => $Limit,
             },
         );
@@ -597,7 +592,13 @@ sub _Overview {
 
     # if there are results to show
     if (%List) {
+        my $ListKeyNo = 1;
+
+        LISTKEY:
         for my $ListKey ( sort { $List{$a} cmp $List{$b} } keys %List ) {
+
+            # Don't diplay last user if beyond limit.
+            last LISTKEY if ( $ListKeyNo++ > $Limit );
 
             my %UserData = $UserObject->GetUserData(
                 UserID        => $ListKey,

@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -437,11 +438,18 @@ sub CustomerSearch {
     my @CustomerUserListFieldsDynamicFields
         = grep { exists $Self->{ConfiguredDynamicFieldNames}->{$_} } @{$CustomerUserListFields};
 
+    # Use limit specified in function call if specified but do not
+    # go beyond source limit.
+    my $Limit = $Param{Limit} // $Self->{UserSearchListLimit};
+    if ( defined $Self->{UserSearchListLimit} && ( $Limit > $Self->{UserSearchListLimit} ) ) {
+        $Limit = $Self->{UserSearchListLimit};
+    }
+
     # get data from customer user table
     return if !$Self->{DBObject}->Prepare(
         SQL   => $SQL,
         Bind  => \@Bind,
-        Limit => $Param{Limit} || $Self->{UserSearchListLimit},
+        Limit => $Limit,
     );
 
     my @CustomerUserData;

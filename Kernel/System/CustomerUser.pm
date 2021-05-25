@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -142,7 +143,7 @@ to search users
     my %List = $CustomerUserObject->CustomerSearch(
         Search => '*some*', # also 'hans+huber' possible
         Valid  => 1,        # (optional) default 1
-        Limit  => 100,      # (optional) overrides limit of the config
+        Limit  => 100,      # (optional) if smaller - overrides limit of the config
     );
 
     # username search
