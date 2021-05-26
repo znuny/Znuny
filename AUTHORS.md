@@ -120,6 +120,7 @@ The following persons contributed to OTRS:
 * Weblate <noreply@weblate.org>
 * Wojciech Kuchta <klapi85@gmail.com>
 * Wojciech Kuchta <wojciech.kuchta@allegro.pl>
+* Yuri Myasoedov <ymyasoedov@yandex.ru>
 * Yuri Myasoedov <yuriy.myasoedov@open.ru>
 * Zoran Ilibasic <zilibasic@s7deisgncreative.com>
 * Zoran Ilibasic <zilibasic@s7desigcreative.com>
@@ -130,6 +131,7 @@ The following persons contributed to OTRS:
 * djurici <igor.djuric@muehlbauer.de>
 * juanmclavero <juanm.clavero@ibsalut.es>
 * otrsintern <otrsintern@gmail.com>
+* paulfolkers <83212096+paulfolkers@users.noreply.github.com>
 * reneeb <info@perl-services.de>
 * reneeb <reb@perl-services.de>
 * s7design <otrs@s7designcreative.com>
