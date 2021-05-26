@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -764,6 +765,8 @@ sub SearchOptionList {
 
     my $ParamHook = $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Hook') || 'Ticket#';
 
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
     # search option list
     my @SearchOptionList = (
         {
@@ -793,7 +796,7 @@ sub SearchOptionList {
         },
     );
 
-    if ( $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Type') ) {
+    if ( $ConfigObject->Get('Ticket::Type') ) {
         push @SearchOptionList,
             {
             Key  => 'TypeIDs',
@@ -802,13 +805,44 @@ sub SearchOptionList {
             };
     }
 
-    if ( $Kernel::OM->Get('Kernel::Config')->Get('Ticket::ArchiveSystem') ) {
-        push @SearchOptionList,
-            {
-            Key  => 'ArchiveID',
-            Name => Translatable('Archive search'),
-            Type => 'List',
-            };
+    if ( $ConfigObject->Get('Ticket::ArchiveSystem') ) {
+
+        # Allow archive searching if Ticket::ArchiveSearchUserGroup is not defined.
+        my $ArchiveSearchAllowed = 1;
+
+        if ( $ConfigObject->Get('Ticket::ArchiveSearchUserGroup') ) {
+
+            # If Ticket::ArchiveSearchUserGroup is defined, allow archive searching
+            # only if user does has rw access to Ticket::ArchiveSearchUserGroup group.
+
+            $ArchiveSearchAllowed = 0;
+
+            my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
+
+            # Get current user groups.
+            my %UserGroups = $GroupObject->GroupMemberList(
+                UserID => $Self->{UserID},
+                Type   => 'rw',
+                Result => 'HASH',
+            );
+
+            # Get group id of Ticket::ArchiveSearchUserGroup.
+            my $ArchiveSearchUserGroupID =
+                $GroupObject->GroupLookup( Group => $ConfigObject->Get('Ticket::ArchiveSearchUserGroup') );
+
+            if ( defined $ArchiveSearchUserGroupID && $UserGroups{$ArchiveSearchUserGroupID} ) {
+                $ArchiveSearchAllowed = 1;
+            }
+        }
+
+        if ( $ArchiveSearchAllowed ) {
+            push @SearchOptionList,
+                {
+                Key  => 'ArchiveID',
+                Name => Translatable('Archive search'),
+                Type => 'List',
+                };
+        }
     }
 
     # add formkey
