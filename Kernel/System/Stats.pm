@@ -3568,7 +3568,7 @@ sub _ColumnAndRowTranslation {
 
         # Special handling if the sumfunction is used.
         my $SumColRef;
-        if ( $Param{StatRef}->{SumRow} ) {
+        if ( $Param{StatRef}->{SumCol} ) {
             $SumColRef = pop @HeadOld;
         }
 
