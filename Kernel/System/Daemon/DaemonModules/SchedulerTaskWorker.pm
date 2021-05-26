@@ -131,7 +131,6 @@ sub PreRun {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-
     $Self->{CurrentWorkersCount} = scalar keys %{ $Self->{CurrentWorkers} };
 
     my @TaskList = $Self->{SchedulerDBObject}->TaskListUnlocked();
