@@ -25,6 +25,7 @@ my @Tests = (
         COMP_LINE => 'bin/otrs.Console.pl Admin::Article::StorageSwitch ',
         Arguments => [ 'bin/otrs.Console.pl', '', 'Admin::Article::SwitchStorage' ],
         Result    => "--target
+--source
 --tickets-closed-before-date
 --tickets-closed-before-days
 --tolerant
