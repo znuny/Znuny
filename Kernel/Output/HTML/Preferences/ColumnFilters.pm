@@ -14,6 +14,7 @@ use strict;
 use warnings;
 
 use Kernel::Language qw(Translatable);
+use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::System::Web::Request',
@@ -58,27 +59,28 @@ sub Run {
 
     return 1 if !defined $FilterAction;
 
-    for my $Key ( sort keys %{ $Param{GetParam} } ) {
+    if ( !$Kernel::OM->Get('Kernel::Config')->Get('DemoSystem') ) {
+        KEY:
+        for my $Key ( sort keys %{ $Param{GetParam} } ) {
 
-        # pref update db
-        if ( !$Kernel::OM->Get('Kernel::Config')->Get('DemoSystem') ) {
+            # We require non-empty list of column names - ignore antyhing else.
+            next KEY if !( $Param{GetParam}->{$Key} && IsArrayRefWithData( $Param{GetParam}->{$Key} ) );
 
-            my %Seen;
-            my @ColumnsUnique;
-            COLUMN:
-            for my $Column ( @{ $Param{GetParam}->{$Key} } ) {
-
-                # Skip duplicates.
-                next COLUMN if $Seen{$Column};
-                $Seen{$Column} = 1;
-
-                push @ColumnsUnique, $Column;
+            # Remove column name duplicates from list preserving column order.
+            my %SeenColumnNames;
+            my @DeduplicatedColumnNameArray;
+            COLUMN_NAME:
+            for my $ColumnName ( @{ $Param{GetParam}->{$Key} } ) {
+                next COLUMN_NAME if $SeenColumnNames{$ColumnName};
+                $SeenColumnNames{$ColumnName} = 1;
+                push @DeduplicatedColumnNameArray, $ColumnName;
             }
 
+            # Update list in DB.
             $Kernel::OM->Get('Kernel::System::User')->SetPreferences(
                 UserID => $Param{UserData}->{UserID},
                 Key    => $Key . '-' . $FilterAction,
-                Value  => $Kernel::OM->Get('Kernel::System::JSON')->Encode( Data => \@ColumnsUnique ),
+                Value  => $Kernel::OM->Get('Kernel::System::JSON')->Encode( Data => \@DeduplicatedColumnNameArray ),
             );
         }
     }
