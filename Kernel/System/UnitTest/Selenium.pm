@@ -96,6 +96,8 @@ sub new {
 
     my %SeleniumTestsConfig = %{ $Kernel::OM->Get('Kernel::Config')->Get('SeleniumTestsConfig') // {} };
 
+    use Data::Dumper;
+    print STDERR 'Debug Dump - - %SeleniumTestsConfig = ' . Dumper(\%SeleniumTestsConfig) . "\n";
     if ( !%SeleniumTestsConfig ) {
         my $Self = bless {}, $Class;
         $Self->{UnitTestDriverObject} = $Param{UnitTestDriverObject};
@@ -414,18 +416,18 @@ sub Login {
             $Self->{UnitTestDriverObject}->True( 1, 'Login sequence ended...' );
         };
 
-        # an error happend
+        # an error occurred
         if ($@) {
 
             $Self->{UnitTestDriverObject}->True( 1, "Login attempt $Try of $MaxTries not successful." );
 
             # try again
             next TRY if $Try < $MaxTries;
-
+            $Self->HandleError($@);
             die "Login failed!";
         }
 
-        # login was sucessful
+        # login was successful
         else {
             last TRY;
         }
@@ -446,7 +448,7 @@ Exactly one condition (JavaScript or WindowCount) must be specified.
         ElementExists  => ['css-selector', 'css'],
         ElementMissing => 'xpath-selector',                  # Wait until an element is not present
         ElementMissing => ['css-selector', 'css'],
-        JavaScript     => 'return $(".someclass").length',   # Javascript code that checks condition
+        JavaScript     => 'return $(".someclass").length',   # JavaScript code that checks condition
         WindowCount    => 2,                                 # Wait until this many windows are open
         Time           => 20,                                # optional, wait time in seconds (default 20)
     );

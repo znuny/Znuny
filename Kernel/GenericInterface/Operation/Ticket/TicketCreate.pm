@@ -281,7 +281,7 @@ perform TicketCreate Operation. This will return the created ticket number.
 
                             Attachment => [
                                 {
-                                    Content            => "xxxx",     # actual attachment contents, base64 enconded
+                                    Content            => "xxxx",     # actual attachment contents, base64 encoded
                                     ContentAlternative => "",
                                     ContentID          => "",
                                     ContentType        => "application/pdf",
@@ -790,7 +790,7 @@ checks if the given article parameter is valid.
     returns:
 
     $ArticleCheck = {
-        Success => 1,                               # if everething is OK
+        Success => 1,                               # if everything is OK
     }
 
     $ArticleCheck = {
@@ -1059,7 +1059,7 @@ checks if the given dynamic field parameter is valid.
     returns:
 
     $DynamicFieldCheck = {
-        Success => 1,                               # if everething is OK
+        Success => 1,                               # if everything is OK
     }
 
     $DynamicFieldCheck = {
@@ -1121,7 +1121,7 @@ checks if the given attachment parameter is valid.
     returns:
 
     $AttachmentCheck = {
-        Success => 1,                               # if everething is OK
+        Success => 1,                               # if everything is OK
     }
 
     $AttachmentCheck = {
