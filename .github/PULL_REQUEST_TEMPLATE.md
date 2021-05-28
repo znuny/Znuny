@@ -2,6 +2,12 @@
   You are amazing! 🚀
   Thanks for contributing to the Znuny community project!
   Please, DO NOT DELETE ANY TEXT from this template (unless instructed)!
+
+### Licensing, copyright and credits
+
+Znuny is an open fork of an existing software. So we have to respect the already given copyright of the original creators.
+
+New files will be licensed using the AGPL Version 3. If you contribute code to the Znuny project you will get mentioned in the pull request incl. the commit, in CHANGES.md and in AUTHORS.md. We will not mention you in the file you provided or changed. Your work is highly appreciated and acknowledged but you contribute it to the project and your copyright will pass on to the fork itself.
 -->
 
 ## Proposed change
@@ -52,7 +58,7 @@
 
 ## Checklist
 <!--
-  Put an '✖️' in the boxes that apply. You can also fill these out after
+  Put an 'x' in the boxes that apply. You can also fill these out after
   creating the PR. If you're unsure about any of them, don't hesitate to ask.
   We're here to help! This is simply a reminder of what we are going to look
   for before merging your code.

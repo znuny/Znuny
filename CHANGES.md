@@ -1,8 +1,10 @@
 # 6.0.35 2021-06-02
+ - 2021-05-28 Improved StorageSwitch command to be more flexible (#27). Thanks to Renée Bäcker (@reneeb). [#27](https://github.com/znuny/Znuny/pull/27)
  - 2021-05-26 Changed autocomplete to 'new-password' (#64). Thanks to maxence (@tipue-dev) and Thijs Kinkhorst (@thijskh) [#64](https://github.com/znuny/Znuny/pull/64)
  - 2021-05-26 Fixed typo in variable "$SumRow"/"$SumCol" (#65). Thanks to paulfolkers (@paulfolkers) [#65](https://github.com/znuny/Znuny/pull/65)
  - 2021-05-26 Fixed ACL item from selection not changeable (#71). Thanks to maxence (@tipue-dev) [#71](https://github.com/znuny/Znuny/pull/71)
  - 2021-05-19 Fixed performance issue with regular expression that looks for PGP keys in the content of articles.
+ - 2021-05-03 Changed behaviour of `NotificationEvent::Transport::Base->_ReplaceTicketAttributes()` function if multiselect fields are used.
 
 # 6.0.34 2021-04-21
  - 2021-04-14 Updated jquery-validate from version 1.16.0 to 1.19.3 (CVE-2021-21252).
