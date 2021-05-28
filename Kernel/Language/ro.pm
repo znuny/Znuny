@@ -1348,12 +1348,12 @@ sub Data {
         'Please visit our customer portal and file a request.' => 'Vă rugăm să vizitați portalul nostru pentru clienți și să depuneți o solicitare.',
         'Everything else will be done as part of your contract.' => '',
         'Your installed OTRS version is %s.' => '',
-        'To install this package, you need to update to OTRS %s or higher.' =>
+        'To install this package, you need to update to Znuny %s or higher.' =>
             '',
         'To install this package, the Maximum OTRS Version is %s.' => '',
         'To install this package, the required Framework version is %s.' =>
             '',
-        'Why should I keep OTRS up to date?' => 'De ce trebuie să țin OTRS la zi?',
+        'Why should I keep Znuny up to date?' => 'De ce trebuie să țin Znuny la zi?',
         'You will receive updates about relevant security issues.' => '',
         'You will receive updates for all other relevant OTRS issues' => '',
         'With your existing contract you can only use a small part of the %s.' =>
@@ -1411,18 +1411,18 @@ sub Data {
             'Sunteți sigur că doriți să reinstalați acest pachet? Modificările făcute manual se vor pierde.',
         'Go to updating instructions' => 'Salt la instrucțiunile de actualizare',
         'package information' => 'informații despre pachet',
-        'Package installation requires a patch level update of OTRS.' => '',
-        'Package update requires a patch level update of OTRS.' => '',
+        'Package installation requires a patch level update of Znuny.' => '',
+        'Package update requires a patch level update of Znuny.' => '',
         'If you are a OTRS Business Solution™ customer, please visit our customer portal and file a request.' =>
             '',
-        'Please note that your installed OTRS version is %s.' => 'Rețineți că versiunea dvs. OTRS instalată este %s.',
-        'To install this package, you need to update OTRS to version %s or newer.' =>
-            'Pentru a instala acest pachet, trebuie să actualizați OTRS la versiunea %s sau mai nouă.',
-        'This package can only be installed on OTRS version %s or older.' =>
-            'Acest pachet poate fi instalat doar pe versiunea OTRS %s sau mai veche.',
-        'This package can only be installed on OTRS version %s or newer.' =>
-            'Acest pachet poate fi instalat doar pe versiunea OTRS %s sau mai nouă.',
-        'You will receive updates for all other relevant OTRS issues.' =>
+        'Please note that your installed Znuny version is %s.' => 'Rețineți că versiunea dvs. OTRS instalată este %s.',
+        'To install this package, you need to update Znuny to version %s or newer.' =>
+            'Pentru a instala acest pachet, trebuie să actualizați Znuny la versiunea %s sau mai nouă.',
+        'This package can only be installed on Znuny version %s or older.' =>
+            'Acest pachet poate fi instalat doar pe versiunea Znuny %s sau mai veche.',
+        'This package can only be installed on Znuny version %s or newer.' =>
+            'Acest pachet poate fi instalat doar pe versiunea Znuny %s sau mai nouă.',
+        'You will receive updates for all other relevant Znuny issues.' =>
             '',
         'How can I do a patch level update if I don’t have a contract?' =>
             '',

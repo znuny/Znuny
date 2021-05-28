@@ -4849,9 +4849,9 @@ msgid "Your installed OTRS version is %s."
 msgstr "Sua versão do OTRS instalada é %s."
 
 #. Template: AdminOTRSBusinessNotInstalled
-msgid "To install this package, you need to update to OTRS %s or higher."
+msgid "To install this package, you need to update to Znuny %s or higher."
 msgstr ""
-"Para instalar este pacote, você precisa atualizar para OTRS %s ou superior."
+"Para instalar este pacote, você precisa atualizar para Znuny %s ou superior."
 
 #. Template: AdminOTRSBusinessNotInstalled
 msgid "To install this package, the Maximum OTRS Version is %s."
@@ -4862,8 +4862,8 @@ msgid "To install this package, the required Framework version is %s."
 msgstr "Para instalar este pacote, a versão do framework requerida é %s."
 
 #. Template: AdminOTRSBusinessNotInstalled
-msgid "Why should I keep OTRS up to date?"
-msgstr "Por que eu deveria manter o OTRS atualizado?"
+msgid "Why should I keep Znuny up to date?"
+msgstr "Por que eu deveria manter o Znuny atualizado?"
 
 #. Template: AdminOTRSBusinessNotInstalled
 msgid "You will receive updates about relevant security issues."
@@ -5063,11 +5063,11 @@ msgid "package information"
 msgstr "informação do pacote"
 
 #. Template: AdminPackageManager
-msgid "Package installation requires a patch level update of OTRS."
+msgid "Package installation requires a patch level update of Znuny."
 msgstr "Pacote de Instalação requer atualização do OTRS"
 
 #. Template: AdminPackageManager
-msgid "Package update requires a patch level update of OTRS."
+msgid "Package update requires a patch level update of Znuny."
 msgstr "Atualização do pacote requer atualização de nível do OTRS"
 
 #. Template: AdminPackageManager
@@ -5079,30 +5079,30 @@ msgstr ""
 "de clientes e registre um pedido."
 
 #. Template: AdminPackageManager
-msgid "Please note that your installed OTRS version is %s."
-msgstr "Por favor note que a sua versão do OTRS instalada é %s."
+msgid "Please note that your installed Znuny version is %s."
+msgstr "Por favor note que a sua versão do Znuny instalada é %s."
 
 #. Template: AdminPackageManager
 msgid ""
-"To install this package, you need to update OTRS to version %s or newer."
+"To install this package, you need to update Znuny to version %s or newer."
 msgstr ""
-"Para instalar este pacote, você precisa atualizar seu OTRS para versão %s ou "
+"Para instalar este pacote, você precisa atualizar seu Znuny para versão %s ou "
 "superior."
 
 #. Template: AdminPackageManager
-msgid "This package can only be installed on OTRS version %s or older."
+msgid "This package can only be installed on Znuny version %s or older."
 msgstr ""
-"Este pacote smente pode ser instalado na versão %s ou inferior do OTRS."
+"Este pacote smente pode ser instalado na versão %s ou inferior do Znuny."
 
 #. Template: AdminPackageManager
-msgid "This package can only be installed on OTRS version %s or newer."
+msgid "This package can only be installed on Znuny version %s or newer."
 msgstr ""
-"Este pacote smente pode ser instalado na versão %s ou superior do OTRS."
+"Este pacote smente pode ser instalado na versão %s ou superior do Znuny."
 
 #. Template: AdminPackageManager
-msgid "You will receive updates for all other relevant OTRS issues."
+msgid "You will receive updates for all other relevant Znuny issues."
 msgstr ""
-"Você receberá atualizações para todos os outros problemas relevantes do OTRS."
+"Você receberá atualizações para todos os outros problemas relevantes do Znuny."
 
 #. Template: AdminPackageManager
 msgid "How can I do a patch level update if I don’t have a contract?"

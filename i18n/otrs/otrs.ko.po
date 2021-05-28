@@ -4611,8 +4611,8 @@ msgid "Your installed OTRS version is %s."
 msgstr "설치된 OTRS 버전은 %s입니다."
 
 #. Template: AdminOTRSBusinessNotInstalled
-msgid "To install this package, you need to update to OTRS %s or higher."
-msgstr "이 패키지를 설치하려면 %s 이상의 OTRS로 업데이트해야합니다."
+msgid "To install this package, you need to update to Znuny %s or higher."
+msgstr "이 패키지를 설치하려면 %s 이상의 Znuny로 업데이트해야합니다."
 
 #. Template: AdminOTRSBusinessNotInstalled
 msgid "To install this package, the Maximum OTRS Version is %s."
@@ -4623,8 +4623,8 @@ msgid "To install this package, the required Framework version is %s."
 msgstr "이 패키지를 설치하려면 필요한 Framework 버전이 %s입니다."
 
 #. Template: AdminOTRSBusinessNotInstalled
-msgid "Why should I keep OTRS up to date?"
-msgstr "왜 OTRS를 최신 상태로 유지해야합니까?"
+msgid "Why should I keep Znuny up to date?"
+msgstr "왜 Znuny를 최신 상태로 유지해야합니까?"
 
 #. Template: AdminOTRSBusinessNotInstalled
 msgid "You will receive updates about relevant security issues."
@@ -4815,11 +4815,11 @@ msgid "package information"
 msgstr "패키지 정보"
 
 #. Template: AdminPackageManager
-msgid "Package installation requires a patch level update of OTRS."
+msgid "Package installation requires a patch level update of Znuny."
 msgstr "패키지를 설치하려면 OTRS의 패치 레벨 업데이트가 필요합니다. "
 
 #. Template: AdminPackageManager
-msgid "Package update requires a patch level update of OTRS."
+msgid "Package update requires a patch level update of Znuny."
 msgstr "패키지 업데이트에는 OTRS의 패치 수준 업데이트가 필요합니다. "
 
 #. Template: AdminPackageManager
@@ -4831,25 +4831,25 @@ msgstr ""
 "오."
 
 #. Template: AdminPackageManager
-msgid "Please note that your installed OTRS version is %s."
-msgstr "설치된 OTRS 버전은 %s입니다."
+msgid "Please note that your installed Znuny version is %s."
+msgstr "설치된 Znuny 버전은 %s입니다."
 
 #. Template: AdminPackageManager
 msgid ""
-"To install this package, you need to update OTRS to version %s or newer."
-msgstr "이 패키지를 설치하려면 OTRS를 버전 %s 이상으로 업데이트해야합니다."
+"To install this package, you need to update Znuny to version %s or newer."
+msgstr "이 패키지를 설치하려면 Znuny를 버전 %s 이상으로 업데이트해야합니다."
 
 #. Template: AdminPackageManager
-msgid "This package can only be installed on OTRS version %s or older."
-msgstr "이 패키지는 OTRS 버전 %s 또는 그 이상에서만 설치할 수 있습니다."
+msgid "This package can only be installed on Znuny version %s or older."
+msgstr "이 패키지는 Znuny 버전 %s 또는 그 이상에서만 설치할 수 있습니다."
 
 #. Template: AdminPackageManager
-msgid "This package can only be installed on OTRS version %s or newer."
-msgstr "This package can only be installed on OTRS version %s or newer."
+msgid "This package can only be installed on Znuny version %s or newer."
+msgstr "This package can only be installed on Znuny version %s or newer."
 
 #. Template: AdminPackageManager
-msgid "You will receive updates for all other relevant OTRS issues."
-msgstr "다른 모든 관련 OTRS 문제에 대한 업데이트가 제공됩니다."
+msgid "You will receive updates for all other relevant Znuny issues."
+msgstr "다른 모든 관련 Znuny 문제에 대한 업데이트가 제공됩니다."
 
 #. Template: AdminPackageManager
 msgid "How can I do a patch level update if I don’t have a contract?"

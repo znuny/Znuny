@@ -4400,7 +4400,7 @@ msgid "Your installed OTRS version is %s."
 msgstr ""
 
 #. Template: AdminOTRSBusinessNotInstalled
-msgid "To install this package, you need to update to OTRS %s or higher."
+msgid "To install this package, you need to update to Znuny %s or higher."
 msgstr ""
 
 #. Template: AdminOTRSBusinessNotInstalled
@@ -4412,7 +4412,7 @@ msgid "To install this package, the required Framework version is %s."
 msgstr ""
 
 #. Template: AdminOTRSBusinessNotInstalled
-msgid "Why should I keep OTRS up to date?"
+msgid "Why should I keep Znuny up to date?"
 msgstr ""
 
 #. Template: AdminOTRSBusinessNotInstalled
@@ -4603,11 +4603,11 @@ msgid "package information"
 msgstr ""
 
 #. Template: AdminPackageManager
-msgid "Package installation requires a patch level update of OTRS."
+msgid "Package installation requires a patch level update of Znuny."
 msgstr ""
 
 #. Template: AdminPackageManager
-msgid "Package update requires a patch level update of OTRS."
+msgid "Package update requires a patch level update of Znuny."
 msgstr ""
 
 #. Template: AdminPackageManager
@@ -4617,24 +4617,24 @@ msgid ""
 msgstr ""
 
 #. Template: AdminPackageManager
-msgid "Please note that your installed OTRS version is %s."
+msgid "Please note that your installed Znuny version is %s."
 msgstr ""
 
 #. Template: AdminPackageManager
 msgid ""
-"To install this package, you need to update OTRS to version %s or newer."
+"To install this package, you need to update Znuny to version %s or newer."
 msgstr ""
 
 #. Template: AdminPackageManager
-msgid "This package can only be installed on OTRS version %s or older."
+msgid "This package can only be installed on Znuny version %s or older."
 msgstr ""
 
 #. Template: AdminPackageManager
-msgid "This package can only be installed on OTRS version %s or newer."
+msgid "This package can only be installed on Znuny version %s or newer."
 msgstr ""
 
 #. Template: AdminPackageManager
-msgid "You will receive updates for all other relevant OTRS issues."
+msgid "You will receive updates for all other relevant Znuny issues."
 msgstr ""
 
 #. Template: AdminPackageManager

@@ -1348,12 +1348,12 @@ sub Data {
         'Please visit our customer portal and file a request.' => 'Bitte besuchen Sie unser Kundenportal und eröffnen Sie eine Anfrage.',
         'Everything else will be done as part of your contract.' => 'Alles Weitere wird als Teil Ihres Vertrages durchgeführt.',
         'Your installed OTRS version is %s.' => 'Die Version Ihres installierten OTRS ist %s.',
-        'To install this package, you need to update to OTRS %s or higher.' =>
-            'Um dieses Paket zu installieren, müssen Sie zuerst OTRS auf Version %s oder neuer aktualisieren.',
+        'To install this package, you need to update to Znuny %s or higher.' =>
+            'Um dieses Paket zu installieren, müssen Sie zuerst Znuny auf Version %s oder neuer aktualisieren.',
         'To install this package, the Maximum OTRS Version is %s.' => 'Um dieses Paket zu installieren, können sie OTRS bis maximal zur Version %s verwenden.',
         'To install this package, the required Framework version is %s.' =>
             'Um dieses Paket zu installieren, wird die Framework-Version %s benötigt.',
-        'Why should I keep OTRS up to date?' => 'Warum sollte ich OTRS aktuell halten?',
+        'Why should I keep Znuny up to date?' => 'Warum sollte ich Znuny aktuell halten?',
         'You will receive updates about relevant security issues.' => 'Sie erhalten Updates über relevante Sicherheitsprobleme.',
         'You will receive updates for all other relevant OTRS issues' => 'Sie erhalten Updates für alle anderen relevanten Probleme im Zusammenhang mit OTRS',
         'With your existing contract you can only use a small part of the %s.' =>
@@ -1402,6 +1402,7 @@ sub Data {
         'PGP key' => 'PGP-Schlüssel',
 
         # Template: AdminPackageManager
+        'Go to znuny.org' => 'znuny.org aufrufen',
         'Package Manager' => 'Paketverwaltung',
         'Uninstall Package' => 'Paket deinstallieren',
         'Uninstall package' => 'Paket deinstallieren',
@@ -1411,19 +1412,19 @@ sub Data {
             'Möchten Sie dieses Paket wirklich erneut installieren? Alle manuellen Änderungen gehen verloren.',
         'Go to updating instructions' => 'Gehe zur Update-Anweisung',
         'package information' => 'Paketinformation',
-        'Package installation requires a patch level update of OTRS.' => 'Paketinstallation benötigt ein Patchlevel-Update von OTRS.',
-        'Package update requires a patch level update of OTRS.' => 'Paket-Update benötigt ein Patchlevel-Update von OTRS.',
+        'Package installation requires a patch level update of Znuny.' => 'Paketinstallation benötigt ein Patchlevel-Update von Znuny.',
+        'Package update requires a patch level update of Znuny.' => 'Paket-Update benötigt ein Patchlevel-Update von Znuny.',
         'If you are a OTRS Business Solution™ customer, please visit our customer portal and file a request.' =>
             'Wenn Sie ein OTRS Business Solution™ Kunde sind, erstellen Sie bitte eine Anfrage in unserem Kundenportal.',
-        'Please note that your installed OTRS version is %s.' => 'Bitte beachten Sie, dass Ihre installierte OTRS-Version %s ist.',
-        'To install this package, you need to update OTRS to version %s or newer.' =>
-            'Um dieses Paket zu installieren, müssen Sie zunächst OTRS auf Version %s oder neuer aktualisieren.',
-        'This package can only be installed on OTRS version %s or older.' =>
-            'Dieses Paket kann nur mit OTRS-Version %s oder älter verwendet werden.',
-        'This package can only be installed on OTRS version %s or newer.' =>
-            'Dieses Paket kann nur mit OTRS-Version %s oder neuer verwendet werden.',
-        'You will receive updates for all other relevant OTRS issues.' =>
-            'Sie erhalten Updates für alle anderen relevanten Probleme im Zusammenhang mit OTRS.',
+        'Please note that your installed Znuny version is %s.' => 'Bitte beachten Sie, dass Ihre installierte Znuny-Version %s ist.',
+        'To install this package, you need to update Znuny to version %s or newer.' =>
+            'Um dieses Paket zu installieren, müssen Sie zunächst Znuny auf Version %s oder neuer aktualisieren.',
+        'This package can only be installed on Znuny version %s or older.' =>
+            'Dieses Paket kann nur mit Znuny-Version %s oder älter verwendet werden.',
+        'This package can only be installed on Znuny version %s or newer.' =>
+            'Dieses Paket kann nur mit Znuny-Version %s oder neuer verwendet werden.',
+        'You will receive updates for all other relevant Znuny issues.' =>
+            'Sie erhalten Updates für alle anderen relevanten Probleme im Zusammenhang mit Znuny.',
         'How can I do a patch level update if I don’t have a contract?' =>
             'Wie kann ich ein Patchlevel-Update durchführen, wenn ich keinen Vertrag habe?',
         'Please find all relevant information within the updating instructions at %s.' =>

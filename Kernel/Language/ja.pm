@@ -1354,12 +1354,12 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Please visit our customer portal and file a request.' => '',
         'Everything else will be done as part of your contract.' => '',
         'Your installed OTRS version is %s.' => 'インストールされているOTRSのバージョンは%sです。',
-        'To install this package, you need to update to OTRS %s or higher.' =>
-            'このパッケージをインストールするにはOTRS %s以上にアップデートする必要があります。',
+        'To install this package, you need to update to Znuny %s or higher.' =>
+            'このパッケージをインストールするにはZnuny %s以上にアップデートする必要があります。',
         'To install this package, the Maximum OTRS Version is %s.' => 'このパッケージがインストールできるOTRSの最大バージョンは%sです。',
         'To install this package, the required Framework version is %s.' =>
             'このパッケージをインストールするにはフレームワークのバージョンが%sである必要があります。',
-        'Why should I keep OTRS up to date?' => 'OTRSのバージョンを最新に保つことが必要な理由',
+        'Why should I keep Znuny up to date?' => 'Znunyのバージョンを最新に保つことが必要な理由',
         'You will receive updates about relevant security issues.' => '',
         'You will receive updates for all other relevant OTRS issues' => '',
         'With your existing contract you can only use a small part of the %s.' =>
@@ -1417,18 +1417,18 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             'このパッケージを本当に再インストールしますか？ 全ての手動変更点は失われます。',
         'Go to updating instructions' => '',
         'package information' => 'パッケージ情報',
-        'Package installation requires a patch level update of OTRS.' => '',
-        'Package update requires a patch level update of OTRS.' => '',
+        'Package installation requires a patch level update of Znuny.' => '',
+        'Package update requires a patch level update of Znuny.' => '',
         'If you are a OTRS Business Solution™ customer, please visit our customer portal and file a request.' =>
             'OTRS Business Solution™のお客様は、カスタマーポータルにアクセスしてリクエストを提出してください。',
-        'Please note that your installed OTRS version is %s.' => 'インストールされているOTRSのバージョンは%sです。',
-        'To install this package, you need to update OTRS to version %s or newer.' =>
-            'このパッケージをインストールするには、OTRSのバージョンを%s以上にアップデートする必要があります。',
-        'This package can only be installed on OTRS version %s or older.' =>
-            'このパッケージはOTRSのバージョンが%sかそれより古い必要があります。',
-        'This package can only be installed on OTRS version %s or newer.' =>
-            'このパッケージをインストールするにはOTRSのバージョンが%sかそれより新しい必要があります。',
-        'You will receive updates for all other relevant OTRS issues.' =>
+        'Please note that your installed Znuny version is %s.' => 'インストールされているZnunyのバージョンは%sです。',
+        'To install this package, you need to update Znuny to version %s or newer.' =>
+            'このパッケージをインストールするには、Znunyのバージョンを%s以上にアップデートする必要があります。',
+        'This package can only be installed on Znuny version %s or older.' =>
+            'このパッケージはZnunyのバージョンが%sかそれより古い必要があります。',
+        'This package can only be installed on Znuny version %s or newer.' =>
+            'このパッケージをインストールするにはZnunyのバージョンが%sかそれより新しい必要があります。',
+        'You will receive updates for all other relevant Znuny issues.' =>
             '',
         'How can I do a patch level update if I don’t have a contract?' =>
             '',

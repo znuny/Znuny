@@ -1354,12 +1354,12 @@ sub Data {
         'Please visit our customer portal and file a request.' => 'Favor, visite nuestro portal del cliente y deje su solicitud.',
         'Everything else will be done as part of your contract.' => 'Todo el resto se cumplirá cómo el parte de su contrato.',
         'Your installed OTRS version is %s.' => 'Su versión de OTRS instalada es %s.',
-        'To install this package, you need to update to OTRS %s or higher.' =>
-            'Para instalar éste paquete necesitas actualizar a %sde OTRS o más.',
+        'To install this package, you need to update to Znuny %s or higher.' =>
+            'Para instalar éste paquete necesitas actualizar a %sde Znuny o más.',
         'To install this package, the Maximum OTRS Version is %s.' => 'Para instalar este paquete, la Máxima versión de OTRS es %s.',
         'To install this package, the required Framework version is %s.' =>
             'Para instalar éste paquete, se requiere la versión %s del Framework.',
-        'Why should I keep OTRS up to date?' => '¿Porqué debo mantener OTRS actualizado?',
+        'Why should I keep Znuny up to date?' => '¿Porqué debo mantener Znuny actualizado?',
         'You will receive updates about relevant security issues.' => 'Recibirás las actualizaciones acerca de los casos relevantes de la seguridad.',
         'You will receive updates for all other relevant OTRS issues' => 'Recibirás las actualizaciones sobre todos los casos OTRS relevantes.',
         'With your existing contract you can only use a small part of the %s.' =>
@@ -1417,18 +1417,18 @@ sub Data {
             '¿Realmente desea reinstalar este paquete? Se perderá cualquier cambio manual.',
         'Go to updating instructions' => 'Ir a instrucciones de actualización',
         'package information' => 'información del paquete',
-        'Package installation requires a patch level update of OTRS.' => 'Instalación del paquete requiere un parche de actualización de OTRS. ',
-        'Package update requires a patch level update of OTRS.' => 'La actualización del paquete requiere un parche de actualización de OTRS.',
+        'Package installation requires a patch level update of Znuny.' => 'Instalación del paquete requiere un parche de actualización de Znuny.',
+        'Package update requires a patch level update of Znuny.' => 'La actualización del paquete requiere un parche de actualización de Znuny.',
         'If you are a OTRS Business Solution™ customer, please visit our customer portal and file a request.' =>
             'Sí eres el cliente de OTRS Business Solution™, favor visite nuestro portal de clientes y deje su solicitud.',
-        'Please note that your installed OTRS version is %s.' => '',
-        'To install this package, you need to update OTRS to version %s or newer.' =>
-            'Para instalar este paquete necesita actualizar OTRS a la versión %s o posterior',
-        'This package can only be installed on OTRS version %s or older.' =>
-            'Este paquete sólo puede ser instalado en la versión %s o más antigua del OTRS',
-        'This package can only be installed on OTRS version %s or newer.' =>
-            'Este paquete sólo puede ser instalado en la versión %s o más nueva del OTRS',
-        'You will receive updates for all other relevant OTRS issues.' =>
+        'Please note that your installed Znuny version is %s.' => '',
+        'To install this package, you need to update Znuny to version %s or newer.' =>
+            'Para instalar este paquete necesita actualizar Znuny a la versión %s o posterior.',
+        'This package can only be installed on Znuny version %s or older.' =>
+            'Este paquete sólo puede ser instalado en la versión %s o más antigua del Znuny.',
+        'This package can only be installed on Znuny version %s or newer.' =>
+            'Este paquete sólo puede ser instalado en la versión %s o más nueva del Znuny.',
+        'You will receive updates for all other relevant Znuny issues.' =>
             '',
         'How can I do a patch level update if I don’t have a contract?' =>
             '',
