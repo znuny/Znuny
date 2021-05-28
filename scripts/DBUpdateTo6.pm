@@ -346,8 +346,8 @@ sub _TasksGet {
         # ...
 
         {
-            Message => 'Uninstall Merged Feature Add-Ons',
-            Module  => 'UninstallMergedFeatureAddOns',
+            Message => 'Uninstall merged packages',
+            Module  => 'UninstallMergedPackages',
         },
         {
             Message => 'Clean up the cache',
