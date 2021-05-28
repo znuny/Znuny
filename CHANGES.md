@@ -1,6 +1,3 @@
-# 6.0.35 2021-xx-xx
- - 2021-05-25 Column list validation before saving agent preferences.
-
 # 6.0.34 2021-04-21
  - 2021-04-14 Updated jquery-validate from version 1.16.0 to 1.19.3 (CVE-2021-21252).
  - 2021-04-13 Fixed product URL in HTTP Headers. Thanks to Renée Bäcker (@reneeb) [#42](https://github.com/znuny/Znuny/pull/42)
