@@ -3,65 +3,60 @@ use feature ':5.10';
 use strict;
 use warnings;
 
-my $RhostClass = {
-    qr/\Aaspmx[.]l[.]google[.]com\z/                 => 'GoogleApps',
-    qr/[.](?:prod|protection)[.]outlook[.]com\z/     => 'ExchangeOnline',
-    qr/\A(?:smtp|mailstore1)[.]secureserver[.]net\z/ => 'GoDaddy',
-    qr/\b(?:laposte[.]net|orange[.]fr)\z/            => 'FrancePTT',
-    qr/[.](?:ezweb[.]ne[.]jp|au[.]com)\z/            => 'KDDI',
+use constant RhostClass => {
+    qr/[.](?:prod|protection)[.]outlook[.]com\z/      => 'ExchangeOnline',
+    qr/\b(?>laposte[.]net|(?:orange|wanadoo)[.]fr)\z/ => 'FrancePTT',
+    qr/\A(?:smtp|mailstore1)[.]secureserver[.]net\z/  => 'GoDaddy',
+    qr/(?:aspmx|gmail-smtp-in)[.]l[.]google[.]com\z/  => 'GoogleApps',
+    qr/[.]email[.]ua\z/                               => 'IUA',
+    qr/[.](?:ezweb[.]ne[.]jp|au[.]com)\z/             => 'KDDI',
+    qr/charter[.]net/                                 => 'Spectrum',
+    qr/cox[.]net/                                     => 'Cox',
+    qr/mx[0-9]+[.]qq[.]com\z/                         => 'TencentQQ',
 };
 
-sub list {
-    # Retrun the list of remote hosts Sisimai support
-    # @return   [Array] Remote host list
-    return [keys %$RhostClass];
-}
-
 sub match {
-    # The value of "rhost" is listed in $RhostClass or not
+    # The value of "rhost" is listed in RhostClass or not
     # @param    [String] argv1  Remote host name
     # @return   [Integer]       0: did not match
     #                           1: match
     my $class = shift;
     my $rhost = shift // return undef;
-    my $host0 = lc $rhost;
+    my $host0 = lc($rhost) || return 0;
     my $match = 0;
-    return $match unless $rhost;
 
-    for my $e ( keys %$RhostClass ) {
-        # Try to match with each key of $RhostClass
+    for my $e ( keys %{ RhostClass() } ) {
+        # Try to match with each key of RhostClass
         next unless $host0 =~ $e;
         $match = 1;
         last;
     }
-    return $match; 
+    return $match;
 }
 
 sub get {
     # Detect the bounce reason from certain remote hosts
     # @param    [Sisimai::Data] argvs   Parsed email object
+    # @param    [String]        proxy   The alternative of the "rhost"
     # @return   [String]                The value of bounce reason
     my $class = shift;
-    my $argvs = shift // return undef;
-    return undef unless ref $argvs eq 'Sisimai::Data';
+    my $argvs = shift || return undef;
+    my $proxy = shift || undef;
 
-    my $reasontext = '';
-    my $remotehost = lc $argvs->rhost;
+    my $remotehost = $proxy || lc $argvs->rhost;
     my $rhostclass = '';
 
-    for my $e ( keys %$RhostClass ) {
-        # Try to match with each key of $RhostClass
+    for my $e ( keys %{ RhostClass() } ) {
+        # Try to match with each key of RhostClass
         next unless $remotehost =~ $e;
-        $rhostclass = __PACKAGE__.'::'.$RhostClass->{ $e };
+        $rhostclass = __PACKAGE__.'::'.RhostClass->{ $e };
         last;
     }
     return undef unless $rhostclass;
 
-    (my $modulepath = $rhostclass) =~ s|::|/|g; 
+    (my $modulepath = $rhostclass) =~ s|::|/|g;
     require $modulepath.'.pm';
-    $reasontext = $rhostclass->get($argvs);
-
-    return $reasontext;
+    return $rhostclass->get($argvs);
 }
 
 1;
@@ -86,11 +81,6 @@ This class is called only Sisimai::Data class.
 
 =head1 CLASS METHODS
 
-=head2 C<B<list()>>
-
-Return the list of remote hosts which is supported by Sisimai for detecting the
-reason of bounce from major email services.
-
 =head2 C<B<match(I<remote host>)>>
 
 Returns 1 if the remote host is listed in the results of Sisimai::Rhost->list()
@@ -106,7 +96,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2018 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2020 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

@@ -9,6 +9,7 @@ The following persons contributed to OTRS:
 * Balázs Úr <balazs.ur@otrs.com>
 * Balázs Úr <urbalazs@gmail.com>
 * Belnet <info@belnet.be>
+* Bernhard Schmalhofer <Bernhard.Schmalhofer@gmx.de>
 * Bernhard Schmalhofer <bernhard.schmalhofer@otrs.com>
 * Bodo Bauer <bodo.bauer@otrs.com>
 * Burchard Steinbild <burchard.steinbild@otrs.com>
@@ -23,6 +24,7 @@ The following persons contributed to OTRS:
 * David Crimi <deathpoison.dc@gmail.com>
 * Denis Nelubin <dnelubin@gmail.com>
 * Dennis Schmelter <dennis.schmelter@otrs.com>
+* Denny Korsukéwitz <dennykorsukewitz@gmail.com>
 * Denny Korsukéwitz <dk@znuny.com>
 * Diego Selzlein <diegoselzlein@gmail.com>
 * Dietmar Berg <dietmar.berg@thalesgroup.com>
@@ -93,6 +95,7 @@ The following persons contributed to OTRS:
 * Rolf Schmidt <rolf.schmidt@otrs.com>
 * Romain THERRAT <romain42@gmail.com>
 * Roy Kaldung <rk@znuny.com>
+* Roy Kaldung <roy@kaldung.com>
 * Rui Patinha <rui.patinha@otrs.com>
 * Sanjin Vik <scik@s7designcreative.com>
 * Sanjin Vik <svik@s7designcrative.com>
@@ -117,6 +120,7 @@ The following persons contributed to OTRS:
 * Weblate <noreply@weblate.org>
 * Wojciech Kuchta <klapi85@gmail.com>
 * Wojciech Kuchta <wojciech.kuchta@allegro.pl>
+* Yuri Myasoedov <ymyasoedov@yandex.ru>
 * Yuri Myasoedov <yuriy.myasoedov@open.ru>
 * Zoran Ilibasic <zilibasic@s7deisgncreative.com>
 * Zoran Ilibasic <zilibasic@s7desigcreative.com>
@@ -127,8 +131,11 @@ The following persons contributed to OTRS:
 * djurici <igor.djuric@muehlbauer.de>
 * juanmclavero <juanm.clavero@ibsalut.es>
 * otrsintern <otrsintern@gmail.com>
+* paulfolkers <83212096+paulfolkers@users.noreply.github.com>
 * reneeb <info@perl-services.de>
 * reneeb <reb@perl-services.de>
 * s7design <otrs@s7designcreative.com>
 * sergot <filip@sergot.pl>
+* tipue <80031303+tipue-dev@users.noreply.github.com>
+* tipue <tim.puettmanns@maxence.de>
 * vlascoder <vlascoder@gmail.com>

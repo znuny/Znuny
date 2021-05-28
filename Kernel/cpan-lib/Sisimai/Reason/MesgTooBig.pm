@@ -13,7 +13,8 @@ sub match {
     # @since v4.0.0
     my $class = shift;
     my $argv1 = shift // return undef;
-    my $index = [
+
+    state $index = [
         'exceeded maximum inbound message size',
         'line limit exceeded',
         'max message size exceeded',
@@ -27,7 +28,6 @@ sub match {
         'size limit',
         'taille limite du message atteinte',
     ];
-
     return 1 if grep { rindex($argv1, $_) > -1 } @$index;
     return 0;
 }
@@ -44,7 +44,7 @@ sub true {
     return 1 if $argvs->reason eq 'mesgtoobig';
 
     my $statuscode = $argvs->deliverystatus // '';
-    my $tempreason = Sisimai::SMTP::Status->name($statuscode);
+    my $tempreason = Sisimai::SMTP::Status->name($statuscode) || '';
 
     # Delivery status code points "mesgtoobig".
     # Status: 5.3.4

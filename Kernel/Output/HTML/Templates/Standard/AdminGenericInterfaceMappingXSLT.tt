@@ -1,5 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 maxence business consulting GmbH, http://www.maxence.de
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -265,6 +267,7 @@
                                 <input name="[% Data.Type | html %]Value_[% Data.ValueCounter | html %]" id="[% Data.Type | html %]Value" class="W20pc" type="text" maxlength="100" value="[% Data.Value | html %]"/>
 
                                 <a href="#" id="[% Data.Type | html %]RemoveValue_[% Data.ValueCounter | html %]" class="RemoveButton ValueRemove"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove regex") | html %]</span></a>
+                                <div class="SpacingTopMini" ></div>
                             </div>
 [% RenderBlockEnd("ValueTemplate") %]
                             <input type="hidden" name="[% Data.Type | html %]DeletedValue" value="[% Data.DeletedString | html %]" id="[% Data.Type | html %]DeletedValue" class="[% Data.Type | html %]DeletedValue" />

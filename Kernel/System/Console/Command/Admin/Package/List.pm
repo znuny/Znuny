@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -305,9 +306,9 @@ sub _PackageContentGet {
                 %List,
                 $Kernel::OM->Get('Kernel::System::Package')->PackageOnlineRepositories()
             );
-            for ( sort keys %List ) {
-                if ( $List{$_} =~ /^\[-Master-\]/ ) {
-                    $URL = $_;
+            for my $Repository ( sort keys %List ) {
+                if ( $List{$Repository} =~ /^\[-Master-\]/ ) {
+                    $URL = $Repository;
                 }
             }
         }

@@ -13,7 +13,8 @@ sub match {
     # @since v4.0.0
     my $class = shift;
     my $argv1 = shift // return undef;
-    my $index = [
+
+    state $index = [
         'domain does not exist',
         'domain is not reachable',
         'domain must exist',
@@ -27,17 +28,19 @@ sub match {
         'recipient domain must exist',
         'the account or domain may not exist',
         'unknown host',
+        'unroutable address',
         'unrouteable address',
     ];
-
+    state $regex = qr/553[ ][^ ]+[ ]does[ ]not[ ]exist/;
     return 1 if grep { rindex($argv1, $_) > -1 } @$index;
+    return 1 if $argv1 =~ $regex;
     return 0;
 }
 
 sub true {
     # Whether the host is unknown or not
     # @param    [Sisimai::Data] argvs   Object to be detected the reason
-    # @return   [Integer]               1: is unknown host 
+    # @return   [Integer]               1: is unknown host
     #           [Integer]               0: is not unknown host.
     # @since v4.0.0
     # @see http://www.ietf.org/rfc/rfc2822.txt
@@ -48,7 +51,7 @@ sub true {
     my $statuscode = $argvs->deliverystatus // '';
     my $diagnostic = lc $argvs->diagnosticcode // '';
 
-    if( Sisimai::SMTP::Status->name($statuscode) eq 'hostunknown' ) {
+    if( (Sisimai::SMTP::Status->name($statuscode) || '') eq 'hostunknown' ) {
         # Status: 5.1.2
         # Diagnostic-Code: SMTP; 550 Host unknown
         require Sisimai::Reason::NetworkError;
@@ -79,8 +82,8 @@ Sisimai::Reason::HostUnknown - Bounce reason is C<hostunknown> or not.
 Sisimai::Reason::HostUnknown checks the bounce reason is C<hostunknown> or not.
 This class is called only Sisimai::Reason class.
 
-This is the error that a domain part (Right hand side of @ sign) of a 
-recipient's email address does not exist. In many case, the domain part is 
+This is the error that a domain part (Right hand side of @ sign) of a
+recipient's email address does not exist. In many case, the domain part is
 misspelled, or the domain name has been expired. Sisimai will set C<hostunknown>
 to the reason of email bounce if the value of Status: field in a bounce mail is
 C<5.1.2>.
@@ -115,7 +118,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2018 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2018,2020,2021 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

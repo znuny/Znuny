@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -381,17 +382,12 @@ false (if can't update)
 sub UpdateSessionID {
     my ( $Self, %Param ) = @_;
 
-    if ( $Param{Key} ) {
-
-        my @Parts = split /:/, $Param{Key};
-
-        if ( defined $Parts[1] ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Can't update key: '$Param{Key}' because ':' is not allowed!",
-            );
-            return;
-        }
+    if ( $Param{Key} && $Param{Key} =~ /:/ ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Can't update key: '$Param{Key}' because ':' is not allowed!",
+        );
+        return;
     }
 
     return $Self->{Backend}->UpdateSessionID(%Param);

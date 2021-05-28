@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -61,11 +62,11 @@ sub BuildSelectionJSON {
         my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
 
         # check needed stuff
-        for (qw(Name)) {
-            if ( !defined $Param{$_} ) {
+        for my $Needed (qw(Name)) {
+            if ( !defined $Param{$Needed} ) {
                 $LogObject->Log(
                     Priority => 'error',
-                    Message  => "Need $_!"
+                    Message  => "Need $Needed!"
                 );
                 return;
             }

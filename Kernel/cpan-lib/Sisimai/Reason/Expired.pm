@@ -13,12 +13,15 @@ sub match {
     # @since v4.0.0
     my $class = shift;
     my $argv1 = shift // return undef;
-    my $index = [
+
+    state $index = [
         'connection timed out',
         'could not find a gateway for',
+        'delivery attempts will continue to be',
         'delivery time expired',
         'failed to deliver to domain ',
         'giving up on',
+        'have been failing for a long time',
         'has been delayed',
         'it has not been collected after',
         'message expired after sitting in queue for',
@@ -31,7 +34,6 @@ sub match {
         'was not reachable within the allowed queue period',
         'your message could not be delivered for more than',
     ];
-
     return 1 if grep { rindex($argv1, $_) > -1 } @$index;
     return 0;
 }
@@ -92,7 +94,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2016,2018 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2016,2018,2021 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

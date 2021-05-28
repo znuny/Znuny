@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -170,7 +171,7 @@ sub Run {
 
     # create tickets
     my @TicketIDs;
-    for ( 1 .. $Self->GetOption('generate-tickets') ) {
+    for my $TicketCount ( 1 .. $Self->GetOption('generate-tickets') ) {
         my $TicketUserID =
 
             my $TicketID = $Kernel::OM->Get('Kernel::System::Ticket')->TicketCreate(
@@ -202,7 +203,7 @@ sub Run {
 
             print "Ticket with ID '$TicketID' created.\n";
 
-            for ( 1 .. $Self->GetOption('articles-per-ticket') // 10 ) {
+            for my $ArticleCount ( 1 .. $Self->GetOption('articles-per-ticket') // 10 ) {
                 my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
                     ChannelName => 'Internal',
                 );
@@ -384,7 +385,7 @@ sub RandomBody {
         'is fully formed. The speed at which a pathway is formed depends on the individual, but ',
         'is usually localised resulting in talents.[citation needed]',
     );
-    for ( 1 .. 50 ) {
+    for my $Line ( 1 .. 50 ) {
         $Body .= $Text[ int( rand( $#Text + 1 ) ) ] . "\n";
     }
     return $Body;
@@ -405,8 +406,8 @@ sub PriorityGet {
 sub QueueGet {
     my @QueueIDs;
     my %Queues = $Kernel::OM->Get('Kernel::System::Queue')->GetAllQueues();
-    for ( sort keys %Queues ) {
-        push @QueueIDs, $_;
+    for my $QueueID ( sort keys %Queues ) {
+        push @QueueIDs, $QueueID;
     }
     return @QueueIDs;
 }
@@ -416,7 +417,7 @@ sub QueueCreate {
     my @GroupIDs = @{ shift() };
 
     my @QueueIDs;
-    for ( 1 .. $Count ) {
+    for my $Index ( 1 .. $Count ) {
         my $Name = 'fill-up-queue' . int( rand(100_000_000) );
         my $ID   = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
             Name              => $Name,
@@ -446,8 +447,8 @@ sub QueueCreate {
 sub GroupGet {
     my @GroupIDs;
     my %Groups = $Kernel::OM->Get('Kernel::System::Group')->GroupList( Valid => 1 );
-    for ( sort keys %Groups ) {
-        push @GroupIDs, $_;
+    for my $GroupID ( sort keys %Groups ) {
+        push @GroupIDs, $GroupID;
     }
     return @GroupIDs;
 }
@@ -456,7 +457,7 @@ sub GroupCreate {
     my $Count = shift || return;
 
     my @GroupIDs;
-    for ( 1 .. $Count ) {
+    for my $Index ( 1 .. $Count ) {
         my $Name = 'fill-up-group' . int( rand(100_000_000) );
         my $ID   = $Kernel::OM->Get('Kernel::System::Group')->GroupAdd(
             Name    => $Name,
@@ -492,8 +493,8 @@ sub UserGet {
         Type  => 'Short',    # Short|Long
         Valid => 1,          # not required
     );
-    for ( sort keys %Users ) {
-        push @UserIDs, $_;
+    for my $UserID ( sort keys %Users ) {
+        push @UserIDs, $UserID;
     }
     return @UserIDs;
 }
@@ -503,7 +504,7 @@ sub UserCreate {
     my @GroupIDs = @{ shift() };
 
     my @UserIDs;
-    for ( 1 .. $Count ) {
+    for my $Index ( 1 .. $Count ) {
         my $Name = 'fill-up-user' . int( rand(100_000_000) );
         my $ID   = $Kernel::OM->Get('Kernel::System::User')->UserAdd(
             UserFirstname => "$Name-Firstname",
@@ -557,7 +558,7 @@ sub UserCreate {
 sub CustomerCreate {
     my $Count = shift || return;
 
-    for ( 1 .. $Count ) {
+    for my $Index ( 1 .. $Count ) {
         my $Name      = 'fill-up-user' . int( rand(100_000_000) );
         my $UserLogin = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
             Source         => 'CustomerUser',            # CustomerUser source config
@@ -577,7 +578,7 @@ sub CustomerCreate {
 sub CompanyCreate {
     my $Count = shift || return;
 
-    for ( 1 .. $Count ) {
+    for my $Index ( 1 .. $Count ) {
 
         my $Name       = 'fill-up-company' . int( rand(100_000_000) );
         my $CustomerID = $Kernel::OM->Get('Kernel::System::CustomerCompany')->CustomerCompanyAdd(

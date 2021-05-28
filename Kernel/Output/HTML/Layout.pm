@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -462,11 +463,11 @@ EOF
 sub SetEnv {
     my ( $Self, %Param ) = @_;
 
-    for (qw(Key Value)) {
-        if ( !defined $Param{$_} ) {
+    for my $Needed (qw(Key Value)) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             $Self->FatalError();
         }
@@ -563,8 +564,8 @@ sub Redirect {
     # add cookies if exists
     my $Cookies = '';
     if ( $Self->{SetCookies} && $ConfigObject->Get('SessionUseCookie') ) {
-        for ( sort keys %{ $Self->{SetCookies} } ) {
-            $Cookies .= "Set-Cookie: $Self->{SetCookies}->{$_}\n";
+        for my $Key ( sort keys %{ $Self->{SetCookies} } ) {
+            $Cookies .= "Set-Cookie: $Self->{SetCookies}->{$Key}\n";
         }
     }
 
@@ -698,8 +699,8 @@ sub Login {
 
     # add cookies if exists
     if ( $Self->{SetCookies} && $ConfigObject->Get('SessionUseCookie') ) {
-        for ( sort keys %{ $Self->{SetCookies} } ) {
-            $Output .= "Set-Cookie: $Self->{SetCookies}->{$_}\n";
+        for my $Key ( sort keys %{ $Self->{SetCookies} } ) {
+            $Output .= "Set-Cookie: $Self->{SetCookies}->{$Key}\n";
         }
     }
 
@@ -988,11 +989,11 @@ sub FatalDie {
     }
 
     # get backend error messages
-    for (qw(Message Traceback)) {
-        my $Backend = 'Backend' . $_;
+    for my $Needed (qw(Message Traceback)) {
+        my $Backend = 'Backend' . $Needed;
         $Param{$Backend} = $Kernel::OM->Get('Kernel::System::Log')->GetLogEntry(
             Type => 'Error',
-            What => $_
+            What => $Needed
         ) || '';
         $Param{$Backend} = $Self->Ascii2Html(
             Text           => $Param{$Backend},
@@ -1018,11 +1019,11 @@ sub Error {
     my ( $Self, %Param ) = @_;
 
     # get backend error messages
-    for (qw(Message Traceback)) {
-        my $Backend = 'Backend' . $_;
+    for my $Needed (qw(Message Traceback)) {
+        my $Backend = 'Backend' . $Needed;
         $Param{$Backend} = $Kernel::OM->Get('Kernel::System::Log')->GetLogEntry(
             Type => 'Error',
-            What => $_
+            What => $Needed
         ) || '';
     }
     if ( !$Param{BackendMessage} && !$Param{BackendTraceback} ) {
@@ -1030,11 +1031,11 @@ sub Error {
             Priority => 'error',
             Message  => $Param{Message} || '?',
         );
-        for (qw(Message Traceback)) {
-            my $Backend = 'Backend' . $_;
+        for my $Needed (qw(Message Traceback)) {
+            my $Backend = 'Backend' . $Needed;
             $Param{$Backend} = $Kernel::OM->Get('Kernel::System::Log')->GetLogEntry(
                 Type => 'Error',
-                What => $_
+                What => $Needed
             ) || '';
         }
     }
@@ -1328,8 +1329,8 @@ sub Header {
     # add cookies if exists
     my $Output = '';
     if ( $Self->{SetCookies} && $ConfigObject->Get('SessionUseCookie') ) {
-        for ( sort keys %{ $Self->{SetCookies} } ) {
-            $Output .= "Set-Cookie: $Self->{SetCookies}->{$_}\n";
+        for my $Key ( sort keys %{ $Self->{SetCookies} } ) {
+            $Output .= "Set-Cookie: $Self->{SetCookies}->{$Key}\n";
         }
     }
 
@@ -1900,9 +1901,9 @@ sub Ascii2Html {
         my @TextList = split( "\n", ${$Text} );
         ${$Text} = '';
         my $Counter = 1;
-        for (@TextList) {
+        for my $TextList (@TextList) {
             if ( $Counter <= $Param{VMax} ) {
-                ${$Text} .= $_ . "\n";
+                ${$Text} .= $TextList . "\n";
             }
             $Counter++;
         }
@@ -2268,11 +2269,11 @@ sub BuildSelection {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Name Data)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(Name Data)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -2568,11 +2569,11 @@ sub Attachment {
     my ( $Self, %Param ) = @_;
 
     # check needed params
-    for (qw(Content ContentType)) {
-        if ( !defined $Param{$_} ) {
+    for my $Needed (qw(Content ContentType)) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Got no $_!",
+                Message  => "Got no $Needed!",
             );
             $Self->FatalError();
         }
@@ -3075,7 +3076,7 @@ sub NavigationBar {
             # set prio of item
             my $Key = ( $Item->{Block} || '' ) . sprintf( "%07d", $Item->{Prio} );
             COUNT:
-            for ( 1 .. 51 ) {
+            for my $Count ( 1 .. 51 ) {
                 last COUNT if !$NavBar{$Key};
 
                 $Item->{Prio}++;
@@ -3489,16 +3490,16 @@ sub BuildDateSelection {
             }
         }
         else {
-            for ( 2001 .. $Y + 1 + ( $Param{YearDiff} || 0 ) ) {
-                $Year{$_} = $_;
+            for my $Key ( 2001 .. $Y + 1 + ( $Param{YearDiff} || 0 ) ) {
+                $Year{$Key} = $Key;
             }
         }
 
         # Check if the DiffTime is in a future year. In this case, we add the missing years between
         # $CY (current year) and $Y (year) to allow the user to manually set back the year if needed.
         if ( $Y > $CY ) {
-            for ( $CY .. $Y ) {
-                $Year{$_} = $_;
+            for my $Key ( $CY .. $Y ) {
+                $Year{$Key} = $Key;
             }
         }
 
@@ -3869,8 +3870,8 @@ sub CustomerLogin {
 
     # add cookies if exists
     if ( $Self->{SetCookies} && $ConfigObject->Get('SessionUseCookie') ) {
-        for ( sort keys %{ $Self->{SetCookies} } ) {
-            $Output .= "Set-Cookie: $Self->{SetCookies}->{$_}\n";
+        for my $Key ( sort keys %{ $Self->{SetCookies} } ) {
+            $Output .= "Set-Cookie: $Self->{SetCookies}->{$Key}\n";
         }
     }
 
@@ -4065,8 +4066,8 @@ sub CustomerHeader {
     # add cookies if exists
     my $Output = '';
     if ( $Self->{SetCookies} && $ConfigObject->Get('SessionUseCookie') ) {
-        for ( sort keys %{ $Self->{SetCookies} } ) {
-            $Output .= "Set-Cookie: $Self->{SetCookies}->{$_}\n";
+        for my $Key ( sort keys %{ $Self->{SetCookies} } ) {
+            $Output .= "Set-Cookie: $Self->{SetCookies}->{$Key}\n";
         }
     }
 
@@ -4505,7 +4506,7 @@ sub CustomerNavigationBar {
             # set prio of item
             my $Key = ( $Item->{Block} || '' ) . sprintf( "%07d", $Item->{Prio} );
             COUNT:
-            for ( 1 .. 51 ) {
+            for my $Count ( 1 .. 51 ) {
                 last COUNT if !$NavBarModule{$Key};
 
                 $Item->{Prio}++;
@@ -4727,10 +4728,10 @@ sub CustomerError {
     my ( $Self, %Param ) = @_;
 
     # get backend error messages
-    for (qw(Message Traceback)) {
-        $Param{ 'Backend' . $_ } = $Kernel::OM->Get('Kernel::System::Log')->GetLogEntry(
+    for my $Needed (qw(Message Traceback)) {
+        $Param{ 'Backend' . $Needed } = $Kernel::OM->Get('Kernel::System::Log')->GetLogEntry(
             Type => 'Error',
-            What => $_
+            What => $Needed
         ) || '';
     }
     if ( !$Param{BackendMessage} && !$Param{BackendTraceback} ) {
@@ -4738,10 +4739,10 @@ sub CustomerError {
             Priority => 'error',
             Message  => $Param{Message} || '?',
         );
-        for (qw(Message Traceback)) {
-            $Param{ 'Backend' . $_ } = $Kernel::OM->Get('Kernel::System::Log')->GetLogEntry(
+        for my $Needed (qw(Message Traceback)) {
+            $Param{ 'Backend' . $Needed } = $Kernel::OM->Get('Kernel::System::Log')->GetLogEntry(
                 Type => 'Error',
-                What => $_
+                What => $Needed
             ) || '';
         }
     }
@@ -4823,11 +4824,11 @@ sub Ascii2RichText {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(String)) {
-        if ( !defined $Param{$_} ) {
+    for my $Needed (qw(String)) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -4855,11 +4856,11 @@ sub RichText2Ascii {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(String)) {
-        if ( !defined $Param{$_} ) {
+    for my $Needed (qw(String)) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -4888,11 +4889,11 @@ sub RichTextDocumentComplete {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(String)) {
-        if ( !defined $Param{$_} ) {
+    for my $Needed (qw(String)) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -4938,11 +4939,11 @@ sub _RichTextReplaceLinkOfInlineContent {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(String)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(String)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -4993,11 +4994,11 @@ sub RichTextDocumentServe {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Data URL Attachments)) {
-        if ( !defined $Param{$_} ) {
+    for my $Needed (qw(Data URL Attachments)) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -5186,11 +5187,11 @@ sub RichTextDocumentCleanup {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(String)) {
-        if ( !defined $Param{$_} ) {
+    for my $Needed (qw(String)) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -5348,9 +5349,9 @@ sub _BuildSelectionAttributeRefCreate {
     my $AttributeRef = {};
 
     # check params with key and value
-    for (qw(Name ID Size Class OnChange OnClick AutoComplete)) {
-        if ( $Param{$_} ) {
-            $AttributeRef->{ lc($_) } = $Param{$_};
+    for my $Needed (qw(Name ID Size Class OnChange OnClick AutoComplete)) {
+        if ( $Param{$Needed} ) {
+            $AttributeRef->{ lc($Needed) } = $Param{$Needed};
         }
     }
 
@@ -5360,16 +5361,16 @@ sub _BuildSelectionAttributeRefCreate {
     }
 
     # check params with key and value that need to be HTML-Quoted
-    for (qw(Title)) {
-        if ( $Param{$_} ) {
-            $AttributeRef->{ lc($_) } = $Self->Ascii2Html( Text => $Param{$_} );
+    for my $Needed (qw(Title)) {
+        if ( $Param{$Needed} ) {
+            $AttributeRef->{ lc($Needed) } = $Self->Ascii2Html( Text => $Param{$Needed} );
         }
     }
 
     # check HTML params
-    for (qw(Multiple Disabled)) {
-        if ( $Param{$_} ) {
-            $AttributeRef->{ lc($_) } = lc($_);
+    for my $Needed (qw(Multiple Disabled)) {
+        if ( $Param{$Needed} ) {
+            $AttributeRef->{ lc($Needed) } = lc($Needed);
         }
     }
 

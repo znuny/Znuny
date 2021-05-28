@@ -22,7 +22,7 @@ sub dump {
     };
     if( $@ ) {
         # Try to load YAML::Syck
-        eval { 
+        eval {
             require YAML::Syck;
             $modulename = 'YAML::Syck';
         };
@@ -71,7 +71,7 @@ Sisimai::Data::YAML - Dumps parsed data object as a YAML format
 
 =head1 DESCRIPTION
 
-Sisimai::Data::YAML dumps parsed data object as a YAML format. This class and 
+Sisimai::Data::YAML dumps parsed data object as a YAML format. This class and
 method should be called from the parent object "Sisimai::Data".
 
 =head1 CLASS METHODS

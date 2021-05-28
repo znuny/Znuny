@@ -1,12 +1,12 @@
 package Sisimai::MIME;
+use feature ':5.10';
 use strict;
 use warnings;
 use Encode;
 use MIME::Base64 ();
 use MIME::QuotedPrint ();
 use Sisimai::String;
-
-my $ReE = {
+use constant ReE => {
     '7bit-encoded' => qr/^content-transfer-encoding:[ ]*7bit/m,
     'quoted-print' => qr/^content-transfer-encoding:[ ]*quoted-printable/m,
     'some-iso2022' => qr/^content-type:[ ]*.+;[ ]*charset=["']?(iso-2022-[-a-z0-9]+)['"]?\b/m,
@@ -15,34 +15,27 @@ my $ReE = {
     'html-message' => qr|^content-type:[ ]*text/html;|m,
 };
 
-sub patterns {
-  # Make MIME-Encoding and Content-Type related headers regurlar expression
-  # @return   [Array] Regular expressions related to MIME encoding
-  return $ReE;
-}
-
 sub is_mimeencoded {
     # Check that the argument is MIME-Encoded string or not
     # @param    [String] argv1  String to be checked
     # @return   [Integer]       0: Not MIME encoded string
     #                           1: MIME encoded string
     my $class = shift;
-    my $argv1 = shift || return 0;
-    my @piece = ();
-    my $mime1 = 0;
-
-    return undef unless ref $argv1;
+    my $argv1 = shift || return undef;
     return undef unless ref $argv1 eq 'SCALAR';
-    $$argv1 =~ y/"//d;
 
-    if( rindex($$argv1, ' ') > -1 ) {
+    my $text1 = $$argv1; $text1 =~ y/"//d;
+    my $mime1 = 0;
+    my @piece;
+
+    if( rindex($text1, ' ') > -1 ) {
         # Multiple MIME-Encoded strings in a line
-        @piece = split(' ', $$argv1);
+        @piece = split(' ', $text1);
     } else {
-        push @piece, $$argv1;
+        push @piece, $text1;
     }
 
-    while( my $e = shift @piece ) {
+    for my $e ( @piece ) {
         # Check all the string in the array
         next unless $e =~ /[ \t]*=[?][-_0-9A-Za-z]+[?][BbQq][?].+[?]=?[ \t]*/;
         $mime1 = 1;
@@ -56,15 +49,11 @@ sub mimedecode {
     # @return   [String]        MIME-Decoded text
     my $class = shift;
     my $argvs = shift;
-
-    return '' unless ref $argvs;
-    return '' unless ref $argvs eq 'ARRAY';
+    return undef unless ref $argvs eq 'ARRAY';
 
     my $characterset = '';
     my $encodingname = '';
-    my @decodedtext0 = ();
-    my $decodedtext1 = '';
-    my $utf8decoded1 = '';
+    my @decodedtext0;
 
     for my $e ( @$argvs ) {
         # Check and decode each element
@@ -73,30 +62,25 @@ sub mimedecode {
         $e =~ y/"//d;
 
         if( __PACKAGE__->is_mimeencoded(\$e) ) {
-            # MIME Encoded string
-            if( $e =~ m{\A(.*)=[?]([-_0-9A-Za-z]+)[?]([BbQq])[?](.+)[?]=?(.*)\z} ) {
-                # =?utf-8?B?55m954yr44Gr44KD44KT44GT?=
-                $characterset ||= lc $2;
-                $encodingname ||= uc $3;
+            # =?utf-8?B?55m954yr44Gr44KD44KT44GT?=
+            next unless $e =~ m{\A(.*)=[?]([-_0-9A-Za-z]+)[?]([BbQq])[?](.+)[?]=?(.*)\z};
+            $characterset ||= lc $2;
+            $encodingname ||= uc $3;
 
-                push @decodedtext0, $1;
-                if( $encodingname eq 'Q' ) {
-                    # Quoted-Printable
-                    push @decodedtext0, MIME::QuotedPrint::decode($4);
+            push @decodedtext0, $1;
+            push @decodedtext0, $encodingname eq 'B'
+                ? MIME::Base64::decode($4)
+                : MIME::QuotedPrint::decode($4);
+            $decodedtext0[-1] =~ y/\r\n//d;
+            push @decodedtext0, $5;
 
-                } elsif( $encodingname eq 'B' ) {
-                    # Base64
-                    push @decodedtext0, MIME::Base64::decode($4);
-                }
-                push @decodedtext0, $5;
-            }
         } else {
-            push @decodedtext0, $e;
+            push @decodedtext0, scalar @decodedtext0 ? ' '.$e : $e;
         }
     }
     return '' unless scalar @decodedtext0;
 
-    $decodedtext1 = join('', @decodedtext0);
+    my $decodedtext1 = join('', @decodedtext0);
     if( $characterset && $encodingname ) {
         # utf-8 => utf8
         $characterset = 'utf8' if $characterset eq 'utf-8';
@@ -107,9 +91,7 @@ sub mimedecode {
             $decodedtext1 = 'FAILED TO CONVERT THE SUBJECT' if $@;
         }
     }
-
-    $utf8decoded1 = Encode::decode_utf8 $decodedtext1;
-    return $utf8decoded1;
+    return $decodedtext1;
 }
 
 sub qprintd {
@@ -121,8 +103,6 @@ sub qprintd {
     my $argv1 = shift // return undef;
     my $heads = shift // {};
     my $plain = '';
-
-    return \'' unless ref $argv1;
     return \'' unless ref $argv1 eq 'SCALAR';
 
     if( ! exists $heads->{'content-type'} || ! $heads->{'content-type'} ) {
@@ -133,7 +113,7 @@ sub qprintd {
 
     # Quoted-printable encoded part is the part of the text
     my $boundary00 = __PACKAGE__->boundary($heads->{'content-type'}, 0);
-    if( ! $boundary00 || lc($$argv1) !~ $ReE->{'quoted-print'} ) {
+    if( ! $boundary00 || lc($$argv1) !~ ReE->{'quoted-print'} ) {
         # There is no boundary string or no
         # Content-Transfer-Encoding: quoted-printable field.
         $plain = MIME::QuotedPrint::decode($$argv1);
@@ -174,8 +154,7 @@ sub qprintd {
             }
         } else {
             # NOT Quoted-Printable encoded text block
-            my $lowercased = lc $e;
-            if( $e =~ /\A[-]{2}[^\s]+[^-]\z/ ) {
+            if( (my $lowercased = lc $e) =~ /\A[-]{2}[^\s]+[^-]\z/ ) {
                 # Start of the boundary block
                 # --=_gy7C4Gpes0RP4V5Bs9cK4o2Us2ZT57b-3OLnRN+4klS8dTmQ
                 unless( $e eq $boundary00 ) {
@@ -183,12 +162,12 @@ sub qprintd {
                     $boundary00 = $e;
                     $boundary01 = $e . '--';
                 }
-            } elsif( $lowercased =~ $ReE->{'with-charset'} || $lowercased =~ $ReE->{'only-charset'} ) {
+            } elsif( $lowercased =~ ReE->{'with-charset'} || $lowercased =~ ReE->{'only-charset'} ) {
                 # Content-Type: text/plain; charset=ISO-2022-JP
                 $encodename = $1;
                 $mimeinside = 1 if $ctencoding;
 
-            } elsif( $lowercased =~ $ReE->{'quoted-print'} ){
+            } elsif( $lowercased =~ ReE->{'quoted-print'} ) {
                 # Content-Transfer-Encoding: quoted-printable
                 $ctencoding = $e;
                 $mimeinside = 1 if $encodename;
@@ -212,13 +191,10 @@ sub base64d {
     # @return   [String]         MIME-Decoded text
     my $class = shift;
     my $argv1 = shift // return undef;
-    my $plain = undef;
-
-    return \'' unless ref $argv1;
     return \'' unless ref $argv1 eq 'SCALAR';
 
     # Decode BASE64
-    $plain = MIME::Base64::decode($1) if $$argv1 =~ m|([+/=0-9A-Za-z\r\n]+)|;
+    my $plain = $$argv1 =~ m|([+/=0-9A-Za-z\r\n]+)| ? MIME::Base64::decode($1) : '';
     return \$plain;
 }
 
@@ -255,24 +231,25 @@ sub breaksup {
     my $argv0 = shift || return undef;
     my $argv1 = shift || '';
 
-    my $hasflatten = '';    # Message body including only text/plain and message/*
-    my $alsoappend = qr{\A(?:text/rfc822-headers|message/)};
-    my $thisformat = qr/\A(?:Content-Transfer-Encoding:\s*.+\n)?Content-Type:\s*([^ ;]+)/;
-    my $leavesonly = qr{\A(?>
+    state $alsoappend = qr{\A(?:text/rfc822-headers|message/)};
+    state $thisformat = qr/\A(?:Content-Transfer-Encoding:\s*.+\n)?Content-Type:\s*([^ ;\s]+)/;
+    state $leavesonly = qr{\A(?>
          text/(?:plain|html|rfc822-headers)
         |message/(?:x?delivery-status|rfc822|partial|feedback-report)
         |multipart/(?:report|alternative|mixed|related|partial)
         )
     }x;
+
     my $mimeformat = $$argv0 =~ $thisformat ? lc($1) : '';
     my $alternates = index($argv1, 'multipart/alternative') == 0 ? 1 : 0;
+    my $hasflatten = '';    # Message body including only text/plain and message/*
 
     # Sisimai require only MIME types defined in $leavesonly variable
     return \'' unless $mimeformat =~ $leavesonly;
     return \'' if $alternates && $mimeformat eq 'text/html';
 
     my ($upperchunk, $lowerchunk) = split(/^$/m, $$argv0, 2);
-    $upperchunk =~ s/\n/ /g;
+    $upperchunk =~ y/\n/ /;
     $upperchunk =~ y/ //s;
 
     # Content-Description: Undelivered Message
@@ -284,18 +261,17 @@ sub breaksup {
         # Content-Type: multipart/*
         my $mpboundary = __PACKAGE__->boundary($upperchunk, 0);
         my @innerparts = split(/\Q$mpboundary\E\n/, $lowerchunk);
-
         shift @innerparts unless length $innerparts[0];
-        while( my $e = shift @innerparts ) {
+        shift @innerparts if $innerparts[0] eq "\n";
+
+        for my $e ( @innerparts ) {
             # Find internal multipart/* blocks and decode
             if( $e =~ $thisformat ) {
                 # Found Content-Type field at the first or second line of this
-                # splitted part
+                # split part
                 my $nextformat = lc $1;
-
                 next unless $nextformat =~ $leavesonly;
                 next if $nextformat eq 'text/html';
-
                 $hasflatten .= ${ __PACKAGE__->breaksup(\$e, $mimeformat) };
 
             } else {
@@ -308,10 +284,9 @@ sub breaksup {
         # Is not "Content-Type: multipart/*"
         if( $upperchunk =~ /Content-Transfer-Encoding: ([^\s;]+)/ ) {
             # Content-Transfer-Encoding: quoted-printable|base64|7bit|...
-            my $ctencoding = lc $1;
             my $getdecoded = '';
 
-            if( $ctencoding eq 'quoted-printable' ) {
+            if( (my $ctencoding = lc $1) eq 'quoted-printable' ) {
                 # Content-Transfer-Encoding: quoted-printable
                 $getdecoded = ${ __PACKAGE__->qprintd(\$lowerchunk) };
 
@@ -321,7 +296,7 @@ sub breaksup {
 
             } elsif( $ctencoding eq '7bit' ) {
                 # Content-Transfer-Encoding: 7bit
-                if( lc($upperchunk) =~ $ReE->{'some-iso2022'} ) {
+                if( lc($upperchunk) =~ ReE->{'some-iso2022'} ) {
                     # Content-Type: text/plain; charset=ISO-2022-JP
                     $getdecoded = ${ Sisimai::String->to_utf8(\$lowerchunk, $1) };
 
@@ -333,13 +308,14 @@ sub breaksup {
                 # Content-Transfer-Encoding: 8bit, binary, and so on
                 $getdecoded = $lowerchunk;
             }
-            $getdecoded =~ s|\r\n|\n|g; # Convert CRLF to LF
+            $getdecoded =~ s|\r\n|\n|g if index($getdecoded, "\r\n") > -1; # Convert CRLF to LF
 
             if( $mimeformat =~ $alsoappend ) {
                 # Append field when the value of Content-Type: begins with
                 # message/ or equals text/rfc822-headers.
-                $upperchunk =~ s/Content-Transfer-Encoding:.+\z//;
-                $upperchunk =~ s/[ ]\z//g;
+                $upperchunk =~ s/Content-Transfer-Encoding:\s*[^\s]+//;
+                $upperchunk =~ s/\A[ ]//g if substr($upperchunk,  0, 1) eq ' ';
+                $upperchunk =~ s/[ ]\z//g if substr($upperchunk, -1, 1) eq ' ';
                 $hasflatten .= $upperchunk;
 
             } elsif( $mimeformat eq 'text/html' ) {
@@ -347,7 +323,6 @@ sub breaksup {
                 $getdecoded = ${ Sisimai::String->to_plain(\$getdecoded) };
             }
             $hasflatten .= $getdecoded."\n\n" if length $getdecoded;
-
         } else {
             # Content-Type: text/plain OR text/rfc822-headers OR message/*
             if( index($mimeformat, 'message/') == 0 || $mimeformat eq 'text/rfc822-headers' ) {
@@ -385,8 +360,8 @@ sub makeflat {
     # Some bounce messages include lower-cased "content-type:" field such as
     #   content-type: message/delivery-status
     #   content-transfer-encoding: quoted-printable
-    $$argv1 =~ s/[Cc]ontent-[Tt]ype:/Content-Type:/gm;
-    $$argv1 =~ s/[Cc]ontent-[Tt]ransfer-[Ee]ncodeing:/Content-Transfer-Encoding:/gm;
+    $$argv1 =~ s/[Cc]ontent-[Tt]ype:/Content-Type:/g;
+    $$argv1 =~ s/[Cc]ontent-[Tt]ransfer-[Ee]ncodeing:/Content-Transfer-Encoding:/g;
 
     # 1. Some bounce messages include upper-cased "Content-Transfer-Encoding",
     #    and "Content-Type" value such as
@@ -394,13 +369,32 @@ sub makeflat {
     #      - Content-Transfer-Encoding: 7BIT
     # 2. Unused fields inside of mutipart/* block should be removed
     $$argv1 =~ s/(Content-[A-Za-z-]+?):[ ]*([^\s]+)/$1.': '.lc($2)/eg;
-    $$argv1 =~ s/^Content-(?:Description|Disposition):.+\n//gm;
+    $$argv1 =~ s/^Content-(?:Description|Disposition):.+?\n//gm;
 
-    my @multiparts = split(/\Q$ehboundary\E\n/, $$argv1);
+    my @multiparts = split(/\Q$ehboundary\E\n?/, $$argv1);
     shift @multiparts unless length $multiparts[0];
-    while( my $e = shift @multiparts ) {
+    for my $e ( @multiparts ) {
         # Find internal multipart blocks and decode
-        if( $e =~ /\A(?:Content-[A-Za-z-]+:.+?\r\n)?Content-Type:[ ]*[^\s]+/ ) {
+        XCCT: {
+            # Remove fields except Content-Type, Content-Transfer-Encoding in
+            # each part such as the following:
+            #   Date: Thu, 29 Apr 2018 22:22:22 +0900
+            #   MIME-Version: 1.0
+            #   Message-ID: ...
+            #   Content-Transfer-Encoding: quoted-printable
+            #   Content-Type: text/plain; charset=us-ascii
+            #
+            # Fields before "Content-Type:" in each part should have been removed
+            # and "Content-Type:" should be exist at the first line of each part.
+            # The field works as a delimiter to decode contents of each part.
+            #
+            last(XCCT) if $e =~ /\AContent-T[ry]/;  # The first field is "Content-Type:"
+            my $p = $1 if $e =~ /\A(.+?)Content-Type:/s || last(XCCT);
+            last(XCCT) if $p =~ /\n\n/m;            # There is no field before "Content-Type:"
+            $e =~ s/\A.+?(Content-T[ry].+)\z/$1/s;  # Remove fields before "Content-Type:"
+        }
+
+        if( $e =~ /\A(?:Content-[A-Za-z-]+:.+?\r?\n)?Content-Type:[ ]*[^\s]+/ ) {
             # Content-Type: multipart/*
             $bodystring .= ${ __PACKAGE__->breaksup(\$e, $mimeformat) };
 
@@ -492,7 +486,7 @@ C<boundary()> returns a boundary string from the value of Content-Type header.
 =head2 C<B<breaksup(I<\String>, I<String>)>>
 
 C<breaksup> is a multipart/* message decoder: Decode quoted-printable, base64,
-and other encoded message part, leave only text/plain, message/*, text/html 
+and other encoded message part, leave only text/plain, message/*, text/html
 (only in multipart/alternative), returns string as a reference. This method is
 called from makeflat() and breaksup() itself.
 
@@ -514,7 +508,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2016,2018 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2016,2018-2020 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

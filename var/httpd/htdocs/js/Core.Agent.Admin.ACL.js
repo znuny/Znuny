@@ -1,5 +1,6 @@
 // --
 // Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+// Copyright (C) 2021 maxence business consulting GmbH, http://www.maxence.de
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -741,11 +742,6 @@ Core.Agent.Admin.ACL = (function (TargetNS) {
                 Value = $(this).val();
 
                 if (Value) {
-
-                    // avoid wrong behavior when Value is already present
-                    if ($(this).next('span').length) {
-                        return false;
-                    }
 
                     if ($(this).hasClass('Big')) {
 

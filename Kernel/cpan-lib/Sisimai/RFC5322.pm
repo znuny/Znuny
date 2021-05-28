@@ -2,10 +2,17 @@ package Sisimai::RFC5322;
 use feature ':5.10';
 use strict;
 use warnings;
+use constant HEADERTABLE => {
+    'messageid' => ['message-id'],
+    'subject'   => ['subject'],
+    'listid'    => ['list-id'],
+    'date'      => [qw|date posted-date posted resent-date|],
+    'addresser' => [qw|from return-path reply-to errors-to reverse-path x-postfix-sender envelope-from x-envelope-from|],
+    'recipient' => [qw|to delivered-to forward-path envelope-to x-envelope-to resent-to apparently-to|],
+};
 
 # Regular expression of valid RFC-5322 email address(<addr-spec>)
 my $Re = { 'rfc5322' => undef, 'ignored' => undef, 'domain' => undef, };
-
 BUILD_REGULAR_EXPRESSIONS: {
     # See http://www.ietf.org/rfc/rfc5322.txt
     #  or http://www.ex-parrot.com/pdw/Mail-RFC822-Address.html ...
@@ -30,22 +37,12 @@ BUILD_REGULAR_EXPRESSIONS: {
     $Re->{'domain'}  = qr/\A$domain\z/o;
 }
 
-my $LONGHEADERS = __PACKAGE__->LONGFIELDS;
 my $HEADERINDEX = {};
-my $HEADERTABLE = {
-    'messageid' => ['Message-Id'],
-    'subject'   => ['Subject'],
-    'listid'    => ['List-Id'],
-    'date'      => [qw|Date Posted-Date Posted Resent-Date|],
-    'addresser' => [qw|From Return-Path Reply-To Errors-To Reverse-Path X-Postfix-Sender Envelope-From X-Envelope-From|],
-    'recipient' => [qw|To Delivered-To Forward-Path Envelope-To X-Envelope-To Resent-To Apparently-To|],
-};
-
 BUILD_FLATTEN_RFC822HEADER_LIST: {
     # Convert $HEADER: hash reference to flatten hash reference for being
-    # called from Sisimai::Bite::Email::*
-    for my $v ( values %$HEADERTABLE ) {
-        $HEADERINDEX->{ lc $_ } = 1 for @$v;
+    # called from Sisimai::Lhost::*
+    for my $v ( values %{ HEADERTABLE() } ) {
+        $HEADERINDEX->{ $_ } = 1 for @$v;
     }
 }
 
@@ -55,8 +52,8 @@ sub HEADERFIELDS {
     # @return   [Array,Hash]    RFC822 Header list
     my $class = shift;
     my $group = shift || return $HEADERINDEX;
-    return $HEADERTABLE->{ $group } if exists $HEADERTABLE->{ $group };
-    return $HEADERTABLE;
+    return HEADERTABLE->{ $group } if exists HEADERTABLE->{ $group };
+    return HEADERTABLE;
 }
 
 sub LONGFIELDS {
@@ -79,20 +76,6 @@ sub is_emailaddress {
     return 0;
 }
 
-sub is_domainpart {
-    # Check that the argument is an domain part of email address or not
-    # @param    [String] dpart  Domain part of the email address
-    # @return   [Integer]       0: Not domain part
-    #                           1: Valid domain part
-    my $class = shift;
-    my $dpart = shift // return 0;
-
-    return 0 if $dpart =~ /(?:[\x00-\x1f]|\x1f)/;
-    return 0 if rindex($dpart, '@') > -1;
-    return 1 if $dpart =~ $Re->{'domain'};
-    return 0;
-}
-
 sub is_mailerdaemon {
     # Check that the argument is mailer-daemon or not
     # @param    [String] email  Email address
@@ -100,14 +83,14 @@ sub is_mailerdaemon {
     #                           1: Mailer-daemon
     my $class = shift;
     my $email = shift // return 0;
-    my $rxmds = qr{(?>
+    state $match = qr{(?>
          (?:mailer-daemon|postmaster)[@]
         |[<(](?:mailer-daemon|postmaster)[)>]
         |\A(?:mailer-daemon|postmaster)\z
         |[ ]?mailer-daemon[ ]
         )
     }x;
-    return 1 if lc($email) =~ $rxmds;
+    return 1 if lc($email) =~ $match;
     return 0;
 }
 
@@ -143,12 +126,12 @@ sub received {
         #   by nijo.example.jp (V8/cf) with ESMTP id s1QB5ka0018055;
         #   Wed, 26 Feb 2014 06:05:47 -0500
         my @received = split(' ', $value->{'from'});
-        my @namelist = ();
-        my @addrlist = ();
+        my @namelist;
+        my @addrlist;
         my $hostname = '';
         my $hostaddr = '';
 
-        while( my $e = shift @received ) {
+        for my $e ( @received ) {
             # Received: from [10.22.22.222] (smtp-gateway.kyoto.ocn.ne.jp [192.0.2.222])
             if( $e =~ /\A[(\[]\d+[.]\d+[.]\d+[.]\d+[)\]]\z/ ) {
                 # [192.0.2.1] or (192.0.2.1)
@@ -162,7 +145,7 @@ sub received {
             }
         }
 
-        while( my $e = shift @namelist ) {
+        for my $e ( @namelist ) {
             # 1. Hostname takes priority over all other IP addresses
             next unless rindex($e, '.') > -1;
             $hostname = $e;
@@ -193,42 +176,30 @@ sub received {
     return $hosts;
 }
 
-sub weedout {
-    # Weed out rfc822/message header fields excepct necessary fields
-    # @param    [Array] argv1  each line divided message/rc822 part
-    # @return   [String]       Selected fields
+sub fillet {
+    # Split given entire message body into error message lines and the original
+    # message part only include email headers
+    # @param    [String] mbody  Entire message body
+    # @param    [Regexp] regex  Regular expression of the message/rfc822 or the
+    #                           beginning of the original message part
+    # @return   [Array]         [Error message lines, The original message]
+    # @since    v4.25.5
     my $class = shift;
-    my $argv1 = shift // return undef;
-    return undef unless ref $argv1 eq 'ARRAY';
+    my $mbody = shift || return undef;
+    my $regex = shift || return undef;
 
-    my $rfc822next = { 'from' => 0, 'to' => 0, 'subject' => 0 };
-    my $rfc822part = '';    # (String) message/rfc822-headers part
-    my $previousfn = '';    # (String) Previous field name
-
-    for my $e ( @$argv1 ) {
-        # After "message/rfc822"
-        if( $e =~ /\A([-0-9A-Za-z]+?)[:][ ]*.*/ ) {
-            # Get required headers
-            my $lhs = lc $1;
-            $previousfn = '';
-            next unless exists $HEADERINDEX->{ $lhs };
-
-            $previousfn  = $lhs;
-            $rfc822part .= $e."\n";
-
-        } elsif( $e =~ /\A[ \t]+/ ) {
-            # Continued line from the previous line
-            next if $rfc822next->{ $previousfn };
-            $rfc822part .= $e."\n" if exists $LONGHEADERS->{ $previousfn };
-
-        } else {
-            # Check the end of headers in rfc822 part
-            next unless exists $LONGHEADERS->{ $previousfn };
-            next if length $e;
-            $rfc822next->{ $previousfn } = 1;
-        }
+    my ($a, $b) = split($regex, $$mbody, 2); $b ||= '';
+    if( length $b ) {
+        # Remove blank lines, the message body of the original message, and
+        # append "\n" at the end of the original message headers
+        # 1. Remove leading blank lines
+        # 2. Remove text after the first blank line: \n\n
+        # 3. Append "\n" at the end of test block when the last character is not "\n"
+        $b =~ s/\A[\r\n\s]+//m;
+        substr($b, index($b, "\n\n") + 1, length($b), '') if index($b, "\n\n") > 0;
+        $b .= "\n" unless $b =~ /\n\z/;
     }
-    return \$rfc822part;
+    return [$a, $b];
 }
 
 1;
@@ -292,30 +263,27 @@ header.
     my $v = 'from mx.example.org (c1.example.net [192.0.2.1]) by mx.example.jp';
     my $r = Sisimai::RFC5322->received($v);
 
-    warn Dumper $r; 
+    warn Dumper $r;
     $VAR1 = [
         'mx.example.org',
         'mx.example.jp'
     ];
 
-=head2 C<B<weedout(I<Array>)>>
+=head2 C<B<fillet(I<String>, I<RegExp>)>>
 
-C<weedout()> returns string including only necessary fields from message/rfc822
-part. This method is called from only Sisimai::Bite::Email::* modules.
+C<fillet()> returns array reference which include error message lines of given
+message body and the original message part split by the 2nd argument.
 
-    my $v = <<'EOM';
-    From: postmaster@nyaan.example.org
-    To: kijitora@example.jp
-    Subject: Delivery failure
-    X-Mailer: Neko mailer v2.22
-    EOM
+    my $v = 'Error message here
+    Content-Type: message/rfc822
+    Return-Path: <neko@libsisimai.org>';
+    my $r = Sisimai::RFC5322->fillet(\$v, qr|^Content-Type:[ ]message/rfc822|m);
 
-    my $r = Sisimai::RFC5322->weedout([split("\n", $v)]);
-    print $$r;
-
-    From: postmaster@nyaan.example.org
-    To: kijitora@example.jp
-    Subject: Delivery failure
+    warn Dumper $r;
+    $VAR1 = [
+        'Error message here',
+        'Return-Path: <neko@libsisimai.org>';
+    ];
 
 =head1 AUTHOR
 
@@ -323,7 +291,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2018 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2021 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

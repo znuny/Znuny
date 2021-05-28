@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -708,8 +709,8 @@ sub Run {
                 || 'ERROR: NotificationBodyLostPasswordToken is missing!';
             my $Subject = $ConfigObject->Get('NotificationSubjectLostPasswordToken')
                 || 'ERROR: NotificationSubjectLostPasswordToken is missing!';
-            for ( sort keys %UserData ) {
-                $Body =~ s/<OTRS_$_>/$UserData{$_}/gi;
+            for my $Key ( sort keys %UserData ) {
+                $Body =~ s/<OTRS_$Key>/$UserData{$Key}/gi;
             }
             my $Sent = $EmailObject->Send(
                 To       => $UserData{UserEmail},
@@ -767,8 +768,8 @@ sub Run {
             || 'New Password is: <OTRS_NEWPW>';
         my $Subject = $ConfigObject->Get('NotificationSubjectLostPassword')
             || 'New Password!';
-        for ( sort keys %UserData ) {
-            $Body =~ s/<OTRS_$_>/$UserData{$_}/gi;
+        for my $Key ( sort keys %UserData ) {
+            $Body =~ s/<OTRS_$Key>/$UserData{$Key}/gi;
         }
         my $Sent = $EmailObject->Send(
             To       => $UserData{UserEmail},

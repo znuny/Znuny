@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -34,11 +35,11 @@ sub TicketAcceleratorUpdate {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(TicketID)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(TicketID)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -79,9 +80,9 @@ sub TicketAcceleratorUpdate {
 
     my $ViewableStatesHit = 0;
 
-    for (@ViewableStates) {
+    for my $State (@ViewableStates) {
 
-        if ( $_ =~ /^$TicketData{State}$/i ) {
+        if ( $State =~ /^$TicketData{State}$/i ) {
             $ViewableStatesHit = 1;
         }
     }
@@ -92,9 +93,9 @@ sub TicketAcceleratorUpdate {
 
     my $ViewableLocksHit = 0;
 
-    for (@ViewableLocks) {
+    for my $Lock (@ViewableLocks) {
 
-        if ( $_ =~ /^$TicketData{Lock}$/i ) {
+        if ( $Lock =~ /^$TicketData{Lock}$/i ) {
             $ViewableLocksHit = 1;
         }
     }
@@ -217,11 +218,11 @@ sub TicketAcceleratorDelete {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(TicketID)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(TicketID)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -241,11 +242,11 @@ sub TicketAcceleratorAdd {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(TicketID)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(TicketID)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -265,8 +266,8 @@ sub TicketAcceleratorAdd {
 
     my $ViewableStatesHit = 0;
 
-    for (@ViewableStates) {
-        if ( $_ =~ /^$TicketData{State}$/i ) {
+    for my $State (@ViewableStates) {
+        if ( $State =~ /^$TicketData{State}$/i ) {
             $ViewableStatesHit = 1;
         }
     }
@@ -300,11 +301,11 @@ sub TicketLockAcceleratorDelete {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(TicketID)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(TicketID)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -323,11 +324,11 @@ sub TicketLockAcceleratorAdd {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(TicketID)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(TicketID)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -351,11 +352,11 @@ sub TicketAcceleratorIndex {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(UserID QueueID ShownQueueIDs)) {
-        if ( !exists( $Param{$_} ) ) {
+    for my $Needed (qw(UserID QueueID ShownQueueIDs)) {
+        if ( !exists( $Param{$Needed} ) ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -391,13 +392,13 @@ sub TicketAcceleratorIndex {
             WHERE st.ticket_state_id IN ( ${\(join ', ', @ViewableStateIDs)} )
                 AND st.queue_id IN (";
 
-        for ( 0 .. $#QueueIDs ) {
+        for my $Index ( 0 .. $#QueueIDs ) {
 
-            if ( $_ > 0 ) {
+            if ( $Index > 0 ) {
                 $SQL .= ",";
             }
 
-            $SQL .= $DBObject->Quote( $QueueIDs[$_], 'Integer' );
+            $SQL .= $DBObject->Quote( $QueueIDs[$Index], 'Integer' );
         }
 
         $SQL .= " )";
@@ -586,9 +587,9 @@ sub TicketAcceleratorRebuild {
     # write index
     return if !$DBObject->Do( SQL => 'DELETE FROM ticket_index' );
 
-    for (@RowBuffer) {
+    for my $Row (@RowBuffer) {
 
-        my %Data = %{$_};
+        my %Data = %{$Row};
 
         $DBObject->Do(
             SQL => '
@@ -618,8 +619,8 @@ sub TicketAcceleratorRebuild {
     # add lock index entry
     return if !$DBObject->Do( SQL => 'DELETE FROM ticket_lock_index' );
 
-    for (@LockRowBuffer) {
-        $Self->TicketLockAcceleratorAdd( TicketID => $_ );
+    for my $TicketID (@LockRowBuffer) {
+        $Self->TicketLockAcceleratorAdd( TicketID => $TicketID );
     }
 
     return 1;
@@ -629,11 +630,11 @@ sub GetIndexTicket {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(TicketID)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(TicketID)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -669,11 +670,11 @@ sub _GetIndexTicketLock {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(TicketID)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(TicketID)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }

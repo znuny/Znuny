@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -150,8 +151,8 @@ sub PreRun {
         $Self->{MailBody} .= "Stats with following options:\n\n";
         $Self->{MailBody} .= "StatNumber: " . $Self->GetOption('number') . "\n";
         my @P = split( /&/, $Self->{Params} );
-        for (@P) {
-            my ( $Key, $Value ) = split( /=/, $_, 2 );
+        for my $Param (@P) {
+            my ( $Key, $Value ) = split( /=/, $Param, 2 );
             $Self->{MailBody} .= "$Key: $Value\n";
         }
     }
@@ -427,8 +428,8 @@ sub GetParam {
         $Self->PrintError("Need 'Param' in GetParam()");
     }
     my @P = split( /&/, $Param{Params} || '' );
-    for (@P) {
-        my ( $Key, $Value ) = split( /=/, $_, 2 );
+    for my $Param (@P) {
+        my ( $Key, $Value ) = split( /=/, $Param, 2 );
         if ( $Key eq $Param{Param} ) {
             return $Value;
         }
@@ -444,8 +445,8 @@ sub GetArray {
     }
     my @P = split( /&/, $Param{Params} || '' );
     my @Array;
-    for (@P) {
-        my ( $Key, $Value ) = split( /=/, $_, 2 );
+    for my $Param (@P) {
+        my ( $Key, $Value ) = split( /=/, $Param, 2 );
         if ( $Key eq $Param{Param} ) {
             push( @Array, $Value );
         }
