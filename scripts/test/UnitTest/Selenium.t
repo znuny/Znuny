@@ -74,10 +74,13 @@ $Self->True(
     'Selenium default config TestOk',
 );
 
-$Self->True(
-    $SeleniumObject->{SeleniumTestsActive},
-    'SeleniumTestsActive',
-);
+if ( !$SeleniumObject->{SeleniumTestsActive} ) {
+    $Self->True(
+        1,
+        'Selenium testing is not active, skipping tests.',
+    );
+    return 1;
+}
 
 # new Selenium test config
 my $NewSeleniumConfig = $ConfigObject->Get('SeleniumTestsConfig');
