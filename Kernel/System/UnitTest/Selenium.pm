@@ -96,8 +96,6 @@ sub new {
 
     my %SeleniumTestsConfig = %{ $Kernel::OM->Get('Kernel::Config')->Get('SeleniumTestsConfig') // {} };
 
-    use Data::Dumper;
-    print STDERR 'Debug Dump - - %SeleniumTestsConfig = ' . Dumper(\%SeleniumTestsConfig) . "\n";
     if ( !%SeleniumTestsConfig ) {
         my $Self = bless {}, $Class;
         $Self->{UnitTestDriverObject} = $Param{UnitTestDriverObject};
