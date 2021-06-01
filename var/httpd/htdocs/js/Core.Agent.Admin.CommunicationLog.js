@@ -1,5 +1,6 @@
 // --
 // Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+// Copyright (C) 2021 maxence GmbH, https://maxence.de/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -74,7 +75,8 @@ Core.Agent.Admin.CommunicationLog = (function (TargetNS) {
             LogEntryCount,
             ObjectSelected,
             ObjectIdElement,
-            AccountID = Core.Config.Get('AccountID');
+            AccountID = Core.Config.Get('AccountID'),
+            Session = {};
 
         TargetNS.ShowContextSettingsDialog();
 
@@ -94,15 +96,22 @@ Core.Agent.Admin.CommunicationLog = (function (TargetNS) {
         Core.UI.Table.Sort.Init($('#AccountsTable'));
         Core.UI.Table.Sort.Init($('#CommunicationLogListTable'));
 
+        if (!Core.Config.Get('SessionIDCookie')) {
+            Session[Core.Config.Get('SessionName')] = Core.Config.Get('SessionID');
+        }
+
         // initialize time range update in communication log overview
         $('#TimeRange').off('change.TimeRange').on('change.TimeRange', function () {
 
             URL = Core.Config.Get('Baselink');
-            URL += SerializeData({
-                Action: 'AdminCommunicationLog',
-                StartTime: $('#TimeRange').val(),
-                Expand: $('#CommunicationList').hasClass('Expanded') ? 1 : 0
-            });
+            URL += SerializeData($.extend(false,
+                {
+                    Action: 'AdminCommunicationLog',
+                    StartTime: $('#TimeRange').val(),
+                    Expand: $('#CommunicationList').hasClass('Expanded') ? 1 : 0
+                },
+                Session
+            ));
             window.location = URL;
         });
 
@@ -110,11 +119,14 @@ Core.Agent.Admin.CommunicationLog = (function (TargetNS) {
         $('#TimeRangeAccounts').off('change.TimeRangeAccounts').on('change.TimeRangeAccounts', function () {
 
             URL = Core.Config.Get('Baselink');
-            URL += SerializeData({
-                Action: 'AdminCommunicationLog',
-                Subaction: 'Accounts',
-                StartTime: $('#TimeRangeAccounts').val()
-            });
+            URL += SerializeData($.extend(false,
+                {
+                    Action: 'AdminCommunicationLog',
+                    Subaction: 'Accounts',
+                    StartTime: $('#TimeRangeAccounts').val()
+                },
+                Session
+            ));
             window.location = URL;
         });
 
@@ -122,18 +134,20 @@ Core.Agent.Admin.CommunicationLog = (function (TargetNS) {
         $('#PriorityFilter').off('change.PriorityFilter').on('change.PriorityFilter', function () {
 
             URL = Core.Config.Get('Baselink');
-            URL += SerializeData({
-                Action: 'AdminCommunicationLog',
-                Subaction: 'Zoom',
-                PriorityFilter: $('#PriorityFilter').val(),
-                CommunicationID: Core.Config.Get('CommunicationID')
-            });
+            URL += SerializeData($.extend(false,
+                {
+                    Action: 'AdminCommunicationLog',
+                    Subaction: 'Zoom',
+                    PriorityFilter: $('#PriorityFilter').val(),
+                    CommunicationID: Core.Config.Get('CommunicationID')
+                },
+                Session
+            ));
             window.location = URL;
         });
 
         // initialize object log entry update
         $('#ObjectListTable > tbody').children('tr').off('click.ObjectList').on('click.ObjectList', function() {
-
 
             URL = Core.Config.Get('Baselink');
             URL += SerializeData({

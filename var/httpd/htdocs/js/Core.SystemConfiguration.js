@@ -1,5 +1,6 @@
 // --
 // Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+// Copyright (C) 2021 maxence GmbH, https://maxence.de/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -169,11 +170,12 @@ var Core = Core || {};
     TargetNS.InitConfigurationTree = function(RedirectAction, Category, UserModificationActive) {
 
         var Data = {
-            Action    : 'AdminSystemConfiguration',
-            Subaction : 'AJAXNavigationTree',
-            Category  : Category || $('#Category').val(),
-            UserModificationActive : UserModificationActive
-        };
+                Action    : 'AdminSystemConfiguration',
+                Subaction : 'AJAXNavigationTree',
+                Category  : Category || $('#Category').val(),
+                UserModificationActive : UserModificationActive
+            },
+            Session = '';
 
         if (Core.Config.Get('Action') == 'AgentPreferences') {
             Data.Action = 'AgentPreferences';
@@ -189,7 +191,10 @@ var Core = Core || {};
         }
 
         $('#ConfigTree').on('click', '.OpenNodeInNewWindow', function(Event) {
-            window.open(Core.Config.Get('CGIHandle') + '?Action=AdminSystemConfigurationGroup;RootNavigation=' + $(this).data('node'), '_blank');
+            if (!Core.Config.Get('SessionIDCookie')) {
+                Session = ';' + encodeURIComponent(Core.Config.Get('SessionName')) + '=' + encodeURIComponent(Core.Config.Get('SessionID'));
+            }
+            window.open(Core.Config.Get('CGIHandle') + '?Action=AdminSystemConfigurationGroup;RootNavigation=' + $(this).data('node') + Session, '_blank');
             Event.preventDefault;
             return false;
         });
@@ -1609,7 +1614,12 @@ var Core = Core || {};
             BreadCrumbItems,
             ListItem,
             URL = Core.Config.Get('CGIHandle'),
-            Index;
+            Index,
+            Session = '';
+
+        if (!Core.Config.Get('SessionIDCookie')) {
+            Session = ';' + encodeURIComponent(Core.Config.Get('SessionName')) + '=' + encodeURIComponent(Core.Config.Get('SessionID'));
+        }
 
         $('.ContentColumn').html(Core.Template.Render("Agent/WidgetLoading"));
 
@@ -1618,10 +1628,10 @@ var Core = Core || {};
         BreadCrumbItems = Selected.split("::");
 
         if (Core.Config.Get('Action') == 'AgentPreferences') {
-            URL += "?Action=AgentPreferences;Subaction=Group;Group=Advanced;RootNavigation=";
+            URL += "?Action=AgentPreferences;Subaction=Group;Group=Advanced" + Session + ";RootNavigation=";
         }
         else {
-            URL += "?Action=AdminSystemConfigurationGroup;RootNavigation=";
+            URL += "?Action=AdminSystemConfigurationGroup" + Session + ";RootNavigation=";
         }
         for (Index in BreadCrumbItems) {
             if (Index != 0) {

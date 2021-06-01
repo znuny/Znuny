@@ -1,5 +1,6 @@
 // --
 // Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+// Copyright (C) 2021 maxence GmbH, https://maxence.de/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -160,7 +161,12 @@ Core.Agent.Admin = Core.Agent.Admin || {};
                     }
 
                     $('#DownloadSupportBundle').on('click', function () {
-                        window.location.href = Core.Config.Get('Baselink') + 'Action=' + Core.Config.Get('Action') + ';Subaction=DownloadSupportBundle;Filename=' + Response.Filename + ';RandomID=' + Response.RandomID + ';ChallengeToken=' + Core.Config.Get('ChallengeToken');
+                        var Session = '';
+                        if (!Core.Config.Get('SessionIDCookie')) {
+                            Session = ';' + encodeURIComponent(Core.Config.Get('SessionName')) + '=' + encodeURIComponent(Core.Config.Get('SessionID'));
+                        }
+
+                        window.location.href = Core.Config.Get('Baselink') + 'Action=' + Core.Config.Get('Action') + ';Subaction=DownloadSupportBundle;Filename=' + Response.Filename + ';RandomID=' + Response.RandomID + ';ChallengeToken=' + Core.Config.Get('ChallengeToken') + Session;
                         Core.UI.Dialog.CloseDialog($('#SupportBundleOptionsDialog'));
                     });
                 }
