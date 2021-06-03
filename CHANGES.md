@@ -1,3 +1,5 @@
+# 6.1.1 2021-xx-xx
+
 # 6.0.35 2021-06-02
  - 2021-05-28 Improved StorageSwitch command to be more flexible (#27). Thanks to Renée Bäcker (@reneeb). [#27](https://github.com/znuny/Znuny/pull/27)
  - 2021-05-26 Changed autocomplete to 'new-password' (#64). Thanks to maxence (@tipue-dev) and Thijs Kinkhorst (@thijskh) [#64](https://github.com/znuny/Znuny/pull/64)
@@ -7,6 +9,12 @@
  - 2021-05-03 Changed behaviour of `NotificationEvent::Transport::Base->_ReplaceTicketAttributes()` function if multiselect fields are used.
 
 # 6.0.34 2021-04-21
+ - 2021-04-16 Fixed uninitialized value in pattern match warning for the TicketUpdate operation (#57). Thanks to maxence (@tipue-dev) [#57](https://github.com/znuny/Znuny/pull/57)
+ - 2021-04-16 Fixed webservice console commands only use valid webservices to check if the name is already used (#56). Thanks to maxence (@tipue-dev) [#56](https://github.com/znuny/Znuny/pull/56)
+ - 2021-04-16 Fixed uninitialized value in pattern match warning for the TicketCreate operation (#55). Thanks to maxence (@tipue-dev) [#55](https://github.com/znuny/Znuny/pull/55)
+ - 2021-04-16 Changed CommunicationChannel to optional (#54). Thanks to maxence (@tipue-dev) [#54](https://github.com/znuny/Znuny/pull/54)
+ - 2021-04-16 Fixed webservice creation only uses valid webservices to check if the name is already used (#53). Thanks to maxence (@tipue-dev) [#53](https://github.com/znuny/Znuny/pull/53)
+ - 2021-04-16 Improved POD in Priority.pm (#46). Thanks to maxence (@tipue-dev) [#46](https://github.com/znuny/Znuny/pull/46)
  - 2021-04-14 Updated jquery-validate from version 1.16.0 to 1.19.3 (CVE-2021-21252).
  - 2021-04-13 Fixed product URL in HTTP Headers. Thanks to Renée Bäcker (@reneeb) [#42](https://github.com/znuny/Znuny/pull/42)
  - 2021-04-13 Updated CPAN module Sisimai. Thanks to Renée Bäcker (@reneeb) [#37](https://github.com/znuny/Znuny/pull/37)
