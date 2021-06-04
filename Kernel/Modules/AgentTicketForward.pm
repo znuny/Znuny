@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -40,14 +41,14 @@ sub new {
 
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
-    for (
+    for my $Param (
         qw(To Cc Bcc Subject Body InReplyTo References ComposeStateID IsVisibleForCustomerPresent
         IsVisibleForCustomer ArticleID TimeUnits Year Month Day Hour Minute FormID FormDraftID Title)
         )
     {
-        my $Value = $ParamObject->GetParam( Param => $_ );
+        my $Value = $ParamObject->GetParam( Param => $Param );
         if ( defined $Value ) {
-            $Self->{GetParam}->{$_} = $Value;
+            $Self->{GetParam}->{$Param} = $Value;
         }
     }
 
@@ -457,10 +458,10 @@ sub Form {
             $Data{Body}       = $LayoutObject->{LanguageObject}->Translate('Date') .
                 ": $Data{CreateTime}\n" . $Data{Body};
         }
-        for (qw(Subject ReplyTo Reply-To Cc To From Sender)) {
-            if ( $Data{$_} ) {
-                $Data{Body} = $LayoutObject->{LanguageObject}->Translate($_) .
-                    ": $Data{$_}\n" . $Data{Body};
+        for my $Key (qw(Subject ReplyTo Reply-To Cc To From Sender)) {
+            if ( $Data{$Key} ) {
+                $Data{Body} = $LayoutObject->{LanguageObject}->Translate($Key) .
+                    ": $Data{$Key}\n" . $Data{Body};
             }
         }
 
@@ -486,8 +487,8 @@ sub Form {
         my %AllStdAttachments = $StdAttachmentObject->StdAttachmentStandardTemplateMemberList(
             StandardTemplateID => $GetParam{ForwardTemplateID},
         );
-        for ( sort keys %AllStdAttachments ) {
-            my %AttachmentsData = $StdAttachmentObject->StdAttachmentGet( ID => $_ );
+        for my $ID ( sort keys %AllStdAttachments ) {
+            my %AttachmentsData = $StdAttachmentObject->StdAttachmentGet( ID => $ID );
             $UploadCacheObject->FormIDAddFile(
                 FormID      => $GetParam{FormID},
                 Disposition => 'attachment',
@@ -502,9 +503,9 @@ sub Form {
     );
 
     # check some values
-    for (qw(To Cc Bcc)) {
-        if ( $Data{$_} ) {
-            delete $Data{$_};
+    for my $Key (qw(To Cc Bcc)) {
+        if ( $Data{$Key} ) {
+            delete $Data{$Key};
         }
     }
 

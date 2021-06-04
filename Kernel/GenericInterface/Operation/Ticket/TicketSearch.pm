@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -603,11 +604,11 @@ sub _CreateTimeSettings {
         # do nothing on time stuff
     }
     elsif ( $GetParam{ChangeTimeSearchType} eq 'TimeSlot' ) {
-        for (qw(Month Day)) {
-            $GetParam{"TicketChangeTimeStart$_"} = sprintf( "%02d", $GetParam{"TicketChangeTimeStart$_"} );
+        for my $Key (qw(Month Day)) {
+            $GetParam{"TicketChangeTimeStart$Key"} = sprintf( "%02d", $GetParam{"TicketChangeTimeStart$Key"} );
         }
-        for (qw(Month Day)) {
-            $GetParam{"TicketChangeTimeStop$_"} = sprintf( "%02d", $GetParam{"TicketChangeTimeStop$_"} );
+        for my $Key (qw(Month Day)) {
+            $GetParam{"TicketChangeTimeStop$Key"} = sprintf( "%02d", $GetParam{"TicketChangeTimeStop$Key"} );
         }
         if (
             $GetParam{TicketChangeTimeStartDay}
@@ -673,11 +674,11 @@ sub _CreateTimeSettings {
         # do nothing on time stuff
     }
     elsif ( $GetParam{LastChangeTimeSearchType} eq 'TimeSlot' ) {
-        for (qw(Month Day)) {
-            $GetParam{"TicketLastChangeTimeStart$_"} = sprintf( "%02d", $GetParam{"TicketLastChangeTimeStart$_"} );
+        for my $Key (qw(Month Day)) {
+            $GetParam{"TicketLastChangeTimeStart$Key"} = sprintf( "%02d", $GetParam{"TicketLastChangeTimeStart$Key"} );
         }
-        for (qw(Month Day)) {
-            $GetParam{"TicketLastChangeTimeStop$_"} = sprintf( "%02d", $GetParam{"TicketLastChangeTimeStop$_"} );
+        for my $Key (qw(Month Day)) {
+            $GetParam{"TicketLastChangeTimeStop$Key"} = sprintf( "%02d", $GetParam{"TicketLastChangeTimeStop$Key"} );
         }
         if (
             $GetParam{TicketLastChangeTimeStartDay}
@@ -743,11 +744,11 @@ sub _CreateTimeSettings {
         # do nothing on time stuff
     }
     elsif ( $GetParam{CloseTimeSearchType} eq 'TimeSlot' ) {
-        for (qw(Month Day)) {
-            $GetParam{"TicketCloseTimeStart$_"} = sprintf( "%02d", $GetParam{"TicketCloseTimeStart$_"} );
+        for my $Key (qw(Month Day)) {
+            $GetParam{"TicketCloseTimeStart$Key"} = sprintf( "%02d", $GetParam{"TicketCloseTimeStart$Key"} );
         }
-        for (qw(Month Day)) {
-            $GetParam{"TicketCloseTimeStop$_"} = sprintf( "%02d", $GetParam{"TicketCloseTimeStop$_"} );
+        for my $Key (qw(Month Day)) {
+            $GetParam{"TicketCloseTimeStop$Key"} = sprintf( "%02d", $GetParam{"TicketCloseTimeStop$Key"} );
         }
         if (
             $GetParam{TicketCloseTimeStartDay}
@@ -810,8 +811,8 @@ sub _CreateTimeSettings {
     # prepare full text search
     if ( $GetParam{Fulltext} ) {
         $GetParam{ContentSearch} = 'OR';
-        for (qw(From To Cc Subject Body)) {
-            $GetParam{$_} = $GetParam{Fulltext};
+        for my $Key (qw(From To Cc Subject Body)) {
+            $GetParam{$Key} = $GetParam{Fulltext};
         }
     }
 

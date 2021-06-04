@@ -4,6 +4,14 @@
   Please, DO NOT DELETE ANY TEXT from this template (unless instructed)!
 -->
 
+## Proposed change
+<!--
+  Describe the big picture of your changes here to communicate to the
+  maintainers why this pull request should be accepted. If it fixes a bug
+  or resolves a feature request, be sure to link to that issue in the
+  additional information section.
+-->
+
 ## Type of change
 <!--
   What type of change does your PR introduce to Znuny?
@@ -12,18 +20,10 @@
   split it into multiple PRs. This makes things easier and faster for the code review.
 -->
 
-- [ ] 🆙 - Dependency upgrade (e.g. libraries)
-- [ ] 🐞 - Bugfix (non-breaking change which fixes an issue)
-- [ ] 💎 - Code quality improvements to existing code or addition of unit tests
-- [ ] 🚀 - New feature (which adds functionality to an existing integration)
-
-## Proposed change
-<!--
-  Describe the big picture of your changes here to communicate to the
-  maintainers why this pull request should be accepted. If it fixes a bug
-  or resolves a feature request, be sure to link to that issue in the
-  additional information section.
--->
+- [ ] 🆙 - Dependency upgrade (e.g. libraries) <!-- delete [ ] if not checked -->
+- [ ] 🐞 - Bugfix (non-breaking change which fixes an issue) <!-- delete [ ] if not checked -->
+- [ ] 💎 - Code quality improvements to existing code or addition of unit tests <!-- delete [ ] if not checked -->
+- [ ] 🚀 - New feature (which adds functionality to an existing integration) <!-- delete [ ] if not checked -->
 
 ## Breaking change
 <!--
@@ -38,13 +38,14 @@
 <!--
   Details are important and help maintainers processing your PR.
   Please be sure to fill out additional details, if applicable.
+  Note: Remove this section if not needed.
 -->
 
 <!--
 - This PR is related to issue: #
--->
 - This PR fixes issue: #
 - ...
+-->
 
 ## Checklist
 <!--
@@ -59,9 +60,9 @@
 
 - [ ] The code change is tested and works locally.(❗)
 - [ ] There is no commented out code in this PR.(❕)
-- [ ] You improved or added new unit tests.(❕/❗depends on the code)
-- [ ] Local ZnunyCodePolicy run passes successfully.(❗)
-- [ ] Local unit tests pass.(❗)
+- [ ] You improved or added new unit tests.(❕)
+- [ ] Local ZnunyCodePolicy run passes successfully.(❕)
+- [ ] Local unit tests pass.(❕)
 - [ ] GitHub workflow ZnunyCodePolicy passes.(❗)
 - [ ] GitHub workflow unit tests pass.(❗)
 

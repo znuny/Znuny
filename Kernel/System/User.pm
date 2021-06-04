@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -371,11 +372,11 @@ sub UserAdd {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(UserFirstname UserLastname UserLogin UserEmail ValidID ChangeUserID)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(UserFirstname UserLastname UserLogin UserEmail ValidID ChangeUserID)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!",
+                Message  => "Need $Needed!",
             );
             return;
         }
@@ -516,11 +517,11 @@ sub UserUpdate {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(UserID UserFirstname UserLastname UserLogin ValidID ChangeUserID)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(UserID UserFirstname UserLastname UserLogin ValidID ChangeUserID)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!",
+                Message  => "Need $Needed!",
             );
             return;
         }
@@ -709,9 +710,9 @@ sub UserSearch {
             Value => $Param{PostMasterSearch},
         );
 
-        for ( sort keys %UserID ) {
+        for my $UserID ( sort keys %UserID ) {
             my %User = $Self->GetUserData(
-                UserID => $_,
+                UserID => $UserID,
                 Valid  => $Param{Valid},
             );
             if (%User) {
@@ -1217,11 +1218,11 @@ sub SetPreferences {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Key UserID)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(Key UserID)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }

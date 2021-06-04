@@ -332,7 +332,7 @@ sub TicketCheckNumber {
     my $Limit = 10;
     my $Count = 1;
     MERGE:
-    for ( 1 .. $Limit ) {
+    for my $Current ( 1 .. $Limit ) {
         my %Ticket = $Self->TicketGet(
             TicketID      => $TicketID,
             DynamicFields => 0,
