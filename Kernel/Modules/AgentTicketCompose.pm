@@ -1295,18 +1295,45 @@ sub Run {
             NoCache     => 1,
         );
     }
+    elsif ( $Self->{Subaction} eq 'CheckSubject' ) {
+
+        # Inform a user that article subject will be empty if contains only the ticket hook (if nothing is modified).
+        my $Message = $LayoutObject->{LanguageObject}->Translate(
+            'Article subject will be empty if the subject contains only the ticket hook!'
+        );
+
+        my $OldSubject = $ParamObject->GetParam( Param => 'Subject' );
+
+        my $CleanedSubject = $TicketObject->TicketSubjectClean(
+            TicketNumber => $Ticket{TicketNumber},
+            Subject      => $OldSubject,
+        );
+
+        my $Empty = !length $CleanedSubject;
+
+        $Kernel::OM->Get('Kernel::System::Log')
+            ->Log( Priority => error => Message =>
+                $Kernel::OM->Get('Kernel::System::Main')->Dump( [ $OldSubject, $CleanedSubject, $Empty, ] ) );
+
+        my $JSON = $LayoutObject->JSONEncode(
+            Data => {
+                Empty   => $Empty ? 1 : 0,
+                Message => $Message,
+            }
+        );
+
+        return $LayoutObject->Attachment(
+            ContentType => 'application/json; charset=' . $LayoutObject->{Charset},
+            Content     => $JSON,
+            Type        => 'inline',
+            NoCache     => 1,
+        );
+    }
     else {
         my $Output = $LayoutObject->Header(
             Value     => $Ticket{TicketNumber},
             Type      => 'Small',
             BodyClass => 'Popup',
-        );
-
-        # Inform a user that article subject will be empty if contains only the ticket hook (if nothing is modified).
-        $Output .= $LayoutObject->Notify(
-            Data => $LayoutObject->{LanguageObject}->Translate(
-                'Article subject will be empty if the subject contains only the ticket hook!'
-            ),
         );
 
         # get std attachment object
