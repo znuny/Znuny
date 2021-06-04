@@ -189,7 +189,10 @@ if ($PluginKeyTicket) {
     $Self->IsDeeply(
         $ResultList,
         {
-            $TicketID => "$TicketNumber Test Ticket $RandomID",
+            $TicketID => {
+                Subject => "$TicketNumber Test Ticket $RandomID",
+                Title   => "Test Ticket $RandomID",
+            },
         },
         'PluginSearch() - Search results (by ticket number)'
     );
@@ -204,7 +207,10 @@ if ($PluginKeyTicket) {
     $Self->IsDeeply(
         $ResultList,
         {
-            $TicketID => "$TicketNumber Test Ticket $RandomID",
+            $TicketID => {
+                Subject => "$TicketNumber Test Ticket $RandomID",
+                Title   => 'Test Ticket ' . $RandomID,
+            },
         },
         'PluginSearch() - Search results (by ticket ID)'
     );

@@ -229,7 +229,10 @@ sub Search {
         next TICKET if !%Ticket;
 
         # generate the ticket information string
-        $ResultList{ $Ticket{TicketID} } = $Ticket{TicketNumber} . ' ' . $Ticket{Title};
+        $ResultList{ $Ticket{TicketID} } = {
+            Subject => $Ticket{TicketNumber} . ' ' . $Ticket{Title},
+            Title   => $Ticket{Title},
+        };
     }
 
     return \%ResultList;

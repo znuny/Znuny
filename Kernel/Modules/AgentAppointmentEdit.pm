@@ -975,9 +975,15 @@ sub Run {
 
                 # add possible links
                 for my $LinkID (@LinkArray) {
+                    my $LinkData = $ResultList->{$LinkID};
+
+                    if ( $GetParam{ObjectID} && !defined $Appointment{Title} && ref $LinkData ) {
+                        $Appointment{Title} = $LinkData->{Title};
+                    }
+
                     push @{ $Param{PluginData}->{ $GetParam{PluginKey} } }, {
                         LinkID   => $LinkID,
-                        LinkName => $ResultList->{$LinkID},
+                        LinkName => ( ref $LinkData ? $LinkData->{Subject} : $LinkData ),
                         LinkURL  => sprintf(
                             $Param{PluginList}->{ $GetParam{PluginKey} }->{PluginURL},
                             $LinkID

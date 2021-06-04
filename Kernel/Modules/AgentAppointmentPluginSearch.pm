@@ -71,9 +71,11 @@ sub Run {
         keys %{$ResultList}
         )
     {
+
+        my $ObjectData = $ResultList->{$ObjectID};
         push @Data, {
             Key   => $ObjectID,
-            Value => $ResultList->{$ObjectID},
+            Value => ref $ObjectData ? $ObjectData->{Subject} : $ObjectData,
         };
 
         $MaxResultCount--;
