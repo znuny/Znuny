@@ -15,7 +15,7 @@
     <a href="https://github.com/znuny/Znuny/graphs/contributors"><img src="https://img.shields.io/github/contributors/znuny/Znuny?"></a>
     <a href="https://github.com/znuny/Znuny"><img src="https://img.shields.io/github/languages/count/znuny/Znuny?style=flat&label=language"></a>
     <br>
-    <a href="https://discord.gg/XTud3WWZTs"><img src="https://img.shields.io/discord/836533233885773825?style=flat-square"></a>
+    <a href="https://discord.gg/XTud3WWZTs"><img src="https://img.shields.io/discord/836533233885773825?style=flat"></a>
 </p>
 <hr>
 
