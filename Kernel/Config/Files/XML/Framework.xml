@@ -9015,4 +9015,11 @@ via the Preferences button after logging in.
             </Array>
         </Value>
     </Setting>
+    <Setting Name="Datepicker::ShowWeek" Required="0" Valid="1">
+        <Description Translatable="1">Activates week number for datepickers.</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Item ValueType="Checkbox" ValueRegex="">0</Item>
+        </Value>
+    </Setting>
 </otrs_config>

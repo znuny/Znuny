@@ -173,6 +173,7 @@ Core.UI.Datepicker = (function (TargetNS) {
             nextText: Core.Language.Translate('Next'),
             firstDay: Element.WeekDayStart,
             showMonthAfterYear: 0,
+            showWeek: (Core.Config.Get('DatepickerShowWeek') == 1 ? true : false),
             monthNames: [
                 Core.Language.Translate('Jan'),
                 Core.Language.Translate('Feb'),
