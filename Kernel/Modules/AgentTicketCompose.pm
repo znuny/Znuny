@@ -1311,10 +1311,6 @@ sub Run {
 
         my $Empty = !length $CleanedSubject;
 
-        $Kernel::OM->Get('Kernel::System::Log')
-            ->Log( Priority => error => Message =>
-                $Kernel::OM->Get('Kernel::System::Main')->Dump( [ $OldSubject, $CleanedSubject, $Empty, ] ) );
-
         my $JSON = $LayoutObject->JSONEncode(
             Data => {
                 Empty   => $Empty ? 1 : 0,
