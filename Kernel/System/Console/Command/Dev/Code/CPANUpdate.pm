@@ -96,7 +96,12 @@ sub Run {
     elsif ( $Mode eq 'single' ) {
         my $ModulesToUpdate = $Self->GetOption('module');
 
-        for my $Module ( @{ $ModulesToUpdate || {} } ) {
+        if ( !$ModulesToUpdate ) {
+            $Self->PrintError("Need module!");
+            return $Self->ExitCodeError();
+        }
+
+        for my $Module ( @{ $ModulesToUpdate || [] } ) {
             $Self->InstallModule(
                 ModuleConfig => { Module => $Module },
                 TargetPath   => $CPANDir,
