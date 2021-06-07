@@ -14,6 +14,7 @@
     [% BreadcrumbPath = [
             {
                 Name => Translate('Dynamic Fields Management'),
+                Link => Env("Action"),
             },
         ]
     %]
