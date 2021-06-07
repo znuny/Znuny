@@ -64,23 +64,23 @@ sub Run {
         for my $Key ( sort keys %{ $Param{GetParam} } ) {
 
             # We require non-empty list of column names - ignore antyhing else.
-            next KEY if !( $Param{GetParam}->{$Key} && IsArrayRefWithData( $Param{GetParam}->{$Key} ) );
+            next KEY if !$Param{GetParam}->{$Key};
+            next KEY if !IsArrayRefWithData($Param{GetParam}->{$Key});
 
             # Remove column name duplicates from list preserving column order.
             my %SeenColumnNames;
-            my @DeduplicatedColumnNameArray;
-            COLUMN_NAME:
+            my @UniqueColumnNames;
+            COLUMNNAME:
             for my $ColumnName ( @{ $Param{GetParam}->{$Key} } ) {
-                next COLUMN_NAME if $SeenColumnNames{$ColumnName};
+                next COLUMNNAME if $SeenColumnNames{$ColumnName};
                 $SeenColumnNames{$ColumnName} = 1;
-                push @DeduplicatedColumnNameArray, $ColumnName;
+                push @UniqueColumnNames, $ColumnName;
             }
 
-            # Update list in DB.
             $Kernel::OM->Get('Kernel::System::User')->SetPreferences(
                 UserID => $Param{UserData}->{UserID},
                 Key    => $Key . '-' . $FilterAction,
-                Value  => $Kernel::OM->Get('Kernel::System::JSON')->Encode( Data => \@DeduplicatedColumnNameArray ),
+                Value  => $Kernel::OM->Get('Kernel::System::JSON')->Encode( Data => \@UniqueColumnNames ),
             );
         }
     }
