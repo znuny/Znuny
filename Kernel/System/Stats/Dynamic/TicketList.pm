@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -949,11 +950,14 @@ sub GetStatTable {
                 next DYNAMICFIELD if !$IsStatsCondition;
 
                 # get new search parameter
-                my $DynamicFieldStatsSearchParameter = $DynamicFieldBackendObject->StatsSearchFieldParameterBuild(
-                    DynamicFieldConfig => $DynamicFieldConfig,
-                    Value              => $Param{Restrictions}->{$ParameterName},
-                    Operator           => $Operator,
-                );
+                my $DynamicFieldStatsSearchParameter;
+                if ($Param{Restrictions}->{$ParameterName}) {
+                    $DynamicFieldStatsSearchParameter = $DynamicFieldBackendObject->StatsSearchFieldParameterBuild(
+                        DynamicFieldConfig => $DynamicFieldConfig,
+                        Value              => $Param{Restrictions}->{$ParameterName},
+                        Operator           => $Operator,
+                    );
+                }
 
                 # add new search parameter
                 if ( !IsHashRefWithData( $DynamicFieldRestrictions{"DynamicField_$FieldName"} ) ) {
