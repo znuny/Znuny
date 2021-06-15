@@ -1,4 +1,6 @@
 # 6.1.1 2021-xx-xx
+ - 2021-06-15 Use ticket title as the default appointment title (#90). Thanks to Renée Bäcker (@reneeb). [#90](https://github.com/znuny/Znuny/pull/90)
+ - 2021-06-15 Column list validation before saving agent preferences (#84). Thanks to Paweł Bogusławski (@pboguslawski). [#84](https://github.com/znuny/Znuny/pull/84)
 
 # 6.0.35 2021-06-02
  - 2021-05-28 Improved StorageSwitch command to be more flexible (#27). Thanks to Renée Bäcker (@reneeb). [#27](https://github.com/znuny/Znuny/pull/27)
