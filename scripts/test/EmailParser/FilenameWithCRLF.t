@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -46,7 +47,7 @@ $Self->Is(
 # LF => 0A hexadecimal
 $Self->Is(
     $Attachments[2]->{'Filename'} || '',
-    'Test__test_test_test_dokument.eml',
+    'Test  test test test dokument_72f42c7d9d3d7deda64e7f3bb68c2cc0.eml',
     "Filename with multiple newlines removed",
 );
 

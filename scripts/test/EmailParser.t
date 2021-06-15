@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -602,22 +603,22 @@ $Self->Is(
 );
 $Self->Is(
     $Attachments[5]->{Filename} || '',
-    '報告書_..txt',
+    '報告書_._a86cfd50111b38859f9dabbd60b4e11e.txt',
     "#12 Filename check",
 );
 $Self->Is(
     $Attachments[6]->{Filename} || '',
-    '金田_美羽',
+    '金田_美羽_0fd37459af13fce03ba3ce6ac1fb6758',
     "#12 Filename check",
 );
 $Self->Is(
     $Attachments[7]->{Filename} || '',
-    '國科會50科學之旅活動計畫徵求書_r_final_.doc',
+    '國科會50科學之旅活動計畫徵求書_r_final_ab9ef92ceaa8fdf051527dfd01ca800f.doc',
     "#12 Filename check",
 );
 $Self->Is(
     $Attachments[8]->{Filename} || '',
-    '2차_보도자료.hwp',
+    '2차 보도자료.hwp',
     "#12 Filename check",
 );
 $Self->True(

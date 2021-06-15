@@ -1,5 +1,6 @@
 // --
 // Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+// Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -629,9 +630,12 @@ Core.UI = (function (TargetNS) {
                     return true;
                 }
 
-                // don't allow uploading multiple files with the same name
+                // don't allow uploading multiple files with the same name or with the same original name
                 FileExist = $ContainerObj.find('.AttachmentList tbody tr td.Filename').filter(function() {
                     if ($(this).text() === File.name) {
+                        return $(this);
+                    }
+                    if ($(this).attr('data-filename-orig') === File.name) {
                         return $(this);
                     }
                 });
@@ -682,18 +686,25 @@ Core.UI = (function (TargetNS) {
 
                         $.each(Response, function(index, Attachment) {
 
-                            // walk through the list to see if we can update an entry
+                            // Walk through the list to see if we can update an entry.
                             var AttachmentItem,
                                 $ExistingItemObj = $ContainerObj.find('.AttachmentList tbody tr td.Filename').filter(function() {
-                                    if ($(this).text() === Attachment.Filename) {
+                                    if (($(this).text() === Attachment.Filename)) {
+                                        return $(this);
+                                    }
+                                    // Match using original filename and update filename if filename was changed by server.
+                                    // Save original filename in data-orig to block uploading file with same original name.
+                                    if (($(this).text() === Attachment.FilenameOrig)) {
+                                        $(this).text(Attachment.Filename);
+                                        $(this).attr('data-filename-orig', Attachment.FilenameOrig);
                                         return $(this);
                                     }
                                 }),
                                 $TargetObj;
 
-                            // update the existing item if one exists
                             if ($ExistingItemObj.length) {
 
+                                // Update the existing item if one exists.
                                 $TargetObj = $ExistingItemObj.closest('tr');
 
                                 if ($TargetObj.find('a').data('file-id')) {
@@ -714,6 +725,7 @@ Core.UI = (function (TargetNS) {
                             }
                             else {
 
+                                // Add item if doesn't exist already.
                                 AttachmentItem = Core.Template.Render('AjaxDnDUpload/AttachmentItem', {
                                     'Filename' : Attachment.Filename,
                                     'Filetype' : Attachment.ContentType,

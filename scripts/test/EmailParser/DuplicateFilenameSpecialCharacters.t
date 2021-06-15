@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -37,13 +38,13 @@ $Self->Is(
 
 $Self->Is(
     $Attachments[1]->{Filename} || '',
-    '_Terminology_Guide_.pdf',
+    '_Terminology_Guide_3d444c64edc7f4eeaa611215329c7b08.pdf',
     "First attachment",
 );
 
 $Self->Is(
     $Attachments[2]->{Filename} || '',
-    '_Terminology_Guide_.pdf',
+    '_Terminology_Guide_3d444c64edc7f4eeaa611215329c7b08.pdf',
     "First attachment",
 );
 
