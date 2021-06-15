@@ -1302,11 +1302,11 @@ sub Run {
             'Article subject will be empty if the subject contains only the ticket hook!'
         );
 
-        my $OldSubject = $ParamObject->GetParam( Param => 'Subject' );
+        my $Subject = $ParamObject->GetParam( Param => 'Subject' );
 
         my $CleanedSubject = $TicketObject->TicketSubjectClean(
             TicketNumber => $Ticket{TicketNumber},
-            Subject      => $OldSubject,
+            Subject      => $Subject,
         );
 
         my $Empty = !length $CleanedSubject;
