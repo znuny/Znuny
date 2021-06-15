@@ -40,6 +40,27 @@ $Helper->ConfigSettingChange(
     Value => 1,
 );
 
+# Disable connecting external RSS during test.
+$Helper->ConfigSettingChange(
+    Valid => 1,
+    Key   => 'DashboardBackend',
+    Value => {
+        '0442-RSS' => {
+            'Block' => 'ContentSmall',
+            'CacheTTL' => '360',
+            'Default' => '1',
+            'Description' => '',
+            'Group' => '',
+            'Limit' => '6',
+            'Mandatory' => '0',
+            'Module' => 'Kernel::Output::HTML::Dashboard::RSS',
+            'Title' => 'News',
+            'URL' => 'http://127.0.0.1/public/rss/en/rss.xml',
+            'URL_de' => 'http://127.0.0.1/public/rss/de/rss.xml'
+        },
+    },
+);
+
 my $TestUserLogin = $Helper->TestUserCreate(
     Groups => ['admin'],
 );
