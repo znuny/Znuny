@@ -57,8 +57,10 @@ sub new {
         UserID => 1,
         );
 
-    # set URL for calling cloud services
-    $Self->{CloudServiceURL} = 'https://cloud.otrs.com/otrs/public.pl';
+    # set new cloud service url
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $Schema       = $ConfigObject->Get('PackageRepositoryURLSchema') // 'https';
+    $Self->{CloudServiceURL} = $Schema . '://' . $ConfigObject->Get('CloudServiceProxyURL');
 
     return $Self;
 }

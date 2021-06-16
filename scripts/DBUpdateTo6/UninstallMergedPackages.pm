@@ -70,10 +70,12 @@ sub Run {
         Result => 'short',
     );
 
+    # NOTE: Znuny4OTRS-Repo must always be uninstalled last, after all other Znuny4OTRS packages.
     PACKAGENAME:
     for my $PackageName (
         qw(
         Znuny4OTRS-ZSA202106
+        Znuny4OTRS-Repo
         )
         )
     {

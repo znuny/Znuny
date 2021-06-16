@@ -330,6 +330,58 @@ sub AddJSOnDocumentComplete {
     return;
 }
 
+=head2 AddJSOnDocumentCompleteIfNotExists()
+
+adds JavaScript only if it haven't been added yet.
+
+    my $Success = $LayoutObject->AddJSOnDocumentCompleteIfNotExists(
+        Key  => 'identifier_key_of_your_js',
+        Code => $JSBlock,
+    );
+
+Returns:
+
+    my $Success = 1;
+
+=cut
+
+sub AddJSOnDocumentCompleteIfNotExists {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
+    for my $Needed (qw(Key Code)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    my $Exists;
+
+    CODEJS:
+    for my $CodeJS ( @{ $Self->{_JSOnDocumentComplete} // [] } ) {
+        next CODEJS if $CodeJS !~ m{ Key: \s $Param{Key}}xms;
+
+        $Exists = 1;
+        last CODEJS;
+    }
+
+    return 1 if $Exists;
+
+    my $AddCode = "// Key: $Param{Key}\n" . $Param{Code};
+
+    $Self->AddJSOnDocumentComplete(
+        Code => $AddCode,
+    );
+
+    return 1;
+}
+
 =head2 AddJSData()
 
 dynamically add JavaScript data that should be handed over to

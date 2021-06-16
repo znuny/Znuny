@@ -15003,10 +15003,6 @@ msgstr "Compromisso"
 msgid "Archive search"
 msgstr "Pesquisar arquivamento."
 
-#. Perl Module: Kernel/Output/HTML/Notification/AgentCloudServicesDisabled.pm
-msgid "Enable cloud services to unleash all OTRS features!"
-msgstr "Habilite serviços de nuvem para liberar todos os recursos do OTRS!"
-
 #. Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
 msgid "%s Upgrade to %s now! %s"
 msgstr "%s Atualize para %s agora! %s"

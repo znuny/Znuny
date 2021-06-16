@@ -4636,9 +4636,6 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/LinkObject/Ticket.pm
         'Archive search' => 'بایگانی جستجو',
 
-        # Perl Module: Kernel/Output/HTML/Notification/AgentCloudServicesDisabled.pm
-        'Enable cloud services to unleash all OTRS features!' => 'فعال کردن سرویس های ابری به رها کردن تمام ویژگی های OTRS!',
-
         # Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
         '%s Upgrade to %s now! %s' => '%s ارتقا به %s در حال حاضر! %s',
         'Please verify your license data!' => '',

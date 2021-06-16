@@ -34,6 +34,19 @@ sub Data {
     $Self->{ThousandSeparator} = '.';
     $Self->{Translation} = {
 
+        # Znuny.xml config file
+        "Enables/disables the Znuny package verification. If disabled, all packages are shown as verified. It's still recommended to use only verified packages."
+            => 'Aktiviert/deaktiviert die Znuny-Paketverifizierung. Wenn deaktiviert werden alle Pakete als verifiziert angezeigt. Es wird trotzdem empfohlen, nur verifizierte Pakete zu verwenden.',
+        'Screens for which it is possible to enable or disable dynamic fields.'           => 'Dialoge, für die es möglich ist, dynamische Felder zu aktivieren oder zu deaktivieren.',
+        'Screens for which it is possible to enable or disable default columns.'          => 'Dialoge, für die es möglich ist, Standardspalten zu aktivieren oder zu deaktivieren.',
+        'Shows a link in the menu to create a unit test for the current ticket.'          => 'Zeigt einen Link im Menü zur Erzeugung eines Unit-Tests für das aktuelle Ticket.',
+        'Create a unit test file'                                                         => 'Unit-Test-Datei erzeugen',
+        'Creates a unit test file for this ticket.'                                       => 'Erzeugt eine Unit-Test-Datei für dieses Ticket.',
+        'Shows a link in the menu to create and send a unit test for the current ticket.' => 'Zeigt einen Link im Menü zur Erzeugung und den Versand eines Unit-Tests für das aktuelle Ticket.',
+        'Send a unit test file'                                                           => 'Unit-Test-Datei versenden',
+        'Creates a unit test file for this ticket and sends it to Znuny.'                 => 'Erzeugt eine Unit-Test-Datei für dieses Ticket und sendet diese an Znuny.',
+        'Creates a unit test file for a ticket.'                                          => 'Erzeugt eine Unit-Test-Datei für ein Ticket.',
+
         # Template: AdminACL
         'ACL Management' => 'ACL-Verwaltung',
         'Actions' => 'Aktionen',
@@ -4630,9 +4643,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/LinkObject/Ticket.pm
         'Archive search' => 'Archivsuche',
-
-        # Perl Module: Kernel/Output/HTML/Notification/AgentCloudServicesDisabled.pm
-        'Enable cloud services to unleash all OTRS features!' => 'Aktivieren Sie die Cloud-Services, um alle OTRS-Funktionen nutzen zu können!',
 
         # Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
         '%s Upgrade to %s now! %s' => '%s Jetzt auf %s upgraden! %s',

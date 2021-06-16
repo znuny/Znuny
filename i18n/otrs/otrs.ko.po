@@ -14530,10 +14530,6 @@ msgstr "약속"
 msgid "Archive search"
 msgstr "보관 검색"
 
-#. Perl Module: Kernel/Output/HTML/Notification/AgentCloudServicesDisabled.pm
-msgid "Enable cloud services to unleash all OTRS features!"
-msgstr "클라우드 서비스로 모든 OTRS 기능을 구현할 수 있습니다!"
-
 #. Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
 msgid "%s Upgrade to %s now! %s"
 msgstr "%s 지금 %s로 업그레이드하십시오! %s"

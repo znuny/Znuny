@@ -8134,6 +8134,16 @@ via the Preferences button after logging in.
             </Array>
         </Value>
     </Setting>
+    <Setting Name="Loader::Agent::CommonJS###888-Znuny" Required="1" Valid="1">
+        <Description Translatable="1">List of JS files to always be loaded for the agent interface.</Description>
+        <Navigation>Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>Znuny.Form.Input.js</Item>
+                <Item>Znuny.Form.Generic.js</Item>
+            </Array>
+        </Value>
+    </Setting>
     <Setting Name="Loader::Customer::CommonCSS###000-Framework" Required="1" Valid="1">
         <Description Translatable="1">List of CSS files to always be loaded for the customer interface.</Description>
         <Navigation>Frontend::Base::Loader</Navigation>
@@ -8220,6 +8230,16 @@ via the Preferences button after logging in.
         <Value>
             <Array>
                 <Item>thirdparty/ckeditor-4.16.0/ckeditor.js</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Customer::CommonJS###888-Znuny" Required="1" Valid="1">
+        <Description Translatable="1">List of JS files to always be loaded for the customer interface.</Description>
+        <Navigation>Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>Znuny.Form.Input.js</Item>
+                <Item>Znuny.Form.Generic.js</Item>
             </Array>
         </Value>
     </Setting>

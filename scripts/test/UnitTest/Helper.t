@@ -16,7 +16,6 @@ use vars (qw($Self));
 use Kernel::Config;
 use Kernel::System::AsynchronousExecutor;
 
-# get helper object
 my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 $Self->True(

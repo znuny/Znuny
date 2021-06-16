@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<otrs_config version="2.0" init="Application">
+    <Setting Name="PackageRepositoryURLSchema" Required="1" Valid="1">
+        <Description Translatable="1">Access package repositories via HTTP or HTTPS.</Description>
+        <Navigation>Core::Znuny::Repository</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="https">
+                <Item ValueType="Option" Value="https">https</Item>
+                <Item ValueType="Option" Value="http">http</Item>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="CloudServiceProxyURL" Required="1" Valid="1">
+        <Description Translatable="1">URL to the OTRS cloud service proxy service. The http or https prefix will be added, depending on SysConfig option 'PackageRepositoryURLSchema'.</Description>
+        <Navigation>Core::Znuny::Repository</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">addons.znuny.com/api/otrs_cloud_service/</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Module###AdminSystemFiles" Required="1" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Admin</Item>
+                    <Item Key="Title" Translatable="1">System file support</Item>
+                    <Item Key="NavBarName">Admin</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::NavigationModule###AdminSystemFiles" Required="0" Valid="1">
+        <Description Translatable="1">Admin area navigation for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Group">
+                    <Array>
+                        <Item>admin</Item>
+                    </Array>
+                </Item>
+                <Item Key="GroupRo">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
+                <Item Key="Name" Translatable="1">System file support</Item>
+                <Item Key="Block">Administration</Item>
+                <Item Key="Description" Translatable="1">Manage system files.</Item>
+                <Item Key="IconBig">fa-search</Item>
+                <Item Key="IconSmall"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AdminSystemFiles###001-Framework" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.Agent.Admin.SupportDataCollector.css</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AdminSystemFiles###900-Znuny" Required="1" Valid="1">
+        <Description Translatable="1">Loader module registration for AdminSystemFiles.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.Agent.Admin.SystemFiles.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item></Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="PackageVerification" Required="1" Valid="1">
+        <Description Translatable="1">Enables/disables the Znuny package verification. If disabled, all packages are shown as verified. It's still recommended to use only verified packages.</Description>
+        <Navigation>Core::Znuny</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="1">
+                <Item ValueType="Option" Value="1">Active</Item>
+                <Item ValueType="Option" Value="0">Disabled</Item>
+            </Item>
+        </Value>
+    </Setting>
+
+    <!--
+        Dynamic fields
+    -->
+    <Setting Name="DynamicFieldScreens###Framework" Required="1" Valid="1">
+        <Description Translatable="1">Screens for which it is possible to enable or disable dynamic fields.</Description>
+        <Navigation>Frontend::Base::DynamicFieldScreens</Navigation>
+        <Value>
+            <Hash>
+                <!-- Views -->
+                <Item Key="Ticket::Frontend::AgentTicketClose###DynamicField">AgentTicketClose</Item>
+                <Item Key="Ticket::Frontend::AgentTicketCompose###DynamicField">AgentTicketCompose</Item>
+                <Item Key="Ticket::Frontend::AgentTicketEmail###DynamicField">AgentTicketEmail</Item>
+                <Item Key="Ticket::Frontend::AgentTicketEmailOutbound###DynamicField">AgentTicketEmailOutbound</Item>
+                <Item Key="Ticket::Frontend::AgentTicketForward###DynamicField">AgentTicketForward</Item>
+                <Item Key="Ticket::Frontend::AgentTicketFreeText###DynamicField">AgentTicketFreeText</Item>
+                <Item Key="Ticket::Frontend::AgentTicketMove###DynamicField">AgentTicketMove</Item>
+                <Item Key="Ticket::Frontend::AgentTicketNote###DynamicField">AgentTicketNote</Item>
+                <Item Key="Ticket::Frontend::AgentTicketOwner###DynamicField">AgentTicketOwner</Item>
+                <Item Key="Ticket::Frontend::AgentTicketPending###DynamicField">AgentTicketPending</Item>
+                <Item Key="Ticket::Frontend::AgentTicketPhone###DynamicField">AgentTicketPhone</Item>
+                <Item Key="Ticket::Frontend::AgentTicketPhoneInbound###DynamicField">AgentTicketPhoneInbound</Item>
+                <Item Key="Ticket::Frontend::AgentTicketPhoneOutbound###DynamicField">AgentTicketPhoneOutbound</Item>
+                <Item Key="Ticket::Frontend::AgentTicketPrint###DynamicField">AgentTicketPrint</Item>
+                <Item Key="Ticket::Frontend::AgentTicketPriority###DynamicField">AgentTicketPriority</Item>
+                <Item Key="Ticket::Frontend::AgentTicketResponsible###DynamicField">AgentTicketResponsible</Item>
+                <Item Key="Ticket::Frontend::AgentTicketSearch###DynamicField">AgentTicketSearch</Item>
+                <Item Key="Ticket::Frontend::AgentTicketZoom###DynamicField">AgentTicketZoom</Item>
+                <Item Key="Ticket::Frontend::CustomerTicketMessage###DynamicField">CustomerTicketMessage</Item>
+                <Item Key="Ticket::Frontend::CustomerTicketPrint###DynamicField">CustomerTicketPrint</Item>
+                <Item Key="Ticket::Frontend::CustomerTicketSearch###DynamicField">CustomerTicketSearch</Item>
+                <Item Key="Ticket::Frontend::CustomerTicketZoom###DynamicField">CustomerTicketZoom</Item>
+                <!-- Overviews -->
+                <Item Key="Ticket::Frontend::OverviewMedium###DynamicField">OverviewMedium</Item>
+                <Item Key="Ticket::Frontend::OverviewPreview###DynamicField">OverviewPreview</Item>
+                <Item Key="Ticket::Frontend::OverviewSmall###DynamicField">OverviewSmall</Item>
+                <Item Key="Ticket::Frontend::CustomerTicketOverview###DynamicField">CustomerTicketOverview</Item>
+                <!-- Process -->
+                <Item Key="Ticket::Frontend::AgentTicketZoom###ProcessWidgetDynamicField">ProcessWidgetDynamicField</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="DefaultColumnsScreens###Framework" Required="1" Valid="1">
+        <Description Translatable="1">Screens for which it is possible to enable or disable default columns.</Description>
+        <Navigation>Frontend::Base::DynamicFieldScreens</Navigation>
+        <Value>
+            <Hash>
+                <!-- DefaultColumns -->
+                <Item Key="Ticket::Frontend::AgentTicketStatusView###DefaultColumns">AgentTicketStatusView</Item>
+                <Item Key="Ticket::Frontend::AgentTicketQueue###DefaultColumns">AgentTicketQueue</Item>
+                <Item Key="Ticket::Frontend::AgentTicketResponsibleView###DefaultColumns">AgentTicketResponsibleView</Item>
+                <Item Key="Ticket::Frontend::AgentTicketWatchView###DefaultColumns">AgentTicketWatchView</Item>
+                <Item Key="Ticket::Frontend::AgentTicketLockedView###DefaultColumns">AgentTicketLockedView</Item>
+                <Item Key="Ticket::Frontend::AgentTicketEscalationView###DefaultColumns">AgentTicketEscalationView</Item>
+                <Item Key="Ticket::Frontend::AgentTicketSearch###DefaultColumns">AgentTicketSearch</Item>
+                <Item Key="Ticket::Frontend::AgentTicketService###DefaultColumns">AgentTicketService</Item>
+                <!-- DefaultColumns and Dashboard Widgets -->
+                <Item Key="DashboardBackend###0100-TicketPendingReminder">DashboardWidget TicketPendingReminder</Item>
+                <Item Key="DashboardBackend###0110-TicketEscalation">DashboardWidget TicketEscalation</Item>
+                <Item Key="DashboardBackend###0120-TicketNew">DashboardWidget TicketNew</Item>
+                <Item Key="DashboardBackend###0130-TicketOpen">DashboardWidget TicketOpen</Item>
+                <Item Key="DashboardBackend###0140-RunningTicketProcess">DashboardWidget RunningTicketProcess</Item>
+                <Item Key="AgentCustomerInformationCenter::Backend###0100-CIC-TicketPendingReminder">DashboardWidget CIC-TicketPendingReminder</Item>
+                <Item Key="AgentCustomerInformationCenter::Backend###0110-CIC-TicketEscalation">DashboardWidget CIC-TicketEscalation</Item>
+                <Item Key="AgentCustomerInformationCenter::Backend###0120-CIC-TicketNew">DashboardWidget CIC-TicketNew</Item>
+                <Item Key="AgentCustomerInformationCenter::Backend###0130-CIC-TicketOpen">DashboardWidget CIC-TicketOpen</Item>
+                <Item Key="AgentCustomerUserInformationCenter::Backend###0100-CUIC-TicketPendingReminder">DashboardWidget CUIC-TicketPendingReminder</Item>
+                <Item Key="AgentCustomerUserInformationCenter::Backend###0110-CUIC-TicketEscalation">DashboardWidget CUIC-TicketEscalation</Item>
+                <Item Key="AgentCustomerUserInformationCenter::Backend###0120-CUIC-TicketNew">DashboardWidget CUIC-TicketNew</Item>
+                <Item Key="AgentCustomerUserInformationCenter::Backend###0130-CUIC-TicketOpen">DashboardWidget CUIC-TicketOpen</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!--
+        TicketToUnitTest
+    -->
+    <Setting Name="Ticket::Frontend::MenuModule###999-TicketToUnitTest" Required="0" Valid="0">
+        <Description Translatable="1">Shows a link in the menu to create a unit test for the current ticket.</Description>
+        <Navigation>Frontend::Agent::View::TicketZoom::MenuModule</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
+                <Item Key="Group">rw:admin</Item>
+                <Item Key="Name" Translatable="1">Create a unit test file</Item>
+                <Item Key="Description" Translatable="1">Creates a unit test file for this ticket.</Item>
+                <Item Key="Action"></Item>
+                <Item Key="Link">Action=AgentTicketToUnitTest;Subaction=CreateFile;TicketID=[% Data.TicketID | html %]</Item>
+                <Item Key="Target"></Item>
+                <Item Key="PopupType"></Item>
+                <Item Key="ClusterName" Translatable="1">Miscellaneous</Item>
+                <Item Key="ClusterPriority">998</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::MenuModule###999-TicketToUnitTestSend" Required="0" Valid="0">
+        <Description Translatable="1">Shows a link in the menu to create and send a unit test for the current ticket.</Description>
+        <Navigation>Frontend::Agent::View::TicketZoom::MenuModule</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
+                <Item Key="Group">rw:admin</Item>
+                <Item Key="Name" Translatable="1">Send a unit test file</Item>
+                <Item Key="Description" Translatable="1">Creates a unit test file for this ticket and sends it to Znuny.</Item>
+                <Item Key="Action"></Item>
+                <Item Key="Link">Action=AgentTicketToUnitTest;Subaction=SendEmail;TicketID=[% Data.TicketID | html %]</Item>
+                <Item Key="Target"></Item>
+                <Item Key="PopupType"></Item>
+                <Item Key="ClusterName" Translatable="1">Miscellaneous</Item>
+                <Item Key="ClusterPriority">999</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Module###AgentTicketToUnitTest" Required="1" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Creates a unit test file for a ticket.</Item>
+                    <Item Key="Title">TicketToUnitTest</Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Navigation###AgentTicketToUnitTest###002-Ticket" Required="0" Valid="0">
+        <Description Translatable="1">Main menu item registration.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+            </Array>
+        </Value>
+    </Setting>
+</otrs_config>

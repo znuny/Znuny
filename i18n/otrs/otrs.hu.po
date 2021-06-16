@@ -15059,11 +15059,6 @@ msgstr "Időpont"
 msgid "Archive search"
 msgstr "Archívum keresés"
 
-#. Perl Module: Kernel/Output/HTML/Notification/AgentCloudServicesDisabled.pm
-msgid "Enable cloud services to unleash all OTRS features!"
-msgstr ""
-"Engedélyezze a felhőszolgáltatásokat az összes OTRS funkció feloldásához!"
-
 #. Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
 msgid "%s Upgrade to %s now! %s"
 msgstr "%s Frissítés erre most: %s! %s"
