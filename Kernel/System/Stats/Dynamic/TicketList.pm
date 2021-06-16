@@ -948,16 +948,14 @@ sub GetStatTable {
                 );
 
                 next DYNAMICFIELD if !$IsStatsCondition;
+                next DYNAMICFIELD if !$Param{Restrictions}->{$ParameterName};
 
                 # get new search parameter
-                my $DynamicFieldStatsSearchParameter;
-                if ($Param{Restrictions}->{$ParameterName}) {
-                    $DynamicFieldStatsSearchParameter = $DynamicFieldBackendObject->StatsSearchFieldParameterBuild(
-                        DynamicFieldConfig => $DynamicFieldConfig,
-                        Value              => $Param{Restrictions}->{$ParameterName},
-                        Operator           => $Operator,
-                    );
-                }
+                my $DynamicFieldStatsSearchParameter = $DynamicFieldBackendObject->StatsSearchFieldParameterBuild(
+                    DynamicFieldConfig => $DynamicFieldConfig,
+                    Value              => $Param{Restrictions}->{$ParameterName},
+                    Operator           => $Operator,
+                );
 
                 # add new search parameter
                 if ( !IsHashRefWithData( $DynamicFieldRestrictions{"DynamicField_$FieldName"} ) ) {
