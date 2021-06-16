@@ -86,6 +86,7 @@ The following persons contributed to OTRS:
 * Patrick Brischler <patrick.brischler@otrs.com>
 * Patrick Rauscher <prauscher@ohai.su>
 * Paul Waring <paul@xk7.net>
+* Paweł Bogusławski <pawel.boguslawski@ib.pl>
 * Peter Krantz <peter@peterkrantz.se>
 * Ralf Hildebrandt <hildeb@charite.de>
 * Raphaël Doursenaud <rdoursenaud@gpcsolutions.fr>

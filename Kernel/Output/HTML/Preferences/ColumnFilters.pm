@@ -65,7 +65,7 @@ sub Run {
 
             # We require non-empty list of column names - ignore antyhing else.
             next KEY if !$Param{GetParam}->{$Key};
-            next KEY if !IsArrayRefWithData($Param{GetParam}->{$Key});
+            next KEY if !IsArrayRefWithData( $Param{GetParam}->{$Key} );
 
             # Remove column name duplicates from list preserving column order.
             my %SeenColumnNames;
