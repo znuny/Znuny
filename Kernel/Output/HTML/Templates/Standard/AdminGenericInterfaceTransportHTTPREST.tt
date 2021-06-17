@@ -86,6 +86,24 @@
                                 </p>
                             </div>
                             <div class="Clear"></div>
+                            <label class="Mandatory" for="ParserBackend[% Data.Operation | html %]"><span class="Marker">*</span>[% Translate("Parser backend for operation") | html %] '[% Data.Operation | html %]':</label>
+                            <div class="Field">
+                                [% Data.ParserBackendStrg %]
+                                <p class="FieldExplanation">
+                                    [% Translate("Defines the incoming data format.") | html %]
+                                </p>
+                            </div>
+
+[% RenderBlockStart("RouteOperationMappingParserBackendParameter") %]
+                            <label class="Mandatory" for="ParserBackendParameter[% Data.Parameter | html %][% Data.Operation | html %]"><span class="Marker">*</span>[% Translate("Parser backend parameter") | html %] '[% Data.Parameter | html %]':</label>
+                            <div class="Field">
+                                <input id="ParserBackendParameter[% Data.Parameter | html %][% Data.Operation | html %]" class="W50pc [% Data.BackendParameterServerError | html %]" type="text" maxlength="250" value="[% Data.Value | html %]" name="ParserBackendParameter[% Data.Parameter | html %][% Data.Operation | html %]"/>
+                                <p class="FieldExplanation">
+                                    [% Translate("Please click 'Save' to get the corresponding backend parameter if the parser backend was changed.") | html %]
+                                </p>
+                            </div>
+[% RenderBlockEnd("RouteOperationMappingParserBackendParameter") %]
+
 [% RenderBlockEnd("RouteOperationMapping") %]
 
                             <label class="Mandatory" for="MaxLength"><span class="Marker">*</span>[% Translate("Maximum message length") | html %]:</label>
@@ -171,6 +189,18 @@
                             </div>
                             <div class="Clear"></div>
 
+                            <label for="SSLNoHostnameVerification">[% Translate("Disable SSL hostname certificate verification") | html %]:</label>
+                            <div class="Field">
+                                <input type="checkbox" name="SSLNoHostnameVerification" id="SSLNoHostnameVerification" value="1" class="[% Data.SSLNoHostnameVerificationServerError | html %]" [% Data.SSLNoHostnameVerificationChecked | html %] />
+
+                                <div id="SSLNoHostnameVerificationError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                <div id="SSLNoHostnameVerificationServerError" class="TooltipErrorMessage"><p>[% Translate(Data.SSLNoHostnameVerificationServerErrorMessage) | html %]</p></div>
+                                <p class="FieldExplanation W50pc">
+                                    [% Translate("Disables hostname certificate verification. This is not recommended and should only be used in test environments.") | html %]
+                                </p>
+                            </div>
+                            <div class="Clear"></div>
+
                             <label class="Mandatory" for="Timeout">
                                 <span class="Marker">*</span> [% Translate("Timeout") | html %]:
                             </label>
@@ -219,6 +249,15 @@
                                     <div class="Clear"></div>
                                 </fieldset>
                             </div>
+
+                            <label for="ContentType">[% Translate("ContentType") | html %]:</label>
+                            <div class="Field">
+                                [% Data.ContentTypeStrg %]
+                                <p class="FieldExplanation">
+                                    [% Translate("The default content type added to HTTP header to use for POST and PUT requests.") | html %]
+                                </p>
+                            </div>
+                            <div class="Clear"></div>
 
                             <label class="Mandatory" for="UseProxy"><span class="Marker">*</span>[% Translate("Use Proxy Options") | html %]:</label>
                             <div class="Field">
@@ -370,6 +409,62 @@
                             <div class="Clear"></div>
 
 [% END %]
+[% RenderBlockStart("AdditionalHeaders") %]
+                        <label>
+                            [% IF Data.CommunicationType == 'Provider' %]
+                                [% Translate("Additional response headers") | html %]:
+                            [% ELSE %]
+                                [% Translate("Additional request headers") | html %]:
+                            [% END %]
+                        </label>
+                        <div class="Field ValueInsert">
+
+                            <input type="hidden" name="ValueCounter" value="[% Data.ValueCounter | html %]" id="ValueCounter" class="ValueCounter" />
+[% RenderBlockStart("ValueRow") %]
+                            <div class="ValueRow">
+                                <input name="Key_[% Data.ValueCounter | html %]" id="Key_[% Data.ValueCounter | html %]" class="DefaultValueKeyItem Validate_Required W20pc [% Data.KeyError | html %]" type="text" maxlength="150" value="[% Data.Key | html %]" style="width:250px"/>
+                                <div id="Key_[% Data.ValueCounter | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                <div id="Key_[% Data.ValueCounter | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate(Data.KeyErrorStrg) | html %]</p></div>
+
+                                <label class="Mandatory" for="Value_[% Data.ValueCounter | html %]"><span class="Marker">*</span>[% Translate("Value") | html %]:</label>
+                                <input name="Value_[% Data.ValueCounter | html %]" id="Value_[% Data.ValueCounter | html %]" class="DefaultValueItem Validate_Required W20pc [% Data.ValueError | html %]" type="text" maxlength="150" value="[% Data.Value | html %]"/>
+                                <div id="Value_[% Data.ValueCounter | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                <div id="Value_[% Data.ValueCounter | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+
+                                <a href="#" id="RemoveValue_[% Data.ValueCounter | html %]" class="RemoveButton ValueRemove"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove value") | html %]</span></a>
+                                <div class="SpacingTopMini" ></div>
+                            </div>
+[% RenderBlockEnd("ValueRow") %]
+                        <div class="Field">
+                            <a href="#" id="AddValue" class="CallForAction AddButton Inline"><span><i class="fa fa-plus-square-o">&nbsp;</i>
+                                [% IF Data.CommunicationType == 'Provider' %]
+                                    [% Translate("Add response header") | html %]
+                                [% ELSE %]
+                                    [% Translate("Add request header") | html %]
+                                [% END %]
+                            </span></a>
+                        </div>
+[% RenderBlockStart("ValueTemplate") %]
+                            <div class="ValueTemplate Hidden">
+                                <input name="Key_[% Data.ValueCounter | html %]" id="Key" class="DefaultValueKeyItem W20pc" type="text" maxlength="150" value="[% Data.Key | html %]" style="width:250px"/>
+                                <div id="KeyError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                <div id="KeyServerError" class="TooltipErrorMessage"><p>[% Translate(Data.KeyErrorStrg) | html %]</p></div>
+
+                                <label class="Mandatory" for="Value"><span class="Marker">*</span>[% Translate("Value") | html %]:</label>
+                                <input name="Value_[% Data.ValueCounter | html %]" id="Value" class="DefaultValueItem W20pc" type="text" maxlength="150" value="[% Data.Value | html %]"/>
+                                <div id="ValueError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                <div id="ValueServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+
+                                <a href="#" id="RemoveValue_[% Data.ValueCounter | html %]" class="RemoveButton ValueRemove"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove value") | html %]</span></a>
+                                <div class="SpacingTopMini" ></div>
+                            </div>
+[% RenderBlockEnd("ValueTemplate") %]
+
+                            <input type="hidden" name="DeletedValue" value="[% Data.DeletedString | html %]" id="DeletedValue" class="DeletedValue" />
+
+                        </div>
+                        <div class="Clear"></div>
+[% RenderBlockEnd("AdditionalHeaders") %]
 
                             <div class="Field SpacingTop">
                                 [% IF Data.Action == 'Change' %]

@@ -1095,6 +1095,15 @@ sub Data {
             'Ein spezifisches HTTP-Kommando, das für Anfragen mit diesem Invoker zu verwenden ist (optional).',
         'Default command' => 'Standardbefehl',
         'The default HTTP command to use for the requests.' => 'Der Standard-HTTP-Befehl für die Anfragen.',
+        'Disable SSL hostname certificate verification'                                                                                                                         => 'SSL-Hostname-Verifikation deaktivieren',
+        'Disables hostname certificate verification. This is not recommended and should only be used in test environments.' => 'Deaktiviert die SSL-Hostname-Verifikation. Es wird empfohlen, dies nicht oder nur in Testumgebungen zu deaktivieren.',
+        'Defines the incoming data format.'                                                                                                                                     => 'Definiert das eingehende Datenformat.',
+        'Parser backend for operation'                                                                                                                                          => 'Parser-Backend für Operation',
+        'Advanced configuration for operation'                                                                                                                                  => 'Erweiterte Konfiguiration für Operation',
+        'Parser backend parameter'                                                                                                                                              => 'Parser-Backend-Parameter',
+        "Please click 'Save' to get the corresponding backend parameter if the parser backend was changed."                                                                     => "Bitte klicken Sie 'Speichern', nachdem das Parser-Backend geändert wurde, um die entsprechenden Backend-Parameter zu erhalten.",
+        'Additional request headers'                                                                                                                                            => 'Zusätzliche Request-Header',
+        'Add request header'                                                                                                                                                    => 'Request-Header hinzufügen',
 
         # Template: AdminGenericInterfaceTransportHTTPSOAP
         'e.g. https://local.otrs.com:8000/Webservice/Example' => 'z.B. https://local.otrs.com:8000/Webservice/Example',

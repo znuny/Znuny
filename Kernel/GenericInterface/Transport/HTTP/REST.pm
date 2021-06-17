@@ -16,6 +16,7 @@ use HTTP::Status;
 use MIME::Base64;
 use REST::Client;
 use URI::Escape;
+use LWP::UserAgent;
 use Kernel::Config;
 
 use Kernel::System::VariableCheck qw(:all);
@@ -75,6 +76,9 @@ In case of an error, the resulting http error code and message are remembered fo
 
 sub ProviderProcessRequest {
     my ( $Self, %Param ) = @_;
+
+    my $JSONObject  = $Kernel::OM->Get('Kernel::System::JSON');
+    my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
     # Check transport config.
     if ( !IsHashRefWithData( $Self->{TransportConfig} ) ) {
@@ -154,6 +158,9 @@ sub ProviderProcessRequest {
         }
     }
 
+    my $ParserBackend;
+    my %ParserBackendParameter;
+
     my $RequestMethod = $ENV{'REQUEST_METHOD'} || 'GET';
     ROUTE:
     for my $CurrentOperation ( sort keys %{ $Config->{RouteOperationMapping} } ) {
@@ -198,6 +205,12 @@ sub ProviderProcessRequest {
             $URIData{$URIKey} = $URIValue;
         }
 
+        $ParserBackend = $RouteMapping{ParserBackend} || 'JSON';
+
+        if ( IsHashRefWithData( $RouteMapping{ParserBackendParameter} ) ) {
+            %ParserBackendParameter = %{ $RouteMapping{ParserBackendParameter} };
+        }
+
         $Operation = $CurrentOperation;
 
         # Leave with the first matching regexp.
@@ -207,6 +220,21 @@ sub ProviderProcessRequest {
     # Combine query params with URIData params, URIData has more precedence.
     if (%QueryParams) {
         %URIData = ( %QueryParams, %URIData, );
+    }
+
+    my %DataHeaderOverwrite = (
+        HTTP_X_OTRS_HEADER_USERLOGIN         => 'UserLogin',
+        HTTP_X_OTRS_HEADER_CUSTOMERUSERLOGIN => 'CustomerUserLogin',
+        HTTP_X_OTRS_HEADER_SESSIONID         => 'SessionID',
+        HTTP_X_OTRS_HEADER_PASSWORD          => 'Password',
+        HTTP_X_OTRS_HEADER_IMPERSONATEASUSER => 'ImpersonateAsUser',
+    );
+
+    HEADER:
+    for my $Header ( sort keys %DataHeaderOverwrite ) {
+        next HEADER if !IsStringWithData( $ENV{$Header} );
+
+        $URIData{ $DataHeaderOverwrite{$Header} } = $ENV{$Header};
     }
 
     if ( !$Operation ) {
@@ -240,9 +268,36 @@ sub ProviderProcessRequest {
         );
     }
 
-    # Read request.
-    my $Content;
-    read STDIN, $Content, $Length;
+    # try to read request from special CGI parameters
+    # those are filled:
+    # 'If POSTed data is not of type application/x-www-form-urlencoded or multipart/form-data'
+    # https://metacpan.org/pod/CGI#Handling-non-urlencoded-arguments
+    my $Content = $ParamObject->GetParam( Param => 'POSTDATA' )
+        // $ParamObject->GetParam( Param => 'PUTDATA' )
+        // $ParamObject->GetParam( Param => 'PATCHDATA' );
+
+    # if no content is given yet, maybe there were some
+    # 'application/x-www-form-urlencoded or multipart/form-data'
+    # submitted...
+    if ( !IsStringWithData($Content) ) {
+
+        # get possible POST parameter name from config
+        # otherwise fall back on 'file'
+        my %UploadInfo = $Kernel::OM->Get('Kernel::System::Web::Request')->GetUploadAll(
+            Param => $Config->{PostParamName} || 'file',
+        );
+
+        # if the parameter indeed has some content with it
+        # pass it to $Content so we can work with it later
+        if ( IsStringWithData( $UploadInfo{Content} ) ) {
+            $Content = $UploadInfo{Content};
+        }
+    }
+
+    # fallback to otrs standard
+    if ( !$Content ) {
+        read STDIN, $Content, $Length;
+    }
 
     # If there is no STDIN data it might be caused by fastcgi already having read the request.
     # In this case we need to get the data from CGI.
@@ -260,6 +315,10 @@ sub ProviderProcessRequest {
             HTTPError => 500,
         );
     }
+
+    # remove utf-8 BOMs:
+    # http://www.ueber.net/who/mjl/projects/bomstrip/
+    $Content =~ s{\xef\xbb\xbf}{}g;
 
     # Convert char-set if necessary.
     my $ContentCharset;
@@ -282,9 +341,73 @@ sub ProviderProcessRequest {
         Data    => $Content,
     );
 
-    my $ContentDecoded = $Kernel::OM->Get('Kernel::System::JSON')->Decode(
-        Data => $Content,
-    );
+    my $ContentDecoded;
+    if ( $ParserBackend eq 'JSON' ) {
+        $ContentDecoded = $JSONObject->Decode(
+            %ParserBackendParameter,
+            Data => $Content,
+        );
+    }
+    elsif ( $ParserBackend eq 'CSV' ) {
+
+        # add one newline to the end to
+        # make sure there is one
+        $Content .= "\n";
+
+        # change possible WIN line break
+        $Content =~ s{ \n?\r+\n? }{\n}xms;
+
+        # now remove unneeded newlines at the end,
+        # otherwise the CSV parser will cry some tears
+        $Content =~ s{ \n+ \z }{\n}xms;
+
+        # remove comment lines
+        $Content =~ s{^#.*\n}{}gm;
+
+        my $CSVArrayRef = $Kernel::OM->Get('Kernel::System::CSV')->CSV2Array(
+            %ParserBackendParameter,
+            String => $Content,
+        );
+
+        if ( !IsArrayRefWithData($CSVArrayRef) ) {
+            return $Self->_Error(
+                Summary   => "Error while parsing CSV structure.",
+                HTTPError => 400,
+            );
+        }
+
+        $ContentDecoded = $CSVArrayRef;
+        if (
+            $ParserBackendParameter{HasHeadline}
+            && $ParserBackendParameter{TransformToHash}
+            )
+        {
+            my $Headline = shift @{$ContentDecoded};
+            my @TransformedHashArray;
+
+            ENTRY:
+            for my $CurrentEntry ( @{$ContentDecoded} ) {
+
+                next ENTRY if !IsArrayRefWithData($CurrentEntry);
+
+                my %Entry;
+                for my $CurrentHeadEntryNumber ( 0 .. $#{$Headline} ) {
+
+                    $Entry{ $Headline->[$CurrentHeadEntryNumber] } = $CurrentEntry->[$CurrentHeadEntryNumber];
+                }
+
+                push @TransformedHashArray, \%Entry;
+            }
+
+            $ContentDecoded = \@TransformedHashArray;
+        }
+    }
+    else {
+        return $Self->_Error(
+            Summary   => "Invalid parser backend '$ParserBackend' configured for Operation '$Operation'.",
+            HTTPError => 500,
+        );
+    }
 
     if ( !$ContentDecoded ) {
         return $Self->_Error(
@@ -363,16 +486,9 @@ sub ProviderGenerateResponse {
         );
     }
 
-    # Check data param.
-    if ( defined $Param{Data} && ref $Param{Data} ne 'HASH' ) {
-        return $Self->_Output(
-            HTTPCode => 500,
-            Content  => 'Invalid data',
-        );
-    }
-
     # Check success param.
-    my $HTTPCode = 200;
+    my $HTTPCode = $Param{HTTPCode} // 200;
+
     if ( !$Param{Success} ) {
 
         # Create Fault structure.
@@ -382,13 +498,23 @@ sub ProviderGenerateResponse {
             faultstring => $FaultString,
         };
 
-        # Override HTTPCode to 500.
-        $HTTPCode = 500;
+        # overide HTTPCode to 500 if no custom HTTP code was provided
+        $HTTPCode = 500 if !$Param{HTTPCode};
     }
 
-    # Orepare data.
+    my %AdditionalResponseHeaders;
+    if ( exists $Param{Data}->{AdditionalResponseHeaders} ) {
+        if ( IsHashRefWithData( $Param{Data}->{AdditionalResponseHeaders} ) ) {
+            %AdditionalResponseHeaders = %{ $Param{Data}->{AdditionalResponseHeaders} };
+        }
+
+        delete $Param{Data}->{AdditionalResponseHeaders};
+    }
+
+    # Prepare data.
     my $JSONString = $Kernel::OM->Get('Kernel::System::JSON')->Encode(
-        Data => $Param{Data},
+        Data     => $Param{Data},
+        SortKeys => 1,
     );
 
     if ( !$JSONString ) {
@@ -400,8 +526,9 @@ sub ProviderGenerateResponse {
 
     # No error - return output.
     return $Self->_Output(
-        HTTPCode => $HTTPCode,
-        Content  => $JSONString,
+        HTTPCode                  => $HTTPCode,
+        Content                   => $JSONString,
+        AdditionalResponseHeaders => \%AdditionalResponseHeaders,
     );
 }
 
@@ -429,6 +556,9 @@ receive the response and return its data.
 
 sub RequesterPerformRequest {
     my ( $Self, %Param ) = @_;
+
+    my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
+    my $JSONObject   = $Kernel::OM->Get('Kernel::System::JSON');
 
     # Check transport config.
     if ( !IsHashRefWithData( $Self->{TransportConfig} ) ) {
@@ -475,12 +605,74 @@ sub RequesterPerformRequest {
     my $Headers = { 'Content-Type' => 'application/json; charset=UTF-8' };
 
     # set up a REST session
-    my $RestClient = REST::Client->new(
-        {
+    my $RestClient = $Kernel::OM->{Objects}->{ $Config->{Host} };
+
+    if (
+        !$Config->{ReuseClient}
+        || !$RestClient
+        )
+    {
+        # fill default parameter
+        my %RESTClientParameter = (
             host    => $Config->{Host},
             timeout => $Config->{Timeout},
+        );
+
+        # if configured we have to skip hostname verification
+        # on ssl connections for e.g. self signed certs
+        if ( $Config->{SSLNoHostnameVerification} ) {
+
+            # therefore we have to use our own LWP::UserAgent object
+            # with disabled 'verify_hostname' SSL option
+            $RESTClientParameter{useragent} = LWP::UserAgent->new(
+                keep_alive => $Config->{KeepAlive},
+                ssl_opts   => {
+                    verify_hostname => 0,
+                    SSL_verify_mode => 0,
+                },
+            );
         }
-    );
+
+        # create a REST::Client object we can perform our session with
+        $RestClient = REST::Client->new( \%RESTClientParameter );
+
+        if ( !$RestClient ) {
+            my $ErrorMessage = "Error while creating REST client from 'REST::Client'.";
+
+            # log to debugger
+            $Self->{DebuggerObject}->Error(
+                Summary => $ErrorMessage,
+            );
+            return {
+                Success      => 0,
+                ErrorMessage => $ErrorMessage,
+            };
+        }
+
+        # add X509 options if configured
+        if ( IsHashRefWithData( $Config->{X509} ) ) {
+
+            # use X509 options
+            if (
+                IsStringWithData( $Config->{X509}->{UseX509} )
+                && $Config->{X509}->{UseX509} eq 'Yes'
+                )
+            {
+                #X509 client authentication
+                $RestClient->setCert( $Config->{X509}->{X509CertFile} );
+                $RestClient->setKey( $Config->{X509}->{X509KeyFile} );
+
+                #add a CA to verify server certificates
+                if ( IsStringWithData( $Config->{X509}->{X509CAFile} ) ) {
+                    $RestClient->setCa( $Config->{X509}->{X509CAFile} );
+                }
+            }
+        }
+
+        if ( $Config->{ReuseClient} ) {
+            $Kernel::OM->{Objects}->{ $Config->{Host} } = $RestClient;
+        }
+    }
 
     if ( !$RestClient ) {
 
@@ -624,6 +816,32 @@ sub RequesterPerformRequest {
         };
     }
 
+    if ( grep { $_ eq $RestCommand } qw(POST PUT PATCH) ) {
+        if ( IsStringWithData( $Config->{ContentType} ) ) {
+
+            # Add defined content-type to HTTP header
+            if ( $Config->{ContentType} eq 'JSON' ) {
+                $Headers->{'Content-Type'} = 'application/json';
+            }
+            elsif ( $Config->{ContentType} eq 'FORM' ) {
+                $Headers->{'Content-Type'} = 'application/x-www-form-urlencoded';
+            }
+        }
+    }
+
+    my $RequestHeaders = delete $Param{Data}->{__RequestHeaders};
+    if ( IsHashRefWithData($RequestHeaders) ) {
+        $Headers = $RequestHeaders;
+    }
+
+    my $RequestHeadersAppend = delete $Param{Data}->{__RequestHeadersAppend};
+    if ( IsHashRefWithData($RequestHeadersAppend) ) {
+        %{$Headers} = (
+            %{$Headers},
+            %{$RequestHeadersAppend},
+        );
+    }
+
     my @RequestParam;
     my $Controller = $Config->{InvokerControllerMapping}->{ $Param{Operation} }->{Controller};
 
@@ -642,7 +860,11 @@ sub RequesterPerformRequest {
     #    to /Ticket/1/2 (considering that $Param{Data} contains TicketID = 1 and Other = 2).
     for my $ParamName ( sort keys %{ $Param{Data} } ) {
         if ( $Controller =~ m{:$ParamName(?=/|\?|$)}msx ) {
+
             my $ParamValue = $Param{Data}->{$ParamName};
+
+            $EncodeObject->EncodeInput( \$ParamValue );
+
             $ParamValue = URI::Escape::uri_escape_utf8($ParamValue);
             $Controller =~ s{:$ParamName(?=/|\?|$)}{$ParamValue}msxg;
             push @ParamsToDelete, $ParamName;
@@ -664,6 +886,9 @@ sub RequesterPerformRequest {
         for my $ParamName ( sort keys %{ $Param{Data} } ) {
             if ( $QueryParamsStr =~ m{:$ParamName(?=&|$)}msx ) {
                 my $ParamValue = $Param{Data}->{$ParamName};
+
+                $EncodeObject->EncodeInput( \$ParamValue );
+
                 $ParamValue = URI::Escape::uri_escape_utf8($ParamValue);
                 $QueryParamsStr =~ s{:$ParamName(?=&|$)}{$ParamValue}msxg;
                 push @ParamsToDelete, $ParamName;
@@ -687,10 +912,6 @@ sub RequesterPerformRequest {
         delete $Param{Data}->{$ParamName};
     }
 
-    # Get JSON and Encode object.
-    my $JSONObject   = $Kernel::OM->Get('Kernel::System::JSON');
-    my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
-
     my $Body;
     if ( IsHashRefWithData( $Param{Data} ) ) {
 
@@ -706,9 +927,25 @@ sub RequesterPerformRequest {
                 Data    => $Param{Data},
             );
 
-            $Param{Data} = $JSONObject->Encode(
-                Data => $Param{Data},
-            );
+            if ( $Headers->{'Content-Type'} eq 'application/x-www-form-urlencoded' ) {
+
+                # Add parameters as form data to body.
+                $Param{Data} = $RestClient->buildQuery(
+                    %{ $Param{Data} }
+                );
+
+                # Remove any leading questing mark
+                if ( IsStringWithData( $Param{Data} ) ) {
+                    $Param{Data} =~ s{\A\?}{}sm;
+                }
+            }
+            else {
+
+                # Default to JSON (OTRS default behavior)
+                $Param{Data} = $JSONObject->Encode(
+                    Data => $Param{Data},
+                );
+            }
 
             # Make sure data is correctly encoded.
             $EncodeObject->EncodeOutput( \$Param{Data} );
@@ -748,10 +985,29 @@ sub RequesterPerformRequest {
         push @RequestParam, $Body;
     }
 
+    if ( IsHashRefWithData( $Config->{AdditionalHeaders} ) ) {
+        %{$Headers} = (
+            %{$Headers},
+            %{ $Config->{AdditionalHeaders} },
+        );
+    }
+
+    if ( IsHashRefWithData($Headers) ) {
+        for my $HeaderName ( sort keys %{$Headers} ) {
+            my $HeaderValue = $Headers->{$HeaderName};
+            $RestClient->addHeader( $HeaderName, $HeaderValue );
+        }
+    }
+
     # Add headers to request
     push @RequestParam, $Headers;
 
     $RestClient->$RestCommand(@RequestParam);
+
+    $Self->{DebuggerObject}->Debug(
+        Summary => "Request params from outgoing data",
+        Data    => \@RequestParam,
+    );
 
     my $ResponseCode = $RestClient->responseCode();
     my $ResponseError;
@@ -767,6 +1023,12 @@ sub RequesterPerformRequest {
     }
 
     my $ResponseContent = $RestClient->responseContent();
+
+    $Self->{DebuggerObject}->Debug(
+        Summary => "JSON data received from remote system",
+        Data    => $ResponseContent,
+    );
+
     if ( $ResponseCode ne '204' && !IsStringWithData($ResponseContent) ) {
         $ResponseError .= ' No content provided.';
     }
@@ -826,6 +1088,19 @@ sub RequesterPerformRequest {
     my $Result;
 
     if ( $ResponseCode ne '204' ) {
+
+        my $ResponseContentType = $RestClient->responseHeader('Content-Type') || '';
+        if ( $ResponseContentType eq 'text/plain' ) {
+            $Result = {
+                Body => $ResponseContent,
+            };
+
+            return {
+                Success     => 1,
+                Data        => $Result,
+                SizeExeeded => $SizeExeeded,
+            };
+        }
 
         $Result = $JSONObject->Decode(
             Data => $ResponseContent,
@@ -933,12 +1208,17 @@ sub _Output {
 
     # prepare additional headers
     my $AdditionalHeaderStrg = '';
+
+    my %AdditionalHeaders;
     if ( IsHashRefWithData( $Self->{TransportConfig}->{Config}->{AdditionalHeaders} ) ) {
-        my %AdditionalHeaders = %{ $Self->{TransportConfig}->{Config}->{AdditionalHeaders} };
-        for my $AdditionalHeader ( sort keys %AdditionalHeaders ) {
-            $AdditionalHeaderStrg
-                .= $AdditionalHeader . ': ' . ( $AdditionalHeaders{$AdditionalHeader} || '' ) . "\r\n";
-        }
+        %AdditionalHeaders = %{ $Self->{TransportConfig}->{Config}->{AdditionalHeaders} };
+    }
+    if ( IsHashRefWithData( $Param{AdditionalResponseHeaders} ) ) {
+        %AdditionalHeaders = ( %AdditionalHeaders, %{ $Param{AdditionalResponseHeaders} } );
+    }
+    for my $AdditionalHeader ( sort keys %AdditionalHeaders ) {
+        $AdditionalHeaderStrg
+            .= $AdditionalHeader . ': ' . ( $AdditionalHeaders{$AdditionalHeader} // '' ) . "\r\n";
     }
 
     # In the constructor of this module STDIN and STDOUT are set to binmode without any additional

@@ -118,6 +118,15 @@ sub Run {
     # To store the clean new configuration locally.
     my $TransportConfig;
 
+    my @PossibleParserBackends  = qw(CSV JSON);
+    my %ParserBackendParameters = (
+        CSV => [
+            'HasHeadline',
+            'Separator',
+            'TransformToHash',
+        ],
+    );
+
     # Get requester specific settings.
     if ( $CommunicationType eq 'Requester' ) {
 
@@ -129,6 +138,10 @@ sub Run {
             $Error{ $Needed . 'ServerError' }        = 'ServerError';
             $Error{ $Needed . 'ServerErrorMessage' } = Translatable('This field is required');
         }
+
+        # optional
+        $TransportConfig->{SSLNoHostnameVerification} = $GetParam->{SSLNoHostnameVerification} || 0;
+        $TransportConfig->{ContentType}               = $GetParam->{ContentType};
 
         # Set error for non integer content.
         if ( $GetParam->{Timeout} && !IsInteger( $GetParam->{Timeout} ) ) {
@@ -259,15 +272,46 @@ sub Run {
                 my @RequestMethod = $ParamObject->GetArray(
                     Param => 'RequestMethod' . $CurrentOperation,
                 );
-                next OPERATION if !scalar @RequestMethod;
 
                 $TransportConfig->{RouteOperationMapping}->{$CurrentOperation}->{RequestMethod} = \@RequestMethod;
+
+                my $ParserBackend = $ParamObject->GetParam( Param => 'ParserBackend' . $CurrentOperation );
+
+                if ( !$ParserBackend ) {
+                    $Error{ 'ParserBackend' . $CurrentOperation . 'ServerError' }        = 'ServerError';
+                    $Error{ 'ParserBackend' . $CurrentOperation . 'ServerErrorMessage' } = 'This field is required';
+                    next OPERATION;
+                }
+
+                if ( !grep { $ParserBackend eq $_ } @PossibleParserBackends ) {
+                    $Error{ 'ParserBackend' . $CurrentOperation . 'ServerError' }        = 'ServerError';
+                    $Error{ 'ParserBackend' . $CurrentOperation . 'ServerErrorMessage' } = 'Invalid selection';
+                    next OPERATION;
+                }
+                $TransportConfig->{RouteOperationMapping}->{$CurrentOperation}->{ParserBackend} = $ParserBackend;
+
+                next OPERATION if !IsArrayRefWithData( $ParserBackendParameters{$ParserBackend} );
+
+                my @PossibleParserBackendParameters = @{ $ParserBackendParameters{$ParserBackend} };
+
+                BACKENDPARAM:
+                for my $CurrentPossibleBackendParameter (@PossibleParserBackendParameters) {
+
+                    my $CurrentValue = $ParamObject->GetParam(
+                        Param => 'ParserBackendParameter' . $CurrentPossibleBackendParameter . $CurrentOperation
+                    );
+
+                    next BACKENDPARAM if !defined $CurrentValue;
+
+                    $TransportConfig->{RouteOperationMapping}->{$CurrentOperation}->{ParserBackendParameter}
+                        ->{$CurrentPossibleBackendParameter} = $CurrentValue;
+                }
             }
         }
-
-        # Get additional headers.
-        $TransportConfig->{AdditionalHeaders} = $Self->_GetAdditionalHeaders();
     }
+
+    # Get additional headers.
+    $TransportConfig->{AdditionalHeaders} = $Self->_GetAdditionalHeaders();
 
     # Set new configuration.
     $WebserviceData->{Config}->{$CommunicationType}->{Transport}->{Config} = $TransportConfig;
@@ -345,10 +389,36 @@ sub _ShowEdit {
         $Param{$ParamName} = $TransportConfig->{Proxy}->{$ParamName};
     }
 
+    $Param{SSLNoHostnameVerification} = $TransportConfig->{SSLNoHostnameVerification};
+    $Param{ContentType}               = $TransportConfig->{ContentType};
+
     my @PossibleRequestMethods = qw(GET POST PUT PATCH DELETE HEAD OPTIONS CONNECT TRACE);
+    my @PossibleParserBackends = qw(CSV JSON);
+
+    my %ParserBackendParameters = (
+        CSV => [
+            'HasHeadline',
+            'Separator',
+            'TransformToHash',
+        ],
+    );
 
     # Check if communication type is requester.
     if ( $Param{CommunicationType} eq 'Requester' ) {
+
+        # create ContentType select
+        $Param{ContentTypeStrg} = $LayoutObject->BuildSelection(
+            Data          => [ 'JSON', 'FORM' ],
+            Name          => 'ContentType',
+            SelectedValue => $Param{ContentType} || '-',
+            PossibleNone  => 1,
+            Sort          => 'AlphanumericValue',
+            Class         => 'Modernize',
+        );
+
+        if ( $Param{SSLNoHostnameVerification} ) {
+            $Param{SSLNoHostnameVerificationChecked} = 'checked="checked"';
+        }
 
         # create default command types select
         $Param{DefaultCommandStrg} = $LayoutObject->BuildSelection(
@@ -479,6 +549,7 @@ sub _ShowEdit {
         my $Operations = $Param{WebserviceData}->{Config}->{ $Param{CommunicationType} }->{Operation};
         if ( IsHashRefWithData($Operations) ) {
 
+            OPERATION:
             for my $CurrentOperation ( sort keys %{$Operations} ) {
 
                 my $RequestMethodStrg = $LayoutObject->BuildSelection(
@@ -488,6 +559,16 @@ sub _ShowEdit {
                         || ['-'],
                     PossibleNone => 1,
                     Multiple     => 1,
+                    Sort         => 'AlphanumericValue',
+                    Class        => 'Modernize',
+                );
+
+                my $ParserBackendStrg = $LayoutObject->BuildSelection(
+                    Data          => \@PossibleParserBackends,
+                    Name          => 'ParserBackend' . $CurrentOperation,
+                    SelectedValue => $TransportConfig->{RouteOperationMapping}->{$CurrentOperation}->{ParserBackend}
+                        || 'JSON',
+                    PossibleNone => 0,
                     Sort         => 'AlphanumericValue',
                     Class        => 'Modernize',
                 );
@@ -521,40 +602,40 @@ sub _ShowEdit {
             Translation  => 1,
             Class        => 'Modernize',
         );
-
-        $LayoutObject->Block(
-            Name => 'AdditionalHeaders',
-            Data => {
-                %Param,
-            },
-        );
-
-        # Output the possible values and errors within (if any).
-        my $ValueCounter = 1;
-        for my $Key ( sort keys %{ $Param{AdditionalHeaders} || {} } ) {
-            $LayoutObject->Block(
-                Name => 'ValueRow',
-                Data => {
-                    Key          => $Key,
-                    ValueCounter => $ValueCounter,
-                    Value        => $Param{AdditionalHeaders}->{$Key},
-                },
-            );
-
-            $ValueCounter++;
-        }
-
-        # Create the possible values template.
-        $LayoutObject->Block(
-            Name => 'ValueTemplate',
-            Data => {
-                %Param,
-            },
-        );
-
-        # Set value counter.
-        $Param{ValueCounter} = $ValueCounter;
     }
+
+    $LayoutObject->Block(
+        Name => 'AdditionalHeaders',
+        Data => {
+            %Param,
+        },
+    );
+
+    # Output the possible values and errors within (if any).
+    my $ValueCounter = 1;
+    for my $Key ( sort keys %{ $Param{AdditionalHeaders} || {} } ) {
+        $LayoutObject->Block(
+            Name => 'ValueRow',
+            Data => {
+                Key          => $Key,
+                ValueCounter => $ValueCounter,
+                Value        => $Param{AdditionalHeaders}->{$Key},
+            },
+        );
+
+        $ValueCounter++;
+    }
+
+    # Create the possible values template.
+    $LayoutObject->Block(
+        Name => 'ValueTemplate',
+        Data => {
+            %Param,
+        },
+    );
+
+    # Set value counter.
+    $Param{ValueCounter} = $ValueCounter;
 
     $Output .= $LayoutObject->Output(
         TemplateFile => 'AdminGenericInterfaceTransportHTTPREST',
@@ -579,6 +660,7 @@ sub _GetParams {
         AuthType BasicAuthUser BasicAuthPassword
         UseProxy ProxyHost ProxyUser ProxyPassword ProxyExclude
         UseSSL SSLCertificate SSLKey SSLPassword SSLCAFile SSLCADir
+        SSLNoHostnameVerification ContentType
         )
         )
     {
