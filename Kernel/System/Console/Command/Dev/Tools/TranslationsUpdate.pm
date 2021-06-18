@@ -65,13 +65,13 @@ sub Configure {
 
 Make sure that you have a clean system with a current configuration. No modules may be installed or linked into the system!
 
-    <green>otrs.Console.pl $Name --language ...</green>
+    <green>otrs.Console.pl $Name --language de</green>
 
 <yellow>Translating Extension Modules</yellow>
 
 Make sure that you have a clean system with a current configuration. The module that needs to be translated has to be installed or linked into the system, but only this one!
 
-    <green>otrs.Console.pl $Name --language ... --module-directory ...</green>
+    <green>otrs.Console.pl $Name --language de --module-directory \$PathToDirectory</green>
 EOF
 
     return;
@@ -767,10 +767,8 @@ sub WritePOFile {
             );
         }
     }
-
     # Theoretically we could now also check for removed strings, but since the translations
     #   are handled by Weblate, this will not be needed as Weblate will handle that for us.
-
     Locale::PO->save_file_fromarray( $Param{TargetPOFile}, $POEntries )
         || die "Could not save file $Param{TargetPOFile}: $!";
 
