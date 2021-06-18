@@ -12,6 +12,8 @@ package Kernel::System::Util;
 use strict;
 use warnings;
 
+use MIME::Base64;
+
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
@@ -95,6 +97,139 @@ sub IsFrontendContext {
     return if !$LayoutObject->{Action};
 
     return 1;
+}
+
+=head2 Base64DeepEncode()
+
+    Base-64 encodes elements of given data for given keys.
+    If data is an array, all of its child elements will be checked for given keys whose elements
+    will be encoded recursively.
+
+    my $Base64EncodedData = $UtilObject->Base64DeepEncode(
+        # Data can be a scalar, hash or array
+        Data => {
+            Article => {
+                # ...
+            },
+            # ...
+        },
+        HashKeys => [
+            # All 'Body' elements of array $Hash->{Articles} will be base-64 encoded.
+            # Also can mean: $Hash->{Articles}->{Body}, if 'Articles' is a hash.
+            # Will encode nothing if last key ('Body') cannot be reached or is not a scalar/string.
+            'Articles->Body',
+
+            'QueueData->Comment',
+            # ...
+        ],
+    );
+
+=cut
+
+sub Base64DeepEncode {
+    my ( $Self, %Param ) = @_;
+
+    if ( !ref $Param{Data} ) {
+        return encode_base64( $Param{Data} // '' );
+    }
+    elsif ( ref $Param{Data} eq 'ARRAY' ) {
+        for my $Element ( @{ $Param{Data} } ) {
+            $Element = $Self->Base64DeepEncode(
+                Data     => $Element,
+                HashKeys => $Param{HashKeys},
+            );
+        }
+    }
+    elsif ( ref $Param{Data} eq 'HASH' ) {
+        return $Param{Data} if !IsArrayRefWithData( $Param{HashKeys} );
+
+        NESTEDHASHKEYS:
+        for my $NestedHashKeys ( @{ $Param{HashKeys} } ) {
+            my @HashKeys = split '->', $NestedHashKeys;
+            while (@HashKeys) {
+                my $HashKey = shift @HashKeys;
+
+                next NESTEDHASHKEYS if !exists $Param{Data}->{$HashKey};
+
+                $Param{Data}->{$HashKey} = $Self->Base64DeepEncode(
+                    Data     => $Param{Data}->{$HashKey},
+                    HashKeys => [
+                        ( join '->', @HashKeys ),
+                    ],
+                );
+            }
+        }
+    }
+
+    return $Param{Data};
+}
+
+=head2 DataStructureRemoveElements()
+
+    Removes elements of given data for given keys.
+    If data is an array, all of its child elements will be checked for given keys whose elements
+    will be removed recursively.
+
+    my $Data = $Znuny4OTRSAdvancedGIObject->DataStructureRemoveElements(
+        # Data can be a scalar, hash or array
+        Data => {
+            Article => {
+                # ...
+            },
+            # ...
+        },
+        HashKeys => [
+            # All 'Body' elements of array $Hash->{Articles} will be removed.
+            # Also can mean: $Hash->{Articles}->{Body}, if 'Articles' is a hash.
+            # Will remove nothing if last key ('Body') cannot be reached or is not a scalar/string.
+            'Articles->Body',
+
+            'QueueData->Comment',
+            # ...
+        ],
+    );
+
+=cut
+
+sub DataStructureRemoveElements {
+    my ( $Self, %Param ) = @_;
+
+    if ( ref $Param{Data} eq 'ARRAY' ) {
+        for my $Element ( @{ $Param{Data} } ) {
+            $Element = $Self->DataStructureRemoveElements(
+                Data     => $Element,
+                HashKeys => $Param{HashKeys},
+            );
+        }
+    }
+    elsif ( ref $Param{Data} eq 'HASH' ) {
+        return $Param{Data} if !IsArrayRefWithData( $Param{HashKeys} );
+
+        NESTEDHASHKEYS:
+        for my $NestedHashKeys ( @{ $Param{HashKeys} } ) {
+            my @HashKeys = split '->', $NestedHashKeys;
+            while (@HashKeys) {
+                my $HashKey = shift @HashKeys;
+
+                next NESTEDHASHKEYS if !exists $Param{Data}->{$HashKey};
+
+                # If last key, remove entire element.
+                if ( !@HashKeys ) {
+                    delete $Param{Data}->{$HashKey};
+                    next NESTEDHASHKEYS;
+                }
+
+                $Param{Data}->{$HashKey} = $Self->DataStructureRemoveElements(
+                    Data     => $Param{Data}->{$HashKey},
+                    HashKeys => [
+                        ( join '->', @HashKeys ),
+                    ],
+                );
+            }
+        }
+    }
+
+    return $Param{Data};
 }
 
 1;

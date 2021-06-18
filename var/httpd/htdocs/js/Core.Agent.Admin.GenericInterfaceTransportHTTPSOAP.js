@@ -214,7 +214,7 @@ Core.Agent.Admin.GenericInterfaceTransportHTTPSOAP = (function (TargetNS) {
 
         // bind change function to Authentication field
         $('#AuthType').on('change', function(){
-            if ($(this).val() === 'BasicAuth') {
+            if ($(this).val() === 'BasicAuth' || $(this).val() === 'NTLM') {
                 $('.BasicAuthField').removeClass('Hidden');
                 $('.BasicAuthField').find('#BasicAuthUser').each(function(){
                     $(this).addClass('Validate_Required');

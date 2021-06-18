@@ -356,6 +356,18 @@ my @NeededModules = (
         },
     },
     {
+        Module   => 'Jq',
+        Required => 0,
+        Comment =>
+            'Support for extended condition checking via Jq for the generic interface.',
+        InstTypes => {
+            aptget => undef,
+            emerge => undef,
+            zypper => undef,
+            ports  => undef,
+        },
+    },
+    {
         Module    => 'JSON::XS',
         Required  => 0,
         Comment   => 'Recommended for faster AJAX/JavaScript handling.',
@@ -526,6 +538,17 @@ my @NeededModules = (
             emerge => 'dev-perl/Template-Toolkit',
             zypper => 'perl-Template-Toolkit',
             ports  => 'www/p5-Template-Toolkit',
+        },
+    },
+    {
+        Module    => 'Text::Diff::FormattedHTML',
+        Required  => 1,
+        Comment   => undef,
+        InstTypes => {
+            aptget => undef,
+            emerge => undef,
+            zypper => undef,
+            ports  => undef,
         },
     },
     {

@@ -12,7 +12,7 @@ package Kernel::GenericInterface::Debugger;
 use strict;
 use warnings;
 
-use Kernel::System::VariableCheck qw(IsString IsStringWithData IsHashRefWithData);
+use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
 
@@ -186,7 +186,11 @@ sub DebugLog {
 
     # create log message
     my $DataString = '';
-    if ( IsHashRefWithData( $Param{Data} ) ) {
+    if (
+        IsHashRefWithData( $Param{Data} )
+        || IsArrayRefWithData( $Param{Data} )
+        )
+    {
         $DataString = $Kernel::OM->Get('Kernel::System::Main')->Dump( $Param{Data} );
     }
     elsif ( IsStringWithData( $Param{Data} ) ) {
@@ -205,10 +209,13 @@ sub DebugLog {
                 CommunicationID   => $Self->{CommunicationID},
                 CommunicationType => $Self->{CommunicationType},
                 RemoteIP          => $Self->{RemoteIP},
-                Summary           => $Param{Summary},
-                WebserviceID      => $Self->{WebserviceID},
-                DebugLevel        => $Param{DebugLevel},
-                Data              => $DataString,
+
+                # Database table gi_debugger_entry_content limits subject column
+                # value length in which the summary will be stored to 255 characters.
+                Summary      => substr( $Param{Summary}, 0, 255 ),
+                WebserviceID => $Self->{WebserviceID},
+                DebugLevel   => $Param{DebugLevel},
+                Data         => $DataString,
             );
         }
         return 1 if $Param{DebugLevel} ne 'error';

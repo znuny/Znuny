@@ -187,6 +187,15 @@
                             </div>
                             <div class="Clear"></div>
 
+                            <label for="NoNameSpace">[% Translate("Omit namespace prefix") |html %]:</label>
+                            <div class="Field">
+                                [% Data.NoNameSpaceSelection %]
+                                <p class="FieldExplanation">
+                                    [% Translate("Omits the namespace prefix (e. g. namesp1:) in root tag of SOAP message.") | html %]
+                                </p>
+                            </div>
+                            <div class="Clear"></div>
+
                             <label class="Mandatory" for="RequestNameScheme"><span class="Marker">*</span>[% Translate("Request name scheme") | html %]:</label>
                             <div class="Field">
                                 [% Data.RequestNameSchemeStrg %]
@@ -312,6 +321,24 @@
 # requester specific configuration
 [% ELSE %]
 
+                            <label for="FixedNameSpacePrefix">[% Translate("Fixed namespace prefix") | html %]:</label>
+                            <div class="Field">
+                                <input id="FixedNameSpacePrefix" class="W50pc" type="text" maxlength="250" value="[% Data.FixedNameSpacePrefix | html %]" name="FixedNameSpacePrefix"/>
+                                <p class="FieldExplanation">
+                                    [% Translate("Use a fixed namespace prefix (e. g. myns:) for the root tag of a SOAP message.") | html %]
+                                </p>
+                            </div>
+                            <div class="Clear"></div>
+
+                            <label for="ResponseTagSuffix">[% Translate("Suffix for response tag") | html %]:</label>
+                            <div class="Field">
+                                <input id="ResponseTagSuffix" class="W50pc" type="text" maxlength="250" value="[% Data.ResponseTagSuffix | html %]" name="ResponseTagSuffix"/>
+                                <p class="FieldExplanation">
+                                    [% Translate('Usually OTRS expects a response tag like "&lt;Operation&gt;Response". This setting can change the "Response" part, e. g. to "Result".') | html %]
+                                </p>
+                            </div>
+                            <div class="Clear"></div>
+
                             <label for="Encoding">[% Translate("Encoding") | html %]:</label>
                             <div class="Field">
                                 <input id="Encoding" class="W50pc" type="text" maxlength="250" value="[% Data.Encoding | html %]" name="Encoding"/>
@@ -335,7 +362,7 @@
                             <div class="BasicAuthField [% Data.BasicAuthHidden | html %]">
                                 <fieldset class="TableLike">
 
-                                    <label class="Mandatory" for="BasicAuthUser"><span class="Marker">*</span> [% Translate("BasicAuth User") | html %]:</label>
+                                    <label class="Mandatory" for="BasicAuthUser"><span class="Marker">*</span> [% Translate("User") | html %]:</label>
                                     <div class="Field">
                                         <input id="BasicAuthUser" class="W50pc [% Data.BasicAuthUserValidateRequired | html %] [% Data.BasicAuthUserServerError | html %]" type="text" maxlength="250" value="[% Data.BasicAuthUser | html %]" name="BasicAuthUser"/>
                                         <div id="BasicAuthUserError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
@@ -346,7 +373,7 @@
                                     </div>
                                     <div class="Clear"></div>
 
-                                    <label class="Mandatory" for="BasicAuthPassword"><span class="Marker">*</span>[% Translate("BasicAuth Password") | html %]:</label>
+                                    <label class="Mandatory" for="BasicAuthPassword"><span class="Marker">*</span>[% Translate("Password") | html %]:</label>
                                     <div class="Field">
                                         <input id="BasicAuthPassword" class="W50pc [% Data.BasicAuthPasswordValidateRequired | html %] [% Data.BasicAuthPasswordServerError | html %]" type="password" maxlength="250" value="[% Data.BasicAuthPassword | html %]" name="BasicAuthPassword"/>
                                         <div id="BasicAuthPasswordError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
@@ -419,6 +446,15 @@
 
                             <div class="SSLField [% Data.SSLHidden | html %]">
                                 <fieldset class="TableLike">
+
+                                    <label for="SSLNoHostnameVerification">[% Translate("Disable SSL hostname verification") | html %]:</label>
+                                    <div class="Field">
+                                        [% Data.SSLNoHostnameVerificationSelection %]
+                                        <p class="FieldExplanation">
+                                            [% Translate('Disables (setting "Yes") or enables (setting "No", default) the SSL hostname verification.') | html %]
+                                        </p>
+                                    </div>
+                                    <div class="Clear"></div>
 
                                     <label for="SSLCertificate">[% Translate("Client Certificate") | html %]:</label>
                                     <div class="Field">

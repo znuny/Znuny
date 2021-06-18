@@ -235,13 +235,14 @@ $ReturnData = $InvokerObject->HandleResponse(
     ResponseSuccess => '0',
     Data            => ( '1', '2', '3' ),
 );
+
 $Self->False(
     $ReturnData->{Success},
     'HandleResponse response failure success (array as response)',
 );
 $Self->Is(
     $ReturnData->{ErrorMessage},
-    'Got Data but it is not a hash or array ref in Invoker handler (HandleResponse)!',
+    'Got response error, but no response error message!',
     'HandleResponse call response failure error message (array as response)',
 );
 

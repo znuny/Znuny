@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <otrs_config version="2.0" init="Application">
+
+    <!--
+        Znuny4OTRS-Repo
+    -->
     <Setting Name="PackageRepositoryURLSchema" Required="1" Valid="1">
         <Description Translatable="1">Access package repositories via HTTP or HTTPS.</Description>
-        <Navigation>Core::Znuny::Repository</Navigation>
+        <Navigation>Core::Repository</Navigation>
         <Value>
             <Item ValueType="Select" SelectedID="https">
                 <Item ValueType="Option" Value="https">https</Item>
@@ -12,7 +16,7 @@
     </Setting>
     <Setting Name="CloudServiceProxyURL" Required="1" Valid="1">
         <Description Translatable="1">URL to the OTRS cloud service proxy service. The http or https prefix will be added, depending on SysConfig option 'PackageRepositoryURLSchema'.</Description>
-        <Navigation>Core::Znuny::Repository</Navigation>
+        <Navigation>Core::Repository</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">addons.znuny.com/api/otrs_cloud_service/</Item>
         </Value>
@@ -95,7 +99,7 @@
     </Setting>
     <Setting Name="PackageVerification" Required="1" Valid="1">
         <Description Translatable="1">Enables/disables the Znuny package verification. If disabled, all packages are shown as verified. It's still recommended to use only verified packages.</Description>
-        <Navigation>Core::Znuny</Navigation>
+        <Navigation>Core</Navigation>
         <Value>
             <Item ValueType="Select" SelectedID="1">
                 <Item ValueType="Option" Value="1">Active</Item>
@@ -173,6 +177,48 @@
                 <Item Key="AgentCustomerUserInformationCenter::Backend###0110-CUIC-TicketEscalation">DashboardWidget CUIC-TicketEscalation</Item>
                 <Item Key="AgentCustomerUserInformationCenter::Backend###0120-CUIC-TicketNew">DashboardWidget CUIC-TicketNew</Item>
                 <Item Key="AgentCustomerUserInformationCenter::Backend###0130-CUIC-TicketOpen">DashboardWidget CUIC-TicketOpen</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!--
+        Znuny4OTRS-AdvancedGI
+    -->
+    <Setting Name="GenericInterface::Invoker::Module###Znuny::Generic" Required="1" Valid="1">
+        <Description Translatable="1">GenericInterface module registration for the invoker layer.</Description>
+        <Navigation>GenericInterface::Invoker::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name">Generic</Item>
+                <Item Key="Controller">Znuny</Item>
+                <Item Key="ConfigDialog">AdminGenericInterfaceInvokerDefault</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="GenericInterface::Invoker::Module###Znuny::Tunnel" Required="1" Valid="0">
+        <Description Translatable="1">GenericInterface module registration for the invoker layer.</Description>
+        <Navigation>GenericInterface::Invoker::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name">Tunnel</Item>
+                <Item Key="Controller">Znuny</Item>
+                <Item Key="ConfigDialog">AdminGenericInterfaceInvokerDefault</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="GenericInterface::Invoker::Znuny::Generic::PrepareRequest::Base64EncodedFields" Required="1" Valid="1">
+        <Description Translatable="1">Mapping of Znuny::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Content of different fields can be given by separating those fields by ';'.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="GenericInterface::Invoker::Znuny::Generic::PrepareRequest::OmittedFields" Required="1" Valid="1">
+        <Description Translatable="1">Mapping of Znuny::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Different fields can be omitted by separating them by ';'.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
             </Hash>
         </Value>
     </Setting>

@@ -106,7 +106,7 @@ sub LoadDefaults {
 
     # ProductName
     # (Application name displayed in frontend.)
-    $Self->{ProductName} = 'Znuny LTS';
+    $Self->{ProductName} = 'Znuny';
 
     # --------------------------------------------------- #
     # database settings                                   #

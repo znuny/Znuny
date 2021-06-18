@@ -31,7 +31,7 @@ my $String = '<?xml version="1.0" encoding="utf-8" ?>
     <URL>https://otrs.com/</URL>
     <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
     <Description Lang="en">TestPackage1.</Description>
-    <Framework>6.0.x</Framework>
+    <Framework>6.1.x</Framework>
     <BuildDate>2016-10-11 02:35:46</BuildDate>
     <BuildHost>yourhost.example.com</BuildHost>
     <Filelist>
@@ -48,7 +48,7 @@ my $String2 = '<?xml version="1.0" encoding="utf-8" ?>
     <URL>https://otrs.com/</URL>
     <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
     <Description Lang="en">TestPackage2.</Description>
-    <Framework>6.0.x</Framework>
+    <Framework>6.1.x</Framework>
     <BuildDate>2016-10-11 02:36:29</BuildDate>
     <BuildHost>yourhost.example.com</BuildHost>
     <Filelist>

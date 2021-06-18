@@ -47,6 +47,28 @@ sub Data {
         'Creates a unit test file for this ticket and sends it to Znuny.'                 => 'Erzeugt eine Unit-Test-Datei für dieses Ticket und sendet diese an Znuny.',
         'Creates a unit test file for a ticket.'                                          => 'Erzeugt eine Unit-Test-Datei für ein Ticket.',
 
+        "Mapping of Znuny::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Content of different fields can be given by separating those fields by ';'."
+            => "Mapping von Znuny::Generic-Invoker-Name (Schlüssel) zu einer Liste von Feldern (Inhalt), die base-64-kodiert werden sollen. Felder müssen in der folgenden Form angegeben werden: Feld1->Feld2;Feld3->Feld4->Feld5;Feld6. Eine verschachtelte Datenstruktur kann also durch Verbindung der Felder mit '->' angegeben werden. Inhalte aus verschiedenen Feldern je Invoker können kodiert werden, indem die Felder mit ';' voneinander getrennt werden. Bitte beachten Sie die Dokumentation des Pakets für weitere Informationen.",
+        "Mapping of Znuny::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Different fields can be omitted by separating them by ';'."
+            => "Mapping von Znuny::Generic-Invoker-Name (Schlüssel) zu einer Liste von Feldern (Inhalt), die aus dem Request entfernt werden. Felder müssen in der folgenden Form angegeben werden: Feld1->Feld2;Feld3->Feld4->Feld5;Feld6. Eine verschachtelte Datenstruktur kann also durch Verbindung der Felder mit '->' angegeben werden. Verschiedene Felder je Invoker können entfernt werden, indem sie mit ';' voneinander getrennt werden. Bitte beachten Sie die Dokumentation des Pakets für weitere Informationen.",
+
+
+        # AdminGenericInterfaceTransportHTTPSOAP
+        'Omit namespace prefix'  => 'Namespace-Präfix weglassen',
+        'Omits the namespace prefix (e. g. namesp1:) in root tag of SOAP message.'  => 'Lässt das Namespace-Präfix (z. B. namesp1:) im Root-Tag der SOAP-Nachricht weg.',
+        'Fixed namespace prefix' => 'Festes Namespace-Präfix',
+        'Use a fixed namespace prefix (e. g. myns:) for the root tag of a SOAP message.' => 'Festes Namespace-Präfix (z. B. myns:) im Root-Tag der SOAP-Nachricht verwenden.',
+        'Suffix for response tag' => 'Suffix für Response-Tag',
+        'Usually OTRS expects a response tag like "&lt;Operation&gt;Response". This setting can change the "Response" part, e. g. to "Result".'
+            => 'Normalerweise erwartet OTRS ein Response-Tag in der Form "&lt;Operation&gt;Response". Mit dieser Einstellung kann der "Response"-Teil geändert werden, z. B. zu "Result".',
+        'Disable SSL hostname verification' => 'Deaktivierung der Verifikation des SSL-Hostnamens',
+        'Disables (setting "Yes") or enables (setting "No", default) the SSL hostname verification.' => 'Deaktiviert (Einstellung "Ja") oder aktiviert (Einstellung "Nein", Default) die Verifikation des SSL-Hostnamens.',
+
+        # AdminGenericInterfaceMappingXSLT
+        'Force array for tags' => 'Array für Tags erzwingen',
+        'Enter tags separated by space for which array representation should be forced.'
+            => 'Geben Sie Tags durch Leerzeichen getrennt ein, die als Array repräsentiert werden sollen.',
+
         # Template: AdminACL
         'ACL Management' => 'ACL-Verwaltung',
         'Actions' => 'Aktionen',

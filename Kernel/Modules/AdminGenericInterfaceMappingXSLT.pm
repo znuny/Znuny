@@ -123,6 +123,7 @@ sub Run {
 
         $Mapping{Template}              = $MappingConfig->{Template};
         $Mapping{DataInclude}           = $MappingConfig->{DataInclude};
+        $Mapping{ForceArray}            = $MappingConfig->{ForceArray};
         $Mapping{PreRegExFilter}        = $MappingConfig->{PreRegExFilter};
         $Mapping{PreRegExValueCounter}  = $MappingConfig->{PreRegExValueCounter};
         $Mapping{PostRegExFilter}       = $MappingConfig->{PostRegExFilter};
@@ -178,6 +179,7 @@ sub Run {
         my %NewMapping;
         $NewMapping{Template}              = $GetParam->{Template};
         $NewMapping{DataInclude}           = $GetParam->{DataInclude};
+        $NewMapping{ForceArray}            = $GetParam->{ForceArray};
         $NewMapping{PreRegExFilter}        = $GetParam->{PreRegExFilter};
         $NewMapping{PreRegExValueCounter}  = $GetParam->{PreRegExValueCounter};
         $NewMapping{PostRegExFilter}       = $GetParam->{PostRegExFilter};
@@ -352,6 +354,8 @@ sub _ShowEdit {
         Class        => 'Modernize W50pc',
     );
 
+    $Param{ForceArray} = $MappingConfig->{ForceArray} // '';
+
     $LayoutObject->Block(
         Name => 'ConfigBlock',
         Data => {},
@@ -393,6 +397,8 @@ sub _GetParams {
     $GetParam->{Template} = $ParamObject->GetParam( Param => 'Template' ) || '';
     my @DataInclude = $ParamObject->GetArray( Param => 'DataInclude' );
     $GetParam->{DataInclude} = \@DataInclude;
+
+    $GetParam->{ForceArray} = $ParamObject->GetParam( Param => 'ForceArray' ) // '';
 
     # Check validity.
     my $LibXML  = XML::LibXML->new();

@@ -342,9 +342,6 @@ sub _TasksGet {
             Message => 'Migrate ticket search profiles',
             Module  => 'MigrateTicketSearchProfiles',
         },
-
-        # ...
-
         {
             Message => 'Uninstall merged packages',
             Module  => 'UninstallMergedPackages',
