@@ -1,5 +1,13 @@
 # 6.1.1 2021-xx-xx
+ - 2021-06-17 Fixed not needed error message in TicketList.pm (#94). Thanks to Paweł Bogusławski (@pboguslawski). [#94](https://github.com/znuny/Znuny/pull/94)
+ - 2021-06-15 Do not warn agents about empty article subjects by default (#88). Thanks to Renée Bäcker (@reneeb). [#88](https://github.com/znuny/Znuny/pull/88)
+ - 2021-06-15 Improvements for Dev::Code::CPANUpdate (#38). Thanks to Renée Bäcker (@reneeb). [#38](https://github.com/znuny/Znuny/pull/38)
  - 2021-06-15 Use ticket title as the default appointment title (#90). Thanks to Renée Bäcker (@reneeb). [#90](https://github.com/znuny/Znuny/pull/90)
+ - 2021-06-15 Column list validation before saving agent preferences (#84). Thanks to Paweł Bogusławski (@pboguslawski). [#84](https://github.com/znuny/Znuny/pull/84)
+
+# 6.0.36 2021-xx-xx
+ - 2021-06-17 Fixed not needed error message in TicketList.pm (#94). Thanks to Paweł Bogusławski (@pboguslawski). [#94](https://github.com/znuny/Znuny/pull/94)
+ - 2021-06-15 Do not warn agents about empty article subjects by default (#88). Thanks to Renée Bäcker (@reneeb). [#88]
  - 2021-06-15 Column list validation before saving agent preferences (#84). Thanks to Paweł Bogusławski (@pboguslawski). [#84](https://github.com/znuny/Znuny/pull/84)
 
 # 6.0.35 2021-06-02
@@ -23,8 +31,8 @@
  - 2021-04-13 Updated libwww-perl (LWP::UserAgent et al). Thanks to Renée Bäcker (@reneeb) [#40](https://github.com/znuny/Znuny/pull/40)
  - 2021-04-13 Updated cpan-lib LWP::Protocol::https. Thanks to Renée Bäcker (@reneeb) [#39](https://github.com/znuny/Znuny/pull/39)
  - 2021-04-13 Fixed missing spacing when adding new values to dynamic field dropdowns in configuration. Thanks to maxence (@tipue-dev) [#52](https://github.com/znuny/Znuny/pull/52)
- - 2021-03-18 Added HTML filter to output of localized date/time data which does not explicitly contain date/time values.
- - 2021-03-18 Limited evaluation of ticket column data as date/time to specific date/time string format in Kernel/Output/HTML/TicketOverview/Small.pm.
+ - 2021-03-18 Added HTML filter to output of localized date/time data which does not explicitly contain date/time values. [ZSA-2021-06](https://github.com/znuny/Znuny/commit/b67e43f73dbb3c029504a082c7807677ed091d23)
+ - 2021-03-18 Limited evaluation of ticket column data as date/time to specific date/time string format in Kernel/Output/HTML/TicketOverview/Small.pm. [ZSA-2021-03](https://github.com/znuny/Znuny/commit/b67e43f73dbb3c029504a082c7807677ed091d23)
  - 2021-03-16 Removed duplicated code. Thanks to Renée Bäcker (@reneeb). [#33](https://github.com/znuny/Znuny/pull/33)
  - 2021-03-16 Fixed minor syntax issues: replaced ',' with ';'. Thanks to Renée Bäcker (@reneeb). [#32](https://github.com/znuny/Znuny/pull/32)
  - 2021-03-16 Fixed bug#[14622](https://bugs.otrs.org/show_bug.cgi?id=14622) - Wrong navigation group for Frontend::Module###AdminAppointmentImport and Frontend::NavBarModule###2-AdminFavourites admin modules
