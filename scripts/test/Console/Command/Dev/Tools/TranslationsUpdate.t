@@ -58,6 +58,7 @@ my @Tests = (
         Parameter => [ '--language=de', '--generate-po', '--module-directory', $ModuleDir ],
         Data      => {
             TemplateFile => '<h1>[% Translate("TranslationsUpdate") | html %]</h1>',
+            POTFile      => ' ',
         },
         ExitCode => 0,
         STDOUT   => 'Starting...',
@@ -158,15 +159,17 @@ for my $Test (@Tests) {
 
         $Self->True(
             $TemplateContent,
-            'Template.tt exists',
+            "$ModuleDir/Template.tt exists",
         );
+
         $Self->True(
             $POTContent,
-            'TranslationsUpdate.pot exists',
+            "$I18nDir/TranslationsUpdate.pot exists",
         );
+
         $Self->True(
             $LanguageContent,
-            'de_TranslationsUpdate.pm exists',
+            "$LanguageDir/de_TranslationsUpdate.pm exists",
         );
 
     }
