@@ -767,6 +767,7 @@ sub WritePOFile {
             );
         }
     }
+
     # Theoretically we could now also check for removed strings, but since the translations
     #   are handled by Weblate, this will not be needed as Weblate will handle that for us.
     Locale::PO->save_file_fromarray( $Param{TargetPOFile}, $POEntries )

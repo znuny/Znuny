@@ -1581,7 +1581,7 @@ my @Tests = (
         },
         ExpectedReturnData => {
             Success => 1,
-            Data => {
+            Data    => {
                 Key => 'Value',
             },
         },
