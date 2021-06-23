@@ -1,8 +1,33 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <otrs_config version="2.0" init="Application">
+    <!--
+        General settings
+    -->
+    <Setting Name="Loader::Agent::CommonJS###888-Znuny" Required="1" Valid="1">
+        <Description Translatable="1">List of JS files to always be loaded for the agent interface.</Description>
+        <Navigation>Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>Znuny.Form.Input.js</Item>
+                <Item>Znuny.Form.Generic.js</Item>
+                <Item>Znuny.DynamicField.Webservice.js</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Customer::CommonJS###888-Znuny" Required="1" Valid="1">
+        <Description Translatable="1">List of JS files to always be loaded for the customer interface.</Description>
+        <Navigation>Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>Znuny.Form.Input.js</Item>
+                <Item>Znuny.Form.Generic.js</Item>
+                <Item>Znuny.DynamicField.Webservice.js</Item>
+            </Array>
+        </Value>
+    </Setting>
 
     <!--
-        Znuny4OTRS-Repo
+        Repositories
     -->
     <Setting Name="PackageRepositoryURLSchema" Required="1" Valid="1">
         <Description Translatable="1">Access package repositories via HTTP or HTTPS.</Description>
@@ -182,7 +207,7 @@
     </Setting>
 
     <!--
-        Znuny4OTRS-AdvancedGI
+        Generic interface
     -->
     <Setting Name="GenericInterface::Invoker::Module###Znuny::Generic" Required="1" Valid="1">
         <Description Translatable="1">GenericInterface module registration for the invoker layer.</Description>
@@ -294,6 +319,165 @@
                     </Hash>
                 </DefaultItem>
             </Array>
+        </Value>
+    </Setting>
+
+    <!--
+        Dynamic field web service
+    -->
+    <Setting Name="DynamicFields::Driver###WebserviceText" Required="1" Valid="1">
+        <Description Translatable="1">Dynamic field backend registration.</Description>
+        <Navigation>Core::DynamicFields::DriverRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="DisplayName" Translatable="1">Webservice (Text)</Item>
+                <Item Key="Module">Kernel::System::DynamicField::Driver::WebserviceText</Item>
+                <Item Key="ConfigDialog">AdminDynamicFieldWebservice</Item>
+                <Item Key="Config">
+                    <Hash>
+                        <Item Key="DefaultValue"></Item>
+                        <Item Key="Link"></Item>
+                        <Item Key="LinkPreview"></Item>
+                        <Item Key="Webservice">Webservice</Item>
+                        <Item Key="InvokerSearch">Invoker</Item>
+                        <Item Key="InvokerGet">Invoker</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="DynamicFields::Driver###WebserviceMultiselect" Required="0" Valid="1">
+        <Description Translatable="1">Dynamic field backend registration.</Description>
+        <Navigation>Core::DynamicFields::DriverRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="DisplayName" Translatable="1">Webservice (Multiselect)</Item>
+                <Item Key="Module">Kernel::System::DynamicField::Driver::WebserviceMultiselect</Item>
+                <Item Key="ConfigDialog">AdminDynamicFieldWebservice</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Module###AJAXDynamicFieldWebservice" Required="1" Valid="1">
+        <Description Translatable="1">Frontend module for the agent interface that provides the AJAX interface for the Webservice dynamic field backends.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="NavBarName">Web service autocompletion</Item>
+                    <Item Key="Title" Translatable="1">Webservice dynamic field AJAX interface</Item>
+                    <Item Key="Description" Translatable="1">AJAX interface for the Webservice dynamic field backends.</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="CustomerFrontend::Module###Znuny4OTRSDynamicFieldWebserviceAJAX" Required="1" Valid="1">
+        <Description Translatable="1">Frontend module for the customer interface that provides the AJAX interface for the Webservice dynamic field backends.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="NavBarName">Web service autocompletion</Item>
+                    <Item Key="Title" Translatable="1">Webservice dynamic field AJAX interface</Item>
+                    <Item Key="Description" Translatable="1">AJAX interface for the Webservice dynamic field backends.</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::EventModulePost###999-DynamicFieldWebservice" Required="0" Valid="1">
+        <Description Translatable="1">Ticket event module that stores values of the selected web service record into the configured additional dynamic fields.</Description>
+        <Navigation>Core::Event::Ticket</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Ticket::Event::DynamicFieldWebservice</Item>
+                <Item Key="Transaction">1</Item>
+                <Item Key="Event">TicketDynamicFieldUpdate</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="GenericInterface::Invoker::Module###Test::DynamicFieldWebservice::TestGet" Required="0" Valid="0">
+        <Description Translatable="1">GenericInterface module registration for the invoker layer.</Description>
+        <Navigation>GenericInterface::Invoker::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name">TestGet</Item>
+                <Item Key="Controller">Test::DynamicFieldWebservice</Item>
+                <Item Key="ConfigDialog">AdminGenericInterfaceInvokerDefault</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="GenericInterface::Invoker::Module###Test::DynamicFieldWebservice::TestSearch" Required="0" Valid="0">
+        <Description Translatable="1">GenericInterface module registration for the invoker layer.</Description>
+        <Navigation>GenericInterface::Invoker::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name">TestSearch</Item>
+                <Item Key="Controller">Test::DynamicFieldWebservice</Item>
+                <Item Key="ConfigDialog">AdminGenericInterfaceInvokerDefault</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Module###AdminDynamicFieldWebservice" Required="1" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Admin</Item>
+                    <Item Key="Title" Translatable="1">Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect</Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AdminDynamicFieldWebservice###003-DynamicFieldWebservice" Required="1" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.Agent.Admin.DynamicField.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.DynamicField.js</Item>
+                        <Item>Core.Agent.Admin.DynamicFieldText.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketZoom###HideWebserviceDynamicFieldsWithoutDisplayValue" Required="1" Valid="1">
+        <Description Translatable="1">It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.</Description>
+        <Navigation>Core::Znuny4OTRS::DynamicFieldWebservice</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
         </Value>
     </Setting>
 </otrs_config>

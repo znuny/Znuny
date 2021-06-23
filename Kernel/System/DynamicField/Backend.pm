@@ -2156,7 +2156,7 @@ sub ValueLookup {
 
 =head2 HasBehavior()
 
-checks if the dynamic field as an specified behavior
+checks if the dynamic field has a specific behavior
 
     my $Success = $BackendObject->HasBehavior(
         DynamicFieldConfig => $DynamicFieldConfig,       # complete config of the DynamicField

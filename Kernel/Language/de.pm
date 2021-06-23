@@ -52,6 +52,90 @@ sub Data {
         "Mapping of Znuny::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Different fields can be omitted by separating them by ';'."
             => "Mapping von Znuny::Generic-Invoker-Name (Schlüssel) zu einer Liste von Feldern (Inhalt), die aus dem Request entfernt werden. Felder müssen in der folgenden Form angegeben werden: Feld1->Feld2;Feld3->Feld4->Feld5;Feld6. Eine verschachtelte Datenstruktur kann also durch Verbindung der Felder mit '->' angegeben werden. Verschiedene Felder je Invoker können entfernt werden, indem sie mit ';' voneinander getrennt werden. Bitte beachten Sie die Dokumentation des Pakets für weitere Informationen.",
 
+        # DynamicFieldWebservice
+        'Webservice (Text)'                                                          => 'Webservice (Text)',
+        'Webservice (Multiselect)'                                                   => 'Webservice (Mehrfachauswahl)',
+        'Dynamic field backend registration.'                                        => 'Registrierung eines Dynamic-Field-Backends.',
+        'Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect' => 'Admin-Konfigurationsdialog für die dynamischen Feldtypen WebserviceText und WebserviceMultiselect',
+
+        'Frontend module for the agent interface that provides the AJAX interface for the Webservice dynamic field backends.'
+            => 'Frontend-Modul für die Agentenschnittstelle, das die AJAX-Schnittstelle für die Webservice-Dynamic-Field-Backends bereitstellt.',
+        'Frontend module for the customer interface that provides the AJAX interface for the Webservice dynamic field backends.'
+            => 'Frontend-Modul für die Kundenschnittstelle, das die AJAX-Schnittstelle für die Webservice-Dynamic-Field-Backends bereitstellt.',
+        'Webservice dynamic field AJAX interface' => 'AJAX-Schnittstelle für dynamische Webservice-Felder',
+        'AJAX interface for the webservice dynamic field backends.' => 'AJAX-Schnittstelle für die Webservice-Dynamic-Field-Backends.',
+
+        'Ticket event module that stores values of the selected web service record into the configured additional dynamic fields.'
+            => 'Ticket-Event-Modul zur Speicherung von Werten des gewählten Webservice-Datensatzes in den konfigurierten zusätzlichen dynamischen Feldern.',
+
+        'Web service which will be used for this dynamic field.' => 'Webservice, der für dieses dynamische Feld verwendet werden soll.',
+
+        'InvokerSearch which will be used for this dynamic field. Searches for the SearchTerm(s) and returns an array as result. Note: The invoker needs to be enabled in the web service you specified above.'
+            => 'Invoker, welcher für dieses dynamische Feld verwendet werden soll. Sucht nach dem SearchTerm(s) und erhält ein Array als Ergebnis zurück. Hinweis: Der Invoker muss im oben angegebenen Webservice aktiviert sein.'.
+
+        'InvokerGet which will be used for this dynamic field. Searches for the key and value combination (e.g. ID = 1) and returns a hash as result. Note: The invoker needs to be enabled in the web service you specified above.'
+            => 'Invoker, welcher für dieses dynamische Feld verwendet werden soll. Sucht nach der Key-Value-Kombination (z. B. ID = 1) und erhält einen Hash als Ergebnis zurück. Hinweis: Der Invoker muss im oben angegebenen Webservice aktiviert sein.',
+
+        'Backend which will be used for this dynamic field.' => 'Backend, welches für dieses dynamische Feld verwendet werden soll.',
+        'Backend documentation' => 'Backend-Dokumentation.',
+
+        'Key for search' => 'Schlüssel für die Suche',
+        'The keys (separated by comma) that will be searched when using the autocomplete while entering a value for the dynamic field.'
+            => 'Schlüssel (kommasepariert), die bei Eingabe eines Werts im dynamischen Feld durchsucht werden.',
+
+        'Key for stored value' => 'Schlüssel für den gespeicherten Wert',
+        'The key whose value will be stored in the dynamic field.' => 'Schlüssel, dessen Wert im dynamischen Feld gespeichert wird.',
+
+        'Key to display' => 'Schlüssel zur Anzeige',
+
+        'The keys (separated by comma) that will be shown when the value of the dynamic field is being displayed. This also affects the value displayed in the autocomplete field when entering a value. If this field is left empty, the stored value from above will be displayed.'
+            => 'Schlüssel (kommasepariert), deren Werte bei Ausgabe des dynamischen Felds angezeigt werden. Dies beeinflusst auch den angezeigten Wert bei der Eingabe per Auto-Complete. Wenn diese Konfigurationsoption leer gelassen wird, wird der im dynamischen Feld gespeicherte Wert angezeigt.',
+
+        "Separator to display between multi-key values" => 'Trennzeichen zur Anzeige zwischen mehreren Schlüsselwerten',
+        "The separator to show between the values if there's more than one key configured to be displayed above. If left empty, a single space will be used as separator. Use <space> to add spaces."
+            => "Trennzeichen, das zwischen Anzeigewerten angezeigt wird, wenn oben mehr als ein Schlüssel zur Anzeige konfiguriert ist. Wenn diese Konfigurationsoption leer gelassen wird, die ein Leerzeichen als Trennzeichen verwendet. Benutzen Sie <space>, um Leerzeichen zu konfigurieren.",
+
+        'Maximum number of results for web service queries, e.g. for autcomplete selection list.' => 'Maximale Anzahl von Ergebnissen für Webservice-Abfragen, z. B. für die automatische Vervollständigung der Auswahlliste.',
+
+        'Autocomplete min. input length' => 'Min. Länge für Autovervollständigung'.
+        'Minimum length of input for autocomplete field to trigger search.' => 'Mindestlänge der Eingabe im Autocomplete-Feld, um die Suche auszulösen.',
+
+        'Query delay' => 'Abfrage-Verzögerung',
+        'Delay (in milliseconds) until the AJAX request will be sent.' => 'Verzögerung (in Millisekunden) bis der AJAX-Request abgeschickt wird.',
+
+        'Autocompletion for search fields' => 'Autovervollständigung für Suchfelder',
+        'Use autocompletion for search fields instead of a static selection of values that are currently selected in OTRS (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch.'
+            => 'Autovervollständigung für Suchfelder benutzen statt statischer Auswahl aktuell in OTRS gewählter Werte (in Tickets, Artikeln, etc.). Dies verbessert die Performance, sofern mehrere tausend Werte des dynamischen Felds gewählt wurden. Diese Einstellungen hat keine Auswirkungen auf die Suchfelder, die in AgentTicketSearch und CustomerTicketSearch angezeigt werden.',
+
+        'Input field width' => 'Breite des Eingabefelds',
+        'Width of the input field (percentage).' => 'Breite des Eingabefelds (in Prozent).',
+
+        'Additional dynamic field storage' => 'Zusätzliche dynamische Felder befüllen',
+        'Add dynamic field' => 'Dynamisches Feld hinzufügen',
+        'These dynamic fields are also filled with values from the same web service record.' => 'Diese dynamischen Felder werden ebenfalls mit Werten aus demselben Webservice-Datensatz befüllt.',
+
+        'Default search term'                            => 'Standardwert für die Suche',
+        'This is the default term for the click search.' => 'Dies ist der Standardbegriff für die Klicksuche.',
+
+        'Initial default search term'                              => 'Initialer Standardwert für die Suche',
+        'This is the default search term when the mask is loaded.' => 'Dies ist der Standardbegriff für die Suche, wenn die Maske geladen wird.',
+
+        'Template Type' => 'Vorlagentyp',
+        'Word wrap' => 'Zeilenumbruch',
+        'This configuration determines how the values of the dynamic field are output in templates or masks.' => 'Diese Konfiguration legt fest, wie die Werte des dynamischen Felds in Templates oder Masken ausgegeben werden.',
+
+        'StoredValue'  => 'gespeicherter Wert',
+        'DisplayValue' => 'Anzeigewert',
+
+        'Test settings'                                                              => 'Einstellungen testen',
+        'Error while testing configuration. Please check the configuration.'         => 'Fehler beim Testen der Konfiguration. Bitte überprüfen Sie die Konfiguration.',
+        'Test was successful.'                                                       => 'Test war erfolgreich.',
+        'Test this dynamic field exactly as it is displayed in the editing dialogs.' => 'Testen Sie dieses dynamische Feld exakt so wie es in den Bearbeitungsdialogen angezeigt wird.',
+        'Enter a search term to test the current settings.'                          => 'Geben Sie einen Suchbegriff ein, um aktuellen Einstellungen zu testen.',
+        'Click "Test settings"'                                                      => 'Klicken Sie auf "Einstellungen testen"',
+
+        "It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty."
+            => 'Es kann vorkommen, dass ein dynamisches Feld des Typs WebserviceText oder WebserviceMultiselect auf einen Wert gesetzt wird, der aus einem konfigurierten Webservice geholt wird, aber im Webservice-Datensatz kein Wert in demjenigen Feld gesetzt ist, das als Anzeigewert konfiguriert ist. Aktivieren Sie diese Einstellung, um diese dynamischen Felder im Ticketinformations-Widget in AgentTicketZoom auszublenden, damit sie nicht als leer angezeigt werden.',
 
         # AdminGenericInterfaceTransportHTTPSOAP
         'Omit namespace prefix'  => 'Namespace-Präfix weglassen',

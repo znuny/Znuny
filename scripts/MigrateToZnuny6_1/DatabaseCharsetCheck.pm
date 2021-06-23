@@ -40,7 +40,7 @@ Check for initial conditions for running this migration step.
 
 Returns 1 on success:
 
-    my $Result = $DBUpdateObject->CheckPreviousRequirement();
+    my $Result = $MigrateToZnunyObject->CheckPreviousRequirement();
 
 =cut
 
