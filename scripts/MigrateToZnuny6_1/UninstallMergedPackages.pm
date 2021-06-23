@@ -53,6 +53,9 @@ sub Run {
     PACKAGENAME:
     for my $PackageName (
         qw(
+        Znuny4OTRS-DynamicFieldWebservice
+        Znuny4OTRS-GIArticleSend
+        Znuny4OTRS-GenericInterfaceREST
         Znuny4OTRS-AdvancedGI
         Znuny4OTRS-Repo
         )
