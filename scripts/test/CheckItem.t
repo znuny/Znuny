@@ -206,6 +206,78 @@ for my $Test (@Tests) {
     }
 }
 
+# AreEmailAddressesValid()
+@Tests = (
+
+    # Invalid
+    {
+        EmailAddresses => 'test',
+        Valid          => 0,
+    },
+    {
+        EmailAddresses => [
+            'test',
+        ],
+        Valid => 0,
+    },
+    {
+        EmailAddresses => 'test@somehost.com, test',
+        Valid          => 0,
+    },
+    {
+        EmailAddresses => [
+            'test@somehost.com',
+            'test',
+        ],
+        Valid => 0,
+    },
+
+    # Valid
+    {
+        EmailAddresses => 'test@somehost.com',
+        Valid          => 1,
+    },
+    {
+        EmailAddresses => [
+            'test@somehost.com',
+        ],
+        Valid => 1,
+    },
+    {
+        EmailAddresses => 'test@somehost.com, test2@somehost.com',
+        Valid => 1,
+    },
+    {
+        EmailAddresses => [
+            'test@somehost.com',
+            'test2@somehost.com',
+        ],
+        Valid => 1,
+    },
+);
+
+for my $Test (@Tests) {
+    my $Valid = $CheckItemObject->AreEmailAddressesValid( EmailAddresses => $Test->{EmailAddresses} );
+
+    my $TestEmailAddresses = $Test->{EmailAddresses};
+    if ( ref $Test->{EmailAddresses} eq 'ARRAY' ) {
+        $TestEmailAddresses = join ', ', @{ $Test->{EmailAddresses} };
+    }
+
+    if ( $Test->{Valid} ) {
+        $Self->True(
+            scalar $Valid,
+            "AreEmailAddressesValid() - $TestEmailAddresses",
+        );
+    }
+    else {
+        $Self->False(
+            scalar $Valid,
+            "AreEmailAddressesValid() - $TestEmailAddresses",
+        );
+    }
+}
+
 # string clean tests
 @Tests = (
     {

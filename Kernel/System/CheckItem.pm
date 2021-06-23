@@ -13,6 +13,7 @@ use strict;
 use warnings;
 
 use Email::Valid;
+use Mail::Address;
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -220,6 +221,54 @@ sub CheckEmail {
         $Self->{Error} = "invalid $Param{Address} ($Error)! ";
         return;
     }
+}
+
+=head2 AreEmailAddressesValid()
+
+    Checks if the given string contains only valid email address(es).
+
+    my $EmailAddressesAreValid = $UtilObject->AreEmailAddressesValid(
+        EmailAddresses => 'test@example.org, test2@example.org',
+
+        # or as array ref
+        EmailAddresses => [
+            'test@example.org',
+            'test2@example.org',
+        ],
+
+        # also works with just one address
+        EmailAddresses => 'test@example.org',
+
+        # or as array ref
+        EmailAddresses => ['test@example.org'],
+    );
+
+    Returns true value if the given string only contains valid email addresses.
+
+=cut
+
+sub AreEmailAddressesValid {
+    my ( $Self, %Param ) = @_;
+
+    return if !defined $Param{EmailAddresses};
+
+    if ( ref $Param{EmailAddresses} eq 'ARRAY' ) {
+        $Param{EmailAddresses} = join ', ', @{ $Param{EmailAddresses} };
+    }
+
+    my @EmailAddresses = Mail::Address->parse( $Param{EmailAddresses} );
+    return if !@EmailAddresses;
+
+    EMAILADDRESS:
+    for my $EmailAddress (@EmailAddresses) {
+        my $EmailAddressIsValid = $Self->CheckEmail(
+            Address => $EmailAddress->address()
+        );
+
+        return if !$EmailAddressIsValid;
+    }
+
+    return 1;
 }
 
 =head2 StringClean()
