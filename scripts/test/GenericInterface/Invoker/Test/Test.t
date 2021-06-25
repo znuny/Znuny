@@ -276,7 +276,7 @@ my @InvokerHandleResponseTests = (
 );
 
 for my $Test (@InvokerHandleResponseTests) {
-    my %InvokerParams = {};
+    my %InvokerParams = ();
     $InvokerParams{Data}                 = $Test->{Data}                 || undef;
     $InvokerParams{ResponseSuccess}      = $Test->{ResponseSuccess}      || undef;
     $InvokerParams{ResponseErrorMessage} = $Test->{ResponseErrorMessage} || undef;

@@ -979,8 +979,7 @@ sub _JobRunTicket {
         );
 
         if ( IsHashRefWithData( \%Ticket ) ) {
-
-            my %CustomerUserData = {};
+            my %CustomerUserData = ();
             if ( IsStringWithData( $Ticket{CustomerUserID} ) ) {
                 %CustomerUserData = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserDataGet(
                     User => $Ticket{CustomerUserID},
