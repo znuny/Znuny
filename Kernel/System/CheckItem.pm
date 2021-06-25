@@ -273,15 +273,16 @@ sub AreEmailAddressesValid {
 
 =head2 StringClean()
 
-clean a given string
+clean a given string.
 
     my $StringRef = $CheckItemObject->StringClean(
-        StringRef         => \'String',
-        TrimLeft          => 0,  # (optional) default 1
-        TrimRight         => 0,  # (optional) default 1
-        RemoveAllNewlines => 1,  # (optional) default 0
-        RemoveAllTabs     => 1,  # (optional) default 0
-        RemoveAllSpaces   => 1,  # (optional) default 0
+        StringRef               => \'String',
+        TrimLeft                => 0,  # (optional) default 1
+        TrimRight               => 0,  # (optional) default 1
+        RemoveAllNewlines       => 1,  # (optional) default 0
+        RemoveAllTabs           => 1,  # (optional) default 0
+        RemoveAllSpaces         => 1,  # (optional) default 0
+        ReplaceWithWhiteSpace   => 1,  # (optional) default 0
     );
 
 =cut
@@ -315,7 +316,7 @@ sub StringClean {
     $Param{TrimRight} = defined $Param{TrimRight} ? $Param{TrimRight} : 1;
 
     my %TrimAction = (
-        RemoveAllNewlines => qr{ [\n\r\f] }xms,
+        RemoveAllNewlines => qr{ (\n\r|\n|\r|\f)+ }xms,
         RemoveAllTabs     => qr{ \t       }xms,
         RemoveAllSpaces   => qr{ [ ]      }xms,
         TrimLeft          => qr{ \A \s+   }xms,
@@ -325,8 +326,18 @@ sub StringClean {
     ACTION:
     for my $Action ( sort keys %TrimAction ) {
         next ACTION if !$Param{$Action};
+        my $ReplaceWith = '';
 
-        ${ $Param{StringRef} } =~ s{ $TrimAction{$Action} }{}xmsg;
+        # Check if Newline or Tabs should be replaced with a whitespace
+        if (
+            $Param{ReplaceWithWhiteSpace}
+            && ( $Action eq 'RemoveAllNewlines' || $Action eq 'RemoveAllTabs' )
+            && !$Param{RemoveAllSpaces}
+            )
+        {
+            $ReplaceWith = ' ';
+        }
+        ${ $Param{StringRef} } =~ s{ $TrimAction{$Action} }{$ReplaceWith}xmsg;
     }
 
     return $Param{StringRef};
