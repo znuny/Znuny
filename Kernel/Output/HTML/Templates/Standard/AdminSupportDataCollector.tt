@@ -12,6 +12,7 @@
     [% BreadcrumbPath = [
             {
                 Name => Translate('Support Data Collector'),
+                Link => Env("Action"),
             },
         ]
     %]
