@@ -53,6 +53,7 @@ sub Run {
     PACKAGENAME:
     for my $PackageName (
         qw(
+        Znuny4OTRS-TimeAccountingWebservice
         Znuny4OTRS-DynamicFieldWebservice
         Znuny4OTRS-GIArticleSend
         Znuny4OTRS-GenericInterfaceREST

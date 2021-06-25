@@ -231,8 +231,12 @@ sub _TasksGet {
             Module  => 'MigrateSysConfigSettings',
         },
         {
-            Message => 'Migrate web service configuration',
-            Module  => 'MigrateWebServiceConfiguration',
+            Message => 'Migrate webservice configuration',
+            Module  => 'MigrateWebserviceConfiguration',
+        },
+        {
+            Message => 'Migrate groups',
+            Module  => 'MigrateGroups',
         },
 
         # NOTE: UninstallMergedPackages needs to be called only after

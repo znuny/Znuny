@@ -245,7 +245,7 @@ for my $Test (@Tests) {
     },
     {
         EmailAddresses => 'test@somehost.com, test2@somehost.com',
-        Valid => 1,
+        Valid          => 1,
     },
     {
         EmailAddresses => [
