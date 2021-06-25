@@ -509,7 +509,9 @@ sub _Overview {
 
     $LayoutObject->Block(
         Name => 'Overview',
-        Data => {},
+        Data => {
+            OverviewLink => $Self->{Action} . ';Search=' . $Param{Search},
+        },
     );
 
     $LayoutObject->Block( Name => 'ActionList' );

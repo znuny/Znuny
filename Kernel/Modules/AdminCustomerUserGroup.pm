@@ -566,7 +566,7 @@ sub _Overview {
         Name => 'Overview',
         Data => {
             %Param,
-            OverviewLink => $Self->{Action},
+            OverviewLink => $Self->{Action} . ';CustomerUserSearch=' . $Param{CustomerUserSearch},
         }
     );
 
@@ -697,7 +697,9 @@ sub _Disabled {
 
     $LayoutObject->Block(
         Name => 'Overview',
-        Data => {},
+        Data => {
+            OverviewLink => $Self->{Action},
+        },
     );
 
     $LayoutObject->Block( Name => 'Disabled' );
