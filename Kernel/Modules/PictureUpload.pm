@@ -187,10 +187,11 @@ sub Run {
     my @AttachmentMeta = $UploadCacheObject->FormIDGetAllFilesMeta(
         FormID => $FormID
     );
+
     ATTACHMENT:
     for my $Attachment (@AttachmentMeta) {
         next ATTACHMENT if ($File{Filename} ne $Attachment->{Filename})
-            && !(defined($Attachment->{FilenameOrig}) && ($File{Filename} ne $Attachment->{FilenameOrig}));
+            && !(defined($Attachment->{FilenameOrig}) && ($File{Filename} eq $Attachment->{FilenameOrig}));
         $File{Filename} = $Attachment->{Filename};
         $ContentIDNew = $Attachment->{ContentID};
         last ATTACHMENT;
