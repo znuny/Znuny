@@ -187,7 +187,6 @@ sub Run {
     my @AttachmentMeta = $UploadCacheObject->FormIDGetAllFilesMeta(
         FormID => $FormID
     );
-
     ATTACHMENT:
     for my $Attachment (@AttachmentMeta) {
         next ATTACHMENT if ($File{Filename} ne $Attachment->{Filename})
