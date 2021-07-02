@@ -1361,5 +1361,50 @@ Znuny.Form.Input = (function (TargetNS) {
       return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
     }
 
+    //
+    // Shows/hides pending time selection depending on if a pending state was
+    // selected.
+    //
+    function InitPendingStateDateTimeSelectionToggle() {
+        var PendingStateIDs = Core.Config.Get('PendingStateIDs');
+
+        if (!PendingStateIDs || !PendingStateIDs.length) {
+            return;
+        }
+
+        $('#NextStateID, #NewStateID, #StateID, #ComposeStateID')
+            .off('change.PendingStateDateTimeSelectionToggle')
+            .on(
+                'change.PendingStateDateTimeSelectionToggle',
+                function () {
+                    var SelectedStateID = $(this).val(),
+                        PendingStateIDsFound = [];
+
+                    PendingStateIDsFound = jQuery.grep(
+                        PendingStateIDs,
+                        function(StateID) {
+                            return StateID == SelectedStateID;
+                        }
+                    );
+
+                    if (PendingStateIDsFound.length) {
+                        $('#Month').parent().prev().show();
+                        $('#Month').parent().show();
+                        return;
+                    }
+
+                    $('#Month').parent().prev().hide();
+                    $('#Month').parent().hide();
+                }
+            )
+            .trigger('change.PendingStateDateTimeSelectionToggle');
+    }
+
+    TargetNS.Init = function () {
+        InitPendingStateDateTimeSelectionToggle();
+    }
+
+    Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');
+
     return TargetNS;
 }(Znuny.Form.Input || {}));
