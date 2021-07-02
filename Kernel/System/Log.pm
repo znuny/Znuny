@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -56,6 +57,9 @@ my %LogLevel = (
     debug  => 2,
 );
 
+# Reversed LogLevel hash for faster searching for loglevel name with its number.
+my %LogLevelReverse = ();
+
 sub new {
     my ( $Type, %Param ) = @_;
 
@@ -65,6 +69,11 @@ sub new {
 
     if ( !$Kernel::OM ) {
         Carp::confess('$Kernel::OM is not defined, please initialize your object manager');
+    }
+
+    # Fill log level reverse mapping.
+    while (my ($k, $v) = each %LogLevel) {
+        $LogLevelReverse{$v} = $k;
     }
 
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
@@ -367,6 +376,44 @@ sub Dumper {
     );
 
     return 1;
+}
+
+=head2 LogLevelStr2Num()
+
+Get numerical representation of given log level name.
+
+    my $LogLevelNum = $Log->LogLevelStr2Num(
+        LogLevelStr => 'debug'
+    );
+
+Returns empty if unknown numerical representation given.
+
+=cut
+
+sub LogLevelStr2Num {
+    my ( $Self, %Param, ) = @_;
+
+    return if !$Param{LogLevelStr};
+    return $LogLevel{ lc($Param{LogLevelStr}) };
+}
+
+=head2 LogLevelNum2Str()
+
+Get string representation of given log level number.
+
+    my $LogLevelStr = $Log->LogLevelNum2Str(
+        LogLevelNum => 'debug'
+    );
+
+Returns empty if unknown string representation given.
+
+=cut
+
+sub LogLevelNum2Str {
+    my ( $Self, %Param, ) = @_;
+
+    return if !$Param{LogLevelNum};
+    return $LogLevelReverse{ $Param{LogLevelNum} };
 }
 
 1;

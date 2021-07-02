@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -280,10 +281,21 @@ sub ObjectLog {
         return $Self->_LogError("Object Log needs to have an open Log Type.");
     }
 
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
     $Param{Priority} //= 'Info';
 
-    # In case of error also add it to the system log.
-    if ( $Param{Priority} eq 'Error' ) {
+    # Get current message log level numerical representation (debug by default).
+    my $LogLevelNum = $LogObject->LogLevelStr2Num( LogLevelStr => $Param{Priority} )
+        // $LogObject->LogLevelStr2Num( LogLevelStr => 'debug' );
+
+    # Get minimum communication log level to be sent to syslog also (error if not defined in SysConfig).
+    my $SyslogMinimumLogLevelNum =
+        $LogObject->LogLevelStr2Num( LogLevelStr => $Kernel::OM->Get('Kernel::Config')->Get('CommunicationLog::SyslogMinimumLogLevel') )
+        // $LogObject->LogLevelStr2Num( LogLevelStr => 'error' );
+
+    # Send message to syslog also if level is equal or greater than minimum.
+    if ( $LogLevelNum >= $SyslogMinimumLogLevelNum ) {
         my @Identification = (
             'ID:' . $Self->CommunicationIDGet(),
             'AccountType:' . ( $Self->{AccountType} || '-' ),
@@ -293,9 +305,9 @@ sub ObjectLog {
             'ObjectLogType:' . $Param{ObjectLogType},
             'ObjectLogID:' . $ObjectLogID,
         );
-
-        $Self->_LogError(
-            sprintf(
+        $LogObject->Log(
+            Priority => $LogObject->LogLevelNum2Str( LogLevelNum => $LogLevelNum ),
+            Message  => sprintf(
                 'CommunicationLog(%s)' . '::%s => %s',
                 join( ',', @Identification, ),
                 $Param{Key},
