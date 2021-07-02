@@ -52,6 +52,12 @@ sub Data {
         "Mapping of Znuny::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Different fields can be omitted by separating them by ';'."
             => "Mapping von Znuny::Generic-Invoker-Name (Schlüssel) zu einer Liste von Feldern (Inhalt), die aus dem Request entfernt werden. Felder müssen in der folgenden Form angegeben werden: Feld1->Feld2;Feld3->Feld4->Feld5;Feld6. Eine verschachtelte Datenstruktur kann also durch Verbindung der Felder mit '->' angegeben werden. Verschiedene Felder je Invoker können entfernt werden, indem sie mit ';' voneinander getrennt werden. Bitte beachten Sie die Dokumentation des Pakets für weitere Informationen.",
 
+        # WebUserAgent
+        'Domains accessed through WebUserAgent module for which no proxy should be used. Separate domains by semicolon.'
+            => 'Domains, auf die durch das WebUserAgent-Modul zugegriffen wird und für die kein Proxy verwendet werden soll. Mehrere Domains können durch Semikolon getrennt hinterlegt werden.',
+        'User agent string to use for the WebUserAgent module. Leave empty to use the default user agent string.'
+            => 'User-Agent-String zur Verwendung im WebUserAgent-Modul. Leerlassen, um Standard-User-Agent-String zu verwenden.',
+
         # DynamicFieldWebservice
         'Webservice (Text)'                                                          => 'Webservice (Text)',
         'Webservice (Multiselect)'                                                   => 'Webservice (Mehrfachauswahl)',

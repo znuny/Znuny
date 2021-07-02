@@ -496,4 +496,22 @@
         </Value>
     </Setting>
 
+    <!--
+        Web user agent extensions
+    -->
+    <Setting Name="WebUserAgent::NoProxy" Required="0" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Domains accessed through WebUserAgent module for which no proxy should be used. Separate domains by semicolon.</Description>
+        <Navigation>Core::WebUserAgent</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex=""></Item>
+        </Value>
+    </Setting>
+    <Setting Name="WebUserAgent::UserAgent" Required="0" Valid="1" ConfigLevel="205">
+        <Description Translatable="1">User agent string to use for the WebUserAgent module. Leave empty to use the default user agent string.</Description>
+        <Navigation>Core::WebUserAgent</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex=""></Item>
+        </Value>
+    </Setting>
+
 </otrs_config>

@@ -53,6 +53,8 @@ sub Run {
     PACKAGENAME:
     for my $PackageName (
         qw(
+        Znuny4OTRS-WebUserAgent
+        Znuny4OTRS-EnhancedProxySupport
         Znuny4OTRS-TimeAccountingWebservice
         Znuny4OTRS-DynamicFieldWebservice
         Znuny4OTRS-GIArticleSend
