@@ -1362,6 +1362,50 @@ Znuny.Form.Input = (function (TargetNS) {
     }
 
     //
+    // Automatically sets the checkbox of date and datetime dynamic fields
+    // if a date/time (or part of it) was selected.
+    //
+    function InitDynamicFieldDateTimeAutoCheckboxSet() {
+
+        // Note: Also handle input fields because date fields can also be input fields (SysConfig option TimeInputFormat).
+        $('select, input')
+            .off('change.DynamicFieldDateTimeAutoCheckboxSet')
+            .on('change.DynamicFieldDateTimeAutoCheckboxSet', function() {
+                DynamicFieldDateTimeAutoCheckboxSet($(this));
+            }
+        );
+
+        // Take care of AJAX requests, this is e.g. needed in process management.
+        Core.App.Subscribe('Event.AJAX.FunctionCall.Callback', function() {
+            $('select, input')
+                .off('change.DynamicFieldDateTimeAutoCheckboxSet')
+                .on('change.DynamicFieldDateTimeAutoCheckboxSet', function() {
+                    DynamicFieldDateTimeAutoCheckboxSet($(this));
+                }
+            );
+        });
+    }
+
+    function DynamicFieldDateTimeAutoCheckboxSet($Element) {
+        var ElementID = $Element.attr('id'),
+            ElementType,
+            ElementCheckboxID;
+
+        if (!ElementID) return;
+
+        // Only handle dynamic fields.
+        if (!ElementID.match(/^DynamicField/)) return;
+
+        // Check which element of the date input was changed.
+        var ChangedElementType = ElementID.match(/(Day|Month|Year|Hour|Minute)$/);
+        if (!ChangedElementType) return;
+
+        // Set checkbox for changed date input field.
+        ElementCheckboxID = ElementID.replace(ChangedElementType[1], 'Used');
+        $('#' + ElementCheckboxID).prop('checked', true);
+    }
+
+    //
     // Shows/hides pending time selection depending on if a pending state was
     // selected.
     //
@@ -1401,6 +1445,7 @@ Znuny.Form.Input = (function (TargetNS) {
     }
 
     TargetNS.Init = function () {
+        InitDynamicFieldDateTimeAutoCheckboxSet();
         InitPendingStateDateTimeSelectionToggle();
     }
 

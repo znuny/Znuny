@@ -248,6 +248,10 @@ Core.UI.Datepicker = (function (TargetNS) {
                 Element.Month.val(LeadingZero(Month));
                 Element.Day.val(LeadingZero(Day));
             }
+
+            $(Element.Year).trigger('change');
+            $(Element.Month).trigger('change');
+            $(Element.Day).trigger('change');
         };
         Options.beforeShow = function (Input) {
             $(Input).val('');
