@@ -26,6 +26,25 @@
         </Value>
     </Setting>
 
+    <Setting Name="Loader::Agent::CommonCSS###888-Znuny" Required="1" Valid="1">
+        <Description Translatable="1">List of CSS files to always be loaded for the agent interface.</Description>
+        <Navigation>Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>Znuny.LastViews.css</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Customer::CommonCSS###888-Znuny" Required="1" Valid="1">
+        <Description Translatable="1">List of CSS files to always be loaded for the customer interface.</Description>
+        <Navigation>Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>Znuny.LastViews.css</Item>
+            </Array>
+        </Value>
+    </Setting>
+
     <!--
         Repositories
     -->
@@ -378,7 +397,7 @@
             </Item>
         </Value>
     </Setting>
-    <Setting Name="CustomerFrontend::Module###Znuny4OTRSDynamicFieldWebserviceAJAX" Required="1" Valid="1">
+    <Setting Name="CustomerFrontend::Module###AJAXDynamicFieldWebservice" Required="1" Valid="1">
         <Description Translatable="1">Frontend module for the customer interface that provides the AJAX interface for the Webservice dynamic field backends.</Description>
         <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
         <Value>
@@ -475,7 +494,7 @@
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketZoom###HideWebserviceDynamicFieldsWithoutDisplayValue" Required="1" Valid="1">
         <Description Translatable="1">It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.</Description>
-        <Navigation>Core::Znuny4OTRS::DynamicFieldWebservice</Navigation>
+        <Navigation>Core::DynamicFieldWebservice</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
         </Value>
@@ -493,6 +512,252 @@
                 <Item Key="Controller">Ticket</Item>
                 <Item Key="ConfigDialog">AdminGenericInterfaceOperationDefault</Item>
             </Hash>
+        </Value>
+    </Setting>
+
+    <!--
+        Last views
+    -->
+    <Setting Name="LastViews###ActionMapping###Framework" Required="1" Valid="1">
+        <Description Translatable="1">Assignment between action and attributes.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem>
+                    <Hash>
+                        <Item Key=""></Item>
+                    </Hash>
+                </DefaultItem>
+                <!-- TicketCreate -->
+                <Item Key="AgentTicketPhone">
+                    <Hash>
+                        <Item Key="Type">TicketCreate</Item>
+                        <Item Key="Frontend">Agent</Item>
+                        <Item Key="Icon">Phone</Item>
+                        <Item Key="Name">Phone</Item>
+                    </Hash>
+                </Item>
+                <Item Key="AgentTicketEmail">
+                    <Hash>
+                        <Item Key="Type">TicketCreate</Item>
+                        <Item Key="Frontend">Agent</Item>
+                        <Item Key="Icon">Email</Item>
+                        <Item Key="Name">Email</Item>
+                    </Hash>
+                </Item>
+                <Item Key="AgentTicketProcess">
+                    <Hash>
+                        <Item Key="Type">TicketCreate</Item>
+                        <Item Key="Frontend">Agent</Item>
+                        <Item Key="Icon">Process</Item>
+                        <Item Key="Name">Process</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="LastViews###Types###AgentInterface" Required="1" Valid="1">
+        <Description Translatable="1">Possible types for agent interface.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Agent">Agent</Item>
+                <Item Key="Admin">Admin</Item>
+                <Item Key="Ticket">Ticket</Item>
+                <Item Key="TicketCreate">Ticket creation</Item>
+                <Item Key="TicketOverview">Ticket overview</Item>
+                <Item Key="FAQ">FAQ</Item>
+                <Item Key="Customer">Customer</Item>
+                <Item Key="CustomerUser">CustomerUser</Item>
+                <Item Key="Statistics">Statistics</Item>
+                <Item Key="Calendar">Calendar</Item>
+                <Item Key="Appointment">Appointment</Item>
+                <Item Key="Preferences">Preferences</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="LastViews###Types###CustomerInterface" Required="1" Valid="1">
+        <Description Translatable="1">Possible types for customer interface.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Ticket">Ticket</Item>
+                <Item Key="TicketCreate">Ticket Create</Item>
+                <Item Key="TicketOverview">Ticket Overview</Item>
+                <Item Key="FAQ">FAQ</Item>
+                <Item Key="Customer">Customer</Item>
+                <Item Key="CustomerUser">CustomerUser</Item>
+                <Item Key="Preferences">Preferences</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="LastViews###IconMapping" Required="1" Valid="1">
+        <Description Translatable="1">Assignment between type and icon.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Admin">fa fa-cog</Item>
+                <Item Key="Agent">fa fa-user</Item>
+                <Item Key="Appointment">fa fa-calendar</Item>
+                <Item Key="Calendar">fa fa-calendar</Item>
+                <Item Key="Customer">fa fa-building-o</Item>
+                <Item Key="CustomerUser">fa fa-male</Item>
+                <Item Key="Email">fa fa-envelope-o</Item>
+                <Item Key="FAQ">fa fa-comment-o</Item>
+                <Item Key="Overview">fa fa-table</Item>
+                <Item Key="Phone">fa fa-phone</Item>
+                <Item Key="Process">fa fa-sitemap</Item>
+                <Item Key="Public">fa fa-users</Item>
+                <Item Key="Question">fa fa-question</Item>
+                <Item Key="Statistics">fa fa-bar-chart</Item>
+                <Item Key="Ticket">fa fa-ticket</Item>
+                <Item Key="Preferences">fa fa-wrench</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="LastViews###ActionIgnore###Framework" Required="1" Valid="1">
+        <Description Translatable="1">List of actions that will be ignored.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Array>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="LastViews###SubactionIgnore###Framework" Required="1" Valid="1">
+        <Description Translatable="1">List of sub-actions that will be ignored.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Array>
+            </Array>
+        </Value>
+    </Setting>
+
+    <Setting Name="PreferencesGroups###LastViewsLimit" Required="1" Valid="1">
+        <Description Translatable="1">Registers a user preferences module for LastViewsLimit.</Description>
+        <Navigation>Frontend::Agent::View::Preferences</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::Preferences::Generic</Item>
+                <Item Key="PreferenceGroup">Miscellaneous</Item>
+                <Item Key="Label" Translatable="1">Last view - limit</Item>
+                <Item Key="Desc" Translatable="1">Select how many last views should be shown.</Item>
+                <Item Key="Data">
+                    <Hash>
+                        <Item Key="1">1</Item>
+                        <Item Key="2">2</Item>
+                        <Item Key="3">3</Item>
+                        <Item Key="4">4</Item>
+                        <Item Key="5">5</Item>
+                        <Item Key="6">6</Item>
+                        <Item Key="7">7</Item>
+                        <Item Key="8">8</Item>
+                        <Item Key="9">9</Item>
+                    </Hash>
+                </Item>
+                <Item Key="DataSelected">5</Item>
+                <Item Key="PrefKey">UserLastViewsLimit</Item>
+                <Item Key="Prio">8000</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="PreferencesGroups###LastViewsPosition" Required="1" Valid="1">
+        <Description Translatable="1">Registers a user preferences module for LastViewsPosition.</Description>
+        <Navigation>Frontend::Agent::View::Preferences</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::Preferences::Generic</Item>
+                <Item Key="PreferenceGroup">Miscellaneous</Item>
+                <Item Key="Label" Translatable="1">Last view - position</Item>
+                <Item Key="Desc" Translatable="1">Select where to display the last views.</Item>
+                <Item Key="Data">
+                    <Hash>
+                        <Item Key="ToolBar">Tool bar</Item>
+                        <Item Key="Avatar">Avatar</Item>
+                        <Item Key="MenuBar">Menu bar</Item>
+                    </Hash>
+                </Item>
+                <Item Key="DataSelected">Avatar</Item>
+                <Item Key="PrefKey">UserLastViewsPosition</Item>
+                <Item Key="Prio">8000</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="PreferencesGroups###LastViewsType" Required="1" Valid="1">
+        <Description Translatable="1">Registers a user preferences module for LastViewsType.</Description>
+        <Navigation>Frontend::Agent::View::Preferences</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::Preferences::LastViewsTypes</Item>
+                <Item Key="PreferenceGroup">Miscellaneous</Item>
+                <Item Key="Label" Translatable="1">Last view - types</Item>
+                <Item Key="Desc" Translatable="1">Select which types should be displayed.</Item>
+                <Item Key="PrefKey">UserLastViewsTypes</Item>
+                <Item Key="Prio">8000</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="CustomerPreferencesGroups###LastViewsLimit" Required="0" Valid="1">
+        <Description Translatable="1">Registers a user preferences module for LastViewsLimit.</Description>
+        <Navigation>Frontend::Customer::View::Preferences</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::Preferences::Generic</Item>
+                <Item Key="PreferenceGroup">UserProfile</Item>
+                <Item Key="Label" Translatable="1">Last view - limit</Item>
+                <Item Key="Key" Translatable="1">Limit</Item>
+                <Item Key="Desc" Translatable="1">Select how many last views should be shown.</Item>
+                <Item Key="Data">
+                    <Hash>
+                        <Item Key="1">1</Item>
+                        <Item Key="2">2</Item>
+                        <Item Key="3">3</Item>
+                        <Item Key="4">4</Item>
+                        <Item Key="5">5</Item>
+                        <Item Key="6">6</Item>
+                        <Item Key="7">7</Item>
+                        <Item Key="8">8</Item>
+                        <Item Key="9">9</Item>
+                    </Hash>
+                </Item>
+                <Item Key="DataSelected">5</Item>
+                <Item Key="PrefKey">UserLastViewsLimit</Item>
+                <Item Key="Prio">8000</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="CustomerPreferencesGroups###LastViewsType" Required="1" Valid="1">
+        <Description Translatable="1">Registers a user preferences module for LastViewsType.</Description>
+        <Navigation>Frontend::Agent::View::Preferences</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::Preferences::LastViewsTypes</Item>
+                <Item Key="PreferenceGroup">UserProfile</Item>
+                <Item Key="Label" Translatable="1">Last view - types</Item>
+                <Item Key="Key" Translatable="1">Types</Item>
+                <Item Key="Desc" Translatable="1">Select which types should be displayed.</Item>
+                <Item Key="PrefKey">UserLastViewsTypes</Item>
+                <Item Key="Prio">8000</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="PreApplicationModule###PreApplicationLastViews" Required="1" Valid="1">
+        <Description Translatable="1">Pre-application module to store the current view.</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">Kernel::Modules::PreApplicationLastViews</Item>
+        </Value>
+    </Setting>
+    <Setting Name="CustomerPanelPreApplicationModule###PreApplicationLastViews" Required="0" Valid="1">
+        <Description Translatable="1">Pre-application module to store the current view.</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">Kernel::Modules::PreApplicationLastViews</Item>
         </Value>
     </Setting>
 

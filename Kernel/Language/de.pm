@@ -52,6 +52,47 @@ sub Data {
         "Mapping of Znuny::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Different fields can be omitted by separating them by ';'."
             => "Mapping von Znuny::Generic-Invoker-Name (Schlüssel) zu einer Liste von Feldern (Inhalt), die aus dem Request entfernt werden. Felder müssen in der folgenden Form angegeben werden: Feld1->Feld2;Feld3->Feld4->Feld5;Feld6. Eine verschachtelte Datenstruktur kann also durch Verbindung der Felder mit '->' angegeben werden. Verschiedene Felder je Invoker können entfernt werden, indem sie mit ';' voneinander getrennt werden. Bitte beachten Sie die Dokumentation des Pakets für weitere Informationen.",
 
+        # Last views
+        'Assignment between action and attributes.' => 'Zuordnung zwischen Aktion und Attributen.',
+        'Possible types for agent interface.'       => 'Mögliche Typen für das Agenten-Interface.',
+        'Possible types for customer interface.'    => 'Mögliche Typen für das Kunden-Interface.',
+        'Assignment between type and icon.'         => 'Zuordnung zwischen Typ und Icon.',
+        'List of actions that will be ignored.'     => 'Liste von Aktionen, die ignoriert werden.',
+        'List of sub-actions that will be ignored.' => 'Liste von Sub-Aktionen, die ignoriert werden.',
+
+        'Registers a user preferences module for Znuny4OTRSLastViewsLimit.'    => 'Registriert eine Benutzereinstellung für Znuny4OTRSLastViewsLimit.',
+        'Registers a user preferences module for Znuny4OTRSLastViewsPosition.' => 'Registriert eine Benutzereinstellung für Znuny4OTRSLastViewsPosition.',
+        'Registers a user preferences module for Znuny4OTRSLastViewsType.'     => 'Registriert eine Benutzereinstellung für den Znuny4OTRSLastViewsType.',
+
+        'Select which types should be displayed.'     => 'Wählen Sie aus, welche Typen angezeigt werden sollen.',
+        'Last view - types'                           => 'Letzte Ansicht - Typen',
+        'Select how many last views should be shown.' => 'Wählen Sie aus, wie viele letzte Ansichten angezeigt werden sollen.',
+        'Last view - limit'                           => 'Letzte Ansicht - Limit',
+        'Select where to display the last views.'     => 'Wählen Sie aus, wo die letzten Ansichten angezeigt werden sollen.',
+        'Last view - position'                        => 'Letzte Ansicht - Postition',
+
+        'Last viewed' => 'Zuletzt gesehen',
+
+        'Ticket creation' => 'Ticketerstellung',
+        'Tool bar'        => 'Toolbar',
+        'Menu bar'        => 'Menüleiste',
+
+        'Pre-application module to store the current view.' => 'Pre-Application-Modul zum Speichern der aktuellen Ansicht.',
+
+        'CustomerInformationCenter'     => 'Kunden-Informationszentrum',
+        'CustomerUserInformationCenter' => 'Kundenbenutzer-Informationszentrum',
+        'CustomerCompany'               => 'Kundenunternehmen',
+        'AppointmentCalendarManage'     => 'Kalenderverwaltung',
+        'AppointmentCalendarOverview'   => 'Kalenderübersicht',
+        'AppointmentAgendaOverview'     => 'Agendaübersicht',
+        'TicketOverview'                => 'Ticketübersicht',
+        'TicketCreate'                  => 'Ticketerstellung',
+        'PhoneInbound'                  => 'Eingehender Telefonanruf',
+        'PhoneOutbound'                 => 'Ausgehender Telefonanruf',
+        'EmailOutbound'                 => 'Ausgehende Email',
+        'TicketMessage'                 => 'Ticketerstellung',
+        'TicketSearch'                  => 'Ticketsuche',
+
         # WebUserAgent
         'Domains accessed through WebUserAgent module for which no proxy should be used. Separate domains by semicolon.'
             => 'Domains, auf die durch das WebUserAgent-Modul zugegriffen wird und für die kein Proxy verwendet werden soll. Mehrere Domains können durch Semikolon getrennt hinterlegt werden.',

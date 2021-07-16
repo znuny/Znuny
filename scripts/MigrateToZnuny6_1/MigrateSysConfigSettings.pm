@@ -43,6 +43,14 @@ sub Run {
         # Znuny4OTRS-DynamicFieldWebservice
         'Znuny4OTRSDynamicFieldWebservice::HideDynamicFieldsWithoutDisplayedValue'
             => 'Ticket::Frontend::AgentTicketZoom###HideWebserviceDynamicFieldsWithoutDisplayValue',
+
+        # Znuny4OTRS-LastViews
+        'Znuny4OTRSLastViews'                                  => 'LastViews',
+        'PreferencesGroups###Znuny4OTRSLastViewsLimit'         => 'PreferencesGroups###LastViewsLimit',
+        'PreferencesGroups###Znuny4OTRSLastViewsPosition'      => 'PreferencesGroups###LastViewsPosition',
+        'PreferencesGroups###Znuny4OTRSLastViewsType'          => 'PreferencesGroups###LastViewsType',
+        'CustomerPreferencesGroups###Znuny4OTRSLastViewsLimit' => 'CustomerPreferencesGroups###LastViewsLimit',
+        'CustomerPreferencesGroups###Znuny4OTRSLastViewsType'  => 'CustomerPreferencesGroups###LastViewsType',
     );
 
     ORIGINALSYSCONFIGOPTIONNAME:

@@ -44,6 +44,10 @@
                         <i class="fa fa-power-off"></i><strong>[% Translate("Logout") | html %]</strong>
                     </a>
                 [% RenderBlockEnd("Logout") %]
+[% RenderBlockStart("LastViewsAvatar") %]
+                    <span>[% Translate("Last viewed") | html %]</span>
+                    [% Data.AvatarLastViewsHTML %]
+[% RenderBlockEnd("LastViewsAvatar") %]
                 </div>
             </li>
 [% RenderBlockStart("ToolBarItem") %]
@@ -92,5 +96,10 @@
                 <button type="button" class="DebugRTL">Simulate RTL</button>
             </li>
 [% RenderBlockEnd("DebugRTLButton") %]
+[% RenderBlockStart("LastViewsToolBar") %]
+            <div class="LastViewToolBar">
+                [% Data.ToolBarLastViewsHTML %]
+            </div>
+[% RenderBlockEnd("LastViewsToolBar") %]
         </ul>
     </div>

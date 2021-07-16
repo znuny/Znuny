@@ -56,6 +56,9 @@ for my $Key ( sort keys %CustomerData ) {
     next KEY if $Key eq 'CustomerCompanyValidID';
     next KEY if $Key eq 'UserLanguage';
 
+    # Skip dropdown-values of last views
+    next KEY if $Key =~ m{\AUserLastViews};
+
     $Self->False(
         $CustomerUserObject->SetPreferences(
             Key    => $Key,

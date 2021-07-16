@@ -54,6 +54,9 @@ for my $Key ( sort keys %UserData ) {
     next KEY if $Key =~ m/UserEmail$/smx;
     next KEY if $Key =~ m/UserMobile$/smx;
 
+    # Skip dropdown-values of last views
+    next KEY if $Key =~ m{\AUserLastViews};
+
     $Self->False(
         $UserObject->SetPreferences(
             Key    => $Key,

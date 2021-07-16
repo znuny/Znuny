@@ -294,6 +294,7 @@ dd {
 
 .FloatLeft {
     text-align: left;
+    float: left;
 }
 
 .Right {
