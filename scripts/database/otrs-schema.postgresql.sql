@@ -81,9 +81,9 @@ END IF;
 END$$;
 ;
 -- ----------------------------------------------------------
---  create table groups
+--  create table permission_groups
 -- ----------------------------------------------------------
-CREATE TABLE groups (
+CREATE TABLE permission_groups (
     id serial NOT NULL,
     name VARCHAR (200) NOT NULL,
     comments VARCHAR (250) NULL,

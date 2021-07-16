@@ -148,7 +148,7 @@ END;
 --
 ;
 BEGIN
-    EXECUTE IMMEDIATE 'ALTER TABLE groups ADD CONSTRAINT FK_groups_create_by_id FOREIGN KEY (create_by) REFERENCES users (id)';
+    EXECUTE IMMEDIATE 'ALTER TABLE permission_groups ADD CONSTRAINT FK_permission_groups_create_46 FOREIGN KEY (create_by) REFERENCES users (id)';
 EXCEPTION
   WHEN OTHERS THEN NULL;
 END;
@@ -156,7 +156,7 @@ END;
 --
 ;
 BEGIN
-    EXECUTE IMMEDIATE 'CREATE INDEX FK_groups_create_by ON groups (create_by)';
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_permission_groups_create_by ON permission_groups (create_by)';
 EXCEPTION
   WHEN OTHERS THEN NULL;
 END;
@@ -164,7 +164,7 @@ END;
 --
 ;
 BEGIN
-    EXECUTE IMMEDIATE 'ALTER TABLE groups ADD CONSTRAINT FK_groups_change_by_id FOREIGN KEY (change_by) REFERENCES users (id)';
+    EXECUTE IMMEDIATE 'ALTER TABLE permission_groups ADD CONSTRAINT FK_permission_groups_change_9c FOREIGN KEY (change_by) REFERENCES users (id)';
 EXCEPTION
   WHEN OTHERS THEN NULL;
 END;
@@ -172,7 +172,7 @@ END;
 --
 ;
 BEGIN
-    EXECUTE IMMEDIATE 'CREATE INDEX FK_groups_change_by ON groups (change_by)';
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_permission_groups_change_by ON permission_groups (change_by)';
 EXCEPTION
   WHEN OTHERS THEN NULL;
 END;
@@ -180,7 +180,7 @@ END;
 --
 ;
 BEGIN
-    EXECUTE IMMEDIATE 'ALTER TABLE groups ADD CONSTRAINT FK_groups_valid_id_id FOREIGN KEY (valid_id) REFERENCES valid (id)';
+    EXECUTE IMMEDIATE 'ALTER TABLE permission_groups ADD CONSTRAINT FK_permission_groups_valid_i1b FOREIGN KEY (valid_id) REFERENCES valid (id)';
 EXCEPTION
   WHEN OTHERS THEN NULL;
 END;
@@ -188,7 +188,7 @@ END;
 --
 ;
 BEGIN
-    EXECUTE IMMEDIATE 'CREATE INDEX FK_groups_valid_id ON groups (valid_id)';
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_permission_groups_valid_id ON permission_groups (valid_id)';
 EXCEPTION
   WHEN OTHERS THEN NULL;
 END;
@@ -196,7 +196,7 @@ END;
 --
 ;
 BEGIN
-    EXECUTE IMMEDIATE 'ALTER TABLE group_user ADD CONSTRAINT FK_group_user_group_id_id FOREIGN KEY (group_id) REFERENCES groups (id)';
+    EXECUTE IMMEDIATE 'ALTER TABLE group_user ADD CONSTRAINT FK_group_user_group_id_id FOREIGN KEY (group_id) REFERENCES permission_groups (id)';
 EXCEPTION
   WHEN OTHERS THEN NULL;
 END;
@@ -260,7 +260,7 @@ END;
 --
 ;
 BEGIN
-    EXECUTE IMMEDIATE 'ALTER TABLE group_role ADD CONSTRAINT FK_group_role_group_id_id FOREIGN KEY (group_id) REFERENCES groups (id)';
+    EXECUTE IMMEDIATE 'ALTER TABLE group_role ADD CONSTRAINT FK_group_role_group_id_id FOREIGN KEY (group_id) REFERENCES permission_groups (id)';
 EXCEPTION
   WHEN OTHERS THEN NULL;
 END;
@@ -324,7 +324,7 @@ END;
 --
 ;
 BEGIN
-    EXECUTE IMMEDIATE 'ALTER TABLE group_customer_user ADD CONSTRAINT FK_group_customer_user_groupbb FOREIGN KEY (group_id) REFERENCES groups (id)';
+    EXECUTE IMMEDIATE 'ALTER TABLE group_customer_user ADD CONSTRAINT FK_group_customer_user_groupbb FOREIGN KEY (group_id) REFERENCES permission_groups (id)';
 EXCEPTION
   WHEN OTHERS THEN NULL;
 END;
@@ -372,7 +372,7 @@ END;
 --
 ;
 BEGIN
-    EXECUTE IMMEDIATE 'ALTER TABLE group_customer ADD CONSTRAINT FK_group_customer_group_id_id FOREIGN KEY (group_id) REFERENCES groups (id)';
+    EXECUTE IMMEDIATE 'ALTER TABLE group_customer ADD CONSTRAINT FK_group_customer_group_id_id FOREIGN KEY (group_id) REFERENCES permission_groups (id)';
 EXCEPTION
   WHEN OTHERS THEN NULL;
 END;
@@ -836,7 +836,7 @@ END;
 --
 ;
 BEGIN
-    EXECUTE IMMEDIATE 'ALTER TABLE queue ADD CONSTRAINT FK_queue_group_id_id FOREIGN KEY (group_id) REFERENCES groups (id)';
+    EXECUTE IMMEDIATE 'ALTER TABLE queue ADD CONSTRAINT FK_queue_group_id_id FOREIGN KEY (group_id) REFERENCES permission_groups (id)';
 EXCEPTION
   WHEN OTHERS THEN NULL;
 END;
@@ -1668,7 +1668,7 @@ END;
 --
 ;
 BEGIN
-    EXECUTE IMMEDIATE 'ALTER TABLE ticket_index ADD CONSTRAINT FK_ticket_index_group_id_id FOREIGN KEY (group_id) REFERENCES groups (id)';
+    EXECUTE IMMEDIATE 'ALTER TABLE ticket_index ADD CONSTRAINT FK_ticket_index_group_id_id FOREIGN KEY (group_id) REFERENCES permission_groups (id)';
 EXCEPTION
   WHEN OTHERS THEN NULL;
 END;
@@ -3956,7 +3956,7 @@ END;
 --
 ;
 BEGIN
-    EXECUTE IMMEDIATE 'ALTER TABLE calendar ADD CONSTRAINT FK_calendar_group_id_id FOREIGN KEY (group_id) REFERENCES groups (id)';
+    EXECUTE IMMEDIATE 'ALTER TABLE calendar ADD CONSTRAINT FK_calendar_group_id_id FOREIGN KEY (group_id) REFERENCES permission_groups (id)';
 EXCEPTION
   WHEN OTHERS THEN NULL;
 END;

@@ -70,9 +70,9 @@ CREATE TABLE user_preferences (
     INDEX user_preferences_user_id (user_id)
 );
 # ----------------------------------------------------------
-#  create table groups
+#  create table permission_groups
 # ----------------------------------------------------------
-CREATE TABLE groups (
+CREATE TABLE permission_groups (
     id INTEGER NOT NULL AUTO_INCREMENT,
     name VARCHAR (200) NOT NULL,
     comments VARCHAR (250) NULL,

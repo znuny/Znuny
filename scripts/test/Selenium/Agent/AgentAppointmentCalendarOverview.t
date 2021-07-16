@@ -965,7 +965,7 @@ $Selenium->RunTest(
 
         # Delete groups.
         $Success = $DBObject->Do(
-            SQL => "DELETE FROM groups WHERE id = $GroupID OR id = $GroupID2",
+            SQL => "DELETE FROM permission_groups WHERE id = $GroupID OR id = $GroupID2",
         );
         $Self->True(
             $Success,

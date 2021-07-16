@@ -92,7 +92,7 @@
 </Table>
 
 <!-- group - all groups -->
-<Table Name="groups">
+<Table Name="permission_groups">
     <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
     <Column Name="name" Required="true" Size="200" Type="VARCHAR"/>
     <Column Name="comments" Required="false" Size="250" Type="VARCHAR"/>
@@ -133,7 +133,7 @@
         <Reference Local="change_by" Foreign="id"/>
         <Reference Local="user_id" Foreign="id"/>
     </ForeignKey>
-    <ForeignKey ForeignTable="groups">
+    <ForeignKey ForeignTable="permission_groups">
         <Reference Local="group_id" Foreign="id"/>
     </ForeignKey>
 </Table>
@@ -160,7 +160,7 @@
         <Reference Local="create_by" Foreign="id"/>
         <Reference Local="change_by" Foreign="id"/>
     </ForeignKey>
-    <ForeignKey ForeignTable="groups">
+    <ForeignKey ForeignTable="permission_groups">
         <Reference Local="group_id" Foreign="id"/>
     </ForeignKey>
     <ForeignKey ForeignTable="roles">
@@ -190,7 +190,7 @@
         <Reference Local="create_by" Foreign="id"/>
         <Reference Local="change_by" Foreign="id"/>
     </ForeignKey>
-    <ForeignKey ForeignTable="groups">
+    <ForeignKey ForeignTable="permission_groups">
         <Reference Local="group_id" Foreign="id"/>
     </ForeignKey>
 </Table>
@@ -218,7 +218,7 @@
         <Reference Local="create_by" Foreign="id"/>
         <Reference Local="change_by" Foreign="id"/>
     </ForeignKey>
-    <ForeignKey ForeignTable="groups">
+    <ForeignKey ForeignTable="permission_groups">
         <Reference Local="group_id" Foreign="id"/>
     </ForeignKey>
 </Table>
@@ -462,7 +462,7 @@
     <ForeignKey ForeignTable="signature">
         <Reference Local="signature_id" Foreign="id"/>
     </ForeignKey>
-    <ForeignKey ForeignTable="groups">
+    <ForeignKey ForeignTable="permission_groups">
         <Reference Local="group_id" Foreign="id"/>
     </ForeignKey>
     <ForeignKey ForeignTable="follow_up_possible">
@@ -884,7 +884,7 @@
     <ForeignKey ForeignTable="queue">
         <Reference Local="queue_id" Foreign="id"/>
     </ForeignKey>
-    <ForeignKey ForeignTable="groups">
+    <ForeignKey ForeignTable="permission_groups">
         <Reference Local="group_id" Foreign="id"/>
     </ForeignKey>
 </Table>
@@ -2489,7 +2489,7 @@
     <Unique Name="calendar_name">
         <UniqueColumn Name="name" />
     </Unique>
-    <ForeignKey ForeignTable="groups">
+    <ForeignKey ForeignTable="permission_groups">
         <Reference Local="group_id" Foreign="id" />
     </ForeignKey>
     <ForeignKey ForeignTable="valid">

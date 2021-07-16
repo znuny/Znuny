@@ -77,7 +77,7 @@ sub Run {
             Label      => Translatable("Roles"),
         },
         {
-            SQL        => "SELECT count(*) FROM groups",
+            SQL        => "SELECT count(*) FROM permission_groups",
             Identifier => 'GroupCount',
             Label      => Translatable("Groups"),
         },
@@ -128,7 +128,6 @@ sub Run {
         },
     );
 
-    # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     my %Counts;

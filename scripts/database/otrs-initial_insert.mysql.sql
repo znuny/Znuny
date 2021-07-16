@@ -26,21 +26,21 @@ INSERT INTO users (id, first_name, last_name, login, pw, valid_id, create_by, cr
     VALUES
     (1, 'Admin', 'OTRS', 'root@localhost', 'roK20XGbWEsSM', 1, 1, current_timestamp, 1, current_timestamp);
 # ----------------------------------------------------------
-#  insert into table groups
+#  insert into table permission_groups
 # ----------------------------------------------------------
-INSERT INTO groups (id, name, comments, valid_id, create_by, create_time, change_by, change_time)
+INSERT INTO permission_groups (id, name, comments, valid_id, create_by, create_time, change_by, change_time)
     VALUES
     (1, 'users', 'Group for default access.', 1, 1, current_timestamp, 1, current_timestamp);
 # ----------------------------------------------------------
-#  insert into table groups
+#  insert into table permission_groups
 # ----------------------------------------------------------
-INSERT INTO groups (id, name, comments, valid_id, create_by, create_time, change_by, change_time)
+INSERT INTO permission_groups (id, name, comments, valid_id, create_by, create_time, change_by, change_time)
     VALUES
     (2, 'admin', 'Group of all administrators.', 1, 1, current_timestamp, 1, current_timestamp);
 # ----------------------------------------------------------
-#  insert into table groups
+#  insert into table permission_groups
 # ----------------------------------------------------------
-INSERT INTO groups (id, name, comments, valid_id, create_by, create_time, change_by, change_time)
+INSERT INTO permission_groups (id, name, comments, valid_id, create_by, create_time, change_by, change_time)
     VALUES
     (3, 'stats', 'Group for statistics access.', 1, 1, current_timestamp, 1, current_timestamp);
 # ----------------------------------------------------------
@@ -854,7 +854,7 @@ INSERT INTO article_data_mime_plain (id, article_id, body, create_by, create_tim
     (1, 1, 'From: Znuny <hello@znuny.org>
 To: Your Znuny service desk <znuny@localhost>
 Subject: Znuny says hi!
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain\; charset=utf-8
 Content-Transfer-Encoding: 8bit
 
 We welcome you to Znuny, our ticketing solution based on the well-known OTRS ((Community Edition)) which we forked to make things different.

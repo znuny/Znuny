@@ -72,7 +72,7 @@ sub _MigrateGroupNames {
         # Rename group.
         my $RenamingOK = $DBObject->Do(
             SQL => '
-                UPDATE groups SET name = ?
+                UPDATE permission_groups SET name = ?
                 WHERE id = ?
             ',
             Bind => [
