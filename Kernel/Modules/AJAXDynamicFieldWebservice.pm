@@ -45,7 +45,12 @@ sub Run {
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
     my $DynamicFieldName = $ParamObject->GetParam( Param => 'DynamicFieldName' );
-    return if !$DynamicFieldName;
+    if ( !$DynamicFieldName ) {
+        return $LayoutObject->Attachment(
+            ContentType => 'application/json; charset=' . $LayoutObject->{Charset},
+            Content     => '{}',
+        );
+    }
 
     my $Subaction   = $ParamObject->GetParam( Param => 'Subaction' );
     my $SearchTerms = $ParamObject->GetParam( Param => 'SearchTerms' ) || '';
