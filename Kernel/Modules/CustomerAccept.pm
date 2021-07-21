@@ -17,13 +17,12 @@ our $ObjectManagerDisabled = 1;
 sub new {
     my ( $Type, %Param ) = @_;
 
-    # allocate new hash for object
     my $Self = {%Param};
     bless( $Self, $Type );
 
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-    $Self->{InfoKey}  = $ConfigObject->Get('CustomerPanel::InfoKey');
-    $Self->{InfoFile} = $ConfigObject->Get('CustomerPanel::InfoFile');
+    $Self->{InfoKey}  = $ConfigObject->Get('CustomerPanel::InfoKey') || 'CustomerAccept1';
+    $Self->{InfoFile} = $ConfigObject->Get('CustomerPanel::InfoFile') || 'CustomerAccept';
 
     return $Self;
 }
@@ -105,11 +104,10 @@ sub Run {
 
         # show info
         $Output = $LayoutObject->CustomerHeader();
-        $Output
-            .= $LayoutObject->Output(
+        $Output .= $LayoutObject->Output(
             TemplateFile => $Self->{InfoFile},
             Data         => \%Param
-            );
+        );
         $Output .= $LayoutObject->CustomerFooter();
         return $Output;
     }
