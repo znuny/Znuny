@@ -99,6 +99,52 @@ sub Data {
         'User agent string to use for the WebUserAgent module. Leave empty to use the default user agent string.'
             => 'User-Agent-String zur Verwendung im WebUserAgent-Modul. Leerlassen, um Standard-User-Agent-String zu verwenden.',
 
+        # Dynamic field screen configuration and config import/export
+        'Dynamic fields ↔ Screens'                  => 'Dynamische Felder ↔ Masken',
+        'Activation of dynamic fields for screens.' => 'Aktivierung dynamischer Felder für Masken.',
+        'Shows only valid dynamic fields in screen configuration (AdminDynamicFieldScreenConfiguration) if enabled.'
+            => 'Zeigt nur gültige dynamische Felder in der Maskenkonfiguration (AdminDynamicFieldScreenConfiguration), falls aktiviert.',
+        'Shows only valid dynamic fields in dynamic field export selection (AdminDynamicFieldImportExport) if enabled.'
+            => 'Zeigt nur gültige dynamische Felder in der Auswahl für den Export dynamischer Felder (AdminDynamicFieldImportExport), falls aktiviert.',
+        'Config keys and their action to activate dynamic fields in different screens, grouped by object type.'
+            => 'Config-Keys und deren Action zur Aktivierung von dynamischen Feldern in verschiedenen Dialogen, gruppiert nach Objekttyp.',
+        "Dynamic field screen config keys and their action for all screens that don't allow dynamic fields to be mandatory."
+            => 'Config-Keys zur Aktivierung von dynamischen Feldern inkl. zugehöriger Action, für alle Dialoge, in denen dynamische Felder nicht als Pflichtfelder konfiguriert werden können.',
+        'Assignment of dynamic fields to screens' => 'Zuordnung von dynamischen Feldern zu Masken',
+        'Screens'                                 => 'Masken',
+        'Default columns'                         => 'Standardspalten',
+        'Screen'                                  => 'Maske',
+        'Dynamic field'                           => 'Dynamisches Feld',
+        'Dynamic fields for screen %s'            => 'Dynamische Felder für Maske %s',
+        'Screens for dynamic field %s'            => 'Masken für dynamisches Feld %s',
+        'Default columns for screen %s'           => 'Standardspalten für Maske %s',
+        'You can assign elements by dragging and dropping them to the lists of available, disabled, assigned and required elements.'
+            => 'Sie können Elemente zuweisen, indem Sie sie auf die Listen von verfügbaren, deaktivierten, zugewiesenen und erforderlichen Elementen ziehen und ablegen.',
+
+        'Assign selected elements to this list' => 'Gewählte Elemente zu dieser Liste hinzufügen',
+        'Filter available elements'             => 'Verfügbare Elemente filtern',
+        'Filter disabled elements'              => 'Deaktivierte Elemente filtern',
+        'Filter assigned elements'              => 'Zugewiesene Elemente filtern',
+        'Filter required elements'             => 'Erforderliche Elemente filtern',
+
+        'Import and export of dynamic field configurations.' => 'Import und Export von Konfigurationen dynamischer Felder.',
+
+        'Dynamic field configurations: %s' => 'Konfigurationen dynamischer Felder: %s',
+        "Select the dynamic fields whose configuration you want to export and click on 'Export' to generate a YAML file." => "Wählen Sie die dynamischen Felder, deren Konfiguration exportiert werden soll und klicken Sie auf 'Export', um eine YAML-Datei zu erstellen.",
+        'For the following dynamic fields a configuration cannot be imported because of an invalid backend.' => 'Für die folgenden dynamischen Felder kann keine Konfiguration importiert werden, da das Backend ungültig ist.',
+        'Select all field configurations' => 'Alle Feldkonfigurationen wählen',
+        'Select all screen configurations' => 'Alle Maskenkonfigurationen wählen',
+
+        'Import and export of configurations' => 'Import und Export von Konfigurationen',
+        'Upload a file in YAML format (as provided by the export) to import dynamic field configurations.'
+            => 'Datei im YAML-Format hochladen (wie durch den Export bereitgestellt), um Konfigurationen für dynamische Felder zu importieren.',
+        'Overwrite existing configurations' => 'Bestehende Konfigurationen überschreiben',
+
+        'Import configurations' => 'Konfigurationen importieren',
+        'Export configurations' => 'Konfigurationen exportieren',
+        'The uploaded file does not contain configuration(s), is not a YAML file, is damaged or has the wrong structure.'
+            => 'Die hochgeladene Datei enthält keine Konfiguration(en), ist keine YAML-Datei, ist beschädigt oder hat die falsche Struktur.',
+
         # DynamicFieldWebservice
         'Webservice (Text)'                                                          => 'Webservice (Text)',
         'Webservice (Multiselect)'                                                   => 'Webservice (Mehrfachauswahl)',
@@ -683,7 +729,7 @@ sub Data {
             'Dieses Feature erlaubt es, (mehrere) Kontakte mit Daten zu Tickets hinzuzufügen.',
         'To add a new field, select the field type from one of the object\'s list, the object defines the boundary of the field and it can\'t be changed after the field creation.' =>
             'Um ein neues Feld hinzuzufügen, wählen Sie den Typ des Feldes aus der Liste der verfügbaren Typen für das jeweilige Objekt aus. Die Objekt-Auswahl ist bindend und kann nicht nachträglich verändert werden.',
-        'Dynamic Fields List' => 'Dynamische Felder - Liste',
+        'Dynamic Fields List' => 'Liste dynamischer Felder',
         'Dynamic fields per page' => 'Dynamische Felder pro Seite',
         'Label' => 'Beschriftung',
         'Order' => 'Sortierung',
@@ -1252,7 +1298,7 @@ sub Data {
         'Disables hostname certificate verification. This is not recommended and should only be used in test environments.' => 'Deaktiviert die SSL-Hostname-Verifikation. Es wird empfohlen, dies nicht oder nur in Testumgebungen zu deaktivieren.',
         'Defines the incoming data format.'                                                                                                                                     => 'Definiert das eingehende Datenformat.',
         'Parser backend for operation'                                                                                                                                          => 'Parser-Backend für Operation',
-        'Advanced configuration for operation'                                                                                                                                  => 'Erweiterte Konfiguiration für Operation',
+        'Advanced configuration for operation'                                                                                                                                  => 'Erweiterte Konfiguration für Operation',
         'Parser backend parameter'                                                                                                                                              => 'Parser-Backend-Parameter',
         "Please click 'Save' to get the corresponding backend parameter if the parser backend was changed."                                                                     => "Bitte klicken Sie 'Speichern', nachdem das Parser-Backend geändert wurde, um die entsprechenden Backend-Parameter zu erhalten.",
         'Additional request headers'                                                                                                                                            => 'Zusätzliche Request-Header',

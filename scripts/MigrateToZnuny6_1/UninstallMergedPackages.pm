@@ -53,6 +53,7 @@ sub Run {
     PACKAGENAME:
     for my $PackageName (
         qw(
+        Znuny4OTRS-AdvancedDynamicFields
         Znuny4OTRS-AutoCheckbox
         Znuny4OTRS-WebUserAgent
         Znuny4OTRS-EnhancedProxySupport

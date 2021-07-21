@@ -1920,9 +1920,15 @@ sub _DynamicFieldsConfigExport {
     # Remove hash keys
     my $IncludeAllConfigKeys = $Param{IncludeAllConfigKeys} // 1;
     if ( !$IncludeAllConfigKeys ) {
-        for my $DynamicField (@DynamicFieldConfigs) {
+        for my $DynamicFieldConfig (@DynamicFieldConfigs) {
+
+            KEY:
             for my $Key (qw(ChangeTime CreateTime ID InternalField ValidID)) {
-                delete $DynamicField->{$Key};
+
+                # Leave key InternalField in hash if it's an internal field.
+                next KEY if $Key eq 'InternalField' && $DynamicFieldConfig->{InternalField};
+
+                delete $DynamicFieldConfig->{$Key};
             }
         }
     }

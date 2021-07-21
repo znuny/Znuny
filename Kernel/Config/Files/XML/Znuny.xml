@@ -3,7 +3,7 @@
     <!--
         General settings
     -->
-    <Setting Name="Loader::Agent::CommonJS###888-Znuny" Required="1" Valid="1">
+    <Setting Name="Loader::Agent::CommonJS###888-Framework" Required="1" Valid="1">
         <Description Translatable="1">List of JS files to always be loaded for the agent interface.</Description>
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
@@ -14,7 +14,7 @@
             </Array>
         </Value>
     </Setting>
-    <Setting Name="Loader::Customer::CommonJS###888-Znuny" Required="1" Valid="1">
+    <Setting Name="Loader::Customer::CommonJS###888-Framework" Required="1" Valid="1">
         <Description Translatable="1">List of JS files to always be loaded for the customer interface.</Description>
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
@@ -776,6 +776,245 @@
         <Navigation>Core::WebUserAgent</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex=""></Item>
+        </Value>
+    </Setting>
+
+    <!--
+        Advanced dynamic fields
+    -->
+
+    <!-- General settings -->
+    <Setting Name="DynamicFields::ScreenConfiguration::ShowOnlyValidDynamicFields" Required="1" Valid="1">
+        <Description Translatable="1">Shows only valid dynamic fields in screen configuration (AdminDynamicFieldScreenConfiguration) if enabled.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="DynamicFields::ImportExport::ShowOnlyValidDynamicFields" Required="1" Valid="1">
+        <Description Translatable="1">Shows only valid dynamic fields in dynamic field export selection (AdminDynamicFieldConfigurationImportExport) if enabled.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+
+    <!-- Dynamic field screens -->
+    <Setting Name="DynamicFields::ScreenConfiguration::ConfigKeysOfScreensByObjectType###Framework" Required="1" Valid="1">
+        <Description Translatable="1">Config keys and their action to activate dynamic fields in different screens, grouped by object type.</Description>
+        <Navigation>Frontend::Base::DynamicFieldScreens</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Ticket">
+                    <Hash>
+                        <Item Key="Ticket::Frontend::AgentTicketMove###DynamicField">AgentTicketMove</Item>
+                        <Item Key="Ticket::Frontend::CustomerTicketZoom###DynamicField">CustomerTicketZoom</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketClose###DynamicField">AgentTicketClose</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketPrint###DynamicField">AgentTicketPrint</Item>
+                        <Item Key="Ticket::Frontend::CustomerTicketPrint###DynamicField">CustomerTicketPrint</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketPending###DynamicField">AgentTicketPending</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketSearch###DynamicField">AgentTicketSearch</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketCompose###DynamicField">AgentTicketCompose</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketFreeText###DynamicField">AgentTicketFreeText</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketEmail###DynamicField">AgentTicketEmail</Item>
+                        <Item Key="Ticket::Frontend::CustomerTicketOverview###DynamicField">CustomerTicketOverview</Item>
+                        <Item Key="Ticket::Frontend::OverviewSmall###DynamicField">OverviewSmall</Item>
+                        <Item Key="Ticket::Frontend::OverviewPreview###DynamicField">OverviewPreview</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketPhone###DynamicField">AgentTicketPhone</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketForward###DynamicField">AgentTicketForward</Item>
+                        <Item Key="Ticket::Frontend::CustomerTicketSearch###DynamicField">CustomerTicketSearch</Item>
+                        <Item Key="Ticket::Frontend::OverviewMedium###DynamicField">OverviewMedium</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketZoom###DynamicField">AgentTicketZoom</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketZoom###ProcessWidgetDynamicField">ProcessWidgetDynamicField</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketPhoneInbound###DynamicField">AgentTicketPhoneInbound</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketPhoneOutbound###DynamicField">AgentTicketPhoneOutbound</Item>
+                        <Item Key="Ticket::Frontend::CustomerTicketMessage###DynamicField">CustomerTicketMessage</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketEmailOutbound###DynamicField">AgentTicketEmailOutbound</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketPriority###DynamicField">AgentTicketPriority</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketNote###DynamicField">AgentTicketNote</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketOwner###DynamicField">AgentTicketOwner</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketResponsible###DynamicField">AgentTicketResponsible</Item>
+
+                        <Item Key="Ticket::Frontend::AgentTicketStatusView###DefaultColumns">AgentTicketStatusView</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketQueue###DefaultColumns">AgentTicketQueue</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketResponsibleView###DefaultColumns">AgentTicketResponsibleView</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketWatchView###DefaultColumns">AgentTicketWatchView</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketLockedView###DefaultColumns">AgentTicketLockedView</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketEscalationView###DefaultColumns">AgentTicketEscalationView</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketSearch###DefaultColumns">AgentTicketSearch</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketService###DefaultColumns">AgentTicketService</Item>
+
+                        <Item Key="AgentCustomerInformationCenter::Backend###0100-CIC-TicketPendingReminder">DashboardWidget CIC-TicketPendingReminder</Item>
+                        <Item Key="AgentCustomerInformationCenter::Backend###0110-CIC-TicketEscalation">DashboardWidget CIC-TicketEscalation</Item>
+                        <Item Key="AgentCustomerInformationCenter::Backend###0120-CIC-TicketNew">DashboardWidget CIC-TicketNew</Item>
+                        <Item Key="AgentCustomerInformationCenter::Backend###0130-CIC-TicketOpen">DashboardWidget CIC-TicketOpen</Item>
+                        <Item Key="AgentCustomerUserInformationCenter::Backend###0100-CUIC-TicketPendingReminder">DashboardWidget CUIC-TicketPendingReminder</Item>
+                        <Item Key="AgentCustomerUserInformationCenter::Backend###0110-CUIC-TicketEscalation">DashboardWidget CUIC-TicketEscalation</Item>
+                        <Item Key="AgentCustomerUserInformationCenter::Backend###0120-CUIC-TicketNew">DashboardWidget CUIC-TicketNew</Item>
+                        <Item Key="AgentCustomerUserInformationCenter::Backend###0130-CUIC-TicketOpen">DashboardWidget CUIC-TicketOpen</Item>
+                        <Item Key="DashboardBackend###0100-TicketPendingReminder">DashboardWidget TicketPendingReminder</Item>
+                        <Item Key="DashboardBackend###0110-TicketEscalation">DashboardWidget TicketEscalation</Item>
+                        <Item Key="DashboardBackend###0120-TicketNew">DashboardWidget TicketNew</Item>
+                        <Item Key="DashboardBackend###0130-TicketOpen">DashboardWidget TicketOpen</Item>
+                        <Item Key="DashboardBackend###0140-RunningTicketProcess">DashboardWidget RunningTicketProcess</Item>
+                    </Hash>
+                </Item>
+                <Item Key="Article">
+                    <Hash>
+                        <Item Key="Ticket::Frontend::AgentTicketMove###DynamicField">AgentTicketMove</Item>
+                        <Item Key="Ticket::Frontend::CustomerTicketZoom###DynamicField">CustomerTicketZoom</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketClose###DynamicField">AgentTicketClose</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketPrint###DynamicField">AgentTicketPrint</Item>
+                        <Item Key="Ticket::Frontend::CustomerTicketPrint###DynamicField">CustomerTicketPrint</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketPending###DynamicField">AgentTicketPending</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketSearch###DynamicField">AgentTicketSearch</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketCompose###DynamicField">AgentTicketCompose</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketFreeText###DynamicField">AgentTicketFreeText</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketEmail###DynamicField">AgentTicketEmail</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketPhone###DynamicField">AgentTicketPhone</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketForward###DynamicField">AgentTicketForward</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketPhoneInbound###DynamicField">AgentTicketPhoneInbound</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketPhoneOutbound###DynamicField">AgentTicketPhoneOutbound</Item>
+                        <Item Key="Ticket::Frontend::CustomerTicketMessage###DynamicField">CustomerTicketMessage</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketEmailOutbound###DynamicField">AgentTicketEmailOutbound</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketPriority###DynamicField">AgentTicketPriority</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketNote###DynamicField">AgentTicketNote</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketOwner###DynamicField">AgentTicketOwner</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketResponsible###DynamicField">AgentTicketResponsible</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketSearch###DefaultColumns">AgentTicketSearch</Item>
+                    </Hash>
+                </Item>
+                <Item Key="CustomerCompany">
+                    <Hash>
+                    </Hash>
+                </Item>
+                <Item Key="CustomerUser">
+                    <Hash>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="DynamicFields::ScreenConfiguration::ConfigKeysOfScreensWithoutMandatoryDynamicFieldSupport###Framework" Required="1" Valid="1">
+        <Description Translatable="1">Dynamic field screen config keys and their action for all screens that don't allow dynamic fields to be mandatory.</Description>
+        <Navigation>Frontend::Base::DynamicFieldScreens</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Ticket::Frontend::OverviewMedium###DynamicField">OverviewMedium</Item>
+                <Item Key="Ticket::Frontend::OverviewPreview###DynamicField">OverviewPreview</Item>
+                <Item Key="Ticket::Frontend::OverviewSmall###DynamicField">OverviewSmall</Item>
+                <Item Key="Ticket::Frontend::CustomerTicketOverview###DynamicField">CustomerTicketOverview</Item>
+                <Item Key="Ticket::Frontend::AgentTicketZoom###DynamicField">AgentTicketZoom</Item>
+                <Item Key="Ticket::Frontend::AgentTicketZoom###ProcessWidgetDynamicField">ProcessWidgetDynamicField</Item>
+                <Item Key="Ticket::Frontend::CustomerTicketZoom###DynamicField">CustomerTicketZoom</Item>
+                <Item Key="Ticket::Frontend::AgentTicketPrint###DynamicField">AgentTicketPrint</Item>
+                <Item Key="Ticket::Frontend::CustomerTicketPrint###DynamicField">CustomerTicketPrint</Item>
+                <Item Key="Ticket::Frontend::CustomerTicketSearch###DynamicField">CustomerTicketSearch</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!-- AdminDynamicFieldScreenConfiguration -->
+    <Setting Name="Frontend::Module###AdminDynamicFieldScreenConfiguration" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Activation of dynamic fields for screens.</Item>
+                    <Item Key="Title" Translatable="1">Dynamic fields ↔ Screens</Item>
+                    <Item Key="NavBarName">Admin</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AdminDynamicFieldScreenConfiguration###003-Framework" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.AllocationList.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.UI.AllocationList.js</Item>
+                        <Item>Core.UI.Table.js</Item>
+                        <Item>Znuny.Agent.Admin.DynamicFieldScreenConfiguration.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::NavigationModule###AdminDynamicFieldScreenConfiguration" Required="0" Valid="1">
+        <Description Translatable="1">Admin area navigation for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Group">
+                    <Array>
+                        <Item>admin</Item>
+                    </Array>
+                </Item>
+                <Item Key="GroupRo">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
+                <Item Key="Name" Translatable="1">Dynamic fields ↔ Screens</Item>
+                <Item Key="Block">Automation</Item>
+                <Item Key="Description" Translatable="1">Activation of dynamic fields for screens.</Item>
+                <Item Key="IconBig">fa-align-left</Item>
+                <Item Key="IconSmall">fa-desktop</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!-- AdminDynamicFieldConfigurationImportExport -->
+    <Setting Name="Frontend::Module###AdminDynamicFieldConfigurationImportExport" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the admin interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Import and export of dynamic field configurations.</Item>
+                    <Item Key="Title">Import and export of dynamic field configurations.</Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AdminDynamicFieldConfigurationImportExport###003-Framework" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Znuny.Agent.Admin.DynamicFieldConfigurationImportExport.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
         </Value>
     </Setting>
 
