@@ -20,7 +20,6 @@ our $ObjectManagerDisabled = 1;
 sub new {
     my ( $Type, %Param ) = @_;
 
-    # allocate new hash for object
     my $Self = {%Param};
     bless( $Self, $Type );
 
@@ -66,7 +65,9 @@ sub Run {
         }
         my $Output = $LayoutObject->Header();
         $Output .= $LayoutObject->NavigationBar();
-        $Output .= $TypeNotActive;
+        if ($TypeNotActive){
+            $Output .= $TypeNotActive;
+        }
         $Self->_Edit(
             Action => 'Change',
             %Data,
@@ -215,7 +216,9 @@ sub Run {
         # something has gone wrong
         my $Output = $LayoutObject->Header();
         $Output .= $LayoutObject->NavigationBar();
-        $Output .= $TypeNotActive;
+        if ($TypeNotActive){
+            $Output .= $TypeNotActive;
+        }
         $Output .= $LayoutObject->Notify( Priority => 'Error' );
         $Self->_Edit(
             Action => 'Change',
@@ -239,7 +242,9 @@ sub Run {
         $GetParam{Name} = $ParamObject->GetParam( Param => 'Name' );
         my $Output = $LayoutObject->Header();
         $Output .= $LayoutObject->NavigationBar();
-        $Output .= $TypeNotActive;
+        if ($TypeNotActive){
+            $Output .= $TypeNotActive;
+        }
         $Self->_Edit(
             Action => 'Add',
             %GetParam,
@@ -292,7 +297,9 @@ sub Run {
                 $Self->_Overview();
                 my $Output = $LayoutObject->Header();
                 $Output .= $LayoutObject->NavigationBar();
-                $Output .= $TypeNotActive;
+                if ($TypeNotActive){
+                    $Output .= $TypeNotActive;
+                }
                 $Output .= $LayoutObject->Notify( Info => Translatable('Type added!') );
                 $Output .= $LayoutObject->Output(
                     TemplateFile => 'AdminType',
@@ -306,7 +313,9 @@ sub Run {
         # something has gone wrong
         my $Output = $LayoutObject->Header();
         $Output .= $LayoutObject->NavigationBar();
-        $Output .= $TypeNotActive;
+        if ($TypeNotActive){
+            $Output .= $TypeNotActive;
+        }
         $Output .= $LayoutObject->Notify( Priority => 'Error' );
         $Self->_Edit(
             Action => 'Add',
@@ -328,7 +337,9 @@ sub Run {
 
         my $Output = $LayoutObject->Header();
         $Output .= $LayoutObject->NavigationBar();
-        $Output .= $TypeNotActive;
+        if ($TypeNotActive){
+            $Output .= $TypeNotActive;
+        }
 
         $Self->_Overview();
 
