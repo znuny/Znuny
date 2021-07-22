@@ -206,7 +206,7 @@ sub Send {
         }
         elsif ( $Result->{Status} eq 'Failed' ) {
             $Self->PrintError("\nCould not send message with ID '$Item->{ID}'! Please refer to the log.\n");
-            $Self->Print("\n<yellow>$Result->{Message}</yellow>\n") if ($Verbose);
+            $Self->PrintError("\n$Result->{Message}\n") if ($Verbose);
             $Success = 0;
         }
         else {
