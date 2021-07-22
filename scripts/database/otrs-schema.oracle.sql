@@ -2295,6 +2295,14 @@ END;
 --
 ;
 BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX time_accounting_article_id ON time_accounting (article_id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
     EXECUTE IMMEDIATE 'CREATE INDEX time_accounting_ticket_id ON time_accounting (ticket_id)';
 EXCEPTION
   WHEN OTHERS THEN NULL;

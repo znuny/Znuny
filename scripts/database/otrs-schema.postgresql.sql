@@ -1438,6 +1438,17 @@ BEGIN
 IF NOT EXISTS (
     SELECT 1
     FROM pg_indexes
+    WHERE LOWER(indexname) = LOWER('time_accounting_article_id')
+    ) THEN
+    CREATE INDEX time_accounting_article_id ON time_accounting (article_id);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_indexes
     WHERE LOWER(indexname) = LOWER('time_accounting_ticket_id')
     ) THEN
     CREATE INDEX time_accounting_ticket_id ON time_accounting (ticket_id);

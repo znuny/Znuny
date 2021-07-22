@@ -721,6 +721,7 @@ CREATE TABLE time_accounting (
     change_time DATETIME NOT NULL,
     change_by INTEGER NOT NULL,
     PRIMARY KEY(id),
+    INDEX time_accounting_article_id (article_id),
     INDEX time_accounting_ticket_id (ticket_id)
 );
 # ----------------------------------------------------------

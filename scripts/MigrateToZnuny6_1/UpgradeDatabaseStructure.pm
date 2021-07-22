@@ -42,6 +42,10 @@ sub Run {
             Message => 'Renaming database tables',
             Module  => 'RenameTables',
         },
+        {
+            Message => 'Updating database indices',
+            Module  => 'UpdateIndices',
+        },
     );
 
     print "\n" if $Verbose;
