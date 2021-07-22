@@ -47,7 +47,7 @@ my $GetDynamicFieldScreenConfig = sub {
     my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
 
     NEEDED:
-    for my $Needed (qw(ConfigItem)) {
+    for my $Needed (qw(ConfigKey)) {
         next NEEDED if defined $Param{$Needed};
 
         $LogObject->Log(
@@ -57,7 +57,7 @@ my $GetDynamicFieldScreenConfig = sub {
         return;
     }
 
-    my @Keys   = split '###', $Param{ConfigItem};
+    my @Keys   = split '###', $Param{ConfigKey};
     my $Config = $ConfigObject->Get( $Keys[0] );
 
     INDEX:
@@ -69,7 +69,7 @@ my $GetDynamicFieldScreenConfig = sub {
 
     return if ref $Config ne 'HASH';
 
-    return %{$Config};
+    return $Config;
 };
 
 my @Tests = (
@@ -178,20 +178,21 @@ for my $Test (@Tests) {
     $ZnunyHelperObject->_RebuildConfig();
 
     for my $Screen ( @{ $Test->{Arguments}->{'--screen'} } ) {
-        my %ScreenConfig = $GetDynamicFieldScreenConfig->(
-            ConfigItem => $Screen,
+        my $ScreenConfig = $GetDynamicFieldScreenConfig->(
+            ConfigKey => $Screen,
         );
 
         $Self->True(
-            scalar %ScreenConfig,
+            ref $ScreenConfig eq 'HASH',
             $Test->{Name} . ' - Screen config must be found.',
         );
 
         DYNAMICFIELDNAME:
         for my $DynamicFieldName ( @{ $Test->{Arguments}->{'--dynamic-field'} } ) {
             if ( $Test->{Arguments}->{'--set-mode'} ) {
+
                 $Self->Is(
-                    $ScreenConfig{$DynamicFieldName},
+                    $ScreenConfig->{$DynamicFieldName},
                     $Test->{Arguments}->{'--set-mode'},
                     $Test->{Name} . ' - SysConfig must be set to expected mode.',
                 );
@@ -199,7 +200,7 @@ for my $Test (@Tests) {
             }
 
             $Self->False(
-                scalar $ScreenConfig{$DynamicFieldName},
+                scalar $ScreenConfig->{$DynamicFieldName},
                 $Test->{Name} . ' - SysConfig must not contain mode for dynamic field.',
             );
         }
