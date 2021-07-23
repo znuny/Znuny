@@ -17,12 +17,12 @@ our @ObjectDependencies = (
     'Kernel::System::AuthSession',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
+    'Kernel::System::DynamicField::Webservice',
     'Kernel::System::GenericInterface::Webservice',
     'Kernel::System::Log',
     'Kernel::System::SysConfig',
     'Kernel::System::Valid',
     'Kernel::System::Web::Request',
-    'Kernel::System::DynamicField::Webservice',
 );
 
 use Kernel::System::VariableCheck qw(:all);

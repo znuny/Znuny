@@ -21,7 +21,7 @@ sub new {
     bless( $Self, $Type );
 
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-    $Self->{InfoKey}  = $ConfigObject->Get('CustomerPanel::InfoKey') || 'CustomerAccept1';
+    $Self->{InfoKey}  = $ConfigObject->Get('CustomerPanel::InfoKey')  || 'CustomerAccept1';
     $Self->{InfoFile} = $ConfigObject->Get('CustomerPanel::InfoFile') || 'CustomerAccept';
 
     return $Self;

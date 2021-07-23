@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2012-2021 Znuny GmbH, http://znuny.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -112,14 +112,14 @@ my $SeleniumTest = sub {
 
         # Move UnitTestText0 to disabled elements
         $SeleniumObject->find_element( "#UnitTestText0 input[type='checkbox']", 'css' )->click();
-        $SeleniumObject->find_element( '#AssignSelectedToDisabledElements', 'css' )->click();
+        $SeleniumObject->find_element( '#AssignSelectedToDisabledElements',     'css' )->click();
 
         # Move UnitTestText1 to assigned elements
         $SeleniumObject->find_element( "#UnitTestText1 input[type='checkbox']", 'css' )->click();
-        $SeleniumObject->find_element( '#AssignSelectedToAssignedElements', 'css' )->click();
+        $SeleniumObject->find_element( '#AssignSelectedToAssignedElements',     'css' )->click();
 
         # Move UnitTestText2 to assigned required elements
-        $SeleniumObject->find_element( "#UnitTestText2 input[type='checkbox']", 'css' )->click();
+        $SeleniumObject->find_element( "#UnitTestText2 input[type='checkbox']",     'css' )->click();
         $SeleniumObject->find_element( '#AssignSelectedToAssignedRequiredElements', 'css' )->click();
 
         # submit form
