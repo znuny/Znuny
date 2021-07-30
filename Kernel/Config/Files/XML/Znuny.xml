@@ -26,7 +26,7 @@
         </Value>
     </Setting>
 
-    <Setting Name="Loader::Agent::CommonCSS###888-Znuny" Required="1" Valid="1">
+    <Setting Name="Loader::Agent::CommonCSS###888-Framework" Required="1" Valid="1">
         <Description Translatable="1">List of CSS files to always be loaded for the agent interface.</Description>
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
@@ -35,7 +35,7 @@
             </Array>
         </Value>
     </Setting>
-    <Setting Name="Loader::Customer::CommonCSS###888-Znuny" Required="1" Valid="1">
+    <Setting Name="Loader::Customer::CommonCSS###888-Framework" Required="1" Valid="1">
         <Description Translatable="1">List of CSS files to always be loaded for the customer interface.</Description>
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
