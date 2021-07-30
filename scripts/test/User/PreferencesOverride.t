@@ -54,6 +54,10 @@ for my $Key ( sort keys %UserData ) {
     next KEY if $Key =~ m/UserEmail$/smx;
     next KEY if $Key =~ m/UserMobile$/smx;
 
+    # Skip out-of-office status (will always be set dynamically in Kernel::System::User
+    # and cannot be set/changed by SetPreferences()).
+    next KEY if $Key eq 'LoggedStatusMessage';
+
     # Skip dropdown-values of last views
     next KEY if $Key =~ m{\AUserLastViews};
 
@@ -69,6 +73,7 @@ for my $Key ( sort keys %UserData ) {
     my %NewUserData = $UserObject->GetUserData(
         UserID => $UserID,
     );
+
     $Self->Is(
         $NewUserData{$Key},
         $UserData{$Key},

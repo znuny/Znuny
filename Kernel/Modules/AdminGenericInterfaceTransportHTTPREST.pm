@@ -118,14 +118,11 @@ sub Run {
     # To store the clean new configuration locally.
     my $TransportConfig;
 
-    my @PossibleParserBackends  = qw(CSV JSON);
-    my %ParserBackendParameters = (
-        CSV => [
-            'HasHeadline',
-            'Separator',
-            'TransformToHash',
-        ],
-    );
+    my @PossibleParserBackends = qw(JSON);
+
+    # This can be used in the future, when additional parser backends will be added
+    # which need parameters.
+    my %ParserBackendParameters;
 
     # Get requester specific settings.
     if ( $CommunicationType eq 'Requester' ) {
@@ -393,15 +390,11 @@ sub _ShowEdit {
     $Param{ContentType}               = $TransportConfig->{ContentType};
 
     my @PossibleRequestMethods = qw(GET POST PUT PATCH DELETE HEAD OPTIONS CONNECT TRACE);
-    my @PossibleParserBackends = qw(CSV JSON);
+    my @PossibleParserBackends = qw(JSON);
 
-    my %ParserBackendParameters = (
-        CSV => [
-            'HasHeadline',
-            'Separator',
-            'TransformToHash',
-        ],
-    );
+    # This can be used in the future, when additional parser backends will be added
+    # which need parameters.
+    my %ParserBackendParameters;
 
     # Check if communication type is requester.
     if ( $Param{CommunicationType} eq 'Requester' ) {
@@ -484,8 +477,7 @@ sub _ShowEdit {
 
         # Hide and disable Proxy options if they are not selected.
         $Param{ProxyHidden} = 'Hidden';
-        if ( $Param{UseProxy} && $Param{UseProxy} eq 'Yes' )
-        {
+        if ( $Param{UseProxy} && $Param{UseProxy} eq 'Yes' ) {
             $Param{ProxyHidden} = '';
         }
 
@@ -504,8 +496,7 @@ sub _ShowEdit {
 
         # Hide and disable SSL options if they are not selected.
         $Param{SSLHidden} = 'Hidden';
-        if ( $Param{UseSSL} && $Param{UseSSL} eq 'Yes' )
-        {
+        if ( $Param{UseSSL} && $Param{UseSSL} eq 'Yes' ) {
             $Param{SSLHidden} = '';
         }
 
@@ -579,6 +570,7 @@ sub _ShowEdit {
                         Operation         => $CurrentOperation,
                         Route             => $TransportConfig->{RouteOperationMapping}->{$CurrentOperation}->{Route},
                         RequestMethodStrg => $RequestMethodStrg,
+                        ParserBackendStrg => $ParserBackendStrg,
                         ServerError => $Param{ 'RouteOperationMapping' . $CurrentOperation . 'ServerError' } || '',
                         ServerErrorMessage => $Param{
                             'RouteOperationMapping'

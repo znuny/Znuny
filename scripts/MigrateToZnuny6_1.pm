@@ -231,7 +231,7 @@ sub _TasksGet {
             Module  => 'MigrateSysConfigSettings',
         },
         {
-            Message => 'Migrate webservice configuration',
+            Message => 'Migrate web service configuration',
             Module  => 'MigrateWebserviceConfiguration',
         },
         {

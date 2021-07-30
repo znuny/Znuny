@@ -55,8 +55,10 @@ sub Run {
         qw(
         Znuny4OTRS-AdvancedDynamicFields
         Znuny4OTRS-AutoCheckbox
+        Znuny4OTRS-ShowPendingTimeIfNeeded
         Znuny4OTRS-WebUserAgent
         Znuny4OTRS-EnhancedProxySupport
+        Znuny4OTRS-AdvancedOutOfOffice
         Znuny4OTRS-ShowPendingTimeIfNeeded
         Znuny4OTRS-LastViews
         Znuny4OTRS-TimeAccountingWebservice

@@ -348,60 +348,6 @@ sub ProviderProcessRequest {
             Data => $Content,
         );
     }
-    elsif ( $ParserBackend eq 'CSV' ) {
-
-        # add one newline to the end to
-        # make sure there is one
-        $Content .= "\n";
-
-        # change possible WIN line break
-        $Content =~ s{ \n?\r+\n? }{\n}xms;
-
-        # now remove unneeded newlines at the end,
-        # otherwise the CSV parser will cry some tears
-        $Content =~ s{ \n+ \z }{\n}xms;
-
-        # remove comment lines
-        $Content =~ s{^#.*\n}{}gm;
-
-        my $CSVArrayRef = $Kernel::OM->Get('Kernel::System::CSV')->CSV2Array(
-            %ParserBackendParameter,
-            String => $Content,
-        );
-
-        if ( !IsArrayRefWithData($CSVArrayRef) ) {
-            return $Self->_Error(
-                Summary   => "Error while parsing CSV structure.",
-                HTTPError => 400,
-            );
-        }
-
-        $ContentDecoded = $CSVArrayRef;
-        if (
-            $ParserBackendParameter{HasHeadline}
-            && $ParserBackendParameter{TransformToHash}
-            )
-        {
-            my $Headline = shift @{$ContentDecoded};
-            my @TransformedHashArray;
-
-            ENTRY:
-            for my $CurrentEntry ( @{$ContentDecoded} ) {
-
-                next ENTRY if !IsArrayRefWithData($CurrentEntry);
-
-                my %Entry;
-                for my $CurrentHeadEntryNumber ( 0 .. $#{$Headline} ) {
-
-                    $Entry{ $Headline->[$CurrentHeadEntryNumber] } = $CurrentEntry->[$CurrentHeadEntryNumber];
-                }
-
-                push @TransformedHashArray, \%Entry;
-            }
-
-            $ContentDecoded = \@TransformedHashArray;
-        }
-    }
     else {
         return $Self->_Error(
             Summary   => "Invalid parser backend '$ParserBackend' configured for Operation '$Operation'.",

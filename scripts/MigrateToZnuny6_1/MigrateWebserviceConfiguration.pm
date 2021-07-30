@@ -20,6 +20,7 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::DB',
     'Kernel::System::GenericInterface::Webservice',
+    'Kernel::System::Valid',
     'Kernel::System::ZnunyHelper',
 );
 
@@ -32,14 +33,14 @@ Migrate web service configuration.
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    $Self->_MigrateConfiguredInvokerTypes(%Param);
+    $Self->_MigrateWebserviceConfigs(%Param);
     $Self->_MigrateWebserviceNames(%Param);
     $Self->_CreateMissingWebservices(%Param);
 
     return 1;
 }
 
-sub _MigrateConfiguredInvokerTypes {
+sub _MigrateWebserviceConfigs {
     my ( $Self, %Param ) = @_;
 
     my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
@@ -52,24 +53,78 @@ sub _MigrateConfiguredInvokerTypes {
     my %InvokerTypeMapping = (
         'Znuny4OTRSAdvanced::Generic' => 'Znuny::Generic',
         'Znuny4OTRSAdvanced::Tunnel'  => 'Znuny::Tunnel',
+        'OutOfOffice'                 => 'User::OutOfOffice',
+    );
+
+    my %MappingTypeMapping = (
+        'Znuny4OTRSAdvancedOutOfOffice' => 'OutOfOffice',
     );
 
     WEBSERVICEID:
     for my $WebserviceID ( sort keys %{$Webservices} ) {
+
         my $WebserviceData = $WebserviceObject->WebserviceGet(
             ID => $WebserviceID,
         );
         next WEBSERVICEID if !IsHashRefWithData($WebserviceData);
 
+        my $InvokerConfigs   = $WebserviceData->{Config}->{Requester}->{Invoker};
+        my $OperationConfigs = $WebserviceData->{Config}->{Provider}->{Operation};
+
         # Migrate web service invoker types.
-        if ( IsHashRefWithData( $WebserviceData->{Config}->{Requester}->{Invoker} ) ) {
+        if ( IsHashRefWithData($InvokerConfigs) ) {
             INVOKER:
-            for my $Invoker ( sort keys %{ $WebserviceData->{Config}->{Requester}->{Invoker} } ) {
-                my $InvokerConfig = $WebserviceData->{Config}->{Requester}->{Invoker}->{$Invoker};
+            for my $Invoker ( sort keys %{$InvokerConfigs} ) {
+                my $InvokerConfig = $InvokerConfigs->{$Invoker};
                 next INVOKER if !defined $InvokerConfig->{Type};
                 next INVOKER if !exists $InvokerTypeMapping{ $InvokerConfig->{Type} };
 
                 $InvokerConfig->{Type} = $InvokerTypeMapping{ $InvokerConfig->{Type} };
+            }
+        }
+
+        # Migrate web service mapping types.
+        CONFIGS:
+        for my $Configs ( $InvokerConfigs, $OperationConfigs ) {
+            next CONFIGS if !IsHashRefWithData($Configs);
+
+            CONFIGNAME:
+            for my $ConfigName ( sort keys %{$Configs} ) {
+                my $Config = $Configs->{$ConfigName};
+
+                MAPPINGKEY:
+                for my $MappingKey (qw(MappingInbound MappingOutbound)) {
+                    next MAPPINGKEY if !defined $Config->{$MappingKey}->{Type};
+                    next MAPPINGKEY if !exists $MappingTypeMapping{ $Config->{$MappingKey}->{Type} };
+
+                    $Config->{$MappingKey}->{Type} = $MappingTypeMapping{ $Config->{$MappingKey}->{Type} };
+                }
+            }
+        }
+
+        # Migrate web service route operation mapping
+        my $ProviderTransportConfig = $WebserviceData->{Config}->{Provider}->{Transport};
+        if (
+            IsHashRefWithData($ProviderTransportConfig)
+            && exists $ProviderTransportConfig->{Config}->{RouteOperationMapping}
+            && IsHashRefWithData( $ProviderTransportConfig->{Config}->{RouteOperationMapping} )
+            )
+        {
+            my $RoutOperationMapping = $ProviderTransportConfig->{Config}->{RouteOperationMapping};
+
+            CONFIGNAME:
+            for my $ConfigName ( sort keys %{$RoutOperationMapping} ) {
+                my $Config = $RoutOperationMapping->{$ConfigName};
+
+                # Remove use of parser backend "CSV".
+                if (
+                    defined $Config->{ParserBackend}
+                    && $Config->{ParserBackend} eq 'CSV'
+                    )
+                {
+                    delete $Config->{ParserBackend};
+                    delete $Config->{ParserBackendParameter};
+                }
             }
         }
 
@@ -142,7 +197,11 @@ sub _CreateMissingWebservices {
 
     my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
     my $WebserviceObject  = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
+    my $ValidObject       = $Kernel::OM->Get('Kernel::System::Valid');
     my $ZnunyHelperObject = $Kernel::OM->Get('Kernel::System::ZnunyHelper');
+
+    my %ValidIDsByName = reverse $ValidObject->ValidList();
+    my $InvalidID      = $ValidIDsByName{invalid};
 
     my $Webservices = $WebserviceObject->WebserviceList(
         Valid => 0,
@@ -153,7 +212,10 @@ sub _CreateMissingWebservices {
     my $Home = $ConfigObject->Get('Home');
 
     my %WebservicesToCreate = (
-        TimeAccounting => $Home . '/scripts/webservices/TimeAccounting.yml',
+        TimeAccounting => {
+            YAMLFilePath => $Home . '/scripts/webservices/TimeAccounting.yml',
+            Valid        => 0,
+        },
     );
 
     WEBSERVICENAME:
@@ -164,12 +226,24 @@ sub _CreateMissingWebservices {
             next WEBSERVICENAME;
         }
 
-        my $YAMLFilePath = $WebservicesToCreate{$WebserviceName};
-
         $ZnunyHelperObject->_WebserviceCreateIfNotExists(
             Webservices => {
-                $WebserviceName => $YAMLFilePath,
+                $WebserviceName => $WebservicesToCreate{$WebserviceName}->{YAMLFilePath},
             },
+        );
+
+        # Disable web service (if configured).
+        next WEBSERVICENAME if $WebservicesToCreate{$WebserviceName}->{Valid};
+
+        my $Webservice = $WebserviceObject->WebserviceGet(
+            Name => $WebserviceName,
+        );
+        next WEBSERVICENAME if !IsHashRefWithData($Webservice);
+
+        $WebserviceObject->WebserviceUpdate(
+            %{$Webservice},
+            ValidID => $InvalidID,
+            UserID  => 1,
         );
     }
 

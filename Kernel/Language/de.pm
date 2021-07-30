@@ -34,7 +34,9 @@ sub Data {
     $Self->{ThousandSeparator} = '.';
     $Self->{Translation} = {
 
+        #
         # Znuny.xml config file
+        #
         "Enables/disables the Znuny package verification. If disabled, all packages are shown as verified. It's still recommended to use only verified packages."
             => 'Aktiviert/deaktiviert die Znuny-Paketverifizierung. Wenn deaktiviert werden alle Pakete als verifiziert angezeigt. Es wird trotzdem empfohlen, nur verifizierte Pakete zu verwenden.',
         'Screens for which it is possible to enable or disable dynamic fields.'           => 'Dialoge, für die es möglich ist, dynamische Felder zu aktivieren oder zu deaktivieren.',
@@ -51,6 +53,12 @@ sub Data {
             => "Mapping von Znuny::Generic-Invoker-Name (Schlüssel) zu einer Liste von Feldern (Inhalt), die base-64-kodiert werden sollen. Felder müssen in der folgenden Form angegeben werden: Feld1->Feld2;Feld3->Feld4->Feld5;Feld6. Eine verschachtelte Datenstruktur kann also durch Verbindung der Felder mit '->' angegeben werden. Inhalte aus verschiedenen Feldern je Invoker können kodiert werden, indem die Felder mit ';' voneinander getrennt werden. Bitte beachten Sie die Dokumentation des Pakets für weitere Informationen.",
         "Mapping of Znuny::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Different fields can be omitted by separating them by ';'."
             => "Mapping von Znuny::Generic-Invoker-Name (Schlüssel) zu einer Liste von Feldern (Inhalt), die aus dem Request entfernt werden. Felder müssen in der folgenden Form angegeben werden: Feld1->Feld2;Feld3->Feld4->Feld5;Feld6. Eine verschachtelte Datenstruktur kann also durch Verbindung der Felder mit '->' angegeben werden. Verschiedene Felder je Invoker können entfernt werden, indem sie mit ';' voneinander getrennt werden. Bitte beachten Sie die Dokumentation des Pakets für weitere Informationen.",
+
+        # Out-of-office
+        'Template for the out-of-office message shown to the user in the frontend. Placeholders for out-of-office information can be used via ###PlaceholderName###. Possible placeholders are: StartYear, StartMonth, StartDay, EndYear, EndMonth, EndDay, DaysRemaining.'
+            => 'Template für die "Out-of-Office"-Nachricht, die im Agenten-Interface angezeigt wird. Platzhalter für Out-Of-Office-Daten können wie folgt benutzt werden: ###PlatzhalterName###. Mögliche Out-Of-Office-PLatzhalter sind: StartYear, StartMonth, StartDay, EndYear, EndMonth, EndDay, DaysRemaining.',
+        'Message that will be shown if the agent is currently logged in.' => 'Meldung, die angezeigt werden soll, wenn der Agent gerade angemeldet ist.',
+        'Message that will be shown if the agent is currently logged out.' => 'Meldung, die angezeigt werden soll, wenn der Agent gerade abgemeldet ist.',
 
         # Last views
         'Assignment between action and attributes.' => 'Zuordnung zwischen Aktion und Attributen.',
@@ -151,12 +159,12 @@ sub Data {
         'Dynamic field backend registration.'                                        => 'Registrierung eines Dynamic-Field-Backends.',
         'Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect' => 'Admin-Konfigurationsdialog für die dynamischen Feldtypen WebserviceText und WebserviceMultiselect',
 
-        'Frontend module for the agent interface that provides the AJAX interface for the Webservice dynamic field backends.'
+        'Frontend module for the agent interface that provides the AJAX interface for the web service dynamic field backends.'
             => 'Frontend-Modul für die Agentenschnittstelle, das die AJAX-Schnittstelle für die Webservice-Dynamic-Field-Backends bereitstellt.',
-        'Frontend module for the customer interface that provides the AJAX interface for the Webservice dynamic field backends.'
+        'Frontend module for the customer interface that provides the AJAX interface for the web service dynamic field backends.'
             => 'Frontend-Modul für die Kundenschnittstelle, das die AJAX-Schnittstelle für die Webservice-Dynamic-Field-Backends bereitstellt.',
-        'Webservice dynamic field AJAX interface' => 'AJAX-Schnittstelle für dynamische Webservice-Felder',
-        'AJAX interface for the webservice dynamic field backends.' => 'AJAX-Schnittstelle für die Webservice-Dynamic-Field-Backends.',
+        'Web service dynamic field AJAX interface' => 'AJAX-Schnittstelle für dynamische Webservice-Felder',
+        'AJAX interface for the web service dynamic field backends.' => 'AJAX-Schnittstelle für die Webservice-Dynamic-Field-Backends.',
 
         'Ticket event module that stores values of the selected web service record into the configured additional dynamic fields.'
             => 'Ticket-Event-Modul zur Speicherung von Werten des gewählten Webservice-Datensatzes in den konfigurierten zusätzlichen dynamischen Feldern.',

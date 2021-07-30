@@ -27,6 +27,11 @@ my $TimeObject                     = $Kernel::OM->Get('Kernel::System::Time');
 my $UnitTestWebserviceObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Webservice');
 my $ConfigObject                   = $Kernel::OM->Get('Kernel::Config');
 my $ZnunyHelperObject              = $Kernel::OM->Get('Kernel::System::ZnunyHelper');
+my $ValidObject                    = $Kernel::OM->Get('Kernel::System::Valid');
+my $WebserviceObject               = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
+
+my %ValidIDsByName = reverse $ValidObject->ValidList();
+my $ValidID        = $ValidIDsByName{valid};
 
 my $Home = $ConfigObject->Get('Home');
 
@@ -34,6 +39,17 @@ $ZnunyHelperObject->_WebserviceCreateIfNotExists(
     Webservices => {
         TimeAccounting => $Home . '/scripts/webservices/TimeAccounting.yml'
     },
+);
+
+# Activate time accounting web service in case it is set to invalid.
+my $Webservice = $WebserviceObject->WebserviceGet(
+    Name => 'TimeAccounting',
+);
+
+$WebserviceObject->WebserviceUpdate(
+    %{$Webservice},
+    ValidID => $ValidID,
+    UserID  => 1,
 );
 
 $ZnunyHelperObject->_GroupCreateIfNotExists(

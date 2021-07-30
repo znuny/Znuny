@@ -377,7 +377,7 @@
         </Value>
     </Setting>
     <Setting Name="Frontend::Module###AJAXDynamicFieldWebservice" Required="1" Valid="1">
-        <Description Translatable="1">Frontend module for the agent interface that provides the AJAX interface for the Webservice dynamic field backends.</Description>
+        <Description Translatable="1">Frontend module for the agent interface that provides the AJAX interface for the web service dynamic field backends.</Description>
         <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
         <Value>
             <Item ValueType="FrontendRegistration">
@@ -391,14 +391,14 @@
                         </Array>
                     </Item>
                     <Item Key="NavBarName">Web service autocompletion</Item>
-                    <Item Key="Title" Translatable="1">Webservice dynamic field AJAX interface</Item>
-                    <Item Key="Description" Translatable="1">AJAX interface for the Webservice dynamic field backends.</Item>
+                    <Item Key="Title" Translatable="1">Web service dynamic field AJAX interface</Item>
+                    <Item Key="Description" Translatable="1">AJAX interface for the web service dynamic field backends.</Item>
                 </Hash>
             </Item>
         </Value>
     </Setting>
     <Setting Name="CustomerFrontend::Module###AJAXDynamicFieldWebservice" Required="1" Valid="1">
-        <Description Translatable="1">Frontend module for the customer interface that provides the AJAX interface for the Webservice dynamic field backends.</Description>
+        <Description Translatable="1">Frontend module for the customer interface that provides the AJAX interface for the web service dynamic field backends.</Description>
         <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
         <Value>
             <Item ValueType="FrontendRegistration">
@@ -412,8 +412,8 @@
                         </Array>
                     </Item>
                     <Item Key="NavBarName">Web service autocompletion</Item>
-                    <Item Key="Title" Translatable="1">Webservice dynamic field AJAX interface</Item>
-                    <Item Key="Description" Translatable="1">AJAX interface for the Webservice dynamic field backends.</Item>
+                    <Item Key="Title" Translatable="1">Web service dynamic field AJAX interface</Item>
+                    <Item Key="Description" Translatable="1">AJAX interface for the web service dynamic field backends.</Item>
                 </Hash>
             </Item>
         </Value>
@@ -512,6 +512,50 @@
                 <Item Key="Controller">Ticket</Item>
                 <Item Key="ConfigDialog">AdminGenericInterfaceOperationDefault</Item>
             </Hash>
+        </Value>
+    </Setting>
+
+    <!--
+        Out-of-office
+    -->
+    <Setting Name="GenericInterface::Operation::Module###User::OutOfOffice" Required="0" Valid="1">
+        <Description Translatable="1">GenericInterface module registration for the operation layer.</Description>
+        <Navigation>GenericInterface::Operation::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name">OutOfOffice</Item>
+                <Item Key="Controller">User</Item>
+                <Item Key="ConfigDialog">AdminGenericInterfaceOperationDefault</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="GenericInterface::Mapping::Module###OutOfOffice" Required="1" Valid="1">
+        <Description Translatable="1">GenericInterface module registration for the mapping layer.</Description>
+        <Navigation>GenericInterface::Mapping::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="OutOfOffice::DisplayAgentOutOfOfficeMessage" Required="0" Valid="1">
+        <Description Translatable="1">Template for the out-of-office message shown to the user in the frontend. Placeholders for out-of-office information can be used via ###PlaceholderName###. Possible placeholders are: StartYear, StartMonth, StartDay, EndYear, EndMonth, EndDay, DaysRemaining.</Description>
+        <Navigation>Core::OutOfOffice</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">*** out of office until ###EndYear###-###EndMonth###-###EndDay###/###DaysRemaining### d ***</Item>
+        </Value>
+    </Setting>
+    <Setting Name="OutOfOffice::DisplayAgentLoggedInMessage" Required="0" Valid="1">
+        <Description Translatable="1">Message that will be shown if the agent is currently logged in.</Description>
+        <Navigation>Core::OutOfOffice</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex=""></Item>
+        </Value>
+    </Setting>
+    <Setting Name="OutOfOffice::DisplayAgentLoggedOutMessage" Required="0" Valid="1">
+        <Description Translatable="1">Message that will be shown if the agent is currently logged out.</Description>
+        <Navigation>Core::OutOfOffice</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex=""></Item>
         </Value>
     </Setting>
 

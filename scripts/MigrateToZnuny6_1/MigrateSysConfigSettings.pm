@@ -54,6 +54,14 @@ sub Run {
         'DynamicFieldNonRequiredScreens###Framework' =>
             ['DynamicFields::ScreenConfiguration::ConfigKeysOfScreensWithoutMandatoryDynamicFieldSupport###Framework'],
 
+        # Znuny4OTRS-AdvancedOutOfOffice
+        'AdvancedOutOfOffice::DisplayAgentOutOfOfficeMessage'
+            => ['OutOfOffice::DisplayAgentOutOfOfficeMessage'],
+        'AdvancedOutOfOffice::DisplayAgentLoggedInMessage'
+            => ['OutOfOffice::DisplayAgentLoggedInMessage'],
+        'AdvancedOutOfOffice::DisplayAgentLoggedOutMessage'
+            => ['OutOfOffice::DisplayAgentLoggedOutMessage'],
+
         # Znuny4OTRS-LastViews
         'Znuny4OTRSLastViews'                                  => ['LastViews'],
         'PreferencesGroups###Znuny4OTRSLastViewsLimit'         => ['PreferencesGroups###LastViewsLimit'],
