@@ -4480,7 +4480,7 @@ sub _PackageUninstallMerged {
                     }
 
                     # skip framework file
-                    print STDERR "Notice: Skiped framework file: $RealFile\n";
+                    print STDERR "Notice: Skipped framework file: $RealFile\n";
                     next FILE;
                 }
 
