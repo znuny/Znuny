@@ -6,7 +6,7 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-package Kernel::GenericInterface::Invoker::Znuny::Generic;
+package Kernel::GenericInterface::Invoker::Ticket::Generic;
 
 use strict;
 use warnings;
@@ -18,9 +18,7 @@ our $ObjectManagerDisabled = 1;
 
 =head1 NAME
 
-Kernel::GenericInterface::Invoker::Znuny::Generic - GenericInterface Znuny Generic Invoker backend
-
-=head1 SYNOPSIS
+Kernel::GenericInterface::Invoker::Ticket::Generic
 
 =head1 PUBLIC INTERFACE
 
@@ -86,7 +84,7 @@ sub PrepareRequest {
 
     # Remove configured fields.
     my $OmittedFields = $ConfigObject->Get(
-        'GenericInterface::Invoker::Znuny::Generic::PrepareRequest::OmittedFields'
+        'GenericInterface::Invoker::Ticket::Generic::PrepareRequest::OmittedFields'
     ) // {};
 
     if (
@@ -104,7 +102,7 @@ sub PrepareRequest {
 
     # Base-64 encode configured field values.
     my $Base64EncodedFields = $ConfigObject->Get(
-        'GenericInterface::Invoker::Znuny::Generic::PrepareRequest::Base64EncodedFields'
+        'GenericInterface::Invoker::Ticket::Generic::PrepareRequest::Base64EncodedFields'
     ) // {};
 
     if (

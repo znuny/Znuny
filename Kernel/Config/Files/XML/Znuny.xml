@@ -228,13 +228,13 @@
     <!--
         Generic interface
     -->
-    <Setting Name="GenericInterface::Invoker::Module###Znuny::Generic" Required="1" Valid="1">
+    <Setting Name="GenericInterface::Invoker::Module###Ticket::Generic" Required="1" Valid="1">
         <Description Translatable="1">GenericInterface module registration for the invoker layer.</Description>
         <Navigation>GenericInterface::Invoker::ModuleRegistration</Navigation>
         <Value>
             <Hash>
                 <Item Key="Name">Generic</Item>
-                <Item Key="Controller">Znuny</Item>
+                <Item Key="Controller">Ticket</Item>
                 <Item Key="ConfigDialog">AdminGenericInterfaceInvokerDefault</Item>
             </Hash>
         </Value>
@@ -250,16 +250,16 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="GenericInterface::Invoker::Znuny::Generic::PrepareRequest::Base64EncodedFields" Required="1" Valid="1">
-        <Description Translatable="1">Mapping of Znuny::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Content of different fields can be given by separating those fields by ';'.</Description>
+    <Setting Name="GenericInterface::Invoker::Ticket::Generic::PrepareRequest::Base64EncodedFields" Required="1" Valid="1">
+        <Description Translatable="1">Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Content of different fields can be given by separating those fields by ';'.</Description>
         <Navigation>Core</Navigation>
         <Value>
             <Hash>
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="GenericInterface::Invoker::Znuny::Generic::PrepareRequest::OmittedFields" Required="1" Valid="1">
-        <Description Translatable="1">Mapping of Znuny::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Different fields can be omitted by separating them by ';'.</Description>
+    <Setting Name="GenericInterface::Invoker::Ticket::Generic::PrepareRequest::OmittedFields" Required="1" Valid="1">
+        <Description Translatable="1">Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Different fields can be omitted by separating them by ';'.</Description>
         <Navigation>Core</Navigation>
         <Value>
             <Hash>

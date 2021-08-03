@@ -21,6 +21,6 @@ Requester:
         Type: Simple
       MappingOutbound:
         Type: Simple
-      Type: Znuny::Generic
+      Type: Ticket::Generic
   Transport:
     Type: HTTP::REST

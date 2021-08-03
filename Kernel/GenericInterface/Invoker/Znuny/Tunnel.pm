@@ -20,9 +20,7 @@ our $ObjectManagerDisabled = 1;
 
 =head1 NAME
 
-Kernel::GenericInterface::Invoker::Znuny::Tunnel - GenericInterface Znuny Tunnel Invoker backend
-
-=head1 SYNOPSIS
+Kernel::GenericInterface::Invoker::Znuny::Tunnel
 
 =head1 PUBLIC INTERFACE
 

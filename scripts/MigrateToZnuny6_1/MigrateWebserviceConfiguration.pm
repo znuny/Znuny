@@ -51,7 +51,7 @@ sub _MigrateWebserviceConfigs {
     return 1 if !IsHashRefWithData($Webservices);
 
     my %InvokerTypeMapping = (
-        'Znuny4OTRSAdvanced::Generic' => 'Znuny::Generic',
+        'Znuny4OTRSAdvanced::Generic' => 'Ticket::Generic',
         'Znuny4OTRSAdvanced::Tunnel'  => 'Znuny::Tunnel',
         'OutOfOffice'                 => 'User::OutOfOffice',
     );

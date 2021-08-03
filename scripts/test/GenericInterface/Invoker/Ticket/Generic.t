@@ -34,7 +34,7 @@ my $Home = $ConfigObject->Get('Home');
 
 # Enable base-64-encoding for certain fields
 $ConfigObject->Set(
-    Key   => 'GenericInterface::Invoker::Znuny::Generic::PrepareRequest::Base64EncodedFields',
+    Key   => 'GenericInterface::Invoker::Ticket::Generic::PrepareRequest::Base64EncodedFields',
     Value => {
         Generic => 'Articles->Body;CustomerCompany->CustomerCompanyCity;Owner',
     },
@@ -42,7 +42,7 @@ $ConfigObject->Set(
 
 # Enable removal of certain fields
 $ConfigObject->Set(
-    Key   => 'GenericInterface::Invoker::Znuny::Generic::PrepareRequest::OmittedFields',
+    Key   => 'GenericInterface::Invoker::Ticket::Generic::PrepareRequest::OmittedFields',
     Value => {
         Generic => 'Articles->IsVisibleForCustomer;CustomerCompany->CustomerCompanyStreet;Queue',
     },
