@@ -90,8 +90,8 @@ sub TimeAccountingSearch {
         SELECT
             ticket.id,
             ticket.tn,
-            CONCAT(ticket.customer_id, " ", ticket.title) AS "ticket.title",
-            ticket.queue_id,
+            ticket.customer_id,
+            ticket.title,
             time_accounting.time_unit,
             time_accounting.create_time
         FROM
@@ -120,12 +120,12 @@ sub TimeAccountingSearch {
     ROW:
     while ( my @Row = $DBObject->FetchrowArray() ) {
         push @Entries, {
-            TicketID     => $Row[0],
-            TicketNumber => $Row[1],
-            TicketTitle  => $Row[2],
-            Queue        => $Row[3],
-            TimeUnit     => $Row[4],
-            Created      => $Row[5],
+            TicketID         => $Row[0],
+            TicketNumber     => $Row[1],
+            TicketCustomerID => $Row[2],
+            TicketTitle      => $Row[3],
+            TimeUnit         => $Row[4],
+            Created          => $Row[5],
         };
     }
 

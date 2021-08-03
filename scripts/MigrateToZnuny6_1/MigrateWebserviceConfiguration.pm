@@ -211,11 +211,13 @@ sub _CreateMissingWebservices {
 
     my $Home = $ConfigObject->Get('Home');
 
+    # Nothing to do right now but keep in here as example for later.
     my %WebservicesToCreate = (
-        TimeAccounting => {
-            YAMLFilePath => $Home . '/scripts/webservices/TimeAccounting.yml',
-            Valid        => 0,
-        },
+
+        #         TimeAccounting => {
+        #             YAMLFilePath => $Home . '/var/webservices/examples/TimeAccounting.yml',
+        #             Valid        => 0,
+        #         },
     );
 
     WEBSERVICENAME:
