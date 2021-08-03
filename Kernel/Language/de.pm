@@ -54,6 +54,17 @@ sub Data {
         "Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Different fields can be omitted by separating them by ';'."
             => "Mapping von Ticket::Generic-Invoker-Name (Schlüssel) zu einer Liste von Feldern (Inhalt), die aus dem Request entfernt werden. Felder müssen in der folgenden Form angegeben werden: Feld1->Feld2;Feld3->Feld4->Feld5;Feld6. Eine verschachtelte Datenstruktur kann also durch Verbindung der Felder mit '->' angegeben werden. Verschiedene Felder je Invoker können entfernt werden, indem sie mit ';' voneinander getrennt werden. Bitte beachten Sie die Dokumentation des Pakets für weitere Informationen.",
 
+        # Notification event transport web service
+        'Web service name' => 'Webservice-Name',
+        'Agent recipient information which will be passed to the web service.'
+            => 'Agenten-Empfänger-Information, die an den Web-Service weitergegeben wird.',
+        'Customer recipient information which will be passed to the web service.'
+            => 'Kunden-Empfänger-Information, die an den Web-Service weitergegeben wird.',
+        'Parameter name for additional recipients.'
+            => 'Parametername für zusätzliche Empfänger.',
+        'AJAX functions for notification event transport web service.'
+            => 'AJAX-Funktionen für Web-Service-Transport-Modul der Ticket-Benachrichtigungen.',
+
         # Out-of-office
         'Template for the out-of-office message shown to the user in the frontend. Placeholders for out-of-office information can be used via ###PlaceholderName###. Possible placeholders are: StartYear, StartMonth, StartDay, EndYear, EndMonth, EndDay, DaysRemaining.'
             => 'Template für die "Out-of-Office"-Nachricht, die im Agenten-Interface angezeigt wird. Platzhalter für Out-Of-Office-Daten können wie folgt benutzt werden: ###PlatzhalterName###. Mögliche Out-Of-Office-PLatzhalter sind: StartYear, StartMonth, StartDay, EndYear, EndMonth, EndDay, DaysRemaining.',
@@ -3928,6 +3939,10 @@ sub Data {
         'Operations' => 'Operationen',
         'OTRS as requester' => 'OTRS als Requester',
         'Invokers' => 'Invoker',
+        'Asynchronous event triggers will be handled as separate process by the scheduler daemon (recommended).'
+            => 'Asynchrone Event-Trigger werden als separate Prozesse über den Scheduler-Daemon ausgeführt (empfohlen).',
+        'Synchronous event triggers will be processed directly during the web request.'
+            => 'Synchrone Event-Trigger werden direkt während des Web-Requests ausgeführt.',
 
         # Perl Module: Kernel/Modules/AdminGenericInterfaceWebserviceHistory.pm
         'Got no WebserviceHistoryID!' => 'Keine WebserviceHistoryID empfangen!',

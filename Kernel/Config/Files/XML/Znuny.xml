@@ -824,6 +824,85 @@
     </Setting>
 
     <!--
+        Webservice ticket notification event transport
+    -->
+    <Setting Name="Notification::Transport###Webservice" Required="0" Valid="1">
+        <Description Translatable="1">Defines all the parameters for this notification transport.</Description>
+        <Navigation>Frontend::Admin::View::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Ticket::Event::NotificationEvent::Transport::Webservice</Item>
+                <Item Key="Name" Translatable="1">Webservice</Item>
+                <Item Key="Icon">fa fa-cloud-upload</Item>
+                <Item Key="Prio">520</Item>
+                <Item Key="AgentEnabledByDefault">0</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="WebserviceNotifications::RecipientInformation###Agent" Required="1" Valid="1">
+        <Description Translatable="1">Agent recipient information which will be passed to the web service.</Description>
+        <Navigation>Core::Notifications::Webservice</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="String">ParamName</DefaultItem>
+                <Item ValueType="String">UserEmail</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="WebserviceNotifications::RecipientInformation###Customer" Required="1" Valid="1">
+        <Description Translatable="1">Customer recipient information which will be passed to the web service.</Description>
+        <Navigation>Core::Notifications::Webservice</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="String">ParamName</DefaultItem>
+                <Item ValueType="String">UserEmail</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="WebserviceNotifications::RecipientInformation###AdditionalRecipientKeyName" Required="1" Valid="1">
+        <Description Translatable="1">Parameter name for additional recipients.</Description>
+        <Navigation>Core::Notifications::Webservice</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">UserLogin</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Module###AJAXNotificationEventTransportWebservice" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">AJAX functions for notification event transport web service.</Item>
+                    <Item Key="Title" Translatable="1">AJAX functions for notification event transport web service.</Item>
+                    <Item Key="NavBarName" Translatable="1">AJAX functions for notification event transport web service.</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AdminNotificationEvent###900-WebserviceNotification" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.WebserviceNotification.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!--
         Advanced dynamic fields
     -->
 

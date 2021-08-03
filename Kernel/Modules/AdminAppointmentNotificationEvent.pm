@@ -1072,24 +1072,6 @@ sub _Edit {
                     },
                 );
 
-                # if not standard transport
-                if (
-                    defined $RegisteredTransports{$Transport}->{IsOTRSBusinessTransport}
-                    && $RegisteredTransports{$Transport}->{IsOTRSBusinessTransport} eq '1'
-                    && !$OTRSBusinessIsInstalled
-                    )
-                {
-
-                    # transport
-                    $LayoutObject->Block(
-                        Name => 'TransportRowRecommendation',
-                        Data => {
-                            Transport     => $Transport,
-                            TransportName => $RegisteredTransports{$Transport}->{Name},
-                        },
-                    );
-                }
-
                 next TRANSPORT;
             }
             else {
