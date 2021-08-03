@@ -39,7 +39,6 @@ our @ObjectDependencies = (
     'Kernel::System::Main',
     'Kernel::System::OTRSBusiness',
     'Kernel::System::Scheduler',
-    'Kernel::System::SysConfig::Migration',
     'Kernel::System::SysConfig::XML',
     'Kernel::System::SystemData',
     'Kernel::System::XML',
@@ -4956,109 +4955,18 @@ sub _ConfigurationDeploy {
         return;
     }
 
-    # get OTRS home directory
-    my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
-
-    # build file location for OTRS5 config file
-    my $OTRS5ConfigFile = "$Home/Kernel/Config/Backups/ZZZAutoOTRS5.pm";
-
-    # if this is a Packageupgrade and if there is a ZZZAutoOTRS5.pm file in the backup location
-    # (this file has been copied there during the migration from OTRS 5 to OTRS 6)
-    if ( ( IsHashRefWithData( $Self->{MergedPackages} ) || $Param{Action} eq 'PackageUpgrade' ) && -e $OTRS5ConfigFile )
-    {
-
-        # delete categories cache
-        $Kernel::OM->Get('Kernel::System::Cache')->Delete(
-            Type => 'SysConfig',
-            Key  => 'ConfigurationCategoriesGet',
+    my $Success = $SysConfigObject->ConfigurationDeploy(
+        Comments => $Param{Comments},
+        NotDirty => 1,
+        UserID   => 1,
+        Force    => 1,
+    );
+    if ( !$Success ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Could not deploy configuration!",
         );
-
-        # get all config categories
-        my %Categories = $SysConfigObject->ConfigurationCategoriesGet();
-
-        # to store all setting names from this package
-        my @PackageSettings;
-
-        # get all config files names for this package
-        CONFIGXMLFILE:
-        for my $ConfigXMLFile ( @{ $Categories{ $Param{Package} }->{Files} } ) {
-
-            my $FileLocation = "$Home/Kernel/Config/Files/XML/$ConfigXMLFile";
-
-            # get the content of the XML file
-            my $ContentRef = $Kernel::OM->Get('Kernel::System::Main')->FileRead(
-                Location => $FileLocation,
-                Mode     => 'utf8',
-                Result   => 'SCALAR',
-            );
-
-            # check error, but continue
-            if ( !$ContentRef ) {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
-                    Priority => 'error',
-                    Message  => "Could not read content of $FileLocation!",
-                );
-                next CONFIGXMLFILE;
-            }
-
-            # get all settings from this package
-            my @SettingList = $Kernel::OM->Get('Kernel::System::SysConfig::XML')->SettingListParse(
-                XMLInput    => ${$ContentRef},
-                XMLFilename => $ConfigXMLFile,
-            );
-
-            # get all the setting names from this file
-            for my $Setting (@SettingList) {
-                push @PackageSettings, $Setting->{XMLContentParsed}->{Name};
-            }
-        }
-
-        # sort the settings
-        @PackageSettings = sort @PackageSettings;
-
-        # run the migration of the effective values (only for the package settings)
-        my $Success = $Kernel::OM->Get('Kernel::System::SysConfig::Migration')->MigrateConfigEffectiveValues(
-            FileClass       => 'Kernel::Config::Backups::ZZZAutoOTRS5',
-            FilePath        => $OTRS5ConfigFile,
-            PackageSettings => \@PackageSettings,                         # only migrate the given package settings
-            NoOutput => 1,    # we do not want to print status output to the screen
-        );
-
-        # deploy only the package settings
-        # (even if the migration of the effective values was not or only party successfull)
-        $Success = $SysConfigObject->ConfigurationDeploy(
-            Comments      => $Param{Comments},
-            NoValidation  => 1,
-            UserID        => 1,
-            Force         => 1,
-            DirtySettings => \@PackageSettings,
-        );
-
-        # check error
-        if ( !$Success ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Could not deploy configuration!",
-            );
-            return;
-        }
-    }
-
-    else {
-
-        my $Success = $SysConfigObject->ConfigurationDeploy(
-            Comments => $Param{Comments},
-            NotDirty => 1,
-            UserID   => 1,
-            Force    => 1,
-        );
-        if ( !$Success ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Could not deploy configuration!",
-            );
-            return;
-        }
+        return;
     }
 
     return 1;
