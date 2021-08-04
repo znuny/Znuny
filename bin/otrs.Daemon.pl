@@ -2,6 +2,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -104,10 +105,20 @@ if ( !@ARGV ) {
 my $DaemonStopWait = 30;
 my $ForceStop;
 
-# check for debug mode
 my %DebugDaemons;
 my $Debug;
-if (
+my $Foreground;
+
+
+if ( # Check for foreground mode.
+    lc $ARGV[0] eq 'start'
+    && $ARGV[1]
+    && lc $ARGV[1] eq '--foreground'
+    )
+{
+    $Foreground = 1;
+}
+elsif ( # Check for debug mode.
     lc $ARGV[0] eq 'start'
     && $ARGV[1]
     && lc $ARGV[1] eq '--debug'
@@ -170,11 +181,12 @@ else {
 
 sub PrintUsage {
     my $UsageText = "Usage:\n";
-    $UsageText .= " otrs.Daemon.pl action [--debug] [--force]\n";
+    $UsageText .= " otrs.Daemon.pl action [--debug] [--force] [--foreground]\n";
     $UsageText .= "\nOptions:\n";
     $UsageText .= sprintf " %-22s - %s", '[--debug]', 'Run the daemon in debug mode.' . "\n";
     $UsageText .= sprintf " %-22s - %s", '[--force]',
         'Reduce the time the main daemon waits other daemons to stop.' . "\n";
+    $UsageText .= sprintf " %-22s - %s", '[--foreground]', 'Run the daemon in foreground.' . "\n";
     $UsageText .= "\nActions:\n";
     $UsageText .= sprintf " %-22s - %s", 'start', 'Start the daemon process.' . "\n";
     $UsageText .= sprintf " %-22s - %s", 'stop', 'Stop the daemon process.' . "\n";
@@ -195,16 +207,20 @@ sub PrintUsage {
 
 sub Start {
 
-    # Create a fork of the current process.
-    #   Parent gets the PID of the child.
-    #   Child gets PID = 0.
-    my $DaemonPID = fork;
+    # Detach daemon if should not be run in foreground.
+    if (!$Foreground) {
 
-    # Check if fork was not possible.
-    die "Can not create daemon process: $!" if !defined $DaemonPID || $DaemonPID < 0;
+        # Create a fork of the current process.
+        #   Parent gets the PID of the child.
+        #   Child gets PID = 0.
+        my $DaemonPID = fork;
 
-    # Close parent gracefully.
-    exit 0 if $DaemonPID;
+        # Check if fork was not possible.
+        die "Can not create daemon process: $!" if !defined $DaemonPID || $DaemonPID < 0;
+
+        # Close parent gracefully.
+        exit 0 if $DaemonPID;
+    }
 
     # Lock PID.
     my $LockSuccess = _PIDLock();
