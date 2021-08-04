@@ -1207,6 +1207,13 @@ sub _GetRecipientList {
 
     TICKETID:
     for my $TicketID ( @{ $Param{TicketIDs} } ) {
+        my $UserHasTicketPermission = $TicketObject->TicketPermission(
+            Type     => 'ro',
+            TicketID => $TicketID,
+            UserID   => $Self->{UserID},
+        );
+
+        next TICKETID if !$UserHasTicketPermission;
 
         my %Ticket = $TicketObject->TicketGet(
             TicketID      => $TicketID,
