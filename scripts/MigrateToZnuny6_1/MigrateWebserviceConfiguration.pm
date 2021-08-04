@@ -52,7 +52,7 @@ sub _MigrateWebserviceConfigs {
 
     my %InvokerTypeMapping = (
         'Znuny4OTRSAdvanced::Generic' => 'Ticket::Generic',
-        'Znuny4OTRSAdvanced::Tunnel'  => 'Znuny::Tunnel',
+        'Znuny4OTRSAdvanced::Tunnel'  => 'Generic::Tunnel',
         'OutOfOffice'                 => 'User::OutOfOffice',
     );
 

@@ -6,7 +6,7 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-package Kernel::GenericInterface::Invoker::Znuny::Tunnel;
+package Kernel::GenericInterface::Invoker::Generic::Tunnel;
 
 use strict;
 use warnings;
@@ -20,7 +20,7 @@ our $ObjectManagerDisabled = 1;
 
 =head1 NAME
 
-Kernel::GenericInterface::Invoker::Znuny::Tunnel
+Kernel::GenericInterface::Invoker::Generic::Tunnel
 
 =head1 PUBLIC INTERFACE
 

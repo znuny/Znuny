@@ -239,13 +239,13 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="GenericInterface::Invoker::Module###Znuny::Tunnel" Required="1" Valid="0">
+    <Setting Name="GenericInterface::Invoker::Module###Generic::Tunnel" Required="0" Valid="1">
         <Description Translatable="1">GenericInterface module registration for the invoker layer.</Description>
         <Navigation>GenericInterface::Invoker::ModuleRegistration</Navigation>
         <Value>
             <Hash>
                 <Item Key="Name">Tunnel</Item>
-                <Item Key="Controller">Znuny</Item>
+                <Item Key="Controller">Generic</Item>
                 <Item Key="ConfigDialog">AdminGenericInterfaceInvokerDefault</Item>
             </Hash>
         </Value>
