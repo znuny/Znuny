@@ -75,6 +75,18 @@ sub SendNotification {
         return;
     }
 
+    NEEDED:
+    for my $Needed (qw(Notification Recipient)) {
+        next NEEDED if ref $Param{$Needed} eq 'HASH';
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "$Needed needs to be a hash!",
+        );
+
+        return;
+    }
+
     $Self->{EventData} = undef;
 
     my %Notification = %{ $Param{Notification} };
@@ -111,6 +123,13 @@ sub SendNotification {
     my $AgentRecipientInformation    = $RecipientInformation->{Agent} // [];
     my $CustomerRecipientInformation = $RecipientInformation->{Customer} // [];
     my $AdditionalRecipientKeyName   = $RecipientInformation->{AdditionalRecipientKeyName} || 'Recipient';
+
+    # Remove certain keys/values from recipient.
+    # Note: UserPassword is a configurable customer user field. Only the default field name 'UserPassword'
+    # is supported right now.
+    for my $Key (qw(UserPw UserPassword)) {
+        delete $Param{Recipient}->{$Key};
+    }
 
     my %Recipient = %{ $Param{Recipient} };
 
