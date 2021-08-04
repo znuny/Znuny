@@ -1,4 +1,5 @@
 # 6.1.1 2021-xx-xx
+ - 2021-07-28 Improved JavaScript recognition in function Kernel::System::HTMLUtils::Safety. Thanks for hints to Tim Püttmanns, maxence.
  - 2021-06-17 Fixed not needed error message in TicketList.pm (#94). Thanks to Paweł Bogusławski (@pboguslawski). [#94](https://github.com/znuny/Znuny/pull/94)
  - 2021-06-15 Do not warn agents about empty article subjects by default (#88). Thanks to Renée Bäcker (@reneeb). [#88](https://github.com/znuny/Znuny/pull/88)
  - 2021-06-15 Improvements for Dev::Code::CPANUpdate (#38). Thanks to Renée Bäcker (@reneeb). [#38](https://github.com/znuny/Znuny/pull/38)
