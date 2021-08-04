@@ -119,9 +119,17 @@ sub Run {
                 }
             }
 
-            my @Appointments = $AppointmentObject->AppointmentList(
-                %GetParam,
+            my $UserHasCalendarPermission = $CalendarObject->CalendarPermissionGet(
+                CalendarID => $GetParam{CalendarID},
+                UserID     => $Self->{UserID},
             );
+
+            my @Appointments;
+            if ($UserHasCalendarPermission) {
+                @Appointments = $AppointmentObject->AppointmentList(
+                    %GetParam,
+                );
+            }
 
             # go through all appointments
             for my $Appointment (@Appointments) {
