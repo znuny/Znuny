@@ -1,4 +1,4 @@
-# 6.1.1 2021-xx-xx
+# 6.1.1 2021-08-05
  - 2021-08-03 Integrated package WebserviceNotification.
  - 2021-07-30 Integrated package Znuny4OTRS-AdvancedOutOfOffice.
  - 2021-07-28 Improved JavaScript recognition in function Kernel::System::HTMLUtils::Safety. Thanks for hints to Tim Püttmanns, maxence.
@@ -28,7 +28,7 @@
  - 2021-06-15 Use ticket title as the default appointment title (#90). Thanks to Renée Bäcker (@reneeb). [#90](https://github.com/znuny/Znuny/pull/90)
  - 2021-06-15 Column list validation before saving agent preferences (#84). Thanks to Paweł Bogusławski (@pboguslawski). [#84](https://github.com/znuny/Znuny/pull/84)
 
-# 6.0.36 2021-xx-xx
+# 6.0.36 2021-08-05
  - 2021-07-28 Improved JavaScript recognition in function Kernel::System::HTMLUtils::Safety. Thanks for hints to Tim Püttmanns, maxence.
  - 2021-07-27 Files in configured directories of SysConfig options SMIME::PrivatePath and SMIME::CertPath will now not be included in a support bundle anymore if they are within the Znuny directory (CVE-2021-21440). Thanks for hints to Centuran Consulting.
  - 2021-07-27 Added safety checks for form/URL parameters to AdminAppointmentCalendarManage, AgentAppointmentEdit and AgentAppointmentList. Thanks for hints to Centuran Consulting.
