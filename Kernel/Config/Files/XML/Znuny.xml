@@ -1141,4 +1141,24 @@
         </Value>
     </Setting>
 
+    <!-- Webservice example Mattermpst 
+    <Setting Name="PreferencesGroups###MattermostUsername" Required="0" Valid="0">
+        <Description Translatable="1">The user's Mattermost username.</Description>
+        <Navigation>Frontend::Agent::View::Preferences</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::Preferences::Generic</Item>
+                <Item Key="PreferenceGroup">NotificationSettings</Item>
+                <Item Key="Label" Translatable="1">Mattermost Username</Item>
+                <Item Key="Desc" Translatable="1">Your username in Mattermost without the leading @</Item>
+                <Item Key="Block">Input</Item>
+                <Item Key="Name">MattermostUsername</Item>
+                <Item Key="PrefKey">MattermostUsername</Item>
+                <Item Key="Data">[% Env("MattermostUsername") %]</Item>
+                <Item Key="Prio">0100</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
 </otrs_config>
