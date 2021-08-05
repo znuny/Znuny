@@ -67,7 +67,7 @@
                         <li class="Header">[% Translate("Dynamic Fields") | html %]</li>
 [% RenderBlockStart("NoDataFoundMsg") %]
                         <li>
-                            [% Translate("No data found.") | html %] <a href="[% Env("Baselink") %]Action=AdminDynamicField" >[% Translate("Add DynamicField") | html %]</a>
+                            [% Translate("No data found.") | html %] <a href="[% Env("Baselink") %]Action=AdminDynamicField" >[% Translate("Add dynamic field") | html %]</a>
                         </li>
 [% RenderBlockEnd("NoDataFoundMsg") %]
 [% RenderBlockStart("DynamicFieldOverviewRow") %]

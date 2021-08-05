@@ -250,7 +250,7 @@
                                 </fieldset>
                             </div>
 
-                            <label for="ContentType">[% Translate("ContentType") | html %]:</label>
+                            <label for="ContentType">[% Translate("Content type") | html %]:</label>
                             <div class="Field">
                                 [% Data.ContentTypeStrg %]
                                 <p class="FieldExplanation">

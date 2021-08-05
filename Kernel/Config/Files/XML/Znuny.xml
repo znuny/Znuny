@@ -123,8 +123,8 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Loader::Module::AdminSystemFiles###900-Znuny" Required="1" Valid="1">
-        <Description Translatable="1">Loader module registration for AdminSystemFiles.</Description>
+    <Setting Name="Loader::Module::AdminSystemFiles###900-Framework" Required="1" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
         <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
         <Value>
             <Hash>
@@ -349,7 +349,7 @@
         <Navigation>Core::DynamicFields::DriverRegistration</Navigation>
         <Value>
             <Hash>
-                <Item Key="DisplayName" Translatable="1">Webservice (Text)</Item>
+                <Item Key="DisplayName" Translatable="1">Web service (Text)</Item>
                 <Item Key="Module">Kernel::System::DynamicField::Driver::WebserviceText</Item>
                 <Item Key="ConfigDialog">AdminDynamicFieldWebservice</Item>
                 <Item Key="Config">
@@ -370,7 +370,7 @@
         <Navigation>Core::DynamicFields::DriverRegistration</Navigation>
         <Value>
             <Hash>
-                <Item Key="DisplayName" Translatable="1">Webservice (Multiselect)</Item>
+                <Item Key="DisplayName" Translatable="1">Web service (Multiselect)</Item>
                 <Item Key="Module">Kernel::System::DynamicField::Driver::WebserviceMultiselect</Item>
                 <Item Key="ConfigDialog">AdminDynamicFieldWebservice</Item>
             </Hash>
