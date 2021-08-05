@@ -50,6 +50,7 @@ The following persons contributed to OTRS:
 * Jens Pfeifer <jp@znuny.com>
 * Johannes Hörburger <johannes.hoerburger@otrs.com>
 * Johannes Nickel <hanne_hal@me.com>
+* Johannes Nickel <hanneshal@users.noreply.github.com>
 * Johannes Nickel <jn@znuny.com>
 * Keith Moore <tenareth@gmail.com>
 * Luca Maranzano <liuk@linux.it>

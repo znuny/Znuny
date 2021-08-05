@@ -1,5 +1,12 @@
 # 6.0.36 2021-xx-xx
  - 2021-07-28 Improved JavaScript recognition in function Kernel::System::HTMLUtils::Safety. Thanks for hints to Tim Püttmanns, maxence.
+ - 2021-07-27 Files in configured directories of SysConfig options SMIME::PrivatePath and SMIME::CertPath will now not be included in a support bundle anymore if they are within the Znuny directory (CVE-2021-21440). Thanks for hints to Centuran Consulting.
+ - 2021-07-27 Added safety checks for form/URL parameters to AdminAppointmentCalendarManage, AgentAppointmentEdit and AgentAppointmentList. Thanks for hints to Centuran Consulting.
+ - 2021-07-26 Added permission check to ticket recipient list (CVE-2021-21443). Thanks for hints to Centuran Consulting.
+ - 2021-07-26 Added permission check to appointment list (CVE-2021-36091). Thanks for hints to Centuran Consulting.
+ - 2021-06-25 Linebreak now does not break fulltext search anymore (#49). Thanks to Johannes Nickel (@hanneshal). [#49](https://github.com/znuny/Znuny/pull/49)
+ - 2021-06-25 Incorrect empty hash initializations fixed (#96). Thanks to Paweł Bogusławski (@pboguslawski). [#96](https://github.com/znuny/Znuny/pull/96)
+ - 2021-06-25 Changed breadcrumb for the main action entry to a link. (#91). Thanks to maxence (@tipue-dev). [#91](https://github.com/znuny/Znuny/pull/91)
  - 2021-06-17 Fixed not needed error message in TicketList.pm (#94). Thanks to Paweł Bogusławski (@pboguslawski). [#94](https://github.com/znuny/Znuny/pull/94)
  - 2021-06-15 Do not warn agents about empty article subjects by default (#88). Thanks to Renée Bäcker (@reneeb). [#88]
  - 2021-06-15 Column list validation before saving agent preferences (#84). Thanks to Paweł Bogusławski (@pboguslawski). [#84](https://github.com/znuny/Znuny/pull/84)
