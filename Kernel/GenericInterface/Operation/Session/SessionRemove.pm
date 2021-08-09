@@ -11,7 +11,6 @@ package Kernel::GenericInterface::Operation::Session::SessionRemove;
 
 use strict;
 use warnings;
-use Data::Dumper;
 
 use Kernel::System::VariableCheck qw(IsStringWithData IsHashRefWithData);
 
