@@ -619,6 +619,363 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###Custom10" Required="0" Valid="0" ConfigLevel="100">
+        <Description Translatable="1">Executes a custom command or module. Note: if module is used, function is required.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">Custom10</Item>
+                <Item Key="Schedule">* * * * *</Item>
+                <Item Key="Module"></Item>
+                <Item Key="Function"></Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###Custom11" Required="0" Valid="0" ConfigLevel="100">
+        <Description Translatable="1">Executes a custom command or module. Note: if module is used, function is required.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">Custom11</Item>
+                <Item Key="Schedule">* * * * *</Item>
+                <Item Key="Module"></Item>
+                <Item Key="Function"></Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###Custom12" Required="0" Valid="0" ConfigLevel="100">
+        <Description Translatable="1">Executes a custom command or module. Note: if module is used, function is required.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">Custom12</Item>
+                <Item Key="Schedule">* * * * *</Item>
+                <Item Key="Module"></Item>
+                <Item Key="Function"></Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###Custom13" Required="0" Valid="0" ConfigLevel="100">
+        <Description Translatable="1">Executes a custom command or module. Note: if module is used, function is required.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">Custom13</Item>
+                <Item Key="Schedule">* * * * *</Item>
+                <Item Key="Module"></Item>
+                <Item Key="Function"></Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###Custom14" Required="0" Valid="0" ConfigLevel="100">
+        <Description Translatable="1">Executes a custom command or module. Note: if module is used, function is required.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">Custom14</Item>
+                <Item Key="Schedule">* * * * *</Item>
+                <Item Key="Module"></Item>
+                <Item Key="Function"></Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###Custom15" Required="0" Valid="0" ConfigLevel="100">
+        <Description Translatable="1">Executes a custom command or module. Note: if module is used, function is required.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">Custom15</Item>
+                <Item Key="Schedule">* * * * *</Item>
+                <Item Key="Module"></Item>
+                <Item Key="Function"></Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###Custom16" Required="0" Valid="0" ConfigLevel="100">
+        <Description Translatable="1">Executes a custom command or module. Note: if module is used, function is required.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">Custom16</Item>
+                <Item Key="Schedule">* * * * *</Item>
+                <Item Key="Module"></Item>
+                <Item Key="Function"></Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###Custom17" Required="0" Valid="0" ConfigLevel="100">
+        <Description Translatable="1">Executes a custom command or module. Note: if module is used, function is required.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">Custom17</Item>
+                <Item Key="Schedule">* * * * *</Item>
+                <Item Key="Module"></Item>
+                <Item Key="Function"></Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###Custom18" Required="0" Valid="0" ConfigLevel="100">
+        <Description Translatable="1">Executes a custom command or module. Note: if module is used, function is required.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">Custom18</Item>
+                <Item Key="Schedule">* * * * *</Item>
+                <Item Key="Module"></Item>
+                <Item Key="Function"></Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###Custom19" Required="0" Valid="0" ConfigLevel="100">
+        <Description Translatable="1">Executes a custom command or module. Note: if module is used, function is required.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">Custom19</Item>
+                <Item Key="Schedule">* * * * *</Item>
+                <Item Key="Module"></Item>
+                <Item Key="Function"></Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###Custom20" Required="0" Valid="0" ConfigLevel="100">
+        <Description Translatable="1">Executes a custom command or module. Note: if module is used, function is required.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">Custom20</Item>
+                <Item Key="Schedule">* * * * *</Item>
+                <Item Key="Module"></Item>
+                <Item Key="Function"></Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###Custom21" Required="0" Valid="0" ConfigLevel="100">
+        <Description Translatable="1">Executes a custom command or module. Note: if module is used, function is required.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">Custom21</Item>
+                <Item Key="Schedule">* * * * *</Item>
+                <Item Key="Module"></Item>
+                <Item Key="Function"></Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###Custom22" Required="0" Valid="0" ConfigLevel="100">
+        <Description Translatable="1">Executes a custom command or module. Note: if module is used, function is required.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">Custom22</Item>
+                <Item Key="Schedule">* * * * *</Item>
+                <Item Key="Module"></Item>
+                <Item Key="Function"></Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###Custom23" Required="0" Valid="0" ConfigLevel="100">
+        <Description Translatable="1">Executes a custom command or module. Note: if module is used, function is required.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">Custom23</Item>
+                <Item Key="Schedule">* * * * *</Item>
+                <Item Key="Module"></Item>
+                <Item Key="Function"></Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###Custom24" Required="0" Valid="0" ConfigLevel="100">
+        <Description Translatable="1">Executes a custom command or module. Note: if module is used, function is required.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">Custom24</Item>
+                <Item Key="Schedule">* * * * *</Item>
+                <Item Key="Module"></Item>
+                <Item Key="Function"></Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###Custom25" Required="0" Valid="0" ConfigLevel="100">
+        <Description Translatable="1">Executes a custom command or module. Note: if module is used, function is required.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">Custom25</Item>
+                <Item Key="Schedule">* * * * *</Item>
+                <Item Key="Module"></Item>
+                <Item Key="Function"></Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###Custom26" Required="0" Valid="0" ConfigLevel="100">
+        <Description Translatable="1">Executes a custom command or module. Note: if module is used, function is required.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">Custom26</Item>
+                <Item Key="Schedule">* * * * *</Item>
+                <Item Key="Module"></Item>
+                <Item Key="Function"></Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###Custom27" Required="0" Valid="0" ConfigLevel="100">
+        <Description Translatable="1">Executes a custom command or module. Note: if module is used, function is required.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">Custom27</Item>
+                <Item Key="Schedule">* * * * *</Item>
+                <Item Key="Module"></Item>
+                <Item Key="Function"></Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###Custom28" Required="0" Valid="0" ConfigLevel="100">
+        <Description Translatable="1">Executes a custom command or module. Note: if module is used, function is required.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">Custom28</Item>
+                <Item Key="Schedule">* * * * *</Item>
+                <Item Key="Module"></Item>
+                <Item Key="Function"></Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###Custom29" Required="0" Valid="0" ConfigLevel="100">
+        <Description Translatable="1">Executes a custom command or module. Note: if module is used, function is required.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">Custom29</Item>
+                <Item Key="Schedule">* * * * *</Item>
+                <Item Key="Module"></Item>
+                <Item Key="Function"></Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###Custom30" Required="0" Valid="0" ConfigLevel="100">
+        <Description Translatable="1">Executes a custom command or module. Note: if module is used, function is required.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">Custom30</Item>
+                <Item Key="Schedule">* * * * *</Item>
+                <Item Key="Module"></Item>
+                <Item Key="Function"></Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
     <!-- custom generic agent tasks -->
     <Setting Name="Daemon::SchedulerCronTaskManager::Task###GenericAgentFile1" Required="0" Valid="0" ConfigLevel="100">
         <Description Translatable="1">Run file based generic agent jobs (Note: module name needs to be specified in -configuration-module param e.g. "Kernel::System::GenericAgent").</Description>
