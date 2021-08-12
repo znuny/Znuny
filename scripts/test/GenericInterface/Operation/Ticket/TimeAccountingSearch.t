@@ -37,7 +37,7 @@ my $Home = $ConfigObject->Get('Home');
 
 $ZnunyHelperObject->_WebserviceCreateIfNotExists(
     Webservices => {
-        TimeAccounting => $Home . '/var/webservices/examples/TimeAccounting.yml'
+        TimeAccounting => $Home . '/var/webservices/examples/TimeAccountingREST.yml'
     },
 );
 
