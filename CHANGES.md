@@ -1,6 +1,3 @@
-# 6.0.37 2021-xx-x
- - 2021-08-12 Fixed wrong otrs.Daemon.pl exit code after valid termination.
-
 # 6.0.36 2021-08-05
  - 2021-07-28 Improved JavaScript recognition in function Kernel::System::HTMLUtils::Safety. Thanks for hints to Tim Püttmanns, maxence.
  - 2021-07-27 Files in configured directories of SysConfig options SMIME::PrivatePath and SMIME::CertPath will now not be included in a support bundle anymore if they are within the Znuny directory (CVE-2021-21440). Thanks for hints to Centuran Consulting.
