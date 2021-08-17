@@ -1141,7 +1141,7 @@
         </Value>
     </Setting>
 
-    <!-- Web service example Mattermost
+    <!-- Web service example Mattermost -->
     <Setting Name="PreferencesGroups###MattermostUsername" Required="0" Valid="0">
         <Description Translatable="1">The user's Mattermost username.</Description>
         <Navigation>Frontend::Agent::View::Preferences</Navigation>
@@ -1160,6 +1160,5 @@
             </Hash>
         </Value>
     </Setting>
-    -->
 
 </otrs_config>
