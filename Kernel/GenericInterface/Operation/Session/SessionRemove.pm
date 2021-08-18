@@ -83,7 +83,6 @@ session can't get deleted)
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     if ( !IsHashRefWithData( $Param{Data} ) ) {
 
         return $Self->ReturnError(
