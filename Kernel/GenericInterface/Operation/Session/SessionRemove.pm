@@ -12,7 +12,7 @@ package Kernel::GenericInterface::Operation::Session::SessionRemove;
 use strict;
 use warnings;
 
-use Kernel::System::VariableCheck qw(IsStringWithData IsHashRefWithData);
+use Kernel::System::VariableCheck qw(:all);
 
 use parent qw(
     Kernel::GenericInterface::Operation::Common
