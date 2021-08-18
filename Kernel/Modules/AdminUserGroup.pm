@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -48,7 +49,8 @@ sub Run {
 
         # get group data
         my %GroupData = $GroupObject->GroupList(
-            Valid => 1,
+            Valid                => 1,
+            WithoutManagedInLDAP => 1,
         );
         my %Types;
         for my $Type ( @{ $ConfigObject->Get('System::Permission') } ) {
@@ -134,36 +136,60 @@ sub Run {
 
         my $ID = $ParamObject->GetParam( Param => 'ID' ) || '';
 
-        # get new groups
-        my %Permissions;
-        for my $Type ( @{ $ConfigObject->Get('System::Permission') } ) {
-            my @IDs = $ParamObject->GetArray( Param => $Type );
-            $Permissions{$Type} = \@IDs;
+        # Get system groups.
+        my %SystemGroups = $Kernel::OM->Get('Kernel::System::Group')->GroupList( Valid => 1 );
+
+        # Hash with groups that are managed in LDAP and should not be managed locally in app.
+        # If defined, only specified groups are synchronized from LDAP.
+        my %UserSyncGroupsWithPermissionsManagedInLDAP;
+
+        # Populate hash from parameter (array with group names).
+        my $UserSyncGroupsWithPermissionsManagedInLDAPParam
+            = $Kernel::OM->Get('Kernel::Config')->Get('UserSyncGroupsWithPermissionsManagedInLDAP');
+        if ($UserSyncGroupsWithPermissionsManagedInLDAPParam) {
+            %UserSyncGroupsWithPermissionsManagedInLDAP
+                = map { $_ => 1 } @{$UserSyncGroupsWithPermissionsManagedInLDAPParam};
         }
 
-        # get group data
-        my %UserData = $UserObject->UserList(
-            Valid => 1,
-        );
-        my %NewPermission;
-        for my $UserID ( sort keys %UserData ) {
-            for my $Permission ( sort keys %Permissions ) {
-                $NewPermission{$Permission} = 0;
-                my @Array = @{ $Permissions{$Permission} };
-                ID:
-                for my $ID (@Array) {
-                    next ID if !$ID;
-                    if ( $UserID == $ID ) {
-                        $NewPermission{$Permission} = 1;
+        # If LDAP managed groups are defined and it's LDAP managed group, don't allow changing
+        # its permissions in UI.
+        if (
+            !%UserSyncGroupsWithPermissionsManagedInLDAP
+            || !$UserSyncGroupsWithPermissionsManagedInLDAP{ $SystemGroups{$ID} }
+            )
+        {
+
+            # Get new groups.
+            my %Permissions;
+            for my $Type ( @{ $ConfigObject->Get('System::Permission') } ) {
+                my @IDs = $ParamObject->GetArray( Param => $Type );
+                $Permissions{$Type} = \@IDs;
+            }
+
+            # Get group data.
+            my %UserData = $UserObject->UserList(
+                Valid => 1,
+            );
+            my %NewPermission;
+            for my $UserID ( sort keys %UserData ) {
+                for my $Permission ( sort keys %Permissions ) {
+                    $NewPermission{$Permission} = 0;
+                    my @Array = @{ $Permissions{$Permission} };
+                    ID:
+                    for my $ID (@Array) {
+                        next ID if !$ID;
+                        if ( $UserID == $ID ) {
+                            $NewPermission{$Permission} = 1;
+                        }
                     }
                 }
+                $GroupObject->PermissionGroupUserAdd(
+                    UID        => $UserID,
+                    GID        => $ID,
+                    Permission => \%NewPermission,
+                    UserID     => $Self->{UserID},
+                );
             }
-            $GroupObject->PermissionGroupUserAdd(
-                UID        => $UserID,
-                GID        => $ID,
-                Permission => \%NewPermission,
-                UserID     => $Self->{UserID},
-            );
         }
 
         # if the user would like to continue editing the group-user relation just redirect to the edit screen
@@ -199,7 +225,8 @@ sub Run {
 
         # get group data
         my %GroupData = $GroupObject->GroupList(
-            Valid => 1,
+            Valid                => 1,
+            WithoutManagedInLDAP => 1,
         );
         my %NewPermission;
         for my $GroupID ( sort keys %GroupData ) {
@@ -421,7 +448,8 @@ sub _Overview {
 
     # get group data
     my %GroupData = $Kernel::OM->Get('Kernel::System::Group')->GroupList(
-        Valid => 1,
+        Valid                => 1,
+        WithoutManagedInLDAP => 1,
     );
 
     if (%GroupData) {

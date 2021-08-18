@@ -1,3 +1,6 @@
+# 6.5.2 ????-??-??
+ - 2023-04-26 Fixed permission removal from LDAP and UserSyncGroupsWithPermissionsManagedInLDAP parameter introduced to allow manage specified groups in LDAP.
+
 # 6.5.1 2023-03-09
  - 2023-02-28 Added options tickets-created-before-date and tickets-created-before-days to console command Admin::Article::StorageSwitch.
  - 2023-02-28 Fixed encoding of postmaster filter name in AdminPostMasterFilter.

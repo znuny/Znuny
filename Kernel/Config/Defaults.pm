@@ -588,6 +588,22 @@ sub LoadDefaults {
     # Utilize extended nested group search? (may impact performance)
 #    $Self->{'AuthSyncModule::LDAP::NestedGroupSearch'} = 1;
 
+    # SelfUserSyncGroupsWithPermissionsManagedInLDAP
+    # List of application group names; if not empty, only specified groups
+    # are synchronized from LDAP and cannot be managed in application UI
+    # (specified groups are not inherited from roles any more even if
+    # already defined there). Existing group permissions for specified
+    # groups will be changed on first sync with LDAP (i.e. on user login)
+    # if different than in LDAP. This parameter is common for all
+    # AuthSyncModule::LDAP::*N sync backends. When undefined or empty
+    # and group permissions from LDAP sync is enabled, all groups are
+    # synchronized from LDAP and all groups may be managed from application
+    # UI also.
+#    $Self->{'UserSyncGroupsWithPermissionsManagedInLDAP'} = [
+#        'admin',
+#        'users',
+#    ];
+
     # AuthSyncModule::LDAP::UserSyncGroupsDefinition
     # (If "LDAP" was selected for AuthModule and you want to sync LDAP
     # groups to otrs groups, define the following.)

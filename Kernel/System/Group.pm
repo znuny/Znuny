@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -16,6 +17,7 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Cache',
     'Kernel::System::DB',
+    'Kernel::System::Group',
     'Kernel::System::Log',
     'Kernel::System::User',
     'Kernel::System::Valid',
@@ -161,11 +163,19 @@ sub GroupAdd {
     );
     $CacheObject->Delete(
         Type => 'Group',
-        Key  => 'GroupList::0',
+        Key  => 'GroupList::00',
     );
     $CacheObject->Delete(
         Type => 'Group',
-        Key  => 'GroupList::1',
+        Key  => 'GroupList::01',
+    );
+    $CacheObject->Delete(
+        Type => 'Group',
+        Key  => 'GroupList::10',
+    );
+    $CacheObject->Delete(
+        Type => 'Group',
+        Key  => 'GroupList::11',
     );
     $CacheObject->CleanUp(
         Type => 'CustomerGroup',
@@ -301,11 +311,19 @@ sub GroupUpdate {
     );
     $CacheObject->Delete(
         Type => 'Group',
-        Key  => 'GroupList::0',
+        Key  => 'GroupList::00',
     );
     $CacheObject->Delete(
         Type => 'Group',
-        Key  => 'GroupList::1',
+        Key  => 'GroupList::01',
+    );
+    $CacheObject->Delete(
+        Type => 'Group',
+        Key  => 'GroupList::10',
+    );
+    $CacheObject->Delete(
+        Type => 'Group',
+        Key  => 'GroupList::11',
     );
     $CacheObject->CleanUp(
         Type => 'CustomerGroup',
@@ -329,6 +347,7 @@ returns a hash of all groups
 
     my %Groups = $GroupObject->GroupList(
         Valid => 1,   # (optional) default 0
+        WithoutManagedInLDAP => 0,   # (optional) default 0; set 1 to skip groups with permissions managed in LDAP
     );
 
 the result looks like
@@ -345,14 +364,15 @@ the result looks like
 sub GroupList {
     my ( $Self, %Param ) = @_;
 
-    # set default value
-    my $Valid = $Param{Valid} ? 1 : 0;
+    # Set default values.
+    my $Valid                = $Param{Valid}                ? 1 : 0;
+    my $WithoutManagedInLDAP = $Param{WithoutManagedInLDAP} ? 1 : 0;
 
     # get cache object
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
     # create cache key
-    my $CacheKey = 'GroupList::' . $Valid;
+    my $CacheKey = 'GroupList::' . $Valid . $WithoutManagedInLDAP;
 
     # read cache
     my $Cache = $CacheObject->Get(
@@ -367,12 +387,30 @@ sub GroupList {
     # get group data list
     my %GroupDataList = $Self->GroupDataList();
 
+    # Hash with groups that are managed in LDAP and should not be managed locally in app.
+    # If defined, only specified groups are synchronized from LDAP.
+    my %UserSyncGroupsWithPermissionsManagedInLDAP;
+
+    # Populate hash from parameter (array with group names).
+    my $UserSyncGroupsWithPermissionsManagedInLDAPParam
+        = $Kernel::OM->Get('Kernel::Config')->Get('UserSyncGroupsWithPermissionsManagedInLDAP');
+    if ($UserSyncGroupsWithPermissionsManagedInLDAPParam) {
+        %UserSyncGroupsWithPermissionsManagedInLDAP
+            = map { $_ => 1 } @{$UserSyncGroupsWithPermissionsManagedInLDAPParam};
+    }
+
     my %GroupListValid;
     my %GroupListAll;
     KEY:
     for my $Key ( sort keys %GroupDataList ) {
 
         next KEY if !$Key;
+
+        # If WithoutManagedInLDAP was requested and LDAP managed groups are defined,
+        # skip groups that are managed in LDAP.
+        if ( $WithoutManagedInLDAP && %UserSyncGroupsWithPermissionsManagedInLDAP ) {
+            next KEY if $UserSyncGroupsWithPermissionsManagedInLDAP{ $GroupDataList{$Key}->{Name} };
+        }
 
         # add group to the list of all groups
         $GroupListAll{$Key} = $GroupDataList{$Key}->{Name};
@@ -397,13 +435,13 @@ sub GroupList {
     # set cache
     $CacheObject->Set(
         Type  => 'Group',
-        Key   => 'GroupList::0',
+        Key   => 'GroupList::0' . $WithoutManagedInLDAP,
         TTL   => 60 * 60 * 24 * 20,
         Value => \%GroupListAll,
     );
     $CacheObject->Set(
         Type  => 'Group',
-        Key   => 'GroupList::1',
+        Key   => 'GroupList::1' . $WithoutManagedInLDAP,
         TTL   => 60 * 60 * 24 * 20,
         Value => \%GroupListValid,
     );
@@ -2660,6 +2698,21 @@ sub _DBGroupRoleGet {
         return %{$Cache} if $Cache && ref $Cache eq 'HASH';
     }
 
+    # Get system groups.
+    my %SystemGroups = $Kernel::OM->Get('Kernel::System::Group')->GroupList( Valid => 1 );
+
+    # Hash with groups that are managed in LDAP and should not be managed locally in app.
+    # If defined, only specified groups are synchronized from LDAP.
+    my %UserSyncGroupsWithPermissionsManagedInLDAP;
+
+    # Populate hash from parameter (array with group names).
+    my $UserSyncGroupsWithPermissionsManagedInLDAPParam
+        = $Kernel::OM->Get('Kernel::Config')->Get('UserSyncGroupsWithPermissionsManagedInLDAP');
+    if ($UserSyncGroupsWithPermissionsManagedInLDAPParam) {
+        %UserSyncGroupsWithPermissionsManagedInLDAP
+            = map { $_ => 1 } @{$UserSyncGroupsWithPermissionsManagedInLDAPParam};
+    }
+
     # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
@@ -2674,7 +2727,14 @@ sub _DBGroupRoleGet {
     my %RoleGroupPermList;
     my %RolePermGroupList;
     my %GroupPermRoleList;
+    ROW:
     while ( my @Row = $DBObject->FetchrowArray() ) {
+
+        # If LDAP managed groups are defined, skip groups that are
+        # managed in LDAP.
+        if (%UserSyncGroupsWithPermissionsManagedInLDAP) {
+            next ROW if $UserSyncGroupsWithPermissionsManagedInLDAP{ $SystemGroups{ $Row[1] } };
+        }
 
         $RoleGroupPermList{ $Row[0] }->{ $Row[1] } ||= [];
         $RolePermGroupList{ $Row[0] }->{ $Row[2] } ||= [];

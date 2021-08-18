@@ -612,10 +612,24 @@ sub Sync {
         }
     }
 
+    # Hash with groups that are managed in LDAP and should not be managed locally in app.
+    # If defined, only specified groups are synchronized from LDAP (other groups should
+    # be managed locally).
+    my %UserSyncGroupsWithPermissionsManagedInLDAP;
+
+    # Populate hash from parameter (array with group names).
+    my $UserSyncGroupsWithPermissionsManagedInLDAPParam
+        = $ConfigObject->Get('UserSyncGroupsWithPermissionsManagedInLDAP');
+    if ($UserSyncGroupsWithPermissionsManagedInLDAPParam) {
+        %UserSyncGroupsWithPermissionsManagedInLDAP
+            = map { $_ => 1 } @{$UserSyncGroupsWithPermissionsManagedInLDAPParam};
+    }
+
     # Compare group permissions from LDAP with current user group permissions.
     my %GroupPermissionsChanged;
 
-    if (%GroupPermissionsFromLDAP) {
+    # Modify group permissions from LDAP only if configured.
+    if ( $UserSyncGroupsDefinition || $UserSyncAttributeGroupsDefinition ) {
 
         PERMISSIONTYPE:
         for my $PermissionType ( @{ $ConfigObject->Get('System::Permission') } ) {
@@ -628,6 +642,12 @@ sub Sync {
 
             GROUPID:
             for my $GroupID ( sort keys %SystemGroups ) {
+
+                # If LDAP managed groups are defined, skip permission if
+                # this group is not managed in LDAP.
+                if (%UserSyncGroupsWithPermissionsManagedInLDAP) {
+                    next GROUPID if !$UserSyncGroupsWithPermissionsManagedInLDAP{ $SystemGroups{$GroupID} };
+                }
 
                 my $OldPermission = $GroupPermissions{$GroupID} ? 1 : 0;
 
@@ -807,8 +827,8 @@ sub Sync {
         }
     }
 
-    # compare role permissions from ldap with current user role permissions and update if necessary
-    if (%RolePermissionsFromLDAP) {
+    # Modify role permissions from LDAP only if configured.
+    if ( $UserSyncRolesDefinition || $UserSyncAttributeRolesDefinition ) {
 
         # get current user roles
         my %UserRoles = $GroupObject->PermissionUserRoleGet(

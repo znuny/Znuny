@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -84,36 +85,64 @@ sub Run {
         # if no errors occurred
         if ( !%Errors ) {
 
-            # update group
-            my $GroupUpdate = $GroupObject->GroupUpdate(
-                %GetParam,
-                UserID => $Self->{UserID}
-            );
+            # Get system groups.
+            my %SystemGroups = $Kernel::OM->Get('Kernel::System::Group')->GroupList( Valid => 1 );
 
-            if ($GroupUpdate) {
+            # Hash with groups that are managed in LDAP and should not be managed locally in app.
+            # If defined, only specified groups are synchronized from LDAP.
+            my %UserSyncGroupsWithPermissionsManagedInLDAP;
 
-                # if the user would like to continue editing the group, just redirect to the edit screen
-                if (
-                    defined $ParamObject->GetParam( Param => 'ContinueAfterSave' )
-                    && ( $ParamObject->GetParam( Param => 'ContinueAfterSave' ) eq '1' )
-                    )
-                {
-                    my $ID = $ParamObject->GetParam( Param => 'ID' ) || '';
-                    return $LayoutObject->Redirect(
-                        OP => "Action=$Self->{Action};Subaction=Change;ID=$GetParam{ID};Notification=Update"
-                    );
+            # Populate hash from parameter (array with group names).
+            my $UserSyncGroupsWithPermissionsManagedInLDAPParam
+                = $Kernel::OM->Get('Kernel::Config')->Get('UserSyncGroupsWithPermissionsManagedInLDAP');
+            if ($UserSyncGroupsWithPermissionsManagedInLDAPParam) {
+                %UserSyncGroupsWithPermissionsManagedInLDAP
+                    = map { $_ => 1 } @{$UserSyncGroupsWithPermissionsManagedInLDAPParam};
+            }
+
+            # If LDAP managed groups are defined and it's LDAP managed group, don't allow changing
+            # its properties in UI.
+            if (
+                !%UserSyncGroupsWithPermissionsManagedInLDAP
+                || !$GetParam{ID}
+                || !$UserSyncGroupsWithPermissionsManagedInLDAP{ $SystemGroups{ $GetParam{ID} } }
+                )
+            {
+
+                # Update group.
+                my $GroupUpdate = $GroupObject->GroupUpdate(
+                    %GetParam,
+                    UserID => $Self->{UserID}
+                );
+
+                if ($GroupUpdate) {
+
+                    # If the user would like to continue editing the group, just redirect to the edit screen.
+                    if (
+                        defined $ParamObject->GetParam( Param => 'ContinueAfterSave' )
+                        && ( $ParamObject->GetParam( Param => 'ContinueAfterSave' ) eq '1' )
+                        )
+                    {
+                        my $ID = $ParamObject->GetParam( Param => 'ID' ) || '';
+                        return $LayoutObject->Redirect(
+                            OP => "Action=$Self->{Action};Subaction=Change;ID=$GetParam{ID};Notification=Update"
+                        );
+                    }
+                    else {
+
+                        # Otherwise return to overview.
+                        return $LayoutObject->Redirect( OP => "Action=$Self->{Action};Notification=Update" );
+                    }
                 }
                 else {
-
-                    # otherwise return to overview
-                    return $LayoutObject->Redirect( OP => "Action=$Self->{Action};Notification=Update" );
+                    $Note = $LogObject->GetLogEntry(
+                        Type => 'Error',
+                        What => 'Message',
+                    );
                 }
             }
             else {
-                $Note = $LogObject->GetLogEntry(
-                    Type => 'Error',
-                    What => 'Message',
-                );
+                $Note = $Kernel::OM->Get('Kernel::Language')->Translate('This group cannot be changed.');
             }
         }
 

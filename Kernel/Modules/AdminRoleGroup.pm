@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -42,7 +43,10 @@ sub Run {
         my %RoleData = $GroupObject->RoleGet( ID => $ID );
 
         # get group data
-        my %GroupData = $GroupObject->GroupList( Valid => 1 );
+        my %GroupData = $GroupObject->GroupList(
+            Valid                => 1,
+            WithoutManagedInLDAP => 1,
+        );
         my %Types;
         for my $Type ( @{ $ConfigObject->Get('System::Permission') } ) {
             my %Data = $GroupObject->PermissionRoleGroupGet(
@@ -364,7 +368,10 @@ sub _Overview {
     }
 
     # get group data
-    my %GroupData = $GroupObject->GroupList( Valid => 1 );
+    my %GroupData = $GroupObject->GroupList(
+        Valid                => 1,
+        WithoutManagedInLDAP => 1,
+    );
 
     if (%GroupData) {
         for my $GroupID ( sort { uc( $GroupData{$a} ) cmp uc( $GroupData{$b} ) } keys %GroupData ) {
