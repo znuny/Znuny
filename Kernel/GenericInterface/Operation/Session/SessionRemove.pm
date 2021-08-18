@@ -101,7 +101,8 @@ sub Run {
             );
         }
     }
-    my $Success = $Kernel::OM->Get('Kernel::System::AuthSession')->RemoveSessionID(SessionID => $Param{Data}->{SessionID});
+    my $Success
+        = $Kernel::OM->Get('Kernel::System::AuthSession')->RemoveSessionID( SessionID => $Param{Data}->{SessionID} );
 
     if ( $Success == 0 ) {
 
