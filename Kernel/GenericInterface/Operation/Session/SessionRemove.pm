@@ -62,7 +62,7 @@ session can't get deleted)
 
     my $Result = $OperationObject->Run(
         Data => {
-            SessionID         => '12345678243',
+            SessionID => '12345678243',
         },
     );
 
