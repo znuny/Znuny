@@ -115,8 +115,15 @@ sub new {
 
     }
 
+    # Disable scheduling of asynchronous tasks using C<AsynchronousExecutor> component of System daemon.
     if ( $Param{DisableAsyncCalls} ) {
         $Self->DisableAsyncCalls();
+    }
+
+    if ( $Param{DisableSysConfigs} ) {
+        $Self->DisableSysConfigs(
+            %Param
+        );
     }
 
     return $Self;
@@ -688,6 +695,9 @@ Please note that this will not work correctly in clustered environments.
 sub ConfigSettingChange {
     my ( $Self, %Param ) = @_;
 
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
+
     my $Valid = $Param{Valid} // 1;
     my $Key   = $Param{Key};
     my $Value = $Param{Value};
@@ -702,14 +712,14 @@ sub ConfigSettingChange {
     $KeyDump =~ s|\#{3}|'}->{'|smxg;
 
     # Also set at runtime in the ConfigObject. This will be destroyed at the end of the unit test.
-    $Kernel::OM->Get('Kernel::Config')->Set(
+    $ConfigObject->Set(
         Key   => $Key,
         Value => $Valid ? $Value : undef,
     );
 
     my $ValueDump;
     if ($Valid) {
-        $ValueDump = $Kernel::OM->Get('Kernel::System::Main')->Dump($Value);
+        $ValueDump = $MainObject->Dump($Value);
         $ValueDump =~ s/\$VAR1/$KeyDump/;
     }
     else {
@@ -732,9 +742,11 @@ sub Load {
 }
 1;
 EOF
-    my $Home     = $Kernel::OM->Get('Kernel::Config')->Get('Home');
+
+    my $Home     = $ConfigObject->Get('Home');
     my $FileName = "$Home/Kernel/Config/Files/$PackageName.pm";
-    $Kernel::OM->Get('Kernel::System::Main')->FileWrite(
+
+    $MainObject->FileWrite(
         Location => $FileName,
         Mode     => 'utf8',
         Content  => \$Content,
@@ -852,7 +864,7 @@ sub UseTmpArticleDir {
 
 =head2 DisableAsyncCalls()
 
-Disable scheduling of asynchronous tasks using C<AsynchronousExecutor> component of OTRS daemon.
+Disable scheduling of asynchronous tasks using C<AsynchronousExecutor> component of System daemon.
 
 =cut
 
@@ -864,6 +876,55 @@ sub DisableAsyncCalls {
         Key   => 'DisableAsyncCalls',
         Value => 1,
     );
+
+    return 1;
+}
+
+=head2 DisableSysConfigs()
+
+Disables SysConfigs for current UnitTest.
+
+    $HelperObject->DisableSysConfigs(
+        DisableSysConfigs => [
+            'Ticket::Responsible'
+            'DashboardBackend###0442-RSS'
+        ],
+    );
+
+    $Kernel::OM->ObjectParamAdd(
+        'Kernel::System::UnitTest::Helper' => {
+            DisableSysConfigs => [
+                'Ticket::Responsible'
+                'DashboardBackend###0442-RSS'
+            ],
+        },
+    );
+
+=cut
+
+sub DisableSysConfigs {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
+    for my $Needed (qw(DisableSysConfigs)) {
+
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    for my $SysConfig ( @{ $Param{DisableSysConfigs} } ) {
+        $Self->ConfigSettingChange(
+            Valid => 0,
+            Key   => $SysConfig,
+        );
+    }
 
     return 1;
 }
