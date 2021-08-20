@@ -1,4 +1,6 @@
 # 6.2.1 2021-XX-XX
+ - Added SysConfig option to enable week numbers in the datepicker widget (#89). Thanks to Renée Bäcker (@reneeb). [#89](https://github.com/znuny/Znuny/pull/89)
+ - Added new autocomplete values to input fields (#67). Thanks to maxence (@tipue-dev). [#67](https://github.com/znuny/Znuny/pull/67)
  - Fixed double encoding for dynamic field filters in ticket overviews (#51). Thanks to maxence (@tipue-dev). [#51](https://github.com/znuny/Znuny/pull/51)
  - Fixed #107 - AgentTicketEmailOutbound "Empty subject" notification is not translated (#111.) Thanks to Tronsy (@Tronsy). [#111](https://github.com/znuny/Znuny/pull/111)
 
