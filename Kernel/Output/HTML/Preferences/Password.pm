@@ -94,10 +94,11 @@ sub Param {
 
         push @Params, {
             %Param,
-            Key   => '2 Factor Token',
-            Name  => 'TwoFactorToken',
-            Raw   => 1,
-            Block => 'Input',
+            Key          => '2 Factor Token',
+            Name         => 'TwoFactorToken',
+            Raw          => 1,
+            Block        => 'Input',
+            Autocomplete => 'one-time-code',
         };
 
         last COUNT;

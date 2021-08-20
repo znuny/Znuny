@@ -74,7 +74,7 @@
 [% RenderBlockStart("AuthTwoFactor") %]
                     <div>
                         <label for="TwoFactorToken">[% Translate("2 Factor Token") | html %]</label>
-                        <input title="[% Translate("Your 2 Factor Token") | html %]" type="text" name="TwoFactorToken" id="TwoFactorToken" />
+                        <input title="[% Translate("Your 2 Factor Token") | html %]" type="text" name="TwoFactorToken" id="TwoFactorToken" autocomplete="one-time-code"/>
                     </div>
 [% RenderBlockEnd("AuthTwoFactor") %]
 
