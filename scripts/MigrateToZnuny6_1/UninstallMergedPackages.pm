@@ -45,17 +45,11 @@ sub Run {
         Type => 'XMLParse',
     );
 
-    # Uninstall merged Znuny packages
-    my @InstalledPackages = $PackageObject->RepositoryList(
-        Result => 'short',
-    );
-
     PACKAGENAME:
     for my $PackageName (
         qw(
         Znuny4OTRS-AdvancedDynamicFields
         Znuny4OTRS-AutoCheckbox
-        Znuny4OTRS-ShowPendingTimeIfNeeded
         Znuny4OTRS-WebUserAgent
         Znuny4OTRS-EnhancedProxySupport
         Znuny4OTRS-AdvancedOutOfOffice
@@ -70,19 +64,10 @@ sub Run {
         )
         )
     {
-        my @InstalledPackage = grep { $_->{Name} eq $PackageName } @InstalledPackages;
-        next PACKAGENAME if @InstalledPackage != 1;
-
-        my $InstalledPackage = shift @InstalledPackage;
-
-        my $Package = $PackageObject->RepositoryGet(
-            Name    => $InstalledPackage->{Name},
-            Version => $InstalledPackage->{Version},
+        my $Success = $PackageObject->_PackageUninstallMerged(
+            Name => $PackageName,
         );
-        if ( defined $Package && length $Package ) {
-            my $Success = $PackageObject->PackageUninstall( String => $Package );
-            next PACKAGENAME if $Success;
-        }
+        next PACKAGENAME if $Success;
 
         print "\n    Error uninstalling package $PackageName\n\n";
         return;

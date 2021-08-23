@@ -736,16 +736,30 @@ my @Tests = (
             Other2  => 'Two',
             Other3  => 'Three',
             Other4  => 'Four',
+            NestedOther => {
+                SubOther => [
+                    'OtherValue1',
+                    'OtherValue2',
+                ],
+            },
             Complex => {
                 ComplexData => 'Data',
             },
         },
         ExpectedReturnData => {
             Other   => 'Data',
+            NestedOther => {
+                SubOther => [
+                    'OtherValue1',
+                    'OtherValue2',
+                ],
+            },
             URI1    => 'One',
             URI2    => 'Two',
+            URI3    => 'OtherValue1',
             Query3  => 'Three',
             Query4  => 'Four',
+            Query5  => 'OtherValue2',
             Complex => {
                 ComplexData => 'Data',
             },
@@ -766,7 +780,7 @@ my @Tests = (
                         RouteOperationMapping => {
                             TestSimple => {
                                 RequestMethod => ['POST'],
-                                Route         => '/Test/:URI1/:URI2',
+                                Route         => '/Test/:URI1/:URI2/:URI3',
                             },
                         },
                     },
@@ -786,7 +800,7 @@ my @Tests = (
                         Timeout                  => 120,
                         InvokerControllerMapping => {
                             TestSimple => {
-                                Controller => '/Test/:Other1/:Other2?Query3=:Other3&Query4=:Other4',
+                                Controller => '/Test/:Other1/:Other2/:NestedOther.SubOther.0?Query3=:Other3&Query4=:Other4&Query5=:NestedOther.SubOther.1',
                             },
                         },
                     },

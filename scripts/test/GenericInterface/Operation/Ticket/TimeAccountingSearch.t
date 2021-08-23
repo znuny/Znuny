@@ -37,7 +37,7 @@ my $Home = $ConfigObject->Get('Home');
 
 $ZnunyHelperObject->_WebserviceCreateIfNotExists(
     Webservices => {
-        TimeAccounting => $Home . '/scripts/webservices/TimeAccounting.yml'
+        TimeAccounting => $Home . '/var/webservices/examples/TimeAccountingREST.yml'
     },
 );
 
@@ -137,36 +137,35 @@ my @List = $TimeAccountingWebserviceObject->TimeAccountingSearch(
 
 my @ExpectedList = (
     {
-        'Created'      => '2017-01-01 10:00:00',
-        'Queue'        => 'Raw',
-        'TicketNumber' => $Ticket{TicketNumber},
-        'TicketTitle'  => $Ticket{CustomerID} . ' ' . $Ticket{Title},
-        'TimeUnit'     => '10.00'
+        'Created'          => '2017-01-01 10:00:00',
+        'Queue'            => 'Raw',
+        'TicketNumber'     => $Ticket{TicketNumber},
+        'TicketTitle'      => $Ticket{Title},
+        'TicketCustomerID' => $Ticket{CustomerID},
+        'TimeUnit'         => '10.00'
     },
     {
-        'Created'      => '2017-01-01 11:00:00',
-        'Queue'        => 'Misc',
-        'TicketNumber' => $Ticket{TicketNumber},
-        'TicketTitle'  => $Ticket{CustomerID} . ' ' . $Ticket{Title},
-        'TimeUnit'     => '20.00'
+        'Created'          => '2017-01-01 11:00:00',
+        'Queue'            => 'Misc',
+        'TicketNumber'     => $Ticket{TicketNumber},
+        'TicketTitle'      => $Ticket{Title},
+        'TicketCustomerID' => $Ticket{CustomerID},
+        'TimeUnit'         => '20.00'
     },
     {
-        'Created'      => '2017-01-01 12:00:00',
-        'Queue'        => 'Junk',
-        'TicketNumber' => $Ticket{TicketNumber},
-        'TicketTitle'  => $Ticket{CustomerID} . ' ' . $Ticket{Title},
-        'TimeUnit'     => '30.00'
+        'Created'          => '2017-01-01 12:00:00',
+        'Queue'            => 'Junk',
+        'TicketNumber'     => $Ticket{TicketNumber},
+        'TicketTitle'      => $Ticket{Title},
+        'TicketCustomerID' => $Ticket{CustomerID},
+        'TimeUnit'         => '30.00'
     }
 );
 
-my $DataIsDifferent = DataIsDifferent(
-    Data1 => \@List,
-    Data2 => \@ExpectedList,
-);
-
-$Self->False(
-    $DataIsDifferent,
-    "TimeAccountingSearch returned the correct result",
+$Self->IsDeeply(
+    \@List,
+    \@ExpectedList,
+    'TimeAccountingSearch returned the correct result',
 );
 
 $UnitTestWebserviceObject->Process(

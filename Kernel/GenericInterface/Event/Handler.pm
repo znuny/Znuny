@@ -158,7 +158,7 @@ sub Run {
                         # do not serialize config in case of available jq
                         if (
                             $Self->{JqIsAvailable}
-                            && $InvokerConfig->{Type} eq 'Znuny::Generic'
+                            && $InvokerConfig->{Type} eq 'Ticket::Generic'
                             )
                         {
                             %ObjectData = %EventData;

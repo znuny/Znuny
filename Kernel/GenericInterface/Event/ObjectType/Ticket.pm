@@ -67,7 +67,7 @@ sub DataGet {
 
     if (
         defined $Param{InvokerType}
-        && $Param{InvokerType} eq 'Znuny::Generic'
+        && $Param{InvokerType} eq 'Ticket::Generic'
         )
     {
         my %Ticket = $TicketObject->TicketDeepGet(

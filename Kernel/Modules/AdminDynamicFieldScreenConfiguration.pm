@@ -25,6 +25,7 @@ our @ObjectDependencies = (
 );
 
 use Kernel::System::VariableCheck qw(:all);
+use Kernel::Language qw(Translatable);
 
 sub new {
     my ( $Type, %Param ) = @_;
@@ -366,7 +367,7 @@ sub _ShowEdit {
         }
 
         %OtherElements      = %DynamicFields;
-        $Param{Header}      = 'Screens for dynamic field %s';
+        $Param{Header}      = Translatable('Screens for dynamic field %s');
         $Param{HiddenReset} = 'Hidden';
     }
     elsif ( $Param{Type} eq 'DynamicFieldScreen' ) {
@@ -381,10 +382,10 @@ sub _ShowEdit {
         }
         %OtherElements = %DynamicFieldScreens;
 
-        $Param{Header} = 'Dynamic fields for screen %s';
+        $Param{Header} = Translatable('Dynamic fields for screen %s');
     }
     elsif ( $Param{Type} eq 'DefaultColumnsScreen' ) {
-        $Param{Header} = 'Default columns for screen %s';
+        $Param{Header} = Translatable('Default columns for screen %s');
     }
 
     if ( $Param{Type} ne 'DynamicField' ) {

@@ -991,7 +991,7 @@ sub Safety {
         }
     }
 
-    my $String = $Param{String} || '';
+    my $String = $Param{String} // '';
 
     # check ref
     my $StringScalar;
@@ -1136,7 +1136,7 @@ sub Safety {
 
                 # remove javascript in a href links or src links
                 $Replaced += $Tag =~ s{
-                    ((?:\s|;|/)(?:background|url|src|href)=)
+                    ((?:\s|;|/)(?:background|url|src|href)\s*=\s*)
                     ('|"|)                                  # delimiter, can be empty
                     (?:\s* $JavaScriptPrefixRegex .*?)      # javascript, followed by anything but the delimiter
                     \2                                      # delimiter again

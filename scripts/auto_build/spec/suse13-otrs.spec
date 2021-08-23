@@ -181,6 +181,7 @@ rm -rf $RPM_BUILD_ROOT
 /opt/otrs/var/processes/examples/*
 %dir /opt/otrs/var/webservices/examples/
 /opt/otrs/var/webservices/examples/*.pm
+/opt/otrs/var/webservices/examples/*.yml
 
 /opt/otrs/Kernel/cpan-lib*
 

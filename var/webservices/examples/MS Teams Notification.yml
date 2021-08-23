@@ -1,0 +1,64 @@
+---
+Debugger:
+  DebugThreshold: debug
+  TestMode: '0'
+Description: ''
+FrameworkVersion: 6.1.x git
+Provider:
+  Transport:
+    Type: ''
+RemoteSystem: ''
+Requester:
+  Invoker:
+    Escalate:
+      Description: ''
+      Events: []
+      MappingOutbound:
+        Config:
+          DataInclude: []
+          ForceArray: sections target potentialAction
+          PostRegExFilter:
+          - Replace: \@context
+            Search: Initialcontext
+          - Replace: \@type
+            Search: Initialtype
+          - Replace: \@type
+            Search: potentialActiontype
+          - Replace: \@context
+            Search: potentialActioncontext
+          PostRegExValueCounter: '4'
+          PreRegExFilter: ~
+          PreRegExValueCounter: ~
+          Template: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<xsl:transform
+            version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" xmlns:date=\"http://exslt.org/dates-and-times\"
+            extension-element-prefixes=\"date\">\r\n    <xsl:output method=\"xml\"
+            encoding=\"utf-8\" indent=\"yes\"/>\r\n    <xsl:template match=\"RootElement\">\r\n
+            \       <xsl:copy>\r\n        \t<themeColor>0076D7</themeColor>\r\n        \t<Initialtype>MessageCard</Initialtype>\r\n
+            \       \t<Initialcontext>http://schema.org/extensions</Initialcontext>\r\n
+            \           <summary>Ticket <xsl:value-of select=\"//Ticket/TicketNumber\"
+            /> is escalated</summary>\r\n            <sections>\r\n            \t<activityTitle>Ticket
+            #<xsl:value-of select=\"//Ticket/TicketNumber\" />&#160;is escalated</activityTitle>\r\n
+            \           \t<markdown>true</markdown>\r\n            \t<facts><Name>Owner</Name><Value><xsl:value-of
+            select=\"//Ticket/OwnerData/UserFullname\"/></Value></facts>\r\n            \t<facts><Name>State</Name><Value><xsl:value-of
+            select=\"//Ticket/State\"/></Value></facts>\r\n            \t<facts><Name>Type</Name><Value><xsl:value-of
+            select=\"//Ticket/Type\"/></Value></facts>\r\n        \t</sections>\r\n
+            \           <potentialAction>\r\n                <potentialActiontype>ViewAction</potentialActiontype>\r\n
+            \               <potentialActioncontext>http://schema.org</potentialActioncontext>\r\n
+            \               <name>View ticket in Znuny</name>\r\n                <target>&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;/index.pl?Action=AgentTicketZoom;TicketID=<xsl:value-of
+            select=\"//Ticket/TicketID\" /></target>\r\n            </potentialAction>\r\n
+            \       </xsl:copy>\r\n    </xsl:template>\r\n</xsl:transform>"
+        Type: XSLT
+      Type: Ticket::Generic
+  Transport:
+    Config:
+      AdditionalHeaders: ~
+      ContentType: JSON
+      DefaultCommand: POST
+      Host: YOURHOOK_PART1
+      InvokerControllerMapping:
+        Escalate:
+          Command: POST
+          Controller: /YOURHOOK_PART2
+      SSLNoHostnameVerification: '0'
+      Timeout: '30'
+    Type: HTTP::REST

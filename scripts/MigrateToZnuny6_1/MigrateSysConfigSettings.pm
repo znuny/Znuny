@@ -36,9 +36,9 @@ sub Run {
 
         # Znuny4OTRS-AdvancedGI
         'Znuny4OTRS::AdvancedGI::Invoker::Generic::PrepareRequest::Base64EncodedFields' =>
-            ['GenericInterface::Invoker::Znuny::Generic::PrepareRequest::Base64EncodedFields'],
+            ['GenericInterface::Invoker::Ticket::Generic::PrepareRequest::Base64EncodedFields'],
         'Znuny4OTRS::AdvancedGI::Invoker::Generic::PrepareRequest::OmittedFields' =>
-            ['GenericInterface::Invoker::Znuny::Generic::PrepareRequest::OmittedFields'],
+            ['GenericInterface::Invoker::Ticket::Generic::PrepareRequest::OmittedFields'],
 
         # Znuny4OTRS-DynamicFieldWebservice
         'Znuny4OTRSDynamicFieldWebservice::HideDynamicFieldsWithoutDisplayedValue' =>

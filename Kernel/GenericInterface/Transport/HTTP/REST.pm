@@ -801,20 +801,34 @@ sub RequesterPerformRequest {
 
     my @ParamsToDelete;
 
+    my %FlattenedParamData;
+    $Self->_FlattenDataStructure(
+        Data      => $Param{Data},
+        Flattened => \%FlattenedParamData,
+    );
+
     # Replace any URI params with their actual value.
-    #    for example: from /Ticket/:TicketID/:Other
-    #    to /Ticket/1/2 (considering that $Param{Data} contains TicketID = 1 and Other = 2).
-    for my $ParamName ( sort keys %{ $Param{Data} } ) {
-        if ( $Controller =~ m{:$ParamName(?=/|\?|$)}msx ) {
+    #    for example: from /Ticket/:TicketData.TicketID/:Other
+    #    to /Ticket/1/2 (considering that $Param{Data} contains {TicketData}->{TicketID} = 1 and {Other} = 2).
+    FLATTENEDPARAMDATA:
+    for my $FlattenedParamName ( sort keys %FlattenedParamData ) {
+        next FLATTENEDPARAMDATA if $Controller !~ m{:$FlattenedParamName(?=/|\?|$)}ms;
 
-            my $ParamValue = $Param{Data}->{$ParamName};
+        my $ParamValue = $FlattenedParamData{$FlattenedParamName};
+        next FLATTENEDPARAMDATA if !defined $ParamValue;
 
-            $EncodeObject->EncodeInput( \$ParamValue );
+        $EncodeObject->EncodeInput( \$ParamValue );
 
-            $ParamValue = URI::Escape::uri_escape_utf8($ParamValue);
-            $Controller =~ s{:$ParamName(?=/|\?|$)}{$ParamValue}msxg;
-            push @ParamsToDelete, $ParamName;
-        }
+        $ParamValue = URI::Escape::uri_escape_utf8($ParamValue);
+        $Controller =~ s{:$FlattenedParamName(?=/|\?|$)}{$ParamValue}msg;
+
+        # Only delete "top level" hash keys.
+        # Keep data of nested structures as is because it would
+        # look like there's something missing otherwise (especially if
+        # array elements would be removed).
+        next FLATTENEDPARAMDATA if index( $FlattenedParamName, '.' ) != -1;
+
+        push @ParamsToDelete, $FlattenedParamName;
     }
 
     $Self->{DebuggerObject}->Debug(
@@ -829,17 +843,26 @@ sub RequesterPerformRequest {
         #    to ?UserLogin=user&Password=secret
         #    (considering that $Param{Data} contains UserLogin = 'user' and Password = 'secret').
         my $ReplaceFlag;
-        for my $ParamName ( sort keys %{ $Param{Data} } ) {
-            if ( $QueryParamsStr =~ m{:$ParamName(?=&|$)}msx ) {
-                my $ParamValue = $Param{Data}->{$ParamName};
+        FLATTENEDPARAMDATA:
+        for my $FlattenedParamName ( sort keys %FlattenedParamData ) {
+            next FLATTENEDPARAMDATA if $QueryParamsStr !~ m{:$FlattenedParamName(?=&|$)}ms;
 
-                $EncodeObject->EncodeInput( \$ParamValue );
+            my $ParamValue = $FlattenedParamData{$FlattenedParamName};
+            next FLATTENEDPARAMDATA if !defined $ParamValue;
 
-                $ParamValue = URI::Escape::uri_escape_utf8($ParamValue);
-                $QueryParamsStr =~ s{:$ParamName(?=&|$)}{$ParamValue}msxg;
-                push @ParamsToDelete, $ParamName;
-                $ReplaceFlag = 1;
-            }
+            $EncodeObject->EncodeInput( \$ParamValue );
+
+            $ParamValue = URI::Escape::uri_escape_utf8($ParamValue);
+            $QueryParamsStr =~ s{:$FlattenedParamName(?=&|$)}{$ParamValue}msxg;
+            $ReplaceFlag = 1;
+
+            # Only delete "top level" hash keys.
+            # Keep data of nested structures as is because it would
+            # look like there's something missing otherwise (especially if
+            # array elements would be removed).
+            next FLATTENEDPARAMDATA if index( $FlattenedParamName, '.' ) != -1;
+
+            push @ParamsToDelete, $FlattenedParamName;
         }
 
         # Append query params in the URI.
@@ -853,7 +876,7 @@ sub RequesterPerformRequest {
         }
     }
 
-    # Remove already used params.
+    # Remove already used "top-level" params.
     for my $ParamName (@ParamsToDelete) {
         delete $Param{Data}->{$ParamName};
     }
@@ -1241,6 +1264,112 @@ sub _Error {
         Success      => 0,
         ErrorMessage => $Param{Summary},
     };
+}
+
+=head2 _FlattenDataStructure()
+
+    Returns a flattened hash/array of a given hash/array.
+
+    $TransportObject->_FlattenDataStructure(
+        Data => \%OldHash,
+        Flattened => \%NewHash,
+    );
+
+    my %OldHash = (
+        Config => {
+            A => 1,
+            B => 2,
+            C => 3,
+            D => [
+                2, 5, 6,
+            ],
+        },
+        Config2 => 1
+    );
+
+    my %NewHash = (
+        Config.A   => 1,
+        Config.B   => 1,
+        Config.C   => 1,
+        Config.D.0 => 2,
+        Config.D.1 => 5,
+        Config.D.2 => 6,
+        Config2    => 1,
+    );
+
+=cut
+
+sub _FlattenDataStructure {
+    my ( $Self, %Param ) = @_;
+
+    for my $Needed (qw(Data Flattened)) {
+        if ( !$Param{$Needed} ) {
+            print "Got no $Needed!\n";
+            return;
+        }
+    }
+
+    my @Containers;
+    my $DataType;
+
+    if ( IsHashRefWithData( $Param{Data} ) ) {
+        @Containers = sort keys %{ $Param{Data} };
+        $DataType   = 'Hash';
+    }
+    else {
+        @Containers = @{ $Param{Data} };
+        $DataType   = 'Array';
+    }
+
+    my $Prefix = $Param{Prefix} // '';
+
+    my $ArrayCount = 0;
+
+    CONTAINER:
+    for my $Container (@Containers) {
+        next CONTAINER if !$Container;
+
+        if ( $DataType eq 'Hash' ) {
+            if (
+                IsHashRefWithData( $Param{Data}->{$Container} )
+                || IsArrayRefWithData( $Param{Data}->{$Container} )
+                )
+            {
+                $Self->_FlattenDataStructure(
+                    Data      => $Param{Data}->{$Container},
+                    Flattened => $Param{Flattened},
+                    Prefix    => $Prefix . $Container . '.',
+                );
+            }
+            else {
+                $Prefix                      = $Prefix . $Container;
+                $Param{Flattened}->{$Prefix} = $Param{Data}->{$Container};
+                $Prefix                      = $Param{Prefix} || '';
+            }
+        }
+        else {
+            if (
+                IsHashRefWithData($Container)
+                || IsArrayRefWithData($Container)
+                )
+            {
+                $Self->_FlattenDataStructure(
+                    Data      => $Container,
+                    Flattened => $Param{Flattened},
+                    Prefix    => $Prefix . $Container . '.',
+                );
+            }
+            else {
+                $Prefix                      = $Prefix . $ArrayCount;
+                $Param{Flattened}->{$Prefix} = $Container;
+                $Prefix                      = $Param{Prefix} || '';
+            }
+
+            $ArrayCount++;
+        }
+    }
+
+    return 1;
 }
 
 1;

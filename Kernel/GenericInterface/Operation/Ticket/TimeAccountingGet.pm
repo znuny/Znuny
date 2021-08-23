@@ -108,7 +108,7 @@ sub Run {
     if ( !$UserID ) {
         return $Self->ReturnError(
             ErrorCode    => 'TimeAccountingGet.AuthFail',
-            ErrorMessage => "TimeAccountingGet: Authorization failing!",
+            ErrorMessage => "TimeAccountingGet: Authentication failed!",
         );
     }
 
