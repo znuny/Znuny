@@ -68,9 +68,9 @@ session can't get deleted)
 
     $Result = {
         Success      => 1,                                # 0 or 1
-        ErrorMessage => '',                               # In case of an error
+        ErrorMessage => 'SessionRemove: Could not remove SessionID!',                               # In case of an error
         Data         => {
-            SessionID => $SessionID,
+            Success => $Success,
         },
     };
     
