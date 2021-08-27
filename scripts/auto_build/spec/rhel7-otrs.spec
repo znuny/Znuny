@@ -12,7 +12,7 @@
 # "bin/otrs.Console.pl Dev::Tools::RPMSpecGenerate". All changes will be lost.
 #
 
-Summary:      The Znuny LTS service desk.
+Summary:      The Znuny service desk.
 Name:         znuny
 Version:      0.0
 License:      GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
@@ -170,6 +170,7 @@ rm -rf $RPM_BUILD_ROOT
 /opt/otrs/var/processes/examples/*
 %dir /opt/otrs/var/webservices/examples/
 /opt/otrs/var/webservices/examples/*.pm
+/opt/otrs/var/webservices/examples/*.yml
 
 /opt/otrs/Kernel/cpan-lib*
 

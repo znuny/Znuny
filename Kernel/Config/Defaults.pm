@@ -106,7 +106,7 @@ sub LoadDefaults {
 
     # ProductName
     # (Application name displayed in frontend.)
-    $Self->{ProductName} = 'Znuny LTS';
+    $Self->{ProductName} = 'Znuny';
 
     # --------------------------------------------------- #
     # database settings                                   #
@@ -716,10 +716,6 @@ sub LoadDefaults {
     # agent interface notification module to check the admin user id
     # (don't work with user id 1 notification)
     $Self->{'Frontend::NotifyModule'} = {
-        '1000-CloudServicesDisabled' => {
-            Group  => 'admin',
-            Module => 'Kernel::Output::HTML::Notification::AgentCloudServicesDisabled',
-        },
         '1100-OTRSBusiness' => {
             Group  => 'admin',
             Module => 'Kernel::Output::HTML::Notification::AgentOTRSBusiness',

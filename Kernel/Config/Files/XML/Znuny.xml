@@ -1,0 +1,1164 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<otrs_config version="2.0" init="Application">
+    <!--
+        General settings
+    -->
+    <Setting Name="Loader::Agent::CommonJS###888-Framework" Required="1" Valid="1">
+        <Description Translatable="1">List of JS files to always be loaded for the agent interface.</Description>
+        <Navigation>Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>Znuny.Form.Input.js</Item>
+                <Item>Znuny.Form.Generic.js</Item>
+                <Item>Znuny.DynamicField.Webservice.js</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Customer::CommonJS###888-Framework" Required="1" Valid="1">
+        <Description Translatable="1">List of JS files to always be loaded for the customer interface.</Description>
+        <Navigation>Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>Znuny.Form.Input.js</Item>
+                <Item>Znuny.Form.Generic.js</Item>
+                <Item>Znuny.DynamicField.Webservice.js</Item>
+            </Array>
+        </Value>
+    </Setting>
+
+    <Setting Name="Loader::Agent::CommonCSS###888-Framework" Required="1" Valid="1">
+        <Description Translatable="1">List of CSS files to always be loaded for the agent interface.</Description>
+        <Navigation>Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>Znuny.LastViews.css</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Customer::CommonCSS###888-Framework" Required="1" Valid="1">
+        <Description Translatable="1">List of CSS files to always be loaded for the customer interface.</Description>
+        <Navigation>Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>Znuny.LastViews.css</Item>
+            </Array>
+        </Value>
+    </Setting>
+
+    <!--
+        Repositories
+    -->
+    <Setting Name="PackageRepositoryURLSchema" Required="1" Valid="1">
+        <Description Translatable="1">Access package repositories via HTTP or HTTPS.</Description>
+        <Navigation>Core::Repository</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="https">
+                <Item ValueType="Option" Value="https">https</Item>
+                <Item ValueType="Option" Value="http">http</Item>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="CloudServiceProxyURL" Required="1" Valid="1">
+        <Description Translatable="1">URL to the OTRS cloud service proxy service. The http or https prefix will be added, depending on SysConfig option 'PackageRepositoryURLSchema'.</Description>
+        <Navigation>Core::Repository</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">addons.znuny.com/api/otrs_cloud_service/</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Module###AdminSystemFiles" Required="1" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Admin</Item>
+                    <Item Key="Title" Translatable="1">System file support</Item>
+                    <Item Key="NavBarName">Admin</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::NavigationModule###AdminSystemFiles" Required="0" Valid="1">
+        <Description Translatable="1">Admin area navigation for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Group">
+                    <Array>
+                        <Item>admin</Item>
+                    </Array>
+                </Item>
+                <Item Key="GroupRo">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
+                <Item Key="Name" Translatable="1">System file support</Item>
+                <Item Key="Block">Administration</Item>
+                <Item Key="Description" Translatable="1">Manage system files.</Item>
+                <Item Key="IconBig">fa-search</Item>
+                <Item Key="IconSmall"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AdminSystemFiles###001-Framework" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.Agent.Admin.SupportDataCollector.css</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AdminSystemFiles###900-Framework" Required="1" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.Agent.Admin.SystemFiles.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item></Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="PackageVerification" Required="1" Valid="1">
+        <Description Translatable="1">Enables/disables the Znuny package verification. If disabled, all packages are shown as verified. It's still recommended to use only verified packages.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="1">
+                <Item ValueType="Option" Value="1">Active</Item>
+                <Item ValueType="Option" Value="0">Disabled</Item>
+            </Item>
+        </Value>
+    </Setting>
+
+    <!--
+        Dynamic fields
+    -->
+    <Setting Name="DynamicFieldScreens###Framework" Required="1" Valid="1">
+        <Description Translatable="1">Screens for which it is possible to enable or disable dynamic fields.</Description>
+        <Navigation>Frontend::Base::DynamicFieldScreens</Navigation>
+        <Value>
+            <Hash>
+                <!-- Views -->
+                <Item Key="Ticket::Frontend::AgentTicketClose###DynamicField">AgentTicketClose</Item>
+                <Item Key="Ticket::Frontend::AgentTicketCompose###DynamicField">AgentTicketCompose</Item>
+                <Item Key="Ticket::Frontend::AgentTicketEmail###DynamicField">AgentTicketEmail</Item>
+                <Item Key="Ticket::Frontend::AgentTicketEmailOutbound###DynamicField">AgentTicketEmailOutbound</Item>
+                <Item Key="Ticket::Frontend::AgentTicketForward###DynamicField">AgentTicketForward</Item>
+                <Item Key="Ticket::Frontend::AgentTicketFreeText###DynamicField">AgentTicketFreeText</Item>
+                <Item Key="Ticket::Frontend::AgentTicketMove###DynamicField">AgentTicketMove</Item>
+                <Item Key="Ticket::Frontend::AgentTicketNote###DynamicField">AgentTicketNote</Item>
+                <Item Key="Ticket::Frontend::AgentTicketOwner###DynamicField">AgentTicketOwner</Item>
+                <Item Key="Ticket::Frontend::AgentTicketPending###DynamicField">AgentTicketPending</Item>
+                <Item Key="Ticket::Frontend::AgentTicketPhone###DynamicField">AgentTicketPhone</Item>
+                <Item Key="Ticket::Frontend::AgentTicketPhoneInbound###DynamicField">AgentTicketPhoneInbound</Item>
+                <Item Key="Ticket::Frontend::AgentTicketPhoneOutbound###DynamicField">AgentTicketPhoneOutbound</Item>
+                <Item Key="Ticket::Frontend::AgentTicketPrint###DynamicField">AgentTicketPrint</Item>
+                <Item Key="Ticket::Frontend::AgentTicketPriority###DynamicField">AgentTicketPriority</Item>
+                <Item Key="Ticket::Frontend::AgentTicketResponsible###DynamicField">AgentTicketResponsible</Item>
+                <Item Key="Ticket::Frontend::AgentTicketSearch###DynamicField">AgentTicketSearch</Item>
+                <Item Key="Ticket::Frontend::AgentTicketZoom###DynamicField">AgentTicketZoom</Item>
+                <Item Key="Ticket::Frontend::CustomerTicketMessage###DynamicField">CustomerTicketMessage</Item>
+                <Item Key="Ticket::Frontend::CustomerTicketPrint###DynamicField">CustomerTicketPrint</Item>
+                <Item Key="Ticket::Frontend::CustomerTicketSearch###DynamicField">CustomerTicketSearch</Item>
+                <Item Key="Ticket::Frontend::CustomerTicketZoom###DynamicField">CustomerTicketZoom</Item>
+                <!-- Overviews -->
+                <Item Key="Ticket::Frontend::OverviewMedium###DynamicField">OverviewMedium</Item>
+                <Item Key="Ticket::Frontend::OverviewPreview###DynamicField">OverviewPreview</Item>
+                <Item Key="Ticket::Frontend::OverviewSmall###DynamicField">OverviewSmall</Item>
+                <Item Key="Ticket::Frontend::CustomerTicketOverview###DynamicField">CustomerTicketOverview</Item>
+                <!-- Process -->
+                <Item Key="Ticket::Frontend::AgentTicketZoom###ProcessWidgetDynamicField">ProcessWidgetDynamicField</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="DefaultColumnsScreens###Framework" Required="1" Valid="1">
+        <Description Translatable="1">Screens for which it is possible to enable or disable default columns.</Description>
+        <Navigation>Frontend::Base::DynamicFieldScreens</Navigation>
+        <Value>
+            <Hash>
+                <!-- DefaultColumns -->
+                <Item Key="Ticket::Frontend::AgentTicketStatusView###DefaultColumns">AgentTicketStatusView</Item>
+                <Item Key="Ticket::Frontend::AgentTicketQueue###DefaultColumns">AgentTicketQueue</Item>
+                <Item Key="Ticket::Frontend::AgentTicketResponsibleView###DefaultColumns">AgentTicketResponsibleView</Item>
+                <Item Key="Ticket::Frontend::AgentTicketWatchView###DefaultColumns">AgentTicketWatchView</Item>
+                <Item Key="Ticket::Frontend::AgentTicketLockedView###DefaultColumns">AgentTicketLockedView</Item>
+                <Item Key="Ticket::Frontend::AgentTicketEscalationView###DefaultColumns">AgentTicketEscalationView</Item>
+                <Item Key="Ticket::Frontend::AgentTicketSearch###DefaultColumns">AgentTicketSearch</Item>
+                <Item Key="Ticket::Frontend::AgentTicketService###DefaultColumns">AgentTicketService</Item>
+                <!-- DefaultColumns and Dashboard Widgets -->
+                <Item Key="DashboardBackend###0100-TicketPendingReminder">DashboardWidget TicketPendingReminder</Item>
+                <Item Key="DashboardBackend###0110-TicketEscalation">DashboardWidget TicketEscalation</Item>
+                <Item Key="DashboardBackend###0120-TicketNew">DashboardWidget TicketNew</Item>
+                <Item Key="DashboardBackend###0130-TicketOpen">DashboardWidget TicketOpen</Item>
+                <Item Key="DashboardBackend###0140-RunningTicketProcess">DashboardWidget RunningTicketProcess</Item>
+                <Item Key="AgentCustomerInformationCenter::Backend###0100-CIC-TicketPendingReminder">DashboardWidget CIC-TicketPendingReminder</Item>
+                <Item Key="AgentCustomerInformationCenter::Backend###0110-CIC-TicketEscalation">DashboardWidget CIC-TicketEscalation</Item>
+                <Item Key="AgentCustomerInformationCenter::Backend###0120-CIC-TicketNew">DashboardWidget CIC-TicketNew</Item>
+                <Item Key="AgentCustomerInformationCenter::Backend###0130-CIC-TicketOpen">DashboardWidget CIC-TicketOpen</Item>
+                <Item Key="AgentCustomerUserInformationCenter::Backend###0100-CUIC-TicketPendingReminder">DashboardWidget CUIC-TicketPendingReminder</Item>
+                <Item Key="AgentCustomerUserInformationCenter::Backend###0110-CUIC-TicketEscalation">DashboardWidget CUIC-TicketEscalation</Item>
+                <Item Key="AgentCustomerUserInformationCenter::Backend###0120-CUIC-TicketNew">DashboardWidget CUIC-TicketNew</Item>
+                <Item Key="AgentCustomerUserInformationCenter::Backend###0130-CUIC-TicketOpen">DashboardWidget CUIC-TicketOpen</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!--
+        Generic interface
+    -->
+    <Setting Name="GenericInterface::Invoker::Module###Ticket::Generic" Required="1" Valid="1">
+        <Description Translatable="1">GenericInterface module registration for the invoker layer.</Description>
+        <Navigation>GenericInterface::Invoker::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name">Generic</Item>
+                <Item Key="Controller">Ticket</Item>
+                <Item Key="ConfigDialog">AdminGenericInterfaceInvokerDefault</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="GenericInterface::Invoker::Module###Generic::Tunnel" Required="0" Valid="1">
+        <Description Translatable="1">GenericInterface module registration for the invoker layer.</Description>
+        <Navigation>GenericInterface::Invoker::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name">Tunnel</Item>
+                <Item Key="Controller">Generic</Item>
+                <Item Key="ConfigDialog">AdminGenericInterfaceInvokerDefault</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="GenericInterface::Invoker::Ticket::Generic::PrepareRequest::Base64EncodedFields" Required="1" Valid="1">
+        <Description Translatable="1">Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Content of different fields can be given by separating those fields by ';'.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="GenericInterface::Invoker::Ticket::Generic::PrepareRequest::OmittedFields" Required="1" Valid="1">
+        <Description Translatable="1">Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Different fields can be omitted by separating them by ';'.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!--
+        TicketToUnitTest
+    -->
+    <Setting Name="Ticket::Frontend::MenuModule###999-TicketToUnitTest" Required="0" Valid="0">
+        <Description Translatable="1">Shows a link in the menu to create a unit test for the current ticket.</Description>
+        <Navigation>Frontend::Agent::View::TicketZoom::MenuModule</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
+                <Item Key="Group">rw:admin</Item>
+                <Item Key="Name" Translatable="1">Create a unit test file</Item>
+                <Item Key="Description" Translatable="1">Creates a unit test file for this ticket.</Item>
+                <Item Key="Action"></Item>
+                <Item Key="Link">Action=AgentTicketToUnitTest;Subaction=CreateFile;TicketID=[% Data.TicketID | html %]</Item>
+                <Item Key="Target"></Item>
+                <Item Key="PopupType"></Item>
+                <Item Key="ClusterName" Translatable="1">Miscellaneous</Item>
+                <Item Key="ClusterPriority">998</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::MenuModule###999-TicketToUnitTestSend" Required="0" Valid="0">
+        <Description Translatable="1">Shows a link in the menu to create and send a unit test for the current ticket.</Description>
+        <Navigation>Frontend::Agent::View::TicketZoom::MenuModule</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
+                <Item Key="Group">rw:admin</Item>
+                <Item Key="Name" Translatable="1">Send a unit test file</Item>
+                <Item Key="Description" Translatable="1">Creates a unit test file for this ticket and sends it to Znuny.</Item>
+                <Item Key="Action"></Item>
+                <Item Key="Link">Action=AgentTicketToUnitTest;Subaction=SendEmail;TicketID=[% Data.TicketID | html %]</Item>
+                <Item Key="Target"></Item>
+                <Item Key="PopupType"></Item>
+                <Item Key="ClusterName" Translatable="1">Miscellaneous</Item>
+                <Item Key="ClusterPriority">999</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Module###AgentTicketToUnitTest" Required="1" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Creates a unit test file for a ticket.</Item>
+                    <Item Key="Title">TicketToUnitTest</Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Navigation###AgentTicketToUnitTest###002-Ticket" Required="0" Valid="0">
+        <Description Translatable="1">Main menu item registration.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+            </Array>
+        </Value>
+    </Setting>
+
+    <!--
+        Dynamic field web service
+    -->
+    <Setting Name="DynamicFields::Driver###WebserviceText" Required="1" Valid="1">
+        <Description Translatable="1">Dynamic field backend registration.</Description>
+        <Navigation>Core::DynamicFields::DriverRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="DisplayName" Translatable="1">Web service (Text)</Item>
+                <Item Key="Module">Kernel::System::DynamicField::Driver::WebserviceText</Item>
+                <Item Key="ConfigDialog">AdminDynamicFieldWebservice</Item>
+                <Item Key="Config">
+                    <Hash>
+                        <Item Key="DefaultValue"></Item>
+                        <Item Key="Link"></Item>
+                        <Item Key="LinkPreview"></Item>
+                        <Item Key="Webservice">Webservice</Item>
+                        <Item Key="InvokerSearch">Invoker</Item>
+                        <Item Key="InvokerGet">Invoker</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="DynamicFields::Driver###WebserviceMultiselect" Required="0" Valid="1">
+        <Description Translatable="1">Dynamic field backend registration.</Description>
+        <Navigation>Core::DynamicFields::DriverRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="DisplayName" Translatable="1">Web service (Multiselect)</Item>
+                <Item Key="Module">Kernel::System::DynamicField::Driver::WebserviceMultiselect</Item>
+                <Item Key="ConfigDialog">AdminDynamicFieldWebservice</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Module###AJAXDynamicFieldWebservice" Required="1" Valid="1">
+        <Description Translatable="1">Frontend module for the agent interface that provides the AJAX interface for the web service dynamic field backends.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="NavBarName">Web service autocompletion</Item>
+                    <Item Key="Title" Translatable="1">Web service dynamic field AJAX interface</Item>
+                    <Item Key="Description" Translatable="1">AJAX interface for the web service dynamic field backends.</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="CustomerFrontend::Module###AJAXDynamicFieldWebservice" Required="1" Valid="1">
+        <Description Translatable="1">Frontend module for the customer interface that provides the AJAX interface for the web service dynamic field backends.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="NavBarName">Web service autocompletion</Item>
+                    <Item Key="Title" Translatable="1">Web service dynamic field AJAX interface</Item>
+                    <Item Key="Description" Translatable="1">AJAX interface for the web service dynamic field backends.</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::EventModulePost###999-DynamicFieldWebservice" Required="0" Valid="1">
+        <Description Translatable="1">Ticket event module that stores values of the selected web service record into the configured additional dynamic fields.</Description>
+        <Navigation>Core::Event::Ticket</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Ticket::Event::DynamicFieldWebservice</Item>
+                <Item Key="Transaction">1</Item>
+                <Item Key="Event">TicketDynamicFieldUpdate</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="GenericInterface::Invoker::Module###Test::DynamicFieldWebservice::TestGet" Required="0" Valid="0">
+        <Description Translatable="1">GenericInterface module registration for the invoker layer.</Description>
+        <Navigation>GenericInterface::Invoker::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name">TestGet</Item>
+                <Item Key="Controller">Test::DynamicFieldWebservice</Item>
+                <Item Key="ConfigDialog">AdminGenericInterfaceInvokerDefault</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="GenericInterface::Invoker::Module###Test::DynamicFieldWebservice::TestSearch" Required="0" Valid="0">
+        <Description Translatable="1">GenericInterface module registration for the invoker layer.</Description>
+        <Navigation>GenericInterface::Invoker::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name">TestSearch</Item>
+                <Item Key="Controller">Test::DynamicFieldWebservice</Item>
+                <Item Key="ConfigDialog">AdminGenericInterfaceInvokerDefault</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Module###AdminDynamicFieldWebservice" Required="1" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Admin</Item>
+                    <Item Key="Title" Translatable="1">Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect</Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AdminDynamicFieldWebservice###003-DynamicFieldWebservice" Required="1" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.Agent.Admin.DynamicField.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.DynamicField.js</Item>
+                        <Item>Core.Agent.Admin.DynamicFieldText.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketZoom###HideWebserviceDynamicFieldsWithoutDisplayValue" Required="1" Valid="1">
+        <Description Translatable="1">It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.</Description>
+        <Navigation>Core::DynamicFieldWebservice</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+
+    <!--
+        Time accounting web service
+    -->
+    <Setting Name="GenericInterface::Operation::Module###Ticket::TimeAccountingGet" Required="0" Valid="1">
+        <Description Translatable="1">GenericInterface module registration for the operation layer.</Description>
+        <Navigation>GenericInterface::Operation::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name">TimeAccountingGet</Item>
+                <Item Key="Controller">Ticket</Item>
+                <Item Key="ConfigDialog">AdminGenericInterfaceOperationDefault</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!--
+        Out-of-office
+    -->
+    <Setting Name="GenericInterface::Operation::Module###User::OutOfOffice" Required="0" Valid="1">
+        <Description Translatable="1">GenericInterface module registration for the operation layer.</Description>
+        <Navigation>GenericInterface::Operation::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name">OutOfOffice</Item>
+                <Item Key="Controller">User</Item>
+                <Item Key="ConfigDialog">AdminGenericInterfaceOperationDefault</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="GenericInterface::Mapping::Module###OutOfOffice" Required="1" Valid="1">
+        <Description Translatable="1">GenericInterface module registration for the mapping layer.</Description>
+        <Navigation>GenericInterface::Mapping::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="OutOfOffice::DisplayAgentOutOfOfficeMessage" Required="0" Valid="1">
+        <Description Translatable="1">Template for the out-of-office message shown to the user in the frontend. Placeholders for out-of-office information can be used via ###PlaceholderName###. Possible placeholders are: StartYear, StartMonth, StartDay, EndYear, EndMonth, EndDay, DaysRemaining.</Description>
+        <Navigation>Core::OutOfOffice</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">*** out of office until ###EndYear###-###EndMonth###-###EndDay###/###DaysRemaining### d ***</Item>
+        </Value>
+    </Setting>
+    <Setting Name="OutOfOffice::DisplayAgentLoggedInMessage" Required="0" Valid="1">
+        <Description Translatable="1">Message that will be shown if the agent is currently logged in.</Description>
+        <Navigation>Core::OutOfOffice</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex=""></Item>
+        </Value>
+    </Setting>
+    <Setting Name="OutOfOffice::DisplayAgentLoggedOutMessage" Required="0" Valid="1">
+        <Description Translatable="1">Message that will be shown if the agent is currently logged out.</Description>
+        <Navigation>Core::OutOfOffice</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex=""></Item>
+        </Value>
+    </Setting>
+
+    <!--
+        Last views
+    -->
+    <Setting Name="LastViews###ActionMapping###Framework" Required="1" Valid="1">
+        <Description Translatable="1">Assignment between action and attributes.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem>
+                    <Hash>
+                        <Item Key=""></Item>
+                    </Hash>
+                </DefaultItem>
+                <!-- TicketCreate -->
+                <Item Key="AgentTicketPhone">
+                    <Hash>
+                        <Item Key="Type">TicketCreate</Item>
+                        <Item Key="Frontend">Agent</Item>
+                        <Item Key="Icon">Phone</Item>
+                        <Item Key="Name">Phone</Item>
+                    </Hash>
+                </Item>
+                <Item Key="AgentTicketEmail">
+                    <Hash>
+                        <Item Key="Type">TicketCreate</Item>
+                        <Item Key="Frontend">Agent</Item>
+                        <Item Key="Icon">Email</Item>
+                        <Item Key="Name">Email</Item>
+                    </Hash>
+                </Item>
+                <Item Key="AgentTicketProcess">
+                    <Hash>
+                        <Item Key="Type">TicketCreate</Item>
+                        <Item Key="Frontend">Agent</Item>
+                        <Item Key="Icon">Process</Item>
+                        <Item Key="Name">Process</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="LastViews###Types###AgentInterface" Required="1" Valid="1">
+        <Description Translatable="1">Possible types for agent interface.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Agent">Agent</Item>
+                <Item Key="Admin">Admin</Item>
+                <Item Key="Ticket">Ticket</Item>
+                <Item Key="TicketCreate">Ticket creation</Item>
+                <Item Key="TicketOverview">Ticket overview</Item>
+                <Item Key="FAQ">FAQ</Item>
+                <Item Key="Customer">Customer</Item>
+                <Item Key="CustomerUser">CustomerUser</Item>
+                <Item Key="Statistics">Statistics</Item>
+                <Item Key="Calendar">Calendar</Item>
+                <Item Key="Appointment">Appointment</Item>
+                <Item Key="Preferences">Preferences</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="LastViews###Types###CustomerInterface" Required="1" Valid="1">
+        <Description Translatable="1">Possible types for customer interface.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Ticket">Ticket</Item>
+                <Item Key="TicketCreate">Ticket Create</Item>
+                <Item Key="TicketOverview">Ticket Overview</Item>
+                <Item Key="FAQ">FAQ</Item>
+                <Item Key="Customer">Customer</Item>
+                <Item Key="CustomerUser">CustomerUser</Item>
+                <Item Key="Preferences">Preferences</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="LastViews###IconMapping" Required="1" Valid="1">
+        <Description Translatable="1">Assignment between type and icon.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Admin">fa fa-cog</Item>
+                <Item Key="Agent">fa fa-user</Item>
+                <Item Key="Appointment">fa fa-calendar</Item>
+                <Item Key="Calendar">fa fa-calendar</Item>
+                <Item Key="Customer">fa fa-building-o</Item>
+                <Item Key="CustomerUser">fa fa-male</Item>
+                <Item Key="Email">fa fa-envelope-o</Item>
+                <Item Key="FAQ">fa fa-comment-o</Item>
+                <Item Key="Overview">fa fa-table</Item>
+                <Item Key="Phone">fa fa-phone</Item>
+                <Item Key="Process">fa fa-sitemap</Item>
+                <Item Key="Public">fa fa-users</Item>
+                <Item Key="Question">fa fa-question</Item>
+                <Item Key="Statistics">fa fa-bar-chart</Item>
+                <Item Key="Ticket">fa fa-ticket</Item>
+                <Item Key="Preferences">fa fa-wrench</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="LastViews###ActionIgnore###Framework" Required="1" Valid="1">
+        <Description Translatable="1">List of actions that will be ignored.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Array>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="LastViews###SubactionIgnore###Framework" Required="1" Valid="1">
+        <Description Translatable="1">List of sub-actions that will be ignored.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Array>
+            </Array>
+        </Value>
+    </Setting>
+
+    <Setting Name="PreferencesGroups###LastViewsLimit" Required="1" Valid="1">
+        <Description Translatable="1">Registers a user preferences module for LastViewsLimit.</Description>
+        <Navigation>Frontend::Agent::View::Preferences</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::Preferences::Generic</Item>
+                <Item Key="PreferenceGroup">Miscellaneous</Item>
+                <Item Key="Label" Translatable="1">Last view - limit</Item>
+                <Item Key="Desc" Translatable="1">Select how many last views should be shown.</Item>
+                <Item Key="Data">
+                    <Hash>
+                        <Item Key="1">1</Item>
+                        <Item Key="2">2</Item>
+                        <Item Key="3">3</Item>
+                        <Item Key="4">4</Item>
+                        <Item Key="5">5</Item>
+                        <Item Key="6">6</Item>
+                        <Item Key="7">7</Item>
+                        <Item Key="8">8</Item>
+                        <Item Key="9">9</Item>
+                    </Hash>
+                </Item>
+                <Item Key="DataSelected">5</Item>
+                <Item Key="PrefKey">UserLastViewsLimit</Item>
+                <Item Key="Prio">8000</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="PreferencesGroups###LastViewsPosition" Required="1" Valid="1">
+        <Description Translatable="1">Registers a user preferences module for LastViewsPosition.</Description>
+        <Navigation>Frontend::Agent::View::Preferences</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::Preferences::Generic</Item>
+                <Item Key="PreferenceGroup">Miscellaneous</Item>
+                <Item Key="Label" Translatable="1">Last view - position</Item>
+                <Item Key="Desc" Translatable="1">Select where to display the last views.</Item>
+                <Item Key="Data">
+                    <Hash>
+                        <Item Key="ToolBar">Tool bar</Item>
+                        <Item Key="Avatar">Avatar</Item>
+                        <Item Key="MenuBar">Menu bar</Item>
+                    </Hash>
+                </Item>
+                <Item Key="DataSelected">Avatar</Item>
+                <Item Key="PrefKey">UserLastViewsPosition</Item>
+                <Item Key="Prio">8000</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="PreferencesGroups###LastViewsType" Required="1" Valid="1">
+        <Description Translatable="1">Registers a user preferences module for LastViewsType.</Description>
+        <Navigation>Frontend::Agent::View::Preferences</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::Preferences::LastViewsTypes</Item>
+                <Item Key="PreferenceGroup">Miscellaneous</Item>
+                <Item Key="Label" Translatable="1">Last view - types</Item>
+                <Item Key="Desc" Translatable="1">Select which types should be displayed.</Item>
+                <Item Key="PrefKey">UserLastViewsTypes</Item>
+                <Item Key="Prio">8000</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="CustomerPreferencesGroups###LastViewsLimit" Required="0" Valid="1">
+        <Description Translatable="1">Registers a user preferences module for LastViewsLimit.</Description>
+        <Navigation>Frontend::Customer::View::Preferences</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::Preferences::Generic</Item>
+                <Item Key="PreferenceGroup">UserProfile</Item>
+                <Item Key="Label" Translatable="1">Last view - limit</Item>
+                <Item Key="Key" Translatable="1">Limit</Item>
+                <Item Key="Desc" Translatable="1">Select how many last views should be shown.</Item>
+                <Item Key="Data">
+                    <Hash>
+                        <Item Key="1">1</Item>
+                        <Item Key="2">2</Item>
+                        <Item Key="3">3</Item>
+                        <Item Key="4">4</Item>
+                        <Item Key="5">5</Item>
+                        <Item Key="6">6</Item>
+                        <Item Key="7">7</Item>
+                        <Item Key="8">8</Item>
+                        <Item Key="9">9</Item>
+                    </Hash>
+                </Item>
+                <Item Key="DataSelected">5</Item>
+                <Item Key="PrefKey">UserLastViewsLimit</Item>
+                <Item Key="Prio">8000</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="CustomerPreferencesGroups###LastViewsType" Required="1" Valid="1">
+        <Description Translatable="1">Registers a user preferences module for LastViewsType.</Description>
+        <Navigation>Frontend::Agent::View::Preferences</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::Preferences::LastViewsTypes</Item>
+                <Item Key="PreferenceGroup">UserProfile</Item>
+                <Item Key="Label" Translatable="1">Last view - types</Item>
+                <Item Key="Key" Translatable="1">Types</Item>
+                <Item Key="Desc" Translatable="1">Select which types should be displayed.</Item>
+                <Item Key="PrefKey">UserLastViewsTypes</Item>
+                <Item Key="Prio">8000</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="PreApplicationModule###PreApplicationLastViews" Required="1" Valid="1">
+        <Description Translatable="1">Pre-application module to store the current view.</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">Kernel::Modules::PreApplicationLastViews</Item>
+        </Value>
+    </Setting>
+    <Setting Name="CustomerPanelPreApplicationModule###PreApplicationLastViews" Required="0" Valid="1">
+        <Description Translatable="1">Pre-application module to store the current view.</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">Kernel::Modules::PreApplicationLastViews</Item>
+        </Value>
+    </Setting>
+
+    <!--
+        Web user agent extensions
+    -->
+    <Setting Name="WebUserAgent::NoProxy" Required="0" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Domains accessed through WebUserAgent module for which no proxy should be used. Separate domains by semicolon.</Description>
+        <Navigation>Core::WebUserAgent</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex=""></Item>
+        </Value>
+    </Setting>
+    <Setting Name="WebUserAgent::UserAgent" Required="0" Valid="1" ConfigLevel="205">
+        <Description Translatable="1">User agent string to use for the WebUserAgent module. Leave empty to use the default user agent string.</Description>
+        <Navigation>Core::WebUserAgent</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex=""></Item>
+        </Value>
+    </Setting>
+
+    <!--
+        Webservice ticket notification event transport
+    -->
+    <Setting Name="Notification::Transport###Webservice" Required="0" Valid="1">
+        <Description Translatable="1">Defines all the parameters for this notification transport.</Description>
+        <Navigation>Frontend::Admin::View::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Ticket::Event::NotificationEvent::Transport::Webservice</Item>
+                <Item Key="Name" Translatable="1">Webservice</Item>
+                <Item Key="Icon">fa fa-cloud-upload</Item>
+                <Item Key="Prio">520</Item>
+                <Item Key="AgentEnabledByDefault">0</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="WebserviceNotifications::RecipientInformation###Agent" Required="1" Valid="1">
+        <Description Translatable="1">Agent recipient information which will be passed to the web service.</Description>
+        <Navigation>Core::Notifications::Webservice</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="String">ParamName</DefaultItem>
+                <Item ValueType="String">UserEmail</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="WebserviceNotifications::RecipientInformation###Customer" Required="1" Valid="1">
+        <Description Translatable="1">Customer recipient information which will be passed to the web service.</Description>
+        <Navigation>Core::Notifications::Webservice</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="String">ParamName</DefaultItem>
+                <Item ValueType="String">UserEmail</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="WebserviceNotifications::RecipientInformation###AdditionalRecipientKeyName" Required="1" Valid="1">
+        <Description Translatable="1">Parameter name for additional recipients.</Description>
+        <Navigation>Core::Notifications::Webservice</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">UserLogin</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Module###AJAXNotificationEventTransportWebservice" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">AJAX functions for notification event transport web service.</Item>
+                    <Item Key="Title" Translatable="1">AJAX functions for notification event transport web service.</Item>
+                    <Item Key="NavBarName" Translatable="1">AJAX functions for notification event transport web service.</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AdminNotificationEvent###900-WebserviceNotification" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.WebserviceNotification.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!--
+        Advanced dynamic fields
+    -->
+
+    <!-- General settings -->
+    <Setting Name="DynamicFields::ScreenConfiguration::ShowOnlyValidDynamicFields" Required="1" Valid="1">
+        <Description Translatable="1">Shows only valid dynamic fields in screen configuration (AdminDynamicFieldScreenConfiguration) if enabled.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="DynamicFields::ImportExport::ShowOnlyValidDynamicFields" Required="1" Valid="1">
+        <Description Translatable="1">Shows only valid dynamic fields in dynamic field export selection (AdminDynamicFieldConfigurationImportExport) if enabled.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+
+    <!-- Dynamic field screens -->
+    <Setting Name="DynamicFields::ScreenConfiguration::ConfigKeysOfScreensByObjectType###Framework" Required="1" Valid="1">
+        <Description Translatable="1">Config keys and their action to activate dynamic fields in different screens, grouped by object type.</Description>
+        <Navigation>Frontend::Base::DynamicFieldScreens</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Ticket">
+                    <Hash>
+                        <Item Key="Ticket::Frontend::AgentTicketMove###DynamicField">AgentTicketMove</Item>
+                        <Item Key="Ticket::Frontend::CustomerTicketZoom###DynamicField">CustomerTicketZoom</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketClose###DynamicField">AgentTicketClose</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketPrint###DynamicField">AgentTicketPrint</Item>
+                        <Item Key="Ticket::Frontend::CustomerTicketPrint###DynamicField">CustomerTicketPrint</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketPending###DynamicField">AgentTicketPending</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketSearch###DynamicField">AgentTicketSearch</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketCompose###DynamicField">AgentTicketCompose</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketFreeText###DynamicField">AgentTicketFreeText</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketEmail###DynamicField">AgentTicketEmail</Item>
+                        <Item Key="Ticket::Frontend::CustomerTicketOverview###DynamicField">CustomerTicketOverview</Item>
+                        <Item Key="Ticket::Frontend::OverviewSmall###DynamicField">OverviewSmall</Item>
+                        <Item Key="Ticket::Frontend::OverviewPreview###DynamicField">OverviewPreview</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketPhone###DynamicField">AgentTicketPhone</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketForward###DynamicField">AgentTicketForward</Item>
+                        <Item Key="Ticket::Frontend::CustomerTicketSearch###DynamicField">CustomerTicketSearch</Item>
+                        <Item Key="Ticket::Frontend::OverviewMedium###DynamicField">OverviewMedium</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketZoom###DynamicField">AgentTicketZoom</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketZoom###ProcessWidgetDynamicField">ProcessWidgetDynamicField</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketPhoneInbound###DynamicField">AgentTicketPhoneInbound</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketPhoneOutbound###DynamicField">AgentTicketPhoneOutbound</Item>
+                        <Item Key="Ticket::Frontend::CustomerTicketMessage###DynamicField">CustomerTicketMessage</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketEmailOutbound###DynamicField">AgentTicketEmailOutbound</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketPriority###DynamicField">AgentTicketPriority</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketNote###DynamicField">AgentTicketNote</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketOwner###DynamicField">AgentTicketOwner</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketResponsible###DynamicField">AgentTicketResponsible</Item>
+
+                        <Item Key="Ticket::Frontend::AgentTicketStatusView###DefaultColumns">AgentTicketStatusView</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketQueue###DefaultColumns">AgentTicketQueue</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketResponsibleView###DefaultColumns">AgentTicketResponsibleView</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketWatchView###DefaultColumns">AgentTicketWatchView</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketLockedView###DefaultColumns">AgentTicketLockedView</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketEscalationView###DefaultColumns">AgentTicketEscalationView</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketSearch###DefaultColumns">AgentTicketSearch</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketService###DefaultColumns">AgentTicketService</Item>
+
+                        <Item Key="AgentCustomerInformationCenter::Backend###0100-CIC-TicketPendingReminder">DashboardWidget CIC-TicketPendingReminder</Item>
+                        <Item Key="AgentCustomerInformationCenter::Backend###0110-CIC-TicketEscalation">DashboardWidget CIC-TicketEscalation</Item>
+                        <Item Key="AgentCustomerInformationCenter::Backend###0120-CIC-TicketNew">DashboardWidget CIC-TicketNew</Item>
+                        <Item Key="AgentCustomerInformationCenter::Backend###0130-CIC-TicketOpen">DashboardWidget CIC-TicketOpen</Item>
+                        <Item Key="AgentCustomerUserInformationCenter::Backend###0100-CUIC-TicketPendingReminder">DashboardWidget CUIC-TicketPendingReminder</Item>
+                        <Item Key="AgentCustomerUserInformationCenter::Backend###0110-CUIC-TicketEscalation">DashboardWidget CUIC-TicketEscalation</Item>
+                        <Item Key="AgentCustomerUserInformationCenter::Backend###0120-CUIC-TicketNew">DashboardWidget CUIC-TicketNew</Item>
+                        <Item Key="AgentCustomerUserInformationCenter::Backend###0130-CUIC-TicketOpen">DashboardWidget CUIC-TicketOpen</Item>
+                        <Item Key="DashboardBackend###0100-TicketPendingReminder">DashboardWidget TicketPendingReminder</Item>
+                        <Item Key="DashboardBackend###0110-TicketEscalation">DashboardWidget TicketEscalation</Item>
+                        <Item Key="DashboardBackend###0120-TicketNew">DashboardWidget TicketNew</Item>
+                        <Item Key="DashboardBackend###0130-TicketOpen">DashboardWidget TicketOpen</Item>
+                        <Item Key="DashboardBackend###0140-RunningTicketProcess">DashboardWidget RunningTicketProcess</Item>
+                    </Hash>
+                </Item>
+                <Item Key="Article">
+                    <Hash>
+                        <Item Key="Ticket::Frontend::AgentTicketMove###DynamicField">AgentTicketMove</Item>
+                        <Item Key="Ticket::Frontend::CustomerTicketZoom###DynamicField">CustomerTicketZoom</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketClose###DynamicField">AgentTicketClose</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketPrint###DynamicField">AgentTicketPrint</Item>
+                        <Item Key="Ticket::Frontend::CustomerTicketPrint###DynamicField">CustomerTicketPrint</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketPending###DynamicField">AgentTicketPending</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketSearch###DynamicField">AgentTicketSearch</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketCompose###DynamicField">AgentTicketCompose</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketFreeText###DynamicField">AgentTicketFreeText</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketEmail###DynamicField">AgentTicketEmail</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketPhone###DynamicField">AgentTicketPhone</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketForward###DynamicField">AgentTicketForward</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketPhoneInbound###DynamicField">AgentTicketPhoneInbound</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketPhoneOutbound###DynamicField">AgentTicketPhoneOutbound</Item>
+                        <Item Key="Ticket::Frontend::CustomerTicketMessage###DynamicField">CustomerTicketMessage</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketEmailOutbound###DynamicField">AgentTicketEmailOutbound</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketPriority###DynamicField">AgentTicketPriority</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketNote###DynamicField">AgentTicketNote</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketOwner###DynamicField">AgentTicketOwner</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketResponsible###DynamicField">AgentTicketResponsible</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketSearch###DefaultColumns">AgentTicketSearch</Item>
+                    </Hash>
+                </Item>
+                <Item Key="CustomerCompany">
+                    <Hash>
+                    </Hash>
+                </Item>
+                <Item Key="CustomerUser">
+                    <Hash>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="DynamicFields::ScreenConfiguration::ConfigKeysOfScreensWithoutMandatoryDynamicFieldSupport###Framework" Required="1" Valid="1">
+        <Description Translatable="1">Dynamic field screen config keys and their action for all screens that don't allow dynamic fields to be mandatory.</Description>
+        <Navigation>Frontend::Base::DynamicFieldScreens</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Ticket::Frontend::OverviewMedium###DynamicField">OverviewMedium</Item>
+                <Item Key="Ticket::Frontend::OverviewPreview###DynamicField">OverviewPreview</Item>
+                <Item Key="Ticket::Frontend::OverviewSmall###DynamicField">OverviewSmall</Item>
+                <Item Key="Ticket::Frontend::CustomerTicketOverview###DynamicField">CustomerTicketOverview</Item>
+                <Item Key="Ticket::Frontend::AgentTicketZoom###DynamicField">AgentTicketZoom</Item>
+                <Item Key="Ticket::Frontend::AgentTicketZoom###ProcessWidgetDynamicField">ProcessWidgetDynamicField</Item>
+                <Item Key="Ticket::Frontend::CustomerTicketZoom###DynamicField">CustomerTicketZoom</Item>
+                <Item Key="Ticket::Frontend::AgentTicketPrint###DynamicField">AgentTicketPrint</Item>
+                <Item Key="Ticket::Frontend::CustomerTicketPrint###DynamicField">CustomerTicketPrint</Item>
+                <Item Key="Ticket::Frontend::CustomerTicketSearch###DynamicField">CustomerTicketSearch</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!-- AdminDynamicFieldScreenConfiguration -->
+    <Setting Name="Frontend::Module###AdminDynamicFieldScreenConfiguration" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Activation of dynamic fields for screens.</Item>
+                    <Item Key="Title" Translatable="1">Dynamic fields ↔ Screens</Item>
+                    <Item Key="NavBarName">Admin</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AdminDynamicFieldScreenConfiguration###003-Framework" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.AllocationList.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.UI.AllocationList.js</Item>
+                        <Item>Core.UI.Table.js</Item>
+                        <Item>Znuny.Agent.Admin.DynamicFieldScreenConfiguration.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::NavigationModule###AdminDynamicFieldScreenConfiguration" Required="0" Valid="1">
+        <Description Translatable="1">Admin area navigation for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Group">
+                    <Array>
+                        <Item>admin</Item>
+                    </Array>
+                </Item>
+                <Item Key="GroupRo">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
+                <Item Key="Name" Translatable="1">Dynamic fields ↔ Screens</Item>
+                <Item Key="Block">Automation</Item>
+                <Item Key="Description" Translatable="1">Activation of dynamic fields for screens.</Item>
+                <Item Key="IconBig">fa-align-left</Item>
+                <Item Key="IconSmall">fa-desktop</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!-- AdminDynamicFieldConfigurationImportExport -->
+    <Setting Name="Frontend::Module###AdminDynamicFieldConfigurationImportExport" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the admin interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Import and export of dynamic field configurations.</Item>
+                    <Item Key="Title">Import and export of dynamic field configurations.</Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AdminDynamicFieldConfigurationImportExport###003-Framework" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Znuny.Agent.Admin.DynamicFieldConfigurationImportExport.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!-- Web service example Mattermost -->
+    <Setting Name="PreferencesGroups###MattermostUsername" Required="0" Valid="0">
+        <Description Translatable="1">The user's Mattermost username.</Description>
+        <Navigation>Frontend::Agent::View::Preferences</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::Preferences::Generic</Item>
+                <Item Key="PreferenceGroup">NotificationSettings</Item>
+                <Item Key="Label" Translatable="1">Mattermost Username</Item>
+                <Item Key="Desc" Translatable="1">Your username in Mattermost without the leading @</Item>
+                <Item Key="Block">Input</Item>
+                <Item Key="Name">MattermostUsername</Item>
+                <Item Key="PrefKey">MattermostUsername</Item>
+                <Item Key="Data">[% Env("MattermostUsername") %]</Item>
+                <Item Key="Prio">0100</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+</otrs_config>

@@ -22,6 +22,7 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::CustomerUser',
     'Kernel::System::DB',
+    'Kernel::System::DateTime',
     'Kernel::System::Email',
     'Kernel::System::HTMLUtils',
     'Kernel::System::Log',
@@ -31,8 +32,6 @@ our @ObjectDependencies = (
     'Kernel::System::TemplateGenerator',
     'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
-    'Kernel::System::DateTime',
-    'Kernel::System::MailQueue',
 );
 
 =head1 NAME

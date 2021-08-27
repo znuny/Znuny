@@ -61,3 +61,9 @@ bin/otrs.Console.pl Dev::Package::Build --module-directory /path/to/MyCompany-My
 #### Example packages
 
 You can find many open source packages from and for Znuny at [GitHub](https://github.com/znuny/), for example the package [Znuny4OTRS-CTI](https://github.com/znuny/Znuny4OTRS-CTI). Have a look at them, especially their sopm file in the root directory.
+
+### Licensing, copyright and credits
+
+Znuny is an open fork of an existing software. So we have to respect the already given copyright of the original creators.
+
+New files will be licensed using the AGPL Version 3. If you contribute code to the Znuny project you will get mentioned in the pull request incl. the commit, in CHANGES.md and in AUTHORS.md. We will not mention you in the file you provided or changed. Your work is highly appreciated and acknowledged but you contribute it to the project and your copyright will pass on to the fork itself.

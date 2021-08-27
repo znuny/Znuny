@@ -50,7 +50,7 @@
         <Description Translatable="1">Defines the name of the application, shown in the web interface, tabs and title bar of the web browser.</Description>
         <Navigation>Core</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">Znuny LTS</Item>
+            <Item ValueType="String" ValueRegex="">Znuny</Item>
         </Value>
     </Setting>
     <Setting Name="SystemID" Required="1" Valid="1" ConfigLevel="200">
@@ -266,16 +266,16 @@
             <Item ValueType="String" ValueRegex="">Example Company</Item>
         </Value>
     </Setting>
-    <Setting Name="CustomerLogo" Required="0" Valid="0">
+    <Setting Name="CustomerLogo" Required="0" Valid="1">
         <Description Translatable="1">The logo shown in the header of the customer interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.</Description>
         <Navigation>Frontend::Customer</Navigation>
         <Value>
             <Hash>
                 <Item Key="URL">skins/Customer/default/img/logo.png</Item>
                 <Item Key="StyleTop">9px</Item>
-                <Item Key="StyleRight">25px</Item>
+                <Item Key="StyleRight">0px</Item>
                 <Item Key="StyleHeight">45px</Item>
-                <Item Key="StyleWidth">300px</Item>
+                <Item Key="StyleWidth">216px</Item>
             </Hash>
         </Value>
     </Setting>
@@ -284,11 +284,11 @@
         <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Hash>
-                <Item Key="URL">skins/Agent/default/img/logo_bg.png</Item>
-                <Item Key="StyleTop">7px</Item>
-                <Item Key="StyleRight">24px</Item>
+                <Item Key="URL">skins/Agent/default/img/logo.png</Item>
+                <Item Key="StyleTop">24px</Item>
+                <Item Key="StyleRight">4px</Item>
                 <Item Key="StyleHeight">55px</Item>
-                <Item Key="StyleWidth">300px</Item>
+                <Item Key="StyleWidth">265px</Item>
             </Hash>
         </Value>
     </Setting>
@@ -297,11 +297,11 @@
         <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Hash>
-                <Item Key="URL">skins/Agent/default/img/logo_bg.png</Item>
-                <Item Key="StyleTop">7px</Item>
-                <Item Key="StyleRight">24px</Item>
+                <Item Key="URL">skins/Agent/default/img/logo.png</Item>
+                <Item Key="StyleTop">24px</Item>
+                <Item Key="StyleRight">4px</Item>
                 <Item Key="StyleHeight">55px</Item>
-                <Item Key="StyleWidth">300px</Item>
+                <Item Key="StyleWidth">265px</Item>
             </Hash>
         </Value>
     </Setting>
@@ -310,9 +310,9 @@
         <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Hash>
-                <Item Key="URL">skins/Agent/default/img/logo_bg.png</Item>
+                <Item Key="URL">skins/Agent/default/img/logo.png</Item>
                 <Item Key="StyleTop">10px</Item>
-                <Item Key="StyleRight">45px</Item>
+                <Item Key="StyleRight">50px</Item>
                 <Item Key="StyleHeight">45px</Item>
                 <Item Key="StyleWidth">220px</Item>
             </Hash>
@@ -323,11 +323,11 @@
         <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Hash>
-                <Item Key="URL">skins/Agent/default/img/logo_bg.png</Item>
-                <Item Key="StyleTop">7px</Item>
-                <Item Key="StyleRight">24px</Item>
+                <Item Key="URL">skins/Agent/default/img/logo.png</Item>
+                <Item Key="StyleTop">24px</Item>
+                <Item Key="StyleRight">4px</Item>
                 <Item Key="StyleHeight">55px</Item>
-                <Item Key="StyleWidth">300px</Item>
+                <Item Key="StyleWidth">265px</Item>
             </Hash>
         </Value>
     </Setting>
@@ -336,9 +336,9 @@
         <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Hash>
-                <Item Key="URL">skins/Agent/default/img/logo_bg.png</Item>
+                <Item Key="URL">skins/Agent/default/img/logo.png</Item>
                 <Item Key="StyleTop">10px</Item>
-                <Item Key="StyleRight">45px</Item>
+                <Item Key="StyleRight">50px</Item>
                 <Item Key="StyleHeight">45px</Item>
                 <Item Key="StyleWidth">220px</Item>
             </Hash>
@@ -349,11 +349,11 @@
         <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Hash>
-                <Item Key="URL">skins/Agent/default/img/logo_bg.png</Item>
-                <Item Key="StyleTop">7px</Item>
-                <Item Key="StyleRight">24px</Item>
+                <Item Key="URL">skins/Agent/default/img/logo.png</Item>
+                <Item Key="StyleTop">24px</Item>
+                <Item Key="StyleRight">4px</Item>
                 <Item Key="StyleHeight">55px</Item>
-                <Item Key="StyleWidth">300px</Item>
+                <Item Key="StyleWidth">265px</Item>
             </Hash>
         </Value>
     </Setting>
@@ -2607,13 +2607,6 @@
         <Navigation>Core</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
-        </Value>
-    </Setting>
-    <Setting Name="OutOfOfficeMessageTemplate" Required="0" Valid="1">
-        <Description Translatable="1">Defines out of office message template. Two string parameters (%s) available: end date and number of days left.</Description>
-        <Navigation>Frontend::Base</Navigation>
-        <Value>
-            <Item ValueType="String" Translatable="1">*** out of office until %s (%s d left) ***</Item>
         </Value>
     </Setting>
     <Setting Name="SwitchToUser" Required="1" Valid="1">
@@ -8965,6 +8958,13 @@ via the Preferences button after logging in.
             <Array>
                 <Item ValueType="String">Kernel::Autoload::Test</Item>
             </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Datepicker::ShowWeek" Required="0" Valid="1">
+        <Description Translatable="1">Activates week number for datepickers.</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Item ValueType="Checkbox" ValueRegex="">0</Item>
         </Value>
     </Setting>
 </otrs_config>

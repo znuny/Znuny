@@ -1,0 +1,70 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+<table class="DataTable">
+    <thead>
+        <tr>
+            [% Translate(StoredValue) | html %]
+            [% Translate(DisplayValue) | html %]
+[% RenderBlockStart("SearchAttributesHeader") %]
+            <th>[% Translate(Data.Value) | html %]</th>
+[% RenderBlockEnd("SearchAttributesHeader") %]
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+[% RenderBlockStart("SearchAttributesColumn") %]
+            <td><b>[% Translate(Data.Value) | html %]</b></td>
+[% RenderBlockEnd("SearchAttributesColumn") %]
+        </tr>
+    </tbody>
+</table>
+<div class="SpacingTop"></div>
+
+<table class="DataTable">
+    <thead>
+        <tr>
+            [% Translate(StoredValue) | html %]
+            [% Translate(DisplayValue) | html %]
+[% RenderBlockStart("TestDataHeader") %]
+            <th>[% Translate(Data.Value) | html %]
+                <b>
+                    [% IF Data.IsStoredValue || Data.IsDisplayValue %]
+                        - (
+                    [% END %]
+
+                    [% IF Data.IsDisplayValue %]
+                        [% Translate('DisplayValue') | html %]
+                    [% END %]
+
+                    [% IF Data.IsStoredValue && Data.IsDisplayValue %]
+                     |
+                    [% END %]
+
+                    [% IF Data.IsStoredValue %]
+                        [% Translate('StoredValue') | html %]
+                    [% END %]
+
+                    [% IF Data.IsStoredValue || Data.IsDisplayValue %]
+                        )
+                    [% END %]
+                </b>
+        </th>
+[% RenderBlockEnd("TestDataHeader") %]
+        </tr>
+    </thead>
+    <tbody>
+[% RenderBlockStart("TestDataRow") %]
+        <tr>
+[% RenderBlockStart("TestDataColumn") %]
+            <td>[% Translate(Data.Value) | html %]</td>
+[% RenderBlockEnd("TestDataColumn") %]
+        </tr>
+[% RenderBlockEnd("TestDataRow") %]
+    </tbody>
+</table>

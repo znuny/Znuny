@@ -29,13 +29,13 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
  * @subsection  Logo
  */
 #Logo {
-    top: 25px;
-    right: 24px;
-    width: 300px;
-    height: 55px;
-    background: url(../img/logo_bg.png) no-repeat;
+    top:             24px;
+    right:           4px;
+    width:           265px;
+    height:          55px;
+    background:      url(../img/logo.png) no-repeat;
     background-size: contain;
-    position: absolute;
+    position:        absolute;
 }
 
 .RTL #Header #Logo {

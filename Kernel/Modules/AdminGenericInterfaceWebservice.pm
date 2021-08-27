@@ -910,23 +910,19 @@ sub _ShowEdit {
             $ExampleWebServicesData{$Key} = $Value;
         }
 
-        my %Frontend;
-
-        if ( %ExampleWebServicesData && $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled() ) {
-            $Frontend{ExampleWebServiceList} = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->BuildSelection(
-                Name         => 'ExampleWebService',
-                Data         => \%ExampleWebServicesData,
-                PossibleNone => 1,
-                Translation  => 0,
-                Class        => 'Modernize Validate_Required',
-            );
-        }
+        my $ExampleWebServices = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->BuildSelection(
+            Name         => 'ExampleWebService',
+            Data         => \%ExampleWebServicesData,
+            PossibleNone => 1,
+            Translation  => 0,
+            Class        => 'Modernize Validate_Required',
+        );
 
         # Enable Example web services.
         $LayoutObject->Block(
             Name => 'ExampleWebServices',
             Data => {
-                %Frontend,
+                ExampleWebServiceList => $ExampleWebServices,
             },
         );
     }

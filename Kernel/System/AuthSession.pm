@@ -20,7 +20,6 @@ our @ObjectDependencies = (
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::SystemData',
-    'Kernel::System::SysConfig',
 );
 
 =head1 NAME
@@ -214,6 +213,8 @@ create a new session with given data
 sub CreateSessionID {
     my ( $Self, %Param ) = @_;
 
+    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
+
     if ( !$Param{UserType} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -229,6 +230,10 @@ sub CreateSessionID {
         );
         return;
     }
+
+    $CacheObject->CleanUp(
+        Type => 'User',
+    );
 
     my %OTRSBusinessSystemData = $Kernel::OM->Get('Kernel::System::SystemData')->SystemDataGroupGet(
         Group => 'OTRSBusiness',
@@ -296,7 +301,7 @@ sub CreateSessionID {
         }
     }
 
-    $Kernel::OM->Get('Kernel::System::Cache')->Delete(
+    $CacheObject->Delete(
         Type => 'AuthSession',
         Key  => 'AgentSessionLimitPriorWarningMessage',
     );
@@ -316,7 +321,13 @@ session can't get deleted)
 sub RemoveSessionID {
     my ( $Self, %Param ) = @_;
 
-    $Kernel::OM->Get('Kernel::System::Cache')->Delete(
+    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
+
+    $CacheObject->CleanUp(
+        Type => 'User',
+    );
+
+    $CacheObject->Delete(
         Type => 'AuthSession',
         Key  => 'AgentSessionLimitPriorWarningMessage',
     );

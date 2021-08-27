@@ -101,8 +101,7 @@ sub new {
     # Load backend module.
     my $GenericModule = 'Kernel::GenericInterface::Invoker::' . $Param{InvokerType};
     if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($GenericModule) ) {
-
-        return $Self->{DebuggerObject}->Error( Summary => "Can't load invoker backend module!" );
+        return $Self->{DebuggerObject}->Error( Summary => "Can't load invoker backend module '$Param{InvokerType}'!" );
     }
     $Self->{BackendObject} = $GenericModule->new( %{$Self} );
 
@@ -141,17 +140,8 @@ prepare the invocation of the configured remote web service.
 sub PrepareRequest {
     my ( $Self, %Param ) = @_;
 
-    # Check data - only accept undef or hash ref or array ref.
-    if ( defined $Param{Data} && ref $Param{Data} ne 'HASH' && ref $Param{Data} ne 'ARRAY' ) {
-
-        return $Self->{DebuggerObject}->Error(
-            Summary => 'Got Data but it is not a hash or array ref in Invoker handler (PrepareRequest)!'
-        );
-    }
-
     # Start map on backend.
     return $Self->{BackendObject}->PrepareRequest(%Param);
-
 }
 
 =head2 HandleResponse()
@@ -179,17 +169,8 @@ handle response data of the configured remote web service.
 sub HandleResponse {
     my ( $Self, %Param ) = @_;
 
-    # Check data - only accept undef or hash ref or array ref.
-    if ( defined $Param{Data} && ref $Param{Data} ne 'HASH' && ref $Param{Data} ne 'ARRAY' ) {
-
-        return $Self->{DebuggerObject}->Error(
-            Summary => 'Got Data but it is not a hash or array ref in Invoker handler (HandleResponse)!'
-        );
-    }
-
     # Start map on backend.
     return $Self->{BackendObject}->HandleResponse(%Param);
-
 }
 
 =head2 HandleError()
@@ -214,14 +195,6 @@ handle error data of the configured remote web service.
 
 sub HandleError {
     my ( $Self, %Param ) = @_;
-
-    # Check data - only accept undef or hash ref or array ref.
-    if ( defined $Param{Data} && ref $Param{Data} ne 'HASH' && ref $Param{Data} ne 'ARRAY' ) {
-
-        return $Self->{DebuggerObject}->Error(
-            Summary => 'Got Data but it is not a hash or array ref in Invoker handler (HandleResponse)!'
-        );
-    }
 
     return $Self->{BackendObject}->HandleError(%Param);
 

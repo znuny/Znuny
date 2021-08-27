@@ -13,6 +13,7 @@
     [% BreadcrumbPath = [
             {
                 Name => Translate('Admin Message'),
+                Link => Env("Action"),
             },
         ]
     %]

@@ -190,9 +190,9 @@ END;
 --
 ;
 -- ----------------------------------------------------------
---  create table groups
+--  create table permission_groups
 -- ----------------------------------------------------------
-CREATE TABLE groups (
+CREATE TABLE permission_groups (
     id NUMBER (12, 0) NOT NULL,
     name VARCHAR2 (200) NOT NULL,
     comments VARCHAR2 (250) NULL,
@@ -203,16 +203,16 @@ CREATE TABLE groups (
     change_by NUMBER (12, 0) NOT NULL,
     CONSTRAINT groups_name UNIQUE (name)
 );
-ALTER TABLE groups ADD CONSTRAINT PK_groups PRIMARY KEY (id);
+ALTER TABLE permission_groups ADD CONSTRAINT PK_permission_groups PRIMARY KEY (id);
 BEGIN
-    EXECUTE IMMEDIATE 'DROP SEQUENCE SE_groups';
+    EXECUTE IMMEDIATE 'DROP SEQUENCE SE_permission_groups';
 EXCEPTION
     WHEN OTHERS THEN NULL;
 END;
 /
 --
 ;
-CREATE SEQUENCE SE_groups
+CREATE SEQUENCE SE_permission_groups
 INCREMENT BY 1
 START WITH 1
 NOMAXVALUE
@@ -221,19 +221,19 @@ CACHE 20
 ORDER
 ;
 BEGIN
-    EXECUTE IMMEDIATE 'DROP TRIGGER SE_groups_t';
+    EXECUTE IMMEDIATE 'DROP TRIGGER SE_permission_groups_t';
 EXCEPTION
     WHEN OTHERS THEN NULL;
 END;
 /
 --
 ;
-CREATE OR REPLACE TRIGGER SE_groups_t
-BEFORE INSERT ON groups
+CREATE OR REPLACE TRIGGER SE_permission_groups_t
+BEFORE INSERT ON permission_groups
 FOR EACH ROW
 BEGIN
     IF :new.id IS NULL THEN
-        SELECT SE_groups.nextval
+        SELECT SE_permission_groups.nextval
         INTO :new.id
         FROM DUAL;
     END IF;
@@ -2290,6 +2290,14 @@ BEGIN
         INTO :new.id
         FROM DUAL;
     END IF;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX time_accounting_article_id ON time_accounting (article_id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
 END;
 /
 --

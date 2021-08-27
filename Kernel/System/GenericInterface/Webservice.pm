@@ -16,12 +16,13 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::Output::HTML::Layout',
     'Kernel::System::Cache',
     'Kernel::System::DB',
     'Kernel::System::GenericInterface::DebugLog',
     'Kernel::System::GenericInterface::WebserviceHistory',
     'Kernel::System::Log',
-    'Kernel::System::Main',
+    'Kernel::System::Storable',
     'Kernel::System::Valid',
     'Kernel::System::YAML',
 );
@@ -209,7 +210,6 @@ Returns:
 sub WebserviceGet {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     if ( !$Param{ID} && !$Param{Name} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -234,7 +234,23 @@ sub WebserviceGet {
         Type => 'Webservice',
         Key  => $CacheKey,
     );
-    return $Cache if $Cache;
+
+    if ( IsHashRefWithData($Cache) ) {
+        if (
+            !exists $Kernel::OM->{Objects}->{'Kernel::Output::HTML::Layout'}
+            || $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{Action} !~ m{\AAdmin}
+            )
+        {
+            $Cache = $Kernel::OM->Get('Kernel::System::Storable')->Clone(
+                Data => $Cache,
+            );
+
+            if ( $Cache->{Config} ) {
+                $Cache->{Config} = $Self->WebserviceConfigReplace( $Cache->{Config} );
+            }
+        }
+        return $Cache;
+    }
 
     # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
@@ -262,7 +278,6 @@ sub WebserviceGet {
 
     my %Data;
     while ( my @Data = $DBObject->FetchrowArray() ) {
-
         my $Config = $YAMLObject->Load( Data => $Data[2] );
 
         %Data = (
@@ -288,6 +303,21 @@ sub WebserviceGet {
         Value => \%Data,
         TTL   => $CacheTTL,
     );
+
+    if (
+        $Data{Config}
+        && (
+            !exists $Kernel::OM->{Objects}->{'Kernel::Output::HTML::Layout'}
+            || $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{Action} !~ m{\AAdmin}
+        )
+        )
+    {
+        $Data{Config} = $Kernel::OM->Get('Kernel::System::Storable')->Clone(
+            Data => $Data{Config},
+        );
+
+        $Data{Config} = $Self->WebserviceConfigReplace( $Data{Config} );
+    }
 
     return \%Data;
 }
@@ -563,6 +593,43 @@ sub WebserviceList {
     );
 
     return \%Data;
+}
+
+=head2 WebserviceConfigReplace()
+
+Replaces <OTRS_CONFIG> tags in arrays, hashes and strings recursively.
+
+    my $Data   = '<OTRS_CONFIG_Home>';
+    my $Result = $WebserviceObject->WebserviceConfigReplace($Data);
+
+Returns:
+
+    my $Result = '/opt/otrs';
+
+=cut
+
+sub WebserviceConfigReplace {
+    my ( $Self, $Data ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    if ( IsStringWithData($Data) ) {
+        $Data =~ s/(?:<|&lt;)OTRS_CONFIG_(.+?)(?:>|&gt;)/$ConfigObject->{$1}/g;
+    }
+    elsif ( IsArrayRefWithData($Data) ) {
+
+        for my $Entry ( @{$Data} ) {
+            $Entry = $Self->WebserviceConfigReplace($Entry);
+        }
+    }
+    elsif ( IsHashRefWithData($Data) ) {
+
+        for my $Key ( sort keys %{$Data} ) {
+            $Data->{$Key} = $Self->WebserviceConfigReplace( $Data->{$Key} );
+        }
+    }
+
+    return $Data;
 }
 
 =begin Internal:

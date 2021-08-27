@@ -50,6 +50,7 @@ The following persons contributed to OTRS:
 * Jens Pfeifer <jp@znuny.com>
 * Johannes Hörburger <johannes.hoerburger@otrs.com>
 * Johannes Nickel <hanne_hal@me.com>
+* Johannes Nickel <hanneshal@users.noreply.github.com>
 * Johannes Nickel <jn@znuny.com>
 * Keith Moore <tenareth@gmail.com>
 * Luca Maranzano <liuk@linux.it>
@@ -86,6 +87,7 @@ The following persons contributed to OTRS:
 * Patrick Brischler <patrick.brischler@otrs.com>
 * Patrick Rauscher <prauscher@ohai.su>
 * Paul Waring <paul@xk7.net>
+* Paweł Bogusławski <pawel.boguslawski@ib.pl>
 * Peter Krantz <peter@peterkrantz.se>
 * Ralf Hildebrandt <hildeb@charite.de>
 * Raphaël Doursenaud <rdoursenaud@gpcsolutions.fr>

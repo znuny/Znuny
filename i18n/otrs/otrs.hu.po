@@ -4813,9 +4813,9 @@ msgid "Your installed OTRS version is %s."
 msgstr "A telepített OTRS verziója %s."
 
 #. Template: AdminOTRSBusinessNotInstalled
-msgid "To install this package, you need to update to OTRS %s or higher."
+msgid "To install this package, you need to update to Znuny %s or higher."
 msgstr ""
-"A csomag telepítéséhez frissítenie kell az OTRS %s vagy magasabb verziójára."
+"A csomag telepítéséhez frissítenie kell az Znuny %s vagy magasabb verziójára."
 
 #. Template: AdminOTRSBusinessNotInstalled
 msgid "To install this package, the Maximum OTRS Version is %s."
@@ -4826,8 +4826,8 @@ msgid "To install this package, the required Framework version is %s."
 msgstr "A csomag telepítéséhez a szükséges keretrendszer-verzió %s."
 
 #. Template: AdminOTRSBusinessNotInstalled
-msgid "Why should I keep OTRS up to date?"
-msgstr "Miért kell naprakészen tartanom az OTRS-t?"
+msgid "Why should I keep Znuny up to date?"
+msgstr "Miért kell naprakészen tartanom az Znuny-t?"
 
 #. Template: AdminOTRSBusinessNotInstalled
 msgid "You will receive updates about relevant security issues."
@@ -5031,11 +5031,11 @@ msgid "package information"
 msgstr "csomaginformációk"
 
 #. Template: AdminPackageManager
-msgid "Package installation requires a patch level update of OTRS."
+msgid "Package installation requires a patch level update of Znuny."
 msgstr "A csomagtelepítés az OTRS hibajavító szintű frissítését igényli."
 
 #. Template: AdminPackageManager
-msgid "Package update requires a patch level update of OTRS."
+msgid "Package update requires a patch level update of Znuny."
 msgstr "A csomagfrissítés az OTRS hibajavító szintű frissítését igényli."
 
 #. Template: AdminPackageManager
@@ -5047,26 +5047,26 @@ msgstr ""
 "ügyfélportálunkat, és küldjön egy kérést."
 
 #. Template: AdminPackageManager
-msgid "Please note that your installed OTRS version is %s."
-msgstr "Ne feledje, hogy a telepített OTRS verziója %s."
+msgid "Please note that your installed Znuny version is %s."
+msgstr "Ne feledje, hogy a telepített Znuny verziója %s."
 
 #. Template: AdminPackageManager
 msgid ""
-"To install this package, you need to update OTRS to version %s or newer."
+"To install this package, you need to update Znuny to version %s or newer."
 msgstr ""
-"A csomag telepítéséhez frissítenie kell az OTRS-t %s vagy újabb verzióra."
+"A csomag telepítéséhez frissítenie kell az Znuny-t %s vagy újabb verzióra."
 
 #. Template: AdminPackageManager
-msgid "This package can only be installed on OTRS version %s or older."
-msgstr "Ez a csomag csak az OTRS %s vagy régebbi verziójára telepíthető."
+msgid "This package can only be installed on Znuny version %s or older."
+msgstr "Ez a csomag csak az Znuny %s vagy régebbi verziójára telepíthető."
 
 #. Template: AdminPackageManager
-msgid "This package can only be installed on OTRS version %s or newer."
-msgstr "Ez a csomag csak az OTRS %s vagy újabb verziójára telepíthető."
+msgid "This package can only be installed on Znuny version %s or newer."
+msgstr "Ez a csomag csak az Znuny %s vagy újabb verziójára telepíthető."
 
 #. Template: AdminPackageManager
-msgid "You will receive updates for all other relevant OTRS issues."
-msgstr "Frissítéseket fog kapni minden egyéb fontos OTRS problémáról."
+msgid "You will receive updates for all other relevant Znuny issues."
+msgstr "Frissítéseket fog kapni minden egyéb fontos Znuny problémáról."
 
 #. Template: AdminPackageManager
 msgid "How can I do a patch level update if I don’t have a contract?"
@@ -15058,11 +15058,6 @@ msgstr "Időpont"
 #. Perl Module: Kernel/Output/HTML/LinkObject/Ticket.pm
 msgid "Archive search"
 msgstr "Archívum keresés"
-
-#. Perl Module: Kernel/Output/HTML/Notification/AgentCloudServicesDisabled.pm
-msgid "Enable cloud services to unleash all OTRS features!"
-msgstr ""
-"Engedélyezze a felhőszolgáltatásokat az összes OTRS funkció feloldásához!"
 
 #. Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
 msgid "%s Upgrade to %s now! %s"

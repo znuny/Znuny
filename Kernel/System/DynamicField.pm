@@ -1319,7 +1319,7 @@ sub ObjectMappingGet {
 
 =head2 ObjectMappingCreate()
 
-Creates an object mapping for the given given object name.
+Creates an object mapping for the given object name.
 
 NOTE: Only use object mappings for dynamic fields that must support non-integer object IDs,
 like customer user logins and customer company IDs.

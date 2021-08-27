@@ -25,11 +25,13 @@ our @ObjectDependencies = (
     'Kernel::System::Cache',
     'Kernel::System::Chat',
     'Kernel::System::CustomerGroup',
+    'Kernel::System::CustomerUser',
     'Kernel::System::DateTime',
     'Kernel::System::Group',
     'Kernel::System::Encode',
     'Kernel::System::HTMLUtils',
     'Kernel::System::JSON',
+    'Kernel::System::LastViews',
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::OTRSBusiness',
@@ -1479,6 +1481,20 @@ sub Header {
                     },
                 );
             }
+
+            # Show links to last views, if enabled for tool bar.
+            my $ToolBarLastViewsHTML = $Self->_BuildLastViewsOutput(
+                Interface => 'Agent',
+                Position  => 'ToolBar',
+            );
+            if ( defined $ToolBarLastViewsHTML && length $ToolBarLastViewsHTML ) {
+                $Self->Block(
+                    Name => 'LastViewsToolBar',
+                    Data => {
+                        ToolBarLastViewsHTML => $ToolBarLastViewsHTML,
+                    },
+                );
+            }
         }
 
         if ( $Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::Chat', Silent => 1 ) ) {
@@ -1504,6 +1520,20 @@ sub Header {
             );
 
             $Param{UserInitials} = $Self->UserInitialsGet( Fullname => $User{UserFullname} );
+        }
+
+        # Show links to last views, if enabled for avatar.
+        my $AvatarLastViewsHTML = $Self->_BuildLastViewsOutput(
+            Interface => 'Agent',
+            Position  => 'Avatar',
+        );
+        if ( defined $AvatarLastViewsHTML && length $AvatarLastViewsHTML ) {
+            $Self->Block(
+                Name => 'LastViewsAvatar',
+                Data => {
+                    AvatarLastViewsHTML => $AvatarLastViewsHTML,
+                },
+            );
         }
 
         # show logged in notice
@@ -1658,6 +1688,7 @@ sub Footer {
         InputFieldsActivated           => $ConfigObject->Get('ModernizeFormFields'),
         OTRSBusinessIsInstalled        => $Param{OTRSBusinessIsInstalled},
         VideoChatEnabled               => $Param{VideoChatEnabled},
+        DatepickerShowWeek             => $ConfigObject->Get('Datepicker::ShowWeek') || 0,
         PendingStateIDs                => \@PendingStateIDs,
         CheckSearchStringsForStopWords => (
             $ConfigObject->Get('Ticket::SearchIndex::WarnOnStopWordUsage')
@@ -3226,6 +3257,21 @@ sub NavigationBar {
         );
     }
 
+    # Show links to last views, if enabled for menu bar.
+    my $MenuBarLastViewsHTML = $Self->_BuildLastViewsOutput(
+        Interface => 'Agent',
+        Position  => 'MenuBar',
+    );
+
+    if ( defined $MenuBarLastViewsHTML && length $MenuBarLastViewsHTML ) {
+        $Self->Block(
+            Name => 'LastViewsMenuBar',
+            Data => {
+                MenuBarLastViewsHTML => $MenuBarLastViewsHTML,
+            },
+        );
+    }
+
     # create & return output
     my $Output = $Self->Output(
         TemplateFile => 'AgentNavigationBar',
@@ -4717,6 +4763,21 @@ sub CustomerNavigationBar {
         }
     }
 
+    # Show links to last views, if enabled for menu bar.
+    my $MenuBarLastViewsHTML = $Self->_BuildLastViewsOutput(
+        Interface => 'Customer',
+        Position  => 'MenuBar',
+    );
+
+    if ( defined $MenuBarLastViewsHTML && length $MenuBarLastViewsHTML ) {
+        $Self->Block(
+            Name => 'LastViewsMenuBar',
+            Data => {
+                MenuBarLastViewsHTML => $MenuBarLastViewsHTML,
+            },
+        );
+    }
+
     # create & return output
     return $Self->Output(
         TemplateFile => 'CustomerNavigationBar',
@@ -5468,13 +5529,6 @@ sub _BuildSelectionDataRefCreate {
             push @SortKeys, sort { lc $a cmp lc $b } ( values %List );
         }
 
-        # translate value
-        if ( $OptionRef->{Translation} ) {
-            for my $Row ( sort keys %{$DataLocal} ) {
-                $DataLocal->{$Row} = $Self->{LanguageObject}->Translate( $DataLocal->{$Row} );
-            }
-        }
-
         # sort hash (after the translation)
         if ( $OptionRef->{Sort} eq 'NumericKey' ) {
             @SortKeys = sort { $a <=> $b } ( keys %{$DataLocal} );
@@ -5835,8 +5889,16 @@ sub _BuildSelectionDataRefCreate {
         }
     }
 
+    # translate value
+    if ( $OptionRef->{Translation} ) {
+        for my $Row (  @{$DataRef} ) {
+            $Row->{Value} = $Self->{LanguageObject}->Translate( $Row->{Value} );
+        }
+    }
+
     return $DataRef;
 }
+
 
 =head2 _BuildSelectionOutput()
 
@@ -6399,6 +6461,124 @@ sub UserInitialsGet {
     }
 
     return $UserInitials;
+}
+
+=head2 _BuildLastViewsOutput()
+
+Outputs links to the last views of the (customer) user in the avatar area, tool bar or menu bar.
+
+    my $LastViewsHTML = $LayoutObject->_BuildLastViewsOutput(
+        Interface => 'Agent',       # or Customer
+        Position  => 'ToolBar',     # or MenuBar or Avatar, for customer interface only MenuBar is possible.
+    );
+
+=cut
+
+sub _BuildLastViewsOutput {
+    my ( $Self, %Param ) = @_;
+
+    my $LastViewsObject    = $Kernel::OM->Get('Kernel::System::LastViews');
+    my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
+    my $JSONObject         = $Kernel::OM->Get('Kernel::System::JSON');
+    my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+    my $LogObject          = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
+    for my $Needed (qw(Interface Position)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    my %UserPreferences;
+
+    if ( $Param{Interface} eq 'Agent' ) {
+        %UserPreferences = $UserObject->GetPreferences(
+            UserID => $Self->{UserID},
+        );
+    }
+    elsif ( $Param{Interface} eq 'Customer' ) {
+        %UserPreferences = $CustomerUserObject->GetPreferences(
+            UserID => $Self->{UserID},
+        );
+        $UserPreferences{UserLastViewsLimit} ||= 10;
+        $UserPreferences{UserLastViewsPosition} = 'MenuBar';
+    }
+    else {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter 'Interface' must be 'Agent' or 'Customer'.",
+        );
+        return;
+    }
+
+    my $LastViewTypes = $JSONObject->Decode(
+        Data => $UserPreferences{UserLastViewsTypes},
+    );
+    return if !IsArrayRefWithData($LastViewTypes);
+
+    my $LastViewsLimit = $UserPreferences{UserLastViewsLimit} || 5;
+
+    my $SelectedPosition = $UserPreferences{UserLastViewsPosition} || 'ToolBar';
+    return if $Param{Position} ne $SelectedPosition;
+
+    my @LastViews = $LastViewsObject->GetList(
+        SessionID => $Self->{SessionID},
+        Types     => $LastViewTypes,
+    );
+    return if !@LastViews;
+
+    my $ReverseCounter  = $LastViewsLimit;
+    my $LastViewCounter = 1;
+    my $LastViewLabel   = $Self->{LanguageObject}->Translate('Last Views');
+
+    LASTVIEW:
+    for my $LastView ( reverse @LastViews ) {
+        last LASTVIEW if $LastViewCounter > $LastViewsLimit;
+
+        my $Name  = $LastView->{Name} || $LastView->{Action};
+        my $Label = $Self->{LanguageObject}->Translate($Name);
+
+        my $Class;
+        if ( $LastView->{PopUp} ) {
+            $Class = 'AsPopup PopupType_LastView' . $LastView->{PopUp};
+        }
+
+        $Self->Block(
+            Name => 'LastView',
+            Data => {
+                %{$LastView},
+                Label   => $Label,
+                Counter => $LastViewCounter,
+                Class   => $Class,
+            },
+        );
+
+        for my $Param ( sort keys %{ $LastView->{Params} } ) {
+            my $Value = $LastView->{Params}->{$Param};
+            $Self->Block(
+                Name => 'LastViewParam',
+                Data => {
+                    Key   => $Param,
+                    Value => $Value,
+                },
+            );
+        }
+
+        $LastViewCounter++;
+        $ReverseCounter--;
+    }
+
+    my $LastViewHTML = $Self->Output(
+        TemplateFile => 'LastViews/' . $Param{Interface} . '/' . $SelectedPosition,
+        Data         => {},
+    );
+
+    return $LastViewHTML;
 }
 
 1;

@@ -1357,12 +1357,12 @@ sub Data {
         'Please visit our customer portal and file a request.' => 'Per cortesia visita il nostro portale clienti e inoltra una richiesta.',
         'Everything else will be done as part of your contract.' => 'Tutto il resto sarà fatto come parte del tuo contratto.',
         'Your installed OTRS version is %s.' => 'La versione installata di OTRS è %s.',
-        'To install this package, you need to update to OTRS %s or higher.' =>
-            'Per installare questo pacchetto, è necessario aggiornare a OTRS %s o superiore.',
+        'To install this package, you need to update to Znuny %s or higher.' =>
+            'Per installare questo pacchetto, è necessario aggiornare a Znuny %s o superiore.',
         'To install this package, the Maximum OTRS Version is %s.' => 'To install this package, the Maximum OTRS Version is %s.',
         'To install this package, the required Framework version is %s.' =>
             'Per installare questo pacchetto, è la versione Framework richiesta %s.',
-        'Why should I keep OTRS up to date?' => 'Perché dovrei tenere aggiornato OTRS?',
+        'Why should I keep Znuny up to date?' => 'Perché dovrei tenere aggiornato Znuny?',
         'You will receive updates about relevant security issues.' => 'Riceverai aggiornamenti su importanti problemi di sicurezza.',
         'You will receive updates for all other relevant OTRS issues' => 'Riceverai aggiornamenti per tutti gli altri problemi OTRS pertinenti',
         'With your existing contract you can only use a small part of the %s.' =>
@@ -1420,19 +1420,19 @@ sub Data {
             'Vuoi davvero reinstallare questo pacchetto? Ogni modifica manuale sarà persa.',
         'Go to updating instructions' => 'Vai alle istruzioni di aggiornamento',
         'package information' => 'informazioni sul pacchetto',
-        'Package installation requires a patch level update of OTRS.' => 'L\'installazione del pacchetto richiede un aggiornamento a livello di patch di OTRS.',
-        'Package update requires a patch level update of OTRS.' => 'L\'aggiornamento del pacchetto richiede un aggiornamento a livello di patch di OTRS.',
+        'Package installation requires a patch level update of Znuny.' => 'L\'installazione del pacchetto richiede un aggiornamento a livello di patch di Znuny.',
+        'Package update requires a patch level update of Znuny.' => 'L\'aggiornamento del pacchetto richiede un aggiornamento a livello di patch di Znuny.',
         'If you are a OTRS Business Solution™ customer, please visit our customer portal and file a request.' =>
             'Se sei un cliente OTRS Business Solution™, visita il nostro portale cliente e invia una richiesta.',
-        'Please note that your installed OTRS version is %s.' => 'Si noti che la versione OTRS installata è %s.',
-        'To install this package, you need to update OTRS to version %s or newer.' =>
-            'Per installare questo pacchetto, è necessario aggiornare OTRS alla versione %s o più nuova.',
-        'This package can only be installed on OTRS version %s or older.' =>
-            'Questo pacchetto può essere installato solo sulla versione OTRS %s o più vecchia.',
-        'This package can only be installed on OTRS version %s or newer.' =>
-            'Questo pacchetto può essere installato solo sulla versione OTRS %s o più nuova.',
-        'You will receive updates for all other relevant OTRS issues.' =>
-            'Riceverai aggiornamenti per tutti gli altri problemi OTRS pertinenti.',
+        'Please note that your installed Znuny version is %s.' => 'Si noti che la versione Znuny installata è %s.',
+        'To install this package, you need to update Znuny to version %s or newer.' =>
+            'Per installare questo pacchetto, è necessario aggiornare Znuny alla versione %s o più nuova.',
+        'This package can only be installed on Znuny version %s or older.' =>
+            'Questo pacchetto può essere installato solo sulla versione Znuny %s o più vecchia.',
+        'This package can only be installed on Znuny version %s or newer.' =>
+            'Questo pacchetto può essere installato solo sulla versione Znuny %s o più nuova.',
+        'You will receive updates for all other relevant Znuny issues.' =>
+            'Riceverai aggiornamenti per tutti gli altri problemi Znuny pertinenti.',
         'How can I do a patch level update if I don’t have a contract?' =>
             'Come posso effettuare un aggiornamento a livello di patch se non ho un contratto?',
         'Please find all relevant information within the updating instructions at %s.' =>
@@ -4638,9 +4638,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/LinkObject/Ticket.pm
         'Archive search' => '',
-
-        # Perl Module: Kernel/Output/HTML/Notification/AgentCloudServicesDisabled.pm
-        'Enable cloud services to unleash all OTRS features!' => 'Aumenta le potenzialità di OTRS abilitando i servizi cloud!',
 
         # Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
         '%s Upgrade to %s now! %s' => '%s Aggiorna a %s ora! %s',

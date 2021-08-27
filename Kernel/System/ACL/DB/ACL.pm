@@ -519,7 +519,7 @@ sub ACLUpdate {
     my $CurrentConfigChange;
     while ( my @Data = $DBObject->FetchrowArray() ) {
         $CurrentName           = $Data[0];
-        $CurrentComment        = $Data[1];
+        $CurrentComment        = $Data[1] || '';
         $CurrentDescription    = $Data[2] || '';
         $CurrentStopAfterMatch = $Data[3] || 0;
         $CurrentValidID        = $Data[4];

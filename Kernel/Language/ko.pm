@@ -1348,12 +1348,12 @@ sub Data {
         'Please visit our customer portal and file a request.' => '고객 포털을 방문하여 요청을 제출하십시오.',
         'Everything else will be done as part of your contract.' => '그 밖의 모든 것은 계약의 일부로 수행됩니다.',
         'Your installed OTRS version is %s.' => '설치된 OTRS 버전은 %s입니다.',
-        'To install this package, you need to update to OTRS %s or higher.' =>
-            '이 패키지를 설치하려면 %s 이상의 OTRS로 업데이트해야합니다.',
+        'To install this package, you need to update to Znuny %s or higher.' =>
+            '이 패키지를 설치하려면 %s 이상의 Znuny로 업데이트해야합니다.',
         'To install this package, the Maximum OTRS Version is %s.' => '이 패키지를 설치하려면 최대 OTRS 버전은 %s입니다.',
         'To install this package, the required Framework version is %s.' =>
             '이 패키지를 설치하려면 필요한 Framework 버전이 %s입니다.',
-        'Why should I keep OTRS up to date?' => '왜 OTRS를 최신 상태로 유지해야합니까?',
+        'Why should I keep Znuny up to date?' => '왜 Znuny를 최신 상태로 유지해야합니까?',
         'You will receive updates about relevant security issues.' => '관련 보안 문제에 대한 업데이트가 제공됩니다.',
         'You will receive updates for all other relevant OTRS issues' => '다른 모든 관련 OTRS 문제에 대한 업데이트를 받게됩니다.',
         'With your existing contract you can only use a small part of the %s.' =>
@@ -1411,19 +1411,19 @@ sub Data {
             '이 패키지를 정말로 다시 설치 하시겠습니까? 수동으로 변경하면 손실됩니다.',
         'Go to updating instructions' => '',
         'package information' => '패키지 정보',
-        'Package installation requires a patch level update of OTRS.' => '패키지를 설치하려면 OTRS의 패치 레벨 업데이트가 필요합니다. ',
-        'Package update requires a patch level update of OTRS.' => '패키지 업데이트에는 OTRS의 패치 수준 업데이트가 필요합니다. ',
+        'Package installation requires a patch level update of Znuny.' => '패키지를 설치하려면 Znuny의 패치 레벨 업데이트가 필요합니다.',
+        'Package update requires a patch level update of Znuny.' => '패키지 업데이트에는 Znuny의 패치 수준 업데이트가 필요합니다.',
         'If you are a OTRS Business Solution™ customer, please visit our customer portal and file a request.' =>
             'OTRS Business Solution ™ 고객 인 경우 고객 포털을 방문하여 요청을 제출하십시오.',
-        'Please note that your installed OTRS version is %s.' => '설치된 OTRS 버전은 %s입니다.',
-        'To install this package, you need to update OTRS to version %s or newer.' =>
-            '이 패키지를 설치하려면 OTRS를 버전 %s 이상으로 업데이트해야합니다.',
-        'This package can only be installed on OTRS version %s or older.' =>
-            '이 패키지는 OTRS 버전 %s 또는 그 이상에서만 설치할 수 있습니다.',
-        'This package can only be installed on OTRS version %s or newer.' =>
-            'This package can only be installed on OTRS version %s or newer.',
-        'You will receive updates for all other relevant OTRS issues.' =>
-            '다른 모든 관련 OTRS 문제에 대한 업데이트가 제공됩니다.',
+        'Please note that your installed Znuny version is %s.' => '설치된 OTRS 버전은 %s입니다.',
+        'To install this package, you need to update Znuny to version %s or newer.' =>
+            '이 패키지를 설치하려면 Znuny를 버전 %s 이상으로 업데이트해야합니다.',
+        'This package can only be installed on Znuny version %s or older.' =>
+            '이 패키지는 Znuny 버전 %s 또는 그 이상에서만 설치할 수 있습니다.',
+        'This package can only be installed on Znuny version %s or newer.' =>
+            '',
+        'You will receive updates for all other relevant Znuny issues.' =>
+            '다른 모든 관련 Znuny 문제에 대한 업데이트가 제공됩니다.',
         'How can I do a patch level update if I don’t have a contract?' =>
             '계약이 없다면 어떻게 패치 레벨 업데이트를 할 수 있습니까?',
         'Please find all relevant information within the updating instructions at %s.' =>
@@ -4629,9 +4629,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/LinkObject/Ticket.pm
         'Archive search' => '보관 검색',
-
-        # Perl Module: Kernel/Output/HTML/Notification/AgentCloudServicesDisabled.pm
-        'Enable cloud services to unleash all OTRS features!' => '클라우드 서비스로 모든 OTRS 기능을 구현할 수 있습니다!',
 
         # Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
         '%s Upgrade to %s now! %s' => '%s 지금 %s로 업그레이드하십시오! %s',

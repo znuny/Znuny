@@ -1349,12 +1349,12 @@ sub Data {
         'Please visit our customer portal and file a request.' => 'Будь ласка, відвідайте наш портал клієнта та подайте заявку.',
         'Everything else will be done as part of your contract.' => 'Все інше буде зроблено в рамках угоди.',
         'Your installed OTRS version is %s.' => 'Версія вашого встановленого OTRS %s.',
-        'To install this package, you need to update to OTRS %s or higher.' =>
-            'Щоб встановити цей пакунок, вам необхідно оновитись до OTRS %s або вище.',
+        'To install this package, you need to update to Znuny %s or higher.' =>
+            'Щоб встановити цей пакунок, вам необхідно оновитись до Znuny %s або вище.',
         'To install this package, the Maximum OTRS Version is %s.' => 'Максимальна версія OTRS для встановлення цього пакунку, це %s.',
         'To install this package, the required Framework version is %s.' =>
             'Щоб встановити цей пакунок, необхідний Фреймворк версії %s.',
-        'Why should I keep OTRS up to date?' => 'Чому я маю тримати OTRS в актуальному стані?',
+        'Why should I keep Znuny up to date?' => 'Чому я маю тримати Znuny в актуальному стані?',
         'You will receive updates about relevant security issues.' => 'Ви будете отримувати нову інформацію з відповідних питань безпеки.',
         'You will receive updates for all other relevant OTRS issues' => 'Ви будете отримувати оновлення для всіх інших відповідних питань OTRS',
         'With your existing contract you can only use a small part of the %s.' =>
@@ -1412,19 +1412,19 @@ sub Data {
             'Ви дійсно хочете перевстановити цей пакунок? Аби-які ручні зміни буде втрачено!',
         'Go to updating instructions' => '',
         'package information' => 'інформація про пакет',
-        'Package installation requires a patch level update of OTRS.' => 'Установка пакунку потребує оновлення рівня виправлень OTRS.',
-        'Package update requires a patch level update of OTRS.' => 'Оновлення пакунку потребує оновлення рівня оновлень OTRS.',
+        'Package installation requires a patch level update of Znuny.' => 'Установка пакунку потребує оновлення рівня виправлень Znuny.',
+        'Package update requires a patch level update of Znuny.' => 'Оновлення пакунку потребує оновлення рівня оновлень Znuny.',
         'If you are a OTRS Business Solution™ customer, please visit our customer portal and file a request.' =>
             'Якщо ви є клієнтом OTRS Business Solution™, будь ласка, відвідайте наш портал клієнтів та подайте заявку.',
-        'Please note that your installed OTRS version is %s.' => 'Зверніть увагу, що версія встановленого OTRS %s.',
-        'To install this package, you need to update OTRS to version %s or newer.' =>
-            'Щоб встановити цей пакунок, ви маєте оновити OTRS до версії %s або новіше.',
-        'This package can only be installed on OTRS version %s or older.' =>
-            'Цей пакунок можна встановити на OTRS версії %s або старше.',
-        'This package can only be installed on OTRS version %s or newer.' =>
-            'Цей пакунок можна встановити на OTRS версії %s або новіше.',
-        'You will receive updates for all other relevant OTRS issues.' =>
-            'Ви будете отримувати оновлення для всіх інших питань стосовно OTRS.',
+        'Please note that your installed Znuny version is %s.' => 'Зверніть увагу, що версія встановленого Znuny %s.',
+        'To install this package, you need to update Znuny to version %s or newer.' =>
+            'Щоб встановити цей пакунок, ви маєте оновити Znuny до версії %s або новіше.',
+        'This package can only be installed on Znuny version %s or older.' =>
+            'Цей пакунок можна встановити на Znuny версії %s або старше.',
+        'This package can only be installed on Znuny version %s or newer.' =>
+            'Цей пакунок можна встановити на Znuny версії %s або новіше.',
+        'You will receive updates for all other relevant Znuny issues.' =>
+            'Ви будете отримувати оновлення для всіх інших питань стосовно Znuny.',
         'How can I do a patch level update if I don’t have a contract?' =>
             'Як я можу оновити рівень виправлень якщо у мене немає угоди?',
         'Please find all relevant information within the updating instructions at %s.' =>
@@ -4630,9 +4630,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/LinkObject/Ticket.pm
         'Archive search' => 'Пошук в архіві',
-
-        # Perl Module: Kernel/Output/HTML/Notification/AgentCloudServicesDisabled.pm
-        'Enable cloud services to unleash all OTRS features!' => 'Ввімкніть хмарні сервіси щоб розкрити усі можливості OTRS!',
 
         # Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
         '%s Upgrade to %s now! %s' => '%s Оновіться до %s зараз! %s',

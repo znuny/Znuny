@@ -14,15 +14,16 @@ use utf8;
 
 use vars (qw($Self));
 
-my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
 # Skip SSL certificate verification.
 $Kernel::OM->ObjectParamAdd(
     'Kernel::System::UnitTest::Helper' => {
         SkipSSLVerify => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+my $JSONObject   = $Kernel::OM->Get('Kernel::System::JSON');
 
 # Add web service to be used (empty config).
 my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
@@ -31,7 +32,7 @@ $Self->Is(
     ref $WebserviceObject,
     'Create web service object'
 );
-my $WebserviceName = 'REST' . $Helper->GetRandomID();
+my $WebserviceName = 'REST' . $HelperObject->GetRandomID();
 my $WebserviceID   = $WebserviceObject->WebserviceAdd(
     Name   => $WebserviceName,
     Config => {
@@ -53,7 +54,7 @@ $Self->True(
 );
 
 # Get remote host with some precautions for certain unit test systems.
-my $Host = $Helper->GetTestHTTPHostname();
+my $Host = $HelperObject->GetTestHTTPHostname();
 
 # Prepare web service config.
 my $BaseURL =
@@ -735,16 +736,30 @@ my @Tests = (
             Other2  => 'Two',
             Other3  => 'Three',
             Other4  => 'Four',
+            NestedOther => {
+                SubOther => [
+                    'OtherValue1',
+                    'OtherValue2',
+                ],
+            },
             Complex => {
                 ComplexData => 'Data',
             },
         },
         ExpectedReturnData => {
             Other   => 'Data',
+            NestedOther => {
+                SubOther => [
+                    'OtherValue1',
+                    'OtherValue2',
+                ],
+            },
             URI1    => 'One',
             URI2    => 'Two',
+            URI3    => 'OtherValue1',
             Query3  => 'Three',
             Query4  => 'Four',
+            Query5  => 'OtherValue2',
             Complex => {
                 ComplexData => 'Data',
             },
@@ -765,7 +780,7 @@ my @Tests = (
                         RouteOperationMapping => {
                             TestSimple => {
                                 RequestMethod => ['POST'],
-                                Route         => '/Test/:URI1/:URI2',
+                                Route         => '/Test/:URI1/:URI2/:URI3',
                             },
                         },
                     },
@@ -785,7 +800,7 @@ my @Tests = (
                         Timeout                  => 120,
                         InvokerControllerMapping => {
                             TestSimple => {
-                                Controller => '/Test/:Other1/:Other2?Query3=:Other3&Query4=:Other4',
+                                Controller => '/Test/:Other1/:Other2/:NestedOther.SubOther.0?Query3=:Other3&Query4=:Other4&Query5=:NestedOther.SubOther.1',
                             },
                         },
                     },
@@ -1283,9 +1298,6 @@ for my $Test (@Tests) {
     },
 );
 
-# Get JSON object.
-my $JSONObject = $Kernel::OM->Get('Kernel::System::JSON');
-
 TEST:
 for my $Test (@Tests) {
 
@@ -1371,6 +1383,32 @@ for my $Test (@Tests) {
             Key2           => 'Value2',
         },
     },
+    {
+        Name   => 'dynamic additional response headers',
+        Config => {
+            AdditionalHeaders => {
+                Key1 => 'Value1',
+                Key2 => 'Value2',
+            },
+        },
+        Header => {
+            'Content-Type'                        => 'application/json; charset=UTF-8',
+            Key1                                  => 'Value1',
+            Key2                                  => 'Value2',
+            'X-OTRS-GenericInterface-Per-Page'    => 2,
+            'X-OTRS-GenericInterface-Total'       => 5,
+            'X-OTRS-GenericInterface-Total-Pages' => 3,
+            'X-OTRS-GenericInterface-Page'        => 2,
+        },
+        Data => {
+            AdditionalResponseHeaders => {
+                'X-OTRS-GenericInterface-Per-Page'    => 2,
+                'X-OTRS-GenericInterface-Total'       => 5,
+                'X-OTRS-GenericInterface-Total-Pages' => 3,
+                'X-OTRS-GenericInterface-Page'        => 2,
+            }
+        }
+    },
 );
 
 # Create debugger object.
@@ -1410,10 +1448,14 @@ for my $Test (@Tests) {
         # Discard request object to prevent errors.
         $Kernel::OM->ObjectsDiscard( Objects => ['Kernel::System::Web::Request'] );
 
+        $Test->{Data} //= {};
+
         # Create response.
         $Result = $TransportObject->ProviderGenerateResponse(
             Success => 1,
-            Data    => {},
+            Data    => {
+                %{ $Test->{Data} },
+            }
         );
     }
     $Self->True(

@@ -44,6 +44,20 @@ sub Run {
     for my $Key (@ParamNames) {
         next KEY if $Key eq 'AppointmentIDs';
         $GetParam{$Key} = $ParamObject->GetParam( Param => $Key );
+
+        my %SafeGetParam = $Kernel::OM->Get('Kernel::System::HTMLUtils')->Safety(
+            String       => $GetParam{$Key},
+            NoApplet     => 1,
+            NoObject     => 1,
+            NoEmbed      => 1,
+            NoSVG        => 1,
+            NoImg        => 1,
+            NoIntSrcLoad => 1,
+            NoExtSrcLoad => 1,
+            NoJavaScript => 1,
+        );
+
+        $GetParam{$Key} = $SafeGetParam{String};
     }
 
     my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
@@ -105,9 +119,17 @@ sub Run {
                 }
             }
 
-            my @Appointments = $AppointmentObject->AppointmentList(
-                %GetParam,
+            my $UserHasCalendarPermission = $CalendarObject->CalendarPermissionGet(
+                CalendarID => $GetParam{CalendarID},
+                UserID     => $Self->{UserID},
             );
+
+            my @Appointments;
+            if ($UserHasCalendarPermission) {
+                @Appointments = $AppointmentObject->AppointmentList(
+                    %GetParam,
+                );
+            }
 
             # go through all appointments
             for my $Appointment (@Appointments) {

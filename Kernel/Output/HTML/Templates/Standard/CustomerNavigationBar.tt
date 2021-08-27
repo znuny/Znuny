@@ -26,6 +26,11 @@
         </li>
 [% RenderBlockEnd("Item") %]
     </ul>
+[% RenderBlockStart("LastViewsMenuBar") %]
+    <ul class="LastViewMenuBar">
+        [% Data.MenuBarLastViewsHTML %]
+    </ul>
+[% RenderBlockEnd("LastViewsUserBar") %]
     <ul class="Individual">
 [% RenderBlockStart("ChatRequests") %]
         <li class="ChatRequests [% Data.Class | html %]">

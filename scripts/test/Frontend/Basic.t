@@ -22,32 +22,32 @@ use LWP::UserAgent;
 
 use Kernel::System::UnitTest::Helper;
 
-my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-my $JSONObject   = $Kernel::OM->Get('Kernel::System::JSON');
-
 $Kernel::OM->ObjectParamAdd(
     'Kernel::System::UnitTest::Helper' => {
         SkipSSLVerify     => 1,
         DisableAsyncCalls => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+
+my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+my $JSONObject   = $Kernel::OM->Get('Kernel::System::JSON');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # Disable cloud service calls to avoid test failures due to connection problems etc.
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'CloudServices::Disabled',
     Value => 1,
 );
 
-my $TestUserLogin = $Helper->TestUserCreate(
+my $TestUserLogin = $HelperObject->TestUserCreate(
     Groups => ['admin'],
 );
-my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate();
+my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate();
 
 my $BaseURL = $ConfigObject->Get('HttpType') . '://';
 
-$BaseURL .= $Helper->GetTestHTTPHostname() . '/';
+$BaseURL .= $HelperObject->GetTestHTTPHostname() . '/';
 $BaseURL .= $ConfigObject->Get('ScriptAlias');
 
 my $AgentBaseURL    = $BaseURL . 'index.pl?';

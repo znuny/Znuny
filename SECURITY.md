@@ -53,7 +53,7 @@ Older versions are not supported and have known vulnerabilities.
 | Version | Supported          | Known vulnerabilities   |
 | ------- | ------------------ |------------------------ |
 | 6 LTS   | :white_check_mark: |:x:                      |
-
+| 6.1     | :white_check_mark: |:x:                      |
 
 
 ## How to report a security vulnerability?

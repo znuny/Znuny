@@ -16,10 +16,9 @@ use parent qw(Kernel::System::Console::BaseCommand);
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::System::Crypt::SMIME',
-    'Kernel::System::User',
-    'Kernel::System::CustomerUser',
     'Kernel::System::CheckItem',
+    'Kernel::System::Crypt::SMIME',
+    'Kernel::System::CustomerUser',
 );
 
 sub Configure {

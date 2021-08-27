@@ -271,13 +271,12 @@ sub GroupMemberList {
         %Data = $Kernel::OM->Get('Kernel::System::Group')->GroupList( Valid => 1 );
     }
     else {
-        # get database object
         my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
         # if it's active, return just the permitted groups
         my $SQL =
             'SELECT g.id, g.name, gu.permission_key, gu.permission_value, gu.user_id'
-            . ' FROM groups g, group_customer_user gu'
+            . ' FROM permission_groups g, group_customer_user gu'
             . ' WHERE g.valid_id IN ( ' . join ', ', $Kernel::OM->Get('Kernel::System::Valid')->ValidIDsGet() . ')'
             . ' AND g.id = gu.group_id AND gu.permission_value = 1'
             . " AND gu.permission_key IN (?, 'rw')";
@@ -639,13 +638,12 @@ sub GroupCustomerList {
         %Data = $Kernel::OM->Get('Kernel::System::Group')->GroupList( Valid => 1 );
     }
     else {
-        # get database object
         my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
         # if it's active, return just the permitted groups
         my $SQL =
             'SELECT g.id, g.name, gc.permission_key, gc.permission_value, gc.customer_id'
-            . ' FROM groups g, group_customer gc'
+            . ' FROM permission_groups g, group_customer gc'
             . ' WHERE g.valid_id IN ( ' . join ', ', $Kernel::OM->Get('Kernel::System::Valid')->ValidIDsGet() . ')'
             . ' AND g.id = gc.group_id AND gc.permission_value = 1'
             . " AND gc.permission_key IN (?, 'rw')"
@@ -904,7 +902,6 @@ sub GroupLookup {
     );
     return ${$Cache} if ( ref $Cache eq 'SCALAR' );
 
-    # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     # get data
@@ -914,13 +911,13 @@ sub GroupLookup {
     if ( $Param{Group} ) {
         $Param{What} = $Param{Group};
         $Suffix      = 'GroupID';
-        $SQL         = 'SELECT id FROM groups WHERE name = ?';
+        $SQL         = 'SELECT id FROM permission_groups WHERE name = ?';
         push @Bind, \$Param{Group};
     }
     else {
         $Param{What} = $Param{GroupID};
         $Suffix      = 'Group';
-        $SQL         = 'SELECT name FROM groups WHERE id = ?';
+        $SQL         = 'SELECT name FROM permission_groups WHERE id = ?';
         push @Bind, \$Param{GroupID};
     }
     return if !$DBObject->Prepare(

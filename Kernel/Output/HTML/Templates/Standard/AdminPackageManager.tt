@@ -172,10 +172,10 @@
                             <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
                         </li>
                         <li>
-                            <a href="https://doc.otrs.com/doc/manual/admin/6.0/en/html/updating.html" target="_blank" class="CallForAction Fullsize Center"><span><i class="fa fa-external-link"></i>[% Translate("Go to updating instructions") | html %]</span></a>
+                            <a href="https://doc.znuny.org/doc/manual/admin/6.0/en/html/updating.html" target="_blank" class="CallForAction Fullsize Center"><span><i class="fa fa-external-link"></i>[% Translate("Go to updating instructions") | html %]</span></a>
                         </li>
                         <li>
-                            <a href="https://portal.otrs.com/" target="_blank" class="CallForAction Fullsize Center"><span><i class="fa fa-external-link"></i>[% Translate("Go to the OTRS customer portal") | html %]</span></a>
+                            <a href="https://www.znuny.org/" target="_blank" class="CallForAction Fullsize Center"><span><i class="fa fa-external-link"></i>[% Translate("Go to znuny.org") | html %]</span></a>
                         </li>
                     </ul>
                 </div>
@@ -189,33 +189,33 @@
                 </div>
                 <div class="Content">
                     [% IF Data.Type == 'InstallIncompatible' %]
-                    <h2>[% Translate("Package installation requires a patch level update of OTRS.") | html %]</h2>
+                    <h2>[% Translate("Package installation requires a patch level update of Znuny.") | html %]</h2>
                     [% ELSIF Data.Type =='UpgradeIncompatible' %]
-                    <h2>[% Translate("Package update requires a patch level update of OTRS.") | html %]</h2>
+                    <h2>[% Translate("Package update requires a patch level update of Znuny.") | html %]</h2>
                     [% END %]
-                    <p class="SpacingTop">[% Translate("Please note that your installed OTRS version is %s.", Config("Version")) | html %]</p>
+                    <p class="SpacingTop">[% Translate("Please note that your installed Znuny version is %s.", Config("Version")) | html %]</p>
                     [% IF Data.RequiredMinimumVersion %]
-                    <p><span class="MinimumRequired">[% Translate("To install this package, you need to update OTRS to version %s or newer.", Data.RequiredMinimumVersion) | html %]</span></p>
+                    <p><span class="MinimumRequired">[% Translate("To install this package, you need to update Znuny to version %s or newer.", Data.RequiredMinimumVersion) | html %]</span></p>
                     [% END %]
                     [% IF Data.RequiredMaximumVersion %]
-                    <p><span class="MaximumRequired">[% Translate("This package can only be installed on OTRS version %s or older.", Data.RequiredMaximumVersion) | html %] </span></p>
+                    <p><span class="MaximumRequired">[% Translate("This package can only be installed on Znuny version %s or older.", Data.RequiredMaximumVersion) | html %] </span></p>
                     [% END %]
                     [% IF !Data.RequiredMinimumVersion && Data.RequiredFramework %]
-                    <p><span class="MaximumRequired">[% Translate("This package can only be installed on OTRS version %s or newer.", Data.RequiredFramework) | html %] </span></p>
+                    <p><span class="MaximumRequired">[% Translate("This package can only be installed on Znuny version %s or newer.", Data.RequiredFramework) | html %] </span></p>
                     [% END %]
-                    <h2 class="SpacingTop">[% Translate("Why should I keep OTRS up to date?") | html %]</h2>
+                    <h2 class="SpacingTop">[% Translate("Why should I keep Znuny up to date?") | html %]</h2>
                     <ul class="Default">
                         <li>
                             [% Translate("You will receive updates about relevant security issues.") | html %]
                         </li>
                         <li>
-                            [% Translate("You will receive updates for all other relevant OTRS issues.") | html %]
+                            [% Translate("You will receive updates for all other relevant Znuny issues.") | html %]
                         </li>
                     </ul>
                     <h2 class="SpacingTop">[% Translate("How can I do a patch level update if I don’t have a contract?") | html %]</h2>
                     <p>
                         [% Translate("Please find all relevant information within the updating instructions at %s.") | html
-                        | ReplacePlaceholders('<a href="https://doc.otrs.com/doc/manual/admin/6.0/en/html/updating.html" target="_blank">doc.otrs.com</a>') %]
+                        | ReplacePlaceholders('<a href="https://doc.znuny.org/doc/manual/admin/6.0/en/html/updating.html" target="_blank">doc.znuny.org</a>') %]
                     </p>
                     <p>[% Translate("In case you would have further questions we would be glad to answer them.") | html %] <br />[% Translate("Please visit our customer portal and file a request.") | html %]</p>
                 </div>

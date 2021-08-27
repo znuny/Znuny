@@ -21,6 +21,7 @@ use Kernel::System::MailAccount::IMAP;
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::DateTime',
     'Kernel::System::Log',
     'Kernel::System::MailAccount',
 );

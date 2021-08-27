@@ -305,14 +305,16 @@ for my $Fail ( 0 .. 1 ) {
             ResultSuccess => 1,
         },
         {
-            Name          => "TransportObject (Fail $Fail) ProviderGenerateResponse() wrong data scalar",
+            Name          => "TransportObject (Fail $Fail) ProviderGenerateResponse() scalar data",
             Data          => 'testdata',
-            ResultSuccess => 0,
+            ResultData    => 'testdata',
+            ResultSuccess => 1,
         },
         {
-            Name          => "TransportObject (Fail $Fail) ProviderGenerateResponse() wrong data listref",
+            Name          => "TransportObject (Fail $Fail) ProviderGenerateResponse() arrayref data",
             Data          => ['testdata'],
-            ResultSuccess => 0,
+            ResultData    => '',
+            ResultSuccess => 1,
         },
     );
 

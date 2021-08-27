@@ -4732,9 +4732,9 @@ msgid "Your installed OTRS version is %s."
 msgstr "Инсталирана OTRS верзија код вас је %s."
 
 #. Template: AdminOTRSBusinessNotInstalled
-msgid "To install this package, you need to update to OTRS %s or higher."
+msgid "To install this package, you need to update to Znuny %s or higher."
 msgstr ""
-"Да бисте инсталирали овај пакет, неопходно је да ажурирате ваш OTRS на "
+"Да бисте инсталирали овај пакет, неопходно је да ажурирате ваш Znuny на "
 "верзију %s или више."
 
 #. Template: AdminOTRSBusinessNotInstalled
@@ -4746,8 +4746,8 @@ msgid "To install this package, the required Framework version is %s."
 msgstr "За инсталацију овог пакета неопходна верзија OTRS је %s."
 
 #. Template: AdminOTRSBusinessNotInstalled
-msgid "Why should I keep OTRS up to date?"
-msgstr "Зашто би требало да OTRS увек буде ажуриран?"
+msgid "Why should I keep Znuny up to date?"
+msgstr "Зашто би требало да Znuny увек буде ажуриран?"
 
 #. Template: AdminOTRSBusinessNotInstalled
 msgid "You will receive updates about relevant security issues."
@@ -4947,11 +4947,11 @@ msgid "package information"
 msgstr "Информације о пакету"
 
 #. Template: AdminPackageManager
-msgid "Package installation requires a patch level update of OTRS."
+msgid "Package installation requires a patch level update of Znuny."
 msgstr "Инсталација пакета захтева ажурирану верзију OTRS."
 
 #. Template: AdminPackageManager
-msgid "Package update requires a patch level update of OTRS."
+msgid "Package update requires a patch level update of Znuny."
 msgstr "Ажурирање пакета захтева ажурирану верзију OTRS."
 
 #. Template: AdminPackageManager
@@ -4963,27 +4963,27 @@ msgstr ""
 "портал и поднесите захтев."
 
 #. Template: AdminPackageManager
-msgid "Please note that your installed OTRS version is %s."
-msgstr "Тренутно инсталирана OTRS верзија је %s."
+msgid "Please note that your installed Znuny version is %s."
+msgstr "Тренутно инсталирана Znuny верзија је %s."
 
 #. Template: AdminPackageManager
 msgid ""
-"To install this package, you need to update OTRS to version %s or newer."
+"To install this package, you need to update Znuny to version %s or newer."
 msgstr ""
-"Да бисте инсталирали овај пакет, неопходно је да ажурирате ваш OTRS на "
+"Да бисте инсталирали овај пакет, неопходно је да ажурирате ваш Znuny на "
 "верзију %s или новију."
 
 #. Template: AdminPackageManager
-msgid "This package can only be installed on OTRS version %s or older."
-msgstr "Овај пакет се може инсталирати само на OTRS верзију%s или старију."
+msgid "This package can only be installed on Znuny version %s or older."
+msgstr "Овај пакет се може инсталирати само на Znuny верзију%s или старију."
 
 #. Template: AdminPackageManager
-msgid "This package can only be installed on OTRS version %s or newer."
-msgstr "Овај пакет се може инсталирати само на OTRS верзију%s или новију."
+msgid "This package can only be installed on Znuny version %s or newer."
+msgstr "Овај пакет се може инсталирати само на Znuny верзију%s или новију."
 
 #. Template: AdminPackageManager
-msgid "You will receive updates for all other relevant OTRS issues."
-msgstr "Добићете ажурирања свих других релевантних OTRS издања."
+msgid "You will receive updates for all other relevant Znuny issues."
+msgstr "Добићете ажурирања свих других релевантних Znuny издања."
 
 #. Template: AdminPackageManager
 msgid "How can I do a patch level update if I don’t have a contract?"
@@ -14801,10 +14801,6 @@ msgstr "Термин"
 #. Perl Module: Kernel/Output/HTML/LinkObject/Ticket.pm
 msgid "Archive search"
 msgstr "Претрага архиве"
-
-#. Perl Module: Kernel/Output/HTML/Notification/AgentCloudServicesDisabled.pm
-msgid "Enable cloud services to unleash all OTRS features!"
-msgstr "Активирајте сервисе у облаку да би омогућили све OTRS функције!"
 
 #. Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
 msgid "%s Upgrade to %s now! %s"

@@ -160,7 +160,9 @@ sub Run {
         );
 
         # Gather ticket count for corresponding Queue <-> State.
+        QUEUEID:
         for my $QueueID (@QueueIDs) {
+            next QUEUEID if !%Queues || !$Queues{$QueueID};
             push @{ $Results{ $Queues{$QueueID} } },
                 $TicketCountByQueueID->{$QueueID} ? $TicketCountByQueueID->{$QueueID} : 0;
         }

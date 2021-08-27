@@ -20,11 +20,12 @@ our @ObjectDependencies = (
     'Kernel::System::Cache',
     'Kernel::System::CheckItem',
     'Kernel::System::DB',
+    'Kernel::System::DateTime',
     'Kernel::System::Encode',
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::SearchProfile',
-    'Kernel::System::DateTime',
+    'Kernel::System::Time',
     'Kernel::System::Valid',
 );
 
@@ -266,6 +267,68 @@ sub GetUserData {
 
     # out of office check
     if ( !$Param{NoOutOfOffice} ) {
+        my %AvailableInformationMessage;
+
+        for my $InformationName (qw(LoggedIn LoggedOut)) {
+            $AvailableInformationMessage{$InformationName} = $ConfigObject->Get(
+                'OutOfOffice::DisplayAgent' . $InformationName . 'Message'
+            );
+        }
+
+        if (%AvailableInformationMessage) {
+            my $SessionTable   = $ConfigObject->Get('SessionTable')   // 'sessions';
+            my $MaxSessionTime = $ConfigObject->Get('SessionMaxTime') // 57600;
+            my $SystemTime     = $Kernel::OM->Get('Kernel::System::Time')->SystemTime();
+            my $LastValidSessionTime = $SystemTime - $MaxSessionTime;
+
+            return if !$DBObject->Prepare(
+                SQL => "
+                    SELECT s2.data_value
+                    FROM   $SessionTable s1, $SessionTable s2
+                    WHERE  s1.data_key = 'UserEmail'
+                        AND s1.data_value LIKE ?
+                        AND s1.session_id = s2.session_id
+                        AND s2.data_key = 'UserLastRequest'
+                ",
+                Bind => [
+                    \$Preferences{UserEmail},
+                ],
+            );
+
+            my @UserLastRequests;
+            while ( my @Row = $DBObject->FetchrowArray() ) {
+                push @UserLastRequests, $Row[0];
+            }
+            @UserLastRequests = reverse sort @UserLastRequests;
+
+            my %AvailableInformation = (
+                LoggedIn  => 0,
+                LoggedOut => 0,
+            );
+
+            if (
+                $UserLastRequests[0]
+                && $UserLastRequests[0] > $LastValidSessionTime
+                )
+            {
+                $AvailableInformation{LoggedIn} = 1;
+            }
+
+            if ( !$AvailableInformation{LoggedIn} ) {
+                $AvailableInformation{LoggedOut} = 1;
+                $AvailableInformation{LoggedIn}  = 0;
+            }
+
+            INFORMATIONNAME:
+            for my $InformationName (qw(LoggedIn LoggedOut)) {
+                next INFORMATIONNAME if !$AvailableInformationMessage{$InformationName};
+                next INFORMATIONNAME if !$AvailableInformation{$InformationName};
+
+                $Preferences{LoggedStatusMessage} = $AvailableInformationMessage{$InformationName} . ' ';
+                $Data{UserFullname} .= ' ' . $AvailableInformationMessage{$InformationName} . ' ';
+            }
+        }
+
         if ( $Preferences{OutOfOffice} ) {
 
             my $CurrentTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
@@ -300,22 +363,24 @@ sub GetUserData {
                 Time  => '23:59:59',
             );
 
+            $Preferences{OutOfOfficeDaysRemaining}
+                = int( ( $TimeEndObj->ToEpoch() - $CurrentTimeObject->ToEpoch() ) / 60 / 60 / 24 );
+
             if ( $TimeStartObj < $CurrentTimeObject && $TimeEndObj > $CurrentTimeObject ) {
-                my $OutOfOfficeMessageTemplate =
-                    $ConfigObject->Get('OutOfOfficeMessageTemplate') || '*** out of office until %s (%s d left) ***';
-                my $TillDate = sprintf(
-                    '%04d-%02d-%02d',
-                    $Preferences{OutOfOfficeEndYear},
-                    $Preferences{OutOfOfficeEndMonth},
-                    $Preferences{OutOfOfficeEndDay}
-                );
-                my $Till = int( ( $TimeEndObj->ToEpoch() - $CurrentTimeObject->ToEpoch() ) / 60 / 60 / 24 );
-                $Preferences{OutOfOfficeMessage} = sprintf( $OutOfOfficeMessageTemplate, $TillDate, $Till );
-                $Data{UserFullname} .= ' ' . $Preferences{OutOfOfficeMessage};
+                my $OutOfficeMessage = $ConfigObject->Get('OutOfOffice::DisplayAgentOutOfOfficeMessage')
+                    // '*** out of office until ###EndYear###-###EndMonth###-###EndDay###/###DaysRemaining### d ***';
+
+                for my $CurrentAttribute (qw(StartYear StartMonth StartDay EndYear EndMonth EndDay DaysRemaining )) {
+                    my $ReplaceValue = $Preferences{ 'OutOfOffice' . $CurrentAttribute } // '';
+                    $OutOfficeMessage =~ s{\#\#\#$CurrentAttribute\#\#\#}{$ReplaceValue}g;
+                }
+
+                $Preferences{OutOfOfficeMessage} .= $OutOfficeMessage;
+                $Data{UserFullname}              .= ' ' . $OutOfficeMessage;
             }
 
             # Reduce CacheTTL to one hour for users that are out of office to make sure the cache expires timely
-            #   even if there is no update action.
+            # even if there is no update action.
             $CacheTTL = 60 * 60 * 1;
         }
     }
@@ -1158,6 +1223,11 @@ sub UserList {
             my %User = $Self->GetUserData(
                 UserID => $UserID,
             );
+
+            if ( $User{LoggedStatusMessage} ) {
+                $Users{$UserID} .= ' ' . $User{LoggedStatusMessage};
+            }
+
             if ( $User{OutOfOfficeMessage} ) {
                 $Users{$UserID} .= ' ' . $User{OutOfOfficeMessage};
             }

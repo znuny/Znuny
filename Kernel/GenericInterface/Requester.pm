@@ -197,7 +197,9 @@ sub Run {
     );
 
     my $FunctionResult = $InvokerObject->PrepareRequest(
-        Data => $Param{Data},
+        Webservice  => $Webservice,
+        InvokerName => $Param{Invoker},
+        Data        => $Param{Data},
     );
 
     if ( !$FunctionResult->{Success} ) {
@@ -308,8 +310,10 @@ sub Run {
 
     # Read request content.
     $FunctionResult = $TransportObject->RequesterPerformRequest(
-        Operation => $Param{Invoker},
-        Data      => $DataOut,
+        Webservice => $Webservice,
+        Sort       => $RequesterConfig->{Invoker}->{ $Param{Invoker} }->{SortOutbound},
+        Operation  => $Param{Invoker},
+        Data       => $DataOut,
     );
 
     my $IsAsynchronousCall = $Param{Asynchronous} ? 1 : 0;

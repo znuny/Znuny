@@ -221,6 +221,15 @@
                         </div>
                         <div class="Clear"/>
                     </fieldset>
+
+                    <fieldset class="TableLike FixedLabel">
+                        <label for="ForceArray">[% Translate("Force array for tags") | html %]:</label>
+                        <div class="Field">
+                            <input id="ForceArray" class="ForceArray W75pc" type="text" value="[% Data.ForceArray | html %]" name="ForceArray"/>
+                            <p class="FieldExplanation">[% Translate("Enter tags separated by space for which array representation should be forced.") | html %]</p>
+                        </div>
+                        <div class="Clear"/>
+                    </fieldset>
                 </div>
             </div>
 [% RenderBlockEnd("ConfigBlockTemplate") %]

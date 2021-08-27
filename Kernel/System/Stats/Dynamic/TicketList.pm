@@ -947,6 +947,7 @@ sub GetStatTable {
                 );
 
                 next DYNAMICFIELD if !$IsStatsCondition;
+                next DYNAMICFIELD if !$Param{Restrictions}->{$ParameterName};
 
                 # get new search parameter
                 my $DynamicFieldStatsSearchParameter = $DynamicFieldBackendObject->StatsSearchFieldParameterBuild(

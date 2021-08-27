@@ -115,7 +115,7 @@
                                         <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]:</label>
                                     [% END %]
                                     <div class="Field[% IF !Data.Key %] NoMargin[% END %]">
-                                        <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" />
+                                        <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" [% IF Data.Autocomplete %]autocomplete="[% Data.Autocomplete | html %]"[% END %] />
                                     </div>
                                     <div class="Clear"></div>
     [% RenderBlockEnd("Input") %]
