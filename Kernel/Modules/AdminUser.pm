@@ -160,7 +160,6 @@ sub Run {
 
         my $Note = '';
         my ( %GetParam, %Errors );
-
         for my $Parameter (
             qw(UserID UserTitle UserLogin UserFirstname UserLastname UserEmail UserPw UserMobile ValidID Search)
             )
