@@ -2307,6 +2307,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminUser.tt
         'Agent Management' => 'Zarządzanie agentami',
         'Edit Agent' => 'Edytuj agenta',
+        'Agent Data' => 'Dane agenta',
         'Edit personal preferences for this agent' => 'Edytuj ustawienia osobiste tego agenta',
         'Agents will be needed to handle tickets.' => 'Agenci są potrzebni do obsługi zgłoszeń.',
         'Don\'t forget to add a new agent to groups and/or roles!' => 'Nie zapomnij dodać nowego agenta do grup lub/i ról!',
