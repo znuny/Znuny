@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -452,6 +453,11 @@ sub _Edit {
                 },
             );
         }
+    }
+
+    # Hide password field if backend that does not require password from db it is enabled.
+    if ($Kernel::OM->Get('Kernel::Config')->Get('AuthModule') =~ /(LDAP|HTTPBasicAuth|Radius)/i) {
+        $Param{PwHidden} = 1;
     }
 
     # get valid list
