@@ -214,11 +214,12 @@ sub _GetStorageBackends {
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
     my $Base = 'Kernel/System/Ticket/Article/Backend/MIMEBase';
+    my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
 
     my %Backends;
-    for my $Prefix ( '', 'Custom/' ) {
+    for my $Prefix ( '/', '/Custom/' ) {
         my @Files = $MainObject->DirectoryRead(
-            Directory => $Prefix . $Base,
+            Directory => $Home . $Prefix . $Base,
             Filter    => '*.pm',
             Silent    => 1,
         );
