@@ -134,7 +134,7 @@ sub Run {
     }
 
     # Only users of group admin allowed.
-    my %Groups = reverse $GroupObject->PermissionUserGroupGet(
+    my %Groups = reverse $GroupObject->PermissionUserGet(
         UserID => $UserID,
         Type   => 'rw',
     );
