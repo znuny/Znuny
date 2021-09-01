@@ -954,7 +954,7 @@ sub SyncAll {
     my $Cookie;
     my $ProcessedLDAPEntries = 0;
 
-	PAGE:
+    PAGE:
     while (1) {
         $Result = $LDAP->search(
             base => $Self->{BaseDN},
@@ -972,7 +972,7 @@ sub SyncAll {
         }
 
         # Process every UID in page.
-		ENTRY:
+        ENTRY:
         while (my $Entry = $Result->pop_entry()) {
 
             # Extract user UID.
