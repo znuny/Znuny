@@ -9,6 +9,7 @@
 # --
 
 package Kernel::System::Auth::Sync::LDAP;
+## nofilter(TidyAll::Plugin::OTRS::Perl::PerlCritic)
 
 use strict;
 use warnings;
@@ -953,6 +954,7 @@ sub SyncAll {
     my $Cookie;
     my $ProcessedLDAPEntries = 0;
 
+	PAGE:
     while (1) {
         $Result = $LDAP->search(
             base => $Self->{BaseDN},
@@ -970,6 +972,7 @@ sub SyncAll {
         }
 
         # Process every UID in page.
+		ENTRY:
         while (my $Entry = $Result->pop_entry()) {
 
             # Extract user UID.
@@ -998,8 +1001,8 @@ sub SyncAll {
         }
 
         # LDAP query paging stuff.
-        my ($Response) = $Result->control(LDAP_CONTROL_PAGED) or last;
-        $Cookie = $Response->cookie or last;
+        my ($Response) = $Result->control(LDAP_CONTROL_PAGED) or last PAGE;
+        $Cookie = $Response->cookie() or last PAGE;
         $Page->cookie($Cookie);
     }
 
