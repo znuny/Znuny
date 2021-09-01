@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -542,6 +543,10 @@ sub LoadDefaults {
     # this option. e. g. AlwaysFilter => '(mail=*)' or AlwaysFilter => '(objectclass=user)'
     # or if you want to filter with a logical OR-Expression, like AlwaysFilter => '(|(mail=*abc.com)(mail=*xyz.com))'
 #    $Self->{'AuthSyncModule::LDAP::AlwaysFilter'} = '';
+
+    # Set to 1 if AlwaysFilter returns only valid users (deactivated user will
+    # be automatically updated to valid on sync).
+#    $Self->{'AuthSyncModule::LDAP::AlwaysFilterReturnsOnlyValidUsers'} = 1;
 
     # AuthSyncModule::LDAP::UserSyncMap
     # (map if agent should create/synced from LDAP to DB after successful login)
