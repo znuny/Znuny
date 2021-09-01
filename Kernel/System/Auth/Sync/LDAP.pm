@@ -18,7 +18,7 @@ use Net::LDAP;
 use Net::LDAP::Util qw(escape_filter_value);
 use URI;
 use Net::LDAP::Control::Paged;
-use Net::LDAP::Constant qw( LDAP_CONTROL_PAGED );
+use Net::LDAP::Constant qw(LDAP_CONTROL_PAGED);
 
 our @ObjectDependencies = (
     'Kernel::Config',
