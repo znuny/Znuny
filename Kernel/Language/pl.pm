@@ -648,7 +648,7 @@ sub Data {
         'Schedule minutes' => 'Ustal minuty',
         'Schedule hours' => 'Ustal godziny',
         'Schedule days' => 'Ustal dni',
-        'Automatic execution values are in the system timezone.' => 'Harmonogram automatycznego wykonywania w UTC.',
+        'Automatic execution schedule in UTC.' => 'Harmonogram automatycznego wykonywania w UTC.',
         'Currently this generic agent job will not run automatically.' =>
             'Zadanie nie zostanie uruchomione automatycznie.',
         'To enable automatic execution select at least one value from minutes, hours and days!' =>
