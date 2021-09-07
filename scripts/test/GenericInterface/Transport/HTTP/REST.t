@@ -731,11 +731,11 @@ my @Tests = (
         Name        => 'Correct Complex Transport Mapping URIParams QueryParams POST',
         Success     => '1',
         RequestData => {
-            Other   => 'Data',
-            Other1  => 'One',
-            Other2  => 'Two',
-            Other3  => 'Three',
-            Other4  => 'Four',
+            Other       => 'Data',
+            Other1      => 'One',
+            Other2      => 'Two',
+            Other3      => 'Three',
+            Other4      => 'Four',
             NestedOther => {
                 SubOther => [
                     'OtherValue1',
@@ -747,7 +747,7 @@ my @Tests = (
             },
         },
         ExpectedReturnData => {
-            Other   => 'Data',
+            Other       => 'Data',
             NestedOther => {
                 SubOther => [
                     'OtherValue1',
@@ -800,7 +800,8 @@ my @Tests = (
                         Timeout                  => 120,
                         InvokerControllerMapping => {
                             TestSimple => {
-                                Controller => '/Test/:Other1/:Other2/:NestedOther.SubOther.0?Query3=:Other3&Query4=:Other4&Query5=:NestedOther.SubOther.1',
+                                Controller =>
+                                    '/Test/:Other1/:Other2/:NestedOther.SubOther.0?Query3=:Other3&Query4=:Other4&Query5=:NestedOther.SubOther.1',
                             },
                         },
                     },

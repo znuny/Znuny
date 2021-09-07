@@ -138,6 +138,12 @@ It is guaranteed that within a test this function will never return a duplicate.
 Please note that these numbers are not really random and should only be used
 to create test data.
 
+    my $RandomID = $HelperObject->GetRandomID();
+
+Returns:
+
+    my $RandomID = 'test2735808026700610';
+
 =cut
 
 sub GetRandomID {
@@ -154,6 +160,12 @@ It is guaranteed that within a test this function will never return a duplicate.
 
 Please note that these numbers are not really random and should only be used
 to create test data.
+
+    my $RandomNumber = $HelperObject->GetRandomNumber();
+
+Returns:
+
+    my $RandomNumber = '2735808026700610';
 
 =cut
 
@@ -182,6 +194,22 @@ the login name of the new user, the password is the same.
         Language  => 'de'                        # optional, defaults to 'en' if not set
         KeepValid => 1,                          # optional, defaults to 0
     );
+
+Returns:
+
+    my $TestUserLogin = 'test2755008034702000';
+
+
+To get UserLogin and UserID:
+
+    my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
+        Groups    => ['admin', 'users'],
+        Language  => 'de'
+        KeepValid => 1,
+    );
+
+    my $TestUserLogin = 'test2755008034702000';
+    my $TestUserID    = '123';
 
 =cut
 
@@ -263,10 +291,14 @@ creates a test customer user that can be used in tests. It will
 be set to invalid automatically during L</DESTROY()>. Returns
 the login name of the new customer user, the password is the same.
 
-    my $TestUserLogin = $HelperObject->TestCustomerUserCreate(
+    my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
         Language  => 'de',   # optional, defaults to 'en' if not set
         KeepValid => 1,      # optional, defaults to 0
     );
+
+Returns:
+
+    my $TestCustomerUserLogin = 'test2735808026700610';
 
 =cut
 
@@ -320,9 +352,9 @@ sub TestCustomerUserCreate {
 
 =head2 BeginWork()
 
-    $HelperObject->BeginWork()
-
 Starts a database transaction (in order to isolate the test from the static database).
+
+    $HelperObject->BeginWork();
 
 =cut
 
@@ -335,9 +367,9 @@ sub BeginWork {
 
 =head2 Rollback()
 
-    $HelperObject->Rollback()
-
 Rolls back the current database transaction.
+
+    $HelperObject->Rollback()
 
 =cut
 
@@ -354,7 +386,12 @@ sub Rollback {
 
 =head2 GetTestHTTPHostname()
 
-returns a host name for HTTP based tests, possibly including the port.
+Returns a host name for HTTP based tests, possibly including the port.
+
+    my $Hostname = $HelperObject->GetTestHTTPHostname();
+
+Returns:
+    my $Hostname = 'localhost';
 
 =cut
 
@@ -395,12 +432,13 @@ the current system time will be used.
 All calls to methods of Kernel::System::Time and Kernel::System::DateTime will
 use the given time afterwards.
 
-    $HelperObject->FixedTimeSet(366475757);         # with Timestamp
-    $HelperObject->FixedTimeSet($DateTimeObject);   # with previously created DateTime object
-    $HelperObject->FixedTimeSet();                  # set to current date and time
+    my $Timestamp = $HelperObject->FixedTimeSet(366475757);         # with Timestamp
+    my $Timestamp = $HelperObject->FixedTimeSet($DateTimeObject);   # with previously created DateTime object
+    my $Timestamp = $HelperObject->FixedTimeSet();                  # set to current date and time
 
 Returns:
-    Timestamp
+
+    my $Timestamp = 1454420017;    # date/time as seconds
 
 =cut
 
@@ -419,7 +457,9 @@ sub FixedTimeSet {
 
 =head2 FixedTimeUnset()
 
-restores the regular system time behavior.
+Restores the regular system time behavior.
+
+    $HelperObject->FixedTimeUnset();
 
 =cut
 
@@ -432,8 +472,10 @@ sub FixedTimeUnset {
 
 =head2 FixedTimeAddSeconds()
 
-adds a number of seconds to the fixed system time which was previously
+Adds a number of seconds to the fixed system time which was previously
 set by FixedTimeSet(). You can pass a negative value to go back in time.
+
+    $HelperObject->FixedTimeAddSeconds(5);
 
 =cut
 
@@ -810,7 +852,9 @@ sub CustomCodeActivate {
 
 =head2 CustomFileCleanup()
 
-Remove all custom files from C<ConfigSettingChange()> and C<CustomCodeActivate()>.
+Removes all custom files from C<ConfigSettingChange()> and C<CustomCodeActivate()>.
+
+    $HelperObject->CustomFileCleanup();
 
 =cut
 
@@ -832,7 +876,9 @@ sub CustomFileCleanup {
 
 =head2 UseTmpArticleDir()
 
-switch the article storage directory to a temporary one to prevent collisions;
+Switch the article storage directory to a temporary one to prevent collisions;
+
+    $HelperObject->UseTmpArticleDir();
 
 =cut
 
@@ -865,6 +911,8 @@ sub UseTmpArticleDir {
 =head2 DisableAsyncCalls()
 
 Disable scheduling of asynchronous tasks using C<AsynchronousExecutor> component of System daemon.
+
+    $HelperObject->DisableAsyncCalls();
 
 =cut
 

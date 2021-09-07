@@ -237,6 +237,7 @@ $Selenium->RunTest(
 
         # Check the filter for dynamic fields on the AgentTicketStatusView screen (see bug#14497).
         for my $Test (@Tests) {
+
             # Open filter selection
             $Selenium->find_element("//a[contains(\@title, \'$DFName, filter not active\' )]")->click();
 
@@ -262,7 +263,7 @@ $Selenium->RunTest(
 
             # Check not matching for the other two tickets
             OTHERTESTS:
-            for my $OtherTests (@Tests){
+            for my $OtherTests (@Tests) {
                 next OTHERTESTS if $OtherTests == $Test;
 
                 # Verify the other test ticket is not found by filtering with the dynamic field key of one ticket.

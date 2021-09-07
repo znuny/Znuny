@@ -1002,9 +1002,9 @@ You can also use this as a function for Perl's sort:
 
 Returns:
 
-    $Result = -1;       # if date/time of this object < date/time of given object
+    $Result = -1;       # if date/time of $DateTimeObject < date/time of $AnotherDateTimeObject
     $Result = 0;        # if date/time are equal
-    $Result = 1:        # if date/time of this object > date/time of given object
+    $Result = 1:        # if date/time of $DateTimeObject > date/time of $AnotherDateTimeObject
 
 =cut
 

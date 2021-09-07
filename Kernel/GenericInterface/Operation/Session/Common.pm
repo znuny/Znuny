@@ -28,9 +28,10 @@ performs user authentication and return a new SessionID value
 
     my $SessionID = $CommonObject->CreateSessionID(
         Data {
-            UserLogin         => 'Agent1',
-            CustomerUserLogin => 'Customer1',       # optional, provide UserLogin or
-                                                    #   CustomerUserLogin
+            UserLogin         => 'Agent1',          # optional, provide UserLogin or CustomerUserLogin
+            # or
+            CustomerUserLogin => 'Customer1',       # optional, provide UserLogin or CustomerUserLogin
+
             Password          => 'some password',   # plain text password
         }
     );

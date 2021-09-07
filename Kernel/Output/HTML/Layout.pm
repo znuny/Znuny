@@ -5891,14 +5891,13 @@ sub _BuildSelectionDataRefCreate {
 
     # translate value
     if ( $OptionRef->{Translation} ) {
-        for my $Row (  @{$DataRef} ) {
+        for my $Row ( @{$DataRef} ) {
             $Row->{Value} = $Self->{LanguageObject}->Translate( $Row->{Value} );
         }
     }
 
     return $DataRef;
 }
-
 
 =head2 _BuildSelectionOutput()
 

@@ -116,6 +116,7 @@ The following persons contributed to OTRS:
 * Thorsten Eckel <thorsten.eckel@otrs.com>
 * Thorsten Eckel <thorsten.eckel@zhuny.com>
 * Torsten Thau <Torsten.Thau@cape-it.de>
+* Tronsy <77062636+Tronsy@users.noreply.github.com>
 * Udo Bretz <udo.bretz@otrs.com>
 * Uwe Dieckmann <uwe.dieckmann@otrs.com>
 * Walter Souto <walter.souto@saude.go.gov.br>

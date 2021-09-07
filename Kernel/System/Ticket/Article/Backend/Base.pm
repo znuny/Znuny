@@ -25,7 +25,8 @@ our @ObjectDependencies = (
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::Ticket::Article',
-#     'Kernel::System::Ticket::Article::Backend::MyBackend',
+
+    #     'Kernel::System::Ticket::Article::Backend::MyBackend',
 );
 
 =head1 NAME
