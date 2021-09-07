@@ -33,7 +33,7 @@ our @ObjectDependencies = (
 sub Configure {
     my ( $Self, %Param ) = @_;
 
-    $Self->Description('Update the OTRS translation files.');
+    $Self->Description('Update the Znuny translation files.');
     $Self->AddOption(
         Name        => 'language',
         Description => "Which language to use, omit to update all languages.",
@@ -43,7 +43,7 @@ sub Configure {
     );
     $Self->AddOption(
         Name        => 'module-directory',
-        Description => "Translate the OTRS module in the given directory.",
+        Description => "Translate the Znuny module in the given directory.",
         Required    => 0,
         HasValue    => 1,
         ValueRegex  => qr/.*/smx,
@@ -55,12 +55,18 @@ sub Configure {
         Required => 0,
         HasValue => 0,
     );
+    $Self->AddOption(
+        Name => 'keep-old',
+        Description =>  "Keep old language files (e.g. Kernel/Language/de_GeneralCatalog.pm). This is only needed if you want to diff these files.",
+        Required => 0,
+        HasValue => 0,
+    );
 
     my $Name = $Self->Name();
 
     $Self->AdditionalHelp(<<"EOF");
 
-<yellow>Translating OTRS</yellow>
+<yellow>Translating Znuny</yellow>
 
 Make sure that you have a clean system with a current configuration. No modules may be installed or linked into the system!
 
@@ -924,6 +930,7 @@ sub WritePerlLanguageFile {
         $NewOut = <<"EOF";
 $Separator
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 $Separator
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -1013,8 +1020,11 @@ EOF
 
     my $TargetFile = $Param{TargetFile};
 
-    if ( -e $TargetFile ) {
+    if ( -e $TargetFile && $Self->GetOption('keep-old') ) {
         rename( $TargetFile, "$TargetFile.old" ) || die $!;
+    }
+    elsif ( -e $TargetFile ) {
+        unlink($TargetFile);
     }
 
     $Kernel::OM->Get('Kernel::System::Main')->FileWrite(

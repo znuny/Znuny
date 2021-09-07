@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2021-08-05 12:10+0000\n"
+"POT-Creation-Date: 2021-08-26 17:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16607,6 +16607,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Activates time accounting."
+msgstr ""
+
+#. SysConfig
+msgid "Activates week number for datepickers."
 msgstr ""
 
 #. SysConfig

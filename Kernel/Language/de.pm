@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.999501909347501;
+    $Self->{Completeness}        = 0.99933598937583;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -6062,6 +6062,7 @@ Ihr Helpdesk-Team
         'Activates the ticket archive system to have a faster system by moving some tickets out of the daily scope. To search for these tickets, the archive flag has to be enabled in the ticket search.' =>
             'Aktiviert das Ticket Archivsystem, um ein schnelleres System zu haben, indem einige Tickets aus dem täglichen Anwendungsbereich verschoben werden. Um diese Tickets in der Suche zu finden, muss das Archiv-Flag in der Ticketsuche aktiviert werden.',
         'Activates time accounting.' => 'Aktiviert die Zeitabrechnung.',
+        'Activates week number for datepickers.' => '',
         'Activation of dynamic fields for screens.' => 'Aktivierung dynamischer Felder für Masken.',
         'ActivityID' => 'ActivityID',
         'Add a note to this ticket' => 'Eine Notiz zu diesem Ticket hinzufügen',
