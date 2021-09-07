@@ -21,7 +21,6 @@ use Kernel::System::DateTime;
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::Language',
     'Kernel::Output::HTML::Layout',
     'Kernel::Output::PDF::Statistics',
     'Kernel::System::CSV',
@@ -30,10 +29,8 @@ our @ObjectDependencies = (
     'Kernel::System::Group',
     'Kernel::System::Log',
     'Kernel::System::Main',
-    'Kernel::System::PDF',
     'Kernel::System::Stats',
     'Kernel::System::Ticket::Article',
-    'Kernel::System::Ticket',
     'Kernel::System::User',
     'Kernel::System::Web::Request',
 );

@@ -16,11 +16,8 @@ use warnings;
 use parent qw(scripts::MigrateToZnuny6_1::Base);
 
 our @ObjectDependencies = (
-    'Kernel::Config',
-    'Kernel::System::DB',
-    'Kernel::System::Log',
-    'Kernel::System::Main',
     'Kernel::System::Console::Command::Maint::Database::Check',
+    'Kernel::System::Main',
 );
 
 =head1 NAME

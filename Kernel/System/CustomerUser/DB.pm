@@ -22,15 +22,14 @@ our @ObjectDependencies = (
     'Kernel::Language',
     'Kernel::System::Cache',
     'Kernel::System::CheckItem',
-    'Kernel::System::DateTime',
     'Kernel::System::DB',
+    'Kernel::System::DateTime',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
     'Kernel::System::Encode',
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::Valid',
-    'Kernel::System::DynamicFieldValueObjectName',
 );
 
 sub new {

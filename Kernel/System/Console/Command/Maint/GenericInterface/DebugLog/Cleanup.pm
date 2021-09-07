@@ -15,6 +15,7 @@ use warnings;
 use parent qw(Kernel::System::Console::BaseCommand);
 
 our @ObjectDependencies = (
+    'Kernel::System::DateTime',
     'Kernel::System::GenericInterface::DebugLog',
 );
 

@@ -20,7 +20,6 @@ use parent qw(scripts::MigrateToZnuny6_1::Base);
 use version;
 
 our @ObjectDependencies = (
-    'Kernel::Config',
     'Kernel::System::DB',
 );
 

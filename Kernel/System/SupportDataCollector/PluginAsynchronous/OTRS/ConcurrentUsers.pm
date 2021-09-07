@@ -18,9 +18,7 @@ use Kernel::Language qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
-    'Kernel::Config',
     'Kernel::System::AuthSession',
-    'Kernel::System::SystemData',
     'Kernel::System::DateTime',
 );
 

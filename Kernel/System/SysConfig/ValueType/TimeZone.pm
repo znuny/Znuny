@@ -20,6 +20,7 @@ use parent qw(Kernel::System::SysConfig::BaseValueType);
 our @ObjectDependencies = (
     'Kernel::Language',
     'Kernel::Output::HTML::Layout',
+    'Kernel::System::DateTime',
     'Kernel::System::Log',
 );
 

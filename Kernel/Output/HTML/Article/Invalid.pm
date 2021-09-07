@@ -17,7 +17,6 @@ use parent 'Kernel::Output::HTML::Article::Base';
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
-    'Kernel::Config',
     'Kernel::Output::HTML::Layout',
     'Kernel::System::CommunicationChannel',
     'Kernel::System::HTMLUtils',

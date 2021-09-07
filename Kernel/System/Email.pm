@@ -22,13 +22,12 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::System::Crypt::PGP',
-    'Kernel::System::Crypt::SMIME',
+    'Kernel::System::CommunicationLog',
+    'Kernel::System::DateTime',
     'Kernel::System::Encode',
     'Kernel::System::HTMLUtils',
     'Kernel::System::Log',
     'Kernel::System::MailQueue',
-    'Kernel::System::CommunicationLog',
 );
 
 =head1 NAME

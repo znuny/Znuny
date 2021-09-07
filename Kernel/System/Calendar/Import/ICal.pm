@@ -20,13 +20,10 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::System::Cache',
-    'Kernel::System::Calendar',
     'Kernel::System::Calendar::Appointment',
     'Kernel::System::Calendar::Plugin',
     'Kernel::System::Calendar::Team',
     'Kernel::System::DateTime',
-    'Kernel::System::DB',
     'Kernel::System::Encode',
     'Kernel::System::Log',
     'Kernel::System::Main',

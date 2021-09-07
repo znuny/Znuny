@@ -16,9 +16,8 @@ use Kernel::Language qw(Translatable);
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::System::Web::Request',
-    'Kernel::System::User',
     'Kernel::System::AuthSession',
+    'Kernel::System::Web::Request',
 );
 
 sub new {

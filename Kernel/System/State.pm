@@ -17,7 +17,6 @@ our @ObjectDependencies = (
     'Kernel::System::Cache',
     'Kernel::System::DB',
     'Kernel::System::Log',
-    'Kernel::System::SysConfig',
     'Kernel::System::Valid',
 );
 

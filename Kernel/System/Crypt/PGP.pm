@@ -17,7 +17,6 @@ use Kernel::System::VariableCheck qw(:all);
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::DateTime',
-    'Kernel::System::CheckItem',
     'Kernel::System::Encode',
     'Kernel::System::FileTemp',
     'Kernel::System::Log',

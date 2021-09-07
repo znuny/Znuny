@@ -26,6 +26,7 @@ our @ObjectDependencies = (
     'Kernel::Language',
     'Kernel::Output::HTML::SysConfig',
     'Kernel::System::Cache',
+    'Kernel::System::DateTime',
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::Package',

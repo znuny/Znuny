@@ -26,6 +26,7 @@ our @ObjectDependencies = (
     'Kernel::System::Main',
     'Kernel::System::Package',
     'Kernel::System::SupportDataCollector',
+    'Kernel::System::UnitTest::Driver',
     'Kernel::System::WebUserAgent',
 );
 

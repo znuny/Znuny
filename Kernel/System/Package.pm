@@ -29,8 +29,8 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Cache',
     'Kernel::System::CloudService::Backend::Run',
-    'Kernel::System::DateTime',
     'Kernel::System::DB',
+    'Kernel::System::DateTime',
     'Kernel::System::Encode',
     'Kernel::System::Environment',
     'Kernel::System::JSON',
@@ -39,7 +39,6 @@ our @ObjectDependencies = (
     'Kernel::System::Main',
     'Kernel::System::OTRSBusiness',
     'Kernel::System::Scheduler',
-    'Kernel::System::SysConfig::XML',
     'Kernel::System::SystemData',
     'Kernel::System::XML',
 );

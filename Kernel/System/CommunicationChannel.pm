@@ -17,11 +17,10 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Cache',
     'Kernel::System::DB',
-    'Kernel::System::Main',
     'Kernel::System::Log',
+    'Kernel::System::Main',
     'Kernel::System::Ticket::Article',
     'Kernel::System::Valid',
-    'Kernel::System::XML',
     'Kernel::System::YAML',
 );
 

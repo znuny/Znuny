@@ -16,10 +16,8 @@ use Net::SMTP;
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::System::DB',
     'Kernel::System::Encode',
     'Kernel::System::Log',
-    'Kernel::System::CommunicationLog',
 );
 
 sub new {

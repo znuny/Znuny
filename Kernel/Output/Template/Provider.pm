@@ -25,8 +25,6 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Cache',
     'Kernel::System::Encode',
-    'Kernel::System::Log',
-    'Kernel::System::Main',
 );
 
 # Force the use of our own document class.

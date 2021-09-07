@@ -15,10 +15,9 @@ use warnings;
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
-    'Kernel::System::Log',
-    'Kernel::System::LinkObject',
     'Kernel::System::Calendar',
     'Kernel::System::Calendar::Appointment',
+    'Kernel::System::Log',
 );
 
 =head1 NAME

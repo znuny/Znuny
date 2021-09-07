@@ -15,8 +15,9 @@ use strict;
 use warnings;
 
 our @ObjectDependencies = (
-    'Kernel::System::User',
     'Kernel::Output::HTML::Layout',
+    'Kernel::System::DateTime',
+    'Kernel::System::User',
 );
 
 sub Run {

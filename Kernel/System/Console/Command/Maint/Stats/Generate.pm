@@ -23,9 +23,7 @@ our @ObjectDependencies = (
     'Kernel::System::DateTime',
     'Kernel::System::Email',
     'Kernel::System::Main',
-    'Kernel::System::PDF',
     'Kernel::System::Stats',
-    'Kernel::System::User',
 );
 
 sub Configure {

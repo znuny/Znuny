@@ -17,6 +17,7 @@ use parent qw(Kernel::System::Console::BaseCommand);
 our @ObjectDependencies = (
     'Kernel::System::CommunicationLog',
     'Kernel::System::Main',
+    'Kernel::System::PostMaster',
 );
 
 sub Configure {

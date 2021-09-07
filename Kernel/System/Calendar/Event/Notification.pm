@@ -18,13 +18,12 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Calendar',
     'Kernel::System::Calendar::Appointment',
+    'Kernel::System::CalendarTemplateGenerator',
     'Kernel::System::DateTime',
     'Kernel::System::Group',
     'Kernel::System::JSON',
     'Kernel::System::Log',
     'Kernel::System::NotificationEvent',
-    'Kernel::System::CalendarTemplateGenerator',
-    'Kernel::System::Ticket',
     'Kernel::System::User',
 );
 

@@ -21,7 +21,6 @@ our @ObjectDependencies = (
     'Kernel::Output::HTML::Layout',
     'Kernel::System::Log',
     'Kernel::System::PDF',
-    'Kernel::System::User',
 );
 
 sub new {

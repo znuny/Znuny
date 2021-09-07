@@ -16,9 +16,7 @@ use Kernel::Language qw(Translatable);
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::Output::HTML::Layout',
     'Kernel::System::Log',
-    'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
 );
 

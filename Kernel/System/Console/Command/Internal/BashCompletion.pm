@@ -17,7 +17,6 @@ use Kernel::System::Console::InterfaceConsole;
 use parent qw(Kernel::System::Console::BaseCommand Kernel::System::Console::Command::List);
 
 our @ObjectDependencies = (
-    'Kernel::Config',
     'Kernel::System::Main',
 );
 

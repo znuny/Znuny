@@ -24,7 +24,6 @@ use Kernel::System::VariableCheck qw(DataIsDifferent);
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::System::Log',
     'Kernel::System::Main',
 );
 

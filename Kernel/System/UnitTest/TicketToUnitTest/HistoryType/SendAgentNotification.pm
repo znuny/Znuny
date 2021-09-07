@@ -14,6 +14,7 @@ use warnings;
 
 our @ObjectDependencies = (
     'Kernel::System::Log',
+    'Kernel::System::Ticket::Event::NotificationEvent',
 );
 
 use Kernel::System::VariableCheck qw(:all);

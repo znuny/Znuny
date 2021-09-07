@@ -15,9 +15,9 @@ use strict;
 use warnings;
 
 our @ObjectDependencies = (
-    'Kernel::System::Log',
     'Kernel::Config',
     'Kernel::Output::HTML::Layout',
+    'Kernel::System::Log',
 );
 
 sub Run {

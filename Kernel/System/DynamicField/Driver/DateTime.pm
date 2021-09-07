@@ -18,7 +18,6 @@ use parent qw(Kernel::System::DynamicField::Driver::BaseDateTime);
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::System::DynamicFieldValue',
     'Kernel::System::Main',
 );
 

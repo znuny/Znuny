@@ -19,6 +19,7 @@ use Kernel::Language qw(Translatable);
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::DB',
+    'Kernel::System::DateTime',
     'Kernel::System::Ticket',
 );
 

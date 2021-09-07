@@ -12,7 +12,9 @@ package Kernel::System::UnitTest::TicketToUnitTest::HistoryType::NewTicket;
 use strict;
 use warnings;
 
-our @ObjectDependencies = ();
+our @ObjectDependencies = (
+    'Kernel::System::Ticket',
+);
 
 use Kernel::System::VariableCheck qw(:all);
 use parent qw( Kernel::System::UnitTest::TicketToUnitTest::Base );

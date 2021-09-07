@@ -17,12 +17,13 @@ use Kernel::System::VariableCheck qw(:all);
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Cache',
+    'Kernel::System::CheckItem',
+    'Kernel::System::CustomerUser',
     'Kernel::System::DB',
+    'Kernel::System::DateTime',
     'Kernel::System::FileTemp',
     'Kernel::System::Log',
     'Kernel::System::Main',
-    'Kernel::System::CustomerUser',
-    'Kernel::System::CheckItem',
 );
 
 =head1 NAME

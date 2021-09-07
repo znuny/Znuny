@@ -20,8 +20,9 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::Language',
     'Kernel::Output::HTML::Layout',
-    'Kernel::System::Log',
+    'Kernel::System::DateTime',
     'Kernel::System::JSON',
+    'Kernel::System::Log',
     'Kernel::System::User',
 );
 

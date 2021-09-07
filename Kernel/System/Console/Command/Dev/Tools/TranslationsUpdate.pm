@@ -27,7 +27,6 @@ our @ObjectDependencies = (
     'Kernel::System::DateTime',
     'Kernel::System::Encode',
     'Kernel::System::Main',
-    'Kernel::System::Storable',
     'Kernel::System::SysConfig',
 );
 

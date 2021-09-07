@@ -14,12 +14,8 @@ use warnings;
 
 our @ObjectDependencies = (
     'Kernel::System::DateTime',
-    'Kernel::System::Group',
     'Kernel::System::Log',
-    'Kernel::System::Queue',
-    'Kernel::System::SLA',
     'Kernel::System::Ticket',
-    'Kernel::System::User',
 );
 
 sub new {

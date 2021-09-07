@@ -18,9 +18,7 @@ use IO::Interactive qw(is_interactive);
 use parent qw(scripts::MigrateToZnuny6_1::Base);
 
 our @ObjectDependencies = (
-    'Kernel::System::Cache',
     'Kernel::System::Console::Command::Admin::Config::FixInvalid',
-    'Kernel::System::Main',
     'Kernel::System::SysConfig',
 );
 
