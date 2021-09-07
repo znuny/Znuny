@@ -2,8 +2,8 @@
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
-# the enclosed file COPYING for license information (GPL). If you
-# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
 use strict;
@@ -31,8 +31,8 @@ my $SLAObject          = $Kernel::OM->Get('Kernel::System::SLA');
 my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
 
-my $RandomID = $HelperObject->GetRandomID();
-my $TicketID = $HelperObject->TicketCreate();
+my $RandomID  = $HelperObject->GetRandomID();
+my $TicketID  = $HelperObject->TicketCreate();
 my $ArticleID = $HelperObject->ArticleCreate(
     TicketID => $TicketID,
 );
@@ -57,13 +57,12 @@ for my $DynamicField ( @{$DynamicField} ) {
     $Self->{DynamicFieldLookup}->{ $DynamicField->{Name} } = $DynamicField;
 }
 
-
 my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
     Language  => 'de',
     KeepValid => 1,
 );
 
-my $ServiceID   = $ServiceObject->ServiceAdd(
+my $ServiceID = $ServiceObject->ServiceAdd(
     Name    => $RandomID,
     Comment => 'Some Comment',
     ValidID => 1,
@@ -97,7 +96,7 @@ my @Tests = (
         Name     => 'ValidateQueue - Queue - True',
         Function => 'ValidateQueue',
         Data     => {
-            Queue   => 'Postmaster',
+            Queue => 'Postmaster',
         },
         ExpectedData => 1,
     },
@@ -113,7 +112,7 @@ my @Tests = (
         Name     => 'ValidateQueue - Queue - False',
         Function => 'ValidateQueue',
         Data     => {
-            Queue   => 'UNKNOWN',
+            Queue => 'UNKNOWN',
         },
         ExpectedData => undef,
     },
@@ -129,7 +128,7 @@ my @Tests = (
         Name     => 'ValidateLock - Lock - True',
         Function => 'ValidateLock',
         Data     => {
-            Lock   => 'lock',
+            Lock => 'lock',
         },
         ExpectedData => 1,
     },
@@ -145,7 +144,7 @@ my @Tests = (
         Name     => 'ValidateLock - Lock - False',
         Function => 'ValidateLock',
         Data     => {
-            Lock   => 'UNKNOWN',
+            Lock => 'UNKNOWN',
         },
         ExpectedData => undef,
     },
@@ -162,7 +161,7 @@ my @Tests = (
         Name     => 'ValidateType - Type - True',
         Function => 'ValidateType',
         Data     => {
-            Type   => 'Unclassified',
+            Type => 'Unclassified',
         },
         ExpectedData => 1,
     },
@@ -178,50 +177,50 @@ my @Tests = (
         Name     => 'ValidateType - Type - False',
         Function => 'ValidateType',
         Data     => {
-            Type   => 'UNKNOWN',
+            Type => 'UNKNOWN',
         },
         ExpectedData => undef,
     },
 
     {
-        Name     => 'ValidateCustomer - CustomerUser - True',
-        Function => 'ValidateCustomer',
+        Name      => 'ValidateCustomer - CustomerUser - True',
+        Function  => 'ValidateCustomer',
         SysConfig => [
             {
                 Key   => 'CheckEmailAddresses',
                 Value => 1,
             }
         ],
-        Data     => {
-            CustomerUser   => $TestCustomerUserLogin,
+        Data => {
+            CustomerUser => $TestCustomerUserLogin,
         },
         ExpectedData => 1,
     },
     {
-        Name     => 'ValidateCustomer - CustomerUser - True',
-        Function => 'ValidateCustomer',
+        Name      => 'ValidateCustomer - CustomerUser - True',
+        Function  => 'ValidateCustomer',
         SysConfig => [
             {
                 Key   => 'CheckEmailAddresses',
                 Value => 0,
             }
         ],
-        Data     => {
-            CustomerUser   => 'UNKNOWN',
+        Data => {
+            CustomerUser => 'UNKNOWN',
         },
         ExpectedData => 1,
     },
     {
-        Name     => 'ValidateCustomer - CustomerUser CheckEmailAddresses - False',
-        Function => 'ValidateCustomer',
+        Name      => 'ValidateCustomer - CustomerUser CheckEmailAddresses - False',
+        Function  => 'ValidateCustomer',
         SysConfig => [
             {
                 Key   => 'CheckEmailAddresses',
                 Value => 1,
             }
         ],
-        Data     => {
-            CustomerUser   => 'UNKNOWN',
+        Data => {
+            CustomerUser => 'UNKNOWN',
         },
         ExpectedData => undef,
     },
@@ -299,7 +298,6 @@ my @Tests = (
         },
         ExpectedData => undef,
     },
-
 
     {
         Name     => 'ValidateState - StateID - True',
@@ -462,6 +460,7 @@ my @Tests = (
         Function => 'ValidatePendingTime',
         Data     => {
             PendingTime => {
+
                 # Year   => 2021,
                 Month  => 12,
                 Day    => 23,
@@ -732,10 +731,10 @@ my @Tests = (
         Name     => 'SetDynamicFieldValue - True',
         Function => 'SetDynamicFieldValue',
         Data     => {
-            Name      => 'ProcessManagementProcessID',
-            Value     => 'some value',
-            TicketID  => $TicketID,
-            UserID    => 1,
+            Name     => 'ProcessManagementProcessID',
+            Value    => 'some value',
+            TicketID => $TicketID,
+            UserID   => 1,
         },
         ExpectedData => {
             Success => 1
@@ -745,10 +744,10 @@ my @Tests = (
         Name     => 'SetDynamicFieldValue - Name - False',
         Function => 'SetDynamicFieldValue',
         Data     => {
-            Name      => 'UNKNOWN',
-            Value     => 'some value',
-            TicketID  => $TicketID,
-            UserID    => 1,
+            Name     => 'UNKNOWN',
+            Value    => 'some value',
+            TicketID => $TicketID,
+            UserID   => 1,
         },
         ExpectedData => {
             ErrorMessage => 'SetDynamicFieldValue() Could not set !',
@@ -797,7 +796,6 @@ my @Tests = (
         },
     },
 
-
     {
         Name     => 'CheckCreatePermissions - True',
         Function => 'CheckCreatePermissions',
@@ -823,9 +821,9 @@ my @Tests = (
         Name     => 'CheckAccessPermissions - True',
         Function => 'CheckAccessPermissions',
         Data     => {
-            TicketID   => $TicketID,
-            UserID     => 1,
-            UserType   => 'Agent',
+            TicketID => $TicketID,
+            UserID   => 1,
+            UserType => 'Agent',
         },
         ExpectedData => 1,
     },
@@ -833,9 +831,9 @@ my @Tests = (
         Name     => 'CheckAccessPermissions - False',
         Function => 'CheckAccessPermissions',
         Data     => {
-            TicketID   => $TicketID,
-            UserID     => 123,
-            UserType   => 'Agent',
+            TicketID => $TicketID,
+            UserID   => 123,
+            UserType => 'Agent',
         },
         ExpectedData => undef,
     },
@@ -844,7 +842,7 @@ my @Tests = (
 TEST:
 for my $Test (@Tests) {
 
-    for my $SySConfig (@{$Test->{SysConfig}}){
+    for my $SySConfig ( @{ $Test->{SysConfig} } ) {
         $HelperObject->ConfigSettingChange(
             Valid => 1,
             %{$SySConfig},
@@ -852,8 +850,8 @@ for my $Test (@Tests) {
     }
 
     my $Function = $Test->{Function};
-    my $Result = $Self->$Function(
-        %{$Test->{Data}}
+    my $Result   = $Self->$Function(
+        %{ $Test->{Data} }
     );
 
     $Self->IsDeeply(
@@ -862,7 +860,6 @@ for my $Test (@Tests) {
         $Test->{Name},
     );
 }
-
 
 # cleanup cache
 $Kernel::OM->Get('Kernel::System::Cache')->CleanUp();
