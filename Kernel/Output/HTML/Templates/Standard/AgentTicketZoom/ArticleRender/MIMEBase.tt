@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -86,8 +87,9 @@
             <div class="WidgetMessage Top [% IF Data.Status == 'Failed' %]Error[% ELSE %]Warning[% END %]">
                 <p>
                 [% IF Data.Status == "Failed" %]
+                    [% Data.CreateTime | Localize("TimeShort") %]:
                     [% Translate("Sending of this message has failed.") | html %]
-                    [[% Data.CreateTime | Localize("TimeShort") %]] [% Data.Message | html %]
+                    [% Translate(Data.Message) | html %]
                 [% ELSE %]
                     [% Translate("This message is being processed. Already tried to send %s time(s). Next try will be %s.", Data.Attempts, Localize(Data.DueTime, "TimeShort")) | html %]
                 [% END %]
