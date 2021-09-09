@@ -75,9 +75,9 @@ Core.Agent.TicketCompose = (function (TargetNS) {
 
     function CheckSubject () {
         var CurrentSubject = $('#Subject').val();
-        $('#SubjectWarning').remove();
+        var ForTicketID    = $('input[name=TicketID]').val();
 
-        var ForTicketID = $('input[name=TicketID]').val();
+        $('#SubjectWarning').remove();
 
         if ( !ForTicketID ) {
             return;
