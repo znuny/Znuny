@@ -7750,7 +7750,7 @@ sub _TicketGetClosed {
     my %Data;
     ROW:
     while ( my @Row = $DBObject->FetchrowArray() ) {
-        last ROW if !defined $Row[0];
+        next ROW if !defined $Row[0];
         $Data{Closed} = $Row[0];
 
         # cleanup time stamps (some databases are using e. g. 2008-02-25 22:03:00.000000
