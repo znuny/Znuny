@@ -614,7 +614,7 @@ sub WebserviceConfigReplace {
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     if ( IsStringWithData($Data) ) {
-        $Data =~ s/(?:<|&lt;)OTRS_CONFIG_(.+?)(?:>|&gt;)/$ConfigObject->{$1}/g;
+        $Data =~ s{(?:<|&lt;)OTRS_CONFIG_(.+?)(?:>|&gt;)}{$ConfigObject->{$1} // ''}eg;
     }
     elsif ( IsArrayRefWithData($Data) ) {
 
