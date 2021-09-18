@@ -81,6 +81,7 @@ sub new {
             Owner         => 'someuserlogin',    # or OwnerID => 123
 
             # ticket optional:
+            DontSkipMe      => "1", # optional, without given value DontSkipMe is 1
             TN              => $TicketObject->TicketCreateNumber(), # optional
             Type            => 'Incident',            # or TypeID => 1, not required
             Service         => 'Service A',           # or ServiceID => 1, not required
@@ -151,7 +152,29 @@ sub Run {
             );
         }
     }
-
+    
+    # check for DontSkipMe
+    my $DontSkipMe;
+    if( defined( $Param{Config}->{DontSkipMe}) )
+    {
+        $DontSkipMe = $Param{Config}->{DontSkipMe};
+    }
+    else
+    {
+        $DontSkipMe = 1;
+    }
+    
+    if( !$DontSkipMe )
+    {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'info',
+            Message  => $CommonMessage
+                . "Skipped Create of New Ticket from Ticket: "
+                . $Param{Ticket}->{TicketID} . '!',
+        );
+        return;
+    }
+    
     # collect ticket params
     my %TicketParam;
     for my $Attribute (
