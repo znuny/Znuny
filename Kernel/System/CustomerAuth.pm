@@ -12,6 +12,7 @@ package Kernel::System::CustomerAuth;
 use strict;
 use warnings;
 
+use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language qw(Translatable);
 
 our @ObjectDependencies = (
@@ -21,6 +22,7 @@ our @ObjectDependencies = (
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::SystemMaintenance',
+    'Kernel::System::Valid',
 );
 
 =head1 NAME
@@ -114,9 +116,10 @@ The authentication function.
 sub Auth {
     my ( $Self, %Param ) = @_;
 
-    # get customer user object
     my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
     my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+    my $ValidObject        = $Kernel::OM->Get('Kernel::System::Valid');
+    my $LogObject          = $Kernel::OM->Get('Kernel::System::Log');
 
     # use all 11 backends and return on first auth
     my $User;
@@ -158,34 +161,72 @@ sub Auth {
         }
 
         # remember auth backend
-        if ($User) {
-            $CustomerUserObject->SetPreferences(
-                Key    => 'UserAuthBackend',
-                Value  => $MainCount,
-                UserID => $User,
-            );
-            last COUNT;
-        }
+        $CustomerUserObject->SetPreferences(
+            Key    => 'UserAuthBackend',
+            Value  => $MainCount,
+            UserID => $User,
+        );
+        last COUNT;
     }
 
-    # check if record exists
     if ( !$User ) {
-        my %CustomerData = $CustomerUserObject->CustomerUserDataGet( User => $Param{User} );
-        if (%CustomerData) {
-            my $Count = $CustomerData{UserLoginFailed} || 0;
-            $Count++;
-            $CustomerUserObject->SetPreferences(
-                Key    => 'UserLoginFailed',
-                Value  => $Count,
-                UserID => $CustomerData{UserLogin},
-            );
+        my %CustomerUserData = $CustomerUserObject->CustomerUserDataGet( User => $Param{User} );
+        return if !%CustomerUserData;
+
+        my $Count = $CustomerUserData{UserLoginFailed} || 0;
+        $Count++;
+        $CustomerUserObject->SetPreferences(
+            Key    => 'UserLoginFailed',
+            Value  => $Count,
+            UserID => $CustomerUserData{UserLogin},
+        );
+
+        my $BackendConfig = $ConfigObject->Get( $CustomerUserData{Source} );
+        return if !IsHashRefWithData($BackendConfig);
+        return if $BackendConfig->{ReadOnly};
+
+        # set customer user to invalid-temporarily if max failed logins reached
+        my $Config = $ConfigObject->Get('CustomerPreferencesGroups');
+        my $PasswordMaxLoginFailed;
+
+        if ( $Config && $Config->{Password} && $Config->{Password}->{PasswordMaxLoginFailed} ) {
+            $PasswordMaxLoginFailed = $Config->{Password}->{PasswordMaxLoginFailed};
         }
+
+        return if !$PasswordMaxLoginFailed;
+        return if $Count < $PasswordMaxLoginFailed;
+
+        my $TemporarilyInvalidID = $ValidObject->ValidLookup(
+            Valid => 'invalid-temporarily',
+        );
+        return if !$TemporarilyInvalidID;
+
+        return if !defined $CustomerUserData{ValidID};
+        return if $CustomerUserData{ValidID} == $TemporarilyInvalidID;
+
+        # Don't overwrite the password.
+        delete $CustomerUserData{UserPassword};
+
+        my $Updated = $CustomerUserObject->CustomerUserUpdate(
+            %CustomerUserData,
+            ID      => $CustomerUserData{UserLogin},
+            ValidID => $TemporarilyInvalidID,
+            UserID  => 1,
+        );
+        return if !$Updated;
+
+        $LogObject->Log(
+            Priority => 'notice',
+            Message  => "Login failed $Count times. Setting customer user $CustomerUserData{UserLogin} to "
+                . "'invalid-temporarily'.",
+        );
+
         return;
     }
 
     # check if user is valid
-    my %CustomerData = $CustomerUserObject->CustomerUserDataGet( User => $User );
-    if ( defined $CustomerData{ValidID} && $CustomerData{ValidID} ne 1 ) {
+    my %CustomerUserData = $CustomerUserObject->CustomerUserDataGet( User => $User );
+    if ( defined $CustomerUserData{ValidID} && $CustomerUserData{ValidID} != 1 ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'notice',
             Message  => "CustomerUser: '$User' is set to invalid, can't login!",
@@ -193,13 +234,13 @@ sub Auth {
         return;
     }
 
-    return $User if !%CustomerData;
+    return $User if !%CustomerUserData;
 
     # reset failed logins
     $CustomerUserObject->SetPreferences(
         Key    => 'UserLoginFailed',
         Value  => 0,
-        UserID => $CustomerData{UserLogin},
+        UserID => $CustomerUserData{UserLogin},
     );
 
     # on system maintenance customers
@@ -222,7 +263,7 @@ sub Auth {
     $CustomerUserObject->SetPreferences(
         Key    => 'UserLastLogin',
         Value  => $DateTimeObject->ToEpoch(),
-        UserID => $CustomerData{UserLogin},
+        UserID => $CustomerUserData{UserLogin},
     );
 
     return $User;

@@ -1639,12 +1639,6 @@ sub CustomerUserUpdate {
         );
     }
 
-    # log notice
-    $Kernel::OM->Get('Kernel::System::Log')->Log(
-        Priority => 'info',
-        Message  => "CustomerUser: '$Param{UserLogin}' updated successfully ($Param{UserID})!",
-    );
-
     # check pw
     if ( $Param{UserPassword} ) {
         $Self->SetPassword(

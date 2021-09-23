@@ -13,10 +13,9 @@ use utf8;
 
 use vars (qw($Self));
 
-# get config object
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+my $ValidObject  = $Kernel::OM->Get('Kernel::System::Valid');
 
-# get helper object
 $Kernel::OM->ObjectParamAdd(
     'Kernel::System::UnitTest::Helper' => {
         RestoreDatabase => 1,
@@ -36,6 +35,15 @@ for my $Count ( 1 .. 10 ) {
 $ConfigObject->Set(
     Key   => 'CheckEmailAddresses',
     Value => 0,
+);
+
+# Prepare max. failed login count config.
+my $CustomerPreferencesGroups = $ConfigObject->Get('CustomerPreferencesGroups');
+my $PasswordMaxLoginFailed    = 5;
+$CustomerPreferencesGroups->{Password}->{PasswordMaxLoginFailed} = $PasswordMaxLoginFailed;
+
+my $TemporarilyInvalidID = $ValidObject->ValidLookup(
+    Valid => 'invalid-temporarily',
 );
 
 # add test user
@@ -222,6 +230,55 @@ for my $CryptType (qw(plain crypt apr1 md5 sha1 sha2 sha512 bcrypt)) {
             $CustomerAuthResult,
             "CryptType $CryptType Password '$Test->{Password}' (wrong user)",
         );
+
+        #
+        # Test for PasswordMaxLoginFailed count
+        #
+
+        # Reset counter through successful login
+        $CustomerAuthResult = $CustomerAuthObject->Auth(
+            User => $UserRand,
+            Pw   => $Test->{Password},
+        );
+
+        $Self->True(
+            $CustomerAuthResult,
+            "CryptType $CryptType Password '$Test->{Password}'",
+        );
+
+        for my $LoginAttemptCount ( 1 .. $PasswordMaxLoginFailed ) {
+            $CustomerAuthResult = $CustomerAuthObject->Auth(
+                User => $UserRand,
+                Pw   => 'wrong_pw',
+            );
+        }
+
+        my %CustomerUserData = $GlobalUserObject->CustomerUserDataGet(
+            User => $UserRand,
+        );
+        $Self->Is(
+            $CustomerUserData{ValidID},
+            $TemporarilyInvalidID,
+            "Customer user $UserRand must be set to temporarily invalid after too many failed login attempts.",
+        );
+
+        $CustomerAuthResult = $CustomerAuthObject->Auth(
+            User => $UserRand,
+            Pw   => $Test->{Password},
+        );
+
+        $Self->False(
+            scalar $CustomerAuthResult,
+            "CryptType $CryptType Password '$Test->{Password}' must fail after too many login attempts.",
+        );
+
+        # Set customer user's previous valid ID so he can log in again
+        $GlobalUserObject->CustomerUserUpdate(
+            %CustomerUserData,
+            ID      => $UserRand,
+            ValidID => 1,
+            UserID  => 1,
+        );
     }
 }
 
@@ -312,7 +369,5 @@ $Self->True(
     $Result,
     "System crypt type - $Tests[1]->{CryptType}, crypt type for customer password - $Tests[0]->{CryptType}, customer password '$Tests[0]->{Password}'",
 );
-
-# cleanup is done by RestoreDatabase
 
 1;
