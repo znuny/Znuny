@@ -4013,6 +4013,7 @@ via the Preferences button after logging in.
                 <Item Key="PasswordMin2Lower2UpperCharacters">0</Item>
                 <Item Key="PasswordMin2Characters">0</Item>
                 <Item Key="PasswordNeedDigit">0</Item>
+                <Item Key="PasswordMaxLoginFailed">0</Item>
                 <Item Key="Active">1</Item>
             </Hash>
         </Value>
