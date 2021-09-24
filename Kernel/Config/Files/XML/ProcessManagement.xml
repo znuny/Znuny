@@ -734,54 +734,52 @@
                 </Item>
                 <Item Key="TicketCreate">
                     <Hash>
-                        <Item Key="Attachments">DynamicField_ProcessManagementAttachments</Item>
+                        <Item Key="ArchiveFlag">y|n</Item>                       
+                        <Item Key="Attachments">X</Item>
                         <Item Key="Body">(* required) Some text</Item>
                         <Item Key="CommunicationChannel">Internal|Phone|Email|...</Item>
                         <Item Key="ContentType">(* required) text/html; charset=UTF-8</Item>
-                        <Item Key="CustomerID">(* required) 123</Item>
-                        <Item Key="CustomerUser">(* required) somecustomeremail</Item>
+                        <Item Key="CustomerID">123</Item>
+                        <Item Key="CustomerUser">somecustomeremail</Item>
                         <Item Key="DynamicField_FieldName">Some Value</Item>
                         <Item Key="From">Some Agent email@example.com</Item>
-                        <Item Key="HistoryComment">(* required) Subticket created</Item>
+                        <Item Key="HistoryComment">(* required) Subticket Created</Item>
                         <Item Key="HistoryType">(* required) NewTicket</Item>
                         <Item Key="IsVisibleForCustomer">(* required) 0|1</Item>
-                        <Item Key="LinkAs">(* required) Normal|Parent|Child</Item>
+                        <Item Key="LinkAs">Normal|Parent|Child</Item>
                         <Item Key="Lock">(* required) unlock|lock</Item>
                         <Item Key="Owner">(* required) someuserlogin</Item>
+                        <Item Key="PendingTime">2021-09-01 09:00:00</Item>
+                        <Item Key="PendingTimeDiff">123</Item>
                         <Item Key="Priority">(* required) 3 normal</Item>
                         <Item Key="Queue">(* required) Raw</Item>
-                        <Item Key="Responsible">(* required) someuserlogin</Item>
+                        <Item Key="Responsible">someuserlogin</Item>
                         <Item Key="SenderType">(* required) agent|system|customer</Item>
                         <Item Key="Service">Service A</Item>
                         <Item Key="SLA">SLA A</Item>
-                        <Item Key="State">(* required) open</Item>
-                        <Item Key="Subject">Some subject</Item>
-                        <Item Key="Title">(* required) Some ticket title</Item>
-                        <Item Key="Type">Incident</Item>
-                        <Item Key="Lock">(* required) unlock|lock</Item>
-                        <Item Key="ArchiveFlag">y|n</Item>
-                        <Item Key="PendingTime">2021-09-01 09:00:00</Item>
-                        <Item Key="PendingTimeDiff">123</Item>
+                        <Item Key="State">(* required) new</Item>
+                        <Item Key="Subject">(* required) Some subject</Item>
                         <Item Key="TimeUnit">5</Item>
+                        <Item Key="Title">(* required) Some Ticket Title</Item>
+                        <Item Key="Type">Incident</Item>
                         <Item Key="UserID">1 (use to overwrite the logged user)</Item>
                     </Hash>
                 </Item>
                 <Item Key="TicketArticleCreate">
                     <Hash>
-                        <Item Key="SenderType">(* required) agent|system|customer</Item>
-                        <Item Key="IsVisibleForCustomer">(* required) 0|1</Item>
-                        <Item Key="CommunicationChannel">(* required) Internal|Phone|Email</Item>
-                        <Item Key="From">(* required) Some Agent email@example.com</Item>
-                        <Item Key="To">(* required) Some Customer A customer-a@example.com</Item>
-                        <Item Key="Subject">(* required) Some subject</Item>
                         <Item Key="Body">(* required) Some text</Item>
-                        <Item Key="Charset">(* required) UTF-8</Item>
-                        <Item Key="MimeType">(* required) text/plain</Item>
+                        <Item Key="CommunicationChannel">(* required) Internal|Phone|Email</Item>
+                        <Item Key="ContentType">(* required) text/html; charset=UTF-8</Item>
+                        <Item Key="DynamicField_FieldName">Some Value</Item>
+                        <Item Key="From">Some Agent email@example.com</Item>
                         <Item Key="HistoryType">(* required) EmailCustomer|AddNote|WebRequestCustomer</Item>
-                        <Item Key="HistoryComment">(* required) Article created</Item>
+                        <Item Key="HistoryComment">(* required) Article created</Item>                      
+                        <Item Key="IsVisibleForCustomer">(* required) 0|1</Item>
+                        <Item Key="SenderType">(* required) agent|system|customer</Item>
+                        <Item Key="Subject">(* required) Some subject</Item>
+                        <Item Key="To">Some Customer A customer-a@example.com</Item>
                         <Item Key="UserID">1 (use to overwrite the logged user)</Item>
                         <Item Key="UnlockOnAway">1|0</Item>
-                        <Item Key="DynamicField_FieldName">Some Value</Item>
                     </Hash>
                 </Item>
                 <Item Key="TicketLockSet">
@@ -805,7 +803,7 @@
                 </Item>
                 <Item Key="TicketQueueSet">
                     <Hash>
-                        <Item Key="Queue">(* required) 1stLevel::Hardware</Item>
+                        <Item Key="Queue">(* required) MyQueue::SubQueue</Item>
                         <Item Key="UserID">1 (use to overwrite the logged user)</Item>
                     </Hash>
                 </Item>
