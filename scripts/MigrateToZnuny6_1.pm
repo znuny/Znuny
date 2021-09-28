@@ -22,7 +22,7 @@ our @ObjectDependencies = (
     'Kernel::System::SysConfig',
 );
 
-=head1 NAME
+=head1 SYNOPSIS
 
 Migrates Znuny LTS or OTRS 6 to Znuny 6.1.
 
@@ -229,6 +229,10 @@ sub _TasksGet {
         {
             Message => 'Migrate SysConfig settings',
             Module  => 'MigrateSysConfigSettings',
+        },
+        {
+            Message => 'Initialize default cron jobs',
+            Module  => 'InitializeDefaultCronjobs',
         },
         {
             Message => 'Migrate web service configuration',

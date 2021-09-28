@@ -22,7 +22,7 @@ our @ObjectDependencies = (
     'Kernel::System::SysConfig',
 );
 
-=head1 NAME
+=head1 SYNOPSIS
 
 Checks for CPAN::Audit warnings.
 

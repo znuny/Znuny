@@ -22,7 +22,7 @@ our @ObjectDependencies = (
     'Kernel::System::DB',
 );
 
-=head1 NAME
+=head1 SYNOPSIS
 
 Checks if MySQL database is using correct charset.
 

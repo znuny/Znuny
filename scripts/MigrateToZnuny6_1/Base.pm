@@ -17,7 +17,7 @@ use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
 
-=head1 NAME
+=head1 SYNOPSIS
 
 Base class for migrations.
 

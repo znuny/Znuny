@@ -17,7 +17,7 @@ use parent qw(scripts::MigrateToZnuny6_1::Base);
 
 our @ObjectDependencies = ();
 
-=head1 NAME
+=head1 SYNOPSIS
 
 Rebuilds the system configuration trying to cleanup the database.
 

@@ -20,7 +20,7 @@ our @ObjectDependencies = (
     'Kernel::System::Package',
 );
 
-=head1 NAME
+=head1 SYNOPSIS
 
 Uninstalls code that was merged from packages into Znuny.
 

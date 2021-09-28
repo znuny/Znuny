@@ -24,7 +24,7 @@ our @ObjectDependencies = (
     'Kernel::System::SysConfig',
 );
 
-=head1 NAME
+=head1 SYNOPSIS
 
 Checks for invalid configuration settings.
 

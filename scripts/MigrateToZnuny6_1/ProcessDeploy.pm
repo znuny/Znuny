@@ -21,7 +21,7 @@ our @ObjectDependencies = (
     'Kernel::System::ProcessManagement::DB::Entity',
 );
 
-=head1 NAME
+=head1 SYNOPSIS
 
 Deploy the process management configuration.
 

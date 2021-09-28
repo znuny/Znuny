@@ -22,7 +22,7 @@ our @ObjectDependencies = (
     'Kernel::System::ZnunyHelper',
 );
 
-=head1 NAME
+=head1 SYNOPSIS
 
 Migrate web service configuration.
 

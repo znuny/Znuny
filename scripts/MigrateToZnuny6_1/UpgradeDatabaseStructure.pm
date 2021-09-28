@@ -23,7 +23,7 @@ our @ObjectDependencies = (
     'Kernel::System::Console::Command::Maint::Database::Check',
 );
 
-=head1 NAME
+=head1 SYNOPSIS
 
 Upgrades the database structure to OTRS 6.
 

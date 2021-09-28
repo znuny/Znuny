@@ -20,7 +20,7 @@ our @ObjectDependencies = (
     'Kernel::System::ACL::DB::ACL',
 );
 
-=head1 NAME
+=head1 SYNOPSIS
 
 Deploy the ACL configuration.
 

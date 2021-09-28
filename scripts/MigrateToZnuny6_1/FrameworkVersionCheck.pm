@@ -19,7 +19,7 @@ our @ObjectDependencies = (
     'Kernel::Config',
 );
 
-=head1 NAME
+=head1 SYNOPSIS
 
 Checks required framework version for update.
 

@@ -18,7 +18,7 @@ our @ObjectDependencies = (
     'Kernel::Config',
 );
 
-=head1 NAME
+=head1 SYNOPSIS
 
 Migrates SysConfig settings.
 

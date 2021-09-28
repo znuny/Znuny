@@ -18,7 +18,7 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies;
 
-=head1 NAME
+=head1 SYNOPSIS
 
 Update indices.
 
