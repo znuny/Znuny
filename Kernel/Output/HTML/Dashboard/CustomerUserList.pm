@@ -101,8 +101,8 @@ sub Run {
     MemberCustomerID:
     for my $MemberCustomerID (@MemberCustomerIDs)
     {
-    	my $tmpMemberCustomer = { $CustomerUserObject->CustomerSearch( UserLogin => $MemberCustomerID ) };
-	    $CustomerIDs = { %$CustomerIDs, %$tmpMemberCustomer };
+    	my $MemberCustomerObj = { $CustomerUserObject->CustomerSearch( UserLogin => $MemberCustomerID ) };
+	    $CustomerIDs = { %$CustomerIDs, %$MemberCustomerObj };
     }
 
     # add page nav bar
