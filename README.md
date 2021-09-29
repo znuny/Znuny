@@ -52,7 +52,7 @@ Web server
 - Web server with CGI support (CGI is not recommended)
 
 Databases
-- MySQL 5.0 or higher (MySQL 8+ is [not supported](https://bugs.otrs.org/show_bug.cgi?id=13866))
+- MySQL 5.0 or higher
 - MariaDB
 - PostgreSQL 9.2 or higher
 - Oracle 10g or higher

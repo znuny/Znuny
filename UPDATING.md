@@ -1,2 +1,1 @@
-Please see [the updating instructions](https://doc.znuny.org/doc/manual/admin/6.0/en/html/updating.html)
-in the online documentation.
+Please see [the updating instructions](https://doc.znuny.org/manual/releases/installupdate/update.html#update-to-6-1) in the online documentation.
