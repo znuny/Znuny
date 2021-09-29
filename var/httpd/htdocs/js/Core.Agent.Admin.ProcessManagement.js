@@ -1100,7 +1100,7 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
      */
     TargetNS.InitActivityDialogEdit = function () {
         var MandatoryFields = ['Queue', 'State', 'Lock', 'Priority', 'Type', 'CustomerID'],
-            FieldsWithoutDefaultValue = ['CustomerID', 'Article'];
+            FieldsWithoutDefaultValue = ['CustomerID', 'Article', 'Attachments'];
 
         function UpdateFields(Event, UI) {
             var Fieldname,
