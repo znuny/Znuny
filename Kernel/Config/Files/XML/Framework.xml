@@ -5685,7 +5685,7 @@ via the Preferences button after logging in.
                         <Item Key="Type"></Item>
                         <Item Key="Block">ItemArea</Item>
                         <Item Key="AccessKey"></Item>
-                        <Item Key="Prio">9000</Item>
+                        <Item Key="Prio">9101</Item>
                     </Hash>
                 </Item>
             </Array>
