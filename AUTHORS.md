@@ -52,7 +52,9 @@ The following persons contributed to OTRS:
 * Johannes Nickel <hanne_hal@me.com>
 * Johannes Nickel <hanneshal@users.noreply.github.com>
 * Johannes Nickel <jn@znuny.com>
+* Kai Herlemann <43746520+KaiHerlemann@users.noreply.github.com>
 * Keith Moore <tenareth@gmail.com>
+* Kevin Janssen <77158891+BuTzZ@users.noreply.github.com>
 * Luca Maranzano <liuk@linux.it>
 * Manuel Hecht <manuel.hecht@otrs.com>
 * Marc Bonsels <marc.bonsels@otrs.com>

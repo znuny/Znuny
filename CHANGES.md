@@ -3,7 +3,8 @@
  - Added new autocomplete values to input fields (#67). Thanks to maxence (@tipue-dev). [#67](https://github.com/znuny/Znuny/pull/67)
  - Fixed double encoding for dynamic field filters in ticket overviews (#51). Thanks to maxence (@tipue-dev). [#51](https://github.com/znuny/Znuny/pull/51)
  - Fixed #107 - AgentTicketEmailOutbound "Empty subject" notification is not translated (#111). Thanks to Tronsy (@Tronsy). [#111](https://github.com/znuny/Znuny/pull/111)
- - Added initial config for Frontend::Navigation###AdminCustomerUserCustomer###001-Framework (#146). Thanks to BuTzZ (@BuTzZ). [#146](https://github.com/znuny/Znuny/pull/146)
+ - Added initial config for Frontend::Navigation###AdminCustomerUserCustomer###001-Framework (#146). Thanks to Kevin Janssen (@BuTzZ). [#146](https://github.com/znuny/Znuny/pull/146)
+ - Fixed error "Can't sign: unable to write 'random state'" if sending emails signed with S/MIME. – OTRS bug #14522 (#72). Thanks to Kai Herlemann (@KaiHerlemann). [#72](https://github.com/znuny/Znuny/pull/72)
 
 # 6.1.2 2021-XX-XX
  - Fixed double encoding for dynamic field filters in ticket overviews (#51). Thanks to maxence (@tipue-dev). [#51](https://github.com/znuny/Znuny/pull/51)
