@@ -734,7 +734,7 @@
                 </Item>
                 <Item Key="TicketCreate">
                     <Hash>
-                        <Item Key="ArchiveFlag">y|n</Item>                       
+                        <Item Key="ArchiveFlag">y|n</Item>
                         <Item Key="Attachments">X</Item>
                         <Item Key="Body">(* required) Some text</Item>
                         <Item Key="CommunicationChannel">Internal|Phone|Email|...</Item>
@@ -773,7 +773,7 @@
                         <Item Key="DynamicField_FieldName">Some Value</Item>
                         <Item Key="From">Some Agent email@example.com</Item>
                         <Item Key="HistoryType">(* required) EmailCustomer|AddNote|WebRequestCustomer</Item>
-                        <Item Key="HistoryComment">(* required) Article created</Item>                      
+                        <Item Key="HistoryComment">(* required) Article created</Item>
                         <Item Key="IsVisibleForCustomer">(* required) 0|1</Item>
                         <Item Key="SenderType">(* required) agent|system|customer</Item>
                         <Item Key="Subject">(* required) Some subject</Item>

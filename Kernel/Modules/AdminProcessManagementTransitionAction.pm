@@ -414,7 +414,6 @@ sub Run {
     # Add default parameter
     # ------------------------------------------------------------ #
     elsif ( $Self->{Subaction} eq 'GetDefaultConfigParameters' ) {
-    
         my $Module = $ParamObject->GetParam( Param => 'Module' );
         my %ConfigParameter = $Self->_GetDefaultConfigParameters(
             Module => $Module,
@@ -772,15 +771,13 @@ sub _CheckTransitionActionUsage {
 
 sub _GetDefaultConfigParameters {
     my ( $Self, %Param ) = @_;
-    
     for my $Needed (qw(Module)) {
-        if ( !$Param{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => 'Need '.$Needed.'!'
-            );
-            return;
-        }
+        next NEEDED if defined $Param{ $Needed };
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => 'Need '.$Needed.'!'
+        );
+        return;
     }
 
     # replace e.g. 'Kernel::System::ProcessManagement::TransitionAction::TicketCreate' to 'TicketCreate'

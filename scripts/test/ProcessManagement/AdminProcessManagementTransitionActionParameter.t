@@ -1,57 +1,69 @@
 # --
-# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
-# the enclosed file COPYING for license information (GPL). If you
-# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-## no critic (Modules::RequireExplicitPackage)
 use strict;
 use warnings;
+use utf8;
+
 use vars (qw($Self));
 
 use Kernel::System::VariableCheck qw(:all);
 
-# get helper object
 $Kernel::OM->ObjectParamAdd(
     'Kernel::System::UnitTest::Helper' => {
         RestoreDatabase  => 1,
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
-$Kernel::OM->Get('Kernel::System::Main')->Require('Kernel::Modules::AdminProcessManagementTransitionAction');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
+my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+$MainObject->Require('Kernel::Modules::AdminProcessManagementTransitionAction');
+
 my $TestModule = Kernel::Modules::AdminProcessManagementTransitionAction->new();
 
 # define variables
-my $ModuleName = 'AdminProcessManagementTransitionActionParameter';
-
-my $RandomID   = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 #
 # Create the config for testing
 #
 
 # add config
-$Kernel::OM->Get('Kernel::Config')->Set(
-    Key => 'ProcessManagement::TransitionAction::DefaultParameters###001-Framework', 
+$ConfigObject->Set(
+    Key   => 'ProcessManagement::TransitionAction::DefaultParameters###001-Framework',
     Value => {
-        'TicketCreate' => {
-            'Body' => $RandomID,
-            'From' => 'otrs',
-            'UserID' => '123'
+        TicketCreate => {
+            Body   => $RandomID,
+            From   => 'Znuny',
+            UserID => 123,
         },
-        'TicketCustomerSet' => {
-            'CustomerID' => 'client123',
-            'CustomerUserID' => 'client-user-123'
+        TicketCustomerSet => {
+            CustomerID     => 'client123',
+            CustomerUserID => 'client-user-123',
         },
-        'TicketLockSet' => {
-            'Lock' => '(Lock|Unlock)',
-            'LockID' => '(1|2)'
+        TicketLockSet => {
+            Lock   => '(Lock|Unlock)',
+            LockID => '(1|2)',
+        },
+    }
+);
+
+$ConfigObject->Set(
+    Key   => 'ProcessManagement::TransitionAction::DefaultParameters###001-Custom',
+    Value => {
+        NewTransitionAction => {
+            Body   => $RandomID,
+            UserID => 1,
+            NewKey => 1,
         },
     }
 );
@@ -59,54 +71,55 @@ $Kernel::OM->Get('Kernel::Config')->Set(
 # add tests
 my @ParameterTestConfigs = (
     {
-        Name       => 'TicketCreate',
+        Name         => 'TicketCreate',
         ActionModule => 'Kernel::System::ProcessManagement::TransitionAction::TicketCreate',
-        Result  => {
-            'Body' => $RandomID,
-            'From' => 'otrs',
-            'UserID' => '123'
+        Result       => {
+            Body   => $RandomID,
+            From   => 'Znuny',
+            UserID => 123,
         },
     },
     {
-        Name       => 'TicketCustomerSet',
+        Name         => 'TicketCustomerSet',
         ActionModule => 'Kernel::System::ProcessManagement::TransitionAction::TicketCustomerSet',
-        Result  => {
-            'CustomerID' => 'client123',
-            'CustomerUserID' => 'client-user-123'
+        Result       => {
+            CustomerID     => 'client123',
+            CustomerUserID => 'client-user-123',
         },
     },
     {
-        Name       => 'UnknownConfig',
+        Name         => 'UnknownConfig',
         ActionModule => $RandomID,
-        Result  => {},
+        Result       => {},
     },
     {
-        Name       => 'EmptyConfig',
+        Name         => 'EmptyConfig',
         ActionModule => '',
-        Result  => {},
+        Result       => {},
+    },
+    {
+        Name         => 'NewTransitionAction',
+        ActionModule => 'Kernel::System::ProcessManagement::TransitionAction::NewTransitionAction',
+        Result       => {
+            Body   => $RandomID,
+            UserID => 1,
+            NewKey => 1,
+        },
     },
 );
 
 for my $Test (@ParameterTestConfigs) {
 
-    my %Expectation = %{$Test->{Result}};
-
     # run module
     my %Result = $TestModule->_GetDefaultConfigParameters(
         Module => $Test->{ActionModule},
     );
-       
-    # compare hashes
-    my $DataIsDifferent = DataIsDifferent(
-        Data1 => \%Expectation,
-        Data2 => \%Result,
-    );
 
-    $Self->True(
-        !$DataIsDifferent,
-        "Result is equal to the expectation.",
+    $Self->IsDeeply(
+        \%Result,
+        $Test->{Result},
+        $Test->{Name} . ' - Result is equal to the expectation.',
     );
-
 }
 
 1;
