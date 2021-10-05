@@ -719,7 +719,7 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="TransitionActionDefaultParameter::Settings" Required="0" Valid="1">
+    <Setting Name="ProcessManagement::TransitionAction::DefaultParameters###001-Framework" Required="0" Valid="1">
         <Description Translatable="1">Defines the default keys and values for the transition action module parameters. Mandatory fields are marked with "(* required)". Note: For most of the keys the AttributeID can also be used, e.g. "Owner" can be "OwnerID". Keys that define the same Attribute should only be used once, e.g. "Owner" and "OwnerID" are redundant.</Description>
         <Navigation>Core::ProcessManagement</Navigation>
         <Value>

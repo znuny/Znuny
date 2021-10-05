@@ -38,7 +38,7 @@ my $RandomID   = $Helper->GetRandomID();
 
 # add config
 $Kernel::OM->Get('Kernel::Config')->Set(
-    Key => 'TransitionActionDefaultParameter::Settings', 
+    Key => 'ProcessManagement::TransitionAction::DefaultParameters###001-Framework', 
     Value => {
         'TicketCreate' => {
             'Body' => $RandomID,
