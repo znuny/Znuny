@@ -244,7 +244,7 @@
         </Value>
     </Setting>
     <Setting Name="Ticket::EventModulePost###2000-TicketAllChildrenClosed" Required="0" Valid="1">
-        <Description Translatable="1">Sends an event to the parent ticket if a child was closed/merged/removed.</Description>
+        <Description Translatable="1">Triggers event 'TicketAllChildrenClosed' if all child tickets of a parent ticket have been closed/merged/removed.</Description>
         <Navigation>Core::Event::Ticket</Navigation>
         <Value>
             <Hash>

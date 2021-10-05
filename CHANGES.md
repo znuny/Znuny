@@ -54,9 +54,18 @@
  - 2021-06-15 Use ticket title as the default appointment title (#90). Thanks to Renée Bäcker (@reneeb). [#90](https://github.com/znuny/Znuny/pull/90)
  - 2021-06-15 Column list validation before saving agent preferences (#84). Thanks to Paweł Bogusławski (@pboguslawski). [#84](https://github.com/znuny/Znuny/pull/84)
 
-# 6.0.37 2021-XX-XX
- - Fixed double encoding for dynamic field filters in ticket overviews (#51). Thanks to maxence (@tipue-dev). [#51](https://github.com/znuny/Znuny/pull/51)
- - Fixed #107 - AgentTicketEmailOutbound "Empty subject" notification is not translated (#111.) Thanks to Tronsy (@Tronsy). [#111](https://github.com/znuny/Znuny/pull/111)
+# 6.0.37 2021-09-29
+ - 2021-09-28 Removed MySQL performance check module from support data collector. It only tests for the now deprecated MySQL setting 'query_cache_size'. Thanks for the hint to GitHub user arndkeyz.
+ - 2021-09-27 Fixed problem with daylight saving time switch for recurrent appointments and date/time in general.
+ - 2021-09-27 JavaScript in the error message of regular expression checks for dynamic field values now will be removed instead of being executed when showing the error message. Thanks to Stefan Härter (OTOBO) for reporting the issue.
+ - 2021-09-23 Customer users with too many failed login attempts will now be set to "invalid-temporarily" and cannot log in anymore.
+ - 2021-09-09 Fixed handling of database query results in Kernel::System::Ticket::_TicketGetClosed.
+ - 2021-08-31 Fixed UI hang on admin group name change (#121). Thanks to Paweł Bogusławski (@pboguslawski). [#121](https://github.com/znuny/Znuny/pull/121)
+ - 2021-08-31 Fixed storage switch only executable from main directory (#116). Thanks to maxence (@tipue-dev). [#116](https://github.com/znuny/Znuny/pull/116)
+ - 2021-08-23 Added default value for CurrentComment in ACLUpdate.
+ - 2021-08-20 Fixed double encoding for dynamic field filters in ticket overviews (#51). Thanks to maxence (@tipue-dev). [#51](https://github.com/znuny/Znuny/pull/51)
+ - 2021-08-20 Fixed #107 - AgentTicketEmailOutbound "Empty subject" notification is not translated (#111.) Thanks to Tronsy (@Tronsy). [#111](https://github.com/znuny/Znuny/pull/111)
+ - 2021-08-18 Fixed layout bug in BuildSelectionDataRefCreate
 
 # 6.0.36 2021-08-05
  - 2021-07-28 Improved JavaScript recognition in function Kernel::System::HTMLUtils::Safety. Thanks for hints to Tim Püttmanns, maxence.

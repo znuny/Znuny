@@ -1,10 +1,9 @@
 # --
-# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
-# the enclosed file COPYING for license information (GPL). If you
-# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
 package Kernel::System::Ticket::Event::TicketAllChildrenClosed;
@@ -13,18 +12,14 @@ use strict;
 use warnings;
 
 our @ObjectDependencies = (
+    'Kernel::System::LinkObject',
     'Kernel::System::Log',
     'Kernel::System::Ticket',
-    'Kernel::System::LinkObject',
 );
 
 =head1 NAME
 
-Kernel::System::Ticket::Event::TicketAllChildrenClosed - A module to create an event after all children have been closed.
-
-=head1 DESCRIPTION
-
-All TicketAllChildrenClosed functions.
+Kernel::System::Ticket::Event::TicketAllChildrenClosed - A module to trigger an event after all child tickets have been closed.
 
 =head1 PUBLIC INTERFACE
 
@@ -39,7 +34,6 @@ Don't use the constructor directly, use the ObjectManager instead:
 sub new {
     my ( $Type, %Param ) = @_;
 
-    # allocate new hash for object
     my $Self = {};
     bless( $Self, $Type );
 
@@ -50,7 +44,7 @@ sub new {
 
     Run Data
 
-    my $Success = $TicketAllChildrenClosedObject->Run(
+    my $Success = $TicketAllChildTicketsClosedObject->Run(
         Data    => {
             TicketID => TicketID,
         },
@@ -59,7 +53,8 @@ sub new {
         UserID  => $UserID,
     )
 
-    If all subtickets are closed of a Ticket then the Event 'TicketAllChildrenClosed' will be triggered.
+    If all child tickets of a parent ticket are closed/merged/removed,
+    the event 'TicketAllChildrenClosed' will be triggered.
 
     Returns:
 
@@ -70,81 +65,81 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
-    for my $Needed (qw(Data Event Config)) {
-        if ( !$Param{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Need $Needed!"
-            );
-            return;
-        }
-    }
-    for my $Needed (qw(TicketID)) {
-        if ( !$Param{Data}->{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Need $Needed in Data!"
-            );
-            return;
-        }
-    }
-
-    # get ticket object
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
     my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
     my $LinkObject   = $Kernel::OM->Get('Kernel::System::LinkObject');
 
-    my %LinkedParents = $LinkObject->LinkKeyList(
+    NEEDED:
+    for my $Needed (qw( Data Event Config UserID )) {
+        next NEEDED if $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Need $Needed!"
+        );
+        return;
+    }
+
+    NEEDED:
+    for my $Needed (qw(TicketID)) {
+        next NEEDED if $Param{Data}->{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Need $Needed in Data!"
+        );
+        return;
+    }
+
+    my %LinkedParentTickets = $LinkObject->LinkKeyList(
         Object1   => 'Ticket',
         Key1      => $Param{Data}->{TicketID},
         Object2   => 'Ticket',
         State     => 'Valid',
         Type      => 'ParentChild',
         Direction => 'Source',
-        UserID    => 1,
+        UserID    => $Param{UserID},
     );
 
-    PARENTS:
-    for my $ParentID ( sort keys %LinkedParents ) {
+    return 1 if !%LinkedParentTickets;
+
+    PARENTTICKETID:
+    for my $ParentTicketID ( sort keys %LinkedParentTickets ) {
         my %LinkedChildren = $LinkObject->LinkKeyList(
             Object1   => 'Ticket',
-            Key1      => $ParentID,
+            Key1      => $ParentTicketID,
             Object2   => 'Ticket',
             State     => 'Valid',
             Type      => 'ParentChild',
             Direction => 'Target',
-            UserID    => 1,
+            UserID    => $Param{UserID},
         );
 
-        my $ChildrenClosed = 1;
+        my $AllChildTicketsClosed = 1;
 
-        # process child tickets
-        CHILDREN:
+        CHILDTICKETID:
         for my $ChildTicketID ( sort keys %LinkedChildren ) {
             my %ChildTicket = $TicketObject->TicketGet(
                 TicketID => $ChildTicketID,
             );
 
-            if (%ChildTicket) {
+            next CHILDTICKETID if !%ChildTicket;
+            next CHILDTICKETID if $ChildTicket{StateType} =~ m{\A(closed|merged|removed)\z};
 
-                # skip closed/removed/merged tickets
-                if ( $ChildTicket{StateType} !~ m/^(?:closed|merged|removed)$/ ) {
-                    $ChildrenClosed = 0;
-                    last CHILDREN;
-                }
-            }
+            $AllChildTicketsClosed = 0;
+            last CHILDTICKETID;
         }
 
-        if ($ChildrenClosed) {
-            $TicketObject->EventHandler(
-                Event => 'TicketAllChildrenClosed',
-                Data  => {
-                    TicketID => $ParentID,
-                },
-                UserID      => $Self->{UserID} || 1,
-                Transaction => 0,
-            );
-        }
+        next PARENTTICKETID if !$AllChildTicketsClosed;
+
+        $TicketObject->EventHandler(
+            Event => 'TicketAllChildrenClosed',
+            Data  => {
+                TicketID => $ParentTicketID,
+            },
+            UserID      => $Param{UserID},
+            Transaction => 0,
+        );
     }
 
     return 1;
