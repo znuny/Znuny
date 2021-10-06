@@ -1,4 +1,6 @@
 # 6.2.1 2021-XX-XX
+ - 2021-10-06 Sector Nord AG: Added optional check condition in TransitionActions (#144). Thanks to Sector Nord AG (@paulfolkers). [#144](https://github.com/znuny/Znuny/pull/144)
+ - 2021-10-06 Sector Nord AG: Added TransitionAction parameter placeholder (#145). Thanks to Sector Nord AG (@tjsinagowitz). [#145](https://github.com/znuny/Znuny/pull/145)
  - Added SysConfig option to enable week numbers in the datepicker widget (#89). Thanks to Renée Bäcker (@reneeb). [#89](https://github.com/znuny/Znuny/pull/89)
  - Added new autocomplete values to input fields (#67). Thanks to maxence (@tipue-dev). [#67](https://github.com/znuny/Znuny/pull/67)
  - Fixed double encoding for dynamic field filters in ticket overviews (#51). Thanks to maxence (@tipue-dev). [#51](https://github.com/znuny/Znuny/pull/51)
