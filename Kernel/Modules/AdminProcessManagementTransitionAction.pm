@@ -781,19 +781,19 @@ sub _GetDefaultConfigParameters {
     }
 
     # get TransitionAction name of full namespace e.g. 'Kernel::System::ProcessManagement::TransitionAction::TicketCreate' to 'TicketCreate'
-	    if ($Param{Module} =~ m/TransitionAction::(.+)$/) {
-	        my $TransitionAction = $1;
-	        my $Config = $Kernel::OM->Get('Kernel::Config')->Get('ProcessManagement::TransitionAction::DefaultParameters');
-	
-	        my %Settings;
-	        for my $Key ( sort keys %{ $Config } ) {
-                if (IsHashRefWithData($Config->{$Key})) {
-	                %Settings = ( %Settings, %{ $Config->{$Key} } );
-                }
-	        }
-	        return %{ $Settings{ $TransitionAction } };
-	    }
-	    return;
+    if ($Param{Module} =~ m/TransitionAction::(.+)$/) {
+        my $TransitionAction = $1;
+        my $Config = $Kernel::OM->Get('Kernel::Config')->Get('ProcessManagement::TransitionAction::DefaultParameters');
+
+        my %Settings;
+        for my $Key ( sort keys %{ $Config } ) {
+            if (IsHashRefWithData($Config->{$Key})) {
+                %Settings = ( %Settings, %{ $Config->{$Key} } );
+            }
+        }
+        return %{ $Settings{ $TransitionAction } };
+    }
+    return;
 }
 
 1;
