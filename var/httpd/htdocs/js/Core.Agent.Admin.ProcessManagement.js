@@ -83,6 +83,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
         if (Core.Config.Get('Action') === 'AdminProcessManagementPath' && Subaction !== 'ClosePopup') {
            TargetNS.InitPathEdit();
         }
+
+        // Initialize ajax call for updating default config parameter
+        TargetNS.InitDefaultConfigParameters();
     };
 
     /**
@@ -1667,7 +1670,7 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
      * @returns {Boolean} Returns false, if Config is not defined.
      * @param {Object} Config
      * @description
-     *      Update gloabl process config object after config change e.g. in popup windows.
+     *      Update global process config object after config change e.g. in popup windows.
      */
     TargetNS.UpdateConfig = function (Config) {
         if (typeof Config === 'undefined') {
@@ -1715,6 +1718,83 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             });
         }
     };
+
+    TargetNS.InitDefaultConfigParameters = function () {
+        $('#Module').on("change", function () {
+            var Module = $("#Module option:selected").val()
+            var FieldsWithValue;
+            var ConfigParameters;
+            if (!Module) {
+                return;
+            }
+
+            // alert if there is at least one field with user input
+            FieldsWithValue = $('#ConfigParams input[name*="ConfigValue"]').filter(function() { return $(this).val() !== ''; }).length;
+            if (FieldsWithValue) {
+
+                Core.UI.Dialog.ShowDialog({
+                    Title:               Core.Language.Translate('Warning'),
+                    HTML:                Core.Language.Translate('Are you sure you want to overwrite the config parameters?'),
+                    Modal:               true,
+                    CloseOnClickOutside: true,
+                    CloseOnEscape:       true,
+                    PositionTop:         '100px',
+                    PositionLeft:        'Center',
+                    Buttons: [
+                        {
+                            Label: Core.Language.Translate("Yes"),
+                            Class: 'Primary',
+                            Function: function () {
+                                ConfigParameters = TargetNS.GetDefaultConfigParameters(Module)
+                                TargetNS.SetDefaultConfigParameters(ConfigParameters)
+                                Core.UI.Dialog.CloseDialog($('.Dialog:visible'));
+                            }
+                        },
+                        {
+                            Label: Core.Language.Translate("Cancel"),
+                            Function: function () {
+                                Core.UI.Dialog.CloseDialog($('.Dialog:visible'));
+                            }
+                        }
+                    ]
+                });
+            } else {
+                ConfigParameters = TargetNS.GetDefaultConfigParameters(Module)
+                TargetNS.SetDefaultConfigParameters(ConfigParameters)
+            }
+        });
+    }
+    TargetNS.GetDefaultConfigParameters = function (Module) {
+        // do AJAX call
+        var ConfigParameters = {},
+            Data = {
+            Action:    'AdminProcessManagementTransitionAction',
+            Subaction: 'GetDefaultConfigParameters',
+            Module:    Module,
+        };
+        Core.AJAX.FunctionCallSynchronous(Core.Config.Get('CGIHandle'), Data, function (Response) {
+            ConfigParameters =  Response;
+        });
+        return ConfigParameters;
+    }
+    TargetNS.SetDefaultConfigParameters = function (ConfigParameters) {
+        if (!ConfigParameters){
+            return;
+        }
+        // delete old params
+        $('#ConfigParams > fieldset').remove();
+        // add one empty element
+        if (!Object.keys(ConfigParameters).length) {
+            $('#ConfigParams').append( $('#ConfigParamContainer').html().replace(/_INDEX_/g, 1) );
+        }
+        // insert params from config
+        $.each(Object.keys(ConfigParameters).sort(), function(Counter, Key) {
+            var $Element = $($('#ConfigParamContainer').html().replace(/_INDEX_/g, Counter + 1));
+            $Element.find('input[name*="ConfigKey"]').val(Key);
+            $Element.find('input[name*="ConfigValue"]').attr('placeholder', ConfigParameters[Key]);
+            $('#ConfigParams').append($Element);
+        });
+    }
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');
 
