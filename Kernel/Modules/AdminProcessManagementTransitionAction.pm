@@ -771,27 +771,27 @@ sub _CheckTransitionActionUsage {
 
 sub _GetDefaultConfigParameters {
     my ( $Self, %Param ) = @_;
+
+    NEEDED:
     for my $Needed (qw(Module)) {
-        next NEEDED if defined $Param{ $Needed };
+        next NEEDED if defined $Param{$Needed};
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  => 'Need '.$Needed.'!'
+            Message  => 'Need ' . $Needed . '!'
         );
         return;
     }
-
     # get TransitionAction name of full namespace e.g. 'Kernel::System::ProcessManagement::TransitionAction::TicketCreate' to 'TicketCreate'
-    if ($Param{Module} =~ m/TransitionAction::(.+)$/) {
+    if ( $Param{Module} =~ m/TransitionAction::(.+)$/ ) {
         my $TransitionAction = $1;
         my $Config = $Kernel::OM->Get('Kernel::Config')->Get('ProcessManagement::TransitionAction::DefaultParameters');
-
         my %Settings;
-        for my $Key ( sort keys %{ $Config } ) {
-            if (IsHashRefWithData($Config->{$Key})) {
+        for my $Key ( sort keys %{$Config} ) {
+            if ( IsHashRefWithData( $Config->{$Key} ) ) {
                 %Settings = ( %Settings, %{ $Config->{$Key} } );
             }
         }
-        return %{ $Settings{ $TransitionAction } };
+        return %{ $Settings{$TransitionAction} };
     }
     return;
 }
