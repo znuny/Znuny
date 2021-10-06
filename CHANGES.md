@@ -1,5 +1,6 @@
 # 6.0.38 2021-xx-xx
- - Fixed error "Can't sign: unable to write 'random state'" if sending emails signed with S/MIME. – OTRS bug #14522 (#72). Thanks to Kai Herlemann (@KaiHerlemann). [#72](https://github.com/znuny/Znuny/pull/72)
+ - 2021-10-01 Disable connecting external RSS during unit testing (#45). Thanks to Paweł Bogusławski (@pboguslawski). [#45](https://github.com/znuny/Znuny/pull/45)
+ - 2021-10-01 Fixed error "Can't sign: unable to write 'random state'" if sending emails signed with S/MIME. – OTRS bug #14522 (#72). Thanks to Kai Herlemann (@KaiHerlemann). [#72](https://github.com/znuny/Znuny/pull/72)
 
 # 6.0.37 2021-09-29
  - 2021-09-28 Removed MySQL performance check module from support data collector. It only tests for the now deprecated MySQL setting 'query_cache_size'. Thanks for the hint to GitHub user arndkeyz.
