@@ -294,8 +294,7 @@ sub DynamicFieldGet {
     }
 
     # get yaml object
-    my $YAMLObject      = $Kernel::OM->Get('Kernel::System::YAML');
-    my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
+    my $YAMLObject = $Kernel::OM->Get('Kernel::System::YAML');
 
     my %Data;
     while ( my @Data = $DBObject->FetchrowArray() ) {
