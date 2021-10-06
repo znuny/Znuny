@@ -1723,6 +1723,7 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
         $('#Module').on("change", function () {
             var Module = $("#Module option:selected").val()
             var FieldsWithValue;
+            var ConfigParameters;
             if (!Module) {
                 return;
             }
@@ -1744,7 +1745,7 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                             Label: Core.Language.Translate("Yes"),
                             Class: 'Primary',
                             Function: function () {
-                                var ConfigParameters = TargetNS.GetDefaultConfigParameters(Module)
+                                ConfigParameters = TargetNS.GetDefaultConfigParameters(Module)
                                 TargetNS.SetDefaultConfigParameters(ConfigParameters)
                                 Core.UI.Dialog.CloseDialog($('.Dialog:visible'));
                             }
@@ -1758,7 +1759,7 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                     ]
                 });
             } else {
-                var ConfigParameters = TargetNS.GetDefaultConfigParameters(Module)
+                ConfigParameters = TargetNS.GetDefaultConfigParameters(Module)
                 TargetNS.SetDefaultConfigParameters(ConfigParameters)
             }
         });
