@@ -1,16 +1,27 @@
 # 6.2.1 2021-XX-XX
  - 2021-10-06 Sector Nord AG: Added optional check condition in TransitionActions (#144). Thanks to Sector Nord AG (@paulfolkers). [#144](https://github.com/znuny/Znuny/pull/144)
  - 2021-10-06 Sector Nord AG: Added TransitionAction parameter placeholder (#145). Thanks to Sector Nord AG (@tjsinagowitz). [#145](https://github.com/znuny/Znuny/pull/145)
- - Added SysConfig option to enable week numbers in the datepicker widget (#89). Thanks to Renée Bäcker (@reneeb). [#89](https://github.com/znuny/Znuny/pull/89)
- - Added new autocomplete values to input fields (#67). Thanks to maxence (@tipue-dev). [#67](https://github.com/znuny/Znuny/pull/67)
- - Fixed double encoding for dynamic field filters in ticket overviews (#51). Thanks to maxence (@tipue-dev). [#51](https://github.com/znuny/Znuny/pull/51)
- - Fixed #107 - AgentTicketEmailOutbound "Empty subject" notification is not translated (#111). Thanks to Tronsy (@Tronsy). [#111](https://github.com/znuny/Znuny/pull/111)
- - Added initial config for Frontend::Navigation###AdminCustomerUserCustomer###001-Framework (#146). Thanks to Kevin Janssen (@BuTzZ). [#146](https://github.com/znuny/Znuny/pull/146)
- - Fixed error "Can't sign: unable to write 'random state'" if sending emails signed with S/MIME. – OTRS bug #14522 (#72). Thanks to Kai Herlemann (@KaiHerlemann). [#72](https://github.com/znuny/Znuny/pull/72)
+ - 2021-10-05 Added ticket event and event module 'TicketAllChildrenClosed' (#143). Thanks to Paul Folkers (Sector Nord AG, @paulfolkers). [#143](https://github.com/znuny/Znuny/pull/143)
+ - 2021-10-01 Added initial config for Frontend::Navigation###AdminCustomerUserCustomer###001-Framework (#146). Thanks to Kevin Janssen (@BuTzZ). [#146](https://github.com/znuny/Znuny/pull/146)
+ - 2021-10-01 Fixed error "Can't sign: unable to write 'random state'" if sending emails signed with S/MIME. – OTRS bug #14522 (#72). Thanks to Kai Herlemann (@KaiHerlemann). [#72](https://github.com/znuny/Znuny/pull/72)
+ - 2021-08-31 Added generic interface operation SessionRemove (#120). Thanks to Kevin Janssen (@BuTzZ). [#120](https://github.com/znuny/Znuny/pull/120)
+ - 2021-08-20 Added SysConfig option to enable week numbers in the datepicker widget (#89). Thanks to Renée Bäcker (@reneeb). [#89](https://github.com/znuny/Znuny/pull/89)
+ - 2021-08-20 Added new autocomplete values to input fields (#67). Thanks to maxence (@tipue-dev). [#67](https://github.com/znuny/Znuny/pull/67)
 
-# 6.1.2 2021-XX-XX
- - Fixed double encoding for dynamic field filters in ticket overviews (#51). Thanks to maxence (@tipue-dev). [#51](https://github.com/znuny/Znuny/pull/51)
- - Fixed #107 - AgentTicketEmailOutbound "Empty subject" notification is not translated (#111.) Thanks to Tronsy (@Tronsy). [#111](https://github.com/znuny/Znuny/pull/111)
+# 6.1.2 2021-09-29
+ - 2021-09-28 Added missing migration module scripts::MigrateToZnuny6_1::InitializeDefaultCronjobs.
+ - 2021-09-28 Removed MySQL performance check module from support data collector. It only tests for the now deprecated MySQL setting 'query_cache_size'. Thanks for the hint to GitHub user arndkeyz.
+ - 2021-09-27 Fixed problem with daylight saving time switch for recurrent appointments and date/time in general.
+ - 2021-09-27 JavaScript in the error message of regular expression checks for dynamic field values now will be removed instead of being executed when showing the error message. Thanks to Stefan Härter (OTOBO) for reporting the issue.
+ - 2021-09-24 Customer users with too many failed login attempts will now be set to "invalid-temporarily" and cannot log in anymore.
+ - 2021-09-14 Fixed use of undefined config value in Kernel::System::GenericInterface::Webservice::WebserviceConfigReplace.
+ - 2021-09-09 Fixed handling of database query results in Kernel::System::Ticket::_TicketGetClosed.
+ - 2021-09-01 Fixed permission check in generic interface operation User::OutOfOffice.
+ - 2021-08-31 Fixed UI hang on admin group name change (#121). Thanks to Paweł Bogusławski (@pboguslawski). [#121](https://github.com/znuny/Znuny/pull/121)
+ - 2021-08-31 Fixed storage switch only executable from main directory (#116). Thanks to maxence (@tipue-dev). [#116](https://github.com/znuny/Znuny/pull/116)
+ - 2021-08-23 Added default value for CurrentComment in ACLUpdate.
+ - 2021-08-20 Fixed double encoding for dynamic field filters in ticket overviews (#51). Thanks to maxence (@tipue-dev). [#51](https://github.com/znuny/Znuny/pull/51)
+ - 2021-08-20 Fixed #107 - AgentTicketEmailOutbound "Empty subject" notification is not translated (#111.) Thanks to Tronsy (@Tronsy). [#111](https://github.com/znuny/Znuny/pull/111)
 
 # 6.1.1 2021-08-05
  - 2021-08-03 Integrated package WebserviceNotification.
