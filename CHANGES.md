@@ -1,4 +1,6 @@
 # 6.2.1 2021-XX-XX
+ - 2021-10-06 Sector Nord AG: Added optional check condition in TransitionActions (#144). Thanks to Sector Nord AG (@paulfolkers). [#144](https://github.com/znuny/Znuny/pull/144)
+ - 2021-10-06 Sector Nord AG: Added TransitionAction parameter placeholder (#145). Thanks to Sector Nord AG (@tjsinagowitz). [#145](https://github.com/znuny/Znuny/pull/145)
  - 2021-10-05 Added ticket event and event module 'TicketAllChildrenClosed' (#143). Thanks to Paul Folkers (Sector Nord AG, @paulfolkers). [#143](https://github.com/znuny/Znuny/pull/143)
  - 2021-10-01 Added initial config for Frontend::Navigation###AdminCustomerUserCustomer###001-Framework (#146). Thanks to Kevin Janssen (@BuTzZ). [#146](https://github.com/znuny/Znuny/pull/146)
  - 2021-10-01 Fixed error "Can't sign: unable to write 'random state'" if sending emails signed with S/MIME. – OTRS bug #14522 (#72). Thanks to Kai Herlemann (@KaiHerlemann). [#72](https://github.com/znuny/Znuny/pull/72)
