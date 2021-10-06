@@ -66,6 +66,17 @@ sub _CheckParams {
         return;
     }
 
+    # Check if we have a needed attribute
+    if ( $Param{Config}->{ProcessManagementTransitionCheck} ) {
+        my $Attribute = $Param{Config}->{ProcessManagementTransitionCheck};
+        return if !$Param{Ticket}->{$Attribute};
+    }
+
+    # delete the config entry to make sure it doesn't cause errors
+    if ( exists($Param{Config}->{ProcessManagementTransitionCheck}) ) {
+        delete($Param{Config}->{ProcessManagementTransitionCheck});
+    }
+
     return 1;
 }
 
