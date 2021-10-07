@@ -345,3 +345,5 @@ OTRSSTORM.sopm
 .ssh
 .viminfo
 .bash*
+
+.idea/

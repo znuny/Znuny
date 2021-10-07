@@ -65,7 +65,12 @@
                         <div class="Clear"></div>
 
                         <label>[% Translate("Queue") | html %]:</label>
-                        <p class="Value" title="[% Data.Queue | html %]">[% Data.Queue | html | replace('::', '<wbr>::<wbr>') %]</p>
+                        <p class="Value">
+                            <a target="_blank"
+                                href="?Action=AgentTicketQueue;QueueID=[%Data.QueueID %]">
+                                    [% Data.Queue | html | replace('::', '<wbr>::<wbr>') %]
+                            </a>
+                        </p>
                         <div class="Clear"></div>
 
 [% RenderBlockStart("Service") %]
