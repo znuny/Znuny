@@ -43,6 +43,10 @@ sub Run {
             Message => 'Updating database indices',
             Module  => 'UpdateIndices',
         },
+        {
+            Message => 'Insert attachment dynamic field',
+            Module  => 'InsertProcessManagementAttachment',
+        },
     );
 
     print "\n" if $Verbose;

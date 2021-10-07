@@ -51,6 +51,7 @@ sub new {
         ResponsibleID  => 'ResponsibleID',
         PendingTime    => 'PendingTime',
         Article        => 'Article',
+        Attachments    => 'Attachments',
     };
 
     return $Self;
@@ -394,7 +395,7 @@ sub Run {
         );
     }
 
-    # if invalid process is detected on a ActivityDilog pop-up screen show an error message
+    # if invalid process is detected on an ActivityDialog pop-up screen show an error message
     elsif (
         $Self->{Subaction} eq 'DisplayActivityDialog'
         && !$FollowupProcessList->{$ProcessEntityID}
@@ -1082,6 +1083,15 @@ sub _GetParam {
             next DIALOGFIELD;
         }
 
+        # get Attachment fields
+        if ($CurrentField eq 'Attachments') {
+            @{$GetParam{Attachments}} = $ParamObject->GetArray(
+                Param => 'Attachments',
+            );
+
+            next DIALOGFIELD;
+        }
+
         # get article fields
         if ( $CurrentField eq 'Article' ) {
 
@@ -1727,7 +1737,39 @@ sub _OutputActivityDialog {
             $RenderedFields{$CurrentField} = 1;
 
         }
+        # render Attachments
+        elsif ($CurrentField eq 'Attachments' && $TicketID) {
+            next DIALOGFIELD if $RenderedFields{ $CurrentField };
 
+            my $Response = $Self->_RenderAttachments(
+                ActivityDialogField => $ActivityDialog->{Fields}{$CurrentField},
+                FieldName           => $CurrentField,
+                DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
+                DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
+                Ticket              => \%Ticket || {},
+                Error               => \%Error || {},
+                FormID              => $Self->{FormID},
+                GetParam            => $Param{GetParam},
+                AJAXUpdatableFields => $AJAXUpdatableFields,
+            );
+
+            if ( !$Response->{Success} ) {
+
+                # does not show header and footer again
+                if ( $Self->{IsMainWindow} ) {
+                    return $LayoutObject->Error(
+                        Message => $Response->{Message},
+                    );
+                }
+
+                $LayoutObject->FatalError(
+                    Message => $Response->{Message},
+                );
+            }
+
+            $Output .= $Response->{HTML};
+            $RenderedFields{ $CurrentField } = 1;
+        }
         # render State
         elsif ( $Self->{NameToID}->{$CurrentField} eq 'StateID' )
         {
@@ -4191,6 +4233,106 @@ sub _RenderQueue {
     };
 }
 
+sub _RenderAttachments {
+    my ($Self, %Param) = @_;
+
+    # get layout object
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    for my $Needed (qw(FormID)) {
+        if (!$Param{$Needed}) {
+            return {
+                Success => 0,
+                Message => $LayoutObject->{LanguageObject}
+                    ->Translate('Parameter %s is missing in %s.', $Needed, '_RenderAttachments'),
+            };
+        }
+    }
+    if (!IsHashRefWithData($Param{ActivityDialogField})) {
+        return {
+            Success => 0,
+            Message => $LayoutObject->{LanguageObject}
+                ->Translate('Parameter %s is missing in %s.', 'ActivityDialogField', '_RenderAttachments'),
+        };
+    }
+
+    my $AttachmentList = $Self->_GetAttachments(%{$Param{GetParam}});
+
+    my %Data = (
+        Label            => $LayoutObject->{LanguageObject}->Translate("Attachments for subtickets"),
+        FieldID          => 'Attachments',
+        FormID           => $Param{FormID},
+        MandatoryClass   => '',
+        ValidateRequired => '',
+    );
+
+    # If field is required put in the necessary variables for
+    # ValidateRequired class input field, Mandatory class for the label
+    if ($Param{ActivityDialogField}->{Display} && $Param{ActivityDialogField}->{Display} == 2) {
+        $Data{ValidateRequired} = 'Validate_Required';
+        $Data{MandatoryClass} = 'Mandatory';
+    }
+
+    my $DFAttachmentsName = $ConfigObject->Get('Process::DynamicFieldProcessManagementAttachment');
+
+    my $AttachmentsParam = $Param{GetParam}->{$DFAttachmentsName};
+    my @SelectedAttachments;
+    if ($AttachmentsParam) {
+        @SelectedAttachments = split(',', $AttachmentsParam);
+    }
+
+    # build next states string
+    $Data{Content} = $LayoutObject->BuildSelection(
+        Data        => $AttachmentList,
+        Name        => 'Attachments',
+        Translation => 0,
+        SelectedID  => \@SelectedAttachments,
+        Multiple    => 1,
+        Class       => "Modernize",
+    );
+
+    $LayoutObject->Block(
+        Name => $Param{ActivityDialogField}->{LayoutBlock} || 'rw:Attachment',
+        Data => \%Data,
+    );
+
+    # set mandatory label marker
+    if ($Data{MandatoryClass} && $Data{MandatoryClass} ne '') {
+        $LayoutObject->Block(
+            Name => 'LabelSpan',
+            Data => {},
+        );
+    }
+
+    if ( !$Param{DescriptionShort} ) {
+        $Param{DescriptionShort} = $ConfigObject->Get('Process::ActivityDialogDescriptionShort::Attachments');
+    }
+
+    if ( $Param{DescriptionShort} ) {
+        $LayoutObject->Block(
+            Name => $Param{ActivityDialogField}->{LayoutBlock} || 'rw:Attachment:DescriptionShort',
+            Data => {
+                DescriptionShort => $Param{DescriptionShort},
+            },
+        );
+    }
+
+    if ( $Param{DescriptionLong} ) {
+        $LayoutObject->Block(
+            Name => 'rw:Attachment:DescriptionLong',
+            Data => {
+                DescriptionLong => $Param{DescriptionLong},
+            },
+        );
+    }
+
+    return {
+        Success => 1,
+        HTML    => $LayoutObject->Output(TemplateFile => 'ProcessManagement/Attachment'),
+    };
+}
+
 sub _RenderState {
     my ( $Self, %Param ) = @_;
 
@@ -4497,6 +4639,9 @@ sub _StoreActivityDialog {
     # get layout object
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
+    # get config object
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
     my $ActivityDialogEntityID = $Param{GetParam}->{ActivityDialogEntityID};
     if ( !$ActivityDialogEntityID ) {
         $LayoutObject->FatalError(
@@ -4689,6 +4834,9 @@ sub _StoreActivityDialog {
 
             # skip if we've already checked ID or Name
             next DIALOGFIELD if $CheckedFields{ $Self->{NameToID}->{$CurrentField} };
+
+            next DIALOGFIELD if ($CurrentField eq 'Attachments');
+
 
             my $Result = $Self->_CheckField(
                 Field => $Self->{NameToID}->{$CurrentField},
@@ -5018,9 +5166,6 @@ sub _StoreActivityDialog {
             );
         }
 
-        # get config object
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
         $ActivityEntityID = $Ticket{
             'DynamicField_'
                 . $ConfigObject->Get('Process::DynamicFieldProcessManagementActivityID')
@@ -5146,7 +5291,41 @@ sub _StoreActivityDialog {
                 );
             }
         }
-        elsif ( $CurrentField eq 'PendingTime' ) {
+        elsif ($CurrentField eq 'Attachments') {
+            if (IsArrayRefWithData($Param{GetParam}{Attachments}) || $Param{GetParam}{Attachments} =~ /\:\:/) {
+
+                my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+                my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
+                    Name => $ConfigObject->Get('Process::DynamicFieldProcessManagementAttachment'),
+                );
+
+                my $Value;
+                if (IsArrayRefWithData($Param{GetParam}{Attachments})) {
+                    $Value = join(",", @{$Param{GetParam}{Attachments}});
+                }
+                else {
+                    $Value = $Param{GetParam}{Attachments} || "";
+                }
+
+                my $Success = $DynamicFieldBackendObject->ValueSet(
+                    DynamicFieldConfig => $DynamicFieldConfig,
+                    ObjectID           => $TicketID,
+                    Value              => $Value,
+                    UserID             => $Self->{UserID},
+                );
+
+                if (!$Success) {
+                    $LayoutObject->FatalError(
+                        Message => $LayoutObject->{LanguageObject}->Translate(
+                            'Could not set Attachments for Ticket with ID "%s" in ActivityDialog "%s"!',
+                            $TicketID,
+                            $ActivityDialogEntityID,
+                        ),
+                    );
+                }
+            }
+        }
+        elsif ($CurrentField eq 'PendingTime') {
 
             # This Value is just set if Status was on a Pending state
             # so it has to be possible to store the ticket if this one's empty
@@ -5370,6 +5549,8 @@ sub _StoreActivityDialog {
             }
             else {
                 next DIALOGFIELD if $StoredFields{ $Self->{NameToID}->{$CurrentField} };
+
+                next DIALOGFIELD if ($CurrentField eq 'Attachments');
 
                 my $TicketFieldSetSub = $CurrentField;
                 $TicketFieldSetSub =~ s{ID$}{}xms;
@@ -6286,6 +6467,44 @@ sub _GetQueues {
     }
 
     return \%NewQueues;
+}
+
+sub _GetAttachments {
+    my ($Self, %Param) = @_;
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+    my @Articles = $ArticleObject->ArticleList(
+        TicketID => $Param{TicketID},
+    );
+
+    my %ArticleFileData;
+    for my $Article (@Articles) {
+        my $BackendObject = $ArticleObject->BackendForArticle(
+            TicketID  => $Param{TicketID},
+            ArticleID => $Article->{ArticleID},
+        );
+
+        my %Index = $BackendObject->ArticleAttachmentIndex(
+            ArticleID        => $Article->{ArticleID},
+            ExcludePlainText => 1,
+            ExcludeHTMLBody  => 1,
+            ExcludeInline    => 0,
+        );
+
+        if (%Index) {
+            for my $FileID (keys %Index) {
+                my $SelectionText = $LayoutObject->{LanguageObject}->Translate('Article')
+                    . ': ' . "$Article->{ArticleNumber}" . " --> "
+                    . $LayoutObject->{LanguageObject}->Translate('Attachment')
+                    . ": '$Index{$FileID}->{Filename}'";
+
+                # SelectionText results in  something like: "Article: 2 --> Attachment: 'testfile.pdf'"
+                $ArticleFileData{$FileID . "::" . $Article->{ArticleID}} = $SelectionText;
+            }
+        }
+    }
+
+    return \%ArticleFileData;
 }
 
 sub _GetStates {
