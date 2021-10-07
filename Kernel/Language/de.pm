@@ -1719,6 +1719,10 @@ sub Data {
         'Is visible for customer' => 'Ist sichtbar für Kunde',
         'Display' => 'Anzeige',
 
+        # ProcessManagement/Attachment
+        'Attachments for subtickets' => 'Anhänge für Subtickets',
+        'Attachments to be propagated to a subticket on creation.' => 'Ausgewählte Anhänge werden bei der Erstellung eines Subtickets übergeben.',
+
         # Template: AdminProcessManagementPath
         'Path' => 'Pfad',
         'Edit this transition' => 'Diesen Übergang bearbeiten',
