@@ -398,20 +398,6 @@
             <Item ValueType="String" ValueRegex="">ProcessManagementActivityID</Item>
         </Value>
     </Setting>
-    <Setting Name="Process::DynamicFieldProcessManagementAttachment" Required="1" Valid="1">
-        <Description Translatable="1">This option defines the name of the dynamic field in which the Attachment File IDs of the TicketCreateAttachment Transition should be stored.</Description>
-        <Navigation>Core::ProcessManagement</Navigation>
-        <Value>
-            <Item ValueType="String" ValueRegex="">ProcessManagementAttachment</Item>
-        </Value>
-    </Setting>
-    <Setting Name="Process::ActivityDialogDescriptionShort::Attachments" Required="0" Valid="1">
-        <Description Translatable="1">Default description (short) in activity dialogs for field Attachments.</Description>
-        <Navigation>Core::ProcessManagement</Navigation>
-        <Value>
-            <Item ValueType="String" ValueRegex="" Translatable="1">Attachments to be propagated to a subticket on creation.</Item>
-        </Value>
-    </Setting>
     <Setting Name="Process::DefaultQueue" Required="1" Valid="1">
         <Description Translatable="1">This option defines the process tickets default queue.</Description>
         <Navigation>Core::ProcessManagement</Navigation>

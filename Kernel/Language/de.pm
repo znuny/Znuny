@@ -36,6 +36,14 @@ sub Data {
 
         "Triggers event 'TicketAllChildrenClosed' if all child tickets of a parent ticket have been closed/merged/removed."
             => "Löst Event 'TicketAllChildrenClosed' aus, wenn alle Kind-Tickets eines Eltern-Tickets den Status geschlossen/gemergt/entfernt erreicht haben.",
+        'Name of the dynamic field in which the attachment file IDs of the transition will be stored.'
+            => 'Name des dynamischen Felds, in dem die Datei-IDs der Anhänge der Transition gespeichert werden.',
+        'Keep dynamic field attachments after each transition.'
+            => 'Anhänge in dynamischem Feld nach jeder Transition beibehalten.',
+        'Format string for output of attachments in the selection list. "%1$d": article number; "%2$s": filename; "%3$s": translated object type (e.g. Article => Artikel); "%4$s": translated attachment label (e.g. "Anhang").'
+            => 'Formatierter String zur Ausgabe der Anhänge in Auswahllisten. "%1$d": Artikelnummer; "%2$s": Dateiname; "%3$s": übersetzter Objekttyp (z. B. Article => Artikel); "%4$s": übersetztes Anhang-Label (z. B. "Anhang").',
+        'Could not set attachments for ticket with ID %s in activity dialog "%s"!'
+            => 'Anhänge für Ticket mit ID %s konnten in Aktivitätsdialog "%s" nicht gesetzt werden!',
 
         # Template: AdminACL
         'ACL Management' => 'ACL-Verwaltung',
@@ -6748,7 +6756,7 @@ Ihr Helpdesk-Team
         'Defines the default front-end language. All the possible values are determined by the available language files on the system (see the next setting).' =>
             'Definiert die Standard-Frontend-Sprache. Die möglichen Werte werden durch die verfügbaren Sprachdateien auf dem System bestimmt (siehe nächste Einstellung).',
         'Defines the default history type in the customer interface.' => 'Definiert den Standard-Historientyp im Kunden-Interface.',
-        'Defines the default keys and values for the transition action module parameters. Mandatory fields are marked with "(* required)". Note: For most of the keys the AttributeID can also be used, e.g. "Owner" can be "OwnerID". Keys that define the same Attribute should only be used once, e.g. "Owner" and "OwnerID" are redundant.' => 
+        'Defines the default keys and values for the transition action module parameters. Mandatory fields are marked with "(* required)". Note: For most of the keys the AttributeID can also be used, e.g. "Owner" can be "OwnerID". Keys that define the same Attribute should only be used once, e.g. "Owner" and "OwnerID" are redundant.' =>
         'Definiert die vorausgewählten Schlüssel und Werte für die Konfigurations-Parameter bei den Übergangs-Aktionen. Notiz: Für die meisten Schlüssel können ebenfalls die AttributIDs genutzt werden, z.B. anstatt "Owner" kann "OwnerID" genutzt werden. Dabei sollten Schlüssel, die das gleiche Attribut beschreiben, nur einmal genutzt werden, z.B. wären "Owner" und "OwnerID" redundant.',
         'Defines the default maximum number of X-axis attributes for the time scale.' =>
             'Definiert die standardmäßig eingestellte maximale Anzahl von Attributen für die x-Achse für die Zeitachse.',

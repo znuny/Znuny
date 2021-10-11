@@ -1083,12 +1083,11 @@ sub _GetParam {
             next DIALOGFIELD;
         }
 
-        # get Attachment fields
-        if ($CurrentField eq 'Attachments') {
-            @{$GetParam{Attachments}} = $ParamObject->GetArray(
+        # get attachment fields
+        if ( $CurrentField eq 'Attachments' ) {
+            @{ $GetParam{Attachments} } = $ParamObject->GetArray(
                 Param => 'Attachments',
             );
-
             next DIALOGFIELD;
         }
 
@@ -1710,8 +1709,8 @@ sub _OutputActivityDialog {
                 FieldName           => $DynamicFieldName,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 ErrorMessages       => \%ErrorMessages || {},
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
@@ -1737,17 +1736,18 @@ sub _OutputActivityDialog {
             $RenderedFields{$CurrentField} = 1;
 
         }
-        # render Attachments
-        elsif ($CurrentField eq 'Attachments' && $TicketID) {
-            next DIALOGFIELD if $RenderedFields{ $CurrentField };
 
-            my $Response = $Self->_RenderAttachments(
-                ActivityDialogField => $ActivityDialog->{Fields}{$CurrentField},
+        # render Attachments
+        elsif ( $CurrentField eq 'Attachments' && $TicketID ) {
+            next DIALOGFIELD if $RenderedFields{$CurrentField};
+
+            my $Response = $Self->_RenderAttachment(
+                ActivityDialogField => $ActivityDialog->{Fields}->{$CurrentField},
                 FieldName           => $CurrentField,
-                DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
-                DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                DescriptionShort    => $ActivityDialog->{Fields}->{$CurrentField}->{DescriptionShort},
+                DescriptionLong     => $ActivityDialog->{Fields}->{$CurrentField}->{DescriptionLong},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -1768,8 +1768,9 @@ sub _OutputActivityDialog {
             }
 
             $Output .= $Response->{HTML};
-            $RenderedFields{ $CurrentField } = 1;
+            $RenderedFields{$CurrentField} = 1;
         }
+
         # render State
         elsif ( $Self->{NameToID}->{$CurrentField} eq 'StateID' )
         {
@@ -1783,8 +1784,8 @@ sub _OutputActivityDialog {
                 FieldName           => $CurrentField,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -1819,8 +1820,8 @@ sub _OutputActivityDialog {
                 FieldName           => $CurrentField,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -1855,8 +1856,8 @@ sub _OutputActivityDialog {
                 FieldName           => $CurrentField,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -1890,8 +1891,8 @@ sub _OutputActivityDialog {
                 FieldName           => $CurrentField,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -1925,8 +1926,8 @@ sub _OutputActivityDialog {
                 FieldName           => $CurrentField,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -1960,8 +1961,8 @@ sub _OutputActivityDialog {
                 FieldName           => $CurrentField,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -1995,8 +1996,8 @@ sub _OutputActivityDialog {
                 FieldName           => $CurrentField,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -2030,8 +2031,8 @@ sub _OutputActivityDialog {
                 FieldName           => $CurrentField,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -2065,8 +2066,8 @@ sub _OutputActivityDialog {
                 FieldName           => $CurrentField,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -2119,8 +2120,8 @@ sub _OutputActivityDialog {
                 FieldName           => $CurrentField,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
             );
@@ -2153,8 +2154,8 @@ sub _OutputActivityDialog {
                 FieldName           => $CurrentField,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
             );
@@ -2187,8 +2188,8 @@ sub _OutputActivityDialog {
                 FieldName           => $CurrentField,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 InformAgents        => $ActivityDialog->{Fields}->{Article}->{Config}->{InformAgents},
@@ -2225,8 +2226,8 @@ sub _OutputActivityDialog {
                 FieldName           => $CurrentField,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket,
+                Error               => \%Error,
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -4233,90 +4234,87 @@ sub _RenderQueue {
     };
 }
 
-sub _RenderAttachments {
-    my ($Self, %Param) = @_;
+sub _RenderAttachment {
+    my ( $Self, %Param ) = @_;
 
-    # get layout object
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-    for my $Needed (qw(FormID)) {
-        if (!$Param{$Needed}) {
-            return {
-                Success => 0,
-                Message => $LayoutObject->{LanguageObject}
-                    ->Translate('Parameter %s is missing in %s.', $Needed, '_RenderAttachments'),
-            };
-        }
-    }
-    if (!IsHashRefWithData($Param{ActivityDialogField})) {
+    NEEDED:
+    for my $Needed (qw(FormID ActivityDialogField)) {
+        next NEEDED if defined $Param{$Needed};
         return {
             Success => 0,
             Message => $LayoutObject->{LanguageObject}
-                ->Translate('Parameter %s is missing in %s.', 'ActivityDialogField', '_RenderAttachments'),
+                ->Translate( 'Parameter %s is missing in %s.', $Needed, '_RenderAttachment' ),
         };
     }
 
-    my $AttachmentList = $Self->_GetAttachments(%{$Param{GetParam}});
+    if ( !IsHashRefWithData( $Param{ActivityDialogField} ) ) {
+        return {
+            Success => 0,
+            Message => $LayoutObject->{LanguageObject}
+                ->Translate( 'Parameter %s is missing in %s.', 'ActivityDialogField', '_RenderAttachment' ),
+        };
+    }
+
+    my $AttachmentList = $Self->_GetAttachments(
+        %{ $Param{GetParam} }
+    );
 
     my %Data = (
-        Label            => $LayoutObject->{LanguageObject}->Translate("Attachments for subtickets"),
+        Label            => 'Attachments',
         FieldID          => 'Attachments',
         FormID           => $Param{FormID},
         MandatoryClass   => '',
         ValidateRequired => '',
     );
 
-    # If field is required put in the necessary variables for
-    # ValidateRequired class input field, Mandatory class for the label
-    if ($Param{ActivityDialogField}->{Display} && $Param{ActivityDialogField}->{Display} == 2) {
+    if (
+        $Param{ActivityDialogField}->{Display}
+        && $Param{ActivityDialogField}->{Display} == 2
+        )
+    {
         $Data{ValidateRequired} = 'Validate_Required';
-        $Data{MandatoryClass} = 'Mandatory';
+        $Data{MandatoryClass}   = 'Mandatory';
     }
 
-    my $DFAttachmentsName = $ConfigObject->Get('Process::DynamicFieldProcessManagementAttachment');
+    my $AttachmentsDynamicFieldName = $ConfigObject->Get('Process::DynamicFieldProcessManagementAttachment');
 
-    my $AttachmentsParam = $Param{GetParam}->{$DFAttachmentsName};
+    my $AttachmentsParam = $Param{GetParam}->{ 'DynamicField_' . $AttachmentsDynamicFieldName };
     my @SelectedAttachments;
     if ($AttachmentsParam) {
-        @SelectedAttachments = split(',', $AttachmentsParam);
+        @SelectedAttachments = split( ',', $AttachmentsParam );
     }
 
-    # build next states string
     $Data{Content} = $LayoutObject->BuildSelection(
         Data        => $AttachmentList,
         Name        => 'Attachments',
         Translation => 0,
         SelectedID  => \@SelectedAttachments,
         Multiple    => 1,
-        Class       => "Modernize",
+        Class       => "Modernize $Data{ValidateRequired}",
     );
 
     $LayoutObject->Block(
-        Name => $Param{ActivityDialogField}->{LayoutBlock} || 'rw:Attachment',
+        Name => $Param{ActivityDialogField}->{LayoutBlock} // 'rw:Attachment',
         Data => \%Data,
     );
 
-    # set mandatory label marker
-    if ($Data{MandatoryClass} && $Data{MandatoryClass} ne '') {
+    if ( $Data{MandatoryClass} && $Data{MandatoryClass} ne '' ) {
         $LayoutObject->Block(
             Name => 'LabelSpan',
-            Data => {},
         );
     }
 
-    if ( !$Param{DescriptionShort} ) {
-        $Param{DescriptionShort} = $ConfigObject->Get('Process::ActivityDialogDescriptionShort::Attachments');
-    }
+    $Param{DescriptionShort} //= 'Attachments to be propagated to a subticket on creation.';
 
-    if ( $Param{DescriptionShort} ) {
-        $LayoutObject->Block(
-            Name => $Param{ActivityDialogField}->{LayoutBlock} || 'rw:Attachment:DescriptionShort',
-            Data => {
-                DescriptionShort => $Param{DescriptionShort},
-            },
-        );
-    }
+    $LayoutObject->Block(
+        Name => $Param{ActivityDialogField}->{LayoutBlock} // 'rw:Attachment:DescriptionShort',
+        Data => {
+            DescriptionShort => $Param{DescriptionShort},
+        },
+    );
 
     if ( $Param{DescriptionLong} ) {
         $LayoutObject->Block(
@@ -4329,7 +4327,7 @@ sub _RenderAttachments {
 
     return {
         Success => 1,
-        HTML    => $LayoutObject->Output(TemplateFile => 'ProcessManagement/Attachment'),
+        HTML    => $LayoutObject->Output( TemplateFile => 'ProcessManagement/Attachment' ),
     };
 }
 
@@ -4636,10 +4634,7 @@ sub _StoreActivityDialog {
 
     my %TicketParam;
 
-    # get layout object
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-
-    # get config object
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     my $ActivityDialogEntityID = $Param{GetParam}->{ActivityDialogEntityID};
@@ -4835,8 +4830,7 @@ sub _StoreActivityDialog {
             # skip if we've already checked ID or Name
             next DIALOGFIELD if $CheckedFields{ $Self->{NameToID}->{$CurrentField} };
 
-            next DIALOGFIELD if ($CurrentField eq 'Attachments');
-
+            next DIALOGFIELD if $CurrentField eq 'Attachments';
 
             my $Result = $Self->_CheckField(
                 Field => $Self->{NameToID}->{$CurrentField},
@@ -5291,20 +5285,28 @@ sub _StoreActivityDialog {
                 );
             }
         }
-        elsif ($CurrentField eq 'Attachments') {
-            if (IsArrayRefWithData($Param{GetParam}{Attachments}) || $Param{GetParam}{Attachments} =~ /\:\:/) {
-
+        elsif ( $CurrentField eq 'Attachments' ) {
+            if (
+                IsArrayRefWithData( $Param{GetParam}->{Attachments} )
+                || $Param{GetParam}->{Attachments} =~ m{\:\:}
+                )
+            {
                 my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+                my $AttachmentsDynamicFieldName
+                    = $ConfigObject->Get('Process::DynamicFieldProcessManagementAttachment');
+
                 my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
-                    Name => $ConfigObject->Get('Process::DynamicFieldProcessManagementAttachment'),
+                    Name => $AttachmentsDynamicFieldName,
                 );
 
+                next DIALOGFIELD if !IsHashRefWithData($DynamicFieldConfig);
+
                 my $Value;
-                if (IsArrayRefWithData($Param{GetParam}{Attachments})) {
-                    $Value = join(",", @{$Param{GetParam}{Attachments}});
+                if ( IsArrayRefWithData( $Param{GetParam}->{Attachments} ) ) {
+                    $Value = join ',', @{ $Param{GetParam}->{Attachments} };
                 }
                 else {
-                    $Value = $Param{GetParam}{Attachments} || "";
+                    $Value = $Param{GetParam}->{Attachments} // '';
                 }
 
                 my $Success = $DynamicFieldBackendObject->ValueSet(
@@ -5313,19 +5315,18 @@ sub _StoreActivityDialog {
                     Value              => $Value,
                     UserID             => $Self->{UserID},
                 );
+                next DIALOGFIELD if $Success;
 
-                if (!$Success) {
-                    $LayoutObject->FatalError(
-                        Message => $LayoutObject->{LanguageObject}->Translate(
-                            'Could not set Attachments for Ticket with ID "%s" in ActivityDialog "%s"!',
-                            $TicketID,
-                            $ActivityDialogEntityID,
-                        ),
-                    );
-                }
+                $LayoutObject->FatalError(
+                    Message => $LayoutObject->{LanguageObject}->Translate(
+                        'Could not set attachments for ticket with ID %s in activity dialog "%s"!',
+                        $TicketID,
+                        $ActivityDialogEntityID,
+                    ),
+                );
             }
         }
-        elsif ($CurrentField eq 'PendingTime') {
+        elsif ( $CurrentField eq 'PendingTime' ) {
 
             # This Value is just set if Status was on a Pending state
             # so it has to be possible to store the ticket if this one's empty
@@ -5549,8 +5550,7 @@ sub _StoreActivityDialog {
             }
             else {
                 next DIALOGFIELD if $StoredFields{ $Self->{NameToID}->{$CurrentField} };
-
-                next DIALOGFIELD if ($CurrentField eq 'Attachments');
+                next DIALOGFIELD if $CurrentField eq 'Attachments';
 
                 my $TicketFieldSetSub = $CurrentField;
                 $TicketFieldSetSub =~ s{ID$}{}xms;
@@ -6470,37 +6470,61 @@ sub _GetQueues {
 }
 
 sub _GetAttachments {
-    my ($Self, %Param) = @_;
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+    my $LayoutObject  = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+
     my @Articles = $ArticleObject->ArticleList(
         TicketID => $Param{TicketID},
     );
 
     my %ArticleFileData;
-    for my $Article (@Articles) {
-        my $BackendObject = $ArticleObject->BackendForArticle(
-            TicketID  => $Param{TicketID},
-            ArticleID => $Article->{ArticleID},
-        );
 
-        my %Index = $BackendObject->ArticleAttachmentIndex(
+    return \%ArticleFileData if !@Articles;
+
+    my $FormatString = $ConfigObject->Get('Process::DynamicFieldProcessManagementAttachment::FormatString')
+        // 'A#%1$d: %2$s';
+
+    my $TranslatedObjectType      = $LayoutObject->{LanguageObject}->Translate('Article');
+    my $TranslatedAttachmentLabel = $LayoutObject->{LanguageObject}->Translate('Attachment');
+
+    ARTICLE:
+    for my $Article (@Articles) {
+        my %Index = $ArticleObject->ArticleAttachmentIndex(
+            TicketID         => $Param{TicketID},
             ArticleID        => $Article->{ArticleID},
             ExcludePlainText => 1,
             ExcludeHTMLBody  => 1,
             ExcludeInline    => 0,
         );
 
-        if (%Index) {
-            for my $FileID (keys %Index) {
-                my $SelectionText = $LayoutObject->{LanguageObject}->Translate('Article')
-                    . ': ' . "$Article->{ArticleNumber}" . " --> "
-                    . $LayoutObject->{LanguageObject}->Translate('Attachment')
-                    . ": '$Index{$FileID}->{Filename}'";
+        next ARTICLE if !%Index;
 
-                # SelectionText results in  something like: "Article: 2 --> Attachment: 'testfile.pdf'"
-                $ArticleFileData{$FileID . "::" . $Article->{ArticleID}} = $SelectionText;
-            }
+        for my $FileID ( sort keys %Index ) {
+
+            # SelectionText results in something like: "#2: testfile.pdf"
+            # $FormatString = '#%1$d: %2$s'
+            my $SelectionText = sprintf $FormatString, $Article->{ArticleNumber}, $Index{$FileID}->{Filename},
+                $TranslatedObjectType, $TranslatedAttachmentLabel;
+
+            # Create a stringified structure to use data as key in HTML selection.
+            # This info is needed to get the correct attachment from the backend.
+            #
+            # Stringified structure
+            # 'ObjectType=Article;ObjectID=1;ID=5'
+            # 'ObjectType=Article;ObjectID=1;ID=5,ObjectType=Article;ObjectID=3;ID=2'
+            #
+            # Parsed stringified structure
+            # Data = {
+            #     ObjectType => 'Article',
+            #     ObjectID   => '1',
+            #     ID         => '4',
+            # }
+
+            my $Key = 'ObjectType=Article;ObjectID=' . $Article->{ArticleID} . ';ID=' . $FileID;
+            $ArticleFileData{$Key} = $SelectionText;
         }
     }
 
