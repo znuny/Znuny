@@ -35,6 +35,8 @@ sub Data {
     $Self->{Translation} = {
 
         'Operator' => 'Operator',
+        'Keep XML attributes' => 'XML-Attribute beibehalten',
+        'Only needed for content type XML.' => 'Nur für Content-Type XML benötigt.',
         "Triggers event 'TicketAllChildrenClosed' if all child tickets of a parent ticket have been closed/merged/removed."
             => "Löst Event 'TicketAllChildrenClosed' aus, wenn alle Kind-Tickets eines Eltern-Tickets den Status geschlossen/gemergt/entfernt erreicht haben.",
         'Name of the dynamic field in which the attachment file IDs of the transition will be stored.'

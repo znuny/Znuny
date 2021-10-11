@@ -298,14 +298,17 @@ sub Map {
         $ForceArray = \@ForceArrayTags;
     }
 
+    my $KeepAttributes = $Config->{KeepAttributes};
+
     my $ReturnData;
     eval {
         $ReturnData = $XMLSimple->XMLin(
             $XMLPost,
-            ForceArray => $ForceArray,
-            ContentKey => '-content',
-            NoAttr     => 1,
-            KeyAttr    => [],
+            ForceArray   => $ForceArray,
+            ContentKey   => '-content',
+            NoAttr       => $KeepAttributes ? 0 : 1,
+            ForceContent => $KeepAttributes ? 1 : 0,
+            KeyAttr      => [],
         );
     };
     if ( !$ReturnData ) {
