@@ -101,7 +101,7 @@ sub new {
             TimeUnit => 123
 
             # Attachment optional:
-            Attachments => '1'                                          # (1|y|yes) not required
+            Attachments => '1'                                          #  optional, 1|0
 
             # other:
             DynamicField_NameX => $Value,
@@ -121,8 +121,6 @@ sub new {
 
 sub Run {
     my ( $Self, %Param ) = @_;
-
-    my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
 
     # define a common message to output in case of any error
     my $CommonMessage = "Process: $Param{ProcessEntityID} Activity: $Param{ActivityEntityID}"
@@ -260,10 +258,6 @@ sub Run {
         }
     }
 
-    # get dynamic field objects
-    my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
-    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
-
     $Param{Config}->{CommunicationChannel} ||= 'Internal';
 
     # check if article can be created
@@ -299,51 +293,8 @@ sub Run {
         );
 
         # check for selected Attachments
-        if ( $Param{Config}->{Attachments} =~ m/^(?:1|yes|y)$/i ) {
-            my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
-                Name => $ConfigObject->Get('Process::DynamicFieldProcessManagementAttachment'),
-            );
-
-            my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
-            my $Value = $DynamicFieldBackendObject->ValueGet(
-                DynamicFieldConfig => $DynamicFieldConfig,
-                ObjectID           => $Param{Ticket}->{TicketID},
-            );
-
-            # If attachments are selected, then from the AgentTicketProcess#6531 / Sub:_GetAttachments()
-            # the following comma-separated key-value pairs ('::'-separated) will be contained in $Value, which must be 2::197,5::197',
-            # where the preceding key is the AttachmentID and the value is the ArticleID
-            my @SelectedAttachments;
-            $Param{Config}->{Attachment} = [];
-            if ( IsStringWithData($Value) ) {
-                @SelectedAttachments = split(',', $Value);
-            }
-
-            my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
-
-            for my $Entry (@SelectedAttachments) {
-                my ($FileID, $ArticleID) = $Entry =~ m/^(\d+)\:\:(\d+)$/;
-
-                my $TempArticleBackendObject = $ArticleObject->BackendForArticle(
-                    TicketID  => $Param{Ticket}->{TicketID},
-                    ArticleID => $ArticleID
-                );
-                my %Attachment = $TempArticleBackendObject->ArticleAttachment(
-                    ArticleID => $ArticleID,
-                    FileID    => $FileID,
-                );
-                if (%Attachment) {
-                    push @{$Param{Config}->{Attachment}}, \%Attachment;
-                }
-            }
-
-            # clear special field
-            my $Success = $DynamicFieldBackendObject->ValueSet(
-                DynamicFieldConfig => $DynamicFieldConfig,
-                ObjectID           => $Param{Ticket}->{TicketID},
-                Value              => '',
-                UserID             => 1,
-            );
+        if ( $Param{Config}->{Attachments} ) {
+            $Param{Config}->{Attachments} = $Self->_GetAttachments(%Param);
         }
 
         # Create article for the new ticket.
@@ -384,6 +335,9 @@ sub Run {
             $FieldFilter{$1} = 1;
         }
     }
+
+    my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
     # get the dynamic fields for ticket
     my $DynamicFieldList = $DynamicFieldObject->DynamicFieldListGet(

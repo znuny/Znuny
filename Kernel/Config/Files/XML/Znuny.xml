@@ -1161,4 +1161,29 @@
         </Value>
     </Setting>
 
+    <!--
+        Dynamic field attachment for process management.
+    -->
+    <Setting Name="Process::DynamicFieldProcessManagementAttachment" Required="1" Valid="1">
+        <Description Translatable="1">Name of the dynamic field in which the attachment file IDs of the transition will be stored.</Description>
+        <Navigation>Core::ProcessManagement</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">ProcessManagementAttachment</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Process::DynamicFieldProcessManagementAttachment::Keep" Required="1" Valid="1">
+        <Description Translatable="1">Keep dynamic field attachments after each transition.</Description>
+        <Navigation>Core::ProcessManagement</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Process::DynamicFieldProcessManagementAttachment::FormatString" Required="1" Valid="1">
+        <Description Translatable="1">Format string for output of attachments in the selection list. "%1$d": article number; "%2$s": filename; "%3$s": translated object type (e.g. Article => Artikel); "%4$s": translated attachment label (e.g. "Anhang").</Description>
+        <Navigation>Core::ProcessManagement</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">%3$s#%1$d: %2$s</Item>
+        </Value>
+    </Setting>
+
 </otrs_config>

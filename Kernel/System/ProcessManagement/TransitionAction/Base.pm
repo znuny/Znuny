@@ -73,11 +73,133 @@ sub _CheckParams {
     }
 
     # delete the config entry to make sure it doesn't cause errors
-    if ( exists($Param{Config}->{ProcessManagementTransitionCheck}) ) {
-        delete($Param{Config}->{ProcessManagementTransitionCheck});
+    if ( exists( $Param{Config}->{ProcessManagementTransitionCheck} ) ) {
+        delete( $Param{Config}->{ProcessManagementTransitionCheck} );
     }
 
     return 1;
+}
+
+=head2 _GetAttachments()
+
+Returns an array ref with attachments.
+
+    my $Attachment = $BaseObject->_GetAttachments(
+        UserID                   => 123,
+        Ticket                   => \%Ticket,   # required
+        ProcessEntityID          => 'P123',
+        ActivityEntityID         => 'A123',
+        TransitionEntityID       => 'T123',
+        TransitionActionEntityID => 'TA123',
+        Config                   => {
+            Attachments => '1'
+            ...
+        }
+    );
+
+Returns:
+
+    my $Attachment = [];
+
+=cut
+
+sub _GetAttachments {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject              = $Kernel::OM->Get('Kernel::Config');
+    my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+    my $ArticleObject             = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+    my $StdAttachmentObject       = $Kernel::OM->Get('Kernel::System::StdAttachment');
+
+    my $AttachmentsDynamicFieldName = $ConfigObject->Get('Process::DynamicFieldProcessManagementAttachment');
+
+    $Param{Config}->{Attachment} = [];
+
+    my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
+        Name => $AttachmentsDynamicFieldName,
+    );
+    return $Param{Config}->{Attachment} if !IsHashRefWithData($DynamicFieldConfig);
+
+    # Get attachments via dynamic field Process::DynamicFieldProcessManagementAttachment.
+    my $Value = $DynamicFieldBackendObject->ValueGet(
+        DynamicFieldConfig => $DynamicFieldConfig,
+        ObjectID           => $Param{Ticket}->{TicketID},
+    );
+    return $Param{Config}->{Attachment} if !$Value;
+
+    # If attachments are selected, AgentTicketProcess->_GetAttachments()
+    # returns the following comma-separated stringified structure:
+    # ObjectType (required)
+    # ObjectID, (optional)
+    # ID, (required) FieldID or StdAttachmentID
+
+    # $Value = 'ObjectType=Article;ObjectID=1;ID=5,ObjectType=Article;ObjectID=3;ID=2';
+    my @SelectedAttachments;
+    if ( IsStringWithData($Value) ) {
+
+        # @SelectedAttachments = (
+        #     'ObjectType=Article;ObjectID=1;ID=5',
+        #     'ObjectType=Article;ObjectID=3;ID=2',
+        # )
+        @SelectedAttachments = split( ',', $Value );
+    }
+
+    return $Param{Config}->{Attachment} if !@SelectedAttachments;
+
+    ATTACHMENT:
+    for my $AttachmentString (@SelectedAttachments) {
+
+        # @Data = (
+        #     'ObjectType=Article',
+        #     'ObjectID=1',
+        #     'ID=5',
+        # )
+        my @Data = split( ';', $AttachmentString );
+
+        # %Data = (
+        #     'ObjectType => 'Article',
+        #     'ObjectID   => '1',
+        #     'ID         => '5',
+        # )
+        my %Data = map { split '=', $_ } @Data;
+
+        next ATTACHMENT if !$Data{ObjectType};
+
+        if ( $Data{ObjectType} eq 'Article' ) {
+            my %Attachment = $ArticleObject->ArticleAttachment(
+                TicketID  => $Param{Ticket}->{TicketID},
+                ArticleID => $Data{ObjectID},
+                FileID    => $Data{ID},
+            );
+
+            next ATTACHMENT if !%Attachment;
+            push @{ $Param{Config}->{Attachment} }, \%Attachment;
+        }
+
+        ## nofilter(TidyAll::Plugin::OTRS::Perl::ObjectDependencies)
+        # upcoming feature (please do not delete this) # Znuny
+        # elsif ($Data{ObjectType} eq 'StdAttachment'){
+
+        #     my %Attachment = $StdAttachmentObject->StdAttachmentGet(
+        #         ID => $Data{ID},
+        #     );
+        #     next ATTACHMENT if !%Attachment;
+        #     push @{ $Param{Config}->{Attachment} }, \%Attachment;
+        # }
+    }
+
+    my $KeepAttachments = $ConfigObject->Get('Process::DynamicFieldProcessManagementAttachment::Keep');
+    return $Param{Config}->{Attachment} if $KeepAttachments;
+
+    $DynamicFieldBackendObject->ValueSet(
+        DynamicFieldConfig => $DynamicFieldConfig,
+        ObjectID           => $Param{Ticket}->{TicketID},
+        Value              => '',
+        UserID             => 1,
+    );
+
+    return $Param{Config}->{Attachment};
 }
 
 sub _OverrideUserID {

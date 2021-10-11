@@ -3,3 +3,17 @@ image: registry.znuny.com/znuny/internal/docker-centos-otrs-systemd:stable
 include:
   - project: 'Znuny/Internal/Znuny'
     file: '/templates/gitlab/Znuny/default.yml'
+
+# mysql
+mysql:
+  stage: test-mysql
+  extends: .services_mysql_selenium
+  before_script:
+    - echo 'run before_script'
+    - test $DEBUG_SLEEP && sleep 14400
+    - /run-framework.sh
+  script:
+    - echo 'run mysql'
+    - su -c "bin/otrs.CheckSum.pl -a create" - otrs
+    - su -c "bin/otrs.Console.pl Dev::Code::CPANUpdate --mode stable" - otrs
+    - su -c "bin/otrs.Console.pl Dev::UnitTest::Run --verbose --test scripts/test/WebUserAgent" - otrs
