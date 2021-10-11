@@ -20,7 +20,7 @@ our @ObjectDependencies = (
 
 =head1 NAME
 
-Kernel::System::ProcessManagement::TransitionAction::TicketAllChildrenClosed - A module to create an event after all children have been closed.
+Kernel::System::Ticket::Event::TicketAllChildrenClosed - A module to create an event after all children have been closed.
 
 =head1 DESCRIPTION
 
@@ -56,7 +56,7 @@ sub new {
         },
         Event   => $EventName,
         Config  => $Config,
-        UserID  => $UserID,        
+        UserID  => $UserID,
     )
 
     If all subtickets are closed of a Ticket then the Event 'TicketAllChildrenClosed' will be triggered.
@@ -105,7 +105,7 @@ sub Run {
     );
 
     PARENTS:
-    for my $ParentID (keys %LinkedParents) {
+    for my $ParentID ( sort keys %LinkedParents ) {
         my %LinkedChildren = $LinkObject->LinkKeyList(
             Object1   => 'Ticket',
             Key1      => $ParentID,
@@ -120,12 +120,13 @@ sub Run {
 
         # process child tickets
         CHILDREN:
-        for my $ChildTicketID (keys %LinkedChildren) {
+        for my $ChildTicketID ( sort keys %LinkedChildren ) {
             my %ChildTicket = $TicketObject->TicketGet(
-                TicketID      => $ChildTicketID,
+                TicketID => $ChildTicketID,
             );
 
-            if ( %ChildTicket ) {
+            if (%ChildTicket) {
+
                 # skip closed/removed/merged tickets
                 if ( $ChildTicket{StateType} !~ m/^(?:closed|merged|removed)$/ ) {
                     $ChildrenClosed = 0;
@@ -133,19 +134,18 @@ sub Run {
                 }
             }
         }
-    
-        if ( $ChildrenClosed ) {
+
+        if ($ChildrenClosed) {
             $TicketObject->EventHandler(
                 Event => 'TicketAllChildrenClosed',
                 Data  => {
-                    TicketID      => $ParentID,
+                    TicketID => $ParentID,
                 },
-                UserID => $Self->{UserID} || 1,
+                UserID      => $Self->{UserID} || 1,
                 Transaction => 0,
             );
         }
     }
-
 
     return 1;
 }

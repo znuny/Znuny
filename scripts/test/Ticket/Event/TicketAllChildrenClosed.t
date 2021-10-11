@@ -29,7 +29,7 @@ my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 my $LinkObject   = $Kernel::OM->Get('Kernel::System::LinkObject');
 my $ModuleObject = $Kernel::OM->Get('Kernel::System::Ticket::Event::TicketAllChildrenClosed');
 
-# define Variables 
+# define Variables
 my $UserID     = 1;
 my $ModuleName = 'TicketAllChildrenClosed';
 my $RandomID   = $Helper->GetRandomID();
@@ -38,11 +38,11 @@ my $RandomID   = $Helper->GetRandomID();
 my ( $TestUserLogin, $TestUserID ) = $Helper->TestUserCreate();
 
 # add Event to Config if it doesn't exist yet
-my $AddEvent = 1;
-my $EventsConfig = $ConfigObject->Get('Events')->{'Ticket'};
+my $AddEvent          = 1;
+my $EventsConfig      = $ConfigObject->Get('Events')->{'Ticket'};
 my @EventsConfigArray = @{$EventsConfig};
 for my $Event (@EventsConfigArray) {
-    if ($Event eq 'TicketAllChildrenClosed' ) {
+    if ( $Event eq 'TicketAllChildrenClosed' ) {
         $AddEvent = 0;
     }
 }
@@ -50,7 +50,7 @@ if ($AddEvent) {
     push @EventsConfigArray, "TicketAllChildrenClosed";
 }
 $ConfigObject->Set(
-    Key => 'Events::Ticket',
+    Key   => 'Events::Ticket',
     Value => @EventsConfigArray,
 );
 
@@ -66,6 +66,7 @@ my $ParentTicketID = $TicketObject->TicketCreate(
     ResponsibleID => 1,
     UserID        => $UserID,
 );
+
 # sanity checks
 $Self->True(
     $ParentTicketID,
@@ -74,9 +75,9 @@ $Self->True(
 
 # Creating 3 ChildTickets
 my @TestSubTickets;
-for (my $i = 0; $i < 3; $i++) {
+for ( my $i = 0; $i < 3; $i++ ) {
     my $TicketID = $TicketObject->TicketCreate(
-        Title         => 'test'.$i,
+        Title         => 'test' . $i,
         QueueID       => 1,
         Lock          => 'unlock',
         Priority      => '3 normal',
@@ -110,15 +111,15 @@ for (my $i = 0; $i < 3; $i++) {
 # Set the tests up
 my @Tests = (
     {
-        TicketID => $TestSubTickets[0],
+        TicketID          => $TestSubTickets[0],
         ExpectedEventExec => 0,
     },
     {
-        TicketID => $TestSubTickets[1],
+        TicketID          => $TestSubTickets[1],
         ExpectedEventExec => 0,
     },
     {
-        TicketID => $TestSubTickets[2],
+        TicketID          => $TestSubTickets[2],
         ExpectedEventExec => 1,
     },
 );
@@ -126,7 +127,7 @@ my @Tests = (
 # set State to closed and run the Module to check if the event has been executed
 my $EventExecuted = 0;
 
-for my $Event( @{$TicketObject->{EventHandlerPipe}} ) {
+for my $Event ( @{ $TicketObject->{EventHandlerPipe} } ) {
     if ( $Event->{Event} eq 'TicketAllChildrenClosed' ) {
         $EventExecuted = 1;
     }
@@ -137,12 +138,12 @@ $Self->False(
     "$ModuleName Pre Run() was unsuccessful with the execution of the event TicketAllChildrenClosed"
 );
 
-for my $Test ( @Tests ) {
+for my $Test (@Tests) {
     my %EventData = (
-        Event => 'TicketStateUpdate',
+        Event  => 'TicketStateUpdate',
         UserID => $TestUserID,
-        Config =>{
-            'Event' => 'TicketStateUpdate',
+        Config => {
+            'Event'  => 'TicketStateUpdate',
             'Module' => 'Kernel::System::Ticket::Event::TicketAllChildrenClosed'
         },
         Data => {
@@ -157,9 +158,9 @@ for my $Test ( @Tests ) {
     );
 
     my $TicketStateSet = $TicketObject->TicketStateSet(
-        State     => 'closed successful',
-        TicketID  => $Test->{TicketID},
-        UserID    => 1,
+        State    => 'closed successful',
+        TicketID => $Test->{TicketID},
+        UserID   => 1,
     );
 
     $Success = $ModuleObject->Run(%EventData);
@@ -169,7 +170,7 @@ for my $Test ( @Tests ) {
     );
 
     $EventExecuted = 0;
-    for my $Event( @{$TicketObject->{EventHandlerPipe}} ) {
+    for my $Event ( @{ $TicketObject->{EventHandlerPipe} } ) {
         if ( $Event->{Event} eq 'TicketAllChildrenClosed' ) {
             $EventExecuted = 1;
         }
