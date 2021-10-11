@@ -1785,7 +1785,7 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
         $('#ConfigParams > fieldset').remove();
         // add one empty element
         if (!Object.keys(ConfigParameters).length) {
-            $('#ConfigParams').append( $('#ConfigParamContainer').html().replace(/_INDEX_/g, 1) );
+            $('#ConfigParams').append($('#ConfigParamContainer').html().replace(/_INDEX_/g, 1));
         }
         // insert params from config
         $.each(Object.keys(ConfigParameters).sort(), function(Counter, Key) {

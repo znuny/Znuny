@@ -414,7 +414,7 @@ sub Run {
     # Add default parameter
     # ------------------------------------------------------------ #
     elsif ( $Self->{Subaction} eq 'GetDefaultConfigParameters' ) {
-        my $Module = $ParamObject->GetParam( Param => 'Module' );
+        my $Module          = $ParamObject->GetParam( Param => 'Module' );
         my %ConfigParameter = $Self->_GetDefaultConfigParameters(
             Module => $Module,
         );
@@ -781,7 +781,8 @@ sub _GetDefaultConfigParameters {
         );
         return;
     }
-    # get TransitionAction name of full namespace e.g. 'Kernel::System::ProcessManagement::TransitionAction::TicketCreate' to 'TicketCreate'
+
+# get TransitionAction name of full namespace e.g. 'Kernel::System::ProcessManagement::TransitionAction::TicketCreate' to 'TicketCreate'
     if ( $Param{Module} =~ m/TransitionAction::(.+)$/ ) {
         my $TransitionAction = $1;
         my $Config = $Kernel::OM->Get('Kernel::Config')->Get('ProcessManagement::TransitionAction::DefaultParameters');

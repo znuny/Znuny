@@ -16,7 +16,7 @@ use Kernel::System::VariableCheck qw(:all);
 
 $Kernel::OM->ObjectParamAdd(
     'Kernel::System::UnitTest::Helper' => {
-        RestoreDatabase => 1,
+        RestoreDatabase  => 1,
         UseTmpArticleDir => 1,
     },
 );
@@ -31,14 +31,14 @@ my $WebserviceObject   = $Kernel::OM->Get('Kernel::System::GenericInterface::Web
 
 $HelperObject->ConfigSettingChange(
     Valid => 1,
-    Key => 'Ticket::Type',
+    Key   => 'Ticket::Type',
     Value => 1,
 );
 
-my $RandomID               = $HelperObject->GetRandomID();
-my $DFName1                = 'Test1' . $RandomID;
+my $RandomID = $HelperObject->GetRandomID();
+my $DFName1  = 'Test1' . $RandomID;
 my ( $UserLogin, $UserID ) = $HelperObject->TestUserCreate();
-my $TestUserLogin          = $HelperObject->TestCustomerUserCreate();
+my $TestUserLogin = $HelperObject->TestCustomerUserCreate();
 
 my $TicketID = $TicketObject->TicketCreate(
     Title         => 'test',
@@ -65,7 +65,7 @@ my %DynamicFieldConfig = (
     ObjectType => 'Ticket',
     Config     => {
         TranslatableValues => '0',
-        PossibleValues => {
+        PossibleValues     => {
             1 => 'A',
             2 => 'B',
             3 => 'C',
@@ -91,7 +91,7 @@ $Self->True(
 
 # add service
 my $ServiceID = $ServiceObject->ServiceAdd(
-    Name    => 'UnitTest'. $RandomID,
+    Name    => 'UnitTest' . $RandomID,
     ValidID => 1,
     UserID  => 1,
 );
@@ -111,7 +111,7 @@ my %ServiceData = $ServiceObject->ServiceGet(
 # add SLA
 my $SLAID = $SLAObject->SLAAdd(
     ServiceIDs => [$ServiceID],
-    Name       => 'SLA Name'. $RandomID,
+    Name       => 'SLA Name' . $RandomID,
     Calendar   => 'Calendar1',
     ValidID    => 1,
     UserID     => 1,
@@ -147,7 +147,7 @@ my $WebserviceID = $WebserviceObject->WebserviceAdd(
 
 my @Tests = (
     {
-        Name => 'DynamicFieldSet',
+        Name   => 'DynamicFieldSet',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -162,7 +162,7 @@ my @Tests = (
         DynamicFieldValue => 1,
     },
     {
-        Name => 'DynamicFieldSet',
+        Name   => 'DynamicFieldSet',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -170,15 +170,15 @@ my @Tests = (
             TransitionEntityID       => 'T2',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
-                $DFName1                          => 'New Value'
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                $DFName1                         => 'New Value'
             },
         },
         Success           => 1,
         DynamicFieldValue => 1,
     },
     {
-        Name => 'DynamicFieldSet',
+        Name   => 'DynamicFieldSet',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -193,7 +193,7 @@ my @Tests = (
         DynamicFieldValue => 1,
     },
     {
-        Name => 'DynamicFieldSet',
+        Name   => 'DynamicFieldSet',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -201,15 +201,15 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => '',
-                $DFName1                          => 'New Value'
+                ProcessManagementTransitionCheck => '',
+                $DFName1                         => 'New Value'
             },
         },
         Success           => 1,
         DynamicFieldValue => 0,
     },
     {
-        Name => 'DynamicFieldSet',
+        Name   => 'DynamicFieldSet',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -217,14 +217,14 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
             },
         },
         Success           => 0,
         DynamicFieldValue => 0,
     },
     {
-        Name => 'ExecuteInvoker',
+        Name   => 'ExecuteInvoker',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -232,17 +232,17 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
-                Webservice                        => "Test $RandomID",
-                Invoker                           => 'Test::TestSimple',
-                UserID                            => 1,
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                Webservice                       => "Test $RandomID",
+                Invoker                          => 'Test::TestSimple',
+                UserID                           => 1,
             },
         },
         Success           => 1,
         DynamicFieldValue => 1,
     },
     {
-        Name => 'ExecuteInvoker',
+        Name   => 'ExecuteInvoker',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -250,8 +250,8 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
-                Webservice                        => {
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                Webservice                       => {
                     ID => 1,
                 },
                 Invoker => 'Notify by chat',
@@ -261,7 +261,7 @@ my @Tests = (
         DynamicFieldValue => 0,
     },
     {
-        Name => 'TicketArticleCreate',
+        Name   => 'TicketArticleCreate',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -269,10 +269,10 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                 ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
-                SenderType           => 'agent',
-                IsVisibleForCustomer => 1,
-                CommunicationChannel => 'Internal',
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                SenderType                       => 'agent',
+                IsVisibleForCustomer             => 1,
+                CommunicationChannel             => 'Internal',
 
                 # Internal article data payload.
                 From           => 'Some Agent <email@example.com>',
@@ -290,7 +290,7 @@ my @Tests = (
         DynamicFieldValue => 0,
     },
     {
-        Name => 'TicketArticleCreate',
+        Name   => 'TicketArticleCreate',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -298,10 +298,10 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
-                SenderType                        => 'agent',
-                IsVisibleForCustomer              => 1,
-                CommunicationChannel              => 'Internal',
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                SenderType                       => 'agent',
+                IsVisibleForCustomer             => 1,
+                CommunicationChannel             => 'Internal',
 
                 # Internal article data payload.
                 From           => 'Some Agent <email@example.com>',
@@ -319,7 +319,7 @@ my @Tests = (
         DynamicFieldValue => 1,
     },
     {
-        Name => 'TicketCreate',
+        Name   => 'TicketCreate',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -327,15 +327,15 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
-                OwnerID                           => 1,
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                OwnerID                          => 1,
             },
         },
         Success           => 1,
         DynamicFieldValue => 1,
     },
     {
-        Name => 'TicketCreate',
+        Name   => 'TicketCreate',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -343,15 +343,15 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
-                OwnerID                           => 1,
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                OwnerID                          => 1,
             },
         },
         Success           => 0,
         DynamicFieldValue => 0,
     },
     {
-        Name => 'TicketCustomerSet',
+        Name   => 'TicketCustomerSet',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -359,15 +359,15 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
-                CustomerID                        => 1,
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                CustomerID                       => 1,
             },
         },
         Success           => 1,
         DynamicFieldValue => 1,
     },
     {
-        Name => 'TicketCustomerSet',
+        Name   => 'TicketCustomerSet',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -375,15 +375,15 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
-                CustomerID                        => 1,
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                CustomerID                       => 1,
             },
         },
         Success           => 0,
         DynamicFieldValue => 0,
     },
     {
-        Name => 'TicketLockSet',
+        Name   => 'TicketLockSet',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -391,15 +391,15 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
-                LockID                            => 1,
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                LockID                           => 1,
             },
         },
         Success           => 1,
         DynamicFieldValue => 1,
     },
     {
-        Name => 'TicketLockSet',
+        Name   => 'TicketLockSet',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -407,15 +407,15 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
-                LockID                            => 1,
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                LockID                           => 1,
             },
         },
         Success           => 0,
         DynamicFieldValue => 0,
     },
     {
-        Name => 'TicketOwnerSet',
+        Name   => 'TicketOwnerSet',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -423,15 +423,15 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
-                OwnerID                           => 1,
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                OwnerID                          => 1,
             },
         },
         Success           => 1,
         DynamicFieldValue => 1,
     },
     {
-        Name => 'TicketOwnerSet',
+        Name   => 'TicketOwnerSet',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -439,15 +439,15 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
-                OwnerID                           => 1,
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                OwnerID                          => 1,
             },
         },
         Success           => 0,
         DynamicFieldValue => 0,
     },
     {
-        Name => 'TicketQueueSet',
+        Name   => 'TicketQueueSet',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -455,15 +455,15 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
-                QueueID                           => 1,
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                QueueID                          => 1,
             },
         },
         Success           => 1,
         DynamicFieldValue => 1,
     },
     {
-        Name => 'TicketQueueSet',
+        Name   => 'TicketQueueSet',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -471,15 +471,15 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
-                QueueID                           => 1,
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                QueueID                          => 1,
             },
         },
         Success           => 0,
         DynamicFieldValue => 0,
     },
     {
-        Name => 'TicketResponsibleSet',
+        Name   => 'TicketResponsibleSet',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -487,15 +487,15 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
-                ResponsibleID                     => 1,
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                ResponsibleID                    => 1,
             },
         },
         Success           => 1,
         DynamicFieldValue => 1,
     },
     {
-        Name => 'TicketResponsibleSet',
+        Name   => 'TicketResponsibleSet',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -503,15 +503,15 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
-                ResponsibleID                     => 1,
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                ResponsibleID                    => 1,
             },
         },
         Success           => 0,
         DynamicFieldValue => 0,
     },
     {
-        Name => 'TicketServiceSet',
+        Name   => 'TicketServiceSet',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -519,16 +519,16 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
-                ServiceID                         => $ServiceData{ServiceID},
-                Service                           => $ServiceData{Name},
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                ServiceID                        => $ServiceData{ServiceID},
+                Service                          => $ServiceData{Name},
             },
         },
         Success           => 1,
         DynamicFieldValue => 1,
     },
     {
-        Name => 'TicketServiceSet',
+        Name   => 'TicketServiceSet',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -536,16 +536,16 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
-                ServiceID                         => $ServiceData{ServiceID},
-                Service                           => $ServiceData{Name},
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                ServiceID                        => $ServiceData{ServiceID},
+                Service                          => $ServiceData{Name},
             },
         },
         Success           => 0,
         DynamicFieldValue => 0,
     },
     {
-        Name => 'TicketSLASet',
+        Name   => 'TicketSLASet',
         Config => {
             UserID                   => 1,
             ProcessEntityID          => 'P1',
@@ -553,16 +553,16 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
-                SLAID                             => $SLAID,
-                SLA                               => 'SLA Name'. $RandomID,
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                SLAID                            => $SLAID,
+                SLA                              => 'SLA Name' . $RandomID,
             },
         },
         Success           => 1,
         DynamicFieldValue => 1,
     },
     {
-        Name => 'TicketSLASet',
+        Name   => 'TicketSLASet',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -570,16 +570,16 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
-                SLAID                             => $SLAID,
-                SLA                               => 'SLA Name'. $RandomID,
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                SLAID                            => $SLAID,
+                SLA                              => 'SLA Name' . $RandomID,
             },
         },
         Success           => 0,
         DynamicFieldValue => 0,
     },
     {
-        Name => 'TicketStateSet',
+        Name   => 'TicketStateSet',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -587,15 +587,15 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
-                StateID                           => 1,
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                StateID                          => 1,
             },
         },
         Success           => 1,
         DynamicFieldValue => 1,
     },
     {
-        Name => 'TicketStateSet',
+        Name   => 'TicketStateSet',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -603,15 +603,15 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
-                StateID                           => 1,
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                StateID                          => 1,
             },
         },
         Success           => 0,
         DynamicFieldValue => 0,
     },
     {
-        Name => 'TicketTitleSet',
+        Name   => 'TicketTitleSet',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -619,15 +619,15 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
-                Title                             => 'Test Title',
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                Title                            => 'Test Title',
             },
         },
         Success           => 1,
         DynamicFieldValue => 1,
     },
     {
-        Name => 'TicketTitleSet',
+        Name   => 'TicketTitleSet',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -635,15 +635,15 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
-                Title                             => 'Test Title',
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                Title                            => 'Test Title',
             },
         },
         Success           => 0,
         DynamicFieldValue => 0,
     },
     {
-        Name => 'TicketTypeSet',
+        Name   => 'TicketTypeSet',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -651,15 +651,15 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
-                TypeID                            => 1,
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                TypeID                           => 1,
             },
         },
         Success           => 1,
         DynamicFieldValue => 1,
     },
     {
-        Name => 'TicketTypeSet',
+        Name   => 'TicketTypeSet',
         Config => {
             UserID                   => $UserID,
             ProcessEntityID          => 'P1',
@@ -667,8 +667,8 @@ my @Tests = (
             TransitionEntityID       => 'T1',
             TransitionActionEntityID => 'TA1',
             Config                   => {
-                ProcessManagementTransitionCheck  => "DynamicField_" . $DFName1,
-                TypeID                            => 1,
+                ProcessManagementTransitionCheck => "DynamicField_" . $DFName1,
+                TypeID                           => 1,
             },
         },
         Success           => 0,
@@ -694,7 +694,7 @@ for my $Test (@Tests) {
     $Test->{Config}->{Ticket} = \%Ticket;
     $Test->{Config}->{Ticket}->{ServiceID} = $ServiceID;
 
-    my $ModulName = "Kernel::System::ProcessManagement::TransitionAction::" . $Test->{Name};
+    my $ModulName   = "Kernel::System::ProcessManagement::TransitionAction::" . $Test->{Name};
     my $ModulObject = $Kernel::OM->Get($ModulName);
     my $CheckResult = $ModulObject->Run( %{ $Test->{Config} } );
 
