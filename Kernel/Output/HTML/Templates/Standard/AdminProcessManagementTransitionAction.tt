@@ -103,7 +103,7 @@
                                 </fieldset>
 [% RenderBlockEnd("ConfigItemEditRow") %]
                             </div>
-                        </fieldset>
+                        </div>
                     </div>
                 </div>
 <!-- Invisible submit button to allow form submit on pressing enter/return without javascript -->

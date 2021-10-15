@@ -53,15 +53,19 @@ sub new {
 
 =head2 Run()
 
-    Run Data
+Runs TransitionAction TicketTypeSet.
 
-    my $TicketTypeSetResult = $TicketTypeSetActionObject->Run(
+    my $Success = $TicketTypeSetActionObject->Run(
         UserID                   => 123,
+
+        # Ticket contains the result of TicketGet including dynamic fields
         Ticket                   => \%Ticket,   # required
         ProcessEntityID          => 'P123',
         ActivityEntityID         => 'A123',
         TransitionEntityID       => 'T123',
         TransitionActionEntityID => 'TA123',
+
+        # Config is the hash stored in a Process::TransitionAction's config key
         Config                   => {
             Type => 'Default',
             # or
@@ -70,11 +74,10 @@ sub new {
 
         }
     );
-    Ticket contains the result of TicketGet including DynamicFields
-    Config is the Config Hash stored in a Process::TransitionAction's  Config key
-    Returns:
 
-    $TicketTypeSetResult = 1; # 0
+Returns:
+
+    my $Success = 1; # 0
 
 =cut
 

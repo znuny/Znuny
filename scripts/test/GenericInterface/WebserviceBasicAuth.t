@@ -28,8 +28,8 @@ my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
 my $CacheObject       = $Kernel::OM->Get('Kernel::System::Cache');
 my $LayoutObject      = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
-$ConfigObject->{'Znuny4OTRSAdvancedGI_BasicAuth_Password'} = 'testpass';
-$ConfigObject->{'Znuny4OTRSAdvancedGI_BasicAuth_User'}     = 'testuser';
+$ConfigObject->{'WebService_BasicAuth_Password'} = 'testpass';
+$ConfigObject->{'WebService_BasicAuth_User'}     = 'testuser';
 
 my $ID = $WebserviceObject->WebserviceAdd(
     Name   => 'special test',
@@ -62,9 +62,9 @@ my $ID = $WebserviceObject->WebserviceAdd(
                         },
                     },
                     'Authentication' => {
-                        'BasicAuthPassword' => '&lt;OTRS_CONFIG_Znuny4OTRSAdvancedGI_BasicAuth_Password&gt;',
+                        'BasicAuthPassword' => '&lt;OTRS_CONFIG_WebService_BasicAuth_Password&gt;',
                         'AuthType'          => 'BasicAuth',
-                        'BasicAuthUser'     => '<OTRS_CONFIG_Znuny4OTRSAdvancedGI_BasicAuth_User>'
+                        'BasicAuthUser'     => '<OTRS_CONFIG_WebService_BasicAuth_User>'
                     },
                     'DefaultCommand' => 'GET'
                 },
@@ -127,12 +127,12 @@ $WebserviceConfig = $WebserviceObject->WebserviceGet(
 
 $Self->Is(
     $WebserviceConfig->{Config}->{Requester}->{Transport}->{Config}->{Authentication}->{BasicAuthUser},
-    '<OTRS_CONFIG_Znuny4OTRSAdvancedGI_BasicAuth_User>',
+    '<OTRS_CONFIG_WebService_BasicAuth_User>',
     'Replaced of config variables should not be replaced for the admin interface e.g. user',
 );
 $Self->Is(
     $WebserviceConfig->{Config}->{Requester}->{Transport}->{Config}->{Authentication}->{BasicAuthPassword},
-    '&lt;OTRS_CONFIG_Znuny4OTRSAdvancedGI_BasicAuth_Password&gt;',
+    '&lt;OTRS_CONFIG_WebService_BasicAuth_Password&gt;',
     'Replaced of config variables should not be replaced for the admin interface e.g. password',
 );
 

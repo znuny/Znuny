@@ -1,5 +1,6 @@
 # 6.2.1 2021-XX-XX
  - 2021-10-13 Added thirdparty/jscolor-2.4.6 js lib - colorpicker (used in GeneralCatalog).
+ - 2021-10-11 Integrated package Znuny4OTRS-AdvancedProcessManagement.
  - 2021-10-07 Sector Nord AG: Added Attachments to TransitionAction TicketCreate (#149). Thanks to Sector Nord AG (@LuBroering ). [#149](https://github.com/znuny/Znuny/pull/149)
  - 2021-10-06 Sector Nord AG: Added optional check condition in TransitionActions (#144). Thanks to Sector Nord AG (@paulfolkers). [#144](https://github.com/znuny/Znuny/pull/144)
  - 2021-10-06 Sector Nord AG: Added TransitionAction parameter placeholder (#145). Thanks to Sector Nord AG (@tjsinagowitz). [#145](https://github.com/znuny/Znuny/pull/145)

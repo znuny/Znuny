@@ -51,7 +51,7 @@ sub new {
 
 =head2 Run()
 
-    Run Data
+Runs TransitionAction ExecuteInvoker.
 
     my $ExecuteInvokerResult = $ExecuteInvokerActionObject->Run(
         UserID                   => 123,

@@ -579,6 +579,7 @@ sub _ShowEdit {
         Data         => \%TransitionAction,
         Name         => 'Module',
         PossibleNone => 1,
+        Translation  => 0,
         SelectedID   => $TransitionActionData->{Config}->{Module},
         Class        => 'Modernize Validate_Required ' . ( $Param{Errors}->{'ModuleInvalid'} || '' ),
     );
@@ -792,7 +793,7 @@ sub _GetDefaultConfigParameters {
                 %Settings = ( %Settings, %{ $Config->{$Key} } );
             }
         }
-        return %{ $Settings{$TransitionAction} };
+        return %{ $Settings{$TransitionAction} || {} };
     }
     return;
 }

@@ -576,27 +576,27 @@ sub TransitionList {
 get a Transition list with all Transition details
 
     my $List = $TransitionObject->TransitionListGet(
-        UserID      => 1,
+        UserID => 1,
     );
 
 Returns:
 
     $List = [
         {
-            ID             => 123,
-            EntityID       => 'T1',
-            Name           => 'some name',
-            Config         => $ConfigHashRef,
-            CreateTime     => '2012-07-04 15:08:00',
-            ChangeTime     => '2012-07-04 15:08:00',
+            ID         => 123,
+            EntityID   => 'T1',
+            Name       => 'some name',
+            Config     => $ConfigHashRef,
+            CreateTime => '2012-07-04 15:08:00',
+            ChangeTime => '2012-07-04 15:08:00',
         }
         {
-            ID             => 456,
-            EntityID       => 'T2',
-            Name           => 'some name',
-            Config         => $ConfigHashRef,
-            CreateTime     => '2012-07-04 15:09:00',
-            ChangeTime     => '2012-07-04 15:09:00',
+            ID         => 456,
+            EntityID   => 'T2',
+            Name       => 'some name',
+            Config     => $ConfigHashRef,
+            CreateTime => '2012-07-04 15:09:00',
+            ChangeTime => '2012-07-04 15:09:00',
         }
     ];
 

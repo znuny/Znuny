@@ -34,6 +34,9 @@ sub Data {
     $Self->{ThousandSeparator} = '.';
     $Self->{Translation} = {
 
+        'Operator' => 'Operator',
+        "Triggers event 'TicketAllChildrenClosed' if all child tickets of a parent ticket have been closed/merged/removed."
+            => "Löst Event 'TicketAllChildrenClosed' aus, wenn alle Kind-Tickets eines Eltern-Tickets den Status geschlossen/gemergt/entfernt erreicht haben.",
         'Name of the dynamic field in which the attachment file IDs of the transition will be stored.'
             => 'Name des dynamischen Felds, in dem die Datei-IDs der Anhänge der Transition gespeichert werden.',
         'Keep dynamic field attachments after each transition.'
@@ -9014,7 +9017,6 @@ Ihr Helpdesk-Team
         'responsible' => 'Verantwortlicher',
         'reverse' => 'umgekehrt',
         'stats' => 'stats',
-
     };
 
     $Self->{JavaScriptStrings} = [

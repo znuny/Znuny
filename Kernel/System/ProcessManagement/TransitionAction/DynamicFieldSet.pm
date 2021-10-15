@@ -53,32 +53,32 @@ sub new {
 
 =head2 Run()
 
-    Run Data
+Runs TransitionAction DynamicFieldSet
 
-    my $DynamicFieldSetResult = $DynamicFieldSetActionObject->Run(
+    my $Success = $DynamicFieldSetActionObject->Run(
         UserID                   => 123,
+
+        # Ticket contains the result of TicketGet including dynamic fields
         Ticket                   => \%Ticket,   # required
         ProcessEntityID          => 'P123',
         ActivityEntityID         => 'A123',
         TransitionEntityID       => 'T123',
         TransitionActionEntityID => 'TA123',
+
+        # Config is the hash stored in a Process::TransitionAction's config key
         Config                   => {
             MasterSlave => 'Master',
             Approved    => '1',
             UserID      => 123,                 # optional, to override the UserID from the logged user
         }
     );
-    Ticket contains the result of TicketGet including DynamicFields
-    Config is the Config Hash stored in a Process::TransitionAction's  Config key
 
-    If a Dynamic Field is named UserID (to avoid conflicts) it must be set in the config as:
+    If a dynamic field is named UserID (to avoid conflicts) it must be set in the config as:
     DynamicField_UserID => $Value,
 
-    Returns:
+Returns:
 
-    $DynamicFieldSetResult = 1; # 0
-
-    );
+    my $Success = 1;     # 0
 
 =cut
 

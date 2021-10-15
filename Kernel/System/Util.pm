@@ -170,7 +170,7 @@ sub Base64DeepEncode {
     If data is an array, all of its child elements will be checked for given keys whose elements
     will be removed recursively.
 
-    my $Data = $Znuny4OTRSAdvancedGIObject->DataStructureRemoveElements(
+    my $Data = $UtilObject->DataStructureRemoveElements(
         # Data can be a scalar, hash or array
         Data => {
             Article => {

@@ -1156,7 +1156,7 @@ Znuny.Form.Input = (function (TargetNS) {
         var IsReadonly,
             $LabelObject,
             FieldID = TargetNS.FieldID(Attribute),
-            Type    = Core.Form.Znuny4OTRSInput.Type(FieldID);
+            Type    = TargetNS.Type(FieldID);
 
         if (!FieldID) {
             return false;
