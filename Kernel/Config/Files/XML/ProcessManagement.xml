@@ -908,6 +908,13 @@
                         <Item Key="UserID">1 (use to overwrite the logged user)</Item>
                     </Hash>
                 </Item>
+                <Item Key="TicketPrioritySet">
+                    <Hash>
+                        <Item Key="Priority">(* required) 5 very high</Item>
+                        <Item Key="PriorityID">(* required) 1</Item>
+                        <Item Key="UserID">1 (use to overwrite the logged user)</Item>
+                    </Hash>
+                </Item>
                 <Item Key="TicketQueueSet">
                     <Hash>
                         <Item Key="Queue">(* required) MyQueue::SubQueue</Item>
