@@ -60,15 +60,19 @@ sub new {
 
 =head2 Run()
 
-    Run Data
+Runs TransitionAction TicketCreate.
 
     my $TicketCreateResult = $TicketCreateActionObject->Run(
         UserID                   => 123,
+
+        # Ticket contains the result of TicketGet including dynamic fields
         Ticket                   => \%Ticket,   # required
         ProcessEntityID          => 'P123',
         ActivityEntityID         => 'A123',
         TransitionEntityID       => 'T123',
         TransitionActionEntityID => 'TA123',
+
+        # Config is the hash stored in a Process::TransitionAction's config key
         Config                   => {
             # ticket required:
             Title         => 'Some Ticket Title',
@@ -109,13 +113,10 @@ sub new {
             UserID => 123,                                              # optional, to override the UserID from the logged user
         }
     );
-    Ticket contains the result of TicketGet including DynamicFields
-    Config is the Config Hash stored in a Process::TransitionAction's  Config key
-    Returns:
 
-    $TicketCreateResult = 1; # 0
+Returns:
 
-    );
+    my $Success = 1; # 0
 
 =cut
 
@@ -294,7 +295,7 @@ sub Run {
 
         # check for selected Attachments
         if ( $Param{Config}->{Attachments} ) {
-            $Param{Config}->{Attachments} = $Self->_GetAttachments(%Param);
+            $Param{Config}->{Attachment} = $Self->_GetAttachments(%Param);
         }
 
         # Create article for the new ticket.

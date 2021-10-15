@@ -36,6 +36,7 @@ sub Data {
 
         'Keep XML attributes' => 'XML-Attribute beibehalten',
         'Only needed for content type XML.' => 'Nur für Content-Type XML benötigt.',
+        'Operator' => 'Operator',
         "Triggers event 'TicketAllChildrenClosed' if all child tickets of a parent ticket have been closed/merged/removed."
             => "Löst Event 'TicketAllChildrenClosed' aus, wenn alle Kind-Tickets eines Eltern-Tickets den Status geschlossen/gemergt/entfernt erreicht haben.",
         'Name of the dynamic field in which the attachment file IDs of the transition will be stored.'
@@ -46,6 +47,8 @@ sub Data {
             => 'Formatierter String zur Ausgabe der Anhänge in Auswahllisten. "%1$d": Artikelnummer; "%2$s": Dateiname; "%3$s": übersetzter Objekttyp (z. B. Article => Artikel); "%4$s": übersetztes Anhang-Label (z. B. "Anhang").',
         'Could not set attachments for ticket with ID %s in activity dialog "%s"!'
             => 'Anhänge für Ticket mit ID %s konnten in Aktivitätsdialog "%s" nicht gesetzt werden!',
+        "Triggers event 'TicketAllChildrenClosed' if all child tickets of a parent ticket have been closed/merged/removed."
+            => "Löst Event 'TicketAllChildrenClosed' aus, wenn alle Kind-Tickets eines Eltern-Tickets den Status geschlossen/gemergt/entfernt erreicht haben.",
 
         # Template: AdminACL
         'ACL Management' => 'ACL-Verwaltung',
@@ -9016,7 +9019,6 @@ Ihr Helpdesk-Team
         'responsible' => 'Verantwortlicher',
         'reverse' => 'umgekehrt',
         'stats' => 'stats',
-
     };
 
     $Self->{JavaScriptStrings} = [
