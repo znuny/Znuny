@@ -213,6 +213,7 @@ sub Run {
         }
 
         my $StandardTemplates = $Self->_GetStandardTemplates(
+            TicketID => $Self->{TicketID},
             %GetParam,
             QueueID => $QueueID || '',
         );
@@ -281,15 +282,17 @@ sub Run {
 
             # Get the first article of the ticket.
             my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
-            my @MetaArticles  = $ArticleObject->ArticleList(
-                TicketID  => $Self->{TicketID},
-                UserID    => $Self->{UserID},
-                OnlyFirst => 1,
+            my @ArticleIDs    = $ArticleObject->ArticleIndex(
+                TicketID => $Self->{TicketID},
             );
-            my %Article = $ArticleObject->BackendForArticle( %{ $MetaArticles[0] } )->ArticleGet(
-                %{ $MetaArticles[0] },
-                DynamicFields => 0,
-            );
+
+            my %Article;
+            if (@ArticleIDs) {
+                %Article = $ArticleObject->ArticleGet(
+                    TicketID  => $Self->{TicketID},
+                    ArticleID => $ArticleIDs[0],
+                );
+            }
 
             # get the matching signature for the current user
             my $Signature = $TemplateGenerator->Signature(
@@ -2410,14 +2413,10 @@ sub _GetExtendedParams {
 sub _GetStandardTemplates {
     my ( $Self, %Param ) = @_;
 
-    NEEDED:
-    for my $Needed (qw(QueueID TicketID)) {
-
-        next NEEDED if defined $Param{$Needed};
-
+    if ( !$Param{QueueID} && !$Param{TicketID} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  => "Parameter '$Needed' is needed!",
+            Message  => "Parameter 'QueueID' or 'TicketID' is needed!",
         );
         return {};
     }
