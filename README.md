@@ -1,4 +1,4 @@
-<a href="https://www.znuny.org"><img align="center" src="https://github.com/znuny/Znuny/blob/rel-6_1-dev/var/httpd/htdocs/skins/Agent/default/img/logo.png"></a>
+<a href="https://www.znuny.org"><img align="center" src="https://github.com/znuny/Znuny/blob/dev/var/httpd/htdocs/skins/Agent/default/img/logo.png"></a>
 
 <p align="center">
     <a href="https://download.znuny.org/releases/znuny-latest.tar.gz"><img src="https://img.shields.io/github/v/tag/znuny/Znuny?label=latest%20release"></a>
