@@ -362,7 +362,7 @@
         <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Hash>
-                <Item Key="URL">skins/Agent/default/img/loginlogo_default.png</Item>
+                <Item Key="URL">skins/Agent/default/img/logo.png</Item>
                 <Item Key="StyleHeight">60px</Item>
             </Hash>
         </Value>
@@ -2836,10 +2836,20 @@
         </Value>
     </Setting>
     <Setting Name="PDF::LogoFile" Required="1" Valid="1">
-        <Description Translatable="1">Specifies the path of the file for the logo in the page header (gif|jpg|png, 700 x 100 pixel).</Description>
+        <Description Translatable="1">Specifies the path of the file for the logo in the page header (gif|jpg|png).</Description>
         <Navigation>Core::PDF</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Home&gt;/var/logo-otrs.png</Item>
+            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Home&gt;/var/httpd/htdocs/skins/Agent/default/img/logo.png</Item>
+        </Value>
+    </Setting>
+    <Setting Name="PDF::LogoSize" Required="1" Valid="1">
+        <Description Translatable="1">Size of the logo in the page header.</Description>
+        <Navigation>Core::PDF</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Width">475</Item>
+                <Item Key="Height">100</Item>
+            </Hash>
         </Value>
     </Setting>
     <Setting Name="PDF::PageSize" Required="1" Valid="1">
