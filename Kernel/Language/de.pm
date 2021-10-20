@@ -34,6 +34,8 @@ sub Data {
     $Self->{ThousandSeparator} = '.';
     $Self->{Translation} = {
 
+        'Ticket event module which sends new ticket notifications even for tickets without articles.'
+            => 'Ticket-Eventmodul, das Benachrichtigungen für Prozess-Tickets versendet, die keine Artikel haben.',
         'Size of the logo in the page header.' => 'Größe des Logos im Seiten-Header.',
 
         'Keep XML attributes' => 'XML-Attribute beibehalten',

@@ -1162,6 +1162,35 @@
     </Setting>
 
     <!--
+        Ticket event module for triggering a new event when all child tickets of a parent ticket have been closed.
+    -->
+    <Setting Name="Ticket::EventModulePost###2000-TicketAllChildrenClosed" Required="0" Valid="1">
+        <Description Translatable="1">Triggers event 'TicketAllChildrenClosed' if all child tickets of a parent ticket have been closed/merged/removed.</Description>
+        <Navigation>Core::Event::Ticket</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Ticket::Event::TicketAllChildrenClosed</Item>
+                <Item Key="Event">TicketStateUpdate|TicketCreate</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!--
+        Notifications for empty process tickets
+    -->
+    <Setting Name="Ticket::EventModulePost###999-NotifyOnEmptyProcessTickets" Required="0" Valid="1">
+        <Description Translatable="1">Ticket event module which sends new ticket notifications even for tickets without articles.</Description>
+        <Navigation>Core::Event::Ticket</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Ticket::Event::NotifyOnEmptyProcessTickets</Item>
+                <Item Key="Event">TicketCreate</Item>
+                <Item Key="Transaction">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!--
         Dynamic field attachment for process management.
     -->
     <Setting Name="Process::DynamicFieldProcessManagementAttachment" Required="1" Valid="1">
