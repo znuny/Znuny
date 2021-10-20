@@ -768,8 +768,20 @@ sub RequesterPerformRequest {
             );
         }
 
+        # Crypt::SSLeay needs the following environment variables for SSL.
+        # See https://metacpan.org/dist/SOAP-Lite/view/lib/SOAP/Transport.pod#SSL-CERTIFICATE-AUTHENTICATION
+        if ( IsStringWithData( $Config->{SSL}->{SSLCertificate} ) ) {
+            $ENV{HTTPS_CERT_FILE} = $Config->{SSL}->{SSLCertificate};    ## no critic
+        }
+        if ( IsStringWithData( $Config->{SSL}->{SSLKey} ) ) {
+            $ENV{HTTPS_KEY_FILE} = $Config->{SSL}->{SSLKey};             ## no critic
+        }
+        if ( IsStringWithData( $Config->{SSL}->{SSLPassword} ) ) {
+            $ENV{HTTPS_CERT_PASS} = $Config->{SSL}->{SSLPassword};       ## no critic
+        }
+
         # see https://github.com/OTRS/otrs/pull/1474
-        $ENV{PERL_NET_HTTPS_SSL_SOCKET_CLASS} = 'Net::SSL';    ## no critic
+        $ENV{PERL_NET_HTTPS_SSL_SOCKET_CLASS} = 'Net::SSL';              ## no critic
     }
 
     # Add proxy options if configured.
@@ -1047,7 +1059,7 @@ sub RequesterPerformRequest {
 
     # Build response wrapper name
     #   possible values are 'Append', 'Plain', 'Replace' and 'Response'
-    my $OperationResponse = $Param{Operation};
+    my $OperationResponse = $OperationName;
     $Config->{ResponseNameScheme} ||= 'Response';
     if ( $Config->{ResponseNameScheme} eq 'Response' ) {
         $Config->{ResponseNameScheme}   = 'Append';
@@ -1079,7 +1091,7 @@ sub RequesterPerformRequest {
         return {
             Success => 0,
             ErrorMessage =>
-                "No response data found for specified operation '$Param{Operation}'"
+                "No response data found for specified operation '$OperationName'"
                 . " in soap response",
         };
     }

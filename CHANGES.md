@@ -1,4 +1,5 @@
 # 6.2.1 2021-XX-XX
+ - 2021-10-18 Generic interface HTTP SOAP transport: Added SSL environment variables for Crypt::SSLeay and fixed operation name in response evaluation.
  - 2021-10-14 Integrated package Znuny4OTRS-NotifyOnEmptyProcessTickets.
  - 2021-10-13 Added thirdparty/jscolor-2.4.6 js lib - colorpicker (used in GeneralCatalog).
  - 2021-10-11 Integrated package Znuny4OTRS-AdvancedProcessManagement.
