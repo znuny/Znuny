@@ -1,4 +1,5 @@
 # 6.0.38 2021-xx-xx
+ - 2021-10-21 Fixed Need Ticket ID error when switching templates in AgentTicketCommon Modules [#127](https://github.com/znuny/Znuny/issues/127).
  - 2021-10-15 Fixed "Need ticket ID" error in Kernel::Modules::AgentTicketEmailOutbound (#130). [#130](https://github.com/znuny/Znuny/issues/130)
  - 2021-10-12 Fixed translation bug in Kernel::Output::HTML::Layout::_BuildSelectionDataRefCreate.
  - 2021-10-11 Updated CPAN package Mozilla/CA.
