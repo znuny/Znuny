@@ -1,25 +1,23 @@
 # 6.2.1 2021-XX-XX
  - 2021-10-22 Integrated package Znuny4OTRS-TicketAttributeRelations.
- - 2021-10-21 Fixed Need Ticket ID error when switching templates in AgentTicketCommon Modules [#127](https://github.com/znuny/Znuny/issues/127).
- - 2021-10-15 Fixed "Need ticket ID" error in Kernel::Modules::AgentTicketEmailOutbound (#130). [#130](https://github.com/znuny/Znuny/issues/130)
+ - 2021-10-21 Fixed error log message for missing days in Kernel::System::SysConfig::ValueType::WorkingHours::ModifiedValueGet(). [#122](https://github.com/znuny/Znuny/issues/122)
+ - 2021-10-21 Fixed "Need Ticket ID" error when switching templates in AgentTicketCommon modules. [#127](https://github.com/znuny/Znuny/issues/127)
  - 2021-10-18 Generic interface HTTP SOAP transport: Added SSL environment variables for Crypt::SSLeay and fixed operation name in response evaluation.
+ - 2021-10-15 Fixed "Need ticket ID" error in Kernel::Modules::AgentTicketEmailOutbound. [#130](https://github.com/znuny/Znuny/issues/130)
  - 2021-10-14 Integrated package Znuny4OTRS-NotifyOnEmptyProcessTickets.
  - 2021-10-13 Added thirdparty/jscolor-2.4.6 js lib - colorpicker (used in GeneralCatalog).
  - 2021-10-11 Integrated package Znuny4OTRS-AdvancedProcessManagement.
- - 2021-10-07 Added attachments to transition action TicketCreate (#149). Thanks to Sector Nord AG (@LuBroering ). [#149](https://github.com/znuny/Znuny/pull/149)
- - 2021-10-07 Sector Nord AG: Added Attachments to TransitionAction TicketCreate (#149). Thanks to Sector Nord AG (@LuBroering ). [#149](https://github.com/znuny/Znuny/pull/149)
+ - 2021-10-07 Sector Nord AG: Added Attachments to TransitionAction TicketCreate. Thanks to Sector Nord AG (@LuBroering ). [#149](https://github.com/znuny/Znuny/pull/149)
  - 2021-10-06 Added support for content type application/xml to generic interface REST transport.
  - 2021-10-06 Added option to keep attributes of XML in generic interface XSLT mapping.
- - 2021-10-06 Added optional check condition to transition actions (#144). Thanks to Paul Folkers (Sector Nord AG, @paulfolkers). [#144](https://github.com/znuny/Znuny/pull/144)
- - 2021-10-06 Added transition action parameter placeholder (#145). Thanks to Sector Nord AG (@tjsinagowitz). [#145](https://github.com/znuny/Znuny/pull/145)
- - 2021-10-06 Sector Nord AG: Added optional check condition in TransitionActions (#144). Thanks to Sector Nord AG (@paulfolkers). [#144](https://github.com/znuny/Znuny/pull/144)
- - 2021-10-06 Sector Nord AG: Added TransitionAction parameter placeholder (#145). Thanks to Sector Nord AG (@tjsinagowitz). [#145](https://github.com/znuny/Znuny/pull/145)
- - 2021-10-05 Added ticket event and event module 'TicketAllChildrenClosed' (#143). Thanks to Paul Folkers (Sector Nord AG, @paulfolkers). [#143](https://github.com/znuny/Znuny/pull/143)
- - 2021-10-01 Added initial config for Frontend::Navigation###AdminCustomerUserCustomer###001-Framework (#146). Thanks to Kevin Janssen (@BuTzZ). [#146](https://github.com/znuny/Znuny/pull/146)
- - 2021-10-01 Fixed error "Can't sign: unable to write 'random state'" if sending emails signed with S/MIME. – OTRS bug #14522 (#72). Thanks to Kai Herlemann (@KaiHerlemann). [#72](https://github.com/znuny/Znuny/pull/72)
- - 2021-08-31 Added generic interface operation SessionRemove (#120). Thanks to Kevin Janssen (@BuTzZ). [#120](https://github.com/znuny/Znuny/pull/120)
- - 2021-08-20 Added SysConfig option to enable week numbers in the datepicker widget (#89). Thanks to Renée Bäcker (@reneeb). [#89](https://github.com/znuny/Znuny/pull/89)
- - 2021-08-20 Added new autocomplete values to input fields (#67). Thanks to maxence (@tipue-dev). [#67](https://github.com/znuny/Znuny/pull/67)
+ - 2021-10-06 Sector Nord AG: Added optional check condition in TransitionActions. Thanks to Sector Nord AG (@paulfolkers). [#144](https://github.com/znuny/Znuny/pull/144)
+ - 2021-10-06 Sector Nord AG: Added TransitionAction parameter placeholder. Thanks to Sector Nord AG (@tjsinagowitz). [#145](https://github.com/znuny/Znuny/pull/145)
+ - 2021-10-05 Sector Nord AG: Added ticket event and event module TicketAllChildrenClosed. Thanks to Sector Nord AG (@paulfolkers). [#143](https://github.com/znuny/Znuny/pull/143)
+ - 2021-10-01 Added initial config for Frontend::Navigation###AdminCustomerUserCustomer###001-Framework. Thanks to Kevin Janssen (@BuTzZ). [#146](https://github.com/znuny/Znuny/pull/146)
+ - 2021-10-01 Fixed error "Can't sign: unable to write 'random state'" if sending emails signed with S/MIME (OTRS bug #14522). Thanks to Kai Herlemann (@KaiHerlemann). [#72](https://github.com/znuny/Znuny/pull/72)
+ - 2021-08-31 Added generic interface operation SessionRemove. Thanks to Kevin Janssen (@BuTzZ). [#120](https://github.com/znuny/Znuny/pull/120)
+ - 2021-08-20 Added SysConfig option to enable week numbers in the datepicker widget. Thanks to Renée Bäcker (@reneeb). [#89](https://github.com/znuny/Znuny/pull/89)
+ - 2021-08-20 Added new autocomplete values to input fields. Thanks to maxence (@tipue-dev). [#67](https://github.com/znuny/Znuny/pull/67)
 
 # 6.1.2 2021-09-29
  - 2021-09-28 Added missing migration module scripts::MigrateToZnuny6_1::InitializeDefaultCronjobs.
