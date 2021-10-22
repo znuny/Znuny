@@ -218,12 +218,24 @@ sub _TasksGet {
             Message => 'Check if database has been backed up',
             Module  => 'scripts::Migration::Base::DatabaseBackupCheck',
         },
+
+        # >>> Znuny 6.2
+        {
+            Message => 'Upgrade database structure',
+            Module  => 'scripts::Migration::Znuny6_2::UpgradeDatabaseStructure',
+        },
+
+        # <<< Znuny 6.2
         {
             Message => 'Rebuild configuration',
             Module  => 'scripts::Migration::Base::RebuildConfig',
         },
 
-        # Znuny 6.2
+        # >>> Znuny 6.2
+        {
+            Message => 'Migrate SysConfig settings',
+            Module  => 'scripts::Migration::Znuny6_2::MigrateSysConfigSettings',
+        },
         {
             Message => 'Migrate web service configuration',
             Module  => 'scripts::Migration::Znuny6_2::MigrateProcessManagement',
@@ -236,7 +248,8 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Znuny6_2::UninstallMergedPackages',
         },
 
-        # Base
+        # <<< Znuny 6.2
+
         {
             Message => 'Initialize default cron jobs',
             Module  => 'scripts::Migration::Base::InitializeDefaultCronjobs',

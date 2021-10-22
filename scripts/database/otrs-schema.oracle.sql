@@ -69,6 +69,60 @@ CREATE TABLE acl_sync (
     change_time DATE NOT NULL
 );
 -- ----------------------------------------------------------
+--  create table acl_ticket_attribute_relations
+-- ----------------------------------------------------------
+CREATE TABLE acl_ticket_attribute_relations (
+    id NUMBER (20, 0) NOT NULL,
+    filename VARCHAR2 (255) NOT NULL,
+    attribute_1 VARCHAR2 (200) NOT NULL,
+    attribute_2 VARCHAR2 (200) NOT NULL,
+    acl_data CLOB NOT NULL,
+    priority NUMBER (20, 0) NOT NULL,
+    create_time DATE NOT NULL,
+    create_by NUMBER (12, 0) NOT NULL,
+    change_time DATE NOT NULL,
+    change_by NUMBER (12, 0) NOT NULL,
+    CONSTRAINT acl_tar_filename UNIQUE (filename)
+);
+ALTER TABLE acl_ticket_attribute_relations ADD CONSTRAINT PK_acl_ticket_attribute_relac5 PRIMARY KEY (id);
+BEGIN
+    EXECUTE IMMEDIATE 'DROP SEQUENCE SE_acl_ticket_attribute_reab';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE SEQUENCE SE_acl_ticket_attribute_reab
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+CACHE 20
+ORDER
+;
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TRIGGER SE_acl_ticket_attribute_reab_t';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE OR REPLACE TRIGGER SE_acl_ticket_attribute_reab_t
+BEFORE INSERT ON acl_ticket_attribute_relations
+FOR EACH ROW
+BEGIN
+    IF :new.id IS NULL THEN
+        SELECT SE_acl_ticket_attribute_reab.nextval
+        INTO :new.id
+        FROM DUAL;
+    END IF;
+END;
+/
+--
+;
+-- ----------------------------------------------------------
 --  create table valid
 -- ----------------------------------------------------------
 CREATE TABLE valid (

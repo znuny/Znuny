@@ -17,6 +17,7 @@ use parent qw(scripts::Migration::Base);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
+    'Kernel::System::DynamicField',
     'Kernel::System::ProcessManagement::DB::Transition',
     'Kernel::System::ProcessManagement::DB::TransitionAction',
 );
@@ -30,8 +31,9 @@ Migrate ProcessManagement configuration.
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    $Self->_MigrateTransitionActions(%Param);
-    $Self->_MigrateTransitionValidations(%Param);
+    return if !$Self->_MigrateTransitionActions(%Param);
+    return if !$Self->_MigrateTransitionValidations(%Param);
+    return if !$Self->_CreateProcessManagementAttachmentDynamicField(%Param);
 
     return 1;
 }
@@ -126,6 +128,36 @@ sub _MigrateTransitionValidations {
             UserID => 1,
         );
     }
+
+    return 1;
+}
+
+sub _CreateProcessManagementAttachmentDynamicField {
+    my ( $Self, %Param ) = @_;
+
+    my $DynamicFieldName = 'ProcessManagementAttachment';
+
+    my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
+        Name => $DynamicFieldName,
+    );
+    return 1 if IsHashRefWithData($DynamicFieldConfig);
+
+    my $DynamicFieldID = $DynamicFieldObject->DynamicFieldAdd(
+        InternalField => 1,
+        Name          => $DynamicFieldName,
+        Label         => 'Attachment',
+        FieldOrder    => 1,
+        FieldType     => 'TextArea',
+        ObjectType    => 'Ticket',
+        Config        => {
+            DefaultValue => '',
+        },
+        Reorder => 1,
+        ValidID => 1,
+        UserID  => 1,
+    );
+    return if !$DynamicFieldID;
 
     return 1;
 }

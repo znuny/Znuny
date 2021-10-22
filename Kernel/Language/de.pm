@@ -34,13 +34,35 @@ sub Data {
     $Self->{ThousandSeparator} = '.';
     $Self->{Translation} = {
 
+        'Ticket attribute related ACLs'                               => 'Ticketattributabhängige ACLs',
+        'Management of ticket attribute related ACLs.'                => 'Verwaltung von ticketattributabhängigen ACLs.',
+        'Adds ticket attribute related ACLs based on CSV/Excel data.' => 'Fügt auf CSV-/Excel-Daten basierende ticketattributabhängige ACLs hinzu.',
+        'Available/allowed actions in ticket attribute related ACLs.' => 'Verfügbare/erlaubte Actions in ticketattributabhängigen ACLs.',
+        'Always adds empty values to the ticket attribute related ACLs so that it is not needed to add it to the CSV/Excel data.'
+            => 'Fügt immer leere Werte zu ticketattributabhängigen ACLs hinzu, so dass diese nicht zu den CSV-/Excel-Daten hinzugefügt werden müssen.',
+        'Add ticket attribute related ACL'  => 'Ticketattributabhängige ACL hinzufügen',
+        'Edit ticket attribute related ACL' => 'Ticketattributabhängige ACL bearbeiten',
+        'Import CSV or Excel file' => 'CSV- oder Excel-Datei importieren',
+        'Download previously imported file' => 'Zuvor importierte Datei herunterladen',
+        'The file needs to be in CSV (UTF-8) or Excel format. Both header columns need to contain the names of valid ticket attributes. The name of the uploaded file must be unique and must not be in use by another ticket attribute relations record.'
+            => 'Die Datei muss CSV- (UTF-8) oder Excel-Format haben. Beide Kopfspalten müssen den Namen von gültigen Ticket-Attributen enthalten. Der Name der hochgeladenen Datei muss eindeutig sein und darf nicht bereits für einen anderen Datensatz verwendet worden sein.',
+        'Add missing possible dynamic field values' => 'Fehlende mögliche Werte zu dynamischen Feldern hinzufügen',
+        'If a value is colored red, it is missing from the possible values list of the dynamic field configuration.'
+            => 'Falls ein Wert rot ist, fehlt er in der Liste der möglichen Werte der Konfiguration des dynamischen Felds.',
+        'Attribute values' => 'Attributwerte',
+        'Last update' => 'Letzte Aktualisierung',
+        "Are you sure you want to delete entry '%s'?" => "Sind Sie sicher, dass der Eintrag '%s' gelöscht werden soll?",
+
         'Ticket event module which sends new ticket notifications even for tickets without articles.'
             => 'Ticket-Eventmodul, das Benachrichtigungen für Prozess-Tickets versendet, die keine Artikel haben.',
+
         'Size of the logo in the page header.' => 'Größe des Logos im Seiten-Header.',
 
         'Keep XML attributes' => 'XML-Attribute beibehalten',
         'Only needed for content type XML.' => 'Nur für Content-Type XML benötigt.',
+
         'Operator' => 'Operator',
+
         "Triggers event 'TicketAllChildrenClosed' if all child tickets of a parent ticket have been closed/merged/removed."
             => "Löst Event 'TicketAllChildrenClosed' aus, wenn alle Kind-Tickets eines Eltern-Tickets den Status geschlossen/gemergt/entfernt erreicht haben.",
         'Name of the dynamic field in which the attachment file IDs of the transition will be stored.'

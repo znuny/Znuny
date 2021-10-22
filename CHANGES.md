@@ -1,4 +1,5 @@
 # 6.2.1 2021-XX-XX
+ - 2021-10-22 Integrated package Znuny4OTRS-TicketAttributeRelations.
  - 2021-10-21 Fixed Need Ticket ID error when switching templates in AgentTicketCommon Modules [#127](https://github.com/znuny/Znuny/issues/127).
  - 2021-10-15 Fixed "Need ticket ID" error in Kernel::Modules::AgentTicketEmailOutbound (#130). [#130](https://github.com/znuny/Znuny/issues/130)
  - 2021-10-18 Generic interface HTTP SOAP transport: Added SSL environment variables for Crypt::SSLeay and fixed operation name in response evaluation.

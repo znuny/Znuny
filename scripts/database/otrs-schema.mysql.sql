@@ -30,6 +30,23 @@ CREATE TABLE acl_sync (
     change_time DATETIME NOT NULL
 );
 # ----------------------------------------------------------
+#  create table acl_ticket_attribute_relations
+# ----------------------------------------------------------
+CREATE TABLE acl_ticket_attribute_relations (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    filename VARCHAR (255) NOT NULL,
+    attribute_1 VARCHAR (200) NOT NULL,
+    attribute_2 VARCHAR (200) NOT NULL,
+    acl_data MEDIUMTEXT NOT NULL,
+    priority BIGINT NOT NULL,
+    create_time DATETIME NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time DATETIME NOT NULL,
+    change_by INTEGER NOT NULL,
+    PRIMARY KEY(id),
+    UNIQUE INDEX acl_tar_filename (filename)
+);
+# ----------------------------------------------------------
 #  create table valid
 # ----------------------------------------------------------
 CREATE TABLE valid (

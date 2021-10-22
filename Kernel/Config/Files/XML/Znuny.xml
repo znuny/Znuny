@@ -1162,6 +1162,139 @@
     </Setting>
 
     <!--
+        Ticket attribute relations
+    -->
+    <Setting Name="Frontend::Module###AdminTicketAttributeRelations" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Admin</Item>
+                    <Item Key="Title" Translatable="1">Ticket attribute related ACLs</Item>
+                    <Item Key="NavBarName">Admin</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AdminTicketAttributeRelations###999-Znuny" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the admin interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.TicketAttributeRelations.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Navigation###AdminTicketAttributeRelations###003-TicketAttributeRelations" Required="0" Valid="0">
+        <Description Translatable="1">Main menu item registration.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::NavigationModule###AdminTicketAttributeRelations" Required="0" Valid="1">
+        <Description Translatable="1">Admin area navigation for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Group">
+                    <Array>
+                        <Item>admin</Item>
+                    </Array>
+                </Item>
+                <Item Key="GroupRo">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
+                <Item Key="Name" Translatable="1">Ticket attribute related ACLs</Item>
+                <Item Key="Block">Automation</Item>
+                <Item Key="Description" Translatable="1">Management of ticket attribute related ACLs.</Item>
+                <Item Key="IconBig"></Item>
+                <Item Key="IconSmall"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Acl::Module###100-TicketAttributeRelations" Required="1" Valid="1">
+        <Description Translatable="1">Adds ticket attribute related ACLs based on CSV/Excel data.</Description>
+        <Navigation>Core::Ticket::ACL</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Ticket::Acl::TicketAttributeRelations</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Core::TicketAttributeRelations::ACLActions" Required="1" Valid="1">
+        <Description Translatable="1">Available/allowed actions in ticket attribute related ACLs.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Array>
+                <Item>AgentTicketBounce</Item>
+                <Item>AgentTicketClose</Item>
+                <Item>AgentTicketCompose</Item>
+                <Item>AgentTicketCustomer</Item>
+                <Item>AgentTicketDecision</Item>
+                <Item>AgentTicketEmail</Item>
+                <Item>AgentTicketEmailOutbound</Item>
+                <Item>AgentTicketEmailSecond</Item>
+                <Item>AgentTicketForward</Item>
+                <Item>AgentTicketFreeText</Item>
+                <Item>AgentTicketMerge</Item>
+                <Item>AgentTicketMove</Item>
+                <Item>AgentTicketNote</Item>
+                <Item>AgentTicketOwner</Item>
+                <Item>AgentTicketPending</Item>
+                <Item>AgentTicketPhone</Item>
+                <Item>AgentTicketPhoneInbound</Item>
+                <Item>AgentTicketPhoneOutbound</Item>
+                <Item>AgentTicketPhoneSecond</Item>
+                <Item>AgentTicketPriority</Item>
+                <Item>AgentTicketProcess</Item>
+                <Item>AgentTicketResponsible</Item>
+                <Item>CustomerTicketMessage</Item>
+                <Item>CustomerTicketProcess</Item>
+                <Item>CustomerTicketZoom</Item>
+
+                <!-- The following actions are supported by package Znuny4OTRS-AdditionalCommon -->
+                <Item>AgentTicketAdditionalCommon1</Item>
+                <Item>AgentTicketAdditionalCommon2</Item>
+                <Item>AgentTicketAdditionalCommon3</Item>
+                <Item>AgentTicketAdditionalCommon4</Item>
+                <Item>AgentTicketAdditionalCommon5</Item>
+                <Item>AgentTicketAdditionalCommon6</Item>
+                <Item>AgentTicketAdditionalCommon7</Item>
+                <Item>AgentTicketAdditionalCommon8</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Core::TicketAttributeRelations::AlwaysPossibleNone" Required="1" Valid="1">
+        <Description Translatable="1">Always adds empty values to the ticket attribute related ACLs so that it is not needed to add it to the CSV/Excel data.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+
+    <!--
         Ticket event module for triggering a new event when all child tickets of a parent ticket have been closed.
     -->
     <Setting Name="Ticket::EventModulePost###2000-TicketAllChildrenClosed" Required="0" Valid="1">

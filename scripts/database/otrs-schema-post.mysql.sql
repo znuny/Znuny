@@ -13,6 +13,14 @@ SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHER
 SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE acl ADD CONSTRAINT FK_acl_valid_id_id FOREIGN KEY (valid_id) REFERENCES valid (id)', 'SELECT ''INFO: Foreign key constraint FK_acl_valid_id_id does already exist, skipping.''' );
 PREPARE FKStatement FROM @FKSQLStatement;
 EXECUTE FKStatement;
+SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHERE table_schema = DATABASE() AND table_name = 'acl_ticket_attribute_relations' AND constraint_name = 'FK_acl_ticket_attribute_relations_create_by_id');
+SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE acl_ticket_attribute_relations ADD CONSTRAINT FK_acl_ticket_attribute_relations_create_by_id FOREIGN KEY (create_by) REFERENCES users (id)', 'SELECT ''INFO: Foreign key constraint FK_acl_ticket_attribute_relations_create_by_id does already exist, skipping.''' );
+PREPARE FKStatement FROM @FKSQLStatement;
+EXECUTE FKStatement;
+SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHERE table_schema = DATABASE() AND table_name = 'acl_ticket_attribute_relations' AND constraint_name = 'FK_acl_ticket_attribute_relations_change_by_id');
+SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE acl_ticket_attribute_relations ADD CONSTRAINT FK_acl_ticket_attribute_relations_change_by_id FOREIGN KEY (change_by) REFERENCES users (id)', 'SELECT ''INFO: Foreign key constraint FK_acl_ticket_attribute_relations_change_by_id does already exist, skipping.''' );
+PREPARE FKStatement FROM @FKSQLStatement;
+EXECUTE FKStatement;
 SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHERE table_schema = DATABASE() AND table_name = 'valid' AND constraint_name = 'FK_valid_create_by_id');
 SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE valid ADD CONSTRAINT FK_valid_create_by_id FOREIGN KEY (create_by) REFERENCES users (id)', 'SELECT ''INFO: Foreign key constraint FK_valid_create_by_id does already exist, skipping.''' );
 PREPARE FKStatement FROM @FKSQLStatement;

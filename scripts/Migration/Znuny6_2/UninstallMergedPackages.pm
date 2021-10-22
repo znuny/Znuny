@@ -45,10 +45,15 @@ sub Run {
         Type => 'XMLParse',
     );
 
+    # Note: Znuny and Znuny4OTRS in case one of the packages later will be built with the Znuny prefix for
+    # Znuny 6.1.
     PACKAGENAME:
     for my $PackageName (
         qw(
+        Znuny-AdvancedProcessManagement
+        Znuny-TicketAttributeRelations
         Znuny4OTRS-AdvancedProcessManagement
+        Znuny4OTRS-TicketAttributeRelations
         )
         )
     {

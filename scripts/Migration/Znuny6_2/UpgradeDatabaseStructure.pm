@@ -13,14 +13,11 @@ package scripts::Migration::Znuny6_2::UpgradeDatabaseStructure;    ## no critic
 use strict;
 use warnings;
 
-use parent qw(scripts::Migration::Znuny6_2::Base);
+use parent qw(scripts::Migration::Base);
 
 our @ObjectDependencies = (
-    'Kernel::Config',
-    'Kernel::System::DB',
-    'Kernel::System::Log',
-    'Kernel::System::Main',
     'Kernel::System::Console::Command::Maint::Database::Check',
+    'Kernel::System::Main',
 );
 
 =head1 SYNOPSIS
@@ -39,12 +36,12 @@ sub Run {
 
     my @Tasks = (
         {
-            Message => 'Insert attachment dynamic field',
-            Module  => 'InsertProcessManagementAttachment',
+            Message => 'Insert or upgrade ticket attribute relations table',
+            Module  => 'TicketAttributeRelations',
         },
     );
 
-    return if !@Tasks;
+    return     if !@Tasks;
     print "\n" if $Verbose;
 
     TASK:

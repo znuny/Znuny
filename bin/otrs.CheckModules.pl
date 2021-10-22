@@ -519,6 +519,17 @@ my @NeededModules = (
         },
     },
     {
+        Module    => 'Spreadsheet::XLSX',
+        Required  => 0,
+        Comment   => 'Spreadsheet::XLSX enables import of Excel files in certain dialogs.',
+        InstTypes => {
+            aptget => 'libspreadsheet-xlsx-perl',
+            emerge => 'dev-perl/Spreadsheet-XLSX',
+            zypper => 'perl-Spreadsheet-XLSX',
+            ports  => 'www/p5-Spreadsheet-XLSX',
+        },
+    },
+    {
         Module    => 'Template',
         Required  => 1,
         Comment   => 'Template::Toolkit, the rendering engine of OTRS.',
