@@ -1,10 +1,10 @@
 # 6.0.38 2021-xx-xx
- - 2021-10-21 Fixed Need Ticket ID error when switching templates in AgentTicketCommon Modules [#127](https://github.com/znuny/Znuny/issues/127).
- - 2021-10-15 Fixed "Need ticket ID" error in Kernel::Modules::AgentTicketEmailOutbound (#130). [#130](https://github.com/znuny/Znuny/issues/130)
+ - 2021-10-21 Fixed "Need Ticket ID" error when switching templates in AgentTicketCommon modules. [#127](https://github.com/znuny/Znuny/issues/127)
+ - 2021-10-15 Fixed "Need ticket ID" error in Kernel::Modules::AgentTicketEmailOutbound. [#130](https://github.com/znuny/Znuny/issues/130)
  - 2021-10-12 Fixed translation bug in Kernel::Output::HTML::Layout::_BuildSelectionDataRefCreate.
  - 2021-10-11 Updated CPAN package Mozilla/CA.
- - 2021-10-01 Disabled connection to external RSS during unit testing (#45). Thanks to Paweł Bogusławski (@pboguslawski). [#45](https://github.com/znuny/Znuny/pull/45)
- - 2021-10-01 Fixed error "Can't sign: unable to write 'random state'" if sending emails signed with S/MIME. – OTRS bug #14522 (#72). Thanks to Kai Herlemann (@KaiHerlemann). [#72](https://github.com/znuny/Znuny/pull/72)
+ - 2021-10-01 Disabled connection to external RSS during unit testing. Thanks to Paweł Bogusławski (@pboguslawski). [#45](https://github.com/znuny/Znuny/pull/45)
+ - 2021-10-01 Fixed error "Can't sign: unable to write 'random state'" if sending emails signed with S/MIME (OTRS bug #14522). Thanks to Kai Herlemann (@KaiHerlemann). [#72](https://github.com/znuny/Znuny/pull/72)
 
 # 6.0.37 2021-09-29
  - 2021-09-28 Removed MySQL performance check module from support data collector. It only tests for the now deprecated MySQL setting 'query_cache_size'. Thanks for the hint to GitHub user arndkeyz.
