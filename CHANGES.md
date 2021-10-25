@@ -2,6 +2,7 @@
  - 2021-10-22 Integrated package Znuny4OTRS-TicketAttributeRelations.
  - 2021-10-21 Fixed error log message for missing days in Kernel::System::SysConfig::ValueType::WorkingHours::ModifiedValueGet(). [#122](https://github.com/znuny/Znuny/issues/122)
  - 2021-10-21 Fixed "Need Ticket ID" error when switching templates in AgentTicketCommon modules. [#127](https://github.com/znuny/Znuny/issues/127)
+ - 2021-10-19 Console command Dev::Code::CPANUpdate now uses proxy and SSL settings of SysConfig options WebUserAgent::Proxy and WebUserAgent::DisableSSLVerification.
  - 2021-10-18 Generic interface HTTP SOAP transport: Added SSL environment variables for Crypt::SSLeay and fixed operation name in response evaluation.
  - 2021-10-15 Fixed "Need ticket ID" error in Kernel::Modules::AgentTicketEmailOutbound. [#130](https://github.com/znuny/Znuny/issues/130)
  - 2021-10-14 Integrated package Znuny4OTRS-NotifyOnEmptyProcessTickets.
