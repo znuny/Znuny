@@ -87,11 +87,13 @@ sub Run {
             $Self->Print( $Module . $Space . $Installed . $SpaceInstalled );
 
             my $ProxySetting                  = $Self->_GetProxySetting();
+            my $NoProxySetting                = $Self->_GetNoProxySetting();
             my $DisableSSLVerificationSetting = $Self->_GetDisableSSLVerificationSetting();
 
             my $URL = sprintf "https://fastapi.metacpan.org/v1/download_url/%s", $Module;
-            my $Available
-                = `wget $ProxySetting $DisableSSLVerificationSetting -q -O - $URL | grep version | cut -d '"' -f4`;
+            my $Command
+                = "wget $ProxySetting $NoProxySetting $DisableSSLVerificationSetting -q -O - $URL | grep version | cut -d '\"' -f4";
+            my $Available = `$Command`;
             chomp $Available;
 
             $Available ||= '0';
@@ -187,10 +189,11 @@ sub InstallModule {
     File::Path::make_path($TmpDir) || die "Could not create $TmpDir: $!.";
 
     my $ProxySetting                  = $Self->_GetProxySetting();
+    my $NoProxySetting                = $Self->_GetNoProxySetting();
     my $DisableSSLVerificationSetting = $Self->_GetDisableSSLVerificationSetting();
 
     my $Command
-        = "wget $ProxySetting $DisableSSLVerificationSetting -q -O - https://fastapi.metacpan.org/v1/download_url/$ModuleConfig->{Module} | grep download_url | cut -d '\"' -f4";
+        = "wget $ProxySetting $NoProxySetting $DisableSSLVerificationSetting -q -O - https://fastapi.metacpan.org/v1/download_url/$ModuleConfig->{Module} | grep download_url | cut -d '\"' -f4";
 
     my $DownloadURL = `$Command`;
     die "Error: Could not get DownloadURL." if !$DownloadURL;
@@ -243,9 +246,36 @@ sub _GetProxySetting {
     my $Proxy = $ConfigObject->Get('WebUserAgent::Proxy');
     return '' if !IsStringWithData($Proxy);
 
-    my $ProxySetting = "-e use_proxy=yes -e http_proxy=$Proxy -e https_proxy=$Proxy";
+    ( my $EscapedProxy = $Proxy ) =~ s{([\$"])}{\\$1}g;
+
+    my $ProxySetting = '-e use_proxy=yes -e http_proxy="' . $EscapedProxy . '" -e https_proxy="' . $EscapedProxy . '"';
 
     return $ProxySetting;
+}
+
+sub _GetNoProxySetting {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    my $NoProxies = $ConfigObject->Get('WebUserAgent::NoProxy');
+    return '' if !IsStringWithData($NoProxies);
+
+    my @NoProxies = split /\s*;\s*/, $NoProxies;
+    return '' if !@NoProxies;
+
+    my $NoProxySetting = '';
+
+    NOPROXY:
+    for my $NoProxy (@NoProxies) {
+        next NOPROXY if !IsStringWithData($NoProxy);
+
+        ( my $EscapedNoProxy = $NoProxy ) =~ s{([\$"])}{\\$1}g;
+
+        $NoProxySetting .= '-e no_proxy="' . $EscapedNoProxy . '" ';
+    }
+
+    return $NoProxySetting;
 }
 
 sub _GetDisableSSLVerificationSetting {
