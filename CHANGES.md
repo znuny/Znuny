@@ -1,4 +1,5 @@
 # 6.2.1 2021-10-27
+ - 2021-10-26 Fixed call to encode_base64 in Kernel::System::Ticket. Thanks to @Reedu. [#160](https://github.com/znuny/Znuny/issues/160)
  - 2021-10-25 Console command Dev::Code::CPANUpdate now uses proxy and SSL settings of SysConfig options WebUserAgent::Proxy, WebUserAgent::NoProxy and WebUserAgent::DisableSSLVerification.
  - 2021-10-22 Integrated package Znuny4OTRS-TicketAttributeRelations.
  - 2021-10-21 Fixed error log message for missing days in Kernel::System::SysConfig::ValueType::WorkingHours::ModifiedValueGet(). [#122](https://github.com/znuny/Znuny/issues/122)
