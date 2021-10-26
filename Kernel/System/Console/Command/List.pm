@@ -67,8 +67,10 @@ sub Run {
             $UsageText .= "<yellow>$CommandNamespace</yellow>\n";
             $PreviousCommandNameSpace = $CommandNamespace;
         }
-        $UsageText .= sprintf( " <green>%-" . $MaxCommandLength . "s</green> - %s\n",
-            $CommandName, $CommandObject->Description() );
+        $UsageText .= sprintf(
+            " <green>%-" . $MaxCommandLength . "s</green> - %s\n",
+            $CommandName, $CommandObject->Description()
+        );
     }
 
     $Self->Print($UsageText);

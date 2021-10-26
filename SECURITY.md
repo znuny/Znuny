@@ -48,12 +48,13 @@ parties and forks of Znuny or the ((OTRS)) Community Edition.
 ## Supported Versions
 
 The following versions of Znuny are currently being supported with security updates.
-Older versions are not supported and have known vulnerabilities.
+Older/other versions are not supported and have known vulnerabilities.
 
 | Version | Supported          | Known vulnerabilities   |
 | ------- | ------------------ |------------------------ |
 | 6 LTS   | :white_check_mark: |:x:                      |
-| 6.1     | :white_check_mark: |:x:                      |
+| 6.1     | :x:                |:x:                      |
+| 6.2     | :white_check_mark: |:x:                      |
 
 
 ## How to report a security vulnerability?
