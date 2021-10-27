@@ -1180,7 +1180,7 @@
                         </Array>
                     </Item>
                     <Item Key="Description">Admin</Item>
-                    <Item Key="Title" Translatable="1">Ticket attribute related ACLs</Item>
+                    <Item Key="Title" Translatable="1">Ticket attribute relations</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
             </Item>
@@ -1226,16 +1226,16 @@
                     </Array>
                 </Item>
                 <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
-                <Item Key="Name" Translatable="1">Ticket attribute related ACLs</Item>
+                <Item Key="Name" Translatable="1">Ticket attribute relations</Item>
                 <Item Key="Block">Automation</Item>
-                <Item Key="Description" Translatable="1">Management of ticket attribute related ACLs.</Item>
+                <Item Key="Description" Translatable="1">Management of ticket attribute relations.</Item>
                 <Item Key="IconBig"></Item>
                 <Item Key="IconSmall"></Item>
             </Hash>
         </Value>
     </Setting>
     <Setting Name="Ticket::Acl::Module###100-TicketAttributeRelations" Required="1" Valid="1">
-        <Description Translatable="1">Adds ticket attribute related ACLs based on CSV/Excel data.</Description>
+        <Description Translatable="1">Adds ticket attribute relations based on CSV/Excel data.</Description>
         <Navigation>Core::Ticket::ACL</Navigation>
         <Value>
             <Hash>
@@ -1244,7 +1244,7 @@
         </Value>
     </Setting>
     <Setting Name="Core::TicketAttributeRelations::ACLActions" Required="1" Valid="1">
-        <Description Translatable="1">Available/allowed actions in ticket attribute related ACLs.</Description>
+        <Description Translatable="1">Available/allowed actions for ticket attribute relations.</Description>
         <Navigation>Core</Navigation>
         <Value>
             <Array>
@@ -1287,7 +1287,7 @@
         </Value>
     </Setting>
     <Setting Name="Core::TicketAttributeRelations::AlwaysPossibleNone" Required="1" Valid="1">
-        <Description Translatable="1">Always adds empty values to the ticket attribute related ACLs so that it is not needed to add it to the CSV/Excel data.</Description>
+        <Description Translatable="1">Always adds empty values to the ticket attribute relations so that it is not needed to add them to the CSV/Excel data.</Description>
         <Navigation>Core</Navigation>
         <Value>
             <Item ValueType="Checkbox">1</Item>

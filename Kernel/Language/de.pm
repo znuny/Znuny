@@ -2305,9 +2305,9 @@ sub Data {
         'Link %s to selected %s' => '%s zu %s (markiert) verknüpfen',
 
         # Template: AdminTicketAttributeRelations
-        'Ticket attribute related ACLs' => 'Ticketattributabhängige ACLs',
-        'Add ticket attribute related ACL' => 'Ticketattributabhängige ACL hinzufügen',
-        'Edit ticket attribute related ACL' => 'Ticketattributabhängige ACL bearbeiten',
+        'Ticket attribute relations' => 'Abhängige Ticketattribute',
+        'Add ticket attribute relations' => 'Abhängige Ticketattribute hinzufügen',
+        'Edit ticket attribute relations' => 'Abhängige Ticketattribute bearbeiten',
         'Import CSV or Excel file' => 'CSV- oder Excel-Datei importieren',
         'Last update' => 'Letzte Aktualisierung',
         'Are you sure you want to delete entry \'%s\'?' => 'Sind Sie sicher, dass der Eintrag \'%s\' gelöscht werden soll?',
@@ -6101,7 +6101,7 @@ Ihr Helpdesk-Team
         'Adds the permanent vacation days for the indicated calendar.' =>
             'Fügt die dauerhaften Urlaubstage für den angegebenen Kalender hinzu.',
         'Adds the permanent vacation days.' => 'Fügt die dauerhaften Urlaubstage hinzu.',
-        'Adds ticket attribute related ACLs based on CSV/Excel data.' => 'Fügt auf CSV-/Excel-Daten basierende ticketattributabhängige ACLs hinzu.',
+        'Adds ticket attribute relations based on CSV/Excel data.' => 'Fügt auf CSV-/Excel-Daten basierende abhängige Ticketattribute hinzu.',
         'Admin' => 'Admin',
         'Admin Area.' => 'Administratorbereich.',
         'Admin Notification' => 'Admin-Benachrichtigung',
@@ -6239,8 +6239,8 @@ Ihr Helpdesk-Team
             'Erlaubt das Speichern des aktuellen Stands als Entwurf im Verantwortlicher-Bildschirm des Agentenbereichs.',
         'Allows to set a new ticket state in the move ticket screen of the agent interface.' =>
             'Erlaubt das Setzen eines neuen Ticket-Status im Verschieben-Bildschirm im Agenten-Interface.',
-        'Always adds empty values to the ticket attribute related ACLs so that it is not needed to add it to the CSV/Excel data.' =>
-            'Fügt immer leere Werte zu ticketattributabhängigen ACLs hinzu, so dass diese nicht zu den CSV-/Excel-Daten hinzugefügt werden müssen.',
+        'Always adds empty values to the ticket attribute relations so that it is not needed to add them to the CSV/Excel data.' =>
+            'Fügt immer leere Werte zu abhängigen Ticketattributen hinzu, so dass diese nicht zu den CSV-/Excel-Daten hinzugefügt werden müssen.',
         'Always show RichText if available' => 'RichText immer verwenden, wenn verfügbar',
         'Answer' => 'Beantworten',
         'Appointment Calendar overview page.' => 'Terminkalender-Übersichtsseite.',
@@ -6271,7 +6271,7 @@ Ihr Helpdesk-Team
             'Setzt den Besitzer eines Tickets automatisch auch als Verantwortlichen (wenn das Verantwortlicher-Feature aktiviert ist). Dies wird nur durch manuelle Aktionen des eingeloggten Benutzers ausgelöst, nicht durch automatische wie GenericAgent, Postmaster oder GenericInterface.',
         'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>
             'Automatisches setzen eines Ticket-Verantwortlichen (wenn er noch nicht gesetzt wurde) nach dem ersten Besitzer-Update.',
-        'Available/allowed actions in ticket attribute related ACLs.' => 'Verfügbare/erlaubte Actions in ticketattributabhängigen ACLs.',
+        'Available/allowed actions for ticket attribute relations.' => 'Verfügbare/erlaubte Aktionen für abhängige Ticketattribute.',
         'Avatar' => 'Avatar',
         'Balanced white skin by Felix Niklas (slim version).' => 'Balanced White-Skin von Felix Niklas (slim version).',
         'Balanced white skin by Felix Niklas.' => 'Balanced White Skin von Felix Niklas.',
@@ -7842,7 +7842,7 @@ Ihr Helpdesk-Team
         'Manage system files.' => 'Systemdateien verwalten',
         'Manage system registration.' => 'Systemregistrierung verwalten.',
         'Manage tasks triggered by event or time based execution.' => 'Verwaltung von event- oder zeitbasierten Aufgaben.',
-        'Management of ticket attribute related ACLs.' => 'Verwaltung von ticketattributabhängigen ACLs.',
+        'Management of ticket attribute relations.' => 'Verwaltung von abhängigen Ticketattributen.',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
             'Mapping von Ticket::Generic-Invoker-Name (Schlüssel) zu einer Liste von Feldern (Inhalt), die aus dem Request entfernt werden. Felder müssen in der folgenden Form angegeben werden: Feld1->Feld2;Feld3->Feld4->Feld5;Feld6. Eine verschachtelte Datenstruktur kann also durch Verbindung der Felder mit \'->\' angegeben werden. Verschiedene Felder je Invoker können entfernt werden, indem sie mit \';\' voneinander getrennt werden. Bitte beachten Sie die Dokumentation des Pakets für weitere Informationen.',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>

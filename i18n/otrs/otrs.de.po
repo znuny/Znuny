@@ -24573,16 +24573,16 @@ msgid "Package update requires a patch level update of Znuny."
 msgstr "Paket-Update benötigt ein Patchlevel-Update von Znuny."
 
 #. Template: AdminTicketAttributeRelations
-msgid "Ticket attribute related ACLs"
-msgstr "Ticketattributabhängige ACLs"
+msgid "Ticket attribute relations"
+msgstr "Abhängige Ticketattribute"
 
 #. Template: AdminTicketAttributeRelations
-msgid "Add ticket attribute related ACL"
-msgstr "Ticketattributabhängige ACL hinzufügen"
+msgid "Add ticket attribute relations"
+msgstr "Abhängige Ticketattribute hinzufügen"
 
 #. Template: AdminTicketAttributeRelations
-msgid "Edit ticket attribute related ACL"
-msgstr "Ticketattributabhängige ACL bearbeiten"
+msgid "Edit ticket attribute relations"
+msgstr "Abhängige Ticketattribute bearbeiten"
 
 #. Template: AdminTicketAttributeRelations
 msgid "Import CSV or Excel file"
@@ -24617,22 +24617,22 @@ msgid "If a value is colored red, it is missing from the possible values list of
 msgstr "Falls ein Wert rot ist, fehlt er in der Liste der möglichen Werte der Konfiguration des dynamischen Felds."
 
 #. SysConfig
-msgid "Adds ticket attribute related ACLs based on CSV/Excel data."
-msgstr "Fügt auf CSV-/Excel-Daten basierende ticketattributabhängige ACLs hinzu."
+msgid "Adds ticket attribute relations based on CSV/Excel data."
+msgstr "Fügt auf CSV-/Excel-Daten basierende abhängige Ticketattribute hinzu."
 
 #. SysConfig
-msgid "Always adds empty values to the ticket attribute related ACLs so that it is not needed to add it to the CSV/Excel data."
-msgstr "Fügt immer leere Werte zu ticketattributabhängigen ACLs hinzu, so dass diese nicht zu den CSV-/Excel-Daten hinzugefügt werden müssen."
+msgid "Always adds empty values to the ticket attribute relations so that it is not needed to add them to the CSV/Excel data."
+msgstr "Fügt immer leere Werte zu abhängigen Ticketattributen hinzu, so dass diese nicht zu den CSV-/Excel-Daten hinzugefügt werden müssen."
 
 #. SysConfig
-msgid "Available/allowed actions in ticket attribute related ACLs."
-msgstr "Verfügbare/erlaubte Actions in ticketattributabhängigen ACLs."
+msgid "Available/allowed actions for ticket attribute relations."
+msgstr "Verfügbare/erlaubte Aktionen für abhängige Ticketattribute."
 
 #. SysConfig
 msgid "Loader module registration for the admin interface."
 msgstr "Loader-Modulregistrierung für die Adminoberfläche."
 
 #. SysConfig
-msgid "Management of ticket attribute related ACLs."
-msgstr "Verwaltung von ticketattributabhängigen ACLs."
+msgid "Management of ticket attribute relations."
+msgstr "Verwaltung von abhängigen Ticketattributen."
 

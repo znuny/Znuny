@@ -40,7 +40,7 @@ sub Configure {
 
     $Self->AddOption(
         Name        => 'priority',
-        Description => 'Priority for ACL evaluation.',
+        Description => 'Priority for evaluation.',
         Required    => 0,
         HasValue    => 1,
         ValueRegex  => qr/^\d+$/smx,

@@ -9,7 +9,7 @@
 <div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
     [% BreadcrumbPath = [
             {
-                Name => Translate('Ticket attribute related ACLs'),
+                Name => Translate('Ticket attribute relations'),
                 Link => Env("Action"),
             },
         ]
@@ -17,9 +17,9 @@
 
     [% SWITCH Data.Action %]
         [% CASE 'Add' %]
-            [% BreadcrumbPath.push({ Name => Translate("Add ticket attribute related ACL"),}) %]
+            [% BreadcrumbPath.push({ Name => Translate("Add ticket attribute relations"),}) %]
         [% CASE 'Change' %]
-            [% USE EditTitle = String(Translate("Edit ticket attribute related ACL")) %]
+            [% USE EditTitle = String(Translate("Edit ticket attribute relations")) %]
             [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.TicketAttributeRelations.Filename, ' (' , Translate("Priority"), ': ', Data.TicketAttributeRelations.Priority, ')' ) }) %]
     [% END %]
 

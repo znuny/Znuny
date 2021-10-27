@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2021-10-26 06:21+0000\n"
+"POT-Creation-Date: 2021-10-27 07:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -6819,15 +6819,15 @@ msgid "Link %s to selected %s"
 msgstr ""
 
 #. Template: AdminTicketAttributeRelations
-msgid "Ticket attribute related ACLs"
+msgid "Ticket attribute relations"
 msgstr ""
 
 #. Template: AdminTicketAttributeRelations
-msgid "Add ticket attribute related ACL"
+msgid "Add ticket attribute relations"
 msgstr ""
 
 #. Template: AdminTicketAttributeRelations
-msgid "Edit ticket attribute related ACL"
+msgid "Edit ticket attribute relations"
 msgstr ""
 
 #. Template: AdminTicketAttributeRelations
@@ -16746,7 +16746,7 @@ msgid "Adds the permanent vacation days."
 msgstr ""
 
 #. SysConfig
-msgid "Adds ticket attribute related ACLs based on CSV/Excel data."
+msgid "Adds ticket attribute relations based on CSV/Excel data."
 msgstr ""
 
 #. SysConfig
@@ -17074,7 +17074,7 @@ msgid "Allows to set a new ticket state in the move ticket screen of the agent i
 msgstr ""
 
 #. SysConfig
-msgid "Always adds empty values to the ticket attribute related ACLs so that it is not needed to add it to the CSV/Excel data."
+msgid "Always adds empty values to the ticket attribute relations so that it is not needed to add them to the CSV/Excel data."
 msgstr ""
 
 #. SysConfig
@@ -17166,7 +17166,7 @@ msgid "Automatically sets the responsible of a ticket (if it is not set yet) aft
 msgstr ""
 
 #. SysConfig
-msgid "Available/allowed actions in ticket attribute related ACLs."
+msgid "Available/allowed actions for ticket attribute relations."
 msgstr ""
 
 #. SysConfig
@@ -21150,7 +21150,7 @@ msgid "Manage tasks triggered by event or time based execution."
 msgstr ""
 
 #. SysConfig
-msgid "Management of ticket attribute related ACLs."
+msgid "Management of ticket attribute relations."
 msgstr ""
 
 #. SysConfig
