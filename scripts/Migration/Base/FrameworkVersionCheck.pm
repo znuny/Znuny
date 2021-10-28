@@ -79,8 +79,7 @@ sub CheckPreviousRequirement {
         print "    Error:    No Znuny system found.\n";
         return;
     }
-    if ( $Version !~ /^6\.1(.*)$/ ) {
-
+    if ( $Version !~ m{\A6\.2\.} ) {
         print "\n    Error: You are trying to run this script on the wrong Znuny version $Version!\n";
         return;
     }
