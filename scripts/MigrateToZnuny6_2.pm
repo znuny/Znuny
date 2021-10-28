@@ -191,10 +191,6 @@ sub _TasksGet {
 
         # Base
         {
-            Message => 'Check framework version',
-            Module  => 'scripts::Migration::Base::FrameworkVersionCheck',
-        },
-        {
             Message => 'Check required Perl version',
             Module  => 'scripts::Migration::Base::PerlVersionCheck',
         },
