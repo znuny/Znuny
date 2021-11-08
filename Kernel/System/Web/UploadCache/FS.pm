@@ -106,7 +106,6 @@ sub FormIDAddFile {
     return if !$Self->_FormIDValidate( $Param{FormID} );
 
     $Param{Content} = '' if !defined( $Param{Content} );
-    $Param{FilenameOrig} = '' if !defined( $Param{FilenameOrig} );
 
     # create content id
     my $ContentID   = $Param{ContentID};
@@ -139,9 +138,23 @@ sub FormIDAddFile {
     # get main object
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
-    $Param{Filename} = $MainObject->FilenameCleanUp(
+
+    # Save original filename if cleanup changes filename;
+    # save empty string as original filename otherwise.
+
+    my $FilenameCleanedUp = $MainObject->FilenameCleanUp(
         Filename => $Param{Filename},
     );
+
+    if ( $FilenameCleanedUp ne $Param{Filename} ) {
+        $Param{FilenameOrig} = $Param{Filename};
+        $Param{Filename} = $FilenameCleanedUp;
+    }
+    else {
+        $Param{FilenameOrig} = '';
+    }
+
+    $Param{Filename} = $FilenameCleanedUp;
 
     # files must readable for creator
     return if !$MainObject->FileWrite(

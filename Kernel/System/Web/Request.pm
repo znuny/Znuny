@@ -335,7 +335,6 @@ Returns:
 
     my %File = (
         Filename    => 'abc_123.txt',
-        FilenameOrig => 'abc 123.txt',
         ContentType => 'text/plain',
         Content     => 'Some text',
     );
@@ -349,16 +348,8 @@ sub GetUploadAll {
     my $Upload = $Self->{Query}->upload( $Param{Param} );
     return if !$Upload;
 
-    my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
-
     # get real file name
-    my $UploadFilenameOrig = $Self->GetParam( Param => $Param{Param} ) || 'unknown';
-
-    my $NewFileName = "$UploadFilenameOrig";    # use "" to get filename of anony. object
-    $EncodeObject->EncodeInput( \$NewFileName );
-
-    my $NewFileNameOrig = "$UploadFilenameOrig";    # use "" to get filename of anony. object
-    $EncodeObject->EncodeInput( \$NewFileNameOrig );
+    my $UploadFilename = $Self->GetParam( Param => $Param{Param} ) || 'unknown';
 
     # return a string
     my $Content = '';
@@ -368,17 +359,17 @@ sub GetUploadAll {
     close $Upload;
 
     my $ContentType = $Self->_GetUploadInfo(
-        Filename => $UploadFilenameOrig,
+        Filename => $UploadFilename,
         Header   => 'Content-Type',
     );
 
-    $Kernel::OM->Get('Kernel::System::Encode')->EncodeInput( \$UploadFilenameOrig );
+    $UploadFilename = "${UploadFilename}";
+    $Kernel::OM->Get('Kernel::System::Encode')->EncodeInput( \$UploadFilename );
 
     return (
-        Filename     => $NewFileName,
-        FilenameOrig => $NewFileNameOrig,
-        Content      => $Content,
-        ContentType  => $ContentType,
+        Filename    => $UploadFilename,
+        Content     => $Content,
+        ContentType => $ContentType,
     );
 }
 
