@@ -373,39 +373,26 @@ sub _NotificationFilter {
 
     my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
+    # get not ticket related attributes
+    my $IgnoredAttributes = $Kernel::OM->Get('Kernel::Config')->Get('Frontend::Admin::AdminNotificationEvent::IgnoredAttributes');
+    my %IgnoredAttributesHash;
+    if ( IsHashRefWithData( $IgnoredAttributes ) ) {
+        for my $Key ( keys %{$IgnoredAttributes} ) {
+            if ( IsHashRefWithData( $IgnoredAttributes->{$Key} ) ) {
+                %IgnoredAttributesHash = ( %IgnoredAttributesHash, %{ $IgnoredAttributes->{$Key} } );
+            }
+        }
+    }   
     # get the search article fields to retrieve values for
     my %ArticleSearchableFields = $ArticleObject->ArticleSearchableFieldsList();
 
     KEY:
     for my $Key ( sort keys %{ $Notification{Data} } ) {
 
-        # TODO: This function here should be fixed to not use hardcoded attribute values!
         # ignore not ticket related attributes
-        next KEY if $Key eq 'Recipients';
-        next KEY if $Key eq 'SkipRecipients';
-        next KEY if $Key eq 'RecipientAgents';
-        next KEY if $Key eq 'RecipientGroups';
-        next KEY if $Key eq 'RecipientRoles';
-        next KEY if $Key eq 'TransportEmailTemplate';
-        next KEY if $Key eq 'Events';
-        next KEY if $Key eq 'ArticleSenderTypeID';
-        next KEY if $Key eq 'ArticleIsVisibleForCustomer';
-        next KEY if $Key eq 'ArticleCommunicationChannelID';
-        next KEY if $Key eq 'ArticleAttachmentInclude';
-        next KEY if $Key eq 'IsVisibleForCustomer';
-        next KEY if $Key eq 'Transports';
-        next KEY if $Key eq 'OncePerDay';
-        next KEY if $Key eq 'VisibleForAgent';
-        next KEY if $Key eq 'VisibleForAgentTooltip';
-        next KEY if $Key eq 'LanguageID';
-        next KEY if $Key eq 'SendOnOutOfOffice';
-        next KEY if $Key eq 'AgentEnabledByDefault';
-        next KEY if $Key eq 'EmailSecuritySettings';
-        next KEY if $Key eq 'EmailSigningCrypting';
-        next KEY if $Key eq 'EmailMissingCryptingKeys';
-        next KEY if $Key eq 'EmailMissingSigningKeys';
-        next KEY if $Key eq 'EmailDefaultSigningKeys';
-        next KEY if $Key eq 'NotificationType';
+        if ( $IgnoredAttributesHash{$Key} ) {
+            next KEY;
+        }
 
         # ignore article searchable fields
         next KEY if $ArticleSearchableFields{$Key};
