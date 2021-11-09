@@ -173,12 +173,18 @@ sub Run {
         . '-'
         . $File{Filename};
 
+    # Clean up filename for name in ContentType; for FormIDAddFile we pass filename without
+    # cleaning it up (need original filename and will clean it up independently).
+    my $FilenameCleanedUp = $Kernel::OM->Get('Kernel::System::Main')->FilenameCleanUp(
+        Filename => $File{Filename},
+    );
+
     # add uploaded file to upload cache
     $UploadCacheObject->FormIDAddFile(
         FormID      => $FormID,
         Filename    => $File{Filename},
         Content     => $File{Content},
-        ContentType => $File{ContentType} . '; name="' . $File{Filename} . '"',
+        ContentType => $File{ContentType} . '; name="' . $FilenameCleanedUp . '"',
         Disposition => 'inline',
     );
 
