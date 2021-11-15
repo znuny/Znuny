@@ -135,7 +135,7 @@ sub InstallModule {
     die "Error: Could not get DownloadURL." if !$DownloadURL;
     chomp $DownloadURL;
 
-    system("cd $TmpDir; wget -q -O - $DownloadURL | tar -xz --strip 1");
+    system("cd $TmpDir; wget -q -O - $DownloadURL | tar -xzf - --strip 1");
 
     if ( $ModuleConfig->{BuildBLib} ) {
         system("cd $TmpDir; perl Makefile.PL; make; cp -r $TmpDir/blib/lib/* $TargetPath");
