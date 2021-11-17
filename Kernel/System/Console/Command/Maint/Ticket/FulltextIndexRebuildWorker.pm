@@ -180,6 +180,13 @@ sub ArticleIndexRebuild {
                         ArticleID => $ArticleID,
                         UserID    => 1,
                     );
+
+                    if ( $Success ) {
+                        $ArticleObject->ArticleSearchIndexRebuildFlagSet(
+                            ArticleIDs => [$ArticleID],
+                            Value      => 0,
+                        );
+                    }
                 }
                 else {
                     $Success = $ArticleObject->ArticleSearchIndexBuild(
@@ -187,6 +194,8 @@ sub ArticleIndexRebuild {
                         ArticleID => $ArticleID,
                         UserID    => 1,
                     );
+                    # ArticleSearchIndexBuild() removes rebuild flag on rebuilding
+                    # success, so no need to do it here.
                 }
 
                 if ( !$Success ) {
