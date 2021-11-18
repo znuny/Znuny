@@ -919,7 +919,7 @@ Returns:
 sub ArticleSearchIndexBuild {
     my ( $Self, %Param ) = @_;
 
-    for my $Needed (qw(ArticleID)) {
+    for my $Needed (qw(TicketID ArticleID)) {
         if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
@@ -927,6 +927,22 @@ sub ArticleSearchIndexBuild {
             );
             return;
         }
+    }
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    # Don't build index, unset rebuild flag and return indexing failure if ticket is archived
+    # and archived ticket indexing is disabled.
+    if ( $ConfigObject->Get('Ticket::ArchiveSystem')
+        && !$ConfigObject->Get('Ticket::SearchIndex::IndexArchivedTickets')
+        && $Kernel::OM->Get('Kernel::System::Ticket')->TicketArchiveFlagGet( TicketID => $Param{TicketID} ) ) {
+
+        $Self->ArticleSearchIndexRebuildFlagSet(
+             ArticleIDs => [$Param{ArticleID}],
+             Value      => 0,
+        );
+
+        return;
     }
 
     if ( $Kernel::OM->Get( $Self->{ArticleSearchIndexModule} )->ArticleSearchIndexBuild(%Param) ) {
