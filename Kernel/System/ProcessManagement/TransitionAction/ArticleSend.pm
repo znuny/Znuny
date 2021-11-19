@@ -153,6 +153,7 @@ sub Run {
 
     # use ticket attributes if needed
     $Self->_ReplaceTicketAttributes(%Param);
+    $Self->_ReplaceAdditionalAttributes(%Param);
 
     my $RichText = $Param{Config}->{MimeType} =~ m{html}xmsi ? 1 : 0;
 
@@ -186,7 +187,7 @@ sub Run {
             );
             next ATTACHMENT if !%Data;
 
-            push @{$Param{Config}->{Attachment}}, {
+            push @{ $Param{Config}->{Attachment} }, {
                 Content     => $Data{Content},
                 ContentType => $Data{ContentType},
                 Filename    => $Data{Filename},
@@ -289,8 +290,8 @@ sub Run {
     my $ArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Email' );
 
     $ArticleBackendObject->ArticleSend(
-        TicketID   => $Param{Ticket}->{TicketID},
-        UserID     => $Param{UserID},
+        TicketID => $Param{Ticket}->{TicketID},
+        UserID   => $Param{UserID},
         %{ $Param{Config} || {} },
     );
 
