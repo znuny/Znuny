@@ -876,7 +876,7 @@ sub logout {
 
 sub quit {
     my ( $self, $hq ) = @_;
-    $self->_send_cmd('EXPUNGE'); # XXX: $self->expunge_mailbox?
+    $self->_process_cmd( cmd => ['EXPUNGE'], final => sub { 1 }, process => sub { } ); # XXX: $self->expunge_mailbox?
 
     if ( !$hq ) {
         # XXX: $self->logout?
