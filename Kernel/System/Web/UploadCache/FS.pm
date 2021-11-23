@@ -322,6 +322,7 @@ sub FormIDGetAllFilesData {
             Location        => "$File.ContentType",
             Mode            => 'binmode',             # optional - binmode|utf8
             NoFilenameClean => 1,
+            DisableWarnings => 1,
         );
         next FILE if !$ContentType;
 
@@ -329,6 +330,7 @@ sub FormIDGetAllFilesData {
             Location        => "$File.ContentID",
             Mode            => 'binmode',             # optional - binmode|utf8
             NoFilenameClean => 1,
+            DisableWarnings => 1,
         );
         next FILE if !$ContentID;
 
@@ -341,6 +343,7 @@ sub FormIDGetAllFilesData {
             Location        => "$File.Disposition",
             Mode            => 'binmode',             # optional - binmode|utf8
             NoFilenameClean => 1,
+            DisableWarnings => 1,
         );
         next FILE if !$Disposition;
 
@@ -348,7 +351,9 @@ sub FormIDGetAllFilesData {
             Location        => "$File.FilenameOrig",
             Mode            => 'utf8',                # optional - binmode|utf8
             NoFilenameClean => 1,
+            DisableWarnings => 1,
         );
+        next FILE if !defined($FilenameOrig);
 
         # strip filename
         $File =~ s/^.*\/(.+?)$/$1/;
@@ -426,6 +431,7 @@ sub FormIDGetAllFilesMeta {
             Location        => "$File.ContentType",
             Mode            => 'binmode',             # optional - binmode|utf8
             NoFilenameClean => 1,
+            DisableWarnings => 1,
         );
         next FILE if !$ContentType;
 
@@ -433,6 +439,7 @@ sub FormIDGetAllFilesMeta {
             Location        => "$File.ContentID",
             Mode            => 'binmode',             # optional - binmode|utf8
             NoFilenameClean => 1,
+            DisableWarnings => 1,
         );
         next FILE if !$ContentID;
 
@@ -445,6 +452,7 @@ sub FormIDGetAllFilesMeta {
             Location        => "$File.Disposition",
             Mode            => 'binmode',             # optional - binmode|utf8
             NoFilenameClean => 1,
+            DisableWarnings => 1,
         );
         next FILE if !$Disposition;
 
@@ -452,7 +460,9 @@ sub FormIDGetAllFilesMeta {
             Location        => "$File.FilenameOrig",
             Mode            => 'utf8',                # optional - binmode|utf8
             NoFilenameClean => 1,
+            DisableWarnings => 1,
         );
+        next FILE if !defined($FilenameOrig);
 
         # strip filename
         $File =~ s/^.*\/(.+?)$/$1/;
