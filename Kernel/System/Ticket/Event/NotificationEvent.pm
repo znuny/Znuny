@@ -390,9 +390,7 @@ sub _NotificationFilter {
     for my $Key ( sort keys %{ $Notification{Data} } ) {
 
         # ignore not ticket related attributes
-        if ( $IgnoredAttributesHash{$Key} ) {
-            next KEY;
-        }
+        next KEY if %IgnoredAttributesHash && $IgnoredAttributesHash{$Key};
 
         # ignore article searchable fields
         next KEY if $ArticleSearchableFields{$Key};
