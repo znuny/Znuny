@@ -10543,7 +10543,7 @@
     </Setting>
     <Setting Name="Ticket::Event::NotificationEvent::IgnoredAttributes###001-Framework" Required="0" Valid="1">
         <Description Translatable="1">Ignores not ticket related attributes.</Description>
-        <Navigation>Frontend::Admin::View::NotificationEvent</Navigation>
+        <Navigation>Core::Event::Ticket::NotificationEvent</Navigation>
         <Value>
             <Hash>
                 <Item Key="Recipients">1</Item>
