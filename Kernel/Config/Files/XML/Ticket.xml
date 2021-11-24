@@ -10541,7 +10541,7 @@
             <Item ValueType="String" ValueRegex="^\d+%?$">320</Item>
         </Value>
     </Setting>
-    <Setting Name="Frontend::Admin::AdminNotificationEvent::IgnoredAttributes###002-Ticket" Required="0" Valid="1">
+    <Setting Name="Ticket::Event::NotificationEvent::IgnoredAttributes###001-Framework" Required="0" Valid="1">
         <Description Translatable="1">Ignores not ticket related attributes.</Description>
         <Navigation>Frontend::Admin::View::NotificationEvent</Navigation>
         <Value>

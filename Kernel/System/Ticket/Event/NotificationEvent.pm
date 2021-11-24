@@ -374,7 +374,7 @@ sub _NotificationFilter {
     my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
     # get not ticket related attributes
-    my $IgnoredAttributes = $Kernel::OM->Get('Kernel::Config')->Get('Frontend::Admin::AdminNotificationEvent::IgnoredAttributes');
+    my $IgnoredAttributes = $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Event::NotificationEvent::IgnoredAttributes');
     my %IgnoredAttributesHash;
     if ( IsHashRefWithData( $IgnoredAttributes ) ) {
         for my $Key ( keys %{$IgnoredAttributes} ) {
