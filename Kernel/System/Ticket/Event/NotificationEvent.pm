@@ -374,15 +374,13 @@ sub _NotificationFilter {
     my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
     # get not ticket related attributes
-    my $IgnoredAttributes = $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Event::NotificationEvent::IgnoredAttributes');
+    my $IgnoredAttributes = $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Event::NotificationEvent::IgnoredAttributes') || {};
     my %IgnoredAttributesHash;
-    if ( IsHashRefWithData( $IgnoredAttributes ) ) {
-        for my $Key ( keys %{$IgnoredAttributes} ) {
-            if ( IsHashRefWithData( $IgnoredAttributes->{$Key} ) ) {
-                %IgnoredAttributesHash = ( %IgnoredAttributesHash, %{ $IgnoredAttributes->{$Key} } );
-            }
+    for my $Key ( keys %{$IgnoredAttributes} ) {
+        if ( IsHashRefWithData( $IgnoredAttributes->{$Key} ) ) {
+            %IgnoredAttributesHash = ( %IgnoredAttributesHash, %{ $IgnoredAttributes->{$Key} } );
         }
-    }   
+    }
     # get the search article fields to retrieve values for
     my %ArticleSearchableFields = $ArticleObject->ArticleSearchableFieldsList();
 
