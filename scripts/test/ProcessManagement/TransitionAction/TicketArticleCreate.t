@@ -23,7 +23,9 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $TransitionActionObject
+    = $Kernel::OM->Get('Kernel::System::ProcessManagement::TransitionAction::TicketArticleCreate');
 
 # use Test email backend
 $Kernel::OM->Get('Kernel::Config')->Set(
@@ -35,7 +37,7 @@ $Kernel::OM->Get('Kernel::Config')->Set(
 my $ModuleName = 'TicketArticleCreate';
 
 # set user details
-my ( $TestUserLogin, $UserID ) = $Helper->TestUserCreate();
+my ( $TestUserLogin, $UserID ) = $HelperObject->TestUserCreate();
 
 # get ticket object
 my $TicketObject         = $Kernel::OM->Get('Kernel::System::Ticket');
@@ -85,7 +87,7 @@ $Self->True(
 
 my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 # create a dynamic field
 my $TextFieldName = "texttest$RandomID";
@@ -736,7 +738,7 @@ for my $Test (@Tests) {
     # make a deep copy to avoid changing the definition
     my $OrigTest = Storable::dclone($Test);
 
-    my $Success = $Kernel::OM->Get('Kernel::System::ProcessManagement::TransitionAction::TicketArticleCreate')->Run(
+    my $Success = $TransitionActionObject->Run(
         %{ $Test->{Config} },
         ProcessEntityID          => 'P1',
         ActivityEntityID         => 'A1',
@@ -888,6 +890,89 @@ for my $Test (@Tests) {
         );
     }
 }
+
+# Run TransitionAction with ForeignTicketID
+
+# create a dynamic field
+my $DFForeignTicketID = 'UnitTestForeignTicketID' . $RandomID;
+my $DFForeignID       = $DynamicFieldObject->DynamicFieldAdd(
+    FieldOrder => 9991,
+    Name       => $DFForeignTicketID,
+    Label      => $DFForeignTicketID,
+    ObjectType => 'Ticket',
+    FieldType  => 'Text',
+    Config     => {
+        DefaultValue => '',
+    },
+    ValidID => 1,
+    UserID  => 1,
+);
+
+# sanity check
+$Self->True(
+    $DFForeignID,
+    "DynamicFieldAdd() successful for Field ID $DFForeignID",
+);
+
+$TicketID = $HelperObject->TicketCreate();
+my $ForeignTicketID = $HelperObject->TicketCreate();
+
+$DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
+    Name => $DFForeignTicketID,
+);
+
+my $ValueSet = $DynamicFieldBackendObject->ValueSet(
+    DynamicFieldConfig => $DynamicFieldConfig,
+    ObjectID           => $TicketID,
+    Value              => $ForeignTicketID,
+    UserID             => 1,
+);
+
+$Self->True(
+    $ValueSet,
+    "ValueSet()",
+);
+
+%Ticket = $TicketObject->TicketGet(
+    TicketID      => $TicketID,
+    DynamicFields => 1,
+    UserID        => 1,
+);
+
+my $DynamicFieldSetResult = $TransitionActionObject->Run(
+    UserID                   => 1,
+    Ticket                   => \%Ticket,
+    ProcessEntityID          => 'P123',
+    ActivityEntityID         => 'A123',
+    TransitionEntityID       => 'T123',
+    TransitionActionEntityID => 'TA123',
+    Config                   => {
+        ForeignTicketID      => '<OTRS_Ticket_DynamicField_' . $DFForeignTicketID . '>',
+        IsVisibleForCustomer => 0,
+        SenderType           => 'agent',
+        ContentType          => 'text/plain; charset=ISO-8859-15',
+        Subject              => 'blub',
+        Body                 => 'blub',
+        HistoryType          => 'OwnerUpdate',
+        HistoryComment       => 'Some free text!',
+        UserID               => 1,
+    },
+);
+
+$Self->True(
+    $DynamicFieldSetResult,
+    "TransitionActionObject->Run()",
+);
+
+my @ArticleIndex = $ArticleObject->ArticleIndex(
+    TicketID => $ForeignTicketID,
+    UserID   => 1,
+);
+
+$Self->True(
+    @ArticleIndex ? 1 : 0,
+    "ArticleGet()",
+);
 
 # cleanup is done by RestoreDatabase
 

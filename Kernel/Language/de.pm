@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.99933598937583;
+    $Self->{Completeness}        = 0.99900826446281;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1054,6 +1054,8 @@ sub Data {
         'Force array for tags' => 'Array für Tags erzwingen',
         'Enter tags separated by space for which array representation should be forced.' =>
             'Geben Sie Tags durch Leerzeichen getrennt ein, die als Array repräsentiert werden sollen.',
+        'Keep XML attributes' => 'XML-Attribute beibehalten',
+        'Only needed for content type XML.' => 'Nur für Content-Type XML benötigt.',
         'Data key regex filters (before mapping)' => 'RegEx-Filter für Daten-Schlüssel (vor dem Mapping)',
         'Data key regex filters (after mapping)' => 'RegEx-Filter für Daten-Schlüssel (nach dem Mapping)',
         'Regular expressions' => 'Reguläre Ausdrücke',
@@ -1531,8 +1533,8 @@ sub Data {
         'Go to znuny.org' => 'znuny.org aufrufen',
         'package information' => 'Paketinformation',
         'Package installation requires a patch level update of Znuny.' =>
-            'Paketinstallation benötigt ein Patchlevel-Update von OTRS.',
-        'Package update requires a patch level update of Znuny.' => 'Paket-Update benötigt ein Patchlevel-Update von OTRS.',
+            'Paketinstallation benötigt ein Patchlevel-Update von Znuny.',
+        'Package update requires a patch level update of Znuny.' => 'Paket-Update benötigt ein Patchlevel-Update von Znuny.',
         'Please note that your installed Znuny version is %s.' => 'Bitte beachten Sie, dass Ihre installierte Znuny-Version %s ist.',
         'To install this package, you need to update Znuny to version %s or newer.' =>
             'Um dieses Paket zu installieren, müssen Sie zunächst Znuny auf Version %s oder neuer aktualisieren.',
@@ -2301,6 +2303,21 @@ sub Data {
         'Manage Template-Attachment Relations' => 'Verwaltung der Zuordnung von Anhängen zu Vorlagen',
         'Toggle active for all' => 'Aktiv umschalten für alle',
         'Link %s to selected %s' => '%s zu %s (markiert) verknüpfen',
+
+        # Template: AdminTicketAttributeRelations
+        'Ticket attribute relations' => 'Abhängige Ticketattribute',
+        'Add ticket attribute relations' => 'Abhängige Ticketattribute hinzufügen',
+        'Edit ticket attribute relations' => 'Abhängige Ticketattribute bearbeiten',
+        'Import CSV or Excel file' => 'CSV- oder Excel-Datei importieren',
+        'Last update' => 'Letzte Aktualisierung',
+        'Are you sure you want to delete entry \'%s\'?' => 'Sind Sie sicher, dass der Eintrag \'%s\' gelöscht werden soll?',
+        'Download previously imported file' => 'Zuvor importierte Datei herunterladen',
+        'The file needs to be in CSV (UTF-8) or Excel format. Both header columns need to contain the names of valid ticket attributes. The name of the uploaded file must be unique and must not be in use by another ticket attribute relations record.' =>
+            'Die Datei muss CSV- (UTF-8) oder Excel-Format haben. Beide Kopfspalten müssen den Namen von gültigen Ticket-Attributen enthalten. Der Name der hochgeladenen Datei muss eindeutig sein und darf nicht bereits für einen anderen Datensatz verwendet worden sein.',
+        'Add missing possible dynamic field values' => 'Fehlende mögliche Werte zu dynamischen Feldern hinzufügen',
+        'Attribute values' => 'Attributwerte',
+        'If a value is colored red, it is missing from the possible values list of the dynamic field configuration.' =>
+            'Falls ein Wert rot ist, fehlt er in der Liste der möglichen Werte der Konfiguration des dynamischen Felds.',
 
         # Template: AdminType
         'Type Management' => 'Typverwaltung',
@@ -3975,7 +3992,6 @@ sub Data {
         'Could not get data for TransitionID %s' => 'Konnte Daten für TransitionID %s nicht ermitteln',
         'There was an error updating the Transition' => 'Beim Aktualisieren des Übergangs ist ein Fehler aufgetreten',
         'Edit Transition "%s"' => 'Bearbeite Transition %s',
-        'Transition validation module' => 'Transition-Validierungs-Modul',
 
         # Perl Module: Kernel/Modules/AdminProcessManagementTransitionAction.pm
         'At least one valid config parameter is required.' => 'Mindestens ein gültiger Konfigurationsparameter wird benötigt.',
@@ -4368,6 +4384,8 @@ sub Data {
         'Missing ProcessEntityID in Ticket %s!' => 'ProcessEntityID fehlt für Ticket %s!',
         'Could not set DynamicField value for %s of Ticket with ID "%s" in ActivityDialog "%s"!' =>
             'Konnte Wert des Dynamischen Feldes %s für TicketID %s im Aktivitätsdialog "%s" nicht speichern!',
+        'Could not set attachments for ticket with ID %s in activity dialog "%s"!' =>
+            'Anhänge für Ticket mit ID %s konnten in Aktivitätsdialog "%s" nicht gesetzt werden!',
         'Could not set PendingTime for Ticket with ID "%s" in ActivityDialog "%s"!' =>
             'Konnte Wartezeit %s für TicketID %s im Aktivitätsdialog "%s" nicht speichern!',
         'Wrong ActivityDialog Field config: %s can\'t be Display => 1 / Show field (Please change its configuration to be Display => 0 / Do not show field or Display => 2 / Show field as mandatory)!' =>
@@ -5116,11 +5134,6 @@ sub Data {
         'The setting \'max_allowed_packet\' must be higher than 64 MB.' =>
             'Die Einstellung \'max_allowed_packet\' muss größer als 64 MB sein.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Performance.pm
-        'Query Cache Size' => 'Größe Abfrage-Cache',
-        'The setting \'query_cache_size\' should be used (higher than 10 MB but not more than 512 MB).' =>
-            'Die Einstellung query_cache_size sollte genutzt werden (mehr als 10 MB aber nicht mehr als 512 MB).',
-
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/StorageEngine.pm
         'Default Storage Engine' => 'Standard-Storage-Engine',
         'Table Storage Engine' => 'Tabellen Speicher-Engine',
@@ -5725,6 +5738,7 @@ sub Data {
         'Customer interface does not support articles not visible for customers.' =>
             'Das Kunden-Interface unterstützt keine internen Artikeltypen.',
         'Sorry, the only existing parameter can\'t be removed.' => 'Der einzig existierende Parameter kann nicht entfernt werden.',
+        'Are you sure you want to overwrite the config parameters?' => 'Sollen die Konfigurations-Parameter wirklich überschrieben werden?',
 
         # JS File: Core.Agent.Admin.SMIME
         'Do you really want to delete this certificate?' => 'Möchten Sie dieses Zertifikat wirklich löschen?',
@@ -6087,6 +6101,7 @@ Ihr Helpdesk-Team
         'Adds the permanent vacation days for the indicated calendar.' =>
             'Fügt die dauerhaften Urlaubstage für den angegebenen Kalender hinzu.',
         'Adds the permanent vacation days.' => 'Fügt die dauerhaften Urlaubstage hinzu.',
+        'Adds ticket attribute relations based on CSV/Excel data.' => 'Fügt auf CSV-/Excel-Daten basierende abhängige Ticketattribute hinzu.',
         'Admin' => 'Admin',
         'Admin Area.' => 'Administratorbereich.',
         'Admin Notification' => 'Admin-Benachrichtigung',
@@ -6224,6 +6239,8 @@ Ihr Helpdesk-Team
             'Erlaubt das Speichern des aktuellen Stands als Entwurf im Verantwortlicher-Bildschirm des Agentenbereichs.',
         'Allows to set a new ticket state in the move ticket screen of the agent interface.' =>
             'Erlaubt das Setzen eines neuen Ticket-Status im Verschieben-Bildschirm im Agenten-Interface.',
+        'Always adds empty values to the ticket attribute relations so that it is not needed to add them to the CSV/Excel data.' =>
+            'Fügt immer leere Werte zu abhängigen Ticketattributen hinzu, so dass diese nicht zu den CSV-/Excel-Daten hinzugefügt werden müssen.',
         'Always show RichText if available' => 'RichText immer verwenden, wenn verfügbar',
         'Answer' => 'Beantworten',
         'Appointment Calendar overview page.' => 'Terminkalender-Übersichtsseite.',
@@ -6254,6 +6271,7 @@ Ihr Helpdesk-Team
             'Setzt den Besitzer eines Tickets automatisch auch als Verantwortlichen (wenn das Verantwortlicher-Feature aktiviert ist). Dies wird nur durch manuelle Aktionen des eingeloggten Benutzers ausgelöst, nicht durch automatische wie GenericAgent, Postmaster oder GenericInterface.',
         'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>
             'Automatisches setzen eines Ticket-Verantwortlichen (wenn er noch nicht gesetzt wurde) nach dem ersten Besitzer-Update.',
+        'Available/allowed actions for ticket attribute relations.' => 'Verfügbare/erlaubte Aktionen für abhängige Ticketattribute.',
         'Avatar' => 'Avatar',
         'Balanced white skin by Felix Niklas (slim version).' => 'Balanced White-Skin von Felix Niklas (slim version).',
         'Balanced white skin by Felix Niklas.' => 'Balanced White Skin von Felix Niklas.',
@@ -6454,6 +6472,7 @@ Ihr Helpdesk-Team
         'Customer User Information Center Search.' => 'Suche Kundenbenutzer-Informationszentrum.',
         'Customer User Information Center search.' => 'Kundenbenutzer-Informationszentrum-Suche.',
         'Customer User Information Center.' => 'Kundenbenutzer-Informationszentrum.',
+        'Customer User-Customer Relations' => '',
         'Customer Users ↔ Customers' => 'Kundenbenutzer ↔ Kunden',
         'Customer Users ↔ Groups' => 'Kundenbenutzer ↔ Gruppen',
         'Customer Users ↔ Services' => 'Kundenbenutzer ↔ Services',
@@ -6740,6 +6759,8 @@ Ihr Helpdesk-Team
         'Defines the default front-end language. All the possible values are determined by the available language files on the system (see the next setting).' =>
             'Definiert die Standard-Frontend-Sprache. Die möglichen Werte werden durch die verfügbaren Sprachdateien auf dem System bestimmt (siehe nächste Einstellung).',
         'Defines the default history type in the customer interface.' => 'Definiert den Standard-Historientyp im Kunden-Interface.',
+        'Defines the default keys and values for the transition action module parameters. Mandatory fields are marked with "(* required)". Note: For most of the keys the AttributeID can also be used, e.g. "Owner" can be "OwnerID". Keys that define the same Attribute should only be used once, e.g. "Owner" and "OwnerID" are redundant.' =>
+            'Definiert die vorausgewählten Schlüssel und Werte für die Konfigurations-Parameter bei den Übergangs-Aktionen. Notiz: Für die meisten Schlüssel können ebenfalls die AttributIDs genutzt werden, z.B. anstatt "Owner" kann "OwnerID" genutzt werden. Dabei sollten Schlüssel, die das gleiche Attribut beschreiben, nur einmal genutzt werden, z.B. wären "Owner" und "OwnerID" redundant.',
         'Defines the default maximum number of X-axis attributes for the time scale.' =>
             'Definiert die standardmäßig eingestellte maximale Anzahl von Attributen für die x-Achse für die Zeitachse.',
         'Defines the default maximum number of statistics per page on the overview screen.' =>
@@ -7492,6 +7513,8 @@ Ihr Helpdesk-Team
             'Erzwingt das Setzen eines (vom aktuellen Status) abweichenden Ticket-Status nach dem Sperren eines Tickets. Legen Sie den aktuellen Status als Schlüssel und den neuen Status als Inhalt fest.',
         'Forces to unlock tickets after being moved to another queue.' =>
             'Tickets werden nach dem Verschieben in eine andere Queue entsperrt.',
+        'Format string for output of attachments in the selection list. "%1$d": article number; "%2$s": filename; "%3$s": translated object type (e.g. Article => Artikel); "%4$s": translated attachment label (e.g. "Anhang").' =>
+            'Formatierter String zur Ausgabe der Anhänge in Auswahllisten. "%1$d": Artikelnummer; "%2$s": Dateiname; "%3$s": übersetzter Objekttyp (z. B. Article => Artikel); "%4$s": übersetztes Anhang-Label (z. B. "Anhang").',
         'Forwarded to "%s".' => 'Weitergeleitet an "%s".',
         'Free Fields' => 'Freie Felder',
         'French' => 'Französisch',
@@ -7720,6 +7743,7 @@ Ihr Helpdesk-Team
         'Ivory (Slim)' => 'Elfenbein (Schlank)',
         'Japanese' => 'Japanisch',
         'JavaScript function for the search frontend.' => 'JavaScript-Funktion für das Suche-Frontend.',
+        'Keep dynamic field attachments after each transition.' => 'Anhänge in dynamischem Feld nach jeder Transition beibehalten.',
         'Korean' => 'Koreanisch',
         'Language' => 'Sprache',
         'Large' => 'Groß',
@@ -7782,6 +7806,7 @@ Ihr Helpdesk-Team
         'List of sub-actions that will be ignored.' => 'Liste von Sub-Aktionen, die ignoriert werden.',
         'List view' => 'Listenansicht',
         'Lithuanian' => 'Litauisch',
+        'Loader module registration for the admin interface.' => 'Loader-Modulregistrierung für die Adminoberfläche.',
         'Loader module registration for the agent interface.' => 'Loader-Modulregistrierung für die Agentenoberfläche.',
         'Loader module registration for the customer interface.' => 'Loader-Modulregistrierung für das Kunden-Interface.',
         'Lock / unlock this ticket' => 'Dieses Ticket sperren / entsperren',
@@ -7805,6 +7830,7 @@ Ihr Helpdesk-Team
         'Makes the session management use html cookies. If html cookies are disabled or if the client browser disabled html cookies, then the system will work as usual and append the session id to the links.' =>
             'Benutzt für das Session-Management HTML-Cookies. Wenn HTML-Cookies deaktiviert sind oder im Browser HTML-Cookies deaktiviert sind, arbeitet das System wie immer und fügt die Session-ID and Links an.',
         'Malay' => 'Malaysisch',
+        'Manage Customer User-Customer Relations.' => '',
         'Manage OTRS Group cloud services.' => 'Cloud-Services der OTRS Gruppe verwalten.',
         'Manage PGP keys for email encryption.' => 'PGP-Schlüssel für E-Mail-Verschlüsselung verwalten.',
         'Manage POP3 or IMAP accounts to fetch email from.' => 'POP3- oder IMAP-Konten für das Abholen von E-Mail verwalten.',
@@ -7816,6 +7842,7 @@ Ihr Helpdesk-Team
         'Manage system files.' => 'Systemdateien verwalten',
         'Manage system registration.' => 'Systemregistrierung verwalten.',
         'Manage tasks triggered by event or time based execution.' => 'Verwaltung von event- oder zeitbasierten Aufgaben.',
+        'Management of ticket attribute relations.' => 'Verwaltung von abhängigen Ticketattributen.',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
             'Mapping von Ticket::Generic-Invoker-Name (Schlüssel) zu einer Liste von Feldern (Inhalt), die aus dem Request entfernt werden. Felder müssen in der folgenden Form angegeben werden: Feld1->Feld2;Feld3->Feld4->Feld5;Feld6. Eine verschachtelte Datenstruktur kann also durch Verbindung der Felder mit \'->\' angegeben werden. Verschiedene Felder je Invoker können entfernt werden, indem sie mit \';\' voneinander getrennt werden. Bitte beachten Sie die Dokumentation des Pakets für weitere Informationen.',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
@@ -7915,6 +7942,8 @@ Ihr Helpdesk-Team
             'Bezeichnung Ihrer persönlichen Queuekollektion. "Meine Queues" ist eine Zusammenstellung Ihrer bevorzugten Queues, die in den persönlichen Einstellungen konfiguriert werden kann.',
         'Name of custom service. The custom service is a service selection of your preferred services and can be selected in the preferences settings.' =>
             'Bezeichnung Ihrer persönlichen Servicekollektion. "Meine Services" ist eine Zusammenstellung von bevorzugten Services, die in den persönlichen Einstellungen konfiguriert werden kann.',
+        'Name of the dynamic field in which the attachment file IDs of the transition will be stored.' =>
+            'Name des dynamischen Felds, in dem die Datei-IDs der Anhänge der Transition gespeichert werden.',
         'NameX' => 'NameX',
         'New Ticket' => 'Neues Ticket',
         'New Tickets' => 'Neue Tickets',
@@ -8654,6 +8683,7 @@ Ihr Helpdesk-Team
         'Signature data.' => 'Signatur-Daten.',
         'Signatures' => 'Signaturen',
         'Simple' => 'Einfach',
+        'Size of the logo in the page header.' => 'Größe des Logos im Seiten-Header.',
         'Skin' => 'Skin',
         'Slovak' => 'Slowakisch',
         'Slovenian' => 'Slowenisch',
@@ -8697,8 +8727,8 @@ Ihr Helpdesk-Team
             'Legt den Namen fest, der beim Versenden von Benachrichtigungen durch die Applikation verwendet werden soll. Der Absendername wird genutzt, um den vollständigen Anzeigenamen des Benachrichtigungs-Masters zu bilden (z. B. "OTRS Notifications otrs@your.example.com).',
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             'Legt die Reihenfolge fest, in der Vorname und Nachname von Agenten angezeigt wird.',
-        'Specifies the path of the file for the logo in the page header (gif|jpg|png, 700 x 100 pixel).' =>
-            'Gibt den Pfad für die Datei mit dem Logo in der Kopfzeile der Webseite an. (gif|jpg|pnp, 700 x 100 Pixel).',
+        'Specifies the path of the file for the logo in the page header (gif|jpg|png).' =>
+            'Gibt den Pfad für die Datei mit dem Logo in der Kopfzeile der Webseite an (gif|jpg|png).',
         'Specifies the path of the file for the performance log.' => 'Hinterlegt den Pfad für die Datei des Leistungsprotokolls.',
         'Specifies the path to the converter that allows the view of Microsoft Excel files, in the web interface.' =>
             'Gibt den Pfad zu dem Konverter an, welcher das Ansehen von Microsoft Excel Dateien in der Weboberfläche erlaubt.',
@@ -8874,6 +8904,8 @@ Ihr Helpdesk-Team
             'Ticket-Event-Modul zur Speicherung von Werten des gewählten Webservice-Datensatzes in den konfigurierten zusätzlichen dynamischen Feldern.',
         'Ticket event module that triggers the escalation stop events.' =>
             'Ticket Event Modul welche die Eskalation-Stop-Ereignisse auslöst.',
+        'Ticket event module which sends new ticket notifications even for tickets without articles.' =>
+            'Ticket-Eventmodul, das Benachrichtigungen für Prozess-Tickets versendet, die keine Artikel haben.',
         'Ticket limit per page for Ticket Overview "Medium".' => 'Maximale Anzahl Tickets pro Seite für Ticketübersicht "Mittel".',
         'Ticket limit per page for Ticket Overview "Preview".' => 'Maximale Anzahl Tickets pro Seite für Ticketübersicht "Vorschau".',
         'Ticket limit per page for Ticket Overview "Small".' => 'Maximale Anzahl Tickets pro Seite für Ticketübersicht "Klein".',
@@ -8901,6 +8933,8 @@ Ihr Helpdesk-Team
         'Tree view' => 'Baumansicht',
         'Triggers add or update of automatic calendar appointments based on certain ticket times.' =>
             'Stößt das Hinzufügen oder Aktualisieren von automatischen Terminen an, basierend auf Ticketzeiten.',
+        'Triggers event \'TicketAllChildrenClosed\' if all child tickets of a parent ticket have been closed/merged/removed.' =>
+            'Löst Event \'TicketAllChildrenClosed\' aus, wenn alle Kind-Tickets eines Eltern-Tickets den Status geschlossen/gemergt/entfernt erreicht haben.',
         'Triggers ticket escalation events and notification events for escalation.' =>
             'Löst Ticket-Eskalationsereignisse und Benachrichtigungsereignisse für Eskalationen aus.',
         'Turkish' => 'Türkisch',
@@ -9034,6 +9068,7 @@ Ihr Helpdesk-Team
         'Apr',
         'April',
         'Are you sure you want to delete this appointment? This operation cannot be undone.',
+        'Are you sure you want to overwrite the config parameters?',
         'Are you sure you want to update all installed packages?',
         'Are you using a browser plugin like AdBlock or AdBlockPlus? This can cause several issues and we highly recommend you to add an exception for this domain.',
         'Article display',

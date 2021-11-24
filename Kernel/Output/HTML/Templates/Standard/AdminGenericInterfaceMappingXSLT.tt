@@ -230,6 +230,15 @@
                         </div>
                         <div class="Clear"/>
                     </fieldset>
+
+                    <fieldset class="TableLike FixedLabel">
+                        <label for="KeepAttributes">[% Translate("Keep XML attributes") | html %]:</label>
+                        <div class="Field">
+                            <input id="KeepAttributes" class="KeepAttributes " type="checkbox" value="1" [% IF Data.KeepAttributes %]checked="checked"[% END %] name="KeepAttributes"/>
+                            <p class="FieldExplanation">[% Translate("Only needed for content type XML.") | html %]</p>
+                        </div>
+                        <div class="Clear"/>
+                    </fieldset>
                 </div>
             </div>
 [% RenderBlockEnd("ConfigBlockTemplate") %]

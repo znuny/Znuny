@@ -401,9 +401,9 @@ sub _ShowEdit {
 
         # create ContentType select
         $Param{ContentTypeStrg} = $LayoutObject->BuildSelection(
-            Data          => [ 'JSON', 'FORM' ],
+            Data          => [ 'JSON', 'FORM', 'XML' ],
             Name          => 'ContentType',
-            SelectedValue => $Param{ContentType} || '-',
+            SelectedValue => $Param{ContentType} // '-',
             PossibleNone  => 1,
             Sort          => 'AlphanumericValue',
             Class         => 'Modernize',

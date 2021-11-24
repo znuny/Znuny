@@ -3,7 +3,7 @@ Debugger:
   DebugThreshold: debug
   TestMode: '0'
 Description: ''
-FrameworkVersion: 6.1.x git
+FrameworkVersion: 6.2.x git
 Provider:
   Operation:
     TicketCreate:

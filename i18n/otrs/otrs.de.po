@@ -4264,14 +4264,6 @@ msgid "package information"
 msgstr "Paketinformation"
 
 #. Template: AdminPackageManager
-msgid "Package installation requires a patch level update of Znuny."
-msgstr "Paketinstallation benötigt ein Patchlevel-Update von OTRS."
-
-#. Template: AdminPackageManager
-msgid "Package update requires a patch level update of Znuny."
-msgstr "Paket-Update benötigt ein Patchlevel-Update von OTRS."
-
-#. Template: AdminPackageManager
 msgid "If you are a OTRS Business Solution™ customer, please visit our customer portal and file a request."
 msgstr "Wenn Sie ein OTRS Business Solution™ Kunde sind, erstellen Sie bitte eine Anfrage in unserem Kundenportal."
 
@@ -24511,4 +24503,136 @@ msgstr "Dynamische Felder für Maske %s"
 #. Perl Module: Kernel/Modules/AdminDynamicFieldScreenConfiguration.pm
 msgid "Default columns for screen %s"
 msgstr "Standardspalten für Maske %s"
+
+#. Template: AdminGenericInterfaceMappingXSLT
+msgid "Keep XML attributes"
+msgstr "XML-Attribute beibehalten"
+
+#. Template: AdminGenericInterfaceMappingXSLT
+msgid "Only needed for content type XML."
+msgstr "Nur für Content-Type XML benötigt."
+
+#. Perl Module: Kernel/Modules/AgentTicketProcess.pm
+msgid "Could not set attachments for ticket with ID %s in activity dialog \"%s\"!"
+msgstr "Anhänge für Ticket mit ID %s konnten in Aktivitätsdialog \"%s\" nicht gesetzt werden!"
+
+#. JS File: Core.Agent.Admin.ProcessManagement
+msgid "Are you sure you want to overwrite the config parameters?"
+msgstr "Sollen die Konfigurations-Parameter wirklich überschrieben werden?"
+
+#. SysConfig
+msgid "Activates week number for datepickers."
+msgstr ""
+
+#. SysConfig
+msgid "Customer User-Customer Relations"
+msgstr ""
+
+#. SysConfig
+msgid "Defines the default keys and values for the transition action module parameters. Mandatory fields are marked with \"(* required)\". Note: For most of the keys the AttributeID can also be used, e.g. \"Owner\" can be \"OwnerID\". Keys that define the same Attribute should only be used once, e.g. \"Owner\" and \"OwnerID\" are redundant."
+msgstr "Definiert die vorausgewählten Schlüssel und Werte für die Konfigurations-Parameter bei den Übergangs-Aktionen. Notiz: Für die meisten Schlüssel können ebenfalls die AttributIDs genutzt werden, z.B. anstatt \"Owner\" kann \"OwnerID\" genutzt werden. Dabei sollten Schlüssel, die das gleiche Attribut beschreiben, nur einmal genutzt werden, z.B. wären \"Owner\" und \"OwnerID\" redundant."
+
+#. SysConfig
+msgid "Format string for output of attachments in the selection list. \"%1$d\": article number; \"%2$s\": filename; \"%3$s\": translated object type (e.g. Article => Artikel); \"%4$s\": translated attachment label (e.g. \"Anhang\")."
+msgstr "Formatierter String zur Ausgabe der Anhänge in Auswahllisten. \"%1$d\": Artikelnummer; \"%2$s\": Dateiname; \"%3$s\": übersetzter Objekttyp (z. B. Article => Artikel); \"%4$s\": übersetztes Anhang-Label (z. B. \"Anhang\")."
+
+#. SysConfig
+msgid "Keep dynamic field attachments after each transition."
+msgstr "Anhänge in dynamischem Feld nach jeder Transition beibehalten."
+
+#. SysConfig
+msgid "Manage Customer User-Customer Relations."
+msgstr ""
+
+#. SysConfig
+msgid "Name of the dynamic field in which the attachment file IDs of the transition will be stored."
+msgstr "Name des dynamischen Felds, in dem die Datei-IDs der Anhänge der Transition gespeichert werden."
+
+#. SysConfig
+msgid "Size of the logo in the page header."
+msgstr "Größe des Logos im Seiten-Header."
+
+#. SysConfig
+msgid "Specifies the path of the file for the logo in the page header (gif|jpg|png)."
+msgstr "Gibt den Pfad für die Datei mit dem Logo in der Kopfzeile der Webseite an (gif|jpg|png)."
+
+#. SysConfig
+msgid "Triggers event 'TicketAllChildrenClosed' if all child tickets of a parent ticket have been closed/merged/removed."
+msgstr "Löst Event 'TicketAllChildrenClosed' aus, wenn alle Kind-Tickets eines Eltern-Tickets den Status geschlossen/gemergt/entfernt erreicht haben."
+
+#. SysConfig
+msgid "Ticket event module which sends new ticket notifications even for tickets without articles."
+msgstr "Ticket-Eventmodul, das Benachrichtigungen für Prozess-Tickets versendet, die keine Artikel haben."
+
+#. Template: AdminPackageManager
+msgid "Package installation requires a patch level update of Znuny."
+msgstr "Paketinstallation benötigt ein Patchlevel-Update von Znuny."
+
+#. Template: AdminPackageManager
+msgid "Package update requires a patch level update of Znuny."
+msgstr "Paket-Update benötigt ein Patchlevel-Update von Znuny."
+
+#. Template: AdminTicketAttributeRelations
+msgid "Ticket attribute relations"
+msgstr "Abhängige Ticketattribute"
+
+#. Template: AdminTicketAttributeRelations
+msgid "Add ticket attribute relations"
+msgstr "Abhängige Ticketattribute hinzufügen"
+
+#. Template: AdminTicketAttributeRelations
+msgid "Edit ticket attribute relations"
+msgstr "Abhängige Ticketattribute bearbeiten"
+
+#. Template: AdminTicketAttributeRelations
+msgid "Import CSV or Excel file"
+msgstr "CSV- oder Excel-Datei importieren"
+
+#. Template: AdminTicketAttributeRelations
+msgid "Last update"
+msgstr "Letzte Aktualisierung"
+
+#. Template: AdminTicketAttributeRelations
+msgid "Are you sure you want to delete entry '%s'?"
+msgstr "Sind Sie sicher, dass der Eintrag '%s' gelöscht werden soll?"
+
+#. Template: AdminTicketAttributeRelations
+msgid "Download previously imported file"
+msgstr "Zuvor importierte Datei herunterladen"
+
+#. Template: AdminTicketAttributeRelations
+msgid "The file needs to be in CSV (UTF-8) or Excel format. Both header columns need to contain the names of valid ticket attributes. The name of the uploaded file must be unique and must not be in use by another ticket attribute relations record."
+msgstr "Die Datei muss CSV- (UTF-8) oder Excel-Format haben. Beide Kopfspalten müssen den Namen von gültigen Ticket-Attributen enthalten. Der Name der hochgeladenen Datei muss eindeutig sein und darf nicht bereits für einen anderen Datensatz verwendet worden sein."
+
+#. Template: AdminTicketAttributeRelations
+msgid "Add missing possible dynamic field values"
+msgstr "Fehlende mögliche Werte zu dynamischen Feldern hinzufügen"
+
+#. Template: AdminTicketAttributeRelations
+msgid "Attribute values"
+msgstr "Attributwerte"
+
+#. Template: AdminTicketAttributeRelations
+msgid "If a value is colored red, it is missing from the possible values list of the dynamic field configuration."
+msgstr "Falls ein Wert rot ist, fehlt er in der Liste der möglichen Werte der Konfiguration des dynamischen Felds."
+
+#. SysConfig
+msgid "Adds ticket attribute relations based on CSV/Excel data."
+msgstr "Fügt auf CSV-/Excel-Daten basierende abhängige Ticketattribute hinzu."
+
+#. SysConfig
+msgid "Always adds empty values to the ticket attribute relations so that it is not needed to add them to the CSV/Excel data."
+msgstr "Fügt immer leere Werte zu abhängigen Ticketattributen hinzu, so dass diese nicht zu den CSV-/Excel-Daten hinzugefügt werden müssen."
+
+#. SysConfig
+msgid "Available/allowed actions for ticket attribute relations."
+msgstr "Verfügbare/erlaubte Aktionen für abhängige Ticketattribute."
+
+#. SysConfig
+msgid "Loader module registration for the admin interface."
+msgstr "Loader-Modulregistrierung für die Adminoberfläche."
+
+#. SysConfig
+msgid "Management of ticket attribute relations."
+msgstr "Verwaltung von abhängigen Ticketattributen."
 

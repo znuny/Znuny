@@ -52,26 +52,29 @@ sub new {
 
 =head2 Run()
 
-    Run Data
+Runs TransitionAction TicketTitleSet.
 
-    my $TicketTitleSetResult = $TicketTitleSetActionObject->Run(
+    my $Success = $TicketTitleSetActionObject->Run(
         UserID                   => 123,
+
+        # Ticket contains the result of TicketGet including dynamic fields
         Ticket                   => \%Ticket,   # required
         ProcessEntityID          => 'P123',
         ActivityEntityID         => 'A123',
         TransitionEntityID       => 'T123',
         TransitionActionEntityID => 'TA123',
+
+        # Config is the hash stored in a Process::TransitionAction's config key
         Config                   => {
             Title  => 'Some ticket title',
             UserID => 123,                      # optional, to override the UserID from the logged user
 
         }
     );
-    Ticket contains the result of TicketGet including DynamicFields
-    Config is the Config Hash stored in a Process::TransitionAction's  Config key
-    Returns:
 
-    $TicketTitleSetResult = 1; # 0
+Returns:
+
+    my $Success = 1; # 0
 
 =cut
 

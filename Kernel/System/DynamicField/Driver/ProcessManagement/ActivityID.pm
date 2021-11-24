@@ -18,10 +18,14 @@ use parent qw(Kernel::System::DynamicField::Driver::BaseText);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::Language',
+    'Kernel::Output::HTML::Layout',
+    'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::ProcessManagement::Activity',
     'Kernel::System::ProcessManagement::DB::Activity',
     'Kernel::System::Ticket::ColumnFilter',
+    'Kernel::System::Util',
 );
 
 =head1 NAME
@@ -151,6 +155,8 @@ sub DisplayValueRender {
         Link  => $Link,
     };
 
+    $Data->{Value} = $Self->_TranslateValue( Value => $Data->{Value} );
+
     return $Data;
 }
 
@@ -170,11 +176,11 @@ sub ColumnFilterValuesGet {
         ValueType => 'Text',
     );
 
+    my $Translate = $Self->_TranslateValue();
+
     # get the display value if still exist in dynamic field configuration
     for my $Key ( sort keys %{$ColumnFilterValues} ) {
-        if ( $SelectionData->{$Key} ) {
-            $ColumnFilterValues->{$Key} = $SelectionData->{$Key};
-        }
+        $ColumnFilterValues->{$Key} = $Self->_TranslateValue( Value => $SelectionData->{$Key} );
     }
 
     return $ColumnFilterValues;
@@ -262,6 +268,42 @@ sub StatsSearchFieldParameterBuild {
     return {
         $Operator => $Value,
     };
+}
+
+sub _TranslateValue {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
+    for my $Needed (qw(Value)) {
+        next NEEDED if exists $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' has to exist!",
+        );
+        return;
+    }
+
+    my $Value = $Param{Value};
+    return $Value if !IsStringWithData($Value);
+
+    my $UtilObject = $Kernel::OM->Get('Kernel::System::Util');
+
+    return $Value if !$UtilObject->IsFrontendContext();
+
+    # Object must be created/fetched here, in case we're not in frontend context.
+    my $LayoutObject   = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
+
+    my $Action = $LayoutObject->{Action};
+    return $Value if !$Action;
+    return $Value if $Action ne 'AgentDashboard';
+
+    my $TranslatedValue = $LanguageObject->Translate($Value);
+
+    return $TranslatedValue;
 }
 
 1;

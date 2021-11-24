@@ -17,6 +17,7 @@ use MIME::Base64;
 use REST::Client;
 use URI::Escape;
 use LWP::UserAgent;
+use XML::Simple;
 use Kernel::Config;
 
 use Kernel::System::VariableCheck qw(:all);
@@ -772,6 +773,9 @@ sub RequesterPerformRequest {
             elsif ( $Config->{ContentType} eq 'FORM' ) {
                 $Headers->{'Content-Type'} = 'application/x-www-form-urlencoded';
             }
+            elsif ( $Config->{ContentType} eq 'XML' ) {
+                $Headers->{'Content-Type'} = 'application/xml';
+            }
         }
     }
 
@@ -908,6 +912,30 @@ sub RequesterPerformRequest {
                     $Param{Data} =~ s{\A\?}{}sm;
                 }
             }
+            elsif ( $Headers->{'Content-Type'} eq 'application/xml' ) {
+                my $XMLSimple = XML::Simple->new();
+                my $XMLOut;
+                eval {
+                    $XMLOut = $XMLSimple->XMLout(
+                        $Param{Data},
+                        AttrIndent => 1,
+                        ContentKey => '-content',
+                        NoAttr     => 0,
+                        KeyAttr    => [],
+                        RootName   => undef,
+                    );
+                };
+
+                $XMLOut //= '';
+
+                if ( !length $XMLOut ) {
+                    $Self->{DebuggerObject}->Error(
+                        Summary => 'Could not generate XML content for request.',
+                    );
+                }
+
+                $Param{Data} = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . $XMLOut;
+            }
             else {
 
                 # Default to JSON (OTRS default behavior)
@@ -1023,7 +1051,7 @@ sub RequesterPerformRequest {
     }
 
     # Send processed data to debugger.
-    my $SizeExeeded = 0;
+    my $SizeExceeded = 0;
     {
         my $MaxSize = $Kernel::OM->Get('Kernel::Config')->Get('GenericInterface::Operation::ResponseLoggingMaxSize')
             || 200;
@@ -1039,7 +1067,7 @@ sub RequesterPerformRequest {
             );
         }
         else {
-            $SizeExeeded = 1;
+            $SizeExceeded = 1;
             $Self->{DebuggerObject}->Debug(
                 Summary => "JSON data received from remote system was too large for logging",
                 Data =>
@@ -1058,16 +1086,16 @@ sub RequesterPerformRequest {
 
     if ( $ResponseCode ne '204' ) {
 
-        my $ResponseContentType = $RestClient->responseHeader('Content-Type') || '';
-        if ( $ResponseContentType eq 'text/plain' ) {
+        my $ResponseContentType = $RestClient->responseHeader('Content-Type') // '';
+        if ( $ResponseContentType =~ m{text/(plain|html|xml)} ) {
             $Result = {
                 Body => $ResponseContent,
             };
 
             return {
-                Success     => 1,
-                Data        => $Result,
-                SizeExeeded => $SizeExeeded,
+                Success      => 1,
+                Data         => $Result,
+                SizeExceeded => $SizeExceeded,
             };
         }
 
@@ -1091,9 +1119,9 @@ sub RequesterPerformRequest {
 
     # All OK - return result.
     return {
-        Success     => 1,
-        Data        => $Result || undef,
-        SizeExeeded => $SizeExeeded,
+        Success      => 1,
+        Data         => $Result || undef,
+        SizeExceeded => $SizeExceeded,
     };
 }
 

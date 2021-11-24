@@ -1443,6 +1443,37 @@ sub ArticleAttachment {    ## no critic;
     return %Attachment;
 }
 
+=head2 ArticleWriteAttachment()
+
+Write an article attachment to storage.
+
+    my $Success = $ArticleBackendObject->ArticleWriteAttachment(
+        TicketID           => 503,
+        Content            => $ContentAsString,
+        ContentType        => 'text/html; charset="iso-8859-15"',
+        Filename           => 'lala.html',
+        ContentID          => 'cid-1234',   # optional
+        ContentAlternative => 0,            # optional, alternative content to shown as body
+        Disposition        => 'attachment', # or 'inline'
+        ArticleID          => 123,
+        UserID             => 123,
+    );
+
+=cut
+
+sub ArticleWriteAttachment {
+    my ( $Self, %Param ) = @_;
+
+    my $ArticleBackendObject = $Self->BackendForArticle(
+        TicketID  => $Param{TicketID},
+        ArticleID => $Param{ArticleID}
+    );
+    return if !$ArticleBackendObject;
+
+    my $Success = $ArticleBackendObject->ArticleWriteAttachment(%Param);
+    return $Success;
+}
+
 =head2 ArticleCount()
 
 Returns count of article.

@@ -124,4 +124,29 @@ $Self->Is(
     'FindAsciiSupersetEncoding falls back to ASCII',
 );
 
+#
+# Tests for RemoveUTF8BOM
+#
+my $String = 'This is a UTF-8 string öäüÖÄÜ€.';
+
+my $ProcessedString = $EncodeObject->RemoveUTF8BOM(
+    String => $String,
+);
+
+$Self->Is(
+    $ProcessedString,
+    $String,
+    'RemoveUTF8BOM() must not change string that has no UTF-8 BOM.',
+);
+
+$ProcessedString = $EncodeObject->RemoveUTF8BOM(
+    String => "\xef\xbb\xbf$String",
+);
+
+$Self->Is(
+    $ProcessedString,
+    $String,
+    'RemoveUTF8BOM() must remove UTF-8 BOM from string.',
+);
+
 1;

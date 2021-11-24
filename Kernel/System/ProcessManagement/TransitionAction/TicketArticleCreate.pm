@@ -57,15 +57,19 @@ sub new {
 
 =head2 Run()
 
-    Run Data
+Runs TransitionAction TicketArticleCreate.
 
-    my $TicketArticleCreateResult = $TicketArticleCreateActionObject->Run(
+    my $Success = $TicketArticleCreateActionObject->Run(
         UserID                   => 123,
+
+        # Ticket contains the result of TicketGet including dynamic fields
         Ticket                   => \%Ticket,   # required
         ProcessEntityID          => 'P123',
         ActivityEntityID         => 'A123',
         TransitionEntityID       => 'T123',
         TransitionActionEntityID => 'TA123',
+
+        # Config is the hash stored in a Process::TransitionAction's config key
         Config => {
             SenderType           => 'agent',                            # (required) agent|system|customer
             IsVisibleForCustomer => 1,                                  # 0 or 1
@@ -79,15 +83,13 @@ sub new {
        },
     );
 
-    Ticket contains the result of TicketGet including DynamicFields
-    Config is the Config Hash stored in a Process::TransitionAction's  Config key
-    Returns:
+Returns:
 
-    $TicketArticleCreateResult = 1; # 0
+    $Success = 1; # 0
 
-    Internal article example:
+    # Internal article example:
 
-    my $TicketArticleCreateResult = $TicketArticleCreateActionObject->Run(
+    my $Success = $TicketArticleCreateActionObject->Run(
         UserID => 123,
         Ticket => {
             TicketNumber => '20101027000001',
@@ -118,9 +120,9 @@ sub new {
         },
     );
 
-    Email article example:
+    # Email article example:
 
-    my $TicketArticleCreateResult = $TicketArticleCreateActionObject->Run(
+    my $Success = $TicketArticleCreateActionObject->Run(
         UserID => 123,
         Ticket => {
             TicketNumber => '20101027000001',
@@ -151,9 +153,9 @@ sub new {
         },
     );
 
-    Chat article example:
+    # Chat article example:
 
-    my $TicketArticleCreateResult = $TicketArticleCreateActionObject->Run(
+    my $Success = $TicketArticleCreateActionObject->Run(
         UserID => 123,
         Ticket => {
             TicketNumber => '20101027000001',
@@ -284,6 +286,11 @@ sub Run {
     my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
         ChannelName => $Param{Config}->{CommunicationChannel}
     );
+
+    # check for selected Attachments
+    if ( $Param{Config}->{Attachments} ) {
+        $Param{Config}->{Attachment} = $Self->_GetAttachments(%Param);
+    }
 
     my $ArticleID = $ArticleBackendObject->ArticleCreate(
         %{ $Param{Config} },

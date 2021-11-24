@@ -168,7 +168,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir /opt/otrs/var/article/
 /opt/otrs/var/fonts/
 /opt/otrs/var/httpd/
-/opt/otrs/var/logo-otrs.png
 %dir /opt/otrs/var/cron/
 %dir /opt/otrs/var/log/
 %dir /opt/otrs/var/sessions/

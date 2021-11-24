@@ -362,7 +362,7 @@
         <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Hash>
-                <Item Key="URL">skins/Agent/default/img/loginlogo_default.png</Item>
+                <Item Key="URL">skins/Agent/default/img/logo.png</Item>
                 <Item Key="StyleHeight">60px</Item>
             </Hash>
         </Value>
@@ -2836,10 +2836,20 @@
         </Value>
     </Setting>
     <Setting Name="PDF::LogoFile" Required="1" Valid="1">
-        <Description Translatable="1">Specifies the path of the file for the logo in the page header (gif|jpg|png, 700 x 100 pixel).</Description>
+        <Description Translatable="1">Specifies the path of the file for the logo in the page header (gif|jpg|png).</Description>
         <Navigation>Core::PDF</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Home&gt;/var/logo-otrs.png</Item>
+            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Home&gt;/var/httpd/htdocs/skins/Agent/default/img/logo.png</Item>
+        </Value>
+    </Setting>
+    <Setting Name="PDF::LogoSize" Required="1" Valid="1">
+        <Description Translatable="1">Size of the logo in the page header.</Description>
+        <Navigation>Core::PDF</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Width">475</Item>
+                <Item Key="Height">100</Item>
+            </Hash>
         </Value>
     </Setting>
     <Setting Name="PDF::PageSize" Required="1" Valid="1">
@@ -4013,6 +4023,7 @@ via the Preferences button after logging in.
                 <Item Key="PasswordMin2Lower2UpperCharacters">0</Item>
                 <Item Key="PasswordMin2Characters">0</Item>
                 <Item Key="PasswordNeedDigit">0</Item>
+                <Item Key="PasswordMaxLoginFailed">0</Item>
                 <Item Key="Active">1</Item>
             </Hash>
         </Value>
@@ -5656,7 +5667,7 @@ via the Preferences button after logging in.
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::Navigation###AdminCustomerUserCustomer###001-Framework" Required="0" Valid="0">
+    <Setting Name="Frontend::Navigation###AdminCustomerUserCustomer###001-Framework" Required="0" Valid="1">
         <Description Translatable="1">Main menu item registration.</Description>
         <Navigation>Frontend::Admin::ModuleRegistration::MainMenu</Navigation>
         <Value>
@@ -5665,6 +5676,29 @@ via the Preferences button after logging in.
                     <Hash>
                     </Hash>
                 </DefaultItem>
+                <Item>
+                    <Hash>
+                        <Item Key="Group">
+                            <Array>
+                                <Item>admin</Item>
+                                <Item>users</Item>
+                            </Array>
+                        </Item>
+                        <Item Key="GroupRo">
+                            <Array>
+                            </Array>
+                        </Item>
+                        <Item Key="Description" Translatable="1">Manage Customer User-Customer Relations.</Item>
+                        <Item Key="Name" Translatable="1">Customer User-Customer Relations</Item>
+                        <Item Key="Link">Action=AdminCustomerUserCustomer;Nav=Agent</Item>
+                        <Item Key="LinkOption"></Item>
+                        <Item Key="NavBar">Customers</Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Block">ItemArea</Item>
+                        <Item Key="AccessKey"></Item>
+                        <Item Key="Prio">9101</Item>
+                    </Hash>
+                </Item>
             </Array>
         </Value>
     </Setting>
@@ -8068,6 +8102,7 @@ via the Preferences button after logging in.
                 <Item>thirdparty/jquery-pubsub/pubsub.js</Item>
                 <Item>thirdparty/jquery-jstree-3.3.7/jquery.jstree.js</Item>
                 <Item>thirdparty/nunjucks-3.0.1/nunjucks.js</Item>
+                <Item>thirdparty/jscolor-2.4.6/jscolor.js</Item>
                 <Item>Core.Init.js</Item>
                 <Item>Core.JavaScriptEnhancements.js</Item>
                 <Item>Core.Debug.js</Item>

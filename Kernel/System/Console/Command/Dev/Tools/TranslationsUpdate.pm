@@ -57,7 +57,8 @@ sub Configure {
     );
     $Self->AddOption(
         Name => 'keep-old',
-        Description =>  "Keep old language files (e.g. Kernel/Language/de_GeneralCatalog.pm). This is only needed if you want to diff these files.",
+        Description =>
+            "Keep old language files (e.g. Kernel/Language/de_GeneralCatalog.pm). This is only needed if you want to diff these files.",
         Required => 0,
         HasValue => 0,
     );

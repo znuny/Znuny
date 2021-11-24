@@ -15,6 +15,7 @@ use warnings;
 use File::Path;
 use utf8;
 use Encode ();
+use MIME::Base64;
 
 use parent qw(
     Kernel::System::EventHandler

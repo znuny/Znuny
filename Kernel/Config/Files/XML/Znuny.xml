@@ -1161,4 +1161,191 @@
         </Value>
     </Setting>
 
+    <!--
+        Ticket attribute relations
+    -->
+    <Setting Name="Frontend::Module###AdminTicketAttributeRelations" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Admin</Item>
+                    <Item Key="Title" Translatable="1">Ticket attribute relations</Item>
+                    <Item Key="NavBarName">Admin</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AdminTicketAttributeRelations###999-Znuny" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the admin interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.TicketAttributeRelations.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Navigation###AdminTicketAttributeRelations###003-TicketAttributeRelations" Required="0" Valid="0">
+        <Description Translatable="1">Main menu item registration.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::NavigationModule###AdminTicketAttributeRelations" Required="0" Valid="1">
+        <Description Translatable="1">Admin area navigation for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Group">
+                    <Array>
+                        <Item>admin</Item>
+                    </Array>
+                </Item>
+                <Item Key="GroupRo">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
+                <Item Key="Name" Translatable="1">Ticket attribute relations</Item>
+                <Item Key="Block">Automation</Item>
+                <Item Key="Description" Translatable="1">Management of ticket attribute relations.</Item>
+                <Item Key="IconBig"></Item>
+                <Item Key="IconSmall"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Acl::Module###100-TicketAttributeRelations" Required="1" Valid="1">
+        <Description Translatable="1">Adds ticket attribute relations based on CSV/Excel data.</Description>
+        <Navigation>Core::Ticket::ACL</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Ticket::Acl::TicketAttributeRelations</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Core::TicketAttributeRelations::ACLActions" Required="1" Valid="1">
+        <Description Translatable="1">Available/allowed actions for ticket attribute relations.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Array>
+                <Item>AgentTicketBounce</Item>
+                <Item>AgentTicketClose</Item>
+                <Item>AgentTicketCompose</Item>
+                <Item>AgentTicketCustomer</Item>
+                <Item>AgentTicketDecision</Item>
+                <Item>AgentTicketEmail</Item>
+                <Item>AgentTicketEmailOutbound</Item>
+                <Item>AgentTicketEmailSecond</Item>
+                <Item>AgentTicketForward</Item>
+                <Item>AgentTicketFreeText</Item>
+                <Item>AgentTicketMerge</Item>
+                <Item>AgentTicketMove</Item>
+                <Item>AgentTicketNote</Item>
+                <Item>AgentTicketOwner</Item>
+                <Item>AgentTicketPending</Item>
+                <Item>AgentTicketPhone</Item>
+                <Item>AgentTicketPhoneInbound</Item>
+                <Item>AgentTicketPhoneOutbound</Item>
+                <Item>AgentTicketPhoneSecond</Item>
+                <Item>AgentTicketPriority</Item>
+                <Item>AgentTicketProcess</Item>
+                <Item>AgentTicketResponsible</Item>
+                <Item>CustomerTicketMessage</Item>
+                <Item>CustomerTicketProcess</Item>
+                <Item>CustomerTicketZoom</Item>
+
+                <!-- The following actions are supported by package Znuny4OTRS-AdditionalCommon -->
+                <Item>AgentTicketAdditionalCommon1</Item>
+                <Item>AgentTicketAdditionalCommon2</Item>
+                <Item>AgentTicketAdditionalCommon3</Item>
+                <Item>AgentTicketAdditionalCommon4</Item>
+                <Item>AgentTicketAdditionalCommon5</Item>
+                <Item>AgentTicketAdditionalCommon6</Item>
+                <Item>AgentTicketAdditionalCommon7</Item>
+                <Item>AgentTicketAdditionalCommon8</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Core::TicketAttributeRelations::AlwaysPossibleNone" Required="1" Valid="1">
+        <Description Translatable="1">Always adds empty values to the ticket attribute relations so that it is not needed to add them to the CSV/Excel data.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+
+    <!--
+        Ticket event module for triggering a new event when all child tickets of a parent ticket have been closed.
+    -->
+    <Setting Name="Ticket::EventModulePost###2000-TicketAllChildrenClosed" Required="0" Valid="1">
+        <Description Translatable="1">Triggers event 'TicketAllChildrenClosed' if all child tickets of a parent ticket have been closed/merged/removed.</Description>
+        <Navigation>Core::Event::Ticket</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Ticket::Event::TicketAllChildrenClosed</Item>
+                <Item Key="Event">TicketStateUpdate|TicketCreate</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!--
+        Notifications for empty process tickets
+    -->
+    <Setting Name="Ticket::EventModulePost###999-NotifyOnEmptyProcessTickets" Required="0" Valid="1">
+        <Description Translatable="1">Ticket event module which sends new ticket notifications even for tickets without articles.</Description>
+        <Navigation>Core::Event::Ticket</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Ticket::Event::NotifyOnEmptyProcessTickets</Item>
+                <Item Key="Event">TicketCreate</Item>
+                <Item Key="Transaction">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!--
+        Dynamic field attachment for process management.
+    -->
+    <Setting Name="Process::DynamicFieldProcessManagementAttachment" Required="1" Valid="1">
+        <Description Translatable="1">Name of the dynamic field in which the attachment file IDs of the transition will be stored.</Description>
+        <Navigation>Core::ProcessManagement</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">ProcessManagementAttachment</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Process::DynamicFieldProcessManagementAttachment::Keep" Required="1" Valid="1">
+        <Description Translatable="1">Keep dynamic field attachments after each transition.</Description>
+        <Navigation>Core::ProcessManagement</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Process::DynamicFieldProcessManagementAttachment::FormatString" Required="1" Valid="1">
+        <Description Translatable="1">Format string for output of attachments in the selection list. "%1$d": article number; "%2$s": filename; "%3$s": translated object type (e.g. Article => Artikel); "%4$s": translated attachment label (e.g. "Anhang").</Description>
+        <Navigation>Core::ProcessManagement</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">%3$s#%1$d: %2$s</Item>
+        </Value>
+    </Setting>
+
 </otrs_config>

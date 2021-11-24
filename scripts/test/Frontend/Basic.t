@@ -26,6 +26,9 @@ $Kernel::OM->ObjectParamAdd(
     'Kernel::System::UnitTest::Helper' => {
         SkipSSLVerify     => 1,
         DisableAsyncCalls => 1,
+        DisableSysConfigs => [
+            'DashboardBackend###0442-RSS',
+        ],
     },
 );
 

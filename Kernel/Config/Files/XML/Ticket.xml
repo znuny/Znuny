@@ -10473,6 +10473,7 @@
                 <Item>NotificationEscalation</Item>
                 <Item>NotificationEscalationNotifyBefore</Item>
                 <Item>NotificationServiceUpdate</Item>
+                <Item>TicketAllChildrenClosed</Item>
             </Array>
         </Value>
     </Setting>

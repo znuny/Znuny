@@ -142,7 +142,7 @@ sub Run {
             );
         }
 
-        # set entitty sync state
+        # set entity sync state
         my $Success = $EntityObject->EntitySyncStateSet(
             EntityType => 'TransitionAction',
             EntityID   => $EntityID,
@@ -330,7 +330,7 @@ sub Run {
             );
         }
 
-        # set entitty sync state
+        # set entity sync state
         $Success = $EntityObject->EntitySyncStateSet(
             EntityType => 'TransitionAction',
             EntityID   => $TransitionActionData->{EntityID},
@@ -408,6 +408,28 @@ sub Run {
                 );
             }
         }
+    }
+
+    # ------------------------------------------------------------ #
+    # Add default parameter
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'GetDefaultConfigParameters' ) {
+        my $Module          = $ParamObject->GetParam( Param => 'Module' );
+        my %ConfigParameter = $Self->_GetDefaultConfigParameters(
+            Module => $Module,
+        );
+
+        my $JSON = $LayoutObject->JSONEncode(
+            Data => {
+                %ConfigParameter
+            }
+        );
+        return $LayoutObject->Attachment(
+            ContentType => 'application/json; charset=' . $LayoutObject->{Charset},
+            Content     => $JSON || '',
+            Type        => 'inline',
+            NoCache     => 1,
+        );
     }
 
     # ------------------------------------------------------------ #
@@ -557,6 +579,7 @@ sub _ShowEdit {
         Data         => \%TransitionAction,
         Name         => 'Module',
         PossibleNone => 1,
+        Translation  => 0,
         SelectedID   => $TransitionActionData->{Config}->{Module},
         Class        => 'Modernize Validate_Required ' . ( $Param{Errors}->{'ModuleInvalid'} || '' ),
     );
@@ -745,6 +768,34 @@ sub _CheckTransitionActionUsage {
     }
 
     return \@Usage;
+}
+
+sub _GetDefaultConfigParameters {
+    my ( $Self, %Param ) = @_;
+
+    NEEDED:
+    for my $Needed (qw(Module)) {
+        next NEEDED if defined $Param{$Needed};
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => 'Need ' . $Needed . '!'
+        );
+        return;
+    }
+
+# get TransitionAction name of full namespace e.g. 'Kernel::System::ProcessManagement::TransitionAction::TicketCreate' to 'TicketCreate'
+    if ( $Param{Module} =~ m/TransitionAction::(.+)$/ ) {
+        my $TransitionAction = $1;
+        my $Config = $Kernel::OM->Get('Kernel::Config')->Get('ProcessManagement::TransitionAction::DefaultParameters');
+        my %Settings;
+        for my $Key ( sort keys %{$Config} ) {
+            if ( IsHashRefWithData( $Config->{$Key} ) ) {
+                %Settings = ( %Settings, %{ $Config->{$Key} } );
+            }
+        }
+        return %{ $Settings{$TransitionAction} || {} };
+    }
+    return;
 }
 
 1;

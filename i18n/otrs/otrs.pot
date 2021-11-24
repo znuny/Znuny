@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2021-08-26 17:00+0000\n"
+"POT-Creation-Date: 2021-10-27 07:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3184,6 +3184,14 @@ msgstr ""
 
 #. Template: AdminGenericInterfaceMappingXSLT
 msgid "Enter tags separated by space for which array representation should be forced."
+msgstr ""
+
+#. Template: AdminGenericInterfaceMappingXSLT
+msgid "Keep XML attributes"
+msgstr ""
+
+#. Template: AdminGenericInterfaceMappingXSLT
+msgid "Only needed for content type XML."
 msgstr ""
 
 #. Template: AdminGenericInterfaceMappingXSLT
@@ -6808,6 +6816,50 @@ msgstr ""
 
 #. Template: AdminTemplateAttachment
 msgid "Link %s to selected %s"
+msgstr ""
+
+#. Template: AdminTicketAttributeRelations
+msgid "Ticket attribute relations"
+msgstr ""
+
+#. Template: AdminTicketAttributeRelations
+msgid "Add ticket attribute relations"
+msgstr ""
+
+#. Template: AdminTicketAttributeRelations
+msgid "Edit ticket attribute relations"
+msgstr ""
+
+#. Template: AdminTicketAttributeRelations
+msgid "Import CSV or Excel file"
+msgstr ""
+
+#. Template: AdminTicketAttributeRelations
+msgid "Last update"
+msgstr ""
+
+#. Template: AdminTicketAttributeRelations
+msgid "Are you sure you want to delete entry '%s'?"
+msgstr ""
+
+#. Template: AdminTicketAttributeRelations
+msgid "Download previously imported file"
+msgstr ""
+
+#. Template: AdminTicketAttributeRelations
+msgid "The file needs to be in CSV (UTF-8) or Excel format. Both header columns need to contain the names of valid ticket attributes. The name of the uploaded file must be unique and must not be in use by another ticket attribute relations record."
+msgstr ""
+
+#. Template: AdminTicketAttributeRelations
+msgid "Add missing possible dynamic field values"
+msgstr ""
+
+#. Template: AdminTicketAttributeRelations
+msgid "Attribute values"
+msgstr ""
+
+#. Template: AdminTicketAttributeRelations
+msgid "If a value is colored red, it is missing from the possible values list of the dynamic field configuration."
 msgstr ""
 
 #. Template: AdminType
@@ -11526,10 +11578,6 @@ msgstr ""
 msgid "Edit Transition \"%s\""
 msgstr ""
 
-#. Perl Module: Kernel/Modules/AdminProcessManagementTransition.pm
-msgid "Transition validation module"
-msgstr ""
-
 #. Perl Module: Kernel/Modules/AdminProcessManagementTransitionAction.pm
 msgid "At least one valid config parameter is required."
 msgstr ""
@@ -12548,6 +12596,10 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentTicketProcess.pm
 msgid "Could not set DynamicField value for %s of Ticket with ID \"%s\" in ActivityDialog \"%s\"!"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AgentTicketProcess.pm
+msgid "Could not set attachments for ticket with ID %s in activity dialog \"%s\"!"
 msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentTicketProcess.pm
@@ -14402,14 +14454,6 @@ msgstr ""
 msgid "The setting 'max_allowed_packet' must be higher than 64 MB."
 msgstr ""
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Performance.pm
-msgid "Query Cache Size"
-msgstr ""
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Performance.pm
-msgid "The setting 'query_cache_size' should be used (higher than 10 MB but not more than 512 MB)."
-msgstr ""
-
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/StorageEngine.pm
 msgid "Default Storage Engine"
 msgstr ""
@@ -15846,6 +15890,10 @@ msgstr ""
 msgid "Sorry, the only existing parameter can't be removed."
 msgstr ""
 
+#. JS File: Core.Agent.Admin.ProcessManagement
+msgid "Are you sure you want to overwrite the config parameters?"
+msgstr ""
+
 #. JS File: Core.Agent.Admin.SMIME
 msgid "Do you really want to delete this certificate?"
 msgstr ""
@@ -16698,6 +16746,10 @@ msgid "Adds the permanent vacation days."
 msgstr ""
 
 #. SysConfig
+msgid "Adds ticket attribute relations based on CSV/Excel data."
+msgstr ""
+
+#. SysConfig
 msgid "Admin"
 msgstr ""
 
@@ -17022,6 +17074,10 @@ msgid "Allows to set a new ticket state in the move ticket screen of the agent i
 msgstr ""
 
 #. SysConfig
+msgid "Always adds empty values to the ticket attribute relations so that it is not needed to add them to the CSV/Excel data."
+msgstr ""
+
+#. SysConfig
 msgid "Always show RichText if available"
 msgstr ""
 
@@ -17107,6 +17163,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update."
+msgstr ""
+
+#. SysConfig
+msgid "Available/allowed actions for ticket attribute relations."
 msgstr ""
 
 #. SysConfig
@@ -17743,6 +17803,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Customer User Information Center."
+msgstr ""
+
+#. SysConfig
+msgid "Customer User-Customer Relations"
 msgstr ""
 
 #. SysConfig
@@ -18439,6 +18503,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Defines the default history type in the customer interface."
+msgstr ""
+
+#. SysConfig
+msgid "Defines the default keys and values for the transition action module parameters. Mandatory fields are marked with \"(* required)\". Note: For most of the keys the AttributeID can also be used, e.g. \"Owner\" can be \"OwnerID\". Keys that define the same Attribute should only be used once, e.g. \"Owner\" and \"OwnerID\" are redundant."
 msgstr ""
 
 #. SysConfig
@@ -20150,6 +20218,10 @@ msgid "Forces to unlock tickets after being moved to another queue."
 msgstr ""
 
 #. SysConfig
+msgid "Format string for output of attachments in the selection list. \"%1$d\": article number; \"%2$s\": filename; \"%3$s\": translated object type (e.g. Article => Artikel); \"%4$s\": translated attachment label (e.g. \"Anhang\")."
+msgstr ""
+
+#. SysConfig
 msgid "Forwarded to \"%s\"."
 msgstr ""
 
@@ -20726,6 +20798,10 @@ msgid "JavaScript function for the search frontend."
 msgstr ""
 
 #. SysConfig
+msgid "Keep dynamic field attachments after each transition."
+msgstr ""
+
+#. SysConfig
 msgid "Korean"
 msgstr ""
 
@@ -20938,6 +21014,10 @@ msgid "Lithuanian"
 msgstr ""
 
 #. SysConfig
+msgid "Loader module registration for the admin interface."
+msgstr ""
+
+#. SysConfig
 msgid "Loader module registration for the agent interface."
 msgstr ""
 
@@ -21022,6 +21102,10 @@ msgid "Malay"
 msgstr ""
 
 #. SysConfig
+msgid "Manage Customer User-Customer Relations."
+msgstr ""
+
+#. SysConfig
 msgid "Manage OTRS Group cloud services."
 msgstr ""
 
@@ -21063,6 +21147,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Manage tasks triggered by event or time based execution."
+msgstr ""
+
+#. SysConfig
+msgid "Management of ticket attribute relations."
 msgstr ""
 
 #. SysConfig
@@ -21311,6 +21399,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Name of custom service. The custom service is a service selection of your preferred services and can be selected in the preferences settings."
+msgstr ""
+
+#. SysConfig
+msgid "Name of the dynamic field in which the attachment file IDs of the transition will be stored."
 msgstr ""
 
 #. SysConfig
@@ -23138,6 +23230,10 @@ msgid "Simple"
 msgstr ""
 
 #. SysConfig
+msgid "Size of the logo in the page header."
+msgstr ""
+
+#. SysConfig
 msgid "Skin"
 msgstr ""
 
@@ -23254,7 +23350,7 @@ msgid "Specifies the order in which the firstname and the lastname of agents wil
 msgstr ""
 
 #. SysConfig
-msgid "Specifies the path of the file for the logo in the page header (gif|jpg|png, 700 x 100 pixel)."
+msgid "Specifies the path of the file for the logo in the page header (gif|jpg|png)."
 msgstr ""
 
 #. SysConfig
@@ -23750,6 +23846,10 @@ msgid "Ticket event module that triggers the escalation stop events."
 msgstr ""
 
 #. SysConfig
+msgid "Ticket event module which sends new ticket notifications even for tickets without articles."
+msgstr ""
+
+#. SysConfig
 msgid "Ticket limit per page for Ticket Overview \"Medium\"."
 msgstr ""
 
@@ -23831,6 +23931,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Triggers add or update of automatic calendar appointments based on certain ticket times."
+msgstr ""
+
+#. SysConfig
+msgid "Triggers event 'TicketAllChildrenClosed' if all child tickets of a parent ticket have been closed/merged/removed."
 msgstr ""
 
 #. SysConfig
