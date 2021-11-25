@@ -55,6 +55,7 @@ The following persons contributed to OTRS:
 * Kai Herlemann <43746520+KaiHerlemann@users.noreply.github.com>
 * Keith Moore <tenareth@gmail.com>
 * Luca Maranzano <liuk@linux.it>
+* Lukas Bröring SectorNord AG <91135132+LuBroering@users.noreply.github.com>
 * Manuel Hecht <manuel.hecht@otrs.com>
 * Marc Bonsels <marc.bonsels@otrs.com>
 * Marc Nilius <marc.nilius@otrs.com>
@@ -132,8 +133,10 @@ The following persons contributed to OTRS:
 * Zoran Ilibasic <zilibasic@s7desingcreative.com>
 * anonymous <uknown@anonymous>
 * b1-luettje <53084931+b1-luettje@users.noreply.github.com>
+* dennykorsukewitz <dennykorsukewitz@gmail.com>
 * djurici <igor.djuric@muehlbauer.de>
 * juanmclavero <juanm.clavero@ibsalut.es>
+* meisterheister <35762852+meisterheister@users.noreply.github.com>
 * otrsintern <otrsintern@gmail.com>
 * paulfolkers <83212096+paulfolkers@users.noreply.github.com>
 * reneeb <info@perl-services.de>
