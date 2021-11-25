@@ -75,7 +75,13 @@ Core.Agent.TicketCompose = (function (TargetNS) {
 
     function CheckSubject () {
         var CurrentSubject = $('#Subject').val();
+        var TicketID       = $('input[name=TicketID]').val();
+
         $('#SubjectWarning').remove();
+
+        if ( !TicketID ) {
+            return;
+        }
 
         $.ajax({
             url: Core.Config.Get('Baselink'),
@@ -84,7 +90,7 @@ Core.Agent.TicketCompose = (function (TargetNS) {
                 Action: Core.Config.Get('Action'),
                 Subaction: 'CheckSubject',
                 Subject: CurrentSubject,
-                TicketID: $('input[name=TicketID]').val(),
+                TicketID: TicketID,
             },
             success : function(Response) {
                 if (Response.Empty) {
