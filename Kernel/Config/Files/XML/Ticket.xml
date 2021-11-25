@@ -10496,6 +10496,8 @@
                 <Item>ArticleEmailSendingQueued</Item>
                 <Item>ArticleEmailSendingSent</Item>
                 <Item>ArticleEmailSendingError</Item>
+                <Item>ArticleTransmissionErrorCreate</Item>
+                <Item>ArticleTransmissionErrorUpdate</Item>
             </Array>
         </Value>
     </Setting>
