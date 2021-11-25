@@ -24,6 +24,7 @@ The following persons contributed to OTRS:
 * David Crimi <deathpoison.dc@gmail.com>
 * Denis Nelubin <dnelubin@gmail.com>
 * Dennis Schmelter <dennis.schmelter@otrs.com>
+* Denny Korsukewitz <dennykorsukewitz@gmail.com>
 * Denny Korsukéwitz <dennykorsukewitz@gmail.com>
 * Denny Korsukéwitz <dk@znuny.com>
 * Diego Selzlein <diegoselzlein@gmail.com>
@@ -133,12 +134,14 @@ The following persons contributed to OTRS:
 * Zoran Ilibasic <zilibasic@s7desigcreative.com>
 * Zoran Ilibasic <zilibasic@s7designcreative.com>
 * Zoran Ilibasic <zilibasic@s7desingcreative.com>
+* anonymous <uknown@anonymous>
 * b1-luettje <53084931+b1-luettje@users.noreply.github.com>
 * dennykorsukewitz <dennykorsukewitz@gmail.com>
 * dennykorsukewitz <dk@znuny.com>
 * djurici <igor.djuric@muehlbauer.de>
 * jsinagowitz <91074418+jsinagowitz@users.noreply.github.com>
 * juanmclavero <juanm.clavero@ibsalut.es>
+* meisterheister <35762852+meisterheister@users.noreply.github.com>
 * otrsintern <otrsintern@gmail.com>
 * paulfolkers <83212096+paulfolkers@users.noreply.github.com>
 * reneeb <info@perl-services.de>
