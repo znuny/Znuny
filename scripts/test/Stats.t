@@ -16,6 +16,11 @@ use vars (qw($Self));
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 my $StatsObject  = $Kernel::OM->Get('Kernel::System::Stats');
 
+$ConfigObject->Set(
+    Key   => 'OTRSTimeZone',
+    Value => 'Europe/Berlin',
+);
+
 $Kernel::OM->ObjectParamAdd(
     'Kernel::System::UnitTest::Helper' => {
         RestoreDatabase => 1,
@@ -649,9 +654,10 @@ my $String = $StatsObject->_ToOTRSTimeZone(
     TimeZone => 'Europe/Berlin',
 );
 
-$Self->False(
+$Self->Is(
     scalar $String,
-    '_ToOTRSTimeZone() - invalid date',
+    '2019-03-31 03:30:00',
+    '_ToOTRSTimeZone() - invalid date (DST) corrected to valid date',
 );
 
 # Check _ToOTRSTimeZone for valid date.
@@ -660,8 +666,9 @@ $String = $StatsObject->_ToOTRSTimeZone(
     TimeZone => 'Europe/Berlin',
 );
 
-$Self->True(
+$Self->Is(
     scalar $String,
+    '2019-03-31 12:30:00',
     '_ToOTRSTimeZone() - valid date',
 );
 

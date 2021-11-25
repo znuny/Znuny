@@ -2501,6 +2501,19 @@ sub _CalculateRecurrenceTime {
     # We will modify this object throughout the function.
     my $CurrentTimeObject = $Param{CurrentTime};
 
+    # Use floating time zone to be able to add and subtract whole days, etc.
+    # regardless of daylight saving time.
+    #
+    # This might lead to other problems like calculating a time that does not exist,
+    # e.g. 2:00 AM on the day of the DST switch from winter to summer time in time zone
+    # Europe/Berlin (1:59 AM switches to 3:00 AM).
+    #
+    # Kernel::System::DateTime takes care of this by adjusting the date.
+    my $CurrentTimeObjectValues = $CurrentTimeObject->Get();
+    my $TimeZone                = $CurrentTimeObjectValues->{TimeZone};
+
+    $CurrentTimeObject->ToTimeZone( TimeZone => 'floating' );
+
     if ( $Param{Appointment}->{RecurrenceType} eq 'Daily' ) {
 
         # Add one day.
@@ -2705,6 +2718,8 @@ sub _CalculateRecurrenceTime {
     else {
         return;
     }
+
+    $CurrentTimeObject->ToTimeZone( TimeZone => $TimeZone );
 
     return $CurrentTimeObject;
 }

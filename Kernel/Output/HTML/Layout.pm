@@ -5716,6 +5716,10 @@ sub _BuildSelectionDataRefCreate {
     # SelectedID and SelectedValue option
     if ( defined $OptionRef->{SelectedID} || $OptionRef->{SelectedValue} ) {
         for my $Row ( @{$DataRef} ) {
+            my $CheckValue = $Row->{Value};
+            if ( $OptionRef->{Translation} ) {
+               $CheckValue = $Self->{LanguageObject}->Translate( $Row->{Value} );
+            }
             if (
                 (
                     (
@@ -5725,13 +5729,13 @@ sub _BuildSelectionDataRefCreate {
                     ||
                     (
                         defined $Row->{Value}
-                        && $OptionRef->{SelectedValue}->{ $Row->{Value} }
+                        && $OptionRef->{SelectedValue}->{ $CheckValue }
                     )
                 )
                 &&
                 (
                     defined $Row->{Value}
-                    && !$DisabledElements{ $Row->{Value} }
+                    && !$DisabledElements{ $CheckValue }
                 )
                 )
             {

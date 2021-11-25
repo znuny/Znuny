@@ -52,6 +52,7 @@ The following persons contributed to OTRS:
 * Johannes Nickel <hanne_hal@me.com>
 * Johannes Nickel <hanneshal@users.noreply.github.com>
 * Johannes Nickel <jn@znuny.com>
+* Kai Herlemann <43746520+KaiHerlemann@users.noreply.github.com>
 * Keith Moore <tenareth@gmail.com>
 * Luca Maranzano <liuk@linux.it>
 * Manuel Hecht <manuel.hecht@otrs.com>
@@ -116,6 +117,7 @@ The following persons contributed to OTRS:
 * Thorsten Eckel <thorsten.eckel@otrs.com>
 * Thorsten Eckel <thorsten.eckel@zhuny.com>
 * Torsten Thau <Torsten.Thau@cape-it.de>
+* Tronsy <77062636+Tronsy@users.noreply.github.com>
 * Udo Bretz <udo.bretz@otrs.com>
 * Uwe Dieckmann <uwe.dieckmann@otrs.com>
 * Walter Souto <walter.souto@saude.go.gov.br>

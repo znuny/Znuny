@@ -20,6 +20,7 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Cache',
     'Kernel::System::DB',
+    'Kernel::System::HTMLUtils',
     'Kernel::System::Log',
     'Kernel::System::Valid',
     'Kernel::System::YAML',
@@ -149,6 +150,7 @@ sub DynamicFieldAdd {
     }
 
     # dump config as string
+    $Self->_SanitizeConfig( Config => $Param{Config} );
     my $Config = $Kernel::OM->Get('Kernel::System::YAML')->Dump( Data => $Param{Config} );
 
     # Make sure the resulting string has the UTF-8 flag. YAML only sets it if
@@ -298,6 +300,7 @@ sub DynamicFieldGet {
     while ( my @Data = $DBObject->FetchrowArray() ) {
 
         my $Config = $YAMLObject->Load( Data => $Data[7] );
+        $Self->_SanitizeConfig( Config => $Config );
 
         %Data = (
             ID            => $Data[0],
@@ -378,6 +381,7 @@ sub DynamicFieldUpdate {
     my $YAMLObject = $Kernel::OM->Get('Kernel::System::YAML');
 
     # dump config as string
+    $Self->_SanitizeConfig( Config => $Param{Config} );
     my $Config = $YAMLObject->Dump(
         Data => $Param{Config},
     );
@@ -1684,6 +1688,73 @@ sub _DynamicFieldReorder {
     $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
         Type => 'DynamicField',
     );
+
+    return 1;
+}
+
+=head2 _SanitizeConfig()
+
+Currently only removes JavaScript code from configured regular expression error messages.
+
+    $DynamicFieldObject->_SanitizeConfig(
+
+        # 'Config' part of a dynamic field config hash returned by DynamicFieldGet()
+        # or given to DynamicFieldAdd() and -Update()
+        Config => $Config,
+    );
+
+    Returns 1.
+
+=cut
+
+sub _SanitizeConfig {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject       = $Kernel::OM->Get('Kernel::System::Log');
+    my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
+
+    NEEDED:
+    for my $Needed (qw(Config)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    if ( !IsHashRefWithData( $Param{Config} ) ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter 'Config' must be a hash ref with data!",
+        );
+        return;
+    }
+
+    # Remove JavaScript, etc. from regex error messages.
+    # This prevents execution of arbitrary JavaScript when showing
+    # error messages for not-matching values.
+    REGEXCONFIG:
+    for my $RegExConfig ( @{ $Param{Config}->{RegExList} // [] } ) {
+        next REGEXCONFIG if !defined $RegExConfig->{ErrorMessage};
+        next REGEXCONFIG if !length $RegExConfig->{ErrorMessage};
+
+        my %SafeRegExErrorMessage = $HTMLUtilsObject->Safety(
+            String       => $RegExConfig->{ErrorMessage},
+            NoApplet     => 1,
+            NoObject     => 1,
+            NoEmbed      => 1,
+            NoSVG        => 1,
+            NoImg        => 1,
+            NoIntSrcLoad => 1,
+            NoExtSrcLoad => 1,
+            NoJavaScript => 1,
+        );
+        next REGEXCONFIG if !%SafeRegExErrorMessage;
+
+        $RegExConfig->{ErrorMessage} = $SafeRegExErrorMessage{String} // '';
+    }
 
     return 1;
 }

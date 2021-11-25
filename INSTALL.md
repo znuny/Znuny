@@ -1,2 +1,1 @@
-Please see [the installation instructions](https://doc.znuny.org/doc/manual/admin/6.0/en/html/installation.html)
-in the online documentation.
+Please see [the installation instructions](https://doc.znuny.org/manual/releases/installupdate/install.html) in the online documentation.
