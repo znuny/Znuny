@@ -1724,13 +1724,7 @@ sub _SanitizeConfig {
         return;
     }
 
-    if ( !IsHashRefWithData( $Param{Config} ) ) {
-        $LogObject->Log(
-            Priority => 'error',
-            Message  => "Parameter 'Config' must be a hash ref with data!",
-        );
-        return;
-    }
+    return if !IsHashRefWithData( $Param{Config} );
 
     # Remove JavaScript, etc. from regex error messages.
     # This prevents execution of arbitrary JavaScript when showing
