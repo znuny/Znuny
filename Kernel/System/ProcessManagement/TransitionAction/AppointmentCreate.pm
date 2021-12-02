@@ -105,7 +105,7 @@ Runs TransitionAction AppointmentCreate.
             NotificationCustomDateTime => '2016-01-01 17:00:00',                    # (optional) Notification date time for custom template
             TicketAppointmentRuleID    => '9bb20ea035e7a9930652a9d82d00c725',       # (optional) Ticket appointment rule ID (for ticket appointments only!)
 
-            DynamicField_AppointmentID => '123',                                    # (optional) dynamic field name to save the AppointmentID in a dynamic field (e.g. to link it afterwards)
+            DynamicField_AppointmentID => 'AppointmentID',                          # (optional) dynamic field name to save the AppointmentID in a dynamic field (e.g. to link it afterwards)
 
             UserID                     => 1,                                        # (optional) UserID
         }
