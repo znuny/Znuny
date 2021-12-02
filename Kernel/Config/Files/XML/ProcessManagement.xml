@@ -743,7 +743,7 @@
                         <Item Key="NotificationCustomRelativeUnitCount">(* required for Custom) 12 (number of time units)</Item>
                         <Item Key="NotificationCustomRelativeUnit">(* required for Custom) minutes|hours|days</Item>
                         <Item Key="NotificationCustomRelativePointOfTime">(* required for Custom) beforestart|afterstart|beforeend|afterend (Possible notification types for the "relative" type)</Item>
-                        <Item Key="DynamicField_AppointmentID">(optional) 123 (dynamic field for saving the appointment ID (suitable for linking the appointment later)</Item>
+                        <Item Key="DynamicField_AppointmentID">(optional) AppointmentID (dynamic field for saving the appointment ID (suitable for linking the appointment later)</Item>
                     </Hash>
                 </Item>
                 <Item Key="ArticleSend">
