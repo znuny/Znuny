@@ -1,5 +1,6 @@
 # 6.3.1 2021-??-??
  - 2021-12-03 Fixed - Links in dynamic fields are shortened so that the link no longer works (CustomerTicketZoom).
+ - 2021-12-01 Fixed Bug - Avoidable error message / entry in logfiles (#123). [#123](https://github.com/znuny/Znuny/issues/123)
  - 2021-11-26 Fixed error "Parameter 'Config' must be a hash ref with data!" (#173). Thanks to @meisterheister. [#173](https://github.com/znuny/Znuny/issues/173)
  - 2021-11-25 Removed error log if !IsHashRefWithData( Config ) in `SanitizeConfig`. This is to strict and not needed.
  - 2021-11-25 Sector Nord AG: Replaced hardcoded attributes with a dynamic Sysconfig in Kernel/System/Ticket/Event/NotificationEvent.pm (#171). Thanks to @LuBroering (Lukas Bröring SectorNord AG). [#171](https://github.com/znuny/Znuny/issues/171)
