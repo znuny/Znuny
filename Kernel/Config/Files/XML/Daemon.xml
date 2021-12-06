@@ -721,24 +721,7 @@
         </Value>
     </Setting>
     <!-- new tasks -->
-    <Setting Name="Daemon::SchedulerCronTaskManager::Task###RegistrationUpdateSend" Required="1" Valid="1" ReadOnly="1" ConfigLevel="100">
-        <Description Translatable="1">Sends registration information to OTRS group.</Description>
-        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="TaskName">RegistrationUpdateSend</Item>
-                <Item Key="Schedule">30 * * * *</Item> <!-- default: every hour in minute 30 -->
-                <Item Key="Module">Kernel::System::Console::Command::Maint::Registration::UpdateSend</Item>
-                <Item Key="Function">Execute</Item>
-                <Item Key="MaximumParallelInstances">1</Item>
-                <Item Key="Params">
-                    <Array>
-                    </Array>
-                </Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Daemon::SchedulerCronTaskManager::Task###SupportDataCollectAsynchronous" Required="1" Valid="1" ReadOnly="1" ConfigLevel="100">
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###SupportDataCollectAsynchronous" Required="0" Valid="1" ConfigLevel="100">
         <Description Translatable="1">Collect support data for asynchronous plug-in modules.</Description>
         <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
         <Value>
@@ -746,40 +729,6 @@
                 <Item Key="TaskName">SupportDataCollectAsynchronous</Item>
                 <Item Key="Schedule">1 * * * *</Item> <!-- default: every hour in minute 1 -->
                 <Item Key="Module">Kernel::System::Console::Command::Maint::SupportData::CollectAsynchronous</Item>
-                <Item Key="Function">Execute</Item>
-                <Item Key="MaximumParallelInstances">1</Item>
-                <Item Key="Params">
-                    <Array>
-                    </Array>
-                </Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Daemon::SchedulerCronTaskManager::Task###OTRSBusinessEntitlementCheck" Required="1" Valid="1" ReadOnly="1" ConfigLevel="100">
-        <Description Translatable="1">Checks the entitlement status of OTRS Business Solution™.</Description>
-        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="TaskName">OTRSBusinessEntitlementCheck</Item>
-                <Item Key="Schedule">25,45 */1 * * *</Item> <!-- default: each hour in the minute 15 and 45 -->
-                <Item Key="Module">Kernel::System::Console::Command::Maint::OTRSBusiness::EntitlementCheck</Item>
-                <Item Key="Function">Execute</Item>
-                <Item Key="MaximumParallelInstances">1</Item>
-                <Item Key="Params">
-                    <Array>
-                    </Array>
-                </Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Daemon::SchedulerCronTaskManager::Task###OTRSBusinessAvailabilityCheck" Required="1" Valid="1" ReadOnly="1" ConfigLevel="100">
-        <Description Translatable="1">Checks the availability of OTRS Business Solution™ for this system.</Description>
-        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="TaskName">OTRSBusinessAvailabilityCheck</Item>
-                <Item Key="Schedule">15,35,55 */1 * * *</Item> <!-- default: each hour in the minute 15,35 and 55 -->
-                <Item Key="Module">Kernel::System::Console::Command::Maint::OTRSBusiness::AvailabilityCheck</Item>
                 <Item Key="Function">Execute</Item>
                 <Item Key="MaximumParallelInstances">1</Item>
                 <Item Key="Params">
