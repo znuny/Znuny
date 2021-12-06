@@ -4,7 +4,7 @@ X-Sieve: CMU Sieve 2.2
 Received: by mail.otrs.org (Postfix)  id DD8A632C83C; Fri, 6 Jul 2007 12:17:38 +0200 (CEST)
 Date: Fri,  6 Jul 2007 12:17:38 +0200 (CEST)
 From: MAILER-DAEMON@mail.otrs.org (Mail Delivery System)
-Subject: Undelivered Mail Returned to Sender
+Subject:
 To: skywalker@otrs.org
 MIME-Version: 1.0
 Content-Type: multipart/report; report-type=delivery-status; boundary="AB35D32CDC7.1183717058/mail.otrs.org"
@@ -67,7 +67,7 @@ Content-Type: text/plain; charset="utf-8"
 Content-Disposition: inline
 Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Subject: [Ticket#2007070610001801] test mail
+Subject:
 X-Powered-BY: OTRS - Open Ticket Request System (http://otrs.org/)
 X-Mailer: OTRS Mail Service (2.1.7)
 Date: Fri, 6 Jul 2007 12:17:31 +0200
