@@ -3,11 +3,11 @@
  - 2021-12-01 Fixed Bug - Avoidable error message / entry in logfiles (#123). [#123](https://github.com/znuny/Znuny/issues/123)
  - 2021-11-26 Fixed error "Parameter 'Config' must be a hash ref with data!" (#173). Thanks to @meisterheister. [#173](https://github.com/znuny/Znuny/issues/173)
  - 2021-11-25 Removed error log if !IsHashRefWithData( Config ) in `SanitizeConfig`. This is to strict and not needed.
- - 2021-11-25 Sector Nord AG: Replaced hardcoded attributes with a dynamic Sysconfig in Kernel/System/Ticket/Event/NotificationEvent.pm (#171). Thanks to @LuBroering (Lukas Bröring SectorNord AG). [#171](https://github.com/znuny/Znuny/issues/171)
- - 2021-11-25 Add option '--no-tablespaces' to scripts/backup.pl (#136). Thanks to @meisterheister. [#136](https://github.com/znuny/Znuny/issues/136)
- - 2021-11-25 Prevents error message "no TicketID" on sending an answer if no TicketID exists (#133). Thanks to @Reedu. [#133](https://github.com/znuny/Znuny/issues/133)
- - 2021-11-25 Fixed - "No TicketID is given!" on each outgoing reply #170 https://github.com/znuny/Znuny/issues/170.Thanks to @Reedu. [#133](https://github.com/znuny/Znuny/issues/133)
- - 2021-11-25 Fixed - Bug - Regression Error Message in Log #126 https://github.com/znuny/Znuny/issues/126. Thanks to @Reedu. [#133](https://github.com/znuny/Znuny/issues/133)
+ - 2021-11-25 Sector Nord AG: Replaced hardcoded attributes with a dynamic Sysconfig in Kernel/System/Ticket/Event/NotificationEvent.pm (#171). Thanks to @LuBroering (Lukas Bröring SectorNord AG). [#171](https://github.com/znuny/Znuny/pull/171)
+ - 2021-11-25 Add option '--no-tablespaces' to scripts/backup.pl (#136). Thanks to @meisterheister. [#136](https://github.com/znuny/Znuny/pull/136)
+ - 2021-11-25 Prevents error message "no TicketID" on sending an answer if no TicketID exists (#133). Thanks to @reneeb. [#133](https://github.com/znuny/Znuny/pull/133)
+ - 2021-11-25 Fixed - "No TicketID is given!" on each outgoing reply (#170). Thanks to @reneeb. [#170](https://github.com/znuny/Znuny/issues/170)
+ - 2021-11-25 Fixed - Bug - Regression Error Message in Log (#126). Thanks to @reneeb. [#126](https://github.com/znuny/Znuny/issues/126)
 
 # 6.2.2 2021-??-??
  - 2021-12-03 Fixed - Links in dynamic fields are shortened so that the link no longer works (CustomerTicketZoom).
