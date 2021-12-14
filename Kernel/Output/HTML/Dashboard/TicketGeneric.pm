@@ -325,10 +325,8 @@ sub new {
     if ( $Self->{Config}->{IsProcessWidget} ) {
 
         # get process management configuration
-        $Self->{ProcessManagementProcessID}
-            = $Kernel::OM->Get('Kernel::Config')->Get('Process::DynamicFieldProcessManagementProcessID');
-        $Self->{ProcessManagementActivityID}
-            = $Kernel::OM->Get('Kernel::Config')->Get('Process::DynamicFieldProcessManagementActivityID');
+        $Self->{ProcessManagementProcessID}  = $ConfigObject->Get('Process::DynamicFieldProcessManagementProcessID');
+        $Self->{ProcessManagementActivityID} = $ConfigObject->Get('Process::DynamicFieldProcessManagementActivityID');
 
         # get the list of processes in the system
         my $ProcessListHash = $Kernel::OM->Get('Kernel::System::ProcessManagement::Process')->ProcessList(
