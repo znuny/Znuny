@@ -1,4 +1,9 @@
-# 6.0.39 2021-??-??
+# 6.0.39 2021-12-14
+ - 2021-12-14 Added ProcessListTreeView in AgentTicketProcess and CustomerTicketProcess.
+ - 2021-12-14 Added missing translation for process and activity in CustomerTicketZoom.tt.
+ - 2021-12-14 Removed translation for process in AdminProcessManagement.
+ - 2021-12-14 Fixed bug, too long process / activity names are not translated.
+ - 2021-12-03 Deactivated business solution daemon tasks.
  - 2021-12-03 Fixed - Links in dynamic fields are shortened so that the link no longer works (CustomerTicketZoom).
  - 2021-12-01 Fixed Bug - Avoidable error message / entry in logfiles (#123). [#123](https://github.com/znuny/Znuny/issues/123)
  - 2021-11-26 Fixed error "Parameter 'Config' must be a hash ref with data!" (#173). Thanks to @meisterheister. [#173](https://github.com/znuny/Znuny/issues/173)
