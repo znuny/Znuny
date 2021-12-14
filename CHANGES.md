@@ -1,4 +1,4 @@
-# 6.2.2 2021-??-??
+# 6.2.2 2021-12-15
  - 2021-12-14 Added ProcessListTreeView in AgentTicketProcess and CustomerTicketProcess.
  - 2021-12-14 Added missing translation for process and activity in CustomerTicketZoom.tt.
  - 2021-12-14 Removed translation for process in AdminProcessManagement.
@@ -89,7 +89,7 @@
  - 2021-06-15 Use ticket title as the default appointment title (#90). Thanks to Renée Bäcker (@reneeb). [#90](https://github.com/znuny/Znuny/pull/90)
  - 2021-06-15 Column list validation before saving agent preferences (#84). Thanks to Paweł Bogusławski (@pboguslawski). [#84](https://github.com/znuny/Znuny/pull/84)
 
-# 6.0.39 2021-12-14
+# 6.0.39 2021-12-15
  - 2021-12-14 Added ProcessListTreeView in AgentTicketProcess and CustomerTicketProcess.
  - 2021-12-14 Added missing translation for process and activity in CustomerTicketZoom.tt.
  - 2021-12-14 Removed translation for process in AdminProcessManagement.
