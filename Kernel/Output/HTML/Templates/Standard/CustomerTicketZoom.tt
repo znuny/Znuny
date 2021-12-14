@@ -109,8 +109,8 @@
                     <li><span class="Key">[% Translate("Responsible") | html %]:</span> [% Data.ResponsibleName | html %]</li>
 [% RenderBlockEnd("Responsible") %]
 [% RenderBlockStart("ProcessData") %]
-                    <li><span class="Key">[% Translate("Process") | html %]:</span> <span title="[% Data.Process | html %]">[% Data.Process | html %]</span></li>
-                    <li><span class="Key">[% Translate("Activity") | html %]:</span> <span title="[% Data.Activity | html %]">[% Data.Activity | html %]</span></li>
+                    <li><span class="Key">[% Translate("Process") | html %]:</span> <span title="[% Translate(Data.Process) | html %]">[% Translate(Data.Process) | html %]</span></li>
+                    <li><span class="Key">[% Translate("Activity") | html %]:</span> <span title="[% Translate(Data.Activity) | html %]">[% Translate(Data.Activity) | html %]</span></li>
 [% RenderBlockEnd("ProcessData") %]
 
 # show ticket dynamic fields
