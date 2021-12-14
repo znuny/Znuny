@@ -190,7 +190,7 @@
                     <fieldset class="TableLike FixedLabelSmall Narrow">
 
                         <label>[% Translate("Process") | html %]:</label>
-                        <p class="Value" title="[% Data.Process | html %]">[% Data.Process | html %]</p>
+                        <p class="Value" title="[% Translate(Data.Process) | html %]">[% Translate(Data.Process) | html %]</p>
                         <div class="Clear"></div>
 
                         <label>[% Translate("Activity") | html %]:</label>

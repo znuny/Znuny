@@ -119,7 +119,7 @@ sub DisplayValueRender {
     }
 
     my $Value = $Process->{Name} // '';
-
+    $Value = $Param{LayoutObject}->{LanguageObject}->Translate($Value);
     my $Title = $Value;
 
     # HTMLOutput transformations
