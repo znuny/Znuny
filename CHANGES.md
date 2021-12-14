@@ -1,4 +1,4 @@
-# 6.0.39 2021-12-14
+# 6.0.39 2021-12-15
  - 2021-12-14 Added ProcessListTreeView in AgentTicketProcess and CustomerTicketProcess.
  - 2021-12-14 Added missing translation for process and activity in CustomerTicketZoom.tt.
  - 2021-12-14 Removed translation for process in AdminProcessManagement.
