@@ -24,10 +24,7 @@ $ConfigObject->Set(
     Key   => 'CheckMXRecord',
     Value => 0,
 );
-$ConfigObject->Set(
-    Key   => 'CheckEmailAddresses',
-    Value => 1,
-);
+
 
 # email address checks
 my @Tests = (
@@ -72,6 +69,16 @@ my @Tests = (
     {
         Email => 'foo=bar@[192.22.2]',
         Valid => 0,
+    },
+    {
+        Email => 'somebody',
+        Valid => 0,
+        SysConfig => [
+            {
+                Key   => 'CheckEmailAddresses',
+                Value => 1,
+            }
+        ]
     },
 
     # Valid
@@ -127,7 +134,16 @@ my @Tests = (
         Email => 'foo=bar@[192.123.22.2]',
         Valid => 1,
     },
-
+    {
+        Email => 'somebody',
+        Valid => 1,
+        SysConfig => [
+            {
+                Key   => 'CheckEmailAddresses',
+                Value => 0,
+            }
+        ]
+    },
     # Unicode domains
     {
         Email => 'mail@xn--f1aefnbl.xn--p1ai',
@@ -183,10 +199,22 @@ my @Tests = (
         Email => 'Test <test@home.com> (Test)',
         Valid => 1,
     },
-
 );
 
 for my $Test (@Tests) {
+
+    $ConfigObject->Set(
+        Key   => 'CheckEmailAddresses',
+        Value => 1,
+    );
+
+    if ($Test->{SysConfig}){
+        for my $SySConfig (@{$Test->{SysConfig}}){
+            $ConfigObject->Set(
+                %{$SySConfig}
+            );
+        }
+    }
 
     # check address
     my $Valid = $CheckItemObject->CheckEmail( Address => $Test->{Email} );
@@ -205,6 +233,11 @@ for my $Test (@Tests) {
         );
     }
 }
+
+$ConfigObject->Set(
+    Key   => 'CheckEmailAddresses',
+    Value => 1,
+);
 
 # AreEmailAddressesValid()
 @Tests = (

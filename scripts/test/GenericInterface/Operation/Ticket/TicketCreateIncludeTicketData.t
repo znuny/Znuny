@@ -383,7 +383,7 @@ $Self->Is(
 );
 
 # set web service name
-my $WebserviceName = '-Test-' . $RandomID;
+my $WebserviceName = 'Operation::Ticket::TicketCreateIncludeTicketData-Test-' . $RandomID;
 
 my $WebserviceID = $WebserviceObject->WebserviceAdd(
     Name   => $WebserviceName,

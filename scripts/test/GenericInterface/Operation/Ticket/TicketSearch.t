@@ -757,7 +757,7 @@ for my $Key ( sort keys %TicketEntryFour ) {
 push @TicketIDs, $TicketID4;
 
 # set web service name
-my $WebserviceName = '-Test-' . $RandomID;
+my $WebserviceName = 'Operation::Ticket::TicketSearch-Test-' . $RandomID;
 
 # create web service object
 my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');

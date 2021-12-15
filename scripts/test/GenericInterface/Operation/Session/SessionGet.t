@@ -67,7 +67,7 @@ my $UserID4 = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
 );
 
 # Set web-service name.
-my $WebserviceName = '-Test-' . $RandomID;
+my $WebserviceName = 'Operation::Session::SessionGet-Test-' . $RandomID;
 
 my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
 $Self->Is(
