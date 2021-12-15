@@ -1067,10 +1067,22 @@ sub CustomerSearchDetail {
     );
 
     if ( $ResultSearch->code() ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => $ResultSearch->error(),
-        );
+        if ( $ResultSearch->code() == 4 ) {
+
+            # Result code 4 (LDAP_SIZELIMIT_EXCEEDED) is normal if there
+            # are more items in LDAP than search limit defined in OTRS or
+            # in LDAP server. Avoid spamming logs with such errors.
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'debug',
+                Message  => 'LDAP size limit exceeded (' . $ResultSearch->error() . ').',
+            );
+        }
+        else {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => 'Search failed! ' . $ResultSearch->error(),
+            );
+        }
     }
 
     my @TmpCustomerUsers;
