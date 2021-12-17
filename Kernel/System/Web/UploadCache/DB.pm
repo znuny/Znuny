@@ -141,6 +141,7 @@ sub FormIDRemoveFile {
 
     # Find and remove file with given filename; return success if
     # file not found (to avoid error if user double clicks delete icon).
+    FILE:
     for my $File (@Index) {
         if ($File->{Filename} eq $Param{Filename}) {
 
@@ -152,7 +153,7 @@ sub FormIDRemoveFile {
                 Bind => [ \$Param{FormID}, \$Param{Filename} ],
             );
 
-            last;
+            last FILE;
         }
     }
 
