@@ -192,6 +192,7 @@ sub FormIDRemoveFile {
 
     # Find and remove file with given filename; return success if
     # file not found (to avoid error if user double clicks delete icon).
+    FILE:
     for my $File (@Index) {
         if ($File->{Filename} eq $Param{Filename}) {
             my $Directory = $Self->{TempDir} . '/' . $Param{FormID};
@@ -224,7 +225,7 @@ sub FormIDRemoveFile {
                 NoReplace => 1,
             );
 
-            last;
+            last FILE;
         }
     }
 
