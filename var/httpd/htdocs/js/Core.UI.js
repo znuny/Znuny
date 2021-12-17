@@ -1,6 +1,7 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 // Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -697,10 +698,6 @@ Core.UI = (function (TargetNS) {
 
                                 $TargetObj = $ExistingItemObj.closest('tr');
 
-                                if ($TargetObj.find('a').data('file-id')) {
-                                    return;
-                                }
-
                                 $TargetObj
                                     .find('.Filetype')
                                     .text(Attachment.ContentType)
@@ -710,8 +707,7 @@ Core.UI = (function (TargetNS) {
                                     .attr('data-file-size', Attachment.Filesize)
                                     .next('td')
                                     .find('a')
-                                    .removeClass('Hidden')
-                                    .data('file-id', Attachment.FileID);
+                                    .removeClass('Hidden');
                             }
                             else {
 
@@ -719,7 +715,6 @@ Core.UI = (function (TargetNS) {
                                     'Filename' : Attachment.Filename,
                                     'Filetype' : Attachment.ContentType,
                                     'Filesize' : Attachment.Filesize,
-                                    'FileID'   : Attachment.FileID,
                                 });
 
                                 $(AttachmentItem).prependTo($ContainerObj.find('.AttachmentList tbody')).fadeIn();
@@ -808,7 +803,7 @@ Core.UI = (function (TargetNS) {
                 Data = {
                     Action: $(this).data('delete-action') ? $(this).data('delete-action') : 'AjaxAttachment',
                     Subaction: 'Delete',
-                    FileID: $(this).data('file-id'),
+                    Filename: $(this).closest('tr').find('td.Filename').text(),
                     FormID: FormID,
                     ObjectID: $(this).data('object-id'),
                     FieldID: $(this).data('field-id'),
@@ -822,12 +817,7 @@ Core.UI = (function (TargetNS) {
 
                         $(this).remove();
 
-                        if (Response.Data && Response.Data.length) {
-
-                            // go through all attachments and update the FileIDs
-                            $.each(Response.Data, function(index, Attachment) {
-                                $AttachmentListContainerObj.find('.AttachmentList td:contains(' + Attachment.Filename + ')').closest('tr').find('a').data('file-id', Attachment.FileID);
-                            });
+                        if (Response.NumberOfAttachmentsLeft && (Response.NumberOfAttachmentsLeft > 0)) {
                             $AttachmentListContainerObj.find('.Busy').fadeOut();
                         }
                         else {

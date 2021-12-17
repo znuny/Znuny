@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -172,7 +173,7 @@ sub FormIDAddFile {
 sub FormIDRemoveFile {
     my ( $Self, %Param ) = @_;
 
-    for my $Needed (qw(FormID FileID)) {
+    for my $Needed (qw(FormID Filename)) {
         if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
@@ -189,38 +190,43 @@ sub FormIDRemoveFile {
     # finish if files have been already removed by other process
     return if !@Index;
 
-    my $ID   = $Param{FileID} - 1;
-    my %File = %{ $Index[$ID] };
+    # Find and remove file with given filename; return success if
+    # file not found (to avoid error if user double clicks delete icon).
+    for my $File (@Index) {
+        if ($File->{Filename} eq $Param{Filename}) {
+            my $Directory = $Self->{TempDir} . '/' . $Param{FormID};
 
-    my $Directory = $Self->{TempDir} . '/' . $Param{FormID};
+            if ( !-d $Directory ) {
+                return 1;
+            }
 
-    if ( !-d $Directory ) {
-        return 1;
+            # Get main object.
+            my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+
+            $MainObject->FileDelete(
+                Directory => $Directory,
+                Filename  => "$File{Filename}",
+                NoReplace => 1,
+            );
+            $MainObject->FileDelete(
+                Directory => $Directory,
+                Filename  => "$File{Filename}.ContentType",
+                NoReplace => 1,
+            );
+            $MainObject->FileDelete(
+                Directory => $Directory,
+                Filename  => "$File{Filename}.ContentID",
+                NoReplace => 1,
+            );
+            $MainObject->FileDelete(
+                Directory => $Directory,
+                Filename  => "$File{Filename}.Disposition",
+                NoReplace => 1,
+            );
+
+            last;
+        }
     }
-
-    # get main object
-    my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
-
-    $MainObject->FileDelete(
-        Directory => $Directory,
-        Filename  => "$File{Filename}",
-        NoReplace => 1,
-    );
-    $MainObject->FileDelete(
-        Directory => $Directory,
-        Filename  => "$File{Filename}.ContentType",
-        NoReplace => 1,
-    );
-    $MainObject->FileDelete(
-        Directory => $Directory,
-        Filename  => "$File{Filename}.ContentID",
-        NoReplace => 1,
-    );
-    $MainObject->FileDelete(
-        Directory => $Directory,
-        Filename  => "$File{Filename}.Disposition",
-        NoReplace => 1,
-    );
 
     return 1;
 }
@@ -254,8 +260,6 @@ sub FormIDGetAllFilesData {
         Filter    => "*",
     );
 
-    my $Counter = 0;
-
     FILE:
     for my $File (@List) {
 
@@ -264,7 +268,6 @@ sub FormIDGetAllFilesData {
         next FILE if $File =~ /\.ContentID$/;
         next FILE if $File =~ /\.Disposition$/;
 
-        $Counter++;
         my $FileSize = -s $File;
 
         # human readable file size
@@ -314,7 +317,6 @@ sub FormIDGetAllFilesData {
                 ContentType => ${$ContentType},
                 Filename    => $File,
                 Filesize    => $FileSize,
-                FileID      => $Counter,
                 Disposition => ${$Disposition},
             },
         );
@@ -352,8 +354,6 @@ sub FormIDGetAllFilesMeta {
         Filter    => "*",
     );
 
-    my $Counter = 0;
-
     FILE:
     for my $File (@List) {
 
@@ -362,7 +362,6 @@ sub FormIDGetAllFilesMeta {
         next FILE if $File =~ /\.ContentID$/;
         next FILE if $File =~ /\.Disposition$/;
 
-        $Counter++;
         my $FileSize = -s $File;
 
         # human readable file size
@@ -406,7 +405,6 @@ sub FormIDGetAllFilesMeta {
                 ContentType => ${$ContentType},
                 Filename    => $File,
                 Filesize    => $FileSize,
-                FileID      => $Counter,
                 Disposition => ${$Disposition},
             },
         );
