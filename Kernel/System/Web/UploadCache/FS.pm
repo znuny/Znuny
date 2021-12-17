@@ -206,22 +206,22 @@ sub FormIDRemoveFile {
 
             $MainObject->FileDelete(
                 Directory => $Directory,
-                Filename  => "$File{Filename}",
+                Filename  => $File->{Filename},
                 NoReplace => 1,
             );
             $MainObject->FileDelete(
                 Directory => $Directory,
-                Filename  => "$File{Filename}.ContentType",
+                Filename  => $File->{Filename} . '.ContentType',
                 NoReplace => 1,
             );
             $MainObject->FileDelete(
                 Directory => $Directory,
-                Filename  => "$File{Filename}.ContentID",
+                Filename  => $File->{Filename} . '.ContentID',
                 NoReplace => 1,
             );
             $MainObject->FileDelete(
                 Directory => $Directory,
-                Filename  => "$File{Filename}.Disposition",
+                Filename  => $File->{Filename} . '.Disposition',
                 NoReplace => 1,
             );
 
