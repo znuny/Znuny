@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -408,6 +409,9 @@ sub LoadFormDraft {
     my $FormID = $Kernel::OM->Get('Kernel::System::Web::UploadCache')->FormIDCreate();
     $FormDraft->{FormData}->{FormID} = $FormID;
 
+    # Replace FormID tag with new FormID value in draft body (to match inline images in new form).
+    $FormDraft->{FormData}{Body} =~ s/FormID=%%%FORMID%%%;/FormID=$FormID;/g;
+
     # set form data to param object, depending on type
     KEY:
     for my $Key ( sort keys %{ $FormDraft->{FormData} } ) {
@@ -537,10 +541,17 @@ sub SaveFormDraft {
         $FormData{$Param} = $Value;
     }
 
-    # get files from upload cache
-    my @FileData = $Kernel::OM->Get('Kernel::System::Web::UploadCache')->FormIDGetAllFilesData(
+    # Get files from upload cache.
+    my $UploadCacheObject = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
+    my @FileData = $UploadCacheObject->FormIDGetAllFilesData(
         FormID => $MetaParams{FormID},
     );
+    $UploadCacheObject->FormIDRemove( FormID => $MetaParams{FormID} );
+
+    # Replace old FormID with tag to be replaced with new FormID on draft load.
+    if ($MetaParams{FormID}) {
+        $FormData{Body} =~ s/FormID=$MetaParams{FormID};/FormID=%%%FORMID%%%;/g;
+    }
 
     # prepare data to add or update draft
     my %FormDraft = (

@@ -1,3 +1,6 @@
+# 6.0.39 2021-??-??
+ - 2021-12-18 Correct handling of web upload dir with drafts.
+
 # 6.0.38 2021-10-27
  - 2021-10-21 Fixed error log message for missing days in Kernel::System::SysConfig::ValueType::WorkingHours::ModifiedValueGet(). [#122](https://github.com/znuny/Znuny/issues/122)
  - 2021-10-21 Fixed "Need Ticket ID" error when switching templates in AgentTicketCommon modules. [#127](https://github.com/znuny/Znuny/issues/127)
