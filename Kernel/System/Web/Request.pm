@@ -624,12 +624,10 @@ sub SaveFormDraft {
         $FormData{$Param} = $Value;
     }
 
-    # Get files from upload cache.
-    my $UploadCacheObject = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
-    my @FileData = $UploadCacheObject->FormIDGetAllFilesData(
+    # get files from upload cache
+    my @FileData = $Kernel::OM->Get('Kernel::System::Web::UploadCache')->FormIDGetAllFilesData(
         FormID => $MetaParams{FormID},
     );
-    $UploadCacheObject->FormIDRemove( FormID => $MetaParams{FormID} );
 
     $FormData{FormID} = $MetaParams{FormID};
 
