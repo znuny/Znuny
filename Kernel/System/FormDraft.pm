@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -98,7 +99,6 @@ Returns (without GetContent or GetContent = 1):
                 'ContentID'   => undef,                                 # optional
                 'Filename'    => 'thankyou.txt',
                 'Filesize'    => 25,
-                'FileID'      => 1,
                 'Disposition' => 'attachment',
             },
             ...
@@ -261,7 +261,6 @@ add a new draft
                 'ContentID'   => undef,                         # optional
                 'Filename'    => 'thankyou.txt',
                 'Filesize'    => 25,
-                'FileID'      => 1,
                 'Disposition' => 'attachment',
             },
             ...
@@ -348,7 +347,6 @@ update an existing draft
                 'ContentID'   => undef,                         # optional
                 'Filename'    => 'thankyou.txt',
                 'Filesize'    => 25,
-                'FileID'      => 1,
                 'Disposition' => 'attachment',
             },
             ...
