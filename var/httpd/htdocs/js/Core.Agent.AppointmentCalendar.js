@@ -336,9 +336,9 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                         .prepend($IconContainer);
                 }
                 //Appointmentfilter
-                let filter = $('#FilterAppointments').val();
-                let title;
-                let description;
+                var filter = $('#FilterAppointments').val();
+                var title;
+                var description;
                 filter ? filter = filter.toLowerCase() : '';
                 CalEvent.title ? title = CalEvent.title.toLowerCase() : {};
                 CalEvent.description ? description = CalEvent.description.toLowerCase() : {};
