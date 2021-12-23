@@ -101,6 +101,7 @@
                     <div class="Clear"></div>
                 </div>
                 <h2>[% Translate("Calendar") | html %]</h2>
+                <input type="text" id="FilterAppointments" class="" placeholder="[% Translate("Just start typing to filter...") | html %]" name="FilterAppointments" value="" title="[% Translate("Filter for Appointments") | html %]" size="150">
             </div>
             <div class="Content ">
 
