@@ -335,6 +335,33 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                     $Element.find('.fc-content')
                         .prepend($IconContainer);
                 }
+                //Appointmentfilter
+                let filter = $('#FilterAppointments').val();
+                let title;
+                let description;
+                filter ? filter = filter.toLowerCase() : '';
+                CalEvent.title ? title = CalEvent.title.toLowerCase() : {};
+                CalEvent.description ? description = CalEvent.description.toLowerCase() : {};
+
+                // If we have a description we can try to filter
+                if (description) {
+                    description = description.includes(filter);
+                }
+
+                // If we have a title we can try to filter
+                if (title) {
+                    title = title.includes(filter);
+                }
+                if(
+                    title
+                    || description
+                    || filter.length < 1
+                    ) {
+                    return true;
+                } else {
+                    return false;
+                }
+                //End Appointmentfilter
             },
             eventResizeStart: function(CalEvent) {
                 CurrentAppointment.start = CalEvent.start;
@@ -425,6 +452,11 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
             ],
             resourceLabelText: Core.Language.Translate('Resources')
         });
+        
+        // Activate Appointmentfilter
+        $('#FilterAppointments').on('keyup',function(){
+            $CalendarObj.fullCalendar('rerenderEvents');
+        })
 
         // Initialize datepicker
         $DatepickerObj.datepicker({
