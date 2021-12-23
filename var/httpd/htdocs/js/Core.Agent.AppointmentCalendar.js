@@ -291,8 +291,7 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                 UpdateAppointment(Data);
             },
             eventRender: function(CalEvent, $Element) {
-                var $IconContainer,
-                    $Icon;
+                var $IconContainer, $Icon, filter, title, description;
 
                 if (CalEvent.allDay
                     || CalEvent.recurring
@@ -336,9 +335,9 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                         .prepend($IconContainer);
                 }
                 //Appointmentfilter
-                var filter = $('#FilterAppointments').val();
-                var title;
-                var description;
+                filter = $('#FilterAppointments').val();
+                title;
+                description;
                 filter ? filter = filter.toLowerCase() : '';
                 CalEvent.title ? title = CalEvent.title.toLowerCase() : {};
                 CalEvent.description ? description = CalEvent.description.toLowerCase() : {};
