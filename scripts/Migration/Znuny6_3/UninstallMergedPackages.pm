@@ -47,9 +47,12 @@ sub Run {
 
     # Note: Znuny and Znuny4OTRS in case one of the packages later will be built with the Znuny prefix
     PACKAGENAME:
-    for my $PackageName (qw(
-
-    )){
+    for my $PackageName (
+        qw(
+        Znuny4OTRS-ExcelStats
+        )
+        )
+    {
         my $Success = $PackageObject->_PackageUninstallMerged(
             Name => $PackageName,
         );

@@ -22,6 +22,7 @@ our @ObjectDependencies = (
     'Kernel::System::CheckItem',
     'Kernel::System::DateTime',
     'Kernel::System::Email',
+    'Kernel::System::Excel',
     'Kernel::System::Main',
     'Kernel::System::Stats',
 );
@@ -32,6 +33,7 @@ sub Configure {
     $Self->Description(
         'Generate (and send, optional) statistics which have been configured previously in the OTRS statistics module.'
     );
+
     $Self->AddOption(
         Name        => 'number',
         Description => "Statistic number as shown in the overview of AgentStats.",
@@ -305,12 +307,33 @@ sub Run {
     }
     elsif ( $Self->{Format} eq 'Excel' ) {
 
-        # Create the Excel data
-        my $Output = $Kernel::OM->Get('Kernel::System::CSV')->Array2CSV(
-            WithHeader => \@WithHeader,
-            Head       => $HeadArrayRef,
-            Data       => \@StatArray,
-            Format     => 'Excel',
+        # create the Excel data
+        my $StatsBackendObject = $Kernel::OM->Get( $Stat->{ObjectModule} );
+        my $ExcelObject        = $Kernel::OM->Get('Kernel::System::Excel');
+
+        my %Array2ExcelParams;
+        if ( $StatsBackendObject->can('Worksheets') ) {
+
+            my $Worksheets = $StatsBackendObject->Worksheets();
+            %Array2ExcelParams = (
+                Worksheets => $Worksheets,
+            );
+        }
+        else {
+            my @TableData        = ( [ @{$HeadArrayRef} ], @StatArray );
+            my $FormatDefinition = $ExcelObject->GetFormatDefinition(
+                Stat => $Stat,
+            );
+
+            %Array2ExcelParams = (
+                Data             => \@TableData,
+                FormatDefinition => $FormatDefinition,
+            );
+        }
+
+        my $Output = $ExcelObject->Array2Excel(
+            %Array2ExcelParams,
+            Stat => $Stat,
         );
 
         # save the Excel with the title and timestamp as filename, or read it from param
@@ -407,10 +430,10 @@ sub Run {
             Attachment => [ {%Attachment}, ],
         );
         if ( $Result->{Success} ) {
-            $Self->Print("<yellow>Email sent to '$Recipient'.</yellow>\n");
+            $Self->Print("<yellow>Email sent to '$Recipient' at $Time.</yellow>\n");
         }
         else {
-            $Self->Print("<red>Email sending to '$Recipient' has failed.</red>\n");
+            $Self->Print("<red>Email sending to '$Recipient' has failed at $Time.</red>\n");
         }
 
     }
@@ -428,9 +451,7 @@ sub GetParam {
     my @P = split( /&/, $Param{Params} || '' );
     for my $Param (@P) {
         my ( $Key, $Value ) = split( /=/, $Param, 2 );
-        if ( $Key eq $Param{Param} ) {
-            return $Value;
-        }
+        return $Value if ( $Key eq $Param{Param} );
     }
     return;
 }

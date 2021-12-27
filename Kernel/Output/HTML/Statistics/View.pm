@@ -9,8 +9,6 @@
 
 package Kernel::Output::HTML::Statistics::View;
 
-## nofilter(TidyAll::Plugin::OTRS::Perl::PodChecker)
-
 use strict;
 use warnings;
 
@@ -26,6 +24,7 @@ our @ObjectDependencies = (
     'Kernel::System::CSV',
     'Kernel::System::CustomerCompany',
     'Kernel::System::DateTime',
+    'Kernel::System::Excel',
     'Kernel::System::Group',
     'Kernel::System::Log',
     'Kernel::System::Main',
@@ -1630,10 +1629,31 @@ sub StatsResultRender {
 
     # generate excel output
     elsif ( $Param{Format} eq 'Excel' ) {
-        my $Output = $CSVObject->Array2CSV(
-            Head   => $HeadArrayRef,
-            Data   => \@StatArray,
-            Format => 'Excel',
+
+        my $StatsBackendObject = $Kernel::OM->Get( $Stat->{ObjectModule} );
+        my $ExcelObject        = $Kernel::OM->Get('Kernel::System::Excel');
+
+        my %Array2ExcelParams;
+        if ( $StatsBackendObject->can('Worksheets') ) {
+            %Array2ExcelParams = (
+                Worksheets => $StatsBackendObject->Worksheets(),
+            );
+        }
+        else {
+            my @TableData        = ( [ @{$HeadArrayRef} ], @StatArray );
+            my $FormatDefinition = $ExcelObject->GetFormatDefinition(
+                Stat => $Stat,
+            );
+
+            %Array2ExcelParams = (
+                Data             => \@TableData,
+                FormatDefinition => $FormatDefinition,
+            );
+        }
+
+        my $Output = $ExcelObject->Array2Excel(
+            %Array2ExcelParams,
+            Stat => $Stat,
         );
 
         return $LayoutObject->Attachment(

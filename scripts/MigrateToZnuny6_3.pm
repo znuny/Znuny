@@ -217,6 +217,10 @@ sub _TasksGet {
         # >>> Znuny 6.3
         {
             Message => 'Upgrade database structure',
+            Module  => 'scripts::Migration::Znuny6_3::MigrateExcelStatsFormatDefinitions',
+        },
+        {
+            Message => 'Upgrade database structure',
             Module  => 'scripts::Migration::Znuny6_3::UpgradeDatabaseStructure',
         },
 
@@ -233,6 +237,7 @@ sub _TasksGet {
             Message => 'Uninstall merged packages',
             Module  => 'scripts::Migration::Znuny6_3::UninstallMergedPackages',
         },
+
         # <<< Znuny 6.3
 
         {
