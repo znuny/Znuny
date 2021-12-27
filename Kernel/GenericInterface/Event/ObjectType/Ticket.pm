@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -41,9 +42,12 @@ sub new {
 sub DataGet {
     my ( $Self, %Param ) = @_;
 
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+
     for my $Needed (qw(Data)) {
         if ( !$Param{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message  => "Need $Needed!"
             );
@@ -54,14 +58,26 @@ sub DataGet {
     my $ID = $Param{Data}->{TicketID};
 
     if ( !$ID ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => "Need TicketID!",
         );
         return;
     }
 
-    my %ObjectData = $Kernel::OM->Get('Kernel::System::Ticket')->TicketGet(
+    if (
+        defined $Param{InvokerType}
+        && $Param{InvokerType} eq 'Ticket::Generic'
+        )
+    {
+        my %Ticket = $TicketObject->TicketDeepGet(
+            TicketID => $ID,
+            UserID   => 1,
+        );
+        return %Ticket;
+    }
+
+    my %ObjectData = $TicketObject->TicketGet(
         TicketID      => $ID,
         DynamicFields => 1,
         UserID        => 1,

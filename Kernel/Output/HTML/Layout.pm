@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -24,11 +25,13 @@ our @ObjectDependencies = (
     'Kernel::System::Cache',
     'Kernel::System::Chat',
     'Kernel::System::CustomerGroup',
+    'Kernel::System::CustomerUser',
     'Kernel::System::DateTime',
     'Kernel::System::Group',
     'Kernel::System::Encode',
     'Kernel::System::HTMLUtils',
     'Kernel::System::JSON',
+    'Kernel::System::LastViews',
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::OTRSBusiness',
@@ -462,11 +465,11 @@ EOF
 sub SetEnv {
     my ( $Self, %Param ) = @_;
 
-    for (qw(Key Value)) {
-        if ( !defined $Param{$_} ) {
+    for my $Needed (qw(Key Value)) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             $Self->FatalError();
         }
@@ -563,8 +566,8 @@ sub Redirect {
     # add cookies if exists
     my $Cookies = '';
     if ( $Self->{SetCookies} && $ConfigObject->Get('SessionUseCookie') ) {
-        for ( sort keys %{ $Self->{SetCookies} } ) {
-            $Cookies .= "Set-Cookie: $Self->{SetCookies}->{$_}\n";
+        for my $Key ( sort keys %{ $Self->{SetCookies} } ) {
+            $Cookies .= "Set-Cookie: $Self->{SetCookies}->{$Key}\n";
         }
     }
 
@@ -698,8 +701,8 @@ sub Login {
 
     # add cookies if exists
     if ( $Self->{SetCookies} && $ConfigObject->Get('SessionUseCookie') ) {
-        for ( sort keys %{ $Self->{SetCookies} } ) {
-            $Output .= "Set-Cookie: $Self->{SetCookies}->{$_}\n";
+        for my $Key ( sort keys %{ $Self->{SetCookies} } ) {
+            $Output .= "Set-Cookie: $Self->{SetCookies}->{$Key}\n";
         }
     }
 
@@ -988,11 +991,11 @@ sub FatalDie {
     }
 
     # get backend error messages
-    for (qw(Message Traceback)) {
-        my $Backend = 'Backend' . $_;
+    for my $Needed (qw(Message Traceback)) {
+        my $Backend = 'Backend' . $Needed;
         $Param{$Backend} = $Kernel::OM->Get('Kernel::System::Log')->GetLogEntry(
             Type => 'Error',
-            What => $_
+            What => $Needed
         ) || '';
         $Param{$Backend} = $Self->Ascii2Html(
             Text           => $Param{$Backend},
@@ -1018,11 +1021,11 @@ sub Error {
     my ( $Self, %Param ) = @_;
 
     # get backend error messages
-    for (qw(Message Traceback)) {
-        my $Backend = 'Backend' . $_;
+    for my $Needed (qw(Message Traceback)) {
+        my $Backend = 'Backend' . $Needed;
         $Param{$Backend} = $Kernel::OM->Get('Kernel::System::Log')->GetLogEntry(
             Type => 'Error',
-            What => $_
+            What => $Needed
         ) || '';
     }
     if ( !$Param{BackendMessage} && !$Param{BackendTraceback} ) {
@@ -1030,11 +1033,11 @@ sub Error {
             Priority => 'error',
             Message  => $Param{Message} || '?',
         );
-        for (qw(Message Traceback)) {
-            my $Backend = 'Backend' . $_;
+        for my $Needed (qw(Message Traceback)) {
+            my $Backend = 'Backend' . $Needed;
             $Param{$Backend} = $Kernel::OM->Get('Kernel::System::Log')->GetLogEntry(
                 Type => 'Error',
-                What => $_
+                What => $Needed
             ) || '';
         }
     }
@@ -1328,8 +1331,8 @@ sub Header {
     # add cookies if exists
     my $Output = '';
     if ( $Self->{SetCookies} && $ConfigObject->Get('SessionUseCookie') ) {
-        for ( sort keys %{ $Self->{SetCookies} } ) {
-            $Output .= "Set-Cookie: $Self->{SetCookies}->{$_}\n";
+        for my $Key ( sort keys %{ $Self->{SetCookies} } ) {
+            $Output .= "Set-Cookie: $Self->{SetCookies}->{$Key}\n";
         }
     }
 
@@ -1478,6 +1481,20 @@ sub Header {
                     },
                 );
             }
+
+            # Show links to last views, if enabled for tool bar.
+            my $ToolBarLastViewsHTML = $Self->_BuildLastViewsOutput(
+                Interface => 'Agent',
+                Position  => 'ToolBar',
+            );
+            if ( defined $ToolBarLastViewsHTML && length $ToolBarLastViewsHTML ) {
+                $Self->Block(
+                    Name => 'LastViewsToolBar',
+                    Data => {
+                        ToolBarLastViewsHTML => $ToolBarLastViewsHTML,
+                    },
+                );
+            }
         }
 
         if ( $Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::Chat', Silent => 1 ) ) {
@@ -1503,6 +1520,20 @@ sub Header {
             );
 
             $Param{UserInitials} = $Self->UserInitialsGet( Fullname => $User{UserFullname} );
+        }
+
+        # Show links to last views, if enabled for avatar.
+        my $AvatarLastViewsHTML = $Self->_BuildLastViewsOutput(
+            Interface => 'Agent',
+            Position  => 'Avatar',
+        );
+        if ( defined $AvatarLastViewsHTML && length $AvatarLastViewsHTML ) {
+            $Self->Block(
+                Name => 'LastViewsAvatar',
+                Data => {
+                    AvatarLastViewsHTML => $AvatarLastViewsHTML,
+                },
+            );
         }
 
         # show logged in notice
@@ -1657,6 +1688,7 @@ sub Footer {
         InputFieldsActivated           => $ConfigObject->Get('ModernizeFormFields'),
         OTRSBusinessIsInstalled        => $Param{OTRSBusinessIsInstalled},
         VideoChatEnabled               => $Param{VideoChatEnabled},
+        DatepickerShowWeek             => $ConfigObject->Get('Datepicker::ShowWeek') || 0,
         PendingStateIDs                => \@PendingStateIDs,
         CheckSearchStringsForStopWords => (
             $ConfigObject->Get('Ticket::SearchIndex::WarnOnStopWordUsage')
@@ -1900,9 +1932,9 @@ sub Ascii2Html {
         my @TextList = split( "\n", ${$Text} );
         ${$Text} = '';
         my $Counter = 1;
-        for (@TextList) {
+        for my $TextList (@TextList) {
             if ( $Counter <= $Param{VMax} ) {
-                ${$Text} .= $_ . "\n";
+                ${$Text} .= $TextList . "\n";
             }
             $Counter++;
         }
@@ -2268,11 +2300,11 @@ sub BuildSelection {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Name Data)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(Name Data)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -2568,11 +2600,11 @@ sub Attachment {
     my ( $Self, %Param ) = @_;
 
     # check needed params
-    for (qw(Content ContentType)) {
-        if ( !defined $Param{$_} ) {
+    for my $Needed (qw(Content ContentType)) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Got no $_!",
+                Message  => "Got no $Needed!",
             );
             $Self->FatalError();
         }
@@ -3075,7 +3107,7 @@ sub NavigationBar {
             # set prio of item
             my $Key = ( $Item->{Block} || '' ) . sprintf( "%07d", $Item->{Prio} );
             COUNT:
-            for ( 1 .. 51 ) {
+            for my $Count ( 1 .. 51 ) {
                 last COUNT if !$NavBar{$Key};
 
                 $Item->{Prio}++;
@@ -3222,6 +3254,21 @@ sub NavigationBar {
     if ( !$SearchAdded && $FrontendRegistration->{AgentTicketSearch} ) {
         $Self->Block(
             Name => 'SearchIcon',
+        );
+    }
+
+    # Show links to last views, if enabled for menu bar.
+    my $MenuBarLastViewsHTML = $Self->_BuildLastViewsOutput(
+        Interface => 'Agent',
+        Position  => 'MenuBar',
+    );
+
+    if ( defined $MenuBarLastViewsHTML && length $MenuBarLastViewsHTML ) {
+        $Self->Block(
+            Name => 'LastViewsMenuBar',
+            Data => {
+                MenuBarLastViewsHTML => $MenuBarLastViewsHTML,
+            },
         );
     }
 
@@ -3489,16 +3536,16 @@ sub BuildDateSelection {
             }
         }
         else {
-            for ( 2001 .. $Y + 1 + ( $Param{YearDiff} || 0 ) ) {
-                $Year{$_} = $_;
+            for my $Key ( 2001 .. $Y + 1 + ( $Param{YearDiff} || 0 ) ) {
+                $Year{$Key} = $Key;
             }
         }
 
         # Check if the DiffTime is in a future year. In this case, we add the missing years between
         # $CY (current year) and $Y (year) to allow the user to manually set back the year if needed.
         if ( $Y > $CY ) {
-            for ( $CY .. $Y ) {
-                $Year{$_} = $_;
+            for my $Key ( $CY .. $Y ) {
+                $Year{$Key} = $Key;
             }
         }
 
@@ -3869,8 +3916,8 @@ sub CustomerLogin {
 
     # add cookies if exists
     if ( $Self->{SetCookies} && $ConfigObject->Get('SessionUseCookie') ) {
-        for ( sort keys %{ $Self->{SetCookies} } ) {
-            $Output .= "Set-Cookie: $Self->{SetCookies}->{$_}\n";
+        for my $Key ( sort keys %{ $Self->{SetCookies} } ) {
+            $Output .= "Set-Cookie: $Self->{SetCookies}->{$Key}\n";
         }
     }
 
@@ -4065,8 +4112,8 @@ sub CustomerHeader {
     # add cookies if exists
     my $Output = '';
     if ( $Self->{SetCookies} && $ConfigObject->Get('SessionUseCookie') ) {
-        for ( sort keys %{ $Self->{SetCookies} } ) {
-            $Output .= "Set-Cookie: $Self->{SetCookies}->{$_}\n";
+        for my $Key ( sort keys %{ $Self->{SetCookies} } ) {
+            $Output .= "Set-Cookie: $Self->{SetCookies}->{$Key}\n";
         }
     }
 
@@ -4505,7 +4552,7 @@ sub CustomerNavigationBar {
             # set prio of item
             my $Key = ( $Item->{Block} || '' ) . sprintf( "%07d", $Item->{Prio} );
             COUNT:
-            for ( 1 .. 51 ) {
+            for my $Count ( 1 .. 51 ) {
                 last COUNT if !$NavBarModule{$Key};
 
                 $Item->{Prio}++;
@@ -4716,6 +4763,21 @@ sub CustomerNavigationBar {
         }
     }
 
+    # Show links to last views, if enabled for menu bar.
+    my $MenuBarLastViewsHTML = $Self->_BuildLastViewsOutput(
+        Interface => 'Customer',
+        Position  => 'MenuBar',
+    );
+
+    if ( defined $MenuBarLastViewsHTML && length $MenuBarLastViewsHTML ) {
+        $Self->Block(
+            Name => 'LastViewsMenuBar',
+            Data => {
+                MenuBarLastViewsHTML => $MenuBarLastViewsHTML,
+            },
+        );
+    }
+
     # create & return output
     return $Self->Output(
         TemplateFile => 'CustomerNavigationBar',
@@ -4727,10 +4789,10 @@ sub CustomerError {
     my ( $Self, %Param ) = @_;
 
     # get backend error messages
-    for (qw(Message Traceback)) {
-        $Param{ 'Backend' . $_ } = $Kernel::OM->Get('Kernel::System::Log')->GetLogEntry(
+    for my $Needed (qw(Message Traceback)) {
+        $Param{ 'Backend' . $Needed } = $Kernel::OM->Get('Kernel::System::Log')->GetLogEntry(
             Type => 'Error',
-            What => $_
+            What => $Needed
         ) || '';
     }
     if ( !$Param{BackendMessage} && !$Param{BackendTraceback} ) {
@@ -4738,10 +4800,10 @@ sub CustomerError {
             Priority => 'error',
             Message  => $Param{Message} || '?',
         );
-        for (qw(Message Traceback)) {
-            $Param{ 'Backend' . $_ } = $Kernel::OM->Get('Kernel::System::Log')->GetLogEntry(
+        for my $Needed (qw(Message Traceback)) {
+            $Param{ 'Backend' . $Needed } = $Kernel::OM->Get('Kernel::System::Log')->GetLogEntry(
                 Type => 'Error',
-                What => $_
+                What => $Needed
             ) || '';
         }
     }
@@ -4823,11 +4885,11 @@ sub Ascii2RichText {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(String)) {
-        if ( !defined $Param{$_} ) {
+    for my $Needed (qw(String)) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -4855,11 +4917,11 @@ sub RichText2Ascii {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(String)) {
-        if ( !defined $Param{$_} ) {
+    for my $Needed (qw(String)) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -4888,11 +4950,11 @@ sub RichTextDocumentComplete {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(String)) {
-        if ( !defined $Param{$_} ) {
+    for my $Needed (qw(String)) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -4938,11 +5000,11 @@ sub _RichTextReplaceLinkOfInlineContent {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(String)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(String)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -4993,11 +5055,11 @@ sub RichTextDocumentServe {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Data URL Attachments)) {
-        if ( !defined $Param{$_} ) {
+    for my $Needed (qw(Data URL Attachments)) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -5186,11 +5248,11 @@ sub RichTextDocumentCleanup {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(String)) {
-        if ( !defined $Param{$_} ) {
+    for my $Needed (qw(String)) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -5348,9 +5410,9 @@ sub _BuildSelectionAttributeRefCreate {
     my $AttributeRef = {};
 
     # check params with key and value
-    for (qw(Name ID Size Class OnChange OnClick AutoComplete)) {
-        if ( $Param{$_} ) {
-            $AttributeRef->{ lc($_) } = $Param{$_};
+    for my $Needed (qw(Name ID Size Class OnChange OnClick AutoComplete)) {
+        if ( $Param{$Needed} ) {
+            $AttributeRef->{ lc($Needed) } = $Param{$Needed};
         }
     }
 
@@ -5360,16 +5422,16 @@ sub _BuildSelectionAttributeRefCreate {
     }
 
     # check params with key and value that need to be HTML-Quoted
-    for (qw(Title)) {
-        if ( $Param{$_} ) {
-            $AttributeRef->{ lc($_) } = $Self->Ascii2Html( Text => $Param{$_} );
+    for my $Needed (qw(Title)) {
+        if ( $Param{$Needed} ) {
+            $AttributeRef->{ lc($Needed) } = $Self->Ascii2Html( Text => $Param{$Needed} );
         }
     }
 
     # check HTML params
-    for (qw(Multiple Disabled)) {
-        if ( $Param{$_} ) {
-            $AttributeRef->{ lc($_) } = lc($_);
+    for my $Needed (qw(Multiple Disabled)) {
+        if ( $Param{$Needed} ) {
+            $AttributeRef->{ lc($Needed) } = lc($Needed);
         }
     }
 
@@ -5465,13 +5527,6 @@ sub _BuildSelectionDataRefCreate {
                 }
             }
             push @SortKeys, sort { lc $a cmp lc $b } ( values %List );
-        }
-
-        # translate value
-        if ( $OptionRef->{Translation} ) {
-            for my $Row ( sort keys %{$DataLocal} ) {
-                $DataLocal->{$Row} = $Self->{LanguageObject}->Translate( $DataLocal->{$Row} );
-            }
         }
 
         # sort hash (after the translation)
@@ -5722,6 +5777,10 @@ sub _BuildSelectionDataRefCreate {
     # SelectedID and SelectedValue option
     if ( defined $OptionRef->{SelectedID} || $OptionRef->{SelectedValue} ) {
         for my $Row ( @{$DataRef} ) {
+            my $CheckValue = $Row->{Value};
+            if ( $OptionRef->{Translation} ) {
+               $CheckValue = $Self->{LanguageObject}->Translate( $Row->{Value} );
+            }
             if (
                 (
                     (
@@ -5731,13 +5790,13 @@ sub _BuildSelectionDataRefCreate {
                     ||
                     (
                         defined $Row->{Value}
-                        && $OptionRef->{SelectedValue}->{ $Row->{Value} }
+                        && $OptionRef->{SelectedValue}->{ $CheckValue }
                     )
                 )
                 &&
                 (
                     defined $Row->{Value}
-                    && !$DisabledElements{ $Row->{Value} }
+                    && !$DisabledElements{ $CheckValue }
                 )
                 )
             {
@@ -5831,6 +5890,13 @@ sub _BuildSelectionDataRefCreate {
                     }
                 }
             }
+        }
+    }
+
+    # translate value
+    if ( $OptionRef->{Translation} ) {
+        for my $Row ( @{$DataRef} ) {
+            $Row->{Value} = $Self->{LanguageObject}->Translate( $Row->{Value} );
         }
     }
 
@@ -6398,6 +6464,124 @@ sub UserInitialsGet {
     }
 
     return $UserInitials;
+}
+
+=head2 _BuildLastViewsOutput()
+
+Outputs links to the last views of the (customer) user in the avatar area, tool bar or menu bar.
+
+    my $LastViewsHTML = $LayoutObject->_BuildLastViewsOutput(
+        Interface => 'Agent',       # or Customer
+        Position  => 'ToolBar',     # or MenuBar or Avatar, for customer interface only MenuBar is possible.
+    );
+
+=cut
+
+sub _BuildLastViewsOutput {
+    my ( $Self, %Param ) = @_;
+
+    my $LastViewsObject    = $Kernel::OM->Get('Kernel::System::LastViews');
+    my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
+    my $JSONObject         = $Kernel::OM->Get('Kernel::System::JSON');
+    my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+    my $LogObject          = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
+    for my $Needed (qw(Interface Position)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    my %UserPreferences;
+
+    if ( $Param{Interface} eq 'Agent' ) {
+        %UserPreferences = $UserObject->GetPreferences(
+            UserID => $Self->{UserID},
+        );
+    }
+    elsif ( $Param{Interface} eq 'Customer' ) {
+        %UserPreferences = $CustomerUserObject->GetPreferences(
+            UserID => $Self->{UserID},
+        );
+        $UserPreferences{UserLastViewsLimit} ||= 10;
+        $UserPreferences{UserLastViewsPosition} = 'MenuBar';
+    }
+    else {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter 'Interface' must be 'Agent' or 'Customer'.",
+        );
+        return;
+    }
+
+    my $LastViewTypes = $JSONObject->Decode(
+        Data => $UserPreferences{UserLastViewsTypes},
+    );
+    return if !IsArrayRefWithData($LastViewTypes);
+
+    my $LastViewsLimit = $UserPreferences{UserLastViewsLimit} || 5;
+
+    my $SelectedPosition = $UserPreferences{UserLastViewsPosition} || 'ToolBar';
+    return if $Param{Position} ne $SelectedPosition;
+
+    my @LastViews = $LastViewsObject->GetList(
+        SessionID => $Self->{SessionID},
+        Types     => $LastViewTypes,
+    );
+    return if !@LastViews;
+
+    my $ReverseCounter  = $LastViewsLimit;
+    my $LastViewCounter = 1;
+    my $LastViewLabel   = $Self->{LanguageObject}->Translate('Last Views');
+
+    LASTVIEW:
+    for my $LastView ( reverse @LastViews ) {
+        last LASTVIEW if $LastViewCounter > $LastViewsLimit;
+
+        my $Name  = $LastView->{Name} || $LastView->{Action};
+        my $Label = $Self->{LanguageObject}->Translate($Name);
+
+        my $Class;
+        if ( $LastView->{PopUp} ) {
+            $Class = 'AsPopup PopupType_LastView' . $LastView->{PopUp};
+        }
+
+        $Self->Block(
+            Name => 'LastView',
+            Data => {
+                %{$LastView},
+                Label   => $Label,
+                Counter => $LastViewCounter,
+                Class   => $Class,
+            },
+        );
+
+        for my $Param ( sort keys %{ $LastView->{Params} } ) {
+            my $Value = $LastView->{Params}->{$Param};
+            $Self->Block(
+                Name => 'LastViewParam',
+                Data => {
+                    Key   => $Param,
+                    Value => $Value,
+                },
+            );
+        }
+
+        $LastViewCounter++;
+        $ReverseCounter--;
+    }
+
+    my $LastViewHTML = $Self->Output(
+        TemplateFile => 'LastViews/' . $Param{Interface} . '/' . $SelectedPosition,
+        Data         => {},
+    );
+
+    return $LastViewHTML;
 }
 
 1;

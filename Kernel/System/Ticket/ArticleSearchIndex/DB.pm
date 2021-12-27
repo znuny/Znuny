@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -17,6 +18,7 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::DB',
     'Kernel::System::Log',
+    'Kernel::System::CheckItem',
     'Kernel::System::Ticket::Article',
 );
 
@@ -83,7 +85,8 @@ sub ArticleSearchIndexBuild {
     my $ForceUnfilteredStorage = $Kernel::OM->Get('Kernel::Config')->Get('Ticket::SearchIndex::ForceUnfilteredStorage')
         // 0;
 
-    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+    my $DBObject        = $Kernel::OM->Get('Kernel::System::DB');
+    my $CheckItemObject = $Kernel::OM->Get('Kernel::System::CheckItem');
 
     # Use regular multi-inserts for MySQL and PostgreSQL:
     # INSERT INTO table (field1, field2) VALUES (?, ?), (?, ?);
@@ -130,6 +133,15 @@ sub ArticleSearchIndexBuild {
         # (this will be done automatically on filterable fields)
         else {
             $ArticleSearchableContent{$FieldKey}->{String} = lc $ArticleSearchableContent{$FieldKey}->{String};
+
+            # Cleanup String and remove newlines
+            # https://github.com/znuny/Znuny/issues/29
+            $CheckItemObject->StringClean(
+                StringRef             => \$ArticleSearchableContent{$FieldKey}->{String},
+                RemoveAllNewlines     => 1,
+                RemoveAllTabs         => 1,
+                ReplaceWithWhiteSpace => 1,
+            );
         }
 
         my @CurrentBind = (

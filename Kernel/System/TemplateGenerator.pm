@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,12 +19,13 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::Output::HTML::Layout',
     'Kernel::System::AutoResponse',
     'Kernel::System::CommunicationChannel',
     'Kernel::System::CustomerUser',
+    'Kernel::System::DateTime',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
-    'Kernel::System::Encode',
     'Kernel::System::HTMLUtils',
     'Kernel::System::Log',
     'Kernel::System::Queue',
@@ -34,8 +36,6 @@ our @ObjectDependencies = (
     'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
     'Kernel::System::User',
-    'Kernel::Output::HTML::Layout',
-    'Kernel::System::DateTime',
 );
 
 =head1 NAME
@@ -88,11 +88,11 @@ sub Salutation {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(TicketID Data UserID)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(TicketID Data UserID)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -185,11 +185,11 @@ sub Signature {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Data UserID)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(Data UserID)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -290,11 +290,11 @@ sub Sender {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw( UserID QueueID)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw( UserID QueueID)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -374,11 +374,11 @@ sub Template {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(TemplateID UserID)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(TemplateID UserID)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -503,11 +503,11 @@ sub GenericAgentArticle {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(TicketID Notification UserID)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(TicketID Notification UserID)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -608,11 +608,11 @@ sub Attributes {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(TicketID Data UserID)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(TicketID Data UserID)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -677,11 +677,11 @@ sub AutoResponse {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(TicketID AutoResponseType OrigHeader UserID)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(TicketID AutoResponseType OrigHeader UserID)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -723,11 +723,11 @@ sub AutoResponse {
     if (@ArticleList) {
         my %Article = $ArticleObject->BackendForArticle( %{ $ArticleList[0] } )->ArticleGet( %{ $ArticleList[0] } );
 
-        for (qw(From To Cc Subject Body)) {
-            if ( !$Param{OrigHeader}->{$_} ) {
-                $Param{OrigHeader}->{$_} = $Article{$_} || '';
+        for my $Key (qw(From To Cc Subject Body)) {
+            if ( !$Param{OrigHeader}->{$Key} ) {
+                $Param{OrigHeader}->{$Key} = $Article{$Key} || '';
             }
-            chomp $Param{OrigHeader}->{$_};
+            chomp $Param{OrigHeader}->{$Key};
         }
     }
 
@@ -752,9 +752,9 @@ sub AutoResponse {
     }
 
     # fill up required attributes
-    for (qw(Subject Body)) {
-        if ( !$Param{OrigHeader}->{$_} ) {
-            $Param{OrigHeader}->{$_} = "No $_";
+    for my $Key (qw(Subject Body)) {
+        if ( !$Param{OrigHeader}->{$Key} ) {
+            $Param{OrigHeader}->{$Key} = "No $Key";
         }
     }
 
@@ -1165,11 +1165,11 @@ sub _Replace {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Text RichText Data UserID)) {
-        if ( !defined $Param{$_} ) {
+    for my $Needed (qw(Text RichText Data UserID)) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -1231,7 +1231,7 @@ sub _Replace {
         $RecipientTimeZone = $Kernel::OM->Create('Kernel::System::DateTime')->OTRSTimeZoneGet();
 
         my %CustomerUser;
-        if ( IsHashRefWithData( \%Ticket ) && $Ticket{CustomerUserID} ) {
+        if ( %Ticket && $Ticket{CustomerUserID} ) {
             %CustomerUser = $CustomerUserObject->CustomerUserDataGet( User => $Ticket{CustomerUserID} );
         }
 
@@ -1255,7 +1255,7 @@ sub _Replace {
         elsif (
             $Param{AddTimezoneInfo}->{AutoResponse}
             && $Ticket{CustomerUserID}
-            && IsHashRefWithData( \%CustomerUser )
+            && %CustomerUser
             )
         {
             %UserPreferences = $CustomerUserObject->GetPreferences(
@@ -1713,11 +1713,15 @@ sub _Replace {
                 SenderType => 'agent',
                 OnlyLast   => 1,
             );
+            if ( @AgentArticles && IsHashRefWithData( $AgentArticles[0] ) ) {
+                my %AgentArticle = $ArticleObject->BackendForArticle( %{ $AgentArticles[0] } )->ArticleGet(
+                    %{ $AgentArticles[0] },
+                    DynamicFields => 0,
+                );
 
-            my %AgentArticle = $ArticleObject->BackendForArticle( %{ $AgentArticles[0] } )->ArticleGet(
-                %{ $AgentArticles[0] },
-                DynamicFields => 0,
-            );
+                $Param{DataAgent}->{Subject} = $AgentArticle{Subject};
+                $Param{DataAgent}->{Body}    = $AgentArticle{Body};
+            }
 
             # Get last article from customer.
             my @CustomerArticles = $ArticleObject->ArticleList(
@@ -1725,16 +1729,15 @@ sub _Replace {
                 SenderType => 'customer',
                 OnlyLast   => 1,
             );
+            if ( @CustomerArticles && IsHashRefWithData( $CustomerArticles[0] ) ) {
 
-            my %CustomerArticle = $ArticleObject->BackendForArticle( %{ $CustomerArticles[0] } )->ArticleGet(
-                %{ $CustomerArticles[0] },
-                DynamicFields => 0,
-            );
-
-            $Param{DataAgent}->{Subject} = $AgentArticle{Subject};
-            $Param{DataAgent}->{Body}    = $AgentArticle{Body};
-            $Param{Data}->{Subject}      = $CustomerArticle{Subject};
-            $Param{Data}->{Body}         = $CustomerArticle{Body};
+                my %CustomerArticle = $ArticleObject->BackendForArticle( %{ $CustomerArticles[0] } )->ArticleGet(
+                    %{ $CustomerArticles[0] },
+                    DynamicFields => 0,
+                );
+                $Param{Data}->{Subject} = $CustomerArticle{Subject};
+                $Param{Data}->{Body}    = $CustomerArticle{Body};
+            }
         }
         elsif ( $Param{Template} eq 'Answer' || $Param{Template} eq 'Forward' ) {
 
@@ -1821,7 +1824,7 @@ sub _Replace {
                 if ( $Param{RichText} && $NewOldBody ) {
 
                     # remove trailing new lines
-                    for ( 1 .. 10 ) {
+                    for my $Lines ( 1 .. 10 ) {
                         $NewOldBody =~ s/(<br\/>)\s{0,20}$//gs;
                     }
 

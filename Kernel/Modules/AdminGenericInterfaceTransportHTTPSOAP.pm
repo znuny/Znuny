@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -139,6 +140,8 @@ sub Run {
         $TransportConfig->{$Param} = $GetParam->{$Param};
     }
 
+    $TransportConfig->{NoNameSpace} = $GetParam->{NoNameSpace} ? 1 : 0;
+
     # Check SOAPAction options.
     if ( $GetParam->{SOAPAction} && $GetParam->{SOAPAction} eq 'Yes' ) {
 
@@ -199,7 +202,14 @@ sub Run {
         }
 
         # Check authentication options.
-        if ( $GetParam->{AuthType} && $GetParam->{AuthType} eq 'BasicAuth' ) {
+        if (
+            $GetParam->{AuthType}
+            && (
+                $GetParam->{AuthType} eq 'BasicAuth'
+                || $GetParam->{AuthType} eq 'NTLM'
+            )
+            )
+        {
 
             # Get BasicAuth settings.
             for my $ParamName (qw( AuthType BasicAuthUser BasicAuthPassword )) {
@@ -226,6 +236,10 @@ sub Run {
         # Check SSL options.
         if ( $GetParam->{UseSSL} && $GetParam->{UseSSL} eq 'Yes' ) {
 
+            if ( $GetParam->{SSLNoHostnameVerification} ) {
+                $TransportConfig->{SSLNoHostnameVerification} = 1;
+            }
+
             # Get SSL authentication settings.
             for my $ParamName (qw( UseSSL SSLPassword )) {
                 $TransportConfig->{SSL}->{$ParamName} = $GetParam->{$ParamName};
@@ -246,6 +260,9 @@ sub Run {
                 $Error{ $ParamName . 'ServerErrorMessage' } = Translatable('File or Directory not found.');
             }
         }
+
+        $TransportConfig->{FixedNameSpacePrefix} = $GetParam->{FixedNameSpacePrefix} // '';
+        $TransportConfig->{ResponseTagSuffix}    = $GetParam->{ResponseTagSuffix}    // '';
     }
 
     # Get provider specific settings.
@@ -333,17 +350,32 @@ sub _ShowEdit {
         RequestNameFreeText ResponseNameFreeText
         SOAPActionFreeText
         AdditionalHeaders
+        NoNameSpace FixedNameSpacePrefix ResponseTagSuffix SSLNoHostnameVerification
         )
         )
     {
         $Param{$ParamName} = $TransportConfig->{$ParamName};
     }
+
     for my $ParamName (qw( AuthType BasicAuthUser BasicAuthPassword )) {
         $Param{$ParamName} = $TransportConfig->{Authentication}->{$ParamName};
     }
+
     for my $ParamName (qw( UseSSL SSLCertificate SSLKey SSLPassword SSLCAFile SSLCADir )) {
         $Param{$ParamName} = $TransportConfig->{SSL}->{$ParamName};
     }
+
+    if (
+        $TransportConfig->{SSLNoHostnameVerification}
+        && (
+            !defined $Param{UseSSL}
+            || $Param{UseSSL} ne 'Yes'
+        )
+        )
+    {
+        $Param{UseSSL} = 'Yes';
+    }
+
     for my $ParamName (qw( UseProxy ProxyHost ProxyUser ProxyPassword ProxyExclude )) {
         $Param{$ParamName} = $TransportConfig->{Proxy}->{$ParamName};
     }
@@ -467,6 +499,19 @@ sub _ShowEdit {
         $Param{SOAPActionFreeTextHidden} = 'Hidden';
     }
 
+    # NoNameSpace option
+    $Param{NoNameSpaceSelection} = $LayoutObject->BuildSelection(
+        Data => {
+            0 => 'No',
+            1 => 'Yes',
+        },
+        Name         => 'NoNameSpace',
+        SelectedID   => $Param{NoNameSpace} ? 1 : 0,
+        PossibleNone => 0,
+        Sort         => 'AlphanumericValue',
+        Class        => 'Modernize Validate_Required',
+    );
+
     # Check if communication type is requester.
     if ( $Param{CommunicationType} eq 'Requester' ) {
 
@@ -479,9 +524,23 @@ sub _ShowEdit {
             Class         => 'Modernize',
         );
 
+        my %AuthenticationTypes = (
+            'BasicAuth' => 1,
+        );
+
+        my $MainObject        = $Kernel::OM->Get('Kernel::System::Main');
+        my $NTLMAuthAvailable = $MainObject->Require(
+            'Authen::NTLM',
+            Silent => 1,
+        );
+
+        if ($NTLMAuthAvailable) {
+            $AuthenticationTypes{NTLM} = 1;
+        }
+
         # Create Authentication types select.
         $Param{AuthenticationStrg} = $LayoutObject->BuildSelection(
-            Data          => ['BasicAuth'],
+            Data          => [ keys %AuthenticationTypes ],
             Name          => 'AuthType',
             SelectedValue => $Param{AuthType} || '-',
             PossibleNone  => 1,
@@ -491,7 +550,7 @@ sub _ShowEdit {
 
         # Hide and disable authentication methods if they are not selected.
         $Param{BasicAuthHidden} = 'Hidden';
-        if ( $Param{AuthType} && $Param{AuthType} eq 'BasicAuth' ) {
+        if ( $Param{AuthType} && $AuthenticationTypes{ $Param{AuthType} } ) {
             $Param{BasicAuthHidden}                   = '';
             $Param{BasicAuthUserServerError}          = 'Validate_Required';
             $Param{BasicAuthPasswordValidateRequired} = 'Validate_Required';
@@ -549,6 +608,18 @@ sub _ShowEdit {
         {
             $Param{SSLHidden} = '';
         }
+
+        $Param{SSLNoHostnameVerificationSelection} = $LayoutObject->BuildSelection(
+            Data => {
+                0 => 'No',
+                1 => 'Yes',
+            },
+            Name         => 'SSLNoHostnameVerification',
+            SelectedID   => $Param{SSLNoHostnameVerification} ? 1 : 0,
+            PossibleNone => 0,
+            Sort         => 'AlphanumericValue',
+            Class        => 'Modernize',
+        );
     }
 
     # Check if communication type is requester.
@@ -613,11 +684,13 @@ sub _GetParams {
         UseSSL SSLCertificate SSLKey SSLPassword SSLCAFile SSLCADir
         SOAPAction SOAPActionSeparator SOAPActionScheme SOAPActionFreeText
         RequestNameFreeText ResponseNameFreeText RequestNameScheme ResponseNameScheme
+        NoNameSpace FixedNameSpacePrefix ResponseTagSuffix SSLNoHostnameVerification
         )
         )
     {
         $GetParam->{$ParamName} = $ParamObject->GetParam( Param => $ParamName ) || '';
     }
+
     return $GetParam;
 }
 

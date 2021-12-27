@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -27,9 +28,10 @@ performs user authentication and return a new SessionID value
 
     my $SessionID = $CommonObject->CreateSessionID(
         Data {
-            UserLogin         => 'Agent1',
-            CustomerUserLogin => 'Customer1',       # optional, provide UserLogin or
-                                                    #   CustomerUserLogin
+            UserLogin         => 'Agent1',          # optional, provide UserLogin or CustomerUserLogin
+            # or
+            CustomerUserLogin => 'Customer1',       # optional, provide UserLogin or CustomerUserLogin
+
             Password          => 'some password',   # plain text password
         }
     );

@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -17,12 +18,11 @@ use Kernel::Output::HTML::Layout;
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::Output::HTML::Layout',
     'Kernel::System::Calendar',
-    'Kernel::System::Log',
-    'Kernel::System::Web::Request',
     'Kernel::System::JSON',
+    'Kernel::System::Log',
     'Kernel::System::User',
+    'Kernel::System::Web::Request',
 );
 
 =head1 NAME

@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -746,7 +747,10 @@ sub PartsAttachments {
     elsif ( $PartData{ContentType} eq 'message/rfc822' ) {
 
         my ($SubjectString) = $Part->as_string() =~ m/^Subject: ([^\n]*(\n[ \t][^\n]*)*)/m;
-        my $Subject = $Self->_DecodeString( String => $SubjectString ) . '.eml';
+        my $Subject = '';
+        if ($SubjectString){
+            $Subject = $Self->_DecodeString( String => $SubjectString ) . '.eml';
+        }
 
         # cleanup filename
         $Subject = $Kernel::OM->Get('Kernel::System::Main')->FilenameCleanUp(
@@ -913,11 +917,11 @@ sub GetReferences {
     # get uniq
     my %Checked;
     my @References;
-    for ( reverse @ReferencesAll ) {
-        if ( !$Checked{$_} ) {
-            push @References, $_;
+    for my $Reference ( reverse @ReferencesAll ) {
+        if ( !$Checked{$Reference} ) {
+            push @References, $Reference;
         }
-        $Checked{$_} = 1;
+        $Checked{$Reference} = 1;
     }
     return @References;
 }

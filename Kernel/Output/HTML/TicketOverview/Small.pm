@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -1635,7 +1636,7 @@ sub Run {
                     # If value is in date format, change block type to 'Time' so it can be localized. See bug#14542.
                     if (
                         defined $DataValue
-                        && $DataValue =~ /^\d\d\d\d-(\d|\d\d)-(\d|\d\d)\s(\d|\d\d):(\d|\d\d):(\d|\d\d)/
+                        && $DataValue =~ /^\d\d\d\d-(\d|\d\d)-(\d|\d\d)\s(\d|\d\d):(\d|\d\d):(\d|\d\d)$/
                         )
                     {
                         $BlockType = 'Time';
@@ -2031,15 +2032,10 @@ sub _ColumnFilterJSON {
 
         my %Values = %{ $Param{ColumnValues} };
 
-        # Keys must be link encoded for dynamic fields because they are added to URL during filtering
-        # and can contain characters like '&', ';', etc.
-        # See bug#14497 - https://bugs.otrs.org/show_bug.cgi?id=14497.
-        my $Encoding = ( $Param{ColumnName} =~ m/^DynamicField_/ ) ? 1 : 0;
-
         # Set possible values.
         for my $ValueKey ( sort { lc $Values{$a} cmp lc $Values{$b} } keys %Values ) {
             push @{$Data}, {
-                Key   => $Encoding ? $LayoutObject->LinkEncode($ValueKey) : $ValueKey,
+                Key   => $ValueKey,
                 Value => $Values{$ValueKey},
             };
         }

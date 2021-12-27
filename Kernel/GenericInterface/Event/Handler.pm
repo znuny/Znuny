@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -23,7 +24,6 @@ our @ObjectDependencies = (
     'Kernel::System::Event',
     'Kernel::System::Main',
     'Kernel::Config',
-    'Kernel::System::Daemon::SchedulerDB',
     'Kernel::System::DateTime',
 );
 
@@ -41,9 +41,10 @@ invokers.
 sub new {
     my ( $Type, %Param ) = @_;
 
-    # Allocate new hash for object.
     my $Self = {};
     bless( $Self, $Type );
+
+    $Self->{JqIsAvailable} = $Self->_IsJqAvailable();
 
     return $Self;
 }
@@ -146,16 +147,28 @@ sub Run {
 
                     # Get object data
                     my %EventData = $BackendObject->DataGet(
-                        Data => $Param{Data},
+                        Data        => $Param{Data},
+                        Invoker     => $Invoker,
+                        InvokerType => $InvokerConfig->{Type},
                     );
 
                     if ( IsHashRefWithData( \%EventData ) ) {
                         my %ObjectData;
 
-                        $Self->_SerializeConfig(
-                            Data  => \%EventData,
-                            SHash => \%ObjectData,
-                        );
+                        # do not serialize config in case of available jq
+                        if (
+                            $Self->{JqIsAvailable}
+                            && $InvokerConfig->{Type} eq 'Ticket::Generic'
+                            )
+                        {
+                            %ObjectData = %EventData;
+                        }
+                        else {
+                            $Self->_SerializeConfig(
+                                Data  => \%EventData,
+                                SHash => \%ObjectData,
+                            );
+                        }
 
                         # Check if the event condition matches.
                         my $ConditionCheckResult = $Self->_ConditionCheck(
@@ -177,7 +190,10 @@ sub Run {
                         Data     => {
                             WebserviceID => $WebserviceID,
                             Invoker      => $Invoker,
-                            Data         => $Param{Data},
+                            Data         => {
+                                %{ $Param{Data} // {} },
+                                Event => $Param{Event},
+                            },
                         },
                     );
                     if ( !$Success ) {
@@ -195,7 +211,10 @@ sub Run {
                 my $Result = $RequesterObject->Run(
                     WebserviceID => $WebserviceID,
                     Invoker      => $Invoker,
-                    Data         => Storable::dclone( $Param{Data} ),
+                    Data         => {
+                        %{ Storable::dclone( $Param{Data} ) // {} },
+                        Event => $Param{Event},
+                    },
                 );
                 next INVOKEREVENT if $Result->{Success};
 
@@ -245,7 +264,10 @@ sub Run {
                     Name          => 'Invoker-' . $Invoker,
                     Attempts      => 10,
                     Data          => {
-                        Data              => $Param{Data},
+                        Data => {
+                            %{ $Param{Data} // {} },
+                            Event => $Param{Event},
+                        },
                         PastExecutionData => $Result->{Data}->{PastExecutionData},
                         WebserviceID      => $WebserviceID,
                         Invoker           => $Invoker,
@@ -480,6 +502,7 @@ sub _ConditionCheck {
 
     # Loop through all submitted conditions
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+
     CONDITIONNAME:
     for my $ConditionName ( sort { $a cmp $b } keys %{ $Param{Condition} } ) {
 
@@ -578,9 +601,12 @@ sub _ConditionCheck {
                 # Make sure the data string is here and it isn't a ref (array or whatsoever)
                 #   then compare it to our Condition configuration.
                 if (
-                    defined $Param{Data}->{$FieldName}
-                    && defined $ActualCondition->{Fields}->{$FieldName}->{Match}
-                    && ( $Param{Data}->{$FieldName} || $Param{Data}->{$FieldName} eq '0' )
+                    $FieldName =~ m{\Ajq\#(.+)}msi
+                    || (
+                        defined $Param{Data}->{$FieldName}
+                        && defined $ActualCondition->{Fields}->{$FieldName}->{Match}
+                        && ( $Param{Data}->{$FieldName} || $Param{Data}->{$FieldName} eq '0' )
+                    )
                     )
                 {
 
@@ -588,11 +614,33 @@ sub _ConditionCheck {
 
                     # Check if field data is a string and compare directly.
                     if (
-                        ref $Param{Data}->{$FieldName} eq ''
+                        defined $Param{Data}->{$FieldName}
+                        && ref $Param{Data}->{$FieldName} eq ''
                         && $ActualCondition->{Fields}->{$FieldName}->{Match} eq $Param{Data}->{$FieldName}
                         )
                     {
                         $Match = 1;
+                    }
+                    elsif (
+                        $Self->{JqIsAvailable}
+                        && $FieldName =~ m{\Ajq\#(.+)}msi
+                        )
+                    {
+                        my $JqExpression = $1;
+
+                        my $CompareValue;
+                        eval {
+                            $CompareValue = Jq::jq( $JqExpression, $Param{Data} );
+                        };
+
+                        if (
+                            defined $CompareValue
+                            && defined $ActualCondition->{Fields}->{$FieldName}->{Match}
+                            && $ActualCondition->{Fields}->{$FieldName}->{Match} eq $CompareValue
+                            )
+                        {
+                            $Match = 1;
+                        }
                     }
 
                     # Otherwise check if field data is and array and compare each element until
@@ -984,6 +1032,17 @@ sub _ConditionCheck {
 
     # If no condition matched till here, we failed.
     return;
+}
+
+sub _IsJqAvailable {
+    my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+
+    my $JqIsAvailable = $MainObject->Require(
+        'Jq',
+        Silent => 1,
+    );
+
+    return $JqIsAvailable;
 }
 
 1;

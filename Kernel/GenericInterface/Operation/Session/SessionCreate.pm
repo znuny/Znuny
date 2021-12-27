@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -64,15 +65,17 @@ Retrieve a new session id value.
 
     my $Result = $OperationObject->Run(
         Data => {
-            UserLogin         => 'Agent1',
+            UserLogin         => 'Agent1',          # optional, provide UserLogin or CustomerUserLogin
+            # or
             CustomerUserLogin => 'Customer1',       # optional, provide UserLogin or CustomerUserLogin
+
             Password          => 'some password',   # plain text password
         },
     );
 
     $Result = {
-        Success      => 1,                                # 0 or 1
-        ErrorMessage => '',                               # In case of an error
+        Success      => 1,                          # 0 or 1
+        ErrorMessage => '',                         # In case of an error
         Data         => {
             SessionID => $SessionID,
         },

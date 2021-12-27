@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -71,11 +72,11 @@ sub XMLHashAdd {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Type XMLHash)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(Type XMLHash)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -149,11 +150,11 @@ sub XMLHashUpdate {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Type Key XMLHash)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(Type Key XMLHash)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -186,11 +187,11 @@ sub XMLHashGet {
     my @XMLHash;
 
     # check needed stuff
-    for (qw(Type Key)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(Type Key)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -269,11 +270,11 @@ sub XMLHashDelete {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Type Key)) {
-        if ( !defined $Param{$_} ) {
+    for my $Needed (qw(Type Key)) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -313,11 +314,11 @@ sub XMLHashMove {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(OldType OldKey NewType NewKey)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(OldType OldKey NewType NewKey)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -656,7 +657,7 @@ sub XMLHash2D {
     my $Count = 0;
     for my $Item ( @{ $Param{XMLHash} } ) {
         if ( ref $Item eq 'HASH' ) {
-            for ( sort keys %{$Item} ) {
+            for my $Index ( sort keys %{$Item} ) {
                 $Self->_XMLHash2D(
                     Key     => $Item->{Tag},
                     Item    => $Item,
@@ -883,11 +884,11 @@ sub _XMLHashAddAutoIncrement {
     my @KeysExists;
 
     # check needed stuff
-    for (qw(Type KeyAutoIncrement)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(Type KeyAutoIncrement)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -936,19 +937,19 @@ sub _ElementBuild {
         $Output .= "<$Param{Key}";
     }
 
-    for ( sort keys %Param ) {
-        if ( ref $Param{$_} eq 'ARRAY' ) {
-            push @Tag, $_;
-            push @Sub, $Param{$_};
+    for my $Key ( sort keys %Param ) {
+        if ( ref $Param{$Key} eq 'ARRAY' ) {
+            push @Tag, $Key;
+            push @Sub, $Param{$Key};
         }
-        elsif ( $_ ne 'Content' && $_ ne 'Key' && $_ !~ /^Tag/ ) {
-            if ( defined $Param{$_} ) {
-                $Param{$_} =~ s/&/&amp;/g;
-                $Param{$_} =~ s/</&lt;/g;
-                $Param{$_} =~ s/>/&gt;/g;
-                $Param{$_} =~ s/"/&quot;/g;
+        elsif ( $Key ne 'Content' && $Key ne 'Key' && $Key !~ /^Tag/ ) {
+            if ( defined $Param{$Key} ) {
+                $Param{$Key} =~ s/&/&amp;/g;
+                $Param{$Key} =~ s/</&lt;/g;
+                $Param{$Key} =~ s/>/&gt;/g;
+                $Param{$Key} =~ s/"/&quot;/g;
             }
-            $Output .= " $_=\"$Param{$_}\"";
+            $Output .= " $Key=\"$Param{$Key}\"";
         }
     }
     if ( $Param{Key} ) {
@@ -966,12 +967,12 @@ sub _ElementBuild {
     else {
         $Output .= "\n";
     }
-    for ( 0 .. $#Sub ) {
-        for my $K ( @{ $Sub[$_] } ) {
-            if ( defined $K ) {
+    for my $Index ( 0 .. $#Sub ) {
+        for my $SubKey ( @{ $Sub[$Index] } ) {
+            if ( defined $SubKey ) {
                 $Output .= $Self->_ElementBuild(
-                    %{$K},
-                    Key => $Tag[$_],
+                    %{$SubKey},
+                    Key => $Tag[$Index],
                 );
             }
         }
@@ -996,8 +997,8 @@ sub _XMLHash2D {
         $Self->{XMLTagCount}++;
         $Self->{XMLLevelTag}->{ $Self->{XMLLevel} } = $Param{Key};
         if ( $Self->{Tll} && $Self->{Tll} > $Self->{XMLLevel} ) {
-            for ( ( $Self->{XMLLevel} + 1 ) .. 30 ) {
-                undef $Self->{XMLLevelCount}->{$_};    #->{$Element} = 0;
+            for my $Index ( ( $Self->{XMLLevel} + 1 ) .. 30 ) {
+                undef $Self->{XMLLevelCount}->{$Index};    #->{$Element} = 0;
             }
         }
         $Self->{XMLLevelCount}->{ $Self->{XMLLevel} }->{ $Param{Key} || '' }++;
@@ -1006,31 +1007,31 @@ sub _XMLHash2D {
         $Self->{Tll} = $Self->{XMLLevel};
 
         my $Key = "[$Param{Counter}]";
-        for ( 2 .. ( $Self->{XMLLevel} ) ) {
-            $Key .= "{'$Self->{XMLLevelTag}->{$_}'}";
-            $Key .= "[" . $Self->{XMLLevelCount}->{$_}->{ $Self->{XMLLevelTag}->{$_} } . "]";
+        for my $Index ( 2 .. ( $Self->{XMLLevel} ) ) {
+            $Key .= "{'$Self->{XMLLevelTag}->{$Index}'}";
+            $Key .= "[" . $Self->{XMLLevelCount}->{$Index}->{ $Self->{XMLLevelTag}->{$Index} } . "]";
         }
 
         # add tag key to the passed in data structure
         $Param{Item}->{TagKey} = $Key;
 
-        for ( sort keys %{ $Param{Item} } ) {
-            if ( defined $Param{Item}->{$_} && ref $Param{Item}->{$_} ne 'ARRAY' ) {
-                $Self->{XMLHash}->{ $Key . "{'$_'}" } = $Param{Item}->{$_};
+        for my $ParamKey ( sort keys %{ $Param{Item} } ) {
+            if ( defined $Param{Item}->{$ParamKey} && ref $Param{Item}->{$ParamKey} ne 'ARRAY' ) {
+                $Self->{XMLHash}->{ $Key . "{'$ParamKey'}" } = $Param{Item}->{$ParamKey};
             }
             $Self->_XMLHash2D(
-                Key     => $_,
-                Item    => $Param{Item}->{$_},
+                Key     => $ParamKey,
+                Item    => $Param{Item}->{$ParamKey},
                 Counter => $Param{Counter}
             );
         }
         $Self->{XMLLevel} = $Self->{XMLLevel} - 1;
     }
     elsif ( ref $Param{Item} eq 'ARRAY' ) {
-        for ( @{ $Param{Item} } ) {
+        for my $Item ( @{ $Param{Item} } ) {
             $Self->_XMLHash2D(
                 Key     => $Param{Key},
-                Item    => $_,
+                Item    => $Item,
                 Counter => $Param{Counter}
             );
         }
@@ -1054,8 +1055,8 @@ sub _XMLStructure2XMLHash {
         $Self->{XMLTagCount}++;
         $Self->{XMLLevelTag}->{ $Param{Item}->{TagLevel} } = $Param{Key};
         if ( $Self->{Tll} && $Self->{Tll} > $Param{Item}->{TagLevel} ) {
-            for ( ( $Param{Item}->{TagLevel} + 1 ) .. 30 ) {
-                undef $Self->{XMLLevelCount}->{$_};
+            for my $Index ( ( $Param{Item}->{TagLevel} + 1 ) .. 30 ) {
+                undef $Self->{XMLLevelCount}->{$Index};
             }
         }
         $Self->{XMLLevelCount}->{ $Param{Item}->{TagLevel} }->{ $Param{Key} }++;
@@ -1064,50 +1065,53 @@ sub _XMLStructure2XMLHash {
         $Self->{Tll} = $Param{Item}->{TagLevel};
 
         if ( $Param{Item}->{TagLevel} == 1 ) {
-            for ( sort keys %{ $Param{Item} } ) {
-                if ( !defined $Param{Item}->{$_} ) {
-                    $Param{Item}->{$_} = '';
+            for my $Item ( sort keys %{ $Param{Item} } ) {
+                if ( !defined $Param{Item}->{$Item} ) {
+                    $Param{Item}->{$Item} = '';
                 }
-                if ( $_ !~ /^Tag/ ) {
+                if ( $Item !~ /^Tag/ ) {
                     $Self->{XMLHash2}->{ $Self->{XMLLevelTag}->{1} }
-                        ->[ $Self->{XMLLevelCount}->{1}->{ $Self->{XMLLevelTag}->{1} } ]->{$_} = $Param{Item}->{$_};
+                        ->[ $Self->{XMLLevelCount}->{1}->{ $Self->{XMLLevelTag}->{1} } ]->{$Item}
+                        = $Param{Item}->{$Item};
                 }
             }
         }
         elsif ( $Param{Item}->{TagLevel} == 2 ) {
-            for ( sort keys %{ $Param{Item} } ) {
-                if ( !defined $Param{Item}->{$_} ) {
-                    $Param{Item}->{$_} = '';
+            for my $Item ( sort keys %{ $Param{Item} } ) {
+                if ( !defined $Param{Item}->{$Item} ) {
+                    $Param{Item}->{$Item} = '';
                 }
-                if ( $_ !~ /^Tag/ ) {
+                if ( $Item !~ /^Tag/ ) {
                     $Self->{XMLHash2}->{ $Self->{XMLLevelTag}->{1} }
                         ->[ $Self->{XMLLevelCount}->{1}->{ $Self->{XMLLevelTag}->{1} } ]
                         ->{ $Self->{XMLLevelTag}->{2} }
-                        ->[ $Self->{XMLLevelCount}->{2}->{ $Self->{XMLLevelTag}->{2} } ]->{$_} = $Param{Item}->{$_};
+                        ->[ $Self->{XMLLevelCount}->{2}->{ $Self->{XMLLevelTag}->{2} } ]->{$Item}
+                        = $Param{Item}->{$Item};
                 }
             }
         }
         elsif ( $Param{Item}->{TagLevel} == 3 ) {
-            for ( sort keys %{ $Param{Item} } ) {
-                if ( !defined $Param{Item}->{$_} ) {
-                    $Param{Item}->{$_} = '';
+            for my $Item ( sort keys %{ $Param{Item} } ) {
+                if ( !defined $Param{Item}->{$Item} ) {
+                    $Param{Item}->{$Item} = '';
                 }
-                if ( $_ !~ /^Tag/ ) {
+                if ( $Item !~ /^Tag/ ) {
                     $Self->{XMLHash2}->{ $Self->{XMLLevelTag}->{1} }
                         ->[ $Self->{XMLLevelCount}->{1}->{ $Self->{XMLLevelTag}->{1} } ]
                         ->{ $Self->{XMLLevelTag}->{2} }
                         ->[ $Self->{XMLLevelCount}->{2}->{ $Self->{XMLLevelTag}->{2} } ]
                         ->{ $Self->{XMLLevelTag}->{3} }
-                        ->[ $Self->{XMLLevelCount}->{3}->{ $Self->{XMLLevelTag}->{3} } ]->{$_} = $Param{Item}->{$_};
+                        ->[ $Self->{XMLLevelCount}->{3}->{ $Self->{XMLLevelTag}->{3} } ]->{$Item}
+                        = $Param{Item}->{$Item};
                 }
             }
         }
         elsif ( $Param{Item}->{TagLevel} == 4 ) {
-            for ( sort keys %{ $Param{Item} } ) {
-                if ( !defined $Param{Item}->{$_} ) {
-                    $Param{Item}->{$_} = '';
+            for my $Item ( sort keys %{ $Param{Item} } ) {
+                if ( !defined $Param{Item}->{$Item} ) {
+                    $Param{Item}->{$Item} = '';
                 }
-                if ( $_ !~ /^Tag/ ) {
+                if ( $Item !~ /^Tag/ ) {
                     $Self->{XMLHash2}->{ $Self->{XMLLevelTag}->{1} }
                         ->[ $Self->{XMLLevelCount}->{1}->{ $Self->{XMLLevelTag}->{1} } ]
                         ->{ $Self->{XMLLevelTag}->{2} }
@@ -1115,16 +1119,17 @@ sub _XMLStructure2XMLHash {
                         ->{ $Self->{XMLLevelTag}->{3} }
                         ->[ $Self->{XMLLevelCount}->{3}->{ $Self->{XMLLevelTag}->{3} } ]
                         ->{ $Self->{XMLLevelTag}->{4} }
-                        ->[ $Self->{XMLLevelCount}->{4}->{ $Self->{XMLLevelTag}->{4} } ]->{$_} = $Param{Item}->{$_};
+                        ->[ $Self->{XMLLevelCount}->{4}->{ $Self->{XMLLevelTag}->{4} } ]->{$Item}
+                        = $Param{Item}->{$Item};
                 }
             }
         }
         elsif ( $Param{Item}->{TagLevel} == 5 ) {
-            for ( sort keys %{ $Param{Item} } ) {
-                if ( !defined $Param{Item}->{$_} ) {
-                    $Param{Item}->{$_} = '';
+            for my $Item ( sort keys %{ $Param{Item} } ) {
+                if ( !defined $Param{Item}->{$Item} ) {
+                    $Param{Item}->{$Item} = '';
                 }
-                if ( $_ !~ /^Tag/ ) {
+                if ( $Item !~ /^Tag/ ) {
                     $Self->{XMLHash2}->{ $Self->{XMLLevelTag}->{1} }
                         ->[ $Self->{XMLLevelCount}->{1}->{ $Self->{XMLLevelTag}->{1} } ]
                         ->{ $Self->{XMLLevelTag}->{2} }
@@ -1134,16 +1139,17 @@ sub _XMLStructure2XMLHash {
                         ->{ $Self->{XMLLevelTag}->{4} }
                         ->[ $Self->{XMLLevelCount}->{4}->{ $Self->{XMLLevelTag}->{4} } ]
                         ->{ $Self->{XMLLevelTag}->{5} }
-                        ->[ $Self->{XMLLevelCount}->{5}->{ $Self->{XMLLevelTag}->{5} } ]->{$_} = $Param{Item}->{$_};
+                        ->[ $Self->{XMLLevelCount}->{5}->{ $Self->{XMLLevelTag}->{5} } ]->{$Item}
+                        = $Param{Item}->{$Item};
                 }
             }
         }
         elsif ( $Param{Item}->{TagLevel} == 6 ) {
-            for ( sort keys %{ $Param{Item} } ) {
-                if ( !defined $Param{Item}->{$_} ) {
-                    $Param{Item}->{$_} = '';
+            for my $Item ( sort keys %{ $Param{Item} } ) {
+                if ( !defined $Param{Item}->{$Item} ) {
+                    $Param{Item}->{$Item} = '';
                 }
-                if ( $_ !~ /^Tag/ ) {
+                if ( $Item !~ /^Tag/ ) {
                     $Self->{XMLHash2}->{ $Self->{XMLLevelTag}->{1} }
                         ->[ $Self->{XMLLevelCount}->{1}->{ $Self->{XMLLevelTag}->{1} } ]
                         ->{ $Self->{XMLLevelTag}->{2} }
@@ -1155,16 +1161,17 @@ sub _XMLStructure2XMLHash {
                         ->{ $Self->{XMLLevelTag}->{5} }
                         ->[ $Self->{XMLLevelCount}->{5}->{ $Self->{XMLLevelTag}->{5} } ]
                         ->{ $Self->{XMLLevelTag}->{6} }
-                        ->[ $Self->{XMLLevelCount}->{6}->{ $Self->{XMLLevelTag}->{6} } ]->{$_} = $Param{Item}->{$_};
+                        ->[ $Self->{XMLLevelCount}->{6}->{ $Self->{XMLLevelTag}->{6} } ]->{$Item}
+                        = $Param{Item}->{$Item};
                 }
             }
         }
         elsif ( $Param{Item}->{TagLevel} == 7 ) {
-            for ( sort keys %{ $Param{Item} } ) {
-                if ( !defined $Param{Item}->{$_} ) {
-                    $Param{Item}->{$_} = '';
+            for my $Item ( sort keys %{ $Param{Item} } ) {
+                if ( !defined $Param{Item}->{$Item} ) {
+                    $Param{Item}->{$Item} = '';
                 }
-                if ( $_ !~ /^Tag/ ) {
+                if ( $Item !~ /^Tag/ ) {
                     $Self->{XMLHash2}->{ $Self->{XMLLevelTag}->{1} }
                         ->[ $Self->{XMLLevelCount}->{1}->{ $Self->{XMLLevelTag}->{1} } ]
                         ->{ $Self->{XMLLevelTag}->{2} }
@@ -1178,16 +1185,17 @@ sub _XMLStructure2XMLHash {
                         ->{ $Self->{XMLLevelTag}->{6} }
                         ->[ $Self->{XMLLevelCount}->{6}->{ $Self->{XMLLevelTag}->{6} } ]
                         ->{ $Self->{XMLLevelTag}->{7} }
-                        ->[ $Self->{XMLLevelCount}->{7}->{ $Self->{XMLLevelTag}->{7} } ]->{$_} = $Param{Item}->{$_};
+                        ->[ $Self->{XMLLevelCount}->{7}->{ $Self->{XMLLevelTag}->{7} } ]->{$Item}
+                        = $Param{Item}->{$Item};
                 }
             }
         }
         elsif ( $Param{Item}->{TagLevel} == 8 ) {
-            for ( sort keys %{ $Param{Item} } ) {
-                if ( !defined $Param{Item}->{$_} ) {
-                    $Param{Item}->{$_} = '';
+            for my $Item ( sort keys %{ $Param{Item} } ) {
+                if ( !defined $Param{Item}->{$Item} ) {
+                    $Param{Item}->{$Item} = '';
                 }
-                if ( $_ !~ /^Tag/ ) {
+                if ( $Item !~ /^Tag/ ) {
                     $Self->{XMLHash2}->{ $Self->{XMLLevelTag}->{1} }
                         ->[ $Self->{XMLLevelCount}->{1}->{ $Self->{XMLLevelTag}->{1} } ]
                         ->{ $Self->{XMLLevelTag}->{2} }
@@ -1203,16 +1211,17 @@ sub _XMLStructure2XMLHash {
                         ->{ $Self->{XMLLevelTag}->{7} }
                         ->[ $Self->{XMLLevelCount}->{7}->{ $Self->{XMLLevelTag}->{7} } ]
                         ->{ $Self->{XMLLevelTag}->{8} }
-                        ->[ $Self->{XMLLevelCount}->{8}->{ $Self->{XMLLevelTag}->{8} } ]->{$_} = $Param{Item}->{$_};
+                        ->[ $Self->{XMLLevelCount}->{8}->{ $Self->{XMLLevelTag}->{8} } ]->{$Item}
+                        = $Param{Item}->{$Item};
                 }
             }
         }
         elsif ( $Param{Item}->{TagLevel} == 9 ) {
-            for ( sort keys %{ $Param{Item} } ) {
-                if ( !defined $Param{Item}->{$_} ) {
-                    $Param{Item}->{$_} = '';
+            for my $Item ( sort keys %{ $Param{Item} } ) {
+                if ( !defined $Param{Item}->{$Item} ) {
+                    $Param{Item}->{$Item} = '';
                 }
-                if ( $_ !~ /^Tag/ ) {
+                if ( $Item !~ /^Tag/ ) {
                     $Self->{XMLHash2}->{ $Self->{XMLLevelTag}->{1} }
                         ->[ $Self->{XMLLevelCount}->{1}->{ $Self->{XMLLevelTag}->{1} } ]
                         ->{ $Self->{XMLLevelTag}->{2} }
@@ -1230,16 +1239,17 @@ sub _XMLStructure2XMLHash {
                         ->{ $Self->{XMLLevelTag}->{8} }
                         ->[ $Self->{XMLLevelCount}->{8}->{ $Self->{XMLLevelTag}->{8} } ]
                         ->{ $Self->{XMLLevelTag}->{9} }
-                        ->[ $Self->{XMLLevelCount}->{9}->{ $Self->{XMLLevelTag}->{9} } ]->{$_} = $Param{Item}->{$_};
+                        ->[ $Self->{XMLLevelCount}->{9}->{ $Self->{XMLLevelTag}->{9} } ]->{$Item}
+                        = $Param{Item}->{$Item};
                 }
             }
         }
         elsif ( $Param{Item}->{TagLevel} == 10 ) {
-            for ( sort keys %{ $Param{Item} } ) {
-                if ( !defined $Param{Item}->{$_} ) {
-                    $Param{Item}->{$_} = '';
+            for my $Item ( sort keys %{ $Param{Item} } ) {
+                if ( !defined $Param{Item}->{$Item} ) {
+                    $Param{Item}->{$Item} = '';
                 }
-                if ( $_ !~ /^Tag/ ) {
+                if ( $Item !~ /^Tag/ ) {
                     $Self->{XMLHash2}->{ $Self->{XMLLevelTag}->{1} }
                         ->[ $Self->{XMLLevelCount}->{1}->{ $Self->{XMLLevelTag}->{1} } ]
                         ->{ $Self->{XMLLevelTag}->{2} }
@@ -1259,16 +1269,17 @@ sub _XMLStructure2XMLHash {
                         ->{ $Self->{XMLLevelTag}->{9} }
                         ->[ $Self->{XMLLevelCount}->{9}->{ $Self->{XMLLevelTag}->{9} } ]
                         ->{ $Self->{XMLLevelTag}->{10} }
-                        ->[ $Self->{XMLLevelCount}->{10}->{ $Self->{XMLLevelTag}->{10} } ]->{$_} = $Param{Item}->{$_};
+                        ->[ $Self->{XMLLevelCount}->{10}->{ $Self->{XMLLevelTag}->{10} } ]->{$Item}
+                        = $Param{Item}->{$Item};
                 }
             }
         }
         elsif ( $Param{Item}->{TagLevel} == 11 ) {
-            for ( sort keys %{ $Param{Item} } ) {
-                if ( !defined $Param{Item}->{$_} ) {
-                    $Param{Item}->{$_} = '';
+            for my $Item ( sort keys %{ $Param{Item} } ) {
+                if ( !defined $Param{Item}->{$Item} ) {
+                    $Param{Item}->{$Item} = '';
                 }
-                if ( $_ !~ /^Tag/ ) {
+                if ( $Item !~ /^Tag/ ) {
                     $Self->{XMLHash2}->{ $Self->{XMLLevelTag}->{1} }
                         ->[ $Self->{XMLLevelCount}->{1}->{ $Self->{XMLLevelTag}->{1} } ]
                         ->{ $Self->{XMLLevelTag}->{2} }
@@ -1290,16 +1301,17 @@ sub _XMLStructure2XMLHash {
                         ->{ $Self->{XMLLevelTag}->{10} }
                         ->[ $Self->{XMLLevelCount}->{10}->{ $Self->{XMLLevelTag}->{10} } ]
                         ->{ $Self->{XMLLevelTag}->{11} }
-                        ->[ $Self->{XMLLevelCount}->{11}->{ $Self->{XMLLevelTag}->{11} } ]->{$_} = $Param{Item}->{$_};
+                        ->[ $Self->{XMLLevelCount}->{11}->{ $Self->{XMLLevelTag}->{11} } ]->{$Item}
+                        = $Param{Item}->{$Item};
                 }
             }
         }
         elsif ( $Param{Item}->{TagLevel} == 12 ) {
-            for ( sort keys %{ $Param{Item} } ) {
-                if ( !defined $Param{Item}->{$_} ) {
-                    $Param{Item}->{$_} = '';
+            for my $Item ( sort keys %{ $Param{Item} } ) {
+                if ( !defined $Param{Item}->{$Item} ) {
+                    $Param{Item}->{$Item} = '';
                 }
-                if ( $_ !~ /^Tag/ ) {
+                if ( $Item !~ /^Tag/ ) {
                     $Self->{XMLHash2}->{ $Self->{XMLLevelTag}->{1} }
                         ->[ $Self->{XMLLevelCount}->{1}->{ $Self->{XMLLevelTag}->{1} } ]
                         ->{ $Self->{XMLLevelTag}->{2} }
@@ -1323,16 +1335,17 @@ sub _XMLStructure2XMLHash {
                         ->{ $Self->{XMLLevelTag}->{11} }
                         ->[ $Self->{XMLLevelCount}->{11}->{ $Self->{XMLLevelTag}->{11} } ]
                         ->{ $Self->{XMLLevelTag}->{12} }
-                        ->[ $Self->{XMLLevelCount}->{12}->{ $Self->{XMLLevelTag}->{12} } ]->{$_} = $Param{Item}->{$_};
+                        ->[ $Self->{XMLLevelCount}->{12}->{ $Self->{XMLLevelTag}->{12} } ]->{$Item}
+                        = $Param{Item}->{$Item};
                 }
             }
         }
         elsif ( $Param{Item}->{TagLevel} == 13 ) {
-            for ( sort keys %{ $Param{Item} } ) {
-                if ( !defined $Param{Item}->{$_} ) {
-                    $Param{Item}->{$_} = '';
+            for my $Item ( sort keys %{ $Param{Item} } ) {
+                if ( !defined $Param{Item}->{$Item} ) {
+                    $Param{Item}->{$Item} = '';
                 }
-                if ( $_ !~ /^Tag/ ) {
+                if ( $Item !~ /^Tag/ ) {
                     $Self->{XMLHash2}->{ $Self->{XMLLevelTag}->{1} }
                         ->[ $Self->{XMLLevelCount}->{1}->{ $Self->{XMLLevelTag}->{1} } ]
                         ->{ $Self->{XMLLevelTag}->{2} }
@@ -1358,16 +1371,17 @@ sub _XMLStructure2XMLHash {
                         ->{ $Self->{XMLLevelTag}->{12} }
                         ->[ $Self->{XMLLevelCount}->{12}->{ $Self->{XMLLevelTag}->{12} } ]
                         ->{ $Self->{XMLLevelTag}->{13} }
-                        ->[ $Self->{XMLLevelCount}->{13}->{ $Self->{XMLLevelTag}->{13} } ]->{$_} = $Param{Item}->{$_};
+                        ->[ $Self->{XMLLevelCount}->{13}->{ $Self->{XMLLevelTag}->{13} } ]->{$Item}
+                        = $Param{Item}->{$Item};
                 }
             }
         }
         elsif ( $Param{Item}->{TagLevel} == 14 ) {
-            for ( sort keys %{ $Param{Item} } ) {
-                if ( !defined $Param{Item}->{$_} ) {
-                    $Param{Item}->{$_} = '';
+            for my $Item ( sort keys %{ $Param{Item} } ) {
+                if ( !defined $Param{Item}->{$Item} ) {
+                    $Param{Item}->{$Item} = '';
                 }
-                if ( $_ !~ /^Tag/ ) {
+                if ( $Item !~ /^Tag/ ) {
                     $Self->{XMLHash2}->{ $Self->{XMLLevelTag}->{1} }
                         ->[ $Self->{XMLLevelCount}->{1}->{ $Self->{XMLLevelTag}->{1} } ]
                         ->{ $Self->{XMLLevelTag}->{2} }
@@ -1395,16 +1409,17 @@ sub _XMLStructure2XMLHash {
                         ->{ $Self->{XMLLevelTag}->{13} }
                         ->[ $Self->{XMLLevelCount}->{13}->{ $Self->{XMLLevelTag}->{13} } ]
                         ->{ $Self->{XMLLevelTag}->{14} }
-                        ->[ $Self->{XMLLevelCount}->{14}->{ $Self->{XMLLevelTag}->{14} } ]->{$_} = $Param{Item}->{$_};
+                        ->[ $Self->{XMLLevelCount}->{14}->{ $Self->{XMLLevelTag}->{14} } ]->{$Item}
+                        = $Param{Item}->{$Item};
                 }
             }
         }
         elsif ( $Param{Item}->{TagLevel} == 15 ) {
-            for ( sort keys %{ $Param{Item} } ) {
-                if ( !defined $Param{Item}->{$_} ) {
-                    $Param{Item}->{$_} = '';
+            for my $Item ( sort keys %{ $Param{Item} } ) {
+                if ( !defined $Param{Item}->{$Item} ) {
+                    $Param{Item}->{$Item} = '';
                 }
-                if ( $_ !~ /^Tag/ ) {
+                if ( $Item !~ /^Tag/ ) {
                     $Self->{XMLHash2}->{ $Self->{XMLLevelTag}->{1} }
                         ->[ $Self->{XMLLevelCount}->{1}->{ $Self->{XMLLevelTag}->{1} } ]
                         ->{ $Self->{XMLLevelTag}->{2} }
@@ -1434,7 +1449,8 @@ sub _XMLStructure2XMLHash {
                         ->{ $Self->{XMLLevelTag}->{14} }
                         ->[ $Self->{XMLLevelCount}->{14}->{ $Self->{XMLLevelTag}->{14} } ]
                         ->{ $Self->{XMLLevelTag}->{15} }
-                        ->[ $Self->{XMLLevelCount}->{15}->{ $Self->{XMLLevelTag}->{15} } ]->{$_} = $Param{Item}->{$_};
+                        ->[ $Self->{XMLLevelCount}->{15}->{ $Self->{XMLLevelTag}->{15} } ]->{$Item}
+                        = $Param{Item}->{$Item};
                 }
             }
         }
@@ -1449,15 +1465,15 @@ sub _Decode {
     # get encode object
     my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
 
-    for ( sort keys %{$A} ) {
-        if ( ref $A->{$_} eq 'ARRAY' ) {
-            for my $B ( @{ $A->{$_} } ) {
+    for my $Key ( sort keys %{$A} ) {
+        if ( ref $A->{$Key} eq 'ARRAY' ) {
+            for my $B ( @{ $A->{$Key} } ) {
                 $Self->_Decode($B);
             }
         }
 
         # decode
-        elsif ( defined $A->{$_} ) {
+        elsif ( defined $A->{$Key} ) {
 
             # check if decode is already done by parser
             if ( $Self->{XMLQuote} ) {
@@ -1467,12 +1483,12 @@ sub _Decode {
                     'gt'   => '>',
                     'quot' => '"',
                 );
-                $A->{$_} =~ s/&(amp|lt|gt|quot);/$Map{$1}/g;
+                $A->{$Key} =~ s/&(amp|lt|gt|quot);/$Map{$1}/g;
             }
 
             # convert into default charset
-            $A->{$_} = $EncodeObject->Convert(
-                Text  => $A->{$_},
+            $A->{$Key} = $EncodeObject->Convert(
+                Text  => $A->{$Key},
                 From  => 'utf-8',
                 To    => 'utf-8',
                 Force => 1,
@@ -1498,8 +1514,8 @@ sub _HS {
     $Self->{XMLLevelTag}->{ $Self->{XMLLevel} } = $Element;
 
     if ( $Self->{Tll} && $Self->{Tll} > $Self->{XMLLevel} ) {
-        for ( ( $Self->{XMLLevel} + 1 ) .. 30 ) {
-            undef $Self->{XMLLevelCount}->{$_};
+        for my $Index ( ( $Self->{XMLLevel} + 1 ) .. 30 ) {
+            undef $Self->{XMLLevelCount}->{$Index};
         }
     }
 
@@ -1509,9 +1525,9 @@ sub _HS {
     $Self->{Tll} = $Self->{XMLLevel};
 
     my $Key = '';
-    for ( 1 .. ( $Self->{XMLLevel} ) ) {
-        $Key .= "{'$Self->{XMLLevelTag}->{$_}'}";
-        $Key .= "[" . $Self->{XMLLevelCount}->{$_}->{ $Self->{XMLLevelTag}->{$_} } . "]";
+    for my $Index ( 1 .. ( $Self->{XMLLevel} ) ) {
+        $Key .= "{'$Self->{XMLLevelTag}->{$Index}'}";
+        $Key .= "[" . $Self->{XMLLevelCount}->{$Index}->{ $Self->{XMLLevelTag}->{$Index} } . "]";
     }
 
     $Self->{LastTag} = {

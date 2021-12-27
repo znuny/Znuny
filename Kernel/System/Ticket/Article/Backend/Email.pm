@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -21,6 +22,7 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::CustomerUser',
     'Kernel::System::DB',
+    'Kernel::System::DateTime',
     'Kernel::System::Email',
     'Kernel::System::HTMLUtils',
     'Kernel::System::Log',
@@ -30,8 +32,6 @@ our @ObjectDependencies = (
     'Kernel::System::TemplateGenerator',
     'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
-    'Kernel::System::DateTime',
-    'Kernel::System::MailQueue',
 );
 
 =head1 NAME

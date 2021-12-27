@@ -686,10 +686,6 @@ $Self->{'CustomerUser::EventModulePost'}->{'1000-GenericInterface'} =  {
   'Module' => 'Kernel::GenericInterface::Event::Handler',
   'Transaction' => '1'
 };
-$Self->{'Frontend::NotifyModule'}->{'100-CloudServicesDisabled'} =  {
-  'Group' => 'admin',
-  'Module' => 'Kernel::Output::HTML::Notification::AgentCloudServicesDisabled'
-};
 $Self->{'Frontend::NotifyModule'}->{'100-OTRSBusiness'} =  {
   'Group' => 'admin',
   'Module' => 'Kernel::Output::HTML::Notification::AgentOTRSBusiness'

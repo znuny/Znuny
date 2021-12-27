@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -16,7 +17,6 @@ use parent qw(Kernel::System::EventHandler);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
-    'Kernel::System::Cache',
     'Kernel::System::CommunicationChannel',
     'Kernel::System::DB',
     'Kernel::System::DynamicField',
@@ -25,6 +25,8 @@ our @ObjectDependencies = (
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::Ticket::Article',
+
+    #     'Kernel::System::Ticket::Article::Backend::MyBackend',
 );
 
 =head1 NAME

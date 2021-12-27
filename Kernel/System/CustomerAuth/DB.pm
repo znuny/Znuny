@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -274,7 +275,7 @@ sub Auth {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'notice',
             Message =>
-                "CustomerUser: $User authentication without Pw!!! (REMOTE_ADDR: $RemoteAddr)",
+                "CustomerUser: $User authentication without password (REMOTE_ADDR: $RemoteAddr)",
         );
         return;
     }
@@ -283,7 +284,7 @@ sub Auth {
     elsif ( ( $GetPw && $User && $UserID ) && $CryptedPw eq $GetPw ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'notice',
-            Message  => "CustomerUser: $User Authentication ok (REMOTE_ADDR: $RemoteAddr).",
+            Message  => "CustomerUser: $User Authentication OK (REMOTE_ADDR: $RemoteAddr).",
         );
         return $User;
     }
@@ -293,7 +294,7 @@ sub Auth {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'notice',
             Message =>
-                "CustomerUser: $User Authentication with wrong Pw!!! (REMOTE_ADDR: $RemoteAddr)"
+                "CustomerUser: $User Authentication with wrong password (REMOTE_ADDR: $RemoteAddr)"
         );
         return;
     }
@@ -303,7 +304,7 @@ sub Auth {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'notice',
             Message =>
-                "CustomerUser: $User doesn't exist or is invalid!!! (REMOTE_ADDR: $RemoteAddr)"
+                "CustomerUser: $User doesn't exist, is invalid or has no password set (REMOTE_ADDR: $RemoteAddr)"
         );
         return;
     }

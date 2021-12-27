@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -1367,6 +1368,7 @@ my @Tests = (
                         NameSpace         => 'http://otrs.org/SoapTestInterface/',
                         Endpoint          => $RemoteSystem,
                         RequestNameScheme => 'Request',
+                        NoNameSpace       => 1,
                     },
                 },
                 Operation => {
@@ -1404,8 +1406,9 @@ my @Tests = (
             Key => 'Value',
         },
         ExpectedReturnData => {
-            Success      => 0,
-            ErrorMessage => 'faultcode: Server, faultstring: Got no OperationType!',
+            Success => 0,
+            ErrorMessage =>
+                "faultcode: Server, faultstring: Operation from SOAP data 'PriorityIDNameRequest' does not match operation from SOAPAction 'PriorityIDName'",
 
         },
         WebserviceConfig => {
@@ -1480,6 +1483,7 @@ my @Tests = (
                         NameSpace         => 'http://otrs.org/SoapTestInterface/',
                         Endpoint          => $RemoteSystem,
                         RequestNameScheme => 'Request',
+                        NoNameSpace       => 1,
                     },
                 },
                 Operation => {
@@ -1517,8 +1521,9 @@ my @Tests = (
             Key => 'Value',
         },
         ExpectedReturnData => {
-            Success      => 0,
-            ErrorMessage => 'faultcode: Server, faultstring: Got no OperationType!',
+            Success => 0,
+            ErrorMessage =>
+                "faultcode: Server, faultstring: Operation from SOAP data 'PriorityIDNameRequest' does not match operation from SOAPAction 'PriorityIDName'",
 
         },
         WebserviceConfig => {
@@ -1570,14 +1575,15 @@ my @Tests = (
 
     {
         Name           => 'Test 23',
-        SuccessRequest => '0',
+        SuccessRequest => '1',
         RequestData    => {
             Key => 'Value',
         },
         ExpectedReturnData => {
-            Success      => 0,
-            ErrorMessage => 'faultcode: Server, faultstring: Got no OperationType!',
-
+            Success => 1,
+            Data    => {
+                Key => 'Value',
+            },
         },
         WebserviceConfig => {
             Name        => 'SOAPTest1',
@@ -1960,8 +1966,9 @@ my @Tests = (
             Key => 'Value',
         },
         ExpectedReturnData => {
-            Success      => 0,
-            ErrorMessage => 'faultcode: Server, faultstring: Got no OperationType!',
+            Success => 0,
+            ErrorMessage =>
+                "faultcode: Server, faultstring: Operation from SOAP data 'PriorityIDNameName' does not match operation from SOAPAction 'PriorityIDName'",
 
         },
         WebserviceConfig => {
@@ -2033,10 +2040,11 @@ my @Tests = (
                 Transport => {
                     Type   => 'HTTP::SOAP',
                     Config => {
-                        MaxLength  => 10000000,
-                        NameSpace  => 'http://otrs.org/SoapTestInterface/',
-                        Endpoint   => $RemoteSystem,
-                        SOAPAction => 'No',
+                        MaxLength   => 10000000,
+                        NameSpace   => 'http://otrs.org/SoapTestInterface/',
+                        Endpoint    => $RemoteSystem,
+                        SOAPAction  => 'No',
+                        NoNameSpace => 1,
                     },
                 },
                 Operation => {
@@ -2534,8 +2542,9 @@ my @Tests = (
                 Transport => {
                     Type   => 'HTTP::SOAP',
                     Config => {
-                        MaxLength => 10000000,
-                        NameSpace => 'http://otrs.org/SoapTestInterface/',
+                        MaxLength   => 10000000,
+                        NameSpace   => 'http://otrs.org/SoapTestInterface/',
+                        NoNameSpace => 1,
                     },
                 },
                 Operation => {
@@ -2645,8 +2654,9 @@ my @Tests = (
                 Transport => {
                     Type   => 'HTTP::SOAP',
                     Config => {
-                        MaxLength => 10000000,
-                        NameSpace => 'http://otrs.org/SoapTestInterface/',
+                        MaxLength   => 10000000,
+                        NameSpace   => 'http://otrs.org/SoapTestInterface/',
+                        NoNameSpace => 1,
                     },
                 },
                 Operation => {
@@ -2764,6 +2774,7 @@ my @Tests = (
                         SOAPAction          => 'Yes',
                         SOAPActionScheme    => 'SeparatorOperation',
                         SOAPActionSeparator => '/',
+                        NoNameSpace         => 1,
                     },
                 },
                 Operation => {
@@ -2878,6 +2889,7 @@ my @Tests = (
                         SOAPAction         => 'Yes',
                         SOAPActionScheme   => 'FreeText',
                         SOAPActionFreeText => 'SoapTestInterface',
+                        NoNameSpace        => 1,
                     },
                 },
                 Operation => {
@@ -2936,6 +2948,7 @@ my @Tests = (
                         SOAPAction          => 'Yes',
                         SOAPActionScheme    => 'NameSpaceSeparatorOperation',
                         SOAPActionSeparator => '/',
+                        NoNameSpace         => 1,
                     },
                 },
                 Operation => {

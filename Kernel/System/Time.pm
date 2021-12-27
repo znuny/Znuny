@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -16,7 +17,7 @@ use Kernel::System::DateTime;
 use Kernel::System::VariableCheck qw( IsArrayRefWithData IsHashRefWithData );
 
 our @ObjectDependencies = (
-    'Kernel::Config',
+    'Kernel::System::DateTime',
     'Kernel::System::Log',
 );
 
@@ -340,11 +341,11 @@ sub Date2SystemTime {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Year Month Day Hour Minute Second)) {
-        if ( !defined $Param{$_} ) {
+    for my $Needed (qw(Year Month Day Hour Minute Second)) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!",
+                Message  => "Need $Needed!",
             );
             return;
         }
@@ -438,11 +439,11 @@ sub WorkingTime {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(StartTime StopTime)) {
-        if ( !defined $Param{$_} ) {
+    for my $Needed (qw(StartTime StopTime)) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!",
+                Message  => "Need $Needed!",
             );
             return;
         }
@@ -519,11 +520,11 @@ sub DestinationTime {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw( StartTime Time )) {
-        if ( !defined $Param{$_} ) {
+    for my $Needed (qw( StartTime Time )) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!",
+                Message  => "Need $Needed!",
             );
             return;
         }
@@ -577,11 +578,11 @@ sub VacationCheck {
     my ( $Self, %Param ) = @_;
 
     # check required params
-    for (qw(Year Month Day)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(Year Month Day)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "VacationCheck: Need $_!",
+                Message  => "VacationCheck: Need $Needed!",
             );
             return;
         }

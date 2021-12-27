@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -17,13 +18,12 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Calendar',
     'Kernel::System::Calendar::Appointment',
+    'Kernel::System::CalendarTemplateGenerator',
     'Kernel::System::DateTime',
     'Kernel::System::Group',
     'Kernel::System::JSON',
     'Kernel::System::Log',
     'Kernel::System::NotificationEvent',
-    'Kernel::System::CalendarTemplateGenerator',
-    'Kernel::System::Ticket',
     'Kernel::System::User',
 );
 

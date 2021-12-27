@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -196,7 +197,9 @@ sub Run {
     );
 
     my $FunctionResult = $InvokerObject->PrepareRequest(
-        Data => $Param{Data},
+        Webservice  => $Webservice,
+        InvokerName => $Param{Invoker},
+        Data        => $Param{Data},
     );
 
     if ( !$FunctionResult->{Success} ) {
@@ -307,8 +310,10 @@ sub Run {
 
     # Read request content.
     $FunctionResult = $TransportObject->RequesterPerformRequest(
-        Operation => $Param{Invoker},
-        Data      => $DataOut,
+        Webservice => $Webservice,
+        Sort       => $RequesterConfig->{Invoker}->{ $Param{Invoker} }->{SortOutbound},
+        Operation  => $Param{Invoker},
+        Data       => $DataOut,
     );
 
     my $IsAsynchronousCall = $Param{Asynchronous} ? 1 : 0;
@@ -350,10 +355,10 @@ sub Run {
     # Extend the data include payload.
     $DataInclude{RequesterResponseInput} = $FunctionResult->{Data};
 
-    my $DataIn      = $FunctionResult->{Data};
-    my $SizeExeeded = $FunctionResult->{SizeExeeded} || 0;
+    my $DataIn       = $FunctionResult->{Data};
+    my $SizeExceeded = $FunctionResult->{SizeExceeded} || 0;
 
-    if ($SizeExeeded) {
+    if ($SizeExceeded) {
         $DebuggerObject->Debug(
             Summary => "Incoming data before mapping was too large for logging",
             Data => 'See SysConfig option GenericInterface::Operation::ResponseLoggingMaxSize to change the maximum.',
@@ -415,7 +420,7 @@ sub Run {
 
         $DataIn = $FunctionResult->{Data};
 
-        if ($SizeExeeded) {
+        if ($SizeExceeded) {
             $DebuggerObject->Debug(
                 Summary => "Incoming data after mapping was too large for logging",
                 Data =>

@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -117,6 +118,12 @@ sub Run {
     # To store the clean new configuration locally.
     my $TransportConfig;
 
+    my @PossibleParserBackends = qw(JSON);
+
+    # This can be used in the future, when additional parser backends will be added
+    # which need parameters.
+    my %ParserBackendParameters;
+
     # Get requester specific settings.
     if ( $CommunicationType eq 'Requester' ) {
 
@@ -128,6 +135,10 @@ sub Run {
             $Error{ $Needed . 'ServerError' }        = 'ServerError';
             $Error{ $Needed . 'ServerErrorMessage' } = Translatable('This field is required');
         }
+
+        # optional
+        $TransportConfig->{SSLNoHostnameVerification} = $GetParam->{SSLNoHostnameVerification} || 0;
+        $TransportConfig->{ContentType}               = $GetParam->{ContentType};
 
         # Set error for non integer content.
         if ( $GetParam->{Timeout} && !IsInteger( $GetParam->{Timeout} ) ) {
@@ -258,15 +269,46 @@ sub Run {
                 my @RequestMethod = $ParamObject->GetArray(
                     Param => 'RequestMethod' . $CurrentOperation,
                 );
-                next OPERATION if !scalar @RequestMethod;
 
                 $TransportConfig->{RouteOperationMapping}->{$CurrentOperation}->{RequestMethod} = \@RequestMethod;
+
+                my $ParserBackend = $ParamObject->GetParam( Param => 'ParserBackend' . $CurrentOperation );
+
+                if ( !$ParserBackend ) {
+                    $Error{ 'ParserBackend' . $CurrentOperation . 'ServerError' }        = 'ServerError';
+                    $Error{ 'ParserBackend' . $CurrentOperation . 'ServerErrorMessage' } = 'This field is required';
+                    next OPERATION;
+                }
+
+                if ( !grep { $ParserBackend eq $_ } @PossibleParserBackends ) {
+                    $Error{ 'ParserBackend' . $CurrentOperation . 'ServerError' }        = 'ServerError';
+                    $Error{ 'ParserBackend' . $CurrentOperation . 'ServerErrorMessage' } = 'Invalid selection';
+                    next OPERATION;
+                }
+                $TransportConfig->{RouteOperationMapping}->{$CurrentOperation}->{ParserBackend} = $ParserBackend;
+
+                next OPERATION if !IsArrayRefWithData( $ParserBackendParameters{$ParserBackend} );
+
+                my @PossibleParserBackendParameters = @{ $ParserBackendParameters{$ParserBackend} };
+
+                BACKENDPARAM:
+                for my $CurrentPossibleBackendParameter (@PossibleParserBackendParameters) {
+
+                    my $CurrentValue = $ParamObject->GetParam(
+                        Param => 'ParserBackendParameter' . $CurrentPossibleBackendParameter . $CurrentOperation
+                    );
+
+                    next BACKENDPARAM if !defined $CurrentValue;
+
+                    $TransportConfig->{RouteOperationMapping}->{$CurrentOperation}->{ParserBackendParameter}
+                        ->{$CurrentPossibleBackendParameter} = $CurrentValue;
+                }
             }
         }
-
-        # Get additional headers.
-        $TransportConfig->{AdditionalHeaders} = $Self->_GetAdditionalHeaders();
     }
+
+    # Get additional headers.
+    $TransportConfig->{AdditionalHeaders} = $Self->_GetAdditionalHeaders();
 
     # Set new configuration.
     $WebserviceData->{Config}->{$CommunicationType}->{Transport}->{Config} = $TransportConfig;
@@ -344,10 +386,32 @@ sub _ShowEdit {
         $Param{$ParamName} = $TransportConfig->{Proxy}->{$ParamName};
     }
 
+    $Param{SSLNoHostnameVerification} = $TransportConfig->{SSLNoHostnameVerification};
+    $Param{ContentType}               = $TransportConfig->{ContentType};
+
     my @PossibleRequestMethods = qw(GET POST PUT PATCH DELETE HEAD OPTIONS CONNECT TRACE);
+    my @PossibleParserBackends = qw(JSON);
+
+    # This can be used in the future, when additional parser backends will be added
+    # which need parameters.
+    my %ParserBackendParameters;
 
     # Check if communication type is requester.
     if ( $Param{CommunicationType} eq 'Requester' ) {
+
+        # create ContentType select
+        $Param{ContentTypeStrg} = $LayoutObject->BuildSelection(
+            Data          => [ 'JSON', 'FORM', 'XML' ],
+            Name          => 'ContentType',
+            SelectedValue => $Param{ContentType} // '-',
+            PossibleNone  => 1,
+            Sort          => 'AlphanumericValue',
+            Class         => 'Modernize',
+        );
+
+        if ( $Param{SSLNoHostnameVerification} ) {
+            $Param{SSLNoHostnameVerificationChecked} = 'checked="checked"';
+        }
 
         # create default command types select
         $Param{DefaultCommandStrg} = $LayoutObject->BuildSelection(
@@ -413,8 +477,7 @@ sub _ShowEdit {
 
         # Hide and disable Proxy options if they are not selected.
         $Param{ProxyHidden} = 'Hidden';
-        if ( $Param{UseProxy} && $Param{UseProxy} eq 'Yes' )
-        {
+        if ( $Param{UseProxy} && $Param{UseProxy} eq 'Yes' ) {
             $Param{ProxyHidden} = '';
         }
 
@@ -433,8 +496,7 @@ sub _ShowEdit {
 
         # Hide and disable SSL options if they are not selected.
         $Param{SSLHidden} = 'Hidden';
-        if ( $Param{UseSSL} && $Param{UseSSL} eq 'Yes' )
-        {
+        if ( $Param{UseSSL} && $Param{UseSSL} eq 'Yes' ) {
             $Param{SSLHidden} = '';
         }
 
@@ -478,6 +540,7 @@ sub _ShowEdit {
         my $Operations = $Param{WebserviceData}->{Config}->{ $Param{CommunicationType} }->{Operation};
         if ( IsHashRefWithData($Operations) ) {
 
+            OPERATION:
             for my $CurrentOperation ( sort keys %{$Operations} ) {
 
                 my $RequestMethodStrg = $LayoutObject->BuildSelection(
@@ -491,12 +554,23 @@ sub _ShowEdit {
                     Class        => 'Modernize',
                 );
 
+                my $ParserBackendStrg = $LayoutObject->BuildSelection(
+                    Data          => \@PossibleParserBackends,
+                    Name          => 'ParserBackend' . $CurrentOperation,
+                    SelectedValue => $TransportConfig->{RouteOperationMapping}->{$CurrentOperation}->{ParserBackend}
+                        || 'JSON',
+                    PossibleNone => 0,
+                    Sort         => 'AlphanumericValue',
+                    Class        => 'Modernize',
+                );
+
                 $LayoutObject->Block(
                     Name => 'RouteOperationMapping',
                     Data => {
                         Operation         => $CurrentOperation,
                         Route             => $TransportConfig->{RouteOperationMapping}->{$CurrentOperation}->{Route},
                         RequestMethodStrg => $RequestMethodStrg,
+                        ParserBackendStrg => $ParserBackendStrg,
                         ServerError => $Param{ 'RouteOperationMapping' . $CurrentOperation . 'ServerError' } || '',
                         ServerErrorMessage => $Param{
                             'RouteOperationMapping'
@@ -520,40 +594,40 @@ sub _ShowEdit {
             Translation  => 1,
             Class        => 'Modernize',
         );
-
-        $LayoutObject->Block(
-            Name => 'AdditionalHeaders',
-            Data => {
-                %Param,
-            },
-        );
-
-        # Output the possible values and errors within (if any).
-        my $ValueCounter = 1;
-        for my $Key ( sort keys %{ $Param{AdditionalHeaders} || {} } ) {
-            $LayoutObject->Block(
-                Name => 'ValueRow',
-                Data => {
-                    Key          => $Key,
-                    ValueCounter => $ValueCounter,
-                    Value        => $Param{AdditionalHeaders}->{$Key},
-                },
-            );
-
-            $ValueCounter++;
-        }
-
-        # Create the possible values template.
-        $LayoutObject->Block(
-            Name => 'ValueTemplate',
-            Data => {
-                %Param,
-            },
-        );
-
-        # Set value counter.
-        $Param{ValueCounter} = $ValueCounter;
     }
+
+    $LayoutObject->Block(
+        Name => 'AdditionalHeaders',
+        Data => {
+            %Param,
+        },
+    );
+
+    # Output the possible values and errors within (if any).
+    my $ValueCounter = 1;
+    for my $Key ( sort keys %{ $Param{AdditionalHeaders} || {} } ) {
+        $LayoutObject->Block(
+            Name => 'ValueRow',
+            Data => {
+                Key          => $Key,
+                ValueCounter => $ValueCounter,
+                Value        => $Param{AdditionalHeaders}->{$Key},
+            },
+        );
+
+        $ValueCounter++;
+    }
+
+    # Create the possible values template.
+    $LayoutObject->Block(
+        Name => 'ValueTemplate',
+        Data => {
+            %Param,
+        },
+    );
+
+    # Set value counter.
+    $Param{ValueCounter} = $ValueCounter;
 
     $Output .= $LayoutObject->Output(
         TemplateFile => 'AdminGenericInterfaceTransportHTTPREST',
@@ -578,6 +652,7 @@ sub _GetParams {
         AuthType BasicAuthUser BasicAuthPassword
         UseProxy ProxyHost ProxyUser ProxyPassword ProxyExclude
         UseSSL SSLCertificate SSLKey SSLPassword SSLCAFile SSLCADir
+        SSLNoHostnameVerification ContentType
         )
         )
     {

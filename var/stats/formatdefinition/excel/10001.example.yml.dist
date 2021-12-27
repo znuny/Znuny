@@ -1,0 +1,35 @@
+---
+Name: Worksheet 12345
+FreezePanes:
+  - Column: 0
+    Row: 1
+1:
+  Format:
+    align: center
+    bg_color: silver
+    bold: 1
+    border: 1
+    valign: vcentre
+D:
+  Format:
+    align: center
+    bold: 1
+    color: red
+    valign: vcentre
+H:
+  Format:
+    align: center
+    bold: 1
+    bg_color: ccffff
+    color: ED053B
+    valign: vcentre
+B3:
+  Format:
+    bold: 1
+LASTROW:
+  Format:
+    bold: 1
+    bottom: 1
+LASTCOLUMN:
+  Format:
+    border: 1

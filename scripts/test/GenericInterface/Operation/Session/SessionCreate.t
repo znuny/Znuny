@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -49,7 +50,7 @@ $Self->Is(
 );
 
 # set web service name
-my $WebserviceName = '-Test-' . $RandomID;
+my $WebserviceName = 'Operation::Session::SessionCreate-Test-' . $RandomID;
 
 my $WebserviceID = $WebserviceObject->WebserviceAdd(
     Name   => $WebserviceName,
@@ -86,7 +87,6 @@ my $RemoteSystem =
 
 my $WebserviceConfig = {
 
-    #    Name => '',
     Description =>
         'Test for Ticket Connector using SOAP transport backend.',
     Debugger => {

@@ -5,6 +5,8 @@
 # Copyright (C) 2007 Aron Ujvari <ujvari@hungary.com>
 # Copyright (C) 2009 Arnold Matyasi <arn@webma.hu>
 # Copyright (C) 2013 Csaba Németh <csaba@sopron.hu>
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -1352,12 +1354,12 @@ sub Data {
         'Please visit our customer portal and file a request.' => 'Látogassa meg az ügyfélportálunkat, és küldjön egy kérést.',
         'Everything else will be done as part of your contract.' => 'Minden más a szerződése részeként fog történni.',
         'Your installed OTRS version is %s.' => 'A telepített OTRS verziója %s.',
-        'To install this package, you need to update to OTRS %s or higher.' =>
+        'To install this package, you need to update to Znuny %s or higher.' =>
             'A csomag telepítéséhez frissítenie kell az OTRS %s vagy magasabb verziójára.',
         'To install this package, the Maximum OTRS Version is %s.' => 'A csomag telepítéséhez a legmagasabb OTRS verzió %s.',
         'To install this package, the required Framework version is %s.' =>
             'A csomag telepítéséhez a szükséges keretrendszer-verzió %s.',
-        'Why should I keep OTRS up to date?' => 'Miért kell naprakészen tartanom az OTRS-t?',
+        'Why should I keep Znuny up to date?' => 'Miért kell naprakészen tartanom az Znuny-t?',
         'You will receive updates about relevant security issues.' => 'Frissítéseket fog kapni a fontos biztonsági problémákról.',
         'You will receive updates for all other relevant OTRS issues' => 'Frissítéseket fog kapni minden egyéb fontos OTRS problémáról',
         'With your existing contract you can only use a small part of the %s.' =>
@@ -1415,19 +1417,19 @@ sub Data {
             'Valóban újra szeretné telepíteni ezt a csomagot? Minden kézi változtatás el fog veszni.',
         'Go to updating instructions' => 'Ugrás a frissítési utasításokhoz',
         'package information' => 'csomaginformációk',
-        'Package installation requires a patch level update of OTRS.' => 'A csomagtelepítés az OTRS hibajavító szintű frissítését igényli.',
-        'Package update requires a patch level update of OTRS.' => 'A csomagfrissítés az OTRS hibajavító szintű frissítését igényli.',
+        'Package installation requires a patch level update of Znuny.' => 'A csomagtelepítés az Znuny hibajavító szintű frissítését igényli.',
+        'Package update requires a patch level update of Znuny.' => 'A csomagfrissítés az Znuny hibajavító szintű frissítését igényli.',
         'If you are a OTRS Business Solution™ customer, please visit our customer portal and file a request.' =>
             'Ha Ön OTRS Business Solution™ ügyfél, akkor látogassa meg az ügyfélportálunkat, és küldjön egy kérést.',
-        'Please note that your installed OTRS version is %s.' => 'Ne feledje, hogy a telepített OTRS verziója %s.',
-        'To install this package, you need to update OTRS to version %s or newer.' =>
-            'A csomag telepítéséhez frissítenie kell az OTRS-t %s vagy újabb verzióra.',
-        'This package can only be installed on OTRS version %s or older.' =>
-            'Ez a csomag csak az OTRS %s vagy régebbi verziójára telepíthető.',
-        'This package can only be installed on OTRS version %s or newer.' =>
-            'Ez a csomag csak az OTRS %s vagy újabb verziójára telepíthető.',
-        'You will receive updates for all other relevant OTRS issues.' =>
-            'Frissítéseket fog kapni minden egyéb fontos OTRS problémáról.',
+        'Please note that your installed Znuny version is %s.' => 'Ne feledje, hogy a telepített Znuny verziója %s.',
+        'To install this package, you need to update Znuny to version %s or newer.' =>
+            'A csomag telepítéséhez frissítenie kell az Znuny-t %s vagy újabb verzióra.',
+        'This package can only be installed on Znuny version %s or older.' =>
+            'Ez a csomag csak az Znuny %s vagy régebbi verziójára telepíthető.',
+        'This package can only be installed on Znuny version %s or newer.' =>
+            'Ez a csomag csak az Znuny %s vagy újabb verziójára telepíthető.',
+        'You will receive updates for all other relevant Znuny issues.' =>
+            'Frissítéseket fog kapni minden egyéb fontos Znuny problémáról.',
         'How can I do a patch level update if I don’t have a contract?' =>
             'Hogyan végezhetek hibajavító szintű frissítést, ha nincs szerződésem?',
         'Please find all relevant information within the updating instructions at %s.' =>
@@ -4633,9 +4635,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/LinkObject/Ticket.pm
         'Archive search' => 'Archívum keresés',
-
-        # Perl Module: Kernel/Output/HTML/Notification/AgentCloudServicesDisabled.pm
-        'Enable cloud services to unleash all OTRS features!' => 'Engedélyezze a felhőszolgáltatásokat az összes OTRS funkció feloldásához!',
 
         # Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
         '%s Upgrade to %s now! %s' => '%s Frissítés erre most: %s! %s',

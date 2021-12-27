@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -12,21 +13,12 @@ use strict;
 use warnings;
 
 use Exporter qw(import);
+use Package::Stash;
+
+my @Tags = Package::Stash->new('Kernel::System::VariableCheck')->list_all_symbols('CODE');
+
 our %EXPORT_TAGS = (    ## no critic
-    all => [
-        'IsArrayRefWithData',
-        'IsHashRefWithData',
-        'IsInteger',
-        'IsIPv4Address',
-        'IsIPv6Address',
-        'IsMD5Sum',
-        'IsNotEqual',
-        'IsNumber',
-        'IsPositiveInteger',
-        'IsString',
-        'IsStringWithData',
-        'DataIsDifferent',
-    ],
+    all => \@Tags,
 );
 Exporter::export_ok_tags('all');
 

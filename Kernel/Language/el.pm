@@ -1,6 +1,8 @@
 # --
 # Copyright (C) 2006 Stelios Maistros <smaistros aegean.gr>
 # Copyright (C) 2006 George Thomas <gthomas aegean.gr>
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -1350,12 +1352,12 @@ sub Data {
         'Please visit our customer portal and file a request.' => '',
         'Everything else will be done as part of your contract.' => '',
         'Your installed OTRS version is %s.' => '',
-        'To install this package, you need to update to OTRS %s or higher.' =>
+        'To install this package, you need to update to Znuny %s or higher.' =>
             '',
         'To install this package, the Maximum OTRS Version is %s.' => '',
         'To install this package, the required Framework version is %s.' =>
             '',
-        'Why should I keep OTRS up to date?' => '',
+        'Why should I keep Znuny up to date?' => '',
         'You will receive updates about relevant security issues.' => '',
         'You will receive updates for all other relevant OTRS issues' => '',
         'With your existing contract you can only use a small part of the %s.' =>
@@ -1414,18 +1416,18 @@ sub Data {
             '',
         'Go to updating instructions' => '',
         'package information' => '',
-        'Package installation requires a patch level update of OTRS.' => '',
-        'Package update requires a patch level update of OTRS.' => '',
+        'Package installation requires a patch level update of Znuny.' => '',
+        'Package update requires a patch level update of Znuny.' => '',
         'If you are a OTRS Business Solution™ customer, please visit our customer portal and file a request.' =>
             '',
-        'Please note that your installed OTRS version is %s.' => '',
-        'To install this package, you need to update OTRS to version %s or newer.' =>
+        'Please note that your installed Znuny version is %s.' => '',
+        'To install this package, you need to update Znuny to version %s or newer.' =>
             '',
-        'This package can only be installed on OTRS version %s or older.' =>
+        'This package can only be installed on Znuny version %s or older.' =>
             '',
-        'This package can only be installed on OTRS version %s or newer.' =>
+        'This package can only be installed on Znuny version %s or newer.' =>
             '',
-        'You will receive updates for all other relevant OTRS issues.' =>
+        'You will receive updates for all other relevant Znuny issues.' =>
             '',
         'How can I do a patch level update if I don’t have a contract?' =>
             '',
@@ -4634,9 +4636,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/LinkObject/Ticket.pm
         'Archive search' => '',
-
-        # Perl Module: Kernel/Output/HTML/Notification/AgentCloudServicesDisabled.pm
-        'Enable cloud services to unleash all OTRS features!' => 'Ενεργοποίηση των υπηρεσιών cloud για τα πλήρη χαρακτηριστικά του OTRS!',
 
         # Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
         '%s Upgrade to %s now! %s' => '',

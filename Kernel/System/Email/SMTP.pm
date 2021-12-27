@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -15,10 +16,8 @@ use Net::SMTP;
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::System::DB',
     'Kernel::System::Encode',
     'Kernel::System::Log',
-    'Kernel::System::CommunicationLog',
 );
 
 sub new {
@@ -200,19 +199,19 @@ sub Send {
     );
 
     # check needed stuff
-    for (qw(Header Body ToArray)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(Header Body ToArray)) {
+        if ( !$Param{$Needed} ) {
 
             $Param{CommunicationLogObject}->ObjectLog(
                 ObjectLogType => 'Message',
                 Priority      => 'Error',
                 Key           => 'Kernel::System::Email::SMTP',
-                Value         => "Need $_!",
+                Value         => "Need $Needed!",
             );
 
             return $Self->_SendError(
                 %Param,
-                ErrorMessage => "Need $_!",
+                ErrorMessage => "Need $Needed!",
             );
         }
     }
@@ -385,11 +384,11 @@ sub _Connect {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(MailHost FQDN)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(MailHost FQDN)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!",
+                Message  => "Need $Needed!",
             );
             return;
         }

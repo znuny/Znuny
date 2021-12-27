@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -324,10 +325,8 @@ sub new {
     if ( $Self->{Config}->{IsProcessWidget} ) {
 
         # get process management configuration
-        $Self->{ProcessManagementProcessID}
-            = $Kernel::OM->Get('Kernel::Config')->Get('Process::DynamicFieldProcessManagementProcessID');
-        $Self->{ProcessManagementActivityID}
-            = $Kernel::OM->Get('Kernel::Config')->Get('Process::DynamicFieldProcessManagementActivityID');
+        $Self->{ProcessManagementProcessID}  = $ConfigObject->Get('Process::DynamicFieldProcessManagementProcessID');
+        $Self->{ProcessManagementActivityID} = $ConfigObject->Get('Process::DynamicFieldProcessManagementActivityID');
 
         # get the list of processes in the system
         my $ProcessListHash = $Kernel::OM->Get('Kernel::System::ProcessManagement::Process')->ProcessList(
@@ -2185,15 +2184,10 @@ sub _ColumnFilterJSON {
 
         my %Values = %{ $Param{ColumnValues} };
 
-        # Keys must be link encoded for dynamic fields because they are added to URL during filtering
-        # and can contain characters like '&', ';', etc.
-        # See bug#14497 - https://bugs.otrs.org/show_bug.cgi?id=14497.
-        my $Encoding = ( $Param{ColumnName} =~ m/^DynamicField_/ ) ? 1 : 0;
-
         # Set possible values.
         for my $ValueKey ( sort { lc $Values{$a} cmp lc $Values{$b} } keys %Values ) {
             push @{$Data}, {
-                Key   => $Encoding ? $LayoutObject->LinkEncode($ValueKey) : $ValueKey,
+                Key   => $ValueKey,
                 Value => $Values{$ValueKey}
             };
         }

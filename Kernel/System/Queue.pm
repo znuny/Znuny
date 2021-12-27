@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -22,7 +23,6 @@ our @ObjectDependencies = (
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::StandardTemplate',
-    'Kernel::System::SysConfig',
     'Kernel::System::Valid',
 );
 
@@ -775,7 +775,7 @@ sub QueueAdd {
 
     # check if this request is from web and not from command line
     if ( !$Param{NoDefaultValues} ) {
-        for (
+        for my $Key (
             qw(UnlockTimeout FirstResponseTime FirstResponseNotify UpdateTime UpdateNotify SolutionTime SolutionNotify
             FollowUpLock SystemAddressID SalutationID SignatureID
             FollowUpID FollowUpLock DefaultSignKey Calendar)
@@ -783,17 +783,17 @@ sub QueueAdd {
         {
 
             # I added default values in the Load Routine
-            if ( !$Param{$_} ) {
-                $Param{$_} = $Self->{QueueDefaults}->{$_} || 0;
+            if ( !$Param{$Key} ) {
+                $Param{$Key} = $Self->{QueueDefaults}->{$Key} || 0;
             }
         }
     }
 
-    for (qw(Name GroupID SystemAddressID SalutationID SignatureID ValidID UserID FollowUpID)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(Name GroupID SystemAddressID SalutationID SignatureID ValidID UserID FollowUpID)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -1094,14 +1094,11 @@ sub QueueUpdate {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (
-        qw(QueueID Name ValidID GroupID SystemAddressID SalutationID SignatureID UserID FollowUpID)
-        )
-    {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(QueueID Name ValidID GroupID SystemAddressID SalutationID SignatureID UserID FollowUpID)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }

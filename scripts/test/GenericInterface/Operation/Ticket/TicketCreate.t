@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -36,6 +37,12 @@ my $RandomID = $Helper->GetRandomID();
 $Helper->ConfigSettingChange(
     Valid => 1,
     Key   => 'Ticket::Type',
+    Value => 1,
+);
+
+$Helper->ConfigSettingChange(
+    Valid => 1,
+    Key   => 'Ticket::Service',
     Value => 1,
 );
 
@@ -474,7 +481,7 @@ $Self->Is(
 );
 
 # set web service name
-my $WebserviceName = '-Test-' . $RandomID;
+my $WebserviceName = 'Operation::Ticket::TicketCreate-Test-' . $RandomID;
 
 my $WebserviceID = $WebserviceObject->WebserviceAdd(
     Name   => $WebserviceName,
@@ -510,10 +517,7 @@ my $RemoteSystem =
     . $WebserviceID;
 
 my $WebserviceConfig = {
-
-    #    Name => '',
-    Description =>
-        'Test for Ticket Connector using SOAP transport backend.',
+    Description => 'Test for Ticket Connector using SOAP transport backend.',
     Debugger => {
         DebugThreshold => 'debug',
         TestMode       => 1,
@@ -523,7 +527,7 @@ my $WebserviceConfig = {
             Type   => 'HTTP::SOAP',
             Config => {
                 MaxLength => 10000000,
-                NameSpace => 'http://otrs.org/SoapTestInterface/',
+                NameSpace => 'http://znuny.org/SoapTestInterface/',
                 Endpoint  => $RemoteSystem,
             },
         },
@@ -540,7 +544,7 @@ my $WebserviceConfig = {
         Transport => {
             Type   => 'HTTP::SOAP',
             Config => {
-                NameSpace => 'http://otrs.org/SoapTestInterface/',
+                NameSpace => 'http://znuny.org/SoapTestInterface/',
                 Encoding  => 'UTF-8',
                 Endpoint  => $RemoteSystem,
                 Timeout   => 120,
@@ -854,7 +858,7 @@ my @Tests        = (
         RequestData    => {
             Ticket => {
                 Title        => 'Ticket Title',
-                CustomerUser => 'Invalid' . $RandomID,
+                CustomerUser => 'Invalid@Email@' . $RandomID,
             },
             Article => {
                 Test => 1,
@@ -4505,7 +4509,7 @@ $Self->Is(
 TEST:
 for my $Test (@Tests) {
 
-    if ( $Test->{Type} eq 'EmailCustomerUser' ) {
+    if ( $Test->{Type} && $Test->{Type} eq 'EmailCustomerUser' ) {
         $Helper->ConfigSettingChange(
             Valid => 1,
             Key   => 'CheckEmailAddresses',
@@ -4550,6 +4554,7 @@ for my $Test (@Tests) {
         },
     );
 
+
     # check result
     $Self->Is(
         'HASH',
@@ -4578,7 +4583,7 @@ for my $Test (@Tests) {
     # TODO prevent failing test if enviroment on SaaS unit test system doesn't work.
     if (
         $Test->{SuccessCreate}
-        && $RequesterResult->{ErrorMessage} eq
+        && $RequesterResult->{ErrorMessage} && $RequesterResult->{ErrorMessage} eq
         'faultcode: Server, faultstring: Attachment could not be created, please contact the system administrator'
         )
     {
@@ -4781,7 +4786,7 @@ for my $Test (@Tests) {
         }
         for my $DynamicField (@RequestedDynamicFields) {
 
-            if ( $DynamicField->{FieldType} eq 'Date' && $DynamicField->{Value} =~ m{ \A \d{4}-\d{2}-\d{2} \z }xms ) {
+            if ($DynamicField->{FieldType} && $DynamicField->{FieldType} eq 'Date' && $DynamicField->{Value} && $DynamicField->{Value} =~ m{ \A \d{4}-\d{2}-\d{2} \z }xms ) {
                 $DynamicField->{Value} .= ' 00:00:00';
             }
 
@@ -4923,6 +4928,7 @@ for my $Test (@Tests) {
                 . " local and remote tests."
         );
 
+
         $Self->IsDeeply(
             $LocalResult,
             $RequesterResult,
@@ -4975,7 +4981,7 @@ for my $QueueData (@Queues) {
 
 # delete group
 $Success = $DBObject->Do(
-    SQL => "DELETE FROM groups WHERE id = $GroupID",
+    SQL => "DELETE FROM permission_groups WHERE id = $GroupID",
 );
 $Self->True(
     $Success,

@@ -13,18 +13,20 @@ sub match {
     # @since v4.0.0
     my $class = shift;
     my $argv1 = shift // return undef;
-    my $regex = qr{(?>
-         .+[ ]user[ ]unknown
-        |[#]5[.]1[.]1[ ]bad[ ]address
-        |[<].+[>][ ]not[ ]found
-        |[<].+[@].+[>][.][.][.][ ]blocked[ ]by[ ]
-        |5[.]0[.]0[.][ ]mail[ ]rejected[.]
+
+    state $regex = qr{(?>
+         [#]5[.]1[.]1[ ]bad[ ]address
+        |[<][^ ]+[>][ ]not[ ]found
+        |[<][^ ]+[@][^ ]+[>][.][.][.][ ]blocked[ ]by[ ]
+        |550[ ]address[ ]invalid
         |5[.]1[.]0[ ]address[ ]rejected[.]
-        |adresse[ ]d[ ]au[ ]moins[ ]un[ ]destinataire[ ]invalide.+[a-z]{3}.+(?:416|418)
-        |address[ ](?:does[ ]not[ ]exist|unknown)
+        |account[ ][^ ]+[ ]does[ ]not[ ]exist[ ]at[ ]the[ ]organization
+        |adresse[ ]d[ ]au[ ]moins[ ]un[ ]destinataire[ ]invalide[.][ ]invalid[ ]recipient[.][0-9a-z_]+41[68]
+        |address[ ](?:does[ ]not[ ]exist|not[ ]present[ ]in[ ]directory|unknown)
         |archived[ ]recipient
         |bad[-_ \t]recipient
         |can[']t[ ]accept[ ]user
+        |does[ ]not[ ]exist[.]
         |destination[ ](?:
              addresses[ ]were[ ]unknown
             |server[ ]rejected[ ]recipients
@@ -32,7 +34,7 @@ sub match {
         |email[ ]address[ ](?:does[ ]not[ ]exist|could[ ]not[ ]be[ ]found)
         |invalid[ ](?:
              address
-            |mailbox:
+            |mailbox:?
             |mailbox[ ]path|recipient
             )
         |is[ ]not[ ](?:
@@ -41,15 +43,17 @@ sub match {
             |an[ ]active[ ]address[ ]at[ ]this[ ]host
             )
         |mailbox[ ](?:
-             .+[ ]does[ ]not[ ]exist
-            |.+[@].+[ ]unavailable
+             [^ ]+[ ]does[ ]not[ ]exist
+            |[^ ]+[@][^ ]+[ ]unavailable
+            |does[ ]not[ ]exist
             |invalid
             |is[ ](?:inactive|unavailable)
             |not[ ](?:present|found)
             |unavailable
             )
+        |nessun[ ]utente[ ]simile[ ]in[ ]questo[ ]indirizzo
         |no[ ](?:
-             [ ].+[ ]in[ ]name[ ]directory
+             [ ][^ ]+[ ]in[ ]name[ ]directory
             |account[ ]by[ ]that[ ]name[ ]here
             |existe[ ](?:dicha[ ]persona|ese[ ]usuario[ ])
             |mail[ ]box[ ]available[ ]for[ ]this[ ]user
@@ -66,22 +70,23 @@ sub match {
                 |user(?:[ ]here)?
                 )
             |thank[ ]you[ ]rejected:[ ]account[ ]unavailable:
-            |valid[ ]recipients[,][ ]bye    # Microsoft
+            |valid[ ]recipients,[ ]bye
             )
         |non[- ]?existent[ ]user
         |not[ ](?:
-             a[ ]valid[ ]user[ ]here
+             a[ ]valid[ ](?:recipient|user[ ]here)
             |a[ ]local[ ]address
             |email[ ]addresses
             )
-        |rcpt[ ][<].+[>][ ]does[ ]not[ ]exist
-        |rece?ipient[ ](?:
-             .+[ ]was[ ]not[ ]found[ ]in
+        |rcpt[ ][<][^ ]+[>][ ]does[ ]not[ ]exist
+        |recipient[ ]address[ ]rejected[.][ ][(]in[ ]reply[ ]to[ ]rcpt[ ]to[ ]command[)]
+        |recipient[ ](?:
+             [^ ]+[ ]was[ ]not[ ]found[ ]in
             |address[ ]rejected:[ ](?:
                  access[ ]denied
                 |invalid[ ]user
-                |user[ ].+[ ]does[ ]not[ ]exist
-                |user[ ]unknown[ ]in[ ].+[ ]table
+                |user[ ][^ ]+[ ]does[ ]not[ ]exist
+                |user[ ]unknown[ ]in[ ][^ ]+[ ]table
                 |unknown[ ]user
                 )
             |does[ ]not[ ]exist(?:[ ]on[ ]this[ ]system)?
@@ -90,9 +95,8 @@ sub match {
             |unknown
             )
         |requested[ ]action[ ]not[ ]taken:[ ]mailbox[ ]unavailable
-        |resolver[.]adr[.]recip(?:ient)notfound # Microsoft
-        |said:[ ]550[-[ ]]5[.]1[.]1[ ].+[ ]user[ ]unknown[ ]
-        |smtp[ ]error[ ]from[ ]remote[ ]mail[ ]server[ ]after[ ]end[ ]of[ ]data:[ ]553.+does[ ]not[ ]exist
+        |resolver[.]adr[.]recipient notfound
+        |said:[ ]550[-[ ]]5[.]1[.]1[ ][^ ]+[ ]user[ ]unknown[ ]
         |sorry,[ ](?:
              user[ ]unknown
             |badrcptto
@@ -108,7 +112,7 @@ sub match {
              address[ ]no[ ]longer[ ]accepts[ ]mail
             |email[ ]address[ ]is[ ]wrong[ ]or[ ]no[ ]longer[ ]valid
             |spectator[ ]does[ ]not[ ]exist
-            |user[ ]doesn[']?t[ ]have[ ]a[ ].+[ ]account
+            |user[ ]doesn[']?t[ ]have[ ]a[ ][^ ]+[ ]account
             )
         |unknown[ ](?:
              e[-]?mail[ ]address
@@ -118,18 +122,18 @@ sub match {
             |user
             )
         |user[ ](?:
-             .+[ ]was[ ]not[ ]found
-            |.+[ ]does[ ]not[ ]exist
+             [^ ]+[ ]was[ ]not[ ]found
+            |[^ ]+[ ]does[ ]not[ ]exist
             |does[ ]not[ ]exist
             |missing[ ]home[ ]directory
-            |not[ ](?:active|found|known)
+            |not[ ](?:active|exist|found|known)
             |unknown
             )
+        |utilisateur[ ]inconnu[ ]!
         |vdeliver:[ ]invalid[ ]or[ ]unknown[ ]virtual[ ]user
         |your[ ]envelope[ ]recipient[ ]is[ ]in[ ]my[ ]badrcptto[ ]list
         )
     }x;
-
     return 1 if $argv1 =~ $regex;
     return 0;
 }
@@ -145,31 +149,36 @@ sub true {
     my $argvs = shift // return undef;
     return 1 if $argvs->reason eq 'userunknown';
 
-    my $diagnostic = lc $argvs->diagnosticcode;
-    my $tempreason = Sisimai::SMTP::Status->name($argvs->deliverystatus);
+    my $tempreason = Sisimai::SMTP::Status->name($argvs->deliverystatus) || '';
     return 0 if $tempreason eq 'suspend';
 
+    my $diagnostic = lc $argvs->diagnosticcode;
     if( $tempreason eq 'userunknown' ) {
         # *.1.1 = 'Bad destination mailbox address'
         #   Status: 5.1.1
         #   Diagnostic-Code: SMTP; 550 5.1.1 <***@example.jp>:
         #     Recipient address rejected: User unknown in local recipient table
-        my $prematches = [qw|NoRelaying Blocked MailboxFull HasMoved Blocked Rejected|];
+        state $prematches = [qw|NoRelaying Blocked MailboxFull HasMoved Rejected|];
+        state $ModulePath = {
+            'Sisimai::Reason::NoRelaying'  => 'Sisimai/Reason/NoRelaying.pm',
+            'Sisimai::Reason::Blocked'     => 'Sisimai/Reason/Blocked.pm',
+            'Sisimai::Reason::MailboxFull' => 'Sisimai/Reason/MailboxFull.pm',
+            'Sisimai::Reason::HasMoved'    => 'Sisimai/Reason/HasMoved.pm',
+            'Sisimai::Reason::Rejected'    => 'Sisimai/Reason/Rejected.pm',
+        };
         my $matchother = 0;
-        my $modulepath = '';
 
         for my $e ( @$prematches ) {
             # Check the value of "Diagnostic-Code" with other error patterns.
             my $p = 'Sisimai::Reason::'.$e;
-            ($modulepath = $p) =~ s|::|/|g; 
-            require $modulepath.'.pm';
+            require $ModulePath->{ $p };
 
             next unless $p->match($diagnostic);
             # Match with reason defined in Sisimai::Reason::* except UserUnknown.
             $matchother = 1;
             last;
         }
-        return 1 if not $matchother;    # Did not match with other message patterns
+        return 1 unless $matchother;    # Did not match with other message patterns
 
     } elsif( $argvs->smtpcommand eq 'RCPT' ) {
         # When the SMTP command is not "RCPT", the session rejected by other
@@ -234,7 +243,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2018 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2021 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -11,6 +12,7 @@ package Kernel::System::CustomerAuth;
 use strict;
 use warnings;
 
+use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language qw(Translatable);
 
 our @ObjectDependencies = (
@@ -20,6 +22,7 @@ our @ObjectDependencies = (
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::SystemMaintenance',
+    'Kernel::System::Valid',
 );
 
 =head1 NAME
@@ -113,20 +116,21 @@ The authentication function.
 sub Auth {
     my ( $Self, %Param ) = @_;
 
-    # get customer user object
     my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
     my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+    my $ValidObject        = $Kernel::OM->Get('Kernel::System::Valid');
+    my $LogObject          = $Kernel::OM->Get('Kernel::System::Log');
 
     # use all 11 backends and return on first auth
     my $User;
     COUNT:
-    for ( '', 1 .. 10 ) {
+    for my $MainCount ( '', 1 .. 10 ) {
 
         # next on no config setting
-        next COUNT if !$Self->{"Backend$_"};
+        next COUNT if !$Self->{"Backend$MainCount"};
 
         # check auth backend
-        $User = $Self->{"Backend$_"}->Auth(%Param);
+        $User = $Self->{"Backend$MainCount"}->Auth(%Param);
 
         # next on no success
         next COUNT if !$User;
@@ -157,34 +161,77 @@ sub Auth {
         }
 
         # remember auth backend
-        if ($User) {
-            $CustomerUserObject->SetPreferences(
-                Key    => 'UserAuthBackend',
-                Value  => $_,
-                UserID => $User,
-            );
-            last COUNT;
-        }
+        $CustomerUserObject->SetPreferences(
+            Key    => 'UserAuthBackend',
+            Value  => $MainCount,
+            UserID => $User,
+        );
+        last COUNT;
     }
 
-    # check if record exists
     if ( !$User ) {
-        my %CustomerData = $CustomerUserObject->CustomerUserDataGet( User => $Param{User} );
-        if (%CustomerData) {
-            my $Count = $CustomerData{UserLoginFailed} || 0;
-            $Count++;
-            $CustomerUserObject->SetPreferences(
-                Key    => 'UserLoginFailed',
-                Value  => $Count,
-                UserID => $CustomerData{UserLogin},
-            );
+        return if !defined $Param{User};
+        return if !length $Param{User};
+
+        my %CustomerUserData = $CustomerUserObject->CustomerUserDataGet( User => $Param{User} );
+        return if !%CustomerUserData;
+
+        my $Count = $CustomerUserData{UserLoginFailed} || 0;
+        $Count++;
+        $CustomerUserObject->SetPreferences(
+            Key    => 'UserLoginFailed',
+            Value  => $Count,
+            UserID => $CustomerUserData{UserLogin},
+        );
+
+        my $BackendConfig = $ConfigObject->Get( $CustomerUserData{Source} );
+        return if !IsHashRefWithData($BackendConfig);
+        return if $BackendConfig->{ReadOnly};
+
+        # set customer user to invalid-temporarily if max failed logins reached
+        my $Config = $ConfigObject->Get('CustomerPreferencesGroups');
+        my $PasswordMaxLoginFailed;
+
+        if ( IsHashRefWithData($Config) && $Config->{Password} && $Config->{Password}->{PasswordMaxLoginFailed} ) {
+            $PasswordMaxLoginFailed = $Config->{Password}->{PasswordMaxLoginFailed};
         }
+
+        return if !$PasswordMaxLoginFailed;
+        return if $Count < $PasswordMaxLoginFailed;
+
+        my $TemporarilyInvalidID = $ValidObject->ValidLookup(
+            Valid => 'invalid-temporarily',
+        );
+        return if !$TemporarilyInvalidID;
+
+        return if !defined $CustomerUserData{ValidID};
+        return if $CustomerUserData{ValidID} == $TemporarilyInvalidID;
+
+        # Don't overwrite the password.
+        delete $CustomerUserData{UserPassword};
+
+        my $Updated = $CustomerUserObject->CustomerUserUpdate(
+            %CustomerUserData,
+            ID      => $CustomerUserData{UserLogin},
+            ValidID => $TemporarilyInvalidID,
+            UserID  => 1,
+        );
+        return if !$Updated;
+
+        $LogObject->Log(
+            Priority => 'notice',
+            Message  => "Login failed $Count times. Setting customer user $CustomerUserData{UserLogin} to "
+                . "'invalid-temporarily'.",
+        );
+
         return;
     }
 
     # check if user is valid
-    my %CustomerData = $CustomerUserObject->CustomerUserDataGet( User => $User );
-    if ( defined $CustomerData{ValidID} && $CustomerData{ValidID} ne 1 ) {
+    my %CustomerUserData = $CustomerUserObject->CustomerUserDataGet( User => $User );
+    return $User if !%CustomerUserData;
+
+    if ( defined $CustomerUserData{ValidID} && $CustomerUserData{ValidID} != 1 ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'notice',
             Message  => "CustomerUser: '$User' is set to invalid, can't login!",
@@ -192,22 +239,17 @@ sub Auth {
         return;
     }
 
-    return $User if !%CustomerData;
-
     # reset failed logins
     $CustomerUserObject->SetPreferences(
         Key    => 'UserLoginFailed',
         Value  => 0,
-        UserID => $CustomerData{UserLogin},
+        UserID => $CustomerUserData{UserLogin},
     );
 
     # on system maintenance customers
-    # shouldn't be allowed get into the system
+    # shouldn't be allowed to get into the system
     my $ActiveMaintenance = $Kernel::OM->Get('Kernel::System::SystemMaintenance')->SystemMaintenanceIsActive();
-
-    # check if system maintenance is active
     if ($ActiveMaintenance) {
-
         $Self->{LastErrorMessage} =
             $ConfigObject->Get('SystemMaintenance::IsActiveDefaultLoginErrorMessage')
             || Translatable("It is currently not possible to login due to a scheduled system maintenance.");
@@ -221,7 +263,7 @@ sub Auth {
     $CustomerUserObject->SetPreferences(
         Key    => 'UserLastLogin',
         Value  => $DateTimeObject->ToEpoch(),
-        UserID => $CustomerData{UserLogin},
+        UserID => $CustomerUserData{UserLogin},
     );
 
     return $User;

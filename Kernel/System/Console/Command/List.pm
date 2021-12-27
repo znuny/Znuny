@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -10,6 +11,7 @@ package Kernel::System::Console::Command::List;
 
 use strict;
 use warnings;
+use List::Util qw(max);
 
 use Kernel::System::Console::InterfaceConsole;
 
@@ -38,9 +40,10 @@ sub Run {
     $UsageText .= "<yellow>Usage:</yellow>\n";
     $UsageText .= " otrs.Console.pl command [options] [arguments]\n";
     $UsageText .= "\n<yellow>Options:</yellow>\n";
-    GLOBALOPTION:
+
+    OPTION:
     for my $Option ( @{ $Self->{_GlobalOptions} // [] } ) {
-        next GLOBALOPTION if $Option->{Invisible};
+        next OPTION if $Option->{Invisible};
         my $OptionShort = "[--$Option->{Name}]";
         $UsageText .= sprintf " <green>%-40s</green> - %s", $OptionShort, $Option->{Description} . "\n";
     }
@@ -48,19 +51,26 @@ sub Run {
 
     my $PreviousCommandNameSpace = '';
 
+    my @Commands         = $Self->ListAllCommands();
+    my $MaxCommandLength = max map {length} @Commands;
+    $MaxCommandLength -= length('Kernel::System::Console::Command::');
+
     COMMAND:
-    for my $Command ( $Self->ListAllCommands() ) {
+    for my $Command (@Commands) {
         my $CommandObject = $Kernel::OM->Get($Command);
         my $CommandName   = $CommandObject->Name();
 
-        # Group by toplevel namespace
+        # Group by top-level namespace
         my ($CommandNamespace) = $CommandName =~ m/^([^:]+)::/smx;
         $CommandNamespace //= '';
         if ( $CommandNamespace ne $PreviousCommandNameSpace ) {
             $UsageText .= "<yellow>$CommandNamespace</yellow>\n";
             $PreviousCommandNameSpace = $CommandNamespace;
         }
-        $UsageText .= sprintf( " <green>%-40s</green> - %s\n", $CommandName, $CommandObject->Description() );
+        $UsageText .= sprintf(
+            " <green>%-" . $MaxCommandLength . "s</green> - %s\n",
+            $CommandName, $CommandObject->Description()
+        );
     }
 
     $Self->Print($UsageText);
@@ -68,21 +78,21 @@ sub Run {
     return $Self->ExitCodeOk();
 }
 
-# =item ListAllCommands()
-#
-# returns all available commands, sorted first by directory and then by file name.
-#
-#     my @Commands = $CommandObject->ListAllCommands();
-#
-# returns
-#
-#     (
-#         'Kernel::System::Console::Command::Help',
-#         'Kernel::System::Console::Command::List',
-#         ...
-#     )
-#
-# =cut
+=head2 ListAllCommands()
+
+Returns all available commands, sorted first by directory and then by file name.
+
+    my @Commands = $CommandObject->ListAllCommands();
+
+Returns:
+
+    my @Commands = (
+        'Kernel::System::Console::Command::Help',
+        'Kernel::System::Console::Command::List',
+        ...
+    );
+
+=cut
 
 sub ListAllCommands {
     my ( $Self, %Param ) = @_;
@@ -95,9 +105,9 @@ sub ListAllCommands {
 
     my @Commands;
 
-    COMMAND_FILE:
+    COMMANDFILE:
     for my $CommandFile (@CommandFiles) {
-        next COMMAND_FILE if ( $CommandFile =~ m{/Internal/}xms );
+        next COMMANDFILE if ( $CommandFile =~ m{/Internal/}xms );
         $CommandFile =~ s{^.*(Kernel/System.*)[.]pm$}{$1}xmsg;
         $CommandFile =~ s{/+}{::}xmsg;
         push @Commands, $CommandFile;

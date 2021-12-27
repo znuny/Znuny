@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -12,7 +13,6 @@ use strict;
 use warnings;
 
 our @ObjectDependencies = (
-    'Kernel::System::Log',
     'Kernel::System::PostMaster::Filter',
 );
 
@@ -36,13 +36,13 @@ sub Run {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(JobConfig GetParam)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(JobConfig GetParam)) {
+        if ( !$Param{$Needed} ) {
             $Self->{CommunicationLogObject}->ObjectLog(
                 ObjectLogType => 'Message',
                 Priority      => 'Error',
                 Key           => 'Kernel::System::PostMaster::Filter::MatchDBSource',
-                Value         => "Need $_!",
+                Value         => "Need $Needed!",
             );
             return;
         }
@@ -54,12 +54,12 @@ sub Run {
     # get all db filters
     my %JobList = $PostMasterFilter->FilterList();
 
-    for ( sort keys %JobList ) {
+    for my $Name ( sort keys %JobList ) {
 
         my %NamedCaptures;
 
         # get config options
-        my %Config = $PostMasterFilter->FilterGet( Name => $_ );
+        my %Config = $PostMasterFilter->FilterGet( Name => $Name );
 
         my @Match;
         my @Set;

@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -47,6 +48,20 @@ sub Run {
         next PARAMNAME if $Key eq 'Action';
 
         $GetParam{$Key} = $ParamObject->GetParam( Param => $Key );
+
+        my %SafeGetParam = $Kernel::OM->Get('Kernel::System::HTMLUtils')->Safety(
+            String       => $GetParam{$Key},
+            NoApplet     => 1,
+            NoObject     => 1,
+            NoEmbed      => 1,
+            NoSVG        => 1,
+            NoImg        => 1,
+            NoIntSrcLoad => 1,
+            NoExtSrcLoad => 1,
+            NoJavaScript => 1,
+        );
+
+        $GetParam{$Key} = $SafeGetParam{String};
     }
 
     my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
@@ -974,9 +989,15 @@ sub Run {
 
                 # add possible links
                 for my $LinkID (@LinkArray) {
+                    my $LinkData = $ResultList->{$LinkID};
+
+                    if ( $GetParam{ObjectID} && !defined $Appointment{Title} && ref $LinkData ) {
+                        $Appointment{Title} = $LinkData->{Title};
+                    }
+
                     push @{ $Param{PluginData}->{ $GetParam{PluginKey} } }, {
                         LinkID   => $LinkID,
-                        LinkName => $ResultList->{$LinkID},
+                        LinkName => ( ref $LinkData ? $LinkData->{Subject} : $LinkData ),
                         LinkURL  => sprintf(
                             $Param{PluginList}->{ $GetParam{PluginKey} }->{PluginURL},
                             $LinkID

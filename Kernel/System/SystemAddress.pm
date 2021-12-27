@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -67,7 +68,6 @@ add system address with attributes
 sub SystemAddressAdd {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     for my $Needed (qw(Name ValidID Realname QueueID UserID)) {
         if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -87,7 +87,6 @@ sub SystemAddressAdd {
         return;
     }
 
-    # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     # insert new system address
@@ -147,7 +146,6 @@ returns:
 sub SystemAddressGet {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     if ( !$Param{ID} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -165,7 +163,6 @@ sub SystemAddressGet {
 
     return %{$Cached} if ref $Cached eq 'HASH';
 
-    # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     # get system address
@@ -220,7 +217,6 @@ update system address with attributes
 sub SystemAddressUpdate {
     my ( $Self, %Param ) = @_;
 
-    # Check needed stuff.
     for my $Needed (qw(ID Name ValidID Realname QueueID UserID)) {
         if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -315,7 +311,6 @@ sub SystemAddressList {
         $ValidSQL = " WHERE valid_id IN ($ValidIDs)";
     }
 
-    # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     # get system address
@@ -359,7 +354,6 @@ for local addresses.
 sub SystemAddressIsLocalAddress {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     for my $Needed (qw(Address)) {
         if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -384,7 +378,6 @@ find dispatching queue id of email address
 sub SystemAddressQueueID {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     for my $Needed (qw(Address)) {
         if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -406,7 +399,6 @@ sub SystemAddressQueueID {
 
     return ${$Cached} if ref $Cached eq 'SCALAR';
 
-    # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     if ( $DBObject->GetDatabaseFunction('CaseSensitive') ) {
@@ -480,7 +472,6 @@ sub SystemAddressQueueList {
         $SQL .= ' WHERE valid_id IN (' . $ValidIDs . ')';
     }
 
-    # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     # get data from database
@@ -498,13 +489,83 @@ sub SystemAddressQueueList {
 
 }
 
+=head2 SystemAddressLookup()
+
+returns the ID or the name of a system address
+
+    my $SystemAddressID = $SystemAddressObject->SystemAddressLookup(
+        Name          => 'info@znuny.com',
+        # or
+        SystemAddress => 'info@znuny.com',
+    );
+
+    my $Name = $SystemAddressObject->SystemAddressLookup(
+        ID              => 2,
+        # or
+        SystemAddressID => 2,
+    );
+
+=cut
+
+sub SystemAddressLookup {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    if (
+        !$Param{Name}
+        && !$Param{SystemAddress}
+        && !$Param{ID}
+        && !$Param{SystemAddressID}
+        )
+    {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => 'Either give parameter Name, SystemAddress, SystemAddressID or ID!',
+        );
+        return;
+    }
+
+    # get (already cached) system address list
+    my %SystemAddresses = $Self->SystemAddressList(
+        Valid => 0,
+    );
+
+    my $Key;
+    my $Value;
+    my $ReturnData;
+    if ( $Param{SystemAddressID} || $Param{ID} ) {
+        $Key        = 'System address ID';
+        $Value      = $Param{SystemAddressID} || $Param{ID};
+        $ReturnData = $SystemAddresses{$Value};
+    }
+    elsif ( $Param{SystemAddress} || $Param{Name} ) {
+        $Key   = 'System address';
+        $Value = $Param{SystemAddress} || $Param{Name};
+
+        my %SystemAddressesReverse = reverse %SystemAddresses;
+        $ReturnData = $SystemAddressesReverse{$Value};
+    }
+
+    # check if data exists
+    if ( !defined $ReturnData ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "No $Key for $Value found!",
+        );
+        return;
+    }
+
+    return $ReturnData;
+}
+
 =head2 NameExistsCheck()
 
 return 1 if another system address with this name already exists
 
-    $Exist = $SystemAddressObject->NameExistsCheck(
+    my $Exists = $SystemAddressObject->NameExistsCheck(
         Name => 'Some Address',
-        ID => 1, # optional
+        ID   => 1,                  # optional
     );
 
 =cut
@@ -512,7 +573,6 @@ return 1 if another system address with this name already exists
 sub NameExistsCheck {
     my ( $Self, %Param ) = @_;
 
-    # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
     return if !$DBObject->Prepare(
         SQL  => 'SELECT id FROM system_address WHERE value0 = ?',
@@ -538,7 +598,7 @@ sub NameExistsCheck {
 
 Return 1 if system address is used in one of the queue's or auto response's.
 
-    $SytemAddressIsUsed = $SystemAddressObject->SystemAddressIsUsed(
+    my $SytemAddressIsUsed = $SystemAddressObject->SystemAddressIsUsed(
         SystemAddressID => 1,
     );
 
@@ -556,7 +616,6 @@ sub SystemAddressIsUsed {
         return;
     }
 
-    # Get database object.
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     return if !$DBObject->Prepare(

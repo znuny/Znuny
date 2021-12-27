@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -12,11 +13,9 @@ use strict;
 use warnings;
 
 our @ObjectDependencies = (
-    'Kernel::Config',
     'Kernel::System::Cache',
     'Kernel::System::DB',
     'Kernel::System::Log',
-    'Kernel::System::SysConfig',
     'Kernel::System::Valid',
 );
 
@@ -54,11 +53,21 @@ sub new {
 
 =head2 PriorityList()
 
-return a priority list as hash
+get priority list as a hash of ID, Name pairs
 
-    my %List = $PriorityObject->PriorityList(
-        Valid => 0,
+    my %PriorityList = $PriorityObject->PriorityList(
+        Valid => 0,   # (optional) default 1 (0|1)
     );
+
+returns
+
+    %PriorityList = (
+        1 => '1 very low',
+        2 => '2 low',
+        3 => '3 normal',
+        4 => '4 high',
+        5 => '5 very high'
+    )
 
 =cut
 
@@ -116,11 +125,23 @@ sub PriorityList {
 
 =head2 PriorityGet()
 
-get a priority
+get priority attributes
 
-    my %List = $PriorityObject->PriorityGet(
+    my %PriorityData = $PriorityObject->PriorityGet(
         PriorityID => 123,
         UserID     => 1,
+    );
+
+returns:
+
+    %PriorityData = (
+        ID          => '123',
+        Name        => '123 something',
+        ValidID     => '1',
+        CreateTime  => '2021-02-01 12:15:00',
+        CreateBy    => '321',
+        ChangeTime  => '2021-04-01 15:30:00',
+        ChangeBy    => '223',
     );
 
 =cut
@@ -129,11 +150,11 @@ sub PriorityGet {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(PriorityID UserID)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(PriorityID UserID)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -195,11 +216,11 @@ sub PriorityAdd {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Name ValidID UserID)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(Name ValidID UserID)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -256,11 +277,11 @@ sub PriorityUpdate {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(PriorityID Name ValidID UserID)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(PriorityID Name ValidID UserID)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }

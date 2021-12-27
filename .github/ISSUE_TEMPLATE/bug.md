@@ -18,13 +18,13 @@ assignees: ''
 
 - OS:           <!-- [e.g. Windows, MacOS, Linux] -->
 - Browser:      <!-- [e. g. Chrome, Firefox, Safari] -->
-- OTRS version: <!-- [e. g. 6.0.15] -->
+- Znuny version: <!-- [e. g. 6.0.15] -->
 
-### Expected behavior
+### Expected behaviour
 
 <!-- A clear and concise description of what you expected to happen. -->
 
-### Actual behavior
+### Actual behaviour
 
 <!-- A clear and concise description of what happened (the issue/bug/problem). -->
 

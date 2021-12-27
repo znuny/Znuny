@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -108,8 +109,8 @@
                     <li><span class="Key">[% Translate("Responsible") | html %]:</span> [% Data.ResponsibleName | html %]</li>
 [% RenderBlockEnd("Responsible") %]
 [% RenderBlockStart("ProcessData") %]
-                    <li><span class="Key">[% Translate("Process") | html %]:</span> <span title="[% Data.Process | html %]">[% Data.Process | html %]</span></li>
-                    <li><span class="Key">[% Translate("Activity") | html %]:</span> <span title="[% Data.Activity | html %]">[% Data.Activity | html %]</span></li>
+                    <li><span class="Key">[% Translate("Process") | html %]:</span> <span title="[% Translate(Data.Process) | html %]">[% Translate(Data.Process) | html %]</span></li>
+                    <li><span class="Key">[% Translate("Activity") | html %]:</span> <span title="[% Translate(Data.Activity) | html %]">[% Translate(Data.Activity) | html %]</span></li>
 [% RenderBlockEnd("ProcessData") %]
 
 # show ticket dynamic fields

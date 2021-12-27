@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -26,11 +27,13 @@ Kernel::GenericInterface::Operation::Ticket::Common - Base class for all Ticket 
 
 =head2 Init()
 
-initialize the operation by checking the web service configuration and gather of the dynamic fields
+Initialize the operation by checking the web service configuration and gather of the dynamic fields.
 
     my $Return = $CommonObject->Init(
         WebserviceID => 1,
     );
+
+Returns:
 
     $Return = {
         Success => 1,                       # or 0 in case of failure,
@@ -42,7 +45,6 @@ initialize the operation by checking the web service configuration and gather of
 sub Init {
     my ( $Self, %Param ) = @_;
 
-    # check needed
     if ( !$Param{WebserviceID} ) {
         return {
             Success      => 0,
@@ -86,7 +88,7 @@ sub Init {
 
 =head2 ValidateQueue()
 
-checks if the given queue or queue ID is valid.
+Checks if the given queue or queue ID is valid.
 
     my $Success = $CommonObject->ValidateQueue(
         QueueID => 123,
@@ -96,15 +98,15 @@ checks if the given queue or queue ID is valid.
         Queue   => 'some queue',
     );
 
-    returns
-    $Success = 1            # or 0
+Returns:
+
+    my $Success = 1;            # or 0
 
 =cut
 
 sub ValidateQueue {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     return if !$Param{QueueID} && !$Param{Queue};
 
     my %QueueData;
@@ -133,24 +135,19 @@ sub ValidateQueue {
     }
 
     # return false if queue data is empty
-    return if !IsHashRefWithData( \%QueueData );
+    return if !%QueueData;
+    return if !$QueueData{ValidID};
 
     # return false if queue is not valid
-
-    if (
-        $Kernel::OM->Get('Kernel::System::Valid')->ValidLookup( ValidID => $QueueData{ValidID} ) ne
-        'valid'
-        )
-    {
-        return;
-    }
+    my $Valid = $Kernel::OM->Get('Kernel::System::Valid')->ValidLookup( ValidID => $QueueData{ValidID} );
+    return if $Valid ne 'valid';
 
     return 1;
 }
 
 =head2 ValidateLock()
 
-checks if the given lock or lock ID is valid.
+Checks if the given lock or lock ID is valid.
 
     my $Success = $CommonObject->ValidateLock(
         LockID => 123,
@@ -160,15 +157,15 @@ checks if the given lock or lock ID is valid.
         Lock   => 'some lock',
     );
 
-    returns
-    $Success = 1            # or 0
+Returns:
+
+    my $Success = 1;            # or 0
 
 =cut
 
 sub ValidateLock {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     return if !$Param{LockID} && !$Param{Lock};
 
     # check for Lock name sent
@@ -200,7 +197,7 @@ sub ValidateLock {
 
 =head2 ValidateType()
 
-checks if the given type or type ID is valid.
+Checks if the given type or type ID is valid.
 
     my $Success = $CommonObject->ValidateType(
         TypeID => 123,
@@ -210,15 +207,15 @@ checks if the given type or type ID is valid.
         Type   => 'some type',
     );
 
-    returns
-    $Success = 1            # or 0
+Returns:
+
+    my $Success = 1;            # or 0
 
 =cut
 
 sub ValidateType {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     return if !$Param{TypeID} && !$Param{Type};
 
     my %TypeData;
@@ -246,74 +243,51 @@ sub ValidateType {
     }
 
     # return false if type data is empty
-    return if !IsHashRefWithData( \%TypeData );
+    return if !%TypeData;
+    return if !$TypeData{ValidID};
 
     # return false if type is not valid
-    if (
-        $Kernel::OM->Get('Kernel::System::Valid')->ValidLookup( ValidID => $TypeData{ValidID} ) ne
-        'valid'
-        )
-    {
-        return;
-    }
+    my $Valid = $Kernel::OM->Get('Kernel::System::Valid')->ValidLookup( ValidID => $TypeData{ValidID} );
+    return if $Valid ne 'valid';
 
     return 1;
 }
 
 =head2 ValidateCustomer()
 
-checks if the given customer user or customer ID is valid.
-
-    my $Success = $CommonObject->ValidateCustomer(
-        CustomerID => 123,
-    );
+Checks if the given customer user or customer ID is valid.
 
     my $Success = $CommonObject->ValidateCustomer(
         CustomerUser   => 'some type',
     );
 
-    returns
-    $Success = 1            # or 0
+Returns:
+
+    my $Success = 1;            # or 0
 
 =cut
 
 sub ValidateCustomer {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
-    return if !$Param{CustomerUser};
-
-    my %CustomerData;
+    return if !defined $Param{CustomerUser} || !length $Param{CustomerUser};
 
     # check for customer user sent
-    if (
-        $Param{CustomerUser}
-        && $Param{CustomerUser} ne ''
-        )
-    {
-        %CustomerData = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserDataGet(
-            User => $Param{CustomerUser},
-        );
-    }
-    else {
-        return;
-    }
-
-    # if customer is not registered in the database, check if email is valid
-    if ( !IsHashRefWithData( \%CustomerData ) ) {
-        return $Self->ValidateFrom( From => $Param{CustomerUser} );
-    }
+    my %CustomerData = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserDataGet(
+        User => $Param{CustomerUser},
+    );
 
     # if ValidID is present, check if it is valid!
     if ( defined $CustomerData{ValidID} ) {
 
         # return false if customer is not valid
-        if (
-            $Kernel::OM->Get('Kernel::System::Valid')->ValidLookup( ValidID => $CustomerData{ValidID} ) ne 'valid'
-            )
-        {
-            return;
-        }
+        my $Valid = $Kernel::OM->Get('Kernel::System::Valid')->ValidLookup( ValidID => $CustomerData{ValidID} );
+        return if $Valid ne 'valid';
+    }
+
+    # if customer is not registered in the database, check if email is valid
+    if ( !%CustomerData ) {
+        return $Self->ValidateFrom( From => $Param{CustomerUser} );
     }
 
     return 1;
@@ -321,7 +295,7 @@ sub ValidateCustomer {
 
 =head2 ValidateService()
 
-checks if the given service or service ID is valid.
+Checks if the given service or service ID is valid.
 
     my $Success = $CommonObject->ValidateService(
         ServiceID    => 123,
@@ -333,21 +307,20 @@ checks if the given service or service ID is valid.
         CustomerUser => 'Test',
     );
 
-    returns
-    $Success = 1            # or 0
+Returns:
+
+    my $Success = 1;            # or 0
 
 =cut
 
 sub ValidateService {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     return if !$Param{ServiceID} && !$Param{Service};
     return if !$Param{CustomerUser};
 
     my %ServiceData;
 
-    # get service object
     my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
 
     # check for Service name sent
@@ -375,16 +348,12 @@ sub ValidateService {
     }
 
     # return false if service data is empty
-    return if !IsHashRefWithData( \%ServiceData );
+    return if !%ServiceData;
+    return if !$ServiceData{ValidID};
 
     # return false if service is not valid
-    if (
-        $Kernel::OM->Get('Kernel::System::Valid')->ValidLookup( ValidID => $ServiceData{ValidID} )
-        ne 'valid'
-        )
-    {
-        return;
-    }
+    my $Valid = $Kernel::OM->Get('Kernel::System::Valid')->ValidLookup( ValidID => $ServiceData{ValidID} );
+    return if $Valid ne 'valid';
 
     # get customer services
     my %CustomerServices = $ServiceObject->CustomerUserServiceMemberList(
@@ -401,29 +370,28 @@ sub ValidateService {
 
 =head2 ValidateSLA()
 
-checks if the given service or service ID is valid.
+Checks if the given sla or sla ID is valid.
 
     my $Success = $CommonObject->ValidateSLA(
         SLAID     => 12,
-        ServiceID => 123,       # || Service => 'some service'
-    );
-
-    my $Success = $CommonObject->ValidateService(
+        # or
         SLA       => 'some SLA',
-        ServiceID => 123,       # || Service => 'some service'
+
+        ServiceID => 123,
+        # or
+        Service   => 'some service',
     );
 
-    returns
-    $Success = 1            # or 0
+Returns:
+
+    my $Success = 1            # or 0
 
 =cut
 
 sub ValidateSLA {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
-    return if !$Param{SLAID}     && !$Param{SLA};
-    return if !$Param{ServiceID} && !$Param{Service};
+    return if !$Param{SLAID} && !$Param{SLA};
 
     my %SLAData;
 
@@ -458,16 +426,12 @@ sub ValidateSLA {
     }
 
     # return false if SLA data is empty
-    return if !IsHashRefWithData( \%SLAData );
+    return if !%SLAData;
+    return if !$SLAData{ValidID};
 
     # return false if SLA is not valid
-    if (
-        $Kernel::OM->Get('Kernel::System::Valid')->ValidLookup( ValidID => $SLAData{ValidID} )
-        ne 'valid'
-        )
-    {
-        return;
-    }
+    my $Valid = $Kernel::OM->Get('Kernel::System::Valid')->ValidLookup( ValidID => $SLAData{ValidID} );
+    return if $Valid ne 'valid';
 
     # get service ID
     my $ServiceID;
@@ -506,7 +470,7 @@ sub ValidateSLA {
 
 =head2 ValidateState()
 
-checks if the given state or state ID is valid.
+Checks if the given state or state ID is valid.
 
     my $Success = $CommonObject->ValidateState(
         StateID => 123,
@@ -516,15 +480,15 @@ checks if the given state or state ID is valid.
         State   => 'some state',
     );
 
-    returns
-    $Success = 1            # or 0
+Returns:
+
+    my $Success = 1;            # or 0
 
 =cut
 
 sub ValidateState {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     return if !$Param{StateID} && !$Param{State};
 
     my %StateData;
@@ -553,23 +517,19 @@ sub ValidateState {
     }
 
     # return false if state data is empty
-    return if !IsHashRefWithData( \%StateData );
+    return if !%StateData;
+    return if !$StateData{ValidID};
 
-    # return false if queue is not valid
-    if (
-        $Kernel::OM->Get('Kernel::System::Valid')->ValidLookup( ValidID => $StateData{ValidID} )
-        ne 'valid'
-        )
-    {
-        return;
-    }
+    # return false if state is not valid
+    my $Valid = $Kernel::OM->Get('Kernel::System::Valid')->ValidLookup( ValidID => $StateData{ValidID} );
+    return if $Valid ne 'valid';
 
     return 1;
 }
 
 =head2 ValidatePriority()
 
-checks if the given priority or priority ID is valid.
+Checks if the given priority or priority ID is valid.
 
     my $Success = $CommonObject->ValidatePriority(
         PriorityID => 123,
@@ -579,20 +539,18 @@ checks if the given priority or priority ID is valid.
         Priority   => 'some priority',
     );
 
-    returns
-    $Success = 1            # or 0
+Returns:
+
+    my $Success = 1;            # or 0
 
 =cut
 
 sub ValidatePriority {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     return if !$Param{PriorityID} && !$Param{Priority};
 
     my %PriorityData;
-
-    # get priority object
     my $PriorityObject = $Kernel::OM->Get('Kernel::System::Priority');
 
     # check for Priority name sent
@@ -623,23 +581,19 @@ sub ValidatePriority {
     }
 
     # return false if priority data is empty
-    return if !IsHashRefWithData( \%PriorityData );
+    return if !%PriorityData;
+    return if !$PriorityData{ValidID};
 
     # return false if priority is not valid
-    if (
-        $Kernel::OM->Get('Kernel::System::Valid')->ValidLookup( ValidID => $PriorityData{ValidID} )
-        ne 'valid'
-        )
-    {
-        return;
-    }
+    my $Valid = $Kernel::OM->Get('Kernel::System::Valid')->ValidLookup( ValidID => $PriorityData{ValidID} );
+    return if $Valid ne 'valid';
 
     return 1;
 }
 
 =head2 ValidateOwner()
 
-checks if the given owner or owner ID is valid.
+Checks if the given owner or owner ID is valid.
 
     my $Success = $CommonObject->ValidateOwner(
         OwnerID => 123,
@@ -649,15 +603,15 @@ checks if the given owner or owner ID is valid.
         Owner   => 'some user',
     );
 
-    returns
-    $Success = 1            # or 0
+Returns:
+
+    my $Success = 1;            # or 0
 
 =cut
 
 sub ValidateOwner {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     return if !$Param{OwnerID} && !$Param{Owner};
 
     return $Self->_ValidateUser(
@@ -668,7 +622,7 @@ sub ValidateOwner {
 
 =head2 ValidateResponsible()
 
-checks if the given responsible or responsible ID is valid.
+Checks if the given responsible or responsible ID is valid.
 
     my $Success = $CommonObject->ValidateResponsible(
         ResponsibleID => 123,
@@ -678,15 +632,15 @@ checks if the given responsible or responsible ID is valid.
         Responsible   => 'some user',
     );
 
-    returns
-    $Success = 1            # or 0
+Returns:
+
+    my $Success = 1;            # or 0
 
 =cut
 
 sub ValidateResponsible {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     return if !$Param{ResponsibleID} && !$Param{Responsible};
 
     return $Self->_ValidateUser(
@@ -697,7 +651,7 @@ sub ValidateResponsible {
 
 =head2 ValidatePendingTime()
 
-checks if the given pending time is valid.
+Checks if the given pending time is valid.
 
     my $Success = $CommonObject->ValidatePendingTime(
         PendingTime => {
@@ -715,15 +669,15 @@ checks if the given pending time is valid.
         },
     );
 
-    returns
-    $Success = 1            # or 0
+Returns:
+
+    my $Success = 1;            # or 0
 
 =cut
 
 sub ValidatePendingTime {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     return if !$Param{PendingTime};
     return if !IsHashRefWithData( $Param{PendingTime} );
 
@@ -760,21 +714,21 @@ sub ValidatePendingTime {
 
 =head2 ValidateAutoResponseType()
 
-checks if the given AutoResponseType is valid.
+Checks if the given AutoResponseType is valid.
 
     my $Success = $CommonObject->ValidateAutoResponseType(
-        AutoResponseType => 'Some AutoRespobse',
+        AutoResponseType => 'Some AutoResponse',
     );
 
-    returns
-    $Success = 1            # or 0
+Returns:
+
+    my $Success = 1;            # or 0
 
 =cut
 
 sub ValidateAutoResponseType {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     return if !$Param{AutoResponseType};
 
     # get all AutoResponse Types
@@ -790,31 +744,32 @@ sub ValidateAutoResponseType {
 
 =head2 ValidateFrom()
 
-checks if the given from is valid.
+Checks if the given from is valid.
 
     my $Success = $CommonObject->ValidateFrom(
         From => 'user@domain.com',
     );
 
-    returns
-    $Success = 1            # or 0
+Returns:
+
+    my $Success = 1;            # or 0
 
 =cut
 
 sub ValidateFrom {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     return if !$Param{From};
 
     # check email address
     for my $Email ( Mail::Address->parse( $Param{From} ) ) {
-        if (
-            !$Kernel::OM->Get('Kernel::System::CheckItem')->CheckEmail( Address => $Email->address() )
-            )
-        {
-            return;
-        }
+
+        my $Address = $Email->address();
+
+        my $Valid = $Kernel::OM->Get('Kernel::System::CheckItem')->CheckEmail(
+            Address => $Address,
+        );
+        return $Valid;
     }
 
     return 1;
@@ -822,7 +777,7 @@ sub ValidateFrom {
 
 =head2 ValidateArticleCommunicationChannel()
 
-checks if provided Communication Channel is valid.
+Checks if provided Communication Channel is valid.
 
     my $Success = $CommonObject->ValidateArticleCommunicationChannel(
         CommunicationChannel   => 'Internal',   # optional
@@ -830,15 +785,15 @@ checks if provided Communication Channel is valid.
         CommunicationChannelID => 1,            # optional
     );
 
-    returns
-    $Success = 1            # or 0
+Returns:
+
+    my $Success = 1;            # or 0
 
 =cut
 
 sub ValidateArticleCommunicationChannel {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     if ( !$Param{CommunicationChannel} && !$Param{CommunicationChannelID} ) {
         return;
     }
@@ -858,7 +813,7 @@ sub ValidateArticleCommunicationChannel {
 
 =head2 ValidateSenderType()
 
-checks if the given SenderType or SenderType ID is valid.
+Checks if the given SenderType or SenderType ID is valid.
 
     my $Success = $CommonObject->ValidateSenderType(
         SenderTypeID => 123,
@@ -868,15 +823,15 @@ checks if the given SenderType or SenderType ID is valid.
         SenderType => 'some SenderType',
     );
 
-    returns
-    $Success = 1            # or 0
+Returns:
+
+    my $Success = 1;            # or 0
 
 =cut
 
 sub ValidateSenderType {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     return if !$Param{SenderTypeID} && !$Param{SenderType};
 
     my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
@@ -920,21 +875,21 @@ sub ValidateSenderType {
 
 =head2 ValidateMimeType()
 
-checks if the given MimeType is valid.
+Checks if the given MimeType is valid.
 
     my $Success = $CommonObject->ValidateMimeType(
-        MimeTypeID => 'some MimeType',
+        MimeType => 'some MimeType',
     );
 
-    returns
-    $Success = 1            # or 0
+Returns:
+
+    my $Success = 1;            # or 0
 
 =cut
 
 sub ValidateMimeType {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     return if !$Param{MimeType};
 
     return if $Param{MimeType} !~ m{\A\w+\/\w+\z};
@@ -944,21 +899,21 @@ sub ValidateMimeType {
 
 =head2 ValidateCharset()
 
-checks if the given Charset is valid.
+Checks if the given Charset is valid.
 
     my $Success = $CommonObject->ValidateCharset(
         Charset => 'some charset',
     );
 
-    returns
-    $Success = 1            # or 0
+Returns:
+
+    my $Success = 1;            # or 0
 
 =cut
 
 sub ValidateCharset {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     return if !$Param{Charset};
 
     use Encode;
@@ -969,21 +924,21 @@ sub ValidateCharset {
 
 =head2 ValidateHistoryType()
 
-checks if the given HistoryType is valid.
+Checks if the given HistoryType is valid.
 
     my $Success = $CommonObject->ValidateHistoryType(
         HistoryType => 'some HostoryType',
     );
 
-    returns
-    $Success = 1            # or 0
+Returns:
+
+    my $Success = 1;            # or 0
 
 =cut
 
 sub ValidateHistoryType {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     return if !$Param{HistoryType};
 
     # check for HistoryType name sent
@@ -1006,21 +961,21 @@ sub ValidateHistoryType {
 
 =head2 ValidateTimeUnit()
 
-checks if the given TimeUnit is valid.
+Checks if the given TimeUnit is valid.
 
     my $Success = $CommonObject->ValidateTimeUnit(
         TimeUnit => 1,
     );
 
-    returns
-    $Success = 1            # or 0
+Returns:
+
+    my $Success = 1;            # or 0
 
 =cut
 
 sub ValidateTimeUnit {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     return if !$Param{TimeUnit};
 
     # TimeUnit must be positive
@@ -1031,21 +986,21 @@ sub ValidateTimeUnit {
 
 =head2 ValidateUserID()
 
-checks if the given user ID is valid.
+Checks if the given user ID is valid.
 
     my $Success = $CommonObject->ValidateUserID(
         UserID => 123,
     );
 
-    returns
-    $Success = 1            # or 0
+Returns:
+
+    my $Success = 1;            # or 0
 
 =cut
 
 sub ValidateUserID {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     return if !$Param{UserID};
 
     return $Self->_ValidateUser(
@@ -1055,21 +1010,21 @@ sub ValidateUserID {
 
 =head2 ValidateDynamicFieldName()
 
-checks if the given dynamic field name is valid.
+Checks if the given dynamic field name is valid.
 
     my $Success = $CommonObject->ValidateDynamicFieldName(
         Name => 'some name',
     );
 
-    returns
-    $Success = 1            # or 0
+Returns:
+
+    my $Success = 1;            # or 0
 
 =cut
 
 sub ValidateDynamicFieldName {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     return if !IsHashRefWithData( $Self->{DynamicFieldLookup} );
     return if !$Param{Name};
 
@@ -1081,7 +1036,7 @@ sub ValidateDynamicFieldName {
 
 =head2 ValidateDynamicFieldValue()
 
-checks if the given dynamic field value is valid.
+Checks if the given dynamic field value is valid.
 
     my $Success = $CommonObject->ValidateDynamicFieldValue(
         Name  => 'some name',
@@ -1103,7 +1058,6 @@ checks if the given dynamic field value is valid.
 sub ValidateDynamicFieldValue {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     return if !IsHashRefWithData( $Self->{DynamicFieldLookup} );
 
     # possible structures are string and array, no data inside is needed
@@ -1126,22 +1080,22 @@ sub ValidateDynamicFieldValue {
 
 =head2 ValidateDynamicFieldObjectType()
 
-checks if the given dynamic field name is valid.
+Checks if the given dynamic field name is valid.
 
     my $Success = $CommonObject->ValidateDynamicFieldObjectType(
         Name    => 'some name',
         Article => 1,               # if article exists
     );
 
-    returns
-    $Success = 1            # or 0
+Returns:
+
+    my $Success = 1;            # or 0
 
 =cut
 
 sub ValidateDynamicFieldObjectType {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     return if !IsHashRefWithData( $Self->{DynamicFieldLookup} );
     return if !$Param{Name};
 
@@ -1156,7 +1110,7 @@ sub ValidateDynamicFieldObjectType {
 
 =head2 SetDynamicFieldValue()
 
-sets the value of a dynamic field.
+Sets the value of a dynamic field.
 
     my $Result = $CommonObject->SetDynamicFieldValue(
         Name      => 'some name',           # the name of the dynamic field
@@ -1175,12 +1129,13 @@ sets the value of a dynamic field.
         UserID => 123,
     );
 
-    returns
-    $Result = {
+Returns:
+
+    my $Result = {
         Success => 1,                        # if everything is ok
     }
 
-    $Result = {
+    my $Result = {
         Success      => 0,
         ErrorMessage => 'Error description'
     }
@@ -1190,7 +1145,6 @@ sets the value of a dynamic field.
 sub SetDynamicFieldValue {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     for my $Needed (qw(Name UserID)) {
         if ( !IsString( $Param{$Needed} ) ) {
             return {
@@ -1214,7 +1168,7 @@ sub SetDynamicFieldValue {
     my $DynamicFieldConfig = $Self->{DynamicFieldLookup}->{ $Param{Name} };
 
     my $ObjectID;
-    if ( $DynamicFieldConfig->{ObjectType} eq 'Ticket' ) {
+    if ( defined $DynamicFieldConfig->{ObjectType} && $DynamicFieldConfig->{ObjectType} eq 'Ticket' ) {
         $ObjectID = $Param{TicketID} || '';
     }
     else {
@@ -1242,21 +1196,22 @@ sub SetDynamicFieldValue {
 
 =head2 CreateAttachment()
 
-creates a new attachment for the given article.
+Creates a new attachment for the given article.
 
     my $Result = $CommonObject->CreateAttachment(
         TicketID   => 123,
-        Attachment => $Data,                   # file content (Base64 encoded)
+        Attachment => $Attachment,          # file content (Base64 encoded)
         ArticleID  => 456,
         UserID     => 123,
     );
 
-    returns
-    $Result = {
-        Success => 1,                        # if everything is ok
+Returns:
+
+    my $Result = {
+        Success => 1,                       # if everything is ok
     }
 
-    $Result = {
+    my $Result = {
         Success      => 0,
         ErrorMessage => 'Error description'
     }
@@ -1266,7 +1221,6 @@ creates a new attachment for the given article.
 sub CreateAttachment {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     for my $Needed (qw(TicketID Attachment ArticleID UserID)) {
         if ( !$Param{$Needed} ) {
             return {
@@ -1296,23 +1250,23 @@ sub CreateAttachment {
 
 =head2 CheckCreatePermissions ()
 
-Tests if the user have the permissions to create a ticket on a determined queue
+Tests if the user have the permissions to create a ticket on a determined queue.
 
     my $Result = $CommonObject->CheckCreatePermissions(
-        Ticket     => $TicketHashReference,
-        UserID     => 123,                      # or 'CustomerLogin'
-        UserType   => 'Agent',                  # or 'Customer'
+        Ticket   => $TicketHashReference,
+        UserID   => 123,            # or 'CustomerLogin'
+        UserType => 'Agent',        # or 'Customer'
     );
 
-returns:
-    $Success = 1                                # if everything is OK
+Returns:
+
+    my $Success = 1;                    # if everything is OK
 
 =cut
 
 sub CheckCreatePermissions {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     for my $Needed (qw(Ticket UserID UserType)) {
         if ( !$Param{$Needed} ) {
             return;
@@ -1345,6 +1299,7 @@ sub CheckCreatePermissions {
     }
 
     # permission check, can we create new tickets in queue
+    return if !$QueueData{GroupID};
     return if !$UserGroups{ $QueueData{GroupID} };
 
     return 1;
@@ -1352,7 +1307,7 @@ sub CheckCreatePermissions {
 
 =head2 CheckAccessPermissions()
 
-Tests if the user have access permissions over a ticket
+Tests if the user have access permissions over a ticket.
 
     my $Result = $CommonObject->CheckAccessPermissions(
         TicketID   => 123,
@@ -1360,15 +1315,15 @@ Tests if the user have access permissions over a ticket
         UserType   => 'Agent',                  # or 'Customer'
     );
 
-returns:
-    $Success = 1                                # if everything is OK
+Returns:
+
+    my $Success = 1;                    # if everything is OK
 
 =cut
 
 sub CheckAccessPermissions {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     for my $Needed (qw(TicketID UserID UserType)) {
         if ( !$Param{$Needed} ) {
             return;
@@ -1393,7 +1348,7 @@ sub CheckAccessPermissions {
 
 =head2 _ValidateUser()
 
-checks if the given user or user ID is valid.
+Checks if the given user or user ID is valid.
 
     my $Success = $CommonObject->_ValidateUser(
         UserID => 123,
@@ -1403,15 +1358,15 @@ checks if the given user or user ID is valid.
         User   => 'some user',
     );
 
-    returns
-    $Success = 1            # or 0
+Returns:
+
+    my $Success = 1;            # or 0
 
 =cut
 
 sub _ValidateUser {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     return if !$Param{UserID} && !$Param{User};
 
     my %UserData;

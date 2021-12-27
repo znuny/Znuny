@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -15,7 +16,6 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::System::Log',
     'Kernel::System::Email',
     'Kernel::System::Ticket',
 );
@@ -37,13 +37,13 @@ sub Run {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(JobConfig GetParam)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(JobConfig GetParam)) {
+        if ( !$Param{$Needed} ) {
             $Self->{CommunicationLogObject}->ObjectLog(
                 ObjectLogType => 'Message',
                 Priority      => 'Error',
                 Key           => 'Kernel::System::PostMaster::Filter::NewTicketReject',
-                Value         => "Need $_!",
+                Value         => "Need $Needed!",
             );
             return;
         }

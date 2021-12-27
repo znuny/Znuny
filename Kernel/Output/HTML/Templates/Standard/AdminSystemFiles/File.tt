@@ -1,0 +1,64 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+<div class="WidgetSimple">
+    <div class="Header">
+        <h2>[% Translate('Details') | html %]</h2>
+    </div>
+    <div class="Content LayoutGrid ColumnsWithSpacing">
+        <div class="Size1of2">
+            <table class="DataTable Files">
+                <thead>
+                </thead>
+                <tbody>
+[% RenderBlockStart("FileDetails") %]
+                    <tr>
+                        <td><b>[% Translate(Data.Key) | html %]</b></td>
+                        <td>[% Data.Value | html %]</td>
+                    </tr>
+[% RenderBlockEnd("FileDetails") %]
+                </tbody>
+            </table>
+        </div>
+        <div class="Size1of2">
+            <table class="DataTable Files">
+                <thead>
+                </thead>
+                <tbody>
+[% RenderBlockStart("FileDetailsExtended") %]
+                    <tr>
+                        <td><b>[% Translate(Data.Key) | html %]</b></td>
+                        <td>[% Data.Value | html %]</td>
+                    </tr>
+[% RenderBlockEnd("FileDetailsExtended") %]
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+[% RenderBlockStart("FileDiff") %]
+<div class="WidgetSimple">
+    <div class="Header">
+        <h2>Diff</h2>
+    </div>
+    <div class="Content">
+        [% Data.Content %]
+    </div>
+</div>
+[% RenderBlockEnd("FileDiff") %]
+
+<div class="WidgetSimple">
+    <div class="Header">
+        <h2>
+            [% Data.File | html %]
+        </h2>
+    </div>
+    <div class="Content">
+        <pre><code>[% Data.Content | html %]</code></pre>
+    </div>
+</div>

@@ -1,0 +1,135 @@
+---
+Activities:
+  Activity-1e2242197da3f067e0981143fe9b5f0f:
+    ActivityDialogs:
+    - ActivityDialog-fee75215705dec111d7d3ea93b0fe45f
+    ChangeTime: 2016-08-12 10:15:57
+    Config:
+      ActivityDialog:
+        '1': ActivityDialog-fee75215705dec111d7d3ea93b0fe45f
+    CreateTime: 2016-08-12 10:15:57
+    EntityID: Activity-1e2242197da3f067e0981143fe9b5f0f
+    ID: '2'
+    Name: A2
+  Activity-24e205401c4ed840ea56f846091810a9:
+    ActivityDialogs:
+    - ActivityDialog-b217c6af7f7370c6c11c7ade32e10fe3
+    ChangeTime: 2016-08-12 10:12:50
+    Config:
+      ActivityDialog:
+        '1': ActivityDialog-b217c6af7f7370c6c11c7ade32e10fe3
+    CreateTime: 2016-08-12 10:12:50
+    EntityID: Activity-24e205401c4ed840ea56f846091810a9
+    ID: '1'
+    Name: A1
+ActivityDialogs:
+  ActivityDialog-b217c6af7f7370c6c11c7ade32e10fe3:
+    ChangeTime: 2016-08-12 10:11:57
+    Config:
+      DescriptionLong: ''
+      DescriptionShort: AD1
+      FieldOrder:
+      - Queue
+      Fields:
+        Queue:
+          DefaultValue: ''
+          DescriptionLong: ''
+          DescriptionShort: ''
+          Display: '2'
+      Interface:
+      - AgentInterface
+      Permission: ''
+      RequiredLock: 0
+      SubmitAdviceText: ''
+      SubmitButtonText: ''
+    CreateTime: 2016-08-12 10:11:57
+    EntityID: ActivityDialog-b217c6af7f7370c6c11c7ade32e10fe3
+    ID: '1'
+    Name: AD1
+  ActivityDialog-fee75215705dec111d7d3ea93b0fe45f:
+    ChangeTime: 2016-08-12 10:13:41
+    Config:
+      DescriptionLong: ''
+      DescriptionShort: AD2
+      FieldOrder:
+      - Queue
+      Fields:
+        Queue:
+          DefaultValue: ''
+          DescriptionLong: ''
+          DescriptionShort: ''
+          Display: '2'
+      Interface:
+      - AgentInterface
+      Permission: ''
+      RequiredLock: 0
+      SubmitAdviceText: ''
+      SubmitButtonText: ''
+    CreateTime: 2016-08-12 10:13:41
+    EntityID: ActivityDialog-fee75215705dec111d7d3ea93b0fe45f
+    ID: '2'
+    Name: AD2
+Process:
+  Activities:
+  - Activity-1e2242197da3f067e0981143fe9b5f0f
+  - Activity-24e205401c4ed840ea56f846091810a9
+  ChangeTime: 2016-08-12 10:27:18
+  Config:
+    Description: ZnunyProcessTest Process
+    Path:
+      Activity-1e2242197da3f067e0981143fe9b5f0f:
+        Transition-c51b4405130e6379f1befe356410af94:
+          ActivityEntityID: Activity-24e205401c4ed840ea56f846091810a9
+      Activity-24e205401c4ed840ea56f846091810a9:
+        Transition-aed96ea1cfcf607875a480d60a917778:
+          ActivityEntityID: Activity-1e2242197da3f067e0981143fe9b5f0f
+    StartActivity: Activity-24e205401c4ed840ea56f846091810a9
+    StartActivityDialog: ActivityDialog-b217c6af7f7370c6c11c7ade32e10fe3
+  CreateTime: 2016-08-12 09:59:54
+  EntityID: Process-015a82d39f32ae06bf28714e4bb56b40
+  ID: '1'
+  Layout:
+    Activity-1e2242197da3f067e0981143fe9b5f0f:
+      left: '730'
+      top: '5'
+    Activity-24e205401c4ed840ea56f846091810a9:
+      left: '229'
+      top: '5'
+  Name: ZnunyProcessTest
+  State: Active
+  StateEntityID: S1
+  TransitionActions: []
+  Transitions:
+  - Transition-c51b4405130e6379f1befe356410af94
+  - Transition-aed96ea1cfcf607875a480d60a917778
+Transitions:
+  Transition-aed96ea1cfcf607875a480d60a917778:
+    ChangeTime: 2016-08-12 10:24:31
+    Config:
+      Condition:
+        '1':
+          Fields:
+            QueueID:
+              Match: '2'
+              Type: String
+          Type: and
+      ConditionLinking: and
+    CreateTime: 2016-08-12 10:24:31
+    EntityID: Transition-aed96ea1cfcf607875a480d60a917778
+    ID: '1'
+    Name: T1
+  Transition-c51b4405130e6379f1befe356410af94:
+    ChangeTime: 2016-08-12 10:26:55
+    Config:
+      Condition:
+        '1':
+          Fields:
+            QueueID:
+              Match: '4'
+              Type: String
+          Type: and
+      ConditionLinking: and
+    CreateTime: 2016-08-12 10:26:55
+    EntityID: Transition-c51b4405130e6379f1befe356410af94
+    ID: '2'
+    Name: T2

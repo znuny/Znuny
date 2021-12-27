@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -22,17 +23,17 @@ my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 my @Tests = (
     {
         Name   => 'SELECT with named columns',
-        Data   => 'SELECT id, name FROM groups',
+        Data   => 'SELECT id, name FROM permission_groups',
         Result => [qw(id name)],
     },
     {
         Name   => 'SELECT with all columns',
-        Data   => 'SELECT * FROM groups',
+        Data   => 'SELECT * FROM permission_groups',
         Result => [qw(id name comments valid_id create_time create_by change_time change_by)],
     },
     {
         Name   => 'SELECT with unicode characters',
-        Data   => 'SELECT name AS äöüüßüöä FROM groups',
+        Data   => 'SELECT name AS äöüüßüöä FROM permission_groups',
         Result => ['äöüüßüöä'],
     },
 );

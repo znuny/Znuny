@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -189,7 +190,7 @@ sub Run {
 
     # get params
     my %GetParam;
-    for (
+    for my $Needed (
         qw(
         To Cc Bcc Subject Body InReplyTo References ResponseID ReplyArticleID StateID ArticleID
         IsVisibleForCustomerPresent IsVisibleForCustomer TimeUnits Year Month Day Hour Minute FormID ReplyAll
@@ -197,7 +198,7 @@ sub Run {
         )
         )
     {
-        $GetParam{$_} = $ParamObject->GetParam( Param => $_ );
+        $GetParam{$Needed} = $ParamObject->GetParam( Param => $Needed );
     }
 
     # Make sure sender is correct one. See bug#14872 ( https://bugs.otrs.org/show_bug.cgi?id=14872 ).
@@ -1294,18 +1295,41 @@ sub Run {
             NoCache     => 1,
         );
     }
+    elsif ( $Self->{Subaction} eq 'CheckSubject' ) {
+
+        # Inform a user that article subject will be empty if contains only the ticket hook (if nothing is modified).
+        my $Message = $LayoutObject->{LanguageObject}->Translate(
+            'Article subject will be empty if the subject contains only the ticket hook!'
+        );
+
+        my $Subject = $ParamObject->GetParam( Param => 'Subject' );
+
+        my $CleanedSubject = $TicketObject->TicketSubjectClean(
+            TicketNumber => $Ticket{TicketNumber},
+            Subject      => $Subject,
+        );
+
+        my $Empty = !length $CleanedSubject;
+
+        my $JSON = $LayoutObject->JSONEncode(
+            Data => {
+                Empty   => $Empty ? 1 : 0,
+                Message => $Message,
+            }
+        );
+
+        return $LayoutObject->Attachment(
+            ContentType => 'application/json; charset=' . $LayoutObject->{Charset},
+            Content     => $JSON,
+            Type        => 'inline',
+            NoCache     => 1,
+        );
+    }
     else {
         my $Output = $LayoutObject->Header(
             Value     => $Ticket{TicketNumber},
             Type      => 'Small',
             BodyClass => 'Popup',
-        );
-
-        # Inform a user that article subject will be empty if contains only the ticket hook (if nothing is modified).
-        $Output .= $LayoutObject->Notify(
-            Data => $LayoutObject->{LanguageObject}->Translate(
-                'Article subject will be empty if the subject contains only the ticket hook!'
-            ),
         );
 
         # get std attachment object
@@ -1316,8 +1340,8 @@ sub Run {
             my %AllStdAttachments = $StdAttachmentObject->StdAttachmentStandardTemplateMemberList(
                 StandardTemplateID => $GetParam{ResponseID},
             );
-            for ( sort keys %AllStdAttachments ) {
-                my %Data = $StdAttachmentObject->StdAttachmentGet( ID => $_ );
+            for my $ID ( sort keys %AllStdAttachments ) {
+                my %Data = $StdAttachmentObject->StdAttachmentGet( ID => $ID );
                 $UploadCacheObject->FormIDAddFile(
                     FormID      => $Self->{FormID},
                     Disposition => 'attachment',
@@ -1509,10 +1533,10 @@ sub Run {
                             ": $Data{CreateTime}<br/>" . $Data{Body};
                     }
 
-                    for (qw(Subject ReplyTo Reply-To Cc To From)) {
-                        if ( $Data{$_} ) {
-                            $Data{Body} = $LayoutObject->{LanguageObject}->Translate($_) .
-                                ": $Data{$_}<br/>" . $Data{Body};
+                    for my $Key (qw(Subject ReplyTo Reply-To Cc To From)) {
+                        if ( $Data{$Key} ) {
+                            $Data{Body} = $LayoutObject->{LanguageObject}->Translate($Key) .
+                                ": $Data{$Key}<br/>" . $Data{Body};
                         }
                     }
 
@@ -1546,10 +1570,10 @@ sub Run {
                             ": $Data{CreateTime}\n" . $Data{Body};
                     }
 
-                    for (qw(Subject ReplyTo Reply-To Cc To From)) {
-                        if ( $Data{$_} ) {
-                            $Data{Body} = $LayoutObject->{LanguageObject}->Translate($_) .
-                                ": $Data{$_}\n" . $Data{Body};
+                    for my $Key (qw(Subject ReplyTo Reply-To Cc To From)) {
+                        if ( $Data{$Key} ) {
+                            $Data{Body} = $LayoutObject->{LanguageObject}->Translate($Key) .
+                                ": $Data{$Key}\n" . $Data{Body};
                         }
                     }
 

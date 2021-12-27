@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -382,7 +383,7 @@ $Self->Is(
 );
 
 # set web service name
-my $WebserviceName = '-Test-' . $RandomID;
+my $WebserviceName = 'Operation::Ticket::TicketCreateIncludeTicketData-Test-' . $RandomID;
 
 my $WebserviceID = $WebserviceObject->WebserviceAdd(
     Name   => $WebserviceName,
@@ -884,7 +885,7 @@ for my $QueueData (@Queues) {
 
 # delete group
 $Success = $DBObject->Do(
-    SQL => "DELETE FROM groups WHERE id = $GroupID",
+    SQL => "DELETE FROM permission_groups WHERE id = $GroupID",
 );
 $Self->True(
     $Success,

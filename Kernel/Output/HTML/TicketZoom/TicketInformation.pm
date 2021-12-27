@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -369,7 +370,7 @@ sub Run {
         ObjectType  => ['Ticket'],
         FieldFilter => $DynamicFieldFilter || {},
     );
-    my $DynamicFieldBeckendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
     # to store dynamic fields to be displayed in the process widget and in the sidebar
     my (@FieldsSidebar);
@@ -384,7 +385,7 @@ sub Run {
         # Check if this field is supposed to be hidden from the ticket information box.
         #   For example, it's displayed by a different mechanism (i.e. async widget).
         if (
-            $DynamicFieldBeckendObject->HasBehavior(
+            $DynamicFieldBackendObject->HasBehavior(
                 DynamicFieldConfig => $DynamicFieldConfig,
                 Behavior           => 'IsHiddenInTicketInformation',
             )
@@ -393,10 +394,16 @@ sub Run {
             next DYNAMICFIELD;
         }
 
+        my $SkipWebserviceDynamicField = $Self->_SkipWebserviceDynamicField(
+            DynamicFieldConfig => $DynamicFieldConfig,
+            Value              => $Ticket{ 'DynamicField_' . $DynamicFieldConfig->{Name} },
+        );
+        next DYNAMICFIELD if $SkipWebserviceDynamicField;
+
         # use translation here to be able to reduce the character length in the template
         my $Label = $LayoutObject->{LanguageObject}->Translate( $DynamicFieldConfig->{Label} );
 
-        my $ValueStrg = $DynamicFieldBeckendObject->DisplayValueRender(
+        my $ValueStrg = $DynamicFieldBackendObject->DisplayValueRender(
             DynamicFieldConfig => $DynamicFieldConfig,
             Value              => $Ticket{ 'DynamicField_' . $DynamicFieldConfig->{Name} },
             LayoutObject       => $LayoutObject,
@@ -487,6 +494,52 @@ sub Run {
     return {
         Output => $Output,
     };
+}
+
+# Checks if dynamic fields of types WebserviceText and WebserviceMultiselect
+# should be skipped if they have no display value and SysConfig option
+# Ticket::Frontend::AgentTicketZoom###HideWebserviceDynamicFieldsWithoutDisplayValue
+# is enabled.
+sub _SkipWebserviceDynamicField {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject                    = $Kernel::OM->Get('Kernel::System::Log');
+    my $ConfigObject                 = $Kernel::OM->Get('Kernel::Config');
+    my $DynamicFieldWebserviceObject = $Kernel::OM->Get('Kernel::System::DynamicField::Webservice');
+
+    NEEDED:
+    for my $Needed (qw(DynamicFieldConfig Value)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    my $DynamicFieldConfig = $Param{DynamicFieldConfig};
+    return 1 if !IsHashRefWithData($DynamicFieldConfig);
+
+    return if !$DynamicFieldWebserviceObject->{SupportedDynamicFieldTypes}->{ $DynamicFieldConfig->{FieldType} };
+
+    my $Value = $Param{Value};
+    return 1 if !length $Value;
+
+    my $AgentTicketZoomConfig = $ConfigObject->Get('Ticket::Frontend::AgentTicketZoom');
+    return if !IsHashRefWithData($AgentTicketZoomConfig);
+
+    my $HideWebserviceDynamicFieldsWithoutDisplayValue
+        = $AgentTicketZoomConfig->{HideWebserviceDynamicFieldsWithoutDisplayValue};
+    return if !$HideWebserviceDynamicFieldsWithoutDisplayValue;
+
+    my $DisplayValue = $DynamicFieldWebserviceObject->DisplayValueGet(
+        DynamicFieldConfig => $DynamicFieldConfig,
+        Value              => $Value,
+    );
+    return if defined $DisplayValue && length $DisplayValue;
+
+    return 1;
 }
 
 1;

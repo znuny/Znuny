@@ -2,11 +2,9 @@ package Sisimai;
 use feature ':5.10';
 use strict;
 use warnings;
-use version;
+use version; our $VERSION = version->declare('v4.25.11'); our $PATCHLV = 0;
 
-our $VERSION = version->declare('v4.24.1');
-our $PATCHLV = 0;
-sub version { return $VERSION.($PATCHLV > 0 ? 'p'.$PATCHLV : '') }
+sub version { return substr($VERSION->stringify, 1).($PATCHLV > 0 ? 'p'.$PATCHLV : '') }
 sub sysname { 'bouncehammer' }
 sub libname { 'Sisimai'      }
 
@@ -18,91 +16,29 @@ sub make {
     # @param         [Hash]    argv1      Parser options
     # @options argv1 [Integer] delivered  1 = Including "delivered" reason
     # @options argv1 [Code]    hook       Code reference to a callback method
-    # @options argv1 [String]  input      Input data format: 'email', 'json'
-    # @options argv1 [Array]   field      Email header names to be captured
     # @return        [Array]              Parsed objects
     # @return        [Undef]              Undef if the argument was wrong or an empty array
     my $class = shift;
-    my $argv0 = shift // return undef;
-    die ' ***error: wrong number of arguments' if scalar @_ % 2;
-
+    my $argv0 = shift // return undef; die ' ***error: wrong number of arguments' if scalar @_ % 2;
     my $argv1 = { @_ };
-    my $input = $argv1->{'input'} || undef;
-    my $field = $argv1->{'field'} || [];
-
-    die ' ***error: "field" accepts an array reference only' if ref $field ne 'ARRAY';
-    unless( $input ) {
-        # "input" did not specified, try to detect automatically.
-        my $rtype = ref $argv0;
-        if( ! $rtype || $rtype eq 'SCALAR' ) {
-            # The argument may be a path to email OR a scalar reference to an
-            # email text
-            $input = 'email';
-
-        } elsif( $rtype eq 'ARRAY' || $rtype eq 'HASH' ) {
-            # The argument may be a decoded JSON object
-            $input = 'json';
-        }
-    }
-
-    my $methodargv = {};
-    my $delivered1 = { 'delivered' => $argv1->{'delivered'} // 0 };
-    my $hookmethod = $argv1->{'hook'} || undef;
-    my $bouncedata = [];
 
     require Sisimai::Data;
     require Sisimai::Message;
+    require Sisimai::Mail;
 
-    if( $input eq 'email' ) {
-        # Path to mailbox or Maildir/, or STDIN: 'input' => 'email'
-        require Sisimai::Mail;
-        my $mail = Sisimai::Mail->new($argv0);
-        return undef unless $mail;
+    my $list = [];
+    my $mail = Sisimai::Mail->new($argv0) || return undef;
+    while( my $r = $mail->data->read ) {
+        # Read and parse each email file
+        my $p = { 'data' => $r, 'hook' => $argv1->{'hook'} };
+        next unless my $mesg = Sisimai::Message->new(%$p);
 
-        while( my $r = $mail->read ) {
-            # Read and parse each mail file
-            $methodargv = {
-                'data'  => $r,
-                'hook'  => $hookmethod,
-                'input' => 'email',
-                'field' => $field,
-            };
-            my $mesg = Sisimai::Message->new(%$methodargv);
-            next unless defined $mesg;
-
-            my $data = Sisimai::Data->make('data' => $mesg, %$delivered1);
-            push @$bouncedata, @$data if scalar @$data;
-        }
-    } elsif( $input eq 'json' ) {
-        # Decoded JSON object: 'input' => 'json'
-        my $type = ref $argv0;
-        my $list = [];
-
-        if( $type eq 'ARRAY' ) {
-            # [ {...}, {...}, ... ]
-            for my $e ( @$argv0 ) {
-                next unless ref $e eq 'HASH';
-                push @$list, $e;
-            }
-        } else {
-            push @$list, $argv0;
-        }
-
-        while( my $e = shift @$list ) {
-            $methodargv = { 'data' => $e, 'hook' => $hookmethod, 'input' => 'json' };
-            my $mesg = Sisimai::Message->new(%$methodargv);
-            next unless defined $mesg;
-
-            my $data = Sisimai::Data->make('data' => $mesg, %$delivered1);
-            push @$bouncedata, @$data if scalar @$data;
-        }
-    } else {
-        # The value of "input" neither "email" nor "json"
-        die ' ***error: invalid value of "input"';
+        $p = { 'data' => $mesg, 'delivered' => $argv1->{'delivered'}, 'origin' => $mail->data->path };
+        my $data = Sisimai::Data->make(%$p);
+        push @$list, @$data if scalar @$data;
     }
-
-    return undef unless scalar @$bouncedata;
-    return $bouncedata;
+    return undef unless scalar @$list;
+    return $list;
 }
 
 sub dump {
@@ -113,19 +49,21 @@ sub dump {
     # @param         [Hash]    argv1      Parser options
     # @options argv1 [Integer] delivered  1 = Including "delivered" reason
     # @options argv1 [Code]    hook       Code reference to a callback method
-    # @options argv1 [String]  input      Input data format: 'email', 'json'
     # @return        [String]             Parsed data as JSON text
     my $class = shift;
-    my $argv0 = shift // return undef;
-
-    die ' ***error: wrong number of arguments' if scalar @_ % 2;
+    my $argv0 = shift // return undef; die ' ***error: wrong number of arguments' if scalar @_ % 2;
     my $argv1 = { @_ };
     my $nyaan = __PACKAGE__->make($argv0, %$argv1) // [];
 
-    # Dump as JSON
+    for my $e ( @$nyaan ) {
+        # Set UTF8 flag before converting to JSON string
+        utf8::decode $e->{'subject'};
+        utf8::decode $e->{'diagnosticcode'};
+    }
+
     require Module::Load;
     Module::Load::load('JSON', '-convert_blessed_universally');
-    my $jsonparser = JSON->new->allow_blessed->convert_blessed;
+    my $jsonparser = JSON->new->allow_blessed->convert_blessed->utf8;
     my $jsonstring = $jsonparser->encode($nyaan);
 
     utf8::encode $jsonstring if utf8::is_utf8 $jsonstring;
@@ -136,21 +74,19 @@ sub engine {
     # Parser engine list (MTA modules)
     # @return   [Hash]     Parser engine table
     my $class = shift;
-    my $names = [qw|Bite::Email Bite::JSON ARF RFC3464 RFC3834|];
     my $table = {};
-    my $loads = '';
 
-    while( my $e = shift @$names ) {
+    for my $e ('Lhost', 'ARF', 'RFC3464', 'RFC3834') {
         my $r = 'Sisimai::'.$e;
-        ($loads = $r) =~ s|::|/|g; 
+        (my $loads = $r) =~ s|::|/|g;
         require $loads.'.pm';
 
-        if( $e eq 'Bite::Email' || $e eq 'Bite::JSON' ) {
-            # Sisimai::Bite::Email or Sisimai::Bite::JSON
+        if( $e eq 'Lhost' ) {
+            # Sisimai::Lhost::*
             for my $ee ( @{ $r->index } ) {
                 # Load and get the value of "description" from each module
                 my $rr = 'Sisimai::'.$e.'::'.$ee;
-                ($loads = $rr) =~ s|::|/|g; 
+                ($loads = $rr) =~ s|::|/|g;
                 require $loads.'.pm';
                 $table->{ $rr } = $rr->description;
             }
@@ -168,17 +104,14 @@ sub reason {
     my $class = shift;
     my $table = {};
 
-    require Sisimai::Reason;
-    my $names = Sisimai::Reason->index;
-    my $loads = '';
-
     # These reasons are not included in the results of Sisimai::Reason->index
-    push @$names, (qw|Delivered Feedback Undefined Vacation|);
+    require Sisimai::Reason;
+    my @names = (@{ Sisimai::Reason->index }, qw|Delivered Feedback Undefined Vacation|);
 
-    while( my $e = shift @$names ) {
+    for my $e ( @names ) {
         # Call ->description() method of Sisimai::Reason::*
         my $r = 'Sisimai::Reason::'.$e;
-        ($loads = $r) =~ s|::|/|g; 
+        (my $loads = $r) =~ s|::|/|g;
         require $loads.'.pm';
         $table->{ $e } = $r->description;
     }
@@ -220,12 +153,12 @@ Japanese) and MAI (acronym of "Mail Analyzing Interface").
 
 =head2 C<B<make(I<'/path/to/mbox'>)>>
 
-C<make> method provides feature for getting parsed data from bounced email 
+C<make> method provides feature for getting parsed data from bounced email
 messages like following.
 
     use Sisimai;
     my $v = Sisimai->make('/path/to/mbox'); # or Path to Maildir/
-    #  $v = Sisimai->make(\'From Mailer-Daemon ...'); 
+    #  $v = Sisimai->make(\'From Mailer-Daemon ...');
 
     if( defined $v ) {
         for my $e ( @$v ) {
@@ -239,13 +172,14 @@ messages like following.
             print $e->deliverystatus;       # 5.1.1
             print $e->replycode;            # 550
             print $e->reason;               # userunknown
+            print $e->origin;               # /var/spool/bounce/2022-2222.eml
 
             my $h = $e->damn;               # Convert to HASH reference
             my $j = $e->dump('json');       # Convert to JSON string
             my $y = $e->dump('yaml');       # Convert to YAML string
         }
 
-        # Dump entire list as a JSON 
+        # Dump entire list as a JSON
         use JSON '-convert_blessed_universally';
         my $json = JSON->new->allow_blessed->convert_blessed;
 
@@ -302,9 +236,8 @@ method like the following codes:
     };
 
     my $message = Sisimai::Message->new(
-        'data' => $mailtxt, 
+        'data' => $mailtxt,
         'hook' => $cmethod,
-        'field' => ['X-Mailer', 'Precedence']
     );
     print $message->catch->{'x-mailer'};    # Apple Mail (2.1283)
     print $message->catch->{'queue-id'};    # 2DAEB222022E
@@ -334,6 +267,23 @@ C<reason> method provides table including all the reasons Sisimai can detect
         print $v->{ $e };   # 'Email rejected due to client IP address or a hostname'
     }
 
+=head2 C<B<match()>>
+
+C<match> method receives an error message as a string and returns a reason name
+like the following:
+
+    use Sisimai;
+    my $v = '550 5.1.1 User unknown';
+    my $r = Sisimai->match($v);
+    print $r;   # "userunknown"
+
+=head2 C<B<version()>>
+
+C<version> method returns the version number of Sisimai.
+
+    use Sisimai;
+    print Sisimai->version; # 4.25.0p5
+
 =head1 SEE ALSO
 
 =over
@@ -356,13 +306,13 @@ C<reason> method provides table including all the reasons Sisimai can detect
 
 =head1 REPOSITORY
 
-L<https://github.com/sisimai/p5-Sisimai> - Sisimai on GitHub
+L<https://github.com/sisimai/p5-sisimai> - Sisimai on GitHub
 
 =head1 WEB SITE
 
 L<https://libsisimai.org/> - A successor to bounceHammer, Library to parse error mails.
 
-L<https://github.com/sisimai/rb-Sisimai> - Ruby version of Sisimai
+L<https://github.com/sisimai/rb-sisimai> - Ruby version of Sisimai
 
 =head1 AUTHOR
 
@@ -370,7 +320,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2014-2018 azumakuniyuki, All rights reserved.
+Copyright (C) 2014-2020 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

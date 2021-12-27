@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -114,7 +115,7 @@
                                         <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]:</label>
                                     [% END %]
                                     <div class="Field[% IF !Data.Key %] NoMargin[% END %]">
-                                        <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" />
+                                        <input type="text" name="[% Data.Name | html %]" id="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" [% IF Data.Autocomplete %]autocomplete="[% Data.Autocomplete | html %]"[% END %] />
                                     </div>
                                     <div class="Clear"></div>
     [% RenderBlockEnd("Input") %]

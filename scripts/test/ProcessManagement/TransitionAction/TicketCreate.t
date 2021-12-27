@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -38,6 +39,16 @@ my ( $TestUserLogin, $UserID ) = $Helper->TestUserCreate();
 # Create another test user.
 my ( $TestUserLogin2, $TestUserID2 ) = $Helper->TestUserCreate();
 
+my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate(
+    Language       => 'de',
+    UserFirstname  => 'customer@example.com',
+    UserLastname   => 'customer@example.com',
+    UserCustomerID => 'customer@example.com',
+    UserLogin      => 'customer@example.com',
+    UserPassword   => 'customer@example.com',
+    UserEmail      => 'customer@example.com',
+);
+
 # use Test email backend
 my $Success = $Kernel::OM->Get('Kernel::Config')->Set(
     Key   => 'SendmailModule',
@@ -62,6 +73,7 @@ my $TicketID = $TicketObject->TicketCreate(
     OwnerID       => 1,
     ResponsibleID => 1,
     UserID        => $UserID,
+    CustomerUser  => 'customer@example.com',
 );
 
 # sanity checks
@@ -997,6 +1009,37 @@ my @Tests = (
         CheckFromValue => 1,
     },
 
+    {
+        Name   => 'Correct Ticket->OTRS smart tags CUSTOMER_DATA',
+        Config => {
+            UserID => $UserID,
+            Ticket => \%Ticket,
+            Config => {
+                Title                          => 'ProcessManagement::TransitionAction::TicketCreate::12::' . $RandomID,
+                CustomerID                     => '123465',
+                CustomerUser                   => 'customer@example.com',
+                OwnerID                        => 1,
+                TypeID                         => 1,
+                ResponsibleID                  => 1,
+                PendingTime                    => '2014-12-23 23:05:00',
+                SenderType                     => 'agent',
+                CommunicationChannel           => 'Internal',
+                IsVisibleForCustomer           => 0,
+                ContentType                    => 'text/plain; charset=ISO-8859-15',
+                "DynamicField_Field2$RandomID" => '<OTRS_CUSTOMER_DATA_UserEmail>',
+                Subject                        => '<OTRS_CUSTOMER_BODY>',
+                Body                           => '<OTRS_CUSTOMER_DATA_UserEmail>',
+                HistoryType                    => 'OwnerUpdate',
+                HistoryComment                 => 'Some free text!',
+                NoAgentNotify                  => 0,
+                LinkAs                         => 'Child',
+                TimeUnit                       => 123,
+            },
+        },
+        Success        => 1,
+        Article        => 1,
+        CheckFromValue => 1,
+    },
 );
 
 my %ExcludedArtributes = (
@@ -1138,6 +1181,13 @@ for my $Test (@Tests) {
                         $OrigTest->{Config}->{Config}->{$Attribute},
                         "$ModuleName - Test:'$Test->{Name}' | Attribute: $Attribute value: $OrigTest->{Config}->{Config}->{$Attribute} should been replaced"
                     );
+
+                    $Self->IsNot(
+                        $Test->{Config}->{Config}->{$Attribute},
+                        '-',
+                        "$ModuleName - Test:'$Test->{Name}' | Attribute: $Attribute value: $OrigTest->{Config}->{Config}->{$Attribute} should been replaced"
+                    );
+
                     $Self->Is(
                         $Test->{Config}->{Config}->{$Attribute},
                         $Ticket{$Attribute},
@@ -1151,6 +1201,13 @@ for my $Test (@Tests) {
                         $OrigTest->{Config}->{Config}->{$Attribute},
                         "$ModuleName - Test:'$Test->{Name}' | Attribute: $Attribute value: $OrigTest->{Config}->{Config}->{$Attribute} should been replaced"
                     );
+
+                    $Self->IsNot(
+                        $Test->{Config}->{Config}->{$Attribute},
+                        '-',
+                        "$ModuleName - Test:'$Test->{Name}' | Attribute: $Attribute value: $OrigTest->{Config}->{Config}->{$Attribute} should been replaced"
+                    );
+
                     my $DynamicFieldName = $1;
 
                     my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
@@ -1179,6 +1236,13 @@ for my $Test (@Tests) {
                         $OrigTest->{Config}->{Config}->{$Attribute},
                         "$ModuleName - Test:'$Test->{Name}' | Attribute: $Attribute value: $OrigTest->{Config}->{Config}->{$Attribute} should been replaced"
                     );
+
+                    $Self->IsNot(
+                        $Test->{Config}->{Config}->{$Attribute},
+                        '-',
+                        "$ModuleName - Test:'$Test->{Name}' | Attribute: $Attribute value: $OrigTest->{Config}->{Config}->{$Attribute} should been replaced"
+                    );
+
                     my $DynamicFieldName = $1;
 
                     my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
@@ -1209,6 +1273,24 @@ for my $Test (@Tests) {
                     );
                 }
             }
+            elsif (
+                $OrigTest->{Config}->{Config}->{$Attribute}
+                && $OrigTest->{Config}->{Config}->{$Attribute}
+                =~ m{\A<OTRS_CUSTOMER_DATA_([A-Za-z0-9_]+)>\z}msx
+                )
+            {
+                $Self->IsNot(
+                    $Test->{Config}->{Config}->{$Attribute},
+                    $OrigTest->{Config}->{Config}->{$Attribute},
+                    "$ModuleName - Test:'$Test->{Name}' | Attribute: $Attribute value: $OrigTest->{Config}->{Config}->{$Attribute} should been replaced"
+                );
+                $Self->IsNot(
+                    $Test->{Config}->{Config}->{$Attribute},
+                    '-',
+                    "$ModuleName - Test:'$Test->{Name}' | Attribute: $Attribute value: $OrigTest->{Config}->{Config}->{$Attribute} should been replaced"
+                );
+            }
+
             elsif ( $Attribute eq 'PendingTime' && !$OrigTest->{UpdatePendingTime} ) {
                 $ExpectedValue = 0;
             }
@@ -1228,7 +1310,12 @@ for my $Test (@Tests) {
             # }
 
             if ( $Test->{Article} ) {
-                if ( !ref $ExpectedValue && $OrigTest->{Config}->{Config}->{$Attribute} !~ m{_Value} ) {
+                if (
+                    !ref $ExpectedValue
+                    && $OrigTest->{Config}->{Config}->{$Attribute}
+                    && $OrigTest->{Config}->{Config}->{$Attribute} !~ m{_Value}
+                    )
+                {
                     $Self->Is(
                         $Article{$ArticleAttribute},
                         $ExpectedValue,
@@ -1236,7 +1323,11 @@ for my $Test (@Tests) {
                             . " $Article{ArticleID} match expected value"
                     );
                 }
-                elsif ( $OrigTest->{Config}->{Config}->{$Attribute} =~ m{OTRS_TICKET_DynamicField_(\S+?)_Value} ) {
+                elsif (
+                    $OrigTest->{Config}->{Config}->{$Attribute}
+                    && $OrigTest->{Config}->{Config}->{$Attribute} =~ m{OTRS_TICKET_DynamicField_(\S+?)_Value}
+                    )
+                {
 
                     my $DynamicFieldName = $1;
 

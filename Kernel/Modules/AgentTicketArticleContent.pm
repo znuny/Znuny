@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -151,14 +152,7 @@ sub Run {
     # if there is unexpectedly pgp decrypted content in the html email (OE),
     # we will use the article body (plain text) from the database as fall back
     # see bug#9672
-    if (
-        $Data{Content} =~ m{
-        ^ .* -----BEGIN [ ] PGP [ ] MESSAGE-----  .* $      # grep PGP begin tag
-        .+                                                  # PGP parts may be nested in html
-        ^ .* -----END [ ] PGP [ ] MESSAGE-----  .* $        # grep PGP end tag
-    }xms
-        )
-    {
+    if ( $Data{Content} =~ m{-----(?:BEGIN|END) PGP MESSAGE-----} ) {
 
         # html quoting
         $Article{Body} = $LayoutObject->Ascii2Html(

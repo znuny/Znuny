@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -12,7 +12,7 @@
 # "bin/otrs.Console.pl Dev::Tools::RPMSpecGenerate". All changes will be lost.
 #
 
-Summary:      The Znuny LTS service desk.
+Summary:      The Znuny service desk.
 Name:         znuny
 Version:      0.0
 License:      GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
@@ -157,7 +157,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir /opt/otrs/var/article/
 /opt/otrs/var/fonts/
 /opt/otrs/var/httpd/
-/opt/otrs/var/logo-otrs.png
 %dir /opt/otrs/var/cron/
 %dir /opt/otrs/var/log/
 %dir /opt/otrs/var/sessions/
@@ -170,6 +169,7 @@ rm -rf $RPM_BUILD_ROOT
 /opt/otrs/var/processes/examples/*
 %dir /opt/otrs/var/webservices/examples/
 /opt/otrs/var/webservices/examples/*.pm
+/opt/otrs/var/webservices/examples/*.yml
 
 /opt/otrs/Kernel/cpan-lib*
 

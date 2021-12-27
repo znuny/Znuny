@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -14,9 +15,7 @@ use warnings;
 use Digest::MD5 qw(md5_hex);
 
 our @ObjectDependencies = (
-    'Kernel::System::Web::Request',
     'Kernel::Config',
-    'Kernel::System::AuthSession',
     'Kernel::System::Encode',
 );
 

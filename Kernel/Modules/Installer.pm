@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -1418,11 +1419,11 @@ sub CheckMailConfiguration {
     # Check inbound mail config.
     my $MailAccount = $Kernel::OM->Get('Kernel::System::MailAccount');
 
-    for (qw(InboundUser InboundPassword InboundHost)) {
-        if ( !$ParamObject->GetParam( Param => $_ ) ) {
+    for my $Needed (qw(InboundUser InboundPassword InboundHost)) {
+        if ( !$ParamObject->GetParam( Param => $Needed ) ) {
             return (
                 Successful => 0,
-                Message    => "Missing parameter: $_!"
+                Message    => "Missing parameter: $Needed!"
             );
         }
     }

@@ -596,6 +596,16 @@
             </Array>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketProcess###ProcessListTreeView" Required="1" Valid="1">
+        <Description Translatable="1">Shows existing parent/child (separated by ::) process lists in the form of a tree or a list.</Description>
+        <Navigation>Frontend::Agent::View::TicketProcess</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="0">
+                <Item ValueType="Option" Value="1" Translatable="1">Tree view</Item>
+                <Item ValueType="Option" Value="0" Translatable="1">List view</Item>
+            </Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::CustomerTicketProcess###StateType" Required="1" Valid="1">
         <Description Translatable="1">Determines the next possible ticket states, for process tickets in the customer interface.</Description>
         <Navigation>Frontend::Customer::View::TicketProcess</Navigation>
@@ -604,6 +614,16 @@
                 <Item>new</Item>
                 <Item>open</Item>
             </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::CustomerTicketProcess###ProcessListTreeView" Required="1" Valid="1">
+        <Description Translatable="1">Shows existing parent/child (separated by ::) process lists in the form of a tree or a list.</Description>
+        <Navigation>Frontend::Customer::View::TicketProcess</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="0">
+                <Item ValueType="Option" Value="1" Translatable="1">Tree view</Item>
+                <Item ValueType="Option" Value="0" Translatable="1">List view</Item>
+            </Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketProcess::CustomerIDReadOnly" Required="1" Valid="1">
@@ -719,5 +739,253 @@
             </Hash>
         </Value>
     </Setting>
-
+    <Setting Name="ProcessManagement::TransitionAction::DefaultParameters###001-Framework" Required="0" Valid="1">
+        <Description Translatable="1">Defines the default keys and values for the transition action module parameters. Mandatory fields are marked with "(* required)". Note: For most of the keys the AttributeID can also be used, e.g. "Owner" can be "OwnerID". Keys that define the same Attribute should only be used once, e.g. "Owner" and "OwnerID" are redundant.</Description>
+        <Navigation>Core::ProcessManagement</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="AppointmentCreate">
+                    <Hash>
+                        <Item Key="CalendarName">Calendar 1</Item>
+                        <Item Key="Title">Webinar</Item>
+                        <Item Key="StartTime">2016-01-01 00:00:00</Item>
+                        <Item Key="EndTime">2016-01-02 00:00:00</Item>
+                        <!-- Recurring -->
+                        <Item Key="Recurring">(optional) 1</Item>
+                        <Item Key="RecurrenceType">(* required if Recurring) Daily|Weekly|Monthly|Yearly|CustomWeekly|CustomMonthly|CustomYearly</Item>
+                        <Item Key="RecurrenceCount">(optional) 1</Item>
+                        <Item Key="RecurrenceFrequency">(* required if RecurringType "Custom*")1, 3, 5</Item>
+                        <Item Key="RecurrenceUntil">(optional) 2016-01-10 00:00:00</Item>
+                        <!-- Notification -->
+                        <Item Key="NotificationTime">(optional) 2016-01-01 17:00:00</Item>
+                        <Item Key="NotificationTemplate">(optional) Custom</Item>
+                        <Item Key="NotificationCustom">(* required for Custom) relative</Item>
+                        <Item Key="NotificationCustomRelativeUnitCount">(* required for Custom) 12 (number of time units)</Item>
+                        <Item Key="NotificationCustomRelativeUnit">(* required for Custom) minutes|hours|days</Item>
+                        <Item Key="NotificationCustomRelativePointOfTime">(* required for Custom) beforestart|afterstart|beforeend|afterend (Possible notification types for the "relative" type)</Item>
+                        <Item Key="DynamicField_AppointmentID">(optional) AppointmentID (dynamic field for saving the appointment ID (suitable for linking the appointment later)</Item>
+                    </Hash>
+                </Item>
+                <Item Key="ArticleSend">
+                    <Hash>
+                        <Item Key="SenderType">(* required) agent|system|customer</Item>
+                        <Item Key="IsVisibleForCustomer">(* required) 1</Item>
+                        <Item Key="UserID">(* required) 123</Item>
+                        <Item Key="From">(* required) Some Agent email@example.co</Item>
+                        <Item Key="To">(* required if both Cc and Bcc are not present) Some Customer A customer-a@example.co</Item>
+                        <Item Key="Cc">(* required if both To and Bcc are not present) Some Customer B customer-b@example.co</Item>
+                        <Item Key="Bcc">(* required if both To and Cc are not present) Some Customer C customer-c@example.co</Item>
+                        <Item Key="ReplyTo">(optional) Some Customer B customer-b@example.co</Item>
+                        <Item Key="Subject">(* required) some short description</Item>
+                        <Item Key="Body">(* required) the message text</Item>
+                        <Item Key="InReplyTo">(optional) mail.1@znuny.org</Item>
+                        <Item Key="References">(optional) mail.1@znuny.org mail.2@znuny.org</Item>
+                        <Item Key="Charset">(* required) iso-8859-15</Item>
+                        <Item Key="MimeType">(* required) text/plain</Item>
+                        <Item Key="Loop">1|0 (used for bulk emails)</Item>
+                        <Item Key="HistoryType">OwnerUpdate|Move|AddNote|PriorityUpdate|WebRequestCustomer|...</Item>
+                        <Item Key="HistoryComment">Some free text!</Item>
+                        <Item Key="NoAgentNotify">0</Item>
+                        <Item Key="Queue">(optional) Misc</Item>
+                        <Item Key="Attachments">Attachment 1, Attachment 2 (add attachment of the admin interface)</Item>
+                        <Item Key="Template">(optional) Template 1 (use template to replace in Body by Tag OTRS_TA_TEMPLATE)</Item>
+                        <Item Key="Salutation">(optional) Salutation 1 (use salutation to replace in Body by Tag OTRS_TA_SALUTATION)</Item>
+                        <Item Key="Signature">(optional) Signature 1 (use signature to replace in Body by Tag OTRS_TA_SIGNATURE)</Item>
+                        <Item Key="UseTicketHook">(optional) 1|0</Item>
+                    </Hash>
+                </Item>
+                <Item Key="ConfigItemUpdate">
+                    <Hash>
+                        <Item Key="ConfigItemID">(* required if ConfigItemNumber is set) 1</Item>
+                        <Item Key="ConfigItemNumber">(* required if ConfigItemID is set) 5422000001</Item>
+                        <Item Key="Name">New Name</Item>
+                        <Item Key="InciStateID">(optional) 1</Item>
+                        <Item Key="DeplStateID">(optional) 32</Item>
+                        <Item Key="DeplStateName">(optional) Production</Item>
+                        <Item Key="InciStateName">(optional) Operational</Item>
+                        <!-- All XMLData keys must be configured with a ::. -->
+                        <Item Key="CPU::">(optional) NEW-CPU, NEW-CPU2</Item>
+                        <Item Key="HardDisk::1">(optional) HardDisk::1</Item>
+                        <Item Key="HardDisk::1::Capacity::1">(optional) HardDisk::1::Capacity::1</Item>
+                        <Item Key="HardDisk::2">(optional) HardDisk::2</Item>
+                        <Item Key="HardDisk::2::Capacity::1">(optional) HardDisk::2::Capacity::1</Item>
+                        <Item Key="UserID">(optional) 1 (use to overwrite the logged user)</Item>
+                    </Hash>
+                </Item>
+                <Item Key="DynamicFieldIncrement">
+                    <Hash>
+                        <Item Key="Value">(optional) 5 (default: 1)</Item>
+                        <Item Key="DynamicField1">1</Item>
+                        <Item Key="DynamicField2">1</Item>
+                        <Item Key="DynamicField3">1</Item>
+                        <Item Key="UserID">(optional) 1 (use to overwrite the logged user)</Item>
+                    </Hash>
+                </Item>
+                <Item Key="DynamicFieldPendingTimeSet">
+                    <Hash>
+                        <Item Key="DynamicField">Field1</Item>
+                        <Item Key="Offset">1d 5h 12m 500s</Item>
+                        <Item Key="State">pending auto close +</Item>
+                    </Hash>
+                </Item>
+                <Item Key="DynamicFieldRemove">
+                    <Hash>
+                        <Item Key="DynamicField1">1</Item>
+                        <Item Key="DynamicField2">1</Item>
+                    </Hash>
+                </Item>
+                <Item Key="DynamicFieldSet">
+                    <Hash>
+                        <Item Key="FieldName">(* required) Value</Item>
+                        <Item Key="UserID">1 (use to overwrite the logged user)</Item>
+                    </Hash>
+                </Item>
+                <Item Key="ExecuteInvoker">
+                    <Hash>
+                        <Item Key="Webservice">(* required) Chat System</Item>
+                        <Item Key="Invoker">(* required) Notify by chat</Item>
+                        <Item Key="Asynchronous">0|1</Item>
+                        <Item Key="UserID">1 (use to overwrite the logged user)</Item>
+                    </Hash>
+                </Item>
+                <Item Key="LinkAdd">
+                    <Hash>
+                        <Item Key="SourceObject">(* required) Ticket</Item>
+                        <Item Key="SourceKey">(* required) 123</Item>
+                        <Item Key="TargetObject">(* required) Ticket</Item>
+                        <Item Key="TargetKey">(* required) 345</Item>
+                        <Item Key="Type">(* required) ParentChild</Item>
+                        <Item Key="State">(* required) Valid</Item>
+                        <Item Key="UserID">1 (use to overwrite the logged user)</Item>
+                    </Hash>
+                </Item>
+                <Item Key="TicketArticleCreate">
+                    <Hash>
+                        <Item Key="Body">(* required) Some text</Item>
+                        <Item Key="CommunicationChannel">(* required) Internal|Phone|Email</Item>
+                        <Item Key="ContentType">(* required) text/html; charset=UTF-8</Item>
+                        <Item Key="DynamicField_FieldName">Some Value</Item>
+                        <Item Key="From">Some Agent email@example.com</Item>
+                        <Item Key="HistoryType">(* required) EmailCustomer|AddNote|WebRequestCustomer</Item>
+                        <Item Key="HistoryComment">(* required) Article created</Item>
+                        <Item Key="IsVisibleForCustomer">(* required) 0|1</Item>
+                        <Item Key="SenderType">(* required) agent|system|customer</Item>
+                        <Item Key="Subject">(* required) Some subject</Item>
+                        <Item Key="To">Some Customer A customer-a@example.com</Item>
+                        <Item Key="UserID">1 (use to overwrite the logged user)</Item>
+                        <Item Key="UnlockOnAway">1|0</Item>
+                    </Hash>
+                </Item>
+                <Item Key="TicketCreate">
+                    <Hash>
+                        <Item Key="ArchiveFlag">y|n</Item>
+                        <Item Key="Attachments">optional, 0|1</Item>
+                        <Item Key="Body">(* required) Some text</Item>
+                        <Item Key="CommunicationChannel">Internal|Phone|Email|...</Item>
+                        <Item Key="ContentType">(* required) text/html; charset=UTF-8</Item>
+                        <Item Key="CustomerID">123</Item>
+                        <Item Key="CustomerUser">somecustomeremail</Item>
+                        <Item Key="DynamicField_FieldName">Some Value</Item>
+                        <Item Key="From">Some Agent email@example.com</Item>
+                        <Item Key="HistoryComment">(* required) Subticket Created</Item>
+                        <Item Key="HistoryType">(* required) NewTicket</Item>
+                        <Item Key="IsVisibleForCustomer">(* required) 0|1</Item>
+                        <Item Key="LinkAs">Normal|Parent|Child</Item>
+                        <Item Key="Lock">(* required) unlock|lock</Item>
+                        <Item Key="Owner">(* required) someuserlogin</Item>
+                        <Item Key="PendingTime">2021-09-01 09:00:00</Item>
+                        <Item Key="PendingTimeDiff">123</Item>
+                        <Item Key="Priority">(* required) 3 normal</Item>
+                        <Item Key="Queue">(* required) Raw</Item>
+                        <Item Key="Responsible">someuserlogin</Item>
+                        <Item Key="SenderType">(* required) agent|system|customer</Item>
+                        <Item Key="Service">Service A</Item>
+                        <Item Key="SLA">SLA A</Item>
+                        <Item Key="State">(* required) new</Item>
+                        <Item Key="Subject">(* required) Some subject</Item>
+                        <Item Key="TimeUnit">5</Item>
+                        <Item Key="Title">(* required) Some Ticket Title</Item>
+                        <Item Key="Type">Incident</Item>
+                        <Item Key="UserID">1 (use to overwrite the logged user)</Item>
+                    </Hash>
+                </Item>
+                <Item Key="TicketCustomerSet">
+                    <Hash>
+                        <Item Key="CustomerID">(* required or CustomerUserID) 1</Item>
+                        <Item Key="CustomerUserID">(* required or CustomerID) somecustomerusername</Item>
+                        <Item Key="UserID">1 (use to overwrite the logged user)</Item>
+                    </Hash>
+                </Item>
+                <Item Key="TicketLockSet">
+                    <Hash>
+                        <Item Key="Lock">(* required) Lock|Unlock</Item>
+                        <Item Key="UserID">1 (use to overwrite the logged user)</Item>
+                    </Hash>
+                </Item>
+                <Item Key="TicketOwnerSet">
+                    <Hash>
+                        <Item Key="Owner">(* required) someuserlogin</Item>
+                        <Item Key="UserID">1 (use to overwrite the logged user)</Item>
+                    </Hash>
+                </Item>
+                <Item Key="TicketPrioritySet">
+                    <Hash>
+                        <Item Key="Priority">(* required) 5 very high</Item>
+                        <Item Key="PriorityID">(* required) 1</Item>
+                        <Item Key="UserID">1 (use to overwrite the logged user)</Item>
+                    </Hash>
+                </Item>
+                <Item Key="TicketQueueSet">
+                    <Hash>
+                        <Item Key="Queue">(* required) MyQueue::SubQueue</Item>
+                        <Item Key="UserID">1 (use to overwrite the logged user)</Item>
+                    </Hash>
+                </Item>
+                <Item Key="TicketResponsibleSet">
+                    <Hash>
+                        <Item Key="Responsible">(* required) someuserlogin</Item>
+                        <Item Key="UserID">1 (use to overwrite the logged user)</Item>
+                    </Hash>
+                </Item>
+                <Item Key="TicketServiceSet">
+                    <Hash>
+                        <Item Key="Service">(* required) MyService::Subservice</Item>
+                        <Item Key="UserID">1 (use to overwrite the logged user)</Item>
+                    </Hash>
+                </Item>
+                <Item Key="TicketSLASet">
+                    <Hash>
+                        <Item Key="SLA">(* required) SLA A</Item>
+                        <Item Key="UserID">1 (use to overwrite the logged user)</Item>
+                    </Hash>
+                </Item>
+                <Item Key="TicketStateSet">
+                    <Hash>
+                        <Item Key="State">(* required) open</Item>
+                        <Item Key="UserID">1 (use to overwrite the logged user)</Item>
+                    </Hash>
+                </Item>
+                <Item Key="TicketTitleSet">
+                    <Hash>
+                        <Item Key="Title">(* required) Some ticket title</Item>
+                        <Item Key="UserID">1 (use to overwrite the logged user)</Item>
+                    </Hash>
+                </Item>
+                <Item Key="TicketTypeSet">
+                    <Hash>
+                        <Item Key="Type">(* required) Default</Item>
+                        <Item Key="UserID">1 (use to overwrite the logged user)</Item>
+                    </Hash>
+                </Item>
+                <Item Key="TicketWatchSet">
+                    <Hash>
+                        <Item Key="Action">Subscribe|Unsubscribe|UnsubscribeAll</Item>
+                        <Item Key="UserLogin">(* required if both PostMasterSearch and UserIDs are not present) UserLogin1, UserLogin2, UserLogin3</Item>
+                        <Item Key="PostMasterSearch">(* required if both UserLogin and UserIDs are not present) UserLogin1@znuny.com, UserLogin2@znuny.com, UserLogin3@znuny.com</Item>
+                        <Item Key="UserIDs">(* required if both UserLogin and PostMasterSearch are not present) 1, 2, 3</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
 </otrs_config>

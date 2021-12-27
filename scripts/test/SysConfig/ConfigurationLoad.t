@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -216,26 +217,6 @@ my @Tests = (
         ExpectedResults => {
             Modified => {
                 'Stats::MaxXaxisAttributes' => '1000',
-            },
-        },
-        Success => 1,
-    },
-    {
-        Name              => 'Setting disabled',
-        ConfigurationPerl => {
-            Modified => {
-                'OutOfOfficeMessageTemplate' => {
-                    EffectiveValue => 'template',
-                    IsValid        => 0,
-                },
-            },
-        },
-        Config => {
-            UserID => 1,
-        },
-        ExpectedResults => {
-            Modified => {
-                'OutOfOfficeMessageTemplate' => 'template',
             },
         },
         Success => 1,

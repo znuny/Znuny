@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -588,12 +589,12 @@ sub _MaskQueueView {
 
         # move to short queue names
         my $QueueName = '';
-        for ( 0 .. $#Queue ) {
+        for my $Key ( 0 .. $#Queue ) {
             if ( !$QueueName ) {
-                $QueueName .= $Queue[$_];
+                $QueueName .= $Queue[$Key];
             }
             else {
-                $QueueName .= '::' . $Queue[$_];
+                $QueueName .= '::' . $Queue[$Key];
             }
             if ( !exists $Counter{$QueueName} ) {
                 $Counter{$QueueName} = 0;    # init
@@ -615,9 +616,9 @@ sub _MaskQueueView {
                 $Hash{Queue} = $QueueName;
                 $Hash{Count} = $Counter{$QueueName};
                 $Hash{Total} = $Total;
-                for ( sort keys %AllQueues ) {
-                    if ( $AllQueues{$_} eq $QueueName ) {
-                        $Hash{QueueID} = $_;
+                for my $QueueID ( sort keys %AllQueues ) {
+                    if ( $AllQueues{$QueueID} eq $QueueName ) {
+                        $Hash{QueueID} = $QueueID;
                     }
                 }
                 $Hash{MaxAge} = 0;

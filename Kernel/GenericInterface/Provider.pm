@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -310,6 +311,10 @@ sub Run {
         );
     }
 
+    # store the HTTPCode so we can pass it
+    # to the transport backend later
+    my $HTTPCode = $FunctionResult->{HTTPCode};
+
     # extend the data include payload
     $DataInclude{ProviderResponseInput} = $FunctionResult->{Data};
 
@@ -385,13 +390,15 @@ sub Run {
     #
 
     $FunctionResult = $Self->{TransportObject}->ProviderGenerateResponse(
-        Success => 1,
-        Data    => $DataOut,
+        Success  => 1,
+        Data     => $DataOut,
+        Sort     => $ProviderConfig->{Operation}->{$Operation}->{SortOutbound},
+        HTTPCode => $HTTPCode,
     );
 
     if ( !$FunctionResult->{Success} ) {
-
         my $Summary = $FunctionResult->{ErrorMessage} // 'TransportObject returned an error, cancelling Request';
+
         $Self->_HandleError(
             %HandleErrorData,
             DataInclude => \%DataInclude,

@@ -6,6 +6,8 @@
 # Copyright (C) 2009 Qingjiu Jia <jiaqj at yahoo.com>
 # Copyright (C) 2011 Martin Liu <liuzh66 at gmail.com> http://martinliu.cn
 # Copyright (C) 2013 Michael Shi <micshi at 163.com>
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -1353,12 +1355,12 @@ sub Data {
         'Please visit our customer portal and file a request.' => '请访问我们的客户门户并提出请求。',
         'Everything else will be done as part of your contract.' => '一切都将作为您的合同的一部分完成。',
         'Your installed OTRS version is %s.' => '您安装的OTRS版本是%s。',
-        'To install this package, you need to update to OTRS %s or higher.' =>
-            '要安装此软件包，您需要更新到OTRS %s或更高版本。',
+        'To install this package, you need to update to Znuny %s or higher.' =>
+            '要安装此软件包，您需要更新到Znuny %s或更高版本。',
         'To install this package, the Maximum OTRS Version is %s.' => '要安装此软件包，OTRS最高版本为%s。',
         'To install this package, the required Framework version is %s.' =>
             '要安装此软件包，所需的框架版本为%s。',
-        'Why should I keep OTRS up to date?' => '为什么要保持OTRS是最新的？',
+        'Why should I keep Znuny up to date?' => '为什么要保持Znuny是最新的？',
         'You will receive updates about relevant security issues.' => '您将收到有关安全问题的更新。',
         'You will receive updates for all other relevant OTRS issues' => '您将收到所有其他OTRS相关问题的更新',
         'With your existing contract you can only use a small part of the %s.' =>
@@ -1416,19 +1418,19 @@ sub Data {
             '您真的想要重新安装该软包吗? 所有该模块的手工设置将丢失.',
         'Go to updating instructions' => '转到升级说明',
         'package information' => '软件包信息',
-        'Package installation requires a patch level update of OTRS.' => '安装软件包需要将OTRS补丁级别更新。',
-        'Package update requires a patch level update of OTRS.' => '升级软件包需要将OTRS补丁级别更新。',
+        'Package installation requires a patch level update of Znuny.' => '安装软件包需要将Znuny补丁级别更新。',
+        'Package update requires a patch level update of Znuny.' => '升级软件包需要将Znuny补丁级别更新。',
         'If you are a OTRS Business Solution™ customer, please visit our customer portal and file a request.' =>
             '如果您是OTRS 商业版™客户，请访问我们的客户门户并提交请求。',
-        'Please note that your installed OTRS version is %s.' => '请注意，您安装的OTRS版本是%s。',
-        'To install this package, you need to update OTRS to version %s or newer.' =>
-            '安装这个软件包，你需要升级OTRS版本到%s或者更高。',
-        'This package can only be installed on OTRS version %s or older.' =>
-            '这个软件包只能安装在OTRS版本%s或者更低。',
-        'This package can only be installed on OTRS version %s or newer.' =>
-            '这个软件包只能安装在OTRS版本%s或者更高。',
-        'You will receive updates for all other relevant OTRS issues.' =>
-            '你将收到所有其他有关OTRS问题的更新。',
+        'Please note that your installed Znuny version is %s.' => '请注意，您安装的Znuny版本是%s。',
+        'To install this package, you need to update Znuny to version %s or newer.' =>
+            '安装这个软件包，你需要升级Znuny版本到%s或者更高。',
+        'This package can only be installed on Znuny version %s or older.' =>
+            '这个软件包只能安装在Znuny版本%s或者更低。',
+        'This package can only be installed on Znuny version %s or newer.' =>
+            '这个软件包只能安装在Znuny版本%s或者更高。',
+        'You will receive updates for all other relevant Znuny issues.' =>
+            '你将收到所有其他有关Znuny问题的更新。',
         'How can I do a patch level update if I don’t have a contract?' =>
             '如果没有合约，我怎么更新补丁级别？',
         'Please find all relevant information within the updating instructions at %s.' =>
@@ -4634,9 +4636,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/LinkObject/Ticket.pm
         'Archive search' => '归档搜索',
-
-        # Perl Module: Kernel/Output/HTML/Notification/AgentCloudServicesDisabled.pm
-        'Enable cloud services to unleash all OTRS features!' => '启用云服务以激活OTRS的所有功能！',
 
         # Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
         '%s Upgrade to %s now! %s' => '现在升级%s到%s！%s',

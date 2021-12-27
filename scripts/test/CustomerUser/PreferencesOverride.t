@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -54,6 +55,9 @@ for my $Key ( sort keys %CustomerData ) {
     next KEY if $Key eq 'Source';
     next KEY if $Key eq 'CustomerCompanyValidID';
     next KEY if $Key eq 'UserLanguage';
+
+    # Skip dropdown-values of last views
+    next KEY if $Key =~ m{\AUserLastViews};
 
     $Self->False(
         $CustomerUserObject->SetPreferences(

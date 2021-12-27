@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -275,22 +276,21 @@ my @InvokerHandleResponseTests = (
 );
 
 for my $Test (@InvokerHandleResponseTests) {
-    my %InvokerParams = {};
-    $InvokerParams{Data}                 = $Test->{Data}                 || undef;
-    $InvokerParams{ResponseSuccess}      = $Test->{ResponseSuccess}      || undef;
-    $InvokerParams{ResponseErrorMessage} = $Test->{ResponseErrorMessage} || undef;
-    my $InvokerResult = $InvokerObject->HandleResponse(
-        %InvokerParams,
+    my %InvokerParams = (
+        Data                 => $Test->{Data},
+        ResponseSuccess      => $Test->{ResponseSuccess},
+        ResponseErrorMessage => $Test->{ResponseErrorMessage},
     );
+    my $InvokerResult = $InvokerObject->HandleResponse(%InvokerParams);
 
-    # check if function return correct status
+    # check if function returns correct status
     $Self->Is(
         $InvokerResult->{Success},
         $Test->{ResultSuccess},
         $Test->{Name} . ' (Success).',
     );
 
-    # check if function return correct data
+    # check if function returns correct data
     $Self->IsDeeply(
         $InvokerResult->{Data},
         $Test->{ResultData},

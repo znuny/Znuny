@@ -27,21 +27,21 @@ INSERT INTO users (first_name, last_name, login, pw, valid_id, create_by, create
     VALUES
     ('Admin', 'OTRS', 'root@localhost', 'roK20XGbWEsSM', 1, 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
---  insert into table groups
+--  insert into table permission_groups
 -- ----------------------------------------------------------
-INSERT INTO groups (name, comments, valid_id, create_by, create_time, change_by, change_time)
+INSERT INTO permission_groups (name, comments, valid_id, create_by, create_time, change_by, change_time)
     VALUES
     ('users', 'Group for default access.', 1, 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
---  insert into table groups
+--  insert into table permission_groups
 -- ----------------------------------------------------------
-INSERT INTO groups (name, comments, valid_id, create_by, create_time, change_by, change_time)
+INSERT INTO permission_groups (name, comments, valid_id, create_by, create_time, change_by, change_time)
     VALUES
     ('admin', 'Group of all administrators.', 1, 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
---  insert into table groups
+--  insert into table permission_groups
 -- ----------------------------------------------------------
-INSERT INTO groups (name, comments, valid_id, create_by, create_time, change_by, change_time)
+INSERT INTO permission_groups (name, comments, valid_id, create_by, create_time, change_by, change_time)
     VALUES
     ('stats', 'Group for statistics access.', 1, 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
@@ -212,7 +212,7 @@ Your Ticket-Team
 -- ----------------------------------------------------------
 INSERT INTO system_address (value0, value1, comments, valid_id, queue_id, create_by, create_time, change_by, change_time)
     VALUES
-    ('znuny@localhost', 'Znuny LTS System', 'Standard Address.', 1, 1, 1, current_timestamp, 1, current_timestamp);
+    ('znuny@localhost', 'Znuny System', 'Standard Address.', 1, 1, 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table follow_up_possible
 -- ----------------------------------------------------------
@@ -831,7 +831,7 @@ INSERT INTO article (ticket_id, communication_channel_id, article_sender_type_id
 -- ----------------------------------------------------------
 INSERT INTO article_data_mime (article_id, a_from, a_to, a_subject, a_body, a_message_id, incoming_time, content_path, create_by, create_time, change_by, change_time)
     VALUES
-    (1, 'Znuny LTS <hello@znuny.org>', 'Your Znuny Helpdesk <znuny@localhost>', 'Znuny says hi!', 'We welcome you to Znuny, our ticketing solution based on the well-known OTRS ((Community Edition)) which we forked to make things different.
+    (1, 'Znuny <hello@znuny.org>', 'Your Znuny service desk <znuny@localhost>', 'Znuny says hi!', 'We welcome you to Znuny, our ticketing solution based on the well-known OTRS ((Community Edition)) which we forked to make things different.
 
 We are focused on delivering a stable and community influenced software. So if you have something to contribute, whether bug reports, solutions or enhancements, let us know. We will be happy about your participation.
 
@@ -852,8 +852,8 @@ Your Znuny Team
 -- ----------------------------------------------------------
 INSERT INTO article_data_mime_plain (article_id, body, create_by, create_time, change_by, change_time)
     VALUES
-    (1, 'From: Znuny LTS <hello@znuny.org>
-To: Your Znuny Helpdesk <znuny@localhost>
+    (1, 'From: Znuny <hello@znuny.org>
+To: Your Znuny service desk <znuny@localhost>
 Subject: Znuny says hi!
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit

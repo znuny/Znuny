@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -204,6 +205,46 @@ for my $Test (@Tests) {
     );
 }
 
+# NameExistsCheck
+
+@Tests = (
+    {
+        Address  => uc($SystemAddressEmail),
+        Expected => 1,
+    },
+    {
+        Address  => lc($SystemAddressEmail),
+        Expected => 1,
+    },
+    {
+        Address  => $SystemAddressEmail,
+        Expected => 1,
+    },
+    {
+        Address  => '2' . $SystemAddressEmail,
+        Expected => 0,
+    },
+    {
+        Address  => ', ' . $SystemAddressEmail,
+        Expected => 0,
+    },
+    {
+        Address  => ')' . $SystemAddressEmail,
+        Expected => 0,
+    },
+);
+for my $Test (@Tests) {
+    my $Exists = $SystemAddressObject->NameExistsCheck(
+        Name => $Test->{Address},
+    );
+
+    $Self->Is(
+        $Exists,
+        $Test->{Expected},
+        "NameExistsCheck - $Test->{Address}",
+    );
+}
+
 my %SystemAddressDataUpdate = (
     Name     => '2' . $SystemAddressEmail,
     Realname => '2' . $SystemAddressRealname,
@@ -322,6 +363,52 @@ $Self->False(
         This system address $SystemAddressID2 cannot be set to invalid,
         because it is used in one or more queue(s) or auto response(s)",
 );
+
+# SystemAddressLookup
+@Tests = (
+    {
+        Name => 'Lookup via Name',
+        Data => {
+            Name => '2' . $SystemAddressEmail,
+        },
+        Expected => $SystemAddressID,
+    },
+    {
+        Name => 'Lookup via Name',
+        Data => {
+            SystemAddress => '2' . $SystemAddressEmail,
+        },
+        Expected => $SystemAddressID,
+    },
+    {
+        Name => 'Lookup via ID',
+        Data => {
+            ID => $SystemAddressID
+        },
+        Expected => '2' . $SystemAddressEmail,
+    },
+    {
+        Name => 'Lookup via ID',
+        Data => {
+            SystemAddressID => $SystemAddressID
+        },
+        Expected => '2' . $SystemAddressEmail,
+    },
+);
+
+for my $Test (@Tests) {
+
+    my $Result = $SystemAddressObject->SystemAddressLookup(
+        %{ $Test->{Data} },
+    );
+
+    $Self->Is(
+        $Result,
+        $Test->{Expected},
+        $Test->{Name} . ' - SystemAddressLookup ' . $Result,
+    );
+
+}
 
 # Cleanup is done by RestoreDatabase.
 

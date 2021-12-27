@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2012-2021 Znuny GmbH, http://znuny.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -14,6 +14,7 @@
     [% BreadcrumbPath = [
             {
                 Name => Translate('Dynamic Fields Management'),
+                Link => Env("Action"),
             },
         ]
     %]
@@ -64,6 +65,74 @@
             </div>
         </div>
 [% RenderBlockEnd("Hint") %]
+
+        <div class='WidgetSimple' id='DynamicFieldImportExportWidget'>
+            <div class='Header'>
+                <h2>
+                    [% Translate("Import and export of configurations") | html %]
+                </h2>
+            </div>
+            <div class='Content'>
+                <p class='FieldExplanation'>
+                    [% Translate('Upload a file in YAML format (as provided by the export) to import dynamic field configurations.') | html %]
+                </p>
+                <ul class='ActionList SpacingTop'>
+                    <li>
+                        <form action='[% Env("CGIHandle") %]' method='post' enctype='multipart/form-data' class='Validate PreventMultipleSubmits'>
+                            <input type='hidden' name='ChallengeToken' value=[% Env("UserChallengeToken") | JSON %]>
+                            <input type='hidden' name='Action' value='AdminDynamicFieldConfigurationImportExport'/>
+                            <input type='hidden' name='Subaction' value='Import'/>
+                            <input name='FileUpload' id='FileUpload' type='file' size='18' class='Fixed W100pc Validate_Required [% Data.FileUploadInvalid | html %]'/>
+                            <div id='FileUploadError' class='TooltipErrorMessage'>
+                                <p>
+                                   [% Translate('This field is required.') | html %]
+                                </p>
+                            </div>
+                            <div id='FileUploadServerError' class='TooltipErrorMessage'>
+                                <p>
+                                   [% Translate('This field is required.') | html %]
+                                </p>
+                            </div>
+                            <fieldset class='SpacingTop'>
+                                <label for='OverwriteExistingConfigurations'>
+                                    <input type='checkbox' id='OverwriteExistingConfigurations' name='OverwriteExistingConfigurations' value='1'/>
+                                    [% Translate('Overwrite existing configurations') | html %]
+                                </label>
+                            </fieldset>
+                            <button class='CallForAction Fullsize Center SpacingTop' id='DynamicFieldImport' type='submit'>
+                                <span><i class='fa fa-upload'></i>
+                                    [% Translate('Import configurations') | html %]
+                                </span>
+                            </button>
+                        </form>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminDynamicFieldConfigurationImportExport;Subaction=Export' id='DynamicFieldExport' class='CallForAction Fullsize Center'>
+                            <span><i class='fa fa-download'></i>
+                                [% Translate('Export configurations') | html %]
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class='WidgetSimple'>
+            <div class='Header'>
+                <h2>[% Translate('Actions') | html %]</h2>
+            </div>
+            <div class='Content'>
+                <ul class='ActionList SpacingTop'>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminDynamicFieldScreenConfiguration' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Dynamic fields ↔ Screens') | html %]
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="ContentColumn">
         <div class="WidgetSimple">

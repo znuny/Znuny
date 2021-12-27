@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2021 Perl-Services.de
-# Copyright (C) 2021 Znuny GmbH, https://znuny.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -57,7 +57,7 @@ my $ArticleLimit = 100;
 my @TicketIDs = CreateTickets(@NrOfArticles);
 
 # set web-service name
-my $WebserviceName = '-Test-' . $RandomID;
+my $WebserviceName = 'Operation::Ticket::TicketGetBulkWithArticleLimit-Test-' . $RandomID;
 
 # create web-service object
 my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');

@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -565,7 +566,7 @@ sub _Overview {
         Name => 'Overview',
         Data => {
             %Param,
-            OverviewLink => $Self->{Action},
+            OverviewLink => $Self->{Action} . ';CustomerUserSearch=' . $Param{CustomerUserSearch},
         }
     );
 
@@ -696,7 +697,9 @@ sub _Disabled {
 
     $LayoutObject->Block(
         Name => 'Overview',
-        Data => {},
+        Data => {
+            OverviewLink => $Self->{Action},
+        },
     );
 
     $LayoutObject->Block( Name => 'Disabled' );

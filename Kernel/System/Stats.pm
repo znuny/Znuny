@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -24,13 +25,11 @@ our @ObjectDependencies = (
     'Kernel::Language',
     'Kernel::Output::HTML::Statistics::View',
     'Kernel::System::Cache',
-    'Kernel::System::DB',
-    'Kernel::System::Encode',
+    'Kernel::System::DateTime',
     'Kernel::System::Group',
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::Storable',
-    'Kernel::System::DateTime',
     'Kernel::System::User',
     'Kernel::System::XML',
 );
@@ -369,14 +368,14 @@ sub StatsGet {
                     if ( $Attribute->{Block} eq 'Time' ) {
 
                         # settings for working with time elements
-                        for (
+                        for my $TimeKey (
                             qw(TimeStop TimeStart TimeRelativeUnit
                             TimeRelativeCount TimeRelativeUpcomingCount TimeScaleCount
                             )
                             )
                         {
-                            if ( defined $Ref->{$_} && ( !$Attribute->{$_} || $Ref->{Fixed} ) ) {
-                                $Attribute->{$_} = $Ref->{$_};
+                            if ( defined $Ref->{$TimeKey} && ( !$Attribute->{$TimeKey} || $Ref->{Fixed} ) ) {
+                                $Attribute->{$TimeKey} = $Ref->{$TimeKey};
                             }
                         }
 
@@ -460,9 +459,9 @@ sub StatsUpdate {
 
     # a delete function can be the better solution
     for my $Key (qw(UseAsXvalue UseAsValueSeries UseAsRestriction)) {
-        for ( @{ $StatOld->{$Key} } ) {
-            if ( !$_->{Selected} ) {
-                $_ = undef;
+        for my $Data ( @{ $StatOld->{$Key} } ) {
+            if ( !$Data->{Selected} ) {
+                $Data = undef;
             }
         }
     }
@@ -494,10 +493,12 @@ sub StatsUpdate {
                 }
 
                 # stetting for working with time elements
-                for (qw(TimeStop TimeStart TimeRelativeUnit TimeRelativeCount TimeRelativeUpcomingCount TimeScaleCount))
+                for my $TimeKey (
+                    qw(TimeStop TimeStart TimeRelativeUnit TimeRelativeCount TimeRelativeUpcomingCount TimeScaleCount)
+                    )
                 {
-                    if ( defined $Ref->{$_} ) {
-                        $StatXML{$Key}->[$Index]->{$_} = $Ref->{$_};
+                    if ( defined $Ref->{$TimeKey} ) {
+                        $StatXML{$Key}->[$Index]->{$TimeKey} = $Ref->{$TimeKey};
                     }
                 }
             }
@@ -919,11 +920,11 @@ sub GetStatsObjectAttributes {
     my ( $Self, %Param ) = @_;
 
     # check needed params
-    for (qw(ObjectModule Use)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(ObjectModule Use)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -2965,8 +2966,8 @@ sub _GenerateDynamicStats {
         }
         elsif ( $Ref1->{SelectedValues}[0] eq 'Minute' ) {
             if ( $Count == 1 ) {
-                for ( 0 .. 59 ) {
-                    my $Time = 'sec ' . $_;
+                for my $Index ( 0 .. 59 ) {
+                    my $Time = 'sec ' . $Index;
                     push @HeaderLine, $Time;
                 }
             }
@@ -3565,7 +3566,7 @@ sub _ColumnAndRowTranslation {
 
         # Special handling if the sumfunction is used.
         my $SumColRef;
-        if ( $Param{StatRef}->{SumRow} ) {
+        if ( $Param{StatRef}->{SumCol} ) {
             $SumColRef = pop @HeadOld;
         }
 
@@ -3708,9 +3709,9 @@ sub _CreateStaticResultCacheFilename {
     my $GetParamRef = $Param{GetParam};
 
     # format month and day params
-    for (qw(Month Day)) {
-        if ( $GetParamRef->{$_} ) {
-            $GetParamRef->{$_} = sprintf( "%02d", $GetParamRef->{$_} );
+    for my $TimeKey (qw(Month Day)) {
+        if ( $GetParamRef->{$TimeKey} ) {
+            $GetParamRef->{$TimeKey} = sprintf( "%02d", $GetParamRef->{$TimeKey} );
         }
     }
 

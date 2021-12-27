@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -50,11 +51,11 @@ sub TicketAcceleratorIndex {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(UserID QueueID ShownQueueIDs)) {
-        if ( !exists( $Param{$_} ) ) {
+    for my $Needed (qw(UserID QueueID ShownQueueIDs)) {
+        if ( !exists( $Param{$Needed} ) ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -64,8 +65,8 @@ sub TicketAcceleratorIndex {
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     # db quote
-    for (qw(UserID)) {
-        $Param{$_} = $DBObject->Quote( $Param{$_}, 'Integer' );
+    for my $Needed (qw(UserID)) {
+        $Param{$Needed} = $DBObject->Quote( $Param{$Needed}, 'Integer' );
     }
 
     # get user groups
@@ -114,13 +115,13 @@ sub TicketAcceleratorIndex {
                 AND st.archive_flag = 0
                 AND st.queue_id IN (";
 
-        for ( 0 .. $#QueueIDs ) {
+        for my $Index ( 0 .. $#QueueIDs ) {
 
-            if ( $_ > 0 ) {
+            if ( $Index > 0 ) {
                 $SQL .= ",";
             }
 
-            $SQL .= $DBObject->Quote( $QueueIDs[$_], 'Integer' );
+            $SQL .= $DBObject->Quote( $QueueIDs[$Index], 'Integer' );
         }
         $SQL .= " )";
 

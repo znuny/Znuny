@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -14,9 +15,9 @@ use strict;
 use warnings;
 
 our @ObjectDependencies = (
-    'Kernel::System::Log',
     'Kernel::Config',
     'Kernel::Output::HTML::Layout',
+    'Kernel::System::Log',
 );
 
 sub Run {
@@ -38,8 +39,8 @@ sub Run {
 
     # check if config exists
     if ( $ConfigObject->Get('MIME-Viewer') ) {
-        for ( sort keys %{ $ConfigObject->Get('MIME-Viewer') } ) {
-            if ( $Param{File}->{ContentType} =~ /^$_/i ) {
+        for my $Key ( sort keys %{ $ConfigObject->Get('MIME-Viewer') } ) {
+            if ( $Param{File}->{ContentType} =~ /^Key/i ) {
                 return (
                     %{ $Param{File} },
                     Action => 'Viewer',

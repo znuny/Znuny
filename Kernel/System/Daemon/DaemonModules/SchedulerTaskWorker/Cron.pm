@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -17,10 +18,8 @@ use Symbol;
 use parent qw(Kernel::System::Daemon::DaemonModules::BaseTaskWorker);
 
 our @ObjectDependencies = (
-    'Kernel::Config',
     'Kernel::System::Daemon::SchedulerDB',
     'Kernel::System::DateTime',
-    'Kernel::System::Email',
     'Kernel::System::Log',
 );
 

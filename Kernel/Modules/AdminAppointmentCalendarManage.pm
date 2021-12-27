@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -59,11 +60,47 @@ sub Run {
             )
         {
             my @ParamArray = $ParamObject->GetArray( Param => $Key );
-            $GetParam{$Key} = \@ParamArray;
+
+            my @SafeParamArray;
+            for my $Value (@ParamArray) {
+                if ( defined $Value ) {
+                    my %SafeValue = $Kernel::OM->Get('Kernel::System::HTMLUtils')->Safety(
+                        String       => $Value,
+                        NoApplet     => 1,
+                        NoObject     => 1,
+                        NoEmbed      => 1,
+                        NoSVG        => 1,
+                        NoImg        => 1,
+                        NoIntSrcLoad => 1,
+                        NoExtSrcLoad => 1,
+                        NoJavaScript => 1,
+                    );
+
+                    $Value = $SafeValue{String};
+                }
+
+                push @SafeParamArray, $Value;
+            }
+
+            $GetParam{$Key} = \@SafeParamArray;
             next PARAMNAME;
         }
 
         $GetParam{$Key} = $ParamObject->GetParam( Param => $Key );
+
+        my %SafeGetParam = $Kernel::OM->Get('Kernel::System::HTMLUtils')->Safety(
+            String       => $GetParam{$Key},
+            NoApplet     => 1,
+            NoObject     => 1,
+            NoEmbed      => 1,
+            NoSVG        => 1,
+            NoImg        => 1,
+            NoIntSrcLoad => 1,
+            NoExtSrcLoad => 1,
+            NoJavaScript => 1,
+        );
+
+        $GetParam{$Key} = $SafeGetParam{String};
     }
 
     my $LayoutObject   = $Kernel::OM->Get('Kernel::Output::HTML::Layout');

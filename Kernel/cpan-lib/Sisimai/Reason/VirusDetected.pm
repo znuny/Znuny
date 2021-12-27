@@ -13,13 +13,14 @@ sub match {
     # @since v4.22.0
     my $class = shift;
     my $argv1 = shift // return undef;
-    my $index = [
+
+    state $index = [
         'it has a potentially executable attachment',
         'the message was rejected because it contains prohibited virus or spam content',
         'this form of attachment has been used by recent viruses or other malware',
+        'virus detected',
         'your message was infected with a virus',
     ];
-
     return 1 if grep { rindex($argv1, $_) > -1 } @$index;
     return 0;
 }
@@ -89,7 +90,7 @@ azumakuniyuki
 
 =head1 COPYRIGHT
 
-Copyright (C) 2017-2018 azumakuniyuki, All rights reserved.
+Copyright (C) 2017-2019 azumakuniyuki, All rights reserved.
 
 =head1 LICENSE
 

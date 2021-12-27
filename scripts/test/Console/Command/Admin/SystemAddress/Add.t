@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -25,8 +26,8 @@ $Kernel::OM->ObjectParamAdd(
 my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $SystemAddressName = 'SystemAddress' . $Helper->GetRandomID();
-my $SystemAddress     = $SystemAddressName . '@example.com',
-    my $QueueName     = 'queue' . $Helper->GetRandomID();
+my $SystemAddress     = $SystemAddressName . '@example.com';
+my $QueueName         = 'queue' . $Helper->GetRandomID();
 
 # try to execute command without any options
 $ExitCode = $CommandObject->Execute();

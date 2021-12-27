@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -66,7 +67,7 @@ my $UserID4 = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
 );
 
 # Set web-service name.
-my $WebserviceName = '-Test-' . $RandomID;
+my $WebserviceName = 'Operation::Session::SessionGet-Test-' . $RandomID;
 
 my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
 $Self->Is(

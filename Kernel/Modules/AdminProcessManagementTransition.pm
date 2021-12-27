@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -422,10 +423,13 @@ sub _GetTransitionConfig {
 sub _ShowEdit {
     my ( $Self, %Param ) = @_;
 
+    my $LayoutObject     = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $TransitionObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::Transition');
+
     # get Transition information
     my $TransitionData = $Param{TransitionData} || {};
 
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my %TransitionValidationTypeList = $TransitionObject->TransitionValidationTypeList();
 
     # check if last screen action is main screen
     if ( $Self->{ScreensPath}->[-1]->{Action} eq 'AdminProcessManagement' ) {
@@ -479,19 +483,15 @@ sub _ShowEdit {
     );
 
     $Param{FreshConditionFieldType} = $LayoutObject->BuildSelection(
-        Data => {
-            'String' => Translatable('String'),
-
-          # disable hash and array selection here, because there is no practical way to enter the needed data in the GUI
-          # TODO: implement a possibility to enter the data in a correct way in the GUI
-          #'Hash'   => 'Hash',
-          #'Array'  => 'Array',
-            'Regexp' => Translatable('Regular expression'),
-            'Module' => Translatable('Transition validation module')
-        },
-        SelectedID   => 'String',
-        Name         => "ConditionFieldType[_INDEX_][_FIELDINDEX_]",
-        Sort         => 'AlphanumericKey',
+        Data           => \%TransitionValidationTypeList,
+        SelectedID     => 'String',
+        Name           => "ConditionFieldType[_INDEX_][_FIELDINDEX_]",
+        Sort           => 'IndividualKey',
+        SortIndividual => [
+            'Module',   'Regexp',   'String',      'Equal',
+            'NotEqual', 'Contains', 'NotContains', 'GreaterThan',
+            'GreaterThanOrEqual', 'LessThan', 'LessThanOrEqual'
+        ],
         PossibleNone => 1,
         Class        => 'Validate_Required Modernize',
         Translation  => 1,
@@ -546,18 +546,14 @@ sub _ShowEdit {
 
                 my %FieldData          = %{ $ConditionData{Fields}->{$Field} };
                 my $ConditionFieldType = $LayoutObject->BuildSelection(
-                    Data => {
-                        'String' => Translatable('String'),
-
-          # disable hash and array selection here, because there is no practical way to enter the needed data in the GUI
-          # TODO: implement a possibility to enter the data in a correct way in the GUI
-          #'Hash'   => 'Hash',
-          #'Array'  => 'Array',
-                        'Regexp' => Translatable('Regular expression'),
-                        'Module' => Translatable('Transition validation module')
-                    },
-                    Name         => "ConditionFieldType[$Condition][$Field]",
-                    Sort         => 'AlphanumericKey',
+                    Data           => \%TransitionValidationTypeList,
+                    Name           => "ConditionFieldType[$Condition][$Field]",
+                    Sort           => 'IndividualKey',
+                    SortIndividual => [
+                        'Module',   'Regexp',   'String',      'Equal',
+                        'NotEqual', 'Contains', 'NotContains', 'GreaterThan',
+                        'GreaterThanOrEqual', 'LessThan', 'LessThanOrEqual'
+                    ],
                     Translation  => 1,
                     PossibleNone => 1,
                     Class        => 'Validate_Required Modernize',
@@ -620,18 +616,14 @@ sub _ShowEdit {
         );
 
         $Param{ConditionFieldType} = $LayoutObject->BuildSelection(
-            Data => {
-                'String' => Translatable('String'),
-
-          # disable hash and array selection here, because there is no practical way to enter the needed data in the GUI
-          # TODO: implement a possibility to enter the data in a correct way in the GUI
-          #'Hash'   => 'Hash',
-          #'Array'  => 'Array',
-                'Regexp' => Translatable('Regular expression'),
-                'Module' => Translatable('Transition validation module')
-            },
-            Name        => 'ConditionFieldType[_INDEX_][_FIELDINDEX_]',
-            Sort        => 'AlphanumericKey',
+            Data           => \%TransitionValidationTypeList,
+            Name           => 'ConditionFieldType[_INDEX_][_FIELDINDEX_]',
+            Sort           => 'IndividualKey',
+            SortIndividual => [
+                'Module',   'Regexp',   'String',      'Equal',
+                'NotEqual', 'Contains', 'NotContains', 'GreaterThan',
+                'GreaterThanOrEqual', 'LessThan', 'LessThanOrEqual'
+            ],
             Class       => 'Modernize',
             Translation => 1,
         );

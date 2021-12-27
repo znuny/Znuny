@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -56,8 +57,10 @@ sub new {
         UserID => 1,
         );
 
-    # set URL for calling cloud services
-    $Self->{CloudServiceURL} = 'https://cloud.otrs.com/otrs/public.pl';
+    # set new cloud service url
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $Schema       = $ConfigObject->Get('PackageRepositoryURLSchema') // 'https';
+    $Self->{CloudServiceURL} = $Schema . '://' . $ConfigObject->Get('CloudServiceProxyURL');
 
     return $Self;
 }

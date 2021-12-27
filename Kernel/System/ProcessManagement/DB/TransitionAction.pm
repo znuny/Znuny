@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -363,12 +364,12 @@ update TransitionAction attributes
 returns 1 if success or undef otherwise
 
     my $Success = $TransitionActionObject->TransitionActionUpdate(
-        ID          => 123,                      # mandatory
-        EntityID    => 'TA1'                     # mandatory, exportable unique identifier
-        Name        => 'NameOfTransitionAction', # mandatory
-        Config      => $ConfigHashRef,           # mandatory, actvity dialog configuration to be
+        ID       => 123,                      # mandatory
+        EntityID => 'TA1'                     # mandatory, exportable unique identifier
+        Name     => 'NameOfTransitionAction', # mandatory
+        Config   => $ConfigHashRef,           # mandatory, actvity dialog configuration to be
                                                  #   stored in YAML format
-        UserID      => 123,                      # mandatory
+        UserID   => 123,                      # mandatory
     );
 
 =cut

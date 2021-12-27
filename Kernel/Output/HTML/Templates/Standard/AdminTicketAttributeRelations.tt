@@ -1,0 +1,200 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
+    [% BreadcrumbPath = [
+            {
+                Name => Translate('Ticket attribute relations'),
+                Link => Env("Action"),
+            },
+        ]
+    %]
+
+    [% SWITCH Data.Action %]
+        [% CASE 'Add' %]
+            [% BreadcrumbPath.push({ Name => Translate("Add ticket attribute relations"),}) %]
+        [% CASE 'Change' %]
+            [% USE EditTitle = String(Translate("Edit ticket attribute relations")) %]
+            [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.TicketAttributeRelations.Filename, ' (' , Translate("Priority"), ': ', Data.TicketAttributeRelations.Priority, ')' ) }) %]
+    [% END %]
+
+    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+    <div class="SidebarColumn">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+                    [% IF Data.Action %]
+                        <li>
+                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                        </li>
+                    [% ELSE %]
+                        <li>
+                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Add" class="CallForAction Fullsize Center Create"><span><i class="fa fa-plus-square"></i>[% Translate("Import CSV or Excel file") | html %]</span></a>
+                        </li>
+                    [% END %]
+                </ul>
+            </div>
+        </div>
+    </div>
+
+[% RenderBlockStart("Overview") %]
+    <div class="ContentColumn">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("List") | html %]</h2>
+            </div>
+            <div class="Content">
+                <table class="DataTable">
+                    <thead>
+                        <tr>
+                            <th>[% Translate("Priority") | html %]</th>
+                            <th>[% Translate("Attribute") | html %] 1</th>
+                            <th>[% Translate("Attribute") | html %] 2</th>
+                            <th>[% Translate("Filename") | html %]</th>
+                            <th>[% Translate("Last update") | html %]</th>
+                            <th>[% Translate("Edit") | html %]</th>
+                            <th>[% Translate("Delete") | html %]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        [% IF Data.TicketAttributeRelations.size %]
+                            [% FOREACH TicketAttributeRelations IN Data.TicketAttributeRelations %]
+                                <tr>
+                                    <td>[% TicketAttributeRelations.Priority | html %]</td>
+                                    <td>[% TicketAttributeRelations.Attribute1 | html%]</td>
+                                    <td>[% TicketAttributeRelations.Attribute2 | html%]</td>
+                                    <td>[% TicketAttributeRelations.Filename | html %]</td>
+                                    <td>[% TicketAttributeRelations.ChangeTime | Localize("TimeShort") %]</td>
+                                    <td><a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Change;ID=[% TicketAttributeRelations.ID | uri %]">[% Translate("Edit") | html %]</a></td>
+                                    <td><a class="AsBlock" href="#" data-confirmation-message="[% Translate( "Are you sure you want to delete entry '%s'?", TicketAttributeRelations.Filename ) | html %]" data-action="delete-ticket-attribute-relations" data-url="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Delete;ID=[% TicketAttributeRelations.ID | uri %]">[% Translate("Delete") | html %]</a></td>
+                                </tr>
+                            [% END %]
+                        [% ELSE %]
+                            <tr>
+                                <td colspan="7">
+                                    [% Translate("No data found.") | html %]
+                                </td>
+                            </tr>
+                        [% END %]
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="Clear"></div>
+[% RenderBlockEnd("Overview") %]
+
+[% RenderBlockStart("Edit") %]
+    <div class="ContentColumn">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>
+                    [% IF Data.Action == 'Add' %]
+                        [% Translate("Import CSV or Excel file") | html %]
+                    [% ELSE %]
+                        [% Translate("Edit") | html %]
+                    [% END %]
+                </h2>
+            </div>
+            <div class="Content">
+                <form action="[% Env("CGIHandle") %]" method="post" class="Validate PreventMultipleSubmits" enctype="multipart/form-data">
+                    <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                    <input type="hidden" name="Subaction" value="[% Data.Action | uri %]Action"/>
+                    <input type="hidden" name="ID" value="[% Data.ID | html %]"/>
+                    [% IF Data.Action == 'Change' %]
+                        <input type="hidden" name="ContinueAfterSave" id="ContinueAfterSave" value=""/>
+                    [% END %]
+                    <fieldset class="TableLike">
+                        <label for="File">[% Translate("File") | html %]:</label>
+                        <div class="RichTextField">
+                            <input id="File" name="File" type="file" size="40" class="[% Data.FileInvalid | html %]" />
+
+                            [% IF Data.Action == 'Change' %]
+                                <br><br> <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Download;ID=[% Data.ID | html %]">[% Translate("Download previously imported file") | html %]</a>
+                            [% END %]
+
+                            <div id="FileServerError" class="TooltipErrorMessage">
+                                <p>[% Translate("The file needs to be in CSV (UTF-8) or Excel format. Both header columns need to contain the names of valid ticket attributes. The name of the uploaded file must be unique and must not be in use by another ticket attribute relations record.") | html %]</p>
+                            </div>
+                        </div>
+                        <div class="Clear"></div>
+
+                        <label class="Mandatory" for="Priority">
+                            <span class="Marker">*</span> [% Translate("Priority") | html %]:
+                        </label>
+                        <div class="Field">
+                            [% Data.PrioritySelectionHTML %]
+                            <div id="PriorityError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                            <div id="PriorityServerError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                        </div>
+                        <div class="Clear"></div>
+
+                        <label for="DynamicFieldConfigUpdate">[% Translate("Add missing possible dynamic field values") | html %]:</label>
+                        <div class="Field">
+                            <input type="checkbox" name="DynamicFieldConfigUpdate" id="DynamicFieldConfigUpdate" value="1"[% IF Data.DynamicFieldConfigUpdate %] checked="checked"[% END %] />
+                        </div>
+                        <div class="Clear"></div>
+
+                        <div class="Field SpacingTop">
+                            [% IF Data.Action == 'Change' %]
+                                <button class="CallForAction Primary" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                                [% Translate("or") | html %]
+                                <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
+                            [% ELSE %]
+                                <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                            [% END %]
+                            [% Translate("or") | html %]
+                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %]"><span>[% Translate("Cancel") | html %]</span></a>
+                        </div>
+                        <div class="Clear"></div>
+
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
+        [% IF Data.Action == 'Change' %]
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("Attribute values") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <table class="DataTable">
+                        <thead>
+                            <tr>
+                                <th class="OverviewHeader">[% Data.Attribute1 %]</th>
+                                <th class="OverviewHeader">[% Data.Attribute2 %]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            [% FOREACH Value IN Data.Data %]
+                                <tr>
+                                    <td[% IF Value.item(Data.Attribute1 _ 'ValueMissing') %] style="color: red"[% END %]>[% Value.item(Data.Attribute1) | html %]</td>
+                                    <td[% IF Value.item(Data.Attribute2 _ 'ValueMissing') %] style="color: red"[% END %]>[% Value.item(Data.Attribute2) | html %]</td>
+                                </tr>
+                            [% END %]
+                            </tbody>
+                    </table>
+                    <p class="FieldExplanation">
+                        [% Translate("If a value is colored red, it is missing from the possible values list of the dynamic field configuration.") | html %]
+                    </p>
+                </div>
+            </div>
+        [% END %]
+    </div>
+    <div class="Clear"></div>
+[% RenderBlockEnd("Edit") %]
+</div>

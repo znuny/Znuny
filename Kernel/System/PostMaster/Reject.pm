@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -14,7 +15,6 @@ use warnings;
 our @ObjectDependencies = (
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
-    'Kernel::System::Log',
     'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
 );
@@ -39,13 +39,13 @@ sub Run {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(TicketID InmailUserID GetParam Tn AutoResponseType)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(TicketID InmailUserID GetParam Tn AutoResponseType)) {
+        if ( !$Param{$Needed} ) {
             $Self->{CommunicationLogObject}->ObjectLog(
                 ObjectLogType => 'Message',
                 Priority      => 'Error',
                 Key           => 'Kernel::System::PostMaster::Reject',
-                Value         => "Need $_!",
+                Value         => "Need $Needed!",
             );
             return;
         }

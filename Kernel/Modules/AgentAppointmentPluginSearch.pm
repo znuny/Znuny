@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -70,9 +71,11 @@ sub Run {
         keys %{$ResultList}
         )
     {
+
+        my $ObjectData = $ResultList->{$ObjectID};
         push @Data, {
             Key   => $ObjectID,
-            Value => $ResultList->{$ObjectID},
+            Value => ref $ObjectData ? $ObjectData->{Subject} : $ObjectData,
         };
 
         $MaxResultCount--;

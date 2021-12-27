@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,6 +19,7 @@ use Kernel::Language qw(Translatable);
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::DB',
+    'Kernel::System::DateTime',
     'Kernel::System::Ticket',
 );
 
@@ -76,7 +78,7 @@ sub Run {
             Label      => Translatable("Roles"),
         },
         {
-            SQL        => "SELECT count(*) FROM groups",
+            SQL        => "SELECT count(*) FROM permission_groups",
             Identifier => 'GroupCount',
             Label      => Translatable("Groups"),
         },
@@ -127,7 +129,6 @@ sub Run {
         },
     );
 
-    # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     my %Counts;

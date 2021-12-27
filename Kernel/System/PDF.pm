@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,7 +19,6 @@ our @ObjectDependencies = (
     'Kernel::System::Cache',
     'Kernel::System::DateTime',
     'Kernel::System::Log',
-    'Kernel::System::Main',
 );
 
 =head1 NAME
@@ -344,7 +344,7 @@ sub PageNew {
 
     # get logofile
     my $LogoFile = $Self->{Document}->{LogoFile}
-        || $Kernel::OM->Get('Kernel::Config')->Get('Home') . '/var/logo-otrs.png';
+        || $Kernel::OM->Get('Kernel::Config')->Get('Home') . '/var/httpd/htdocs/skins/Agent/default/img/logo.png';
 
     if (
         defined( $Param{LogoFile} )
@@ -359,11 +359,13 @@ sub PageNew {
         $LogoFile = $Param{LogoFile};
     }
 
+    my $LogoSize = $Kernel::OM->Get('Kernel::Config')->Get('PDF::LogoSize');
+
     # output the logo image at header left
     $Self->Image(
         File   => $LogoFile,
-        Width  => 700,
-        Height => 100,
+        Width  => $LogoSize->{Width} || 475,
+        Height => $LogoSize->{Height} || 100,
     );
 
     if ( $Param{HeaderRight} ) {
@@ -663,11 +665,11 @@ sub Table {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(CellData)) {
-        if ( !defined( $Param{$_} ) ) {
+    for my $Needed (qw(CellData)) {
+        if ( !defined( $Param{$Needed} ) ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             $Param{State} = 1;
             return;
@@ -1067,11 +1069,11 @@ sub Text {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Text)) {
-        if ( !defined( $Param{$_} ) ) {
+    for my $Needed (qw(Text)) {
+        if ( !defined( $Param{$Needed} ) ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -1239,11 +1241,11 @@ sub Image {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(File Width Height)) {
-        if ( !defined( $Param{$_} ) ) {
+    for my $Needed (qw(File Width Height)) {
+        if ( !defined( $Param{$Needed} ) ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -1807,7 +1809,7 @@ sub _TableCalculate {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (
+    for my $Needed (
         qw(
         CellData ColumnData RowData
         Type Font FontSize Lead FontColor Align BackgroundColor Width Border BorderColor
@@ -1815,10 +1817,10 @@ sub _TableCalculate {
         )
         )
     {
-        if ( !defined( $Param{$_} ) ) {
+        if ( !defined( $Param{$Needed} ) ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -1963,9 +1965,9 @@ sub _TableCalculate {
             }
 
             # set default values
-            for (qw(Type Font FontSize FontColor Align Lead BackgroundColor)) {
-                if ( !defined( $Cell->{$_} ) ) {
-                    $Cell->{$_} = $Param{$_};
+            for my $Needed (qw(Type Font FontSize FontColor Align Lead BackgroundColor)) {
+                if ( !defined( $Cell->{$Needed} ) ) {
+                    $Cell->{$Needed} = $Param{$Needed};
                 }
             }
 
@@ -1988,14 +1990,14 @@ sub _TableCalculate {
             }
             my @Words         = split( /\s+/, $Cell->{Content} );
             my $WordMaxLength = 0;
-            for (@Words) {
-                my $WordLength = length($_);
+            for my $Word (@Words) {
+                my $WordLength = length($Word);
                 if ( $WordMaxLength <= $WordLength + 2 ) {
                     $WordMaxLength = $WordLength;
 
                     # calculate width of word
                     my $WordWidth = $Self->_StringWidth(
-                        Text     => $_,
+                        Text     => $Word,
                         Font     => $Cell->{Font},
                         FontSize => $Cell->{FontSize},
                     );
@@ -2176,11 +2178,11 @@ sub _TableBlockNextCalculate {
     );
 
     # check needed stuff
-    for (qw(CellData ColumnData)) {
-        if ( !defined $Param{$_} ) {
+    for my $Needed (qw(CellData ColumnData)) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -2290,11 +2292,11 @@ sub _TableRowCalculate {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(CellData RowData ColumnData Row)) {
-        if ( !defined( $Param{$_} ) ) {
+    for my $Needed (qw(CellData RowData ColumnData Row)) {
+        if ( !defined( $Param{$Needed} ) ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -2409,15 +2411,15 @@ sub _TableCellOutput {
     );
 
     # check needed stuff
-    for (
+    for my $Needed (
         qw(Width Height Text Type Font FontSize FontColor Align Lead
         PaddingTop PaddingRight PaddingBottom PaddingLeft BackgroundColor Border BorderColor)
         )
     {
-        if ( !defined( $Param{$_} ) ) {
+        if ( !defined( $Param{$Needed} ) ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -2543,11 +2545,11 @@ sub _TableCellOnCount {
     my $Return = 0;
 
     # check needed stuff
-    for (qw(CellData)) {
-        if ( !defined( $Param{$_} ) ) {
+    for my $Needed (qw(CellData)) {
+        if ( !defined( $Param{$Needed} ) ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -2619,11 +2621,11 @@ sub _TextCalculate {
     my @PossibleRows;
 
     # check needed stuff
-    for (qw(Text Type Width Height Font FontSize Lead)) {
-        if ( !defined( $Param{$_} ) ) {
+    for my $Needed (qw(Text Type Width Height Font FontSize Lead)) {
+        if ( !defined( $Param{$Needed} ) ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -2812,9 +2814,9 @@ sub _TextCalculate {
 
     # calculate RequiredWidth
     my $Counter2 = 0;
-    for (@PossibleRows) {
+    for my $Text (@PossibleRows) {
         my $RowWidth = $Self->_StringWidth(
-            Text     => $_,
+            Text     => $Text,
             Font     => $Param{Font},
             FontSize => $Param{FontSize},
         );
@@ -2858,11 +2860,11 @@ sub _StringWidth {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Text Font FontSize)) {
-        if ( !defined $Param{$_} ) {
+    for my $Needed (qw(Text Font FontSize)) {
+        if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }
@@ -2920,11 +2922,11 @@ sub _PrepareText {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Text)) {
-        if ( !defined( $Param{$_} ) ) {
+    for my $Needed (qw(Text)) {
+        if ( !defined( $Param{$Needed} ) ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!"
+                Message  => "Need $Needed!"
             );
             return;
         }

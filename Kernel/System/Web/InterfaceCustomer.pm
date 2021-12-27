@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -24,13 +25,12 @@ our @ObjectDependencies = (
     'Kernel::System::CustomerGroup',
     'Kernel::System::CustomerUser',
     'Kernel::System::DB',
-    'Kernel::System::Group',
+    'Kernel::System::DateTime',
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::Scheduler',
-    'Kernel::System::DateTime',
-    'Kernel::System::Web::Request',
     'Kernel::System::Valid',
+    'Kernel::System::Web::Request',
 );
 
 =head1 NAME
@@ -649,8 +649,8 @@ sub Run {
                 || 'ERROR: CustomerPanelBodyLostPasswordToken is missing!';
             my $Subject = $ConfigObject->Get('CustomerPanelSubjectLostPasswordToken')
                 || 'ERROR: CustomerPanelSubjectLostPasswordToken is missing!';
-            for ( sort keys %UserData ) {
-                $Body =~ s/<OTRS_$_>/$UserData{$_}/gi;
+            for my $UserKey ( sort keys %UserData ) {
+                $Body =~ s/<OTRS_$UserKey>/$UserData{$UserKey}/gi;
             }
             my $Sent = $EmailObject->Send(
                 To       => $UserData{UserEmail},
@@ -719,8 +719,8 @@ sub Run {
             || 'New Password is: <OTRS_NEWPW>';
         my $Subject = $ConfigObject->Get('CustomerPanelSubjectLostPassword')
             || 'New Password!';
-        for ( sort keys %UserData ) {
-            $Body =~ s/<OTRS_$_>/$UserData{$_}/gi;
+        for my $UserKey ( sort keys %UserData ) {
+            $Body =~ s/<OTRS_$UserKey>/$UserData{$UserKey}/gi;
         }
         my $Sent = $EmailObject->Send(
             To       => $UserData{UserEmail},
@@ -914,8 +914,8 @@ sub Run {
             || 'No Config Option found!';
         my $Subject = $ConfigObject->Get('CustomerPanelSubjectNewAccount')
             || 'New OTRS Account!';
-        for ( sort keys %GetParams ) {
-            $Body =~ s/<OTRS_$_>/$GetParams{$_}/gi;
+        for my $Key ( sort keys %GetParams ) {
+            $Body =~ s/<OTRS_$Key>/$GetParams{$Key}/gi;
         }
 
         # send account info

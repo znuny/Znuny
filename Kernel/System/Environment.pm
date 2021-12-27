@@ -273,6 +273,7 @@ sub PerlInfoGet {
             Net::HTTP
             Net::SSLGlue
             PDF::API2
+            Sisimai
             SOAP::Lite
             Sys::Hostname::Long
             Text::CSV

@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -16,20 +17,19 @@ use Kernel::Language qw(Translatable);
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::Language',
     'Kernel::System::DB',
+    'Kernel::System::DateTime',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
     'Kernel::System::Lock',
     'Kernel::System::Log',
     'Kernel::System::Priority',
     'Kernel::System::Queue',
-    'Kernel::System::Service',
     'Kernel::System::SLA',
+    'Kernel::System::Service',
     'Kernel::System::State',
     'Kernel::System::Stats',
     'Kernel::System::Ticket',
-    'Kernel::System::DateTime',
     'Kernel::System::Type',
     'Kernel::System::User',
 );

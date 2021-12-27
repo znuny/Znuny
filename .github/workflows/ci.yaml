@@ -5,6 +5,7 @@ name: CI
 on:
   - push
   - pull_request
+  - workflow_dispatch
 
 jobs:
   znunycodepolicy:
@@ -74,10 +75,10 @@ jobs:
             libtimedate-perl libnet-dns-perl libnet-ldap-perl \
             libio-socket-ssl-perl libpdf-api2-perl libdbd-mysql-perl \
             libsoap-lite-perl libtext-csv-xs-perl libjson-xs-perl \
-            libapache-dbi-perl libxml-libxml-perl libxml-libxslt-perl \
+            libapache-dbi-perl libxml-libxml-perl libxml-libxslt-perl libspreadsheet-xlsx-perl \
             libyaml-perl libarchive-zip-perl libcrypt-eksblowfish-perl \
             libencode-hanextra-perl libmail-imapclient-perl libtemplate-perl \
-            libdatetime-perl libmoo-perl apache2 mariadb-client gnupg2 \
+            libdatetime-perl libmoo-perl apache2 mariadb-client gnupg2 liblocale-po-perl \
             cpanminus make gcc
 
       - name: Setup Apache and system user

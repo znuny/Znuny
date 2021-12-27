@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -14,19 +15,18 @@ use warnings;
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::CustomerUser',
+    'Kernel::System::DateTime',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
     'Kernel::System::LinkObject',
-    'Kernel::System::Log',
     'Kernel::System::Priority',
     'Kernel::System::Queue',
+    'Kernel::System::Service',
     'Kernel::System::State',
     'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
-    'Kernel::System::DateTime',
     'Kernel::System::Type',
     'Kernel::System::User',
-    'Kernel::System::Service',
 );
 
 sub new {

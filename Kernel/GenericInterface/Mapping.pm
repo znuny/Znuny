@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -147,23 +148,6 @@ perform data mapping in backend
 
 sub Map {
     my ( $Self, %Param ) = @_;
-
-    # check data - only accept undef or hash ref
-    if ( defined $Param{Data} && ref $Param{Data} ne 'HASH' ) {
-
-        return $Self->{DebuggerObject}->Error(
-            Summary => 'Got Data but it is not a hash ref in Mapping handler!'
-        );
-    }
-
-    # return if data is empty
-    if ( !defined $Param{Data} || !%{ $Param{Data} } ) {
-
-        return {
-            Success => 1,
-            Data    => {},
-        };
-    }
 
     # start map on backend
     return $Self->{BackendObject}->Map(%Param);

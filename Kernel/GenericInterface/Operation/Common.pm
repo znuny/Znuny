@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -28,10 +29,11 @@ performs user or customer user authorization
     my ( $UserID, $UserType ) = $CommonObject->Auth(
         Data => {
             SessionID         => 'AValidSessionIDValue'     # the ID of the user session
-            UserLogin         => 'Agent',                   # if no SessionID is given UserLogin or
-                                                            #   CustomerUserLogin is required
-            CustomerUserLogin => 'Customer',
-            Password  => 'some password',                   # user password
+            UserLogin         => 'Agent1',                  # optional, provide UserLogin or CustomerUserLogin
+            # or
+            CustomerUserLogin => 'Customer1',               # optional, provide UserLogin or CustomerUserLogin
+
+            Password          => 'some password',           # user password
         },
     );
 
@@ -39,7 +41,7 @@ performs user or customer user authorization
 
     (
         1,                                              # the UserID from login or session data
-        'Agent',                                        # || 'Customer', the UserType.
+        'User',                                         # || 'Customer' or 'User', the UserType.
     );
 
 =cut
@@ -182,8 +184,8 @@ sub _AuthUser {
 performs customer user authentication
 
     my $UserID = $CommonObject->_AuthCustomerUser(
-        UserLogin => 'Agent',
-        Password  => 'some password',           # plain text password
+        CustomerUserLogin' => 'Customer1',
+        Password           => 'some password',           # plain text password
     );
 
     returns

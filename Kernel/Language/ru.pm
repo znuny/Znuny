@@ -11,6 +11,8 @@
 # Copyright (C) 2013 Alexey Gluhov <glalexnn at yandex.ru>
 # Copyright (C) 2013 Andrey N. Burdin <BurdinAN at it-sakh.net>
 # Copyright (C) 2013 Yuriy Kolesnikov <ynkolesnikov at gmail.com>
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -1358,12 +1360,12 @@ sub Data {
         'Please visit our customer portal and file a request.' => 'Посетите наш клиентский портал и отправьте запрос.',
         'Everything else will be done as part of your contract.' => 'Все остальное будет сделано в рамках вашего контракта.',
         'Your installed OTRS version is %s.' => 'Установлена OTRS версии %s.',
-        'To install this package, you need to update to OTRS %s or higher.' =>
-            'Для установки пакета необходимо обновить OTRS до версии %s или выше.',
+        'To install this package, you need to update to Znuny %s or higher.' =>
+            'Для установки пакета необходимо обновить Znuny до версии %s или выше.',
         'To install this package, the Maximum OTRS Version is %s.' => 'Для установки пакета необходима версия OTRS не выше %s.',
         'To install this package, the required Framework version is %s.' =>
             'Для установки этого пакета требуется Framework версии %s',
-        'Why should I keep OTRS up to date?' => 'Почему я должен постоянно обновлять OTRS?',
+        'Why should I keep Znuny up to date?' => 'Почему я должен постоянно обновлять Znuny?',
         'You will receive updates about relevant security issues.' => 'Вы получите обновления о соответствующих выпусках безопасности.',
         'You will receive updates for all other relevant OTRS issues' => 'Вы получите обновления для всех других соответствующих вопросов OTRS',
         'With your existing contract you can only use a small part of the %s.' =>
@@ -1421,19 +1423,19 @@ sub Data {
             'Вы действительно хотите переустановить этот пакет? Все ручные изменения будут потеряны.',
         'Go to updating instructions' => 'Перейдите к инструкциям по обновлению',
         'package information' => 'Информация о пакете',
-        'Package installation requires a patch level update of OTRS.' => 'Установка пакета требует обновления уровня патчей OTRS.',
-        'Package update requires a patch level update of OTRS.' => 'Обновление пакета требует обновления уровня патчей OTRS.',
+        'Package installation requires a patch level update of Znuny.' => 'Установка пакета требует обновления уровня патчей Znuny.',
+        'Package update requires a patch level update of Znuny.' => 'Обновление пакета требует обновления уровня патчей Znuny.',
         'If you are a OTRS Business Solution™ customer, please visit our customer portal and file a request.' =>
             'Если вы являетесь покупателем OTRS Business Solution™ посетите наш клиентский портал и отправьте запрос.',
-        'Please note that your installed OTRS version is %s.' => 'Установлена OTRS версии %s.',
-        'To install this package, you need to update OTRS to version %s or newer.' =>
-            'Для установки пакета необходимо обновить OTRS до версии %s или выше.',
-        'This package can only be installed on OTRS version %s or older.' =>
-            'Этот пакет может быть установлен для версий OTRS не выше %s.',
-        'This package can only be installed on OTRS version %s or newer.' =>
-            'Этот пакет может быть установлен на OTRS версии не ниже %s.',
-        'You will receive updates for all other relevant OTRS issues.' =>
-            'Вы получите обновления для всех других соответствующих вопросов OTRS.',
+        'Please note that your installed Znuny version is %s.' => 'Установлена Znuny версии %s.',
+        'To install this package, you need to update Znuny to version %s or newer.' =>
+            'Для установки пакета необходимо обновить Znuny до версии %s или выше.',
+        'This package can only be installed on Znuny version %s or older.' =>
+            'Этот пакет может быть установлен для версий Znuny не выше %s.',
+        'This package can only be installed on Znuny version %s or newer.' =>
+            'Этот пакет может быть установлен на Znuny версии не ниже %s.',
+        'You will receive updates for all other relevant Znuny issues.' =>
+            'Вы получите обновления для всех других соответствующих вопросов Znuny.',
         'How can I do a patch level update if I don’t have a contract?' =>
             'Как я могу выполнить обновление уровня патч если у меня нет контракта?',
         'Please find all relevant information within the updating instructions at %s.' =>
@@ -4639,9 +4641,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/LinkObject/Ticket.pm
         'Archive search' => 'Поиск в архиве',
-
-        # Perl Module: Kernel/Output/HTML/Notification/AgentCloudServicesDisabled.pm
-        'Enable cloud services to unleash all OTRS features!' => 'Включите облачные сервисы, чтобы получить доступ ко всем возможностям OTRS!',
 
         # Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
         '%s Upgrade to %s now! %s' => '%s Обновление до %s сейчас! %s',

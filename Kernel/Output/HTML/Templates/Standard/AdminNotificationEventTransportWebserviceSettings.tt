@@ -1,0 +1,47 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+<label for="TransportWebserviceID">[% Translate("Web service name") | html %]: </label>
+<div class="Field">
+    [% Data.TransportWebserviceIDSelection %]
+</div>
+<div class="Clear"></div>
+
+<label for="TransportWebserviceInvokerName">[% Translate("Invoker") | html %]: </label>
+<div class="Field">
+    [% Data.TransportWebserviceInvokerNameSelection %]
+</div>
+<div class="Clear"></div>
+
+<label for="TransportWebserviceAsynchronous">[% Translate("Asynchronous") | html %]: </label>
+<div class="Field">
+    <input type="checkbox" name="TransportWebserviceAsynchronous" id="TransportWebserviceAsynchronous" value="1" [% IF Data.Data.TransportWebserviceAsynchronous %] checked="checked" [% END %]/>
+    <p class="FieldExplanation">
+        [% Translate("Asynchronous event triggers will be handled as separate process by the scheduler daemon (recommended).") | html %]
+        <br/>
+        [% Translate("Synchronous event triggers will be processed directly during the web request.") | html %]
+    </p>
+</div>
+<div class="Clear"></div>
+
+<label for="TransportWebserviceAdditionalRecipients">[% Translate("Additional recipient email addresses") | html %]: </label>
+<div class="Field">
+    <input type="text" name="TransportWebserviceAdditionalRecipients" id="TransportWebserviceAdditionalRecipients" class="W50pc Validate_MaxLength [% Data.TransportWebserviceAdditionalRecipientsServerError | html %]" value="[% Data.TransportWebserviceAdditionalRecipients | html %]" data-maxlength="200"/>
+    <div id="TransportWebserviceAdditionalRecipientsError" class="TooltipErrorMessage"><p>[% Translate("This field must have less then 200 characters.") | html %]</p></div>
+    <div id="TransportWebserviceAdditionalRecipientsServerError" class="TooltipErrorMessage"><p>[% Translate("This field must have less then 200 characters.") | html %]</p></div>
+    <p class="FieldExplanation">[% Translate("Use comma or semicolon to separate email addresses.") | html %]</p>
+    <p class="FieldExplanation">[% Translate("You can use OTRS-tags like <OTRS_TICKET_DynamicField_...> to insert values from the current ticket.") | html %]</p>
+</div>
+<div class="Clear"></div>
+
+<label for="TransportWebserviceArticleIsVisibleForCustomer">[% Translate("Article visible for customer") | html %]: </label>
+<div class="Field">
+    <input type="checkbox" name="TransportWebserviceArticleIsVisibleForCustomer" id="TransportWebserviceArticleIsVisibleForCustomer" value="1" [% IF Data.Data.TransportWebserviceArticleIsVisibleForCustomer %] checked="checked" [% END %]/>
+    <p class="FieldExplanation">[% Translate("An article will be created if the notification is sent to the customer or an additional email address.") | html %]</p>
+</div>
+<div class="Clear"></div>

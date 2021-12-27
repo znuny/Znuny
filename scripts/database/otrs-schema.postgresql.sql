@@ -31,6 +31,23 @@ CREATE TABLE acl_sync (
     change_time timestamp(0) NOT NULL
 );
 -- ----------------------------------------------------------
+--  create table acl_ticket_attribute_relations
+-- ----------------------------------------------------------
+CREATE TABLE acl_ticket_attribute_relations (
+    id bigserial NOT NULL,
+    filename VARCHAR (255) NOT NULL,
+    attribute_1 VARCHAR (200) NOT NULL,
+    attribute_2 VARCHAR (200) NOT NULL,
+    acl_data VARCHAR NOT NULL,
+    priority BIGINT NOT NULL,
+    create_time timestamp(0) NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time timestamp(0) NOT NULL,
+    change_by INTEGER NOT NULL,
+    PRIMARY KEY(id),
+    CONSTRAINT acl_tar_filename UNIQUE (filename)
+);
+-- ----------------------------------------------------------
 --  create table valid
 -- ----------------------------------------------------------
 CREATE TABLE valid (
@@ -81,9 +98,9 @@ END IF;
 END$$;
 ;
 -- ----------------------------------------------------------
---  create table groups
+--  create table permission_groups
 -- ----------------------------------------------------------
-CREATE TABLE groups (
+CREATE TABLE permission_groups (
     id serial NOT NULL,
     name VARCHAR (200) NOT NULL,
     comments VARCHAR (250) NULL,
@@ -1433,6 +1450,17 @@ CREATE TABLE time_accounting (
     change_by INTEGER NOT NULL,
     PRIMARY KEY(id)
 );
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_indexes
+    WHERE LOWER(indexname) = LOWER('time_accounting_article_id')
+    ) THEN
+    CREATE INDEX time_accounting_article_id ON time_accounting (article_id);
+END IF;
+END$$;
+;
 DO $$
 BEGIN
 IF NOT EXISTS (

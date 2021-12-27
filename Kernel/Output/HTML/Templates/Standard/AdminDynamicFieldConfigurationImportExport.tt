@@ -1,0 +1,196 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
+    [% TranslatedSubaction = Translate(Env("Subaction")); %]
+
+    [% BreadcrumbPath = [
+            {
+                Name => Translate("Dynamic field configurations: %s", TranslatedSubaction),
+            },
+        ]
+    %]
+
+    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+    <div class="Clear"></div>
+
+    <div class="SidebarColumn">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+[% RenderBlockStart("ActionOverview") %]
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=AdminDynamicField" class="CallForAction Fullsize Center">
+                            <span>[% Translate("Dynamic Fields") | html %]</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminDynamicFieldScreenConfiguration' class='CallForAction Fullsize Center'>
+                            <span>[% Translate("Dynamic fields ↔ Screens") | html %]</span>
+                        </a>
+                    </li>
+[% RenderBlockEnd("ActionOverview") %]
+                </ul>
+            </div>
+        </div>
+
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Hint") | html %]</h2>
+            </div>
+            <div class="Content">
+                <div class="FieldExplanation">
+                    <p>
+[% RenderBlockStart("ImportHint") %]
+                        [% Translate("Select the dynamic fields you want to import and click on 'Import'.") | html %]
+[% RenderBlockEnd("ImportHint") %]
+[% RenderBlockStart("ExportHint") %]
+                            [% Translate("Select the dynamic fields whose configuration you want to export and click on 'Export' to generate a YAML file.") | html %]
+                         </p>
+[% RenderBlockEnd("ExportHint") %]
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ContentColumn">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Dynamic fields") | html %]</h2>
+            </div>
+            <div class="Clear"></div>
+            <div class="Content LayoutGrid ColumnsWithSpacing">
+
+[% RenderBlockStart("DynamicFieldsInvalidBackend") %]
+                <h2 style="color:#ff0000;">[% Translate("For the following dynamic fields a configuration cannot be imported because of an invalid backend.") | html %]</h2>
+                <table class="DataTable SpacingBottom id="DynamicFieldsInvalidBackend" style="border-color:#ff0000;">
+                    <thead>
+                        <tr>
+
+                            <th>[% Translate("Name") | html %]</th>
+                            <th>[% Translate("Label") | html %]</th>
+                            <th>[% Translate("Field type") | html %]</th>
+                            <th>[% Translate("Object type") | html %]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+[% RenderBlockStart("DynamicFieldRowInvalidBackend") %]
+                        <tr id="DynamicFieldID_[% Data.ID | html %]">
+                            <td>
+                                [% Data.Name %]
+                            </td>
+                            <td>
+                                <div>[% Translate(Data.Label) | html %]</div>
+                            </td>
+                            <td>
+                                <div>[% Translate(Data.FieldTypeName) | html %]</div>
+                            </td>
+                            <td>
+                                <div>[% Translate(Data.ObjectTypeName) | html %]</div>
+                            </td>
+                        </tr>
+[% RenderBlockEnd("DynamicFieldRowInvalidBackend") %]
+                    </tbody>
+                </table >
+[% RenderBlockEnd("DynamicFieldsInvalidBackend") %]
+
+                [% IF !Data.ImportYAMLFileError %]
+                    <form id='Form' action="[% Env("CGIHandle") %]" method="post" class="Validate [% IF Env("Subaction") == 'Import' %]PreventMultipleSubmits[% END %]">
+                        <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                        <input type="hidden" name="Subaction" value="[% Env("Subaction") %]Action"/>
+                        <input type="hidden" name="Type" value="[% Data.Type | html %]"/>
+                        <input type="hidden" name="OverwriteExistingConfigurations"  value="[% Data.OverwriteExistingConfigurations | html %]">
+                        <table class="DataTable" id="DynamicFieldsTable" summary="List of all registered Dynamic Fields">
+                            <thead>
+                                <tr>
+                                    <th class='Center'>
+                                        <label for="SelectAllDynamicFieldConfigurations">
+                                            <input type="checkbox" id="SelectAllDynamicFieldConfigurations" data-type="DynamicFieldConfiguration" checked="checked" value="" />
+                                            [% Translate("Select all field configurations") | html %]
+                                        </label>
+                                    </th>
+                                    <th class='Center'>
+                                        <label for="SelectAllDynamicFieldScreenConfigurations">
+                                            <input type="checkbox" id="SelectAllDynamicFieldScreenConfigurations" data-type="DynamicFieldScreenConfiguration" checked="checked" value="" />
+                                            [% Translate("Select all screen configurations") | html %]
+                                        </label>
+                                    </th>
+                                    <th>[% Translate("Name") | html %]</th>
+                                    <th>[% Translate("Label") | html %]</th>
+                                    <th>[% Translate("Order") | html %]</th>
+                                    <th>[% Translate("Field type") | html %]</th>
+                                    <th>[% Translate("Object type") | html %]</th>
+                                    <th>[% Translate("Validity") | html %]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+[% RenderBlockStart("DynamicFieldRow") %]
+                                <tr id="DynamicFieldID_[% Data.ID | html %]">
+                                    <td class='Center'>
+[% RenderBlockStart("DynamicFieldConfigurationCheckbox") %]
+                                        <input type="checkbox" name="DynamicFieldConfiguration" value="[% Data.Name | html %]" checked="checked" />
+[% RenderBlockEnd("DynamicFieldConfigurationCheckbox") %]
+                                    </td>
+                                    <td class='Center'>
+[% RenderBlockStart("DynamicFieldScreenConfigurationCheckbox") %]
+                                        <input type="checkbox" name="DynamicFieldScreenConfiguration" value="[% Data.Name | html %]" checked="checked" />
+[% RenderBlockEnd("DynamicFieldScreenConfigurationCheckbox") %]
+                                    </td>
+                                    <td>
+[% RenderBlockStart("Import") %]
+                                        [% Data.Name %]
+[% RenderBlockEnd("Import") %]
+[% RenderBlockStart("Export") %]
+                                        <a href="[% Env("Baselink") %]Action=[% Data.ConfigDialog | uri %];Subaction=Change;ObjectType=[% Data.ObjectType | uri %];FieldType=[% Data.FieldType | uri %];ID=[% Data.ID | uri %]" title="[% Data.Name | html %]" class="MasterActionLink">[% Data.Name %]</a>
+[% RenderBlockEnd("Export") %]
+                                    </td>
+                                    <td>
+                                        <div>[% Translate(Data.Label) | html %]</div>
+                                    </td>
+                                    <td>
+                                        <div>[% Data.FieldOrder %]</div>
+                                    </td>
+                                    <td>
+                                        <div>[% Translate(Data.FieldTypeName) | html %]</div>
+                                    </td>
+                                    <td>
+                                        <div>[% Translate(Data.ObjectTypeName) | html %]</div>
+                                    </td>
+                                    <td>
+                                        <div>[% Translate(Data.Valid) | html %]</div>
+                                    </td>
+                                </tr>
+[% RenderBlockEnd("DynamicFieldRow") %]
+                            </tbody>
+                        </table>
+                        <div class="Field SpacingTop" style="text-align: center;">
+                            <button class="Primary CallForAction" type="submit" id="[% Env("Subaction") | html %]" value="[% TranslatedSubaction | html %]">
+                                <span>[% TranslatedSubaction | html %]</span>
+                            </button>
+                            [% Translate("or") | html %]
+                            <a href="[% Env("Baselink") %]Action=AdminDynamicField" >[% Translate("Cancel") | html %]</a>
+                        </div>
+                        <div class="Clear"></div>
+                    </form>
+                [% ELSE %]
+                    <p>
+                        [% Translate("The uploaded file does not contain configuration(s), is not a YAML file, is damaged or has the wrong structure.") | html %]
+                        <br />
+                        <a href="[% Env("Baselink") %]Action=AdminDynamicField" >[% Translate("Cancel") | html %]</a>
+                    </p>
+                [% END %]
+            </div>
+        </div>
+        <div class="Clear"></div>
+    </div>
+</div>

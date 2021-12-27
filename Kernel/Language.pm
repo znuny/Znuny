@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -21,6 +22,7 @@ use Kernel::System::DateTime;
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::DateTime',
     'Kernel::System::Log',
     'Kernel::System::Main',
 );
@@ -266,9 +268,9 @@ sub Translate {
 
     return $Text if !@Parameters;
 
-    for ( 0 .. $#Parameters ) {
-        return $Text if !defined $Parameters[$_];
-        $Text =~ s/\%(s|d)/$Parameters[$_]/;
+    for my $Count ( 0 .. $#Parameters ) {
+        return $Text if !defined $Parameters[$Count];
+        $Text =~ s/\%(s|d)/$Parameters[$Count]/;
     }
 
     return $Text;
@@ -460,11 +462,11 @@ sub Time {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for (qw(Action Format)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(Action Format)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Need $_!",
+                Message  => "Need $Needed!",
             );
             return;
         }

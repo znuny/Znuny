@@ -1,0 +1,48 @@
+---
+Debugger:
+  DebugThreshold: debug
+  TestMode: '0'
+Description: ''
+FrameworkVersion: 6.1.x git
+Provider:
+  Transport:
+    Type: ''
+RemoteSystem: ''
+Requester:
+  Invoker:
+    Webhook:
+      Description: ''
+      Events: []
+      MappingOutbound:
+        Config:
+          DataInclude: []
+          ForceArray: ''
+          PostRegExFilter: ~
+          PostRegExValueCounter: ~
+          PreRegExFilter: ~
+          PreRegExValueCounter: ~
+          Template: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<xsl:transform
+            version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" xmlns:date=\"http://exslt.org/dates-and-times\"
+            extension-element-prefixes=\"date\">\r\n    <xsl:output method=\"xml\"
+            encoding=\"utf-8\" indent=\"yes\"/>\r\n    <xsl:template match=\"RootElement\">\r\n
+            \       <xsl:copy>\r\n            <username>&lt;OTRS_CONFIG_ProductName&gt;</username>\r\n
+            \           <icon_url>https://www.znuny.org/favicon.ico</icon_url>\r\n
+            \           <channel>@<xsl:value-of select=\"//Recipient/MattermostUsername\"
+            /></channel>\r\n            <text>A new ticket has been created in queue&#x20;**<xsl:value-of
+            select=\"//Ticket/Queue\" />**&#x20;with the title&#x20;**<xsl:value-of
+            select=\"//Ticket/Title\" />**.</text>\r\n        </xsl:copy>\r\n    </xsl:template>\r\n</xsl:transform>"
+        Type: XSLT
+      Type: Ticket::Generic
+  Transport:
+    Config:
+      AdditionalHeaders: ~
+      ContentType: JSON
+      DefaultCommand: GET
+      Host: https://YOURHOST/hooks
+      InvokerControllerMapping:
+        Webhook:
+          Command: POST
+          Controller: /YOURHOOK
+      SSLNoHostnameVerification: '0'
+      Timeout: '30'
+    Type: HTTP::REST

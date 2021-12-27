@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -21,7 +22,6 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Encode',
     'Kernel::System::Log',
-    'Kernel::System::Main',
 );
 
 =head1 NAME
@@ -50,15 +50,14 @@ create an object
 sub new {
     my ( $Type, %Param ) = @_;
 
-    # allocate new hash for object
     my $Self = {};
     bless( $Self, $Type );
 
-    # get database object
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     $Self->{Timeout} = $Param{Timeout} || $ConfigObject->Get('WebUserAgent::Timeout') || 15;
     $Self->{Proxy}   = $Param{Proxy}   || $ConfigObject->Get('WebUserAgent::Proxy')   || '';
+    $Self->{NoProxy} = $Param{NoProxy} // $ConfigObject->Get('WebUserAgent::NoProxy');
 
     return $Self;
 }
@@ -73,6 +72,10 @@ Simple GET request:
         URL => 'http://example.com/somedata.xml',
         SkipSSLVerification => 1, # (optional)
         NoLog               => 1, # (optional)
+
+        # Returns the response content (if available) if the request was not successful.
+        # Otherwise only the status will be returned (default behavior).
+        ReturnResponseContentOnError => 1, # optional
     );
 
 Or a POST request; attributes can be a hashref like this:
@@ -83,6 +86,10 @@ Or a POST request; attributes can be a hashref like this:
         Data => { Attribute1 => 'Value', Attribute2 => 'Value2' },
         SkipSSLVerification => 1, # (optional)
         NoLog               => 1, # (optional)
+
+        # Returns the response content (if available) if the request was not successful.
+        # Otherwise only the status will be returned (default behavior).
+        ReturnResponseContentOnError => 1, # optional
     );
 
 alternatively, you can use an arrayref like this:
@@ -93,6 +100,10 @@ alternatively, you can use an arrayref like this:
         Data => [ Attribute => 'Value', Attribute => 'OtherValue' ],
         SkipSSLVerification => 1, # (optional)
         NoLog               => 1, # (optional)
+
+        # Returns the response content (if available) if the request was not successful.
+        # Otherwise only the status will be returned (default behavior).
+        ReturnResponseContentOnError => 1, # optional
     );
 
 returns
@@ -114,6 +125,10 @@ You can even pass some headers
         },
         SkipSSLVerification => 1, # (optional)
         NoLog               => 1, # (optional)
+
+        # Returns the response content (if available) if the request was not successful.
+        # Otherwise only the status will be returned (default behavior).
+        ReturnResponseContentOnError => 1, # optional
     );
 
 If you need to set credentials
@@ -130,6 +145,10 @@ If you need to set credentials
         },
         SkipSSLVerification => 1, # (optional)
         NoLog               => 1, # (optional)
+
+        # Returns the response content (if available) if the request was not successful.
+        # Otherwise only the status will be returned (default behavior).
+        ReturnResponseContentOnError => 1, # optional
     );
 
 =cut
@@ -137,19 +156,21 @@ If you need to set credentials
 sub Request {
     my ( $Self, %Param ) = @_;
 
-    # define method - default to GET
-    $Param{Type} ||= 'GET';
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+    my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
+
+    $Param{Type} //= 'GET';
 
     my $Response;
 
-    # init agent
     my $UserAgent = LWP::UserAgent->new();
 
     # In some scenarios like transparent HTTPS proxies, it can be neccessary to turn off
-    #   SSL certificate validation.
+    # SSL certificate validation.
     if (
         $Param{SkipSSLVerification}
-        || $Kernel::OM->Get('Kernel::Config')->Get('WebUserAgent::DisableSSLVerification')
+        || $ConfigObject->Get('WebUserAgent::DisableSSLVerification')
         )
     {
         $UserAgent->ssl_opts(
@@ -180,30 +201,31 @@ sub Request {
     # set timeout
     $UserAgent->timeout( $Self->{Timeout} );
 
-    # get database object
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
     # set user agent
-    $UserAgent->agent(
-        $ConfigObject->Get('Product') . ' ' . $ConfigObject->Get('Version')
-    );
+    my $UserAgentString = $ConfigObject->Get('WebUserAgent::UserAgent');
+    $UserAgentString //= $ConfigObject->Get('Product') . ' ' . $ConfigObject->Get('Version');
+
+    $UserAgent->agent($UserAgentString);
 
     # set proxy
     if ( $Self->{Proxy} ) {
         $UserAgent->proxy( [ 'http', 'https', 'ftp' ], $Self->{Proxy} );
     }
 
-    if ( $Param{Type} eq 'GET' ) {
+    # set "no proxy" if configured
+    if ( defined $Self->{NoProxy} && length $Self->{NoProxy} ) {
+        my @Hosts = split /\s*;\s*/, $Self->{NoProxy};
+        @Hosts = grep { defined $_ && length $_ } @Hosts;
 
-        # perform get request on URL
-        $Response = $UserAgent->get( $Param{URL} );
+        $UserAgent->no_proxy(@Hosts) if @Hosts;
     }
 
+    if ( $Param{Type} eq 'GET' ) {
+        $Response = $UserAgent->get( $Param{URL} );
+    }
     else {
-
-        # check for Data param
         if ( !IsArrayRefWithData( $Param{Data} ) && !IsHashRefWithData( $Param{Data} ) ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message =>
                     'WebUserAgent POST: Need Data param containing a hashref or arrayref with data.',
@@ -211,36 +233,46 @@ sub Request {
             return ( Status => 0 );
         }
 
-        # perform post request plus data
         $Response = $UserAgent->post( $Param{URL}, $Param{Data} );
     }
 
-    if ( !$Response->is_success() ) {
+    # convert content to internally used charset
+    my $ResponseContent = $Response->decoded_content();
+    if ( defined $ResponseContent && length $ResponseContent ) {
+        $EncodeObject->EncodeInput( \$ResponseContent );
+    }
 
+    if ( !$Response->is_success() ) {
         if ( !$Param{NoLog} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message  => "Can't perform $Param{Type} on $Param{URL}: " . $Response->status_line(),
             );
         }
 
-        return (
+        my %Response = (
             Status => $Response->status_line(),
         );
+
+        if (
+            $Param{ReturnResponseContentOnError}
+            && defined $ResponseContent
+            && length $ResponseContent
+            )
+        {
+            $Response{Content} = \$ResponseContent;
+        }
+
+        return %Response;
     }
 
-    # get the content to convert internal used charset
-    my $ResponseContent = $Response->decoded_content();
-    $Kernel::OM->Get('Kernel::System::Encode')->EncodeInput( \$ResponseContent );
-
-    if ( $Param{Return} && $Param{Return} eq 'REQUEST' ) {
+    if ( defined $Param{Return} && $Param{Return} eq 'REQUEST' ) {
         return (
             Status  => $Response->status_line(),
             Content => \$Response->request()->as_string(),
         );
     }
 
-    # return request
     return (
         Status  => $Response->status_line(),
         Content => \$ResponseContent,

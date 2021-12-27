@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -12,6 +13,7 @@ use strict;
 use warnings;
 
 use Email::Valid;
+use Mail::Address;
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -221,17 +223,66 @@ sub CheckEmail {
     }
 }
 
+=head2 AreEmailAddressesValid()
+
+    Checks if the given string contains only valid email address(es).
+
+    my $EmailAddressesAreValid = $UtilObject->AreEmailAddressesValid(
+        EmailAddresses => 'test@example.org, test2@example.org',
+
+        # or as array ref
+        EmailAddresses => [
+            'test@example.org',
+            'test2@example.org',
+        ],
+
+        # also works with just one address
+        EmailAddresses => 'test@example.org',
+
+        # or as array ref
+        EmailAddresses => ['test@example.org'],
+    );
+
+    Returns true value if the given string only contains valid email addresses.
+
+=cut
+
+sub AreEmailAddressesValid {
+    my ( $Self, %Param ) = @_;
+
+    return if !defined $Param{EmailAddresses};
+
+    if ( ref $Param{EmailAddresses} eq 'ARRAY' ) {
+        $Param{EmailAddresses} = join ', ', @{ $Param{EmailAddresses} };
+    }
+
+    my @EmailAddresses = Mail::Address->parse( $Param{EmailAddresses} );
+    return if !@EmailAddresses;
+
+    EMAILADDRESS:
+    for my $EmailAddress (@EmailAddresses) {
+        my $EmailAddressIsValid = $Self->CheckEmail(
+            Address => $EmailAddress->address()
+        );
+
+        return if !$EmailAddressIsValid;
+    }
+
+    return 1;
+}
+
 =head2 StringClean()
 
-clean a given string
+clean a given string.
 
     my $StringRef = $CheckItemObject->StringClean(
-        StringRef         => \'String',
-        TrimLeft          => 0,  # (optional) default 1
-        TrimRight         => 0,  # (optional) default 1
-        RemoveAllNewlines => 1,  # (optional) default 0
-        RemoveAllTabs     => 1,  # (optional) default 0
-        RemoveAllSpaces   => 1,  # (optional) default 0
+        StringRef               => \'String',
+        TrimLeft                => 0,  # (optional) default 1
+        TrimRight               => 0,  # (optional) default 1
+        RemoveAllNewlines       => 1,  # (optional) default 0
+        RemoveAllTabs           => 1,  # (optional) default 0
+        RemoveAllSpaces         => 1,  # (optional) default 0
+        ReplaceWithWhiteSpace   => 1,  # (optional) default 0
     );
 
 =cut
@@ -265,7 +316,7 @@ sub StringClean {
     $Param{TrimRight} = defined $Param{TrimRight} ? $Param{TrimRight} : 1;
 
     my %TrimAction = (
-        RemoveAllNewlines => qr{ [\n\r\f] }xms,
+        RemoveAllNewlines => qr{ (\n\r|\n|\r|\f)+ }xms,
         RemoveAllTabs     => qr{ \t       }xms,
         RemoveAllSpaces   => qr{ [ ]      }xms,
         TrimLeft          => qr{ \A \s+   }xms,
@@ -275,8 +326,18 @@ sub StringClean {
     ACTION:
     for my $Action ( sort keys %TrimAction ) {
         next ACTION if !$Param{$Action};
+        my $ReplaceWith = '';
 
-        ${ $Param{StringRef} } =~ s{ $TrimAction{$Action} }{}xmsg;
+        # Check if Newline or Tabs should be replaced with a whitespace
+        if (
+            $Param{ReplaceWithWhiteSpace}
+            && ( $Action eq 'RemoveAllNewlines' || $Action eq 'RemoveAllTabs' )
+            && !$Param{RemoveAllSpaces}
+            )
+        {
+            $ReplaceWith = ' ';
+        }
+        ${ $Param{StringRef} } =~ s{ $TrimAction{$Action} }{$ReplaceWith}xmsg;
     }
 
     return $Param{StringRef};

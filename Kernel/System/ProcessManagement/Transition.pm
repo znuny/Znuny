@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -11,6 +12,7 @@ package Kernel::System::ProcessManagement::Transition;
 use strict;
 use warnings;
 
+use Kernel::Language qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
@@ -123,20 +125,22 @@ sub new {
 sub TransitionGet {
     my ( $Self, %Param ) = @_;
 
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
     for my $Needed (qw(TransitionEntityID)) {
-        if ( !defined $Param{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Need $Needed!",
-            );
-            return;
-        }
+        next NEEDED if defined $Param{$Needed};
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Need $Needed!",
+        );
+        return;
     }
 
     my $Transition = $Kernel::OM->Get('Kernel::Config')->Get('Process::Transition');
 
     if ( !IsHashRefWithData($Transition) ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => 'Need Transition config!',
         );
@@ -144,7 +148,7 @@ sub TransitionGet {
     }
 
     if ( !IsHashRefWithData( $Transition->{ $Param{TransitionEntityID} } ) ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => "No data for Transition '$Param{TransitionEntityID}' found!",
         );
@@ -156,7 +160,7 @@ sub TransitionGet {
 
 =head2 TransitionCheck()
 
-    Checks if one or more Transition Conditions are true
+Checks if one or more Transition Conditions are true.
 
     my $TransitionCheck = $TransitionObject->TransitionCheck(
         TransitionEntityID => 'T1',
@@ -170,33 +174,38 @@ sub TransitionGet {
         },
     );
 
+Returns:
     If called on a single TransitionEntityID
-    Returns:
-    $Checked = 1; # 0
 
+    $Checked = 1;       # 0
+
+Returns:
     If called on an array of TransitionEntityIDs
-    Returns:
-    $Checked = 'T1' # 0 if no Transition was true
+
+    $Checked = 'T1'     # 0 if no Transition was true
 
 =cut
 
 sub TransitionCheck {
     my ( $Self, %Param ) = @_;
 
+    my $LogObject  = $Kernel::OM->Get('Kernel::System::Log');
+    my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+
     # Check if we have TransitionEntityID and Data.
+    NEEDED:
     for my $Needed (qw(TransitionEntityID Data)) {
-        if ( !defined $Param{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Need $Needed!",
-            );
-            return;
-        }
+        next NEEDED if defined $Param{$Needed};
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Need $Needed!",
+        );
+        return;
     }
 
     # Check if TransitionEntityID is not empty (either Array or String with length).
     if ( !length $Param{TransitionEntityID} ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => "Need TransitionEntityID or TransitionEntityID array!",
         );
@@ -260,7 +269,7 @@ sub TransitionCheck {
 
     # Check if we have Data to check against transitions conditions.
     if ( !IsHashRefWithData( $Param{Data} ) ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => "Data has no values!",
         );
@@ -272,7 +281,7 @@ sub TransitionCheck {
 
     # Check if there are Transitions.
     if ( !IsHashRefWithData($Transitions) ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => 'Need transition config!',
         );
@@ -280,6 +289,8 @@ sub TransitionCheck {
     }
 
     $Self->{TransitionDebugOrig} = $Self->{TransitionDebug};
+
+    my %TransitionValidation = $Self->TransitionValidationTypeListGet();
 
     # Loop through all submitted TransitionEntityID's.
     TRANSITIONENTITYID:
@@ -299,7 +310,7 @@ sub TransitionCheck {
 
         # Check if the submitted TransitionEntityID has a config.
         if ( !IsHashRefWithData( $Transitions->{$TransitionEntityID} ) ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message  => "No config data for transition $TransitionEntityID found!",
             );
@@ -308,7 +319,7 @@ sub TransitionCheck {
 
         # Check if we have TransitionConditions.
         if ( !IsHashRefWithData( $Transitions->{$TransitionEntityID}->{Condition} ) ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message  => "No conditions for transition $TransitionEntityID found!",
             );
@@ -343,7 +354,7 @@ sub TransitionCheck {
             && $ConditionLinking ne 'xor'
             )
         {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message  => "Invalid Condition->Type in $TransitionEntityID!",
             );
@@ -366,7 +377,7 @@ sub TransitionCheck {
             # Check if we have Fields in our Condition.
             if ( !IsHashRefWithData( $ActualCondition->{Fields} ) )
             {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                $LogObject->Log(
                     Priority => 'error',
                     Message  => "No Fields in Transition $TransitionEntityID->Condition->$ConditionName"
                         . " found!",
@@ -387,7 +398,7 @@ sub TransitionCheck {
 
             # If there is something else than 'and', 'or', 'xor' log defect Transition Config.
             if ( $CondType ne 'and' && $CondType ne 'or' && $CondType ne 'xor' ) {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                $LogObject->Log(
                     Priority => 'error',
                     Message  => "Invalid Condition->$ConditionName->Type in $TransitionEntityID!",
                 );
@@ -430,90 +441,61 @@ sub TransitionCheck {
                     );
                 }
 
-                # If there is something else than 'String', 'Regexp', 'Hash', 'Array', 'Module'
-                #   log defect Transition Config.
-                if (
-                    $FieldType ne 'String'
-                    && $FieldType ne 'Hash'
-                    && $FieldType ne 'Array'
-                    && $FieldType ne 'Regexp'
-                    && $FieldType ne 'Module'
-                    )
-                {
-                    $Kernel::OM->Get('Kernel::System::Log')->Log(
+                my @ComplexTypes  = ( 'Array', 'Hash' );
+                my $IsComplexType = grep { $FieldType eq $_ } @ComplexTypes;
+
+                if ( $FieldType && %TransitionValidation && !$TransitionValidation{$FieldType} && !$IsComplexType ) {
+                    $LogObject->Log(
                         Priority => 'error',
                         Message  => "Invalid Condition->Type in $TransitionEntityID!",
                     );
                     return;
                 }
 
-                if ( $ActualCondition->{Fields}->{$FieldName}->{Type} eq 'String' ) {
+                my $ValidateModuleObject;
+                if ( !$IsComplexType ) {
 
-                    # if our Check contains anything else than a string we can't check
-                    #   Special Condition: if Match contains '0' we can check.
-                    if (
-                        (
-                            !$ActualCondition->{Fields}->{$FieldName}->{Match}
-                            && $ActualCondition->{Fields}->{$FieldName}->{Match} ne '0'
-                        )
-                        || ref $ActualCondition->{Fields}->{$FieldName}->{Match}
-                        )
-                    {
-                        $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    my $Module = $TransitionValidation{ $ActualCondition->{Fields}->{$FieldName}->{Type} }->{Module};
+
+                    if ( $ActualCondition->{Fields}->{$FieldName}->{Type} eq 'Module' ) {
+                        $Module = $ActualCondition->{Fields}->{$FieldName}->{Match};
+                    }
+
+                    # check if transition validation module exists
+                    if ( !$MainObject->Require($Module) ) {
+                        $LogObject->Log(
                             Priority => 'error',
-                            Message =>
-                                "$TransitionEntityID->Condition->$ConditionName->Fields->$FieldName Match must"
-                                . " be a String if Type is set to String!",
+                            Message  => "Can't load transition validation "
+                                . $ActualCondition->{Fields}->{$FieldName}->{Type}
+                                . " module for Transition->$TransitionEntityID->Condition->$ConditionName->"
+                                . "Fields->$FieldName validation!",
                         );
                         return;
                     }
 
-                    my $Match;
-                    my $MatchValue;
+                    $ValidateModuleObject = $Module->new(
+                        %{$Self},
+                        %Param,
+                    );
+                }
 
-                    # Make sure there is data to compare.
-                    if (
-                        defined $Param{Data}->{$FieldName}
-                        && defined $ActualCondition->{Fields}->{$FieldName}->{Match}
-                        )
-                    {
+                if ( $ActualCondition->{Fields}->{$FieldName}->{Type} eq 'String' ) {
 
-                        # Check if field data is a string and compare directly.
-                        if (
-                            ref $Param{Data}->{$FieldName} eq ''
-                            && $ActualCondition->{Fields}->{$FieldName}->{Match} eq $Param{Data}->{$FieldName}
-                            )
-                        {
-                            $Match      = 1;
-                            $MatchValue = $Param{Data}->{$FieldName};
-                        }
+                    # Handle "Data" Param to ValidateModule's "Validate" subroutine.
+                    my $Match = $ValidateModuleObject->Validate(
+                        Data               => $Param{Data},
+                        FieldName          => $FieldName,
+                        Transition         => $Transitions->{$TransitionEntityID},
+                        TransitionName     => $Transitions->{$TransitionEntityID}->{Name},
+                        TransitionEntityID => $TransitionEntityID,
+                        Condition          => $ActualCondition->{Fields}->{$FieldName},
+                        ConditionName      => $ConditionName,
+                        ConditionType      => $CondType,
+                        ConditionLinking   => $ConditionLinking,
+                    );
 
-                        # Otherwise check if field data is and array and compare each element until
-                        #   one match.
-                        elsif ( ref $Param{Data}->{$FieldName} eq 'ARRAY' ) {
-
-                            ITEM:
-                            for my $Item ( @{ $Param{Data}->{$FieldName} } ) {
-                                if ( $ActualCondition->{Fields}->{$FieldName}->{Match} eq $Item ) {
-                                    $Match      = 1;
-                                    $MatchValue = "Item: [$Item]";
-                                    last ITEM;
-                                }
-                            }
-                        }
-                    }
                     if ($Match) {
                         $FieldSuccess++;
-
-                        $Self->DebugLog(
-                            MessageType    => 'Match',
-                            TransitionName => $Transitions->{$TransitionEntityID}->{Name},
-                            ConditionName  => $ConditionName,
-                            FieldName      => $FieldName,
-                            MatchType      => 'String',
-                            MatchValue     => $MatchValue,
-                            MatchCondition => $ActualCondition->{Fields}->{$FieldName}->{Match}
-                        );
 
                         # Successful check if we just need one matching Condition to make this
                         #   Transition valid.
@@ -627,11 +609,11 @@ sub TransitionCheck {
 
                     # If our Check doesn't contain a hash.
                     if ( ref $ActualCondition->{Fields}->{$FieldName}->{Match} ne 'HASH' ) {
-                        $Kernel::OM->Get('Kernel::System::Log')->Log(
+                        $LogObject->Log(
                             Priority => 'error',
                             Message =>
-                                "$TransitionEntityID->Condition->$ConditionName->Fields->$FieldName Match must"
-                                . " be a Hash!",
+                                "$TransitionEntityID->Condition->$ConditionName->Fields->$FieldName: Match must"
+                                . " be a hash!",
                         );
                         return;
                     }
@@ -705,86 +687,23 @@ sub TransitionCheck {
                     }
                     next FIELDLNAME;
                 }
-                elsif ( $ActualCondition->{Fields}->{$FieldName}->{Type} eq 'Regexp' )
-                {
+                elsif ( $ActualCondition->{Fields}->{$FieldName}->{Type} eq 'Regexp' ) {
 
-                    # If our Check contains anything else then a string we can't check.
-                    if (
-                        !$ActualCondition->{Fields}->{$FieldName}->{Match}
-                        ||
-                        (
-                            ref $ActualCondition->{Fields}->{$FieldName}->{Match} ne 'Regexp'
-                            && ref $ActualCondition->{Fields}->{$FieldName}->{Match} ne ''
-                        )
-                        )
-                    {
-                        $Kernel::OM->Get('Kernel::System::Log')->Log(
-                            Priority => 'error',
-                            Message =>
-                                "$TransitionEntityID->Condition->$ConditionName->Fields->$FieldName Match must"
-                                . " be a Regular expression if Type is set to Regexp!",
-                        );
-                        return;
-                    }
-
-                    # Precompile Regexp if is a string.
-                    if ( ref $ActualCondition->{Fields}->{$FieldName}->{Match} eq '' ) {
-                        my $Match = $ActualCondition->{Fields}->{$FieldName}->{Match};
-
-                        eval {
-                            $ActualCondition->{Fields}->{$FieldName}->{Match} = qr{$Match};
-                        };
-                        if ($@) {
-                            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                                Priority => 'error',
-                                Message  => $@,
-                            );
-                            return;
-                        }
-                    }
-
-                    my $Match;
-                    my $MatchValue;
-
-                    # Make sure there is data to compare.
-                    if ( $Param{Data}->{$FieldName} ) {
-
-                        # Check if field data is a string and compare directly.
-                        if (
-                            ref $Param{Data}->{$FieldName} eq ''
-                            && $Param{Data}->{$FieldName} =~ $ActualCondition->{Fields}->{$FieldName}->{Match}
-                            )
-                        {
-                            $Match      = 1;
-                            $MatchValue = $Param{Data}->{$FieldName};
-                        }
-
-                        # Otherwise check if field data is and array and compare each element until one match.
-                        elsif ( ref $Param{Data}->{$FieldName} eq 'ARRAY' ) {
-
-                            ITEM:
-                            for my $Item ( @{ $Param{Data}->{$FieldName} } ) {
-                                if ( $Item =~ $ActualCondition->{Fields}->{$FieldName}->{Match} ) {
-                                    $Match      = 1;
-                                    $MatchValue = "Item: [$Item]";
-                                    last ITEM;
-                                }
-                            }
-                        }
-                    }
+                    # Handle "Data" Param to ValidateModule's "Validate" subroutine.
+                    my $Match = $ValidateModuleObject->Validate(
+                        Data               => $Param{Data},
+                        FieldName          => $FieldName,
+                        Transition         => $Transitions->{$TransitionEntityID},
+                        TransitionName     => $Transitions->{$TransitionEntityID}->{Name},
+                        TransitionEntityID => $TransitionEntityID,
+                        Condition          => $ActualCondition->{Fields}->{$FieldName},
+                        ConditionName      => $ConditionName,
+                        ConditionType      => $CondType,
+                        ConditionLinking   => $ConditionLinking,
+                    );
 
                     if ($Match) {
                         $FieldSuccess++;
-
-                        $Self->DebugLog(
-                            MessageType    => 'Match',
-                            TransitionName => $Transitions->{$TransitionEntityID}->{Name},
-                            ConditionName  => $ConditionName,
-                            FieldName      => $FieldName,
-                            MatchType      => 'Regexp',
-                            MatchValue     => $MatchValue,
-                            MatchCondition => $ActualCondition->{Fields}->{$FieldName}->{Match}
-                        );
 
                         # Successful check if we just need one matching Condition to make this Transition valid.
                         if ( $ConditionLinking eq 'or' && $CondType eq 'or' ) {
@@ -830,39 +749,79 @@ sub TransitionCheck {
                 }
                 elsif ( $ActualCondition->{Fields}->{$FieldName}->{Type} eq 'Module' ) {
 
-                    # Load Validation Modules.
-                    # Default location for validation modules:
-                    #   Kernel/System/ProcessManagement/TransitionValidation/.
-                    if (
-                        !$Kernel::OM->Get('Kernel::System::Main')
-                        ->Require( $ActualCondition->{Fields}->{$FieldName}->{Match} )
-                        )
-                    {
-                        $Kernel::OM->Get('Kernel::System::Log')->Log(
-                            Priority => 'error',
-                            Message  => "Can't load "
-                                . $ActualCondition->{Fields}->{$FieldName}->{Type}
-                                . "Module for Transition->$TransitionEntityID->Condition->$ConditionName->"
-                                . "Fields->$FieldName validation!",
-                        );
-                        return;
-                    }
-
-                    # Create new ValidateModuleObject.
-                    my $ValidateModuleObject = $ActualCondition->{Fields}->{$FieldName}->{Match}->new();
-
                     # Handle "Data" Param to ValidateModule's "Validate" subroutine.
-                    if ( $ValidateModuleObject->Validate( Data => $Param{Data} ) ) {
+                    # use ValidateModule 'Module' to run another ValidateModule
+                    my $Match = $ValidateModuleObject->Validate(
+                        Data               => $Param{Data},
+                        FieldName          => $FieldName,
+                        Transition         => $Transitions->{$TransitionEntityID},
+                        TransitionName     => $Transitions->{$TransitionEntityID}->{Name},
+                        TransitionEntityID => $TransitionEntityID,
+                        Condition          => $ActualCondition->{Fields}->{$FieldName},
+                        ConditionName      => $ConditionName,
+                        ConditionType      => $CondType,
+                        ConditionLinking   => $ConditionLinking,
+                    );
+
+                    if ($Match) {
                         $FieldSuccess++;
 
+                        # Successful check if we just need one matching Condition to make this Transition valid.
+                        if ( $ConditionLinking eq 'or' && $CondType eq 'or' ) {
+
+                            $Self->DebugLog(
+                                MessageType      => 'Success',
+                                TransitionName   => $Transitions->{$TransitionEntityID}->{Name},
+                                ConditionName    => $ConditionName,
+                                ConditionType    => $CondType,
+                                ConditionLinking => $ConditionLinking,
+                            );
+
+                            return $TransitionEntityID;
+                        }
+
+                        next CONDITIONNAME if $ConditionLinking ne 'or' && $CondType eq 'or';
+                    }
+                    else {
+                        $FieldFail++;
+
                         $Self->DebugLog(
-                            MessageType    => 'Match',
+                            MessageType    => 'NoMatch',
                             TransitionName => $Transitions->{$TransitionEntityID}->{Name},
                             ConditionName  => $ConditionName,
                             FieldName      => $FieldName,
                             MatchType      => 'Module',
                             Module         => $ActualCondition->{Fields}->{$FieldName}->{Type}
                         );
+
+                        # Failed check if we have all 'and' conditions.
+                        next TRANSITIONENTITYID if $ConditionLinking eq 'and' && $CondType eq 'and';
+
+                        # Try next Condition if all Condition Fields have to be true.
+                        next CONDITIONNAME if $CondType eq 'and';
+                    }
+                    next FIELDLNAME;
+                }
+
+                # runs all TransitionValidation except String, Array, Hash, Regexp, Module
+                elsif (  $TransitionValidation{ $ActualCondition->{Fields}->{$FieldName}->{Type} }->{Module} && $ValidateModuleObject ) {
+
+                    # Handle "Data" Param to ValidateModule's "Validate" subroutine.
+                    # use ValidateModule 'Module' to run another ValidateModule
+                    my $Match = $ValidateModuleObject->Validate(
+                        Data               => $Param{Data},
+                        FieldName          => $FieldName,
+                        Transition         => $Transitions->{$TransitionEntityID},
+                        TransitionName     => $Transitions->{$TransitionEntityID}->{Name},
+                        TransitionEntityID => $TransitionEntityID,
+                        Condition          => $ActualCondition->{Fields}->{$FieldName},
+                        ConditionName      => $ConditionName,
+                        ConditionType      => $CondType,
+                        ConditionLinking   => $ConditionLinking,
+                    );
+
+                    if ($Match) {
+                        $FieldSuccess++;
 
                         # Successful check if we just need one matching Condition to make this Transition valid.
                         if ( $ConditionLinking eq 'or' && $CondType eq 'or' ) {
@@ -1038,10 +997,126 @@ sub TransitionCheck {
 
 }
 
+=head2 TransitionValidationTypeList()
+
+Returns a list of possible transition validations.
+
+    my %TransitionValidationTypeList = $TransitionObject->TransitionValidationTypeList();
+
+Returns:
+
+    my %TransitionValidationTypeList = TransitionValidationTypeList(
+        'String' => 'String',
+        'Regexp' => 'Regular expression',
+        'Module' => 'Transition validation module',
+    );
+
+=cut
+
+sub TransitionValidationTypeList {
+    my ( $Self, %Param ) = @_;
+
+    my %TransitionValidationTypeListGet = $Self->TransitionValidationTypeListGet();
+
+    my %TransitionValidationTypeList;
+    TYPE:
+    for my $Type ( sort keys %TransitionValidationTypeListGet ) {
+        next TYPE if !$TransitionValidationTypeListGet{$Type};
+        $TransitionValidationTypeList{$Type}
+            = $TransitionValidationTypeListGet{$Type}->{Label} || $TransitionValidationTypeListGet{$Type}->{Name};
+    }
+
+    return %TransitionValidationTypeList;
+}
+
+=head2 TransitionValidationTypeListGet()
+
+Returns a list of possible transition validations.
+
+    my %TransitionValidationTypeListGet = $TransitionObject->TransitionValidationTypeListGet();
+
+Returns:
+
+    my %TransitionValidationTypeListGet = (
+        'String' => {
+            Name   => 'String',
+            Label  => 'String',
+            Module => 'Kernel::System::ProcessManagement::TransitionValidation::String',
+        },
+        'Regexp' => {
+            Name   => 'Regexp',
+            Label  => 'Regular expression',
+            Module => 'Kernel::System::ProcessManagement::TransitionValidation::Regexp',
+        },
+        'Module' => {
+            Name   => 'Module',
+            Label  => 'Transition validation module',
+            Module => 'Kernel::System::ProcessManagement::TransitionValidation::Module',
+        },
+    );
+
+=cut
+
+sub TransitionValidationTypeListGet {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+
+    my $Directory = $ConfigObject->Get('Home') . '/Kernel/System/ProcessManagement/TransitionValidation';
+
+    my @TransitionValidation = $MainObject->DirectoryRead(
+        Directory => $Directory,
+        Filter    => '*.pm',
+    );
+
+    my %TransitionValidationTypeListGet;
+    ITEM:
+    for my $Item (@TransitionValidation) {
+
+        # remove .pm
+        $Item =~ s/^.*\/(.+?)\.pm$/$1/;
+
+        # ignore Base and ValidateDemo
+        next ITEM if $Item eq 'Base';
+        next ITEM if $Item eq 'ValidateDemo';
+
+        my $Module = 'Kernel::System::ProcessManagement::TransitionValidation::' . $Item;
+
+        # check if transition validation module exists
+        if ( !$MainObject->Require($Module) ) {
+            $LogObject->Log(
+                Priority => 'error',
+                Message  => "Can't load TransitionValidation "
+                    . $Module
+                    . " for validation!",
+            );
+            return;
+        }
+
+        my $ValidateModuleObject = $Module->new(
+            %{$Self},
+            %Param,
+        );
+
+        $TransitionValidationTypeListGet{$Item} = {
+            Name   => Translatable($Item),
+            Label  => Translatable( $ValidateModuleObject->{Label} ) || Translatable($Item),
+            Module => $Module,
+        };
+    }
+
+    return %TransitionValidationTypeListGet;
+}
+
 sub DebugLog {
     my ( $Self, %Param ) = @_;
 
-    return 1 if !$Self->{TransitionDebug};
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    $Param{TransitionName} //= '';
 
     my $Message = "Transition:'$Param{TransitionName}'";
 
@@ -1052,7 +1127,7 @@ sub DebugLog {
         $Message = " Condition:'$Param{ConditionName}' $MatchedString Field:'$Param{FieldName}'";
 
         if ( $Param{MatchType} eq 'Module' ) {
-            $Message .= " with Transition Validation Module: '$Param{Module}'";
+            $Message .= " with transition validation module '$Param{Module}'";
         }
         else {
             $Message .= " as $Param{MatchType}";
@@ -1065,11 +1140,11 @@ sub DebugLog {
     elsif ( $Param{MessageType} eq 'Success' ) {
 
         if ( $Param{ConditionName} && $Param{ConditionType} ) {
-            $Message = " Condition:'$Param{ConditionName}' Success on Condition Linking:'$Param{ConditionLinking}'"
-                . "  and Condition Type:'$Param{ConditionType}'";
+            $Message = " Condition:'$Param{ConditionName}': Success on condition linking: '$Param{ConditionLinking}'"
+                . "  and condition type: '$Param{ConditionType}'";
         }
         else {
-            $Message = " Success on Condition Linking:'$Param{ConditionLinking}'";
+            $Message = " Success on condition linking:'$Param{ConditionLinking}'";
         }
     }
 
@@ -1079,8 +1154,12 @@ sub DebugLog {
         $Message = $Param{Message};
     }
 
-    $Kernel::OM->Get('Kernel::System::Log')->Log(
-        Priority => $Self->{TransitionDebugLogPriority},
+    if ( !$Self->{TransitionDebugLogPriority} ) {
+        $Self->{TransitionDebugLogPriority}
+            = $ConfigObject->Get('ProcessManagement::Transition::Debug::LogPriority') || 'debug';
+    }
+    $LogObject->Log(
+        Priority => $Param{Priority} || $Self->{TransitionDebugLogPriority},
         Message  => $Message,
     );
 

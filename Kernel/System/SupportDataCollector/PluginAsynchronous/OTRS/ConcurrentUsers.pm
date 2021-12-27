@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -17,9 +18,7 @@ use Kernel::Language qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
-    'Kernel::Config',
     'Kernel::System::AuthSession',
-    'Kernel::System::SystemData',
     'Kernel::System::DateTime',
 );
 
@@ -136,10 +135,10 @@ sub RunAsynchronous {
     # get AuthSession object
     my $AuthSessionObject = $Kernel::OM->Get('Kernel::System::AuthSession');
 
-    # delete the old session ids
-    my @Expired = $AuthSessionObject->GetExpiredSessionIDs();
-    for ( 0 .. 1 ) {
-        for my $SessionID ( @{ $Expired[$_] } ) {
+    # delete the old session IDs
+    my @ExpiredOrIdleSessionIDs = $AuthSessionObject->GetExpiredSessionIDs();
+    for my $ExpiredOrIdleSessionIDs (@ExpiredOrIdleSessionIDs) {
+        for my $SessionID ( @{$ExpiredOrIdleSessionIDs} ) {
             $AuthSessionObject->RemoveSessionID( SessionID => $SessionID );
         }
     }

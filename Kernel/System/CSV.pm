@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -70,11 +71,11 @@ sub Array2CSV {
     my ( $Self, %Param ) = @_;
 
     # check required params
-    for (qw(Data)) {
-        if ( !$Param{$_} ) {
+    for my $Needed (qw(Data)) {
+        if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "Got no $_ param!"
+                Message  => "Got no $Needed param!"
             );
             return;
         }

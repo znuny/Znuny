@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -142,18 +143,16 @@ sub GetTransportEventData {
 
 =head2 _ReplaceTicketAttributes()
 
-returns the specified field with replaced OTRS-tags
+returns the specified field with replaced OTRS tags
 
-    $RecipientEmail = $Self->_ReplaceTicketAttributes(
+    my $RecipientEmail = $Self->_ReplaceTicketAttributes(
         Ticket => $Param{Ticket},
-        Field  => $RecipientEmail,
+        Field  => '<OTRS_TICKET_DynamicField_Name1>',       # value of DynamicField_Name1 is 'two@stars.com'
     );
-
-    for example: $RecipientEmail = '<OTRS_TICKET_DynamicField_Name1>';
 
 returns:
 
-    $RecipientEmail = 'foo@bar.com';
+    my $RecipientEmail = 'two@stars.com';
 
 =cut
 
@@ -162,7 +161,6 @@ sub _ReplaceTicketAttributes {
 
     return if !$Param{Field};
 
-    # get needed objects
     my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
@@ -173,7 +171,7 @@ sub _ReplaceTicketAttributes {
     REPLACEMENT:
     while (
         $Param{Field}
-        && $Param{Field} =~ m{<OTRS_TICKET_([A-Za-z0-9_]+)>}msxi
+        && $Param{Field} =~ m{<OTRS_TICKET_([A-Za-z0-9_]+)>}msi
         && $Count++ < 1000
         )
     {
@@ -198,21 +196,25 @@ sub _ReplaceTicketAttributes {
                 Value              => $DisplayValue,
             );
 
-            $Param{Field} =~ s{<OTRS_TICKET_$TicketAttribute>}{$DisplayValueStrg->{Value} // ''}ige;
+            $Param{Field} =~ s{<OTRS_TICKET_$TicketAttribute>}{$DisplayValueStrg->{Value} // ''}ig;
 
             next REPLACEMENT;
         }
 
-        # if ticket value is scalar substitute all instances (as strings)
+        my $TicketAttributeValue = '';
+
+        # if ticket value is scalar, substitute all instances (as strings)
         # this will allow replacements for "<OTRS_TICKET_Title> <OTRS_TICKET_Queue"
-        if ( !ref $Param{Ticket}->{$TicketAttribute} ) {
-            $Param{Field} =~ s{<OTRS_TICKET_$TicketAttribute>}{$Param{Ticket}->{$TicketAttribute} // ''}ige;
+        if ( IsStringWithData( $Param{Ticket}->{$TicketAttribute} ) ) {
+            $TicketAttributeValue = $Param{Ticket}->{$TicketAttribute};
         }
-        else {
-            # if the value is an array (e.g. a multiselect dynamic field) set the value directly
-            # this unfortunately will not let a combination of values to be replaced
-            $Param{Field} = $Param{Ticket}->{$TicketAttribute};
+
+        # if the value is an array (e.g. a multi select dynamic field) replace the value as 'joined' string
+        elsif ( IsArrayRefWithData( $Param{Ticket}->{$TicketAttribute} ) ) {
+            $TicketAttributeValue = join ', ', grep { defined $_ && length $_ } @{ $Param{Ticket}->{$TicketAttribute} };
         }
+
+        $Param{Field} =~ s{<OTRS_TICKET_$TicketAttribute>}{$TicketAttributeValue}ig;
     }
 
     return $Param{Field};

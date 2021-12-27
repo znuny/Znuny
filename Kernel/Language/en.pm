@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -36,6 +37,21 @@ sub Data {
 
     $Self->{Translation} = {
         'May_long' => 'May',
+
+        # Last views
+        'CustomerInformationCenter'     => 'Customer Information Center',
+        'CustomerUserInformationCenter' => 'Customer User Information Center',
+        'CustomerCompany'               => 'Customer Company',
+        'AppointmentCalendarManage'     => 'Calendar Management',
+        'AppointmentCalendarOverview'   => 'Calendar Overview',
+        'AppointmentAgendaOverview'     => 'Agenda Overview',
+        'TicketOverview'                => 'Ticket Overview',
+        'TicketCreate'                  => 'Ticket create',
+        'PhoneInbound'                  => 'Phone Call Inbound',
+        'PhoneOutbound'                 => 'Phone Call Outbound',
+        'EmailOutbound'                 => 'Email Outbound',
+        'TicketMessage'                 => 'Ticket create',
+        'TicketSearch'                  => 'Ticket search',
     };
 
     $Self->{JavaScriptStrings} = [
@@ -43,6 +59,7 @@ sub Data {
     ];
 
     # $$STOP$$
+
     return;
 }
 

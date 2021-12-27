@@ -1,10 +1,13 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+
+## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::SpellCheck)
 
 package Kernel::System::Encode;
 
@@ -15,10 +18,15 @@ use Encode;
 use Encode::Locale;
 use IO::Interactive qw(is_interactive);
 
+use Kernel::System::VariableCheck qw(:all);
+
 our %ObjectManagerFlags = (
     IsSingleton => 1,
 );
-our @ObjectDependencies = ();
+
+our @ObjectDependencies = (
+    'Kernel::System::Log',
+);
 
 =head1 NAME
 
@@ -102,9 +110,9 @@ sub Convert {
     return '' if $Param{Text} eq '';
 
     # check needed stuff
-    for (qw(From To)) {
-        if ( !defined $Param{$_} ) {
-            print STDERR "Need $_!\n";
+    for my $Needed (qw(From To)) {
+        if ( !defined $Param{$Needed} ) {
+            print STDERR "Need $Needed!\n";
             return;
         }
     }
@@ -401,6 +409,36 @@ sub FindAsciiSupersetEncoding {
         }
     }
     return 'ASCII';
+}
+
+=head2 RemoveUTF8BOM()
+
+Removes UTF-8 BOM (if present) from start of given string.
+
+    my $StringWithoutBOM = $EncodeObject->RemoveUTF8BOM(
+        String => '<BOM>....',
+    );
+
+    Returns given string without BOM.
+
+=cut
+
+sub RemoveUTF8BOM {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    if ( !IsStringWithData( $Param{String} ) ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter 'String' needs to be a string with data.",
+        );
+        return;
+    }
+
+    ( my $String = $Param{String} ) =~ s{\A\xef\xbb\xbf}{};
+
+    return $String;
 }
 
 1;
