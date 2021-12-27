@@ -17,6 +17,7 @@ our @ObjectDependencies = (
     'Kernel::System::Cache',
     'Kernel::System::DB',
     'Kernel::System::Log',
+    'Kernel::System::Util',
 );
 
 sub new {
@@ -99,8 +100,12 @@ sub ServicePreferencesGet {
         }
     }
 
-    # check if service preferences are available
-    return if !$Kernel::OM->Get('Kernel::Config')->Get('ServicePreferences');
+    my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
+    if ( !$IsITSMInstalled ) {
+
+        # check if service preferences are available
+        return if !$Kernel::OM->Get('Kernel::Config')->Get('ServicePreferences');
+    }
 
     # read cache
     my $Cache = $Kernel::OM->Get('Kernel::System::Cache')->Get(
