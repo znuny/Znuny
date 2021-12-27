@@ -8,7 +8,7 @@
 # --
 ## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::NamePod)
 
-package scripts::Migration::Znuny6_2::UninstallMergedPackages;    ## no critic
+package scripts::Migration::Znuny6_3::UninstallMergedPackages;    ## no critic
 
 use strict;
 use warnings;
@@ -45,18 +45,11 @@ sub Run {
         Type => 'XMLParse',
     );
 
-    # Note: Znuny and Znuny4OTRS in case one of the packages later will be built with the Znuny prefix for
-    # Znuny 6.1.
+    # Note: Znuny and Znuny4OTRS in case one of the packages later will be built with the Znuny prefix
     PACKAGENAME:
-    for my $PackageName (
-        qw(
-        Znuny-AdvancedProcessManagement
-        Znuny-TicketAttributeRelations
-        Znuny4OTRS-AdvancedProcessManagement
-        Znuny4OTRS-TicketAttributeRelations
-        )
-        )
-    {
+    for my $PackageName (qw(
+
+    )){
         my $Success = $PackageObject->_PackageUninstallMerged(
             Name => $PackageName,
         );

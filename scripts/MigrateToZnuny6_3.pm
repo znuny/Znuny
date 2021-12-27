@@ -8,7 +8,7 @@
 # --
 ## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::NamePod)
 
-package scripts::MigrateToZnuny6_2;    ## no critic
+package scripts::MigrateToZnuny6_3;    ## no critic
 
 use strict;
 use warnings;
@@ -22,7 +22,7 @@ our @ObjectDependencies = (
 
 =head1 SYNOPSIS
 
-Migrates Znuny 6.1 to Znuny 6.2.
+Migrates Znuny 6.2 to Znuny 6.3.
 
 =head1 PUBLIC INTERFACE
 
@@ -30,14 +30,13 @@ Migrates Znuny 6.1 to Znuny 6.2.
 
 Don't use the constructor directly, use the ObjectManager instead:
 
-    my $MigrateToZnunyObject = $Kernel::OM->Get('scripts::MigrateToZnuny6_2');
+    my $MigrateToZnunyObject = $Kernel::OM->Get('scripts::MigrateToZnuny6_3');
 
 =cut
 
 sub new {
     my ( $Type, %Param ) = @_;
 
-    # allocate new hash for object
     my $Self = {};
     bless( $Self, $Type );
 
@@ -215,36 +214,26 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Base::DatabaseBackupCheck',
         },
 
-        # >>> Znuny 6.2
+        # >>> Znuny 6.3
         {
             Message => 'Upgrade database structure',
-            Module  => 'scripts::Migration::Znuny6_2::UpgradeDatabaseStructure',
+            Module  => 'scripts::Migration::Znuny6_3::UpgradeDatabaseStructure',
         },
 
-        # <<< Znuny 6.2
+        # <<< Znuny 6.3
         {
             Message => 'Rebuild configuration',
             Module  => 'scripts::Migration::Base::RebuildConfig',
         },
 
-        # >>> Znuny 6.2
-        {
-            Message => 'Migrate SysConfig settings',
-            Module  => 'scripts::Migration::Znuny6_2::MigrateSysConfigSettings',
-        },
-        {
-            Message => 'Migrate web service configuration',
-            Module  => 'scripts::Migration::Znuny6_2::MigrateProcessManagement',
-        },
-
+        # >>> Znuny 6.3
         # NOTE: UninstallMergedPackages needs to be called only after
         # SysConfig settings of the merged packages have been migrated.
         {
             Message => 'Uninstall merged packages',
-            Module  => 'scripts::Migration::Znuny6_2::UninstallMergedPackages',
+            Module  => 'scripts::Migration::Znuny6_3::UninstallMergedPackages',
         },
-
-        # <<< Znuny 6.2
+        # <<< Znuny 6.3
 
         {
             Message => 'Initialize default cron jobs',

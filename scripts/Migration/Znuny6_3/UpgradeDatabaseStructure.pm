@@ -8,7 +8,7 @@
 # --
 ## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::NamePod)
 
-package scripts::Migration::Znuny6_2::UpgradeDatabaseStructure;    ## no critic
+package scripts::Migration::Znuny6_3::UpgradeDatabaseStructure;    ## no critic
 
 use strict;
 use warnings;
@@ -35,10 +35,10 @@ sub Run {
     my $Verbose = $Param{CommandlineOptions}->{Verbose} || 0;
 
     my @Tasks = (
-        {
-            Message => 'Insert or upgrade ticket attribute relations table',
-            Module  => 'TicketAttributeRelations',
-        },
+#         {
+#             Message => '',
+#             Module  => '',
+#         },
     );
 
     return     if !@Tasks;
@@ -52,14 +52,14 @@ sub Run {
 
         print "       - $Task->{Message}\n" if $Verbose;
 
-        my $ModuleName = "scripts::Migration::Znuny6_2::UpgradeDatabaseStructure::$Task->{Module}";
+        my $ModuleName = "scripts::Migration::Znuny6_3::UpgradeDatabaseStructure::$Task->{Module}";
         if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($ModuleName) ) {
             next TASK;
         }
 
         # Run module.
         $Kernel::OM->ObjectParamAdd(
-            "scripts::Migration::Znuny6_2::UpgradeDatabaseStructure::$Task->{Module}" => {
+            "scripts::Migration::Znuny6_3::UpgradeDatabaseStructure::$Task->{Module}" => {
                 Opts => $Param{CommandlineOptions},
             },
         );
