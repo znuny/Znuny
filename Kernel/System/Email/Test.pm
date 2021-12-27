@@ -1,5 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -13,7 +14,6 @@ use warnings;
 
 our @ObjectDependencies = (
     'Kernel::System::Cache',
-    'Kernel::System::CommunicationLog',
 );
 
 sub new {
@@ -106,6 +106,17 @@ sub CleanUp {
 
     return $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
         Type => $Self->{CacheType},
+    );
+}
+
+sub Check {
+    my ( $Self, %Param ) = @_;
+
+    my $Message = $Param{Test} ? '' : 'Error!';
+
+    return (
+        Successful => $Param{Test},
+        Message    => $Message,
     );
 }
 
