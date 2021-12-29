@@ -34,8 +34,8 @@ sub Run {
     my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
 
     my $Home       = $ConfigObject->Get('Home') . '/';
-    my $SourcePath = $Home . "var/statsformatdefinition/",
-    my $DestPath   = $Home . "var/stats/formatdefinition/excel/",
+    my $SourcePath = $Home . "var/statsformatdefinition/";
+    my $DestPath   = $Home . "var/stats/formatdefinition/excel/";
 
     my @Files = $MainObject->DirectoryRead(
         Directory => $SourcePath,

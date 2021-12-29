@@ -518,7 +518,7 @@ my $RemoteSystem =
 
 my $WebserviceConfig = {
     Description => 'Test for Ticket Connector using SOAP transport backend.',
-    Debugger => {
+    Debugger    => {
         DebugThreshold => 'debug',
         TestMode       => 1,
     },
@@ -4554,7 +4554,6 @@ for my $Test (@Tests) {
         },
     );
 
-
     # check result
     $Self->Is(
         'HASH',
@@ -4786,7 +4785,13 @@ for my $Test (@Tests) {
         }
         for my $DynamicField (@RequestedDynamicFields) {
 
-            if ($DynamicField->{FieldType} && $DynamicField->{FieldType} eq 'Date' && $DynamicField->{Value} && $DynamicField->{Value} =~ m{ \A \d{4}-\d{2}-\d{2} \z }xms ) {
+            if (
+                $DynamicField->{FieldType}
+                && $DynamicField->{FieldType} eq 'Date'
+                && $DynamicField->{Value}
+                && $DynamicField->{Value} =~ m{ \A \d{4}-\d{2}-\d{2} \z }xms
+                )
+            {
                 $DynamicField->{Value} .= ' 00:00:00';
             }
 
@@ -4927,7 +4932,6 @@ for my $Test (@Tests) {
             "$Test->{Name} - Local result ErrorMessage (outside Data hash) got removed to compare"
                 . " local and remote tests."
         );
-
 
         $Self->IsDeeply(
             $LocalResult,

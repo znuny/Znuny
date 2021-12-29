@@ -25,7 +25,6 @@ $ConfigObject->Set(
     Value => 0,
 );
 
-
 # email address checks
 my @Tests = (
 
@@ -71,8 +70,8 @@ my @Tests = (
         Valid => 0,
     },
     {
-        Email => 'somebody',
-        Valid => 0,
+        Email     => 'somebody',
+        Valid     => 0,
         SysConfig => [
             {
                 Key   => 'CheckEmailAddresses',
@@ -135,8 +134,8 @@ my @Tests = (
         Valid => 1,
     },
     {
-        Email => 'somebody',
-        Valid => 1,
+        Email     => 'somebody',
+        Valid     => 1,
         SysConfig => [
             {
                 Key   => 'CheckEmailAddresses',
@@ -144,6 +143,7 @@ my @Tests = (
             }
         ]
     },
+
     # Unicode domains
     {
         Email => 'mail@xn--f1aefnbl.xn--p1ai',
@@ -202,16 +202,15 @@ my @Tests = (
 );
 
 for my $Test (@Tests) {
-
     $ConfigObject->Set(
         Key   => 'CheckEmailAddresses',
         Value => 1,
     );
 
-    if ($Test->{SysConfig}){
-        for my $SySConfig (@{$Test->{SysConfig}}){
+    if ( $Test->{SysConfig} ) {
+        for my $SysConfig ( @{ $Test->{SysConfig} } ) {
             $ConfigObject->Set(
-                %{$SySConfig}
+                %{$SysConfig}
             );
         }
     }

@@ -79,7 +79,7 @@ Core.Agent.TicketCompose = (function (TargetNS) {
 
         $('#SubjectWarning').remove();
 
-        if ( !TicketID ) {
+        if (!TicketID) {
             return;
         }
 

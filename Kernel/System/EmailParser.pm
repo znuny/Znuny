@@ -748,7 +748,7 @@ sub PartsAttachments {
 
         my ($SubjectString) = $Part->as_string() =~ m/^Subject: ([^\n]*(\n[ \t][^\n]*)*)/m;
         my $Subject = '';
-        if ($SubjectString){
+        if ($SubjectString) {
             $Subject = $Self->_DecodeString( String => $SubjectString ) . '.eml';
         }
 

@@ -804,7 +804,11 @@ sub TransitionCheck {
                 }
 
                 # runs all TransitionValidation except String, Array, Hash, Regexp, Module
-                elsif (  $TransitionValidation{ $ActualCondition->{Fields}->{$FieldName}->{Type} }->{Module} && $ValidateModuleObject ) {
+                elsif (
+                    $TransitionValidation{ $ActualCondition->{Fields}->{$FieldName}->{Type} }->{Module}
+                    && $ValidateModuleObject
+                    )
+                {
 
                     # Handle "Data" Param to ValidateModule's "Validate" subroutine.
                     # use ValidateModule 'Module' to run another ValidateModule
