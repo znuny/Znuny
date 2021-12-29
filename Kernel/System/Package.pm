@@ -4224,8 +4224,9 @@ sub _FileRemove {
             Mode     => 'binmode',
         );
         if ( $Content && ${$Content} ne $Param{File}->{Content} ) {
-            print STDERR "Notice: Backup for changed file: $RealFile.backup\n";
-            copy( $RealFile, "$RealFile.custom_backup" );
+            my $BackupFilePath = "$RealFile.custom_backup";
+            print STDERR "Notice: Backup for changed file: $BackupFilePath\n";
+            copy( $RealFile, $BackupFilePath );
         }
     }
 
