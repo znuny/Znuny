@@ -1,5 +1,6 @@
-# 6.3.1 2021-??-??
- - 2021-12-08 Added ITSMConfigurationManagement compatibility.
+# 6.3.1 2022-??-??
+ - 2021-12-27 Integrated package Znuny4OTRS-ExcelStats.
+ - 2021-12-27 Added ITSMConfigurationManagement compatibility.
  - 2021-12-14 Added ProcessListTreeView in AgentTicketProcess and CustomerTicketProcess.
  - 2021-12-14 Added missing translation for process and activity in CustomerTicketZoom.tt.
  - 2021-12-14 Removed translation for process in AdminProcessManagement.

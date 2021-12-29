@@ -150,7 +150,7 @@ sub _GetAttachments {
 
     my $AttachmentsDynamicFieldName = $ConfigObject->Get('Process::DynamicFieldProcessManagementAttachment');
 
-    if (!$Param{Config}->{Attachment}){
+    if ( !$Param{Config}->{Attachment} ) {
         $Param{Config}->{Attachment} = [];
     }
 

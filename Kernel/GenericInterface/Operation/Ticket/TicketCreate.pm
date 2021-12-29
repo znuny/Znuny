@@ -1565,7 +1565,9 @@ sub _TicketCreate {
         if ($Signature) {
             $Article->{Body} = $Article->{Body} . $Signature;
 
-            if ( ($Article->{ContentType} && $Article->{ContentType} =~ /text\/html/i) || ($Article->{MimeType} && $Article->{MimeType} =~ /text\/html/i )) {
+            if (   ( $Article->{ContentType} && $Article->{ContentType} =~ /text\/html/i )
+                || ( $Article->{MimeType} && $Article->{MimeType} =~ /text\/html/i ) )
+            {
                 $PlainBody = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToAscii(
                     String => $Article->{Body},
                 );
