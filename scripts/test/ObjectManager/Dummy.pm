@@ -13,6 +13,7 @@ use strict;
 use warnings;
 
 ## nofilter(TidyAll::Plugin::OTRS::Perl::ObjectDependencies)
+## nofilter(TidyAll::Plugin::Znuny::Perl::ObjectDependencies)
 our @ObjectDependencies = ();                   # we want to use an undeclared dependency for testing
 
 sub new {

@@ -1,0 +1,85 @@
+/*
+Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (GPL). If you
+did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+*/
+
+/**
+ * @package     Skin "default"
+ * @section
+ */
+
+@media screen,projection,tv,handheld {
+
+    .ToolTip {
+        position: relative;
+        display:  inline-block;
+    }
+
+    .ToolTipContent:after{
+        border-bottom-color: #333 !important;
+    }
+
+    .LastViewToolBarRow > .ToolTipContent{
+        top: 35px;
+    }
+    .LastViewAvatarRow > .ToolTipContent{
+        top: 55% !important;
+    }
+
+    .ToolTip .ToolTipContent {
+        visibility:       hidden;
+        width:            max-content;
+        background-color: #333;
+        color:            #DDD;
+        border:           1px solid #545454;
+        padding:          5px;
+        position:         absolute;
+        z-index:          100;
+        line-height:      1.5;
+        background:       #333 !important;
+    }
+
+    .ToolTip:hover .ToolTipContent {
+        visibility: visible;
+        display:    inline-block !important;
+        background: #333 !important;
+    }
+
+    .ToolTipText {
+        float:   left;
+        padding: 0 5px 0 5px;
+    }
+
+    .ToolTipContent > fieldset > label,
+    .ToolTipText > fieldset > label{
+        text-align:  left;
+        text-shadow: none;
+        width:       fit-content;
+        width:       -moz-fit-content;
+        background:  #333;
+        color:       #DDD;
+        margin-top:  0px;
+
+    }
+    .ToolTipText > fieldset{
+        background: #333;
+        border: none;
+    }
+
+    .FloatRight {
+        float: right;
+    }
+    .FloatLeft {
+        float: left;
+    }
+
+    .LastViewMenuBar
+    {
+        border-left: 1px solid #545454;
+    }
+
+}

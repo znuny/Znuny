@@ -20,6 +20,7 @@ use Carp ();
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::DateTime',
     'Kernel::System::Encode',
 );
 

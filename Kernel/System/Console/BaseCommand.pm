@@ -22,7 +22,6 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Cache',
     'Kernel::System::Encode',
-    'Kernel::System::Main',
 );
 
 our $SuppressANSI = 0;

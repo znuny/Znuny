@@ -21,7 +21,6 @@ use Kernel::Language qw(Translatable);
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::Language',
-    'Kernel::Output::HTML::Layout',
     'Kernel::System::CustomerCompany',
     'Kernel::System::CustomerUser',
     'Kernel::System::DynamicField',

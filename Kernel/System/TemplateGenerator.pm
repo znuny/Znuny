@@ -19,12 +19,13 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::Output::HTML::Layout',
     'Kernel::System::AutoResponse',
     'Kernel::System::CommunicationChannel',
     'Kernel::System::CustomerUser',
+    'Kernel::System::DateTime',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
-    'Kernel::System::Encode',
     'Kernel::System::HTMLUtils',
     'Kernel::System::Log',
     'Kernel::System::Queue',
@@ -35,8 +36,6 @@ our @ObjectDependencies = (
     'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
     'Kernel::System::User',
-    'Kernel::Output::HTML::Layout',
-    'Kernel::System::DateTime',
 );
 
 =head1 NAME
@@ -1714,11 +1713,15 @@ sub _Replace {
                 SenderType => 'agent',
                 OnlyLast   => 1,
             );
+            if ( @AgentArticles && IsHashRefWithData( $AgentArticles[0] ) ) {
+                my %AgentArticle = $ArticleObject->BackendForArticle( %{ $AgentArticles[0] } )->ArticleGet(
+                    %{ $AgentArticles[0] },
+                    DynamicFields => 0,
+                );
 
-            my %AgentArticle = $ArticleObject->BackendForArticle( %{ $AgentArticles[0] } )->ArticleGet(
-                %{ $AgentArticles[0] },
-                DynamicFields => 0,
-            );
+                $Param{DataAgent}->{Subject} = $AgentArticle{Subject};
+                $Param{DataAgent}->{Body}    = $AgentArticle{Body};
+            }
 
             # Get last article from customer.
             my @CustomerArticles = $ArticleObject->ArticleList(
@@ -1726,16 +1729,15 @@ sub _Replace {
                 SenderType => 'customer',
                 OnlyLast   => 1,
             );
+            if ( @CustomerArticles && IsHashRefWithData( $CustomerArticles[0] ) ) {
 
-            my %CustomerArticle = $ArticleObject->BackendForArticle( %{ $CustomerArticles[0] } )->ArticleGet(
-                %{ $CustomerArticles[0] },
-                DynamicFields => 0,
-            );
-
-            $Param{DataAgent}->{Subject} = $AgentArticle{Subject};
-            $Param{DataAgent}->{Body}    = $AgentArticle{Body};
-            $Param{Data}->{Subject}      = $CustomerArticle{Subject};
-            $Param{Data}->{Body}         = $CustomerArticle{Body};
+                my %CustomerArticle = $ArticleObject->BackendForArticle( %{ $CustomerArticles[0] } )->ArticleGet(
+                    %{ $CustomerArticles[0] },
+                    DynamicFields => 0,
+                );
+                $Param{Data}->{Subject} = $CustomerArticle{Subject};
+                $Param{Data}->{Body}    = $CustomerArticle{Body};
+            }
         }
         elsif ( $Param{Template} eq 'Answer' || $Param{Template} eq 'Forward' ) {
 

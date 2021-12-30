@@ -23,8 +23,11 @@ echo "Copyright (C) 2001-2021 OTRS AG, https://otrs.com/";
 echo "Copyright (C) 2012-2021 Znuny GmbH, https://znuny.com/";
 
 PATH_TO_CVS_SRC=$1
-PRODUCT="Znuny LTS"
+PRODUCT="Znuny"
 VERSION=$2
+MAJOR_VERSION="$(echo "$VERSION" | cut -d. -f1)"
+MINOR_VERSION="$(echo "$VERSION" | cut -d. -f2)"
+LATEST_VERSION=false
 RELEASE=$3
 ARCHIVE_DIR="znuny-$VERSION"
 PACKAGE=znuny
@@ -163,11 +166,11 @@ function CreateRPM() {
     mv $SYSTEM_SRPM_DIR/$PACKAGE*$VERSION*$RELEASE*.src.rpm $PACKAGE_DEST_DIR/SRPMS/$TargetPath
 }
 
+CreateRPM "RHEL 7"    "rhel7-otrs.spec"    "rhel/7"
 CreateRPM "SuSE 12"   "suse12-otrs.spec"   "suse/12/"
 CreateRPM "SuSE 13"   "suse13-otrs.spec"   "suse/13/"
 CreateRPM "Fedora 25" "fedora25-otrs.spec" "fedora/25/"
 CreateRPM "Fedora 26" "fedora26-otrs.spec" "fedora/26/"
-CreateRPM "RHEL 7"    "rhel7-otrs.spec"    "rhel/7"
 
 echo "-----------------------------------------------------------------";
 echo "You will find your tar.gz, RPMs and SRPMs in $PACKAGE_DEST_DIR";
@@ -175,14 +178,42 @@ cd "$PACKAGE_DEST_DIR"
 find . -name "*$PACKAGE*" | xargs ls -lo
 echo "-----------------------------------------------------------------";
 if which md5sum >> /dev/null; then
-    echo "MD5 message digest (128-bit) checksums in wiki table format";
-    find . -name "*$PACKAGE*" | xargs md5sum | sed -e "s/^/| /" -e "s/\.\//| https:\/\/download.znuny.org\/releases\//" -e "s/$/ |/"
+    echo "MD5 message digest (128-bit) checksums and download URLs in markdown table format";
+    echo "| Typ / URL| MD5 Summe |
+| ---- | ------- |"
+    for p in $(find . -name "*$PACKAGE*")
+    do
+        md5_complete="$(md5sum "$p"| sed -e "s/\.\//https:\/\/download.znuny.org\/releases\//" )"
+        md5=$(echo "$md5_complete" | awk {'print $1'})
+        url=$(echo "$md5_complete" | awk {'print $NF'})
+        label="Unknown"
+        echo "$url" | grep -q ".gz" && label="Source .tar.gz"
+        echo "$url" | grep -q ".bz2" && label="Source .bz2"
+        echo "$url" | grep -q ".zip" && label="Source .zip"
+        echo "$url" | grep -q "/RPMS/rhel/7" && label="RPM RHEL 7 / CentOS 7"
+        echo "$url" | grep -q "/RPMS/suse/12/" && label="RPM SuSE 12"
+        echo "$url" | grep -q "/RPMS/suse/13/" && label="RPM SuSE 13 "
+        echo "$url" | grep -q "/RPMS/fedora/25/" && label="RPM Fedora 25 "
+        echo "$url" | grep -q "/RPMS/fedora/26/" && label="RPM Fedora 26 "
+        echo "$url" | grep -q "/SRPMS/rhel/7" && label="SRPM RHEL 7 / CentOS 7"
+        echo "$url" | grep -q "/SRPMS/suse/12/" && label="SRPM SuSE 12"
+        echo "$url" | grep -q "/SRPMS/suse/13/" && label="SRPM SuSE 13 "
+        echo "$url" | grep -q "/SRPMS/fedora/25/" && label="SRPM Fedora 25 "
+        echo "$url" | grep -q "/SRPMS/fedora/26/" && label="SRPM Fedora 26 "
+
+        echo "| [$label]($url) | $md5 |"
+    done
 else
     echo "No md5sum found in \$PATH!"
 fi
-ln -s $PACKAGE-$VERSION.tar.gz $PACKAGE-6.0.tar.gz
-ln -s $PACKAGE-$VERSION.tar.gz $PACKAGE-latest-6.0.tar.gz
-ln -s $PACKAGE-$VERSION.tar.gz $PACKAGE-latest.tar.gz
+prerelease=$(echo "$VERSION" | egrep -e '[a-zA-Z]')
+if [ -z "$prerelease" ]; then 
+    ln -s $PACKAGE-$VERSION.tar.gz $PACKAGE-$MAJOR_VERSION.$MINOR_VERSION.tar.gz
+    ln -s $PACKAGE-$VERSION.tar.gz $PACKAGE-latest-$MAJOR_VERSION.$MINOR_VERSION.tar.gz
+    if [ $LATEST_VERSION  = "true" ]; then
+        ln -s $PACKAGE-$VERSION.tar.gz $PACKAGE-latest.tar.gz
+    fi
+fi
 echo "--------------------------------------------------------------------------";
 echo "Note: You may have to tag your git tree: git tag rel-6_x_x -a -m \"6.x.x\"";
 echo "--------------------------------------------------------------------------";

@@ -10473,6 +10473,7 @@
                 <Item>NotificationEscalation</Item>
                 <Item>NotificationEscalationNotifyBefore</Item>
                 <Item>NotificationServiceUpdate</Item>
+                <Item>TicketAllChildrenClosed</Item>
             </Array>
         </Value>
     </Setting>
@@ -10540,6 +10541,39 @@
             <Item ValueType="String" ValueRegex="^\d+%?$">320</Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Event::NotificationEvent::IgnoredAttributes###001-Framework" Required="0" Valid="1">
+        <Description Translatable="1">Ignores not ticket related attributes.</Description>
+        <Navigation>Core::Event::Ticket::NotificationEvent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Recipients">1</Item>
+                <Item Key="SkipRecipients">1</Item>
+                <Item Key="RecipientAgents">1</Item>
+                <Item Key="RecipientGroups">1</Item>
+                <Item Key="RecipientRoles">1</Item>
+                <Item Key="TransportEmailTemplate">1</Item>
+                <Item Key="Events">1</Item>
+                <Item Key="ArticleSenderTypeID">1</Item>
+                <Item Key="ArticleIsVisibleForCustomer">1</Item>
+                <Item Key="ArticleCommunicationChannelID">1</Item>
+                <Item Key="ArticleAttachmentInclude">1</Item>
+                <Item Key="IsVisibleForCustomer">1</Item>
+                <Item Key="Transports">1</Item>
+                <Item Key="OncePerDay">1</Item>
+                <Item Key="VisibleForAgent">1</Item>
+                <Item Key="VisibleForAgentTooltip">1</Item>
+                <Item Key="LanguageID">1</Item>
+                <Item Key="SendOnOutOfOffice">1</Item>
+                <Item Key="AgentEnabledByDefault">1</Item>
+                <Item Key="EmailSecuritySettings">1</Item>
+                <Item Key="EmailSigningCrypting">1</Item>
+                <Item Key="EmailMissingCryptingKeys">1</Item>
+                <Item Key="EmailMissingSigningKeys">1</Item>
+                <Item Key="EmailDefaultSigningKeys">1</Item>
+                <Item Key="NotificationType">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="Notification::Transport###Email" Required="0" Valid="1">
         <Description Translatable="1">Defines all the parameters for this notification transport.</Description>
         <Navigation>Frontend::Admin::View::NotificationEvent</Navigation>
@@ -10549,36 +10583,7 @@
                 <Item Key="Name" Translatable="1">Email</Item>
                 <Item Key="Icon">fa fa-envelope</Item>
                 <Item Key="Prio">100</Item>
-                <Item Key="IsOTRSBusinessTransport">0</Item>
                 <Item Key="AgentEnabledByDefault">1</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Notification::Transport###NotificationView" Required="0" Valid="1">
-        <Description Translatable="1">Defines all the parameters for this notification transport.</Description>
-        <Navigation>Frontend::Admin::View::NotificationEvent</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Module">Kernel::System::Ticket::Event::NotificationEvent::Transport::NotificationView</Item>
-                <Item Key="Name" Translatable="1">Web View</Item>
-                <Item Key="Icon">fa fa-th-list</Item>
-                <Item Key="Prio">110</Item>
-                <Item Key="IsOTRSBusinessTransport">1</Item>
-                <Item Key="AgentEnabledByDefault">0</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Notification::Transport###SMS" Required="0" Valid="1">
-        <Description Translatable="1">Defines all the parameters for this notification transport.</Description>
-        <Navigation>Frontend::Admin::View::NotificationEvent</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Module">Kernel::System::Ticket::Event::NotificationEvent::Transport::SMS</Item>
-                <Item Key="Name" Translatable="1">SMS (Short Message Service)</Item>
-                <Item Key="Icon">fa fa-mobile</Item>
-                <Item Key="Prio">120</Item>
-                <Item Key="IsOTRSBusinessTransport">1</Item>
-                <Item Key="AgentEnabledByDefault">0</Item>
             </Hash>
         </Value>
     </Setting>

@@ -134,7 +134,7 @@ my $ArticleID1           = $ArticleBackendObject->ArticleCreate(
 );
 
 # set web-service name
-my $WebserviceName = '-Test-' . $RandomID;
+my $WebserviceName = 'Operation::Ticket::TicketHistoryGet-Test-' . $RandomID;
 
 # create web-service object
 my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');

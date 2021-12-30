@@ -50,7 +50,7 @@
         <Description Translatable="1">Defines the name of the application, shown in the web interface, tabs and title bar of the web browser.</Description>
         <Navigation>Core</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">Znuny LTS</Item>
+            <Item ValueType="String" ValueRegex="">Znuny</Item>
         </Value>
     </Setting>
     <Setting Name="SystemID" Required="1" Valid="1" ConfigLevel="200">
@@ -266,16 +266,16 @@
             <Item ValueType="String" ValueRegex="">Example Company</Item>
         </Value>
     </Setting>
-    <Setting Name="CustomerLogo" Required="0" Valid="0">
+    <Setting Name="CustomerLogo" Required="0" Valid="1">
         <Description Translatable="1">The logo shown in the header of the customer interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.</Description>
         <Navigation>Frontend::Customer</Navigation>
         <Value>
             <Hash>
                 <Item Key="URL">skins/Customer/default/img/logo.png</Item>
                 <Item Key="StyleTop">9px</Item>
-                <Item Key="StyleRight">25px</Item>
+                <Item Key="StyleRight">0px</Item>
                 <Item Key="StyleHeight">45px</Item>
-                <Item Key="StyleWidth">300px</Item>
+                <Item Key="StyleWidth">216px</Item>
             </Hash>
         </Value>
     </Setting>
@@ -284,11 +284,11 @@
         <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Hash>
-                <Item Key="URL">skins/Agent/default/img/logo_bg.png</Item>
-                <Item Key="StyleTop">7px</Item>
-                <Item Key="StyleRight">24px</Item>
+                <Item Key="URL">skins/Agent/default/img/logo.png</Item>
+                <Item Key="StyleTop">24px</Item>
+                <Item Key="StyleRight">4px</Item>
                 <Item Key="StyleHeight">55px</Item>
-                <Item Key="StyleWidth">300px</Item>
+                <Item Key="StyleWidth">265px</Item>
             </Hash>
         </Value>
     </Setting>
@@ -297,11 +297,11 @@
         <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Hash>
-                <Item Key="URL">skins/Agent/default/img/logo_bg.png</Item>
-                <Item Key="StyleTop">7px</Item>
-                <Item Key="StyleRight">24px</Item>
+                <Item Key="URL">skins/Agent/default/img/logo.png</Item>
+                <Item Key="StyleTop">24px</Item>
+                <Item Key="StyleRight">4px</Item>
                 <Item Key="StyleHeight">55px</Item>
-                <Item Key="StyleWidth">300px</Item>
+                <Item Key="StyleWidth">265px</Item>
             </Hash>
         </Value>
     </Setting>
@@ -310,9 +310,9 @@
         <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Hash>
-                <Item Key="URL">skins/Agent/default/img/logo_bg.png</Item>
+                <Item Key="URL">skins/Agent/default/img/logo.png</Item>
                 <Item Key="StyleTop">10px</Item>
-                <Item Key="StyleRight">45px</Item>
+                <Item Key="StyleRight">50px</Item>
                 <Item Key="StyleHeight">45px</Item>
                 <Item Key="StyleWidth">220px</Item>
             </Hash>
@@ -323,11 +323,11 @@
         <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Hash>
-                <Item Key="URL">skins/Agent/default/img/logo_bg.png</Item>
-                <Item Key="StyleTop">7px</Item>
-                <Item Key="StyleRight">24px</Item>
+                <Item Key="URL">skins/Agent/default/img/logo.png</Item>
+                <Item Key="StyleTop">24px</Item>
+                <Item Key="StyleRight">4px</Item>
                 <Item Key="StyleHeight">55px</Item>
-                <Item Key="StyleWidth">300px</Item>
+                <Item Key="StyleWidth">265px</Item>
             </Hash>
         </Value>
     </Setting>
@@ -336,9 +336,9 @@
         <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Hash>
-                <Item Key="URL">skins/Agent/default/img/logo_bg.png</Item>
+                <Item Key="URL">skins/Agent/default/img/logo.png</Item>
                 <Item Key="StyleTop">10px</Item>
-                <Item Key="StyleRight">45px</Item>
+                <Item Key="StyleRight">50px</Item>
                 <Item Key="StyleHeight">45px</Item>
                 <Item Key="StyleWidth">220px</Item>
             </Hash>
@@ -349,11 +349,11 @@
         <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Hash>
-                <Item Key="URL">skins/Agent/default/img/logo_bg.png</Item>
-                <Item Key="StyleTop">7px</Item>
-                <Item Key="StyleRight">24px</Item>
+                <Item Key="URL">skins/Agent/default/img/logo.png</Item>
+                <Item Key="StyleTop">24px</Item>
+                <Item Key="StyleRight">4px</Item>
                 <Item Key="StyleHeight">55px</Item>
-                <Item Key="StyleWidth">300px</Item>
+                <Item Key="StyleWidth">265px</Item>
             </Hash>
         </Value>
     </Setting>
@@ -362,7 +362,7 @@
         <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Hash>
-                <Item Key="URL">skins/Agent/default/img/loginlogo_default.png</Item>
+                <Item Key="URL">skins/Agent/default/img/logo.png</Item>
                 <Item Key="StyleHeight">60px</Item>
             </Hash>
         </Value>
@@ -849,7 +849,7 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::NotifyModule###1100-OTRSBusiness" Required="1" Valid="1">
+    <Setting Name="Frontend::NotifyModule###1100-OTRSBusiness" Required="0" Valid="0">
         <Description Translatable="1">Defines the module to display a notification in different interfaces on different occasions for OTRS Business Solution™.</Description>
         <Navigation>Frontend::Agent::FrontendNotification</Navigation>
         <Value>
@@ -859,7 +859,7 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="CustomerFrontend::NotifyModule###1-OTRSBusiness" Required="1" Valid="1">
+    <Setting Name="CustomerFrontend::NotifyModule###1-OTRSBusiness" Required="0" Valid="0">
         <Description Translatable="1">Defines the module to display a notification in different interfaces on different occasions for OTRS Business Solution™.</Description>
         <Navigation>Frontend::Customer::FrontendNotification</Navigation>
         <Value>
@@ -2609,13 +2609,6 @@
             <Item ValueType="Checkbox">0</Item>
         </Value>
     </Setting>
-    <Setting Name="OutOfOfficeMessageTemplate" Required="0" Valid="1">
-        <Description Translatable="1">Defines out of office message template. Two string parameters (%s) available: end date and number of days left.</Description>
-        <Navigation>Frontend::Base</Navigation>
-        <Value>
-            <Item ValueType="String" Translatable="1">*** out of office until %s (%s d left) ***</Item>
-        </Value>
-    </Setting>
     <Setting Name="SwitchToUser" Required="1" Valid="1">
         <Description Translatable="1">Allows the administrators to login as other users, via the users administration panel.</Description>
         <Navigation>Core::Permission</Navigation>
@@ -2843,10 +2836,20 @@
         </Value>
     </Setting>
     <Setting Name="PDF::LogoFile" Required="1" Valid="1">
-        <Description Translatable="1">Specifies the path of the file for the logo in the page header (gif|jpg|png, 700 x 100 pixel).</Description>
+        <Description Translatable="1">Specifies the path of the file for the logo in the page header (gif|jpg|png).</Description>
         <Navigation>Core::PDF</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Home&gt;/var/logo-otrs.png</Item>
+            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Home&gt;/var/httpd/htdocs/skins/Agent/default/img/logo.png</Item>
+        </Value>
+    </Setting>
+    <Setting Name="PDF::LogoSize" Required="1" Valid="1">
+        <Description Translatable="1">Size of the logo in the page header.</Description>
+        <Navigation>Core::PDF</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Width">475</Item>
+                <Item Key="Height">100</Item>
+            </Hash>
         </Value>
     </Setting>
     <Setting Name="PDF::PageSize" Required="1" Valid="1">
@@ -4020,6 +4023,7 @@ via the Preferences button after logging in.
                 <Item Key="PasswordMin2Lower2UpperCharacters">0</Item>
                 <Item Key="PasswordMin2Characters">0</Item>
                 <Item Key="PasswordNeedDigit">0</Item>
+                <Item Key="PasswordMaxLoginFailed">0</Item>
                 <Item Key="Active">1</Item>
             </Hash>
         </Value>
@@ -5663,7 +5667,7 @@ via the Preferences button after logging in.
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::Navigation###AdminCustomerUserCustomer###001-Framework" Required="0" Valid="0">
+    <Setting Name="Frontend::Navigation###AdminCustomerUserCustomer###001-Framework" Required="0" Valid="1">
         <Description Translatable="1">Main menu item registration.</Description>
         <Navigation>Frontend::Admin::ModuleRegistration::MainMenu</Navigation>
         <Value>
@@ -5672,6 +5676,29 @@ via the Preferences button after logging in.
                     <Hash>
                     </Hash>
                 </DefaultItem>
+                <Item>
+                    <Hash>
+                        <Item Key="Group">
+                            <Array>
+                                <Item>admin</Item>
+                                <Item>users</Item>
+                            </Array>
+                        </Item>
+                        <Item Key="GroupRo">
+                            <Array>
+                            </Array>
+                        </Item>
+                        <Item Key="Description" Translatable="1">Manage Customer User-Customer Relations.</Item>
+                        <Item Key="Name" Translatable="1">Customer User-Customer Relations</Item>
+                        <Item Key="Link">Action=AdminCustomerUserCustomer;Nav=Agent</Item>
+                        <Item Key="LinkOption"></Item>
+                        <Item Key="NavBar">Customers</Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Block">ItemArea</Item>
+                        <Item Key="AccessKey"></Item>
+                        <Item Key="Prio">9101</Item>
+                    </Hash>
+                </Item>
             </Array>
         </Value>
     </Setting>
@@ -8075,6 +8102,7 @@ via the Preferences button after logging in.
                 <Item>thirdparty/jquery-pubsub/pubsub.js</Item>
                 <Item>thirdparty/jquery-jstree-3.3.7/jquery.jstree.js</Item>
                 <Item>thirdparty/nunjucks-3.0.1/nunjucks.js</Item>
+                <Item>thirdparty/jscolor-2.4.6/jscolor.js</Item>
                 <Item>Core.Init.js</Item>
                 <Item>Core.JavaScriptEnhancements.js</Item>
                 <Item>Core.Debug.js</Item>
@@ -9013,6 +9041,13 @@ via the Preferences button after logging in.
             <Array>
                 <Item ValueType="String">Kernel::Autoload::Test</Item>
             </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Datepicker::ShowWeek" Required="0" Valid="1">
+        <Description Translatable="1">Activates week number for datepickers.</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Item ValueType="Checkbox" ValueRegex="">0</Item>
         </Value>
     </Setting>
 </otrs_config>

@@ -18,7 +18,6 @@ use Kernel::Language qw(Translatable);
 
 our @ObjectDependencies = (
     'Kernel::System::Console::Command::Dev::Code::CPANAudit',
-    'Kernel::System::Log',
 );
 
 sub GetDisplayPath {

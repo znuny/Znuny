@@ -143,13 +143,6 @@ sub ProviderGenerateResponse {
         );
     }
 
-    if ( $Param{Data} && ref $Param{Data} ne 'HASH' ) {
-
-        return $Self->{DebuggerObject}->Error(
-            Summary => 'Data is not a hash reference.',
-        );
-    }
-
     return $Self->{BackendObject}->ProviderGenerateResponse(%Param);
 }
 

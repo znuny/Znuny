@@ -22,9 +22,9 @@ use parent qw(Kernel::System::Ticket::Event::NotificationEvent::Transport::Base)
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::Output::HTML::Layout',
-    'Kernel::System::CustomerUser',
     'Kernel::System::Crypt::PGP',
     'Kernel::System::Crypt::SMIME',
+    'Kernel::System::CustomerUser',
     'Kernel::System::Email',
     'Kernel::System::Log',
     'Kernel::System::Main',
@@ -32,8 +32,6 @@ our @ObjectDependencies = (
     'Kernel::System::SystemAddress',
     'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
-    'Kernel::System::Ticket::Article::Backend::Email',
-    'Kernel::System::User',
     'Kernel::System::Web::Request',
 );
 

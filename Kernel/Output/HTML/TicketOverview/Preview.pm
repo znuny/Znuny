@@ -17,19 +17,18 @@ use Kernel::Language qw(Translatable);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::Output::HTML::Layout',
     'Kernel::System::CommunicationChannel',
     'Kernel::System::CustomerUser',
-    'Kernel::System::SystemAddress',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
     'Kernel::System::Group',
     'Kernel::System::Log',
-    'Kernel::Output::HTML::Layout',
-    'Kernel::System::User',
-    'Kernel::System::Ticket',
-    'Kernel::System::Ticket::Article',
     'Kernel::System::Main',
     'Kernel::System::Queue',
+    'Kernel::System::Ticket',
+    'Kernel::System::Ticket::Article',
+    'Kernel::System::User',
 );
 
 sub new {

@@ -25,13 +25,12 @@ our @ObjectDependencies = (
     'Kernel::System::CustomerGroup',
     'Kernel::System::CustomerUser',
     'Kernel::System::DB',
-    'Kernel::System::Group',
+    'Kernel::System::DateTime',
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::Scheduler',
-    'Kernel::System::DateTime',
-    'Kernel::System::Web::Request',
     'Kernel::System::Valid',
+    'Kernel::System::Web::Request',
 );
 
 =head1 NAME

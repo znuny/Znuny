@@ -22,7 +22,6 @@ our @ObjectDependencies = (
     'Kernel::Output::HTML::Layout',
     'Kernel::System::Log',
     'Kernel::System::Main',
-    'Kernel::System::SysConfig::EntityType',
 );
 
 =head1 NAME

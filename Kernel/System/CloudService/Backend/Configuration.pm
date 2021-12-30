@@ -15,11 +15,9 @@ use warnings;
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
-    'Kernel::Config',
     'Kernel::System::Cache',
     'Kernel::System::DB',
     'Kernel::System::Log',
-    'Kernel::System::Main',
     'Kernel::System::Valid',
     'Kernel::System::YAML',
 );

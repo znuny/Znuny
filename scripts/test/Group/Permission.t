@@ -13,22 +13,20 @@ use utf8;
 
 use vars (qw($Self));
 
-# get helper object
 $Kernel::OM->ObjectParamAdd(
     'Kernel::System::UnitTest::Helper' => {
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-# get needed objects
-my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
-my $UserObject  = $Kernel::OM->Get('Kernel::System::User');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $GroupObject  = $Kernel::OM->Get('Kernel::System::Group');
+my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
 
 # create test users
 my %UserIDByUserLogin;
 for my $UserCount ( 0 .. 2 ) {
-    my ( $UserLogin, $UserID ) = $Helper->TestUserCreate();
+    my ( $UserLogin, $UserID ) = $HelperObject->TestUserCreate();
 
     $UserIDByUserLogin{$UserLogin} = $UserID;
 }
@@ -36,7 +34,7 @@ my @UserIDs = values %UserIDByUserLogin;
 
 # create test groups
 my %GroupIDByGroupName;
-my $GroupNameRandomPartBase = $Helper->GetRandomID();
+my $GroupNameRandomPartBase = $HelperObject->GetRandomID();
 for my $GroupCount ( 1 .. 3 ) {
     my $GroupName = 'test-permission-group-' . $GroupNameRandomPartBase . '-' . $GroupCount;
     my $GroupID   = $GroupObject->GroupAdd(
@@ -47,11 +45,12 @@ for my $GroupCount ( 1 .. 3 ) {
 
     $GroupIDByGroupName{$GroupName} = $GroupID;
 }
+
 my @GroupIDs = values %GroupIDByGroupName;
 
 # create test roles
 my %RoleIDByRoleName;
-my $RoleNameRandomPartBase = $Helper->GetRandomID();
+my $RoleNameRandomPartBase = $HelperObject->GetRandomID();
 for my $RoleCount ( 1 .. 3 ) {
     my $RoleName = 'test-permission-role-' . $RoleNameRandomPartBase . '-' . $RoleCount;
     my $RoleID   = $GroupObject->RoleAdd(

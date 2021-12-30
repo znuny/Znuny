@@ -356,6 +356,18 @@ my @NeededModules = (
         },
     },
     {
+        Module   => 'Jq',
+        Required => 0,
+        Comment =>
+            'Support for extended condition checking via Jq for the generic interface.',
+        InstTypes => {
+            aptget => undef,
+            emerge => undef,
+            zypper => undef,
+            ports  => undef,
+        },
+    },
+    {
         Module    => 'JSON::XS',
         Required  => 0,
         Comment   => 'Recommended for faster AJAX/JavaScript handling.',
@@ -507,6 +519,17 @@ my @NeededModules = (
         },
     },
     {
+        Module    => 'Spreadsheet::XLSX',
+        Required  => 0,
+        Comment   => 'Spreadsheet::XLSX enables import of Excel files in certain dialogs.',
+        InstTypes => {
+            aptget => 'libspreadsheet-xlsx-perl',
+            emerge => 'dev-perl/Spreadsheet-XLSX',
+            zypper => 'perl-Spreadsheet-XLSX',
+            ports  => 'www/p5-Spreadsheet-XLSX',
+        },
+    },
+    {
         Module    => 'Template',
         Required  => 1,
         Comment   => 'Template::Toolkit, the rendering engine of OTRS.',
@@ -526,6 +549,17 @@ my @NeededModules = (
             emerge => 'dev-perl/Template-Toolkit',
             zypper => 'perl-Template-Toolkit',
             ports  => 'www/p5-Template-Toolkit',
+        },
+    },
+    {
+        Module    => 'Text::Diff::FormattedHTML',
+        Required  => 1,
+        Comment   => undef,
+        InstTypes => {
+            aptget => undef,
+            emerge => undef,
+            zypper => undef,
+            ports  => undef,
         },
     },
     {

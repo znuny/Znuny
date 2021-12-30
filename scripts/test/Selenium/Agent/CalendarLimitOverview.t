@@ -234,7 +234,7 @@ $Selenium->RunTest(
 
         # Delete test group.
         $Success = $DBObject->Do(
-            SQL  => "DELETE FROM groups WHERE id = ?",
+            SQL  => "DELETE FROM permission_groups WHERE id = ?",
             Bind => [ \$GroupID ],
         );
         $Self->True(

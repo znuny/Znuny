@@ -43,9 +43,13 @@ sub new {
 sub DataGet {
     my ( $Self, %Param ) = @_;
 
+    my $LogObject     = $Kernel::OM->Get('Kernel::System::Log');
+    my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+
     for my $Needed (qw(Data)) {
         if ( !$Param{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message  => "Need $Needed!"
             );
@@ -59,7 +63,7 @@ sub DataGet {
 
     for my $Needed (qw(ArticleID TicketID)) {
         if ( !$IDs{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message  => "Need $Needed!",
             );
@@ -67,14 +71,26 @@ sub DataGet {
         }
     }
 
+    if (
+        defined $Param{InvokerType}
+        && $Param{InvokerType} eq 'Ticket::Generic'
+        )
+    {
+        my %Ticket = $TicketObject->TicketDeepGet(
+            %IDs,
+            UserID => 1,
+        );
+        return %Ticket;
+    }
+
     # Get ticket data to be able to filtering conditions at article event (see bug#13708).
-    my %TicketData = $Kernel::OM->Get('Kernel::System::Ticket')->TicketGet(
+    my %TicketData = $TicketObject->TicketGet(
         TicketID      => $Param{Data}->{TicketID},
         DynamicFields => 1,
         UserID        => 1,
     );
 
-    my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForArticle(%IDs);
+    my $ArticleBackendObject = $ArticleObject->BackendForArticle(%IDs);
 
     my %ObjectData = $ArticleBackendObject->ArticleGet(
         %IDs,

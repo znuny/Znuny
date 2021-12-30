@@ -213,6 +213,7 @@ sub Run {
         }
 
         my $StandardTemplates = $Self->_GetStandardTemplates(
+            TicketID => $Self->{TicketID},
             %GetParam,
             QueueID => $QueueID || '',
         );
@@ -281,15 +282,17 @@ sub Run {
 
             # Get the first article of the ticket.
             my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
-            my @MetaArticles  = $ArticleObject->ArticleList(
-                TicketID  => $Self->{TicketID},
-                UserID    => $Self->{UserID},
-                OnlyFirst => 1,
+            my @ArticleIDs    = $ArticleObject->ArticleIndex(
+                TicketID => $Self->{TicketID},
             );
-            my %Article = $ArticleObject->BackendForArticle( %{ $MetaArticles[0] } )->ArticleGet(
-                %{ $MetaArticles[0] },
-                DynamicFields => 0,
-            );
+
+            my %Article;
+            if (@ArticleIDs) {
+                %Article = $ArticleObject->ArticleGet(
+                    TicketID  => $Self->{TicketID},
+                    ArticleID => $ArticleIDs[0],
+                );
+            }
 
             # get the matching signature for the current user
             my $Signature = $TemplateGenerator->Signature(
@@ -782,7 +785,8 @@ sub Form {
 
     # Inform a user that article subject will be empty if contains only the ticket hook (if nothing is modified).
     $Output .= $LayoutObject->Notify(
-        Data => Translatable('Article subject will be empty if the subject contains only the ticket hook!'),
+        Priority => 'Warning',
+        Info     => Translatable('Article subject will be empty if the subject contains only the ticket hook!'),
     );
 
     $Output .= $Self->_Mask(
@@ -2023,24 +2027,12 @@ sub _Mask {
         $Param{OptionCustomerUserAddressBook} = 1;
     }
 
-    # build text template string
-    my %StandardTemplates = $Kernel::OM->Get('Kernel::System::StandardTemplate')->StandardTemplateList(
-        Valid => 1,
-        Type  => 'Email',
-    );
-
     my $QueueStandardTemplates = $Self->_GetStandardTemplates(
         %Param,
         TicketID => $Self->{TicketID} || '',
     );
 
-    if (
-        IsHashRefWithData(
-            $QueueStandardTemplates
-                || ( $Param{Queue} && IsHashRefWithData( \%StandardTemplates ) )
-        )
-        )
-    {
+    if ( IsHashRefWithData($QueueStandardTemplates) ) {
         $Param{StandardTemplateStrg} = $LayoutObject->BuildSelection(
             Data         => $QueueStandardTemplates || {},
             Name         => 'StandardTemplateID',
@@ -2421,11 +2413,13 @@ sub _GetExtendedParams {
 sub _GetStandardTemplates {
     my ( $Self, %Param ) = @_;
 
-    # get create templates
-    my %Templates;
-
-    # check needed
-    return \%Templates if !$Param{QueueID} && !$Param{TicketID};
+    if ( !$Param{QueueID} && !$Param{TicketID} ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Parameter 'QueueID' or 'TicketID' is needed!",
+        );
+        return {};
+    }
 
     my $QueueID = $Param{QueueID} || '';
     if ( !$Param{QueueID} && $Param{TicketID} ) {
@@ -2446,7 +2440,7 @@ sub _GetStandardTemplates {
     );
 
     # return empty hash if there are no templates for this screen
-    return \%Templates if !IsHashRefWithData( $StandardTemplates{Email} );
+    return {} if !IsHashRefWithData( $StandardTemplates{Email} );
 
     # return just the templates for this screen
     return $StandardTemplates{Email};

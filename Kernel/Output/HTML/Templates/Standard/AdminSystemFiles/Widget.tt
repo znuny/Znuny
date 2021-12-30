@@ -1,0 +1,61 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+[% RenderBlockStart("Widget") %]
+    <div class="WidgetSimple">
+        <div class="Header">
+            <div class="WidgetAction Toggle">
+                <a href="#" title="[% Translate("Show or hide the content") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+            </div>
+            <h2>[% Translate(Data.Name) | html %] [% Translate(Data.Hint) | html %]</h2>
+        </div>
+        <div class="Content">
+            <table class="DataTable Files">
+                <thead>
+                    <tr>
+                        <th>[% Translate('State') | html %]</th>
+                        <th>[% Translate('Name') | html %]</th>
+                        <th>[% Translate('Path') | html %]</th>
+                        <th>[% Translate('Permissions') | html %]</th>
+                        [% IF Data.Widget == "Custom" %]
+                            <th>[% Translate('Package') | html %]</th>
+                        [% END %]
+                        <th>[% Translate('Changed') | html %]</th>
+                    </tr>
+                </thead>
+                <tbody>
+[% RenderBlockStart("File") %]
+
+                    <tr>
+                        <!-- <td >[% Data.State | html %]</td> -->
+                        <td class="Status">
+                            <span title="[% Translate(Data.StateMessage) | html %]" class="Small Flag [% Data.State | html %]" style="display: block;">
+                                <span>[% Data.StateMessage | html %]</span>
+                            </span>
+                        </td>
+                        <td>
+                            <a href="[% Env("Baselink") %]Action=AdminSystemFiles;Subaction=ViewFile;Type=[% Data.Type %];File=[% Data.FullPath | html %]">
+                                [% Data.Name | html %]
+                            </a>
+                        </td>
+                        <td title="[% Data.FullPath | html %]">[% Data.Path | html %]</td>
+                        <td>[% Data.Permissions | html %]</td>
+                        [% IF Data.Widget == "Custom" %]
+                            <td>[% Data.Package | html %]</td>
+                        [% END %]
+                        <td>[% Data.Changed | html %]</td>
+                        <!-- <td>
+                            <a href="#" class="DownloadFile"><i class="fa fa-save"></i></a>
+                        </td> -->
+                    </tr>
+[% RenderBlockEnd("File") %]
+                </tbody>
+            </table>
+        </div>
+    </div>
+[% RenderBlockEnd("Widget") %]

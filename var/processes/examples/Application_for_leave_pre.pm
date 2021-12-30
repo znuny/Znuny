@@ -59,6 +59,7 @@ sub Run {
             ObjectType => 'Ticket',
             FieldOrder => 10001,
             Config     => {
+                DefaultValue => '',
             },
         },
         {
@@ -88,6 +89,7 @@ sub Run {
             ObjectType => 'Ticket',
             FieldOrder => 10004,
             Config     => {
+                DefaultValue => '',
             },
         },
         {
@@ -97,6 +99,7 @@ sub Run {
             ObjectType => 'Ticket',
             FieldOrder => 10005,
             Config     => {
+                DefaultValue => '',
             },
         },
         {
@@ -117,6 +120,7 @@ sub Run {
             ObjectType => 'Ticket',
             FieldOrder => 10007,
             Config     => {
+                DefaultValue => '',
             },
         },
         {

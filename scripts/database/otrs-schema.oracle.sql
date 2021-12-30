@@ -69,6 +69,60 @@ CREATE TABLE acl_sync (
     change_time DATE NOT NULL
 );
 -- ----------------------------------------------------------
+--  create table acl_ticket_attribute_relations
+-- ----------------------------------------------------------
+CREATE TABLE acl_ticket_attribute_relations (
+    id NUMBER (20, 0) NOT NULL,
+    filename VARCHAR2 (255) NOT NULL,
+    attribute_1 VARCHAR2 (200) NOT NULL,
+    attribute_2 VARCHAR2 (200) NOT NULL,
+    acl_data CLOB NOT NULL,
+    priority NUMBER (20, 0) NOT NULL,
+    create_time DATE NOT NULL,
+    create_by NUMBER (12, 0) NOT NULL,
+    change_time DATE NOT NULL,
+    change_by NUMBER (12, 0) NOT NULL,
+    CONSTRAINT acl_tar_filename UNIQUE (filename)
+);
+ALTER TABLE acl_ticket_attribute_relations ADD CONSTRAINT PK_acl_ticket_attribute_relac5 PRIMARY KEY (id);
+BEGIN
+    EXECUTE IMMEDIATE 'DROP SEQUENCE SE_acl_ticket_attribute_reab';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE SEQUENCE SE_acl_ticket_attribute_reab
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+CACHE 20
+ORDER
+;
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TRIGGER SE_acl_ticket_attribute_reab_t';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE OR REPLACE TRIGGER SE_acl_ticket_attribute_reab_t
+BEFORE INSERT ON acl_ticket_attribute_relations
+FOR EACH ROW
+BEGIN
+    IF :new.id IS NULL THEN
+        SELECT SE_acl_ticket_attribute_reab.nextval
+        INTO :new.id
+        FROM DUAL;
+    END IF;
+END;
+/
+--
+;
+-- ----------------------------------------------------------
 --  create table valid
 -- ----------------------------------------------------------
 CREATE TABLE valid (
@@ -190,9 +244,9 @@ END;
 --
 ;
 -- ----------------------------------------------------------
---  create table groups
+--  create table permission_groups
 -- ----------------------------------------------------------
-CREATE TABLE groups (
+CREATE TABLE permission_groups (
     id NUMBER (12, 0) NOT NULL,
     name VARCHAR2 (200) NOT NULL,
     comments VARCHAR2 (250) NULL,
@@ -203,16 +257,16 @@ CREATE TABLE groups (
     change_by NUMBER (12, 0) NOT NULL,
     CONSTRAINT groups_name UNIQUE (name)
 );
-ALTER TABLE groups ADD CONSTRAINT PK_groups PRIMARY KEY (id);
+ALTER TABLE permission_groups ADD CONSTRAINT PK_permission_groups PRIMARY KEY (id);
 BEGIN
-    EXECUTE IMMEDIATE 'DROP SEQUENCE SE_groups';
+    EXECUTE IMMEDIATE 'DROP SEQUENCE SE_permission_groups';
 EXCEPTION
     WHEN OTHERS THEN NULL;
 END;
 /
 --
 ;
-CREATE SEQUENCE SE_groups
+CREATE SEQUENCE SE_permission_groups
 INCREMENT BY 1
 START WITH 1
 NOMAXVALUE
@@ -221,19 +275,19 @@ CACHE 20
 ORDER
 ;
 BEGIN
-    EXECUTE IMMEDIATE 'DROP TRIGGER SE_groups_t';
+    EXECUTE IMMEDIATE 'DROP TRIGGER SE_permission_groups_t';
 EXCEPTION
     WHEN OTHERS THEN NULL;
 END;
 /
 --
 ;
-CREATE OR REPLACE TRIGGER SE_groups_t
-BEFORE INSERT ON groups
+CREATE OR REPLACE TRIGGER SE_permission_groups_t
+BEFORE INSERT ON permission_groups
 FOR EACH ROW
 BEGIN
     IF :new.id IS NULL THEN
-        SELECT SE_groups.nextval
+        SELECT SE_permission_groups.nextval
         INTO :new.id
         FROM DUAL;
     END IF;
@@ -2290,6 +2344,14 @@ BEGIN
         INTO :new.id
         FROM DUAL;
     END IF;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX time_accounting_article_id ON time_accounting (article_id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
 END;
 /
 --

@@ -18,12 +18,11 @@ use Kernel::Output::HTML::Layout;
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::Output::HTML::Layout',
     'Kernel::System::Calendar',
-    'Kernel::System::Log',
-    'Kernel::System::Web::Request',
     'Kernel::System::JSON',
+    'Kernel::System::Log',
     'Kernel::System::User',
+    'Kernel::System::Web::Request',
 );
 
 =head1 NAME

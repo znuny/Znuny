@@ -16,9 +16,10 @@ use warnings;
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::System::Group',
     'Kernel::Output::HTML::Layout',
-    'Kernel::System::SysConfig'
+    'Kernel::System::DateTime',
+    'Kernel::System::Group',
+    'Kernel::System::SysConfig',
 );
 
 sub Run {

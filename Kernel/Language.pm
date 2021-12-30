@@ -22,6 +22,7 @@ use Kernel::System::DateTime;
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::DateTime',
     'Kernel::System::Log',
     'Kernel::System::Main',
 );

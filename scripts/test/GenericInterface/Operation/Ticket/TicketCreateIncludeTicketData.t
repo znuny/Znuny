@@ -383,7 +383,7 @@ $Self->Is(
 );
 
 # set web service name
-my $WebserviceName = '-Test-' . $RandomID;
+my $WebserviceName = 'Operation::Ticket::TicketCreateIncludeTicketData-Test-' . $RandomID;
 
 my $WebserviceID = $WebserviceObject->WebserviceAdd(
     Name   => $WebserviceName,
@@ -885,7 +885,7 @@ for my $QueueData (@Queues) {
 
 # delete group
 $Success = $DBObject->Do(
-    SQL => "DELETE FROM groups WHERE id = $GroupID",
+    SQL => "DELETE FROM permission_groups WHERE id = $GroupID",
 );
 $Self->True(
     $Success,

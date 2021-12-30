@@ -23,17 +23,17 @@ my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 my @Tests = (
     {
         Name   => 'SELECT with named columns',
-        Data   => 'SELECT id, name FROM groups',
+        Data   => 'SELECT id, name FROM permission_groups',
         Result => [qw(id name)],
     },
     {
         Name   => 'SELECT with all columns',
-        Data   => 'SELECT * FROM groups',
+        Data   => 'SELECT * FROM permission_groups',
         Result => [qw(id name comments valid_id create_time create_by change_time change_by)],
     },
     {
         Name   => 'SELECT with unicode characters',
-        Data   => 'SELECT name AS äöüüßüöä FROM groups',
+        Data   => 'SELECT name AS äöüüßüöä FROM permission_groups',
         Result => ['äöüüßüöä'],
     },
 );

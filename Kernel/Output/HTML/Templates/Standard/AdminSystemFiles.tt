@@ -1,0 +1,50 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+<div class="MainBox ARIARoleMain AdminSupportDataCollector LayoutFixedSidebar SidebarFirst">
+    <h1 class="InvisibleText">[% Translate("System file support") | html %]</h1>
+
+    [% BreadcrumbPath = [
+            {
+                Name => Translate('System file support'),
+                Link => Env("Action"),
+            },
+        ]
+    %]
+
+    [% SWITCH Data.Subaction %]
+        [% CASE 'ViewFile' %]
+            [% USE FileBreadcrumb = String(Translate("File")) %]
+            [% BreadcrumbPath.push({ Name => FileBreadcrumb.append( ': ', Data.File ) }) %]
+    [% END %]
+
+    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+    <div class="ContentColumn">
+[% RenderBlockStart("Filter") %]
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Filter") | html %]</h2>
+            </div>
+            <div class="Content  LayoutGrid ColumnsWithSpacing">
+                <div class="Size3of4">
+                    <input type="text" id="FilterFiles" class="W90pc" name="FilterFiles" value="" title="[% Translate('Filter') | html %]" placeholder="[% Translate('Filter') | html %]..." autofocus="autofocus" />
+                </div>
+                <div class="Size1of4">
+                    <a href="[% Env("Baselink") %]Action=AdminSystemFiles;Subaction=CacheDelete;" class="CallForAction W95pc Center" style="margin-left: 10px;">
+                        <span>
+                            <i class="fa fa-trash-o"></i>
+                            [% Translate("Delete cache") | html %] - [% Translate("Date") | html %]:
+                            <b>[% Data.CacheDate | Localize("TimeLong") %]</b>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+[% RenderBlockEnd("Filter") %]
+    </div>

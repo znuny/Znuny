@@ -35,3 +35,8 @@
 [% RenderBlockEnd("SearchIcon") %]
     </ul>
 </div>
+[% RenderBlockStart("LastViewsMenuBar") %]
+<div class="LastViewMenuBar">
+    [% Data.MenuBarLastViewsHTML %]
+</div>
+[% RenderBlockEnd("LastViewsMenuBar") %]

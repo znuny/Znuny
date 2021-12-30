@@ -15,6 +15,7 @@ use warnings;
 use File::Path;
 use utf8;
 use Encode ();
+use MIME::Base64;
 
 use parent qw(
     Kernel::System::EventHandler
@@ -27,33 +28,29 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::Language',
     'Kernel::System::Cache',
     'Kernel::System::Calendar',
+    'Kernel::System::CustomerCompany',
     'Kernel::System::CustomerUser',
     'Kernel::System::DB',
+    'Kernel::System::DateTime',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
     'Kernel::System::DynamicFieldValue',
-    'Kernel::System::Email',
     'Kernel::System::Group',
-    'Kernel::System::HTMLUtils',
     'Kernel::System::LinkObject',
     'Kernel::System::Lock',
     'Kernel::System::Log',
     'Kernel::System::Main',
-    'Kernel::System::PostMaster::LoopProtection',
     'Kernel::System::Priority',
     'Kernel::System::Queue',
-    'Kernel::System::Service',
     'Kernel::System::SLA',
+    'Kernel::System::Service',
     'Kernel::System::State',
-    'Kernel::System::TemplateGenerator',
-    'Kernel::System::DateTime',
     'Kernel::System::Ticket::Article',
     'Kernel::System::Type',
     'Kernel::System::User',
-    'Kernel::System::Valid',
-    'Kernel::Language',
 );
 
 =head1 NAME
@@ -1444,6 +1441,320 @@ sub TicketGet {
     );
 
     return %Ticket;
+}
+
+=head2 TicketDeepGet()
+
+Returns ticket data with all resolved dependent data like (customer) user data, etc.
+It also contains all articles and a separate hash of the requested article by parameter.
+
+    my %Ticket = $TicketObject->TicketDeepGet(
+        TicketID  => 123,
+        ArticleID => 123, # optional
+        UserID    => 53,
+    );
+
+Returns:
+
+    my %Ticket = (
+        # ticket attributes
+
+        %Ticket,
+        Articles        => [
+            # ...
+        ],
+        CustomerUser    => {
+            # ...
+        },
+        CustomerCompany => {
+            # ...
+        },
+        QueueData       => {
+            # ...
+        },
+        TypeData        => {
+            # ...
+        },
+        PriorityData    => {
+            # ...
+        },
+        ServiceData     => {
+            # ...
+        },
+        SLAData         => {
+            # ...
+        },
+        OwnerData       => {
+            # ...
+        },
+        ResponsibleData => {
+            # ...
+        },
+        CreateByData    => {
+            # ...
+        },
+        Article         => {
+            # ...
+        },
+    );
+
+=cut
+
+sub TicketDeepGet {
+    my ( $Self, %Param ) = @_;
+
+    my $ArticleObject         = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+    my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
+    my $CustomerUserObject    = $Kernel::OM->Get('Kernel::System::CustomerUser');
+    my $QueueObject           = $Kernel::OM->Get('Kernel::System::Queue');
+    my $ServiceObject         = $Kernel::OM->Get('Kernel::System::Service');
+    my $SLAObject             = $Kernel::OM->Get('Kernel::System::SLA');
+    my $TypeObject            = $Kernel::OM->Get('Kernel::System::Type');
+    my $UserObject            = $Kernel::OM->Get('Kernel::System::User');
+    my $PriorityObject        = $Kernel::OM->Get('Kernel::System::Priority');
+    my $LogObject             = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
+    for my $Needed (qw(TicketID UserID)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter $Needed is needed.",
+        );
+        return;
+    }
+
+    my %Ticket = $Self->TicketGet(
+        TicketID      => $Param{TicketID},
+        DynamicFields => 1,
+        Extended      => 1,
+        UserID        => $Param{UserID},
+    );
+    return if !%Ticket;
+
+    my %Data = %Ticket;
+
+    my @Articles = $ArticleObject->ArticleList(
+        TicketID => $Param{TicketID},
+    );
+
+    $Data{Articles} = [];
+    for my $ArticleMeta (@Articles) {
+        my %Article = $ArticleObject->ArticleGet(
+            %{$ArticleMeta},
+            DynamicFields => 1,
+            RealNames     => 1,
+        );
+
+        push @{ $Data{Articles} }, $Self->_TicketDeepGetDataCleanUp(
+            Data => \%Article,
+        );
+    }
+
+    $Data{CustomerUser} = {};
+    if ( $Ticket{CustomerUserID} ) {
+        my %CustomerUser = $CustomerUserObject->CustomerUserDataGet(
+            User => $Ticket{CustomerUserID},
+        );
+
+        $Data{CustomerUser} = $Self->_TicketDeepGetDataCleanUp(
+            Data => \%CustomerUser,
+        );
+    }
+
+    $Data{CustomerCompany} = {};
+    if ( $Ticket{CustomerID} ) {
+        my %CustomerCompany = $CustomerCompanyObject->CustomerCompanyGet(
+            CustomerID => $Ticket{CustomerID},
+        );
+
+        $Data{CustomerCompany} = $Self->_TicketDeepGetDataCleanUp(
+            Data => \%CustomerCompany,
+        );
+    }
+
+    $Data{QueueData} = {};
+    if ( $Ticket{QueueID} ) {
+        my %Queue = $QueueObject->QueueGet(
+            ID => $Ticket{QueueID},
+        );
+
+        $Data{QueueData} = $Self->_TicketDeepGetDataCleanUp(
+            Data => \%Queue,
+        );
+    }
+
+    $Data{TypeData} = {};
+    if ( $Ticket{TypeID} ) {
+        my %TypeData = $TypeObject->TypeGet(
+            ID => $Ticket{TypeID},
+        );
+
+        $Data{TypeData} = $Self->_TicketDeepGetDataCleanUp(
+            Data => \%TypeData,
+        );
+    }
+
+    $Data{PriorityData} = {};
+    if ( $Ticket{PriorityID} ) {
+        my %PriorityData = $PriorityObject->PriorityGet(
+            PriorityID => $Ticket{PriorityID},
+            UserID     => 1,
+        );
+
+        $Data{PriorityData} = $Self->_TicketDeepGetDataCleanUp(
+            Data => \%PriorityData,
+        );
+    }
+
+    $Data{ServiceData} = {};
+    if ( $Ticket{ServiceID} ) {
+        my %ServiceData = $ServiceObject->ServiceGet(
+            ServiceID => $Ticket{ServiceID},
+            UserID    => 1,
+        );
+
+        $Data{ServiceData} = $Self->_TicketDeepGetDataCleanUp(
+            Data => \%ServiceData,
+        );
+    }
+
+    $Data{SLAData} = {};
+    if ( $Ticket{SLAID} ) {
+        my %SLAData = $SLAObject->SLAGet(
+            SLAID  => $Ticket{SLAID},
+            UserID => 1,
+        );
+
+        $Data{SLAData} = $Self->_TicketDeepGetDataCleanUp(
+            Data => \%SLAData,
+        );
+    }
+
+    $Data{OwnerData} = {};
+    if ( $Ticket{OwnerID} ) {
+        my %Owner = $UserObject->GetUserData(
+            UserID => $Ticket{OwnerID},
+        );
+
+        $Data{OwnerData} = $Self->_TicketDeepGetDataCleanUp(
+            Data => \%Owner,
+        );
+    }
+
+    $Data{ResponsibleData} = {};
+    if ( $Ticket{ResponsibleID} ) {
+        my %Responsible = $UserObject->GetUserData(
+            UserID => $Ticket{ResponsibleID},
+        );
+
+        $Data{ResponsibleData} = $Self->_TicketDeepGetDataCleanUp(
+            Data => \%Responsible,
+        );
+    }
+
+    $Data{CreateByData} = {};
+    if ( $Ticket{CreateBy} ) {
+        my %CreateBy = $UserObject->GetUserData(
+            UserID => $Ticket{CreateBy},
+        );
+
+        $Data{CreateByData} = $Self->_TicketDeepGetDataCleanUp(
+            Data => \%CreateBy,
+        );
+    }
+
+    $Data{Article} = {};
+    return %Data if !IsArrayRefWithData( $Data{Articles} );
+
+    # If there is only one article, return its data, regardless
+    # if an article ID has been given or if the given ID is valid.
+    if ( @{ $Data{Articles} } == 1 ) {
+        $Param{ArticleID} = $Data{Articles}->[0]->{ArticleID};
+    }
+
+    return %Data if !$Param{ArticleID};
+
+    @Articles = grep { $_->{ArticleID} == $Param{ArticleID} } @{ $Data{Articles} };
+    return %Data if @Articles != 1;
+
+    # %{} to prevent showing perl references in web service debug log.
+    %{ $Data{Article} } = %{ $Articles[0] };
+
+    # get attachment index (without attachments)
+    my %AttachmentIndex = $ArticleObject->ArticleAttachmentIndex(
+        TicketID         => $Param{TicketID},
+        ArticleID        => $Param{ArticleID},
+        ExcludePlainText => 0,                   # (optional) Exclude plain text attachment
+        ExcludeHTMLBody  => 0,                   # (optional) Exclude HTML body attachment
+        ExcludeInline    => 0,                   # (optional) Exclude inline attachments
+    );
+    return %Data if !%AttachmentIndex;
+
+    my @Attachments;
+    ATTACHMENT:
+    for my $FileID ( sort keys %AttachmentIndex ) {
+        next ATTACHMENT if !$FileID;
+
+        my %Attachment = $ArticleObject->ArticleAttachment(
+            TicketID  => $Param{TicketID},
+            ArticleID => $Param{ArticleID},
+            FileID    => $FileID,                # as returned by ArticleAttachmentIndex
+        );
+        next ATTACHMENT if !%Attachment;
+
+        $Attachment{FileID}  = $FileID;
+        $Attachment{Content} = encode_base64( $Attachment{Content}, '' );
+
+        push @Attachments, \%Attachment;
+    }
+
+    # set Attachments data
+    $Data{Article}->{Attachment} = \@Attachments;
+
+    return %Data;
+}
+
+=head2 _TicketDeepGetDataCleanUp()
+
+Cleans up the given hash by removing possible given passwords, tokens, etc.
+
+    my $CleanedUpData = $TicketObject->_TicketDeepGetDataCleanUp(
+        Data => {
+            Test   => 'ok',
+            config => 'removed',
+            secret => 'removed',
+            passw  => 'removed',
+            userpw => 'removed',
+            auth   => 'removed',
+            token  => 'removed',
+            Field  => 'ok',
+        }
+    );
+
+Returns:
+
+    my $CleanedUpData = {
+        Test  => 'ok',
+        Field => 'ok',
+    };
+
+=cut
+
+sub _TicketDeepGetDataCleanUp {
+    my ( $Self, %Param ) = @_;
+
+    return $Param{Data} if !IsHashRefWithData( $Param{Data} );
+
+    KEY:
+    for my $Key ( sort keys %{ $Param{Data} } ) {
+        next KEY if $Key !~ m{\:\:|config|secret|passw|userpw|auth|token}i;
+
+        delete $Param{Data}->{$Key};
+    }
+
+    return $Param{Data};
 }
 
 =head2 TicketTitleUpdate()
@@ -7750,7 +8061,7 @@ sub _TicketGetClosed {
     my %Data;
     ROW:
     while ( my @Row = $DBObject->FetchrowArray() ) {
-        last ROW if !defined $Row[0];
+        next ROW if !defined $Row[0];
         $Data{Closed} = $Row[0];
 
         # cleanup time stamps (some databases are using e. g. 2008-02-25 22:03:00.000000

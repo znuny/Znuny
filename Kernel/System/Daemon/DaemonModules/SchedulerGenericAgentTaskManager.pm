@@ -18,7 +18,6 @@ use parent qw(Kernel::System::Daemon::BaseDaemon);
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Cache',
-    'Kernel::System::CronEvent',
     'Kernel::System::DB',
     'Kernel::System::Daemon::SchedulerDB',
     'Kernel::System::GenericAgent',

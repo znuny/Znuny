@@ -60,15 +60,19 @@ sub new {
 
 =head2 Run()
 
-    Run Data
+Runs TransitionAction TicketCreate.
 
     my $TicketCreateResult = $TicketCreateActionObject->Run(
         UserID                   => 123,
+
+        # Ticket contains the result of TicketGet including dynamic fields
         Ticket                   => \%Ticket,   # required
         ProcessEntityID          => 'P123',
         ActivityEntityID         => 'A123',
         TransitionEntityID       => 'T123',
         TransitionActionEntityID => 'TA123',
+
+        # Config is the hash stored in a Process::TransitionAction's config key
         Config                   => {
             # ticket required:
             Title         => 'Some Ticket Title',
@@ -100,19 +104,19 @@ sub new {
             # article optional:
             TimeUnit => 123
 
+            # Attachment optional:
+            Attachments => '1'                                          #  optional, 1|0
+
             # other:
             DynamicField_NameX => $Value,
             LinkAs => $LinkType,                                        # Normal, Parent, Child, etc. (respective original ticket)
             UserID => 123,                                              # optional, to override the UserID from the logged user
         }
     );
-    Ticket contains the result of TicketGet including DynamicFields
-    Config is the Config Hash stored in a Process::TransitionAction's  Config key
-    Returns:
 
-    $TicketCreateResult = 1; # 0
+Returns:
 
-    );
+    my $Success = 1; # 0
 
 =cut
 
@@ -289,6 +293,11 @@ sub Run {
             ChannelName => $Param{Config}->{CommunicationChannel},
         );
 
+        # check for selected Attachments
+        if ( $Param{Config}->{Attachments} ) {
+            $Param{Config}->{Attachment} = $Self->_GetAttachments(%Param);
+        }
+
         # Create article for the new ticket.
         $ArticleID = $ArticleBackendObject->ArticleCreate(
             %{ $Param{Config} },
@@ -328,7 +337,6 @@ sub Run {
         }
     }
 
-    # get dynamic field objects
     my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 

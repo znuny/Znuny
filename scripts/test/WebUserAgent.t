@@ -67,6 +67,42 @@ my @Tests = (
         ErrorNumber => 400,
     },
     {
+        Name        => 'GET - http - ftp NoProxy option - Test ' . $TestNumber++,
+        URL         => "https://download.znuny.org/releases/packages/otrs.xml",
+        Timeout     => $TimeOut,
+        Proxy       => 'ftp://NoProxy',
+        NoProxy     => 'download.znuny.org',
+        Success     => 1,
+        ErrorNumber => 400,
+    },
+    {
+        Name        => 'GET - http - ftp NoProxy option with multiple domains - Test ' . $TestNumber++,
+        URL         => "https://download.znuny.org/releases/packages/otrs.xml",
+        Timeout     => $TimeOut,
+        Proxy       => 'ftp://NoProxy',
+        NoProxy     => 'download2.znuny.org;download.znuny.org',
+        Success     => 1,
+        ErrorNumber => 400,
+    },
+    {
+        Name        => 'GET - http - ftp no matching NoProxy option - Test ' . $TestNumber++,
+        URL         => "https://download.znuny.org/releases/packages/otrs.xml",
+        Timeout     => $TimeOut,
+        Proxy       => 'ftp://NoProxy',
+        NoProxy     => 'download2.znuny.org',
+        Success     => 0,
+        ErrorNumber => 400,
+    },
+    {
+        Name        => 'GET - http - ftp no matching NoProxy option with multiple domains - Test ' . $TestNumber++,
+        URL         => "https://download.znuny.org/releases/packages/otrs.xml",
+        Timeout     => $TimeOut,
+        Proxy       => 'ftp://NoProxy',
+        NoProxy     => 'download2.znuny.org;download3.znuny.org',
+        Success     => 0,
+        ErrorNumber => 400,
+    },
+    {
         Name    => 'GET - http - long timeout - Test ' . $TestNumber++,
         URL     => "https://download.znuny.org/releases/packages/otrs.xml",
         Timeout => 100,
@@ -147,10 +183,10 @@ for my $Test (@Tests) {
 
     TRY:
     for my $Try ( 1 .. 5 ) {
-
         my $WebUserAgentObject = Kernel::System::WebUserAgent->new(
             Timeout => $Test->{Timeout},
             Proxy   => $Test->{Proxy},
+            NoProxy => $Test->{NoProxy},
         );
 
         $Self->Is(
@@ -171,9 +207,7 @@ for my $Test (@Tests) {
         my $Status = substr $Response{Status}, 0, 3;
 
         if ( !$Test->{Success} ) {
-
             if ( $Try < 5 && $Status eq 500 && $Test->{ErrorNumber} ne 500 ) {
-
                 sleep $Interval{$Try};
 
                 next TRY;
@@ -193,9 +227,7 @@ for my $Test (@Tests) {
             next TEST;
         }
         else {
-
             if ( $Try < 5 && ( !$Response{Content} || !$Status || $Status ne 200 ) ) {
-
                 sleep $Interval{$Try};
 
                 next TRY;
@@ -221,7 +253,6 @@ for my $Test (@Tests) {
         }
 
         if ( $Test->{Content} ) {
-
             $Self->Is(
                 ${ $Response{Content} },
                 $Test->{Content},

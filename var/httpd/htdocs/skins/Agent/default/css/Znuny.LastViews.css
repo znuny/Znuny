@@ -1,0 +1,166 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+/**
+ * @package     Skin "default"
+ * @section
+ */
+
+@media screen,projection,tv,handheld {
+
+    .ToolTip {
+        position:      relative;
+        display:       inline-block;
+        border-bottom: 1px dotted #333;
+    }
+
+    .ToolTipContent:after{
+        border-bottom-color: #333 !important;
+    }
+
+    .LastViewToolBarRow > .ToolTipContent{
+        top: 35px;
+    }
+
+    .LastViewAvatarRow > .ToolTipContent{
+        top: 55% !important;
+    }
+
+    .ToolTip .ToolTipContent {
+        visibility:       hidden;
+        width:            max-content;
+        background-color: #333;
+        color:            #DDD;
+        border:           1px solid #545454;
+        padding:          5px;
+        position:         absolute;
+        z-index:          100;
+        left:             -1px;
+        line-height:      1.5;
+        background:       #333 !important;
+    }
+
+    .ToolTip:hover .ToolTipContent {
+        visibility: visible;
+        display:    inline-block !important;
+        background: #333333 !important;
+    }
+
+    .ToolTipText {
+        float:   left;
+        padding: 0 5px 0 5px;
+    }
+
+    .ToolTipContent > fieldset > label,
+    .ToolTipText > fieldset > label{
+        text-align: left;
+        text-shadow: none;
+        width: fit-content;
+        width: -moz-fit-content;
+    }
+
+    /* Avatar */
+
+    #ToolBar > li.UserAvatar > div {
+        width: max-content !important;
+    }
+    .LastViewAvatarRow{
+        border-bottom: none !important;
+    }
+
+    #ToolBar li.UserAvatar i.LastViewAvatarIcon,
+    .LastViewAvatarIcon {
+        display:       block !important;
+        top:           auto !important;
+        padding-right: 5px !important;
+    }
+
+    .LastViewAvatarCounter {
+        display:      block !important;
+        top:          auto !important;
+        line-height:  inherit;
+        padding-left: 5px;
+    }
+
+    /* ToolBar */
+
+    .LastViewToolBar{
+        display: inline-flex;
+        border:  1px solid #545454;
+    }
+
+    .LastViewToolBarRow {
+        width: fit-content !important;
+        width: -moz-fit-content !important;
+    }
+
+    #ToolBar li.LastViewToolBarRow a{
+        display: inline;
+    }
+
+    #ToolBar li.LastViewToolBarRow a i{
+        display:      inline !important;
+        font-size:    18px;
+        font-style:   normal;
+        font-weight:  normal !important;
+        padding:      0;
+        text-align:   center;
+        text-indent:  0;
+        text-shadow:  1px 1px 0 #000000;
+        width:        24px;
+        position:     relative;
+        top:          2px;
+        margin-right: 4px;
+    }
+
+    #ToolBar li.LastViewToolBarRow {
+        border-right: 1px solid #545454;
+        padding:      0 5px 0 5px;
+        margin:       0;
+    }
+
+    #ToolBar li.LastViewToolBarRow:last-child a {
+        border-right:none;
+    }
+
+    /* MenuBar */
+
+    .LastViewMenuBar{
+        background: #2d2d2d;
+        z-index:    20;
+        width:      100%;
+        height:     34px;
+
+    }
+
+    .LastViewMenuBarRow  > .ToolTipContent{
+        left: -3px;
+    }
+
+    li.LastViewMenuBarRow a{
+        color: #DDD;
+    }
+
+    li.LastViewMenuBarRow{
+        border-right: 1px solid #545454;
+        padding:      0 5px 0 5px;
+        margin:       0;
+        line-height:  34px;
+    }
+
+    li.LastViewMenuBarRow:last-child a {
+        border-right: 1px solid #545454;
+        padding:      0 5px 0 5px;
+        margin:       0;
+        border-right: none;
+    }
+
+    .LastViewMenuBarRow .ToolTipContent {
+        top: 34px;
+    }
+}

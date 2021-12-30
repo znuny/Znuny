@@ -561,7 +561,7 @@ for my $Test (@Tests) {
 
         $Self->Is(
             scalar(
-                grep { $_->{Data} =~ m/'ResponseContent' \s+ => \s+ 'TicketID=$TicketID'/smx }
+                grep { $_->{Data} =~ m/'ResponseContent' \s+ => \s+ '.*?TicketID=$TicketID.*?'/smx }
                     @{ $LogData->[0]->{Data} }
             ),
             1,

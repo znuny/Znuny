@@ -15,9 +15,7 @@ use warnings;
 use Digest::MD5 qw(md5_hex);
 
 our @ObjectDependencies = (
-    'Kernel::System::Web::Request',
     'Kernel::Config',
-    'Kernel::System::AuthSession',
     'Kernel::System::Encode',
 );
 

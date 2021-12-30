@@ -19,7 +19,6 @@ our @ObjectDependencies = (
     'Kernel::System::DateTime',
     'Kernel::System::State',
     'Kernel::System::Ticket',
-    'Kernel::System::User',
 );
 
 sub Configure {

@@ -33,7 +33,7 @@
 [% RenderBlockStart("Input") %]
                     <div>
                         <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]</label>
-                        <input title="[% Data.Name | html %]" type="text" id="[% Data.Name | html %]" name="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" size="20" />
+                        <input title="[% Data.Name | html %]" type="text" id="[% Data.Name | html %]" name="[% Data.Name | html %]" value="[% Data.SelectedID | html %]" size="20" [% IF Data.Autocomplete %]autocomplete="[% Data.Autocomplete | html %]"[% END %] />
                         <div class="ClearLeft"></div>
                     </div>
 [% RenderBlockEnd("Input") %]

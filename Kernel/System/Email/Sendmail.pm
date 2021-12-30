@@ -14,9 +14,7 @@ use warnings;
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::System::CommunicationLog',
     'Kernel::System::Encode',
-    'Kernel::System::Log',
 );
 
 sub new {

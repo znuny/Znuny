@@ -14245,10 +14245,6 @@ msgstr "预约"
 msgid "Archive search"
 msgstr "归档搜索"
 
-#. Perl Module: Kernel/Output/HTML/Notification/AgentCloudServicesDisabled.pm
-msgid "Enable cloud services to unleash all OTRS features!"
-msgstr "启用云服务以激活OTRS的所有功能！"
-
 #. Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
 msgid "%s Upgrade to %s now! %s"
 msgstr "现在升级%s到%s！%s"

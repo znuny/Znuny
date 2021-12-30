@@ -12,6 +12,7 @@
     [% BreadcrumbPath = [
             {
                 Name => Translate('System Log'),
+                Link => Env("Action"),
             },
         ]
     %]

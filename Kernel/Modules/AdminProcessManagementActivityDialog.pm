@@ -63,6 +63,7 @@ sub Run {
         Owner       => 'OwnerID',
         PendingTime => 'PendingTime',
         Title       => 'Title',
+        Attachments => 'Attachments',
     };
 
     # add service and SLA fields, if option is activated in sysconfig.
@@ -94,6 +95,7 @@ sub Run {
         # do not show internal fields for process management
         next DYNAMICFIELD if $DynamicFieldName eq 'ProcessManagementProcessID';
         next DYNAMICFIELD if $DynamicFieldName eq 'ProcessManagementActivityID';
+        next DYNAMICFIELD if $DynamicFieldName eq 'ProcessManagementAttachment';
 
         $AvailableFieldsList->{"DynamicField_$DynamicFieldName"} = $DynamicFieldName;
     }
@@ -657,6 +659,7 @@ sub _ShowEdit {
         Owner       => 'OwnerID',
         PendingTime => 'PendingTime',
         Title       => 'Title',
+        Attachments => 'Attachments',
     };
 
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
@@ -690,6 +693,7 @@ sub _ShowEdit {
         # do not show internal fields for process management
         next DYNAMICFIELD if $DynamicFieldName eq 'ProcessManagementProcessID';
         next DYNAMICFIELD if $DynamicFieldName eq 'ProcessManagementActivityID';
+        next DYNAMICFIELD if $DynamicFieldName eq 'ProcessManagementAttachment';
 
         $AvailableFieldsList->{"DynamicField_$DynamicFieldName"} = $DynamicFieldName;
     }

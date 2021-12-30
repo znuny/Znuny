@@ -1,0 +1,29 @@
+---
+Debugger:
+  DebugThreshold: debug
+  TestMode: '0'
+Description: 'Webservice to update the out-of-office settings for agents.'
+Provider:
+  Operation:
+    OutOfOffice:
+      Description: ''
+      IncludeTicketData: '0'
+      MappingInbound:
+        Type: OutOfOffice
+      Type: User::OutOfOffice
+  Transport:
+    Config:
+      AdditionalHeaders: ~
+      KeepAlive: ''
+      MaxLength: '1000000'
+      RouteOperationMapping:
+        OutOfOffice:
+          ParserBackend: JSON
+          RequestMethod:
+          - POST
+          Route: /OutOfOffice
+    Type: HTTP::REST
+RemoteSystem: ''
+Requester:
+  Transport:
+    Type: ''

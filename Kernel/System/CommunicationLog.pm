@@ -20,12 +20,8 @@ our %ObjectManagerFlags = (
 );
 
 our @ObjectDependencies = (
-    'Kernel::Config',
-    'Kernel::System::Log',
     'Kernel::System::CommunicationLog::DB',
-    'Kernel::System::DB',
-    'Kernel::System::DateTime',
-    'Kernel::System::Main',
+    'Kernel::System::Log',
 );
 
 =head1 PUBLIC INTERFACE

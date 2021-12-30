@@ -15,10 +15,8 @@ use warnings;
 use parent 'Kernel::System::PostMaster::LoopProtectionCommon';
 
 our @ObjectDependencies = (
-    'Kernel::Config',
     'Kernel::System::DB',
     'Kernel::System::Log',
-    'Kernel::System::DateTime',
 );
 
 sub SendEmail {

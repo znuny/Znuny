@@ -18,7 +18,6 @@ use Kernel::Language qw(Translatable);
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::System::DB',
 );
 
 sub GetDisplayPath {

@@ -1,0 +1,30 @@
+---
+Debugger:
+  DebugThreshold: debug
+  TestMode: '0'
+Description: ''
+FrameworkVersion: 6.1.x git
+Provider:
+  Operation:
+    TimeAccountingGet:
+      Description: ''
+      MappingInbound: {}
+      MappingOutbound: {}
+      Type: Ticket::TimeAccountingGet
+  Transport:
+    Config:
+      MaxLength: '9999999999'
+      NameSpace: http://www.znuny.org/TimeAccountingWebservice/
+      RequestNameFreeText: ''
+      RequestNameScheme: Plain
+      ResponseNameFreeText: ''
+      ResponseNameScheme: Response
+      SOAPAction: Yes
+      SOAPActionFreeText: ''
+      SOAPActionScheme: NameSpaceSeparatorOperation
+      SOAPActionSeparator: /
+    Type: HTTP::SOAP
+RemoteSystem: ''
+Requester:
+  Transport:
+    Type: ''

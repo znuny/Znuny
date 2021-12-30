@@ -14802,10 +14802,6 @@ msgstr "Термин"
 msgid "Archive search"
 msgstr "Претрага архиве"
 
-#. Perl Module: Kernel/Output/HTML/Notification/AgentCloudServicesDisabled.pm
-msgid "Enable cloud services to unleash all OTRS features!"
-msgstr "Активирајте сервисе у облаку да би омогућили све OTRS функције!"
-
 #. Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
 msgid "%s Upgrade to %s now! %s"
 msgstr "%s Унапредите на %s сада! %s"

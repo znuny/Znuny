@@ -16,11 +16,11 @@ use vars (qw($Self));
 use Kernel::Config;
 use Kernel::System::AsynchronousExecutor;
 
-# get helper object
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $SchedulerDBObject = $Kernel::OM->Get('Kernel::System::Daemon::SchedulerDB');
 
 $Self->True(
-    $Helper,
+    $HelperObject,
     "Instance created",
 );
 
@@ -30,7 +30,7 @@ my $DuplicateIDFound;
 
 LOOP:
 for my $I ( 1 .. 1_000 ) {
-    my $RandomID = $Helper->GetRandomID();
+    my $RandomID = $HelperObject->GetRandomID();
     if ( $SeenRandomIDs{$RandomID}++ ) {
         $Self->True(
             0,
@@ -52,7 +52,7 @@ my $DuplicateNumbersFound;
 
 LOOP:
 for my $I ( 1 .. 1_000 ) {
-    my $RandomNumber = $Helper->GetRandomNumber();
+    my $RandomNumber = $HelperObject->GetRandomNumber();
     if ( $SeenRandomNumbers{$RandomNumber}++ ) {
         $Self->True(
             0,
@@ -69,16 +69,16 @@ $Self->False(
 );
 
 # Test transactions
-$Helper->BeginWork();
+$HelperObject->BeginWork();
 
-my $TestUserLogin = $Helper->TestUserCreate();
+my $TestUserLogin = $HelperObject->TestUserCreate();
 
 $Self->True(
     $TestUserLogin,
     'Can create test user',
 );
 
-$Helper->Rollback();
+$HelperObject->Rollback();
 $Kernel::OM->Get('Kernel::System::Cache')->CleanUp();
 
 my %User = $Kernel::OM->Get('Kernel::System::User')->GetUserData(
@@ -99,7 +99,7 @@ $Self->Is(
 
 my $Value = q$1'"$;
 
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'nonexisting_dummy',
     Value => $Value,
@@ -119,7 +119,7 @@ $Self->Is(
 );
 
 # Check custom code injection.
-my $RandomNumber   = $Helper->GetRandomNumber();
+my $RandomNumber   = $HelperObject->GetRandomNumber();
 my $PackageName    = "Kernel::Config::Files::ZZZZUnitTest$RandomNumber";
 my $SubroutineName = "Sub$RandomNumber";
 my $SubroutinePath = "${PackageName}::$SubroutineName";
@@ -139,7 +139,7 @@ sub $SubroutineName {
 }
 1;
 EOS
-$Helper->CustomCodeActivate(
+$HelperObject->CustomCodeActivate(
     Code       => $CustomCode,
     Identifier => $RandomNumber,
 );
@@ -156,7 +156,7 @@ $Self->True(
     "Subroutine $SubroutinePath() is now defined",
 );
 
-$Helper->CustomFileCleanup();
+$HelperObject->CustomFileCleanup();
 
 $NewConfigObject = Kernel::Config->new();
 $Self->Is(
@@ -172,7 +172,7 @@ $Self->Is(
 );
 
 # Disable scheduling of asynchronous executor tasks.
-$Helper->DisableAsyncCalls();
+$HelperObject->DisableAsyncCalls();
 
 # Create a new task for the scheduler daemon using AsyncCall method.
 my $Success = Kernel::System::AsynchronousExecutor->AsyncCall(
@@ -186,7 +186,83 @@ $Self->True(
     'Created an asynchronous task'
 );
 
-my $SchedulerDBObject = $Kernel::OM->Get('Kernel::System::Daemon::SchedulerDB');
+# Disable SysConfigs for current UnitTest.
+
+my @Tests = (
+    {
+        Name       => '1 DisableSysConfigs single ',
+        SysConfigs => [
+            'DashboardBackend###0442-RSS',
+        ],
+    },
+    {
+        Name       => '2 DisableSysConfigs multi ',
+        SysConfigs => [
+            'DashboardBackend###0400-UserOnline',
+            'DashboardBackend###0390-UserOutOfOffice',
+        ],
+    },
+);
+
+for my $Test (@Tests) {
+
+    for my $SysConfigName ( @{ $Test->{SysConfigs} } ) {
+        my @SettingStructure = split( '###', $SysConfigName );
+
+        my $SysConfig;
+        KEY:
+        for my $Key (@SettingStructure) {
+            if ( !$SysConfig ) {
+                $SysConfig = $ConfigObject->Get($Key);
+                next KEY;
+            }
+            else {
+                $SysConfig = $SysConfig->{$Key};
+            }
+        }
+
+        $Self->True(
+            $SysConfig,
+            $Test->{Name} . 'enabled: ' . $SysConfigName,
+        );
+    }
+
+    $Success = $HelperObject->DisableSysConfigs(
+        DisableSysConfigs => $Test->{SysConfigs}
+    );
+
+    $Self->True(
+        $Success,
+        'HelperObject DisableSysConfigs()',
+    );
+
+    $Kernel::OM->ObjectsDiscard(
+        Objects => ['Kernel::Config'],
+    );
+
+    $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    for my $SysConfigName ( @{ $Test->{SysConfigs} } ) {
+        my @SettingStructure = split( '###', $SysConfigName );
+
+        my $SysConfig;
+        KEY:
+        for my $Key (@SettingStructure) {
+            if ( !$SysConfig ) {
+                $SysConfig = $ConfigObject->Get($Key);
+                next KEY;
+            }
+            else {
+                $SysConfig = $SysConfig->{$Key};
+            }
+        }
+
+        $Self->False(
+            $SysConfig,
+            $Test->{Name} . 'disabled: ' . $SysConfigName,
+        );
+    }
+}
 
 # Check if scheduled asynchronous task is present in DB.
 my @TaskIDs;

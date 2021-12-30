@@ -23,7 +23,6 @@ our @ObjectDependencies = (
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::StandardTemplate',
-    'Kernel::System::SysConfig',
     'Kernel::System::Valid',
 );
 

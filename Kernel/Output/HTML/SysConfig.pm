@@ -16,10 +16,8 @@ use Kernel::System::VariableCheck qw( :all );
 use parent qw(Kernel::System::SysConfig::Base::Framework);
 
 our @ObjectDependencies = (
-    'Kernel::Config',
     'Kernel::Language',
     'Kernel::Output::HTML::Layout',
-    'Kernel::System::SysConfig',
     'Kernel::System::Log',
     'Kernel::System::Main',
 );

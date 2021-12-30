@@ -311,6 +311,10 @@ sub Run {
         );
     }
 
+    # store the HTTPCode so we can pass it
+    # to the transport backend later
+    my $HTTPCode = $FunctionResult->{HTTPCode};
+
     # extend the data include payload
     $DataInclude{ProviderResponseInput} = $FunctionResult->{Data};
 
@@ -386,13 +390,15 @@ sub Run {
     #
 
     $FunctionResult = $Self->{TransportObject}->ProviderGenerateResponse(
-        Success => 1,
-        Data    => $DataOut,
+        Success  => 1,
+        Data     => $DataOut,
+        Sort     => $ProviderConfig->{Operation}->{$Operation}->{SortOutbound},
+        HTTPCode => $HTTPCode,
     );
 
     if ( !$FunctionResult->{Success} ) {
-
         my $Summary = $FunctionResult->{ErrorMessage} // 'TransportObject returned an error, cancelling Request';
+
         $Self->_HandleError(
             %HandleErrorData,
             DataInclude => \%DataInclude,

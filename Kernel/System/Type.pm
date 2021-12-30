@@ -14,7 +14,6 @@ use warnings;
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::System::SysConfig',
     'Kernel::System::Cache',
     'Kernel::System::DB',
     'Kernel::System::Log',

@@ -30,6 +30,23 @@ CREATE TABLE acl_sync (
     change_time DATETIME NOT NULL
 );
 # ----------------------------------------------------------
+#  create table acl_ticket_attribute_relations
+# ----------------------------------------------------------
+CREATE TABLE acl_ticket_attribute_relations (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    filename VARCHAR (255) NOT NULL,
+    attribute_1 VARCHAR (200) NOT NULL,
+    attribute_2 VARCHAR (200) NOT NULL,
+    acl_data MEDIUMTEXT NOT NULL,
+    priority BIGINT NOT NULL,
+    create_time DATETIME NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time DATETIME NOT NULL,
+    change_by INTEGER NOT NULL,
+    PRIMARY KEY(id),
+    UNIQUE INDEX acl_tar_filename (filename)
+);
+# ----------------------------------------------------------
 #  create table valid
 # ----------------------------------------------------------
 CREATE TABLE valid (
@@ -70,9 +87,9 @@ CREATE TABLE user_preferences (
     INDEX user_preferences_user_id (user_id)
 );
 # ----------------------------------------------------------
-#  create table groups
+#  create table permission_groups
 # ----------------------------------------------------------
-CREATE TABLE groups (
+CREATE TABLE permission_groups (
     id INTEGER NOT NULL AUTO_INCREMENT,
     name VARCHAR (200) NOT NULL,
     comments VARCHAR (250) NULL,
@@ -721,6 +738,7 @@ CREATE TABLE time_accounting (
     change_time DATETIME NOT NULL,
     change_by INTEGER NOT NULL,
     PRIMARY KEY(id),
+    INDEX time_accounting_article_id (article_id),
     INDEX time_accounting_ticket_id (ticket_id)
 );
 # ----------------------------------------------------------

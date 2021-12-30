@@ -15,6 +15,7 @@ use warnings;
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
+    'Kernel::System::DateTime',
     'Kernel::System::Log',
 );
 
@@ -36,7 +37,7 @@ create an object. Do not create it directly, instead use:
 
     use Kernel::System::ObjectManager;
     local $Kernel::OM = Kernel::System::ObjectManager->new();
-    my $ErrorObject = $Kernel::OM->Get('Kernel::GenericInterface::ErrorHandling');
+    my $ErrorObject = $Kernel::OM->Get('Kernel::GenericInterface::ErrorHandling::RequestRetry');
 
 =cut
 

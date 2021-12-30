@@ -14870,12 +14870,6 @@ msgstr "Cita"
 msgid "Archive search"
 msgstr "Archivar la búsqueda"
 
-#. Perl Module: Kernel/Output/HTML/Notification/AgentCloudServicesDisabled.pm
-msgid "Enable cloud services to unleash all OTRS features!"
-msgstr ""
-"¡Habilitar los servicios en la nube para liberar todas las características "
-"de OTRS!"
-
 #. Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
 msgid "%s Upgrade to %s now! %s"
 msgstr "%s ¡Actualizar ahora a %s! %s"

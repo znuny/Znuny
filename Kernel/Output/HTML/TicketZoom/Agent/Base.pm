@@ -23,7 +23,6 @@ our @ObjectDependencies = (
     'Kernel::System::DynamicField::Backend',
     'Kernel::System::Encode',
     'Kernel::System::Log',
-    'Kernel::System::SystemAddress',
     'Kernel::System::Ticket::Article',
     'Kernel::System::User',
 );

@@ -1,0 +1,32 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+[% RenderBlockStart("LastView") %]
+    <li class="LastViewToolBarRow ToolTip">
+        <span class="ToolTipContent">
+            <div class="ToolTipText">
+                <p>
+                    <b>[% Translate(Data.Type) | html %]</b>
+                    <br />
+                    [% Data.TimeStamp | Localize("TimeLong") %]
+                </p>
+                <fieldset class="TableLike FixedLabelSmall Narrow">
+[% RenderBlockStart("LastViewParam") %]
+                    <label>[% Data.Key | html %]:</label>
+                    <p class="Value" title="[% Data.Value | html %]">[% Data.Value | html %]</p>
+                    <div class="Clear"></div>
+[% RenderBlockEnd("LastViewParam") %]
+                </fieldset>
+            </div>
+        </span>
+        <a id="[% Data.URL | html %]" href="index.pl?[% Data.URL | html %]" class="[% Data.Class | html %] LastView">
+            <i class="[% Data.Icon | html %]"></i>
+            <span class="Counter">[% Data.Counter | html %]</span>
+            [% Data.Label | html %]
+        </a>
+    </li>
+[% RenderBlockEnd("LastView") %]

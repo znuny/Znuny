@@ -50,7 +50,7 @@ $Self->Is(
 );
 
 # set web service name
-my $WebserviceName = '-Test-' . $RandomID;
+my $WebserviceName = 'Operation::Session::SessionCreate-Test-' . $RandomID;
 
 my $WebserviceID = $WebserviceObject->WebserviceAdd(
     Name   => $WebserviceName,
@@ -87,7 +87,6 @@ my $RemoteSystem =
 
 my $WebserviceConfig = {
 
-    #    Name => '',
     Description =>
         'Test for Ticket Connector using SOAP transport backend.',
     Debugger => {

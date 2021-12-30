@@ -14605,10 +14605,6 @@ msgstr "Подія"
 msgid "Archive search"
 msgstr "Пошук в архіві"
 
-#. Perl Module: Kernel/Output/HTML/Notification/AgentCloudServicesDisabled.pm
-msgid "Enable cloud services to unleash all OTRS features!"
-msgstr "Ввімкніть хмарні сервіси щоб розкрити усі можливості OTRS!"
-
 #. Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
 msgid "%s Upgrade to %s now! %s"
 msgstr "%s Оновіться до %s зараз! %s"

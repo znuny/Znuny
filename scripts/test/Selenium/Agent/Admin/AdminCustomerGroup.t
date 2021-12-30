@@ -243,7 +243,7 @@ $Selenium->RunTest(
 
         if ($GroupRandomID) {
             my $Success = $DBObject->Do(
-                SQL => "DELETE FROM groups WHERE id = $GroupID",
+                SQL => "DELETE FROM permission_groups WHERE id = $GroupID",
             );
             $Self->True(
                 $Success,

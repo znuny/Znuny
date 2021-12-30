@@ -14409,10 +14409,6 @@ msgstr "予約"
 msgid "Archive search"
 msgstr "アーカイブの検索"
 
-#. Perl Module: Kernel/Output/HTML/Notification/AgentCloudServicesDisabled.pm
-msgid "Enable cloud services to unleash all OTRS features!"
-msgstr "クラウドサービスを利用して、OTRSのすべての機能を活用しましょう！"
-
 #. Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
 msgid "%s Upgrade to %s now! %s"
 msgstr "%s は %sに更新されました！ %s"

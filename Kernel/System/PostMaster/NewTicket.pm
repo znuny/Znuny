@@ -15,19 +15,18 @@ use warnings;
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::CustomerUser',
+    'Kernel::System::DateTime',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
     'Kernel::System::LinkObject',
-    'Kernel::System::Log',
     'Kernel::System::Priority',
     'Kernel::System::Queue',
+    'Kernel::System::Service',
     'Kernel::System::State',
     'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
-    'Kernel::System::DateTime',
     'Kernel::System::Type',
     'Kernel::System::User',
-    'Kernel::System::Service',
 );
 
 sub new {

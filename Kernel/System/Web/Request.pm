@@ -22,9 +22,8 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::CheckItem',
     'Kernel::System::Encode',
-    'Kernel::System::Web::UploadCache',
     'Kernel::System::FormDraft',
-    'Kernel::System::Main',
+    'Kernel::System::Web::UploadCache',
 );
 
 =head1 NAME

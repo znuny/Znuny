@@ -57,7 +57,7 @@ my $ArticleLimit = 100;
 my @TicketIDs = CreateTickets(@NrOfArticles);
 
 # set web-service name
-my $WebserviceName = '-Test-' . $RandomID;
+my $WebserviceName = 'Operation::Ticket::TicketGetBulkWithArticleLimit-Test-' . $RandomID;
 
 # create web-service object
 my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');

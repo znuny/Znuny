@@ -1,0 +1,59 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+<div class="WidgetSimple">
+    <div class="Header">
+        <h2>[% Translate("Test settings") | html %]</h2>
+    </div>
+    <div class="Content">
+        <div class="Center TestSettings">
+            <div class="Field">
+                <button type="button" class="CallForAction" value="[% Translate('Test settings') | html %]" data-action="Test"><span>[% Translate("Test settings") | html %]</span></button>
+            </div>
+            <div class="Clear"></div>
+
+            <div class="Field SpacingTop Hidden" id="TestError">
+                <p class="ErrorBox">[% Translate("Error while testing configuration. Please check the configuration.") | html %]</p>
+            </div>
+
+            <div class="Field SpacingTop Hidden" id="TestSuccess">
+                <p class="SuccessBox">[% Translate("Test was successful.") | html %]</p>
+            </div>
+            <div class="Clear"></div>
+        </div>
+        <div class="Test Hidden">
+            <fieldset class="TableLike WidgetSimple CenterBox">
+[% RenderBlockStart("TestField") %]
+                <div id='TestField' class="Row Row_DynamicField_[% Data.Name | html %]">
+                    [% Data.Label %]
+                    <div class="Field SpacingTop">
+                        [% Data.Field %]
+                        <p class="FieldExplanation">[% Translate("Test this dynamic field exactly as it is displayed in the editing dialogs.") | html %]</p>
+                    </div>
+                    <div class="Clear"></div>
+                </div>
+[% RenderBlockEnd("TestField") %]
+            </fieldset>
+            <fieldset class="TableLike WidgetSimple CenterBox">
+                <div id='TestSearchTerms' class="Row">
+                    <label  for="SearchTerms">[% Translate("Search") | html %]:</label>
+                    <div class="Field SpacingTop">
+                        <input id="SearchTerms" class="W50pc [% Data.SearchTermsServerError | html %]" type="text" value="[% Data.SearchTerms | html %]" name="SearchTerms"/>
+                        <div id="SearchTermsError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                        <div id="SearchTermsServerError" class="TooltipErrorMessage"><p>[% Translate(Data.SearchTermsServerErrorMessage) | html %]</p></div>
+                        <p class="FieldExplanation">[% Translate("Enter a search term to test the current settings.") | html %] - <b>([% Translate('Click "Test settings"') | html %])</b></p>
+                    </div>
+                </div>
+                <div class="Center Spacing">
+                    <div class="Field" id="TestData">
+                    </div>
+                    <div class="Clear"></div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>
