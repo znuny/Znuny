@@ -544,6 +544,12 @@ Core.App = (function (TargetNS) {
                 if (Core && Core.UI && Core.UI.Popup && Core.UI.Popup.HasOpenPopups()) {
                     return;
                 }
+
+                // If there is an input value in the toolbar TicketSearchFulltext, don't refresh
+                if ($('#Fulltext') && $('#Fulltext').val().length) {
+                    return;
+                }
+
                 // Now we can reload
                 window.location.reload();
             }, RefreshSeconds * 1000);
