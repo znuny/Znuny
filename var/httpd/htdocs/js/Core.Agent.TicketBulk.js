@@ -32,6 +32,7 @@ Core.Agent.TicketBulk = (function (TargetNS) {
         var TicketBulkURL = Core.Config.Get('TicketBulkURL'),
             $TicketNumberObj = $('#MergeTo'),
             Fields = ['StateID', 'TypeID', 'OwnerID', 'ResponsibleID', 'QueueID', 'PriorityID'],
+            DynamicFieldNames = Core.Config.Get('DynamicFieldNames'),
             ModifiedFields;
 
         // Initialize autocomplete feature on ticket number field.
@@ -82,14 +83,16 @@ Core.Agent.TicketBulk = (function (TargetNS) {
             }
         });
 
+
+        TargetNS.InitDynamicFields(DynamicFieldNames);
+
         // Bind events to specific fields
         $.each(Fields, function(Index, Value) {
-            ModifiedFields = Core.Data.CopyObject(Fields);
+            ModifiedFields = Core.Data.CopyObject(Fields).concat(DynamicFieldNames);
             ModifiedFields.splice(Index, 1);
 
             FieldUpdate(Value, ModifiedFields);
         });
-
 
         // execute function in the parent window
         Core.UI.Popup.ExecuteInParentWindow(function(WindowObject) {
@@ -167,6 +170,105 @@ Core.Agent.TicketBulk = (function (TargetNS) {
                     }
                 );
             }
+        });
+    };
+
+    TargetNS.InitDynamicFields = function (DynamicFieldNames) {
+        $.each(DynamicFieldNames, function(Index, DynamicFieldName) {
+
+            var DynamicFieldConfigs = Core.Config.Get('DynamicFieldConfigs'),
+                UsedSuffix = 'Used',
+                UsedType;
+
+            var HasCheckbox = false,
+                IsChecked         = DynamicFieldConfigs[DynamicFieldName]['IsChecked'] || false,
+                RequireActivation = DynamicFieldConfigs[DynamicFieldName]['RequireActivation'] || false;
+
+            // check if this current DynamicField has a hidden checkbox "DynamicFieldUsed"
+            if ($('#' +  DynamicFieldName + 'Used').length) {
+                HasCheckbox = true;
+            }
+
+            // if Ticket::Frontend::AgentTicketBulk###DynamicFieldRequireActivation is not activated
+            // hide the additional checkbox (Used) of datetime and checkbox
+            if (!RequireActivation) {
+                if (HasCheckbox) {
+                    $('#' + DynamicFieldName + 'Used').hide();
+                    $('#' + DynamicFieldName + 'Used').prop('checked', true);
+                }
+                return;
+            }
+
+            if (HasCheckbox) {
+                UsedType = $('#' + DynamicFieldName + 'Used').prop('type');
+                // show hidden checkbox
+                if (UsedType === 'hidden') {
+                    UsedSuffix = '';
+                    $('#' + DynamicFieldName + 'Used').prop('type', 'checkbox');
+                }
+
+                // move current checkboxUsed to the <for="DynamicField_DynamicFieldName"> tag
+                $('#' + DynamicFieldName + 'Used').prependTo(
+                    $("[for='" + DynamicFieldName + UsedSuffix + "']")
+               );
+            }
+            else {
+                // insert a new checkbox with id=DynamicFieldNameUsed to label
+                $("[for='" + DynamicFieldName + "']").prepend(
+                    '<input type="checkbox" id="' + DynamicFieldName + 'Used" name="' + DynamicFieldName + 'Used" value="1"/>'
+                );
+            }
+
+            // set the label "for" to the CheckboxUsed
+            // otherwise Firefox won't uncheck the CheckboxUsed
+            $("[for='" + DynamicFieldName + "']").prop('for', '' + DynamicFieldName + 'Used');
+
+            if (IsChecked) {
+                $('#' + DynamicFieldName + 'Used').prop('checked',  true);
+            }
+
+            // reset input values for current DynamicField after uncheck CheckboxUsed
+            $('#' + DynamicFieldName + 'Used').on('change', function () {
+                var IsChecked = $('#' + DynamicFieldName + 'Used').prop('checked'),
+                    Tag,
+                    Type;
+
+                if (
+                    IsChecked === false
+                    && $('#' + DynamicFieldName).length
+                ) {
+                    Tag = $('#' + DynamicFieldName).prop('tagName').toLowerCase();
+
+                    if (Tag === 'input') {
+                        Type = $('#' + DynamicFieldName).prop('type').toLowerCase();
+
+                        if (Type === 'checkbox') {
+                            $('#' + DynamicFieldName).prop('checked', false);
+                        }
+                        else {
+                            $('#' + DynamicFieldName).val('');
+                        }
+                    }
+                    else {
+                        $('#' + DynamicFieldName).val('');
+                    }
+                }
+            });
+
+            // set CheckboxUsed to check after clicking into input field
+            $('#' + DynamicFieldName).on('click', function () {
+                $('#' + DynamicFieldName + 'Used').prop('checked', true);
+            });
+
+            // if input field is date dynamic field, loop over every input field to set CheckboxUsed to check
+            $.each(['Year', 'Month', 'Day', 'Hour', 'Minute','DayDatepickerIcon'], function (Index, Element) {
+                if ($('#' +  DynamicFieldName + Element).length) {
+                    $('#' +  DynamicFieldName + Element).on('click', function() {
+                        $('#' + DynamicFieldName + 'Used').prop('checked', true);
+                    });
+                }
+            });
+
         });
     };
 

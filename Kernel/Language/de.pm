@@ -34,6 +34,13 @@ sub Data {
     $Self->{ThousandSeparator} = '.';
     $Self->{Translation} = {
 
+        'Dynamic fields shown in the ticket bulk screen of the agent interface.' => 'Dynamische Felder, die in der Ticket-Sammelaktion in der Agentenoberfläche angezeigt werden.',
+        'This configuration defines if a dynamic field has to be checked in the agent ticket bulk view to get set for each ticket. This prevents unwanted overwrite of dynamic field values with their default or even empty values.' => 'Diese Konfiguration definiert, ob ein dynamisches Feld in der Ticket-Sammelaktion zum Setzen mit einer Checkbox markiert werden muss. Dies verhindert das ungewollte Überschreiben von dynamischen Feldwerten durch deren Standardwerte oder sogar leeren Inhalt.',
+        'Loader module registration for AgentTicketBulk.' => 'Loader-Modulregistrierung für die Ticket-Sammelaktion.',
+        'Sets the service in the ticket bulk screen in the agent interface (Ticket::Service needs to be enabled).' => 'Setzt den Service in der Ticket-Sammelaktion in der Agentenoberfläche (Ticket::Service muss aktiviert sein).',
+        'Sets if service must be selected by the agent.' => 'Legt fest, ob der Service durch Agenten ausgewählt werden muss.',
+        'This configuration defines all possible screens to enable or disable dynamic fields.' => 'Diese Konfiguration definiert alle möglichen Screens, um dynamische Felder zu aktivieren oder zu deaktivieren.',
+
         # Template: AdminACL
         'ACL Management' => 'ACL-Verwaltung',
         'Actions' => 'Aktionen',

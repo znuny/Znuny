@@ -49,7 +49,10 @@ sub Run {
     PACKAGENAME:
     for my $PackageName (
         qw(
+        Znuny-ExcelStats
         Znuny4OTRS-ExcelStats
+        Znuny-AdvancedBulkAction
+        Znuny4OTRS-AdvancedBulkAction
         )
         )
     {

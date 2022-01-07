@@ -51,6 +51,7 @@ my $ExpectedValidDynamicFieldScreenListHash = {
         'Ticket::Frontend::AgentTicketWatchView###DefaultColumns'            => 'AgentTicketWatchView',
     },
     'DynamicFieldScreens' => {
+        'Ticket::Frontend::AgentTicketBulk###DynamicField'              => 'AgentTicketBulk',
         'Ticket::Frontend::AgentTicketClose###DynamicField'             => 'AgentTicketClose',
         'Ticket::Frontend::AgentTicketCompose###DynamicField'           => 'AgentTicketCompose',
         'Ticket::Frontend::AgentTicketEmail###DynamicField'             => 'AgentTicketEmail',
@@ -106,6 +107,7 @@ my $ExpectedValidDynamicFieldScreenListArray = {
         'Ticket::Frontend::AgentTicketWatchView###DefaultColumns'
     ],
     'DynamicFieldScreens' => [
+        'Ticket::Frontend::AgentTicketBulk###DynamicField',
         'Ticket::Frontend::AgentTicketClose###DynamicField',
         'Ticket::Frontend::AgentTicketCompose###DynamicField',
         'Ticket::Frontend::AgentTicketEmail###DynamicField',
