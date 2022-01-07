@@ -168,6 +168,32 @@
                     </div>
                     <div class="Clear"></div>
 
+[% RenderBlockStart("Service") %]
+                    [% IF Data.ServiceMandatory %]
+                        <label class="Mandatory" for="ServiceID"><span class="Marker">*</span>[% Translate("Service") | html %]:</label>
+                    [% ELSE %]
+                        <label for="ServiceID">[% Translate("Service") | html %]:</label>
+                    [% END %]
+                    <div class="Field">
+                        [% Data.ServiceStrg %]
+                        [% IF Data.ServiceMandatory %]
+                            <div id="ServiceIDError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                        [% END %]
+                        <div id="ServiceIDServerError" class="TooltipErrorMessage"><p>[% Translate("Service invalid.") | html %]</p></div>
+                    </div>
+                    <div class="Clear"></div>
+[% RenderBlockEnd("Service") %]
+
+[% RenderBlockStart("ServiceMandatory") %]
+                    <label class="Mandatory" for="ServiceID"><span class="Marker">*</span>[% Translate("Service") | html %]:</label>
+                    <div class="Field">
+                        [% Data.ServiceStrg %]
+                        <div id="ServiceIDError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                        <div id="ServiceIDServerError" class="TooltipErrorMessage"><p>[% Translate("Service invalid.") | html %]</p></div>
+                    </div>
+                    <div class="Clear"></div>
+[% RenderBlockEnd("ServiceMandatory") %]
+
 [% RenderBlockStart("Owner") %]
                     <label for="OwnerID">[% Translate("Owner") | html %]:</label>
                     <div class="Field">
@@ -229,6 +255,15 @@
 [% FOREACH CONTENT IN Data.BulkModuleContent %]
                     [% CONTENT %]
 [% END %]
+[% RenderBlockStart("DynamicField") %]
+                    <div class="Row Row_DynamicField_[% Data.Name | html %]">
+                    [% Data.Label %]
+                        <div class="Field">
+                        [% Data.Field %]
+                        </div>
+                        <div class="Clear"></div>
+                    </div>
+[% RenderBlockEnd("DynamicField") %]
                 </fieldset>
             </div>
         </div>
