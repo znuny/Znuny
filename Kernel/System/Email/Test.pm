@@ -109,4 +109,15 @@ sub CleanUp {
     );
 }
 
+sub Check {
+    my ( $Self, %Param ) = @_;
+
+    my $Message = $Param{Test} ? '' : 'Error!';
+
+    return (
+        Successful => $Param{Test},
+        Message    => $Message,
+    );
+}
+
 1;
