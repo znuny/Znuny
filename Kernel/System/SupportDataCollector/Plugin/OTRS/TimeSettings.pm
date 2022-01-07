@@ -78,7 +78,14 @@ sub Run {
     }
 
     # Calendar time zones
-    for my $Counter ( 1 .. 9 ) {
+    my $Maximum = $ConfigObject->Get("MaximumCalendarNumber") || 50; 
+
+    COUNTER:
+    for my $Counter ( '', 1 .. $Maximum ) {
+        my $CalendarName = $ConfigObject->Get('TimeZone::Calendar' . $Counter . 'Name' );
+
+        next COUNTER if !$CalendarName;
+
         my $CalendarTimeZone = $ConfigObject->Get( 'TimeZone::Calendar' . $Counter );
 
         if ( defined $CalendarTimeZone ) {
