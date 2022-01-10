@@ -53,6 +53,8 @@ sub Run {
         Znuny4OTRS-ExcelStats
         Znuny-AdvancedBulkAction
         Znuny4OTRS-AdvancedBulkAction
+        Znuny-RandomTicketNumberGenerator
+        Znuny4OTRS-RandomTicketNumberGenerator
         )
         )
     {

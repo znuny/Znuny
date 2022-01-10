@@ -1,4 +1,5 @@
 # 6.3.1 2022-??-??
+ - 2022-01-07 Integrated package Znuny4OTRS-RandomTicketNumberGenerator.
  - 2022-01-07 Parameter %Param are now passed to function Kernel::System::Email::Check. Thanks to @reneeb. [#26](https://github.com/znuny/Znuny/pull/26)
  - 2022-01-07 Integrated package Znuny4OTRS-AdvancedBulkAction.
  - 2022-01-06 Fixed Bug - The page refresh stops the fulltext search via toolbar. [#182](https://github.com/znuny/Znuny/issues/182)
