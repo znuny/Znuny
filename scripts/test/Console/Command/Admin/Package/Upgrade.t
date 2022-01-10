@@ -1,6 +1,6 @@
 # --
-# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2001-2022 OTRS AG, https://otrs.com/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -58,15 +58,32 @@ $Helper->CustomCodeActivate(
     Identifier => 'Admin::Package::Upgrade' . $RandomID,
 );
 
+#
+# Install package before upgrade.
+#
 my $Location             = $ConfigObject->Get('Home') . '/scripts/test/sample/PackageManager/TestPackage.opm';
-my $UpgradeCommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Admin::Package::Upgrade');
+my $InstallCommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Admin::Package::Install');
 
-my $ExitCode = $UpgradeCommandObject->Execute($Location);
+my $ExitCode = $InstallCommandObject->Execute($Location);
 
 $Self->Is(
     $ExitCode,
     0,
-    "Admin::Package::Upgrade exit code - package is verified",
+    "Admin::Package::Install exit code - package installed",
+);
+
+#
+# Upgrade package
+#
+$Location = $ConfigObject->Get('Home') . '/scripts/test/sample/PackageManager/TestPackageUpgrade.opm';
+my $UpgradeCommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Admin::Package::Upgrade');
+
+$ExitCode = $UpgradeCommandObject->Execute($Location);
+
+$Self->Is(
+    $ExitCode,
+    0,
+    "Admin::Package::Upgrade exit code - package upgraded.",
 );
 
 $ExitCode = $UpgradeCommandObject->Execute($Location);
@@ -74,7 +91,7 @@ $ExitCode = $UpgradeCommandObject->Execute($Location);
 $Self->Is(
     $ExitCode,
     1,
-    "Admin::Package::Upgrade exit code without arguments - Can't upgrade, package 'Test-0.0.1' already installed!",
+    "Admin::Package::Upgrade exit code without arguments - Can't upgrade, package 'Test-0.0.2' already installed!",
 );
 
 1;

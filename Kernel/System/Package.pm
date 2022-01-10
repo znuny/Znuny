@@ -1,6 +1,6 @@
 # --
-# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2001-2022 OTRS AG, https://otrs.com/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -509,7 +509,7 @@ sub PackageInstall {
         if ( !$Param{Force} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'notice',
-                Message  => 'Package already installed, try upgrade!',
+                Message  => 'Package already installed, trying upgrade!',
             );
             return $Self->PackageUpgrade(%Param);
         }
@@ -823,10 +823,10 @@ sub PackageUpgrade {
 
     if ( !$Installed ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'notice',
-            Message  => 'Package is not installed, try a installation!',
+            Priority => 'error',
+            Message  => 'Package is not installed, try an installation!',
         );
-        return $Self->PackageInstall(%Param);
+        return;
     }
 
     # write permission check
