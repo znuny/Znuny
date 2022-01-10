@@ -23,7 +23,7 @@ my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 my $BackendObject      = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
-my $TimeObject         = $Kernel::OM->Get('Kernel::System::ZnunyTime');
+my $TimeObject         = $Kernel::OM->Get('Kernel::System::Time');
 my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
 
 my %UserData = $HelperObject->TestUserDataGet(

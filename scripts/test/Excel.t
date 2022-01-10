@@ -5342,7 +5342,7 @@ for my $Key ( sort keys %DemoData ) {
 
     $Self->True(
         $Success,
-        'Created Excel Sheet sucessfully: ' . $FilePath . $FileName,
+        'Created Excel Sheet successfully: ' . $FilePath . $FileName,
     );
 }
 

@@ -18,7 +18,7 @@ my $ZnunyHelperObject = $Kernel::OM->Get('Kernel::System::ZnunyHelper');
 my $ServiceObject     = $Kernel::OM->Get('Kernel::System::Service');
 my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $TicketObject      = $Kernel::OM->Get('Kernel::System::Ticket');
-my $TimeObject        = $Kernel::OM->Get('Kernel::System::ZnunyTime');
+my $TimeObject        = $Kernel::OM->Get('Kernel::System::Time');
 my $CacheObject       = $Kernel::OM->Get('Kernel::System::Cache');
 my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
 
@@ -73,7 +73,7 @@ my %UserData = $HelperObject->TestUserDataGet(
 
 $Self->True(
     scalar keys %UserData,
-    "Test User created sucessfully.",
+    "Test User created successfully.",
 );
 my $QueueID = $ZnunyHelperObject->_QueueCreateIfNotExists(
     Name    => 'UT' . $HelperObject->GetRandomNumber(),
@@ -82,7 +82,7 @@ my $QueueID = $ZnunyHelperObject->_QueueCreateIfNotExists(
 
 $Self->True(
     $QueueID,
-    "Test Queue created sucessfully.",
+    "Test Queue created successfully.",
 );
 my $CustomerUserLogin = 'test-customer-user-' . $HelperObject->GetRandomNumber();
 
