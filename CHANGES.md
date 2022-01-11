@@ -1,3 +1,7 @@
+# 6.2.3 2022-xx-xx
+ - 2022-01-11 Fixed Bug - Email overwritten when editing an agent.
+ - 2022-01-06 Fixed Bug - The page refresh stops the fulltext search via toolbar. [#182](https://github.com/znuny/Znuny/issues/182)
+
 # 6.2.2 2021-12-15
  - 2021-12-14 Added ProcessListTreeView in AgentTicketProcess and CustomerTicketProcess.
  - 2021-12-14 Added missing translation for process and activity in CustomerTicketZoom.tt.
