@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -21,6 +21,12 @@ my $TicketObject      = $Kernel::OM->Get('Kernel::System::Ticket');
 my $TimeObject        = $Kernel::OM->Get('Kernel::System::Time');
 my $CacheObject       = $Kernel::OM->Get('Kernel::System::Cache');
 my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
+my $SeleniumObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
+
+if ( !$SeleniumObject->{SeleniumTestsActive} ) {
+    $Self->True( 1, 'Selenium testing is not active, skipping tests.' );
+    return 1;
+}
 
 my $Success;
 
@@ -120,8 +126,6 @@ for my $TicketID (@TicketIDs) {
         ),
     };
 }
-
-my $SeleniumObject = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 my $SeleniumTest = sub {
 

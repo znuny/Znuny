@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -12,6 +12,13 @@ use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 use vars (qw($Self));
+
+my $SeleniumObject = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
+
+if ( !$SeleniumObject->{SeleniumTestsActive} ) {
+    $Self->True( 1, 'Selenium testing is not active, skipping tests.' );
+    return 1;
+}
 
 my $ZnunyHelperObject = $Kernel::OM->Get('Kernel::System::ZnunyHelper');
 
@@ -197,8 +204,6 @@ for my $TicketID (@TicketIDs) {
         ),
     };
 }
-
-my $SeleniumObject = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 my $SeleniumTest = sub {
 
