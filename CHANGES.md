@@ -1,3 +1,6 @@
+# 6.0.40 2022-??-??
+ - 2022-01-11 Incorrect display of empty HTML article body fixed.
+
 # 6.0.39 2021-12-15
  - 2021-12-14 Added ProcessListTreeView in AgentTicketProcess and CustomerTicketProcess.
  - 2021-12-14 Added missing translation for process and activity in CustomerTicketZoom.tt.
