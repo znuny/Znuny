@@ -906,7 +906,7 @@ sub GetFormatDefinition {
     FILE:
     for my $FormatDefinitionFile (@FormatDefinitionFiles) {
         my $FormatDefinitionFileLocation = $ConfigObject->Get('Home')
-            . '/var/stats/formatdefinition/'
+            . '/var/stats/formatdefinition/excel/'
             . $FormatDefinitionFile . '.yml';
 
         next FILE if !-e $FormatDefinitionFileLocation;
