@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -5412,7 +5412,7 @@ my $Stat = $Kernel::OM->Get('Kernel::System::Stats')->StatsGet(
 );
 
 my $FormatDefinitionFileLocation = $ConfigObject->Get('Home')
-    . '/var/stats/formatdefinition/'
+    . '/var/stats/formatdefinition/excel/'
     . $Stat->{StatNumber} . '.yml';
 
 my $FileLocation = $MainObject->FileWrite(
