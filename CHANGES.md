@@ -20,9 +20,6 @@
  - 2021-11-25 Fixed - "No TicketID is given!" on each outgoing reply (#170). Thanks to @reneeb. [#170](https://github.com/znuny/Znuny/issues/170)
  - 2021-11-25 Fixed - Bug - Regression Error Message in Log (#126). Thanks to @reneeb. [#126](https://github.com/znuny/Znuny/issues/126)
 
-# 6.2.3 2022-xx-xx
- - 2022-01-06 Fixed Bug - The page refresh stops the fulltext search via toolbar. [#182](https://github.com/znuny/Znuny/issues/182)
-
 # 6.2.2 2021-12-15
  - 2021-12-14 Added ProcessListTreeView in AgentTicketProcess and CustomerTicketProcess.
  - 2021-12-14 Added missing translation for process and activity in CustomerTicketZoom.tt.
