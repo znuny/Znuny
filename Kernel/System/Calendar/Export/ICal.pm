@@ -317,7 +317,7 @@ sub Export {
         my $ChangeTimeObject = $Kernel::OM->Create(
             'Kernel::System::DateTime',
             ObjectParams => {
-                String => $Appointment{ChangeTime},
+                String => $Appointment{ChangedAt},
             },
         );
         my $ICalChangeTime = Date::ICal->new(
