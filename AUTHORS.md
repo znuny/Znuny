@@ -86,7 +86,7 @@ The following persons contributed to Znuny:
 * Roy Kaldung <rk@znuny.com>
 * Rui Patinha <rui.patinha@otrs.com>
 * Sanjin Vik <svik@s7designcreative.com>
-* Shawn Beasley <shawn.beasley@otrs.com>
+* Shawn Beasley <shawn.beasley@znuny.com>
 * Stefan Bedorf <stefan.bedorf@otrs.com>
 * Stefan Rother <stefan.rother@otrs.com>
 * Stefan Wintermeyer <stefan@otrs.org>

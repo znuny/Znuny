@@ -1,7 +1,9 @@
 # 6.3.1 2022-??-??
+ - 2022-01-11 List all configured calendars in support data collector (#185). Thanks to Renée Bäcker (@reneeb). [#185](https://github.com/znuny/Znuny/pull/185)
+ - 2022-01-11 Fixed broken SmartTag example CUSTOMER_BODY (#191). Thanks to Shawn Beasley (@dignin). [#191](https://github.com/znuny/Znuny/pull/191)
  - 2022-01-11 Fixed Bug - Email overwritten when editing an agent.
  - 2022-01-07 Integrated package Znuny4OTRS-RandomTicketNumberGenerator.
- - 2022-01-07 Parameter %Param are now passed to function Kernel::System::Email::Check. Thanks to @reneeb. [#26](https://github.com/znuny/Znuny/pull/26)
+ - 2022-01-07 Parameter %Param are now passed to function Kernel::System::Email::Check. Thanks to Renée Bäcker (@reneeb). [#26](https://github.com/znuny/Znuny/pull/26)
  - 2022-01-07 Integrated package Znuny4OTRS-AdvancedBulkAction.
  - 2022-01-06 Fixed Bug - The page refresh stops the fulltext search via toolbar. [#182](https://github.com/znuny/Znuny/issues/182)
  - 2021-12-27 Integrated package Znuny4OTRS-ExcelStats.
@@ -16,9 +18,9 @@
  - 2021-11-25 Removed error log if !IsHashRefWithData( Config ) in `SanitizeConfig`. This is to strict and not needed.
  - 2021-11-25 Sector Nord AG: Replaced hardcoded attributes with a dynamic Sysconfig in Kernel/System/Ticket/Event/NotificationEvent.pm (#171). Thanks to @LuBroering (Lukas Bröring SectorNord AG). [#171](https://github.com/znuny/Znuny/pull/171)
  - 2021-11-25 Add option '--no-tablespaces' to scripts/backup.pl (#136). Thanks to @meisterheister. [#136](https://github.com/znuny/Znuny/pull/136)
- - 2021-11-25 Prevents error message "no TicketID" on sending an answer if no TicketID exists (#133). Thanks to @reneeb. [#133](https://github.com/znuny/Znuny/pull/133)
- - 2021-11-25 Fixed - "No TicketID is given!" on each outgoing reply (#170). Thanks to @reneeb. [#170](https://github.com/znuny/Znuny/issues/170)
- - 2021-11-25 Fixed - Bug - Regression Error Message in Log (#126). Thanks to @reneeb. [#126](https://github.com/znuny/Znuny/issues/126)
+ - 2021-11-25 Prevents error message "no TicketID" on sending an answer if no TicketID exists (#133). Thanks to Renée Bäcker (@reneeb). [#133](https://github.com/znuny/Znuny/pull/133)
+ - 2021-11-25 Fixed - "No TicketID is given!" on each outgoing reply (#170). Thanks to Renée Bäcker (@reneeb). [#170](https://github.com/znuny/Znuny/issues/170)
+ - 2021-11-25 Fixed - Bug - Regression Error Message in Log (#126). Thanks to Renée Bäcker (@reneeb). [#126](https://github.com/znuny/Znuny/issues/126)
 
 # 6.2.2 2021-12-15
  - 2021-12-14 Added ProcessListTreeView in AgentTicketProcess and CustomerTicketProcess.
