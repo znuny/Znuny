@@ -249,7 +249,7 @@
                     <dd>
                         [% Translate("To get the article attribute") | html %]
                         ([% Translate(" e. g.") | html %] <code>&lt;OTRS_CUSTOMER_From&gt;, &lt;OTRS_CUSTOMER_To&gt;,
-                        &lt;OTRS_CUSTOMER_Cc&gt;, &lt;OTRS_CUSTOMER_Subject&gt;, &lt;OTRS_CUSTOMER_Body&gt;</code>).
+                        &lt;OTRS_CUSTOMER_Cc&gt;, &lt;OTRS_CUSTOMER_Subject&gt;, &lt;OTRS_CUSTOMER_BODY&gt;</code>).
                     </dd>
 
                     <dt><code>&lt;OTRS_CUSTOMER_DATA_*&gt;</code></dt>
