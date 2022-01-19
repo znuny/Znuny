@@ -40,10 +40,10 @@ and we make a code or configuration change based on the issue.
 - Managed Znuny instances and any tools created or operated by Znuny
 
 ### Out of scope
+
 Any services hosted by 3rd party providers and services are excluded
 from scope. These services include instances hosted by external
 parties and forks of Znuny or the ((OTRS)) Community Edition.
-
 
 ## Supported Versions
 
@@ -54,10 +54,11 @@ Older/other versions are not supported and have known vulnerabilities.
 | ------- | ------------------ |------------------------ |
 | 6 LTS   | :white_check_mark: |:x:                      |
 | 6.1     | :x:                |:x:                      |
-| 6.2     | :white_check_mark: |:x:                      |
-
+| 6.2     | :x:                |:x:                      |
+| 6.3     | :white_check_mark: |:x:                      |
 
 ## How to report a security vulnerability?
+
 If you believe you’ve found a security vulnerability in one of our
 products or platforms please send it to us by emailing
 security@znuny.org. Please include the following details with your report:

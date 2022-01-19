@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -22,6 +22,8 @@ $Kernel::OM->ObjectParamAdd(
     },
 );
 my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+my $Version      = $ConfigObject->Get('Version');
 
 my $String = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.1">
@@ -31,7 +33,7 @@ my $String = '<?xml version="1.0" encoding="utf-8" ?>
     <URL>https://otrs.com/</URL>
     <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
     <Description Lang="en">TestPackage1.</Description>
-    <Framework>6.2.x</Framework>
+    <Framework>' . $Version . '</Framework>
     <BuildDate>2016-10-11 02:35:46</BuildDate>
     <BuildHost>yourhost.example.com</BuildHost>
     <Filelist>
@@ -48,7 +50,7 @@ my $String2 = '<?xml version="1.0" encoding="utf-8" ?>
     <URL>https://otrs.com/</URL>
     <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
     <Description Lang="en">TestPackage2.</Description>
-    <Framework>6.2.x</Framework>
+    <Framework>' . $Version . '</Framework>
     <BuildDate>2016-10-11 02:36:29</BuildDate>
     <BuildHost>yourhost.example.com</BuildHost>
     <Filelist>
