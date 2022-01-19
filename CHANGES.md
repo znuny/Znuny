@@ -1,6 +1,7 @@
 # 6.3.1 2022-??-??
  - 2022-01-18 List all configured calendars in support data collector (#185). Thanks to Renée Bäcker (@reneeb). [#185](https://github.com/znuny/Znuny/pull/185)
  - 2022-01-18 Fixed broken SmartTag example CUSTOMER_BODY (#191). Thanks to Shawn Beasley (@dignin). [#191](https://github.com/znuny/Znuny/pull/191)
+ - 2022-01-13 Added jq function also for regex matches in GenericInterface/Event/Handler.
  - 2022-01-11 Fixed Bug - Email overwritten when editing an agent.
  - 2022-01-07 Integrated package Znuny4OTRS-RandomTicketNumberGenerator.
  - 2022-01-07 Parameter %Param are now passed to function Kernel::System::Email::Check. Thanks to Renée Bäcker (@reneeb). [#26](https://github.com/znuny/Znuny/pull/26)

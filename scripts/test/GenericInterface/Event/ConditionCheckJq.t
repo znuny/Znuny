@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -29,75 +29,137 @@ if ( !$JqIsAvailable ) {
         1,
         'Jq is not available, skipping tests.',
     );
-
     return 1;
 }
-
-my $ConditionCheck = $EventHandlerObject->_ConditionCheck(
-    ConditionLinking => 'and',
-    Condition        => {
-        1 => {
-            Type   => 'and',
-            Fields => {
-                'jq#.QueueData.Name' => 'Misc',
+my @Tests = (
+    {
+        Name => 'String _ConditionCheck(jq found queue misc)',
+        Data => {
+            ConditionLinking => 'and',
+            Condition        => {
+                1 => {
+                    Type   => 'and',
+                    Fields => {
+                        'jq#.QueueData.Name' => {
+                            Match => 'Misc',
+                            Type  => 'String',
+                        },
+                    },
+                },
+            },
+            Data => {
+                QueueData => {
+                    Name => 'Misc',
+                },
             },
         },
+        Expected => 1,
     },
-    Data => {
-        QueueData => {
-            QueueID => 123,
-            Name    => 'Misc',
-        },
-    },
-);
-
-$Self->True(
-    $ConditionCheck,
-    '_ConditionCheck(jq found queue misc)',
-);
-
-$ConditionCheck = $EventHandlerObject->_ConditionCheck(
-    ConditionLinking => 'and',
-    Condition        => {
-        1 => {
-            Type   => 'and',
-            Fields => {
-                'jq#.QueueData.Name' => 'Misc',
+    {
+        Name => 'String _ConditionCheck(jq did not find queue misc)',
+        Data => {
+            ConditionLinking => 'and',
+            Condition        => {
+                1 => {
+                    Type   => 'and',
+                    Fields => {
+                        'jq#.QueueData.Name' => {
+                            Match => 'Misc',
+                            Type  => 'String',
+                        },
+                    },
+                },
+            },
+            Data => {
+                QueueData => {
+                    QueueID => 123,
+                },
             },
         },
+        Expected => undef,
     },
-    Data => {
-        QueueData => {
-            QueueID => 123,
-        },
-    },
-);
-
-$Self->False(
-    $ConditionCheck,
-    '_ConditionCheck(jq did not find queue misc)',
-);
-
-$ConditionCheck = $EventHandlerObject->_ConditionCheck(
-    ConditionLinking => 'and',
-    Condition        => {
-        1 => {
-            Type   => 'and',
-            Fields => {
-                'jq#' => 'Misc',
+    {
+        Name => 'String _ConditionCheck(jq did not find queue misc - empty expression)',
+        Data => {
+            ConditionLinking => 'and',
+            Condition        => {
+                1 => {
+                    Type   => 'and',
+                    Fields => {
+                        'jq#' => {
+                            Match => 'Misc',
+                            Type  => 'String',
+                        },
+                    },
+                },
+            },
+            Data => {
+                QueueData => {
+                    QueueID => 123,
+                },
             },
         },
+        Expected => undef,
     },
-    Data => {
-        QueueData => {
-            QueueID => 123,
+    {
+        Name => 'Regexp _ConditionCheck(jq found queue Misc)',
+        Data => {
+            ConditionLinking => 'and',
+            Condition        => {
+                1 => {
+                    Type   => 'and',
+                    Fields => {
+                        'jq#.QueueData.Name' => {
+                            Match => '(Postmaster|Misc)',
+                            Type  => 'Regexp',
+                        },
+                    },
+                },
+            },
+            Data => {
+                QueueData => {
+                    Name => 'Misc',
+                },
+            },
         },
+        Expected => 1,
+    },
+    {
+        Name => 'Regexp _ConditionCheck(jq found no queue Postmaster or Raw)',
+        Data => {
+            ConditionLinking => 'and',
+            Condition        => {
+                1 => {
+                    Type   => 'and',
+                    Fields => {
+                        'jq#.QueueData.Name' => {
+                            Match => '(Postmaster|Raw)',
+                            Type  => 'Regexp',
+                        },
+                    },
+                },
+            },
+            Data => {
+                QueueData => {
+                    Name => 'Misc',
+                },
+            },
+        },
+        Expected => undef,
     },
 );
 
-$Self->False(
-    $ConditionCheck,
-    '_ConditionCheck(jq did not find queue misc - empty expression)',
-);
+for my $Test (@Tests) {
+
+    my $ConditionCheck = $EventHandlerObject->_ConditionCheck(
+        %{ $Test->{Data} },
+    );
+
+    $Self->Is(
+        $ConditionCheck,
+        $Test->{Expected},
+        $Test->{Name},
+    );
+}
 
 1;
