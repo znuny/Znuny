@@ -958,15 +958,10 @@ $Self->True(
 # find out if it is an developer installation with files
 # from the version control system.
 my $DeveloperSystem = 0;
-if (
-    !-e $Home . '/ARCHIVE'
-    && $Version =~ m{git}
-    )
-{
+if ( !-e $Home . '/ARCHIVE' ) {
     $DeveloperSystem = 1;
 }
 
-# todo remove this `git` check and create an ARCHIVE file for this test!
 # check #12 doesn't work on developer systems because there is no ARCHIVE file!
 if ( !$DeveloperSystem ) {
 

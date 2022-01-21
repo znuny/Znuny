@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -13,29 +13,24 @@ use utf8;
 
 use vars (qw($Self));
 
-# get needed objects
 my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
 my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
 
-# get OTRS Version
-my $OTRSVersion = $ConfigObject->Get('Version');
+# get Framework Version
+my $Version = $ConfigObject->Get('Version');
 
 # leave only major and minor level versions
-$OTRSVersion =~ s{ (\d+ \. \d+) .+ }{$1}msx;
+$Version =~ s{ (\d+ \. \d+) .+ }{$1}msx;
 
 # add x as patch level version
-$OTRSVersion .= '.x';
+$Version .= '.x';
 
 # find out if it is an developer installation with files
 # from the version control system.
+my $Home = $ConfigObject->Get('Home');
+
 my $DeveloperSystem = 0;
-my $Home            = $ConfigObject->Get('Home');
-my $Version         = $ConfigObject->Get('Version');
-if (
-    !-e $Home . '/ARCHIVE'
-    && $Version =~ m{git}
-    )
-{
+if ( !-e $Home . '/ARCHIVE' ) {
     $DeveloperSystem = 1;
 }
 
@@ -54,7 +49,7 @@ if ( !$DeveloperSystem ) {
       <Description Lang="en">A test package (some test &lt; &gt; &amp;).</Description>
       <Description Lang="de">Ein Test Paket (some test &lt; &gt; &amp;).</Description>
       <ModuleRequired Version="1.112">Encode</ModuleRequired>
-      <Framework>' . $OTRSVersion . '</Framework>
+      <Framework>' . $Version . '</Framework>
       <BuildDate>2005-11-10 21:17:16</BuildDate>
       <BuildHost>yourhost.example.com</BuildHost>
       <Filelist>
@@ -94,7 +89,7 @@ if ( !$DeveloperSystem ) {
       <Description Lang="en">A test package (some test &lt; &gt; &amp;).</Description>
       <Description Lang="de">Ein Test Paket (some test &lt; &gt; &amp;).</Description>
       <ModuleRequired Version="1.112">Encode</ModuleRequired>
-      <Framework>' . $OTRSVersion . '</Framework>
+      <Framework>' . $Version . '</Framework>
       <BuildDate>2005-11-10 21:17:16</BuildDate>
       <BuildHost>yourhost.example.com</BuildHost>
       <Filelist>
