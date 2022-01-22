@@ -10,11 +10,14 @@
 
 package Kernel::System::CustomerUser::LDAP;
 
+# Throws errors when using LDAP_SIZELIMIT_EXCEEDED constant so disabled for now.
+## nofilter(TidyAll::Plugin::OTRS::Perl::SyntaxCheck)
+
 use strict;
 use warnings;
 
 use Net::LDAP;
-use Net::LDAP qw(LDAP_SIZELIMIT_EXCEEDED);
+use Net::LDAP::Constant qw(LDAP_SIZELIMIT_EXCEEDED);
 use Net::LDAP::Util qw(escape_filter_value);
 
 use Kernel::System::VariableCheck qw(:all);
