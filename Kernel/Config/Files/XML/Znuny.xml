@@ -400,7 +400,7 @@
     </Setting>
     <Setting Name="CustomerFrontend::Module###AJAXDynamicFieldWebservice" Required="1" Valid="1">
         <Description Translatable="1">Frontend module for the customer interface that provides the AJAX interface for the web service dynamic field backends.</Description>
-        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Navigation>Frontend::Customer::ModuleRegistration</Navigation>
         <Value>
             <Item ValueType="FrontendRegistration">
                 <Hash>
