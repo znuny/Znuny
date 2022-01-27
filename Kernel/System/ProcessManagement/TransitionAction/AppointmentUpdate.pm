@@ -20,6 +20,7 @@ our @ObjectDependencies = (
     'Kernel::System::Calendar',
     'Kernel::System::Calendar::Appointment',
     'Kernel::System::DateTime',
+    'Kernel::System::Log',
 );
 
 =head1 NAME
