@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2022 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -324,22 +325,69 @@ sub Run {
         );
     }
 
-    # set ticket service
+    # Ticket service handling.
+
     if ( $GetParam{'X-OTRS-FollowUp-Service'} ) {
 
-        $TicketObject->TicketServiceSet(
-            Service  => $GetParam{'X-OTRS-FollowUp-Service'},
-            TicketID => $Param{TicketID},
-            UserID   => $Param{InmailUserID},
+        my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
+
+        # Check if service exists
+        my $ServiceID = $ServiceObject->ServiceLookup(
+            Name => $GetParam{'X-OTRS-FollowUp-Service'},
         );
 
-        $Self->{CommunicationLogObject}->ObjectLog(
-            ObjectLogType => 'Message',
-            Priority      => 'Debug',
-            Key           => 'Kernel::System::PostMaster::FollowUp',
-            Value =>
-                "Services update via 'X-OTRS-FollowUp-Service'! Service: $GetParam{'X-OTRS-FollowUp-Service'}.",
-        );
+        if ($ServiceID) {
+
+            # If service with given name exists, don't set it if not active.
+
+            # Get all active services.
+            my %ServiceList = $ServiceObject->ServiceList(
+                Valid        => 1,
+                KeepChildren => $ConfigObject->Get('Ticket::Service::KeepChildren') // 0,
+                UserID       => $Param{InmailUserID},
+            );
+
+            if ( !$ServiceList{$ServiceID} ) {
+                $Self->{CommunicationLogObject}->ObjectLog(
+                    ObjectLogType => 'Message',
+                    Priority      => 'Debug',
+                    Key           => 'Kernel::System::PostMaster::FollowUp',
+                    Value =>
+                        "Ticket service won't be updated to '$GetParam{'X-OTRS-FollowUp-Service'}' (service invalid or is a child of invalid service).",
+                );
+                $GetParam{'X-OTRS-FollowUp-Service'} = '';
+            }
+        }
+        else {
+
+            # If service with given name doesn't exist, don't set it.
+
+            $Self->{CommunicationLogObject}->ObjectLog(
+                ObjectLogType => 'Message',
+                Priority      => 'Debug',
+                Key           => 'Kernel::System::PostMaster::FollowUp',
+                Value =>
+                    "Ticket service won't be updated to '$GetParam{'X-OTRS-FollowUp-Service'}' (service does not exist).",
+            );
+
+            $GetParam{'X-OTRS-FollowUp-Service'} = '';
+        }
+
+        if ( $GetParam{'X-OTRS-FollowUp-Service'} ) {
+            $TicketObject->TicketServiceSet(
+                Service  => $GetParam{'X-OTRS-FollowUp-Service'},
+                TicketID => $Param{TicketID},
+                UserID   => $Param{InmailUserID},
+            );
+
+            $Self->{CommunicationLogObject}->ObjectLog(
+                ObjectLogType => 'Message',
+                Priority      => 'Debug',
+                Key           => 'Kernel::System::PostMaster::FollowUp',
+                Value =>
+                    "Ticket service updated via 'X-OTRS-FollowUp-Service' to '$GetParam{'X-OTRS-FollowUp-Service'}'.",
+            );
+        }
     }
 
     # set ticket sla
