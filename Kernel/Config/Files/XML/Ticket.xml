@@ -2352,10 +2352,14 @@
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###SearchInArchive" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
-        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen (AllTickets/ArchivedTickets/NotArchivedTickets).</Description>
+        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
         <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
         <Value>
-            <Item ValueType="String"></Item>
+            <Item ValueType="Select" SelectedID="AllTickets">
+                <Item ValueType="Option" Value="AllTickets" Translatable="1">all tickets</Item>
+                <Item ValueType="Option" Value="ArchivedTickets" Translatable="1">archived tickets</Item>
+                <Item ValueType="Option" Value="NotArchivedTickets" Translatable="1">not archived tickets</Item>
+            </Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::Search###Ticket" Required="0" Valid="1">
