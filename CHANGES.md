@@ -1,4 +1,5 @@
 # 6.3.1 2022-??-??
+ - 2022-01-22 Updated third party jquery to 3.6.0. [#168](https://git.znuny.com/Znuny/Public/Znuny/-/issues/168)
  - 2022-01-18 List all configured calendars in support data collector (#185). Thanks to Renée Bäcker (@reneeb). [#185](https://github.com/znuny/Znuny/pull/185)
  - 2022-01-18 Fixed broken SmartTag example CUSTOMER_BODY (#191). Thanks to Shawn Beasley (@dignin). [#191](https://github.com/znuny/Znuny/pull/191)
  - 2022-01-13 Added jq function also for regex matches in GenericInterface/Event/Handler.
