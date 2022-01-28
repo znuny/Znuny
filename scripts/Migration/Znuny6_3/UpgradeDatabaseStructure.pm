@@ -35,14 +35,13 @@ sub Run {
     my $Verbose = $Param{CommandlineOptions}->{Verbose} || 0;
 
     my @Tasks = (
-
         #         {
         #             Message => '',
         #             Module  => '',
         #         },
     );
 
-    return     if !@Tasks;
+    return 1 if !@Tasks;
     print "\n" if $Verbose;
 
     TASK:

@@ -1,18 +1,18 @@
 # --
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-package scripts::Migration::Znuny6_2::MigrateExcelStatsFormatDefinitions;    ## no critic
+package scripts::Migration::Znuny6_3::MigrateExcelStatsFormatDefinitions;    ## no critic
 
 use strict;
 use warnings;
+use File::Copy;
 
 use parent qw(scripts::Migration::Base);
-use File::Copy;
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -36,6 +36,8 @@ sub Run {
     my $Home       = $ConfigObject->Get('Home') . '/';
     my $SourcePath = $Home . "var/statsformatdefinition/";
     my $DestPath   = $Home . "var/stats/formatdefinition/excel/";
+
+    return 1 if !-d $SourcePath;
 
     my @Files = $MainObject->DirectoryRead(
         Directory => $SourcePath,
