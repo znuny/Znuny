@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -56,6 +56,27 @@ sub Run {
 
     my $LimitGroup = $Self->{Config}->{QueuePermissionGroup} || 0;
     my $CacheKey   = 'User' . '-' . $Self->{UserID} . '-' . $LimitGroup;
+
+    # get layout object
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    # check for refresh time
+    my $Refresh = '';
+    if ( $Self->{UserRefreshTime} ) {
+        $Refresh = 60 * $Self->{UserRefreshTime};
+        my $NameHTML = $Self->{Name};
+        $NameHTML =~ s{-}{_}xmsg;
+
+        # send data to JS
+        $LayoutObject->AddJSData(
+            Key   => 'QueueOverview',
+            Value => {
+                Name        => $Self->{Name},
+                NameHTML    => $NameHTML,
+                RefreshTime => $Refresh,
+            },
+        );
+    }
 
     # get cache object
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
@@ -174,9 +195,6 @@ sub Run {
         push @Headers, $ConfiguredStates{$StateOrder};
     }
 
-    # get layout object
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-
     for my $HeaderItem (@Headers) {
         $LayoutObject->Block(
             Name => 'ContentLargeTicketQueueOverviewHeaderStatus',
@@ -263,24 +281,6 @@ sub Run {
             Data => {
                 ColumnCount => ( scalar keys %ConfiguredStates ) + 2,
             }
-        );
-    }
-
-    # check for refresh time
-    my $Refresh = '';
-    if ( $Self->{UserRefreshTime} ) {
-        $Refresh = 60 * $Self->{UserRefreshTime};
-        my $NameHTML = $Self->{Name};
-        $NameHTML =~ s{-}{_}xmsg;
-
-        # send data to JS
-        $LayoutObject->AddJSData(
-            Key   => 'QueueOverview',
-            Value => {
-                Name        => $Self->{Name},
-                NameHTML    => $NameHTML,
-                RefreshTime => $Refresh,
-            },
         );
     }
 
