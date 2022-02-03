@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -923,6 +923,13 @@ sub LinkQuote {
             $DisplayLink .= $Link;
             $HrefLink    .= $Link;
         }
+
+        # remove trailing dots in href link
+        if( $HrefLink =~ s{\.+\z}{} ){
+            $DisplayLink =~ s{\.+\z}{};
+            $End .= '.';
+        }
+
         $Start . "<a href=\"$HrefLink\"$Target title=\"$HrefLink\">$DisplayLink<\/a>" . $End;
     }egxism;
 
@@ -938,7 +945,7 @@ sub LinkQuote {
 
 =head2 Safety()
 
-To remove/strip active html tags/addons (javascript, C<applet>s, C<embed>s and C<object>s)
+To remove/strip active html tags/addons (JavaScript, C<applet>s, C<embed>s and C<object>s)
 from html strings.
 
     my %Safe = $HTMLUtilsObject->Safety(
