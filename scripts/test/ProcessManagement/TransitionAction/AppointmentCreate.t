@@ -12,8 +12,6 @@ use utf8;
 
 use vars (qw($Self));
 
-use Kernel::System::VariableCheck qw(:all);
-
 $Kernel::OM->ObjectParamAdd(
     'Kernel::System::UnitTest::Helper' => {
         RestoreDatabase => 1,
@@ -22,7 +20,6 @@ $Kernel::OM->ObjectParamAdd(
 
 my $AppointmentObject = $Kernel::OM->Get('Kernel::System::Calendar::Appointment');
 my $CalendarObject    = $Kernel::OM->Get('Kernel::System::Calendar');
-my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
 my $GroupObject       = $Kernel::OM->Get('Kernel::System::Group');
 my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $TicketObject      = $Kernel::OM->Get('Kernel::System::Ticket');
@@ -34,8 +31,9 @@ my $GroupID = $GroupObject->GroupLookup(
     Group => 'users',
 );
 
+my $CalendarName = 'Calendar ' . $HelperObject->GetRandomNumber();
 my %Calendar = $CalendarObject->CalendarCreate(
-    CalendarName => 'Calendar 1',
+    CalendarName => $CalendarName,
     GroupID      => $GroupID,
     Color        => '#FF7700',
     UserID       => 1,
@@ -44,8 +42,8 @@ my %Calendar = $CalendarObject->CalendarCreate(
 
 my @DynamicFields = (
     {
-        Name       => 'appid',
-        Label      => 'appid',
+        Name       => 'AppointmentID',
+        Label      => 'AppointmentID',
         ObjectType => 'Ticket',
         FieldType  => 'Text',
         Config     => {
@@ -73,11 +71,11 @@ my $TransitionActionResult = $TransitionActionObject->Run(
     TransitionEntityID       => 'T123',
     TransitionActionEntityID => 'TA123',
     Config                   => {
-        CalendarName               => 'Calendar 1',
+        CalendarName               => $CalendarName,
         Title                      => 'Webinar',
         StartTime                  => '2016-01-01',
         EndTime                    => '2016-01-02',
-        DynamicField_AppointmentID => 'appid',
+        DynamicField_AppointmentID => 'AppointmentID',
         UserID                     => 1,
     },
 );
@@ -94,12 +92,12 @@ $Self->True(
 );
 
 $Self->True(
-    $Ticket{DynamicField_appid},
+    $Ticket{DynamicField_AppointmentID},
     'DynamicField_AppointmentID got filled correctly',
 );
 
 my %Appointment = $AppointmentObject->AppointmentGet(
-    AppointmentID => $Ticket{DynamicField_appid},
+    AppointmentID => $Ticket{DynamicField_AppointmentID},
     CalendarID    => $Calendar{CalendarID},
 );
 

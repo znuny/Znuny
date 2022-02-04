@@ -787,7 +787,7 @@
                         <Item Key="NotificationCustomRelativePointOfTime">(* required for Custom) beforestart|afterstart|beforeend|afterend (Possible notification types for the "relative" type)</Item>
                     </Hash>
                 </Item>
-                <Item Key="AppointmentDelete">
+                <Item Key="AppointmentRemove">
                     <Hash>
                         <Item Key="AppointmentID">123</Item>
                     </Hash>

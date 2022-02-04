@@ -12,14 +12,11 @@ use strict;
 use warnings;
 use utf8;
 
-use Kernel::System::VariableCheck qw(:all);
-
 use parent qw(Kernel::System::ProcessManagement::TransitionAction::Base);
 
 our @ObjectDependencies = (
     'Kernel::System::Calendar',
     'Kernel::System::Calendar::Appointment',
-    'Kernel::System::DateTime',
     'Kernel::System::Log',
 );
 
@@ -205,35 +202,6 @@ sub Run {
     );
 
     return $Success;
-}
-
-=head2 _ValidDateTimeConvert()
-
-Converts the date to always be a datetime format.
-
-    my $TimeStamp = $AppointmentUpdateActionObject->_ValidDateTimeConvert(
-        String => '2019-01-01',
-    );
-
-Returns:
-
-    my $TimeStamp = '2019-01-01 00:00:00';
-
-=cut
-
-sub _ValidDateTimeConvert {
-    my ( $Self, %Param ) = @_;
-
-    return if !$Param{String};
-
-    my $DateTimeObject = $Kernel::OM->Create(
-        'Kernel::System::DateTime',
-        ObjectParams => {
-            String => $Param{String},
-        },
-    );
-
-    return $DateTimeObject->ToString();
 }
 
 1;
