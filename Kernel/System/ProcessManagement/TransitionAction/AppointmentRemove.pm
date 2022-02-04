@@ -6,7 +6,7 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-package Kernel::System::ProcessManagement::TransitionAction::AppointmentDelete;
+package Kernel::System::ProcessManagement::TransitionAction::AppointmentRemove;
 
 use strict;
 use warnings;
@@ -24,11 +24,11 @@ our @ObjectDependencies = (
 
 =head1 NAME
 
-Kernel::System::ProcessManagement::TransitionAction::AppointmentDelete - A module to delete an appointment
+Kernel::System::ProcessManagement::TransitionAction::AppointmentRemove - A module to delete an appointment
 
 =head1 SYNOPSIS
 
-All AppointmentDelete functions.
+All AppointmentRemove functions.
 
 =head1 PUBLIC INTERFACE
 
@@ -36,7 +36,7 @@ All AppointmentDelete functions.
 
 create an object. Do not use it directly, instead use:
 
-    my $AppointmentDeleteObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::TransitionAction::AppointmentDelete');
+    my $AppointmentRemoveObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::TransitionAction::AppointmentRemove');
 
 =cut
 
@@ -51,9 +51,9 @@ sub new {
 
 =head2 Run()
 
-Runs TransitionAction AppointmentDelete.
+Runs TransitionAction AppointmentRemove.
 
-    my $Success = $AppointmentDeleteActionObject->Run(
+    my $Success = $AppointmentRemoveActionObject->Run(
         UserID                   => 123,
         Ticket                   => \%Ticket,    # required
         ProcessEntityID          => 'P123',
