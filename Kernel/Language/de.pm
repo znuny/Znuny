@@ -9040,6 +9040,7 @@ Ihr Helpdesk-Team
         'all tickets'         => 'alle Tickets',
         'archived tickets'    => 'archivierte Tickets',
         'not archived tickets' => 'nicht archivierte Tickets',
+        'Clear log entries' => 'Lösche Protokolleinträge',
     };
 
     $Self->{JavaScriptStrings} = [

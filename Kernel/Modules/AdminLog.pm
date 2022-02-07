@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -28,13 +28,19 @@ sub Run {
     my ( $Self, %Param ) = @_;
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+
+    if ( $Self->{Subaction} eq 'Clear' ) {
+        $LogObject->CleanUp();
+        return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
+    }
 
     # Print form.
     my $Output = $LayoutObject->Header();
     $Output .= $LayoutObject->NavigationBar();
 
     # Get log data.
-    my $Log = $Kernel::OM->Get('Kernel::System::Log')->GetLog() || '';
+    my $Log = $LogObject->GetLog() || '';
 
     # Split data to lines.
     my $Limit    = 400;
