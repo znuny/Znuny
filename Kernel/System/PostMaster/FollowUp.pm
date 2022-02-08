@@ -330,51 +330,31 @@ sub Run {
 
     if ( $GetParam{'X-OTRS-FollowUp-Service'} ) {
 
-        my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
-
-        # Check if service exists
-        my $ServiceID = $ServiceObject->ServiceLookup(
-            Name => $GetParam{'X-OTRS-FollowUp-Service'},
+        # Get all valid services.
+        my %ValidServices = reverse $Kernel::OM->Get('Kernel::System::Service')->ServiceList(
+           Valid        => 1,
+           KeepChildren => $ConfigObject->Get('Ticket::Service::KeepChildren') // 0,
+           UserID       => $Param{InmailUserID},
         );
 
-        if ($ServiceID) {
+        if (!$ValidServices{$GetParam{'X-OTRS-FollowUp-Service'}}) {
 
-            # If service with given name exists, don't set it if not active.
-
-            # Get all active services.
-            my %ServiceList = $ServiceObject->ServiceList(
-                Valid        => 1,
-                KeepChildren => $ConfigObject->Get('Ticket::Service::KeepChildren') // 0,
-                UserID       => $Param{InmailUserID},
-            );
-
-            if ( !$ServiceList{$ServiceID} ) {
-                $Self->{CommunicationLogObject}->ObjectLog(
-                    ObjectLogType => 'Message',
-                    Priority      => 'Debug',
-                    Key           => 'Kernel::System::PostMaster::FollowUp',
-                    Value =>
-                        "Ticket service won't be updated to '$GetParam{'X-OTRS-FollowUp-Service'}' (service invalid or is a child of invalid service).",
-                );
-                $GetParam{'X-OTRS-FollowUp-Service'} = '';
-            }
-        }
-        else {
-
-            # If service with given name doesn't exist, don't set it.
+            # If service with given name does not exist or is invalid don't set it if not active.
 
             $Self->{CommunicationLogObject}->ObjectLog(
                 ObjectLogType => 'Message',
                 Priority      => 'Debug',
                 Key           => 'Kernel::System::PostMaster::FollowUp',
                 Value =>
-                    "Ticket service won't be updated to '$GetParam{'X-OTRS-FollowUp-Service'}' (service does not exist).",
+                    "Ticket service won't be updated to '$GetParam{'X-OTRS-FollowUp-Service'}' (does not exist or is invalid or is a child of invalid service).",
             );
 
             $GetParam{'X-OTRS-FollowUp-Service'} = '';
         }
+        else {
 
-        if ( $GetParam{'X-OTRS-FollowUp-Service'} ) {
+            # If service with given name exists, update ticket service.
+
             $TicketObject->TicketServiceSet(
                 Service  => $GetParam{'X-OTRS-FollowUp-Service'},
                 TicketID => $Param{TicketID},

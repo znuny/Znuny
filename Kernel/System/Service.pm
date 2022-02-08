@@ -68,10 +68,9 @@ sub new {
 return a hash list of services
 
     my %ServiceList = $ServiceObject->ServiceList(
-        Valid  => 0,   # (optional) default 1 (0|1)
-        KeepChildren => 0,   # (optional) default 0 (0|1); when Valid=1 set to 1 if you want
-                             # to include also valid child services of invalid services.
-        UserID => 1,
+        Valid        => 0,   # (optional) default 1 (0|1)
+        KeepChildren => 0,   # (optional) default 0 (0|1); when Valid=1 set to 1 if you want to include also valid child services of invalid services.
+        UserID       => 1,
     );
 
 =cut

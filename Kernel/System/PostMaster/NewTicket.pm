@@ -275,45 +275,24 @@ sub Run {
     # Ticket service handling.
 
     if ( $GetParam{'X-OTRS-Service'} ) {
-        my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
 
-        # Check if service exists.
-        my $ServiceID = $ServiceObject->ServiceLookup(
-            Name => $GetParam{'X-OTRS-Service'},
+        # Get all valid services.
+        my %ValidServices = reverse $Kernel::OM->Get('Kernel::System::Service')->ServiceList(
+           Valid        => 1,
+           KeepChildren => $ConfigObject->Get('Ticket::Service::KeepChildren') // 0,
+           UserID       => $Param{InmailUserID},
         );
 
-        if ($ServiceID) {
+        if (!$ValidServices{$GetParam{'X-OTRS-Service'}}) {
 
-            # If service with given name exists, don't set it if not active.
-
-            # Get all active services.
-            my %ServiceList = $ServiceObject->ServiceList(
-                Valid        => 1,
-                KeepChildren => $ConfigObject->Get('Ticket::Service::KeepChildren') // 0,
-                UserID       => $Param{InmailUserID},
-            );
-
-            if ( !$ServiceList{$ServiceID} ) {
-                $Self->{CommunicationLogObject}->ObjectLog(
-                    ObjectLogType => 'Message',
-                    Priority      => 'Debug',
-                    Key           => 'Kernel::System::PostMaster::NewTicket',
-                    Value =>
-                        "Ticket service won't be changed to '$GetParam{'X-OTRS-Service'}' (service invalid or is a child of invalid service).",
-                );
-                $GetParam{'X-OTRS-Service'} = '';
-            }
-        }
-        else {
-
-            # If service with given name doesn't exist, don't set it.
+            # If service with given name does not exist or is invalid don't set it if not active.
 
             $Self->{CommunicationLogObject}->ObjectLog(
                 ObjectLogType => 'Message',
                 Priority      => 'Debug',
                 Key           => 'Kernel::System::PostMaster::NewTicket',
                 Value =>
-                    "Ticket service won't be changed to '$GetParam{'X-OTRS-Service'}' (service does not exist).",
+                    "Ticket service won't be set to '$GetParam{'X-OTRS-Service'}' (does not exist or is invalid or is a child of invalid service).",
             );
 
             $GetParam{'X-OTRS-Service'} = '';
