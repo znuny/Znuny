@@ -1,5 +1,10 @@
 # 6.3.1 2022-??-??
  - 2022-02-07 Added clear log action to AdminLog.
+ - 2022-02-03 Fixed Bug - Dashboard-TicketQueueOverview refresh (https://github.com/znuny/Znuny/issues/156).
+ - 2022-02-03 Updated jQuery UI from 1.12.1 to 1.13.1.
+ - 2022-02-03 Fixed unnecessary error message - 'Use of uninitialized value in pattern match...'
+ - 2022-02-03 Fixed link detection matches trailing dot.
+ - 2022-02-01 Fixed description of option Kernel::System::Ticket::Number::Random in SysConfig.
  - 2022-01-22 Updated third party jquery to 3.6.0. [#168](https://git.znuny.com/Znuny/Public/Znuny/-/issues/168)
  - 2022-01-18 List all configured calendars in support data collector (#185). Thanks to Renée Bäcker (@reneeb). [#185](https://github.com/znuny/Znuny/pull/185)
  - 2022-01-18 Fixed broken SmartTag example CUSTOMER_BODY (#191). Thanks to Shawn Beasley (@dignin). [#191](https://github.com/znuny/Znuny/pull/191)
@@ -117,6 +122,10 @@
  - 2021-06-15 Column list validation before saving agent preferences (#84). Thanks to Paweł Bogusławski (@pboguslawski). [#84](https://github.com/znuny/Znuny/pull/84)
 
 # 6.0.40 2022-xx-xx
+ - 2022-02-03 Fixed Bug - Dashboard-TicketQueueOverview refresh (https://github.com/znuny/Znuny/issues/156).
+ - 2022-02-03 Updated jQuery UI from 1.12.1 to 1.13.1.
+ - 2022-02-03 Fixed link detection matches trailing dot.
+ - 2022-01-11 Fixed Bug - Email overwritten when editing an agent.
  - 2022-01-06 Fixed Bug - The page refresh stops the fulltext search via toolbar. [#182](https://github.com/znuny/Znuny/issues/182)
 
 # 6.0.39 2021-12-15
