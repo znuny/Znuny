@@ -1,4 +1,5 @@
 # 6.0.40 2022-xx-xx
+ - 2022-02-11 Fixed Bug - Show menu items when showing the error screen. (https://github.com/znuny/Znuny/issues/210)
  - 2022-02-03 Fixed Bug - Dashboard-TicketQueueOverview refresh (https://github.com/znuny/Znuny/issues/156).
  - 2022-02-03 Updated jQuery UI from 1.12.1 to 1.13.1.
  - 2022-02-03 Fixed link detection matches trailing dot.
