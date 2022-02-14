@@ -1,4 +1,5 @@
 # 6.3.1 2022-??-??
+ - 2022-02-14 Integrated package Znuny-DatabaseBackend.
  - 2022-02-11 Fixed Bug - Show menu items when showing the error screen. (https://github.com/znuny/Znuny/issues/210)
  - 2022-02-07 Added clear log action to AdminLog.
  - 2022-02-03 Fixed Bug - Dashboard-TicketQueueOverview refresh (https://github.com/znuny/Znuny/issues/156).

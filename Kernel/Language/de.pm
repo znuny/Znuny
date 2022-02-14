@@ -34,6 +34,14 @@ sub Data {
     $Self->{ThousandSeparator} = '.';
     $Self->{Translation} = {
 
+        'Handles changes to data of modules which use the DBCRUD base module.'
+            => 'Verarbeitet Änderungen an Daten von Modulen, die das DBCRUD-Modul als Basis nutzen.',
+        'Default format for export files.'                    => 'Default-Format für Exportdateien.',
+        'Separator for exported CSV files.'                   => 'Trennzeichen für exportierte CSV-Dateien.',
+        'Quoting character for exported CSV files.'           => 'Anführungszeichen für exportierte CSV-Dateien.',
+        'Cache settings for DBCRUD modules (default: 1 day).' => 'Cache-Einstellungen für DBCRUD-Module (Standardwert: 1 Tag).',
+
+
         'Dynamic fields shown in the ticket bulk screen of the agent interface.' => 'Dynamische Felder, die in der Ticket-Sammelaktion in der Agentenoberfläche angezeigt werden.',
         'This configuration defines if a dynamic field has to be checked in the agent ticket bulk view to get set for each ticket. This prevents unwanted overwrite of dynamic field values with their default or even empty values.' => 'Diese Konfiguration definiert, ob ein dynamisches Feld in der Ticket-Sammelaktion zum Setzen mit einer Checkbox markiert werden muss. Dies verhindert das ungewollte Überschreiben von dynamischen Feldwerten durch deren Standardwerte oder sogar leeren Inhalt.',
         'Loader module registration for AgentTicketBulk.' => 'Loader-Modulregistrierung für die Ticket-Sammelaktion.',

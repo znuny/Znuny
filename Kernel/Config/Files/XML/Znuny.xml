@@ -1379,4 +1379,41 @@
             <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
+
+    <!--
+        DBCRUD (formerly known as database backend)
+    -->
+    <Setting Name="DBCRUD###Export###DefaultFormat" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Default format for export files.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">yml</Item>
+        </Value>
+    </Setting>
+    <Setting Name="DBCRUD###Export###CSV###Separator" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Separator for exported CSV files.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">;</Item>
+        </Value>
+    </Setting>
+    <Setting Name="DBCRUD###Export###CSV###Quote" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Quoting character for exported CSV files.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">"</Item>
+        </Value>
+    </Setting>
+    <Setting Name="DBCRUD::EventModulePost###9990-DBCRUD" Required="0" Valid="1">
+        <Description Translatable="1">Handles changes to data of modules which use the DBCRUD base module.</Description>
+        <Navigation>Core::Event::Ticket</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::DBCRUD::Event::DBCRUD</Item>
+                <Item Key="Transaction">1</Item>
+                <Item Key="Event">.*(Add|Update|Delete|Export|Import|Copy)</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
 </otrs_config>

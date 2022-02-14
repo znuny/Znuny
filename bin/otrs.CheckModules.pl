@@ -210,6 +210,18 @@ my @NeededModules = (
         },
     },
     {
+        Module    => 'Data::UUID',
+        Required  => 1,
+        Comment   => 'Required to generate UUIDs.',
+        InstTypes => {
+            aptget => undef,
+            emerge => undef,
+            yum    => undef,
+            zypper => undef,
+            ports  => undef,
+        },
+    },
+    {
         Module    => 'Date::Format',
         Required  => 1,
         InstTypes => {
@@ -545,7 +557,7 @@ my @NeededModules = (
     {
         Module    => 'Spreadsheet::XLSX',
         Required  => 0,
-        Comment   => 'Spreadsheet::XLSX enables import of Excel files in certain dialogs.',
+        Comment   => 'Spreadsheet::XLSX enables import and export of Excel files in certain dialogs.',
         InstTypes => {
             aptget => 'libspreadsheet-xlsx-perl',
             emerge => 'dev-perl/Spreadsheet-XLSX',
