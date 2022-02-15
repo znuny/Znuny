@@ -1,8 +1,9 @@
 # 6.3.1 2022-??-??
+ - 2022-02-15 Fixed config navigation path for customer frontend module AJAXDynamicFieldWebservice. Thanks to Renée Bäcker (@reneeb). [#193](https://github.com/znuny/Znuny/pull/193)
  - 2022-02-14 Integrated package Znuny-DatabaseBackend.
- - 2022-02-11 Fixed Bug - Show menu items when showing the error screen. (https://github.com/znuny/Znuny/issues/210)
+ - 2022-02-11 Fixed Bug - Show menu items when showing the error screen. [#210](https://github.com/znuny/Znuny/issues/210)
  - 2022-02-07 Added clear log action to AdminLog.
- - 2022-02-03 Fixed Bug - Dashboard-TicketQueueOverview refresh (https://github.com/znuny/Znuny/issues/156).
+ - 2022-02-03 Fixed Bug - Dashboard-TicketQueueOverview refresh [#156](https://github.com/znuny/Znuny/issues/156).
  - 2022-02-03 Updated jQuery UI from 1.12.1 to 1.13.1.
  - 2022-02-03 Fixed unnecessary error message - 'Use of uninitialized value in pattern match...'
  - 2022-02-03 Fixed link detection matches trailing dot.
@@ -124,8 +125,8 @@
  - 2021-06-15 Column list validation before saving agent preferences (#84). Thanks to Paweł Bogusławski (@pboguslawski). [#84](https://github.com/znuny/Znuny/pull/84)
 
 # 6.0.40 2022-xx-xx
- - 2022-02-11 Fixed Bug - Show menu items when showing the error screen. (https://github.com/znuny/Znuny/issues/210)
- - 2022-02-03 Fixed Bug - Dashboard-TicketQueueOverview refresh (https://github.com/znuny/Znuny/issues/156).
+ - 2022-02-11 Fixed Bug - Show menu items when showing the error screen. [#210](https://github.com/znuny/Znuny/issues/210)
+ - 2022-02-03 Fixed Bug - Dashboard-TicketQueueOverview refresh [#156](https://github.com/znuny/Znuny/issues/156).
  - 2022-02-03 Updated jQuery UI from 1.12.1 to 1.13.1.
  - 2022-02-03 Fixed link detection matches trailing dot.
  - 2022-01-11 Fixed Bug - Email overwritten when editing an agent.
