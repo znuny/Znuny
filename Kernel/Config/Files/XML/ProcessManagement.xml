@@ -766,6 +766,32 @@
                         <Item Key="DynamicField_AppointmentID">(optional) AppointmentID (dynamic field for saving the appointment ID (suitable for linking the appointment later)</Item>
                     </Hash>
                 </Item>
+                <Item Key="AppointmentUpdate">
+                    <Hash>
+                        <Item Key="CalendarName">Calendar 1</Item>
+                        <Item Key="AppointmentID">123</Item>
+                        <Item Key="Title">Webinar</Item>
+                        <Item Key="Description">Webinar</Item>
+                        <Item Key="StartTime">2016-01-01 00:00:00</Item>
+                        <Item Key="EndTime">2016-01-02 00:00:00</Item>
+                        <Item Key="Recurring">(optional) 1</Item>
+                        <Item Key="RecurrenceType">(* required if Recurring) Daily|Weekly|Monthly|Yearly|CustomWeekly|CustomMonthly|CustomYearly</Item>
+                        <Item Key="RecurrenceCount">(optional) 1</Item>
+                        <Item Key="RecurrenceFrequency">(* required if RecurringType "Custom*")1, 3, 5</Item>
+                        <Item Key="RecurrenceUntil">(optional) 2016-01-10 00:00:00</Item>
+                        <Item Key="NotificationTime">(optional) 2016-01-01 17:00:00</Item>
+                        <Item Key="NotificationTemplate">(optional) Custom</Item>
+                        <Item Key="NotificationCustom">(* required for Custom) relative</Item>
+                        <Item Key="NotificationCustomRelativeUnitCount">(* required for Custom) 12 (number of time units)</Item>
+                        <Item Key="NotificationCustomRelativeUnit">(* required for Custom) minutes|hours|days</Item>
+                        <Item Key="NotificationCustomRelativePointOfTime">(* required for Custom) beforestart|afterstart|beforeend|afterend (Possible notification types for the "relative" type)</Item>
+                    </Hash>
+                </Item>
+                <Item Key="AppointmentRemove">
+                    <Hash>
+                        <Item Key="AppointmentID">123</Item>
+                    </Hash>
+                </Item>
                 <Item Key="ArticleSend">
                     <Hash>
                         <Item Key="SenderType">(* required) agent|system|customer</Item>
