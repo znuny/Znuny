@@ -6,7 +6,7 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-package Kernel::System::ProcessManagement::TransitionAction::AppointmentCreate;
+package Kernel::System::ProcessManagement::TransitionAction::AppointmentUpdate;
 
 use strict;
 use warnings;
@@ -17,17 +17,16 @@ use parent qw(Kernel::System::ProcessManagement::TransitionAction::Base);
 our @ObjectDependencies = (
     'Kernel::System::Calendar',
     'Kernel::System::Calendar::Appointment',
-    'Kernel::System::DynamicField',
-    'Kernel::System::DynamicField::Backend',
+    'Kernel::System::Log',
 );
 
 =head1 NAME
 
-Kernel::System::ProcessManagement::TransitionAction::AppointmentCreate - A module to create an appointment
+Kernel::System::ProcessManagement::TransitionAction::AppointmentUpdate - A module to update an appointment
 
 =head1 SYNOPSIS
 
-All AppointmentCreate functions.
+All AppointmentUpdate functions.
 
 =head1 PUBLIC INTERFACE
 
@@ -35,7 +34,7 @@ All AppointmentCreate functions.
 
 create an object. Do not use it directly, instead use:
 
-    my $AppointmentCreateObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::TransitionAction::AppointmentCreate');
+    my $AppointmentUpdateObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::TransitionAction::AppointmentUpdate');
 
 =cut
 
@@ -50,9 +49,9 @@ sub new {
 
 =head2 Run()
 
-Runs TransitionAction AppointmentCreate.
+Runs TransitionAction AppointmentUpdate.
 
-    my $Success = $AppointmentCreateActionObject->Run(
+    my $Success = $AppointmentUpdateActionObject->Run(
         UserID                   => 123,
         Ticket                   => \%Ticket,                                       # required
         ProcessEntityID          => 'P123',
@@ -63,6 +62,8 @@ Runs TransitionAction AppointmentCreate.
             CalendarID            => 1,                                             # (required) valid CalendarID
             # or
             CalendarName          => 'Calendar 1',                                  # (required) valid CalendarName
+
+            AppointmentID         => 1,                                             # (required) AppointmentID to update the appointment
 
             Title                 => 'Webinar',                                     # (required) Title
             StartTime             => '2016-01-01 16:00:00',                         # (required)
@@ -102,7 +103,6 @@ Runs TransitionAction AppointmentCreate.
             NotificationCustomDateTime => '2016-01-01 17:00:00',                    # (optional) Notification date time for custom template
             TicketAppointmentRuleID    => '9bb20ea035e7a9930652a9d82d00c725',       # (optional) Ticket appointment rule ID (for ticket appointments only!)
 
-            DynamicField_AppointmentID => 'AppointmentID',                          # (optional) dynamic field name to save the AppointmentID in a dynamic field (e.g. to link it afterwards)
 
             UserID                     => 1,                                        # (optional) UserID
         }
@@ -118,9 +118,7 @@ sub Run {
     my ( $Self, %Param ) = @_;
 
     my $AppointmentObject  = $Kernel::OM->Get('Kernel::System::Calendar::Appointment');
-    my $BackendObject      = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
     my $CalendarObject     = $Kernel::OM->Get('Kernel::System::Calendar');
-    my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
     # define a common message to output in case of any error
     my $CommonMessage = "Process: $Param{ProcessEntityID} Activity: $Param{ActivityEntityID}"
@@ -137,7 +135,7 @@ sub Run {
     # override UserID if specified as a parameter in the TA config
     $Param{UserID} = $Self->_OverrideUserID(%Param);
 
-    # special case for DyanmicField UserID, convert form DynamicField_UserID to UserID
+    # special case for DynamicField UserID, convert form DynamicField_UserID to UserID
     if ( defined $Param{Config}->{DynamicField_UserID} ) {
         $Param{Config}->{UserID} = $Param{Config}->{DynamicField_UserID};
         delete $Param{Config}->{DynamicField_UserID};
@@ -188,25 +186,22 @@ sub Run {
         );
     }
 
-    my $AppointmentID = $AppointmentObject->AppointmentCreate(
+    if (!$Param{Config}->{AppointmentID}) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => 'Need AppointmentID to update appointment!'
+        );
+        return;
+    }
+
+    # get dynamic field config
+    $Success = $AppointmentObject->AppointmentUpdate(
+        AppointmentID => $Param{Config}->{AppointmentID},
         UserID => $Param{UserID},
         %{ $Param{Config} },
     );
 
-    return 1 if !$Param{Config}->{DynamicField_AppointmentID};
-
-    my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
-        Name => $Param{Config}->{DynamicField_AppointmentID},
-    );
-
-    $BackendObject->ValueSet(
-        DynamicFieldConfig => $DynamicFieldConfig,
-        ObjectID           => $Param{Ticket}->{TicketID},
-        Value              => $AppointmentID,
-        UserID             => 1,
-    );
-
-    return 1;
+    return $Success;
 }
 
 1;
