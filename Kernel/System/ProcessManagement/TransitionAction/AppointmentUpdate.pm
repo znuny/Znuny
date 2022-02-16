@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -117,8 +117,8 @@ Returns:
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $AppointmentObject  = $Kernel::OM->Get('Kernel::System::Calendar::Appointment');
-    my $CalendarObject     = $Kernel::OM->Get('Kernel::System::Calendar');
+    my $AppointmentObject = $Kernel::OM->Get('Kernel::System::Calendar::Appointment');
+    my $CalendarObject    = $Kernel::OM->Get('Kernel::System::Calendar');
 
     # define a common message to output in case of any error
     my $CommonMessage = "Process: $Param{ProcessEntityID} Activity: $Param{ActivityEntityID}"
@@ -186,7 +186,7 @@ sub Run {
         );
     }
 
-    if (!$Param{Config}->{AppointmentID}) {
+    if ( !$Param{Config}->{AppointmentID} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => 'Need AppointmentID to update appointment!'
@@ -197,7 +197,7 @@ sub Run {
     # get dynamic field config
     $Success = $AppointmentObject->AppointmentUpdate(
         AppointmentID => $Param{Config}->{AppointmentID},
-        UserID => $Param{UserID},
+        UserID        => $Param{UserID},
         %{ $Param{Config} },
     );
 

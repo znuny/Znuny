@@ -1,4 +1,5 @@
 # 6.3.1 2022-??-??
+ - 2022-02-16 Sector Nord AG: Added ProcessManagement TransitionAction - AppointmentUpdate and AppointmentRemove. Thanks to Sector Nord AG (@jsinagowitz). [#196](https://github.com/znuny/Znuny/pull/196)
  - 2022-02-15 Fixed config navigation path for customer frontend module AJAXDynamicFieldWebservice. Thanks to Renée Bäcker (@reneeb). [#193](https://github.com/znuny/Znuny/pull/193)
  - 2022-02-14 Integrated package Znuny-DatabaseBackend.
  - 2022-02-11 Fixed Bug - Show menu items when showing the error screen. [#210](https://github.com/znuny/Znuny/issues/210)
@@ -70,7 +71,7 @@
  - 2021-10-06 Added support for content type application/xml to generic interface REST transport.
  - 2021-10-06 Added option to keep attributes of XML in generic interface XSLT mapping.
  - 2021-10-06 Sector Nord AG: Added optional check condition in TransitionActions. Thanks to Sector Nord AG (@paulfolkers). [#144](https://github.com/znuny/Znuny/pull/144)
- - 2021-10-06 Sector Nord AG: Added TransitionAction parameter placeholder. Thanks to Sector Nord AG (@tjsinagowitz). [#145](https://github.com/znuny/Znuny/pull/145)
+ - 2021-10-06 Sector Nord AG: Added TransitionAction parameter placeholder. Thanks to Sector Nord AG (@jsinagowitz). [#145](https://github.com/znuny/Znuny/pull/145)
  - 2021-10-05 Sector Nord AG: Added ticket event and event module TicketAllChildrenClosed. Thanks to Sector Nord AG (@paulfolkers). [#143](https://github.com/znuny/Znuny/pull/143)
  - 2021-10-01 Added initial config for Frontend::Navigation###AdminCustomerUserCustomer###001-Framework. Thanks to Kevin Janssen (@BuTzZ). [#146](https://github.com/znuny/Znuny/pull/146)
  - 2021-10-01 Disabled connection to external RSS during unit testing.

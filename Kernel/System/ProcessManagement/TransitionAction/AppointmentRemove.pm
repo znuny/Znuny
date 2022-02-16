@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -72,7 +72,7 @@ Returns:
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $AppointmentObject  = $Kernel::OM->Get('Kernel::System::Calendar::Appointment');
+    my $AppointmentObject = $Kernel::OM->Get('Kernel::System::Calendar::Appointment');
 
     # define a common message to output in case of any error
     my $CommonMessage = "Process: $Param{ProcessEntityID} Activity: $Param{ActivityEntityID}"
@@ -93,7 +93,7 @@ sub Run {
     $Self->_ReplaceTicketAttributes(%Param);
     $Self->_ReplaceAdditionalAttributes(%Param);
 
-    if (!$Param{Config}->{AppointmentID}) {
+    if ( !$Param{Config}->{AppointmentID} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => 'Need AppointmentID to delete appointment!'
@@ -103,7 +103,7 @@ sub Run {
 
     $Success = $AppointmentObject->AppointmentDelete(
         AppointmentID => $Param{Config}->{AppointmentID},
-        UserID => $Param{UserID},
+        UserID        => $Param{UserID},
     );
 
     return $Success;
