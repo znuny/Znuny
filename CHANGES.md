@@ -1,4 +1,5 @@
 # 6.3.1 2022-??-??
+ - 2022-02-17 Updated CKEditor from version 4.16.0 to 4.17.1.
  - 2022-02-16 Sector Nord AG: Added ProcessManagement TransitionAction - AppointmentUpdate and AppointmentRemove. Thanks to Sector Nord AG (@jsinagowitz). [#196](https://github.com/znuny/Znuny/pull/196)
  - 2022-02-15 Fixed config navigation path for customer frontend module AJAXDynamicFieldWebservice. Thanks to Renée Bäcker (@reneeb). [#193](https://github.com/znuny/Znuny/pull/193)
  - 2022-02-14 Integrated package Znuny-DatabaseBackend.
