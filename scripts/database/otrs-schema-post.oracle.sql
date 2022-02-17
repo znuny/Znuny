@@ -2900,6 +2900,22 @@ END;
 --
 ;
 BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE mail_account ADD CONSTRAINT FK_mail_account_oauth2_token60 FOREIGN KEY (oauth2_token_config_id) REFERENCES oauth2_token_config (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_mail_account_oauth2_token47 ON mail_account (oauth2_token_config_id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
     EXECUTE IMMEDIATE 'ALTER TABLE mail_account ADD CONSTRAINT FK_mail_account_create_by_id FOREIGN KEY (create_by) REFERENCES users (id)';
 EXCEPTION
   WHEN OTHERS THEN NULL;
@@ -4253,6 +4269,102 @@ END;
 ;
 BEGIN
     EXECUTE IMMEDIATE 'CREATE INDEX FK_form_draft_change_by ON form_draft (change_by)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE oauth2_token_config ADD CONSTRAINT FK_oauth2_token_config_creatd7 FOREIGN KEY (create_by) REFERENCES users (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_oauth2_token_config_creat9e ON oauth2_token_config (create_by)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE oauth2_token_config ADD CONSTRAINT FK_oauth2_token_config_chang13 FOREIGN KEY (change_by) REFERENCES users (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_oauth2_token_config_chang73 ON oauth2_token_config (change_by)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE oauth2_token_config ADD CONSTRAINT FK_oauth2_token_config_valida9 FOREIGN KEY (valid_id) REFERENCES valid (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_oauth2_token_config_valid84 ON oauth2_token_config (valid_id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE oauth2_token ADD CONSTRAINT FK_oauth2_token_token_configbb FOREIGN KEY (token_config_id) REFERENCES oauth2_token_config (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_oauth2_token_token_config6e ON oauth2_token (token_config_id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE oauth2_token ADD CONSTRAINT FK_oauth2_token_create_by_id FOREIGN KEY (create_by) REFERENCES users (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_oauth2_token_create_by ON oauth2_token (create_by)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE oauth2_token ADD CONSTRAINT FK_oauth2_token_change_by_id FOREIGN KEY (change_by) REFERENCES users (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_oauth2_token_change_by ON oauth2_token (change_by)';
 EXCEPTION
   WHEN OTHERS THEN NULL;
 END;

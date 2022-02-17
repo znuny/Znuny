@@ -6,23 +6,32 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-package Kernel::System::MailAccount::IMAPTLS;
+package Kernel::System::MailAccount::Base;
 
 use strict;
 use warnings;
 
-use parent qw(Kernel::System::MailAccount::IMAP);
+sub _GetSSLOptions {
+    my ( $Self, %Param ) = @_;
 
-our @ObjectDependencies;
+    return;
+}
 
 sub _GetStartTLSOptions {
     my ( $Self, %Param ) = @_;
 
-    my %StartTLSOptions = (
-        Starttls => [ SSL_verify_mode => 0 ],
-    );
+    return;
+}
 
-    return %StartTLSOptions;
+sub _GetMailAccountModuleName {
+    my ( $Self, %Param ) = @_;
+
+    my $PackageName = ref $Self;
+    if ( $PackageName =~ m{\AKernel::System::MailAccount::(.*)\z} ) {
+        $PackageName = $1;
+    }
+
+    return $PackageName;
 }
 
 1;

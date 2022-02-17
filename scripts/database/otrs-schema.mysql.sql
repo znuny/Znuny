@@ -1014,10 +1014,12 @@ CREATE TABLE mail_account (
     login VARCHAR (200) NOT NULL,
     pw VARCHAR (200) NOT NULL,
     host VARCHAR (200) NOT NULL,
-    account_type VARCHAR (20) NOT NULL,
+    account_type VARCHAR (20) DEFAULT 'password' NOT NULL,
     queue_id INTEGER NOT NULL,
     trusted SMALLINT NOT NULL,
     imap_folder VARCHAR (250) NULL,
+    authentication_type VARCHAR (100) NOT NULL,
+    oauth2_token_config_id INTEGER NULL,
     comments VARCHAR (250) NULL,
     valid_id SMALLINT NOT NULL,
     create_time DATETIME NOT NULL,
@@ -1826,4 +1828,40 @@ CREATE TABLE form_draft (
     change_by INTEGER NOT NULL,
     PRIMARY KEY(id),
     INDEX form_draft_object_type_object_id_action (object_type, object_id, action)
+);
+# ----------------------------------------------------------
+#  create table oauth2_token_config
+# ----------------------------------------------------------
+CREATE TABLE oauth2_token_config (
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    name VARCHAR (250) NOT NULL,
+    config TEXT NOT NULL,
+    valid_id SMALLINT NOT NULL,
+    create_time DATETIME NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time DATETIME NOT NULL,
+    change_by INTEGER NOT NULL,
+    PRIMARY KEY(id),
+    UNIQUE INDEX oauth2_token_config_name (name)
+);
+# ----------------------------------------------------------
+#  create table oauth2_token
+# ----------------------------------------------------------
+CREATE TABLE oauth2_token (
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    token_config_id INTEGER NOT NULL,
+    authorization_code TEXT NULL,
+    token TEXT NULL,
+    token_expiration_date DATETIME NULL,
+    refresh_token TEXT NULL,
+    refresh_token_expiration_date DATETIME NULL,
+    error_message TEXT NULL,
+    error_description TEXT NULL,
+    error_code VARCHAR (250) NULL,
+    create_time DATETIME NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time DATETIME NOT NULL,
+    change_by INTEGER NOT NULL,
+    PRIMARY KEY(id),
+    UNIQUE INDEX oauth2_token_config_id (token_config_id)
 );

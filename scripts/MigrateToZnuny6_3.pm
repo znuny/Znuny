@@ -228,8 +228,18 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Znuny6_3::MigrateSysConfigSettings',
         },
         {
+            Message => 'Migrates OAuth2 token database tables',
+            Module  => 'scripts::Migration::Znuny6_3::MigrateOAuth2TokenDatabaseTables',
+        },
+
+        # This must be executed after newly integrated database backend tables have been created/updated!
+        {
             Message => 'Migrate database backends',
             Module  => 'scripts::Migration::Znuny6_3::MigrateDatabaseBackends',
+        },
+        {
+            Message => 'Migrates mail account database table',
+            Module  => 'scripts::Migration::Znuny6_3::MigrateMailAccountDatabaseTable',
         },
 
         # <<< Znuny 6.3

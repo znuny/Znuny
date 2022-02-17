@@ -1416,4 +1416,107 @@
         </Value>
     </Setting>
 
+    <!--
+        OAuth2 token management
+    -->
+    <Setting Name="DBCRUD::OAuth2TokenConfig::CacheTTL" Required="1" Valid="1">
+        <Description Translatable="1">Cache settings for DBCRUD modules (default: 1 day).</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+$">86400</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Module###AdminOAuth2TokenManagement" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1"></Item>
+                    <Item Key="NavBarName">AdminOAuth2TokenManagement</Item>
+                    <Item Key="Title" Translatable="1">AdminOAuth2TokenManagement</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::NavigationModule###AdminOAuth2TokenManagement" Required="0" Valid="1">
+        <Description Translatable="1">Admin area navigation for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Group">
+                    <Array>
+                        <Item>admin</Item>
+                    </Array>
+                </Item>
+                <Item Key="GroupRo">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
+                <Item Key="Name" Translatable="1">OAuth2</Item>
+                <Item Key="Block">Communication</Item>
+                <Item Key="Description" Translatable="1">Manage OAuth2 tokens and their configurations.</Item>
+                <Item Key="IconBig">fa-id-badge</Item>
+                <Item Key="IconSmall"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AdminOAuth2TokenManagement###200-OAuth2TokenManagement" Required="1" Valid="1">
+        <Description Translatable="1">Loader module registration for AdminOAuth2TokenManagement.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item></Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.OAuth2TokenManagement.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::NotifyModule###100-OAuth2TokenManagementTokenExpired" Required="1" Valid="1">
+        <Description Translatable="1">Displays notifications for missing and expired OAuth2 tokens.</Description>
+        <Navigation>Frontend::Agent::FrontendNotification</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::Notification::OAuth2TokenManagementTokenExpired</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!--
+        Mail accounts
+    -->
+    <Setting Name="SendmailModule::AuthenticationType" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Authentication type for sendmail module. If 'OAuth2 token' has been selected, SendmailModule::OAuth2TokenConfigName must also be configured.</Description>
+        <Navigation>Core::Email</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="password">
+                <Item ValueType="Option" Value="password" Translatable="1">Password</Item>
+                <Item ValueType="Option" Value="oauth2_token" Translatable="1">OAuth2 token</Item>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="SendmailModule::OAuth2TokenConfigName" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Name of the OAuth2 token configuration to use for sending mails if 'OAuth2 token' was configured in SendmailModule::AuthenticationType.</Description>
+        <Navigation>Core::Email</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex=""></Item>
+        </Value>
+    </Setting>
 </otrs_config>

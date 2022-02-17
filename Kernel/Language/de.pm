@@ -34,13 +34,69 @@ sub Data {
     $Self->{ThousandSeparator} = '.';
     $Self->{Translation} = {
 
+        "Authentication type for sendmail module. If 'OAuth2 token' has been selected, SendmailModule::OAuth2TokenConfigName must also be configured." =>
+            "Authentifikationstyp für das Sendmail-Modul. Falls 'OAuth2-Token' gewählt wurde, muss SendmailModule::OAuth2TokenConfigName ebenfalls konfiguriert werden.",
+        "Name of the OAuth2 token configuration to use for sending mails if 'OAuth2 token' was configured in SendmailModule::AuthenticationType."
+            => "Name der OAuth2-Token-Konfiguration für den Versand von E-Mails, falls 'OAuth2-Token' in SendmailModule::AuthenticationType konfiguriert wurde.",
+        'OAuth2 token'               => 'OAuth2-Token',
+        'OAuth2 token configuration' => 'OAuth2-Token-Konfiguration',
+        'Authentication type'        => 'Authentifikationstyp',
+
         'Handles changes to data of modules which use the DBCRUD base module.'
             => 'Verarbeitet Änderungen an Daten von Modulen, die das DBCRUD-Modul als Basis nutzen.',
+
         'Default format for export files.'                    => 'Default-Format für Exportdateien.',
         'Separator for exported CSV files.'                   => 'Trennzeichen für exportierte CSV-Dateien.',
         'Quoting character for exported CSV files.'           => 'Anführungszeichen für exportierte CSV-Dateien.',
         'Cache settings for DBCRUD modules (default: 1 day).' => 'Cache-Einstellungen für DBCRUD-Module (Standardwert: 1 Tag).',
 
+        'Manage OAuth2 tokens and their configurations'     => 'OAuth2-Token und deren Konfigurationen verwalten',
+        'Token status'                                      => 'Token-Status',
+        'Refresh token status'                              => 'Refresh-Token-Status',
+        'OAuth2 token configurations'                       => 'OAuth2-Token-Konfigurationen',
+        'Last token request failed.'                        => 'Letzter Token-Request ist fehlgeschlagen.',
+        'Token has expired on %s.'                          => 'Token ist am %s abgelaufen.',
+        'Token is valid until %s.'                          => 'Token ist gültig bis %s.',
+        'No token was requested yet.'                       => 'Bisher wurde kein Token angefordert.',
+        'Refresh token request is not configured.'          => 'Refresh-Token-Request ist nicht konfiguriert.',
+        'Last (refresh) token request failed.'              => 'Letzter (Refresh-)Token-Request ist fehlgeschlagen.',
+        'Refresh token has expired on %s.'                  => 'Refresh-Token ist am %s abgelaufen.',
+        'Refresh token has expired.'                        => 'Refresh-Token ist abgelaufen.',
+        'Refresh token is valid until %s.'                  => 'Refresh-Token ist gültig bis %s.',
+        'Refresh token is valid (without expiration date).' => 'Refresh-Token ist gültig (ohne Ablaufdatum).',
+        'No refresh token was requested yet.'               => 'Bisher wurde kein Refresh-Token angefordert.',
+        'Validity of token configuration'                   => 'Gültigkeit der Token-Konfiguration',
+        'Request new token'                                 => 'Neues Token anfordern',
+        'Delete this token and its configuration.'          => 'Token und dessen Konfiguration löschen.',
+
+        'Do you really want to delete this token and its configuration?' => 'Soll das Token und dessen Konfiguration wirklich gelöscht werden?',
+
+        'Add OAuth2 token configuration' => 'OAuth2-Token-Konfiguration hinzufügen',
+        'Add a new OAuth2 token configuration based on the selected template.' => 'Neue OAuth2-Token-Konfiguration auf Basis der gewählten Vorlage hinzufügen',
+
+        'Import and export' => 'Import und Export',
+        'Upload a YAML file to import token configurations. See documentation on OAuth2 token management for further details.'
+            => 'Datei im YAML-Format zum Import von Token-Konfigurationen hochladen. Beachten Sie die Dokumentation zum OAuth2-Token-Management für weitere Informationen.',
+        'Overwrite existing token configurations' => 'Bestehende Token-Konfigurationen überschreiben',
+        'Import token configurations' => 'Token-Konfigurationen importieren',
+        'Export token configurations' => 'Token-Konfigurationen exportieren',
+
+        'Add by template'    => 'Auf Basis von Template hinzufügen',
+        'Base configuration' => 'Basiskonfiguration',
+        'This is the template that was used to create this OAuth2 token configuration.' => 'Dies ist die Vorlage, die zur Erstellung dieser OAuth2-Token-Konfiguration verwendet wurde.',
+        'Client ID' => 'Client-ID',
+        'Client secret' => 'Client-Secret',
+
+        'Expired token' => 'Abgelaufenes Token',
+        'Shows a notification for admins below the top menu if the OAuth2 token has expired.' => 'Zeigt für abgelaufenes OAuth2-Token eine Benachrichtigung für Admins unterhalb des Hauptmenüs.',
+
+        'Expired refresh token' => 'Abgelaufenes Refresh-Token',
+        'Shows a notification for admins below the top menu if the OAuth2 refresh token has expired.' => 'Zeigt für abgelaufenes OAuth2-Refresh-Token eine Benachrichtigung für Admins unterhalb des Hauptmenüs.',
+
+        'An OAuth2 token configuration with this name already exists.' => 'Es existiert bereits eine OAuth2-Token-Konfiguration mit diesem Namen.',
+
+        'OAuth2 token for "%s" has expired.'         => 'OAuth2-Token für "%s" ist abgelaufen.',
+        'OAuth2 refresh token for "%s" has expired.' => 'OAuth2-Refresh-Token für "%s" ist abgelaufen.',
 
         'Dynamic fields shown in the ticket bulk screen of the agent interface.' => 'Dynamische Felder, die in der Ticket-Sammelaktion in der Agentenoberfläche angezeigt werden.',
         'This configuration defines if a dynamic field has to be checked in the agent ticket bulk view to get set for each ticket. This prevents unwanted overwrite of dynamic field values with their default or even empty values.' => 'Diese Konfiguration definiert, ob ein dynamisches Feld in der Ticket-Sammelaktion zum Setzen mit einer Checkbox markiert werden muss. Dies verhindert das ungewollte Überschreiben von dynamischen Feldwerten durch deren Standardwerte oder sogar leeren Inhalt.',
@@ -9169,6 +9225,7 @@ Ihr Helpdesk-Team
         'Do you really want to delete this statistic?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',
+        'Do you really want to delete this token and its configuration?',
         'Don\'t save, update manually',
         'Draft title',
         'Duplicate event.',

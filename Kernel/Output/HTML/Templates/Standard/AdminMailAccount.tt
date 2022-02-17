@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -31,7 +31,6 @@
 
     <div class="Clear"></div>
     <div class="SidebarColumn">
-
 [% RenderBlockStart("ActionList") %]
         <div class="WidgetSimple">
             <div class="Header">
@@ -93,6 +92,7 @@
                         <tr>
                             <th>[% Translate("Host") | html %]/[% Translate("Username") | html %]</th>
                             <th>[% Translate("Type") | html %]</th>
+                            <th>[% Translate("Authentication type") | html %]</th>
                             <th>[% Translate("Comment") | html %]</th>
                             <th>[% Translate("Validity") | html %]</th>
                             <th>[% Translate("Changed") | html %]</th>
@@ -115,6 +115,13 @@
                                 <a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Update;ID=[% Data.ID | uri %]">[% Data.Host | html %] / [% Data.Login | html %]</a>
                             </td>
                             <td>[% Data.Type | html %]</td>
+                            <td>
+                                [% AuthenticationType = Data.AuthenticationType %]
+                                [% IF Data.AuthenticationTypes.item(AuthenticationType) %]
+                                    [% AuthenticationType = Data.AuthenticationTypes.item(AuthenticationType) %]
+                                [% END %]
+                                [% Translate(AuthenticationType) | html %]
+                            </td>
                             <td title="[% Data.Comment | html %]">[% Data.Comment | truncate(20) | html %]</td>
                             <td>[% Translate(Data.ShownValid) | html %]</td>
                             <td>[% Data.ChangeTime | Localize("TimeShort") %]</td>
@@ -149,8 +156,8 @@
             </div>
             <div class="Content">
                 <form action="[% Env("CGIHandle") %]" method="post" class="Validate PreventMultipleSubmits">
-                    <input type="hidden" name="Action" value="[% Env("Action") %]"/>
-                    <input type="hidden" name="Subaction" value="AddAction"/>
+                    <input type="hidden" id="Action" name="Action" value="[% Env("Action") %]"/>
+                    <input type="hidden" id="Subaction" name="Subaction" value="AddAction"/>
                     <fieldset class="TableLike">
                         <label class="Mandatory" for="TypeAdd"><span class="Marker">*</span> [% Translate("Type") | html %]:</label>
                         <div class="Field">
@@ -164,33 +171,63 @@
                         </div>
                         <div class="Clear"></div>
 
-                        <label class="Mandatory" for="LoginAdd"><span class="Marker">*</span> [% Translate("Username") | html %]:</label>
+                        <label class="Mandatory" for="AuthenticationType"><span class="Marker">*</span> [% Translate("Authentication type") | html %]:</label>
                         <div class="Field">
-                            <input type="text" class="W50pc Validate_Required [% Data.LoginAddInvalid | html %]" name="Login" id="LoginAdd" value="" maxlength="200" autocomplete="off" />
-                            <div id="LoginAddError" class="TooltipErrorMessage">
+                            [% Data.AuthenticationTypeSelection %]
+                            <div id="AuthenticationTypeError" class="TooltipErrorMessage">
                                 <p>[% Translate("This field is required.") | html %]</p>
                             </div>
-                            <div id="LoginAddServerError" class="TooltipErrorMessage">
+                            <div id="AuthenticationTypeServerError" class="TooltipErrorMessage">
                                 <p>[% Translate("This field is required.") | html %]</p>
                             </div>
                         </div>
                         <div class="Clear"></div>
 
-                        <label class="Mandatory" for="PasswordAdd"><span class="Marker">*</span> [% Translate("Password") | html %]:</label>
-                        <div class="Field">
-                            <input type="password" class="W50pc Validate_Required [% Data.PasswordAddInvalid | html %]" name="Password" id="PasswordAdd" value="" maxlength="200" autocomplete="new-password" />
-                            <div id="PasswordAddError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
+                        <div class="Row Row_Login">
+                            <label class="Mandatory" for="LoginAdd"><span class="Marker">*</span> [% Translate("Username") | html %]:</label>
+                            <div class="Field">
+                                <input type="text" class="W50pc Validate_Required [% Data.LoginAddInvalid | html %]" name="Login" id="LoginAdd" value="[% Data.Login | html %]" maxlength="200" autocomplete="off" />
+                                <div id="LoginAddError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                                <div id="LoginAddServerError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
                             </div>
-                            <div id="PasswordAddServerError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
-                            </div>
+                            <div class="Clear"></div>
                         </div>
-                        <div class="Clear"></div>
+
+                        <div class="Row Row_Password">
+                            <label class="Mandatory" for="PasswordAdd"><span class="Marker">*</span> [% Translate("Password") | html %]:</label>
+                            <div class="Field">
+                                <input type="password" class="W50pc Validate_Required [% Data.PasswordAddInvalid | html %]" name="Password" id="PasswordAdd" value="" maxlength="200" autocomplete="new-password" />
+                                <div id="PasswordAddError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                                <div id="PasswordAddServerError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                            </div>
+                            <div class="Clear"></div>
+                        </div>
+
+                        <div class="Row Row_OAuth2TokenConfigID Hidden">
+                            <label class="Mandatory" for="OAuth2TokenConfigID"><span class="Marker">*</span> [% Translate("OAuth2 token configuration") | html %]:</label>
+                            <div class="Field">
+                                [% Data.OAuth2TokenConfigSelection %]
+                            </div>
+                            <div id="OAuth2TokenConfigIDError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                            <div id="OAuth2TokenConfigIDServerError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                            <div class="Clear"></div>
+                        </div>
 
                         <label class="Mandatory" for="HostAdd"><span class="Marker">*</span> [% Translate("Host") | html %]:</label>
                         <div class="Field">
-                            <input type="text" class="W50pc Validate_Required [% Data.HostAddInvalid | html %]" name="Host" id="HostAdd" value="" maxlength="200"/>
+                            <input type="text" class="W50pc Validate_Required [% Data.HostAddInvalid | html %]" name="Host" id="HostAdd" value="[% Data.Host | html %]" maxlength="200"/>
                             <div id="HostAddError" class="TooltipErrorMessage">
                                 <p>[% Translate("This field is required.") | html %]</p>
                             </div>
@@ -284,29 +321,59 @@
                         </div>
                         <div class="Clear"></div>
 
-                        <label class="Mandatory" for="LoginEdit"><span class="Marker">*</span> [% Translate("Username") | html %]:</label>
+                        <label class="Mandatory" for="AuthenticationType"><span class="Marker">*</span> [% Translate("Authentication type") | html %]:</label>
                         <div class="Field">
-                            <input type="text" class="W50pc Validate_Required [% Data.LoginEditInvalid | html %]" name="Login" id="LoginEdit" value="[% Data.Login | html %]" maxlength="200" autocomplete="off" />
-                            <div id="LoginEditError" class="TooltipErrorMessage">
+                            [% Data.AuthenticationTypeSelection %]
+                            <div id="AuthenticationTypeError" class="TooltipErrorMessage">
                                 <p>[% Translate("This field is required.") | html %]</p>
                             </div>
-                            <div id="LoginEditServerError" class="TooltipErrorMessage">
+                            <div id="AuthenticationTypeServerError" class="TooltipErrorMessage">
                                 <p>[% Translate("This field is required.") | html %]</p>
                             </div>
                         </div>
                         <div class="Clear"></div>
 
-                        <label class="Mandatory" for="PasswordEdit"><span class="Marker">*</span> [% Translate("Password") | html %]:</label>
-                        <div class="Field">
-                            <input type="password" class="W50pc Validate_Required [% Data.PasswordEditInvalid | html %]" name="Password" id="PasswordEdit" value="[% IF Data.Password %]otrs-dummy-password-placeholder[% END %]" maxlength="200" autocomplete="off" />
-                            <div id="PasswordEditError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
+                        <div class="Row Row_Login">
+                            <label class="Mandatory" for="LoginEdit"><span class="Marker">*</span> [% Translate("Username") | html %]:</label>
+                            <div class="Field">
+                                <input type="text" class="W50pc Validate_Required [% Data.LoginEditInvalid | html %]" name="Login" id="LoginEdit" value="[% Data.Login | html %]" maxlength="200" autocomplete="off" />
+                                <div id="LoginEditError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                                <div id="LoginEditServerError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
                             </div>
-                            <div id="PasswordEditServerError" class="TooltipErrorMessage">
-                                <p>[% Translate("This field is required.") | html %]</p>
-                            </div>
+                            <div class="Clear"></div>
                         </div>
-                        <div class="Clear"></div>
+
+                        <div class="Row Row_Password">
+                            <label class="Mandatory" for="PasswordEdit"><span class="Marker">*</span> [% Translate("Password") | html %]:</label>
+                            <div class="Field">
+                                <input type="password" class="W50pc Validate_Required [% Data.PasswordEditInvalid | html %]" name="Password" id="PasswordEdit" value="[% IF Data.Password && Data.AuthenticationType == 'password' %]dummy-password-placeholder[% END %]" maxlength="200" autocomplete="off" />
+                                <div id="PasswordEditError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                                <div id="PasswordEditServerError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                            </div>
+                            <div class="Clear"></div>
+                        </div>
+
+                        <div class="Row Row_OAuth2TokenConfigID Hidden">
+                            <label class="Mandatory" for="OAuth2TokenConfigID"><span class="Marker">*</span> [% Translate("OAuth2 token configuration") | html %]:</label>
+                            <div class="Field">
+                                [% Data.OAuth2TokenConfigSelection %]
+                            </div>
+                            <div id="OAuth2TokenConfigIDError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                            <div id="OAuth2TokenConfigIDServerError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                            <div class="Clear"></div>
+                        </div>
 
                         <label class="Mandatory" for="HostEdit"><span class="Marker">*</span> [% Translate("Host") | html %]:</label>
                         <div class="Field">

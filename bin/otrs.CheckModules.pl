@@ -188,6 +188,16 @@ my @NeededModules = (
         },
     },
     {
+        Module    => 'Authen::SASL',
+        Required  => 1,
+        Comment   => 'Required for SASL authentication mechanisms (e.g. IMAP and SMTP connections).',
+        InstTypes => {
+            aptget => 'libauthen-sasl-perl',
+            emerge => 'dev-perl/Authen-SASL',
+            zypper => 'perl-Authen-SASL',
+        },
+    },
+    {
         Module    => 'Crypt::Eksblowfish::Bcrypt',
         Required  => 0,
         Comment   => 'For strong password hashing.',
@@ -463,16 +473,6 @@ my @NeededModules = (
                     emerge => 'dev-perl/IO-Socket-SSL',
                     zypper => 'perl-IO-Socket-SSL',
                     ports  => 'security/p5-IO-Socket-SSL',
-                },
-            },
-            {
-                Module    => 'Authen::SASL',
-                Required  => 0,
-                Comment   => 'Required for MD5 authentication mechanisms in IMAP connections.',
-                InstTypes => {
-                    aptget => 'libauthen-sasl-perl',
-                    emerge => 'dev-perl/Authen-SASL',
-                    zypper => 'perl-Authen-SASL',
                 },
             },
             {

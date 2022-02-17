@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -125,7 +125,7 @@ $Selenium->RunTest(
         my %Check = (
             Type          => 'IMAP',
             LoginEdit     => $RandomID,
-            PasswordEdit  => 'otrs-dummy-password-placeholder',    # real password is not sent to user
+            PasswordEdit  => 'dummy-password-placeholder',       # real password is not sent to user
             HostEdit      => 'pop3.example.com',
             Trusted       => 0,
             DispatchingBy => 'Queue',

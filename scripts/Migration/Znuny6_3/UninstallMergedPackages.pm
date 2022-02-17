@@ -57,6 +57,10 @@ sub Run {
         Znuny4OTRS-RandomTicketNumberGenerator
         Znuny-DatabaseBackend
         Znuny4OTRS-DatabaseBackend
+        Znuny-OAuth2TokenManagement
+        Znuny4OTRS-OAuth2TokenManagement
+        Znuny-MailAccounts
+        Znuny4OTRS-MailAccounts
         )
         )
     {
