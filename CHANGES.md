@@ -1,4 +1,5 @@
 # 6.3.1 2022-??-??
+ - 2022-02-18 Added 'textwatcher', 'autocomplete' and 'textmatch' as extraPlugins to CKEditor global config.
  - 2022-02-17 Integrated package Znuny4OTRS-MailAccounts.
  - 2022-02-17 Integrated package Znuny4OTRS-OAuth2TokenManagement.
  - 2022-02-17 Updated CKEditor from version 4.16.0 to 4.17.1.
