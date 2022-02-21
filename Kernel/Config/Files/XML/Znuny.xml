@@ -1519,4 +1519,203 @@
             <Item ValueType="String" ValueRegex=""></Item>
         </Value>
     </Setting>
+
+    <!--
+        TimeUnits
+    -->
+    <Setting Name="Ticket::Frontend::AccountTimeType" Required="1" Valid="1">
+        <Description Translatable="1">Activates time accounting.</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="Text">
+                <Item ValueType="Option" Value="Text" Translatable="1">Text</Item>
+                <Item ValueType="Option" Value="Dropdown" Translatable="1">Dropdown</Item>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="Ticket::Frontend::AccountTime::Dropdown###001-TimeUnits" Required="0" Valid="1">
+        <Description Translatable="1">This option enables a dropdown which will be displayed instead of the time unit input field.</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Label" Translatable="1">Hours</Item>
+                <Item Key="DataSelected"></Item>
+                <Item Key="Data">
+                    <Hash>
+                        <Item Key="3600">1</Item>
+                        <Item Key="7200">2</Item>
+                        <Item Key="10800">3</Item>
+                        <Item Key="14400">4</Item>
+                        <Item Key="18000">5</Item>
+                        <Item Key="21600">6</Item>
+                        <Item Key="25200">7</Item>
+                        <Item Key="28800">8</Item>
+                        <Item Key="32400">9</Item>
+                        <Item Key="36000">10</Item>
+                        <Item Key="39600">11</Item>
+                        <Item Key="43200">12</Item>
+                        <Item Key="46800">13</Item>
+                        <Item Key="50400">14</Item>
+                        <Item Key="54000">15</Item>
+                        <Item Key="57600">16</Item>
+                        <Item Key="61200">17</Item>
+                        <Item Key="64800">18</Item>
+                        <Item Key="68400">19</Item>
+                        <Item Key="72000">20</Item>
+                        <Item Key="75600">21</Item>
+                        <Item Key="79200">22</Item>
+                        <Item Key="82800">23</Item>
+                        <Item Key="86400">24</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AccountTime::Dropdown###002-TimeUnits" Required="0" Valid="1">
+        <Description Translatable="1">This option enables a dropdown which will be displayed instead of the time unit input field.</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Label" Translatable="1">Minutes</Item>
+                <Item Key="DataSelected"></Item>
+                <Item Key="Data">
+                    <Hash>
+                        <Item Key="60">1</Item>
+                        <Item Key="120">2</Item>
+                        <Item Key="180">3</Item>
+                        <Item Key="240">4</Item>
+                        <Item Key="300">5</Item>
+                        <Item Key="360">6</Item>
+                        <Item Key="420">7</Item>
+                        <Item Key="480">8</Item>
+                        <Item Key="540">9</Item>
+                        <Item Key="600">10</Item>
+                        <Item Key="660">11</Item>
+                        <Item Key="720">12</Item>
+                        <Item Key="780">13</Item>
+                        <Item Key="840">14</Item>
+                        <Item Key="900">15</Item>
+                        <Item Key="960">16</Item>
+                        <Item Key="1020">17</Item>
+                        <Item Key="1080">18</Item>
+                        <Item Key="1140">19</Item>
+                        <Item Key="1200">20</Item>
+                        <Item Key="1260">21</Item>
+                        <Item Key="1320">22</Item>
+                        <Item Key="1380">23</Item>
+                        <Item Key="1440">24</Item>
+                        <Item Key="1500">25</Item>
+                        <Item Key="1560">26</Item>
+                        <Item Key="1620">27</Item>
+                        <Item Key="1680">28</Item>
+                        <Item Key="1740">29</Item>
+                        <Item Key="1800">30</Item>
+                        <Item Key="1860">31</Item>
+                        <Item Key="1920">32</Item>
+                        <Item Key="1980">33</Item>
+                        <Item Key="2040">34</Item>
+                        <Item Key="2100">35</Item>
+                        <Item Key="2160">36</Item>
+                        <Item Key="2220">37</Item>
+                        <Item Key="2280">38</Item>
+                        <Item Key="2340">39</Item>
+                        <Item Key="2400">40</Item>
+                        <Item Key="2460">41</Item>
+                        <Item Key="2520">42</Item>
+                        <Item Key="2580">43</Item>
+                        <Item Key="2640">44</Item>
+                        <Item Key="2700">45</Item>
+                        <Item Key="2760">46</Item>
+                        <Item Key="2820">47</Item>
+                        <Item Key="2880">48</Item>
+                        <Item Key="2940">49</Item>
+                        <Item Key="3000">50</Item>
+                        <Item Key="3060">51</Item>
+                        <Item Key="3120">52</Item>
+                        <Item Key="3180">53</Item>
+                        <Item Key="3240">54</Item>
+                        <Item Key="3300">55</Item>
+                        <Item Key="3360">56</Item>
+                        <Item Key="3420">57</Item>
+                        <Item Key="3480">58</Item>
+                        <Item Key="3540">59</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AccountTime::Dropdown###003-TimeUnits" Required="0" Valid="1">
+        <Description Translatable="1">This option enables a dropdown which will be displayed instead of the time unit input field.</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Label" Translatable="1">Seconds</Item>
+                <Item Key="DataSelected"></Item>
+                <Item Key="Data">
+                    <Hash>
+                        <Item Key="1">1</Item>
+                        <Item Key="2">2</Item>
+                        <Item Key="3">3</Item>
+                        <Item Key="4">4</Item>
+                        <Item Key="5">5</Item>
+                        <Item Key="6">6</Item>
+                        <Item Key="7">7</Item>
+                        <Item Key="8">8</Item>
+                        <Item Key="9">9</Item>
+                        <Item Key="10">10</Item>
+                        <Item Key="11">11</Item>
+                        <Item Key="12">12</Item>
+                        <Item Key="13">13</Item>
+                        <Item Key="14">14</Item>
+                        <Item Key="15">15</Item>
+                        <Item Key="16">16</Item>
+                        <Item Key="17">17</Item>
+                        <Item Key="18">18</Item>
+                        <Item Key="19">19</Item>
+                        <Item Key="20">20</Item>
+                        <Item Key="21">21</Item>
+                        <Item Key="22">22</Item>
+                        <Item Key="23">23</Item>
+                        <Item Key="24">24</Item>
+                        <Item Key="25">25</Item>
+                        <Item Key="26">26</Item>
+                        <Item Key="27">27</Item>
+                        <Item Key="28">28</Item>
+                        <Item Key="29">29</Item>
+                        <Item Key="30">30</Item>
+                        <Item Key="31">31</Item>
+                        <Item Key="32">32</Item>
+                        <Item Key="33">33</Item>
+                        <Item Key="34">34</Item>
+                        <Item Key="35">35</Item>
+                        <Item Key="36">36</Item>
+                        <Item Key="37">37</Item>
+                        <Item Key="38">38</Item>
+                        <Item Key="39">39</Item>
+                        <Item Key="40">40</Item>
+                        <Item Key="41">41</Item>
+                        <Item Key="42">42</Item>
+                        <Item Key="43">43</Item>
+                        <Item Key="44">44</Item>
+                        <Item Key="45">45</Item>
+                        <Item Key="46">46</Item>
+                        <Item Key="47">47</Item>
+                        <Item Key="48">48</Item>
+                        <Item Key="49">49</Item>
+                        <Item Key="50">50</Item>
+                        <Item Key="51">51</Item>
+                        <Item Key="52">52</Item>
+                        <Item Key="53">53</Item>
+                        <Item Key="54">54</Item>
+                        <Item Key="55">55</Item>
+                        <Item Key="56">56</Item>
+                        <Item Key="57">57</Item>
+                        <Item Key="58">58</Item>
+                        <Item Key="59">59</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
 </otrs_config>

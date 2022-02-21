@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -1659,43 +1659,39 @@ sub _Mask {
 
     # show time accounting box
     if ( $ConfigObject->Get('Ticket::Frontend::AccountTime') ) {
+
         $Param{TimeUnitsRequired} = (
             $ConfigObject->Get('Ticket::Frontend::NeedAccountedTime')
             ? 'Validate_DependingRequiredAND Validate_Depending_Subject'
             : ''
         );
-        $Param{TimeUnitsRequiredEmail} = (
+
+        $Param{TimeUnitsBlock} = $LayoutObject->TimeUnits(
+            ID                => 'TimeUnits',
+            Name              => 'TimeUnits',
+            TimeUnits         => $Param{TimeUnits},
+            TimeUnitsRequired => $Param{TimeUnitsRequired},
+        );
+
+        $LayoutObject->Block(
+            Name => 'TimeUnits',
+            Data => \%Param,
+        );
+
+        $Param{TimeUnitsRequired} = (
             $ConfigObject->Get('Ticket::Frontend::NeedAccountedTime')
             ? 'Validate_DependingRequiredAND Validate_Depending_EmailSubject'
             : ''
         );
 
-        if ( $ConfigObject->Get('Ticket::Frontend::NeedAccountedTime') ) {
-            $LayoutObject->Block(
-                Name => 'TimeUnitsLabelMandatory',
-                Data => { TimeUnitsRequired => $Param{TimeUnitsRequired} },
-            );
-            $LayoutObject->Block(
-                Name => 'TimeUnitsLabelMandatoryEmail',
-                Data => { TimeUnitsRequired => $Param{TimeUnitsRequiredEmail} },
-            );
-        }
-        else {
-            $LayoutObject->Block(
-                Name => 'TimeUnitsLabel',
-                Data => \%Param,
-            );
-            $LayoutObject->Block(
-                Name => 'TimeUnitsLabelEmail',
-                Data => \%Param,
-            );
-        }
-        $LayoutObject->Block(
-            Name => 'TimeUnits',
-            Data => \%Param,
+        $Param{EmailTimeUnitsBlock} = $LayoutObject->TimeUnits(
+            ID                => 'EmailTimeUnits',
+            Name              => 'EmailTimeUnits',
+            TimeUnits         => $Param{EmailTimeUnits},
+            TimeUnitsRequired => $Param{TimeUnitsRequired},
         );
         $LayoutObject->Block(
-            Name => 'TimeUnitsEmail',
+            Name => 'EmailTimeUnits',
             Data => \%Param,
         );
     }

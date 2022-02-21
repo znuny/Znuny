@@ -9115,6 +9115,7 @@ Ihr Helpdesk-Team
         'archived tickets'    => 'archivierte Tickets',
         'not archived tickets' => 'nicht archivierte Tickets',
         'Clear log entries' => 'Lösche Protokolleinträge',
+        'This option enables a dropdown which will be displayed instead of the time unit input field.' => 'Diese Option aktiviert ein Dropdown, das anstelle des Eingabefeldes für die Zeiteinheit angezeigt wird.',
     };
 
     $Self->{JavaScriptStrings} = [

@@ -144,19 +144,8 @@
 #                    </div>
 #[% RenderBlockEnd("DynamicField_Field2") %]
 
-[% RenderBlockStart("TimeUnitsLabel") %]
-                    <label for="TimeUnits">[% Translate("Time units") | html %] [% Translate(Config("Ticket::Frontend::TimeUnits")) | html %]:</label>
-[% RenderBlockEnd("TimeUnitsLabel") %]
-[% RenderBlockStart("TimeUnitsLabelMandatory") %]
-                    <label class="Mandatory" for="TimeUnits"><span class="Marker">*</span>[% Translate("Time units") | html %] [% Translate(Config("Ticket::Frontend::TimeUnits")) | html %]:</label>
-[% RenderBlockEnd("TimeUnitsLabelMandatory") %]
 [% RenderBlockStart("TimeUnits") %]
-                    <div class="Field">
-                        <input type="text" name="TimeUnits" id="TimeUnits" value="[% Data.TimeUnits | html %]" class="W50pc Validate_TimeUnits [% Data.TimeUnitsRequired | html %] [% Data.TimeUnitsInvalid | html %]"/>
-                        <div id="TimeUnitsError" class="TooltipErrorMessage"><p>[% Translate("Invalid time!") | html %]</p></div>
-                        <div id="TimeUnitsServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                    </div>
-                    <div class="Clear"></div>
+                    [% Data.TimeUnitsBlock %]
 [% RenderBlockEnd("TimeUnits") %]
 
                 </fieldset>
