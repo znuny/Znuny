@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -83,6 +83,20 @@ sub Run {
         # check required parameters
         my %Error;
         if ( !$GetParam->{Name} ) {
+
+            # add server error error class
+            $Error{NameServerError}        = 'ServerError';
+            $Error{NameServerErrorMessage} = Translatable('This field is required');
+        }
+
+        if ( !$GetParam->{Config}->{Scope} ) {
+
+            # add server error error class
+            $Error{NameServerError}        = 'ServerError';
+            $Error{NameServerErrorMessage} = Translatable('This field is required');
+        }
+
+        if ( $GetParam->{Config}->{Scope} eq 'Process' && !$GetParam->{Config}->{ScopeEntityID} ) {
 
             # add server error error class
             $Error{NameServerError}        = 'ServerError';
@@ -470,6 +484,35 @@ sub _ShowEdit {
         Type  => 'Small',
     );
 
+    $Param{ScopeSelection} = $LayoutObject->BuildSelection(
+        Data => {
+            Global  => 'Global',
+            Process => 'Current Process',
+        },
+        Name           => 'Scope',
+        ID             => 'Scope',
+        SelectedID     => $TransitionData->{Config}->{Scope} || 'Global',
+        Sort           => 'IndividualKey',
+        SortIndividual => [ 'Global', 'Process' ],
+        Translation    => 1,
+        Class          => 'Modernize W50pc ',
+    );
+
+    my $ProcessList = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process')->ProcessList(
+        UserID      => 1,
+        UseEntities => 1,
+    );
+
+    $Param{ScopeEntityIDSelection} = $LayoutObject->BuildSelection(
+        Data        => $ProcessList,
+        Name        => 'ScopeEntityID',
+        ID          => 'ScopeEntityID',
+        SelectedID  => $TransitionData->{Config}->{ScopeEntityID},
+        Sort        => 'AlphanumericKey',
+        Translation => 1,
+        Class       => 'Modernize W50pc ',
+    );
+
     $Param{FreshConditionLinking} = $LayoutObject->BuildSelection(
         Data => {
             'and' => Translatable('and'),
@@ -656,9 +699,9 @@ sub _GetParams {
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
     # get parameters from web browser
-    $GetParam->{Name}            = $ParamObject->GetParam( Param => 'Name' ) || '';
-    $GetParam->{ConditionConfig} = $ParamObject->GetParam( Param => 'ConditionConfig' )
-        || '';
+    for my $ParamName (qw( Name ConditionConfig )) {
+        $GetParam->{$ParamName} = $ParamObject->GetParam( Param => $ParamName ) || '';
+    }
 
     my $Config = $Kernel::OM->Get('Kernel::System::JSON')->Decode(
         Data => $GetParam->{ConditionConfig}
@@ -667,6 +710,13 @@ sub _GetParams {
     $GetParam->{Config}->{Condition}        = $Config;
     $GetParam->{Config}->{ConditionLinking} = $ParamObject->GetParam( Param => 'OverallConditionLinking' ) || '';
 
+    for my $ParamName (qw( Scope ScopeEntityID )) {
+        $GetParam->{Config}->{$ParamName} = $ParamObject->GetParam( Param => $ParamName ) || '';
+    }
+    $GetParam->{Config}->{Scope} //= 'Global';
+    if ( $GetParam->{Config}->{Scope} eq 'Global' ) {
+        delete $GetParam->{Config}->{ScopeEntityID};
+    }
     return $GetParam;
 }
 

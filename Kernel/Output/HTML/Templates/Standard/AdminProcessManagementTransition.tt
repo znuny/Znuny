@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -28,6 +28,7 @@
                 <input type="hidden" name="Subaction" value="Transition[% Data.Action | html %]Action"/>
                 <input type="hidden" name="EntityID" value="[% Data.EntityID | html %]"/>
                 <input type="hidden" name="ID" value="[% Data.ID | html %]"/>
+                <input type="hidden" ID="ProcessEntityID" name="ProcessEntityID" value="[% Data.ProcessEntityID | html %]"/>
                 <input type="hidden" name="ActivityDialogs" value=""/>
                 <input type="hidden" name="ConditionConfig" value=""/>
                 <input type="hidden" name="PopupRedirect" value="" id="PopupRedirect"/>
@@ -57,6 +58,24 @@
                                 </div>
                                 <div id="NameServerError" class="TooltipErrorMessage">
                                     <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                            </div>
+                            <div class="Clear"></div>
+
+                            <label for="Scope">[% Translate("Scope") | html %]:</label>
+                            <div class="Field">
+                                [% Data.ScopeSelection %]
+                                <div id="ScopeError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                            </div>
+                            <div class="Clear"></div>
+
+                            <label class="Mandatory" for="ScopeEntityID"><span class="Marker">*</span> [% Translate("Scope EntityID") | html %]:</label>
+                            <div class="Field">
+                                [% Data.ScopeEntityIDSelection %]
+                                <div id="ScopeEntityIDError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required for transitions with a scope.") | html %]</p>
                                 </div>
                             </div>
                             <div class="Clear"></div>

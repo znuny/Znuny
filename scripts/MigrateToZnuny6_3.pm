@@ -224,6 +224,9 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Znuny6_3::UpgradeDatabaseStructure',
         },
         {
+            Message => 'Upgrade database structure for new scope attribute in ProcessManagement',
+            Module  => 'scripts::Migration::Znuny6_3::MigrateProcessEntitesToScope',
+        },
             Message => 'Migrate SysConfig settings',
             Module  => 'scripts::Migration::Znuny6_3::MigrateSysConfigSettings',
         },
@@ -241,7 +244,6 @@ sub _TasksGet {
             Message => 'Migrates mail account database table',
             Module  => 'scripts::Migration::Znuny6_3::MigrateMailAccountDatabaseTable',
         },
-
         # <<< Znuny 6.3
 
         {

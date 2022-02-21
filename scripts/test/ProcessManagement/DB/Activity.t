@@ -16,24 +16,22 @@ use vars (qw($Self));
 
 use Kernel::System::VariableCheck qw(:all);
 
-# get needed objects
-my $CacheObject          = $Kernel::OM->Get('Kernel::System::Cache');
-my $ActivityObject       = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Activity');
-my $ActivityDialogObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::ActivityDialog');
-
-# get helper object
 $Kernel::OM->ObjectParamAdd(
     'Kernel::System::UnitTest::Helper' => {
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+
+my $CacheObject          = $Kernel::OM->Get('Kernel::System::Cache');
+my $ActivityObject       = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Activity');
+my $ActivityDialogObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::ActivityDialog');
+my $HelperObject         = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # set fixed time
-$Helper->FixedTimeSet();
+$HelperObject->FixedTimeSet();
 
 # define needed variables
-my $RandomID                = $Helper->GetRandomID();
+my $RandomID                = $HelperObject->GetRandomID();
 my $UserID                  = 1;
 my $ActivityDialogEntityID1 = 'AD1-' . $RandomID;
 my $ActivityDialogEntityID2 = 'AD2-' . $RandomID;
@@ -42,7 +40,17 @@ my $ActivityDialogName1     = 'ActivityDialog1';
 my $ActivityDialogName2     = 'ActivityDialog2';
 my $ActivityDialogName3     = 'ActivityDialog3';
 
+my $ProcessEntityID = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Entity')->EntityIDGenerate(
+    EntityType => 'Process',
+    UserID     => 1,
+);
+
 my $EntityID = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Entity')->EntityIDGenerate(
+    EntityType => 'Activity',
+    UserID     => 1,
+);
+
+my $ActivityEntityID = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Entity')->EntityIDGenerate(
     EntityType => 'Activity',
     UserID     => 1,
 );
@@ -237,6 +245,44 @@ my @Tests = (
                     2 => $ActivityDialogEntityID2,
                     3 => $ActivityDialogEntityID3,
                 },
+            },
+            UserID => $UserID,
+        },
+        Success => 1,
+    },
+    {
+        Name   => 'ActivityAdd Test 11: Scope Global',
+        Config => {
+            EntityID => "$ActivityEntityID-1",
+            Name     => "$ActivityEntityID-1",
+            Config   => {
+                Description    => 'a Description -äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ',
+                ActivityDialog => {
+                    1 => $ActivityDialogEntityID1,
+                    2 => $ActivityDialogEntityID2,
+                    3 => $ActivityDialogEntityID3,
+                },
+                Scope         => 'Global',
+                ScopeEntityID => undef,
+            },
+            UserID => $UserID,
+        },
+        Success => 1,
+    },
+    {
+        Name   => 'ActivityAdd Test 12: Scope Process',
+        Config => {
+            EntityID => "$ActivityEntityID-2",
+            Name     => "$ActivityEntityID-2",
+            Config   => {
+                Description    => 'a Description -äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ',
+                ActivityDialog => {
+                    1 => $ActivityDialogEntityID1,
+                    2 => $ActivityDialogEntityID2,
+                    3 => $ActivityDialogEntityID3,
+                },
+                Scope         => 'Process',
+                ScopeEntityID => $ProcessEntityID,
             },
             UserID => $UserID,
         },
@@ -498,6 +544,27 @@ my @AddedActivityList = map {$_} sort keys %AddedActivities;
         },
         Success => 1,
     },
+    {
+        Name   => 'ActivityGet Test 19: Scope Global',
+        Config => {
+            ID                  => undef,
+            EntityID            => "$ActivityEntityID-1",
+            ActivityDialogNames => 1,
+            UserID              => $UserID,
+        },
+        Success => 1,
+    },
+    {
+        Name   => 'ActivityGet Test 20: Scope Process',
+        Config => {
+            ID                  => undef,
+            EntityID            => "$ActivityEntityID-2",
+            ActivityDialogNames => 1,
+            UserID              => $UserID,
+            Scope               => 'Global',
+        },
+        Success => 1,
+    },
 );
 
 for my $Test (@Tests) {
@@ -744,6 +811,21 @@ for my $Test (@Tests) {
         Success  => 1,
         UpdateDB => 0,
     },
+    {
+        Name   => 'ActivityUpdate Test 11: Scope Global',
+        Config => {
+            ID       => $AddedActivityList[0],
+            EntityID => $RandomID . '-U',
+            Name     => "Activity-$RandomID -U",
+            Config   => {
+                Description => 'a Description-U',
+                Scope       => 'Global'
+            },
+            UserID => $UserID,
+        },
+        Success  => 1,
+        UpdateDB => 0,
+    },
 );
 
 for my $Test (@Tests) {
@@ -760,7 +842,7 @@ for my $Test (@Tests) {
         print "Force a gap between create and update activity, Waiting 2s\n";
 
         # wait 2 seconds
-        $Helper->FixedTimeAddSeconds(2);
+        $HelperObject->FixedTimeAddSeconds(2);
 
         my $Success = $ActivityObject->ActivityUpdate( %{ $Test->{Config} } );
 

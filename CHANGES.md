@@ -1,4 +1,5 @@
 # 6.3.1 2022-??-??
+ - 2022-02-21 Added scope flag to AdminProcessManagement to reduce possible overflow selection. Thanks to Michel Rodriguez [@mirod](https://github.com/mirod).
  - 2022-02-18 Added 'autolink' extraPlugin to CKEditor.
  - 2022-02-18 Added 'textwatcher', 'autocomplete' and 'textmatch' as extraPlugins to CKEditor global config.
  - 2022-02-17 Integrated package Znuny4OTRS-MailAccounts.

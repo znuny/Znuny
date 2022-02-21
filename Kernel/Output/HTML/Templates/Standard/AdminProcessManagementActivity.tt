@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -28,6 +28,7 @@
                 <input type="hidden" name="Subaction" value="Activity[% Data.Action | html %]Action"/>
                 <input type="hidden" name="EntityID" value="[% Data.EntityID | html %]"/>
                 <input type="hidden" name="ID" value="[% Data.ID | html %]"/>
+                <input type="hidden" ID="ProcessEntityID" name="ProcessEntityID" value="[% Data.ProcessEntityID | html %]"/>
                 <input type="hidden" name="ActivityDialogs" value=""/>
                 <input type="hidden" name="PopupRedirect" value="" id="PopupRedirect"/>
                 <input type="hidden" name="PopupRedirectAction" value="" id="PopupRedirectAction"/>
@@ -56,8 +57,23 @@
                                 <div id="NameError" class="TooltipErrorMessage">
                                     <p>[% Translate("This field is required.") | html %]</p>
                                 </div>
-                                <div id="NameServerError" class="TooltipErrorMessage">
+                            </div>
+                            <div class="Clear"></div>
+
+                            <label for="Scope">[% Translate("Scope") | html %]:</label>
+                            <div class="Field">
+                                [% Data.ScopeSelection %]
+                                <div id="ScopeError" class="TooltipErrorMessage">
                                     <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                            </div>
+                            <div class="Clear"></div>
+
+                            <label class="Mandatory" for="ScopeEntityID"><span class="Marker">*</span> [% Translate("Scope EntityID") | html %]:</label>
+                            <div class="Field">
+                                [% Data.ScopeEntityIDSelection %]
+                                <div id="ScopeEntityIDError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required for activities with a scope.") | html %]</p>
                                 </div>
                             </div>
                             <div class="Clear"></div>
@@ -80,7 +96,9 @@
                             </p>
                         </div>
                         <div class="Size1of2">
-                            <input type="text" id="FilterAvailableActivityDialogs" class="W75pc" name="FilterAvailableActivityDialogs" value="" title="[% Translate("Filter available Activity Dialogs") | html %]" placeholder="[% Translate("Filter available Activity Dialogs") | html %]..." />
+                           <a name="ProcessID" id="ProcessID" data-processid="[% Data.ProcessID %]"></a>
+                            <input type="text" id="FilterAvailableActivityDialogs" class="FilterAvailableProcessItem" name="FilterAvailableActivityDialogs" value="" title="[% Translate("Filter available Activity Dialogs") | html %]" placeholder="[% Translate("Filter available Activity Dialogs") | html %]..." />
+                            <input type="checkbox" checked id="ActivityDialogScopeFilter" class="ScopeFilter" data-scope-filter="ActivityDialog" name="ActivityDialogScopeFilter"><i class="fa fa-globe" title="[% Translate('Show global %s', Translate('Activity Dialogs')) | html %]"></i>
                             <ul class="Tablelike W90pc SpacingTop">
                                 <li class="Header">
                                     [% Translate("Available Activity Dialogs") | html %]
@@ -88,7 +106,7 @@
                             </ul>
                             <ul class="AllocationList Tablelike W90pc" id="AvailableActivityDialogs">
 [% RenderBlockStart("AvailableActivityDialogRow") %]
-                                <li data-id="[% Data.ID | html %]" title="[% Translate("Name: %s, EntityID: %s", Data.Name, Data.EntityID) | html %]">
+                                <li data-id="[% Data.ID | html %]" title="[% Translate('Name: %s, EntityID: %s', Data.Name, Data.EntityID) | html %]" data-entity-type="ActivityDialog" data-scope="[% Data.Scope %]" data-scope-entity-id="[% Data.ScopeEntityID %]">
                                     [% Data.Name | html %]
                                     <span class="Functions">
                                         <span class="AvailableIn">[% Translate(Data.AvailableIn) | html %]</span>
@@ -102,7 +120,7 @@
                             <div class="SpacingTop">
 #                                <button>[% Translate("Create New Activity Dialog") | html %]</button>
 <!-- TODO Re-implemented as link, but it can be a button if needed (button is disabled by leading #)  -->
-                                <a href="#" data-entity="" data-id="" data-action="AdminProcessManagementActivityDialog" data-subaction="ActivityDialogNew" class="CallForAction AsPopup_Redirect" ><span>[% Translate("Create New Activity Dialog") | html %]</span></a>
+                                <a href="#" data-entity="" data-id="" data-processid="[% Data.ProcessID %]" data-action="AdminProcessManagementActivityDialog" data-subaction="ActivityDialogNew" class="CallForAction AsPopup_Redirect" ><span>[% Translate("Create New Activity Dialog") | html %]</span></a>
 
 
                             </div>

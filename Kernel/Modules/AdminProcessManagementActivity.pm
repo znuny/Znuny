@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -22,7 +22,6 @@ our $ObjectManagerDisabled = 1;
 sub new {
     my ( $Type, %Param ) = @_;
 
-    # allocate new hash for object
     my $Self = {%Param};
     bless( $Self, $Type );
 
@@ -82,7 +81,7 @@ sub Run {
 
         # set new configuration
         $ActivityData->{Name}   = $GetParam->{Name};
-        $ActivityData->{Config} = {};
+        $ActivityData->{Config} = $GetParam->{Config};
 
         # set the rest of the config
         if ( IsArrayRefWithData( $GetParam->{ActivityDialogs} ) ) {
@@ -128,6 +127,20 @@ sub Run {
             # add server error error class
             $Error{NameServerError}        = 'ServerError';
             $Error{NameServerErrorMessage} = Translatable('This field is required');
+        }
+
+        if ( !$GetParam->{Config}->{Scope} ) {
+
+            # add server error error class
+            $Error{ScopeError}        = 'ServerError';
+            $Error{ScopeErrorMessage} = Translatable('This field is required');
+        }
+
+        if ( $GetParam->{Config}->{Scope} eq 'Process' && !$GetParam->{Config}->{ScopeEntityID} ) {
+
+            # add server error error class
+            $Error{ScopeEntityIDError}        = 'ServerError';
+            $Error{ScopeEntityIDErrorMessage} = Translatable('This field is required');
         }
 
         # if there is an error return to edit screen
@@ -302,7 +315,7 @@ sub Run {
         # set new configuration
         $ActivityData->{Name}     = $GetParam->{Name};
         $ActivityData->{EntityID} = $GetParam->{EntityID};
-        $ActivityData->{Config}   = {};
+        $ActivityData->{Config}   = $GetParam->{Config};
 
         # set the rest of the config
         if ( IsArrayRefWithData( $GetParam->{ActivityDialogs} ) ) {
@@ -658,6 +671,8 @@ sub _GetActivityConfig {
 sub _ShowEdit {
     my ( $Self, %Param ) = @_;
 
+    my $GetParam = $Self->_GetParams();
+
     # get Activity information
     my $ActivityData = $Param{ActivityData} || {};
 
@@ -749,10 +764,12 @@ sub _ShowEdit {
             $LayoutObject->Block(
                 Name => 'AvailableActivityDialogRow',
                 Data => {
-                    ID          => $ActivityDialogData->{ID},
-                    EntityID    => $ActivityDialogData->{EntityID},
-                    Name        => $ActivityDialogData->{Name},
-                    AvailableIn => $AvailableIn,
+                    ID            => $ActivityDialogData->{ID},
+                    EntityID      => $ActivityDialogData->{EntityID},
+                    Name          => $ActivityDialogData->{Name},
+                    Scope         => $ActivityDialogData->{Config}->{Scope} || 'Global',
+                    ScopeEntityID => $ActivityDialogData->{Config}->{ScopeEntityID},
+                    AvailableIn   => $AvailableIn,
                 },
             );
         }
@@ -784,10 +801,12 @@ sub _ShowEdit {
             $LayoutObject->Block(
                 Name => 'AssignedActivityDialogRow',
                 Data => {
-                    ID          => $ActivityDialogData->{ID},
-                    EntityID    => $ActivityDialogData->{EntityID},
-                    Name        => $ActivityDialogData->{Name},
-                    AvailableIn => $AvailableIn,
+                    ID            => $ActivityDialogData->{ID},
+                    EntityID      => $ActivityDialogData->{EntityID},
+                    Name          => $ActivityDialogData->{Name},
+                    Scope         => $ActivityDialogData->{Config}->{Scope} || 'Global',
+                    ScopeEntityID => $ActivityDialogData->{Config}->{ScopeEntityID},
+                    AvailableIn   => $AvailableIn,
                 },
             );
         }
@@ -852,15 +871,46 @@ sub _ShowEdit {
         $Param{Title} = Translatable('Create New Activity');
     }
 
+    $Param{ScopeSelection} = $LayoutObject->BuildSelection(
+        Data => {
+            Global  => 'Global',
+            Process => 'Current Process',
+        },
+        Name           => 'Scope',
+        ID             => 'Scope',
+        SelectedID     => $ActivityData->{Config}->{Scope} || 'Global',
+        Sort           => 'IndividualKey',
+        SortIndividual => [ 'Global', 'Process' ],
+        Translation    => 1,
+        Class          => 'Modernize W50pc ',
+    );
+
+    my $ProcessList = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process')->ProcessList(
+        UserID      => 1,
+        UseEntities => 1,
+    );
+
+    $Param{ScopeEntityIDSelection} = $LayoutObject->BuildSelection(
+        Data        => $ProcessList,
+        Name        => 'ScopeEntityID',
+        ID          => 'ScopeEntityID',
+        SelectedID  => $ActivityData->{Config}->{ScopeEntityID},
+        Sort        => 'AlphanumericKey',
+        Translation => 1,
+        Class       => 'Modernize W50pc ',
+    );
+
     my $Output = $LayoutObject->Header(
         Value => $Param{Title},
         Type  => 'Small',
     );
+
     $Output .= $LayoutObject->Output(
         TemplateFile => "AdminProcessManagementActivity",
         Data         => {
             %Param,
             %{$ActivityData},
+            ProcessEntityID => $GetParam->{ProcessEntityID},
         },
     );
 
@@ -877,7 +927,7 @@ sub _GetParams {
 
     # get parameters from web browser
     for my $ParamName (
-        qw( Name EntityID )
+        qw( Name EntityID ProcessEntityID)
         )
     {
         $GetParam->{$ParamName} = $ParamObject->GetParam( Param => $ParamName ) || '';
@@ -894,6 +944,13 @@ sub _GetParams {
         $GetParam->{ActivityDialogs} = '';
     }
 
+    for my $ParamName (qw( Scope ScopeEntityID )) {
+        $GetParam->{Config}->{$ParamName} = $ParamObject->GetParam( Param => $ParamName ) || '';
+    }
+    $GetParam->{Config}->{Scope} //= 'Global';
+    if ( $GetParam->{Config}->{Scope} eq 'Global' ) {
+        delete $GetParam->{Config}->{ScopeEntityID};
+    }
     return $GetParam;
 }
 

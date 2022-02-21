@@ -9101,6 +9101,16 @@ Ihr Helpdesk-Team
         'responsible' => 'Verantwortlicher',
         'reverse' => 'umgekehrt',
         'stats' => 'stats',
+
+        'Current Process' => 'aktueller Prozess',
+        'Scope'           => 'Geltungsbereich',
+        'Scope EntityID'  => 'Geltungsbereich EntitätsID',
+        'Show global %s'  => 'globale %s anzeigen',
+
+        'This field is required for activities with a scope.' => 'Dieses Feld ist für Aktivitäten mit einem Geltungsbereich erforderlich.',
+        'This field is required for activitiy dialogs with a scope.' => 'Dieses Feld ist für Aktivitäts-Dialoge mit einem Geltungsbereich erforderlich.',
+        'This field is required for transitions with a scope.' => 'Dieses Feld ist für Übergänge mit einem Geltungsbereich erforderlich.',
+        'This field is required for transition actions with a scope.' => 'Dieses Feld ist für Übergangsaktionen mit einem Geltungsbereich erforderlich.',
         'all tickets'         => 'alle Tickets',
         'archived tickets'    => 'archivierte Tickets',
         'not archived tickets' => 'nicht archivierte Tickets',

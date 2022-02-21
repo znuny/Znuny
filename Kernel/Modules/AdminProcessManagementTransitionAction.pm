@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -77,9 +77,8 @@ sub Run {
         my $GetParam = $Self->_GetParams();
 
         # set new configuration
-        $TransitionActionData->{Name}             = $GetParam->{Name};
-        $TransitionActionData->{Config}->{Module} = $GetParam->{Module};
-        $TransitionActionData->{Config}->{Config} = $GetParam->{Config};
+        $TransitionActionData->{Name}   = $GetParam->{Name};
+        $TransitionActionData->{Config} = $GetParam->{Config};
 
         # check required parameters
         my %Error;
@@ -97,10 +96,24 @@ sub Run {
             $Error{ModuleServerErrorMessage} = Translatable('This field is required');
         }
 
-        if ( !$GetParam->{Config} ) {
+        if ( !$GetParam->{Config}->{Config} ) {
             return $LayoutObject->ErrorScreen(
                 Message => Translatable('At least one valid config parameter is required.'),
             );
+        }
+
+        if ( !$GetParam->{Config}->{Scope} ) {
+
+            # add server error error class
+            $Error{NameServerError}        = 'ServerError';
+            $Error{NameServerErrorMessage} = Translatable('This field is required');
+        }
+
+        if ( $GetParam->{Config}->{Scope} eq 'Process' && !$GetParam->{Config}->{ScopeEntityID} ) {
+
+            # add server error error class
+            $Error{NameServerError}        = 'ServerError';
+            $Error{NameServerErrorMessage} = Translatable('This field is required');
         }
 
         # if there is an error return to edit screen
@@ -129,7 +142,6 @@ sub Run {
         # otherwise save configuration and return process screen
         my $TransitionActionID = $TransitionActionObject->TransitionActionAdd(
             Name     => $TransitionActionData->{Name},
-            Module   => $TransitionActionData->{Module},
             EntityID => $EntityID,
             Config   => $TransitionActionData->{Config},
             UserID   => $Self->{UserID},
@@ -276,10 +288,9 @@ sub Run {
         my $GetParam = $Self->_GetParams();
 
         # set new configuration
-        $TransitionActionData->{Name}             = $GetParam->{Name};
-        $TransitionActionData->{EntityID}         = $GetParam->{EntityID};
-        $TransitionActionData->{Config}->{Module} = $GetParam->{Module};
-        $TransitionActionData->{Config}->{Config} = $GetParam->{Config};
+        $TransitionActionData->{Name}     = $GetParam->{Name};
+        $TransitionActionData->{EntityID} = $GetParam->{EntityID};
+        $TransitionActionData->{Config}   = $GetParam->{Config};
 
         # check required parameters
         my %Error;
@@ -290,17 +301,31 @@ sub Run {
             $Error{NameServerErrorMessage} = Translatable('This field is required');
         }
 
-        if ( !$GetParam->{Module} ) {
+        if ( !$GetParam->{Config}->{Module} ) {
 
             # add server error error class
             $Error{ModuleServerError}        = 'ServerError';
             $Error{ModuleServerErrorMessage} = Translatable('This field is required');
         }
 
-        if ( !$GetParam->{Config} ) {
+        if ( !$GetParam->{Config}->{Config} ) {
             return $LayoutObject->ErrorScreen(
                 Message => Translatable('At least one valid config parameter is required.'),
             );
+        }
+
+        if ( !$GetParam->{Config}->{Scope} ) {
+
+            # add server error error class
+            $Error{NameServerError}        = 'ServerError';
+            $Error{NameServerErrorMessage} = Translatable('This field is required');
+        }
+
+        if ( $GetParam->{Config}->{Scope} eq 'Process' && !$GetParam->{Config}->{ScopeEntityID} ) {
+
+            # add server error error class
+            $Error{NameServerError}        = 'ServerError';
+            $Error{NameServerErrorMessage} = Translatable('This field is required');
         }
 
         # if there is an error return to edit screen
@@ -318,7 +343,6 @@ sub Run {
             ID       => $TransitionActionID,
             EntityID => $TransitionActionData->{EntityID},
             Name     => $TransitionActionData->{Name},
-            Module   => $TransitionActionData->{Module},
             Config   => $TransitionActionData->{Config},
             UserID   => $Self->{UserID},
         );
@@ -584,6 +608,35 @@ sub _ShowEdit {
         Class        => 'Modernize Validate_Required ' . ( $Param{Errors}->{'ModuleInvalid'} || '' ),
     );
 
+    $Param{ScopeSelection} = $LayoutObject->BuildSelection(
+        Data => {
+            Global  => 'Global',
+            Process => 'Current Process',
+        },
+        Name           => 'Scope',
+        ID             => 'Scope',
+        SelectedID     => $TransitionActionData->{Config}->{Scope} || 'Global',
+        Sort           => 'IndividualKey',
+        SortIndividual => [ 'Global', 'Process' ],
+        Translation    => 1,
+        Class          => 'Modernize W50pc ',
+    );
+
+    my $ProcessList = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process')->ProcessList(
+        UserID      => 1,
+        UseEntities => 1,
+    );
+
+    $Param{ScopeEntityIDSelection} = $LayoutObject->BuildSelection(
+        Data        => $ProcessList,
+        Name        => 'ScopeEntityID',
+        ID          => 'ScopeEntityID',
+        SelectedID  => $TransitionActionData->{Config}->{ScopeEntityID},
+        Sort        => 'AlphanumericKey',
+        Translation => 1,
+        Class       => 'Modernize W50pc ',
+    );
+
     $Output .= $LayoutObject->Output(
         TemplateFile => "AdminProcessManagementTransitionAction",
         Data         => {
@@ -605,11 +658,16 @@ sub _GetParams {
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
     # get parameters from web browser
-    for my $ParamName (
-        qw( Name Module EntityID )
-        )
-    {
+    for my $ParamName (qw(Name EntityID)) {
         $GetParam->{$ParamName} = $ParamObject->GetParam( Param => $ParamName ) || '';
+    }
+
+    for my $ParamName (qw(Module Scope ScopeEntityID)) {
+        $GetParam->{Config}->{$ParamName} = $ParamObject->GetParam( Param => $ParamName ) || '';
+    }
+    $GetParam->{Config}->{Scope} //= 'Global';
+    if ( $GetParam->{Config}->{Scope} eq 'Global' ) {
+        delete $GetParam->{Config}->{ScopeEntityID};
     }
 
     # get config params
@@ -639,7 +697,7 @@ sub _GetParams {
     for my $Key (@ConfigParamKeys) {
         $KeyValue   = $ParamObject->GetParam( Param => "ConfigKey[$Key]" );
         $ValueValue = $ParamObject->GetParam( Param => "ConfigValue[$Key]" );
-        $GetParam->{Config}->{$KeyValue} = $ValueValue;
+        $GetParam->{Config}->{Config}->{$KeyValue} = $ValueValue;
     }
 
     return $GetParam;

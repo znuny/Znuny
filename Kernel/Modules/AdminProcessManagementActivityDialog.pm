@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -125,23 +125,17 @@ sub Run {
         # get parameter from web browser
         my $GetParam = $Self->_GetParams();
 
-        # set new confguration
-        $ActivityDialogData->{Name}                       = $GetParam->{Name};
-        $ActivityDialogData->{EntityID}                   = $GetParam->{EntityID};
-        $ActivityDialogData->{Config}->{Interface}        = $GetParam->{Interface};
-        $ActivityDialogData->{Config}->{DescriptionShort} = $GetParam->{DescriptionShort};
-        $ActivityDialogData->{Config}->{DescriptionLong}  = $GetParam->{DescriptionLong};
-        $ActivityDialogData->{Config}->{Permission}       = $GetParam->{Permission};
-        $ActivityDialogData->{Config}->{RequiredLock}     = $GetParam->{RequiredLock} || 0;
-        $ActivityDialogData->{Config}->{SubmitAdviceText} = $GetParam->{SubmitAdviceText};
-        $ActivityDialogData->{Config}->{SubmitButtonText} = $GetParam->{SubmitButtonText};
-        $ActivityDialogData->{Config}->{Fields}           = {};
-        $ActivityDialogData->{Config}->{FieldOrder}       = [];
+        # set new configuration
+        $ActivityDialogData->{Name}                 = $GetParam->{Name};
+        $ActivityDialogData->{EntityID}             = $GetParam->{EntityID};
+        $ActivityDialogData->{Config}               = $GetParam->{Config};
+        $ActivityDialogData->{Config}->{Fields}     = {};
+        $ActivityDialogData->{Config}->{FieldOrder} = [];
 
-        if ( IsArrayRefWithData( $GetParam->{Fields} ) ) {
+        if ( IsArrayRefWithData( $GetParam->{Config}->{Fields} ) ) {
 
             FIELD:
-            for my $FieldName ( @{ $GetParam->{Fields} } ) {
+            for my $FieldName ( @{ $GetParam->{Config}->{Fields} } ) {
                 next FIELD if !$FieldName;
                 next FIELD if !$AvailableFieldsList->{$FieldName};
 
@@ -154,13 +148,14 @@ sub Run {
         }
 
         # add field detail config to fields
-        if ( IsHashRefWithData( $GetParam->{FieldDetails} ) ) {
+        if ( IsHashRefWithData( $GetParam->{Config}->{FieldDetails} ) ) {
             FIELDDETAIL:
-            for my $FieldDetail ( sort keys %{ $GetParam->{FieldDetails} } ) {
+            for my $FieldDetail ( sort keys %{ $GetParam->{Config}->{FieldDetails} } ) {
                 next FIELDDETAIL if !$FieldDetail;
                 next FIELDDETAIL if !$ActivityDialogData->{Config}->{Fields}->{$FieldDetail};
 
-                $ActivityDialogData->{Config}->{Fields}->{$FieldDetail} = $GetParam->{FieldDetails}->{$FieldDetail};
+                $ActivityDialogData->{Config}->{Fields}->{$FieldDetail}
+                    = $GetParam->{Config}->{FieldDetails}->{$FieldDetail};
             }
         }
 
@@ -185,7 +180,7 @@ sub Run {
             $Error{NameServerErrorMessage} = Translatable('This field is required');
         }
 
-        if ( !$GetParam->{DescriptionShort} ) {
+        if ( !$GetParam->{Config}->{DescriptionShort} ) {
 
             # add server error error class
             $Error{DescriptionShortServerError} = 'ServerError';
@@ -193,12 +188,12 @@ sub Run {
         }
 
         # check if permission exists
-        if ( defined $GetParam->{Permission} && $GetParam->{Permission} ne '' ) {
+        if ( defined $GetParam->{Config}->{Permission} && $GetParam->{Config}->{Permission} ne '' ) {
             my $PermissionList = $ConfigObject->Get('System::Permission');
 
             my %PermissionLookup = map { $_ => 1 } @{$PermissionList};
 
-            if ( !$PermissionLookup{ $GetParam->{Permission} } )
+            if ( !$PermissionLookup{ $GetParam->{Config}->{Permission} } )
             {
 
                 # add server error error class
@@ -207,10 +202,24 @@ sub Run {
         }
 
         # check if required lock exists
-        if ( $GetParam->{RequiredLock} && $GetParam->{RequiredLock} ne 1 ) {
+        if ( $GetParam->{Config}->{RequiredLock} && $GetParam->{Config}->{RequiredLock} ne 1 ) {
 
             # add server error error class
             $Error{RequiredLockServerError} = 'ServerError';
+        }
+
+        if ( !$GetParam->{Config}->{Scope} ) {
+
+            # add server error error class
+            $Error{NameServerError}        = 'ServerError';
+            $Error{NameServerErrorMessage} = Translatable('This field is required');
+        }
+
+        if ( $GetParam->{Config}->{Scope} eq 'Process' && !$GetParam->{Config}->{ScopeEntityID} ) {
+
+            # add server error error class
+            $Error{NameServerError}        = 'ServerError';
+            $Error{NameServerErrorMessage} = Translatable('This field is required');
         }
 
         # if there is an error return to edit screen
@@ -380,23 +389,17 @@ sub Run {
         # get parameter from web browser
         my $GetParam = $Self->_GetParams();
 
-        # set new confguration
-        $ActivityDialogData->{Name}                       = $GetParam->{Name};
-        $ActivityDialogData->{EntityID}                   = $GetParam->{EntityID};
-        $ActivityDialogData->{Config}->{Interface}        = $GetParam->{Interface};
-        $ActivityDialogData->{Config}->{DescriptionShort} = $GetParam->{DescriptionShort};
-        $ActivityDialogData->{Config}->{DescriptionLong}  = $GetParam->{DescriptionLong};
-        $ActivityDialogData->{Config}->{Permission}       = $GetParam->{Permission};
-        $ActivityDialogData->{Config}->{RequiredLock}     = $GetParam->{RequiredLock} || 0;
-        $ActivityDialogData->{Config}->{SubmitAdviceText} = $GetParam->{SubmitAdviceText};
-        $ActivityDialogData->{Config}->{SubmitButtonText} = $GetParam->{SubmitButtonText};
-        $ActivityDialogData->{Config}->{Fields}           = {};
-        $ActivityDialogData->{Config}->{FieldOrder}       = [];
+        # set new configuration
+        $ActivityDialogData->{Name}                 = $GetParam->{Name};
+        $ActivityDialogData->{EntityID}             = $GetParam->{EntityID};
+        $ActivityDialogData->{Config}               = $GetParam->{Config};
+        $ActivityDialogData->{Config}->{Fields}     = {};
+        $ActivityDialogData->{Config}->{FieldOrder} = [];
 
-        if ( IsArrayRefWithData( $GetParam->{Fields} ) ) {
+        if ( IsArrayRefWithData( $GetParam->{Config}->{Fields} ) ) {
 
             FIELD:
-            for my $FieldName ( @{ $GetParam->{Fields} } ) {
+            for my $FieldName ( @{ $GetParam->{Config}->{Fields} } ) {
                 next FIELD if !$FieldName;
                 next FIELD if !$AvailableFieldsList->{$FieldName};
 
@@ -409,13 +412,14 @@ sub Run {
         }
 
         # add field detail config to fields
-        if ( IsHashRefWithData( $GetParam->{FieldDetails} ) ) {
+        if ( IsHashRefWithData( $GetParam->{Config}->{FieldDetails} ) ) {
             FIELDDETAIL:
-            for my $FieldDetail ( sort keys %{ $GetParam->{FieldDetails} } ) {
+            for my $FieldDetail ( sort keys %{ $GetParam->{Config}->{FieldDetails} } ) {
                 next FIELDDETAIL if !$FieldDetail;
                 next FIELDDETAIL if !$ActivityDialogData->{Config}->{Fields}->{$FieldDetail};
 
-                $ActivityDialogData->{Config}->{Fields}->{$FieldDetail} = $GetParam->{FieldDetails}->{$FieldDetail};
+                $ActivityDialogData->{Config}->{Fields}->{$FieldDetail}
+                    = $GetParam->{Config}->{FieldDetails}->{$FieldDetail};
             }
         }
 
@@ -448,7 +452,7 @@ sub Run {
             $Error{NameServerErrorMessage} = Translatable('This field is required');
         }
 
-        if ( !$GetParam->{DescriptionShort} ) {
+        if ( !$GetParam->{Config}->{DescriptionShort} ) {
 
             # add server error error class
             $Error{DescriptionShortServerError} = 'ServerError';
@@ -456,13 +460,13 @@ sub Run {
         }
 
         # check if permission exists
-        if ( defined $GetParam->{Permission} && $GetParam->{Permission} ne '' ) {
+        if ( defined $GetParam->{Config}->{Permission} && $GetParam->{Config}->{Permission} ne '' ) {
 
             my $PermissionList = $ConfigObject->Get('System::Permission');
 
             my %PermissionLookup = map { $_ => 1 } @{$PermissionList};
 
-            if ( !$PermissionLookup{ $GetParam->{Permission} } )
+            if ( !$PermissionLookup{ $GetParam->{Config}->{Permission} } )
             {
 
                 # add server error error class
@@ -471,7 +475,7 @@ sub Run {
         }
 
         # check if required lock exists
-        if ( $GetParam->{RequiredLock} && $GetParam->{RequiredLock} ne 1 ) {
+        if ( $GetParam->{Config}->{RequiredLock} && $GetParam->{Config}->{RequiredLock} ne 1 ) {
 
             # add server error error class
             $Error{RequiredLockServerError} = 'ServerError';
@@ -934,6 +938,35 @@ sub _ShowEdit {
     $Param{SubmitAdviceText} = $Param{ActivityDialogData}->{Config}->{SubmitAdviceText};
     $Param{SubmitButtonText} = $Param{ActivityDialogData}->{Config}->{SubmitButtonText};
 
+    $Param{ScopeSelection} = $LayoutObject->BuildSelection(
+        Data => {
+            Global  => 'Global',
+            Process => 'Current Process',
+        },
+        Name           => 'Scope',
+        ID             => 'Scope',
+        SelectedID     => $Param{ActivityDialogData}->{Config}->{Scope} || 'Global',
+        Sort           => 'IndividualKey',
+        SortIndividual => [ 'Global', 'Process' ],
+        Translation    => 1,
+        Class          => 'Modernize W50pc ',
+    );
+
+    my $ProcessList = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process')->ProcessList(
+        UserID      => 1,
+        UseEntities => 1,
+    );
+
+    $Param{ScopeEntityIDSelection} = $LayoutObject->BuildSelection(
+        Data        => $ProcessList,
+        Name        => 'ScopeEntityID',
+        ID          => 'ScopeEntityID',
+        SelectedID  => $Param{ActivityDialogData}->{Config}->{ScopeEntityID},
+        Sort        => 'AlphanumericKey',
+        Translation => 1,
+        Class       => 'Modernize W50pc ',
+    );
+
     my $Output = $LayoutObject->Header(
         Value => $Param{Title},
         Type  => 'Small',
@@ -958,12 +991,20 @@ sub _GetParams {
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
     # get parameters from web browser
+    for my $ParamName (qw( Name EntityID)) {
+        $GetParam->{$ParamName} = $ParamObject->GetParam( Param => $ParamName ) || '';
+    }
+
     for my $ParamName (
-        qw( Name EntityID Interface DescriptionShort DescriptionLong Permission RequiredLock SubmitAdviceText
+        qw( Interface DescriptionShort DescriptionLong Permission RequiredLock Scope ScopeEntityID SubmitAdviceText
         SubmitButtonText )
         )
     {
-        $GetParam->{$ParamName} = $ParamObject->GetParam( Param => $ParamName ) || '';
+        $GetParam->{Config}->{$ParamName} = $ParamObject->GetParam( Param => $ParamName ) || '';
+    }
+    $GetParam->{Config}->{Scope} //= 'Global';
+    if ( $GetParam->{Config}->{Scope} eq 'Global' ) {
+        delete $GetParam->{Config}->{ScopeEntityID};
     }
 
     my $Fields     = $ParamObject->GetParam( Param => 'Fields' ) || '';

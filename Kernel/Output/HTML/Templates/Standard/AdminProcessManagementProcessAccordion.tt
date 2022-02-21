@@ -1,24 +1,24 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-
 <ul id="ProcessElements">
     <li class="AccordionElement Active">
         <h2><a href="#" class="AsBlock"><span><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></span>[% Translate("Activities") | html %]</a></h2>
         <div class="Content">
-            <input type="text" id="ActivityFilter" class="ProcessElementFilter W75pc" placeholder="[% Translate("Filter Activities...") | html %]" />
+            <input type="text" id="ActivityFilter" class="ProcessElementFilter WithScope" placeholder="[% Translate("Filter Activities...") | html %]" />
+            <input type="checkbox" checked id="ActivityScopeFilter" class="ScopeFilter" title="[% Translate('Show global %s', Translate('Activities')) | html %]" data-scope-filter="Activity" name="ActivityScopeFilter"><i class="fa fa-globe" title="[% Translate('Show global %s', Translate('Activities')) | html %]"></i>
             <ul class="Tablelike" id="Activities">
 [% RenderBlockStart("ActivityRow") %]
-                <li class="OneRow" data-entity="[% Data.EntityID | html %]" data-id="[% Data.ID | html %]">
+                <li class="OneRow" data-entity="[% Data.EntityID | html %]" data-id="[% Data.ID | html %]" data-entity-type="Activity" data-scope="[% Data.Config.Scope %]" data-scope-entity-id="[% Data.Config.ScopeEntityID %]">
                     <div class="AsBlock W80pc" title="[% Data.Name | html %] ([% Data.EntityID | html %])">[% Data.Name | html %]</div>
                     <span>
                         <a href="#" title="[% Translate("Delete") | html %]" class="DeleteEntity DeleteActivity"><i class="fa fa-trash-o"></i></a>
-                        <a href="[% Env("Baselink") %]Action=AdminProcessManagementActivity;Subaction=ActivityEdit;ID=[% Data.ID | uri %];EntityID=[% Data.EntityID | uri %]" title="[% Translate("Edit") | html %]" class="AsPopup PopupType_Activity"><i class="fa fa-edit"></i></a>
+                        <a href="[% Env("Baselink") %]Action=AdminProcessManagementActivity;Subaction=ActivityEdit;ID=[% Data.ID %];EntityID=[% Data.EntityID | uri %];ProcessEntityID=[% Data.ProcessEntityID %]" title="[% Translate("Edit") | html %]" class="AsPopup PopupType_Activity"><i class="fa fa-edit"></i></a>
                     </span>
                 </li>
 [% RenderBlockEnd("ActivityRow") %]
@@ -28,20 +28,21 @@
                 </li>
 [% RenderBlockEnd("ActivityNoDataRow") %]
             </ul>
-            <a href="[% Env("Baselink") %]Action=AdminProcessManagementActivity;Subaction=ActivityNew;" class="CallForAction AsPopup PopupType_Activity Fullsize Center ProcessElementButton"><span><i class="fa fa-plus-square"></i>[% Translate("Create New Activity") | html %]</span></a>
+            <a href="[% Env("Baselink") %]Action=AdminProcessManagementActivity;Subaction=ActivityNew;ProcessEntityID=[% Data.ProcessEntityID %];" class="CallForAction AsPopup PopupType_Activity Fullsize Center ProcessElementButton"><span><i class="fa fa-plus-square"></i>[% Translate("Create New Activity") | html %]</span></a>
         </div>
     </li>
     <li class="AccordionElement">
         <h2><a href="#" class="AsBlock"><span><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></span>[% Translate("Activity Dialogs") | html %]</a></h2>
         <div class="Content">
-            <input type="text" id="ActivityDialogFilter" class="ProcessElementFilter W75pc" placeholder="[% Translate("Filter Activity Dialogs...") | html %]" />
+            <input type="text" id="ActivityDialogFilter" class="ProcessElementFilter WithScope" placeholder="[% Translate("Filter Activity Dialogs...") | html %]" />
+            <input type="checkbox" checked id="ActivityDialogScopeFilter" class="ScopeFilter" data-scope-filter="ActivityDialog" title="[% Translate('Show global %s', Translate('Activity Dialogs')) | html %]" name="ActivityDialogScopeFilter"><i class="fa fa-globe" title="[% Translate('Show global %s', Translate('Activity Dialogs')) | html %]"></i>
             <ul class="Tablelike" id="ActivityDialogs">
 [% RenderBlockStart("ActivityDialogRow") %]
-                <li class="OneRow" data-entity="[% Data.EntityID | html %]" data-id="[% Data.ID | html %]">
+                <li class="OneRow" data-entity="[% Data.EntityID | html %]" data-id="[% Data.ID | html %]" data-entity-type="ActivityDialog" data-scope="[% Data.Config.Scope %]" data-scope-entity-id="[% Data.Config.ScopeEntityID %]">
                     <div class="AsBlock W80pc" title="[% Data.Name | html %] ([% Data.EntityID | html %])">[% Data.Name | html %]</div>
                     <span>
                         <a href="#" title="[% Translate("Delete") | html %]" class="DeleteEntity DeleteActivityDialog"><i class="fa fa-trash-o"></i></a>
-                        <a href="[% Env("Baselink") %]Action=AdminProcessManagementActivityDialog;Subaction=ActivityDialogEdit;ID=[% Data.ID | uri %];EntityID=[% Data.EntityID | uri %]" title="[% Translate("Edit") | html %]" class="AsPopup PopupType_ActivityDialog"><i class="fa fa-edit"></i></a>
+                        <a href="[% Env("Baselink") %]Action=AdminProcessManagementActivityDialog;Subaction=ActivityDialogEdit;ID=[% Data.ID %];EntityID=[% Data.EntityID | uri %];" title="[% Translate("Edit") | html %]" class="AsPopup PopupType_ActivityDialog"><i class="fa fa-edit"></i></a>
                         <span class="AvailableIn">[% Translate(Data.AvailableIn) | html %]</span>
                     </span>
                 </li>
@@ -52,20 +53,22 @@
                 </li>
 [% RenderBlockEnd("ActivityDialogNoDataRow") %]
             </ul>
-            <a href="[% Env("Baselink") %]Action=AdminProcessManagementActivityDialog;Subaction=ActivityDialogNew;" class="CallForAction AsPopup PopupType_ActivityDialog Fullsize Center ProcessElementButton"><span><i class="fa fa-plus-square"></i>[% Translate("Create New Activity Dialog") | html %]</span></a>
+            <a href="[% Env("Baselink") %]Action=AdminProcessManagementActivityDialog;Subaction=ActivityDialogNew;ProcessEntityID=[% Data.ProcessEntityID %];" class="CallForAction AsPopup PopupType_ActivityDialog Fullsize Center ProcessElementButton"><span><i class="fa fa-plus-square"></i>[% Translate("Create New Activity Dialog") | html %]</span></a>
         </div>
     </li>
     <li class="AccordionElement">
         <h2><a href="#" class="AsBlock"><span><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></span>[% Translate("Transitions") | html %]</a></h2>
         <div class="Content">
-            <input type="text" id="TransitionFilter" class="ProcessElementFilter W75pc" placeholder="[% Translate("Filter Transitions...") | html %]" />
+            <input type="text" id="TransitionFilter" class="ProcessElementFilter WithScope" placeholder="[% Translate("Filter Transitions...") | html %]" />
+            <input type="checkbox" checked id="TransitionScopeFilter" class="ScopeFilter" data-scope-filter="Transition" title="[% Translate('Show global %s', Translate('Transitions')) | html %]"><i class="fa fa-globe" title="[% Translate('Show global %s', Translate('Transitions')) | html %]"></i>
             <ul class="Tablelike" id="Transitions">
+
 [% RenderBlockStart("TransitionRow") %]
-                <li class="OneRow" data-entity="[% Data.EntityID | html %]" data-id="[% Data.ID | html %]">
+                <li class="OneRow" data-entity="[% Data.EntityID | html %]" data-id="[% Data.ID | html %]" data-entity-type="Transition" data-scope="[% Data.Config.Scope %]" data-scope-entity-id="[% Data.Config.ScopeEntityID %]">
                     <div class="AsBlock W80pc" title="[% Data.Name | html %] ([% Data.EntityID | html %])">[% Data.Name | html %]</div>
                     <span>
                         <a href="#" title="[% Translate("Delete") | html %]" class="DeleteEntity DeleteTransition"><i class="fa fa-trash-o"></i></a>
-                        <a href="[% Env("Baselink") %]Action=AdminProcessManagementTransition;Subaction=TransitionEdit;ID=[% Data.ID | uri %];EntityID=[% Data.EntityID | uri %]" title="[% Translate("Edit") | html %]" class="AsPopup PopupType_Transition"><i class="fa fa-edit"></i></a>
+                        <a href="[% Env("Baselink") %]Action=AdminProcessManagementTransition;Subaction=TransitionEdit;ID=[% Data.ID %];EntityID=[% Data.EntityID | uri %];ProcessEntityID=[% Data.ProcessEntityID %]" title="[% Translate("Edit") | html %]" class="AsPopup PopupType_Transition"><i class="fa fa-edit"></i></a>
                     </span>
                 </li>
 [% RenderBlockEnd("TransitionRow") %]
@@ -75,20 +78,21 @@
                 </li>
 [% RenderBlockEnd("TransitionNoDataRow") %]
             </ul>
-            <a href="[% Env("Baselink") %]Action=AdminProcessManagementTransition;Subaction=TransitionNew;" class="CallForAction AsPopup PopupType_Transition Fullsize Center ProcessElementButton"><span><i class="fa fa-plus-square"></i>[% Translate("Create New Transition") | html %]</span></a>
+            <a href="[% Env("Baselink") %]Action=AdminProcessManagementTransition;Subaction=TransitionNew;ProcessEntityID=[% Data.ProcessEntityID %];" class="CallForAction AsPopup PopupType_Transition Fullsize Center ProcessElementButton"><span><i class="fa fa-plus-square"></i>[% Translate("Create New Transition") | html %]</span></a>
         </div>
     </li>
     <li class="AccordionElement">
         <h2><a href="#" class="AsBlock"><span><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></span>[% Translate("Transition Actions") | html %]</a></h2>
         <div class="Content">
-            <input type="text" id="TransitionActionFilter" class="ProcessElementFilter W75pc" placeholder="[% Translate("Filter Transition Actions...") | html %]" />
+            <input type="text" id="TransitionActionFilter" class="ProcessElementFilter WithScope" placeholder="[% Translate("Filter Transition Actions...") | html %]" />
+            <input type="checkbox" checked id="TransitionActionScopeFilter" class="ScopeFilter" data-scope-filter="TransitionAction" title="[% Translate('Show global %s', Translate('Transition Actions')) | html %]"><i class="fa fa-globe" title="[% Translate('Show global %s', Translate('Transition Actions')) | html %]"></i>
             <ul class="Tablelike" id="TransitionActions">
 [% RenderBlockStart("TransitionActionRow") %]
-                <li class="OneRow" data-entity="[% Data.EntityID | html %]" data-id="[% Data.ID | html %]">
+                <li class="OneRow" data-entity="[% Data.EntityID | html %]" data-id="[% Data.ID | html %]" data-entity-type="TransitionAction" data-scope="[% Data.Config.Scope %]" data-scope-entity-id="[% Data.Config.ScopeEntityID %]">
                     <div class="AsBlock W80pc" title="[% Data.Name | html %] ([% Data.EntityID | html %])">[% Data.Name | html %]</div>
                     <span>
                         <a href="#" title="[% Translate("Delete") | html %]" class="DeleteEntity DeleteTransitionAction"><i class="fa fa-trash-o"></i></a>
-                        <a href="[% Env("Baselink") %]Action=AdminProcessManagementTransitionAction;Subaction=TransitionActionEdit;ID=[% Data.ID | uri %];EntityID=[% Data.EntityID | uri %]" title="[% Translate("Edit") | html %]" class="AsPopup PopupType_TransitionAction"><i class="fa fa-edit"></i></a>
+                        <a href="[% Env("Baselink") %]Action=AdminProcessManagementTransitionAction;Subaction=TransitionActionEdit;ID=[% Data.ID %];EntityID=[% Data.EntityID | uri %];ProcessEntityID=[% Data.ProcessEntityID %]" title="[% Translate("Edit") | html %]" class="AsPopup PopupType_TransitionAction"><i class="fa fa-edit"></i></a>
                     </span>
                 </li>
 [% RenderBlockEnd("TransitionActionRow") %]
@@ -98,7 +102,7 @@
                 </li>
 [% RenderBlockEnd("TransitionActionNoDataRow") %]
             </ul>
-            <a href="[% Env("Baselink") %]Action=AdminProcessManagementTransitionAction;Subaction=TransitionActionNew;" class="CallForAction AsPopup PopupType_TransitionAction Fullsize Center ProcessElementButton"><span><i class="fa fa-plus-square"></i>[% Translate("Create New Transition Action") | html %]</span></a>
+            <a href="[% Env("Baselink") %]Action=AdminProcessManagementTransitionAction;Subaction=TransitionActionNew;ProcessEntityID=[% Data.ProcessEntityID %];" class="CallForAction AsPopup PopupType_TransitionAction Fullsize Center ProcessElementButton"><span><i class="fa fa-plus-square"></i>[% Translate("Create New Transition Action") | html %]</span></a>
         </div>
     </li>
 </ul>

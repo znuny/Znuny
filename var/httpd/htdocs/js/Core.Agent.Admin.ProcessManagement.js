@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2022 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -86,6 +86,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
 
         // Initialize ajax call for updating default config parameter
         TargetNS.InitDefaultConfigParameters();
+
+        // Init handling of scope filter change
+        TargetNS.InitScopeFilter();
     };
 
     /**
@@ -822,7 +825,7 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
         // re-initialize accordion functions (accordion, filters, DnD)
         var Data = {
                 Action: 'AdminProcessManagement',
-                Subaction: 'UpdateAccordion'
+                Subaction: 'UpdateAccordion',
             },
             ActiveElementIndex = parseInt($('ul#ProcessElements > li.Active').index(), 10),
             ActiveElementValue = $('ul#ProcessElements > li:eq(' + ActiveElementIndex + ') .ProcessElementFilter').val();
@@ -848,6 +851,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
 
             // Init DnD on Accordion
             TargetNS.InitAccordionDnD();
+
+            // init handling of scope filter
+            TargetNS.InitScopeFilter();
 
             // Initialize the different create and edit links/buttons
             InitProcessPopups();
@@ -1044,6 +1050,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             return false;
         });
 
+        // Init Scope Filters
+        TargetNS.InitScopeFilter();
+
         // Init Diagram Canvas
         TargetNS.Canvas.Init();
     };
@@ -1083,6 +1092,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
 
             Form.submit();
         });
+
+        // Init handling of scope filter change
+        TargetNS.InitScopeFilterSelection();
 
         // Init handling of closing popup with the OS functionality ("X")
         $(window).off("beforeunload.PMPopup").on("beforeunload.PMPopup", function () {
@@ -1323,6 +1335,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             return false;
         });
 
+        // Init handling of scope filter change
+        TargetNS.InitScopeFilterSelection();
+
         // Init handling of closing popup with the OS functionality ("X")
         $(window).off("beforeunload.PMPopup").on("beforeunload.PMPopup", function () {
             window.opener.Core.Agent.Admin.ProcessManagement.HandlePopupClose();
@@ -1412,6 +1427,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             Form.submit();
         });
 
+        // Init handling of scope filter change
+        TargetNS.InitScopeFilterSelection();
+
         // Init handling of closing popup with the OS functionality ("X")
         $(window).off("beforeunload.PMPopup").on("beforeunload.PMPopup", function () {
             window.opener.Core.Agent.Admin.ProcessManagement.HandlePopupClose();
@@ -1422,7 +1440,6 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
         });
 
         Core.UI.InputFields.Init();
-
     };
 
     /**
@@ -1478,6 +1495,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
 
             Form.submit();
         });
+
+        // Init handling of scope filter change
+        TargetNS.InitScopeFilterSelection();
 
         // Init handling of closing popup with the OS functionality ("X")
         $(window).off("beforeunload.PMPopup").on("beforeunload.PMPopup", function () {
@@ -1795,6 +1815,85 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             $('#ConfigParams').append($Element);
         });
     }
+
+    /**
+     * @private
+     * @name InitScopeFilter
+     * @memberof Core.Agent.Admin.ProcessManagement
+     * @function
+     * @description
+     *     initialises all scope filters for AdminProcessManagement
+     */
+    TargetNS.InitScopeFilter = function() {
+
+        var $ScopeFilterElements = $('[data-scope-filter]'),
+            ScopeEntityID = $('#ProcessEntityID').val();
+
+        if( !ScopeEntityID ) { return; }
+
+        $ScopeFilterElements.each(function(){
+            $(this).off('change.InitScopeFilter').on('change.InitScopeFilter', function () {
+
+                var EntityType = $(this).data('scopeFilter'),
+                    FilterType         = 'Process',
+                    ScopeEntityID      = $('#ProcessEntityID').val(),
+                    $HideScopeElements = $('[data-entity-type=' + EntityType + ']'),
+                    $ShowScopeElements;
+
+                $ShowScopeElements = $('[data-entity-type=' + EntityType + '][data-scope=' + FilterType +'][data-scope-entity-id=' + ScopeEntityID + ']');
+
+                // change / improve this FilterType if you need more types
+                if(this.checked) {
+                    $ShowScopeElements = $('[data-entity-type=' + EntityType + ']');
+                }
+
+                $HideScopeElements.each(function(){
+                    $(this).hide();
+                });
+                $ShowScopeElements.each(function(){
+                    $(this).show();
+                });
+            });
+        });
+    };
+
+    /**
+     * @private
+     * @name InitScopeFilterSelection
+     * @memberof Core.Agent.Admin.ProcessManagement
+     * @function
+     * @description
+     *     initialises all Scope Filter Selection
+     *     depending on which scope has been selected, a different selection is displayed
+     */
+    TargetNS.InitScopeFilterSelection = function() {
+
+        var $Scope = $('#Scope');
+        if( !$Scope ) { return; }
+
+        var Scope = $Scope.val();
+        if( Scope == 'Global' ) {
+            $('label[for="ScopeEntityID"]').hide().next().hide().next().hide();
+        }
+
+        $Scope.change( function() {
+
+            // the ScopeEntityID element will be shown/hidden depending on the scope
+            var $ScopeEntityID = $('#ScopeEntityID'),
+                Scope = $Scope.val();
+
+            if( !$ScopeEntityID ) { return; }
+
+            // show/hide the 3 items on the ScopeEntityID Process line depending on the current scope
+            if( Scope == 'Global' ) {
+                // hide the 3 items on the ScopeEntityID Process line
+                $('label[for="ScopeEntityID"]').hide().next().hide().next().hide();
+            } else {
+                // show the 3 items on the ScopeEntityID Process line
+                $('label[for="ScopeEntityID"]').show().next().show().next().show();
+            }
+        });
+    };
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');
 

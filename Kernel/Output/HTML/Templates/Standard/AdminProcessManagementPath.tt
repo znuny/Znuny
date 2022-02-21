@@ -26,7 +26,7 @@
             <form id="PathForm" action="[% Env("CGIHandle") %]" method="post" class="Validate PreventMultipleSubmits">
                 <input type="hidden" name="Action" value="[% Env("Action") %]"/>
                 <input type="hidden" name="Subaction" value="Path[% Data.Action | html %]Action"/>
-                <input type="hidden" name="ProcessEntityID" value="[% Data.ProcessEntityID %]" id="ProcessEntityID"/>
+                <input type="hidden" ID="ProcessEntityID" name="ProcessEntityID" value="[% Data.ProcessEntityID %]" id="ProcessEntityID"/>
                 <input type="hidden" name="TransitionEntityID" value="[% Data.TransitionEntityID %]" id="TransitionEntityID"/>
                 <input type="hidden" name="StartActivityID" value="[% Data.StartActivityID %]" id="StartActivityID"/>
                 <input type="hidden" name="ProcessData" value="" id="ProcessData"/>
