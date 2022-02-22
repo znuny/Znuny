@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -1829,7 +1829,7 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
         var $ScopeFilterElements = $('[data-scope-filter]'),
             ScopeEntityID = $('#ProcessEntityID').val();
 
-        if( !ScopeEntityID ) { return; }
+        if(!ScopeEntityID) { return; }
 
         $ScopeFilterElements.each(function(){
             $(this).off('change.InitScopeFilter').on('change.InitScopeFilter', function () {
@@ -1868,24 +1868,25 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
      */
     TargetNS.InitScopeFilterSelection = function() {
 
-        var $Scope = $('#Scope');
-        if( !$Scope ) { return; }
+        var $Scope = $('#Scope'),
+            Scope;
+        if(!$Scope) { return; }
 
-        var Scope = $Scope.val();
-        if( Scope == 'Global' ) {
+        Scope = $Scope.val();
+        if(Scope == 'Global') {
             $('label[for="ScopeEntityID"]').hide().next().hide().next().hide();
         }
 
-        $Scope.change( function() {
+        $Scope.change(function() {
 
             // the ScopeEntityID element will be shown/hidden depending on the scope
             var $ScopeEntityID = $('#ScopeEntityID'),
                 Scope = $Scope.val();
 
-            if( !$ScopeEntityID ) { return; }
+            if(!$ScopeEntityID) { return; }
 
             // show/hide the 3 items on the ScopeEntityID Process line depending on the current scope
-            if( Scope == 'Global' ) {
+            if(Scope == 'Global') {
                 // hide the 3 items on the ScopeEntityID Process line
                 $('label[for="ScopeEntityID"]').hide().next().hide().next().hide();
             } else {

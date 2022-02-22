@@ -1750,7 +1750,7 @@ sub _ShowEdit {
                         Data => {
                             %{$ElementData},
                             ProcessEntityID => $ProcessData->{EntityID} || '',
-                            AvailableIn     => $AvailableIn,    #only used for ActivityDialogs
+                            AvailableIn     => $AvailableIn,                     #only used for ActivityDialogs
                         },
                     );
                 }
@@ -1832,7 +1832,7 @@ sub _ShowEdit {
         Data         => {
             %Param,
             %{$ProcessData},
-            ProcessEntityID => $ProcessData->{EntityID} || '',
+            ProcessEntityID => $ProcessData->{EntityID}              || '',
             Description     => $ProcessData->{Config}->{Description} || '',
         },
     );

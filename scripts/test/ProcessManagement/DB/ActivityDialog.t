@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -543,7 +543,7 @@ my @AddedActivityDialogsList = map {$_} sort { $a <=> $b } keys %AddedActivityDi
         Name   => 'ActivityDialogGet Test 12: Scope Global',
         Config => {
             ID       => undef,
-            EntityID =>"$ActivityDialogEntityID-1",
+            EntityID => "$ActivityDialogEntityID-1",
             UserID   => $UserID,
         },
         Success => 1,

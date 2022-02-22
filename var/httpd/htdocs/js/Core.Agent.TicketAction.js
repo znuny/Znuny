@@ -319,8 +319,7 @@ Core.Agent.TicketAction = (function (TargetNS) {
     */
     TargetNS.SetTimeUnits = function(Selector) {
         var Count = 0,
-            $TimeUnits        = $('#' + Selector),
-            NeedAccountedTime = Core.Config.Get('Ticket::Frontend::NeedAccountedTime');
+            $TimeUnits = $('#' + Selector);
 
         $('.TimeUnitDropdown.' + Selector).each(function() {
             Count += Number($(this).val() || 0);

@@ -858,9 +858,11 @@ sub _ConditionCheck {
                             $CompareValue = Jq::jq( $JqExpression, $Param{Data} );
                         };
 
-                        if (   defined $CompareValue
+                        if (
+                            defined $CompareValue
                             && defined $ActualCondition->{Fields}->{$FieldName}->{Match}
-                            && $ActualCondition->{Fields}->{$FieldName}->{Match} =~ $CompareValue )
+                            && $ActualCondition->{Fields}->{$FieldName}->{Match} =~ $CompareValue
+                            )
                         {
                             $Match = 1;
                         }
