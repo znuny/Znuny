@@ -2443,7 +2443,7 @@ sub NoPermission {
     # create output
     my $Output;
     $Output = $Self->Header( Title => 'Insufficient Rights' ) if ( $WithHeader eq 'yes' );
-    $Output .= $Self->NavigationBar() if ( $WithHeader eq 'yes' );
+    $Output .= $Self->NavigationBar() if ( $WithHeader eq 'yes' && $Self->{UserID} );
     $Output .= $Self->Output(
         TemplateFile => 'NoPermission',
         Data         => \%Param
@@ -3317,7 +3317,7 @@ sub NavigationBar {
             next NOTIFICATIONMODULE if !$Object;
 
             # run module
-            $Output .= $Object->Run( %Param, Config => $Jobs{$Job} );
+            $Output .= $Object->Run( %Param, Config => $Jobs{$Job} ) || '';
         }
     }
 
