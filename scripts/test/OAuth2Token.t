@@ -77,7 +77,7 @@ my $Hostname    = URI::Escape::uri_escape_utf8( $ConfigObject->Get('FQDN') )    
 my $ScriptAlias = URI::Escape::uri_escape_utf8( $ConfigObject->Get('ScriptAlias') ) // '';
 
 my $ExpectedURL
-    = "https://login.microsoftonline.com/consumers/oauth2/v2.0/authorize?client_id=649202b8-fdf8-45c5-9cc4-999999999999&redirect_uri=${HttpType}%3A%2F%2F${Hostname}%2F${ScriptAlias}get-oauth2-token-by-authorization-code.pl&response_mode=query&response_type=code&scope=https%3A%2F%2Foutlook.office.com%2FIMAP.AccessAsUser.All%20https%3A%2F%2Foutlook.office.com%2FPOP.AccessAsUser.All%20https%3A%2F%2Foutlook.office.com%2FSMTP.Send%20offline_access&state=TokenConfigID${TokenConfigID}";
+    = "https://login.microsoftonline.com/consumers/oauth2/v2.0/authorize?client_id=1111&redirect_uri=${HttpType}%3A%2F%2F${Hostname}%2F${ScriptAlias}get-oauth2-token-by-authorization-code.pl&response_mode=query&response_type=code&scope=https%3A%2F%2Foutlook.office.com%2FIMAP.AccessAsUser.All%20https%3A%2F%2Foutlook.office.com%2FPOP.AccessAsUser.All%20https%3A%2F%2Foutlook.office.com%2FSMTP.Send%20offline_access&state=TokenConfigID${TokenConfigID}";
 
 $Self->Is(
     $URL,
@@ -316,6 +316,12 @@ $Self->Is(
     $SASLAuthString,
     'dXNlcj11bml0LXRlc3QtdXNlcgFhdXRoPUJlYXJlciB1bml0LXRlc3QtdG9rZW4BAQ==',
     'AssembleSASLAuthString() must return expected string.',
+);
+
+# delete OAuth2Token manual
+$OAuth2TokenObject->DataDelete(
+    $OAuth2TokenObject->{Identifier} => $TokenID,
+    UserID                           => $UserID,
 );
 
 1;

@@ -126,16 +126,19 @@ sub Run {
         my $GetParam = $Self->_GetParams();
 
         # set new configuration
-        $ActivityDialogData->{Name}                 = $GetParam->{Name};
-        $ActivityDialogData->{EntityID}             = $GetParam->{EntityID};
-        $ActivityDialogData->{Config}               = $GetParam->{Config};
+        $ActivityDialogData->{Name}     = $GetParam->{Name};
+        $ActivityDialogData->{EntityID} = $GetParam->{EntityID};
+        $ActivityDialogData->{Config}   = $GetParam->{Config};
+        my @GetParamFields = @{ $GetParam->{Config}->{Fields} };
+
         $ActivityDialogData->{Config}->{Fields}     = {};
         $ActivityDialogData->{Config}->{FieldOrder} = [];
 
-        if ( IsArrayRefWithData( $GetParam->{Config}->{Fields} ) ) {
+        if (@GetParamFields) {
 
             FIELD:
-            for my $FieldName ( @{ $GetParam->{Config}->{Fields} } ) {
+            for my $FieldName (@GetParamFields) {
+
                 next FIELD if !$FieldName;
                 next FIELD if !$AvailableFieldsList->{$FieldName};
 
@@ -390,16 +393,18 @@ sub Run {
         my $GetParam = $Self->_GetParams();
 
         # set new configuration
-        $ActivityDialogData->{Name}                 = $GetParam->{Name};
-        $ActivityDialogData->{EntityID}             = $GetParam->{EntityID};
-        $ActivityDialogData->{Config}               = $GetParam->{Config};
+        $ActivityDialogData->{Name}     = $GetParam->{Name};
+        $ActivityDialogData->{EntityID} = $GetParam->{EntityID};
+        $ActivityDialogData->{Config}   = $GetParam->{Config};
+        my @GetParamFields = @{ $GetParam->{Config}->{Fields} };
+
         $ActivityDialogData->{Config}->{Fields}     = {};
         $ActivityDialogData->{Config}->{FieldOrder} = [];
 
-        if ( IsArrayRefWithData( $GetParam->{Config}->{Fields} ) ) {
+        if (@GetParamFields) {
 
             FIELD:
-            for my $FieldName ( @{ $GetParam->{Config}->{Fields} } ) {
+            for my $FieldName (@GetParamFields) {
                 next FIELD if !$FieldName;
                 next FIELD if !$AvailableFieldsList->{$FieldName};
 
@@ -1011,23 +1016,23 @@ sub _GetParams {
     my $JSONObject = $Kernel::OM->Get('Kernel::System::JSON');
 
     if ($Fields) {
-        $GetParam->{Fields} = $JSONObject->Decode(
+        $GetParam->{Config}->{Fields} = $JSONObject->Decode(
             Data => $Fields,
         );
     }
     else {
-        $GetParam->{Fields} = '';
+        $GetParam->{Config}->{Fields} = '';
     }
 
     my $FieldDetails = $ParamObject->GetParam( Param => 'FieldDetails' ) || '';
 
     if ($FieldDetails) {
-        $GetParam->{FieldDetails} = $JSONObject->Decode(
+        $GetParam->{Config}->{FieldDetails} = $JSONObject->Decode(
             Data => $FieldDetails,
         );
     }
     else {
-        $GetParam->{FieldDetails} = '';
+        $GetParam->{Config}->{FieldDetails} = '';
     }
 
     return $GetParam;

@@ -1,7 +1,7 @@
 ---
 - Config:
-    ClientID: 999999999999
-    ClientSecret: 999999999999
+    ClientID: 1111
+    ClientSecret: 1111
     Requests:
       AuthorizationCode:
         Request:
@@ -59,8 +59,8 @@
         NotifyOnExpiredRefreshToken: 1
   Name: Microsoft Outlook (example@outlook.com)
 - Config:
-    ClientID: 999999999999-99999999999999999999999999999999.apps.googleusercontent.com
-    ClientSecret: 999999999999
+    ClientID: 2222.apps.googleusercontent.com
+    ClientSecret: 2222
     Requests:
       AuthorizationCode:
         Request:
