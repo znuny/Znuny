@@ -1,4 +1,5 @@
 # 6.0.40 2022-xx-xx
+ - 2022-02-25 Fixed Bug - Since version 6.0.31 the size of embedded images within the RTE cannot be changed via click & drag anymore [#98](https://github.com/znuny/Znuny/issues/98).
  - 2022-02-11 Fixed Bug - Show menu items when showing the error screen. (https://github.com/znuny/Znuny/issues/210)
  - 2022-02-03 Fixed Bug - Dashboard-TicketQueueOverview refresh (https://github.com/znuny/Znuny/issues/156).
  - 2022-02-03 Updated jQuery UI from 1.12.1 to 1.13.1.
