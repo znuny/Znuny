@@ -30,7 +30,10 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $ParamObject            = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $LayoutObject           = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $EntityObject           = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Entity');
+    my $TransitionActionObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::TransitionAction');
 
     $Self->{Subaction} = $ParamObject->GetParam( Param => 'Subaction' ) || '';
 
@@ -45,11 +48,6 @@ sub Run {
     $Self->{ScreensPath} = $Kernel::OM->Get('Kernel::System::JSON')->Decode(
         Data => $SessionData{ProcessManagementScreensPath}
     );
-
-    # get needed objects
-    my $LayoutObject           = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $EntityObject           = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Entity');
-    my $TransitionActionObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::TransitionAction');
 
     # ------------------------------------------------------------ #
     # TransitionActionNew
@@ -89,14 +87,14 @@ sub Run {
             $Error{NameServerErrorMessage} = Translatable('This field is required');
         }
 
-        if ( !$GetParam->{Module} ) {
+        if ( !$GetParam->{Config}->{Module} ) {
 
             # add server error error class
             $Error{ModuleServerError}        = 'ServerError';
             $Error{ModuleServerErrorMessage} = Translatable('This field is required');
         }
 
-        if ( !$GetParam->{Config}->{Config} ) {
+        if ( !IsHashRefWithData( $GetParam->{Config}->{Config} ) ) {
             return $LayoutObject->ErrorScreen(
                 Message => Translatable('At least one valid config parameter is required.'),
             );
@@ -694,9 +692,12 @@ sub _GetParams {
     }
 
     my ( $KeyValue, $ValueValue );
+    PARAM:
     for my $Key (@ConfigParamKeys) {
         $KeyValue   = $ParamObject->GetParam( Param => "ConfigKey[$Key]" );
         $ValueValue = $ParamObject->GetParam( Param => "ConfigValue[$Key]" );
+
+        next PARAM if !$KeyValue || $KeyValue eq '';
         $GetParam->{Config}->{Config}->{$KeyValue} = $ValueValue;
     }
 
