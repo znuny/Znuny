@@ -203,7 +203,7 @@ sub Run {
 
         if ( !$FetchedCount && $MailAccountID ) {
             $Self->PrintError("Could not find mail account $MailAccountID.");
-            $ExitCode = $Self->ExitCodeError();
+            $ExitCode = $Self->ExitCodeError(2);
         }
 
         # Close child process at the end.
@@ -240,6 +240,10 @@ sub Run {
     alarm 0;
 
     $Self->Print("<green>Done.</green>\n\n");
+
+    # Return exit error code if child process cannot find mail account.
+    return $Self->ExitCodeError() if ( $? >> 8 ) > 1;
+
     return $Self->ExitCodeOk();
 }
 
