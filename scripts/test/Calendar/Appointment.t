@@ -20,7 +20,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $CalendarObject    = $Kernel::OM->Get('Kernel::System::Calendar');
 my $AppointmentObject = $Kernel::OM->Get('Kernel::System::Calendar::Appointment');
@@ -28,7 +28,7 @@ my $GroupObject       = $Kernel::OM->Get('Kernel::System::Group');
 my $UserObject        = $Kernel::OM->Get('Kernel::System::User');
 my $MailQueueObject   = $Kernel::OM->Get('Kernel::System::MailQueue');
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 my %MailQueueCurrentItems = map { $_->{ID} => $_ } @{ $MailQueueObject->List() || [] };
 my $MailQueueClean        = sub {
@@ -67,25 +67,25 @@ my $MailQueueProcess = sub {
 $MailQueueClean->();
 
 # Do not check RichText.
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'Frontend::RichText',
     Value => 0,
 );
 
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'AgentSelfNotifyOnAction',
     Value => 1,
 );
 
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'SendmailModule',
     Value => 'Kernel::System::Email::Test',
 );
 
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Key   => 'CheckEmailAddresses',
     Value => 0,
 );
@@ -104,7 +104,7 @@ $Self->True(
 );
 
 # Create test user and add it to the test group.
-my ( $UserLogin, $UserID ) = $Helper->TestUserCreate(
+my ( $UserLogin, $UserID ) = $HelperObject->TestUserCreate(
     Groups => [$GroupName],
 );
 

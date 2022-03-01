@@ -23,8 +23,8 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper   = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-my $RoleName = "role" . $Helper->GetRandomID();
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $RoleName     = "role" . $HelperObject->GetRandomID();
 
 # try to execute command without any options
 $ExitCode = $CommandObject->Execute();

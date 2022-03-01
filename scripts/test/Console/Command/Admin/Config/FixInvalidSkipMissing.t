@@ -18,7 +18,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $CacheObject       = $Kernel::OM->Get('Kernel::System::Cache');
 my $CommandObject     = $Kernel::OM->Get('Kernel::System::Console::Command::Admin::Config::FixInvalid');
 my $SysConfigObject   = $Kernel::OM->Get('Kernel::System::SysConfig');
@@ -44,7 +44,7 @@ my $RunCommand = sub {
     return ( $ResultErr . $ResultOut, $ExitCode );
 };
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 my $PerlModule = $MainObject->FileWrite(
     Directory => "${Home}/Kernel",

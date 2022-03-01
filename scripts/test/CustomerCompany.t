@@ -24,7 +24,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $Data         = $ConfigObject->Get('CustomerCompany');
 my $DefaultValue = $Data->{Params}->{Table};
@@ -88,7 +88,7 @@ my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
 
 for my $Key ( 1 .. 3, 'ä', 'カス' ) {
 
-    my $CompanyRand = 'Example-Customer-Company' . $Key . $Helper->GetRandomID();
+    my $CompanyRand = 'Example-Customer-Company' . $Key . $HelperObject->GetRandomID();
 
     my $CustomerID = $CustomerCompanyObject->CustomerCompanyAdd(
         CustomerID             => $CompanyRand,

@@ -23,8 +23,8 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper     = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-my $RandomName = $Helper->GetRandomID();
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $RandomName   = $HelperObject->GetRandomID();
 
 $Kernel::OM->Get('Kernel::Config')->Set(
     Key   => 'CheckEmailAddresses',

@@ -23,10 +23,10 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my $ParentServiceName = "ParentService" . $Helper->GetRandomID();
-my $ChildServiceName  = "ChildService" . $Helper->GetRandomID();
+my $ParentServiceName = "ParentService" . $HelperObject->GetRandomID();
+my $ChildServiceName  = "ChildService" . $HelperObject->GetRandomID();
 
 # try to execute command without any options
 $ExitCode = $CommandObject->Execute();

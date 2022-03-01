@@ -13,24 +13,24 @@ use utf8;
 
 use vars (qw($Self));
 
-my $Helper        = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
 my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
 
 # Make sure to enable cloud services.
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'CloudServices::Disabled',
     Value => 0,
 );
 
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'Package::AllowNotVerifiedPackages',
     Value => 0,
 );
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 # Override Request() from WebUserAgent to always return some test data without making any
 #   actual web service calls. This should prevent instability in case cloud services are
@@ -53,7 +53,7 @@ use warnings;
 }
 1;
 EOS
-$Helper->CustomCodeActivate(
+$HelperObject->CustomCodeActivate(
     Code       => $CustomCode,
     Identifier => 'Admin::Package::Upgrade' . $RandomID,
 );

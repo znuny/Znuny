@@ -23,11 +23,11 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my $SystemAddressName = 'SystemAddress' . $Helper->GetRandomID();
+my $SystemAddressName = 'SystemAddress' . $HelperObject->GetRandomID();
 my $SystemAddress     = $SystemAddressName . '@example.com';
-my $QueueName         = 'queue' . $Helper->GetRandomID();
+my $QueueName         = 'queue' . $HelperObject->GetRandomID();
 
 # try to execute command without any options
 $ExitCode = $CommandObject->Execute();

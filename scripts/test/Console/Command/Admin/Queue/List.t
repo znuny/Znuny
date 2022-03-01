@@ -23,8 +23,8 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-my $QueueName = "queue" . $Helper->GetRandomID();
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $QueueName    = "queue" . $HelperObject->GetRandomID();
 
 my $QueueID = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
     Name            => $QueueName,

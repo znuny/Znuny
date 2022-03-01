@@ -19,12 +19,12 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # get customer user object
 my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
 
-my $RandomID        = $Helper->GetRandomID();
+my $RandomID        = $HelperObject->GetRandomID();
 my $CustomerUserID  = "user$RandomID";
 my $CustomerUserID2 = "user$RandomID-2";
 my $CustomerID      = "customer$RandomID";

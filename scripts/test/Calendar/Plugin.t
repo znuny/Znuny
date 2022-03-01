@@ -19,7 +19,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # get needed objects
 my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
@@ -102,7 +102,7 @@ for my $PluginKey ( sort keys %{$PluginConfig} ) {
 if ($PluginKeyTicket) {
 
     # create test group
-    my $GroupName = 'test-calendar-group-' . $Helper->GetRandomID();
+    my $GroupName = 'test-calendar-group-' . $HelperObject->GetRandomID();
     my $GroupID   = $GroupObject->GroupAdd(
         Name    => $GroupName,
         ValidID => 1,
@@ -115,7 +115,7 @@ if ($PluginKeyTicket) {
     );
 
     # create test user
-    my ( $UserLogin, $UserID ) = $Helper->TestUserCreate(
+    my ( $UserLogin, $UserID ) = $HelperObject->TestUserCreate(
         Groups => [ 'users', $GroupName ],
     );
 
@@ -124,7 +124,7 @@ if ($PluginKeyTicket) {
         "Test user $UserID created",
     );
 
-    my $RandomID = $Helper->GetRandomID();
+    my $RandomID = $HelperObject->GetRandomID();
 
     # create a test ticket
     my $TicketID = $TicketObject->TicketCreate(

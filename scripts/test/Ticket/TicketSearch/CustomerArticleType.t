@@ -25,7 +25,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 $ConfigObject->Set(
     Key   => 'CheckEmailAddresses',
@@ -40,7 +40,7 @@ $ConfigObject->Set(
 my $UserID = 1;
 
 # get a random id
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 # Make sure that the ticket and article objects get recreated for each loop.
 $Kernel::OM->ObjectsDiscard(

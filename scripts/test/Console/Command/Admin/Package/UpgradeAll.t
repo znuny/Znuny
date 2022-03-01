@@ -14,12 +14,12 @@ use utf8;
 
 use vars (qw($Self));
 
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
 
 # Initialize test database based on fresh OTRS 6 schema.
-my $Success = $Helper->ProvideTestDatabase(
+my $Success = $HelperObject->ProvideTestDatabase(
     DatabaseXMLFiles => [
         "$Home/scripts/database/otrs-schema.xml",
         "$Home/scripts/database/otrs-initial_insert.xml",

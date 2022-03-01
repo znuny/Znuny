@@ -21,7 +21,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # configure CustomerAuth backend to db
 $ConfigObject->Set( 'CustomerAuthBackend', 'DB' );
@@ -49,7 +49,7 @@ my $TemporarilyInvalidID = $ValidObject->ValidLookup(
 # add test user
 my $GlobalUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
 
-my $UserRand = 'example-user' . $Helper->GetRandomID();
+my $UserRand = 'example-user' . $HelperObject->GetRandomID();
 
 my $TestUserID = $GlobalUserObject->CustomerUserAdd(
     UserFirstname  => 'CustomerFirstname Test1',
@@ -302,12 +302,12 @@ $Self->True(
 @Tests = (
     {
         Password  => 'test111test111test111',
-        UserLogin => 'example-user' . $Helper->GetRandomID(),
+        UserLogin => 'example-user' . $HelperObject->GetRandomID(),
         CryptType => 'crypt',
     },
     {
         Password  => 'test222test222test222',
-        UserLogin => 'example-user' . $Helper->GetRandomID(),
+        UserLogin => 'example-user' . $HelperObject->GetRandomID(),
         CryptType => 'sha1',
     }
 );

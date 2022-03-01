@@ -23,8 +23,8 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-my $QueueName = "queue" . $Helper->GetRandomID();
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $QueueName    = "queue" . $HelperObject->GetRandomID();
 
 # try to execute command without any options
 $ExitCode = $CommandObject->Execute();
@@ -51,7 +51,7 @@ $Self->Is(
 );
 
 # provide illegal system-address-name
-my $SystemAddressName = "address" . $Helper->GetRandomID();
+my $SystemAddressName = "address" . $HelperObject->GetRandomID();
 $ExitCode = $CommandObject->Execute(
     '--name', "$QueueName-second", '--group', 'admin', '--system-address-name',
     $SystemAddressName

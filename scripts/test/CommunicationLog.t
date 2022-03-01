@@ -22,7 +22,7 @@ $Kernel::OM->ObjectParamAdd(
     },
 );
 
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my @Test = (
     {
@@ -181,7 +181,7 @@ my @Test = (
 
 for my $Test (@Test) {
 
-    $Helper->FixedTimeSet();
+    $HelperObject->FixedTimeSet();
 
     #
     # CommunicationLog object create

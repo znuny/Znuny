@@ -24,7 +24,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my @TicketIDs;
 
@@ -47,8 +47,8 @@ for ( 1 .. 2 ) {
     push @TicketIDs, $TicketID;
 }
 
-$Helper->FixedTimeSet();
-$Helper->FixedTimeAddSeconds(60);
+$HelperObject->FixedTimeSet();
+$HelperObject->FixedTimeAddSeconds(60);
 
 # update ticket 1
 my $Success = $TicketObject->TicketLockSet(
@@ -72,7 +72,7 @@ $Self->True(
     "TicketStateSet() for test - $TicketIDs[1]",
 );
 
-$Helper->FixedTimeAddSeconds(60);
+$HelperObject->FixedTimeAddSeconds(60);
 
 my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
 

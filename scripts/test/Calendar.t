@@ -18,7 +18,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $CalendarObject    = $Kernel::OM->Get('Kernel::System::Calendar');
 my $AppointmentObject = $Kernel::OM->Get('Kernel::System::Calendar::Appointment');
@@ -26,14 +26,14 @@ my $GroupObject       = $Kernel::OM->Get('Kernel::System::Group');
 my $UserObject        = $Kernel::OM->Get('Kernel::System::User');
 
 # create test user
-my ( $UserLogin, $UserID ) = $Helper->TestUserCreate();
+my ( $UserLogin, $UserID ) = $HelperObject->TestUserCreate();
 
 $Self->True(
     $UserID,
     "Test user $UserID created",
 );
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 # create test group
 my $GroupName = 'test-calendar-group-' . $RandomID;

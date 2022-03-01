@@ -20,7 +20,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # get needed objects
 my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Maint::Ticket::PendingCheck');
@@ -63,7 +63,7 @@ my $SystemTime = $Kernel::OM->Create(
 )->ToEpoch();
 
 # set the fixed time
-$Helper->FixedTimeSet($SystemTime);
+$HelperObject->FixedTimeSet($SystemTime);
 
 my $ExitCode = $CommandObject->Execute();
 
@@ -92,7 +92,7 @@ $SystemTime = $Kernel::OM->Create(
 )->ToEpoch();
 
 # set the fixed time
-$Helper->FixedTimeSet($SystemTime);
+$HelperObject->FixedTimeSet($SystemTime);
 
 $ExitCode = $CommandObject->Execute();
 

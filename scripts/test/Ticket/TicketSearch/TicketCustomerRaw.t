@@ -26,7 +26,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 $Kernel::OM->Get('Kernel::Config')->Set(
     Key   => 'CheckEmailAddresses',
@@ -37,7 +37,7 @@ my @CustomerLogins;
 
 # add two customer users
 for ( 1 .. 2 ) {
-    my $UserRand = "CustomerUserLogin + " . $Helper->GetRandomID();
+    my $UserRand = "CustomerUserLogin + " . $HelperObject->GetRandomID();
 
     my $CustomerUserID = $CustomerUserObject->CustomerUserAdd(
         Source         => 'CustomerUser',

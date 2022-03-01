@@ -23,7 +23,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my @TicketIDs;
 
@@ -229,7 +229,7 @@ for my $Test (@Tests) {
                 String => $Test->{TimeStamp},
             }
         )->ToEpoch();
-        $Helper->FixedTimeSet($SystemTime);
+        $HelperObject->FixedTimeSet($SystemTime);
     }
 
     # print test case description
@@ -291,7 +291,7 @@ for my $Test (@Tests) {
 }
 continue {
 
-    $Helper->FixedTimeUnset();
+    $HelperObject->FixedTimeUnset();
 
     $TestCount++;
 }

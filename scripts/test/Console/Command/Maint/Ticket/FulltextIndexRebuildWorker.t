@@ -21,20 +21,20 @@ $Kernel::OM->ObjectParamAdd(
 
 use Kernel::System::VariableCheck qw(:all);
 
-my $Helper               = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject         = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
 my $TicketObject         = $Kernel::OM->Get('Kernel::System::Ticket');
 my $ArticleObject        = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 my $ArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Email' );
 my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Maint::Ticket::FulltextIndexRebuildWorker');
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 $ConfigObject->Set(
     Key   => 'CheckEmailAddresses',
     Value => 0,
 );
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 0,
     Key   => 'Ticket::EventModulePost###1000-IndexManagement',
     Value => {},

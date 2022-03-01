@@ -26,7 +26,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # get home directory
 my $HomeDir = $ConfigObject->Get('Home');
@@ -772,7 +772,7 @@ for my $ModuleFile (@BackendModuleFiles) {
     }
 
     # Added some checks for the GetActiveSessions function
-    $Helper->FixedTimeSet();
+    $HelperObject->FixedTimeSet();
 
     $ConfigObject->Set(
         Key   => 'SessionMaxIdleTime',
@@ -833,7 +833,7 @@ for my $ModuleFile (@BackendModuleFiles) {
         "#$Module - GetActiveSessions - correct data",
     );
 
-    $Helper->FixedTimeAddSeconds(90);
+    $HelperObject->FixedTimeAddSeconds(90);
 
     my %NewSessionData = (
         UserLogin => 'root3',
@@ -872,7 +872,7 @@ for my $ModuleFile (@BackendModuleFiles) {
     );
 }
 continue {
-    $Helper->FixedTimeUnset();
+    $HelperObject->FixedTimeUnset();
 }
 
 # restore to the previous state is done by RestoreDatabase
