@@ -18,42 +18,42 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ACLObject    = $Kernel::OM->Get('Kernel::System::ACL::DB::ACL');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # Set to change queue for ticket in a new window.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::MoveType',
             Value => 'link'
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketMove###Note',
             Value => '1'
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketMove###NoteMandatory',
             Value => '1'
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketMove###Subject',
             Value => 'test subject'
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketMove###Body',
             Value => 'test body'
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => '0'
@@ -63,7 +63,7 @@ $Selenium->RunTest(
         my @QueueNames;
         my @QueueIDs;
         for my $QueueCreate (qw(Delete Junk)) {
-            my $QueueName = $QueueCreate . $Helper->GetRandomID();
+            my $QueueName = $QueueCreate . $HelperObject->GetRandomID();
             my $QueueID   = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
                 Name            => $QueueName,
                 ValidID         => 1,
@@ -107,7 +107,7 @@ $Selenium->RunTest(
             my %MenuModuleConfigUpdate = %{ $MenuModuleConfig{EffectiveValue} };
             $MenuModuleConfigUpdate{Link} =~ s/$SysConfigUpdate->{OrgQueueLink}/$SysConfigUpdate->{TestQueueLink}/g;
 
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => $SysConfigUpdate->{MenuModule},
                 Value => \%MenuModuleConfigUpdate,
@@ -132,7 +132,7 @@ $Selenium->RunTest(
         }
 
         # Create test ACL with possible not selection of test queues.
-        my $ACLName = 'AACL' . $Helper->GetRandomID();
+        my $ACLName = 'AACL' . $HelperObject->GetRandomID();
         my $ACLID   = $ACLObject->ACLAdd(
             Name           => $ACLName,
             Comment        => 'Selenium ACL',
@@ -175,7 +175,7 @@ $Selenium->RunTest(
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -292,19 +292,19 @@ $Selenium->RunTest(
 
         # Test for bug#12559 that nothing shpuld happen,
         # if the user click on a disabled queue (only for move type 'form').
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::MoveType',
             Value => 'form'
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketMove###Note',
             Value => '0'
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketMove###NoteMandatory',
             Value => '0'

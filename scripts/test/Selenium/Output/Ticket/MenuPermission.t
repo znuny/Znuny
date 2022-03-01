@@ -24,10 +24,10 @@ $Selenium->RunTest(
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # get needed variables
-        my $RandomNumber = $Helper->GetRandomNumber();
+        my $RandomNumber = $HelperObject->GetRandomNumber();
         my $Success;
 
         # define group names - first will be added to the system, second doesn't exist
@@ -68,7 +68,7 @@ $Selenium->RunTest(
         );
 
         # create test user
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users', ],
         ) || die "Did not get test user";
 
@@ -117,7 +117,7 @@ $Selenium->RunTest(
         for my $Test (@Tests) {
 
             # update config
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => 'Ticket::Frontend::MenuModule###450-Close',
                 Value => {

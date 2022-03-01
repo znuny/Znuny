@@ -18,11 +18,11 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Disable all dashboard plugins.
         my $Config = $Kernel::OM->Get('Kernel::Config')->Get('DashboardBackend');
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 0,
             Key   => 'DashboardBackend',
             Value => \%$Config,
@@ -34,7 +34,7 @@ $Selenium->RunTest(
             Default => 1,
         );
 
-        my $RandomRSSTitle = 'RSS' . $Helper->GetRandomID();
+        my $RandomRSSTitle = 'RSS' . $HelperObject->GetRandomID();
 
         # Set URL config to xml content in ordr to prevent instability in case cloud services are
         # unavailable at the exact moment of this test run.
@@ -71,21 +71,21 @@ $Selenium->RunTest(
             </rss>
         ";
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'DashboardBackend###0410-RSS',
             Value => $RSSConfig{EffectiveValue},
         );
 
         # Avoid SSL errors on old test platforms.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'WebUserAgent::DisableSSLVerification',
             Value => 1,
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 

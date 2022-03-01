@@ -17,10 +17,10 @@ use vars (qw($Self));
 my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 my $CreateTestCustomer = sub {
-    my $Helper             = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+    my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
     my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
 
-    my $RandomID           = $Helper->GetRandomID();
+    my $RandomID           = $HelperObject->GetRandomID();
     my $TestCustomer       = 'Customer' . $RandomID;
     my $CustomerEmail      = "$TestCustomer\@localhost.com";
     my $TestCustomerUserID = $CustomerUserObject->CustomerUserAdd(
@@ -42,11 +42,11 @@ my $CreateTestCustomer = sub {
 };
 
 my $CreateTestUser = sub {
-    my $Helper     = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+    my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+    my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
 
     my $Language      = 'en';
-    my $TestUserLogin = $Helper->TestUserCreate(
+    my $TestUserLogin = $HelperObject->TestUserCreate(
         Groups   => [ 'users', ],
         Language => $Language,
     ) || die "Did not get test user";
@@ -267,21 +267,21 @@ my $CheckTicketReplyOrForward = sub {
 
 $Selenium->RunTest(
     sub {
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Disable check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Do not check service and type.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 0
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Type',
             Value => 0

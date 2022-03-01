@@ -20,10 +20,10 @@ $Selenium->RunTest(
     sub {
 
         # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # make sure Ticket::Frontend::CustomerTicketMessage###Queue sysconfig is set to 'Yes'
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::CustomerTicketMessage###Queue',
             Value => 1
@@ -33,7 +33,7 @@ $Selenium->RunTest(
         my @QueueIDs;
         my @QueueNames;
         for my $CreateQueue ( 1 .. 2 ) {
-            my $QueueName = "Queue" . $Helper->GetRandomID();
+            my $QueueName = "Queue" . $HelperObject->GetRandomID();
             my $QueueID   = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
                 Name            => $QueueName,
                 ValidID         => 1,
@@ -53,7 +53,7 @@ $Selenium->RunTest(
         }
 
         # create test system address
-        my $SystemAddressName = "SystemAddress" . $Helper->GetRandomID() . "\@localhost.com";
+        my $SystemAddressName = "SystemAddress" . $HelperObject->GetRandomID() . "\@localhost.com";
         my $SystemAddressID   = $Kernel::OM->Get('Kernel::System::SystemAddress')->SystemAddressAdd(
             Name     => $SystemAddressName,
             Realname => 'Selenium SystemAddress',
@@ -64,7 +64,7 @@ $Selenium->RunTest(
         );
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestCustomerUserCreate(
+        my $TestUserLogin = $HelperObject->TestCustomerUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -87,7 +87,7 @@ $Selenium->RunTest(
         );
 
         # switch to system address as new destination for customer new ticket
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CustomerPanelSelectionType',
             Value => 'SystemAddress'

@@ -45,10 +45,10 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # Disabled the package deployment plugins, to avoid timeout issues in the test.
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'SupportDataCollector::DisablePlugins',
     Value => [
@@ -62,7 +62,7 @@ $Home =~ s{\/\z}{};
 
 my $ArchiveExists;
 my $Success;
-my $RandomNumber = $Helper->GetRandomNumber();
+my $RandomNumber = $HelperObject->GetRandomNumber();
 if ( !-e $Home . '/ARCHIVE' ) {
 
     # perfect time to test the missing ARCHVIVE
@@ -217,7 +217,7 @@ for my $Test (@Tests) {
         for my $File ( @{ $Test->{ModifyFiles} } ) {
 
             # this operation is destructive be aware of it!
-            my $Content = $Helper->GetRandomID();
+            my $Content = $HelperObject->GetRandomID();
             $Content .= "\n";
             my $FileLocation = $MainObject->FileWrite(
                 Location => $File,
@@ -559,7 +559,7 @@ $Self->IsDeeply(
 );
 
 # Generate ZZZZUnitTestMaskPasswords.pm to check later for mask passwords.
-my $MaskPasswordFile    = 'ZZZZUnitTest' . $Helper->GetRandomNumber() . 'MaskPasswords';
+my $MaskPasswordFile    = 'ZZZZUnitTest' . $HelperObject->GetRandomNumber() . 'MaskPasswords';
 my $MaskPasswordContent = <<"EOF";
 # OTRS config file (automatically generated)
 # VERSION:1.1

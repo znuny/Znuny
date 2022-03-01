@@ -20,27 +20,27 @@ $Selenium->RunTest(
     sub {
 
         # get helper object
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $GroupObject  = $Kernel::OM->Get('Kernel::System::Group');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
         my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
 
         # enable ticket responsible
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Responsible',
             Value => 1
         );
 
         # enable ticket watcher feature
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Watcher',
             Value => 1
         );
 
         # create test group
-        my $TestGroup   = 'Group' . $Helper->GetRandomID();
+        my $TestGroup   = 'Group' . $HelperObject->GetRandomID();
         my $TestGroupID = $GroupObject->GroupAdd(
             Name    => $TestGroup,
             ValidID => 1,
@@ -102,7 +102,7 @@ $Selenium->RunTest(
 
             $ToolBarConfig{Group} = "ro:$TestGroup";
 
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => 'Frontend::ToolBarModule###' . $ConfigUpdate->{ToolBarModule},
                 Value => \%ToolBarConfig,
@@ -110,7 +110,7 @@ $Selenium->RunTest(
         }
 
         # create test user
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 

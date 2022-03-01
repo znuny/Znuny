@@ -16,7 +16,7 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper               = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject         = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ACLObject            = $Kernel::OM->Get('Kernel::System::ACL::DB::ACL');
         my $TicketObject         = $Kernel::OM->Get('Kernel::System::Ticket');
         my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
@@ -24,7 +24,7 @@ $Selenium->RunTest(
         );
 
         # Set to change queue for ticket in a new window.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::MoveType',
             Value => 'link'
@@ -64,7 +64,7 @@ EOF
         );
 
         # create and login test user
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 

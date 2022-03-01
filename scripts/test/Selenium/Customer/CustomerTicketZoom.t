@@ -18,35 +18,35 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0,
         );
 
         # Disable setting.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::CustomerTicketZoom###CustomerZoomExpand',
             Value => 0,
         );
 
         # Disable check email address.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Create test customer user.
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate(
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
         ) || die "Did not get test customer user";
 
         # Change customer user first and last name.
-        my $RandomID          = $Helper->GetRandomID();
+        my $RandomID          = $HelperObject->GetRandomID();
         my $CustomerFirstName = 'FirstName';
         my $CustomerLastName  = 'LastName, test (12345)';
         $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserUpdate(
@@ -81,8 +81,8 @@ $Selenium->RunTest(
         );
 
         # Create test article for test ticket.
-        my $SubjectRandom = "Subject" . $Helper->GetRandomID();
-        my $TextRandom    = "Text" . $Helper->GetRandomID();
+        my $SubjectRandom = "Subject" . $HelperObject->GetRandomID();
+        my $TextRandom    = "Text" . $HelperObject->GetRandomID();
 
         my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
             ChannelName => 'Phone',
@@ -210,7 +210,7 @@ $Selenium->RunTest(
         );
 
         # Enable displaying accounted time.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::CustomerTicketZoom###ZoomTimeDisplay',
             Value => 1
@@ -229,7 +229,7 @@ $Selenium->RunTest(
         );
 
         # Enable expanding.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::CustomerTicketZoom###CustomerZoomExpand',
             Value => 1,
@@ -290,7 +290,7 @@ $Selenium->RunTest(
             ChannelName => 'Internal',
         );
 
-        my $TestOriginalFrom = 'Agent Some Agent Some Agent' . $Helper->GetRandomID();
+        my $TestOriginalFrom = 'Agent Some Agent Some Agent' . $HelperObject->GetRandomID();
 
         # Add article from agent, with enabled IsVisibleForCustomer.
         my $ArticleID3 = $ArticleBackendObjectInternal->ArticleCreate(
@@ -313,7 +313,7 @@ $Selenium->RunTest(
         );
 
         # Use From field value.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::CustomerTicketZoom###DisplayNoteFrom',
             Value => 'FromField',
@@ -336,16 +336,16 @@ $Selenium->RunTest(
         );
 
         # Use default agent name setting.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::CustomerTicketZoom###DisplayNoteFrom',
             Value => 'DefaultAgentName',
         );
 
-        my $TestDefaultAgentName = 'ADefaultValueForAgentName' . $Helper->GetRandomID();
+        my $TestDefaultAgentName = 'ADefaultValueForAgentName' . $HelperObject->GetRandomID();
 
         # Set a default value for agent.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::CustomerTicketZoom###DefaultAgentName',
             Value => $TestDefaultAgentName,
@@ -368,7 +368,7 @@ $Selenium->RunTest(
         );
 
         # Login to Agent interface and verify customer name in answer article.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 

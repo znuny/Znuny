@@ -33,20 +33,20 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # set valid options
 my %ValidList = $Kernel::OM->Get('Kernel::System::Valid')->ValidList();
 %ValidList = reverse %ValidList;
 
 # set user options
-my ( $UserLogin, $UserID ) = $Helper->TestUserCreate(
+my ( $UserLogin, $UserID ) = $HelperObject->TestUserCreate(
     Groups => ['admin'],
 );
 my %UserData = $UserObject->GetUserData(
     UserID => $UserID,
 );
-my ( $NewUserLogin, $NewUserID ) = $Helper->TestUserCreate(
+my ( $NewUserLogin, $NewUserID ) = $HelperObject->TestUserCreate(
     Groups => ['admin'],
 );
 my %NewUserData = $UserObject->GetUserData(
@@ -54,21 +54,21 @@ my %NewUserData = $UserObject->GetUserData(
 );
 
 # set customer user options
-my $CustomerUserLogin = $Helper->TestCustomerUserCreate()
+my $CustomerUserLogin = $HelperObject->TestCustomerUserCreate()
     || die "Did not get test customer user";
 
 my %CustomerUserData = $CustomerUserObject->CustomerUserDataGet(
     User => $CustomerUserLogin,
 );
 
-my $NewCustomerUserLogin = $Helper->TestCustomerUserCreate()
+my $NewCustomerUserLogin = $HelperObject->TestCustomerUserCreate()
     || die "Did not get test customer user";
 
 my %NewCustomerUserData = $CustomerUserObject->CustomerUserDataGet(
     User => $NewCustomerUserLogin,
 );
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 # set queue options
 my $QueueName = 'Queue_' . $RandomID;

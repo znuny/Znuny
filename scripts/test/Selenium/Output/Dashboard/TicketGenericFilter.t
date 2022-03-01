@@ -18,12 +18,12 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper             = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
         my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -35,24 +35,24 @@ $Selenium->RunTest(
         my @Tests = (
             {
                 TN                => $TicketObject->TicketCreateNumber(),
-                CustomerUser      => $Helper->GetRandomID() . '@first.com',
+                CustomerUser      => $HelperObject->GetRandomID() . '@first.com',
                 DynamicFieldValue => 'Key',
             },
             {
                 TN                => $TicketObject->TicketCreateNumber(),
-                CustomerUser      => $Helper->GetRandomID() . '@second.com',
+                CustomerUser      => $HelperObject->GetRandomID() . '@second.com',
                 DynamicFieldValue => 'Key::Sub',
             },
             {
                 TN                => $TicketObject->TicketCreateNumber(),
-                CustomerUser      => $Helper->GetRandomID() . '@third.com',
-                CustomerID        => 'CustomerCompany' . $Helper->GetRandomID() . '(#)',
+                CustomerUser      => $HelperObject->GetRandomID() . '@third.com',
+                CustomerID        => 'CustomerCompany' . $HelperObject->GetRandomID() . '(#)',
                 DynamicFieldValue => 'Key;Special',
             },
             {
                 TN           => $TicketObject->TicketCreateNumber(),
-                CustomerUser => $Helper->GetRandomID() . '@fourth.com',
-                CustomerID   => 'CustomerCompany#%' . $Helper->GetRandomID() . '(#)',
+                CustomerUser => $HelperObject->GetRandomID() . '@fourth.com',
+                CustomerID   => 'CustomerCompany#%' . $HelperObject->GetRandomID() . '(#)',
             },
         );
 
@@ -160,7 +160,7 @@ $Selenium->RunTest(
         # Turn on the 'Customer User ID' column by default.
         my $Config = $ConfigObject->Get('DashboardBackend')->{'0120-TicketNew'};
         $Config->{DefaultColumns}->{CustomerUserID} = '2';
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'DashboardBackend###0120-TicketNew',
             Value => $Config,
@@ -321,7 +321,7 @@ $Selenium->RunTest(
         $Config                                     = $ConfigObject->Get('DashboardBackend')->{'0120-TicketNew'};
         $Config->{DefaultColumns}->{CustomerUserID} = '0';
         $Config->{DefaultColumns}->{CustomerID}     = '2';
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'DashboardBackend###0120-TicketNew',
             Value => $Config,
@@ -469,7 +469,7 @@ $Selenium->RunTest(
         $Config->{DefaultColumns}->{CustomerUserID} = '0';
         $Config->{DefaultColumns}->{CustomerID}     = '0';
         $Config->{DefaultColumns}->{"DynamicField_$DynamicFieldName"} = '2';
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'DashboardBackend###0120-TicketNew',
             Value => $Config,

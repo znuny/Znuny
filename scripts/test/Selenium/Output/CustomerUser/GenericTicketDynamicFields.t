@@ -18,26 +18,26 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper                    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject              = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject              = $Kernel::OM->Get('Kernel::System::Ticket');
         my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
         my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
         # Do not check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
-        my $RandomNumber = $Helper->GetRandomNumber();
+        my $RandomNumber = $HelperObject->GetRandomNumber();
 
         # Create test user.
-        my ( $TestUserLogin, $TestUserID ) = $Helper->TestUserCreate(
+        my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         );
 
         # Create test customer user.
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate(
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
         ) || die "Did not get test customer user";
 
         # Get test customer user ID.
@@ -522,7 +522,7 @@ $Selenium->RunTest(
             $SysConfig{EffectiveValue}->{Attributes} = 'States=open;' . $Test->{Attributes};
 
             # Set Attributes.
-            my $Success = $Helper->ConfigSettingChange(
+            my $Success = $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => $SysConfigName,
                 Value => $SysConfig{EffectiveValue},

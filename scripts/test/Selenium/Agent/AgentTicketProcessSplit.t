@@ -18,29 +18,29 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Set 'Linked Objects' widget to simple view.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'LinkObject::ViewMode',
             Value => 'Simple',
         );
 
         # Disable check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'Frontend::RichText',
             Value => 0,
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -49,7 +49,7 @@ $Selenium->RunTest(
         my @DeleteTicketIDs;
 
         # create a test ticket
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
         my $TicketID = $TicketObject->TicketCreate(
             Title        => "Ticket$RandomID",
             Queue        => 'Raw',
@@ -163,7 +163,7 @@ $Selenium->RunTest(
 
         # Check if CustomerID read only field can be disabled. See bug#14412.
         # Disable CustomerID read only.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketProcess::CustomerIDReadOnly',
             Value => 0
@@ -176,7 +176,7 @@ $Selenium->RunTest(
             JavaScript => 'return $("#CustomerAutoComplete").length;'
         );
 
-        my $RandomCustomerUser = 'RandomCustomerUser' . $Helper->GetRandomID();
+        my $RandomCustomerUser = 'RandomCustomerUser' . $HelperObject->GetRandomID();
         $Selenium->find_element( "#CustomerAutoComplete", 'css' )->clear();
         $Selenium->find_element( "#CustomerID",           'css' )->clear();
         $Selenium->find_element( "#CustomerAutoComplete", 'css' )->send_keys($RandomCustomerUser);
@@ -192,7 +192,7 @@ $Selenium->RunTest(
         $Selenium->find_element( "#CustomerAutoComplete", 'css' )->clear();
         $Selenium->find_element( "#CustomerID",           'css' )->clear();
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketProcess::CustomerIDReadOnly',
             Value => 1

@@ -24,11 +24,11 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my @CustomerCompanyIDs;
 for my $Item ( 1 .. 3 ) {
-    my $CustomerCompany = 'CustomerCompany' . $Helper->GetRandomID();
+    my $CustomerCompany = 'CustomerCompany' . $HelperObject->GetRandomID();
     push @CustomerCompanyIDs, $CustomerCompany;
     my $CustomerCompanyID = $CustomerCompanyObject->CustomerCompanyAdd(
         CustomerID             => $CustomerCompany,

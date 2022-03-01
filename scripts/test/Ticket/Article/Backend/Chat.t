@@ -19,7 +19,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $DBObject             = $Kernel::OM->Get('Kernel::System::DB');
 my $TicketObject         = $Kernel::OM->Get('Kernel::System::Ticket');

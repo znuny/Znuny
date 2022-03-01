@@ -36,7 +36,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $TicketObject            = $Kernel::OM->Get('Kernel::System::Ticket');
 my $ArticleObject           = $Kernel::OM->Get('Kernel::System::Ticket::Article');
@@ -46,8 +46,8 @@ my $TemplateGeneratorObject = $Kernel::OM->Get('Kernel::System::TemplateGenerato
 my $CustomerCompanyObject   = $Kernel::OM->Get('Kernel::System::CustomerCompany');
 
 # create test company
-my $TestCustomerID    = $Helper->GetRandomID() . "CID";
-my $TestCompanyName   = "Company" . $Helper->GetRandomID();
+my $TestCustomerID    = $HelperObject->GetRandomID() . "CID";
+my $TestCompanyName   = "Company" . $HelperObject->GetRandomID();
 my $CustomerCompanyID = $Kernel::OM->Get('Kernel::System::CustomerCompany')->CustomerCompanyAdd(
     CustomerID             => $TestCustomerID,
     CustomerCompanyName    => $TestCompanyName,
@@ -66,9 +66,9 @@ $Self->True(
 );
 
 # create test customer user
-my $TestUserLogin      = 'Customer' . $Helper->GetRandomID();
-my $TestUserFirstname  = 'Firstname' . $Helper->GetRandomID();
-my $TestUserLastname   = 'Lastname' . $Helper->GetRandomID();
+my $TestUserLogin      = 'Customer' . $HelperObject->GetRandomID();
+my $TestUserFirstname  = 'Firstname' . $HelperObject->GetRandomID();
+my $TestUserLastname   = 'Lastname' . $HelperObject->GetRandomID();
 my $CustomerEmail      = "$TestUserLogin\@localhost.com";
 my $TestCustomerUserID = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
     Source         => 'CustomerUser',
@@ -125,7 +125,7 @@ for my $Test (@Tests) {
 
     # add salutation
     my $SalutationID = $SalutationObject->SalutationAdd(
-        Name => $Helper->GetRandomID() . '-Salutation',
+        Name => $HelperObject->GetRandomID() . '-Salutation',
         Text => $Test->{Salutation},
         ,
         ContentType => 'text/plain; charset=utf-8',
@@ -138,7 +138,7 @@ for my $Test (@Tests) {
         "Salutation is created - ID $SalutationID",
     );
 
-    my $QueueName = $Helper->GetRandomID() . '-Queue';
+    my $QueueName = $HelperObject->GetRandomID() . '-Queue';
     my $QueueID   = $QueueObject->QueueAdd(
         Name            => $QueueName,
         ValidID         => 1,

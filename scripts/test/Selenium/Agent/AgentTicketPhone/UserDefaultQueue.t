@@ -19,17 +19,17 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0,
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -48,14 +48,14 @@ $Selenium->RunTest(
 
             # Enable or disable setting that will influence the new phone ticket initial screen
             if ($Queue) {
-                $Helper->ConfigSettingChange(
+                $HelperObject->ConfigSettingChange(
                     Valid => 1,
                     Key   => 'Ticket::Frontend::UserDefaultQueue',
                     Value => $Queue,
                 );
             }
             else {
-                $Helper->ConfigSettingChange(
+                $HelperObject->ConfigSettingChange(
                     Valid => 0,
                     Key   => 'Ticket::Frontend::UserDefaultQueue',
                     Value => 'Raw',

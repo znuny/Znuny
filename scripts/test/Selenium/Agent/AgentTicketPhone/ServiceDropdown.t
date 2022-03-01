@@ -35,17 +35,17 @@ $Selenium->RunTest(
     sub {
 
         # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # update sysconfig settings
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 1,
         );
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['users'],
         ) || die "Did not get test user";
 
@@ -62,7 +62,7 @@ $Selenium->RunTest(
         my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # create a test customer
-        my $TestUserCustomer = $Helper->TestCustomerUserCreate()
+        my $TestUserCustomer = $HelperObject->TestCustomerUserCreate()
             || die "Did not get test customer user";
 
         # create a ticket from the just created customer
@@ -82,7 +82,7 @@ $Selenium->RunTest(
             "Ticket is created - $TicketID",
         );
 
-        my $TestService = "Service-" . $Helper->GetRandomID();
+        my $TestService = "Service-" . $HelperObject->GetRandomID();
 
         # create a test service
         my $ServiceID = $ServiceObject->ServiceAdd(

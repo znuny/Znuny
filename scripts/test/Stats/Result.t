@@ -41,9 +41,9 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 # create new queues
 my @QueueNames;
@@ -315,7 +315,7 @@ for my $Ticket (@Tickets) {
     )->ToEpoch();
 
     # set the fixed time
-    $Helper->FixedTimeSet($SystemTime);
+    $HelperObject->FixedTimeSet($SystemTime);
 
     # create the ticket
     my $TicketID = $TicketObject->TicketCreate(
@@ -349,7 +349,7 @@ for my $Ticket (@Tickets) {
     push @TicketIDs, \%TicketData;
 }
 continue {
-    $Helper->FixedTimeUnset();
+    $HelperObject->FixedTimeUnset();
 }
 
 my %StateList = $Kernel::OM->Get('Kernel::System::State')->StateList(
@@ -4141,7 +4141,7 @@ for my $Test (@Tests) {
             String => $Test->{TimeStamp},
         },
     )->ToEpoch();
-    $Helper->FixedTimeSet($SystemTime);
+    $HelperObject->FixedTimeSet($SystemTime);
 
     # print test case description
     if ( $Test->{Description} ) {
@@ -4184,7 +4184,7 @@ for my $Test (@Tests) {
 }
 continue {
 
-    $Helper->FixedTimeUnset();
+    $HelperObject->FixedTimeUnset();
 
     $TestCount++;
 }

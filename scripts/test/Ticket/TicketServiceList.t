@@ -18,14 +18,14 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper        = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
 my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
 my $TypeObject    = $Kernel::OM->Get('Kernel::System::Type');
 
-my $TestUserLogin = $Helper->TestCustomerUserCreate();
+my $TestUserLogin = $HelperObject->TestCustomerUserCreate();
 
-my $Random = $Helper->GetRandomNumber();
+my $Random = $HelperObject->GetRandomNumber();
 
 my $TypeID1 = $TypeObject->TypeAdd(
     Name    => 'TestType1' . $Random,

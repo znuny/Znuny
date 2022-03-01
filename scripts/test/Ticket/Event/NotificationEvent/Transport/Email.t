@@ -29,7 +29,7 @@ $Kernel::OM->ObjectParamAdd(
         CheckEmailAddresses => 0,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $DateTimeObject = $Kernel::OM->Create(
     'Kernel::System::DateTime',
@@ -38,7 +38,7 @@ my $DateTimeObject = $Kernel::OM->Create(
     },
 );
 
-$Helper->FixedTimeSet($DateTimeObject);
+$HelperObject->FixedTimeSet($DateTimeObject);
 
 my $MailQueueObj = $Kernel::OM->Get('Kernel::System::MailQueue');
 
@@ -168,7 +168,7 @@ $Self->True(
     "ArticleCreate() successful for Article ID $ArticleID",
 );
 
-my $RandomID                  = $Helper->GetRandomNumber();
+my $RandomID                  = $HelperObject->GetRandomNumber();
 my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
 my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
@@ -541,7 +541,7 @@ for my $Test (@Tests) {
             },
         );
 
-        $Helper->FixedTimeSet($TestDateTimeObject);
+        $HelperObject->FixedTimeSet($TestDateTimeObject);
         my $Result = $EventNotificationEventObject->Run(
             Event => 'TicketDynamicFieldUpdate_DFT1' . $RandomID . 'Update',
             Data  => {
@@ -552,7 +552,7 @@ for my $Test (@Tests) {
         );
 
         # Set FixedTime back for the other tests
-        $Helper->FixedTimeSet($DateTimeObject);
+        $HelperObject->FixedTimeSet($DateTimeObject);
     }
 
     $SendEmails->();

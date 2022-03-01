@@ -26,9 +26,9 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 # define structure for create and update values
 my %TicketValues = (
@@ -253,7 +253,7 @@ for my $Item ( sort keys %AddDynamicFields ) {
 }
 
 # add the new Job
-my $RandomID2 = $Helper->GetRandomID();
+my $RandomID2 = $HelperObject->GetRandomID();
 my $JobName2  = 'UnitTest_' . $RandomID2;
 my %NewJob2   = (
     Name => $JobName2,

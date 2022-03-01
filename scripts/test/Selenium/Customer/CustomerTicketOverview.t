@@ -18,9 +18,9 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate(
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
         ) || die "Did not get test customer user";
 
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
@@ -67,21 +67,21 @@ $Selenium->RunTest(
         );
 
         # Enable CustomerTicketOverviewSortable.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::CustomerTicketOverviewSortable',
             Value => 'Sortable',
         );
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0,
         );
 
         # Check if TicketOverview does show articles on ProcessTicket, see bug#14006.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users', ],
         ) || die "Did not get test user";
         $Selenium->Login(
@@ -218,7 +218,7 @@ $Selenium->RunTest(
             $Element->is_displayed();
         }
 
-        my $RandomID   = $Helper->GetRandomID();
+        my $RandomID   = $HelperObject->GetRandomID();
         my $TicketBody = "TicketBody$RandomID";
 
         $Selenium->find_element( "#Subject",              'css' )->send_keys("Subject$RandomID");
@@ -256,7 +256,7 @@ $Selenium->RunTest(
         # for both Ticket::Frontend::CustomerTicketOverview###ColumnHeader settings.
         for my $ColumnHeader (qw(LastCustomerSubject TicketTitle)) {
 
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => 'Ticket::Frontend::CustomerTicketOverview###ColumnHeader',
                 Value => $ColumnHeader,
@@ -322,7 +322,7 @@ $Selenium->RunTest(
         );
 
         # disable CustomerTicketOverviewSortable
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::CustomerTicketOverviewSortable',
             Value => 0

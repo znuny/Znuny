@@ -18,7 +18,7 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
         my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
 
@@ -30,11 +30,11 @@ $Selenium->RunTest(
         );
 
         # Defines from which ticket attributes the agent can select the result order.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'TicketOverviewMenuSort###SortAttributes',
             Value => \%SortOverview,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'TicketOverviewMenuSort###SortAttributes',
             Value => \%SortOverview,
@@ -42,14 +42,14 @@ $Selenium->RunTest(
 
         # Override FirstnameLastnameOrder setting to check if it is taken into account
         #   (see bug#12554 for more information).
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'FirstnameLastnameOrder',
             Value => 3,
         );
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -64,7 +64,7 @@ $Selenium->RunTest(
         );
 
         # Create test queue.
-        my $QueueName = 'Queue' . $Helper->GetRandomID();
+        my $QueueName = 'Queue' . $HelperObject->GetRandomID();
         my $QueueID   = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
             Name            => $QueueName,
             ValidID         => 1,

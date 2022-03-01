@@ -26,15 +26,15 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 # create template generator after the dynamic field are created as it gathers all DF in the
 # constructor
 my $TemplateGeneratorObject = $Kernel::OM->Get('Kernel::System::TemplateGenerator');
 
-my $TestUserLogin = $Helper->TestUserCreate(
+my $TestUserLogin = $HelperObject->TestUserCreate(
     Language => 'en',
 );
 
@@ -44,7 +44,7 @@ my %TestUser = $Kernel::OM->Get('Kernel::System::User')->GetUserData(
 my $UserObject = $Kernel::OM->Get('Kernel::System::User');
 
 # add SystemAddress
-my $SystemAddressEmail    = $Helper->GetRandomID() . '@example.com';
+my $SystemAddressEmail    = $HelperObject->GetRandomID() . '@example.com';
 my $SystemAddressRealname = "OTRS-Team";
 
 my $SystemAddressObject = $Kernel::OM->Get('Kernel::System::SystemAddress');
@@ -59,7 +59,7 @@ my $SystemAddressID = $SystemAddressObject->SystemAddressAdd(
 );
 my %SystemAddressData = $SystemAddressObject->SystemAddressGet( ID => $SystemAddressID );
 
-my $QueueRand = $Helper->GetRandomID();
+my $QueueRand = $HelperObject->GetRandomID();
 my $QueueID   = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
     Name                => $QueueRand,
     ValidID             => 1,

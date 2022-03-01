@@ -26,10 +26,10 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # initialize variables
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 my $UserID   = 1;
 my $Index    = 1;
 
@@ -567,7 +567,7 @@ for my $Test (@Tests) {
         UserID    => $UserID,
     );
 
-    $Helper->FixedTimeSet(
+    $HelperObject->FixedTimeSet(
         $Kernel::OM->Create(
             'Kernel::System::DateTime',
             ObjectParams => {

@@ -23,7 +23,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # test XMLParse2XMLHash() with an iso-8859-1 encoded XML
 my $String = '<?xml version="1.0" encoding="iso-8859-1" ?>

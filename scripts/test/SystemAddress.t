@@ -19,12 +19,12 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper              = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject        = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $SystemAddressObject = $Kernel::OM->Get('Kernel::System::SystemAddress');
 my $QueueObject         = $Kernel::OM->Get('Kernel::System::Queue');
 
-my $QueueRand1 = $Helper->GetRandomID();
-my $QueueRand2 = $Helper->GetRandomID();
+my $QueueRand1 = $HelperObject->GetRandomID();
+my $QueueRand2 = $HelperObject->GetRandomID();
 
 my $QueueID1 = $QueueObject->QueueAdd(
     Name                => $QueueRand1,
@@ -61,7 +61,7 @@ my $QueueID2 = $QueueObject->QueueAdd(
 );
 
 # add SystemAddress
-my $SystemAddressEmail    = $Helper->GetRandomID() . '@example.com';
+my $SystemAddressEmail    = $HelperObject->GetRandomID() . '@example.com';
 my $SystemAddressRealname = "OTRS-Team";
 
 my %SystemAddressData = (
@@ -97,7 +97,7 @@ $Self->False(
 );
 
 # add SystemAddress
-my $SystemAddressEmail2    = $Helper->GetRandomID() . '@example.com';
+my $SystemAddressEmail2    = $HelperObject->GetRandomID() . '@example.com';
 my $SystemAddressRealname2 = "OTRS-Team2";
 my $SystemAddressID2       = $SystemAddressObject->SystemAddressAdd(
     Name     => $SystemAddressEmail2,

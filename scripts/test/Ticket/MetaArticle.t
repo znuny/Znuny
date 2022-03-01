@@ -25,8 +25,8 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-$Helper->FixedTimeSet();
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+$HelperObject->FixedTimeSet();
 
 my $TicketID = $TicketObject->TicketCreate(
     Title        => 'Some Ticket_Title',
@@ -308,7 +308,7 @@ $Self->IsDeeply(
     'MetaArticleIndex()'
 );
 
-$Helper->FixedTimeAddSeconds(60);
+$HelperObject->FixedTimeAddSeconds(60);
 
 $SuccessUpdate = $ArticleBackendObject->_MetaArticleUpdate(
     ArticleID => $ArticleID,
@@ -366,7 +366,7 @@ $Self->IsDeeply(
 # Check default image for avatar.
 # See bug#14615 for more information.
 my $DefaultImage = 'mp';
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 0,
     Key   => "Frontend::Gravatar::ArticleDefaultImage",
     Value => $DefaultImage,

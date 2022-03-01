@@ -26,7 +26,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my @BlackListedStates = ( 'closed successful', 'closed unsuccessful' );
 
@@ -45,9 +45,9 @@ $ConfigObject->Set(
     Value => {},
 );
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
-my ( $TestUserLogin, $TestUserID ) = $Helper->TestUserCreate();
+my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate();
 
 # get ticket object
 my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');

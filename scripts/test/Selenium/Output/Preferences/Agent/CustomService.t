@@ -21,24 +21,24 @@ $Selenium->RunTest(
     sub {
 
         # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # enable the services
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => '1',
         );
 
         # don't keep children services
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service::KeepChildren',
             Value => '0',
         );
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -60,7 +60,7 @@ $Selenium->RunTest(
         my @ServiceIDs;
         my @ServiceNames;
         for my $Service (qw(Parent Child)) {
-            my $ServiceName = $Service . 'Service' . $Helper->GetRandomID();
+            my $ServiceName = $Service . 'Service' . $HelperObject->GetRandomID();
             my $ServiceID   = $ServiceObject->ServiceAdd(
                 Name    => $ServiceName,
                 ValidID => 2,                 # invalid
@@ -105,7 +105,7 @@ $Selenium->RunTest(
         );
 
         # turn on keep children setting
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service::KeepChildren',
             Value => '1',

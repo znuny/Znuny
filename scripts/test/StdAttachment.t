@@ -26,7 +26,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
 my $Location;
@@ -169,7 +169,7 @@ for my $File (qw(xls txt doc png pdf)) {
 
 # attachment -> templates tests
 my $UserID   = 1;
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 # create a new attachment
 $Location = $Home . "/scripts/test/sample/StdAttachment/StdAttachment-Test1.png";

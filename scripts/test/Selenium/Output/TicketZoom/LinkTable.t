@@ -18,13 +18,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
         my $LinkObject   = $Kernel::OM->Get('Kernel::System::LinkObject');
 
         # Disable 'Ticket Information', 'Customer Information' and 'Linked Objects' widgets in AgentTicketZoom screen.
         for my $WidgetDisable (qw(0100-TicketInformation 0200-CustomerInformation 0300-LinkTable)) {
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 0,
                 Key   => "Ticket::Frontend::AgentTicketZoom###Widgets###$WidgetDisable",
                 Value => '',
@@ -32,7 +32,7 @@ $Selenium->RunTest(
         }
 
         # Set 'Linked Objects' widget to simple view.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'LinkObject::ViewMode',
             Value => 'Simple',
@@ -42,7 +42,7 @@ $Selenium->RunTest(
         my @TicketTitles;
         my @TicketIDs;
         for my $TicketCreate ( 1 .. 3 ) {
-            my $TicketTitle = "Title" . $Helper->GetRandomID();
+            my $TicketTitle = "Title" . $HelperObject->GetRandomID();
             my $TicketID    = $TicketObject->TicketCreate(
                 Title      => $TicketTitle,
                 Queue      => 'Raw',
@@ -92,7 +92,7 @@ $Selenium->RunTest(
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -120,7 +120,7 @@ $Selenium->RunTest(
         );
 
         # Reset 'Linked Objects' widget sysconfig, enable it and refresh screen.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketZoom###Widgets###0300-LinkTable',
             Value => {
@@ -184,7 +184,7 @@ $Selenium->RunTest(
         );
 
         # Change view to complex.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'LinkObject::ViewMode',
             Value => 'Complex',

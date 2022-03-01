@@ -25,7 +25,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # disable rich text editor
 my $Success = $ConfigObject->Set(
@@ -109,7 +109,7 @@ $ConfigObject->Set(
 );
 
 # create a new user for current test
-my $UserLogin = $Helper->TestUserCreate(
+my $UserLogin = $HelperObject->TestUserCreate(
     Groups => ['users'],
 );
 
@@ -123,14 +123,14 @@ my %UserData = $UserObject->GetUserData(
 my $UserID = $UserData{UserID};
 
 # create a new user without permissions
-my $UserLogin2 = $Helper->TestUserCreate();
+my $UserLogin2 = $HelperObject->TestUserCreate();
 
 my %UserData2 = $UserObject->GetUserData(
     User => $UserLogin2,
 );
 
 # create a new user invalid
-my $UserLogin3 = $Helper->TestUserCreate(
+my $UserLogin3 = $HelperObject->TestUserCreate(
     Groups => ['users'],
 );
 
@@ -139,7 +139,7 @@ my %UserData3 = $UserObject->GetUserData(
 );
 
 # create a new user with permissions via roles only
-my $UserLogin4 = $Helper->TestUserCreate();
+my $UserLogin4 = $HelperObject->TestUserCreate();
 
 my %UserData4 = $UserObject->GetUserData(
     User => $UserLogin4,
@@ -152,10 +152,10 @@ my $SetInvalid = $UserObject->UserUpdate(
 );
 
 # create a new customer user for current test
-my $CustomerUserLogin = $Helper->TestCustomerUserCreate();
+my $CustomerUserLogin = $HelperObject->TestCustomerUserCreate();
 
 # get a random id
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 # get group object
 my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');

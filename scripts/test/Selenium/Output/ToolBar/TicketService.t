@@ -19,12 +19,12 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
         my $GroupObject  = $Kernel::OM->Get('Kernel::System::Group');
 
         # Get random variable.
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Enable AgentTicketService toolbar icon.
         my %AgentTicketService = (
@@ -34,21 +34,21 @@ $Selenium->RunTest(
             Priority => '1030035',
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::ToolBarModule###200-Ticket::AgentTicketService',
             Value => \%AgentTicketService,
         );
 
         # Allows defining services for tickets.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 1,
         );
 
         # Create test service.
-        my $ServiceName = 'Selenium' . $Helper->GetRandomID();
+        my $ServiceName = 'Selenium' . $HelperObject->GetRandomID();
         my $ServiceID   = $Kernel::OM->Get('Kernel::System::Service')->ServiceAdd(
             Name    => $ServiceName,
             ValidID => 1,
@@ -60,7 +60,7 @@ $Selenium->RunTest(
         );
 
         # Create test group.
-        my $GroupName = "Group" . $Helper->GetRandomID();
+        my $GroupName = "Group" . $HelperObject->GetRandomID();
         my $GroupID   = $GroupObject->GroupAdd(
             Name    => $GroupName,
             ValidID => 1,
@@ -108,7 +108,7 @@ $Selenium->RunTest(
         );
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users', $GroupName ],
         ) || die "Did not get test user";
 
@@ -184,7 +184,7 @@ $Selenium->RunTest(
         );
 
         # Change settings Ticket::Frontend::AgentTicketService###ViewAllPossibleTickets to 'Yes'.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketService###ViewAllPossibleTickets',
             Value => 1

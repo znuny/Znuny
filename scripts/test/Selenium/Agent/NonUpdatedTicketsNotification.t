@@ -16,13 +16,13 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
         my $ACLObject    = $Kernel::OM->Get('Kernel::System::ACL::DB::ACL');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
         my $QueueObject  = $Kernel::OM->Get('Kernel::System::Queue');
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Do not check email addresses.
         $ConfigObject->Set(
@@ -31,14 +31,14 @@ $Selenium->RunTest(
         );
 
         # Disable MX record check.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CheckMXRecord',
             Value => 0,
         );
 
         # Create test user.
-        my ( $UserLogin, $UserID ) = $Helper->TestUserCreate(
+        my ( $UserLogin, $UserID ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         );
 

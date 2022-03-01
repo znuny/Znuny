@@ -32,7 +32,7 @@ $Kernel::OM->ObjectParamAdd(
         CheckEmailAddresses => 0,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # Ensure mail queue is empty before tests start.
 $MailQueueObj->Delete();
@@ -89,16 +89,16 @@ $Self->IsDeeply(
     'Test backend is empty after initial cleanup',
 );
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 # Create test customer user.
-my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate();
+my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate();
 my %TestCustomerUserData  = $CustomerUserObject->CustomerUserDataGet(
     User => $TestCustomerUserLogin,
 );
 
 # Create test user.
-my $TestUserLogin = $Helper->TestUserCreate();
+my $TestUserLogin = $HelperObject->TestUserCreate();
 my %TestUserData  = $UserObject->GetUserData(
     User => $TestUserLogin,
 );
@@ -184,7 +184,7 @@ $Self->True(
 );
 
 # Set fixed time.
-$Helper->FixedTimeSet(
+$HelperObject->FixedTimeSet(
     $Kernel::OM->Create(
         'Kernel::System::DateTime',
         ObjectParams => {

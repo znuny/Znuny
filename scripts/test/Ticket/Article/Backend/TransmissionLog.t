@@ -21,9 +21,9 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-$Helper->FixedTimeSet();
+$HelperObject->FixedTimeSet();
 
 # Use test email backend.
 $Kernel::OM->Get('Kernel::Config')->Set(
@@ -52,7 +52,7 @@ $Self->True(
 );
 
 my $ArticleBackendObject = $Kernel::OM->Get("Kernel::System::Ticket::Article::Backend::Email");
-my $MessageID            = '<' . $Helper->GetRandomID() . '@example.com>';
+my $MessageID            = '<' . $HelperObject->GetRandomID() . '@example.com>';
 my %ArticleHash          = (
     TicketID             => $TicketID,
     SenderType           => 'agent',

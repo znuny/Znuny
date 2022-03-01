@@ -18,26 +18,26 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
         my $StatsObject  = $Kernel::OM->Get('Kernel::System::Stats');
 
         # Disable all dashboard plugins.
         my $Config = $ConfigObject->Get('DashboardBackend');
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 0,
             Key   => 'DashboardBackend',
             Value => \%$Config,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Stats::ExchangeAxis',
             Value => 1,
         );
 
         # Add at least one dashboard setting dashboard sysconfig so dashboard can be loaded.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'DashboardBackend###0400-UserOnline',
             Value => {
@@ -57,7 +57,7 @@ $Selenium->RunTest(
         );
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users', 'stats' ],
         ) || die "Did not get test user";
 
@@ -82,7 +82,7 @@ $Selenium->RunTest(
         );
 
         # Update test stats name and show as dashboard widget.
-        my $TestStatsName = "SeleniumStats" . $Helper->GetRandomID();
+        my $TestStatsName = "SeleniumStats" . $HelperObject->GetRandomID();
         my $Update        = $StatsObject->StatsUpdate(
             StatID => $TestStatID,
             Hash   => {

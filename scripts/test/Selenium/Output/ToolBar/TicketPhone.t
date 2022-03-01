@@ -20,7 +20,7 @@ $Selenium->RunTest(
     sub {
 
         # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # get config object
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
@@ -36,19 +36,19 @@ $Selenium->RunTest(
             Priority => "1020010",
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'Frontend::ToolBarModule###4-Ticket::AgentTicketPhone',
             Value => \%AgentTicketPhone,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::ToolBarModule###4-Ticket::AgentTicketPhone',
             Value => \%AgentTicketPhone
         );
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 

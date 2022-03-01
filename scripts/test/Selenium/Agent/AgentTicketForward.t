@@ -102,7 +102,7 @@ $Selenium->RunTest(
         );
 
         # Add test customer for testing.
-        my $TestCustomer       = 'Customer' . $Helper->GetRandomID();
+        my $TestCustomer       = 'Customer' . $HelperObject->GetRandomID();
         my $TestCustomerUserID = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
             Source         => 'CustomerUser',
             UserFirstname  => $TestCustomer,
@@ -167,13 +167,13 @@ $Selenium->RunTest(
 
         # Test external content loading depends on BlockLoadingRemoteContent setting (see bug#14398).
         # Enable RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 1,
         );
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create another email article.
         my $ImgSource           = 'http://example.com/image.png';
@@ -237,7 +237,7 @@ $Selenium->RunTest(
         );
 
         # Enable global external content blocking.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::BlockLoadingRemoteContent',
             Value => 1,

@@ -18,24 +18,24 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Enable article filter.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::TicketArticleFilter',
             Value => 1,
         );
 
         # Set ZoomExpandSort to reverse.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::ZoomExpandSort',
             Value => 'reverse',
         );
 
         # Set 3 max article per page.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::MaxArticlesPerPage',
             Value => 3,
@@ -81,7 +81,7 @@ $Selenium->RunTest(
             }
         );
 
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -236,7 +236,7 @@ $Selenium->RunTest(
         }
 
         # Set ZoomExpandSort to normal.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::ZoomExpandSort',
             Value => 'normal',
@@ -276,7 +276,7 @@ $Selenium->RunTest(
         }
 
         # Change max article per page config.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::MaxArticlesPerPage',
             Value => 6,
@@ -372,21 +372,21 @@ $Selenium->RunTest(
         if ($OTRSBusinessIsInstalled) {
 
             # Enable TimelineViewEnabled.
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => 'TimelineViewEnabled',
                 Value => 1,
             );
 
             # Change max article per page config.
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => 'Ticket::Frontend::MaxArticlesPerPage',
                 Value => 100,
             );
 
             # Add non 'AddNote' article.
-            my $RandomID          = $Helper->GetRandomID();
+            my $RandomID          = $HelperObject->GetRandomID();
             my $NonAddNoteSubject = "Subject-$RandomID";
             my $NonAddNoteArticleID
                 = $Kernel::OM->Get("Kernel::System::Ticket::Article::Backend::Phone")->ArticleCreate(

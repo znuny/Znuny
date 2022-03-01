@@ -22,10 +22,10 @@ $Selenium->RunTest(
     sub {
 
         # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # enable meta floaters for AgentTicketZoom
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::ZoomCollectMeta',
             Value => 1
@@ -39,14 +39,14 @@ $Selenium->RunTest(
             Name => $SettingName,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => $SettingName,
             Value => $Setting{EffectiveValue},
         );
 
         my $Language      = 'de';
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Language => $Language,
             Groups   => [ 'admin', 'users' ],
         ) || die "Did not get test user";

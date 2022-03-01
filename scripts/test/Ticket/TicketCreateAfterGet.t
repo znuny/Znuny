@@ -29,10 +29,10 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # set fixed time
-$Helper->FixedTimeSet();
+$HelperObject->FixedTimeSet();
 
 my $TicketID = $TicketObject->TicketCreate(
     Title        => 'Some Ticket_Title',
@@ -59,7 +59,7 @@ $Self->False(
     'TicketGet() (Title) is empty',
 );
 
-my ( $TestUserLogin, $TestUserID ) = $Helper->TestUserCreate(
+my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
     Groups => [ 'users', ],
 );
 

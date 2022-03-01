@@ -18,7 +18,7 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         my %QueuePreferences = (
             Module  => "Kernel::Output::HTML::QueuePreferences::Generic",
@@ -31,19 +31,19 @@ $Selenium->RunTest(
         );
 
         # Enable QueuePreferences.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'QueuePreferences###Comment2',
             Value => \%QueuePreferences,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'QueuePreferences###Comment2',
             Value => \%QueuePreferences,
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -74,7 +74,7 @@ $Selenium->RunTest(
         }
 
         # Create a real test queue.
-        my $RandomQueueName = 'Queue' . $Helper->GetRandomID();
+        my $RandomQueueName = 'Queue' . $HelperObject->GetRandomID();
         my $TestComment     = 'QueuePreferences Comment2';
 
         $Selenium->find_element( "#Name", 'css' )->send_keys($RandomQueueName);

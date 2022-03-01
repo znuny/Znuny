@@ -20,7 +20,7 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper                 = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject           = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $StandardTemplateObject = $Kernel::OM->Get('Kernel::System::StandardTemplate');
         my $TicketObject           = $Kernel::OM->Get('Kernel::System::Ticket');
         my $QueueObject            = $Kernel::OM->Get('Kernel::System::Queue');
@@ -29,19 +29,19 @@ $Selenium->RunTest(
         my $XMLObject              = $Kernel::OM->Get('Kernel::System::XML');
 
         # Disable check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
-        my $RandomID              = $Helper->GetRandomID();
+        my $RandomID              = $HelperObject->GetRandomID();
         my $CustomerUserTableName = "ut_$RandomID";
         my $CustomerCompanyName   = "Co-$RandomID";
         my $EmailAddress          = $RandomID . '@example.com';
         my $Success;
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 

@@ -19,13 +19,13 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # get signature object
 my $SignatureObject = $Kernel::OM->Get('Kernel::System::Signature');
 
 # add signature
-my $SignatureName = $Helper->GetRandomID();
+my $SignatureName = $HelperObject->GetRandomID();
 my $SignatureText = "Your OTRS-Team
 
 <OTRS_CURRENT_UserFirstname> <OTRS_CURRENT_UserLastname>

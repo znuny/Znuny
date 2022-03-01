@@ -18,19 +18,19 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
         $Selenium->set_window_size( 600, 400 );
 
         my $Language      = 'de';
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Language => $Language,
             Groups   => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
         # Create test ticket.
-        my $TitleRandom  = "Title" . $Helper->GetRandomID();
+        my $TitleRandom  = "Title" . $HelperObject->GetRandomID();
         my $TicketNumber = $TicketObject->TicketCreateNumber();
         my $TicketID     = $TicketObject->TicketCreate(
             TN         => $TicketNumber,

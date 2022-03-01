@@ -18,7 +18,7 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper                    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject              = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $UserObject                = $Kernel::OM->Get('Kernel::System::User');
         my $TicketObject              = $Kernel::OM->Get('Kernel::System::Ticket');
         my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
@@ -28,7 +28,7 @@ $Selenium->RunTest(
         # Do not check email addresses and mx records.
         # Change settings in both runtime and disk configuration.
         for my $Key (qw(CheckEmailAddresses CheckMXRecord)) {
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => $Key,
                 Value => 0,
@@ -37,14 +37,14 @@ $Selenium->RunTest(
 
         # Override FirstnameLastnameOrder setting to check if it is taken into account.
         #   (see bug#12554 for more information).
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'FirstnameLastnameOrder',
             Value => 1,
         );
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -53,7 +53,7 @@ $Selenium->RunTest(
             UserLogin => $TestUserLogin,
         );
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create test queue.
         my $QueueName = 'Queue' . $RandomID;
@@ -194,7 +194,7 @@ $Selenium->RunTest(
         my %AgentTicketStatusViewDefaultColumns = $SysConfigObject->SettingGet(
             Name => 'Ticket::Frontend::AgentTicketStatusView###DefaultColumns',
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketStatusView###DefaultColumns',
             Value => {
@@ -209,7 +209,7 @@ $Selenium->RunTest(
         );
         $DashboardTicketNew{EffectiveValue}->{DefaultColumns}->{"DynamicField_$DFName"} = 2;
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'DashboardBackend###0120-TicketNew',
             Value => {

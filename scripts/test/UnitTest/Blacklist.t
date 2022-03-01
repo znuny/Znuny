@@ -13,8 +13,8 @@ use utf8;
 
 use vars (qw($Self));
 
-my $Helper   = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-my $RandomID = $Helper->GetRandomID();
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $RandomID     = $HelperObject->GetRandomID();
 
 my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Dev::UnitTest::Run');
 
@@ -43,7 +43,7 @@ my @Tests = (
 
 for my $Test (@Tests) {
 
-    $Helper->ConfigSettingChange(
+    $HelperObject->ConfigSettingChange(
         %{ $Test->{Config} },
     );
 

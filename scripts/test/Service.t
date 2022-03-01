@@ -26,9 +26,9 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 # ------------------------------------------------------------ #
 # make preparations
@@ -70,7 +70,7 @@ my @UserIDs;
 # create needed random service names
 my @ServiceName;
 for my $Counter ( 1 .. 11 ) {
-    push @ServiceName, $Helper->GetRandomID();
+    push @ServiceName, $HelperObject->GetRandomID();
 }
 
 # get original service list for later checks

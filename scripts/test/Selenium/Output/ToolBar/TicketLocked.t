@@ -18,12 +18,12 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $GroupObject  = $Kernel::OM->Get('Kernel::System::Group');
         my $QueueObject  = $Kernel::OM->Get('Kernel::System::Queue');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
         my @Groups;
         my @Queues;
         my @Users;
@@ -78,7 +78,7 @@ $Selenium->RunTest(
             };
 
             # Create test user.
-            my $TestUserLogin = $Helper->TestUserCreate(
+            my $TestUserLogin = $HelperObject->TestUserCreate(
                 Groups => [ 'admin', 'users', $GroupName ],
             ) || die "Did not get test user $Item";
 

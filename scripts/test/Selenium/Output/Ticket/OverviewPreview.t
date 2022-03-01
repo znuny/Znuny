@@ -18,7 +18,7 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper             = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
         my $AutoResponseObject = $Kernel::OM->Get('Kernel::System::AutoResponse');
         my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
@@ -31,16 +31,16 @@ $Selenium->RunTest(
         );
 
         # Defines from which ticket attributes the agent can select the result order.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'TicketOverviewMenuSort###SortAttributes',
             Value => \%SortOverview,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'TicketOverviewMenuSort###SortAttributes',
             Value => \%SortOverview,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::NewArticleIgnoreSystemSender',
             Value => 0,
@@ -48,14 +48,14 @@ $Selenium->RunTest(
 
         # Override FirstnameLastnameOrder setting to check if it is taken into account
         #   (see bug#12554 for more information).
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'FirstnameLastnameOrder',
             Value => 5,
         );
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -69,7 +69,7 @@ $Selenium->RunTest(
             UserID => $TestUserID,
         );
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create test queue.
         my $QueueName = 'Queue' . $RandomID;
@@ -144,7 +144,7 @@ $Selenium->RunTest(
         }
         my @SortTicketNumbers = sort @TicketNumbers;
 
-        my $RandomNumber = $Helper->GetRandomNumber();
+        my $RandomNumber = $HelperObject->GetRandomNumber();
 
         my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
             ChannelName => 'Email',
@@ -310,7 +310,7 @@ $Selenium->RunTest(
         );
 
         # Update Ticket::NewArticleIgnoreSystemSender.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::NewArticleIgnoreSystemSender',
             Value => 1,

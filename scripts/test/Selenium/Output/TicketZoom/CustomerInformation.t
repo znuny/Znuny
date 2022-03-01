@@ -18,12 +18,12 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # Disable 'Ticket Information', 'Customer Information' and 'Linked Object' widgets in AgentTicketZoom screen.
         for my $WidgetDisable (qw(0100-TicketInformation 0200-CustomerInformation 0300-LinkTable)) {
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 0,
                 Key   => "Ticket::Frontend::AgentTicketZoom###Widgets###$WidgetDisable",
                 Value => '',
@@ -31,13 +31,13 @@ $Selenium->RunTest(
         }
 
         # Do not check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Get test customer data.
-        my $RandomID     = $Helper->GetRandomID();
+        my $RandomID     = $HelperObject->GetRandomID();
         my %CustomerData = (
             CustomerFirstName => "FirstName$RandomID",
             CustomerLastName  => "LastName$RandomID",
@@ -45,7 +45,7 @@ $Selenium->RunTest(
             CustomerEmail     => "$RandomID\@localhost.com",
             CompanyName       => "Company$RandomID",
             CompanyStreet     => "Street$RandomID",
-            CompanyZip        => $Helper->GetRandomNumber(),
+            CompanyZip        => $HelperObject->GetRandomNumber(),
             CompanyCity       => "City$RandomID",
             CompanyURL        => "http://www.$RandomID.org",
             CompanyComment    => "Comment$RandomID",
@@ -86,7 +86,7 @@ $Selenium->RunTest(
         );
 
         # Create test ticket.
-        my $TitleRandom = "Title" . $Helper->GetRandomID();
+        my $TitleRandom = "Title" . $HelperObject->GetRandomID();
         my $TicketID    = $TicketObject->TicketCreate(
             Title        => $TitleRandom,
             Queue        => 'Raw',
@@ -104,7 +104,7 @@ $Selenium->RunTest(
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -132,7 +132,7 @@ $Selenium->RunTest(
         );
 
         # Reset 'Customer Information' widget sysconfig, enable it and refresh screen.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketZoom###Widgets###0200-CustomerInformation',
             Value => {

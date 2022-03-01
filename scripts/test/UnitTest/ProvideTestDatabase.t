@@ -13,9 +13,9 @@ use utf8;
 
 use vars (qw($Self));
 
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my $Success = $Helper->ProvideTestDatabase();
+my $Success = $HelperObject->ProvideTestDatabase();
 if ( !$Success ) {
     $Self->False(
         0,
@@ -44,7 +44,7 @@ my @DatabaseXMLFiles = (
     "$Home/scripts/database/otrs-initial_insert.xml",
 );
 
-$Success = $Helper->ProvideTestDatabase(
+$Success = $HelperObject->ProvideTestDatabase(
     DatabaseXMLFiles => \@DatabaseXMLFiles,
 );
 

@@ -21,14 +21,14 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 $ConfigObject->Set(
     Key   => 'CheckEmailAddresses',
     Value => 0,
 );
 
-my $UserRandom = 'unittest-' . $Helper->GetRandomID();
+my $UserRandom = 'unittest-' . $HelperObject->GetRandomID();
 my $UserID     = $UserObject->UserAdd(
     UserFirstname => 'John',
     UserLastname  => 'Doe',
