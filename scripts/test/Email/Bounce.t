@@ -18,10 +18,10 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # Disable email addresses checking.
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Key   => 'CheckEmailAddresses',
     Value => 0,
 );
@@ -42,7 +42,7 @@ my $SystemTime = $Kernel::OM->Create(
         String => '2014-01-01 12:00:00',
     },
 );
-$Helper->FixedTimeSet($SystemTime);
+$HelperObject->FixedTimeSet($SystemTime);
 
 my $EmailObject = $Kernel::OM->Get('Kernel::System::Email');
 

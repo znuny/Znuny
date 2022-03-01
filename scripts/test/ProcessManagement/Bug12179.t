@@ -25,10 +25,10 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # Create a new dynamic field name.
-my $DynamicFieldName = 'UnitTestDF' . $Helper->GetRandomNumber();
+my $DynamicFieldName = 'UnitTestDF' . $HelperObject->GetRandomNumber();
 
 # Define new process.
 my %Process = (
@@ -166,7 +166,7 @@ $Self->IsNot(
     "DynamicFieldAdd() for $DynamicFieldName with true",
 );
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 my $TicketObject         = $Kernel::OM->Get('Kernel::System::Ticket');
 my $ArticleObject        = $Kernel::OM->Get('Kernel::System::Ticket::Article');

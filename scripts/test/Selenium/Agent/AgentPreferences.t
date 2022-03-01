@@ -22,26 +22,26 @@ $Selenium->RunTest(
     sub {
 
         # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # enable google authenticator shared secret preference
         my $SharedSecretConfig
             = $Kernel::OM->Get('Kernel::Config')->Get('PreferencesGroups')->{'GoogleAuthenticatorSecretKey'};
         $SharedSecretConfig->{Active} = 1;
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => "PreferencesGroups###GoogleAuthenticatorSecretKey",
             Value => $SharedSecretConfig,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 1,
         );
 
         # Simulate that we have overridden setting in the .pm file.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::ZoomTimeDisplay',
             Value => 1,
@@ -49,7 +49,7 @@ $Selenium->RunTest(
 
         # create test user and login
         my $Language      = "en";
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups   => [ 'users', 'admin' ],
             Language => $Language,
         ) || die "Did not get test user";
@@ -61,7 +61,7 @@ $Selenium->RunTest(
         );
 
         # add a test notification
-        my $RandomID                = $Helper->GetRandomID();
+        my $RandomID                = $HelperObject->GetRandomID();
         my $NotificationEventObject = $Kernel::OM->Get('Kernel::System::NotificationEvent');
         my $NotificationID          = $NotificationEventObject->NotificationAdd(
             Name => 'NotificationTest' . $RandomID,
@@ -264,7 +264,7 @@ $Selenium->RunTest(
         );
 
         # check if the correct avatar widget is displayed (engine disabled)
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::AvatarEngine',
             Value => 'None',
@@ -279,7 +279,7 @@ $Selenium->RunTest(
         );
 
         # now set engine to 'Gravatar' and reload the screen
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::AvatarEngine',
             Value => 'Gravatar',
@@ -583,7 +583,7 @@ JAVASCRIPT
             );
 
             # Create non-admin user.
-            my $TestUserLogin2 = $Helper->TestUserCreate(
+            my $TestUserLogin2 = $HelperObject->TestUserCreate(
                 Groups   => ['users'],
                 Language => $Language,
             ) || die "Did not get test user";

@@ -26,14 +26,14 @@ $Kernel::OM->ObjectParamAdd(
         SkipSSLVerify => 1
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my $TestUserLogin         = $Helper->TestUserCreate();
-my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate();
+my $TestUserLogin         = $HelperObject->TestUserCreate();
+my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate();
 
 my $BaseURL = $ConfigObject->Get('HttpType') . '://';
 
-$BaseURL .= $Helper->GetTestHTTPHostname() . '/';
+$BaseURL .= $HelperObject->GetTestHTTPHostname() . '/';
 $BaseURL .= $ConfigObject->Get('ScriptAlias') . 'index.pl?';
 
 my $UserAgent = LWP::UserAgent->new(

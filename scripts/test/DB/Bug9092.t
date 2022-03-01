@@ -22,7 +22,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # create test ticket and article
 my $TicketID = $Kernel::OM->Get('Kernel::System::Ticket')->TicketCreate(
@@ -64,7 +64,7 @@ $Self->True(
 
 # create test user
 my $UserObject = $Kernel::OM->Get('Kernel::System::User');
-my ( $UserLogin, $UserID ) = $Helper->TestUserCreate();
+my ( $UserLogin, $UserID ) = $HelperObject->TestUserCreate();
 
 =cut
 This test is supposed to verify the solution for bug#9092, which showed

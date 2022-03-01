@@ -33,38 +33,38 @@ $Selenium->RunTest(
         my $SLAObject       = $Kernel::OM->Get('Kernel::System::SLA');
         my $StateObject     = $Kernel::OM->Get('Kernel::System::State');
         my $DBObject        = $Kernel::OM->Get('Kernel::System::DB');
-        my $Helper          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
         my $Success;
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0,
         );
 
         # Enable ticket responsible feature.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Responsible',
             Value => 1,
         );
 
         # Enable ticket service feature.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 1,
         );
 
         # Create test customer user.
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate()
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate()
             || die "Did not get test customer user";
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -229,7 +229,7 @@ $Selenium->RunTest(
 
             for my $NoMandatoryField ( values %{ $FreeTextFields{NoMandatory} } ) {
 
-                $Helper->ConfigSettingChange(
+                $HelperObject->ConfigSettingChange(
                     Valid => 1,
                     Key   => "Ticket::Frontend::AgentTicketFreeText###$NoMandatoryField",
                     Value => $Test->{NoMandatory},
@@ -238,7 +238,7 @@ $Selenium->RunTest(
 
             for my $MandatoryField ( values %{ $FreeTextFields{Mandatory} } ) {
 
-                $Helper->ConfigSettingChange(
+                $HelperObject->ConfigSettingChange(
                     Valid => 1,
                     Key   => "Ticket::Frontend::AgentTicketFreeText###$MandatoryField",
                     Value => $Test->{Mandatory},

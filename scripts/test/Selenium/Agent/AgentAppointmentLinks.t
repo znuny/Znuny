@@ -19,7 +19,7 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $UserObject        = $Kernel::OM->Get('Kernel::System::User');
         my $GroupObject       = $Kernel::OM->Get('Kernel::System::Group');
         my $CalendarObject    = $Kernel::OM->Get('Kernel::System::Calendar');
@@ -28,13 +28,13 @@ $Selenium->RunTest(
         my $CacheObject       = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Set link object view mode to 'Complex'.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'LinkObject::ViewMode',
             Value => 'Complex',
         );
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create test group.
         my $GroupName = "group-$RandomID";
@@ -50,7 +50,7 @@ $Selenium->RunTest(
 
         # Create test user.
         my $Language      = 'en';
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups   => [ 'admin', 'users', $GroupName ],
             Language => $Language,
         ) || die 'Did not get test user';

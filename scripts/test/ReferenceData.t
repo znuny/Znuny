@@ -17,7 +17,7 @@ use Kernel::System::VariableCheck qw(:all);
 
 # get needed objects
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # use ReferenceData ISO list
 $ConfigObject->Set(

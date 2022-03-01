@@ -27,7 +27,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # ------------------------------------------------------------ #
 # make preparations
@@ -50,7 +50,7 @@ my @UserIDs;
         my $UserID = $UserObject->UserAdd(
             UserFirstname => 'SLA' . $Counter,
             UserLastname  => 'UnitTest',
-            UserLogin     => 'UnitTest-SLA-' . $Counter . $Helper->GetRandomID(),
+            UserLogin     => 'UnitTest-SLA-' . $Counter . $HelperObject->GetRandomID(),
             UserEmail     => 'UnitTest-SLA-' . $Counter . '@localhost',
             ValidID       => 1,
             ChangeUserID  => 1,
@@ -69,7 +69,7 @@ my @UserIDs;
 # create needed random service names
 my @SLAName;
 for my $Counter ( 1 .. 10 ) {
-    push @SLAName, 'UnitTest' . $Helper->GetRandomID();
+    push @SLAName, 'UnitTest' . $HelperObject->GetRandomID();
 }
 
 # create some test services
@@ -78,7 +78,7 @@ for my $Counter ( 1 .. 3 ) {
 
     # add a service
     my $ServiceID = $ServiceObject->ServiceAdd(
-        Name    => 'UnitTest-SLA' . $Helper->GetRandomID(),
+        Name    => 'UnitTest-SLA' . $HelperObject->GetRandomID(),
         ValidID => 1,
         UserID  => 1,
     );

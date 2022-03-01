@@ -22,10 +22,10 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # set fixed time
-$Helper->FixedTimeSet();
+$HelperObject->FixedTimeSet();
 
 my $PIDCreate = $PIDObject->PIDCreate( Name => 'Test' );
 $Self->True(
@@ -62,7 +62,7 @@ $Self->False(
 );
 
 $UpdateSuccess = $PIDObject->PIDUpdate(
-    Name => 'NonExistentProcess' . $Helper->GetRandomID(),
+    Name => 'NonExistentProcess' . $HelperObject->GetRandomID(),
 );
 
 $Self->False(
@@ -71,7 +71,7 @@ $Self->False(
 );
 
 # wait 2 seconds to update the PID change time
-$Helper->FixedTimeAddSeconds(2);
+$HelperObject->FixedTimeAddSeconds(2);
 
 $UpdateSuccess = $PIDObject->PIDUpdate(
     Name => 'Test',
@@ -109,7 +109,7 @@ $Self->True(
 );
 
 # 2 manually modify the PID host
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 $UpdateSuccess = $Kernel::OM->Get('Kernel::System::DB')->Do(
     SQL => '
         UPDATE process_id

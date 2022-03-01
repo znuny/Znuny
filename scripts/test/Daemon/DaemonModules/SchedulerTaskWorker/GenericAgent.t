@@ -32,10 +32,10 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # get random ID
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 my $TicketID = $Kernel::OM->Get('Kernel::System::Ticket')->TicketCreate(
     Title        => 'GA' . $RandomID,
@@ -123,7 +123,7 @@ $Self->True(
 );
 
 # freeze time
-$Helper->FixedTimeSet();
+$HelperObject->FixedTimeSet();
 
 my @Tests = (
     {
@@ -239,7 +239,7 @@ for my $Test (@Tests) {
     }
 
     if ( $Test->{AddSeconds} ) {
-        $Helper->FixedTimeAddSeconds( $Test->{AddSeconds} );
+        $HelperObject->FixedTimeAddSeconds( $Test->{AddSeconds} );
     }
 
     my %Job = $GenericAgentObject->JobGet( Name => 'GA' . $RandomID );

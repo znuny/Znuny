@@ -24,7 +24,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # -------------------------------------------------------------------------------------------- #
 # Test creating a table with a column that needs data type translation in the DB drivers

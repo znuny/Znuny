@@ -23,7 +23,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # Get config object.
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
@@ -176,7 +176,7 @@ for my $Count ( 1 .. 2 ) {
 }
 
 my $PostMasterFilter = $Kernel::OM->Get('Kernel::System::PostMaster::Filter');
-my $FilterRand1      = 'filter' . $Helper->GetRandomID();
+my $FilterRand1      = 'filter' . $HelperObject->GetRandomID();
 
 $PostMasterFilter->FilterAdd(
     Name           => $FilterRand1,

@@ -26,11 +26,11 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper   = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-my $RandomID = $Helper->GetRandomID();
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $RandomID     = $HelperObject->GetRandomID();
 
 # freeze time
-$Helper->FixedTimeSet();
+$HelperObject->FixedTimeSet();
 
 # web service config
 my $WebserviceConfig = {

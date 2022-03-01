@@ -19,7 +19,7 @@ $Kernel::OM->ObjectParamAdd(
     },
 );
 
-my $Helper               = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject         = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $TicketObject         = $Kernel::OM->Get('Kernel::System::Ticket');
 my $QueueObject          = $Kernel::OM->Get('Kernel::System::Queue');
 my $ArticleObject        = $Kernel::OM->Get('Kernel::System::Ticket::Article');
@@ -28,7 +28,7 @@ my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->
 );
 
 # Create test queue.
-my $QueueName = 'Queue' . $Helper->GetRandomID();
+my $QueueName = 'Queue' . $HelperObject->GetRandomID();
 my $QueueID   = $QueueObject->QueueAdd(
     Name            => $QueueName,
     ValidID         => 1,
@@ -93,13 +93,13 @@ $Self->True(
 );
 
 # Ensure check mail addresses is enabled.
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Key   => 'CheckEmailAddresses',
     Value => 1,
 );
 
 # Disable MX record check.
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Key   => 'CheckMXRecord',
     Value => 0,
 );

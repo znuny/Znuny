@@ -23,7 +23,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 $ConfigObject->Set(
     Key   => 'Ticket::ArchiveSystem',
@@ -51,7 +51,7 @@ my @Tests = (
     },
 );
 
-my $QueueBefore = 'Unittest-' . $Helper->GetRandomID();
+my $QueueBefore = 'Unittest-' . $HelperObject->GetRandomID();
 
 my $QueueIDExist = $QueueObject->QueueLookup( Queue => $QueueBefore );
 
@@ -104,7 +104,7 @@ my %IndexBefore = $TicketObject->TicketAcceleratorIndex(
     ShownQueueIDs => [$QueueID],
 );
 
-my $QueueAfterName = 'Unittest-' . $Helper->GetRandomID();
+my $QueueAfterName = 'Unittest-' . $HelperObject->GetRandomID();
 
 my $Updated = $QueueObject->QueueUpdate(
     %Queue,
@@ -153,7 +153,7 @@ $Self->True(
 
 # Create a ticket in sub queue, then rename parent queue. Make sure the index update
 # picks up this change for sub queue name (see bug#13570 for more information).
-my $SubQueueName = 'SubUnittest-' . $Helper->GetRandomID();
+my $SubQueueName = 'SubUnittest-' . $HelperObject->GetRandomID();
 my $SubQueueID   = $QueueObject->QueueAdd(
     Name            => $QueueBefore . '::' . $SubQueueName,
     GroupID         => 1,
@@ -202,7 +202,7 @@ for my $QueueIndex ( @{ $SubQueueIndex{Queues} } ) {
     }
 }
 
-my $UpdatedParentQueueName = 'ChangedQueue-' . $Helper->GetRandomID();
+my $UpdatedParentQueueName = 'ChangedQueue-' . $HelperObject->GetRandomID();
 my $ParenQueueUpdate       = $QueueObject->QueueUpdate(
     %Queue,
     Name   => $UpdatedParentQueueName,

@@ -31,7 +31,7 @@ $Kernel::OM->ObjectParamAdd(
         SkipSSLVerify => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # search old test tickets
 my @OldTicketIDs = $TicketObject->TicketSearch(
@@ -49,7 +49,7 @@ for my $TicketID (@OldTicketIDs) {
 }
 
 # get a random number
-my $RandomID = $Helper->GetRandomNumber();
+my $RandomID = $HelperObject->GetRandomNumber();
 
 $ConfigObject->Set(
     Key   => 'CheckEmailAddresses',
@@ -788,7 +788,7 @@ $Self->True(
 );
 
 # get remote host with some precautions for certain unit test systems
-my $Host = $Helper->GetTestHTTPHostname();
+my $Host = $HelperObject->GetTestHTTPHostname();
 
 # prepare web service config
 my $RemoteSystem =
@@ -871,7 +871,7 @@ $Self->Is(
 );
 
 # create a new user for current test
-my $UserLogin = $Helper->TestUserCreate(
+my $UserLogin = $HelperObject->TestUserCreate(
     Groups => [ 'admin', 'users' ],
 );
 my $Password = $UserLogin;

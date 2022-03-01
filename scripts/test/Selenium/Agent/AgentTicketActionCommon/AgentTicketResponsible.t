@@ -18,32 +18,32 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # Enable change owner to everyone feature.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::ChangeOwnerToEveryone',
             Value => 1,
         );
 
         # Enable ticket responsible feature.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Responsible',
             Value => 1,
         );
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0,
         );
 
         my $Config = $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Frontend::AgentTicketResponsible');
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketResponsible',
             Value => {
@@ -56,7 +56,7 @@ $Selenium->RunTest(
         # Create test users.
         my @TestUser;
         for my $User ( 1 .. 2 ) {
-            my $TestUserLogin = $Helper->TestUserCreate(
+            my $TestUserLogin = $HelperObject->TestUserCreate(
                 Groups => [ 'admin', 'users' ],
             ) || die "Did not get test user";
 

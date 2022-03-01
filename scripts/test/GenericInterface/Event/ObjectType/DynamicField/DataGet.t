@@ -19,9 +19,9 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my $Rand = $Helper->GetRandomNumber();
+my $Rand = $HelperObject->GetRandomNumber();
 
 my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 

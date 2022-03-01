@@ -20,7 +20,7 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # Disable email checks to create new user.
@@ -31,12 +31,12 @@ $Selenium->RunTest(
 
         my $CustomerUser = $ConfigObject->Get('CustomerUser');
         $CustomerUser->{CustomerUserListFields} = [ 'first_name', 'last_name', 'customer_id', 'email' ];
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CustomerUser',
             Value => $CustomerUser,
         );
 
-        my $RandomNumber = $Helper->GetRandomNumber();
+        my $RandomNumber = $HelperObject->GetRandomNumber();
 
         # Create customer.
         my $CustomerID        = "CustomerID$RandomNumber";
@@ -80,7 +80,7 @@ $Selenium->RunTest(
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 

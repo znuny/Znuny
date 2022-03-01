@@ -22,7 +22,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
 my $MainObject    = $Kernel::OM->Get('Kernel::System::Main');
@@ -31,7 +31,7 @@ my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 for my $Backend (qw(DB FS)) {
 
     # Change the article storage backend.
-    $Helper->ConfigSettingChange(
+    $HelperObject->ConfigSettingChange(
         Key   => 'Ticket::Article::Backend::MIMEBase::ArticleStorage',
         Value => 'Kernel::System::Ticket::Article::Backend::MIMEBase::ArticleStorage' . $Backend,
     );

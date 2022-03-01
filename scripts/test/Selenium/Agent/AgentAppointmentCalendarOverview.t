@@ -80,13 +80,13 @@ my $ElementExists = sub {
 
 $Selenium->RunTest(
     sub {
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         my $GroupObject    = $Kernel::OM->Get('Kernel::System::Group');
         my $CalendarObject = $Kernel::OM->Get('Kernel::System::Calendar');
         my $TicketObject   = $Kernel::OM->Get('Kernel::System::Ticket');
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create test group.
         my $GroupName = "test-calendar-group-$RandomID";
@@ -109,7 +109,7 @@ $Selenium->RunTest(
 
         # Create test user.
         my $Language      = 'en';
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups   => [ 'users', $GroupName ],
             Language => $Language,
         ) || die 'Did not get test user';
@@ -119,7 +119,7 @@ $Selenium->RunTest(
             UserLogin => $TestUserLogin,
         );
 
-        my $TestUserLogin2 = $Helper->TestUserCreate(
+        my $TestUserLogin2 = $HelperObject->TestUserCreate(
             Groups   => [ 'users', $GroupName2 ],
             Language => $Language,
         ) || die 'Did not get test user';
@@ -130,7 +130,7 @@ $Selenium->RunTest(
         );
 
         # Create test customer user.
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate()
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate()
             || die 'Did not get test customer user';
 
         # Create a few test calendars.

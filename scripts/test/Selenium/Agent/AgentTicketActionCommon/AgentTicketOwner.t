@@ -18,38 +18,38 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Enable change owner to everyone feature.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::ChangeOwnerToEveryone',
             Value => 1
         );
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0
         );
 
         # Disable check of email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Disable MX record check.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CheckMXRecord',
             Value => 0,
         );
 
         my $Config = $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Frontend::AgentTicketOwner');
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketOwner',
             Value => {
@@ -62,7 +62,7 @@ $Selenium->RunTest(
         # Create test users and login first.
         my @TestUser;
         for my $User ( 1 .. 2 ) {
-            my $TestUserLogin = $Helper->TestUserCreate(
+            my $TestUserLogin = $HelperObject->TestUserCreate(
                 Groups => [ 'admin', 'users' ],
             ) || die "Did not get test user";
 
@@ -252,7 +252,7 @@ $Selenium->RunTest(
         };
 
         # Enable Test email backend.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SendmailModule',
             Value => 'Kernel::System::Email::Test',
@@ -266,13 +266,13 @@ $Selenium->RunTest(
         );
 
         # Disable AgentTicketOwner###NoteMandatory.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketOwner###NoteMandatory',
             Value => 0
         );
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
         my $Subject  = "Subject-$RandomID";
         my $Body     = "Body-$RandomID";
 

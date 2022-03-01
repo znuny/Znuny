@@ -27,7 +27,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # create common objects to be used in ActivityDialog object creation
 my %CommonObject;
@@ -38,7 +38,7 @@ $CommonObject{TransitionActionObject} = $Kernel::OM->Get('Kernel::System::Proces
 $CommonObject{TicketObject}           = $Kernel::OM->Get('Kernel::System::Ticket');
 
 # define needed variables
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 # create some queues in the system
 my %QueueData1 = (
@@ -101,7 +101,7 @@ $Self->IsNot(
     "QueueAdd() - Added queue '$QueueData3{Name}' for ACL check - should not be undef"
 );
 
-my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate();
+my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate();
 
 # Get ServiceObject.
 my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');

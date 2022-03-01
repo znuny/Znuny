@@ -28,7 +28,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 $ConfigObject->Set(
     Key   => 'CheckEmailAddresses',
@@ -36,9 +36,9 @@ $ConfigObject->Set(
 );
 
 # create test user
-my ( $Login, $UserID ) = $Helper->TestUserCreate();
+my ( $Login, $UserID ) = $HelperObject->TestUserCreate();
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 my $TestNumber = 1;
 
@@ -338,7 +338,7 @@ for my $SearchProfileName (@SearchProfileNames) {
     );
 }
 
-my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate();
+my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate();
 my $CustomerBase          = 'CustomerTicketSearch';
 my %CustomerSearches      = (
     First => {
@@ -387,7 +387,7 @@ $Self->Is(
 my %Customer = $CustomerUserObject->CustomerUserDataGet(
     User => $TestCustomerUserLogin,
 );
-my $NewCustomerUserLogin = $Helper->GetRandomID();
+my $NewCustomerUserLogin = $HelperObject->GetRandomID();
 my $Update               = $CustomerUserObject->CustomerUserUpdate(
     %Customer,
     ID        => $Customer{UserLogin},

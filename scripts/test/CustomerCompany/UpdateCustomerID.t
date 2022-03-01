@@ -19,7 +19,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # get needed objects
 my $CustomerUserObject    = $Kernel::OM->Get('Kernel::System::CustomerUser');
@@ -30,7 +30,7 @@ $Kernel::OM->Get('Kernel::Config')->Set(
     Value => 0,
 );
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 my @CustomerIDs;
 for my $Key ( 1 .. 3, 'ä', 'カス', '*' ) {
@@ -74,7 +74,7 @@ for my $Key ( 1 .. 3, 'ä', 'カス', '*' ) {
     );
 
     my @CustomerLogins;
-    my $CustomerUserRandomID = $Helper->GetRandomID();
+    my $CustomerUserRandomID = $HelperObject->GetRandomID();
     for my $CustomerUserKey ( 1 .. 3, 'ä', 'カス', '*' ) {
 
         my $UserRand = $CustomerUserKey . $CustomerUserRandomID;

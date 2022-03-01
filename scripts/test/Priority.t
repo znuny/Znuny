@@ -22,10 +22,10 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # add priority names
-my $PriorityRand = 'priority' . $Helper->GetRandomID();
+my $PriorityRand = 'priority' . $HelperObject->GetRandomID();
 
 # Tests for Priority encode method
 my @Tests = (

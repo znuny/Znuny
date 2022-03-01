@@ -34,14 +34,14 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my ( $TestUserLogin, $TestUserID ) = $Helper->TestUserCreate(
+my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
     Groups => [ 'admin', 'users' ],
 );
 
 # Disable email addresses checking.
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Key   => 'CheckEmailAddresses',
     Value => 0,
 );

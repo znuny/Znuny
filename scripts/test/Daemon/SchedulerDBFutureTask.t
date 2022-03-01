@@ -48,10 +48,10 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # freeze time
-$Helper->FixedTimeSet();
+$HelperObject->FixedTimeSet();
 
 # get current time stamp
 my $TimeStamp = $Kernel::OM->Create('Kernel::System::DateTime')->ToString();
@@ -354,7 +354,7 @@ for my $TaskID (@AddedTasksIDs) {
     );
 }
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 # FutureTaskToExecute() tests
 my $TaskID = $SchedulerDBObject->FutureTaskAdd(
@@ -537,7 +537,7 @@ for my $Test (@Tests) {
             "$Test->{Name} FutureTaskAdd() - result with true",
         );
 
-        $Helper->FixedTimeAddSeconds(60);
+        $HelperObject->FixedTimeAddSeconds(60);
     }
 
     my @List = $SchedulerDBObject->FutureTaskList(

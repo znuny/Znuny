@@ -21,7 +21,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # get needed objects
 my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
@@ -29,7 +29,7 @@ my $BackendObject      = $Kernel::OM->Get('Kernel::System::DynamicField::Backend
 my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
 
 # define needed variable
-my $RandomID = $Helper->GetRandomNumber();
+my $RandomID = $HelperObject->GetRandomNumber();
 
 # create a ticket
 my $TicketID = $TicketObject->TicketCreate(
@@ -72,7 +72,7 @@ $Self->True(
 );
 
 # create a customer user
-my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate();
+my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate();
 
 # create a dynamic field for customer user (ObjectName instead of ObjectID)
 my $DynamicFieldName2 = "dynamicfieldtest2$RandomID";

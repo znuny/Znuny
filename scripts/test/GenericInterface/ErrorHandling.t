@@ -20,7 +20,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1
     },
 );
-my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 my $ErrorObject  = $Kernel::OM->Get('Kernel::GenericInterface::ErrorHandling');
 
@@ -41,7 +41,7 @@ my %WebserviceConfig = (
     },
 );
 my $WebserviceID = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice')->WebserviceAdd(
-    Name    => 'UnitTest ErrorHandler ' . $Helper->GetRandomID(),
+    Name    => 'UnitTest ErrorHandler ' . $HelperObject->GetRandomID(),
     Config  => \%WebserviceConfig,
     ValidID => 1,
     UserID  => 1,

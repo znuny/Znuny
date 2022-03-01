@@ -22,7 +22,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # get needed objects
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
@@ -200,7 +200,7 @@ for my $TicketSubjectConfig ( 'Right', 'Left' ) {
             # add and check rand postmaster filters
             my $FilterRandConfig = [
                 {
-                    Name  => 'filter' . $Helper->GetRandomID(),
+                    Name  => 'filter' . $HelperObject->GetRandomID(),
                     Match => [
                         {
                             Key   => 'Subject',
@@ -238,7 +238,7 @@ for my $TicketSubjectConfig ( 'Right', 'Left' ) {
                     StopAfterMatch => 0,
                 },
                 {
-                    Name  => 'filter' . $Helper->GetRandomID(),
+                    Name  => 'filter' . $HelperObject->GetRandomID(),
                     Match => [
                         {
                             Key   => 'Subject',
@@ -272,7 +272,7 @@ for my $TicketSubjectConfig ( 'Right', 'Left' ) {
                     StopAfterMatch => 0,
                 },
                 {
-                    Name  => 'filter' . $Helper->GetRandomID(),
+                    Name  => 'filter' . $HelperObject->GetRandomID(),
                     Match => [
                         {
                             Key   => 'Subject',
@@ -306,7 +306,7 @@ for my $TicketSubjectConfig ( 'Right', 'Left' ) {
                     StopAfterMatch => 0,
                 },
                 {
-                    Name  => 'filter' . $Helper->GetRandomID(),
+                    Name  => 'filter' . $HelperObject->GetRandomID(),
                     Match => [
                         {
                             Key   => 'Subject',
@@ -351,7 +351,7 @@ for my $TicketSubjectConfig ( 'Right', 'Left' ) {
             }
 
             # get rand sender address
-            my $UserRand1 = 'example-user' . $Helper->GetRandomID() . '@example.com';
+            my $UserRand1 = 'example-user' . $HelperObject->GetRandomID() . '@example.com';
 
             FILE:
             for my $File (qw(1 2 3 5 6 11 17 18 21 22 23)) {
@@ -1549,7 +1549,7 @@ for my $DynamicFieldID (@DynamicfieldIDs) {
 }
 
 # test X-OTRS-(Owner|Responsible)
-my ( $Login, $UserID ) = $Helper->TestUserCreate();
+my ( $Login, $UserID ) = $HelperObject->TestUserCreate();
 
 my %OwnerResponsibleTests = (
     Owner => {

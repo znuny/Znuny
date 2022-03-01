@@ -25,35 +25,35 @@ $Selenium->RunTest(
         my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # disable check email addresses
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # do not check RichText
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0
         );
 
         # do not check service and type
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 0
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Type',
             Value => 0
         );
 
         # create test user
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -63,7 +63,7 @@ $Selenium->RunTest(
         );
 
         # get needed variables
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
         my $DFName   = 'DF' . $RandomID;
 
         # create a test dynamic field
@@ -88,7 +88,7 @@ $Selenium->RunTest(
         );
 
         # enable test dynamic field to show in AgentTicketEmailOutbound screen
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketEmailOutbound###DynamicField',
             Value => {
@@ -115,7 +115,7 @@ $Selenium->RunTest(
         );
 
         # add test customer for testing
-        my $TestCustomer       = 'Customer' . $Helper->GetRandomID();
+        my $TestCustomer       = 'Customer' . $HelperObject->GetRandomID();
         my $TestCustomerUserID = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
             Source         => 'CustomerUser',
             UserFirstname  => $TestCustomer,

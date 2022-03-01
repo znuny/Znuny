@@ -20,7 +20,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # get needed objects
 my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
@@ -29,7 +29,7 @@ my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
 
 # start tests
 # always random number with the same number of digits
-my $RandomID = $Helper->GetRandomNumber();
+my $RandomID = $HelperObject->GetRandomNumber();
 $RandomID = substr $RandomID, -7, 7;
 my @FieldIDs;
 

@@ -27,7 +27,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 $ConfigObject->Set(
     Key   => 'CheckEmailAddresses',
@@ -133,7 +133,7 @@ if ( !$SMIMEObject ) {
     return 1;
 }
 
-my $Random = $Helper->GetRandomID();
+my $Random = $HelperObject->GetRandomID();
 
 # get existing certificates
 my @CertList  = $SMIMEObject->CertificateList();

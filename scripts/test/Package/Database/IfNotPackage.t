@@ -16,7 +16,7 @@ use vars (qw($Self));
 
 # Do not use RestoreDatabae here, in our tests the first contained package remains installed
 #   with this option.
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
 
@@ -125,7 +125,7 @@ $OTRSVersion =~ s{ (\d+ \. \d+) .+ }{$1}msx;
 # add x as patch level version
 $OTRSVersion .= '.x';
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 my %Packages = (
     'Package1' => << "EOF",

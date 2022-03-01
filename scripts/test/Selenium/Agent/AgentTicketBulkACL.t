@@ -68,70 +68,70 @@ $Selenium->RunTest(
             }
         };
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ACLObject    = $Kernel::OM->Get('Kernel::System::ACL::DB::ACL');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CheckMXRecord',
             Value => 0,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Type',
             Value => 1,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Responsible',
             Value => 1,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketBulk###State',
             Value => 1,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketBulk###TicketType',
             Value => 1,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketBulk###Owner',
             Value => 1,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketBulk###Responsible',
             Value => 1,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketBulk###Priority',
             Value => 1,
         );
 
         # Create test user and login.
-        my $TestUserLogin1 = $Helper->TestUserCreate(
+        my $TestUserLogin1 = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
         my $UserObject = $Kernel::OM->Get('Kernel::System::User');
         my $UserID1    = $UserObject->UserLookup(
             UserLogin => $TestUserLogin1,
         );
-        my ( $TestUserLogin2, $UserID2 ) = $Helper->TestUserCreate(
+        my ( $TestUserLogin2, $UserID2 ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         );
 
@@ -300,9 +300,9 @@ EOF
             UserFirstname  => 'Huber',
             UserLastname   => 'Manfred',
             UserCustomerID => 'A124',
-            UserLogin      => 'customeruser_' . $Helper->GetRandomID(),
+            UserLogin      => 'customeruser_' . $HelperObject->GetRandomID(),
             UserPassword   => 'some-pass',
-            UserEmail      => $Helper->GetRandomID() . '@localhost.com',
+            UserEmail      => $HelperObject->GetRandomID() . '@localhost.com',
             ValidID        => 1,
             UserID         => 1,
         );

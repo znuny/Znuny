@@ -24,7 +24,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 $ConfigObject->Set(
     Key   => 'CheckEmailAddresses',
@@ -62,7 +62,7 @@ $ConfigObject->Set(
 my $CustomerGroupObject = $Kernel::OM->Get('Kernel::System::CustomerGroup');
 my $GroupObject         = $Kernel::OM->Get('Kernel::System::Group');
 
-my $RandomID   = $Helper->GetRandomID();
+my $RandomID   = $HelperObject->GetRandomID();
 my $UserID     = 1;
 my $UID        = $RandomID;
 my $GID1       = 1;
@@ -2190,8 +2190,8 @@ for my $Test (@Tests) {
 my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
 
 # get another customer id
-my $CustomerID2 = $Helper->GetRandomID();
-my $CustomerID3 = $Helper->GetRandomID();
+my $CustomerID2 = $HelperObject->GetRandomID();
+my $CustomerID3 = $HelperObject->GetRandomID();
 
 # add customer companies to the database
 my @CustomerIDs = (

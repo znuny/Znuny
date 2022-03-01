@@ -39,7 +39,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # get scheduler database object
 my $SchedulerDBObject = $Kernel::OM->Get('Kernel::System::Daemon::SchedulerDB');
@@ -517,7 +517,7 @@ for my $Task (@List) {
 # TaskCleanup() tests
 
 # freeze the current time
-$Helper->FixedTimeSet();
+$HelperObject->FixedTimeSet();
 
 my %TaskTemplate = (
     Type     => 'UnitTest',
@@ -574,7 +574,7 @@ my @Tests = (
 for my $Test (@Tests) {
 
     if ( $Test->{PastSecondsAdd} ) {
-        $Helper->FixedTimeAddSeconds( -$Test->{PastSecondsAdd} );
+        $HelperObject->FixedTimeAddSeconds( -$Test->{PastSecondsAdd} );
         print "  Set $Test->{PastSecondsAdd} seconds into the past.\n";
     }
 
@@ -602,7 +602,7 @@ for my $Test (@Tests) {
     }
 
     if ( $Test->{PastSecondsAdd} ) {
-        $Helper->FixedTimeAddSeconds( $Test->{PastSecondsAdd} );
+        $HelperObject->FixedTimeAddSeconds( $Test->{PastSecondsAdd} );
         print "  Restored time.\n";
     }
 
@@ -668,7 +668,7 @@ my $OriginalTimeStamp = $Kernel::OM->Create('Kernel::System::DateTime')->ToStrin
 
 for my $Test (@Tests) {
     if ( $Test->{AddSeconds} ) {
-        $Helper->FixedTimeAddSeconds( $Test->{AddSeconds} );
+        $HelperObject->FixedTimeAddSeconds( $Test->{AddSeconds} );
     }
 
     my $CurrentTimeStamp = $Kernel::OM->Create('Kernel::System::DateTime')->ToString();
@@ -824,7 +824,7 @@ for my $Test (@Tests) {
             "$Test->{Name} TaskAdd() - result should not be undef",
         );
 
-        $Helper->FixedTimeAddSeconds(60);
+        $HelperObject->FixedTimeAddSeconds(60);
     }
 
     my @List = $SchedulerDBObject->TaskList(

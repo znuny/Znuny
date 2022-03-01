@@ -29,7 +29,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my %Jobs;
 
@@ -91,7 +91,7 @@ for my $AllowCustomScriptExecution ( 0, 1 ) {
                 "GenericAgent ScriptExecution: $AllowCustomScriptExecution ModuleExecution: $AllowCustomModuleExecution Mode: $Mode TmpFile $FileName created"
             );
 
-            my $Name = 'job' . $Helper->GetRandomID();
+            my $Name = 'job' . $HelperObject->GetRandomID();
 
             my %NewJob = (
                 Name => $Name,

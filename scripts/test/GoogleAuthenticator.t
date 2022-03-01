@@ -21,7 +21,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 0,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # get config object
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
@@ -32,7 +32,7 @@ $ConfigObject->Set(
 );
 
 # set fixed time to have predetermined verifiable results
-$Helper->FixedTimeSet(0);
+$HelperObject->FixedTimeSet(0);
 
 # configure auth backend to db
 $ConfigObject->Set(
@@ -55,8 +55,8 @@ $ConfigObject->Set(
     Value => 0,
 );
 
-my $UserRand     = 'example-user' . $Helper->GetRandomID();
-my $CustomerRand = 'example-customer' . $Helper->GetRandomID();
+my $UserRand     = 'example-user' . $HelperObject->GetRandomID();
+my $CustomerRand = 'example-customer' . $HelperObject->GetRandomID();
 
 my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
 my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
@@ -231,7 +231,7 @@ for my $Test (@Tests) {
     # update time if necessary
     if ( ( $Test->{FixedTimeSet} || 0 ) ne $CurrentConfig{Time} ) {
         $CurrentConfig{Time} = $Test->{FixedTimeSet} || 0;
-        $Helper->FixedTimeSet( $CurrentConfig{Time} );
+        $HelperObject->FixedTimeSet( $CurrentConfig{Time} );
     }
 
     # test agent auth

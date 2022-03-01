@@ -19,9 +19,9 @@ $Kernel::OM->ObjectParamAdd(
 );
 
 my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
-my $Helper             = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my $RandomID = $Helper->GetRandomNumber();
+my $RandomID = $HelperObject->GetRandomNumber();
 my $UserID   = 1;
 
 my @Tests = (

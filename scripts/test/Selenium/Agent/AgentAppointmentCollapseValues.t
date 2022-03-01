@@ -28,13 +28,13 @@ if ( !$Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::Calend
 
 $Selenium->RunTest(
     sub {
-        my $Helper            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $AppointmentObject = $Kernel::OM->Get('Kernel::System::Calendar::Appointment');
         my $CalendarObject    = $Kernel::OM->Get('Kernel::System::Calendar');
         my $TeamObject        = $Kernel::OM->Get('Kernel::System::Calendar::Team');
         my $GroupObject       = $Kernel::OM->Get('Kernel::System::Group');
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create test group.
         my $GroupName = "test-calendar-group-$RandomID";
@@ -48,7 +48,7 @@ $Selenium->RunTest(
             "Test group $GroupID created",
         );
 
-        my ( $TestUserLogin, $TestUserID ) = $Helper->TestUserCreate(
+        my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users', $GroupName ],
         );
 
@@ -88,7 +88,7 @@ $Selenium->RunTest(
         my $NumberOfResources = 5;
         for my $Counter ( 1 .. $NumberOfResources ) {
 
-            my ( $ResourceUserLogin, $ResourceID ) = $Helper->TestUserCreate(
+            my ( $ResourceUserLogin, $ResourceID ) = $HelperObject->TestUserCreate(
                 Groups => [$GroupName],
             );
             $Self->True(
@@ -139,7 +139,7 @@ $Selenium->RunTest(
         # TODO language will be possible to set on some other languages,
         #     after updating JavaScriptStrings with Dev::Tools::TranslationsUpdate.
         my $Language = 'en';
-        my ( $TestUserRoLogin, $TestUserRoID ) = $Helper->TestUserCreate(
+        my ( $TestUserRoLogin, $TestUserRoID ) = $HelperObject->TestUserCreate(
             Groups   => [ 'admin', 'users' ],
             Language => $Language,
         );

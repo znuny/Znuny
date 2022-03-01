@@ -26,9 +26,9 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my $GroupNameRandom  = $Helper->GetRandomID();
+my $GroupNameRandom  = $HelperObject->GetRandomID();
 my %RoleIDByRoleName = (
     'test-role-' . $GroupNameRandom . '-1' => undef,
     'test-role-' . $GroupNameRandom . '-2' => undef,

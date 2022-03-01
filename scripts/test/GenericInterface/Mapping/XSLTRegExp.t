@@ -19,10 +19,10 @@ use Kernel::GenericInterface::Mapping;
 my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
 
 # Get helper object.
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # Get random id.
-my $RandomNumber = $Helper->GetRandomNumber();
+my $RandomNumber = $HelperObject->GetRandomNumber();
 
 my $DebuggerObject = Kernel::GenericInterface::Debugger->new(
     DebuggerConfig => {

@@ -285,7 +285,7 @@ $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
 
 for my $Key ( 1 .. 3, 'ä', 'カス' ) {
 
-    my $CompanyRand = 'Example-Customer-Company' . $Key . $Helper->GetRandomID();
+    my $CompanyRand = 'Example-Customer-Company' . $Key . $HelperObject->GetRandomID();
 
     my $CustomerID = $CustomerCompanyObject->CustomerCompanyAdd(
         CustomerID             => $CompanyRand,
@@ -443,7 +443,7 @@ $Self->False(
 );
 
 # Create Invalid customer company.
-my $CompanyInvalid    = 'Invalid' . $Helper->GetRandomID();
+my $CompanyInvalid    = 'Invalid' . $HelperObject->GetRandomID();
 my $CustomerCompanyID = $CustomerCompanyObject->CustomerCompanyAdd(
     CustomerID             => $CompanyInvalid,
     CustomerCompanyName    => $CompanyInvalid . '- Inc',

@@ -22,7 +22,7 @@ $Kernel::OM->ObjectParamAdd(
     },
 );
 
-my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
