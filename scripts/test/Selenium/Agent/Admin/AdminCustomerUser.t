@@ -18,18 +18,18 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper                = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
 
         # Disable check email address.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CheckEmailAddresses',
             Value => 0
         );
 
         # Also create a CustomerCompany so that it can be selected in the dropdown.
-        my $RandomID        = 'TestCustomer' . $Helper->GetRandomID();
+        my $RandomID        = 'TestCustomer' . $HelperObject->GetRandomID();
         my $CustomerCompany = $CustomerCompanyObject->CustomerCompanyAdd(
             CustomerID             => $RandomID,
             CustomerCompanyName    => $RandomID,
@@ -48,7 +48,7 @@ $Selenium->RunTest(
         );
 
         # Also create a CustomerCompany so that it can be selected in the dropdown.
-        my $RandomID2        = 'TestCustomer' . $Helper->GetRandomID();
+        my $RandomID2        = 'TestCustomer' . $HelperObject->GetRandomID();
         my $CustomerCompany2 = $CustomerCompanyObject->CustomerCompanyAdd(
             CustomerID             => $RandomID2,
             CustomerCompanyName    => $RandomID2,
@@ -67,7 +67,7 @@ $Selenium->RunTest(
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -172,7 +172,7 @@ $Selenium->RunTest(
         );
 
         # Create another test customer user for filter search test (with CustomerID as a auto complete field).
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'AdminCustomerUser::UseAutoComplete',
             Value => 1,
@@ -206,7 +206,7 @@ $Selenium->RunTest(
 
         $Selenium->find_element( "#Submit", 'css' )->VerifiedClick();
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'AdminCustomerUser::UseAutoComplete',
             Value => 0,
@@ -324,7 +324,7 @@ $Selenium->RunTest(
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("#UserFirstname").length' );
 
         # Create new test customer user.
-        my $RandomID3 = 'TestCustomer' . $Helper->GetRandomID();
+        my $RandomID3 = 'TestCustomer' . $HelperObject->GetRandomID();
         my $UserEmail = $RandomID3 . "\@localhost.com";
         $Selenium->find_element( "#UserFirstname", 'css' )->send_keys($RandomID3);
         $Selenium->find_element( "#UserLastname",  'css' )->send_keys($RandomID3);
@@ -407,7 +407,7 @@ $Selenium->RunTest(
 
         # Create a test case for bug#13782 (https://bugs.otrs.org/show_bug.cgi?id=13782).
         # Creating CustomerUser with according DynamicField when AutoLoginCreation is enabled.
-        my $RandomID4          = $Helper->GetRandomID();
+        my $RandomID4          = $HelperObject->GetRandomID();
         my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
         my $DynamicFieldName   = 'Text' . $RandomID4;
         my $DynamicFieldID     = $DynamicFieldObject->DynamicFieldAdd(
@@ -435,7 +435,7 @@ $Selenium->RunTest(
             undef, 0,
         ];
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CustomerUser',
             Value => $CustomerUserConfig,
         );

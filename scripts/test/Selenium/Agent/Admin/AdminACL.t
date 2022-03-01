@@ -21,33 +21,33 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $QueueObject = $Kernel::OM->Get('Kernel::System::Queue');
-        my $DBObject    = $Kernel::OM->Get('Kernel::System::DB');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $QueueObject  = $Kernel::OM->Get('Kernel::System::Queue');
+        my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
 
         # Defined user language for testing if message is being translated correctly.
         my $Language = "de";
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 0,
             Key   => 'Ticket::Frontend::AgentTicketNote###DynamicField',
             Value => 0
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketNote###Queue',
             Value => 0
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketNote###QueueMandatory',
             Value => 0
         );
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0
@@ -73,7 +73,7 @@ $Selenium->RunTest(
         }
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups   => [ 'admin', 'users' ],
             Language => $Language,
         ) || die "Did not get test user";
@@ -149,7 +149,7 @@ $Selenium->RunTest(
 
         # Create test ACL names.
         for my $Name (qw(ACL NewACL)) {
-            my $TestACLName = $Name . $Helper->GetRandomNumber() . ' $ @';
+            my $TestACLName = $Name . $HelperObject->GetRandomNumber() . ' $ @';
             push @TestACLNames, $TestACLName;
         }
 
@@ -484,7 +484,7 @@ JAVASCRIPT
 
         # Create dynamic field.
         my $DynamicFieldObject     = $Kernel::OM->Get('Kernel::System::DynamicField');
-        my $RandomID               = $Helper->GetRandomID();
+        my $RandomID               = $HelperObject->GetRandomID();
         my $DynamicFieldName       = "Produkt$RandomID";
         my $DynamicFieldDropDownID = $DynamicFieldObject->DynamicFieldAdd(
             Name       => $DynamicFieldName,
@@ -531,7 +531,7 @@ JAVASCRIPT
         }
 
         # Set fields to AgentTicketNote screen.
-        my $Success = $Helper->ConfigSettingChange(
+        my $Success = $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketNote###DynamicField',
             Value => {
@@ -543,7 +543,7 @@ JAVASCRIPT
             "'Ticket::Frontend::AgentTicketNote###DynamicField' is updated successfully",
         );
 
-        $Success = $Helper->ConfigSettingChange(
+        $Success = $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketNote###Queue',
             Value => 1
@@ -553,7 +553,7 @@ JAVASCRIPT
             "'Ticket::Frontend::AgentTicketNote###Queue' is updated successfully",
         );
 
-        $Success = $Helper->ConfigSettingChange(
+        $Success = $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketNote###QueueMandatory',
             Value => 1

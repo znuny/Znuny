@@ -18,16 +18,16 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Disable check email address.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0
         );
 
         # Create test CustomerUser.
-        my $CustomerUserName = "CustomerUser" . $Helper->GetRandomID();
+        my $CustomerUserName = "CustomerUser" . $HelperObject->GetRandomID();
         my $CustomerUserID   = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
             UserFirstname  => $CustomerUserName,
             UserLastname   => $CustomerUserName,
@@ -43,7 +43,7 @@ $Selenium->RunTest(
         );
 
         # Create test Service.
-        my $ServiceName = 'SomeService' . $Helper->GetRandomID();
+        my $ServiceName = 'SomeService' . $HelperObject->GetRandomID();
         my $ServiceID   = $Kernel::OM->Get('Kernel::System::Service')->ServiceAdd(
             Name    => $ServiceName,
             Comment => 'Some Comment',
@@ -56,7 +56,7 @@ $Selenium->RunTest(
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 

@@ -20,16 +20,16 @@ my $Selenium     = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0
         );
 
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -94,7 +94,7 @@ $Selenium->RunTest(
         }
 
         # Create real test Signature.
-        my $SignatureRandomID = "Signature" . $Helper->GetRandomID();
+        my $SignatureRandomID = "Signature" . $HelperObject->GetRandomID();
 
         # Also check leading and trailing white space.
         my $SignatureRichText = "\n\nYour Ticket-Team \n\n<OTRS_Owner_UserFirstname> <OTRS_Owner_UserLastname>\n";

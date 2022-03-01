@@ -20,10 +20,10 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper           = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject     = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
 
-        my $RandomID       = $Helper->GetRandomID();
+        my $RandomID       = $HelperObject->GetRandomID();
         my $WebserviceName = "Selenium $RandomID web service";
 
         # Create test web service.
@@ -94,7 +94,7 @@ EOS
         }
 
         # Create test user and login.
-        my ( $TestUserLogin, $TestUserID ) = $Helper->TestUserCreate(
+        my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         );
 

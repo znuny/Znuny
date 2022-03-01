@@ -20,17 +20,17 @@ my $Selenium     = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -97,7 +97,7 @@ $Selenium->RunTest(
         }
 
         # Create real test Salutation.
-        my $SalutationRandomID = "Salutation" . $Helper->GetRandomID();
+        my $SalutationRandomID = "Salutation" . $HelperObject->GetRandomID();
         my $SalutationRichText = "Dear <OTRS_OWNER_Userfirstname>>,\n\nThank you for your request.";
         my $SalutationComment  = "Selenium Salutation test";
 

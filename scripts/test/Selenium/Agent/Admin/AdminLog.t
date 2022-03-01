@@ -18,11 +18,11 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
-        my $Helper    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Set log module in sysconfig.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'LogModule',
             Value => 'Kernel::System::Log::SysLog',
@@ -44,7 +44,7 @@ $Selenium->RunTest(
 
         # Create log entries.
         for ( 0 .. 1 ) {
-            my $LogMessage = 'LogMessage' . $Helper->GetRandomNumber();
+            my $LogMessage = 'LogMessage' . $HelperObject->GetRandomNumber();
 
             $LogObject->Log(
                 Priority => 'error',
@@ -55,7 +55,7 @@ $Selenium->RunTest(
         }
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 

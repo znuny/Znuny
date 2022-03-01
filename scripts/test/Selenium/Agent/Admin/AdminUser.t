@@ -18,22 +18,22 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Do not check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Enable Service.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 1,
         );
 
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -113,7 +113,7 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminUser;Subaction=Add");
 
         # Create a real test agent.
-        my $RandomID     = $Helper->GetRandomID();
+        my $RandomID     = $HelperObject->GetRandomID();
         my $UserRandomID = 'TestAgent' . $RandomID;
         $Selenium->find_element( "#UserFirstname", 'css' )->send_keys($UserRandomID);
         $Selenium->find_element( "#UserLastname",  'css' )->send_keys($UserRandomID);
@@ -319,7 +319,7 @@ $Selenium->RunTest(
         );
 
         # Create another test user.
-        my $TestUserLogin2 = $Helper->TestUserCreate(
+        my $TestUserLogin2 = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 

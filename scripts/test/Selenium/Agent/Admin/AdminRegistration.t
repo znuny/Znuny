@@ -30,10 +30,10 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # make sure to enable cloud services
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CloudServices::Disabled',
             Value => 0,
@@ -41,10 +41,10 @@ $Selenium->RunTest(
 
         # Get needed variables.
         my $Daemon   = $ConfigObject->Get('Home') . '/bin/otrs.Daemon.pl';
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -127,7 +127,7 @@ $CloudServiceResponseJSON
 }
 1;
 EOS
-        $Helper->CustomCodeActivate(
+        $HelperObject->CustomCodeActivate(
             Code       => $CustomCode,
             Identifier => 'AdminRegistration' . $RandomID,
         );

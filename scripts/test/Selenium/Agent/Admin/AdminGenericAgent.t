@@ -19,26 +19,26 @@ my $Selenium     = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # set generic agent run limit
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::GenericAgentRunLimit',
             Value => 10
         );
 
         # enable extended condition search for generic agent ticket search
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::GenericAgentTicketSearch###ExtendedSearchCondition',
             Value => 1,
         );
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -262,7 +262,7 @@ $Selenium->RunTest(
         );
 
         # Disable modernize fields to check buttons for clearing selections.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'ModernizeFormFields',
             Value => 0,
         );
@@ -432,7 +432,7 @@ $Selenium->RunTest(
         );
 
         # disable extended condition search for generic agent ticket search
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::GenericAgentTicketSearch###ExtendedSearchCondition',
             Value => 0,

@@ -18,17 +18,17 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0,
         );
 
         # Enable SMIME due to 'Enable email security' checkbox must be enabled.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SMIME',
             Value => 1,
@@ -38,7 +38,7 @@ $Selenium->RunTest(
         my $Language = "de";
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups   => ['admin'],
             Language => $Language,
         ) || die "Did not get test user";
@@ -110,7 +110,7 @@ $Selenium->RunTest(
         );
 
         # Create test NotificationEvent.
-        my $NotifEventRandomID = 'NotificationEvent' . $Helper->GetRandomID();
+        my $NotifEventRandomID = 'NotificationEvent' . $HelperObject->GetRandomID();
         my $NotifEventText     = 'Selenium NotificationEvent test';
         $Selenium->find_element( '#Name',    'css' )->send_keys($NotifEventRandomID);
         $Selenium->find_element( '#Comment', 'css' )->send_keys($NotifEventText);

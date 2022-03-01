@@ -19,9 +19,9 @@ my $Selenium     = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-        my ( $TestUserLogin, $UserID ) = $Helper->TestUserCreate(
+        my ( $TestUserLogin, $UserID ) = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         );
 
@@ -101,7 +101,7 @@ $Selenium->RunTest(
         );
 
         # Create a real test group.
-        my $GroupName = 'TestGroup' . $Helper->GetRandomID();
+        my $GroupName = 'TestGroup' . $HelperObject->GetRandomID();
         $Selenium->find_element( "#GroupName", 'css' )->send_keys($GroupName);
         $Selenium->InputFieldValueSet(
             Element => '#ValidID',

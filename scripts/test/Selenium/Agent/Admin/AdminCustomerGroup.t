@@ -19,17 +19,17 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # disable check email address
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # enable CustomerGroupSupport
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CustomerGroupSupport',
             Value => 1,
@@ -38,7 +38,7 @@ $Selenium->RunTest(
         # activate external context
         my $PermissionContextDirect          = 'UnitTestPermission-direct';
         my $PermissionContextOtherCustomerID = 'UnitTestPermission-other-CustomerID';
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CustomerGroupPermissionContext',
             Value => {
@@ -48,7 +48,7 @@ $Selenium->RunTest(
         );
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -59,7 +59,7 @@ $Selenium->RunTest(
         );
 
         # create new CustomerCompany for the tests
-        my $CustomerRandomID = 'customer' . $Helper->GetRandomID();
+        my $CustomerRandomID = 'customer' . $HelperObject->GetRandomID();
         my $CustomerID       = $Kernel::OM->Get('Kernel::System::CustomerCompany')->CustomerCompanyAdd(
             CustomerID          => $CustomerRandomID,
             CustomerCompanyName => $CustomerRandomID,
@@ -72,7 +72,7 @@ $Selenium->RunTest(
         );
 
         # create new Group for the tests
-        my $GroupRandomID = 'group' . $Helper->GetRandomID();
+        my $GroupRandomID = 'group' . $HelperObject->GetRandomID();
         my $GroupID       = $Kernel::OM->Get('Kernel::System::Group')->GroupAdd(
             Name    => $GroupRandomID,
             ValidID => 1,

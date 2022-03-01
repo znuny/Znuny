@@ -18,10 +18,10 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Add test role.
-        my $RoleName = $Helper->GetRandomID();
+        my $RoleName = $HelperObject->GetRandomID();
         my $RoleID   = $Kernel::OM->Get('Kernel::System::Group')->RoleAdd(
             Name    => $RoleName,
             ValidID => 1,
@@ -33,7 +33,7 @@ $Selenium->RunTest(
         );
 
         # Add test group.
-        my $GroupName = $Helper->GetRandomID();
+        my $GroupName = $HelperObject->GetRandomID();
         my $GroupID   = $Kernel::OM->Get('Kernel::System::Group')->GroupAdd(
             Name    => $GroupName,
             ValidID => 1,
@@ -45,7 +45,7 @@ $Selenium->RunTest(
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 

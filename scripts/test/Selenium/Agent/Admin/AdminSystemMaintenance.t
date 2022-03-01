@@ -38,10 +38,10 @@ $Selenium->RunTest(
     sub {
 
         # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Make sure system is based on UTC.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'OTRSTimeZone',
             Value => 'UTC',
@@ -54,7 +54,7 @@ $Selenium->RunTest(
         my $SystemMaintenanceObject = $Kernel::OM->Get('Kernel::System::SystemMaintenance');
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -136,7 +136,7 @@ $Selenium->RunTest(
         $DTWrongObj->Subtract( Hours => 1 );
         my $DTWrong = $DTWrongObj->Get();
 
-        my $SysMainComment = "sysmaintenance" . $Helper->GetRandomID();
+        my $SysMainComment = "sysmaintenance" . $HelperObject->GetRandomID();
         my $SysMainLogin   = "Selenium test SystemMaintance is progress, please log in later on";
         my $SysMainNotify  = "Currently Selenium SystemMaintenance test is active";
 
@@ -255,7 +255,7 @@ $Selenium->RunTest(
         );
 
         # Update TimeNotifyUpcomingMaintenance config.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => "SystemMaintenance::TimeNotifyUpcomingMaintenance",
             Value => 61,
         );

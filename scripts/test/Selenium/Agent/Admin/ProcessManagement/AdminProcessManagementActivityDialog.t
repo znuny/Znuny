@@ -18,10 +18,10 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -36,8 +36,8 @@ $Selenium->RunTest(
             UserLogin => $TestUserLogin,
         );
 
-        my $ProcessRandom        = 'Process' . $Helper->GetRandomID();
-        my $ActivityDialogRandom = 'ActivityDialog' . $Helper->GetRandomID();
+        my $ProcessRandom        = 'Process' . $HelperObject->GetRandomID();
+        my $ActivityDialogRandom = 'ActivityDialog' . $HelperObject->GetRandomID();
         my $DescriptionShort     = "Selenium ActivityDialog Test";
 
         my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');

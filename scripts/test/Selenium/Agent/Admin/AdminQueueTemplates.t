@@ -18,10 +18,10 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -31,7 +31,7 @@ $Selenium->RunTest(
         );
 
         # Add test queue.
-        my $QueueName = "queue" . $Helper->GetRandomID();
+        my $QueueName = "queue" . $HelperObject->GetRandomID();
         my $QueueID   = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
             Name            => $QueueName,
             ValidID         => 1,
@@ -52,7 +52,7 @@ $Selenium->RunTest(
 
         # Create test templates.
         for ( 1 .. 2 ) {
-            my $StandardTemplateName = "standard template" . $Helper->GetRandomID();
+            my $StandardTemplateName = "standard template" . $HelperObject->GetRandomID();
             my $TemplateID           = $StandardTemplateObject->StandardTemplateAdd(
                 Name         => $StandardTemplateName,
                 Template     => 'Thank you for your email.',

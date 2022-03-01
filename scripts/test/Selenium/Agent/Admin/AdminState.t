@@ -18,10 +18,10 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -87,7 +87,7 @@ $Selenium->RunTest(
         );
 
         # Create a real test state.
-        my $RandomState = "New State " . $Helper->GetRandomID();
+        my $RandomState = "New State " . $HelperObject->GetRandomID();
 
         $Selenium->find_element( "#Name", 'css' )->send_keys($RandomState);
         $Selenium->InputFieldValueSet(

@@ -20,9 +20,9 @@ my $Selenium     = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -89,7 +89,7 @@ $Selenium->RunTest(
         }
 
         # Create test SLA.
-        my $SLARandomID = "SLA" . $Helper->GetRandomID();
+        my $SLARandomID = "SLA" . $HelperObject->GetRandomID();
         my $SLAComment  = "Selenium SLA test";
 
         $Selenium->find_element( "#Name",    'css' )->send_keys($SLARandomID);

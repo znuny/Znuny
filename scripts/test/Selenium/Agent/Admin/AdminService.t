@@ -18,10 +18,10 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -92,7 +92,7 @@ $Selenium->RunTest(
         }
 
         # Create first test Service.
-        my $ServiceRandomID = "service" . $Helper->GetRandomID();
+        my $ServiceRandomID = "service" . $HelperObject->GetRandomID();
         my $ServiceComment  = "Selenium test Service";
 
         $Selenium->find_element( "#Name",    'css' )->send_keys($ServiceRandomID);
@@ -102,7 +102,7 @@ $Selenium->RunTest(
         # Create second test Service.
         $Selenium->find_element("//a[contains(\@href, \'ServiceEdit;ServiceID=NEW' )]")->VerifiedClick();
 
-        my $ServiceRandomID2 = "service" . $Helper->GetRandomID();
+        my $ServiceRandomID2 = "service" . $HelperObject->GetRandomID();
 
         $Selenium->find_element( "#Name",    'css' )->send_keys($ServiceRandomID2);
         $Selenium->find_element( "#Comment", 'css' )->send_keys($ServiceComment);
@@ -210,7 +210,7 @@ $Selenium->RunTest(
         # Create third test Service.
         $Selenium->find_element("//a[contains(\@href, \'ServiceEdit;ServiceID=NEW' )]")->VerifiedClick();
 
-        my $ServiceRandomID3 = "Long service" . $Helper->GetRandomID();
+        my $ServiceRandomID3 = "Long service" . $HelperObject->GetRandomID();
         $ServiceRandomID3
             .= $ServiceRandomID3 . $ServiceRandomID3 . $ServiceRandomID3 . $ServiceRandomID3 . $ServiceRandomID3;
 

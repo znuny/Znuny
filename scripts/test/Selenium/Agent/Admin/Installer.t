@@ -13,11 +13,11 @@ use utf8;
 
 use vars (qw($Self));
 
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # Use test database, if configured. Otherwise, skip this test. ProvideTestDatabase() will clean the test database and
 #   change database settings system-wide.
-my $Success = $Helper->ProvideTestDatabase();
+my $Success = $HelperObject->ProvideTestDatabase();
 if ( !$Success ) {
     $Self->False(
         0,
@@ -61,7 +61,7 @@ $Selenium->RunTest(
         #   Enforce exception handling for the whole test, and if something goes wrong, we can always restore original
         #   configuration from the backup.
         my $ConfigPmFile       = $Home . '/Kernel/Config.pm';
-        my $ConfigPmFileBackup = $Home . '/Kernel/Config.pm.' . $Helper->GetRandomID();
+        my $ConfigPmFileBackup = $Home . '/Kernel/Config.pm.' . $HelperObject->GetRandomID();
 
         eval {
 
@@ -74,7 +74,7 @@ $Selenium->RunTest(
 
             # Turn off secure mode setting via additional configuration file. This works on systems where secure mode is
             #   activated outside the main configuration file (Config.pm).
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Key   => 'SecureMode',
                 Value => 0,
             );
@@ -280,7 +280,7 @@ $Selenium->RunTest(
             );
 
             # Turn on secure mode.
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Key   => 'SecureMode',
                 Value => 1,
             );

@@ -19,7 +19,7 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # Create directory for certificates and private keys.
@@ -31,14 +31,14 @@ $Selenium->RunTest(
         File::Path::make_path( $PrivatePath, { chmod => 0770 } );    ## no critic
 
         # Disabled SMIME in config.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SMIME',
             Value => 0
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -70,19 +70,19 @@ $Selenium->RunTest(
         );
 
         # Enable SMIME in config.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SMIME',
             Value => 1
         );
 
         # Set SMIME paths in sysConfig.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SMIME::CertPath',
             Value => '/SomeCertPath',
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SMIME::PrivatePath',
             Value => '/SomePrivatePath',
@@ -102,12 +102,12 @@ $Selenium->RunTest(
         );
 
         # Set SMIME paths in sysConfig.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SMIME::CertPath',
             Value => $CertPath,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'SMIME::PrivatePath',
             Value => $PrivatePath,
@@ -201,7 +201,7 @@ $Selenium->RunTest(
         # Check download file name.
         my $BaseURL = $ConfigObject->Get('HttpType') . '://';
 
-        $BaseURL .= $Helper->GetTestHTTPHostname() . '/';
+        $BaseURL .= $HelperObject->GetTestHTTPHostname() . '/';
         $BaseURL .= $ConfigObject->Get('ScriptAlias') . 'index.pl?';
 
         my $UserAgent = LWP::UserAgent->new(

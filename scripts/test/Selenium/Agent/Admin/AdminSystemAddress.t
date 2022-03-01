@@ -35,17 +35,17 @@ my $CheckBreadcrumb = sub {
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Disable check email address.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -56,7 +56,7 @@ $Selenium->RunTest(
 
         # Add test Queue.
         my $QueueObject   = $Kernel::OM->Get('Kernel::System::Queue');
-        my $QueueRandomID = "queue" . $Helper->GetRandomID();
+        my $QueueRandomID = "queue" . $HelperObject->GetRandomID();
         my $QueueID       = $QueueObject->QueueAdd(
             Name            => $QueueRandomID,
             ValidID         => 1,
@@ -125,7 +125,7 @@ $Selenium->RunTest(
         );
 
         # Create real test SystemAddress.
-        my $SysAddRandom  = 'sysadd' . $Helper->GetRandomID() . '@localhost.com';
+        my $SysAddRandom  = 'sysadd' . $HelperObject->GetRandomID() . '@localhost.com';
         my $SysAddComment = "Selenium test SystemAddress";
 
         $Selenium->find_element( "#Name",     'css' )->send_keys($SysAddRandom);
@@ -331,7 +331,7 @@ $Selenium->RunTest(
         );
 
         my $AutoResponseObject   = $Kernel::OM->Get('Kernel::System::AutoResponse');
-        my $AutoResponseNameRand = 'SystemAddress' . $Helper->GetRandomID();
+        my $AutoResponseNameRand = 'SystemAddress' . $HelperObject->GetRandomID();
 
         # Add auto response.
         my $AutoResponseID = $AutoResponseObject->AutoResponseAdd(
