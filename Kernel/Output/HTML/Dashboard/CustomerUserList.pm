@@ -93,16 +93,16 @@ sub Run {
 
     my $CustomerIDs = { $CustomerUserObject->CustomerSearch( CustomerIDRaw => $Param{CustomerID} ) };
     
-    # If we are using multiple CustomerIDs for a CustomerUser whe have to expand our CustomerIDs variable
-    my @MemberCustomerIDs = $CustomerUserObject->CustomerUserCustomerMemberList(
-	    CustomerID => $Param{CustomerID},
+    # if we are using multiple CustomerIDs for a CustomerUser, we have to expand our CustomerIDs variable
+    my @CustomerUserIDs = $CustomerUserObject->CustomerUserCustomerMemberList(
+        CustomerID => $Param{CustomerID},
     );
 
-    MemberCustomerID:
-    for my $MemberCustomerID (@MemberCustomerIDs)
-    {
-    	my $MemberCustomerObj = { $CustomerUserObject->CustomerSearch( UserLogin => $MemberCustomerID ) };
-	    $CustomerIDs = { %$CustomerIDs, %$MemberCustomerObj };
+    CUSTOMERUSERID:
+    for my $CustomerUserID (@CustomerUserIDs){
+        my %CustomerUserList = $CustomerUserObject->CustomerSearch( UserLogin => $CustomerUserID );
+        next CUSTOMERUSERID if !%CustomerUserList;
+        $CustomerIDs = { %$CustomerIDs, %CustomerUserList };
     }
 
     # add page nav bar
