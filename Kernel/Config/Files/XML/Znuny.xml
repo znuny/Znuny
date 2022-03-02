@@ -200,14 +200,16 @@
         <Value>
             <Hash>
                 <!-- DefaultColumns -->
-                <Item Key="Ticket::Frontend::AgentTicketStatusView###DefaultColumns">AgentTicketStatusView</Item>
+                <Item Key="Ticket::Frontend::AgentTicketEscalationView###DefaultColumns">AgentTicketEscalationView</Item>
+                <Item Key="Ticket::Frontend::AgentTicketLockedView###DefaultColumns">AgentTicketLockedView</Item>
+                <Item Key="Ticket::Frontend::AgentTicketOwnerView###DefaultColumns">AgentTicketOwnerView</Item>
                 <Item Key="Ticket::Frontend::AgentTicketQueue###DefaultColumns">AgentTicketQueue</Item>
                 <Item Key="Ticket::Frontend::AgentTicketResponsibleView###DefaultColumns">AgentTicketResponsibleView</Item>
-                <Item Key="Ticket::Frontend::AgentTicketWatchView###DefaultColumns">AgentTicketWatchView</Item>
-                <Item Key="Ticket::Frontend::AgentTicketLockedView###DefaultColumns">AgentTicketLockedView</Item>
-                <Item Key="Ticket::Frontend::AgentTicketEscalationView###DefaultColumns">AgentTicketEscalationView</Item>
                 <Item Key="Ticket::Frontend::AgentTicketSearch###DefaultColumns">AgentTicketSearch</Item>
                 <Item Key="Ticket::Frontend::AgentTicketService###DefaultColumns">AgentTicketService</Item>
+                <Item Key="Ticket::Frontend::AgentTicketStatusView###DefaultColumns">AgentTicketStatusView</Item>
+                <Item Key="Ticket::Frontend::AgentTicketWatchView###DefaultColumns">AgentTicketWatchView</Item>
+
                 <!-- DefaultColumns and Dashboard Widgets -->
                 <Item Key="DashboardBackend###0100-TicketPendingReminder">DashboardWidget TicketPendingReminder</Item>
                 <Item Key="DashboardBackend###0110-TicketEscalation">DashboardWidget TicketEscalation</Item>
@@ -1715,6 +1717,146 @@
                         <Item Key="59">59</Item>
                     </Hash>
                 </Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!--
+        AgentTicketOwnerView / OwnerToolbar
+    -->
+    <Setting Name="Frontend::Module###AgentTicketOwnerView" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Owner Tickets</Item>
+                    <Item Key="Title">Owner Tickets</Item>
+                    <Item Key="NavBarName">Ticket</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AgentTicketOwnerView###002-Ticket" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.AgentTicketQueue.css</Item>
+                        <Item>Core.AllocationList.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.UI.AllocationList.js</Item>
+                        <Item>Core.Agent.Overview.js</Item>
+                        <Item>Core.Agent.TableFilters.js</Item>
+                        <Item>Core.Agent.TicketSplit.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Navigation###AgentTicketOwnerView###002-Ticket" Required="0" Valid="0">
+        <Description Translatable="1">Main menu item registration.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketOwnerView###SortBy::Default" Required="1" Valid="1">
+        <Description Translatable="1">Defines the default ticket attribute for ticket sorting in the owner view of the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketOwnerView</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="Age">
+                <Item ValueType="Option" Value="Age">Age</Item>
+                <Item ValueType="Option" Value="TicketNumber">TicketNumber</Item>
+                <Item ValueType="Option" Value="Title">Title</Item>
+                <Item ValueType="Option" Value="Queue">Queue</Item>
+                <Item ValueType="Option" Value="Priority">Priority</Item>
+                <Item ValueType="Option" Value="EscalationTime">EscalationTime</Item>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketOwnerView###Order::Default" Required="1" Valid="1">
+        <Description Translatable="1">Defines the default ticket order in the owner view of the agent interface. Up: oldest on top. Down: latest on top.</Description>
+        <Navigation>Frontend::Agent::View::TicketOwnerView</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="Up">
+                <Item ValueType="Option" Value="Down">Down</Item>
+                <Item ValueType="Option" Value="Up">Up</Item>
+            </Item>
+        </Value>
+    </Setting>
+   <Setting Name="Ticket::Frontend::AgentTicketOwnerView###DefaultColumns" Required="0" Valid="1">
+        <Description Translatable="1">Columns that can be filtered in the owner view of the agent interface. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed.</Description>
+        <Navigation>Frontend::Agent::View::TicketOwnerView</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem ValueType="Select">
+                    <Item ValueType="Option" Value="0" Translatable="1">0 - Disabled</Item>
+                    <Item ValueType="Option" Value="1" Translatable="1">1 - Available</Item>
+                    <Item ValueType="Option" Value="2" Translatable="1">2 - Enabled by default</Item>
+                </DefaultItem>
+                <Item Key="Age" SelectedID="2"></Item>
+                <Item Key="Changed" SelectedID="1"></Item>
+                <Item Key="Created" SelectedID="1"></Item>
+                <Item Key="CustomerCompanyName" SelectedID="1"></Item>
+                <Item Key="CustomerID" SelectedID="2"></Item>
+                <Item Key="CustomerName" SelectedID="1"></Item>
+                <Item Key="CustomerUserID" SelectedID="1"></Item>
+                <Item Key="EscalationResponseTime" SelectedID="1"></Item>
+                <Item Key="EscalationSolutionTime" SelectedID="1"></Item>
+                <Item Key="EscalationTime" SelectedID="1"></Item>
+                <Item Key="EscalationUpdateTime" SelectedID="1"></Item>
+                <Item Key="TicketNumber" SelectedID="2"></Item>
+                <Item Key="Lock" SelectedID="2"></Item>
+                <Item Key="Owner" SelectedID="2"></Item>
+                <Item Key="PendingTime" SelectedID="1"></Item>
+                <Item Key="Queue" SelectedID="2"></Item>
+                <Item Key="Responsible" SelectedID="1"></Item>
+                <Item Key="Priority" SelectedID="1"></Item>
+                <Item Key="Sender" SelectedID="2"></Item>
+                <Item Key="Service" SelectedID="1"></Item>
+                <Item Key="State" SelectedID="2"></Item>
+                <Item Key="SLA" SelectedID="1"></Item>
+                <Item Key="Subject" SelectedID="1"></Item>
+                <Item Key="Title" SelectedID="2"></Item>
+                <Item Key="Type" SelectedID="1"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::ToolBarModule###191-Ticket::TicketOwner" Required="0" Valid="1">
+        <Description Translatable="1">Agent interface notification module to see the number of tickets an agent is owner for. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
+        <Navigation>Frontend::Agent::ToolBar</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::ToolBar::TicketOwner</Item>
+                <Item Key="CssClass">Owner</Item>
+                <Item Key="CssClassNew">Owner New</Item>
+                <Item Key="CssClassReached">Owner Reached</Item>
+                <Item Key="Icon">fa fa-user</Item>
+                <Item Key="IconNew">fa fa-user</Item>
+                <Item Key="IconReached">fa fa-user</Item>
+                <Item Key="AccessKey"></Item>
+                <Item Key="AccessKeyNew"></Item>
+                <Item Key="AccessKeyReached"></Item>
+                <Item Key="Priority">1030031</Item>
             </Hash>
         </Value>
     </Setting>

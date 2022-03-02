@@ -4959,9 +4959,9 @@
                 <Item Key="CssClass">Responsible</Item>
                 <Item Key="CssClassNew">Responsible New</Item>
                 <Item Key="CssClassReached">Responsible Reached</Item>
-                <Item Key="Icon">fa fa-user</Item>
-                <Item Key="IconNew">fa fa-user</Item>
-                <Item Key="IconReached">fa fa-user</Item>
+                <Item Key="Icon">fa fa-user-plus</Item>
+                <Item Key="IconNew">fa fa-user-plus</Item>
+                <Item Key="IconReached">fa fa-user-plus</Item>
                 <Item Key="AccessKey">r</Item>
                 <Item Key="AccessKeyNew"></Item>
                 <Item Key="AccessKeyReached"></Item>

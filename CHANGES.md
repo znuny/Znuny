@@ -1,4 +1,5 @@
 # 6.3.1 2022-??-??
+ - 2022-03-02 Integrated package Znuny4OTRS-OwnerToolbar.
  - 2022-02-25 Fixed Bug - Since version 6.0.31 the size of embedded images within the RTE cannot be changed via click & drag anymore [#98](https://github.com/znuny/Znuny/issues/98).
  - 2022-02-21 Integrated package Znuny4OTRS-AdvancedTimeUnit.
  - 2022-02-21 Added scope flag to AdminProcessManagement to reduce possible overflow selection. Thanks to Michel Rodriguez [@mirod](https://github.com/mirod).

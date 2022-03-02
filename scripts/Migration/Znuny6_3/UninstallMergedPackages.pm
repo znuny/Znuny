@@ -63,6 +63,8 @@ sub Run {
         Znuny4OTRS-OAuth2TokenManagement
         Znuny-MailAccounts
         Znuny4OTRS-MailAccounts
+        Znuny-OwnerToolbar
+        Znuny4OTRS-OwnerToolbar
         )
         )
     {

@@ -53,6 +53,26 @@ sub Run {
         'ZnunyDatabaseBackend###Export###CSV###Quote"' => [
             'DBCRUD###Export###CSV###Quote',
         ],
+
+        # Znuny(4OTRS)-OwnerToolbar
+        'Frontend::Module###AgentTicketOwnerView' => [
+            'Frontend::Module###AgentTicketOwnerView',
+        ],
+        'Loader::Module::AgentTicketOwnerView###002-Znuny4OTRSOwnerToolbar' => [
+            'Loader::Module::AgentTicketOwnerView###002-Ticket',
+        ],
+        'Frontend::Navigation###AgentTicketOwnerView###002-Znuny4OTRSOwnerToolbar' => [
+            'Frontend::Navigation###AgentTicketOwnerView###002-Ticket',
+        ],
+        'Ticket::Frontend::AgentTicketOwnerView###SortBy::Default' => [
+            'Ticket::Frontend::AgentTicketOwnerView###SortBy::Default',
+        ],
+        'Ticket::Frontend::AgentTicketOwnerView###Order::Default' => [
+            'Ticket::Frontend::AgentTicketOwnerView###Order::Default',
+        ],
+        'Frontend::ToolBarModule###9-Ticket::TicketOwner' => [
+            'Frontend::ToolBarModule###191-Ticket::TicketOwner',
+        ],
     );
 
     ORIGINALSYSCONFIGOPTIONNAME:
