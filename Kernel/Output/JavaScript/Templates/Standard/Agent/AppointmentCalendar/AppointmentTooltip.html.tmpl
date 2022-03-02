@@ -10,19 +10,19 @@
 <div class="AppointmentTooltip Hidden">
     <div class="Icons">
     {% if CalEvent.allDay %}
-        <i class="fa fa-sun-o" />
+        <i class="fa fa-sun-o"></i>
     {% endif %}
     {% if CalEvent.recurring %}
-        <i class="fa fa-repeat" />
+        <i class="fa fa-repeat"></i>
     {% endif %}
     {% if CalEvent.parentId %}
-        <i class="fa fa-link" />
+        <i class="fa fa-link"></i>
     {% endif %}
     {% if CalEvent.notification %}
-        <i class="fa fa-bell" />
+        <i class="fa fa-bell"></i>
     {% endif %}
     {% if CalEvent.ticketAppointmentType %}
-        <i class="fa fa-char-{{ TicketAppointmentConfig[CalEvent.ticketAppointmentType].Mark }}" />
+        <i class="fa fa-char-{{ TicketAppointmentConfig[CalEvent.ticketAppointmentType].Mark }}"></i>
     {% endif %}
     </div>
     <fieldset>
