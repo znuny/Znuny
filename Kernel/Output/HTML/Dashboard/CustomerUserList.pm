@@ -167,10 +167,10 @@ sub Run {
         }
     }
 
-    # show change customer relations button if the agent has permission:
+    # show change customer relations button if the agent has permission
     my $ChangeCustomerReleationsAccess = $LayoutObject->Permission(
         Action => 'AdminCustomerUserCustomer',
-        Type   => 'rw',                          # ro|rw possible
+        Type   => 'rw',
     );
 
     if ($ChangeCustomerReleationsAccess) {
