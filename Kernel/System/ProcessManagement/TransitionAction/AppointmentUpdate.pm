@@ -160,7 +160,7 @@ sub Run {
     for my $Param (qw(TeamID ResourceID RecurrenceFrequency RecurrenceExclude )) {
         next PARAM if !defined $Param{Config}->{$Param};
 
-        $Param{Config}->{$Param} = split /\s*,\s*/, $Param{Config}->{$Param};
+        $Param{Config}->{$Param} = [ split /\s*,\s*/, $Param{Config}->{$Param} ];
     }
 
     # be sure that the date parameters are always in the correct format
