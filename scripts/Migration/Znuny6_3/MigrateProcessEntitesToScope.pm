@@ -51,11 +51,10 @@ sub Run {
     # Loop over every entity and update the scope
     my $ActivityList = $ActivityObject->ActivityListGet(
         UserID => 1,
-    );
+    ) // [];
 
     ACTIVITY:
     for my $ActivityData ( @{$ActivityList} ) {
-
         next ACTIVITY if !IsHashRefWithData($ActivityData);
 
         $ActivityObject->ActivityUpdate(
@@ -72,11 +71,10 @@ sub Run {
 
     my $ActivityDialogList = $ActivityDialogObject->ActivityDialogListGet(
         UserID => 1
-    );
+    ) // [];
 
     ACTIVITYDIALOG:
     for my $ActivityDialogData ( @{$ActivityDialogList} ) {
-
         next ACTIVITYDIALOG if !IsHashRefWithData($ActivityDialogData);
 
         $ActivityDialogObject->ActivityDialogUpdate(
@@ -91,13 +89,12 @@ sub Run {
         );
     }
 
-    my $TransitionList = $TransitionObject->TransitionList(
+    my $TransitionList = $TransitionObject->TransitionListGet(
         UserID => 1,
-    );
+    ) // [];
 
     TRANSITION:
     for my $TransitionData ( @{$TransitionList} ) {
-
         next TRANSITION if !IsHashRefWithData($TransitionData);
 
         $TransitionObject->TransitionUpdate(
@@ -115,11 +112,10 @@ sub Run {
 
     my $TransitionActionList = $TransitionActionObject->TransitionActionListGet(
         UserID => 1,
-    );
+    ) // [];
 
     TRANSITIONACTION:
     for my $TransitionActionData ( @{$TransitionActionList} ) {
-
         next TRANSITIONACTION if !IsHashRefWithData($TransitionActionData);
 
         $TransitionActionObject->TransitionActionUpdate(
