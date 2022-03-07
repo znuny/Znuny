@@ -744,19 +744,22 @@ sub PartsAttachments {
     }
 
     # Guess the filename for nested messages (see bug#1970).
-    elsif ( $PartData{ContentType} eq 'message/rfc822' ) {
+    elsif ( $PartData{ContentType} =~ m{message/rfc822} ) {
 
-        my ($SubjectString) = $Part->as_string() =~ m/^Subject: ([^\n]*(\n[ \t][^\n]*)*)/m;
+        my ($SubjectString) = $Part->as_string() =~ m{Subject: *([^\n]*(\n[ \t][^\n]*)*)}m;
         my $Subject = '';
         if ($SubjectString) {
             $Subject = $Self->_DecodeString( String => $SubjectString ) . '.eml';
         }
 
-        # cleanup filename
-        $Subject = $Kernel::OM->Get('Kernel::System::Main')->FilenameCleanUp(
-            Filename => $Subject,
-            Type     => 'Local',
-        );
+        if ($Subject) {
+
+            # cleanup filename
+            $Subject = $Kernel::OM->Get('Kernel::System::Main')->FilenameCleanUp(
+                Filename => $Subject,
+                Type     => 'Local',
+            );
+        }
 
         if ( $Subject eq '' ) {
             $Self->{NoFilenamePartCounter}++;
