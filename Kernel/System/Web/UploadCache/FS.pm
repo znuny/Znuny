@@ -209,24 +209,24 @@ sub FormIDRemoveFile {
             my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
             $MainObject->FileDelete(
-                Directory => $Directory,
-                Filename  => $File->{Filename},
-                NoReplace => 1,
+                Directory       => $Directory,
+                Filename        => $File->{Filename},
+                NoFilenameClean => 1,
             );
             $MainObject->FileDelete(
-                Directory => $Directory,
-                Filename  => $File->{Filename} . '.ContentType',
-                NoReplace => 1,
+                Directory       => $Directory,
+                Filename        => $File->{Filename} . '.ContentType',
+                NoFilenameClean => 1,
             );
             $MainObject->FileDelete(
-                Directory => $Directory,
-                Filename  => $File->{Filename} . '.ContentID',
-                NoReplace => 1,
+                Directory       => $Directory,
+                Filename        => $File->{Filename} . '.ContentID',
+                NoFilenameClean => 1,
             );
             $MainObject->FileDelete(
-                Directory => $Directory,
-                Filename  => $File->{Filename} . '.Disposition',
-                NoReplace => 1,
+                Directory       => $Directory,
+                Filename        => $File->{Filename} . '.Disposition',
+                NoFilenameClean => 1,
             );
 
             last FILE;
