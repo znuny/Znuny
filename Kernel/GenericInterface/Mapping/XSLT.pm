@@ -245,6 +245,8 @@ sub Map {
     my $XMLSimple = XML::Simple->new();
     my $XMLPre;
     eval {
+        no warnings;    ## no critic
+
         $XMLPre = $XMLSimple->XMLout(
             $Param{Data},
             AttrIndent => 1,
