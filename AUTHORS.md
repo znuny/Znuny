@@ -91,6 +91,7 @@ The following persons contributed to OTRS:
 * Stefan Rother <stefan.rother@otrs.com>
 * Stefan Wintermeyer <stefan@otrs.org>
 * Steva Stevic <svik@s7designcreative.com>
+* Sławomir Niedbała <sniedbala@opgksoftware.com>
 * Theo van Hoesel <Th.J.v.Hoesel+GitHub@gmail.com>
 * Thomas Raith <thomas.raith@otrs.com>
 * Thomas Wouters <thomas@sijn.org>
