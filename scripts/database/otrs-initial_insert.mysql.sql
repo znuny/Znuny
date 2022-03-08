@@ -747,6 +747,12 @@ INSERT INTO ticket_history_type (id, name, valid_id, create_by, create_time, cha
     VALUES
     (51, 'EmailResend', 1, 1, current_timestamp, 1, current_timestamp);
 # ----------------------------------------------------------
+#  insert into table ticket_history_type
+# ----------------------------------------------------------
+INSERT INTO ticket_history_type (id, name, valid_id, create_by, create_time, change_by, change_time)
+    VALUES
+    (52, 'Bulk', 1, 1, current_timestamp, 1, current_timestamp);
+# ----------------------------------------------------------
 #  insert into table article_sender_type
 # ----------------------------------------------------------
 INSERT INTO article_sender_type (id, name, valid_id, create_by, create_time, change_by, change_time)

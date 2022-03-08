@@ -451,6 +451,14 @@ $Selenium->RunTest(
             1,
             "Ticket remind locked after undo in bulk feature - $Tickets[0]->{TicketNumber}"
         );
+
+        # Check for previous owner.
+        $Self->Is(
+            $Tickets[3]->{OwnerID},
+            1,
+            "Ticket owner remain after undo in bulk feature - $Tickets[3]->{TicketNumber}"
+        );
+
         $Selenium->VerifiedRefresh();
 
         # Select test tickets and click on "bulk".

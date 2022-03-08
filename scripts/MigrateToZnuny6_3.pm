@@ -228,11 +228,15 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Znuny6_3::MigrateProcessEntitesToScope',
         },
         {
+            Message => 'Add history types',
+            Module  => 'scripts::Migration::Znuny6_3::AddHistoryTypes',
+        },
+        {
             Message => 'Migrate SysConfig settings',
             Module  => 'scripts::Migration::Znuny6_3::MigrateSysConfigSettings',
         },
         {
-            Message => 'Migrates OAuth2 token database tables',
+            Message => 'Migrate OAuth2 token database tables',
             Module  => 'scripts::Migration::Znuny6_3::MigrateOAuth2TokenDatabaseTables',
         },
 
