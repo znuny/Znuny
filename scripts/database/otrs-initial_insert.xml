@@ -1206,6 +1206,15 @@ Your Znuny Team
         <Data Key="change_by">1</Data>
         <Data Key="change_time">current_timestamp</Data>
     </Insert>
+    <Insert Table="ticket_history_type">
+        <Data Key="id" Type="AutoIncrement">52</Data>
+        <Data Key="name" Type="Quote">Bulk</Data>
+        <Data Key="valid_id">1</Data>
+        <Data Key="create_by">1</Data>
+        <Data Key="create_time">current_timestamp</Data>
+        <Data Key="change_by">1</Data>
+        <Data Key="change_time">current_timestamp</Data>
+    </Insert>
 
     <Insert Table="article_sender_type">
         <Data Key="id" Type="AutoIncrement">1</Data>
