@@ -249,7 +249,7 @@ sub HandleLanguage {
 
             my $Content = ${$ContentRef};
 
-            $File =~ s{^.*/(.+?)\.tt}{$1}smx;
+            $File =~ s{^.*/(Kernel/.+?)}{$1}smx;
 
             # do translation
             $Content =~ s{
