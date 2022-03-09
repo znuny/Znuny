@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2021-10-27 07:36+0000\n"
+"POT-Creation-Date: 2022-03-09 09:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3979,6 +3979,10 @@ msgid "System Log"
 msgstr ""
 
 #. Template: AdminLog
+msgid "Clear log entries"
+msgstr ""
+
+#. Template: AdminLog
 msgid "Here you will find log information about your system."
 msgstr ""
 
@@ -4043,6 +4047,10 @@ msgid "Host"
 msgstr ""
 
 #. Template: AdminMailAccount
+msgid "Authentication type"
+msgstr ""
+
+#. Template: AdminMailAccount
 msgid "Delete account"
 msgstr ""
 
@@ -4052,6 +4060,10 @@ msgstr ""
 
 #. Template: AdminMailAccount
 msgid "Do you really want to delete this mail account?"
+msgstr ""
+
+#. Template: AdminMailAccount
+msgid "OAuth2 token configuration"
 msgstr ""
 
 #. Template: AdminMailAccount
@@ -4248,6 +4260,158 @@ msgstr ""
 
 #. Template: AdminNotificationEventTransportWebserviceSettings
 msgid "Synchronous event triggers will be processed directly during the web request."
+msgstr ""
+
+#. Template: Edit
+msgid "Queue Management"
+msgstr ""
+
+#. Template: Edit
+msgid "Manage OAuth2 tokens and their configurations"
+msgstr ""
+
+#. Template: Edit
+msgid "Add by template"
+msgstr ""
+
+#. Template: Edit
+msgid "Base configuration"
+msgstr ""
+
+#. Template: Edit
+msgid "An OAuth2 token configuration with this name already exists."
+msgstr ""
+
+#. Template: Edit
+msgid "Client ID"
+msgstr ""
+
+#. Template: Edit
+msgid "Client secret"
+msgstr ""
+
+#. Template: Edit
+msgid "Template"
+msgstr ""
+
+#. Template: Edit
+msgid "This is the template that was used to create this OAuth2 token configuration."
+msgstr ""
+
+#. Template: Edit
+msgid "Notifications"
+msgstr ""
+
+#. Template: Edit
+msgid "Expired token"
+msgstr ""
+
+#. Template: Edit
+msgid "Shows a notification for admins below the top menu if the OAuth2 token has expired."
+msgstr ""
+
+#. Template: Edit
+msgid "Expired refresh token"
+msgstr ""
+
+#. Template: Edit
+msgid "Shows a notification for admins below the top menu if the OAuth2 refresh token has expired."
+msgstr ""
+
+#. Template: Overview
+msgid "Add OAuth2 token configuration"
+msgstr ""
+
+#. Template: Overview
+msgid "Add a new OAuth2 token configuration based on the selected template."
+msgstr ""
+
+#. Template: Overview
+msgid "Import and export"
+msgstr ""
+
+#. Template: Overview
+msgid "Upload a YAML file to import token configurations. See documentation on OAuth2 token management for further details."
+msgstr ""
+
+#. Template: Overview
+msgid "Overwrite existing token configurations"
+msgstr ""
+
+#. Template: Overview
+msgid "Import token configurations"
+msgstr ""
+
+#. Template: Overview
+msgid "Export token configurations"
+msgstr ""
+
+#. Template: Overview
+msgid "OAuth2 token configurations"
+msgstr ""
+
+#. Template: Overview
+msgid "Token status"
+msgstr ""
+
+#. Template: Overview
+msgid "Refresh token status"
+msgstr ""
+
+#. Template: Overview
+msgid "Validity of token configuration"
+msgstr ""
+
+#. Template: Overview
+msgid "Last token request failed."
+msgstr ""
+
+#. Template: Overview
+msgid "Token has expired on %s."
+msgstr ""
+
+#. Template: Overview
+msgid "Token is valid until %s."
+msgstr ""
+
+#. Template: Overview
+msgid "No token was requested yet."
+msgstr ""
+
+#. Template: Overview
+msgid "Last (refresh) token request failed."
+msgstr ""
+
+#. Template: Overview
+msgid "Refresh token has expired on %s."
+msgstr ""
+
+#. Template: Overview
+msgid "Refresh token has expired."
+msgstr ""
+
+#. Template: Overview
+msgid "Refresh token is valid until %s."
+msgstr ""
+
+#. Template: Overview
+msgid "Refresh token is valid (without expiration date)."
+msgstr ""
+
+#. Template: Overview
+msgid "No refresh token was requested yet."
+msgstr ""
+
+#. Template: Overview
+msgid "Refresh token request is not configured."
+msgstr ""
+
+#. Template: Overview
+msgid "Request new token"
+msgstr ""
+
+#. Template: Overview
+msgid "Delete this token and its configuration."
 msgstr ""
 
 #. Template: AdminOTRSBusinessInstalled
@@ -5027,6 +5191,18 @@ msgid "Activity Name"
 msgstr ""
 
 #. Template: AdminProcessManagementActivity
+msgid "Scope"
+msgstr ""
+
+#. Template: AdminProcessManagementActivity
+msgid "Scope EntityID"
+msgstr ""
+
+#. Template: AdminProcessManagementActivity
+msgid "This field is required for activities with a scope."
+msgstr ""
+
+#. Template: AdminProcessManagementActivity
 msgid "Activity Dialogs"
 msgstr ""
 
@@ -5040,6 +5216,10 @@ msgstr ""
 
 #. Template: AdminProcessManagementActivity
 msgid "Filter available Activity Dialogs"
+msgstr ""
+
+#. Template: AdminProcessManagementActivity
+msgid "Show global %s"
 msgstr ""
 
 #. Template: AdminProcessManagementActivity
@@ -5100,6 +5280,10 @@ msgstr ""
 
 #. Template: AdminProcessManagementActivityDialog
 msgid "The selected required lock does not exist."
+msgstr ""
+
+#. Template: AdminProcessManagementActivityDialog
+msgid "This field is required for activitiy dialogs with a scope."
 msgstr ""
 
 #. Template: AdminProcessManagementActivityDialog
@@ -5370,6 +5554,10 @@ msgstr ""
 msgid "Transition Name"
 msgstr ""
 
+#. Template: AdminProcessManagementTransition
+msgid "This field is required for transitions with a scope."
+msgstr ""
+
 #. Template: AdminProcessManagementTransitionAction
 msgid "Please note that changing this transition action will affect the following processes"
 msgstr ""
@@ -5387,6 +5575,10 @@ msgid "Transition Action Module"
 msgstr ""
 
 #. Template: AdminProcessManagementTransitionAction
+msgid "This field is required for transition actions with a scope."
+msgstr ""
+
+#. Template: AdminProcessManagementTransitionAction
 msgid "Config Parameters"
 msgstr ""
 
@@ -5396,10 +5588,6 @@ msgstr ""
 
 #. Template: AdminProcessManagementTransitionAction
 msgid "Remove this Parameter"
-msgstr ""
-
-#. Template: AdminQueue
-msgid "Queue Management"
 msgstr ""
 
 #. Template: AdminQueue
@@ -6771,10 +6959,6 @@ msgid "A standard template with this name already exists!"
 msgstr ""
 
 #. Template: AdminTemplate
-msgid "Template"
-msgstr ""
-
-#. Template: AdminTemplate
 msgid "To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types."
 msgstr ""
 
@@ -7228,14 +7412,6 @@ msgstr ""
 
 #. Template: AgentAppointmentEdit
 msgid "Relative point of time"
-msgstr ""
-
-#. Template: AgentAppointmentEdit
-msgid "Link"
-msgstr ""
-
-#. Template: AgentAppointmentEdit
-msgid "Remove entry"
 msgstr ""
 
 #. Template: AgentCustomerInformationCenter
@@ -7974,10 +8150,6 @@ msgstr ""
 msgid "Setting a template will overwrite any text or attachment."
 msgstr ""
 
-#. Template: AgentTicketActionCommon
-msgid "Invalid time!"
-msgstr ""
-
 #. Template: AgentTicketBounce
 msgid "Bounce %s%s%s"
 msgstr ""
@@ -8686,6 +8858,18 @@ msgstr ""
 msgid "Back to admin overview"
 msgstr ""
 
+#. Template: Create
+msgid "Ticket Creation"
+msgstr ""
+
+#. Template: Create
+msgid "Link"
+msgstr ""
+
+#. Template: Link
+msgid "Remove entry"
+msgstr ""
+
 #. Template: CloudServicesDisabled
 msgid "This Feature Requires Cloud Services"
 msgstr ""
@@ -9040,10 +9224,6 @@ msgstr ""
 
 #. Template: Header
 msgid "View notifications"
-msgstr ""
-
-#. Template: Header
-msgid "Notifications"
 msgstr ""
 
 #. Template: Header
@@ -9888,6 +10068,10 @@ msgstr ""
 
 #. Template: Test
 msgid "Counter"
+msgstr ""
+
+#. Template: TimeUnits
+msgid "Invalid time!"
 msgstr ""
 
 #. Template: Warning
@@ -11190,6 +11374,10 @@ msgstr ""
 msgid "Visible to customer"
 msgstr ""
 
+#. Perl Module: Kernel/Modules/AdminOAuth2TokenManagement.pm
+msgid "Authorization code parameters not found."
+msgstr ""
+
 #. Perl Module: Kernel/Modules/AdminOTRSBusiness.pm
 msgid "Your system was successfully upgraded to %s."
 msgstr ""
@@ -12420,6 +12608,10 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentTicketMove.pm
 msgid "You need move permissions!"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AgentTicketOwnerView.pm
+msgid "My Owned Tickets"
 msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentTicketPhone.pm
@@ -13670,6 +13862,14 @@ msgstr ""
 msgid "OTRS Daemon is not running."
 msgstr ""
 
+#. Perl Module: Kernel/Output/HTML/Notification/OAuth2TokenManagementTokenExpired.pm
+msgid "OAuth2 token for \"%s\" has expired."
+msgstr ""
+
+#. Perl Module: Kernel/Output/HTML/Notification/OAuth2TokenManagementTokenExpired.pm
+msgid "OAuth2 refresh token for \"%s\" has expired."
+msgstr ""
+
 #. Perl Module: Kernel/Output/HTML/Notification/OutofOfficeCheck.pm
 msgid "You have Out of Office enabled, would you like to disable it?"
 msgstr ""
@@ -13904,6 +14104,18 @@ msgstr ""
 
 #. Perl Module: Kernel/Output/HTML/ToolBar/TicketLocked.pm
 msgid "Locked Tickets Total"
+msgstr ""
+
+#. Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
+msgid "Owned Tickets New"
+msgstr ""
+
+#. Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
+msgid "Owned Tickets Reminder Reached"
+msgstr ""
+
+#. Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
+msgid "Owned Tickets Total"
 msgstr ""
 
 #. Perl Module: Kernel/Output/HTML/ToolBar/TicketResponsible.pm
@@ -15766,6 +15978,10 @@ msgstr ""
 msgid "Do you really want to delete this notification?"
 msgstr ""
 
+#. JS File: Core.Agent.Admin.OAuth2TokenManagement
+msgid "Do you really want to delete this token and its configuration?"
+msgstr ""
+
 #. JS File: Core.Agent.Admin.PGP
 msgid "Do you really want to delete this key?"
 msgstr ""
@@ -16778,6 +16994,10 @@ msgid "Admin."
 msgstr ""
 
 #. SysConfig
+msgid "AdminOAuth2TokenManagement"
+msgstr ""
+
+#. SysConfig
 msgid "Administration"
 msgstr ""
 
@@ -16839,6 +17059,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Agent interface notification module to see the number of locked tickets. Additional access control to show or not show this link can be done by using Key \"Group\" and Content like \"rw:group1;move_into:group2\"."
+msgstr ""
+
+#. SysConfig
+msgid "Agent interface notification module to see the number of tickets an agent is owner for. Additional access control to show or not show this link can be done by using Key \"Group\" and Content like \"rw:group1;move_into:group2\"."
 msgstr ""
 
 #. SysConfig
@@ -17142,6 +17366,10 @@ msgid "Attachment Name"
 msgstr ""
 
 #. SysConfig
+msgid "Authentication type for sendmail module. If 'OAuth2 token' has been selected, SendmailModule::OAuth2TokenConfigName must also be configured."
+msgstr ""
+
+#. SysConfig
 msgid "Automated line break in text messages after x number of chars."
 msgstr ""
 
@@ -17211,6 +17439,10 @@ msgstr ""
 
 #. SysConfig
 msgid "CSV Separator"
+msgstr ""
+
+#. SysConfig
+msgid "Cache settings for DBCRUD modules (default: 1 day)."
 msgstr ""
 
 #. SysConfig
@@ -17374,14 +17606,6 @@ msgid "Checks the SystemID in ticket number detection for follow-ups. If not ena
 msgstr ""
 
 #. SysConfig
-msgid "Checks the availability of OTRS Business Solution™ for this system."
-msgstr ""
-
-#. SysConfig
-msgid "Checks the entitlement status of OTRS Business Solution™."
-msgstr ""
-
-#. SysConfig
 msgid "Child"
 msgstr ""
 
@@ -17407,6 +17631,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Christmas Eve"
+msgstr ""
+
+#. SysConfig
+msgid "Cleans up the calendar-based tickets regularly."
 msgstr ""
 
 #. SysConfig
@@ -17447,6 +17675,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Columns that can be filtered in the locked view of the agent interface. Note: Only Ticket attributes, Dynamic Fields (DynamicField_NameX) and Customer attributes (e.g. CustomerUserPhone, CustomerCompanyName, ...) are allowed."
+msgstr ""
+
+#. SysConfig
+msgid "Columns that can be filtered in the owner view of the agent interface. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed."
 msgstr ""
 
 #. SysConfig
@@ -17742,6 +17974,10 @@ msgid "Creates a unit test file for this ticket."
 msgstr ""
 
 #. SysConfig
+msgid "Creates the calendar-based tickets regularly."
+msgstr ""
+
+#. SysConfig
 msgid "Croatian"
 msgstr ""
 
@@ -17923,6 +18159,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom."
+msgstr ""
+
+#. SysConfig
+msgid "Default format for export files."
 msgstr ""
 
 #. SysConfig
@@ -18170,6 +18410,10 @@ msgid "Defines available groups for the admin overview screen."
 msgstr ""
 
 #. SysConfig
+msgid "Defines available groups for the appointment calendar screen."
+msgstr ""
+
+#. SysConfig
 msgid "Defines chat communication channel."
 msgstr ""
 
@@ -18346,6 +18590,10 @@ msgid "Defines if the previously valid token should be accepted for authenticati
 msgstr ""
 
 #. SysConfig
+msgid "Defines if the processes should be displayed in TreeView."
+msgstr ""
+
+#. SysConfig
 msgid "Defines if the values for filters should be retrieved from all available tickets. If enabled, only values which are actually used in any ticket will be available for filtering. Please note: The list of customers will always be retrieved like this."
 msgstr ""
 
@@ -18482,6 +18730,10 @@ msgid "Defines the default agent name in the ticket zoom view of the customer in
 msgstr ""
 
 #. SysConfig
+msgid "Defines the default article channel name for calendar based tickets."
+msgstr ""
+
+#. SysConfig
 msgid "Defines the default auto response type of the article for this operation."
 msgstr ""
 
@@ -18490,7 +18742,15 @@ msgid "Defines the default body of a note in the ticket free text screen of the 
 msgstr ""
 
 #. SysConfig
+msgid "Defines the default content type for calendar based tickets."
+msgstr ""
+
+#. SysConfig
 msgid "Defines the default filter fields in the customer user address book search (CustomerUser or CustomerCompany). For the CustomerCompany fields a prefix 'CustomerCompany_' must be added."
+msgstr ""
+
+#. SysConfig
+msgid "Defines the default from for calendar based tickets."
 msgstr ""
 
 #. SysConfig
@@ -18499,6 +18759,14 @@ msgstr ""
 
 #. SysConfig
 msgid "Defines the default front-end language. All the possible values are determined by the available language files on the system (see the next setting)."
+msgstr ""
+
+#. SysConfig
+msgid "Defines the default history comment for calendar based tickets."
+msgstr ""
+
+#. SysConfig
+msgid "Defines the default history type for calendar based tickets."
 msgstr ""
 
 #. SysConfig
@@ -18570,6 +18838,10 @@ msgid "Defines the default next state of a ticket, in the ticket bulk screen of 
 msgstr ""
 
 #. SysConfig
+msgid "Defines the default next state."
+msgstr ""
+
+#. SysConfig
 msgid "Defines the default note body text for phone tickets in the ticket phone inbound screen of the agent interface."
 msgstr ""
 
@@ -18610,6 +18882,10 @@ msgid "Defines the default selection at the drop down menu for stats format (For
 msgstr ""
 
 #. SysConfig
+msgid "Defines the default sender type for calendar based tickets."
+msgstr ""
+
+#. SysConfig
 msgid "Defines the default sender type for phone tickets in the ticket phone inbound screen of the agent interface."
 msgstr ""
 
@@ -18619,10 +18895,6 @@ msgstr ""
 
 #. SysConfig
 msgid "Defines the default sender type for tickets in the ticket zoom screen of the customer interface."
-msgstr ""
-
-#. SysConfig
-msgid "Defines the default shown ticket search attribute for ticket search screen (AllTickets/ArchivedTickets/NotArchivedTickets)."
 msgstr ""
 
 #. SysConfig
@@ -18686,6 +18958,10 @@ msgid "Defines the default ticket attribute for ticket sorting in the locked tic
 msgstr ""
 
 #. SysConfig
+msgid "Defines the default ticket attribute for ticket sorting in the owner view of the agent interface."
+msgstr ""
+
+#. SysConfig
 msgid "Defines the default ticket attribute for ticket sorting in the responsible view of the agent interface."
 msgstr ""
 
@@ -18706,6 +18982,10 @@ msgid "Defines the default ticket attribute for ticket sorting of the ticket sea
 msgstr ""
 
 #. SysConfig
+msgid "Defines the default ticket body for calendar based tickets."
+msgstr ""
+
+#. SysConfig
 msgid "Defines the default ticket bounced notification for customer/sender in the ticket bounce screen of the agent interface."
 msgstr ""
 
@@ -18723,6 +19003,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Defines the default ticket order (after priority sort) in the status view of the agent interface. Up: oldest on top. Down: latest on top."
+msgstr ""
+
+#. SysConfig
+msgid "Defines the default ticket order in the owner view of the agent interface. Up: oldest on top. Down: latest on top."
 msgstr ""
 
 #. SysConfig
@@ -18747,6 +19031,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Defines the default ticket order of a search result in the customer interface. Up: oldest on top. Down: latest on top."
+msgstr ""
+
+#. SysConfig
+msgid "Defines the default ticket priority for calendar based tickets."
 msgstr ""
 
 #. SysConfig
@@ -18782,6 +19070,10 @@ msgid "Defines the default ticket priority in the ticket responsible screen of t
 msgstr ""
 
 #. SysConfig
+msgid "Defines the default ticket title for calendar based tickets."
+msgstr ""
+
+#. SysConfig
 msgid "Defines the default ticket type for new customer tickets in the customer interface."
 msgstr ""
 
@@ -18803,6 +19095,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Defines the default viewable sender types of a ticket (default: customer)."
+msgstr ""
+
+#. SysConfig
+msgid "Defines the default visibility of articles for calendar based tickets."
 msgstr ""
 
 #. SysConfig
@@ -19167,6 +19463,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Defines the next possible states for customer tickets in the customer interface."
+msgstr ""
+
+#. SysConfig
+msgid "Defines the next possible ticket states for calendar based tickets."
 msgstr ""
 
 #. SysConfig
@@ -19674,6 +19974,10 @@ msgid "Display settings to override defaults for Process Tickets."
 msgstr ""
 
 #. SysConfig
+msgid "Displays notifications for missing and expired OAuth2 tokens."
+msgstr ""
+
+#. SysConfig
 msgid "Displays the accounted time for an article in the ticket zoom view."
 msgstr ""
 
@@ -19767,6 +20071,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Dynamic fields shown in the sidebar of the ticket zoom screen of the agent interface."
+msgstr ""
+
+#. SysConfig
+msgid "Dynamic fields shown in the ticket bulk screen of the agent interface."
 msgstr ""
 
 #. SysConfig
@@ -19939,6 +20247,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Enables S/MIME support."
+msgstr ""
+
+#. SysConfig
+msgid "Enables calendar based ticket creation feature only for the listed groups."
 msgstr ""
 
 #. SysConfig
@@ -20430,6 +20742,10 @@ msgid "Greek"
 msgstr ""
 
 #. SysConfig
+msgid "Handles changes to data of modules which use the DBCRUD base module."
+msgstr ""
+
+#. SysConfig
 msgid "Hebrew"
 msgstr ""
 
@@ -20699,6 +21015,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Ignore system sender article types (e. g. auto responses or email notifications) to be flagged as 'Unread Article' in AgentTicketZoom or expanded automatically in Large view screens."
+msgstr ""
+
+#. SysConfig
+msgid "Ignores not ticket related attributes."
 msgstr ""
 
 #. SysConfig
@@ -21014,6 +21334,14 @@ msgid "Lithuanian"
 msgstr ""
 
 #. SysConfig
+msgid "Loader module registration for AdminOAuth2TokenManagement."
+msgstr ""
+
+#. SysConfig
+msgid "Loader module registration for AgentAppointmentEdit."
+msgstr ""
+
+#. SysConfig
 msgid "Loader module registration for the admin interface."
 msgstr ""
 
@@ -21103,6 +21431,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Manage Customer User-Customer Relations."
+msgstr ""
+
+#. SysConfig
+msgid "Manage OAuth2 tokens and their configurations."
 msgstr ""
 
 #. SysConfig
@@ -21402,6 +21734,10 @@ msgid "Name of custom service. The custom service is a service selection of your
 msgstr ""
 
 #. SysConfig
+msgid "Name of the OAuth2 token configuration to use for sending mails if 'OAuth2 token' was configured in SendmailModule::AuthenticationType."
+msgstr ""
+
+#. SysConfig
 msgid "Name of the dynamic field in which the attachment file IDs of the transition will be stored."
 msgstr ""
 
@@ -21495,6 +21831,14 @@ msgstr ""
 
 #. SysConfig
 msgid "Number of tickets to be displayed in each page of a search result in the customer interface."
+msgstr ""
+
+#. SysConfig
+msgid "OAuth2"
+msgstr ""
+
+#. SysConfig
+msgid "OAuth2 token"
 msgstr ""
 
 #. SysConfig
@@ -21934,6 +22278,10 @@ msgid "Queues ↔ Auto Responses"
 msgstr ""
 
 #. SysConfig
+msgid "Quoting character for exported CSV files."
+msgstr ""
+
+#. SysConfig
 msgid "Rebuild the ticket index for AgentTicketQueue."
 msgstr ""
 
@@ -22202,6 +22550,10 @@ msgid "Second Queue"
 msgstr ""
 
 #. SysConfig
+msgid "Seconds"
+msgstr ""
+
+#. SysConfig
 msgid "Select after which period ticket overviews should refresh automatically."
 msgstr ""
 
@@ -22254,7 +22606,7 @@ msgid "Selects the module to handle uploads via the web interface. \"DB\" stores
 msgstr ""
 
 #. SysConfig
-msgid "Selects the ticket number generator module. \"AutoIncrement\" increments the ticket number, the SystemID and the counter are used with SystemID.counter format (e.g. 1010138, 1010139). With \"Date\" the ticket numbers will be generated by the current date, the SystemID and the counter. The format looks like Year.Month.Day.SystemID.counter (e.g. 200206231010138, 200206231010139). With \"DateChecksum\"  the counter will be appended as checksum to the string of date and SystemID. The checksum will be rotated on a daily basis. The format looks like Year.Month.Day.SystemID.Counter.CheckSum (e.g. 2002070110101520, 2002070110101535)."
+msgid "Selects the ticket number generator module. \"AutoIncrement\" increments the ticket number, the SystemID and the counter are used with SystemID.counter format (e.g. 1010138, 1010139). With \"Date\" the ticket numbers will be generated by the current date, the SystemID and the counter. The format looks like Year.Month.Day.SystemID.counter (e.g. 200206231010138, 200206231010139). With \"DateChecksum\"  the counter will be appended as checksum to the string of date and SystemID. The checksum will be rotated on a daily basis. The format looks like Year.Month.Day.SystemID.Counter.CheckSum (e.g. 2002070110101520, 2002070110101535). With \"Random\" the ticket numbers will be generated by 12 random numbers. The format looks like SystemID.RandomNumbers (e.g. 10123456789012)."
 msgstr ""
 
 #. SysConfig
@@ -22283,10 +22635,6 @@ msgstr ""
 
 #. SysConfig
 msgid "Sends customer notifications just to the mapped customer."
-msgstr ""
-
-#. SysConfig
-msgid "Sends registration information to OTRS group."
 msgstr ""
 
 #. SysConfig
@@ -22323,6 +22671,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Sent notification to \"%s\"."
+msgstr ""
+
+#. SysConfig
+msgid "Separator for exported CSV files."
 msgstr ""
 
 #. SysConfig
@@ -22675,6 +23027,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Sets the service in the close ticket screen of the agent interface (Ticket::Service needs to be enabled)."
+msgstr ""
+
+#. SysConfig
+msgid "Sets the service in the ticket bulk screen in the agent interface (Ticket::Service needs to be enabled)."
 msgstr ""
 
 #. SysConfig
@@ -23095,6 +23451,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Shows either the last customer article's subject or the ticket title in the small format overview."
+msgstr ""
+
+#. SysConfig
+msgid "Shows existing parent/child (separated by ::) process lists in the form of a tree or a list."
 msgstr ""
 
 #. SysConfig
@@ -23658,6 +24018,10 @@ msgid "Theme"
 msgstr ""
 
 #. SysConfig
+msgid "This configuration defines if a dynamic field has to be checked in the agent ticket bulk view to get set for each ticket. This prevents unwanted overwrite of dynamic field values with their default or even empty values."
+msgstr ""
+
+#. SysConfig
 msgid "This event module stores attributes from CustomerUser as DynamicFields tickets. Please see DynamicFieldFromCustomerUser::Mapping setting for how to configure the mapping."
 msgstr ""
 
@@ -23714,6 +24078,10 @@ msgid "This option defines the process tickets default state."
 msgstr ""
 
 #. SysConfig
+msgid "This option enables a dropdown which will be displayed instead of the time unit input field."
+msgstr ""
+
+#. SysConfig
 msgid "This option will deny the access to customer company tickets, which are not created by the customer user."
 msgstr ""
 
@@ -23731,6 +24099,10 @@ msgstr ""
 
 #. SysConfig
 msgid "This will allow the system to send text messages via SMS."
+msgstr ""
+
+#. SysConfig
+msgid "Threshold (in minutes) for catching up with ticket creation for appointments. Tickets for due appointments will only be created if their planned creation date is not older than the configured amount of minutes. This prevents creation of tickets for e. g. recurring appointments if the ticket creation will be executed some time later."
 msgstr ""
 
 #. SysConfig
@@ -23835,6 +24207,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Ticket bulk module."
+msgstr ""
+
+#. SysConfig
+msgid "Ticket creation"
 msgstr ""
 
 #. SysConfig
@@ -24162,6 +24538,14 @@ msgid "Zoom"
 msgstr ""
 
 #. SysConfig
+msgid "all tickets"
+msgstr ""
+
+#. SysConfig
+msgid "archived tickets"
+msgstr ""
+
+#. SysConfig
 msgid "attachment"
 msgstr ""
 
@@ -24195,6 +24579,10 @@ msgstr ""
 
 #. SysConfig
 msgid "normal"
+msgstr ""
+
+#. SysConfig
+msgid "not archived tickets"
 msgstr ""
 
 #. SysConfig

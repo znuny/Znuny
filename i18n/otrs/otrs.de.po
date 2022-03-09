@@ -5115,7 +5115,7 @@ msgstr "Neuen Parameter hinzufügen"
 msgid "Remove this Parameter"
 msgstr "Parameter entfernen"
 
-#. Template: AdminQueue
+#. Template: Edit
 msgid "Queue Management"
 msgstr "Queue-Verwaltung"
 
@@ -6471,7 +6471,7 @@ msgstr "Möchten Sie diese Vorlage wirklich löschen?"
 msgid "A standard template with this name already exists!"
 msgstr "Es existiert bereits eine Standardvorlage mit diesem Namen!"
 
-#. Template: AdminTemplate
+#. Template: Edit
 msgid "Template"
 msgstr "Vorlage"
 
@@ -6887,11 +6887,11 @@ msgstr "Dez"
 msgid "Relative point of time"
 msgstr "Relativer Zeitpunkt"
 
-#. Template: AgentAppointmentEdit
+#. Template: Create
 msgid "Link"
 msgstr "Verknüpfen"
 
-#. Template: AgentAppointmentEdit
+#. Template: Link
 msgid "Remove entry"
 msgstr "Eintrag entfernen"
 
@@ -7635,7 +7635,7 @@ msgstr "Textvorlage"
 msgid "Setting a template will overwrite any text or attachment."
 msgstr "Die Auswahl einer Vorlage wird bereits bestehenden Text oder Anhänge löschen."
 
-#. Template: AgentTicketActionCommon
+#. Template: TimeUnits
 msgid "Invalid time!"
 msgstr "Ungültige Zeitangabe!"
 
@@ -8723,7 +8723,7 @@ msgstr "Bitte beachten Sie, dass dieser Entwurf aufgrund zwischenzeitlicher Änd
 msgid "View notifications"
 msgstr "Benachrichtigungen anzeigen"
 
-#. Template: Header
+#. Template: Edit
 msgid "Notifications"
 msgstr "Benachrichtigungen"
 
@@ -24635,4 +24635,412 @@ msgstr "Loader-Modulregistrierung für die Adminoberfläche."
 #. SysConfig
 msgid "Management of ticket attribute relations."
 msgstr "Verwaltung von abhängigen Ticketattributen."
+
+#. Template: AdminLog
+msgid "Clear log entries"
+msgstr "Lösche Protokolleinträge"
+
+#. Template: AdminMailAccount
+msgid "Authentication type"
+msgstr "Authentifikationstyp"
+
+#. Template: AdminMailAccount
+msgid "OAuth2 token configuration"
+msgstr "OAuth2-Token-Konfiguration"
+
+#. Template: Edit
+msgid "Manage OAuth2 tokens and their configurations"
+msgstr "OAuth2-Token und deren Konfigurationen verwalten"
+
+#. Template: Edit
+msgid "Add by template"
+msgstr "Auf Basis von Template hinzufügen"
+
+#. Template: Edit
+msgid "Base configuration"
+msgstr "Basiskonfiguration"
+
+#. Template: Edit
+msgid "An OAuth2 token configuration with this name already exists."
+msgstr "Es existiert bereits eine OAuth2-Token-Konfiguration mit diesem Namen."
+
+#. Template: Edit
+msgid "Client ID"
+msgstr "Client-ID"
+
+#. Template: Edit
+msgid "Client secret"
+msgstr "Client-Secret"
+
+#. Template: Edit
+msgid "This is the template that was used to create this OAuth2 token configuration."
+msgstr "Dies ist die Vorlage, die zur Erstellung dieser OAuth2-Token-Konfiguration verwendet wurde."
+
+#. Template: Edit
+msgid "Expired token"
+msgstr "Abgelaufenes Token"
+
+#. Template: Edit
+msgid "Shows a notification for admins below the top menu if the OAuth2 token has expired."
+msgstr "Zeigt für abgelaufenes OAuth2-Token eine Benachrichtigung für Admins unterhalb des Hauptmenüs."
+
+#. Template: Edit
+msgid "Expired refresh token"
+msgstr "Abgelaufenes Refresh-Token"
+
+#. Template: Edit
+msgid "Shows a notification for admins below the top menu if the OAuth2 refresh token has expired."
+msgstr "Zeigt für abgelaufenes OAuth2-Refresh-Token eine Benachrichtigung für Admins unterhalb des Hauptmenüs."
+
+#. Template: Overview
+msgid "Add OAuth2 token configuration"
+msgstr "OAuth2-Token-Konfiguration hinzufügen"
+
+#. Template: Overview
+msgid "Add a new OAuth2 token configuration based on the selected template."
+msgstr "Neue OAuth2-Token-Konfiguration auf Basis der gewählten Vorlage hinzufügen"
+
+#. Template: Overview
+msgid "Import and export"
+msgstr "Import und Export"
+
+#. Template: Overview
+msgid "Upload a YAML file to import token configurations. See documentation on OAuth2 token management for further details."
+msgstr "Datei im YAML-Format zum Import von Token-Konfigurationen hochladen. Beachten Sie die Dokumentation zum OAuth2-Token-Management für weitere Informationen."
+
+#. Template: Overview
+msgid "Overwrite existing token configurations"
+msgstr "Bestehende Token-Konfigurationen überschreiben"
+
+#. Template: Overview
+msgid "Import token configurations"
+msgstr "Token-Konfigurationen importieren"
+
+#. Template: Overview
+msgid "Export token configurations"
+msgstr "Token-Konfigurationen exportieren"
+
+#. Template: Overview
+msgid "OAuth2 token configurations"
+msgstr "OAuth2-Token-Konfigurationen"
+
+#. Template: Overview
+msgid "Token status"
+msgstr "Token-Status"
+
+#. Template: Overview
+msgid "Refresh token status"
+msgstr "Refresh-Token-Status"
+
+#. Template: Overview
+msgid "Validity of token configuration"
+msgstr "Gültigkeit der Token-Konfiguration"
+
+#. Template: Overview
+msgid "Last token request failed."
+msgstr "Letzter Token-Request ist fehlgeschlagen."
+
+#. Template: Overview
+msgid "Token has expired on %s."
+msgstr "Token ist am %s abgelaufen."
+
+#. Template: Overview
+msgid "Token is valid until %s."
+msgstr "Token ist gültig bis %s."
+
+#. Template: Overview
+msgid "No token was requested yet."
+msgstr "Bisher wurde kein Token angefordert."
+
+#. Template: Overview
+msgid "Last (refresh) token request failed."
+msgstr "Letzter (Refresh-)Token-Request ist fehlgeschlagen."
+
+#. Template: Overview
+msgid "Refresh token has expired on %s."
+msgstr "Refresh-Token ist am %s abgelaufen."
+
+#. Template: Overview
+msgid "Refresh token has expired."
+msgstr "Refresh-Token ist abgelaufen."
+
+#. Template: Overview
+msgid "Refresh token is valid until %s."
+msgstr "Refresh-Token ist gültig bis %s."
+
+#. Template: Overview
+msgid "Refresh token is valid (without expiration date)."
+msgstr "Refresh-Token ist gültig (ohne Ablaufdatum)."
+
+#. Template: Overview
+msgid "No refresh token was requested yet."
+msgstr "Bisher wurde kein Refresh-Token angefordert."
+
+#. Template: Overview
+msgid "Refresh token request is not configured."
+msgstr "Refresh-Token-Request ist nicht konfiguriert."
+
+#. Template: Overview
+msgid "Request new token"
+msgstr "Neues Token anfordern"
+
+#. Template: Overview
+msgid "Delete this token and its configuration."
+msgstr "Token und dessen Konfiguration löschen."
+
+#. Template: AdminProcessManagementActivity
+msgid "Scope"
+msgstr "Geltungsbereich"
+
+#. Template: AdminProcessManagementActivity
+msgid "Scope EntityID"
+msgstr "Geltungsbereich EntitätsID"
+
+#. Template: AdminProcessManagementActivity
+msgid "This field is required for activities with a scope."
+msgstr "Dieses Feld ist für Aktivitäten mit einem Geltungsbereich erforderlich."
+
+#. Template: AdminProcessManagementActivity
+msgid "Show global %s"
+msgstr "globale %s anzeigen"
+
+#. Template: AdminProcessManagementActivityDialog
+msgid "This field is required for activitiy dialogs with a scope."
+msgstr "Dieses Feld ist für Aktivitäts-Dialoge mit einem Geltungsbereich erforderlich."
+
+#. Template: AdminProcessManagementTransition
+msgid "This field is required for transitions with a scope."
+msgstr "Dieses Feld ist für Übergänge mit einem Geltungsbereich erforderlich."
+
+#. Template: AdminProcessManagementTransitionAction
+msgid "This field is required for transition actions with a scope."
+msgstr "Dieses Feld ist für Übergangsaktionen mit einem Geltungsbereich erforderlich."
+
+#. Template: Create
+msgid "Ticket Creation"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminOAuth2TokenManagement.pm
+msgid "Authorization code parameters not found."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AgentTicketOwnerView.pm
+msgid "My Owned Tickets"
+msgstr ""
+
+#. Perl Module: Kernel/Output/HTML/Notification/OAuth2TokenManagementTokenExpired.pm
+msgid "OAuth2 token for \"%s\" has expired."
+msgstr "OAuth2-Token für \"%s\" ist abgelaufen."
+
+#. Perl Module: Kernel/Output/HTML/Notification/OAuth2TokenManagementTokenExpired.pm
+msgid "OAuth2 refresh token for \"%s\" has expired."
+msgstr "OAuth2-Refresh-Token für \"%s\" ist abgelaufen."
+
+#. Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
+msgid "Owned Tickets New"
+msgstr ""
+
+#. Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
+msgid "Owned Tickets Reminder Reached"
+msgstr ""
+
+#. Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
+msgid "Owned Tickets Total"
+msgstr ""
+
+#. JS File: Core.Agent.Admin.OAuth2TokenManagement
+msgid "Do you really want to delete this token and its configuration?"
+msgstr "Soll das Token und dessen Konfiguration wirklich gelöscht werden?"
+
+#. SysConfig
+msgid "AdminOAuth2TokenManagement"
+msgstr ""
+
+#. SysConfig
+msgid "Agent interface notification module to see the number of tickets an agent is owner for. Additional access control to show or not show this link can be done by using Key \"Group\" and Content like \"rw:group1;move_into:group2\"."
+msgstr "Agenten-Schnittstellen Benachrichtigungs-Modul zum Anzeigen der Anzahl der Tickets, für die der Agent besitzer ist. Zusätzliche Zugriffssteuerung zum Zeigen oder Verstecken dieses Links können durch Nutzung des Schlüssels \"Group\" und Inhalten wie \"rw:group1;move_into:group2\" realisiert werden."
+
+#. SysConfig
+msgid "Authentication type for sendmail module. If 'OAuth2 token' has been selected, SendmailModule::OAuth2TokenConfigName must also be configured."
+msgstr "Authentifikationstyp für das Sendmail-Modul. Falls 'OAuth2-Token' gewählt wurde, muss SendmailModule::OAuth2TokenConfigName ebenfalls konfiguriert werden."
+
+#. SysConfig
+msgid "Cache settings for DBCRUD modules (default: 1 day)."
+msgstr "Cache-Einstellungen für DBCRUD-Module (Standardwert: 1 Tag)."
+
+#. SysConfig
+msgid "Cleans up the calendar-based tickets regularly."
+msgstr "Säubert die kalenderbasierten Tickets regelmäßig."
+
+#. SysConfig
+msgid "Columns that can be filtered in the owner view of the agent interface. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed."
+msgstr "Filterbare Spalten in der betreffenden Ansicht des Agentenbereichs. Hinweis: Nur Ticket-Attribute, Dynamische Felder (DynamicField_NameX) und Kundenattribute (z. B. CustomerUserPhone, CustomerCompanyName) sind zulässig."
+
+#. SysConfig
+msgid "Creates the calendar-based tickets regularly."
+msgstr "Erstellt regelmäßig die kalenderbasierten Tickets."
+
+#. SysConfig
+msgid "Default format for export files."
+msgstr "Default-Format für Exportdateien."
+
+#. SysConfig
+msgid "Defines available groups for the appointment calendar screen."
+msgstr ""
+
+#. SysConfig
+msgid "Defines if the processes should be displayed in TreeView."
+msgstr "Definiert ob die Prozesse in TreeView angezeigt werden sollen."
+
+#. SysConfig
+msgid "Defines the default article channel name for calendar based tickets."
+msgstr "Definiert den Standardartikelkanal für kalenderbasierte Tickets."
+
+#. SysConfig
+msgid "Defines the default content type for calendar based tickets."
+msgstr "Definiert den Standardinhaltstyp für kalenderbasierte Tickets."
+
+#. SysConfig
+msgid "Defines the default from for calendar based tickets."
+msgstr "Definiert die Standardeinstellung des Absenders für kalenderbasierte Tickets."
+
+#. SysConfig
+msgid "Defines the default history comment for calendar based tickets."
+msgstr "Definiert den standardmäßigen Verlaufskommentar für kalenderbasierte Tickets."
+
+#. SysConfig
+msgid "Defines the default history type for calendar based tickets."
+msgstr "Definiert den Standardhistorientyp für kalenderbasierte Tickets."
+
+#. SysConfig
+msgid "Defines the default next state."
+msgstr "Definiert den standardmäßigen nächsten Zustand in der Agentenschnittstelle."
+
+#. SysConfig
+msgid "Defines the default sender type for calendar based tickets."
+msgstr "Definiert den Standard-Absendertyp für kalenderbasierte Tickets."
+
+#. SysConfig
+msgid "Defines the default ticket attribute for ticket sorting in the owner view of the agent interface."
+msgstr "Bestimmt das Standard-Ticket-Attribut für das Sortieren der Tickets in der Besitzer-Tickets-Anzeige im Agent-Interface."
+
+#. SysConfig
+msgid "Defines the default ticket body for calendar based tickets."
+msgstr "Definiert den Standard-Ticketbody für kalenderbasierte Tickets."
+
+#. SysConfig
+msgid "Defines the default ticket order in the owner view of the agent interface. Up: oldest on top. Down: latest on top."
+msgstr "Steuert die Ticket-Sortierung für die Besitzer-Ansicht des Agentenbereichs. Auf: Älteste oben. Ab: Neuste oben."
+
+#. SysConfig
+msgid "Defines the default ticket priority for calendar based tickets."
+msgstr "Definiert die Standard-Ticketpriorität für kalenderbasierte Tickets."
+
+#. SysConfig
+msgid "Defines the default ticket title for calendar based tickets."
+msgstr "Definiert den Standard-Tickettitel für kalenderbasierte Tickets."
+
+#. SysConfig
+msgid "Defines the default visibility of articles for calendar based tickets."
+msgstr "Definiert die Standardsichtbarkeit von Artikeln für kalenderbasierte Tickets."
+
+#. SysConfig
+msgid "Defines the next possible ticket states for calendar based tickets."
+msgstr "Definiert die nächstmöglichen Ticketzustände für kalenderbasierte Tickets."
+
+#. SysConfig
+msgid "Displays notifications for missing and expired OAuth2 tokens."
+msgstr ""
+
+#. SysConfig
+msgid "Dynamic fields shown in the ticket bulk screen of the agent interface."
+msgstr "Dynamische Felder, die in der Ticket-Sammelaktion in der Agentenoberfläche angezeigt werden."
+
+#. SysConfig
+msgid "Enables calendar based ticket creation feature only for the listed groups."
+msgstr "Aktiviert die kalenderbasierte Ticketerstellung nur für die aufgeführten Gruppen."
+
+#. SysConfig
+msgid "Handles changes to data of modules which use the DBCRUD base module."
+msgstr "Verarbeitet Änderungen an Daten von Modulen, die das DBCRUD-Modul als Basis nutzen."
+
+#. SysConfig
+msgid "Ignores not ticket related attributes."
+msgstr ""
+
+#. SysConfig
+msgid "Loader module registration for AdminOAuth2TokenManagement."
+msgstr ""
+
+#. SysConfig
+msgid "Loader module registration for AgentAppointmentEdit."
+msgstr ""
+
+#. SysConfig
+msgid "Manage OAuth2 tokens and their configurations."
+msgstr ""
+
+#. SysConfig
+msgid "Name of the OAuth2 token configuration to use for sending mails if 'OAuth2 token' was configured in SendmailModule::AuthenticationType."
+msgstr "Name der OAuth2-Token-Konfiguration für den Versand von E-Mails, falls 'OAuth2-Token' in SendmailModule::AuthenticationType konfiguriert wurde."
+
+#. SysConfig
+msgid "OAuth2"
+msgstr ""
+
+#. SysConfig
+msgid "OAuth2 token"
+msgstr "OAuth2-Token"
+
+#. SysConfig
+msgid "Quoting character for exported CSV files."
+msgstr "Anführungszeichen für exportierte CSV-Dateien."
+
+#. SysConfig
+msgid "Seconds"
+msgstr ""
+
+#. SysConfig
+msgid "Selects the ticket number generator module. \"AutoIncrement\" increments the ticket number, the SystemID and the counter are used with SystemID.counter format (e.g. 1010138, 1010139). With \"Date\" the ticket numbers will be generated by the current date, the SystemID and the counter. The format looks like Year.Month.Day.SystemID.counter (e.g. 200206231010138, 200206231010139). With \"DateChecksum\"  the counter will be appended as checksum to the string of date and SystemID. The checksum will be rotated on a daily basis. The format looks like Year.Month.Day.SystemID.Counter.CheckSum (e.g. 2002070110101520, 2002070110101535). With \"Random\" the ticket numbers will be generated by 12 random numbers. The format looks like SystemID.RandomNumbers (e.g. 10123456789012)."
+msgstr "Definiert das Modul zur Generierung von Ticketnummern. \"AutoIncrement\" erhöht den Zähler fortlaufend, dazu werden System-ID und Zähler im Format \"System-ID.Zähler\" dargestellt. \"Datum\" generiert Ticketnummern basierend auf dem jeweiligen Datum, der System-ID und dem Zähler im Format \"Jahr.Monat.Tag.System-ID.Zähler\" (z. B. \"200206231010138\", \"200206231010139\"). \"DateChecksum\" fügt den Zähler als Checksumme nach Datum und System-ID ein. Die Checksumme ändert sich dabei täglich. Format: \"Jahr.Monat.Tag.System-ID.Zähler.Checksumme\" (z. B. \"2002070110101520\", \"2002070110101535\"). Mit \"Random\" werden die Ticketnummern aus 12 Zufallszahlen generiert. Format: \"SysteID.RandomNumbers\" (z.B. 10123456789012)."
+
+#. SysConfig
+msgid "Separator for exported CSV files."
+msgstr "Trennzeichen für exportierte CSV-Dateien."
+
+#. SysConfig
+msgid "Sets the service in the ticket bulk screen in the agent interface (Ticket::Service needs to be enabled)."
+msgstr "Setzt den Service in der Ticket-Sammelaktion in der Agentenoberfläche (Ticket::Service muss aktiviert sein)."
+
+#. SysConfig
+msgid "Shows existing parent/child (separated by ::) process lists in the form of a tree or a list."
+msgstr ""
+
+#. SysConfig
+msgid "This configuration defines if a dynamic field has to be checked in the agent ticket bulk view to get set for each ticket. This prevents unwanted overwrite of dynamic field values with their default or even empty values."
+msgstr "Diese Konfiguration definiert, ob ein dynamisches Feld in der Ticket-Sammelaktion zum Setzen mit einer Checkbox markiert werden muss. Dies verhindert das ungewollte Überschreiben von dynamischen Feldwerten durch deren Standardwerte oder sogar leeren Inhalt."
+
+#. SysConfig
+msgid "This option enables a dropdown which will be displayed instead of the time unit input field."
+msgstr "Diese Option aktiviert ein Dropdown, das anstelle des Eingabefeldes für die Zeiteinheit angezeigt wird."
+
+#. SysConfig
+msgid "Threshold (in minutes) for catching up with ticket creation for appointments. Tickets for due appointments will only be created if their planned creation date is not older than the configured amount of minutes. This prevents creation of tickets for e. g. recurring appointments if the ticket creation will be executed some time later."
+msgstr "Schwellenwert (in Minuten) für das Aufholen der Ticketerstellung für Termine. Tickets für fällige Termine werden nur dann erstellt, wenn ihr geplantes Erstellungsdatum nicht älter als die konfigurierte Anzahl von Minuten ist. Dadurch wird verhindert, dass Tickets für z. B. wiederkehrende Termine erstellt werden, wenn die Ticketerstellung einige Zeit später durchgeführt wird."
+
+#. SysConfig
+msgid "Ticket creation"
+msgstr "Ticketerstellung"
+
+#. SysConfig
+msgid "all tickets"
+msgstr "alle Tickets"
+
+#. SysConfig
+msgid "archived tickets"
+msgstr "archivierte Tickets"
+
+#. SysConfig
+msgid "not archived tickets"
+msgstr "nicht archivierte Tickets"
 
