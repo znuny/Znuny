@@ -234,7 +234,7 @@ sub Get {
     my $LinkCount = scalar @LinkArray;
     if ( $LinkCount > 4 ) {
         splice @LinkArray, 3;
-        push @LinkArray,  $LanguageObject->Translate('+%s more', $LinkCount - 3 );
+        push @LinkArray, $LanguageObject->Translate( '+%s more', $LinkCount - 3 );
     }
 
     my $Value = join( '\n', @LinkArray );
@@ -246,7 +246,6 @@ sub Get {
 
     return \%Data;
 }
-
 
 =head2 LinkAdd()
 

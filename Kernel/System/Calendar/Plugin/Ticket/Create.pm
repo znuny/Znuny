@@ -2,9 +2,11 @@
 # Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
-# the enclosed file COPYING for license information (GPL). If you
-# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
+## nofilter(TidyAll::Plugin::OTRS::Perl::ParamObject)
+## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::SpellCheck)
 
 package Kernel::System::Calendar::Plugin::Ticket::Create;
 use parent qw(Kernel::System::Calendar::Plugin::Base);
@@ -388,11 +390,12 @@ sub Get {
         PluginKey     => $Param{Plugin}->{PluginKey},
         UserID        => 1,
     );
-    return if (!%Data);
+    return if ( !%Data );
 
-    if ($Data{Config}->{TicketCreateTimeType} ne 'Never'){
+    if ( $Data{Config}->{TicketCreateTimeType} ne 'Never' ) {
 
-        my $Value =  $LanguageObject->Translate($Data{Config}->{TicketCreateTimeType}) . ': ' . $Data{Config}->{TicketCreateTime};
+        my $Value = $LanguageObject->Translate( $Data{Config}->{TicketCreateTimeType} ) . ': '
+            . $Data{Config}->{TicketCreateTime};
         $Data{Icon}  = 'ticket';
         $Data{Value} = $Value;
     }
@@ -465,7 +468,6 @@ sub AJAXUpdate {
 
     # this is needed to get the Ticket::Frontend::AgentAppointmentEdit### config
     $Param{Action} = 'AgentAppointmentEdit';
-
 
     my %Owner            = $Self->_GetUsers(%Param);
     my %ResponsibleUsers = $Self->_GetResponsibles(%Param);
