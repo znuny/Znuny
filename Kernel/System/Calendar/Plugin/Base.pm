@@ -187,7 +187,7 @@ sub Get {
         PluginKey     => $Param{Plugin}->{PluginKey},
         UserID        => 1,
     );
-    return if (!%Data);
+    return if ( !%Data );
 
     return \%Data;
 }
