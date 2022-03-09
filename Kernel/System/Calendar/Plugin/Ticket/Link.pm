@@ -16,6 +16,7 @@ use warnings;
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
+    'Kernel::Language',
     'Kernel::Output::HTML::Layout',
     'Kernel::System::Calendar::Appointment',
     'Kernel::System::LinkObject',

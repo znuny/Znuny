@@ -16,6 +16,7 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::Language',
     'Kernel::Output::HTML::Layout',
     'Kernel::System::Calendar',
     'Kernel::System::Calendar::Appointment',
@@ -31,7 +32,6 @@ our @ObjectDependencies = (
     'Kernel::System::Priority',
     'Kernel::System::ProcessManagement::Process',
     'Kernel::System::Queue',
-    'Kernel::System::SLA',
     'Kernel::System::Service',
     'Kernel::System::State',
     'Kernel::System::Ticket',

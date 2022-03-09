@@ -1,4 +1,4 @@
-# 6.3.1 2022-??-??
+# 6.3.1 2022-03-09
  - 2022-03-07 Integrated package Znuny4OTRS-CalendarBasedTicketCreation.
  - 2022-03-07 Original owners of tickets will now be set again when cancelling a ticket bulk action.
  - 2022-03-02 Sector Nord AG: Fixed AgentAppointmentCalendarOverview AppointmentTooltip (#216). Thanks to Sector Nord AG (@jsinagowitz). [#216](https://github.com/znuny/Znuny/pull/216)
@@ -138,11 +138,12 @@
  - 2021-06-15 Use ticket title as the default appointment title (#90). Thanks to Renée Bäcker (@reneeb). [#90](https://github.com/znuny/Znuny/pull/90)
  - 2021-06-15 Column list validation before saving agent preferences (#84). Thanks to Paweł Bogusławski (@pboguslawski). [#84](https://github.com/znuny/Znuny/pull/84)
 
-# 6.0.40 2022-xx-xx
+# 6.0.40 2022-03-09
  - 2022-03-07 Original owners of tickets will now be set again when cancelling a ticket bulk action.
  - 2022-03-02 Sector Nord AG: Fixed AgentAppointmentCalendarOverview AppointmentTooltip (#216). Thanks to Sector Nord AG (@jsinagowitz). [#216](https://github.com/znuny/Znuny/pull/216)
  - 2022-02-25 Fixed Bug - Since version 6.0.31 the size of embedded images within the RTE cannot be changed via click & drag anymore [#98](https://github.com/znuny/Znuny/issues/98).
  - 2022-02-25 Fixed Bug - Fixed subject regex for rfc822 attachments on email parsing operation. No error will be thrown anymore if subject is missing/empty.
+ - 2022-02-18 Updated CKEditor from version 4.16.0 to 4.17.1.
  - 2022-02-11 Fixed Bug - Show menu items when showing the error screen. [#210](https://github.com/znuny/Znuny/issues/210)
  - 2022-02-03 Fixed Bug - Dashboard-TicketQueueOverview refresh [#156](https://github.com/znuny/Znuny/issues/156).
  - 2022-02-03 Updated jQuery UI from 1.12.1 to 1.13.1.

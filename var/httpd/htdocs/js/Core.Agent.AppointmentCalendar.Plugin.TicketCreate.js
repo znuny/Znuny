@@ -2,18 +2,23 @@
 // Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
-// the enclosed file COPYING for license information (GPL). If you
-// did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+// the enclosed file COPYING for license information (AGPL). If you
+// did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 // --
 
 "use strict";
 
-var Core = Core || {};
+var Core = Core || {},
+    Znuny = Znuny || {};
+
 Core.Agent = Core.Agent || {};
 Core.Agent.AppointmentCalendar = Core.Agent.AppointmentCalendar || {};
 Core.Agent.AppointmentCalendar.Plugin = Core.Agent.AppointmentCalendar.Plugin || {};
 Core.Agent.AppointmentCalendar.Plugin.Ticket = Core.Agent.AppointmentCalendar.Plugin.Ticket || {};
 Core.Agent.AppointmentCalendar.Plugin.TicketCreate = Core.Agent.AppointmentCalendar.Plugin.TicketCreate || {};
+
+Znuny.Form = Znuny.Form || {};
+Znuny.Form.Input = Znuny.Form.Input || {};
 
 /**
  * @namespace Core.Agent.AppointmentCalendar.Plugin.TicketCreate
@@ -35,6 +40,9 @@ Core.Agent.AppointmentCalendar.Plugin.TicketCreate = (function (TargetNS) {
      */
     TargetNS.Init = function () {
         Core.App.Subscribe('Core.Agent.AppointmentCalendar.AgentAppointmentEdit', function () {
+            var Fields = ['QueueID', 'OwnerID', 'ResponsibleUserID', 'CustomerUserID', 'StateID', 'PriorityID', 'LockID', 'TypeID', 'ServiceID', 'SLAID'],
+                ModifiedFields;
+
             if ($('#' + PluginKeySelector + 'TicketCreateTimeType').length > 0) {
 
                 // init for input fields
@@ -52,9 +60,6 @@ Core.Agent.AppointmentCalendar.Plugin.TicketCreate = (function (TargetNS) {
                 $('.ui-autocomplete').unbind('click.PluginKeyTicketCreate').bind('click.PluginKeyTicketCreate', function() {
                     $(document).unbind('click.Dialog');
                 });
-
-                var Fields = ['QueueID', 'OwnerID', 'ResponsibleUserID', 'CustomerUserID', 'StateID', 'PriorityID', 'LockID', 'TypeID', 'ServiceID', 'SLAID'],
-                    ModifiedFields;
 
                 // Bind events to specific fields
                 $.each(Fields, function(Index, ChangedElement) {
@@ -107,15 +112,15 @@ Core.Agent.AppointmentCalendar.Plugin.TicketCreate = (function (TargetNS) {
     function TogglePendingState () {
 
         var PendingStatesJSON = $('#' + PluginKeySelector + 'PendingStateIDs').val(),
-        StateID               = $('#' + PluginKeySelector + 'StateID' ).val(),
-        PendingStates;
+        StateID               = $('#' + PluginKeySelector + 'StateID').val(),
+        PendingStates,
+        StateFound = false;
 
         if (PendingStatesJSON){
             PendingStates = JSON.parse(PendingStatesJSON);
         }
 
         // check if state exists in the pending state list.
-        var StateFound = false;
         $.each(PendingStates, function(index, PendingStateID) {
             if (PendingStateID != StateID) return true;
             StateFound = true;
