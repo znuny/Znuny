@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -237,6 +237,7 @@ $Selenium->RunTest(
 
         # Check the filter for dynamic fields on the AgentTicketStatusView screen (see bug#14497).
         for my $Test (@Tests) {
+
             # Open filter selection
             $Selenium->find_element("//a[contains(\@title, \'$DFName, filter not active\' )]")->click();
 
@@ -262,7 +263,7 @@ $Selenium->RunTest(
 
             # Check not matching for the other two tickets
             OTHERTESTS:
-            for my $OtherTests (@Tests){
+            for my $OtherTests (@Tests) {
                 next OTHERTESTS if $OtherTests == $Test;
 
                 # Verify the other test ticket is not found by filtering with the dynamic field key of one ticket.

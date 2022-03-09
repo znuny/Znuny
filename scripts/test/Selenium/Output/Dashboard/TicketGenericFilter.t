@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,8 +18,8 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $Helper             = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
         my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
         # Create test user.
@@ -50,15 +50,15 @@ $Selenium->RunTest(
                 DynamicFieldValue => 'Key;Special',
             },
             {
-                TN                => $TicketObject->TicketCreateNumber(),
-                CustomerUser      => $Helper->GetRandomID() . '@fourth.com',
-                CustomerID        => 'CustomerCompany#%' . $Helper->GetRandomID() . '(#)',
+                TN           => $TicketObject->TicketCreateNumber(),
+                CustomerUser => $Helper->GetRandomID() . '@fourth.com',
+                CustomerID   => 'CustomerCompany#%' . $Helper->GetRandomID() . '(#)',
             },
         );
 
         # Check if test dynamic field exists in the system, remove it if it does.
         my $DynamicFieldName = 'DynamicFieldFilterTest';
-        my $DynamicField = $DynamicFieldObject->DynamicFieldGet(
+        my $DynamicField     = $DynamicFieldObject->DynamicFieldGet(
             Name => $DynamicFieldName,
         );
         my $Success;
@@ -78,7 +78,7 @@ $Selenium->RunTest(
         }
 
         # Create test dynamic field.
-        my $DynamicFieldID   = $DynamicFieldObject->DynamicFieldAdd(
+        my $DynamicFieldID = $DynamicFieldObject->DynamicFieldAdd(
             Name       => $DynamicFieldName,
             Label      => $DynamicFieldName,
             FieldOrder => 9991,
@@ -120,7 +120,7 @@ $Selenium->RunTest(
             );
 
             # Set dynamic field value for the ticket
-            if (defined $Test->{DynamicFieldValue}){
+            if ( defined $Test->{DynamicFieldValue} ) {
                 $Success = $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->ValueSet(
                     FieldID    => $DynamicFieldID,
                     ObjectType => 'Ticket',
@@ -513,6 +513,7 @@ $Selenium->RunTest(
             $Selenium->execute_script(
                 "\$('#ColumnFilterDynamicField_${DynamicFieldName}0120-TicketNew').val('$Tickets[0]->{DynamicFieldValue}').trigger('change');"
             );
+
             # Wait for AJAX to finish.
             $Selenium->WaitFor(
                 JavaScript =>
@@ -541,6 +542,7 @@ $Selenium->RunTest(
             $Selenium->execute_script(
                 "\$('a#Dashboard0120-TicketNew-remove-filters').trigger('click');"
             );
+
             # Wait for AJAX to finish.
             $Selenium->WaitFor(
                 JavaScript =>
@@ -589,6 +591,7 @@ $Selenium->RunTest(
             $Selenium->execute_script(
                 "\$('a#Dashboard0120-TicketNew-remove-filters').trigger('click');"
             );
+
             # Wait for AJAX to finish.
             $Selenium->WaitFor(
                 JavaScript =>
@@ -637,6 +640,7 @@ $Selenium->RunTest(
             $Selenium->execute_script(
                 "\$('a#Dashboard0120-TicketNew-remove-filters').trigger('click');"
             );
+
             # Wait for AJAX to finish.
             $Selenium->WaitFor(
                 JavaScript =>

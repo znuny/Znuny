@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -378,13 +378,15 @@ sub _NotificationFilter {
     my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
     # get not ticket related attributes
-    my $IgnoredAttributes = $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Event::NotificationEvent::IgnoredAttributes') || {};
+    my $IgnoredAttributes
+        = $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Event::NotificationEvent::IgnoredAttributes') || {};
     my %IgnoredAttributesHash;
-    for my $Key ( keys %{$IgnoredAttributes} ) {
+    for my $Key ( sort keys %{$IgnoredAttributes} ) {
         if ( IsHashRefWithData( $IgnoredAttributes->{$Key} ) ) {
             %IgnoredAttributesHash = ( %IgnoredAttributesHash, %{ $IgnoredAttributes->{$Key} } );
         }
     }
+
     # get the search article fields to retrieve values for
     my %ArticleSearchableFields = $ArticleObject->ArticleSearchableFieldsList();
 

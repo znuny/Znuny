@@ -1,4 +1,4 @@
-# 6.0.40 2022-xx-xx
+# 6.0.40 2022-03-09
  - 2022-03-07 Original owners of tickets will now be set again when cancelling a ticket bulk action.
  - 2022-03-02 Sector Nord AG: Fixed AgentAppointmentCalendarOverview AppointmentTooltip (#216). Thanks to Sector Nord AG (@jsinagowitz). [#216](https://github.com/znuny/Znuny/pull/216)
  - 2022-02-25 Fixed Bug - Since version 6.0.31 the size of embedded images within the RTE cannot be changed via click & drag anymore [#98](https://github.com/znuny/Znuny/issues/98).
@@ -9,6 +9,7 @@
  - 2022-02-03 Updated jQuery UI from 1.12.1 to 1.13.1.
  - 2022-02-03 Fixed link detection matches trailing dot.
  - 2022-01-11 Fixed Bug - Email overwritten when editing an agent.
+ - 2022-01-06 Fixed Bug - The page refresh stops the fulltext search via toolbar. [#182](https://github.com/znuny/Znuny/issues/182)
 
 # 6.0.39 2021-12-15
  - 2021-12-14 Added ProcessListTreeView in AgentTicketProcess and CustomerTicketProcess.

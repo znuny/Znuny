@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -34,17 +34,17 @@ $Helper->ConfigSettingChange(
     Key   => 'DashboardBackend',
     Value => {
         '0442-RSS' => {
-            'Block' => 'ContentSmall',
-            'CacheTTL' => '360',
-            'Default' => '1',
+            'Block'       => 'ContentSmall',
+            'CacheTTL'    => '360',
+            'Default'     => '1',
             'Description' => '',
-            'Group' => '',
-            'Limit' => '6',
-            'Mandatory' => '0',
-            'Module' => 'Kernel::Output::HTML::Dashboard::RSS',
-            'Title' => 'News',
-            'URL' => 'http://127.0.0.1/public/rss/en/rss.xml',
-            'URL_de' => 'http://127.0.0.1/public/rss/de/rss.xml'
+            'Group'       => '',
+            'Limit'       => '6',
+            'Mandatory'   => '0',
+            'Module'      => 'Kernel::Output::HTML::Dashboard::RSS',
+            'Title'       => 'News',
+            'URL'         => 'http://127.0.0.1/public/rss/en/rss.xml',
+            'URL_de'      => 'http://127.0.0.1/public/rss/de/rss.xml'
         },
     },
 );

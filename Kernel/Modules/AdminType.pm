@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -65,7 +65,7 @@ sub Run {
         }
         my $Output = $LayoutObject->Header();
         $Output .= $LayoutObject->NavigationBar();
-        if ($TypeNotActive){
+        if ($TypeNotActive) {
             $Output .= $TypeNotActive;
         }
         $Self->_Edit(
@@ -216,7 +216,7 @@ sub Run {
         # something has gone wrong
         my $Output = $LayoutObject->Header();
         $Output .= $LayoutObject->NavigationBar();
-        if ($TypeNotActive){
+        if ($TypeNotActive) {
             $Output .= $TypeNotActive;
         }
         $Output .= $LayoutObject->Notify( Priority => 'Error' );
@@ -242,7 +242,7 @@ sub Run {
         $GetParam{Name} = $ParamObject->GetParam( Param => 'Name' );
         my $Output = $LayoutObject->Header();
         $Output .= $LayoutObject->NavigationBar();
-        if ($TypeNotActive){
+        if ($TypeNotActive) {
             $Output .= $TypeNotActive;
         }
         $Self->_Edit(
@@ -297,7 +297,7 @@ sub Run {
                 $Self->_Overview();
                 my $Output = $LayoutObject->Header();
                 $Output .= $LayoutObject->NavigationBar();
-                if ($TypeNotActive){
+                if ($TypeNotActive) {
                     $Output .= $TypeNotActive;
                 }
                 $Output .= $LayoutObject->Notify( Info => Translatable('Type added!') );
@@ -313,7 +313,7 @@ sub Run {
         # something has gone wrong
         my $Output = $LayoutObject->Header();
         $Output .= $LayoutObject->NavigationBar();
-        if ($TypeNotActive){
+        if ($TypeNotActive) {
             $Output .= $TypeNotActive;
         }
         $Output .= $LayoutObject->Notify( Priority => 'Error' );
@@ -337,7 +337,7 @@ sub Run {
 
         my $Output = $LayoutObject->Header();
         $Output .= $LayoutObject->NavigationBar();
-        if ($TypeNotActive){
+        if ($TypeNotActive) {
             $Output .= $TypeNotActive;
         }
 
