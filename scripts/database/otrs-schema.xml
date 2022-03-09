@@ -2575,6 +2575,22 @@
     </ForeignKey>
 </Table>
 
+<!-- calender appointment plugin -->
+<Table Name="calendar_appointment_plugin">
+    <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
+    <Column Name="appointment_id" Required="true" Type="SMALLINT"/>
+    <Column Name="plugin_key" Required="true" Size="1000" Type="VARCHAR"/>
+    <Column Name="config" Required="false" Size="1000000" Type="VARCHAR"/>
+    <Column Name="create_time" Required="true" Type="DATE"/>
+    <Column Name="create_by" Required="true" Type="INTEGER"/>
+    <Column Name="change_time" Required="true" Type="DATE"/>
+    <Column Name="change_by" Required="true" Type="INTEGER"/>
+    <ForeignKey ForeignTable="users">
+        <Reference Local="create_by" Foreign="id"/>
+        <Reference Local="change_by" Foreign="id"/>
+    </ForeignKey>
+</Table>
+
 <Table Name="calendar_appointment_ticket">
     <Column Name="calendar_id" Required="true" Type="BIGINT" />
     <Column Name="ticket_id" Required="true" Type="BIGINT" />

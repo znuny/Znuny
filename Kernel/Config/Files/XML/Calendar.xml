@@ -424,13 +424,41 @@
             </Array>
         </Value>
     </Setting>
-    <Setting Name="AppointmentCalendar::Plugin###0100-Ticket" Required="0" Valid="1">
+    <Setting Name="AppointmentCalendar::Plugin::Groups###001-Framework" Required="1" Valid="1">
+        <Description Translatable="1">Defines available groups for the appointment calendar screen.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Ticket">
+                    <Hash>
+                        <Item Key="Title" Translatable="1">Ticket</Item>
+                        <Item Key="Prio">1000</Item>
+                    </Hash>
+                </Item>
+                <Item Key="Link">
+                    <Hash>
+                        <Item Key="Title" Translatable="1">Link</Item>
+                        <Item Key="Prio">8000</Item>
+                    </Hash>
+                </Item>
+                <Item Key="Miscellaneous">
+                    <Hash>
+                        <Item Key="Title" Translatable="1">Miscellaneous</Item>
+                        <Item Key="Prio">9001</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin###TicketLink" Required="0" Valid="1">
         <Description Translatable="1">Defines the ticket plugin for calendar appointments.</Description>
         <Navigation>Core::AppointmentCalendar::Plugin</Navigation>
         <Value>
             <Hash>
-                <Item Key="Module">Kernel::System::Calendar::Plugin::Ticket</Item>
+                <Item Key="Module">Kernel::System::Calendar::Plugin::Ticket::Link</Item>
                 <Item Key="Name" Translatable="1">Ticket</Item>
+                <Item Key="Block">Link</Item>
+                <Item Key="Prio">1000</Item>
                 <Item Key="URL">&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentTicketZoom;TicketID=%s</Item>
             </Hash>
         </Value>

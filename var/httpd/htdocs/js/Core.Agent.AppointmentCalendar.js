@@ -28,7 +28,8 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
         AppointmentDaysCacheRefreshed = false,
         AJAXCounter = 0,
         CurrentView,
-        CalendarSources = {};
+        CalendarSources = {},
+        PluginList = Core.Config.Get('PluginList');
 
     /**
      * @name Init
@@ -330,6 +331,15 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                             .addClass('fa-char-' + Core.Config.Get('TicketAppointmentConfig')[CalEvent.ticketAppointmentType].Mark)
                             .appendTo($IconContainer);
                     }
+                    if (CalEvent.pluginData) {
+                        $.each(PluginList, function (PluginKey) {
+                            if (CalEvent.pluginData[PluginKey] && CalEvent.pluginData[PluginKey]['Icon'] !== 'undefined'){
+                                $Icon.clone()
+                                    .addClass('fa-' + CalEvent.pluginData[PluginKey]['Icon'])
+                                    .appendTo($IconContainer);
+                            }
+                        })
+                    }
 
                     // Prepend container to the appointment
                     $Element.find('.fc-content')
@@ -350,6 +360,7 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                     PosX = 0,
                     PosY = 0,
                     TooltipHTML = Core.Template.Render('Agent/AppointmentCalendar/AppointmentTooltip', {
+                        'PluginGroups': Core.Config.Get('PluginGroups'),
                         'PluginList': Core.Config.Get('PluginList'),
                         'CalEvent': CalEvent,
                         'TooltipTemplateResource': Core.Config.Get('TooltipTemplateResource') || 0,
@@ -551,6 +562,7 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                         resourceIds: AppointmentData.ResourceID,
                         resourceNames: AppointmentData.ResourceNames,
                         pluginData: AppointmentData.PluginData,
+                        pluginDataGroup: AppointmentData.PluginDataGroup,
                         calendarName: Calendar.CalendarName,
                         calendarColor: Calendar.Color,
                         notification: AppointmentData.NotificationDate.length ? true : false,
@@ -1745,7 +1757,7 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
             $('.RemoveButton').off('click.AppointmentCalendar').on('click.AppointmentCalendar', function () {
                 var $RemoveObj = $(this),
                     PluginKey = $RemoveObj.data('pluginKey'),
-                    $PluginDataObj = $('#Plugin_' + Core.App.EscapeSelector(PluginKey)),
+                    $PluginDataObj = $('#Plugin_' + Core.App.EscapeSelector(PluginKey) + '_LinkList'),
                     PluginData = JSON.parse($PluginDataObj.val()),
                     LinkID = $RemoveObj.data('linkId').toString(),
                     $Parent = $RemoveObj.parent();
@@ -1761,7 +1773,7 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
 
         function AddLink(PluginKey, PluginURL, LinkID, LinkName) {
             var $PluginContainerObj = $('#PluginContainer_' + Core.App.EscapeSelector(PluginKey)),
-                $PluginDataObj = $('#Plugin_' + Core.App.EscapeSelector(PluginKey)),
+                $PluginDataObj = $('#Plugin_' + Core.App.EscapeSelector(PluginKey) + '_LinkList'),
                 PluginData = JSON.parse($PluginDataObj.val()),
                 $ExistingLinks = $PluginContainerObj.find('.Link_' + Core.App.EscapeSelector(LinkID)),
                 $LinkContainerObj = $('<div />'),
@@ -2081,6 +2093,7 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                 });
             });
         }
+        Core.App.Publish('Core.Agent.AppointmentCalendar.AgentAppointmentEdit');
     }
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');

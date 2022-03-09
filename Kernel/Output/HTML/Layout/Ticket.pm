@@ -480,6 +480,7 @@ sub AgentQueueListOption {
     my $ValueNoQueue;
     my $MoveStr           = $Self->{LanguageObject}->Translate('Move');
     my $ValueOfQueueNoKey = "- " . $MoveStr . " -";
+
     DATA:
     for my $DataKey ( sort { $Data{$a} cmp $Data{$b} } keys %Data ) {
 

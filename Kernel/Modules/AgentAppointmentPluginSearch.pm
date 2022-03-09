@@ -54,10 +54,13 @@ sub Run {
         # get plugin object
         my $PluginObject = $Kernel::OM->Get('Kernel::System::Calendar::Plugin');
 
-        $ResultList = $PluginObject->PluginSearch(
-            Search    => $Search,
-            PluginKey => $PluginKey,
-            UserID    => $Self->{UserID},
+        $ResultList = $PluginObject->PluginFunction(
+            PluginKey      => $PluginKey,
+            PluginFunction => 'Search',
+            PluginData     => {
+                Search => $Search,
+                UserID => $Self->{UserID},
+            },
         );
     }
 

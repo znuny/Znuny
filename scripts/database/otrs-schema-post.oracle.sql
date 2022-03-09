@@ -4132,6 +4132,38 @@ END;
 --
 ;
 BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE calendar_appointment_plugin ADD CONSTRAINT FK_calendar_appointment_plug31 FOREIGN KEY (create_by) REFERENCES users (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_calendar_appointment_plug14 ON calendar_appointment_plugin (create_by)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE calendar_appointment_plugin ADD CONSTRAINT FK_calendar_appointment_plugdc FOREIGN KEY (change_by) REFERENCES users (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_calendar_appointment_plug15 ON calendar_appointment_plugin (change_by)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
     EXECUTE IMMEDIATE 'ALTER TABLE calendar_appointment_ticket ADD CONSTRAINT FK_calendar_appointment_tick55 FOREIGN KEY (calendar_id) REFERENCES calendar (id)';
 EXCEPTION
   WHEN OTHERS THEN NULL;

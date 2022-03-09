@@ -1014,7 +1014,7 @@ CREATE TABLE mail_account (
     login VARCHAR (200) NOT NULL,
     pw VARCHAR (200) NOT NULL,
     host VARCHAR (200) NOT NULL,
-    account_type VARCHAR (20) DEFAULT 'password' NOT NULL,
+    account_type VARCHAR (20) NOT NULL DEFAULT 'password',
     queue_id INTEGER NOT NULL,
     trusted SMALLINT NOT NULL,
     imap_folder VARCHAR (250) NULL,
@@ -1706,6 +1706,20 @@ CREATE TABLE calendar_appointment (
     create_by INTEGER NULL,
     change_time DATETIME NULL,
     change_by INTEGER NULL,
+    PRIMARY KEY(id)
+);
+# ----------------------------------------------------------
+#  create table calendar_appointment_plugin
+# ----------------------------------------------------------
+CREATE TABLE calendar_appointment_plugin (
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    appointment_id SMALLINT NOT NULL,
+    plugin_key TEXT NOT NULL,
+    config MEDIUMTEXT NULL,
+    create_time DATETIME NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time DATETIME NOT NULL,
+    change_by INTEGER NOT NULL,
     PRIMARY KEY(id)
 );
 # ----------------------------------------------------------

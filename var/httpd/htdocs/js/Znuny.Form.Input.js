@@ -128,6 +128,12 @@ Znuny.Form.Input = (function (TargetNS) {
             CustomerUserID: 'CustomerAutoComplete',
         },
 
+        AgentAppointmentCalendarOverview: {
+            QueueID:            'QueueID',
+            TypeID:             'TypeID',
+            TicketCreateOffset: 'TicketCreateOffset',
+        },
+
         CustomerTicketProcess: {
             Body:           'RichText',
             Customer:       'CustomerAutoComplete',

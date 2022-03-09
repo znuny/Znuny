@@ -421,29 +421,17 @@
 
         </fieldset>
 
-[% IF Data.PluginList %]
-        <fieldset class="TableLike">
-            <legend><span>[% Translate("Link") | html %]</span></legend>
-[% FOREACH Key IN Data.PluginList.keys %]
-            <label>[% Translate(Data.PluginList.$Key.PluginName) | html %]:</label>
-            <div class="Field">
-[% IF Data.PermissionLevel >= 2 %]
-                <input id="[% Key | html %]" type="text" data-plugin-key="[% Key | html %]" data-plugin-url="[% Data.PluginList.$Key.PluginURL | html %]" class="PluginField W90pc" />
-                <input type="hidden" id="Plugin_[% Key | html %]" name="Plugin_[% Key | html %]" value='[% Data.PluginList.$Key.LinkList || "[]" %]' />
-[% ELSE %]
-[% IF Data.PluginData.$Key.size == 0 %]
-                <p class="ReadOnlyValue">-</p>
+[% IF Data.PluginGroups %]
+    [% FOREACH Group IN Data.PluginGroups %]
+        [% IF Group.HTML %]
+            <fieldset class="TableLike">
+                <legend><span>[% Translate(Group.Title) | html %]</span></legend>
+                [% Group.HTML %]
+            </fieldset>
+        [% END %]
+    [% END %]
 [% END %]
-[% END %]
-# keep following block on a single line, so :empty CSS selector would work!
-                <div id="PluginContainer_[% Key | html %]"[% IF Data.PermissionLevel >= 2 %] class="PluginContainer"[% END %]>[% FOREACH Link IN Data.PluginData.$Key %]<div class="Link_[% Link.LinkID | html %]">
-                    <a href="[% Link.LinkURL %]">[% Link.LinkName | html %]</a>[% IF Data.PermissionLevel >= 2 %]<a class="RemoveButton" href="#" data-plugin-key="[% Key | html %]" data-link-id="[% Link.LinkID | html %]" title="[% Translate("Remove entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>[% END %]
-                </div>[% END %]</div>
-            </div>
-            <div class="Clear"></div>
-[% END %]
-        </fieldset>
-[% END %]
+
     </form>
 </div>
 

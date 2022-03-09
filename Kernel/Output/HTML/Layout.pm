@@ -433,10 +433,13 @@ EOF
         my @NewFiles = $MainObject->DirectoryRead(
             Directory => $NewDir,
             Filter    => '*.pm',
+            Recursive => 1,
         );
+
         for my $NewFile (@NewFiles) {
             if ( $NewFile !~ /Layout.pm$/ ) {
-                $NewFile =~ s{\A.*\/(.+?).pm\z}{$1}xms;
+                $NewFile =~ s{$NewDir/(.+?).pm\z}{$1}xms;
+                $NewFile =~ s{\/}{::}g;
                 my $NewClassName = "Kernel::Output::HTML::Layout::$NewFile";
                 if ( !$MainObject->RequireBaseClass($NewClassName) ) {
                     $Self->FatalDie(

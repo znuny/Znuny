@@ -1,0 +1,27 @@
+# --
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+    <label>[% Translate(Data.Plugin.Name) | html %]:</label>
+    <div class="Field">
+[% IF Data.PermissionLevel >= 2 %]
+        <input id="[% Data.Plugin.PluginKey | html %]" type="text" data-plugin-key="[% Data.Plugin.PluginKey | html %]" data-plugin-url="[% Data.Plugin.URL | html %]" class="PluginField W90pc" />
+        <input type="hidden" id="Plugin_[% Data.Plugin.PluginKey | html %]_LinkList" name="Plugin_[% Data.Plugin.PluginKey | html %]_LinkList" value='[% Data.Plugin.LinkList || "[]" %]' />
+[% ELSE %]
+    [% IF Data.Plugin.Links.size == 0 %]
+        <p class="ReadOnlyValue">-</p>
+    [% END %]
+[% END %]
+        <div id="PluginContainer_[% Data.Plugin.PluginKey | html %]"[% IF Data.PermissionLevel >= 2 %] class="PluginContainer"[% END %]>[% FOREACH Link IN Data.Plugin.Links %]
+            <div class="Link_[% Link.LinkID | html %]">
+                <a href="[% Link.LinkURL %]">[% Link.LinkName | html %]</a>
+            [% IF Data.PermissionLevel >= 2 %]
+                <a class="RemoveButton" href="#" data-plugin-key="[% Data.Plugin.PluginKey | html %]" data-link-id="[% Link.LinkID | html %]" title="[% Translate("Remove entry") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            [% END %]</div>
+[% END %]</div>
+    </div>
+    <div class="Clear"></div>

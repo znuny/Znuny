@@ -1721,6 +1721,7 @@
         </Value>
     </Setting>
 
+
     <!--
         AgentTicketOwnerView / OwnerToolbar
     -->
@@ -1857,6 +1858,186 @@
                 <Item Key="AccessKeyNew"></Item>
                 <Item Key="AccessKeyReached"></Item>
                 <Item Key="Priority">1030031</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!--
+        CalendarBasedTicketCreation
+    -->
+    <Setting Name="AppointmentCalendar::Plugin###TicketCreate" Required="0" Valid="1">
+        <Description Translatable="1">Defines the ticket plugin for calendar appointments.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Calendar::Plugin::Ticket::Create</Item>
+                <Item Key="Name" Translatable="1">Ticket creation</Item>
+                <Item Key="Block">Ticket</Item>
+                <Item Key="Prio">1000</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AgentAppointmentCalendarOverview###500-AppointmentCalendar::Plugin::TicketCreate" Required="1" Valid="1">
+        <Description Translatable="1">Loader module registration for AgentAppointmentEdit.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item></Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.AppointmentCalendar.Plugin.TicketCreate.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###StateType" Required="1" Valid="1">
+        <Description Translatable="1">Defines the next possible ticket states for calendar based tickets.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Array>
+                <Item>new</Item>
+                <Item>open</Item>
+                <Item>closed</Item>
+                <Item>pending reminder</Item>
+                <Item>pending auto</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###StateDefault" Required="1" Valid="1">
+        <Description Translatable="1">Defines the default next state.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">new</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###PriorityDefault" Required="0" Valid="1">
+        <Description Translatable="1">Defines the default ticket priority for calendar based tickets.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="Priority" ValueRegex="">3 normal</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###ProcessTreeView" Required="0" Valid="1">
+        <Description Translatable="1">Defines if the processes should be displayed in TreeView.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###Group" Required="0" Valid="1">
+        <Description Translatable="1">Enables calendar based ticket creation feature only for the listed groups.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Array>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###Title" Required="0" Valid="1">
+        <Description Translatable="1">Defines the default ticket title for calendar based tickets.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">Calendar based ticket</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###Body" Required="0" Valid="1">
+        <Description Translatable="1">Defines the default ticket body for calendar based tickets.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">Calendar based ticket</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###ArticleChannelName" Required="0" Valid="1">
+        <Description Translatable="1">Defines the default article channel name for calendar based tickets.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">Internal</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###ArticleIsVisibleForCustomer" Required="0" Valid="1">
+        <Description Translatable="1">Defines the default visibility of articles for calendar based tickets.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###SenderType" Required="0" Valid="1">
+        <Description Translatable="1">Defines the default sender type for calendar based tickets.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">system</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###From" Required="0" Valid="1">
+        <Description Translatable="1">Defines the default from for calendar based tickets.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">Calendar</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###HistoryType" Required="0" Valid="1">
+        <Description Translatable="1">Defines the default history type for calendar based tickets.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">NewTicket</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###HistoryComment" Required="0" Valid="1">
+        <Description Translatable="1">Defines the default history comment for calendar based tickets.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">Calendar based ticket</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###ContentType" Required="0" Valid="1">
+        <Description Translatable="1">Defines the default content type for calendar based tickets.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">text/plain; charset=ISO-8859-15</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###TicketCreateCatchUpThreshold" Required="0" Valid="1">
+        <Description Translatable="1">Threshold (in minutes) for catching up with ticket creation for appointments. Tickets for due appointments will only be created if their planned creation date is not older than the configured amount of minutes. This prevents creation of tickets for e. g. recurring appointments if the ticket creation will be executed some time later.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+$">5</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###CalendarTicketCreate" Required="1" Valid="1">
+        <Description Translatable="1">Creates the calendar-based tickets regularly.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">CalendarTicketCreate</Item>
+                <Item Key="Schedule">*/2 * * * *</Item>
+                <Item Key="Module">Kernel::System::Console::Command::Maint::Calendar::Ticket::Generate</Item>
+                <Item Key="Function">Execute</Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###CalendarTicketCreateCleanup" Required="1" Valid="1">
+        <Description Translatable="1">Cleans up the calendar-based tickets regularly.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">CalendarTicketCreateCleanup</Item>
+                <Item Key="Schedule">0 2 * * *</Item>
+                <Item Key="Module">Kernel::System::Console::Command::Maint::Calendar::Ticket::Cleanup</Item>
+                <Item Key="Function">Execute</Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
             </Hash>
         </Value>
     </Setting>

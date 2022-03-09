@@ -9117,6 +9117,38 @@ Ihr Helpdesk-Team
         'Clear log entries' => 'Lösche Protokolleinträge',
         'This option enables a dropdown which will be displayed instead of the time unit input field.' => 'Diese Option aktiviert ein Dropdown, das anstelle des Eingabefeldes für die Zeiteinheit angezeigt wird.',
 
+        'Ticket creation'                => 'Ticketerstellung',
+        'Creation date'                  => 'Erstellzeitpunkt',
+        'Calendar based ticket'          => 'Kalenderbasiertes Ticket',
+        'Calendar based ticket creation' => 'Kalenderbasierte Ticketerstellung',
+
+        'On the date' => 'zum Termin',
+        'StartTime'   => 'Startzeitpunkt',
+
+        # SysConfig
+        'Defines the next possible ticket states for calendar based tickets.'        => 'Definiert die nächstmöglichen Ticketzustände für kalenderbasierte Tickets.',
+        'Defines the default next state.'                                            => 'Definiert den standardmäßigen nächsten Zustand in der Agentenschnittstelle.',
+        'Defines the default ticket priority for calendar based tickets.'            => 'Definiert die Standard-Ticketpriorität für kalenderbasierte Tickets.',
+        'Enables calendar based ticket creation feature only for the listed groups.' => 'Aktiviert die kalenderbasierte Ticketerstellung nur für die aufgeführten Gruppen.',
+        'Defines the default ticket title for calendar based tickets.'               => 'Definiert den Standard-Tickettitel für kalenderbasierte Tickets.',
+        'Defines the default ticket body for calendar based tickets.'                => 'Definiert den Standard-Ticketbody für kalenderbasierte Tickets.',
+        'Defines the default article channel name for calendar based tickets.'       => 'Definiert den Standardartikelkanal für kalenderbasierte Tickets.',
+        'Defines the default visibility of articles for calendar based tickets.'     => 'Definiert die Standardsichtbarkeit von Artikeln für kalenderbasierte Tickets.',
+        'Defines the default sender type for calendar based tickets.'                => 'Definiert den Standard-Absendertyp für kalenderbasierte Tickets.',
+        'Defines the default from for calendar based tickets.'                       => 'Definiert die Standardeinstellung des Absenders für kalenderbasierte Tickets.',
+        'Defines the default history type for calendar based tickets.'               => 'Definiert den Standardhistorientyp für kalenderbasierte Tickets.',
+        'Defines the default history comment for calendar based tickets.'            => 'Definiert den standardmäßigen Verlaufskommentar für kalenderbasierte Tickets.',
+        'Defines the default content type for calendar based tickets.'               => 'Definiert den Standardinhaltstyp für kalenderbasierte Tickets.',
+
+        'Threshold (in minutes) for catching up with ticket creation for appointments. Tickets for due appointments will only be created if their planned creation date is not older than the configured amount of minutes. This prevents creation of tickets for e. g. recurring appointments if the ticket creation will be executed some time later.'
+            => 'Schwellenwert (in Minuten) für das Aufholen der Ticketerstellung für Termine. Tickets für fällige Termine werden nur dann erstellt, wenn ihr geplantes Erstellungsdatum nicht älter als die konfigurierte Anzahl von Minuten ist. Dadurch wird verhindert, dass Tickets für z. B. wiederkehrende Termine erstellt werden, wenn die Ticketerstellung einige Zeit später durchgeführt wird.',
+
+        'Creates the calendar-based tickets regularly.'   => 'Erstellt regelmäßig die kalenderbasierten Tickets.',
+        'Cleans up the calendar-based tickets regularly.' => 'Säubert die kalenderbasierten Tickets regelmäßig.',
+
+        'Registers an Output filter to add the additional input fields for the calendar-based ticket creation.' => 'Registriert einen Output-Filter, der die zusätzlichen Eingabefelder zur kalenderbasierten Ticketerstellung hinzufügt.',
+        'Defines if the processes should be displayed in TreeView.' => 'Definiert ob die Prozesse in TreeView angezeigt werden sollen.',
+
         'Defines the default ticket attribute for ticket sorting in the owner view of the agent interface.' => 'Bestimmt das Standard-Ticket-Attribut für das Sortieren der Tickets in der Besitzer-Tickets-Anzeige im Agent-Interface.',
         'Defines the default ticket order in the owner view of the agent interface. Up: oldest on top. Down: latest on top.' => 'Steuert die Ticket-Sortierung für die Besitzer-Ansicht des Agentenbereichs. Auf: Älteste oben. Ab: Neuste oben.',
 
@@ -9464,6 +9496,8 @@ Ihr Helpdesk-Team
         'Timeline Month',
         'Timeline Week',
         'Title',
+        'Ticket creation',
+        'StartTime',
         'Today',
         'Too many active calendars',
         'Try again',

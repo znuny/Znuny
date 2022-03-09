@@ -65,6 +65,8 @@ sub Run {
         Znuny4OTRS-MailAccounts
         Znuny-OwnerToolbar
         Znuny4OTRS-OwnerToolbar
+        Znuny-CalendarBasedTicketCreation
+        Znuny4OTRS-CalendarBasedTicketCreation
         )
         )
     {

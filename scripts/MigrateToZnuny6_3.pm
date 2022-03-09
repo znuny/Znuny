@@ -239,6 +239,10 @@ sub _TasksGet {
             Message => 'Migrate OAuth2 token database tables',
             Module  => 'scripts::Migration::Znuny6_3::MigrateOAuth2TokenDatabaseTables',
         },
+        {
+            Message => 'Migrates calendar based ticket creation tables',
+            Module  => 'scripts::Migration::Znuny6_3::MigrateCalendarBasedTicketCreationTables',
+        },
 
         # This must be executed after newly integrated database backend tables have been created/updated!
         {

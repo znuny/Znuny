@@ -1033,6 +1033,14 @@ SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHER
 SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE calendar_appointment ADD CONSTRAINT FK_calendar_appointment_change_by_id FOREIGN KEY (change_by) REFERENCES users (id)', 'SELECT ''INFO: Foreign key constraint FK_calendar_appointment_change_by_id does already exist, skipping.''' );
 PREPARE FKStatement FROM @FKSQLStatement;
 EXECUTE FKStatement;
+SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHERE table_schema = DATABASE() AND table_name = 'calendar_appointment_plugin' AND constraint_name = 'FK_calendar_appointment_plugin_create_by_id');
+SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE calendar_appointment_plugin ADD CONSTRAINT FK_calendar_appointment_plugin_create_by_id FOREIGN KEY (create_by) REFERENCES users (id)', 'SELECT ''INFO: Foreign key constraint FK_calendar_appointment_plugin_create_by_id does already exist, skipping.''' );
+PREPARE FKStatement FROM @FKSQLStatement;
+EXECUTE FKStatement;
+SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHERE table_schema = DATABASE() AND table_name = 'calendar_appointment_plugin' AND constraint_name = 'FK_calendar_appointment_plugin_change_by_id');
+SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE calendar_appointment_plugin ADD CONSTRAINT FK_calendar_appointment_plugin_change_by_id FOREIGN KEY (change_by) REFERENCES users (id)', 'SELECT ''INFO: Foreign key constraint FK_calendar_appointment_plugin_change_by_id does already exist, skipping.''' );
+PREPARE FKStatement FROM @FKSQLStatement;
+EXECUTE FKStatement;
 SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHERE table_schema = DATABASE() AND table_name = 'calendar_appointment_ticket' AND constraint_name = 'FK_calendar_appointment_ticket_calendar_id_id');
 SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE calendar_appointment_ticket ADD CONSTRAINT FK_calendar_appointment_ticket_calendar_id_id FOREIGN KEY (calendar_id) REFERENCES calendar (id)', 'SELECT ''INFO: Foreign key constraint FK_calendar_appointment_ticket_calendar_id_id does already exist, skipping.''' );
 PREPARE FKStatement FROM @FKSQLStatement;

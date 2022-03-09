@@ -258,8 +258,6 @@ for my $Test (@Tests) {
         UnitTestObject => $Self,
     );
 
-    use Data::Dumper;
-    print STDERR 'Debug Dump - - $Result = ' . Dumper( \$Result ) . "\n";
     $Self->True(
         ( $Result =~ m{$Test->{ExpectedResult}}msi ? 1 : 0 ),
         $Test->{Name} . " - ExpectedResult: $Test->{ExpectedResult}",

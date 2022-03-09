@@ -216,8 +216,6 @@ my @Tests = (
 TEST:
 for my $Test (@Tests) {
 
-    use Data::Dumper;
-    print STDERR 'Debug Dump  - $Test->{Data} = ' . Dumper( \$Test->{Data} ) . "\n";
     my $Function = $Test->{Function};
 
     my $Success = $ZnunyHelperObject->$Function( @{ $Test->{Data} } );

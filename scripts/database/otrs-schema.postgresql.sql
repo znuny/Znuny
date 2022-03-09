@@ -2850,6 +2850,20 @@ CREATE TABLE calendar_appointment (
     PRIMARY KEY(id)
 );
 -- ----------------------------------------------------------
+--  create table calendar_appointment_plugin
+-- ----------------------------------------------------------
+CREATE TABLE calendar_appointment_plugin (
+    id serial NOT NULL,
+    appointment_id SMALLINT NOT NULL,
+    plugin_key VARCHAR (1000) NOT NULL,
+    config VARCHAR NULL,
+    create_time timestamp(0) NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time timestamp(0) NOT NULL,
+    change_by INTEGER NOT NULL,
+    PRIMARY KEY(id)
+);
+-- ----------------------------------------------------------
 --  create table calendar_appointment_ticket
 -- ----------------------------------------------------------
 CREATE TABLE calendar_appointment_ticket (

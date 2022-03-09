@@ -24,6 +24,12 @@
     {% if CalEvent.ticketAppointmentType %}
         <i class="fa fa-char-{{ TicketAppointmentConfig[CalEvent.ticketAppointmentType].Mark }}"></i>
     {% endif %}
+    {% if CalEvent.pluginData %}
+        {% for PluginKey, PluginValue in PluginList %}
+            <i class="fa fa-{{ CalEvent.pluginData[PluginKey]['Icon'] }}"></i>
+        {% endfor %}
+    {% endif %}
+
     </div>
     <fieldset>
         <legend><span>{{ 'Basic information' | Translate }}</span></legend>
@@ -81,16 +87,20 @@
         <div class="Clear"></div>
     {% endif %}
     </fieldset>
-{% if CalEvent.pluginData %}
-    <fieldset>
-        <legend><span>{{ 'Link' | Translate }}</span></legend>
-    {% for PluginKey, PluginValue in PluginList %}
-        <label>{{ PluginValue.PluginName }}:</label>
-        <p class="Value">{{ CalEvent.pluginData[PluginKey] | escape | replace('\\n', '<br>') | safe }}</p>
-        <div class="Clear"></div>
+
+{% if CalEvent.pluginDataGroup %}
+    {% for Group, PluginKeyData in CalEvent.pluginDataGroup %}
+        <fieldset>
+            <legend><span>{{ Group | Translate }}</span></legend>
+            {% for PluginKey, PluginData in PluginKeyData %}
+                <label>{{ PluginList[PluginKey].Name | Translate }}:</label>
+                <p class="Value">{{ PluginKeyData[PluginKey]['Value'] | escape | replace('\\n', '<br>') | safe }}</p>
+                <div class="Clear"></div>
+            {% endfor %}
+        </fieldset>
     {% endfor %}
-    </fieldset>
 {% endif %}
+
 {% if CalEvent.notificationDate %}
     <fieldset>
         <legend><span>{{ 'Notification' | Translate }}</span></legend>

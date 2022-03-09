@@ -667,9 +667,6 @@ my $String3b = '<?xml version="1.0" encoding="utf-8" ?>
 </otrs_package>
 ';
 
-use Data::Dumper;
-print STDERR 'Debug Dump -  - $String3b = ' . Dumper( \$String3b ) . "\n";
-
 $CachePopulate->();
 
 $PackageUpgrade = $PackageObject->PackageUpgrade( String => $String3b );

@@ -5247,6 +5247,57 @@ END;
 --
 ;
 -- ----------------------------------------------------------
+--  create table calendar_appointment_plugin
+-- ----------------------------------------------------------
+CREATE TABLE calendar_appointment_plugin (
+    id NUMBER (12, 0) NOT NULL,
+    appointment_id NUMBER (5, 0) NOT NULL,
+    plugin_key VARCHAR2 (1000) NOT NULL,
+    config CLOB NULL,
+    create_time DATE NOT NULL,
+    create_by NUMBER (12, 0) NOT NULL,
+    change_time DATE NOT NULL,
+    change_by NUMBER (12, 0) NOT NULL
+);
+ALTER TABLE calendar_appointment_plugin ADD CONSTRAINT PK_calendar_appointment_plugin PRIMARY KEY (id);
+BEGIN
+    EXECUTE IMMEDIATE 'DROP SEQUENCE SE_calendar_appointment_pl68';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE SEQUENCE SE_calendar_appointment_pl68
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+CACHE 20
+ORDER
+;
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TRIGGER SE_calendar_appointment_pl68_t';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE OR REPLACE TRIGGER SE_calendar_appointment_pl68_t
+BEFORE INSERT ON calendar_appointment_plugin
+FOR EACH ROW
+BEGIN
+    IF :new.id IS NULL THEN
+        SELECT SE_calendar_appointment_pl68.nextval
+        INTO :new.id
+        FROM DUAL;
+    END IF;
+END;
+/
+--
+;
+-- ----------------------------------------------------------
 --  create table calendar_appointment_ticket
 -- ----------------------------------------------------------
 CREATE TABLE calendar_appointment_ticket (

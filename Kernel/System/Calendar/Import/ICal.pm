@@ -696,11 +696,14 @@ sub Import {
 
                 # add links
                 for my $PluginData ( @{ $LinkedObjects{$PluginKey} } ) {
-                    my $LinkSuccess = $PluginObject->PluginLinkAdd(
-                        AppointmentID => $Success,
-                        PluginKey     => $PluginKey,
-                        PluginData    => $PluginData,
-                        UserID        => $Param{UserID},
+                    my $LinkSuccess = $PluginObject->PluginFunction(
+                        PluginKey      => $PluginKey,
+                        PluginFunction => 'LinkAdd',
+                        PluginData     => {
+                            TargetKey => $PluginData,      # TicketID, depends on TargetObject
+                            SourceKey => $Success,         # AppointmentID
+                            UserID    => $Param{UserID},
+                        }
                     );
 
                     if ( !$LinkSuccess ) {

@@ -256,28 +256,34 @@ sub Run {
                 }
 
                 # include plugin (link) data
-                my $PluginList = $PluginObject->PluginList();
+                my $PluginList  = $PluginObject->PluginList();
+                my %PluginParam = $PluginObject->PluginGetParam(%Param);
+
                 PLUGINKEY:
                 for my $PluginKey ( sort keys %{$PluginList} ) {
-                    my $LinkList = $PluginObject->PluginLinkList(
-                        AppointmentID => $Appointment->{AppointmentID},
-                        PluginKey     => $PluginKey,
-                        UserID        => $Self->{UserID},
+
+                    my %Plugin = (
+                        %{ $PluginList->{$PluginKey} },
+                        PluginKey => $PluginKey,
+                        Param     => $PluginParam{$PluginKey},
                     );
-                    my @LinkArray;
-                    for my $LinkID ( sort keys %{$LinkList} ) {
-                        push @LinkArray, $LinkList->{$LinkID}->{LinkName};
-                    }
-                    last PLUGINKEY if !@LinkArray;
 
-                    # truncate more than three elements
-                    my $LinkCount = scalar @LinkArray;
-                    if ( $LinkCount > 4 ) {
-                        splice @LinkArray, 3;
-                        push @LinkArray, $LayoutObject->{LanguageObject}->Translate( '+%s more', $LinkCount - 3 );
-                    }
+                    my $PluginData = $PluginObject->PluginFunction(
+                        PluginKey      => $PluginKey,
+                        PluginFunction => 'Get',
+                        PluginData     => {
+                            GetParam    => \%GetParam,
+                            Appointment => $Appointment,
+                            Plugin      => \%Plugin,
+                            UserID      => $Self->{UserID},
+                        },
+                    );
 
-                    $Appointment->{PluginData}->{$PluginKey} = join( '\n', @LinkArray );
+                    my $PluginGroup = $PluginList->{$PluginKey}->{Block};
+                    $PluginData->{PluginGroup} = $PluginGroup;
+
+                    $Appointment->{PluginData}->{$PluginKey} = $PluginData;
+                    $Appointment->{PluginDataGroup}->{$PluginGroup}->{$PluginKey} = $PluginData;
                 }
 
                 # check if dealing with ticket appointment

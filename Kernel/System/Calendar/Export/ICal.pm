@@ -379,11 +379,15 @@ sub Export {
         # include plugin (link) data
         my $PluginList = $PluginObject->PluginList();
         for my $PluginKey ( sort keys %{$PluginList} ) {
-            my $LinkList = $PluginObject->PluginLinkList(
-                AppointmentID => $Appointment{AppointmentID},
-                PluginKey     => $PluginKey,
-                UserID        => $Param{UserID},
+            my $LinkList = $PluginObject->PluginFunction(
+                PluginKey      => $PluginKey,
+                PluginFunction => 'LinkList',
+                PluginData     => {
+                    AppointmentID => $Appointment{AppointmentID},
+                    UserID        => $Param{UserID},
+                }
             );
+
             my @LinkArray;
             for my $LinkID ( sort keys %{$LinkList} ) {
                 push @LinkArray, $LinkList->{$LinkID}->{LinkID};
