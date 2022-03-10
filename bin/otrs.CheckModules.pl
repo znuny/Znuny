@@ -937,6 +937,7 @@ sub _VersionClean {
 
     # replace all special characters with an dot
     $Param{Version} =~ s{ [_-] }{.}xmsg;
+    $Param{Version} =~ s{v}{}xmsg;
 
     my @VersionParts = split q{\.}, $Param{Version};
 
