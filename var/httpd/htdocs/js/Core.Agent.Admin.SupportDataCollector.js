@@ -130,36 +130,6 @@ Core.Agent.Admin = Core.Agent.Admin || {};
                         true
                     );
 
-                    // if the support bundle is bigger than 10 MB do not show send option
-                    if (parseInt(Response.Filesize,10)>10) {
-                        $('.SupportBundleSendFieldSet').addClass('Hidden');
-                        $('.NoSupportBundleSendMessage').removeClass('Hidden');
-                        $('.SizeMessage').removeClass('Hidden');
-                    }
-
-                    // if the sender addres is invalid it is set to empty string, send option should not be shown
-                    else if ($('#Sender').val() === '') {
-                        $('.SupportBundleSendFieldSet').addClass('Hidden');
-                        $('.NoSupportBundleSendMessage').removeClass('Hidden');
-                        $('.EmailMessage').removeClass('Hidden');
-                    }
-
-                    // otherwise show full email option
-                    else {
-                        $('#SendSupportBundle').on('click', function () {
-                            $('#SendingAJAXLoader').addClass('AJAXLoader');
-                            $('#SendSupportBundle').prop('disabled', true);
-                            $('#DownloadSupportBundle').prop('disabled', true);
-                            Core.AJAX.FunctionCall(Core.Config.Get('CGIHandle'), 'Action=' + Core.Config.Get('Action') + ';Subaction=SendSupportBundle;Filename=' + Response.Filename + ';RandomID=' + Response.RandomID, function (SendResponse) {
-
-                                if (!SendResponse || !SendResponse.Success) {
-                                    alert(Core.Language.Translate("The mail could not be sent"));
-                                }
-                                Core.UI.Dialog.CloseDialog($('#SupportBundleOptionsDialog'));
-                            });
-                        });
-                    }
-
                     $('#DownloadSupportBundle').on('click', function () {
                         window.location.href = Core.Config.Get('Baselink') + 'Action=' + Core.Config.Get('Action') + ';Subaction=DownloadSupportBundle;Filename=' + Response.Filename + ';RandomID=' + Response.RandomID + ';ChallengeToken=' + Core.Config.Get('ChallengeToken');
                         Core.UI.Dialog.CloseDialog($('#SupportBundleOptionsDialog'));
