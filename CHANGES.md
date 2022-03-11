@@ -1,3 +1,6 @@
+# 6.3.2 2022-??-??
+ - 2022-03-11 CPAN module Mail::IMAPClient will now be correctly reported as required by bin/otrs.CheckModules.pl [#222](https://github.com/znuny/Znuny/issues/222).
+
 # 6.3.1 2022-03-09
  - 2022-03-07 Integrated package Znuny4OTRS-CalendarBasedTicketCreation.
  - 2022-03-07 Original owners of tickets will now be set again when cancelling a ticket bulk action.

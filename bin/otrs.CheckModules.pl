@@ -449,8 +449,7 @@ my @NeededModules = (
     {
         Module          => 'Mail::IMAPClient',
         VersionRequired => '3.22',
-        Comment         => 'Required for IMAP TLS connections.',
-        Required        => 0,
+        Required        => 1,
         InstTypes       => {
             aptget => 'libmail-imapclient-perl',
             emerge => 'dev-perl/Mail-IMAPClient',
