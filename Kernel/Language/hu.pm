@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 1;
+    $Self->{Completeness}        = 0.950333821853118;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -40,7 +40,7 @@ sub Data {
     $Self->{ThousandSeparator} = ' ';
     $Self->{Translation} = {
 
-        # Template: AdminACL
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
         'ACL Management' => 'ACL kezelés',
         'Actions' => 'Műveletek',
         'Create New ACL' => 'Új ACL létrehozása',
@@ -71,7 +71,7 @@ sub Data {
         'No data found.' => 'Nem található adat.',
         'No matches found.' => 'Nincs találat.',
 
-        # Template: AdminACLEdit
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
         'Edit ACL %s' => '%s ACL szerkesztése',
         'Edit ACL' => 'ACL szerkesztése',
         'Go to overview' => 'Ugrás az áttekintőhöz',
@@ -96,11 +96,11 @@ sub Data {
         'Cancel' => 'Mégse',
         'Do you really want to delete this ACL?' => 'Valóban törölni szeretné ezt az ACL-t?',
 
-        # Template: AdminACLNew
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminACLNew.tt
         'Create a new ACL by submitting the form data. After creating the ACL, you will be able to add configuration items in edit mode.' =>
             'Egy új ACL létrehozása az űrlapadatok beküldésével. Az ACL létrehozása után lesz képes beállítási elemek hozzáadására szerkesztés módban.',
 
-        # Template: AdminAppointmentCalendarManage
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentCalendarManage.tt
         'Calendar Management' => 'Naptárkezelés',
         'Add Calendar' => 'Naptár hozzáadása',
         'Edit Calendar' => 'Naptár szerkesztése',
@@ -155,7 +155,7 @@ sub Data {
         'Add Rule' => 'Szabály hozzáadása',
         'Submit' => 'Elküldés',
 
-        # Template: AdminAppointmentImport
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentImport.tt
         'Appointment Import' => 'Időpont importálása',
         'Go back' => 'Vissza',
         'Uploaded file must be in valid iCal format (.ics).' => 'A feltöltött fájlnak érvényes iCal formátumban (.ics) kell lennie.',
@@ -168,7 +168,7 @@ sub Data {
         'Upload calendar' => 'Naptár feltöltése',
         'Import appointments' => 'Időpontok importálása',
 
-        # Template: AdminAppointmentNotificationEvent
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
         'Appointment Notification Management' => 'Időpont-értesítés kezelés',
         'Add Notification' => 'Értesítés hozzáadása',
         'Edit Notification' => 'Értesítés szerkesztése',
@@ -218,7 +218,6 @@ sub Data {
         'This is the default value for assigned recipient agents who didn\'t make a choice for this notification in their preferences yet. If the box is enabled, the notification will be sent to such agents.' =>
             'Ez az alapértelmezett érték az olyan hozzárendelt címzett ügyintézőknél, akik még nem választottak ennél az értesítésnél a beállításaikban. Ha a doboz engedélyezve van, akkor az értesítés el lesz küldve az ilyen ügyintézőknek.',
         'This feature is currently not available.' => 'Ez a szolgáltatás jelenleg nem érhető el.',
-        'Upgrade to %s' => 'Frissítés a következőre: %s',
         'Please activate this transport in order to use it.' => 'Kapcsolja be azt az átvitelt annak érdekében, hogy használni tudja.',
         'No data found' => 'Nem található adat',
         'No notification method found.' => 'Nem található értesítési módszer.',
@@ -242,7 +241,7 @@ sub Data {
         'Config options' => 'Konfigurációs beállítások',
         'Example notification' => 'Példa értesítés',
 
-        # Template: AdminAppointmentNotificationEventTransportEmailSettings
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEventTransportEmailSettings.tt
         'Additional recipient email addresses' => 'További címzett e-mail címek',
         'This field must have less then 200 characters.' => 'Ennek a mezőnek rövidebbnek kell lennie 200 karakternél.',
         'Article visible for customer' => 'A bejegyzés látható az ügyfélnek',
@@ -256,7 +255,7 @@ sub Data {
         'If signing key/certificate is missing' => 'Ha az aláíró kulcs vagy tanúsítvány hiányzik',
         'If encryption key/certificate is missing' => 'Ha a titkosító kulcs vagy tanúsítvány hiányzik',
 
-        # Template: AdminAttachment
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
         'Attachment Management' => 'Mellékletkezelés',
         'Add Attachment' => 'Melléklet hozzáadása',
         'Edit Attachment' => 'Melléklet szerkesztése',
@@ -268,7 +267,7 @@ sub Data {
         'Do you really want to delete this attachment?' => 'Valóban törölni szeretné ezt a mellékletet?',
         'Attachment' => 'Melléklet',
 
-        # Template: AdminAutoResponse
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
         'Auto Response Management' => 'Automatikus válasz kezelés',
         'Add Auto Response' => 'Automatikus válasz hozzáadása',
         'Edit Auto Response' => 'Automatikus válasz szerkesztése',
@@ -291,7 +290,7 @@ sub Data {
             'A jegy dinamikus mezői megjelenített értékeinek beállításai, legördülő és többválasztós mezőknél hasznos',
         'Example response' => 'Példa válasz',
 
-        # Template: AdminCloudServiceSupportDataCollector
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
         'Cloud Service Management' => 'Felhőszolgáltatás kezelés',
         'Support Data Collector' => 'Támogatási adatgyűjtő',
         'Support data collector' => 'Támogatási adatgyűjtő',
@@ -311,7 +310,7 @@ sub Data {
         'System Registration is disabled for your system. Please check your configuration.' =>
             'A rendszer regisztráció le van tiltva a rendszerénél. Ellenőrizze a beállításokat.',
 
-        # Template: AdminCloudServices
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServices.tt
         'System registration is a service of OTRS Group, which provides a lot of advantages!' =>
             'A rendszer regisztráció az OTRS csoport szolgáltatása, amely számos előnyt biztosít!',
         'Please note that the use of OTRS cloud services requires the system to be registered.' =>
@@ -321,7 +320,7 @@ sub Data {
             'Itt tudja beállítani azokat az elérhető felhőszolgáltatásokat, amelyek biztonságosan kommunikálnak a következővel: %s.',
         'Available Cloud Services' => 'Elérhető felhőszolgáltatások',
 
-        # Template: AdminCommunicationLog
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLog.tt
         'Communication Log' => 'Kommunikációs napló',
         'Time Range' => 'Időtartomány',
         'Show only communication logs created in specific time range.' =>
@@ -355,7 +354,7 @@ sub Data {
         'No communications found.' => 'Nem találhatók kommunikációk.',
         '%s s' => '%s mp',
 
-        # Template: AdminCommunicationLogAccounts
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogAccounts.tt
         'Account Status' => 'Fiókállapot',
         'Back to overview' => 'Vissza az áttekintőhöz',
         'Filter for Accounts' => 'Szűrő a fiókokhoz',
@@ -373,17 +372,17 @@ sub Data {
         'End Time' => 'Befejezési idő',
         'No communication log entries found.' => 'Nem találhatók kommunikációs naplóbejegyzések.',
 
-        # Template: AdminCommunicationLogCommunications
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogCommunications.tt
         'Duration' => 'Időtartam',
 
-        # Template: AdminCommunicationLogObjectLog
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogObjectLog.tt
         '#' => '#',
         'Priority' => 'Prioritás',
         'Module' => 'Modul',
         'Information' => 'Információ',
         'No log entries found.' => 'Nem találhatók bejegyzések.',
 
-        # Template: AdminCommunicationLogZoom
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogZoom.tt
         'Detail view for %s communication started at %s' => '%s kommunikáció részletes nézete elkezdődött ekkor: %s',
         'Filter for Log Entries' => 'Szűrő a naplóbejegyzésekhez',
         'Filter for log entries' => 'Szűrő a naplóbejegyzésekhez',
@@ -393,7 +392,7 @@ sub Data {
         'Communication Log Details' => 'Kommunikációs napló részletei',
         'Please select an entry from the list.' => 'Válasszon egy bejegyzést a listából.',
 
-        # Template: AdminCustomerCompany
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
         'Customer Management' => 'Ügyfélkezelés',
         'Add Customer' => 'Ügyfél hozzáadása',
         'Edit Customer' => 'Ügyfél szerkesztése',
@@ -407,7 +406,7 @@ sub Data {
         'Please note' => 'Ne feledje',
         'This customer backend is read only!' => 'Ez az ügyfél háttérprogram csak olvasható!',
 
-        # Template: AdminCustomerGroup
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
         'Manage Customer-Group Relations' => 'Ügyfél–Csoport kapcsolatok kezelése',
         'Notice' => 'Értesítés',
         'This feature is disabled!' => 'Ez a szolgáltatás le van tiltva!',
@@ -437,7 +436,7 @@ sub Data {
         'Full read and write access to the tickets in this group/queue.' =>
             'Teljes írási és olvasási hozzáférés ebben a csoportban/várólistában lévő jegyekhez.',
 
-        # Template: AdminCustomerUser
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Customer User Management' => 'Ügyfél-felhasználó kezelés',
         'Add Customer User' => 'Ügyfél-felhasználó hozzáadása',
         'Edit Customer User' => 'Ügyfél-felhasználó szerkesztése',
@@ -472,7 +471,7 @@ sub Data {
         'Table above shows granted customer access for the customer user by permission context. The matrix takes into account all inherited access (e.g. via customer groups). Note: The table does not consider changes made to this form without submitting it.' =>
             'A fenti táblázat a megadott ügyfélhozzáféréseket jeleníti meg az ügyfél-felhasználónál jogosultsági környezet szerint. A mátrix figyelembe veszi az összes örökölt hozzáférést (például ügyfélcsoportokon keresztül). Megjegyzés: a táblázat elküldés nélkül nem veszi figyelembe az ezen az űrlapon végzett változtatásokat.',
 
-        # Template: AdminCustomerUserCustomer
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
         'Manage Customer User-Customer Relations' => 'Ügyfél-felhasználó–Ügyfél kapcsolatok kezelése',
         'Select the customer user:customer relations.' => 'Az ügyfél-felhasználó:ügyfél kapcsolatok kiválasztása.',
         'Customer Users' => 'Ügyfél-felhasználók',
@@ -482,7 +481,7 @@ sub Data {
         'Active' => 'Aktív',
         'Toggle active state for %s' => 'Aktivált állapot ki- és bekapcsolása ehhez: %s',
 
-        # Template: AdminCustomerUserGroup
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
         'Manage Customer User-Group Relations' => 'Ügyfél-felhasználó–Csoport kapcsolatok kezelése',
         'Just use this feature if you want to define group permissions for customer users.' =>
             'Csak akkor használja ezt a szolgáltatást, ha csoportjogosultságokat szeretne meghatározni az ügyfél-felhasználókhoz.',
@@ -497,32 +496,27 @@ sub Data {
             'Ha semmi sincs kiválasztva, akkor ebben a csoportban nincsenek jogosultságok (a jegyek nem lesznek elérhetők az ügyfél-felhasználónak).',
         'Customer User Default Groups:' => 'Ügyfél-felhasználó alapértelmezett csoportjai:',
 
-        # Template: AdminCustomerUserService
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
         'Manage Customer User-Service Relations' => 'Ügyfél-felhasználó–Szolgáltatás kapcsolatok kezelése',
         'Edit default services' => 'Alapértelmezett szolgáltatások szerkesztése',
         'Filter for Services' => 'Szűrő a szolgáltatásokhoz',
         'Filter for services' => 'Szűrő a szolgáltatásokhoz',
         'Services' => 'Szolgáltatások',
 
-        # Template: AdminDynamicField
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
         'Dynamic Fields Management' => 'Dinamikus mezők kezelése',
         'Add new field for object' => 'Új mező hozzáadása az objektumhoz',
         'Filter for Dynamic Fields' => 'Szűrő a dinamikus mezőkhöz',
         'Filter for dynamic fields' => 'Szűrő a dinamikus mezőkhöz',
-        'More Business Fields' => 'Több üzleti mező',
-        'Would you like to benefit from additional dynamic field types for businesses? Upgrade to %s to get access to the following field types:' =>
-            'Szeretné élvezni a vállalkozások számára készített további dinamikus mező típusok előnyeit? Frissítsen az %s szoftverre, hogy hozzáférést kapjon a következő mezőtípusokhoz:',
-        'Database' => 'Adatbázis',
-        'Use external databases as configurable data sources for this dynamic field.' =>
-            'Külső adatbázis használata beállítható adatforrásokként ennél a dinamikus mezőnél.',
-        'Web service' => 'Webszolgáltatás',
-        'External web services can be configured as data sources for this dynamic field.' =>
-            'Külső webszolgáltatások beállíthatók adatforrásokként ennél a dinamikus mezőnél.',
-        'Contact with data' => 'Partneradatok',
-        'This feature allows to add (multiple) contacts with data to tickets.' =>
-            'Ez a funkció lehetővé teszi (több) partneradat hozzáadását a jegyhez.',
         'To add a new field, select the field type from one of the object\'s list, the object defines the boundary of the field and it can\'t be changed after the field creation.' =>
             'Egy új mező hozzáadásához válassza ki a mezőtípust az objektum listájának egyikéből. Az objektum határozza meg a mező határát, és nem lehet azt megváltoztatni a mező létrehozása után.',
+        'Import and export of configurations' => '',
+        'Upload a file in YAML format (as provided by the export) to import dynamic field configurations.' =>
+            '',
+        'Overwrite existing configurations' => '',
+        'Import configurations' => '',
+        'Export configurations' => '',
+        'Dynamic fields ↔ Screens' => '',
         'Dynamic Fields List' => 'Dinamikus mezők listája',
         'Dynamic fields per page' => 'Oldalankénti dinamikus mezők',
         'Label' => 'Címke',
@@ -530,7 +524,7 @@ sub Data {
         'Object' => 'Objektum',
         'Delete this field' => 'Mező törlése',
 
-        # Template: AdminDynamicFieldCheckbox
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
         'Dynamic Fields' => 'Dinamikus mezők',
         'Go back to overview' => 'Vissza az áttekintőhöz',
         'General' => 'Általános',
@@ -558,7 +552,21 @@ sub Data {
         'Default value' => 'Alapértelmezett érték',
         'This is the default value for this field.' => 'Ez az alapértelmezett érték ehhez a mezőhöz.',
 
-        # Template: AdminDynamicFieldDateTime
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldConfigurationImportExport.tt
+        'Dynamic field configurations: %s' => '',
+        'Select the dynamic fields you want to import and click on \'Import\'.' =>
+            '',
+        'Select the dynamic fields whose configuration you want to export and click on \'Export\' to generate a YAML file.' =>
+            '',
+        'Dynamic fields' => 'Dinamikus mezők',
+        'For the following dynamic fields a configuration cannot be imported because of an invalid backend.' =>
+            '',
+        'Select all field configurations' => '',
+        'Select all screen configurations' => '',
+        'The uploaded file does not contain configuration(s), is not a YAML file, is damaged or has the wrong structure.' =>
+            '',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldDateTime.tt
         'Default date difference' => 'Alapértelmezett dátumkülönbség',
         'This field must be numeric.' => 'Ez a mező csak számot tartalmazhat.',
         'The difference from NOW (in seconds) to calculate the field default value (e.g. 3600 or -60).' =>
@@ -582,7 +590,7 @@ sub Data {
         'Restrict entering of dates' => 'Korlátozás dátumok bevitelére',
         'Here you can restrict the entering of dates of tickets.' => 'Itt korlátozható a jegyek dátumának bevitele.',
 
-        # Template: AdminDynamicFieldDropdown
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldDropdown.tt
         'Possible values' => 'Lehetséges értékek',
         'Key' => 'Kulcs',
         'Value' => 'Érték',
@@ -600,7 +608,24 @@ sub Data {
         'You need to add the translations manually into the language translation files.' =>
             'A fordításokat kézzel kell hozzáadnia a nyelv fordítási fájljaihoz.',
 
-        # Template: AdminDynamicFieldText
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldScreenConfiguration.tt
+        'Assignment of dynamic fields to screens' => '',
+        'Overview' => 'Áttekintés',
+        'Screens' => '',
+        'Default columns' => '',
+        'Add dynamic field' => 'Dinamikus mező hozzáadása',
+        'Filter' => 'Szűrő',
+        'You can assign elements by dragging and dropping them to the lists of available, disabled, assigned and required elements.' =>
+            '',
+        'Filter available elements' => '',
+        'Assign selected elements to this list' => '',
+        'Select all' => 'Összes kijelölése',
+        'Filter disabled elements' => '',
+        'Filter assigned elements' => '',
+        'Filter required elements' => '',
+        'Reset' => 'Visszaállítás',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldText.tt
         'Number of rows' => 'Sorok száma',
         'Specify the height (in lines) for this field in the edit mode.' =>
             'A mező magasságának megadása (sorokban) a szerkesztő módban.',
@@ -615,7 +640,73 @@ sub Data {
         'Error Message' => 'Hibaüzenet',
         'Add RegEx' => 'Reguláris kifejezés hozzáadása',
 
-        # Template: AdminEmail
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice.tt
+        'Default search term' => '',
+        'This is the default term for the click search.' => '',
+        'Initial default search term' => '',
+        'This is the default search term when the mask is loaded.' => '',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
+        'Web service' => 'Webszolgáltatás',
+        'Web service which will be used for this dynamic field.' => '',
+        'Invoker to search for records' => '',
+        'Invoker which will be used for this dynamic field. Searches for the search term(s) and returns an array as result. Note: The invoker needs to be enabled in the web service you specified above.' =>
+            '',
+        'Invoker to get a record' => '',
+        'Invoker which will be used for this dynamic field. Returns a hash of the record that will be found when searching for its identifier in the field configured in \'key for stored value\' below. Note: The invoker needs to be enabled in the web service you specified above.' =>
+            '',
+        'Backend' => 'Háttérprogram',
+        'Backend which will be used for this dynamic field.' => '',
+        'Backend documentation' => '',
+        'Key for search' => '',
+        'The keys (separated by comma) that will be searched when using the autocomplete while entering a value for the dynamic field.' =>
+            '',
+        'Key for stored value' => '',
+        'The key whose value will be stored in the dynamic field.' => '',
+        'Key to display' => '',
+        'The keys (separated by comma) that will be shown when the value of the dynamic field is being displayed. This also affects the value displayed in the autocomplete field when entering a value. If this field is left empty, the stored value from above will be displayed.' =>
+            '',
+        'Template Type' => '',
+        'This configuration determines how the values of the dynamic field are output in templates or masks.' =>
+            '',
+        'Separator to display between multi-key values' => '',
+        'The separator to show between the values if there\'s more than one key configured to be displayed above. If left empty, a single space will be used as separator. Use <space> to add spaces.' =>
+            '',
+        'Limit' => 'Korlát',
+        'Maximum number of results for web service queries, e.g. for autcomplete selection list.' =>
+            '',
+        'Autocomplete min. input length' => '',
+        'Minimum length of input for autocomplete field to trigger search.' =>
+            '',
+        'Query delay' => '',
+        'Delay (in milliseconds) until the AJAX request will be sent.' =>
+            '',
+        'Autocompletion for search fields' => '',
+        'Use autocompletion for search fields instead of a static selection of values that are currently selected in OTRS (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch.' =>
+            '',
+        'Input field width' => '',
+        'Width of the input field (percentage).' => '',
+        'Additional dynamic field storage' => '',
+        'Dynamic field' => '',
+        'Restore values' => '',
+        'These dynamic fields are also filled with values from the same record.' =>
+            '',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Test.tt
+        'Test settings' => '',
+        'Error while testing configuration. Please check the configuration.' =>
+            '',
+        'Test was successful.' => '',
+        'Test this dynamic field exactly as it is displayed in the editing dialogs.' =>
+            '',
+        'Enter a search term to test the current settings.' => '',
+        'Click "Test settings"' => '',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/TestData.tt
+        'DisplayValue' => '',
+        'StoredValue' => '',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminEmail.tt
         'Admin Message' => 'Adminisztrátori üzenet',
         'With this module, administrators can send messages to agents, group or role members.' =>
             'Ezzel a modullal az adminisztrátorok üzeneteket küldhetnek az ügyintézőknek, csoportoknak vagy a tagoknak.',
@@ -630,7 +721,7 @@ sub Data {
         'Body' => 'Törzs',
         'Send' => 'Küldés',
 
-        # Template: AdminGenericAgent
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
         'Generic Agent Job Management' => 'Általános ügyintéző feladat kezelés',
         'Edit Job' => 'Feladat szerkesztése',
         'Add Job' => 'Feladat hozzáadása',
@@ -681,8 +772,6 @@ sub Data {
         'Owner' => 'Tulajdonos',
         'Responsible' => 'Felelős',
         'Ticket lock' => 'Jegyzár',
-        'Dynamic fields' => 'Dinamikus mezők',
-        'Add dynamic field' => 'Dinamikus mező hozzáadása',
         'Create times' => 'Létrehozási idők',
         'No create time settings.' => 'Nincsenek létrehozási idő beállítások.',
         'Ticket created' => 'Jegy létrehozva',
@@ -761,7 +850,7 @@ sub Data {
         'Affected Tickets' => 'Érintett jegyek',
         'Age' => 'Életkor',
 
-        # Template: AdminGenericInterfaceDebugger
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceDebugger.tt
         'GenericInterface Web Service Management' => 'Általános felület webszolgáltatás kezelés',
         'Web Service Management' => 'Webszolgáltatás kezelés',
         'Debugger' => 'Hibakereső',
@@ -779,10 +868,9 @@ sub Data {
         'Filter from' => 'Szűrés ettől',
         'Filter to' => 'Szűrés eddig',
         'Filter by remote IP' => 'Szűrés távoli IP szerint',
-        'Limit' => 'Korlát',
         'Refresh' => 'Frissítés',
 
-        # Template: AdminGenericInterfaceErrorHandlingDefault
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceErrorHandlingDefault.tt
         'Add ErrorHandling' => 'Hibakezelés hozzáadása',
         'Edit ErrorHandling' => 'Hibakezelés szerkesztése',
         'Do you really want to delete this error handling module?' => 'Valóban törölni szeretné ezt a hibakezelési modult?',
@@ -829,7 +917,7 @@ sub Data {
             'Annak meghatározása, hogy a feldolgozást le kell-e állítani a modul végrehajtása után, kihagyva az összes hátralévő modult vagy csak ugyanannak a háttérprogramnak a moduljait.',
         'Default behavior is to resume, processing the next module.' => 'Az alapértelmezett viselkedés a folytatás, a következő modul feldolgozása.',
 
-        # Template: AdminGenericInterfaceErrorHandlingRequestRetry
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceErrorHandlingRequestRetry.tt
         'This module allows to configure scheduled retries for failed requests.' =>
             'Ez a modul lehetővé teszi az ütemezett újrapróbálkozások beállítását a sikertelen kéréseknél.',
         'Default behavior of GenericInterface web services is to send each request exactly once and not to reschedule after errors.' =>
@@ -876,7 +964,7 @@ sub Data {
         'Note: Maximum retry period might not be reached if a maximum retry count is configured as well and reached earlier.' =>
             'Megjegyzés: a legnagyobb újrapróbálkozási időtartam esetleg nem érhető el, ha legnagyobb újrapróbálkozási darabszám is be van állítva, és azt előbb éri el.',
 
-        # Template: AdminGenericInterfaceInvokerDefault
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
         'Add Invoker' => 'Meghívó hozzáadása',
         'Edit Invoker' => 'Meghívó szerkesztése',
         'Do you really want to delete this invoker?' => 'Valóban törölni szeretné ezt a meghívót?',
@@ -905,7 +993,7 @@ sub Data {
         'Synchronous event triggers would be processed directly during the web request.' =>
             'A szinkron eseményaktiválók közvetlenül lehetnek feldolgozva a webkérések közben.',
 
-        # Template: AdminGenericInterfaceInvokerEvent
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerEvent.tt
         'GenericInterface Invoker Event Settings for Web Service %s' => 'Általános felület meghívóesemény beállításai a webszolgáltatásnál: %s',
         'Go back to' => 'Vissza ide',
         'Delete all conditions' => 'Minden feltétel törlése',
@@ -924,7 +1012,7 @@ sub Data {
         'And can\'t be repeated on the same condition.' => 'És nem lehet ismételni ugyanazon a feltételen.',
         'Add New Condition' => 'Új feltétel hozzáadása',
 
-        # Template: AdminGenericInterfaceMappingSimple
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingSimple.tt
         'Mapping Simple' => 'Egyszerű leképezés',
         'Default rule for unmapped keys' => 'Alapértelmezett szabály a nem leképezett kulcsokhoz',
         'This rule will apply for all keys with no mapping rule.' => 'Ez a szabály alkalmazni fogja minden leképezési szabály nélküli kulcsra.',
@@ -946,7 +1034,7 @@ sub Data {
         'Add value mapping' => 'Értékleképezés hozzáadása',
         'Do you really want to delete this key mapping?' => 'Valóban törölni szeretné ezt a kulcsleképezést?',
 
-        # Template: AdminGenericInterfaceMappingXSLT
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingXSLT.tt
         'General Shortcuts' => 'Általános gyorsbillentyűk',
         'MacOS Shortcuts' => 'MacOS gyorsbillentyűk',
         'Comment code' => 'Kód megjegyzésbe tétele',
@@ -969,6 +1057,11 @@ sub Data {
             'Egy vagy több adathalmaz kiválasztása, amely korábbi kérés/válasz állapotokban lett létrehozva, hogy belekerüljenek a leképezhető adatokba.',
         'These sets will appear in the data structure at \'/DataInclude/<DataSetName>\' (see debugger output of actual requests for details).' =>
             'Ezek a halmazok az adatszerkezetben fognak megjelenni itt: „/AdatFelvetel/<AdatHalmazNev>” (a részletekért nézze meg az aktuális kérések hibakeresési kimenetét).',
+        'Force array for tags' => '',
+        'Enter tags separated by space for which array representation should be forced.' =>
+            '',
+        'Keep XML attributes' => '',
+        'Only needed for content type XML.' => '',
         'Data key regex filters (before mapping)' => 'Adatkulcs reguláris kifejezés szűrők (leképezés előtt)',
         'Data key regex filters (after mapping)' => 'Adatkulcs reguláris kifejezés szűrők (leképezés után)',
         'Regular expressions' => 'Reguláris kifejezések',
@@ -997,7 +1090,7 @@ sub Data {
         'Regular expressions defined here will be applied after the XSLT mapping.' =>
             'Az itt meghatározott reguláris kifejezések az XSLT-leképezés után lesznek alkalmazva.',
 
-        # Template: AdminGenericInterfaceOperationDefault
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceOperationDefault.tt
         'Add Operation' => 'Művelet hozzáadása',
         'Edit Operation' => 'Művelet szerkesztése',
         'Do you really want to delete this operation?' => 'Valóban törölni szeretné ezt a műveletet?',
@@ -1016,7 +1109,7 @@ sub Data {
         'Include Ticket Data' => 'Jegyadatok felvétele',
         'Include ticket data in response.' => 'Jegyadatok felvétele a válaszba.',
 
-        # Template: AdminGenericInterfaceTransportHTTPREST
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
         'Network Transport' => 'Hálózati átvitel',
         'Properties' => 'Tulajdonságok',
         'Route mapping for Operation' => 'Útvonal leképezés a művelethez',
@@ -1025,6 +1118,11 @@ sub Data {
         'Valid request methods for Operation' => 'Érvényes kérési módszerek a művelethez',
         'Limit this Operation to specific request methods. If no method is selected all requests will be accepted.' =>
             'Ezen művelet korlátozása a megadott kérési módszerekre. Ha nincs módszer kiválasztva, akkor minden kérés el lesz fogadva.',
+        'Parser backend for operation' => '',
+        'Defines the incoming data format.' => '',
+        'Parser backend parameter' => '',
+        'Please click \'Save\' to get the corresponding backend parameter if the parser backend was changed.' =>
+            '',
         'Maximum message length' => 'Legnagyobb üzenethossz',
         'This field should be an integer number.' => 'Ez a mező csak egész szám lehet.',
         'Here you can specify the maximum size (in bytes) of REST messages that OTRS will process.' =>
@@ -1039,6 +1137,9 @@ sub Data {
             'Adott helyet jelző URI egy webszolgáltatáshoz való hozzáféréshez.',
         'e.g https://www.otrs.com:10745/api/v1.0 (without trailing backslash)' =>
             'például https://www.otrs.com:10745/api/v1.0 (lezáró perjel nélkül)',
+        'Disable SSL hostname certificate verification' => '',
+        'Disables hostname certificate verification. This is not recommended and should only be used in test environments.' =>
+            '',
         'Timeout' => 'Időkorlát',
         'Timeout value for requests.' => 'Időkorlátérték a kérésekhez.',
         'Authentication' => 'Hitelesítés',
@@ -1048,6 +1149,9 @@ sub Data {
         'The user name to be used to access the remote system.' => 'A távoli rendszer hozzáféréséhez használandó felhasználónév.',
         'BasicAuth Password' => 'Alap hitelesítés jelszó',
         'The password for the privileged user.' => 'A privilegizált felhasználó jelszava.',
+        'Content type' => '',
+        'The default content type added to HTTP header to use for POST and PUT requests.' =>
+            '',
         'Use Proxy Options' => 'Proxybeállítások használata',
         'Show or hide Proxy options to connect to the remote system.' => 'Proxybeállítások megjelenítése vagy elrejtése a távoli rendszerhez való csatlakozáshoz.',
         'Proxy Server' => 'Proxy-kiszolgáló',
@@ -1088,8 +1192,10 @@ sub Data {
             'A kérésekhez használandó megadott HTTP parancs ezzel a meghívóval (opcionális).',
         'Default command' => 'Alapértelmezett parancs',
         'The default HTTP command to use for the requests.' => 'A kéréseknél használandó alapértelmezett HTTP parancs.',
+        'Additional request headers' => '',
+        'Add request header' => '',
 
-        # Template: AdminGenericInterfaceTransportHTTPSOAP
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt
         'e.g. https://local.otrs.com:8000/Webservice/Example' => 'például https://local.otrs.com:8000/Webservice/Example',
         'Set SOAPAction' => 'SOAP-művelet beállítása',
         'Set to "Yes" in order to send a filled SOAPAction header.' => 'Állítsa „Igen” értékre egy kitöltött SOAP-művelet fejléc küldéséhez.',
@@ -1112,6 +1218,9 @@ sub Data {
         'URI to give SOAP methods a context, reducing ambiguities.' => 'URI egy környezethez való SOAP metódusok adásához csökkentve a kétértelműséget.',
         'e.g urn:otrs-com:soap:functions or http://www.otrs.com/GenericInterface/actions' =>
             'például urn:otrs-com:soap:functions vagy http://www.otrs.com/GenericInterface/actions',
+        'Omit namespace prefix' => '',
+        'Omits the namespace prefix (e. g. namesp1:) in root tag of SOAP message.' =>
+            '',
         'Request name scheme' => 'Kérés névséma',
         'Select how SOAP request function wrapper should be constructed.' =>
             'Válassza ki, hogy a SOAP-kérés függvénycsomagolót hogyan kell felépíteni.',
@@ -1130,16 +1239,27 @@ sub Data {
         'Response name free text' => 'Kérés nevének szabad szövege',
         'Here you can specify the maximum size (in bytes) of SOAP messages that OTRS will process.' =>
             'Itt adhatja meg a SOAP üzenetek legnagyobb méretét (bájtban), amelyeket az OTRS fel fog dolgozni.',
+        'Fixed namespace prefix' => '',
+        'Use a fixed namespace prefix (e. g. myns:) for the root tag of a SOAP message.' =>
+            '',
+        'Suffix for response tag' => '',
+        'Usually OTRS expects a response tag like "&lt;Operation&gt;Response". This setting can change the "Response" part, e. g. to "Result".' =>
+            '',
         'Encoding' => 'Kódolás',
         'The character encoding for the SOAP message contents.' => 'A SOAP üzenettartalmak karakterkódolása.',
         'e.g utf-8, latin1, iso-8859-1, cp1250, Etc.' => 'például utf-8, latin1, iso-8859-1, cp1250, stb.',
+        'User' => 'Felhasználó',
+        'Password' => 'Jelszó',
+        'Disable SSL hostname verification' => '',
+        'Disables (setting "Yes") or enables (setting "No", default) the SSL hostname verification.' =>
+            '',
         'Sort options' => 'Rendezési beállítások',
         'Add new first level element' => 'Új első szintű elem hozzáadása',
         'Element' => 'Elem',
         'Outbound sort order for xml fields (structure starting below function name wrapper) - see documentation for SOAP transport.' =>
             'Kimenő rendezési sorrend az XML-mezőknél (a szerkezet a függvénynév csomagoló alatt indul) – nézze meg a SOAP-átvitel dokumentációját.',
 
-        # Template: AdminGenericInterfaceWebservice
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceWebservice.tt
         'Add Web Service' => 'Webszolgáltatás hozzáadása',
         'Edit Web Service' => 'Webszolgáltatás szerkesztése',
         'Clone Web Service' => 'Webszolgáltatás klónozása',
@@ -1157,13 +1277,7 @@ sub Data {
         'Delete web service' => 'Webszolgáltatás törlése',
         'Do you really want to delete this web service?' => 'Valóban törölni szeretné ezt a webszolgáltatást?',
         'Ready2Adopt Web Services' => 'Használatra kész webszolgáltatások',
-        'Here you can activate Ready2Adopt web services showcasing our best practices that are a part of %s.' =>
-            'Itt kapcsolhatja be a legjobb gyakorlatainkat bemutató, használatra kész webszolgáltatásokat, amelyek az %s részei.',
-        'Please note that these web services may depend on other modules only available with certain %s contract levels (there will be a notification with further details when importing).' =>
-            'Ne feledje, hogy ezen webszolgáltatások függhetnek olyan egyéb moduloktól, amelyek csak bizonyos %s szerződési szintekkel érhetők el (lesz egy értesítés a további részletekkel az importáláskor).',
         'Import Ready2Adopt web service' => 'Használatra kész webszolgáltatás importálása',
-        'Would you like to benefit from web services created by experts? Upgrade to %s to import some sophisticated Ready2Adopt web services.' =>
-            'Szeretné élvezni a szakértők által létrehozott webszolgáltatások előnyeit? Ahhoz, hogy importálhasson néhány kitapasztalt, használatra kész webszolgáltatást, frissítsen a következőre: %s.',
         'After you save the configuration you will be redirected again to the edit screen.' =>
             'A beállítások mentése után ismét átirányításra kerül a szerkesztő képernyőre.',
         'If you want to return to overview please click the "Go to overview" button.' =>
@@ -1180,7 +1294,6 @@ sub Data {
         'Error Handling Modules' => 'Hibakezelési modulok',
         'Error handling modules are used to react in case of errors during the communication. Those modules are executed in a specific order, which can be changed by drag and drop.' =>
             'A hibakezelési modulok arra használhatók, hogy a kommunikáció során történt hibák esetén reagáljanak. Azok a modulok egy adott sorrendben lesznek végrehajtva, amely „fog és vidd” módon változtatható meg.',
-        'Backend' => 'Háttérprogram',
         'Add error handling module' => 'Hibakezelési modul hozzáadása',
         'Operations are individual system functions which remote systems can request.' =>
             'A műveletek olyan egyedi rendszerfunkciók, amelyeket a távoli rendszerek kérhetnek.',
@@ -1193,7 +1306,7 @@ sub Data {
         'At least one %s has a controller that is either not active or not present, please check the controller registration or delete the %s' =>
             'Legalább egy %s olyan vezérlővel rendelkezik, amely vagy nem aktív, vagy nincs jelen. Ellenőrizze a vezérlő regisztrációját, vagy törölje a következőt: %s',
 
-        # Template: AdminGenericInterfaceWebserviceHistory
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceWebserviceHistory.tt
         'History' => 'Előzmények',
         'Go back to Web Service' => 'Vissza a webszolgáltatáshoz',
         'Here you can view older versions of the current web service\'s configuration, export or even restore them.' =>
@@ -1208,7 +1321,7 @@ sub Data {
             'Valóban vissza szeretné állítani a webszolgáltatás beállításának ezen verzióját?',
         'Your current web service configuration will be overwritten.' => 'A jelenlegi webszolgáltatás-beállítás felül lesz írva.',
 
-        # Template: AdminGroup
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
         'Group Management' => 'Csoportkezelés',
         'Add Group' => 'Csoport hozzáadása',
         'Edit Group' => 'Csoport szerkesztése',
@@ -1218,15 +1331,16 @@ sub Data {
             'Új csoportok létrehozása a hozzáférési jogosultságok kezeléséhez az ügyintézők különböző csoportjainál (például beszerzési részleg, támogató részleg, értékesítési részleg, …). ',
         'It\'s useful for ASP solutions. ' => 'Ez ASP megoldásoknál hasznos. ',
 
-        # Template: AdminLog
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'System Log' => 'Rendszernapló',
+        'Clear log entries' => '',
         'Here you will find log information about your system.' => 'Itt napló információkat fog találni a rendszeréről.',
         'Hide this message' => 'Üzenet elrejtése',
         'Recent Log Entries' => 'Legutóbbi naplóbejegyzések',
         'Facility' => 'Összetevő',
         'Message' => 'Üzenet',
 
-        # Template: AdminMailAccount
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
         'Mail Account Management' => 'Levelezőfiók-kezelés',
         'Add Mail Account' => 'Levelezőfiók hozzáadása',
         'Edit Mail Account for host' => 'Levelezőfiók szerkesztése a géphez',
@@ -1241,10 +1355,11 @@ sub Data {
             'A kimenő e-mail a Sendmail* beállításokon keresztül állítható be itt: %s.',
         'System Configuration' => 'Rendszerbeállítások',
         'Host' => 'Kiszolgáló',
+        'Authentication type' => '',
         'Delete account' => 'Fiók törlése',
         'Fetch mail' => 'Levél lekérése',
         'Do you really want to delete this mail account?' => 'Valóban törölni szeretné ezt a levelezési fiókot?',
-        'Password' => 'Jelszó',
+        'OAuth2 token configuration' => '',
         'Example: mail.example.com' => 'Példa: mail.example.com',
         'IMAP Folder' => 'IMAP mappa',
         'Only modify this if you need to fetch mail from a different folder than INBOX.' =>
@@ -1253,10 +1368,9 @@ sub Data {
         'Dispatching' => 'Kézbesítés',
         'Edit Mail Account' => 'Levelezőfiók szerkesztése',
 
-        # Template: AdminNavigationBar
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
         'Administration Overview' => 'Adminisztrációs áttekintő',
         'Filter for Items' => 'Szűrő az elemekhez',
-        'Filter' => 'Szűrő',
         'Favorites' => 'Kedvencek',
         'You can add favorites by moving your cursor over items on the right side and clicking the star icon.' =>
             'Hozzáadhat kedvenceket, ha a kurzort a jobb oldalon lévő elemek fölé viszi, és a csillag ikonra kattint.',
@@ -1266,7 +1380,7 @@ sub Data {
         'Sorry, your search didn\'t match any items.' => 'Sajnáljuk, a keresése nem illeszkedik egyetlen elemre sem.',
         'Set as favorite' => 'Beállítás kedvencként',
 
-        # Template: AdminNotificationEvent
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
         'Ticket Notification Management' => 'Jegyértesítés-kezelés',
         'Here you can upload a configuration file to import Ticket Notifications to your system. The file needs to be in .yml format as exported by the Ticket Notification module.' =>
             'Itt tud egy beállítófájlt feltölteni a jegyértesítések importálásához a rendszerre. A fájlnak .yml formátumban kell lennie, ahogy a jegyértesítés modul exportálta.',
@@ -1307,12 +1421,68 @@ sub Data {
         'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
             'A jegy dinamikus mezőinek megjelenített értékei, legördülő és többválasztós mezőknél hasznos',
 
-        # Template: AdminNotificationEventTransportEmailSettings
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => 'Használjon vesszőt vagy pontosvesszőt az e-mail címek elválasztásához.',
         'You can use OTRS-tags like <OTRS_TICKET_DynamicField_...> to insert values from the current ticket.' =>
             'Használhatja az OTRS címkéket (mint például <OTRS_TICKET_DynamicField_...>) értékek beszúrásához a jelenlegi jegyből.',
 
-        # Template: AdminOTRSBusinessInstalled
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportWebserviceSettings.tt
+        'Web service name' => '',
+        'Invoker' => '',
+        'Asynchronous event triggers will be handled as separate process by the scheduler daemon (recommended).' =>
+            '',
+        'Synchronous event triggers will be processed directly during the web request.' =>
+            '',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
+        'Queue Management' => 'Várólista-kezelés',
+        'Manage OAuth2 tokens and their configurations' => '',
+        'Add by template' => '',
+        'Base configuration' => '',
+        'An OAuth2 token configuration with this name already exists.' =>
+            '',
+        'Client ID' => '',
+        'Client secret' => '',
+        'Template' => 'Sablon',
+        'This is the template that was used to create this OAuth2 token configuration.' =>
+            '',
+        'Notifications' => 'Értesítések',
+        'Expired token' => '',
+        'Shows a notification for admins below the top menu if the OAuth2 token has expired.' =>
+            '',
+        'Expired refresh token' => '',
+        'Shows a notification for admins below the top menu if the OAuth2 refresh token has expired.' =>
+            '',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
+        'Add OAuth2 token configuration' => '',
+        'Add a new OAuth2 token configuration based on the selected template.' =>
+            '',
+        'Import and export' => '',
+        'Upload a YAML file to import token configurations. See documentation on OAuth2 token management for further details.' =>
+            '',
+        'Overwrite existing token configurations' => '',
+        'Import token configurations' => '',
+        'Export token configurations' => '',
+        'OAuth2 token configurations' => '',
+        'Token status' => '',
+        'Refresh token status' => '',
+        'Validity of token configuration' => '',
+        'Last token request failed.' => '',
+        'Token has expired on %s.' => '',
+        'Token is valid until %s.' => '',
+        'No token was requested yet.' => '',
+        'Last (refresh) token request failed.' => '',
+        'Refresh token has expired on %s.' => '',
+        'Refresh token has expired.' => '',
+        'Refresh token is valid until %s.' => '',
+        'Refresh token is valid (without expiration date).' => '',
+        'No refresh token was requested yet.' => '',
+        'Refresh token request is not configured.' => '',
+        'Request new token' => '',
+        'Delete this token and its configuration.' => '',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessInstalled.tt
         'Manage %s' => '%s kezelése',
         'Downgrade to ((OTRS)) Community Edition' => 'Visszaváltás az ((OTRS)) Community Edition verzióra',
         'Read documentation' => 'Dokumentáció elolvasása',
@@ -1339,7 +1509,8 @@ sub Data {
         'Congratulations, your %s is correctly installed and up to date!' =>
             'Gratulálunk, az %s helyesen van telepítve és naprakész!',
 
-        # Template: AdminOTRSBusinessNotInstalled
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessNotInstalled.tt
+        'Upgrade to %s' => 'Frissítés a következőre: %s',
         'Go to the OTRS customer portal' => 'Ugrás az OTRS ügyfélportáljára',
         '%s will be available soon. Please check again in a few days.' =>
             'Az %s hamarosan elérhető lesz. Ellenőrizze ismét néhány nap múlva.',
@@ -1354,12 +1525,12 @@ sub Data {
         'Please visit our customer portal and file a request.' => 'Látogassa meg az ügyfélportálunkat, és küldjön egy kérést.',
         'Everything else will be done as part of your contract.' => 'Minden más a szerződése részeként fog történni.',
         'Your installed OTRS version is %s.' => 'A telepített OTRS verziója %s.',
-        'To install this package, you need to update to Znuny %s or higher.' =>
-            'A csomag telepítéséhez frissítenie kell az OTRS %s vagy magasabb verziójára.',
+        'To install this package, you need to update to OTRS %s or higher.' =>
+            '',
         'To install this package, the Maximum OTRS Version is %s.' => 'A csomag telepítéséhez a legmagasabb OTRS verzió %s.',
         'To install this package, the required Framework version is %s.' =>
             'A csomag telepítéséhez a szükséges keretrendszer-verzió %s.',
-        'Why should I keep Znuny up to date?' => 'Miért kell naprakészen tartanom az Znuny-t?',
+        'Why should I keep OTRS up to date?' => '',
         'You will receive updates about relevant security issues.' => 'Frissítéseket fog kapni a fontos biztonsági problémákról.',
         'You will receive updates for all other relevant OTRS issues' => 'Frissítéseket fog kapni minden egyéb fontos OTRS problémáról',
         'With your existing contract you can only use a small part of the %s.' =>
@@ -1367,7 +1538,7 @@ sub Data {
         'If you would like to take full advantage of the %s get your contract upgraded now! Contact %s.' =>
             'Ha az %s minden előnyét igénybe szeretné venni, akkor frissítse most a szerződését! Kapcsolatfelvétel: %s.',
 
-        # Template: AdminOTRSBusinessUninstall
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessUninstall.tt
         'Cancel downgrade and go back' => 'Visszaváltás megszakítása és visszalépés',
         'Go to OTRS Package Manager' => 'Ugrás az OTRS csomagkezelőhöz',
         'Sorry, but currently you can\'t downgrade due to the following packages which depend on %s:' =>
@@ -1386,7 +1557,7 @@ sub Data {
         'Ticket Attachment View' => 'Jegymelléklet nézet',
         'The %s skin' => 'Az %s felszín',
 
-        # Template: AdminPGP
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminPGP.tt
         'PGP Management' => 'PGP kezelés',
         'Add PGP Key' => 'PGP kulcs hozzáadása',
         'PGP support is disabled' => 'A PGP támogatás le van tiltva',
@@ -1407,7 +1578,7 @@ sub Data {
         'Delete this key' => 'Kulcs törlése',
         'PGP key' => 'PGP kulcs',
 
-        # Template: AdminPackageManager
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
         'Package Manager' => 'Csomagkezelő',
         'Uninstall Package' => 'Csomag eltávolítása',
         'Uninstall package' => 'Csomag eltávolítása',
@@ -1416,11 +1587,11 @@ sub Data {
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Valóban újra szeretné telepíteni ezt a csomagot? Minden kézi változtatás el fog veszni.',
         'Go to updating instructions' => 'Ugrás a frissítési utasításokhoz',
+        'Go to znuny.org' => '',
         'package information' => 'csomaginformációk',
-        'Package installation requires a patch level update of Znuny.' => 'A csomagtelepítés az Znuny hibajavító szintű frissítését igényli.',
-        'Package update requires a patch level update of Znuny.' => 'A csomagfrissítés az Znuny hibajavító szintű frissítését igényli.',
-        'If you are a OTRS Business Solution™ customer, please visit our customer portal and file a request.' =>
-            'Ha Ön OTRS Business Solution™ ügyfél, akkor látogassa meg az ügyfélportálunkat, és küldjön egy kérést.',
+        'Package installation requires a patch level update of Znuny.' =>
+            'A csomagtelepítés az OTRS hibajavító szintű frissítését igényli.',
+        'Package update requires a patch level update of Znuny.' => 'A csomagfrissítés az OTRS hibajavító szintű frissítését igényli.',
         'Please note that your installed Znuny version is %s.' => 'Ne feledje, hogy a telepített Znuny verziója %s.',
         'To install this package, you need to update Znuny to version %s or newer.' =>
             'A csomag telepítéséhez frissítenie kell az Znuny-t %s vagy újabb verzióra.',
@@ -1428,6 +1599,7 @@ sub Data {
             'Ez a csomag csak az Znuny %s vagy régebbi verziójára telepíthető.',
         'This package can only be installed on Znuny version %s or newer.' =>
             'Ez a csomag csak az Znuny %s vagy újabb verziójára telepíthető.',
+        'Why should I keep Znuny up to date?' => 'Miért kell naprakészen tartanom az Znuny-t?',
         'You will receive updates for all other relevant Znuny issues.' =>
             'Frissítéseket fog kapni minden egyéb fontos Znuny problémáról.',
         'How can I do a patch level update if I don’t have a contract?' =>
@@ -1456,9 +1628,6 @@ sub Data {
         'Package not correctly deployed! Please reinstall the package.' =>
             'A csomag nincs megfelelően üzembe állítva! Telepítse újra a csomagot.',
         'Reinstall' => 'Újratelepítés',
-        'Features for %s customers only' => 'Kizárólag %s ügyfelek számára elérhető funkciók',
-        'With %s, you can benefit from the following optional features. Please make contact with %s if you need more information.' =>
-            'Az %s használatával a következő opcionális szolgáltatások előnyeit élvezheti. Ha további információkra van szüksége, akkor vegye fel a kapcsolatot a következővel: %s.',
         'Package Information' => 'Csomaginformációk',
         'Download package' => 'Csomag letöltése',
         'Rebuild package' => 'Csomag újraépítése',
@@ -1476,7 +1645,7 @@ sub Data {
         'File Differences for File %s' => 'Fájleltérések ezzel a fájllal: %s',
         'File differences for file %s' => 'Fájleltérések ezzel a fájllal: %s',
 
-        # Template: AdminPerformanceLog
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminPerformanceLog.tt
         'Performance Log' => 'Teljesítmény napló',
         'Range' => 'Tartomány',
         'last' => 'utolsó',
@@ -1487,8 +1656,6 @@ sub Data {
         'Disable it here!' => 'Itt tiltsa le!',
         'Logfile too large!' => 'A naplófájl túl nagy!',
         'The logfile is too large, you need to reset it' => 'A naplófájl túl nagy, vissza kell állítania azt',
-        'Reset' => 'Visszaállítás',
-        'Overview' => 'Áttekintés',
         'Interface' => 'Felület',
         'Requests' => 'Kérések',
         'Min Response' => 'Legkisebb válasz',
@@ -1500,7 +1667,7 @@ sub Data {
         'Max' => 'Legnagyobb',
         'Average' => 'Átlag',
 
-        # Template: AdminPostMasterFilter
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminPostMasterFilter.tt
         'PostMaster Filter Management' => 'Levelezési szűrő kezelés',
         'Add PostMaster Filter' => 'Levelezési szűrő hozzáadása',
         'Edit PostMaster Filter' => 'Levelezési szűrő szerkesztése',
@@ -1530,7 +1697,7 @@ sub Data {
         'The field needs to be a literal word.' => 'Ennek a mezőnek szóliterálnak kell lennie.',
         'Header' => 'Fejléc',
 
-        # Template: AdminPriority
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminPriority.tt
         'Priority Management' => 'Prioritás-kezelés',
         'Add Priority' => 'Prioritás hozzáadása',
         'Edit Priority' => 'Prioritás szerkesztése',
@@ -1540,7 +1707,7 @@ sub Data {
             'Ez a prioritás megtalálható egy rendszerbállításban, az új prioritásra mutató beállítások frissítésének megerősítése szükséges!',
         'This priority is used in the following config settings:' => 'Ez a prioritás a következő konfigurációs beállításokban van használva:',
 
-        # Template: AdminProcessManagement
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
         'Process Management' => 'Folyamatkezelés',
         'Filter for Processes' => 'Szűrő a folyamatokhoz',
         'Filter for processes' => 'Szűrő a folyamatokhoz',
@@ -1553,8 +1720,6 @@ sub Data {
         'Ready2Adopt Processes' => 'Használatra kész folyamatok',
         'Here you can activate Ready2Adopt processes showcasing our best practices. Please note that some additional configuration may be required.' =>
             'Itt kapcsolhatja be a legjobb gyakorlatainkat bemutató, használatra kész folyamatokat. Ne feledje, hogy néhány további beállítás lehet szükséges.',
-        'Would you like to benefit from processes created by experts? Upgrade to %s to import some sophisticated Ready2Adopt processes.' =>
-            'Szeretné élvezni a szakértők által létrehozott folyamatok előnyeit? Ahhoz, hogy importálhasson néhány kitapasztalt, használatra kész folyamatot, frissítsen a következőre: %s.',
         'Import Ready2Adopt process' => 'Használatra kész folyamat importálása',
         'To create a new Process you can either import a Process that was exported from another system or create a complete new one.' =>
             'Egy új folyamat létrehozásához importálhat egy másik rendszerből exportált folyamatot, vagy létrehozhat egy teljesen újat.',
@@ -1566,25 +1731,29 @@ sub Data {
         'Export Process Configuration' => 'Folyamat-beállítás exportálása',
         'Copy Process' => 'Folyamat másolása',
 
-        # Template: AdminProcessManagementActivity
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Cancel & close' => 'Megszakítás és bezárás',
         'Go Back' => 'Vissza',
         'Please note, that changing this activity will affect the following processes' =>
             'Ne feledje, hogy a tevékenység megváltoztatása érinteni fogja a következő folyamatokat',
         'Activity' => 'Tevékenység',
         'Activity Name' => 'Tevékenység neve',
+        'Scope' => '',
+        'Scope EntityID' => '',
+        'This field is required for activities with a scope.' => '',
         'Activity Dialogs' => 'Tevékenység párbeszédek',
         'You can assign Activity Dialogs to this Activity by dragging the elements with the mouse from the left list to the right list.' =>
             'Tevékenység párbeszédeket rendelhet hozzá ehhez a tevékenységhez, ha az elemeket bal oldali listából a jobb oldali listába húzza az egérrel.',
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             'Lehetőség van az elemek rendezésére is a listán belül fogd és vidd módon.',
         'Filter available Activity Dialogs' => 'Elérhető tevékenység párbeszédek szűrése',
+        'Show global %s' => '',
         'Available Activity Dialogs' => 'Elérhető tevékenység párbeszédek',
         'Name: %s, EntityID: %s' => 'Név: %s, egyedazonosító: %s',
         'Create New Activity Dialog' => 'Új tevékenység párbeszéd létrehozása',
         'Assigned Activity Dialogs' => 'Hozzárendelt tevékenység párbeszédek',
 
-        # Template: AdminProcessManagementActivityDialog
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
         'Please note that changing this activity dialog will affect the following activities' =>
             'Ne feledje, hogy a tevékenység párbeszéd módosítása érinteni fogja a következő tevékenységeket',
         'Please note that customer users will not be able to see or use the following fields: Owner, Responsible, Lock, PendingTime and CustomerID.' =>
@@ -1599,6 +1768,7 @@ sub Data {
         'The selected permission does not exist.' => 'A kijelölt jogosultság nem létezik.',
         'Required Lock' => 'Zárolás szükséges',
         'The selected required lock does not exist.' => 'A kijelölt szükséges zárolás nem létezik.',
+        'This field is required for activitiy dialogs with a scope.' => '',
         'Submit Advice Text' => 'Elküldés értesítőszövege',
         'Submit Button Text' => 'Elküldés gomb szövege',
         'You can assign Fields to this Activity Dialog by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1610,7 +1780,7 @@ sub Data {
         'Is visible for customer' => 'Látható az ügyfélnek',
         'Display' => 'Megjelenítés',
 
-        # Template: AdminProcessManagementPath
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => 'Útvonal',
         'Edit this transition' => 'Átmenet szerkesztése',
         'Transition Actions' => 'Átmenet műveletek',
@@ -1621,7 +1791,7 @@ sub Data {
         'Create New Transition Action' => 'Új átmenet művelet létrehozása',
         'Assigned Transition Actions' => 'Hozzárendelt átmenet műveletek',
 
-        # Template: AdminProcessManagementProcessAccordion
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessAccordion.tt
         'Activities' => 'Tevékenységek',
         'Filter Activities...' => 'Tevékenységek szűrése…',
         'Create New Activity' => 'Új tevékenység létrehozása',
@@ -1631,7 +1801,7 @@ sub Data {
         'Create New Transition' => 'Új átmenet létrehozása',
         'Filter Transition Actions...' => 'Átmenet műveletek szűrése…',
 
-        # Template: AdminProcessManagementProcessEdit
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
         'Edit Process' => 'Folyamat szerkesztése',
         'Print process information' => 'Folyamatinformációk nyomtatása',
         'Delete Process' => 'Folyamat törlése',
@@ -1667,11 +1837,11 @@ sub Data {
         'Do you really want to remove this transition from the canvas? This can only be undone by leaving this screen without saving.' =>
             'Valóban el szeretné távolítani ezt az átmenetet a vászonról? Ezt csak akkor lehet változatlanul hagyni, ha mentés nélkül hagyja el ezt a képernyőt.',
 
-        # Template: AdminProcessManagementProcessNew
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessNew.tt
         'In this screen, you can create a new process. In order to make the new process available to users, please make sure to set its state to \'Active\' and synchronize after completing your work.' =>
             'Ezen a képernyőn hozhat létre új folyamatot. Annak érdekében, hogy az új folyamatot elérhetővé tegye a felhasználóknak, győződjön meg arról, hogy „Aktívra” állította az állapotát, és szinkronizálta a munka befejezése után.',
 
-        # Template: AdminProcessManagementProcessPrint
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessPrint.tt
         'cancel & close' => 'megszakítás és bezárás',
         'Start Activity' => 'Tevékenység indítása',
         'Contains %s dialog(s)' => '%s párbeszédet tartalmaz',
@@ -1684,24 +1854,25 @@ sub Data {
         'Module name' => 'Modulnév',
         'Transition actions are not being used in this process.' => 'Ebben a folyamatban nem használnak átmenet műveleteket.',
 
-        # Template: AdminProcessManagementTransition
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementTransition.tt
         'Please note that changing this transition will affect the following processes' =>
             'Ne feledje, hogy az átmenet módosítása érinteni fogja a következő folyamatokat',
         'Transition' => 'Átmenet',
         'Transition Name' => 'Átmenet neve',
+        'This field is required for transitions with a scope.' => '',
 
-        # Template: AdminProcessManagementTransitionAction
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementTransitionAction.tt
         'Please note that changing this transition action will affect the following processes' =>
             'Ne feledje, hogy az átmenet művelet módosítása érinteni fogja a következő folyamatokat',
         'Transition Action' => 'Átmenet művelet',
         'Transition Action Name' => 'Átmenet művelet neve',
         'Transition Action Module' => 'Átmenet művelet modul',
+        'This field is required for transition actions with a scope.' => '',
         'Config Parameters' => 'Beállítási paraméterek',
         'Add a new Parameter' => 'Új paraméter hozzáadása',
         'Remove this Parameter' => 'Paraméter eltávolítása',
 
-        # Template: AdminQueue
-        'Queue Management' => 'Várólista-kezelés',
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
         'Add Queue' => 'Várólista hozzáadása',
         'Edit Queue' => 'Várólista szerkesztése',
         'Filter for Queues' => 'Szűrő a várólistákhoz',
@@ -1741,7 +1912,7 @@ sub Data {
         'The signature for email answers.' => 'Az aláírás a válasz e-mailekhez.',
         'This queue is used in the following config settings:' => 'Ez a várólista a következő konfigurációs beállításokban van használva:',
 
-        # Template: AdminQueueAutoResponse
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminQueueAutoResponse.tt
         'Manage Queue-Auto Response Relations' => 'Várólista–Automatikus válasz kapcsolatok kezelése',
         'Change Auto Response Relations for Queue' => 'Automatikus válasz kapcsolatok megváltoztatása egy várólistánál',
         'This filter allow you to show queues without auto responses' => 'Ez a szűrő lehetővé teszi az automatikus válaszok nélküli várólisták megjelenítést',
@@ -1750,13 +1921,13 @@ sub Data {
         'Show All Queues' => 'Az összes várólista megjelenítése',
         'Auto Responses' => 'Automatikus válaszok',
 
-        # Template: AdminQueueTemplates
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminQueueTemplates.tt
         'Manage Template-Queue Relations' => 'Sablon–Várólista kapcsolatok kezelése',
         'Filter for Templates' => 'Szűrő a sablonokhoz',
         'Filter for templates' => 'Szűrő a sablonokhoz',
         'Templates' => 'Sablonok',
 
-        # Template: AdminRegistration
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
         'System Registration Management' => 'Rendszer regisztráció kezelés',
         'Edit System Registration' => 'Rendszer regisztráció szerkesztése',
         'System Registration Overview' => 'Rendszer regisztráció áttekintője',
@@ -1824,6 +1995,7 @@ sub Data {
         'Attribute' => 'Jellemző',
         'FQDN' => 'FQDN',
         'OTRS Version' => 'OTRS verzió',
+        'Database' => 'Adatbázis',
         'Operating System' => 'Operációs rendszer',
         'Perl Version' => 'Perl verzió',
         'Optional description of this system.' => 'A rendszer opcionális leírása.',
@@ -1841,7 +2013,7 @@ sub Data {
         'System Registration Data' => 'Rendszer regisztráció adatok',
         'Support Data' => 'Támogatási adatok',
 
-        # Template: AdminRole
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'Szerepkezelés',
         'Add Role' => 'Szerep hozzáadása',
         'Edit Role' => 'Szerep szerkesztése',
@@ -1852,7 +2024,7 @@ sub Data {
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             'Nincsenek szerepek meghatározva. Használja a „Hozzáadás” gombot egy új szerep létrehozásához.',
 
-        # Template: AdminRoleGroup
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminRoleGroup.tt
         'Manage Role-Group Relations' => 'Szerep–Csoport kapcsolatok kezelése',
         'Roles' => 'Szerepek',
         'Select the role:group permissions.' => 'A szerep:csoport jogosultságok kiválasztása.',
@@ -1872,7 +2044,7 @@ sub Data {
         'Permissions to change the ticket priority in this group/queue.' =>
             'Jogosultságok a jegy prioritásnak megváltoztatásához ebben a csoportban/várólistában.',
 
-        # Template: AdminRoleUser
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminRoleUser.tt
         'Manage Agent-Role Relations' => 'Ügyintéző–Szerep kapcsolatok kezelése',
         'Add Agent' => 'Ügyintéző hozzáadása',
         'Filter for Agents' => 'Szűrő az ügyintézőkhöz',
@@ -1880,14 +2052,14 @@ sub Data {
         'Agents' => 'Ügyintézők',
         'Manage Role-Agent Relations' => 'Szerep–Ügyintéző kapcsolatok kezelése',
 
-        # Template: AdminSLA
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSLA.tt
         'SLA Management' => 'SLA kezelés',
         'Edit SLA' => 'SLA szerkesztése',
         'Add SLA' => 'SLA hozzáadása',
         'Filter for SLAs' => 'Szűrő az SLA-khoz',
         'Please write only numbers!' => 'Csak számokat írjon!',
 
-        # Template: AdminSMIME
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
         'S/MIME Management' => 'S/MIME kezelés',
         'Add Certificate' => 'Tanúsítvány hozzáadása',
         'Add Private Key' => 'Személyes kulcs hozzáadása',
@@ -1922,12 +2094,12 @@ sub Data {
         'Filter for S/MIME certs' => 'Szűrő az S/MIME tanúsítványokhoz',
         'Relate this certificate' => 'Tanúsítvány összekapcsolása',
 
-        # Template: AdminSMIMECertRead
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSMIMECertRead.tt
         'S/MIME Certificate' => 'S/MIME tanúsítvány',
         'Close this dialog' => 'Párbeszédablak bezárása',
         'Certificate Details' => 'Tanúsítvány részletek',
 
-        # Template: AdminSalutation
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSalutation.tt
         'Salutation Management' => 'Megszólítás kezelés',
         'Add Salutation' => 'Megszólítás hozzáadása',
         'Edit Salutation' => 'Megszólítás szerkesztése',
@@ -1936,14 +2108,14 @@ sub Data {
         'e. g.' => 'például',
         'Example salutation' => 'Példa megszólítás',
 
-        # Template: AdminSecureMode
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => 'A biztonsági módot engedélyezni szükséges!',
         'Secure mode will (normally) be set after the initial installation is completed.' =>
             'A biztonságos mód (normális esetben) a kezdeti telepítés befejezése után lesz beállítva.',
         'If secure mode is not activated, activate it via SysConfig because your application is already running.' =>
             'Ha a biztonságos mód nincs aktiválva, aktiválja a rendszerbeállításon keresztül, mert az alkalmazás már fut.',
 
-        # Template: AdminSelectBox
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSelectBox.tt
         'SQL Box' => 'SQL doboz',
         'Filter for Results' => 'Szűrő az eredményekhez',
         'Filter for results' => 'Szűrő az eredményekhez',
@@ -1962,7 +2134,7 @@ sub Data {
         '%s Results' => '%s találat',
         'Query is executed.' => 'Lekérdezés végrehajtva.',
 
-        # Template: AdminService
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
         'Service Management' => 'Szolgáltatás kezelés',
         'Add Service' => 'Szolgáltatás hozzáadása',
         'Edit Service' => 'Szolgáltatás szerkesztése',
@@ -1970,7 +2142,7 @@ sub Data {
             'A szolgáltatás nevének legnagyobb hossza 200 karakter (alszolgáltatásokkal).',
         'Sub-service of' => 'Részszolgáltatása ennek',
 
-        # Template: AdminSession
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
         'Session Management' => 'Munkamenet-kezelés',
         'Detail Session View for %s (%s)' => '%s (%s) részletes munkamenetnézete',
         'All sessions' => 'Összes munkamenet',
@@ -1983,11 +2155,10 @@ sub Data {
         'Filter for Sessions' => 'Szűrő a munkamenetekhez',
         'Filter for sessions' => 'Szűrő a munkamenetekhez',
         'Session' => 'Munkamenet',
-        'User' => 'Felhasználó',
         'Kill' => 'Kilövés',
         'Detail View for SessionID: %s - %s' => 'A munkamenet-azonosító részletes nézete: %s - %s',
 
-        # Template: AdminSignature
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSignature.tt
         'Signature Management' => 'Aláírás kezelés',
         'Add Signature' => 'Aláírás hozzáadása',
         'Edit Signature' => 'Aláírás szerkesztése',
@@ -1995,7 +2166,7 @@ sub Data {
         'Filter for signatures' => 'Szűrő az aláírásokhoz',
         'Example signature' => 'Példa aláírás',
 
-        # Template: AdminState
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
         'State Management' => 'Állapot kezelés',
         'Add State' => 'Állapot hozzáadása',
         'Edit State' => 'Állapot szerkesztése',
@@ -2010,7 +2181,7 @@ sub Data {
             'Nem lehetséges érvényteleníteni ezt a bejegyzést, mert nincsenek egyéb egyesítés állapotok a rendszeren!',
         'This state is used in the following config settings:' => 'Ez az állapot a következő konfigurációs beállításokban van használva:',
 
-        # Template: AdminSupportDataCollector
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
         'Sending support data to OTRS Group is not possible!' => 'Nem lehetséges támogatási adatokat küldeni az OTRS csoportnak!',
         'Enable Cloud Services' => 'Felhőszolgáltatások engedélyezése',
         'This data is sent to OTRS Group on a regular basis. To stop sending this data please update your system registration.' =>
@@ -2024,21 +2195,13 @@ sub Data {
         'Generate Support Bundle' => 'Támogatási csomag előállítása',
         'The Support Bundle has been Generated' => 'A támogatási csomag előállítva',
         'Please choose one of the following options.' => 'Válassza a következő lehetőségek egyikét.',
-        'Send by Email' => 'Küldés e-mailben',
-        'The support bundle is too large to send it by email, this option has been disabled.' =>
-            'A támogatási csomag túl nagy az e-mailben történő küldéshez, ez a lehetőség le lett tiltva.',
-        'The email address for this user is invalid, this option has been disabled.' =>
-            'Ennek a felhasználónak az e-mail címe érvénytelen, ez a lehetőség le lett tiltva.',
-        'Sending' => 'Küldés',
-        'The support bundle will be sent to OTRS Group via email automatically.' =>
-            'A támogatási csomag automatikusan el lesz küldve e-mailben az OTRS csoportnak.',
         'Download File' => 'Fájl letöltése',
         'A file containing the support bundle will be downloaded to the local system. Please save the file and send it to the OTRS Group, using an alternate method.' =>
             'A támogatási csomagot tartalmazó fájl le lesz töltve a helyi rendszerre. Mentse el a fájlt, és küldje el az OTRS csoportnak egy alternatív módszer használatával.',
         'Error: Support data could not be collected (%s).' => 'Hiba: A támogatási adatokat nem sikerült összegyűjteni (%s).',
         'Details' => 'Részletek',
 
-        # Template: AdminSystemAddress
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
         'System Email Addresses Management' => 'Rendszer e-mail címek kezelése',
         'Add System Email Address' => 'Rendszer e-mail cím hozzáadása',
         'Edit System Email Address' => 'Rendszer e-mail cím szerkesztése',
@@ -2056,7 +2219,7 @@ sub Data {
         'This system address cannot be set to invalid, because it is used in one or more queue(s) or auto response(s).' =>
             'Ezt a rendszercímet nem lehet érvénytelenre állítani, mert egy vagy több várólistában vagy automatikus válaszban használják.',
 
-        # Template: AdminSystemConfiguration
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfiguration.tt
         'online administrator documentation' => 'interneten lévő adminisztrátori kézikönyv',
         'System configuration' => 'Rendszerbeállítások',
         'Navigate through the available settings by using the tree in the navigation box on the left side.' =>
@@ -2069,7 +2232,7 @@ sub Data {
         'There are currently no settings available. Please make sure to run \'otrs.Console.pl Maint::Config::Rebuild\' before using the software.' =>
             'Jelenleg nincsenek elérhető beállítások. Győződjön meg arról, hogy lefuttatta-e az „otrs.Console.pl Maint::Config::Rebuild” parancsot a szoftver használata előtt.',
 
-        # Template: AdminSystemConfigurationDeployment
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationDeployment.tt
         'Changes Deployment' => 'Változások üzembe állítása',
         'Help' => 'Súgó',
         'This is an overview of all settings which will be part of the deployment if you start it now. You can compare each setting to its former state by clicking the icon on the top right.' =>
@@ -2097,11 +2260,11 @@ sub Data {
             'Átváltás speciális módra a más felhasználók által megváltoztatott üzembe állítható beállítások megtekintéséhez.',
         'Deploy selected changes' => 'Kijelölt változások üzembe állítása',
 
-        # Template: AdminSystemConfigurationGroup
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationGroup.tt
         'This group doesn\'t contain any settings. Please try navigating to one of its sub groups.' =>
             'Ez a csoport nem tartalmaz egyetlen beállítást sem. Próbáljon meg az alcsoportjai egyikére navigálni.',
 
-        # Template: AdminSystemConfigurationImportExport
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationImportExport.tt
         'Import & Export' => 'Importálás és exportálás',
         'Upload a file to be imported to your system (.yml format as exported from the System Configuration module).' =>
             'Töltsön fel egy fájlt a rendszerbe importáláshoz (.yml formátumban, ahogy a rendszerbeállítás modulból exportálva lett).',
@@ -2112,7 +2275,7 @@ sub Data {
         'Include user settings' => 'Tartalmazza a felhasználó beállításait',
         'Export current configuration' => 'Jelenlegi beállítások exportálása',
 
-        # Template: AdminSystemConfigurationSearch
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationSearch.tt
         'Search for' => 'Keresés erre:',
         'Search for category' => 'Kategória keresése',
         'Settings I\'m currently editing' => 'Beállítások, amelyeket jelenleg szerkesztek',
@@ -2123,16 +2286,24 @@ sub Data {
         'You\'re currently not editing any settings.' => 'Jelenleg nem szerkeszt egyetlen beállítást sem.',
         'You\'re currently editing %s setting(s).' => 'Jelenleg %s beállítást szerkeszt.',
 
-        # Template: AdminSystemConfigurationSearchDialog
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationSearchDialog.tt
         'Category' => 'Kategória',
         'Run search' => 'Keresés futtatása',
 
-        # Template: AdminSystemConfigurationView
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
         'View a custom List of Settings' => 'Egyéni beállításlista megtekintése',
         'View single Setting: %s' => 'Önálló beállítás megtekintése: %s',
         'Go back to Deployment Details' => 'Vissza az üzembe állítás részleteihez',
 
-        # Template: AdminSystemMaintenance
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
+        'System file support' => '',
+        'Delete cache' => '',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
+        'Permissions' => 'Jogosultságok',
+        'Package' => '',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
         'System Maintenance Management' => 'Rendszerkarbantartás kezelés',
         'Schedule New System Maintenance' => 'Új rendszerkarbantartás ütemezése',
         'Filter for System Maintenances' => 'Szűrő a rendszerkarbantartásokhoz',
@@ -2144,7 +2315,7 @@ sub Data {
         'Stop date' => 'Végdátum',
         'Delete System Maintenance' => 'Rendszerkarbantartás törlése',
 
-        # Template: AdminSystemMaintenanceEdit
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenanceEdit.tt
         'Edit System Maintenance' => 'Rendszerkarbantartás szerkesztése',
         'Edit System Maintenance Information' => 'Rendszerkarbantartás információk szerkesztése',
         'Date invalid!' => 'Érvénytelen dátum!',
@@ -2158,7 +2329,7 @@ sub Data {
         'Customer Sessions' => 'Ügyfél munkamenetek',
         'Kill all Sessions, except for your own' => 'Összes munkamenet kilövése, kivéve az Ön sajátját',
 
-        # Template: AdminTemplate
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminTemplate.tt
         'Template Management' => 'Sablonkezelés',
         'Add Template' => 'Sablon hozzáadása',
         'Edit Template' => 'Sablon szerkesztése',
@@ -2169,7 +2340,6 @@ sub Data {
         'Delete this entry' => 'Bejegyzés törlése',
         'Do you really want to delete this template?' => 'Valóban törölni szeretné ezt a sablont?',
         'A standard template with this name already exists!' => 'Már létezik ilyen nevű szabványos sablon!',
-        'Template' => 'Sablon',
         'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
             'A jelenlegi vagy a legfrissebb ügyintézői bejegyzés tárgyának első 20 karakterének lekéréséhez (jelenlegi a válasznál és továbbításnál, a legfrissebb a jegyzet sablontípusnál). Ez a címke nem támogatott más sablontípusoknál.',
         'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
@@ -2183,12 +2353,27 @@ sub Data {
         'The current ticket state is' => 'A jegy jelenlegi állapota',
         'Your email address is' => 'Az e-mail címe',
 
-        # Template: AdminTemplateAttachment
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminTemplateAttachment.tt
         'Manage Template-Attachment Relations' => 'Sablon–Melléklet kapcsolatok kezelése',
         'Toggle active for all' => 'Aktiválás ki- és bekapcsolása mindenkinek',
         'Link %s to selected %s' => '%s összekapcsolása a kijelölt %s elemmel',
 
-        # Template: AdminType
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
+        'Ticket attribute relations' => '',
+        'Add ticket attribute relations' => '',
+        'Edit ticket attribute relations' => '',
+        'Import CSV or Excel file' => '',
+        'Last update' => '',
+        'Are you sure you want to delete entry \'%s\'?' => '',
+        'Download previously imported file' => '',
+        'The file needs to be in CSV (UTF-8) or Excel format. Both header columns need to contain the names of valid ticket attributes. The name of the uploaded file must be unique and must not be in use by another ticket attribute relations record.' =>
+            '',
+        'Add missing possible dynamic field values' => '',
+        'Attribute values' => '',
+        'If a value is colored red, it is missing from the possible values list of the dynamic field configuration.' =>
+            '',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminType.tt
         'Type Management' => 'Típuskezelés',
         'Add Type' => 'Típus hozzáadása',
         'Edit Type' => 'Típus szerkesztése',
@@ -2199,7 +2384,7 @@ sub Data {
             'Ez a típus megtalálható egy rendszerbállításban, az új típusra mutató beállítások frissítésének megerősítése szükséges!',
         'This type is used in the following config settings:' => 'Ez a típus a következő konfigurációs beállításokban van használva:',
 
-        # Template: AdminUser
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminUser.tt
         'Agent Management' => 'Ügyintéző-kezelés',
         'Edit Agent' => 'Ügyintéző szerkesztése',
         'Edit personal preferences for this agent' => 'Személyes beállítások szerkesztése ennél az ügyintézőnél',
@@ -2219,10 +2404,10 @@ sub Data {
         'Table above shows effective group permissions for the agent. The matrix takes into account all inherited permissions (e.g. via roles).' =>
             'A fenti táblázat a tényleges csoportjogosultságokat jeleníti meg az ügyintézőnél. A mátrix figyelembe veszi az összes örökölt jogosultságot (például szerepeken keresztül).',
 
-        # Template: AdminUserGroup
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminUserGroup.tt
         'Manage Agent-Group Relations' => 'Ügyintéző–Csoport kapcsolatok kezelése',
 
-        # Template: AgentAppointmentAgendaOverview
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentAgendaOverview.tt
         'Agenda Overview' => 'Napirend áttekintő',
         'Manage Calendars' => 'Naptárak kezelése',
         'Add Appointment' => 'Időpont hozzáadása',
@@ -2235,11 +2420,11 @@ sub Data {
         'No calendars found. Please add a calendar first by using Manage Calendars page.' =>
             'Nem találhatók naptárak. Először adjon hozzá egy naptárat a naptárak kezelése oldal használatával.',
 
-        # Template: AgentAppointmentCalendarOverview
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
         'Add new Appointment' => 'Új időpont hozzáadása',
         'Calendars' => 'Naptárak',
 
-        # Template: AgentAppointmentEdit
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
         'Basic information' => 'Alap információk',
         'Date/Time' => 'Dátum/idő',
         'Invalid date!' => 'Érvénytelen dátum!',
@@ -2294,22 +2479,20 @@ sub Data {
         'December' => 'december',
         'Dec' => 'dec.',
         'Relative point of time' => 'Relatív időpont',
-        'Link' => 'Összekapcsolás',
-        'Remove entry' => 'Bejegyzés eltávolítása',
 
-        # Template: AgentCustomerInformationCenter
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerInformationCenter.tt
         'Customer Information Center' => 'Ügyfélinformációs-központ',
 
-        # Template: AgentCustomerInformationCenterSearch
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerInformationCenterSearch.tt
         'Customer User' => 'Ügyfél-felhasználó',
 
-        # Template: AgentCustomerTableView
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerTableView.tt
         'Note: Customer is invalid!' => 'Megjegyzés: Az ügyfél érvénytelen!',
         'Start chat' => 'Csevegés indítása',
         'Video call' => 'Videohívás',
         'Audio call' => 'Hanghívás',
 
-        # Template: AgentCustomerUserAddressBook
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
         'Customer User Address Book' => 'Ügyfél-felhasználó címjegyzék',
         'Search for recipients and add the results as \'%s\'.' => 'Címzettek keresése és az eredmények hozzáadása mint „%s”.',
         'Search template' => 'Keresési sablon',
@@ -2323,19 +2506,18 @@ sub Data {
             'Az „(Ügyfél)” azonosítóval rendelkező attribútumok az ügyfél-vállalatból vannak.',
         '(e. g. Term* or *Term*)' => '(például kifejezés* vagy *kifejezés*)',
 
-        # Template: AgentCustomerUserAddressBookOverview
-        'Select all' => 'Összes kijelölése',
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBookOverview.tt
         'The customer user is already selected in the ticket mask.' => 'Az ügyfél-felhasználó már ki van jelölve a jegymaszkban.',
         'Select this customer user' => 'Az ügyfél-felhasználó kiválasztása',
         'Add selected customer user to' => 'Kijelölt ügyfél-felhasználó hozzáadása ehhez:',
 
-        # Template: AgentCustomerUserAddressBookOverviewNavBar
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBookOverviewNavBar.tt
         'Change search options' => 'Keresési beállítások módosítása',
 
-        # Template: AgentCustomerUserInformationCenter
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserInformationCenter.tt
         'Customer User Information Center' => 'Ügyfél-felhasználó információs-központ',
 
-        # Template: AgentDaemonInfo
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
         'The OTRS Daemon is a daemon process that performs asynchronous tasks, e.g. ticket escalation triggering, email sending, etc.' =>
             'Az OTRS démon egy démonfolyamat, amely olyan aszinkron feladatokat hajt végre, mint például jegyeszkaláció aktiválás, e-mail küldés, stb.',
         'A running OTRS Daemon is mandatory for correct system operation.' =>
@@ -2348,10 +2530,10 @@ sub Data {
         'After 5 minutes, check that the OTRS Daemon is running in the system (\'bin/otrs.Daemon.pl status\').' =>
             'Ellenőrizze 5 perc után, hogy az OTRS démon fut-e a rendszeren („bin/otrs.Daemon.pl status”).',
 
-        # Template: AgentDashboard
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboard.tt
         'Dashboard' => 'Vezérlőpult',
 
-        # Template: AgentDashboardAppointmentCalendar
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardAppointmentCalendar.tt
         'New Appointment' => 'Új időpont',
         'Tomorrow' => 'Holnap',
         'Soon' => 'Hamarosan',
@@ -2359,17 +2541,17 @@ sub Data {
         'Start' => 'Indítás',
         'none' => 'nincs',
 
-        # Template: AgentDashboardCalendarOverview
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCalendarOverview.tt
         'in' => 'ekkor:',
 
-        # Template: AgentDashboardCommon
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
         'Save settings' => 'Beállítások mentése',
         'Close this widget' => 'Felületi elem bezárása',
         'more' => 'tovább',
         'Available Columns' => 'Elérhető oszlopok',
         'Visible Columns (order by drag & drop)' => 'Látható oszlopok (rendezés fogd és vidd módon)',
 
-        # Template: AgentDashboardCustomerIDList
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
         'Change Customer Relations' => 'Ügyfélkapcsolatok megváltoztatása',
         'Open' => 'Nyitott',
         'Closed' => 'Lezárva',
@@ -2377,33 +2559,33 @@ sub Data {
         '%s closed ticket(s) of %s' => '%s lezárt jegye ennek: %s',
         'Edit customer ID' => 'Ügyfél-azonosító szerkesztése',
 
-        # Template: AgentDashboardCustomerIDStatus
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
         'Escalated tickets' => 'Eszkalált jegyek',
         'Open tickets' => 'Nyitott jegyek',
         'Closed tickets' => 'Lezárt jegyek',
         'All tickets' => 'Összes jegy',
         'Archived tickets' => 'Archivált jegyek',
 
-        # Template: AgentDashboardCustomerUserInformation
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserInformation.tt
         'Note: Customer User is invalid!' => 'Megjegyzés: Az ügyfél-felhasználó érvénytelen!',
 
-        # Template: AgentDashboardCustomerUserList
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
         'Customer user information' => 'Ügyfél-felhasználó információk',
         'Phone ticket' => 'Telefonos jegy',
         'Email ticket' => 'E-mail jegy',
         'New phone ticket from %s' => 'Új telefonos jegy tőle: %s',
         'New email ticket to %s' => 'Új e-mail jegy neki: %s',
 
-        # Template: AgentDashboardProductNotify
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardProductNotify.tt
         '%s %s is available!' => '%s %s elérhető!',
         'Please update now.' => 'Frissítse most.',
         'Release Note' => 'Kiadási megjegyzés',
         'Level' => 'Szint',
 
-        # Template: AgentDashboardRSSOverview
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardRSSOverview.tt
         'Posted %s ago.' => 'Beküldve %s ezelőtt.',
 
-        # Template: AgentDashboardStats
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardStats.tt
         'The configuration for this statistic widget contains errors, please review your settings.' =>
             'Ennek a statisztikai felületi elemnek a beállítása hibákat tartalmaz. Nézze át a beállításait.',
         'Download as SVG file' => 'Letöltés SVG-fájlként',
@@ -2418,7 +2600,7 @@ sub Data {
         'This statistic can currently not be used because its configuration needs to be corrected by the statistics administrator.' =>
             'Ez a statisztika jelenleg nem használható, mert a beállításait javítania kell a statisztika adminisztrátorának.',
 
-        # Template: AgentDashboardTicketGeneric
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketGeneric.tt
         'Assigned to customer user' => 'Hozzárendelve az ügyfél-felhasználóhoz',
         'Accessible for customer user' => 'Hozzáférhető az ügyfél-felhasználónak',
         'My locked tickets' => 'Saját zárolt jegyek',
@@ -2428,20 +2610,20 @@ sub Data {
         'Tickets in My Services' => 'Jegyek a szolgáltatásaimban',
         'Service Time' => 'Szolgáltatás ideje',
 
-        # Template: AgentDashboardTicketQueueOverview
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketQueueOverview.tt
         'Total' => 'Összesen',
 
-        # Template: AgentDashboardUserOnline
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardUserOnline.tt
         'out of office' => 'irodán kívül',
 
-        # Template: AgentDashboardUserOutOfOffice
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardUserOutOfOffice.tt
         'until' => 'eddig:',
 
-        # Template: AgentInfo
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentInfo.tt
         'To accept some news, a license or some changes.' => 'A hírek, a licenc és néhány változtatás elfogadásához.',
         'Yes, accepted.' => 'Igen, elfogadva.',
 
-        # Template: AgentLinkObject
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentLinkObject.tt
         'Manage links for %s' => 'Kapcsolatok kezelése ennél: %s',
         'Create new links' => 'Új kapcsolatok létrehozása',
         'Manage existing links' => 'Meglévő kapcsolatok kezelése',
@@ -2450,12 +2632,12 @@ sub Data {
         'There are currently no links. Please click \'Create new Links\' on the top to link this item to other objects.' =>
             'Jelenleg nincsenek kapcsolatok. Kattintson a fenti „Új kapcsolatok létrehozása” gombra ezen elem más objektumokkal történő összekapcsolásához.',
 
-        # Template: AgentOTRSBusinessBlockScreen
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentOTRSBusinessBlockScreen.tt
         'Unauthorized usage of %s detected' => 'Az %s jogosulatlan használata észlelhető',
         'If you decide to downgrade to ((OTRS)) Community Edition, you will lose all database tables and data related to %s.' =>
             'Ha úgy dönt, hogy visszavált az ((OTRS)) Community Edition verzióra, akkor el fogja veszíteni az %s szolgáltatáshoz kapcsolódó összes adatbázis táblát és adatot.',
 
-        # Template: AgentPreferences
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
         'Edit your preferences' => 'Beállítások szerkesztése',
         'Personal Preferences' => 'Személyes beállítások',
         'Preferences' => 'Beállítások',
@@ -2481,22 +2663,22 @@ sub Data {
         'Save this setting' => 'Beállítás mentése',
         'Did you know? You can help translating OTRS at %s.' => 'Tudta? Segíthet az OTRS fordításában a következő címen: %s.',
 
-        # Template: SettingsList
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences/SettingsList.tt
         'Reset to default' => 'Visszaállítás az alapértelmezettre',
 
-        # Template: AgentPreferencesOverview
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentPreferencesOverview.tt
         'Choose from the groups on the right to find the settings you\'d wish to change.' =>
             'Válasszon a jobb oldali csoportok közül azon beállítások megtalálásához, amelyeket meg szeretne változtatni.',
         'Did you know?' => 'Tudta?',
         'You can change your avatar by registering with your email address %s on %s' =>
             'Megváltoztathatja a profilképét, ha regisztrálja az e-mail címét (%s) a következő oldalon: %s',
 
-        # Template: AgentSplitSelection
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentSplitSelection.tt
         'Target' => 'Cél',
         'Process' => 'Folyamat',
         'Split' => 'Felosztás',
 
-        # Template: AgentStatisticsAdd
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
         'Statistics Management' => 'Statisztikakezelés',
         'Add Statistics' => 'Statisztika hozzáadása',
         'Read more about statistics in OTRS' => 'Tudjon meg többet az OTRS-ben lévő statisztikákról',
@@ -2509,17 +2691,17 @@ sub Data {
         'General Specification' => 'Általános specifikáció',
         'Create Statistic' => 'Statisztika létrehozása',
 
-        # Template: AgentStatisticsEdit
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsEdit.tt
         'Edit Statistics' => 'Statisztika szerkesztése',
         'Run now' => 'Futtatás most',
         'Statistics Preview' => 'Statisztikák előnézet',
         'Save Statistic' => 'Statisztika mentése',
 
-        # Template: AgentStatisticsImport
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsImport.tt
         'Import Statistics' => 'Statisztika importálása',
         'Import Statistics Configuration' => 'Statisztikák beállításának importálása',
 
-        # Template: AgentStatisticsOverview
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
         'Statistics' => 'Statisztikák',
         'Run' => 'Futtatás',
         'Edit statistic "%s".' => '„%s” statisztika szerkesztése.',
@@ -2528,7 +2710,7 @@ sub Data {
         'Delete statistic "%s"' => '„%s” statisztika törlése',
         'Delete statistic %s' => '%s statisztika törlése',
 
-        # Template: AgentStatisticsView
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Overview' => 'Statisztikák áttekintő',
         'View Statistics' => 'Statisztika megtekintése',
         'Statistics Information' => 'Statisztikák információi',
@@ -2541,7 +2723,7 @@ sub Data {
         'This statistic contains configuration errors and can currently not be used.' =>
             'Ez a statisztika beállítási hibákat tartalmaz, és jelenleg nem használható.',
 
-        # Template: AgentTicketActionCommon
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
         'Change Free Text of %s%s%s' => '%s%s%s szabad szövegének módosítása',
         'Change Owner of %s%s%s' => '%s%s%s tulajdonosának módosítása',
         'Close %s%s%s' => '%s%s%s lezárása',
@@ -2574,9 +2756,8 @@ sub Data {
         'Text will also be received by' => 'A szöveget meg fogja még kapni',
         'Text Template' => 'Szövegsablon',
         'Setting a template will overwrite any text or attachment.' => 'Egy sablon beállítása felül fog írni minden szöveget vagy mellékletet.',
-        'Invalid time!' => 'Érvénytelen időpont!',
 
-        # Template: AgentTicketBounce
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
         'Bounce %s%s%s' => '%s%s%s átirányítása',
         'Bounce to' => 'Átirányítás ide',
         'You need a email address.' => 'Egy e-mail címre van szüksége.',
@@ -2586,7 +2767,7 @@ sub Data {
         'Inform sender' => 'Küldő tájékoztatása',
         'Send mail' => 'Levél küldése',
 
-        # Template: AgentTicketBulk
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBulk.tt
         'Ticket Bulk Action' => 'Tömeges jegyművelet',
         'Send Email' => 'E-mail küldése',
         'Merge' => 'Egyesítés',
@@ -2598,7 +2779,7 @@ sub Data {
         'Unlock tickets' => 'Jegyek feloldása',
         'Execute Bulk Action' => 'Tömeges művelet végrehajtása',
 
-        # Template: AgentTicketCompose
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
         'Compose Answer for %s%s%s' => 'Válasz írása erre: %s%s%s',
         'This address is registered as system address and cannot be used: %s' =>
             'Ez a cím rendszercímként van regisztrálva és nem használható: %s',
@@ -2615,12 +2796,12 @@ sub Data {
         'Remove Bcc' => 'Rejtett másolat eltávolítása',
         'Date Invalid!' => 'Érvénytelen dátum!',
 
-        # Template: AgentTicketCustomer
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
         'Change Customer of %s%s%s' => '%s%s%s ügyfelének módosítása',
         'Customer Information' => 'Ügyfél-információk',
         'Customer user' => 'Ügyfél-felhasználó',
 
-        # Template: AgentTicketEmail
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
         'Create New Email Ticket' => 'Új e-mail jegy létrehozása',
         'Example Template' => 'Példa sablon',
         'From queue' => 'Várólistából',
@@ -2630,13 +2811,13 @@ sub Data {
         'Remove Ticket Customer User' => 'Jegy ügyfél-felhasználójának eltávolítása',
         'Get all' => 'Összes lekérése',
 
-        # Template: AgentTicketEmailOutbound
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
         'Outbound Email for %s%s%s' => 'Kimenő e-mail ehhez: %s%s%s',
 
-        # Template: AgentTicketEmailResend
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => 'E-mail újraküldése ennél: %s%s%s',
 
-        # Template: AgentTicketEscalation
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
         'Ticket %s: first response time is over (%s/%s)!' => '%s jegy: az első válaszidő lejárt (%s/%s)!',
         'Ticket %s: first response time will be over in %s/%s!' => '%s jegy: az első válaszidő le fog járni: %s/%s!',
         'Ticket %s: update time is over (%s/%s)!' => '%s jegy: a frissítés ideje lejárt (%s/%s)!',
@@ -2644,17 +2825,17 @@ sub Data {
         'Ticket %s: solution time is over (%s/%s)!' => '%s jegy: a megoldási idő lejárt (%s/%s)!',
         'Ticket %s: solution time will be over in %s/%s!' => '%s jegy: a megoldási idő le fog járni: %s/%s!',
 
-        # Template: AgentTicketForward
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketForward.tt
         'Forward %s%s%s' => '%s%s%s továbbítása',
 
-        # Template: AgentTicketHistory
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
         'History of %s%s%s' => '%s%s%s előzményei',
         'Filter for history items' => 'Szűrő az előzményelemekhez',
         'Expand/collapse all' => 'Összes kinyitása vagy összecsukása',
         'CreateTime' => 'Létrehozás ideje',
         'Article' => 'Bejegyzés',
 
-        # Template: AgentTicketMerge
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMerge.tt
         'Merge %s%s%s' => '%s%s%s egyesítése',
         'Merge Settings' => 'Egyesítés beállítások',
         'You need to use a ticket number!' => 'Egy jegyszámot kell használnia!',
@@ -2665,12 +2846,12 @@ sub Data {
         'Inform Sender' => 'Küldő tájékoztatása',
         'Need a valid email address.' => 'Érvényes e-mail cím szükséges.',
 
-        # Template: AgentTicketMove
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
         'Move %s%s%s' => '%s%s%s áthelyezése',
         'New Queue' => 'Új várólista',
         'Move' => 'Áthelyezés',
 
-        # Template: AgentTicketOverviewMedium
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
         'No ticket data found.' => 'Nem található jegyadat.',
         'Open / Close ticket action menu' => 'Jegyművelet menü megnyitása vagy bezárása',
         'Select this ticket' => 'Jegy kijelölése',
@@ -2681,18 +2862,18 @@ sub Data {
         'Move ticket to a different queue' => 'Jegy áthelyezése egy másik várólistába',
         'Change queue' => 'Várólista módosítása',
 
-        # Template: AgentTicketOverviewNavBar
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
         'Remove active filters for this screen.' => 'Aktív szűrők eltávolítása ennél a képernyőnél.',
         'Tickets per page' => 'Jegyek oldalanként',
 
-        # Template: AgentTicketOverviewPreview
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
         'Missing channel' => 'Hiányzó csatorna',
 
-        # Template: AgentTicketOverviewSmall
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewSmall.tt
         'Reset overview' => 'Áttekintő visszaállítása',
         'Column Filters Form' => 'Oszlopszűrők űrlap',
 
-        # Template: AgentTicketPhone
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhone.tt
         'Split Into New Phone Ticket' => 'Felosztás új telefonos jegybe',
         'Save Chat Into New Phone Ticket' => 'Csevegés mentése egy új telefonos jegybe',
         'Create New Phone Ticket' => 'Új telefonos jegy létrehozása',
@@ -2701,21 +2882,21 @@ sub Data {
         'Chat protocol' => 'Csevegés protokoll',
         'The chat will be appended as a separate article.' => 'A csevegés elkülönített bejegyzésként lesz hozzáfűzve.',
 
-        # Template: AgentTicketPhoneCommon
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhoneCommon.tt
         'Phone Call for %s%s%s' => 'Telefonhívás ehhez: %s%s%s',
 
-        # Template: AgentTicketPlain
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPlain.tt
         'View Email Plain Text for %s%s%s' => 'Egyszerű szöveges e-mail megtekintése ennél: %s%s%s',
         'Plain' => 'Egyszerű',
         'Download this email' => 'E-mail letöltése',
 
-        # Template: AgentTicketProcess
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcess.tt
         'Create New Process Ticket' => 'Új folyamatjegy létrehozása',
 
-        # Template: AgentTicketProcessSmall
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcessSmall.tt
         'Enroll Ticket into a Process' => 'Jegy besorolása egy folyamatba',
 
-        # Template: AgentTicketSearch
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketSearch.tt
         'Profile link' => 'Profil hivatkozás',
         'Output' => 'Kimenet',
         'Fulltext' => 'Szabad-szavas',
@@ -2747,7 +2928,7 @@ sub Data {
         'Ticket Escalation Time (between)' => 'Jegy eszkalálási ideje (között)',
         'Archive Search' => 'Archívum keresés',
 
-        # Template: AgentTicketZoom
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
         'Sender Type' => 'Küldőtípus',
         'Save filter settings as default' => 'Szűrőbeállítások mentése alapértelmezettként',
         'Event Type' => 'Eseménytípus',
@@ -2780,13 +2961,13 @@ sub Data {
         'No more events found. Please try changing the filter settings.' =>
             'Nem található több esemény. Próbáljon meg változtatni a szűrő beállításain.',
 
-        # Template: Chat
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/Chat.tt
         '#%s' => '#%s',
         'via %s' => 'ezen keresztül: %s',
         'by %s' => '– %s',
         'Toggle article details' => 'Bejegyzés részleteinek ki- és bekapcsolása',
 
-        # Template: MIMEBase
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
         'This message is being processed. Already tried to send %s time(s). Next try will be %s.' =>
             'Az üzenet feldolgozás alatt van. Már %s alkalommal meg lett kísérelve a küldése. A következő próbálkozás %s múlva lesz.',
         'To open links in the following article, you might need to press Ctrl or Cmd or Shift key while clicking the link (depending on your browser and OS).' =>
@@ -2797,10 +2978,10 @@ sub Data {
         'Unknown' => 'Ismeretlen',
         'View' => 'Nézet',
 
-        # Template: LinkTable
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
         'Linked Objects' => 'Kapcsolt objektumok',
 
-        # Template: TicketInformation
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Archiválás',
         'This ticket is archived.' => 'Ez a jegy archiválva van.',
         'Note: Type is invalid!' => 'Megjegyzés: a típus érvénytelen!',
@@ -2809,7 +2990,7 @@ sub Data {
         '%s Ticket(s)' => '%s jegy',
         'Accounted time' => 'Elszámolt idő',
 
-        # Template: Invalid
+        # Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
         'Preview of this article is not possible because %s channel is missing in the system.' =>
             'A bejegyzés előnézete nem lehetséges, mert %s csatorna hiányzik a rendszeren.',
         'This feature is part of the %s. Please contact us at %s for an upgrade.' =>
@@ -2817,25 +2998,32 @@ sub Data {
         'Please re-install %s package in order to display this article.' =>
             'Telepítse újra a(z) %s csomagot annak érdekében, hogy megjeleníthesse ezt a bejegyzést.',
 
-        # Template: AttachmentBlocker
+        # Template: Kernel/Output/HTML/Templates/Standard/AttachmentBlocker.tt
         'To protect your privacy, remote content was blocked.' => 'Az adatai védelme érdekében a távoli tartalom blokkolva lett.',
         'Load blocked content.' => 'Blokkolt tartalom betöltése.',
 
-        # Template: Breadcrumb
+        # Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => 'Kezdőoldal',
         'Back to admin overview' => 'Vissza az adminisztrációs áttekintőhöz',
 
-        # Template: CloudServicesDisabled
+        # Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
+        'Ticket Creation' => '',
+        'Link' => 'Összekapcsolás',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Link.tt
+        'Remove entry' => 'Bejegyzés eltávolítása',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/CloudServicesDisabled.tt
         'This Feature Requires Cloud Services' => 'Ez a funkció felhőszolgáltatásokat igényel',
         'You can' => 'Lehetőségei',
         'go back to the previous page' => 'visszatérés az előző oldalra',
 
-        # Template: CustomerAccept
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerAccept.tt
         'Dear Customer,' => 'Kedves Ügyfelünk!',
         'thank you for using our services.' => 'Köszönjük, hogy a szolgáltatásainkat használta.',
         'Yes, I accept your license.' => 'Igen, elfogadom a licencet.',
 
-        # Template: TicketCustomerIDSelection
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerCompany/TicketCustomerIDSelection.tt
         'The customer ID is not changeable, no other customer ID can be assigned to this ticket.' =>
             'Az ügyfél-azonosító nem változtatható meg, más ügyfél-azonosító nem rendelhető hozzá ehhez a jegyhez.',
         'First select a customer user, then you can select a customer ID to assign to this ticket.' =>
@@ -2844,22 +3032,21 @@ sub Data {
         'From all Customer IDs' => 'Az összes ügyfél-azonosítóból',
         'From assigned Customer IDs' => 'A hozzárendelt ügyfél-azonosítókból',
 
-        # Template: CustomerError
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'An Error Occurred' => 'Hiba történt',
         'Error Details' => 'Hiba részletei',
         'Traceback' => 'Visszakövetés',
 
-        # Template: CustomerFooter
-        '%s powered by %s™' => '%s gépházában: %s™',
-        'Powered by %s™' => 'A gépházban: %s™',
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
+        'Powered by %s' => '',
 
-        # Template: CustomerFooterJS
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerFooterJS.tt
         '%s detected possible network issues. You could either try reloading this page manually or wait until your browser has re-established the connection on its own.' =>
             'A(z) %s lehetséges hálózati problémákat észlelt. Megpróbálhatja újratölteni ezt az oldalt kézzel, vagy megvárhatja, amíg a böngészője saját maga létesíti újra a kapcsolatot.',
         'The connection has been re-established after a temporary connection loss. Due to this, elements on this page could have stopped to work correctly. In order to be able to use all elements correctly again, it is strongly recommended to reload this page.' =>
             'A kapcsolat ismét kiépítésre került, miután egy átmeneti kapcsolat elveszett. Emiatt az oldalon lévő elemek esetleg nem fognak helyesen működni. Annak érdekében, hogy ismét képes legyen minden elemet helyesen használni, erősen ajánlott az oldal újratöltése.',
 
-        # Template: CustomerLogin
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
         'JavaScript Not Available' => 'JavaScript nem érhető el',
         'In order to experience this software, you\'ll need to enable JavaScript in your browser.' =>
             'Annak érdekében, hogy megtapasztalja ezt a szoftvert, szükséges lesz engedélyeznie a JavaScriptet a böngészőben.',
@@ -2890,20 +3077,20 @@ sub Data {
         'Your Last Name' => 'A vezetékneve',
         'Your email address (this will become your username)' => 'Az e-mail címe (ez lesz a felhasználóneve)',
 
-        # Template: CustomerNavigationBar
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerNavigationBar.tt
         'Incoming Chat Requests' => 'Bejövő csevegés kérések',
         'Edit personal preferences' => 'Személyes beállítások szerkesztése',
         'Logout %s' => 'Kilépés: %s',
 
-        # Template: CustomerTicketMessage
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
         'Service level agreement' => 'Szolgáltatási megállapodás',
 
-        # Template: CustomerTicketOverview
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketOverview.tt
         'Welcome!' => 'Üdvözöljük!',
         'Please click the button below to create your first ticket.' => 'Kattintson a lenti gombra az első jegy létrehozásához.',
         'Create your first ticket' => 'Első jegy létrehozása',
 
-        # Template: CustomerTicketSearch
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => 'például 10*5155 vagy 105658*',
         'CustomerID' => 'Ügyfél-azonosító',
@@ -2924,44 +3111,38 @@ sub Data {
         'Pick a profile name' => 'Válasszon egy profilnevet',
         'Output to' => 'Kimenet ide',
 
-        # Template: CustomerTicketSearchResultShort
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearchResultShort.tt
         'of' => '/',
         'Page' => 'Oldal',
         'Search Results for' => 'Keresési eredmények ennél',
         'Remove this Search Term.' => 'A keresési kifejezés eltávolítása.',
 
-        # Template: CustomerTicketZoom
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketZoom.tt
         'Start a chat from this ticket' => 'Csevegés indítása ebből a jegyből',
         'Next Steps' => 'Következő lépések',
         'Reply' => 'Válasz',
 
-        # Template: Chat
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketZoom/ArticleRender/Chat.tt
         'Expand article' => 'Bejegyzés kinyitása',
 
-        # Template: CustomerWarning
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerWarning.tt
         'Warning' => 'Figyelmeztetés',
 
-        # Template: DashboardEventsTicketCalendar
+        # Template: Kernel/Output/HTML/Templates/Standard/DashboardEventsTicketCalendar.tt
         'Event Information' => 'Esemény információk',
         'Ticket fields' => 'Jegymezők',
 
-        # Template: Error
-        'Really a bug? 5 out of 10 bug reports result from a wrong or incomplete installation of OTRS.' =>
-            'Valóban hiba? 10-ből 5 hibajelentés az OTRS hibás vagy befejezetlen telepítéséből származik.',
-        'With %s, our experts take care of correct installation and cover your back with support and periodic security updates.' =>
-            'Az %s használatával a szakértőink gondoskodnak a jelenlegi telepítésről, és támogatást nyújtanak, valamint rendszeres biztonsági frissítéseket biztosítanak.',
-        'Contact our service team now.' => 'Vegye fel a kapcsolatot a szolgáltatási csapatunkkal most.',
-        'Send a bugreport' => 'Hibajelentés küldése',
+        # Template: Kernel/Output/HTML/Templates/Standard/Error.tt
         'Expand' => 'Kinyitás',
 
-        # Template: AttachmentList
+        # Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
         'Click to delete this attachment.' => 'Kattintson a melléklet törléséhez.',
 
-        # Template: DraftButtons
+        # Template: Kernel/Output/HTML/Templates/Standard/FormElements/DraftButtons.tt
         'Update draft' => 'Piszkozat frissítése',
         'Save as new draft' => 'Mentés új piszkozatként',
 
-        # Template: DraftNotifications
+        # Template: Kernel/Output/HTML/Templates/Standard/FormElements/DraftNotifications.tt
         'You have loaded the draft "%s".' => 'Betöltötte a következő piszkozatot: „%s”.',
         'You have loaded the draft "%s". You last changed it %s.' => 'Betöltötte a következő piszkozatot: „%s”. Utoljára %s-kor változtatta meg.',
         'You have loaded the draft "%s". It was last changed %s by %s.' =>
@@ -2969,15 +3150,14 @@ sub Data {
         'Please note that this draft is outdated because the ticket was modified since this draft was created.' =>
             'Ne feledje, hogy ez a piszkozat elavult, mert a jegyet módosították a piszkozat létrehozása óta.',
 
-        # Template: Header
+        # Template: Kernel/Output/HTML/Templates/Standard/Header.tt
         'View notifications' => 'Értesítések megtekintése',
-        'Notifications' => 'Értesítések',
-        'Notifications (OTRS Business Solution™)' => 'Értesítések (OTRS Business Solution™)',
         'Personal preferences' => 'Személyes beállítások',
         'Logout' => 'Kilépés',
         'You are logged in as' => 'Belépett a következő néven:',
+        'Last viewed' => '',
 
-        # Template: Installer
+        # Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript nem érhető el',
         'Step %s' => '%s. lépés',
         'License' => 'Licenc',
@@ -2985,17 +3165,11 @@ sub Data {
         'General Specifications and Mail Settings' => 'Általános specifikációk és levelezési beállítások',
         'Finish' => 'Befejezés',
         'Welcome to %s' => 'Üdvözli a(z) %s',
-        'Germany' => 'Németország',
         'Phone' => 'Telefon',
-        'United States' => 'Egyesült Államok',
-        'Mexico' => 'Mexikó',
-        'Hungary' => 'Magyarország',
-        'Brazil' => 'Brazília',
-        'Singapore' => 'Szingapúr',
-        'Hong Kong' => 'Hongkong',
         'Web site' => 'Weboldal',
+        'Community' => '',
 
-        # Template: InstallerConfigureMail
+        # Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => 'Kimenő levél beállítása',
         'Outbound mail type' => 'Kimenő levél típusa',
         'Select outbound mail type.' => 'Válassza ki a kimenő levél típusát.',
@@ -3022,17 +3196,17 @@ sub Data {
         'Check mail configuration' => 'Levélbeállítás ellenőrzése',
         'Skip this step' => 'Lépés kihagyása',
 
-        # Template: InstallerDBResult
+        # Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Kész',
         'Error' => 'Hiba',
         'Database setup successful!' => 'Az adatbázis beállítása sikeres!',
 
-        # Template: InstallerDBStart
+        # Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
         'Install Type' => 'Telepítés típusa',
         'Create a new database for OTRS' => 'Új adatbázis létrehozása az OTRS-hez',
         'Use an existing database for OTRS' => 'Meglévő adatbázis használata az OTRS-hez',
 
-        # Template: InstallerDBmssql
+        # Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmssql.tt
         'If you have set a root password for your database, it must be entered here. If not, leave this field empty.' =>
             'Ha az adatbázishoz rendszergazda jelszót állított be, akkor azt itt meg kell adni. Ha nem, hagyja üresen ezt a mezőt.',
         'Database name' => 'Adatbázis neve',
@@ -3046,26 +3220,25 @@ sub Data {
         'Repeat Password' => 'Jelszó ismétlése',
         'Generated password' => 'Előállított jelszó',
 
-        # Template: InstallerDBmysql
+        # Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmysql.tt
         'Passwords do not match' => 'A jelszavak nem egyeznek',
 
-        # Template: InstallerDBoracle
+        # Template: Kernel/Output/HTML/Templates/Standard/InstallerDBoracle.tt
         'SID' => 'SID',
         'Port' => 'Port',
 
-        # Template: InstallerFinish
+        # Template: Kernel/Output/HTML/Templates/Standard/InstallerFinish.tt
         'To be able to use OTRS you have to enter the following line in your command line (Terminal/Shell) as root.' =>
             'Ahhoz, hogy az OTRS-t használni tudja, a következő parancsot kell begépelnie a parancssorba (terminálban/parancsértelmezőben) rendszergazdaként.',
         'Restart your webserver' => 'Indítsa újra a webkiszolgálót',
         'After doing so your OTRS is up and running.' => 'Miután ezt megtette, az OTRS készen áll és fut.',
         'Start page' => 'Kezdőoldal',
-        'Your OTRS Team' => 'Az OTRS csapata',
 
-        # Template: InstallerLicense
+        # Template: Kernel/Output/HTML/Templates/Standard/InstallerLicense.tt
         'Don\'t accept license' => 'Licenc elutasítása',
         'Accept license and continue' => 'Licenc elfogadása és folytatás',
 
-        # Template: InstallerSystem
+        # Template: Kernel/Output/HTML/Templates/Standard/InstallerSystem.tt
         'SystemID' => 'Rendszer azonosító',
         'The identifier of the system. Each ticket number and each HTTP session ID contain this number.' =>
             'A rendszer azonosítója. Minden jegyszám és minden HTTP munkamenet-azonosító tartalmazza ezt a számot.',
@@ -3085,74 +3258,73 @@ sub Data {
         'Email addresses that are manually entered are checked against the MX records found in DNS. Don\'t use this option if your DNS is slow or does not resolve public addresses.' =>
             'A kézzel megadott e-mail címek ellenőrzése a DNS-ben található MX rekordokkal. Ne használja ezt a lehetőséget, ha a DNS lassú, vagy nem oldja fel a nyilvános címeket.',
 
-        # Template: LinkObject
+        # Template: Kernel/Output/HTML/Templates/Standard/LinkObject.tt
         'Delete link' => 'Kapcsolat törlése',
         'Delete Link' => 'Kapcsolat törlése',
         'Object#' => 'Objektum#',
         'Add links' => 'Kapcsolatok hozzáadása',
         'Delete links' => 'Kapcsolatok törlése',
 
-        # Template: Login
+        # Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => 'Elfelejtette a jelszavát?',
         'Back to login' => 'Vissza a bejelentkezéshez',
 
-        # Template: MetaFloater
+        # Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => 'Előnézet tartalmának méretezése',
         'Open URL in new tab' => 'URL megnyitása új lapon',
         'Close preview' => 'Előnézet bezárása',
         'A preview of this website can\'t be provided because it didn\'t allow to be embedded.' =>
             'Ennek a weboldalnak nem lehet biztosítani az előnézetét, mert nem engedte meg a beágyazását.',
 
-        # Template: MobileNotAvailableWidget
+        # Template: Kernel/Output/HTML/Templates/Standard/MobileNotAvailableWidget.tt
         'Feature not Available' => 'A szolgáltatás nem érhető el',
         'Sorry, but this feature of OTRS is currently not available for mobile devices. If you\'d like to use it, you can either switch to desktop mode or use your regular desktop device.' =>
             'Sajnáljuk, de az OTRS ezen szolgáltatása jelenleg nem érhető el mobil készülékekről. Ha használni szeretné, akkor vagy váltson asztali módra, vagy használja a megszokott asztali eszközét.',
 
-        # Template: Motd
+        # Template: Kernel/Output/HTML/Templates/Standard/Motd.tt
         'Message of the Day' => 'A nap üzenete',
         'This is the message of the day. You can edit this in %s.' => 'Ez a nap üzenete. Ezt a %s fájlban szerkesztheti.',
 
-        # Template: NoPermission
+        # Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => 'Nincs elegendő joga',
         'Back to the previous page' => 'Vissza az előző oldalra',
 
-        # Template: Alert
+        # Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => 'Riasztás',
         'Powered by' => 'A gépházban:',
 
-        # Template: Pagination
+        # Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
         'Show first page' => 'Első oldal megjelenítése',
         'Show previous pages' => 'Előző oldalak megjelenítése',
         'Show page %s' => '%s. oldal megjelenítése',
         'Show next pages' => 'Következő oldalak megjelenítése',
         'Show last page' => 'Utolsó oldal megjelenítése',
 
-        # Template: PictureUpload
+        # Template: Kernel/Output/HTML/Templates/Standard/PictureUpload.tt
         'Need FormID!' => 'Űrlap-azonosító szükséges!',
         'No file found!' => 'Nem található fájl!',
         'The file is not an image that can be shown inline!' => 'A fájl nem olyan kép, amelyet beágyazva meg lehetne jeleníteni!',
 
-        # Template: PreferencesNotificationEvent
+        # Template: Kernel/Output/HTML/Templates/Standard/PreferencesNotificationEvent.tt
         'No user configurable notifications found.' => 'Nem találhatók felhasználó által beállítható értesítések.',
         'Receive messages for notification \'%s\' by transport method \'%s\'.' =>
             'Üzenetek fogadása a(z) „%s” értesítéshez a(z) „%s” átviteli módszerrel.',
 
-        # Template: ActivityDialogHeader
+        # Template: Kernel/Output/HTML/Templates/Standard/ProcessManagement/ActivityDialogHeader.tt
         'Process Information' => 'Folyamatinformációk',
         'Dialog' => 'Párbeszéd',
 
-        # Template: Article
+        # Template: Kernel/Output/HTML/Templates/Standard/ProcessManagement/Article.tt
         'Inform Agent' => 'Ügyintéző tájékoztatása',
 
-        # Template: PublicDefault
+        # Template: Kernel/Output/HTML/Templates/Standard/PublicDefault.tt
         'Welcome' => 'Üdvözöljük',
         'This is the default public interface of OTRS! There was no action parameter given.' =>
             'Ez az OTRS alapértelmezett nyilvános felülete! Nem került megadásra műveleti paraméter.',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             'Telepíthetne egy olyan egyéni nyilvános modult (a csomagkezelőn keresztül), amelynek van nyilvános felülete, mint például a GyIK modulnak.',
 
-        # Template: GeneralSpecificationsWidget
-        'Permissions' => 'Jogosultságok',
+        # Template: Kernel/Output/HTML/Templates/Standard/Statistics/GeneralSpecificationsWidget.tt
         'You can select one or more groups to define access for different agents.' =>
             'Kiválaszthat egy vagy több csoportot a hozzáférés meghatározásához a különböző ügyintézőknél.',
         'Result formats' => 'Eredmény formátumok',
@@ -3174,7 +3346,7 @@ sub Data {
             'Ne feledje, hogy a vezérlőpult felületi elem engedélyezése aktiválni fogja a statisztika gyorsítótárának használatát a vezérlőpulton.',
         'If set to invalid end users can not generate the stat.' => 'Ha érvénytelenre állítja, a végfelhasználók nem tudják a statisztikát előállítani.',
 
-        # Template: PreviewWidget
+        # Template: Kernel/Output/HTML/Templates/Standard/Statistics/PreviewWidget.tt
         'There are problems in the configuration of this statistic:' => 'Problémák vannak ennek a statisztikának a beállításaiban:',
         'You may now configure the X-axis of your statistic.' => 'Most beállíthatja a statisztika X-tengelyét.',
         'This statistic does not provide preview data.' => 'Ez a statisztika nem szolgáltat előnézeti adatokat.',
@@ -3187,7 +3359,7 @@ sub Data {
         'Y-axis' => 'Y-tengely',
         'Configure Filter' => 'Szűrő beállítása',
 
-        # Template: RestrictionsWidget
+        # Template: Kernel/Output/HTML/Templates/Standard/Statistics/RestrictionsWidget.tt
         'Please select only one element or turn off the button \'Fixed\'.' =>
             'Csak egyetlen elemet válasszon, vagy kapcsolja ki a „Rögzített” gombot.',
         'Absolute period' => 'Abszolút időszak',
@@ -3198,7 +3370,7 @@ sub Data {
         'Do not allow changes to this element when the statistic is generated.' =>
             'Ne tegyen lehetővé változtatásokat ezen az elemen, amikor a statisztikát előállítják.',
 
-        # Template: StatsParamsWidget
+        # Template: Kernel/Output/HTML/Templates/Standard/Statistics/StatsParamsWidget.tt
         'Format' => 'Formátum',
         'Exchange Axis' => 'Tengelyek felcserélése',
         'Configurable Params of Static Stat' => 'Statikus statisztika beállítható paraméterei',
@@ -3207,21 +3379,21 @@ sub Data {
         'show more' => 'több megjelenítése',
         'show less' => 'kevesebb megjelenítése',
 
-        # Template: D3
+        # Template: Kernel/Output/HTML/Templates/Standard/Statistics/StatsResultRender/D3.tt
         'Download SVG' => 'SVG letöltése',
         'Download PNG' => 'PNG letöltése',
 
-        # Template: XAxisWidget
+        # Template: Kernel/Output/HTML/Templates/Standard/Statistics/XAxisWidget.tt
         'The selected time period defines the default time frame for this statistic to collect data from.' =>
             'A kijelölt időszak határozza meg azt az alapértelmezett időkeretet ennél a statisztikánál, amelyből az adatokat begyűjti.',
         'Defines the time unit that will be used to split the selected time period into reporting data points.' =>
             'Azt az időegységet határozza meg, amely a kijelölt időszaknak jelentési adatpontokba történő felosztásához lesz használva.',
 
-        # Template: YAxisWidget
+        # Template: Kernel/Output/HTML/Templates/Standard/Statistics/YAxisWidget.tt
         'Please remember that the scale for the Y-axis has to be larger than the scale for the X-axis (e.g. X-axis => Month, Y-Axis => Year).' =>
             'Ne feledje, hogy az Y-tengely méretezésének nagyobbnak kell lennie az X-tengely méretezésénél (például X-tengely => Hónap, Y-tengely => Év).',
 
-        # Template: SettingsList
+        # Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
         'This setting is disabled.' => 'Ez a beállítás le van tiltva.',
         'This setting is fixed but not deployed yet!' => 'Ez a beállítás javítva lett, de még nincs üzembe állítva!',
         'This setting is currently being overridden in %s and can\'t thus be changed here!' =>
@@ -3257,21 +3429,21 @@ sub Data {
         'This group doesn\'t contain any settings. Please try navigating to one of its sub groups or another group.' =>
             'Ez a csoport nem tartalmaz egyetlen beállítást sem. Próbáljon meg az alcsoportjai egyikére vagy egy másik csoportra navigálni.',
 
-        # Template: SettingsListCompare
+        # Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsListCompare.tt
         'Now' => 'Most',
         'User modification' => 'Felhasználó-módosítás',
         'enabled' => 'engedélyezve',
         'disabled' => 'letiltva',
         'Setting state' => 'Beállítás állapota',
 
-        # Template: Actions
+        # Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/Sidebar/Actions.tt
         'Edit search' => 'Keresés szerkesztése',
         'Go back to admin: ' => 'Vissza az adminisztrációhoz: ',
         'Deployment' => 'Üzembe állítás',
         'My favourite settings' => 'Kedvenc beállításaim',
         'Invalid settings' => 'Érvénytelen beállítások',
 
-        # Template: DynamicActions
+        # Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/Sidebar/DynamicActions.tt
         'Filter visible settings...' => 'Látható beállítások szűrése…',
         'Enable edit mode for all settings' => 'Szerkesztőmód engedélyezése az összes beállításnál',
         'Save all edited settings' => 'Az összes szerkesztett beállítás mentése',
@@ -3279,7 +3451,7 @@ sub Data {
         'All actions from this widget apply to the visible settings on the right only.' =>
             'Ebből a felületi elemből az összes művelet csak a jobb oldalon látható beállításokra lesz alkalmazva.',
 
-        # Template: Help
+        # Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/Sidebar/Help.tt
         'Currently edited by me.' => 'Jelenleg én szerkesztem.',
         'Modified but not yet deployed.' => 'Módosított, de még nem üzembe állított.',
         'Currently edited by another user.' => 'Jelenleg másik felhasználó által szerkesztve.',
@@ -3287,20 +3459,19 @@ sub Data {
         'Save current setting.' => 'Jelenlegi beállítás mentése.',
         'Cancel editing current setting.' => 'Jelenlegi beállítás szerkesztésének megszakítása.',
 
-        # Template: Navigation
+        # Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/Sidebar/Navigation.tt
         'Navigation' => 'Navigáció',
 
-        # Template: OTRSBusinessTeaser
-        'With %s, System Configuration supports versioning, rollback and user-specific configuration settings.' =>
-            'Az %s használatával a rendszerbeállítások támogatják a verziókövetést, visszaállítást és a felhasználóra jellemző konfigurációs beállításokat.',
-
-        # Template: Test
+        # Template: Kernel/Output/HTML/Templates/Standard/Test.tt
         'OTRS Test Page' => 'OTRS tesztoldal',
         'Unlock' => 'Feloldás',
         'Welcome %s %s' => 'Üdvözli a(z) %s %s',
         'Counter' => 'Számláló',
 
-        # Template: Warning
+        # Template: Kernel/Output/HTML/Templates/Standard/Ticket/TimeUnits.tt
+        'Invalid time!' => 'Érvénytelen időpont!',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/Warning.tt
         'Go back to the previous page' => 'Vissza az előző oldalra',
 
         # JS Template: CalendarSettingsDialog
@@ -3519,9 +3690,6 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminDynamicField.pm
         'Fields configuration is not valid' => 'A mezők beállítása nem érvényes',
         'Objects configuration is not valid' => 'Az objektumok beállítása nem érvényes',
-        'Database (%s)' => 'Adatbázis (%s)',
-        'Web service (%s)' => 'Webszolgáltatás (%s)',
-        'Contact with data (%s)' => 'Partneradatok (%s)',
         'Could not reset Dynamic Field order properly, please check the error log for more details.' =>
             'Nem sikerült megfelelően visszaállítani a dinamikus mező sorrendjét. További részletekért nézze meg a hibanaplót.',
 
@@ -3549,6 +3717,23 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminDynamicFieldDropdown.pm
         'This field value is duplicated.' => 'Ez a mezőérték kettőzött.',
+
+        # Perl Module: Kernel/Modules/AdminDynamicFieldScreenConfiguration.pm
+        'Settings were saved.' => '',
+        'System was not able to save the setting!' => '',
+        'Setting is locked by another user!' => 'A beállítást egy másik felhasználó zárolta!',
+        'System was not able to reset the setting!' => 'A rendszer nem volt képes visszaállítani a beállítást!',
+        'Settings were reset.' => '',
+        'Screens for dynamic field %s' => '',
+        'Dynamic fields for screen %s' => '',
+        'Default columns for screen %s' => '',
+
+        # Perl Module: Kernel/Modules/AdminDynamicFieldWebservice.pm
+        'Could not get config for dynamic field %s' => '',
+        'The field must contain only ASCII letters and numbers.' => '',
+        'Dynamic field is configured more than once.' => '',
+        'Dynamic field does not exist or is invalid.' => '',
+        'Only dynamic fields for tickets are allowed.' => '',
 
         # Perl Module: Kernel/Modules/AdminEmail.pm
         'Select at least one recipient.' => 'Válasszon legalább egy címzettet.',
@@ -3735,6 +3920,9 @@ sub Data {
         'Invisible to customer' => 'Láthatatlan az ügyfélnek',
         'Visible to customer' => 'Látható az ügyfélnek',
 
+        # Perl Module: Kernel/Modules/AdminOAuth2TokenManagement.pm
+        'Authorization code parameters not found.' => '',
+
         # Perl Module: Kernel/Modules/AdminOTRSBusiness.pm
         'Your system was successfully upgraded to %s.' => 'A rendszere sikeresen frissítve lett a következő verzióra: %s.',
         'There was a problem during the upgrade to %s.' => 'Hiba történt az %s verzióra való frissítés közben.',
@@ -3867,7 +4055,6 @@ sub Data {
         'Could not get data for TransitionID %s' => 'Nem sikerült lekérni az adatokat az átmenet-azonosítóhoz: %s',
         'There was an error updating the Transition' => 'Hiba történt az átmenet frissítésekor',
         'Edit Transition "%s"' => 'Átmenet szerkesztése: „%s”',
-        'Transition validation module' => 'Átmenet-ellenőrző modul',
 
         # Perl Module: Kernel/Modules/AdminProcessManagementTransitionAction.pm
         'At least one valid config parameter is required.' => 'Legalább egy érvényes beállítási paraméter szükséges.',
@@ -3970,13 +4157,16 @@ sub Data {
             'Nem dolgozhat ezzel a beállítással, mert jelenleg %s (%s) dolgozik vele.',
         'Missing setting name!' => 'Hiányzó beállításnév!',
         'Missing ResetOptions!' => 'Hiányzó visszaállítási lehetőségek!',
-        'Setting is locked by another user!' => 'A beállítást egy másik felhasználó zárolta!',
         'System was not able to lock the setting!' => 'A rendszer nem volt képes zárolni a beállítást!',
-        'System was not able to reset the setting!' => 'A rendszer nem volt képes visszaállítani a beállítást!',
         'System was unable to update setting!' => 'A rendszer nem tudta frissíteni a beállítást!',
         'Missing setting name.' => 'Hiányzó beállításnév.',
         'Setting not found.' => 'A beállítás nem található.',
         'Missing Settings!' => 'Hiányzó beállítások!',
+
+        # Perl Module: Kernel/Modules/AdminSystemFiles.pm
+        'Package files - %s' => '',
+        '(Files where only the permissions have been changed will not be displayed.)' =>
+            '',
 
         # Perl Module: Kernel/Modules/AdminSystemMaintenance.pm
         'Start date shouldn\'t be defined after Stop date!' => 'A kezdődátumot nem lehet a végdátum utánra meghatározni!',
@@ -4190,6 +4380,9 @@ sub Data {
         # Perl Module: Kernel/Modules/AgentTicketMove.pm
         'You need move permissions!' => 'Áthelyezés jogosultságokra van szüksége!',
 
+        # Perl Module: Kernel/Modules/AgentTicketOwnerView.pm
+        'My Owned Tickets' => '',
+
         # Perl Module: Kernel/Modules/AgentTicketPhone.pm
         'Chat is not active.' => 'A csevegés nem aktív.',
         'No permission.' => 'Nincs jogosultság.',
@@ -4257,6 +4450,8 @@ sub Data {
         'Missing ProcessEntityID in Ticket %s!' => 'Hiányzó folyamategyed-azonosító a következő jegyben: %s!',
         'Could not set DynamicField value for %s of Ticket with ID "%s" in ActivityDialog "%s"!' =>
             'Nem sikerült beállítani a(z) %s dinamikus mező értékét, amely a(z) „%s” azonosítójú jegyhez tartozik a(z) „%s” tevékenység párbeszédben!',
+        'Could not set attachments for ticket with ID %s in activity dialog "%s"!' =>
+            '',
         'Could not set PendingTime for Ticket with ID "%s" in ActivityDialog "%s"!' =>
             'Nem sikerült beállítani a várakozási időt a(z) „%s” azonosítójú jegynél a(z) „%s” tevékenység párbeszédben!',
         'Wrong ActivityDialog Field config: %s can\'t be Display => 1 / Show field (Please change its configuration to be Display => 0 / Do not show field or Display => 2 / Show field as mandatory)!' =>
@@ -4367,7 +4562,6 @@ sub Data {
         'Show one article' => 'Egy bejegyzés megjelenítése',
         'Show all articles' => 'Összes bejegyzés megjelenítése',
         'Show Ticket Timeline View' => 'Jegy idővonal nézet megjelenítése',
-        'Show Ticket Timeline View (%s)' => 'Jegy idővonal nézetének megjelenítése (%s)',
 
         # Perl Module: Kernel/Modules/AjaxAttachment.pm
         'Got no FormID.' => 'Nem érkezett űrlap-azonosító.',
@@ -4619,6 +4813,7 @@ sub Data {
         'Show Tree Selection' => 'Fakijelölés megjelenítése',
         'Split Quote' => 'Idézet felosztása',
         'Remove Quote' => 'Idézés eltávolítása',
+        'Last Views' => '',
 
         # Perl Module: Kernel/Output/HTML/Layout/LinkObject.pm
         'Linked as' => 'Összekapcsolva mint',
@@ -4637,7 +4832,6 @@ sub Data {
         'Archive search' => 'Archívum keresés',
 
         # Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
-        '%s Upgrade to %s now! %s' => '%s Frissítés erre most: %s! %s',
         'Please verify your license data!' => 'Ellenőrizze a licencadatait!',
         'The license for your %s is about to expire. Please make contact with %s to renew your contract!' =>
             'Az Ön %s licence hamarosan lejár. A szerződés megújításához vegye fel a kapcsolatot a következővel: %s!',
@@ -4665,13 +4859,13 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Notification/DaemonCheck.pm
         'OTRS Daemon is not running.' => 'Az OTRS démon nem fut.',
 
+        # Perl Module: Kernel/Output/HTML/Notification/OAuth2TokenManagementTokenExpired.pm
+        'OAuth2 token for "%s" has expired.' => '',
+        'OAuth2 refresh token for "%s" has expired.' => '',
+
         # Perl Module: Kernel/Output/HTML/Notification/OutofOfficeCheck.pm
         'You have Out of Office enabled, would you like to disable it?' =>
             'Engedélyezte az Irodán kívül funkciót, szeretné letiltani azt?',
-
-        # Perl Module: Kernel/Output/HTML/Notification/PackageManagerCheckNotVerifiedPackages.pm
-        'The installation of packages which are not verified by the OTRS Group is activated. These packages could threaten your whole system! It is recommended not to use unverified packages.' =>
-            'Aktiválva lett azoknak a csomagoknak a telepítése, amelyeket nem ellenőrzött az OTRS csoport. Ezek a csomagok veszélyt jelenthetnek a teljes rendszerre! Nem ajánlott az ellenőrizetlen csomagok használata.',
 
         # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationInvalidCheck.pm
         'You have %s invalid setting(s) deployed. Click here to show invalid settings.' =>
@@ -4780,6 +4974,11 @@ sub Data {
         'Locked Tickets Reminder Reached' => 'Zárolt jegyek (emlékeztető elérve)',
         'Locked Tickets Total' => 'Zárolt jegyek (összes)',
 
+        # Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
+        'Owned Tickets New' => '',
+        'Owned Tickets Reminder Reached' => '',
+        'Owned Tickets Total' => '',
+
         # Perl Module: Kernel/Output/HTML/ToolBar/TicketResponsible.pm
         'Responsible Tickets New' => 'Felelős jegyek (új)',
         'Responsible Tickets Reminder Reached' => 'Felelős jegyek (emlékeztető elérve)',
@@ -4871,10 +5070,6 @@ sub Data {
         'File is not installed!' => 'A fájl nincs telepítve!',
         'File is different!' => 'A fájl eltérő!',
         'Can\'t read file!' => 'Nem olvasható a fájl!',
-        '<p>If you continue to install this package, the following issues may occur:</p><ul><li>Security problems</li><li>Stability problems</li><li>Performance problems</li></ul><p>Please note that issues that are caused by working with this package are not covered by OTRS service contracts.</p>' =>
-            '<p>Ha folytatja a csomag telepítését, a következő hibák fordulhatnak elő!</p><ul><li>Biztonsági problémák</li><li>Stabilitási problémák</li><li>Teljesítmény problémák</li></ul><p>Vegye figyelembe, hogy a csomag használata során felmerülő problémákra nem vonatkozik az OTRS szolgáltatási szerződése!</p>',
-        '<p>The installation of packages which are not verified by the OTRS Group is not possible by default. You can activate the installation of not verified packages via the "AllowNotVerifiedPackages" system configuration setting.</p>' =>
-            '<p>Alapértelmezetten nem lehetséges azoknak a csomagoknak a telepítése, amelyeket nem ellenőrzött az OTRS csoport. A nem ellenőrzött csomagok telepítést az „AllowNotVerifiedPackages” rendszerbeállításon keresztül aktiválhatja.</p>',
 
         # Perl Module: Kernel/System/ProcessManagement/DB/Process.pm
         'The process "%s" and all of its data has been imported successfully.' =>
@@ -5013,11 +5208,6 @@ sub Data {
         'Maximum Query Size' => 'Legnagyobb lekérdezési méret',
         'The setting \'max_allowed_packet\' must be higher than 64 MB.' =>
             'A „max_allowed_packet” beállításnak nagyobbnak kell lennie mint 64 MB.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Performance.pm
-        'Query Cache Size' => 'Lekérdezési gyorsítótár méret',
-        'The setting \'query_cache_size\' should be used (higher than 10 MB but not more than 512 MB).' =>
-            'A „query_cache_size” beállítást használni kell (nagyobb mint 10 MB, de nem több mint 512 MB).',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/StorageEngine.pm
         'Default Storage Engine' => 'Alapértelmezett tárolómotor',
@@ -5570,6 +5760,10 @@ sub Data {
         'Do you really want to delete this notification language?' => 'Valóban törölni szeretné ezt az értesítési nyelvet?',
         'Do you really want to delete this notification?' => 'Valóban törölni szeretné ezt az értesítést?',
 
+        # JS File: Core.Agent.Admin.OAuth2TokenManagement
+        'Do you really want to delete this token and its configuration?' =>
+            '',
+
         # JS File: Core.Agent.Admin.PGP
         'Do you really want to delete this key?' => 'Valóban törölni szeretné ezt a kulcsot?',
 
@@ -5623,6 +5817,7 @@ sub Data {
         'Customer interface does not support articles not visible for customers.' =>
             'Az ügyfélfelület nem támogatja az ügyfeleknek nem látható bejegyzéseket.',
         'Sorry, the only existing parameter can\'t be removed.' => 'Sajnáljuk, de az egyetlen meglévő paramétert nem lehet eltávolítani.',
+        'Are you sure you want to overwrite the config parameters?' => '',
 
         # JS File: Core.Agent.Admin.SMIME
         'Do you really want to delete this certificate?' => 'Valóban törölni szeretné ezt a tanúsítványt?',
@@ -5636,7 +5831,6 @@ sub Data {
         'It was not possible to generate the Support Bundle.' => 'Nem volt lehetséges a támogatási csomag előállítása.',
         'Generate Result' => 'Előállítás eredménye',
         'Support Bundle' => 'Támogatási csomag',
-        'The mail could not be sent' => 'A levelet nem sikerült elküldeni',
 
         # JS File: Core.Agent.Admin.SysConfig.Entity
         'It is not possible to set this entry to invalid. All affected configuration settings have to be changed beforehand.' =>
@@ -5919,7 +6113,6 @@ Az Ön segélyszolgálat csapata
         '(UserLogin) Firstname Lastname' => '(Felhasználónév) Keresztnév Vezetéknév',
         '(UserLogin) Lastname Firstname' => '(Felhasználónév) Vezetéknév Keresztnév',
         '(UserLogin) Lastname, Firstname' => '(Felhasználónév) Vezetéknév, Keresztnév',
-        '*** out of office until %s (%s d left) ***' => '*** irodán kívül eddig: %s (%s nap van hátra) ***',
         '0 - Disabled' => '0 – Letiltva',
         '1 - Available' => '1 – Elérhető',
         '1 - Enabled' => '1 – Engedélyezve',
@@ -5941,7 +6134,11 @@ Az Ön segélyszolgálat csapata
         'A picture' => 'Egy kép',
         'ACL module that allows closing parent tickets only if all its children are already closed ("State" shows which states are not available for the parent ticket until all child tickets are closed).' =>
             'Egy ACL modul, amely csak akkor engedélyezi a szülőjegyek lezárását, ha már minden gyermekjegyük le van zárva (a „State” azt jelzi, hogy mely állapotok nem érhetők el a szülőjegyhez, amíg minden gyermekjegy le nincs zárva).',
+        'AJAX functions for notification event transport web service.' =>
+            '',
+        'AJAX interface for the web service dynamic field backends.' => '',
         'Access Control Lists (ACL)' => 'Hozzáférés-vezérlési listák (ACL)',
+        'Access package repositories via HTTP or HTTPS.' => '',
         'AccountedTime' => 'Elszámolt idő',
         'Activates a blinking mechanism of the queue that contains the oldest ticket.' =>
             'A legrégebbi jegyet tartalmazó várólista villogási mechanizmusát aktiválja.',
@@ -5958,6 +6155,8 @@ Az Ön segélyszolgálat csapata
         'Activates the ticket archive system to have a faster system by moving some tickets out of the daily scope. To search for these tickets, the archive flag has to be enabled in the ticket search.' =>
             'A jegyarchiváló rendszert aktiválja, hogy felgyorsítsa a rendszert néhány jegy áthelyezésével a napi áttekintőből.',
         'Activates time accounting.' => 'Az időelszámolást aktiválja.',
+        'Activates week number for datepickers.' => '',
+        'Activation of dynamic fields for screens.' => '',
         'ActivityID' => 'Tevékenység-azonosító',
         'Add a note to this ticket' => 'Jegyzet hozzáadása a jegyhez',
         'Add an inbound phone call to this ticket' => 'Bejövő telefonhívás hozzáadása ehhez a jegyhez',
@@ -5981,12 +6180,16 @@ Az Ön segélyszolgálat csapata
         'Adds the permanent vacation days for the indicated calendar.' =>
             'Hozzáadja az állandó munkaszüneti napokat a jelzett naptárhoz.',
         'Adds the permanent vacation days.' => 'Hozzáadja az állandó munkaszüneti napokat.',
+        'Adds ticket attribute relations based on CSV/Excel data.' => '',
         'Admin' => 'Adminisztráció',
         'Admin Area.' => 'Adminisztrációs terület.',
         'Admin Notification' => 'Adminisztrátor értesítés',
         'Admin area navigation for the agent interface.' => 'Adminisztrációs terület navigáció az ügyintézői felülethez.',
+        'Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect' =>
+            '',
         'Admin modules overview.' => 'Adminisztrátori modulok áttekintője.',
         'Admin.' => 'Adminisztráció.',
+        'AdminOAuth2TokenManagement' => '',
         'Administration' => 'Adminisztráció',
         'Agent Customer Search' => 'Ügyintézői ügyfélkeresés',
         'Agent Customer Search.' => 'Ügyintézői ügyfélkeresés.',
@@ -6009,12 +6212,16 @@ Az Ön segélyszolgálat csapata
             'Ügyintézői felület modul a bejövő e-mailek ellenőrzéséhez a jegynagyítás nézeten, ha az S/MIME-kulcs elérhető és igaz.',
         'Agent interface notification module to see the number of locked tickets. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             'Ügyintézői felület értesítési modul a zárolt jegyek számának megtekintéséhez. A hivatkozás megjelenítéséhez vagy elrejtéséhez további hozzáférés vezérlő készíthető a „Group” kulcs és az „rw:csoport1;move_into:csoport2” értékhez hasonló tartalom használatával.',
+        'Agent interface notification module to see the number of tickets an agent is owner for. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
+            '',
         'Agent interface notification module to see the number of tickets an agent is responsible for. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             'Ügyintézői felület értesítési modul azon jegyek számának megtekintéséhez, amelyekért egy ügyintéző felelős. A hivatkozás megjelenítéséhez vagy elrejtéséhez további hozzáférés vezérlő készíthető a „Group” kulcs és az „rw:csoport1;move_into:csoport2” értékhez hasonló tartalom használatával.',
         'Agent interface notification module to see the number of tickets in My Services. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             'Ügyintézői felület értesítési modul a „Saját szolgáltatásaiban” lévő jegyek számának megtekintéséhez. A hivatkozás megjelenítéséhez vagy elrejtéséhez további hozzáférés vezérlő készíthető a „Group” kulcs és az „rw:csoport1;move_into:csoport2” értékhez hasonló tartalom használatával.',
         'Agent interface notification module to see the number of watched tickets. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             'Ügyintézői felület értesítési modul a megfigyelt jegyek számának megtekintéséhez. A hivatkozás megjelenítéséhez vagy elrejtéséhez további hozzáférés vezérlő készíthető a „Group” kulcs és az „rw:csoport1;move_into:csoport2” értékhez hasonló tartalom használatával.',
+        'Agent recipient information which will be passed to the web service.' =>
+            '',
         'AgentTicketZoom widget that displays a table of objects linked to the ticket.' =>
             'Ügyintézői jegynagyítás felületi elem, amely a jegyhez kapcsolt objektumok táblázatát jeleníti meg.',
         'AgentTicketZoom widget that displays customer information for the ticket in the side bar.' =>
@@ -6024,7 +6231,6 @@ Az Ön segélyszolgálat csapata
         'Agents ↔ Groups' => 'Ügyintézők ↔ Csoportok',
         'Agents ↔ Roles' => 'Ügyintézők ↔ Szerepek',
         'All CustomerIDs of a customer user.' => 'Egy ügyfél-felhasználó összes ügyfél-azonosítója.',
-        'All attachments (OTRS Business Solution™)' => 'Összes melléklet (OTRS Business Solution™)',
         'All customer users of a CustomerID' => 'Egy ügyfél-azonosító minden ügyfél-felhasználója',
         'All escalated tickets' => 'Minden eszkalált jegy',
         'All new tickets, these tickets have not been worked on yet' => 'Minden új jegy, ezeken a jegyeken még nem dolgoztak',
@@ -6115,6 +6321,8 @@ Az Ön segélyszolgálat csapata
             'Lehetővé teszi az aktuális munka elmentését piszkozatként az ügyintézői felület jegyfelelős képernyőjén.',
         'Allows to set a new ticket state in the move ticket screen of the agent interface.' =>
             'Lehetővé teszi új jegyállapotok beállítását az ügyintézői felület jegy áthelyezése képernyőjén.',
+        'Always adds empty values to the ticket attribute relations so that it is not needed to add them to the CSV/Excel data.' =>
+            '',
         'Always show RichText if available' => 'Mindig RichText szöveget jelenítsen meg, ha elérhető',
         'Answer' => 'Válasz',
         'Appointment Calendar overview page.' => 'Időpontnaptár áttekintő oldal.',
@@ -6130,7 +6338,11 @@ Az Ön segélyszolgálat csapata
         'Appointments' => 'Időpontok',
         'Arabic (Saudi Arabia)' => 'Arab (Szaúd-Arábia)',
         'ArticleTree' => 'Bejegyzés fa',
+        'Assignment between action and attributes.' => '',
+        'Assignment between type and icon.' => '',
         'Attachment Name' => 'Melléklet neve',
+        'Authentication type for sendmail module. If \'OAuth2 token\' has been selected, SendmailModule::OAuth2TokenConfigName must also be configured.' =>
+            '',
         'Automated line break in text messages after x number of chars.' =>
             'Automatikus sortörés a szöveges üzenetekben x karakter után.',
         'Automatically change the state of a ticket with an invalid owner once it is unlocked. Maps from a state type to a new ticket state.' =>
@@ -6143,6 +6355,7 @@ Az Ön segélyszolgálat csapata
             'Automatikusan beállítja a jegy tulajdonosát annak felelőseként (ha a jegyfelelős szolgáltatás engedélyezve van). Ez csak a bejelentkezett felhasználó kézi műveleteinél fog működni. Nem működik olyan automatizált műveleteknél, mint például az általános ügyintéző, a levelezés és az általános felület.',
         'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>
             'Automatikusan beállítja a jegy felelősét (ha még nincs beállítva) az első tulajdonos-frissítés után.',
+        'Available/allowed actions for ticket attribute relations.' => '',
         'Avatar' => 'Profilkép',
         'Balanced white skin by Felix Niklas (slim version).' => 'Kiegyenlített fehér felszín Felix Niklas-tól (karcsú változat).',
         'Balanced white skin by Felix Niklas.' => 'Kiegyenlített fehér felszín Felix Niklas-tól.',
@@ -6157,6 +6370,7 @@ Az Ön segélyszolgálat csapata
         'CMD example setup. Ignores emails where external CMD returns some output on STDOUT (email will be piped into STDIN of some.bin).' =>
             'PARANCS példa beállítás. Mellőzi azokat az e-maileket, ahol a külső PARANCS néhány kimenettel tér vissza a SZABVÁNYOS KIMENETEN (az e-mail át lesz irányítva a some.bin SZABVÁNYOS BEMENETÉRE).',
         'CSV Separator' => 'CSV elválasztó',
+        'Cache settings for DBCRUD modules (default: 1 day).' => '',
         'Cache time in seconds for agent authentication in the GenericInterface.' =>
             'Gyorsítótárazás ideje másodpercben az ügyintéző hitelesítésénél az általános felületen.',
         'Cache time in seconds for customer authentication in the GenericInterface.' =>
@@ -6205,9 +6419,6 @@ Az Ön segélyszolgálat csapata
             'Ellenőrzi, hogy egy e-mail egy meglévő jegyre történő követés-e olyan jegyszámmal, amelyet az ExternalTicketNumberRecognition szűrőmodul megtalálhat.',
         'Checks the SystemID in ticket number detection for follow-ups. If not enabled, SystemID will be changed after using the system.' =>
             'Ellenőrzi a rendszer-azonosítót a jegy számának felismeréskor a követéseknél (ha nincs engedélyezve, akkor a rendszer-azonosító meg lesz változtatva a rendszer használata után).',
-        'Checks the availability of OTRS Business Solution™ for this system.' =>
-            'Ellenőrzi az OTRS Business Solution™ elérhetőségét ennél a rendszernél.',
-        'Checks the entitlement status of OTRS Business Solution™.' => 'Ellenőrzi az OTRS Business Solution™ jogosultsági állapotát.',
         'Child' => 'Gyermek',
         'Chinese (Simplified)' => 'Kínai (egyszerűsített)',
         'Chinese (Traditional)' => 'Kínai (hagyományos)',
@@ -6217,6 +6428,7 @@ Az Ön segélyszolgálat csapata
             'Annak kiválasztása, hogy mely típusú jegyváltozásokról szeretne értesítéseket kapni. Ne feledje, hogy nem tudja teljesen letiltani a kötelezőként megjelölt értesítéseket.',
         'Choose which notifications you\'d like to receive.' => 'Annak kiválasztása, hogy milyen értesítéseket szeretne kapni.',
         'Christmas Eve' => 'Szenteste',
+        'Cleans up the calendar-based tickets regularly.' => '',
         'Close' => 'Lezárás',
         'Close this ticket' => 'Jegy lezárása',
         'Closed tickets (customer user)' => 'Lezárt jegyek (ügyfél-felhasználó)',
@@ -6230,6 +6442,8 @@ Az Ön segélyszolgálat csapata
             'Az ügyintézői felület eszkalációs nézetében szűrhető oszlopok. Megjegyzés: Csak jegyattribútumok, dinamikus mezők (DynamicField_NévX) és ügyfélattribútumok (például CustomerUserPhone, CustomerCompanyName, …) engedélyezettek.',
         'Columns that can be filtered in the locked view of the agent interface. Note: Only Ticket attributes, Dynamic Fields (DynamicField_NameX) and Customer attributes (e.g. CustomerUserPhone, CustomerCompanyName, ...) are allowed.' =>
             'Az ügyintézői felület zárolás nézetében szűrhető oszlopok. Megjegyzés: Csak jegyattribútumok, dinamikus mezők (DynamicField_NévX) és ügyfélattribútumok (például CustomerUserPhone, CustomerCompanyName, …) engedélyezettek.',
+        'Columns that can be filtered in the owner view of the agent interface. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed.' =>
+            '',
         'Columns that can be filtered in the queue view of the agent interface. Note: Only Ticket attributes, Dynamic Fields (DynamicField_NameX) and Customer attributes (e.g. CustomerUserPhone, CustomerCompanyName, ...) are allowed.' =>
             'Az ügyintézői felület várólista nézetében szűrhető oszlopok. Megjegyzés: Csak jegyattribútumok, dinamikus mezők (DynamicField_NévX) és ügyfélattribútumok (például CustomerUserPhone, CustomerCompanyName, …) engedélyezettek.',
         'Columns that can be filtered in the responsible view of the agent interface. Note: Only Ticket attributes, Dynamic Fields (DynamicField_NameX) and Customer attributes (e.g. CustomerUserPhone, CustomerCompanyName, ...) are allowed.' =>
@@ -6257,6 +6471,8 @@ Az Ön segélyszolgálat csapata
         'Compat module for AgentZoom to AgentTicketZoom.' => 'Kompatibilitási modul az AgentZoom részére az AgentTicketZoom modulhoz.',
         'Complex' => 'Összetett',
         'Compose' => 'Válasz',
+        'Config keys and their action to activate dynamic fields in different screens, grouped by object type.' =>
+            '',
         'Configure Processes.' => 'Folyamatok beállítása.',
         'Configure and manage ACLs.' => 'ACL-ek beállítása és kezelése.',
         'Configure any additional readonly mirror databases that you want to use.' =>
@@ -6289,6 +6505,7 @@ Az Ön segélyszolgálat csapata
         'Create New process ticket.' => 'Új folyamatjegy létrehozása.',
         'Create Ticket' => 'Jegy létrehozása',
         'Create a new calendar appointment linked to this ticket' => 'Ehhez a jegyhez hozzákapcsolt új naptáridőpont létrehozása',
+        'Create a unit test file' => '',
         'Create and manage Service Level Agreements (SLAs).' => 'Szolgáltatási megállapodások (SLA-k) létrehozása és kezelése.',
         'Create and manage agents.' => 'Ügyintézők létrehozása és kezelése.',
         'Create and manage appointment notifications.' => 'Időpont-értesítések létrehozása és kezelése.',
@@ -6320,6 +6537,10 @@ Az Ön segélyszolgálat csapata
         'Create tickets.' => 'Jegyek létrehozása.',
         'Created ticket [%s] in "%s" with priority "%s" and state "%s".' =>
             'Egy jegy [%s] létrejött a(z) „%s” várólistában „%s” prioritással és „%s” állapottal.',
+        'Creates a unit test file for this ticket and sends it to Znuny.' =>
+            '',
+        'Creates a unit test file for this ticket.' => '',
+        'Creates the calendar-based tickets regularly.' => '',
         'Croatian' => 'Horvát',
         'Custom RSS Feed' => 'Egyéni RSS hírforrás',
         'Custom RSS feed.' => 'Egyéni RSS hírforrás.',
@@ -6337,6 +6558,7 @@ Az Ön segélyszolgálat csapata
         'Customer User Information Center Search.' => 'Ügyfél-felhasználó információs-központ keresés.',
         'Customer User Information Center search.' => 'Ügyfél-felhasználó információs-központ keresés.',
         'Customer User Information Center.' => 'Ügyfél-felhasználó információs-központ.',
+        'Customer User-Customer Relations' => '',
         'Customer Users ↔ Customers' => 'Ügyfél-felhasználók ↔ Ügyfelek',
         'Customer Users ↔ Groups' => 'Ügyfél-felhasználók ↔ Csoportok',
         'Customer Users ↔ Services' => 'Ügyfél-felhasználók ↔ Szolgáltatások',
@@ -6345,6 +6567,8 @@ Az Ön segélyszolgálat csapata
         'Customer item (icon) which shows the open tickets of this customer as info block. Setting CustomerUserLogin to 1 searches for tickets based on login name rather than CustomerID.' =>
             'Ügyfélelem (ikon), amely az ügyfél nyitott jegyeit jeleníti információs blokként. A CustomerUserLogin beállítás 1 értékkel a bejelentkezési név alapján keresi a jegyeket az ügyfél-azonosító helyett.',
         'Customer preferences.' => 'Ügyfélbeállítások.',
+        'Customer recipient information which will be passed to the web service.' =>
+            '',
         'Customer ticket overview' => 'Ügyféljegy-áttekintő',
         'Customer ticket search.' => 'Ügyféljegykeresés.',
         'Customer ticket zoom' => 'Ügyféljegynagyítás',
@@ -6373,6 +6597,7 @@ Az Ön segélyszolgálat csapata
             'Alapértelmezett megjelenítési típus a címzett (címzett, másolat) neveihez az ügyintézői jegynagyítás és az ügyfél jegynagyítás képernyőkön.',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             'Alapértelmezett megjelenítési típus a küldő (feladó) neveihez az ügyintézői jegynagyítás és az ügyfél jegynagyítás képernyőkön.',
+        'Default format for export files.' => '',
         'Default loop protection module.' => 'Alapértelmezett hurokvédelem modul.',
         'Default queue ID used by the system in the agent interface.' => 'A rendszer által alapértelmezetten használt várólista azonosító az ügyintézői felületen.',
         'Default skin for the agent interface (slim version).' => 'Alapértelmezett felszín az ügyintézői felülethez (karcsú változat).',
@@ -6471,6 +6696,8 @@ Az Ön segélyszolgálat csapata
         'Defines available article actions for Phone articles.' => 'Meghatározza az elérhető bejegyzésműveleteket a telefonos bejegyzéseknél.',
         'Defines available article actions for invalid articles.' => 'Meghatározza az elérhető bejegyzésműveleteket az érvénytelen bejegyzéseknél.',
         'Defines available groups for the admin overview screen.' => 'Meghatározza az elérhető csoportokat az adminisztrátori áttekintő képernyőhöz.',
+        'Defines available groups for the appointment calendar screen.' =>
+            '',
         'Defines chat communication channel.' => 'Csevegés kommunikációs csatornát határoz meg.',
         'Defines default headers for outgoing emails.' => 'Alapértelmezett fejléceket határoz meg a kimenő levelekhez.',
         'Defines email communication channel.' => 'E-mail kommunikációs csatornát határoz meg.',
@@ -6554,6 +6781,7 @@ Az Ön segélyszolgálat csapata
             'Meghatározza, hogy az ügyintézői felület jegyfelelős képernyőjén lévő jegyzet alapértelmezetten látható-e az ügyfélnek.',
         'Defines if the previously valid token should be accepted for authentication. This is slightly less secure but gives users 30 seconds more time to enter their one-time password.' =>
             'Meghatározza, hogy az előző érvényes tokent el kell-e fogadni a hitelesítésnél. Ez valamivel kevésbé biztonságos, de 30 másodperccel több időt ad a felhasználóknak az egyszer használatos jelszavuk beírásához.',
+        'Defines if the processes should be displayed in TreeView.' => '',
         'Defines if the values for filters should be retrieved from all available tickets. If enabled, only values which are actually used in any ticket will be available for filtering. Please note: The list of customers will always be retrieved like this.' =>
             'Meghatározza, hogy a szűrők értékeit le kell-e kérni az összes elérhető jegyből. Ha engedélyezve van, akkor csak azok az értékek lesznek elérhetők a szűréshez, amelyeket ténylegesen használnak valamelyik jegyben. Ne feledje: az ügyfelek listája mindig lekérése kerül ehhez hasonlóan.',
         'Defines if time accounting is mandatory in the agent interface. If enabled, a note must be entered for all ticket actions (no matter if the note itself is configured as active or is originally mandatory for the individual ticket action screen).' =>
@@ -6561,8 +6789,6 @@ Az Ön segélyszolgálat csapata
         'Defines if time accounting must be set to all tickets in bulk action.' =>
             'Meghatározza, hogy az időelszámolást be kell állítani minden jegyre a tömeges műveletben.',
         'Defines internal communication channel.' => 'Belső kommunikációs csatornát határoz meg.',
-        'Defines out of office message template. Two string parameters (%s) available: end date and number of days left.' =>
-            'Meghatározza az irodán kívüli üzenet sablonját. Két szövegparaméter (%s) érhető el: a befejezési dátum és a hátralévő napok száma.',
         'Defines phone communication channel.' => 'Telefonos kommunikációs csatornát határoz meg.',
         'Defines queues that\'s tickets are used for displaying as calendar events.' =>
             'Várólistákat határoz meg, amely jegyei naptárban lévő eseményekként való megjelenítéshez vannak felhasználva.',
@@ -6612,17 +6838,28 @@ Az Ön segélyszolgálat csapata
         'Defines the default CSS used in rich text editors.' => 'Meghatározza a RichText szerkesztőkben használt alapértelmezett CSS-t.',
         'Defines the default agent name in the ticket zoom view of the customer interface.' =>
             'Meghatározza az alapértelmezett ügyintézőnevet az ügyfélfelület jegynagyítás nézetén.',
+        'Defines the default article channel name for calendar based tickets.' =>
+            '',
         'Defines the default auto response type of the article for this operation.' =>
             'Meghatározza a bejegyzés alapértelmezett automatikus válasz típusát ehhez a művelethez.',
         'Defines the default body of a note in the ticket free text screen of the agent interface.' =>
             'Meghatározza egy jegyzet alapértelmezett törzsét az ügyintézői felület jegy szabad szöveg képernyőjén.',
+        'Defines the default content type for calendar based tickets.' =>
+            '',
         'Defines the default filter fields in the customer user address book search (CustomerUser or CustomerCompany). For the CustomerCompany fields a prefix \'CustomerCompany_\' must be added.' =>
             'Meghatározza az alapértelmezett szűrőmezőket az ügyfél-felhasználó címjegyzék keresésében (CustomerUser vagy CustomerCompany). A CustomerCompany mezőnél egy „CustomerCompany_” előtagot kell hozzáadni.',
+        'Defines the default from for calendar based tickets.' => '',
         'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.otrs.com/doc/.' =>
             'Meghatározza az ügyintézők és az ügyfelek által használt alapértelmezett előtétprogram (HTML) témáját. Ha szeretné, hozzáadhatja a saját témáját. Nézze meg a https://doc.otrs.com/doc/ címen elérhető adminisztrátori kézikönyvet.',
         'Defines the default front-end language. All the possible values are determined by the available language files on the system (see the next setting).' =>
             'Meghatározza az előtétprogram alapértelmezett nyelvét. Az összes lehetséges értéket a rendszeren lévő elérhető nyelvi fájlok határozzák meg.',
+        'Defines the default history comment for calendar based tickets.' =>
+            '',
+        'Defines the default history type for calendar based tickets.' =>
+            '',
         'Defines the default history type in the customer interface.' => 'Meghatározza az alapértelmezett előzménytípust az ügyfélfelületen.',
+        'Defines the default keys and values for the transition action module parameters. Mandatory fields are marked with "(* required)". Note: For most of the keys the AttributeID can also be used, e.g. "Owner" can be "OwnerID". Keys that define the same Attribute should only be used once, e.g. "Owner" and "OwnerID" are redundant.' =>
+            '',
         'Defines the default maximum number of X-axis attributes for the time scale.' =>
             'Meghatározza az X-tengely jellemzőinek az alapértelmezett legnagyobb számát az időskálánál.',
         'Defines the default maximum number of statistics per page on the overview screen.' =>
@@ -6653,6 +6890,7 @@ Az Ön segélyszolgálat csapata
             'Meghatározza egy jegy alapértelmezett következő állapotát, ha azt megírták / megválaszolták az ügyintézői felület jegyválasz képernyőjén.',
         'Defines the default next state of a ticket, in the ticket bulk screen of the agent interface.' =>
             'Meghatározza egy jegy alapértelmezett következő állapotát az ügyintézői felület tömeges jegy képernyőjén.',
+        'Defines the default next state.' => '',
         'Defines the default note body text for phone tickets in the ticket phone inbound screen of the agent interface.' =>
             'Meghatározza a telefonos jegyek alapértelmezett jegyzet törzsét az ügyintézői felület bejövő telefonhívás képernyőjén.',
         'Defines the default note body text for phone tickets in the ticket phone outbound screen of the agent interface.' =>
@@ -6672,14 +6910,13 @@ Az Ön segélyszolgálat csapata
             'Meghatározza a legördülő menü alapértelmezett kijelölését a jogosultságokhoz (Űrlap: közös specifikáció).',
         'Defines the default selection at the drop down menu for stats format (Form: Common Specification). Please insert the format key (see Stats::Format).' =>
             'Meghatározza a legördülő menü alapértelmezett kijelölését a statisztika formátumokhoz (Űrlap: közös specifikáció). Szúrja be a formátum kulcsot (lásd: Stats::Format).',
+        'Defines the default sender type for calendar based tickets.' => '',
         'Defines the default sender type for phone tickets in the ticket phone inbound screen of the agent interface.' =>
             'Meghatározza a telefonos jegyek alapértelmezett küldőtípusát az ügyintézői felület bejövő telefonhívás képernyőjén.',
         'Defines the default sender type for phone tickets in the ticket phone outbound screen of the agent interface.' =>
             'Meghatározza a telefonos jegyek alapértelmezett küldőtípusát az ügyintézői felület kimenő telefonhívás képernyőjén.',
         'Defines the default sender type for tickets in the ticket zoom screen of the customer interface.' =>
             'Meghatározza a jegyek alapértelmezett küldőtípusát az ügyfélfelület jegynagyítás képernyőjén.',
-        'Defines the default shown ticket search attribute for ticket search screen (AllTickets/ArchivedTickets/NotArchivedTickets).' =>
-            'Meghatározza az alapértelmezetten megjelenített jegykeresési jellemzőket a jegykeresés képernyőnél (AllTickets/ArchivedTickets/NotArchivedTickets).',
         'Defines the default shown ticket search attribute for ticket search screen.' =>
             'Meghatározza az alapértelmezetten megjelenített jegykeresési jellemzőket a jegykeresés képernyőnél.',
         'Defines the default shown ticket search attribute for ticket search screen. Example: "Key" must have the name of the Dynamic Field in this case \'X\', "Content" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: \'a text\', Dropdown: \'1\', Date/Time: \'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' and or \'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7\';.' =>
@@ -6709,6 +6946,8 @@ Az Ön segélyszolgálat csapata
             'Meghatározza az alapértelmezett jegyjellemzőt a jegyrendezéshez az ügyintézői felület eszkalációs nézetében.',
         'Defines the default ticket attribute for ticket sorting in the locked ticket view of the agent interface.' =>
             'Meghatározza az alapértelmezett jegyjellemzőt a jegyrendezéshez az ügyintézői felület zárolt jegy nézetében.',
+        'Defines the default ticket attribute for ticket sorting in the owner view of the agent interface.' =>
+            '',
         'Defines the default ticket attribute for ticket sorting in the responsible view of the agent interface.' =>
             'Meghatározza az alapértelmezett jegyjellemzőt a jegyrendezéshez az ügyintézői felület felelős nézetében.',
         'Defines the default ticket attribute for ticket sorting in the status view of the agent interface.' =>
@@ -6719,6 +6958,7 @@ Az Ön segélyszolgálat csapata
             'Meghatározza az alapértelmezett jegyjellemzőt az ügyintézői felület jegykeresési eredményének jegyrendezéséhez.',
         'Defines the default ticket attribute for ticket sorting of the ticket search result of this operation.' =>
             'Meghatározza az alapértelmezett jegyjellemzőt ezen művelet jegykeresési eredményének jegyrendezéséhez.',
+        'Defines the default ticket body for calendar based tickets.' => '',
         'Defines the default ticket bounced notification for customer/sender in the ticket bounce screen of the agent interface.' =>
             'Meghatározza az ügyfél/küldő alapértelmezett jegyátirányítási értesítését az ügyintézői felület jegyátirányítás képernyőjén.',
         'Defines the default ticket next state after adding a phone note in the ticket phone inbound screen of the agent interface.' =>
@@ -6729,6 +6969,8 @@ Az Ön segélyszolgálat csapata
             'Meghatározza az alapértelmezett jegysorrendet (a prioritás rendezés után) az ügyintézői felület eszkalációs nézetében. Fel: legrégebbi felülre. Le: legutolsó felülre.',
         'Defines the default ticket order (after priority sort) in the status view of the agent interface. Up: oldest on top. Down: latest on top.' =>
             'Meghatározza az alapértelmezett jegysorrendet (a prioritás rendezés után) az ügyintézői felület állapot nézetében. Fel: legrégebbi felülre. Le: legutolsó felülre.',
+        'Defines the default ticket order in the owner view of the agent interface. Up: oldest on top. Down: latest on top.' =>
+            '',
         'Defines the default ticket order in the responsible view of the agent interface. Up: oldest on top. Down: latest on top.' =>
             'Meghatározza az alapértelmezett jegysorrendet az ügyintézői felület felelős nézetében. Fel: legrégebbi felülre. Le: legutolsó felülre.',
         'Defines the default ticket order in the ticket locked view of the agent interface. Up: oldest on top. Down: latest on top.' =>
@@ -6741,6 +6983,8 @@ Az Ön segélyszolgálat csapata
             'Meghatározza az alapértelmezett jegysorrendet az ügyintézői felület megfigyelés nézetében. Fel: legrégebbi felülre. Le: legutolsó felülre.',
         'Defines the default ticket order of a search result in the customer interface. Up: oldest on top. Down: latest on top.' =>
             'Meghatározza egy keresési eredmény alapértelmezett jegysorrendjét az ügyfélfelületen. Fel: legrégebbi felülre. Le: legutolsó felülre.',
+        'Defines the default ticket priority for calendar based tickets.' =>
+            '',
         'Defines the default ticket priority in the close ticket screen of the agent interface.' =>
             'Meghatározza az alapértelmezett jegyprioritást az ügyintézői felület jegylezárás képernyőjén.',
         'Defines the default ticket priority in the ticket bulk screen of the agent interface.' =>
@@ -6757,6 +7001,8 @@ Az Ön segélyszolgálat csapata
             'Meghatározza az alapértelmezett jegyprioritást egy nagyított jegynek a jegyprioritás képernyőjén az ügyintézői felületen.',
         'Defines the default ticket priority in the ticket responsible screen of the agent interface.' =>
             'Meghatározza az alapértelmezett jegyprioritást az ügyintézői felület jegyfelelős képernyőjén.',
+        'Defines the default ticket title for calendar based tickets.' =>
+            '',
         'Defines the default ticket type for new customer tickets in the customer interface.' =>
             'Meghatározza az alapértelmezett jegytípust az új ügyféljegyekhez az ügyfélfelületen.',
         'Defines the default ticket type.' => 'Meghatározza az alapértelmezett jegytípust.',
@@ -6768,6 +7014,8 @@ Az Ön segélyszolgálat csapata
             'Meghatározza a nyilvános előtétprogram művelet paraméterének alapértelmezett értékét. Ezt a művelet paramétert használják a rendszer parancsfájljaiban.',
         'Defines the default viewable sender types of a ticket (default: customer).' =>
             'Meghatározza egy jegy alapértelmezett megtekinthető küldő típusait (alapértelmezett: ügyfél).',
+        'Defines the default visibility of articles for calendar based tickets.' =>
+            '',
         'Defines the default visibility of the article to customer for this operation.' =>
             'Meghatározza a bejegyzés alapértelmezett láthatóságát az ügyfélnek ennél a műveletnél.',
         'Defines the displayed style of the From field in notes that are visible for customers. A default agent name can be defined in Ticket::Frontend::CustomerTicketZoom###DefaultAgentName setting.' =>
@@ -6892,8 +7140,6 @@ Az Ön segélyszolgálat csapata
         'Defines the module that shows the currently logged in customers in the customer interface.' =>
             'Meghatározza azt a modult, amely megjeleníti az aktuálisan bejelentkezett ügyfeleket az ügyfélfelületen.',
         'Defines the module to authenticate customers.' => 'Meghatározza azt a modult, amely hitelesíti az ügyfeleket.',
-        'Defines the module to display a notification if cloud services are disabled.' =>
-            'Meghatározza azt a modult, amely egy értesítést jelenít meg, ha a felhőszolgáltatások le vannak tiltva.',
         'Defines the module to display a notification in different interfaces on different occasions for OTRS Business Solution™.' =>
             'Meghatározza azt a modult, amely egy értesítést jelenít meg a különböző felületeken különböző alkalmakkor OTRS Business Solution™ használatánál.',
         'Defines the module to display a notification in the agent interface if the OTRS Daemon is not running.' =>
@@ -6908,8 +7154,6 @@ Az Ön segélyszolgálat csapata
             'Meghatározza azt a modult, amely egy értesítést jelenít meg az ügyintézői felületen, ha az ügyintéző aközben jelentkezett be, hogy a rendszerkarbantartás aktív.',
         'Defines the module to display a notification in the agent interface, if the agent session limit prior warning is reached.' =>
             'Meghatározza azt a modult, amely egy értesítést jelenít meg az ügyintézői felületen, ha az ügyintézői munkamenetkorlát előzetes figyelmeztetését elérték.',
-        'Defines the module to display a notification in the agent interface, if the installation of not verified packages is activated (only shown to admins).' =>
-            'Meghatározza azt a modult, amely egy értesítést jelenít meg az ügyintézői felületen, ha a nem ellenőrzött csomagok telepítése aktiválva van (csak adminisztrátoroknak jelenik meg).',
         'Defines the module to display a notification in the agent interface, if the system is used by the admin user (normally you shouldn\'t work as admin).' =>
             'Meghatározza azt a modult, amely egy értesítést jelenít meg az ügyintézői felületen, ha a rendszert egy adminisztrátor felhasználó használja (normális esetben nem kell adminisztrátorként dolgozni).',
         'Defines the module to display a notification in the agent interface, if there are invalid sysconfig settings deployed.' =>
@@ -6946,6 +7190,8 @@ Az Ön segélyszolgálat csapata
             'Meghatározza egy üzenet küldése utáni következő lehetséges állapotokat az ügyintézői felület kimenő e-mail képernyőjén.',
         'Defines the next possible states for customer tickets in the customer interface.' =>
             'Meghatározza az ügyféljegyek következő lehetséges állapotait az ügyfélfelületen.',
+        'Defines the next possible ticket states for calendar based tickets.' =>
+            '',
         'Defines the next state of a ticket after adding a note, in the close ticket screen of the agent interface.' =>
             'Meghatározza egy jegy következő állapotát egy jegyzet hozzáadása után az ügyintézői felület jegylezárás képernyőjén.',
         'Defines the next state of a ticket after adding a note, in the ticket free text screen of the agent interface.' =>
@@ -7170,10 +7416,14 @@ Az Ön segélyszolgálat csapata
             'Figyelmeztetés megjelenítése és a keresés megakadályozása, ha kiszűrendő szavakat használ a szabad-szavas keresésen belül.',
         'Display communication log entries.' => 'Kommunikációs naplóbejegyzések megjelenítése.',
         'Display settings to override defaults for Process Tickets.' => 'Beállítások megjelenítése az alapértékek felülbírálásához a jegyek feldolgozásánál.',
+        'Displays notifications for missing and expired OAuth2 tokens.' =>
+            '',
         'Displays the accounted time for an article in the ticket zoom view.' =>
             'Megjeleníti az elszámolt időt egy bejegyzésnél a jegy nagyítás nézeten.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             'Megjeleníti az aktuális jeggyel azonos ügyfél-azonosítóval rendelkező összes jegy számát a jegynagyítás nézeten.',
+        'Domains accessed through WebUserAgent module for which no proxy should be used. Separate domains by semicolon.' =>
+            '',
         'Down' => 'Le',
         'Dropdown' => 'Legördülő',
         'Dutch' => 'Holland',
@@ -7188,6 +7438,9 @@ Az Ön segélyszolgálat csapata
         'Dynamic Fields Text Backend GUI' => 'Dinamikus mezők szöveg háttérprogram grafikus felület',
         'Dynamic Fields used to export the search result in CSV format.' =>
             'Dinamikus mezők, amelyek a keresési eredmények CSV formátumba való exportálásához használhatók.',
+        'Dynamic field backend registration.' => '',
+        'Dynamic field screen config keys and their action for all screens that don\'t allow dynamic fields to be mandatory.' =>
+            '',
         'Dynamic fields groups for process widget. The key is the name of the group, the value contains the fields to be shown. Example: \'Key => My Group\', \'Content: Name_X, NameY\'.' =>
             'Dinamikus mezők csoportjai a folyamat felületi elemhez. A kulcs a csoport neve, az érték a megjelenítendő mezőket tartalmazza. Példa: „Kulcs => Saját csoport”, „Tartalom: Név_X, Név_Y”.',
         'Dynamic fields limit per page for Dynamic Fields Overview.' => 'Oldalankénti dinamikus mező korlát a dinamikus mezők áttekintőnél.',
@@ -7201,6 +7454,8 @@ Az Ön segélyszolgálat csapata
             'Az ügyintézői felület jegynagyítás képernyőjén a folyamat felületi elemben megjelenített dinamikus mezők.',
         'Dynamic fields shown in the sidebar of the ticket zoom screen of the agent interface.' =>
             'Az ügyintézői felület jegynagyítás képernyőjének oldalsávján megjelenített dinamikus mezők.',
+        'Dynamic fields shown in the ticket bulk screen of the agent interface.' =>
+            '',
         'Dynamic fields shown in the ticket close screen of the agent interface.' =>
             'Az ügyintézői felület jegylezárás képernyőjén megjelenített dinamikus mezők.',
         'Dynamic fields shown in the ticket compose screen of the agent interface.' =>
@@ -7270,6 +7525,8 @@ Az Ön segélyszolgálat csapata
         'Enables PGP support. When PGP support is enabled for signing and encrypting mail, it is HIGHLY recommended that the web server runs as the OTRS user. Otherwise, there will be problems with the privileges when accessing .gnupg folder.' =>
             'Engedélyezi a PGP támogatást. Amikor a PGP támogatás engedélyezve van levelek aláírásához és titkosításához, akkor ERŐSEN javasolt, hogy a webkiszolgáló az OTRS felhasználóként fusson. Egyébként problémák lesznek a jogosultságokkal, amikor hozzáfér a .gnupg mappához.',
         'Enables S/MIME support.' => 'Engedélyezi az S/MIME támogatást.',
+        'Enables calendar based ticket creation feature only for the listed groups.' =>
+            '',
         'Enables customers to create their own accounts.' => 'Engedélyezi az ügyfeleknek, hogy létrehozzák a saját fiókjaikat.',
         'Enables fetch S/MIME from CustomerUser backend support.' => 'Engedélyezi az S/MIME lekérését az ügyfél-felhasználó háttérprogram támogatásából.',
         'Enables file upload in the package manager frontend.' => 'Engedélyezi a fájlfeltöltést a csomagkezelő előtétprogramon.',
@@ -7290,6 +7547,8 @@ Az Ön segélyszolgálat csapata
             'Engedélyezi a jegyfelelős szolgáltatást egy megadott jegy nyomon követéséhez.',
         'Enables ticket type feature.' => 'Engedélyezi a jegytípus szolgáltatást.',
         'Enables ticket watcher feature only for the listed groups.' => 'Csak a felsorolt csoportoknak engedélyezi a jegymegfigyelés szolgáltatást.',
+        'Enables/disables the Znuny package verification. If disabled, all packages are shown as verified. It\'s still recommended to use only verified packages.' =>
+            '',
         'English (Canada)' => 'Angol (Kanada)',
         'English (United Kingdom)' => 'Angol (Egyesült Királyság)',
         'English (United States)' => 'Angol (Egyesült Államok)',
@@ -7372,6 +7631,8 @@ Az Ön segélyszolgálat csapata
             'Egy másik jegyállapot (az aktuálisból) kiválasztását kényszeríti a zárolás művelet után. Az aktuális állapotot kulcsként határozza meg, és a zárolás művelet utáni következő állapotot tartalomként.',
         'Forces to unlock tickets after being moved to another queue.' =>
             'Kényszeríti a jegyek feloldását, miután át lettek helyezve egy másik várólistába.',
+        'Format string for output of attachments in the selection list. "%1$d": article number; "%2$s": filename; "%3$s": translated object type (e.g. Article => Artikel); "%4$s": translated attachment label (e.g. "Anhang").' =>
+            '',
         'Forwarded to "%s".' => 'Továbbítva ide: „%s”.',
         'Free Fields' => 'Szabad mezők',
         'French' => 'Francia',
@@ -7379,6 +7640,10 @@ Az Ön segélyszolgálat csapata
         'French stop words for fulltext index. These words will be removed from the search index.' =>
             'Francia kiszűrendő szavak a szabad-szavas indexnél. Ezek a szavak el lesznek távolítva a keresési indexből.',
         'Frontend' => 'Előtétprogram',
+        'Frontend module for the agent interface that provides the AJAX interface for the web service dynamic field backends.' =>
+            '',
+        'Frontend module for the customer interface that provides the AJAX interface for the web service dynamic field backends.' =>
+            '',
         'Frontend module registration (disable AgentTicketService link if Ticket Service feature is not used).' =>
             'Előtétprogram-modul regisztráció (a szolgáltatás nézet menüpont letiltása, ha a jegy szolgáltatás funkció nincs használatban).',
         'Frontend module registration (disable company link if no company feature is used).' =>
@@ -7389,6 +7654,7 @@ Az Ön segélyszolgálat csapata
             'Előtétprogram-modul regisztráció (az új folyamatjegy képernyő letiltása, ha nincs elérhető folyamat).',
         'Frontend module registration (show personal favorites as sub navigation items of \'Admin\').' =>
             'Előtétprogram-modul regisztráció (személyes kedvencek megjelenítése az „Adminisztráció” alnavigációs elemeiként).',
+        'Frontend module registration for the admin interface.' => '',
         'Frontend module registration for the agent interface.' => 'Előtétprogram-modul regisztráció az ügyintézői felülethez.',
         'Frontend module registration for the customer interface.' => 'Előtétprogram-modul regisztráció az ügyfélfelülethez.',
         'Frontend module registration for the public interface.' => 'Előtétprogram-modul regisztráció a nyilvános felülethez.',
@@ -7434,6 +7700,8 @@ Az Ön segélyszolgálat csapata
         'Graph: Line Chart' => 'Grafikon: vonaldiagram',
         'Graph: Stacked Area Chart' => 'Grafikon: halmozott területdiagram',
         'Greek' => 'Görög',
+        'Handles changes to data of modules which use the DBCRUD base module.' =>
+            '',
         'Hebrew' => 'Héber',
         'Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild".' =>
             'Segít kiterjeszteni a bejegyzések szabad-szavas keresését (feladó, címzett, másolat, tárgy és törzs keresés). Fel fogja darabolni az összes bejegyzést, és egy indexet fog felépíteni a bejegyzés létrehozása után, körülbelül 50%-kal növelve a szabad-szavas kereséseket. Egy kezdeti index létrehozásához használja a „bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild” parancsfájlt.',
@@ -7561,6 +7829,7 @@ Az Ön segélyszolgálat csapata
             'Ha irodán kívül lesz, akkor érdemes lenne azt a többi felhasználóval tudatni a távollét pontos dátumának beállításával.',
         'Ignore system sender article types (e. g. auto responses or email notifications) to be flagged as \'Unread Article\' in AgentTicketZoom or expanded automatically in Large view screens.' =>
             'Annak mellőzése, hogy a rendszer által küldött bejegyzéstípusok (például automatikus válaszok vagy e-mail értesítések) „olvasatlan bejegyzésként” legyenek megjelölve az ügyintézői jegynagyításban vagy automatikusan ki legyenek nyitva a nagy nézet képernyőkben.',
+        'Ignores not ticket related attributes.' => '',
         'Import appointments screen.' => 'Időpontok importálása képernyő.',
         'Include tickets of subqueues per default when selecting a queue.' =>
             'Az alvárólisták jegyeinek felvétele alapértelmezetten egy várólista kijelölésekor.',
@@ -7584,6 +7853,8 @@ Az Ön segélyszolgálat csapata
             'Lehetséges különféle felszínek beállítása, például különbséget lehet tenni az alkalmazáson belül különböző ügyfelek között tartományonkénti alapon használva. Egy reguláris kifejezés (regex) használatával beállíthat egy tartományra illeszkedő Kulcs/Tartalom párt. A „Kulcsban” lévő értéknek kell illeszkednie a tartományra, és a „Tartalomban” lévő értéknek a rendszeren lévő érvényes felszínnek kell lennie. Nézze meg a példabejegyzéseket a reguláris kifejezés megfelelő formájáért.',
         'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
             'Lehetséges különféle témák beállítása, például különbséget lehet tenni az alkalmazáson belül ügyintézők és ügyfelek között tartományonkénti alapon használva. Egy reguláris kifejezés (regex) használatával beállíthat egy tartományra illeszkedő Kulcs/Tartalom párt. A „Kulcsban” lévő értéknek kell illeszkednie a tartományra, és a „Tartalomban” lévő értéknek a rendszeren lévő érvényes témának kell lennie. Nézze meg a példabejegyzéseket a reguláris kifejezés megfelelő formájáért.',
+        'It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
+            '',
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             'Nem volt lehetséges ellenőrizni a PGP-aláírást. Ezt egy hiányzó nyilvános kulcs vagy egy nem támogatott algoritmus okozhatja.',
         'Italian' => 'Olasz',
@@ -7593,11 +7864,15 @@ Az Ön segélyszolgálat csapata
         'Ivory (Slim)' => 'Elefántcsont (karcsú)',
         'Japanese' => 'Japán',
         'JavaScript function for the search frontend.' => 'JavaScript függvény a keresési előtétprogramhoz.',
+        'Keep dynamic field attachments after each transition.' => '',
         'Korean' => 'Koreai',
         'Language' => 'Nyelv',
         'Large' => 'Nagy',
         'Last Screen Overview' => 'Utolsó képernyő áttekintője',
         'Last customer subject' => 'Legutóbbi ügyféltárgy',
+        'Last view - limit' => '',
+        'Last view - position' => '',
+        'Last view - types' => '',
         'Lastname Firstname' => 'Vezetéknév Keresztnév',
         'Lastname Firstname (UserLogin)' => 'Vezetéknév Keresztnév (Felhasználónév)',
         'Lastname, Firstname' => 'Vezetéknév, Keresztnév',
@@ -7629,6 +7904,7 @@ Az Ön segélyszolgálat csapata
             'JS fájlok listája, amelyek mindig betöltődnek az ügyintézői felületnél.',
         'List of JS files to always be loaded for the customer interface.' =>
             'JS fájlok listája, amelyek mindig betöltődnek az ügyfélfelületnél.',
+        'List of actions that will be ignored.' => '',
         'List of all CustomerCompany events to be displayed in the GUI.' =>
             'Az összes ügyfélvállalat-esemény listája, amelyek megjelennek a grafikus felületen.',
         'List of all CustomerUser events to be displayed in the GUI.' => 'Az összes ügyfélfelhasználó-esemény listája, amelyek megjelennek a grafikus felületen.',
@@ -7648,8 +7924,12 @@ Az Ön segélyszolgálat csapata
             'Alkalmazkodó CSS fájlok listája, amelyek mindig betöltődnek az ügyintézői felületnél.',
         'List of responsive CSS files to always be loaded for the customer interface.' =>
             'Alkalmazkodó CSS fájlok listája, amelyek mindig betöltődnek az ügyfélfelületnél.',
+        'List of sub-actions that will be ignored.' => '',
         'List view' => 'Listanézet',
         'Lithuanian' => 'Litván',
+        'Loader module registration for AdminOAuth2TokenManagement.' => '',
+        'Loader module registration for AgentAppointmentEdit.' => '',
+        'Loader module registration for the admin interface.' => '',
         'Loader module registration for the agent interface.' => 'Betöltőmodul regisztráció az ügyintézői felülethez.',
         'Loader module registration for the customer interface.' => 'Betöltőmodul regisztráció az ügyfélfelülethez.',
         'Lock / unlock this ticket' => 'Jegy zárolása vagy feloldása',
@@ -7673,6 +7953,8 @@ Az Ön segélyszolgálat csapata
         'Makes the session management use html cookies. If html cookies are disabled or if the client browser disabled html cookies, then the system will work as usual and append the session id to the links.' =>
             'HTML sütik használatát írja elő a munkamenet-kezelőnek. Ha a HTML sütik le vannak tiltva, vagy a kliens böngésző letiltotta a HTML sütiket, akkor a rendszer a szokásos módon fog működni, és hozzáfűzi a munkamenet-azonosítót a hivatkozásokhoz.',
         'Malay' => 'Maláj',
+        'Manage Customer User-Customer Relations.' => '',
+        'Manage OAuth2 tokens and their configurations.' => '',
         'Manage OTRS Group cloud services.' => 'OTRS csoport felhőszolgáltatások kezelése.',
         'Manage PGP keys for email encryption.' => 'PGP kulcsok kezelése e-mail titkosításhoz.',
         'Manage POP3 or IMAP accounts to fetch email from.' => 'POP3 vagy IMAP fiókok kezelése e-mailek letöltéséhez.',
@@ -7681,10 +7963,17 @@ Az Ön segélyszolgálat csapata
         'Manage different calendars.' => 'Különböző naptárak kezelése.',
         'Manage existing sessions.' => 'Meglévő munkamenetek kezelése.',
         'Manage support data.' => 'Támogatási adatok kezelése.',
+        'Manage system files.' => '',
         'Manage system registration.' => 'Rendszer regisztráció kezelése.',
         'Manage tasks triggered by event or time based execution.' => 'Esemény vagy időalapú végrehajtás által aktivált feladatok kezelése.',
+        'Management of ticket attribute relations.' => '',
+        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
+            '',
+        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
+            '',
         'Mark as Spam!' => 'Megjelölés szemétként!',
         'Mark this ticket as junk!' => 'Jegy megjelölése szemétként!',
+        'Mattermost Username' => '',
         'Max size (in characters) of the customer information table (phone and email) in the compose screen.' =>
             'Az ügyfél-információs tábla (telefon vagy e-mail) legnagyobb mérete (karakterben) a jegyválasz képernyőn.',
         'Max size (in rows) of the informed agents box in the agent interface.' =>
@@ -7718,6 +8007,10 @@ Az Ön segélyszolgálat csapata
         'Merge this ticket and all articles into another ticket' => 'A jegy és minden bejegyzés egyesítése egy másik jegybe',
         'Merged Ticket (%s/%s) to (%s/%s).' => 'Jegy (%s/%s) egyesítve ezzel: (%s/%s).',
         'Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>.' => 'A(z) <OTRS_TICKET> jegy egyesítve a következővel: <OTRS_MERGE_TO_TICKET>.',
+        'Message that will be shown if the agent is currently logged in.' =>
+            '',
+        'Message that will be shown if the agent is currently logged out.' =>
+            '',
         'Minute' => 'Perc',
         'Miscellaneous' => 'Egyebek',
         'Module for To-selection in new ticket screen in the customer interface.' =>
@@ -7773,6 +8066,10 @@ Az Ön segélyszolgálat csapata
             'Az egyéni várólista neve. Az egyéni várólista az előnyben részesített várólisták kiválasztása, és a beállításokban választható ki.',
         'Name of custom service. The custom service is a service selection of your preferred services and can be selected in the preferences settings.' =>
             'Az egyéni szolgáltatás neve. Az egyéni szolgáltatás az előnyben részesített szolgáltatások kiválasztása, és a beállításokban választható ki.',
+        'Name of the OAuth2 token configuration to use for sending mails if \'OAuth2 token\' was configured in SendmailModule::AuthenticationType.' =>
+            '',
+        'Name of the dynamic field in which the attachment file IDs of the transition will be stored.' =>
+            '',
         'NameX' => 'NévX',
         'New Ticket' => 'Új jegy',
         'New Tickets' => 'Új jegyek',
@@ -7780,8 +8077,8 @@ Az Ön segélyszolgálat csapata
         'New Year\'s Day' => 'Újév',
         'New Year\'s Eve' => 'Szilveszter',
         'New process ticket' => 'Új folyamatjegy',
+        'News' => '',
         'News about OTRS releases!' => 'Az OTRS kiadásaival kapcsolatos hírek!',
-        'News about OTRS.' => 'Az OTRS-sel kapcsolatos hírek.',
         'Next possible ticket states after adding a phone note in the ticket phone inbound screen of the agent interface.' =>
             'A következő lehetséges jegyállapotok egy új telefonos jegyzet hozzáadása után az ügyintézői felület bejövő telefonhívás képernyőjén.',
         'Next possible ticket states after adding a phone note in the ticket phone outbound screen of the agent interface.' =>
@@ -7801,8 +8098,9 @@ Az Ön segélyszolgálat csapata
             'Egy keresési eredmény minden egyes oldalán megjelenített jegyek száma az ügyintézői felületen.',
         'Number of tickets to be displayed in each page of a search result in the customer interface.' =>
             'Egy keresési eredmény minden egyes oldalán megjelenített jegyek száma az ügyfélfelületen.',
+        'OAuth2' => '',
+        'OAuth2 token' => '',
         'OTRS Group Services' => 'OTRS csoport szolgáltatások',
-        'OTRS News' => 'OTRS hírek',
         'OTRS can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>
             'Az OTRS képes egy vagy több csak olvasható tükör adatbázist használni az olyan költséges műveleteknél, mint például a szabad-szavas keresés vagy a statisztikák előállítása. Itt adhatja meg a DNS-t az első tükör adatbázishoz.',
         'OTRS doesn\'t support recurring Appointments without end date or number of iterations. During import process, it might happen that ICS file contains such Appointments. Instead, system creates all Appointments in the past, plus Appointments for the next N months (120 months/10 years by default).' =>
@@ -7838,6 +8136,7 @@ Az Ön segélyszolgálat csapata
         'PGP Keys' => 'PGP kulcsok',
         'Package event module file a scheduler task for update registration.' =>
             'Csomag esemény modul egy ütemező feladat iktatásához a regisztráció frissítésénél.',
+        'Parameter name for additional recipients.' => '',
         'Parameters for the CreateNextMask object in the preference view of the agent interface. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             'A következő maszk létrehozása objektum paraméterei az ügyintézői felület beállítás nézetében. Ne feledje: az „Active” 0-ra állításával csak az ügyintézőknek akadályozza meg ezen csoport beállításainak szerkesztését a személyes beállításaikban, de az adminisztrátoroknak továbbra is lehetővé teszi a beállítások szerkesztését egy másik felhasználó nevében. Használja a „PreferenceGroup” kulcsot annak szabályozásához, hogy ezeknek a beállításoknak mely területen kell megjelenniük a felhasználói felületen.',
         'Parameters for the CustomQueue object in the preference view of the agent interface. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
@@ -7926,8 +8225,11 @@ Az Ön segélyszolgálat csapata
         'Polish' => 'Lengyel',
         'Portuguese' => 'Portugál',
         'Portuguese (Brasil)' => 'Portugál (Brazil)',
+        'Possible types for agent interface.' => '',
+        'Possible types for customer interface.' => '',
         'PostMaster Filters' => 'Levelezési szűrők',
         'PostMaster Mail Accounts' => 'Levelezési levélfiókok',
+        'Pre-application module to store the current view.' => '',
         'Print this ticket' => 'Jegy nyomtatása',
         'Priorities' => 'Prioritások',
         'Process Management Activity Dialog GUI' => 'Folyamatkezelés tevékenység párbeszéd grafikus felület',
@@ -7950,12 +8252,16 @@ Az Ön segélyszolgálat csapata
         'Public calendar.' => 'Nyilvános naptár.',
         'Queue view' => 'Várólista nézet',
         'Queues ↔ Auto Responses' => 'Várólisták ↔ Automatikus válaszok',
+        'Quoting character for exported CSV files.' => '',
         'Rebuild the ticket index for AgentTicketQueue.' => 'Az AgentTicketQueue jegyindexének újraépítése.',
         'Recognize if a ticket is a follow-up to an existing ticket using an external ticket number. Note: the first capturing group from the \'NumberRegExp\' expression will be used as the ticket number value.' =>
             'Annak felismerése, ha egy jegy egy külső jegyszámot használó meglévő jegy követője. Megjegyzés: a „NumberRegExp” kifejezés első elfogási csoportja lesz használva a jegyszám értékeként.',
         'Refresh interval' => 'Frissítési időköz',
         'Registers a log module, that can be used to log communication related information.' =>
             'Regisztrál egy naplózó modult, amely a kommunikációval kapcsolatos információk naplózásához használható.',
+        'Registers a user preferences module for LastViewsLimit.' => '',
+        'Registers a user preferences module for LastViewsPosition.' => '',
+        'Registers a user preferences module for LastViewsType.' => '',
         'Reminder Tickets' => 'Emlékeztető jegyek',
         'Removed subscription for user "%s".' => 'Feliratkozás eltávolítva a következő felhasználónál: „%s”.',
         'Removes old generic interface debug log entries created before the specified amount of days.' =>
@@ -7970,7 +8276,6 @@ Az Ön segélyszolgálat csapata
         'Replaces the original sender with current customer\'s email address on compose answer in the ticket compose screen of the agent interface.' =>
             'Kicseréli az eredeti küldőt az aktuális ügyfél e-mail címére a válasz írásakor az ügyintézői felület jegyválasz képernyőjén.',
         'Reports' => 'Jelentések',
-        'Reports (OTRS Business Solution™)' => 'Jelentések (OTRS Business Solution™)',
         'Reprocess mails from spool directory that could not be imported in the first place.' =>
             'Azon levelek újrafeldolgozása a tároló könyvtárból, amelyeket nem sikerült importálni az első helyen.',
         'Required permissions to change the customer of a ticket in the agent interface.' =>
@@ -8009,7 +8314,6 @@ Az Ön segélyszolgálat csapata
         'Resent email to "%s".' => 'E-mail újraküldve neki: „%s”.',
         'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
             'Visszaállítja és feloldja egy jegy tulajdonosát, ha az egy másik várólistába lett áthelyezve.',
-        'Resource Overview (OTRS Business Solution™)' => 'Erőforrás áttekintő (OTRS Business Solution™)',
         'Responsible Tickets' => 'Felelős jegyek',
         'Responsible Tickets.' => 'Felelős jegyek.',
         'Restores a ticket from the archive (only if the event is a state change to any open available state).' =>
@@ -8031,13 +8335,16 @@ Az Ön segélyszolgálat csapata
         'Russian' => 'Orosz',
         'S/MIME Certificates' => 'S/MIME tanúsítványok',
         'SMS' => 'SMS',
-        'SMS (Short Message Service)' => 'SMS (rövid szöveges üzenet)',
         'Salutations' => 'Megszólítások',
         'Sample command output' => 'Minta parancskimenet',
         'Saves the attachments of articles. "DB" stores all data in the database (not recommended for storing big attachments). "FS" stores the data on the filesystem; this is faster but the webserver should run under the OTRS user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when "FS" is used.' =>
             'Elmenti a bejegyzések mellékleteit. A „DB” minden adatot az adatbázisban tárol (nem ajánlott nagy mellékletek tárolásához). Az „FS” a fájlrendszeren tárolja az adatokat. Ez gyorsabb, de a webkiszolgálót az OTRS felhasználó alatt kell futtatni. Adatvesztés nélkül válthat át a modulok között még egy olyan rendszeren is, amely produktív használatban van. Megjegyzés: A mellékletnevek keresése nem támogatott „FS” használata esetén.',
         'Schedule a maintenance period.' => 'Egy karbantartási időszakot ütemez.',
         'Screen after new ticket' => 'Új jegy utáni képernyő',
+        'Screens for which it is possible to enable or disable default columns.' =>
+            '',
+        'Screens for which it is possible to enable or disable dynamic fields.' =>
+            '',
         'Search Customer' => 'Ügyfél keresése',
         'Search Ticket.' => 'Jegy keresése.',
         'Search Tickets.' => 'Jegyek keresése.',
@@ -8047,13 +8354,17 @@ Az Ön segélyszolgálat csapata
         'Search.' => 'Keresés.',
         'Second Christmas Day' => 'Karácsony második napja',
         'Second Queue' => 'Második várólista',
+        'Seconds' => '',
         'Select after which period ticket overviews should refresh automatically.' =>
             'Annak kiválasztása, hogy a jegyáttekintőket milyen időszakonként kell automatikusan frissíteni.',
+        'Select how many last views should be shown.' => '',
         'Select how many tickets should be shown in overviews by default.' =>
             'Annak kiválasztása, hogy alapértelmezetten hány jegyet kell megjeleníteni az áttekintőkben.',
         'Select the main interface language.' => 'A felület fő nyelvének kiválasztása.',
         'Select the separator character used in CSV files (stats and searches). If you don\'t select a separator here, the default separator for your language will be used.' =>
             'Válassza ki a CSV fájlokban (statisztikák és keresések) használt elválasztó karaktert. Ha nem választ ki elválasztót itt, a nyelvének megfelelő alapértelmezett elválasztó lesz használva.',
+        'Select where to display the last views.' => '',
+        'Select which types should be displayed.' => '',
         'Select your frontend Theme.' => 'Válasszon előtétprogram témát.',
         'Select your personal time zone. All times will be displayed relative to this time zone.' =>
             'Személyes időzóna kiválasztása. Az összes idő ettől az időzónától relatívan lesz megjelenítve.',
@@ -8062,8 +8373,9 @@ Az Ön segélyszolgálat csapata
         'Selects the cache backend to use.' => 'Kiválasztja a használandó gyorsítótár háttérprogramot.',
         'Selects the module to handle uploads via the web interface. "DB" stores all uploads in the database, "FS" uses the file system.' =>
             'Kiválasztja a modult a webes felületen keresztüli feltöltések kezeléséhez. A „DB” minden feltöltést adatbázisban tárol, az „FS” a fájlrendszert használja.',
-        'Selects the ticket number generator module. "AutoIncrement" increments the ticket number, the SystemID and the counter are used with SystemID.counter format (e.g. 1010138, 1010139). With "Date" the ticket numbers will be generated by the current date, the SystemID and the counter. The format looks like Year.Month.Day.SystemID.counter (e.g. 200206231010138, 200206231010139). With "DateChecksum"  the counter will be appended as checksum to the string of date and SystemID. The checksum will be rotated on a daily basis. The format looks like Year.Month.Day.SystemID.Counter.CheckSum (e.g. 2002070110101520, 2002070110101535).' =>
-            'Kiválasztja a jegyszám-előállító modult. Az „AutoIncrement” növeli a jegyszámot, a rendszer-azonosító és a számláló rendszer-azonosító.számláló formátumban lesz használva (például 1010138, 1010139). A „Date” választásával a jegyszámok az aktuális dátum, a rendszer-azonosító és a számláló alapján lesznek előállítva. A formátum év.hónap.nap.rendszer-azonosító.számláló kinézetű lesz (például 200206231010138, 200206231010139). A „DateChecksum” választásával a számláló ellenőrzőösszegként lesz hozzáfűzve a dátum és a rendszer-azonosító karakterláncához. Az ellenőrzőösszeg forgatva lesz minden nap. A formátum év.hónap.nap.rendszer-azonosító.számláló.ellenőrzőösszeg kinézetű lesz (például 2002070110101520, 2002070110101535).',
+        'Selects the ticket number generator module. "AutoIncrement" increments the ticket number, the SystemID and the counter are used with SystemID.counter format (e.g. 1010138, 1010139). With "Date" the ticket numbers will be generated by the current date, the SystemID and the counter. The format looks like Year.Month.Day.SystemID.counter (e.g. 200206231010138, 200206231010139). With "DateChecksum"  the counter will be appended as checksum to the string of date and SystemID. The checksum will be rotated on a daily basis. The format looks like Year.Month.Day.SystemID.Counter.CheckSum (e.g. 2002070110101520, 2002070110101535). With "Random" the ticket numbers will be generated by 12 random numbers. The format looks like SystemID.RandomNumbers (e.g. 10123456789012).' =>
+            '',
+        'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => 'Új kimenő levél küldése ebből a jegyből',
         'Send notifications to users.' => 'Értesítések küldése a felhasználóknak.',
         'Sender type for new tickets from the customer inteface.' => 'Az új jegyek küldőtípusa az ügyfélfelületről.',
@@ -8072,7 +8384,6 @@ Az Ön segélyszolgálat csapata
         'Sends all outgoing email via bcc to the specified address. Please use this only for backup reasons.' =>
             'Elküld minden kimenő e-mailt rejtett másolatként egy megadott címre. Ezt csak biztonsági mentés céljából használja.',
         'Sends customer notifications just to the mapped customer.' => 'Az ügyfél értesítéseket csak a leképezett ügyfélnek küldi el.',
-        'Sends registration information to OTRS group.' => 'Regisztrációs információkat küld az OTRS csoportnak.',
         'Sends reminder notifications of unlocked ticket after reaching the reminder date (only sent to ticket owner).' =>
             'Elküldi a feloldott jegy emlékeztető értesítéseit az emlékeztető dátum elérése után (csak a jegy tulajdonosának küldi).',
         'Sends the notifications which are configured in the admin interface under "Ticket Notifications".' =>
@@ -8084,6 +8395,7 @@ Az Ön segélyszolgálat csapata
         'Sent email to "%s".' => 'E-mail elküldve neki: „%s”.',
         'Sent email to customer.' => 'E-mail elküldve az ügyfélnek.',
         'Sent notification to "%s".' => 'Értesítés elküldve neki: „%s”.',
+        'Separator for exported CSV files.' => '',
         'Serbian Cyrillic' => 'Szerb (cirill)',
         'Serbian Latin' => 'Szerb (latin)',
         'Service Level Agreements' => 'Szolgáltatási megállapodások',
@@ -8242,6 +8554,8 @@ Az Ön segélyszolgálat csapata
             'Beállítja a jegy felelős ügyintézőjét az ügyintézői felület jegyfelelős képernyőjén.',
         'Sets the service in the close ticket screen of the agent interface (Ticket::Service needs to be enabled).' =>
             'Beállítja a szolgáltatást az ügyintézői felület jegylezárás képernyőjén (a Ticket::Service modulnak engedélyezve kell lennie).',
+        'Sets the service in the ticket bulk screen in the agent interface (Ticket::Service needs to be enabled).' =>
+            '',
         'Sets the service in the ticket free text screen of the agent interface (Ticket::Service needs to be enabled).' =>
             'Beállítja a szolgáltatást az ügyintézői felület jegy szabad szöveg képernyőjén (a Ticket::Service modulnak engedélyezve kell lennie).',
         'Sets the service in the ticket note screen of the agent interface (Ticket::Service needs to be enabled).' =>
@@ -8353,6 +8667,10 @@ Az Ön segélyszolgálat csapata
             'Egy hivatkozást jelenít meg a menüben egy jegylezárásához az ügyintézői felület összes jegyáttekintőjében.',
         'Shows a link in the menu to close a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
             'Egy hivatkozást jelenít meg a menüben egy jegy lezárásához az ügyintézői felület jegynagyítás nézetében. Ezen hivatkozás megjelenítéséhez vagy meg nem jelenítéséhez további hozzáférési vezérlőt lehet készíteni a „Group” kulcs és az „rw:csoport1;move_into:csoport2” tartalomhoz hasonló használatával. A menüpontok csoportokba rendezéséhez használja a „ClusterName” kulcsot bármilyen olyan tartalommal, amelyet a felhasználói felületen látni szeretne. Használja a „ClusterPriority” kulcsot egy bizonyos fürt sorrendjének beállításához az eszköztáron belül.',
+        'Shows a link in the menu to create a unit test for the current ticket.' =>
+            '',
+        'Shows a link in the menu to create and send a unit test for the current ticket.' =>
+            '',
         'Shows a link in the menu to delete a ticket in every ticket overview of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             'Egy hivatkozást jelenít meg a menüben egy jegy törléséhez az ügyintézői felület összes jegyáttekintőjében. A hivatkozás megjelenítéséhez vagy elrejtéséhez további hozzáférés vezérlő készíthető a „Group” kulcs és az „rw:csoport1;move_into:csoport2” értékhez hasonló tartalom használatával.',
         'Shows a link in the menu to delete a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
@@ -8420,12 +8738,8 @@ Az Ön segélyszolgálat csapata
             'Megjeleníti az összes lehetséges ügyintéző listáját (minden ügyintéző, aki jegyzet jogosultsággal rendelkezik a várólistán vagy jegyen) annak meghatározásához, hogy kit kell értesíteni erről a jegyzetről az ügyintézői felület jegyfelelős képernyőjén.',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             'Megjeleníti a jegyáttekintő előnézetét (CustomerInfo => 1 – az ügyfél-információt is megjeleníti, a CustomerInfoMaxSize az ügyfél-információ legnagyobb mérete karakterben).',
-        'Shows a teaser link in the menu for the ticket attachment view of OTRS Business Solution™.' =>
-            'Egy rávezető hivatkozást jelenít meg a menüben az OTRS Business Solution™ jegymelléklet nézetéhez.',
         'Shows all both ro and rw queues in the queue view.' => 'Megjeleníti a csak olvasható és az írható, olvasható várólistákat is a várólista nézetben.',
         'Shows all both ro and rw tickets in the service view.' => 'Megjeleníti a csak olvasható és az írható, olvasható jegyeket is a szolgáltatás nézetben.',
-        'Shows all open tickets (even if they are locked) in the escalation view of the agent interface.' =>
-            'Megjelenít minden nyitott jegyet (akkor is, ha zárolt) az ügyintézői felület eszkalációs nézetében.',
         'Shows all the articles of the ticket (expanded) in the agent zoom view.' =>
             'Megjeleníti a jegy összes bejegyzését (kinyitva) az ügyintézői nagyítás nézetben.',
         'Shows all the articles of the ticket (expanded) in the customer zoom view.' =>
@@ -8440,11 +8754,17 @@ Az Ön segélyszolgálat csapata
             'Ügyfélelőzmény jegyeket jelenít meg az ügyintézői telefonos jegy, az ügyintézői e-mail jegy és az ügyintézői ügyféljegy képernyőkön.',
         'Shows either the last customer article\'s subject or the ticket title in the small format overview.' =>
             'Vagy a legutolsó ügyfél bejegyzés tárgyát, vagy a jegy címét jeleníti meg a kis formátumú áttekintőben.',
+        'Shows existing parent/child (separated by ::) process lists in the form of a tree or a list.' =>
+            '',
         'Shows existing parent/child queue lists in the system in the form of a tree or a list.' =>
             'Megjeleníti a meglévő szülő vagy gyermek várólisták listáit a rendszeren fa vagy lista formában.',
         'Shows information on how to start OTRS Daemon' => 'Információkat jelenít meg arról, hogy hogyan indítsa az OTRS démont',
         'Shows link to external page in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             'Külső oldalra mutató hivatkozást jelenít meg az ügyintézői felület jegynagyítás nézetében. A hivatkozás megjelenítéséhez vagy elrejtéséhez további hozzáférés vezérlő készíthető a „Group” kulcs és az „rw:csoport1;move_into:csoport2” értékhez hasonló tartalom használatával.',
+        'Shows only valid dynamic fields in dynamic field export selection (AdminDynamicFieldConfigurationImportExport) if enabled.' =>
+            '',
+        'Shows only valid dynamic fields in screen configuration (AdminDynamicFieldScreenConfiguration) if enabled.' =>
+            '',
         'Shows the article head information in the agent zoom view.' => 'Megjeleníti a bejegyzésfejléc információit a ügyintézői nagyítás nézeten.',
         'Shows the articles sorted normally or in reverse, under ticket zoom in the agent interface.' =>
             'Megjeleníti a bejegyzéseket normálisan vagy fordítottan rendezve a jegynagyítás alatt az ügyintézői felületen.',
@@ -8497,6 +8817,7 @@ Az Ön segélyszolgálat csapata
         'Signature data.' => 'Aláírási adatok.',
         'Signatures' => 'Aláírások',
         'Simple' => 'Egyszerű',
+        'Size of the logo in the page header.' => '',
         'Skin' => 'Felszín',
         'Slovak' => 'Szlovák',
         'Slovenian' => 'Szlovén',
@@ -8540,8 +8861,8 @@ Az Ön segélyszolgálat csapata
             'Azt a nevet adja meg, amelyet az alkalmazás az értesítések elküldésekor használjon. A küldő neve a teljes megjelenítési név összeállításához lesz használva az értesítési mesternél (azaz "OTRS értesítésiek" <otrs@your.example.com>).',
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             'Azt a sorrendet adja meg, amelyben az ügyintéző keresztneve és vezetékneve megjelenítve legyen.',
-        'Specifies the path of the file for the logo in the page header (gif|jpg|png, 700 x 100 pixel).' =>
-            'Megadja a fájl útvonalát az oldal fejlécében lévő logóhoz (gif|jpg|png, 700 x 100 képpont).',
+        'Specifies the path of the file for the logo in the page header (gif|jpg|png).' =>
+            '',
         'Specifies the path of the file for the performance log.' => 'Megadja a fájl útvonalát a teljesítménynaplóhoz.',
         'Specifies the path to the converter that allows the view of Microsoft Excel files, in the web interface.' =>
             'Megadja az átalakító útvonalát, amely lehetővé teszi a Microsoft Excel fájlok megtekintését a webes felületen.',
@@ -8578,7 +8899,6 @@ Az Ön segélyszolgálat csapata
             'Elindítja az aktív objektum helyettesítő karakter keresését, miután a hivatkozás objektum maszk elindult.',
         'Stat#' => 'Stat#',
         'States' => 'Állapotok',
-        'Statistic Reports overview.' => 'Statisztikai jelentések áttekintője.',
         'Statistics overview.' => 'Statisztikák áttekintője.',
         'Status view' => 'Állapot nézet',
         'Stopped response time escalation.' => 'Leállt a válaszidő eszkalációja.',
@@ -8595,6 +8915,8 @@ Az Ön segélyszolgálat csapata
         'System Configuration Deployment' => 'Rendszer-konfigurációs üzembe állítás',
         'System Configuration Group' => 'Rendszerbeállítások csoport',
         'System Maintenance' => 'Rendszerkarbantartás',
+        'Template for the out-of-office message shown to the user in the frontend. Placeholders for out-of-office information can be used via ###PlaceholderName###. Possible placeholders are: StartYear, StartMonth, StartDay, EndYear, EndMonth, EndDay, DaysRemaining.' =>
+            '',
         'Templates ↔ Attachments' => 'Sablonok ↔ Mellékletek',
         'Templates ↔ Queues' => 'Sablonok ↔ Várólisták',
         'Textarea' => 'Szövegdoboz',
@@ -8656,8 +8978,11 @@ Az Ön segélyszolgálat csapata
             'A tárgy elején lévő szöveg egy válasz e-mailben, például RE, AW vagy AS.',
         'The text at the beginning of the subject when an email is forwarded, e.g. FW, Fwd, or WG.' =>
             'A tárgy elején lévő szöveg egy e-mail továbbításakor, például FW, Fwd vagy WG.',
+        'The user\'s Mattermost username.' => '',
         'The value of the From field' => 'A Feladó mező értéke',
         'Theme' => 'Téma',
+        'This configuration defines if a dynamic field has to be checked in the agent ticket bulk view to get set for each ticket. This prevents unwanted overwrite of dynamic field values with their default or even empty values.' =>
+            '',
         'This event module stores attributes from CustomerUser as DynamicFields tickets. Please see DynamicFieldFromCustomerUser::Mapping setting for how to configure the mapping.' =>
             'Ez az eseménymodul az ügyfél-felhasználó jellemzőit tárolja jegy típusú dinamikus mezőkként. Nézze meg a DynamicFieldFromCustomerUser::Mapping beállítást ahhoz, hogy hogyan kell beállítani a leképezést.',
         'This is a Description for Comment on Framework.' => 'Ez egy leírás a keretrendszeren lévő megjegyzéshez.',
@@ -8677,6 +9002,8 @@ Az Ön segélyszolgálat csapata
         'This option defines the process tickets default priority.' => 'Ez a beállítás határozza meg a folyamatjegyek alapértelmezett prioritását.',
         'This option defines the process tickets default queue.' => 'Ez a beállítás határozza meg a folyamatjegyek alapértelmezett várólistáját.',
         'This option defines the process tickets default state.' => 'Ez a beállítás határozza meg a folyamatjegyek alapértelmezett állapotát.',
+        'This option enables a dropdown which will be displayed instead of the time unit input field.' =>
+            '',
         'This option will deny the access to customer company tickets, which are not created by the customer user.' =>
             'Ez a beállítás meg fogja tagadni azon ügyfél-vállalati jegyekhez való hozzáférést, amelyeket nem az ügyfél-felhasználó hozott létre.',
         'This setting allows you to override the built-in country list with your own list of countries. This is particularly handy if you just want to use a small select group of countries.' =>
@@ -8685,6 +9012,8 @@ Az Ön segélyszolgálat csapata
         'This setting shows the sorting attributes in all overview screen, not only in queue view.' =>
             'Ez a beállítás megjeleníti a rendezési attribútumokat az összes képernyőn, nem csak a várólista nézeten.',
         'This will allow the system to send text messages via SMS.' => 'Ez lehetővé fogja tenni a rendszernek a szöveges üzenetek küldését SMS-ben.',
+        'Threshold (in minutes) for catching up with ticket creation for appointments. Tickets for due appointments will only be created if their planned creation date is not older than the configured amount of minutes. This prevents creation of tickets for e. g. recurring appointments if the ticket creation will be executed some time later.' =>
+            '',
         'Ticket Close.' => 'Jegylezárás.',
         'Ticket Compose Bounce Email.' => 'E-mail átirányító jegyválasz.',
         'Ticket Compose email Answer.' => 'E-mailre történő jegyválasz.',
@@ -8711,8 +9040,13 @@ Az Ön segélyszolgálat csapata
         'Ticket Zoom' => 'Jegynagyítás',
         'Ticket Zoom.' => 'Jegynagyítás.',
         'Ticket bulk module.' => 'Jegy tömeges modul.',
+        'Ticket creation' => '',
+        'Ticket event module that stores values of the selected web service record into the configured additional dynamic fields.' =>
+            '',
         'Ticket event module that triggers the escalation stop events.' =>
             'Jegyesemény modul, amely aktiválja az eszkaláció leállítás eseményeket.',
+        'Ticket event module which sends new ticket notifications even for tickets without articles.' =>
+            '',
         'Ticket limit per page for Ticket Overview "Medium".' => 'Oldalankénti jegykorlát a „Közepes” jegyáttekintéshez.',
         'Ticket limit per page for Ticket Overview "Preview".' => 'Oldalankénti jegykorlát az „Előnézet” jegyáttekintéshez.',
         'Ticket limit per page for Ticket Overview "Small".' => 'Oldalankénti jegykorlát a „Kis” jegyáttekintéshez.',
@@ -8740,6 +9074,8 @@ Az Ön segélyszolgálat csapata
         'Tree view' => 'Fa nézet',
         'Triggers add or update of automatic calendar appointments based on certain ticket times.' =>
             'Aktiválja az automatikus naptáridőpontok hozzáadását vagy frissítését bizonyos jegyidők alapján.',
+        'Triggers event \'TicketAllChildrenClosed\' if all child tickets of a parent ticket have been closed/merged/removed.' =>
+            '',
         'Triggers ticket escalation events and notification events for escalation.' =>
             'Aktiválja a jegyeszkalációs eseményeket és az értesítés eseményeket az eszkalációnál.',
         'Turkish' => 'Török',
@@ -8751,6 +9087,8 @@ Az Ön segélyszolgálat csapata
         'Tweak the system as you wish.' => 'A rendszer finomhangolása, ahogy szeretné.',
         'Type of daemon log rotation to use: Choose \'OTRS\' to let OTRS system to handle the file rotation, or choose \'External\' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration.' =>
             'A használandó démon naplóforgatásának típusa: válassza az „OTRS” lehetőséget, ha az OTRS rendszerre szeretné bízni a fájlforgatás kezelését, vagy válassza a „Külső” lehetőséget egy harmadik féltől származó forgatási mechanizmus (azaz logrotate) használatához. Megjegyzés: a külső forgatási mechanizmus a saját és független beállítását igényli.',
+        'URL to the OTRS cloud service proxy service. The http or https prefix will be added, depending on SysConfig option \'PackageRepositoryURLSchema\'.' =>
+            '',
         'Ukrainian' => 'Ukrán',
         'Unlock tickets that are past their unlock timeout.' => 'Jegyek feloldása, amelyek átlépték a feloldási időkorlátjukat.',
         'Unlock tickets whenever a note is added and the owner is out of office.' =>
@@ -8771,6 +9109,8 @@ Az Ön segélyszolgálat csapata
         'Use new type of select and autocomplete fields in customer interface, where applicable (InputFields).' =>
             'A választó és automatikusan kiegészítő mezők új típusának használata az ügyfélfelületen, ahol alkalmazható (beviteli mezők).',
         'User Profile' => 'Felhasználói profil',
+        'User agent string to use for the WebUserAgent module. Leave empty to use the default user agent string.' =>
+            '',
         'UserFirstname' => 'Felhasználó keresztneve',
         'UserLastname' => 'Felhasználó vezetékneve',
         'Users, Groups & Roles' => 'Felhasználók, csoportok és szerepek',
@@ -8778,7 +9118,6 @@ Az Ön segélyszolgálat csapata
         'Uses richtext for viewing and editing: articles, salutations, signatures, standard templates, auto responses and notifications.' =>
             'RichText szöveget használ a megtekintésnél és szerkesztésnél: bejegyzések, megszólítások, aláírások, szabványos sablonok, automatikus válaszok és értesítések.',
         'Vietnam' => 'Vietnami',
-        'View all attachments of the current ticket' => 'Az aktuális jegy összes mellékletének megtekintése',
         'View performance benchmark results.' => 'Teljesítményteszt eredményeinek megtekintése.',
         'Watch this ticket' => 'Jegy megfigyelése',
         'Watched Tickets' => 'Megfigyelt jegyek',
@@ -8789,7 +9128,10 @@ Az Ön segélyszolgálat csapata
         'We are performing scheduled maintenance. We should be back online shortly.' =>
             'Ütemezett karbantartást végzünk. Rövidesen ismét elérhetőnek kell lennünk.',
         'Web Services' => 'Webszolgáltatások',
-        'Web View' => 'Webnézet',
+        'Web service (Multiselect)' => '',
+        'Web service (Text)' => '',
+        'Web service dynamic field AJAX interface' => '',
+        'Webservice' => '',
         'When agent creates a ticket, whether or not the ticket is automatically locked to the agent.' =>
             'Amikor az ügyintéző létrehoz egy jegyet, akkor a jegy legyen-e automatikusan az ügyintézőre zárolva vagy sem.',
         'When tickets are merged, a note will be added automatically to the ticket which is no longer active. Here you can define the body of this note (this text cannot be changed by the agent).' =>
@@ -8811,7 +9153,11 @@ Az Ön segélyszolgálat csapata
             'Az előnyben részesített várólistáknak a várólista kiválasztása. Értesítést is kaphat azokról a várólistákról e-mailben, ha engedélyezve van.',
         'Your service selection of your preferred services. You also get notified about those services via email if enabled.' =>
             'Az előnyben részesített szolgáltatásoknak a szolgáltatás kiválasztása. Értesítést is kaphat azokról a szolgáltatásokról e-mailben, ha engedélyezve van.',
+        'Your username in Mattermost without the leading @' => '',
+        'Znuny.org - News' => '',
         'Zoom' => 'Részletek',
+        'all tickets' => '',
+        'archived tickets' => '',
         'attachment' => 'melléklet',
         'bounce' => 'átirányítás',
         'compose' => 'válasz',
@@ -8821,6 +9167,7 @@ Az Ön segélyszolgálat csapata
         'info' => 'információ',
         'inline' => 'beágyazott',
         'normal' => 'normál',
+        'not archived tickets' => '',
         'notice' => 'értesítés',
         'pending' => 'függőben',
         'phone' => 'telefon',
@@ -8865,6 +9212,7 @@ Az Ön segélyszolgálat csapata
         'Apr',
         'April',
         'Are you sure you want to delete this appointment? This operation cannot be undone.',
+        'Are you sure you want to overwrite the config parameters?',
         'Are you sure you want to update all installed packages?',
         'Are you using a browser plugin like AdBlock or AdBlockPlus? This can cause several issues and we highly recommend you to add an exception for this domain.',
         'Article display',
@@ -8945,6 +9293,7 @@ Az Ön segélyszolgálat csapata
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
         'Do you really want to delete this statistic?',
+        'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',
         'Don\'t save, update manually',
@@ -8998,7 +9347,6 @@ Az Ön segélyszolgálat csapata
         'Just this occurrence',
         'Keys with values can\'t be renamed. Please remove this key/value pair instead and re-add it afterwards.',
         'Less',
-        'Link',
         'Loading, please wait...',
         'Loading...',
         'Location',
@@ -9137,7 +9485,6 @@ Az Ön segélyszolgálat csapata
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',
-        'The mail could not be sent',
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',
