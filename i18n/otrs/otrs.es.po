@@ -34,15 +34,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-07-01 07:05+0000\n"
-"PO-Revision-Date: 2020-04-29 09:22+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Spanish <https://translate.app.otrs.com/projects/otrs-6/otrs/es/>\n"
+"PO-Revision-Date: 2022-03-11 19:34+0000\n"
+"Last-Translator: Denny Korsukéwitz <dk@znuny.com>\n"
+"Language-Team: Spanish <https://translations.znuny.org/projects/znuny/znuny/"
+"es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.11.3\n"
+"X-Generator: Weblate 4.8\n"
 
 #. Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "ACL Management"
@@ -8470,11 +8471,11 @@ msgstr "¿Olvidó su contraseña?"
 
 #. Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "2 Factor Token"
-msgstr "2 Factor de Señal"
+msgstr "Código de autenticación en dos pasos"
 
 #. Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Your 2 Factor Token"
-msgstr "Tu 2 Factor de Señal"
+msgstr "Su código de autenticación en dos pasos"
 
 #. Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Log In"
