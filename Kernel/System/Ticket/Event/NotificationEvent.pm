@@ -38,6 +38,7 @@ our @ObjectDependencies = (
     'Kernel::System::DateTime',
     'Kernel::System::User',
     'Kernel::System::CheckItem',
+    'Kernel::System::Valid',
 );
 
 sub new {
@@ -256,6 +257,8 @@ sub Run {
                 next TRANSPORT;
             }
 
+            my @ValidIDs = $Kernel::OM->Get('Kernel::System::Valid')->ValidIDsGet();
+
             # check if transport is usable
             next TRANSPORT if !$TransportObject->IsUsable();
 
@@ -303,6 +306,18 @@ sub Run {
 
                     # No UserID means it's not a mapped customer.
                     next BUNDLE if !$Bundle->{Recipient}->{UserID};
+                }
+
+                # Check if customer user is invalid.
+                if (
+                    $Bundle->{Recipient}->{Source}
+                    && $Bundle->{Recipient}->{Source} eq 'CustomerUser'
+                    && $Bundle->{Recipient}->{ValidID}
+                    && !grep { $Bundle->{Recipient}->{ValidID} eq $_ } @ValidIDs
+
+                    )
+                {
+                    next BUNDLE;
                 }
 
                 my $Success = $Self->_SendRecipientNotification(

@@ -25,7 +25,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # disable rich text editor
 my $Success = $ConfigObject->Set(
@@ -109,12 +109,14 @@ $ConfigObject->Set(
 );
 
 # create a new user for current test
-my $UserLogin = $Helper->TestUserCreate(
+my $UserLogin = $HelperObject->TestUserCreate(
     Groups => ['users'],
 );
 
 # get user object
-my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
+my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+
 
 my %UserData = $UserObject->GetUserData(
     User => $UserLogin,
@@ -123,14 +125,14 @@ my %UserData = $UserObject->GetUserData(
 my $UserID = $UserData{UserID};
 
 # create a new user without permissions
-my $UserLogin2 = $Helper->TestUserCreate();
+my $UserLogin2 = $HelperObject->TestUserCreate();
 
 my %UserData2 = $UserObject->GetUserData(
     User => $UserLogin2,
 );
 
 # create a new user invalid
-my $UserLogin3 = $Helper->TestUserCreate(
+my $UserLogin3 = $HelperObject->TestUserCreate(
     Groups => ['users'],
 );
 
@@ -139,7 +141,7 @@ my %UserData3 = $UserObject->GetUserData(
 );
 
 # create a new user with permissions via roles only
-my $UserLogin4 = $Helper->TestUserCreate();
+my $UserLogin4 = $HelperObject->TestUserCreate();
 
 my %UserData4 = $UserObject->GetUserData(
     User => $UserLogin4,
@@ -151,11 +153,19 @@ my $SetInvalid = $UserObject->UserUpdate(
     ChangeUserID => 1,
 );
 
-# create a new customer user for current test
-my $CustomerUserLogin = $Helper->TestCustomerUserCreate();
+# create a new customer user for current test.
+my $CustomerUserLogin = $HelperObject->TestCustomerUserCreate();
+
+# create a new customer for invalid test.
+my $CustomerUserLogin1 = $HelperObject->TestCustomerUserCreate();
+
+my %CustomerUser1 = $CustomerUserObject->CustomerUserDataGet(
+    User => $CustomerUserLogin1,
+);
+
 
 # get a random id
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 # get group object
 my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
@@ -295,6 +305,34 @@ $Self->True(
     "TicketCreate() successful for Ticket ID $TicketID",
 );
 
+# create ticket
+my $CustomerTicketIDInvalidCustomer = $TicketObject->TicketCreate(
+    Title         => 'Customer Ticket Invalid Test',
+    QueueID       => 1,
+    Lock          => 'unlock',
+    Priority      => '3 normal',
+    State         => 'new',
+    CustomerID    => 'example.com',
+    CustomerUser  => $CustomerUserLogin1,
+    OwnerID       => $UserID,
+    ResponsibleID => $UserID,
+    UserID        => $UserID,
+);
+
+# sanity check
+$Self->True(
+    $CustomerTicketIDInvalidCustomer,
+    "TicketCreate() successful for Ticket ID $CustomerTicketIDInvalidCustomer",
+);
+
+$CustomerUserObject->CustomerUserUpdate(
+    %CustomerUser1,
+    ID      => $CustomerUser1{UserID},
+    ValidID => 2,
+    UserID  => 1,
+);
+
+
 my $ArticleObject        = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 my $ArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Email' );
 
@@ -381,6 +419,29 @@ $Self->True(
     $CustomerArticleID1,
     "Article is created - ID $ArticleID1",
 );
+
+# create first customer article
+my $CustomerArticleID1InvalidCustomer = $ArticleBackendObject->ArticleCreate(
+    TicketID             => $CustomerTicketIDInvalidCustomer,
+    IsVisibleForCustomer => 1,
+    SenderType           => 'customer',
+    Subject              => 'Article 1',
+    Body                 => 'This is the first article',
+    Charset              => 'ISO-8859-15',
+    MimeType             => 'text/plain',
+    HistoryType          => 'EmailCustomer',
+    HistoryComment       => 'Some free text!',
+    UserID               => 1,
+    From                 => "$CustomerUserLogin1\@localunittest.com",
+    To                   => 'test1@otrsexample.com',
+    Cc                   => 'test2@otrsexample.com',
+);
+
+$Self->True(
+    $CustomerArticleID1InvalidCustomer,
+    "Article is created - ID $CustomerArticleID1InvalidCustomer",
+);
+
 
 my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
 my $DynamicFieldValueObject   = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
@@ -1364,6 +1425,24 @@ my @Tests = (
         ],
         Success => 1,
     },
+    {
+        Name => 'CustomerUser Invalid',
+        Data => {
+            Events     => [ 'TicketDynamicFieldUpdate_DFT1' . $RandomID . 'Update' ],
+            Recipients => ['Customer'],
+        },
+        Config => {
+            Event => 'TicketDynamicFieldUpdate_DFT1' . $RandomID . 'Update',
+            Data  => {
+                TicketID => $CustomerTicketIDInvalidCustomer,
+            },
+            Config => {},
+            UserID => 1,
+        },
+        ExpectedResults => [],
+        Success         => 1,
+    },
+
 );
 
 my $SetPostMasterUserID = sub {

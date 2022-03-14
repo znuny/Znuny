@@ -1,3 +1,6 @@
+# 6.0.41 2022-xx-xx
+ - 2022-03-14 Fixed sending notifications to invalid customer users.
+
 # 6.0.40 2022-03-09
  - 2022-03-07 Original owners of tickets will now be set again when cancelling a ticket bulk action.
  - 2022-03-02 Sector Nord AG: Fixed AgentAppointmentCalendarOverview AppointmentTooltip (#216). Thanks to Sector Nord AG (@jsinagowitz). [#216](https://github.com/znuny/Znuny/pull/216)
