@@ -45,8 +45,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-07-01 07:05+0000\n"
-"PO-Revision-Date: 2022-03-11 19:34+0000\n"
-"Last-Translator: Denny Korsukéwitz <dk@znuny.com>\n"
+"PO-Revision-Date: 2022-03-14 16:55+0000\n"
+"Last-Translator: Weblate Admin <operations@znuny.com>\n"
 "Language-Team: German <https://translations.znuny.org/projects/znuny/znuny/"
 "de/>\n"
 "Language: de\n"
@@ -24203,7 +24203,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Hide"
-msgstr ""
+msgstr "Ausblenden"
 
 #. SysConfig
 msgid "It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty."
