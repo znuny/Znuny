@@ -45,8 +45,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-07-01 07:05+0000\n"
-"PO-Revision-Date: 2022-03-14 16:55+0000\n"
-"Last-Translator: Weblate Admin <operations@znuny.com>\n"
+"PO-Revision-Date: 2022-03-15 10:04+0000\n"
+"Last-Translator: Denny Korsukéwitz <dk@znuny.com>\n"
 "Language-Team: German <https://translations.znuny.org/projects/znuny/znuny/"
 "de/>\n"
 "Language: de\n"
@@ -54,7 +54,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8\n"
+"X-Generator: Weblate 4.11.2\n"
 
 #. Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "ACL Management"
@@ -24523,7 +24523,7 @@ msgstr "Sollen die Konfigurations-Parameter wirklich überschrieben werden?"
 
 #. SysConfig
 msgid "Activates week number for datepickers."
-msgstr ""
+msgstr "Kalenderwochen für Datumsauswahl aktivieren."
 
 #. SysConfig
 msgid "Customer User-Customer Relations"
@@ -24951,7 +24951,7 @@ msgstr "Definiert die nächstmöglichen Ticketzustände für kalenderbasierte Ti
 
 #. SysConfig
 msgid "Displays notifications for missing and expired OAuth2 tokens."
-msgstr ""
+msgstr "Zeigt Benachrichtigungen für fehlende und abgelaufene OAuth2-Token an."
 
 #. SysConfig
 msgid "Dynamic fields shown in the ticket bulk screen of the agent interface."
@@ -24979,7 +24979,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Manage OAuth2 tokens and their configurations."
-msgstr ""
+msgstr "Verwalten von OAuth2-Token und deren Konfigurationen."
 
 #. SysConfig
 msgid "Name of the OAuth2 token configuration to use for sending mails if 'OAuth2 token' was configured in SendmailModule::AuthenticationType."
