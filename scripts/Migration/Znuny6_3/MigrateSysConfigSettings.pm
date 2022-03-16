@@ -64,12 +64,6 @@ sub Run {
         'Frontend::Navigation###AgentTicketOwnerView###002-Znuny4OTRSOwnerToolbar' => [
             'Frontend::Navigation###AgentTicketOwnerView###002-Ticket',
         ],
-        'Ticket::Frontend::AgentTicketOwnerView###SortBy::Default' => [
-            'Ticket::Frontend::AgentTicketOwnerView###SortBy::Default',
-        ],
-        'Ticket::Frontend::AgentTicketOwnerView###Order::Default' => [
-            'Ticket::Frontend::AgentTicketOwnerView###Order::Default',
-        ],
         'Frontend::ToolBarModule###9-Ticket::TicketOwner' => [
             'Frontend::ToolBarModule###191-Ticket::TicketOwner',
         ],
