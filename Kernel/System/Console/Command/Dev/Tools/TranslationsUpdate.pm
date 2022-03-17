@@ -85,6 +85,35 @@ EOF
 
 my $BreakLineAfterChars = 60;
 
+sub PreRun {
+    my ( $Self, %Param ) = @_;
+
+    my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
+
+    $Self->Print("<yellow>Check for links...</yellow>\n\n");
+
+    my @FilesInDirectory = $Kernel::OM->Get('Kernel::System::Main')->DirectoryRead(
+        Directory => $Home,
+        Filter    => '*',
+        Silent    => 1,
+    );
+
+    my $LinkedFile = 0;
+    for my $File (@FilesInDirectory){
+        if ( -l "$File" ) {
+            $LinkedFile++;
+            $Self->Print("<red>Linked file detected:</red> $File\n");
+        }
+    }
+
+    return 1 if !$LinkedFile;
+
+    $Self->Print("\n<red>Make sure that all symbolic links are removed before.</red>\n");
+    $Self->Print("<green>perl module-tools/bin/otrs.ModuleTools.pl Module::File::Unlink --all $Home</green>\n\n");
+
+    return 1;
+}
+
 sub Run {
     my ( $Self, %Param ) = @_;
 
