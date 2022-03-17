@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-03-11 16:24+0000\n"
+"POT-Creation-Date: 2022-03-16 17:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -7839,7 +7839,7 @@ msgid "Save this setting"
 msgstr ""
 
 #. Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
-msgid "Did you know? You can help translating OTRS at %s."
+msgid "Did you know? You can help translating Znuny at %s."
 msgstr ""
 
 #. Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences/SettingsList.tt
@@ -14192,6 +14192,10 @@ msgstr ""
 
 #. Perl Module: Kernel/System/Calendar/Event/Transport/Email.pm
 msgid "Send unencrypted notification"
+msgstr ""
+
+#. Perl Module: Kernel/System/Calendar/Plugin/Ticket/Create.pm
+msgid "On the date"
 msgstr ""
 
 #. Perl Module: Kernel/System/Console/Command/Dev/Tools/Config2Docbook.pm

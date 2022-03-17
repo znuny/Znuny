@@ -9,6 +9,8 @@
 ## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::SpellCheck)
 
 package Kernel::System::Calendar::Plugin::Ticket::Create;
+use Kernel::Language qw(Translatable);
+
 use parent qw(Kernel::System::Calendar::Plugin::Base);
 
 use strict;
@@ -936,9 +938,9 @@ sub _TicketCreateTimeTypeSelection {
         ID   => 'Plugin_' . $Param{Plugin}->{PluginKey} . '_TicketCreateTimeType',
         Name => 'Plugin_' . $Param{Plugin}->{PluginKey} . '_TicketCreateTimeType',
         Data => {
-            Never     => 'Never',
-            Relative  => 'Relative period',
-            StartTime => 'On the date',
+            Never     => Translatable('Never'),
+            Relative  => Translatable('Relative period'),
+            StartTime => Translatable('On the date'),
         },
         Sort           => 'IndividualKey',
         SortIndividual => [ 'Never', 'Relative', 'StartTime' ],

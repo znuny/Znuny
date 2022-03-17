@@ -47,8 +47,7 @@ msgstr ""
 "POT-Creation-Date: 2020-07-01 07:05+0000\n"
 "PO-Revision-Date: 2022-03-15 10:04+0000\n"
 "Last-Translator: Denny Korsukéwitz <dk@znuny.com>\n"
-"Language-Team: German <https://translations.znuny.org/projects/znuny/znuny/"
-"de/>\n"
+"Language-Team: German <https://translations.znuny.org/projects/znuny/znuny/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -9612,123 +9611,123 @@ msgstr "Zähler"
 msgid "Go back to the previous page"
 msgstr "Zurück zur vorhergehenden Seite"
 
-#. JS Template: CalendarSettingsDialog
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/AppointmentCalendar/CalendarSettingsDialog.html.tmpl
 msgid "Show"
 msgstr "Anzeigen"
 
-#. JS Template: FormDraftAddDialog
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/FormDraftAddDialog.html.tmpl
 msgid "Draft title"
 msgstr "Entwurfstitel"
 
-#. JS Template: ArticleViewSettingsDialog
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/TicketZoom/ArticleViewSettingsDialog.html.tmpl
 msgid "Article display"
 msgstr "Artikel-Anzeige"
 
-#. JS Template: FormDraftDeleteDialog
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/TicketZoom/FormDraftDeleteDialog.html.tmpl
 msgid "Do you really want to delete \"%s\"?"
 msgstr "Möchten Sie \"%s\" wirklich löschen?"
 
-#. JS Template: FormDraftDeleteDialog
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/TicketZoom/FormDraftDeleteDialog.html.tmpl
 msgid "Confirm"
 msgstr "Bestätigen"
 
-#. JS Template: WidgetLoading
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/WidgetLoading.html.tmpl
 msgid "Loading, please wait..."
 msgstr "Lade, bitte warten..."
 
-#. JS Template: UploadContainer
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/AjaxDnDUpload/UploadContainer.html.tmpl
 msgid "Click to select a file for upload."
 msgstr "Klicken Sie, um eine Datei fürs Hochladen auszuwählen."
 
-#. JS Template: UploadContainer
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/AjaxDnDUpload/UploadContainer.html.tmpl
 msgid "Click to select files or just drop them here."
 msgstr "Klicken Sie zum Auswählen oder legen Sie die Dateien einfach hier ab."
 
-#. JS Template: UploadContainer
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/AjaxDnDUpload/UploadContainer.html.tmpl
 msgid "Click to select a file or just drop it here."
 msgstr "Klicken Sie zum Auswählen oder legen Sie die Dateien einfach hier ab."
 
-#. JS Template: UploadContainer
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/AjaxDnDUpload/UploadContainer.html.tmpl
 msgid "Uploading..."
 msgstr "Wird hochgeladen..."
 
-#. JS Template: InformationDialog
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/PackageManager/InformationDialog.html.tmpl
 msgid "Process state"
 msgstr "Prozess-Status"
 
-#. JS Template: InformationDialog
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/PackageManager/InformationDialog.html.tmpl
 msgid "Running"
 msgstr "Laufend"
 
-#. JS Template: InformationDialog
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/PackageManager/InformationDialog.html.tmpl
 msgid "Finished"
 msgstr "Fertig"
 
-#. JS Template: InformationDialog
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/PackageManager/InformationDialog.html.tmpl
 msgid "No package information available."
 msgstr "Keine Paketinformationen verfügbar."
 
-#. JS Template: AddButton
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
 msgid "Add new entry"
 msgstr "Eintrag hinzufügen"
 
-#. JS Template: AddHashKey
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddHashKey.html.tmpl
 msgid "Add key"
 msgstr "Schlüssel hinzufügen"
 
-#. JS Template: DialogDeployment
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DialogDeployment.html.tmpl
 msgid "Deployment comment..."
 msgstr "Kommentar zur Inbetriebnahme..."
 
-#. JS Template: DialogDeployment
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DialogDeployment.html.tmpl
 msgid "This field can have no more than 250 characters."
 msgstr "Dieses Feld darf nicht mehr als 250 Zeichen lang sein."
 
-#. JS Template: DialogDeployment
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DialogDeployment.html.tmpl
 msgid "Deploying, please wait..."
 msgstr "Inbetriebnahme läuft, bitte warten..."
 
-#. JS Template: DialogDeployment
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DialogDeployment.html.tmpl
 msgid "Preparing to deploy, please wait..."
 msgstr "Inbetriebnahme wird vorbereitet, bitte warten..."
 
-#. JS Template: DialogDeployment
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DialogDeployment.html.tmpl
 msgid "Deploy now"
 msgstr "Jetzt in Betrieb nehmen"
 
-#. JS Template: DialogDeployment
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DialogDeployment.html.tmpl
 msgid "Try again"
 msgstr "Nochmals versuchen"
 
-#. JS Template: DialogReset
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DialogReset.html.tmpl
 msgid "Reset options"
 msgstr "Optionen zurücksetzen"
 
-#. JS Template: DialogReset
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DialogReset.html.tmpl
 msgid "Reset setting on global level."
 msgstr "Einstellung global zurücksetzen."
 
-#. JS Template: DialogReset
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DialogReset.html.tmpl
 msgid "Reset globally"
 msgstr "Global zurücksetzen"
 
-#. JS Template: DialogReset
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DialogReset.html.tmpl
 msgid "Remove all user changes."
 msgstr "Alle Benutzereinstellungen entfernen."
 
-#. JS Template: DialogReset
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DialogReset.html.tmpl
 msgid "Reset locally"
 msgstr "Lokal zurücksetzen"
 
-#. JS Template: DialogReset
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DialogReset.html.tmpl
 msgid "user(s) have modified this setting."
 msgstr "Benutzer verwenden modifizierte Versionen dieser Einstellung."
 
-#. JS Template: DialogReset
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DialogReset.html.tmpl
 msgid "Do you really want to reset this setting to it's default value?"
 msgstr "Möchten Sie diese Einstellung wirklich auf ihren Standardwert zurücksetzen?"
 
-#. JS Template: HelpDialog
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/HelpDialog.html.tmpl
 msgid "You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built."
 msgstr "Sie können die Kategorieauswahl nutzen, um den Navigationsbaum auf Einträge aus der gewählten Kategorie einzuschränken. Sobald Sie einen Eintrag wählen, wird der Baum automatisch neu aufgebaut."
 
@@ -14920,711 +14919,711 @@ msgstr "Neues Konto angelegt. Anmeldedaten wurden an %s gesendet. Bitte prüfen 
 msgid "Action \"%s\" not found!"
 msgstr "Aktion \"%s\" nicht gefunden!"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "invalid-temporarily"
 msgstr "ungültig-temporär"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Group for default access."
 msgstr "Gruppe für den Standardzugriff."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Group of all administrators."
 msgstr "Gruppe aller Administratoren."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Group for statistics access."
 msgstr "Gruppe für den Statistikzugriff."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "new"
 msgstr "neu"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "All new state types (default: viewable)."
 msgstr "Alle neuen Statustypen (Standard: sichtbar)."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "open"
 msgstr "offen"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "All open state types (default: viewable)."
 msgstr "Alle offenen Statustypen (Standard: sichtbar)."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "closed"
 msgstr "geschlossen"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "All closed state types (default: not viewable)."
 msgstr "Alle geschlossenen Statustypen (Standard: nicht sichtbar)."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "pending reminder"
 msgstr "warten zur Erinnerung"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "All 'pending reminder' state types (default: viewable)."
 msgstr "Alle 'warten auf'-Statustypen (Standard: sichtbar)."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "pending auto"
 msgstr "warten auf"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "All 'pending auto *' state types (default: viewable)."
 msgstr "Alle 'warten auf automatisch *'-Statustypen (Standard: sichtbar)."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "removed"
 msgstr "entfernt"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "All 'removed' state types (default: not viewable)."
 msgstr "Alle 'entfernt'-Statustypen (Standard: nicht sichtbar)."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "merged"
 msgstr "zusammengefasst"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "State type for merged tickets (default: not viewable)."
 msgstr "Statustyp für zusammengefasste Tickets (Standard: nicht sichtbar)."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "New ticket created by customer."
 msgstr "Neues Ticket von Kunden erstellt."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "closed successful"
 msgstr "erfolgreich geschlossen"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket is closed successful."
 msgstr "Ticket erfolgreich geschlossen."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "closed unsuccessful"
 msgstr "erfolglos geschlossen"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket is closed unsuccessful."
 msgstr "Das Ticket ist erfolglos geschlossen."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Open tickets."
 msgstr "Offene Tickets."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Customer removed ticket."
 msgstr "Kunde hat Ticket entfernt."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket is pending for agent reminder."
 msgstr "Das Ticket wartet auf Erinnerung für Agenten."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "pending auto close+"
 msgstr "warten auf erfolgreich schließen"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket is pending for automatic close."
 msgstr "Das Ticket wartet auf automatisches schließen."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "pending auto close-"
 msgstr "warten auf erfolglos schließen"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "State for merged tickets."
 msgstr "Status für zusammengefasste Tickets."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "system standard salutation (en)"
 msgstr "Systemstandardanrede (en)"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Standard Salutation."
 msgstr "Standardanrede."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "system standard signature (en)"
 msgstr "Systemstandardsignatur (en)"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Standard Signature."
 msgstr "Standard Signatur."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Standard Address."
 msgstr "Standard Adresse."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "possible"
 msgstr "möglich"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Follow-ups for closed tickets are possible. Ticket will be reopened."
 msgstr "Rückfragen für geschlossene Tickets sind möglich. Tickets werden wieder geöffnet."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "reject"
 msgstr "ablehnen"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Follow-ups for closed tickets are not possible. No new ticket will be created."
 msgstr "Rückfragen für geschlossene Tickets sind nicht möglich. Neue Tickets werden nicht erstellt."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "new ticket"
 msgstr "neues Ticket"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Follow-ups for closed tickets are not possible. A new ticket will be created."
 msgstr "Rückfragen für geschlossene Tickets sind nicht möglich. Ein neues Ticket wird erstellt."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Postmaster queue."
 msgstr "Postmaster-Queue."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "All default incoming tickets."
 msgstr "Alle eingehenden Tickets."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "All junk tickets."
 msgstr "Alle Junk-Tickets."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "All misc tickets."
 msgstr "Alle Misc-Tickets."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "auto reply"
 msgstr "automatische Antwort"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Automatic reply which will be sent out after a new ticket has been created."
 msgstr "Eine automatische Antwort wird versandt, nachdem ein neues Ticket erstellt wurde."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "auto reject"
 msgstr "automatische Ablehnung"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Automatic reject which will be sent out after a follow-up has been rejected (in case queue follow-up option is \"reject\")."
 msgstr "Automatische Ablehnung, die gesendet wird, nachdem eine Rückantwort abgelehnt wurde (falls die Queue-Einstellung für Rückantworten auf \"Ablehnen\" gesetzt ist)."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "auto follow up"
 msgstr "automatische Rückfrage"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Automatic confirmation which is sent out after a follow-up has been received for a ticket (in case queue follow-up option is \"possible\")."
 msgstr "Automatische Bestätigung, die gesendet wird, nachdem eine Rückantwort für ein Ticket empfangen wurde (falls die Queue-Einstellung für Rückantworten auf \"Möglich\" gesetzt ist)."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "auto reply/new ticket"
 msgstr "automatische Antwort / neues Ticket"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Automatic response which will be sent out after a follow-up has been rejected and a new ticket has been created (in case queue follow-up option is \"new ticket\")."
 msgstr "Automatische Antwort, die gesendet wird, nachdem eine Rückantwort abgelehnt und ein neues Ticket erstellt wurde (falls die Queue-Einstellung für Rückantworten auf \"Neues Ticket\" gesetzt ist."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "auto remove"
 msgstr "automatisches Entfernen"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Auto remove will be sent out after a customer removed the request."
 msgstr "\"Automatisches Entfernen\" wird versendet, nachdem der Kundenbenutzer die Anfrage entfernt hat."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "default reply (after new ticket has been created)"
 msgstr "Standardantwort (nachdem ein neues Ticket erstellt wurde)"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "default reject (after follow-up and rejected of a closed ticket)"
 msgstr "Standardablehnung (nachdem eine Antwort auf ein geschlossenes Ticket eingegangen und diese abgelehnt wurde)"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "default follow-up (after a ticket follow-up has been added)"
 msgstr "Standardantwort (nachdem eine Antwort auf ein Ticket eingegangen ist)"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "default reject/new ticket created (after closed follow-up with new ticket creation)"
 msgstr "Standardablehnung/Neues Ticket erstellt (nachdem eine Antwort auf ein geschlossenes Ticket eingegangen ist und ein neues Ticket erstellt wurde)"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Unclassified"
 msgstr "Unklassifiziert"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "1 very low"
 msgstr "1 sehr niedrig"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "2 low"
 msgstr "2 niedrig"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "3 normal"
 msgstr "3 normal"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "4 high"
 msgstr "4 hoch"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "5 very high"
 msgstr "5 sehr hoch"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "unlock"
 msgstr "frei"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "lock"
 msgstr "gesperrt"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "tmp_lock"
 msgstr "tmp_lock"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "agent"
 msgstr "Agent"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "system"
 msgstr "System"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "customer"
 msgstr "Kunde"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket create notification"
 msgstr "Benachrichtigung über neues Ticket"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "You will receive a notification each time a new ticket is created in one of your \"My Queues\" or \"My Services\"."
 msgstr "Sie erhalten eine Benachrichtigung, wenn ein Ticket in Ihren unter \"Meine Queues\" oder \"Meine Services\" ausgewählten Queues oder Services erstellt wird."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket follow-up notification (unlocked)"
 msgstr "Benachrichtigung über Folgeaktionen (entsperrtes Ticket)"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "You will receive a notification if a customer sends a follow-up to an unlocked ticket which is in your \"My Queues\" or \"My Services\"."
 msgstr "Sie erhalten eine Benachrichtigung, wenn ein Kunde eine Rückmeldung zu einem Ticket sendet, das in Ihren unter \"Meine Queues\" oder \"Meine Services\" ausgewählten Queues oder Services erstellt wurde."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket follow-up notification (locked)"
 msgstr "Benachrichtigung über Folgeaktionen (gesperrtes Ticket)"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "You will receive a notification if a customer sends a follow-up to a locked ticket of which you are the ticket owner or responsible."
 msgstr "Sie erhalten eine Benachrichtigung, wenn ein Kunde eine Rückmeldung zu einem Ticket sendet, dessen Besitzer oder Verantwortlicher Sie sind."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket lock timeout notification"
 msgstr "Mitteilung bei Überschreiten der Ticket-Sperrzeit"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "You will receive a notification as soon as a ticket owned by you is automatically unlocked."
 msgstr "Sie erhalten eine Benachrichtigung, wenn ein Ticket, dessen Besitzer Sie sind, automatisch entsperrt wurde."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket owner update notification"
 msgstr "Benachrichtigung über Änderung des Ticket-Besitzers"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket responsible update notification"
 msgstr "Benachrichtigung über Änderung des Ticket-Verantwortlichen"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket new note notification"
 msgstr "Benachrichtigung über neue Notiz"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket queue update notification"
 msgstr "Benachrichtigung über Änderung der Queue"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "You will receive a notification if a ticket is moved into one of your \"My Queues\"."
 msgstr "Sie erhalten eine Benachrichtigung, wenn ein Ticket in eine der Queues verschoben wurde, die Sie unter \"Meine Queues\" ausgewählt haben."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket pending reminder notification (locked)"
 msgstr "Benachrichtigung über Erreichen der Erinnerungszeit (gesperrtes Ticket)"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket pending reminder notification (unlocked)"
 msgstr "Benachrichtigung über Erreichen der Erinnerungszeit (entsperrtes Ticket)"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket escalation notification"
 msgstr "Benachrichtigung über erfolgte Ticket-Eskalation"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket escalation warning notification"
 msgstr "Benachrichtigung über baldige Ticket Eskalation"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket service update notification"
 msgstr "Benachrichtigung über Änderung des Services"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "You will receive a notification if a ticket's service is changed to one of your \"My Services\"."
 msgstr "Sie erhalten eine Benachrichtigung, wenn für ein Ticket einer der Services ausgewählt wurde, die Sie unter \"Meine Services\" ausgewählt haben."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Appointment reminder notification"
 msgstr "Benachrichtigung über Erreichen der Erinnerungszeit von Terminen"
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "You will receive a notification each time a reminder time is reached for one of your appointments."
 msgstr "Sie erhalten immer dann eine Benachrichtigung, wenn der Benachrichtigungszeitpunkt für einen Ihrer Termine erreicht wurde."
 
-#. Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket email delivery failure notification"
 msgstr "Benachrichtigung über Fehler beim Versand von E-Mail-Tickets"
 
-#. JS File: Core.AJAX
+#. JS File: var/httpd/htdocs/js/Core.AJAX.js
 msgid "Error during AJAX communication. Status: %s, Error: %s"
 msgstr "Fehler während AJAX-Kommunikation. Status: %s, Fehler: %s"
 
-#. JS File: Core.AJAX
+#. JS File: var/httpd/htdocs/js/Core.AJAX.js
 msgid "This window must be called from compose window."
 msgstr "Dieses Fenster muss aus dem Fenster zum Verfassen von Tickets aufgerufen werden."
 
-#. JS File: Core.Agent.Admin.ACL
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.ACL.js
 msgid "Add all"
 msgstr "Alle hinzufügen"
 
-#. JS File: Core.Agent.Admin.ACL
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.ACL.js
 msgid "An item with this name is already present."
 msgstr "Ein Eintrag mit diesem Namen existiert bereits."
 
-#. JS File: Core.Agent.Admin.ACL
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.ACL.js
 msgid "This item still contains sub items. Are you sure you want to remove this item including its sub items?"
 msgstr "Dieser Eintrag enthält Untereinträge. Wollen Sie den Eintrag und alle Untereinträge wirklich löschen?"
 
-#. JS File: Core.Agent.Admin.AppointmentCalendar.Manage
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.AppointmentCalendar.Manage.js
 msgid "More"
 msgstr "Mehr"
 
-#. JS File: Core.Agent.Admin.AppointmentCalendar.Manage
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.AppointmentCalendar.Manage.js
 msgid "Less"
 msgstr "Weniger"
 
-#. JS File: Core.Agent.Admin.AppointmentCalendar.Manage
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.AppointmentCalendar.Manage.js
 msgid "Press Ctrl+C (Cmd+C) to copy to clipboard"
 msgstr "In die Zwischenablage legen mit Strg+C (Cmd+C)"
 
-#. JS File: Core.Agent.Admin.Attachment
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Attachment.js
 msgid "Delete this Attachment"
 msgstr "Diesen Anhang entfernen"
 
-#. JS File: Core.Agent.Admin.Attachment
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Attachment.js
 msgid "Deleting attachment..."
 msgstr "Anhang wird entfernt..."
 
-#. JS File: Core.Agent.Admin.Attachment
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Attachment.js
 msgid "There was an error deleting the attachment. Please check the logs for more information."
 msgstr "Es ist ein Fehler beim Entfernen des Anhangs aufgetreten. Bitte prüfen Sie die Protokolle für mehr Informationen."
 
-#. JS File: Core.Agent.Admin.Attachment
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Attachment.js
 msgid "Attachment was deleted successfully."
 msgstr "Anhang erfolgreich entfernt."
 
-#. JS File: Core.Agent.Admin.DynamicField
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.DynamicField.js
 msgid "Do you really want to delete this dynamic field? ALL associated data will be LOST!"
 msgstr "Wollen Sie dieses Dynamische Feld wirklich löschen? Alle darin enthaltenen Daten werden GELÖSCHT!"
 
-#. JS File: Core.Agent.Admin.DynamicField
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.DynamicField.js
 msgid "Delete field"
 msgstr "Feld löschen"
 
-#. JS File: Core.Agent.Admin.DynamicField
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.DynamicField.js
 msgid "Deleting the field and its data. This may take a while..."
 msgstr "Lösche das Feld und die zugehörigen Daten. Dies kann etwas dauern..."
 
-#. JS File: Core.Agent.Admin.GenericAgent
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "Remove this dynamic field"
 msgstr "Dieses dynamische Feld entfernen"
 
-#. JS File: Core.Agent.Admin.GenericAgent
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "Remove selection"
 msgstr "Auswahl entfernen"
 
-#. JS File: Core.Agent.Admin.GenericAgent
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "Do you really want to delete this generic agent job?"
 msgstr "Wollen Sie diesen GenericAgent-Job wirklich löschen?"
 
-#. JS File: Core.Agent.Admin.GenericAgent
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "Delete this Event Trigger"
 msgstr "Diesen Event-Trigger löschen"
 
-#. JS File: Core.Agent.Admin.GenericAgent
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "Duplicate event."
 msgstr "Ereignis duplizieren."
 
-#. JS File: Core.Agent.Admin.GenericAgent
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "This event is already attached to the job, Please use a different one."
 msgstr "Dieses Event ist dem Job bereits zugeordnet. Bitte wählen Sie ein anderes aus."
 
-#. JS File: Core.Agent.Admin.GenericInterfaceDebugger
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
 msgid "An error occurred during communication."
 msgstr "Während der Kommunikation ist ein Fehler aufgetreten."
 
-#. JS File: Core.Agent.Admin.GenericInterfaceDebugger
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
 msgid "Request Details"
 msgstr "Anfragedetails"
 
-#. JS File: Core.Agent.Admin.GenericInterfaceDebugger
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
 msgid "Request Details for Communication ID"
 msgstr "Anfragedetails für Verbindungs-ID"
 
-#. JS File: Core.Agent.Admin.GenericInterfaceDebugger
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
 msgid "Show or hide the content."
 msgstr "Inhalt anzeigen oder verbergen."
 
-#. JS File: Core.Agent.Admin.GenericInterfaceDebugger
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
 msgid "Clear debug log"
 msgstr "Debug-Protokoll leeren"
 
-#. JS File: Core.Agent.Admin.GenericInterfaceErrorHandling
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceErrorHandling.js
 msgid "Delete error handling module"
 msgstr "Fehlerbehandlungs-Modul entfernen"
 
-#. JS File: Core.Agent.Admin.GenericInterfaceInvoker
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvoker.js
 msgid "It is not possible to add a new event trigger because the event is not set."
 msgstr "Es ist nicht möglich einen neuen Event-Trigger hinzuzufügen, da das Event noch nicht angelegt ist."
 
-#. JS File: Core.Agent.Admin.GenericInterfaceInvoker
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvoker.js
 msgid "Delete this Invoker"
 msgstr "Diesen Invoker löschen"
 
-#. JS File: Core.Agent.Admin.GenericInterfaceInvokerEvent
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
 msgid "Sorry, the only existing condition can't be removed."
 msgstr "Die einzig existierende Bedingung kann nicht entfernt werden."
 
-#. JS File: Core.Agent.Admin.GenericInterfaceInvokerEvent
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
 msgid "Sorry, the only existing field can't be removed."
 msgstr "Das einzig existierende Feld kann nicht entfernt werden."
 
-#. JS File: Core.Agent.Admin.GenericInterfaceInvokerEvent
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
 msgid "Delete conditions"
 msgstr "Bedingungen löschen"
 
-#. JS File: Core.Agent.Admin.GenericInterfaceMapping
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceMapping.js
 msgid "Mapping for Key %s"
 msgstr "Mapping für Schlüssel %s"
 
-#. JS File: Core.Agent.Admin.GenericInterfaceMapping
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceMapping.js
 msgid "Mapping for Key"
 msgstr "Mapping für Schlüssel"
 
-#. JS File: Core.Agent.Admin.GenericInterfaceMapping
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceMapping.js
 msgid "Delete this Key Mapping"
 msgstr "Schlüssel-Mapping löschen"
 
-#. JS File: Core.Agent.Admin.GenericInterfaceOperation
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceOperation.js
 msgid "Delete this Operation"
 msgstr "Diese Operation löschen"
 
-#. JS File: Core.Agent.Admin.GenericInterfaceWebservice
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceWebservice.js
 msgid "Clone web service"
 msgstr "Webservice klonen"
 
-#. JS File: Core.Agent.Admin.GenericInterfaceWebservice
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceWebservice.js
 msgid "Delete operation"
 msgstr "Operation löschen"
 
-#. JS File: Core.Agent.Admin.GenericInterfaceWebservice
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceWebservice.js
 msgid "Delete invoker"
 msgstr "Invoker löschen"
 
-#. JS File: Core.Agent.Admin.Group
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Group.js
 msgid "WARNING: When you change the name of the group 'admin', before making the appropriate changes in the SysConfig, you will be locked out of the administrations panel! If this happens, please rename the group back to admin per SQL statement."
 msgstr "VORSICHT: Wenn Sie den Namen der 'admin'-Gruppe ändern ohne zuvor die entsprechenden Anpassungen in der SysConfig getätigt haben, verlieren Sie den Zugang zum Adminbereich! In diesem Fall sollten Sie den Gruppennamen in der Datenbank zurücksetzen."
 
-#. JS File: Core.Agent.Admin.MailAccount
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.MailAccount.js
 msgid "Delete this Mail Account"
 msgstr "E-Mail-Konto löschen"
 
-#. JS File: Core.Agent.Admin.MailAccount
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.MailAccount.js
 msgid "Deleting the mail account and its data. This may take a while..."
 msgstr "E-Mail-Konto und Daten werden gelöscht. Dies kann einige Zeit dauern..."
 
-#. JS File: Core.Agent.Admin.NotificationEvent
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.NotificationEvent.js
 msgid "Do you really want to delete this notification language?"
 msgstr "Möchten Sie diese Benachrichtigungssprache wirklich löschen?"
 
-#. JS File: Core.Agent.Admin.NotificationEvent
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.NotificationEvent.js
 msgid "Do you really want to delete this notification?"
 msgstr "Möchten Sie diese Benachrichtigung wirklich löschen?"
 
-#. JS File: Core.Agent.Admin.PGP
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.PGP.js
 msgid "Do you really want to delete this key?"
 msgstr "Möchten Sie diesen Schlüssel wirklich löschen?"
 
-#. JS File: Core.Agent.Admin.PackageManager
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.PackageManager.js
 msgid "There is a package upgrade process running, click here to see status information about the upgrade progress."
 msgstr "Derzeit läuft ein Prozess zur Paketaktualisierung. Klicken Sie hier, um Statusinformationen zu erhalten."
 
-#. JS File: Core.Agent.Admin.PackageManager
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.PackageManager.js
 msgid "A package upgrade was recently finished. Click here to see the results."
 msgstr "Eine Paketaktualisierung wurde kürzlich beendet. Klicken Sie hier, um die Ergebnisse zu betrachten."
 
-#. JS File: Core.Agent.Admin.PackageManager
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.PackageManager.js
 msgid "No response from get package upgrade result."
 msgstr "Keine Antwort von get package upgrade result."
 
-#. JS File: Core.Agent.Admin.PackageManager
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.PackageManager.js
 msgid "Update all packages"
 msgstr "Alle Pakete aktualisieren"
 
-#. JS File: Core.Agent.Admin.PackageManager
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.PackageManager.js
 msgid "Dismiss"
 msgstr "Verwerfen"
 
-#. JS File: Core.Agent.Admin.PackageManager
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.PackageManager.js
 msgid "Update All Packages"
 msgstr "Alle Pakete aktualisieren"
 
-#. JS File: Core.Agent.Admin.PackageManager
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.PackageManager.js
 msgid "No response from package upgrade all."
 msgstr "Keine Antwort von upgrade all."
 
-#. JS File: Core.Agent.Admin.PackageManager
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.PackageManager.js
 msgid "Currently not possible"
 msgstr "Derzeit nicht möglich"
 
-#. JS File: Core.Agent.Admin.PackageManager
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.PackageManager.js
 msgid "This is currently disabled because of an ongoing package upgrade."
 msgstr "Dies ist derzeit nicht möglich, da eine Paketaktualisierung läuft."
 
-#. JS File: Core.Agent.Admin.PackageManager
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.PackageManager.js
 msgid "This option is currently disabled because the OTRS Daemon is not running."
 msgstr "Diese Option ist derzeit deaktiviert, weil der OTRS Daemon nicht läuft."
 
-#. JS File: Core.Agent.Admin.PackageManager
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.PackageManager.js
 msgid "Are you sure you want to update all installed packages?"
 msgstr "Sind Sie sicher, dass Sie alle installierten Pakete aktualisieren möchten?"
 
-#. JS File: Core.Agent.Admin.PackageManager
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.PackageManager.js
 msgid "No response from get package upgrade run status."
 msgstr "Keine Antwort von package upgrade run status."
 
-#. JS File: Core.Agent.Admin.PostMasterFilter
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.PostMasterFilter.js
 msgid "Delete this PostMasterFilter"
 msgstr "Diesen Postmaster-Filter löschen"
 
-#. JS File: Core.Agent.Admin.PostMasterFilter
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.PostMasterFilter.js
 msgid "Deleting the postmaster filter and its data. This may take a while..."
 msgstr "Lösche den Postmaster-Filter und die zugehörigen Daten. Dies kann etwas dauern..."
 
-#. JS File: Core.Agent.Admin.ProcessManagement.Canvas
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.ProcessManagement.Canvas.js
 msgid "Remove Entity from canvas"
 msgstr "Eintrag entfernen"
 
-#. JS File: Core.Agent.Admin.ProcessManagement.Canvas
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.ProcessManagement.Canvas.js
 msgid "No TransitionActions assigned."
 msgstr "Keine Übergangsaktionen zugewiesen."
 
-#. JS File: Core.Agent.Admin.ProcessManagement.Canvas
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.ProcessManagement.Canvas.js
 msgid "No dialogs assigned yet. Just pick an activity dialog from the list on the left and drag it here."
 msgstr "Es sind noch keine Dialoge zugewiesen. Wählen Sie einfach einen Aktivitäts-Dialog in der linken Liste aus und ziehen Sie ihn in die rechte Liste."
 
-#. JS File: Core.Agent.Admin.ProcessManagement.Canvas
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.ProcessManagement.Canvas.js
 msgid "This Activity cannot be deleted because it is the Start Activity."
 msgstr "Diese Aktivität kann nicht gelöscht werden, weil sie die Start-Aktivität ist."
 
-#. JS File: Core.Agent.Admin.ProcessManagement.Canvas
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.ProcessManagement.Canvas.js
 msgid "Remove the Transition from this Process"
 msgstr "Diesen Übergang aus dem Prozess entfernen"
 
-#. JS File: Core.Agent.Admin.ProcessManagement
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.ProcessManagement.js
 msgid "As soon as you use this button or link, you will leave this screen and its current state will be saved automatically. Do you want to continue?"
 msgstr "Sobald sie die Schaltfäche oder den Link verwenden, verlassen Sie dieses Fenster, und der aktuelle Stand wird automatisch gespeichert. Möchten Sie fortfahren?"
 
-#. JS File: Core.Agent.Admin.ProcessManagement
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.ProcessManagement.js
 msgid "Delete Entity"
 msgstr "Eintrag löschen"
 
-#. JS File: Core.Agent.Admin.ProcessManagement
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.ProcessManagement.js
 msgid "This Activity is already used in the Process. You cannot add it twice!"
 msgstr "Diese Aktivität wird bereits im Prozess verwendet. Sie können sie nicht erneut hinzufügen!"
 
-#. JS File: Core.Agent.Admin.ProcessManagement
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.ProcessManagement.js
 msgid "Error during AJAX communication"
 msgstr "Fehler während AJAX-Kommunikation"
 
-#. JS File: Core.Agent.Admin.ProcessManagement
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.ProcessManagement.js
 msgid "An unconnected transition is already placed on the canvas. Please connect this transition first before placing another transition."
 msgstr "Auf der Zeichenfläche ist ein nicht verbundener Übergang vorhanden. Bitte verbinden Sie diesen Übergang zuerst, bevor Sie einen weiteren Übergang platzieren."
 
-#. JS File: Core.Agent.Admin.ProcessManagement
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.ProcessManagement.js
 msgid "This Transition is already used for this Activity. You cannot use it twice!"
 msgstr "Dieser Übergang wird bereits für diese Aktiviät verwendet. Sie können ihn nicht erneut hinzufügen!"
 
-#. JS File: Core.Agent.Admin.ProcessManagement
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.ProcessManagement.js
 msgid "This TransitionAction is already used in this Path. You cannot use it twice!"
 msgstr "Diese Übergangsaktion wird bereits in diesem Pfad verwendet. Sie können sie nicht erneut hinzufügen!"
 
-#. JS File: Core.Agent.Admin.ProcessManagement
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.ProcessManagement.js
 msgid "Hide EntityIDs"
 msgstr "EntityIDs ausblenden"
 
-#. JS File: Core.Agent.Admin.ProcessManagement
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.ProcessManagement.js
 msgid "Edit Field Details"
 msgstr "Felddetails bearbeiten"
 
-#. JS File: Core.Agent.Admin.ProcessManagement
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.ProcessManagement.js
 msgid "Customer interface does not support articles not visible for customers."
 msgstr "Das Kunden-Interface unterstützt keine internen Artikeltypen."
 
-#. JS File: Core.Agent.Admin.ProcessManagement
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.ProcessManagement.js
 msgid "Sorry, the only existing parameter can't be removed."
 msgstr "Der einzig existierende Parameter kann nicht entfernt werden."
 
-#. JS File: Core.Agent.Admin.SMIME
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SMIME.js
 msgid "Do you really want to delete this certificate?"
 msgstr "Möchten Sie dieses Zertifikat wirklich löschen?"
 
-#. JS File: Core.Agent.Admin.SupportDataCollector
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SupportDataCollector.js
 msgid "Sending Update..."
 msgstr "Update wird gesendet..."
 
-#. JS File: Core.Agent.Admin.SupportDataCollector
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SupportDataCollector.js
 msgid "Support Data information was successfully sent."
 msgstr "Support-Daten wurden erfolgreich gesendet."
 
-#. JS File: Core.Agent.Admin.SupportDataCollector
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SupportDataCollector.js
 msgid "Was not possible to send Support Data information."
 msgstr "Es war nicht möglich, die Support-Daten zu versenden."
 
-#. JS File: Core.Agent.Admin.SupportDataCollector
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SupportDataCollector.js
 msgid "Update Result"
 msgstr "Update-Ergebnis"
 
-#. JS File: Core.Agent.Admin.SupportDataCollector
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SupportDataCollector.js
 msgid "Generating..."
 msgstr "Wird erstellt..."
 
-#. JS File: Core.Agent.Admin.SupportDataCollector
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SupportDataCollector.js
 msgid "It was not possible to generate the Support Bundle."
 msgstr "Das Support-Paket konnte nicht erzeugt werden."
 
-#. JS File: Core.Agent.Admin.SupportDataCollector
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SupportDataCollector.js
 msgid "Generate Result"
 msgstr "Ergebnis der Generierung"
 
-#. JS File: Core.Agent.Admin.SupportDataCollector
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SupportDataCollector.js
 msgid "Support Bundle"
 msgstr "Support-Paket"
 
@@ -15632,543 +15631,543 @@ msgstr "Support-Paket"
 msgid "The mail could not be sent"
 msgstr "Die E-Mail konnte nicht versendet werden"
 
-#. JS File: Core.Agent.Admin.SysConfig.Entity
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SysConfig.Entity.js
 msgid "It is not possible to set this entry to invalid. All affected configuration settings have to be changed beforehand."
 msgstr "Es ist nicht möglich, diesen Eintrag auf ungültig zu setzen, bevor alle betroffenen Konfiguration entsprechend angepasst wurden."
 
-#. JS File: Core.Agent.Admin.SysConfig.Entity
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SysConfig.Entity.js
 msgid "Cannot proceed"
 msgstr "Kann nicht fortfahren"
 
-#. JS File: Core.Agent.Admin.SysConfig.Entity
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SysConfig.Entity.js
 msgid "Update manually"
 msgstr "Manuell aktualisieren"
 
-#. JS File: Core.Agent.Admin.SysConfig.Entity
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SysConfig.Entity.js
 msgid "You can either have the affected settings updated automatically to reflect the changes you just made or do it on your own by pressing 'update manually'."
 msgstr "Sie können die betroffenen Einstellungen automatisch entsprechend der vorgenommen Änderungen aktualisieren lassen oder die Änderungen durch Klicken von \"manuell anpassen\" selbst vornehmen."
 
-#. JS File: Core.Agent.Admin.SysConfig.Entity
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SysConfig.Entity.js
 msgid "Save and update automatically"
 msgstr "Speichern und automatisch aktualisieren"
 
-#. JS File: Core.Agent.Admin.SysConfig.Entity
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SysConfig.Entity.js
 msgid "Don't save, update manually"
 msgstr "Nicht speichern, manuell aktualisieren"
 
-#. JS File: Core.Agent.Admin.SysConfig.Entity
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SysConfig.Entity.js
 msgid "The item you're currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you're unsure what to do next, please contact your system administrator."
 msgstr "Der Eintrag, den Sie gerade betrachten, ist Teil einer Konfigurationseinstellung, die bislang nicht in Betrieb genommen wurde und deshalb derzeit nicht änderbar ist. Bitte warten Sie, bis die Einstellung in Betrieb genommen wurde. Wenn Sie unsicher sind, was als nächstes zu tun ist, kontaktieren Sie bitte Ihren Systemadministrator."
 
-#. JS File: Core.Agent.Admin.SystemConfiguration
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SystemConfiguration.js
 msgid "Loading..."
 msgstr "Laden..."
 
-#. JS File: Core.Agent.Admin.SystemConfiguration
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SystemConfiguration.js
 msgid "Search the System Configuration"
 msgstr "Systemkonfiguration durchsuchen"
 
-#. JS File: Core.Agent.Admin.SystemConfiguration
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SystemConfiguration.js
 msgid "Please enter at least one search word to find anything."
 msgstr "Bitte geben Sie mindestens einen Suchbegriff ein."
 
-#. JS File: Core.Agent.Admin.SystemConfiguration
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SystemConfiguration.js
 msgid "Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later."
 msgstr "Inbetriebnahme derzeit nicht möglich. Möglicherweise läuft bereits eine durch einen anderen Agenten angestoßene Inbetriebnahme. Bitte versuchen Sie es später noch einmal."
 
-#. JS File: Core.Agent.Admin.SystemConfiguration
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SystemConfiguration.js
 msgid "Deploy"
 msgstr "In Betrieb nehmen"
 
-#. JS File: Core.Agent.Admin.SystemConfiguration
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SystemConfiguration.js
 msgid "The deployment is already running."
 msgstr "Inbetriebnahme läuft bereits."
 
-#. JS File: Core.Agent.Admin.SystemConfiguration
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SystemConfiguration.js
 msgid "Deployment successful. You're being redirected..."
 msgstr "Inbetriebnahme erfolgreich, sie werden weitergeleitet..."
 
-#. JS File: Core.Agent.Admin.SystemConfiguration
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SystemConfiguration.js
 msgid "There was an error. Please save all settings you are editing and check the logs for more information."
 msgstr "Es sind Fehler aufgetreten. Bitte speichern Sie alle Einstellungen, die Sie derzeit bearbeiten und prüfen Sie die Protokolle für mehr Informationen."
 
-#. JS File: Core.Agent.Admin.SystemConfiguration
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SystemConfiguration.js
 msgid "Reset option is required!"
 msgstr "Reset-Option wird benötigt!"
 
-#. JS File: Core.Agent.Admin.SystemConfiguration
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SystemConfiguration.js
 msgid "By restoring this deployment all settings will be reverted to the value they had at the time of the deployment. Do you really want to continue?"
 msgstr "Bei Wiederherstellung dieser Version werden alle Einstellungen auf den Stand zurückgesetzt, den sie zum Zeitpunkt der jeweiligen Inbetriebnahme hatten. Möchten Sie fortfahren?"
 
-#. JS File: Core.Agent.Admin.SystemConfiguration
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SystemConfiguration.js
 msgid "Keys with values can't be renamed. Please remove this key/value pair instead and re-add it afterwards."
 msgstr "Schlüssel mit Werten können nicht umbenannt werden. Bitte entfernen Sie dieses Schlüssel/Wert-Paar und fügen Sie es anschließend erneut hinzu."
 
-#. JS File: Core.Agent.Admin.SystemConfiguration
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SystemConfiguration.js
 msgid "Unlock setting."
 msgstr "Einstellung entsperren."
 
-#. JS File: Core.Agent.Admin.SystemMaintenance
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SystemMaintenance.js
 msgid "Do you really want to delete this scheduled system maintenance?"
 msgstr "Wollen Sie diese geplante Systemwartung wirklich löschen?"
 
-#. JS File: Core.Agent.Admin.Template
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Template.js
 msgid "Delete this Template"
 msgstr "Diese Vorlage löschen"
 
-#. JS File: Core.Agent.Admin.Template
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Template.js
 msgid "Deleting the template and its data. This may take a while..."
 msgstr "Lösche das Template und die zugehörigen Daten. Dies kann etwas dauern..."
 
-#. JS File: Core.Agent.AppointmentCalendar
+#. JS File: var/httpd/htdocs/js/Core.Agent.AppointmentCalendar.js
 msgid "Jump"
 msgstr "Springen"
 
-#. JS File: Core.Agent.AppointmentCalendar
+#. JS File: var/httpd/htdocs/js/Core.Agent.AppointmentCalendar.js
 msgid "Timeline Month"
 msgstr "Zeitstrahl Monat"
 
-#. JS File: Core.Agent.AppointmentCalendar
+#. JS File: var/httpd/htdocs/js/Core.Agent.AppointmentCalendar.js
 msgid "Timeline Week"
 msgstr "Zeitstrahl Woche"
 
-#. JS File: Core.Agent.AppointmentCalendar
+#. JS File: var/httpd/htdocs/js/Core.Agent.AppointmentCalendar.js
 msgid "Timeline Day"
 msgstr "Zeitstrahl Tag"
 
-#. JS File: Core.Agent.AppointmentCalendar
+#. JS File: var/httpd/htdocs/js/Core.Agent.AppointmentCalendar.js
 msgid "Previous"
 msgstr "Zurück"
 
-#. JS File: Core.Agent.AppointmentCalendar
+#. JS File: var/httpd/htdocs/js/Core.Agent.AppointmentCalendar.js
 msgid "Resources"
 msgstr "Ressourcen"
 
-#. JS File: Core.Agent.AppointmentCalendar
+#. JS File: var/httpd/htdocs/js/Core.Agent.AppointmentCalendar.js
 msgid "Su"
 msgstr "So"
 
-#. JS File: Core.Agent.AppointmentCalendar
+#. JS File: var/httpd/htdocs/js/Core.Agent.AppointmentCalendar.js
 msgid "Mo"
 msgstr "Mo"
 
-#. JS File: Core.Agent.AppointmentCalendar
+#. JS File: var/httpd/htdocs/js/Core.Agent.AppointmentCalendar.js
 msgid "Tu"
 msgstr "Di"
 
-#. JS File: Core.Agent.AppointmentCalendar
+#. JS File: var/httpd/htdocs/js/Core.Agent.AppointmentCalendar.js
 msgid "We"
 msgstr "Mi"
 
-#. JS File: Core.Agent.AppointmentCalendar
+#. JS File: var/httpd/htdocs/js/Core.Agent.AppointmentCalendar.js
 msgid "Th"
 msgstr "Do"
 
-#. JS File: Core.Agent.AppointmentCalendar
+#. JS File: var/httpd/htdocs/js/Core.Agent.AppointmentCalendar.js
 msgid "Fr"
 msgstr "Fr"
 
-#. JS File: Core.Agent.AppointmentCalendar
+#. JS File: var/httpd/htdocs/js/Core.Agent.AppointmentCalendar.js
 msgid "Sa"
 msgstr "Sa"
 
-#. JS File: Core.Agent.AppointmentCalendar
+#. JS File: var/httpd/htdocs/js/Core.Agent.AppointmentCalendar.js
 msgid "This is a repeating appointment"
 msgstr "Dieser Termin wiederholt sich"
 
-#. JS File: Core.Agent.AppointmentCalendar
+#. JS File: var/httpd/htdocs/js/Core.Agent.AppointmentCalendar.js
 msgid "Would you like to edit just this occurrence or all occurrences?"
 msgstr "Möchten Sie nur diesen Termin oder alle Vorkommnisse bearbeiten?"
 
-#. JS File: Core.Agent.AppointmentCalendar
+#. JS File: var/httpd/htdocs/js/Core.Agent.AppointmentCalendar.js
 msgid "All occurrences"
 msgstr "Alle Vorkommnisse"
 
-#. JS File: Core.Agent.AppointmentCalendar
+#. JS File: var/httpd/htdocs/js/Core.Agent.AppointmentCalendar.js
 msgid "Just this occurrence"
 msgstr "Nur diesen Termin"
 
-#. JS File: Core.Agent.AppointmentCalendar
+#. JS File: var/httpd/htdocs/js/Core.Agent.AppointmentCalendar.js
 msgid "Too many active calendars"
 msgstr "Zuviele aktive Kalender"
 
-#. JS File: Core.Agent.AppointmentCalendar
+#. JS File: var/httpd/htdocs/js/Core.Agent.AppointmentCalendar.js
 msgid "Please either turn some off first or increase the limit in configuration."
 msgstr "Bitte deaktivieren Sie zuerst einige oder erhöhen Sie das Limit in der Konfiguration."
 
-#. JS File: Core.Agent.AppointmentCalendar
+#. JS File: var/httpd/htdocs/js/Core.Agent.AppointmentCalendar.js
 msgid "Restore default settings"
 msgstr "Standard-Einstellungen wiederherstellen"
 
-#. JS File: Core.Agent.AppointmentCalendar
+#. JS File: var/httpd/htdocs/js/Core.Agent.AppointmentCalendar.js
 msgid "Are you sure you want to delete this appointment? This operation cannot be undone."
 msgstr "Möchten Sie diesen Termin wirklich löschen? Diese Änderung kann nicht rückgängig gemacht werden."
 
-#. JS File: Core.Agent.CustomerSearch
+#. JS File: var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
 msgid "First select a customer user, then select a customer ID to assign to this ticket."
 msgstr "Wählen Sie zunächst einen Kundenbenutzer aus. Anschließend können Sie das Ticket einer Kundennummer zuweisen."
 
-#. JS File: Core.Agent.CustomerSearch
+#. JS File: var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
 msgid "Duplicated entry"
 msgstr "Doppelter Eintrag"
 
-#. JS File: Core.Agent.CustomerSearch
+#. JS File: var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
 msgid "It is going to be deleted from the field, please try again."
 msgstr "Er wird aus dem Feld entfernt, bitte versuchen Sie es erneut."
 
-#. JS File: Core.Agent.CustomerUserAddressBook
+#. JS File: var/httpd/htdocs/js/Core.Agent.CustomerUserAddressBook.js
 msgid "Please enter at least one search value or * to find anything."
 msgstr "Bitte geben Sie zumindest einen Suchbegriff ein oder * um nach Allem zu suchen."
 
-#. JS File: Core.Agent.Daemon
+#. JS File: var/httpd/htdocs/js/Core.Agent.Daemon.js
 msgid "Information about the OTRS Daemon"
 msgstr "Informationen über den OTRS Daemon"
 
-#. JS File: Core.Agent.Dashboard
+#. JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
 msgid "Please check the fields marked as red for valid inputs."
 msgstr "Bitte prüfen Sie die rot markierten Felder auf gültige Eingaben."
 
-#. JS File: Core.Agent.Dashboard
+#. JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
 msgid "month"
 msgstr "Monat"
 
-#. JS File: Core.Agent.Dashboard
+#. JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
 msgid "Remove active filters for this widget."
 msgstr "Aktive Filter für dieses Widget entfernen."
 
-#. JS File: Core.Agent.LinkObject.SearchForm
+#. JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
 msgid "Please wait..."
 msgstr "Bitte warten..."
 
-#. JS File: Core.Agent.LinkObject.SearchForm
+#. JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
 msgid "Searching for linkable objects. This may take a while..."
 msgstr "Suche nach verknüpfbaren Objekten. Dies kann etwas dauern..."
 
-#. JS File: Core.Agent.LinkObject
+#. JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.js
 msgid "Do you really want to delete this link?"
 msgstr "Möchten Sie diese Verknüpfung wirklich löschen?"
 
-#. JS File: Core.Agent.Login
+#. JS File: var/httpd/htdocs/js/Core.Agent.Login.js
 msgid "Are you using a browser plugin like AdBlock or AdBlockPlus? This can cause several issues and we highly recommend you to add an exception for this domain."
 msgstr "Nutzen Sie ein Browser-Plugin wie AdBlock oder AdBlockPlus? Dies kann Probleme bei der Nutzung der Software verursachen. Es wird daher empfohlen, eine Ausnahme für diese Domain hinzuzufügen."
 
-#. JS File: Core.Agent.Login
+#. JS File: var/httpd/htdocs/js/Core.Agent.Login.js
 msgid "Do not show this warning again."
 msgstr "Warnung nicht mehr anzeigen."
 
-#. JS File: Core.Agent.Preferences
+#. JS File: var/httpd/htdocs/js/Core.Agent.Preferences.js
 msgid "Sorry, but you can't disable all methods for notifications marked as mandatory."
 msgstr "Entschuldigung, Sie können für eine erforderliche Benachrichtigungen nicht alle Benachrichtigungsmethoden abschalten."
 
-#. JS File: Core.Agent.Preferences
+#. JS File: var/httpd/htdocs/js/Core.Agent.Preferences.js
 msgid "Sorry, but you can't disable all methods for this notification."
 msgstr "Entschuldigung, Sie können für diese Benachrichtigung nicht alle Benachrichtigungsmethoden abschalten."
 
-#. JS File: Core.Agent.Preferences
+#. JS File: var/httpd/htdocs/js/Core.Agent.Preferences.js
 msgid "Please note that at least one of the settings you have changed requires a page reload. Click here to reload the current screen."
 msgstr "Bitte beachten Sie, dass mindestens eine geänderte Einstellung ein Neuladen benötigt. Klicken Sie hier, um den Bildschirm neu zu laden."
 
-#. JS File: Core.Agent.Preferences
+#. JS File: var/httpd/htdocs/js/Core.Agent.Preferences.js
 msgid "An unknown error occurred. Please contact the administrator."
 msgstr "Ein unbekannter Fehler ist aufgetreten. Bitte kontaktieren Sie den Administrator."
 
-#. JS File: Core.Agent.Responsive
+#. JS File: var/httpd/htdocs/js/Core.Agent.Responsive.js
 msgid "Switch to desktop mode"
 msgstr "Zur Desktop-Ansicht wechseln"
 
-#. JS File: Core.Agent.Search
+#. JS File: var/httpd/htdocs/js/Core.Agent.Search.js
 msgid "Please remove the following words from your search as they cannot be searched for:"
 msgstr "Bitte entfernen Sie die folgenden Wörter aus Ihrer Suche, da nach ihnen nicht gesucht werden kann:"
 
-#. JS File: Core.Agent.SharedSecretGenerator
+#. JS File: var/httpd/htdocs/js/Core.Agent.SharedSecretGenerator.js
 msgid "Generate"
 msgstr "Generieren"
 
-#. JS File: Core.Agent.SortedTree
+#. JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
 msgid "This element has children elements and can currently not be removed."
 msgstr "Dieses Element besitzt Kindelemente und kann derzeit nicht entfernt werden."
 
-#. JS File: Core.Agent.Statistics
+#. JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
 msgid "Do you really want to delete this statistic?"
 msgstr "Möchten Sie diese Statistik wirklich löschen?"
 
-#. JS File: Core.Agent.TicketAction
+#. JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
 msgid "Select a customer ID to assign to this ticket"
 msgstr "Wählen Sie eine Kundennummer aus, die Sie diesem Ticket zuordnen möchten"
 
-#. JS File: Core.Agent.TicketAction
+#. JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
 msgid "Do you really want to continue?"
 msgstr "Möchten Sie wirklich fortfahren?"
 
-#. JS File: Core.Agent.TicketBulk
+#. JS File: var/httpd/htdocs/js/Core.Agent.TicketBulk.js
 msgid " ...and %s more"
 msgstr " ...und %s weitere(s)"
 
-#. JS File: Core.Agent.TicketBulk
+#. JS File: var/httpd/htdocs/js/Core.Agent.TicketBulk.js
 msgid " ...show less"
 msgstr " ...weniger zeigen"
 
-#. JS File: Core.Agent.TicketFormDraft
+#. JS File: var/httpd/htdocs/js/Core.Agent.TicketFormDraft.js
 msgid "Add new draft"
 msgstr "Als Entwurf speichern"
 
-#. JS File: Core.Agent.TicketFormDraft
+#. JS File: var/httpd/htdocs/js/Core.Agent.TicketFormDraft.js
 msgid "Delete draft"
 msgstr "Entwurf löschen"
 
-#. JS File: Core.Agent.TicketFormDraft
+#. JS File: var/httpd/htdocs/js/Core.Agent.TicketFormDraft.js
 msgid "There are no more drafts available."
 msgstr "Derzeit sind keine weiteren Entwürfe verfügbar."
 
-#. JS File: Core.Agent.TicketFormDraft
+#. JS File: var/httpd/htdocs/js/Core.Agent.TicketFormDraft.js
 msgid "It was not possible to delete this draft."
 msgstr "Es war nicht möglich, den Entwurf zu löschen."
 
-#. JS File: Core.Agent.TicketZoom
+#. JS File: var/httpd/htdocs/js/Core.Agent.TicketZoom.js
 msgid "Article filter"
 msgstr "Artikelfilter"
 
-#. JS File: Core.Agent.TicketZoom
+#. JS File: var/httpd/htdocs/js/Core.Agent.TicketZoom.js
 msgid "Apply"
 msgstr "Anwenden"
 
-#. JS File: Core.Agent.TicketZoom
+#. JS File: var/httpd/htdocs/js/Core.Agent.TicketZoom.js
 msgid "Event Type Filter"
 msgstr "Ereignistyp-Filter"
 
-#. JS File: Core.Agent
+#. JS File: var/httpd/htdocs/js/Core.Agent.js
 msgid "Slide the navigation bar"
 msgstr "Verschieben Sie die Navigationsleiste"
 
-#. JS File: Core.Agent
+#. JS File: var/httpd/htdocs/js/Core.Agent.js
 msgid "Please turn off Compatibility Mode in Internet Explorer!"
 msgstr "Bitte schalten Sie den Kompatibilitätsmodus im Internet Explorer aus!"
 
-#. JS File: Core.Agent
+#. JS File: var/httpd/htdocs/js/Core.Agent.js
 msgid "Find out more"
 msgstr "Mehr erfahren"
 
-#. JS File: Core.App.Responsive
+#. JS File: var/httpd/htdocs/js/Core.App.Responsive.js
 msgid "Switch to mobile mode"
 msgstr "Zur mobilen Ansicht wechseln"
 
-#. JS File: Core.App
+#. JS File: var/httpd/htdocs/js/Core.App.js
 msgid "Error: Browser Check failed!"
 msgstr "Fehler: Webbrowser-Überprüfung fehlgeschlagen!"
 
-#. JS File: Core.App
+#. JS File: var/httpd/htdocs/js/Core.App.js
 msgid "Reload page"
 msgstr "Seite aktualisieren"
 
-#. JS File: Core.App
+#. JS File: var/httpd/htdocs/js/Core.App.js
 msgid "Reload page (%ss)"
 msgstr "Seite aktualisieren (%ss)"
 
-#. JS File: Core.Debug
+#. JS File: var/httpd/htdocs/js/Core.Debug.js
 msgid "Namespace %s could not be initialized, because %s could not be found."
 msgstr "Der Namensraum %s konnte nicht initialisiert werden, weil %s nicht gefunden wurde."
 
-#. JS File: Core.Exception
+#. JS File: var/httpd/htdocs/js/Core.Exception.js
 msgid "An error occurred! Please check the browser error log for more details!"
 msgstr "Ein Fehler ist aufgetreten! Bitte prüfen Sie das Protokoll Ihres Webbrowsers für mehr Details!"
 
-#. JS File: Core.Form.Validate
+#. JS File: var/httpd/htdocs/js/Core.Form.Validate.js
 msgid "One or more errors occurred!"
 msgstr "Ein oder mehrere Fehler sind aufgetreten!"
 
-#. JS File: Core.Installer
+#. JS File: var/httpd/htdocs/js/Core.Installer.js
 msgid "Mail check successful."
 msgstr "Konfigurationsprüfung erfolgreich."
 
-#. JS File: Core.Installer
+#. JS File: var/httpd/htdocs/js/Core.Installer.js
 msgid "Error in the mail settings. Please correct and try again."
 msgstr "Fehler in der Mail-Konfiguration. Bitte korrigieren und nochmals probieren."
 
-#. JS File: Core.SystemConfiguration
+#. JS File: var/httpd/htdocs/js/Core.SystemConfiguration.js
 msgid "Open this node in a new window"
 msgstr "Diesen Knoten in einem neuen Fenster öffnen"
 
-#. JS File: Core.SystemConfiguration
+#. JS File: var/httpd/htdocs/js/Core.SystemConfiguration.js
 msgid "Please add values for all keys before saving the setting."
 msgstr "Bitte tragen Sie Werte für alle Schlüssel ein, bevor Sie die Einstellung speichern."
 
-#. JS File: Core.SystemConfiguration
+#. JS File: var/httpd/htdocs/js/Core.SystemConfiguration.js
 msgid "The key must not be empty."
 msgstr "Der Schlüssel darf nicht leer sein."
 
-#. JS File: Core.SystemConfiguration
+#. JS File: var/httpd/htdocs/js/Core.SystemConfiguration.js
 msgid "A key with this name ('%s') already exists."
 msgstr "Ein Schlüssel mit diesem Namen ('%s') existiert bereits."
 
-#. JS File: Core.SystemConfiguration
+#. JS File: var/httpd/htdocs/js/Core.SystemConfiguration.js
 msgid "Do you really want to revert this setting to its historical value?"
 msgstr "Möchten Sie diese Einstellung wirklich auf ihren ursprünglichen Wert zurücksetzen?"
 
-#. JS File: Core.UI.Datepicker
+#. JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
 msgid "Open date selection"
 msgstr "Datumsauswahl öffnen"
 
-#. JS File: Core.UI.Datepicker
+#. JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
 msgid "Invalid date (need a future date)!"
 msgstr "Ungültiges Datum (Benötige Datum in der Zukunft)!"
 
-#. JS File: Core.UI.Datepicker
+#. JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
 msgid "Invalid date (need a past date)!"
 msgstr "Ungültiges Datum (Benötige Datum in der Vergangenheit)!"
 
-#. JS File: Core.UI.InputFields
+#. JS File: var/httpd/htdocs/js/Core.UI.InputFields.js
 msgid "Not available"
 msgstr "Nicht verfügbar"
 
-#. JS File: Core.UI.InputFields
+#. JS File: var/httpd/htdocs/js/Core.UI.InputFields.js
 msgid "and %s more..."
 msgstr "und %s weitere..."
 
-#. JS File: Core.UI.InputFields
+#. JS File: var/httpd/htdocs/js/Core.UI.InputFields.js
 msgid "Show current selection"
 msgstr "Aktuelle Auswahl anzeigen"
 
-#. JS File: Core.UI.InputFields
+#. JS File: var/httpd/htdocs/js/Core.UI.InputFields.js
 msgid "Current selection"
 msgstr "Aktuelle Auwahl"
 
-#. JS File: Core.UI.InputFields
+#. JS File: var/httpd/htdocs/js/Core.UI.InputFields.js
 msgid "Clear all"
 msgstr "Alles löschen"
 
-#. JS File: Core.UI.InputFields
+#. JS File: var/httpd/htdocs/js/Core.UI.InputFields.js
 msgid "Filters"
 msgstr "Filter"
 
-#. JS File: Core.UI.InputFields
+#. JS File: var/httpd/htdocs/js/Core.UI.InputFields.js
 msgid "Clear search"
 msgstr "Suche löschen"
 
-#. JS File: Core.UI.Popup
+#. JS File: var/httpd/htdocs/js/Core.UI.Popup.js
 msgid "If you now leave this page, all open popup windows will be closed, too!"
 msgstr "Wenn Sie diese Seite verlassen, werden auch alle geöffneten Dialoge geschlossen!"
 
-#. JS File: Core.UI.Popup
+#. JS File: var/httpd/htdocs/js/Core.UI.Popup.js
 msgid "A popup of this screen is already open. Do you want to close it and load this one instead?"
 msgstr "Auf diesem Bildschirm ist bereits ein Popup-Fenster geöffnet. Möchten Sie dieses schließen und dieses stattdessen öffnen?"
 
-#. JS File: Core.UI.Popup
+#. JS File: var/httpd/htdocs/js/Core.UI.Popup.js
 msgid "Could not open popup window. Please disable any popup blockers for this application."
 msgstr "Konnte Popup-Fenster nicht öffnen. Bitte deaktivieren Sie alle Popup-Blocker für diese Anwendung."
 
-#. JS File: Core.UI.Table.Sort
+#. JS File: var/httpd/htdocs/js/Core.UI.Table.Sort.js
 msgid "Ascending sort applied, "
 msgstr "Aufsteigende Sortierung angewandt, "
 
-#. JS File: Core.UI.Table.Sort
+#. JS File: var/httpd/htdocs/js/Core.UI.Table.Sort.js
 msgid "Descending sort applied, "
 msgstr "Absteigende Sortierung angewandt, "
 
-#. JS File: Core.UI.Table.Sort
+#. JS File: var/httpd/htdocs/js/Core.UI.Table.Sort.js
 msgid "No sort applied, "
 msgstr "Keine Sortierung angewandt, "
 
-#. JS File: Core.UI.Table.Sort
+#. JS File: var/httpd/htdocs/js/Core.UI.Table.Sort.js
 msgid "sorting is disabled"
 msgstr "Sortierung deaktiviert"
 
-#. JS File: Core.UI.Table.Sort
+#. JS File: var/httpd/htdocs/js/Core.UI.Table.Sort.js
 msgid "activate to apply an ascending sort"
 msgstr "Aktivieren, um eine aufsteigende Sortierung anzuwenden"
 
-#. JS File: Core.UI.Table.Sort
+#. JS File: var/httpd/htdocs/js/Core.UI.Table.Sort.js
 msgid "activate to apply a descending sort"
 msgstr "Aktivieren, um eine absteigende Sortierung anzuwenden"
 
-#. JS File: Core.UI.Table.Sort
+#. JS File: var/httpd/htdocs/js/Core.UI.Table.Sort.js
 msgid "activate to remove the sort"
 msgstr "Aktivieren, um die Sortierung zu entfernen"
 
-#. JS File: Core.UI.Table
+#. JS File: var/httpd/htdocs/js/Core.UI.Table.js
 msgid "Remove the filter"
 msgstr "Filter entfernen"
 
-#. JS File: Core.UI.TreeSelection
+#. JS File: var/httpd/htdocs/js/Core.UI.TreeSelection.js
 msgid "There are currently no elements available to select from."
 msgstr "Derzeit sind keine Elemente für die Auswahl vorhanden."
 
-#. JS File: Core.UI
+#. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "Please only select one file for upload."
 msgstr "Bitte wählen Sie nur eine Datei zum Hochladen aus."
 
-#. JS File: Core.UI
+#. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "Sorry, you can only upload one file here."
 msgstr "Sie können hier nur eine Datei hochladen."
 
-#. JS File: Core.UI
+#. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "Sorry, you can only upload %s files."
 msgstr "Sie können nur %s Datei(en) hochladen."
 
-#. JS File: Core.UI
+#. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "Please only select at most %s files for upload."
 msgstr "Bitte wählen Sie höchstens %s Datei(en) zum Hochladen aus."
 
-#. JS File: Core.UI
+#. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "The following files are not allowed to be uploaded: %s"
 msgstr "Die folgenden Dateien dürfen nicht geändert werden: %s"
 
-#. JS File: Core.UI
+#. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "The following files exceed the maximum allowed size per file of %s and were not uploaded: %s"
 msgstr "Folgende Dateien überschreiten die Maximalgröße pro Datei (%s) und wurden nicht aktualisiert: %s"
 
-#. JS File: Core.UI
+#. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "The following files were already uploaded and have not been uploaded again: %s"
 msgstr "Folgende Dateien waren bereits hochgeladen und wurden nicht erneut verarbeitet: %s"
 
-#. JS File: Core.UI
+#. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "No space left for the following files: %s"
 msgstr "Kein Speicherplatz verfügbar für folgende Dateien: %s"
 
-#. JS File: Core.UI
+#. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "Available space %s of %s."
 msgstr "Verfügbarer Platz %s von %s."
 
-#. JS File: Core.UI
+#. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "Upload information"
 msgstr "Upload-Information"
 
-#. JS File: Core.UI
+#. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator."
 msgstr "Beim Löschen des Anhangs ist ein unbekannter Fehler aufgetreten. Bitte versuchen Sie es erneut. Wenn der Fehler weiterhin auftritt, kontaktieren Sie bitte Ihren Systemadministrator."
 
-#. JS File: Core.Language.UnitTest
+#. JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
 msgid "yes"
 msgstr "ja"
 
-#. JS File: Core.Language.UnitTest
+#. JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
 msgid "no"
 msgstr "nein"
 
-#. JS File: Core.Language.UnitTest
+#. JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
 msgid "This is %s"
 msgstr "Dies ist %s"
 
-#. JS File: Core.Language.UnitTest
+#. JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
 msgid "Complex %s with %s arguments"
 msgstr "Komplex %s mit %s Argumenten"
 
-#. JS File: OTRSLineChart
+#. JS File: var/httpd/htdocs/js/thirdparty/nvd3-1.7.1/models/OTRSLineChart.js
 msgid "No Data Available."
 msgstr "Keine Daten verfügbar."
 
-#. JS File: OTRSMultiBarChart
+#. JS File: var/httpd/htdocs/js/thirdparty/nvd3-1.7.1/models/OTRSMultiBarChart.js
 msgid "Grouped"
 msgstr "Gruppiert"
 
-#. JS File: OTRSMultiBarChart
+#. JS File: var/httpd/htdocs/js/thirdparty/nvd3-1.7.1/models/OTRSMultiBarChart.js
 msgid "Stacked"
 msgstr "Gestapelt"
 
-#. JS File: OTRSStackedAreaChart
+#. JS File: var/httpd/htdocs/js/thirdparty/nvd3-1.7.1/models/OTRSStackedAreaChart.js
 msgid "Stream"
 msgstr "Fließend"
 
-#. JS File: OTRSStackedAreaChart
+#. JS File: var/httpd/htdocs/js/thirdparty/nvd3-1.7.1/models/OTRSStackedAreaChart.js
 msgid "Expanded"
 msgstr "Ausgedehnt"
 
@@ -24517,7 +24516,7 @@ msgstr "Nur für Content-Type XML benötigt."
 msgid "Could not set attachments for ticket with ID %s in activity dialog \"%s\"!"
 msgstr "Anhänge für Ticket mit ID %s konnten in Aktivitätsdialog \"%s\" nicht gesetzt werden!"
 
-#. JS File: Core.Agent.Admin.ProcessManagement
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.ProcessManagement.js
 msgid "Are you sure you want to overwrite the config parameters?"
 msgstr "Sollen die Konfigurations-Parameter wirklich überschrieben werden?"
 
@@ -24849,7 +24848,7 @@ msgstr ""
 msgid "Owned Tickets Total"
 msgstr ""
 
-#. JS File: Core.Agent.Admin.OAuth2TokenManagement
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.OAuth2TokenManagement.js
 msgid "Do you really want to delete this token and its configuration?"
 msgstr "Soll das Token und dessen Konfiguration wirklich gelöscht werden?"
 
@@ -25044,3 +25043,12 @@ msgstr "archivierte Tickets"
 #. SysConfig
 msgid "not archived tickets"
 msgstr "nicht archivierte Tickets"
+
+#. Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "Did you know? You can help translating Znuny at %s."
+msgstr "Haben Sie gewusst, dass Sie bei der Übersetzung von Znuny unter %s helfen können?"
+
+#. Perl Module: Kernel/System/Calendar/Plugin/Ticket/Create.pm
+msgid "On the date"
+msgstr "Am Datum"
+
