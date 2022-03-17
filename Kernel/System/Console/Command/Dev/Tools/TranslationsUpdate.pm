@@ -171,8 +171,8 @@ sub HandleLanguage {
     if ( !$Module ) {
         $LanguageFile  = "$Home/Kernel/Language/$Language.pm";
         $TargetFile    = "$Home/Kernel/Language/$Language.pm";
-        $TargetPOTFile = "$Home/i18n/otrs/otrs.pot";
-        $TargetPOFile  = "$Home/i18n/otrs/otrs.$WeblateLanguage.po";
+        $TargetPOTFile = "$Home/i18n/Znuny/Znuny.pot";
+        $TargetPOFile  = "$Home/i18n/Znuny/Znuny.$WeblateLanguage.po";
     }
     else {
         $IsSubTranslation = 1;
@@ -789,7 +789,7 @@ sub WritePOTFile {
 
     $Kernel::OM->Get('Kernel::System::Main')->Require('Locale::PO') || die "Could not load Locale::PO";
 
-    my $Package = $Param{Module} // 'OTRS';
+    my $Package = $Param{Module} // 'Znuny';
 
     # build creation date, only YEAR-MO-DA HO:MI is needed without seconds
     my $CreationDate = $Kernel::OM->Create('Kernel::System::DateTime')->Format(
