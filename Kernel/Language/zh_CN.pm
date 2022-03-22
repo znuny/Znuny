@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.9962749746021;
+    $Self->{Completeness}        = 0.950333821853118;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -41,7 +41,7 @@ sub Data {
     $Self->{ThousandSeparator} = ',';
     $Self->{Translation} = {
 
-        # Template: AdminACL
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
         'ACL Management' => 'ACL管理',
         'Actions' => '操作',
         'Create New ACL' => '创建ACL',
@@ -72,7 +72,7 @@ sub Data {
         'No data found.' => '没有找到数据。',
         'No matches found.' => '没有找到相匹配的.',
 
-        # Template: AdminACLEdit
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
         'Edit ACL %s' => '编辑ACL %s',
         'Edit ACL' => '编辑ACL',
         'Go to overview' => '返回概览',
@@ -97,11 +97,11 @@ sub Data {
         'Cancel' => '取消',
         'Do you really want to delete this ACL?' => '您真的想要删除这个ACL吗？',
 
-        # Template: AdminACLNew
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminACLNew.tt
         'Create a new ACL by submitting the form data. After creating the ACL, you will be able to add configuration items in edit mode.' =>
             '通过填写表单数据实现ACL控制。创建ACL后，就可在编辑模式中添加ACL配置信息。',
 
-        # Template: AdminAppointmentCalendarManage
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentCalendarManage.tt
         'Calendar Management' => '日历管理',
         'Add Calendar' => '添加日历',
         'Edit Calendar' => '编辑日历',
@@ -156,7 +156,7 @@ sub Data {
         'Add Rule' => '添加规则',
         'Submit' => '提交',
 
-        # Template: AdminAppointmentImport
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentImport.tt
         'Appointment Import' => '预约导入',
         'Go back' => '返回',
         'Uploaded file must be in valid iCal format (.ics).' => '上传文件必须是有效的iCal格式(.ics)。',
@@ -169,7 +169,7 @@ sub Data {
         'Upload calendar' => '上传日历',
         'Import appointments' => '导入预约',
 
-        # Template: AdminAppointmentNotificationEvent
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
         'Appointment Notification Management' => '预约通知管理',
         'Add Notification' => '添加通知',
         'Edit Notification' => '编辑通知',
@@ -219,7 +219,6 @@ sub Data {
         'This is the default value for assigned recipient agents who didn\'t make a choice for this notification in their preferences yet. If the box is enabled, the notification will be sent to such agents.' =>
             '如果选中这个复选框，即使分配为收件人的服务人员在偏好设置中没有选择接收这个通知，这个通知仍然会发送给该服务人员。',
         'This feature is currently not available.' => '该功能当前不可用。',
-        'Upgrade to %s' => '升级到 %s',
         'Please activate this transport in order to use it.' => '请激活此传输方式以使用它。',
         'No data found' => '没有找到数据',
         'No notification method found.' => '没有找到通知方法。',
@@ -243,7 +242,7 @@ sub Data {
         'Config options' => '系统配置数据',
         'Example notification' => '通知样例',
 
-        # Template: AdminAppointmentNotificationEventTransportEmailSettings
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEventTransportEmailSettings.tt
         'Additional recipient email addresses' => '额外的收件人邮件地址',
         'This field must have less then 200 characters.' => '这个字段不能超过200个字符。',
         'Article visible for customer' => '信件对客户的可见性',
@@ -257,7 +256,7 @@ sub Data {
         'If signing key/certificate is missing' => '如果签名密钥/证书丢失了',
         'If encryption key/certificate is missing' => '如果加密密钥/证书丢失了',
 
-        # Template: AdminAttachment
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
         'Attachment Management' => '附件管理',
         'Add Attachment' => '添加附件',
         'Edit Attachment' => '编辑附件',
@@ -269,7 +268,7 @@ sub Data {
         'Do you really want to delete this attachment?' => '你是否确定要删除该附件？',
         'Attachment' => '附件',
 
-        # Template: AdminAutoResponse
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
         'Auto Response Management' => '自动响应管理',
         'Add Auto Response' => '添加自动响应',
         'Edit Auto Response' => '编辑自动响应',
@@ -292,7 +291,7 @@ sub Data {
             '动态字段显示名称，用于下拉选择和复选框',
         'Example response' => '自动响应样例',
 
-        # Template: AdminCloudServiceSupportDataCollector
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
         'Cloud Service Management' => '云服务管理',
         'Support Data Collector' => '支持数据收集工具',
         'Support data collector' => '支持数据收集工具',
@@ -312,7 +311,7 @@ sub Data {
         'System Registration is disabled for your system. Please check your configuration.' =>
             '本系统的系统注册功能已被禁用，请检查你的配置。',
 
-        # Template: AdminCloudServices
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServices.tt
         'System registration is a service of OTRS Group, which provides a lot of advantages!' =>
             '系统注册是OTRS集团的一项服务，它为您提供了很多好处!',
         'Please note that the use of OTRS cloud services requires the system to be registered.' =>
@@ -322,7 +321,7 @@ sub Data {
             '你可以在这里配置可用的云服务，其与%s的通信是安全的。',
         'Available Cloud Services' => '可用的云服务',
 
-        # Template: AdminCommunicationLog
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLog.tt
         'Communication Log' => '通信日志',
         'Time Range' => '时间范围',
         'Show only communication logs created in specific time range.' =>
@@ -356,7 +355,7 @@ sub Data {
         'No communications found.' => '没有找到通信。',
         '%s s' => '%s',
 
-        # Template: AdminCommunicationLogAccounts
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogAccounts.tt
         'Account Status' => '帐户状态',
         'Back to overview' => '返回总览界面',
         'Filter for Accounts' => '账号筛选',
@@ -374,17 +373,17 @@ sub Data {
         'End Time' => '结束时间',
         'No communication log entries found.' => '没有找到通信日志条目。',
 
-        # Template: AdminCommunicationLogCommunications
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogCommunications.tt
         'Duration' => '持续',
 
-        # Template: AdminCommunicationLogObjectLog
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogObjectLog.tt
         '#' => '序号',
         'Priority' => '优先级',
         'Module' => 'Module（模块）',
         'Information' => '信息',
         'No log entries found.' => '没有找到日志条目。',
 
-        # Template: AdminCommunicationLogZoom
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogZoom.tt
         'Detail view for %s communication started at %s' => '通信%s的详情视图开始于%s',
         'Filter for Log Entries' => '日志条目过滤器',
         'Filter for log entries' => '日志条目过滤器',
@@ -394,7 +393,7 @@ sub Data {
         'Communication Log Details' => '通信日志详情',
         'Please select an entry from the list.' => '请从列表中选择一个条目。',
 
-        # Template: AdminCustomerCompany
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
         'Customer Management' => '客户管理',
         'Add Customer' => '添加客户',
         'Edit Customer' => '编辑客户',
@@ -408,7 +407,7 @@ sub Data {
         'Please note' => '请注意',
         'This customer backend is read only!' => '客户后端是只读的！',
 
-        # Template: AdminCustomerGroup
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
         'Manage Customer-Group Relations' => '管理客户与组的关系',
         'Notice' => 'Notice（注意）',
         'This feature is disabled!' => '该功能已关闭！',
@@ -438,7 +437,7 @@ sub Data {
         'Full read and write access to the tickets in this group/queue.' =>
             '对于组/队列中的工单具有完整的\'读写\'权限。',
 
-        # Template: AdminCustomerUser
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Customer User Management' => '客户用户管理',
         'Add Customer User' => '添加客户用户',
         'Edit Customer User' => '编辑客户用户',
@@ -473,7 +472,7 @@ sub Data {
         'Table above shows granted customer access for the customer user by permission context. The matrix takes into account all inherited access (e.g. via customer groups). Note: The table does not consider changes made to this form without submitting it.' =>
             '上表显示了通过权限上下文为客户用户授予的客户访问权限。该矩阵考虑了所有继承的访问权限（例如通过客户组）。注意：此表没有考虑对此表单做了更改但没有提交的内容。',
 
-        # Template: AdminCustomerUserCustomer
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
         'Manage Customer User-Customer Relations' => '管理客户用户和客户的关联',
         'Select the customer user:customer relations.' => '选择客户用户关联的客户。',
         'Customer Users' => '客户用户',
@@ -483,7 +482,7 @@ sub Data {
         'Active' => 'Active（活动的）',
         'Toggle active state for %s' => '%s 激活/不激活状态',
 
-        # Template: AdminCustomerUserGroup
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
         'Manage Customer User-Group Relations' => '管理客户用户与组的关系',
         'Just use this feature if you want to define group permissions for customer users.' =>
             '如果要为客户用户定义组权限，请使用此功能。',
@@ -498,32 +497,27 @@ sub Data {
             '如果没有选择，就不具备该组的任何权限 (客户用户不能使用工单)。',
         'Customer User Default Groups:' => '客户用户的默认组：',
 
-        # Template: AdminCustomerUserService
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
         'Manage Customer User-Service Relations' => '管理客户-服务之间的联系',
         'Edit default services' => '修改默认服务',
         'Filter for Services' => '服务过滤器',
         'Filter for services' => '服务过滤器',
         'Services' => '服务',
 
-        # Template: AdminDynamicField
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
         'Dynamic Fields Management' => '动态字段管理',
         'Add new field for object' => '为对象添加新的字段',
         'Filter for Dynamic Fields' => '动态字段过滤器',
         'Filter for dynamic fields' => '动态字段过滤器',
-        'More Business Fields' => '更多商业版字段',
-        'Would you like to benefit from additional dynamic field types for businesses? Upgrade to %s to get access to the following field types:' =>
-            '您想要从商业版的额外动态字段类型中受益吗？ 升级到%s以访问以下字段类型：',
-        'Database' => '数据库',
-        'Use external databases as configurable data sources for this dynamic field.' =>
-            '使用外部数据库作为此动态字段的可配置数据源。',
-        'Web service' => 'Web服务',
-        'External web services can be configured as data sources for this dynamic field.' =>
-            '外部Web服务可以配置为该动态字段的数据源。',
-        'Contact with data' => '连接数据',
-        'This feature allows to add (multiple) contacts with data to tickets.' =>
-            '此功能允许将（多个）联系人信息添加到工单中。',
         'To add a new field, select the field type from one of the object\'s list, the object defines the boundary of the field and it can\'t be changed after the field creation.' =>
             '为了增加一个新的字段，从对象列表中选择一个字段类型，对象定义了字段的范围并且不能在创建后修改。',
+        'Import and export of configurations' => '',
+        'Upload a file in YAML format (as provided by the export) to import dynamic field configurations.' =>
+            '',
+        'Overwrite existing configurations' => '',
+        'Import configurations' => '',
+        'Export configurations' => '',
+        'Dynamic fields ↔ Screens' => '',
         'Dynamic Fields List' => '动态字段列表',
         'Dynamic fields per page' => '每页动态字段个数',
         'Label' => '标签',
@@ -531,7 +525,7 @@ sub Data {
         'Object' => '对象',
         'Delete this field' => '删除这个字段',
 
-        # Template: AdminDynamicFieldCheckbox
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
         'Dynamic Fields' => '动态字段',
         'Go back to overview' => '返回概览',
         'General' => '一般',
@@ -559,7 +553,21 @@ sub Data {
         'Default value' => '默认值',
         'This is the default value for this field.' => '这是该字段的默认值。',
 
-        # Template: AdminDynamicFieldDateTime
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldConfigurationImportExport.tt
+        'Dynamic field configurations: %s' => '',
+        'Select the dynamic fields you want to import and click on \'Import\'.' =>
+            '',
+        'Select the dynamic fields whose configuration you want to export and click on \'Export\' to generate a YAML file.' =>
+            '',
+        'Dynamic fields' => '动态字段',
+        'For the following dynamic fields a configuration cannot be imported because of an invalid backend.' =>
+            '',
+        'Select all field configurations' => '',
+        'Select all screen configurations' => '',
+        'The uploaded file does not contain configuration(s), is not a YAML file, is damaged or has the wrong structure.' =>
+            '',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldDateTime.tt
         'Default date difference' => '默认的日期差',
         'This field must be numeric.' => '此字段必须是数字。',
         'The difference from NOW (in seconds) to calculate the field default value (e.g. 3600 or -60).' =>
@@ -583,7 +591,7 @@ sub Data {
         'Restrict entering of dates' => '限制输入日期',
         'Here you can restrict the entering of dates of tickets.' => '在这里可以限制输入工单日期。',
 
-        # Template: AdminDynamicFieldDropdown
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldDropdown.tt
         'Possible values' => '可能值',
         'Key' => '键',
         'Value' => '值',
@@ -601,7 +609,24 @@ sub Data {
         'You need to add the translations manually into the language translation files.' =>
             '您需要将翻译手动添加到语言翻译文件中。',
 
-        # Template: AdminDynamicFieldText
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldScreenConfiguration.tt
+        'Assignment of dynamic fields to screens' => '',
+        'Overview' => '概览',
+        'Screens' => '',
+        'Default columns' => '',
+        'Add dynamic field' => '添加动态字段',
+        'Filter' => '过滤器',
+        'You can assign elements by dragging and dropping them to the lists of available, disabled, assigned and required elements.' =>
+            '',
+        'Filter available elements' => '',
+        'Assign selected elements to this list' => '',
+        'Select all' => '选择全部',
+        'Filter disabled elements' => '',
+        'Filter assigned elements' => '',
+        'Filter required elements' => '',
+        'Reset' => '重置',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldText.tt
         'Number of rows' => '行数',
         'Specify the height (in lines) for this field in the edit mode.' =>
             '在编辑模式中指定此字段的高度（行）。',
@@ -616,7 +641,73 @@ sub Data {
         'Error Message' => '错误消息',
         'Add RegEx' => '添加正则表达式',
 
-        # Template: AdminEmail
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice.tt
+        'Default search term' => '',
+        'This is the default term for the click search.' => '',
+        'Initial default search term' => '',
+        'This is the default search term when the mask is loaded.' => '',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
+        'Web service' => 'Web服务',
+        'Web service which will be used for this dynamic field.' => '',
+        'Invoker to search for records' => '',
+        'Invoker which will be used for this dynamic field. Searches for the search term(s) and returns an array as result. Note: The invoker needs to be enabled in the web service you specified above.' =>
+            '',
+        'Invoker to get a record' => '',
+        'Invoker which will be used for this dynamic field. Returns a hash of the record that will be found when searching for its identifier in the field configured in \'key for stored value\' below. Note: The invoker needs to be enabled in the web service you specified above.' =>
+            '',
+        'Backend' => '后端',
+        'Backend which will be used for this dynamic field.' => '',
+        'Backend documentation' => '',
+        'Key for search' => '',
+        'The keys (separated by comma) that will be searched when using the autocomplete while entering a value for the dynamic field.' =>
+            '',
+        'Key for stored value' => '',
+        'The key whose value will be stored in the dynamic field.' => '',
+        'Key to display' => '',
+        'The keys (separated by comma) that will be shown when the value of the dynamic field is being displayed. This also affects the value displayed in the autocomplete field when entering a value. If this field is left empty, the stored value from above will be displayed.' =>
+            '',
+        'Template Type' => '',
+        'This configuration determines how the values of the dynamic field are output in templates or masks.' =>
+            '',
+        'Separator to display between multi-key values' => '',
+        'The separator to show between the values if there\'s more than one key configured to be displayed above. If left empty, a single space will be used as separator. Use <space> to add spaces.' =>
+            '',
+        'Limit' => '限制',
+        'Maximum number of results for web service queries, e.g. for autcomplete selection list.' =>
+            '',
+        'Autocomplete min. input length' => '',
+        'Minimum length of input for autocomplete field to trigger search.' =>
+            '',
+        'Query delay' => '',
+        'Delay (in milliseconds) until the AJAX request will be sent.' =>
+            '',
+        'Autocompletion for search fields' => '',
+        'Use autocompletion for search fields instead of a static selection of values that are currently selected in OTRS (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch.' =>
+            '',
+        'Input field width' => '',
+        'Width of the input field (percentage).' => '',
+        'Additional dynamic field storage' => '',
+        'Dynamic field' => '',
+        'Restore values' => '',
+        'These dynamic fields are also filled with values from the same record.' =>
+            '',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Test.tt
+        'Test settings' => '',
+        'Error while testing configuration. Please check the configuration.' =>
+            '',
+        'Test was successful.' => '',
+        'Test this dynamic field exactly as it is displayed in the editing dialogs.' =>
+            '',
+        'Enter a search term to test the current settings.' => '',
+        'Click "Test settings"' => '',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/TestData.tt
+        'DisplayValue' => '',
+        'StoredValue' => '',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminEmail.tt
         'Admin Message' => '管理消息',
         'With this module, administrators can send messages to agents, group or role members.' =>
             '通过此模块，管理员可以给服务人员、组或角色发送消息。',
@@ -631,7 +722,7 @@ sub Data {
         'Body' => '内容',
         'Send' => '发送',
 
-        # Template: AdminGenericAgent
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
         'Generic Agent Job Management' => '自动任务管理',
         'Edit Job' => '编辑任务',
         'Add Job' => '添加任务',
@@ -682,8 +773,6 @@ sub Data {
         'Owner' => '所有者',
         'Responsible' => '负责人',
         'Ticket lock' => '工单锁定',
-        'Dynamic fields' => '动态字段',
-        'Add dynamic field' => '添加动态字段',
         'Create times' => '创建时间',
         'No create time settings.' => '没有创建时间。',
         'Ticket created' => '工单创建时间',
@@ -697,10 +786,10 @@ sub Data {
         'No change time settings.' => '没有修改时间设置。',
         'Ticket changed' => '工单修改时间',
         'Ticket changed between' => '工单修改时间（在...之间）',
-        'Last close times' => '',
-        'No last close time settings.' => '',
-        'Ticket last close' => '',
-        'Ticket last close between' => '',
+        'Last close times' => '最后关闭时间',
+        'No last close time settings.' => '没有最后关闭时间设置。',
+        'Ticket last close' => '工单最后关闭时间',
+        'Ticket last close between' => '工单最后关闭时间（在...之间）',
         'Close times' => '关闭时间',
         'No close time settings.' => '没有关闭时间设置。',
         'Ticket closed' => '工单关闭时间',
@@ -762,7 +851,7 @@ sub Data {
         'Affected Tickets' => '受影响的工单',
         'Age' => '总时长',
 
-        # Template: AdminGenericInterfaceDebugger
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceDebugger.tt
         'GenericInterface Web Service Management' => '通用接口Web服务管理',
         'Web Service Management' => '管理WEB服务',
         'Debugger' => '调试器',
@@ -780,10 +869,9 @@ sub Data {
         'Filter from' => '按日期过滤(从)',
         'Filter to' => '按日期过滤(到)',
         'Filter by remote IP' => '按远程IP过滤',
-        'Limit' => '限制',
         'Refresh' => '刷新',
 
-        # Template: AdminGenericInterfaceErrorHandlingDefault
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceErrorHandlingDefault.tt
         'Add ErrorHandling' => '添加错误处理',
         'Edit ErrorHandling' => '编辑错误处理',
         'Do you really want to delete this error handling module?' => '你确定要删除这个错误处理模块吗?',
@@ -830,7 +918,7 @@ sub Data {
             '定义在执行模块后是否应该停止处理，跳过所有剩余的模块，或者只跳过同一个后端的模块。',
         'Default behavior is to resume, processing the next module.' => '默认行为是恢复，处理下一个模块。',
 
-        # Template: AdminGenericInterfaceErrorHandlingRequestRetry
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceErrorHandlingRequestRetry.tt
         'This module allows to configure scheduled retries for failed requests.' =>
             '此模块允许配置失败请求的安排重试次数。',
         'Default behavior of GenericInterface web services is to send each request exactly once and not to reschedule after errors.' =>
@@ -858,7 +946,7 @@ sub Data {
         'Intervals calculated to exceed the maximum retry interval will then automatically be shortened accordingly.' =>
             '计算出超过最大重试间隔的间隔将自动相应缩短。',
         'Example: If a request is initially triggered at 10:00 with initial interval at \'1 minute\', retry factor at \'2\' and maximum interval at \'5 minutes\', retries would be triggered at 10:01 (1 minute), 10:03 (2 minutes), 10:07 (4 minutes), 10:12 (8=>5 minutes), 10:17, ...' =>
-            '示例：示例：如果一个请求的初始时间间隔为“1分钟”，重试因子为“2”，最大间隔为“5分钟”，初始触发在10:00，重试将触发在10:01（1分钟），10 ：03（2分钟），10:07（4分钟），10:12（8 => 5分钟），10:17，...',
+            '示例：如果一个请求的初始时间间隔为“1分钟”，重试因子为“2”，最大间隔为“5分钟”，初始触发在10:00，重试将触发在10:01（1分钟），10 ：03（2分钟），10:07（4分钟），10:12（8 => 5分钟），10:17，...',
         'Maximum retry count' => '最大重试次数',
         'Maximum number of retries before a failing request is discarded, not counting the initial request.' =>
             '失败请求被丢弃之前的最大重试次数，不计入初始请求。',
@@ -877,7 +965,7 @@ sub Data {
         'Note: Maximum retry period might not be reached if a maximum retry count is configured as well and reached earlier.' =>
             '注意：如果配置了最大重试次数并且较早到达，则可能无法达到最大重试时间。',
 
-        # Template: AdminGenericInterfaceInvokerDefault
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
         'Add Invoker' => '添加调用程序',
         'Edit Invoker' => '编辑调用程序',
         'Do you really want to delete this invoker?' => '您真的想要删除这个调用程序吗？',
@@ -906,7 +994,7 @@ sub Data {
         'Synchronous event triggers would be processed directly during the web request.' =>
             '同步的事件触发器则是在web请求期间直接处理的。',
 
-        # Template: AdminGenericInterfaceInvokerEvent
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerEvent.tt
         'GenericInterface Invoker Event Settings for Web Service %s' => 'Web服务%s的通用接口调用程序事件设置',
         'Go back to' => '返回到',
         'Delete all conditions' => '删除所有条件',
@@ -925,7 +1013,7 @@ sub Data {
         'And can\'t be repeated on the same condition.' => '同一条件中不能对相同字段使用“和”关系。',
         'Add New Condition' => '添加新的条件',
 
-        # Template: AdminGenericInterfaceMappingSimple
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingSimple.tt
         'Mapping Simple' => '简单映射',
         'Default rule for unmapped keys' => '未映射键的默认规则',
         'This rule will apply for all keys with no mapping rule.' => '这个规则将应用于所有没有映射规则的键。',
@@ -947,7 +1035,7 @@ sub Data {
         'Add value mapping' => '添加值映射',
         'Do you really want to delete this key mapping?' => '您真的想要删除这个键映射吗？',
 
-        # Template: AdminGenericInterfaceMappingXSLT
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingXSLT.tt
         'General Shortcuts' => '通用快捷键',
         'MacOS Shortcuts' => 'MacOS快捷键',
         'Comment code' => '注释代码',
@@ -970,6 +1058,11 @@ sub Data {
             '选择在早期请求/响应阶段创建的一组或多组要包含在可映射数据中的数据集合。',
         'These sets will appear in the data structure at \'/DataInclude/<DataSetName>\' (see debugger output of actual requests for details).' =>
             '这些数据集合将出现在 \'/DataInclude/<DataSetName>\'的数据结构中（有关详细信息，请参阅实际请求的调试器输出）。',
+        'Force array for tags' => '',
+        'Enter tags separated by space for which array representation should be forced.' =>
+            '',
+        'Keep XML attributes' => '',
+        'Only needed for content type XML.' => '',
         'Data key regex filters (before mapping)' => '数据键正则表达式过滤器（映射之前）',
         'Data key regex filters (after mapping)' => '数据键正则表达式过滤器（映射之后）',
         'Regular expressions' => '正则表达式',
@@ -998,7 +1091,7 @@ sub Data {
         'Regular expressions defined here will be applied after the XSLT mapping.' =>
             '这里定义的正则表达式将在XSLT映射之后应用。',
 
-        # Template: AdminGenericInterfaceOperationDefault
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceOperationDefault.tt
         'Add Operation' => '添加操作',
         'Edit Operation' => '编辑操作',
         'Do you really want to delete this operation?' => '您真的想要删除这个操作吗？',
@@ -1017,7 +1110,7 @@ sub Data {
         'Include Ticket Data' => '包含工单数据',
         'Include ticket data in response.' => '在响应中包含工单数据。',
 
-        # Template: AdminGenericInterfaceTransportHTTPREST
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
         'Network Transport' => '网络传输',
         'Properties' => '属性',
         'Route mapping for Operation' => '为操作路由映射',
@@ -1026,6 +1119,11 @@ sub Data {
         'Valid request methods for Operation' => '操作的有效请求方法',
         'Limit this Operation to specific request methods. If no method is selected all requests will be accepted.' =>
             '限制这个操作使用指定的请求方法。如果没有选择方法，则所有的请求都可以接受。',
+        'Parser backend for operation' => '',
+        'Defines the incoming data format.' => '',
+        'Parser backend parameter' => '',
+        'Please click \'Save\' to get the corresponding backend parameter if the parser backend was changed.' =>
+            '',
         'Maximum message length' => '消息的最大长度',
         'This field should be an integer number.' => '这个字段值应该是一个整数。',
         'Here you can specify the maximum size (in bytes) of REST messages that OTRS will process.' =>
@@ -1040,6 +1138,9 @@ sub Data {
             '用于指示访问Web服务的特定位置的URI。',
         'e.g https://www.otrs.com:10745/api/v1.0 (without trailing backslash)' =>
             '例如：https://www.otrs.com:10745/api/v1.0 (最后不带斜杠/)',
+        'Disable SSL hostname certificate verification' => '',
+        'Disables hostname certificate verification. This is not recommended and should only be used in test environments.' =>
+            '',
         'Timeout' => '超时',
         'Timeout value for requests.' => '请求的超时值。',
         'Authentication' => 'Authentication（身份验证）',
@@ -1049,6 +1150,9 @@ sub Data {
         'The user name to be used to access the remote system.' => '用于访问远程系统的用户名。',
         'BasicAuth Password' => '基本认证密码',
         'The password for the privileged user.' => '特权用户的密码。',
+        'Content type' => '',
+        'The default content type added to HTTP header to use for POST and PUT requests.' =>
+            '',
         'Use Proxy Options' => '使用代理选项',
         'Show or hide Proxy options to connect to the remote system.' => '显示或隐藏连接到远程系统的代理选项。',
         'Proxy Server' => '代理服务器',
@@ -1089,8 +1193,10 @@ sub Data {
             '调用程序用于请求的特定的HTTP命令。',
         'Default command' => '默认命令',
         'The default HTTP command to use for the requests.' => '用于请求的默认HTTP命令。',
+        'Additional request headers' => '',
+        'Add request header' => '',
 
-        # Template: AdminGenericInterfaceTransportHTTPSOAP
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt
         'e.g. https://local.otrs.com:8000/Webservice/Example' => '例如： https://local.otrs.com:8000/Webservice/Example',
         'Set SOAPAction' => '设置SOAP动作',
         'Set to "Yes" in order to send a filled SOAPAction header.' => '设置为“是”，发送填写了的SOAPAction 头。',
@@ -1113,6 +1219,9 @@ sub Data {
         'URI to give SOAP methods a context, reducing ambiguities.' => '为SOAP方法指定URI(通用资源标识符), 以便消除二义性。',
         'e.g urn:otrs-com:soap:functions or http://www.otrs.com/GenericInterface/actions' =>
             '例如：urn:otrs-com:soap:functions或http://www.otrs.com/GenericInterface/actions',
+        'Omit namespace prefix' => '',
+        'Omits the namespace prefix (e. g. namesp1:) in root tag of SOAP message.' =>
+            '',
         'Request name scheme' => '请求名称方案',
         'Select how SOAP request function wrapper should be constructed.' =>
             '选择如何构建SOAP请求函数封装器。',
@@ -1131,16 +1240,27 @@ sub Data {
         'Response name free text' => '回复名称自由文本',
         'Here you can specify the maximum size (in bytes) of SOAP messages that OTRS will process.' =>
             '在这里你可以指定OTRS能够处理的SOAP消息的最大长度(以字节为单位)。',
+        'Fixed namespace prefix' => '',
+        'Use a fixed namespace prefix (e. g. myns:) for the root tag of a SOAP message.' =>
+            '',
+        'Suffix for response tag' => '',
+        'Usually OTRS expects a response tag like "&lt;Operation&gt;Response". This setting can change the "Response" part, e. g. to "Result".' =>
+            '',
         'Encoding' => '编码',
         'The character encoding for the SOAP message contents.' => 'SOAP消息内容的字符编码。',
         'e.g utf-8, latin1, iso-8859-1, cp1250, Etc.' => '例如：utf-8, latin1, iso-8859-1, cp1250等等。',
+        'User' => '用户',
+        'Password' => '密码',
+        'Disable SSL hostname verification' => '',
+        'Disables (setting "Yes") or enables (setting "No", default) the SSL hostname verification.' =>
+            '',
         'Sort options' => '排序选项',
         'Add new first level element' => '添加新的第一级元素',
         'Element' => '元素',
         'Outbound sort order for xml fields (structure starting below function name wrapper) - see documentation for SOAP transport.' =>
             '出站XML字段的排序顺序（下面的函数名称封装结构）-查看关于SOAP传输的文档。',
 
-        # Template: AdminGenericInterfaceWebservice
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceWebservice.tt
         'Add Web Service' => '添加Web服务',
         'Edit Web Service' => '编辑Web服务',
         'Clone Web Service' => '克隆Web服务',
@@ -1158,13 +1278,7 @@ sub Data {
         'Delete web service' => '删除Web服务',
         'Do you really want to delete this web service?' => '您真的想要删除这个Web服务吗？',
         'Ready2Adopt Web Services' => '即开即用的Web服务',
-        'Here you can activate Ready2Adopt web services showcasing our best practices that are a part of %s.' =>
-            '你可以在这里激活即开即用的WEB服务，作为%s的一部分展示我们的最佳实践。',
-        'Please note that these web services may depend on other modules only available with certain %s contract levels (there will be a notification with further details when importing).' =>
-            '请注意：这些WEB服务可能依赖于其它仅在某些%s合同级别中才可用的模块(导入时会有详细提示信息)。',
         'Import Ready2Adopt web service' => '导入即开即用的WEB服务',
-        'Would you like to benefit from web services created by experts? Upgrade to %s to import some sophisticated Ready2Adopt web services.' =>
-            '你想从专家创建的WEB服务中受益吗？升级到%s 就能导入一些复杂的即开即用的WEB服务。',
         'After you save the configuration you will be redirected again to the edit screen.' =>
             '保存配置文件后，页面将再次转到编辑页面。',
         'If you want to return to overview please click the "Go to overview" button.' =>
@@ -1181,7 +1295,6 @@ sub Data {
         'Error Handling Modules' => '错误处理模块',
         'Error handling modules are used to react in case of errors during the communication. Those modules are executed in a specific order, which can be changed by drag and drop.' =>
             '错误处理模块用于在通信过程中发生错误时作出反应。 这些模块以特定的顺序执行，可以通过拖放来更改顺序。',
-        'Backend' => '后端',
         'Add error handling module' => '添加错误处理模块',
         'Operations are individual system functions which remote systems can request.' =>
             '操作是各种不同的系统函数，可供远程系统请求调用。',
@@ -1194,7 +1307,7 @@ sub Data {
         'At least one %s has a controller that is either not active or not present, please check the controller registration or delete the %s' =>
             '至少有一个 %s 的控制器未被激活或根本就不存在，请检查控制器注册或删除这个 %s',
 
-        # Template: AdminGenericInterfaceWebserviceHistory
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceWebserviceHistory.tt
         'History' => '历史',
         'Go back to Web Service' => '返回到Web服务',
         'Here you can view older versions of the current web service\'s configuration, export or even restore them.' =>
@@ -1209,7 +1322,7 @@ sub Data {
             '您真的想要恢复Web服务配置的这个版本吗？',
         'Your current web service configuration will be overwritten.' => '当前的Web服务配置将被覆盖。',
 
-        # Template: AdminGroup
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
         'Group Management' => '组管理',
         'Add Group' => '添加组',
         'Edit Group' => '编辑组',
@@ -1219,15 +1332,16 @@ sub Data {
             '若要为不同的服务人员分配不同的访问权限，应创建新的组。(例如，采购部、支持部、销售部...)。 ',
         'It\'s useful for ASP solutions. ' => '它对ASP解决方案非常有用。 ',
 
-        # Template: AdminLog
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'System Log' => '系统日志',
+        'Clear log entries' => '',
         'Here you will find log information about your system.' => '查看系统日志信息。',
         'Hide this message' => '隐藏此消息',
         'Recent Log Entries' => '最近的日志条目',
         'Facility' => '设施',
         'Message' => '消息',
 
-        # Template: AdminMailAccount
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
         'Mail Account Management' => '邮件帐户管理',
         'Add Mail Account' => '添加邮件帐号',
         'Edit Mail Account for host' => '编辑邮件帐户，主机',
@@ -1242,10 +1356,11 @@ sub Data {
             '外发电子邮件可以通过%s中的Sendmail开头的设置进行配置。',
         'System Configuration' => '系统配置',
         'Host' => '主机',
+        'Authentication type' => '',
         'Delete account' => '删除帐号',
         'Fetch mail' => '查收邮件',
         'Do you really want to delete this mail account?' => '您确定要删除这个邮件帐户吗？',
-        'Password' => '密码',
+        'OAuth2 token configuration' => '',
         'Example: mail.example.com' => '样例：mail.example.com',
         'IMAP Folder' => 'IMAP文件夹',
         'Only modify this if you need to fetch mail from a different folder than INBOX.' =>
@@ -1254,10 +1369,9 @@ sub Data {
         'Dispatching' => '分派',
         'Edit Mail Account' => '编辑邮件帐号',
 
-        # Template: AdminNavigationBar
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
         'Administration Overview' => '系统管理概览',
         'Filter for Items' => '条目过滤器',
-        'Filter' => '过滤器',
         'Favorites' => '收藏夹',
         'You can add favorites by moving your cursor over items on the right side and clicking the star icon.' =>
             '你可以移动鼠标到条目的右上角并点击星形图标来将条目添加到收藏夹。',
@@ -1267,7 +1381,7 @@ sub Data {
         'Sorry, your search didn\'t match any items.' => '对不起，你的搜索不匹配任何条目。',
         'Set as favorite' => '添加到收藏夹',
 
-        # Template: AdminNotificationEvent
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
         'Ticket Notification Management' => '工单通知管理',
         'Here you can upload a configuration file to import Ticket Notifications to your system. The file needs to be in .yml format as exported by the Ticket Notification module.' =>
             '在这里你可以上传一个配置文件以便导入工单通知，必须是与工单通知模块导出的文件一样的.yml格式。',
@@ -1308,12 +1422,68 @@ sub Data {
         'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
             '工单动态字段显示值，对下拉式和多项选择字段有用',
 
-        # Template: AdminNotificationEventTransportEmailSettings
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => '使用逗号或分号分隔电子邮件地址。',
         'You can use OTRS-tags like <OTRS_TICKET_DynamicField_...> to insert values from the current ticket.' =>
             '你可以使用诸如<OTRS_TICKET_DynamicField_...>之类的OTRS标签来插入当前工单中的值。',
 
-        # Template: AdminOTRSBusinessInstalled
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportWebserviceSettings.tt
+        'Web service name' => '',
+        'Invoker' => '',
+        'Asynchronous event triggers will be handled as separate process by the scheduler daemon (recommended).' =>
+            '',
+        'Synchronous event triggers will be processed directly during the web request.' =>
+            '',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
+        'Queue Management' => '队列管理',
+        'Manage OAuth2 tokens and their configurations' => '',
+        'Add by template' => '',
+        'Base configuration' => '',
+        'An OAuth2 token configuration with this name already exists.' =>
+            '',
+        'Client ID' => '',
+        'Client secret' => '',
+        'Template' => '模版',
+        'This is the template that was used to create this OAuth2 token configuration.' =>
+            '',
+        'Notifications' => '通知',
+        'Expired token' => '',
+        'Shows a notification for admins below the top menu if the OAuth2 token has expired.' =>
+            '',
+        'Expired refresh token' => '',
+        'Shows a notification for admins below the top menu if the OAuth2 refresh token has expired.' =>
+            '',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
+        'Add OAuth2 token configuration' => '',
+        'Add a new OAuth2 token configuration based on the selected template.' =>
+            '',
+        'Import and export' => '',
+        'Upload a YAML file to import token configurations. See documentation on OAuth2 token management for further details.' =>
+            '',
+        'Overwrite existing token configurations' => '',
+        'Import token configurations' => '',
+        'Export token configurations' => '',
+        'OAuth2 token configurations' => '',
+        'Token status' => '',
+        'Refresh token status' => '',
+        'Validity of token configuration' => '',
+        'Last token request failed.' => '',
+        'Token has expired on %s.' => '',
+        'Token is valid until %s.' => '',
+        'No token was requested yet.' => '',
+        'Last (refresh) token request failed.' => '',
+        'Refresh token has expired on %s.' => '',
+        'Refresh token has expired.' => '',
+        'Refresh token is valid until %s.' => '',
+        'Refresh token is valid (without expiration date).' => '',
+        'No refresh token was requested yet.' => '',
+        'Refresh token request is not configured.' => '',
+        'Request new token' => '',
+        'Delete this token and its configuration.' => '',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessInstalled.tt
         'Manage %s' => '管理 %s',
         'Downgrade to ((OTRS)) Community Edition' => '降级为 ((OTRS)) 社区版',
         'Read documentation' => '阅读文档',
@@ -1340,7 +1510,8 @@ sub Data {
         'Congratulations, your %s is correctly installed and up to date!' =>
             '恭喜，你的%s 已经正确地安装到最新版本！',
 
-        # Template: AdminOTRSBusinessNotInstalled
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessNotInstalled.tt
+        'Upgrade to %s' => '升级到 %s',
         'Go to the OTRS customer portal' => '访问OTRS客户门户',
         '%s will be available soon. Please check again in a few days.' =>
             '%s 很快就可用了，请过几天再检查一次。',
@@ -1355,12 +1526,12 @@ sub Data {
         'Please visit our customer portal and file a request.' => '请访问我们的客户门户并提出请求。',
         'Everything else will be done as part of your contract.' => '一切都将作为您的合同的一部分完成。',
         'Your installed OTRS version is %s.' => '您安装的OTRS版本是%s。',
-        'To install this package, you need to update to Znuny %s or higher.' =>
-            '要安装此软件包，您需要更新到Znuny %s或更高版本。',
+        'To install this package, you need to update to OTRS %s or higher.' =>
+            '',
         'To install this package, the Maximum OTRS Version is %s.' => '要安装此软件包，OTRS最高版本为%s。',
         'To install this package, the required Framework version is %s.' =>
             '要安装此软件包，所需的框架版本为%s。',
-        'Why should I keep Znuny up to date?' => '为什么要保持Znuny是最新的？',
+        'Why should I keep OTRS up to date?' => '',
         'You will receive updates about relevant security issues.' => '您将收到有关安全问题的更新。',
         'You will receive updates for all other relevant OTRS issues' => '您将收到所有其他OTRS相关问题的更新',
         'With your existing contract you can only use a small part of the %s.' =>
@@ -1368,7 +1539,7 @@ sub Data {
         'If you would like to take full advantage of the %s get your contract upgraded now! Contact %s.' =>
             '如欲发挥%s 的全部优势，请升级合同！联系%s。',
 
-        # Template: AdminOTRSBusinessUninstall
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessUninstall.tt
         'Cancel downgrade and go back' => '取消降级并返回',
         'Go to OTRS Package Manager' => '进入 OTRS 软件包管理',
         'Sorry, but currently you can\'t downgrade due to the following packages which depend on %s:' =>
@@ -1387,7 +1558,7 @@ sub Data {
         'Ticket Attachment View' => '工单附件视图',
         'The %s skin' => '%s 皮肤',
 
-        # Template: AdminPGP
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminPGP.tt
         'PGP Management' => 'PGP管理',
         'Add PGP Key' => '添加PGP密钥',
         'PGP support is disabled' => 'PGP支持已禁用',
@@ -1408,7 +1579,7 @@ sub Data {
         'Delete this key' => '删除密钥',
         'PGP key' => 'PGP密钥',
 
-        # Template: AdminPackageManager
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
         'Package Manager' => '软件包管理器',
         'Uninstall Package' => '卸载软件包',
         'Uninstall package' => '卸载软件包',
@@ -1417,11 +1588,11 @@ sub Data {
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             '您真的想要重新安装该软包吗? 所有该模块的手工设置将丢失.',
         'Go to updating instructions' => '转到升级说明',
+        'Go to znuny.org' => '',
         'package information' => '软件包信息',
-        'Package installation requires a patch level update of Znuny.' => '安装软件包需要将Znuny补丁级别更新。',
-        'Package update requires a patch level update of Znuny.' => '升级软件包需要将Znuny补丁级别更新。',
-        'If you are a OTRS Business Solution™ customer, please visit our customer portal and file a request.' =>
-            '如果您是OTRS 商业版™客户，请访问我们的客户门户并提交请求。',
+        'Package installation requires a patch level update of Znuny.' =>
+            '安装软件包需要将OTRS补丁级别更新。',
+        'Package update requires a patch level update of Znuny.' => '升级软件包需要将OTRS补丁级别更新。',
         'Please note that your installed Znuny version is %s.' => '请注意，您安装的Znuny版本是%s。',
         'To install this package, you need to update Znuny to version %s or newer.' =>
             '安装这个软件包，你需要升级Znuny版本到%s或者更高。',
@@ -1429,6 +1600,7 @@ sub Data {
             '这个软件包只能安装在Znuny版本%s或者更低。',
         'This package can only be installed on Znuny version %s or newer.' =>
             '这个软件包只能安装在Znuny版本%s或者更高。',
+        'Why should I keep Znuny up to date?' => '为什么要保持Znuny是最新的？',
         'You will receive updates for all other relevant Znuny issues.' =>
             '你将收到所有其他有关Znuny问题的更新。',
         'How can I do a patch level update if I don’t have a contract?' =>
@@ -1457,9 +1629,6 @@ sub Data {
         'Package not correctly deployed! Please reinstall the package.' =>
             '软件包未正确安装！请重新安装软件包。',
         'Reinstall' => '重新安装',
-        'Features for %s customers only' => '仅%s 才能使用的功能',
-        'With %s, you can benefit from the following optional features. Please make contact with %s if you need more information.' =>
-            '你能从%s 得到以下可选的功能特性，请联系%s 获取更多信息。',
         'Package Information' => '软件包信息',
         'Download package' => '下载该软件包',
         'Rebuild package' => '重新编译',
@@ -1477,7 +1646,7 @@ sub Data {
         'File Differences for File %s' => '文件%s的文件差异',
         'File differences for file %s' => '文件跟%s 有差异',
 
-        # Template: AdminPerformanceLog
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminPerformanceLog.tt
         'Performance Log' => '性能日志',
         'Range' => '范围',
         'last' => '最后',
@@ -1488,8 +1657,6 @@ sub Data {
         'Disable it here!' => '关闭该功能！',
         'Logfile too large!' => '日志文件过大！',
         'The logfile is too large, you need to reset it' => '日志文件太大，请重置日志文件',
-        'Reset' => '重置',
-        'Overview' => '概览',
         'Interface' => '界面',
         'Requests' => '请求',
         'Min Response' => '最快响应',
@@ -1501,7 +1668,7 @@ sub Data {
         'Max' => '最大',
         'Average' => '平均',
 
-        # Template: AdminPostMasterFilter
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminPostMasterFilter.tt
         'PostMaster Filter Management' => '管理邮箱管理员过滤器',
         'Add PostMaster Filter' => '添加邮箱管理员过滤器',
         'Edit PostMaster Filter' => '编辑邮箱管理员过滤器',
@@ -1531,7 +1698,7 @@ sub Data {
         'The field needs to be a literal word.' => '该字段需要输入文字。',
         'Header' => '标头',
 
-        # Template: AdminPriority
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminPriority.tt
         'Priority Management' => '优先级管理',
         'Add Priority' => '添加优先级',
         'Edit Priority' => '编辑优先级',
@@ -1541,7 +1708,7 @@ sub Data {
             '此优先级已存在于系统配置的一个设置中，需要更新设置以确认指向新的优先级！',
         'This priority is used in the following config settings:' => '这个优先级已用于以下的系统配置设置：',
 
-        # Template: AdminProcessManagement
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
         'Process Management' => '流程管理',
         'Filter for Processes' => '流程过滤器',
         'Filter for processes' => '流程筛选',
@@ -1554,8 +1721,6 @@ sub Data {
         'Ready2Adopt Processes' => '即开即用的流程',
         'Here you can activate Ready2Adopt processes showcasing our best practices. Please note that some additional configuration may be required.' =>
             '你可以在此激活能展示我们最佳实践的即开即用的流程，请注意这可能需要一些额外的配置。',
-        'Would you like to benefit from processes created by experts? Upgrade to %s to import some sophisticated Ready2Adopt processes.' =>
-            '你想从专家创建的流程中受益吗？升级到%s 就能导入一些复杂的即开即用的流程。',
         'Import Ready2Adopt process' => '导入即开即用的流程',
         'To create a new Process you can either import a Process that was exported from another system or create a complete new one.' =>
             '为了创建新的流程，你可以导入从其它系统导出的流程配置文件，或者重新创建一个。',
@@ -1567,25 +1732,29 @@ sub Data {
         'Export Process Configuration' => '导出流程配置',
         'Copy Process' => '复制流程',
 
-        # Template: AdminProcessManagementActivity
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Cancel & close' => '取消并关闭',
         'Go Back' => '返回',
         'Please note, that changing this activity will affect the following processes' =>
             '请注意，修改这个活动将影响以下流程',
         'Activity' => '活动',
         'Activity Name' => '活动名称',
+        'Scope' => '',
+        'Scope EntityID' => '',
+        'This field is required for activities with a scope.' => '',
         'Activity Dialogs' => '活动对话框',
         'You can assign Activity Dialogs to this Activity by dragging the elements with the mouse from the left list to the right list.' =>
             '用鼠标将左侧列表中的元素拖放到右侧，你可以为这个活动分配活动对话框。',
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             '利用鼠标拖放动作还可以对元素进行排序。',
         'Filter available Activity Dialogs' => '可用的活动对话框过滤器',
+        'Show global %s' => '',
         'Available Activity Dialogs' => '可用的活动对话框',
         'Name: %s, EntityID: %s' => '名称：%s， EntityID： %s',
         'Create New Activity Dialog' => '创建新的活动对话框',
         'Assigned Activity Dialogs' => '分配的活动对话框',
 
-        # Template: AdminProcessManagementActivityDialog
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
         'Please note that changing this activity dialog will affect the following activities' =>
             '请注意，修改这个活动对话框将影响以下活动',
         'Please note that customer users will not be able to see or use the following fields: Owner, Responsible, Lock, PendingTime and CustomerID.' =>
@@ -1600,6 +1769,7 @@ sub Data {
         'The selected permission does not exist.' => '选择的权限不存在。',
         'Required Lock' => '需要锁定',
         'The selected required lock does not exist.' => '选择的需要锁定不存在（无法锁定）。',
+        'This field is required for activitiy dialogs with a scope.' => '',
         'Submit Advice Text' => '提交按钮的建议文本',
         'Submit Button Text' => '提交按钮的文本',
         'You can assign Fields to this Activity Dialog by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1611,7 +1781,7 @@ sub Data {
         'Is visible for customer' => '对客户可见',
         'Display' => 'Display（显示）',
 
-        # Template: AdminProcessManagementPath
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => '路径',
         'Edit this transition' => '编辑这个转换',
         'Transition Actions' => '转换操作',
@@ -1622,7 +1792,7 @@ sub Data {
         'Create New Transition Action' => '创建新的转换动作',
         'Assigned Transition Actions' => '分配的转换动作',
 
-        # Template: AdminProcessManagementProcessAccordion
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessAccordion.tt
         'Activities' => '活动',
         'Filter Activities...' => '活动过滤器...',
         'Create New Activity' => '创建新的活动',
@@ -1632,7 +1802,7 @@ sub Data {
         'Create New Transition' => '创建新的转换',
         'Filter Transition Actions...' => '转换动作过滤器...',
 
-        # Template: AdminProcessManagementProcessEdit
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
         'Edit Process' => '编辑流程',
         'Print process information' => '打印流程信息',
         'Delete Process' => '删除流程',
@@ -1668,11 +1838,11 @@ sub Data {
         'Do you really want to remove this transition from the canvas? This can only be undone by leaving this screen without saving.' =>
             '您真的想要从画布中删除这个转换吗？不保存并离开此屏幕可撤销删除操作。',
 
-        # Template: AdminProcessManagementProcessNew
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessNew.tt
         'In this screen, you can create a new process. In order to make the new process available to users, please make sure to set its state to \'Active\' and synchronize after completing your work.' =>
             '在这里，你可以创建新的流程。为了使新流程生效，请务必将流程的状态设置为“激活”，并在完成配置工作后执行部署流程操作。',
 
-        # Template: AdminProcessManagementProcessPrint
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessPrint.tt
         'cancel & close' => '取消并关闭',
         'Start Activity' => '开始活动',
         'Contains %s dialog(s)' => '包含%s 个对话框',
@@ -1685,24 +1855,25 @@ sub Data {
         'Module name' => '模块名称',
         'Transition actions are not being used in this process.' => '该流程未使用转换动作。',
 
-        # Template: AdminProcessManagementTransition
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementTransition.tt
         'Please note that changing this transition will affect the following processes' =>
             '请注意，修改这个转换将影响以下流程',
         'Transition' => '转换',
         'Transition Name' => '转换名称',
+        'This field is required for transitions with a scope.' => '',
 
-        # Template: AdminProcessManagementTransitionAction
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementTransitionAction.tt
         'Please note that changing this transition action will affect the following processes' =>
             '请注意，修改这个转换动作将影响以下流程',
         'Transition Action' => '转换动作',
         'Transition Action Name' => '转换动作名称',
         'Transition Action Module' => '转换动作模块',
+        'This field is required for transition actions with a scope.' => '',
         'Config Parameters' => '配置参数',
         'Add a new Parameter' => '添加新的参数',
         'Remove this Parameter' => '删除这个参数',
 
-        # Template: AdminQueue
-        'Queue Management' => '队列管理',
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
         'Add Queue' => '添加队列',
         'Edit Queue' => '编辑队列',
         'Filter for Queues' => '队列过滤器',
@@ -1742,7 +1913,7 @@ sub Data {
         'The signature for email answers.' => '回复邮件中的签名。',
         'This queue is used in the following config settings:' => '这个队列已用于以下的系统配置设置：',
 
-        # Template: AdminQueueAutoResponse
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminQueueAutoResponse.tt
         'Manage Queue-Auto Response Relations' => '管理队列的自动响应',
         'Change Auto Response Relations for Queue' => '修改队列的自动响应关系',
         'This filter allow you to show queues without auto responses' => '这个过滤器允许显示没有自动响应的队列',
@@ -1751,13 +1922,13 @@ sub Data {
         'Show All Queues' => '显示所有队列',
         'Auto Responses' => '自动响应',
 
-        # Template: AdminQueueTemplates
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminQueueTemplates.tt
         'Manage Template-Queue Relations' => '管理模板与队列的对应关系',
         'Filter for Templates' => '模板过滤器',
         'Filter for templates' => '模板筛选',
         'Templates' => '模板',
 
-        # Template: AdminRegistration
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
         'System Registration Management' => '系统注册管理',
         'Edit System Registration' => '编辑系统注册',
         'System Registration Overview' => '系统注册概览',
@@ -1825,6 +1996,7 @@ sub Data {
         'Attribute' => '属性',
         'FQDN' => '正式域名',
         'OTRS Version' => 'OTRS版本',
+        'Database' => '数据库',
         'Operating System' => '操作系统',
         'Perl Version' => 'Perl版本',
         'Optional description of this system.' => '本系统可选的描述。',
@@ -1842,7 +2014,7 @@ sub Data {
         'System Registration Data' => '系统注册信息',
         'Support Data' => '支持数据',
 
-        # Template: AdminRole
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => '角色管理',
         'Add Role' => '添加角色',
         'Edit Role' => '编辑角色',
@@ -1853,7 +2025,7 @@ sub Data {
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             '还没有定义角色，请使用“添加”按钮来创建一个新的角色。',
 
-        # Template: AdminRoleGroup
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminRoleGroup.tt
         'Manage Role-Group Relations' => '管理角色和组的关系',
         'Roles' => '角色',
         'Select the role:group permissions.' => '选择角色的组权限。',
@@ -1873,7 +2045,7 @@ sub Data {
         'Permissions to change the ticket priority in this group/queue.' =>
             '在这个组/队列具有更改工单优先级的权限。',
 
-        # Template: AdminRoleUser
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminRoleUser.tt
         'Manage Agent-Role Relations' => '管理服务人员与角色的关系',
         'Add Agent' => '添加服务人员',
         'Filter for Agents' => '服务人员过滤器',
@@ -1881,14 +2053,14 @@ sub Data {
         'Agents' => '服务人员',
         'Manage Role-Agent Relations' => '管理角色与服务人员的关系',
 
-        # Template: AdminSLA
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSLA.tt
         'SLA Management' => 'SLA管理',
         'Edit SLA' => '编辑SLA',
         'Add SLA' => '添加SLA',
         'Filter for SLAs' => 'SLA过滤器',
         'Please write only numbers!' => '仅可填写数字！',
 
-        # Template: AdminSMIME
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
         'S/MIME Management' => 'S/MIME管理',
         'Add Certificate' => '添加证书',
         'Add Private Key' => '添加私钥',
@@ -1923,12 +2095,12 @@ sub Data {
         'Filter for S/MIME certs' => 'S/MIME证书过滤器',
         'Relate this certificate' => '关联这个证书',
 
-        # Template: AdminSMIMECertRead
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSMIMECertRead.tt
         'S/MIME Certificate' => 'S/MIME证书',
         'Close this dialog' => '关闭该对话框',
         'Certificate Details' => '证书详情',
 
-        # Template: AdminSalutation
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSalutation.tt
         'Salutation Management' => '问候语管理',
         'Add Salutation' => '添加问候语',
         'Edit Salutation' => '编辑问候语',
@@ -1937,14 +2109,14 @@ sub Data {
         'e. g.' => '例如：',
         'Example salutation' => '问候语样例',
 
-        # Template: AdminSecureMode
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => '需要启用安全模式！',
         'Secure mode will (normally) be set after the initial installation is completed.' =>
             '在初始安装结束后，通常都设置系统为安全模式。',
         'If secure mode is not activated, activate it via SysConfig because your application is already running.' =>
             '如果安全模式没有激活，可在系统运行时通过系统配置激活安全模式。',
 
-        # Template: AdminSelectBox
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSelectBox.tt
         'SQL Box' => 'SQL查询窗口',
         'Filter for Results' => '过滤结果',
         'Filter for results' => '过滤结果',
@@ -1963,7 +2135,7 @@ sub Data {
         '%s Results' => '%s 的结果',
         'Query is executed.' => '查询已执行。',
 
-        # Template: AdminService
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
         'Service Management' => '服务管理',
         'Add Service' => '添加服务',
         'Edit Service' => '编辑服务',
@@ -1971,7 +2143,7 @@ sub Data {
             '服务名(含子服务)最大长度为200字符。',
         'Sub-service of' => '上一级服务',
 
-        # Template: AdminSession
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
         'Session Management' => '会话管理',
         'Detail Session View for %s (%s)' => '%s(%s)会话详情视图',
         'All sessions' => '所有会话数',
@@ -1984,11 +2156,10 @@ sub Data {
         'Filter for Sessions' => '会话过滤器',
         'Filter for sessions' => '会话过滤器',
         'Session' => '会话',
-        'User' => '用户',
         'Kill' => '终止',
         'Detail View for SessionID: %s - %s' => '会话ID：%s - %s的详情视图',
 
-        # Template: AdminSignature
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSignature.tt
         'Signature Management' => '签名管理',
         'Add Signature' => '添加签名',
         'Edit Signature' => '编辑签名',
@@ -1996,7 +2167,7 @@ sub Data {
         'Filter for signatures' => '签名过滤器',
         'Example signature' => '签名样例',
 
-        # Template: AdminState
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
         'State Management' => '工单状态管理',
         'Add State' => '添加工单状态',
         'Edit State' => '编辑工单状态',
@@ -2011,7 +2182,7 @@ sub Data {
             '无法使此条目无效，因为系统中没有其他合并状态！',
         'This state is used in the following config settings:' => '这个状态已用于以下的系统配置设置：',
 
-        # Template: AdminSupportDataCollector
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
         'Sending support data to OTRS Group is not possible!' => '不能将支持数据发送给OTRS集团！',
         'Enable Cloud Services' => '启用云服务',
         'This data is sent to OTRS Group on a regular basis. To stop sending this data please update your system registration.' =>
@@ -2025,21 +2196,13 @@ sub Data {
         'Generate Support Bundle' => '生成支持数据包',
         'The Support Bundle has been Generated' => '已生成支持包',
         'Please choose one of the following options.' => '请选择以下的任一个选项。',
-        'Send by Email' => '通过邮件发送',
-        'The support bundle is too large to send it by email, this option has been disabled.' =>
-            '支持数据包太大无法通过邮件发送，本选项无法使用。',
-        'The email address for this user is invalid, this option has been disabled.' =>
-            '当前用户的邮件地址无效，本选项无法使用。',
-        'Sending' => '发送中',
-        'The support bundle will be sent to OTRS Group via email automatically.' =>
-            '支持数据包会自动通过电子邮件方式发送给OTRS集团。',
         'Download File' => '下载文件',
         'A file containing the support bundle will be downloaded to the local system. Please save the file and send it to the OTRS Group, using an alternate method.' =>
             '包含支持数据包的文件已经可以下载到本地。请保存文件，然后通过其他方法把这个文件发送给OTRS集团。',
         'Error: Support data could not be collected (%s).' => '错误：%s 无法收集支持数据。',
         'Details' => '详情',
 
-        # Template: AdminSystemAddress
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
         'System Email Addresses Management' => '系统邮件地址管理',
         'Add System Email Address' => '添加统邮件地址',
         'Edit System Email Address' => '编辑统邮件地址',
@@ -2057,7 +2220,7 @@ sub Data {
         'This system address cannot be set to invalid, because it is used in one or more queue(s) or auto response(s).' =>
             '此系统地址不能设置为无效，因为它用于一个或多个队列或自动响应。',
 
-        # Template: AdminSystemConfiguration
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfiguration.tt
         'online administrator documentation' => '在线管理员文档',
         'System configuration' => '系统配置',
         'Navigate through the available settings by using the tree in the navigation box on the left side.' =>
@@ -2070,7 +2233,7 @@ sub Data {
         'There are currently no settings available. Please make sure to run \'otrs.Console.pl Maint::Config::Rebuild\' before using the software.' =>
             '目前没有可用的设置。 在使用软件之前，请确保运行 \'otrs.Console.pl Maint::Config::Rebuild\'。',
 
-        # Template: AdminSystemConfigurationDeployment
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationDeployment.tt
         'Changes Deployment' => '更改部署',
         'Help' => '帮助',
         'This is an overview of all settings which will be part of the deployment if you start it now. You can compare each setting to its former state by clicking the icon on the top right.' =>
@@ -2098,11 +2261,11 @@ sub Data {
             '切换到高级模式，查看其他用户更改的可部署设置。',
         'Deploy selected changes' => '部署所选更改',
 
-        # Template: AdminSystemConfigurationGroup
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationGroup.tt
         'This group doesn\'t contain any settings. Please try navigating to one of its sub groups.' =>
             '这个组不包含任何设置， 请尝试浏览它的一个子组。',
 
-        # Template: AdminSystemConfigurationImportExport
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationImportExport.tt
         'Import & Export' => '导入和导出',
         'Upload a file to be imported to your system (.yml format as exported from the System Configuration module).' =>
             '上传要导入到系统的文件（从系统配置模块导出的.yml格式）。',
@@ -2113,7 +2276,7 @@ sub Data {
         'Include user settings' => '包括用户设置',
         'Export current configuration' => '导出当前配置',
 
-        # Template: AdminSystemConfigurationSearch
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationSearch.tt
         'Search for' => '搜索',
         'Search for category' => '搜索类别',
         'Settings I\'m currently editing' => '我正在编辑的设置',
@@ -2124,16 +2287,24 @@ sub Data {
         'You\'re currently not editing any settings.' => '你当前没有编辑任何设置。',
         'You\'re currently editing %s setting(s).' => '你正在编辑%s设置。',
 
-        # Template: AdminSystemConfigurationSearchDialog
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationSearchDialog.tt
         'Category' => '类别',
         'Run search' => '搜索',
 
-        # Template: AdminSystemConfigurationView
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
         'View a custom List of Settings' => '查看设置的自定义列表',
         'View single Setting: %s' => '查看单个设置：%s',
         'Go back to Deployment Details' => '返回到部署详情',
 
-        # Template: AdminSystemMaintenance
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
+        'System file support' => '',
+        'Delete cache' => '',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
+        'Permissions' => '权限',
+        'Package' => '',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
         'System Maintenance Management' => '系统维护管理',
         'Schedule New System Maintenance' => '安排新的系统维护',
         'Filter for System Maintenances' => '系统维护过滤器',
@@ -2145,7 +2316,7 @@ sub Data {
         'Stop date' => '结束时间',
         'Delete System Maintenance' => '删除系统维护',
 
-        # Template: AdminSystemMaintenanceEdit
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenanceEdit.tt
         'Edit System Maintenance' => '编辑系统维护',
         'Edit System Maintenance Information' => '编辑系统维护信息',
         'Date invalid!' => '日期无效!',
@@ -2159,7 +2330,7 @@ sub Data {
         'Customer Sessions' => '客户会话',
         'Kill all Sessions, except for your own' => '终止除本会话外的所有会话',
 
-        # Template: AdminTemplate
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminTemplate.tt
         'Template Management' => '模板管理',
         'Add Template' => '添加模板',
         'Edit Template' => '编辑模板',
@@ -2170,26 +2341,40 @@ sub Data {
         'Delete this entry' => '删除该条目',
         'Do you really want to delete this template?' => '您真的想要删除这个模板吗？',
         'A standard template with this name already exists!' => '模板名称已存在！',
-        'Template' => '模版',
         'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
+            '获取当前/最新服务人员文章主题的前20个字符(当前用于回复和转发，最新用于备注模板类型)。其它模板类型不支持此标记。',
         'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
+            '获取当前/最新服务人员文章正文的前5行(当前用于回复和转发，最新用于备注模板类型)。其它模板类型不支持此标记。',
         'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
+            '获取当前/最新文章主题的前20个字符(当前用于回复和转发，最新用于备注模板类型)。其它模板类型不支持此标记。',
         'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
+            '获取当前/最新文章正文的前5行(当前用于回复和转发，最新用于备注模板类型)。其它模板类型不支持此标记。',
         'Create type templates only supports this smart tags' => '“Create创建”类型的模板只支持以下智能标签',
         'Example template' => '模板样例',
         'The current ticket state is' => '当前工单状态是',
         'Your email address is' => '你的邮件地址是',
 
-        # Template: AdminTemplateAttachment
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminTemplateAttachment.tt
         'Manage Template-Attachment Relations' => '管理模板和附件的关联',
         'Toggle active for all' => '全部激活/不激活',
         'Link %s to selected %s' => '链接 %s 到选中的 %s',
 
-        # Template: AdminType
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
+        'Ticket attribute relations' => '',
+        'Add ticket attribute relations' => '',
+        'Edit ticket attribute relations' => '',
+        'Import CSV or Excel file' => '',
+        'Last update' => '',
+        'Are you sure you want to delete entry \'%s\'?' => '',
+        'Download previously imported file' => '',
+        'The file needs to be in CSV (UTF-8) or Excel format. Both header columns need to contain the names of valid ticket attributes. The name of the uploaded file must be unique and must not be in use by another ticket attribute relations record.' =>
+            '',
+        'Add missing possible dynamic field values' => '',
+        'Attribute values' => '',
+        'If a value is colored red, it is missing from the possible values list of the dynamic field configuration.' =>
+            '',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminType.tt
         'Type Management' => '工单类型管理',
         'Add Type' => '添加工单类型',
         'Edit Type' => '编辑工单类型',
@@ -2200,7 +2385,7 @@ sub Data {
             '这个类型已存在于系统配置的一个设置中，需要更新设置以确认指向新的类型态！',
         'This type is used in the following config settings:' => '这个类型已用于以下的系统配置设置：',
 
-        # Template: AdminUser
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminUser.tt
         'Agent Management' => '服务人员管理',
         'Edit Agent' => '编辑服务人员',
         'Edit personal preferences for this agent' => '编辑这个服务人员的个人偏好设置',
@@ -2220,10 +2405,10 @@ sub Data {
         'Table above shows effective group permissions for the agent. The matrix takes into account all inherited permissions (e.g. via roles).' =>
             '上表显示了服务人员的有效组权限。 矩阵考虑了所有继承的权限（例如通过角色继承）。',
 
-        # Template: AdminUserGroup
+        # Template: Kernel/Output/HTML/Templates/Standard/AdminUserGroup.tt
         'Manage Agent-Group Relations' => '管理服务人员的组权限',
 
-        # Template: AgentAppointmentAgendaOverview
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentAgendaOverview.tt
         'Agenda Overview' => '日程概览',
         'Manage Calendars' => '管理日历',
         'Add Appointment' => '添加预约',
@@ -2236,11 +2421,11 @@ sub Data {
         'No calendars found. Please add a calendar first by using Manage Calendars page.' =>
             '没有找到日历。请先通过管理日历界面添加一个日历。',
 
-        # Template: AgentAppointmentCalendarOverview
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
         'Add new Appointment' => '添加新的预约',
         'Calendars' => '日历',
 
-        # Template: AgentAppointmentEdit
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
         'Basic information' => '基本信息',
         'Date/Time' => '日期 / 时间',
         'Invalid date!' => '无效日期!',
@@ -2295,22 +2480,20 @@ sub Data {
         'December' => '十二月',
         'Dec' => '十二月',
         'Relative point of time' => '相对的时间',
-        'Link' => '链接',
-        'Remove entry' => '删除条目',
 
-        # Template: AgentCustomerInformationCenter
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerInformationCenter.tt
         'Customer Information Center' => '客户信息中心',
 
-        # Template: AgentCustomerInformationCenterSearch
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerInformationCenterSearch.tt
         'Customer User' => '客户用户',
 
-        # Template: AgentCustomerTableView
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerTableView.tt
         'Note: Customer is invalid!' => '注意：客户是无效的！',
         'Start chat' => '开始聊天',
         'Video call' => '视频通话',
         'Audio call' => '语音通话',
 
-        # Template: AgentCustomerUserAddressBook
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
         'Customer User Address Book' => '客户用户通讯录',
         'Search for recipients and add the results as \'%s\'.' => '搜索收件人并将结果添加为“%s”。',
         'Search template' => '搜索模板',
@@ -2324,19 +2507,18 @@ sub Data {
             '标识符“（客户）”的属性来自客户单位。',
         '(e. g. Term* or *Term*)' => '（例如： Term* 或 *Term*）',
 
-        # Template: AgentCustomerUserAddressBookOverview
-        'Select all' => '选择全部',
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBookOverview.tt
         'The customer user is already selected in the ticket mask.' => '客户用户已经在工单遮罩窗口中被选中。',
         'Select this customer user' => '选择这个客户用户',
         'Add selected customer user to' => '添加选中的客户用户到',
 
-        # Template: AgentCustomerUserAddressBookOverviewNavBar
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBookOverviewNavBar.tt
         'Change search options' => '修改搜索选项',
 
-        # Template: AgentCustomerUserInformationCenter
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserInformationCenter.tt
         'Customer User Information Center' => '客户用户信息中心',
 
-        # Template: AgentDaemonInfo
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
         'The OTRS Daemon is a daemon process that performs asynchronous tasks, e.g. ticket escalation triggering, email sending, etc.' =>
             'OTRS守护进程用来执行异步任务，例如：触发工单升级、发送电子邮件等等。',
         'A running OTRS Daemon is mandatory for correct system operation.' =>
@@ -2349,10 +2531,10 @@ sub Data {
         'After 5 minutes, check that the OTRS Daemon is running in the system (\'bin/otrs.Daemon.pl status\').' =>
             '5分钟后，在系统中执行\'bin/otrs.Daemon.pl status\'，检查OTRS守护进程是否正常运行。',
 
-        # Template: AgentDashboard
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboard.tt
         'Dashboard' => '仪表板',
 
-        # Template: AgentDashboardAppointmentCalendar
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardAppointmentCalendar.tt
         'New Appointment' => '新建预约',
         'Tomorrow' => '明天',
         'Soon' => '很快',
@@ -2360,17 +2542,17 @@ sub Data {
         'Start' => '开始',
         'none' => '无',
 
-        # Template: AgentDashboardCalendarOverview
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCalendarOverview.tt
         'in' => '之内',
 
-        # Template: AgentDashboardCommon
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
         'Save settings' => '保存设置',
         'Close this widget' => '关闭这个小部件',
         'more' => '更多',
         'Available Columns' => '可用的字段',
         'Visible Columns (order by drag & drop)' => '显示的字段(可通过拖放调整顺序)',
 
-        # Template: AgentDashboardCustomerIDList
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
         'Change Customer Relations' => '变更客户关系',
         'Open' => 'Open（处理中）',
         'Closed' => '已关闭',
@@ -2378,33 +2560,33 @@ sub Data {
         '%s closed ticket(s) of %s' => '%s个已关闭的工单，共%s个',
         'Edit customer ID' => '编辑客户ID',
 
-        # Template: AgentDashboardCustomerIDStatus
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
         'Escalated tickets' => '升级的工单',
         'Open tickets' => '处理中的工单',
         'Closed tickets' => '已关闭的工单',
         'All tickets' => '所有工单',
         'Archived tickets' => '归档的工单',
 
-        # Template: AgentDashboardCustomerUserInformation
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserInformation.tt
         'Note: Customer User is invalid!' => '注意：客户用户无效！',
 
-        # Template: AgentDashboardCustomerUserList
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
         'Customer user information' => '客户用户信息',
         'Phone ticket' => '电话工单',
         'Email ticket' => '邮件工单',
         'New phone ticket from %s' => '来自于%s新的电话工单',
         'New email ticket to %s' => '给%s新的邮件工单',
 
-        # Template: AgentDashboardProductNotify
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardProductNotify.tt
         '%s %s is available!' => '%s %s可用了！',
         'Please update now.' => '请现在更新。',
         'Release Note' => '版本说明',
         'Level' => '级别',
 
-        # Template: AgentDashboardRSSOverview
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardRSSOverview.tt
         'Posted %s ago.' => '发布于%s之前。',
 
-        # Template: AgentDashboardStats
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardStats.tt
         'The configuration for this statistic widget contains errors, please review your settings.' =>
             '统计widget（小部件）的配置有错误，请检查你的设置。',
         'Download as SVG file' => '下载为SVG格式的文件',
@@ -2419,7 +2601,7 @@ sub Data {
         'This statistic can currently not be used because its configuration needs to be corrected by the statistics administrator.' =>
             '这个统计当前还不能使用，需要统计管理员校正配置。',
 
-        # Template: AgentDashboardTicketGeneric
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketGeneric.tt
         'Assigned to customer user' => '分配给客户用户',
         'Accessible for customer user' => '客户用户可访问',
         'My locked tickets' => '我锁定的工单',
@@ -2429,20 +2611,20 @@ sub Data {
         'Tickets in My Services' => '我服务的工单',
         'Service Time' => '服务时间',
 
-        # Template: AgentDashboardTicketQueueOverview
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketQueueOverview.tt
         'Total' => '合计',
 
-        # Template: AgentDashboardUserOnline
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardUserOnline.tt
         'out of office' => '不在办公室',
 
-        # Template: AgentDashboardUserOutOfOffice
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardUserOutOfOffice.tt
         'until' => '直到',
 
-        # Template: AgentInfo
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentInfo.tt
         'To accept some news, a license or some changes.' => '接收新闻、许可证或者一些变更信息。',
         'Yes, accepted.' => '是的，接受。',
 
-        # Template: AgentLinkObject
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentLinkObject.tt
         'Manage links for %s' => '管理%s的链接',
         'Create new links' => '创建新链接',
         'Manage existing links' => '管理现有链接',
@@ -2451,12 +2633,12 @@ sub Data {
         'There are currently no links. Please click \'Create new Links\' on the top to link this item to other objects.' =>
             '目前没有链接。 请点击顶部的“创建新链接”将此项目链接到其他对象。',
 
-        # Template: AgentOTRSBusinessBlockScreen
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentOTRSBusinessBlockScreen.tt
         'Unauthorized usage of %s detected' => '检测到未经授权的使用 %s',
         'If you decide to downgrade to ((OTRS)) Community Edition, you will lose all database tables and data related to %s.' =>
             '如果决定降级到 ((OTRS)) 社区版，会丢失%s相关的所有数据库表及其数据。',
 
-        # Template: AgentPreferences
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
         'Edit your preferences' => '编辑个人设置',
         'Personal Preferences' => '个人偏好设置',
         'Preferences' => '偏好设置',
@@ -2482,22 +2664,22 @@ sub Data {
         'Save this setting' => '保存该设置',
         'Did you know? You can help translating OTRS at %s.' => '你知道吗? 你也可以通过%s帮助翻译 OTRS。',
 
-        # Template: SettingsList
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences/SettingsList.tt
         'Reset to default' => '重置为默认',
 
-        # Template: AgentPreferencesOverview
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentPreferencesOverview.tt
         'Choose from the groups on the right to find the settings you\'d wish to change.' =>
             '从右侧的组中选择您想要更改的设置。',
         'Did you know?' => '你知道吗？',
         'You can change your avatar by registering with your email address %s on %s' =>
             '你可以注册您的电子邮件地址%s（在%s网站）来更改你的头像',
 
-        # Template: AgentSplitSelection
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentSplitSelection.tt
         'Target' => '目标',
         'Process' => '流程',
         'Split' => '拆分',
 
-        # Template: AgentStatisticsAdd
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
         'Statistics Management' => '统计管理',
         'Add Statistics' => '添加统计',
         'Read more about statistics in OTRS' => '详细了解OTR关于统计的信息',
@@ -2510,17 +2692,17 @@ sub Data {
         'General Specification' => '一般设定',
         'Create Statistic' => '创建统计',
 
-        # Template: AgentStatisticsEdit
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsEdit.tt
         'Edit Statistics' => '编辑统计',
         'Run now' => '立即运行',
         'Statistics Preview' => '统计预览',
         'Save Statistic' => '保存统计',
 
-        # Template: AgentStatisticsImport
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsImport.tt
         'Import Statistics' => '导入统计',
         'Import Statistics Configuration' => '导入统计配置',
 
-        # Template: AgentStatisticsOverview
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
         'Statistics' => '统计',
         'Run' => '运行',
         'Edit statistic "%s".' => '编辑统计“%s”。',
@@ -2529,7 +2711,7 @@ sub Data {
         'Delete statistic "%s"' => '删除统计“%s”',
         'Delete statistic %s' => '删除统计%s',
 
-        # Template: AgentStatisticsView
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Overview' => '统计概览',
         'View Statistics' => '查看统计',
         'Statistics Information' => '统计信息',
@@ -2542,7 +2724,7 @@ sub Data {
         'This statistic contains configuration errors and can currently not be used.' =>
             '统计包含有错误配置，当前不能使用。',
 
-        # Template: AgentTicketActionCommon
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
         'Change Free Text of %s%s%s' => '修改%s%s%s的自由文本',
         'Change Owner of %s%s%s' => '变更工单%s%s%s的所有者',
         'Close %s%s%s' => '关闭%s%s%s',
@@ -2575,9 +2757,8 @@ sub Data {
         'Text will also be received by' => '内容也将被以下人员接收到',
         'Text Template' => '内容模板',
         'Setting a template will overwrite any text or attachment.' => '设置一个模板将覆盖任何文本或附件。',
-        'Invalid time!' => '无效时间!',
 
-        # Template: AgentTicketBounce
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
         'Bounce %s%s%s' => '退回%s%s%s',
         'Bounce to' => '退回到',
         'You need a email address.' => '需要一个邮件地址。',
@@ -2587,7 +2768,7 @@ sub Data {
         'Inform sender' => '通知发送者',
         'Send mail' => '发送邮件',
 
-        # Template: AgentTicketBulk
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBulk.tt
         'Ticket Bulk Action' => '工单批量操作',
         'Send Email' => '发送邮件',
         'Merge' => '合并',
@@ -2599,7 +2780,7 @@ sub Data {
         'Unlock tickets' => '解锁工单',
         'Execute Bulk Action' => '执行批量操作',
 
-        # Template: AgentTicketCompose
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
         'Compose Answer for %s%s%s' => '撰写工单%s%s%s的回复邮件',
         'This address is registered as system address and cannot be used: %s' =>
             '这个邮件地址：%s已被注册为系统邮件地址，不能使用。',
@@ -2616,12 +2797,12 @@ sub Data {
         'Remove Bcc' => '移除Bcc',
         'Date Invalid!' => '日期无效！',
 
-        # Template: AgentTicketCustomer
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
         'Change Customer of %s%s%s' => '变更工单%s%s%s的客户',
         'Customer Information' => '客户信息',
         'Customer user' => '客户用户',
 
-        # Template: AgentTicketEmail
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
         'Create New Email Ticket' => '创建邮件工单',
         'Example Template' => '模板样例',
         'From queue' => '从队列',
@@ -2631,13 +2812,13 @@ sub Data {
         'Remove Ticket Customer User' => '移除客户用户',
         'Get all' => '获取全部',
 
-        # Template: AgentTicketEmailOutbound
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
         'Outbound Email for %s%s%s' => '%s%s%s的外发邮件',
 
-        # Template: AgentTicketEmailResend
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => '重新发送电子邮件给%s%s%s',
 
-        # Template: AgentTicketEscalation
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
         'Ticket %s: first response time is over (%s/%s)!' => '工单%s：首次响应时间已超时(%s/%s)！',
         'Ticket %s: first response time will be over in %s/%s!' => '工单%s：首次响应时间将在%s/%s内超时！',
         'Ticket %s: update time is over (%s/%s)!' => '工单%s：更新时间已超时(%s/%s)！',
@@ -2645,17 +2826,17 @@ sub Data {
         'Ticket %s: solution time is over (%s/%s)!' => '工单%s: 解决时间已超时(%s/%s)！',
         'Ticket %s: solution time will be over in %s/%s!' => '工单%s：解决时间将在%s/%s内超时！',
 
-        # Template: AgentTicketForward
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketForward.tt
         'Forward %s%s%s' => '转发%s%s%s',
 
-        # Template: AgentTicketHistory
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
         'History of %s%s%s' => '%s%s%s历史',
         'Filter for history items' => '历史条目过滤器',
         'Expand/collapse all' => '全部展开/折叠',
         'CreateTime' => '创建时间',
         'Article' => '信件',
 
-        # Template: AgentTicketMerge
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMerge.tt
         'Merge %s%s%s' => '合并%s%s%s',
         'Merge Settings' => '合并设置',
         'You need to use a ticket number!' => '您需要使用一个工单编号!',
@@ -2666,12 +2847,12 @@ sub Data {
         'Inform Sender' => '通知发送者',
         'Need a valid email address.' => '需要有效的邮件地址。',
 
-        # Template: AgentTicketMove
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
         'Move %s%s%s' => '转移%s%s%s',
         'New Queue' => '新队列',
         'Move' => '转移',
 
-        # Template: AgentTicketOverviewMedium
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
         'No ticket data found.' => '没有找到工单数据。',
         'Open / Close ticket action menu' => '处理/关闭工单动作的菜单',
         'Select this ticket' => '选择这个工单',
@@ -2682,18 +2863,18 @@ sub Data {
         'Move ticket to a different queue' => '将工单转移到另一个队列',
         'Change queue' => '更改队列',
 
-        # Template: AgentTicketOverviewNavBar
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
         'Remove active filters for this screen.' => '清除这个屏幕的过滤器。',
         'Tickets per page' => '工单数/页',
 
-        # Template: AgentTicketOverviewPreview
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
         'Missing channel' => '频道丢失',
 
-        # Template: AgentTicketOverviewSmall
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewSmall.tt
         'Reset overview' => '刷新概览视图',
         'Column Filters Form' => '字段过滤器表单',
 
-        # Template: AgentTicketPhone
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhone.tt
         'Split Into New Phone Ticket' => '拆分为新的电话工单',
         'Save Chat Into New Phone Ticket' => '保存聊天为新的电话工单',
         'Create New Phone Ticket' => '创建电话工单',
@@ -2702,21 +2883,21 @@ sub Data {
         'Chat protocol' => '聊天协议',
         'The chat will be appended as a separate article.' => '将聊天内容作为单独的信件追加到工单。',
 
-        # Template: AgentTicketPhoneCommon
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhoneCommon.tt
         'Phone Call for %s%s%s' => '%s%s%s的电话',
 
-        # Template: AgentTicketPlain
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPlain.tt
         'View Email Plain Text for %s%s%s' => '查看%s%s%s的邮件纯文本',
         'Plain' => '纯文本',
         'Download this email' => '下载该邮件',
 
-        # Template: AgentTicketProcess
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcess.tt
         'Create New Process Ticket' => '创建流程工单',
 
-        # Template: AgentTicketProcessSmall
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcessSmall.tt
         'Enroll Ticket into a Process' => '注册工单到一个流程',
 
-        # Template: AgentTicketSearch
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketSearch.tt
         'Profile link' => '按模板搜索',
         'Output' => '搜索结果格式为',
         'Fulltext' => '全文',
@@ -2748,7 +2929,7 @@ sub Data {
         'Ticket Escalation Time (between)' => '工单升级时间（在...之间）',
         'Archive Search' => '归档搜索',
 
-        # Template: AgentTicketZoom
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
         'Sender Type' => '发送人类型',
         'Save filter settings as default' => '将过滤器设置保存为默认过滤器',
         'Event Type' => '事件类型',
@@ -2781,13 +2962,13 @@ sub Data {
         'No more events found. Please try changing the filter settings.' =>
             '没有找到更多的事件，请尝试修改过滤器设置。',
 
-        # Template: Chat
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/Chat.tt
         '#%s' => '#%s',
         'via %s' => '通过%s',
         'by %s' => '来自%s',
         'Toggle article details' => '切换信件详情',
 
-        # Template: MIMEBase
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
         'This message is being processed. Already tried to send %s time(s). Next try will be %s.' =>
             '此消息正在处理中。 已尝试发送%s次，下次重试将在%s。',
         'To open links in the following article, you might need to press Ctrl or Cmd or Shift key while clicking the link (depending on your browser and OS).' =>
@@ -2798,10 +2979,10 @@ sub Data {
         'Unknown' => '未知',
         'View' => '查看',
 
-        # Template: LinkTable
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
         'Linked Objects' => '连接的对象',
 
-        # Template: TicketInformation
+        # Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => '归档',
         'This ticket is archived.' => '该工单已归档。',
         'Note: Type is invalid!' => '注意：类型无效！',
@@ -2810,7 +2991,7 @@ sub Data {
         '%s Ticket(s)' => '%s个工单',
         'Accounted time' => '所用工时',
 
-        # Template: Invalid
+        # Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
         'Preview of this article is not possible because %s channel is missing in the system.' =>
             '由于系统丢失了%s频道，无法预览该信件。',
         'This feature is part of the %s. Please contact us at %s for an upgrade.' =>
@@ -2818,25 +2999,32 @@ sub Data {
         'Please re-install %s package in order to display this article.' =>
             '请重新安装%s软件包以显示该信件。',
 
-        # Template: AttachmentBlocker
+        # Template: Kernel/Output/HTML/Templates/Standard/AttachmentBlocker.tt
         'To protect your privacy, remote content was blocked.' => '为了保护你的隐私,远程内容被阻挡。',
         'Load blocked content.' => '载入被阻挡的内容。',
 
-        # Template: Breadcrumb
+        # Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => '首页',
         'Back to admin overview' => '返回到系统管理概览',
 
-        # Template: CloudServicesDisabled
+        # Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
+        'Ticket Creation' => '',
+        'Link' => '链接',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Link.tt
+        'Remove entry' => '删除条目',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/CloudServicesDisabled.tt
         'This Feature Requires Cloud Services' => '这个功能需要启用云服务',
         'You can' => '你可以',
         'go back to the previous page' => '返回上一页',
 
-        # Template: CustomerAccept
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerAccept.tt
         'Dear Customer,' => '尊敬的客户，',
         'thank you for using our services.' => '感谢您使用我们的服务。',
         'Yes, I accept your license.' => '是，同意许可。',
 
-        # Template: TicketCustomerIDSelection
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerCompany/TicketCustomerIDSelection.tt
         'The customer ID is not changeable, no other customer ID can be assigned to this ticket.' =>
             '客户ID不可更改，不能将其他客户ID分配给这个工单。',
         'First select a customer user, then you can select a customer ID to assign to this ticket.' =>
@@ -2845,22 +3033,21 @@ sub Data {
         'From all Customer IDs' => '从所有的客户ID',
         'From assigned Customer IDs' => '从已分配的客户ID',
 
-        # Template: CustomerError
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'An Error Occurred' => '发生了一个错误',
         'Error Details' => '详细错误信息',
         'Traceback' => '追溯',
 
-        # Template: CustomerFooter
-        '%s powered by %s™' => '%s由%s™提供技术支持',
-        'Powered by %s™' => '由%s™提供技术支持',
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
+        'Powered by %s' => '',
 
-        # Template: CustomerFooterJS
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerFooterJS.tt
         '%s detected possible network issues. You could either try reloading this page manually or wait until your browser has re-established the connection on its own.' =>
             '%s发现可能有网络问题。 你可以尝试手动刷新此页面，也可以等浏览器自行重连。',
         'The connection has been re-established after a temporary connection loss. Due to this, elements on this page could have stopped to work correctly. In order to be able to use all elements correctly again, it is strongly recommended to reload this page.' =>
             '连接在临时中断后已重连，因此本页面上的元素可能已无法正常工作。为了能重新正常使用所有的元素，强烈建议刷新本页面。',
 
-        # Template: CustomerLogin
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
         'JavaScript Not Available' => '没有启用JavaScript',
         'In order to experience this software, you\'ll need to enable JavaScript in your browser.' =>
             '为了体验这个软件，你需要在浏览器中启用JavaScript。',
@@ -2891,20 +3078,20 @@ sub Data {
         'Your Last Name' => '姓',
         'Your email address (this will become your username)' => '您的邮件地址（这将是你的登录用户名）',
 
-        # Template: CustomerNavigationBar
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerNavigationBar.tt
         'Incoming Chat Requests' => '进入的聊天请求',
         'Edit personal preferences' => '编辑个人偏好设置',
         'Logout %s' => '注销 %s',
 
-        # Template: CustomerTicketMessage
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
         'Service level agreement' => '服务级别协议',
 
-        # Template: CustomerTicketOverview
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketOverview.tt
         'Welcome!' => '欢迎！',
         'Please click the button below to create your first ticket.' => '请点击下面的按钮创建第一个工单。',
         'Create your first ticket' => '创建第一个工单',
 
-        # Template: CustomerTicketSearch
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => '搜索条件',
         'e. g. 10*5155 or 105658*' => '例如: 10*5155 或 105658*',
         'CustomerID' => 'CustomerID',
@@ -2925,44 +3112,38 @@ sub Data {
         'Pick a profile name' => '输入模板名称',
         'Output to' => '输出为',
 
-        # Template: CustomerTicketSearchResultShort
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearchResultShort.tt
         'of' => '在',
         'Page' => '页',
         'Search Results for' => '以下条件的搜索结果',
         'Remove this Search Term.' => '移除这个搜索词。',
 
-        # Template: CustomerTicketZoom
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketZoom.tt
         'Start a chat from this ticket' => '从这个工单开始一次聊天',
         'Next Steps' => '下一步',
         'Reply' => '回复',
 
-        # Template: Chat
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketZoom/ArticleRender/Chat.tt
         'Expand article' => '展开信件',
 
-        # Template: CustomerWarning
+        # Template: Kernel/Output/HTML/Templates/Standard/CustomerWarning.tt
         'Warning' => '警告',
 
-        # Template: DashboardEventsTicketCalendar
+        # Template: Kernel/Output/HTML/Templates/Standard/DashboardEventsTicketCalendar.tt
         'Event Information' => '事件信息',
         'Ticket fields' => '工单字段',
 
-        # Template: Error
-        'Really a bug? 5 out of 10 bug reports result from a wrong or incomplete installation of OTRS.' =>
-            '真的是一个BUG吗？十个BUG报告有五个起因于错误或不完整的OTRS安装。',
-        'With %s, our experts take care of correct installation and cover your back with support and periodic security updates.' =>
-            '通过%s，我们的专家通过技术支持和定期安全更新来确保正确安装且后台程序正常。',
-        'Contact our service team now.' => '现在就联系我们的服务团队。',
-        'Send a bugreport' => '发送一个BUG报告',
+        # Template: Kernel/Output/HTML/Templates/Standard/Error.tt
         'Expand' => '展开',
 
-        # Template: AttachmentList
+        # Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
         'Click to delete this attachment.' => '点击以删除这个附件。',
 
-        # Template: DraftButtons
+        # Template: Kernel/Output/HTML/Templates/Standard/FormElements/DraftButtons.tt
         'Update draft' => '更新草稿',
         'Save as new draft' => '另存为新的草稿',
 
-        # Template: DraftNotifications
+        # Template: Kernel/Output/HTML/Templates/Standard/FormElements/DraftNotifications.tt
         'You have loaded the draft "%s".' => '你已加载草稿“%s”。',
         'You have loaded the draft "%s". You last changed it %s.' => '你已加载草稿“%s”。 你最后更改了%s。',
         'You have loaded the draft "%s". It was last changed %s by %s.' =>
@@ -2970,15 +3151,14 @@ sub Data {
         'Please note that this draft is outdated because the ticket was modified since this draft was created.' =>
             '请注意，这个草稿已经过时了，因为这个草稿创建后该工单已经被修改过了。',
 
-        # Template: Header
+        # Template: Kernel/Output/HTML/Templates/Standard/Header.tt
         'View notifications' => '查看通知',
-        'Notifications' => '通知',
-        'Notifications (OTRS Business Solution™)' => '通知 (OTRS商业版)',
         'Personal preferences' => '个人偏好设置',
         'Logout' => '注销',
         'You are logged in as' => '您已登录为',
+        'Last viewed' => '',
 
-        # Template: Installer
+        # Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript没有启用',
         'Step %s' => '第%s步',
         'License' => '许可证',
@@ -2986,17 +3166,11 @@ sub Data {
         'General Specifications and Mail Settings' => '一般设定和邮件配置',
         'Finish' => '完成',
         'Welcome to %s' => '欢迎使用%s',
-        'Germany' => '德国',
         'Phone' => '电话',
-        'United States' => '美国',
-        'Mexico' => '墨西哥',
-        'Hungary' => '匈牙利',
-        'Brazil' => '巴西',
-        'Singapore' => '新加坡',
-        'Hong Kong' => '香港',
         'Web site' => '网址',
+        'Community' => '',
 
-        # Template: InstallerConfigureMail
+        # Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => '外发邮件配置',
         'Outbound mail type' => '外发邮件类型',
         'Select outbound mail type.' => '选择外发邮件类型。',
@@ -3023,17 +3197,17 @@ sub Data {
         'Check mail configuration' => '检查邮件配置',
         'Skip this step' => '跳过这一步',
 
-        # Template: InstallerDBResult
+        # Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => '完成',
         'Error' => 'Error（错误）',
         'Database setup successful!' => '数据库设置成功！',
 
-        # Template: InstallerDBStart
+        # Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
         'Install Type' => '安装类型',
         'Create a new database for OTRS' => '为OTRS创建新的数据库',
         'Use an existing database for OTRS' => '使用现有的OTRS数据库',
 
-        # Template: InstallerDBmssql
+        # Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmssql.tt
         'If you have set a root password for your database, it must be entered here. If not, leave this field empty.' =>
             '如果你的数据库为root设置了密码，你必须在这里输入；否则，该字段为空。',
         'Database name' => '数据库名称',
@@ -3047,26 +3221,25 @@ sub Data {
         'Repeat Password' => '重复输入密码',
         'Generated password' => '自动生成的密码',
 
-        # Template: InstallerDBmysql
+        # Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmysql.tt
         'Passwords do not match' => '密码不匹配',
 
-        # Template: InstallerDBoracle
+        # Template: Kernel/Output/HTML/Templates/Standard/InstallerDBoracle.tt
         'SID' => '实例名',
         'Port' => '端口',
 
-        # Template: InstallerFinish
+        # Template: Kernel/Output/HTML/Templates/Standard/InstallerFinish.tt
         'To be able to use OTRS you have to enter the following line in your command line (Terminal/Shell) as root.' =>
             '为了能够使用OTRS, 您必须以root身份在命令行中(Terminal/Shell)输入以下行。',
         'Restart your webserver' => '重启web服务器',
         'After doing so your OTRS is up and running.' => '完成这些后，您的OTRS系统就启动并运行了。',
         'Start page' => '开始页面',
-        'Your OTRS Team' => 'OTRS团队',
 
-        # Template: InstallerLicense
+        # Template: Kernel/Output/HTML/Templates/Standard/InstallerLicense.tt
         'Don\'t accept license' => '不同意许可',
         'Accept license and continue' => '同意许可并继续',
 
-        # Template: InstallerSystem
+        # Template: Kernel/Output/HTML/Templates/Standard/InstallerSystem.tt
         'SystemID' => '系统ID',
         'The identifier of the system. Each ticket number and each HTTP session ID contain this number.' =>
             '系统的标识符，每个工单编号和HTTP会话ID均包含系统ID。',
@@ -3086,74 +3259,73 @@ sub Data {
         'Email addresses that are manually entered are checked against the MX records found in DNS. Don\'t use this option if your DNS is slow or does not resolve public addresses.' =>
             '手动输入的电子邮件地址将通过DNS服务器验证MX记录。如果DNS服务器响应慢或无法提供公网解析，请不要使用此选项。',
 
-        # Template: LinkObject
+        # Template: Kernel/Output/HTML/Templates/Standard/LinkObject.tt
         'Delete link' => '删除链接',
         'Delete Link' => '删除链接',
         'Object#' => '对象号',
         'Add links' => '添加链接',
         'Delete links' => '删除链接',
 
-        # Template: Login
+        # Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => '忘记密码?',
         'Back to login' => '重新登录',
 
-        # Template: MetaFloater
+        # Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '缩放预览内容',
         'Open URL in new tab' => '在新的标签页打开链接',
         'Close preview' => '关闭预览',
         'A preview of this website can\'t be provided because it didn\'t allow to be embedded.' =>
             '这个网站不允许被嵌入，无法提供预览。',
 
-        # Template: MobileNotAvailableWidget
+        # Template: Kernel/Output/HTML/Templates/Standard/MobileNotAvailableWidget.tt
         'Feature not Available' => '功能不可用',
         'Sorry, but this feature of OTRS is currently not available for mobile devices. If you\'d like to use it, you can either switch to desktop mode or use your regular desktop device.' =>
             '抱歉，当前的OTRS不能用于移动终端。如果你想在移动终端上使用，你可以切换到桌面模式或使用普通桌面终端。',
 
-        # Template: Motd
+        # Template: Kernel/Output/HTML/Templates/Standard/Motd.tt
         'Message of the Day' => '今日消息',
         'This is the message of the day. You can edit this in %s.' => '这是今日消息，你可以在文件%s中编辑它的内容。',
 
-        # Template: NoPermission
+        # Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => '没有足够的权限',
         'Back to the previous page' => '返回前一页',
 
-        # Template: Alert
+        # Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '警告',
         'Powered by' => '技术支持：',
 
-        # Template: Pagination
+        # Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
         'Show first page' => '首页',
         'Show previous pages' => '前一页',
         'Show page %s' => '第%s页',
         'Show next pages' => '后一页',
         'Show last page' => '尾页',
 
-        # Template: PictureUpload
+        # Template: Kernel/Output/HTML/Templates/Standard/PictureUpload.tt
         'Need FormID!' => '需要FormID！',
         'No file found!' => '找不到文件！',
         'The file is not an image that can be shown inline!' => '此文件是不是一个可以显示的图像!',
 
-        # Template: PreferencesNotificationEvent
+        # Template: Kernel/Output/HTML/Templates/Standard/PreferencesNotificationEvent.tt
         'No user configurable notifications found.' => '没有找到可以配置的通知。',
         'Receive messages for notification \'%s\' by transport method \'%s\'.' =>
             '接收通知\'%s\'的消息，通过传输方法\'%s\'。',
 
-        # Template: ActivityDialogHeader
+        # Template: Kernel/Output/HTML/Templates/Standard/ProcessManagement/ActivityDialogHeader.tt
         'Process Information' => '流程信息',
         'Dialog' => '对话框',
 
-        # Template: Article
+        # Template: Kernel/Output/HTML/Templates/Standard/ProcessManagement/Article.tt
         'Inform Agent' => '通知服务人员',
 
-        # Template: PublicDefault
+        # Template: Kernel/Output/HTML/Templates/Standard/PublicDefault.tt
         'Welcome' => '欢迎',
         'This is the default public interface of OTRS! There was no action parameter given.' =>
             '这是OTRS默认的公共界面！没有操作参数。',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             '你可以安装一个定制的有公共界面的公共模块（通过软件包管理器），例如FAQ知识库模块。',
 
-        # Template: GeneralSpecificationsWidget
-        'Permissions' => '权限',
+        # Template: Kernel/Output/HTML/Templates/Standard/Statistics/GeneralSpecificationsWidget.tt
         'You can select one or more groups to define access for different agents.' =>
             '你可以为不同的服务人员选择一个或多个组以定义访问权限。',
         'Result formats' => '结果格式',
@@ -3175,7 +3347,7 @@ sub Data {
             '请注意，这个统计启用为仪表板小部件将激活缓存功能。',
         'If set to invalid end users can not generate the stat.' => '如果设置为无效，将无法生成统计。',
 
-        # Template: PreviewWidget
+        # Template: Kernel/Output/HTML/Templates/Standard/Statistics/PreviewWidget.tt
         'There are problems in the configuration of this statistic:' => '这个统计的配置还有如下问题：',
         'You may now configure the X-axis of your statistic.' => '你可以现在配置统计的X轴（横坐标轴）。',
         'This statistic does not provide preview data.' => '这个统计没有预览数据。',
@@ -3188,7 +3360,7 @@ sub Data {
         'Y-axis' => 'Y轴',
         'Configure Filter' => '配置过滤器',
 
-        # Template: RestrictionsWidget
+        # Template: Kernel/Output/HTML/Templates/Standard/Statistics/RestrictionsWidget.tt
         'Please select only one element or turn off the button \'Fixed\'.' =>
             '请只选择一个元素或使“固定”复选框未被选中。',
         'Absolute period' => '绝对时间段',
@@ -3199,7 +3371,7 @@ sub Data {
         'Do not allow changes to this element when the statistic is generated.' =>
             '统计生成后不允许修改这个元素。',
 
-        # Template: StatsParamsWidget
+        # Template: Kernel/Output/HTML/Templates/Standard/Statistics/StatsParamsWidget.tt
         'Format' => '格式',
         'Exchange Axis' => '转换坐标轴',
         'Configurable Params of Static Stat' => '静态统计的可配置参数',
@@ -3208,21 +3380,21 @@ sub Data {
         'show more' => '显示更多',
         'show less' => '收起',
 
-        # Template: D3
+        # Template: Kernel/Output/HTML/Templates/Standard/Statistics/StatsResultRender/D3.tt
         'Download SVG' => '下载SVG',
         'Download PNG' => '下载PNG',
 
-        # Template: XAxisWidget
+        # Template: Kernel/Output/HTML/Templates/Standard/Statistics/XAxisWidget.tt
         'The selected time period defines the default time frame for this statistic to collect data from.' =>
             '选定的时间段定义了统计收集数据的默认时间范围。',
         'Defines the time unit that will be used to split the selected time period into reporting data points.' =>
             '定义报表中数据点拆分为选定时间区间的时间间隔。',
 
-        # Template: YAxisWidget
+        # Template: Kernel/Output/HTML/Templates/Standard/Statistics/YAxisWidget.tt
         'Please remember that the scale for the Y-axis has to be larger than the scale for the X-axis (e.g. X-axis => Month, Y-Axis => Year).' =>
             '请记住：Y轴的时间刻度必须大于X轴的时间刻度（例如：X轴=>月，Y轴=>年）。',
 
-        # Template: SettingsList
+        # Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
         'This setting is disabled.' => '这个设置已被禁用。',
         'This setting is fixed but not deployed yet!' => '这个设置已修正，但尚未部署！',
         'This setting is currently being overridden in %s and can\'t thus be changed here!' =>
@@ -3258,21 +3430,21 @@ sub Data {
         'This group doesn\'t contain any settings. Please try navigating to one of its sub groups or another group.' =>
             '此组不包含任何设置。 请尝试浏览其中一个子组或另一个组。',
 
-        # Template: SettingsListCompare
+        # Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsListCompare.tt
         'Now' => '立即',
         'User modification' => '用户修改',
         'enabled' => '已启用',
         'disabled' => '已禁用',
         'Setting state' => '设置状态',
 
-        # Template: Actions
+        # Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/Sidebar/Actions.tt
         'Edit search' => '编辑搜索',
         'Go back to admin: ' => '返回到系统管理： ',
         'Deployment' => '部署',
         'My favourite settings' => '我收藏的设置',
         'Invalid settings' => '设置无效',
 
-        # Template: DynamicActions
+        # Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/Sidebar/DynamicActions.tt
         'Filter visible settings...' => '过滤可见的设置...',
         'Enable edit mode for all settings' => '启用所有设置的编辑模式',
         'Save all edited settings' => '保存所有编辑过的设置',
@@ -3280,7 +3452,7 @@ sub Data {
         'All actions from this widget apply to the visible settings on the right only.' =>
             '这个小部件的所有操作仅适用于右侧可见的设置。',
 
-        # Template: Help
+        # Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/Sidebar/Help.tt
         'Currently edited by me.' => '目前由我编辑。',
         'Modified but not yet deployed.' => '已修改但尚未部署。',
         'Currently edited by another user.' => '目前由其他用户编辑。',
@@ -3288,20 +3460,19 @@ sub Data {
         'Save current setting.' => '保存当前设置。',
         'Cancel editing current setting.' => '取消编辑当前设置。',
 
-        # Template: Navigation
+        # Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/Sidebar/Navigation.tt
         'Navigation' => '导航',
 
-        # Template: OTRSBusinessTeaser
-        'With %s, System Configuration supports versioning, rollback and user-specific configuration settings.' =>
-            '使用%s，系统配置支持版本控制、回滚和用户特定的配置设置。',
-
-        # Template: Test
+        # Template: Kernel/Output/HTML/Templates/Standard/Test.tt
         'OTRS Test Page' => 'OTRS测试页',
         'Unlock' => '解锁',
         'Welcome %s %s' => '欢迎使用%s %s',
         'Counter' => '计数器',
 
-        # Template: Warning
+        # Template: Kernel/Output/HTML/Templates/Standard/Ticket/TimeUnits.tt
+        'Invalid time!' => '无效时间!',
+
+        # Template: Kernel/Output/HTML/Templates/Standard/Warning.tt
         'Go back to the previous page' => '返回前一页',
 
         # JS Template: CalendarSettingsDialog
@@ -3520,9 +3691,6 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminDynamicField.pm
         'Fields configuration is not valid' => '不是有效的字段配置',
         'Objects configuration is not valid' => '不是有效的对象配置',
-        'Database (%s)' => '数据库 (%s)',
-        'Web service (%s)' => 'Web服务(%s)',
-        'Contact with data (%s)' => '联系人信息（%s）',
         'Could not reset Dynamic Field order properly, please check the error log for more details.' =>
             '不能正确地重置动态字段顺序，请检查错误日志以获得更多详细信息。',
 
@@ -3550,6 +3718,23 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminDynamicFieldDropdown.pm
         'This field value is duplicated.' => '这个字段值是重复的。',
+
+        # Perl Module: Kernel/Modules/AdminDynamicFieldScreenConfiguration.pm
+        'Settings were saved.' => '',
+        'System was not able to save the setting!' => '',
+        'Setting is locked by another user!' => '设置被其它用户锁定！',
+        'System was not able to reset the setting!' => '系统无法重置该设置！',
+        'Settings were reset.' => '',
+        'Screens for dynamic field %s' => '',
+        'Dynamic fields for screen %s' => '',
+        'Default columns for screen %s' => '',
+
+        # Perl Module: Kernel/Modules/AdminDynamicFieldWebservice.pm
+        'Could not get config for dynamic field %s' => '',
+        'The field must contain only ASCII letters and numbers.' => '',
+        'Dynamic field is configured more than once.' => '',
+        'Dynamic field does not exist or is invalid.' => '',
+        'Only dynamic fields for tickets are allowed.' => '',
 
         # Perl Module: Kernel/Modules/AdminEmail.pm
         'Select at least one recipient.' => '选择至少一个收件人。',
@@ -3736,6 +3921,9 @@ sub Data {
         'Invisible to customer' => '客户不可见',
         'Visible to customer' => '对客户可见',
 
+        # Perl Module: Kernel/Modules/AdminOAuth2TokenManagement.pm
+        'Authorization code parameters not found.' => '',
+
         # Perl Module: Kernel/Modules/AdminOTRSBusiness.pm
         'Your system was successfully upgraded to %s.' => '你的系统已成功更新到 %s。',
         'There was a problem during the upgrade to %s.' => '升级到%s的过程中出现问题。',
@@ -3868,7 +4056,6 @@ sub Data {
         'Could not get data for TransitionID %s' => '不能获得TransitionID %s的数据',
         'There was an error updating the Transition' => '更新转换时出现了一个错误',
         'Edit Transition "%s"' => '编辑转换“%s”',
-        'Transition validation module' => '转换验证模块',
 
         # Perl Module: Kernel/Modules/AdminProcessManagementTransitionAction.pm
         'At least one valid config parameter is required.' => '至少需要一个有效的配置参数。',
@@ -3971,13 +4158,16 @@ sub Data {
             '你无法编辑此设置，因为%s（%s）目前正在编辑。',
         'Missing setting name!' => '缺少设置名称！',
         'Missing ResetOptions!' => '缺少重置选项！',
-        'Setting is locked by another user!' => '设置被其它用户锁定！',
         'System was not able to lock the setting!' => '系统无法锁定该设置！',
-        'System was not able to reset the setting!' => '系统无法重置该设置！',
         'System was unable to update setting!' => '系统无法更新该设置！',
         'Missing setting name.' => '缺少设置名称。',
         'Setting not found.' => '没有找到设置。',
         'Missing Settings!' => '缺少设置！',
+
+        # Perl Module: Kernel/Modules/AdminSystemFiles.pm
+        'Package files - %s' => '',
+        '(Files where only the permissions have been changed will not be displayed.)' =>
+            '',
 
         # Perl Module: Kernel/Modules/AdminSystemMaintenance.pm
         'Start date shouldn\'t be defined after Stop date!' => '开始日期不能在结束日期之后！',
@@ -4191,6 +4381,9 @@ sub Data {
         # Perl Module: Kernel/Modules/AgentTicketMove.pm
         'You need move permissions!' => '你需要转换权限！',
 
+        # Perl Module: Kernel/Modules/AgentTicketOwnerView.pm
+        'My Owned Tickets' => '',
+
         # Perl Module: Kernel/Modules/AgentTicketPhone.pm
         'Chat is not active.' => '聊天不是活动的。',
         'No permission.' => '没有权限。',
@@ -4258,6 +4451,8 @@ sub Data {
         'Missing ProcessEntityID in Ticket %s!' => '在工单 “%s”中缺少流程实体ID！',
         'Could not set DynamicField value for %s of Ticket with ID "%s" in ActivityDialog "%s"!' =>
             '不能设置动态字段“%s”的值，工单ID为“%s”，活动对话框 “%s”！',
+        'Could not set attachments for ticket with ID %s in activity dialog "%s"!' =>
+            '',
         'Could not set PendingTime for Ticket with ID "%s" in ActivityDialog "%s"!' =>
             '不能设置工单 “%s”的挂起时间，活动对话框 “%s”！',
         'Wrong ActivityDialog Field config: %s can\'t be Display => 1 / Show field (Please change its configuration to be Display => 0 / Do not show field or Display => 2 / Show field as mandatory)!' =>
@@ -4368,7 +4563,6 @@ sub Data {
         'Show one article' => '显示单一信件',
         'Show all articles' => '显示所有信件',
         'Show Ticket Timeline View' => '以时间轴视图显示工单',
-        'Show Ticket Timeline View (%s)' => '显示工单时间轴视图(%s)',
 
         # Perl Module: Kernel/Modules/AjaxAttachment.pm
         'Got no FormID.' => '没有获取到表单ID。',
@@ -4620,6 +4814,7 @@ sub Data {
         'Show Tree Selection' => '显示树状选项',
         'Split Quote' => '拆分引用',
         'Remove Quote' => '移除引用',
+        'Last Views' => '',
 
         # Perl Module: Kernel/Output/HTML/Layout/LinkObject.pm
         'Linked as' => '链接为',
@@ -4638,7 +4833,6 @@ sub Data {
         'Archive search' => '归档搜索',
 
         # Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
-        '%s Upgrade to %s now! %s' => '现在升级%s到%s！%s',
         'Please verify your license data!' => '请验证您的许可证数据！',
         'The license for your %s is about to expire. Please make contact with %s to renew your contract!' =>
             '您的%s的许可证即将过期， 请与%s联系续订您的合同！',
@@ -4666,13 +4860,13 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Notification/DaemonCheck.pm
         'OTRS Daemon is not running.' => 'OTRS守护进程没有运行。',
 
+        # Perl Module: Kernel/Output/HTML/Notification/OAuth2TokenManagementTokenExpired.pm
+        'OAuth2 token for "%s" has expired.' => '',
+        'OAuth2 refresh token for "%s" has expired.' => '',
+
         # Perl Module: Kernel/Output/HTML/Notification/OutofOfficeCheck.pm
         'You have Out of Office enabled, would you like to disable it?' =>
             '你已设置为不在办公室，是否取消它?',
-
-        # Perl Module: Kernel/Output/HTML/Notification/PackageManagerCheckNotVerifiedPackages.pm
-        'The installation of packages which are not verified by the OTRS Group is activated. These packages could threaten your whole system! It is recommended not to use unverified packages.' =>
-            '使用了没有通过OTRS集团验证的软件包，这些软件包可能会威胁到您的整个系统！ 建议不要使用未经验证的软件包。',
 
         # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationInvalidCheck.pm
         'You have %s invalid setting(s) deployed. Click here to show invalid settings.' =>
@@ -4781,6 +4975,11 @@ sub Data {
         'Locked Tickets Reminder Reached' => '提醒过的锁定工单数',
         'Locked Tickets Total' => '锁定工单总数',
 
+        # Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
+        'Owned Tickets New' => '',
+        'Owned Tickets Reminder Reached' => '',
+        'Owned Tickets Total' => '',
+
         # Perl Module: Kernel/Output/HTML/ToolBar/TicketResponsible.pm
         'Responsible Tickets New' => '负责的新工单数',
         'Responsible Tickets Reminder Reached' => '提醒过的负责的工单数',
@@ -4872,10 +5071,6 @@ sub Data {
         'File is not installed!' => '文件没有安装！',
         'File is different!' => '文件被修改！',
         'Can\'t read file!' => '不能读取文件！',
-        '<p>If you continue to install this package, the following issues may occur:</p><ul><li>Security problems</li><li>Stability problems</li><li>Performance problems</li></ul><p>Please note that issues that are caused by working with this package are not covered by OTRS service contracts.</p>' =>
-            '<p>如果安装这个扩展包，可能导致以下问题：</p><ul><li>安全问题</li><li>稳定问题</li><li>性能问题</li></ul><p>请注意，使用此软件包所引起的问题不在OTRS服务合同范围内。</p>',
-        '<p>The installation of packages which are not verified by the OTRS Group is not possible by default. You can activate the installation of not verified packages via the "AllowNotVerifiedPackages" system configuration setting.</p>' =>
-            '<p>默认情况下，无法安装未经OTRS集团验证的软件包。 您可以通过系统配置设置“AllowNotVerifiedPackages”激活安装未经验证的软件包。</p>',
 
         # Perl Module: Kernel/System/ProcessManagement/DB/Process.pm
         'The process "%s" and all of its data has been imported successfully.' =>
@@ -4995,7 +5190,7 @@ sub Data {
         'Setting character_set_client needs to be utf8.' => 'character_set_client 需要设置为utf8。',
         'Server Database Charset' => '服务器端数据库字符集',
         'This character set is not yet supported, please see https://bugs.otrs.org/show_bug.cgi?id=12361. Please convert your database to the character set \'utf8\'.' =>
-            '',
+            '尚不支持此字符集，请参阅https://bugs.otrs.org/show_bug.cgi?id=12361。请将您的数据库转换为字符集‘utf8’。',
         'The setting character_set_database needs to be \'utf8\'.' => 'character_set_database 需要设置为\'utf8\'。',
         'Table Charset' => '表字符集',
         'There were tables found which do not have \'utf8\' as charset.' =>
@@ -5014,11 +5209,6 @@ sub Data {
         'Maximum Query Size' => '最大查询大小',
         'The setting \'max_allowed_packet\' must be higher than 64 MB.' =>
             '\'max_allowed_packet\'必须设置为大于64MB。',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Performance.pm
-        'Query Cache Size' => '查询缓存大小',
-        'The setting \'query_cache_size\' should be used (higher than 10 MB but not more than 512 MB).' =>
-            '参数\'query_cache_size\'必须设置且大于10MB小于512MB。',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/StorageEngine.pm
         'Default Storage Engine' => '默认的存储引擎',
@@ -5571,6 +5761,10 @@ sub Data {
         'Do you really want to delete this notification language?' => '您真的要删除这个通知语言吗？',
         'Do you really want to delete this notification?' => '您真的想要删除这个通知?',
 
+        # JS File: Core.Agent.Admin.OAuth2TokenManagement
+        'Do you really want to delete this token and its configuration?' =>
+            '',
+
         # JS File: Core.Agent.Admin.PGP
         'Do you really want to delete this key?' => '您真的要删除该键吗？',
 
@@ -5624,6 +5818,7 @@ sub Data {
         'Customer interface does not support articles not visible for customers.' =>
             '客户界面不支持客户不可见的信件。',
         'Sorry, the only existing parameter can\'t be removed.' => '对不起，唯一存在的参数是无法删除的。',
+        'Are you sure you want to overwrite the config parameters?' => '',
 
         # JS File: Core.Agent.Admin.SMIME
         'Do you really want to delete this certificate?' => '你确定要删除这个证书吗？',
@@ -5637,7 +5832,6 @@ sub Data {
         'It was not possible to generate the Support Bundle.' => '无法生成支持数据包。',
         'Generate Result' => '打包结果',
         'Support Bundle' => '支持数据包',
-        'The mail could not be sent' => '邮件无法发送',
 
         # JS File: Core.Agent.Admin.SysConfig.Entity
         'It is not possible to set this entry to invalid. All affected configuration settings have to be changed beforehand.' =>
@@ -5906,6 +6100,7 @@ Thanks for your help!
 请通过客户网页创建一个新的工单。
 
 感谢您的支持！
+
 您的服务台团队
 ',
         ' (work units)' => ' （工作日）',
@@ -5918,7 +6113,6 @@ Thanks for your help!
         '(UserLogin) Firstname Lastname' => '（登录用户名）名 姓',
         '(UserLogin) Lastname Firstname' => '（登录用户名）姓 名',
         '(UserLogin) Lastname, Firstname' => '（登录用户名）姓, 名',
-        '*** out of office until %s (%s d left) ***' => '*** %s前不在办公室（还有%s天）***',
         '0 - Disabled' => '0 - 禁用',
         '1 - Available' => '1 - 可用',
         '1 - Enabled' => '1 - 启用',
@@ -5940,7 +6134,11 @@ Thanks for your help!
         'A picture' => '图片',
         'ACL module that allows closing parent tickets only if all its children are already closed ("State" shows which states are not available for the parent ticket until all child tickets are closed).' =>
             'ACL模块仅在所有子工单都关闭后才允许关闭父工单（除非所有子工单都已经关闭，否则父工单显示的“状态”均不可用）。',
+        'AJAX functions for notification event transport web service.' =>
+            '',
+        'AJAX interface for the web service dynamic field backends.' => '',
         'Access Control Lists (ACL)' => '访问控制列表(ACL)',
+        'Access package repositories via HTTP or HTTPS.' => '',
         'AccountedTime' => '占用时间',
         'Activates a blinking mechanism of the queue that contains the oldest ticket.' =>
             '包含最早工单的队列激活闪烁提醒机制。',
@@ -5957,6 +6155,8 @@ Thanks for your help!
         'Activates the ticket archive system to have a faster system by moving some tickets out of the daily scope. To search for these tickets, the archive flag has to be enabled in the ticket search.' =>
             '激活工单归档系统，将一些工单移出日常范围以便拥有更快速的系统响应。要搜索这些工单，需要在工单搜索时启用“归档搜索”。',
         'Activates time accounting.' => '激活工时管理。',
+        'Activates week number for datepickers.' => '',
+        'Activation of dynamic fields for screens.' => '',
         'ActivityID' => '活动ID',
         'Add a note to this ticket' => '添加工单备注',
         'Add an inbound phone call to this ticket' => '为本工单添加一个客户来电',
@@ -5980,12 +6180,16 @@ Thanks for your help!
         'Adds the permanent vacation days for the indicated calendar.' =>
             '为指定日历添加永久假期。',
         'Adds the permanent vacation days.' => '添加永久假期。',
+        'Adds ticket attribute relations based on CSV/Excel data.' => '',
         'Admin' => '系统管理',
         'Admin Area.' => '系统管理区。',
         'Admin Notification' => '管理员通知',
         'Admin area navigation for the agent interface.' => '服务人员界面系统管理模块导航。',
+        'Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect' =>
+            '',
         'Admin modules overview.' => '系统管理模块概览。',
         'Admin.' => '系统管理。',
+        'AdminOAuth2TokenManagement' => '',
         'Administration' => '管理',
         'Agent Customer Search' => '服务人员搜索客户',
         'Agent Customer Search.' => '服务人员搜索客户。',
@@ -6008,12 +6212,16 @@ Thanks for your help!
             '如果启用S/MIME且有可用键时在工单详情视图检查进入邮件的服务人员界面模块。',
         'Agent interface notification module to see the number of locked tickets. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             '查看锁定工单数的服务人员界面通知模块。可以通过使用键“Group（组）”和值如“rw:group1;move_into:group2”来实现显示/不显示这个链接的额外访问控制。',
+        'Agent interface notification module to see the number of tickets an agent is owner for. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
+            '',
         'Agent interface notification module to see the number of tickets an agent is responsible for. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             '查看服务人员负责工单数的服务人员界面通知模块。可以通过使用键“Group（组）”和值如“rw:group1;move_into:group2”来实现显示/不显示这个链接的额外访问控制。',
         'Agent interface notification module to see the number of tickets in My Services. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             '查看服务人员所属服务工单数的服务人员界面通知模块。可以通过使用键“Group（组）”和值如“rw:group1;move_into:group2”来实现显示/不显示这个链接的额外访问控制。',
         'Agent interface notification module to see the number of watched tickets. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             '查看服务人员关注工单数的服务人员界面通知模块。可以通过使用键“Group（组）”和值如“rw:group1;move_into:group2”来实现显示/不显示这个链接的额外访问控制。',
+        'Agent recipient information which will be passed to the web service.' =>
+            '',
         'AgentTicketZoom widget that displays a table of objects linked to the ticket.' =>
             '服务人员工单详情小部件，显示链接到该工单的对象表。',
         'AgentTicketZoom widget that displays customer information for the ticket in the side bar.' =>
@@ -6023,7 +6231,6 @@ Thanks for your help!
         'Agents ↔ Groups' => '服务人员 ↔ 组',
         'Agents ↔ Roles' => '服务人员 ↔ 角色',
         'All CustomerIDs of a customer user.' => '一个客户用户的所有客户ID。',
-        'All attachments (OTRS Business Solution™)' => '所有附件（OTRS商业解决方案）',
         'All customer users of a CustomerID' => '一个客户ID的所有客户用户',
         'All escalated tickets' => '所有升级的工单',
         'All new tickets, these tickets have not been worked on yet' => '所有新建工单，这些工单目前还没有被处理',
@@ -6114,6 +6321,8 @@ Thanks for your help!
             '允许在服务人员界面工单负责人屏幕将当前工作保存为草稿。',
         'Allows to set a new ticket state in the move ticket screen of the agent interface.' =>
             '允许服务人员界面移动工单界面设置新的工单状态。',
+        'Always adds empty values to the ticket attribute relations so that it is not needed to add them to the CSV/Excel data.' =>
+            '',
         'Always show RichText if available' => '始终显示富文本（如果有富文本）',
         'Answer' => '回复',
         'Appointment Calendar overview page.' => '预约日历概览页面。',
@@ -6129,7 +6338,11 @@ Thanks for your help!
         'Appointments' => '预约',
         'Arabic (Saudi Arabia)' => '阿拉伯语（沙特阿拉伯）',
         'ArticleTree' => '信件树',
+        'Assignment between action and attributes.' => '',
+        'Assignment between type and icon.' => '',
         'Attachment Name' => '附件名',
+        'Authentication type for sendmail module. If \'OAuth2 token\' has been selected, SendmailModule::OAuth2TokenConfigName must also be configured.' =>
+            '',
         'Automated line break in text messages after x number of chars.' =>
             '文本消息中在X个字符后自动换行。',
         'Automatically change the state of a ticket with an invalid owner once it is unlocked. Maps from a state type to a new ticket state.' =>
@@ -6142,6 +6355,7 @@ Thanks for your help!
             '如果启用了工单负责人功能，自动设置工单所有者为其负责人。这个选项只适用于登录用户的手动操作，不适用于自动操作如自动任务、邮箱管理员过滤和通用接口。',
         'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>
             '在第一次工单所有者更新后自动设置工单的负责人（如果还没有设置）。',
+        'Available/allowed actions for ticket attribute relations.' => '',
         'Avatar' => '头像',
         'Balanced white skin by Felix Niklas (slim version).' => 'Felix Niklas制作的平衡白皮肤（修身版）。',
         'Balanced white skin by Felix Niklas.' => 'Felix Niklas制作的平衡白皮肤。',
@@ -6156,6 +6370,7 @@ Thanks for your help!
         'CMD example setup. Ignores emails where external CMD returns some output on STDOUT (email will be piped into STDIN of some.bin).' =>
             '命令行样例设置。忽略外部命令行返回在STDOUT（标准输出）上的一些输出的邮件（邮件将用管道输入到some.bin的STDIN标准输入）。',
         'CSV Separator' => 'CSV分隔符',
+        'Cache settings for DBCRUD modules (default: 1 day).' => '',
         'Cache time in seconds for agent authentication in the GenericInterface.' =>
             '在通用接口服务人员认证的缓存时间（秒）。',
         'Cache time in seconds for customer authentication in the GenericInterface.' =>
@@ -6201,12 +6416,9 @@ Thanks for your help!
         'Checks if an E-Mail is a followup to an existing ticket by searching the subject for a valid ticket number.' =>
             '通过搜索主题中的有效工单号，检查一个邮件是否是跟进到已存在的工单。',
         'Checks if an email is a follow-up to an existing ticket with external ticket number which can be found by ExternalTicketNumberRecognition filter module.' =>
-            '',
+            '检查电子邮件是否是带有外部工单编号的现有工单的跟进邮件，该工单编号可由ExternalTicketNumberRecognition过滤器模块找到。',
         'Checks the SystemID in ticket number detection for follow-ups. If not enabled, SystemID will be changed after using the system.' =>
             '在跟进工单的工单编号检测时检查系统ID。如果不启用，系统ID将在使用系统后更改。',
-        'Checks the availability of OTRS Business Solution™ for this system.' =>
-            '检查本系统的OTRS商业版可用性。',
-        'Checks the entitlement status of OTRS Business Solution™.' => '检查OTRS商业版的权利状态。',
         'Child' => '子',
         'Chinese (Simplified)' => '简体中文',
         'Chinese (Traditional)' => '繁体中文',
@@ -6216,6 +6428,7 @@ Thanks for your help!
             '选择你要接收哪些工单变更的通知消息。 请注意，您不能完全禁用标记为强制性的通知。',
         'Choose which notifications you\'d like to receive.' => '选择您想要接收的通知。',
         'Christmas Eve' => '平安夜',
+        'Cleans up the calendar-based tickets regularly.' => '',
         'Close' => '关闭',
         'Close this ticket' => '关闭工单',
         'Closed tickets (customer user)' => '已关闭的工单（客户用户）',
@@ -6229,6 +6442,8 @@ Thanks for your help!
             '可以在服务人员界面工单升级视图中过滤的列。 注意：只允许使用工单属性、动态字段（DynamicField_NameX）和客户属性（例如CustomerUserPhone，CustomerCompanyName，...）。',
         'Columns that can be filtered in the locked view of the agent interface. Note: Only Ticket attributes, Dynamic Fields (DynamicField_NameX) and Customer attributes (e.g. CustomerUserPhone, CustomerCompanyName, ...) are allowed.' =>
             '可以在服务人员界面锁定的工单视图中过滤的列。 注意：只允许使用工单属性、动态字段（DynamicField_NameX）和客户属性（例如CustomerUserPhone，CustomerCompanyName，...）。',
+        'Columns that can be filtered in the owner view of the agent interface. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed.' =>
+            '',
         'Columns that can be filtered in the queue view of the agent interface. Note: Only Ticket attributes, Dynamic Fields (DynamicField_NameX) and Customer attributes (e.g. CustomerUserPhone, CustomerCompanyName, ...) are allowed.' =>
             '可以在服务人员界面工单队列视图中过滤的列。 注意：只允许使用工单属性、动态字段（DynamicField_NameX）和客户属性（例如CustomerUserPhone，CustomerCompanyName，...）。',
         'Columns that can be filtered in the responsible view of the agent interface. Note: Only Ticket attributes, Dynamic Fields (DynamicField_NameX) and Customer attributes (e.g. CustomerUserPhone, CustomerCompanyName, ...) are allowed.' =>
@@ -6256,6 +6471,8 @@ Thanks for your help!
         'Compat module for AgentZoom to AgentTicketZoom.' => '服务人员工单详情视图中服务人员详情的兼容模块。',
         'Complex' => '复杂',
         'Compose' => '撰写',
+        'Config keys and their action to activate dynamic fields in different screens, grouped by object type.' =>
+            '',
         'Configure Processes.' => '配置流程。',
         'Configure and manage ACLs.' => '配置和管理ACL。',
         'Configure any additional readonly mirror databases that you want to use.' =>
@@ -6288,6 +6505,7 @@ Thanks for your help!
         'Create New process ticket.' => '创建新的流程工单。',
         'Create Ticket' => '创建工单',
         'Create a new calendar appointment linked to this ticket' => '创建一个新的日历预约到这个工单',
+        'Create a unit test file' => '',
         'Create and manage Service Level Agreements (SLAs).' => '创建和管理服务品质协议(SLA)。',
         'Create and manage agents.' => '创建和管理服务人员。',
         'Create and manage appointment notifications.' => '创建和管理预约通知.',
@@ -6319,6 +6537,10 @@ Thanks for your help!
         'Create tickets.' => '创建工单。',
         'Created ticket [%s] in "%s" with priority "%s" and state "%s".' =>
             '已创建工单 [%s]，在 "%s"，优先级为"%s" ，状态为"%s"。',
+        'Creates a unit test file for this ticket and sends it to Znuny.' =>
+            '',
+        'Creates a unit test file for this ticket.' => '',
+        'Creates the calendar-based tickets regularly.' => '',
         'Croatian' => '克罗地亚语',
         'Custom RSS Feed' => '定制RSS订阅',
         'Custom RSS feed.' => '定制RSS订阅。',
@@ -6336,6 +6558,7 @@ Thanks for your help!
         'Customer User Information Center Search.' => '客户用户信息中心搜索。',
         'Customer User Information Center search.' => '客户用户信息中心搜索。',
         'Customer User Information Center.' => '客户用户信息中心。',
+        'Customer User-Customer Relations' => '',
         'Customer Users ↔ Customers' => '客户用户 ↔ 客户',
         'Customer Users ↔ Groups' => '客户用户 ↔ 组',
         'Customer Users ↔ Services' => '客户用户 ↔ 服务',
@@ -6344,6 +6567,8 @@ Thanks for your help!
         'Customer item (icon) which shows the open tickets of this customer as info block. Setting CustomerUserLogin to 1 searches for tickets based on login name rather than CustomerID.' =>
             '显示处理中工单信息块的客户信息（图标）。设置参数CustomerUserLogin为1，则基于登录名而不是客户ID搜索工单。',
         'Customer preferences.' => '客户偏好设置。',
+        'Customer recipient information which will be passed to the web service.' =>
+            '',
         'Customer ticket overview' => '客户工单概览',
         'Customer ticket search.' => '客户工单搜索。',
         'Customer ticket zoom' => '客户工单详情',
@@ -6372,6 +6597,7 @@ Thanks for your help!
             '在服务人员和客户工单详情中收件人（TO，CC）的默认显示类型。',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             '在服务人员和客户工单详情中发件人（From）的默认显示类型。',
+        'Default format for export files.' => '',
         'Default loop protection module.' => '默认的邮件环路保护模块。',
         'Default queue ID used by the system in the agent interface.' => '在服务人员界面中系统使用的默认队列ID。',
         'Default skin for the agent interface (slim version).' => '服务人员界面的默认皮肤（修身版）。',
@@ -6470,6 +6696,8 @@ Thanks for your help!
         'Defines available article actions for Phone articles.' => '定义电话信件的可用信件操作。',
         'Defines available article actions for invalid articles.' => '定义无效信件的可用信件操作。',
         'Defines available groups for the admin overview screen.' => '为管理员概览屏幕定义可用组。',
+        'Defines available groups for the appointment calendar screen.' =>
+            '',
         'Defines chat communication channel.' => '定义聊天通信渠道。',
         'Defines default headers for outgoing emails.' => '定义外发电子邮件的默认标头。',
         'Defines email communication channel.' => '定义电子邮件通信通道。',
@@ -6553,6 +6781,7 @@ Thanks for your help!
             '定义默认情况下客户是否可以看到服务人员界面工单负责人屏幕中的备注。',
         'Defines if the previously valid token should be accepted for authentication. This is slightly less secure but gives users 30 seconds more time to enter their one-time password.' =>
             '定义在身份验证时是否接受先前有效的链接令牌。这稍微降低了安全性但是给用户多了30秒时间来输入他们的一次性密码。',
+        'Defines if the processes should be displayed in TreeView.' => '',
         'Defines if the values for filters should be retrieved from all available tickets. If enabled, only values which are actually used in any ticket will be available for filtering. Please note: The list of customers will always be retrieved like this.' =>
             '定义过滤器的值是否应从所有可用的工单中检索。如果启用了，则只有实际用在工单中的值才能用于过滤。请注意：客户用户列表将像这样始终被检索。',
         'Defines if time accounting is mandatory in the agent interface. If enabled, a note must be entered for all ticket actions (no matter if the note itself is configured as active or is originally mandatory for the individual ticket action screen).' =>
@@ -6560,8 +6789,6 @@ Thanks for your help!
         'Defines if time accounting must be set to all tickets in bulk action.' =>
             '定义在批量操作中是否设置所有工单的工时管理。',
         'Defines internal communication channel.' => '定义内部通信渠道。',
-        'Defines out of office message template. Two string parameters (%s) available: end date and number of days left.' =>
-            '定义不在办公室的消息模板。有两个字符串参数（%s）：结束日期和剩余天数。',
         'Defines phone communication channel.' => '定义电话通信渠道。',
         'Defines queues that\'s tickets are used for displaying as calendar events.' =>
             '定义将工单作为日历事件显示的队列。',
@@ -6611,17 +6838,28 @@ Thanks for your help!
         'Defines the default CSS used in rich text editors.' => '定义用于富文本编辑器的默认CSS。',
         'Defines the default agent name in the ticket zoom view of the customer interface.' =>
             '定义客户界面工单详情视图中默认的服务人员姓名。',
+        'Defines the default article channel name for calendar based tickets.' =>
+            '',
         'Defines the default auto response type of the article for this operation.' =>
             '定义这个信件操作的默认自动响应类型。',
         'Defines the default body of a note in the ticket free text screen of the agent interface.' =>
             '定义服务人员界面工单自定义字段界面的默认备注正文。',
+        'Defines the default content type for calendar based tickets.' =>
+            '',
         'Defines the default filter fields in the customer user address book search (CustomerUser or CustomerCompany). For the CustomerCompany fields a prefix \'CustomerCompany_\' must be added.' =>
             '定义客户用户通讯录搜索（客户用户或客户单位）中的默认过滤器字段。 对于客户单位字段，必须添加一个前缀“CustomerCompany_”。',
+        'Defines the default from for calendar based tickets.' => '',
         'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.otrs.com/doc/.' =>
             '定义服务人员和客户使用的默认前端主题（HTML）。如果您喜欢，您可以添加您自己的主题。请参考管理员手册https://doc.otrs.com/doc/ 。',
         'Defines the default front-end language. All the possible values are determined by the available language files on the system (see the next setting).' =>
             '定义默认的前端语言。所有可能的值由系统中可用的语言文件确定（查看下一个设置）。',
+        'Defines the default history comment for calendar based tickets.' =>
+            '',
+        'Defines the default history type for calendar based tickets.' =>
+            '',
         'Defines the default history type in the customer interface.' => '定义客户界面中的默认历史类型。',
+        'Defines the default keys and values for the transition action module parameters. Mandatory fields are marked with "(* required)". Note: For most of the keys the AttributeID can also be used, e.g. "Owner" can be "OwnerID". Keys that define the same Attribute should only be used once, e.g. "Owner" and "OwnerID" are redundant.' =>
+            '',
         'Defines the default maximum number of X-axis attributes for the time scale.' =>
             '定义X轴时间刻度属性的默认最大数。',
         'Defines the default maximum number of statistics per page on the overview screen.' =>
@@ -6652,6 +6890,7 @@ Thanks for your help!
             '定义服务人员界面在工单编写屏幕编写或答复工单后的默认下一个工单状态。',
         'Defines the default next state of a ticket, in the ticket bulk screen of the agent interface.' =>
             '定义服务人员界面在工单批量操作屏幕的默认下一个工单状态。',
+        'Defines the default next state.' => '',
         'Defines the default note body text for phone tickets in the ticket phone inbound screen of the agent interface.' =>
             '定义服务人员界面在工单电话接入屏幕电话工单的默认备注正文文本。',
         'Defines the default note body text for phone tickets in the ticket phone outbound screen of the agent interface.' =>
@@ -6671,14 +6910,13 @@ Thanks for your help!
             '定义权限下拉菜单的默认选择项（表单：一般设定）。',
         'Defines the default selection at the drop down menu for stats format (Form: Common Specification). Please insert the format key (see Stats::Format).' =>
             '定义统计格式下拉菜单的默认选择项（表单：一般设定）。请插入格式键（参考Stats::Format）。',
+        'Defines the default sender type for calendar based tickets.' => '',
         'Defines the default sender type for phone tickets in the ticket phone inbound screen of the agent interface.' =>
             '定义服务人员界面工单电话接入屏幕中电话工单默认的发送人类型。',
         'Defines the default sender type for phone tickets in the ticket phone outbound screen of the agent interface.' =>
             '定义服务人员界面工单电话拨出屏幕中电话工单默认的发送人类型。',
         'Defines the default sender type for tickets in the ticket zoom screen of the customer interface.' =>
             '定义服务人员界面工单详情屏幕中工单默认的发送人类型。',
-        'Defines the default shown ticket search attribute for ticket search screen (AllTickets/ArchivedTickets/NotArchivedTickets).' =>
-            '定义工单搜索屏幕中默认显示的工单搜索属性（所有工单/归档工单/未归档工单）。',
         'Defines the default shown ticket search attribute for ticket search screen.' =>
             '定义工单搜索屏幕中默认显示的工单搜索属性。',
         'Defines the default shown ticket search attribute for ticket search screen. Example: "Key" must have the name of the Dynamic Field in this case \'X\', "Content" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: \'a text\', Dropdown: \'1\', Date/Time: \'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' and or \'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7\';.' =>
@@ -6708,6 +6946,8 @@ Thanks for your help!
             '定义服务人员界面工单升级视图工单排序的默认工单属性。',
         'Defines the default ticket attribute for ticket sorting in the locked ticket view of the agent interface.' =>
             '定义服务人员界面锁定的工单视图工单排序的默认工单属性。',
+        'Defines the default ticket attribute for ticket sorting in the owner view of the agent interface.' =>
+            '',
         'Defines the default ticket attribute for ticket sorting in the responsible view of the agent interface.' =>
             '定义服务人员界面工单负责人视图工单排序的默认工单属性。',
         'Defines the default ticket attribute for ticket sorting in the status view of the agent interface.' =>
@@ -6718,6 +6958,7 @@ Thanks for your help!
             '定义服务人员界面工单搜索结果工单排序的默认工单属性。',
         'Defines the default ticket attribute for ticket sorting of the ticket search result of this operation.' =>
             '定义本次操作中工单搜索结果工单排序的默认工单属性。',
+        'Defines the default ticket body for calendar based tickets.' => '',
         'Defines the default ticket bounced notification for customer/sender in the ticket bounce screen of the agent interface.' =>
             '定义服务人员界面工单退回屏幕退回客户/发送人默认的工单退回通知。',
         'Defines the default ticket next state after adding a phone note in the ticket phone inbound screen of the agent interface.' =>
@@ -6728,6 +6969,8 @@ Thanks for your help!
             '定义服务人员界面工单升级视图的默认工单顺序（在优先级排序之后）。上：最老的在最上面，下：最近的在最上面。',
         'Defines the default ticket order (after priority sort) in the status view of the agent interface. Up: oldest on top. Down: latest on top.' =>
             '定义服务人员界面工单状态视图的默认工单顺序（在优先级排序之后）。上：最老的在最上面，下：最近的在最上面。',
+        'Defines the default ticket order in the owner view of the agent interface. Up: oldest on top. Down: latest on top.' =>
+            '',
         'Defines the default ticket order in the responsible view of the agent interface. Up: oldest on top. Down: latest on top.' =>
             '定义服务人员界面工单负责人视图的默认工单顺序。上：最老的在最上面，下：最近的在最上面。',
         'Defines the default ticket order in the ticket locked view of the agent interface. Up: oldest on top. Down: latest on top.' =>
@@ -6740,6 +6983,8 @@ Thanks for your help!
             '定义服务人员界面工单关注视图的默认工单顺序。上：最老的在最上面，下：最近的在最上面。',
         'Defines the default ticket order of a search result in the customer interface. Up: oldest on top. Down: latest on top.' =>
             '定义客户界面工单搜索结果的默认工单顺序。上：最老的在最上面，下：最近的在最上面。',
+        'Defines the default ticket priority for calendar based tickets.' =>
+            '',
         'Defines the default ticket priority in the close ticket screen of the agent interface.' =>
             '定义服务人员界面关闭工单屏幕默认的工单优先级。',
         'Defines the default ticket priority in the ticket bulk screen of the agent interface.' =>
@@ -6756,6 +7001,8 @@ Thanks for your help!
             '定义服务人员界面工单优先级屏幕默认的工单优先级。',
         'Defines the default ticket priority in the ticket responsible screen of the agent interface.' =>
             '定义服务人员界面工单负责人屏幕默认的工单优先级。',
+        'Defines the default ticket title for calendar based tickets.' =>
+            '',
         'Defines the default ticket type for new customer tickets in the customer interface.' =>
             '定义客户界面新建客户工单屏幕默认的工单类型。',
         'Defines the default ticket type.' => '定义默认的工单类型。',
@@ -6767,6 +7014,8 @@ Thanks for your help!
             '定义公共界面操作参数的默认值。操作参数用于系统中的脚本。',
         'Defines the default viewable sender types of a ticket (default: customer).' =>
             '定义工单默认可见的发送人类型（默认：客户）。',
+        'Defines the default visibility of articles for calendar based tickets.' =>
+            '',
         'Defines the default visibility of the article to customer for this operation.' =>
             '定义这个信件操作对客户的默认可见性。',
         'Defines the displayed style of the From field in notes that are visible for customers. A default agent name can be defined in Ticket::Frontend::CustomerTicketZoom###DefaultAgentName setting.' =>
@@ -6891,8 +7140,6 @@ Thanks for your help!
         'Defines the module that shows the currently logged in customers in the customer interface.' =>
             '定义客户界面显示当前登录的所有客户人员的模块。',
         'Defines the module to authenticate customers.' => '定义客户身份验证的模块。',
-        'Defines the module to display a notification if cloud services are disabled.' =>
-            '定义云服务被禁用时显示一个通知消息的模块。',
         'Defines the module to display a notification in different interfaces on different occasions for OTRS Business Solution™.' =>
             '定义在不同界面不同场合显示OTRS商业版通知的模块。',
         'Defines the module to display a notification in the agent interface if the OTRS Daemon is not running.' =>
@@ -6907,8 +7154,6 @@ Thanks for your help!
             '定义服务人员界面如果服务人员在系统维护期间登录系统就显示一个通知的模块。',
         'Defines the module to display a notification in the agent interface, if the agent session limit prior warning is reached.' =>
             '定义服务人员界面如果服务人员会话数达到预警值时就显示一个通知的模块。',
-        'Defines the module to display a notification in the agent interface, if the installation of not verified packages is activated (only shown to admins).' =>
-            '如果启用了安装未经验证的软件包，则定义在服务人员界面中显示通知的模块（仅系统管理员会显示）。',
         'Defines the module to display a notification in the agent interface, if the system is used by the admin user (normally you shouldn\'t work as admin).' =>
             '定义服务人员界面如果以管理员帐户登录系统（正常情况下您不应该用管理员帐户工作）就显示一个通知的模块。',
         'Defines the module to display a notification in the agent interface, if there are invalid sysconfig settings deployed.' =>
@@ -6945,6 +7190,8 @@ Thanks for your help!
             '定义服务人员界面工单外出邮件屏幕发送一个消息后下一个可能的状态。',
         'Defines the next possible states for customer tickets in the customer interface.' =>
             '定义客户界面客户工单下一个可能的状态。',
+        'Defines the next possible ticket states for calendar based tickets.' =>
+            '',
         'Defines the next state of a ticket after adding a note, in the close ticket screen of the agent interface.' =>
             '定义服务人员界面工单关闭屏幕添加备注后的下一个工单状态。',
         'Defines the next state of a ticket after adding a note, in the ticket free text screen of the agent interface.' =>
@@ -7157,7 +7404,7 @@ Thanks for your help!
             '禁用HHTP头"Content-Security-Policy"以便允许载入扩展的脚本内容。禁用这个HTTP头可能引起安全问题！仅在您知道您在干什么时才禁用它！',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             '禁用HHTP头"X-Frame-Options: SAMEORIGIN" 以便允许OTRS可以包含在其它网址的IFrame框架中。禁用这个HTTP头可能有安全问题！仅在您知道您在干什么时才禁用它！',
-        'Disable autocomplete in the login screen.' => '',
+        'Disable autocomplete in the login screen.' => '在登录屏幕中禁用自动完成功能。',
         'Disable cloud services' => '禁用云服务',
         'Disables sending reminder notifications to the responsible agent of a ticket (Ticket::Responsible needs to be enabled).' =>
             '禁止发送提醒通知给工单负责人（需要启用Ticket::Responsible设置）。',
@@ -7169,10 +7416,14 @@ Thanks for your help!
             '在全文搜索使用了停止词时显示一个警告并阻止搜索。',
         'Display communication log entries.' => '显示通信日志条目。',
         'Display settings to override defaults for Process Tickets.' => '为流程工单显示设置值覆盖默认值。',
+        'Displays notifications for missing and expired OAuth2 tokens.' =>
+            '',
         'Displays the accounted time for an article in the ticket zoom view.' =>
             '在工单详情视图中显示所用工时。',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '在工单详情视图中显示与当前工单具有相同的客户ID的所有工单数。',
+        'Domains accessed through WebUserAgent module for which no proxy should be used. Separate domains by semicolon.' =>
+            '',
         'Down' => '下',
         'Dropdown' => '下拉选择框',
         'Dutch' => '荷兰语',
@@ -7187,6 +7438,9 @@ Thanks for your help!
         'Dynamic Fields Text Backend GUI' => '动态字段文本框后端图形界面',
         'Dynamic Fields used to export the search result in CSV format.' =>
             '用于输出搜索结果为CSV格式的动态字段。',
+        'Dynamic field backend registration.' => '',
+        'Dynamic field screen config keys and their action for all screens that don\'t allow dynamic fields to be mandatory.' =>
+            '',
         'Dynamic fields groups for process widget. The key is the name of the group, the value contains the fields to be shown. Example: \'Key => My Group\', \'Content: Name_X, NameY\'.' =>
             '流程小部件的动态字段组。键是组名，值是要显示的动态字段。例如：\'键 => My Group\'，\'值: Name_X, NameY\'。',
         'Dynamic fields limit per page for Dynamic Fields Overview.' => '动态字段概览视图的每页动态字段数限制。',
@@ -7200,6 +7454,8 @@ Thanks for your help!
             '在服务人员界面的工单详情屏幕中显示在流程小部件中的动态字段。',
         'Dynamic fields shown in the sidebar of the ticket zoom screen of the agent interface.' =>
             '在服务人员界面的工单详情屏幕中显示在侧边栏中的动态字段。',
+        'Dynamic fields shown in the ticket bulk screen of the agent interface.' =>
+            '',
         'Dynamic fields shown in the ticket close screen of the agent interface.' =>
             '在服务人员界面的工单关闭屏幕中显示的动态字段。',
         'Dynamic fields shown in the ticket compose screen of the agent interface.' =>
@@ -7269,6 +7525,8 @@ Thanks for your help!
         'Enables PGP support. When PGP support is enabled for signing and encrypting mail, it is HIGHLY recommended that the web server runs as the OTRS user. Otherwise, there will be problems with the privileges when accessing .gnupg folder.' =>
             '启用PGP支持。当启用PGP签名和加密邮件时，强烈推荐以OTRS用户运行WEB服务器，否则，访问.pnugp目录会有权限问题。',
         'Enables S/MIME support.' => '启用S/MIME支持。',
+        'Enables calendar based ticket creation feature only for the listed groups.' =>
+            '',
         'Enables customers to create their own accounts.' => '允许客户自己建立帐户。',
         'Enables fetch S/MIME from CustomerUser backend support.' => '在客户用户后端支持模块启用收取S/MIME（邮件）。',
         'Enables file upload in the package manager frontend.' => '在软件包管理前端启用文件上传。',
@@ -7289,6 +7547,8 @@ Thanks for your help!
             '启用工单负责人功能，以跟踪指定的工单。',
         'Enables ticket type feature.' => '启用工单类型功能。',
         'Enables ticket watcher feature only for the listed groups.' => '仅对列表中的组启用工单关注人功能。',
+        'Enables/disables the Znuny package verification. If disabled, all packages are shown as verified. It\'s still recommended to use only verified packages.' =>
+            '',
         'English (Canada)' => '英语（加拿大）',
         'English (United Kingdom)' => '英语（英国）',
         'English (United States)' => '英语（美国）',
@@ -7371,6 +7631,8 @@ Thanks for your help!
             '工单锁定后强制选择与当前不同的另一个工单状态，定义键为当前状态，值为锁定后的下一个工单状态。',
         'Forces to unlock tickets after being moved to another queue.' =>
             '工单转移到另一队列后强制解锁。',
+        'Format string for output of attachments in the selection list. "%1$d": article number; "%2$s": filename; "%3$s": translated object type (e.g. Article => Artikel); "%4$s": translated attachment label (e.g. "Anhang").' =>
+            '',
         'Forwarded to "%s".' => '已转发给“%s”。',
         'Free Fields' => '自定义字段',
         'French' => '法语',
@@ -7378,6 +7640,10 @@ Thanks for your help!
         'French stop words for fulltext index. These words will be removed from the search index.' =>
             '全文索引的法语停止词，这些词将从搜索索引中移除。',
         'Frontend' => '前端',
+        'Frontend module for the agent interface that provides the AJAX interface for the web service dynamic field backends.' =>
+            '',
+        'Frontend module for the customer interface that provides the AJAX interface for the web service dynamic field backends.' =>
+            '',
         'Frontend module registration (disable AgentTicketService link if Ticket Service feature is not used).' =>
             '前端模块注册（如果没有使用工单服务功能，禁用服务人员工单服务链接）。',
         'Frontend module registration (disable company link if no company feature is used).' =>
@@ -7388,6 +7654,7 @@ Thanks for your help!
             '前端模块注册（如果没有可用流程，禁用工单流程屏幕）。',
         'Frontend module registration (show personal favorites as sub navigation items of \'Admin\').' =>
             '前端模块注册（作为“系统管理”的子导航项目显示个人收藏夹）。',
+        'Frontend module registration for the admin interface.' => '',
         'Frontend module registration for the agent interface.' => '服务人员界面的前端模块注册。',
         'Frontend module registration for the customer interface.' => '客户界面的前端模块注册。',
         'Frontend module registration for the public interface.' => '公共界面的前端模块注册。',
@@ -7427,12 +7694,14 @@ Thanks for your help!
             '使最终用户能够覆盖转换文件中定义的CSV文件分隔符。 请注意：将\'Active（激活）\'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用\'PreferenceGroup\'来控制这些设置应该显示在用户界面的哪个区域。',
         'Global Search Module.' => '全局搜索模块。',
         'Go to dashboard!' => '进入仪表板！',
-        'Good PGP signature.' => '',
+        'Good PGP signature.' => '良好的PGP签名。',
         'Google Authenticator' => '谷歌身份验证器',
         'Graph: Bar Chart' => '图形：条形图',
         'Graph: Line Chart' => '图形：折线图',
         'Graph: Stacked Area Chart' => '图形：堆叠面积图',
         'Greek' => '希腊语',
+        'Handles changes to data of modules which use the DBCRUD base module.' =>
+            '',
         'Hebrew' => '希伯来语',
         'Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild".' =>
             '帮助扩展信件全文搜索（发件人、收件人、抄送、主题和正文搜索）。它将在信件创建后条带化所有信件并建立索引，提升全文搜索50%的效率。可使用命令 "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild" 来创建初始索引。',
@@ -7560,6 +7829,7 @@ Thanks for your help!
             '如果你要外出，通过设置你不在办公室的确切日期，你可能希望让其他用户知道。',
         'Ignore system sender article types (e. g. auto responses or email notifications) to be flagged as \'Unread Article\' in AgentTicketZoom or expanded automatically in Large view screens.' =>
             '忽略系统发件人信件类型 （如：自动响应或电子邮件通知），在 工单详情屏幕或在大视图屏幕自动扩展时将其标记为 \'未读信件\' 。',
+        'Ignores not ticket related attributes.' => '',
         'Import appointments screen.' => '导入预约屏幕。',
         'Include tickets of subqueues per default when selecting a queue.' =>
             '选择队列的时候默认包括子队列的工单。',
@@ -7583,8 +7853,10 @@ Thanks for your help!
             '配置不同皮肤是可能的，例如：区分系统中基于域名的不同客户。您可以使用一个正则表达式配置一个键/内容组合来匹配一个域名。“键”应该匹配域名，“值”是一个系统中有效的皮肤。请参照样例条目修改正则表达式的合适格式。',
         'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
             '配置不同主题是可能的，例如：区分系统中基于域名的不同服务人员和客户。您可以使用一个正则表达式配置一个键/内容组合来匹配一个域名。“键”应该匹配域名，“值”是一个系统中有效的皮肤。请参照样例条目修改正则表达式的合适格式。',
-        'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
+        'It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
             '',
+        'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
+            '无法检查PGP签名，这可能是由于缺少公钥或不支持的算法造成的。',
         'Italian' => '意大利语',
         'Italian stop words for fulltext index. These words will be removed from the search index.' =>
             '全文索引的意大利语停止词，这些词将从搜索索引中移除。',
@@ -7592,11 +7864,15 @@ Thanks for your help!
         'Ivory (Slim)' => '象牙白（修身版）',
         'Japanese' => '日语',
         'JavaScript function for the search frontend.' => '搜索界面的JavaScript函数。',
+        'Keep dynamic field attachments after each transition.' => '',
         'Korean' => '韩语',
         'Language' => '语言',
         'Large' => '详细',
         'Last Screen Overview' => '最近屏幕概览',
         'Last customer subject' => '最后客户主题',
+        'Last view - limit' => '',
+        'Last view - position' => '',
+        'Last view - types' => '',
         'Lastname Firstname' => '姓 名',
         'Lastname Firstname (UserLogin)' => '姓 名（登录用户名）',
         'Lastname, Firstname' => '姓, 名',
@@ -7628,6 +7904,7 @@ Thanks for your help!
             '服务人员界面始终载入的JS文件列表。',
         'List of JS files to always be loaded for the customer interface.' =>
             '客户界面始终载入的JS文件列表。',
+        'List of actions that will be ignored.' => '',
         'List of all CustomerCompany events to be displayed in the GUI.' =>
             '在图形用户界面中显示的所有客户单位事件列表。',
         'List of all CustomerUser events to be displayed in the GUI.' => '在图形用户界面中显示的所有客户用户事件列表。',
@@ -7647,8 +7924,12 @@ Thanks for your help!
             '服务人员界面始终载入的响应CSS文件列表。',
         'List of responsive CSS files to always be loaded for the customer interface.' =>
             '客户界面始终载入的响应CSS文件列表。',
+        'List of sub-actions that will be ignored.' => '',
         'List view' => '列表视图',
         'Lithuanian' => '立陶宛语',
+        'Loader module registration for AdminOAuth2TokenManagement.' => '',
+        'Loader module registration for AgentAppointmentEdit.' => '',
+        'Loader module registration for the admin interface.' => '',
         'Loader module registration for the agent interface.' => '服务人员界面的加载器模块注册。',
         'Loader module registration for the customer interface.' => '客户界面的加载器模块注册。',
         'Lock / unlock this ticket' => '锁定/解锁这个工单',
@@ -7672,6 +7953,8 @@ Thanks for your help!
         'Makes the session management use html cookies. If html cookies are disabled or if the client browser disabled html cookies, then the system will work as usual and append the session id to the links.' =>
             '让会话管理使用HTML Cookies。如果禁用了html cookies或客户端浏览器禁用了html cookies，系统仍会正常工作，并将会话ID追加到链接地址中。',
         'Malay' => '马来语',
+        'Manage Customer User-Customer Relations.' => '',
+        'Manage OAuth2 tokens and their configurations.' => '',
         'Manage OTRS Group cloud services.' => '管理 OTRS 集团云服务。',
         'Manage PGP keys for email encryption.' => '管理邮件加密的PGP密钥。',
         'Manage POP3 or IMAP accounts to fetch email from.' => '管理收取邮件的POP3或IMAP帐号。',
@@ -7680,10 +7963,17 @@ Thanks for your help!
         'Manage different calendars.' => '管理不同的日历。',
         'Manage existing sessions.' => '管理已登录会话。',
         'Manage support data.' => '管理支持数据。',
+        'Manage system files.' => '',
         'Manage system registration.' => '管理系统注册。',
         'Manage tasks triggered by event or time based execution.' => '管理事件触发或基于时间执行的任务。',
+        'Management of ticket attribute relations.' => '',
+        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
+            '',
+        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
+            '',
         'Mark as Spam!' => '标记为垃圾!',
         'Mark this ticket as junk!' => '标记这个工单为垃圾!',
+        'Mattermost Username' => '',
         'Max size (in characters) of the customer information table (phone and email) in the compose screen.' =>
             '在编写工单屏幕客户信息表格（电话和邮件）的最大尺寸（单位：字符）。',
         'Max size (in rows) of the informed agents box in the agent interface.' =>
@@ -7717,6 +8007,10 @@ Thanks for your help!
         'Merge this ticket and all articles into another ticket' => '将这个工单和所有的信件合并到另一工单',
         'Merged Ticket (%s/%s) to (%s/%s).' => '已将工单(%s/%s)合并到(%s/%s)。',
         'Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>.' => '合并工单<OTRS_TICKET>到 <OTRS_MERGE_TO_TICKET>。',
+        'Message that will be shown if the agent is currently logged in.' =>
+            '',
+        'Message that will be shown if the agent is currently logged out.' =>
+            '',
         'Minute' => '分钟',
         'Miscellaneous' => '杂项',
         'Module for To-selection in new ticket screen in the customer interface.' =>
@@ -7772,6 +8066,10 @@ Thanks for your help!
             '定制队列的名称。定制队列是您的首选队列，能够在偏好设置中选择。',
         'Name of custom service. The custom service is a service selection of your preferred services and can be selected in the preferences settings.' =>
             '定制服务的名称。定制服务是您的首选服务，能够在偏好设置中选择。',
+        'Name of the OAuth2 token configuration to use for sending mails if \'OAuth2 token\' was configured in SendmailModule::AuthenticationType.' =>
+            '',
+        'Name of the dynamic field in which the attachment file IDs of the transition will be stored.' =>
+            '',
         'NameX' => 'NameX',
         'New Ticket' => '新建工单',
         'New Tickets' => '新建工单',
@@ -7779,14 +8077,14 @@ Thanks for your help!
         'New Year\'s Day' => '新年',
         'New Year\'s Eve' => '除夕',
         'New process ticket' => '新的流程工单',
+        'News' => '',
         'News about OTRS releases!' => 'OTRS版本新闻！',
-        'News about OTRS.' => 'OTRS新闻。',
         'Next possible ticket states after adding a phone note in the ticket phone inbound screen of the agent interface.' =>
             '服务人员界面工单电话接入屏幕在添加一个电话备注后工单可能的下一状态。',
         'Next possible ticket states after adding a phone note in the ticket phone outbound screen of the agent interface.' =>
             '服务人员界面工单电话拨出屏幕在添加一个电话备注后工单可能的下一状态。',
-        'No public key found.' => '',
-        'No valid OpenPGP data found.' => '',
+        'No public key found.' => '没有找到公钥。',
+        'No valid OpenPGP data found.' => '没有找到有效的OpenPGP数据。',
         'None' => '没有',
         'Norwegian' => '挪威语',
         'Notification Settings' => '通知设置',
@@ -7800,8 +8098,9 @@ Thanks for your help!
             '服务人员界面搜索结果每页显示的工单数。',
         'Number of tickets to be displayed in each page of a search result in the customer interface.' =>
             '客户界面搜索结果每页显示的工单数。',
+        'OAuth2' => '',
+        'OAuth2 token' => '',
         'OTRS Group Services' => 'OTRS集团服务',
-        'OTRS News' => 'OTRS新闻',
         'OTRS can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>
             'OTRS能够使用一个或多个只读镜像数据库以扩展操作（如全文搜索或生成统计报表）。您可以在这里指定第一个镜像数据库的DSN（数据源名称）。',
         'OTRS doesn\'t support recurring Appointments without end date or number of iterations. During import process, it might happen that ICS file contains such Appointments. Instead, system creates all Appointments in the past, plus Appointments for the next N months (120 months/10 years by default).' =>
@@ -7837,6 +8136,7 @@ Thanks for your help!
         'PGP Keys' => 'PGP密钥',
         'Package event module file a scheduler task for update registration.' =>
             '软件包事件模块注册。',
+        'Parameter name for additional recipients.' => '',
         'Parameters for the CreateNextMask object in the preference view of the agent interface. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             '服务人员界面的偏好设置视图中CreateNextMask对象的参数。请注意：将\'Active（激活）\'设置为0只会阻止服务人员在个人偏好设置中编辑此组的设置，但仍然允许管理员以其他用户的名义编辑这些设置。 使用\'PreferenceGroup\'来控制这些设置应该显示在用户界面的哪个区域。',
         'Parameters for the CustomQueue object in the preference view of the agent interface. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
@@ -7925,8 +8225,11 @@ Thanks for your help!
         'Polish' => '波兰语',
         'Portuguese' => '葡萄牙语',
         'Portuguese (Brasil)' => '葡萄牙语（巴西）',
+        'Possible types for agent interface.' => '',
+        'Possible types for customer interface.' => '',
         'PostMaster Filters' => '邮箱管理员过滤器',
         'PostMaster Mail Accounts' => '邮箱管理员邮件帐户',
+        'Pre-application module to store the current view.' => '',
         'Print this ticket' => '打印工单',
         'Priorities' => '优先级',
         'Process Management Activity Dialog GUI' => '流程管理 活动对话框的GUI',
@@ -7949,12 +8252,16 @@ Thanks for your help!
         'Public calendar.' => '公共日历。',
         'Queue view' => '队列视图',
         'Queues ↔ Auto Responses' => '队列 ↔ 自动回复',
+        'Quoting character for exported CSV files.' => '',
         'Rebuild the ticket index for AgentTicketQueue.' => '为AgentTicketQueue（服务人员工单队列）重建工单索引。',
         'Recognize if a ticket is a follow-up to an existing ticket using an external ticket number. Note: the first capturing group from the \'NumberRegExp\' expression will be used as the ticket number value.' =>
             '通过外部工单编号识别一个工单是否为已有工单的跟进。 注意：“NumberRegExp”表达式中的第一个捕获组将用作工单编号值。',
         'Refresh interval' => '刷新间隔',
         'Registers a log module, that can be used to log communication related information.' =>
             '注册一个日志模块用于记录通信相关信息。',
+        'Registers a user preferences module for LastViewsLimit.' => '',
+        'Registers a user preferences module for LastViewsPosition.' => '',
+        'Registers a user preferences module for LastViewsType.' => '',
         'Reminder Tickets' => '提醒的工单',
         'Removed subscription for user "%s".' => '用户“%s”已移除的关注。',
         'Removes old generic interface debug log entries created before the specified amount of days.' =>
@@ -7969,7 +8276,6 @@ Thanks for your help!
         'Replaces the original sender with current customer\'s email address on compose answer in the ticket compose screen of the agent interface.' =>
             '服务人员界面工单编写屏幕，用客户当前的邮件地址替换编写回复时的原始发件人。',
         'Reports' => '报表',
-        'Reports (OTRS Business Solution™)' => '报表 (OTRS商业版)',
         'Reprocess mails from spool directory that could not be imported in the first place.' =>
             '从spool目录中重新处理的邮件不能被导入到第一的位置。',
         'Required permissions to change the customer of a ticket in the agent interface.' =>
@@ -8008,7 +8314,6 @@ Thanks for your help!
         'Resent email to "%s".' => '已重发邮件到"%s"。',
         'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
             '如果工单转移到另一个队列，重置并解锁工单所有者。',
-        'Resource Overview (OTRS Business Solution™)' => '资源概览（OTRS商业版）',
         'Responsible Tickets' => '负责的工单',
         'Responsible Tickets.' => '负责的工单.',
         'Restores a ticket from the archive (only if the event is a state change to any open available state).' =>
@@ -8030,13 +8335,16 @@ Thanks for your help!
         'Russian' => '俄语',
         'S/MIME Certificates' => 'S/MIME证书',
         'SMS' => '短信',
-        'SMS (Short Message Service)' => '短信(短消息)',
         'Salutations' => '问候语',
         'Sample command output' => '命令输出样例',
         'Saves the attachments of articles. "DB" stores all data in the database (not recommended for storing big attachments). "FS" stores the data on the filesystem; this is faster but the webserver should run under the OTRS user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when "FS" is used.' =>
             '保存信件的附件。“数据库”在数据库中存储所有数据（不推荐在存储大容量附件时使用）。“文件系统”在文件系统中保存数据；这个选项更快但WEB服务器要以OTRS用户运行。即使是在生产环境您也可以在这两种模式间切换，而不会丢失数据。备注：使用“文件系统”时不能搜索附件名。',
         'Schedule a maintenance period.' => '计划一个系统维护期。',
         'Screen after new ticket' => '创建新工单后的视图',
+        'Screens for which it is possible to enable or disable default columns.' =>
+            '',
+        'Screens for which it is possible to enable or disable dynamic fields.' =>
+            '',
         'Search Customer' => '搜索客户',
         'Search Ticket.' => '搜索工单。',
         'Search Tickets.' => '搜索工单。',
@@ -8046,13 +8354,17 @@ Thanks for your help!
         'Search.' => '搜索。',
         'Second Christmas Day' => '圣诞节的第二天',
         'Second Queue' => '第二队列',
+        'Seconds' => '',
         'Select after which period ticket overviews should refresh automatically.' =>
             '选择工单概览视图自动刷新的时间间隔。',
+        'Select how many last views should be shown.' => '',
         'Select how many tickets should be shown in overviews by default.' =>
             '选择概览视图中默认显示的工单数。',
         'Select the main interface language.' => '选择主界面语言。',
         'Select the separator character used in CSV files (stats and searches). If you don\'t select a separator here, the default separator for your language will be used.' =>
             '选择CSV文件（统计和搜索）中使用的分隔符。如果不指定，系统将使用当前语言的默认分隔符。',
+        'Select where to display the last views.' => '',
+        'Select which types should be displayed.' => '',
         'Select your frontend Theme.' => '选择您的界面主题。',
         'Select your personal time zone. All times will be displayed relative to this time zone.' =>
             '选择你的个人时区，所有时间将相对于这个时区显示。',
@@ -8061,8 +8373,9 @@ Thanks for your help!
         'Selects the cache backend to use.' => '选择使用的缓存后端。',
         'Selects the module to handle uploads via the web interface. "DB" stores all uploads in the database, "FS" uses the file system.' =>
             '选择处理WEB界面上传文件的模块。“数据库”存储所有上传文件到数据库中，“文件系统”存储所有上传文件到文件系统中。',
-        'Selects the ticket number generator module. "AutoIncrement" increments the ticket number, the SystemID and the counter are used with SystemID.counter format (e.g. 1010138, 1010139). With "Date" the ticket numbers will be generated by the current date, the SystemID and the counter. The format looks like Year.Month.Day.SystemID.counter (e.g. 200206231010138, 200206231010139). With "DateChecksum"  the counter will be appended as checksum to the string of date and SystemID. The checksum will be rotated on a daily basis. The format looks like Year.Month.Day.SystemID.Counter.CheckSum (e.g. 2002070110101520, 2002070110101535).' =>
-            '选择工单编号生成器模块。 使用“AutoIncrement（自动增量）”，系统ID和计数器一起使用“系统ID.计数器”格式（例如1010138,1010139）使用增加工单编号。 使用“Date（日期）”，工单编号将由当前日期、系统ID和计数器生成。 该格式看起来像“年.月.日.系统ID.计数器”（例如200206231010138,200206231010139）。 使用“DateChecksum（日期校验和）”，计数器将作为校验和追加到日期和系统ID的字符串。 校验和将每天轮换。 该格式看起来像“年.月.日.系统ID.计数器.校验和”（例如2002070110101520,2002070110101535）。',
+        'Selects the ticket number generator module. "AutoIncrement" increments the ticket number, the SystemID and the counter are used with SystemID.counter format (e.g. 1010138, 1010139). With "Date" the ticket numbers will be generated by the current date, the SystemID and the counter. The format looks like Year.Month.Day.SystemID.counter (e.g. 200206231010138, 200206231010139). With "DateChecksum"  the counter will be appended as checksum to the string of date and SystemID. The checksum will be rotated on a daily basis. The format looks like Year.Month.Day.SystemID.Counter.CheckSum (e.g. 2002070110101520, 2002070110101535). With "Random" the ticket numbers will be generated by 12 random numbers. The format looks like SystemID.RandomNumbers (e.g. 10123456789012).' =>
+            '',
+        'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => '从这个工单发送新的外发邮件',
         'Send notifications to users.' => '给用户发送通知。',
         'Sender type for new tickets from the customer inteface.' => '客户界面新工单的发件人类型。',
@@ -8071,7 +8384,6 @@ Thanks for your help!
         'Sends all outgoing email via bcc to the specified address. Please use this only for backup reasons.' =>
             '通过BCC（密件抄送）发送所有外发邮件到指定地址。请只在备份情况下使用这个选项。',
         'Sends customer notifications just to the mapped customer.' => '仅给映射的客户用户发送客户通知。',
-        'Sends registration information to OTRS group.' => '发送注册信息到OTRS集团。',
         'Sends reminder notifications of unlocked ticket after reaching the reminder date (only sent to ticket owner).' =>
             '在到达提醒时间后发送解锁工单的提醒通知（只发送给工单所有者）。',
         'Sends the notifications which are configured in the admin interface under "Ticket Notifications".' =>
@@ -8083,6 +8395,7 @@ Thanks for your help!
         'Sent email to "%s".' => '已发送电子邮件到"%s"。',
         'Sent email to customer.' => '已发送电子邮件给客户。',
         'Sent notification to "%s".' => '已发送通知到"%s"。',
+        'Separator for exported CSV files.' => '',
         'Serbian Cyrillic' => '塞尔维亚西里尔语',
         'Serbian Latin' => '塞尔维亚拉丁语',
         'Service Level Agreements' => '服务级别协议',
@@ -8241,6 +8554,8 @@ Thanks for your help!
             '设置服务人员界面工单负责人屏幕的服务人员负责人。',
         'Sets the service in the close ticket screen of the agent interface (Ticket::Service needs to be enabled).' =>
             '设置服务人员界面工单关闭屏幕的服务（需要启用Ticket::Service）。',
+        'Sets the service in the ticket bulk screen in the agent interface (Ticket::Service needs to be enabled).' =>
+            '',
         'Sets the service in the ticket free text screen of the agent interface (Ticket::Service needs to be enabled).' =>
             '设置服务人员界面工单自定义字段屏幕的服务（需要启用Ticket::Service）。',
         'Sets the service in the ticket note screen of the agent interface (Ticket::Service needs to be enabled).' =>
@@ -8352,6 +8667,10 @@ Thanks for your help!
             '在服务人员界面所有工单概览视图，为“关闭工单”菜单显示一个链接。',
         'Shows a link in the menu to close a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
             '在服务人员界面工单详情视图中，为“关闭工单”菜单显示一个链接。可以通过使用键“Group（组）”和值如“rw:group1;move_into:group2”来实现显示/不显示这个链接的额外访问控制。 为了给菜单条目分组，使用键"ClusterName（菜单组名称）"，其值可为您想在界面上看到的任何菜单组名称（系统默认为Miscellaneous-杂项），使用键"ClusterPriority（菜单组优先级）"来配置工具栏中菜单组的显示顺序。',
+        'Shows a link in the menu to create a unit test for the current ticket.' =>
+            '',
+        'Shows a link in the menu to create and send a unit test for the current ticket.' =>
+            '',
         'Shows a link in the menu to delete a ticket in every ticket overview of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             '在服务人员界面所有工单概览视图，为“删除工单”菜单显示一个链接。可以通过使用键“Group（组）”和值如“rw:group1;move_into:group2”来实现显示/不显示这个链接的额外访问控制。',
         'Shows a link in the menu to delete a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
@@ -8419,12 +8738,8 @@ Thanks for your help!
             '在服务人员界面工单负责人屏幕，显示这个工单所有可能的服务人员（需要具有这个队列或工单的备注权限）列表，用于确定谁将收到关于这个备注的通知。',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             '显示工单概览的预览（如果参数CustomerInfo值为1，还将显示客户信息，参数CustomerInfoMaxSize定义了显示客户信息的最大字符数）。',
-        'Shows a teaser link in the menu for the ticket attachment view of OTRS Business Solution™.' =>
-            '在OTRS 商业版™的工单附件视图的菜单中显示一个头部预览链接。',
         'Shows all both ro and rw queues in the queue view.' => '在工单队列视图中显示所有RO（只读）和RW（读写）队列。',
         'Shows all both ro and rw tickets in the service view.' => '在工单服务视图中显示所有RO（只读）和RW（读写）服务。',
-        'Shows all open tickets (even if they are locked) in the escalation view of the agent interface.' =>
-            '在服务人员界面工单升级视图显示所有处理中的工单（即使工单已被锁定）。',
         'Shows all the articles of the ticket (expanded) in the agent zoom view.' =>
             '在服务人员工单详情视图中展开显示这个工单所有的信件。',
         'Shows all the articles of the ticket (expanded) in the customer zoom view.' =>
@@ -8439,11 +8754,17 @@ Thanks for your help!
             '在AgentTicketPhone（服务人员电话工单）、AgentTicketEmail（服务人员邮件工单）和AgentTicketCustomer（服务人员客户工单）模块显示客户历史工单信息。',
         'Shows either the last customer article\'s subject or the ticket title in the small format overview.' =>
             '在工单概览简洁版式中显示最近的客户信件的主题或工单标题。',
+        'Shows existing parent/child (separated by ::) process lists in the form of a tree or a list.' =>
+            '',
         'Shows existing parent/child queue lists in the system in the form of a tree or a list.' =>
             '以树形或列表形式显示系统中存在的父/子队列的清单。',
         'Shows information on how to start OTRS Daemon' => '显示如何启动OTRS守护进程的信息',
         'Shows link to external page in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             '在服务人员界面的工单详情视图中显示到外部页面的链接。 可以通过使用键“Group”和内容如“rw：group1; move_into：group2”来完成额外的访问控制，以显示或不显示此链接。',
+        'Shows only valid dynamic fields in dynamic field export selection (AdminDynamicFieldConfigurationImportExport) if enabled.' =>
+            '',
+        'Shows only valid dynamic fields in screen configuration (AdminDynamicFieldScreenConfiguration) if enabled.' =>
+            '',
         'Shows the article head information in the agent zoom view.' => '在服务人员工单详情视图显示信件的头部信息。',
         'Shows the articles sorted normally or in reverse, under ticket zoom in the agent interface.' =>
             '在服务人员界面工单详情视图，按正常排序或反向排序显示信件。',
@@ -8493,9 +8814,10 @@ Thanks for your help!
             '如果启用，则以长格式显示时间（天、小时、分钟）；如果不启用，则以短格式显示时间（天、小时）。',
         'Shows time use complete description (days, hours, minutes), if enabled; or just first letter (d, h, m), if not enabled.' =>
             '如果启用，则显示时间的完整描述（天、小时、分钟）；如果不启用，则只显示时间的首字母（d-天，h-时,m-分）。',
-        'Signature data.' => '',
+        'Signature data.' => '签名数据。',
         'Signatures' => '签名',
         'Simple' => '简单',
+        'Size of the logo in the page header.' => '',
         'Skin' => '皮肤',
         'Slovak' => '斯洛伐克语',
         'Slovenian' => '斯洛文尼亚语',
@@ -8539,8 +8861,8 @@ Thanks for your help!
             '指定系统发送通知的姓名，这个发件人姓名用于创建通知管理员完整的显示名称（如"OTRS通知"otrs@your.example.com）。',
         'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
             '指定服务人员显示姓和名的先后顺序。',
-        'Specifies the path of the file for the logo in the page header (gif|jpg|png, 700 x 100 pixel).' =>
-            '指定页面头部LOGO文件的路径（gif|jpg|png，700 X 100 像素）。',
+        'Specifies the path of the file for the logo in the page header (gif|jpg|png).' =>
+            '',
         'Specifies the path of the file for the performance log.' => '指定性能日志文件的路径。',
         'Specifies the path to the converter that allows the view of Microsoft Excel files, in the web interface.' =>
             '指定在WEB界面查看微软Excel文件的转换器路径。',
@@ -8577,7 +8899,6 @@ Thanks for your help!
             '在打开链接对象遮罩屏幕后搜索一次所有活动对象。',
         'Stat#' => '统计号',
         'States' => '状态',
-        'Statistic Reports overview.' => '统计报告概览。',
         'Statistics overview.' => '统计概览。',
         'Status view' => '状态视图',
         'Stopped response time escalation.' => '响应时间升级已停止。',
@@ -8594,17 +8915,19 @@ Thanks for your help!
         'System Configuration Deployment' => '系统配置部署',
         'System Configuration Group' => '系统配置组',
         'System Maintenance' => '系统维护',
+        'Template for the out-of-office message shown to the user in the frontend. Placeholders for out-of-office information can be used via ###PlaceholderName###. Possible placeholders are: StartYear, StartMonth, StartDay, EndYear, EndMonth, EndDay, DaysRemaining.' =>
+            '',
         'Templates ↔ Attachments' => '模板 ↔ 附件',
         'Templates ↔ Queues' => '模板↔队列',
         'Textarea' => '文本区域',
         'Thai' => '泰国语',
-        'The PGP signature is expired.' => '',
+        'The PGP signature is expired.' => 'PGP签名已过期。',
         'The PGP signature was made by a revoked key, this could mean that the signature is forged.' =>
-            '',
-        'The PGP signature was made by an expired key.' => '',
+            'PGP签名是由撤销的密钥生成的，这可能意味着签名是伪造的。',
+        'The PGP signature was made by an expired key.' => 'PGP签名是由过期密钥创建的。',
         'The PGP signature with the keyid has not been verified successfully.' =>
-            '',
-        'The PGP signature with the keyid is good.' => '',
+            '未成功验证带有密钥ID的PGP签名。',
+        'The PGP signature with the keyid is good.' => '带有密钥ID的PGP签名是好的。',
         'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
             '服务人员界面皮肤的内部名称，请在Frontend::Agent::Loader::Agent::Skin中检查可用的皮肤。',
         'The customer skin\'s InternalName which should be used in the customer interface. Please check the available skins in Frontend::Customer::Skins.' =>
@@ -8655,8 +8978,11 @@ Thanks for your help!
             '回复邮件中加在主题前的文字，如RE、AW或AS。',
         'The text at the beginning of the subject when an email is forwarded, e.g. FW, Fwd, or WG.' =>
             '转发邮件中加在主题前的文字，如FW、Fwd或WG。',
+        'The user\'s Mattermost username.' => '',
         'The value of the From field' => '“发件人”字段的值',
         'Theme' => '主题',
+        'This configuration defines if a dynamic field has to be checked in the agent ticket bulk view to get set for each ticket. This prevents unwanted overwrite of dynamic field values with their default or even empty values.' =>
+            '',
         'This event module stores attributes from CustomerUser as DynamicFields tickets. Please see DynamicFieldFromCustomerUser::Mapping setting for how to configure the mapping.' =>
             '这个事件模块将客户用户的属性存储为工单动态字段，如何配置这个映射请查看DynamicFieldFromCustomerUser::Mapping设置。',
         'This is a Description for Comment on Framework.' => '这是在框架中关于注释的描述信息。',
@@ -8664,7 +8990,7 @@ Thanks for your help!
         'This is the default orange - black skin for the customer interface.' =>
             '这是客户界面默认的橙色-黑色皮肤。',
         'This is the default orange - black skin.' => '这是默认的橙色-黑色皮肤。',
-        'This key is not certified with a trusted signature!' => '',
+        'This key is not certified with a trusted signature!' => '此密钥未使用可信签名进行认证！',
         'This module and its PreRun() function will be executed, if defined, for every request. This module is useful to check some user options or to display news about new applications.' =>
             '每次请求时这个模块和它的PreRun()函数（如果定义了）将被执行。',
         'This module is part of the admin area of OTRS.' => '这个模块是OTRS系统管理的一部分。',
@@ -8676,6 +9002,8 @@ Thanks for your help!
         'This option defines the process tickets default priority.' => '这个选项定义流程工单的默认优先级。',
         'This option defines the process tickets default queue.' => '这个选项定义流程工单的默认队列。',
         'This option defines the process tickets default state.' => '这个选项定义流程工单的默认状态。',
+        'This option enables a dropdown which will be displayed instead of the time unit input field.' =>
+            '',
         'This option will deny the access to customer company tickets, which are not created by the customer user.' =>
             '这个选项将拒绝客户用户访问不是由他本人创建的客户单位工单。',
         'This setting allows you to override the built-in country list with your own list of countries. This is particularly handy if you just want to use a small select group of countries.' =>
@@ -8684,6 +9012,8 @@ Thanks for your help!
         'This setting shows the sorting attributes in all overview screen, not only in queue view.' =>
             '这个设置显示所有概览屏幕（而不是仅队列视图）中的排序属性。',
         'This will allow the system to send text messages via SMS.' => '这个选项允许系统通过短信发送文本消息。',
+        'Threshold (in minutes) for catching up with ticket creation for appointments. Tickets for due appointments will only be created if their planned creation date is not older than the configured amount of minutes. This prevents creation of tickets for e. g. recurring appointments if the ticket creation will be executed some time later.' =>
+            '',
         'Ticket Close.' => '工单关闭。',
         'Ticket Compose Bounce Email.' => '工单编写退回邮件。',
         'Ticket Compose email Answer.' => '工单编写邮件回复。',
@@ -8710,8 +9040,13 @@ Thanks for your help!
         'Ticket Zoom' => '工单详情',
         'Ticket Zoom.' => '工单详情。',
         'Ticket bulk module.' => '工单批量操作模块。',
+        'Ticket creation' => '',
+        'Ticket event module that stores values of the selected web service record into the configured additional dynamic fields.' =>
+            '',
         'Ticket event module that triggers the escalation stop events.' =>
             '触发升级停止事件的工单事件模块。',
+        'Ticket event module which sends new ticket notifications even for tickets without articles.' =>
+            '',
         'Ticket limit per page for Ticket Overview "Medium".' => '工单概览基本版式的每页工单数量。',
         'Ticket limit per page for Ticket Overview "Preview".' => '工单概览预览版式的每页工单数量。',
         'Ticket limit per page for Ticket Overview "Small".' => '工单概览简洁版式的每页工单数量。',
@@ -8739,6 +9074,8 @@ Thanks for your help!
         'Tree view' => '树形视图',
         'Triggers add or update of automatic calendar appointments based on certain ticket times.' =>
             '基于某些工单时间添加或更新自动日历预约的触发器。',
+        'Triggers event \'TicketAllChildrenClosed\' if all child tickets of a parent ticket have been closed/merged/removed.' =>
+            '',
         'Triggers ticket escalation events and notification events for escalation.' =>
             '工单升级事件和工单升级通知事件的触发器。',
         'Turkish' => '土耳其语',
@@ -8750,6 +9087,8 @@ Thanks for your help!
         'Tweak the system as you wish.' => '根据需要调整系统。',
         'Type of daemon log rotation to use: Choose \'OTRS\' to let OTRS system to handle the file rotation, or choose \'External\' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration.' =>
             '要使用的守护程序日志循环类型：选择“OTRS”以使OTRS系统处理文件循环，或选择“外部”以使用第三方循环机制（如logrotate）。 注意：外部循环机制需要使用其自身的配置。',
+        'URL to the OTRS cloud service proxy service. The http or https prefix will be added, depending on SysConfig option \'PackageRepositoryURLSchema\'.' =>
+            '',
         'Ukrainian' => '乌克兰语',
         'Unlock tickets that are past their unlock timeout.' => '过了解锁超时时间后解锁工单。',
         'Unlock tickets whenever a note is added and the owner is out of office.' =>
@@ -8770,6 +9109,8 @@ Thanks for your help!
         'Use new type of select and autocomplete fields in customer interface, where applicable (InputFields).' =>
             '客户界面在合适的地方（输入字段）使用新式选择和自动完成字段。',
         'User Profile' => '用户资料',
+        'User agent string to use for the WebUserAgent module. Leave empty to use the default user agent string.' =>
+            '',
         'UserFirstname' => '用户的名字',
         'UserLastname' => '用户的姓',
         'Users, Groups & Roles' => '用户、组和角色',
@@ -8777,7 +9118,6 @@ Thanks for your help!
         'Uses richtext for viewing and editing: articles, salutations, signatures, standard templates, auto responses and notifications.' =>
             '查看和编辑以下内容时使用富文本：信件、问候语、签名、标准模板、自动响应和通知。',
         'Vietnam' => '越南语',
-        'View all attachments of the current ticket' => '查看当前工单的所有附件',
         'View performance benchmark results.' => '查看性能基准测试结果.',
         'Watch this ticket' => '关注这个工单',
         'Watched Tickets' => '关注的工单',
@@ -8788,7 +9128,10 @@ Thanks for your help!
         'We are performing scheduled maintenance. We should be back online shortly.' =>
             '我们正在执行系统维护，很快就恢复正常使用。',
         'Web Services' => 'Web服务',
-        'Web View' => 'WEB视图',
+        'Web service (Multiselect)' => '',
+        'Web service (Text)' => '',
+        'Web service dynamic field AJAX interface' => '',
+        'Webservice' => '',
         'When agent creates a ticket, whether or not the ticket is automatically locked to the agent.' =>
             '服务人员创建工单时，工单是否被自动锁定到该服务人员。',
         'When tickets are merged, a note will be added automatically to the ticket which is no longer active. Here you can define the body of this note (this text cannot be changed by the agent).' =>
@@ -8810,7 +9153,11 @@ Thanks for your help!
             '你的优先队列中选择的队列，如果启用了，你还会得到有关这些队列的电子邮件通知。',
         'Your service selection of your preferred services. You also get notified about those services via email if enabled.' =>
             '你的优先服务中选择的服务，如果启用了，你还会得到有关这些队列的电子邮件通知。',
+        'Your username in Mattermost without the leading @' => '',
+        'Znuny.org - News' => '',
         'Zoom' => '展开',
+        'all tickets' => '',
+        'archived tickets' => '',
         'attachment' => '附件',
         'bounce' => '退回',
         'compose' => '编写',
@@ -8820,6 +9167,7 @@ Thanks for your help!
         'info' => '信息',
         'inline' => '内联',
         'normal' => '正常',
+        'not archived tickets' => '',
         'notice' => '注意',
         'pending' => '挂起',
         'phone' => '电话',
@@ -8864,6 +9212,7 @@ Thanks for your help!
         'Apr',
         'April',
         'Are you sure you want to delete this appointment? This operation cannot be undone.',
+        'Are you sure you want to overwrite the config parameters?',
         'Are you sure you want to update all installed packages?',
         'Are you using a browser plugin like AdBlock or AdBlockPlus? This can cause several issues and we highly recommend you to add an exception for this domain.',
         'Article display',
@@ -8944,6 +9293,7 @@ Thanks for your help!
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
         'Do you really want to delete this statistic?',
+        'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',
         'Don\'t save, update manually',
@@ -8997,7 +9347,6 @@ Thanks for your help!
         'Just this occurrence',
         'Keys with values can\'t be renamed. Please remove this key/value pair instead and re-add it afterwards.',
         'Less',
-        'Link',
         'Loading, please wait...',
         'Loading...',
         'Location',
@@ -9136,7 +9485,6 @@ Thanks for your help!
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',
-        'The mail could not be sent',
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',

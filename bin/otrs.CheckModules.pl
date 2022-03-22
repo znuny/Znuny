@@ -449,8 +449,7 @@ my @NeededModules = (
     {
         Module          => 'Mail::IMAPClient',
         VersionRequired => '3.22',
-        Comment         => 'Required for IMAP TLS connections.',
-        Required        => 0,
+        Required        => 1,
         InstTypes       => {
             aptget => 'libmail-imapclient-perl',
             emerge => 'dev-perl/Mail-IMAPClient',
@@ -937,6 +936,7 @@ sub _VersionClean {
 
     # replace all special characters with an dot
     $Param{Version} =~ s{ [_-] }{.}xmsg;
+    $Param{Version} =~ s{v}{}xmsg;
 
     my @VersionParts = split q{\.}, $Param{Version};
 

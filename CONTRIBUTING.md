@@ -1,69 +1,132 @@
-# Contributing to Znuny
+# Contributing / How to contribute
 
-## What is Znuny?
+Thank you so much for your interest in contributing! 
+We welcome all types of participation. Whether it is programming, expanding documentation, updating translations or reporting bugs.
+If you want to participate, we prepared a list for you how we handle things. 
+If there are any open questions, you can reach out via:
+- Forum
+- Discord
+- Issues here in this repo
 
-Please have a look [here](https://www.znuny.org/).
 
-## How to contribute?
+Before you start with your contribution, please have a look at the sections below. 
+We tried to cover all relevant parts and it should help to make your contribution as smooth 
+as possible. For you and for us as maintainers.
 
-If you have a fix for some bug you found or any other improvement of the code and want to share it, please create a [pull request](https://github.com/znuny/Znuny/pulls) and use the template (❗).
+Have fun!
 
-Znuny is (at least for now) focused on security and bug fixes. Therefore we would like to politely ask you to not provide new features or changes in behavior via pull requests. See "Contributing new features and changes in behavior" below.
+## How can I:
 
-### Check your code with the ZnunyCodePolicy package
+  * [Report an Issue or Bug](#Report-an-Error-or-Bug)
+  * [Request community support](#Request-Support)
+  * [Open a Feature Request](#Request-a-Feature)
+  * [Join the Project Team](#Join-the-Project-Team)
 
-#### What is the ZnunyCodePolicy package?
 
-With the help of the [ZnunyCodePolicy package](https://github.com/znuny/ZnunyCodePolicy) you can check if your code matches the Znuny code style. It's based on TidyAll, extended by many plugins specific to Znuny.
 
-#### How to use it?
+## How do we:
+  * [Provide Support on Issues](#Provide-Support-on-Issues)
+  * [Clean Up Issues and PRs](#Clean-Up-Issues-and-PRs)
 
-When you made your changes and before you commit them, execute the code policy to let it check your changes. If executed without any parameters, the following command will check all changed files that haven't been committed yet. The command should be executed from within the Znuny base directory. You should stage your changes (via `git add`) before running it, so that you can afterwards see the changes made by the code policy package (via `git diff`), if any.
 
-```bash
-perl <path-to-your-code-policy-package>/bin/otrs.CodePolicy.pl
-```
+## Where do I find: 
+  * The developer documentation https://doc.znuny.org/manual/developer/
+  * The documentation in general https://doc.znuny.org/manual/
+ 
 
-### Tests
 
-If you fix something, a test should be provided or extended to test your changes. You can find all tests in the directory `scripts/test` in your Znuny base directory. Ideally there already should exist one or more tests for the part of Znuny that your code changes. You then can update these tests to also test your fix. If in doubt, create a new test file specifically for your fix. Have a look at said existing tests to find out how to write tests.
+## Report an Error or Bug
 
-You can execute a single test with the following command from within your Znuny base directory:
+If you find an error or a bug, please follow this steps
 
-```bash
-perl bin/otrs.Console.pl Dev::UnitTest::Run --verbose --test <path to test file>
-```
+* Open an Issue at https://github.com/znuny/znuny/issues
+* Use the template we provide. Please dont delete it. 
+* Include everything we need to know. Especially how to reproduce the problem
 
-If there is for example a test file `scripts/test/Ticket/NumberGenerator.t` you have to execute the following command (please note how to give the test file without the `scripts/test/` prefix and without the `.t` suffix):
+After you filed the issue:
 
-```bash
-perl bin/otrs.Console.pl Dev::UnitTest::Run --verbose --test Ticket/NumberGenerator
-```
+* A team member will categorize and label the issue [label the issue](#label-issues).
+* We try to reproduce it and we may ask additional questions.
+* If we are able to reproduce the issue, we will label it accordingly and try to fix it.
 
-### Contributing new features and changes in behavior
+Special Case:
+Security issues. If you want to report a security issue, please see the [Security.md] (https://github.com/znuny/Znuny/blob/dev/SECURITY.md#how-to-report-a-security-vulnerability)
 
-As mentioned, the focus of Znuny is for now on security and bug fixes.
+Note: if you don't reply on questions, we will close the issue after 30 days. This is just a measure to keep our issue list clean. 
 
-Currently, the only way to contribute new features to Znuny (or older OTRS versions) is to put your changes into a package (OPM). A package consists of a source OPM file and all files added or changed by you which will be copied to your Znuny installation directory upon installation of the package. The directory structure within your package must match the one of Znuny.
 
-You then can build an installable package of your code with the following command, executed from within your Znuny base directory:
 
-```bash
-bin/otrs.Console.pl Dev::Package::Build --module-directory <path-to-the-base-directory-of-your-package> <path-to-the-sopm-file-of-your-package> <directory-to-put-in-the-created-opm-package-file>
-```
+## Request Support
 
-The package name should always be prepended by your company name (e. g. `MyCompany-PackageName`). Example for building your package `MyCompany-MyFirstPackage`:
+If you need support / assisitence with your project or just need a helping hand, get in touch:
+- [Project website](https://www.znuny.org)
+- [Community forum](https://community.znuny.org)
+- [Discord server](https://discord.gg/XTud3WWZTs)
+- [Commercial services](https://www.znuny.com)
 
-```bash
-bin/otrs.Console.pl Dev::Package::Build --module-directory /path/to/MyCompany-MyFirstPackage/ /path/to/MyCompany-MyFirstPackage/MyCompany-MyFirstPackage.sopm /path/to/created/package/
-```
+The community is here to help and you can rely on them. If you need immediate help for an incident, 
+you can also request commercial support. 
 
-#### Example packages
+In any case, please provide as much context as you can. Please keep in mind: 
+the community members and the team dont know what you want to achieve or what you already tried. 
 
-You can find many open source packages from and for Znuny at [GitHub](https://github.com/znuny/), for example the package [Znuny4OTRS-CTI](https://github.com/znuny/Znuny4OTRS-CTI). Have a look at them, especially their sopm file in the root directory.
+## Request a Feature
 
-### Licensing, copyright and credits
+If you need a new feature, feel free to follow these steps:
 
-Znuny is an open fork of an existing software. So we have to respect the already given copyright of the original creators.
+* Open an issue in the [featufre request repository](https://github.com/znuny/znuny-feature-requests/issues)
+* Please describe your wish as detailed as possible
+* Keep in mind that it should be a general feature, not one which is only for your specific usecase
+* If similiar features are available, please explain why they won't work for you
 
-New files will be licensed using the AGPL Version 3. If you contribute code to the Znuny project you will get mentioned in the pull request incl. the commit, in CHANGES.md and in AUTHORS.md. We will not mention you in the file you provided or changed. Your work is highly appreciated and acknowledged but you contribute it to the project and your copyright will pass on to the fork itself.
+After you filed the request:
+
+* A team member will categorize and label the request
+* Once a month we discuss feature requests in the team
+* If a feature will be implemented it gets an "accepted" label
+* If a date for the implementation is set, a version label will be added
+* If a request is declined, we close the request
+
+
+Please note: 
+We can't accept every feature request. Especially such requests that are limited to a very small fraction of the users. Our job is not only to build cool software, sometimes it requires us to say no. 
+Please respect that. There is always the of way of using add-ons or customizing to achieve your goal.
+
+
+## Contribute Code
+
+Before you make a code/feature contribution on your own, please ask our team in advance if this customization is likely to find a place in the project. We may have suggestions to make upfront or give you some more insights. 
+There is no special "checklist", just post a question and explain what you would like 
+to contribute. We will get in touch ASAP. 
+We value your time and respect your work. Thats why we dont want you to waste it on features 
+we might be working on in the background.
+
+
+## Provide Support on Issues
+
+We try provide support for free, as good as we can. Thats why we offer so many channels to get help, directly from 
+the community. We dont have a special team for Open Source support, but we do our best to support you. 
+
+The amount of free-support we can deliver is limited. 
+
+If you have a general question, the documentation, the forum and the Discord chat should be a good start. 
+The forum has well build search, which can help in a lot of cases. Before you open a new post, use the search.
+There is a good chance that your issue was already discussed before. 
+
+
+
+## Clean Up Issues and PRs
+
+We will close issues, which are not labeled as bug/verified/critical and haven't been updated in 30 days. 
+Accepted feature requests will remain open until they are implemented. 
+Feature requests that we won't implement, will be closed with an explanation. 
+
+
+## Join the Project Team
+
+If you want to join the project, you are welcome! 
+Just let us know and we can discuss details via Discord.
+
+We need help for: 
+- Issue tracking and handling / labeling issues
+- Code reviews

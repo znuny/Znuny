@@ -106,40 +106,6 @@
                     [% Translate("Please choose one of the following options.") | html %]
                 </div>
                 <div class="Spacing"></div>
-                <fieldset class="TableLike NoSupportBundleSendMessage Hidden">
-                    <legend><span>[% Translate("Send by Email") | html %]</span></legend>
-                    <div class="FieldExplanation SizeMessage Hidden">
-                        [% Translate("The support bundle is too large to send it by email, this option has been disabled.") | html %]
-                    </div>
-                    <div class="FieldExplanation EmailMessage Hidden">
-                        [% Translate("The email address for this user is invalid, this option has been disabled.") | html %]
-                    </div>
-                    <div class="Spacing"></div>
-                </fieldset>
-                <fieldset class="TableLike SupportBundleSendFieldSet">
-                    <legend><span>[% Translate("Send by Email") | html %]</span></legend>
-                    <label for="Name">[% Translate("Name") | html %]:</label>
-                    <div class="Field">
-                        <input type="text" id="Name" name="Name" value="[% Data.SenderName | html %]" class="W50pc" readonly="readonly" />
-                    </div>
-                    <div class="Clear"></div>
-
-                    <label for="Sender">[% Translate("Email") | html %]:</label>
-                    <div class="Field">
-                        <input type="text" id="Sender" name="Sender" value="[% Data.SenderAddress | html %]" class="W50pc" readonly="readonly" />
-                    </div>
-                    <div class="Clear"></div>
-
-                    <div class="Field">
-                        <button class="CallForAction" value="SendByEmail" id="SendSupportBundle">
-                            <span><i class="fa fa-send"></i> [% Translate("Send") | html %]</span>
-                        </button>
-                        <span id="SendingAJAXLoader" class="Hidden" title="[% Translate("Sending") | html %]"></span>
-                        <div class="FieldExplanation">
-                            [% Translate("The support bundle will be sent to OTRS Group via email automatically.") | html %]
-                        </div>
-                    </div>
-                </fieldset>
                 <fieldset class="TableLike">
                     <legend><span>[% Translate("Download File") | html %]</span></legend>
                     <div class="Field">

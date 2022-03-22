@@ -1,3 +1,10 @@
+# 6.4.1 2022-xx-xx
+
+# 6.3.2 2022-xx-xx
+ - 2022-03-17 Added PreRun function to Dev/Tools/TranslationsUpdate to check for symbolic links.
+ - 2022-03-11 Removed 'send support bundle' to OTRS Group.
+ - 2022-03-11 CPAN module Mail::IMAPClient will now be correctly reported as required by bin/otrs.CheckModules.pl [#222](https://github.com/znuny/Znuny/issues/222).
+
 # 6.3.1 2022-03-09
  - 2022-03-07 Integrated package Znuny4OTRS-CalendarBasedTicketCreation.
  - 2022-03-07 Original owners of tickets will now be set again when cancelling a ticket bulk action.
@@ -62,8 +69,8 @@
  - 2021-11-25 Sector Nord AG: Replaced hardcoded attributes with a dynamic Sysconfig in Kernel/System/Ticket/Event/NotificationEvent.pm (#171). Thanks to @LuBroering (Lukas Bröring SectorNord AG). [#171](https://github.com/znuny/Znuny/issues/171)
  - 2021-11-25 Add option '--no-tablespaces' to scripts/backup.pl (#136). Thanks to @meisterheister. [#136](https://github.com/znuny/Znuny/issues/136)
  - 2021-11-25 Prevents error message "no TicketID" on sending an answer if no TicketID exists (#133). Thanks to @Reedu. [#133](https://github.com/znuny/Znuny/issues/133)
- - 2021-11-25 Fixed - "No TicketID is given!" on each outgoing reply #170 https://github.com/znuny/Znuny/issues/170.Thanks to @Reedu. [#133](https://github.com/znuny/Znuny/issues/133)
- - 2021-11-25 Fixed - Bug - Regression Error Message in Log #126 https://github.com/znuny/Znuny/issues/126. Thanks to @Reedu. [#133](https://github.com/znuny/Znuny/issues/133)
+ - 2021-11-25 Fixed - "No TicketID is given!" on each outgoing reply (#170). Thanks to Renée Bäcker (@reneeb). [#170](https://github.com/znuny/Znuny/issues/170)
+ - 2021-11-25 Fixed - Bug - Regression Error Message in Log (#126). Thanks to Renée Bäcker (@reneeb). [#126](https://github.com/znuny/Znuny/issues/126)
  - 2021-11-15 Fixed CPANUpdate console command to also work on FreeBSD. Thanks to @papeng. [#162](https://github.com/znuny/Znuny/issues/162)
 
 # 6.2.1 2021-10-27
@@ -164,8 +171,8 @@
  - 2021-11-25 Sector Nord AG: Replaced hardcoded attributes with a dynamic Sysconfig in Kernel/System/Ticket/Event/NotificationEvent.pm (#171). Thanks to @LuBroering (Lukas Bröring SectorNord AG). [#171](https://github.com/znuny/Znuny/issues/171)
  - 2021-11-25 Add option '--no-tablespaces' to scripts/backup.pl (#136). Thanks to @meisterheister. [#136](https://github.com/znuny/Znuny/issues/136)
  - 2021-11-25 Prevents error message "no TicketID" on sending an answer if no TicketID exists (#133). Thanks to @Reedu. [#133](https://github.com/znuny/Znuny/issues/133)
- - 2021-11-25 Fixed - "No TicketID is given!" on each outgoing reply #170 https://github.com/znuny/Znuny/issues/170.Thanks to @Reedu. [#133](https://github.com/znuny/Znuny/issues/133)
- - 2021-11-25 Fixed - Bug - Regression Error Message in Log #126 https://github.com/znuny/Znuny/issues/126. Thanks to @Reedu. [#133](https://github.com/znuny/Znuny/issues/133)
+ - 2021-11-25 Fixed - "No TicketID is given!" on each outgoing reply (#170). Thanks to @Reedu. [#170](https://github.com/znuny/Znuny/issues/170)
+ - 2021-11-25 Fixed - Bug - Regression Error Message in Log (#126). Thanks to Renée Bäcker (@reneeb). [#126](https://github.com/znuny/Znuny/issues/126)
  - 2021-11-15 Fixed CPANUpdate console command to also work on FreeBSD. Thanks to @papeng. [#162](https://github.com/znuny/Znuny/issues/162)
 
 # 6.0.38 2021-10-27
