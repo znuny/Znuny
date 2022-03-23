@@ -205,7 +205,8 @@
 [% RenderBlockStart("Link") %]
                         <label for="Link">[% Translate("Show link") | html %]:</label>
                         <div class="Field">
-                            <input id="Link" class="W50pc" type="text" maxlength="500" value="[% Data.Link | html %]" name="Link"/>
+                            <input id="Link" class="W50pc Validate_LinkReservedKeywordsInData" type="text" maxlength="500" value="[% Data.Link | html %]" name="Link"/>
+                            <div id="LinkError" class="TooltipErrorMessage"><p>[% Translate("Reserved keywords. The following placeholders are not allowed:") | html %]<br><span>[</span>% Data.(Link|LinkPreview|Title|Value) %<span>]</span></p></div>
                             <p class="FieldExplanation">
                                 [% Translate("Here you can specify an optional HTTP link for the field value in Overviews and Zoom screens.") | html %]
                                 <br/>
@@ -216,9 +217,10 @@
                         </div>
                         <div class="Clear"></div>
 
-                        <label for="Link">[% Translate("Link for preview") | html %]:</label>
+                        <label for="LinkPreview">[% Translate("Link for preview") | html %]:</label>
                         <div class="Field">
-                            <input id="LinkPreview" class="W50pc" type="text" maxlength="500" value="[% Data.LinkPreview | html %]" name="LinkPreview"/>
+                            <input id="LinkPreview" class="W50pc Validate_LinkReservedKeywordsInData" type="text" maxlength="500" value="[% Data.LinkPreview | html %]" name="LinkPreview"/>
+                            <div id="LinkPreviewError" class="TooltipErrorMessage"><p>[% Translate("Reserved keywords. The following placeholders are not allowed:") | html %]<br><span>[</span>% Data.(Link|LinkPreview|Title|Value) %<span>]</span></p></div>
                             <p class="FieldExplanation">
                                 [% Translate("If filled in, this URL will be used for a preview which is shown when this link is hovered in ticket zoom. Please note that for this to work, the regular URL field above needs to be filled in, too.") | html %]
                             </p>

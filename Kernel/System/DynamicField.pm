@@ -1694,16 +1694,32 @@ sub _DynamicFieldReorder {
 
 =head2 _SanitizeConfig()
 
-Currently only removes JavaScript code from configured regular expression error messages.
+This function cleans up the config:
 
-    $DynamicFieldObject->_SanitizeConfig(
+Removes JavaScript code from configured regular expression error messages:
+
+    my $Success = $DynamicFieldObject->_SanitizeConfig(
 
         # 'Config' part of a dynamic field config hash returned by DynamicFieldGet()
         # or given to DynamicFieldAdd() and -Update()
         Config => $Config,
     );
 
-    Returns 1.
+
+Removes reserved keywords in link configuration:
+
+    my $Success = $DynamicFieldObject->_SanitizeConfig(
+        Config => {
+            Link => 'https://www.znuny.org/[% Data.Link %]/[% Data.LinkPreview %]/[% Data.Title %]/[% Data.Value %]'
+        },
+    );
+
+    $Config->{Link} = 'https://www.znuny.org////';
+
+
+Return:
+
+    my $Success = 1;
 
 =cut
 
@@ -1748,6 +1764,13 @@ sub _SanitizeConfig {
         next REGEXCONFIG if !%SafeRegExErrorMessage;
 
         $RegExConfig->{ErrorMessage} = $SafeRegExErrorMessage{String} // '';
+    }
+
+    my @ReservedKeywords = (qw(Link LinkPreview Title Value));
+    if ($Param{Config}->{Link}){
+        for my $Keyword (@ReservedKeywords){
+            $Param{Config}->{Link} =~ s{\[\% Data\.$Keyword \%\]}{}g;
+        };
     }
 
     return 1;
