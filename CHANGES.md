@@ -1,8 +1,7 @@
-# 6.4.1 2022-xx-xx
-
 # 6.3.2 2022-xx-xx
  - 2022-03-23 Improved DynamicFieldObject _SanitizeConfig - ReservedKeywords will now be removed.
  - 2022-03-17 Added PreRun function to Dev/Tools/TranslationsUpdate to check for symbolic links.
+ - 2022-03-15 Added new SysConfig option LibXML::EnableHugeXMLDataSupport to enable support for huge XML data in load_xml calls of CPAN library XML::LibXML.
  - 2022-03-11 Removed 'send support bundle' to OTRS Group.
  - 2022-03-11 CPAN module Mail::IMAPClient will now be correctly reported as required by bin/otrs.CheckModules.pl [#222](https://github.com/znuny/Znuny/issues/222).
 

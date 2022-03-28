@@ -34,6 +34,9 @@ sub Data {
     $Self->{ThousandSeparator} = '.';
     $Self->{Translation} = {
 
+        'Enables support for huge XML data in load_xml calls of CPAN library XML::LibXML. This should only be enabled if absolutely needed. Disabling this option (default) protects against denial of service through entity expansion attacks. Before enabling this option ensure that alternative measures to protect the application against this type of attack have been taken.'
+            => 'Aktiviert die Unterstützung für große XML-Daten in load_xml-Aufrufen der CPAN-Bibliothek XML::LibXML. Diese Option sollte nur aktiviert werden, wenn sie unbedingt benötigt wird. Die Deaktivierung dieser Option (Standard) schützt vor Denial-of-Service-Angriffen durch Entity-Expansion. Bevor diese Option aktiviert wird, muss sichergestellt werden, dass alternative Maßnahmen ergriffen wurden, um die Anwendung gegen diese Art von Angriffen zu schützen.',
+
         # Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
         'ACL Management' => 'ACL-Verwaltung',
         'Actions' => 'Aktionen',

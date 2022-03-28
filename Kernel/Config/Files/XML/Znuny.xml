@@ -269,6 +269,13 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="LibXML::EnableHugeXMLDataSupport" Required="1" Valid="1">
+        <Description Translatable="1">Enables support for huge XML data in load_xml calls of CPAN library XML::LibXML. This should only be enabled if absolutely needed. Disabling this option (default) protects against denial of service through entity expansion attacks. Before enabling this option ensure that alternative measures to protect the application against this type of attack have been taken.</Description>
+        <Navigation>Core::Ticket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
 
     <!--
         TicketToUnitTest

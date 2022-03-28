@@ -109,6 +109,7 @@ sub Map {
     my ( $Self, %Param ) = @_;
 
     my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
+    my $ConfigObject     = $Kernel::OM->Get('Kernel::Config');
 
     # Check data - only accept undef or hash ref or array ref.
     if ( defined $Param{Data} && ref $Param{Data} ne 'HASH' && ref $Param{Data} ne 'ARRAY' ) {
@@ -172,12 +173,14 @@ sub Map {
         =~ s{ (?<! [> \t\n] ) [ \t\n]+ < }{<}xmsgr;
 
     $Template = $WebserviceObject->WebserviceConfigReplace($Template);
+    my $LibXMLHugeXMLDataSupportEnabled = $ConfigObject->Get('LibXML::EnableHugeXMLDataSupport') ? 1 : 0;
 
     my ( $StyleDoc, $StyleSheet );
     eval {
         $StyleDoc = XML::LibXML->load_xml(
             string   => $Template,
             no_cdata => 1,
+            huge     => $LibXMLHugeXMLDataSupportEnabled,
         );
     };
     if ( !$StyleDoc ) {
@@ -269,6 +272,7 @@ sub Map {
         $XMLSource = XML::LibXML->load_xml(
             string   => $XMLPre,
             no_cdata => 1,
+            huge     => $LibXMLHugeXMLDataSupportEnabled,
         );
     };
     if ( !$XMLSource ) {
