@@ -27,7 +27,7 @@ body {
 
 .RTL {
     text-align: right;
-    /* this will inherit to all elemtents because of reset.css */
+    /* this will inherit to all elements because of reset.css */
     direction: rtl;
 }
 
@@ -74,7 +74,7 @@ body {
 }
 
 #AjaxErrorDialogInner .Icon.Green {
-    background: green;
+    background:green
 }
 
 #AjaxErrorDialogInner .FullErrorMessage {
@@ -318,7 +318,7 @@ dd {
 }
 
 .Confirmation {
-    color: #069d07;
+    color: #069d07
 }
 
 .Small {
@@ -348,8 +348,8 @@ dd {
 }
 
 .SuccessBox {
-    color: #FFF;
-    background: #8FB738;
+    color: #fff;
+    background: #8FB738
 }
 
 .ErrorBox span a,
@@ -391,8 +391,8 @@ span.ReadyForUpload {
 }
 
 div.DnDUpload:focus {
-    border-color: #000;
-    color: #000;
+    border-color:#000;
+    color:#000;
 }
 
 input.AjaxDnDUpload.Error + div.DnDUpload {
@@ -887,7 +887,7 @@ table.AttachmentList.DataTable thead th {
 
 .MessageBox p,
 .MessageBox a {
-    color: #442A0B;
+    color: #000;
 }
 
 .MessageBox a:hover {
@@ -994,7 +994,7 @@ form .MessageBox{
 }
 
 .Flag span.Escalated {
-    background-color:#ff505e;
+    background-color: #ff505e;
 }
 
 .Flag span.New {
@@ -1006,23 +1006,23 @@ form .MessageBox{
 }
 
 .Flag span.PriorityID-1 {
-    background-color:#03c4f0;
+    background-color: #03c4f0;
 }
 
 .Flag span.PriorityID-2 {
-    background-color:#83bfc8;
+    background-color: #83bfc8;
 }
 
 .Flag span.PriorityID-3 {
-    background-color:#cdcdcd;
+    background-color: #cdcdcd;
 }
 
 .Flag span.PriorityID-4 {
-    background-color:#ffaaaa;
+    background-color: #ffaaaa;
 }
 
 .Flag span.PriorityID-5 {
-    background-color:#ff505e;
+    background-color: #ff505e;
 }
 
 /**
@@ -1664,22 +1664,12 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     opacity: 0.95;
     filter: alpha(opacity = 95);
     box-shadow: 2px 2px 3px 0px rgba(50, 50, 50, 0.3);
-    -webkit-animation: fadeIn 0.7s;
-    animation: fadeIn 0.7s;
+    -webkit-animation: FadeIn 0.7s;
+    animation: FadeIn 0.7s;
 }
 
 .cke_notification_message a {
     color: #12306F;
-}
-
-@-webkit-keyframes fadeIn {
-    from { opacity: 0.4; }
-    to { opacity: 0.95; }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0.4; }
-    to { opacity: 0.95; }
 }
 
 .cke_notification_success {

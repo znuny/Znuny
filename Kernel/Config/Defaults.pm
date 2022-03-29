@@ -941,6 +941,7 @@ sub LoadDefaults {
 
     # Customer Common CSS
     $Self->{'Loader::Customer::CommonCSS'}->{'000-Framework'} = [
+        'Core.Color.css',
         'Core.Reset.css',
         'Core.Default.css',
         'Core.Form.css',
@@ -957,6 +958,7 @@ sub LoadDefaults {
 
     # Agent Common CSS
     $Self->{'Loader::Agent::CommonCSS'}->{'000-Framework'} = [
+        'Core.Color.css',
         'Core.Reset.css',
         'Core.Default.css',
         'Core.Header.css',

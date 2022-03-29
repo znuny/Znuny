@@ -8057,6 +8057,7 @@ via the Preferences button after logging in.
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Array>
+                <Item>Core.Color.css</Item>
                 <Item>Core.Reset.css</Item>
                 <Item>Core.Default.css</Item>
                 <Item>Core.Header.css</Item>
@@ -8167,6 +8168,7 @@ via the Preferences button after logging in.
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Array>
+                <Item>Core.Color.css</Item>
                 <Item>Core.Reset.css</Item>
                 <Item>Core.Default.css</Item>
                 <Item>Core.Form.css</Item>
