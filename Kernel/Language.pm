@@ -935,7 +935,13 @@ sub GetXMLTranslatableStrings {
     $Param{ModuleDirectory} ||= '';
 
     # add translatable strings from DB XML
-    my @XMLFiles = "$Self->{Home}/scripts/database/otrs-initial_insert.xml";
+    my @XMLFiles = $MainObject->DirectoryRead(
+        Directory => "Kernel/Config/Files/XML",
+        Recursive => 1,
+        Filter    => '*.xml',
+    );
+
+    push @XMLFiles, "scripts/database/otrs-initial_insert.xml";
 
     if ( $Param{ModuleDirectory} ) {
         @XMLFiles = $MainObject->DirectoryRead(
@@ -958,6 +964,7 @@ sub GetXMLTranslatableStrings {
         }
 
         $File =~ s{^.*/(scripts/)}{$1}smx;
+        $File =~ s{//}{/}g;
         if ( $Param{ModuleDirectory} ) {
             $File =~ s{^.*/(.+\.sopm)}{$1}smx;
         }
