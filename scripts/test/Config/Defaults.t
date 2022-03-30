@@ -56,7 +56,7 @@ my @ConfigFiles = $MainObject->DirectoryRead(
 
 for my $ConfigFile (@ConfigFiles) {
 
-    $ConfigFile =~ s{^${Home}/(.*/[^/]+.xml)$}{$1}xmsg;
+    $ConfigFile =~ s{^${Home}\/(.*/[^\/]+.xml)$}{$1}xmsg;
 
     if ( !grep { $_ =~ $ConfigFile } @{$ChecksumFileArrayRef} ) {
         $Self->False(
