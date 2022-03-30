@@ -1056,6 +1056,34 @@ my @SearchTest = (
         },
         ExpectedResult => [],
     },
+    {
+        Name => 'Search (succeeding) - (MultiselectInvokerGet) - UserType Agent',
+        Data => {
+            DynamicFieldConfig => $DynamicFieldConfigMultiselectInvokerGet,
+            SearchTerms        => 'Znuny3',
+            SearchType         => 'EQUALS',                                   # LIKE | EQUALS
+            SearchKeys         => [
+                'Name',
+                'Key',
+            ],
+            Attributes => [
+                'Key',
+                'Value',
+                'Name',
+                'ID',
+            ],
+            UserID   => 1,
+            UserType => 'Agent',
+        },
+        ExpectedResult => [
+            {
+                'Key'   => 'Znuny3',
+                'Value' => 'Znuny3',
+                'Name'  => '',
+                'ID'    => '',
+            },
+        ],
+    },
 );
 
 for my $Test (@SearchTest) {
@@ -1066,7 +1094,6 @@ for my $Test (@SearchTest) {
 
     my $Results = $DynamicFieldWebserviceObject->Search(
         %{ $Test->{Data} },
-
     );
     $Self->IsDeeply(
         $Results,
@@ -1760,5 +1787,33 @@ for my $Test (@Tests) {
         "$Test->{Name} - Template",
     );
 }
+
+# AdditionalRequestDataGet
+my %Data = $DynamicFieldWebserviceObject->AdditionalRequestDataGet(
+    UserID   => 1,
+    UserType => 'Agent',
+);
+
+$Self->Is(
+    $Data{UserLogin},
+    'root@localhost',
+    'AdditionalRequestDataGet - UserID 1',
+);
+
+my $RandomID     = $HelperObject->GetRandomNumber();
+my $CustomerUser = $HelperObject->TestCustomerUserCreate(
+    Language  => 'de',
+    UserLogin => $RandomID,
+);
+%Data = $DynamicFieldWebserviceObject->AdditionalRequestDataGet(
+    UserID   => $CustomerUser,
+    UserType => 'Customer',
+);
+
+$Self->Is(
+    $Data{UserLogin},
+    $RandomID,
+    "AdditionalRequestDataGet - UserID $RandomID",
+);
 
 1;

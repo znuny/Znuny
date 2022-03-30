@@ -96,12 +96,15 @@ sub Request {
         );
     }
 
+    $Param{Data} //= {};
+
     my $ResultData = $RequesterObject->Run(
         WebserviceID => $WebserviceData->{ID},
         Invoker      => $Param{Invoker},
         Data         => {
+            %{ $Param{Data} },
             SearchTerms => $Param{SearchTerms},
-            UserID      => $Param{UserID}
+            UserID      => $Param{UserID},
         },
     );
 

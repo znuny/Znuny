@@ -20,6 +20,7 @@ our @ObjectDependencies = (
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::Ticket',
+    'Kernel::System::Util',
 );
 
 use Kernel::System::VariableCheck qw(:all);
@@ -79,6 +80,7 @@ Tests given web-service configuration by connecting and querying the web-service
         DynamicFieldName => 'DFName1',      # optional
         FieldType        => 'WebserviceText',
         UserID           => 1,
+        UserType         => 'Agent',                                        # optional 'Agent' or 'Customer'
     );
 
 =cut
@@ -138,6 +140,7 @@ sub Test {
         SearchType         => 'LIKE',
         UserID             => $Param{UserID},
         Attributes         => \@Attributes,
+        UserType           => $Param{UserType},
     );
 
     if ( IsArrayRefWithData($Results) ) {
@@ -165,7 +168,9 @@ Retrieves data for auto-complete list of given dynamic field config.
 
     my $Results = $DynamicFieldWebserviceObject->Autocomplete(
         DynamicFieldConfig => {},
-        SearchTerms         => 'my search',
+        SearchTerms        => 'my search',
+        UserID             => 1,
+        UserType           => 'Agent',                # optional 'Agent' or 'Customer'
     );
 
     $Results is an (empty) array ref or undef on failure.
@@ -199,6 +204,7 @@ sub Autocomplete {
         SearchKeys         => $Param{SearchKeys},
         SearchType         => 'LIKE',
         UserID             => $Param{UserID},
+        UserType           => $Param{UserType},
     );
 
     return [] if !defined $Results;
@@ -229,6 +235,7 @@ Retrieves data for auto-fill list of given dynamic field config.
         DynamicFieldConfig => {},
         SearchTerms        => 'my search',
         UserID             => 1,
+        UserType           => 'Agent',                # optional 'Agent' or 'Customer'
     );
 
     $Results is an (empty) array ref or undef on failure.
@@ -266,6 +273,7 @@ sub AutoFill {
         SearchType         => 'EQUALS',
         Attributes         => \@Attributes,
         UserID             => $Param{UserID},
+        UserType           => $Param{UserType},
     );
 
     my %AutoFill;
@@ -346,7 +354,9 @@ Executes search in configured dynamic field web-service.
 sub Search {
     my ( $Self, %Param ) = @_;
 
-    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $UtilObject   = $Kernel::OM->Get('Kernel::System::Util');
 
     NEEDED:
     for my $Needed (qw(DynamicFieldConfig SearchTerms)) {
@@ -411,9 +421,54 @@ sub Search {
         InvokerType => 'InvokerGet',
     );
 
+    my %Data;
+    if ( $Param{UserType} ) {
+        my %AdditionalRequestData = $Self->AdditionalRequestDataGet(
+            UserID   => $Param{UserID},
+            UserType => $Param{UserType},
+        );
+        $Data{ $Param{UserType} } = \%AdditionalRequestData;
+    }
+
+    # Remove configured fields.
+    my $InvokerName   = $RequestData{Invoker};
+    my $OmittedFields = $ConfigObject->Get(
+        'GenericInterface::Invoker::Ticket::Generic::PrepareRequest::OmittedFields'
+    ) // {};
+
+    if (
+        defined $OmittedFields->{$InvokerName}
+        && length $OmittedFields->{$InvokerName}
+        )
+    {
+        my @HashKeys = split /\s*;\s*/, $OmittedFields->{$InvokerName};
+        $UtilObject->DataStructureRemoveElements(
+            Data     => \%Data,
+            HashKeys => \@HashKeys,
+        );
+    }
+
+    # Base-64 encode configured field values.
+    my $Base64EncodedFields = $ConfigObject->Get(
+        'GenericInterface::Invoker::Ticket::Generic::PrepareRequest::Base64EncodedFields'
+    ) // {};
+
+    if (
+        defined $Base64EncodedFields->{$InvokerName}
+        && length $Base64EncodedFields->{$InvokerName}
+        )
+    {
+        my @HashKeys = split /\s*;\s*/, $Base64EncodedFields->{$InvokerName};
+        $UtilObject->Base64DeepEncode(
+            Data     => \%Data,
+            HashKeys => \@HashKeys,
+        );
+    }
+
     my $Results = $BackendObject->Request(
         %{$BackendConfig},
         %RequestData,
+        Data => \%Data,
     );
 
     return $Results if !$Results;
@@ -437,7 +492,9 @@ sub Search {
             $SearchKeyValue{$Key} = $Result->{$Key};
         }
 
-        if ( $SearchType eq 'EQUALS' ) {
+        # if search keys 'SearchKeys' are stored in dynamic field config,
+        # use the additional filter with $SearchType
+        if ( $BackendConfig->{SearchKeys} && $SearchType eq 'EQUALS' ) {
             if ( IsArrayRefWithData( $Param{SearchTerms} ) ) {
                 my $FoundSearchTermInSearchKey;
 
@@ -456,7 +513,7 @@ sub Search {
                 next RESULT if !@FoundSearchTermInSearchKey;
             }
         }
-        elsif ( $SearchType eq 'LIKE' ) {
+        elsif ( $BackendConfig->{SearchKeys} && $SearchType eq 'LIKE' ) {
             if ( IsArrayRefWithData( $Param{SearchTerms} ) ) {
                 my $FoundSearchTermInSearchKey;
 
@@ -492,6 +549,112 @@ sub Search {
     }
 
     return \@Results;
+}
+
+=head2 AdditionalRequestDataGet()
+
+Returns additional data for request. Agent (User) or Customer (CustomerUser) data.
+
+    my %Data = $DynamicFieldWebserviceObject->AdditionalRequestDataGet(
+        UserID   => 123,
+        UserType => 'Agent',            # optional (Agent|Customer)
+    );
+
+Returns:
+
+    my %Data = $DynamicFieldWebserviceObject->AdditionalRequestDataGet(
+        UserID   => 123,
+        UserType => 'Agent',            # optional (Agent|Customer)
+    );
+
+    my %Data = (
+        'UserID'                       => 1,
+        'UserEmail'                    => 'root@localhost',
+        'UserFirstname'                => 'Admin',
+        'UserFullname'                 => 'Admin OTRS',
+        'UserLastLogin'                => '1629733655',
+        'UserLastname'                 => 'OTRS',
+        'UserLogin'                    => 'root@localhost',
+        [...]
+    );
+
+    # or
+
+    my %Data = $DynamicFieldWebserviceObject->AdditionalRequestDataGet(
+        UserID   => 123,
+        UserType => 'Customer',            # optional (Agent|Customer)
+    );
+
+    my %Data = (
+        'UserLogin'              => '9326500963200000',
+        'UserID'                 => '9326500963200000',
+        'UserFirstname'          => 'Firstname',
+        'UserLastname'           => 'Lastname',
+        'UserFullname'           => 'Firstname Lastname',
+        'UserEmail'              => 'znuny@localunittest.com',
+        'UserCustomerID'         => 'znuny',
+        'Source'                 => 'CustomerUser',
+        [...]
+    );
+
+=cut
+
+sub AdditionalRequestDataGet {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+
+    NEEDED:
+    for my $Needed (qw(UserID)) {
+
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    my %Data;
+    if ( $Param{UserType} ) {
+
+        my %BackendMap = (
+            Agent    => 'Kernel::System::User',
+            Customer => 'Kernel::System::CustomerUser',
+        );
+        my %FunctionMap = (
+            Agent    => 'GetUserData',
+            Customer => 'CustomerUserDataGet',
+        );
+        my %KeyMap = (
+            Agent    => 'UserID',
+            Customer => 'User',
+        );
+        return %Data if !$BackendMap{ $Param{UserType} };
+
+        my $UserBackendObject = $Kernel::OM->Get( $BackendMap{ $Param{UserType} } );
+        return %Data if !$UserBackendObject;
+
+        return %Data if !$FunctionMap{ $Param{UserType} };
+
+        my $Function = $FunctionMap{ $Param{UserType} };
+        return %Data if !$Function;
+
+        if ( $UserBackendObject->can($Function) ) {
+            %Data = $UserBackendObject->$Function(
+                $KeyMap{ $Param{UserType} } => $Param{UserID},
+            );
+        }
+
+        my $Data = $TicketObject->_TicketDeepGetDataCleanUp(
+            Data => \%Data,
+        );
+        %Data = %{$Data};
+    }
+
+    return %Data;
 }
 
 =head2 AdditionalDynamicFieldValuesStore()
@@ -569,6 +732,7 @@ sub AdditionalDynamicFieldValuesStore {
         SearchType         => 'EQUALS',
         UserID             => $Param{UserID},
         Attributes         => \@Attributes,
+        UserType           => $Param{UserType},
     );
 
     return 1 if !IsArrayRefWithData($Results);
@@ -687,6 +851,7 @@ sub DisplayValueGet {
         SearchTerms        => $Param{Value},
         SearchType         => 'EQUALS',
         UserID             => $Param{UserID} || 1,
+        UserType           => $Param{UserType},
     );
 
     return $DisplayValue if !IsArrayRefWithData($Results);
@@ -807,7 +972,7 @@ sub _DisplaySeparatorGet {
 =head2 Template()
 
 Returns the current value or values as string according to the desired template.
-This function is only needed for WebserviceMultiselect (multi select).
+This function is only needed for WebserviceMultiselect (multiselect).
 
     my $Value = $DynamicFieldWebserviceObject->Template(
         DynamicFieldConfig => \%DynamicFieldConfig,
@@ -915,7 +1080,7 @@ sub Template {
 =head2 TemplateTypeList()
 
 Returns a list of template types.
-This function is only needed for WebserviceMultiselect (multi select).
+This function is only needed for WebserviceMultiselect (multiselect).
 
     my %TemplateTypeList = $Object->TemplateTypeList();
 
