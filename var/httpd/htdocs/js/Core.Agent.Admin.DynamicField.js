@@ -99,8 +99,8 @@ Core.Agent.Admin.DynamicField = (function (TargetNS) {
             /*eslint-enable camelcase */
         });
         Core.Form.Validate.AddMethod("Validate_LinkReservedKeywordsInData", function (Value) {
-            // \[\%\s+Data\.(Link|LinkPreview|Title|Value)\s+\%\]
-            if (/\[\%\s+Data\.(Link|LinkPreview|Title|Value)\s+\%\]/.test(Value) === true) {
+            // \[%\s+Data\.(Link|LinkPreview|Title|Value)\s+%\]
+            if (/\[%\s+Data\.(Link|LinkPreview|Title|Value)\s+%\]/.test(Value) === true) {
                 return false;
             }
             return true;

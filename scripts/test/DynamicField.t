@@ -284,7 +284,8 @@ my @Tests = (
             Config => {
                 Name        => 'Test13',
                 Description => 'Description for Dynamic Field.',
-                Link        => 'https://www.znuny.org/[% Data.Link %]/[% Data.LinkPreview %]/[% Data.Title %]/[% Data.Value %]',
+                Link =>
+                    'https://www.znuny.org/[% Data.Link %]/[% Data.LinkPreview %]/[% Data.Title %]/[% Data.Value %]',
             },
             Label      => 'something for label',
             FieldOrder => 10000,
@@ -318,7 +319,7 @@ TEST:
 for my $Test (@Tests) {
 
     my $FieldName = $Test->{Name} . $RandomID;
-     $Test->{Expected} //=  $Test->{Data};
+    $Test->{Expected} //= $Test->{Data};
 
     # get nonexisting field first
     my $GetResult = $DynamicFieldObject->DynamicFieldGet(

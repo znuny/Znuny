@@ -1767,10 +1767,10 @@ sub _SanitizeConfig {
     }
 
     my @ReservedKeywords = (qw(Link LinkPreview Title Value));
-    if ($Param{Config}->{Link}){
-        for my $Keyword (@ReservedKeywords){
+    if ( $Param{Config}->{Link} ) {
+        for my $Keyword (@ReservedKeywords) {
             $Param{Config}->{Link} =~ s{\[\% Data\.$Keyword \%\]}{}g;
-        };
+        }
     }
 
     return 1;
