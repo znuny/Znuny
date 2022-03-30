@@ -15,7 +15,7 @@ use warnings;
 use parent qw(scripts::Migration::Base);
 
 our @ObjectDependencies = (
-    'Kernel::Config',
+    'Kernel::System::SysConfig',
 );
 
 =head1 SYNOPSIS
@@ -27,12 +27,15 @@ Migrates SysConfig settings.
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
+
+    # Todo: DEPRECATED. Don't use this function any more. Delete me and use:
+    # $SysConfigMigrationObject->MigrateSysConfigSettings()
 
     #
-    # Handle renamed SysConfig options.
+    # Handle renamed SysConfig.
     #
-    my %RenamedSysConfigOptions = (
+    my %MigrateSysConfig = (
 
         # Znuny(4OTRS)-DatabaseBackend
         'Znuny4OTRSDatabaseBackend###Export###DefaultFormat' => [
@@ -125,41 +128,31 @@ sub Run {
         ],
     );
 
-    ORIGINALSYSCONFIGOPTIONNAME:
-    for my $OriginalSysConfigOptionName ( sort keys %RenamedSysConfigOptions ) {
+    SYSCONFIG:
+    for my $SysConfigName ( sort keys %MigrateSysConfig ) {
 
-        # Fetch original SysConfig option value.
-        my ( $OriginalSysConfigOptionBaseName, @OriginalSysConfigOptionHashKeys ) = split '###',
-            $OriginalSysConfigOptionName;
+        my %Setting = $SysConfigObject->SettingGet(
+            Name    => $SysConfigName,
+            NoLog   => 1,
+            NoCache => 1,
+        );
 
-        my $OriginalSysConfigOptionValue = $ConfigObject->Get($OriginalSysConfigOptionBaseName);
-        next ORIGINALSYSCONFIGOPTIONNAME if !defined $OriginalSysConfigOptionValue;
+        next SYSCONFIG if !%Setting;
 
-        if (@OriginalSysConfigOptionHashKeys) {
-            for my $OriginalSysConfigOptionHashKey (@OriginalSysConfigOptionHashKeys) {
-                next ORIGINALSYSCONFIGOPTIONNAME if ref $OriginalSysConfigOptionValue ne 'HASH';
-                next ORIGINALSYSCONFIGOPTIONNAME
-                    if !exists $OriginalSysConfigOptionValue->{$OriginalSysConfigOptionHashKey};
+        my $NewSysConfigNames = $MigrateSysConfig{$SysConfigName};
+        for my $NewSysConfigName ( @{$NewSysConfigNames} ) {
 
-                $OriginalSysConfigOptionValue = $OriginalSysConfigOptionValue->{$OriginalSysConfigOptionHashKey};
-            }
-        }
-        next ORIGINALSYSCONFIGOPTIONNAME if !defined $OriginalSysConfigOptionValue;
-
-        my $NewSysConfigOptionNames = $RenamedSysConfigOptions{$OriginalSysConfigOptionName};
-        for my $NewSysConfigOptionName ( @{$NewSysConfigOptionNames} ) {
             my $SettingUpdated = $Self->SettingUpdate(
-                Name           => $NewSysConfigOptionName,
+                Name           => $NewSysConfigName,
                 IsValid        => 1,
-                EffectiveValue => $OriginalSysConfigOptionValue,
+                EffectiveValue => $Setting{EffectiveValue},
                 UserID         => 1,
             );
 
-            if ( !$SettingUpdated ) {
-                print
-                    "\n    Error: Unable to migrate value of SysConfig option $OriginalSysConfigOptionName to option $NewSysConfigOptionName\n\n";
-                next ORIGINALSYSCONFIGOPTIONNAME;
-            }
+            next SYSCONFIG if $SettingUpdated;
+
+            print "\n    Error: Unable to migrate value of SysConfig $SysConfigName to $NewSysConfigName\n\n";
+            next SYSCONFIG;
         }
     }
 

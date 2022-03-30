@@ -80,13 +80,17 @@ my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
                     'Subitems' => {
                         'Core::CustomerUser' => {
                             'Subitems' => {},
-                            'Count'    => 4,
+                            'Count'    => 2,
                         },
                         'Core::Ticket' => {
                             'Subitems' => {},
                             'Count'    => 3,
                         },
                     },
+                },
+                'Dev' => {
+                    'Count' => 6,
+                    'Subitems' => {}
                 },
                 'Frontend' => {
                     'Count'    => 0,
@@ -100,7 +104,7 @@ my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
                                 },
                                 'Frontend::Agent::ModuleRegistration' => {
                                     'Subitems' => {},
-                                    'Count'    => 2,
+                                    'Count'    => 1,
                                 },
                                 'Frontend::Agent::Ticket' => {
                                     'Count'    => 0,
@@ -143,7 +147,7 @@ my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
                 },
                 'Frontend::Agent::ModuleRegistration' => {
                     'Subitems' => {},
-                    'Count'    => 2,
+                    'Count'    => 1,
                 },
                 'Frontend::Agent::Ticket' => {
                     'Count'    => 0,
