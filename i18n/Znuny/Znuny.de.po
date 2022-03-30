@@ -45,9 +45,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-07-01 07:05+0000\n"
-"PO-Revision-Date: 2022-03-15 10:04+0000\n"
-"Last-Translator: Denny Korsukéwitz <dk@znuny.com>\n"
-"Language-Team: German <https://translations.znuny.org/projects/znuny/znuny/de/>\n"
+"PO-Revision-Date: 2022-03-29 15:01+0000\n"
+"Last-Translator: Daniel Sprenger <daniel.sprenger@tu-dresden.de>\n"
+"Language-Team: German <https://translations.znuny.org/projects/znuny/znuny/"
+"de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -11013,7 +11014,9 @@ msgstr "Verzeichnisliste"
 
 #. Perl Module: Kernel/Modules/AdminPackageManager.pm
 msgid "No packages found in selected repository. Please check log for more info!"
-msgstr "Keine Pakte im gewählten Verzeichnis gefunden. Bitte prüfen Sie das Systemprotokoll für mehr Informationen!"
+msgstr ""
+"Keine Pakete im gewählten Verzeichnis gefunden. Bitte prüfen Sie das "
+"Systemprotokoll für mehr Informationen!"
 
 #. Perl Module: Kernel/Modules/AdminPackageManager.pm
 msgid "Package not verified due a communication issue with verification server!"
@@ -20314,7 +20317,7 @@ msgstr "Wenn die Einstellung aktiv ist, werden lokale Änderungen nicht als Fehl
 
 #. SysConfig
 msgid "If you're going to be out of office, you may wish to let other users know by setting the exact dates of your absence."
-msgstr "Informiert andere Benutzer über den genauen Zeitraum ihrer Abwesenheit."
+msgstr "Informiert andere Benutzer über den genauen Zeitraum Ihrer Abwesenheit."
 
 #. SysConfig
 msgid "Ignore system sender article types (e. g. auto responses or email notifications) to be flagged as 'Unread Article' in AgentTicketZoom or expanded automatically in Large view screens."
@@ -21686,7 +21689,13 @@ msgstr "Beispielhafte Kommando-Ausgabe"
 
 #. SysConfig
 msgid "Saves the attachments of articles. \"DB\" stores all data in the database (not recommended for storing big attachments). \"FS\" stores the data on the filesystem; this is faster but the webserver should run under the OTRS user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when \"FS\" is used."
-msgstr "Speicherung von Artikel-Ahängen. \"DB\" legt alle Daten in der Datenbank ab (nicht empfohlen für große Anhänge). \"FS\" legt alle Daten im Dateisystem ab; dies ist schneller, jedoch sollte der Webserver mit dem OTRS-Benutzer betrieben werden. Sie können im laufenden Betrieb ohne Datenverlust zwischen den Modulen wechseln. Bitte beachten Sie, dass das Suchen nach Anhängen für \"FS\" nicht unterstützt wird."
+msgstr ""
+"Speicherung von Artikel-Anhängen. \"DB\" legt alle Daten in der Datenbank ab "
+"(nicht empfohlen für große Anhänge). \"FS\" legt alle Daten im Dateisystem "
+"ab; dies ist schneller, jedoch sollte der Webserver mit dem OTRS-Benutzer "
+"betrieben werden. Sie können im laufenden Betrieb ohne Datenverlust zwischen "
+"den Modulen wechseln. Bitte beachten Sie, dass das Suchen nach Anhängen für "
+"\"FS\" nicht unterstützt wird."
 
 #. SysConfig
 msgid "Schedule a maintenance period."
@@ -24214,7 +24223,7 @@ msgstr "Letzte Ansicht - Limit"
 
 #. SysConfig
 msgid "Last view - position"
-msgstr "Letzte Ansicht - Postition"
+msgstr "Letzte Ansicht - Position"
 
 #. SysConfig
 msgid "Last view - types"
@@ -24526,7 +24535,7 @@ msgstr "Kalenderwochen für Datumsauswahl aktivieren."
 
 #. SysConfig
 msgid "Customer User-Customer Relations"
-msgstr ""
+msgstr "Beziehungen zwischen Kundenbenutzern und Kunden"
 
 #. SysConfig
 msgid "Defines the default keys and values for the transition action module parameters. Mandatory fields are marked with \"(* required)\". Note: For most of the keys the AttributeID can also be used, e.g. \"Owner\" can be \"OwnerID\". Keys that define the same Attribute should only be used once, e.g. \"Owner\" and \"OwnerID\" are redundant."
@@ -24542,7 +24551,7 @@ msgstr "Anhänge in dynamischem Feld nach jeder Transition beibehalten."
 
 #. SysConfig
 msgid "Manage Customer User-Customer Relations."
-msgstr ""
+msgstr "Beziehungen zwischen Kundenbenutzern und Kunden verwalten."
 
 #. SysConfig
 msgid "Name of the dynamic field in which the attachment file IDs of the transition will be stored."
@@ -25051,4 +25060,3 @@ msgstr "Haben Sie gewusst, dass Sie bei der Übersetzung von Znuny unter %s helf
 #. Perl Module: Kernel/System/Calendar/Plugin/Ticket/Create.pm
 msgid "On the date"
 msgstr "Am Datum"
-
