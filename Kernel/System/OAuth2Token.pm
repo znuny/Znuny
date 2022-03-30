@@ -431,17 +431,20 @@ sub RequestTokenByAuthorizationCode {
 
     # Update/reset token record to reflect the current action of trying to retrieve a token by authorization code.
     my $TokenUpdated = $Self->DataUpdate(
-        $Self->{Identifier}        => $Token{ $Self->{Identifier} },
-        AuthorizationCode          => $Param{AuthorizationCode},
-        Token                      => undef,
-        TokenExpirationDate        => undef,
-        RefreshToken               => undef,
-        RefreshTokenExpirationDate => undef,
-        Error                      => undef,
-        ErrorDescription           => undef,
-        ErrorCode                  => undef,
-        ChangeBy                   => $Param{UserID},
-        UserID                     => $Param{UserID},
+        $Self->{Identifier} => $Token{ $Self->{Identifier} },
+        AuthorizationCode   => $Param{AuthorizationCode},
+        Error               => undef,
+        ErrorDescription    => undef,
+        ErrorCode           => undef,
+        ChangeBy            => $Param{UserID},
+        UserID              => $Param{UserID},
+
+        # Issue #226:
+        # Don't reset to undef because in case of an error the current token data should be kept.
+        #         Token                      => undef,
+        #         TokenExpirationDate        => undef,
+        #         RefreshToken               => undef,
+        #         RefreshTokenExpirationDate => undef,
     );
     if ( !$TokenUpdated ) {
         $LogObject->Log(
@@ -1497,6 +1500,11 @@ sub _AssembleResponseDataFromJSONString {
     for my $Parameter ( sort keys %{ $ResponseConfig->{ParametersMapping} } ) {
         my $Key = $ResponseConfig->{ParametersMapping}->{$Parameter};
         next PARAMETER if !defined $Key;
+
+        # Issue #226:
+        # Don't set missing values to undef.
+        # Ignore them instead so that existing token values will not get lost.
+        next PARAMETER if !exists $JSONData->{$Parameter};
 
         # Turn arrays and hashes into strings.
         if ( ref $JSONData->{$Parameter} eq 'ARRAY' ) {

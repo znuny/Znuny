@@ -1,5 +1,6 @@
 # 6.3.2 2022-xx-xx
  - 2022-03-23 Improved DynamicFieldObject _SanitizeConfig - ReservedKeywords will now be removed.
+ - 2022-03-22 Fixed accidental deletion of OAuth2 token values on request for new token.
  - 2022-03-17 Added PreRun function to Dev/Tools/TranslationsUpdate to check for symbolic links.
  - 2022-03-15 Added new SysConfig option LibXML::EnableHugeXMLDataSupport to enable support for huge XML data in load_xml calls of CPAN library XML::LibXML.
  - 2022-03-11 Removed 'send support bundle' to OTRS Group.
