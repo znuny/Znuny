@@ -1,4 +1,5 @@
 # 6.3.2 2022-xx-xx
+ - 2022-03-31 Fixed check of UntilTime in Kernel::System::Ticket::Event::TicketPendingTimeReset. [#221)(https://github.com/znuny/Znuny/issues/221)
  - 2022-03-23 Improved DynamicFieldObject _SanitizeConfig - ReservedKeywords will now be removed.
  - 2022-03-22 Fixed accidental deletion of OAuth2 token values on request for new token.
  - 2022-03-17 Added PreRun function to Dev/Tools/TranslationsUpdate to check for symbolic links.
