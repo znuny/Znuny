@@ -1447,37 +1447,6 @@ sub _JobRunTicket {
         );
     }
 
-    # cmd
-    my $AllowCustomScriptExecution
-        = $Kernel::OM->Get('Kernel::Config')->Get('Ticket::GenericAgentAllowCustomScriptExecution') || 0;
-
-    if ( $Param{Config}->{New}->{CMD} && $AllowCustomScriptExecution ) {
-        if ( $Self->{NoticeSTDOUT} ) {
-            print "  - Execute '$Param{Config}->{New}->{CMD}' for Ticket $Ticket.\n";
-        }
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'notice',
-            Message  => "Execute '$Param{Config}->{New}->{CMD}' for Ticket $Ticket.",
-        );
-        system("$Param{Config}->{New}->{CMD} $Param{TicketNumber} $Param{TicketID} ");
-
-        if ( $? ne 0 ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'notice',
-                Message  => "Command returned a nonzero return code: rc=$?, err=$!",
-            );
-        }
-    }
-    elsif ( $Param{Config}->{New}->{CMD} && !$AllowCustomScriptExecution ) {
-        if ( $Self->{NoticeSTDOUT} ) {
-            print "  - Execute '$Param{Config}->{New}->{CMD}' is not allowed by the system configuration..\n";
-        }
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => "Execute '$Param{Config}->{New}->{CMD}' is not allowed by the system configuration..",
-        );
-    }
-
     # delete ticket
     if ( $Param{Config}->{New}->{Delete} ) {
         if ( $Self->{NoticeSTDOUT} ) {

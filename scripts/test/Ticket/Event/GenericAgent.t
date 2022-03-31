@@ -89,7 +89,6 @@ my %NewJob  = (
         NewNoteSubject        => '',
         NewQueueID            => 3,
         NewNoteFrom           => '',
-        NewCMD                => '',
         NewParamKey1          => '',
         NewParamValue1        => '',
         NewParamKey2          => '',

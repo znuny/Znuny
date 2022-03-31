@@ -195,7 +195,6 @@ my %NewJob = (
         NewLockID                    => 2,
         DynamicField_TicketFreeKey2  => 'Test',
         DynamicField_TicketFreeText2 => 'Value 2',
-        NewCMD                       => '',
         NewParamKey1                 => '',
         NewParamValue1               => '',
         NewParamKey2                 => '',

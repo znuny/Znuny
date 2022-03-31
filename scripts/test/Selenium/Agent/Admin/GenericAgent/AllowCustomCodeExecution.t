@@ -42,12 +42,7 @@ $Selenium->RunTest(
 
         my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
 
-        # Allow custom script and module execution.
-        $Helper->ConfigSettingChange(
-            Valid => 1,
-            Key   => 'Ticket::GenericAgentAllowCustomScriptExecution',
-            Value => 1,
-        );
+        # Allow module execution.
         $Helper->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::GenericAgentAllowCustomModuleExecution',
@@ -72,53 +67,17 @@ $Selenium->RunTest(
         # Toggle widgets.
         $Selenium->execute_script('$(".WidgetSimple.Collapsed .WidgetAction.Toggle a").click();');
 
-        # Check that custom code elements.
-        $Self->True(
-            $Selenium->execute_script("return \$('#NewCMD').length === 1;"),
-            "CMD input found on page",
-        );
-        $Self->True(
-            $Selenium->execute_script("return \$('#NewModule').length === 1;"),
-            "CMD input found on page",
-        );
-
-        # Allow custom script and restrict module execution.
-        $Helper->ConfigSettingChange(
-            Valid => 1,
-            Key   => 'Ticket::GenericAgentAllowCustomScriptExecution',
-            Value => 0,
-        );
-        $Helper->ConfigSettingChange(
-            Valid => 1,
-            Key   => 'Ticket::GenericAgentAllowCustomModuleExecution',
-            Value => 1,
-        );
-
-        # Navigate to AdminGenericAgent screen.
-        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminGenericAgent");
-
-        # Check add job page.
-        $Selenium->find_element("//a[contains(\@href, \'Subaction=Update' )]")->VerifiedClick();
-
-        # Toggle widgets.
-        $Selenium->execute_script('$(".WidgetSimple.Collapsed .WidgetAction.Toggle a").click();');
-
-        # Check that custom code elements.
+        # Check custom code elements.
         $Self->False(
             $Selenium->execute_script("return \$('#NewCMD').length === 1;"),
             "CMD input NOT found on page",
         );
         $Self->True(
             $Selenium->execute_script("return \$('#NewModule').length === 1;"),
-            "CMD input NOT found on page",
+            "Custom module input found on page",
         );
 
-        # Restrict custom script and allow module execution.
-        $Helper->ConfigSettingChange(
-            Valid => 1,
-            Key   => 'Ticket::GenericAgentAllowCustomScriptExecution',
-            Value => 1,
-        );
+        # Restrict custom module execution.
         $Helper->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::GenericAgentAllowCustomModuleExecution',
@@ -134,47 +93,15 @@ $Selenium->RunTest(
         # Toggle widgets.
         $Selenium->execute_script('$(".WidgetSimple.Collapsed .WidgetAction.Toggle a").click();');
 
-        # Check that custom code elements.
-        $Self->True(
-            $Selenium->execute_script("return \$('#NewCMD').length === 1;"),
-            "CMD input NOT found on page",
-        );
-        $Self->False(
-            $Selenium->execute_script("return \$('#NewModule').length === 1;"),
-            "CMD input NOT found on page",
-        );
-
-        # Restrict custom script and module execution.
-        $Helper->ConfigSettingChange(
-            Valid => 1,
-            Key   => 'Ticket::GenericAgentAllowCustomScriptExecution',
-            Value => 0,
-        );
-        $Helper->ConfigSettingChange(
-            Valid => 1,
-            Key   => 'Ticket::GenericAgentAllowCustomModuleExecution',
-            Value => 0,
-        );
-
-        # Navigate to AdminGenericAgent screen.
-        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminGenericAgent");
-
-        # Check add job page.
-        $Selenium->find_element("//a[contains(\@href, \'Subaction=Update' )]")->VerifiedClick();
-
-        # Toggle widgets.
-        $Selenium->execute_script('$(".WidgetSimple.Collapsed .WidgetAction.Toggle a").click();');
-
-        # Check that custom code elements.
+        # Check custom code elements.
         $Self->False(
             $Selenium->execute_script("return \$('#NewCMD').length === 1;"),
             "CMD input NOT found on page",
         );
         $Self->False(
             $Selenium->execute_script("return \$('#NewModule').length === 1;"),
-            "CMD input NOT found on page",
+            "Custom module input found on page",
         );
-
     },
 );
 

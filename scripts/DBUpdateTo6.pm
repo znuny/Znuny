@@ -219,6 +219,10 @@ sub _TasksGet {
             Module  => 'DatabaseBackupCheck',
         },
         {
+            Message => 'Remove Generic Agent system commands',
+            Module  => 'RemoveGenericAgentSystemCommandCalls',
+        },
+        {
             Message => 'Upgrade database structure',
             Module  => 'UpgradeDatabaseStructure',
         },
