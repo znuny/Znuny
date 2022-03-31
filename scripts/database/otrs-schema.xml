@@ -1603,11 +1603,11 @@
     <Column Name="login" Required="true" Size="200" Type="VARCHAR"/>
     <Column Name="pw" Required="true" Size="200" Type="VARCHAR"/>
     <Column Name="host" Required="true" Size="200" Type="VARCHAR"/>
-    <Column Name="account_type" Required="true" Size="20" Type="VARCHAR" Default="password"/>
+    <Column Name="account_type" Required="true" Size="20" Type="VARCHAR"/>
     <Column Name="queue_id" Required="true" Type="INTEGER"/>
     <Column Name="trusted" Required="true" Type="SMALLINT"/>
     <Column Name="imap_folder" Required="false" Size="250" Type="VARCHAR"/>
-    <Column Name="authentication_type" Required="true" Size="100" Type="VARCHAR"/>
+    <Column Name="authentication_type" Required="true" Size="100" Type="VARCHAR" Default="password"/>
     <Column Name="oauth2_token_config_id" Required="false" Type="INTEGER"/>
     <Column Name="comments" Required="false" Size="250" Type="VARCHAR"/>
     <Column Name="valid_id" Required="true" Type="SMALLINT"/>
