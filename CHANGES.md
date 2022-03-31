@@ -1,4 +1,5 @@
 # 6.0.41 2022-xx-xx
+ - 2022-03-31 Fixed check of UntilTime in Kernel::System::Ticket::Event::TicketPendingTimeReset. [#221)(https://github.com/znuny/Znuny/issues/221)
  - 2022-03-14 Fixed sending notifications to invalid customer users.
 
 # 6.0.40 2022-03-09
