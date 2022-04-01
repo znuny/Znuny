@@ -86,10 +86,6 @@ sub Run {
     my $Data;
     if ( $Subaction eq 'Autocomplete' ) {
 
-        # workaround, all auto completion requests get posted by utf8 anyway
-        # convert any to 8 bit string if application is not running in utf8
-        $EncodeObject->EncodeOutput( \$SearchTerms );
-
         $Data = $Self->_Autocomplete(
             DynamicFieldName => $DynamicFieldName,
             SearchTerms      => $SearchTerms,
