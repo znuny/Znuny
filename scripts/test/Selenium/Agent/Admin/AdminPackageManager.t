@@ -39,12 +39,6 @@ $HelperObject->ConfigSettingChange(
     Value => 0,
 );
 
-$HelperObject->ConfigSettingChange(
-    Valid => 1,
-    Key   => 'Package::AllowNotVerifiedPackages',
-    Value => 0,
-);
-
 my $RandomID = $HelperObject->GetRandomID();
 
 # Override Request() from WebUserAgent to always return some test data without making any
@@ -207,13 +201,6 @@ $Selenium->RunTest(
                 'The installation of packages which are not verified by the OTRS Group is not possible by default.'
             ) > 0,
             'Message for aborting installation of package is displayed'
-        );
-
-        # Continue with package installation.
-        $HelperObject->ConfigSettingChange(
-            Valid => 1,
-            Key   => 'Package::AllowNotVerifiedPackages',
-            Value => 1,
         );
 
         # Allow web server to pick up the changed config setting.

@@ -32,8 +32,7 @@ my $FileString = $MainObject->FileRead(
 );
 my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
 my $Success       = $PackageObject->RepositoryAdd(
-    String    => ${$FileString},
-    FromCloud => 0,
+    String => ${$FileString},
 );
 $Self->True(
     $Success,

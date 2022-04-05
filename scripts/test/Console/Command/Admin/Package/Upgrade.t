@@ -24,12 +24,6 @@ $HelperObject->ConfigSettingChange(
     Value => 0,
 );
 
-$HelperObject->ConfigSettingChange(
-    Valid => 1,
-    Key   => 'Package::AllowNotVerifiedPackages',
-    Value => 0,
-);
-
 my $RandomID = $HelperObject->GetRandomID();
 
 # Override Request() from WebUserAgent to always return some test data without making any

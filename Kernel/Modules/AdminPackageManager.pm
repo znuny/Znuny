@@ -23,12 +23,8 @@ our $ObjectManagerDisabled = 1;
 sub new {
     my ( $Type, %Param ) = @_;
 
-    # allocate new hash for object
     my $Self = {%Param};
     bless( $Self, $Type );
-
-    # check if cloud services are disabled
-    $Self->{CloudServicesDisabled} = $Kernel::OM->Get('Kernel::Config')->Get('CloudServices::Disabled') || 0;
 
     return $Self;
 }
@@ -199,20 +195,6 @@ sub Run {
 
         # parse package
         my %Structure = $PackageObject->PackageParse( String => $Package );
-
-        # online verification
-        my $Verified = $PackageObject->PackageVerify(
-            Package   => $Package,
-            Structure => \%Structure,
-        ) || 'unknown';
-        my %VerifyInfo = $PackageObject->PackageVerifyInfo();
-
-        # translate description
-        if ( $LayoutObject->{LanguageObject} ) {
-            $VerifyInfo{Description} = $LayoutObject->{LanguageObject}->Translate(
-                $VerifyInfo{Description}
-            );
-        }
 
         # deploy check
         my $Deployed = $PackageObject->DeployCheck(
@@ -517,17 +499,6 @@ sub Run {
             );
         }
 
-        if ( $Verified ne 'verified' ) {
-
-            $Output .= $LayoutObject->Notify(
-                Priority => 'Error',
-                Data     => "$Name $Version - "
-                    . $LayoutObject->{LanguageObject}->Translate(
-                    "Package not verified by the OTRS Group! It is recommended not to use this package."
-                    ),
-            );
-        }
-
         $Output .= $LayoutObject->Output(
             TemplateFile => 'AdminPackageManager',
         );
@@ -553,11 +524,6 @@ sub Run {
             return $LayoutObject->ErrorScreen(
                 Message => Translatable('No such package!'),
             );
-        }
-        elsif ( substr( $Package, 0, length('ErrorMessage:') ) eq 'ErrorMessage:' ) {
-
-            # an error from the Package::CloudFileGet function
-            return $LayoutObject->ErrorScreen( Message => $Package );
         }
         my %Structure = $PackageObject->PackageParse( String => $Package );
 
@@ -1518,38 +1484,18 @@ sub Run {
     # ------------------------------------------------------------ #
     my %Frontend;
     my %NeedReinstall;
-    my %List;
     my $OutputNotify = '';
-    if ( $ConfigObject->Get('Package::RepositoryList') ) {
-        %List = %{ $ConfigObject->Get('Package::RepositoryList') };
-    }
-    my %RepositoryRoot;
-    if ( $ConfigObject->Get('Package::RepositoryRoot') ) {
-        %RepositoryRoot = $PackageObject->PackageOnlineRepositories();
-    }
 
-    # show cloud repo if system is registered
-    my $RepositoryCloudList;
-    my $RegistrationState = $Kernel::OM->Get('Kernel::System::SystemData')->SystemDataGet(
-        Key => 'Registration::State',
-    ) || '';
-    if ( $RegistrationState eq 'registered' && !$Self->{CloudServicesDisabled} ) {
-
-        $RepositoryCloudList =
-            $PackageObject->RepositoryCloudList( NoCache => 1 );
-    }
-
-    # In case Source is present on repository cloud list
-    #   the call for retrieving data about it, should be performed
-    #   using the CloudService backend.
-    my $FromCloud = ( $RepositoryCloudList->{$Source} ? 1 : 0 );
+    my %RepositoryList = $PackageObject->ConfiguredRepositoryListGet();
 
     # Get the list of the installed packages early to be able to show or not the Upgrade All button
     #   in the layout block.
     my @RepositoryList = $PackageObject->RepositoryList();
 
+    my %RepositoryListSelection = map { $_ => $_ } keys %RepositoryList;
+
     $Frontend{SourceList} = $LayoutObject->BuildSelection(
-        Data        => { %List, %RepositoryRoot, %{$RepositoryCloudList}, },
+        Data        => \%RepositoryListSelection,
         Name        => 'Source',
         Title       => Translatable('Repository List'),
         Max         => 40,
@@ -1567,10 +1513,9 @@ sub Run {
     );
     if ($Source) {
 
-        my @List = $PackageObject->PackageOnlineList(
-            URL       => $Source,
-            Lang      => $LayoutObject->{UserLanguage},
-            FromCloud => $FromCloud,
+        my @List = $PackageObject->RepositoryPackageListGet(
+            Source => $Source,
+            Lang   => $LayoutObject->{UserLanguage},
         );
         if ( !@List ) {
             $OutputNotify .= $LayoutObject->Notify(
@@ -1653,17 +1598,7 @@ sub Run {
         );
     }
 
-    # verify packages if we have some
-    my %VerificationData;
-    if (@RepositoryList) {
-        %VerificationData = $PackageObject->PackageVerifyAll();
-    }
-
-    my %NotVerifiedPackages;
-    my %UnknownVerficationPackages;
-
     for my $Package (@RepositoryList) {
-
         my %Data = $Self->_MessageGet( Info => $Package->{Description} );
 
         $LayoutObject->Block(
@@ -1677,17 +1612,6 @@ sub Run {
                 URL     => $Package->{URL}->{Content},
             },
         );
-
-        if (
-            $VerificationData{ $Package->{Name}->{Content} }
-            && $VerificationData{ $Package->{Name}->{Content} } eq 'verified'
-            && !$Self->{CloudServicesDisabled}
-            )
-        {
-            $LayoutObject->Block(
-                Name => 'ShowLocalPackageVerifyLogo',
-            );
-        }
 
         # show documentation link
         my %DocFile = $Self->_DocumentationGet( Filelist => $Package->{Filelist} );
@@ -1703,7 +1627,6 @@ sub Run {
         }
 
         if ( $Package->{Status} eq 'installed' ) {
-
             if (
                 !defined $Package->{PackageIsRemovable}
                 || (
@@ -1712,7 +1635,6 @@ sub Run {
                 )
                 )
             {
-
                 $LayoutObject->Block(
                     Name => 'ShowLocalPackageUninstall',
                     Data => {
@@ -1757,22 +1679,6 @@ sub Run {
                 },
             );
         }
-
-        if (
-            $VerificationData{ $Package->{Name}->{Content} }
-            && $VerificationData{ $Package->{Name}->{Content} } eq 'not_verified'
-            )
-        {
-            $NotVerifiedPackages{ $Package->{Name}->{Content} } = $Package->{Version}->{Content};
-        }
-        elsif (
-            $VerificationData{ $Package->{Name}->{Content} }
-            && $VerificationData{ $Package->{Name}->{Content} } eq 'unknown'
-            )
-        {
-            $UnknownVerficationPackages{ $Package->{Name}->{Content} } = $Package->{Version}->{Content};
-        }
-
     }
 
     # show file upload
@@ -1812,34 +1718,6 @@ sub Run {
                 );
             }
         }
-    }
-
-    # FeatureAddons
-    if ( $ConfigObject->Get('Package::ShowFeatureAddons') ) {
-
-        my $FeatureAddonData;
-        if ( !$Self->{CloudServicesDisabled} ) {
-            $FeatureAddonData = $Self->_GetFeatureAddonData();
-        }
-
-        if ( ref $FeatureAddonData eq 'ARRAY' && scalar @{$FeatureAddonData} > 0 ) {
-            $LayoutObject->Block(
-                Name => 'FeatureAddonList',
-            );
-
-            for my $Item ( @{$FeatureAddonData} ) {
-                $LayoutObject->Block(
-                    Name => 'FeatureAddonData',
-                    Data => $Item,
-                );
-            }
-        }
-    }
-
-    if ( $Self->{CloudServicesDisabled} ) {
-        $LayoutObject->Block(
-            Name => 'CloudServicesWarning',
-        );
     }
 
     # Check if OTRS Daemon is running in the background.
@@ -1894,39 +1772,6 @@ sub Run {
                 . ';Version='
                 . $NeedReinstall{$ReinstallKey},
         );
-    }
-
-    VERIFICATION:
-    for my $Package ( sort keys %NotVerifiedPackages ) {
-
-        next VERIFICATION if !$Package;
-        next VERIFICATION if !$NotVerifiedPackages{$Package};
-
-        $Output .= $LayoutObject->Notify(
-            Priority => 'Error',
-            Data     => "$Package $NotVerifiedPackages{$Package} - "
-                . $LayoutObject->{LanguageObject}->Translate(
-                "Package not verified by the OTRS Group! It is recommended not to use this package."
-                ),
-        );
-    }
-
-    if ( !$Self->{CloudServicesDisabled} ) {
-
-        VERIFICATION:
-        for my $Package ( sort keys %UnknownVerficationPackages ) {
-
-            next VERIFICATION if !$Package;
-            next VERIFICATION if !$UnknownVerficationPackages{$Package};
-
-            $Output .= $LayoutObject->Notify(
-                Priority => 'Error',
-                Data     => "$Package $UnknownVerficationPackages{$Package} - "
-                    . $LayoutObject->{LanguageObject}->Translate(
-                    "Package not verified due a communication issue with verification server!"
-                    ),
-            );
-        }
     }
 
     $Output .= $LayoutObject->Output(
@@ -2070,71 +1915,12 @@ sub _InstallHandling {
         return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
     }
 
-    my $IntroInstallPre    = $ParamObject->GetParam( Param => 'IntroInstallPre' )    || '';
-    my $IntroInstallVendor = $ParamObject->GetParam( Param => 'IntroInstallVendor' ) || '';
+    my $IntroInstallPre = $ParamObject->GetParam( Param => 'IntroInstallPre' ) // '';
 
     my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
 
     # parse package
     my %Structure = $PackageObject->PackageParse( String => $Param{Package} );
-
-    # online verification
-    my $Verified = $PackageObject->PackageVerify(
-        Package   => $Param{Package},
-        Structure => \%Structure,
-    ) || 'verified';
-    my %VerifyInfo = $PackageObject->PackageVerifyInfo();
-
-    # translate description
-    if ( $LayoutObject->{LanguageObject} ) {
-        $VerifyInfo{Description} = $LayoutObject->{LanguageObject}->Translate(
-            $VerifyInfo{Description},
-            $VerifyInfo{PackageInstallPossible} ? '' : $LayoutObject->{Baselink},
-        );
-    }
-
-    # vendor screen
-    if ( !$IntroInstallVendor && !$IntroInstallPre && $Verified ne 'verified' ) {
-
-        $LayoutObject->Block(
-            Name => 'Intro',
-            Data => {
-                %Param,
-                %VerifyInfo,
-                Subaction => $Self->{Subaction},
-                Type      => 'IntroInstallVendor',
-                Name      => $Structure{Name}->{Content},
-                Version   => $Structure{Version}->{Content},
-            },
-        );
-
-        if ( $VerifyInfo{PackageInstallPossible} ) {
-
-            $LayoutObject->Block(
-                Name => 'IntroForm',
-                Data => {
-                    %Param,
-                    %VerifyInfo,
-                    Subaction => $Self->{Subaction},
-                    Type      => 'IntroInstallVendor',
-                    Name      => $Structure{Name}->{Content},
-                    Version   => $Structure{Version}->{Content},
-                },
-            );
-
-            $LayoutObject->Block(
-                Name => 'IntroCancel',
-            );
-        }
-
-        my $Output = $LayoutObject->Header();
-        $Output .= $LayoutObject->NavigationBar();
-        $Output .= $LayoutObject->Output(
-            TemplateFile => 'AdminPackageManager',
-        );
-        $Output .= $LayoutObject->Footer();
-        return $Output;
-    }
 
     # intro screen
     my %Data;
@@ -2143,19 +1929,6 @@ sub _InstallHandling {
             Info => $Structure{IntroInstall},
             Type => 'pre'
         );
-    }
-
-    # get cloud repositories
-    my $RepositoryCloudList;
-    if ( !$Self->{CloudServicesDisabled} ) {
-        $RepositoryCloudList = $PackageObject->RepositoryCloudList();
-    }
-
-    # in case Source is present on repository cloud list
-    # the package should be retrieved using the CloudService backend
-    my $FromCloud = 0;
-    if ( $Param{Source} && $RepositoryCloudList->{ $Param{Source} } ) {
-        $FromCloud = 1;
     }
 
     my %Response = $PackageObject->AnalyzePackageFrameworkRequirements(
@@ -2204,12 +1977,6 @@ sub _InstallHandling {
             },
         );
 
-        if ( $Verified eq 'verified' && !$Self->{CloudServicesDisabled} ) {
-            $LayoutObject->Block(
-                Name => 'OTRSVerifyLogo',
-            );
-        }
-
         $LayoutObject->Block(
             Name => 'IntroForm',
             Data => {
@@ -2238,8 +2005,7 @@ sub _InstallHandling {
     # install package
     elsif (
         $PackageObject->PackageInstall(
-            String    => $Param{Package},
-            FromCloud => $FromCloud
+            String => $Param{Package},
         )
         )
     {
@@ -2276,12 +2042,6 @@ sub _InstallHandling {
                     Version   => $Structure{Version}->{Content},
                 },
             );
-
-            if ( $Verified eq 'verified' ) {
-                $LayoutObject->Block(
-                    Name => 'OTRSVerifyLogo',
-                );
-            }
 
             my $Output = $LayoutObject->Header();
             $Output .= $LayoutObject->NavigationBar();
