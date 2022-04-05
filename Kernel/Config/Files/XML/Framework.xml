@@ -2637,34 +2637,6 @@
             <Item ValueType="String" ValueRegex="">admin</Item>
         </Value>
     </Setting>
-    <Setting Name="MIME-Viewer###application/excel" Required="0" Valid="0">
-        <Description Translatable="1">Specifies the path to the converter that allows the view of Microsoft Excel files, in the web interface.</Description>
-        <Navigation>Frontend::Agent::MIMEViewer</Navigation>
-        <Value>
-            <Item ValueType="String" ValueRegex="">xlhtml</Item>
-        </Value>
-    </Setting>
-    <Setting Name="MIME-Viewer###application/msword" Required="0" Valid="0">
-        <Description Translatable="1">Specifies the path to the converter that allows the view of Microsoft Word files, in the web interface.</Description>
-        <Navigation>Frontend::Agent::MIMEViewer</Navigation>
-        <Value>
-            <Item ValueType="String" ValueRegex="">wvWare</Item>
-        </Value>
-    </Setting>
-    <Setting Name="MIME-Viewer###application/pdf" Required="0" Valid="0">
-        <Description Translatable="1">Specifies the path to the converter that allows the view of PDF documents, in the web interface.</Description>
-        <Navigation>Frontend::Agent::MIMEViewer</Navigation>
-        <Value>
-            <Item ValueType="String" ValueRegex="">pdftohtml -stdout -i</Item>
-        </Value>
-    </Setting>
-    <Setting Name="MIME-Viewer###text/xml" Required="0" Valid="0">
-        <Description Translatable="1">Specifies the path to the converter that allows the view of XML files, in the web interface.</Description>
-        <Navigation>Frontend::Agent::MIMEViewer</Navigation>
-        <Value>
-            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Home&gt;/scripts/tools/xml2html.pl</Item>
-        </Value>
-    </Setting>
     <Setting Name="WebUserAgent::Timeout" Required="1" Valid="1" ConfigLevel="200">
         <Description Translatable="1">Sets the timeout (in seconds) for http/ftp downloads.</Description>
         <Navigation>Core::WebUserAgent</Navigation>
