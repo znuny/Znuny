@@ -188,8 +188,10 @@ sub MigrateSysConfigSettings {
             );
 
             # AddEffectiveValue
-            if ( $Data{$SettingName}->{AddEffectiveValue}
-                && IsArrayRefWithData( $Data{$SettingName}->{AddEffectiveValue} ) )
+            if (
+                $Data{$SettingName}->{AddEffectiveValue}
+                && IsArrayRefWithData( $Data{$SettingName}->{AddEffectiveValue} )
+                )
             {
 
                 push @{$EffectiveValue}, @{ $Data{$SettingName}->{AddEffectiveValue} };
@@ -197,8 +199,10 @@ sub MigrateSysConfigSettings {
             }
 
             # UpdateEffectiveValue
-            if ( $Data{$SettingName}->{UpdateEffectiveValue}
-                && IsHashRefWithData( $Data{$SettingName}->{UpdateEffectiveValue} ) )
+            if (
+                $Data{$SettingName}->{UpdateEffectiveValue}
+                && IsHashRefWithData( $Data{$SettingName}->{UpdateEffectiveValue} )
+                )
             {
                 for my $Index ( 0 .. $#{$EffectiveValue} ) {
                     for my $OldValue ( sort keys %{ $Data{$SettingName}->{UpdateEffectiveValue} } ) {
@@ -211,8 +215,10 @@ sub MigrateSysConfigSettings {
             }
 
             # DeleteEffectiveValue
-            if ( $Data{$SettingName}->{DeleteEffectiveValue}
-                && IsArrayRefWithData( $Data{$SettingName}->{DeleteEffectiveValue} ) )
+            if (
+                $Data{$SettingName}->{DeleteEffectiveValue}
+                && IsArrayRefWithData( $Data{$SettingName}->{DeleteEffectiveValue} )
+                )
             {
 
                 for my $DeleteEffectiveValue ( @{ $Data{$SettingName}->{DeleteEffectiveValue} } ) {
@@ -244,8 +250,10 @@ sub MigrateSysConfigSettings {
             );
 
             # AddEffectiveValue
-            if ( $Data{$SettingName}->{AddEffectiveValue}
-                && IsHashRefWithData( $Data{$SettingName}->{AddEffectiveValue} ) )
+            if (
+                $Data{$SettingName}->{AddEffectiveValue}
+                && IsHashRefWithData( $Data{$SettingName}->{AddEffectiveValue} )
+                )
             {
                 %{ $NewSetting{EffectiveValue} } = (
                     %{$EffectiveValue},
@@ -254,8 +262,10 @@ sub MigrateSysConfigSettings {
             }
 
             # UpdateEffectiveValue
-            if ( $Data{$SettingName}->{UpdateEffectiveValue}
-                && IsHashRefWithData( $Data{$SettingName}->{UpdateEffectiveValue} ) )
+            if (
+                $Data{$SettingName}->{UpdateEffectiveValue}
+                && IsHashRefWithData( $Data{$SettingName}->{UpdateEffectiveValue} )
+                )
             {
 
                 for my $Item ( sort keys %{$EffectiveValue} ) {
@@ -274,8 +284,10 @@ sub MigrateSysConfigSettings {
             }
 
             # DeleteEffectiveValue
-            if ( $Data{$SettingName}->{DeleteEffectiveValue}
-                && IsArrayRefWithData( $Data{$SettingName}->{DeleteEffectiveValue} ) )
+            if (
+                $Data{$SettingName}->{DeleteEffectiveValue}
+                && IsArrayRefWithData( $Data{$SettingName}->{DeleteEffectiveValue} )
+                )
             {
                 DELETE:
                 for my $DeleteEffectiveValue ( @{ $Data{$SettingName}->{DeleteEffectiveValue} } ) {
@@ -296,8 +308,10 @@ sub MigrateSysConfigSettings {
             # AddEffectiveValue and DeleteEffectiveValue are not supported or needed for simple structures
 
             # UpdateEffectiveValue
-            if ( $Data{$SettingName}->{UpdateEffectiveValue}
-                && IsHashRefWithData( $Data{$SettingName}->{UpdateEffectiveValue} ) )
+            if (
+                $Data{$SettingName}->{UpdateEffectiveValue}
+                && IsHashRefWithData( $Data{$SettingName}->{UpdateEffectiveValue} )
+                )
             {
 
                 for my $OldValue ( sort keys %{ $Data{$SettingName}->{UpdateEffectiveValue} } ) {

@@ -89,7 +89,7 @@ my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
                     },
                 },
                 'Dev' => {
-                    'Count' => 6,
+                    'Count'    => 6,
                     'Subitems' => {}
                 },
                 'Frontend' => {

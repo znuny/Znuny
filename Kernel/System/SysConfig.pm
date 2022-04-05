@@ -2230,6 +2230,7 @@ sub ConfigurationTranslatableStrings {
     for my $Key ( sort keys %{ $Self->{ConfigurationTranslatableStrings} } ) {
         push @Strings, $Key;
     }
+
     return @Strings;
 }
 
@@ -5163,6 +5164,7 @@ sub _ConfigurationTranslatableStrings {
             {
                 return if !$Param{Data}->{Content};
                 return if $Param{Data}->{Content} =~ /^\d+$/;
+
                 $Self->{ConfigurationTranslatableStrings}->{ $Param{Data}->{Content} } = 1;
             }
             $Self->_ConfigurationTranslatableStrings( Data => $Param{Data}->{$Key} );
