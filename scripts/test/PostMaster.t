@@ -1377,49 +1377,6 @@ Some Content in Body
         },
         Type => 'Config',
     },
-
-    # Test cases are deactivated, because of problems with RHEL/CentOS7 with PostgreSQL
-    #     {
-    #         Name  => '#5 - X-Envelope-To Test with Kernel::System::PostMaster::Filter::CMD',
-    #         Email => 'From: Sender <sender@example.com>
-    # To: Some Name <recipient@example.com>
-    # X-Envelope-To: Some XEnvelopeTo Name <xenvelopeto@example.com>
-    # Subject: some subject
-
-    # Some Content in Body
-    # ',
-    #         Module => 'Kernel::System::PostMaster::Filter::CMD',
-    #         CMD => 'echo "SPAM"',
-    #         Set => [
-    #             {
-    #                 Key   => 'X-OTRS-Ignore',
-    #                 Value => 'yes',
-    #             }
-    #         ],
-    #         Check => {
-    #             ReturnCode => 5,
-    #         },
-    #         Type => 'Config',
-    #     },
-    #     {
-    #         Name  => '#5 - X-Envelope-To Test with old post format Kernel::System::PostMaster::Filter::CMD',
-    #         Email => 'From: Sender <sender@example.com>
-    # To: Some Name <recipient@example.com>
-    # X-Envelope-To: Some XEnvelopeTo Name <xenvelopeto@example.com>
-    # Subject: some subject
-
-    # Some Content in Body
-    # ',
-    #         Module => 'Kernel::System::PostMaster::Filter::CMD',
-    #         CMD => 'echo "SPAM"',
-    #         Set => {
-    #             'X-OTRS-Ignore' => 'yes',
-    #         },
-    #         Check => {
-    #             ReturnCode => 5,
-    #         },
-    #         Type => 'Config',
-    #     },
 );
 
 $Kernel::OM->ObjectsDiscard( Objects => ['Kernel::System::PostMaster::Filter'] );

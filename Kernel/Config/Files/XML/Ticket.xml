@@ -11451,51 +11451,6 @@ Thanks for your help!
 </Item>
         </Value>
     </Setting>
-    <Setting Name="PostMaster::PreFilterModule###4-CMD" Required="0" Valid="0">
-        <Description Translatable="1">CMD example setup. Ignores emails where external CMD returns some output on STDOUT (email will be piped into STDIN of some.bin).</Description>
-        <Navigation>Core::Email::PostMaster</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Module">Kernel::System::PostMaster::Filter::CMD</Item>
-                <Item Key="CMD">/usr/bin/some.bin</Item>
-                <Item Key="Set">
-                    <Hash>
-                        <Item Key="X-OTRS-Ignore">yes</Item>
-                    </Hash>
-                </Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="PostMaster::PreFilterModule###5-SpamAssassin" Required="0" Valid="0">
-        <Description Translatable="1">Spam Assassin example setup. Ignores emails that are marked with SpamAssassin.</Description>
-        <Navigation>Core::Email::PostMaster</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Module">Kernel::System::PostMaster::Filter::CMD</Item>
-                <Item Key="CMD">/usr/bin/spamassassin | grep -i "X-Spam-Status: yes"</Item>
-                <Item Key="Set">
-                    <Hash>
-                        <Item Key="X-OTRS-Ignore">yes</Item>
-                    </Hash>
-                </Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="PostMaster::PreFilterModule###6-SpamAssassin" Required="0" Valid="0">
-        <Description Translatable="1">Spam Assassin example setup. Moves marked mails to spam queue.</Description>
-        <Navigation>Core::Email::PostMaster</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Module">Kernel::System::PostMaster::Filter::CMD</Item>
-                <Item Key="CMD">/usr/bin/spamassassin | grep -i "X-Spam-Status: yes"</Item>
-                <Item Key="Set">
-                    <Hash>
-                        <Item Key="X-OTRS-Queue">spam</Item>
-                    </Hash>
-                </Item>
-            </Hash>
-        </Value>
-    </Setting>
     <Setting Name="PostMaster::PreFilterModule###000-MatchDBSource" Required="1" Valid="1">
         <Description Translatable="1">Module to use database filter storage.</Description>
         <Navigation>Core::Email::PostMaster</Navigation>

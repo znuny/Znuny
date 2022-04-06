@@ -217,6 +217,10 @@ sub _TasksGet {
             Module  => 'DatabaseBackupCheck',
         },
         {
+            Message => 'Migrate PostMaster pre-filters that execute system commands',
+            Module  => 'PostMasterPreFilterSystemCommandMigration',
+        },
+        {
             Message => 'Remove Generic Agent system commands',
             Module  => 'RemoveGenericAgentSystemCommandCalls',
         },
