@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.943270481144343;
+    $Self->{Completeness}        = 0.943233571893299;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5955,14 +5955,6 @@ sub Data {
             'Дозвољава администраторима да приступе као други клијенти, кроз административни панел клијента корисника.',
         'Specifies the group where the user needs rw permissions so that he can access the "SwitchToCustomer" feature.' =>
             'Одређује групу где су кориснику потребне rw дозволе како би могли приступити својству "SwitchToCustomer".',
-        'Specifies the path to the converter that allows the view of Microsoft Excel files, in the web interface.' =>
-            'Одређује путању конвертора који дозвољава преглед Microsoft Excel датотека у веб интерфејсу.',
-        'Specifies the path to the converter that allows the view of Microsoft Word files, in the web interface.' =>
-            'Одређује путању конвертора који дозвољава преглед Microsoft Word датотека у веб интерфејсу.',
-        'Specifies the path to the converter that allows the view of PDF documents, in the web interface.' =>
-            'Одређује путању конвертора који дозвољава преглед PDF докумената у веб интерфе',
-        'Specifies the path to the converter that allows the view of XML files, in the web interface.' =>
-            'Одређује путању конвертора који дозвољава преглед XML датотека у веб интерфе',
         'Sets the timeout (in seconds) for http/ftp downloads.' => 'Поставља временско одлагање (у секундама) за http/ftp преузимања.',
         'Defines the connections for http/ftp, via a proxy.' => 'Дефинише конекције за http/ftp преко посредника.',
         'Turns off SSL certificate validation, for example if you use a transparent HTTPS proxy. Use at your own risk!' =>

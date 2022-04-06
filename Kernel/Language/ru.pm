@@ -37,7 +37,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.881827048114434;
+    $Self->{Completeness}        = 0.881750162654522;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5967,14 +5967,6 @@ sub Data {
             'Дает возможность администратору войти в систему как клиенту, через панель управления учетными записями клиентов.',
         'Specifies the group where the user needs rw permissions so that he can access the "SwitchToCustomer" feature.' =>
             'Задает группу с rw правами для агента, члены которой могут использовать возможность "SwitchToCustomer" (войти как клиент).',
-        'Specifies the path to the converter that allows the view of Microsoft Excel files, in the web interface.' =>
-            'Задает путь к модулю конвертера, позволяющему просматривать файлы Microsoft Excel в веб-интерфейсе.',
-        'Specifies the path to the converter that allows the view of Microsoft Word files, in the web interface.' =>
-            'Задает путь к модулю конвертера, позволяющему просматривать файлы Microsoft Word в веб-интерфейсе.',
-        'Specifies the path to the converter that allows the view of PDF documents, in the web interface.' =>
-            'Задает путь к модулю конвертера, позволяющему просматривать файлы PDF в веб-интерфейсе.',
-        'Specifies the path to the converter that allows the view of XML files, in the web interface.' =>
-            'Задает путь к модулю конвертера, позволяющему просматривать файлы XML в веб-интерфейсе.',
         'Sets the timeout (in seconds) for http/ftp downloads.' => 'Задает timeout (в сек) для http/ftp downloads.',
         'Defines the connections for http/ftp, via a proxy.' => 'Задает параметры для соединения для http/ftp, через proxy.',
         'Turns off SSL certificate validation, for example if you use a transparent HTTPS proxy. Use at your own risk!' =>

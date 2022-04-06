@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.94684655396619;
+    $Self->{Completeness}        = 0.946811971372804;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -5962,14 +5962,6 @@ sub Data {
             '允许系统管理员作为其他客户登录（通过客户用户管理面板）。',
         'Specifies the group where the user needs rw permissions so that he can access the "SwitchToCustomer" feature.' =>
             '指定组名，以便组中有rw（读写）权限的用户能够访问“切换到客户”功能。',
-        'Specifies the path to the converter that allows the view of Microsoft Excel files, in the web interface.' =>
-            '指定在WEB界面查看微软Excel文件的转换器路径。',
-        'Specifies the path to the converter that allows the view of Microsoft Word files, in the web interface.' =>
-            '指定在WEB界面查看微软Word文件的转换器路径。',
-        'Specifies the path to the converter that allows the view of PDF documents, in the web interface.' =>
-            '指定在WEB界面查看PDF文档的转换器路径。',
-        'Specifies the path to the converter that allows the view of XML files, in the web interface.' =>
-            '指定在WEB界面查看XML文件的转换器路径。',
         'Sets the timeout (in seconds) for http/ftp downloads.' => '设置http/ftp下载的超时时间（单位：秒）。',
         'Defines the connections for http/ftp, via a proxy.' => '定义通过代理到HTTP/FTP的连接。',
         'Turns off SSL certificate validation, for example if you use a transparent HTTPS proxy. Use at your own risk!' =>

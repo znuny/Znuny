@@ -34,7 +34,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.397431729518856;
+    $Self->{Completeness}        = 0.397039687703318;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5964,14 +5964,6 @@ sub Data {
             '',
         'Specifies the group where the user needs rw permissions so that he can access the "SwitchToCustomer" feature.' =>
             '',
-        'Specifies the path to the converter that allows the view of Microsoft Excel files, in the web interface.' =>
-            'Spesifiserer stien til konverteringsprogrammet som tillater visning av Microsoft Excel-filer i webvisningen',
-        'Specifies the path to the converter that allows the view of Microsoft Word files, in the web interface.' =>
-            'Spesifiserer stien til konverteringsprogrammet som tillater visning av Microsoft Word-filer i webvisningen',
-        'Specifies the path to the converter that allows the view of PDF documents, in the web interface.' =>
-            'Spesifiserer stien til konverteringsprogrammet som tillater visning av PDF-filer i webvisningen',
-        'Specifies the path to the converter that allows the view of XML files, in the web interface.' =>
-            'Spesifiserer stien til konverteringsprogrammet som tillater visning av XML-filer',
         'Sets the timeout (in seconds) for http/ftp downloads.' => '',
         'Defines the connections for http/ftp, via a proxy.' => 'Spesifiserer proxy-oppsett for http/ftp',
         'Turns off SSL certificate validation, for example if you use a transparent HTTPS proxy. Use at your own risk!' =>

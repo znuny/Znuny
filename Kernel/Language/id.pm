@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.642717815344603;
+    $Self->{Completeness}        = 0.642485361093038;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -5957,14 +5957,6 @@ bin/otrs.Daemon.pl status\').',
             'Memungkinkan administrator untuk login sebagai pelanggan lain, melalui panel administrasi pengguna pelanggan.',
         'Specifies the group where the user needs rw permissions so that he can access the "SwitchToCustomer" feature.' =>
             'Menentukan kelompok mana kebutuhan pengguna izin rw sehingga ia dapat mengakses "Beralih Pelanggan" fitur.',
-        'Specifies the path to the converter that allows the view of Microsoft Excel files, in the web interface.' =>
-            'Menentukan path ke converter yang memungkinkan tampilan file Microsoft Excel, di antarmuka web.',
-        'Specifies the path to the converter that allows the view of Microsoft Word files, in the web interface.' =>
-            'Menentukan path ke converter yang memungkinkan tampilan file Microsoft Word, di antarmuka web.',
-        'Specifies the path to the converter that allows the view of PDF documents, in the web interface.' =>
-            'Menentukan path ke converter yang memungkinkan tampilan dokumen PDF, di antarmuka web.',
-        'Specifies the path to the converter that allows the view of XML files, in the web interface.' =>
-            'Menentukan path ke converter yang memungkinkan tampilan file XML, di antarmuka web.',
         'Sets the timeout (in seconds) for http/ftp downloads.' => 'Menetapkan batas waktu (dalam detik) untuk download http / ftp.',
         'Defines the connections for http/ftp, via a proxy.' => 'Mendefinisikan koneksi untuk http / ftp, melalui proxy.',
         'Turns off SSL certificate validation, for example if you use a transparent HTTPS proxy. Use at your own risk!' =>

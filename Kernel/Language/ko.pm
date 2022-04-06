@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.917912873862159;
+    $Self->{Completeness}        = 0.917859466493169;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -5955,14 +5955,6 @@ sub Data {
             '관리자가 고객 사용자 관리 패널을 통해 다른 고객으로 로그인 할 수 있습니다.',
         'Specifies the group where the user needs rw permissions so that he can access the "SwitchToCustomer" feature.' =>
             '"SwitchToCustomer"기능에 액세스 할 수 있도록 사용자에게 rw 권한이 필요한 그룹을 지정합니다.',
-        'Specifies the path to the converter that allows the view of Microsoft Excel files, in the web interface.' =>
-            '웹 인터페이스에서 Microsoft Excel 파일보기를 허용하는 변환기의 경로를 지정합니다.',
-        'Specifies the path to the converter that allows the view of Microsoft Word files, in the web interface.' =>
-            '웹 인터페이스에서 Microsoft Word 파일보기를 허용하는 변환기의 경로를 지정합니다.',
-        'Specifies the path to the converter that allows the view of PDF documents, in the web interface.' =>
-            '웹 인터페이스에서 PDF 문서의보기를 허용하는 변환기의 경로를 지정합니다.',
-        'Specifies the path to the converter that allows the view of XML files, in the web interface.' =>
-            '웹 인터페이스에서 XML 파일보기를 허용하는 변환기의 경로를 지정합니다.',
         'Sets the timeout (in seconds) for http/ftp downloads.' => 'http / ftp 다운로드에 대한 시간 초과 (초)를 설정합니다.',
         'Defines the connections for http/ftp, via a proxy.' => '프록시를 통해 http / ftp에 대한 연결을 정의합니다.',
         'Turns off SSL certificate validation, for example if you use a transparent HTTPS proxy. Use at your own risk!' =>
