@@ -399,6 +399,9 @@ sub Run {
                         if ( $Hash->{Format} && $Hash->{Format} =~ /plain/i ) {
                             $Hash->{Content} = '<pre class="contentbody">' . $Hash->{Content} . '</pre>';
                         }
+
+                        $Hash->{Content} = $Self->_GetSafeString( String => $Hash->{Content} );
+
                         $LayoutObject->Block(
                             Name => "PackageItemIntro",
                             Data => {
@@ -699,6 +702,9 @@ sub Run {
                         if ( $Hash->{Format} && $Hash->{Format} =~ /plain/i ) {
                             $Hash->{Content} = '<pre class="contentbody">' . $Hash->{Content} . '</pre>';
                         }
+
+                        $Hash->{Content} = $Self->_GetSafeString( String => $Hash->{Content} );
+
                         $LayoutObject->Block(
                             Name => "PackageItemIntro",
                             Data => {
@@ -1976,6 +1982,10 @@ sub _MessageGet {
         }
     }
     return if !$Description && !$Title;
+
+    $Description = $Self->_GetSafeString( String => $Description );
+    $Title       = $Self->_GetSafeString( String => $Title );
+
     return (
         Description => $Description,
         Title       => $Title,
@@ -2530,6 +2540,26 @@ sub _GetFeatureAddonData {
     );
 
     return $FAOFeed;
+}
+
+sub _GetSafeString {
+    my ( $Self, %Param ) = @_;
+
+    my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
+
+    my %SafeString = $HTMLUtilsObject->Safety(
+        String       => $Param{String} // '',
+        NoApplet     => 1,
+        NoObject     => 1,
+        NoEmbed      => 1,
+        NoSVG        => 1,
+        NoImg        => 1,
+        NoIntSrcLoad => 0,
+        NoExtSrcLoad => 1,
+        NoJavaScript => 1,
+    );
+
+    return $SafeString{String};
 }
 
 1;
