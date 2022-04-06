@@ -28,6 +28,7 @@ our @ObjectDependencies = (
     'Kernel::System::Ticket::Article',
     'Kernel::System::DateTime',
     'Kernel::System::User',
+    'Kernel::System::HTMLUtils',
 );
 
 =head1 NAME
