@@ -16,9 +16,7 @@ use Time::HiRes ();
 use Kernel::System::VariableCheck qw(IsHashRefWithData);
 
 our @ObjectDependencies = (
-    'Kernel::System::Cache',
     'Kernel::System::Main',
-    'Kernel::System::SysConfig',
 );
 
 =head1 NAME
@@ -221,6 +219,10 @@ sub _TasksGet {
         {
             Message => 'Remove Generic Agent system commands',
             Module  => 'RemoveGenericAgentSystemCommandCalls',
+        },
+        {
+            Message => 'Migrate dashboard widgets that execute system commands',
+            Module  => 'DashboardWidgetSystemCommandMigration',
         },
         {
             Message => 'Upgrade database structure',
