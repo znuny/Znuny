@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.723016905071521;
+    $Self->{Completeness}        = 0.722836694860117;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5962,14 +5962,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '管理者は、顧客ユーザ管理パネルを経由して、他の顧客としてログインすることができます。',
         'Specifies the group where the user needs rw permissions so that he can access the "SwitchToCustomer" feature.' =>
             '「SwitchToCustomer」機能にアクセスできるように、ユーザーがRW権限を必要とするグループを指定します。',
-        'Specifies the path to the converter that allows the view of Microsoft Excel files, in the web interface.' =>
-            'ウェブ・インタフェースにて、Microsoft Excelファイルを見られるようにするコンバータへのパスを特定します。',
-        'Specifies the path to the converter that allows the view of Microsoft Word files, in the web interface.' =>
-            'ウェブ・インタフェースにて、Microsoft Wordファイルを見られるようにするコンバータへのパスを特定します。',
-        'Specifies the path to the converter that allows the view of PDF documents, in the web interface.' =>
-            'ウェブ・インタフェースにて、PDFドキュメントを見られるようにするコンバータへのパスを特定します。',
-        'Specifies the path to the converter that allows the view of XML files, in the web interface.' =>
-            'ウェブ・インタフェースにて、XMLファイルを見られるようにするコンバータへのパスを特定します。',
         'Sets the timeout (in seconds) for http/ftp downloads.' => 'http/ftp downloadsのためのタイムアウト（秒）を設定します。',
         'Defines the connections for http/ftp, via a proxy.' => 'プロキシ経由で、http/ftpのための接続を定義します。',
         'Turns off SSL certificate validation, for example if you use a transparent HTTPS proxy. Use at your own risk!' =>

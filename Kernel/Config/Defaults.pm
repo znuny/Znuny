@@ -909,15 +909,15 @@ sub LoadDefaults {
     # --------------------------------------------------- #
     # MIME-Viewer for online to html converter
     # --------------------------------------------------- #
-    # (e. g. xlhtml (xls2html), http://chicago.sourceforge.net/xlhtml/)
-#    $Self->{'MIME-Viewer'}->{'application/excel'} = 'xlhtml';
+    # (e.g. xlhtml (xls2html), http://chicago.sourceforge.net/xlhtml/)
+#     $Self->{'MIME-Viewer'}->{'application/excel'} = 'xlhtml';
     # MIME-Viewer for online to html converter
-    # (e. g. wv (word2html), http://wvware.sourceforge.net/)
-#    $Self->{'MIME-Viewer'}->{'application/msword'} = 'wvWare';
-    # (e. g. pdftohtml (pdf2html), http://pdftohtml.sourceforge.net/)
-#    $Self->{'MIME-Viewer'}->{'application/pdf'} = 'pdftohtml -stdout -i';
-    # (e. g. xml2html (xml2html))
-#    $Self->{'MIME-Viewer'}->{'text/xml'} = $Self->{Home}.'/scripts/tools/xml2html.pl';
+    # (e.g. wv (word2html), http://wvware.sourceforge.net/)
+#     $Self->{'MIME-Viewer'}->{'application/msword'} = 'wvWare';
+    # (e.g. pdftohtml (pdf2html), http://pdftohtml.sourceforge.net/)
+#     $Self->{'MIME-Viewer'}->{'application/pdf'} = 'pdftohtml -stdout -i';
+    # (e.g. xml2html (xml2html))
+#     $Self->{'MIME-Viewer'}->{'text/xml'} = $Self->{Home}.'/scripts/tools/xml2html.pl';
 
     # --------------------------------------------------- #
     # directories                                         #

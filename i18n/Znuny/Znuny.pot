@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-04-05 11:15+0000\n"
+"POT-Creation-Date: 2022-04-06 09:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16292,22 +16292,6 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Specifies the group where the user needs rw permissions so that he can access the \"SwitchToCustomer\" feature."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Specifies the path to the converter that allows the view of Microsoft Excel files, in the web interface."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Specifies the path to the converter that allows the view of Microsoft Word files, in the web interface."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Specifies the path to the converter that allows the view of PDF documents, in the web interface."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Specifies the path to the converter that allows the view of XML files, in the web interface."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml

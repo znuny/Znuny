@@ -34,7 +34,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.641417425227568;
+    $Self->{Completeness}        = 0.641184124918673;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -5968,14 +5968,6 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
             'Permette agli amministratori di effettuare la login come altri clienti attraverso il pannello di amministrazione clienti.',
         'Specifies the group where the user needs rw permissions so that he can access the "SwitchToCustomer" feature.' =>
             '',
-        'Specifies the path to the converter that allows the view of Microsoft Excel files, in the web interface.' =>
-            'Specifica il percorso al convertitore che consente di visualizzare i file di Microsoft Excel, nell\'interfaccia web.',
-        'Specifies the path to the converter that allows the view of Microsoft Word files, in the web interface.' =>
-            'Specifica il percorso al convertitore che consente di visualizzare i file di Microsoft Word, nell\'interfaccia web.',
-        'Specifies the path to the converter that allows the view of PDF documents, in the web interface.' =>
-            'Specifica il percorso al convertitore che consente di visualizzare i documenti PDF, nell\'interfaccia web.',
-        'Specifies the path to the converter that allows the view of XML files, in the web interface.' =>
-            'Specifica il percorso al convertitore che consente di visualizzare i file XML, nell\'interfaccia web.',
         'Sets the timeout (in seconds) for http/ftp downloads.' => '',
         'Defines the connections for http/ftp, via a proxy.' => 'Definisce le connessioni per http/ftp, tramite un proxy.',
         'Turns off SSL certificate validation, for example if you use a transparent HTTPS proxy. Use at your own risk!' =>
