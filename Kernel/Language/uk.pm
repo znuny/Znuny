@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.49813748730105;
+    $Self->{Completeness}        = 0.499914515301761;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -213,7 +213,6 @@ sub Data {
         'This is the default value for assigned recipient agents who didn\'t make a choice for this notification in their preferences yet. If the box is enabled, the notification will be sent to such agents.' =>
             'Це типове значення для призначених агентів-одержувачів, які ще не зробили вибір для цього сповіщення в їх налаштуваннях. Якщо прапорець увімкнений, сповіщення буде відправлено для таких агентів.',
         'This feature is currently not available.' => 'Ця функція наразі недоступна.',
-        'Upgrade to %s' => 'Оновити до %s',
         'Please activate this transport in order to use it.' => '',
         'No data found' => 'Даних не знайдено',
         'No notification method found.' => 'Жодного метода сповіщення не знайдено.',
@@ -504,18 +503,6 @@ sub Data {
         'Add new field for object' => 'Додати нове полк для обєкту',
         'Filter for Dynamic Fields' => '',
         'Filter for dynamic fields' => '',
-        'More Business Fields' => '',
-        'Would you like to benefit from additional dynamic field types for businesses? Upgrade to %s to get access to the following field types:' =>
-            '',
-        'Database' => 'База даних',
-        'Use external databases as configurable data sources for this dynamic field.' =>
-            '',
-        'Web service' => '',
-        'External web services can be configured as data sources for this dynamic field.' =>
-            '',
-        'Contact with data' => '',
-        'This feature allows to add (multiple) contacts with data to tickets.' =>
-            '',
         'To add a new field, select the field type from one of the object\'s list, the object defines the boundary of the field and it can\'t be changed after the field creation.' =>
             'Для того, щоб додати нове поле, виберіть тип поля з наступного переліку об\'єктів, об\'єкт визначає зв\'язки поля та не може бути змінений після його створення.',
         'Dynamic Fields List' => 'Список динамічних полів',
@@ -738,9 +725,6 @@ sub Data {
         'Time units' => 'Одиниці часу',
         'Execute Ticket Commands' => 'Виконати команди заявки',
         'Send agent/customer notifications on changes' => 'Відправляти повідомлення агентові при змінах',
-        'CMD' => 'Команда',
-        'This command will be executed. ARG[0] will be the ticket number. ARG[1] the ticket id.' =>
-            'Ця команда буде виконана. ARG[0] — номер заявки. ARG[1] — id заявки.',
         'Delete tickets' => 'Вилучити заявки',
         'Warning: All affected tickets will be removed from the database and cannot be restored!' =>
             'Попередження: Усі обрані заявки будуть вилучені з бази даних без можливості відновлення!',
@@ -1152,13 +1136,7 @@ sub Data {
         'Delete web service' => 'Вилучити веб-службу',
         'Do you really want to delete this web service?' => 'Ви насправді хочете вилучити цю веб-службу?',
         'Ready2Adopt Web Services' => '',
-        'Here you can activate Ready2Adopt web services showcasing our best practices that are a part of %s.' =>
-            '',
-        'Please note that these web services may depend on other modules only available with certain %s contract levels (there will be a notification with further details when importing).' =>
-            'Зверніть увагу, що ці веб-служби можуть залежати від інших модулів, доступних тільки з певним %s рівнем контракту (буде повідомлення з більш докладними поясненнями при імпорті).',
         'Import Ready2Adopt web service' => '',
-        'Would you like to benefit from web services created by experts? Upgrade to %s to import some sophisticated Ready2Adopt web services.' =>
-            '',
         'After you save the configuration you will be redirected again to the edit screen.' =>
             'Після збереження конфігурації вас буде перенаправлено знову до екрану редагування.',
         'If you want to return to overview please click the "Go to overview" button.' =>
@@ -1335,6 +1313,7 @@ sub Data {
             'Вітаємо, ваш %s встановлено правильно та має актуальну версію!',
 
         # Template: AdminOTRSBusinessNotInstalled
+        'Upgrade to %s' => 'Оновити до %s',
         'Go to the OTRS customer portal' => 'Перейти до порталу клієнтів OTRS',
         '%s will be available soon. Please check again in a few days.' =>
             '%s незабаром буде доступний. Будь ласка, перевірте ще раз через кілька днів.',
@@ -1349,12 +1328,12 @@ sub Data {
         'Please visit our customer portal and file a request.' => 'Будь ласка, відвідайте наш портал клієнта та подайте заявку.',
         'Everything else will be done as part of your contract.' => 'Все інше буде зроблено в рамках угоди.',
         'Your installed OTRS version is %s.' => 'Версія вашого встановленого OTRS %s.',
-        'To install this package, you need to update to Znuny %s or higher.' =>
-            'Щоб встановити цей пакунок, вам необхідно оновитись до Znuny %s або вище.',
+        'To install this package, you need to update to OTRS %s or higher.' =>
+            '',
         'To install this package, the Maximum OTRS Version is %s.' => 'Максимальна версія OTRS для встановлення цього пакунку, це %s.',
         'To install this package, the required Framework version is %s.' =>
             'Щоб встановити цей пакунок, необхідний Фреймворк версії %s.',
-        'Why should I keep Znuny up to date?' => 'Чому я маю тримати Znuny в актуальному стані?',
+        'Why should I keep OTRS up to date?' => '',
         'You will receive updates about relevant security issues.' => 'Ви будете отримувати нову інформацію з відповідних питань безпеки.',
         'You will receive updates for all other relevant OTRS issues' => 'Ви будете отримувати оновлення для всіх інших відповідних питань OTRS',
         'With your existing contract you can only use a small part of the %s.' =>
@@ -1411,11 +1390,11 @@ sub Data {
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Ви дійсно хочете перевстановити цей пакунок? Аби-які ручні зміни буде втрачено!',
         'Go to updating instructions' => '',
+        'Go to znuny.org' => '',
         'package information' => 'інформація про пакет',
-        'Package installation requires a patch level update of Znuny.' => 'Установка пакунку потребує оновлення рівня виправлень Znuny.',
-        'Package update requires a patch level update of Znuny.' => 'Оновлення пакунку потребує оновлення рівня оновлень Znuny.',
-        'If you are a OTRS Business Solution™ customer, please visit our customer portal and file a request.' =>
-            'Якщо ви є клієнтом OTRS Business Solution™, будь ласка, відвідайте наш портал клієнтів та подайте заявку.',
+        'Package installation requires a patch level update of Znuny.' =>
+            'Установка пакунку потребує оновлення рівня виправлень OTRS.',
+        'Package update requires a patch level update of Znuny.' => 'Оновлення пакунку потребує оновлення рівня оновлень OTRS.',
         'Please note that your installed Znuny version is %s.' => 'Зверніть увагу, що версія встановленого Znuny %s.',
         'To install this package, you need to update Znuny to version %s or newer.' =>
             'Щоб встановити цей пакунок, ви маєте оновити Znuny до версії %s або новіше.',
@@ -1423,6 +1402,7 @@ sub Data {
             'Цей пакунок можна встановити на Znuny версії %s або старше.',
         'This package can only be installed on Znuny version %s or newer.' =>
             'Цей пакунок можна встановити на Znuny версії %s або новіше.',
+        'Why should I keep Znuny up to date?' => 'Чому я маю тримати Znuny в актуальному стані?',
         'You will receive updates for all other relevant Znuny issues.' =>
             'Ви будете отримувати оновлення для всіх інших питань стосовно Znuny.',
         'How can I do a patch level update if I don’t have a contract?' =>
@@ -1451,9 +1431,6 @@ sub Data {
         'Package not correctly deployed! Please reinstall the package.' =>
             'Пакет розгорнуто некоректно! Будь ласка, перевстановіть пакет.',
         'Reinstall' => 'Переустановити',
-        'Features for %s customers only' => 'Функція тільки для клієнтів %s',
-        'With %s, you can benefit from the following optional features. Please make contact with %s if you need more information.' =>
-            'З %s ви можете скористатися наступними додатковими функціями. Будь ласка зв\'яжіться із %s, якщо вам потрібна додаткова інформація.',
         'Package Information' => '',
         'Download package' => 'Скачати пакет',
         'Rebuild package' => 'Перезібрати пакет',
@@ -1547,8 +1524,6 @@ sub Data {
         'Import process configuration' => 'Імпортувати конфігурацію процесу',
         'Ready2Adopt Processes' => '',
         'Here you can activate Ready2Adopt processes showcasing our best practices. Please note that some additional configuration may be required.' =>
-            '',
-        'Would you like to benefit from processes created by experts? Upgrade to %s to import some sophisticated Ready2Adopt processes.' =>
             '',
         'Import Ready2Adopt process' => '',
         'To create a new Process you can either import a Process that was exported from another system or create a complete new one.' =>
@@ -1819,6 +1794,7 @@ sub Data {
         'Attribute' => 'Атрибут',
         'FQDN' => 'FQDN',
         'OTRS Version' => 'Версій OTRS',
+        'Database' => 'База даних',
         'Operating System' => 'Операційна Система',
         'Perl Version' => 'Версія Perl',
         'Optional description of this system.' => 'Додатковий опис цієї системи.',
@@ -2474,7 +2450,7 @@ sub Data {
         'This setting can currently not be saved.' => '',
         'This setting can currently not be saved' => '',
         'Save this setting' => '',
-        'Did you know? You can help translating OTRS at %s.' => 'Ви можете допомогти перекласти OTRD в %s.',
+        'Did you know? You can help translating Znuny at %s.' => '',
 
         # Template: SettingsList
         'Reset to default' => '',
@@ -2845,8 +2821,7 @@ sub Data {
         'Traceback' => 'Відстеження',
 
         # Template: CustomerFooter
-        '%s powered by %s™' => '',
-        'Powered by %s™' => '',
+        'Powered by %s' => '',
 
         # Template: CustomerFooterJS
         '%s detected possible network issues. You could either try reloading this page manually or wait until your browser has re-established the connection on its own.' =>
@@ -2941,12 +2916,6 @@ sub Data {
         'Ticket fields' => 'Поля квитка',
 
         # Template: Error
-        'Really a bug? 5 out of 10 bug reports result from a wrong or incomplete installation of OTRS.' =>
-            'Справді помилка? 5 з 10 повідомлень про помилку пов\'язани з неправильним або неповним встановленням OTRS.',
-        'With %s, our experts take care of correct installation and cover your back with support and periodic security updates.' =>
-            'З %s, наші фахівці дбають про правильне встановлення та прикривають вас підтримкою та періодичними оновленнями безпеки.',
-        'Contact our service team now.' => 'Негайно зверніться до нашої сервісної служби.',
-        'Send a bugreport' => 'Відправити повідомлення про помилку',
         'Expand' => 'Розгорнути',
 
         # Template: AttachmentList
@@ -2967,7 +2936,6 @@ sub Data {
         # Template: Header
         'View notifications' => '',
         'Notifications' => '',
-        'Notifications (OTRS Business Solution™)' => '',
         'Personal preferences' => '',
         'Logout' => 'Вийти',
         'You are logged in as' => 'Ви ввійшли як',
@@ -2980,15 +2948,9 @@ sub Data {
         'General Specifications and Mail Settings' => 'Загальні характеристики та налаштування пошти',
         'Finish' => 'Закінчити',
         'Welcome to %s' => 'Ласкаво просимо до %s',
-        'Germany' => '',
         'Phone' => 'Телефон',
-        'United States' => '',
-        'Mexico' => '',
-        'Hungary' => '',
-        'Brazil' => '',
-        'Singapore' => '',
-        'Hong Kong' => '',
         'Web site' => 'Веб-сторінка',
+        'Community' => '',
 
         # Template: InstallerConfigureMail
         'Configure Outbound Mail' => 'Налаштування Вихідної пошти',
@@ -3054,7 +3016,6 @@ sub Data {
         'Restart your webserver' => ' Запустите знову ваш веб-сервер',
         'After doing so your OTRS is up and running.' => 'Після цих дій система вже запущена.',
         'Start page' => 'Головна сторінка',
-        'Your OTRS Team' => 'Команда розроблювачів OTRS',
 
         # Template: InstallerLicense
         'Don\'t accept license' => 'Не ухвалюю умови ліцензії',
@@ -3285,10 +3246,6 @@ sub Data {
         # Template: Navigation
         'Navigation' => '',
 
-        # Template: OTRSBusinessTeaser
-        'With %s, System Configuration supports versioning, rollback and user-specific configuration settings.' =>
-            '',
-
         # Template: Test
         'OTRS Test Page' => 'Тестова сторінка OTRS',
         'Unlock' => 'Розблокувати',
@@ -3514,9 +3471,6 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminDynamicField.pm
         'Fields configuration is not valid' => 'Неправильне налаштування полів',
         'Objects configuration is not valid' => 'Неправильне налаштування об\'єктів',
-        'Database (%s)' => '',
-        'Web service (%s)' => '',
-        'Contact with data (%s)' => '',
         'Could not reset Dynamic Field order properly, please check the error log for more details.' =>
             'Не можу правильно скинути  порядок Динамічного Поля, будь ласка перевірте журнал помилок для отримання більш докладної інформації.',
 
@@ -4362,7 +4316,6 @@ sub Data {
         'Show one article' => 'Відобразити одну заявку',
         'Show all articles' => 'Відобразити всі заявки',
         'Show Ticket Timeline View' => 'Показати Вид Лінії Часу Квитка',
-        'Show Ticket Timeline View (%s)' => '',
 
         # Perl Module: Kernel/Modules/AjaxAttachment.pm
         'Got no FormID.' => '',
@@ -4635,7 +4588,6 @@ sub Data {
         'Enable cloud services to unleash all OTRS features!' => 'Ввімкніть хмарні сервіси щоб розкрити усі можливості OTRS!',
 
         # Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
-        '%s Upgrade to %s now! %s' => '%s Оновіться до %s зараз! %s',
         'Please verify your license data!' => '',
         'The license for your %s is about to expire. Please make contact with %s to renew your contract!' =>
             'Ліцензія для Вашого %s скоро закінчиться. Будь ласка, зв\'яжіться з %s, щоб поновити свій контракт!',
@@ -4666,10 +4618,6 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Notification/OutofOfficeCheck.pm
         'You have Out of Office enabled, would you like to disable it?' =>
             'У Вас ввімкнено «Не при справах», хочете вимкнути?',
-
-        # Perl Module: Kernel/Output/HTML/Notification/PackageManagerCheckNotVerifiedPackages.pm
-        'The installation of packages which are not verified by the OTRS Group is activated. These packages could threaten your whole system! It is recommended not to use unverified packages.' =>
-            '',
 
         # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationInvalidCheck.pm
         'You have %s invalid setting(s) deployed. Click here to show invalid settings.' =>
@@ -4869,10 +4817,6 @@ sub Data {
         'File is not installed!' => 'Файл не встановлено!',
         'File is different!' => 'Файл інакший!',
         'Can\'t read file!' => 'Не можу прочитати файла!',
-        '<p>If you continue to install this package, the following issues may occur:</p><ul><li>Security problems</li><li>Stability problems</li><li>Performance problems</li></ul><p>Please note that issues that are caused by working with this package are not covered by OTRS service contracts.</p>' =>
-            '',
-        '<p>The installation of packages which are not verified by the OTRS Group is not possible by default. You can activate the installation of not verified packages via the "AllowNotVerifiedPackages" system configuration setting.</p>' =>
-            '',
 
         # Perl Module: Kernel/System/ProcessManagement/DB/Process.pm
         'The process "%s" and all of its data has been imported successfully.' =>
@@ -5011,11 +4955,6 @@ sub Data {
         'Maximum Query Size' => 'Максимальний розмір вибірки',
         'The setting \'max_allowed_packet\' must be higher than 64 MB.' =>
             '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Performance.pm
-        'Query Cache Size' => 'Розмір кешу запиту',
-        'The setting \'query_cache_size\' should be used (higher than 10 MB but not more than 512 MB).' =>
-            'Параметр \'query_cache_size\' повинен використовуватися (вище 10 МБ, але не більше 512 МБ).',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/StorageEngine.pm
         'Default Storage Engine' => 'Типове знаряддя зберігання даних',
@@ -6011,7 +5950,6 @@ Thanks for your help!
         'Agents ↔ Groups' => '',
         'Agents ↔ Roles' => '',
         'All CustomerIDs of a customer user.' => '',
-        'All attachments (OTRS Business Solution™)' => '',
         'All customer users of a CustomerID' => '',
         'All escalated tickets' => 'Усі заявки з загостренням',
         'All new tickets, these tickets have not been worked on yet' => 'Усі відкриті заявки, над цими заявками ще не працювали',
@@ -6061,8 +5999,6 @@ Thanks for your help!
         'Allows extended search conditions in ticket search of the customer interface. With this feature you can search e. g. ticket title with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".' =>
             '',
         'Allows extended search conditions in ticket search of the generic agent interface. With this feature you can search e. g. ticket title with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".' =>
-            '',
-        'Allows generic agent to execute custom command line scripts.' =>
             '',
         'Allows generic agent to execute custom modules.' => '',
         'Allows having a medium format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
@@ -6141,8 +6077,6 @@ Thanks for your help!
         'Bounced to "%s".' => 'Повернуте «%s».',
         'Bulgarian' => '',
         'Bulk Action' => 'Масова дія',
-        'CMD example setup. Ignores emails where external CMD returns some output on STDOUT (email will be piped into STDIN of some.bin).' =>
-            '',
         'CSV Separator' => 'Роздільник CSV',
         'Cache time in seconds for agent authentication in the GenericInterface.' =>
             '',
@@ -6895,8 +6829,6 @@ Thanks for your help!
             '',
         'Defines the module to display a notification in the agent interface, if the agent session limit prior warning is reached.' =>
             '',
-        'Defines the module to display a notification in the agent interface, if the installation of not verified packages is activated (only shown to admins).' =>
-            '',
         'Defines the module to display a notification in the agent interface, if the system is used by the admin user (normally you shouldn\'t work as admin).' =>
             '',
         'Defines the module to display a notification in the agent interface, if there are invalid sysconfig settings deployed.' =>
@@ -6963,8 +6895,6 @@ Thanks for your help!
         'Defines the number of hours a successful communication will be stored.' =>
             '',
         'Defines the parameters for the customer preferences table.' => '',
-        'Defines the parameters for the dashboard backend. "Cmd" is used to specify command with parameters. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
-            '',
         'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
         'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" defines the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
@@ -7482,8 +7412,6 @@ Thanks for your help!
             '',
         'If "Radius" was selected for Customer::AuthModule, you can specify if the applications will stop if e. g. a connection to a server can\'t be established due to network problems.' =>
             '',
-        'If "Sendmail" was selected as SendmailModule, the location of the sendmail binary and the needed options must be specified.' =>
-            '',
         'If "SysLog" was selected for LogModule, a special log facility can be specified.' =>
             '',
         'If "SysLog" was selected for LogModule, the charset that should be used for logging can be specified.' =>
@@ -7548,6 +7476,7 @@ Thanks for your help!
             '',
         'Ignore system sender article types (e. g. auto responses or email notifications) to be flagged as \'Unread Article\' in AgentTicketZoom or expanded automatically in Large view screens.' =>
             '',
+        'Ignores not ticket related attributes.' => '',
         'Import appointments screen.' => 'Імпортувати еркан подій',
         'Include tickets of subqueues per default when selecting a queue.' =>
             '',
@@ -7767,8 +7696,8 @@ Thanks for your help!
         'New Year\'s Day' => 'Новий рік',
         'New Year\'s Eve' => 'Переддень Нового року',
         'New process ticket' => '',
+        'News' => '',
         'News about OTRS releases!' => 'Новини про релізи OTRS!',
-        'News about OTRS.' => '',
         'Next possible ticket states after adding a phone note in the ticket phone inbound screen of the agent interface.' =>
             '',
         'Next possible ticket states after adding a phone note in the ticket phone outbound screen of the agent interface.' =>
@@ -7789,7 +7718,6 @@ Thanks for your help!
         'Number of tickets to be displayed in each page of a search result in the customer interface.' =>
             '',
         'OTRS Group Services' => '',
-        'OTRS News' => 'Новини OTRS',
         'OTRS can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>
             '',
         'OTRS doesn\'t support recurring Appointments without end date or number of iterations. During import process, it might happen that ICS file contains such Appointments. Instead, system creates all Appointments in the past, plus Appointments for the next N months (120 months/10 years by default).' =>
@@ -7957,7 +7885,6 @@ Thanks for your help!
         'Replaces the original sender with current customer\'s email address on compose answer in the ticket compose screen of the agent interface.' =>
             '',
         'Reports' => '',
-        'Reports (OTRS Business Solution™)' => '',
         'Reprocess mails from spool directory that could not be imported in the first place.' =>
             '',
         'Required permissions to change the customer of a ticket in the agent interface.' =>
@@ -7996,7 +7923,6 @@ Thanks for your help!
         'Resent email to "%s".' => '',
         'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
             '',
-        'Resource Overview (OTRS Business Solution™)' => 'Перегляд ресурів (OTRS Business Solution™)',
         'Responsible Tickets' => '',
         'Responsible Tickets.' => '',
         'Restores a ticket from the archive (only if the event is a state change to any open available state).' =>
@@ -8020,7 +7946,6 @@ Thanks for your help!
         'SMS' => '',
         'SMS (Short Message Service)' => '',
         'Salutations' => 'Привітання',
-        'Sample command output' => '',
         'Saves the attachments of articles. "DB" stores all data in the database (not recommended for storing big attachments). "FS" stores the data on the filesystem; this is faster but the webserver should run under the OTRS user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when "FS" is used.' =>
             '',
         'Schedule a maintenance period.' => '',
@@ -8302,7 +8227,6 @@ Thanks for your help!
             '',
         'Show article as rich text even if rich text writing is disabled.' =>
             '',
-        'Show command line output.' => '',
         'Show queues even when only locked tickets are in.' => '',
         'Show the current owner in the customer interface.' => '',
         'Show the current queue in the customer interface.' => '',
@@ -8407,12 +8331,8 @@ Thanks for your help!
             '',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             '',
-        'Shows a teaser link in the menu for the ticket attachment view of OTRS Business Solution™.' =>
-            '',
         'Shows all both ro and rw queues in the queue view.' => '',
         'Shows all both ro and rw tickets in the service view.' => '',
-        'Shows all open tickets (even if they are locked) in the escalation view of the agent interface.' =>
-            '',
         'Shows all the articles of the ticket (expanded) in the agent zoom view.' =>
             '',
         'Shows all the articles of the ticket (expanded) in the customer zoom view.' =>
@@ -8426,6 +8346,8 @@ Thanks for your help!
         'Shows customer history tickets in AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer.' =>
             '',
         'Shows either the last customer article\'s subject or the ticket title in the small format overview.' =>
+            '',
+        'Shows existing parent/child (separated by ::) process lists in the form of a tree or a list.' =>
             '',
         'Shows existing parent/child queue lists in the system in the form of a tree or a list.' =>
             '',
@@ -8499,10 +8421,6 @@ Thanks for your help!
         'Sorts the tickets (ascendingly or descendingly) when a single queue is selected in the service view and after the tickets are sorted by priority. Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top). Use the ServiceID for the key and 0 or 1 for value.' =>
             '',
         'Spam' => '',
-        'Spam Assassin example setup. Ignores emails that are marked with SpamAssassin.' =>
-            '',
-        'Spam Assassin example setup. Moves marked mails to spam queue.' =>
-            '',
         'Spanish' => '',
         'Spanish (Colombia)' => '',
         'Spanish (Mexico)' => '',
@@ -8530,14 +8448,6 @@ Thanks for your help!
         'Specifies the path of the file for the logo in the page header (gif|jpg|png, 700 x 100 pixel).' =>
             '',
         'Specifies the path of the file for the performance log.' => '',
-        'Specifies the path to the converter that allows the view of Microsoft Excel files, in the web interface.' =>
-            '',
-        'Specifies the path to the converter that allows the view of Microsoft Word files, in the web interface.' =>
-            '',
-        'Specifies the path to the converter that allows the view of PDF documents, in the web interface.' =>
-            '',
-        'Specifies the path to the converter that allows the view of XML files, in the web interface.' =>
-            '',
         'Specifies the text that should appear in the log file to denote a CGI script entry.' =>
             '',
         'Specifies user id of the postmaster data base.' => '',
@@ -8565,7 +8475,6 @@ Thanks for your help!
             '',
         'Stat#' => 'Звіт №',
         'States' => 'Стани',
-        'Statistic Reports overview.' => '',
         'Statistics overview.' => '',
         'Status view' => 'Перегляд статусу',
         'Stopped response time escalation.' => '',
@@ -8765,7 +8674,6 @@ Thanks for your help!
         'Uses richtext for viewing and editing: articles, salutations, signatures, standard templates, auto responses and notifications.' =>
             '',
         'Vietnam' => '',
-        'View all attachments of the current ticket' => '',
         'View performance benchmark results.' => 'Перегляд результатів виміру продуктивності.',
         'Watch this ticket' => '',
         'Watched Tickets' => 'Спостережувані заявки',
@@ -8798,6 +8706,7 @@ Thanks for your help!
             '',
         'Your service selection of your preferred services. You also get notified about those services via email if enabled.' =>
             '',
+        'Znuny.org - News' => '',
         'Zoom' => 'Докладно',
         'attachment' => '',
         'bounce' => '',

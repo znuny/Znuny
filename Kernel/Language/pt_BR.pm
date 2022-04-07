@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.938367761598375;
+    $Self->{Completeness}        = 0.937254231492563;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -217,7 +217,6 @@ sub Data {
         'This is the default value for assigned recipient agents who didn\'t make a choice for this notification in their preferences yet. If the box is enabled, the notification will be sent to such agents.' =>
             'Esse é o valor padrão atribuído para agentes destinatários que ainda não fizeram uma escolha para essa notificação em suas preferências. Se a caixa estiver habilitada, a notificação será enviada para esses agentes.',
         'This feature is currently not available.' => 'Este recurso não está disponível no momento.',
-        'Upgrade to %s' => 'Atualize para %s',
         'Please activate this transport in order to use it.' => 'Por favor ative este transporte para usá-lo.',
         'No data found' => 'Dados não encontrado',
         'No notification method found.' => 'Método de notificação não existente',
@@ -508,18 +507,6 @@ sub Data {
         'Add new field for object' => 'Adicionar novo campo ao objeto',
         'Filter for Dynamic Fields' => 'Filtro para Campos Dinâmicos',
         'Filter for dynamic fields' => 'Filtro para campos dinâmicos',
-        'More Business Fields' => 'Mais campos de negócio',
-        'Would you like to benefit from additional dynamic field types for businesses? Upgrade to %s to get access to the following field types:' =>
-            'Você gostaria de ter o benefício de campos dinâmicos adicionais para negócios? Atualize para %s e tenha acesso aos seguintes tipos de campos:',
-        'Database' => 'Banco de Dados',
-        'Use external databases as configurable data sources for this dynamic field.' =>
-            'Utilize bancos de dados externos como fontes de dado configuráveis para este campo dinâmico.',
-        'Web service' => 'Serviço Web',
-        'External web services can be configured as data sources for this dynamic field.' =>
-            'Web services externos podem ser configurados como fonte de dados para este campo dinâmico.',
-        'Contact with data' => 'Contato com dados',
-        'This feature allows to add (multiple) contacts with data to tickets.' =>
-            'Este recurso permite adicionar (multiplos) contatos com dados para chamados.',
         'To add a new field, select the field type from one of the object\'s list, the object defines the boundary of the field and it can\'t be changed after the field creation.' =>
             'Para adicionar um novo campo, selecione o tipo de campo em uma das listas de objetos. O objeto define o domínio do campo e não pode ser alterado após a criação.',
         'Dynamic Fields List' => 'Lista de Campos Dinâmicos',
@@ -742,9 +729,6 @@ sub Data {
         'Time units' => 'Unidades de tempo',
         'Execute Ticket Commands' => 'Executar Comandos de Chamado',
         'Send agent/customer notifications on changes' => 'Enviar Notificações de Alterações Para Agente/Cliente',
-        'CMD' => 'Comando',
-        'This command will be executed. ARG[0] will be the ticket number. ARG[1] the ticket id.' =>
-            'Este comando será executado. ARG[0] será o número do chamado. ARG[1] o ID do chamado.',
         'Delete tickets' => 'Excluir Chamados',
         'Warning: All affected tickets will be removed from the database and cannot be restored!' =>
             'Atenção: Todos os chamados afetados serão removidos do banco de dados e não poderão ser restaurados!',
@@ -1156,13 +1140,7 @@ sub Data {
         'Delete web service' => 'Apagar Web Service',
         'Do you really want to delete this web service?' => 'Você realmente deseja apagar este web service?',
         'Ready2Adopt Web Services' => 'Webservices Ready2Adopt',
-        'Here you can activate Ready2Adopt web services showcasing our best practices that are a part of %s.' =>
-            '',
-        'Please note that these web services may depend on other modules only available with certain %s contract levels (there will be a notification with further details when importing).' =>
-            'Por favor note que estes web services podem depender de outros módulos disponíveis apenas com certos %s níveis de contrato (haverá uma notificação com maiores detalhes quando da importação).',
         'Import Ready2Adopt web service' => 'Importar web service Ready2Adopt ',
-        'Would you like to benefit from web services created by experts? Upgrade to %s to import some sophisticated Ready2Adopt web services.' =>
-            '',
         'After you save the configuration you will be redirected again to the edit screen.' =>
             'Após salvar as configuração você será redirecionado novamente para a tela de edição.',
         'If you want to return to overview please click the "Go to overview" button.' =>
@@ -1339,6 +1317,7 @@ sub Data {
             'Parabéns, seu %s está corretamente instalado e atualizado!',
 
         # Template: AdminOTRSBusinessNotInstalled
+        'Upgrade to %s' => 'Atualize para %s',
         'Go to the OTRS customer portal' => 'Vá para o portal de clientes do OTRS',
         '%s will be available soon. Please check again in a few days.' =>
             '%s estará disponível em breve. Por favor, verifique novamente em poucos dias.',
@@ -1353,12 +1332,12 @@ sub Data {
         'Please visit our customer portal and file a request.' => 'Por favor visite nosso portal de clientes e registre um pedido.',
         'Everything else will be done as part of your contract.' => 'Tudo mais será feito como parte do seu contrato.',
         'Your installed OTRS version is %s.' => 'Sua versão do OTRS instalada é %s.',
-        'To install this package, you need to update to Znuny %s or higher.' =>
-            'Para instalar este pacote, você precisa atualizar para Znuny %s ou superior.',
+        'To install this package, you need to update to OTRS %s or higher.' =>
+            '',
         'To install this package, the Maximum OTRS Version is %s.' => 'Para instalar este pacote, a versão máxima do OTRS é %s.',
         'To install this package, the required Framework version is %s.' =>
             'Para instalar este pacote, a versão do framework requerida é %s.',
-        'Why should I keep Znuny up to date?' => 'Por que eu deveria manter o Znuny atualizado?',
+        'Why should I keep OTRS up to date?' => '',
         'You will receive updates about relevant security issues.' => 'Você receberá atualizações sobre questões de segurança relevantes.',
         'You will receive updates for all other relevant OTRS issues' => 'Você receberá atualizações para todas as outras questões relevantes do OTRS',
         'With your existing contract you can only use a small part of the %s.' =>
@@ -1415,11 +1394,11 @@ sub Data {
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Você realmente quer reinstalar este pacote? Quaisquer alterações manuais serão perdidas.',
         'Go to updating instructions' => 'Vá para instruções de atualização',
+        'Go to znuny.org' => '',
         'package information' => 'informação do pacote',
-        'Package installation requires a patch level update of Znuny.' => 'Pacote de Instalação requer atualização do Znuny',
-        'Package update requires a patch level update of Znuny.' => 'Atualização do pacote requer atualização de nível do Znuny',
-        'If you are a OTRS Business Solution™ customer, please visit our customer portal and file a request.' =>
-            'Se você é um cliente OTRS Business Solution™, por favor visite nosso portal de clientes e registre um pedido.',
+        'Package installation requires a patch level update of Znuny.' =>
+            'Pacote de Instalação requer atualização do OTRS',
+        'Package update requires a patch level update of Znuny.' => 'Atualização do pacote requer atualização de nível do OTRS',
         'Please note that your installed Znuny version is %s.' => 'Por favor note que a sua versão do Znuny instalada é %s.',
         'To install this package, you need to update Znuny to version %s or newer.' =>
             'Para instalar este pacote, você precisa atualizar seu Znuny para versão %s ou superior.',
@@ -1427,6 +1406,7 @@ sub Data {
             'Este pacote smente pode ser instalado na versão %s ou inferior do Znuny.',
         'This package can only be installed on Znuny version %s or newer.' =>
             'Este pacote smente pode ser instalado na versão %s ou superior do Znuny.',
+        'Why should I keep Znuny up to date?' => 'Por que eu deveria manter o Znuny atualizado?',
         'You will receive updates for all other relevant Znuny issues.' =>
             'Você receberá atualizações para todos os outros problemas relevantes do Znuny.',
         'How can I do a patch level update if I don’t have a contract?' =>
@@ -1455,9 +1435,6 @@ sub Data {
         'Package not correctly deployed! Please reinstall the package.' =>
             'Pacote não instalado corretamente! Por favor, reinstale o pacote.',
         'Reinstall' => 'Reinstalar',
-        'Features for %s customers only' => 'Características %s só para clientes',
-        'With %s, you can benefit from the following optional features. Please make contact with %s if you need more information.' =>
-            'Com %s, você pode beneficiar os seguintes recursos opcionais. Por favor, faça contato com %s se precisar de mais informações.',
         'Package Information' => 'Informação de Pacote',
         'Download package' => 'Baixar Pacote',
         'Rebuild package' => 'Reconstruir Pacote',
@@ -1552,8 +1529,6 @@ sub Data {
         'Ready2Adopt Processes' => 'Processos Ready2Adopt',
         'Here you can activate Ready2Adopt processes showcasing our best practices. Please note that some additional configuration may be required.' =>
             'Aqui você pode ativar processos Ready2Adopt que demonstram nossas boas práticas. Por favor observe que alguma configuração adicional pode ser necessária.',
-        'Would you like to benefit from processes created by experts? Upgrade to %s to import some sophisticated Ready2Adopt processes.' =>
-            '',
         'Import Ready2Adopt process' => 'Importar processos Ready2Adopt',
         'To create a new Process you can either import a Process that was exported from another system or create a complete new one.' =>
             'Para criar um novo Processo você pode importar um Processo exportado de outro sistema ou criar um Processo completamente novo.',
@@ -1823,6 +1798,7 @@ sub Data {
         'Attribute' => 'Atributo',
         'FQDN' => 'FQDN',
         'OTRS Version' => 'Versão do OTRS',
+        'Database' => 'Banco de Dados',
         'Operating System' => 'Sistema Operacional',
         'Perl Version' => 'Versão Perl',
         'Optional description of this system.' => 'Descrição opcional deste sistema.',
@@ -2478,7 +2454,7 @@ sub Data {
         'This setting can currently not be saved.' => 'Esta configuração não pode ser salva no momento.',
         'This setting can currently not be saved' => 'Esta configuração não pode ser salva no momento',
         'Save this setting' => 'Salvar esta configuração',
-        'Did you know? You can help translating OTRS at %s.' => 'Você sabia? Você pode ajudar a traduzir o OTRS em %s.',
+        'Did you know? You can help translating Znuny at %s.' => '',
 
         # Template: SettingsList
         'Reset to default' => 'Retornar ao padrão',
@@ -2849,8 +2825,7 @@ sub Data {
         'Traceback' => 'Rastreamento',
 
         # Template: CustomerFooter
-        '%s powered by %s™' => '%s powered by %s™',
-        'Powered by %s™' => 'Powered by %s™',
+        'Powered by %s' => '',
 
         # Template: CustomerFooterJS
         '%s detected possible network issues. You could either try reloading this page manually or wait until your browser has re-established the connection on its own.' =>
@@ -2945,12 +2920,6 @@ sub Data {
         'Ticket fields' => 'Campos de chamado',
 
         # Template: Error
-        'Really a bug? 5 out of 10 bug reports result from a wrong or incomplete installation of OTRS.' =>
-            'Realmente um  erro? 5 de 10 informes de erro resultam de uma errada ou incompleta instalação do OTRS.',
-        'With %s, our experts take care of correct installation and cover your back with support and periodic security updates.' =>
-            'Com %s, nossos especialistas vão cuidar de uma instalação correta e da sua retaguarda com suporte e atualizações de segurança periódicas.',
-        'Contact our service team now.' => 'Contacte agora a nossa equipe de serviço.',
-        'Send a bugreport' => 'Enviar um relatório de erro',
         'Expand' => 'Expandir',
 
         # Template: AttachmentList
@@ -2971,7 +2940,6 @@ sub Data {
         # Template: Header
         'View notifications' => 'Visualizar notificações',
         'Notifications' => 'Notificações',
-        'Notifications (OTRS Business Solution™)' => '',
         'Personal preferences' => 'Preferências Pessoais',
         'Logout' => 'Sair',
         'You are logged in as' => 'Você está logado como',
@@ -2984,15 +2952,9 @@ sub Data {
         'General Specifications and Mail Settings' => 'Especificações Gerais e Configurações de E-mail',
         'Finish' => 'Finalizar',
         'Welcome to %s' => 'Bem-vindo a %s',
-        'Germany' => 'Alemanha',
         'Phone' => 'Telefone',
-        'United States' => 'Estados Unidos',
-        'Mexico' => 'México',
-        'Hungary' => 'Hungria',
-        'Brazil' => 'Brasil',
-        'Singapore' => 'Singapura',
-        'Hong Kong' => 'Hong Kong',
         'Web site' => 'Website',
+        'Community' => '',
 
         # Template: InstallerConfigureMail
         'Configure Outbound Mail' => 'Configurar E-mail de Saída',
@@ -3058,7 +3020,6 @@ sub Data {
         'Restart your webserver' => 'Reiniciar o webserver',
         'After doing so your OTRS is up and running.' => 'Após fazer isto, seu sistema OTRS estará pronto para uso.',
         'Start page' => 'Iniciar página',
-        'Your OTRS Team' => 'Sua Equipe de Suporte',
 
         # Template: InstallerLicense
         'Don\'t accept license' => 'Não aceitar licença',
@@ -3289,10 +3250,6 @@ sub Data {
         # Template: Navigation
         'Navigation' => 'Navegação',
 
-        # Template: OTRSBusinessTeaser
-        'With %s, System Configuration supports versioning, rollback and user-specific configuration settings.' =>
-            'Com %s a Configuração do Sistema suporta versionamento, rollback e parâmetros de configuração específicos por usuário.',
-
         # Template: Test
         'OTRS Test Page' => 'Página de Teste do Gerenciador de Chamados',
         'Unlock' => 'Desbloquear',
@@ -3518,9 +3475,6 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminDynamicField.pm
         'Fields configuration is not valid' => 'Configuração do campo não é válida.',
         'Objects configuration is not valid' => 'Configuração dos objetos não são válidas',
-        'Database (%s)' => 'Base de dados (%s)',
-        'Web service (%s)' => 'Web service (%s)',
-        'Contact with data (%s)' => 'Contato com dados (%s)',
         'Could not reset Dynamic Field order properly, please check the error log for more details.' =>
             'Não foi possível resetar corretamente a ordem do campo Dinâmico, verifique o log de erros para obter mais detalhes.',
 
@@ -4366,7 +4320,6 @@ sub Data {
         'Show one article' => 'Exibir um Artigo',
         'Show all articles' => 'Exibir Todos os Artigos',
         'Show Ticket Timeline View' => 'Mostrar a Cronologia do Chamado',
-        'Show Ticket Timeline View (%s)' => 'Mostrar a Visão de Linha do Tempo do Ticket (%s)',
 
         # Perl Module: Kernel/Modules/AjaxAttachment.pm
         'Got no FormID.' => 'Não contém ID de Formulário.',
@@ -4639,7 +4592,6 @@ sub Data {
         'Enable cloud services to unleash all OTRS features!' => 'Habilite serviços de nuvem para liberar todos os recursos do OTRS!',
 
         # Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
-        '%s Upgrade to %s now! %s' => '%s Atualize para %s agora! %s',
         'Please verify your license data!' => 'Favor verificar os dados de sua licença!',
         'The license for your %s is about to expire. Please make contact with %s to renew your contract!' =>
             'A licença do seu %s está prestes a expirar. Por favor entre em contato com %s para revonar o seu contrato!',
@@ -4670,10 +4622,6 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Notification/OutofOfficeCheck.pm
         'You have Out of Office enabled, would you like to disable it?' =>
             'Você habilitou "Fora do Escritório", gostaria de desabilitar?',
-
-        # Perl Module: Kernel/Output/HTML/Notification/PackageManagerCheckNotVerifiedPackages.pm
-        'The installation of packages which are not verified by the OTRS Group is activated. These packages could threaten your whole system! It is recommended not to use unverified packages.' =>
-            'A instalação de pacotes que não são verificados pelo Grupo OTRS está ativa. Esses pacotes podem ameaçar a integridade do seu sistema! É recomendado que não se utilize pacotes não verificados.',
 
         # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationInvalidCheck.pm
         'You have %s invalid setting(s) deployed. Click here to show invalid settings.' =>
@@ -4873,10 +4821,6 @@ sub Data {
         'File is not installed!' => 'Arquivo não instalado!',
         'File is different!' => 'Arquivo é diferente!',
         'Can\'t read file!' => 'Não pode ler o arquivo!',
-        '<p>If you continue to install this package, the following issues may occur:</p><ul><li>Security problems</li><li>Stability problems</li><li>Performance problems</li></ul><p>Please note that issues that are caused by working with this package are not covered by OTRS service contracts.</p>' =>
-            '<p>Se você continuar a instalar este pacote, as seguintes questões podem ocorrer: </p><ul><li>Problemas de segurança</li><li>Problemas de estabilidade</li><li>Problemas de performance</li></ul><p>Observe que questões que são causadas por utilizar este pacote não são cobertas por contratos de serviço OTRS. </p>',
-        '<p>The installation of packages which are not verified by the OTRS Group is not possible by default. You can activate the installation of not verified packages via the "AllowNotVerifiedPackages" system configuration setting.</p>' =>
-            '',
 
         # Perl Module: Kernel/System/ProcessManagement/DB/Process.pm
         'The process "%s" and all of its data has been imported successfully.' =>
@@ -5015,11 +4959,6 @@ sub Data {
         'Maximum Query Size' => 'Tamanho Máximo da Query',
         'The setting \'max_allowed_packet\' must be higher than 64 MB.' =>
             'A definição \'max_allowed_packet\' deve ser maior que 64 MB.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Performance.pm
-        'Query Cache Size' => 'Tamanho do Cache de Consulta',
-        'The setting \'query_cache_size\' should be used (higher than 10 MB but not more than 512 MB).' =>
-            'A configuração \'query_cache_size\' deve ser usada (maior que 10 MB mas não mais que 512 MB).',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/StorageEngine.pm
         'Default Storage Engine' => 'Mecanismo de Armazenamento Padrão',
@@ -6026,7 +5965,6 @@ Obrigado pela ajuda!
         'Agents ↔ Groups' => 'Atendentes ↔ Grupos',
         'Agents ↔ Roles' => 'Atendentes ↔ Papéis',
         'All CustomerIDs of a customer user.' => 'Todos IDs de Clientes de um usuário cliente.',
-        'All attachments (OTRS Business Solution™)' => 'Todos anexos (OTRS Business Solution™)',
         'All customer users of a CustomerID' => 'Todos os usuários clientes de uma CustomerID.',
         'All escalated tickets' => 'Todos os chamados escalados',
         'All new tickets, these tickets have not been worked on yet' => 'Todos os chamados novos, estes chamados não foram trabalhados ainda',
@@ -6077,8 +6015,6 @@ Obrigado pela ajuda!
             '',
         'Allows extended search conditions in ticket search of the generic agent interface. With this feature you can search e. g. ticket title with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".' =>
             'Permite condições de pesquisa extendidas na pesquisa de ticket da interface de agente genérico. Com esta funcionalidade, você pode pesquisar, por exemplo, o título do ticket com condições como "(*chave1*&&*chave2*)" or "(*chave1*||*chave2*)".',
-        'Allows generic agent to execute custom command line scripts.' =>
-            '',
         'Allows generic agent to execute custom modules.' => '',
         'Allows having a medium format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             'Permite ter uma visão em formato médio do chamado (CustomerInfo => 1 - mostra também as informações do cliente).',
@@ -6156,8 +6092,6 @@ Obrigado pela ajuda!
         'Bounced to "%s".' => 'Devolvido a "%s".',
         'Bulgarian' => 'Búlgaro',
         'Bulk Action' => 'Ação em Massa',
-        'CMD example setup. Ignores emails where external CMD returns some output on STDOUT (email will be piped into STDIN of some.bin).' =>
-            'Configuração de exemplo CMD. Ignora e-mails nos quais o CMD externo retorna alguma saída em STDOUT (e-mail será canalizado para STDIN de algum.bin).',
         'CSV Separator' => 'Separador CSV',
         'Cache time in seconds for agent authentication in the GenericInterface.' =>
             'Tempo de cache em segundos para autenticação de agentes na Interface Genérica.',
@@ -6910,8 +6844,6 @@ Obrigado pela ajuda!
             'Define o módulo para exibir uma notificação na interface de agente se o usuário estiver logado enquanto uma manutenção do sistema estiver ativa.',
         'Defines the module to display a notification in the agent interface, if the agent session limit prior warning is reached.' =>
             'Define o módulo para exibir uma notificação na interface de agente se o alerta prévio de limite de sessão de agente tiver sido atingido.',
-        'Defines the module to display a notification in the agent interface, if the installation of not verified packages is activated (only shown to admins).' =>
-            'Define o módulo para exibir uma notificação na interface de agente se a instalação de pacotes não verificados estiver ativada (exibido apenas para administradores).',
         'Defines the module to display a notification in the agent interface, if the system is used by the admin user (normally you shouldn\'t work as admin).' =>
             'Define o módulo para exibir uma notificação na interface de agente se o sistema estiver em uso pelo usuário administrador (normalmente você não deveria trabalhar como administrador).',
         'Defines the module to display a notification in the agent interface, if there are invalid sysconfig settings deployed.' =>
@@ -6978,8 +6910,6 @@ Obrigado pela ajuda!
         'Defines the number of hours a successful communication will be stored.' =>
             'Define o número de horas que uma comunicação com sucesso será guardada.',
         'Defines the parameters for the customer preferences table.' => 'Define os parâmetros da tabela de preferências do cliente.',
-        'Defines the parameters for the dashboard backend. "Cmd" is used to specify command with parameters. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
-            'Define os parâmetros para o backend do painel. "Cmd" é utilizado para especificar comandos com parâmetros. "Group" é utilizado para restringir o acesso ao plugin (por exemplo, Group: admin;group1;group2;). "Default" indica se o plugin é ativado como padrão ou se o usuário precisa ativar manualmente. "CacheTTL" indica o tempo de expiração do  cache, em minutos, para o plugin. "Mandatory" determina se o plugin é exibido sempre e não pode ser removido pelos agentes.',
         'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             'Define os parâmetros para o backend do painel. "Group" é utilizado para restringir o acesso ao plugin (por exemplo, Group: admin;group1;group2;). "Default" indica se o plugin é ativado como padrão ou se o usuário precisa ativar manualmente. "CacheTTL" indica o tempo de expiração do cache, em minutos, para o plugin. "Mandatory" determina se o plugin é exibido sempre e não pode ser removido pelos agentes.',
         'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" defines the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
@@ -7497,8 +7427,6 @@ Obrigado pela ajuda!
             'Se "Radius" foi selecionado para Customer::AuthModule, o host Radius devem ser especificado.',
         'If "Radius" was selected for Customer::AuthModule, you can specify if the applications will stop if e. g. a connection to a server can\'t be established due to network problems.' =>
             'Se "Radius" foi selecionado para Customer::AuthModule, você pode especificar se a aplicação irá para se, por exemplo, uma conexão com o servidor não puder ser estabelecida por caus de problemas de rede.',
-        'If "Sendmail" was selected as SendmailModule, the location of the sendmail binary and the needed options must be specified.' =>
-            'Se "Sendmail" foi selecionado como SendmailModule, o local do binário de sendmail e as opções necessárias precisam ser especificados.',
         'If "SysLog" was selected for LogModule, a special log facility can be specified.' =>
             '',
         'If "SysLog" was selected for LogModule, the charset that should be used for logging can be specified.' =>
@@ -7563,6 +7491,7 @@ Obrigado pela ajuda!
             'Se você for ficar ausente, você pode desejar informar os outros usuários ao definir as datas exatas de sua ausência.',
         'Ignore system sender article types (e. g. auto responses or email notifications) to be flagged as \'Unread Article\' in AgentTicketZoom or expanded automatically in Large view screens.' =>
             '',
+        'Ignores not ticket related attributes.' => '',
         'Import appointments screen.' => 'Tela de importação de compromissos',
         'Include tickets of subqueues per default when selecting a queue.' =>
             'Incluir tickets de subfilas como padrão quando selecionar uma fila.',
@@ -7782,8 +7711,8 @@ Obrigado pela ajuda!
         'New Year\'s Day' => 'Ano Novo',
         'New Year\'s Eve' => 'Véspera de Ano Novo',
         'New process ticket' => 'Novo chamado via processo',
+        'News' => '',
         'News about OTRS releases!' => 'Notícias sobre lançamentos OTRS!',
-        'News about OTRS.' => 'Notícias sobre OTRS.',
         'Next possible ticket states after adding a phone note in the ticket phone inbound screen of the agent interface.' =>
             'Próximos estados de ticket possíveis após adicionar uma nota de telefonema na tela de telefonema recebido da interface de agente.',
         'Next possible ticket states after adding a phone note in the ticket phone outbound screen of the agent interface.' =>
@@ -7804,7 +7733,6 @@ Obrigado pela ajuda!
         'Number of tickets to be displayed in each page of a search result in the customer interface.' =>
             '',
         'OTRS Group Services' => 'Serviços do Grupo OTRS',
-        'OTRS News' => 'Notícias sobre o OTRS',
         'OTRS can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>
             '',
         'OTRS doesn\'t support recurring Appointments without end date or number of iterations. During import process, it might happen that ICS file contains such Appointments. Instead, system creates all Appointments in the past, plus Appointments for the next N months (120 months/10 years by default).' =>
@@ -7972,7 +7900,6 @@ Obrigado pela ajuda!
         'Replaces the original sender with current customer\'s email address on compose answer in the ticket compose screen of the agent interface.' =>
             'Substitui o remetente original pelo endereço de e-mail do cliente atual ao compor uma resposta na tela de composição de ticket da interface de agente.',
         'Reports' => 'Relatórios',
-        'Reports (OTRS Business Solution™)' => 'Relatórios (OTRS Business Solution™)',
         'Reprocess mails from spool directory that could not be imported in the first place.' =>
             '',
         'Required permissions to change the customer of a ticket in the agent interface.' =>
@@ -8011,7 +7938,6 @@ Obrigado pela ajuda!
         'Resent email to "%s".' => 'Reenviar e-mail para "%s".',
         'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
             'Reinicia a propriedade e desbloqueia o chamado se ele for movido para outra fila.',
-        'Resource Overview (OTRS Business Solution™)' => 'Visão geral de recurso (OTRS Business Solution™)',
         'Responsible Tickets' => 'Tickets de sua Responsabilidade',
         'Responsible Tickets.' => 'Tickets de sua Responsabilidade.',
         'Restores a ticket from the archive (only if the event is a state change to any open available state).' =>
@@ -8035,7 +7961,6 @@ Obrigado pela ajuda!
         'SMS' => 'SMS',
         'SMS (Short Message Service)' => 'SMS (Serviço de Mensagens Curtas)',
         'Salutations' => 'Saudações',
-        'Sample command output' => 'Exemplo de saída de comando',
         'Saves the attachments of articles. "DB" stores all data in the database (not recommended for storing big attachments). "FS" stores the data on the filesystem; this is faster but the webserver should run under the OTRS user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when "FS" is used.' =>
             'Salva os anexos de artigos. "DB" armazena todos os dados no banco de dados (não recomendado para armazenar anexos grandes). "FS" armazenao os dados no filesystem; isto é mais rápido, mas o servidor web tem que rodar através do usuário OTRS. Você pode alterar entre módulos sem perder dados mesmo quando um sistema já estiver em produção. Observação: Buscar nomes de anexos não é suportado quando "FS" é utilizado.',
         'Schedule a maintenance period.' => 'Agendar um período de manutenção',
@@ -8317,7 +8242,6 @@ Obrigado pela ajuda!
             'Mostra uma seleção de responsável em tickets de telefone e e-mail na interface de agente.',
         'Show article as rich text even if rich text writing is disabled.' =>
             'Mostrar artigo como rich text mesmo quando escrita em rich text estiver desativada.',
-        'Show command line output.' => 'Mastra a saída da linha de comando.',
         'Show queues even when only locked tickets are in.' => 'Mostrar filas mesmo quando apenas contiverem tickets bloqueados.',
         'Show the current owner in the customer interface.' => '',
         'Show the current queue in the customer interface.' => '',
@@ -8422,12 +8346,8 @@ Obrigado pela ajuda!
             'Mostra lista de todos agentes possíveis (todos agentes com permissões de nota na fila/ticket) para determinar quem pode ser infomado sobre esta nota na tela de responsável pelo ticket da interface de agente.',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             'Mostra uma visão prévia da visão geral de ticket (CustomerInfo => 1 - também mostra Informação de Cliente, CustomerInfoMaxSize tamanho máximo, em caracteres, da Informação de Cliente).',
-        'Shows a teaser link in the menu for the ticket attachment view of OTRS Business Solution™.' =>
-            '',
         'Shows all both ro and rw queues in the queue view.' => 'Mostrar todas filas tanto ro quanto rw na visão de fila.',
         'Shows all both ro and rw tickets in the service view.' => 'Mostrar todos tickets, tanto ro quanto rw, na visão de serviço.',
-        'Shows all open tickets (even if they are locked) in the escalation view of the agent interface.' =>
-            'Mostra todos os tickets abertos (mesmo os que estiverem bloqueados) na visão de escalonamento na interface de agente.',
         'Shows all the articles of the ticket (expanded) in the agent zoom view.' =>
             'Mostra todos artigos de um ticket (expandido) na visão de zoom de agente.',
         'Shows all the articles of the ticket (expanded) in the customer zoom view.' =>
@@ -8441,6 +8361,8 @@ Obrigado pela ajuda!
         'Shows customer history tickets in AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer.' =>
             'Mostra histórico de tickets do cliente em AgentTicketPhone, AgentTicketEmail e AgentTicketCustomer.',
         'Shows either the last customer article\'s subject or the ticket title in the small format overview.' =>
+            '',
+        'Shows existing parent/child (separated by ::) process lists in the form of a tree or a list.' =>
             '',
         'Shows existing parent/child queue lists in the system in the form of a tree or a list.' =>
             'Mostra listas existentes no sistema de filas pai/filho no formato de uma árvore ou uma lista.',
@@ -8514,10 +8436,6 @@ Obrigado pela ajuda!
         'Sorts the tickets (ascendingly or descendingly) when a single queue is selected in the service view and after the tickets are sorted by priority. Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top). Use the ServiceID for the key and 0 or 1 for value.' =>
             'Ordena os tickets (ascendente ou descendente) quando uma fila tiver sido selecionada na visão de serviço e após os tickets terem sido ordenados por prioridade. Valores: 0 = ascendente (mais antigos no topo, padrão), 1 = descendente (mais recentes no topo). Utilize o ID de Fila para a chave e 0 ou 1 para o valor.',
         'Spam' => 'Spam',
-        'Spam Assassin example setup. Ignores emails that are marked with SpamAssassin.' =>
-            'Exemplo de configuração de Assassino de Spam. Ignora e-mails marcados com SpamAssassin.',
-        'Spam Assassin example setup. Moves marked mails to spam queue.' =>
-            'Exemplo de configuração de Assassino de Spam. Move e-mails marcados para a fila SPAM.',
         'Spanish' => 'Espanhol',
         'Spanish (Colombia)' => 'Espanhol (Colômbia)',
         'Spanish (Mexico)' => 'Espanhol (México)',
@@ -8545,14 +8463,6 @@ Obrigado pela ajuda!
         'Specifies the path of the file for the logo in the page header (gif|jpg|png, 700 x 100 pixel).' =>
             'Especifica o caminho para o arquivo da logo no cabeçalho da página (gif|jpg|png, 700 x 100 pixel).',
         'Specifies the path of the file for the performance log.' => 'Especifica o caminho para o arquivo com o log de performance.',
-        'Specifies the path to the converter that allows the view of Microsoft Excel files, in the web interface.' =>
-            'Especifica o caminho do conversor que permite a visualização de arquivos Excel na interface web.',
-        'Specifies the path to the converter that allows the view of Microsoft Word files, in the web interface.' =>
-            'Especifica o caminho do conversor que permite a visualização de arquivos Word na interface web.',
-        'Specifies the path to the converter that allows the view of PDF documents, in the web interface.' =>
-            'Especifica o caminho do conversor que permite a visualização de documentos PDF na interface web.',
-        'Specifies the path to the converter that allows the view of XML files, in the web interface.' =>
-            'Especifica o caminho do conversor que permite a visualização de arquivos XML na interface web.',
         'Specifies the text that should appear in the log file to denote a CGI script entry.' =>
             'Especifica o texto que deve aparecer no arquivo de log para demonstrar uma entrada de script CGI.',
         'Specifies user id of the postmaster data base.' => 'Especifica o user id do postmaster database',
@@ -8580,7 +8490,6 @@ Obrigado pela ajuda!
             'Inicia uma pequisa curinga do objeto ativo após a máscara de objeto de associção ter sido iniciada.',
         'Stat#' => 'Estatística Nº:.',
         'States' => 'Estado',
-        'Statistic Reports overview.' => 'Visão Geral de Estatísticas',
         'Statistics overview.' => 'Resumo de Estatísticas',
         'Status view' => 'Visão de Estados',
         'Stopped response time escalation.' => 'Parou o escalonamento do tempo de resposta.',
@@ -8780,7 +8689,6 @@ Obrigado pela ajuda!
         'Uses richtext for viewing and editing: articles, salutations, signatures, standard templates, auto responses and notifications.' =>
             'Usar RichText quando visualizar e editar: artigos, saudações, assinaturas, modelos, auto respostas e notificações.',
         'Vietnam' => 'Vietnamita',
-        'View all attachments of the current ticket' => 'Ver todos os anexos do chamado atual',
         'View performance benchmark results.' => 'Ver resultados da avaliação de desempenho.',
         'Watch this ticket' => 'Monitorar esse chamado',
         'Watched Tickets' => 'Chamados Monitorados',
@@ -8813,6 +8721,7 @@ Obrigado pela ajuda!
             'Sua seleção de fila favoritas. Você também é notificado sobre essas filas por e-mail se ativado.',
         'Your service selection of your preferred services. You also get notified about those services via email if enabled.' =>
             'Sua seleção de serviços favoritos. Você também é notificado sobre esses serviços via e-mail se ativado.',
+        'Znuny.org - News' => '',
         'Zoom' => 'Detalhes',
         'attachment' => 'anexo',
         'bounce' => 'devolver',

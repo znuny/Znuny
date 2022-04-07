@@ -62,6 +62,7 @@ The following persons contributed to OTRS:
 * Michiel Beijen <michiel.beijen@otrs.com>
 * Milan Rakic <mrakic@s7designcreative.com>
 * Moritz Lenz <mlenz@noris.net>
+* Never <never.min@gmail.com>
 * NeverMin <never.min@gmail.com>
 * Niels Dimmers <niels@nielsdimmers.nl>
 * Nils Fiedler <nils.fiedler@otrs.com>

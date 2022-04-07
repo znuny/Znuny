@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.676430748391466;
+    $Self->{Completeness}        = 0.678235595828347;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -212,7 +212,6 @@ sub Data {
         'This is the default value for assigned recipient agents who didn\'t make a choice for this notification in their preferences yet. If the box is enabled, the notification will be sent to such agents.' =>
             'Ini adalah nilai default untuk agen penerima yang tidak membuat pilihan untuk pemberitahuan dalam preferensi mereka. Jika kotak diaktifkan, pemberitahuan akan dikirim ke agen tersebut.',
         'This feature is currently not available.' => 'Fitur untuk saat ini tidak tersedia',
-        'Upgrade to %s' => 'Tingkatkan ke %s',
         'Please activate this transport in order to use it.' => '',
         'No data found' => 'Data tidak dapat ditemukan',
         'No notification method found.' => 'Metode pemberitahuan tidak ditemukan',
@@ -503,18 +502,6 @@ sub Data {
         'Add new field for object' => 'Tambahkan bidang baru untuk objek',
         'Filter for Dynamic Fields' => '',
         'Filter for dynamic fields' => '',
-        'More Business Fields' => '',
-        'Would you like to benefit from additional dynamic field types for businesses? Upgrade to %s to get access to the following field types:' =>
-            '',
-        'Database' => 'Database',
-        'Use external databases as configurable data sources for this dynamic field.' =>
-            '',
-        'Web service' => '',
-        'External web services can be configured as data sources for this dynamic field.' =>
-            '',
-        'Contact with data' => 'Kontak dengan data',
-        'This feature allows to add (multiple) contacts with data to tickets.' =>
-            '',
         'To add a new field, select the field type from one of the object\'s list, the object defines the boundary of the field and it can\'t be changed after the field creation.' =>
             'Untuk menambahkan bidang baru, pilih satu tipe bidang dari daftar objek, object tersebut mendefinisikan batas dari bidang tersebut dan tidak akan dapat diubah setelah penciptaan bidang tersebut.',
         'Dynamic Fields List' => 'Daftar bidang dinamis',
@@ -737,9 +724,6 @@ sub Data {
         'Time units' => 'Unit waktu',
         'Execute Ticket Commands' => 'Eksekusikan perintah tiket.',
         'Send agent/customer notifications on changes' => 'Kirim notifikasi agen/pelanggan saat pengubahan',
-        'CMD' => 'CMD',
-        'This command will be executed. ARG[0] will be the ticket number. ARG[1] the ticket id.' =>
-            'Perintah ini akan di eksekusi. ARG[0] akan menjadi nomor tiket. ARG[1] id tiket.',
         'Delete tickets' => 'Hapus tiket',
         'Warning: All affected tickets will be removed from the database and cannot be restored!' =>
             'Perhatian: Semua tiket yang terkena dampak akan dihapus dari dari database dan tidak dapat dikembalikan.',
@@ -1151,13 +1135,7 @@ sub Data {
         'Delete web service' => 'Menghapus layanan web',
         'Do you really want to delete this web service?' => 'Apakah anda ingin menghapus layanan web ini?',
         'Ready2Adopt Web Services' => '',
-        'Here you can activate Ready2Adopt web services showcasing our best practices that are a part of %s.' =>
-            '',
-        'Please note that these web services may depend on other modules only available with certain %s contract levels (there will be a notification with further details when importing).' =>
-            'Mohon perhatian bahwa layanan web ini tergantung kepada modul-modul lainnya yang hanya tersedia dengan 1%s level kontrak (akan ada pemberitahuan detail lebih lanjut ketika mengimpor).',
         'Import Ready2Adopt web service' => '',
-        'Would you like to benefit from web services created by experts? Upgrade to %s to import some sophisticated Ready2Adopt web services.' =>
-            '',
         'After you save the configuration you will be redirected again to the edit screen.' =>
             'Setelah anda menyimpan konfigurasi, anda akan diarahkan kembali ke layar edit',
         'If you want to return to overview please click the "Go to overview" button.' =>
@@ -1334,6 +1312,7 @@ sub Data {
             'Selamat, %s anda telah terpasang dengan benar dan up-to-date!',
 
         # Template: AdminOTRSBusinessNotInstalled
+        'Upgrade to %s' => 'Tingkatkan ke %s',
         'Go to the OTRS customer portal' => '',
         '%s will be available soon. Please check again in a few days.' =>
             '%s akan segera tersedia. Silahkan periksa lagi dalam beberapa hari.',
@@ -1348,12 +1327,12 @@ sub Data {
         'Please visit our customer portal and file a request.' => '',
         'Everything else will be done as part of your contract.' => '',
         'Your installed OTRS version is %s.' => '',
-        'To install this package, you need to update to Znuny %s or higher.' =>
-            'Untuk menginstall paket ini, Anda harus memperbarui ke Znuny 1%s atau lebih tinggi.',
+        'To install this package, you need to update to OTRS %s or higher.' =>
+            '',
         'To install this package, the Maximum OTRS Version is %s.' => '',
         'To install this package, the required Framework version is %s.' =>
             '',
-        'Why should I keep Znuny up to date?' => 'Kenapa Saya harus membuat Znuny selalu terbarukan?',
+        'Why should I keep OTRS up to date?' => '',
         'You will receive updates about relevant security issues.' => 'Anda akan menerima pembaruan terkait isu keamanan yang relevan.',
         'You will receive updates for all other relevant OTRS issues' => 'Anda akan menerima pembaruan untuk semua isu OTRS yang relevan',
         'With your existing contract you can only use a small part of the %s.' =>
@@ -1410,11 +1389,11 @@ sub Data {
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Apakah anda ingin menginstal ulang paket ini? Semua perubahan manual akan hilang.',
         'Go to updating instructions' => '',
+        'Go to znuny.org' => '',
         'package information' => 'informasi paket',
-        'Package installation requires a patch level update of Znuny.' => '',
-        'Package update requires a patch level update of Znuny.' => '',
-        'If you are a OTRS Business Solution™ customer, please visit our customer portal and file a request.' =>
+        'Package installation requires a patch level update of Znuny.' =>
             '',
+        'Package update requires a patch level update of Znuny.' => '',
         'Please note that your installed Znuny version is %s.' => '',
         'To install this package, you need to update Znuny to version %s or newer.' =>
             '',
@@ -1422,6 +1401,7 @@ sub Data {
             '',
         'This package can only be installed on Znuny version %s or newer.' =>
             '',
+        'Why should I keep Znuny up to date?' => 'Kenapa Saya harus membuat Znuny selalu terbarukan?',
         'You will receive updates for all other relevant Znuny issues.' =>
             '',
         'How can I do a patch level update if I don’t have a contract?' =>
@@ -1450,9 +1430,6 @@ sub Data {
         'Package not correctly deployed! Please reinstall the package.' =>
             'Paket tidak disebarkan dengan benar! Silahkan untuk menginstal ulang paket ini.',
         'Reinstall' => 'Instal ulang',
-        'Features for %s customers only' => 'Fitur hanya untuk %s pelanggan',
-        'With %s, you can benefit from the following optional features. Please make contact with %s if you need more information.' =>
-            'Dengan %s, anda bisa mendapatkan keuntungan dari fitur opsional berikut. Silakan melakukan kontak dengan %s jika anda memerlukan informasi lebih lanjut.',
         'Package Information' => '',
         'Download package' => 'Download paket',
         'Rebuild package' => 'Membangun paket kembali',
@@ -1547,8 +1524,6 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Import process configuration' => 'Impor proses konfigurasi',
         'Ready2Adopt Processes' => '',
         'Here you can activate Ready2Adopt processes showcasing our best practices. Please note that some additional configuration may be required.' =>
-            '',
-        'Would you like to benefit from processes created by experts? Upgrade to %s to import some sophisticated Ready2Adopt processes.' =>
             '',
         'Import Ready2Adopt process' => '',
         'To create a new Process you can either import a Process that was exported from another system or create a complete new one.' =>
@@ -1819,6 +1794,7 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Attribute' => 'Atribut',
         'FQDN' => 'FQDN',
         'OTRS Version' => 'Versi OTRS',
+        'Database' => 'Database',
         'Operating System' => 'Sistem operasi',
         'Perl Version' => 'Versi Perl',
         'Optional description of this system.' => 'Deskripsi opsional sistem ini',
@@ -2475,7 +2451,7 @@ bin/otrs.Daemon.pl status\').',
         'This setting can currently not be saved.' => '',
         'This setting can currently not be saved' => '',
         'Save this setting' => '',
-        'Did you know? You can help translating OTRS at %s.' => 'Tahukah kamu? Anda dapat membantu menerjemahkan OTRS di%s.',
+        'Did you know? You can help translating Znuny at %s.' => '',
 
         # Template: SettingsList
         'Reset to default' => '',
@@ -2846,8 +2822,7 @@ bin/otrs.Daemon.pl status\').',
         'Traceback' => 'Melacak kembali',
 
         # Template: CustomerFooter
-        '%s powered by %s™' => '',
-        'Powered by %s™' => '',
+        'Powered by %s' => '',
 
         # Template: CustomerFooterJS
         '%s detected possible network issues. You could either try reloading this page manually or wait until your browser has re-established the connection on its own.' =>
@@ -2942,12 +2917,6 @@ bin/otrs.Daemon.pl status\').',
         'Ticket fields' => 'Dasar tiket',
 
         # Template: Error
-        'Really a bug? 5 out of 10 bug reports result from a wrong or incomplete installation of OTRS.' =>
-            'Benar-benar bug? 5 dari 10 laporan bug hasil dari instalasi yang salah atau tidak lengkap dari OTRS.',
-        'With %s, our experts take care of correct installation and cover your back with support and periodic security updates.' =>
-            'Dengan %s, para ahli kami mengurus instalasi yang benar dan menutupi punggung dengan dukungan dan update keamanan secara berkala. ',
-        'Contact our service team now.' => 'Hubungi tim layanan kami sekarang.',
-        'Send a bugreport' => 'Hantar laporan kesalahan',
         'Expand' => 'Perluas',
 
         # Template: AttachmentList
@@ -2968,7 +2937,6 @@ bin/otrs.Daemon.pl status\').',
         # Template: Header
         'View notifications' => 'Lihat pemberitahuan',
         'Notifications' => '',
-        'Notifications (OTRS Business Solution™)' => '',
         'Personal preferences' => '',
         'Logout' => 'logout',
         'You are logged in as' => 'Anda telah masuk sebagai',
@@ -2981,15 +2949,9 @@ bin/otrs.Daemon.pl status\').',
         'General Specifications and Mail Settings' => 'Spesifikasi umum dan Pengaturan Surat',
         'Finish' => 'Selesei',
         'Welcome to %s' => 'Selamat datang di %s',
-        'Germany' => '',
         'Phone' => 'Telepon',
-        'United States' => '',
-        'Mexico' => '',
-        'Hungary' => '',
-        'Brazil' => '',
-        'Singapore' => '',
-        'Hong Kong' => '',
         'Web site' => 'Website',
+        'Community' => '',
 
         # Template: InstallerConfigureMail
         'Configure Outbound Mail' => 'Mengkonfigurasi surat outbound',
@@ -3055,7 +3017,6 @@ bin/otrs.Daemon.pl status\').',
         'Restart your webserver' => 'Mengulang kembali webserver anda',
         'After doing so your OTRS is up and running.' => 'Setelah itu OTRS anda akan berjalan',
         'Start page' => 'Memulai halaman',
-        'Your OTRS Team' => 'Tim OTRS anda',
 
         # Template: InstallerLicense
         'Don\'t accept license' => 'Dilarang menerima lisensi',
@@ -3286,10 +3247,6 @@ bin/otrs.Daemon.pl status\').',
         # Template: Navigation
         'Navigation' => '',
 
-        # Template: OTRSBusinessTeaser
-        'With %s, System Configuration supports versioning, rollback and user-specific configuration settings.' =>
-            '',
-
         # Template: Test
         'OTRS Test Page' => 'Halaman uji OTRS',
         'Unlock' => 'Buka kunci',
@@ -3515,9 +3472,6 @@ bin/otrs.Daemon.pl status\').',
         # Perl Module: Kernel/Modules/AdminDynamicField.pm
         'Fields configuration is not valid' => 'Konfigurasi field tidak sah',
         'Objects configuration is not valid' => 'Konfigurasi objek tidak sah',
-        'Database (%s)' => '',
-        'Web service (%s)' => '',
-        'Contact with data (%s)' => '',
         'Could not reset Dynamic Field order properly, please check the error log for more details.' =>
             'Tidak dapat mengulang pesan dinamis field secara baik, silahkan cek error log untuk lebih jelasnya.',
 
@@ -4363,7 +4317,6 @@ bin/otrs.Daemon.pl status\').',
         'Show one article' => 'Tampilkan satu artikel',
         'Show all articles' => 'Tampilkan semua artikel',
         'Show Ticket Timeline View' => 'Tampilkan Tiket Timeline View',
-        'Show Ticket Timeline View (%s)' => '',
 
         # Perl Module: Kernel/Modules/AjaxAttachment.pm
         'Got no FormID.' => '',
@@ -4636,7 +4589,6 @@ bin/otrs.Daemon.pl status\').',
         'Enable cloud services to unleash all OTRS features!' => 'Mengaktifkan layanan cloud untuk melepaskan semua fitur OTRS!',
 
         # Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
-        '%s Upgrade to %s now! %s' => '%S Upgrade ke %s sekarang! %s',
         'Please verify your license data!' => '',
         'The license for your %s is about to expire. Please make contact with %s to renew your contract!' =>
             'Lisensi untuk %s anda akan segera berakhir. Silahkan mengkontak %s untuk memperbarui kontrak anda!',
@@ -4667,10 +4619,6 @@ bin/otrs.Daemon.pl status\').',
         # Perl Module: Kernel/Output/HTML/Notification/OutofOfficeCheck.pm
         'You have Out of Office enabled, would you like to disable it?' =>
             'Anda telah mengaktifkan Diluar kantor, Apakah anda ingin mengnonaktifkannya?',
-
-        # Perl Module: Kernel/Output/HTML/Notification/PackageManagerCheckNotVerifiedPackages.pm
-        'The installation of packages which are not verified by the OTRS Group is activated. These packages could threaten your whole system! It is recommended not to use unverified packages.' =>
-            '',
 
         # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationInvalidCheck.pm
         'You have %s invalid setting(s) deployed. Click here to show invalid settings.' =>
@@ -4870,10 +4818,6 @@ bin/otrs.Daemon.pl status\').',
         'File is not installed!' => '',
         'File is different!' => '',
         'Can\'t read file!' => '',
-        '<p>If you continue to install this package, the following issues may occur:</p><ul><li>Security problems</li><li>Stability problems</li><li>Performance problems</li></ul><p>Please note that issues that are caused by working with this package are not covered by OTRS service contracts.</p>' =>
-            '',
-        '<p>The installation of packages which are not verified by the OTRS Group is not possible by default. You can activate the installation of not verified packages via the "AllowNotVerifiedPackages" system configuration setting.</p>' =>
-            '',
 
         # Perl Module: Kernel/System/ProcessManagement/DB/Process.pm
         'The process "%s" and all of its data has been imported successfully.' =>
@@ -5012,11 +4956,6 @@ bin/otrs.Daemon.pl status\').',
         'Maximum Query Size' => 'Maksimum Ukuran Query',
         'The setting \'max_allowed_packet\' must be higher than 64 MB.' =>
             '',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Performance.pm
-        'Query Cache Size' => 'Ukuran Query Cache',
-        'The setting \'query_cache_size\' should be used (higher than 10 MB but not more than 512 MB).' =>
-            'Pengaturan \'query_cache_size\' harus digunakan (lebih tinggi dari 10 MB tetapi tidak lebih dari 512 MB).',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/StorageEngine.pm
         'Default Storage Engine' => 'Mesin Storage default',
@@ -6023,7 +5962,6 @@ Helpdesk Team Anda
         'Agents ↔ Groups' => '',
         'Agents ↔ Roles' => '',
         'All CustomerIDs of a customer user.' => '',
-        'All attachments (OTRS Business Solution™)' => '',
         'All customer users of a CustomerID' => 'Semua pengguna pelanggan dari ID Pelanggan',
         'All escalated tickets' => 'Semua tiket yang telah tereskalasi',
         'All new tickets, these tickets have not been worked on yet' => 'Semua tiket baru, tiket-tiket ini belum dikerjakan.',
@@ -6074,8 +6012,6 @@ Helpdesk Team Anda
             '',
         'Allows extended search conditions in ticket search of the generic agent interface. With this feature you can search e. g. ticket title with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".' =>
             'Memungkinkan kondisi pencarian diperpanjang mencari tiket dari antarmuka agen generik. Dengan fitur ini Anda dapat mencari e. g. title tiket dengan jenis kondisi seperti "(* key1 * && * key2 *)" atau "(* key1 * || * key2 *)".',
-        'Allows generic agent to execute custom command line scripts.' =>
-            '',
         'Allows generic agent to execute custom modules.' => '',
         'Allows having a medium format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             'Memungkinkan memiliki gambaran format medium tiket (CustomerInfo => 1 - menunjukkan juga informasi pelanggan).',
@@ -6153,8 +6089,6 @@ Helpdesk Team Anda
         'Bounced to "%s".' => 'Terpental ke "%s".',
         'Bulgarian' => 'Bulgaria',
         'Bulk Action' => 'Tindakan masal',
-        'CMD example setup. Ignores emails where external CMD returns some output on STDOUT (email will be piped into STDIN of some.bin).' =>
-            'CMD contoh setup. Mengabaikan email mana CMD eksternal kembali output dari STDOUT (email akan disalurkan ke STDIN dari some.bin).',
         'CSV Separator' => 'Pemisah CSV',
         'Cache time in seconds for agent authentication in the GenericInterface.' =>
             'Waktu cache di detik untuk otentikasi agen di Generic Interface.',
@@ -6908,8 +6842,6 @@ Helpdesk Team Anda
             'Mendefinisikan modul untuk menampilkan notifikasi di antarmuka agen, jika agen login sementara memiliki pemeliharaan sistem aktif.',
         'Defines the module to display a notification in the agent interface, if the agent session limit prior warning is reached.' =>
             '',
-        'Defines the module to display a notification in the agent interface, if the installation of not verified packages is activated (only shown to admins).' =>
-            '',
         'Defines the module to display a notification in the agent interface, if the system is used by the admin user (normally you shouldn\'t work as admin).' =>
             'Mendefinisikan modul untuk menampilkan notifikasi di antarmuka agen, jika sistem yang digunakan oleh user admin (biasanya Anda tidak harus bekerja sebagai admin).',
         'Defines the module to display a notification in the agent interface, if there are invalid sysconfig settings deployed.' =>
@@ -6976,8 +6908,6 @@ Helpdesk Team Anda
         'Defines the number of hours a successful communication will be stored.' =>
             '',
         'Defines the parameters for the customer preferences table.' => 'Mendefinisikan parameter untuk tabel preferensi pelanggan.',
-        'Defines the parameters for the dashboard backend. "Cmd" is used to specify command with parameters. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
-            '',
         'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
         'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" defines the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
@@ -7495,8 +7425,6 @@ Helpdesk Team Anda
             'Jika "Radius" dipilih untuk Customer::AuthModule, host radius harus ditentukan.',
         'If "Radius" was selected for Customer::AuthModule, you can specify if the applications will stop if e. g. a connection to a server can\'t be established due to network problems.' =>
             'Jika "Radius" dipilih untuk Customer::AuthModule, Anda dapat menentukan apakah aplikasi akan berhenti jika e. g. koneksi ke server tidak dapat dibangun karena masalah jaringan.',
-        'If "Sendmail" was selected as SendmailModule, the location of the sendmail binary and the needed options must be specified.' =>
-            'Jika "Sendmail" terpilih sebagai SendmailModul, lokasi biner sendmail dan opsi yang diperlukan harus ditentukan.',
         'If "SysLog" was selected for LogModule, a special log facility can be specified.' =>
             'Jika "syslog" dipilih untuk LogModule, fasilitas log khusus dapat ditentukan.',
         'If "SysLog" was selected for LogModule, the charset that should be used for logging can be specified.' =>
@@ -7561,6 +7489,7 @@ Helpdesk Team Anda
             '',
         'Ignore system sender article types (e. g. auto responses or email notifications) to be flagged as \'Unread Article\' in AgentTicketZoom or expanded automatically in Large view screens.' =>
             '',
+        'Ignores not ticket related attributes.' => '',
         'Import appointments screen.' => '',
         'Include tickets of subqueues per default when selecting a queue.' =>
             'Termasuk tiket dari subqueues per default ketika memilih antrian.',
@@ -7780,8 +7709,8 @@ Helpdesk Team Anda
         'New Year\'s Day' => 'Hari Tahun Baru',
         'New Year\'s Eve' => 'Malam Tahun Baru',
         'New process ticket' => 'Proses tiket baru',
+        'News' => '',
         'News about OTRS releases!' => 'Berita tentang perilisan OTRS!',
-        'News about OTRS.' => '',
         'Next possible ticket states after adding a phone note in the ticket phone inbound screen of the agent interface.' =>
             'Berikutnya state tiket memungkinkan setelah menambahkan catatan telepon di telepon tiket layar masuk dari interface agen.',
         'Next possible ticket states after adding a phone note in the ticket phone outbound screen of the agent interface.' =>
@@ -7802,7 +7731,6 @@ Helpdesk Team Anda
         'Number of tickets to be displayed in each page of a search result in the customer interface.' =>
             'Jumlah tiket yang akan ditampilkan di setiap halaman hasil pencarian di antarmuka pelanggan.',
         'OTRS Group Services' => '',
-        'OTRS News' => 'Berita OTRS',
         'OTRS can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>
             'OTRS dapat menggunakan satu atau lebih database cermin dibaca untuk operasi mahal seperti penuh pencarian teks atau statistik generasi. Di sini Anda dapat menentukan DSN untuk database cermin pertama.',
         'OTRS doesn\'t support recurring Appointments without end date or number of iterations. During import process, it might happen that ICS file contains such Appointments. Instead, system creates all Appointments in the past, plus Appointments for the next N months (120 months/10 years by default).' =>
@@ -7970,7 +7898,6 @@ Helpdesk Team Anda
         'Replaces the original sender with current customer\'s email address on compose answer in the ticket compose screen of the agent interface.' =>
             'Menggantikan pengirim asli dengan alamat email pelanggan saat ini pada jawaban compose di layar compose tiket dari antarmuka agen.',
         'Reports' => 'Laporan',
-        'Reports (OTRS Business Solution™)' => 'Laporan (Solusi bisnis OTRS™)',
         'Reprocess mails from spool directory that could not be imported in the first place.' =>
             'Memproses ulang email dari direktori spool yang tidak dapat diimpor di tempat pertama.',
         'Required permissions to change the customer of a ticket in the agent interface.' =>
@@ -8009,7 +7936,6 @@ Helpdesk Team Anda
         'Resent email to "%s".' => '',
         'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
             'Ulang dan membuka pemilik tiket jika itu dipindahkan ke antrian yang lain.',
-        'Resource Overview (OTRS Business Solution™)' => '',
         'Responsible Tickets' => 'Tiket bertanggung jawab',
         'Responsible Tickets.' => 'Tiket penanggung jawab',
         'Restores a ticket from the archive (only if the event is a state change to any open available state).' =>
@@ -8033,7 +7959,6 @@ Helpdesk Team Anda
         'SMS' => 'SMS',
         'SMS (Short Message Service)' => 'SMS (Layanan mesej pendek)',
         'Salutations' => 'Salam Pembuka',
-        'Sample command output' => 'Contoh perintah output',
         'Saves the attachments of articles. "DB" stores all data in the database (not recommended for storing big attachments). "FS" stores the data on the filesystem; this is faster but the webserver should run under the OTRS user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when "FS" is used.' =>
             'Menyimpan lampiran dari artikel. "DB" menyimpan semua data dalam database (tidak disarankan untuk menyimpan lampiran besar). "FS" menyimpan data di filesystem; ini lebih cepat tapi webserver harus berjalan di bawah pengguna OTRS. Anda dapat beralih antara modul bahkan pada sistem yang sudah di produksi tanpa kehilangan data. Catatan: Mencari nama lampiran tidak didukung ketika "FS" digunakan.',
         'Schedule a maintenance period.' => 'Jadwalkan masa pemeliharaan.',
@@ -8315,7 +8240,6 @@ Helpdesk Team Anda
             'Tampilkan pilihan yang bertanggung jawab di telepon dan email tiket di antarmuka agen.',
         'Show article as rich text even if rich text writing is disabled.' =>
             'Tampilkan artikel sebagai teks kaya bahkan jika menulis teks kaya dinonaktifkan.',
-        'Show command line output.' => '',
         'Show queues even when only locked tickets are in.' => 'Tampilkan antrian bahkan ketika tiket hanya terkunci dalam.',
         'Show the current owner in the customer interface.' => 'Tampilkan pemilik saat ini di antarmuka pelanggan.',
         'Show the current queue in the customer interface.' => 'Tampilkan antrian saat ini di antarmuka pelanggan.',
@@ -8420,12 +8344,8 @@ Helpdesk Team Anda
             'Menunjukkan daftar semua agen yang mungkin (semua agen dengan izin catatan di antrian / tiket) untuk menentukan siapa yang harus diberitahu tentang catatan ini, dalam tiket layar yang bertanggung jawab dari antarmuka agen.',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             'Menunjukkan preview dari gambaran tiket (CustomerInfo => 1 - menunjukkan juga pelanggan-Info, CustomerInfo Max Ukuran max ukuran dalam karakter Pelanggan-Info.).',
-        'Shows a teaser link in the menu for the ticket attachment view of OTRS Business Solution™.' =>
-            '',
         'Shows all both ro and rw queues in the queue view.' => 'Menunjukkan semua baik antrian ro dan rw dalam tampilan antrian.',
         'Shows all both ro and rw tickets in the service view.' => 'Menunjukkan semua baik tiket ro dan rw dalam tampilan layanan.',
-        'Shows all open tickets (even if they are locked) in the escalation view of the agent interface.' =>
-            'Menunjukkan semua tiket terbuka (bahkan jika mereka terkunci) dalam tampilan eskalasi antarmuka agen.',
         'Shows all the articles of the ticket (expanded) in the agent zoom view.' =>
             '',
         'Shows all the articles of the ticket (expanded) in the customer zoom view.' =>
@@ -8440,6 +8360,8 @@ Helpdesk Team Anda
             'Menunjukkan tiket sejarah pelanggan di AgentTicketPhone, AgentTicketEmail dan Pelanggan Agen Tiket.',
         'Shows either the last customer article\'s subject or the ticket title in the small format overview.' =>
             'Menunjukkan baik subjek pelanggan artikel terakhir atau judul tiket di gambaran format kecil.',
+        'Shows existing parent/child (separated by ::) process lists in the form of a tree or a list.' =>
+            '',
         'Shows existing parent/child queue lists in the system in the form of a tree or a list.' =>
             'Menunjukkan daftar antrian orang tua / anak yang ada dalam sistem dalam bentuk pohon atau daftar.',
         'Shows information on how to start OTRS Daemon' => 'Menunjukkan informasi tentang cara untuk memulai OTRS Daemon',
@@ -8512,10 +8434,6 @@ Helpdesk Team Anda
         'Sorts the tickets (ascendingly or descendingly) when a single queue is selected in the service view and after the tickets are sorted by priority. Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top). Use the ServiceID for the key and 0 or 1 for value.' =>
             'Macam tiket (ascendingly atau descendingly) ketika antrian tunggal yang dipilih dalam tampilan layanan dan setelah tiket diurutkan berdasarkan prioritas. Nilai: 0 = naik (tertua di atas, default), 1 = descending (termuda di atas). Gunakan ServiceID untuk kunci dan 0 atau 1 untuk nilai.',
         'Spam' => 'Spam',
-        'Spam Assassin example setup. Ignores emails that are marked with SpamAssassin.' =>
-            'Spam Assassin contoh setup. Mengabaikan email yang ditandai dengan SpamAssassin.',
-        'Spam Assassin example setup. Moves marked mails to spam queue.' =>
-            'Spamassassin contoh setup. Bergerak ditandai mail ke antrian spam.',
         'Spanish' => 'Spanyol',
         'Spanish (Colombia)' => 'Spanyol (Colombia)',
         'Spanish (Mexico)' => 'Spanyol (Meksiko)',
@@ -8543,14 +8461,6 @@ Helpdesk Team Anda
         'Specifies the path of the file for the logo in the page header (gif|jpg|png, 700 x 100 pixel).' =>
             'Menentukan path file untuk logo di header halaman  (gif|jpg|png, 700 x 100 pixel).',
         'Specifies the path of the file for the performance log.' => 'Menentukan path dari file untuk log kinerja.',
-        'Specifies the path to the converter that allows the view of Microsoft Excel files, in the web interface.' =>
-            'Menentukan path ke converter yang memungkinkan tampilan file Microsoft Excel, di antarmuka web.',
-        'Specifies the path to the converter that allows the view of Microsoft Word files, in the web interface.' =>
-            'Menentukan path ke converter yang memungkinkan tampilan file Microsoft Word, di antarmuka web.',
-        'Specifies the path to the converter that allows the view of PDF documents, in the web interface.' =>
-            'Menentukan path ke converter yang memungkinkan tampilan dokumen PDF, di antarmuka web.',
-        'Specifies the path to the converter that allows the view of XML files, in the web interface.' =>
-            'Menentukan path ke converter yang memungkinkan tampilan file XML, di antarmuka web.',
         'Specifies the text that should appear in the log file to denote a CGI script entry.' =>
             'Menentukan teks yang akan muncul dalam file log untuk menunjukkan entri skrip CGI.',
         'Specifies user id of the postmaster data base.' => 'Ditentukan user id dari database postmaster.',
@@ -8578,7 +8488,6 @@ Helpdesk Team Anda
             'Memulai pencarian wildcard dari objek aktif setelah link objek topeng dimulai.',
         'Stat#' => 'Stat#',
         'States' => 'Kondisi',
-        'Statistic Reports overview.' => '',
         'Statistics overview.' => '',
         'Status view' => 'lihat Status',
         'Stopped response time escalation.' => '',
@@ -8778,7 +8687,6 @@ Helpdesk Team Anda
         'Uses richtext for viewing and editing: articles, salutations, signatures, standard templates, auto responses and notifications.' =>
             'Menggunakan teks kaya untuk melihat dan mengedit: artikel, salam, tanda tangan, template standar, tanggapan otomatis dan pemberitahuan.',
         'Vietnam' => 'Vietnam',
-        'View all attachments of the current ticket' => '',
         'View performance benchmark results.' => 'Lihat hasil kinerja benchmark.',
         'Watch this ticket' => 'Amati tiket ini',
         'Watched Tickets' => 'Tiket yang diamati',
@@ -8811,6 +8719,7 @@ Helpdesk Team Anda
             '',
         'Your service selection of your preferred services. You also get notified about those services via email if enabled.' =>
             '',
+        'Znuny.org - News' => '',
         'Zoom' => 'Zoom',
         'attachment' => 'Lampiran',
         'bounce' => 'memantul',
