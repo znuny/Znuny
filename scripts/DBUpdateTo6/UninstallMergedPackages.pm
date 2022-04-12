@@ -74,6 +74,7 @@ sub Run {
     for my $PackageName (
         qw(
         Znuny4OTRS-ZSA202106
+        Znuny-Bugfix225
         )
         )
     {

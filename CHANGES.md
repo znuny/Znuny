@@ -5,6 +5,7 @@
  - 2022-03-24 The system command in SysConfig option "MIME-Viewer" now is only configurable via Kernel/Config.pm (CVE-2021-36100).
  - 2022-03-23 Removed dashboard widget support for execution of system commands (CVE-2021-36100).
  - 2022-03-23 Removed configurable system commands from generic agents (CVE-2021-36100).
+ - 2022-03-22 Added missing CKEditor codemirror plugin.
  - 2022-03-14 Fixed sending notifications to invalid customer users.
 
 # 6.0.40 2022-03-09
