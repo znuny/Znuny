@@ -81,6 +81,7 @@ my @DynamicFields = (
             InvokerSearch       => 'TestSearch',
             InvokerGet          => 'TestGet',
             Webservice          => $WebserviceName,
+            SearchKeys          => 'Key',
             AdditionalDFStorage => [
                 {
                     DynamicField => 'Field1',
@@ -106,6 +107,7 @@ my @DynamicFields = (
             InvokerSearch       => 'TestSearch',
             InvokerGet          => 'TestGet',
             Webservice          => $WebserviceName,
+            SearchKeys          => 'Key',
             AdditionalDFStorage => [
                 {
                     DynamicField => 'Field1',

@@ -38,14 +38,27 @@ sub Run {
     if ( !$AuthenticationTypeColumnExists ) {
         push @XML, '
             <TableAlter Name="mail_account">
-                <ColumnAdd Name="authentication_type" Required="false" Size="100" Type="VARCHAR"/>
+                <ColumnAdd Name="authentication_type" Required="false" Size="100" Default="password" Type="VARCHAR"/>
             </TableAlter>
         ';
     }
 
+    # See issue #236: Fixed error that default value "password" was set
+    # for column "account_type" instead of "authentication_type".
+    push @XML, '
+        <TableAlter Name="mail_account">
+            <ColumnChange NameOld="account_type" NameNew="account_type" Required="true" Size="20" Type="VARCHAR"/>
+        </TableAlter>
+    ';
+    push @XML, '
+        <TableAlter Name="mail_account">
+            <ColumnChange NameOld="authentication_type" NameNew="authentication_type" Required="false" Size="100" Default="password" Type="VARCHAR"/>
+        </TableAlter>
+    ';
+
     my $OAuth2TokenConfigIDColumnExists = $Self->ColumnExists(
         Table  => 'mail_account',
-        Column => 'authentication_type',
+        Column => 'oauth2_token_config_id',
     );
     if ( !$OAuth2TokenConfigIDColumnExists ) {
         push @XML, '
@@ -86,7 +99,7 @@ sub Run {
         # Change column authentication_type to be required.
         @XML = ( '
             <TableAlter Name="mail_account">
-                <ColumnChange NameOld="authentication_type" NameNew="authentication_type" Required="true" Size="100" Type="VARCHAR"/>
+                <ColumnChange NameOld="authentication_type" NameNew="authentication_type" Required="true" Size="100" Default="password" Type="VARCHAR"/>
             </TableAlter>
         ' );
 

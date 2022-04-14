@@ -73,7 +73,7 @@ sub Run {
     return if !%Ticket;
 
     # only set the pending time to 0 if it's actually set
-    return 1 if !$Ticket{UntilTime};
+    return 1 if !defined $Ticket{UntilTime};
 
     # only set the pending time to 0 if the new state is NOT a pending state
     return 1 if $Ticket{StateType} eq $PendingReminderStateType;

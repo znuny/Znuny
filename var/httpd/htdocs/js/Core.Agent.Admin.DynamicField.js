@@ -92,6 +92,19 @@ Core.Agent.Admin.DynamicField = (function (TargetNS) {
         Core.Form.Validate.AddMethod("Validate_PositiveNegativeNumbers", function (Value) {
             return (/^-?[0-9]+$/.test(Value));
         }, "");
+
+        Core.Form.Validate.AddRule("Validate_LinkReservedKeywordsInData", {
+            /*eslint-disable camelcase */
+            Validate_LinkReservedKeywordsInData: true
+            /*eslint-enable camelcase */
+        });
+        Core.Form.Validate.AddMethod("Validate_LinkReservedKeywordsInData", function (Value) {
+            // \[%\s+Data\.(Link|LinkPreview|Title|Value)\s+%\]
+            if (/\[%\s+Data\.(Link|LinkPreview|Title|Value)\s+%\]/.test(Value) === true) {
+                return false;
+            }
+            return true;
+        }, "");
     };
 
     /**

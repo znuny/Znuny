@@ -2630,34 +2630,6 @@
             <Item ValueType="String" ValueRegex="">admin</Item>
         </Value>
     </Setting>
-    <Setting Name="MIME-Viewer###application/excel" Required="0" Valid="0">
-        <Description Translatable="1">Specifies the path to the converter that allows the view of Microsoft Excel files, in the web interface.</Description>
-        <Navigation>Frontend::Agent::MIMEViewer</Navigation>
-        <Value>
-            <Item ValueType="String" ValueRegex="">xlhtml</Item>
-        </Value>
-    </Setting>
-    <Setting Name="MIME-Viewer###application/msword" Required="0" Valid="0">
-        <Description Translatable="1">Specifies the path to the converter that allows the view of Microsoft Word files, in the web interface.</Description>
-        <Navigation>Frontend::Agent::MIMEViewer</Navigation>
-        <Value>
-            <Item ValueType="String" ValueRegex="">wvWare</Item>
-        </Value>
-    </Setting>
-    <Setting Name="MIME-Viewer###application/pdf" Required="0" Valid="0">
-        <Description Translatable="1">Specifies the path to the converter that allows the view of PDF documents, in the web interface.</Description>
-        <Navigation>Frontend::Agent::MIMEViewer</Navigation>
-        <Value>
-            <Item ValueType="String" ValueRegex="">pdftohtml -stdout -i</Item>
-        </Value>
-    </Setting>
-    <Setting Name="MIME-Viewer###text/xml" Required="0" Valid="0">
-        <Description Translatable="1">Specifies the path to the converter that allows the view of XML files, in the web interface.</Description>
-        <Navigation>Frontend::Agent::MIMEViewer</Navigation>
-        <Value>
-            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Home&gt;/scripts/tools/xml2html.pl</Item>
-        </Value>
-    </Setting>
     <Setting Name="WebUserAgent::Timeout" Required="1" Valid="1" ConfigLevel="200">
         <Description Translatable="1">Sets the timeout (in seconds) for http/ftp downloads.</Description>
         <Navigation>Core::WebUserAgent</Navigation>
@@ -2696,12 +2668,24 @@
         </Value>
     </Setting>
     <Setting Name="Package::RepositoryList" Required="0" Valid="0" ConfigLevel="200">
-        <Description Translatable="1">Defines the list of online repositories. Another installations can be used as repository, for example: Key="http://example.com/otrs/public.pl?Action=PublicRepository;File=" and Content="Some Name".</Description>
+        <Description Translatable="1">List of online package repositories.</Description>
         <Navigation>Core::Package</Navigation>
         <Value>
-            <Hash>
-                <Item Key="ftp://ftp.example.com/pub/otrs/misc/packages/">[Example] ftp://ftp.example.com/</Item>
-            </Hash>
+            <Array>
+                <DefaultItem>
+                    <Hash>
+                        <DefaultItem ValueType="String"></DefaultItem>
+                    </Hash>
+                </DefaultItem>
+                <Item>
+                    <Hash>
+                        <Item Key="Name">Example repository 1</Item>
+                        <Item Key="URL">https://addons.znuny.com/api/addon_repos/</Item>
+                        <Item Key="AuthHeaderKey">Authorization</Item>
+                        <Item Key="AuthHeaderValue">Token token=123</Item>
+                    </Hash>
+                </Item>
+            </Array>
         </Value>
     </Setting>
     <Setting Name="Package::RepositoryAccessRegExp" Required="0" Valid="0">
@@ -2730,20 +2714,6 @@
         <Navigation>Core::Package</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
-        </Value>
-    </Setting>
-    <Setting Name="Package::ShowFeatureAddons" Required="0" Valid="1" ConfigLevel="200">
-        <Description Translatable="1">Toggles display of OTRS FeatureAddons list in PackageManager.</Description>
-        <Navigation>Core::Package</Navigation>
-        <Value>
-            <Item ValueType="Checkbox">1</Item>
-        </Value>
-    </Setting>
-    <Setting Name="Package::AllowNotVerifiedPackages" Required="0" Valid="1" ConfigLevel="100">
-        <Description Translatable="1">If this setting is enabled, it is possible to install packages which are not verified by OTRS Group. These packages could threaten your whole system!</Description>
-        <Navigation>Core::Package</Navigation>
-        <Value>
-            <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
     <Setting Name="Package::EventModulePost###9000-SupportDataSend" Required="0" Valid="1">
@@ -8057,6 +8027,7 @@ via the Preferences button after logging in.
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Array>
+                <Item>Core.Color.css</Item>
                 <Item>Core.Reset.css</Item>
                 <Item>Core.Default.css</Item>
                 <Item>Core.Header.css</Item>
@@ -8167,6 +8138,7 @@ via the Preferences button after logging in.
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Array>
+                <Item>Core.Color.css</Item>
                 <Item>Core.Reset.css</Item>
                 <Item>Core.Default.css</Item>
                 <Item>Core.Form.css</Item>

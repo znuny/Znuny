@@ -926,22 +926,12 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     opacity: 0.95;
     filter: alpha(opacity = 95);
     box-shadow: 2px 2px 3px 0px rgba(50, 50, 50, 0.3);
-    -webkit-animation: fadeIn 0.7s;
-    animation: fadeIn 0.7s;
+    -webkit-animation: FadeIn 0.7s;
+    animation: FadeIn 0.7s;
 }
 
 .cke_notification_message a {
     color: #12306F;
-}
-
-@-webkit-keyframes fadeIn {
-    from { opacity: 0.4; }
-    to { opacity: 0.95; }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0.4; }
-    to { opacity: 0.95; }
 }
 
 .cke_notification_success {

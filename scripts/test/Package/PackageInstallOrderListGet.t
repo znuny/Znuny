@@ -248,24 +248,6 @@ my @Tests = (
         Success => 0,
     },
     {
-        Name   => 'OTRSBusiness only',
-        Config => {
-            InstalledPackages => [],
-            OnlinePackages    => [],
-        },
-        OTRSBusinessOptions => {
-            OTRSBusinessIsInstalled  => 1,
-            OTRSBusinessIsUpdateable => 1,
-        },
-        Success        => 1,
-        ExpectedResult => {
-            InstallOrder => {
-                OTRSBusiness => 9999,
-            },
-            Failed => {},
-        },
-    },
-    {
         Name   => 'ITSM 5.0.17 to 5.0.21',
         Config => {
             InstalledPackages => \@InstalledITSM5017,
@@ -281,31 +263,6 @@ my @Tests = (
                 ITSMCore                      => 5,
                 ITSMIncidentProblemManagement => 1,
                 ITSMServiceLevelManagement    => 1,
-            },
-            Failed => {},
-        },
-    },
-    {
-        Name   => 'ITSM 5.0.17 to 5.0.21 W/OTRSBusiness',
-        Config => {
-            InstalledPackages => \@InstalledITSM5017,
-            OnlinePackages    => \@OnlineITSM5021,
-        },
-        OTRSBusinessOptions => {
-            OTRSBusinessIsInstalled  => 1,
-            OTRSBusinessIsUpdateable => 1,
-        },
-        Success        => 1,
-        ExpectedResult => {
-            InstallOrder => {
-                ImportExport                  => 1,
-                GeneralCatalog                => 6,
-                ITSMChangeManagement          => 1,
-                ITSMConfigurationManagement   => 1,
-                ITSMCore                      => 5,
-                ITSMIncidentProblemManagement => 1,
-                ITSMServiceLevelManagement    => 1,
-                OTRSBusiness                  => 9999,
             },
             Failed => {},
         },

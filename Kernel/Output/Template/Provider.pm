@@ -70,8 +70,6 @@ sub OTRSInit {
     return;
 }
 
-=begin Internal:
-
 =head2 _fetch()
 
 try to get a compiled version of a template from the CacheObject,
@@ -185,13 +183,12 @@ sub _load {
     my @Result = $Self->SUPER::_load( $Name, $Alias );
 
     # If there was no error, pre-process our template
-    if ( ref $Result[0] ) {
+    return @Result if !$Result[0] && !ref $Result[0];
 
-        $Result[0]->{text} = $Self->_PreProcessTemplateContent(
-            Content      => $Result[0]->{text},
-            TemplateFile => $Result[0]->{name},
-        );
-    }
+    $Result[0]->{text} = $Self->_PreProcessTemplateContent(
+        Content      => $Result[0]->{text},
+        TemplateFile => $Result[0]->{name},
+    );
 
     return @Result;
 }
@@ -278,8 +275,6 @@ sub _compile {
         : ( $error, Template::Constants::STATUS_ERROR );
 }
 
-=end Internal:
-
 =head2 store()
 
 inherited from Template::Provider. This function override just makes sure that the original
@@ -292,8 +287,6 @@ sub store {
 
     return $Data;    # no-op
 }
-
-=begin Internal:
 
 =head2 _PreProcessTemplateContent()
 
@@ -378,9 +371,6 @@ sub _PreProcessTemplateContent {
     return $Content;
 
 }
-
-=end Internal:
-=cut
 
 1;
 

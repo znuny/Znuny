@@ -15,6 +15,8 @@ use warnings;
 
 use parent qw(Kernel::System::Console::BaseCommand);
 
+use Kernel::System::VariableCheck qw(:all);
+
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Cache',
@@ -25,7 +27,7 @@ our @ObjectDependencies = (
 sub Configure {
     my ( $Self, %Param ) = @_;
 
-    $Self->Description('List all installed OTRS packages.');
+    $Self->Description('List all installed packages.');
 
     $Self->AddOption(
         Name        => 'package-name',
@@ -42,33 +44,6 @@ sub Configure {
         HasValue    => 0,
     );
 
-    $Self->AddOption(
-        Name        => 'show-verification-info',
-        Description => 'Show package OTRS Verify™ status.',
-        Required    => 0,
-        HasValue    => 0,
-    );
-
-    $Self->AddOption(
-        Name        => 'delete-verification-cache',
-        Description => 'Delete OTRS Verify™ cache, so verification info is fetch again from OTRS group servers.',
-        Required    => 0,
-        HasValue    => 0,
-    );
-
-    return;
-}
-
-sub PreRun {
-    my ( $Self, %Param ) = @_;
-
-    my $ShowVerificationInfoOption    = $Self->GetOption('show-verification-info');
-    my $DeleteVerificationCacheOption = $Self->GetOption('delete-verification-cache');
-
-    if ( $DeleteVerificationCacheOption && !$ShowVerificationInfoOption ) {
-        die "--delete-verification-cache requires --show-verification-info";
-    }
-
     return;
 }
 
@@ -84,23 +59,10 @@ sub Run {
         return $Self->ExitCodeOk();
     }
 
-    my $PackageNameOption             = $Self->GetOption('package-name');
-    my $ShowDeploymentInfoOption      = $Self->GetOption('show-deployment-info');
-    my $ShowVerificationInfoOption    = $Self->GetOption('show-verification-info');
-    my $DeleteVerificationCacheOption = $Self->GetOption('delete-verification-cache');
+    my $PackageNameOption        = $Self->GetOption('package-name');
+    my $ShowDeploymentInfoOption = $Self->GetOption('show-deployment-info');
 
-    my $CloudServicesDisabled = $Kernel::OM->Get('Kernel::Config')->Get('CloudServices::Disabled') || 0;
-
-    # Do not show verification status is cloud services are disabled.
-    if ( $CloudServicesDisabled && $ShowVerificationInfoOption ) {
-        $ShowVerificationInfoOption = 0;
-        $Self->Print("<red>Cloud Services are disabled OTRS Verify information can not be retrieved</red>\n");
-    }
-
-    # Get package object
     my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
-
-    my %VerificationInfo;
 
     PACKAGE:
     for my $Package (@Packages) {
@@ -152,33 +114,6 @@ sub Run {
                 $Self->Print(
                     '| <yellow>Pck. Status:</yellow> ' . ( $PackageDeploymentOK ? 'OK' : 'Not OK' ) . "\n"
                 );
-            }
-        }
-
-        if ($ShowVerificationInfoOption) {
-
-            if ( !%VerificationInfo ) {
-
-                # Clear the package verification cache to get fresh results.
-                if ($DeleteVerificationCacheOption) {
-                    $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
-                        Type => 'PackageVerification',
-                    );
-                }
-
-                # Get verification info for all packages (this will create the cache again).
-                %VerificationInfo = $PackageObject->PackageVerifyAll();
-            }
-
-            if (
-                !defined $VerificationInfo{ $Package->{Name}->{Content} }
-                || $VerificationInfo{ $Package->{Name}->{Content} } ne 'verified'
-                )
-            {
-                $Self->Print("| <red>OTRS Verify:</red> Not Verified\n");
-            }
-            else {
-                $Self->Print("| <yellow>OTRS Verify:</yellow> Verified\n");
             }
         }
     }
@@ -281,62 +216,51 @@ sub _PackageMetadataGet {
 sub _PackageContentGet {
     my ( $Self, %Param ) = @_;
 
-    my $FileString;
+    my $Source;
+    my $PackageName = $Param{Location};
+    if ( $Param{Location} =~ m{\A(.*):(.+)\z} ) {
+        $Source      = $1;
+        $PackageName = $2;
+    }
 
-    if ( -e $Param{Location} ) {
+    # File in local file system
+    if (
+        !IsStringWithData($Source)
+        && -f $Param{Location}
+        )
+    {
         my $ContentRef = $Kernel::OM->Get('Kernel::System::Main')->FileRead(
             Location => $Param{Location},
             Mode     => 'utf8',             # optional - binmode|utf8
             Result   => 'SCALAR',           # optional - SCALAR|ARRAY
         );
         if ($ContentRef) {
-            $FileString = ${$ContentRef};
+            return ${$ContentRef};
         }
         else {
             $Self->PrintError("Can't open: $Param{Location}: $!");
             return;
         }
     }
-    elsif ( $Param{Location} =~ /^(online|.*):(.+?)$/ ) {
-        my $URL         = $1;
-        my $PackageName = $2;
-        if ( $URL eq 'online' ) {
-            my %List = %{ $Kernel::OM->Get('Kernel::Config')->Get('Package::RepositoryList') };
-            %List = (
-                %List,
-                $Kernel::OM->Get('Kernel::System::Package')->PackageOnlineRepositories()
-            );
-            for my $Repository ( sort keys %List ) {
-                if ( $List{$Repository} =~ /^\[-Master-\]/ ) {
-                    $URL = $Repository;
-                }
-            }
-        }
-        if ( $PackageName !~ /^.+?.opm$/ ) {
-            my @Packages = $Kernel::OM->Get('Kernel::System::Package')->PackageOnlineList(
-                URL  => $URL,
-                Lang => $Kernel::OM->Get('Kernel::Config')->Get('DefaultLanguage'),
-            );
-            PACKAGE:
-            for my $Package (@Packages) {
-                if ( $Package->{Name} eq $PackageName ) {
-                    $PackageName = $Package->{File};
-                    last PACKAGE;
-                }
-            }
-        }
-        $FileString = $Kernel::OM->Get('Kernel::System::Package')->PackageOnlineGet(
-            Source => $URL,
+
+    # File in configured remote repository or as direct download
+    elsif ( IsStringWithData($Source) ) {
+        my $FileContent = $Kernel::OM->Get('Kernel::System::Package')->PackageOnlineGet(
+            Source => $Source,
             File   => $PackageName,
         );
-        if ( !$FileString ) {
-            $Self->PrintError("No such file '$Param{Location}' in $URL!");
-            return;
-        }
+        return $FileContent if IsStringWithData($FileContent);
+
+        $Self->PrintError("File '$PackageName' not found in source '$Source'.");
+        return;
     }
-    else {
-        if ( $Param{Location} =~ /^(.*)\-(\d{1,4}\.\d{1,4}\.\d{1,4})$/ ) {
-            $FileString = $Kernel::OM->Get('Kernel::System::Package')->RepositoryGet(
+
+    # File in local repository
+    elsif ( !IsStringWithData($Source) ) {
+        my $FileContent;
+
+        if ( $Param{Location} =~ m{\A(.*)\-(\d+\.\d+\.\d+)\z} ) {
+            $FileContent = $Kernel::OM->Get('Kernel::System::Package')->RepositoryGet(
                 Name    => $1,
                 Version => $2,
             );
@@ -345,7 +269,7 @@ sub _PackageContentGet {
             PACKAGE:
             for my $Package ( $Kernel::OM->Get('Kernel::System::Package')->RepositoryList() ) {
                 if ( $Param{Location} eq $Package->{Name}->{Content} ) {
-                    $FileString = $Kernel::OM->Get('Kernel::System::Package')->RepositoryGet(
+                    $FileContent = $Kernel::OM->Get('Kernel::System::Package')->RepositoryGet(
                         Name    => $Package->{Name}->{Content},
                         Version => $Package->{Version}->{Content},
                     );
@@ -353,13 +277,15 @@ sub _PackageContentGet {
                 }
             }
         }
-        if ( !$FileString ) {
-            $Self->PrintError("No such file '$Param{Location}' or invalid 'package-version'!");
+        if ( !$FileContent ) {
+            $Self->PrintError("File '$Param{Location}' not found in local repository or invalid package version.");
             return;
         }
+
+        return $FileContent;
     }
 
-    return $FileString;
+    return;
 }
 
 1;

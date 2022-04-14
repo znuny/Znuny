@@ -52,9 +52,9 @@
 </div>
 <div class="Clear"></div>
 
-<label class="Mandatory" for="SearchKeys"><span class="Marker">*</span> [% Translate("Key for search") | html %]:</label>
+<label for="SearchKeys">[% Translate("Key for search") | html %]:</label>
 <div class="Field">
-    <input id="SearchKeys" class="W50pc [% Data.SearchKeysServerError | html %] Validate_Required" type="text" maxlength="200" value="[% Data.SearchKeys | html %]" name="SearchKeys"/>
+    <input id="SearchKeys" class="W50pc [% Data.SearchKeysServerError | html %]" type="text" maxlength="200" value="[% Data.SearchKeys | html %]" name="SearchKeys"/>
     <div id="SearchKeysServerError" class="TooltipErrorMessage"><p>[% Translate(Data.SearchKeysServerErrorMessage) | html %]</p></div>
     <p class="FieldExplanation">[% Translate("The keys (separated by comma) that will be searched when using the autocomplete while entering a value for the dynamic field.") | html %]</p>
 </div>

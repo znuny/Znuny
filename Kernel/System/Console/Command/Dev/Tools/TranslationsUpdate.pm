@@ -19,7 +19,7 @@ use File::Copy;
 use Lingua::Translit;
 
 use Kernel::Language;
-use Kernel::System::VariableCheck qw(DataIsDifferent);
+use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -104,12 +104,12 @@ sub PreRun {
         }
     }
 
-    return 1 if !$LinkedFile;
+    return $Self->ExitCodeOk() if !$LinkedFile;
 
     $Self->Print("\n<red>Make sure that all symbolic links are removed before.</red>\n");
     $Self->Print("<green>perl module-tools/bin/otrs.ModuleTools.pl Module::File::Unlink --all $Home</green>\n\n");
 
-    return 1;
+    die;
 }
 
 sub Run {
@@ -169,6 +169,9 @@ sub Run {
 }
 
 my @OriginalTranslationStrings;
+
+# Remember which strings came from JavaScript
+my %UsedInJS;
 
 sub HandleLanguage {
     my ( $Self, %Param ) = @_;
@@ -381,6 +384,10 @@ sub HandleLanguage {
         );
     }
 
+    if ( !%UsedInJS && IsHashRefWithData( $LanguageObject->{UsedInJS} ) ) {
+        %UsedInJS = %{ $LanguageObject->{UsedInJS} };
+    }
+
     $Self->WritePerlLanguageFile(
         IsSubTranslation   => $IsSubTranslation,
         LanguageCoreObject => $LanguageCoreObject,
@@ -389,7 +396,7 @@ sub HandleLanguage {
         LanguageFile       => $LanguageFile,
         TargetFile         => $TargetFile,
         TranslationStrings => \@TranslationStrings,
-        UsedInJS           => $LanguageObject->{UsedInJS},    # Remember which strings came from JavaScript
+        UsedInJS           => \%UsedInJS,             # Remember which strings came from JavaScript
     );
     return 1;
 }

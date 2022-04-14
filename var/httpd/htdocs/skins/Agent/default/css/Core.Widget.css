@@ -142,6 +142,7 @@ ul.Tablelike li.Header + li {
 .WidgetSimple > .Content {
     padding: 8px 8px 10px;
     overflow: auto;
+    color: #000;
     /**
      *   START IE9 Hover Bug Workaround
      *   The problem occurs when you have a container that has a fixed width set, an overflow set to
@@ -1197,11 +1198,11 @@ input.FilterBox {
 }
 
 button.HighlightHint {
-    animation: ButtonHint 0.7s infinite alternate;
+    animation: HighlightGreen 0.7s infinite alternate;
 }
 
 button.HighlightError {
-    animation: ButtonError 0.7s infinite alternate;
+    animation: HighlightRed 0.7s infinite alternate;
 }
 
 /**
@@ -1255,24 +1256,6 @@ button.HighlightError {
 
 .LoginScreen .WidgetSimple.MessageOfTheDayBox h2 {
     padding: 5px 0px;
-}
-
-@keyframes ButtonHint {
-    from {
-        box-shadow: none;
-        }
-    to {
-        box-shadow: 0 0 10px green;
-    }
-}
-
-@keyframes ButtonError {
-    from {
-        box-shadow: none;
-        }
-    to {
-        box-shadow: 0 0 10px red;
-    }
 }
 
 } /* end @media */

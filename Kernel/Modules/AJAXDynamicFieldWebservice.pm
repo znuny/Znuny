@@ -57,6 +57,11 @@ sub Run {
     my $TicketID    = $ParamObject->GetParam( Param => 'TicketID' );
     my $UserID      = $LayoutObject->{UserID};
 
+    my $UserType = $LayoutObject->{SessionSource} || '';
+    if ($UserType) {
+        $UserType =~ s/Interface//;
+    }
+
     my %GetParam = $Self->_GetParams();
 
     # get the dynamic fields for this screen
@@ -81,16 +86,13 @@ sub Run {
     my $Data;
     if ( $Subaction eq 'Autocomplete' ) {
 
-        # workaround, all auto completion requests get posted by utf8 anyway
-        # convert any to 8 bit string if application is not running in utf8
-        $EncodeObject->EncodeOutput( \$SearchTerms );
-
         $Data = $Self->_Autocomplete(
             DynamicFieldName => $DynamicFieldName,
             SearchTerms      => $SearchTerms,
             TicketID         => $TicketID,
             GetParam         => \%GetParam,
             UserID           => $UserID,
+            UserType         => $UserType,
         );
     }
     elsif ( $Subaction eq 'AutoFill' ) {
@@ -101,6 +103,7 @@ sub Run {
             TicketID         => $TicketID,
             GetParam         => \%GetParam,
             UserID           => $UserID,
+            UserType         => $UserType,
         );
     }
     elsif ( $Subaction eq 'Test' ) {
@@ -130,6 +133,7 @@ sub Run {
             Config           => $Config,
             TicketID         => $TicketID,
             UserID           => $UserID,
+            UserType         => $UserType,
         );
     }
 
@@ -180,6 +184,7 @@ sub _Autocomplete {
         TicketID           => $Param{TicketID},
         GetParam           => $Param{GetParam},
         UserID             => $Param{UserID},
+        UserType           => $Param{UserType},
     );
 
     return $Data;
@@ -220,6 +225,7 @@ sub _AutoFill {
         DynamicFieldConfig => $DynamicFieldConfig,
         SearchTerms        => $Param{SearchTerms},
         UserID             => $Param{UserID},
+        UserType           => $Param{UserType},
     );
 
     return $Data;
@@ -249,6 +255,7 @@ sub _Test {
         Config           => $Param{Config},
         TicketID         => $Param{TicketID},
         UserID           => $Param{UserID},
+        UserType         => $Param{UserType},
     );
 
     return $Result if !$Result->{Success};

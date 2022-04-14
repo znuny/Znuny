@@ -546,7 +546,7 @@ Core.App = (function (TargetNS) {
                 }
 
                 // If there is an input value in the toolbar TicketSearchFulltext, don't refresh
-                if ($('#Fulltext') && $('#Fulltext').val().length) {
+                if ($('#Fulltext').length && $('#Fulltext').val().length) {
                     return;
                 }
 

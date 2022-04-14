@@ -49,6 +49,7 @@ my %Setting = $SysConfigObject->SettingGet(
 );
 
 my @ExpectedSettingClean = (
+    'Core.Color.css',
     'Core.Reset.css',
     'Core.Default.css',
     'Core.Header.css',
@@ -137,6 +138,7 @@ $CacheObject->CleanUp();
 );
 
 my @ExpectedSetting = (
+    'Core.Color.css',
     'Core.Reset.css',
     'Core.Default.css',
     'Core.Header.css',

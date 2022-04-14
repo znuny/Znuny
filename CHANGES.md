@@ -1,7 +1,14 @@
-# 6.4.1 2022-xx-xx
-
 # 6.3.2 2022-xx-xx
+ - 2022-04-13 Fixed refresh in overviews if fulltext search in toolbar is not enabled. [#237](https://github.com/znuny/Znuny/issues/237)
+ - 2022-04-01 Fixed encoding for autocompletion in dynamic field edit view of type Webservice.
+ - 2022-03-31 Fixed check of UntilTime in Kernel::System::Ticket::Event::TicketPendingTimeReset. [#221)(https://github.com/znuny/Znuny/issues/221)
+ - 2022-03-28 Added support for online package repositories again.
+ - 2022-03-24 The system command in SysConfig option "MIME-Viewer" now is only configurable via Kernel/Config.pm (CVE-2021-36100).
+ - 2022-03-23 Improved DynamicFieldObject _SanitizeConfig - ReservedKeywords will now be removed.
+ - 2022-03-22 Added missing CKEditor codemirror plugin.
+ - 2022-03-22 Fixed accidental deletion of OAuth2 token values on request for new token.
  - 2022-03-17 Added PreRun function to Dev/Tools/TranslationsUpdate to check for symbolic links.
+ - 2022-03-15 Added new SysConfig option LibXML::EnableHugeXMLDataSupport to enable support for huge XML data in load_xml calls of CPAN library XML::LibXML.
  - 2022-03-11 Removed 'send support bundle' to OTRS Group.
  - 2022-03-11 CPAN module Mail::IMAPClient will now be correctly reported as required by bin/otrs.CheckModules.pl [#222](https://github.com/znuny/Znuny/issues/222).
 
@@ -144,6 +151,12 @@
  - 2021-06-15 Improvements for Dev::Code::CPANUpdate (#38). Thanks to Renée Bäcker (@reneeb). [#38](https://github.com/znuny/Znuny/pull/38)
  - 2021-06-15 Use ticket title as the default appointment title (#90). Thanks to Renée Bäcker (@reneeb). [#90](https://github.com/znuny/Znuny/pull/90)
  - 2021-06-15 Column list validation before saving agent preferences (#84). Thanks to Paweł Bogusławski (@pboguslawski). [#84](https://github.com/znuny/Znuny/pull/84)
+
+# 6.0.41 2022-xx-xx
+ - 2022-04-13 Fixed refresh in overviews if fulltext search in toolbar is not enabled. [#237](https://github.com/znuny/Znuny/issues/237)
+ - 2022-03-24 The system command in SysConfig option "MIME-Viewer" now is only configurable via Kernel/Config.pm (CVE-2021-36100).
+ - 2022-03-22 Added missing CKEditor codemirror plugin.
+ - 2022-03-14 Fixed sending notifications to invalid customer users.
 
 # 6.0.40 2022-03-09
  - 2022-03-07 Original owners of tickets will now be set again when cancelling a ticket bulk action.

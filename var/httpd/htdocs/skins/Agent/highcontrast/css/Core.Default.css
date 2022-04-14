@@ -29,7 +29,7 @@ div.DnDUpload {
 
 .WidgetSimple > .Header,
 .WidgetSimple.Collapsed.AnimationRunning > .Header {
-    background: #333;
+    background: var(--grey3-color, #333);
 }
 
 .WidgetSimple > .Header *,
@@ -50,7 +50,7 @@ div.DnDUpload {
 .TableSmall thead .SortDescendingLarge a,
 .ColumnSettingsContainer .DeleteFilter,
 .ColumnSettingsContainer .SelectedValue {
-    color: #000;
+    color: var(--black-color);
 }
 
 .WidgetAction.Toggle i,
@@ -63,7 +63,7 @@ div.DnDUpload {
 .DataTable tr:nth-child(even) td,
 .TableSmall tr:nth-child(even) td,
 .LayoutPopup > .Header {
-    background: #fff;
+    background: var(--green-color);
 }
 
 #ToolBar a {

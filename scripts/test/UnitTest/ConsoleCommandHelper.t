@@ -42,7 +42,7 @@ my @Tests = (
         CommandModule => 'Kernel::System::Console::Command::Help',
         Parameter     => 'Lis',
         ExitCode      => 0,
-        STDOUT        => 'List all installed OTRS packages',
+        STDOUT        => 'List all installed packages',
     },
     {
         Name          => "Expected invalid 'Parameter'",
