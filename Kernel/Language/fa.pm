@@ -1744,7 +1744,7 @@ sub Data {
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             'مرتب سازی عناصر در لیست با کشیدن و رها کردن نیز ممکن است.',
         'Filter available Activity Dialogs' => 'فیلتر در دسترس تبادل فعالیت',
-        'Show global %s' => '',
+        'Also show global %s' => '',
         'Available Activity Dialogs' => 'در دسترس تبادل فعالیت',
         'Name: %s, EntityID: %s' => 'نام: %s ، EntityID: %s',
         'Create New Activity Dialog' => 'ساختن فعالیت جدید گفت و گو',

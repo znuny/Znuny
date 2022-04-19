@@ -1744,7 +1744,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             'このリストの表示順序はドラッグアンドドロップで変更することが出来ます。',
         'Filter available Activity Dialogs' => '利用可能なアクティビティダイアログをフィルタ',
-        'Show global %s' => '',
+        'Also show global %s' => '',
         'Available Activity Dialogs' => '利用可能なアクティビティダイアログ',
         'Name: %s, EntityID: %s' => '名前: %s, エンティティID: %s',
         'Create New Activity Dialog' => '新規アクティビティダイアログを作成',

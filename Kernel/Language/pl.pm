@@ -1743,7 +1743,7 @@ sub Data {
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             'Porządkowanie elementów na liście jest możliwe również za pomocą chwytania i upuszczania.',
         'Filter available Activity Dialogs' => 'Filtruj dostępne okna działań',
-        'Show global %s' => '',
+        'Also show global %s' => '',
         'Available Activity Dialogs' => 'Dostępne okna działań',
         'Name: %s, EntityID: %s' => 'Nazwa: %s, EtnityID: %s',
         'Create New Activity Dialog' => 'Utwórz nowe okno działania',

@@ -824,8 +824,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
         // get new Accordion HTML via AJAX and replace the accordion with this HTML
         // re-initialize accordion functions (accordion, filters, DnD)
         var Data = {
-                Action: 'AdminProcessManagement',
-                Subaction: 'UpdateAccordion',
+                Action:          'AdminProcessManagement',
+                Subaction:       'UpdateAccordion',
+                ProcessEntityID: $('#ProcessEntityID').val()
             },
             ActiveElementIndex = parseInt($('ul#ProcessElements > li.Active').index(), 10),
             ActiveElementValue = $('ul#ProcessElements > li:eq(' + ActiveElementIndex + ') .ProcessElementFilter').val();
@@ -1832,19 +1833,45 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
         if(!ScopeEntityID) { return; }
 
         $ScopeFilterElements.each(function(){
-            $(this).off('change.InitScopeFilter').on('change.InitScopeFilter', function () {
+            var $ProcessElementFilter = $(this).parent().find('input.ProcessElementFilter, input.FilterAvailableProcessItem'),
+                $GlobeIcon            = $(this).next('.fa-globe'),
+                $ScopeFilterCheckbox  = $(this);
 
+            // Add a keydown event to the process element filter because the "global scope" checkbox
+            // shall be automatically set if the filter is used.
+            // This is because Core.UI.Table filters over all elements of the table, not only the visible ones.
+            if ($ProcessElementFilter.length) {
+                $ProcessElementFilter.off('keydown.InitScopeFilter').on('keydown.InitScopeFilter', function() {
+                    $ScopeFilterCheckbox.prop('checked', true).trigger('change');
+                });
+            }
+
+            // Click on globe should also set/unset checkbox.
+            $GlobeIcon.off('click.InitScopeFilter').on('click.InitScopeFilter', function() {
+                $ScopeFilterCheckbox.trigger('click');
+            });
+
+            $(this).off('change.InitScopeFilter').on('change.InitScopeFilter', function () {
                 var EntityType = $(this).data('scopeFilter'),
                     FilterType         = 'Process',
                     ScopeEntityID      = $('#ProcessEntityID').val(),
                     $HideScopeElements = $('[data-entity-type=' + EntityType + ']'),
-                    $ShowScopeElements;
+                    $ShowGlobalScopeElements,
+                    $ShowScopeElements,
+                    $ElementsToRemove     = $('li[data-scope=Process][data-scope-entity-id != ' + ScopeEntityID + ']');
+
+                // Remove elements from other processes and that are not global.
+                // This is due to Core.UI.Table filtering elements without regard to scope
+                // so the filter would show all elements (also from other processes) instead only the ones from the
+                // current process and global ones.
+                $ElementsToRemove.remove();
 
                 $ShowScopeElements = $('[data-entity-type=' + EntityType + '][data-scope=' + FilterType +'][data-scope-entity-id=' + ScopeEntityID + ']');
 
                 // change / improve this FilterType if you need more types
                 if(this.checked) {
-                    $ShowScopeElements = $('[data-entity-type=' + EntityType + ']');
+                    FilterType = 'Global';
+                    $ShowGlobalScopeElements = $('[data-entity-type=' + EntityType + '][data-scope=Global]');
                 }
 
                 $HideScopeElements.each(function(){
@@ -1853,7 +1880,13 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                 $ShowScopeElements.each(function(){
                     $(this).show();
                 });
+                if($ShowGlobalScopeElements){
+                    $ShowGlobalScopeElements.each(function(){
+                        $(this).show();
+                    });
+                }
             });
+            $(this).trigger('change');
         });
     };
 

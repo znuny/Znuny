@@ -1740,7 +1740,7 @@ sub Data {
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             'Det er også muligt at arrangere elementerne i listen v.h.a. træk og slip.',
         'Filter available Activity Dialogs' => 'Filtrer tilgængelige aktivitets dialoger',
-        'Show global %s' => '',
+        'Also show global %s' => '',
         'Available Activity Dialogs' => 'Tilgængelige aktivitets dialoger',
         'Name: %s, EntityID: %s' => '',
         'Create New Activity Dialog' => 'Opret ny aktivitets dialog',

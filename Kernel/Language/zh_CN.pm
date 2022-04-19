@@ -1745,7 +1745,7 @@ sub Data {
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             '利用鼠标拖放动作还可以对元素进行排序。',
         'Filter available Activity Dialogs' => '可用的活动对话框过滤器',
-        'Show global %s' => '',
+        'Also show global %s' => '',
         'Available Activity Dialogs' => '可用的活动对话框',
         'Name: %s, EntityID: %s' => '名称：%s， EntityID： %s',
         'Create New Activity Dialog' => '创建新的活动对话框',

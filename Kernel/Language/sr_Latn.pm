@@ -1744,7 +1744,7 @@ sub Data {
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             'Menjanje redosleda elemenata unutar liste je, takođe, moguće prevračenjem elemenata i puštanjem.',
         'Filter available Activity Dialogs' => 'Filtriraj slobodne dijaloge aktivnosti',
-        'Show global %s' => '',
+        'Also show global %s' => '',
         'Available Activity Dialogs' => 'Slobodni dijalozi aktivnosti',
         'Name: %s, EntityID: %s' => 'Naziv: %s, ID entiteta: %s',
         'Create New Activity Dialog' => 'Kreiraj nov dijalog aktivnosti',

@@ -1737,7 +1737,7 @@ sub Data {
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             'Memesan unsur dalam senarai juga boleh dilakukan dengan drag dan drop.',
         'Filter available Activity Dialogs' => 'Dialog Aktiviti dengan Penapis',
-        'Show global %s' => '',
+        'Also show global %s' => '',
         'Available Activity Dialogs' => 'Dialog Aktiviti Tersedia',
         'Name: %s, EntityID: %s' => 'Nama: %s, EntitiID: %s',
         'Create New Activity Dialog' => 'Cipta Dialog Aktiviti Baru',

@@ -1744,7 +1744,7 @@ sub Data {
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             'U kunt de elementen ook van volgorde te wijzigen door ze te slepen met de muis.',
         'Filter available Activity Dialogs' => 'Filter beschikbare dialogen',
-        'Show global %s' => '',
+        'Also show global %s' => '',
         'Available Activity Dialogs' => 'Beschikbare dialogen',
         'Name: %s, EntityID: %s' => 'Naam: %s. ID: %s',
         'Create New Activity Dialog' => 'Nieuwe dialoog',

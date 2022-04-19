@@ -24965,3 +24965,7 @@ msgstr ""
 msgid "Enables support for huge XML data in load_xml calls of CPAN library XML::LibXML. This should only be enabled if absolutely needed. Disabling this option (default) protects against denial of service through entity expansion attacks. Before enabling this option ensure that alternative measures to protect the application against this type of attack have been taken."
 msgstr ""
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
+msgid "Also show global %s"
+msgstr ""
+

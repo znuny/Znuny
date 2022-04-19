@@ -1750,7 +1750,7 @@ sub Data {
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             'Порядок элементов в списке изменяется перетаскиванием элементов (drag \'n\' drop)',
         'Filter available Activity Dialogs' => 'Фильтр доступных Диалогов Активности',
-        'Show global %s' => '',
+        'Also show global %s' => '',
         'Available Activity Dialogs' => 'Доступные Диалоги Активности',
         'Name: %s, EntityID: %s' => 'Имя: %s, EntityID: %s',
         'Create New Activity Dialog' => 'Создать новый Диалог Активности',

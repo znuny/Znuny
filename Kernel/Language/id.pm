@@ -1739,7 +1739,7 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             'Pengurutan elemen dalam daftar ini juga mungkin dengan cara drag \'n\' drop.',
         'Filter available Activity Dialogs' => 'Penyaring menyediakan aktivitas dialog',
-        'Show global %s' => '',
+        'Also show global %s' => '',
         'Available Activity Dialogs' => 'Aktivitas dialog tersedia',
         'Name: %s, EntityID: %s' => 'Nama:%s, EntityID:%s',
         'Create New Activity Dialog' => 'Membuat aktivitas dialog baru',

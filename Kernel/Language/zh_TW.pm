@@ -1741,7 +1741,7 @@ sub Data {
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             '利用鼠標拖放動作還可以對元素進行排序。',
         'Filter available Activity Dialogs' => '過濾可選的環節操作',
-        'Show global %s' => '',
+        'Also show global %s' => '',
         'Available Activity Dialogs' => '可選的環節操作',
         'Name: %s, EntityID: %s' => '',
         'Create New Activity Dialog' => '創建新環節操作',

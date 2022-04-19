@@ -1741,7 +1741,7 @@ sub Data {
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             'Kupanga elementi ndani ya orodha pia inawezekana kwa kukokota na kudondosha.',
         'Filter available Activity Dialogs' => 'Chuja mazungumzo yaliyopo ya shughuli',
-        'Show global %s' => '',
+        'Also show global %s' => '',
         'Available Activity Dialogs' => 'Mazungumzo ya shughuli yaliyopo',
         'Name: %s, EntityID: %s' => '',
         'Create New Activity Dialog' => 'Tengeneza mazungumzo ya shughuli mapya',

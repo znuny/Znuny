@@ -1747,7 +1747,7 @@ sub Data {
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             'Puoi ordinare gli elementi dell\'elenco anche attraverso il trascinamento.',
         'Filter available Activity Dialogs' => 'Imposta un filtro alle interazioni delle attività disponibili.',
-        'Show global %s' => '',
+        'Also show global %s' => '',
         'Available Activity Dialogs' => 'Interazioni dell\'attività disponibili',
         'Name: %s, EntityID: %s' => 'Nome: %s, EntityID: %s',
         'Create New Activity Dialog' => 'Crea una nuova interazione per l\'attività',

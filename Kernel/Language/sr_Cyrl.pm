@@ -1738,7 +1738,7 @@ sub Data {
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             'Мењање редоследа елемената унутар листе је, такође, могуће преврачењем елемената и пуштањем.',
         'Filter available Activity Dialogs' => 'Филтрирај слободне дијалоге активности',
-        'Show global %s' => '',
+        'Also show global %s' => '',
         'Available Activity Dialogs' => 'Слободни дијалози активности',
         'Name: %s, EntityID: %s' => 'Назив: %s, ID ентитета: %s',
         'Create New Activity Dialog' => 'Креирај нов дијалог активности',

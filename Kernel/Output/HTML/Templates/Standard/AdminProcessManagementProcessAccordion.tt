@@ -11,7 +11,7 @@
         <h2><a href="#" class="AsBlock"><span><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></span>[% Translate("Activities") | html %]</a></h2>
         <div class="Content">
             <input type="text" id="ActivityFilter" class="ProcessElementFilter WithScope" placeholder="[% Translate("Filter Activities...") | html %]" />
-            <input type="checkbox" checked id="ActivityScopeFilter" class="ScopeFilter" title="[% Translate('Show global %s', Translate('Activities')) | html %]" data-scope-filter="Activity" name="ActivityScopeFilter"><i class="fa fa-globe" title="[% Translate('Show global %s', Translate('Activities')) | html %]"></i>
+            <input type="checkbox" checked id="ActivityScopeFilter" class="ScopeFilter" title="[% Translate('Also show global %s', Translate('Activities')) | html %]" data-scope-filter="Activity" name="ActivityScopeFilter"><i class="fa fa-globe" title="[% Translate('Also show global %s', Translate('Activities')) | html %]"></i>
             <ul class="Tablelike" id="Activities">
 [% RenderBlockStart("ActivityRow") %]
                 <li class="OneRow" data-entity="[% Data.EntityID | html %]" data-id="[% Data.ID | html %]" data-entity-type="Activity" data-scope="[% Data.Config.Scope %]" data-scope-entity-id="[% Data.Config.ScopeEntityID %]">
@@ -35,7 +35,7 @@
         <h2><a href="#" class="AsBlock"><span><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></span>[% Translate("Activity Dialogs") | html %]</a></h2>
         <div class="Content">
             <input type="text" id="ActivityDialogFilter" class="ProcessElementFilter WithScope" placeholder="[% Translate("Filter Activity Dialogs...") | html %]" />
-            <input type="checkbox" checked id="ActivityDialogScopeFilter" class="ScopeFilter" data-scope-filter="ActivityDialog" title="[% Translate('Show global %s', Translate('Activity Dialogs')) | html %]" name="ActivityDialogScopeFilter"><i class="fa fa-globe" title="[% Translate('Show global %s', Translate('Activity Dialogs')) | html %]"></i>
+            <input type="checkbox" checked id="ActivityDialogScopeFilter" class="ScopeFilter" data-scope-filter="ActivityDialog" title="[% Translate('Also show global %s', Translate('Activity Dialogs')) | html %]" name="ActivityDialogScopeFilter"><i class="fa fa-globe" title="[% Translate('Also show global %s', Translate('Activity Dialogs')) | html %]"></i>
             <ul class="Tablelike" id="ActivityDialogs">
 [% RenderBlockStart("ActivityDialogRow") %]
                 <li class="OneRow" data-entity="[% Data.EntityID | html %]" data-id="[% Data.ID | html %]" data-entity-type="ActivityDialog" data-scope="[% Data.Config.Scope %]" data-scope-entity-id="[% Data.Config.ScopeEntityID %]">
@@ -60,7 +60,7 @@
         <h2><a href="#" class="AsBlock"><span><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></span>[% Translate("Transitions") | html %]</a></h2>
         <div class="Content">
             <input type="text" id="TransitionFilter" class="ProcessElementFilter WithScope" placeholder="[% Translate("Filter Transitions...") | html %]" />
-            <input type="checkbox" checked id="TransitionScopeFilter" class="ScopeFilter" data-scope-filter="Transition" title="[% Translate('Show global %s', Translate('Transitions')) | html %]"><i class="fa fa-globe" title="[% Translate('Show global %s', Translate('Transitions')) | html %]"></i>
+            <input type="checkbox" checked id="TransitionScopeFilter" class="ScopeFilter" data-scope-filter="Transition" title="[% Translate('Also show global %s', Translate('Transitions')) | html %]"><i class="fa fa-globe" title="[% Translate('Also show global %s', Translate('Transitions')) | html %]"></i>
             <ul class="Tablelike" id="Transitions">
 
 [% RenderBlockStart("TransitionRow") %]
@@ -85,7 +85,7 @@
         <h2><a href="#" class="AsBlock"><span><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></span>[% Translate("Transition Actions") | html %]</a></h2>
         <div class="Content">
             <input type="text" id="TransitionActionFilter" class="ProcessElementFilter WithScope" placeholder="[% Translate("Filter Transition Actions...") | html %]" />
-            <input type="checkbox" checked id="TransitionActionScopeFilter" class="ScopeFilter" data-scope-filter="TransitionAction" title="[% Translate('Show global %s', Translate('Transition Actions')) | html %]"><i class="fa fa-globe" title="[% Translate('Show global %s', Translate('Transition Actions')) | html %]"></i>
+            <input type="checkbox" checked id="TransitionActionScopeFilter" class="ScopeFilter" data-scope-filter="TransitionAction" title="[% Translate('Also show global %s', Translate('Transition Actions')) | html %]"><i class="fa fa-globe" title="[% Translate('Also show global %s', Translate('Transition Actions')) | html %]"></i>
             <ul class="Tablelike" id="TransitionActions">
 [% RenderBlockStart("TransitionActionRow") %]
                 <li class="OneRow" data-entity="[% Data.EntityID | html %]" data-id="[% Data.ID | html %]" data-entity-type="TransitionAction" data-scope="[% Data.Config.Scope %]" data-scope-entity-id="[% Data.Config.ScopeEntityID %]">

@@ -1743,7 +1743,7 @@ sub Data {
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             'Também é possível ordenar os elementos na lista através de drag \'n\' drop.',
         'Filter available Activity Dialogs' => 'Filtrar Janelas de Atividades Disponíveis',
-        'Show global %s' => '',
+        'Also show global %s' => '',
         'Available Activity Dialogs' => 'Janelas de Atividades Disponíveis',
         'Name: %s, EntityID: %s' => 'Nome: %s, EntityID: %s',
         'Create New Activity Dialog' => 'Criar Nova Janela de Atividade',

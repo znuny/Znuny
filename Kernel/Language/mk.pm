@@ -1738,7 +1738,7 @@ sub Data {
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             'Распоредување на елементите во листата е исто така овозможено со кликни повлечи и пушти.',
         'Filter available Activity Dialogs' => 'Филтерите се достапни за Дијалози на активности',
-        'Show global %s' => '',
+        'Also show global %s' => '',
         'Available Activity Dialogs' => 'Достапни Активност Дијалози',
         'Name: %s, EntityID: %s' => '',
         'Create New Activity Dialog' => 'Креирај нова Дијалог на Активност ',

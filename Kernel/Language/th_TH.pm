@@ -1739,7 +1739,7 @@ sub Data {
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             'การจัดเรียงองค์ประกอบภายในรายการสามารถทำได้โดยการลากและเลื่อนเช่นกัน',
         'Filter available Activity Dialogs' => 'ตัวกรองที่สามารถใช้ได้ในกิจกรรมไดอะล็อก',
-        'Show global %s' => '',
+        'Also show global %s' => '',
         'Available Activity Dialogs' => 'กิจกรรมไดอะล็อกที่สามารถใช้ได้',
         'Name: %s, EntityID: %s' => 'ชื่อ: %s, EntityID: %s',
         'Create New Activity Dialog' => 'สร้างกิจกรรมไดอะล็อกใหม่',

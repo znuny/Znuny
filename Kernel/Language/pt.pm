@@ -1740,7 +1740,7 @@ sub Data {
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             '',
         'Filter available Activity Dialogs' => 'Filtrar Diálogos de Atividade disponíveis',
-        'Show global %s' => '',
+        'Also show global %s' => '',
         'Available Activity Dialogs' => 'Diálogos de Atividade disponíveis',
         'Name: %s, EntityID: %s' => '',
         'Create New Activity Dialog' => 'Criar novo Diálogo de Atividade',

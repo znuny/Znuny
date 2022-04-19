@@ -1744,7 +1744,7 @@ sub Data {
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             'Lehetőség van az elemek rendezésére is a listán belül fogd és vidd módon.',
         'Filter available Activity Dialogs' => 'Elérhető tevékenység párbeszédek szűrése',
-        'Show global %s' => '',
+        'Also show global %s' => '',
         'Available Activity Dialogs' => 'Elérhető tevékenység párbeszédek',
         'Name: %s, EntityID: %s' => 'Név: %s, egyedazonosító: %s',
         'Create New Activity Dialog' => 'Új tevékenység párbeszéd létrehozása',

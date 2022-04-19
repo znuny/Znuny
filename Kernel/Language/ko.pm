@@ -1738,7 +1738,7 @@ sub Data {
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             '드래그 앤 드롭을 사용하여 목록 내의 요소를 정렬 할 수도 있습니다.',
         'Filter available Activity Dialogs' => '사용 가능한 필터 대화상자',
-        'Show global %s' => '',
+        'Also show global %s' => '',
         'Available Activity Dialogs' => '사용 가능한 활동 대화상자',
         'Name: %s, EntityID: %s' => '이름 : %s, EntityID : %s',
         'Create New Activity Dialog' => '새 활동 만들기 대화 상자',
