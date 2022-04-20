@@ -1,4 +1,4 @@
-# 6.0.41 2022-xx-xx
+# 6.0.41 2022-04-20
  - 2022-04-13 Fixed refresh in overviews if fulltext search in toolbar is not enabled. [#237](https://github.com/znuny/Znuny/issues/237)
  - 2022-03-31 Fixed check of UntilTime in Kernel::System::Ticket::Event::TicketPendingTimeReset. [#221)(https://github.com/znuny/Znuny/issues/221)
  - 2022-03-24 Fixed XSS vulnerability in package manager GUI (CVE-2022-0475).
