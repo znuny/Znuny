@@ -1,4 +1,4 @@
-# 6.3.2 2022-xx-xx
+# 6.3.2 2022-04-20
  - 2022-04-13 Fixed refresh in overviews if fulltext search in toolbar is not enabled. [#237](https://github.com/znuny/Znuny/issues/237)
  - 2022-04-01 Fixed encoding for autocompletion in dynamic field edit view of type Webservice.
  - 2022-03-31 Fixed check of UntilTime in Kernel::System::Ticket::Event::TicketPendingTimeReset. [#221)(https://github.com/znuny/Znuny/issues/221)
@@ -156,10 +156,14 @@
  - 2021-06-15 Use ticket title as the default appointment title (#90). Thanks to Renée Bäcker (@reneeb). [#90](https://github.com/znuny/Znuny/pull/90)
  - 2021-06-15 Column list validation before saving agent preferences (#84). Thanks to Paweł Bogusławski (@pboguslawski). [#84](https://github.com/znuny/Znuny/pull/84)
 
-# 6.0.41 2022-xx-xx
+# 6.0.41 2022-04-20
  - 2022-04-13 Fixed refresh in overviews if fulltext search in toolbar is not enabled. [#237](https://github.com/znuny/Znuny/issues/237)
+ - 2022-03-31 Fixed check of UntilTime in Kernel::System::Ticket::Event::TicketPendingTimeReset. [#221)(https://github.com/znuny/Znuny/issues/221)
  - 2022-03-24 Fixed XSS vulnerability in package manager GUI (CVE-2022-0475).
+ - 2022-03-24 Deactivated support for execution of configurable system commands from Sendmail and PostMaster pre-filter configurations (CVE-2021-36100).
  - 2022-03-24 The system command in SysConfig option "MIME-Viewer" now is only configurable via Kernel/Config.pm (CVE-2021-36100).
+ - 2022-03-23 Removed dashboard widget support for execution of system commands (CVE-2021-36100).
+ - 2022-03-23 Removed configurable system commands from generic agents (CVE-2021-36100).
  - 2022-03-22 Added missing CKEditor codemirror plugin.
  - 2022-03-14 Fixed sending notifications to invalid customer users.
 
