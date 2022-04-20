@@ -38,6 +38,10 @@ sub Run {
     my $ProcessID = $ParamObject->GetParam( Param => 'ID' )       || '';
     my $EntityID  = $ParamObject->GetParam( Param => 'EntityID' ) || '';
 
+    # get parameter from web browser
+    my $GetParam = $Self->_GetParams();
+    $GetParam->{ProcessEntityID} ||= $EntityID;
+
     my $EntityObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Entity');
 
     # get the list of updated or deleted entities
@@ -814,9 +818,6 @@ sub Run {
         # get process data
         my $ProcessData;
 
-        # get parameter from web browser
-        my $GetParam = $Self->_GetParams();
-
         # set new configuration
         $ProcessData->{Name}                  = $GetParam->{Name};
         $ProcessData->{Config}->{Description} = $GetParam->{Description};
@@ -930,7 +931,10 @@ sub Run {
             {
                 Action    => $Self->{Action}    || '',
                 Subaction => $Self->{Subaction} || '',
-                Parameters => 'ID=' . $ProcessID . ';EntityID=' . $EntityID
+                ID        => $ProcessID,
+                EntityID  => $EntityID,
+                ProcessEntityID => $EntityID,
+                Parameters      => 'ID=' . $ProcessID . ';EntityID=' . $EntityID . ';ProcessEntityID=' . $EntityID,
             }
         );
 
@@ -976,9 +980,6 @@ sub Run {
         $LayoutObject->ChallengeTokenCheck();
 
         my $ProcessData;
-
-        # get parameter from web browser
-        my $GetParam = $Self->_GetParams();
 
         # set new configuration
         $ProcessData->{Name}                          = $GetParam->{Name};
@@ -1462,6 +1463,7 @@ sub Run {
     # UpdateAccordion AJAX
     # ------------------------------------------------------------ #
     elsif ( $Self->{Subaction} eq 'UpdateAccordion' ) {
+        my $ProcessEntityID = $ParamObject->GetParam( Param => 'ProcessEntityID' );
 
         # output available process elements in the accordion
         for my $Element (qw(Activity ActivityDialog Transition TransitionAction)) {
@@ -1505,6 +1507,7 @@ sub Run {
                     $LayoutObject->Block(
                         Name => $Element . 'Row',
                         Data => {
+                            ProcessEntityID => $ProcessEntityID,
                             %{$ElementData},
                             AvailableIn => $AvailableIn,    #only used for ActivityDialogs
                         },
@@ -1523,7 +1526,9 @@ sub Run {
 
         my $Output = $LayoutObject->Output(
             TemplateFile => "AdminProcessManagementProcessAccordion",
-            Data         => {},
+            Data         => {
+                ProcessEntityID => $ProcessEntityID,
+            },
         );
 
         # send HTML response
@@ -1555,10 +1560,11 @@ sub Run {
         if ($Success) {
 
             $Self->_PushSessionScreen(
-                ID        => $Param{ProcessID},
-                EntityID  => $Param{ProcessEntityID},
-                Subaction => 'ProcessEdit',
-                Action    => 'AdminProcessManagement',
+                ID              => $Param{ProcessID},
+                EntityID        => $Param{ProcessEntityID},
+                ProcessEntityID => $Param{ProcessEntityID},
+                Subaction       => 'ProcessEdit',
+                Action          => 'AdminProcessManagement',
             );
         }
 

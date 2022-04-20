@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.642485361093038;
+    $Self->{Completeness}        = 0.642391658520691;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -828,9 +828,6 @@ sub Data {
         'Time units' => 'Unit waktu',
         'Execute Ticket Commands' => 'Eksekusikan perintah tiket.',
         'Send agent/customer notifications on changes' => 'Kirim notifikasi agen/pelanggan saat pengubahan',
-        'CMD' => 'CMD',
-        'This command will be executed. ARG[0] will be the ticket number. ARG[1] the ticket id.' =>
-            'Perintah ini akan di eksekusi. ARG[0] akan menjadi nomor tiket. ARG[1] id tiket.',
         'Delete tickets' => 'Hapus tiket',
         'Warning: All affected tickets will be removed from the database and cannot be restored!' =>
             'Perhatian: Semua tiket yang terkena dampak akan dihapus dari dari database dan tidak dapat dikembalikan.',
@@ -1739,7 +1736,7 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             'Pengurutan elemen dalam daftar ini juga mungkin dengan cara drag \'n\' drop.',
         'Filter available Activity Dialogs' => 'Penyaring menyediakan aktivitas dialog',
-        'Show global %s' => '',
+        'Also show global %s' => '',
         'Available Activity Dialogs' => 'Aktivitas dialog tersedia',
         'Name: %s, EntityID: %s' => 'Nama:%s, EntityID:%s',
         'Create New Activity Dialog' => 'Membuat aktivitas dialog baru',
@@ -5810,8 +5807,6 @@ bin/otrs.Daemon.pl status\').',
             '',
         'Defines the module to send emails. "DoNotSendEmail" doesn\'t send emails at all. Any of the "SMTP" mechanisms use a specified (external) mailserver. "Sendmail" directly uses the sendmail binary of your operating system. "Test" doesn\'t send emails, but writes them to $OTRS_HOME/var/tmp/CacheFileStorable/EmailTest/ for testing purposes.' =>
             '',
-        'If "Sendmail" was selected as SendmailModule, the location of the sendmail binary and the needed options must be specified.' =>
-            'Jika "Sendmail" terpilih sebagai SendmailModul, lokasi biner sendmail dan opsi yang diperlukan harus ditentukan.',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the mailhost that sends out the mails must be specified.' =>
             'Jika salah satu "SMTP" mekanisme terpilih sebagai Sendmail Modul, yang mailhost yang mengirimkan kiriman harus ditentukan.',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the port where your mailserver is listening for incoming connections must be specified.' =>
@@ -6241,8 +6236,6 @@ bin/otrs.Daemon.pl status\').',
         'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" defines the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
         'Defines the parameters for the dashboard backend. "Limit" defines the number of entries displayed by default. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
-            '',
-        'Defines the parameters for the dashboard backend. "Cmd" is used to specify command with parameters. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
         'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
@@ -7554,8 +7547,6 @@ bin/otrs.Daemon.pl status\').',
             '',
         'Set the limit of tickets that will be executed on a single genericagent job execution.' =>
             'Mengatur batas dari tiket yang akan dilaksanakan pada agen generik yang akan mengeksekusi pekerjaan tunggal.',
-        'Allows generic agent to execute custom command line scripts.' =>
-            '',
         'Allows generic agent to execute custom modules.' => '',
         'Unlock tickets whenever a note is added and the owner is out of office.' =>
             'Membuka tiket setiap kali catatan yang ditambahkan dan pemilik keluar dari kantor.',
@@ -7618,12 +7609,6 @@ bin/otrs.Daemon.pl status\').',
         'Defines the sender for rejected emails.' => 'Mendefinisikan pengirim bahwa email telah ditolak.',
         'Defines the subject for rejected emails.' => 'Mendefinisikan subjek untuk email ditolak.',
         'Defines the body text for rejected emails.' => 'Mendefinisikan teks tubuh untuk email yang ditolak.',
-        'CMD example setup. Ignores emails where external CMD returns some output on STDOUT (email will be piped into STDIN of some.bin).' =>
-            'CMD contoh setup. Mengabaikan email mana CMD eksternal kembali output dari STDOUT (email akan disalurkan ke STDIN dari some.bin).',
-        'Spam Assassin example setup. Ignores emails that are marked with SpamAssassin.' =>
-            'Spam Assassin contoh setup. Mengabaikan email yang ditandai dengan SpamAssassin.',
-        'Spam Assassin example setup. Moves marked mails to spam queue.' =>
-            'Spamassassin contoh setup. Bergerak ditandai mail ke antrian spam.',
         'Module to use database filter storage.' => 'Modul untuk menggunakan database penyimpanan filter.',
         'Module to check if arrived emails should be marked as internal (because of original forwarded internal email). IsVisibleForCustomer and SenderType define the values for the arrived email/article.' =>
             '',
@@ -8992,7 +8977,6 @@ Helpdesk Team Anda
         'S/MIME Certificates' => 'Sertifikat S/MIME',
         'SMS' => 'SMS',
         'Salutations' => 'Salam Pembuka',
-        'Sample command output' => 'Contoh perintah output',
         'Schedule a maintenance period.' => 'Jadwalkan masa pemeliharaan.',
         'Screen after new ticket' => 'Layar setelah tiket baru',
         'Search Customer' => 'Cari Pelanggan',
@@ -9038,7 +9022,6 @@ Helpdesk Team Anda
         'Set sender email addresses for this system.' => 'Mengatur alamat email pengirim untuk sistem ini.',
         'Set this ticket to pending' => 'Atur tiket ini menjadi Ditunda',
         'Shared Secret' => 'Berbagi rahasia',
-        'Show command line output.' => '',
         'Show the history for this ticket' => 'Tampilkan sejarah untuk tiket ini',
         'Show the ticket history' => 'Tunjukan riwayat tiket',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>

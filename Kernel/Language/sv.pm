@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.354749512036435;
+    $Self->{Completeness}        = 0.354675790159661;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -831,9 +831,6 @@ sub Data {
         'Time units' => 'Tidsenheter',
         'Execute Ticket Commands' => '',
         'Send agent/customer notifications on changes' => 'Meddela handläggare/kund när ändringar sker',
-        'CMD' => 'CMD',
-        'This command will be executed. ARG[0] will be the ticket number. ARG[1] the ticket id.' =>
-            'Detta kommando kommer utföras. ARG[0] blir dess ärendenummer. ARG[1] dess ärende-id.',
         'Delete tickets' => 'Radera ärenden',
         'Warning: All affected tickets will be removed from the database and cannot be restored!' =>
             'Varning: Alla påverkade ärenden kommer raderas från databasen och kan inte återställas!',
@@ -1741,7 +1738,7 @@ sub Data {
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             '',
         'Filter available Activity Dialogs' => '',
-        'Show global %s' => '',
+        'Also show global %s' => '',
         'Available Activity Dialogs' => 'Tillgängliga aktivitetsdialoger',
         'Name: %s, EntityID: %s' => 'Namn: %s, EntityID: %s',
         'Create New Activity Dialog' => 'Skapa ny ativitetsdialog',
@@ -5811,8 +5808,6 @@ sub Data {
             '',
         'Defines the module to send emails. "DoNotSendEmail" doesn\'t send emails at all. Any of the "SMTP" mechanisms use a specified (external) mailserver. "Sendmail" directly uses the sendmail binary of your operating system. "Test" doesn\'t send emails, but writes them to $OTRS_HOME/var/tmp/CacheFileStorable/EmailTest/ for testing purposes.' =>
             '',
-        'If "Sendmail" was selected as SendmailModule, the location of the sendmail binary and the needed options must be specified.' =>
-            '',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the mailhost that sends out the mails must be specified.' =>
             '',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the port where your mailserver is listening for incoming connections must be specified.' =>
@@ -6242,8 +6237,6 @@ sub Data {
         'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" defines the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
         'Defines the parameters for the dashboard backend. "Limit" defines the number of entries displayed by default. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
-            '',
-        'Defines the parameters for the dashboard backend. "Cmd" is used to specify command with parameters. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
         'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
@@ -7555,8 +7548,6 @@ sub Data {
             '',
         'Set the limit of tickets that will be executed on a single genericagent job execution.' =>
             '',
-        'Allows generic agent to execute custom command line scripts.' =>
-            '',
         'Allows generic agent to execute custom modules.' => '',
         'Unlock tickets whenever a note is added and the owner is out of office.' =>
             '',
@@ -7619,12 +7610,6 @@ sub Data {
         'Defines the sender for rejected emails.' => 'Anger avsändaren för avvisade e-brev.',
         'Defines the subject for rejected emails.' => '',
         'Defines the body text for rejected emails.' => '',
-        'CMD example setup. Ignores emails where external CMD returns some output on STDOUT (email will be piped into STDIN of some.bin).' =>
-            '',
-        'Spam Assassin example setup. Ignores emails that are marked with SpamAssassin.' =>
-            'Exempelkonfiguration för Spam assassin. Ignorerar spam-märkta e-brev.',
-        'Spam Assassin example setup. Moves marked mails to spam queue.' =>
-            'Exempelkonfiguration för Spam assassin. Flyttar spam-märkta e-brev till spamkön.',
         'Module to use database filter storage.' => '',
         'Module to check if arrived emails should be marked as internal (because of original forwarded internal email). IsVisibleForCustomer and SenderType define the values for the arrived email/article.' =>
             '',
@@ -8981,7 +8966,6 @@ Thanks for your help!
         'S/MIME Certificates' => 'S/MIME-certifikat',
         'SMS' => '',
         'Salutations' => 'Hälsningsfraser',
-        'Sample command output' => '',
         'Schedule a maintenance period.' => '',
         'Screen after new ticket' => 'Vy efter inmatning av nytt ärende',
         'Search Customer' => 'Sök kund',
@@ -9027,7 +9011,6 @@ Thanks for your help!
         'Set sender email addresses for this system.' => '',
         'Set this ticket to pending' => 'Sätt ärendet som väntande',
         'Shared Secret' => '',
-        'Show command line output.' => '',
         'Show the history for this ticket' => '',
         'Show the ticket history' => 'Visa ärende-historik',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>

@@ -98,7 +98,7 @@
                         <div class="Size1of2">
                            <a name="ProcessID" id="ProcessID" data-processid="[% Data.ProcessID %]"></a>
                             <input type="text" id="FilterAvailableActivityDialogs" class="FilterAvailableProcessItem" name="FilterAvailableActivityDialogs" value="" title="[% Translate("Filter available Activity Dialogs") | html %]" placeholder="[% Translate("Filter available Activity Dialogs") | html %]..." />
-                            <input type="checkbox" checked id="ActivityDialogScopeFilter" class="ScopeFilter" data-scope-filter="ActivityDialog" name="ActivityDialogScopeFilter"><i class="fa fa-globe" title="[% Translate('Show global %s', Translate('Activity Dialogs')) | html %]"></i>
+                            <input type="checkbox" checked id="ActivityDialogScopeFilter" class="ScopeFilter" data-scope-filter="ActivityDialog" name="ActivityDialogScopeFilter"><i class="fa fa-globe" title="[% Translate('Also show global %s', Translate('Activity Dialogs')) | html %]"></i>
                             <ul class="Tablelike W90pc SpacingTop">
                                 <li class="Header">
                                     [% Translate("Available Activity Dialogs") | html %]

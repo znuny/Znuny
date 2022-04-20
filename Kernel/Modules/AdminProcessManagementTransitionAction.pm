@@ -609,7 +609,7 @@ sub _ShowEdit {
     $Param{ScopeSelection} = $LayoutObject->BuildSelection(
         Data => {
             Global  => 'Global',
-            Process => 'Current Process',
+            Process => 'Process',
         },
         Name           => 'Scope',
         ID             => 'Scope',
@@ -625,12 +625,14 @@ sub _ShowEdit {
         UseEntities => 1,
     );
 
+    my $GetParam = $Self->_GetParams();
+
     $Param{ScopeEntityIDSelection} = $LayoutObject->BuildSelection(
         Data        => $ProcessList,
         Name        => 'ScopeEntityID',
         ID          => 'ScopeEntityID',
-        SelectedID  => $TransitionActionData->{Config}->{ScopeEntityID},
-        Sort        => 'AlphanumericKey',
+        SelectedID  => $TransitionActionData->{Config}->{ScopeEntityID} // $GetParam->{ProcessEntityID},
+        Sort        => 'AlphanumericValue',
         Translation => 1,
         Class       => 'Modernize W50pc ',
     );
@@ -656,7 +658,7 @@ sub _GetParams {
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
     # get parameters from web browser
-    for my $ParamName (qw(Name EntityID)) {
+    for my $ParamName (qw(Name EntityID ProcessEntityID)) {
         $GetParam->{$ParamName} = $ParamObject->GetParam( Param => $ParamName ) || '';
     }
 

@@ -216,6 +216,18 @@ sub _TasksGet {
 
         # >>> Znuny 6.3
         {
+            Message => 'Remove Generic Agent system commands',
+            Module  => 'scripts::Migration::Znuny6_3::RemoveGenericAgentSystemCommandCalls',
+        },
+        {
+            Message => 'Migrate dashboard widgets that execute system commands',
+            Module  => 'scripts::Migration::Znuny6_3::MigrateDashboardWidgetSystemCommandCalls',
+        },
+        {
+            Message => 'Migrate PostMaster pre-filters that execute system commands',
+            Module  => 'scripts::Migration::Znuny6_3::MigratePostMasterPreFilterSystemCommandCalls',
+        },
+        {
             Message => 'Migrate Excel stats format definitions',
             Module  => 'scripts::Migration::Znuny6_3::MigrateExcelStatsFormatDefinitions',
         },

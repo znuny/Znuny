@@ -701,7 +701,8 @@ sub RequesterPerformRequest {
                 )
             {
                 $Headers->{'Proxy-Authorization'} = 'Basic ' . encode_base64(
-                    $Config->{Proxy}->{ProxyUser} . ':' . $Config->{Proxy}->{ProxyPassword}
+                    $Config->{Proxy}->{ProxyUser} . ':' . $Config->{Proxy}->{ProxyPassword},
+                    '',
                 );
             }
         }
@@ -717,7 +718,8 @@ sub RequesterPerformRequest {
         )
     {
         $Headers->{Authorization} = 'Basic ' . encode_base64(
-            $Config->{Authentication}->{BasicAuthUser} . ':' . $Config->{Authentication}->{BasicAuthPassword}
+            $Config->{Authentication}->{BasicAuthUser} . ':' . $Config->{Authentication}->{BasicAuthPassword},
+            '',
         );
     }
 

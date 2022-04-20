@@ -47,6 +47,10 @@ sub Run {
         Data => $SessionData{ProcessManagementScreensPath}
     );
 
+    # get parameter from web browser
+    my $GetParam = $Self->_GetParams();
+    $GetParam->{ProcessEntityID} ||= $Self->{ScreensPath}->[-1]->{ProcessEntityID};
+
     # get needed objects
     my $LayoutObject        = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $EntityObject        = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Entity');
@@ -75,9 +79,6 @@ sub Run {
 
         # get activity data
         my $ActivityData;
-
-        # get parameter from web browser
-        my $GetParam = $Self->_GetParams();
 
         # set new configuration
         $ActivityData->{Name}   = $GetParam->{Name};
@@ -227,10 +228,11 @@ sub Run {
             return $Self->_PopupResponse(
                 Redirect => 1,
                 Screen   => {
-                    Action    => $RedirectAction,
-                    Subaction => $RedirectSubaction,
-                    ID        => $RedirectID,
-                    EntityID  => $RedirectID,
+                    Action          => $RedirectAction,
+                    Subaction       => $RedirectSubaction,
+                    ID              => $RedirectID,
+                    EntityID        => $RedirectID,
+                    ProcessEntityID => $GetParam->{ProcessEntityID},
                 },
                 ConfigJSON => $ActivityConfig,
             );
@@ -308,9 +310,6 @@ sub Run {
 
         # get Activity Data
         my $ActivityData;
-
-        # get parameter from web browser
-        my $GetParam = $Self->_GetParams();
 
         # set new configuration
         $ActivityData->{Name}     = $GetParam->{Name};
@@ -436,10 +435,11 @@ sub Run {
             return $Self->_PopupResponse(
                 Redirect => 1,
                 Screen   => {
-                    Action    => $RedirectAction,
-                    Subaction => $RedirectSubaction,
-                    ID        => $RedirectID,
-                    EntityID  => $RedirectID,
+                    Action          => $RedirectAction,
+                    Subaction       => $RedirectSubaction,
+                    ID              => $RedirectID,
+                    EntityID        => $RedirectID,
+                    ProcessEntityID => $GetParam->{ProcessEntityID},
                 },
                 ConfigJSON => $ActivityConfig,
             );
@@ -672,6 +672,7 @@ sub _ShowEdit {
     my ( $Self, %Param ) = @_;
 
     my $GetParam = $Self->_GetParams();
+    $GetParam->{ProcessEntityID} ||= $Self->{ScreensPath}->[-1]->{ProcessEntityID};
 
     # get Activity information
     my $ActivityData = $Param{ActivityData} || {};
@@ -693,10 +694,11 @@ sub _ShowEdit {
         $LayoutObject->Block(
             Name => 'GoBack',
             Data => {
-                Action    => $Self->{ScreensPath}->[-1]->{Action}    || '',
-                Subaction => $Self->{ScreensPath}->[-1]->{Subaction} || '',
-                ID        => $Self->{ScreensPath}->[-1]->{ID}        || '',
-                EntityID  => $Self->{ScreensPath}->[-1]->{EntityID}  || '',
+                Action          => $Self->{ScreensPath}->[-1]->{Action}          || '',
+                Subaction       => $Self->{ScreensPath}->[-1]->{Subaction}       || '',
+                ID              => $Self->{ScreensPath}->[-1]->{ID}              || '',
+                EntityID        => $Self->{ScreensPath}->[-1]->{EntityID}        || '',
+                ProcessEntityID => $Self->{ScreensPath}->[-1]->{ProcessEntityID} || '',
             },
         );
     }
@@ -874,7 +876,7 @@ sub _ShowEdit {
     $Param{ScopeSelection} = $LayoutObject->BuildSelection(
         Data => {
             Global  => 'Global',
-            Process => 'Current Process',
+            Process => 'Process',
         },
         Name           => 'Scope',
         ID             => 'Scope',
@@ -894,8 +896,8 @@ sub _ShowEdit {
         Data        => $ProcessList,
         Name        => 'ScopeEntityID',
         ID          => 'ScopeEntityID',
-        SelectedID  => $ActivityData->{Config}->{ScopeEntityID},
-        Sort        => 'AlphanumericKey',
+        SelectedID  => $ActivityData->{Config}->{ScopeEntityID} // $GetParam->{ProcessEntityID},
+        Sort        => 'AlphanumericValue',
         Translation => 1,
         Class       => 'Modernize W50pc ',
     );
@@ -994,10 +996,11 @@ sub _PushSessionScreen {
 
     # add screen to the screen path
     push @{ $Self->{ScreensPath} }, {
-        Action    => $Self->{Action} || '',
-        Subaction => $Param{Subaction},
-        ID        => $Param{ID},
-        EntityID  => $Param{EntityID},
+        Action          => $Self->{Action} || '',
+        Subaction       => $Param{Subaction},
+        ID              => $Param{ID},
+        EntityID        => $Param{EntityID},
+        ProcessEntityID => $Param{ProcessEntityID},
     };
 
     # convert screens path to string (JSON)

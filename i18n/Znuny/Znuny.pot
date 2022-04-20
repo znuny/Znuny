@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-04-06 09:31+0000\n"
+"POT-Creation-Date: 2022-04-14 06:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2524,14 +2524,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Send agent/customer notifications on changes"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
-msgid "CMD"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
-msgid "This command will be executed. ARG[0] will be the ticket number. ARG[1] the ticket id."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
@@ -5207,7 +5199,7 @@ msgid "Filter available Activity Dialogs"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
-msgid "Show global %s"
+msgid "Also show global %s"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
@@ -15971,10 +15963,6 @@ msgid "Defines the module to send emails. \"DoNotSendEmail\" doesn't send emails
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "If \"Sendmail\" was selected as SendmailModule, the location of the sendmail binary and the needed options must be specified."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "If any of the \"SMTP\" mechanisms was selected as SendmailModule, the mailhost that sends out the mails must be specified."
 msgstr ""
 
@@ -16952,10 +16940,6 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the parameters for the dashboard backend. \"Limit\" defines the number of entries displayed by default. \"Group\" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" indicates if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTL\" indicates the cache expiration period in minutes for the plugin. \"Mandatory\" determines if the plugin is always shown and can not be removed by agents."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the parameters for the dashboard backend. \"Cmd\" is used to specify command with parameters. \"Group\" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" indicates if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTL\" indicates the cache expiration period in minutes for the plugin. \"Mandatory\" determines if the plugin is always shown and can not be removed by agents."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
@@ -19719,10 +19703,6 @@ msgid "Set the limit of tickets that will be executed on a single genericagent j
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Allows generic agent to execute custom command line scripts."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows generic agent to execute custom modules."
 msgstr ""
 
@@ -19884,18 +19864,6 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the body text for rejected emails."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "CMD example setup. Ignores emails where external CMD returns some output on STDOUT (email will be piped into STDIN of some.bin)."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Spam Assassin example setup. Ignores emails that are marked with SpamAssassin."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Spam Assassin example setup. Moves marked mails to spam queue."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
@@ -23838,10 +23806,6 @@ msgid "Salutations"
 msgstr ""
 
 #. SysConfig
-msgid "Sample command output"
-msgstr ""
-
-#. SysConfig
 msgid "Schedule a maintenance period."
 msgstr ""
 
@@ -23999,10 +23963,6 @@ msgstr ""
 
 #. SysConfig
 msgid "Shared Secret"
-msgstr ""
-
-#. SysConfig
-msgid "Show command line output."
 msgstr ""
 
 #. SysConfig

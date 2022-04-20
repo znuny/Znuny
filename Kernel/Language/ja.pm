@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.722836694860117;
+    $Self->{Completeness}        = 0.723036819811013;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -831,9 +831,6 @@ sub Data {
         'Time units' => '時間の単位',
         'Execute Ticket Commands' => 'チケットコマンドを実行',
         'Send agent/customer notifications on changes' => '変更を担当者／顧客に通知する',
-        'CMD' => 'コマンド',
-        'This command will be executed. ARG[0] will be the ticket number. ARG[1] the ticket id.' =>
-            'このコマンドが実行されます。チケット番号は ARG[0] 、チケットIDは ARG[1] です。',
         'Delete tickets' => 'チケット削除',
         'Warning: All affected tickets will be removed from the database and cannot be restored!' =>
             '警告: 影響を受ける全てのチケットがデータベースから削除されます。復元することはできません。',
@@ -1744,7 +1741,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             'このリストの表示順序はドラッグアンドドロップで変更することが出来ます。',
         'Filter available Activity Dialogs' => '利用可能なアクティビティダイアログをフィルタ',
-        'Show global %s' => '',
+        'Also show global %s' => '',
         'Available Activity Dialogs' => '利用可能なアクティビティダイアログ',
         'Name: %s, EntityID: %s' => '名前: %s, エンティティID: %s',
         'Create New Activity Dialog' => '新規アクティビティダイアログを作成',
@@ -5815,8 +5812,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'Defines the module to send emails. "DoNotSendEmail" doesn\'t send emails at all. Any of the "SMTP" mechanisms use a specified (external) mailserver. "Sendmail" directly uses the sendmail binary of your operating system. "Test" doesn\'t send emails, but writes them to $OTRS_HOME/var/tmp/CacheFileStorable/EmailTest/ for testing purposes.' =>
             '',
-        'If "Sendmail" was selected as SendmailModule, the location of the sendmail binary and the needed options must be specified.' =>
-            '"Sendmail"がSendmailモジュールとして選択された場合、sendmailバイナリおよび必要オプションのロケーションが特定されている必要があります。',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the mailhost that sends out the mails must be specified.' =>
             '"SMTP"構造のいずれかがSendmailモジュールとして選択された場合、メールを送信するメール・ホストが特定されている必要があります。',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the port where your mailserver is listening for incoming connections must be specified.' =>
@@ -6246,8 +6241,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" defines the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
         'Defines the parameters for the dashboard backend. "Limit" defines the number of entries displayed by default. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
-            '',
-        'Defines the parameters for the dashboard backend. "Cmd" is used to specify command with parameters. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
         'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
@@ -7559,8 +7552,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'Set the limit of tickets that will be executed on a single genericagent job execution.' =>
             '',
-        'Allows generic agent to execute custom command line scripts.' =>
-            '',
         'Allows generic agent to execute custom modules.' => '',
         'Unlock tickets whenever a note is added and the owner is out of office.' =>
             'メモが追加され、所有者が外出中の場合は、チケットのロックを解除します。',
@@ -7623,12 +7614,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Defines the sender for rejected emails.' => 'リジェクトされたEメールの送信者を定義します。',
         'Defines the subject for rejected emails.' => 'リジェクトされたEメールの件名を定義します。',
         'Defines the body text for rejected emails.' => 'リジェクトされたEメールの本文を定義します。',
-        'CMD example setup. Ignores emails where external CMD returns some output on STDOUT (email will be piped into STDIN of some.bin).' =>
-            'CMD例のセットアップです。外部CMDがSTDOUTにおいてアウトプットを戻してくる場合にEメールを無視します（Eメールは、STDIN of some.binへとパイプされます）。',
-        'Spam Assassin example setup. Ignores emails that are marked with SpamAssassin.' =>
-            'スパム・アサシンのセットアップ例です。スパム・アサシンによってマークされたEメールを無視します。',
-        'Spam Assassin example setup. Moves marked mails to spam queue.' =>
-            'SpamAssassinのセットアップ例です。マークされたメールを、スパム・キューへ移動します。',
         'Module to use database filter storage.' => 'データベース・フィルター・ストレージを使用するモジュールです。',
         'Module to check if arrived emails should be marked as internal (because of original forwarded internal email). IsVisibleForCustomer and SenderType define the values for the arrived email/article.' =>
             '',
@@ -9004,7 +8989,6 @@ Thanks for your help!
         'S/MIME Certificates' => 'S/MIME証明書',
         'SMS' => 'SMS',
         'Salutations' => '挨拶文',
-        'Sample command output' => '',
         'Schedule a maintenance period.' => 'メンテナンス期間をスケジュール',
         'Screen after new ticket' => '新規チケット作成後の画面',
         'Search Customer' => '顧客を検索します。',
@@ -9050,7 +9034,6 @@ Thanks for your help!
         'Set sender email addresses for this system.' => 'このシステムのメール送信者を設定',
         'Set this ticket to pending' => 'このチケットを保留に設定',
         'Shared Secret' => '',
-        'Show command line output.' => '',
         'Show the history for this ticket' => 'このチケットの履歴を表示',
         'Show the ticket history' => 'チケットの履歴を表示',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
