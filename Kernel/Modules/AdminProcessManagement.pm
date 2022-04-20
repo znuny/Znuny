@@ -929,10 +929,10 @@ sub Run {
         # set screens path in session
         my @ScreensPath = (
             {
-                Action          => $Self->{Action}    || '',
-                Subaction       => $Self->{Subaction} || '',
-                ID              => $ProcessID,
-                EntityID        => $EntityID,
+                Action    => $Self->{Action}    || '',
+                Subaction => $Self->{Subaction} || '',
+                ID        => $ProcessID,
+                EntityID  => $EntityID,
                 ProcessEntityID => $EntityID,
                 Parameters      => 'ID=' . $ProcessID . ';EntityID=' . $EntityID . ';ProcessEntityID=' . $EntityID,
             }

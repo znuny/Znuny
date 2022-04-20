@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.6337890625;
+    $Self->{Completeness}        = 0.63393584106823;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -6243,8 +6243,6 @@ sub Data {
             '',
         'Defines the parameters for the dashboard backend. "Limit" defines the number of entries displayed by default. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
-        'Defines the parameters for the dashboard backend. "Cmd" is used to specify command with parameters. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
-            '',
         'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
         'Shows the message of the day (MOTD) in the agent dashboard. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
@@ -8975,7 +8973,6 @@ Thanks for your help!
         'S/MIME Certificates' => 'Certyfikaty S/MIME',
         'SMS' => '',
         'Salutations' => 'Powitania',
-        'Sample command output' => '',
         'Schedule a maintenance period.' => 'Zaplanuj konserwację',
         'Screen after new ticket' => 'Ekran po utworzeniu zgłoszenia',
         'Search Customer' => 'Szukaj klienta',
@@ -9021,7 +9018,6 @@ Thanks for your help!
         'Set sender email addresses for this system.' => 'Ustaw adresy e-mail nadawcy dla tego systemu',
         'Set this ticket to pending' => 'Ustaw czas oczekiwania dla tego zgłoszenia',
         'Shared Secret' => '',
-        'Show command line output.' => 'Pokaż komunikaty wyjściowe linii komend.',
         'Show the history for this ticket' => 'Pokaż historię tego zgłoszenia',
         'Show the ticket history' => 'Pokaż historię zgłoszenia',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>

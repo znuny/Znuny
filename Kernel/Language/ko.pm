@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.917805989583333;
+    $Self->{Completeness}        = 0.917765836183032;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -6238,8 +6238,6 @@ sub Data {
             '대시 보드 백엔드의 매개 변수를 정의합니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 또는 사용자가 수동으로 활성화해야하는지 여부를 나타냅니다. "CacheTTLLocal"은 플러그인의 캐시 만기 기간을 분 단위로 정의합니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
         'Defines the parameters for the dashboard backend. "Limit" defines the number of entries displayed by default. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '대시 보드 백엔드의 매개 변수를 정의합니다. "제한"은 기본적으로 표시되는 항목 수를 정의합니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 또는 사용자가 수동으로 활성화해야하는지 여부를 나타냅니다. "CacheTTL"은 플러그인의 캐시 만기 기간을 나타냅니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
-        'Defines the parameters for the dashboard backend. "Cmd" is used to specify command with parameters. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
-            '대시 보드 백엔드의 매개 변수를 정의합니다. "Cmd"는 매개 변수가있는 명령을 지정하는 데 사용됩니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 또는 사용자가 수동으로 활성화해야하는지 여부를 나타냅니다. "CacheTTL"은 플러그인의 캐시 만기 기간을 나타냅니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
         'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '대시 보드 백엔드의 매개 변수를 정의합니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 또는 사용자가 수동으로 활성화해야하는지 여부를 나타냅니다. "CacheTTL"은 플러그인의 캐시 만기 기간을 나타냅니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
         'Shows the message of the day (MOTD) in the agent dashboard. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
@@ -8981,7 +8979,6 @@ Thanks for your help!
         'S/MIME Certificates' => 'S / MIME 인증서',
         'SMS' => 'SMS',
         'Salutations' => '인사말',
-        'Sample command output' => '샘플 명령 출력',
         'Schedule a maintenance period.' => '유지 보수 기간을 예약하십시오.',
         'Screen after new ticket' => '새로운 티켓 후에 화면',
         'Search Customer' => '고객 검색',
@@ -9027,7 +9024,6 @@ Thanks for your help!
         'Set sender email addresses for this system.' => '이 시스템의 보낸 사람 전자 메일 주소를 설정하십시오.',
         'Set this ticket to pending' => '이 티켓을 보류 중으로 설정하십시오.',
         'Shared Secret' => '공유된 비밀',
-        'Show command line output.' => '명령 행 출력보기.',
         'Show the history for this ticket' => '이 티켓의 기록 표시',
         'Show the ticket history' => '티켓 기록보기',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>

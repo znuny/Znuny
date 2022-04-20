@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.72265625;
+    $Self->{Completeness}        = 0.723009281875916;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -6245,8 +6245,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'Defines the parameters for the dashboard backend. "Limit" defines the number of entries displayed by default. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
-        'Defines the parameters for the dashboard backend. "Cmd" is used to specify command with parameters. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
-            '',
         'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
         'Shows the message of the day (MOTD) in the agent dashboard. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
@@ -8996,7 +8994,6 @@ Thanks for your help!
         'S/MIME Certificates' => 'S/MIME証明書',
         'SMS' => 'SMS',
         'Salutations' => '挨拶文',
-        'Sample command output' => '',
         'Schedule a maintenance period.' => 'メンテナンス期間をスケジュール',
         'Screen after new ticket' => '新規チケット作成後の画面',
         'Search Customer' => '顧客を検索します。',
@@ -9042,7 +9039,6 @@ Thanks for your help!
         'Set sender email addresses for this system.' => 'このシステムのメール送信者を設定',
         'Set this ticket to pending' => 'このチケットを保留に設定',
         'Shared Secret' => '',
-        'Show command line output.' => '',
         'Show the history for this ticket' => 'このチケットの履歴を表示',
         'Show the ticket history' => 'チケットの履歴を表示',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>

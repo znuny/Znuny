@@ -5,6 +5,7 @@
  - 2022-03-28 Added support for online package repositories again.
  - 2022-03-24 Deactivated support for execution of configurable system commands from Sendmail and PostMaster pre-filter configurations (CVE-2021-36100).
  - 2022-03-24 The system command in SysConfig option "MIME-Viewer" now is only configurable via Kernel/Config.pm (CVE-2021-36100).
+ - 2022-03-23 Removed dashboard widget support for execution of system commands (CVE-2021-36100).
  - 2022-03-23 Improved DynamicFieldObject _SanitizeConfig - ReservedKeywords will now be removed.
  - 2022-03-22 Added missing CKEditor codemirror plugin.
  - 2022-03-22 Fixed accidental deletion of OAuth2 token values on request for new token.

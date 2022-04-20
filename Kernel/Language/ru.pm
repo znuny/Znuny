@@ -37,7 +37,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.881673177083333;
+    $Self->{Completeness}        = 0.881778212017587;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -6250,8 +6250,6 @@ sub Data {
             'Определяет параметры Дайджеста. "Group" используется для ограничения доступа к разделу (например, Group: admin;group1;group2;). "Default" указывает, будет ли раздел доступен по умолчанию или агент должен активировать его вручную. "CacheTTLLocal" определяет время обновления кэша в минутах для этого раздела. "Mandatory" определяет, будет ли раздел отображаться всегда без возможности убрать его агентами.',
         'Defines the parameters for the dashboard backend. "Limit" defines the number of entries displayed by default. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             'Определяет параметры Дайджеста. "Limit" определяет число записей, отображаемых по умолчанию. "Group" используется для ограничения доступа к разделу (например, Group: admin;group1;group2;). "Default" указывает, будет ли раздел доступен по умолчанию или агент должен активировать его вручную. "CacheTTL" указывает время обновления кэша в минутах для этого раздела. "Mandatory" определяет, будет ли раздел отображаться всегда без возможности убрать его агентами.',
-        'Defines the parameters for the dashboard backend. "Cmd" is used to specify command with parameters. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
-            'Определяет параметры Дайджеста. "Cmd" используется для указания команды с параметрами. "Group" используется для ограничения доступа к разделу (например, Group: admin;group1;group2;). "Default" указывает, будет ли раздел доступен по умолчанию или агент должен активировать его вручную. "CacheTTLLocal" указывает время обновления кэша в минутах для этого раздела. "Mandatory" определяет, будет ли раздел отображаться всегда без возможности убрать его агентами.',
         'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             'Определяет параметры Дайджеста. "Group" используется для ограничения доступа к разделу (например, Group: admin;group1;group2;). "Default" указывает, будет ли раздел доступен по умолчанию или агент должен активировать его вручную. "CacheTTL" указывает время обновления кэша в минутах для этого раздела. "Mandatory" определяет, будет ли раздел отображаться всегда без возможности убрать его агентами.',
         'Shows the message of the day (MOTD) in the agent dashboard. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
@@ -8993,7 +8991,6 @@ Thanks for your help!
         'S/MIME Certificates' => 'Сертификаты S/MIME',
         'SMS' => 'SMS',
         'Salutations' => 'Приветствия',
-        'Sample command output' => 'Простейший пример результата выполнения',
         'Schedule a maintenance period.' => 'Управлять периодом обслуживания.',
         'Screen after new ticket' => 'Экран после создания новой заявки',
         'Search Customer' => 'Искать клиента',
@@ -9039,7 +9036,6 @@ Thanks for your help!
         'Set sender email addresses for this system.' => 'Задать адрес отправителя для этой системы.',
         'Set this ticket to pending' => 'Поставить заявку в ожидание',
         'Shared Secret' => 'Общий секрет',
-        'Show command line output.' => '',
         'Show the history for this ticket' => 'Показать историю этой заявки',
         'Show the ticket history' => 'Показать историю заявки',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>

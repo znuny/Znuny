@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.89013671875;
+    $Self->{Completeness}        = 0.890083048363459;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -6243,8 +6243,6 @@ sub Data {
             'Define os parâmetros para o backend do painel. "Cmd" é utilizado para especificar comandos com parâmetros. "Group" é utilizado para restringir o acesso ao plugin (por exemplo, Group: admin;group1;group2;). "Default" indica se o plugin é ativado como padrão ou se o usuário precisa ativar manualmente. "CacheTTL" indica o tempo de expiração do cache, em minutos, para o plugin. "Mandatory" determina se o plugin é exibido sempre e não pode ser removido pelos agentes.',
         'Defines the parameters for the dashboard backend. "Limit" defines the number of entries displayed by default. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             'Define os parâmetros para o backend do painel. "Limit" define o número de entradas exibidas como padrão. "Group" é utilizado para restringir o acesso ao plugin (por exemplo, Group: admin;group1;group2;). "Default" indica se o plugin é ativado como padrão ou se o usuário precisa ativar manualmente. "CacheTTL" indica o tempo de expiração do cache, em minutos, para o plugin. "Mandatory" determina se o plugin é exibido sempre e não pode ser removido pelos agentes.',
-        'Defines the parameters for the dashboard backend. "Cmd" is used to specify command with parameters. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
-            'Define os parâmetros para o backend do painel. "Cmd" é utilizado para especificar comandos com parâmetros. "Group" é utilizado para restringir o acesso ao plugin (por exemplo, Group: admin;group1;group2;). "Default" indica se o plugin é ativado como padrão ou se o usuário precisa ativar manualmente. "CacheTTL" indica o tempo de expiração do  cache, em minutos, para o plugin. "Mandatory" determina se o plugin é exibido sempre e não pode ser removido pelos agentes.',
         'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             'Define os parâmetros para o backend do painel. "Group" é utilizado para restringir o acesso ao plugin (por exemplo, Group: admin;group1;group2;). "Default" indica se o plugin é ativado como padrão ou se o usuário precisa ativar manualmente. "CacheTTL" indica o tempo de expiração do cache, em minutos, para o plugin. "Mandatory" determina se o plugin é exibido sempre e não pode ser removido pelos agentes.',
         'Shows the message of the day (MOTD) in the agent dashboard. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
@@ -8986,7 +8984,6 @@ Obrigado pela ajuda!
         'S/MIME Certificates' => 'Certificados S/MIME',
         'SMS' => 'SMS',
         'Salutations' => 'Saudações',
-        'Sample command output' => 'Exemplo de saída de comando',
         'Schedule a maintenance period.' => 'Agendar um período de manutenção',
         'Screen after new ticket' => 'Tela Após Novo Chamado',
         'Search Customer' => 'Procurar cliente',
@@ -9032,7 +9029,6 @@ Obrigado pela ajuda!
         'Set sender email addresses for this system.' => 'Configurar endereços de e-mail de remetente para o sistema.',
         'Set this ticket to pending' => 'Marcar chamado como pendente',
         'Shared Secret' => 'Segredo Compartilhado',
-        'Show command line output.' => 'Mastra a saída da linha de comando.',
         'Show the history for this ticket' => 'Mostrar o histórico deste chamado',
         'Show the ticket history' => 'Mostrar histórico do chamado',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>

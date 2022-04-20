@@ -16951,10 +16951,6 @@ msgid "Defines the parameters for the dashboard backend. \"Limit\" defines the n
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the parameters for the dashboard backend. \"Cmd\" is used to specify command with parameters. \"Group\" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" indicates if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTL\" indicates the cache expiration period in minutes for the plugin. \"Mandatory\" determines if the plugin is always shown and can not be removed by agents."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the parameters for the dashboard backend. \"Group\" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" indicates if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTL\" indicates the cache expiration period in minutes for the plugin. \"Mandatory\" determines if the plugin is always shown and can not be removed by agents."
 msgstr ""
 
@@ -23822,10 +23818,6 @@ msgid "Salutations"
 msgstr ""
 
 #. SysConfig
-msgid "Sample command output"
-msgstr ""
-
-#. SysConfig
 msgid "Schedule a maintenance period."
 msgstr ""
 
@@ -23983,10 +23975,6 @@ msgstr ""
 
 #. SysConfig
 msgid "Shared Secret"
-msgstr ""
-
-#. SysConfig
-msgid "Show command line output."
 msgstr ""
 
 #. SysConfig

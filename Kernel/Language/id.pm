@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.642252604166667;
+    $Self->{Completeness}        = 0.642403517342452;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -6240,8 +6240,6 @@ bin/otrs.Daemon.pl status\').',
             '',
         'Defines the parameters for the dashboard backend. "Limit" defines the number of entries displayed by default. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
-        'Defines the parameters for the dashboard backend. "Cmd" is used to specify command with parameters. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
-            '',
         'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
         'Shows the message of the day (MOTD) in the agent dashboard. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
@@ -8984,7 +8982,6 @@ Helpdesk Team Anda
         'S/MIME Certificates' => 'Sertifikat S/MIME',
         'SMS' => 'SMS',
         'Salutations' => 'Salam Pembuka',
-        'Sample command output' => 'Contoh perintah output',
         'Schedule a maintenance period.' => 'Jadwalkan masa pemeliharaan.',
         'Screen after new ticket' => 'Layar setelah tiket baru',
         'Search Customer' => 'Cari Pelanggan',
@@ -9030,7 +9027,6 @@ Helpdesk Team Anda
         'Set sender email addresses for this system.' => 'Mengatur alamat email pengirim untuk sistem ini.',
         'Set this ticket to pending' => 'Atur tiket ini menjadi Ditunda',
         'Shared Secret' => 'Berbagi rahasia',
-        'Show command line output.' => '',
         'Show the history for this ticket' => 'Tampilkan sejarah untuk tiket ini',
         'Show the ticket history' => 'Tunjukan riwayat tiket',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
