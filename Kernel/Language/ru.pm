@@ -37,7 +37,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.881778212017587;
+    $Self->{Completeness}        = 0.881883349625285;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -840,9 +840,6 @@ sub Data {
         'Time units' => 'Затраченное время',
         'Execute Ticket Commands' => 'Выполнить действия над заявкой',
         'Send agent/customer notifications on changes' => 'Отправить уведомление агенту/клиенту при изменениях',
-        'CMD' => 'Команда/CMD',
-        'This command will be executed. ARG[0] will be the ticket number. ARG[1] the ticket id.' =>
-            'Эта команда будет выполнена. ARG[0] — номер заявки. ARG[1] — id заявки.',
         'Delete tickets' => 'Удалить заявки',
         'Warning: All affected tickets will be removed from the database and cannot be restored!' =>
             'Предупреждение: Все выбранные заявки будут удалены из базы данных без возможности восстановления!',
@@ -7560,8 +7557,6 @@ sub Data {
             '',
         'Set the limit of tickets that will be executed on a single genericagent job execution.' =>
             'Задает предельное количество заявок, обрабатываемых за один запуск задания Планировщика.',
-        'Allows generic agent to execute custom command line scripts.' =>
-            '',
         'Allows generic agent to execute custom modules.' => '',
         'Unlock tickets whenever a note is added and the owner is out of office.' =>
             'Разблокирует заявку всякий раз, когда добавляется новое сообщение к заявке и владелец установил состояние - вне офиса.',

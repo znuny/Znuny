@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.943168865005699;
+    $Self->{Completeness}        = 0.943141088302379;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -834,9 +834,6 @@ sub Data {
         'Time units' => 'Vremenske jedinice',
         'Execute Ticket Commands' => 'Izvrši komande tiketa',
         'Send agent/customer notifications on changes' => 'Pošalji obaveštenja operateru/klijentu pri promenama',
-        'CMD' => 'CMD',
-        'This command will be executed. ARG[0] will be the ticket number. ARG[1] the ticket id.' =>
-            'Ova naredba će biti izvršena. ARG[0] je broj tiketa, a ARG[1] ID tiketa.',
         'Delete tickets' => 'Obriši tikete',
         'Warning: All affected tickets will be removed from the database and cannot be restored!' =>
             'UPOZORENJE: Svi obuhvaćeni tiketi će biti nepovratno uklonjeni iz baze!',
@@ -7554,8 +7551,6 @@ sub Data {
             '',
         'Set the limit of tickets that will be executed on a single genericagent job execution.' =>
             'Postavlja ograničenje koliko će tiketa biti izvršeno u jednom izvršavanju posla generičkog operatera.',
-        'Allows generic agent to execute custom command line scripts.' =>
-            'Omogućava generičkom operateru da izvršava komandne skripte.',
         'Allows generic agent to execute custom modules.' => 'Omogućava generičkom operateru da izvršava dodatne module.',
         'Unlock tickets whenever a note is added and the owner is out of office.' =>
             'Otključavanje tiketa kad god se doda napomena i vlasnik je van kancelarije.',

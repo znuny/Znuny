@@ -216,6 +216,10 @@ sub _TasksGet {
 
         # >>> Znuny 6.3
         {
+            Message => 'Remove Generic Agent system commands',
+            Module  => 'scripts::Migration::Znuny6_3::RemoveGenericAgentSystemCommandCalls',
+        },
+        {
             Message => 'Migrate dashboard widgets that execute system commands',
             Module  => 'scripts::Migration::Znuny6_3::MigrateDashboardWidgetSystemCommandCalls',
         },

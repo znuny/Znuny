@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.946751343429409;
+    $Self->{Completeness}        = 0.94672531769306;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -835,9 +835,6 @@ sub Data {
         'Time units' => '时间单元',
         'Execute Ticket Commands' => '执行工单指令',
         'Send agent/customer notifications on changes' => '给服务人员/客户发送通知',
-        'CMD' => '命令',
-        'This command will be executed. ARG[0] will be the ticket number. ARG[1] the ticket id.' =>
-            '将执行这个命令, 第一个参数是工单编号，第二个参数是工单ID。',
         'Delete tickets' => '删除工单',
         'Warning: All affected tickets will be removed from the database and cannot be restored!' =>
             '警告：所有影响的工单将从数据库删除，且无法恢复！',
@@ -7555,8 +7552,6 @@ sub Data {
             '',
         'Set the limit of tickets that will be executed on a single genericagent job execution.' =>
             '设置一个自动任务执行一次能处理的工单数限制。',
-        'Allows generic agent to execute custom command line scripts.' =>
-            '允许自动任务执行定制的命令行脚本。',
         'Allows generic agent to execute custom modules.' => '允许自动任务执行定制的模块。',
         'Unlock tickets whenever a note is added and the owner is out of office.' =>
             '每当添加备注或所有者不在办公室时，解锁工单。',

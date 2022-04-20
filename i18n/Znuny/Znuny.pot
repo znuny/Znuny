@@ -2527,14 +2527,6 @@ msgid "Send agent/customer notifications on changes"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
-msgid "CMD"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
-msgid "This command will be executed. ARG[0] will be the ticket number. ARG[1] the ticket id."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Delete tickets"
 msgstr ""
 
@@ -19708,10 +19700,6 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Set the limit of tickets that will be executed on a single genericagent job execution."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Allows generic agent to execute custom command line scripts."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml

@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.917765836183032;
+    $Self->{Completeness}        = 0.917888563049853;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -828,9 +828,6 @@ sub Data {
         'Time units' => '시간 단위',
         'Execute Ticket Commands' => '티켓 명령 실행',
         'Send agent/customer notifications on changes' => '변경 사항에 대한 상담원 / 고객 알림 보내기',
-        'CMD' => 'CMD',
-        'This command will be executed. ARG[0] will be the ticket number. ARG[1] the ticket id.' =>
-            '이 명령이 실행됩니다. ARG [0]이 티켓 번호입니다. ARG [1] 티켓 ID.',
         'Delete tickets' => '티켓 삭제',
         'Warning: All affected tickets will be removed from the database and cannot be restored!' =>
             '경고 : 영향을받는 모든 티켓이 데이터베이스에서 제거되어 복원 할 수 없습니다!',
@@ -7548,8 +7545,6 @@ sub Data {
             '',
         'Set the limit of tickets that will be executed on a single genericagent job execution.' =>
             '단일 generic 에이전트 작업 실행시 실행될 티켓의 한계를 설정하십시오.',
-        'Allows generic agent to execute custom command line scripts.' =>
-            '',
         'Allows generic agent to execute custom modules.' => '',
         'Unlock tickets whenever a note is added and the owner is out of office.' =>
             '메모가 추가되고 소유자가 부재할 때마다 티켓을 잠금 해제하십시오.',

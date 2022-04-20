@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.323400097703957;
+    $Self->{Completeness}        = 0.323232323232323;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -831,9 +831,6 @@ sub Data {
         'Time units' => '時間',
         'Execute Ticket Commands' => '',
         'Send agent/customer notifications on changes' => '給服務人員/用戶發送通知',
-        'CMD' => '命令',
-        'This command will be executed. ARG[0] will be the ticket number. ARG[1] the ticket id.' =>
-            '將執行這個命令, 第一個参數是工單 編號，第二個参數是工單的標識符.',
         'Delete tickets' => '刪除工單',
         'Warning: All affected tickets will be removed from the database and cannot be restored!' =>
             '警告：所有影響的工單從數據庫刪除，將無法恢復！',
@@ -7551,8 +7548,6 @@ sub Data {
         'Allows extended search conditions in ticket search of the generic agent interface. With this feature you can search e. g. ticket title with this kind of conditions like "(*key1*&amp;&amp;*key2*)" or "(*key1*||*key2*)".' =>
             '',
         'Set the limit of tickets that will be executed on a single genericagent job execution.' =>
-            '',
-        'Allows generic agent to execute custom command line scripts.' =>
             '',
         'Allows generic agent to execute custom modules.' => '',
         'Unlock tickets whenever a note is added and the owner is out of office.' =>

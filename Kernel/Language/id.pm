@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.642403517342452;
+    $Self->{Completeness}        = 0.642391658520691;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -828,9 +828,6 @@ sub Data {
         'Time units' => 'Unit waktu',
         'Execute Ticket Commands' => 'Eksekusikan perintah tiket.',
         'Send agent/customer notifications on changes' => 'Kirim notifikasi agen/pelanggan saat pengubahan',
-        'CMD' => 'CMD',
-        'This command will be executed. ARG[0] will be the ticket number. ARG[1] the ticket id.' =>
-            'Perintah ini akan di eksekusi. ARG[0] akan menjadi nomor tiket. ARG[1] id tiket.',
         'Delete tickets' => 'Hapus tiket',
         'Warning: All affected tickets will be removed from the database and cannot be restored!' =>
             'Perhatian: Semua tiket yang terkena dampak akan dihapus dari dari database dan tidak dapat dikembalikan.',
@@ -7550,8 +7547,6 @@ bin/otrs.Daemon.pl status\').',
             '',
         'Set the limit of tickets that will be executed on a single genericagent job execution.' =>
             'Mengatur batas dari tiket yang akan dilaksanakan pada agen generik yang akan mengeksekusi pekerjaan tunggal.',
-        'Allows generic agent to execute custom command line scripts.' =>
-            '',
         'Allows generic agent to execute custom modules.' => '',
         'Unlock tickets whenever a note is added and the owner is out of office.' =>
             'Membuka tiket setiap kali catatan yang ditambahkan dan pemilik keluar dari kantor.',

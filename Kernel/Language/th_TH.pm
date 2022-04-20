@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.557889594528578;
+    $Self->{Completeness}        = 0.557836428804171;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -828,9 +828,6 @@ sub Data {
         'Time units' => 'หน่วยเวลา',
         'Execute Ticket Commands' => 'คำสั่งดำเนินการตั๋ว',
         'Send agent/customer notifications on changes' => 'ส่งการแจ้งเตือนเกี่ยวกับการเปลี่ยนแปลงไปยัง เอเย่นต์/ ลูกค้า',
-        'CMD' => 'CMD',
-        'This command will be executed. ARG[0] will be the ticket number. ARG[1] the ticket id.' =>
-            'คำสั่งนี้จะถูกดำเนินการ ARG [0]จะเป็นหมายเลขตั๋ว ARG [1]ID ของตั๋ว',
         'Delete tickets' => 'ลบตั๋ว',
         'Warning: All affected tickets will be removed from the database and cannot be restored!' =>
             'คำเตือน: ตั๋วที่ได้รับผลกระทบทั้งหมดจะถูกลบออกจากฐานข้อมูลและไม่สามารถเรียกคืน!',
@@ -7553,8 +7550,6 @@ sub Data {
         'Allows extended search conditions in ticket search of the generic agent interface. With this feature you can search e. g. ticket title with this kind of conditions like "(*key1*&amp;&amp;*key2*)" or "(*key1*||*key2*)".' =>
             '',
         'Set the limit of tickets that will be executed on a single genericagent job execution.' =>
-            '',
-        'Allows generic agent to execute custom command line scripts.' =>
             '',
         'Allows generic agent to execute custom modules.' => '',
         'Unlock tickets whenever a note is added and the owner is out of office.' =>

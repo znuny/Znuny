@@ -34,7 +34,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.396840905390002;
+    $Self->{Completeness}        = 0.396709025741284;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -837,9 +837,6 @@ sub Data {
         'Time units' => 'Tidsenheter',
         'Execute Ticket Commands' => '',
         'Send agent/customer notifications on changes' => 'Send en saksbehandler-/kunde-varsling ved endringer',
-        'CMD' => 'Kommando',
-        'This command will be executed. ARG[0] will be the ticket number. ARG[1] the ticket id.' =>
-            'Denne kommandoen vil bli kjørt. ARG[0] vil være saksnummer. ARG[1] saks-id.',
         'Delete tickets' => 'Slett saker',
         'Warning: All affected tickets will be removed from the database and cannot be restored!' =>
             'ADVARSEL: Alle saker som blir funnet av denne jobben vil bli slettet og kan ikke gjenopprettes!',
@@ -7556,8 +7553,6 @@ sub Data {
         'Allows extended search conditions in ticket search of the generic agent interface. With this feature you can search e. g. ticket title with this kind of conditions like "(*key1*&amp;&amp;*key2*)" or "(*key1*||*key2*)".' =>
             '',
         'Set the limit of tickets that will be executed on a single genericagent job execution.' =>
-            '',
-        'Allows generic agent to execute custom command line scripts.' =>
             '',
         'Allows generic agent to execute custom modules.' => '',
         'Unlock tickets whenever a note is added and the owner is out of office.' =>

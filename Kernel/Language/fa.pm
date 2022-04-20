@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.656896270965641;
+    $Self->{Completeness}        = 0.656891495601173;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -834,9 +834,6 @@ sub Data {
         'Time units' => 'واحد زمان',
         'Execute Ticket Commands' => 'اجرای دستورات درخواست ',
         'Send agent/customer notifications on changes' => 'آگاه کردن کارشناس/مشتری به هنگام ایجاد تغییرات',
-        'CMD' => 'CMD',
-        'This command will be executed. ARG[0] will be the ticket number. ARG[1] the ticket id.' =>
-            'این دستور اجرا خواهد شد. ARG[0] شماره درخواست و ARG[1] id آن خواهد بود.',
         'Delete tickets' => 'حذف درخواست‌ها',
         'Warning: All affected tickets will be removed from the database and cannot be restored!' =>
             'اخطار: تمامی درخواست‌های تاثیر یافته از پایگاه داده حذف خواهد شد و قابل بازیابی نخواهد بود!',
@@ -7554,8 +7551,6 @@ sub Data {
             '',
         'Set the limit of tickets that will be executed on a single genericagent job execution.' =>
             'مجموعه ای از محدودیت بلیط خواهد شد که در یک اعدام کار genericagent تک اجرا می شود.',
-        'Allows generic agent to execute custom command line scripts.' =>
-            '',
         'Allows generic agent to execute custom modules.' => '',
         'Unlock tickets whenever a note is added and the owner is out of office.' =>
             'باز کردن بلیط هر زمان که یک توجه داشته باشید اضافه شده است و مالک از دفتر.',

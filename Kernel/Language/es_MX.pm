@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.760462465396515;
+    $Self->{Completeness}        = 0.760345389377647;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -828,9 +828,6 @@ sub Data {
         'Time units' => 'Unidades de tiempo',
         'Execute Ticket Commands' => 'Ejecutar Comandos del Ticket',
         'Send agent/customer notifications on changes' => 'Enviar notificación de cambios al agente/cliente',
-        'CMD' => 'CMD',
-        'This command will be executed. ARG[0] will be the ticket number. ARG[1] the ticket id.' =>
-            'Este comando se ejecutará. ARG[0] será el número del ticket y ARG[1] el identificador del ticket.',
         'Delete tickets' => 'Eliminar tickets',
         'Warning: All affected tickets will be removed from the database and cannot be restored!' =>
             'Advertencia: ¡Todos los tickets afectados serán eliminados de la base de datos y no se podrán recuperar!',
@@ -7548,8 +7545,6 @@ sub Data {
             '',
         'Set the limit of tickets that will be executed on a single genericagent job execution.' =>
             'Establecer el límite de tickets que se ejecutarán en una sola ejecución de trabajo de agente genérico.',
-        'Allows generic agent to execute custom command line scripts.' =>
-            'Permite que el agente genérico ejecute scripts de línea de comandos personalizados.',
         'Allows generic agent to execute custom modules.' => 'Permite que el agente genérico ejecute módulos personalizados.',
         'Unlock tickets whenever a note is added and the owner is out of office.' =>
             'Desbloquear tickets cuando una nota es añadida y el propietario se encuentra fuera de la oficina.',

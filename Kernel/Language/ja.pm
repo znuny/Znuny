@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.723009281875916;
+    $Self->{Completeness}        = 0.723036819811013;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -831,9 +831,6 @@ sub Data {
         'Time units' => '時間の単位',
         'Execute Ticket Commands' => 'チケットコマンドを実行',
         'Send agent/customer notifications on changes' => '変更を担当者／顧客に通知する',
-        'CMD' => 'コマンド',
-        'This command will be executed. ARG[0] will be the ticket number. ARG[1] the ticket id.' =>
-            'このコマンドが実行されます。チケット番号は ARG[0] 、チケットIDは ARG[1] です。',
         'Delete tickets' => 'チケット削除',
         'Warning: All affected tickets will be removed from the database and cannot be restored!' =>
             '警告: 影響を受ける全てのチケットがデータベースから削除されます。復元することはできません。',
@@ -7554,8 +7551,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Allows extended search conditions in ticket search of the generic agent interface. With this feature you can search e. g. ticket title with this kind of conditions like "(*key1*&amp;&amp;*key2*)" or "(*key1*||*key2*)".' =>
             '',
         'Set the limit of tickets that will be executed on a single genericagent job execution.' =>
-            '',
-        'Allows generic agent to execute custom command line scripts.' =>
             '',
         'Allows generic agent to execute custom modules.' => '',
         'Unlock tickets whenever a note is added and the owner is out of office.' =>

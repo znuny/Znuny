@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.640123758345546;
+    $Self->{Completeness}        = 0.640110785272076;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -831,9 +831,6 @@ sub Data {
         'Time units' => 'Time units',
         'Execute Ticket Commands' => 'Execute Ticket Commands',
         'Send agent/customer notifications on changes' => 'Send agent/customer notifications on changes',
-        'CMD' => 'CMD',
-        'This command will be executed. ARG[0] will be the ticket number. ARG[1] the ticket id.' =>
-            'This command will be executed. ARG[0] will be the ticket number. ARG[1] the ticket id.',
         'Delete tickets' => 'Delete tickets',
         'Warning: All affected tickets will be removed from the database and cannot be restored!' =>
             'Warning: All affected tickets will be removed from the database and cannot be restored!',
@@ -7551,8 +7548,6 @@ sub Data {
             '',
         'Set the limit of tickets that will be executed on a single genericagent job execution.' =>
             'Set the limit of tickets that will be executed on a single genericagent job execution.',
-        'Allows generic agent to execute custom command line scripts.' =>
-            '',
         'Allows generic agent to execute custom modules.' => '',
         'Unlock tickets whenever a note is added and the owner is out of office.' =>
             'Unlock tickets whenever a note is added and the owner is out of office.',
