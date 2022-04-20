@@ -1,4 +1,5 @@
 # 6.3.2 2022-04-20
+ - 2022-04-20 Removed unwanted line breaks from base64 encoded authorization header in Kernel::GenericInterface::Transport::HTTP::REST.
  - 2022-04-13 Fixed refresh in overviews if fulltext search in toolbar is not enabled. [#237](https://github.com/znuny/Znuny/issues/237)
  - 2022-04-01 Fixed encoding for autocompletion in dynamic field edit view of type Webservice.
  - 2022-03-31 Fixed check of UntilTime in Kernel::System::Ticket::Event::TicketPendingTimeReset. [#221)(https://github.com/znuny/Znuny/issues/221)
