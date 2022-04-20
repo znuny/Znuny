@@ -36,7 +36,7 @@
 /opt/otrs/Kernel/Output*
 /opt/otrs/Kernel/System*
 /opt/otrs/scripts*
-/opt/otrs/i18n/otrs/*
+/opt/otrs/i18n/Znuny/*
 
 %dir /opt/otrs/var/
 # TEMPROARILY DEACTIVATED. There are no packages to embed at present.

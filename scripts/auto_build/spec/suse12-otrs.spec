@@ -162,7 +162,7 @@ rm -rf $RPM_BUILD_ROOT
 /opt/otrs/Kernel/Output*
 /opt/otrs/Kernel/System*
 /opt/otrs/scripts*
-/opt/otrs/i18n/otrs/*
+/opt/otrs/i18n/Znuny/*
 
 %dir /opt/otrs/var/
 %dir /opt/otrs/var/article/
