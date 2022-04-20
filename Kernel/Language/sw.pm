@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.460149642160052;
+    $Self->{Completeness}        = 0.459798177083333;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -5811,8 +5811,6 @@ sub Data {
             '',
         'Defines the module to send emails. "DoNotSendEmail" doesn\'t send emails at all. Any of the "SMTP" mechanisms use a specified (external) mailserver. "Sendmail" directly uses the sendmail binary of your operating system. "Test" doesn\'t send emails, but writes them to $OTRS_HOME/var/tmp/CacheFileStorable/EmailTest/ for testing purposes.' =>
             '',
-        'If "Sendmail" was selected as SendmailModule, the location of the sendmail binary and the needed options must be specified.' =>
-            'Kama "Tuma Barua pepe" ilichaguliwa kama Moduli ya kutuma barua pepe, eneo la pacha tuma barua pepe na michaguo inayohusika lazima ibainishwe.',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the mailhost that sends out the mails must be specified.' =>
             'Kama moja ya taratibu za "SMTP" itachaguliwa kama Moduli ya Barua pepe ya kutuma, mwenyeji wa barua pepe ambaye anatuma lazima abainishwe.',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the port where your mailserver is listening for incoming connections must be specified.' =>
@@ -7622,12 +7620,6 @@ Mfano:
         'Defines the sender for rejected emails.' => 'Inamfafanua mtumaji wa barua pepe zilizolizokataliwa.',
         'Defines the subject for rejected emails.' => 'Inafafanua somo kwa barua pepe zilizokataliwa.',
         'Defines the body text for rejected emails.' => 'Inafafanua kiini cha matini ya barua pepe zilizokataliwa',
-        'CMD example setup. Ignores emails where external CMD returns some output on STDOUT (email will be piped into STDIN of some.bin).' =>
-            'Mpangilio wa mfano wa CMD. Inapuuzia barua pepe ambapo CMD ya nje inarudisha baadhi ya matokeo katika STDOUT (Barua pepe zitapitishwa katika TDIN ya some.bin ).',
-        'Spam Assassin example setup. Ignores emails that are marked with SpamAssassin.' =>
-            'Mfano wa mpangilio wa barua taka muuaji. Puuzia barua pepe ambazo zimewekwa alama kama barua taka muuaji.',
-        'Spam Assassin example setup. Moves marked mails to spam queue.' =>
-            'Mfano wa mpangilio wa barua taka muuaji.Hamisha barua pepe zilizowekwa alama kwenye foleni ya barua taka.',
         'Module to use database filter storage.' => 'Moduli ya kutumia hifadhi ya kichujua cha hifadhi data.',
         'Module to check if arrived emails should be marked as internal (because of original forwarded internal email). IsVisibleForCustomer and SenderType define the values for the arrived email/article.' =>
             '',

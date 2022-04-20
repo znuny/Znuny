@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.946811971372804;
+    $Self->{Completeness}        = 0.94677734375;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5814,8 +5814,6 @@ sub Data {
             'A legkisebb naplózási szint beállítása. Ha a „hibát” választja, akkor csak a hibák lesznek naplózva. A „hibakeresés” lehetőséggel minden naplózási üzenetet megkap. A naplózási szintek sorrendje: „hibakeresés”, „információ”, „figyelmeztetés” és „hiba”.',
         'Defines the module to send emails. "DoNotSendEmail" doesn\'t send emails at all. Any of the "SMTP" mechanisms use a specified (external) mailserver. "Sendmail" directly uses the sendmail binary of your operating system. "Test" doesn\'t send emails, but writes them to $OTRS_HOME/var/tmp/CacheFileStorable/EmailTest/ for testing purposes.' =>
             'Meghatározza azt a modult, amely e-maileket küld. A „DoNotSendEmail” egyáltalán nem küld e-maileket. Az „SMTP” mechanizmusok bármelyike egy megadott (külső) levelező-kiszolgálót használ. A „Sendmail” közvetlenül az operációs rendszere sendmail binárisát használja. A „Test” nem küld e-maileket, hanem az $OTRS_HOME/var/tmp/CacheFileStorable/EmailTest/ mappába írja azokat tesztelési céllal.',
-        'If "Sendmail" was selected as SendmailModule, the location of the sendmail binary and the needed options must be specified.' =>
-            'Ha „Sendmail” lett kiválasztva a SendmailModule modulnál, akkor meg kell adni a sendmail bináris helyét és a szükséges beállításokat.',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the mailhost that sends out the mails must be specified.' =>
             'Ha az „SMTP” mechanizmusok bármelyike SendmailModule modulként lett kiválasztva, akkor meg kell adni azt a levelező kiszolgálót, amely kiküldi a leveleket.',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the port where your mailserver is listening for incoming connections must be specified.' =>
@@ -7622,12 +7620,6 @@ sub Data {
         'Defines the sender for rejected emails.' => 'Meghatározza az elutasított e-mailek küldőjét.',
         'Defines the subject for rejected emails.' => 'Meghatározza az elutasított levelek tárgyát.',
         'Defines the body text for rejected emails.' => 'Meghatározza az elutasított levelek törzsének szövegét.',
-        'CMD example setup. Ignores emails where external CMD returns some output on STDOUT (email will be piped into STDIN of some.bin).' =>
-            'PARANCS példa beállítás. Mellőzi azokat az e-maileket, ahol a külső PARANCS néhány kimenettel tér vissza a SZABVÁNYOS KIMENETEN (az e-mail át lesz irányítva a some.bin SZABVÁNYOS BEMENETÉRE).',
-        'Spam Assassin example setup. Ignores emails that are marked with SpamAssassin.' =>
-            'Spam Assassin példa beállítás. Mellőzi azokat az e-maileket, amelyeket a SpamAssassin megjelölt.',
-        'Spam Assassin example setup. Moves marked mails to spam queue.' =>
-            'Spam Assassin példa beállítás. Áthelyezi a megjelölt leveleket a spam várólistába.',
         'Module to use database filter storage.' => 'Egy modul az adatbázis-szűrő tároló használatához.',
         'Module to check if arrived emails should be marked as internal (because of original forwarded internal email). IsVisibleForCustomer and SenderType define the values for the arrived email/article.' =>
             'Egy modul annak ellenőrzéséhez, hogy a beérkező e-maileket meg kell-e jelölni belsőként (az eredeti továbbított belső e-mail miatt). Az IsVisibleForCustomer és a SenderType határozza meg az értékeket a beérkező e-mailhez vagy bejegyzéshez.',

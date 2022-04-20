@@ -24,7 +24,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.572543916720885;
+    $Self->{Completeness}        = 0.572265625;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5807,8 +5807,6 @@ sub Data {
             '',
         'Defines the module to send emails. "DoNotSendEmail" doesn\'t send emails at all. Any of the "SMTP" mechanisms use a specified (external) mailserver. "Sendmail" directly uses the sendmail binary of your operating system. "Test" doesn\'t send emails, but writes them to $OTRS_HOME/var/tmp/CacheFileStorable/EmailTest/ for testing purposes.' =>
             '',
-        'If "Sendmail" was selected as SendmailModule, the location of the sendmail binary and the needed options must be specified.' =>
-            'Jika "Sendmail" dipilih sebagai SendmailModule, lokasi bagi binari sendmail dan pilihan yang diperlukan mesti ditentukan.',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the mailhost that sends out the mails must be specified.' =>
             'Jika satu daripada mekanisme "SMTP" dipilih sebagai SendmailModule, hos mel yang menghantar mel keluar mesti ditentukan.',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the port where your mailserver is listening for incoming connections must be specified.' =>
@@ -7616,12 +7614,6 @@ dalaman.',
         'Defines the sender for rejected emails.' => 'Mentakrifkan penghantar untuk emel yang ditolak.',
         'Defines the subject for rejected emails.' => 'Mentakrifkan subjek untuk emel yang ditolak.',
         'Defines the body text for rejected emails.' => 'Mentakrifkan teks badan untuk e-mel yang ditolak.',
-        'CMD example setup. Ignores emails where external CMD returns some output on STDOUT (email will be piped into STDIN of some.bin).' =>
-            'CMD contoh persediaan. Mengabaikan emel dimana CMD luaran kembali beberapa output dalam STDOUT (emel akan disalurkan kedalam STDIN daripada some.bin).',
-        'Spam Assassin example setup. Ignores emails that are marked with SpamAssassin.' =>
-            'Contoh pemasangan Spam Assassin. Abaikan emel yang ditanda dengan SpamAssassin.',
-        'Spam Assassin example setup. Moves marked mails to spam queue.' =>
-            'Contoh pemasangan Spam Assassin. Pindah mel ditanda ke aturan spam.',
         'Module to use database filter storage.' => 'Modul untuk menggunakan penyimpanan penapis pangkalan data.',
         'Module to check if arrived emails should be marked as internal (because of original forwarded internal email). IsVisibleForCustomer and SenderType define the values for the arrived email/article.' =>
             '',

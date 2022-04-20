@@ -216,6 +216,10 @@ sub _TasksGet {
 
         # >>> Znuny 6.3
         {
+            Message => 'Migrate PostMaster pre-filters that execute system commands',
+            Module  => 'scripts::Migration::Znuny6_3::MigratePostMasterPreFilterSystemCommandCalls',
+        },
+        {
             Message => 'Migrate Excel stats format definitions',
             Module  => 'scripts::Migration::Znuny6_3::MigrateExcelStatsFormatDefinitions',
         },

@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.489264801561483;
+    $Self->{Completeness}        = 0.488932291666667;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5808,8 +5808,6 @@ sub Data {
             '',
         'Defines the module to send emails. "DoNotSendEmail" doesn\'t send emails at all. Any of the "SMTP" mechanisms use a specified (external) mailserver. "Sendmail" directly uses the sendmail binary of your operating system. "Test" doesn\'t send emails, but writes them to $OTRS_HOME/var/tmp/CacheFileStorable/EmailTest/ for testing purposes.' =>
             '',
-        'If "Sendmail" was selected as SendmailModule, the location of the sendmail binary and the needed options must be specified.' =>
-            'Se "Enviarmail" foi seleccionado coma EnviarmailModule, a localización do binario sendmail e as opcións necesitadas deben ser especificadas.',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the mailhost that sends out the mails must be specified.' =>
             'Se calquera dos mecanismos "SMTP" foi seleccionado coma EnviarcorreoModulo, o hostcorreo que envía os correos debe ser especificado.',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the port where your mailserver is listening for incoming connections must be specified.' =>
@@ -7616,12 +7614,6 @@ sub Data {
         'Defines the sender for rejected emails.' => 'Define o remitente para correos electrónicos rexeitados.',
         'Defines the subject for rejected emails.' => 'Define o tema para correos electrónicos rexeitados.',
         'Defines the body text for rejected emails.' => 'Define o texto do corpo para correos rexeitados.',
-        'CMD example setup. Ignores emails where external CMD returns some output on STDOUT (email will be piped into STDIN of some.bin).' =>
-            'Montaxe exemplo CMD. Ignora os correos electrónicos onde unha CMD externa retorna nun STDOUT (correo será canalizado en STDIN de some.bin).',
-        'Spam Assassin example setup. Ignores emails that are marked with SpamAssassin.' =>
-            'Exemplo de montaxe de Asasino de Spam. Ignorar correos electrónicos marcados con AsasinoSpam.',
-        'Spam Assassin example setup. Moves marked mails to spam queue.' =>
-            'Exemplo de mantaxe de Asasino de Spam. Mover correos electrónicos marcados á cola de spam.',
         'Module to use database filter storage.' => 'Módulo para empregar o almacenamento de filtros da base de datos.',
         'Module to check if arrived emails should be marked as internal (because of original forwarded internal email). IsVisibleForCustomer and SenderType define the values for the arrived email/article.' =>
             '',

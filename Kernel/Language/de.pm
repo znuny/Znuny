@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.99430709173715;
+    $Self->{Completeness}        = 0.994303385416667;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5808,8 +5808,6 @@ sub Data {
             'Legt die minimale Protokoll-Ebene fest. Wählen Sie "error" aus, werden nur Fehler protokolliert. Mit "debug" erhalten Sie alle Einträge. Die Reihenfolge der Ebenen ist debug, info, notice und error.',
         'Defines the module to send emails. "DoNotSendEmail" doesn\'t send emails at all. Any of the "SMTP" mechanisms use a specified (external) mailserver. "Sendmail" directly uses the sendmail binary of your operating system. "Test" doesn\'t send emails, but writes them to $OTRS_HOME/var/tmp/CacheFileStorable/EmailTest/ for testing purposes.' =>
             'Definiert das Modul zum Versenden von E-Mails. "DoNotSendEmail" sendet überhaupt keine E-Mails. Jeder der "SMTP"-Mechanismen verwendet einen bestimmten (externen) Mailserver. "Sendmail" verwendet direkt die sendmail-Binärdatei Ihres Betriebssystems. "Test" sendet keine E-Mails, sondern schreibt sie zu Testzwecken in $OTRS_HOME/var/tmp/CacheFileStorable/EmailTest/.',
-        'If "Sendmail" was selected as SendmailModule, the location of the sendmail binary and the needed options must be specified.' =>
-            'Wenn "Sendmail" als als SendmailModule konfiguriert wurde, müssen hier der Pfad zum Sendmail-binary und die benötigten Optionen hinterlegt werden.',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the mailhost that sends out the mails must be specified.' =>
             'Wenn einer der SMTP-Mechanismen als SendmailModule ausgewählt wurde, muss hier der Mailhost, der die Mails versendet, angegeben werden.',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the port where your mailserver is listening for incoming connections must be specified.' =>
@@ -7616,12 +7614,6 @@ sub Data {
         'Defines the sender for rejected emails.' => 'Definiert die Absendeadresse für abgelehnte E-Mails.',
         'Defines the subject for rejected emails.' => 'Bestimmt den Betreff von abgelehnten E-Mails.',
         'Defines the body text for rejected emails.' => 'Definiert den Body-Text für abgelehnte E-Mails.',
-        'CMD example setup. Ignores emails where external CMD returns some output on STDOUT (email will be piped into STDIN of some.bin).' =>
-            'CMD Beispiel-Setup. Ignoriert E-Mails, in denen ein externer CMD eine Ausgabe auf STDOUT liefert (E-Mail von some.bin wird in STDIN geleitet).',
-        'Spam Assassin example setup. Ignores emails that are marked with SpamAssassin.' =>
-            'Spam Assassin Beispielsetup. Ignoriert E-Mail, die von Spam Assassin markiert wurden.',
-        'Spam Assassin example setup. Moves marked mails to spam queue.' =>
-            'Spam Assassin Beispielsetup. Verschiebt markierte E-Mails in die Spam-Queue.',
         'Module to use database filter storage.' => 'Modul zur Nutzung des Datenbank Filter Storage.',
         'Module to check if arrived emails should be marked as internal (because of original forwarded internal email). IsVisibleForCustomer and SenderType define the values for the arrived email/article.' =>
             'Modul zur Prüfung, ob eingegangene E-Mails aufgrund einer vorher weitergeleiteten internen E-Mail als internal gekennzeichnet werden sollen. Über IsVisibleForCustomer und SenderType werden die Werte für die eingegangene E-Mail/den eingegangenen Artikel festgelegt.',

@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.946811971372804;
+    $Self->{Completeness}        = 0.94677734375;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -5815,8 +5815,6 @@ sub Data {
             '设置最小日志级别。 如果选择\'error\'，则只会记录错误。 使用\'debug\'可以获取所有日志消息。 日志级别的顺序是：\'debug\'，\'info\'，\'notice\'和\'error\'。',
         'Defines the module to send emails. "DoNotSendEmail" doesn\'t send emails at all. Any of the "SMTP" mechanisms use a specified (external) mailserver. "Sendmail" directly uses the sendmail binary of your operating system. "Test" doesn\'t send emails, but writes them to $OTRS_HOME/var/tmp/CacheFileStorable/EmailTest/ for testing purposes.' =>
             '定义发送电子邮件的模块。 “DoNotSendEmail”根本不发送电子邮件。 任何“SMTP”机制都使用指定的（外部）邮件服务器。 “Sendmail”直接使用操作系统的sendmail二进制文件。 “Test”不会发送电子邮件，而是将它们写入$OTRS_HOME/var/tmp/CacheFileStorable/EmailTest/ 以用于测试目的。',
-        'If "Sendmail" was selected as SendmailModule, the location of the sendmail binary and the needed options must be specified.' =>
-            '如果发送邮件模块选用了“Sendmail”，必须指定Sendmail的位置和需要的配置。',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the mailhost that sends out the mails must be specified.' =>
             '如果发送邮件模块选用了“SMTP”，并且邮件服务器需要认证，必须指定发送邮件的服务器。',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the port where your mailserver is listening for incoming connections must be specified.' =>
@@ -7623,12 +7621,6 @@ sub Data {
         'Defines the sender for rejected emails.' => '定义拒绝邮件的发件人。',
         'Defines the subject for rejected emails.' => '定义拒绝邮件的主题。',
         'Defines the body text for rejected emails.' => '定义拒绝邮件的正文文本。',
-        'CMD example setup. Ignores emails where external CMD returns some output on STDOUT (email will be piped into STDIN of some.bin).' =>
-            '命令行样例设置。忽略外部命令行返回在STDOUT（标准输出）上的一些输出的邮件（邮件将用管道输入到some.bin的STDIN标准输入）。',
-        'Spam Assassin example setup. Ignores emails that are marked with SpamAssassin.' =>
-            'Spam Assassin（是一种安装在邮件服务器上的邮件过滤器）样例设置，忽略SpamAssassin标记的邮件。',
-        'Spam Assassin example setup. Moves marked mails to spam queue.' =>
-            'Spam Assassin（是一种安装在邮件服务器上的邮件过滤器）样例设置，将标记的邮件移到垃圾队列。',
         'Module to use database filter storage.' => '使用数据库过滤器的模块。',
         'Module to check if arrived emails should be marked as internal (because of original forwarded internal email). IsVisibleForCustomer and SenderType define the values for the arrived email/article.' =>
             '检查邮件是否应该被标记为内部（因为原始转发的内部电子邮件）的模块。 IsVisibleForCustomer（是否对客户可见）和SenderType（发件人类型）定义了到达电子邮件/信件的值。',

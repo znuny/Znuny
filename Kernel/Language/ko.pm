@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.917859466493169;
+    $Self->{Completeness}        = 0.917805989583333;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -5808,8 +5808,6 @@ sub Data {
             '최소 로그 레벨을 설정하십시오. \'오류\'를 선택하면 오류 만 기록됩니다. \'디버그\'를 사용하면 모든 로깅 메시지를 얻을 수 있습니다. 로그 수준의 순서는 \'debug\', \'info\', \'notice\'및 \'error\'입니다.',
         'Defines the module to send emails. "DoNotSendEmail" doesn\'t send emails at all. Any of the "SMTP" mechanisms use a specified (external) mailserver. "Sendmail" directly uses the sendmail binary of your operating system. "Test" doesn\'t send emails, but writes them to $OTRS_HOME/var/tmp/CacheFileStorable/EmailTest/ for testing purposes.' =>
             '',
-        'If "Sendmail" was selected as SendmailModule, the location of the sendmail binary and the needed options must be specified.' =>
-            '"Sendmail"이 SendmailModule로 선택된 경우 sendmail 바이너리의 위치와 필요한 옵션을 지정해야합니다.',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the mailhost that sends out the mails must be specified.' =>
             '"SMTP"메커니즘 중 하나가 SendmailModule로 선택된 경우 메일을 보내는 메일 호스트를 지정해야합니다.',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the port where your mailserver is listening for incoming connections must be specified.' =>
@@ -7616,12 +7614,6 @@ sub Data {
         'Defines the sender for rejected emails.' => '거부된 전자메일에 대한 보낸 사람을 정의합니다.',
         'Defines the subject for rejected emails.' => '거부된 전자메일의 제목을 정의합니다.',
         'Defines the body text for rejected emails.' => '거부된 전자 메일의 본문 텍스트를 정의합니다.',
-        'CMD example setup. Ignores emails where external CMD returns some output on STDOUT (email will be piped into STDIN of some.bin).' =>
-            'CMD 예제 설정. 외부 CMD가 STDOUT에서 일부 출력을 반환하는 전자 메일을 무시합니다 (전자 메일은 some.bin의 STDIN으로 파이프됩니다).',
-        'Spam Assassin example setup. Ignores emails that are marked with SpamAssassin.' =>
-            '스팸 어쌔신 예제 설정. SpamAssassin으로 표시된 이메일을 무시합니다.',
-        'Spam Assassin example setup. Moves marked mails to spam queue.' =>
-            '스팸 어쌔신 예제 설정. 표시된 메일을 스팸 대기열로 이동합니다.',
         'Module to use database filter storage.' => '모듈은 데이터베이스 필터 저장소를 사용합니다.',
         'Module to check if arrived emails should be marked as internal (because of original forwarded internal email). IsVisibleForCustomer and SenderType define the values for the arrived email/article.' =>
             '도착한 전자 메일이 내부 전자 메일로 표시되어야하는지 확인하는 모듈입니다 (원래 전달 된 내부 전자 메일 때문에). IsVisibleForCustomer 및 SenderType은 도착한 전자 메일 / 기사의 값을 정의합니다.',

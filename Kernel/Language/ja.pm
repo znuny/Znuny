@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.722836694860117;
+    $Self->{Completeness}        = 0.72265625;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5815,8 +5815,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'Defines the module to send emails. "DoNotSendEmail" doesn\'t send emails at all. Any of the "SMTP" mechanisms use a specified (external) mailserver. "Sendmail" directly uses the sendmail binary of your operating system. "Test" doesn\'t send emails, but writes them to $OTRS_HOME/var/tmp/CacheFileStorable/EmailTest/ for testing purposes.' =>
             '',
-        'If "Sendmail" was selected as SendmailModule, the location of the sendmail binary and the needed options must be specified.' =>
-            '"Sendmail"がSendmailモジュールとして選択された場合、sendmailバイナリおよび必要オプションのロケーションが特定されている必要があります。',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the mailhost that sends out the mails must be specified.' =>
             '"SMTP"構造のいずれかがSendmailモジュールとして選択された場合、メールを送信するメール・ホストが特定されている必要があります。',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the port where your mailserver is listening for incoming connections must be specified.' =>
@@ -7623,12 +7621,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Defines the sender for rejected emails.' => 'リジェクトされたEメールの送信者を定義します。',
         'Defines the subject for rejected emails.' => 'リジェクトされたEメールの件名を定義します。',
         'Defines the body text for rejected emails.' => 'リジェクトされたEメールの本文を定義します。',
-        'CMD example setup. Ignores emails where external CMD returns some output on STDOUT (email will be piped into STDIN of some.bin).' =>
-            'CMD例のセットアップです。外部CMDがSTDOUTにおいてアウトプットを戻してくる場合にEメールを無視します（Eメールは、STDIN of some.binへとパイプされます）。',
-        'Spam Assassin example setup. Ignores emails that are marked with SpamAssassin.' =>
-            'スパム・アサシンのセットアップ例です。スパム・アサシンによってマークされたEメールを無視します。',
-        'Spam Assassin example setup. Moves marked mails to spam queue.' =>
-            'SpamAssassinのセットアップ例です。マークされたメールを、スパム・キューへ移動します。',
         'Module to use database filter storage.' => 'データベース・フィルター・ストレージを使用するモジュールです。',
         'Module to check if arrived emails should be marked as internal (because of original forwarded internal email). IsVisibleForCustomer and SenderType define the values for the arrived email/article.' =>
             '',

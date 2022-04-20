@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.637443070917372;
+    $Self->{Completeness}        = 0.6376953125;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5815,8 +5815,6 @@ sub Data {
             '',
         'Defines the module to send emails. "DoNotSendEmail" doesn\'t send emails at all. Any of the "SMTP" mechanisms use a specified (external) mailserver. "Sendmail" directly uses the sendmail binary of your operating system. "Test" doesn\'t send emails, but writes them to $OTRS_HOME/var/tmp/CacheFileStorable/EmailTest/ for testing purposes.' =>
             '',
-        'If "Sendmail" was selected as SendmailModule, the location of the sendmail binary and the needed options must be specified.' =>
-            '',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the mailhost that sends out the mails must be specified.' =>
             '',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the port where your mailserver is listening for incoming connections must be specified.' =>
@@ -7629,12 +7627,6 @@ El control del acceso adicional para demostrar o no demostrar éste enlace puede
         'Defines the sender for rejected emails.' => '',
         'Defines the subject for rejected emails.' => '',
         'Defines the body text for rejected emails.' => 'Define el cuerpo del texto para los emails rechazados.',
-        'CMD example setup. Ignores emails where external CMD returns some output on STDOUT (email will be piped into STDIN of some.bin).' =>
-            'Configurar ejemplo CMD. Ignora emails donde una externa CMD devuelve alguna salida STDOUT ( el email será canalizado en STDIN de algún.bin).',
-        'Spam Assassin example setup. Ignores emails that are marked with SpamAssassin.' =>
-            '',
-        'Spam Assassin example setup. Moves marked mails to spam queue.' =>
-            '',
         'Module to use database filter storage.' => 'Módulo para usar el almacenamiento de filtros de base de datos.',
         'Module to check if arrived emails should be marked as internal (because of original forwarded internal email). IsVisibleForCustomer and SenderType define the values for the arrived email/article.' =>
             '',

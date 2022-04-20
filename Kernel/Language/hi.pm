@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.259921925829538;
+    $Self->{Completeness}        = 0.259440104166667;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5811,8 +5811,6 @@ sub Data {
             '',
         'Defines the module to send emails. "DoNotSendEmail" doesn\'t send emails at all. Any of the "SMTP" mechanisms use a specified (external) mailserver. "Sendmail" directly uses the sendmail binary of your operating system. "Test" doesn\'t send emails, but writes them to $OTRS_HOME/var/tmp/CacheFileStorable/EmailTest/ for testing purposes.' =>
             '',
-        'If "Sendmail" was selected as SendmailModule, the location of the sendmail binary and the needed options must be specified.' =>
-            'यदि SendmailModule के रूप में "Sendmail" चुना गया,sendmail द्विआधारी के स्थान और आवश्यक विकल्प निर्दिष्ट किया जाना चाहिए।',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the mailhost that sends out the mails must be specified.' =>
             'यदि "एसएमटीपी" तंत्र को किसी भी SendmailModule के रूप में चुना गया,मेल मेजबान जो बाहर मेल भेजता है निर्दिष्ट किया जाना चाहिए।',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the port where your mailserver is listening for incoming connections must be specified.' =>
@@ -7619,12 +7617,6 @@ sub Data {
         'Defines the sender for rejected emails.' => '',
         'Defines the subject for rejected emails.' => 'खारिज कर दिए ईमेल के लिए विषय को परिभाषित करता है।',
         'Defines the body text for rejected emails.' => 'अस्वीकृत ईमेल मुख्य-भाग लिए के पाठ को परिभाषित करता है।',
-        'CMD example setup. Ignores emails where external CMD returns some output on STDOUT (email will be piped into STDIN of some.bin).' =>
-            'CMD उदाहरण स्थापना,ईमेल पर ध्यान न दें जब बाहरी CMD STDOUT को कुछ उत्पादन देता है(ईमेल some.bin का stdin में पहुंचाया जाएगा)।',
-        'Spam Assassin example setup. Ignores emails that are marked with SpamAssassin.' =>
-            'अवांछनीय अवरोधी उदाहरण स्थापना। ईमेल जो अवांछनीय अवरोधी से चिह्नित हैं पर ध्यान न दें।',
-        'Spam Assassin example setup. Moves marked mails to spam queue.' =>
-            'अवांछनीय अवरोधी उदाहरण स्थापना। चिह्नित मेल अवांछनीय श्रेणी में स्थानांतरित करें।',
         'Module to use database filter storage.' => 'आंकड़ाकोष संग्रहण निस्पादक उपयोग करने के लिए मॉड्यूल।',
         'Module to check if arrived emails should be marked as internal (because of original forwarded internal email). IsVisibleForCustomer and SenderType define the values for the arrived email/article.' =>
             '',

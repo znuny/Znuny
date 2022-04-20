@@ -37,7 +37,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.881750162654522;
+    $Self->{Completeness}        = 0.881673177083333;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5820,8 +5820,6 @@ sub Data {
             '',
         'Defines the module to send emails. "DoNotSendEmail" doesn\'t send emails at all. Any of the "SMTP" mechanisms use a specified (external) mailserver. "Sendmail" directly uses the sendmail binary of your operating system. "Test" doesn\'t send emails, but writes them to $OTRS_HOME/var/tmp/CacheFileStorable/EmailTest/ for testing purposes.' =>
             '',
-        'If "Sendmail" was selected as SendmailModule, the location of the sendmail binary and the needed options must be specified.' =>
-            'Если "Sendmail" было выбрано для  SendmailModule, расположение модулей sendmail и требуемых параметров должно быть задано.',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the mailhost that sends out the mails must be specified.' =>
             'Если любой из "SMTP" механизмов был выбран для SendmailModule, mailhost, который отправляет почту, должен быть задан',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the port where your mailserver is listening for incoming connections must be specified.' =>
@@ -7628,12 +7626,6 @@ sub Data {
         'Defines the sender for rejected emails.' => 'Задает отправителя для отвергнутых заявок.',
         'Defines the subject for rejected emails.' => 'Задает текст поля Тема для отвергнутых заявок',
         'Defines the body text for rejected emails.' => 'Задает содержание сообщения для отвергнутых писем',
-        'CMD example setup. Ignores emails where external CMD returns some output on STDOUT (email will be piped into STDIN of some.bin).' =>
-            'Пример настройки CMD. Игнорирует письма, если внешняя CMD возвращает некоторый вывод на STDOUT (письмо будет направлено в STDIN в некий .bin).',
-        'Spam Assassin example setup. Ignores emails that are marked with SpamAssassin.' =>
-            'Пример настройки Spam Assassin. Игнорирует почту помеченную с его помощью.',
-        'Spam Assassin example setup. Moves marked mails to spam queue.' =>
-            'Пример настройки Spam Assassin. Перемещает почту помеченную с его помощью в очередь для спама.',
         'Module to use database filter storage.' => '',
         'Module to check if arrived emails should be marked as internal (because of original forwarded internal email). IsVisibleForCustomer and SenderType define the values for the arrived email/article.' =>
             '',

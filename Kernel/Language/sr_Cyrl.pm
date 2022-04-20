@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.943233571893299;
+    $Self->{Completeness}        = 0.943196614583333;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5808,8 +5808,6 @@ sub Data {
             'Одредите најнижи ниво логовања. Уколико изаберете \'error\', биће логоване само грешке. Са \'debug\' добићете све поруке у логовима. Редослед нивоа логовања је: \'debug\', \'info\', \'notice\' и \'error\'.',
         'Defines the module to send emails. "DoNotSendEmail" doesn\'t send emails at all. Any of the "SMTP" mechanisms use a specified (external) mailserver. "Sendmail" directly uses the sendmail binary of your operating system. "Test" doesn\'t send emails, but writes them to $OTRS_HOME/var/tmp/CacheFileStorable/EmailTest/ for testing purposes.' =>
             'Дефинише модул за слање имејлова. "DoNotSendEmail" не шаље имејлове уопште. Сваки од SMTP механизама користи специфични (екстерни) мејл сервер.  "Sendmail" директно користи sendmail програм вашег оперативног система. "Test" не шаље имејлове, али их чува у $OTRS_HOME/var/tmp/CacheFileStorable/EmailTest/ у сврху тестирања.',
-        'If "Sendmail" was selected as SendmailModule, the location of the sendmail binary and the needed options must be specified.' =>
-            'Уколико је подешен Sendmail за SendmailModule, морате дефинисати локацију апликације sendmail и неопходне опције.',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the mailhost that sends out the mails must be specified.' =>
             'Ако је као модул за слање имејла изабран било који од "SMTP" механизама, уређај који  шаље имејлове мора да буде наведен.',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the port where your mailserver is listening for incoming connections must be specified.' =>
@@ -7616,12 +7614,6 @@ sub Data {
         'Defines the sender for rejected emails.' => 'Дефинише пошиљаоца одбијених имејл порука.',
         'Defines the subject for rejected emails.' => 'Дефинише предмет за одбачене поруке.',
         'Defines the body text for rejected emails.' => 'Дефинише садржај текста за одбачене поруке.',
-        'CMD example setup. Ignores emails where external CMD returns some output on STDOUT (email will be piped into STDIN of some.bin).' =>
-            'Пример подешавања CMD. Игнорише имејлове када екстерни CMD врати неке излазе на STDOUT (имејл ће бити каналисан у STDIN од some.bin).',
-        'Spam Assassin example setup. Ignores emails that are marked with SpamAssassin.' =>
-            'Пример подешавања за Spam Assassin. Игнорише имејлове које је означио Spam Assassin.',
-        'Spam Assassin example setup. Moves marked mails to spam queue.' =>
-            'Пример подешавања за Spam Assassin. Премешта означене имејлове у ред за непожељне.',
         'Module to use database filter storage.' => 'Модул за смештај филтера у базу података.',
         'Module to check if arrived emails should be marked as internal (because of original forwarded internal email). IsVisibleForCustomer and SenderType define the values for the arrived email/article.' =>
             'Модул за проверу да ли пристигли имејлови треба да буду означени као интерни (на основу оригиналног прослеђеног интерног имејла). „IsVisibleForCustomer” и „SenderType” дефиниишу вредности за пристигли имејл/чланак.',
