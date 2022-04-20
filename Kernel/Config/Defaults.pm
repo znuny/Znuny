@@ -993,7 +993,7 @@ sub LoadDefaults {
         'thirdparty/jquery-ui-1.13.1/jquery-ui.js',
         'thirdparty/jquery-pubsub/pubsub.js',
         'thirdparty/jquery-jstree-3.3.7/jquery.jstree.js',
-        'thirdparty/nunjucks-3.2.3/nunjucks.js',
+        'thirdparty/nunjucks-3.2.2/nunjucks.min.js',
         'Core.Init.js',
         'Core.Debug.js',
         'Core.Exception.js',
