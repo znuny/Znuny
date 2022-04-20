@@ -1032,7 +1032,7 @@ sub LoadDefaults {
         'thirdparty/jquery-validate-1.16.0/jquery.validate.js',
         'thirdparty/jquery-pubsub/pubsub.js',
         'thirdparty/jquery-jstree-3.3.7/jquery.jstree.js',
-        'thirdparty/nunjucks-3.2.3/nunjucks.js',
+        'thirdparty/nunjucks-3.2.2/nunjucks.min.js',
         'thirdparty/jscolor-2.4.6/jscolor.js',
         'Core.Init.js',
         'Core.JavaScriptEnhancements.js',
