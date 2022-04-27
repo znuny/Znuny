@@ -1,3 +1,6 @@
+# 6.0.42 2022-04-xx
+ - 2022-04-27 Deactivated Perl code execution for Template::Toolkit. Thanks to Sven Oesterling (OTOBO).
+
 # 6.0.41 2022-04-20
  - 2022-04-13 Fixed refresh in overviews if fulltext search in toolbar is not enabled. [#237](https://github.com/znuny/Znuny/issues/237)
  - 2022-03-31 Fixed check of UntilTime in Kernel::System::Ticket::Event::TicketPendingTimeReset. [#221)(https://github.com/znuny/Znuny/issues/221)
