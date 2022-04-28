@@ -1,4 +1,5 @@
 # 6.3.3 2022-04-28
+ - 2022-04-27 Deactivated Perl code execution for Template::Toolkit. Thanks to Sven Oesterling (OTOBO).
  - 2022-04-25 Kernel::System::DynamicField::Webservice::DisplayValueGet() now also searches for the stored value to retrieve the display value.
  - 2022-04-25 Deprecated structures in SysConfig option Package::RepositoryList (e.g. from old ITSM packages) will now be ignored instead of throwing an error.
 
@@ -160,6 +161,9 @@
  - 2021-06-15 Improvements for Dev::Code::CPANUpdate (#38). Thanks to Renée Bäcker (@reneeb). [#38](https://github.com/znuny/Znuny/pull/38)
  - 2021-06-15 Use ticket title as the default appointment title (#90). Thanks to Renée Bäcker (@reneeb). [#90](https://github.com/znuny/Znuny/pull/90)
  - 2021-06-15 Column list validation before saving agent preferences (#84). Thanks to Paweł Bogusławski (@pboguslawski). [#84](https://github.com/znuny/Znuny/pull/84)
+
+# 6.0.42 2022-04-28
+ - 2022-04-27 Deactivated Perl code execution for Template::Toolkit. Thanks to Sven Oesterling (OTOBO).
 
 # 6.0.41 2022-04-20
  - 2022-04-13 Fixed refresh in overviews if fulltext search in toolbar is not enabled. [#237](https://github.com/znuny/Znuny/issues/237)
