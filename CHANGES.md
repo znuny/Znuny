@@ -1,4 +1,5 @@
 # 6.3.3 2022-04-28
+ - 2022-04-25 Kernel::System::DynamicField::Webservice::DisplayValueGet() now also searches for the stored value to retrieve the display value.
  - 2022-04-25 Deprecated structures in SysConfig option Package::RepositoryList (e.g. from old ITSM packages) will now be ignored instead of throwing an error.
 
 # 6.3.2 2022-04-20
