@@ -306,9 +306,9 @@ Executes search in configured dynamic field web-service.
 
     my $Results = $DynamicFieldWebserviceObject->Search(
         DynamicFieldConfig => $DynamicFieldConfig,
-        SearchTerms        => 'searchstring',
+        SearchTerms        => 'searchstring',   # or array
         SearchType         => 'LIKE',           # LIKE | EQUALS
-        SearchKeys         => 'Key',            # id, deepends on web service
+        SearchKeys         => 'Key',            # id, depends on web service
         Attributes         => [
             'Key',
             'Value',
@@ -415,13 +415,6 @@ sub Search {
         @SearchKeys = ( $BackendConfig->{StoredValue} );
     }
 
-    my %RequestData = (
-        Invoker     => $SearchType eq 'EQUALS' ? $BackendConfig->{InvokerGet} : $BackendConfig->{InvokerSearch},
-        SearchTerms => $Param{SearchTerms},
-        UserID      => $Param{UserID},
-        InvokerType => 'InvokerGet',
-    );
-
     my %Data;
     if ( $Param{UserType} ) {
         my %AdditionalRequestData = $Self->AdditionalRequestDataGet(
@@ -431,8 +424,10 @@ sub Search {
         $Data{ $Param{UserType} } = \%AdditionalRequestData;
     }
 
+    my $InvokerType = $SearchType eq 'EQUALS' ? 'InvokerGet' : 'InvokerSearch';
+    my $InvokerName = $BackendConfig->{$InvokerType};
+
     # Remove configured fields.
-    my $InvokerName   = $RequestData{Invoker};
     my $OmittedFields = $ConfigObject->Get(
         'GenericInterface::Invoker::Ticket::Generic::PrepareRequest::OmittedFields'
     ) // {};
@@ -466,23 +461,69 @@ sub Search {
         );
     }
 
-    my $Results = $BackendObject->Request(
-        %{$BackendConfig},
-        %RequestData,
-        Data => \%Data,
-    );
+    my @RequestResults;
 
-    return $Results if !$Results;
-    return $Results if !IsArrayRefWithData($Results) && !IsHashRefWithData($Results);
+    # Use one request per search term if InvokerGet is being used because
+    # some web services don't report the needed data when using InvokerSearch for this.
+    if ( $InvokerType eq 'InvokerGet' ) {
+        my $SearchTerms = $Param{SearchTerms};
+        if ( ref $SearchTerms ne 'ARRAY' ) {
+            $SearchTerms = [$SearchTerms];
+        }
 
-    if ( !IsArrayRefWithData($Results) ) {
-        $Results = [$Results];
+        SEARCHTERM:
+        for my $SearchTerm ( @{$SearchTerms} ) {
+            my %RequestData = (
+                InvokerType => $InvokerType,
+                Invoker     => $InvokerName,
+                SearchTerms => $SearchTerm,
+                UserID      => $Param{UserID},
+            );
+
+            my $Results = $BackendObject->Request(
+                %{$BackendConfig},
+                %RequestData,
+                Data => \%Data,
+            );
+
+            next SEARCHTERM if !IsArrayRefWithData($Results) && !IsHashRefWithData($Results);
+
+            if ( !IsArrayRefWithData($Results) ) {
+                $Results = [$Results];
+            }
+
+            push @RequestResults, @{$Results};
+        }
+    }
+
+    # Use combined request for all search terms when using InvokerSearch.
+    else {
+        my %RequestData = (
+            InvokerType => $InvokerType,
+            Invoker     => $InvokerName,
+            SearchTerms => $Param{SearchTerms},
+            UserID      => $Param{UserID},
+        );
+
+        my $Results = $BackendObject->Request(
+            %{$BackendConfig},
+            %RequestData,
+            Data => \%Data,
+        );
+
+        return if !IsArrayRefWithData($Results) && !IsHashRefWithData($Results);
+
+        if ( !IsArrayRefWithData($Results) ) {
+            $Results = [$Results];
+        }
+
+        push @RequestResults, @{$Results};
     }
 
     my @Results;
 
     RESULT:
-    for my $Result ( @{$Results} ) {
+    for my $Result (@RequestResults) {
         my %SearchKeyValue;
 
         KEY:
@@ -847,10 +888,27 @@ sub DisplayValueGet {
         $DisplayValue = $Param{Value};
     }
 
+    my @SearchKeys;
+    if (
+        defined $BackendConfig->{SearchKeys}
+        && length defined $BackendConfig->{SearchKeys}
+        )
+    {
+        @SearchKeys = split /\s*,\s*/, $BackendConfig->{SearchKeys};
+    }
+
+    # Also add stored value key to search keys so that the displayed value
+    # can be found by its stored value.
+    my $StoredValueInSearchKeys = grep { $_ eq $BackendConfig->{StoredValue} } @SearchKeys;
+    if ( !$StoredValueInSearchKeys ) {
+        unshift @SearchKeys, $BackendConfig->{StoredValue};
+    }
+
     my $Results = $Self->Search(
         DynamicFieldConfig => $Param{DynamicFieldConfig},
         SearchTerms        => $Param{Value},
         SearchType         => 'EQUALS',
+        SearchKeys         => \@SearchKeys,
         UserID             => $Param{UserID} || 1,
         UserType           => $Param{UserType},
     );

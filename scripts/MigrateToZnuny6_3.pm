@@ -216,10 +216,6 @@ sub _TasksGet {
 
         # >>> Znuny 6.3
         {
-            Message => 'Remove Generic Agent system commands',
-            Module  => 'scripts::Migration::Znuny6_3::RemoveGenericAgentSystemCommandCalls',
-        },
-        {
             Message => 'Migrate dashboard widgets that execute system commands',
             Module  => 'scripts::Migration::Znuny6_3::MigrateDashboardWidgetSystemCommandCalls',
         },
@@ -274,6 +270,16 @@ sub _TasksGet {
         },
 
         # >>> Znuny 6.3
+        # NOTE: RemoveGenericAgentSystemCommandCalls must only be executed after a config rebuild
+        # has been done. Otherwise it could be that the ZZZ Perl config files have not been created yet.
+        # This leads to initialization of Kernel::System::DynamicField::Backend failing
+        # with missing SysConfig option 'DynamicFields::Driver' when creating Kernel::System::GenericAgent.
+        # See GitLab issue #244.
+        {
+            Message => 'Remove Generic Agent system commands',
+            Module  => 'scripts::Migration::Znuny6_3::RemoveGenericAgentSystemCommandCalls',
+        },
+
         # NOTE: UninstallMergedPackages needs to be called only after
         # SysConfig settings of the merged packages have been migrated.
         {
@@ -307,6 +313,14 @@ sub _TasksGet {
             Message => 'Check invalid settings',
             Module  => 'scripts::Migration::Base::InvalidSettingsCheck',
         },
+
+        # >>> Znuny 6.3
+        {
+            Message => 'ITSM upgrade check',
+            Module  => 'scripts::Migration::Znuny6_3::ShowITSMUpgradeInstructions',
+        },
+
+        # <<< Znuny 6.3
     );
 
     return @Tasks;

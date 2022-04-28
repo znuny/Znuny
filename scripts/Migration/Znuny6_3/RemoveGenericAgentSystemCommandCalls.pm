@@ -20,6 +20,7 @@ use version;
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
+    'Kernel::System::DB',
     'Kernel::System::GenericAgent',
 );
 
@@ -60,7 +61,7 @@ sub Run {
 sub CheckPreviousRequirement {
     my ( $Self, %Param ) = @_;
 
-    my $JobsToMigrate = $Self->_GetJobsToMigrate();
+    my $JobsToMigrate = $Self->_GetJobsToMigrateForRequirementsCheck();
     return 1 if !IsHashRefWithData($JobsToMigrate);
 
     print "\n        The following generic agent jobs have configured system command calls.\n";
@@ -68,7 +69,7 @@ sub CheckPreviousRequirement {
         "        System command calls are not allowed anymore and will be removed. The job will also be renamed and set invalid.\n";
 
     for my $JobName ( sort keys %{$JobsToMigrate} ) {
-        print "            $JobName: $JobsToMigrate->{$JobName}->{NewCMD}\n";
+        print "            $JobName: $JobsToMigrate->{$JobName}\n";
     }
 
     if ( is_interactive() ) {
@@ -81,6 +82,38 @@ sub CheckPreviousRequirement {
     }
 
     return 1;
+}
+
+sub _GetJobsToMigrateForRequirementsCheck {
+    my ( $Self, %Param ) = @_;
+
+    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+
+    # Use direct DB query because at this point the ZZZ Perl config files
+    # might not be present yet, resulting in Kernel::System::GenericAgent
+    # to fail to initialize (see GitLab issue #244).
+    return if !$DBObject->Prepare(
+        SQL => '
+            SELECT job_name, job_value
+            FROM   generic_agent_jobs
+            WHERE  job_key = ?
+        ',
+        Bind => [
+            \'NewCMD',
+        ],
+    );
+
+    my %JobsToMigrate;
+    ROW:
+    while ( my @Row = $DBObject->FetchrowArray() ) {
+        my $JobName = $Row[0];
+        my $Command = $Row[1];
+        next ROW if !IsStringWithData($Command);
+
+        $JobsToMigrate{$JobName} = $Command;
+    }
+
+    return \%JobsToMigrate;
 }
 
 sub _GetJobsToMigrate {

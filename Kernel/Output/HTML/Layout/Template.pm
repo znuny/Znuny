@@ -141,7 +141,6 @@ sub Output {
         $Self->{TemplateProviderObject} = Kernel::Output::Template::Provider->new(
             {
                 INCLUDE_PATH => \@TemplateFolders,
-                EVAL_PERL    => 1,
                 COMPILE_EXT  => '.ttc',
             }
         );
@@ -157,7 +156,6 @@ sub Output {
 
         my $Context = Template::Context->new(
             {
-                EVAL_PERL      => 1,
                 STASH          => Template::Stash::XS->new(),
                 LOAD_TEMPLATES => [ $Self->{TemplateProviderObject} ],
                 LOAD_PLUGINS   => [$Plugins],

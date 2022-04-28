@@ -1390,6 +1390,10 @@ sub ConfiguredRepositoryListGet {
 
     my $RepositoryListFromConfig = $Self->{ConfigObject}->Get('Package::RepositoryList') // [];
 
+    # Throw away old config structure to avoid problems (e.g. from ITSM bundle or ITSMCore
+    # which overwrite Package::RepositoryList).
+    $RepositoryListFromConfig = [] if ref $RepositoryListFromConfig ne 'ARRAY';
+
     REPOSITORYFROMCONFIG:
     for my $RepositoryFromConfig ( @{$RepositoryListFromConfig} ) {
         $RepositoryList{ $RepositoryFromConfig->{Name} } = {
