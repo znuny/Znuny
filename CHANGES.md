@@ -1,4 +1,4 @@
-# 6.0.42 2022-04-xx
+# 6.0.42 2022-04-28
  - 2022-04-27 Deactivated Perl code execution for Template::Toolkit. Thanks to Sven Oesterling (OTOBO).
 
 # 6.0.41 2022-04-20
