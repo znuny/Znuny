@@ -1,3 +1,6 @@
+# 6.3.3 2022-04-28
+ - 2022-04-25 Deprecated structures in SysConfig option Package::RepositoryList (e.g. from old ITSM packages) will now be ignored instead of throwing an error.
+
 # 6.3.2 2022-04-20
  - 2022-04-20 Removed unwanted line breaks from base64 encoded authorization header in Kernel::GenericInterface::Transport::HTTP::REST.
  - 2022-04-13 Fixed refresh in overviews if fulltext search in toolbar is not enabled. [#237](https://github.com/znuny/Znuny/issues/237)

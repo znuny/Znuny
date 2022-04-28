@@ -313,6 +313,14 @@ sub _TasksGet {
             Message => 'Check invalid settings',
             Module  => 'scripts::Migration::Base::InvalidSettingsCheck',
         },
+
+        # >>> Znuny 6.3
+        {
+            Message => 'ITSM upgrade check',
+            Module  => 'scripts::Migration::Znuny6_3::ShowITSMUpgradeInstructions',
+        },
+
+        # <<< Znuny 6.3
     );
 
     return @Tasks;
