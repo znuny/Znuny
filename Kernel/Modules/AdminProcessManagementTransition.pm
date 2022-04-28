@@ -706,7 +706,7 @@ sub _GetParams {
     }
 
     my $Config = $Kernel::OM->Get('Kernel::System::JSON')->Decode(
-        Data => $GetParam->{ConditionConfig}
+        Data => $GetParam->{ConditionConfig} || '{}',
     );
     $GetParam->{Config}                     = {};
     $GetParam->{Config}->{Condition}        = $Config;
