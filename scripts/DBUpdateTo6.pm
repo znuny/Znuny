@@ -221,10 +221,6 @@ sub _TasksGet {
             Module  => 'PostMasterPreFilterSystemCommandMigration',
         },
         {
-            Message => 'Remove Generic Agent system commands',
-            Module  => 'RemoveGenericAgentSystemCommandCalls',
-        },
-        {
             Message => 'Migrate dashboard widgets that execute system commands',
             Module  => 'DashboardWidgetSystemCommandMigration',
         },
@@ -359,6 +355,10 @@ sub _TasksGet {
 
         # ...
 
+        {
+            Message => 'Remove Generic Agent system commands',
+            Module  => 'RemoveGenericAgentSystemCommandCalls',
+        },
         {
             Message => 'Uninstall merged packages',
             Module  => 'UninstallMergedPackages',

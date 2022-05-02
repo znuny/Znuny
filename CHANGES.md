@@ -1,3 +1,6 @@
+# 6.0.43 2022-05-04
+ - Fixed migration module RemoveGenericAgentSystemCommandCalls.
+
 # 6.0.42 2022-04-28
  - 2022-04-27 Deactivated Perl code execution for Template::Toolkit. Thanks to Sven Oesterling (OTOBO).
 
