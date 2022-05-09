@@ -1,3 +1,6 @@
+# 6.0.44 2022-??-??
+ - Mandatory fields in expanded bulk action widgets now will be handled correctly as mandatory.
+
 # 6.0.43 2022-05-04
  - Fixed migration module RemoveGenericAgentSystemCommandCalls.
 

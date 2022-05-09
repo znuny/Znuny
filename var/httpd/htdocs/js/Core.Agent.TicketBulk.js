@@ -32,7 +32,14 @@ Core.Agent.TicketBulk = (function (TargetNS) {
         var TicketBulkURL = Core.Config.Get('TicketBulkURL'),
             $TicketNumberObj = $('#MergeTo'),
             Fields = ['StateID', 'TypeID', 'OwnerID', 'ResponsibleID', 'QueueID', 'PriorityID'],
-            ModifiedFields;
+            ModifiedFields,
+
+            // Fields that are only required if they are visible to the user
+            // when a widget gets expanded.
+            RequiredWidgetFieldIDs = [
+                'Subject', 'Body',
+                'EmailSubject', 'EmailBody'
+            ];
 
         // Initialize autocomplete feature on ticket number field.
         Core.UI.Autocomplete.Init($TicketNumberObj, function (Request, Response) {
@@ -95,6 +102,14 @@ Core.Agent.TicketBulk = (function (TargetNS) {
         Core.UI.Popup.ExecuteInParentWindow(function(WindowObject) {
             WindowObject.Core.UI.Popup.FirePopupEvent('URL', { URL: TicketBulkURL }, false);
         });
+
+        // Toggle required fields of widgets depending on their visibility.
+        $('.WidgetAction.Toggle a').on('click', function() {
+            ToggleRequiredWidgetFields(RequiredWidgetFieldIDs);
+        });
+
+        // Initialize required visible fields of widgets once.
+        ToggleRequiredWidgetFields(RequiredWidgetFieldIDs);
 
         // get the Recipients on expanding of the email widget
         $('#EmailSubject').closest('.WidgetSimple').find('.Header .Toggle a').on('click', function() {
@@ -186,6 +201,31 @@ Core.Agent.TicketBulk = (function (TargetNS) {
         });
     }
 
+    /**
+     * @private
+     * @name ToggleRequiredWidgetFields
+     * @memberof Core.Agent.TicketBulk.Init
+     * @function
+     * @param {Object} RequiredWidgetFieldIDs
+     * @description
+     *      Toggles mandatory fields if they are visible/being used in an expanded widget.
+     */
+    function ToggleRequiredWidgetFields(RequiredWidgetFieldIDs) {
+
+        // Check each relevant field for visibility and toggle
+        // class Validate_Required (visible: add / invisible: remove).
+        $.each(RequiredWidgetFieldIDs, function(Index, FieldID) {
+            var $Widget = $('#' + FieldID).closest('div.WidgetSimple'),
+                WidgetExpanded = $Widget.hasClass('Expanded');
+
+            if (WidgetExpanded || $('#' + FieldID).is(':visible')) {
+                $('#' + FieldID).addClass('Validate_Required');
+            }
+            else {
+                $('#' + FieldID).removeClass('Validate_Required');
+            }
+        });
+    }
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');
 
