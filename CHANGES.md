@@ -1,3 +1,6 @@
+# 6.0.44 ????-??-??
+ - Unnecessarry dashboard widgets disabled by default again.
+
 # 6.0.43 2022-05-04
  - Fixed migration module RemoveGenericAgentSystemCommandCalls.
 
