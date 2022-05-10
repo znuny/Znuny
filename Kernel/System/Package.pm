@@ -1364,11 +1364,13 @@ Returns:
         },
         'Znuny GmbH' => {
             URL   => 'https://addons.znuny.com/api/addon_repos/',
-            Token => '...',
+            AuthHeaderKey   => '...',
+            AuthHeaderValue => '...',
         },
         'Customer Z' => {
-            URL   => 'https://addons.znuny.com/api/addon_repos/',
-            Token => '...',
+            URL             => 'https://addons.znuny.com/api/addon_repos/',
+            AuthHeaderKey   => '...',
+            AuthHeaderValue => '...',
         },
     );
 
