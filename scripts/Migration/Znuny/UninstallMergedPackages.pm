@@ -8,7 +8,7 @@
 # --
 ## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::NamePod)
 
-package scripts::Migration::Znuny6_3::UninstallMergedPackages;    ## no critic
+package scripts::Migration::Znuny::UninstallMergedPackages;    ## no critic
 
 use strict;
 use warnings;
@@ -45,32 +45,18 @@ sub Run {
         Type => 'XMLParse',
     );
 
+    my @PackageName = (
+
+        # Todo change or delete me
+        # qw(
+        #     Znuny-NAME
+        #     Znuny4OTRS-NAME
+        # )
+    );
+
     # Note: Znuny and Znuny4OTRS in case one of the packages later will be built with the Znuny prefix
     PACKAGENAME:
-    for my $PackageName (
-        qw(
-        Znuny-Bugfix225
-        Znuny-ExcelStats
-        Znuny4OTRS-ExcelStats
-        Znuny-AdvancedBulkAction
-        Znuny4OTRS-AdvancedBulkAction
-        Znuny-RandomTicketNumberGenerator
-        Znuny4OTRS-RandomTicketNumberGenerator
-        Znuny-DatabaseBackend
-        Znuny4OTRS-DatabaseBackend
-        Znuny-AdvancedTimeUnit
-        Znuny4OTRS-AdvancedTimeUnit
-        Znuny-OAuth2TokenManagement
-        Znuny4OTRS-OAuth2TokenManagement
-        Znuny-MailAccounts
-        Znuny4OTRS-MailAccounts
-        Znuny-OwnerToolbar
-        Znuny4OTRS-OwnerToolbar
-        Znuny-CalendarBasedTicketCreation
-        Znuny4OTRS-CalendarBasedTicketCreation
-        )
-        )
-    {
+    for my $PackageName (@PackageName) {
         my $Success = $PackageObject->_PackageUninstallMerged(
             Name => $PackageName,
         );

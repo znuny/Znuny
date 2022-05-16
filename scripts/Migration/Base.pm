@@ -573,7 +573,7 @@ sub GetTaskConfig {
     }
 
     my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
-    my $File = $Home . '/scripts/Migration/Znuny6_2/TaskConfig/' . $Param{Module} . '.yml';
+    my $File = $Home . '/scripts/Migration/Znuny/TaskConfig/' . $Param{Module} . '.yml';
 
     if ( !-e $File ) {
         $File .= '.dist';

@@ -8,7 +8,7 @@
 # --
 ## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::NamePod)
 
-package scripts::Migration::Znuny6_3::UpgradeDatabaseStructure;    ## no critic
+package scripts::Migration::Znuny::UpgradeDatabaseStructure;    ## no critic
 
 use strict;
 use warnings;
@@ -36,10 +36,10 @@ sub Run {
 
     my @Tasks = (
 
-        #         {
-        #             Message => '',
-        #             Module  => '',
-        #         },
+        # {
+        #     Message => '',
+        #     Module  => '',
+        # },
     );
 
     return 1   if !@Tasks;
@@ -53,14 +53,14 @@ sub Run {
 
         print "       - $Task->{Message}\n" if $Verbose;
 
-        my $ModuleName = "scripts::Migration::Znuny6_3::UpgradeDatabaseStructure::$Task->{Module}";
+        my $ModuleName = "scripts::Migration::Znuny::UpgradeDatabaseStructure::$Task->{Module}";
         if ( !$Kernel::OM->Get('Kernel::System::Main')->Require($ModuleName) ) {
             next TASK;
         }
 
         # Run module.
         $Kernel::OM->ObjectParamAdd(
-            "scripts::Migration::Znuny6_3::UpgradeDatabaseStructure::$Task->{Module}" => {
+            "scripts::Migration::Znuny::UpgradeDatabaseStructure::$Task->{Module}" => {
                 Opts => $Param{CommandlineOptions},
             },
         );

@@ -55,7 +55,8 @@ Older/other versions are not supported and have known vulnerabilities.
 | 6 LTS   | :white_check_mark: |:x:                      |
 | 6.1     | :x:                |:x:                      |
 | 6.2     | :x:                |:x:                      |
-| 6.3     | :white_check_mark: |:x:                      |
+| 6.3     | :x:                |:x:                      |
+| 6.4     | :white_check_mark: |:x:                      |
 
 ## How to report a security vulnerability?
 

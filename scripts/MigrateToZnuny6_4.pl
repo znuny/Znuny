@@ -33,7 +33,7 @@ use Getopt::Long;
 
 local $Kernel::OM = Kernel::System::ObjectManager->new(
     'Kernel::System::Log' => {
-        LogPrefix => 'MigrateToZnuny6_3.pl',
+        LogPrefix => 'MigrateToZnuny6_4.pl',
     },
 );
 
@@ -55,7 +55,7 @@ Getopt::Long::GetOptions(
     if ( $Options{Help} ) {
         print <<"EOF";
 
-Migrates Znuny 6.2 to Znuny 6.3.
+Migrates Znuny 6.3 to Znuny 6.4.
 Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 
@@ -79,7 +79,7 @@ Please run it as the 'otrs' user or with the help of su:
 ";
     }
 
-    $Kernel::OM->Create('scripts::MigrateToZnuny6_3')->Run(
+    $Kernel::OM->Create('scripts::Migration')->Run(
         CommandlineOptions => \%Options,
     );
 

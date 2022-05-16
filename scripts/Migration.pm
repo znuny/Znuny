@@ -8,7 +8,7 @@
 # --
 ## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::NamePod)
 
-package scripts::MigrateToZnuny6_3;    ## no critic
+package scripts::Migration;    ## no critic
 
 use strict;
 use warnings;
@@ -22,7 +22,7 @@ our @ObjectDependencies = (
 
 =head1 SYNOPSIS
 
-Migrates Znuny 6.2 to Znuny 6.3.
+Migrates Znuny 6.3 to Znuny 6.4.
 
 =head1 PUBLIC INTERFACE
 
@@ -30,7 +30,7 @@ Migrates Znuny 6.2 to Znuny 6.3.
 
 Don't use the constructor directly, use the ObjectManager instead:
 
-    my $MigrateToZnunyObject = $Kernel::OM->Get('scripts::MigrateToZnuny6_3');
+    my $MigrateToZnunyObject = $Kernel::OM->Get('scripts::Migration');
 
 =cut
 
@@ -214,80 +214,28 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Base::DatabaseBackupCheck',
         },
 
-        # >>> Znuny 6.3
-        {
-            Message => 'Migrate dashboard widgets that execute system commands',
-            Module  => 'scripts::Migration::Znuny6_3::MigrateDashboardWidgetSystemCommandCalls',
-        },
-        {
-            Message => 'Migrate PostMaster pre-filters that execute system commands',
-            Module  => 'scripts::Migration::Znuny6_3::MigratePostMasterPreFilterSystemCommandCalls',
-        },
-        {
-            Message => 'Migrate Excel stats format definitions',
-            Module  => 'scripts::Migration::Znuny6_3::MigrateExcelStatsFormatDefinitions',
-        },
+        # Znuny specific migration modules
         {
             Message => 'Upgrade database structure',
-            Module  => 'scripts::Migration::Znuny6_3::UpgradeDatabaseStructure',
-        },
-        {
-            Message => 'Upgrade database structure for new scope attribute in ProcessManagement',
-            Module  => 'scripts::Migration::Znuny6_3::MigrateProcessEntitesToScope',
-        },
-        {
-            Message => 'Add history types',
-            Module  => 'scripts::Migration::Znuny6_3::AddHistoryTypes',
+            Module  => 'scripts::Migration::Znuny::UpgradeDatabaseStructure',
         },
         {
             Message => 'Migrate SysConfig settings',
-            Module  => 'scripts::Migration::Znuny6_3::MigrateSysConfigSettings',
+            Module  => 'scripts::Migration::Znuny::MigrateSysConfigSettings',
         },
-        {
-            Message => 'Migrate OAuth2 token database tables',
-            Module  => 'scripts::Migration::Znuny6_3::MigrateOAuth2TokenDatabaseTables',
-        },
-        {
-            Message => 'Migrates calendar based ticket creation tables',
-            Module  => 'scripts::Migration::Znuny6_3::MigrateCalendarBasedTicketCreationTables',
-        },
-
-        # This must be executed after newly integrated database backend tables have been created/updated!
-        {
-            Message => 'Migrate database backends',
-            Module  => 'scripts::Migration::Znuny6_3::MigrateDatabaseBackends',
-        },
-        {
-            Message => 'Migrates mail account database table',
-            Module  => 'scripts::Migration::Znuny6_3::MigrateMailAccountDatabaseTable',
-        },
-
-        # <<< Znuny 6.3
 
         {
             Message => 'Rebuild configuration',
             Module  => 'scripts::Migration::Base::RebuildConfig',
         },
 
-        # >>> Znuny 6.3
-        # NOTE: RemoveGenericAgentSystemCommandCalls must only be executed after a config rebuild
-        # has been done. Otherwise it could be that the ZZZ Perl config files have not been created yet.
-        # This leads to initialization of Kernel::System::DynamicField::Backend failing
-        # with missing SysConfig option 'DynamicFields::Driver' when creating Kernel::System::GenericAgent.
-        # See GitLab issue #244.
-        {
-            Message => 'Remove Generic Agent system commands',
-            Module  => 'scripts::Migration::Znuny6_3::RemoveGenericAgentSystemCommandCalls',
-        },
-
-        # NOTE: UninstallMergedPackages needs to be called only after
+        # NOTE: UninstallMergedPackages has to be called only after
         # SysConfig settings of the merged packages have been migrated.
         {
             Message => 'Uninstall merged packages',
-            Module  => 'scripts::Migration::Znuny6_3::UninstallMergedPackages',
+            Module  => 'scripts::Migration::Znuny::UninstallMergedPackages',
         },
-
-        # <<< Znuny 6.3
+        #
 
         {
             Message => 'Initialize default cron jobs',
@@ -313,14 +261,6 @@ sub _TasksGet {
             Message => 'Check invalid settings',
             Module  => 'scripts::Migration::Base::InvalidSettingsCheck',
         },
-
-        # >>> Znuny 6.3
-        {
-            Message => 'ITSM upgrade check',
-            Module  => 'scripts::Migration::Znuny6_3::ShowITSMUpgradeInstructions',
-        },
-
-        # <<< Znuny 6.3
     );
 
     return @Tasks;
