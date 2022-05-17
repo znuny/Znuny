@@ -181,7 +181,7 @@
                         <div class="Field">
                             <input type="text" name="UnlockTimeout" id="UnlockTimeout" value="[% Data.UnlockTimeout | html %]" class="W20pc" maxlength="10"/>
                             <p class="FieldExplanation">
-                                [% Translate("0 = no unlock") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours are counted.") | html %]
+                                [% Translate("0 = no unlock") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours configured in System Config TimeWorkingHours are counted.") | html %]
                             </p>
                             <p class="FieldExplanation">
                                 [% Translate("If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.") | html %]
@@ -196,7 +196,7 @@
                             <input type="text" name="FirstResponseTime" id="FirstResponseTime" value="[% Data.FirstResponseTime | html %]" class="W20pc" maxlength="10"/>
                             ( <label>[% Translate("Notify by") | html %]  [% Data.FirstResponseNotifyOptionStrg %] </label> )
                             <p class="FieldExplanation">
-                                [% Translate("0 = no escalation") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours are counted.") | html %]
+                                [% Translate("0 = no escalation") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours configured in System Config TimeWorkingHours are counted.") | html %]
                             </p>
                             <p class="FieldExplanation">
                                 [% Translate("If there is not added a customer contact, either email-external or phone, to a new ticket before the time defined here expires, the ticket is escalated.") | html %]
@@ -211,7 +211,7 @@
                             <input type="text" name="UpdateTime" id="UpdateTime" value="[% Data.UpdateTime | html %]" class="W20pc" maxlength="10"/>
                             ( <label>[% Translate("Notify by") | html %]  [% Data.UpdateNotifyOptionStrg %]</label> )
                             <p class="FieldExplanation">
-                                [% Translate("0 = no escalation") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours are counted.") | html %]
+                                [% Translate("0 = no escalation") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours configured in System Config TimeWorkingHours are counted.") | html %]
                             </p>
                             <p class="FieldExplanation">
                                 [% Translate("If there is an article added, such as a follow-up via email or the customer portal, the escalation update time is reset. If there is no customer contact, either email-external or phone, added to a ticket before the time defined here expires, the ticket is escalated.") | html %]
@@ -226,7 +226,7 @@
                             <input type="text" name="SolutionTime" id="SolutionTime" value="[% Data.SolutionTime | html %]" class="W20pc" maxlength="10"/>
                             ( <label>[% Translate("Notify by") | html %]  [% Data.SolutionNotifyOptionStrg %] </label>)
                             <p class="FieldExplanation">
-                                [% Translate("0 = no escalation") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours are counted.") | html %]
+                                [% Translate("0 = no escalation") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours configured in System Config TimeWorkingHours are counted.") | html %]
                             </p>
                             <p class="FieldExplanation">
                                 [% Translate("If the ticket is not set to closed before the time defined here expires, the ticket is escalated.") | html %]

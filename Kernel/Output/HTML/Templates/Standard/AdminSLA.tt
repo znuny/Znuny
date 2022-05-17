@@ -159,7 +159,7 @@
                             <div id="FirstResponseTimeError" class="TooltipErrorMessage"><p>[% Translate("Please write only numbers!") | html %]</p></div>
                             (<label for="FirstResponseNotify">[% Translate("Notify by") | html %]</label> [% Data.FirstResponseNotifyOptionStrg %])
                             <p class="FieldExplanation">
-                                [% Translate("0 = no escalation") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours are counted.") | html %]
+                                [% Translate("0 = no escalation") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours configured in System Config TimeWorkingHours are counted.") | html %]
                             </p>
                         </div>
                         <div class="Clear"></div>
@@ -170,7 +170,7 @@
                             <div id="UpdateTimeError" class="TooltipErrorMessage"><p>[% Translate("Please write only numbers!") | html %]</p></div>
                             (<label for="UpdateNotify">[% Translate("Notify by") | html %]</label> [% Data.UpdateNotifyOptionStrg %])
                             <p class="FieldExplanation">
-                                [% Translate("0 = no escalation") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours are counted.") | html %]
+                                [% Translate("0 = no escalation") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours configured in System Config TimeWorkingHours are counted.") | html %]
                             </p>
                         </div>
                         <div class="Clear"></div>
@@ -181,7 +181,7 @@
                             <div id="SolutionTimeError" class="TooltipErrorMessage"><p>[% Translate("Please write only numbers!") | html %]</p></div>
                             (<label for="SolutionNotify">[% Translate("Notify by") | html %]</label> [% Data.SolutionNotifyOptionStrg %])
                             <p class="FieldExplanation">
-                                [% Translate("0 = no escalation") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours are counted.") | html %]
+                                [% Translate("0 = no escalation") | html %] - 24 [% Translate("hours") | html %] = 1440 [% Translate("minutes") | html %] - [% Translate("Only business hours configured in System Config TimeWorkingHours are counted.") | html %]
                             </p>
                         </div>
                         <div class="Clear"></div>

@@ -1875,7 +1875,7 @@ sub Data {
         'Unlock timeout' => 'अनलॉक समय समाप्त',
         '0 = no unlock' => '0 = कोई अनलॉक  नहीं',
         'hours' => 'घंटे',
-        'Only business hours are counted.' => 'केवल व्यापार घंटे गिने जाते हैं।',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => 'केवल व्यापार घंटे गिने जाते हैं।',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             'यदि एक प्रतिनिधि टिकट को लॉक करता है और अनलॉक समय समाप्ति बीत जानॆ से पहले उसे बंद नहीं करता है, टिकट अनलॉक हो जाएगा और अन्य प्रतिनिधियॊ के लिए उपलब्ध हो जाएगा।',
         'Notify by' => 'के द्वारा सूचित करें',

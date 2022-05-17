@@ -1873,7 +1873,7 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Unlock timeout' => 'Membuka batas waktu',
         '0 = no unlock' => '0 = tidak dibuka',
         'hours' => 'jam',
-        'Only business hours are counted.' => 'Hanya jam kerja yang dihitung.',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => 'Hanya jam kerja yang dihitung.',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             'Jika agen mengunci tiket dan tidak menutupnya sebelum batas waktu dibuka berakhir, tiket akan membuka dan akan tersedia untuk agen lainnya.',
         'Notify by' => 'Laporan oleh',

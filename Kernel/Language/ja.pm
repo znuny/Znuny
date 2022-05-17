@@ -1878,7 +1878,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Unlock timeout' => 'ロックの解除期限',
         '0 = no unlock' => '0 = ロック解除しない',
         'hours' => '時間',
-        'Only business hours are counted.' => '勤務時間のみ計算されます',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => '勤務時間のみ計算されます',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             '担当者がチケットロック後、ロック期限切れ前にクローズしていない場合、ロックは解除され、他の担当者がチケットを担当できるようになります。',
         'Notify by' => '通知する時間',

@@ -1875,7 +1875,7 @@ sub Data {
         'Unlock timeout' => 'Aika lukituksen poistumiseen',
         '0 = no unlock' => '0 = ei lukituksen poistumista',
         'hours' => 'tuntia',
-        'Only business hours are counted.' => 'Vain työaika huomioidaan',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => 'Vain työaika huomioidaan',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             '',
         'Notify by' => 'Huomauksen lähettäjä',

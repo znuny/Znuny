@@ -1879,7 +1879,7 @@ sub Data {
         'Unlock timeout' => 'Čas do odemknutí',
         '0 = no unlock' => '0 = žádné odemknutí',
         'hours' => 'hodin(y)',
-        'Only business hours are counted.' => 'Počítají se pouze úřední hodiny',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => 'Počítají se pouze úřední hodiny',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             '',
         'Notify by' => 'Upozorněno kým',

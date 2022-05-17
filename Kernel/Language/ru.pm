@@ -1884,7 +1884,7 @@ sub Data {
         'Unlock timeout' => 'Срок блокировки',
         '0 = no unlock' => '0 = не разблокировать',
         'hours' => 'часов',
-        'Only business hours are counted.' => 'С учетом только рабочего времени.',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => 'С учетом только рабочего времени.',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             'Если агент блокирует заявку и не закрывает её, когда подошел таймаут разблокировки, заявка будет разблокирована и станет доступна другим агентам.',
         'Notify by' => 'Уведомление от',

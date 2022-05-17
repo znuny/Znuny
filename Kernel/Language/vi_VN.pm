@@ -1871,7 +1871,7 @@ sub Data {
         'Unlock timeout' => 'Thời gian chờ mở khóa',
         '0 = no unlock' => '0 = không mở khóa',
         'hours' => 'giờ',
-        'Only business hours are counted.' => '',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => '',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             '',
         'Notify by' => '',

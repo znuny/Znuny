@@ -1871,7 +1871,7 @@ sub Data {
         'Unlock timeout' => 'Buka masa tamat',
         '0 = no unlock' => '0 = tidak buka kunci',
         'hours' => 'beberapa jam',
-        'Only business hours are counted.' => 'Hanya waktu perniagaan dikira.',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => 'Hanya waktu perniagaan dikira.',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             'Jika ejen mengunci tiket dan tidak menutupnya sebelum masa tamat membuka telah berlalu, tiket akan membuka dan akan menjadi tersedia untuk ejen-ejen lain.',
         'Notify by' => 'memberitahu melalui',

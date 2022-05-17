@@ -1872,7 +1872,7 @@ sub Data {
         'Unlock timeout' => 'neatrakinti',
         '0 = no unlock' => 'neatrakinti',
         'hours' => 'valandos',
-        'Only business hours are counted.' => 'Skaičiuojamos tik darbo valandos.',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => 'Skaičiuojamos tik darbo valandos.',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             'Jeigu agentas užrakins triktį ir neuždarys jos iki pasibaigs atrakinimo laikas (unlock timeout), tai ji atsirakins ir taps prieinama kitiems agentams.',
         'Notify by' => 'Pranešti per',

@@ -1875,7 +1875,7 @@ sub Data {
         'Unlock timeout' => 'Tidsintervall för borttagning av lås',
         '0 = no unlock' => '0 = ingen upplåsning',
         'hours' => 'timmar',
-        'Only business hours are counted.' => 'Endast kontorstid räknas.',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => 'Endast kontorstid räknas.',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             '',
         'Notify by' => 'Meddela via',

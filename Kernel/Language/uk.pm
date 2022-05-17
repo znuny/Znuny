@@ -1873,7 +1873,7 @@ sub Data {
         'Unlock timeout' => 'Строк блокування',
         '0 = no unlock' => '0 — без блокування',
         'hours' => 'годин',
-        'Only business hours are counted.' => 'З обліком тільки робочого часу.',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => 'З обліком тільки робочого часу.',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             'Якщо агент блокує квиток та не закриває його до того, як  буде вичерпаний період розблокування, квиток буде розблокований та доступний для інших агентів.',
         'Notify by' => 'Повідомлення від',

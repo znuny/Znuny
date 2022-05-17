@@ -1872,7 +1872,7 @@ sub Data {
         'Unlock timeout' => 'Freigabe-Zeitintervall',
         '0 = no unlock' => '0 = keine Freigabe',
         'hours' => 'Stunden',
-        'Only business hours are counted.' => 'Nur Geschäftszeiten werden berücksichtigt.',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => 'Nur Geschäftszeiten werden berücksichtigt.',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             'Wenn ein Agent ein Ticket sperrt und es vor der Entsperrzeit nicht schließt, wird es entsperrt und wieder für andere Agenten verfügbar gemacht.',
         'Notify by' => 'Benachrichtigung durch',

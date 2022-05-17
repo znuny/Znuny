@@ -5132,7 +5132,7 @@ msgid "hours"
 msgstr "horas"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
-msgid "Only business hours are counted."
+msgid "Only business hours configured in System Config TimeWorkingHours are counted."
 msgstr "Só se contan as horas laborábeis."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt

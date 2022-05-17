@@ -5133,8 +5133,8 @@ msgid "hours"
 msgstr "hours"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
-msgid "Only business hours are counted."
-msgstr "Only business hours are counted."
+msgid "Only business hours configured in System Config TimeWorkingHours are counted."
+msgstr "Only business hours configured in System Config TimeWorkingHours are counted."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
 msgid "If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents."

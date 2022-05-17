@@ -1874,7 +1874,7 @@ sub Data {
         'Unlock timeout' => 'Tempo de desbloqueio',
         '0 = no unlock' => '0 = sem desbloqueio',
         'hours' => 'horas',
-        'Only business hours are counted.' => 'Apenas são contabilizadas horas de expediente',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => 'Apenas são contabilizadas horas de expediente',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             'Se um ticket for bloqueado e o agente não o fechar antes de terminar o prazo pendente, o ticket fica desbloqueado e disponível para outros agentes.',
         'Notify by' => 'Notificar por',

@@ -1874,7 +1874,7 @@ sub Data {
         'Unlock timeout' => 'Tidsfrist for frigivelse',
         '0 = no unlock' => '0 = ingen frigivelse',
         'hours' => 'timer',
-        'Only business hours are counted.' => 'Kun normal kontor tid er beregnet.',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => 'Kun normal kontor tid er beregnet.',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             'Hvis en agent trækker sagen og ikke lukker den før frigivelses-timeout, vil sagen blive frigivet og gjort tilgængelig for andre agenter.',
         'Notify by' => 'Adviser ved',

@@ -1878,7 +1878,7 @@ sub Data {
         'Unlock timeout' => 'Feloldási időkorlát',
         '0 = no unlock' => '0 = nincs feloldás',
         'hours' => 'óra',
-        'Only business hours are counted.' => 'Csak a nyitva tartás számít.',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => 'Csak a nyitva tartás számít.',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             'Ha egy ügyintéző zárol egy jegyet, és nem zárja le a feloldási időkorlát elérése előtt, akkor a jegy fel lesz oldva, és elérhetővé válik más ügyintézőknek.',
         'Notify by' => 'Értesítés',

@@ -1877,7 +1877,7 @@ sub Data {
         'Unlock timeout' => 'Limit czasowy odblokowania',
         '0 = no unlock' => '0 = bez odblokowania',
         'hours' => 'godz.',
-        'Only business hours are counted.' => 'Tylko godziny pracy są liczone.',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => 'Tylko godziny pracy są liczone.',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             'Jeśli agent zablokuje zgłoszenie i nie zamknie go w czasie określonym przez limit odblokowania, zgłoszenie zostanie odblokowane i będzie dostępne dla innych agentów.',
         'Notify by' => 'Powiadom wcześniej',

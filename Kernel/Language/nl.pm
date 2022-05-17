@@ -1878,7 +1878,7 @@ sub Data {
         'Unlock timeout' => 'Ontgrendel tijdsoverschrijding',
         '0 = no unlock' => '0 = geen ontgrendeling',
         'hours' => 'uren',
-        'Only business hours are counted.' => 'Alleen openingstijden tellen mee.',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => 'Alleen openingstijden tellen mee.',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             'Als een ticket vergrendeld is en de behandelaar handelt het ticket niet af voor het verstrijken van de tijdsoverschrijding, wordt het ticket automatisch ontgrendeld en komt deze weer beschikbaar voor andere gebruikers.',
         'Notify by' => 'Melding bij',

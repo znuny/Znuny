@@ -1873,7 +1873,7 @@ sub Data {
         'Unlock timeout' => 'Време за отключване',
         '0 = no unlock' => '0 = без отключване',
         'hours' => 'часове',
-        'Only business hours are counted.' => '',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => '',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             '',
         'Notify by' => '',

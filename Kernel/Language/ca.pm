@@ -1873,7 +1873,7 @@ sub Data {
         'Unlock timeout' => 'Temps per a desbloqueig automàtic',
         '0 = no unlock' => '0 = sense bloqueig',
         'hours' => 'hores',
-        'Only business hours are counted.' => 'Només es conta l\'horari laboral',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => 'Només es conta l\'horari laboral',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             'Si un agent bloqueja un tiquet i no ho tanca abans que hagi passat el temps d\'espera de desbloquejo, el tiquet s\'obrirà i estarà disponible per a altres agents.',
         'Notify by' => 'Notificat per',

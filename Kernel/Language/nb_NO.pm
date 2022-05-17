@@ -1881,7 +1881,7 @@ sub Data {
         'Unlock timeout' => 'Tidsintervall for å sette sak tilgjengelig for andre',
         '0 = no unlock' => '0 = ikke gjør saker tilgjengelig',
         'hours' => 'timer',
-        'Only business hours are counted.' => 'Kun timene i åpningstiden telles',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => 'Kun timene i åpningstiden telles',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             'Hvis en agent låser en sak og ikke stenger den før låsetiden har passert vil saken bli låst opp og komme tilgjengelig for andre saksbehandlere.',
         'Notify by' => 'Varsle ved',

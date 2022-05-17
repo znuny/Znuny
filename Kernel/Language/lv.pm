@@ -1872,7 +1872,7 @@ sub Data {
         'Unlock timeout' => 'Atslēgšanas noilgums',
         '0 = no unlock' => '0 = neatslēgt',
         'hours' => 'stundas',
-        'Only business hours are counted.' => 'Tiek uzskaitītas tikai darbalaika stundas.',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => 'Tiek uzskaitītas tikai darbalaika stundas.',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             '',
         'Notify by' => 'Paziņot ar',

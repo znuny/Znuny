@@ -1875,7 +1875,7 @@ sub Data {
         'Unlock timeout' => 'Fungua muda kuisha',
         '0 = no unlock' => '0= hakuna kutokufunga',
         'hours' => 'Masaa',
-        'Only business hours are counted.' => 'Masaa ya kazi tu ndo yanahesabika.',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => 'Masaa ya kazi tu ndo yanahesabika.',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             'Kama wakala amefunga tiketi na hajaifungua kabla ya muda wa wa kuisha kupita, tiketi itafunguliwa na na itakuwa inapatikana kwa mawakala wengine.',
         'Notify by' => 'Taarifu kwa',

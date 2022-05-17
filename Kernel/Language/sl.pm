@@ -1876,7 +1876,7 @@ sub Data {
         'Unlock timeout' => 'Čas do odklenitve',
         '0 = no unlock' => '0 = ne odkleniti',
         'hours' => 'ure',
-        'Only business hours are counted.' => 'Šteje se samo čas dela.',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => 'Šteje se samo čas dela.',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             '',
         'Notify by' => 'Obveščen od',

@@ -1872,7 +1872,7 @@ sub Data {
         'Unlock timeout' => 'Desbloquear o tempo de espera',
         '0 = no unlock' => '0 = no desbloqueo',
         'hours' => 'horas',
-        'Only business hours are counted.' => 'Só se contan as horas laborábeis.',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => 'Só se contan as horas laborábeis.',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             'Se un axente bloquea un ticket e non o pecha antes de que o desbloqueo do tempo de espera pasara, o ticket abrirase e volverase dispoñible para outros axentes.',
         'Notify by' => 'Notificar por',

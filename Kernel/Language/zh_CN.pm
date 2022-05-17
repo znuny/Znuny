@@ -1879,7 +1879,7 @@ sub Data {
         'Unlock timeout' => '解锁超时',
         '0 = no unlock' => '0 = 不解锁',
         'hours' => '小时',
-        'Only business hours are counted.' => '只计算上班时间。',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => '只计算上班时间。',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             '如果工单被锁定且在解锁超时之前未被关闭，则该工单将被解锁，以便其他服务人员能够处理该工单。',
         'Notify by' => '触发通知阈值',

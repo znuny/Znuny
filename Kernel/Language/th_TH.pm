@@ -1874,7 +1874,7 @@ sub Data {
         'Unlock timeout' => 'หมดเวลาการปลดล็อค',
         '0 = no unlock' => '0 = ไม่มีการปลดล็อค',
         'hours' => 'ชั่วโมง',
-        'Only business hours are counted.' => 'เฉพาะวันและเวลาทำการที่จะถูกนับ',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => 'เฉพาะวันและเวลาทำการที่จะถูกนับ',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             'หากเอเยานต์ล็อคตั๋วและไม่ปิดมันก่อนที่จะหมดเวลาการปลดล็อค ตั๋วจะปลดล็อคและจะกลายเป็นตั๋วที่พร้อมใช้งานสำหรับเอเยนต์อื่น ๆ',
         'Notify by' => 'แจ้งโดย',

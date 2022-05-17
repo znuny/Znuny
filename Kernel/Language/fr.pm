@@ -1881,7 +1881,7 @@ sub Data {
         'Unlock timeout' => 'Délai du déverrouillage',
         '0 = no unlock' => '0 = pas de déverrouillage',
         'hours' => 'heures',
-        'Only business hours are counted.' => 'Seules les plages horaires de bureau sont prises en compte.',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => 'Seules les plages horaires de bureau sont prises en compte.',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             'Si un opérateur verrouille un ticket et ne le ferme pas avant le délai de déverrouillage, le ticket sera déverrouillé et sera disponible pour un autre opérateur.',
         'Notify by' => 'Notification par',

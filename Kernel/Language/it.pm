@@ -1881,7 +1881,7 @@ sub Data {
         'Unlock timeout' => 'Tempo di sblocco automatico',
         '0 = no unlock' => '0 = nessuno sblocco automatico',
         'hours' => 'ore',
-        'Only business hours are counted.' => 'Sono considerate solo le ore lavorative.',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => 'Sono considerate solo le ore lavorative.',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             'Se un agente blocca un ticket e non lo chiude prima dello sblocco automatico, il ticket viene sbloccato e diventa disponibile per altri agenti.',
         'Notify by' => 'Notificato da',

@@ -1878,7 +1878,7 @@ sub Data {
         'Unlock timeout' => 'مهلت تحویل دادن درخواست',
         '0 = no unlock' => '0 = تحویل داده نشود',
         'hours' => 'ساعت',
-        'Only business hours are counted.' => ' فقط ساعات اداری محاسبه شده است ',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => ' فقط ساعات اداری محاسبه شده است ',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             'اگر یک کارشناس درخواستی را تحویل بگیرد و آن را قبل از زمان خاتمه تحویل بگذرد، نبندد، درخواست از دست کارشناس خارج شده و برای کارشناسان دیگر در دسترس خواهند شد.',
         'Notify by' => 'اعلان توسط',

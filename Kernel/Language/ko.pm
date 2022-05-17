@@ -1872,7 +1872,7 @@ sub Data {
         'Unlock timeout' => '제한 시간 잠금 해제',
         '0 = no unlock' => '0 = 잠금 해제 없음',
         'hours' => '시간',
-        'Only business hours are counted.' => '영업시간만 계산됩니다.',
+        'Only business hours configured in System Config TimeWorkingHours are counted.' => '영업시간만 계산됩니다.',
         'If an agent locks a ticket and does not close it before the unlock timeout has passed, the ticket will unlock and will become available for other agents.' =>
             '에이전트가 티켓을 잠그고 잠금 해제 시간 초과가 지나기 전에 티켓을 닫지 않으면 티켓이 잠금 해제되고 다른 에이전트에서 사용할 수있게됩니다.',
         'Notify by' => '알림',
