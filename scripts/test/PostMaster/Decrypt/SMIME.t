@@ -57,13 +57,6 @@ if ( $OpenSSLVersionString =~ m{ \A (?: (?: Open|Libre)SSL )? \s* ( \d )  }xmsi 
     $OpenSSLMajorVersion = $1;
 }
 
-# OpenSSL version 1.0.0 uses different hash algorithm... in the future release of OpenSSL this might
-#change again in such case a better version detection will be needed.
-my $UseNewHashes;
-if ( $OpenSSLMajorVersion >= 1 ) {
-    $UseNewHashes = 1;
-}
-
 # Set config.
 $ConfigObject->Set(
     Key   => 'SMIME',
@@ -164,23 +157,12 @@ if ( !$SMIMEObject ) {
 # Setup environment
 #
 
-# OpenSSL 0.9.x hashes
-my $Check1Hash       = '980a83c7';
-my $Check2Hash       = '999bcb2f';
-my $OTRSRootCAHash   = '1a01713f';
-my $OTRSRDCAHash     = '7807c24e';
-my $OTRSLabCAHash    = '2fc24258';
-my $OTRSUserCertHash = 'eab039b6';
-
-# OpenSSL 1.0.0 hashes
-if ($UseNewHashes) {
-    $Check1Hash       = 'f62a2257';
-    $Check2Hash       = '35c7d865';
-    $OTRSRootCAHash   = '7835cf94';
-    $OTRSRDCAHash     = 'b5d19fb9';
-    $OTRSLabCAHash    = '19545811';
-    $OTRSUserCertHash = '4d400195';
-}
+my $Check1Hash       = 'f62a2257';
+my $Check2Hash       = '35c7d865';
+my $ZnunyRootCAHash  = '7835cf94';
+my $ZnunySub2CAHash  = 'b5d19fb9';
+my $ZnunySub1CAHash  = '19545811';
+my $OTRSUserCertHash = '4d400195';
 
 # certificates
 my @Certificates = (

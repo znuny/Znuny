@@ -155,7 +155,7 @@ my $CertificateSearch = sub {
         4 => 'unittest4@example.org',
         5 => 'unittest5@example.org',
     );
-    for my $SearchString ( values %Search, 'smimeuser1@test.com' ) {
+    for my $SearchString ( values %Search, 'john.doe@example.com' ) {
 
         my @Certificat = $SMIMEObject->CertificateSearch( Search => $SearchString );
         if ( defined $Certificat[0]->{Filename} && !grep { $_->{Filename} eq $Certificat[0]->{Filename} } @Result ) {
