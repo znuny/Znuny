@@ -25136,3 +25136,7 @@ msgstr "Aktiviert die Unterstützung für große XML-Daten in load_xml-Aufrufen 
 msgid "Also show global %s"
 msgstr "Auch globale %s anzeigen"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessUninstall.tt
+msgid "Go to Package Manager"
+msgstr "Zum Paket-Manager wechseln"
+

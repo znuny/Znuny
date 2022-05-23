@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.94672531769306;
+    $Self->{Completeness}        = 0.946562398175301;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1540,7 +1540,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessUninstall.tt
         'Cancel downgrade and go back' => '取消降级并返回',
-        'Go to OTRS Package Manager' => '进入 OTRS 软件包管理',
+        'Go to Package Manager' => '',
         'Sorry, but currently you can\'t downgrade due to the following packages which depend on %s:' =>
             '当前不能降级，因为以下软件包依赖%s：',
         'Vendor' => '提供者',

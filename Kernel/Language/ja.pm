@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.723036819811013;
+    $Self->{Completeness}        = 0.722873900293255;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1539,7 +1539,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessUninstall.tt
         'Cancel downgrade and go back' => 'ダウングレードを中止して戻る',
-        'Go to OTRS Package Manager' => 'OTRSパッケージマネージャーへ',
+        'Go to Package Manager' => '',
         'Sorry, but currently you can\'t downgrade due to the following packages which depend on %s:' =>
             'パッケージ%sに依存しているため、現在ダウングレードすることは出来ません',
         'Vendor' => 'ベンダー',

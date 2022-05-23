@@ -24971,3 +24971,7 @@ msgstr ""
 msgid "Also show global %s"
 msgstr ""
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessUninstall.tt
+msgid "Go to Package Manager"
+msgstr ""
+

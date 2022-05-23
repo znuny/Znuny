@@ -65,11 +65,11 @@ my %Ticket = $TicketObject->TicketGet(
 
 my $AppointmentTitle1 = 'Appointment ' . $HelperObject->GetRandomNumber();
 my $AppointmentTitle2 = 'Appointment ' . $HelperObject->GetRandomNumber();
-my @Tests = (
+my @Tests             = (
     {
-        Name  => 'Create appointment',
-        Config  => {
-            CalendarName  => $CalendarName,
+        Name   => 'Create appointment',
+        Config => {
+            CalendarName               => $CalendarName,
             Title                      => $AppointmentTitle1,
             StartTime                  => '2022-01-01',
             EndTime                    => '2022-01-02',
@@ -77,15 +77,15 @@ my @Tests = (
             UserID                     => 1
         },
         Result => {
-            Title                      => $AppointmentTitle1,
-            StartTime                  => '2022-01-01 00:00:00',
-            EndTime                    => '2022-01-02 00:00:00',
+            Title     => $AppointmentTitle1,
+            StartTime => '2022-01-01 00:00:00',
+            EndTime   => '2022-01-02 00:00:00',
         },
     },
     {
-        Name  => 'Create recurring appointment',
-        Config  => {
-            CalendarName  => $CalendarName,
+        Name   => 'Create recurring appointment',
+        Config => {
+            CalendarName               => $CalendarName,
             Title                      => $AppointmentTitle2,
             StartTime                  => '2022-02-01 10:00:00',
             EndTime                    => '2022-02-02 11:00:00',
@@ -105,15 +105,16 @@ my @Tests = (
             RecurrenceFrequency => [
                 2, 3
             ],
-            RecurrenceID        => '2022-02-01 09:30:00',
-            RecurrenceInterval  => '2',
-            RecurrenceType      => 'CustomWeekly',
-            Recurring           => '1'
+            RecurrenceID       => '2022-02-01 09:30:00',
+            RecurrenceInterval => '2',
+            RecurrenceType     => 'CustomWeekly',
+            Recurring          => '1'
         },
     },
 );
 
 for my $Test (@Tests) {
+
     # run function
     my $TransitionActionResult = $TransitionActionObject->Run(
         UserID                   => 1,
@@ -148,7 +149,7 @@ for my $Test (@Tests) {
         CalendarID    => $Calendar{CalendarID},
     );
 
-    for my $Field ( keys %{ $Test->{Result} } ) {
+    for my $Field ( sort keys %{ $Test->{Result} } ) {
 
         $Self->IsDeeply(
             $Appointment{$Field},

@@ -1533,7 +1533,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessUninstall.tt
         'Cancel downgrade and go back' => 'Downgrade abbrechen und zurück',
-        'Go to OTRS Package Manager' => 'Zum OTRS Paket-Manager wechseln',
+        'Go to Package Manager' => 'Zum Paket-Manager wechseln',
         'Sorry, but currently you can\'t downgrade due to the following packages which depend on %s:' =>
             'Entschuldigung, Sie können ein Downgrade derzeit aufgrund folgender, zu %s abhängiger Pakete nicht durchführen:',
         'Vendor' => 'Anbieter',

@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.917888563049853;
+    $Self->{Completeness}        = 0.917725643532095;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1533,7 +1533,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessUninstall.tt
         'Cancel downgrade and go back' => '다운그레이드 취소하고 돌아가기',
-        'Go to OTRS Package Manager' => 'OTRS 패키지 관리자로 이동하십시오.',
+        'Go to Package Manager' => '',
         'Sorry, but currently you can\'t downgrade due to the following packages which depend on %s:' =>
             '죄송하지만 현재 %s에 의존하는 다음 패키지 때문에 다운 그레이드 할 수 없습니다 :',
         'Vendor' => '공급 업체',

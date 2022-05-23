@@ -710,7 +710,7 @@ sub _RecipientsGet {
                 }
             }
 
-            # Other OTRS packages might add other kind of recipients that are normally handled by
+            # Other packages might add other kind of recipients that are normally handled by
             #   other modules then an elsif condition here is useful.
             elsif ( $Recipient eq 'Customer' ) {
 

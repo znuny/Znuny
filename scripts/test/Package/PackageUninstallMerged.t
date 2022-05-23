@@ -42,8 +42,8 @@ if ( !$DeveloperSystem ) {
     <otrs_package version="1.0">
       <Name>Test</Name>
       <Version>0.0.1</Version>
-      <Vendor>OTRS AG</Vendor>
-      <URL>https://otrs.com/</URL>
+      <Vendor>Znuny GmbH</Vendor>
+      <URL>https://znuny.org/</URL>
       <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
       <ChangeLog>2005-11-10 New package (some test &lt; &gt; &amp;).</ChangeLog>
       <Description Lang="en">A test package (some test &lt; &gt; &amp;).</Description>
@@ -82,8 +82,8 @@ if ( !$DeveloperSystem ) {
     <otrs_package version="1.0">
       <Name>Test</Name>
       <Version>0.0.1</Version>
-      <Vendor>OTRS AG</Vendor>
-      <URL>https://otrs.com/</URL>
+      <Vendor>Znuny GmbH</Vendor>
+      <URL>https://znuny.org/</URL>
       <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
       <ChangeLog>2005-11-10 New package (some test &lt; &gt; &amp;).</ChangeLog>
       <Description Lang="en">A test package (some test &lt; &gt; &amp;).</Description>
