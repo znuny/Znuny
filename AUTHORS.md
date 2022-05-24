@@ -43,7 +43,7 @@ The following persons contributed to Znuny:
 * Johannes Hörburger <johannes.hoerburger@otrs.com>
 * Johannes Nickel <jn@znuny.com>
 * Kai Herlemann <43746520+KaiHerlemann@users.noreply.github.com>
-* Kamil Furtek <kfurtek@opgksoftware.com>
+* Kamil Furtek <kfurtek@dev.opgksoftware.com>
 * Keith Moore <tenareth@gmail.com>
 * Kevin Janssen <77158891+BuTzZ@users.noreply.github.com>
 * Luca Maranzano <liuk@linux.it>
