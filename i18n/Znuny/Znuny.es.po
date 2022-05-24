@@ -7628,7 +7628,7 @@ msgstr "Aquí puede seleccionar agentes adicionales que deben recibir una notifi
 msgid "Text will also be received by"
 msgstr "El texto también será recibido también por"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
 msgid "Text Template"
 msgstr "Plantilla de texto"
 
@@ -25014,5 +25014,13 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessUninstall.tt
 msgid "Go to Package Manager"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
+msgid "Scope Entity ID"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Auto fill"
 msgstr ""
 

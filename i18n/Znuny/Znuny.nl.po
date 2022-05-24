@@ -7616,7 +7616,7 @@ msgstr "Hier kun je extra gebruikers aanvinken die een notificatie zouden moeten
 msgid "Text will also be received by"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
 msgid "Text Template"
 msgstr "Tekstsjabloon"
 
@@ -24994,5 +24994,13 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessUninstall.tt
 msgid "Go to Package Manager"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
+msgid "Scope Entity ID"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Auto fill"
 msgstr ""
 

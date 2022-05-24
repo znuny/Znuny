@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.994297816878462;
+    $Self->{Completeness}        = 0.994298745724059;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1727,7 +1727,7 @@ sub Data {
         'Activity' => 'Aktivität',
         'Activity Name' => 'Name der Aktivität',
         'Scope' => 'Geltungsbereich',
-        'Scope EntityID' => 'Geltungsbereich EntitätsID',
+        'Scope Entity ID' => 'Geltungsbereich-Entitäts-ID',
         'This field is required for activities with a scope.' => 'Dieses Feld ist für Aktivitäten mit einem Geltungsbereich erforderlich.',
         'Activity Dialogs' => 'Aktivitäts-Dialoge',
         'You can assign Activity Dialogs to this Activity by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1766,6 +1766,8 @@ sub Data {
         'Assigned Fields' => 'Zugewiesene Felder',
         'Communication Channel' => 'Kommunikationskanal',
         'Is visible for customer' => 'Ist sichtbar für Kunde',
+        'Text Template' => 'Textvorlage',
+        'Auto fill' => 'automatisch ausfüllen',
         'Display' => 'Anzeige',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
@@ -2744,7 +2746,6 @@ sub Data {
         'Here you can select additional agents which should receive a notification regarding the new article.' =>
             'Hier können Sie zusätzliche Agenten auswählen, die eine Benachrichtigung über den neuen Artikel enthalten sollen.',
         'Text will also be received by' => 'Text wird auch gesendet an',
-        'Text Template' => 'Textvorlage',
         'Setting a template will overwrite any text or attachment.' => 'Die Auswahl einer Vorlage wird bereits bestehenden Text oder Anhänge löschen.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt

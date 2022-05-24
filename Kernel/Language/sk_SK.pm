@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.188172043010753;
+    $Self->{Completeness}        = 0.188141391106043;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1727,7 +1727,7 @@ sub Data {
         'Activity' => '',
         'Activity Name' => '',
         'Scope' => '',
-        'Scope EntityID' => '',
+        'Scope Entity ID' => '',
         'This field is required for activities with a scope.' => '',
         'Activity Dialogs' => '',
         'You can assign Activity Dialogs to this Activity by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1766,6 +1766,8 @@ sub Data {
         'Assigned Fields' => '',
         'Communication Channel' => '',
         'Is visible for customer' => '',
+        'Text Template' => 'Textová šablóna',
+        'Auto fill' => '',
         'Display' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
@@ -2744,7 +2746,6 @@ sub Data {
         'Here you can select additional agents which should receive a notification regarding the new article.' =>
             'Tu je možné vybrať dalších agentov ktorí budú prijimať notifikácie o novom článku',
         'Text will also be received by' => '',
-        'Text Template' => 'Textová šablóna',
         'Setting a template will overwrite any text or attachment.' => 'Použitím šablóny prepíšete text alebo prílohy',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt

@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D-%M-%Y';
     $Self->{DateInputFormat}     = '%D-%M-%Y';
     $Self->{DateInputFormatLong} = '%D-%M-%Y - %T';
-    $Self->{Completeness}        = 0.527370478983382;
+    $Self->{Completeness}        = 0.527284574034859;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1733,7 +1733,7 @@ sub Data {
         'Activity' => 'Activiteit',
         'Activity Name' => 'Naam',
         'Scope' => '',
-        'Scope EntityID' => '',
+        'Scope Entity ID' => '',
         'This field is required for activities with a scope.' => '',
         'Activity Dialogs' => 'Dialogen',
         'You can assign Activity Dialogs to this Activity by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1772,6 +1772,8 @@ sub Data {
         'Assigned Fields' => 'Toegewezen velden',
         'Communication Channel' => 'Communicatiekanaal',
         'Is visible for customer' => 'Is zichtbaar voor de klant',
+        'Text Template' => 'Tekstsjabloon',
+        'Auto fill' => '',
         'Display' => 'Weergave',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
@@ -2750,7 +2752,6 @@ sub Data {
         'Here you can select additional agents which should receive a notification regarding the new article.' =>
             'Hier kun je extra gebruikers aanvinken die een notificatie zouden moeten krijgen over het nieuwe artikel.',
         'Text will also be received by' => '',
-        'Text Template' => 'Tekstsjabloon',
         'Setting a template will overwrite any text or attachment.' => 'Het instellen van een template overschrijft alle testen en bijlagen.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt

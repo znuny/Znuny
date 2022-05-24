@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.459758879113718;
+    $Self->{Completeness}        = 0.459683987620134;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1730,7 +1730,7 @@ sub Data {
         'Activity' => 'Shughuli',
         'Activity Name' => 'Jina la shughuli',
         'Scope' => '',
-        'Scope EntityID' => '',
+        'Scope Entity ID' => '',
         'This field is required for activities with a scope.' => '',
         'Activity Dialogs' => 'Mazungumzo ya shughuli',
         'You can assign Activity Dialogs to this Activity by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1769,6 +1769,8 @@ sub Data {
         'Assigned Fields' => 'Uga zilizogaiwa',
         'Communication Channel' => '',
         'Is visible for customer' => '',
+        'Text Template' => 'Kielezo cha matini',
+        'Auto fill' => '',
         'Display' => 'Onyesha',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
@@ -2747,7 +2749,6 @@ sub Data {
         'Here you can select additional agents which should receive a notification regarding the new article.' =>
             'Hapa unaweza kuchagua mawakala wa kuongezea ambao watapokea taarifa kuhusiana na makala mpya.',
         'Text will also be received by' => '',
-        'Text Template' => 'Kielezo cha matini',
         'Setting a template will overwrite any text or attachment.' => 'Kuweka kiolezo kutaandika juu ya matini yoyote au kiambatisho.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt

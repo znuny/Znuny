@@ -1,4 +1,5 @@
 # 6.4.1 2022-xx-xx
+ - 2022-04-21 Added standard templates to [Agent/Customer]TicketProcess.
 
 # 6.3.3 2022-04-28
  - 2022-04-27 Deactivated Perl code execution for Template::Toolkit. Thanks to Sven Oesterling (OTOBO).

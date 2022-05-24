@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.656728576083415;
+    $Self->{Completeness}        = 0.656621599609057;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1733,7 +1733,7 @@ sub Data {
         'Activity' => 'فعالیت',
         'Activity Name' => 'نام فعالیت',
         'Scope' => '',
-        'Scope EntityID' => '',
+        'Scope Entity ID' => '',
         'This field is required for activities with a scope.' => '',
         'Activity Dialogs' => 'تبادل فعالیت',
         'You can assign Activity Dialogs to this Activity by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1772,6 +1772,8 @@ sub Data {
         'Assigned Fields' => 'زمینه اختصاص داده',
         'Communication Channel' => '',
         'Is visible for customer' => '',
+        'Text Template' => 'قالب متن',
+        'Auto fill' => '',
         'Display' => 'نمایش',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
@@ -2750,7 +2752,6 @@ sub Data {
         'Here you can select additional agents which should receive a notification regarding the new article.' =>
             'در اینجا شما می توانید عوامل اضافی که باید اطلاع رسانی در مورد این مقاله جدید دریافت خواهید کرد را انتخاب کنید.',
         'Text will also be received by' => 'متن نیز دریافت می شود  توسط',
-        'Text Template' => 'قالب متن',
         'Setting a template will overwrite any text or attachment.' => 'تنظیم یک قالب هر گونه متن یا پیوست بازنویسی.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt

@@ -120,7 +120,7 @@
                             </div>
                             <div class="Clear"></div>
 
-                            <label class="Mandatory" for="ScopeEntityID"><span class="Marker">*</span> [% Translate("Scope EntityID") | html %]:</label>
+                            <label class="Mandatory" for="ScopeEntityID"><span class="Marker">*</span> [% Translate("Scope Entity ID") | html %]:</label>
                             <div class="Field">
                                 [% Data.ScopeEntityIDSelection %]
                                 <div id="ScopeEntityIDError" class="TooltipErrorMessage">
@@ -242,6 +242,18 @@
                     <input type="checkbox" name="IsVisibleForCustomer" id="IsVisibleForCustomer"/>
                 </div>
                 <div class="Clear"></div>
+
+[% RenderBlockStart("StandardTemplateContainer") %]
+                <label for="StandardTemplateID">[% Translate("Text Template") | html %]:</label>
+                <div class="Field" id="StandardTemplateContainer">
+                    [% Data.StandardTemplateSelection %]
+                </div>
+                <label for="StandardTemplateAutoFill">[% Translate("Auto fill") | html %]:</label>
+                <div class="Field" id="StandardTemplateAutoFillContainer">
+                    <input type="checkbox" name="StandardTemplateAutoFill" id="StandardTemplateAutoFill"/>
+                </div>
+                <div class="Clear"></div>
+[% RenderBlockEnd("StandardTemplateContainer") %]
 
 [% RenderBlockStart("TimeUnitsContainer") %]
                 <label for="TimeUnits">[% Translate("Time units") | html %]:</label>

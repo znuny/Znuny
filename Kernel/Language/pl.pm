@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.633756924079505;
+    $Self->{Completeness}        = 0.633653689525981;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1732,7 +1732,7 @@ sub Data {
         'Activity' => 'Działanie',
         'Activity Name' => 'Nazwa działania',
         'Scope' => '',
-        'Scope EntityID' => '',
+        'Scope Entity ID' => '',
         'This field is required for activities with a scope.' => '',
         'Activity Dialogs' => 'Okna działań',
         'You can assign Activity Dialogs to this Activity by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1771,6 +1771,8 @@ sub Data {
         'Assigned Fields' => 'Przypisane pola',
         'Communication Channel' => 'Kanał Komunikacji',
         'Is visible for customer' => 'Jest widoczna dla klienta',
+        'Text Template' => 'Tekst szablonu',
+        'Auto fill' => '',
         'Display' => 'Wyświetl',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
@@ -2749,7 +2751,6 @@ sub Data {
         'Here you can select additional agents which should receive a notification regarding the new article.' =>
             'Tutaj można wybrać dodatkowych Agentów, którzy powinni otrzymać powiadomienie o nowej wiadomości.',
         'Text will also be received by' => 'Tekst zostanie również odebrany przez',
-        'Text Template' => 'Tekst szablonu',
         'Setting a template will overwrite any text or attachment.' => 'Wybranie szablonu usunie całą treść i załączniki.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt

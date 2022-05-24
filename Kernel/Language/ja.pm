@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.722873900293255;
+    $Self->{Completeness}        = 0.722756149209969;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1733,7 +1733,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Activity' => 'アクティビティ',
         'Activity Name' => 'アクティビティ名',
         'Scope' => '',
-        'Scope EntityID' => '',
+        'Scope Entity ID' => '',
         'This field is required for activities with a scope.' => '',
         'Activity Dialogs' => 'アクティビティダイアログ',
         'You can assign Activity Dialogs to this Activity by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1772,6 +1772,8 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Assigned Fields' => '割り当てられた領域',
         'Communication Channel' => 'コミュニケーション・チャネル',
         'Is visible for customer' => '顧客が閲覧可能',
+        'Text Template' => '本文テンプレート',
+        'Auto fill' => '',
         'Display' => '表示',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
@@ -2750,7 +2752,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Here you can select additional agents which should receive a notification regarding the new article.' =>
             'ここでは、新しい記事に関する通知を受け取るべき担当者をを選択することができます。',
         'Text will also be received by' => 'このテキストは、次の方も閲覧可能です',
-        'Text Template' => '本文テンプレート',
         'Setting a template will overwrite any text or attachment.' => 'テンプレートを設定すると作成中の本文または添付ファイルは上書きされます。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt

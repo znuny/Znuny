@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.557673509286412;
+    $Self->{Completeness}        = 0.557582668187001;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1728,7 +1728,7 @@ sub Data {
         'Activity' => 'กิจกรรม',
         'Activity Name' => 'ชื่อกิจกรรม',
         'Scope' => '',
-        'Scope EntityID' => '',
+        'Scope Entity ID' => '',
         'This field is required for activities with a scope.' => '',
         'Activity Dialogs' => 'กิจกรรมไดอะล็อก',
         'You can assign Activity Dialogs to this Activity by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1768,6 +1768,8 @@ sub Data {
         'Assigned Fields' => 'ฟิลด์ที่ได้รับมอบหมาย',
         'Communication Channel' => '',
         'Is visible for customer' => '',
+        'Text Template' => 'รูปแบบข้อความ',
+        'Auto fill' => '',
         'Display' => 'แสดง',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
@@ -2747,7 +2749,6 @@ sub Data {
         'Here you can select additional agents which should receive a notification regarding the new article.' =>
             'คุณสามารถเลือกเอเย่นต์เพิ่มเติมที่นี้ซึ่งควรได้รับการแจ้งเตือนเกี่ยวกับบทความใหม่',
         'Text will also be received by' => '',
-        'Text Template' => 'รูปแบบข้อความ',
         'Setting a template will overwrite any text or attachment.' => 'การตั้งค่าแม่แบบจะเขียนทับข้อความหรือสิ่งที่แนบมา',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt

@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.890029325513196;
+    $Self->{Completeness}        = 0.889884345984688;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1732,7 +1732,7 @@ sub Data {
         'Activity' => 'Atividade',
         'Activity Name' => 'Nome da Atividade',
         'Scope' => '',
-        'Scope EntityID' => '',
+        'Scope Entity ID' => '',
         'This field is required for activities with a scope.' => '',
         'Activity Dialogs' => 'Janelas de Atividade',
         'You can assign Activity Dialogs to this Activity by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1771,6 +1771,8 @@ sub Data {
         'Assigned Fields' => 'Campos Atribuidos',
         'Communication Channel' => 'Canal de Comunicação',
         'Is visible for customer' => 'Ficar visível para o Cliente',
+        'Text Template' => 'Modelo de Texto',
+        'Auto fill' => '',
         'Display' => 'Exibir',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
@@ -2749,7 +2751,6 @@ sub Data {
         'Here you can select additional agents which should receive a notification regarding the new article.' =>
             'Aqui você pode selecionar atendentes adicionais que deveriam receber uma notificação relacionada ao novo artigo.',
         'Text will also be received by' => 'Texto também será recebido por',
-        'Text Template' => 'Modelo de Texto',
         'Setting a template will overwrite any text or attachment.' => 'Configurar um modelo irá sobrescrever qualquer texto ou anexo.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt

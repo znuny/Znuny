@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.323232323232323;
+    $Self->{Completeness}        = 0.323179670956182;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1730,7 +1730,7 @@ sub Data {
         'Activity' => '環節',
         'Activity Name' => '環節名稱',
         'Scope' => '',
-        'Scope EntityID' => '',
+        'Scope Entity ID' => '',
         'This field is required for activities with a scope.' => '',
         'Activity Dialogs' => '環節操作',
         'You can assign Activity Dialogs to this Activity by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1769,6 +1769,8 @@ sub Data {
         'Assigned Fields' => '指排的字段',
         'Communication Channel' => '',
         'Is visible for customer' => '',
+        'Text Template' => '文本模板',
+        'Auto fill' => '',
         'Display' => '顯示',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
@@ -2748,7 +2750,6 @@ sub Data {
         'Here you can select additional agents which should receive a notification regarding the new article.' =>
             '',
         'Text will also be received by' => '',
-        'Text Template' => '文本模板',
         'Setting a template will overwrite any text or attachment.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt

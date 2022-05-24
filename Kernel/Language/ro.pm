@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.302541544477028;
+    $Self->{Completeness}        = 0.302492262583483;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1727,7 +1727,7 @@ sub Data {
         'Activity' => '',
         'Activity Name' => '',
         'Scope' => '',
-        'Scope EntityID' => '',
+        'Scope Entity ID' => '',
         'This field is required for activities with a scope.' => '',
         'Activity Dialogs' => '',
         'You can assign Activity Dialogs to this Activity by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1766,6 +1766,8 @@ sub Data {
         'Assigned Fields' => 'Câmpuri atribuite',
         'Communication Channel' => '',
         'Is visible for customer' => '',
+        'Text Template' => 'Șablon text',
+        'Auto fill' => '',
         'Display' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
@@ -2744,7 +2746,6 @@ sub Data {
         'Here you can select additional agents which should receive a notification regarding the new article.' =>
             '',
         'Text will also be received by' => '',
-        'Text Template' => 'Șablon text',
         'Setting a template will overwrite any text or attachment.' => 'Adăugarea unui șablon va suprascrie orice text sau atașament existent.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt

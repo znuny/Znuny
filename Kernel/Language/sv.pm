@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.354512870641903;
+    $Self->{Completeness}        = 0.354455122984199;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1730,7 +1730,7 @@ sub Data {
         'Activity' => 'Aktivitet',
         'Activity Name' => 'Aktivitetsnamn',
         'Scope' => '',
-        'Scope EntityID' => '',
+        'Scope Entity ID' => '',
         'This field is required for activities with a scope.' => '',
         'Activity Dialogs' => 'Aktivitetsdialoger',
         'You can assign Activity Dialogs to this Activity by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1769,6 +1769,8 @@ sub Data {
         'Assigned Fields' => 'Tilldelade fält',
         'Communication Channel' => '',
         'Is visible for customer' => '',
+        'Text Template' => 'Textmall',
+        'Auto fill' => '',
         'Display' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
@@ -2747,7 +2749,6 @@ sub Data {
         'Here you can select additional agents which should receive a notification regarding the new article.' =>
             'Välj vilka andra handläggare som ska få notifiering om den här nya artikeln.',
         'Text will also be received by' => '',
-        'Text Template' => 'Textmall',
         'Setting a template will overwrite any text or attachment.' => 'Att applicera mallen kommer att ta bort både text och bilagor. ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt

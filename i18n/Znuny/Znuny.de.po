@@ -7627,7 +7627,7 @@ msgstr "Hier können Sie zusätzliche Agenten auswählen, die eine Benachrichtig
 msgid "Text will also be received by"
 msgstr "Text wird auch gesendet an"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
 msgid "Text Template"
 msgstr "Textvorlage"
 
@@ -25139,4 +25139,12 @@ msgstr "Auch globale %s anzeigen"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessUninstall.tt
 msgid "Go to Package Manager"
 msgstr "Zum Paket-Manager wechseln"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
+msgid "Scope Entity ID"
+msgstr "Geltungsbereich-Entitäts-ID"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Auto fill"
+msgstr "automatisch ausfüllen"
 

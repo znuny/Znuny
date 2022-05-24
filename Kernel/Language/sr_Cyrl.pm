@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.94297816878462;
+    $Self->{Completeness}        = 0.94282456426128;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1727,7 +1727,7 @@ sub Data {
         'Activity' => 'Активност',
         'Activity Name' => 'Назив активности',
         'Scope' => '',
-        'Scope EntityID' => '',
+        'Scope Entity ID' => '',
         'This field is required for activities with a scope.' => '',
         'Activity Dialogs' => 'Дијалози активности',
         'You can assign Activity Dialogs to this Activity by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1766,6 +1766,8 @@ sub Data {
         'Assigned Fields' => 'Додељена поља',
         'Communication Channel' => 'Комуникациони канал',
         'Is visible for customer' => 'Видљиво клијенту',
+        'Text Template' => 'Шаблон текста',
+        'Auto fill' => '',
         'Display' => 'Прикажи',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
@@ -2744,7 +2746,6 @@ sub Data {
         'Here you can select additional agents which should receive a notification regarding the new article.' =>
             'Овде можете изабрати додатне оператере који треба да примају обавештења у вези са новим чланком.',
         'Text will also be received by' => 'Текст ће такође примити и:',
-        'Text Template' => 'Шаблон текста',
         'Setting a template will overwrite any text or attachment.' => 'Подешавање шаблона ће преписати сваки текст или прилог.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt

@@ -9,7 +9,11 @@
 
 "use strict";
 
-var Core = Core || {};
+var Core = Core || {},
+    Znuny = Znuny || {};
+
+Znuny.Form = Znuny.Form || {};
+Znuny.Form.Input = Znuny.Form.Input || {};
 
 /**
  * @namespace Core.TicketProcess
@@ -24,10 +28,14 @@ Core.TicketProcess = (function (TargetNS) {
      * @name Init
      * @memberof Core.TicketProcess
      * @function
+     * @returns {boolean}
      * @description
      *      This function binds event on different fields to trigger AJAX form update on the other fields.
      */
     TargetNS.Init = function () {
+        var Values = [],
+            RawValues,
+            FieldID;
 
         // Bind event on Type field
         if (typeof Core.Config.Get('TypeFieldsToUpdate') !== 'undefined') {
@@ -121,6 +129,32 @@ Core.TicketProcess = (function (TargetNS) {
 
         // initialize rich text editor
         Core.UI.RichTextEditor.Init();
+
+        // if StandardTemplateAutoFill is enabled
+        if (Core.Config.Get('StandardTemplateAutoFill')){
+            Values = [];
+            RawValues = Znuny.Form.Input.Get('StandardTemplateID', { PossibleValues: true }) || [];
+            FieldID   = Znuny.Form.Input.FieldID('StandardTemplateID');
+
+            if (!FieldID) return true;
+            if (!RawValues.length) return true;
+
+            // remove possible empty value
+            $.each(RawValues, function(Index, Value) {
+                if (Value == '-') return true;
+                if (Value == '') return true;
+                if (Value == ' ') return true;
+
+                // get all options
+                Values.push(Value);
+            });
+
+            if (Values.length != 1) return true;
+
+            // select the one option
+            Znuny.Form.Input.Set('StandardTemplateID', Values[0]);
+        }
+
     };
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');

@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.474095796676442;
+    $Self->{Completeness}        = 0.474018569799642;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1728,7 +1728,7 @@ sub Data {
         'Activity' => 'Активність',
         'Activity Name' => 'Ім\'я активності',
         'Scope' => '',
-        'Scope EntityID' => '',
+        'Scope Entity ID' => '',
         'This field is required for activities with a scope.' => '',
         'Activity Dialogs' => 'Діалоги активності',
         'You can assign Activity Dialogs to this Activity by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1767,6 +1767,8 @@ sub Data {
         'Assigned Fields' => 'Призначені поля',
         'Communication Channel' => '',
         'Is visible for customer' => '',
+        'Text Template' => 'Шаблон тексту',
+        'Auto fill' => '',
         'Display' => 'Відображення',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
@@ -2745,7 +2747,6 @@ sub Data {
         'Here you can select additional agents which should receive a notification regarding the new article.' =>
             'Тут ви можете вибрати додаткових агентів, що мають отримувати повідомлення стосовно нової статті.',
         'Text will also be received by' => 'Текст буде також отриманий',
-        'Text Template' => 'Шаблон тексту',
         'Setting a template will overwrite any text or attachment.' => 'Налаштування шаблону перепише будь-який текст або вкладення.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt

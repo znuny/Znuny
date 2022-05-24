@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.372108178559791;
+    $Self->{Completeness}        = 0.372047564749959;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1729,7 +1729,7 @@ sub Data {
         'Activity' => 'Aktivitet',
         'Activity Name' => 'Aktivitetsnavn',
         'Scope' => '',
-        'Scope EntityID' => '',
+        'Scope Entity ID' => '',
         'This field is required for activities with a scope.' => '',
         'Activity Dialogs' => 'Aktivitetsdialoger',
         'You can assign Activity Dialogs to this Activity by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1768,6 +1768,8 @@ sub Data {
         'Assigned Fields' => 'Tildelte felter',
         'Communication Channel' => '',
         'Is visible for customer' => '',
+        'Text Template' => 'Tekst-skabelon',
+        'Auto fill' => '',
         'Display' => 'Vis',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
@@ -2746,7 +2748,6 @@ sub Data {
         'Here you can select additional agents which should receive a notification regarding the new article.' =>
             'Her kan du vælge yderligere agenter der skal have besked om den nye artikel.',
         'Text will also be received by' => '',
-        'Text Template' => 'Tekst-skabelon',
         'Setting a template will overwrite any text or attachment.' => 'Angivelse af skabelon vil overskrive enhver tekst eller vedhæftning.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt

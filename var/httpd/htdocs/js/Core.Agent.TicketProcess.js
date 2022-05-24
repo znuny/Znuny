@@ -189,6 +189,17 @@ Core.Agent.TicketProcess = (function (TargetNS) {
         if ($('#ProcessEntityID').val() !== "") {
             $('#ProcessEntityID').trigger('change');
         }
+
+        // change standard template
+        $(document).off("change.StandardTemplateID").on("change.StandardTemplateID", '#StandardTemplateID', function () {
+            var $Form = $(this).closest('form');
+
+            Core.Agent.TicketAction.ConfirmTemplateOverwrite('RichText', $(this), function () {
+                Core.AJAX.FormUpdate($Form, 'AJAXUpdate', 'StandardTemplateID');
+            });
+            return false;
+        });
+
     };
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');

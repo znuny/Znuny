@@ -1207,49 +1207,58 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                 'Center',
                 true,
                 [
-                     {
-                         Label: Core.Language.Translate('Save'),
-                         Class: 'Primary',
-                         Function: function () {
-                             var FieldConfigElement = {};
+                    {
+                        Label: Core.Language.Translate('Save'),
+                        Class: 'Primary',
+                        Function: function () {
+                            var FieldConfigElement = {},
+                                StandardTemplateIDs = [];
 
-                             FieldConfigElement.DescriptionShort = $('#DescShort').val();
-                             FieldConfigElement.DescriptionLong = $('#DescLong').val();
-                             FieldConfigElement.DefaultValue = $('#DefaultValue').val();
-                             FieldConfigElement.Display = $('#Display').val();
+                            FieldConfigElement.DescriptionShort = $('#DescShort').val();
+                            FieldConfigElement.DescriptionLong = $('#DescLong').val();
+                            FieldConfigElement.DefaultValue = $('#DefaultValue').val();
+                            FieldConfigElement.Display = $('#Display').val();
 
-                             if (Fieldname === 'Article') {
-                                 if (typeof FieldConfigElement.Config === 'undefined'){
+                            if (Fieldname === 'Article') {
+                                if (typeof FieldConfigElement.Config === 'undefined'){
                                      FieldConfigElement.Config = {};
-                                 }
-                                 FieldConfigElement.Config.CommunicationChannel = $('#CommunicationChannel').val();
+                                }
+                                FieldConfigElement.Config.CommunicationChannel = $('#CommunicationChannel').val();
 
-                                 FieldConfigElement.Config.IsVisibleForCustomer = '0';
-                                 if ($('#IsVisibleForCustomer').prop('checked')) {
+                                FieldConfigElement.Config.IsVisibleForCustomer = '0';
+                                if ($('#IsVisibleForCustomer').prop('checked')) {
                                     FieldConfigElement.Config.IsVisibleForCustomer = '1';
-                                 }
+                                }
 
-                                 // show error if not customer visible article is set for an interface different than AgentInterface
-                                 if ($('#Interface').val() !== 'AgentInterface' && !$('#IsVisibleForCustomer').prop('checked')){
-                                     window.alert(Core.Language.Translate('Customer interface does not support articles not visible for customers.'));
-                                     return false;
-                                 }
+                                // show error if no customer visible article is set for an interface different than AgentInterface
+                                if ($('#Interface').val() !== 'AgentInterface' && !$('#IsVisibleForCustomer').prop('checked')){
+                                    window.alert(Core.Language.Translate('Customer interface does not support articles not visible for customers.'));
+                                    return false;
+                                }
 
-                                 // add the time units value to the fieldconfig
-                                 FieldConfigElement.Config.TimeUnits = $('#TimeUnits').val();
-                             }
+                                // add the time units value to the field config
+                                FieldConfigElement.Config.TimeUnits = $('#TimeUnits').val();
 
-                             $Element.closest('li').data('config', Core.JSON.Stringify(FieldConfigElement));
+                                // add the StandardTemplate IDs to the field config
+                                $('#StandardTemplateID option:selected').each(function() {
+                                    StandardTemplateIDs.push($(this).val());
+                                });
+                                FieldConfigElement.Config.StandardTemplateID = StandardTemplateIDs;
 
-                             Core.UI.Dialog.CloseDialog($('.Dialog'));
-                         }
-                     },
-                     {
-                         Label: Core.Language.Translate('Cancel'),
-                         Function: function () {
-                             Core.UI.Dialog.CloseDialog($('.Dialog'));
-                         }
-                     }
+                                FieldConfigElement.Config.StandardTemplateAutoFill = $('#StandardTemplateAutoFill').prop('checked') ? '1' : '0';
+                            }
+
+                            $Element.closest('li').data('config', Core.JSON.Stringify(FieldConfigElement));
+
+                            Core.UI.Dialog.CloseDialog($('.Dialog'));
+                        }
+                    },
+                    {
+                        Label: Core.Language.Translate('Cancel'),
+                        Function: function () {
+                            Core.UI.Dialog.CloseDialog($('.Dialog'));
+                        }
+                    }
                 ]
             );
 
@@ -1295,6 +1304,15 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                     if (FieldConfig.Config.TimeUnits) {
                         $('#TimeUnits').val(FieldConfig.Config.TimeUnits);
                     }
+
+                    if (FieldConfig.Config.StandardTemplateID) {
+                        $.each(FieldConfig.Config.StandardTemplateID, function(Index, ID) {
+                            $('#StandardTemplateID option[value=' + ID + ']').prop('selected', true).trigger('redraw.InputField');
+                        });
+                    }
+                    if (FieldConfig.Config.StandardTemplateAutoFill === '1') {
+                        $('#StandardTemplateAutoFill').prop("checked", true);
+                    }
                 }
             }
 
@@ -1320,6 +1338,13 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                 $('#TimeUnitsContainer').removeClass('Hidden');
                 $('#TimeUnitsContainer').prev('label').css('display', 'block');
                 $('#TimeUnitsContainer .Modernize').trigger('redraw.InputField');
+
+                $('#StandardTemplateContainer').removeClass('Hidden');
+                $('#StandardTemplateContainer').prev('label').css('display', 'block');
+                $('#StandardTemplateContainer .Modernize').trigger('redraw.InputField');
+
+                $('#StandardTemplateAutoFillContainer').removeClass('Hidden');
+                $('#StandardTemplateAutoFillContainer').prev('label').css('display', 'block');
             }
             else {
 
@@ -1331,6 +1356,12 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
 
                 $('#TimeUnitsContainer').addClass('Hidden');
                 $('#TimeUnitsContainer').prev('label').css('display', 'none');
+
+                $('#StandardTemplateContainer').addClass('Hidden');
+                $('#StandardTemplateContainer').prev('label').css('display', 'none');
+
+                $('#StandardTemplateAutoFillContainer').addClass('Hidden');
+                $('#StandardTemplateAutoFillContainer').prev('label').css('display', 'none');
             }
 
             return false;

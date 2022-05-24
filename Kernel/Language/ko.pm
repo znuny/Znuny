@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.917725643532095;
+    $Self->{Completeness}        = 0.917576152467829;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1727,7 +1727,7 @@ sub Data {
         'Activity' => '활동',
         'Activity Name' => '활동명',
         'Scope' => '',
-        'Scope EntityID' => '',
+        'Scope Entity ID' => '',
         'This field is required for activities with a scope.' => '',
         'Activity Dialogs' => '활동 대화상자',
         'You can assign Activity Dialogs to this Activity by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1766,6 +1766,8 @@ sub Data {
         'Assigned Fields' => '할당된 필드',
         'Communication Channel' => '통신 채널',
         'Is visible for customer' => '고객에게 표시됩니다.',
+        'Text Template' => '텍스트 템플릿',
+        'Auto fill' => '',
         'Display' => '다스플레이',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
@@ -2744,7 +2746,6 @@ sub Data {
         'Here you can select additional agents which should receive a notification regarding the new article.' =>
             '여기에서 새 기사와 관련된 알림을 받을 추가 상담원을 선택할 수 있습니다.',
         'Text will also be received by' => '다음에 의해 텍스트도 받게 됩니다.',
-        'Text Template' => '텍스트 템플릿',
         'Setting a template will overwrite any text or attachment.' => '템플릿을 설정하면 텍스트나 첨부파일을 덮어씁니다.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt

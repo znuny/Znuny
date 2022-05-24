@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.642228739002933;
+    $Self->{Completeness}        = 0.642124124450236;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1728,7 +1728,7 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Activity' => 'Aktivitas',
         'Activity Name' => 'Nama activitas',
         'Scope' => '',
-        'Scope EntityID' => '',
+        'Scope Entity ID' => '',
         'This field is required for activities with a scope.' => '',
         'Activity Dialogs' => 'Dialog activitas',
         'You can assign Activity Dialogs to this Activity by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1767,6 +1767,8 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Assigned Fields' => 'Fields ditugaskan',
         'Communication Channel' => '',
         'Is visible for customer' => '',
+        'Text Template' => 'Template teks',
+        'Auto fill' => '',
         'Display' => 'Tampilkan',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
@@ -2746,7 +2748,6 @@ bin/otrs.Daemon.pl status\').',
         'Here you can select additional agents which should receive a notification regarding the new article.' =>
             'Di sini anda dapat memilih agen tambahan yang harus menerima pemberitahuan tentang artikel baru.',
         'Text will also be received by' => 'Teks akan diterima oleh',
-        'Text Template' => 'Template teks',
         'Setting a template will overwrite any text or attachment.' => 'Pengaturan template akan menimpa teks atau lampiran.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
