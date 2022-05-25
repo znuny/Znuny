@@ -1,6 +1,7 @@
 # 6.4.1 2022-??-??
  - 2022-05-10 Mandatory fields in expanded bulk action widgets now will be handled correctly as mandatory.
  - 2022-04-21 Added standard templates to [Agent/Customer]TicketProcess.
+ - 2022-03-14 Fixed sending notifications to invalid customer users.
 
 # 6.3.3 2022-04-28
  - 2022-04-27 Deactivated Perl code execution for Template::Toolkit. Thanks to Sven Oesterling (OTOBO).
