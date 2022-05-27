@@ -841,6 +841,9 @@ Core.Form.Validate = (function (TargetNS) {
                 $(this).parents('.WidgetSimple.Collapsed').toggleClass('Collapsed Expanded');
                 // Highlight error fields.
                 TargetNS.HighlightError(this, 'ServerError');
+                // "Re-modernize" fields that are part of a WidgetSimple.
+                // Otherwise those fields won't be shown as modernized after an error.
+                Core.UI.InputFields.Activate($(this).parents('.WidgetSimple'));
             });
 
             // When the dialog closes, focus the first element which had a server error
