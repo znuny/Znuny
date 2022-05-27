@@ -291,6 +291,20 @@ sub ObjectSearch {
     # get ticket object
     my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
+    if ( !$Param{InitialSearch} || $Param{InitialSearch} ne 'n' ) {
+
+        # get ticket data
+        my %TicketData = $TicketObject->TicketGet(
+            TicketID      => $Param{SourceKey},
+            UserID        => $Param{UserID},
+            DynamicFields => 0,
+        );
+
+        return {} if !$TicketData{CustomerID};
+
+        $Param{SearchParams}->{CustomerID} = $TicketData{CustomerID};
+    }
+
     # search the tickets
     my @TicketIDs = $TicketObject->TicketSearch(
         %{ $Param{SearchParams} },

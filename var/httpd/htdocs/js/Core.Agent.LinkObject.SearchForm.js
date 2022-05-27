@@ -54,6 +54,10 @@ Core.Agent.LinkObject.SearchForm = (function (TargetNS) {
            $('#LinkSearchForm').addClass('SkipFieldCheck');
         });
 
+        $('#SubmitSearch').on('click',function(){
+            $('input[name="InitialSearch"]').val('n');
+        });
+
         $('#LinkSearchForm').submit(function () {
 
             // If SubmitSelect button was clicked,

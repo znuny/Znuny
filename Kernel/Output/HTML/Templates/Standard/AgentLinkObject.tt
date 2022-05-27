@@ -33,6 +33,7 @@
                         <input type="hidden" name="Mode" value="[% Data.Mode | html %]" />
                         <input type="hidden" name="SourceObject" value="[% Data.SourceObject | html %]" />
                         <input type="hidden" name="SourceKey" value="[% Data.SourceKey | html %]" />
+                        <input type="hidden" name="InitialSearch" value="y" />
 
                         <fieldset class="TableLike">
                             <label for="TargetIdentifier">
