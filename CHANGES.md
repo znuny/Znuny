@@ -1,8 +1,8 @@
 # 6.0.44 2022-??-??
- - Mandatory fields in expanded bulk action widgets now will be handled correctly as mandatory.
+ - 2022-05-09 Mandatory fields in expanded bulk action widgets now will be handled correctly as mandatory.
 
 # 6.0.43 2022-05-04
- - Fixed migration module RemoveGenericAgentSystemCommandCalls.
+ - 2022-05-02 Fixed migration module RemoveGenericAgentSystemCommandCalls.
 
 # 6.0.42 2022-04-28
  - 2022-04-27 Deactivated Perl code execution for Template::Toolkit. Thanks to Sven Oesterling (OTOBO).
