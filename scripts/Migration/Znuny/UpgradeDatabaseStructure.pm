@@ -35,11 +35,10 @@ sub Run {
     my $Verbose = $Param{CommandlineOptions}->{Verbose} || 0;
 
     my @Tasks = (
-
-        # {
-        #     Message => '',
-        #     Module  => '',
-        # },
+        {
+            Message => 'Add missing foreign keys that point to database table "article"',
+            Module  => 'RecreateForeignKeysToArticleTable',
+        },
     );
 
     return 1   if !@Tasks;
