@@ -63,11 +63,6 @@ sub Run {
     return if !$Self->_UpdateArticleDataMimeAttachmentTable();
 
     if ($Verbose) {
-        print "        - Re-create foreign keys pointing to the old article table.\n";
-    }
-    return if !$Self->_RecreateForeignKeysPointingToArticleTable();
-
-    if ($Verbose) {
         print "        - Dropping no longer needed article_type table.\n\n";
     }
     return if !$Self->_DropArticleTypeTable();
@@ -372,47 +367,6 @@ sub _UpdateArticleDataMimeAttachmentTable {
         '<TableAlter Name="article_data_mime_attachment">
             <ForeignKeyCreate ForeignTable="users">
                 <Reference Local="change_by" Foreign="id"/>
-            </ForeignKeyCreate>
-        </TableAlter>',
-    );
-
-    return if !$Self->ExecuteXMLDBArray(
-        XMLArray => \@XMLStrings,
-    );
-
-    return 1;
-}
-
-=head2 _RecreateForeignKeysPointingToArticleTable()
-
-re-create foreign keys pointing to the current article table,
-due in some cases these are automatically redirected to the renamed table.
-
-Returns 1 on success
-
-    my $Result = $DBUpdateTo6Object->_RecreateForeignKeysPointingToArticleTable();
-
-=cut
-
-sub _RecreateForeignKeysPointingToArticleTable {
-    my ( $Self, %Param ) = @_;
-
-    # Re-create foreign keys pointing to the current article table,
-    # due in some cases these are automatically redirected to the renamed table.
-    my @XMLStrings = (
-        '<TableAlter Name="ticket_history">
-            <ForeignKeyCreate ForeignTable="article">
-                <Reference Local="article_id" Foreign="id"/>
-            </ForeignKeyCreate>
-        </TableAlter>',
-        '<TableAlter Name="article_flag">
-            <ForeignKeyCreate ForeignTable="article">
-                <Reference Local="article_id" Foreign="id"/>
-            </ForeignKeyCreate>
-        </TableAlter>',
-        '<TableAlter Name="time_accounting">
-            <ForeignKeyCreate ForeignTable="article">
-                <Reference Local="article_id" Foreign="id"/>
             </ForeignKeyCreate>
         </TableAlter>',
     );

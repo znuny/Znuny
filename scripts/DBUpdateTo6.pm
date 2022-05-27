@@ -352,6 +352,10 @@ sub _TasksGet {
             Message => 'Migrate ticket search profiles',
             Module  => 'MigrateTicketSearchProfiles',
         },
+        {
+            Message => 'Add missing foreign keys that point to database table "article"',
+            Module  => 'RecreateForeignKeysToArticleTable',
+        },
 
         # ...
 
