@@ -1,5 +1,6 @@
 # 6.0.44 2022-??-??
  - 2022-05-09 Mandatory fields in expanded bulk action widgets now will be handled correctly as mandatory.
+ - 2022-05-04 Fixed select fields not being shown in modernized mode after submit with input errors.
 
 # 6.0.43 2022-05-04
  - 2022-05-02 Fixed migration module RemoveGenericAgentSystemCommandCalls.
