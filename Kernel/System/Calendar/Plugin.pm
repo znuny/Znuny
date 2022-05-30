@@ -109,6 +109,7 @@ run given plugin function with all existing params.
         PluginData     => {
             AppointmentID => 1,     # AppointmentID
             UserID        => 1,
+            URL           => 'http://znuny.local/index.pl?Action=AgentTicketZoom;TicketID=%s', # optional
         }
     );
 
