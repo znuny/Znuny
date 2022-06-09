@@ -273,16 +273,20 @@ sub Check {
                     Email => \@OrigEmail,
                 );
 
-                my $OrigFrom   = $ParserObjectOrig->GetParam( WHAT => 'From' );
-                my $OrigFromEmail = $ParserObjectOrig->GetEmailAddress( Email => $OrigFrom );
-                my $OrigSender = $ParserObjectOrig->GetParam( WHAT => 'Sender' );
+                my $OrigFrom        = $ParserObjectOrig->GetParam( WHAT => 'From' );
+                my $OrigFromEmail   = $ParserObjectOrig->GetEmailAddress( Email => $OrigFrom );
+                my $OrigSender      = $ParserObjectOrig->GetParam( WHAT => 'Sender' );
                 my $OrigSenderEmail = $ParserObjectOrig->GetEmailAddress( Email => $OrigSender );
 
                 # compare sender email to signer email
                 my $SignerSenderMatch = 0;
                 SIGNER:
                 for my $Signer ( @{ $SignCheck{Signers} } ) {
-                    if ( $OrigFromEmail =~ m{\A \Q$Signer\E \z}xmsi || $OrigSenderEmail =~ m{\A \Q$Signer\E \z}xmsi ) {
+                    if (
+                        $OrigFromEmail =~ m{\A \Q$Signer\E \z}xmsi
+                        || $OrigSenderEmail =~ m{\A \Q$Signer\E \z}xmsi
+                        )
+                    {
                         $SignerSenderMatch = 1;
                         last SIGNER;
                     }
@@ -295,7 +299,7 @@ sub Check {
                     $SignCheck{Message} .= " (signed by "
                         . join( ' | ', @{ $SignCheck{Signers} } )
                         . ")"
-                        . ", but neither $OrigFromEmail nor $OrigSenderEmail does match certificate address!";
+                        . ", but neither $OrigFromEmail nor $OrigSenderEmail match the certificate address!";
                 }
 
                 # Determine if we have decrypted article and attachments before.
@@ -399,16 +403,20 @@ sub Check {
                     Email => \@OrigEmail,
                 );
 
-                my $OrigFrom   = $ParserObjectOrig->GetParam( WHAT => 'From' );
-                my $OrigFromEmail = $ParserObjectOrig->GetEmailAddress( Email => $OrigFrom );
-                my $OrigSender = $ParserObjectOrig->GetParam( WHAT => 'Sender' );
+                my $OrigFrom        = $ParserObjectOrig->GetParam( WHAT => 'From' );
+                my $OrigFromEmail   = $ParserObjectOrig->GetEmailAddress( Email => $OrigFrom );
+                my $OrigSender      = $ParserObjectOrig->GetParam( WHAT => 'Sender' );
                 my $OrigSenderEmail = $ParserObjectOrig->GetEmailAddress( Email => $OrigSender );
 
                 # compare sender email to signer email
                 my $SignerSenderMatch = 0;
                 SIGNER:
                 for my $Signer ( @{ $SignCheck{Signers} } ) {
-                    if ( $OrigFromEmail =~ m{\A \Q$Signer\E \z}xmsi || $OrigSenderEmail =~ m{\A \Q$Signer\E \z}xmsi ) {
+                    if (
+                        $OrigFromEmail =~ m{\A \Q$Signer\E \z}xmsi
+                        || $OrigSenderEmail =~ m{\A \Q$Signer\E \z}xmsi
+                        )
+                    {
                         $SignerSenderMatch = 1;
                         last SIGNER;
                     }
@@ -421,7 +429,7 @@ sub Check {
                     $SignCheck{Message} .= " (signed by "
                         . join( ' | ', @{ $SignCheck{Signers} } )
                         . ")"
-                        . ", but neither $OrigFromEmail nor $OrigSenderEmail does match certificate address!";
+                        . ", but neither $OrigFromEmail nor $OrigSenderEmail match the certificate address!";
                 }
 
                 # Determine if we have decrypted article and attachments before.
