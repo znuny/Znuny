@@ -105,6 +105,7 @@ The following persons contributed to Znuny:
 * Wojciech Kuchta <klapi85@gmail.com>
 * Yuri Myasoedov <ymyasoedov@yandex.ru>
 * Zoran Ilibasic <zilibasic@s7designcreative.com>
+* akmet <akmet@users.noreply.github.com>
 * anonymous <unknown@anonymous>
 * b1-luettje <53084931+b1-luettje@users.noreply.github.com>
 * djurici <igor.djuric@muehlbauer.de>
