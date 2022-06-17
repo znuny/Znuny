@@ -24989,3 +24989,7 @@ msgstr ""
 msgid "Auto fill"
 msgstr ""
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of quoted lines to be added to forwarded messages."
+msgstr ""
+

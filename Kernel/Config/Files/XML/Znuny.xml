@@ -2048,4 +2048,11 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::ForwardQuoteMaxLines" Required="0" Valid="0">
+        <Description Translatable="1">Maximum number of quoted lines to be added to forwarded messages.</Description>
+        <Navigation>Frontend::Agent::View::TicketForward</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^[1-9][0-9]*$">99</Item>
+        </Value>
+    </Setting>
 </otrs_config>

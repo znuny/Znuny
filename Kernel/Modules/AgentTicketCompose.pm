@@ -66,9 +66,10 @@ sub Run {
     }
 
     # get needed objects
-    my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
-    my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
-    my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+    my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+    my $TicketObject    = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $ArticleObject   = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+    my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
 
     my $ArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Email' );
 
@@ -1469,7 +1470,7 @@ sub Run {
             UploadCacheObject => $UploadCacheObject,
         );
 
-        my %SafetyCheckResult = $Kernel::OM->Get('Kernel::System::HTMLUtils')->Safety(
+        my %SafetyCheckResult = $HTMLUtilsObject->Safety(
             String => $Data{Body},
 
             # Strip out external content if BlockLoadingRemoteContent is enabled.
@@ -1485,23 +1486,17 @@ sub Run {
         $Data{Body} = $SafetyCheckResult{String};
 
         # restrict number of body lines if configured
+        my $ResponseQuoteMaxLines = $ConfigObject->Get('Ticket::Frontend::ResponseQuoteMaxLines');
         if (
-            $Data{Body}
-            && $ConfigObject->Get('Ticket::Frontend::ResponseQuoteMaxLines')
+            IsStringWithData( $Data{Body} )
+            && $ResponseQuoteMaxLines
             )
         {
-            my $MaxLines = $ConfigObject->Get('Ticket::Frontend::ResponseQuoteMaxLines');
-
-            # split body - one element per line
-            my @Body = split "\n", $Data{Body};
-
-            # only modify if body is longer than allowed
-            if ( scalar @Body > $MaxLines ) {
-
-                # splice to max. allowed lines and reassemble
-                @Body = @Body[ 0 .. ( $MaxLines - 1 ) ];
-                $Data{Body} = join "\n", @Body;
-            }
+            $Data{Body} = $HTMLUtilsObject->TruncateBodyQuote(
+                Body       => $Data{Body},
+                Limit      => $ResponseQuoteMaxLines,
+                HTMLOutput => $LayoutObject->{BrowserRichText},
+            ) // $Data{Body};
         }
 
         if ( $LayoutObject->{BrowserRichText} ) {
@@ -1510,6 +1505,7 @@ sub Run {
             # rewrap body if exists
             if ( $Data{Body} ) {
                 $Data{Body} =~ s/\t/ /g;
+
                 my $Quote = $LayoutObject->Ascii2Html(
                     Text           => $ConfigObject->Get('Ticket::Frontend::Quote') || '',
                     HTMLResultMode => 1,
@@ -1558,6 +1554,7 @@ sub Run {
             # re-wrap body if exists
             if ( $Data{Body} ) {
                 $Data{Body} =~ s/\t/ /g;
+
                 my $Quote = $ConfigObject->Get('Ticket::Frontend::Quote');
                 if ($Quote) {
                     $Data{Body} =~ s/\n/\n$Quote /g;

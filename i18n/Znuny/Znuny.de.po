@@ -25148,3 +25148,7 @@ msgstr "Geltungsbereich-Entitäts-ID"
 msgid "Auto fill"
 msgstr "automatisch ausfüllen"
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of quoted lines to be added to forwarded messages."
+msgstr "Maximale Anzahl zitierter Zeilen in weitergeleiteten Nachrichten."
+
