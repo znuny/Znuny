@@ -3,6 +3,7 @@
  - 2022-05-31 Maximum number of lines of quote in body of a message now can be limited in AgentTicketForward and AgentTicketCompose.
  - 2022-05-25 Initial search in dialog AgentLinkObject is now limited to tickets which belong to the same customer ID.
  - 2022-05-24 Sanitized output of ACL Perl config file when dumping and deploying it to avoid unexpected execution of arbitrary Perl code.
+ - 2022-05-19 Sector Nord AG: Fixed transition action for recurring appointments with specific recurrence frequency. Thanks to Sector Nord AG (@jsinagowitz). [#219](https://github.com/znuny/Znuny/pull/219)
  - 2022-05-10 Mandatory fields in expanded bulk action widgets now will be handled correctly as mandatory.
  - 2022-05-04 Fixed select fields not being shown in modernized mode after submit with input errors.
  - 2022-04-21 Added standard templates to [Agent/Customer]TicketProcess.
