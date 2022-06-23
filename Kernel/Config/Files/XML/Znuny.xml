@@ -1528,6 +1528,16 @@
             <Item ValueType="String" ValueRegex=""></Item>
         </Value>
     </Setting>
+    <Setting Name="MailAccount::POP3::Auth::SplitOAuth2MethodAndToken::Hosts" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Hosts that need a separate info about authentication method and token (instead of both in one line). Most commonly needed for Office 365 and Outlook.</Description>
+        <Navigation>Core::Email</Navigation>
+        <Value>
+            <Array>
+                <Item>outlook.office365.com</Item>
+                <Item>pop-mail.outlook.com</Item>
+            </Array>
+        </Value>
+    </Setting>
 
     <!--
         TimeUnits

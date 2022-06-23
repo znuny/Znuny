@@ -43,6 +43,7 @@ sub new {
 sub Connect {
     my ( $Self, %Param ) = @_;
 
+    my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
     my $OAuth2TokenObject = $Kernel::OM->Get('Kernel::System::OAuth2Token');
 
     NEEDED:
@@ -120,7 +121,17 @@ sub Connect {
             );
         }
 
-        $NOM = $PopObject->xoauth2( $Param{Login}, $OAuth2Token );
+        # Check if auth header and token must be sent separately for this host.
+        # This mainly is being used by Office 365 and Outlook.
+        # Also see:
+        # https://docs.microsoft.com/en-us/Exchange/client-developer/legacy-protocols/
+        #     how-to-authenticate-an-imap-pop-smtp-application-by-using-oauth#pop-protocol-exchange
+        my $SplitOAuth2MethodAndTokenHosts
+            = $ConfigObject->Get('MailAccount::POP3::Auth::SplitOAuth2MethodAndToken::Hosts') // [];
+        my %SplitOAuth2MethodAndTokenHosts = map { $_ => 1 } @{$SplitOAuth2MethodAndTokenHosts};
+        my $SplitOAuth2MethodAndToken      = $SplitOAuth2MethodAndTokenHosts{ $Param{Host} } ? 1 : 0;
+
+        $NOM = $PopObject->xoauth2( $Param{Login}, $OAuth2Token, $SplitOAuth2MethodAndToken );
     }
 
     if ( !defined $NOM ) {

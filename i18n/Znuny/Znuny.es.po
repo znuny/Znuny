@@ -25028,3 +25028,7 @@ msgstr ""
 msgid "Maximum number of quoted lines to be added to forwarded messages."
 msgstr ""
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Hosts that need a separate info about authentication method and token (instead of both in one line). Most commonly needed for Office 365 and Outlook."
+msgstr ""
+

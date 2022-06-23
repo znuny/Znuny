@@ -8,17 +8,26 @@ use Carp;
 use Net::POP3;
 use MIME::Base64;
 
-our $VERSION = '0.0.1';
+our $VERSION = '0.0.2';
 
 *Net::POP3::_AUTH = sub { shift->command('AUTH', $_[0])->response() == Net::POP3::CMD_OK };
+# Send a token directly
+*Net::POP3::_XOAUTH2_TOKEN = sub { shift->command($_[0])->response() == Net::POP3::CMD_OK };
 *Net::POP3::xoauth2 = sub {
-    @_ >= 1 && @_ <= 3 or croak 'usage: $pop3->xoauth2( USER, TOKEN )';
-    my ($me, $user, $token) = @_;
+    @_ >= 1 && @_ <= 4 or croak 'usage: $pop3->xoauth2( USER, TOKEN, separate_flag )';
+    my ($me, $user, $token, $separate_flag) = @_;
     my $xoauth2_token = encode_base64("user=$user\001auth=Bearer $token\001\001");
     $xoauth2_token =~ s/[\r\n]//g;
 
-    return unless ($me->_AUTH("XOAUTH2 $xoauth2_token"));
-
+    # If you use office365, need to call 'XOAUTH2' and token separately
+    # https://docs.microsoft.com/ja-jp/Exchange/client-developer/legacy-protocols/how-to-authenticate-an-imap-pop-smtp-application-by-using-oauth
+    if ($separate_flag) {
+        $me->_AUTH("XOAUTH2");
+        my $r = $me->_XOAUTH2_TOKEN($xoauth2_token);
+        return unless $r;
+    } else {
+        return unless ($me->_AUTH("XOAUTH2 $xoauth2_token"));
+    }
     $me->_get_mailbox_count();
 };
 
@@ -41,6 +50,9 @@ Net::POP3::XOAuth2 - It enables to use XOAUTH2 authentication with L<Net::POP3>
 
   my $pop = Net::POP3->new('pop.gmail.com', Port => 995, Timeout => 30, SSL => 1, Debug => 1);
   $pop->xoauth2($user, $token);
+
+  # or if you use office365
+  $pop->xoauth2($user, $token, 1);
 
 =head1 DESCRIPTION
 

@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.722638436482085;
+    $Self->{Completeness}        = 0.722520762090865;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7886,6 +7886,8 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         'Authentication type for sendmail module. If \'OAuth2 token\' has been selected, SendmailModule::OAuth2TokenConfigName must also be configured.' =>
             '',
         'Name of the OAuth2 token configuration to use for sending mails if \'OAuth2 token\' was configured in SendmailModule::AuthenticationType.' =>
+            '',
+        'Hosts that need a separate info about authentication method and token (instead of both in one line). Most commonly needed for Office 365 and Outlook.' =>
             '',
         'This option enables a dropdown which will be displayed instead of the time unit input field.' =>
             '',

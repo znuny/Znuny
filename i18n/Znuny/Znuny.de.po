@@ -25152,3 +25152,7 @@ msgstr "automatisch ausfüllen"
 msgid "Maximum number of quoted lines to be added to forwarded messages."
 msgstr "Maximale Anzahl zitierter Zeilen in weitergeleiteten Nachrichten."
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Hosts that need a separate info about authentication method and token (instead of both in one line). Most commonly needed for Office 365 and Outlook."
+msgstr "Hosts, die eine getrennte Info über Authentifizierungsmethode und Token benötigen (anstatt beides in einer Zeile). Wird am häufigsten für Office 365 und Outlook benötigt."
+

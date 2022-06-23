@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.994299674267101;
+    $Self->{Completeness}        = 0.994300602507735;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7871,6 +7871,8 @@ sub Data {
             'Authentifikationstyp für das Sendmail-Modul. Falls \'OAuth2-Token\' gewählt wurde, muss SendmailModule::OAuth2TokenConfigName ebenfalls konfiguriert werden.',
         'Name of the OAuth2 token configuration to use for sending mails if \'OAuth2 token\' was configured in SendmailModule::AuthenticationType.' =>
             'Name der OAuth2-Token-Konfiguration für den Versand von E-Mails, falls \'OAuth2-Token\' in SendmailModule::AuthenticationType konfiguriert wurde.',
+        'Hosts that need a separate info about authentication method and token (instead of both in one line). Most commonly needed for Office 365 and Outlook.' =>
+            'Hosts, die eine getrennte Info über Authentifizierungsmethode und Token benötigen (anstatt beides in einer Zeile). Wird am häufigsten für Office 365 und Outlook benötigt.',
         'This option enables a dropdown which will be displayed instead of the time unit input field.' =>
             'Diese Option aktiviert ein Dropdown, das anstelle des Eingabefeldes für die Zeiteinheit angezeigt wird.',
         'Defines the default ticket attribute for ticket sorting in the owner view of the agent interface.' =>
