@@ -430,7 +430,17 @@ sub Export {
     # Include product name and version in product ID property for debugging purposes, by redefining
     #   external library method.
     sub Data::ICal::product_id {    ## no critic
-        return 'OTRS ' . $Kernel::OM->Get('Kernel::Config')->Get('Version');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+        my $ProductID      = $ConfigObject->Get('Product') // '';
+        my $ProductVersion = $ConfigObject->Get('Version');
+        my $BannerDisabled = $ConfigObject->Get('Secure::DisableBanner');
+
+        if ( !$BannerDisabled && IsStringWithData($ProductVersion) ) {
+            $ProductID .= ' ' . $ProductVersion;
+        }
+
+        return $ProductID;
     }
 }
 
