@@ -128,8 +128,8 @@ sub Connect {
         #     how-to-authenticate-an-imap-pop-smtp-application-by-using-oauth#pop-protocol-exchange
         my $SplitOAuth2MethodAndTokenHosts
             = $ConfigObject->Get('MailAccount::POP3::Auth::SplitOAuth2MethodAndToken::Hosts') // [];
-        my %SplitOAuth2MethodAndTokenHosts = map { $_ => 1 } @{$SplitOAuth2MethodAndTokenHosts};
-        my $SplitOAuth2MethodAndToken      = $SplitOAuth2MethodAndTokenHosts{ $Param{Host} } ? 1 : 0;
+        my %SplitOAuth2MethodAndTokenHosts = map { lc $_ => 1 } @{$SplitOAuth2MethodAndTokenHosts};
+        my $SplitOAuth2MethodAndToken      = $SplitOAuth2MethodAndTokenHosts{ lc $Param{Host} } ? 1 : 0;
 
         $NOM = $PopObject->xoauth2( $Param{Login}, $OAuth2Token, $SplitOAuth2MethodAndToken );
     }
