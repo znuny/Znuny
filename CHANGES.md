@@ -1,4 +1,5 @@
 # 6.4.1 2022-??-??
+ - 2022-07-05 Attachment filenames in ticket zoom will now be truncated if they are too long to be displayed correctly.
  - 2022-06-22 Fixed OAuth2 authentication when using POP3 with Microsoft Office 365 or Outlook. [#259](https://github.com/znuny/Znuny/issues/259)
  - 2022-06-09 Added S/MIME check for sender header. Thanks to @akmet [PR#68](https://github.com/znuny/Znuny/pull/68).
  - 2022-05-31 Maximum number of lines of quote in body of a message now can be limited in AgentTicketForward and AgentTicketCompose.
@@ -177,6 +178,9 @@
  - 2021-06-15 Improvements for Dev::Code::CPANUpdate (#38). Thanks to Renée Bäcker (@reneeb). [#38](https://github.com/znuny/Znuny/pull/38)
  - 2021-06-15 Use ticket title as the default appointment title (#90). Thanks to Renée Bäcker (@reneeb). [#90](https://github.com/znuny/Znuny/pull/90)
  - 2021-06-15 Column list validation before saving agent preferences (#84). Thanks to Paweł Bogusławski (@pboguslawski). [#84](https://github.com/znuny/Znuny/pull/84)
+
+# 6.0.45 2022-??-??
+ - 2022-07-05 Attachment filenames in ticket zoom will now be truncated if they are too long to be displayed correctly.
 
 # 6.0.44 2022-06-15
  - 2022-06-09 Added S/MIME check for sender header. Thanks to @akmet [PR#68](https://github.com/znuny/Znuny/pull/68).

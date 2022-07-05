@@ -1392,6 +1392,9 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
         opacity: 1;
     }
 
+    .ArticleAttachments li {
+        float: none;
+    }
 }
 
 } /* end @media */

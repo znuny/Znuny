@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.994300602507735;
+    $Self->{Completeness}        = 0.994301530446109;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7913,6 +7913,8 @@ sub Data {
         'Cleans up the calendar-based tickets regularly.' => 'Säubert die kalenderbasierten Tickets regelmäßig.',
         'Maximum number of quoted lines to be added to forwarded messages.' =>
             'Maximale Anzahl zitierter Zeilen in weitergeleiteten Nachrichten.',
+        'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
+            'Maximale Länge der angezeigten Dateinamen von Anhängen in der Artikelvorschau der Ticket-Detailansicht.',
 
         # XML Definition: scripts/database/otrs-initial_insert.xml
         'invalid-temporarily' => 'ungültig-temporär',

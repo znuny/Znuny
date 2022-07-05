@@ -34,7 +34,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.641263637843999;
+    $Self->{Completeness}        = 0.641159231520677;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -7925,6 +7925,8 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
         'Creates the calendar-based tickets regularly.' => '',
         'Cleans up the calendar-based tickets regularly.' => '',
         'Maximum number of quoted lines to be added to forwarded messages.' =>
+            '',
+        'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
             '',
 
         # XML Definition: scripts/database/otrs-initial_insert.xml

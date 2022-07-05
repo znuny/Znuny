@@ -24996,3 +24996,7 @@ msgstr ""
 msgid "Hosts that need a separate info about authentication method and token (instead of both in one line). Most commonly needed for Office 365 and Outlook."
 msgstr ""
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum length of displayed attachment filenames in the article preview of ticket zoom view."
+msgstr ""
+
