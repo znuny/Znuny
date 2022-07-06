@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.998461275431698;
+    $Self->{Completeness}        = 0.998461538461539;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7629,6 +7629,8 @@ Ihr Helpdesk-Team
             'Maximale Länge (Buchstaben) von Dynamischen Felder von Artikeln in der TicketZoom-Übersicht.',
         'Maximum length (in characters) of the dynamic field in the sidebar of the ticket zoom view.' =>
             'Maximale Länge (Buchstaben) von Dynamischen Feldern in der Seitenleiste in der TicketZoom-Übersicht.',
+        'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
+            'Maximale Länge der angezeigten Dateinamen von Anhängen in der Artikelvorschau der Ticket-Detailansicht.',
         'Maximum number of active calendars in overview screens. Please note that large number of active calendars can have a performance impact on your server by making too much simultaneous calls.' =>
             'Maximale Anzahl an aktiven Kalendern in der Kalenderübersicht oder Resourcenübersicht. Bitte beachten Sie, dass sich zuviele gleichzeitig aktive Kalender aufgrund vieler gleichzeitiger Anfragen auf die Performance des Systems auswirken kann.',
         'Maximum number of tickets to be displayed in the result of a search in the agent interface.' =>

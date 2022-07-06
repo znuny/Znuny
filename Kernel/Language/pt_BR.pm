@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.937254231492563;
+    $Self->{Completeness}        = 0.937094017094017;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7635,6 +7635,8 @@ Obrigado pela ajuda!
             'Tamanho máximo (em caracteres) do campo dinâmico no artigo na visão de zoom de ticket.',
         'Maximum length (in characters) of the dynamic field in the sidebar of the ticket zoom view.' =>
             'Tamanho máximo (em caracteres) do campo dinâmico na barra lateral na visão de zoom de ticket.',
+        'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
+            '',
         'Maximum number of active calendars in overview screens. Please note that large number of active calendars can have a performance impact on your server by making too much simultaneous calls.' =>
             'Número máximo de calendário ativos nas visões gerais. Por favor, note que um numero grande de calendário ativos você poderá ter impactos na performance do servidor devido a muitas chamadas simultâneas.',
         'Maximum number of tickets to be displayed in the result of a search in the agent interface.' =>

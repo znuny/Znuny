@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.994528979312703;
+    $Self->{Completeness}        = 0.994358974358974;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7636,6 +7636,8 @@ Vaša tehnička podrška
             'Maksimalna dužina (u znacima) dinamičkog polja u članku na detaljnom pregledu tiketa.',
         'Maximum length (in characters) of the dynamic field in the sidebar of the ticket zoom view.' =>
             'Maksimalna dužina (u znacima) dinamičkog polja u bočnoj traci na detaljnom pregledu tiketa.',
+        'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
+            '',
         'Maximum number of active calendars in overview screens. Please note that large number of active calendars can have a performance impact on your server by making too much simultaneous calls.' =>
             'Maksimalni broj aktivnih kalendara u ekranima za pregled. Obratite pažnju da veliki broj aktivnih kalendara može imati uticaj na performanse vašeg servera pravljenjem previše simultanih zahteva.',
         'Maximum number of tickets to be displayed in the result of a search in the agent interface.' =>

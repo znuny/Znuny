@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-04-06 14:16+0000\n"
+"POT-Creation-Date: 2022-07-05 08:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20559,6 +20559,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Maximum length (in characters) of the dynamic field in the sidebar of the ticket zoom view."
+msgstr ""
+
+#. SysConfig
+msgid "Maximum length of displayed attachment filenames in the article preview of ticket zoom view."
 msgstr ""
 
 #. SysConfig

@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.96785775346213;
+    $Self->{Completeness}        = 0.967692307692308;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -7630,6 +7630,8 @@ Thanks for your help!
             '티켓 확대보기의 기사에서 동적 필드의 최대 길이(문자 수)',
         'Maximum length (in characters) of the dynamic field in the sidebar of the ticket zoom view.' =>
             '티켓 확대보기의 사이드 바에 있는 동적 필드의 최대 길이(문자 수).',
+        'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
+            '',
         'Maximum number of active calendars in overview screens. Please note that large number of active calendars can have a performance impact on your server by making too much simultaneous calls.' =>
             '개요 화면의 최대 활성 캘린더 수입니다. 많은 수의 활성 캘린더가 동시 호출을 너무 많이하여 서버에 성능에 영향을 줄 수 있습니다.',
         'Maximum number of tickets to be displayed in the result of a search in the agent interface.' =>

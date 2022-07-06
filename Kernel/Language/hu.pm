@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.99829030603522;
+    $Self->{Completeness}        = 0.998119658119658;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7636,6 +7636,8 @@ Az Ön segélyszolgálat csapata
             'A dinamikus mező legnagyobb hossza (karakterben) a jegynagyítás nézet bejegyzésében.',
         'Maximum length (in characters) of the dynamic field in the sidebar of the ticket zoom view.' =>
             'A dinamikus mező legnagyobb hossza (karakterben) a jegynagyítás nézet oldalsávján.',
+        'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
+            '',
         'Maximum number of active calendars in overview screens. Please note that large number of active calendars can have a performance impact on your server by making too much simultaneous calls.' =>
             'Az aktív naptárak legnagyobb száma az áttekintő képernyőkön. Ne feledje, hogy az aktív naptárak nagy száma teljesítménybeli hatással lehet a kiszolgálójára a túl sok egyidejű hívás indításával.',
         'Maximum number of tickets to be displayed in the result of a search in the agent interface.' =>

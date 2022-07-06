@@ -176,7 +176,7 @@ function CheckIFrameHeight(IFrameID) {
                 <ul class="ArticleAttachments">
                 [% FOREACH Attachment IN Data.Attachments %]
                     <li title="[% Attachment.Filename | html %]">
-                        <h5>[% Attachment.Filename | html %]</h5>
+                        <h5>[% Attachment.Filename | truncate( Config("Ticket::Frontend::AgentTicketZoom::DisplayedAttachmentFilenameMaxLength") ) | html %]</h5>
                         [% IF Attachment.ContentType.match('image') %]
                             [% Translate("Image") | html %]
                         [% ELSIF Attachment.ContentType == "application/pdf" %]

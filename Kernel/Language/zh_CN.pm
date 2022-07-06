@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.99829030603522;
+    $Self->{Completeness}        = 0.998119658119658;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -7636,6 +7636,8 @@ Thanks for your help!
             '工单详情视图信件动态字段的最大长度（单位：字符）。',
         'Maximum length (in characters) of the dynamic field in the sidebar of the ticket zoom view.' =>
             '工单详情视图侧边栏动态字段的最大长度（单位：字符）。',
+        'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
+            '',
         'Maximum number of active calendars in overview screens. Please note that large number of active calendars can have a performance impact on your server by making too much simultaneous calls.' =>
             '日历概览屏幕能激活的日历最大数。请注意：大量的激活日历会对服务器产生太多的同步调用，可能会有性能影响。',
         'Maximum number of tickets to be displayed in the result of a search in the agent interface.' =>

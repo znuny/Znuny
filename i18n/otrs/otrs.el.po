@@ -24720,3 +24720,7 @@ msgstr ""
 msgid "This configuration registers an output filter to hide online repository selection in package manager."
 msgstr ""
 
+#. SysConfig
+msgid "Maximum length of displayed attachment filenames in the article preview of ticket zoom view."
+msgstr ""
+

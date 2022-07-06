@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<otrs_config version="2.0" init="Application">
+
+    <!--
+        Agent ticket zoom
+    -->
+    <Setting Name="Ticket::Frontend::AgentTicketZoom::DisplayedAttachmentFilenameMaxLength" Required="1" Valid="1">
+        <Description Translatable="1">Maximum length of displayed attachment filenames in the article preview of ticket zoom view.</Description>
+        <Navigation>Frontend::Agent::View::TicketZoom</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^[1-9]\d*$">50</Item>
+        </Value>
+    </Setting>
+
+</otrs_config>

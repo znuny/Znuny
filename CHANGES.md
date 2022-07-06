@@ -1,3 +1,6 @@
+# 6.0.45 2022-??-??
+ - 2022-07-05 Attachment filenames in ticket zoom will now be truncated if they are too long to be displayed correctly.
+
 # 6.0.44 2022-06-15
  - 2022-06-09 Added S/MIME check for sender header. Thanks to @akmet [PR#68](https://github.com/znuny/Znuny/pull/68).
  - 2022-05-24 Sanitized output of ACL Perl config file when dumping and deploying it to avoid unexpected execution of arbitrary Perl code.
