@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-07-05 08:14+0000\n"
+"POT-Creation-Date: 2022-07-08 14:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -11891,10 +11891,6 @@ msgid "Certificate %s could not be read!"
 msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminSMIME.pm
-msgid "Needed Fingerprint"
-msgstr ""
-
-#. Perl Module: Kernel/Modules/AdminSMIME.pm
 msgid "Handle Private Certificate Relations"
 msgstr ""
 
@@ -20568,6 +20564,10 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Maximum number of quoted lines to be added to forwarded messages."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml

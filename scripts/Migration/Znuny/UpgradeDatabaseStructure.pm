@@ -36,6 +36,10 @@ sub Run {
 
     my @Tasks = (
         {
+            Message => 'Create table smime_keys',
+            Module  => 'SMIMEKeys',
+        },
+        {
             Message => 'Add missing foreign keys that point to database table "article"',
             Module  => 'RecreateForeignKeysToArticleTable',
         },

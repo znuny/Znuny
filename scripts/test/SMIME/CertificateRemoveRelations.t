@@ -201,6 +201,8 @@ for my $Certificate (@Certificates) {
         Filename  => $Certificate->{CertificateFileName},
     );
     my %Result = $SMIMEObject->CertificateAdd( Certificate => ${$CertString} );
+    $Certificate->{IndexedFilename} = $Result{Filename};
+
     $Self->True(
         $Result{Successful} || '',
         "#$Certificate->{CertificateName} CertificateAdd() - $Result{Message}",
@@ -227,38 +229,39 @@ for my $Certificate (@Certificates) {
 
 my $CryptObject = $Kernel::OM->Get('Kernel::System::Crypt::SMIME');
 
-my @CertList = $CryptObject->CertificateList();
-
-my $Cert1 = $CertList[0];
-my $Cert2 = $CertList[1];
-
-my %Cert1Attributes = $CryptObject->CertificateAttributes(
-    Certificate => $CryptObject->CertificateGet( Filename => $Cert1 ),
-    Filename    => $Cert1,
+my @PrivateCerts = $CryptObject->PrivateSearch(
+    Search => $Certificates[0]->{IndexedFilename},
+    SearchType => 'filename',
 );
-my %Cert2Attributes = $CryptObject->CertificateAttributes(
-    Certificate => $CryptObject->CertificateGet( Filename => $Cert2 ),
-    Filename    => $Cert2,
+my %Cert1Attributes = %{$PrivateCerts[0]};
+
+my @PublicCerts = $CryptObject->CertificateSearch(
+    Search => $Certificates[1]->{IndexedFilename},
+    SearchType => 'filename',
 );
+my %Cert2Attributes = %{$PublicCerts[0]};
 
 my @Data = $CryptObject->SignerCertRelationGet(
     CertFingerprint => $Cert1Attributes{Fingerprint},
 );
+
 $Self->False(
     @Data ? 1 : 0,
     'Certificate 1 has no relations',
 );
+
 @Data = $CryptObject->SignerCertRelationGet(
     CertFingerprint => $Cert2Attributes{Fingerprint},
 );
+
 $Self->False(
     @Data ? 1 : 0,
     'Certificate 2 has no relations',
 );
 
 $CryptObject->SignerCertRelationAdd(
-    CertFingerprint => $Cert1Attributes{Fingerprint},
-    CAFingerprint   => $Cert2Attributes{Fingerprint},
+    CertificateID => $Cert1Attributes{CertificateID},
+    CAID   => $Cert2Attributes{CertificateID},
     UserID          => 1,
 );
 
@@ -271,8 +274,9 @@ $Self->True(
 );
 
 my $Success = $CryptObject->CertificateRemove(
-    Filename => $Cert2,
+    Filename => $Certificates[1]->{IndexedFilename},
 );
+
 $Self->True(
     @Data ? 1 : 0,
     'Certificate 2 got removed',

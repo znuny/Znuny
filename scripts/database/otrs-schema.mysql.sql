@@ -1844,6 +1844,27 @@ CREATE TABLE form_draft (
     INDEX form_draft_object_type_object_id_action (object_type, object_id, action)
 );
 # ----------------------------------------------------------
+#  create table smime_keys
+# ----------------------------------------------------------
+CREATE TABLE smime_keys (
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    key_hash VARCHAR (8) NOT NULL,
+    key_type VARCHAR (255) NOT NULL,
+    file_name VARCHAR (255) NOT NULL,
+    email_address VARCHAR (255) NULL,
+    expiration_date DATETIME NULL,
+    fingerprint VARCHAR (59) NOT NULL,
+    subject VARCHAR (255) NOT NULL,
+    create_time DATETIME NULL,
+    change_time DATETIME NULL,
+    create_by INTEGER NULL,
+    change_by INTEGER NULL,
+    PRIMARY KEY(id),
+    INDEX smime_keys_file_name (file_name),
+    INDEX smime_keys_key_hash (key_hash),
+    INDEX smime_keys_key_type (key_type)
+);
+# ----------------------------------------------------------
 #  create table oauth2_token_config
 # ----------------------------------------------------------
 CREATE TABLE oauth2_token_config (

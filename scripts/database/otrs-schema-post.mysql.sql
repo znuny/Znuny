@@ -1077,6 +1077,14 @@ SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHER
 SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE form_draft ADD CONSTRAINT FK_form_draft_change_by_id FOREIGN KEY (change_by) REFERENCES users (id)', 'SELECT ''INFO: Foreign key constraint FK_form_draft_change_by_id does already exist, skipping.''' );
 PREPARE FKStatement FROM @FKSQLStatement;
 EXECUTE FKStatement;
+SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHERE table_schema = DATABASE() AND table_name = 'smime_keys' AND constraint_name = 'FK_smime_keys_create_by_id');
+SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE smime_keys ADD CONSTRAINT FK_smime_keys_create_by_id FOREIGN KEY (create_by) REFERENCES users (id)', 'SELECT ''INFO: Foreign key constraint FK_smime_keys_create_by_id does already exist, skipping.''' );
+PREPARE FKStatement FROM @FKSQLStatement;
+EXECUTE FKStatement;
+SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHERE table_schema = DATABASE() AND table_name = 'smime_keys' AND constraint_name = 'FK_smime_keys_change_by_id');
+SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE smime_keys ADD CONSTRAINT FK_smime_keys_change_by_id FOREIGN KEY (change_by) REFERENCES users (id)', 'SELECT ''INFO: Foreign key constraint FK_smime_keys_change_by_id does already exist, skipping.''' );
+PREPARE FKStatement FROM @FKSQLStatement;
+EXECUTE FKStatement;
 SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHERE table_schema = DATABASE() AND table_name = 'oauth2_token_config' AND constraint_name = 'FK_oauth2_token_config_create_by_id');
 SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE oauth2_token_config ADD CONSTRAINT FK_oauth2_token_config_create_by_id FOREIGN KEY (create_by) REFERENCES users (id)', 'SELECT ''INFO: Foreign key constraint FK_oauth2_token_config_create_by_id does already exist, skipping.''' );
 PREPARE FKStatement FROM @FKSQLStatement;

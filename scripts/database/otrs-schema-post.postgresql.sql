@@ -2966,6 +2966,28 @@ BEGIN
 IF NOT EXISTS (
     SELECT 1
     FROM pg_constraint
+    WHERE LOWER(conname) = LOWER('FK_smime_keys_create_by_id')
+    ) THEN
+    ALTER TABLE smime_keys ADD CONSTRAINT FK_smime_keys_create_by_id FOREIGN KEY (create_by) REFERENCES users (id);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_constraint
+    WHERE LOWER(conname) = LOWER('FK_smime_keys_change_by_id')
+    ) THEN
+    ALTER TABLE smime_keys ADD CONSTRAINT FK_smime_keys_change_by_id FOREIGN KEY (change_by) REFERENCES users (id);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_constraint
     WHERE LOWER(conname) = LOWER('FK_oauth2_token_config_create_by_id')
     ) THEN
     ALTER TABLE oauth2_token_config ADD CONSTRAINT FK_oauth2_token_config_create_by_id FOREIGN KEY (create_by) REFERENCES users (id);

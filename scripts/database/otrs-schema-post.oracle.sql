@@ -4308,6 +4308,38 @@ END;
 --
 ;
 BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE smime_keys ADD CONSTRAINT FK_smime_keys_create_by_id FOREIGN KEY (create_by) REFERENCES users (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_smime_keys_create_by ON smime_keys (create_by)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE smime_keys ADD CONSTRAINT FK_smime_keys_change_by_id FOREIGN KEY (change_by) REFERENCES users (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_smime_keys_change_by ON smime_keys (change_by)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
     EXECUTE IMMEDIATE 'ALTER TABLE oauth2_token_config ADD CONSTRAINT FK_oauth2_token_config_creatd7 FOREIGN KEY (create_by) REFERENCES users (id)';
 EXCEPTION
   WHEN OTHERS THEN NULL;

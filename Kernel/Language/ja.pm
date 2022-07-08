@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.722403126017584;
+    $Self->{Completeness}        = 0.722240312601758;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4112,7 +4112,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Relation deleted!' => '関係が削除されました！',
         'Impossible to delete relation!' => '関係を削除することはできません！',
         'Certificate %s could not be read!' => '証明書 %s を読み込めませんでした！',
-        'Needed Fingerprint' => 'フィンガープリントが必要です',
         'Handle Private Certificate Relations' => '',
 
         # Perl Module: Kernel/Modules/AdminSalutation.pm
@@ -7928,6 +7927,8 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         'Creates the calendar-based tickets regularly.' => '',
         'Cleans up the calendar-based tickets regularly.' => '',
         'Maximum number of quoted lines to be added to forwarded messages.' =>
+            '',
+        'Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig.' =>
             '',
         'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
             '',

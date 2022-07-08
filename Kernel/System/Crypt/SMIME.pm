@@ -618,12 +618,67 @@ sub Verify {
     return %Return;
 }
 
+=head2 KeysList()
+
+    Return list of all SMIME public and private keys with their attributes.
+
+    my @Result = $CryptObject->KeysList()
+
+=cut
+
+sub KeysList {
+    my ( $Self, %Param ) = @_;
+
+    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+
+    return if !$DBObject->Prepare(
+        SQL => "SELECT * FROM smime_keys",
+    );
+
+    my @KeysList;
+    while ( my @Row = $DBObject->FetchrowArray() ) {
+        my $Certificate = {
+            CertificateID => $Row[0],
+            Hash          => $Row[1],
+            Type          => $Row[2] eq 'P' ? 'key' : 'cert',
+            Filename      => $Row[3],
+            Email         => $Row[4],
+            EndDate       => $Row[5],
+            Fingerprint   => $Row[6],
+            Subject       => $Row[7],
+            StartDate     => $Row[8]
+        };
+
+        push @KeysList, $Certificate;
+    }
+
+    return @KeysList;
+}
+
 =head2 Search()
 
-search a certificate or an private key
+Search for public and private certificates within files.
 
     my @Result = $CryptObject->Search(
         Search => 'some text to search',
+    );
+
+or
+
+Returns list of all certificates.
+
+    my @Result = $CryptObject->Search(
+        IndexedSearch => 1 # Optional.
+    );
+
+or
+
+Search for public and private certificates within files using indexed values.
+
+    my @Result = $CryptObject->Search(
+        Search => 'some text to search',
+        SearchType => 'e-mail/hash/filename/id' # Default lookup by e-mail
+        IndexedSearch => 1 # Required if want to search via indexed attributes.
     );
 
 =cut
@@ -631,58 +686,164 @@ search a certificate or an private key
 sub Search {
     my ( $Self, %Param ) = @_;
 
-    my @Result = $Self->CertificateSearch(%Param);
-    @Result = ( @Result, $Self->PrivateSearch(%Param) );
+    my @Result;
+    if ( $Param{IndexedSearch} ) {
+        @Result = $Self->_CertificateAttributesGet(
+            %Param,
+            Private => 0,
+        );
+        @Result = (
+            @Result,
+            $Self->_CertificateAttributesGet(
+                %Param,
+                Private => 1,
+            )
+        );
+
+        return @Result;
+    }
+
+    my %Certificates = $Self->CertificateList(
+        ResultType => "HASH",
+    );
+
+    @Result = $Self->CertificateFileSearch(
+        %Param,
+        Certificates => \%Certificates,
+    );
+
+    @Result = (
+        @Result,
+        $Self->PrivateFileSearch(
+            %Param,
+            Certificates => \%Certificates,
+        )
+    );
+
     return @Result;
+
 }
 
 =head2 CertificateSearch()
 
-search a local certificate
+Returns a list of certificates searching using indexable attributes.
 
     my @Result = $CryptObject->CertificateSearch(
-        Search => 'some text to search',
+        Search => $Search,
+        SearchType => 'e-mail/hash/filename/id/fingerprint' # Default lookup by e-mail
         Valid  => 1
     );
+
+    or
+
+    my @Result = $CryptObject->CertificateSearch(); # For all certificates.
 
 =cut
 
 sub CertificateSearch {
     my ( $Self, %Param ) = @_;
 
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
     my $Search = $Param{Search} || '';
     $Param{Valid} //= 0;
 
-    # 1 - Get certificate list
-    my @CertList = $Self->CertificateList();
+    my @Result = $Self->_CertificateAttributesGet(
+        Search     => $Search,
+        SearchType => $Param{SearchType},
+        Valid      => $Param{Valid},
+    );
+
+    # 1 - If there are no results already in the system, then check for the certificate in customer data
+    if (
+        !@Result
+        && $ConfigObject->Get('SMIME::FetchFromCustomer')
+        && IsStringWithData($Search)
+        )
+    {
+
+        # Search and add certificates from Customer data if Result from CertList is empty
+        my @CertFiles = $Self->FetchFromCustomer(
+            Search => $Search,
+        );
+
+        if (@CertFiles) {
+
+            # 2 - if found, get its details and add them to the @Results
+            @Result = $Self->_CertificateAttributesGet(
+                Search => $Search,
+                Valid  => $Param{Valid}
+            );
+        }
+    }
+
+    return @Result;
+}
+
+=head2 CertificateFileSearch()
+
+Looks for a given "Search" in physical certificates, not recommended for indexed attributes.
+
+    my @Result = $CryptObject->CertificateFileSearch(
+        Search       => 'some text to search',
+        Valid        => 1 # Optional, default doesn't check if valid.
+        Certificates => $Certificates # Optional, list of certificates to check.
+    );
+
+=cut
+
+sub CertificateFileSearch {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    my $Search = $Param{Search} || '';
+    $Param{Valid} //= 0;
+
+    my %Certificates;
+    if ( IsHashRefWithData( $Param{Certificates} ) ) {
+        %Certificates = %{ $Param{Certificates} };
+    }
+    else {
+        %Certificates = $Self->CertificateList(
+            ResultType => "HASH",
+        );
+    }
 
     my @Result;
-    if (@CertList) {
+    if (%Certificates) {
 
         # 2 - For the certs in list get its attributes and add them to @Results
         @Result = $Self->_CheckCertificateList(
-            CertificateList => \@CertList,
+            CertificateList => \%Certificates,
             Search          => $Search,
             Valid           => $Param{Valid},
         );
     }
 
     # 3 - If there are no results already in the system, then check for the certificate in customer data
-    if ( !@Result && $Kernel::OM->Get('Kernel::Config')->Get('SMIME::FetchFromCustomer') ) {
+    if (
+        !@Result
+        && $ConfigObject->Get('SMIME::FetchFromCustomer')
+        && IsStringWithData($Search)
+        )
+    {
 
-        # Search and add certificates from Customer data if Result from CertList is empty
-        if (
-            $Search &&
-            $Self->FetchFromCustomer(
-                Search => $Search,
-            )
-            )
-        {
+        # Search and add certificates from Customer data if Result from Certificates is empty
+        my @CertFiles = $Self->FetchFromCustomer(
+            Search => $Search,
+        );
+
+        if (@CertFiles) {
+
             # 4 - if found, get its details and add them to the @Results
-            @CertList = $Self->CertificateList();
-            if (@CertList) {
+            %Certificates = $Self->CertificateList(
+                ResultType => "HASH"
+            );
+
+            if (%Certificates) {
                 @Result = $Self->_CheckCertificateList(
-                    CertificateList => \@CertList,
+                    CertificateList => \%Certificates,
                     Search          => $Search,
                     Valid           => $Param{Valid},
                 );
@@ -696,52 +857,41 @@ sub CertificateSearch {
 sub _CheckCertificateList {
     my ( $Self, %Param ) = @_;
 
-    my @CertList = @{ $Param{CertificateList} };
+    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+
+    my $CertList = $Param{CertificateList};
     my $Search   = $Param{Search} || '';
     $Param{Valid} //= 0;
 
     my @Result;
 
-    FILE:
-    for my $Filename (@CertList) {
-        my $Certificate = $Self->CertificateGet( Filename => $Filename );
-        my %Attributes  = $Self->CertificateAttributes(
-            Certificate => $Certificate,
-            Filename    => $Filename,
+    CERTIFICATEID:
+    for my $CertificateID ( sort keys %{$CertList} ) {
+        my %Attributes;
+        my $Hit      = 0;
+        my $Filename = $CertList->{$CertificateID};
+
+        $Hit = $Self->_NonIndexedAttributesLookup(
+            Search     => $Search,
+            Attributes => \%Attributes,
+            Filename   => $Filename,
         );
-        my $Hit = 0;
-        if ($Search) {
-            ATTRIBUTE:
-            for my $Attribute ( sort keys %Attributes ) {
 
-                my @Items = split /[,;\s]+/, $Attributes{$Attribute};
+        next CERTIFICATEID if !$Hit;
 
-                for my $Item (@Items) {
-                    if ( $Item =~ m{^\Q$Search\E$}ixms ) {
-                        $Hit = 1;
-                        last ATTRIBUTE;
-                    }
-                }
-            }
-        }
-        else {
-            $Hit = 1;
+        my $Expired;
+        if ( $Param{Valid} ) {
+            $Expired = $Self->KeyExpiredCheck(
+                EndDate => $Attributes{EndDate},
+            );
         }
 
-        $Attributes{Filename} = $Filename;
+        next CERTIFICATEID if $Expired;
 
-        if ($Hit) {
+        $Attributes{Filename}      = $Filename;
+        $Attributes{CertificateID} = $CertificateID;
 
-            my $Expired = 0;
-            if ( $Param{Valid} ) {
-                $Expired = $Self->KeyExpiredCheck(
-                    EndDate => $Attributes{EndDate},
-                );
-            }
-
-            next FILE if $Expired;
-            push @Result, \%Attributes;
-        }
+        push @Result, \%Attributes;
     }
 
     return @Result;
@@ -945,7 +1095,11 @@ returns result message and new certificate filename
 sub CertificateAdd {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
+    my $DBObject       = $Kernel::OM->Get('Kernel::System::DB');
+    my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
+
+    my $UserID = $Param{UserID} // 1;
+
     if ( !$Param{Certificate} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -971,8 +1125,9 @@ sub CertificateAdd {
     }
 
     # search for certs with same hash
-    my @Result = $Self->CertificateSearch(
-        Search => $Attributes{Hash},
+    my @Result = $Self->_CertificateAttributesGet(
+        Search     => $Attributes{Hash},
+        SearchType => 'hash',
     );
 
     # does the cert already exists?
@@ -1008,7 +1163,20 @@ sub CertificateAdd {
                 Filename   => "$Attributes{Hash}.$Count",
             );
 
-            # delete cache
+            return if !$DBObject->Do(
+                SQL => "
+                    INSERT INTO smime_keys (key_hash, key_type, file_name, email_address, expiration_date, fingerprint, subject, create_time, create_by)
+                    VALUES
+                    (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                Bind => [
+                    \$Attributes{Hash},         \$Attributes{Type},
+                    \$Result{Filename},         \$Attributes{Email},
+                    \$Attributes{ShortEndDate}, \$Attributes{Fingerprint},
+                    \$Attributes{Subject},      \$DateTimeObject->ToString(),
+                    \$UserID,
+                ],
+            );
+
             $CacheObject->CleanUp(
                 Type => 'SMIME_Cert',
             );
@@ -1094,6 +1262,8 @@ remove a local certificate
 sub CertificateRemove {
     my ( $Self, %Param ) = @_;
 
+    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+
     # check needed stuff
     if ( !$Param{Filename} && !( $Param{Hash} && $Param{Fingerprint} ) ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -1157,11 +1327,16 @@ sub CertificateRemove {
     }
 
     if ($Success) {
+        return if !$DBObject->Do(
+            SQL  => "DELETE FROM smime_keys WHERE file_name = ? AND key_type = ?",
+            Bind => [
+                \$Param{Filename},
+                \'cert',
+            ],
+        );
 
-        # get cache object
         my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
-        # delete cache
         $CacheObject->CleanUp(
             Type => 'SMIME_Cert',
         );
@@ -1180,32 +1355,45 @@ sub CertificateRemove {
 
 =head2 CertificateList()
 
-get list of local certificates filenames
+Get hash ref of local certificates filenames(ID => Filename)
 
-    my @CertList = $CryptObject->CertificateList();
+or
+
+Array of filenames
+
+    my $CertList = $CryptObject->CertificateList(
+        ResultType => 'ARRAY/HASH' # 'ARRAY' by default
+    );
 
 =cut
 
 sub CertificateList {
     my ( $Self, %Param ) = @_;
 
-    my @CertList;
-    my @Filters;
-    for my $Number ( 0 .. 99 ) {
-        push @Filters, "*.$Number";
-    }
+    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
-    my @List = $Kernel::OM->Get('Kernel::System::Main')->DirectoryRead(
-        Directory => "$Self->{CertPath}",
-        Filter    => \@Filters,
+    my $ResultType = $Param{ResultType} || 'ARRAY';
+
+    return if !$DBObject->Prepare(
+        SQL  => "SELECT id, file_name FROM smime_keys WHERE key_type = ?",
+        Bind => [ \'cert', ],
     );
 
-    for my $File (@List) {
-        $File =~ s{^.*/}{}xms;
-        push @CertList, $File;
+    my %CertificateList;
+    my @CertificateList;
+
+    ROW:
+    while ( my @Row = $DBObject->FetchrowArray() ) {
+        if ( $ResultType eq 'HASH' ) {
+            $CertificateList{ $Row[0] } = $Row[1];
+            next ROW;
+        }
+
+        push @CertificateList, $Row[1];
     }
 
-    return @CertList;
+    return %CertificateList if $ResultType eq 'HASH';
+    return @CertificateList;
 }
 
 =head2 CertificateAttributes()
@@ -1255,8 +1443,11 @@ sub CertificateAttributes {
     my ( $FH, $Filename ) = $FileTempObject->TempFile();
     print $FH $Param{Certificate};
     close $FH;
+
     $Self->_FetchAttributesFromCert( $Filename, \%Attributes );
+
     if ( $Attributes{Hash} ) {
+        $Attributes{Filename} = $Param{Filename} if $Param{Filename};
         my ($Private) = $Self->PrivateGet(%Attributes);
         if ($Private) {
             $Attributes{Private} = 'Yes';
@@ -1340,66 +1531,103 @@ sub CertificateRead {
     return $Output;
 }
 
-=head2 PrivateSearch()
+=head2 PrivateFileSearch()
 
-returns private keys
+Looks for a given search parameter in physical certificates, not recommended for indexed attributes.
 
-    my @Result = $CryptObject->PrivateSearch(
+    my @Result = $CryptObject->PrivateFileSearch(
         Search => 'some text to search',
         Valid  => 1  # optional
     );
 
 =cut
 
+sub PrivateFileSearch {
+    my ( $Self, %Param ) = @_;
+
+    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+
+    my $Search = $Param{Search} // '';
+    $Param{Valid} //= 0;
+
+    my %Certificates;
+    if ( IsHashRefWithData( $Param{Certificates} ) ) {
+        %Certificates = %{ $Param{Certificates} };
+    }
+    else {
+        %Certificates = $Self->CertificateList(
+            ResultType => "HASH"
+        );
+    }
+
+    my @Result;
+
+    CERTIFICATEID:
+    for my $CertificateID ( sort keys %Certificates ) {
+        my %Attributes;
+        my $Filename = $Certificates{$CertificateID};
+
+        my $Hit = $Self->_NonIndexedAttributesLookup(
+            Search     => $Search,
+            Attributes => \%Attributes,
+            Filename   => $Filename,
+        );
+
+        next CERTIFICATEID if !$Hit;
+        next CERTIFICATEID if !IsStringWithData( $Attributes{Private} );
+        next CERTIFICATEID if $Attributes{Private} ne 'Yes';
+
+        my $Expired;
+        if ( $Param{Valid} ) {
+            $Expired = $Self->KeyExpiredCheck(
+                EndDate => $Attributes{EndDate},
+            );
+        }
+
+        next CERTIFICATEID if $Expired;
+
+        $Attributes{Type}          = 'key';
+        $Attributes{Filename}      = $Filename;
+        $Attributes{CertificateID} = $CertificateID;
+
+        push @Result, \%Attributes;
+    }
+
+    return @Result;
+}
+
+=head2 PrivateSearch()
+
+Returns a list of private keys searching using indexable attributes.
+
+    my @Result = $CryptObject->PrivateSearch(
+        Search => $Search,
+        SearchType => 'e-mail/hash/filename/id/fingerprint', # Default e-mail.
+        Valid  => 1  # optional
+    );
+
+    or
+
+    my @Result = $CryptObject->PrivateSearch(); # For all private keys.
+
+=cut
+
 sub PrivateSearch {
     my ( $Self, %Param ) = @_;
 
-    my $Search = $Param{Search} || '';
+    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+
+    my $Search = $Param{Search};
+    return if !IsStringWithData($Search);
+
     $Param{Valid} //= 0;
-    my @Result;
-    my @Certificates = $Self->CertificateList();
 
-    FILE:
-    for my $File (@Certificates) {
-        my $Certificate = $Self->CertificateGet( Filename => $File );
-        my %Attributes  = $Self->CertificateAttributes(
-            Certificate => $Certificate,
-            Filename    => $File,
-        );
-
-        my $Hit = 0;
-        if ($Search) {
-            ATTRIBUTE:
-            for my $Attribute ( sort keys %Attributes ) {
-
-                my @Items = split /[,;\s]+/, $Attributes{$Attribute};
-
-                for my $Item (@Items) {
-                    if ( $Item =~ m{^\Q$Search\E$}ixms ) {
-                        $Hit = 1;
-                        last ATTRIBUTE;
-                    }
-                }
-            }
-        }
-        else {
-            $Hit = 1;
-        }
-        if ( $Hit && $Attributes{Private} && $Attributes{Private} eq 'Yes' ) {
-            $Attributes{Type}     = 'key';
-            $Attributes{Filename} = $File;
-
-            my $Expired = 0;
-            if ( $Param{Valid} ) {
-                $Expired = $Self->KeyExpiredCheck(
-                    EndDate => $Attributes{EndDate},
-                );
-            }
-
-            next FILE if $Expired;
-            push @Result, \%Attributes;
-        }
-    }
+    my @Result = $Self->_CertificateAttributesGet(
+        Search     => $Search,
+        SearchType => $Param{SearchType},
+        Valid      => $Param{Valid},
+        Private    => 1,
+    );
 
     return @Result;
 }
@@ -1484,7 +1712,11 @@ add private key
 sub PrivateAdd {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
+    my $DBObject       = $Kernel::OM->Get('Kernel::System::DB');
+    my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
+
+    my $UserID = $Param{UserID} // 1;
+
     for my $Needed (qw(Private Secret)) {
         if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -1512,7 +1744,7 @@ sub PrivateAdd {
     }
 
     # get certificate
-    my @Certificates = $Self->CertificateSearch( Search => $Attributes{Modulus} );
+    my @Certificates = $Self->CertificateFileSearch( Search => $Attributes{Modulus} );
     if ( !@Certificates ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -1555,10 +1787,22 @@ sub PrivateAdd {
                 Filename   => $Certificates[0]->{Filename},
             );
 
-            # get cache object
+            return if !$DBObject->Do(
+                SQL => "
+                    INSERT INTO smime_keys (key_hash, key_type, file_name, email_address, expiration_date, fingerprint, subject, create_time, create_by)
+                    VALUES
+                    (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                Bind => [
+                    \$CertificateAttributes{Hash}, \$Attributes{Type},
+                    \$Certificates[0]->{Filename}, \$CertificateAttributes{Email},
+                    \$CertificateAttributes{ShortEndDate}, \$CertificateAttributes{Fingerprint},
+                    \$CertificateAttributes{Subject},      \$DateTimeObject->ToString(),
+                    \$UserID,
+                ],
+            );
+
             my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
-            # delete cache
             $CacheObject->CleanUp(
                 Type => 'SMIME_Cert',
             );
@@ -1667,6 +1911,8 @@ remove private key
 sub PrivateRemove {
     my ( $Self, %Param ) = @_;
 
+    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+
     # check needed stuff
     if ( !$Param{Filename} && !( $Param{Hash} && $Param{Modulus} ) ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -1723,10 +1969,16 @@ sub PrivateRemove {
             Message    => 'Private key deleted!'
         );
 
-        # get cache object
+        return if !$DBObject->Do(
+            SQL  => "DELETE FROM smime_keys WHERE file_name = ? AND key_type = ?",
+            Bind => [
+                \$Param{Filename},
+                \'P',
+            ],
+        );
+
         my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
-        # delete cache
         $CacheObject->CleanUp(
             Type => 'SMIME_Cert',
         );
@@ -1747,32 +1999,29 @@ sub PrivateRemove {
 
 =head2 PrivateList()
 
-returns a list of private key hashes
+Returns a hash of private key hashes(ID => Filename).
 
-    my @PrivateList = $CryptObject->PrivateList();
+    my $PrivateList = $CryptObject->PrivateList();
 
 =cut
 
 sub PrivateList {
     my ( $Self, %Param ) = @_;
 
-    my @CertList;
-    my @Filters;
-    for my $Number ( 0 .. 99 ) {
-        push @Filters, "*.$Number";
-    }
+    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
-    my @List = $Kernel::OM->Get('Kernel::System::Main')->DirectoryRead(
-        Directory => "$Self->{PrivatePath}",
-        Filter    => \@Filters,
+    my %PrivateList;
+
+    return if !$DBObject->Prepare(
+        SQL  => "Select id, file_name FROM smime_keys WHERE key_type = ?",
+        Bind => [ \'P', ],
     );
 
-    for my $File (@List) {
-        $File =~ s{^.*/}{}xms;
-        push @CertList, $File;
+    while ( my @Row = $DBObject->FetchrowArray() ) {
+        $PrivateList{ $Row[0] } = $PrivateList{ $Row[1] };
     }
 
-    return @CertList;
+    return \%PrivateList;
 
 }
 
@@ -1870,7 +2119,7 @@ sub SignerCertRelationAdd {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for my $Needed (qw( CertFingerprint CAFingerprint UserID )) {
+    for my $Needed (qw(UserID CAID CertificateID)) {
         if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
@@ -1880,17 +2129,9 @@ sub SignerCertRelationAdd {
         }
     }
 
-    if ( $Param{CertFingerprint} eq $Param{CAFingerprint} ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => 'CertFingerprint must be different to the CAFingerprint param',
-        );
-        return;
-    }
-
-    # searh certificates by fingerprint
     my @CertResult = $Self->PrivateSearch(
-        Search => $Param{CertFingerprint},
+        Search     => $Param{CertificateID},
+        SearchType => 'id',
     );
 
     # results?
@@ -1902,9 +2143,10 @@ sub SignerCertRelationAdd {
         return 0;
     }
 
-    # searh certificates by fingerprint
+    # search certificates by ID
     my @CAResult = $Self->CertificateSearch(
-        Search => $Param{CAFingerprint},
+        Search     => $Param{CAID},
+        SearchType => 'id',
     );
 
     # results?
@@ -1914,6 +2156,14 @@ sub SignerCertRelationAdd {
             Priority => 'error',
         );
         return 0;
+    }
+
+    if ( $CertResult[0]->{Fingerprint} eq $CAResult[0]->{Fingerprint} ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => 'CertFingerprint must be different to the CAFingerprint param.',
+        );
+        return;
     }
 
     my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
@@ -2291,9 +2541,15 @@ sub CheckCertPath {
         };
     }
 
+    my $ReIndexCertificateSuccess = $Self->ReIndexCertificate( CanReHash => 0 );
+    my $ReIndexPrivateSuccess     = $Self->ReIndexPrivate( CanNormalize => 0 );
+
     return {
         Success => 1,
-        Details => $NormalizeResult->{Details} . $ReHashSuccess->{Details},
+        Details => $NormalizeResult->{Details}
+            . $ReHashSuccess->{Details}
+            . $ReIndexCertificateSuccess->{Details}
+            . $ReIndexPrivateSuccess->{Details},
     };
 }
 
@@ -2343,6 +2599,247 @@ sub _Init {
     }
 
     return $Self;
+}
+
+=head2 ReIndexCertificate()
+
+    Reindexes certificates from local file system to database.
+
+    my $Result = $CryptObject->ReIndexCertificate(
+        CanReHash => 1 # Required, Allow to rehash certificates.
+    );
+
+=cut
+
+sub ReIndexCertificate {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject      = $Kernel::OM->Get('Kernel::System::Log');
+    my $MainObject     = $Kernel::OM->Get('Kernel::System::Main');
+    my $DBObject       = $Kernel::OM->Get('Kernel::System::DB');
+    my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
+
+    if ( $Param{CanReHash} ) {
+        my $ReHashSuccess = $Self->_ReHashCertificates();
+        if ( !$ReHashSuccess->{Success} ) {
+            return {
+                Success => 0,
+                Details => $ReHashSuccess->{Details}
+                    . "\nError while re-hashing certificate files.\n\n",
+            };
+        }
+    }
+
+    my @FileFilters;
+    for my $Number ( 0 .. 99 ) {
+        push @FileFilters, "*.$Number";
+    }
+
+    my @CertFilePaths = $MainObject->DirectoryRead(
+        Directory => $Self->{CertPath},
+        Filter    => \@FileFilters,
+    );
+
+    my @CertFilenames;
+    for my $FilePath (@CertFilePaths) {
+        $FilePath =~ s{\A.*/}{};
+        push @CertFilenames, $FilePath;
+    }
+
+    my @ReIndexedFiles;
+
+    FILENAME:
+    for my $Filename (@CertFilenames) {
+        my $Result = $DBObject->SelectAll(
+            SQL  => "SELECT file_name FROM smime_keys WHERE file_name = ? AND key_type = ?",
+            Bind => [
+                \$Filename,
+                \'cert',
+            ],
+            Limit => 1,
+        );
+
+        next FILENAME if IsArrayRefWithData($Result);
+
+        my $CertificateRef = $MainObject->FileRead(
+            Filename  => $Filename,
+            Directory => $Self->{CertPath},
+        );
+        next FILENAME if !$CertificateRef;
+
+        my %Attributes = $Self->CertificateAttributes(
+            Certificate => $$CertificateRef,
+            Filename    => $Filename
+        );
+        next FILENAME if !%Attributes;
+
+        return if !$DBObject->Do(
+            SQL => "
+                INSERT INTO smime_keys (key_hash, key_type, file_name, email_address, expiration_date, fingerprint, subject, create_time, create_by)
+                VALUES
+                (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            Bind => [
+                \$Attributes{Hash}, \$Attributes{Type},
+                \$Filename, \$Attributes{Email},
+                \$Attributes{ShortEndDate}, \$Attributes{Fingerprint},
+                \$Attributes{Subject},      \$DateTimeObject->ToString(),
+                \1,
+            ],
+        );
+
+        push @ReIndexedFiles, $Filename;
+    }
+
+    if (@ReIndexedFiles) {
+        return {
+            Details => "Successfully re-indexed public files: " . join( ', ', @ReIndexedFiles ) . ".\n",
+            Success => 1,
+        };
+    }
+
+    return {
+        Details => "There is no need to re-index any public file.\n",
+        Success => 1,
+    };
+}
+
+=head2 ReIndexPrivate()
+
+    Reindexes private files from local file system to database.
+
+    my $Result = $CryptObject->ReIndexPrivate(
+        CanNormalize => 1 # Required, Allow to normalize private keys and secrets.
+    );
+
+=cut
+
+sub ReIndexPrivate {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject      = $Kernel::OM->Get('Kernel::System::Log');
+    my $MainObject     = $Kernel::OM->Get('Kernel::System::Main');
+    my $DBObject       = $Kernel::OM->Get('Kernel::System::DB');
+    my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
+
+    if ( $Param{CanNormalize} ) {
+        my $NormalizeResult = $Self->_NormalizePrivateSecretFiles();
+
+        if ( !$NormalizeResult->{Success} ) {
+            return {
+                Success => 0,
+                Details => $NormalizeResult->{Details}
+                    . "\n<red>Error while normalizing private secret files.</red>\n\n",
+            };
+        }
+    }
+
+    my @FileFilters;
+    for my $Number ( 0 .. 99 ) {
+        push @FileFilters, "*.$Number";
+    }
+
+    # get all private keys from the private directory
+    my @PrivateFilePaths = $MainObject->DirectoryRead(
+        Directory => "$Self->{PrivatePath}",
+        Filter    => \@FileFilters,
+    );
+
+    my @PrivateFilenames;
+    for my $FilePath (@PrivateFilePaths) {
+        $FilePath =~ s{\A.*/}{};
+        push @PrivateFilenames, $FilePath;
+    }
+
+    my @ReIndexedFiles;
+
+    FILENAME:
+    for my $Filename (@PrivateFilenames) {
+        my $PrivateKeyRef = $MainObject->FileRead(
+            Filename  => $Filename,
+            Directory => $Self->{PrivatePath},
+        );
+
+        my $PrivateSecretKeyRef = $MainObject->FileRead(
+            Filename  => $Filename . '.P',
+            Directory => $Self->{PrivatePath},
+        );
+
+        my %PrivateAttributes = $Self->PrivateAttributes(
+            Private => $$PrivateKeyRef,
+            Secret  => $$PrivateSecretKeyRef,
+        );
+
+        # get private attributes
+        if ( !$PrivateAttributes{Modulus} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => 'No Private Key!'
+            );
+            next FILENAME;
+        }
+
+        my @Certificates = $Self->CertificateFileSearch( Search => $PrivateAttributes{Modulus} );
+        if ( !@Certificates ) {
+            $LogObject->Log(
+                Priority => 'error',
+                Message  => "No certificate of private key-$PrivateAttributes{Modulus})!",
+            );
+            next FILENAME;
+        }
+        elsif ( @Certificates > 1 ) {
+            $LogObject->Log(
+                Priority => 'error',
+                Message  => "Multiple certificates with the same modulus, can't fetch private key!",
+            );
+            next FILENAME;
+        }
+
+        my $Result = $DBObject->SelectAll(
+            SQL  => "SELECT file_name FROM smime_keys WHERE file_name = ? AND key_type = ?",
+            Bind => [
+                \$Filename,
+                \'P',
+            ],
+            Limit => 1,
+        );
+
+        next FILENAME if IsArrayRefWithData($Result);
+
+        my %CertificateAttributes = $Self->CertificateAttributes(
+            Certificate => $Self->CertificateGet( Filename => $Certificates[0]->{Filename} ),
+            Filename    => $Certificates[0]->{Filename},
+        );
+        next FILENAME if !%CertificateAttributes;
+
+        return if !$DBObject->Do(
+            SQL => "
+                INSERT INTO smime_keys (key_hash, key_type, file_name, email_address, expiration_date, fingerprint, subject, create_time, create_by)
+                VALUES
+                (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            Bind => [
+                \$CertificateAttributes{Hash}, \$PrivateAttributes{Type},
+                \$Filename, \$CertificateAttributes{Email},
+                \$CertificateAttributes{ShortEndDate}, \$CertificateAttributes{Fingerprint},
+                \$CertificateAttributes{Subject},      \$DateTimeObject->ToString(),
+                \1,
+            ],
+        );
+
+        push @ReIndexedFiles, $Filename;
+    }
+
+    if (@ReIndexedFiles) {
+        return {
+            Success => 1,
+            Details => "Successfully re-indexed private files: " . join( ', ', @ReIndexedFiles ) . ".\n",
+        };
+    }
+
+    return {
+        Success => 1,
+        Details => "There is no need to re-index any private file.\n",
+    };
+
 }
 
 sub _FetchAttributesFromCert {
@@ -2534,44 +3031,57 @@ sub _PrivateFilename {
         }
     }
 
-    # get main object
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+    my $DBObject   = $Kernel::OM->Get('Kernel::System::DB');
 
-    # get all certificates with hash name
-    my @CertList = $MainObject->DirectoryRead(
-        Directory => $Self->{PrivatePath},
-        Filter    => $Param{Hash} . '\.*',
+    my @CertList;
+    return if !$DBObject->Prepare(
+        SQL  => "SELECT file_name FROM smime_keys WHERE key_type = ? AND key_hash = ?",
+        Bind => [
+            \'P',
+            \$Param{Hash},
+        ],
     );
+
+    while ( my @Row = $DBObject->FetchrowArray() ) {
+        push @CertList, $Row[0];
+    }
 
     # open every file, get attributes and compare modulus
     CERTFILE:
     for my $CertFile (@CertList) {
         my %Attributes;
-        next CERTFILE if $CertFile =~ m{\.P}xms;
 
         # remove the path and get only the filename (for cache)
         my $CertFilename = $CertFile;
-        $CertFilename =~ s{^.*/}{}xms;
+        $CertFilename =~ s{\A.*/}{};
 
         # open secret
         my $Private = $MainObject->FileRead(
-            Location => $CertFile,
+            Directory => $Self->{PrivatePath},
+            Filename  => $CertFile,
         );
         my $Secret = $MainObject->FileRead(
-            Location => $CertFile . '.P',
+            Directory => $Self->{PrivatePath},
+            Filename  => $CertFile . '.P',
         );
 
         %Attributes = $Self->PrivateAttributes(
             Private  => $$Private,
             Secret   => $$Secret,
-            Filename => $CertFilename,
+            Filename => $CertFile,
         );
 
         # exit and return on first modulus found
-        if ( $Attributes{Modulus} && $Attributes{Modulus} eq $Param{Modulus} ) {
+        if (
+            $Attributes{Modulus}
+            && $Attributes{Modulus} eq $Param{Modulus}
+            )
+        {
             return $CertFilename;
         }
     }
+
     return;
 }
 
@@ -2760,14 +3270,21 @@ sub _NormalizePrivateSecretFiles {
 sub _ReHashCertificates {
     my ( $Self, %Param ) = @_;
 
-    # get the list of certificates
-    my @CertList = $Self->CertificateList();
+    my @FileFilters;
+    for my $Number ( 0 .. 99 ) {
+        push @FileFilters, "*.$Number";
+    }
 
-    my $Details = "\n<yellow>Re-Hashing Certificates...</yellow>\n"
+    my @CertFilePaths = $Kernel::OM->Get('Kernel::System::Main')->DirectoryRead(
+        Directory => "$Self->{CertPath}",
+        Filter    => \@FileFilters,
+    );
+
+    my $Details = "\nRe-Hashing Certificates...\n"
         . "  - Certificate path: $Self->{CertPath}\n"
         . "  - Private path:     $Self->{PrivatePath}\n\n";
 
-    if ( scalar @CertList == 0 ) {
+    if ( !@CertFilePaths ) {
         $Details .= "  No certificate files found, nothing to do... <green>OK</green>\n\n";
 
         return {
@@ -2780,20 +3297,21 @@ sub _ReHashCertificates {
 
     # exclude the certificate files with correct file name
     FILENAME:
-    for my $File (@CertList) {
-        $File =~ s{^.*/}{}xms;
+    for my $Filename (@CertFilePaths) {
+        $Filename =~ s{\A.*/}{};
 
         # get certificate attributes with current OpenSSL version
         my $Certificate = $Self->CertificateGet(
-            Filename => $File,
+            Filename => $Filename,
         );
         my %CertificateAttributes = $Self->CertificateAttributes(
             Certificate => $Certificate,
-            Filename    => $File,
+            Filename    => $Filename,
         );
+        next FILENAME if !%CertificateAttributes;
 
         # split filename into Hash.Index (12345678.0 -> 12345678 / 0)
-        $File =~ m{ (.+) \. (\d+) }smx;
+        $Filename =~ m{ (.+) \. (\d+) }x;
         my $Hash  = $1;
         my $Index = $2;
 
@@ -2812,7 +3330,7 @@ sub _ReHashCertificates {
     }
 
     # stop if the are no wrong files to re-hash
-    if ( scalar @WrongCertificatesList == 0 ) {
+    if ( !@WrongCertificatesList ) {
         $Details .= "  Stored certificates found, but they are all correct, nothing to do... <green>OK</green>\n";
 
         return {
@@ -2944,6 +3462,20 @@ sub _ReHashCertificates {
             };
         }
 
+        my ($NewCertFileName) = $NewCertificateFile   =~ /([^\/]+$)/s;
+        my ($OldCertFileName) = $WrongCertificateFile =~ /([^\/]+$)/s;
+        my $DateTimeObject    = $Kernel::OM->Create('Kernel::System::DateTime');
+
+        return if !$DBObject->Do(
+            SQL  => "UPDATE smime_keys SET file_name = ?, change_by = ?, change_time = ? WHERE file_name = ?",
+            Bind => [
+                \$NewCertFileName,
+                \1,
+                \$DateTimeObject->ToString(),
+                \$OldCertFileName,
+            ],
+        );
+
         $Details .= " <green>OK</green>\n";
 
         # update certificate relations
@@ -2952,8 +3484,11 @@ sub _ReHashCertificates {
             SQL =>
                 'SELECT id, cert_hash, cert_fingerprint, ca_hash, ca_fingerprint'
                 . ' FROM smime_signer_cert_relations'
-                . ' WHERE cert_hash = ? AND cert_fingerprint =?',
-            Bind => [ \$WrongCertificate->{Hash}, \$WrongCertificate->{Fingerprint} ],
+                . ' WHERE cert_hash = ? AND cert_fingerprint = ?',
+            Bind => [
+                \$WrongCertificate->{Hash},
+                \$WrongCertificate->{Fingerprint},
+            ],
         );
 
         my @WrongCertRelations;
@@ -2987,7 +3522,8 @@ sub _ReHashCertificates {
                         . ' WHERE id = ? AND cert_fingerprint = ?',
                     Bind => [
                         \$WrongCertificate->{NewHash},
-                        \$WrongRelation->{ID}, \$WrongCertificate->{Fingerprint}
+                        \$WrongRelation->{ID},
+                        \$WrongCertificate->{Fingerprint},
                     ],
                 );
 
@@ -3011,7 +3547,10 @@ sub _ReHashCertificates {
                 'SELECT id, cert_hash, cert_fingerprint, ca_hash, ca_fingerprint'
                 . ' FROM smime_signer_cert_relations'
                 . ' WHERE ca_hash = ? AND ca_fingerprint =?',
-            Bind => [ \$WrongCertificate->{Hash}, \$WrongCertificate->{Fingerprint} ],
+            Bind => [
+                \$WrongCertificate->{Hash},
+                \$WrongCertificate->{Fingerprint},
+            ],
         );
 
         my @WrongCARelations;
@@ -3044,7 +3583,8 @@ sub _ReHashCertificates {
                         . ' WHERE id = ? AND ca_fingerprint = ?',
                     Bind => [
                         \$WrongCertificate->{NewHash},
-                        \$WrongRelation->{ID}, \$WrongCertificate->{Fingerprint}
+                        \$WrongRelation->{ID},
+                        \$WrongCertificate->{Fingerprint},
                     ],
                 );
 
@@ -3090,7 +3630,7 @@ sub _ReHashCertificates {
                 $Details .= "  Rename private secret $WrongCertificate->{Hash}.$WrongCertificate->{Index}.P to"
                     . " $WrongCertificate->{NewHash}.$NewIndex.P...";
 
-                if ( !rename $WrongPrivateKeyFile . '.P', $NewPrivateKeyFile . '.P' ) {
+                if ( !rename( $WrongPrivateKeyFile . '.P', $NewPrivateKeyFile . '.P' ) ) {
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => 'error',
                         Message  => "Could not rename SMIME private secret file"
@@ -3121,6 +3661,168 @@ sub _ReHashCertificates {
         Success => 1,
         Details => $Details,
     };
+}
+
+sub _CheckIfCertificateHit {
+    my ( $Self, %Param ) = @_;
+
+    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+
+    my $Search   = $Param{Search};
+    my $Filename = $Param{Filename};
+    my %Attributes;
+
+    my $Certificate = $Self->CertificateGet( Filename => $Filename );
+    %Attributes = $Self->CertificateAttributes(
+        Certificate => $Certificate,
+        Filename    => $Filename,
+    );
+
+    my $Hit;
+    ATTRIBUTE:
+    for my $Attribute ( sort keys %Attributes ) {
+        my @Items = split /[,;\s]+/, $Attributes{$Attribute};
+        $Hit = grep { defined $_ && $_ =~ m{^\Q$Search\E$}i } @Items;
+        last ATTRIBUTE if $Hit;
+    }
+
+    return {
+        Attributes => \%Attributes,
+        Hit        => $Hit,
+    };
+}
+
+sub _CertificateAttributesGet {
+    my ( $Self, %Param ) = @_;
+
+    my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+    my $DBObject   = $Kernel::OM->Get('Kernel::System::DB');
+    my $LogObject  = $Kernel::OM->Get('Kernel::System::Log');
+
+    my $Search = $Param{Search};
+
+    my %Mapping = (
+        'e-mail'      => 'email_address',
+        'hash'        => 'key_hash',
+        'id'          => 'id',
+        'filename'    => 'file_name',
+        'fingerprint' => 'fingerprint'
+    );
+
+    my $Valid      = $Param{Valid};
+    my $Private    = $Param{Private} ? 'P' : 'cert';
+    my $SearchType = $Param{SearchType} || 'e-mail';
+
+    $SearchType = $Mapping{$SearchType};
+
+    my @Bind;
+    my $SQL = "SELECT key_hash, expiration_date, file_name, id from smime_keys WHERE key_type = ? ";
+    push @Bind, \$Private;
+
+    if ( IsStringWithData($Search) ) {
+
+        # Prevent use of unhandled attribute.
+        if ( !grep { $_ eq $SearchType } values %Mapping ) {
+            $LogObject->Log(
+                Priority => 'error',
+                Message  => 'Given SearchType is not allowed.',
+            );
+            return;
+        }
+        my $SearchQuery = $Search;
+
+        # Handle multiple e-mail certificates.
+        if ( $SearchType eq "email_address" ) {
+            $SearchQuery = '%' . $Search . '%';
+            $SQL .= "AND $SearchType LIKE ?";
+        }
+        else {
+            $SQL .= "AND $SearchType = ?";
+        }
+        push @Bind, \$SearchQuery;
+    }
+
+    my $Certificates = $DBObject->SelectAll(
+        SQL  => $SQL,
+        Bind => \@Bind,
+    );
+
+    my @Certificates;
+    CERTIFICATE:
+    for my $Certificate ( @{$Certificates} ) {
+        my $CertificateRef = $MainObject->FileRead(
+            Directory => $Self->{CertPath},
+            Filename  => $Certificate->[2],
+        );
+        next CERTIFICATE if !$CertificateRef;
+
+        my %Attributes = $Self->CertificateAttributes(
+            Certificate => $$CertificateRef,
+            Filename    => $Certificate->[2],
+        );
+        next CERTIFICATE if !%Attributes;
+
+        if (
+            IsStringWithData($Search)
+            && $SearchType eq 'email_address'
+            )
+        {
+            my @Emails = split( ', ', $Attributes{Email} );
+
+            # Multiple mail address case insensitive;
+            next CERTIFICATE if !grep { $_ =~ /\A\Q$Search\E/i } @Emails;
+        }
+
+        $Attributes{Filename}      = $Certificate->[2] if !$Attributes{Filename};
+        $Attributes{CertificateID} = $Certificate->[3] if !$Attributes{CertificateID};
+
+        if (
+            $Param{Private}
+            && $Attributes{Private}
+            && $Attributes{Private} eq 'Yes'
+            )
+        {
+            $Attributes{Type} = 'key';
+        }
+
+        next CERTIFICATE if $Valid && $Self->KeyExpiredCheck( EndDate => $Attributes{EndDate} );
+
+        push @Certificates, \%Attributes;
+    }
+
+    return @Certificates;
+}
+
+sub _NonIndexedAttributesLookup {
+    my ( $Self, %Param ) = @_;
+
+    my $Search        = $Param{Search};
+    my $Filename      = $Param{Filename};
+    my $AttributesRef = $Param{Attributes};
+
+    my $Hit = 1;
+    my %LocalAttributes;
+    if ($Search) {
+        my $Result = $Self->_CheckIfCertificateHit(
+            Filename => $Filename,
+            Search   => $Search,
+            Private  => 1,
+        ) // {};
+
+        $Hit             = $Result->{Hit};
+        %LocalAttributes = %{ $Result->{Attributes} // {} };
+    }
+
+    if ( !$LocalAttributes{Hash} ) {
+        my $Certificate = $Self->CertificateGet( Filename => $Filename );
+        %LocalAttributes = $Self->CertificateAttributes(
+            Certificate => $Certificate,
+            Filename    => $Filename,
+        );
+    }
+    %$AttributesRef = %LocalAttributes;
+
+    return $Hit;
 }
 
 1;

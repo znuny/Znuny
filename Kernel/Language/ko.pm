@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.917127971344839;
+    $Self->{Completeness}        = 0.916965157929013;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -4105,7 +4105,6 @@ sub Data {
         'Relation deleted!' => '관계가 삭제되었습니다!',
         'Impossible to delete relation!' => '관계를 삭제할 수 없습니다!',
         'Certificate %s could not be read!' => '인증서 %s을 읽을 수 없습니다.',
-        'Needed Fingerprint' => '필요한 지문',
         'Handle Private Certificate Relations' => '개인 인증서 관계 처리',
 
         # Perl Module: Kernel/Modules/AdminSalutation.pm
@@ -7912,6 +7911,8 @@ sub Data {
         'Creates the calendar-based tickets regularly.' => '',
         'Cleans up the calendar-based tickets regularly.' => '',
         'Maximum number of quoted lines to be added to forwarded messages.' =>
+            '',
+        'Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig.' =>
             '',
         'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
             '',

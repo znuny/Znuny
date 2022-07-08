@@ -25149,6 +25149,10 @@ msgid "Auto fill"
 msgstr "automatisch ausfüllen"
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig."
+msgstr "Re-indiziert S/MIME-Zertifikat-Verzeichnisse. Hinweis: S/MIME muss in der SysConfig aktiviert sein."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Maximum number of quoted lines to be added to forwarded messages."
 msgstr "Maximale Anzahl zitierter Zeilen in weitergeleiteten Nachrichten."
 

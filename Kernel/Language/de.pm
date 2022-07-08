@@ -4105,7 +4105,6 @@ sub Data {
         'Relation deleted!' => 'Beziehung gelöscht!',
         'Impossible to delete relation!' => 'Beziehung konnte nicht gelöscht werden!',
         'Certificate %s could not be read!' => 'Zertifikat %s konnte nicht gelesen werden!',
-        'Needed Fingerprint' => 'Benötige Fingerprint',
         'Handle Private Certificate Relations' => 'Zuordnungen von privaten Zertifikaten verwalten',
 
         # Perl Module: Kernel/Modules/AdminSalutation.pm
@@ -7913,6 +7912,8 @@ sub Data {
         'Cleans up the calendar-based tickets regularly.' => 'Säubert die kalenderbasierten Tickets regelmäßig.',
         'Maximum number of quoted lines to be added to forwarded messages.' =>
             'Maximale Anzahl zitierter Zeilen in weitergeleiteten Nachrichten.',
+        'Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig.' =>
+            'Re-indiziert S/MIME-Zertifikat-Verzeichnisse. Hinweis: S/MIME muss in der SysConfig aktiviert sein.',
         'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
             'Maximale Länge der angezeigten Dateinamen von Anhängen in der Artikelvorschau der Ticket-Detailansicht.',
 

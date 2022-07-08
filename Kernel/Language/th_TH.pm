@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.557310322370563;
+    $Self->{Completeness}        = 0.557147508954738;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -4108,7 +4108,6 @@ sub Data {
         'Relation deleted!' => 'ความสัมพันธ์ถูกลบออก!',
         'Impossible to delete relation!' => 'เป็นไปไม่ได้ที่จะลบความสัมพันธ์!',
         'Certificate %s could not be read!' => 'ไม่สามารถอ่านหนังสือรับรอง %s !',
-        'Needed Fingerprint' => 'ลายนิ้วมือที่ต้องการ',
         'Handle Private Certificate Relations' => '',
 
         # Perl Module: Kernel/Modules/AdminSalutation.pm
@@ -7918,6 +7917,8 @@ sub Data {
         'Creates the calendar-based tickets regularly.' => '',
         'Cleans up the calendar-based tickets regularly.' => '',
         'Maximum number of quoted lines to be added to forwarded messages.' =>
+            '',
+        'Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig.' =>
             '',
         'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
             '',

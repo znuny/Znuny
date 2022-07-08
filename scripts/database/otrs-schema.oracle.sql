@@ -5783,6 +5783,85 @@ END;
 --
 ;
 -- ----------------------------------------------------------
+--  create table smime_keys
+-- ----------------------------------------------------------
+CREATE TABLE smime_keys (
+    id NUMBER (12, 0) NOT NULL,
+    key_hash VARCHAR2 (8) NOT NULL,
+    key_type VARCHAR2 (255) NOT NULL,
+    file_name VARCHAR2 (255) NOT NULL,
+    email_address VARCHAR2 (255) NULL,
+    expiration_date DATE NULL,
+    fingerprint VARCHAR2 (59) NOT NULL,
+    subject VARCHAR (255) NOT NULL,
+    create_time DATE NULL,
+    change_time DATE NULL,
+    create_by NUMBER (12, 0) NULL,
+    change_by NUMBER (12, 0) NULL
+);
+ALTER TABLE smime_keys ADD CONSTRAINT PK_smime_keys PRIMARY KEY (id);
+BEGIN
+    EXECUTE IMMEDIATE 'DROP SEQUENCE SE_smime_keys';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE SEQUENCE SE_smime_keys
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+CACHE 20
+ORDER
+;
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TRIGGER SE_smime_keys_t';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE OR REPLACE TRIGGER SE_smime_keys_t
+BEFORE INSERT ON smime_keys
+FOR EACH ROW
+BEGIN
+    IF :new.id IS NULL THEN
+        SELECT SE_smime_keys.nextval
+        INTO :new.id
+        FROM DUAL;
+    END IF;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX smime_keys_file_name ON smime_keys (file_name)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX smime_keys_key_hash ON smime_keys (key_hash)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX smime_keys_key_type ON smime_keys (key_type)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+-- ----------------------------------------------------------
 --  create table oauth2_token_config
 -- ----------------------------------------------------------
 CREATE TABLE oauth2_token_config (

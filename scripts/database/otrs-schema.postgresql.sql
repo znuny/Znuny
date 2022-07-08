@@ -3135,6 +3135,57 @@ END IF;
 END$$;
 ;
 -- ----------------------------------------------------------
+--  create table smime_keys
+-- ----------------------------------------------------------
+CREATE TABLE smime_keys (
+    id serial NOT NULL,
+    key_hash VARCHAR (8) NOT NULL,
+    key_type VARCHAR (255) NOT NULL,
+    file_name VARCHAR (255) NOT NULL,
+    email_address VARCHAR (255) NULL,
+    expiration_date timestamp(0) NULL,
+    fingerprint VARCHAR (59) NOT NULL,
+    subject VARCHAR (255) NOT NULL,
+    create_time timestamp(0) NULL,
+    change_time timestamp(0) NULL,
+    create_by INTEGER NULL,
+    change_by INTEGER NULL,
+    PRIMARY KEY(id)
+);
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_indexes
+    WHERE LOWER(indexname) = LOWER('smime_keys_file_name')
+    ) THEN
+    CREATE INDEX smime_keys_file_name ON smime_keys (file_name);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_indexes
+    WHERE LOWER(indexname) = LOWER('smime_keys_key_hash')
+    ) THEN
+    CREATE INDEX smime_keys_key_hash ON smime_keys (key_hash);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_indexes
+    WHERE LOWER(indexname) = LOWER('smime_keys_key_type')
+    ) THEN
+    CREATE INDEX smime_keys_key_type ON smime_keys (key_type);
+END IF;
+END$$;
+;
+-- ----------------------------------------------------------
 --  create table oauth2_token_config
 -- ----------------------------------------------------------
 CREATE TABLE oauth2_token_config (

@@ -135,6 +135,12 @@ if ( !$SMIMEObject ) {
     return 1;
 }
 
+my @CertificatesOld      = $SMIMEObject->CertificateList();
+my $CertificatesCountOld = @CertificatesOld;
+
+my $PrivateOld      = $SMIMEObject->PrivateList();
+my $PrivateCountOld = keys %{$PrivateOld};
+
 my %Search = (
     1 => 'unittest@example.org',
     2 => 'unittest2@example.org',
@@ -389,11 +395,11 @@ for my $Count ( 1 .. 3 ) {
         "#$Count PrivateAdd()",
     );
 
-    my @Keys = $SMIMEObject->PrivateSearch( Search => $Search{$Count} );
+    my @Keys = $SMIMEObject->PrivateFileSearch( Search => $Search{$Count} );
 
     $Self->True(
         $Keys[0] || '',
-        "#$Count PrivateSearch()",
+        "#$Count PrivateFileSearch()",
     );
 
     my $CertificateString = $SMIMEObject->CertificateGet(
@@ -733,12 +739,24 @@ $Certificates{ZnunyRootCA} = {
 
     $SMIMEUser1Certificate{Filename} = $Result{Filename};
 
+    my @SMIMEUser1Cert = $SMIMEObject->CertificateSearch(
+        Search     => $Result{Filename},
+        SearchType => 'filename',
+    );
+    my %SMIMEUser1CertAttribute = %{ $SMIMEUser1Cert[0] };
+
     %Result = $SMIMEObject->PrivateAdd(
         Private => $SMIMEUser1Certificate{PrivateString},
         Secret  => $SMIMEUser1Certificate{PrivateSecret},
     );
 
     $SMIMEUser1Certificate{PrivateFilename} = $Result{Filename};
+
+    my @SMIMEUser1Priv = $SMIMEObject->PrivateSearch(
+        Search     => $Result{Filename},
+        SearchType => 'filename',
+    );
+    my %SMIMEUser1PrivAttribute = %{ $SMIMEUser1Priv[0] };
 
     # sign a message with smimeuser1
     my $Message =
@@ -812,9 +830,9 @@ $Certificates{ZnunyRootCA} = {
 
     # add relation
     my $Success = $SMIMEObject->SignerCertRelationAdd(
-        CertFingerprint => 'XX:XX:XX:XX:XX:XX:XX:XX:XX:XX',
-        CAFingerprint   => 'XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:',
-        UserID          => 1,
+        CAID          => 1,    # Interal and External certificate has the same ID.
+        CertificateID => 1,
+        UserID        => 1,
     );
     $Self->False(
         $Success,
@@ -839,22 +857,37 @@ $Certificates{ZnunyRootCA} = {
         'SignerCertRelationGet(), fail, wrong ID',
     );
 
+    my @TestRelationCertificatesList = $SMIMEObject->CertificateSearch(
+        SearchType => 'fingerprint',
+        Search     => $Certificates{ZnunySub2CA}->{Fingerprint},
+    );
+
+    my %TestRelationCertificate = %{ $TestRelationCertificatesList[0] };
+
     # true cert
     # add relation
     $Success = $SMIMEObject->SignerCertRelationAdd(
-        CertFingerprint => $SMIMEUser1Certificate{Fingerprint},
-        CAFingerprint   => $Certificates{ZnunySub2CA}->{Fingerprint},
-        UserID          => 1,
+        CertificateID => $SMIMEUser1PrivAttribute{CertificateID},
+        CAID          => $TestRelationCertificate{CertificateID},
+        UserID        => 1,
     );
+
     $Self->True(
         $Success,
         'SignerCertRelationAdd(), add relation for certificate',
     );
 
+    @TestRelationCertificatesList = $SMIMEObject->CertificateSearch(
+        SearchType => 'fingerprint',
+        Search     => $Certificates{ZnunySub1CA}->{Fingerprint},
+    );
+
+    %TestRelationCertificate = %{ $TestRelationCertificatesList[0] };
+
     $Success = $SMIMEObject->SignerCertRelationAdd(
-        CertFingerprint => $SMIMEUser1Certificate{Fingerprint},
-        CAFingerprint   => $Certificates{ZnunySub1CA}->{Fingerprint},
-        UserID          => 1,
+        CertificateID => $SMIMEUser1PrivAttribute{CertificateID},
+        CAID          => $TestRelationCertificate{CertificateID},
+        UserID        => 1,
     );
     $Self->True(
         $Success,
@@ -1337,7 +1370,8 @@ HZ4=
 ',
     };
 
-    my $OriginalPrivateListCount = $SMIMEObject->PrivateList();
+    my $OriginalPrivateList      = $SMIMEObject->PrivateList();
+    my $OriginalPrivateListCount = keys %{$OriginalPrivateList};
 
     # test privates
     TEST:
@@ -1388,10 +1422,10 @@ HZ4=
                 "Searched parameter otrs-smime\@test.com returned correct number of keys",
             );
 
-            my @PrivateList = $SMIMEObject->PrivateList();
-            $ResultNumber = scalar @PrivateList;
+            my $PrivateList = $SMIMEObject->PrivateList();
+            $ResultNumber = keys %{$PrivateList};
             $Self->Is(
-                $ResultNumber,
+                $ResultNumber - $PrivateCountOld,
                 5,
                 "Private list must be return also $ResultNumber",
             );
@@ -1409,8 +1443,8 @@ HZ4=
 
         # is linked to the correct certificate? - ADD TEST
 
-        @Result       = $SMIMEObject->PrivateList();
-        $ResultNumber = scalar @Result;
+        my $Result = $SMIMEObject->PrivateList();
+        $ResultNumber = keys %{$Result};
         $Self->Is(
             $ResultNumber,
             $Counter + $OriginalPrivateListCount,
@@ -1454,11 +1488,12 @@ HZ4=
         );
 
         my @Result = $SMIMEObject->CertificateSearch(
-            Search => $CertInfo{ 'SmimeTest_' . $Number }->{Fingerprint}
+            SearchType => 'fingerprint',
+            Search     => $CertInfo{ 'SmimeTest_' . $Number }->{Fingerprint}
         );
         $Self->False(
             ( scalar @Result ),
-            "# CertificateSearch(), certificate not found, successfully deleted",
+            "# CertificateFileSearch(), certificate not found, successfully deleted",
         );
     }
 
@@ -2897,11 +2932,11 @@ for my $Count ( 1 .. 3 ) {
         "#$Count Certificated Attributes Cached before and after private must be different",
     );
 
-    my @Keys = $SMIMEObject->PrivateSearch( Search => $Search{$Count} );
+    my @Keys = $SMIMEObject->PrivateFileSearch( Search => $Search{$Count} );
 
     $Self->True(
         $Keys[0] || '',
-        "#$Count PrivateSearch()",
+        "#$Count PrivateFileSearch()",
     );
 }
 

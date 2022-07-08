@@ -2058,11 +2058,33 @@
             </Hash>
         </Value>
     </Setting>
+
+    <!-- Limitation of number of quoted lines in AgenTicketForward -->
     <Setting Name="Ticket::Frontend::ForwardQuoteMaxLines" Required="0" Valid="0">
         <Description Translatable="1">Maximum number of quoted lines to be added to forwarded messages.</Description>
         <Navigation>Frontend::Agent::View::TicketForward</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="^[1-9][0-9]*$">99</Item>
+        </Value>
+    </Setting>
+
+    <!-- S/MIME key storage -->
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###ReindexSMIMECertificates" Required="0" Valid="1">
+        <Description Translatable="1">Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">ReindexSMIMECertificates</Item>
+                <Item Key="Schedule">02 02 * * *</Item> <!-- default each day at 02:02 AM -->
+                <Item Key="Module">Kernel::System::Console::Command::Maint::SMIME::ReindexKeys</Item>
+                <Item Key="Function">Execute</Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                        <Item>all</Item>
+                    </Array>
+                </Item>
+            </Hash>
         </Value>
     </Setting>
 
