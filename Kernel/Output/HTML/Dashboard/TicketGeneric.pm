@@ -592,6 +592,7 @@ sub Run {
     my @Columns             = @{ $SearchParams{Columns} };
     my %TicketSearch        = %{ $SearchParams{TicketSearch} };
     my %TicketSearchSummary = %{ $SearchParams{TicketSearchSummary} };
+    my %Filter              = %{ $SearchParams{Filter} };
 
     # Add the additional filter to the ticket search param.
     if ( $Self->{AdditionalFilter} ) {
@@ -924,6 +925,10 @@ sub Run {
         $Summary->{ $Self->{AdditionalFilter} . '::Selected' } = 'Selected';
     }
 
+    for my $Filter ( sort keys %Filter ) {
+        $Filter{$Filter}->{Summary} = $Summary->{$Filter} || 0;
+    }
+
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     # get filter ticket counts
@@ -934,6 +939,7 @@ sub Run {
             %{ $Self->{Config} },
             Name => $Self->{Name},
             %{$Summary},
+            Filter => $Filter{ $Self->{Filter} },
         },
     );
 
@@ -1084,14 +1090,17 @@ sub Run {
         IDPrefix    => 'Dashboard' . $Self->{Name},
         AJAX        => $Param{AJAX},
     );
-    $LayoutObject->Block(
-        Name => 'ContentLargeTicketGenericFilterNavBar',
-        Data => {
-            %{ $Self->{Config} },
-            Name => $Self->{Name},
-            %PageNav,
-        },
-    );
+
+    if ($Total) {
+        $LayoutObject->Block(
+            Name => 'ContentLargeTicketGenericFilterNavBar',
+            Data => {
+                %{ $Self->{Config} },
+                Name => $Self->{Name},
+                %PageNav,
+            },
+        );
+    }
 
     # show table header
     $LayoutObject->Block(
@@ -2593,6 +2602,34 @@ sub _SearchParamsGet {
         },
     );
 
+    my %Filter = (
+        Locked => {
+            Label => "My locked tickets",
+        },
+        Watcher => {
+            Label => "My watched tickets",
+        },
+        Responsible => {
+            Label => "My responsibilities",
+        },
+        MyQueues => {
+            Label => "Tickets in My Queues",
+        },
+        MyServices => {
+            Label => "Tickets in My Services",
+        },
+        All => {
+            Label => "All tickets",
+        },
+        AssignedToCustomerUser => {
+            Label => "Assigned to customer user",
+        },
+        AccessibleForCustomerUser => {
+            Label => "Accessible for customer user",
+        },
+
+    );
+
     if ( $Self->{Action} eq 'AgentCustomerUserInformationCenter' ) {
 
         # Add filters for assigend and accessible tickets for the customer user information center as a
@@ -2633,6 +2670,7 @@ sub _SearchParamsGet {
         Columns             => \@Columns,
         TicketSearch        => \%TicketSearch,
         TicketSearchSummary => \%TicketSearchSummary,
+        Filter              => \%Filter,
     );
 }
 
