@@ -2030,6 +2030,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBar::TicketOwner</Item>
+                <Item Key="Block">ToolBarPersonalViews</Item>
                 <Item Key="CssClass">Owner</Item>
                 <Item Key="CssClassNew">Owner New</Item>
                 <Item Key="CssClassReached">Owner Reached</Item>

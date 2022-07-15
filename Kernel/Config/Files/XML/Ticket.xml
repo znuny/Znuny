@@ -2246,13 +2246,6 @@
             <Item ValueType="String"></Item>
         </Value>
     </Setting>
-    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###CustomerIDRaw" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
-        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
-        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
-        <Value>
-            <Item ValueType="String"></Item>
-        </Value>
-    </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###CustomerUserLogin" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
         <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
         <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
@@ -2356,104 +2349,6 @@
         <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
         <Value>
             <Item ValueType="String"></Item>
-        </Value>
-    </Setting>
-    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###CreatedQueueIDs" Required="0" Valid="0">
-        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
-        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
-        <Value>
-            <Array></Array>
-        </Value>
-    </Setting>
-    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###CreatedUserIDs" Required="0" Valid="0">
-        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
-        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
-        <Value>
-            <Array></Array>
-        </Value>
-    </Setting>
-    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###CustomerUserID" Required="0" Valid="0">
-        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
-        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
-        <Value>
-            <Item ValueType="String"></Item>
-        </Value>
-    </Setting>
-    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###CustomerUserLoginRaw" Required="0" Valid="0">
-        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
-        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
-        <Value>
-            <Item ValueType="String"></Item>
-        </Value>
-    </Setting>
-    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###LockIDs" Required="0" Valid="0">
-        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
-        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
-        <Value>
-            <Array></Array>
-        </Value>
-    </Setting>
-    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_AttachmentName" Required="0" Valid="0">
-        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
-        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
-        <Value>
-            <Item ValueType="String"></Item>
-        </Value>
-    </Setting>
-    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_Bcc" Required="0" Valid="0">
-        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
-        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
-        <Value>
-            <Item ValueType="String"></Item>
-        </Value>
-    </Setting>
-    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###OwnerIDs" Required="0" Valid="0">
-        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
-        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
-        <Value>
-            <Array></Array>
-        </Value>
-    </Setting>
-    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###PriorityIDs" Required="0" Valid="0">
-        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
-        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
-        <Value>
-            <Array></Array>
-        </Value>
-    </Setting>
-    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###TicketLastChangeTimePoint" Required="0" Valid="0">
-        <Description Translatable="1">Default data to use on attribute for ticket search screen. Example: "TicketLastChangeTimePointFormat=year;TicketLastChangeTimePointStart=Last;TicketLastChangeTimePoint=2;".</Description>
-        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
-        <Value>
-            <Item ValueType="String"></Item>
-        </Value>
-    </Setting>
-    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###TicketLastChangeTimeSlot" Required="0" Valid="0">
-        <Description Translatable="1">Default data to use on attribute for ticket search screen. Example: "TicketLastChangeTimeStartYear=2010;TicketLastChangeTimeStartMonth=10;TicketLastChangeTimeStartDay=4;TicketLastChangeTimeStopYear=2010;TicketLastChangeTimeMonth=11;TicketLastChangeTimeStopDay=3;".</Description>
-        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
-        <Value>
-            <Item ValueType="String"></Item>
-        </Value>
-    </Setting>
-    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###TicketPendingTimePoint" Required="0" Valid="0">
-        <Description Translatable="1">Default data to use on attribute for ticket search screen. Example: "TicketPendingTimePointFormat=year;TicketPendingTimePointStart=Last;TicketPendingTimePoint=2;".</Description>
-        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
-        <Value>
-            <Item ValueType="String"></Item>
-        </Value>
-    </Setting>
-    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###TicketPendingTimeSlot" Required="0" Valid="0">
-        <Description Translatable="1">Default data to use on attribute for ticket search screen. Example: "TicketPendingTimeStartYear=2010;TicketPendingTimeStartMonth=10;TicketPendingTimeStartDay=4;TicketPendingTimeStopYear=2010;TicketPendingTimeMonth=11;TicketPendingTimeStopDay=3;".</Description>
-        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
-        <Value>
-            <Item ValueType="String"></Item>
-        </Value>
-    </Setting>
-    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###TypeIDs" Required="0" Valid="0">
-        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
-        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
-        <Value>
-            <Array></Array>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###SearchInArchive" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
@@ -2701,7 +2596,7 @@
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketFreeText###InformAgent" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
-        <Description Translatable="1">Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket free text screen of the agent interface.</Description>
+        <Description Translatable="1">Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket free text screen of the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketFreeText</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
@@ -3306,7 +3201,7 @@
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketClose###InformAgent" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
-        <Description Translatable="1">Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the close ticket screen of the agent interface.</Description>
+        <Description Translatable="1">Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the close ticket screen of the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketClose</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
@@ -3514,7 +3409,7 @@
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketNote###InformAgent" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
-        <Description Translatable="1">Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket note screen of the agent interface.</Description>
+        <Description Translatable="1">Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket note screen of the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketNote</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
@@ -3721,7 +3616,7 @@
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketOwner###InformAgent" Required="1" Valid="1">
-        <Description Translatable="1">Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket owner screen of a zoomed ticket in the agent interface.</Description>
+        <Description Translatable="1">Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket owner screen of a zoomed ticket in the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketOwner</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
@@ -3927,7 +3822,7 @@
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPending###InformAgent" Required="1" Valid="1">
-        <Description Translatable="1">Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket pending screen of a zoomed ticket in the agent interface.</Description>
+        <Description Translatable="1">Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket pending screen of a zoomed ticket in the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketPending</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
@@ -4134,7 +4029,7 @@
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPriority###InformAgent" Required="1" Valid="1">
-        <Description Translatable="1">Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket priority screen of a zoomed ticket in the agent interface.</Description>
+        <Description Translatable="1">Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket priority screen of a zoomed ticket in the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketPriority</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
@@ -4341,7 +4236,7 @@
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketResponsible###InformAgent" Required="1" Valid="1">
-        <Description Translatable="1">Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface.</Description>
+        <Description Translatable="1">Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketResponsible</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
@@ -4959,12 +4854,13 @@
             <Item ValueType="String" ValueRegex=""></Item>
         </Value>
     </Setting>
-    <Setting Name="Frontend::ToolBarModule###110-Ticket::AgentTicketQueue" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
+    <Setting Name="Frontend::ToolBarModule###110-Ticket::AgentTicketQueue" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Toolbar Item for a shortcut. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
         <Navigation>Frontend::Agent::ToolBar</Navigation>
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBar::Link</Item>
+                <Item Key="Block">ToolBarOverviews</Item>
                 <Item Key="Name" Translatable="1">Queue view</Item>
                 <Item Key="Link">Action=AgentTicketQueue</Item>
                 <Item Key="Action">AgentTicketQueue</Item>
@@ -4975,12 +4871,13 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::ToolBarModule###120-Ticket::AgentTicketStatus" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
+    <Setting Name="Frontend::ToolBarModule###120-Ticket::AgentTicketStatus" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Toolbar Item for a shortcut. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
         <Navigation>Frontend::Agent::ToolBar</Navigation>
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBar::Link</Item>
+                <Item Key="Block">ToolBarOverviews</Item>
                 <Item Key="Name" Translatable="1">Status view</Item>
                 <Item Key="Link">Action=AgentTicketStatusView</Item>
                 <Item Key="Action">AgentTicketStatusView</Item>
@@ -4991,12 +4888,13 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::ToolBarModule###130-Ticket::AgentTicketEscalation" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
+    <Setting Name="Frontend::ToolBarModule###130-Ticket::AgentTicketEscalation" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Toolbar Item for a shortcut. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
         <Navigation>Frontend::Agent::ToolBar</Navigation>
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBar::Link</Item>
+                <Item Key="Block">ToolBarOverviews</Item>
                 <Item Key="Name" Translatable="1">Escalation view</Item>
                 <Item Key="Link">Action=AgentTicketEscalationView</Item>
                 <Item Key="Action">AgentTicketEscalationView</Item>
@@ -5007,12 +4905,13 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::ToolBarModule###140-Ticket::AgentTicketPhone" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
+    <Setting Name="Frontend::ToolBarModule###140-Ticket::AgentTicketPhone" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Toolbar Item for a shortcut. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
         <Navigation>Frontend::Agent::ToolBar</Navigation>
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBar::Link</Item>
+                <Item Key="Block">ToolBarActions</Item>
                 <Item Key="Name" Translatable="1">New phone ticket</Item>
                 <Item Key="Link">Action=AgentTicketPhone</Item>
                 <Item Key="Action">AgentTicketPhone</Item>
@@ -5023,12 +4922,13 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::ToolBarModule###150-Ticket::AgentTicketEmail" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
+    <Setting Name="Frontend::ToolBarModule###150-Ticket::AgentTicketEmail" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Toolbar Item for a shortcut. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
         <Navigation>Frontend::Agent::ToolBar</Navigation>
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBar::Link</Item>
+                <Item Key="Block">ToolBarActions</Item>
                 <Item Key="Name" Translatable="1">New email ticket</Item>
                 <Item Key="Link">Action=AgentTicketEmail</Item>
                 <Item Key="Action">AgentTicketEmail</Item>
@@ -5039,12 +4939,13 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::ToolBarModule###160-Ticket::AgentTicketProcess" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
+    <Setting Name="Frontend::ToolBarModule###160-Ticket::AgentTicketProcess" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Toolbar Item for a shortcut. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
         <Navigation>Frontend::Agent::ToolBar</Navigation>
         <Value>
             <Hash>
-                <Item Key="Module">Kernel::Output::HTML::ToolBar::TicketProcess</Item>
+                <Item Key="Module">Kernel::Output::HTML::ToolBar::Link</Item>
+                <Item Key="Block">ToolBarActions</Item>
                 <Item Key="Name" Translatable="1">New process ticket</Item>
                 <Item Key="Link">Action=AgentTicketProcess</Item>
                 <Item Key="Action">AgentTicketProcess</Item>
@@ -5061,6 +4962,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBar::TicketResponsible</Item>
+                <Item Key="Block">ToolBarPersonalViews</Item>
                 <Item Key="CssClass">Responsible</Item>
                 <Item Key="CssClassNew">Responsible New</Item>
                 <Item Key="CssClassReached">Responsible Reached</Item>
@@ -5080,6 +4982,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBar::TicketWatcher</Item>
+                <Item Key="Block">ToolBarPersonalViews</Item>
                 <Item Key="CssClass">Watcher</Item>
                 <Item Key="CssClassNew">Watcher New</Item>
                 <Item Key="CssClassReached">Watcher Reached</Item>
@@ -5099,6 +5002,7 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBar::TicketLocked</Item>
+                <Item Key="Block">ToolBarPersonalViews</Item>
                 <Item Key="CssClass">Locked</Item>
                 <Item Key="CssClassNew">Locked New</Item>
                 <Item Key="CssClassReached">Locked Reached</Item>
@@ -5115,33 +5019,35 @@
     <!-- TODO: check if the counter is really needed, otherwise the module can be removed and use
     the standard link module
     -->
-    <Setting Name="Frontend::ToolBarModule###200-Ticket::AgentTicketService" Required="0" Valid="0">
+    <Setting Name="Frontend::ToolBarModule###200-Ticket::AgentTicketService" Required="0" Valid="1">
         <Description Translatable="1">Agent interface notification module to see the number of tickets in My Services. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
         <Navigation>Frontend::Agent::ToolBar</Navigation>
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBar::TicketService</Item>
+                <Item Key="Block">ToolBarPersonalViews</Item>
                 <Item Key="CssClass">ServiceView</Item>
                 <Item Key="Icon">fa fa-wrench</Item>
                 <Item Key="Priority">1030035</Item>
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::ToolBarModule###210-Ticket::TicketSearchProfile" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
+    <Setting Name="Frontend::ToolBarModule###210-Ticket::TicketSearchProfile" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Agent interface module to access search profiles via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
         <Navigation>Frontend::Agent::ToolBar</Navigation>
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBar::TicketSearchProfile</Item>
+                <Item Key="Block">ToolBarSearchProfile</Item>
+                <!-- <Item Key="Block">ToolBarSearch</Item> -->
                 <Item Key="Description" Translatable="1">Search template</Item>
                 <Item Key="Name" Translatable="1">Search template</Item>
-                <Item Key="Block">ToolBarSearchProfile</Item>
                 <Item Key="MaxWidth">40</Item>
                 <Item Key="Priority">1990010</Item>
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::ToolBarModule###220-Ticket::TicketSearchFulltext" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="0">
+    <Setting Name="Frontend::ToolBarModule###220-Ticket::TicketSearchFulltext" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Agent interface module to access fulltext search via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
         <Navigation>Frontend::Agent::ToolBar</Navigation>
         <Value>
@@ -5150,20 +5056,13 @@
                 <Item Key="Description" Translatable="1">Fulltext search</Item>
                 <Item Key="Name" Translatable="1">Fulltext</Item>
                 <Item Key="Block">ToolBarSearchFulltext</Item>
+                <!-- <Item Key="Block">ToolBarSearch</Item> -->
                 <Item Key="Size">10</Item>
                 <Item Key="Priority">1990020</Item>
-                <Item Key="Data">
-                    <Hash>
-                        <Item Key="AdditionalSearchParameters">
-                            <Hash>
-                            </Hash>
-                        </Item>
-                    </Hash>
-                </Item>
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::ToolBarModule###230-CICSearchCustomerID" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
+    <Setting Name="Frontend::ToolBarModule###230-CICSearchCustomerID" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Agent interface module to access CIC search via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
         <Navigation>Frontend::Agent::ToolBar</Navigation>
         <Value>
@@ -5172,12 +5071,13 @@
                 <Item Key="Description" Translatable="1">CustomerID search</Item>
                 <Item Key="Name" Translatable="1">CustomerID</Item>
                 <Item Key="Block">ToolBarCICSearchCustomerID</Item>
+                <!-- <Item Key="Block">ToolBarSearch</Item> -->
                 <Item Key="Size">10</Item>
                 <Item Key="Priority">1990030</Item>
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::ToolBarModule###240-CICSearchCustomerUser" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
+    <Setting Name="Frontend::ToolBarModule###240-CICSearchCustomerUser" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Agent interface module to access CIC search via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
         <Navigation>Frontend::Agent::ToolBar</Navigation>
         <Value>
@@ -5186,6 +5086,7 @@
                 <Item Key="Description" Translatable="1">Customer user search</Item>
                 <Item Key="Name" Translatable="1">Customer User</Item>
                 <Item Key="Block">ToolBarCICSearchCustomerUser</Item>
+                <!-- <Item Key="Block">ToolBarSearch</Item> -->
                 <Item Key="Size">10</Item>
                 <Item Key="Priority">1990040</Item>
             </Hash>
@@ -6279,24 +6180,6 @@
                 <Item Key="Group"></Item>
                 <Item Key="Default">1</Item>
                 <Item Key="CacheTTLLocal">30</Item>
-                <Item Key="Mandatory">0</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="DashboardBackend###0255-MyLastChangedTickets" Required="0" Valid="1">
-        <Description Translatable="1">MyLastChangedTickets dashboard widget.</Description>
-        <Navigation>Frontend::Agent::View::Dashboard</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Module">Kernel::Output::HTML::Dashboard::MyLastChangedTickets</Item>
-                <Item Key="Title" Translatable="1">My last changed tickets</Item>
-                <Item Key="Permission">rw</Item>
-                <Item Key="OwnerOnly"></Item>
-                <Item Key="Block">ContentSmall</Item>
-                <Item Key="Limit">10</Item>
-                <Item Key="Group"></Item>
-                <Item Key="Default">1</Item>
-                <Item Key="CacheTTL">2</Item>
                 <Item Key="Mandatory">0</Item>
             </Hash>
         </Value>
@@ -7764,6 +7647,7 @@
             <Hash>
                 <Item Key="JavaScript">
                     <Array>
+                        <Item>Core.Agent.CustomerSearch.js</Item>
                         <Item>Core.Agent.CustomerSearchAutoComplete.js</Item>
                         <Item>Core.Agent.TicketAction.js</Item>
                         <Item>Core.Agent.TicketPhone.js</Item>
@@ -7906,6 +7790,7 @@
             <Hash>
                 <Item Key="JavaScript">
                     <Array>
+                        <Item>Core.Agent.CustomerSearch.js</Item>
                         <Item>Core.Agent.CustomerSearchAutoComplete.js</Item>
                         <Item>Core.Agent.TicketAction.js</Item>
                         <Item>Core.Agent.TicketEmail.js</Item>
@@ -8443,7 +8328,6 @@
                         <Item>Core.Agent.LinkObject.js</Item>
                         <Item>Core.Agent.TableFilters.js</Item>
                         <Item>Core.Agent.TicketFormDraft.js</Item>
-                        <Item>Core.Agent.TicketNoteToLinkedTicket.js</Item>
                     </Array>
                 </Item>
             </Hash>
@@ -8909,6 +8793,7 @@
             <Hash>
                 <Item Key="JavaScript">
                     <Array>
+                        <Item>Core.Agent.CustomerSearch.js</Item>
                         <Item>Core.Agent.CustomerSearchAutoComplete.js</Item>
                         <Item>Core.Agent.TicketAction.js</Item>
                         <Item>Core.Agent.TicketCompose.js</Item>
@@ -8980,6 +8865,7 @@
             <Hash>
                 <Item Key="JavaScript">
                     <Array>
+                        <Item>Core.Agent.CustomerSearch.js</Item>
                         <Item>Core.Agent.CustomerSearchAutoComplete.js</Item>
                         <Item>Core.Agent.TicketAction.js</Item>
                         <Item>Core.Agent.TicketForward.js</Item>
@@ -9017,6 +8903,7 @@
             <Hash>
                 <Item Key="JavaScript">
                     <Array>
+                        <Item>Core.Agent.CustomerSearch.js</Item>
                         <Item>Core.Agent.CustomerSearchAutoComplete.js</Item>
                         <Item>Core.Agent.TicketAction.js</Item>
                         <Item>Core.Agent.TicketEmailOutbound.js</Item>
@@ -9054,6 +8941,7 @@
             <Hash>
                 <Item Key="JavaScript">
                     <Array>
+                        <Item>Core.Agent.CustomerSearch.js</Item>
                         <Item>Core.Agent.CustomerSearchAutoComplete.js</Item>
                         <Item>Core.Agent.TicketAction.js</Item>
                         <Item>Core.Agent.TicketEmailResend.js</Item>
@@ -9090,6 +8978,7 @@
             <Hash>
                 <Item Key="JavaScript">
                     <Array>
+                        <Item>Core.Agent.CustomerSearch.js</Item>
                         <Item>Core.Agent.CustomerSearchAutoComplete.js</Item>
                         <Item>Core.Agent.TicketAction.js</Item>
                         <Item>Core.Agent.TicketSplit.js</Item>
@@ -10525,6 +10414,13 @@
             <Item ValueType="String" ValueRegex="^[0-9]{1,6}$">4000</Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::GenericAgentAllowCustomScriptExecution" Required="0" Valid="1">
+        <Description Translatable="1">Allows generic agent to execute custom command line scripts.</Description>
+        <Navigation>Core::Ticket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::GenericAgentAllowCustomModuleExecution" Required="0" Valid="1">
         <Description Translatable="1">Allows generic agent to execute custom modules.</Description>
         <Navigation>Core::Ticket</Navigation>
@@ -10618,9 +10514,6 @@
                 <Item>ArticleEmailSendingQueued</Item>
                 <Item>ArticleEmailSendingSent</Item>
                 <Item>ArticleEmailSendingError</Item>
-                <Item>ArticleCreateTransmissionError</Item>
-                <Item>ArticleUpdateTransmissionError</Item>
-                <Item>UserMention</Item>
             </Array>
         </Value>
     </Setting>
@@ -10926,6 +10819,7 @@
                 <Item Key="JavaScript">
                     <Array>
                         <Item>Core.Customer.TicketZoom.js</Item>
+                        <Item>Core.UI.Popup.js</Item>
                     </Array>
                 </Item>
             </Hash>
@@ -11221,7 +11115,6 @@
                 <Item>AgentTicketZoom</Item>
                 <Item>AgentLinkObject</Item>
                 <Item>AgentSplitSelection</Item>
-                <Item>CustomerTicketMessage</Item>
                 <Item>CustomerTicketPrint</Item>
                 <Item>CustomerTicketProcess</Item>
                 <Item>CustomerTicketZoom</Item>
@@ -11553,6 +11446,51 @@ Thanks for your help!
 
  Your Helpdesk Team
 </Item>
+        </Value>
+    </Setting>
+    <Setting Name="PostMaster::PreFilterModule###4-CMD" Required="0" Valid="0">
+        <Description Translatable="1">CMD example setup. Ignores emails where external CMD returns some output on STDOUT (email will be piped into STDIN of some.bin).</Description>
+        <Navigation>Core::Email::PostMaster</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::PostMaster::Filter::CMD</Item>
+                <Item Key="CMD">/usr/bin/some.bin</Item>
+                <Item Key="Set">
+                    <Hash>
+                        <Item Key="X-OTRS-Ignore">yes</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="PostMaster::PreFilterModule###5-SpamAssassin" Required="0" Valid="0">
+        <Description Translatable="1">Spam Assassin example setup. Ignores emails that are marked with SpamAssassin.</Description>
+        <Navigation>Core::Email::PostMaster</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::PostMaster::Filter::CMD</Item>
+                <Item Key="CMD">/usr/bin/spamassassin | grep -i "X-Spam-Status: yes"</Item>
+                <Item Key="Set">
+                    <Hash>
+                        <Item Key="X-OTRS-Ignore">yes</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="PostMaster::PreFilterModule###6-SpamAssassin" Required="0" Valid="0">
+        <Description Translatable="1">Spam Assassin example setup. Moves marked mails to spam queue.</Description>
+        <Navigation>Core::Email::PostMaster</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::PostMaster::Filter::CMD</Item>
+                <Item Key="CMD">/usr/bin/spamassassin | grep -i "X-Spam-Status: yes"</Item>
+                <Item Key="Set">
+                    <Hash>
+                        <Item Key="X-OTRS-Queue">spam</Item>
+                    </Hash>
+                </Item>
+            </Hash>
         </Value>
     </Setting>
     <Setting Name="PostMaster::PreFilterModule###000-MatchDBSource" Required="1" Valid="1">
@@ -13094,12 +13032,10 @@ Thanks for your help!
             <Hash>
                 <Item Key="Answer" Translatable="1">Answer</Item>
                 <Item Key="Create" Translatable="1">Create</Item>
-                <Item Key="Email" Translatable="1">Email</Item>
                 <Item Key="Forward" Translatable="1">Forward</Item>
-                <Item Key="Note" Translatable="1">Note</Item>
+                <Item Key="Email" Translatable="1">Email</Item>
                 <Item Key="PhoneCall" Translatable="1">Phone call</Item>
-                <Item Key="ProcessManagement" Translatable="1">Process Management</Item>
-                <Item Key="Snippet" Translatable="1">Snippet</Item>
+                <Item Key="Note" Translatable="1">Note</Item>
             </Hash>
         </Value>
     </Setting>
@@ -13719,13 +13655,6 @@ Thanks for your help!
                         <Item Key="Valid">1</Item>
                     </Hash>
                 </Item>
-                <Item Key="AgentTicketNoteToLinkedTicket">
-                    <Hash>
-                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketNoteToLinkedTicket</Item>
-                        <Item Key="Prio">50</Item>
-                        <Item Key="Valid">1</Item>
-                    </Hash>
-                </Item>
             </Hash>
         </Value>
     </Setting>
@@ -13794,13 +13723,6 @@ Thanks for your help!
                     <Hash>
                         <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketNote</Item>
                         <Item Key="Prio">800</Item>
-                        <Item Key="Valid">1</Item>
-                    </Hash>
-                </Item>
-                <Item Key="AgentTicketNoteToLinkedTicket">
-                    <Hash>
-                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketNoteToLinkedTicket</Item>
-                        <Item Key="Prio">50</Item>
                         <Item Key="Valid">1</Item>
                     </Hash>
                 </Item>
@@ -13889,13 +13811,6 @@ Thanks for your help!
                         <Item Key="Valid">1</Item>
                     </Hash>
                 </Item>
-                <Item Key="AgentTicketNoteToLinkedTicket">
-                    <Hash>
-                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketNoteToLinkedTicket</Item>
-                        <Item Key="Prio">50</Item>
-                        <Item Key="Valid">1</Item>
-                    </Hash>
-                </Item>
             </Hash>
         </Value>
     </Setting>
@@ -13936,13 +13851,6 @@ Thanks for your help!
                     <Hash>
                         <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketCompose</Item>
                         <Item Key="Prio">100</Item>
-                        <Item Key="Valid">1</Item>
-                    </Hash>
-                </Item>
-                <Item Key="AgentTicketNoteToLinkedTicket">
-                    <Hash>
-                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketNoteToLinkedTicket</Item>
-                        <Item Key="Prio">50</Item>
                         <Item Key="Valid">1</Item>
                     </Hash>
                 </Item>

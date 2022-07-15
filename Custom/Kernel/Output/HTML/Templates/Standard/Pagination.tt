@@ -1,0 +1,35 @@
+# --
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (GPL). If you
+# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# --
+# TODO delete me
+## nofilter(TidyAll::Plugin::OTRS::Common::Origin)
+
+[% RenderBlockStart("PageBack") %]
+<a id="[% Data.IDPrefix | html %]PageAllBack" href="[% Data.BaselinkAllBack | html %]" title="[% Translate("Show first page") | html %]">|&lt;</a>
+<a id="[% Data.IDPrefix | html %]PageOneBack" href="[% Data.BaselinkOneBack | html %]" title="[% Translate("Show previous pages") | html %]">&lt;&lt;</a>
+[% RenderBlockEnd("PageBack") %]
+[% RenderBlockStart("PageBackAjax") %]
+<a id="[% Data.IDPrefix | html %]PageAllBack" class="pagination-travel-l PaginationAjax[% Data.WidgetName | html %] Pagination[% Data.WidgetName | html %]" data-pagination-pagenumber="[% Data.BaselinkAllBack | html %]" href="#" title="[% Translate("Show first page") | html %]"><i class="fa fa-angle-double-left"></i></a>
+<a id="[% Data.IDPrefix | html %]PageOneBack" class="pagination-travel-r PaginationAjax[% Data.WidgetName | html %] Pagination[% Data.WidgetName | html %]" data-pagination-pagenumber="[% Data.BaselinkOneBack | html %]" href="#" title="[% Translate("Show previous pages") | html %]"><i class="fa fa-angle-left"></i></a>
+[% RenderBlockEnd("PageBackAjax") %]
+
+[% RenderBlockStart("Page") %]
+<a id="[% Data.IDPrefix | html %]Page[% Data.PageNumber | html %]" href="[% Data.BaselinkAll | html %]" [% IF Data.SelectedPage %]class="[% Data.SelectedPage | html %]"[% END %] title="[% Translate("Show page %s", Data.PageNumber) | html %]">[% Data.PageNumber | html %]</a>
+[% RenderBlockEnd("Page") %]
+[% RenderBlockStart("PageAjax") %]
+<a id="[% Data.IDPrefix | html %]Page[% Data.PageNumber | html %]" class="PaginationAjax[% Data.WidgetName | html %] Pagination[% Data.WidgetName | html %] [% Data.SelectedPage | html %]" data-pagination-pagenumber="[% Data.PageNumber | html %]" href="#" title="[% Translate("Show page %s", Data.PageNumber) | html %]">[% Data.PageNumber | html %]</a>
+[% RenderBlockEnd("PageAjax") %]
+
+[% RenderBlockStart("PageForward") %]
+<a id="[% Data.IDPrefix | html %]PageOneForward" href="[% Data.BaselinkOneForward | html %]" title="[% Translate("Show next pages") | html %]">&gt;&gt;</a>
+<a id="[% Data.IDPrefix | html %]PageAllForward" href="[% Data.BaselinkAllForward | html %]" title="[% Translate("Show last page") | html %]">&gt;|</a>
+[% RenderBlockEnd("PageForward") %]
+[% RenderBlockStart("PageForwardAjax") %]
+<a id="[% Data.IDPrefix | html %]PageOneForward" class="pagination-travel-l PaginationAjax[% Data.WidgetName | html %] Pagination[% Data.WidgetName | html %]" data-pagination-pagenumber="[% Data.BaselinkOneForward | html %]" href="#" title="[% Translate("Show next pages") | html %]"><i class="fa fa-angle-right"></i></a>
+<a id="[% Data.IDPrefix | html %]PageAllForward" class="pagination-travel-r PaginationAjax[% Data.WidgetName | html %] Pagination[% Data.WidgetName | html %]" data-pagination-pagenumber="[% Data.BaselinkAllForward | html %]" href="#" title="[% Translate("Show last page") | html %]"><i class="fa fa-angle-double-right"></i></a>
+[% RenderBlockEnd("PageForwardAjax") %]

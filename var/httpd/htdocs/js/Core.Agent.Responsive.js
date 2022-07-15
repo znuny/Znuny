@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -22,7 +22,7 @@ Core.Agent = Core.Agent || {};
 Core.Agent.Responsive = (function (TargetNS) {
 
     Core.App.Subscribe('Event.App.Responsive.SmallerOrEqualScreenL', function () {
-        // Add switch for Desktopmode
+        // Add switch for Desktop mode
         if (!$('#ViewModeSwitch').length) {
             $('#Footer').append('<div id="ViewModeSwitch"><a href="#">' + Core.Language.Translate('Switch to desktop mode') + '</a></div>');
             $('#ViewModeSwitch a').on('click.Responsive', function() {
@@ -167,8 +167,17 @@ Core.Agent.Responsive = (function (TargetNS) {
         // initially hide navigation container
         $('#NavigationContainer').css('left', '-280px');
 
+// FORWWWARD CHANGES
+
         // move toolbar to navigation container
-        $('#ToolBar').detach().prependTo('body');
+        //$('#ToolBar').detach().prependTo('body');
+        $('#ToolBar').detach().prependTo('#NavigationContainer');
+        $('.InnerSidebarColumn').detach().insertAfter('.WidgetActions');
+        $('#Logo').detach().prependTo('#Header');
+        // FORWWWARD
+        $('.NotificationIcon').click(function() {
+            $('body').toggleClass("ShowNotificationList");
+        });
 
         // make fields which have a following icon not as wide as other fields
         $('.FormScreen select').each(function() {
@@ -194,11 +203,15 @@ Core.Agent.Responsive = (function (TargetNS) {
 
         $('#OptionCustomer').closest('.Field').show().prev('label').show();
 
+// FORWWWARD CHANGES
+
         // reset navigation container position
-        $('#NavigationContainer').css('left', '10px');
+        //$('#NavigationContainer').css('left', '10px');
 
         // re-add toolbar to header
-        $('#ToolBar').detach().prependTo('#Header');
+        //$('#ToolBar').detach().prependTo('#Header');
+        $('#NavigationContainer').detach().prependTo('#Header');
+        $('#Logo').detach().prependTo('#NavigationContainer');
 
         // reset field widths
         $('.FormScreen select').each(function() {
@@ -209,6 +222,19 @@ Core.Agent.Responsive = (function (TargetNS) {
 
         // re-expand widgets in preferences screen
         $('.PreferencesScreen .WidgetSimple').removeClass('Collapsed').addClass('Expanded');
+
+        // toggle .toolbar-row view
+        $(".btn-toggle").on("click", function() {
+            $(".toolbar-row-wrapper").toggleClass("hide");
+
+            if ($(".toolbar-row-wrapper").hasClass("hide")) {
+                $(".btn-toggle i").css("margin", "2px 0 0 0");
+                $(".btn-toggle i").css("transform", "rotate(180deg)");
+            } else {
+                $(".btn-toggle i").css("margin", "0 0 2px 0");
+                $(".btn-toggle i").css("transform", "rotate(0deg)");
+            }
+        });
     });
 
     return TargetNS;
