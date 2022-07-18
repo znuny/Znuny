@@ -909,8 +909,12 @@ sub _ParseCommandlineArguments {
 
     my %OptionValues;
 
+    my %KnownOptions;
+
     OPTION:
     for my $Option ( @{ $Self->{_Options} // [] }, @{ $Self->{_GlobalOptions} } ) {
+        $KnownOptions{ '--' . $Option->{Name} } = 1;
+
         my $Lookup = $Option->{Name};
         if ( $Option->{HasValue} ) {
             $Lookup .= '=s';
@@ -974,6 +978,14 @@ sub _ParseCommandlineArguments {
 
             $OptionValues{ $Option->{Name} } = $Value;
         }
+    }
+
+    # Check for remaining known options that could not be parsed.
+    my @RemainingKnownOptions = grep { exists $KnownOptions{$_} } @{$Arguments};
+    if (@RemainingKnownOptions) {
+        my $OptionsString = join ', ', sort @RemainingKnownOptions;
+        $Self->PrintError("the following options have an unexpected or missing value: $OptionsString.");
+        return;
     }
 
     my %ArgumentValues;
