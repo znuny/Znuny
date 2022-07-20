@@ -1508,7 +1508,7 @@ msgstr "더 많은 사업 분야"
 msgid "Would you like to benefit from additional dynamic field types for businesses? Upgrade to %s to get access to the following field types:"
 msgstr "비즈니스를위한 추가적인 동적 필드 유형의 혜택을 원하십니까? 다음 필드 유형에 액세스하려면 %s로 업그레이드하십시오."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmssql.tt
 msgid "Database"
 msgstr "데이터베이스"
 
@@ -5444,7 +5444,7 @@ msgstr "OTRS-ID "
 msgid "You don't have an OTRS-ID yet?"
 msgstr "아직 OTRS-ID가 없습니까?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Sign up now"
 msgstr "지금 등록하세요"
 
@@ -5456,7 +5456,7 @@ msgstr "비밀번호를 잊어 버렸습니까?"
 msgid "Retrieve a new one"
 msgstr "새 항목 가져 오기"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Next"
 msgstr "다음"
 
@@ -5464,7 +5464,7 @@ msgstr "다음"
 msgid "This data will be frequently transferred to OTRS Group when you register this system."
 msgstr "이 시스템을 등록 할 때이 데이터는 OTRS 그룹으로 자주 전송됩니다."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
 msgid "Attribute"
 msgstr "속성"
 
@@ -5472,15 +5472,15 @@ msgstr "속성"
 msgid "FQDN"
 msgstr "FQDN"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
 msgid "OTRS Version"
 msgstr "OTRS 버전"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
 msgid "Operating System"
 msgstr "운영 체제"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
 msgid "Perl Version"
 msgstr "펄 버전"
 
@@ -5524,7 +5524,7 @@ msgstr "데이터는 안전한 https 연결을 통해 JSON 형식으로 전송�
 msgid "System Registration Data"
 msgstr "시스템 등록 데이터"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "Support Data"
 msgstr "지원 데이터"
 
@@ -6060,10 +6060,6 @@ msgstr "지원 번들 생성"
 msgid "The Support Bundle has been Generated"
 msgstr "지원 번들이 생성 되었습니다."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-msgid "Please choose one of the following options."
-msgstr "다음 옵션 중 하나를 선택 하십시오."
-
 #. Template: AdminSupportDataCollector
 msgid "Send by Email"
 msgstr "이메일로 보내기"
@@ -6089,8 +6085,8 @@ msgid "Download File"
 msgstr "다운로드 파일"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-msgid "A file containing the support bundle will be downloaded to the local system. Please save the file and send it to the OTRS Group, using an alternate method."
-msgstr "지원 번들이 들어있는 파일은 로컬 시스템에 다운로드됩니다. 파일을 저장하고 대체 방법을 사용하여 OTRS 그룹에 보내십시오."
+msgid "A file containing the support bundle will be downloaded to the local system."
+msgstr "지원 번들이 들어있는 파일은 로컬 시스템에 다운로드됩니다."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "Error: Support data could not be collected (%s)."
@@ -11308,7 +11304,7 @@ msgstr "테스트"
 msgid "Training"
 msgstr "훈련"
 
-#. Perl Module: Kernel/Modules/AdminRegistration.pm
+#. SysConfig
 msgid "Development"
 msgstr "개발"
 

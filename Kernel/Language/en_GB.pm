@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.639368283946597;
+    $Self->{Completeness}        = 0.63673805601318;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -312,7 +312,6 @@ sub Data {
             'System registration is a service of OTRS Group, which provides a lot of advantages!',
         'Please note that the use of OTRS cloud services requires the system to be registered.' =>
             'Please note that the use of OTRS cloud services requires the system to be registered.',
-        'Register this system' => 'Register this system',
         'Here you can configure available cloud services that communicate securely with %s.' =>
             'Here you can configure available cloud services that communicate securely with %s.',
         'Available Cloud Services' => 'Available Cloud Services',
@@ -1920,92 +1919,6 @@ sub Data {
         'Filter for templates' => '',
         'Templates' => 'Templates',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-        'System Registration Management' => 'System Registration Management',
-        'Edit System Registration' => '',
-        'System Registration Overview' => '',
-        'Register System' => '',
-        'Validate OTRS-ID' => '',
-        'Deregister System' => 'Deregister System',
-        'Edit details' => 'Edit details',
-        'Show transmitted data' => 'Show transmitted data',
-        'Deregister system' => 'Deregister system',
-        'Overview of registered systems' => 'Overview of registered systems',
-        'This system is registered with OTRS Group.' => 'This system is registered with OTRS Group.',
-        'System type' => 'System type',
-        'Unique ID' => 'Unique ID',
-        'Last communication with registration server' => 'Last communication with registration server',
-        'System Registration not Possible' => '',
-        'Please note that you can\'t register your system if OTRS Daemon is not running correctly!' =>
-            'Please note that you can\'t register your system if OTRS Daemon is not running correctly!',
-        'Instructions' => 'Instructions',
-        'System Deregistration not Possible' => '',
-        'Please note that you can\'t deregister your system if you\'re using the %s or having a valid service contract.' =>
-            'Please note that you can\'t deregister your system if you\'re using the %s or having a valid service contract.',
-        'OTRS-ID Login' => 'OTRS-ID Login',
-        'Read more' => 'Read more',
-        'You need to log in with your OTRS-ID to register your system.' =>
-            'You need to log in with your OTRS-ID to register your system.',
-        'Your OTRS-ID is the email address you used to sign up on the OTRS.com webpage.' =>
-            'Your OTRS-ID is the email address you used to sign up on the OTRS.com webpage.',
-        'Data Protection' => 'Data Protection',
-        'What are the advantages of system registration?' => 'What are the advantages of system registration?',
-        'You will receive updates about relevant security releases.' => 'You will receive updates about relevant security releases.',
-        'With your system registration we can improve our services for you, because we have all relevant information available.' =>
-            'With your system registration we can improve our services for you, because we have all relevant information available.',
-        'This is only the beginning!' => 'This is only the beginning!',
-        'We will inform you about our new services and offerings soon.' =>
-            'We will inform you about our new services and offerings soon.',
-        'Can I use OTRS without being registered?' => 'Can I use OTRS without being registered?',
-        'System registration is optional.' => 'System registration is optional.',
-        'You can download and use OTRS without being registered.' => 'You can download and use OTRS without being registered.',
-        'Is it possible to deregister?' => 'Is it possible to deregister?',
-        'You can deregister at any time.' => 'You can deregister at any time.',
-        'Which data is transfered when registering?' => 'Which data is transfered when registering?',
-        'A registered system sends the following data to OTRS Group:' => 'A registered system sends the following data to OTRS Group:',
-        'Fully Qualified Domain Name (FQDN), OTRS version, Database, Operating System and Perl version.' =>
-            'Fully Qualified Domain Name (FQDN), OTRS version, Database, Operating System and Perl version.',
-        'Why do I have to provide a description for my system?' => 'Why do I have to provide a description for my system?',
-        'The description of the system is optional.' => 'The description of the system is optional.',
-        'The description and system type you specify help you to identify and manage the details of your registered systems.' =>
-            'The description and system type you specify help you to identify and manage the details of your registered systems.',
-        'How often does my OTRS system send updates?' => 'How often does my OTRS system send updates?',
-        'Your system will send updates to the registration server at regular intervals.' =>
-            'Your system will send updates to the registration server at regular intervals.',
-        'Typically this would be around once every three days.' => 'Typically this would be around once every three days.',
-        'If you deregister your system, you will lose these benefits:' =>
-            'If you deregister your system, you will lose these benefits:',
-        'You need to log in with your OTRS-ID to deregister your system.' =>
-            'You need to log in with your OTRS-ID to deregister your system.',
-        'OTRS-ID' => 'OTRS-ID',
-        'You don\'t have an OTRS-ID yet?' => 'You don\'t have an OTRS-ID yet?',
-        'Sign up now' => 'Sign up now',
-        'Forgot your password?' => 'Forgot your password?',
-        'Retrieve a new one' => 'Retrieve a new one',
-        'Next' => 'Next',
-        'This data will be frequently transferred to OTRS Group when you register this system.' =>
-            'This data will be frequently transferred to OTRS Group when you register this system.',
-        'Attribute' => 'Attribute',
-        'FQDN' => 'FQDN',
-        'OTRS Version' => 'OTRS Version',
-        'Database' => 'Database',
-        'Operating System' => 'Operating System',
-        'Perl Version' => 'Perl Version',
-        'Optional description of this system.' => 'Optional description of this system.',
-        'Register' => 'Register',
-        'Continuing with this step will deregister the system from OTRS Group.' =>
-            'Continuing with this step will deregister the system from OTRS Group.',
-        'Deregister' => 'Deregister',
-        'You can modify registration settings here.' => 'You can modify registration settings here.',
-        'Overview of Transmitted Data' => '',
-        'There is no data regularly sent from your system to %s.' => 'There is no data regularly sent from your system to %s.',
-        'The following data is sent at minimum every 3 days from your system to %s.' =>
-            'The following data is sent at minimum every 3 days from your system to %s.',
-        'The data will be transferred in JSON format via a secure https connection.' =>
-            'The data will be transferred in JSON format via a secure https connection.',
-        'System Registration Data' => 'System Registration Data',
-        'Support Data' => 'Support Data',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'Role Management',
         'Add Role' => 'Add Role',
@@ -2179,20 +2092,13 @@ sub Data {
         'Sending support data to OTRS Group is not possible!' => 'Sending support data to OTRS Group is not possible!',
         'Enable Cloud Services' => 'Enable Cloud Services',
         'Enable cloud services' => 'Enable cloud services',
-        'This data is sent to OTRS Group on a regular basis. To stop sending this data please update your system registration.' =>
-            'This data is sent to OTRS Group on a regular basis. To stop sending this data please update your system registration.',
-        'You can manually trigger the Support Data sending by pressing this button:' =>
-            'You can manually trigger the Support Data sending by pressing this button:',
-        'Send Update' => 'Send Update',
-        'Currently this data is only shown in this system.' => 'Currently this data is only shown in this system.',
         'A support bundle (including: system registration information, support data, a list of installed packages and all locally modified source code files) can be generated by pressing this button:' =>
             'A support bundle (including: system registration information, support data, a list of installed packages and all locally modified source code files) can be generated by pressing this button:',
         'Generate Support Bundle' => 'Generate Support Bundle',
         'The Support Bundle has been Generated' => '',
-        'Please choose one of the following options.' => 'Please choose one of the following options.',
-        'Download File' => 'Download File',
-        'A file containing the support bundle will be downloaded to the local system. Please save the file and send it to the OTRS Group, using an alternate method.' =>
-            'A file containing the support bundle will be downloaded to the local system. Please save the file and send it to the OTRS Group, using an alternate method.',
+        'A file containing the support bundle will be downloaded to the local system.' =>
+            'A file containing the support bundle will be downloaded to the local system.',
+        'Support Data' => 'Support Data',
         'Error: Support data could not be collected (%s).' => 'Error: Support data could not be collected (%s).',
         'Details' => 'Details',
 
@@ -2358,6 +2264,7 @@ sub Data {
         'Add ticket attribute relations' => '',
         'Edit ticket attribute relations' => '',
         'Import CSV or Excel file' => '',
+        'Attribute' => 'Attribute',
         'Last update' => '',
         'Are you sure you want to delete entry \'%s\'?' => '',
         'Download previously imported file' => '',
@@ -3060,6 +2967,7 @@ sub Data {
         'Your 2 Factor Token' => 'Your 2 Factor Token',
         'Log In' => 'Log In',
         'Not yet registered?' => 'Not yet registered?',
+        'Sign up now' => 'Sign up now',
         'Back' => 'Back',
         'Request New Password' => 'Request New Password',
         'Your User Name' => 'Your User Name',
@@ -3162,6 +3070,7 @@ sub Data {
         'Phone' => 'Phone',
         'Web site' => 'Web site',
         'Community' => '',
+        'Next' => 'Next',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => 'Configure Outbound Mail',
@@ -3213,6 +3122,7 @@ sub Data {
             'A new database user with limited permissions will be created for this OTRS system.',
         'Repeat Password' => 'Repeat Password',
         'Generated password' => 'Generated password',
+        'Database' => 'Database',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmysql.tt
         'Passwords do not match' => 'Passwords do not match',
@@ -4071,12 +3981,6 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminQueueTemplates.pm
         'Change Queue Relations for Template' => 'Change Queue Relations for Template',
         'Change Template Relations for Queue' => 'Change Template Relations for Queue',
-
-        # Perl Module: Kernel/Modules/AdminRegistration.pm
-        'Production' => '',
-        'Test' => '',
-        'Training' => '',
-        'Development' => '',
 
         # Perl Module: Kernel/Modules/AdminRole.pm
         'Role updated!' => 'Role updated!',
@@ -5240,6 +5144,7 @@ sub Data {
         'PostgreSQL 9.2 or higher is required.' => '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
+        'Operating System' => 'Operating System',
         'OTRS Disk Partition' => 'OTRS Disk Partition',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskSpace.pm
@@ -5274,6 +5179,9 @@ sub Data {
             '',
         'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
             '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
+        'Perl Version' => 'Perl Version',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/Swap.pm
         'Free Swap Space (%)' => 'Free Swap Space (%)',
@@ -5432,6 +5340,9 @@ sub Data {
         'UI - Special Statistics' => '',
         'Agents using custom main menu ordering' => '',
         'Agents using favourites for the admin overview' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
+        'OTRS Version' => 'OTRS Version',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
         'Webserver' => 'Webserver',
@@ -8703,6 +8614,7 @@ Thanks for your help!
             'Determines the strings that will be shown as recipient (To:) of the phone ticket and as sender (From:) of the email ticket in the agent interface. For Queue as NewQueueSelectionType "<Queue>" shows the names of the queues and for SystemAddress "<Realname> <<Email>>" shows the name and email of the recipient.',
         'Determines the strings that will be shown as recipient (To:) of the ticket in the customer interface. For Queue as CustomerPanelSelectionType, "<Queue>" shows the names of the queues, and for SystemAddress, "<Realname> <<Email>>" shows the name and email of the recipient.' =>
             'Determines the strings that will be shown as recipient (To:) of the ticket in the customer interface. For Queue as CustomerPanelSelectionType, "<Queue>" shows the names of the queues, and for SystemAddress, "<Realname> <<Email>>" shows the name and email of the recipient.',
+        'Development' => '',
         'Disable cloud services' => '',
         'Display communication log entries.' => '',
         'Down' => 'Down',
@@ -8871,7 +8783,6 @@ Thanks for your help!
         'Manage existing sessions.' => 'Manage existing sessions.',
         'Manage support data.' => 'Manage support data.',
         'Manage system files.' => '',
-        'Manage system registration.' => 'Manage system registration.',
         'Manage tasks triggered by event or time based execution.' => 'Manage tasks triggered by event or time based execution.',
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Mark as Spam!',
@@ -9265,7 +9176,6 @@ Thanks for your help!
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
-        'Data Protection',
         'Date/Time',
         'Day',
         'Dec',
@@ -9494,7 +9404,6 @@ Thanks for your help!
         'Support Data information was successfully sent.',
         'Switch to desktop mode',
         'Switch to mobile mode',
-        'System Registration',
         'Team',
         'Th',
         'The browser you are using is too old.',

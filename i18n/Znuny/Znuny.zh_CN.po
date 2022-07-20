@@ -1522,7 +1522,7 @@ msgstr "更多商业版字段"
 msgid "Would you like to benefit from additional dynamic field types for businesses? Upgrade to %s to get access to the following field types:"
 msgstr "您想要从商业版的额外动态字段类型中受益吗？ 升级到%s以访问以下字段类型："
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmssql.tt
 msgid "Database"
 msgstr "数据库"
 
@@ -5454,7 +5454,7 @@ msgstr "OTRS-ID"
 msgid "You don't have an OTRS-ID yet?"
 msgstr "还没有OTRS-ID吗？"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Sign up now"
 msgstr "现在注册"
 
@@ -5466,7 +5466,7 @@ msgstr "忘记密码了吗？"
 msgid "Retrieve a new one"
 msgstr "获取新的密码"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Next"
 msgstr "下一步"
 
@@ -5474,7 +5474,7 @@ msgstr "下一步"
 msgid "This data will be frequently transferred to OTRS Group when you register this system."
 msgstr "注册本系统后，这个数据会经常传送给OTRS集团。"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
 msgid "Attribute"
 msgstr "属性"
 
@@ -5482,15 +5482,15 @@ msgstr "属性"
 msgid "FQDN"
 msgstr "正式域名"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
 msgid "OTRS Version"
 msgstr "OTRS版本"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
 msgid "Operating System"
 msgstr "操作系统"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
 msgid "Perl Version"
 msgstr "Perl版本"
 
@@ -5534,7 +5534,7 @@ msgstr "JSON格式的数据将通过安全的HTTPS连接进行上传。"
 msgid "System Registration Data"
 msgstr "系统注册信息"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "Support Data"
 msgstr "支持数据"
 
@@ -6070,10 +6070,6 @@ msgstr "生成支持数据包"
 msgid "The Support Bundle has been Generated"
 msgstr "已生成支持包"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-msgid "Please choose one of the following options."
-msgstr "请选择以下的任一个选项。"
-
 #. Template: AdminSupportDataCollector
 msgid "Send by Email"
 msgstr "通过邮件发送"
@@ -6099,8 +6095,8 @@ msgid "Download File"
 msgstr "下载文件"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-msgid "A file containing the support bundle will be downloaded to the local system. Please save the file and send it to the OTRS Group, using an alternate method."
-msgstr "包含支持数据包的文件已经可以下载到本地。请保存文件，然后通过其他方法把这个文件发送给OTRS集团。"
+msgid "A file containing the support bundle will be downloaded to the local system."
+msgstr "包含支持数据包的文件已经可以下载到本地。"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "Error: Support data could not be collected (%s)."
@@ -11318,7 +11314,7 @@ msgstr "测试"
 msgid "Training"
 msgstr "培训"
 
-#. Perl Module: Kernel/Modules/AdminRegistration.pm
+#. SysConfig
 msgid "Development"
 msgstr "开发"
 

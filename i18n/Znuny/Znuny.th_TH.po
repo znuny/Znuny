@@ -1506,7 +1506,7 @@ msgstr ""
 msgid "Would you like to benefit from additional dynamic field types for businesses? Upgrade to %s to get access to the following field types:"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmssql.tt
 msgid "Database"
 msgstr "ฐานข้อมูล"
 
@@ -5444,7 +5444,7 @@ msgstr "ID OTRS"
 msgid "You don't have an OTRS-ID yet?"
 msgstr "คุณยังไม่มีID OTRS ใช่หรือไม่?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Sign up now"
 msgstr "สมัครตอนนี้เลย"
 
@@ -5456,7 +5456,7 @@ msgstr "ลืมรหัสผ่าน?"
 msgid "Retrieve a new one"
 msgstr "ดึงข้อมูลขึ้นมาใหม่"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Next"
 msgstr "ถัดไป"
 
@@ -5464,7 +5464,7 @@ msgstr "ถัดไป"
 msgid "This data will be frequently transferred to OTRS Group when you register this system."
 msgstr "ข้อมูลนี้จะถูกโอนไปยังกลุ่มOTRS บ่อยครั้งเมื่อคุณลงทะเบียนระบบนี้"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
 msgid "Attribute"
 msgstr "แอตทริบิวต์"
 
@@ -5472,15 +5472,15 @@ msgstr "แอตทริบิวต์"
 msgid "FQDN"
 msgstr "FQDN"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
 msgid "OTRS Version"
 msgstr "เวอร์ชั่นของ OTRS"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
 msgid "Operating System"
 msgstr "ระบบปฏิบัติการ"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
 msgid "Perl Version"
 msgstr "เวอร์ชั่นของ Perl"
 
@@ -5524,7 +5524,7 @@ msgstr "ข้อมูลจะถูกโอนในรูปแบบ JSON 
 msgid "System Registration Data"
 msgstr "ข้อมูลการลงทะเบียนระบบ"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "Support Data"
 msgstr "ข้อมูลการสนับสนุน"
 
@@ -6061,10 +6061,6 @@ msgstr "สร้างกลุ่มสนับสนุน"
 msgid "The Support Bundle has been Generated"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-msgid "Please choose one of the following options."
-msgstr "โปรดเลือกหนึ่งในตัวเลือกดังต่อไปนี้"
-
 #. Template: AdminSupportDataCollector
 msgid "Send by Email"
 msgstr "ส่งโดยอีเมล์"
@@ -6090,8 +6086,8 @@ msgid "Download File"
 msgstr "ดาวน์โหลดไฟล์"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-msgid "A file containing the support bundle will be downloaded to the local system. Please save the file and send it to the OTRS Group, using an alternate method."
-msgstr "ไฟล์ที่ประกอบด้วยกำสนับสนุนจะถูกดาวน์โหลดไปยังระบบภายใน กรุณาบันทึกไฟล์และส่งไปยังกลุ่มOTRS โดยใช้วิธีอื่น"
+msgid "A file containing the support bundle will be downloaded to the local system."
+msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "Error: Support data could not be collected (%s)."
@@ -11309,7 +11305,7 @@ msgstr ""
 msgid "Training"
 msgstr "การฝึกอบรม"
 
-#. Perl Module: Kernel/Modules/AdminRegistration.pm
+#. SysConfig
 msgid "Development"
 msgstr ""
 

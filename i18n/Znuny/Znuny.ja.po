@@ -1520,7 +1520,7 @@ msgstr "その他のビジネス分野"
 msgid "Would you like to benefit from additional dynamic field types for businesses? Upgrade to %s to get access to the following field types:"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmssql.tt
 msgid "Database"
 msgstr "データベース"
 
@@ -5459,7 +5459,7 @@ msgstr "OTRS-ID"
 msgid "You don't have an OTRS-ID yet?"
 msgstr "まだ OTRS-ID をお持ちではありませんか？"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Sign up now"
 msgstr "新規登録する"
 
@@ -5471,7 +5471,7 @@ msgstr "パスワードを忘れましたか？"
 msgid "Retrieve a new one"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Next"
 msgstr "次へ"
 
@@ -5479,7 +5479,7 @@ msgstr "次へ"
 msgid "This data will be frequently transferred to OTRS Group when you register this system."
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
 msgid "Attribute"
 msgstr "属性"
 
@@ -5487,15 +5487,15 @@ msgstr "属性"
 msgid "FQDN"
 msgstr "FQDN"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
 msgid "OTRS Version"
 msgstr "OTRSバージョン"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
 msgid "Operating System"
 msgstr "オペレーションシステム"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
 msgid "Perl Version"
 msgstr "Perl バージョン"
 
@@ -5539,7 +5539,7 @@ msgstr ""
 msgid "System Registration Data"
 msgstr "システム登録データ"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "Support Data"
 msgstr "サポートデータ"
 
@@ -6075,10 +6075,6 @@ msgstr "サポートバンドルの生成"
 msgid "The Support Bundle has been Generated"
 msgstr "サポートバンドルが生成されました"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-msgid "Please choose one of the following options."
-msgstr "次のいずれかのオプションを選択して下さい。"
-
 #. Template: AdminSupportDataCollector
 msgid "Send by Email"
 msgstr "Eメールで送信"
@@ -6104,8 +6100,8 @@ msgid "Download File"
 msgstr "ファイルのダウンロード"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-msgid "A file containing the support bundle will be downloaded to the local system. Please save the file and send it to the OTRS Group, using an alternate method."
-msgstr "サポートバンドルを含むファイルをダウンロードします。ファイルを保存しOTRSグループに他の手段で送信してください。"
+msgid "A file containing the support bundle will be downloaded to the local system."
+msgstr "サポートバンドルを含むファイルをダウンロードします。"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "Error: Support data could not be collected (%s)."
@@ -11324,7 +11320,7 @@ msgstr "テスト"
 msgid "Training"
 msgstr "トレーニング"
 
-#. Perl Module: Kernel/Modules/AdminRegistration.pm
+#. SysConfig
 msgid "Development"
 msgstr "デプロイ"
 

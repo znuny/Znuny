@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.722240312601758;
+    $Self->{Completeness}        = 0.723064250411862;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -312,7 +312,6 @@ sub Data {
             'OTRSグループへのシステムのサポート登録により、多くのメリットが提供されます。',
         'Please note that the use of OTRS cloud services requires the system to be registered.' =>
             'OTRS クラウドサービスのご利用には、システムの登録が必要となりますのでご注意ください。',
-        'Register this system' => 'このシステムをサポート登録する',
         'Here you can configure available cloud services that communicate securely with %s.' =>
             'ここで、 %s と安全に通信するために利用可能なクラウドサービスを構成できます。',
         'Available Cloud Services' => '利用可能なクラウドサービス',
@@ -1923,92 +1922,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Filter for templates' => '',
         'Templates' => 'テンプレート',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-        'System Registration Management' => 'システム登録管理',
-        'Edit System Registration' => 'システム登録を修正',
-        'System Registration Overview' => 'システム登録一覧',
-        'Register System' => '登録システム',
-        'Validate OTRS-ID' => 'OTRS-IDの検証',
-        'Deregister System' => 'システム登録',
-        'Edit details' => '詳細を編集',
-        'Show transmitted data' => '送信されたデータを表示',
-        'Deregister system' => 'システムを未登録に戻す',
-        'Overview of registered systems' => '登録されたシステムの概要',
-        'This system is registered with OTRS Group.' => 'このシステムはOTRS社もしくは関連する会社に登録されています。',
-        'System type' => 'システム種別',
-        'Unique ID' => 'ユニークID',
-        'Last communication with registration server' => '登録管理サーバに対する最後のアクセス',
-        'System Registration not Possible' => 'システム登録ができない',
-        'Please note that you can\'t register your system if OTRS Daemon is not running correctly!' =>
-            '注意：OTRSデーモンが起動していないと、システムの登録が正常に行えません。',
-        'Instructions' => '指示',
-        'System Deregistration not Possible' => 'システムの登録解除ができない',
-        'Please note that you can\'t deregister your system if you\'re using the %s or having a valid service contract.' =>
-            '契約上、%sを使用している場合には登録を解除することが出来ませんので注意して下さい。',
-        'OTRS-ID Login' => 'OTRS-ID',
-        'Read more' => '続きを読む',
-        'You need to log in with your OTRS-ID to register your system.' =>
-            'システムを登録するには、OTRS-IDでログインする必要があります。',
-        'Your OTRS-ID is the email address you used to sign up on the OTRS.com webpage.' =>
-            'OTRS-IDはOTRS.comのウェブページでサインアップに用いたE-Mailアドレスです。',
-        'Data Protection' => 'データ保護',
-        'What are the advantages of system registration?' => 'システムを登録することのメリット',
-        'You will receive updates about relevant security releases.' => '',
-        'With your system registration we can improve our services for you, because we have all relevant information available.' =>
-            '',
-        'This is only the beginning!' => '',
-        'We will inform you about our new services and offerings soon.' =>
-            '',
-        'Can I use OTRS without being registered?' => '登録せずにOTRSを利用できますか？',
-        'System registration is optional.' => 'システムへの登録は任意です。',
-        'You can download and use OTRS without being registered.' => 'OTRSは、登録することなくダウンロード・利用することができます。',
-        'Is it possible to deregister?' => '',
-        'You can deregister at any time.' => '',
-        'Which data is transfered when registering?' => '',
-        'A registered system sends the following data to OTRS Group:' => '',
-        'Fully Qualified Domain Name (FQDN), OTRS version, Database, Operating System and Perl version.' =>
-            '',
-        'Why do I have to provide a description for my system?' => '',
-        'The description of the system is optional.' => '',
-        'The description and system type you specify help you to identify and manage the details of your registered systems.' =>
-            '',
-        'How often does my OTRS system send updates?' => '',
-        'Your system will send updates to the registration server at regular intervals.' =>
-            '',
-        'Typically this would be around once every three days.' => '',
-        'If you deregister your system, you will lose these benefits:' =>
-            '',
-        'You need to log in with your OTRS-ID to deregister your system.' =>
-            '',
-        'OTRS-ID' => 'OTRS-ID',
-        'You don\'t have an OTRS-ID yet?' => 'まだ OTRS-ID をお持ちではありませんか？',
-        'Sign up now' => '新規登録する',
-        'Forgot your password?' => 'パスワードを忘れましたか？',
-        'Retrieve a new one' => '',
-        'Next' => '次へ',
-        'This data will be frequently transferred to OTRS Group when you register this system.' =>
-            '',
-        'Attribute' => '属性',
-        'FQDN' => 'FQDN',
-        'OTRS Version' => 'OTRSバージョン',
-        'Database' => 'データベース',
-        'Operating System' => 'オペレーションシステム',
-        'Perl Version' => 'Perl バージョン',
-        'Optional description of this system.' => '',
-        'Register' => '登録',
-        'Continuing with this step will deregister the system from OTRS Group.' =>
-            '',
-        'Deregister' => '登録解除',
-        'You can modify registration settings here.' => '',
-        'Overview of Transmitted Data' => '送信されたデータの 概要',
-        'There is no data regularly sent from your system to %s.' => '',
-        'The following data is sent at minimum every 3 days from your system to %s.' =>
-            '',
-        'The data will be transferred in JSON format via a secure https connection.' =>
-            '',
-        'System Registration Data' => 'システム登録データ',
-        'Support Data' => 'サポートデータ',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'ロール管理',
         'Add Role' => 'ロールを追加',
@@ -2182,20 +2095,13 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Sending support data to OTRS Group is not possible!' => 'OTRS Group へのサポートデータの送信ができません！',
         'Enable Cloud Services' => 'クラウドサービスを有効にする',
         'Enable cloud services' => 'クラウドサービスの有効化',
-        'This data is sent to OTRS Group on a regular basis. To stop sending this data please update your system registration.' =>
-            'このデータは定期的にOTRSグループに送られます。 このデータの送信を停止するには、システム登録を更新して下さい。',
-        'You can manually trigger the Support Data sending by pressing this button:' =>
-            '手動でこのボタンを押すことにより、サポートデータを送信することができます。',
-        'Send Update' => '更新を送信',
-        'Currently this data is only shown in this system.' => 'このデータは現在このシステム上で表示されています。',
         'A support bundle (including: system registration information, support data, a list of installed packages and all locally modified source code files) can be generated by pressing this button:' =>
             'このボタンを押すとサポートバンドル(システム登録情報、サポートに必要なデータ、インストールされているパッケージリスト、変更されているソース)が作成されます。',
         'Generate Support Bundle' => 'サポートバンドルの生成',
         'The Support Bundle has been Generated' => 'サポートバンドルが生成されました',
-        'Please choose one of the following options.' => '次のいずれかのオプションを選択して下さい。',
-        'Download File' => 'ファイルのダウンロード',
-        'A file containing the support bundle will be downloaded to the local system. Please save the file and send it to the OTRS Group, using an alternate method.' =>
-            'サポートバンドルを含むファイルをダウンロードします。ファイルを保存しOTRSグループに他の手段で送信してください。',
+        'A file containing the support bundle will be downloaded to the local system.' =>
+            'サポートバンドルを含むファイルをダウンロードします。',
+        'Support Data' => 'サポートデータ',
         'Error: Support data could not be collected (%s).' => 'エラー：サポートデータを収集できませんでした。（%s）',
         'Details' => '詳細',
 
@@ -2361,6 +2267,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Add ticket attribute relations' => '',
         'Edit ticket attribute relations' => '',
         'Import CSV or Excel file' => '',
+        'Attribute' => '属性',
         'Last update' => '',
         'Are you sure you want to delete entry \'%s\'?' => '',
         'Download previously imported file' => '',
@@ -3063,6 +2970,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Your 2 Factor Token' => '',
         'Log In' => 'ログイン',
         'Not yet registered?' => '未登録ですか？',
+        'Sign up now' => '新規登録する',
         'Back' => '戻る',
         'Request New Password' => '新規パスワードを申請',
         'Your User Name' => 'ユーザー名',
@@ -3165,6 +3073,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Phone' => '電話',
         'Web site' => 'Webサイト',
         'Community' => '',
+        'Next' => '次へ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => '送信メール設定',
@@ -3216,6 +3125,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             'このOTRSシステム用に限られた権限の新規データベースユーザーが作成されます。',
         'Repeat Password' => 'パスワードを再度入力',
         'Generated password' => 'パスワードを生成しました。',
+        'Database' => 'データベース',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmysql.tt
         'Passwords do not match' => 'パスワードが一致しません',
@@ -4075,12 +3985,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         # Perl Module: Kernel/Modules/AdminQueueTemplates.pm
         'Change Queue Relations for Template' => 'テンプレートに対するキューの関連性を変更',
         'Change Template Relations for Queue' => 'キューに対するテンプレートの関連性を変更',
-
-        # Perl Module: Kernel/Modules/AdminRegistration.pm
-        'Production' => '生産',
-        'Test' => 'テスト',
-        'Training' => 'トレーニング',
-        'Development' => 'デプロイ',
 
         # Perl Module: Kernel/Modules/AdminRole.pm
         'Role updated!' => 'ロールを更新しました。',
@@ -5244,6 +5148,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'PostgreSQL 9.2 or higher is required.' => '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
+        'Operating System' => 'オペレーションシステム',
         'OTRS Disk Partition' => 'OTRS ディスクパーティション',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskSpace.pm
@@ -5278,6 +5183,9 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
             '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
+        'Perl Version' => 'Perl バージョン',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/Swap.pm
         'Free Swap Space (%)' => '未使用の Swap 領域 (%)',
@@ -5436,6 +5344,9 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'UI - Special Statistics' => 'UI - 特殊レポート',
         'Agents using custom main menu ordering' => 'カスタムメインメニューのオーダーを使用する担当者',
         'Agents using favourites for the admin overview' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
+        'OTRS Version' => 'OTRSバージョン',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
         'Webserver' => 'Webサーバー',
@@ -8714,6 +8625,7 @@ Thanks for your help!
             '',
         'Determines the strings that will be shown as recipient (To:) of the ticket in the customer interface. For Queue as CustomerPanelSelectionType, "<Queue>" shows the names of the queues, and for SystemAddress, "<Realname> <<Email>>" shows the name and email of the recipient.' =>
             '',
+        'Development' => 'デプロイ',
         'Disable cloud services' => 'クラウドサービスの無効化',
         'Display communication log entries.' => 'コミュニケーション・ログのエントリを表示します。',
         'Down' => '降順',
@@ -8882,7 +8794,6 @@ Thanks for your help!
         'Manage existing sessions.' => '既存セッション管理',
         'Manage support data.' => 'サポート情報の管理',
         'Manage system files.' => '',
-        'Manage system registration.' => 'システム登録の管理',
         'Manage tasks triggered by event or time based execution.' => 'イベントトリガーまたは時間ベースで実行されるタスクの管理',
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => '迷惑メールにする',
@@ -9277,7 +9188,6 @@ Thanks for your help!
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
-        'Data Protection',
         'Date/Time',
         'Day',
         'Dec',
@@ -9506,7 +9416,6 @@ Thanks for your help!
         'Support Data information was successfully sent.',
         'Switch to desktop mode',
         'Switch to mobile mode',
-        'System Registration',
         'Team',
         'Th',
         'The browser you are using is too old.',

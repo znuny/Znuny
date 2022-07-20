@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.94578313253012;
+    $Self->{Completeness}        = 0.945140032948929;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -315,7 +315,6 @@ sub Data {
             'A rendszer regisztráció az OTRS csoport szolgáltatása, amely számos előnyt biztosít!',
         'Please note that the use of OTRS cloud services requires the system to be registered.' =>
             'Ne feledje, hogy az OTRS felhőszolgáltatások használatához a rendszer regisztrációja szükséges.',
-        'Register this system' => 'A rendszer regisztrálása',
         'Here you can configure available cloud services that communicate securely with %s.' =>
             'Itt tudja beállítani azokat az elérhető felhőszolgáltatásokat, amelyek biztonságosan kommunikálnak a következővel: %s.',
         'Available Cloud Services' => 'Elérhető felhőszolgáltatások',
@@ -1923,92 +1922,6 @@ sub Data {
         'Filter for templates' => 'Szűrő a sablonokhoz',
         'Templates' => 'Sablonok',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-        'System Registration Management' => 'Rendszer regisztráció kezelés',
-        'Edit System Registration' => 'Rendszer regisztráció szerkesztése',
-        'System Registration Overview' => 'Rendszer regisztráció áttekintője',
-        'Register System' => 'Rendszer regisztrálása',
-        'Validate OTRS-ID' => 'OTRS-azonosító ellenőrzése',
-        'Deregister System' => 'Rendszer regisztrációjának törlése',
-        'Edit details' => 'Részletek szerkesztése',
-        'Show transmitted data' => 'Átvitt adatok megtekintése',
-        'Deregister system' => 'Rendszer regisztrációjának törlése',
-        'Overview of registered systems' => 'Regisztrált rendszerek áttekintője',
-        'This system is registered with OTRS Group.' => 'Ez a rendszer regisztrálva van az OTRS csoporttal.',
-        'System type' => 'Rendszertípus',
-        'Unique ID' => 'Egyedi azonosító',
-        'Last communication with registration server' => 'Utolsó kommunikáció a regisztrációs kiszolgálóval',
-        'System Registration not Possible' => 'A rendszer regisztrációja nem lehetséges',
-        'Please note that you can\'t register your system if OTRS Daemon is not running correctly!' =>
-            'Ne feledje, hogy nem tudja regisztrálni a rendszerét, ha az OTRS démon nem fut helyesen!',
-        'Instructions' => 'Utasítások',
-        'System Deregistration not Possible' => 'A rendszer regisztrációjának megszüntetése nem lehetséges',
-        'Please note that you can\'t deregister your system if you\'re using the %s or having a valid service contract.' =>
-            'Ne feledje, hogy nem tudja a rendszer regisztrációját megszüntetni az %s használatakor, vagy ha érvényes szolgáltatói szerződése van.',
-        'OTRS-ID Login' => 'OTRS-azonosító bejelentkezés',
-        'Read more' => 'Olvassa tovább',
-        'You need to log in with your OTRS-ID to register your system.' =>
-            'Be kell jelentkeznie az OTRS-azonosítójával a rendszer regisztrálásához.',
-        'Your OTRS-ID is the email address you used to sign up on the OTRS.com webpage.' =>
-            'Az OTRS-azonosítója az OTRS.com weboldalon a regisztrációhoz használt e-mail címe.',
-        'Data Protection' => 'Adatvédelem',
-        'What are the advantages of system registration?' => 'Mik a rendszer regisztrálásának előnyei?',
-        'You will receive updates about relevant security releases.' => 'Frissítéseket fog kapni a fontos biztonsági kiadásokról.',
-        'With your system registration we can improve our services for you, because we have all relevant information available.' =>
-            'A rendszer regisztrálása által tovább fejleszthetjük a szolgáltatásainkat, mert nekünk minden fontos információ elérhető.',
-        'This is only the beginning!' => 'És ez még csak a kezdet!',
-        'We will inform you about our new services and offerings soon.' =>
-            'Hamarosan értesíteni fogjuk az új szolgáltatásainkról és ajánlatainkról.',
-        'Can I use OTRS without being registered?' => 'Használható az OTRS regisztráció nélkül?',
-        'System registration is optional.' => 'A rendszer regisztrációja opcionális.',
-        'You can download and use OTRS without being registered.' => 'Letöltheti és használhatja az OTRS-t anélkül, hogy regisztrálva lenne.',
-        'Is it possible to deregister?' => 'Lehetséges a regisztráció törlése?',
-        'You can deregister at any time.' => 'Bármikor törölheti a regisztrációt.',
-        'Which data is transfered when registering?' => 'Milyen adatok kerülnek átvitelre a regisztrációkor?',
-        'A registered system sends the following data to OTRS Group:' => 'Egy regisztrált rendszer a következő adatokat küldi az OTRS csoportnak:',
-        'Fully Qualified Domain Name (FQDN), OTRS version, Database, Operating System and Perl version.' =>
-            'Teljes képzésű tartománynév (FQDN), OTRS verzió, adatbázis, operációs rendszer és Perl verzió.',
-        'Why do I have to provide a description for my system?' => 'Miért kell leírást megadnom a rendszeremhez?',
-        'The description of the system is optional.' => 'A rendszer leírása opcionális.',
-        'The description and system type you specify help you to identify and manage the details of your registered systems.' =>
-            'A megadott leírás és a rendszer típusa segít az azonosításban, és a regisztrált rendszer részleteinek kezelésében.',
-        'How often does my OTRS system send updates?' => 'Milyen gyakran küld az OTRS rendszerem frissítéseket?',
-        'Your system will send updates to the registration server at regular intervals.' =>
-            'A rendszer szabályos időközönként fog frissítéseket küldeni a regisztrációs kiszolgálónak.',
-        'Typically this would be around once every three days.' => 'Ez tipikusan nagyjából három naponta történik.',
-        'If you deregister your system, you will lose these benefits:' =>
-            'Ha megszünteti a rendszer regisztrációját, a következő előnyöket fogja elveszíteni:',
-        'You need to log in with your OTRS-ID to deregister your system.' =>
-            'Be kell jelentkeznie az OTRS-azonosítójával a rendszere regisztrációjának törléséhez.',
-        'OTRS-ID' => 'OTRS-azonosító',
-        'You don\'t have an OTRS-ID yet?' => 'Még nincs OTRS-azonosítója?',
-        'Sign up now' => 'Regisztráljon most',
-        'Forgot your password?' => 'Elfelejtette a jelszavát?',
-        'Retrieve a new one' => 'Kérjen egy újat',
-        'Next' => 'Következő',
-        'This data will be frequently transferred to OTRS Group when you register this system.' =>
-            'Ezek az adatok rendszeresen el lesznek küldve az OTRS csoportnak, ha regisztrálja a rendszerét.',
-        'Attribute' => 'Jellemző',
-        'FQDN' => 'FQDN',
-        'OTRS Version' => 'OTRS verzió',
-        'Database' => 'Adatbázis',
-        'Operating System' => 'Operációs rendszer',
-        'Perl Version' => 'Perl verzió',
-        'Optional description of this system.' => 'A rendszer opcionális leírása.',
-        'Register' => 'Regisztráció',
-        'Continuing with this step will deregister the system from OTRS Group.' =>
-            'Ha folytatja, ezzel a lépéssel törölni fogja a rendszer regisztrációját az OTRS csoportnál.',
-        'Deregister' => 'Regisztráció törlése',
-        'You can modify registration settings here.' => 'Itt módosíthatja a regisztrációs beállításokat.',
-        'Overview of Transmitted Data' => 'Átvitt adatok áttekintője',
-        'There is no data regularly sent from your system to %s.' => 'Nincsenek rendszeresen elküldött adatok a rendszeréről ide: %s.',
-        'The following data is sent at minimum every 3 days from your system to %s.' =>
-            'A következő adatok minimum 3 naponta lesznek elküldve a rendszeréről ide: %s.',
-        'The data will be transferred in JSON format via a secure https connection.' =>
-            'Az adatok JSON formátumban kerülnek átvitelre biztonságos https kapcsolaton keresztül.',
-        'System Registration Data' => 'Rendszer regisztráció adatok',
-        'Support Data' => 'Támogatási adatok',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'Szerepkezelés',
         'Add Role' => 'Szerep hozzáadása',
@@ -2182,20 +2095,13 @@ sub Data {
         'Sending support data to OTRS Group is not possible!' => 'Nem lehetséges támogatási adatokat küldeni az OTRS csoportnak!',
         'Enable Cloud Services' => 'Felhőszolgáltatások engedélyezése',
         'Enable cloud services' => 'Felhőszolgáltatások engedélyezése',
-        'This data is sent to OTRS Group on a regular basis. To stop sending this data please update your system registration.' =>
-            'Ezeket az adatokat küldik el az OTRS csoportnak rendszeresen. Az adatok küldésének leállításához frissítse a rendszer regisztrációját.',
-        'You can manually trigger the Support Data sending by pressing this button:' =>
-            'Kézzel is aktiválhatja a támogatási adatok küldését a gomb megnyomásával:',
-        'Send Update' => 'Frissítés küldése',
-        'Currently this data is only shown in this system.' => 'Jelenleg ezek az adatok csak ezen a rendszeren jelennek meg.',
         'A support bundle (including: system registration information, support data, a list of installed packages and all locally modified source code files) can be generated by pressing this button:' =>
             'A támogatási csomag (tartalmazza: rendszer regisztrációs információk, támogatási adatok, telepített csomagok listája és minden helyileg módosított forráskód fájl) előállítható a gomb megnyomásával:',
         'Generate Support Bundle' => 'Támogatási csomag előállítása',
         'The Support Bundle has been Generated' => 'A támogatási csomag előállítva',
-        'Please choose one of the following options.' => 'Válassza a következő lehetőségek egyikét.',
-        'Download File' => 'Fájl letöltése',
-        'A file containing the support bundle will be downloaded to the local system. Please save the file and send it to the OTRS Group, using an alternate method.' =>
-            'A támogatási csomagot tartalmazó fájl le lesz töltve a helyi rendszerre. Mentse el a fájlt, és küldje el az OTRS csoportnak egy alternatív módszer használatával.',
+        'A file containing the support bundle will be downloaded to the local system.' =>
+            'A támogatási csomagot tartalmazó fájl le lesz töltve a helyi rendszerre.',
+        'Support Data' => 'Támogatási adatok',
         'Error: Support data could not be collected (%s).' => 'Hiba: A támogatási adatokat nem sikerült összegyűjteni (%s).',
         'Details' => 'Részletek',
 
@@ -2361,6 +2267,7 @@ sub Data {
         'Add ticket attribute relations' => '',
         'Edit ticket attribute relations' => '',
         'Import CSV or Excel file' => '',
+        'Attribute' => 'Jellemző',
         'Last update' => '',
         'Are you sure you want to delete entry \'%s\'?' => '',
         'Download previously imported file' => '',
@@ -3063,6 +2970,7 @@ sub Data {
         'Your 2 Factor Token' => 'Az Ön kétlépcsős tokenje',
         'Log In' => 'Bejelentkezés',
         'Not yet registered?' => 'Még nem regisztrált?',
+        'Sign up now' => 'Regisztráljon most',
         'Back' => 'Vissza',
         'Request New Password' => 'Új jelszó kérése',
         'Your User Name' => 'A felhasználóneve',
@@ -3165,6 +3073,7 @@ sub Data {
         'Phone' => 'Telefon',
         'Web site' => 'Weboldal',
         'Community' => '',
+        'Next' => 'Következő',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => 'Kimenő levél beállítása',
@@ -3216,6 +3125,7 @@ sub Data {
             'Egy új, korlátozott jogosultságokkal rendelkező adatbázis felhasználó lesz létrehozva ehhez az OTRS rendszerhez.',
         'Repeat Password' => 'Jelszó ismétlése',
         'Generated password' => 'Előállított jelszó',
+        'Database' => 'Adatbázis',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmysql.tt
         'Passwords do not match' => 'A jelszavak nem egyeznek',
@@ -4074,12 +3984,6 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminQueueTemplates.pm
         'Change Queue Relations for Template' => 'Várólista-kapcsolatok megváltoztatása egy sablonnál',
         'Change Template Relations for Queue' => 'Sablonkapcsolatok megváltoztatása egy várólistánál',
-
-        # Perl Module: Kernel/Modules/AdminRegistration.pm
-        'Production' => 'Produktív',
-        'Test' => 'Teszt',
-        'Training' => 'Oktatás',
-        'Development' => 'Fejlesztés',
 
         # Perl Module: Kernel/Modules/AdminRole.pm
         'Role updated!' => 'Szerep frissítve!',
@@ -5243,6 +5147,7 @@ sub Data {
         'PostgreSQL 9.2 or higher is required.' => 'PostgreSQL 9.2 vagy újabb szükséges.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
+        'Operating System' => 'Operációs rendszer',
         'OTRS Disk Partition' => 'OTRS lemezpartíció',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskSpace.pm
@@ -5277,6 +5182,9 @@ sub Data {
             'A CPAN::Audit azt jelentette, hogy egy vagy több telepített Perl modul ismert sebezhetőséggel rendelkezik. Ne feledje, hogy lehetnek tévesen jelzett jelentések is azoknál a disztribúcióknál, amelyek úgy foltozzák a Perl modulokat, hogy nem változtatják meg a verziószámokat.',
         'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
             'A CPAN::Audit nem jelentett semmilyen ismert sebezhetőséget a telepített Perl modulokban.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
+        'Perl Version' => 'Perl verzió',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/Swap.pm
         'Free Swap Space (%)' => 'Szabad lapozófájl méret (%)',
@@ -5435,6 +5343,9 @@ sub Data {
         'UI - Special Statistics' => 'UI – különleges statisztikák',
         'Agents using custom main menu ordering' => 'Egyéni menürendezést használó ügyintézők',
         'Agents using favourites for the admin overview' => 'Kedvenceket használó ügyintézők az adminisztrációs áttekintőnél',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
+        'OTRS Version' => 'OTRS verzió',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
         'Webserver' => 'Webkiszolgáló',
@@ -8706,6 +8617,7 @@ Az Ön segélyszolgálat csapata
             'Meghatározza azokat a szövegeket, amelyek a telefonos jegy címzettjeként (Címzett:), illetve az e-mail jegy küldőjeként (Feladó:) kerülnek megjelenítésre az ügyintézői felületen. A NewQueueSelectionType beállításként megadott várólistánál a „<Queue>” a várólisták neveit jeleníti meg, és a rendszercímnél a „<Realname> <<Email>>” a címzett nevét és e-mail címét jeleníti meg.',
         'Determines the strings that will be shown as recipient (To:) of the ticket in the customer interface. For Queue as CustomerPanelSelectionType, "<Queue>" shows the names of the queues, and for SystemAddress, "<Realname> <<Email>>" shows the name and email of the recipient.' =>
             'Meghatározza azokat a szövegeket, amelyek a jegy címzettjeként (Címzett:) kerülnek megjelenítésre az ügyfélfelületen. A CustomerPanelSelectionType beállításként megadott várólistánál a „<Queue>” a várólisták neveit jeleníti meg, és a rendszercímnél a „<Realname> <<Email>>” a címzett nevét és e-mail címét jeleníti meg.',
+        'Development' => 'Fejlesztés',
         'Disable cloud services' => 'Felhőszolgáltatások letiltása',
         'Display communication log entries.' => 'Kommunikációs naplóbejegyzések megjelenítése.',
         'Down' => 'Le',
@@ -8874,7 +8786,6 @@ Az Ön segélyszolgálat csapata
         'Manage existing sessions.' => 'Meglévő munkamenetek kezelése.',
         'Manage support data.' => 'Támogatási adatok kezelése.',
         'Manage system files.' => '',
-        'Manage system registration.' => 'Rendszer regisztráció kezelése.',
         'Manage tasks triggered by event or time based execution.' => 'Esemény vagy időalapú végrehajtás által aktivált feladatok kezelése.',
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Megjelölés szemétként!',
@@ -9268,7 +9179,6 @@ Az Ön segélyszolgálat csapata
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
-        'Data Protection',
         'Date/Time',
         'Day',
         'Dec',
@@ -9497,7 +9407,6 @@ Az Ön segélyszolgálat csapata
         'Support Data information was successfully sent.',
         'Switch to desktop mode',
         'Switch to mobile mode',
-        'System Registration',
         'Team',
         'Th',
         'The browser you are using is too old.',

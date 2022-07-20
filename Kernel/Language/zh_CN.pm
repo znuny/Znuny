@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.94578313253012;
+    $Self->{Completeness}        = 0.945140032948929;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -316,7 +316,6 @@ sub Data {
             '系统注册是OTRS集团的一项服务，它为您提供了很多好处!',
         'Please note that the use of OTRS cloud services requires the system to be registered.' =>
             '请注意：为了使用OTRS云服务，需要先注册系统。',
-        'Register this system' => '注册本系统',
         'Here you can configure available cloud services that communicate securely with %s.' =>
             '你可以在这里配置可用的云服务，其与%s的通信是安全的。',
         'Available Cloud Services' => '可用的云服务',
@@ -1924,92 +1923,6 @@ sub Data {
         'Filter for templates' => '模板筛选',
         'Templates' => '模板',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-        'System Registration Management' => '系统注册管理',
-        'Edit System Registration' => '编辑系统注册',
-        'System Registration Overview' => '系统注册概览',
-        'Register System' => '注册系统',
-        'Validate OTRS-ID' => '验证OTRS-ID',
-        'Deregister System' => '取消系统注册',
-        'Edit details' => '编辑详细信息',
-        'Show transmitted data' => '显示已传输的数据',
-        'Deregister system' => '取消系统注册',
-        'Overview of registered systems' => '注册系统概述',
-        'This system is registered with OTRS Group.' => '本系统已注册到OTRS集团。',
-        'System type' => '系统类型',
-        'Unique ID' => '唯一ID',
-        'Last communication with registration server' => '与注册服务器上一次的通信',
-        'System Registration not Possible' => '系统注册不可能',
-        'Please note that you can\'t register your system if OTRS Daemon is not running correctly!' =>
-            '请注意：如果OTRS守护进程没有正确运行，你就不能注册你的系统！',
-        'Instructions' => '说明',
-        'System Deregistration not Possible' => '系统取消注册不可能',
-        'Please note that you can\'t deregister your system if you\'re using the %s or having a valid service contract.' =>
-            '请注意：如果你正在使用%s 或具有一个有效的服务合同，你就不能取消你的系统注册。',
-        'OTRS-ID Login' => 'OTRS-ID登陆',
-        'Read more' => '阅读更多',
-        'You need to log in with your OTRS-ID to register your system.' =>
-            '为了注册系统，需要你先使用OTRS-ID进行登陆。',
-        'Your OTRS-ID is the email address you used to sign up on the OTRS.com webpage.' =>
-            'OTRS-ID是你在OTRS.com网站注册的电子邮箱地址。',
-        'Data Protection' => '数据保护',
-        'What are the advantages of system registration?' => '系统注册有什么好处?',
-        'You will receive updates about relevant security releases.' => '你将及时收到有关安全版本的更新信息。',
-        'With your system registration we can improve our services for you, because we have all relevant information available.' =>
-            '你的系统注册有助于我们改善为你提供的服务，因为我们能获得必要的相关信息。',
-        'This is only the beginning!' => '这仅仅是开始！',
-        'We will inform you about our new services and offerings soon.' =>
-            '有了新的服务和产品我们能很快通知你。',
-        'Can I use OTRS without being registered?' => '如果不进行系统注册，我还可以使用OTRS吗?',
-        'System registration is optional.' => '系统注册是可选的。',
-        'You can download and use OTRS without being registered.' => '不进行注册，你仍然可以下载和使用OTRS。',
-        'Is it possible to deregister?' => '可以取消注册吗？',
-        'You can deregister at any time.' => '你可以随时取消系统注册。',
-        'Which data is transfered when registering?' => '注册后，哪些数据会被上传?',
-        'A registered system sends the following data to OTRS Group:' => '注册过的系统会将以下数据上传给OTRS集团：',
-        'Fully Qualified Domain Name (FQDN), OTRS version, Database, Operating System and Perl version.' =>
-            '域名(FQDN)、OTRS版本、数据库、操作系统和Perl版本。',
-        'Why do I have to provide a description for my system?' => '为什么需要我提供有关注册系统的描述?',
-        'The description of the system is optional.' => '注册系统的描述是可选的。',
-        'The description and system type you specify help you to identify and manage the details of your registered systems.' =>
-            '注册系统描述和类型有助于您识别和管理系统的细节。',
-        'How often does my OTRS system send updates?' => '我的OTRS系统上传数据的频度?',
-        'Your system will send updates to the registration server at regular intervals.' =>
-            '你的系统将定期向注册服务器发送更新。',
-        'Typically this would be around once every three days.' => '通常这将是大约每3天1次。',
-        'If you deregister your system, you will lose these benefits:' =>
-            '如果你取消注册你的系统，你将失去以下好处：',
-        'You need to log in with your OTRS-ID to deregister your system.' =>
-            '为了取消注册你的系统，你需要以OTRS-ID登录。',
-        'OTRS-ID' => 'OTRS-ID',
-        'You don\'t have an OTRS-ID yet?' => '还没有OTRS-ID吗？',
-        'Sign up now' => '现在注册',
-        'Forgot your password?' => '忘记密码了吗？',
-        'Retrieve a new one' => '获取新的密码',
-        'Next' => '下一步',
-        'This data will be frequently transferred to OTRS Group when you register this system.' =>
-            '注册本系统后，这个数据会经常传送给OTRS集团。',
-        'Attribute' => '属性',
-        'FQDN' => '正式域名',
-        'OTRS Version' => 'OTRS版本',
-        'Database' => '数据库',
-        'Operating System' => '操作系统',
-        'Perl Version' => 'Perl版本',
-        'Optional description of this system.' => '本系统可选的描述。',
-        'Register' => '注册',
-        'Continuing with this step will deregister the system from OTRS Group.' =>
-            '继续这一步将从OTRS集团取消注册本系统。',
-        'Deregister' => '取消注册',
-        'You can modify registration settings here.' => '你可以在这里修改注册设置。',
-        'Overview of Transmitted Data' => '已传输的数据概览',
-        'There is no data regularly sent from your system to %s.' => '你的系统还没有定期向%s 发送数据。',
-        'The following data is sent at minimum every 3 days from your system to %s.' =>
-            '你的系统至少每3天向%s 发送一次以下数据。',
-        'The data will be transferred in JSON format via a secure https connection.' =>
-            'JSON格式的数据将通过安全的HTTPS连接进行上传。',
-        'System Registration Data' => '系统注册信息',
-        'Support Data' => '支持数据',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => '角色管理',
         'Add Role' => '添加角色',
@@ -2183,20 +2096,13 @@ sub Data {
         'Sending support data to OTRS Group is not possible!' => '不能将支持数据发送给OTRS集团！',
         'Enable Cloud Services' => '启用云服务',
         'Enable cloud services' => '启用云服务',
-        'This data is sent to OTRS Group on a regular basis. To stop sending this data please update your system registration.' =>
-            '这些数据被定期发送到OTRS集团，要停止发送这些数据，请更新你的系统注册配置。',
-        'You can manually trigger the Support Data sending by pressing this button:' =>
-            '你可以通过这个按钮手动发送支持数据：',
-        'Send Update' => '发送更新',
-        'Currently this data is only shown in this system.' => '目前支持数据只是在本地系统上显示。',
         'A support bundle (including: system registration information, support data, a list of installed packages and all locally modified source code files) can be generated by pressing this button:' =>
             '点击以下按钮生成支持数据包（包括：系统注册信息、支持数据、已安装软件包列表和本地所有修改过的源代码文件）：',
         'Generate Support Bundle' => '生成支持数据包',
         'The Support Bundle has been Generated' => '已生成支持包',
-        'Please choose one of the following options.' => '请选择以下的任一个选项。',
-        'Download File' => '下载文件',
-        'A file containing the support bundle will be downloaded to the local system. Please save the file and send it to the OTRS Group, using an alternate method.' =>
-            '包含支持数据包的文件已经可以下载到本地。请保存文件，然后通过其他方法把这个文件发送给OTRS集团。',
+        'A file containing the support bundle will be downloaded to the local system.' =>
+            '包含支持数据包的文件已经可以下载到本地。',
+        'Support Data' => '支持数据',
         'Error: Support data could not be collected (%s).' => '错误：%s 无法收集支持数据。',
         'Details' => '详情',
 
@@ -2362,6 +2268,7 @@ sub Data {
         'Add ticket attribute relations' => '',
         'Edit ticket attribute relations' => '',
         'Import CSV or Excel file' => '',
+        'Attribute' => '属性',
         'Last update' => '',
         'Are you sure you want to delete entry \'%s\'?' => '',
         'Download previously imported file' => '',
@@ -3064,6 +2971,7 @@ sub Data {
         'Your 2 Factor Token' => '你的双因素令牌',
         'Log In' => '登录',
         'Not yet registered?' => '还未注册?',
+        'Sign up now' => '现在注册',
         'Back' => '后退',
         'Request New Password' => '请求新密码',
         'Your User Name' => '你的用户名',
@@ -3166,6 +3074,7 @@ sub Data {
         'Phone' => '电话',
         'Web site' => '网址',
         'Community' => '',
+        'Next' => '下一步',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => '外发邮件配置',
@@ -3217,6 +3126,7 @@ sub Data {
             '已经为OTRS系统创建了新的数据库普通用户。',
         'Repeat Password' => '重复输入密码',
         'Generated password' => '自动生成的密码',
+        'Database' => '数据库',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmysql.tt
         'Passwords do not match' => '密码不匹配',
@@ -4075,12 +3985,6 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminQueueTemplates.pm
         'Change Queue Relations for Template' => '修改模板的队列关系',
         'Change Template Relations for Queue' => '修改队列的模板关系',
-
-        # Perl Module: Kernel/Modules/AdminRegistration.pm
-        'Production' => '生产',
-        'Test' => '测试',
-        'Training' => '培训',
-        'Development' => '开发',
 
         # Perl Module: Kernel/Modules/AdminRole.pm
         'Role updated!' => '角色已更新！',
@@ -5244,6 +5148,7 @@ sub Data {
         'PostgreSQL 9.2 or higher is required.' => '需要PostgreSQL 9.2或更高版本。',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
+        'Operating System' => '操作系统',
         'OTRS Disk Partition' => 'OTRS磁盘分区',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskSpace.pm
@@ -5278,6 +5183,9 @@ sub Data {
             'CPAN::Audit 报告一个或多个已安装的 Perl 模块是否存在已知漏洞。 请注意，在不更改版本号的情况下修补Perl模块的发行版可能存在误报。',
         'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
             '在已安装的Perl模块中 CPAN::Audit 未报告出任何已知漏洞。',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
+        'Perl Version' => 'Perl版本',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/Swap.pm
         'Free Swap Space (%)' => '可用的交换空间(%)',
@@ -5436,6 +5344,9 @@ sub Data {
         'UI - Special Statistics' => '用户界面 - 特殊的统计',
         'Agents using custom main menu ordering' => '服务人员使用定制的主菜单排序',
         'Agents using favourites for the admin overview' => '服务人员在系统管理概览使用收藏夹',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
+        'OTRS Version' => 'OTRS版本',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
         'Webserver' => 'WEB服务器',
@@ -8706,6 +8617,7 @@ Thanks for your help!
             '确定服务人员界面电话工单显示为收件人（To:）和邮件工单显示为发件人（From:）的字符串。如果NewQueueSelectionType参数设置为“队列”，"<Queue>"显示队列名称，如果NewQueueSelectionType参数设置“系统邮件地址”，"<Realname> <<Email>>"显示收件人的名称和邮件地址。',
         'Determines the strings that will be shown as recipient (To:) of the ticket in the customer interface. For Queue as CustomerPanelSelectionType, "<Queue>" shows the names of the queues, and for SystemAddress, "<Realname> <<Email>>" shows the name and email of the recipient.' =>
             '确定客户界面工单显示为收件人（To:）的字符串。如果NewQueueSelectionType参数设置为“队列”，"<Queue>"显示队列名称，如果NewQueueSelectionType参数设置“系统邮件地址”，"<Realname> <<Email>>"显示收件人的名称和邮件地址。',
+        'Development' => '开发',
         'Disable cloud services' => '禁用云服务',
         'Display communication log entries.' => '显示通信日志条目。',
         'Down' => '下',
@@ -8874,7 +8786,6 @@ Thanks for your help!
         'Manage existing sessions.' => '管理已登录会话。',
         'Manage support data.' => '管理支持数据。',
         'Manage system files.' => '',
-        'Manage system registration.' => '管理系统注册。',
         'Manage tasks triggered by event or time based execution.' => '管理事件触发或基于时间执行的任务。',
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => '标记为垃圾!',
@@ -9268,7 +9179,6 @@ Thanks for your help!
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
-        'Data Protection',
         'Date/Time',
         'Day',
         'Dec',
@@ -9497,7 +9407,6 @@ Thanks for your help!
         'Support Data information was successfully sent.',
         'Switch to desktop mode',
         'Switch to mobile mode',
-        'System Registration',
         'Team',
         'Th',
         'The browser you are using is too old.',

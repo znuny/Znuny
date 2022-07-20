@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.459459459459459;
+    $Self->{Completeness}        = 0.454859967051071;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -312,7 +312,6 @@ sub Data {
             'Usajili wa mfumo ni huduma ya kikundi cha OTRS, ambacho kina faida nyingi.',
         'Please note that the use of OTRS cloud services requires the system to be registered.' =>
             '',
-        'Register this system' => '',
         'Here you can configure available cloud services that communicate securely with %s.' =>
             '',
         'Available Cloud Services' => '',
@@ -1920,92 +1919,6 @@ sub Data {
         'Filter for templates' => '',
         'Templates' => 'Kielezo',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-        'System Registration Management' => 'Usimamizi usajili wa mfumo',
-        'Edit System Registration' => '',
-        'System Registration Overview' => '',
-        'Register System' => '',
-        'Validate OTRS-ID' => '',
-        'Deregister System' => 'Kufuta usajili wa mfumo',
-        'Edit details' => 'Hariri maelezo',
-        'Show transmitted data' => 'Onyesha data zilizotumwa',
-        'Deregister system' => 'Futa usajili wa mfumo',
-        'Overview of registered systems' => 'Marejeo ya mifumo iliyosajiliwa',
-        'This system is registered with OTRS Group.' => 'Huu mfumo umesajiliwa na kikundi cha OTRS',
-        'System type' => 'Aina ya mfumo',
-        'Unique ID' => 'Kitambulisho cha kipekee',
-        'Last communication with registration server' => 'Mawasiliano ya mwisho na seva ya usajili.',
-        'System Registration not Possible' => '',
-        'Please note that you can\'t register your system if OTRS Daemon is not running correctly!' =>
-            '',
-        'Instructions' => '',
-        'System Deregistration not Possible' => '',
-        'Please note that you can\'t deregister your system if you\'re using the %s or having a valid service contract.' =>
-            'Tafadhali zingatia kwamba hauwezi kutoa usajili katika mfumo wako kama unatumia %s au una mkataba wa huduma ulio halali.',
-        'OTRS-ID Login' => 'OTRS- ingia na kitambulidho',
-        'Read more' => 'Soma zaidi',
-        'You need to log in with your OTRS-ID to register your system.' =>
-            'Unahitaji kuingia na kitambulisho chako cha OTRS kusajili mfumo wako.',
-        'Your OTRS-ID is the email address you used to sign up on the OTRS.com webpage.' =>
-            'Kitambulisho chako cha OTRS ni barua pepe uliyotumia kujiunga katika ukurasa wa tovuti wa OTRS.com',
-        'Data Protection' => 'Ulinzi wa data',
-        'What are the advantages of system registration?' => 'Nini faida za usajili wa mfumo?',
-        'You will receive updates about relevant security releases.' => 'Utapokea habari kuhusu matoleo yanayohusiana na usalama.',
-        'With your system registration we can improve our services for you, because we have all relevant information available.' =>
-            'Kwa usajili wako wa mfumo tutaboresha huduma zetu kwa ajili yako, kwasababu tuna tarifa zote zinazohusika.',
-        'This is only the beginning!' => 'Huu ni mwanzo tu!',
-        'We will inform you about our new services and offerings soon.' =>
-            'Tutakupa taarifa kuhusu huduma zetu mpya na ofa karibuni.',
-        'Can I use OTRS without being registered?' => 'Je ninawezakutumia OTRS bila kujisajili?',
-        'System registration is optional.' => 'Usajili wa mfumo ni mzuri.',
-        'You can download and use OTRS without being registered.' => 'Unaweza kupakua na kutumia OTRS bila kusajiliwa.',
-        'Is it possible to deregister?' => 'Inawezeka kujifuta?',
-        'You can deregister at any time.' => 'Unaweza kujitoa muda wowote',
-        'Which data is transfered when registering?' => 'Data gani zinatumwa wakati wa usajili?',
-        'A registered system sends the following data to OTRS Group:' => 'Mfumo uliosajiliwa unatuma data zifuatazo kwenda kwenye kikundi cha OTRS:',
-        'Fully Qualified Domain Name (FQDN), OTRS version, Database, Operating System and Perl version.' =>
-            'Jina ka Kikoa lilifuzu Kamili (FQDN), Toleo la OTRS, Hifadhi data, Mfumo endeshi na Toleo la Perl.',
-        'Why do I have to provide a description for my system?' => 'Kwanini nitoe maelezo kwa ajili ya mfumo wangu.',
-        'The description of the system is optional.' => 'Maelezo ya mfumo ni wa hiari.',
-        'The description and system type you specify help you to identify and manage the details of your registered systems.' =>
-            'Maelezo na aina ya mfumo unaobainisha unakusaidia kugundua na kusimamia maelezo ya mfumo wako uliosajiliwa.',
-        'How often does my OTRS system send updates?' => 'Ni kila baada ya muda gani mfumo wangu wa OTRS unatuma ushasishwaji?',
-        'Your system will send updates to the registration server at regular intervals.' =>
-            'Mfumo utatuma visasihi kwenye seva ya usajili kila baada ya muda flani.',
-        'Typically this would be around once every three days.' => 'Hii itakuwa kila mara moja kila  siku tatu',
-        'If you deregister your system, you will lose these benefits:' =>
-            'Kama utatoa usajili katika mfumo wako, utapoteza manufaa haya.',
-        'You need to log in with your OTRS-ID to deregister your system.' =>
-            'Unahitaji kuingia na kitambulisho chako cha OTRS kutoa usajili katika mfumo wako.',
-        'OTRS-ID' => 'Kitambulisho cha OTRS',
-        'You don\'t have an OTRS-ID yet?' => 'Hauna kitambulisho cha OTRS bado?',
-        'Sign up now' => 'Jiandikishe sasa',
-        'Forgot your password?' => 'Umesahau neno lako la siri?',
-        'Retrieve a new one' => 'Pata jipya',
-        'Next' => 'Baadae',
-        'This data will be frequently transferred to OTRS Group when you register this system.' =>
-            'Data hii itahamishwa mara kwa mara kwenye kikundi cha OTRS ukisajili katika mfumo huu.',
-        'Attribute' => 'Sifa',
-        'FQDN' => 'FQDN',
-        'OTRS Version' => 'Toleo la OTRS',
-        'Database' => 'Hifadhidata',
-        'Operating System' => 'Mfumo endeshi',
-        'Perl Version' => 'Toleo la perl',
-        'Optional description of this system.' => 'Maelezo mafupi ya hiari ya mfumo huu.',
-        'Register' => 'Usajili',
-        'Continuing with this step will deregister the system from OTRS Group.' =>
-            'Endelea na hatua hii itafuta usajili wa mfumo kutoka kikundi cha OTRS.',
-        'Deregister' => 'Ondoa usajili',
-        'You can modify registration settings here.' => 'Unaweza kurekebisha mipangilio ya usajili hapa',
-        'Overview of Transmitted Data' => '',
-        'There is no data regularly sent from your system to %s.' => 'Hakuna data za mara kwa mara zinazotumwa katika mfumo wako kwenda %s.',
-        'The following data is sent at minimum every 3 days from your system to %s.' =>
-            'Data ifuatayo inatumwa kila siku 3 katika katika mfumo wako %s.',
-        'The data will be transferred in JSON format via a secure https connection.' =>
-            'Data itatumwa katika umbizo la JSON kupitia muunganisho wa salama wa https.',
-        'System Registration Data' => 'Data ya usajili wa mfumo',
-        'Support Data' => 'Data za masaada',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'Usimamizi wa jukumu',
         'Add Role' => 'Ongeza jukumu',
@@ -2179,20 +2092,13 @@ sub Data {
         'Sending support data to OTRS Group is not possible!' => '',
         'Enable Cloud Services' => '',
         'Enable cloud services' => '',
-        'This data is sent to OTRS Group on a regular basis. To stop sending this data please update your system registration.' =>
-            'Hii data imetumwa kwenda kwenye kikundi cha OTRS kwa msingi wa mara kwa mara. Kuzuia kutuma data hii tafadhali sasisha usajili wa mfumo wako.',
-        'You can manually trigger the Support Data sending by pressing this button:' =>
-            'Unaweza kuchochea kwa mkono data ya kusaidia kwa kutuma kwa kubofya kitufe:',
-        'Send Update' => 'Tuma usasishaji',
-        'Currently this data is only shown in this system.' => 'Kwasasa hii data inaonyeshwa katika mfumo huu',
         'A support bundle (including: system registration information, support data, a list of installed packages and all locally modified source code files) can be generated by pressing this button:' =>
             'Kifurushi cha msaada (Inahusisha: taarifa za usajili za mfumo, data za msaada, orodha ya vifurushi vilivyosanidiwa na mafaili ya chanzo msimbo yote yaliyorekebishwa) yanaweza kuundwa kwa kubofya kibonye hiki.',
         'Generate Support Bundle' => 'Tengeneza kifurushi cha msaada.',
         'The Support Bundle has been Generated' => '',
-        'Please choose one of the following options.' => 'Tafadhali chagua moja kati ya michaguo ifuatayo.',
-        'Download File' => 'Pakua faili',
-        'A file containing the support bundle will be downloaded to the local system. Please save the file and send it to the OTRS Group, using an alternate method.' =>
-            'Faili lililo na kifurushi cha msaada litapakuliwa kwenye mfumo kiambo. Tafadhali hifadhi faili na litume kwenye kikundi cha OTRS, kwa kutumia njia mbadala.',
+        'A file containing the support bundle will be downloaded to the local system.' =>
+            'Faili lililo na kifurushi cha msaada litapakuliwa kwenye mfumo kiambo.',
+        'Support Data' => 'Data za masaada',
         'Error: Support data could not be collected (%s).' => 'Kosa: Data auni hazikuweza kukusanywa (%s).',
         'Details' => 'Undani',
 
@@ -2358,6 +2264,7 @@ sub Data {
         'Add ticket attribute relations' => '',
         'Edit ticket attribute relations' => '',
         'Import CSV or Excel file' => '',
+        'Attribute' => 'Sifa',
         'Last update' => '',
         'Are you sure you want to delete entry \'%s\'?' => '',
         'Download previously imported file' => '',
@@ -3060,6 +2967,7 @@ sub Data {
         'Your 2 Factor Token' => '',
         'Log In' => 'Ingia',
         'Not yet registered?' => 'Bado haujasajiliwa?',
+        'Sign up now' => 'Jiandikishe sasa',
         'Back' => 'Nyuma',
         'Request New Password' => 'Ombi la neno jipya la siri',
         'Your User Name' => 'Jina lako la mtumiaji',
@@ -3162,6 +3070,7 @@ sub Data {
         'Phone' => 'Simu',
         'Web site' => 'Tovuti',
         'Community' => '',
+        'Next' => 'Baadae',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => 'Sanidi barua pepe ya iliyofungwa nje',
@@ -3213,6 +3122,7 @@ sub Data {
             'Mtumiaji mpya wa hifadhi data wenye ruhusa kidogo watangenezwa katika mfumo huu wa OTRS.',
         'Repeat Password' => 'Rudia neno la siri',
         'Generated password' => 'Neno la siri lilitongenezwa',
+        'Database' => 'Hifadhidata',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmysql.tt
         'Passwords do not match' => 'Maneno ya siri hayafanani',
@@ -4071,12 +3981,6 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminQueueTemplates.pm
         'Change Queue Relations for Template' => 'Badili mahusiano ya foleni kwa ajili ya kielezo',
         'Change Template Relations for Queue' => 'Badili mahusiano ya foleni kwa ajili ya foleni',
-
-        # Perl Module: Kernel/Modules/AdminRegistration.pm
-        'Production' => 'Uzalishaji',
-        'Test' => '',
-        'Training' => 'Mafunzo',
-        'Development' => '',
 
         # Perl Module: Kernel/Modules/AdminRole.pm
         'Role updated!' => 'Jukumu limesasishwa!',
@@ -5240,6 +5144,7 @@ sub Data {
         'PostgreSQL 9.2 or higher is required.' => '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
+        'Operating System' => 'Mfumo endeshi',
         'OTRS Disk Partition' => 'Kitenga diski cha OTRS',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskSpace.pm
@@ -5274,6 +5179,9 @@ sub Data {
             '',
         'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
             '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
+        'Perl Version' => 'Toleo la perl',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/Swap.pm
         'Free Swap Space (%)' => 'Nafasi ya kubadilishana ya bure (%)',
@@ -5432,6 +5340,9 @@ sub Data {
         'UI - Special Statistics' => '',
         'Agents using custom main menu ordering' => '',
         'Agents using favourites for the admin overview' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
+        'OTRS Version' => 'Toleo la OTRS',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
         'Webserver' => 'Seva ya tovuti',
@@ -8695,6 +8606,7 @@ Thanks for your help!
             '',
         'Determines the strings that will be shown as recipient (To:) of the ticket in the customer interface. For Queue as CustomerPanelSelectionType, "<Queue>" shows the names of the queues, and for SystemAddress, "<Realname> <<Email>>" shows the name and email of the recipient.' =>
             '',
+        'Development' => '',
         'Disable cloud services' => '',
         'Display communication log entries.' => '',
         'Down' => 'Chini',
@@ -8863,7 +8775,6 @@ Thanks for your help!
         'Manage existing sessions.' => 'Simamia vipindi vilivyopo.',
         'Manage support data.' => '',
         'Manage system files.' => '',
-        'Manage system registration.' => 'Simamia usajili wa mfumo.',
         'Manage tasks triggered by event or time based execution.' => 'Simamia kazi zilizoamshwa na tukio au zinazotekelezwa kutegemeana na muda.',
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Weka alama kama barua taka',
@@ -9257,7 +9168,6 @@ Thanks for your help!
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
-        'Data Protection',
         'Date/Time',
         'Day',
         'Dec',
@@ -9486,7 +9396,6 @@ Thanks for your help!
         'Support Data information was successfully sent.',
         'Switch to desktop mode',
         'Switch to mobile mode',
-        'System Registration',
         'Team',
         'Th',
         'The browser you are using is too old.',

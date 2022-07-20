@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.916965157929013;
+    $Self->{Completeness}        = 0.915980230642504;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -309,7 +309,6 @@ sub Data {
             '시스템 등록은 많은 장점을 제공하는 OTRS Group의 서비스입니다!',
         'Please note that the use of OTRS cloud services requires the system to be registered.' =>
             'OTRS 클라우드 서비스를 사용하려면 시스템을 등록해야합니다.',
-        'Register this system' => '이 시스템 등록',
         'Here you can configure available cloud services that communicate securely with %s.' =>
             '%s와 안전하게 통신 할 수있는 클라우드 서비스를 구성 할 수 있습니다.',
         'Available Cloud Services' => '사용가능한 클라우드 서비스',
@@ -1917,92 +1916,6 @@ sub Data {
         'Filter for templates' => '',
         'Templates' => '템플릿',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-        'System Registration Management' => '시스템 등록 관리',
-        'Edit System Registration' => '시스템 등록 편집',
-        'System Registration Overview' => '시스템 등록 개요',
-        'Register System' => '시스템 등록',
-        'Validate OTRS-ID' => 'OTRS-ID 확인',
-        'Deregister System' => 'Deregister System',
-        'Edit details' => '세부 정보 수정',
-        'Show transmitted data' => '전송된 데이터 표시',
-        'Deregister system' => 'Deregister system',
-        'Overview of registered systems' => '등록된 시스템 개요',
-        'This system is registered with OTRS Group.' => '이 시스템은 OTRS 그룹에 등록되어 있습니다.',
-        'System type' => '시스템 유형',
-        'Unique ID' => '고유 ID',
-        'Last communication with registration server' => '등록 서버와의 마지막 통신',
-        'System Registration not Possible' => '시스템 등록이 불가능합니다.',
-        'Please note that you can\'t register your system if OTRS Daemon is not running correctly!' =>
-            'OTRS 데몬이 올바르게 실행되지 않으면 시스템을 등록 할 수 없습니다.',
-        'Instructions' => '명령',
-        'System Deregistration not Possible' => '시스템 등록 취소가 불가능합니다.',
-        'Please note that you can\'t deregister your system if you\'re using the %s or having a valid service contract.' =>
-            '%s를 사용 중이거나 유효한 서비스 계약이있는 경우 시스템 등록을 취소 할 수 없습니다.',
-        'OTRS-ID Login' => 'OTRS-ID 로그인',
-        'Read more' => '더 많은 것을 읽으십시오',
-        'You need to log in with your OTRS-ID to register your system.' =>
-            '시스템을 등록하려면 OTRS-ID로 로그인해야합니다.',
-        'Your OTRS-ID is the email address you used to sign up on the OTRS.com webpage.' =>
-            'OTRS-ID는 OTRS.com 웹 페이지에 가입 할 때 사용한 이메일 주소입니다.',
-        'Data Protection' => '데이터 보호',
-        'What are the advantages of system registration?' => '시스템 등록의 이점은 무엇입니까?',
-        'You will receive updates about relevant security releases.' => '관련 보안 릴리스에 대한 업데이트가 제공됩니다.',
-        'With your system registration we can improve our services for you, because we have all relevant information available.' =>
-            '시스템 등록을 통해 우리는 모든 관련 정보를 이용할 수 있으므로 귀하를 위해 서비스를 개선 할 수 있습니다.',
-        'This is only the beginning!' => '이것은 단지 시작일뿐입니다!',
-        'We will inform you about our new services and offerings soon.' =>
-            '조만간 새로운 서비스와 제품에 대해 알려 드리겠습니다.',
-        'Can I use OTRS without being registered?' => 'OTRS를 등록하지 않고도 사용할 수 있습니까?',
-        'System registration is optional.' => '시스템 등록은 선택 사항입니다.',
-        'You can download and use OTRS without being registered.' => '등록없이 OTRS를 다운로드하여 사용할 수 있습니다.',
-        'Is it possible to deregister?' => '등록 취소가 가능합니까?',
-        'You can deregister at any time.' => '언제든지 등록 취소 할 수 있습니다.',
-        'Which data is transfered when registering?' => '등록할 때 어떤 데이터가 전송됩니까?',
-        'A registered system sends the following data to OTRS Group:' => '등록 된 시스템은 다음 데이터를 OTRS 그룹에 보냅니다.',
-        'Fully Qualified Domain Name (FQDN), OTRS version, Database, Operating System and Perl version.' =>
-            'FQDN (정규화 된 도메인 이름), OTRS 버전, 데이터베이스, 운영 체제 및 Perl 버전',
-        'Why do I have to provide a description for my system?' => '왜 내 시스템에 대한 설명을 제공해야 합니까?',
-        'The description of the system is optional.' => '시스템 설명은 선택 사항 입니다.',
-        'The description and system type you specify help you to identify and manage the details of your registered systems.' =>
-            '지정하는 설명 W 시스템 유형은 등록 된 시스템의 세부 사항을 식별하고 관리하는 데 도움을줍니다.',
-        'How often does my OTRS system send updates?' => 'OTRS 시스템은 얼마나 자주 업데이트를 보내나요?',
-        'Your system will send updates to the registration server at regular intervals.' =>
-            '시스템은 일정한 간격으로 등록 서버에 업데이트를 보냅니다.',
-        'Typically this would be around once every three days.' => '일반적으로 3일에 1번 정도입니다.',
-        'If you deregister your system, you will lose these benefits:' =>
-            '시스템 등록을 취소하면 다음과 같은 이점을 잃게 됩니다.',
-        'You need to log in with your OTRS-ID to deregister your system.' =>
-            '시스템 등록을 취소하려면 OTRS-ID로 로그인해야합니다.',
-        'OTRS-ID' => 'OTRS-ID ',
-        'You don\'t have an OTRS-ID yet?' => '아직 OTRS-ID가 없습니까?',
-        'Sign up now' => '지금 등록하세요',
-        'Forgot your password?' => '비밀번호를 잊어 버렸습니까?',
-        'Retrieve a new one' => '새 항목 가져 오기',
-        'Next' => '다음',
-        'This data will be frequently transferred to OTRS Group when you register this system.' =>
-            '이 시스템을 등록 할 때이 데이터는 OTRS 그룹으로 자주 전송됩니다.',
-        'Attribute' => '속성',
-        'FQDN' => 'FQDN',
-        'OTRS Version' => 'OTRS 버전',
-        'Database' => '데이터베이스',
-        'Operating System' => '운영 체제',
-        'Perl Version' => '펄 버전',
-        'Optional description of this system.' => '이 시스템에 대한 선택적 설명.',
-        'Register' => '기록',
-        'Continuing with this step will deregister the system from OTRS Group.' =>
-            '이 단계를 계속하면 OTRS 그룹의 시스템 등록이 취소됩니다.',
-        'Deregister' => '위임자',
-        'You can modify registration settings here.' => '여기에서 등록 설정을 수정할 수 있습니다.',
-        'Overview of Transmitted Data' => '전송된 데이터의 개요',
-        'There is no data regularly sent from your system to %s.' => '시스템에서 %s로 정기적으로 전송되는 데이터는 없습니다.',
-        'The following data is sent at minimum every 3 days from your system to %s.' =>
-            '다음 데이터는 최소 3 일마다 시스템에서 %s로 전송됩니다.',
-        'The data will be transferred in JSON format via a secure https connection.' =>
-            '데이터는 안전한 https 연결을 통해 JSON 형식으로 전송됩니다.',
-        'System Registration Data' => '시스템 등록 데이터',
-        'Support Data' => '지원 데이터',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => '역할 관리',
         'Add Role' => '역할 추가',
@@ -2176,20 +2089,13 @@ sub Data {
         'Sending support data to OTRS Group is not possible!' => 'OTRS 그룹에 지원 데이터를 보낼 수 없습니다!',
         'Enable Cloud Services' => '클라우드 서비스 사용',
         'Enable cloud services' => '클라우드 서비스 사용',
-        'This data is sent to OTRS Group on a regular basis. To stop sending this data please update your system registration.' =>
-            '이 데이터는 정기적으로 OTRS 그룹에 전송됩니다. 이 데이터의 전송을 중지하려면 시스템 등록을 업데이트하십시오.',
-        'You can manually trigger the Support Data sending by pressing this button:' =>
-            '이 버튼을 눌러 Support Data를 수동으로 트리거 할 수 있습니다 :',
-        'Send Update' => '업데이트 보내기',
-        'Currently this data is only shown in this system.' => '현재 이 데이터는 이 시스템에만 표시됩니다.',
         'A support bundle (including: system registration information, support data, a list of installed packages and all locally modified source code files) can be generated by pressing this button:' =>
             '이 단추를 누르면 지원 번들 (시스템 등록 정보, 지원 데이터, 설치된 패키지 목록 및 모든 로컬로 수정 된 소스 코드 파일 포함)을 생성 할 수 있습니다.',
         'Generate Support Bundle' => '지원 번들 생성',
         'The Support Bundle has been Generated' => '지원 번들이 생성 되었습니다.',
-        'Please choose one of the following options.' => '다음 옵션 중 하나를 선택 하십시오.',
-        'Download File' => '다운로드 파일',
-        'A file containing the support bundle will be downloaded to the local system. Please save the file and send it to the OTRS Group, using an alternate method.' =>
-            '지원 번들이 들어있는 파일은 로컬 시스템에 다운로드됩니다. 파일을 저장하고 대체 방법을 사용하여 OTRS 그룹에 보내십시오.',
+        'A file containing the support bundle will be downloaded to the local system.' =>
+            '지원 번들이 들어있는 파일은 로컬 시스템에 다운로드됩니다.',
+        'Support Data' => '지원 데이터',
         'Error: Support data could not be collected (%s).' => '오류 : 지원 데이터를 수집 할 수 없습니다 (%s).',
         'Details' => '세부',
 
@@ -2355,6 +2261,7 @@ sub Data {
         'Add ticket attribute relations' => '',
         'Edit ticket attribute relations' => '',
         'Import CSV or Excel file' => '',
+        'Attribute' => '속성',
         'Last update' => '',
         'Are you sure you want to delete entry \'%s\'?' => '',
         'Download previously imported file' => '',
@@ -3057,6 +2964,7 @@ sub Data {
         'Your 2 Factor Token' => '당신의 2 팩터 토큰',
         'Log In' => '로그인',
         'Not yet registered?' => '아직 등록되지 않았습니까?',
+        'Sign up now' => '지금 등록하세요',
         'Back' => '뒤',
         'Request New Password' => '새 비밀번호 요청',
         'Your User Name' => '사용자 이름',
@@ -3159,6 +3067,7 @@ sub Data {
         'Phone' => '전화',
         'Web site' => '웹 사이트',
         'Community' => '',
+        'Next' => '다음',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => '아웃 바운드 메일 구성',
@@ -3210,6 +3119,7 @@ sub Data {
             '제한된 권한을 가진 새로운 데이터베이스 사용자가이 OTRS 시스템에 대해 생성됩니다.',
         'Repeat Password' => '비밀번호 반복',
         'Generated password' => '생성된 암호',
+        'Database' => '데이터베이스',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmysql.tt
         'Passwords do not match' => '비밀번호가 일치하지 않습니다.',
@@ -4068,12 +3978,6 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminQueueTemplates.pm
         'Change Queue Relations for Template' => '템플릿에 대한 대기열 관계 변경',
         'Change Template Relations for Queue' => '대기열에 대한 템플릿 관계 변경',
-
-        # Perl Module: Kernel/Modules/AdminRegistration.pm
-        'Production' => '생산',
-        'Test' => '테스트',
-        'Training' => '훈련',
-        'Development' => '개발',
 
         # Perl Module: Kernel/Modules/AdminRole.pm
         'Role updated!' => '역할이 업데이트 되었습니다!',
@@ -5237,6 +5141,7 @@ sub Data {
         'PostgreSQL 9.2 or higher is required.' => 'PostgreSQL 9.2 이상이 필요합니다.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
+        'Operating System' => '운영 체제',
         'OTRS Disk Partition' => 'OTRS 디스크 파티션',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskSpace.pm
@@ -5271,6 +5176,9 @@ sub Data {
             '',
         'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
             '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
+        'Perl Version' => '펄 버전',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/Swap.pm
         'Free Swap Space (%)' => '무료 스왑 공간 (%)',
@@ -5429,6 +5337,9 @@ sub Data {
         'UI - Special Statistics' => 'UI - 특수 통계',
         'Agents using custom main menu ordering' => '사용자 정의 주 메뉴 순서를 사용하는 에이전트',
         'Agents using favourites for the admin overview' => '관리자 개요에 즐겨찾기를 사용하는 에이전트',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
+        'OTRS Version' => 'OTRS 버전',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
         'Webserver' => '웹 서버',
@@ -8700,6 +8611,7 @@ Thanks for your help!
             '에이전트 티켓에서 전화 티켓의받는 사람 (To :) 및 전자 메일 티켓의 보낸 사람 (From :)으로 표시 될 문자열을 결정합니다. Queue as NewQueueSelectionType "1"은 대기열의 이름을 표시하고 SystemAddress의 "2 3"은받는 사람의 이름과 전자 메일을 표시합니다.',
         'Determines the strings that will be shown as recipient (To:) of the ticket in the customer interface. For Queue as CustomerPanelSelectionType, "<Queue>" shows the names of the queues, and for SystemAddress, "<Realname> <<Email>>" shows the name and email of the recipient.' =>
             '고객 인터페이스에서 티켓의받는 사람 (To :)으로 표시 될 문자열을 결정합니다. Queue는 CustomerPanelSelectionType으로, "1"은 대기열의 이름을 표시하고 SystemAddress의 경우 "2 3"은 수신자의 이름과 전자 메일을 표시합니다.',
+        'Development' => '개발',
         'Disable cloud services' => '클라우드 서비스 사용 중지',
         'Display communication log entries.' => '통신 로그 항목을 표시하십시오.',
         'Down' => '하위',
@@ -8868,7 +8780,6 @@ Thanks for your help!
         'Manage existing sessions.' => '기존 세션을 관리합니다.',
         'Manage support data.' => '지원 데이터를 관리합니다.',
         'Manage system files.' => '',
-        'Manage system registration.' => '시스템 등록을 관리합니다.',
         'Manage tasks triggered by event or time based execution.' => '이벤트 또는 시간 기반 실행에 의해 트리거된 작업을 관리합니다.',
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => '스팸으로 표시하십시오!',
@@ -9262,7 +9173,6 @@ Thanks for your help!
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
-        'Data Protection',
         'Date/Time',
         'Day',
         'Dec',
@@ -9491,7 +9401,6 @@ Thanks for your help!
         'Support Data information was successfully sent.',
         'Switch to desktop mode',
         'Switch to mobile mode',
-        'System Registration',
         'Team',
         'Th',
         'The browser you are using is too old.',

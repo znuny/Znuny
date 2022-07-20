@@ -1511,7 +1511,7 @@ msgstr ""
 msgid "Would you like to benefit from additional dynamic field types for businesses? Upgrade to %s to get access to the following field types:"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmssql.tt
 msgid "Database"
 msgstr "Hifadhidata"
 
@@ -5447,7 +5447,7 @@ msgstr "Kitambulisho cha OTRS"
 msgid "You don't have an OTRS-ID yet?"
 msgstr "Hauna kitambulisho cha OTRS bado?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Sign up now"
 msgstr "Jiandikishe sasa"
 
@@ -5459,7 +5459,7 @@ msgstr "Umesahau neno lako la siri?"
 msgid "Retrieve a new one"
 msgstr "Pata jipya"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Next"
 msgstr "Baadae"
 
@@ -5467,7 +5467,7 @@ msgstr "Baadae"
 msgid "This data will be frequently transferred to OTRS Group when you register this system."
 msgstr "Data hii itahamishwa mara kwa mara kwenye kikundi cha OTRS ukisajili katika mfumo huu."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
 msgid "Attribute"
 msgstr "Sifa"
 
@@ -5475,15 +5475,15 @@ msgstr "Sifa"
 msgid "FQDN"
 msgstr "FQDN"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
 msgid "OTRS Version"
 msgstr "Toleo la OTRS"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
 msgid "Operating System"
 msgstr "Mfumo endeshi"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
 msgid "Perl Version"
 msgstr "Toleo la perl"
 
@@ -5527,7 +5527,7 @@ msgstr "Data itatumwa katika umbizo la JSON kupitia muunganisho wa salama wa htt
 msgid "System Registration Data"
 msgstr "Data ya usajili wa mfumo"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "Support Data"
 msgstr "Data za masaada"
 
@@ -6063,10 +6063,6 @@ msgstr "Tengeneza kifurushi cha msaada."
 msgid "The Support Bundle has been Generated"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-msgid "Please choose one of the following options."
-msgstr "Tafadhali chagua moja kati ya michaguo ifuatayo."
-
 #. Template: AdminSupportDataCollector
 msgid "Send by Email"
 msgstr "Tuma kwa barua pepe"
@@ -6092,8 +6088,8 @@ msgid "Download File"
 msgstr "Pakua faili"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-msgid "A file containing the support bundle will be downloaded to the local system. Please save the file and send it to the OTRS Group, using an alternate method."
-msgstr "Faili lililo na kifurushi cha msaada litapakuliwa kwenye mfumo kiambo. Tafadhali hifadhi faili na litume kwenye kikundi cha OTRS, kwa kutumia njia mbadala."
+msgid "A file containing the support bundle will be downloaded to the local system."
+msgstr "Faili lililo na kifurushi cha msaada litapakuliwa kwenye mfumo kiambo."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "Error: Support data could not be collected (%s)."
@@ -11311,7 +11307,7 @@ msgstr ""
 msgid "Training"
 msgstr "Mafunzo"
 
-#. Perl Module: Kernel/Modules/AdminRegistration.pm
+#. SysConfig
 msgid "Development"
 msgstr ""
 

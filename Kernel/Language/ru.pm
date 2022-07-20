@@ -37,7 +37,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.880983393031586;
+    $Self->{Completeness}        = 0.879571663920923;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -321,7 +321,6 @@ sub Data {
             'Регистрация системы - это сервис от OTRS Group, который предоставляет много преимуществ!',
         'Please note that the use of OTRS cloud services requires the system to be registered.' =>
             'Обращаем внимание, что использование облачных сервисов OTRS требует регистрации системы.',
-        'Register this system' => 'Зарегистрировать эту систему',
         'Here you can configure available cloud services that communicate securely with %s.' =>
             'Здесь вы можете настроить доступные облачные сервисы, которые будут безопасно взаимодействовать с %s.',
         'Available Cloud Services' => 'Доступные облачные сервисы',
@@ -1929,92 +1928,6 @@ sub Data {
         'Filter for templates' => 'Фильтр для шаблонов',
         'Templates' => 'Шаблоны',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-        'System Registration Management' => 'Управление регистрацией',
-        'Edit System Registration' => 'Изменить System Registration',
-        'System Registration Overview' => 'Обзор настроек System Registration',
-        'Register System' => 'Регистрация системы',
-        'Validate OTRS-ID' => 'Подтвердить OTRS-ID',
-        'Deregister System' => 'Удалить зарегистрированиую систему(отрегистрировать)',
-        'Edit details' => 'Редактировать информацию',
-        'Show transmitted data' => 'Показать переданные данные',
-        'Deregister system' => 'Удалить регистрацию системы',
-        'Overview of registered systems' => 'Обзор зарегистрированных систем',
-        'This system is registered with OTRS Group.' => 'Эта система зарегистрирована в OTRS Group.',
-        'System type' => 'Тип системы',
-        'Unique ID' => 'Уникальный индентификатор',
-        'Last communication with registration server' => 'Последняя связь с регистрационным сервером',
-        'System Registration not Possible' => 'Регистрация системы/System registration невозможна',
-        'Please note that you can\'t register your system if OTRS Daemon is not running correctly!' =>
-            'Обратите внимание, что вы не сможете зарегистрировать вашу систему если планировщик работает некорректно!',
-        'Instructions' => 'Инструкции',
-        'System Deregistration not Possible' => 'Разрегистрация/System Deregistration системы невозможна',
-        'Please note that you can\'t deregister your system if you\'re using the %s or having a valid service contract.' =>
-            'Помните, что вы не можете разрегистрировать свою систему, если используете %s или имеете действующий контракт на поддержку.',
-        'OTRS-ID Login' => 'Уч. запись OTRS-ID',
-        'Read more' => 'Читайте дополнительно',
-        'You need to log in with your OTRS-ID to register your system.' =>
-            'Вы должны войти в систему со своей уч. записью OTRS-ID, чтобы зарегистрировать Вашу систему.',
-        'Your OTRS-ID is the email address you used to sign up on the OTRS.com webpage.' =>
-            'Ваша уч. запись OTRS-ID - это адрес электронной почты, Вы раньше регистрировались в системе на веб-странице OTRS.com.',
-        'Data Protection' => 'Защита данных',
-        'What are the advantages of system registration?' => 'Каковы преимущества регистрации системы?',
-        'You will receive updates about relevant security releases.' => 'Вы получите обновления о соответствующих выпусках безопасности.',
-        'With your system registration we can improve our services for you, because we have all relevant information available.' =>
-            'С Вашей регистрацией мы можем улучшить наши службы для Вас, потому что мы имеем всю релевантную информацию в наличии.',
-        'This is only the beginning!' => 'Это - только начало!',
-        'We will inform you about our new services and offerings soon.' =>
-            'Мы сообщим Вам о наших новых службах и предложениях быстрее.',
-        'Can I use OTRS without being registered?' => 'Я могу использовать OTRS без регистрации?',
-        'System registration is optional.' => 'Регистрация как дополнительная опция.',
-        'You can download and use OTRS without being registered.' => 'Вы можете загрузить и использовать OTRS без регистрации.',
-        'Is it possible to deregister?' => 'Действительно ли возможно удалить регистрацию системы (отрегистрироватся)?',
-        'You can deregister at any time.' => 'В любое время Вы можете удалить регистрацию(отрегистрироватся).',
-        'Which data is transfered when registering?' => 'Какие данные будут переданы, при регистрации?',
-        'A registered system sends the following data to OTRS Group:' => 'Зарегистрированная система посылает следующие данные в OTRS Group:',
-        'Fully Qualified Domain Name (FQDN), OTRS version, Database, Operating System and Perl version.' =>
-            'Fully Qualified Domain Name (FQDN), версия OTRS, Базаданных, Операционная система и версия Perl',
-        'Why do I have to provide a description for my system?' => 'Почему я должен предоставить описание для своей системы?',
-        'The description of the system is optional.' => 'Описание системы (необязательно).',
-        'The description and system type you specify help you to identify and manage the details of your registered systems.' =>
-            'Описание и тип системы, который Вы определяете сами, это помогает Вам идентифицировать и управлять деталями своих зарегистрированных систем.',
-        'How often does my OTRS system send updates?' => 'Как часто моя система OTRS отправляет обновления(отчеты)?',
-        'Your system will send updates to the registration server at regular intervals.' =>
-            'Ваша система отправит обновления (отчет) на сервер OTRS Group периодически.',
-        'Typically this would be around once every three days.' => 'Обычно это происходит один раз в три дня.',
-        'If you deregister your system, you will lose these benefits:' =>
-            'Если вы откажетесь от регистрации вашей системы, вы потеряете следующие выгоды:',
-        'You need to log in with your OTRS-ID to deregister your system.' =>
-            'Вы должны войти в систему под своей уч. записью OTRS-ID, чтобы удалить зарегистрированую Вашу систему.',
-        'OTRS-ID' => 'OTRS-ID',
-        'You don\'t have an OTRS-ID yet?' => 'У Вас еще нет уч. записи OTRS-ID?',
-        'Sign up now' => 'Зарегистрируйтесь сейчас',
-        'Forgot your password?' => 'Забыли свой пароль?',
-        'Retrieve a new one' => 'Получите новый',
-        'Next' => 'Вперед',
-        'This data will be frequently transferred to OTRS Group when you register this system.' =>
-            'Эти данные будут часто передаваться OTRS Group, когда Вы зарегистрируете эту систему.',
-        'Attribute' => 'Атрибут',
-        'FQDN' => 'Полное имя домена',
-        'OTRS Version' => 'Версия OTRS',
-        'Database' => 'База данных',
-        'Operating System' => 'Операционная система',
-        'Perl Version' => 'Версия Perl',
-        'Optional description of this system.' => 'Необязательное описание этой системы',
-        'Register' => 'Регистрация',
-        'Continuing with this step will deregister the system from OTRS Group.' =>
-            'Продолжите этот шаг и вы удалите зарегистрированиую ситему из скписка OTRS Group.',
-        'Deregister' => 'Удалить регистрацию',
-        'You can modify registration settings here.' => 'Вы можете изменить параметры регистрации здесь.',
-        'Overview of Transmitted Data' => 'Обзор переданных данных',
-        'There is no data regularly sent from your system to %s.' => 'Отсутствуют, регулярно пересылаемые, данные от вашей системы в %s.',
-        'The following data is sent at minimum every 3 days from your system to %s.' =>
-            'Следующие данные отсылаются, как минимум, каждые 3 дня из вашей системы в %s.',
-        'The data will be transferred in JSON format via a secure https connection.' =>
-            'Данные будут переданы в JSON формате через защищенное https соединение.',
-        'System Registration Data' => 'Данные System Registration',
-        'Support Data' => 'Данные для поддержки',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'Управление ролями',
         'Add Role' => 'Добавить роль',
@@ -2188,20 +2101,13 @@ sub Data {
         'Sending support data to OTRS Group is not possible!' => 'Отправка необходимых данных в OTRS Group невозможна!',
         'Enable Cloud Services' => 'Включить облачный сервис',
         'Enable cloud services' => 'Включить облачный сервис',
-        'This data is sent to OTRS Group on a regular basis. To stop sending this data please update your system registration.' =>
-            'Эти данные отправляются в OTRS Group на регулярной основе. Чтобы прекратить отправку этих данных, обновите регистрацию вашей системы.',
-        'You can manually trigger the Support Data sending by pressing this button:' =>
-            'Вы можете вручную запустить передачу данных поддержки нажатием на эту кнопку:',
-        'Send Update' => 'Отправить обновление',
-        'Currently this data is only shown in this system.' => 'В настоящее время эти данные только отображаются в этой системе.',
         'A support bundle (including: system registration information, support data, a list of installed packages and all locally modified source code files) can be generated by pressing this button:' =>
             'Пакет поддержки (включая сведения о регистрации системы, данные поддержки, список установленных пакетов и локально изменённые файлы с исходным кодом) можно сгенерировать нажатием этой кнопки:',
         'Generate Support Bundle' => 'Сгенерировать пакет поддержки',
         'The Support Bundle has been Generated' => 'Пакет поддержки сгенерирован.',
-        'Please choose one of the following options.' => 'Выберите одну из следующих опций.',
-        'Download File' => 'Загрузить файл.',
-        'A file containing the support bundle will be downloaded to the local system. Please save the file and send it to the OTRS Group, using an alternate method.' =>
-            'Файл, содержащий пакет поддержки будет загружен в вашу локальную систему. Сохраните файл и отправьте его в OTRS Group, используя альтернативный способ.',
+        'A file containing the support bundle will be downloaded to the local system.' =>
+            'Файл, содержащий пакет поддержки будет загружен в вашу локальную систему.',
+        'Support Data' => 'Данные для поддержки',
         'Error: Support data could not be collected (%s).' => 'Ошибка: данные для поддержки не могут быть собраны (%s).',
         'Details' => 'Подробно',
 
@@ -2367,6 +2273,7 @@ sub Data {
         'Add ticket attribute relations' => '',
         'Edit ticket attribute relations' => '',
         'Import CSV or Excel file' => '',
+        'Attribute' => 'Атрибут',
         'Last update' => '',
         'Are you sure you want to delete entry \'%s\'?' => '',
         'Download previously imported file' => '',
@@ -3069,6 +2976,7 @@ sub Data {
         'Your 2 Factor Token' => 'Ваш 2-факторный токен',
         'Log In' => 'Войти',
         'Not yet registered?' => 'Хотите зарегистрироваться?',
+        'Sign up now' => 'Зарегистрируйтесь сейчас',
         'Back' => 'Назад',
         'Request New Password' => 'Запросить новый пароль',
         'Your User Name' => 'Логин',
@@ -3171,6 +3079,7 @@ sub Data {
         'Phone' => 'Телефон',
         'Web site' => 'Веб-сайт',
         'Community' => '',
+        'Next' => 'Вперед',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => 'Конфигурация исходящей почты',
@@ -3222,6 +3131,7 @@ sub Data {
             'Для этой системы OTRS будет создан новый пользователь базы данных с ограниченными правами.',
         'Repeat Password' => 'Повторите пароль',
         'Generated password' => 'Сгенерированный пароль',
+        'Database' => 'База данных',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmysql.tt
         'Passwords do not match' => 'Пароли не подходят',
@@ -4080,12 +3990,6 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminQueueTemplates.pm
         'Change Queue Relations for Template' => 'Изменить связь Очереди с Шаблоном',
         'Change Template Relations for Queue' => 'Изменить связь Шаблона с Очередью',
-
-        # Perl Module: Kernel/Modules/AdminRegistration.pm
-        'Production' => 'Производство',
-        'Test' => 'Тест',
-        'Training' => 'Обучение',
-        'Development' => 'Разработка',
 
         # Perl Module: Kernel/Modules/AdminRole.pm
         'Role updated!' => 'Роль обновлена!',
@@ -5249,6 +5153,7 @@ sub Data {
         'PostgreSQL 9.2 or higher is required.' => 'PostgreSQL 9.2 или выше необходим.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
+        'Operating System' => 'Операционная система',
         'OTRS Disk Partition' => 'Раздел диска для OTRS',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskSpace.pm
@@ -5283,6 +5188,9 @@ sub Data {
             '',
         'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
             '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
+        'Perl Version' => 'Версия Perl',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/Swap.pm
         'Free Swap Space (%)' => 'Свободное место для подкачки (%)',
@@ -5441,6 +5349,9 @@ sub Data {
         'UI - Special Statistics' => '',
         'Agents using custom main menu ordering' => 'Агенты, использующие пользовательские настройки главного меню',
         'Agents using favourites for the admin overview' => 'Агенты, использующие избранное для панели администрирования',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
+        'OTRS Version' => 'Версия OTRS',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
         'Webserver' => 'Веб-сервер',
@@ -8712,6 +8623,7 @@ Thanks for your help!
             '',
         'Determines the strings that will be shown as recipient (To:) of the ticket in the customer interface. For Queue as CustomerPanelSelectionType, "<Queue>" shows the names of the queues, and for SystemAddress, "<Realname> <<Email>>" shows the name and email of the recipient.' =>
             '',
+        'Development' => 'Разработка',
         'Disable cloud services' => 'Отключить облачные сервисы',
         'Display communication log entries.' => 'Показать записи журнала сеансов связи.',
         'Down' => 'Вниз',
@@ -8880,7 +8792,6 @@ Thanks for your help!
         'Manage existing sessions.' => 'Управление активными сеансами.',
         'Manage support data.' => 'Управление данными для поддержки.',
         'Manage system files.' => '',
-        'Manage system registration.' => 'Регистрация системы на портале OTRS Group',
         'Manage tasks triggered by event or time based execution.' => 'Управление заданиями, основанными на событиях или времени выполнения',
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Пометить как спам!',
@@ -9274,7 +9185,6 @@ Thanks for your help!
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
-        'Data Protection',
         'Date/Time',
         'Day',
         'Dec',
@@ -9503,7 +9413,6 @@ Thanks for your help!
         'Support Data information was successfully sent.',
         'Switch to desktop mode',
         'Switch to mobile mode',
-        'System Registration',
         'Team',
         'Th',
         'The browser you are using is too old.',

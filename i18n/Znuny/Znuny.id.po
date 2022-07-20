@@ -1511,7 +1511,7 @@ msgstr ""
 msgid "Would you like to benefit from additional dynamic field types for businesses? Upgrade to %s to get access to the following field types:"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmssql.tt
 msgid "Database"
 msgstr "Database"
 
@@ -5448,7 +5448,7 @@ msgstr "ID OTRS"
 msgid "You don't have an OTRS-ID yet?"
 msgstr "Anda tidak mempunyai ID OTRS?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Sign up now"
 msgstr "Daftarkan sekarang"
 
@@ -5460,7 +5460,7 @@ msgstr "Anda lupa password?"
 msgid "Retrieve a new one"
 msgstr "Mengambil yang baru"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Next"
 msgstr "Lanjut"
 
@@ -5468,7 +5468,7 @@ msgstr "Lanjut"
 msgid "This data will be frequently transferred to OTRS Group when you register this system."
 msgstr "Data ini akan sering dialihkan ke OTRS Grup saat anda mendaftar sistem ini."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
 msgid "Attribute"
 msgstr "Atribut"
 
@@ -5476,15 +5476,15 @@ msgstr "Atribut"
 msgid "FQDN"
 msgstr "FQDN"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
 msgid "OTRS Version"
 msgstr "Versi OTRS"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
 msgid "Operating System"
 msgstr "Sistem operasi"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
 msgid "Perl Version"
 msgstr "Versi Perl"
 
@@ -5528,7 +5528,7 @@ msgstr "Data akan di transfer dalam format JSON melalui koneksi https yang aman 
 msgid "System Registration Data"
 msgstr "Data sistem pendaftaran"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "Support Data"
 msgstr "Data pendukung"
 
@@ -6064,10 +6064,6 @@ msgstr "Menghasilkan Dukungan Bundle"
 msgid "The Support Bundle has been Generated"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-msgid "Please choose one of the following options."
-msgstr "Silahkan pilih satu dari pilihan berikut"
-
 #. Template: AdminSupportDataCollector
 msgid "Send by Email"
 msgstr "Hantarkan melalu email"
@@ -6093,8 +6089,8 @@ msgid "Download File"
 msgstr "Memuat turun file"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-msgid "A file containing the support bundle will be downloaded to the local system. Please save the file and send it to the OTRS Group, using an alternate method."
-msgstr "Sebuah file yang berisi dukungan bundel akan di-download ke sistem lokal. Harap menyimpan file dan mengirimkannya ke grup OTRS,  denganmenggunakan metode alternatif."
+msgid "A file containing the support bundle will be downloaded to the local system."
+msgstr "Sebuah file yang berisi dukungan bundel akan di-download ke sistem lokal."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "Error: Support data could not be collected (%s)."
@@ -11313,7 +11309,7 @@ msgstr ""
 msgid "Training"
 msgstr "Latihan"
 
-#. Perl Module: Kernel/Modules/AdminRegistration.pm
+#. SysConfig
 msgid "Development"
 msgstr ""
 

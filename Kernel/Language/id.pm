@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.641647671768154;
+    $Self->{Completeness}        = 0.638714991762768;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -309,7 +309,6 @@ sub Data {
             'Pendaftaran sistem adalah layanan dari Grup OTRS, yang memberikan banyak keuntungan!',
         'Please note that the use of OTRS cloud services requires the system to be registered.' =>
             'Mohon dicatat bahwa penggunaan Layanan cloud OTRS memerlukan pendaftaran sistem',
-        'Register this system' => 'Daftarkan sistem ini',
         'Here you can configure available cloud services that communicate securely with %s.' =>
             'Disini anda dapat mengkonfigurasi layanan cloud yang tersedia yang berkomunikasi secara aman dengan %s',
         'Available Cloud Services' => 'Layanan cloud yang tersedia',
@@ -1918,92 +1917,6 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Filter for templates' => '',
         'Templates' => 'Klise',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-        'System Registration Management' => 'Manajemen sistem registrasi',
-        'Edit System Registration' => '',
-        'System Registration Overview' => '',
-        'Register System' => '',
-        'Validate OTRS-ID' => '',
-        'Deregister System' => 'Sistem deregister',
-        'Edit details' => 'Mengubah rincian',
-        'Show transmitted data' => 'Tampilkan data dikirimkan',
-        'Deregister system' => 'Sistem deregister',
-        'Overview of registered systems' => 'Ikhtisar sistem yang terdaftar',
-        'This system is registered with OTRS Group.' => 'Sistem ini telah terdaftar oleh grup OTRS',
-        'System type' => 'Jenis sistem',
-        'Unique ID' => 'Unique ID',
-        'Last communication with registration server' => 'Komunikasi terakhir dengan server registrasi',
-        'System Registration not Possible' => '',
-        'Please note that you can\'t register your system if OTRS Daemon is not running correctly!' =>
-            'Perlu diingat bahwa anda tidak dapat mendaftarkan sistem anda apabila OTRS Daemon tidak berjalan dengan baik',
-        'Instructions' => 'Instruksi',
-        'System Deregistration not Possible' => '',
-        'Please note that you can\'t deregister your system if you\'re using the %s or having a valid service contract.' =>
-            'Perlu diingat bahwa anda tidak bisa deregistrer sistem anda apabila anda mengunnakannya %s atau mempunyai sebuah kontrak layanan sah',
-        'OTRS-ID Login' => 'OTRS-ID masuk',
-        'Read more' => 'Baca lagi',
-        'You need to log in with your OTRS-ID to register your system.' =>
-            'Anda perlu masuk dengan menggunakan OTRS-ID anda ke dalam sistem pendaftaran anda',
-        'Your OTRS-ID is the email address you used to sign up on the OTRS.com webpage.' =>
-            'OTRS-ID anda merupakan alamat email anda yang digunakan saat pendaftaran di layanan web OTRS.com',
-        'Data Protection' => 'Perlindungan data',
-        'What are the advantages of system registration?' => 'Apa keuntungan dari sistem pendaftaran?',
-        'You will receive updates about relevant security releases.' => 'Anda akan menerima update tentang rilis keamanan yang relevan.',
-        'With your system registration we can improve our services for you, because we have all relevant information available.' =>
-            'Dengan sistem registrasi anda, kita dapat meningkatkan layanan untuk anda, karena kita memiliki semua informasi yang relevan ',
-        'This is only the beginning!' => 'Ini hanya permulaan!',
-        'We will inform you about our new services and offerings soon.' =>
-            'Kami akan memberitahu anda tentang layanan baru kami dan akan mempersembahkannya dengan segera.',
-        'Can I use OTRS without being registered?' => 'Apakah saya bisa menggunakan OTRS tanpa melakukan pendaftaran?',
-        'System registration is optional.' => 'Sistem pendaftaran adalah pilihan',
-        'You can download and use OTRS without being registered.' => 'Anda bisa memuat naik dan menggunakan OTRS tanpa harus daftar',
-        'Is it possible to deregister?' => 'Apakah mungkin untuk melakukan deregister?',
-        'You can deregister at any time.' => 'Anda bisa melakukan deregister kapan saja',
-        'Which data is transfered when registering?' => 'Data manakah yang ditransfer saat mendaftar?',
-        'A registered system sends the following data to OTRS Group:' => 'Sebuah sistem yang terdaftar akan mengirimkan data berikut untuk grup OTRS',
-        'Fully Qualified Domain Name (FQDN), OTRS version, Database, Operating System and Perl version.' =>
-            'Nama Fully Qualified Domain (FQDN), versi OTRS, Database, Sistem Operasi dan versi Perl.',
-        'Why do I have to provide a description for my system?' => 'Mengapa saya harus memberikan keterangan untuk sistem saya?',
-        'The description of the system is optional.' => 'Deskripsi dari sistem ini adalah opsional.',
-        'The description and system type you specify help you to identify and manage the details of your registered systems.' =>
-            'Deskripsi dan jenis sistem yang anda tentukan untuk membantu anda mengidentifikasi dan mengelola rincian sistem yang terdaftar.',
-        'How often does my OTRS system send updates?' => 'Seberapa sering sistem OTRS saya mengirim pembaruan?',
-        'Your system will send updates to the registration server at regular intervals.' =>
-            'Sistem anda akan mengirimkan pembaruan ke server pendaftaran secara berkala.',
-        'Typically this would be around once every three days.' => 'Biasanya ini akan menjadi sekitar tiga hari sekali.',
-        'If you deregister your system, you will lose these benefits:' =>
-            'Jika anda melakukan deregister sistem anda, maka anda akan kehilangan manfaat berikut:',
-        'You need to log in with your OTRS-ID to deregister your system.' =>
-            'Anda perlu masuk dengan menggunakan ID OTRS anda ke dalam sistem deregister anda',
-        'OTRS-ID' => 'ID OTRS',
-        'You don\'t have an OTRS-ID yet?' => 'Anda tidak mempunyai ID OTRS?',
-        'Sign up now' => 'Daftarkan sekarang',
-        'Forgot your password?' => 'Anda lupa password?',
-        'Retrieve a new one' => 'Mengambil yang baru',
-        'Next' => 'Lanjut',
-        'This data will be frequently transferred to OTRS Group when you register this system.' =>
-            'Data ini akan sering dialihkan ke OTRS Grup saat anda mendaftar sistem ini.',
-        'Attribute' => 'Atribut',
-        'FQDN' => 'FQDN',
-        'OTRS Version' => 'Versi OTRS',
-        'Database' => 'Database',
-        'Operating System' => 'Sistem operasi',
-        'Perl Version' => 'Versi Perl',
-        'Optional description of this system.' => 'Deskripsi opsional sistem ini',
-        'Register' => 'Daftar',
-        'Continuing with this step will deregister the system from OTRS Group.' =>
-            'Melanjutkan dengan langkah berikut akan mempengaruhi deregister dari grup OTRS',
-        'Deregister' => 'Tidak terdaftar',
-        'You can modify registration settings here.' => 'Anda bisa mengubah pengaturan disini',
-        'Overview of Transmitted Data' => '',
-        'There is no data regularly sent from your system to %s.' => 'Tidak ada data regular yang dikirim dari sistem ke %s',
-        'The following data is sent at minimum every 3 days from your system to %s.' =>
-            'Data berikut dikirim dengan minimal 3 hari dari sistem anda ke %s',
-        'The data will be transferred in JSON format via a secure https connection.' =>
-            'Data akan di transfer dalam format JSON melalui koneksi https yang aman ',
-        'System Registration Data' => 'Data sistem pendaftaran',
-        'Support Data' => 'Data pendukung',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'Tugas manajemen',
         'Add Role' => 'Tambahkan peran',
@@ -2177,20 +2090,13 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Sending support data to OTRS Group is not possible!' => 'Mengirimkan dukungan data ke dalam grup OTRS tidak didapati',
         'Enable Cloud Services' => 'Mengadakan layanan cloud',
         'Enable cloud services' => 'Mengaktifkan layanan cloud',
-        'This data is sent to OTRS Group on a regular basis. To stop sending this data please update your system registration.' =>
-            'Data ini dihantar ke grup OTRS dalam basis yang sederhana. Untuk menghentikan data ini, silahkan perbarui system pendaftaran anda',
-        'You can manually trigger the Support Data sending by pressing this button:' =>
-            'Anda dapat secara manual memicu Data Dukungan pengiriman dengan menekan tombol:',
-        'Send Update' => 'Hantar pembaruan',
-        'Currently this data is only shown in this system.' => 'Saat ini data hanya menampilkan sistem ini',
         'A support bundle (including: system registration information, support data, a list of installed packages and all locally modified source code files) can be generated by pressing this button:' =>
             'Sebuah bundel dukungan (termasuk: informasi pendaftaran sistem, data pendukung, daftar paket yang diinstal dan semua sumber kode yang diubah secara manual) dapat dihasilkan dengan menekan tombol ini:',
         'Generate Support Bundle' => 'Menghasilkan Dukungan Bundle',
         'The Support Bundle has been Generated' => '',
-        'Please choose one of the following options.' => 'Silahkan pilih satu dari pilihan berikut',
-        'Download File' => 'Memuat turun file',
-        'A file containing the support bundle will be downloaded to the local system. Please save the file and send it to the OTRS Group, using an alternate method.' =>
-            'Sebuah file yang berisi dukungan bundel akan di-download ke sistem lokal. Harap menyimpan file dan mengirimkannya ke grup OTRS,  denganmenggunakan metode alternatif.',
+        'A file containing the support bundle will be downloaded to the local system.' =>
+            'Sebuah file yang berisi dukungan bundel akan di-download ke sistem lokal.',
+        'Support Data' => 'Data pendukung',
         'Error: Support data could not be collected (%s).' => 'Eror: data pendukung tidak dapat dikumpulkan (%s)',
         'Details' => 'Rincian',
 
@@ -2356,6 +2262,7 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Add ticket attribute relations' => '',
         'Edit ticket attribute relations' => '',
         'Import CSV or Excel file' => '',
+        'Attribute' => 'Atribut',
         'Last update' => '',
         'Are you sure you want to delete entry \'%s\'?' => '',
         'Download previously imported file' => '',
@@ -3059,6 +2966,7 @@ bin/otrs.Daemon.pl status\').',
         'Your 2 Factor Token' => '2 faktor bukti anda',
         'Log In' => 'Masukkan',
         'Not yet registered?' => 'Belum terdaftar?',
+        'Sign up now' => 'Daftarkan sekarang',
         'Back' => 'Kembali',
         'Request New Password' => 'Meminta kata sandi baru',
         'Your User Name' => 'Nama pengguna anda',
@@ -3161,6 +3069,7 @@ bin/otrs.Daemon.pl status\').',
         'Phone' => 'Telepon',
         'Web site' => 'Website',
         'Community' => '',
+        'Next' => 'Lanjut',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => 'Mengkonfigurasi surat outbound',
@@ -3212,6 +3121,7 @@ bin/otrs.Daemon.pl status\').',
             'Pengguna database baru dengan hak akses yang terbatas akan dibuat untuk sistem OTRS ini.',
         'Repeat Password' => 'Ulang kata sandi',
         'Generated password' => 'Mengeluarkan kata sandi',
+        'Database' => 'Database',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmysql.tt
         'Passwords do not match' => 'Kata sandi tidak sesuai',
@@ -4070,12 +3980,6 @@ bin/otrs.Daemon.pl status\').',
         # Perl Module: Kernel/Modules/AdminQueueTemplates.pm
         'Change Queue Relations for Template' => 'Ubah hubungan Queue menjadi Template',
         'Change Template Relations for Queue' => 'Ubah hubungan template menjadi Queue',
-
-        # Perl Module: Kernel/Modules/AdminRegistration.pm
-        'Production' => 'Produksi',
-        'Test' => '',
-        'Training' => 'Latihan',
-        'Development' => '',
 
         # Perl Module: Kernel/Modules/AdminRole.pm
         'Role updated!' => 'Peran telah di perbarui!',
@@ -5239,6 +5143,7 @@ bin/otrs.Daemon.pl status\').',
         'PostgreSQL 9.2 or higher is required.' => '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
+        'Operating System' => 'Sistem operasi',
         'OTRS Disk Partition' => 'OTRS Disk Partisi',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskSpace.pm
@@ -5273,6 +5178,9 @@ bin/otrs.Daemon.pl status\').',
             '',
         'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
             '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
+        'Perl Version' => 'Versi Perl',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/Swap.pm
         'Free Swap Space (%)' => 'Ruang bebas Swap (%)',
@@ -5431,6 +5339,9 @@ bin/otrs.Daemon.pl status\').',
         'UI - Special Statistics' => '',
         'Agents using custom main menu ordering' => '',
         'Agents using favourites for the admin overview' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
+        'OTRS Version' => 'Versi OTRS',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
         'Webserver' => 'Webserver',
@@ -8703,6 +8614,7 @@ Helpdesk Team Anda
             'Menentukan string yang akan ditampilkan sebagai penerima (Untuk :) dari tiket ponsel dan sebagai pengirim (Dari :) dari tiket email di antarmuka agen. Untuk Queue sebagai NewQueueSelectionType "<Antrian>" menunjukkan nama-nama antrian dan untuk SystemAddress "<Realname> << Email >>" menunjukkan nama dan email penerima.',
         'Determines the strings that will be shown as recipient (To:) of the ticket in the customer interface. For Queue as CustomerPanelSelectionType, "<Queue>" shows the names of the queues, and for SystemAddress, "<Realname> <<Email>>" shows the name and email of the recipient.' =>
             'Menentukan string yang akan ditampilkan sebagai penerima (Untuk :) dari tiket di antarmuka pelanggan. Untuk Queue sebagai CustomerPanelSelectionType, "<Antrian>" menunjukkan nama-nama antrian, dan untuk SystemAddress, "<Realname> << Email >>" menunjukkan nama dan email penerima.',
+        'Development' => '',
         'Disable cloud services' => '',
         'Display communication log entries.' => '',
         'Down' => 'Bawah',
@@ -8871,7 +8783,6 @@ Helpdesk Team Anda
         'Manage existing sessions.' => 'Mengelola sesi yang ada.',
         'Manage support data.' => 'Mengelola data dukungan.',
         'Manage system files.' => '',
-        'Manage system registration.' => 'Mengelola sistem pendaftaran.',
         'Manage tasks triggered by event or time based execution.' => 'Mengelola tugas dipicu oleh peristiwa atau waktu eksekusi berdasarkan.',
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Tandai sebagai Spam!',
@@ -9265,7 +9176,6 @@ Helpdesk Team Anda
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
-        'Data Protection',
         'Date/Time',
         'Day',
         'Dec',
@@ -9494,7 +9404,6 @@ Helpdesk Team Anda
         'Support Data information was successfully sent.',
         'Switch to desktop mode',
         'Switch to mobile mode',
-        'System Registration',
         'Team',
         'Th',
         'The browser you are using is too old.',

@@ -33,14 +33,6 @@
                 <p>
                     [% Translate('Please note that the use of OTRS cloud services requires the system to be registered.') | html %]
                 </p>
-                <p class="SpacingTop SpacingBottom">
-                    <a class="CallForAction Fullsize Centered" href="[% Env("Baselink") %]Action=AdminRegistration">
-                        <span>
-                            <i class="fa fa-sign-in"></i>
-                            [% Translate('Register this system') | html %]
-                        </span>
-                    </a>
-                </p>
             [% END %]
                 <p class="FieldExplanation">
                     [% Translate("Here you can configure available cloud services that communicate securely with %s.", "cloud.otrs.com") | html %]

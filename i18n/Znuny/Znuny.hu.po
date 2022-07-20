@@ -1512,7 +1512,7 @@ msgstr "Több üzleti mező"
 msgid "Would you like to benefit from additional dynamic field types for businesses? Upgrade to %s to get access to the following field types:"
 msgstr "Szeretné élvezni a vállalkozások számára készített további dinamikus mező típusok előnyeit? Frissítsen az %s szoftverre, hogy hozzáférést kapjon a következő mezőtípusokhoz:"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmssql.tt
 msgid "Database"
 msgstr "Adatbázis"
 
@@ -5444,7 +5444,7 @@ msgstr "OTRS-azonosító"
 msgid "You don't have an OTRS-ID yet?"
 msgstr "Még nincs OTRS-azonosítója?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Sign up now"
 msgstr "Regisztráljon most"
 
@@ -5456,7 +5456,7 @@ msgstr "Elfelejtette a jelszavát?"
 msgid "Retrieve a new one"
 msgstr "Kérjen egy újat"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Next"
 msgstr "Következő"
 
@@ -5464,7 +5464,7 @@ msgstr "Következő"
 msgid "This data will be frequently transferred to OTRS Group when you register this system."
 msgstr "Ezek az adatok rendszeresen el lesznek küldve az OTRS csoportnak, ha regisztrálja a rendszerét."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
 msgid "Attribute"
 msgstr "Jellemző"
 
@@ -5472,15 +5472,15 @@ msgstr "Jellemző"
 msgid "FQDN"
 msgstr "FQDN"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
 msgid "OTRS Version"
 msgstr "OTRS verzió"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
 msgid "Operating System"
 msgstr "Operációs rendszer"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
 msgid "Perl Version"
 msgstr "Perl verzió"
 
@@ -5524,7 +5524,7 @@ msgstr "Az adatok JSON formátumban kerülnek átvitelre biztonságos https kapc
 msgid "System Registration Data"
 msgstr "Rendszer regisztráció adatok"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "Support Data"
 msgstr "Támogatási adatok"
 
@@ -6060,10 +6060,6 @@ msgstr "Támogatási csomag előállítása"
 msgid "The Support Bundle has been Generated"
 msgstr "A támogatási csomag előállítva"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-msgid "Please choose one of the following options."
-msgstr "Válassza a következő lehetőségek egyikét."
-
 #. Template: AdminSupportDataCollector
 msgid "Send by Email"
 msgstr "Küldés e-mailben"
@@ -6089,8 +6085,8 @@ msgid "Download File"
 msgstr "Fájl letöltése"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-msgid "A file containing the support bundle will be downloaded to the local system. Please save the file and send it to the OTRS Group, using an alternate method."
-msgstr "A támogatási csomagot tartalmazó fájl le lesz töltve a helyi rendszerre. Mentse el a fájlt, és küldje el az OTRS csoportnak egy alternatív módszer használatával."
+msgid "A file containing the support bundle will be downloaded to the local system."
+msgstr "A támogatási csomagot tartalmazó fájl le lesz töltve a helyi rendszerre."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "Error: Support data could not be collected (%s)."
@@ -11308,7 +11304,7 @@ msgstr "Teszt"
 msgid "Training"
 msgstr "Oktatás"
 
-#. Perl Module: Kernel/Modules/AdminRegistration.pm
+#. SysConfig
 msgid "Development"
 msgstr "Fejlesztés"
 

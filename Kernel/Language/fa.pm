@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.65613806577662;
+    $Self->{Completeness}        = 0.65337726523888;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -315,7 +315,6 @@ sub Data {
             'ثبت نام سیستم یک سرویس از OTRS گروه، فراهم می کند که بسیاری از مزایای است!',
         'Please note that the use of OTRS cloud services requires the system to be registered.' =>
             'لطفا توجه داشته باشید که استفاده از سیستم های ابری  OTRS نیاز به این سیستم  ثبت نام دارد . ',
-        'Register this system' => 'ثبت نام این سیستم',
         'Here you can configure available cloud services that communicate securely with %s.' =>
             'در اینجا شما می توانید خدمات ابر در دسترس است که امن برقراری ارتباط با پیکربندی %s .',
         'Available Cloud Services' => 'سرویس های ابری در دسترس',
@@ -1923,92 +1922,6 @@ sub Data {
         'Filter for templates' => '',
         'Templates' => 'قالب ها',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-        'System Registration Management' => 'سیستم مدیریت ثبت نام',
-        'Edit System Registration' => '',
-        'System Registration Overview' => '',
-        'Register System' => '',
-        'Validate OTRS-ID' => '',
-        'Deregister System' => 'لغو ثبت سیستم',
-        'Edit details' => 'جزئیات ویرایش',
-        'Show transmitted data' => 'نمایش انتقال داده ها',
-        'Deregister system' => 'سیستم لغو ثبت',
-        'Overview of registered systems' => 'بررسی اجمالی از سیستم ثبت نام',
-        'This system is registered with OTRS Group.' => 'این سیستم با OTRS گروه ثبت شده است.',
-        'System type' => 'نوع سیستم',
-        'Unique ID' => 'شناسه منحصر به فرد',
-        'Last communication with registration server' => 'ارتباط با سرور و زمان آخرین ثبت نام',
-        'System Registration not Possible' => '',
-        'Please note that you can\'t register your system if OTRS Daemon is not running correctly!' =>
-            'لطفا توجه داشته باشید که شما می توانید از سیستم خود را برای ثبت نام اینجا اگر OTRS دیمون را به درستی اجرا نیست!',
-        'Instructions' => 'دستورعمل',
-        'System Deregistration not Possible' => '',
-        'Please note that you can\'t deregister your system if you\'re using the %s or having a valid service contract.' =>
-            'لطفا توجه داشته باشید که شما می توانید از سیستم خود را لغو ثبت می کنید اگر شما در حال استفاده از %s و یا داشتن یک قرارداد خدمات معتبر است.',
-        'OTRS-ID Login' => 'OTRS-ID ورود',
-        'Read more' => 'ادامه مطلب',
-        'You need to log in with your OTRS-ID to register your system.' =>
-            'شما نیاز به ورود خود را با OTRS-ID برای ثبت نام سیستم شما.',
-        'Your OTRS-ID is the email address you used to sign up on the OTRS.com webpage.' =>
-            'شما OTRS-ID آدرس ایمیل شما استفاده می شود به ثبت نام در صفحه وب OTRS.com است.',
-        'Data Protection' => 'حفاظت از داده ها',
-        'What are the advantages of system registration?' => 'مزایای استفاده از ثبت نام سیستم چیست؟',
-        'You will receive updates about relevant security releases.' => 'شما به روز رسانی در مورد نسخه های امنیتی مربوطه را دریافت خواهید کرد.',
-        'With your system registration we can improve our services for you, because we have all relevant information available.' =>
-            'با ثبت نام در سیستم شما ما می توانیم خدمات ما برای شما را بهبود بخشد، چرا که ما این اطلاعات را از همه مربوط به در دسترس.',
-        'This is only the beginning!' => 'این تنها آغاز است!',
-        'We will inform you about our new services and offerings soon.' =>
-            'ما شما را در مورد خدمات و ارائه جدید ما به زودی اطلاع رسانی خواهد شد.',
-        'Can I use OTRS without being registered?' => 'آیا می توانم از OTRS  استفاده کنم بدون اینکه ثبت نام کنم؟',
-        'System registration is optional.' => 'ثبت نام سیستم اختیاری است.',
-        'You can download and use OTRS without being registered.' => 'شما می توانید دانلود کنید و استفاده کنید از  OTRS بدون اینکه ثبت نام کنید .',
-        'Is it possible to deregister?' => 'آیا لغو ثبت ممکن است؟',
-        'You can deregister at any time.' => 'شما می توانید در هر زمان لغو ثبت کنید .',
-        'Which data is transfered when registering?' => 'که داده منتقل هنگام ثبت نام؟',
-        'A registered system sends the following data to OTRS Group:' => 'سیستم ثبت نام اطلاعات زیر به OTRS گروه می فرستد:',
-        'Fully Qualified Domain Name (FQDN), OTRS version, Database, Operating System and Perl version.' =>
-            'نام کامل دامنه (FQDN)، مدل OTRS، پایگاه داده، سیستم عامل و نسخه پرل.',
-        'Why do I have to provide a description for my system?' => 'چرا باید برای ارائه یک توصیف برای سیستم من؟',
-        'The description of the system is optional.' => 'شرح سیستم اختیاری است.',
-        'The description and system type you specify help you to identify and manage the details of your registered systems.' =>
-            'توضیحات و سیستم نوع را مشخص می کنید به شما کمک کند برای شناسایی و مدیریت جزئیات سیستم ثبت نام خود را.',
-        'How often does my OTRS system send updates?' => 'هر چند وقت یکبار سیستم OTRS من ارسال به روز رسانی؟',
-        'Your system will send updates to the registration server at regular intervals.' =>
-            'سیستم خود را به روز رسانی به سرور ثبت نام در فواصل منظم ارسال می کند.',
-        'Typically this would be around once every three days.' => 'به طور معمول این امر می تواند حدودا هر سه روز یکبار رخ دهد .',
-        'If you deregister your system, you will lose these benefits:' =>
-            'اگر شما سیستم خود را لغو ثبت کنید، شما این منافع را ازدست خواهید داد',
-        'You need to log in with your OTRS-ID to deregister your system.' =>
-            'شما نیاز به ورود خود را با OTRS-ID به لغو ثبت سیستم شما.',
-        'OTRS-ID' => 'OTRS-ID',
-        'You don\'t have an OTRS-ID yet?' => 'شما هنوز یک OTRS-ID ندارید؟',
-        'Sign up now' => 'اکنون عضو شوید',
-        'Forgot your password?' => 'رمز عبور خود را فراموش کرده اید',
-        'Retrieve a new one' => ' یک رمز جدید بازیابی کنید',
-        'Next' => 'بعدی',
-        'This data will be frequently transferred to OTRS Group when you register this system.' =>
-            'این داده خواهد شد اغلب به OTRS گروه منتقل هنگامی که شما این سیستم ثبت نام کنید.',
-        'Attribute' => 'صفت',
-        'FQDN' => 'FQDN',
-        'OTRS Version' => 'OTRS نسخه',
-        'Database' => 'پایگاه داده',
-        'Operating System' => 'سیستم عامل',
-        'Perl Version' => 'پرل نسخه',
-        'Optional description of this system.' => 'توضیحات اختیاری این سیستم.',
-        'Register' => 'ثبت نام',
-        'Continuing with this step will deregister the system from OTRS Group.' =>
-            'در ادامه با این مرحله خواهد شد سیستم را از OTRS گروه لغو ثبت.',
-        'Deregister' => 'لغو ثبت',
-        'You can modify registration settings here.' => 'شما می توانید تنظیمات ثبت نام را اینجا تنظیم کنید.',
-        'Overview of Transmitted Data' => '',
-        'There is no data regularly sent from your system to %s.' => 'هیچ داده به طور منظم از سیستم خود را به ارسال وجود دارد %s .',
-        'The following data is sent at minimum every 3 days from your system to %s.' =>
-            'داده های زیر است که در حداقل هر 3 روز از سیستم خود را به ارسال %s .',
-        'The data will be transferred in JSON format via a secure https connection.' =>
-            'داده خواهد شد در قالب JSON از طریق یک اتصال امن HTTPS منتقل شده است.',
-        'System Registration Data' => 'اطلاعات سیستم ثبت نام',
-        'Support Data' => 'پشتیبانی از داده ها',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'مدیریت نقش',
         'Add Role' => 'افزودن نقش',
@@ -2182,20 +2095,13 @@ sub Data {
         'Sending support data to OTRS Group is not possible!' => 'ارسال اطلاعات پشتیبانی به OTRS گروه ممکن نیست!',
         'Enable Cloud Services' => 'فعال کردن خدمات ابر',
         'Enable cloud services' => 'فعال کردن سرویس های ابری',
-        'This data is sent to OTRS Group on a regular basis. To stop sending this data please update your system registration.' =>
-            'این داده ها به OTRS گروه به طور منظم ارسال می شود. برای متوقف کردن ارسال این اطلاعات لطفا به روز رسانی ثبت نام سیستم شما.',
-        'You can manually trigger the Support Data sending by pressing this button:' =>
-            'شما می توانید دستی ماشه داده پشتیبانی از ارسال با فشار دادن این دکمه:',
-        'Send Update' => 'ارسال به روز رسانی',
-        'Currently this data is only shown in this system.' => 'در حال حاضر این داده ها فقط در این سیستم نشان داده میشوند.',
         'A support bundle (including: system registration information, support data, a list of installed packages and all locally modified source code files) can be generated by pressing this button:' =>
             'بسته نرم افزاری پشتیبانی (از جمله: اطلاعات ثبت نام سیستم، داده پشتیبانی، یک لیست از بسته های نصب شده و تمامی فایل های کد منبع به صورت محلی تغییر) را می توان با فشار دادن این دکمه تولید:',
         'Generate Support Bundle' => 'تولید پشتیبانی بسته نرم افزاری',
         'The Support Bundle has been Generated' => '',
-        'Please choose one of the following options.' => 'لطفا یکی از گزینه های زیر را انتخاب نمایید.',
-        'Download File' => 'دریافت فایل',
-        'A file containing the support bundle will be downloaded to the local system. Please save the file and send it to the OTRS Group, using an alternate method.' =>
-            'فایل حاوی بسته نرم افزاری پشتیبانی خواهد شد به سیستم محلی دریافت کنید. لطفا فایل ذخیره و ارسال آن به گروه OTRS، با استفاده از یک روش جایگزین.',
+        'A file containing the support bundle will be downloaded to the local system.' =>
+            'فایل حاوی بسته نرم افزاری پشتیبانی خواهد شد به سیستم محلی دریافت کنید.',
+        'Support Data' => 'پشتیبانی از داده ها',
         'Error: Support data could not be collected (%s).' => 'خطا: اطلاعات پشتیبانی نمی تواند جمع آوری  شود ( %s ).',
         'Details' => 'جزئیات',
 
@@ -2361,6 +2267,7 @@ sub Data {
         'Add ticket attribute relations' => '',
         'Edit ticket attribute relations' => '',
         'Import CSV or Excel file' => '',
+        'Attribute' => 'صفت',
         'Last update' => '',
         'Are you sure you want to delete entry \'%s\'?' => '',
         'Download previously imported file' => '',
@@ -3063,6 +2970,7 @@ sub Data {
         'Your 2 Factor Token' => ' 2 فاکتور رمزشما',
         'Log In' => 'ورود',
         'Not yet registered?' => 'هنوز ثبت نام نشده‌اید؟',
+        'Sign up now' => 'اکنون عضو شوید',
         'Back' => 'بازگشت',
         'Request New Password' => 'درخواست رمز عبور جدید',
         'Your User Name' => 'نام کاربری شما',
@@ -3165,6 +3073,7 @@ sub Data {
         'Phone' => 'تلفن',
         'Web site' => 'وب سایت',
         'Community' => '',
+        'Next' => 'بعدی',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => 'پیکربندی ایمیل ارسالی',
@@ -3216,6 +3125,7 @@ sub Data {
             'یک کاربر برای پایگاه داده با دسترسی‌های محدود برای این سیستم ساخته خواهند شد.',
         'Repeat Password' => 'تکرار رمز عبور ',
         'Generated password' => 'رمز عبور تولید شده',
+        'Database' => 'پایگاه داده',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmysql.tt
         'Passwords do not match' => 'رمزهای ورود مطابقت ندارند',
@@ -4074,12 +3984,6 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminQueueTemplates.pm
         'Change Queue Relations for Template' => 'تغییر روابط صف برای الگو',
         'Change Template Relations for Queue' => 'تغییر روابط الگو برای صف',
-
-        # Perl Module: Kernel/Modules/AdminRegistration.pm
-        'Production' => 'در حال تولید',
-        'Test' => '',
-        'Training' => 'آموزشی',
-        'Development' => '',
 
         # Perl Module: Kernel/Modules/AdminRole.pm
         'Role updated!' => 'نقش به روزرسانی شد!',
@@ -5243,6 +5147,7 @@ sub Data {
         'PostgreSQL 9.2 or higher is required.' => '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
+        'Operating System' => 'سیستم عامل',
         'OTRS Disk Partition' => 'پارتیشن OTRS دیسک',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskSpace.pm
@@ -5277,6 +5182,9 @@ sub Data {
             '',
         'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
             '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
+        'Perl Version' => 'پرل نسخه',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/Swap.pm
         'Free Swap Space (%)' => 'فضای swap خالی (٪)',
@@ -5435,6 +5343,9 @@ sub Data {
         'UI - Special Statistics' => '',
         'Agents using custom main menu ordering' => '',
         'Agents using favourites for the admin overview' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
+        'OTRS Version' => 'OTRS نسخه',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
         'Webserver' => 'وب Server',
@@ -8706,6 +8617,7 @@ Thanks for your help!
             'تعیین رشته است که به عنوان دریافت کننده نشان داده خواهد شد (برای :) بلیط تلفن و به عنوان فرستنده (از :) از بلیط ایمیل در رابط عامل. برای صف به عنوان NewQueueSelectionType \ "<صف> " نشان می دهد نام از صف و برای SystemAddress \ "<Realname> << >> ایمیل " نام و ایمیل دریافت کننده نشان می دهد.',
         'Determines the strings that will be shown as recipient (To:) of the ticket in the customer interface. For Queue as CustomerPanelSelectionType, "<Queue>" shows the names of the queues, and for SystemAddress, "<Realname> <<Email>>" shows the name and email of the recipient.' =>
             'تعیین رشته است که به عنوان گیرنده (به :) بلیط در رابط مشتری از نشان داده خواهد شد. برای صف به عنوان CustomerPanelSelectionType، \ "<صف> " نشان می دهد نام از صف، و برای SystemAddress، \ "<Realname> << >> ایمیل " نشان می دهد نام و ایمیل دریافت کننده.',
+        'Development' => '',
         'Disable cloud services' => '',
         'Display communication log entries.' => '',
         'Down' => 'پائین',
@@ -8874,7 +8786,6 @@ Thanks for your help!
         'Manage existing sessions.' => 'مدیریت session های موجود',
         'Manage support data.' => 'مدیریت داده پشتیبانی می کند.',
         'Manage system files.' => '',
-        'Manage system registration.' => 'مدیریت ثبت نام سیستم.',
         'Manage tasks triggered by event or time based execution.' => 'مدیریت وظایف موجب شده توسط رویداد یا زمان اجرای .',
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'به‌عنوان هرزنامه علامت بزن',
@@ -9268,7 +9179,6 @@ Thanks for your help!
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
-        'Data Protection',
         'Date/Time',
         'Day',
         'Dec',
@@ -9497,7 +9407,6 @@ Thanks for your help!
         'Support Data information was successfully sent.',
         'Switch to desktop mode',
         'Switch to mobile mode',
-        'System Registration',
         'Team',
         'Th',
         'The browser you are using is too old.',

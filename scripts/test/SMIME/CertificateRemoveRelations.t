@@ -230,16 +230,16 @@ for my $Certificate (@Certificates) {
 my $CryptObject = $Kernel::OM->Get('Kernel::System::Crypt::SMIME');
 
 my @PrivateCerts = $CryptObject->PrivateSearch(
-    Search => $Certificates[0]->{IndexedFilename},
+    Search     => $Certificates[0]->{IndexedFilename},
     SearchType => 'filename',
 );
-my %Cert1Attributes = %{$PrivateCerts[0]};
+my %Cert1Attributes = %{ $PrivateCerts[0] };
 
 my @PublicCerts = $CryptObject->CertificateSearch(
-    Search => $Certificates[1]->{IndexedFilename},
+    Search     => $Certificates[1]->{IndexedFilename},
     SearchType => 'filename',
 );
-my %Cert2Attributes = %{$PublicCerts[0]};
+my %Cert2Attributes = %{ $PublicCerts[0] };
 
 my @Data = $CryptObject->SignerCertRelationGet(
     CertFingerprint => $Cert1Attributes{Fingerprint},
@@ -261,8 +261,8 @@ $Self->False(
 
 $CryptObject->SignerCertRelationAdd(
     CertificateID => $Cert1Attributes{CertificateID},
-    CAID   => $Cert2Attributes{CertificateID},
-    UserID          => 1,
+    CAID          => $Cert2Attributes{CertificateID},
+    UserID        => 1,
 );
 
 @Data = $CryptObject->SignerCertRelationGet(

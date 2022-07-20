@@ -12,6 +12,7 @@
  - 2022-05-04 Fixed select fields not being shown in modernized mode after submit with input errors.
  - 2022-04-21 Added standard templates to [Agent/Customer]TicketProcess.
  - 2022-03-14 Fixed sending notifications to invalid customer users.
+ - 2022-03-11 Removed system registration.
 
 # 6.3.4 2022-06-15
  - 2022-05-30 Fixed use of URL parameter in Kernel::System::Calendar::Plugin::Ticket::Link::LinkList and Kernel::System::Calendar::Export::ICal::Export.

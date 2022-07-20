@@ -1547,7 +1547,7 @@ msgstr "Mehr Business-Felder"
 msgid "Would you like to benefit from additional dynamic field types for businesses? Upgrade to %s to get access to the following field types:"
 msgstr "Möchten Sie von den Vorteilen weiterer Felder profitieren? Aktualisieren Sie zur %s, um diese zusätzlichen Feldtypen freizuschalten:"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmssql.tt
 msgid "Database"
 msgstr "Datenbank"
 
@@ -5471,7 +5471,7 @@ msgstr "OTRS-ID"
 msgid "You don't have an OTRS-ID yet?"
 msgstr "Sie haben noch keine OTRS-ID?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Sign up now"
 msgstr "Registrieren Sie sich jetzt"
 
@@ -5483,7 +5483,7 @@ msgstr "Passwort vergessen?"
 msgid "Retrieve a new one"
 msgstr "Neues anfordern"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Next"
 msgstr "Weiter"
 
@@ -5491,7 +5491,7 @@ msgstr "Weiter"
 msgid "This data will be frequently transferred to OTRS Group when you register this system."
 msgstr "Wenn Sie dieses System registrieren, werden folgende Daten in regelmäßigen Abständen an die OTRS Gruppe übertragen."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
 msgid "Attribute"
 msgstr "Attribut"
 
@@ -5499,15 +5499,15 @@ msgstr "Attribut"
 msgid "FQDN"
 msgstr "FQDN"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
 msgid "OTRS Version"
 msgstr "OTRS-Version"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
 msgid "Operating System"
 msgstr "Betriebssystem"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
 msgid "Perl Version"
 msgstr "Perl-Version"
 
@@ -5551,7 +5551,7 @@ msgstr "Die Daten werden im JSON-Format über eine sichere https-Verbindung übe
 msgid "System Registration Data"
 msgstr "Daten der Systemregistrierung"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "Support Data"
 msgstr "Supportdaten"
 
@@ -6087,10 +6087,6 @@ msgstr "Support-Paket erstellen"
 msgid "The Support Bundle has been Generated"
 msgstr "Das Support-Paket wurde erstellt"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-msgid "Please choose one of the following options."
-msgstr "Bitte wählen Sie eine der nachfolgenden Optionen aus."
-
 #. Template: AdminSupportDataCollector
 msgid "Send by Email"
 msgstr "Per E-Mail senden"
@@ -6116,8 +6112,8 @@ msgid "Download File"
 msgstr "Datei herunterladen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-msgid "A file containing the support bundle will be downloaded to the local system. Please save the file and send it to the OTRS Group, using an alternate method."
-msgstr "Das Support-Paket wird als Datei ins lokale Dateisystem heruntergeladen. Bitte speichern Sie die Datei und senden Sie diese auf anderen Wegen an die OTRS Gruppe."
+msgid "A file containing the support bundle will be downloaded to the local system."
+msgstr "Das Support-Paket wird als Datei ins lokale Dateisystem heruntergeladen."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "Error: Support data could not be collected (%s)."
@@ -11335,7 +11331,7 @@ msgstr "Test"
 msgid "Training"
 msgstr "Training"
 
-#. Perl Module: Kernel/Modules/AdminRegistration.pm
+#. SysConfig
 msgid "Development"
 msgstr "Entwicklung"
 

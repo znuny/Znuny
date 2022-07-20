@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-07-08 14:33+0000\n"
+"POT-Creation-Date: 2022-07-18 12:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -896,10 +896,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServices.tt
 msgid "Please note that the use of OTRS cloud services requires the system to be registered."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServices.tt
-msgid "Register this system"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServices.tt
@@ -5742,282 +5738,6 @@ msgstr ""
 msgid "Templates"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "System Registration Management"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Edit System Registration"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "System Registration Overview"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Register System"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Validate OTRS-ID"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Deregister System"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Edit details"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Show transmitted data"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Deregister system"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Overview of registered systems"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "This system is registered with OTRS Group."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "System type"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Unique ID"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Last communication with registration server"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "System Registration not Possible"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Please note that you can't register your system if OTRS Daemon is not running correctly!"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Instructions"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "System Deregistration not Possible"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Please note that you can't deregister your system if you're using the %s or having a valid service contract."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "OTRS-ID Login"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Read more"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "You need to log in with your OTRS-ID to register your system."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Your OTRS-ID is the email address you used to sign up on the OTRS.com webpage."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Data Protection"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "What are the advantages of system registration?"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "You will receive updates about relevant security releases."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "With your system registration we can improve our services for you, because we have all relevant information available."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "This is only the beginning!"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "We will inform you about our new services and offerings soon."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Can I use OTRS without being registered?"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "System registration is optional."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "You can download and use OTRS without being registered."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Is it possible to deregister?"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "You can deregister at any time."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Which data is transfered when registering?"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "A registered system sends the following data to OTRS Group:"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Fully Qualified Domain Name (FQDN), OTRS version, Database, Operating System and Perl version."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Why do I have to provide a description for my system?"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "The description of the system is optional."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "The description and system type you specify help you to identify and manage the details of your registered systems."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "How often does my OTRS system send updates?"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Your system will send updates to the registration server at regular intervals."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Typically this would be around once every three days."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "If you deregister your system, you will lose these benefits:"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "You need to log in with your OTRS-ID to deregister your system."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "OTRS-ID"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "You don't have an OTRS-ID yet?"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Sign up now"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Forgot your password?"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Retrieve a new one"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Next"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "This data will be frequently transferred to OTRS Group when you register this system."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Attribute"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "FQDN"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "OTRS Version"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Database"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Operating System"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Perl Version"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Optional description of this system."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Register"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Continuing with this step will deregister the system from OTRS Group."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Deregister"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "You can modify registration settings here."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Overview of Transmitted Data"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "There is no data regularly sent from your system to %s."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "The following data is sent at minimum every 3 days from your system to %s."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "The data will be transferred in JSON format via a secure https connection."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "System Registration Data"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-msgid "Support Data"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
 msgid "Role Management"
 msgstr ""
@@ -6527,22 +6247,6 @@ msgid "Enable cloud services"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-msgid "This data is sent to OTRS Group on a regular basis. To stop sending this data please update your system registration."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-msgid "You can manually trigger the Support Data sending by pressing this button:"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-msgid "Send Update"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-msgid "Currently this data is only shown in this system."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "A support bundle (including: system registration information, support data, a list of installed packages and all locally modified source code files) can be generated by pressing this button:"
 msgstr ""
 
@@ -6555,15 +6259,11 @@ msgid "The Support Bundle has been Generated"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-msgid "Please choose one of the following options."
+msgid "A file containing the support bundle will be downloaded to the local system."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-msgid "Download File"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-msgid "A file containing the support bundle will be downloaded to the local system. Please save the file and send it to the OTRS Group, using an alternate method."
+msgid "Support Data"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
@@ -6992,6 +6692,10 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
 msgid "Import CSV or Excel file"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
+msgid "Attribute"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
@@ -8975,6 +8679,10 @@ msgid "Not yet registered?"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
+msgid "Sign up now"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back"
 msgstr ""
 
@@ -9254,6 +8962,10 @@ msgstr ""
 msgid "Community"
 msgstr ""
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
+msgid "Next"
+msgstr ""
+
 #. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
 msgid "Configure Outbound Mail"
 msgstr ""
@@ -9416,6 +9128,10 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmssql.tt
 msgid "Generated password"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmssql.tt
+msgid "Database"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmysql.tt
@@ -11792,22 +11508,6 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminQueueTemplates.pm
 msgid "Change Template Relations for Queue"
-msgstr ""
-
-#. Perl Module: Kernel/Modules/AdminRegistration.pm
-msgid "Production"
-msgstr ""
-
-#. Perl Module: Kernel/Modules/AdminRegistration.pm
-msgid "Test"
-msgstr ""
-
-#. Perl Module: Kernel/Modules/AdminRegistration.pm
-msgid "Training"
-msgstr ""
-
-#. Perl Module: Kernel/Modules/AdminRegistration.pm
-msgid "Development"
 msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminRole.pm
@@ -14703,6 +14403,10 @@ msgid "PostgreSQL 9.2 or higher is required."
 msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
+msgid "Operating System"
+msgstr ""
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
 msgid "OTRS Disk Partition"
 msgstr ""
 
@@ -14764,6 +14468,10 @@ msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
 msgid "CPAN::Audit did not report any known vulnerabilities in the installed Perl modules."
+msgstr ""
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
+msgid "Perl Version"
 msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/Swap.pm
@@ -15116,6 +14824,10 @@ msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/UI/SpecialStats.pm
 msgid "Agents using favourites for the admin overview"
+msgstr ""
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
+msgid "OTRS Version"
 msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
@@ -22750,6 +22462,10 @@ msgid "Determines the strings that will be shown as recipient (To:) of the ticke
 msgstr ""
 
 #. SysConfig
+msgid "Development"
+msgstr ""
+
+#. SysConfig
 msgid "Disable cloud services"
 msgstr ""
 
@@ -23375,10 +23091,6 @@ msgstr ""
 
 #. SysConfig
 msgid "Manage system files."
-msgstr ""
-
-#. SysConfig
-msgid "Manage system registration."
 msgstr ""
 
 #. SysConfig
