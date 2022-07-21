@@ -200,7 +200,7 @@ sub Update {
 
 Get all plugin information.
 
-    my %Data = $TicketLinkPluginObject->Get(
+    my $Data = $TicketLinkPluginObject->Get(
         GetParam    => \%GetParam,
         Appointment => \%Appointment,
         Plugin      => \%Plugin,
@@ -209,7 +209,7 @@ Get all plugin information.
 
 Returns:
 
-    my %Data = {};
+    my $Data = {};
 
 =cut
 
@@ -316,7 +316,7 @@ sub LinkList {
         }
     }
 
-    my %LinkKeyList = $Kernel::OM->Get('Kernel::System::LinkObject')->LinkKeyListWithData(
+    my %LinkKeyListWithData = $Kernel::OM->Get('Kernel::System::LinkObject')->LinkKeyListWithData(
         Object1 => 'Appointment',
         Key1    => $Param{AppointmentID},
         Object2 => 'Ticket',
@@ -324,13 +324,15 @@ sub LinkList {
         UserID  => $Param{UserID},
     );
 
+    return {} if !%LinkKeyListWithData;
+
     my %Result = map {
         $_ => {
-            LinkID   => $LinkKeyList{$_}->{TicketID},
-            LinkName => $LinkKeyList{$_}->{TicketNumber} . ' ' . $LinkKeyList{$_}->{Title},
-            LinkURL  => sprintf( $Param{URL}, $LinkKeyList{$_}->{TicketID} ),
+            LinkID   => $LinkKeyListWithData{$_}->{TicketID},
+            LinkName => $LinkKeyListWithData{$_}->{TicketNumber} . ' ' . $LinkKeyListWithData{$_}->{Title},
+            LinkURL  => sprintf( $Param{URL}, $LinkKeyListWithData{$_}->{TicketID} ),
         }
-    } keys %LinkKeyList;
+    } keys %LinkKeyListWithData;
 
     return \%Result;
 }
@@ -373,6 +375,8 @@ sub LinkDelete {
         State   => 'Valid',
         UserID  => $Param{UserID},
     );
+
+    return 1 if !%LinkKeyList;
 
     my $Success;
     for my $TicketID ( sort keys %LinkKeyList ) {

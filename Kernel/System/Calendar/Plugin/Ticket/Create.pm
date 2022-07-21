@@ -129,10 +129,14 @@ sub RenderOutput {
     }
 
     if ( $Param{Plugin}->{Data}->{CustomerUserID} ) {
-        $Param{Plugin}->{Data}->{SelectedCustomerUser} = $Param{Plugin}->{Data}->{CustomerUserID};
-        $Param{Plugin}->{Data}->{CustomerUserID}       = $CustomerUserObject->CustomerName(
+        $Param{Plugin}->{Data}->{CustomerAutoComplete} = $CustomerUserObject->CustomerName(
             UserLogin => $Param{Plugin}->{Data}->{CustomerUserID},
         );
+        my %User = $CustomerUserObject->CustomerUserDataGet(
+            User => $Param{Plugin}->{Data}->{CustomerUserID},
+        );
+
+        $Param{Plugin}->{Data}->{CustomerID} = $User{UserCustomerID};
     }
 
     if ( $Param{Plugin}->{Data}->{Link} ) {
@@ -144,10 +148,12 @@ sub RenderOutput {
 
     # add Data to Param to use the next functions several times (initial and via AJAXUpdate)
     $Param{Plugin}->{Param} = $Param{Plugin}->{Data};
+    $Param{Action} = 'AgentAppointmentEdit';
 
-    $Param{TicketCreateTimeTypeStrg}        = $Self->_TicketCreateTimeTypeSelection(%Param);
-    $Param{TicketCreateOffsetUnitStrg}      = $Self->_TicketCreateOffsetUnitSelection(%Param);
-    $Param{TicketCreateOffsetPointStrg}     = $Self->_TicketCreateOffsetPointSelection(%Param);
+    $Param{TicketCreateTimeTypeStrg}    = $Self->_TicketCreateTimeTypeSelection(%Param);
+    $Param{TicketCreateOffsetUnitStrg}  = $Self->_TicketCreateOffsetUnitSelection(%Param);
+    $Param{TicketCreateOffsetPointStrg} = $Self->_TicketCreateOffsetPointSelection(%Param);
+
     $Param{QueueStrg}                       = $Self->_QueueSelection(%Param);
     $Param{OwnerStrg}                       = $Self->_OwnerSelection(%Param);
     $Param{StateStrg}                       = $Self->_StateSelection(%Param);
@@ -219,7 +225,7 @@ updated accordingly as needed.
             PluginKey => 'TicketCreate',
             Block     => 'Ticket',
             Module    => 'Kernel::System::Calendar::Plugin::Ticket::Create',
-            Prio      => '1000'
+            Prio      => '1000',
             Param     => {
                 CustomerID                  => 'customer',
                 CustomerUserID              => 'customer',
@@ -232,7 +238,7 @@ updated accordingly as needed.
                 TicketPendingTimeOffsetUnit => 60,
                 PriorityID                  => 1,
                 ProcessID                   => 'Process-37d25e23af417c91c78939039316f8c5',
-                QueueID                     => 1',
+                QueueID                     => 1,
                 ResponsibleUserID           => 1,
                 SLAID                       => 1,
                 ServiceID                   => 1,
@@ -240,7 +246,7 @@ updated accordingly as needed.
                 TicketCreateTimeType        => 'Never',                # Never|Relative|StartTime
                 TicketCreateOffset          => 2,
                 TicketCreateOffsetUnit      => 3600,
-                TicketCreateTime            => '2019-05-01 08:00:00'.
+                TicketCreateTime            => '2019-05-01 08:00:00',
                 TicketCreated               => 1,
                 TypeID                      => 1,
             },
@@ -257,86 +263,41 @@ Returns:
 sub Update {
     my ( $Self, %Param ) = @_;
 
-    my $PluginObject = $Kernel::OM->Get('Kernel::System::Calendar::Plugin');
-    my $StateObject  = $Kernel::OM->Get('Kernel::System::State');
-    my $TimeObject   = $Kernel::OM->Get('Kernel::System::Time');
+    my $PluginObject      = $Kernel::OM->Get('Kernel::System::Calendar::Plugin');
+    my $AppointmentObject = $Kernel::OM->Get('Kernel::System::Calendar::Appointment');
 
-    # Recurring appointment
-    if ( $Param{Appointment}->{ParentID} ) {
-        $Param{Appointment}->{AppointmentID} = $Param{Appointment}->{ParentID};
-    }
+    my $AppointmentID = $Param{Appointment}->{AppointmentID};
 
+    my %Appointment = $AppointmentObject->AppointmentGet(
+        AppointmentID => $AppointmentID,
+    );
+
+    return if !%Appointment;
+
+    # update current appointment (parent|single|single child)
     my %Data = $PluginObject->DataGet(
-        AppointmentID => $Param{Appointment}->{AppointmentID},
+        AppointmentID => $AppointmentID,
         PluginKey     => $Param{Plugin}->{PluginKey},
         UserID        => 1,
     );
 
+    $Self->_PrepareUpdateData(
+        %Param,
+    );
+
     if (
-        $Param{Plugin}->{Param}->{TicketCreateTimeType}
+        %Data
+        && $Param{Plugin}->{Param}->{TicketCreateTimeType}
         && $Param{Plugin}->{Param}->{TicketCreateTimeType} eq 'Never'
-        && $Data{ID}
         )
     {
         $PluginObject->DataDelete(
             ID     => $Data{ID},
             UserID => $Param{UserID},
         );
-        return 1;
     }
+    elsif (%Data) {
 
-    $Param{Plugin}->{Param}->{TicketCreateOffset} //= 0;
-
-    $Param{Plugin}->{Param}->{CustomerUserID} = $Param{GetParam}->{SelectedCustomerUser};
-    $Param{Plugin}->{Param}->{CustomerID}     = $Param{GetParam}->{CustomerID};
-
-    if (
-        $Param{Plugin}->{Param}->{TicketCreateTimeType}
-        && $Param{Plugin}->{Param}->{TicketCreateTimeType} eq 'Relative'
-        && $Param{Plugin}->{Param}->{TicketCreateOffset}
-        && $Param{Plugin}->{Param}->{TicketCreateOffsetPoint}
-        && $Param{Plugin}->{Param}->{TicketCreateOffsetUnit}
-        && $Param{Appointment}->{StartTime}
-        && $Param{Appointment}->{EndTime}
-        )
-    {
-        $Param{Plugin}->{Param}->{TicketCreateTime} = $Self->CalculateTicketCreateTime(
-            StartTimeStamp          => $Param{Appointment}->{StartTime},
-            EndTimeStamp            => $Param{Appointment}->{EndTime},
-            TicketCreateOffset      => $Param{Plugin}->{Param}->{TicketCreateOffset},
-            TicketCreateOffsetPoint => $Param{Plugin}->{Param}->{TicketCreateOffsetPoint},
-            TicketCreateOffsetUnit  => $Param{Plugin}->{Param}->{TicketCreateOffsetUnit},
-        );
-    }
-    elsif ( $Param{Plugin}->{Param}->{TicketCreateTimeType} eq 'StartTime' ) {
-        $Param{Plugin}->{Param}->{TicketCreateTime} = $Param{Appointment}->{StartTime};
-    }
-
-    $Param{Plugin}->{Param}->{TicketPendingTime} = '1900-01-01 00:00:00';
-    if ( $Param{Plugin}->{Param}->{StateID} ) {
-
-        my @PendingStateList = $StateObject->StateGetStatesByType(
-            StateType => [ 'pending reminder', 'pending auto' ],
-            Result    => 'ID',
-        );
-
-        my $IsPendingState = grep { $Param{Plugin}->{Param}->{StateID} eq $_ } @PendingStateList;
-        if ($IsPendingState) {
-            my $TicketCreateSystemTime = $TimeObject->TimeStamp2SystemTime(
-                String => $Param{Plugin}->{Param}->{TicketCreateTime},
-            );
-
-            $TicketCreateSystemTime +=
-                ( $Param{Plugin}->{Param}->{TicketPendingTimeOffset} // 0 )
-                * ( $Param{Plugin}->{Param}->{TicketPendingTimeOffsetUnit} // 60 );
-
-            $Param{Plugin}->{Param}->{TicketPendingTime} = $TimeObject->SystemTime2TimeStamp(
-                SystemTime => $TicketCreateSystemTime,
-            );
-        }
-    }
-
-    if (%Data) {
         $PluginObject->DataUpdate(
             ID     => $Data{ID},
             Config => {
@@ -347,10 +308,53 @@ sub Update {
             ChangeBy => $Param{UserID},
             UserID   => $Param{UserID},
         );
+
     }
     else {
         $PluginObject->DataAdd(
             AppointmentID => $Param{Appointment}->{AppointmentID},
+            PluginKey     => $Param{Plugin}->{PluginKey},
+            Config        => {
+                %{ $Param{Plugin}->{Param} },
+            },
+            CreateBy => $Param{UserID},
+            ChangeBy => $Param{UserID},
+            UserID   => $Param{UserID},
+        );
+    }
+
+    # if Recurring = 0, then AppointmentID is child appointment and we only update the current appointment
+    # if Recurring = 1, then AppointmentID is parent appointment and we delete and create new all 'child' appointments
+    return 1 if !$Param{GetParam}->{Recurring};
+
+    my @Appointments = $AppointmentObject->AppointmentRecurringGet(
+        AppointmentID => $AppointmentID,
+    );
+
+    # Create/update base plugin entry for the recurring appointments.
+    APPOINTMENT:
+    for my $Appointment (@Appointments) {
+
+        if (
+            $Appointment->{AppointmentID}
+            && $Param{Plugin}->{Param}->{TicketCreateTimeType}
+            && $Param{Plugin}->{Param}->{TicketCreateTimeType} eq 'Never'
+            )
+        {
+            $PluginObject->DataDelete(
+                ID     => $Appointment->{AppointmentID},
+                UserID => $Param{UserID},
+            );
+            next APPOINTMENT;
+        }
+
+        $Self->_PrepareUpdateData(
+            %Param,
+            Appointment => $Appointment,
+        );
+
+        $PluginObject->DataAdd(
+            AppointmentID => $Appointment->{AppointmentID},
             PluginKey     => $Param{Plugin}->{PluginKey},
             Config        => {
                 %{ $Param{Plugin}->{Param} },
@@ -368,7 +372,7 @@ sub Update {
 
 Get all plugin information.
 
-    my %Data = $TicketCreatePluginObject->Get(
+    my $Data = $TicketCreatePluginObject->Get(
         GetParam    => \%GetParam,
         Appointment => \%Appointment,
         Plugin      => \%Plugin,
@@ -377,7 +381,7 @@ Get all plugin information.
 
 Returns:
 
-    my %Data = {};
+    my $Data = {};
 
 =cut
 
@@ -386,6 +390,7 @@ sub Get {
 
     my $PluginObject   = $Kernel::OM->Get('Kernel::System::Calendar::Plugin');
     my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
+    my $LayoutObject   = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     my %Data = $PluginObject->DataGet(
         AppointmentID => $Param{Appointment}->{AppointmentID},
@@ -394,10 +399,29 @@ sub Get {
     );
     return if ( !%Data );
 
-    if ( $Data{Config}->{TicketCreateTimeType} ne 'Never' ) {
+    if (
+        $Data{Config}
+        && $Data{Config}->{TicketCreateTimeType}
+        && $Data{Config}->{TicketCreateTimeType} ne 'Never'
+        && $Data{Config}->{TicketCreateTime}
+        )
+    {
 
-        my $Value = $LanguageObject->Translate( $Data{Config}->{TicketCreateTimeType} ) . ': '
-            . $Data{Config}->{TicketCreateTime};
+        my $OTRSTimeZone   = Kernel::System::DateTime->OTRSTimeZoneGet();
+        my $DateTimeObject = $Kernel::OM->Create(
+            'Kernel::System::DateTime',
+            ObjectParams => {
+                String   => $Data{Config}->{TicketCreateTime},
+                TimeZone => $OTRSTimeZone,
+            }
+        );
+
+        $DateTimeObject->ToTimeZone( TimeZone => $LayoutObject->{UserTimeZone} );
+        my $DateTimeString = $DateTimeObject->ToString();
+
+        my $Value = $LanguageObject->Translate( $Data{Config}->{TicketCreateTimeType} )
+            . ': ' . $DateTimeString;
+
         $Data{Icon}  = 'ticket';
         $Data{Value} = $Value;
     }
@@ -725,7 +749,7 @@ sub TicketCreate {
             ID     => $Param{ID},
             Config => {
                 %{ $Param{Config} },
-                TicketCreated => 1,
+                TicketCreated => '1',
             },
             CreateBy => $Param{UserID},
             ChangeBy => $Param{UserID},
@@ -737,7 +761,6 @@ sub TicketCreate {
             Message =>
                 "Ticket for appointment with ID $Param{AppointmentID} and creation date $Param{Config}->{TicketCreateTime} was not created because catch-up threshold of $TicketCreateCatchUpThresholdMinutes minutes was exceeded.",
         );
-
         return 0;
     }
 
@@ -749,6 +772,9 @@ sub TicketCreate {
     my %Calendar      = $CalendarObject->CalendarGet(
         CalendarID => $Appointment{CalendarID},
     );
+
+    # run only for valid calendar
+    return 0 if $Calendar{ValidID} ne 1;
 
     if ( !IsArrayRefWithData( $Param{Config}->{QueueID} ) ) {
         $Param{Config}->{QueueID} = [ $Param{Config}->{QueueID} ] || [];
@@ -875,7 +901,7 @@ sub TicketCreate {
         ID     => $Param{ID},
         Config => {
             %{ $Param{Config} },
-            TicketCreated => 1,
+            TicketCreated => '1',
         },
         CreateBy => $Param{UserID},
         ChangeBy => $Param{UserID},
@@ -927,6 +953,67 @@ sub Cleanup {
     }
     return $Counter;
 
+}
+
+sub _PrepareUpdateData {
+    my ( $Self, %Param ) = @_;
+
+    my $StateObject = $Kernel::OM->Get('Kernel::System::State');
+    my $TimeObject  = $Kernel::OM->Get('Kernel::System::Time');
+
+    $Param{Plugin}->{Param}->{TicketCreateOffset} //= 0;
+    $Param{Plugin}->{Param}->{CustomerID} = $Param{GetParam}->{CustomerID};
+
+    if (
+        $Param{Plugin}->{Param}->{TicketCreateTimeType}
+        && $Param{Plugin}->{Param}->{TicketCreateTimeType} eq 'Relative'
+        && $Param{Plugin}->{Param}->{TicketCreateOffset}
+        && $Param{Plugin}->{Param}->{TicketCreateOffsetPoint}
+        && $Param{Plugin}->{Param}->{TicketCreateOffsetUnit}
+        && $Param{Appointment}->{StartTime}
+        && $Param{Appointment}->{EndTime}
+        )
+    {
+        $Param{Plugin}->{Param}->{TicketCreateTime} = $Self->CalculateTicketCreateTime(
+            StartTimeStamp          => $Param{Appointment}->{StartTime},
+            EndTimeStamp            => $Param{Appointment}->{EndTime},
+            TicketCreateOffset      => $Param{Plugin}->{Param}->{TicketCreateOffset},
+            TicketCreateOffsetPoint => $Param{Plugin}->{Param}->{TicketCreateOffsetPoint},
+            TicketCreateOffsetUnit  => $Param{Plugin}->{Param}->{TicketCreateOffsetUnit},
+        );
+    }
+    elsif (
+        $Param{Plugin}->{Param}->{TicketCreateTimeType}
+        && $Param{Plugin}->{Param}->{TicketCreateTimeType} eq 'StartTime'
+        )
+    {
+        $Param{Plugin}->{Param}->{TicketCreateTime} = $Param{Appointment}->{StartTime};
+    }
+
+    $Param{Plugin}->{Param}->{TicketPendingTime} = '1900-01-01 00:00:00';
+    if ( $Param{Plugin}->{Param}->{StateID} ) {
+        my @PendingStateList = $StateObject->StateGetStatesByType(
+            StateType => [ 'pending reminder', 'pending auto' ],
+            Result    => 'ID',
+        );
+
+        my $IsPendingState = grep { $Param{Plugin}->{Param}->{StateID} eq $_ } @PendingStateList;
+        if ($IsPendingState) {
+            my $TicketCreateSystemTime = $TimeObject->TimeStamp2SystemTime(
+                String => $Param{Plugin}->{Param}->{TicketCreateTime},
+            );
+
+            $TicketCreateSystemTime +=
+                ( $Param{Plugin}->{Param}->{TicketPendingTimeOffset} // 0 )
+                * ( $Param{Plugin}->{Param}->{TicketPendingTimeOffsetUnit} // 60 );
+
+            $Param{Plugin}->{Param}->{TicketPendingTime} = $TimeObject->SystemTime2TimeStamp(
+                SystemTime => $TicketCreateSystemTime,
+            );
+        }
+    }
+
+    return 1;
 }
 
 sub _TicketCreateTimeTypeSelection {
@@ -1189,14 +1276,18 @@ sub _TypeSelection {
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $LockObject   = $Kernel::OM->Get('Kernel::System::Lock');
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-    my %Types = $Self->_GetTypes(%Param);
+    my $DefaultTicketType = $ConfigObject->Get('Ticket::Type::Default');
+
+    my %Types        = $Self->_GetTypes(%Param);
+    my %ReverseTypes = reverse %Types;
 
     return $LayoutObject->BuildSelection(
         ID           => 'Plugin_' . $Param{Plugin}->{PluginKey} . '_TypeID',
         Name         => 'Plugin_' . $Param{Plugin}->{PluginKey} . '_TypeID',
         Data         => \%Types,
-        SelectedID   => $Param{Plugin}->{Data}->{TypeID},
+        SelectedID   => $Param{Plugin}->{Data}->{TypeID} || $ReverseTypes{$DefaultTicketType},
         Class        => 'Modernize W75pc',
         PossibleNone => 0,
         Translation  => 1,
@@ -1489,30 +1580,37 @@ sub _GetServices {
     # get options for default services for unknown customers
     my $DefaultServiceUnknownCustomer = $ConfigObject->Get('Ticket::Service::Default::UnknownCustomer');
 
-    # check if no SelectedCustomerUser is selected
-    # if $DefaultServiceUnknownCustomer = 0 leave SelectedCustomerUser empty, it will not get any services
-    # if $DefaultServiceUnknownCustomer = 1 set SelectedCustomerUser to get default services
-    if ( !$Param{Plugin}->{Param}->{SelectedCustomerUser} && $DefaultServiceUnknownCustomer ) {
-        $Param{Plugin}->{Param}->{SelectedCustomerUser} = '<DEFAULT>';
+    # check if no CustomerUserID is selected
+    # if $DefaultServiceUnknownCustomer = 0 leave CustomerUserID empty, it will not get any services
+    # if $DefaultServiceUnknownCustomer = 1 set CustomerUserID to get default services
+    if ( !$Param{Plugin}->{Param}->{CustomerUserID} && $DefaultServiceUnknownCustomer ) {
+        $Param{Plugin}->{Param}->{CustomerUserID} = '<DEFAULT>';
     }
 
     # get service list
-    if ( $Param{Plugin}->{Param}->{QueueID} && $Param{Plugin}->{Param}->{SelectedCustomerUser} ) {
+    if ( $Param{Plugin}->{Param}->{QueueID} && $Param{Plugin}->{Param}->{CustomerUserID} ) {
+        if ( IsArrayRefWithData( $Param{Plugin}->{Param}->{QueueID} ) ) {
+            $Param{QueueID} = $Param{Plugin}->{Param}->{QueueID}[0];
+        }
         %Services = $TicketObject->TicketServiceList(
             %Param,
             QueueID        => $Param{Plugin}->{Param}->{QueueID},
-            CustomerUserID => $Param{Plugin}->{Param}->{SelectedCustomerUser},
+            CustomerUserID => $Param{Plugin}->{Param}->{CustomerUserID},
             Action         => $Param{Action} || $Self->{Action},
             UserID         => $Param{UserID},
         );
     }
-    elsif ( $Param{Plugin}->{Param}->{SelectedCustomerUser} ) {
+    elsif ( $Param{Plugin}->{Param}->{CustomerUserID} ) {
         %Services = $ServiceObject->CustomerUserServiceMemberList(
             Result            => 'HASH',
-            CustomerUserLogin => $Param{Plugin}->{Param}->{SelectedCustomerUser},
+            CustomerUserLogin => $Param{Plugin}->{Param}->{CustomerUserID},
             UserID            => $Param{UserID},
         );
     }
+    if ($Param{Plugin}->{Param}->{CustomerUserID} eq '<DEFAULT>'){
+        $Param{Plugin}->{Param}->{CustomerUserID} = '';
+    }
+
     return %Services;
 }
 
@@ -1521,12 +1619,14 @@ sub _GetSLAs {
 
     my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
+    $Param{Action} ||= $Self->{Action};
+
     # get sla
     my %SLAs;
     if ( $Param{Plugin}->{Param}->{ServiceID} && $Param{Plugin}->{Param}->{QueueID} && $Param{Action} ) {
         %SLAs = $TicketObject->TicketSLAList(
             %{ $Param{Plugin}->{Param} },
-            Action => $Param{Action} || $Self->{Action},
+            Action => $Param{Action},
             UserID => $Param{UserID},
         );
     }
@@ -1536,7 +1636,7 @@ sub _GetSLAs {
         if ( $Param{QueueID} && $Param{Action} ) {
             %SLAs = $TicketObject->TicketSLAList(
                 %{ $Param{Plugin}->{Param} },
-                Action => $Param{Action} || $Self->{Action},
+                Action => $Param{Action},
                 UserID => $Param{UserID},
             );
         }

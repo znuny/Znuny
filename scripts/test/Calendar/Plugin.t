@@ -344,4 +344,132 @@ $Self->IsDeeply(
     'Plugin keys loaded',
 );
 
+# PluginGetParam
+my @Tests = (
+    {
+        Name => 'Normal data structure via AgentAppointmentEdit',
+        Data => {
+            'Plugin_TicketCreate_PriorityID'                  => '3',
+            'Plugin_TicketCreate_Offset'                      => '1',
+            'Plugin_TicketCreate_LockID'                      => '2',
+            'Plugin_TicketCreate_TicketPendingTimeOffsetUnit' => '86400',
+            'Plugin_TicketCreate_QueueID[]'                   => '[4,1,28]',
+            'Plugin_TicketCreate_OffsetPoint'                 => 'beforestart',
+            'Plugin_TicketCreate_TypeID'                      => '105',
+            'Plugin_TicketCreate_OffsetUnit'                  => '60',
+            'Plugin_TicketCreate_SLAID'                       => '1',
+            'Plugin_TicketCreate_ResponsibleUserID'           => '1',
+            'Plugin_TicketCreate_ServiceID'                   => '1',
+            'Plugin_TicketCreate_OwnerID'                     => '1',
+            'Plugin_TicketCreate_StateID'                     => '1',
+            'Plugin_TicketCreate_TimeType'                    => 'Never',
+            'Plugin_TicketLink_LinkList[]'                    => '[438,414]',
+        },
+        Expected => {
+            'TicketCreate' => {
+                'PriorityID'                  => '3',
+                'Offset'                      => '1',
+                'LockID'                      => '2',
+                'TicketPendingTimeOffsetUnit' => '86400',
+                'QueueID'                     => [
+                    4,
+                    1,
+                    28
+                ],
+                'OffsetPoint'       => 'beforestart',
+                'TypeID'            => '105',
+                'OffsetUnit'        => '60',
+                'SLAID'             => '1',
+                'ResponsibleUserID' => '1',
+                'ServiceID'         => '1',
+                'OwnerID'           => '1',
+                'StateID'           => '1',
+                'TimeType'          => 'Never'
+            },
+            'TicketLink' => {
+                'LinkList' => [
+                    438,
+                    414
+                ]
+            }
+        },
+    },
+    {
+        Name => 'Data structure via UpdateAppointment (eventDrop|eventResize)',
+        Data => {
+            'Plugin[TicketCreate][Config][PriorityID]'                  => '3',
+            'Plugin[TicketCreate][Config][Offset]'                      => '1',
+            'Plugin[TicketCreate][Config][LockID]'                      => '2',
+            'Plugin[TicketCreate][Config][TicketPendingTimeOffsetUnit]' => '86400',
+            'Plugin[TicketCreate][Config][QueueID][]'                   => '[4,1,28]',
+            'Plugin[TicketCreate][Config][OffsetPoint]'                 => 'beforestart',
+            'Plugin[TicketCreate][Config][TypeID]'                      => '105',
+            'Plugin[TicketCreate][Config][OffsetUnit]'                  => '60',
+            'Plugin[TicketCreate][Config][SLAID]'                       => '1',
+            'Plugin[TicketCreate][Config][ResponsibleUserID]'           => '1',
+            'Plugin[TicketCreate][Config][ServiceID]'                   => '1',
+            'Plugin[TicketCreate][Config][OwnerID]'                     => '1',
+            'Plugin[TicketCreate][Config][StateID]'                     => '1',
+            'Plugin[TicketCreate][Config][TimeType]'                    => 'Never',
+            'Plugin[TicketLink][Config][LinkList][]'                    => '[438,414]',
+        },
+        Expected => {
+            'TicketCreate' => {
+                'PriorityID'                  => '3',
+                'Offset'                      => '1',
+                'LockID'                      => '2',
+                'TicketPendingTimeOffsetUnit' => '86400',
+                'QueueID'                     => [
+                    4,
+                    1,
+                    28
+                ],
+                'OffsetPoint'       => 'beforestart',
+                'TypeID'            => '105',
+                'OffsetUnit'        => '60',
+                'SLAID'             => '1',
+                'ResponsibleUserID' => '1',
+                'ServiceID'         => '1',
+                'OwnerID'           => '1',
+                'StateID'           => '1',
+                'TimeType'          => 'Never'
+            },
+            'TicketLink' => {
+                'LinkList' => [
+                    438,
+                    414
+                ]
+            }
+        },
+    },
+);
+
+for my $Test (@Tests) {
+
+    $Kernel::OM->ObjectsDiscard(
+        Objects => ['Kernel::System::Web::Request'],
+    );
+
+    my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
+
+    for my $Attribute ( sort keys %{ $Test->{Data} } ) {
+
+        $ParamObject->{Query}->param(
+            -name  => $Attribute,
+            -value => $Test->{Data}->{$Attribute},
+        );
+    }
+
+    my %PluginGetParam = $PluginObject->PluginGetParam(
+        %{ $Test->{Data} },
+    );
+
+    $Self->IsDeeply(
+        \%PluginGetParam,
+        $Test->{Expected},
+        'PluginGetParam - ' . $Test->{Name},
+    );
+
+}
+
 1;

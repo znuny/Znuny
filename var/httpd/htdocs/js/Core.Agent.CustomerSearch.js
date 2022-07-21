@@ -523,6 +523,9 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
                 else {
                     TargetNS.AddTicketCustomer($(Event.target).attr('id'), CustomerValue, CustomerKey);
                 }
+
+                Core.App.Publish('Event.Agent.CustomerSearch.Callback', [UI.item]);
+
             }, 'CustomerSearch');
 
             // Remember if autocomplete item was focused (by keyboard navigation or mouse).

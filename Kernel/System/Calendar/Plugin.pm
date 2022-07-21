@@ -232,7 +232,41 @@ sub PluginGroups {
 
 Returns all params from ParamObject (Web::Request) of each plugin.
 
-    my %PluginGetParam = $PluginObject->PluginGetParam();
+    my %PluginGetParam = $PluginObject->PluginGetParam(
+        'Plugin_TicketCreate_PriorityID'                  => '3',
+        'Plugin_TicketCreate_Offset'                      => '1',
+        'Plugin_TicketCreate_LockID'                      => '2',
+        'Plugin_TicketCreate_TicketPendingTimeOffsetUnit' => '86400',
+        'Plugin_TicketCreate_QueueID[]'                   => '[4,1,28]',
+        'Plugin_TicketCreate_OffsetPoint'                 => 'beforestart',
+        'Plugin_TicketCreate_TypeID'                      => '105',
+        'Plugin_TicketCreate_OffsetUnit'                  => '60',
+        'Plugin_TicketCreate_SLAID'                       => '1',
+        'Plugin_TicketCreate_ResponsibleUserID'           => '1',
+        'Plugin_TicketCreate_ServiceID'                   => '1',
+        'Plugin_TicketCreate_OwnerID'                     => '1',
+        'Plugin_TicketCreate_StateID'                     => '1',
+        'Plugin_TicketCreate_TimeType'                    => 'Never',
+        'Plugin_TicketLink_LinkList[]'                      => '[438,414]',
+    );
+
+    my %PluginGetParam = $PluginObject->PluginGetParam(
+        'Plugin[TicketCreate][Config][PriorityID]'                  => '3',
+        'Plugin[TicketCreate][Config][Offset]'                      => '1',
+        'Plugin[TicketCreate][Config][LockID]'                      => '2',
+        'Plugin[TicketCreate][Config][TicketPendingTimeOffsetUnit]' => '86400',
+        'Plugin[TicketCreate][Config][QueueID]'                     => '[4,1,28]',
+        'Plugin[TicketCreate][Config][OffsetPoint]'                 => 'beforestart',
+        'Plugin[TicketCreate][Config][TypeID]'                      => '105',
+        'Plugin[TicketCreate][Config][OffsetUnit]'                  => '60',
+        'Plugin[TicketCreate][Config][SLAID]'                       => '1',
+        'Plugin[TicketCreate][Config][ResponsibleUserID]'           => '1',
+        'Plugin[TicketCreate][Config][ServiceID]'                   => '1',
+        'Plugin[TicketCreate][Config][OwnerID]'                     => '1',
+        'Plugin[TicketCreate][Config][StateID]'                     => '1',
+        'Plugin[TicketCreate][Config][TimeType]'                    => 'Never',
+        'Plugin[TicketLink][Config][LinkList]'                      => '[438,414]',
+    );
 
 Returns:
 
@@ -278,15 +312,35 @@ sub PluginGetParam {
     PARAMNAME:
     for my $ParamName (@ParamNames) {
 
-        next PARAMNAME if $ParamName !~ m{^Plugin_}g;
+        next PARAMNAME if $ParamName !~ m{^Plugin}g;
         next PARAMNAME if $ParamName =~ m{_Search$}g;
 
-        my $Key = $ParamName;
-        my ( $ID, $PluginKey, $Attribute, ) = split /_/, $Key;
+        my $Key;
+        my ( $ID, $PluginKey, $Attribute );
 
-        $Attribute =~ s/\[\]$//;
+        # 'Plugin[TicketCreate][Config][StateID]' = 2
+        if ( $ParamName =~ m{\]\[}xms ) {
+            $Key = $ParamName;
 
-        $GetParams{$PluginKey}->{$Attribute} = $ParamObject->GetParam( Param => $ParamName ) || undef;
+            # 'Plugin[TicketCreate][Config][StateID]' = 2
+            if ( $ParamName =~ m{Plugin\[(.*)\]\[Config\]\[(.*)\]}xms ) {
+                $PluginKey = $1;
+                $Attribute = $2;
+                $Attribute =~ s{\]\[}{};
+            }
+        }
+
+        # 'Plugin_TicketCreate_StateID' = 2
+        else {
+            $Key = $ParamName;
+            ( $ID, $PluginKey, $Attribute ) = split /_/, $ParamName;
+            $Attribute =~ s/\[\]$//;
+        }
+
+        next PARAMNAME if !$PluginKey || $PluginKey eq '';
+        next PARAMNAME if !$Attribute || $Attribute eq '';
+
+        $GetParams{$PluginKey}->{$Attribute} = $ParamObject->GetParam( Param => $Key ) || undef;
 
         if ( $GetParams{$PluginKey}->{$Attribute} && $GetParams{$PluginKey}->{$Attribute} =~ m{^\[}g ) {
             $GetParams{$PluginKey}->{$Attribute} = $Kernel::OM->Get('Kernel::System::JSON')->Decode(

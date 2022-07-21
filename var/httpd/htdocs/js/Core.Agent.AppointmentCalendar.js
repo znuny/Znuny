@@ -28,8 +28,7 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
         AppointmentDaysCacheRefreshed = false,
         AJAXCounter = 0,
         CurrentView,
-        CalendarSources = {},
-        PluginList = Core.Config.Get('PluginList');
+        CalendarSources = {};
 
     /**
      * @name Init
@@ -293,7 +292,8 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
             },
             eventRender: function(CalEvent, $Element) {
                 var $IconContainer,
-                    $Icon;
+                    $Icon,
+                    pluginData;
 
                 if (CalEvent.allDay
                     || CalEvent.recurring
@@ -318,7 +318,7 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                     }
                     if (CalEvent.parentId) {
                         $Icon.clone()
-                            .addClass('fa-link')
+                            .addClass('fa-child')
                             .appendTo($IconContainer);
                     }
                     if (CalEvent.notification) {
@@ -331,8 +331,11 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                             .addClass('fa-char-' + Core.Config.Get('TicketAppointmentConfig')[CalEvent.ticketAppointmentType].Mark)
                             .appendTo($IconContainer);
                     }
+
                     if (CalEvent.pluginData) {
-                        $.each(PluginList, function (PluginKey) {
+                        pluginData = Object.keys(CalEvent.pluginData).sort();
+
+                        $.each(pluginData, function (Key,PluginKey) {
                             if (CalEvent.pluginData[PluginKey] && CalEvent.pluginData[PluginKey]['Icon'] !== 'undefined'){
                                 $Icon.clone()
                                     .addClass('fa-' + CalEvent.pluginData[PluginKey]['Icon'])
@@ -856,7 +859,8 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
             Recurring: AppointmentData.CalEvent.recurring ? '1' : '0',
             TeamID: AppointmentData.CalEvent.teamIds ? AppointmentData.CalEvent.teamIds : undefined,
             ResourceID: AppointmentData.CalEvent.resourceIds ? AppointmentData.CalEvent.resourceIds :
-                AppointmentData.CalEvent.resourceId ? [ AppointmentData.CalEvent.resourceId ] : undefined
+                AppointmentData.CalEvent.resourceId ? [ AppointmentData.CalEvent.resourceId ] : undefined,
+            Plugin: AppointmentData.CalEvent.pluginData,
         };
 
         // Assigned resource didn't change

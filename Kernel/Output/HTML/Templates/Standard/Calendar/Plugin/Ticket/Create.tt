@@ -45,10 +45,10 @@
     </div>
 [% RenderBlockEnd("Responsible") %]
 
-    <input type="hidden" id="SelectedCustomerUser" name="Plugin_[% Data.Plugin.PluginKey | html %]_SelectedCustomerUser" value="[% Data.Plugin.Data.SelectedCustomerUser | html %]"/>
+    <input type="hidden" id="Plugin_[% Data.Plugin.PluginKey | html %]_CustomerUserID" name="Plugin_[% Data.Plugin.PluginKey | html %]_CustomerUserID" value="[% Data.Plugin.Data.CustomerUserID | html %]"/>
     <label for="CustomerAutoComplete" class="[% Data.MandatoryClass | html %]">[% Translate("Customer user") | html %]:</label>
     <div class="Field">
-        <input type="text" id="CustomerAutoComplete" name="Plugin_[% Data.Plugin.PluginKey | html %]_CustomerUserID" value="[% Data.Plugin.Data.CustomerUserID | html %]" class="W75pc [% Data.CustomerUserIDServerError | html %]" autocomplete="off" />
+        <input type="text" id="Plugin_[% Data.Plugin.PluginKey | html %]_CustomerAutoComplete" name="Plugin_[% Data.Plugin.PluginKey | html %]_CustomerAutoComplete" value="[% Data.Plugin.Data.CustomerAutoComplete | html %]" class="CustomerAutoComplete W75pc [% Data.CustomerUserIDServerError | html %]" autocomplete="off" />
     </div>
 
     <label for="CustomerID" class="">[% Translate("Customer") | html %]:</label>

@@ -282,8 +282,10 @@ sub Run {
                     my $PluginGroup = $PluginList->{$PluginKey}->{Block};
                     $PluginData->{PluginGroup} = $PluginGroup;
 
-                    $Appointment->{PluginData}->{$PluginKey} = $PluginData;
-                    $Appointment->{PluginDataGroup}->{$PluginGroup}->{$PluginKey} = $PluginData;
+                    if ($PluginData->{Value}){
+                        $Appointment->{PluginData}->{$PluginKey} = $PluginData;
+                        $Appointment->{PluginDataGroup}->{$PluginGroup}->{$PluginKey} = $PluginData;
+                    }
                 }
 
                 # check if dealing with ticket appointment
