@@ -2,6 +2,8 @@
  - 2022-07-05 Attachment filenames in ticket zoom will now be truncated if they are too long to be displayed correctly.
  - 2022-06-23 Fixed issue with high CPU load on parsing e-mails in PostMaster filter DetectAttachment.
  - 2022-06-22 Fixed OAuth2 authentication when using POP3 with Microsoft Office 365 or Outlook. [#259](https://github.com/znuny/Znuny/issues/259)
+ - 2022-06-21 Added support for tag OTRS_TicketArticleCreateEvent and attachments to invoker Ticket::Generic.
+ - 2022-06-21 Added support for JSON web tokens (JWT).
  - 2022-06-20 Improved S/MIME key storage.
  - 2022-06-09 Added S/MIME check for sender header. Thanks to @akmet [PR#68](https://github.com/znuny/Znuny/pull/68).
  - 2022-05-31 Maximum number of lines of quote in body of a message now can be limited in AgentTicketForward and AgentTicketCompose.

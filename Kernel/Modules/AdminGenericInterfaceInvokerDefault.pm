@@ -188,6 +188,10 @@ sub _AddAction {
                 Type  => 'String',
                 Check => 'MappingType',
             },
+            {
+                Name => 'AllAttachments',
+                Type => 'String',
+            },
         ],
     );
 
@@ -210,8 +214,9 @@ sub _AddAction {
     }
 
     my $InvokerConfig = {
-        Description => $GetParam->{Description},
-        Type        => $GetParam->{InvokerType},
+        Description    => $GetParam->{Description},
+        Type           => $GetParam->{InvokerType},
+        AllAttachments => $GetParam->{AllAttachments},
     };
 
     # Validation errors.
@@ -347,6 +352,10 @@ sub _ChangeAction {
                 Type    => 'String',
                 Default => 'Ticket',
             },
+            {
+                Name => 'AllAttachments',
+                Type => 'String',
+            },
         ],
     );
 
@@ -380,7 +389,8 @@ sub _ChangeAction {
         $Errors{InvokerServerError} = 'ServerError';
     }
 
-    $InvokerConfig->{Description} = $GetParam->{Description};
+    $InvokerConfig->{Description}    = $GetParam->{Description};
+    $InvokerConfig->{AllAttachments} = $GetParam->{AllAttachments};
 
     if (%Errors) {
         return $Self->_ShowScreen(
@@ -807,6 +817,21 @@ sub _ShowScreen {
             SelectedValue => $Param{EventType},
             PossibleNone  => 0,
             Class         => 'Modernize',
+        );
+    }
+
+    if ( $TemplateData{InvokerType} eq 'Znuny4OTRSAdvanced::Generic' ) {
+        $TemplateData{AllAttachmentsStrg} = $LayoutObject->BuildSelection(
+            Data => {
+                0 => 'no',
+                1 => 'yes',
+            },
+            Name         => 'AllAttachments',
+            Sort         => 'AlphanumericValue',
+            SelectedID   => $Param{InvokerConfig}->{AllAttachments} // 0,
+            PossibleNone => 0,
+            Class        => 'Modernize',
+            Translation  => 1,
         );
     }
 

@@ -25160,3 +25160,111 @@ msgstr "Hosts, die eine getrennte Info über Authentifizierungsmethode und Token
 msgid "Maximum length of displayed attachment filenames in the article preview of ticket zoom view."
 msgstr "Maximale Länge der angezeigten Dateinamen von Anhängen in der Artikelvorschau der Ticket-Detailansicht."
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Add all attachments"
+msgstr "Alle Anhänge hinzufügen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Add all attachments to invoker payload."
+msgstr "Alle Anhänge zur Nutzlast des Invokers hinzufügen."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "JWT authentication: Key file"
+msgstr "JWT-Authentifizierung: Key-Datei"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "ATTENTION: Key file and/or password (if needed, see below) seem to be invalid."
+msgstr "ACHTUNG: Key-Datei und/oder Passwort (falls benötigt, siehe unten) scheinen ungültig zu sein."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "Path to private key file (PEM or DER). The key will be used to sign the JWT."
+msgstr "Pfad zur Datei mit dem privaten Key (PEM oder DER). Der Key wird zum Signieren des JWT verwendet."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "JWT authentication: Key file password"
+msgstr "JWT-Authentifizierung: Key-Datei-Passwort"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "ATTENTION: Password and/or key file (see above) seem to be invalid."
+msgstr "ACHTUNG: Password und/oder Key-Datei (siehe oben) scheinen ungültig zu sein."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "JWT authentication: Certificate file"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "ATTENTION: Certificate file could not be parsed."
+msgstr "ACHTUNG: Zertifikat-Datei konnte nicht gelesen werden."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "ATTENTION: Certificate is expired."
+msgstr "ACHTUNG: Zertifikat ist abgelaufen."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "Path to X.509 certificate file (PEM). Data of the certificate can be used for the payload and/or header data of the JWT."
+msgstr "Pfad zur X.509-Zertifikat-Datei (PEM). Die Daten des Zertifikats können für die Payload und/oder die Header-Daten des JWT verwendet werden."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "JWT authentication: Algorithm"
+msgstr "JWT-Authentifizierung: Algorithmus"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "JWT authentication: TTL"
+msgstr "JWT-Authentifizierung: TTL"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "TTL (time to live) in seconds for the JWT. This value will be used to calculate the expiration date which will be available in placeholders ExpirationDateTimestamp and ExpirationDateString."
+msgstr "TTL (Time to live) in Sekunden für das JWT. Dieser Wert wird zur Berechnung des Ablaufdatums verwendet und steht in den Platzhaltern ExpirationDateTimestamp und ExpirationDateString zur Verfügung."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "JWT authentication: Payload"
+msgstr "JWT-Authentifizierung: Payload"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "Payload for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3"
+msgstr "Payload für JWT. Geben Sie Key- und Value-Paare an (durch ; getrennt), z. B.: Key1=Value1;Key2=Value2;Key3=Value3"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "Available placeholders (prefixed with OTRS_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion."
+msgstr "Verfügbare Platzhalter (OTRS_JWT vorangestellt): ExpirationDateTimestamp, ExpirationDateString. Zusätzlich bei vorhandener Unterstützung von X.509-Zertifikaten: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "Placeholder usage example: Key1=<OTRS_JWT_ExpirationDateTimestamp>"
+msgstr "Beispiel für Platzhalterverwendung: Key1=<OTRS_JWT_ExpirationDateTimestamp>"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "JWT authentication: Additional header data"
+msgstr "JWT-Authentifizierung: Zusätzliche Header-Daten"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "Additional header data for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3"
+msgstr "Zusätzliche Header-Daten für JWT. Geben Sie Key- und Value-Paare an (durch ; getrennt), z. B.: Key1=Value1;Key2=Value2;Key3=Value3"
+
+#. Perl Module: Kernel/Modules/AdminGenericInterfaceTransportHTTPREST.pm
+msgid "Invalid key file and/or password (if needed, see below)."
+msgstr "Ungültige Key-Datei und/oder Passwort (falls benötigt, siehe unten)."
+
+#. Perl Module: Kernel/Modules/AdminGenericInterfaceTransportHTTPREST.pm
+msgid "Invalid password and/or key file (see above)."
+msgstr "Ungültiges Passwort und/oder Key-Datei (siehe oben)."
+
+#. Perl Module: Kernel/Modules/AdminGenericInterfaceTransportHTTPREST.pm
+msgid "Certificate is expired."
+msgstr "Zertifikat ist abgelaufen."
+
+#. Perl Module: Kernel/Modules/AdminGenericInterfaceTransportHTTPREST.pm
+msgid "Certificate file could not be parsed."
+msgstr "Zertifikat-Datei konnte nicht gelesen werden."
+
+#. Perl Module: Kernel/Modules/AdminGenericInterfaceTransportHTTPREST.pm
+msgid "Please enter a time in seconds (at least 10 seconds)."
+msgstr "Bitte geben Sie eine Zeit in Sekunden ein (mind. 10 Sekunden)."
+
+#. Perl Module: Kernel/Modules/AdminGenericInterfaceTransportHTTPREST.pm
+msgid "Please enter data in expected form (see explanation of field)."
+msgstr "Bitte geben Sie die Daten in der erwarteten Form ein (siehe Feldbeschreibung)."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic."
+msgstr "Maximale Anzahl paralleler Instanzen bei Nutzung von OTRS_AsynchronousInvokerExecution im Invoker Ticket::Generic."
+

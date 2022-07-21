@@ -209,6 +209,28 @@ my @NeededModules = (
         },
     },
     {
+        Module    => 'Crypt::JWT',
+        Required  => 0,
+        Comment   => 'JSON web token support.',
+        InstTypes => {
+            aptget => 'libcrypt-jwt-perl',
+            emerge => 'dev-perl/Crypt-JWT',
+            zypper => 'perl-Crypt-JWT',
+            ports  => 'security/p5-Crypt-JWT',
+        },
+    },
+    {
+        Module    => 'Crypt::OpenSSL::X509',
+        Required  => 0,
+        Comment   => 'X509 certificate support.',
+        InstTypes => {
+            aptget => 'libcrypt-openssl-x509',
+            emerge => 'dev-perl/Crypt-OpenSSL-X509',
+            zypper => 'perl-Crypt-OpenSSL-X509',
+            ports  => 'security/p5-Crypt-OpenSSL-X509',
+        },
+    },
+    {
         Module    => 'CSS::Minifier::XS',
         Required  => 0,
         Comment   => 'Alternative to CSS::Minifier in XS, which is slightly faster than CSS::Minifier (pure Perl).',

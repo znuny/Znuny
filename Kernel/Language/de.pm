@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.994233937397035;
+    $Self->{Completeness}        = 0.994095456782024;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -984,6 +984,8 @@ sub Data {
             'Asynchrone Ereignisauslöser werden vom OTRS Scheduler Daemon im Hintergrund verarbeitet (empfohlen).',
         'Synchronous event triggers would be processed directly during the web request.' =>
             'Synchrone Ereignisauslöser werden direkt während der laufenden Web-Anfrage verarbeitet.',
+        'Add all attachments' => 'Alle Anhänge hinzufügen',
+        'Add all attachments to invoker payload.' => 'Alle Anhänge zur Nutzlast des Invokers hinzufügen.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerEvent.tt
         'GenericInterface Invoker Event Settings for Web Service %s' => 'GenericInterface Invoker Ereignis-Einstellungen für Webservice %s',
@@ -1141,6 +1143,33 @@ sub Data {
         'The user name to be used to access the remote system.' => 'Der Benutzername für den Zugriff auf das entfernte System.',
         'BasicAuth Password' => 'BasicAuth-Passwort',
         'The password for the privileged user.' => 'Dass Passwort des berechtigten Benutzers.',
+        'JWT authentication: Key file' => 'JWT-Authentifizierung: Key-Datei',
+        'ATTENTION: Key file and/or password (if needed, see below) seem to be invalid.' =>
+            'ACHTUNG: Key-Datei und/oder Passwort (falls benötigt, siehe unten) scheinen ungültig zu sein.',
+        'Path to private key file (PEM or DER). The key will be used to sign the JWT.' =>
+            'Pfad zur Datei mit dem privaten Key (PEM oder DER). Der Key wird zum Signieren des JWT verwendet.',
+        'JWT authentication: Key file password' => 'JWT-Authentifizierung: Key-Datei-Passwort',
+        'ATTENTION: Password and/or key file (see above) seem to be invalid.' =>
+            'ACHTUNG: Password und/oder Key-Datei (siehe oben) scheinen ungültig zu sein.',
+        'JWT authentication: Certificate file' => '',
+        'ATTENTION: Certificate file could not be parsed.' => 'ACHTUNG: Zertifikat-Datei konnte nicht gelesen werden.',
+        'ATTENTION: Certificate is expired.' => 'ACHTUNG: Zertifikat ist abgelaufen.',
+        'Path to X.509 certificate file (PEM). Data of the certificate can be used for the payload and/or header data of the JWT.' =>
+            'Pfad zur X.509-Zertifikat-Datei (PEM). Die Daten des Zertifikats können für die Payload und/oder die Header-Daten des JWT verwendet werden.',
+        'JWT authentication: Algorithm' => 'JWT-Authentifizierung: Algorithmus',
+        'JWT authentication: TTL' => 'JWT-Authentifizierung: TTL',
+        'TTL (time to live) in seconds for the JWT. This value will be used to calculate the expiration date which will be available in placeholders ExpirationDateTimestamp and ExpirationDateString.' =>
+            'TTL (Time to live) in Sekunden für das JWT. Dieser Wert wird zur Berechnung des Ablaufdatums verwendet und steht in den Platzhaltern ExpirationDateTimestamp und ExpirationDateString zur Verfügung.',
+        'JWT authentication: Payload' => 'JWT-Authentifizierung: Payload',
+        'Payload for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3' =>
+            'Payload für JWT. Geben Sie Key- und Value-Paare an (durch ; getrennt), z. B.: Key1=Value1;Key2=Value2;Key3=Value3',
+        'Available placeholders (prefixed with OTRS_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion.' =>
+            'Verfügbare Platzhalter (OTRS_JWT vorangestellt): ExpirationDateTimestamp, ExpirationDateString. Zusätzlich bei vorhandener Unterstützung von X.509-Zertifikaten: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion.',
+        'Placeholder usage example: Key1=<OTRS_JWT_ExpirationDateTimestamp>' =>
+            'Beispiel für Platzhalterverwendung: Key1=<OTRS_JWT_ExpirationDateTimestamp>',
+        'JWT authentication: Additional header data' => 'JWT-Authentifizierung: Zusätzliche Header-Daten',
+        'Additional header data for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3' =>
+            'Zusätzliche Header-Daten für JWT. Geben Sie Key- und Value-Paare an (durch ; getrennt), z. B.: Key1=Value1;Key2=Value2;Key3=Value3',
         'Content type' => 'Content-Type',
         'The default content type added to HTTP header to use for POST and PUT requests.' =>
             'Default-Content-Type, der für POST- und PUT-Requests zum HTTP-Header hinzugefügt wird.',
@@ -3771,6 +3800,13 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminGenericInterfaceTransportHTTPREST.pm
         'Need valid Subaction!' => 'Benötige gültige Unteraktion!',
         'This field should be an integer.' => 'Dieses Feld darf nur Ganzzahlen enthalten.',
+        'Invalid key file and/or password (if needed, see below).' => 'Ungültige Key-Datei und/oder Passwort (falls benötigt, siehe unten).',
+        'Invalid password and/or key file (see above).' => 'Ungültiges Passwort und/oder Key-Datei (siehe oben).',
+        'Certificate is expired.' => 'Zertifikat ist abgelaufen.',
+        'Certificate file could not be parsed.' => 'Zertifikat-Datei konnte nicht gelesen werden.',
+        'Please enter a time in seconds (at least 10 seconds).' => 'Bitte geben Sie eine Zeit in Sekunden ein (mind. 10 Sekunden).',
+        'Please enter data in expected form (see explanation of field).' =>
+            'Bitte geben Sie die Daten in der erwarteten Form ein (siehe Feldbeschreibung).',
         'File or Directory not found.' => 'Datei oder Verzeichnis nicht gefunden.',
 
         # Perl Module: Kernel/Modules/AdminGenericInterfaceWebservice.pm
@@ -7698,6 +7734,8 @@ sub Data {
             'Mapping von Ticket::Generic-Invoker-Name (Schlüssel) zu einer Liste von Feldern (Inhalt), die base-64-kodiert werden sollen. Felder müssen in der folgenden Form angegeben werden: Feld1->Feld2;Feld3->Feld4->Feld5;Feld6. Eine verschachtelte Datenstruktur kann also durch Verbindung der Felder mit \'->\' angegeben werden. Inhalte aus verschiedenen Feldern je Invoker können kodiert werden, indem die Felder mit \';\' voneinander getrennt werden. Bitte beachten Sie die Dokumentation des Pakets für weitere Informationen.',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
             'Mapping von Ticket::Generic-Invoker-Name (Schlüssel) zu einer Liste von Feldern (Inhalt), die aus dem Request entfernt werden. Felder müssen in der folgenden Form angegeben werden: Feld1->Feld2;Feld3->Feld4->Feld5;Feld6. Eine verschachtelte Datenstruktur kann also durch Verbindung der Felder mit \'->\' angegeben werden. Verschiedene Felder je Invoker können entfernt werden, indem sie mit \';\' voneinander getrennt werden. Bitte beachten Sie die Dokumentation des Pakets für weitere Informationen.',
+        'Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic.' =>
+            'Maximale Anzahl paralleler Instanzen bei Nutzung von OTRS_AsynchronousInvokerExecution im Invoker Ticket::Generic.',
         'Enables support for huge XML data in load_xml calls of CPAN library XML::LibXML. This should only be enabled if absolutely needed. Disabling this option (default) protects against denial of service through entity expansion attacks. Before enabling this option ensure that alternative measures to protect the application against this type of attack have been taken.' =>
             'Aktiviert die Unterstützung für große XML-Daten in load_xml-Aufrufen der CPAN-Bibliothek XML::LibXML. Diese Option sollte nur aktiviert werden, wenn sie unbedingt benötigt wird. Die Deaktivierung dieser Option (Standard) schützt vor Denial-of-Service-Angriffen durch Entity-Expansion. Bevor diese Option aktiviert wird, muss sichergestellt werden, dass alternative Maßnahmen ergriffen wurden, um die Anwendung gegen diese Art von Angriffen zu schützen.',
         'Shows a link in the menu to create a unit test for the current ticket.' =>

@@ -140,19 +140,33 @@ Core.Agent.Admin.GenericInterfaceTransportHTTPREST = (function (TargetNS) {
 
         // bind change function to Authentication field
         $('#AuthType').on('change', function(){
+
+            // Basic auth
+            $('.BasicAuthField').addClass('Hidden');
+            $('.BasicAuthField').find('#BasicAuthUser, #BasicAuthPassword').each(function(){
+                $(this).removeClass('Validate_Required');
+            });
+
             if ($(this).val() === 'BasicAuth') {
                 $('.BasicAuthField').removeClass('Hidden');
-                $('.BasicAuthField').find('#BasicAuthUser').each(function(){
+                $('.BasicAuthField').find('#BasicAuthUser, #BasicAuthPassword').each(function(){
                     $(this).addClass('Validate_Required');
                 });
             }
-            else {
-                $('.BasicAuthField').addClass('Hidden');
-                $('.BasicAuthField').find('#BasicAuthUser').each(function(){
-                    $(this).removeClass('Validate_Required');
+
+            // JWT
+            $('.JWTAuthField').addClass('Hidden');
+            $('.JWTAuthField').find('#JWTAuthKeyFilePath, #JWTAuthAlgorithm, #JWTAuthTTL, #JWTAuthPayload').each(function(){
+                $(this).removeClass('Validate_Required');
+            });
+
+            if ($(this).val() === 'JWT') {
+                $('.JWTAuthField').removeClass('Hidden');
+                $('.JWTAuthField').find('#JWTAuthKeyFilePath, #JWTAuthAlgorithm, #JWTAuthTTL, #JWTAuthPayload').each(function(){
+                    $(this).addClass('Validate_Required');
                 });
             }
-        });
+        }).trigger('change');
 
         // bind change function to Use Proxy field
         $('#UseProxy').on('change', function(){
