@@ -8,6 +8,7 @@
  - 2022-06-20 Improved S/MIME key storage.
  - 2022-06-09 Added S/MIME check for sender header. Thanks to @akmet [PR#68](https://github.com/znuny/Znuny/pull/68).
  - 2022-05-31 Maximum number of lines of quote in body of a message now can be limited in AgentTicketForward and AgentTicketCompose.
+ - 2022-05-30 Fixed use of URL parameter in Kernel::System::Calendar::Plugin::Ticket::Link::LinkList and Kernel::System::Calendar::Export::ICal::Export.
  - 2022-05-25 Initial search in dialog AgentLinkObject is now limited to tickets which belong to the same customer ID.
  - 2022-05-24 Sanitized output of ACL Perl config file when dumping and deploying it to avoid unexpected execution of arbitrary Perl code.
  - 2022-05-19 Sector Nord AG: Fixed transition action for recurring appointments with specific recurrence frequency. Thanks to Sector Nord AG (@jsinagowitz). [#219](https://github.com/znuny/Znuny/pull/219)

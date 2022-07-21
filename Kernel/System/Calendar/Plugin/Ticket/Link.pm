@@ -299,6 +299,7 @@ returns a hash of linked tickets to an appointment
     my $Success = $TicketLinkPluginObject->LinkList(
         AppointmentID => 123,
         UserID        => 1,
+        URL           => 'http://znuny.local/index.pl?Action=AgentTicketZoom;TicketID=%s' # optional
     );
 
 =cut
@@ -306,7 +307,7 @@ returns a hash of linked tickets to an appointment
 sub LinkList {
     my ( $Self, %Param ) = @_;
 
-    for my $Needed (qw(AppointmentID UserID URL)) {
+    for my $Needed (qw(AppointmentID UserID)) {
         if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
@@ -330,7 +331,7 @@ sub LinkList {
         $_ => {
             LinkID   => $LinkKeyListWithData{$_}->{TicketID},
             LinkName => $LinkKeyListWithData{$_}->{TicketNumber} . ' ' . $LinkKeyListWithData{$_}->{Title},
-            LinkURL  => sprintf( $Param{URL}, $LinkKeyListWithData{$_}->{TicketID} ),
+            LinkURL  => IsStringWithData( $Param{URL} ) ? sprintf( $Param{URL}, $LinkKeyListWithData{$_}->{TicketID} ) : '',
         }
     } keys %LinkKeyListWithData;
 
