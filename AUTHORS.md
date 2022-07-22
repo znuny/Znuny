@@ -46,6 +46,7 @@ The following persons contributed to Znuny:
 * Kamil Furtek <kfurtek@dev.opgksoftware.com>
 * Keith Moore <tenareth@gmail.com>
 * Kevin Janssen <77158891+BuTzZ@users.noreply.github.com>
+* Konrad Gumienny <kgumienny@dev.opgksoftware.com>
 * Luca Maranzano <liuk@linux.it>
 * Lukas Bröring SectorNord AG <91135132+LuBroering@users.noreply.github.com>
 * Manuel Hecht <manuel.hecht@otrs.com>

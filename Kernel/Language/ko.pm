@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.911923896998524;
+    $Self->{Completeness}        = 0.911326012129159;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -668,7 +668,7 @@ sub Data {
         'The separator to show between the values if there\'s more than one key configured to be displayed above. If left empty, a single space will be used as separator. Use <space> to add spaces.' =>
             '',
         'Limit' => '한도',
-        'Maximum number of results for web service queries, e.g. for autcomplete selection list.' =>
+        'Maximum number of results for web service queries, e.g. for autocomplete selection list.' =>
             '',
         'Autocomplete min. input length' => '',
         'Minimum length of input for autocomplete field to trigger search.' =>
@@ -7865,6 +7865,10 @@ sub Data {
             '',
         'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
             '',
+        'General settings for autocompletion in rich text editor.' => '',
+        'Rich text editor configuration for autocompletion module.' => '',
+        'Rich text editor configuration for autocompletion module to support templates.' =>
+            '',
 
         # XML Definition: scripts/database/otrs-initial_insert.xml
         'invalid-temporarily' => '유효하지 않은 일시적',
@@ -8988,6 +8992,7 @@ Thanks for your help!
         'Slovak' => '슬로바키아 사람',
         'Slovenian' => '슬로베니아',
         'Small' => '작은',
+        'Snippet' => '',
         'Software Package Manager.' => '소프트웨어 패키지 관리자.',
         'Solution time' => '솔루션 시간',
         'SolutionDiffInMin' => 'SolutionDiffInMin',

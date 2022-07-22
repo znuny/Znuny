@@ -331,7 +331,9 @@ sub LinkList {
         $_ => {
             LinkID   => $LinkKeyListWithData{$_}->{TicketID},
             LinkName => $LinkKeyListWithData{$_}->{TicketNumber} . ' ' . $LinkKeyListWithData{$_}->{Title},
-            LinkURL  => IsStringWithData( $Param{URL} ) ? sprintf( $Param{URL}, $LinkKeyListWithData{$_}->{TicketID} ) : '',
+            LinkURL  => IsStringWithData( $Param{URL} )
+            ? sprintf( $Param{URL}, $LinkKeyListWithData{$_}->{TicketID} )
+            : '',
         }
     } keys %LinkKeyListWithData;
 

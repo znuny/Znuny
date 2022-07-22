@@ -6271,6 +6271,7 @@ sub SetRichTextParameters {
     $Self->AddJSData(
         Key   => 'RichText',
         Value => {
+            TicketID       => $Param{Data}->{TicketID} || '',
             Height         => $ScreenRichTextHeight,
             Width          => $ScreenRichTextWidth,
             TextDir        => $TextDir,

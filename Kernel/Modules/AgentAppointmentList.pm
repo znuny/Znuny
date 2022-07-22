@@ -282,7 +282,7 @@ sub Run {
                     my $PluginGroup = $PluginList->{$PluginKey}->{Block};
                     $PluginData->{PluginGroup} = $PluginGroup;
 
-                    if ($PluginData->{Value}){
+                    if ( $PluginData->{Value} ) {
                         $Appointment->{PluginData}->{$PluginKey} = $PluginData;
                         $Appointment->{PluginDataGroup}->{$PluginGroup}->{$PluginKey} = $PluginData;
                     }

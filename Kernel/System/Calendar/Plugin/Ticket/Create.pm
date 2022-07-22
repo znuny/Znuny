@@ -1607,7 +1607,7 @@ sub _GetServices {
             UserID            => $Param{UserID},
         );
     }
-    if ($Param{Plugin}->{Param}->{CustomerUserID} eq '<DEFAULT>'){
+    if ( $Param{Plugin}->{Param}->{CustomerUserID} eq '<DEFAULT>' ) {
         $Param{Plugin}->{Param}->{CustomerUserID} = '';
     }
 

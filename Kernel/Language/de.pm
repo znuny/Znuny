@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.994095456782024;
+    $Self->{Completeness}        = 0.993935420422882;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -668,7 +668,7 @@ sub Data {
         'The separator to show between the values if there\'s more than one key configured to be displayed above. If left empty, a single space will be used as separator. Use <space> to add spaces.' =>
             'Trennzeichen, das zwischen Anzeigewerten angezeigt wird, wenn oben mehr als ein Schlüssel zur Anzeige konfiguriert ist. Wenn diese Konfigurationsoption leer gelassen wird, die ein Leerzeichen als Trennzeichen verwendet. Benutzen Sie <space>, um Leerzeichen zu konfigurieren.',
         'Limit' => 'Limit',
-        'Maximum number of results for web service queries, e.g. for autcomplete selection list.' =>
+        'Maximum number of results for web service queries, e.g. for autocomplete selection list.' =>
             'Maximale Anzahl von Ergebnissen für Webservice-Abfragen, z. B. für die automatische Vervollständigung der Auswahlliste.',
         'Autocomplete min. input length' => 'Min. Länge für Autovervollständigung',
         'Minimum length of input for autocomplete field to trigger search.' =>
@@ -7865,6 +7865,10 @@ sub Data {
             'Re-indiziert S/MIME-Zertifikat-Verzeichnisse. Hinweis: S/MIME muss in der SysConfig aktiviert sein.',
         'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
             'Maximale Länge der angezeigten Dateinamen von Anhängen in der Artikelvorschau der Ticket-Detailansicht.',
+        'General settings for autocompletion in rich text editor.' => 'Allgemeine Einstellungen für Autovervollständigung im Rich-Text-Editor.',
+        'Rich text editor configuration for autocompletion module.' => 'Rich-Text-Editor-Konfiguration für Autocompletion-Modul.',
+        'Rich text editor configuration for autocompletion module to support templates.' =>
+            'Rich-Text-Editor-Konfiguration für Autocompletion-Modul zur Unterstützung von Vorlagen.',
 
         # XML Definition: scripts/database/otrs-initial_insert.xml
         'invalid-temporarily' => 'ungültig-temporär',
@@ -8987,6 +8991,7 @@ Ihr Helpdesk-Team
         'Slovak' => 'Slowakisch',
         'Slovenian' => 'Slowenisch',
         'Small' => 'Klein',
+        'Snippet' => '',
         'Software Package Manager.' => 'Softwarepaketverwaltung.',
         'Solution time' => 'Lösungszeit',
         'SolutionDiffInMin' => 'Lösungszeitdifferenz in Minuten',

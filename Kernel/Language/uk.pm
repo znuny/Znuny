@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.467114974577661;
+    $Self->{Completeness}        = 0.466808719881987;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -669,7 +669,7 @@ sub Data {
         'The separator to show between the values if there\'s more than one key configured to be displayed above. If left empty, a single space will be used as separator. Use <space> to add spaces.' =>
             '',
         'Limit' => 'Обмеження',
-        'Maximum number of results for web service queries, e.g. for autcomplete selection list.' =>
+        'Maximum number of results for web service queries, e.g. for autocomplete selection list.' =>
             '',
         'Autocomplete min. input length' => '',
         'Minimum length of input for autocomplete field to trigger search.' =>
@@ -7866,6 +7866,10 @@ sub Data {
             '',
         'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
             '',
+        'General settings for autocompletion in rich text editor.' => '',
+        'Rich text editor configuration for autocompletion module.' => '',
+        'Rich text editor configuration for autocompletion module to support templates.' =>
+            '',
 
         # XML Definition: scripts/database/otrs-initial_insert.xml
         'invalid-temporarily' => 'тимчасово недійсний',
@@ -8978,6 +8982,7 @@ Thanks for your help!
         'Slovak' => '',
         'Slovenian' => '',
         'Small' => 'Малий',
+        'Snippet' => '',
         'Software Package Manager.' => '',
         'Solution time' => 'Час вирішення',
         'SolutionDiffInMin' => '',

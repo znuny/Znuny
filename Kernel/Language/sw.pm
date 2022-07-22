@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.452845661800886;
+    $Self->{Completeness}        = 0.452548762497951;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -671,7 +671,7 @@ sub Data {
         'The separator to show between the values if there\'s more than one key configured to be displayed above. If left empty, a single space will be used as separator. Use <space> to add spaces.' =>
             '',
         'Limit' => 'Upeo',
-        'Maximum number of results for web service queries, e.g. for autcomplete selection list.' =>
+        'Maximum number of results for web service queries, e.g. for autocomplete selection list.' =>
             '',
         'Autocomplete min. input length' => '',
         'Minimum length of input for autocomplete field to trigger search.' =>
@@ -7871,6 +7871,10 @@ Mfano:
             '',
         'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
             '',
+        'General settings for autocompletion in rich text editor.' => '',
+        'Rich text editor configuration for autocompletion module.' => '',
+        'Rich text editor configuration for autocompletion module to support templates.' =>
+            '',
 
         # XML Definition: scripts/database/otrs-initial_insert.xml
         'invalid-temporarily' => 'isiyo halali kwa muda mfupi',
@@ -8983,6 +8987,7 @@ Thanks for your help!
         'Slovak' => '',
         'Slovenian' => '',
         'Small' => 'Ndogo',
+        'Snippet' => '',
         'Software Package Manager.' => '',
         'Solution time' => '',
         'SolutionDiffInMin' => 'Tofauti katika dakika katika ufumbuzi',

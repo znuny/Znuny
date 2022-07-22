@@ -12971,6 +12971,7 @@ Thanks for your help!
                 <Item Key="Note" Translatable="1">Note</Item>
                 <Item Key="PhoneCall" Translatable="1">Phone call</Item>
                 <Item Key="ProcessManagement" Translatable="1">Process Management</Item>
+                <Item Key="Snippet" Translatable="1">Snippet</Item>
             </Hash>
         </Value>
     </Setting>

@@ -2106,4 +2106,65 @@
         </Value>
     </Setting>
 
+    <!--
+        RTE autocompletion
+    -->
+    <Setting Name="Frontend::Module###AJAXRichTextAutocompletion" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Autompletion for rich text editor.</Item>
+                    <Item Key="Title">Autompletion for rich text editor</Item>
+                    <Item Key="NavBarName">Autompletion for rich text editor</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Autocompletion::General" Required="0" Valid="1">
+        <Description Translatable="1">General settings for autocompletion in rich text editor.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="ItemTemplate">&lt;li data-id="{id}"&gt;{selection_list_title}&lt;/li&gt;</Item>
+                <Item Key="OutputTemplate">{inserted_value}</Item>
+                <Item Key="MinSearchLength">3</Item>
+                <!-- <Item Key="PreviewLength">50</Item> -->
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Autocompletion::Modules###Example" Required="0" Valid="0">
+        <Description Translatable="1">Rich text editor configuration for autocompletion module.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Trigger">!EX</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Autocompletion::Modules###Template" Required="0" Valid="1">
+        <Description Translatable="1">Rich text editor configuration for autocompletion module to support templates.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Trigger">##</Item>
+                <Item Key="SearchFields">
+                    <Array>
+                        <Item>Name</Item>
+                        <Item>Comment</Item>
+                        <Item>Template</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
 </otrs_config>

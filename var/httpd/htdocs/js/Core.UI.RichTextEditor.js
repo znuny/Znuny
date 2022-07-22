@@ -9,7 +9,9 @@
 
 "use strict";
 
-var Core = Core || {};
+var Core  = Core || {},
+    Znuny = Znuny || {};
+
 Core.UI = Core.UI || {};
 
 /**
@@ -55,6 +57,131 @@ Core.UI.RichTextEditor = (function (TargetNS) {
             $FormID = $EditorArea.closest('form').find('input:hidden[name=FormID]');
         }
         return $FormID;
+    }
+
+    /**
+     * @private
+     * @name InitAutocompletion
+     * @memberof Core.UI.RichTextEditor
+     * @function
+     * @param { Editor } Editor - The editor object.
+     * @description
+     *      Initializes autocompletion for editor, if configured.
+     */
+    function InitAutocompletion(Editor) {
+        var AutocompletionSettings = {};
+
+
+        function AutocompletionDataCallback(MatchInfo, Callback) {
+            $.each(AutocompletionSettings.Triggers, function (Trigger) {
+
+                // Always take the current values because they could have been changed by
+                // the user in the form.
+                var AdditionalParams = {
+                    TicketID: $('input[name="TicketID"]').val(), // optional, if present
+                    Action: $('input[name="Action"]').val(), // optional, if present
+                    QueueID: Znuny.Form.Input.Get('QueueID') // optional, if present
+                };
+                var SearchString,
+                    RegExEscapedTrigger = EscapeRegExpCharacters(Trigger);
+
+                if (!MatchInfo.query.match(new RegExp('^' + RegExEscapedTrigger))) {
+                    return;
+                }
+
+                SearchString = MatchInfo.query.replace(new RegExp('^' + RegExEscapedTrigger), '');
+                if (SearchString.length < AutocompletionSettings.MinSearchLength) {
+                    return;
+                }
+
+                Core.AJAX.FunctionCall(
+                    Core.Config.Get('Baselink'),
+                    {
+                        Action:           'AJAXRichTextAutocompletion',
+                        Subaction:        'GetData',
+                        Trigger:          Trigger,
+                        SearchString:     SearchString,
+                        AdditionalParams: AdditionalParams
+                    },
+                    function(Response){
+                        if (!Array.isArray(Response)) {
+                            return;
+                        }
+
+                        Callback(Response);
+                    }
+                );
+            });
+        }
+
+        function AutocompletionTextTestCallback(Range) {
+            if (!Range.collapsed) {
+                return null;
+            }
+
+            return CKEDITOR.plugins.textMatch.match(Range, AutocompletionMatchCallback);
+        }
+
+        function AutocompletionMatchCallback(Text, Offset) {
+            var TriggerMatch;
+
+            $.each(AutocompletionSettings.Triggers, function(Trigger) {
+                var RegExEscapedTrigger = EscapeRegExpCharacters(Trigger);
+
+                if (TriggerMatch) {
+                    return;
+                }
+
+                TriggerMatch = Text.match(new RegExp('(?:^|\\s+)(' + RegExEscapedTrigger + '\\S+)$'));
+            });
+
+            if (!TriggerMatch || TriggerMatch.length != 2) {
+                return;
+            }
+
+            return {
+                start: Offset - TriggerMatch[1].length,
+                end:   Offset
+            };
+        }
+
+        // Taken from: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+        function EscapeRegExpCharacters(String) {
+            return String.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+        }
+
+        // Ensure that HTML will be inserted as HTML, not as text
+        // by overwriting the autocomplete plugin's function getHtmlToInsert.
+        CKEDITOR.plugins.autocomplete.prototype.getHtmlToInsert = function(item) {
+            return this.outputTemplate ? this.outputTemplate.output(item) : item.name;
+        };
+
+        // Initialize CKEditor autocompletion.
+        Core.AJAX.FunctionCall(
+            Core.Config.Get('Baselink'),
+            {
+                Action:    'AJAXRichTextAutocompletion',
+                Subaction: 'GetAutocompletionSettings'
+            },
+            function(Response) {
+                var CKEditorConfig;
+
+                if ($.isEmptyObject(Response)) {
+                    return true;
+                }
+
+                AutocompletionSettings = Response;
+
+                CKEditorConfig = {
+                    textTestCallback: AutocompletionTextTestCallback,
+                    dataCallback    : AutocompletionDataCallback,
+                    itemTemplate    : AutocompletionSettings.ItemTemplate,
+                    outputTemplate  : AutocompletionSettings.OutputTemplate
+                };
+
+                new CKEDITOR.plugins.autocomplete(Editor.editor, CKEditorConfig);
+            }
+        );
     }
 
     /**
@@ -109,6 +236,7 @@ Core.UI.RichTextEditor = (function (TargetNS) {
         });
 
         CKEDITOR.on('instanceReady', function (Editor) {
+            InitAutocompletion(Editor);
 
             // specific config for CodeMirror instances (e.g. XSLT editor)
             if (Core.Config.Get('RichText.Type') == 'CodeMirror') {
@@ -130,7 +258,6 @@ Core.UI.RichTextEditor = (function (TargetNS) {
                         cm.replaceSelection(spaces);
                     }
                 });
-
             }
 
             Core.App.Publish('Event.UI.RichTextEditor.InstanceReady', [Editor]);

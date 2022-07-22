@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.719862227324914;
+    $Self->{Completeness}        = 0.719390263891165;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -671,7 +671,7 @@ sub Data {
         'The separator to show between the values if there\'s more than one key configured to be displayed above. If left empty, a single space will be used as separator. Use <space> to add spaces.' =>
             '',
         'Limit' => '制限',
-        'Maximum number of results for web service queries, e.g. for autcomplete selection list.' =>
+        'Maximum number of results for web service queries, e.g. for autocomplete selection list.' =>
             '',
         'Autocomplete min. input length' => '',
         'Minimum length of input for autocomplete field to trigger search.' =>
@@ -7881,6 +7881,10 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             '',
         'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
             '',
+        'General settings for autocompletion in rich text editor.' => '',
+        'Rich text editor configuration for autocompletion module.' => '',
+        'Rich text editor configuration for autocompletion module to support templates.' =>
+            '',
 
         # XML Definition: scripts/database/otrs-initial_insert.xml
         'invalid-temporarily' => '無効-暫定',
@@ -9003,6 +9007,7 @@ Thanks for your help!
         'Slovak' => 'スロバキア語',
         'Slovenian' => 'スロベニア語',
         'Small' => '小',
+        'Snippet' => '',
         'Software Package Manager.' => 'ソフトウェアパッケージマネージャー',
         'Solution time' => '解決期限',
         'SolutionDiffInMin' => '解決期限超過時間',
