@@ -1287,6 +1287,13 @@ sub Header {
         );
     }
 
+    if ( $Self->{UserRefreshTime} ) {
+        $Self->AddJSData(
+            Key   => 'RefreshTimeToolbar',
+            Value => $Self->{UserRefreshTime} * 60,
+        );
+    }
+
     # Generate the minified CSS and JavaScript files and the tags referencing them (see LayoutLoader)
     $Self->LoaderCreateAgentCSSCalls();
 
