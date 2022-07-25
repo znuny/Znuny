@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.993959183673469;
+    $Self->{Completeness}        = 0.993640958747758;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -640,6 +640,11 @@ sub Data {
         'This is the default term for the click search.' => 'Dies ist der Standardbegriff für die Klicksuche.',
         'Initial default search term' => 'Initialer Standardwert für die Suche',
         'This is the default search term when the mask is loaded.' => 'Dies ist der Standardbegriff für die Suche, wenn die Maske geladen wird.',
+        'Attributes' => '',
+        'Attributes for invoker execution (initially default values will be used).' =>
+            'Attribute für Invoker-Ausführung (initial werden Defaultwerte verwendet).',
+        'Attribute keys' => '',
+        'Custom attribute form for invoker execution.' => 'Benutzerdefiniertes Attributformular für die Invoker-Ausführung.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
         'Web service' => 'Webservice',
@@ -7771,6 +7776,14 @@ sub Data {
             'Ticket-Event-Modul zur Speicherung von Werten des gewählten Webservice-Datensatzes in den konfigurierten zusätzlichen dynamischen Feldern.',
         'It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
             'Es kann vorkommen, dass ein dynamisches Feld vom Typ WebserviceText oder WebserviceMultiselect auf einen Wert gesetzt wird, der aus einer konfigurierten Webservice-Tabelle geholt wird, aber der Webservice-Datensatz keinen Wert in dem Feld hat, das als angezeigter Wert konfiguriert ist. Aktivieren Sie diese Einstellung, um diese dynamischen Felder im Ticketinformations-Widget von AgentTicketZoom auszublenden, damit sie nicht als leer angezeigt werden.',
+        'Mapping for field values received from form. This setting is necessary for the correct identification of the form fields. Key means value type, value means possible representation in views.' =>
+            'Mapping für die vom Formular empfangenen Feldwerte. Diese Einstellung ist für die korrekte Identifizierung der Formularfelder notwendig. Schlüssel ist Typ, Inhalt ist möglicher Name im Formular.',
+        'Mapping for field values received from form which have multiple values. This setting is needed when the view shows the values of a particular field in a custom way (e.g. selectable customer user in ticket creation view). This setting is always respected first. There is also the possibility to specify an order for checking fields. (Field of customer user in ticket creation view can be saved as CustomerUser or just simple e-mail. First we need to check if CustomerKey is present (CustomerKey -> ID of CustomerUser). If not, then simply take plain text (CustomerTicketText -> E-mail)).' =>
+            'Zuordnung für Feldwerte, die vom Formular empfangen werden und mehrere Werte haben. Diese Einstellung wird benötigt, wenn die Ansicht die Werte eines bestimmten Feldes in einer benutzerdefinierten Weise anzeigt (z. B. auswählbarer Kundenbenutzer in der Ansicht zur Ticketerstellung). Diese Einstellung wird immer zuerst beachtet. Es besteht auch die Möglichkeit, eine Reihenfolge für die Überprüfung der Felder festzulegen. (Das Feld des Kundenbenutzers in der Ticket-Erstellungsansicht kann als CustomerUser oder als einfache E-Mail gespeichert werden. Zuerst muss geprüft werden, ob CustomerKey vorhanden ist (CustomerKey -> ID von CustomerUser). Ist dies nicht der Fall, wird einfach der Text verwendet (CustomerTicketText -> E-Mail)).',
+        'Options and default field set for attributes. Values of this setting will always be passed as simple form value without possibility to further configure it in AdminDynamicField view. The keys with which the form values will be sent to the invoker can be edited in the "Default" section of this setting.' =>
+            'Optionen und Standardfeld für Attribute. Die Werte dieser Einstellung werden immer als einfache Formularwerte übergeben, ohne die Möglichkeit, sie in der Ansicht AdminDynamicField weiter zu konfigurieren. Die Schlüssel, mit denen die Formularwerte an den Invoker gesendet werden, können im Abschnitt "Default" dieser Einstellung bearbeitet werden.',
+        'Options and default field set for selectable attributes. Values which will be passed to invoker (ID or Name or both) can be configured in AdminDynamicField view. The keys with which the form values (ID or Name) will be sent to the invoker can be edited in the "Default" section of this setting. Example usage for field Queue: Field with selected ID and Name will send QueueID = 3 and Queue = Raw.' =>
+            'Optionen und Standardfeld für auswählbare Attribute. Die Werte, die an den Aufrufer übergeben werden (ID oder Name oder beides), können in der Ansicht AdminDynamicField konfiguriert werden. Die Schlüssel, mit denen die Formularwerte (ID oder Name) an den Invoker gesendet werden, können im Abschnitt "Default" dieser Einstellung bearbeitet werden. Beispiel für die Verwendung des Feldes Queue: Feld mit ausgewählter ID und Name sendet QueueID = 3 und Queue = Raw.',
         'Template for the out-of-office message shown to the user in the frontend. Placeholders for out-of-office information can be used via ###PlaceholderName###. Possible placeholders are: StartYear, StartMonth, StartDay, EndYear, EndMonth, EndDay, DaysRemaining.' =>
             'Template für die "Out-of-Office"-Nachricht, die im Agenten-Interface angezeigt wird. Platzhalter für Out-Of-Office-Daten können wie folgt benutzt werden: ###PlatzhalterName###. Mögliche Out-Of-Office-PLatzhalter sind: StartYear, StartMonth, StartDay, EndYear, EndMonth, EndDay, DaysRemaining.',
         'Message that will be shown if the agent is currently logged in.' =>
