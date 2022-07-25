@@ -43,6 +43,10 @@ sub Run {
             Message => 'Add missing foreign keys that point to database table "article"',
             Module  => 'RecreateForeignKeysToArticleTable',
         },
+        {
+            Message => 'Add table and notification event for user mention support',
+            Module  => 'Mentions',
+        },
     );
 
     return 1   if !@Tasks;

@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.347320111457138;
+    $Self->{Completeness}        = 0.345959183673469;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2794,6 +2794,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
         'Remove active filters for this screen.' => 'Ta bort aktiva filter för denna vy.',
+        'Remove mention' => '',
         'Tickets per page' => 'Ärenden per sida',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
@@ -2910,6 +2911,9 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
         'Linked Objects' => 'Länkade objekt',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/MentionsTable.tt
+        'Mentions' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Arkiv',
@@ -3857,6 +3861,7 @@ sub Data {
         'Customer user of the ticket' => '',
         'All recipients of the first article' => '',
         'All recipients of the last article' => '',
+        'All users who are mentioned in a ticket' => '',
         'Invisible to customer' => '',
         'Visible to customer' => '',
 
@@ -4303,6 +4308,10 @@ sub Data {
         'Reminder Reached' => 'Påminnelse finns',
         'My Locked Tickets' => 'Mina låsta ärenden',
 
+        # Perl Module: Kernel/Modules/AgentTicketMentionView.pm
+        'New mention' => '',
+        'My Mentions' => '',
+
         # Perl Module: Kernel/Modules/AgentTicketMerge.pm
         'Can\'t merge ticket with itself!' => 'Det går inte att slå samman ett ärende med sig själv!',
 
@@ -4573,6 +4582,9 @@ sub Data {
             '',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             '',
+
+        # Perl Module: Kernel/Modules/Mentions.pm
+        '%s users will be mentioned' => '',
 
         # Perl Module: Kernel/Modules/PublicCalendar.pm
         'No %s!' => 'Inga %s!',
@@ -4903,6 +4915,11 @@ sub Data {
         'Locked Tickets Reminder Reached' => 'Låsta ärenden där påminnelse har nåtts',
         'Locked Tickets Total' => 'Totalt antal låsta ärenden',
 
+        # Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
+        'Total mentions' => '',
+        'Total new mentions' => '',
+        'New mentions' => '',
+
         # Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
         'Owned Tickets New' => '',
         'Owned Tickets Reminder Reached' => '',
@@ -4986,6 +5003,9 @@ sub Data {
         'This field is required or' => 'Detta fält är obligatoriskt eller',
         'The field content is too long!' => 'Fältinnehållet är för långt!',
         'Maximum size is %s characters.' => 'Maxlängd är %s tecken.',
+
+        # Perl Module: Kernel/System/Mention.pm
+        'LastMention' => '',
 
         # Perl Module: Kernel/System/NotificationEvent.pm
         'Couldn\'t read Notification configuration file. Please make sure the file is valid.' =>
@@ -7872,6 +7892,18 @@ sub Data {
         'Rich text editor configuration for autocompletion module.' => '',
         'Rich text editor configuration for autocompletion module to support templates.' =>
             '',
+        'Defines which notifications about mentions should be sent.' => '',
+        'Defines if the toolbar mention icon should count mentions.' => '',
+        'Frontend registration of triggers for mention plugin of CKEditor.' =>
+            '',
+        'Frontend registration of input/output templates for mention plugin of CKEditor.' =>
+            '',
+        'Event handler for mentions.' => '',
+        'Parameters for the dashboard backend of the last mention widget.' =>
+            '',
+        'Agent interface notification module to show the number of mentions.' =>
+            '',
+        'Module to grant access to the mentioned agents of a ticket.' => '',
 
         # XML Definition: scripts/database/otrs-initial_insert.xml
         'invalid-temporarily' => '* ogiltig-tillfälligt',
@@ -7984,6 +8016,7 @@ sub Data {
         'You will receive a notification each time a reminder time is reached for one of your appointments.' =>
             'Du får en notifiering för varje påminnelsetid för dina kalenderhändelser. ',
         'Ticket email delivery failure notification' => '',
+        'Mention notification' => '',
 
         # JS File: var/httpd/htdocs/js/Core.AJAX.js
         'Error during AJAX communication. Status: %s, Error: %s' => '',
@@ -8764,6 +8797,7 @@ Thanks for your help!
         'Korean' => '',
         'Language' => 'Språk',
         'Large' => 'Stor',
+        'Last Mentions' => '',
         'Last Screen Overview' => '',
         'Last customer subject' => '',
         'Last view - limit' => '',
@@ -8820,6 +8854,9 @@ Thanks for your help!
         'Mark this ticket as junk!' => 'Märk ärendet som skräp!',
         'Mattermost Username' => '',
         'Medium' => 'Mellan',
+        'Mentioned in article' => '',
+        'Mentioned in ticket' => '',
+        'Mentions.' => '',
         'Merge this ticket and all articles into another ticket' => '',
         'Merged Ticket (%s/%s) to (%s/%s).' => '',
         'Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>.' => '',
@@ -8977,6 +9014,7 @@ Thanks for your help!
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             '',
         'Shows information on how to start OTRS Daemon' => '',
+        'Shows last mention of tickets.' => '',
         'Signature data.' => '',
         'Signatures' => 'Signaturer',
         'Simple' => '',

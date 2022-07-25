@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.936731683330602;
+    $Self->{Completeness}        = 0.933061224489796;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2797,6 +2797,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
         'Remove active filters for this screen.' => 'Ukloni aktivne filtere za ovaj ekran.',
+        'Remove mention' => '',
         'Tickets per page' => 'Tiketa po strani',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
@@ -2913,6 +2914,9 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
         'Linked Objects' => 'Povezani objekti',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/MentionsTable.tt
+        'Mentions' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Arhiviraj',
@@ -3860,6 +3864,7 @@ sub Data {
         'Customer user of the ticket' => 'Klijent korisnik tiketa',
         'All recipients of the first article' => 'Svi primaoci prvog članka',
         'All recipients of the last article' => 'Svi primaoci poslednjeg članka',
+        'All users who are mentioned in a ticket' => '',
         'Invisible to customer' => 'Nevidljivo klijentu',
         'Visible to customer' => 'Vidljivo klijentu',
 
@@ -4306,6 +4311,10 @@ sub Data {
         'Reminder Reached' => 'Dostignut podsetnik',
         'My Locked Tickets' => 'Moji zaključani tiketi',
 
+        # Perl Module: Kernel/Modules/AgentTicketMentionView.pm
+        'New mention' => '',
+        'My Mentions' => '',
+
         # Perl Module: Kernel/Modules/AgentTicketMerge.pm
         'Can\'t merge ticket with itself!' => 'Tiket se ne može povezati sa sobom!',
 
@@ -4576,6 +4585,9 @@ sub Data {
             'Greška: Molimo da podesete vrednost za innodb_log_file_size u vašoj bazi podataka na najmanje %s MB (trenutno: %s MB, preporučeno: %s MB). Za više informacija, molimo pogledajte na %s.',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             'Neispravno podešena baza podataka (%s je %s, a trebalo bi da bude utf8).',
+
+        # Perl Module: Kernel/Modules/Mentions.pm
+        '%s users will be mentioned' => '',
 
         # Perl Module: Kernel/Modules/PublicCalendar.pm
         'No %s!' => 'Bez %s!',
@@ -4906,6 +4918,11 @@ sub Data {
         'Locked Tickets Reminder Reached' => 'Dostignut podsetnik zaključanih tiketa',
         'Locked Tickets Total' => 'Ukupno zaključnih tiketa',
 
+        # Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
+        'Total mentions' => '',
+        'Total new mentions' => '',
+        'New mentions' => '',
+
         # Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
         'Owned Tickets New' => '',
         'Owned Tickets Reminder Reached' => '',
@@ -4989,6 +5006,9 @@ sub Data {
         'This field is required or' => 'Ovo polje je obavezno ili',
         'The field content is too long!' => 'Sadržaj polja je predugačak!',
         'Maximum size is %s characters.' => 'Maksimalna veličina je %s karaktera.',
+
+        # Perl Module: Kernel/System/Mention.pm
+        'LastMention' => '',
 
         # Perl Module: Kernel/System/NotificationEvent.pm
         'Couldn\'t read Notification configuration file. Please make sure the file is valid.' =>
@@ -7875,6 +7895,18 @@ sub Data {
         'Rich text editor configuration for autocompletion module.' => '',
         'Rich text editor configuration for autocompletion module to support templates.' =>
             '',
+        'Defines which notifications about mentions should be sent.' => '',
+        'Defines if the toolbar mention icon should count mentions.' => '',
+        'Frontend registration of triggers for mention plugin of CKEditor.' =>
+            '',
+        'Frontend registration of input/output templates for mention plugin of CKEditor.' =>
+            '',
+        'Event handler for mentions.' => '',
+        'Parameters for the dashboard backend of the last mention widget.' =>
+            '',
+        'Agent interface notification module to show the number of mentions.' =>
+            '',
+        'Module to grant access to the mentioned agents of a ticket.' => '',
 
         # XML Definition: scripts/database/otrs-initial_insert.xml
         'invalid-temporarily' => 'nevažeći-privremeno',
@@ -7987,6 +8019,7 @@ sub Data {
         'You will receive a notification each time a reminder time is reached for one of your appointments.' =>
             'Dobićete obaveštenje svaki put kada dođe do vremena podsetnika za neki od vaših termina.',
         'Ticket email delivery failure notification' => 'Obaveštenje o neuspelom slanju imejla tiketa',
+        'Mention notification' => '',
 
         # JS File: var/httpd/htdocs/js/Core.AJAX.js
         'Error during AJAX communication. Status: %s, Error: %s' => 'Greška prilikom AJAX komunikacije. Status: %s, greška %s',
@@ -8778,6 +8811,7 @@ Vaša tehnička podrška
         'Korean' => 'Korejski',
         'Language' => 'Jezik',
         'Large' => 'Veliko',
+        'Last Mentions' => '',
         'Last Screen Overview' => 'Pregled poslednjeg ekrana',
         'Last customer subject' => 'Poslednji predmet poruke klijenta',
         'Last view - limit' => '',
@@ -8834,6 +8868,9 @@ Vaša tehnička podrška
         'Mark this ticket as junk!' => 'Označi ovaj tiket kao besmislen junk!',
         'Mattermost Username' => '',
         'Medium' => 'Srednje',
+        'Mentioned in article' => '',
+        'Mentioned in ticket' => '',
+        'Mentions.' => '',
         'Merge this ticket and all articles into another ticket' => 'Spoji ovaj tiket i sve članke u drugi tiket',
         'Merged Ticket (%s/%s) to (%s/%s).' => 'Spojen tiket (%s/%s) u (%s/%s)',
         'Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>.' => 'Tiket <OTRS_TICKET> spojen u <OTRS_MERGE_TO_TICKET>.',
@@ -8991,6 +9028,7 @@ Vaša tehnička podrška
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             'Prikazuje pregleda tiketa (Info klijenta => 1 - pokazuje i podatke o klijentu, Maksimalna veličina prikaza podataka o klijentu u karakterima).',
         'Shows information on how to start OTRS Daemon' => 'Prikazuje informacije kako pokrenuti OTRS sistemski servis',
+        'Shows last mention of tickets.' => '',
         'Signature data.' => '',
         'Signatures' => 'Potpisi',
         'Simple' => 'Jednostavno',

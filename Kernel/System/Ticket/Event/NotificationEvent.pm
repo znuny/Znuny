@@ -35,6 +35,7 @@ our @ObjectDependencies = (
     'Kernel::System::Ticket::Article',
     'Kernel::System::User',
     'Kernel::System::Valid',
+    'Kernel::System::Mention',
 );
 
 sub new {
@@ -598,6 +599,7 @@ sub _RecipientsGet {
         my $CheckItemObject     = $Kernel::OM->Get('Kernel::System::CheckItem');
         my $SystemAddressObject = $Kernel::OM->Get('Kernel::System::SystemAddress');
         my $UserObject          = $Kernel::OM->Get('Kernel::System::User');
+        my $MentionObject       = $Kernel::OM->Get('Kernel::System::Mention');
 
         RECIPIENT:
         for my $Recipient ( @{ $Notification{Data}->{Recipients} } ) {
@@ -966,6 +968,15 @@ sub _RecipientsGet {
                 $Recipient{Language} = $ConfigObject->Get('DefaultLanguage') || 'en';
 
                 push @RecipientUsers, \%Recipient;
+            }
+            elsif ( $Recipient eq 'AllMentionedUsers' ) {
+                my $TicketMentions = $MentionObject->GetTicketMentions(
+                    TicketID => $Param{Data}->{TicketID},
+                ) // [];
+
+                for my $TicketMention ( @{$TicketMentions} ) {
+                    push @{ $Notification{Data}->{RecipientAgents} }, $TicketMention->{UserID};
+                }
             }
         }
     }

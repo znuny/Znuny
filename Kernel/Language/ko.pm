@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.911326012129159;
+    $Self->{Completeness}        = 0.907755102040816;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2791,6 +2791,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
         'Remove active filters for this screen.' => '이 화면에서 활성 필터를 제거하십시오.',
+        'Remove mention' => '',
         'Tickets per page' => '페이지 당 티켓',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
@@ -2907,6 +2908,9 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
         'Linked Objects' => '연결된 개체',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/MentionsTable.tt
+        'Mentions' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => '아카이브',
@@ -3854,6 +3858,7 @@ sub Data {
         'Customer user of the ticket' => '티켓의 고객 사용자',
         'All recipients of the first article' => '첫 번째 기사의 모든 수신자',
         'All recipients of the last article' => '마지막 기사의 모든 수신자',
+        'All users who are mentioned in a ticket' => '',
         'Invisible to customer' => '',
         'Visible to customer' => '',
 
@@ -4300,6 +4305,10 @@ sub Data {
         'Reminder Reached' => '알림발생',
         'My Locked Tickets' => '나의 잠긴 티켓',
 
+        # Perl Module: Kernel/Modules/AgentTicketMentionView.pm
+        'New mention' => '',
+        'My Mentions' => '',
+
         # Perl Module: Kernel/Modules/AgentTicketMerge.pm
         'Can\'t merge ticket with itself!' => '티켓을 합칠 수 없습니다.',
 
@@ -4570,6 +4579,9 @@ sub Data {
             '오류 : 데이터베이스의 innodb_log_file_size 값을 최소 %s MB (현재 : %s MB, 권장 : %s MB)로 설정하십시오. 자세한 내용은 %s를보십시오.',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             '잘못된 데이터베이스 정렬 (%s는 %s이지만 utf8이어야합니다).',
+
+        # Perl Module: Kernel/Modules/Mentions.pm
+        '%s users will be mentioned' => '',
 
         # Perl Module: Kernel/Modules/PublicCalendar.pm
         'No %s!' => '아니 %s!',
@@ -4900,6 +4912,11 @@ sub Data {
         'Locked Tickets Reminder Reached' => '잠긴 티켓 알리미에 도달 했습니다.',
         'Locked Tickets Total' => '잠긴 티켓 합계',
 
+        # Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
+        'Total mentions' => '',
+        'Total new mentions' => '',
+        'New mentions' => '',
+
         # Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
         'Owned Tickets New' => '',
         'Owned Tickets Reminder Reached' => '',
@@ -4983,6 +5000,9 @@ sub Data {
         'This field is required or' => '이 필드는 필수이거나',
         'The field content is too long!' => '입력란 내용이 너무 깁니다.',
         'Maximum size is %s characters.' => '최대 크기는%s자입니다.',
+
+        # Perl Module: Kernel/System/Mention.pm
+        'LastMention' => '',
 
         # Perl Module: Kernel/System/NotificationEvent.pm
         'Couldn\'t read Notification configuration file. Please make sure the file is valid.' =>
@@ -7869,6 +7889,18 @@ sub Data {
         'Rich text editor configuration for autocompletion module.' => '',
         'Rich text editor configuration for autocompletion module to support templates.' =>
             '',
+        'Defines which notifications about mentions should be sent.' => '',
+        'Defines if the toolbar mention icon should count mentions.' => '',
+        'Frontend registration of triggers for mention plugin of CKEditor.' =>
+            '',
+        'Frontend registration of input/output templates for mention plugin of CKEditor.' =>
+            '',
+        'Event handler for mentions.' => '',
+        'Parameters for the dashboard backend of the last mention widget.' =>
+            '',
+        'Agent interface notification module to show the number of mentions.' =>
+            '',
+        'Module to grant access to the mentioned agents of a ticket.' => '',
 
         # XML Definition: scripts/database/otrs-initial_insert.xml
         'invalid-temporarily' => '유효하지 않은 일시적',
@@ -7981,6 +8013,7 @@ sub Data {
         'You will receive a notification each time a reminder time is reached for one of your appointments.' =>
             '약속 중 하나에 대해 미리 알림 시간에 도달할 때마다 알림을 받게 됩니다.',
         'Ticket email delivery failure notification' => '티켓 전자 메일 배달 실패 알림',
+        'Mention notification' => '',
 
         # JS File: var/httpd/htdocs/js/Core.AJAX.js
         'Error during AJAX communication. Status: %s, Error: %s' => 'AJAX 통신 중 오류가 발생했습니다. 상태 : %s, 오류 : %s',
@@ -8772,6 +8805,7 @@ Thanks for your help!
         'Korean' => '',
         'Language' => '언어',
         'Large' => '큰',
+        'Last Mentions' => '',
         'Last Screen Overview' => '마지막 화면 개요',
         'Last customer subject' => '마지막 고객 주제',
         'Last view - limit' => '',
@@ -8828,6 +8862,9 @@ Thanks for your help!
         'Mark this ticket as junk!' => '이 티켓을 정크로 표시하십시오!',
         'Mattermost Username' => '',
         'Medium' => '중간의',
+        'Mentioned in article' => '',
+        'Mentioned in ticket' => '',
+        'Mentions.' => '',
         'Merge this ticket and all articles into another ticket' => '이 티켓과 모든 기사를 다른 티켓으로 병합하십시오.',
         'Merged Ticket (%s/%s) to (%s/%s).' => '합쳐진 티켓 (%s/%s) ~ (%s/ 1 %s).',
         'Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>.' => 'Merged Ticket 1 to 2.',
@@ -8985,6 +9022,7 @@ Thanks for your help!
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             '티켓 개요의 미리보기를 표시합니다 (CustomerInfo => 1 - Customer-Info, CustomerInfoMaxSize 최대 크기는 Customer-Info의 문자로 표시).',
         'Shows information on how to start OTRS Daemon' => 'OTRS 데몬을 시작하는 방법에 대한 정보를 보여줍니다.',
+        'Shows last mention of tickets.' => '',
         'Signature data.' => '',
         'Signatures' => '서명',
         'Simple' => '단순한',

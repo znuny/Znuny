@@ -1,0 +1,29 @@
+# --
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+<div class="WidgetSimple">
+    <div class="Header">
+        <div class="WidgetAction Toggle">
+            <a href="#" title="[% Translate("Show or hide the content") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+        </div>
+        <h2>[% Translate("Mentions") | html %]</h2>
+    </div>
+    <div class="Content">
+        <ul>
+[% RenderBlockStart("User") %]
+            <li style="word-wrap: break-word;">-[% Data.UserFullname %]
+                [% IF Data.Removable %]
+                    <a href="#" id=[% Data.UserID %] class="MentionRow"><i class="fa fa-trash"></i></a>
+                [% END %]
+            </li>
+[% RenderBlockEnd("User") %]
+[% RenderBlockStart("NoMentions") %]
+            <li>[% Translate("none") | html %]</li>
+[% RenderBlockEnd("NoMentions") %]
+        </ul>
+    </div>
+</div>

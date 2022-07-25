@@ -25288,3 +25288,99 @@ msgstr "Rich-Text-Editor-Konfiguration für Autocompletion-Modul zur Unterstütz
 msgid "Snippet"
 msgstr ""
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
+msgid "Remove mention"
+msgstr "Erwähnung entfernen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/MentionsTable.tt
+msgid "Mentions"
+msgstr "Erwähnungen"
+
+#. Perl Module: Kernel/Modules/AdminNotificationEvent.pm
+msgid "All users who are mentioned in a ticket"
+msgstr "Alle Benutzer, die in einem Ticket erwähnt werden."
+
+#. Perl Module: Kernel/Modules/AgentTicketMentionView.pm
+msgid "New mention"
+msgstr "Neue Erwähnung"
+
+#. Perl Module: Kernel/Modules/AgentTicketMentionView.pm
+msgid "My Mentions"
+msgstr "Meine Erwähnungen"
+
+#. Perl Module: Kernel/Modules/Mentions.pm
+msgid "%s users will be mentioned"
+msgstr "%s Benutzer werden erwähnt"
+
+#. Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
+msgid "Total mentions"
+msgstr "Gesamte Erwähnungen"
+
+#. Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
+msgid "Total new mentions"
+msgstr "Gesamte neue Erwähnungen"
+
+#. Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
+msgid "New mentions"
+msgstr "Neue Erwähnungen"
+
+#. Perl Module: Kernel/System/Mention.pm
+msgid "LastMention"
+msgstr "Letzte Erwähnung"
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines which notifications about mentions should be sent."
+msgstr "Bestimmt, welche Benachrichtigungen über Erwähnungen versendet werden sollen."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines if the toolbar mention icon should count mentions."
+msgstr "Erwähnungs-Icon in Toolbar soll Anzahl der Erwähnungen anzeigen."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Frontend registration of triggers for mention plugin of CKEditor."
+msgstr "Frontend-Registrierung für Trigger des CKEditor-Mention-Plugins."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Frontend registration of input/output templates for mention plugin of CKEditor."
+msgstr "Frontend-Registrierung für Template des CKEditor-Mention-Plugins."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Event handler for mentions."
+msgstr "Event-Handler für Erwähnungen."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Parameters for the dashboard backend of the last mention widget."
+msgstr "Parameter für das Dasboard-Widget \"Letzte Erwähnung\"."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Agent interface notification module to show the number of mentions."
+msgstr "Benachrichtigungsmodul für Agenten-Interface, das die Anzahl der Erwähnungen anzeigt."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Module to grant access to the mentioned agents of a ticket."
+msgstr "Modul, das Zugriff für die erwähnten Agenten eines Tickets gewährt."
+
+#. XML Definition: scripts/database/otrs-initial_insert.xml
+msgid "Mention notification"
+msgstr "Benachrichtigung für Erwähnung"
+
+#. SysConfig
+msgid "Last Mentions"
+msgstr "Letzte Erwähnungen"
+
+#. SysConfig
+msgid "Mentioned in article"
+msgstr "In Artikel erwähnt"
+
+#. SysConfig
+msgid "Mentioned in ticket"
+msgstr "In Ticket erwähnt"
+
+#. SysConfig
+msgid "Mentions."
+msgstr "Erwähnungen."
+
+#. SysConfig
+msgid "Shows last mention of tickets."
+msgstr "Zeigt letzte Erwähnung von Tickets."
+

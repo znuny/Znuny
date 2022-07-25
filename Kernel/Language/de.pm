@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.993935420422882;
+    $Self->{Completeness}        = 0.993959183673469;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2791,6 +2791,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
         'Remove active filters for this screen.' => 'Aktive Filter für diesen Bildschirm entfernen.',
+        'Remove mention' => 'Erwähnung entfernen',
         'Tickets per page' => 'Tickets pro Seite',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
@@ -2907,6 +2908,9 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
         'Linked Objects' => 'Verknüpfte Objekte',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/MentionsTable.tt
+        'Mentions' => 'Erwähnungen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Archiv',
@@ -3854,6 +3858,7 @@ sub Data {
         'Customer user of the ticket' => 'Kundenbenutzer des Tickets',
         'All recipients of the first article' => 'Alle Empfänger des ersten Artikels',
         'All recipients of the last article' => 'Alle Empfänger des letzten Artikels',
+        'All users who are mentioned in a ticket' => 'Alle Benutzer, die in einem Ticket erwähnt werden.',
         'Invisible to customer' => 'Unsichtbar für Kunde',
         'Visible to customer' => 'Sichtbar für Kunde',
 
@@ -4300,6 +4305,10 @@ sub Data {
         'Reminder Reached' => 'Erinnerung erreicht',
         'My Locked Tickets' => 'Meine gesperrten Tickets',
 
+        # Perl Module: Kernel/Modules/AgentTicketMentionView.pm
+        'New mention' => 'Neue Erwähnung',
+        'My Mentions' => 'Meine Erwähnungen',
+
         # Perl Module: Kernel/Modules/AgentTicketMerge.pm
         'Can\'t merge ticket with itself!' => 'Kann Ticket nicht mit sich selbst zusammenführen!',
 
@@ -4570,6 +4579,9 @@ sub Data {
             'Fehler: Bitte erhöhen Sie den Wert für innodb_log_file_size in Ihrer Datenbank-Konfiguration auf mindestens %s MB (aktuell: %s MB, empfohlen: %s MB). Mehr Informationen finden Sie unter %s.',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             'Falsche Datenbank-Sortierfolge (%s ist %s, muss aber utf8 sein).',
+
+        # Perl Module: Kernel/Modules/Mentions.pm
+        '%s users will be mentioned' => '%s Benutzer werden erwähnt',
 
         # Perl Module: Kernel/Modules/PublicCalendar.pm
         'No %s!' => 'Kein %s!',
@@ -4900,6 +4912,11 @@ sub Data {
         'Locked Tickets Reminder Reached' => 'Gesperrte Tickets, Erinnerungszeit erreicht',
         'Locked Tickets Total' => 'Gesperrte Tickets insgesamt',
 
+        # Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
+        'Total mentions' => 'Gesamte Erwähnungen',
+        'Total new mentions' => 'Gesamte neue Erwähnungen',
+        'New mentions' => 'Neue Erwähnungen',
+
         # Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
         'Owned Tickets New' => '',
         'Owned Tickets Reminder Reached' => '',
@@ -4983,6 +5000,9 @@ sub Data {
         'This field is required or' => 'Dieses Feld ist ein Pflichtfeld oder',
         'The field content is too long!' => 'Der Feldinhalt ist zu lang!',
         'Maximum size is %s characters.' => 'Die Maximallänge beträgt %s Zeichen.',
+
+        # Perl Module: Kernel/System/Mention.pm
+        'LastMention' => 'Letzte Erwähnung',
 
         # Perl Module: Kernel/System/NotificationEvent.pm
         'Couldn\'t read Notification configuration file. Please make sure the file is valid.' =>
@@ -7869,6 +7889,18 @@ sub Data {
         'Rich text editor configuration for autocompletion module.' => 'Rich-Text-Editor-Konfiguration für Autocompletion-Modul.',
         'Rich text editor configuration for autocompletion module to support templates.' =>
             'Rich-Text-Editor-Konfiguration für Autocompletion-Modul zur Unterstützung von Vorlagen.',
+        'Defines which notifications about mentions should be sent.' => 'Bestimmt, welche Benachrichtigungen über Erwähnungen versendet werden sollen.',
+        'Defines if the toolbar mention icon should count mentions.' => 'Erwähnungs-Icon in Toolbar soll Anzahl der Erwähnungen anzeigen.',
+        'Frontend registration of triggers for mention plugin of CKEditor.' =>
+            'Frontend-Registrierung für Trigger des CKEditor-Mention-Plugins.',
+        'Frontend registration of input/output templates for mention plugin of CKEditor.' =>
+            'Frontend-Registrierung für Template des CKEditor-Mention-Plugins.',
+        'Event handler for mentions.' => 'Event-Handler für Erwähnungen.',
+        'Parameters for the dashboard backend of the last mention widget.' =>
+            'Parameter für das Dasboard-Widget "Letzte Erwähnung".',
+        'Agent interface notification module to show the number of mentions.' =>
+            'Benachrichtigungsmodul für Agenten-Interface, das die Anzahl der Erwähnungen anzeigt.',
+        'Module to grant access to the mentioned agents of a ticket.' => 'Modul, das Zugriff für die erwähnten Agenten eines Tickets gewährt.',
 
         # XML Definition: scripts/database/otrs-initial_insert.xml
         'invalid-temporarily' => 'ungültig-temporär',
@@ -7981,6 +8013,7 @@ sub Data {
         'You will receive a notification each time a reminder time is reached for one of your appointments.' =>
             'Sie erhalten immer dann eine Benachrichtigung, wenn der Benachrichtigungszeitpunkt für einen Ihrer Termine erreicht wurde.',
         'Ticket email delivery failure notification' => 'Benachrichtigung über Fehler beim Versand von E-Mail-Tickets',
+        'Mention notification' => 'Benachrichtigung für Erwähnung',
 
         # JS File: var/httpd/htdocs/js/Core.AJAX.js
         'Error during AJAX communication. Status: %s, Error: %s' => 'Fehler während AJAX-Kommunikation. Status: %s, Fehler: %s',
@@ -8771,6 +8804,7 @@ Ihr Helpdesk-Team
         'Korean' => 'Koreanisch',
         'Language' => 'Sprache',
         'Large' => 'Groß',
+        'Last Mentions' => 'Letzte Erwähnungen',
         'Last Screen Overview' => 'Letzte Masken-Übersicht',
         'Last customer subject' => 'Letzter Kunden-Betreff',
         'Last view - limit' => 'Letzte Ansicht - Limit',
@@ -8827,6 +8861,9 @@ Ihr Helpdesk-Team
         'Mark this ticket as junk!' => 'Dieses Ticket als Junk markieren!',
         'Mattermost Username' => 'Mattermost-Benutzername',
         'Medium' => 'Mittel',
+        'Mentioned in article' => 'In Artikel erwähnt',
+        'Mentioned in ticket' => 'In Ticket erwähnt',
+        'Mentions.' => 'Erwähnungen.',
         'Merge this ticket and all articles into another ticket' => 'Dieses Ticket und alle Artikel in ein anderes Ticket zusammenfassen',
         'Merged Ticket (%s/%s) to (%s/%s).' => 'Ticket (%s/%s) zusammengeführt mit (%s/%s).',
         'Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>.' => 'Ticket <OTRS_TICKET> wurde mit <OTRS_MERGE_TO_TICKET> zusammengefasst.',
@@ -8984,6 +9021,7 @@ Ihr Helpdesk-Team
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             'Ermöglicht eine Ticket-Übersicht mit einigen Ticketinformationen (Customer => 1 - zeigt auch die Kundeninformation, CustomerInfoMaxSize steuert die maximale Anzahl an Zeichen der Kundeninformation).',
         'Shows information on how to start OTRS Daemon' => 'Informationen über das Starten des OTRS Daemons anzeigen',
+        'Shows last mention of tickets.' => 'Zeigt letzte Erwähnung von Tickets.',
         'Signature data.' => 'Signatur-Daten.',
         'Signatures' => 'Signaturen',
         'Simple' => 'Einfach',

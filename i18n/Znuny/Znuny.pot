@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-07-22 09:56+0000\n"
+"POT-Creation-Date: 2022-07-25 08:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -8207,6 +8207,10 @@ msgid "Remove active filters for this screen."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
+msgid "Remove mention"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
 msgid "Tickets per page"
 msgstr ""
 
@@ -8556,6 +8560,10 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
 msgid "Linked Objects"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/MentionsTable.tt
+msgid "Mentions"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
@@ -11159,6 +11167,10 @@ msgid "All recipients of the last article"
 msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminNotificationEvent.pm
+msgid "All users who are mentioned in a ticket"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminNotificationEvent.pm
 msgid "Invisible to customer"
 msgstr ""
 
@@ -12366,6 +12378,14 @@ msgstr ""
 msgid "My Locked Tickets"
 msgstr ""
 
+#. Perl Module: Kernel/Modules/AgentTicketMentionView.pm
+msgid "New mention"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AgentTicketMentionView.pm
+msgid "My Mentions"
+msgstr ""
+
 #. Perl Module: Kernel/Modules/AgentTicketMerge.pm
 msgid "Can't merge ticket with itself!"
 msgstr ""
@@ -13142,6 +13162,10 @@ msgstr ""
 msgid "Wrong database collation (%s is %s, but it needs to be utf8)."
 msgstr ""
 
+#. Perl Module: Kernel/Modules/Mentions.pm
+msgid "%s users will be mentioned"
+msgstr ""
+
 #. Perl Module: Kernel/Modules/PublicCalendar.pm
 msgid "No %s!"
 msgstr ""
@@ -13870,6 +13894,18 @@ msgstr ""
 msgid "Locked Tickets Total"
 msgstr ""
 
+#. Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
+msgid "Total mentions"
+msgstr ""
+
+#. Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
+msgid "Total new mentions"
+msgstr ""
+
+#. Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
+msgid "New mentions"
+msgstr ""
+
 #. Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
 msgid "Owned Tickets New"
 msgstr ""
@@ -14044,6 +14080,10 @@ msgstr ""
 
 #. Perl Module: Kernel/System/DynamicField/Driver/TextArea.pm
 msgid "Maximum size is %s characters."
+msgstr ""
+
+#. Perl Module: Kernel/System/Mention.pm
+msgid "LastMention"
 msgstr ""
 
 #. Perl Module: Kernel/System/NotificationEvent.pm
@@ -20406,6 +20446,38 @@ msgstr ""
 msgid "Rich text editor configuration for autocompletion module to support templates."
 msgstr ""
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines which notifications about mentions should be sent."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines if the toolbar mention icon should count mentions."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Frontend registration of triggers for mention plugin of CKEditor."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Frontend registration of input/output templates for mention plugin of CKEditor."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Event handler for mentions."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Parameters for the dashboard backend of the last mention widget."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Agent interface notification module to show the number of mentions."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Module to grant access to the mentioned agents of a ticket."
+msgstr ""
+
 #. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "invalid-temporarily"
 msgstr ""
@@ -20776,6 +20848,10 @@ msgstr ""
 
 #. XML Definition: scripts/database/otrs-initial_insert.xml
 msgid "Ticket email delivery failure notification"
+msgstr ""
+
+#. XML Definition: scripts/database/otrs-initial_insert.xml
+msgid "Mention notification"
 msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.AJAX.js
@@ -23014,6 +23090,10 @@ msgid "Large"
 msgstr ""
 
 #. SysConfig
+msgid "Last Mentions"
+msgstr ""
+
+#. SysConfig
 msgid "Last Screen Overview"
 msgstr ""
 
@@ -23235,6 +23315,18 @@ msgstr ""
 
 #. SysConfig
 msgid "Medium"
+msgstr ""
+
+#. SysConfig
+msgid "Mentioned in article"
+msgstr ""
+
+#. SysConfig
+msgid "Mentioned in ticket"
+msgstr ""
+
+#. SysConfig
+msgid "Mentions."
 msgstr ""
 
 #. SysConfig
@@ -23827,6 +23919,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Shows information on how to start OTRS Daemon"
+msgstr ""
+
+#. SysConfig
+msgid "Shows last mention of tickets."
 msgstr ""
 
 #. SysConfig

@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.940337649565645;
+    $Self->{Completeness}        = 0.93665306122449;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2798,6 +2798,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
         'Remove active filters for this screen.' => '清除这个屏幕的过滤器。',
+        'Remove mention' => '',
         'Tickets per page' => '工单数/页',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
@@ -2914,6 +2915,9 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
         'Linked Objects' => '连接的对象',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/MentionsTable.tt
+        'Mentions' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => '归档',
@@ -3861,6 +3865,7 @@ sub Data {
         'Customer user of the ticket' => '该工单的客户用户',
         'All recipients of the first article' => '第一封信件的所有收件人',
         'All recipients of the last article' => '最近一封信件的所有收件人',
+        'All users who are mentioned in a ticket' => '',
         'Invisible to customer' => '客户不可见',
         'Visible to customer' => '对客户可见',
 
@@ -4307,6 +4312,10 @@ sub Data {
         'Reminder Reached' => '提醒时间已过',
         'My Locked Tickets' => '我锁定的工单',
 
+        # Perl Module: Kernel/Modules/AgentTicketMentionView.pm
+        'New mention' => '',
+        'My Mentions' => '',
+
         # Perl Module: Kernel/Modules/AgentTicketMerge.pm
         'Can\'t merge ticket with itself!' => '不能将工单合并到它自己！',
 
@@ -4577,6 +4586,9 @@ sub Data {
             '错误：请设置数据库参数innodb_log_file_size至少为%s MB（当前：%s MB，推荐：%s MB），请参阅 %s 获取更多信息。',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             '错误的数据库排序规则（%s是%s，但需要是utf8）。',
+
+        # Perl Module: Kernel/Modules/Mentions.pm
+        '%s users will be mentioned' => '',
 
         # Perl Module: Kernel/Modules/PublicCalendar.pm
         'No %s!' => '没有%s!',
@@ -4907,6 +4919,11 @@ sub Data {
         'Locked Tickets Reminder Reached' => '提醒过的锁定工单数',
         'Locked Tickets Total' => '锁定工单总数',
 
+        # Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
+        'Total mentions' => '',
+        'Total new mentions' => '',
+        'New mentions' => '',
+
         # Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
         'Owned Tickets New' => '',
         'Owned Tickets Reminder Reached' => '',
@@ -4990,6 +5007,9 @@ sub Data {
         'This field is required or' => '这个字段是必填的',
         'The field content is too long!' => '字段值太长了！',
         'Maximum size is %s characters.' => '最多%s个字符。',
+
+        # Perl Module: Kernel/System/Mention.pm
+        'LastMention' => '',
 
         # Perl Module: Kernel/System/NotificationEvent.pm
         'Couldn\'t read Notification configuration file. Please make sure the file is valid.' =>
@@ -7876,6 +7896,18 @@ sub Data {
         'Rich text editor configuration for autocompletion module.' => '',
         'Rich text editor configuration for autocompletion module to support templates.' =>
             '',
+        'Defines which notifications about mentions should be sent.' => '',
+        'Defines if the toolbar mention icon should count mentions.' => '',
+        'Frontend registration of triggers for mention plugin of CKEditor.' =>
+            '',
+        'Frontend registration of input/output templates for mention plugin of CKEditor.' =>
+            '',
+        'Event handler for mentions.' => '',
+        'Parameters for the dashboard backend of the last mention widget.' =>
+            '',
+        'Agent interface notification module to show the number of mentions.' =>
+            '',
+        'Module to grant access to the mentioned agents of a ticket.' => '',
 
         # XML Definition: scripts/database/otrs-initial_insert.xml
         'invalid-temporarily' => '暂时无效',
@@ -7988,6 +8020,7 @@ sub Data {
         'You will receive a notification each time a reminder time is reached for one of your appointments.' =>
             '每当你的一个预约到达提醒时间时，你就会收到一个通知。',
         'Ticket email delivery failure notification' => '工单邮件发送失败通知',
+        'Mention notification' => '',
 
         # JS File: var/httpd/htdocs/js/Core.AJAX.js
         'Error during AJAX communication. Status: %s, Error: %s' => 'AJAX通信时发生错误。 状态：%s，错误：%s',
@@ -8778,6 +8811,7 @@ Thanks for your help!
         'Korean' => '韩语',
         'Language' => '语言',
         'Large' => '详细',
+        'Last Mentions' => '',
         'Last Screen Overview' => '最近屏幕概览',
         'Last customer subject' => '最后客户主题',
         'Last view - limit' => '',
@@ -8834,6 +8868,9 @@ Thanks for your help!
         'Mark this ticket as junk!' => '标记这个工单为垃圾!',
         'Mattermost Username' => '',
         'Medium' => '基本',
+        'Mentioned in article' => '',
+        'Mentioned in ticket' => '',
+        'Mentions.' => '',
         'Merge this ticket and all articles into another ticket' => '将这个工单和所有的信件合并到另一工单',
         'Merged Ticket (%s/%s) to (%s/%s).' => '已将工单(%s/%s)合并到(%s/%s)。',
         'Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>.' => '合并工单<OTRS_TICKET>到 <OTRS_MERGE_TO_TICKET>。',
@@ -8991,6 +9028,7 @@ Thanks for your help!
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             '显示工单概览的预览（如果参数CustomerInfo值为1，还将显示客户信息，参数CustomerInfoMaxSize定义了显示客户信息的最大字符数）。',
         'Shows information on how to start OTRS Daemon' => '显示如何启动OTRS守护进程的信息',
+        'Shows last mention of tickets.' => '',
         'Signature data.' => '签名数据。',
         'Signatures' => '签名',
         'Simple' => '简单',

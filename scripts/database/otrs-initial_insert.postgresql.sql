@@ -1649,6 +1649,54 @@ INSERT INTO notification_event_item (notification_id, event_key, event_value)
     VALUES
     (15, 'VisibleForAgent', '0');
 -- ----------------------------------------------------------
+--  insert into table notification_event
+-- ----------------------------------------------------------
+INSERT INTO notification_event (name, valid_id, comments, create_by, create_time, change_by, change_time)
+    VALUES
+    ('Mention notification', 1, '', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table notification_event_item
+-- ----------------------------------------------------------
+INSERT INTO notification_event_item (notification_id, event_key, event_value)
+    VALUES
+    (16, 'AgentEnabledByDefault', 'Email');
+-- ----------------------------------------------------------
+--  insert into table notification_event_item
+-- ----------------------------------------------------------
+INSERT INTO notification_event_item (notification_id, event_key, event_value)
+    VALUES
+    (16, 'ArticleAttachmentInclude', '0');
+-- ----------------------------------------------------------
+--  insert into table notification_event_item
+-- ----------------------------------------------------------
+INSERT INTO notification_event_item (notification_id, event_key, event_value)
+    VALUES
+    (16, 'Events', 'UserMention');
+-- ----------------------------------------------------------
+--  insert into table notification_event_item
+-- ----------------------------------------------------------
+INSERT INTO notification_event_item (notification_id, event_key, event_value)
+    VALUES
+    (16, 'LanguageID', 'en');
+-- ----------------------------------------------------------
+--  insert into table notification_event_item
+-- ----------------------------------------------------------
+INSERT INTO notification_event_item (notification_id, event_key, event_value)
+    VALUES
+    (16, 'TransportEmailTemplate', 'Default');
+-- ----------------------------------------------------------
+--  insert into table notification_event_item
+-- ----------------------------------------------------------
+INSERT INTO notification_event_item (notification_id, event_key, event_value)
+    VALUES
+    (16, 'Transports', 'Email');
+-- ----------------------------------------------------------
+--  insert into table notification_event_item
+-- ----------------------------------------------------------
+INSERT INTO notification_event_item (notification_id, event_key, event_value)
+    VALUES
+    (16, 'VisibleForAgent', '1');
+-- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
@@ -3163,6 +3211,22 @@ Hibaüzenet:
 
 -- <OTRS_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
+--  insert into table notification_event_message
+-- ----------------------------------------------------------
+INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
+    VALUES
+    (16, 'text/plain', 'en', 'Mention in ticket: <OTRS_TICKET_Title>', 'You have been mentioned in ticket <OTRS_TICKET_NUMBER>
+<OTRS_AGENT_BODY[5]>
+            ');
+-- ----------------------------------------------------------
+--  insert into table notification_event_message
+-- ----------------------------------------------------------
+INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
+    VALUES
+    (16, 'text/plain', 'de', 'Erwähnung in Ticket: <OTRS_TICKET_Title>', 'Sie wurden erwähnt in Ticket <OTRS_TICKET_NUMBER>
+<OTRS_AGENT_BODY[5]>
+            ');
+-- ----------------------------------------------------------
 --  insert into table dynamic_field
 -- ----------------------------------------------------------
 INSERT INTO dynamic_field (internal_field, name, label, field_order, field_type, object_type, config, valid_id, create_by, create_time, change_by, change_time)
@@ -3176,6 +3240,14 @@ DefaultValue: ''''
 INSERT INTO dynamic_field (internal_field, name, label, field_order, field_type, object_type, config, valid_id, create_by, create_time, change_by, change_time)
     VALUES
     (1, 'ProcessManagementActivityID', 'Activity', 1, 'ActivityID', 'Ticket', '---
+DefaultValue: ''''
+', 1, 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table dynamic_field
+-- ----------------------------------------------------------
+INSERT INTO dynamic_field (internal_field, name, label, field_order, field_type, object_type, config, valid_id, create_by, create_time, change_by, change_time)
+    VALUES
+    (1, 'ProcessManagementAttachment', 'Attachment', 1, 'TextArea', 'Ticket', '---
 DefaultValue: ''''
 ', 1, 1, current_timestamp, 1, current_timestamp);
 SET standard_conforming_strings TO ON;

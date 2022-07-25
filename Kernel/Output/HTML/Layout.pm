@@ -1701,8 +1701,9 @@ sub Footer {
                 eq 'Kernel::System::Ticket::ArticleSearchIndex::DB'
                 )
         ) ? 1 : 0,
-        SearchFrontend => $JSCall,
-        Autocomplete   => $AutocompleteConfig,
+        SearchFrontend             => $JSCall,
+        Autocomplete               => $AutocompleteConfig,
+        'Mentions::RichTextEditor' => $ConfigObject->Get('Mentions::RichTextEditor') // {},
     );
 
     for my $Config ( sort keys %JSConfig ) {

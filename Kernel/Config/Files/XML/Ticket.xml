@@ -10493,6 +10493,7 @@
                 <Item>ArticleEmailSendingQueued</Item>
                 <Item>ArticleEmailSendingSent</Item>
                 <Item>ArticleEmailSendingError</Item>
+                <Item>UserMention</Item>
             </Array>
         </Value>
     </Setting>

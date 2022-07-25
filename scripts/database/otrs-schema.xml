@@ -2839,4 +2839,21 @@
     </ForeignKey>
 </Table>
 
+<Table Name="mention">
+    <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
+    <Column Name="user_id" Type="INTEGER"/>
+    <Column Name="ticket_id" Type="INTEGER"/>
+    <Column Name="article_id" Type="INTEGER"/>
+    <Column Name="create_time" Type="DATE"/>
+    <Index Name="mention_user_id">
+        <IndexColumn Name="user_id"/>
+    </Index>
+    <Index Name="mention_ticket_id">
+        <IndexColumn Name="ticket_id"/>
+    </Index>
+    <Index Name="mention_article_id">
+        <IndexColumn Name="article_id"/>
+    </Index>
+</Table>
+
 </database>

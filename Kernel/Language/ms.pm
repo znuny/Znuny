@@ -24,7 +24,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.565153253564989;
+    $Self->{Completeness}        = 0.562938775510204;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2790,6 +2790,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
         'Remove active filters for this screen.' => 'Buang penapis aktif untuk skrin ini.',
+        'Remove mention' => '',
         'Tickets per page' => 'Tiket setiap halaman',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
@@ -2906,6 +2907,9 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
         'Linked Objects' => 'Objek yang Dihubungkan',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/MentionsTable.tt
+        'Mentions' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Arkib',
@@ -3853,6 +3857,7 @@ sub Data {
         'Customer user of the ticket' => '',
         'All recipients of the first article' => '',
         'All recipients of the last article' => '',
+        'All users who are mentioned in a ticket' => '',
         'Invisible to customer' => '',
         'Visible to customer' => '',
 
@@ -4299,6 +4304,10 @@ sub Data {
         'Reminder Reached' => 'Peringatan Disampaikan',
         'My Locked Tickets' => 'Tiket Kunci Saya',
 
+        # Perl Module: Kernel/Modules/AgentTicketMentionView.pm
+        'New mention' => '',
+        'My Mentions' => '',
+
         # Perl Module: Kernel/Modules/AgentTicketMerge.pm
         'Can\'t merge ticket with itself!' => '',
 
@@ -4569,6 +4578,9 @@ sub Data {
             'Ralat: Sila tetapkan nilai untuk innodb_log_file_size pada pangkalan data anda kepada sekurang-kurangnya %s MB ( semasa: %s MB, disyorkan: %s MB) . Untuk maklumat lanjut, sila lihat di %s.',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             '',
+
+        # Perl Module: Kernel/Modules/Mentions.pm
+        '%s users will be mentioned' => '',
 
         # Perl Module: Kernel/Modules/PublicCalendar.pm
         'No %s!' => '',
@@ -4899,6 +4911,11 @@ sub Data {
         'Locked Tickets Reminder Reached' => 'Jangkauan peringatan tiket dikunci',
         'Locked Tickets Total' => 'Jumlah Tiket Dikunci',
 
+        # Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
+        'Total mentions' => '',
+        'Total new mentions' => '',
+        'New mentions' => '',
+
         # Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
         'Owned Tickets New' => '',
         'Owned Tickets Reminder Reached' => '',
@@ -4982,6 +4999,9 @@ sub Data {
         'This field is required or' => 'Medan diperlukan untuk',
         'The field content is too long!' => 'Kandungan medan terlalu panjang!',
         'Maximum size is %s characters.' => 'Saiz maksimum ialah %s karakter.',
+
+        # Perl Module: Kernel/System/Mention.pm
+        'LastMention' => '',
 
         # Perl Module: Kernel/System/NotificationEvent.pm
         'Couldn\'t read Notification configuration file. Please make sure the file is valid.' =>
@@ -7870,6 +7890,18 @@ Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDa
         'Rich text editor configuration for autocompletion module.' => '',
         'Rich text editor configuration for autocompletion module to support templates.' =>
             '',
+        'Defines which notifications about mentions should be sent.' => '',
+        'Defines if the toolbar mention icon should count mentions.' => '',
+        'Frontend registration of triggers for mention plugin of CKEditor.' =>
+            '',
+        'Frontend registration of input/output templates for mention plugin of CKEditor.' =>
+            '',
+        'Event handler for mentions.' => '',
+        'Parameters for the dashboard backend of the last mention widget.' =>
+            '',
+        'Agent interface notification module to show the number of mentions.' =>
+            '',
+        'Module to grant access to the mentioned agents of a ticket.' => '',
 
         # XML Definition: scripts/database/otrs-initial_insert.xml
         'invalid-temporarily' => 'tidak sah-sementara',
@@ -7982,6 +8014,7 @@ Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDa
         'You will receive a notification each time a reminder time is reached for one of your appointments.' =>
             '',
         'Ticket email delivery failure notification' => '',
+        'Mention notification' => '',
 
         # JS File: var/httpd/htdocs/js/Core.AJAX.js
         'Error during AJAX communication. Status: %s, Error: %s' => '',
@@ -8774,6 +8807,7 @@ Kumpulan MejaBantuan Anda
         'Korean' => '',
         'Language' => 'Bahasa',
         'Large' => 'Besar',
+        'Last Mentions' => '',
         'Last Screen Overview' => '',
         'Last customer subject' => '',
         'Last view - limit' => '',
@@ -8830,6 +8864,9 @@ Kumpulan MejaBantuan Anda
         'Mark this ticket as junk!' => 'Tanda tiket ini sebagai junk!',
         'Mattermost Username' => '',
         'Medium' => 'Sederhana',
+        'Mentioned in article' => '',
+        'Mentioned in ticket' => '',
+        'Mentions.' => '',
         'Merge this ticket and all articles into another ticket' => '',
         'Merged Ticket (%s/%s) to (%s/%s).' => '',
         'Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>.' => 'Gabung Tiket <OTRS_TICKET> ke <OTRS_MERGE_TO_TICKET>.',
@@ -8987,6 +9024,7 @@ Kumpulan MejaBantuan Anda
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             'Menunjukkan previu overview tiket (CustomerInfo => 1 - tunjuk juga maklumat pelanggan, CustomerInfoMaxSize saiz maksimum aksara maklumat pelanggan).',
         'Shows information on how to start OTRS Daemon' => 'Menunjukkan maklumat untuk memulakan OTRS Daemon.',
+        'Shows last mention of tickets.' => '',
         'Signature data.' => '',
         'Signatures' => 'Tanda Tangan',
         'Simple' => '',

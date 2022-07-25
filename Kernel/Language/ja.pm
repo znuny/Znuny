@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.719390263891165;
+    $Self->{Completeness}        = 0.716571428571429;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2797,6 +2797,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
         'Remove active filters for this screen.' => 'この画面のアクティブなフィルターを削除します。',
+        'Remove mention' => '',
         'Tickets per page' => 'ページ毎のチケット数',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
@@ -2913,6 +2914,9 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
         'Linked Objects' => 'オブジェクトをリンク',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/MentionsTable.tt
+        'Mentions' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'アーカイブ',
@@ -3861,6 +3865,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Customer user of the ticket' => '',
         'All recipients of the first article' => '最初の記事の全ての受信者',
         'All recipients of the last article' => '最後の記事の全ての受信者',
+        'All users who are mentioned in a ticket' => '',
         'Invisible to customer' => '',
         'Visible to customer' => '',
 
@@ -4307,6 +4312,10 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Reminder Reached' => '保留期限切れ',
         'My Locked Tickets' => '担当のロック済チケット',
 
+        # Perl Module: Kernel/Modules/AgentTicketMentionView.pm
+        'New mention' => '',
+        'My Mentions' => '',
+
         # Perl Module: Kernel/Modules/AgentTicketMerge.pm
         'Can\'t merge ticket with itself!' => 'チケットは自分自身に対して結合することはできません！',
 
@@ -4577,6 +4586,9 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             'innodb_log_file_sizeの設定を少なくとも%s MB以上にしてください(現在: %s MB, 推奨: %s MB)。詳細は%sを参照して下さい。',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             '',
+
+        # Perl Module: Kernel/Modules/Mentions.pm
+        '%s users will be mentioned' => '',
 
         # Perl Module: Kernel/Modules/PublicCalendar.pm
         'No %s!' => '%sがありません！',
@@ -4907,6 +4919,11 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Locked Tickets Reminder Reached' => 'ロック済チケット時間切れ',
         'Locked Tickets Total' => 'ロック済チケット合計',
 
+        # Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
+        'Total mentions' => '',
+        'Total new mentions' => '',
+        'New mentions' => '',
+
         # Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
         'Owned Tickets New' => '',
         'Owned Tickets Reminder Reached' => '',
@@ -4990,6 +5007,9 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'This field is required or' => 'この領域は必須です。または、',
         'The field content is too long!' => 'その領域の内容が長すぎます。',
         'Maximum size is %s characters.' => '最大サイズは%s文字です。',
+
+        # Perl Module: Kernel/System/Mention.pm
+        'LastMention' => '',
 
         # Perl Module: Kernel/System/NotificationEvent.pm
         'Couldn\'t read Notification configuration file. Please make sure the file is valid.' =>
@@ -7885,6 +7905,18 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         'Rich text editor configuration for autocompletion module.' => '',
         'Rich text editor configuration for autocompletion module to support templates.' =>
             '',
+        'Defines which notifications about mentions should be sent.' => '',
+        'Defines if the toolbar mention icon should count mentions.' => '',
+        'Frontend registration of triggers for mention plugin of CKEditor.' =>
+            '',
+        'Frontend registration of input/output templates for mention plugin of CKEditor.' =>
+            '',
+        'Event handler for mentions.' => '',
+        'Parameters for the dashboard backend of the last mention widget.' =>
+            '',
+        'Agent interface notification module to show the number of mentions.' =>
+            '',
+        'Module to grant access to the mentioned agents of a ticket.' => '',
 
         # XML Definition: scripts/database/otrs-initial_insert.xml
         'invalid-temporarily' => '無効-暫定',
@@ -7997,6 +8029,7 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         'You will receive a notification each time a reminder time is reached for one of your appointments.' =>
             '',
         'Ticket email delivery failure notification' => 'チケット送信失敗通知',
+        'Mention notification' => '',
 
         # JS File: var/httpd/htdocs/js/Core.AJAX.js
         'Error during AJAX communication. Status: %s, Error: %s' => '',
@@ -8786,6 +8819,7 @@ Thanks for your help!
         'Korean' => '',
         'Language' => '言語',
         'Large' => '大',
+        'Last Mentions' => '',
         'Last Screen Overview' => '',
         'Last customer subject' => '',
         'Last view - limit' => '',
@@ -8842,6 +8876,9 @@ Thanks for your help!
         'Mark this ticket as junk!' => 'このチケットをジャンクとしてマークします!',
         'Mattermost Username' => '',
         'Medium' => '中',
+        'Mentioned in article' => '',
+        'Mentioned in ticket' => '',
+        'Mentions.' => '',
         'Merge this ticket and all articles into another ticket' => '別のチケットの全ての記事とこのチケットを結合',
         'Merged Ticket (%s/%s) to (%s/%s).' => 'チケットを（%s/%s）から（%s/%s）にマージしました。',
         'Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>.' => 'チケット番号 <OTRS_TICKET> は、チケット番号 <OTRS_MERGE_TO_TICKET> にマージされました。',
@@ -9000,6 +9037,7 @@ Thanks for your help!
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             'チケット一覧のプレビューを表示します(CustomerInfo => 1 - 顧客情報も表示しますCustomerInfoMaxSize max ? 顧客情報の文字サイズです)。',
         'Shows information on how to start OTRS Daemon' => 'OTRSデーモンの起動手順を紹介します。',
+        'Shows last mention of tickets.' => '',
         'Signature data.' => '',
         'Signatures' => '署名',
         'Simple' => 'シンプル',

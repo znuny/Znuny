@@ -3144,8 +3144,8 @@ CREATE TABLE smime_keys (
     file_name VARCHAR (255) NOT NULL,
     email_address VARCHAR (255) NULL,
     expiration_date timestamp(0) NULL,
-    fingerprint VARCHAR (59) NOT NULL,
-    subject VARCHAR (255) NOT NULL,
+    fingerprint VARCHAR (59) NULL,
+    subject VARCHAR (255) NULL,
     create_time timestamp(0) NULL,
     change_time timestamp(0) NULL,
     create_by INTEGER NULL,
@@ -3221,3 +3221,47 @@ CREATE TABLE oauth2_token (
     PRIMARY KEY(id),
     CONSTRAINT oauth2_token_config_id UNIQUE (token_config_id)
 );
+-- ----------------------------------------------------------
+--  create table mention
+-- ----------------------------------------------------------
+CREATE TABLE mention (
+    id serial NOT NULL,
+    user_id INTEGER NULL,
+    ticket_id INTEGER NULL,
+    article_id INTEGER NULL,
+    create_time timestamp(0) NULL,
+    PRIMARY KEY(id)
+);
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_indexes
+    WHERE LOWER(indexname) = LOWER('mention_article_id')
+    ) THEN
+    CREATE INDEX mention_article_id ON mention (article_id);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_indexes
+    WHERE LOWER(indexname) = LOWER('mention_ticket_id')
+    ) THEN
+    CREATE INDEX mention_ticket_id ON mention (ticket_id);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_indexes
+    WHERE LOWER(indexname) = LOWER('mention_user_id')
+    ) THEN
+    CREATE INDEX mention_user_id ON mention (user_id);
+END IF;
+END$$;
+;

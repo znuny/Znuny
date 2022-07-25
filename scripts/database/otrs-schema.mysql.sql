@@ -1853,8 +1853,8 @@ CREATE TABLE smime_keys (
     file_name VARCHAR (255) NOT NULL,
     email_address VARCHAR (255) NULL,
     expiration_date DATETIME NULL,
-    fingerprint VARCHAR (59) NOT NULL,
-    subject VARCHAR (255) NOT NULL,
+    fingerprint VARCHAR (59) NULL,
+    subject VARCHAR (255) NULL,
     create_time DATETIME NULL,
     change_time DATETIME NULL,
     create_by INTEGER NULL,
@@ -1899,4 +1899,18 @@ CREATE TABLE oauth2_token (
     change_by INTEGER NOT NULL,
     PRIMARY KEY(id),
     UNIQUE INDEX oauth2_token_config_id (token_config_id)
+);
+# ----------------------------------------------------------
+#  create table mention
+# ----------------------------------------------------------
+CREATE TABLE mention (
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    user_id INTEGER NULL,
+    ticket_id INTEGER NULL,
+    article_id INTEGER NULL,
+    create_time DATETIME NULL,
+    PRIMARY KEY(id),
+    INDEX mention_article_id (article_id),
+    INDEX mention_ticket_id (ticket_id),
+    INDEX mention_user_id (user_id)
 );

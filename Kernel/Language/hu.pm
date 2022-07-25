@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.940337649565645;
+    $Self->{Completeness}        = 0.93665306122449;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2797,6 +2797,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
         'Remove active filters for this screen.' => 'Aktív szűrők eltávolítása ennél a képernyőnél.',
+        'Remove mention' => '',
         'Tickets per page' => 'Jegyek oldalanként',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
@@ -2913,6 +2914,9 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
         'Linked Objects' => 'Kapcsolt objektumok',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/MentionsTable.tt
+        'Mentions' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Archiválás',
@@ -3860,6 +3864,7 @@ sub Data {
         'Customer user of the ticket' => 'A jegy ügyfél-felhasználója',
         'All recipients of the first article' => 'Az első bejegyzés összes címzettje',
         'All recipients of the last article' => 'Az utolsó bejegyzés összes címzettje',
+        'All users who are mentioned in a ticket' => '',
         'Invisible to customer' => 'Láthatatlan az ügyfélnek',
         'Visible to customer' => 'Látható az ügyfélnek',
 
@@ -4306,6 +4311,10 @@ sub Data {
         'Reminder Reached' => 'Emlékeztető elérve',
         'My Locked Tickets' => 'Saját zárolt jegyek',
 
+        # Perl Module: Kernel/Modules/AgentTicketMentionView.pm
+        'New mention' => '',
+        'My Mentions' => '',
+
         # Perl Module: Kernel/Modules/AgentTicketMerge.pm
         'Can\'t merge ticket with itself!' => 'Nem lehet egyesíteni a jegyet saját magával!',
 
@@ -4576,6 +4585,9 @@ sub Data {
             'Hiba: Állítsa be az adatbázison az innodb_log_file_size értékét legalább %s MB méretűre (jelenleg: %s MB, ajánlott: %s MB). További információkért nézze meg a következőt: %s.',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             'Hibás adatbázis egyeztetés (a %s értéke %s, de utf8 értékűnek kell lennie).',
+
+        # Perl Module: Kernel/Modules/Mentions.pm
+        '%s users will be mentioned' => '',
 
         # Perl Module: Kernel/Modules/PublicCalendar.pm
         'No %s!' => 'Nincs %s!',
@@ -4906,6 +4918,11 @@ sub Data {
         'Locked Tickets Reminder Reached' => 'Zárolt jegyek (emlékeztető elérve)',
         'Locked Tickets Total' => 'Zárolt jegyek (összes)',
 
+        # Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
+        'Total mentions' => '',
+        'Total new mentions' => '',
+        'New mentions' => '',
+
         # Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
         'Owned Tickets New' => '',
         'Owned Tickets Reminder Reached' => '',
@@ -4989,6 +5006,9 @@ sub Data {
         'This field is required or' => 'Ez a mező kötelező vagy',
         'The field content is too long!' => 'A mező tartalma túl hosszú!',
         'Maximum size is %s characters.' => 'A legnagyobb méret %s karakter.',
+
+        # Perl Module: Kernel/System/Mention.pm
+        'LastMention' => '',
 
         # Perl Module: Kernel/System/NotificationEvent.pm
         'Couldn\'t read Notification configuration file. Please make sure the file is valid.' =>
@@ -7875,6 +7895,18 @@ sub Data {
         'Rich text editor configuration for autocompletion module.' => '',
         'Rich text editor configuration for autocompletion module to support templates.' =>
             '',
+        'Defines which notifications about mentions should be sent.' => '',
+        'Defines if the toolbar mention icon should count mentions.' => '',
+        'Frontend registration of triggers for mention plugin of CKEditor.' =>
+            '',
+        'Frontend registration of input/output templates for mention plugin of CKEditor.' =>
+            '',
+        'Event handler for mentions.' => '',
+        'Parameters for the dashboard backend of the last mention widget.' =>
+            '',
+        'Agent interface notification module to show the number of mentions.' =>
+            '',
+        'Module to grant access to the mentioned agents of a ticket.' => '',
 
         # XML Definition: scripts/database/otrs-initial_insert.xml
         'invalid-temporarily' => 'átmenetileg érvénytelen',
@@ -7987,6 +8019,7 @@ sub Data {
         'You will receive a notification each time a reminder time is reached for one of your appointments.' =>
             'Egy értesítést fog kapni minden alkalommal, amikor egy emlékeztető idő elérésre kerül az időpontjai egyikénél.',
         'Ticket email delivery failure notification' => 'Jegy e-mail kézbesítési hiba értesítése',
+        'Mention notification' => '',
 
         # JS File: var/httpd/htdocs/js/Core.AJAX.js
         'Error during AJAX communication. Status: %s, Error: %s' => 'Hiba történt az AJAX kommunikáció közben. Állapot: %s, hiba: %s',
@@ -8778,6 +8811,7 @@ Az Ön segélyszolgálat csapata
         'Korean' => 'Koreai',
         'Language' => 'Nyelv',
         'Large' => 'Nagy',
+        'Last Mentions' => '',
         'Last Screen Overview' => 'Utolsó képernyő áttekintője',
         'Last customer subject' => 'Legutóbbi ügyféltárgy',
         'Last view - limit' => '',
@@ -8834,6 +8868,9 @@ Az Ön segélyszolgálat csapata
         'Mark this ticket as junk!' => 'Jegy megjelölése szemétként!',
         'Mattermost Username' => '',
         'Medium' => 'Közepes',
+        'Mentioned in article' => '',
+        'Mentioned in ticket' => '',
+        'Mentions.' => '',
         'Merge this ticket and all articles into another ticket' => 'A jegy és minden bejegyzés egyesítése egy másik jegybe',
         'Merged Ticket (%s/%s) to (%s/%s).' => 'Jegy (%s/%s) egyesítve ezzel: (%s/%s).',
         'Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>.' => 'A(z) <OTRS_TICKET> jegy egyesítve a következővel: <OTRS_MERGE_TO_TICKET>.',
@@ -8991,6 +9028,7 @@ Az Ön segélyszolgálat csapata
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             'Megjeleníti a jegyáttekintő előnézetét (CustomerInfo => 1 – az ügyfél-információt is megjeleníti, a CustomerInfoMaxSize az ügyfél-információ legnagyobb mérete karakterben).',
         'Shows information on how to start OTRS Daemon' => 'Információkat jelenít meg arról, hogy hogyan indítsa az OTRS démont',
+        'Shows last mention of tickets.' => '',
         'Signature data.' => 'Aláírási adatok.',
         'Signatures' => 'Aláírások',
         'Simple' => 'Egyszerű',

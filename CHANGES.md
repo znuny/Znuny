@@ -1,5 +1,6 @@
 # 6.4.1 2022-??-??
  - 2022-07-21 Fixed creation of tickets for recurring appointments.
+ - 2022-07-20 Other users now can be referenced/mentioned in rich text editor and will be notified about it.
  - 2022-07-05 Attachment filenames in ticket zoom will now be truncated if they are too long to be displayed correctly.
  - 2022-06-23 Fixed issue with high CPU load on parsing e-mails in PostMaster filter DetectAttachment.
  - 2022-06-22 Fixed OAuth2 authentication when using POP3 with Microsoft Office 365 or Outlook. [#259](https://github.com/znuny/Znuny/issues/259)

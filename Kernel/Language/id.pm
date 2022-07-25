@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.635469595148336;
+    $Self->{Completeness}        = 0.632979591836735;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2793,6 +2793,7 @@ bin/otrs.Daemon.pl status\').',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
         'Remove active filters for this screen.' => 'Membuang filter yang aktif untuk skrin ini',
+        'Remove mention' => '',
         'Tickets per page' => 'Tiket per halaman',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
@@ -2909,6 +2910,9 @@ bin/otrs.Daemon.pl status\').',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
         'Linked Objects' => 'Menghubungkan obyek',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/MentionsTable.tt
+        'Mentions' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Arsip',
@@ -3856,6 +3860,7 @@ bin/otrs.Daemon.pl status\').',
         'Customer user of the ticket' => '',
         'All recipients of the first article' => '',
         'All recipients of the last article' => '',
+        'All users who are mentioned in a ticket' => '',
         'Invisible to customer' => '',
         'Visible to customer' => '',
 
@@ -4302,6 +4307,10 @@ bin/otrs.Daemon.pl status\').',
         'Reminder Reached' => 'Pengingat tercapai',
         'My Locked Tickets' => 'Tiket terkunci saya',
 
+        # Perl Module: Kernel/Modules/AgentTicketMentionView.pm
+        'New mention' => '',
+        'My Mentions' => '',
+
         # Perl Module: Kernel/Modules/AgentTicketMerge.pm
         'Can\'t merge ticket with itself!' => 'Tidak dapat menggabungkan tiket dengan dirinya sendiri!',
 
@@ -4572,6 +4581,9 @@ bin/otrs.Daemon.pl status\').',
             'Kesalahan: Silakan menetapkan nilai untuk innodb_log_file_size pada database Anda untuk setidaknya%s MB (saat ini: %s MB, direkomendasikan: %s MB). Untuk informasi lebih lanjut, silakan lihat di %s.',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             '',
+
+        # Perl Module: Kernel/Modules/Mentions.pm
+        '%s users will be mentioned' => '',
 
         # Perl Module: Kernel/Modules/PublicCalendar.pm
         'No %s!' => '',
@@ -4902,6 +4914,11 @@ bin/otrs.Daemon.pl status\').',
         'Locked Tickets Reminder Reached' => 'Pengingat Tiket Terkunci Tercapai',
         'Locked Tickets Total' => 'Total Tiket Terkunci',
 
+        # Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
+        'Total mentions' => '',
+        'Total new mentions' => '',
+        'New mentions' => '',
+
         # Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
         'Owned Tickets New' => '',
         'Owned Tickets Reminder Reached' => '',
@@ -4985,6 +5002,9 @@ bin/otrs.Daemon.pl status\').',
         'This field is required or' => 'Bidang ini dibutuhkan untuk',
         'The field content is too long!' => 'Konten dari bidang ini terlalu panjang!',
         'Maximum size is %s characters.' => 'Ukuran maksimum adalah %s karakter',
+
+        # Perl Module: Kernel/System/Mention.pm
+        'LastMention' => '',
 
         # Perl Module: Kernel/System/NotificationEvent.pm
         'Couldn\'t read Notification configuration file. Please make sure the file is valid.' =>
@@ -7872,6 +7892,18 @@ bin/otrs.Daemon.pl status\').',
         'Rich text editor configuration for autocompletion module.' => '',
         'Rich text editor configuration for autocompletion module to support templates.' =>
             '',
+        'Defines which notifications about mentions should be sent.' => '',
+        'Defines if the toolbar mention icon should count mentions.' => '',
+        'Frontend registration of triggers for mention plugin of CKEditor.' =>
+            '',
+        'Frontend registration of input/output templates for mention plugin of CKEditor.' =>
+            '',
+        'Event handler for mentions.' => '',
+        'Parameters for the dashboard backend of the last mention widget.' =>
+            '',
+        'Agent interface notification module to show the number of mentions.' =>
+            '',
+        'Module to grant access to the mentioned agents of a ticket.' => '',
 
         # XML Definition: scripts/database/otrs-initial_insert.xml
         'invalid-temporarily' => 'tidak valid sementara',
@@ -7984,6 +8016,7 @@ bin/otrs.Daemon.pl status\').',
         'You will receive a notification each time a reminder time is reached for one of your appointments.' =>
             '',
         'Ticket email delivery failure notification' => '',
+        'Mention notification' => '',
 
         # JS File: var/httpd/htdocs/js/Core.AJAX.js
         'Error during AJAX communication. Status: %s, Error: %s' => '',
@@ -8775,6 +8808,7 @@ Helpdesk Team Anda
         'Korean' => '',
         'Language' => 'Bahasa',
         'Large' => 'Besar',
+        'Last Mentions' => '',
         'Last Screen Overview' => '',
         'Last customer subject' => 'subjek pelanggan terakhir',
         'Last view - limit' => '',
@@ -8831,6 +8865,9 @@ Helpdesk Team Anda
         'Mark this ticket as junk!' => 'Tandai tiket ini sebagai sampah!',
         'Mattermost Username' => '',
         'Medium' => 'Medium',
+        'Mentioned in article' => '',
+        'Mentioned in ticket' => '',
+        'Mentions.' => '',
         'Merge this ticket and all articles into another ticket' => '',
         'Merged Ticket (%s/%s) to (%s/%s).' => '',
         'Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>.' => 'igabung Tiket <OTRS TIKET> ke <OTRS MERGE_TO_TICKET>.',
@@ -8988,6 +9025,7 @@ Helpdesk Team Anda
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             'Menunjukkan preview dari gambaran tiket (CustomerInfo => 1 - menunjukkan juga pelanggan-Info, CustomerInfo Max Ukuran max ukuran dalam karakter Pelanggan-Info.).',
         'Shows information on how to start OTRS Daemon' => 'Menunjukkan informasi tentang cara untuk memulai OTRS Daemon',
+        'Shows last mention of tickets.' => '',
         'Signature data.' => '',
         'Signatures' => 'Tanda tangan',
         'Simple' => 'Sederhana',

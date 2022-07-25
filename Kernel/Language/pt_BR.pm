@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.883461727585642;
+    $Self->{Completeness}        = 0.88;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2796,6 +2796,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
         'Remove active filters for this screen.' => 'Remover filtros ativos para esta tela.',
+        'Remove mention' => '',
         'Tickets per page' => 'Chamados por página',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
@@ -2912,6 +2913,9 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
         'Linked Objects' => 'Objetos Associados',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/MentionsTable.tt
+        'Mentions' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Arquivar',
@@ -3859,6 +3863,7 @@ sub Data {
         'Customer user of the ticket' => 'Usuário cliente do ticket',
         'All recipients of the first article' => 'Todos os destinatários do primeiro artigo',
         'All recipients of the last article' => 'Todos os destinatários do último artigo',
+        'All users who are mentioned in a ticket' => '',
         'Invisible to customer' => 'Não visível para o cliente',
         'Visible to customer' => 'Visível para o cliente',
 
@@ -4305,6 +4310,10 @@ sub Data {
         'Reminder Reached' => 'Lembrete Expirado',
         'My Locked Tickets' => 'Meus Chamados Bloqueados',
 
+        # Perl Module: Kernel/Modules/AgentTicketMentionView.pm
+        'New mention' => '',
+        'My Mentions' => '',
+
         # Perl Module: Kernel/Modules/AgentTicketMerge.pm
         'Can\'t merge ticket with itself!' => 'Não é possível mesclar um Ticket com ele mesmo.',
 
@@ -4575,6 +4584,9 @@ sub Data {
             'Error: Defina o valor para innodb_log_file_size no seu banco de dados para, ao menos %s MB (atualmente %sMB, recomendado: %sMB). Para mais informações verifique em %s.',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             '',
+
+        # Perl Module: Kernel/Modules/Mentions.pm
+        '%s users will be mentioned' => '',
 
         # Perl Module: Kernel/Modules/PublicCalendar.pm
         'No %s!' => 'Nenhum %s!',
@@ -4905,6 +4917,11 @@ sub Data {
         'Locked Tickets Reminder Reached' => 'Lembrete de Chamados Bloqueados Atingido',
         'Locked Tickets Total' => 'Total de Chamados Bloqueados',
 
+        # Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
+        'Total mentions' => '',
+        'Total new mentions' => '',
+        'New mentions' => '',
+
         # Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
         'Owned Tickets New' => '',
         'Owned Tickets Reminder Reached' => '',
@@ -4988,6 +5005,9 @@ sub Data {
         'This field is required or' => 'Este campo é requerido ou',
         'The field content is too long!' => 'O conteúdo deste campo é muito longo!',
         'Maximum size is %s characters.' => 'O tamanho máximo é %s caracteres.',
+
+        # Perl Module: Kernel/System/Mention.pm
+        'LastMention' => '',
 
         # Perl Module: Kernel/System/NotificationEvent.pm
         'Couldn\'t read Notification configuration file. Please make sure the file is valid.' =>
@@ -7874,6 +7894,18 @@ sub Data {
         'Rich text editor configuration for autocompletion module.' => '',
         'Rich text editor configuration for autocompletion module to support templates.' =>
             '',
+        'Defines which notifications about mentions should be sent.' => '',
+        'Defines if the toolbar mention icon should count mentions.' => '',
+        'Frontend registration of triggers for mention plugin of CKEditor.' =>
+            '',
+        'Frontend registration of input/output templates for mention plugin of CKEditor.' =>
+            '',
+        'Event handler for mentions.' => '',
+        'Parameters for the dashboard backend of the last mention widget.' =>
+            '',
+        'Agent interface notification module to show the number of mentions.' =>
+            '',
+        'Module to grant access to the mentioned agents of a ticket.' => '',
 
         # XML Definition: scripts/database/otrs-initial_insert.xml
         'invalid-temporarily' => 'inválido-temporariamente',
@@ -7986,6 +8018,7 @@ sub Data {
         'You will receive a notification each time a reminder time is reached for one of your appointments.' =>
             'Você receberá uma notificação toda vez que o tempo de lembrete para um de seus compromissos for atingido .',
         'Ticket email delivery failure notification' => 'Notificação de falha na entrega de ticket de e-mail',
+        'Mention notification' => '',
 
         # JS File: var/httpd/htdocs/js/Core.AJAX.js
         'Error during AJAX communication. Status: %s, Error: %s' => 'Error durante comunicação AJAX. Status: %s, Erro: %s',
@@ -8777,6 +8810,7 @@ Obrigado pela ajuda!
         'Korean' => 'Coreano',
         'Language' => 'Idioma',
         'Large' => 'Grande',
+        'Last Mentions' => '',
         'Last Screen Overview' => 'Visão Geral da Última Tela',
         'Last customer subject' => 'Último assunto de cliente',
         'Last view - limit' => '',
@@ -8833,6 +8867,9 @@ Obrigado pela ajuda!
         'Mark this ticket as junk!' => 'Marcar este chamado como lixo!',
         'Mattermost Username' => '',
         'Medium' => 'Médio',
+        'Mentioned in article' => '',
+        'Mentioned in ticket' => '',
+        'Mentions.' => '',
         'Merge this ticket and all articles into another ticket' => 'Agrupar esse ticket e todos artigos com um outro ticket',
         'Merged Ticket (%s/%s) to (%s/%s).' => 'Ticket Agrupado (%s/%s) com (%s/%s).',
         'Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>.' => 'Chamado <OTRS_TICKET> agrupado com <OTRS_MERGE_TO_TICKET>.',
@@ -8990,6 +9027,7 @@ Obrigado pela ajuda!
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             'Mostra uma visão prévia da visão geral de ticket (CustomerInfo => 1 - também mostra Informação de Cliente, CustomerInfoMaxSize tamanho máximo, em caracteres, da Informação de Cliente).',
         'Shows information on how to start OTRS Daemon' => 'Mostra informações de como inciar o Daemon OTRS',
+        'Shows last mention of tickets.' => '',
         'Signature data.' => '',
         'Signatures' => 'Assinaturas',
         'Simple' => 'Simples',

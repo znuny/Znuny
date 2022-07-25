@@ -5792,8 +5792,8 @@ CREATE TABLE smime_keys (
     file_name VARCHAR2 (255) NOT NULL,
     email_address VARCHAR2 (255) NULL,
     expiration_date DATE NULL,
-    fingerprint VARCHAR2 (59) NOT NULL,
-    subject VARCHAR (255) NOT NULL,
+    fingerprint VARCHAR2 (59) NULL,
+    subject VARCHAR2 (255) NULL,
     create_time DATE NULL,
     change_time DATE NULL,
     create_by NUMBER (12, 0) NULL,
@@ -5967,6 +5967,78 @@ BEGIN
         INTO :new.id
         FROM DUAL;
     END IF;
+END;
+/
+--
+;
+-- ----------------------------------------------------------
+--  create table mention
+-- ----------------------------------------------------------
+CREATE TABLE mention (
+    id NUMBER (12, 0) NOT NULL,
+    user_id NUMBER (12, 0) NULL,
+    ticket_id NUMBER (12, 0) NULL,
+    article_id NUMBER (12, 0) NULL,
+    create_time DATE NULL
+);
+ALTER TABLE mention ADD CONSTRAINT PK_mention PRIMARY KEY (id);
+BEGIN
+    EXECUTE IMMEDIATE 'DROP SEQUENCE SE_mention';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE SEQUENCE SE_mention
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+CACHE 20
+ORDER
+;
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TRIGGER SE_mention_t';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE OR REPLACE TRIGGER SE_mention_t
+BEFORE INSERT ON mention
+FOR EACH ROW
+BEGIN
+    IF :new.id IS NULL THEN
+        SELECT SE_mention.nextval
+        INTO :new.id
+        FROM DUAL;
+    END IF;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX mention_article_id ON mention (article_id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX mention_ticket_id ON mention (ticket_id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX mention_user_id ON mention (user_id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
 END;
 /
 --

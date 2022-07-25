@@ -822,6 +822,7 @@ sub _Edit {
             Customer                  => Translatable('Customer user of the ticket'),
             AllRecipientsFirstArticle => Translatable('All recipients of the first article'),
             AllRecipientsLastArticle  => Translatable('All recipients of the last article'),
+            AllMentionedUsers         => Translatable('All users who are mentioned in a ticket'),
         },
         Name       => 'Recipients',
         Multiple   => 1,
@@ -1497,6 +1498,7 @@ sub _Overview {
             my %Data = $NotificationEventObject->NotificationGet(
                 ID => $NotificationID,
             );
+
             $LayoutObject->Block(
                 Name => 'OverviewResultRow',
                 Data => {

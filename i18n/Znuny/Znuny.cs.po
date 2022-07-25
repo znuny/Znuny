@@ -25128,3 +25128,99 @@ msgstr ""
 msgid "Snippet"
 msgstr ""
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
+msgid "Remove mention"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/MentionsTable.tt
+msgid "Mentions"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminNotificationEvent.pm
+msgid "All users who are mentioned in a ticket"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AgentTicketMentionView.pm
+msgid "New mention"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AgentTicketMentionView.pm
+msgid "My Mentions"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/Mentions.pm
+msgid "%s users will be mentioned"
+msgstr ""
+
+#. Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
+msgid "Total mentions"
+msgstr ""
+
+#. Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
+msgid "Total new mentions"
+msgstr ""
+
+#. Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
+msgid "New mentions"
+msgstr ""
+
+#. Perl Module: Kernel/System/Mention.pm
+msgid "LastMention"
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines which notifications about mentions should be sent."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines if the toolbar mention icon should count mentions."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Frontend registration of triggers for mention plugin of CKEditor."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Frontend registration of input/output templates for mention plugin of CKEditor."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Event handler for mentions."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Parameters for the dashboard backend of the last mention widget."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Agent interface notification module to show the number of mentions."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Module to grant access to the mentioned agents of a ticket."
+msgstr ""
+
+#. XML Definition: scripts/database/otrs-initial_insert.xml
+msgid "Mention notification"
+msgstr ""
+
+#. SysConfig
+msgid "Last Mentions"
+msgstr ""
+
+#. SysConfig
+msgid "Mentioned in article"
+msgstr ""
+
+#. SysConfig
+msgid "Mentioned in ticket"
+msgstr ""
+
+#. SysConfig
+msgid "Mentions."
+msgstr ""
+
+#. SysConfig
+msgid "Shows last mention of tickets."
+msgstr ""
+
