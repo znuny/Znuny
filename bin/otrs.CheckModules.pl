@@ -559,6 +559,17 @@ my @NeededModules = (
         },
     },
     {
+        Module    => 'Net::LDAP::Constant',
+        Required  => 0,
+        Comment   => 'Required for directory authentication.',
+        InstTypes => {
+            aptget => 'libnet-ldap-perl',
+            emerge => 'dev-perl/perl-ldap',
+            zypper => 'perl-ldap',
+            ports  => 'net/p5-perl-ldap',
+        },
+    },
+    {
         Module              => 'Net::SMTP',
         Required            => 0,
         Comment             => 'Simple Mail Transfer Protocol Client.',
