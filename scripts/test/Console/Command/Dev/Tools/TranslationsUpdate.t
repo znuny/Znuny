@@ -51,7 +51,7 @@ my @Tests = (
         Parameter => [ '--language=de', '--generate-po', '--module-directory' ],
         ExitCode  => 1,
         STDOUT    => undef,
-        STDERR    => "Error: found unknown arguments on the command line (\'--module-directory\')",
+        STDERR    => "Error: the following options have an unexpected or missing value: --module-directory.",
     },
     {
         Name      => "Run for language de and module-directory with generate-po.",

@@ -37,14 +37,14 @@ sub Configure {
         Description => "Which language to use, omit to update all languages.",
         Required    => 0,
         HasValue    => 1,
-        ValueRegex  => qr/.*/smx,
+        ValueRegex  => qr/.+/,
     );
     $Self->AddOption(
         Name        => 'module-directory',
         Description => "Translate the Znuny module in the given directory.",
         Required    => 0,
         HasValue    => 1,
-        ValueRegex  => qr/.*/smx,
+        ValueRegex  => qr/.+/,
     );
     $Self->AddOption(
         Name => 'generate-po',
