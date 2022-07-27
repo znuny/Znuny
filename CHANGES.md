@@ -1,4 +1,4 @@
-# 6.4.1 2022-??-??
+# 6.4.1 2022-07-27
  - 2022-07-21 Fixed creation of tickets for recurring appointments.
  - 2022-07-20 Other users now can be referenced/mentioned in rich text editor and will be notified about it.
  - 2022-07-05 Attachment filenames in ticket zoom will now be truncated if they are too long to be displayed correctly.
@@ -189,7 +189,7 @@
  - 2021-06-15 Use ticket title as the default appointment title (#90). Thanks to Renée Bäcker (@reneeb). [#90](https://github.com/znuny/Znuny/pull/90)
  - 2021-06-15 Column list validation before saving agent preferences (#84). Thanks to Paweł Bogusławski (@pboguslawski). [#84](https://github.com/znuny/Znuny/pull/84)
 
-# 6.0.45 2022-??-??
+# 6.0.45 2022-07-27
  - 2022-07-05 Attachment filenames in ticket zoom will now be truncated if they are too long to be displayed correctly.
  - 2022-06-23 Fixed issue with high CPU load on parsing e-mails in PostMaster filter DetectAttachment.
 
