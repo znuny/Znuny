@@ -102,10 +102,14 @@ sub GetData {
 
     return if !$QueueID;
 
+    # Only use template type "Snippet".
     my %StandardTemplates = $QueueObject->QueueStandardTemplateMemberList(
-        QueueID => $QueueID,
+        QueueID       => $QueueID,
+        TemplateTypes => 1,
     );
     return if !%StandardTemplates;
+    return if !IsHashRefWithData( $StandardTemplates{Snippet} );
+    %StandardTemplates = %{ $StandardTemplates{Snippet} };
 
     # Build autocompletion information for templates.
     my @Data;
