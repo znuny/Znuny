@@ -1237,7 +1237,7 @@ sub Run {
                     TICKETIDPARTNER:
                     for my $TicketIDPartner (@TicketIDs) {
 
-                        next TICKETIDPARTNER if $TicketID ne $TicketIDPartner;
+                        next TICKETIDPARTNER if $TicketID == $TicketIDPartner;
 
                         $LinkObject->LinkAdd(
                             SourceObject => 'Ticket',
