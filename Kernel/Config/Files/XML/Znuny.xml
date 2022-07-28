@@ -2301,6 +2301,27 @@
             </Item>
         </Value>
     </Setting>
+    <Setting Name="CustomerFrontend::Module###AJAXRichTextAutocompletion" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the customer interface.</Description>
+        <Navigation>Frontend::Customer::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Autompletion for rich text editor.</Item>
+                    <Item Key="Title">Autompletion for rich text editor</Item>
+                    <Item Key="NavBarName">Autompletion for rich text editor</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
     <Setting Name="Frontend::RichText::Autocompletion::General" Required="0" Valid="1">
         <Description Translatable="1">General settings for autocompletion in rich text editor.</Description>
         <Navigation>Core</Navigation>
