@@ -1,3 +1,6 @@
+# 6.4.2 2022-07-28
+ - 2022-07-28 Package Znuny-SMIME will now be uninstalled on Znuny upgrade.
+
 # 6.4.1 2022-07-27
  - 2022-07-21 Fixed creation of tickets for recurring appointments.
  - 2022-07-20 Other users now can be referenced/mentioned in rich text editor and will be notified about it.
