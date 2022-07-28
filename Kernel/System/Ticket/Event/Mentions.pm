@@ -46,20 +46,27 @@ sub Run {
     );
     return {} if !IsStringWithData($Body);
 
-    my @Recipients = ( $Body =~ m{<a class="Mention" href=".*" target=".*">$Triggers->{User}(.*?)<\/a>}sg );
+    my @Recipients = ( $Body =~ m{<a class="Mention" href=".*?" target=".*?">$Triggers->{User}(.*?)<\/a>}sg );
     my %Recipients = map { $_ => 1 } @Recipients;
 
-    my @RecipientGroups = ( $Body =~ m{<a class="GroupMention" href=".*" target=".*">$Triggers->{Group}(.*?)<\/a>}sg );
-
-    my $GroupUsers = $Self->_GetUserFromGroup(
-        Groups => \@RecipientGroups
-    );
+    my @RecipientGroups
+        = ( $Body =~ m{<a class="GroupMention" href=".*?" target=".*?">$Triggers->{Group}(.*?)<\/a>}sg );
+    my $GroupUsers = {};
+    if (@RecipientGroups) {
+        $GroupUsers = $Self->_GetUserFromGroup(
+            Groups => \@RecipientGroups,
+        ) // {};
+    }
 
     %Recipients = ( %Recipients, %{$GroupUsers} );
+    return {} if !%Recipients;
 
     $Self->_GetRecipientAddresses(
-        Recipients => \%Recipients
+        Recipients => \%Recipients,
     );
+
+    # If addresses could not be parsed/verified.
+    return {} if !%Recipients;
 
     $MentionObject->SendNotification(
         Recipients => \%Recipients,
