@@ -68,12 +68,11 @@ sub Run {
     }
 
     my $ListEncoded = $JSONObject->Encode(
-        Data => $Data
+        Data => $Data,
     );
 
     return $LayoutObject->Attachment(
-        ContentType => 'text/html',
-        Charset     => $LayoutObject->{UserCharset},
+        ContentType => 'application/json; charset=' . $LayoutObject->{Charset},
         Content     => $ListEncoded,
         Type        => 'inline',
         NoCache     => 1,

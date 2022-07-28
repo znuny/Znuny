@@ -70,8 +70,7 @@ sub Run {
     my $JSONEncodedResponseData = $JSONObject->Encode( Data => $ResponseData );
 
     return $LayoutObject->Attachment(
-        ContentType => 'text/html',
-        Charset     => $LayoutObject->{UserCharset},
+        ContentType => 'application/json; charset=' . $LayoutObject->{Charset},
         Content     => $JSONEncodedResponseData,
         Type        => 'inline',
         NoCache     => 1,

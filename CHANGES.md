@@ -1,4 +1,5 @@
 # 6.4.2 2022-07-28
+ - 2022-07-28 Fixed content type of output of AJAX backend modules Kernel/Modules/AJAXRichTextAutocompletion.pm and Kernel/Modules/Mentions.pm.
  - 2022-07-28 Package Znuny-SMIME will now be uninstalled on Znuny upgrade.
 
 # 6.4.1 2022-07-27
