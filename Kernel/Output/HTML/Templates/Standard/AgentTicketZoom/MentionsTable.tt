@@ -17,7 +17,7 @@
 [% RenderBlockStart("User") %]
             <li style="word-wrap: break-word;">-[% Data.UserFullname %]
                 [% IF Data.Removable %]
-                    <a href="#" id=[% Data.UserID %] class="MentionRow"><i class="fa fa-trash"></i></a>
+                    <a href="#" data-user-id=[% Data.UserID %] class="MentionRow"><i class="fa fa-trash"></i></a>
                 [% END %]
             </li>
 [% RenderBlockEnd("User") %]
