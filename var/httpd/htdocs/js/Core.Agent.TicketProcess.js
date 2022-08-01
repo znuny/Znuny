@@ -109,6 +109,7 @@ Core.Agent.TicketProcess = (function (TargetNS) {
                         });
                         $ElementToUpdate.fadeIn();
                         Core.UI.InputFields.Activate($ElementToUpdate);
+                        Znuny.Form.Input.Init();
                         try {
                             /*eslint-disable no-eval */
                             eval(JavaScriptString);
