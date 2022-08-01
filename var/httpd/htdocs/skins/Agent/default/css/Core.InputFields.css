@@ -1,6 +1,6 @@
 /*
 Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 
 This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (GPL). If you
@@ -20,13 +20,16 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 div.InputField_Container {
     position: static;
-    display: inline-block;
+    width: 100%;
+    /*padding-left: var(--padding-sm);*/
+    max-width: var(--main-filed-size);
 }
 
 div.InputField_InputContainer {
     position: relative;
-    display: inline-block;
+    display: flex;
     line-height: 11px;
+    width: 100%;
 }
 
 .InputField_Search::-ms-clear {
@@ -38,10 +41,15 @@ div.InputField_InputContainer {
 .InputField_Search,
 .InputField_Autocomplete {
     min-width: 190px;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .InputField_Search.Small {
     min-width: 130px;
+    width: 100%;
+    max-width: 426px;
 }
 
 .InputField_Search[readonly=readonly]:focus {
@@ -54,7 +62,7 @@ div.InputField_InputContainer {
 
 .SidebarColumn .WidgetSimple .InputField_Search,
 .SidebarColumn .WidgetSimple .InputField_Autocomplete {
-    min-width: 80px;
+    min-width: auto;
 }
 
 .WidgetSettingsForm .InputField_Search,
@@ -94,6 +102,10 @@ div.InputField_InputContainer {
 
 div.InputField_InputContainer .InputField_Search {
     margin: 0;
+    min-height: auto;
+    width: 100% !important;
+    max-width: 605px;
+    background: var(--input-field-bg-color);
 }
 
 #ContextSettingsDialog div.InputField_InputContainer .InputField_Search {
@@ -103,42 +115,54 @@ div.InputField_InputContainer .InputField_Search {
 a.InputField_Action {
     position: absolute;
     display: block;
-    color: #000;
-    top: 5px;
+    color: var(--black);
+    top: 10px;
+    transition: var(--main-transition);
 }
 
 a.InputField_Action:hover {
-    color: #f92;
+    color: var(--primary-color);
 }
 
 div.InputField_Selection {
-    display: none;
+    display: flex !important;
     position: absolute;
     top: 4px;
-    height: 17px;
-    line-height: 11px;
-    text-shadow: none;
+    line-height: var(--main-line-height);
+    border-radius: var(--border-radius-xs);
+    padding: var(--padding-xs) var(--padding-md);
+    background: var(--gray-ultra-light);
+    border: var(--border-width) var(--border-solid) var(--border-color);
+}
+
+#NewProcessTicket div.InputField_Selection {
+    left: 5px;
+    top: 6px;
+    padding: 3px var(--padding-md);
+    border-radius: 6px;
 }
 
 div.InputField_Selection div {
     display: inline-block;
-    font-size: 11px;
+    color: var(--black);
+    font-size: var(--font-size-sm);
+    padding: 0 !important;
 }
 
-div.InputField_Selection div.Text {
-    background: #ddd;
-    padding: 2px 4px;
-}
+/*div.InputField_Selection div.Text {}*/
 
 div.InputField_Selection div.Remove {
-    background: #bbb;
-    color: #fff;
+    color: var(--black);
     cursor: pointer;
+    margin-left: 10px;
+    background-color: transparent;
 }
 
+div.InputField_Selection div.Text,
 .AlreadyDisabled div.InputField_Selection div.Text {
-    background: #f5f5f5;
     cursor: default;
+    background: transparent;
+    padding: 0;
 }
 
 .AlreadyDisabled div.InputField_Selection div.Remove {
@@ -147,8 +171,8 @@ div.InputField_Selection div.Remove {
 }
 
 div.InputField_Selection div.Remove a {
-    color: #fff;
-    padding: 2px 4px;
+    color: var(--black);
+    padding: 0;
     display: block;
     border-bottom: none;
 }
@@ -161,22 +185,26 @@ div.InputField_More {
 
 div.InputField_ListContainer {
     position: absolute;
-    z-index: 6103;
+    z-index: 6200;
     display: none;
     text-shadow: none;
+    padding-top: 1px;
 }
 
 div.InputField_TreeContainer {
-    background-color: #fff;
-    border: 1px solid #ccc;
+    border: 0;
     border-top: none;
     overflow-y: auto;
-    box-sizing: content-box;
+    box-sizing: border-box;
     line-height: 18px;
+    background: var(--menu-bg);
+    box-shadow: var(--menu-box-shadow);
+    border-radius: var(--border-radius-xs);
+    /* width: 100% !important; */
 }
 
 .ExpandToTop div.InputField_TreeContainer {
-    border-top: 1px solid #ccc;
+    border-top: 0;
     border-bottom: none;
 }
 
@@ -197,6 +225,7 @@ div.InputField_ToolbarContainer ul {
 div.InputField_ToolbarContainer ul li {
     display: table-cell;
     text-align: center;
+    padding: var(--padding-xs);
 }
 
 div.InputField_ToolbarContainer ul li:after {
@@ -262,6 +291,26 @@ div.InputField_ToolbarContainer ul li a:hover {
 }
 
 /**
+ * @subsection  Select
+ */
+
+form select {
+    border: var(--border-width) var(--border-solid) var(--border-color);
+    background-color: var(--white);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    margin: 0 0 var(--margin-xs) 0;
+    padding: var(--padding-xs) var(--padding-sm);
+    font-size: var(--font-size-sm);
+    color: var(--black);
+    border-radius: var(--border-radius-sm);
+    box-sizing: border-box;
+    line-height: var(--input-line-height);
+    transition: var(--main-transition);
+    height: 30px;
+}
+
+/**
  * @subsection  jsTree theme
  */
 .jstree-InputField {
@@ -278,7 +327,7 @@ div.InputField_ToolbarContainer ul li a:hover {
 .jstree-InputField .jstree-container-ul {
     display: block;
     margin: 0;
-    padding: 0;
+    padding: var(--padding-sm) var(--padding-xs);
     list-style-type: none;
     list-style-image: none;
     text-align: left;
@@ -305,6 +354,7 @@ div.InputField_ToolbarContainer ul li a:hover {
     padding: 0 4px 0 1px;
     margin: 0;
     vertical-align: top;
+    font-size: var(--font-size-sm);
 }
 
 .jstree-InputField .jstree-anchor:focus {
@@ -337,6 +387,36 @@ div.InputField_ToolbarContainer ul li a:hover {
     padding: 0;
     vertical-align: top;
     text-align: center;
+}
+
+.cke_top {
+    background-color: transparent !important;
+}
+
+.cke_toolbar_separator {
+    display: none !important;
+}
+
+a.cke_button:hover {
+    background-color: #E2E2EA !important;
+    border-radius: 5px !important ;
+    border: none !important;
+}
+
+.RichTextField #cke_RichText {
+    width: 100% !important;
+    max-width: var(--main-filed-size) !important;
+    border-radius: 10px !important;
+    border: var(--border-width) var(-border-solid) var(--border-color) !important;
+    overflow: hidden;
+}
+
+.cke_inner {
+    border-radius: 10px !important;
+}
+
+.cke_bottom {
+    display: none !important;
 }
 
 .jstree-InputField .jstree-ocl {
@@ -399,8 +479,6 @@ div.InputField_ToolbarContainer ul li a:hover {
 
 .jstree-InputField .jstree-wholerow-ul {
     position: relative;
-    display: inline-block;
-    min-width: 100%;
 }
 
 .jstree-InputField .jstree-wholerow-ul .jstree-leaf > .jstree-ocl {
@@ -413,35 +491,46 @@ div.InputField_ToolbarContainer ul li a:hover {
 }
 
 .jstree-InputField .jstree-wholerow-ul .jstree-wholerow {
-    width: 100%;
+    width: calc(100% - var(--padding-sm));
     cursor: pointer;
     position: absolute;
-    left: 0;
+    left: var(--padding-xs);
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    border-radius: var(--border-radius-xs);
+    height: 45px;
+    top: 1px;
+    transition: var(--main-transition);
+    /*
+    padding: var(--padding-xs);
+
+
+    box-sizing: border-box;
+    display: inline-block;
+    */
 }
 
 .jstree-InputField .jstree-wholerow-ul .jstree-wholerow-clicked {
-    background-color: #ddd;
+    background-color: transparent;
 }
 
 .jstree-InputField .jstree-wholerow-ul .jstree-wholerow:hover,
 .jstree-InputField .jstree-wholerow-ul .jstree-wholerow-hovered,
 .jstree-InputField .jstree-focused > .jstree-wholerow {
-    background-color: #f92;
+    background-color: var(--gray-light);
 }
 
 .jstree-InputField .jstree-wholerow-ul .jstree-wholerow-clicked:hover,
 .jstree-InputField .jstree-wholerow-ul .jstree-wholerow-clicked.jstree-wholerow-hovered,
 .jstree-InputField .jstree-focused > .jstree-wholerow-clicked {
-    background-color: #f72;
+    background-color: var(--gray-light);
 }
 
 .jstree-InputField .Disabled > .jstree-wholerow:hover,
 .jstree-InputField .Disabled > .jstree-wholerow-hovered {
-    background-color: #eee;
+    background-color: var(--disabled);
     cursor: default;
 }
 
@@ -453,7 +542,8 @@ div.InputField_ToolbarContainer ul li a:hover {
 .jstree-InputField .jstree-clicked {
     background: transparent !important;
     border: none !important;
-    padding: 0 4px 0 1px !important;
+    padding: var(--padding-xs) !important;
+    opacity: 0.4;
 }
 
 .jstree-InputField.jstree-rtl .jstree-node {
@@ -556,6 +646,7 @@ div.InputField_ToolbarContainer ul li a:hover {
     width: 18px;
     height: 18px;
     line-height: 18px;
+    margin: 5px 0;
 }
 
 .jstree-InputField-Tree.jstree-rtl .jstree-node {
@@ -636,28 +727,82 @@ div.InputField_ToolbarContainer ul li a:hover {
 /**
  * @subsection  jsTree theme - No Tree variant
  */
-.jstree-InputField-NoTree .jstree-node {
-    min-height: 18px;
-    line-height: 18px;
-    margin-left: 2px;
+
+.jstree-InputField-NoTree .jstree-node,
+.jstree-InputField .jstree-node {
+    position: relative;
+    min-height: auto;
+    line-height: 1;
+    margin-left: 0;
     min-width: 18px;
+    padding: var(--padding-sm);
+    margin-bottom: var(--margin-sm);
+    box-sizing: border-box;
 }
 
-.jstree-InputField-NoTree .jstree-anchor {
+.jstree-InputField-NoTree .jstree-anchor,
+.jstree-InputField .jstree-anchor {
     height: 18px;
     line-height: 18px;
+    padding: var(--padding-xs);
 }
 
-.jstree-InputField-NoTree .jstree-icon {
+.jstree-InputField-NoTree .jstree-icon,
+.jstree-InputField .jstree-icon {
     display: none;
 }
 
-.jstree-InputField-NoTree.jstree-rtl .jstree-node {
+.jstree-InputField-NoTree.jstree-rtl .jstree-node,
+.jstree-InputField.jstree-rtl .jstree-node {
     margin-right: 2px;
 }
 
-.jstree-InputField-NoTree .jstree-wholerow {
+.jstree-InputField-NoTree .jstree-wholerow,
+.jstree-InputField .jstree-wholerow {
     height: 18px;
 }
+
+/**
+ * @subsection  Checkbox Styles
+ */
+input[type=checkbox]{
+    appearance: none; -webkit-appearance: none;
+    position: relative;
+    display: block;
+    width: 16px; 
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid #ccc; 
+    background: transparent;
+    border-radius: 3px;
+    transition: var(--main-transition);
+  }
+  
+  input[type=checkbox]:checked{
+    background:var(--success-color);
+    border: 2px solid var(--success-color); 
+  }
+
+  input[type=checkbox]::after{
+    position: absolute;
+    z-index: 10000;
+    content: '';
+    transform: rotate(45deg);
+    height: 8px;
+    width: 4px;
+    border-bottom: 2px solid transparent;
+    border-right: 2px solid transparent;
+    left: 3px;
+    top: 0px;
+    transition: var(--main-transition);
+  }
+
+  input[type=checkbox]:checked::after{
+    display: inline-block;
+    border-bottom: 2px solid var(--white);
+    border-right: 2px solid var(--white);
+  }
 
 } /* end @media */
