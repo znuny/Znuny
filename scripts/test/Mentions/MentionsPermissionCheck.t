@@ -96,7 +96,8 @@ my $Success = $MentionObject->AddMention(
         UserID => $UserID
     },
     TicketID  => $TicketID,
-    ArticleID => $ArticleID
+    ArticleID => $ArticleID,
+    UserID    => 1,
 );
 
 @Ticket = $TicketObject->TicketSearch(
