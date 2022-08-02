@@ -70,6 +70,7 @@ of notification "Mention notification" to execute/send it.
             },
             # ...
         },
+        UserID => 123,
     );
 
     Returns true value if all mentions were added successfully.
@@ -109,6 +110,7 @@ sub SendNotification {
             TicketID  => $Param{TicketID},
             ArticleID => $Param{ArticleID},
             Recipient => $Param{Recipients}->{$Recipient},
+            UserID    => $Param{UserID},
         );
 
         $AllMentionAddsOK = 0 if !$Success;
@@ -128,6 +130,7 @@ Adds a mention and triggers event "UserMention" to send a notification.
             UserID    => 1,
             UserEmail => 'admin@mycompany.org',
         },
+        UserID => 1,
     );
 
     Returns true value on success.
@@ -144,7 +147,7 @@ sub AddMention {
     my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
 
     NEEDED:
-    for my $Needed (qw(TicketID ArticleID Recipient)) {
+    for my $Needed (qw(TicketID ArticleID Recipient UserID)) {
         next NEEDED if defined $Param{$Needed};
 
         $LogObject->Log(
@@ -164,7 +167,7 @@ sub AddMention {
 
     my $TicketID  = $Param{TicketID};
     my $ArticleID = $Param{ArticleID};
-    my $UserID    = $Param{Recipient}->{UserID};
+    my $RecipientUserID    = $Param{Recipient}->{UserID};
 
     my $Mentions = $Self->GetTicketMentions(
         TicketID => $TicketID,
@@ -172,7 +175,7 @@ sub AddMention {
     return if ref $Mentions ne 'ARRAY';
 
     my $MentionExists = grep {
-        $_->{UserID} == $UserID
+        $_->{UserID} == $RecipientUserID
             && $_->{TicketID} == $TicketID
             && $_->{ArticleID} == $ArticleID
     } @{$Mentions};
@@ -182,7 +185,7 @@ sub AddMention {
         TicketID => $TicketID,
         Key      => 'MentionSeen',
         Value    => 0,
-        UserID   => $UserID,
+        UserID   => $RecipientUserID,
     );
     return if !$TicketFlagSet;
 
@@ -193,7 +196,7 @@ sub AddMention {
                 VALUES (?, ?, ?, current_timestamp)
         ',
         Bind => [
-            \$UserID,
+            \$RecipientUserID,
             \$TicketID,
             \$ArticleID,
         ],
@@ -202,7 +205,7 @@ sub AddMention {
     my $NotificationsConfig = $ConfigObject->Get('Mentions')->{Notifications};
     if ( $NotificationsConfig && $NotificationsConfig eq 'Ticket' ) {
         my $IsUserMentionedTicket = grep {
-            $_->{UserID} == $UserID
+            $_->{UserID} == $RecipientUserID
                 && $_->{TicketID} == $TicketID
         } @{$Mentions};
 
@@ -214,9 +217,9 @@ sub AddMention {
         Data  => {
             TicketID   => $TicketID,
             ArticleID  => $ArticleID,
-            Recipients => [ $UserID, ],
+            Recipients => [ $RecipientUserID, ],
         },
-        UserID => $UserID,
+        UserID => $Param{UserID},
     );
 
     return 1;

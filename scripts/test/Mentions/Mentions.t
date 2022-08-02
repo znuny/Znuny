@@ -95,7 +95,8 @@ for my $ArticleID (@ArticleIDs) {
             UserID => $UserID
         },
         TicketID  => $TicketID,
-        ArticleID => $ArticleID
+        ArticleID => $ArticleID,
+        UserID    => 1,
     );
     $Self->True(
         $Success,
@@ -128,7 +129,8 @@ my $Success = $MentionObject->AddMention(
         UserID => $UserID
     },
     TicketID  => $TicketID,
-    ArticleID => $ArticleIDs[0]
+    ArticleID => $ArticleIDs[0],
+    UserID    => 1,
 );
 
 $Self->True(

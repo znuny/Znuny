@@ -72,6 +72,7 @@ sub Run {
         Recipients => \%Recipients,
         TicketID   => $Param{Data}{TicketID},
         ArticleID  => $Param{Data}{ArticleID},
+        UserID     => $Param{UserID},
     );
 
     return \%Recipients;
