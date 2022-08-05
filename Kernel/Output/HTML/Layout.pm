@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -1015,7 +1015,6 @@ sub ErrorScreen {
     my ( $Self, %Param ) = @_;
 
     my $Output = $Self->Header( Title => 'Error' );
-    $Output .= $Self->NavigationBar() if $Self->{UserID};
     $Output .= $Self->Error(%Param);
     $Output .= $Self->Footer();
     return $Output;
@@ -1401,9 +1400,104 @@ sub Header {
                 Data => \%Param,
             );
 
-            $Self->ToolbarModules(
-                ToolBarModule => $ToolBarModule,
-            );
+            my %Modules;
+            my %Jobs = %{$ToolBarModule};
+
+            # get group object
+            my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
+
+            MODULE:
+            for my $Job ( sort keys %Jobs ) {
+
+                # load and run module
+                next MODULE if !$MainObject->Require( $Jobs{$Job}->{Module} );
+                my $Object = $Jobs{$Job}->{Module}->new(
+                    %{$Self},    # UserID etc.
+                );
+                next MODULE if !$Object;
+
+                my $ToolBarAccessOk;
+
+                # if group restriction for tool-bar is set, check user permission
+                if ( $Jobs{$Job}->{Group} ) {
+
+                    # remove white-spaces
+                    $Jobs{$Job}->{Group} =~ s{\s}{}xmsg;
+
+                    # get group configurations
+                    my @Items = split( ';', $Jobs{$Job}->{Group} );
+
+                    ITEM:
+                    for my $Item (@Items) {
+
+                        # split values into permission and group
+                        my ( $Permission, $GroupName ) = split( ':', $Item );
+
+                        # log an error if not valid setting
+                        if ( !$Permission || !$GroupName ) {
+                            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                                Priority => 'error',
+                                Message  => "Invalid config for ToolBarModule $Job - Key Group: '$Item'! "
+                                    . "Need something like 'Permission:Group;'",
+                            );
+                        }
+
+                        # get groups for current user
+                        my %Groups = $GroupObject->PermissionUserGet(
+                            UserID => $Self->{UserID},
+                            Type   => $Permission,
+                        );
+
+                        # next job if user have not groups
+                        next ITEM if !%Groups;
+
+                        # check user belongs to the correct group
+                        my %GroupsReverse = reverse %Groups;
+                        next ITEM if !$GroupsReverse{$GroupName};
+
+                        $ToolBarAccessOk = 1;
+
+                        last ITEM;
+                    }
+
+                    # go to the next module if not permissions
+                    # for the current one
+                    next MODULE if !$ToolBarAccessOk;
+                }
+
+                %Modules = ( $Object->Run( %Param, Config => $Jobs{$Job} ), %Modules );
+            }
+
+            # show tool bar items
+            MODULE:
+            for my $Key ( sort keys %Modules ) {
+                next MODULE if !%{ $Modules{$Key} };
+
+                # For ToolBarSearchFulltext module take into consideration SearchInArchive settings.
+                # See bug#13790 (https://bugs.otrs.org/show_bug.cgi?id=13790).
+                if ( $ConfigObject->Get('Ticket::ArchiveSystem') && $Modules{$Key}->{Block} eq 'ToolBarSearch' ){
+                    $Modules{$Key}->{SearchInArchive} = $ConfigObject->Get('Ticket::Frontend::AgentTicketSearch')->{Defaults}->{SearchInArchive};
+                }
+
+                if ( $Modules{$Key}->{Block} eq 'ToolBarSearch' && $Self->{UserToolBarSearchBackend} eq 'ToolBarSearchBackend' . $Modules{$Key}->{Name}){
+                    $Modules{$Key}->{Checked} = 'checked="checked"';
+                }
+
+                if ( $Modules{$Key}->{Block} eq 'ToolBarItem' ) {
+                    $Modules{$Key}->{Block} = 'ToolBarPersonalViews';
+                }
+                $Modules{$Key}->{Block} //= 'ToolBarPersonalViews';
+
+                $Self->Block(
+                    Name => $Modules{$Key}->{Block},
+                    Data => {
+                        %{ $Modules{$Key} },
+                        AccessKeyReference => $Modules{$Key}->{AccessKey}
+                        ? " ($Modules{$Key}->{AccessKey})"
+                        : '',
+                    },
+                );
+            }
 
             # Show links to last views, if enabled for tool bar.
             my $ToolBarLastViewsHTML = $Self->_BuildLastViewsOutput(
@@ -1500,111 +1594,6 @@ sub Header {
     $Self->_DisableBannerCheck( OutputRef => \$Output );
 
     return $Output;
-}
-
-sub ToolbarModules {
-    my ( $Self, %Param ) = @_;
-
-    my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
-    my %Modules;
-    my %Jobs = %{ $Param{ToolBarModule} };
-
-    # get group object
-    my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
-
-    MODULE:
-    for my $Job ( sort keys %Jobs ) {
-
-        # load and run module
-        next MODULE if !$MainObject->Require( $Jobs{$Job}->{Module} );
-        my $Object = $Jobs{$Job}->{Module}->new(
-            %{$Self},    # UserID etc.
-        );
-        next MODULE if !$Object;
-
-        my $ToolBarAccessOk;
-
-        # if group restriction for tool-bar is set, check user permission
-        if ( $Jobs{$Job}->{Group} ) {
-
-            # remove white-spaces
-            $Jobs{$Job}->{Group} =~ s{\s}{}xmsg;
-
-            # get group configurations
-            my @Items = split( ';', $Jobs{$Job}->{Group} );
-
-            ITEM:
-            for my $Item (@Items) {
-
-                # split values into permission and group
-                my ( $Permission, $GroupName ) = split( ':', $Item );
-
-                # log an error if not valid setting
-                if ( !$Permission || !$GroupName ) {
-                    $Kernel::OM->Get('Kernel::System::Log')->Log(
-                        Priority => 'error',
-                        Message  => "Invalid config for ToolBarModule $Job - Key Group: '$Item'! "
-                            . "Need something like 'Permission:Group;'",
-                    );
-                }
-
-                # get groups for current user
-                my %Groups = $GroupObject->PermissionUserGet(
-                    UserID => $Self->{UserID},
-                    Type   => $Permission,
-                );
-
-                # next job if user have not groups
-                next ITEM if !%Groups;
-
-                # check user belongs to the correct group
-                my %GroupsReverse = reverse %Groups;
-                next ITEM if !$GroupsReverse{$GroupName};
-
-                $ToolBarAccessOk = 1;
-
-                last ITEM;
-            }
-
-            # go to the next module if not permissions
-            # for the current one
-            next MODULE if !$ToolBarAccessOk;
-        }
-
-        %Modules = ( $Object->Run( %Param, Config => $Jobs{$Job} ), %Modules );
-    }
-
-    # show tool bar items
-    MODULE:
-    for my $Key ( sort keys %Modules ) {
-        next MODULE if !%{ $Modules{$Key} };
-
-        # For ToolBarSearchFulltext module take into consideration SearchInArchive settings.
-        # See bug#13790 (https://bugs.otrs.org/show_bug.cgi?id=13790).
-        if ( $ConfigObject->Get('Ticket::ArchiveSystem') && $Modules{$Key}->{Block} eq 'ToolBarSearchFulltext' )
-        {
-            $Modules{$Key}->{SearchInArchive}
-                = $ConfigObject->Get('Ticket::Frontend::AgentTicketSearch')->{Defaults}->{SearchInArchive};
-        }
-
-        $Self->Block(
-            Name => $Modules{$Key}->{Block},
-            Data => {
-                %{ $Modules{$Key} },
-                AccessKeyReference => $Modules{$Key}->{AccessKey}
-                ? " ($Modules{$Key}->{AccessKey})"
-                : '',
-            },
-        );
-    }
-
-    if ( $Param{ReturnResult} ) {
-        return $Self->Output(
-            TemplateFile => "HeaderToolbar",
-        );
-    }
 }
 
 sub Footer {
@@ -2950,7 +2939,7 @@ sub PageNavBar {
 
     # only show total amount of pages if there is more than one
     if ( $Pages > 1 ) {
-        $Param{NavBarLong} = "- " . $Self->{LanguageObject}->Translate("Page") . ": $Param{SearchNavBar}";
+        $Param{NavBarLong} = $Param{SearchNavBar};
     }
     else {
         $Param{SearchNavBar} = '';
@@ -6205,17 +6194,10 @@ sub SetRichTextParameters {
     my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
     my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
 
-    my %RichTextSettings = %{ $ConfigObject->Get("Frontend::RichText::Settings") || {} };
-
-    # overwrite RichTextSettings if module specific settings exist (e.g. RichTextHeight)
-    for my $RichTextSettingKey ( sort keys %RichTextSettings ) {
-        if ( $Param{Data}->{ 'RichText' . $RichTextSettingKey } ) {
-            $RichTextSettings{$RichTextSettingKey} = $Param{Data}->{ 'RichText' . $RichTextSettingKey };
-        }
-    }
-
     # get needed variables
-    my $RichTextType        = $Param{Data}->{RichTextType}                || '';
+    my $ScreenRichTextHeight = $Param{Data}->{RichTextHeight} || $ConfigObject->Get("Frontend::RichTextHeight");
+    my $ScreenRichTextWidth  = $Param{Data}->{RichTextWidth}  || $ConfigObject->Get("Frontend::RichTextWidth");
+    my $RichTextType         = $Param{Data}->{RichTextType}   || '';
     my $PictureUploadAction = $Param{Data}->{RichTextPictureUploadAction} || '';
     my $TextDir             = $Self->{TextDirection}                      || '';
     my $EditingAreaCSS      = 'body.cke_editable { ' . $ConfigObject->Get("Frontend::RichText::DefaultCSS") . ' }';
@@ -6305,6 +6287,8 @@ sub SetRichTextParameters {
         Key   => 'RichText',
         Value => {
             TicketID       => $Param{Data}->{TicketID} || '',
+            Height         => $ScreenRichTextHeight,
+            Width          => $ScreenRichTextWidth,
             TextDir        => $TextDir,
             EditingAreaCSS => $EditingAreaCSS,
             Lang           => {
@@ -6315,7 +6299,6 @@ sub SetRichTextParameters {
             ToolbarWithoutImage => $ToolbarWithoutImage[0],
             PictureUploadAction => $PictureUploadAction,
             Type                => $RichTextType,
-            %RichTextSettings,
         },
     );
 
@@ -6350,18 +6333,11 @@ sub CustomerSetRichTextParameters {
     my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
     my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
 
-    my %RichTextSettings = %{ $ConfigObject->Get("Frontend::RichText::Settings") || {} };
-
-    # overwrite RichTextSettings if module specific settings exist (e.g. RichTextHeight)
-    for my $RichTextSettingKey ( sort keys %RichTextSettings ) {
-        if ( $Param{Data}->{ 'RichText' . $RichTextSettingKey } ) {
-            $RichTextSettings{$RichTextSettingKey} = $Param{Data}->{ 'RichText' . $RichTextSettingKey };
-        }
-    }
-
-    my $TextDir             = $Self->{TextDirection}                      || '';
-    my $PictureUploadAction = $Param{Data}->{RichTextPictureUploadAction} || '';
-    my $EditingAreaCSS      = 'body { ' . $ConfigObject->Get("Frontend::RichText::DefaultCSS") . ' }';
+    my $ScreenRichTextHeight = $ConfigObject->Get("Frontend::RichTextHeight");
+    my $ScreenRichTextWidth  = $ConfigObject->Get("Frontend::RichTextWidth");
+    my $TextDir              = $Self->{TextDirection} || '';
+    my $PictureUploadAction  = $Param{Data}->{RichTextPictureUploadAction} || '';
+    my $EditingAreaCSS       = 'body { ' . $ConfigObject->Get("Frontend::RichText::DefaultCSS") . ' }';
 
     # decide if we need to use the enhanced mode (with tables)
     my @Toolbar;
@@ -6440,6 +6416,8 @@ sub CustomerSetRichTextParameters {
     $Self->AddJSData(
         Key   => 'RichText',
         Value => {
+            Height         => $ScreenRichTextHeight,
+            Width          => $ScreenRichTextWidth,
             TextDir        => $TextDir,
             EditingAreaCSS => $EditingAreaCSS,
             Lang           => {
@@ -6448,7 +6426,6 @@ sub CustomerSetRichTextParameters {
             Toolbar             => $Toolbar[0],
             ToolbarWithoutImage => $ToolbarWithoutImage[0],
             PictureUploadAction => $PictureUploadAction,
-            %RichTextSettings,
         },
     );
 

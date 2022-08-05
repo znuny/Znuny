@@ -22,13 +22,11 @@ $Selenium->RunTest(
 
         # Enable ToolBar FulltextSearch..
         my %TicketSearchFulltext = (
-            Block       => 'ToolBarSearchFulltext',
-            CSS         => 'Core.Agent.Toolbar.FulltextSearch.css',
-            Description => 'Fulltext search',
             Module      => 'Kernel::Output::HTML::ToolBar::Generic',
-            Name        => 'Fulltext search',
-            Priority    => '1990020',
-            Size        => '10',
+            Name        => 'Fulltext',
+            Description => 'Fulltext search',
+            Block       => 'ToolBarSearch',
+            Priority    => '1990010',
         );
 
         $HelperObject->ConfigSettingChange(
@@ -117,7 +115,7 @@ $Selenium->RunTest(
         }
 
         # Search for test created ticket in Fulltext search.
-        $Selenium->find_element( "#Fulltext", 'css' )->send_keys( $RandomID, "\N{U+E007}" );
+        $Selenium->find_element( "#ToolBarSearchTerm", 'css' )->send_keys( $RandomID, "\N{U+E007}" );
 
         $Selenium->WaitFor(
             JavaScript =>
@@ -165,7 +163,7 @@ $Selenium->RunTest(
 
         for my $Key ( sort keys %Tests ) {
 
-            # Change sysconfig value and refresh screen.
+            # Change SysConfig value and refresh screen.
             $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => 'Ticket::Frontend::AgentTicketSearch###Defaults###SearchInArchive',
@@ -174,8 +172,8 @@ $Selenium->RunTest(
 
             $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentDashboard");
 
-            # Seach in Fulltext search.
-            $Selenium->find_element( "#Fulltext", 'css' )->send_keys( $RandomID, "\N{U+E007}" );
+            # Search in Fulltext search.
+            $Selenium->find_element( "#ToolBarSearchTerm", 'css' )->send_keys( $RandomID, "\N{U+E007}" );
             $Selenium->WaitFor(
                 JavaScript =>
                     'return typeof(Core) == "object" && typeof(Core.App) == "object" && Core.App.PageLoadComplete'

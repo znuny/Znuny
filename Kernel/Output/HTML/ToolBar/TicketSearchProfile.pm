@@ -15,49 +15,50 @@ use strict;
 use warnings;
 
 our @ObjectDependencies = (
-    'Kernel::System::User',
     'Kernel::Output::HTML::Layout',
-    'Kernel::System::SearchProfile'
+    'Kernel::System::SearchProfile',
+    'Kernel::System::User',
 );
 
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    # get user data
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
     my %User = $Kernel::OM->Get('Kernel::System::User')->GetUserData(
         UserID => $Self->{UserID},
     );
 
-    # get layout object
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-
-    # create search profiles string
-    my $ProfilesStrg = $LayoutObject->BuildSelection(
-        Data => {
-            '', '-',
-            $Kernel::OM->Get('Kernel::System::SearchProfile')->SearchProfileList(
-                Base      => 'TicketSearch',
-                UserLogin => $User{UserLogin},
-            ),
-        },
-        Name       => 'Profile',
-        ID         => 'ToolBarSearchProfile',
-        Title      => $LayoutObject->{LanguageObject}->Translate('Search template'),
-        SelectedID => '',
-        Max        => $Param{Config}->{MaxWidth},
-        Class      => 'Modernize',
+    my %SearchProfiles = $Kernel::OM->Get('Kernel::System::SearchProfile')->SearchProfileList(
+        Base      => 'TicketSearch',
+        UserLogin => $User{UserLogin},
     );
 
     my $Priority = $Param{Config}->{'Priority'};
     my %Return   = ();
+
+    my $HTMLSearchProfiles = '<ul>';
+    for my $SearchProfile ( sort keys %SearchProfiles ) {
+        $HTMLSearchProfiles .= '<li>';
+        $HTMLSearchProfiles
+            .= '<a href="'
+            . $LayoutObject->{Baselink}
+            . 'Action=AgentTicketSearch;Subaction=Search;Profile='
+            . $SearchProfile . '" class="ToolBarSearchProfile">'
+            . $SearchProfile . '</a>';
+        $HTMLSearchProfiles .= '</li>';
+    }
+    $HTMLSearchProfiles .= '</ul>';
+
     $Return{ $Priority++ } = {
         Block       => $Param{Config}->{Block},
         Description => $Param{Config}->{Description},
         Name        => $Param{Config}->{Name},
         Image       => '',
-        Link        => $ProfilesStrg,
+        Link        => $HTMLSearchProfiles,
         AccessKey   => '',
     };
+
     return %Return;
 }
 

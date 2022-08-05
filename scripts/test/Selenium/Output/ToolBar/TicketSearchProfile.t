@@ -23,12 +23,11 @@ $Selenium->RunTest(
 
         # Enable toolbar TicketSearchProfile.
         my %TicketSearchProfile = (
-            Block       => 'ToolBarSearchProfile',
-            Description => 'Search template',
-            MaxWidth    => '40',
             Module      => 'Kernel::Output::HTML::ToolBar::TicketSearchProfile',
-            Name        => 'Search template',
-            Priority    => '1990010',
+            Name        => 'Searchtemplate',
+            Description => 'Search template',
+            Block       => 'ToolBarSearchProfile',
+            Priority    => '1990040',
         );
 
         $HelperObject->ConfigSettingChange(
@@ -116,15 +115,8 @@ $Selenium->RunTest(
         );
 
         # Return to dashboard screen.
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
-        $Selenium->VerifiedGet("${ScriptAlias}index.pl");
-        $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('#ToolBarSearchProfile').length" );
+        $Selenium->find_element( ".ToolBarSearchProfile", 'css' )->click();
 
-        # Click on test search profile.
-        $Selenium->InputFieldValueSet(
-            Element => '#ToolBarSearchProfile',
-            Value   => 'SeleniumTest',
-        );
         $Selenium->WaitFor(
             JavaScript =>
                 "return typeof(\$) === 'function' && \$('a:contains(\"$TicketNumber\")').length && \$('#TicketSearch').length"

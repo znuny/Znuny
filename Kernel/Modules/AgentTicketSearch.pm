@@ -284,6 +284,16 @@ sub Run {
             }
         }
 
+        # add ToolBarSearch
+        my %ToolBarSearchParam;
+        my @ParamNames = $ParamObject->GetParamNames();
+        KEY:
+        for my $Key (@ParamNames) {
+
+            next KEY if $Key !~ m{^ToolBarSearch(.*)}sm;
+            $ToolBarSearchParam{$Key} = $ParamObject->GetParam( Param => $Key );
+        }
+
         # get array params
         for my $Key (
             qw(StateIDs States StateTypeIDs QueueIDs Queues PriorityIDs Priorities OwnerIDs

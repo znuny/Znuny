@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -30,23 +30,31 @@ Core.Agent.Header = (function (TargetNS) {
      */
     TargetNS.Init = function () {
 
-        // Initialize header refresh.
-        TargetNS.InitToolbarOverview();
+        // toggle .toolbar-row view
+        $("#ToolBar-toggle").on("click", function() {
+            $(".toolbar-row-wrapper").toggleClass("hide");
 
-        // Bind event on ToolBarSearchProfile field
-        $('#ToolBarSearchProfile').on('change', function (Event) {
-            $(Event.target).closest('form').submit();
-            Event.preventDefault();
-            Event.stopPropagation();
-            return false;
+            if ($(".toolbar-row-wrapper").hasClass("hide")) {
+                $("#ToolBar-toggle i").addClass('expanded');                  // todo
+
+                $("#ToolBar-toggle i").css("margin", "2px 0 0 0");            // todo move this to Core.Header.css?
+                $("#ToolBar-toggle i").css("transform", "rotate(180deg)");    // todo move this to Core.Header.css?
+                Core.Agent.PreferencesUpdate('UserToolBar', 0);
+            }
+            else {
+                $("#ToolBar-toggle i").removeClass('expanded');               // todo
+
+                $("#ToolBar-toggle i").css("margin", "0 0 2px 0");            // todo move this to Core.Header.css?
+                $("#ToolBar-toggle i").css("transform", "rotate(0deg)");      // todo move this to Core.Header.css?
+                Core.Agent.PreferencesUpdate('UserToolBar', 1);
+            }
         });
 
-        // Initialize auto complete searches
-        Core.Agent.CustomerInformationCenterSearch.InitAutocomplete($('#ToolBarCICSearchCustomerID'), "SearchCustomerID");
-        Core.Agent.CustomerUserInformationCenterSearch.InitAutocomplete($('#ToolBarCICSearchCustomerUser'), "SearchCustomerUser");
+        // Initialize header refresh
+        TargetNS.InitToolBarOverview();
 
-        // Initialize full text search
-        Core.Agent.Search.InitToolbarFulltextSearch();
+        // Initialize all toolbar search backends
+        TargetNS.InitToolBarSearch();
 
         // Bind event on Simulate RTL button
         $('.DebugRTL').on('click', function () {
@@ -57,21 +65,64 @@ Core.Agent.Header = (function (TargetNS) {
 
     /**
      * @private
-     * @name InitToolbarOverview
+     * @name InitToolbarSearch
+     * @memberof Core.Agent.Header
+     * @function
+     * @description
+     *      This function initialize toolbar search
+     */
+    TargetNS.InitToolBarSearch = function () {
+        var Backend = $('input[type=radio][name=ToolBarSearchBackend]:checked').val();
+        $('input[type=radio][name=ToolBarSearchBackend]').change(function() {
+            Backend = this.value;
+            TargetNS.InitToolBarSearchBackend(Backend);
+        });
+        TargetNS.InitToolBarSearchBackend(Backend);
+    }
+
+    /**
+     * @private
+     * @name InitToolBarSearchBackend
+     * @memberof Core.Agent.Header
+     * @function
+     * @description
+     *      This function initialize toolbar search
+     */
+    TargetNS.InitToolBarSearchBackend = function (Backend) {
+        Core.Agent.PreferencesUpdate('UserToolBarSearchBackend', Backend);
+
+        if (Backend == 'ToolBarSearchBackendFulltext'){
+            // Initialize full text search
+            Core.Agent.Search.InitToolbarFulltextSearch();
+        }
+        else if (Backend == 'ToolBarSearchBackendCustomerID'){
+
+            // Initialize auto complete searches
+            Core.Agent.CustomerInformationCenterSearch.InitAutocomplete($('#ToolBarSearchTerm'), "SearchCustomerID");
+        }
+        else if (Backend == 'ToolBarSearchBackendCustomerUser'){
+
+            // Initialize auto complete searches
+            Core.Agent.CustomerUserInformationCenterSearch.InitAutocomplete($('#ToolBarSearchTerm'), "SearchCustomerUser");
+        }
+    }
+
+    /**
+     * @private
+     * @name InitToolBarOverview
      * @memberof Core.Agent.Header
      * @function
      * @description
      *      This function initialize header refresh.
      */
-    TargetNS.InitToolbarOverview = function () {
-        var ToolbarRefreshTime = Core.Config.Get('RefreshTimeToolbar'),
-            RefreshTime = Core.Config.Get('Refresh');
+    TargetNS.InitToolBarOverview = function () {
+        var RefreshTime = Core.Config.Get('RefreshTimeToolbar');
 
-        if (RefreshTime || !ToolbarRefreshTime) {
+        if (!RefreshTime) {
             return;
         }
 
-        Core.Config.Set('RefreshSecondsToolbar', parseInt(ToolbarRefreshTime, 10) || 0);
+        Core.Config.Set('RefreshSecondsToolbar', parseInt(RefreshTime, 10) || 0);
 
         if (!Core.Config.Get('RefreshSecondsToolbar')) {
             return;
@@ -90,13 +141,26 @@ Core.Agent.Header = (function (TargetNS) {
                         Core.Config.Get('Baselink'),
                         Data,
                         function (Response) {
-                            $('#ToolBar li:not(.UserAvatar)').remove()
-                            $('#ToolBar').append(Response)
+                            $.each(Response.IconsOrder, function(index,value) {
+                                if (!$('li[class="' + value + '"]').length) {
+                                    $('<li class ="' + value + '"></li>').insertAfter($('li[class="' + Response.IconsOrder[index-1] + '"]'));
+                                }
 
-                            Core.UI.InputFields.Init()
-                            TargetNS.Init();
-                        },
-                        'html'
+                                if (value == "UserAvatar") {
+                                    return;
+                                }
+
+                                $('li[class="' + value + '"]').html(Response.Icons[Response.IconsOrder[index]]);
+                            });
+
+                            $("#ToolBar").children().each(function(index,element) {
+                                if ($.inArray(element.className, Response.IconsOrder) == -1) {
+                                    $('li[class="' + element.className + '"]').remove();
+                                }
+                            });
+
+                            TargetNS.InitToolBarOverview();
+                        }
                     );
                 },
                 Core.Config.Get('RefreshSecondsToolbar') * 1000

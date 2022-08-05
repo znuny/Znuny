@@ -260,7 +260,7 @@ Core.Agent.Search = (function (TargetNS) {
                 Core.Form.EnableForm($('#SearchForm'));
 
                 if (FoundStopWords.length) {
-                     CallbackStopWordsFound(FoundStopWords);
+                    CallbackStopWordsFound(FoundStopWords);
                 }
                 else {
                     CallbackNoStopWordsFound();
@@ -619,11 +619,11 @@ Core.Agent.Search = (function (TargetNS) {
     TargetNS.InitToolbarFulltextSearch = function () {
 
         // register return key
-        $('#ToolBar li.Extended.SearchFulltext form[name="SearchFulltext"]').off('keypress.FilterInput').on('keypress.FilterInput', function (Event) {
+        $('#ToolBarSearchTerm').off('keypress.FilterInput').on('keypress.FilterInput', function (Event) {
             var SearchString;
 
             if ((Event.charCode || Event.keyCode) === 13) {
-                SearchString = $('#Fulltext').val();
+                SearchString = $('#ToolBarSearchTerm').val();
 
                 if (!SearchString.length || !Core.Config.Get('CheckSearchStringsForStopWords')) {
                     return true;
@@ -635,7 +635,7 @@ Core.Agent.Search = (function (TargetNS) {
                         alert(Core.Language.Translate('Please remove the following words from your search as they cannot be searched for:') + "\n" + FoundStopWords);
                     },
                     function () {
-                        $('#ToolBar li.Extended.SearchFulltext form[name="SearchFulltext"]').submit();
+                        $('form[name="ToolBarSearch"]').submit();
                     }
                 );
 
