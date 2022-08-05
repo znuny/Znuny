@@ -4442,8 +4442,8 @@ Returns:
             Files => [],
         },
         OTRS => {
-            DisplayName => 'OTRS',
-            Files       => ['Calendar.xml', CloudServices.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml', 'ProcessManagement.xml', 'Ticket.xml' ],
+            DisplayName => 'Znuny',
+            Files       => ['Calendar.xml', CloudServices.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml', 'ProcessManagement.xml', 'Ticket.xml', 'Znuny.xml' ],
         },
         # ...
     );
@@ -4473,10 +4473,11 @@ sub ConfigurationCategoriesGet {
             Files       => [],
         },
         OTRS => {
-            DisplayName => 'OTRS',
+            DisplayName => 'Znuny',
             Files       => [
                 'Calendar.xml', 'CloudServices.xml', 'Daemon.xml', 'Framework.xml',
                 'GenericInterface.xml', 'ProcessManagement.xml', 'Ticket.xml',
+                'Znuny.xml',
             ],
         },
     );
