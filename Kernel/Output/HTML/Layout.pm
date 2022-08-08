@@ -1256,6 +1256,10 @@ sub Header {
 
     my $Type = $Param{Type} || '';
 
+    if (!$Self->{UserToolBar}){
+        $Param{HideToolBar} = 'hide';
+    }
+
     # check params
     if ( !defined $Param{ShowToolbarItems} ) {
         $Param{ShowToolbarItems} = 1;

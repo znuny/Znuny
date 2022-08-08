@@ -207,7 +207,7 @@
             </ul>
         </div>
 
-        <div class="toolbar-row-wrapper">
+        <div class="toolbar-row-wrapper [% Data.HideToolBar | html %]">
             <div class="toolbar-row">
                 <div class="component-wrapper component-overviews">
                     <label>[% Translate('Overviews') | html %]</label>
