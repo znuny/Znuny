@@ -806,7 +806,7 @@ sub _RenderAjax {
             );
             $FieldsProcessed{ $Self->{NameToID}{$CurrentField} } = 1;
         }
-        elsif ( $Self->{NameToID}{$CurrentField} eq 'Article' ) {
+        elsif ( $Self->{NameToID}{$CurrentField} eq 'Article' && $Param{GetParam}->{StandardTemplateID} && $Param{GetParam}->{ElementChanged} eq 'StandardTemplateID' ) {
             next DIALOGFIELD if $FieldsProcessed{ $Self->{NameToID}{$CurrentField} };
 
             my $TemplateGeneratorObject = $Kernel::OM->Get('Kernel::System::TemplateGenerator');
