@@ -87,13 +87,13 @@ sub _CreateNotificationEvent {
             en => {
                 Subject => 'Mention in ticket: <OTRS_TICKET_Title>',
                 Body    => 'You have been mentioned in ticket <OTRS_TICKET_NUMBER>
-<OTRS_AGENT_BODY[5]',
+<OTRS_AGENT_BODY[5]>',
                 ContentType => 'text/plain',
             },
             de => {
                 Subject => 'Erwähnung in Ticket: <OTRS_TICKET_Title>',
                 Body    => 'Sie wurden erwähnt in Ticket <OTRS_TICKET_NUMBER>
-<OTRS_AGENT_BODY[5]',
+<OTRS_AGENT_BODY[5]>',
                 ContentType => 'text/plain',
             },
         },
