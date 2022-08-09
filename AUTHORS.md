@@ -84,6 +84,7 @@ The following persons contributed to Znuny:
 * Renée Bäcker <info@perl-services.de>
 * Richard Kammermayer <richard.kammermayer@otrs.com>
 * Richard McCutchan <richard.mccutchan@otrs.com>
+* Robin Naundorf <r.naundorf@fh-muenster.de>
 * Rolf Schmidt <rolf.schmidt@otrs.com>
 * Romain THERRAT <romain42@gmail.com>
 * Roy Kaldung <rk@znuny.com>
