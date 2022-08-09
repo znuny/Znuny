@@ -170,14 +170,7 @@ Core.Agent.Dashboard = (function (TargetNS) {
             }
         );
 
-        $('.SettingsWidget').find('label').each(function() {
-            if ($(this).find('input').prop('checked')) {
-                $(this).addClass('Checked');
-            }
-            $(this).on('click', function() {
-                $(this).toggleClass('Checked', $(this).find('input').prop('checked'));
-            });
-        });
+        TargetNS.InitSettingsWidget();
 
         Core.Agent.TableFilters.SetAllocationList();
 
@@ -889,6 +882,77 @@ Core.Agent.Dashboard = (function (TargetNS) {
                 }
             });
         }
+    };
+
+    /**
+     * @name InitSettingsWidget
+     * @memberof Core.Agent.Dashboard
+     * @function
+     * @description
+     *      Initializes the dashboard widget settings.
+     */
+    TargetNS.InitSettingsWidget = function () {
+
+        var InactiveWidgets = {},
+            $InactiveList,
+            WidgetName,
+            WidgetTitle;
+
+        function LoadInactiveWidgetList() {
+
+            $InactiveList = $('ul.dropdown-search-menu');
+            $InactiveList.empty();
+
+            // load inactive widgets
+            $('.SettingsWidget').find('input[type="checkbox"][name=Backend]').each(function() {
+
+                WidgetName  = $(this).attr('data-widget-name');
+                WidgetTitle = $(this).attr('data-widget-title');
+
+                // check input checkbox
+                if (!$(this).prop('checked')) {
+                    InactiveWidgets[WidgetName] = WidgetTitle;
+                    $(this).siblings('input[type="checkbox"][name=Backend]').prop('checked', false);
+                    $(this).parent().hide();
+                }
+
+                // deactivate this widget
+                $(this).closest('li').find('[data-widget-remove]').off('click.deactivate_widget').on('click.deactivate_widget', function() {
+
+                    // uncheck the input field and hide html element
+                    $(this).siblings('input[type="checkbox"][name=Backend]').prop('checked', false);
+                    $(this).parent().hide();
+
+                    InactiveWidgets[WidgetName] = WidgetTitle;
+                    LoadInactiveWidgetList();
+                });
+            });
+
+            // add all inactive widget to the list and add bindings
+            $.each(InactiveWidgets, function (Name, Title) {
+
+                var $Widget = $('<li class="dropdown-item inactive-widget"><a name="Backend" data-widget-name="' + Name + '" data-widget-title="' + Title + '">' + Title + '</a></li>');
+                $Widget.off('click.activate_widget').on('click.activate_widget', function() {
+
+                    delete InactiveWidgets[Name];
+                    $('.SettingsWidget').find('input[data-widget-name=' + Name + ']').prop('checked', true);
+                    $('.SettingsWidget').find('input[data-widget-name=' + Name + ']').parent().show();
+                    LoadInactiveWidgetList();
+                });
+                $InactiveList.append($Widget);
+            });
+
+            // init filter
+            $("#FilterAvailableWidgets").on('keyup', function() {
+                var Value = $(this).val();
+                $(".inactive-widget").filter(function() {
+                    Value = Value.toLowerCase();
+                    $(this).toggle($(this).text().toLowerCase().indexOf(Value) > -1)
+                });
+            });
+        }
+
+        LoadInactiveWidgetList();
     };
 
     /**

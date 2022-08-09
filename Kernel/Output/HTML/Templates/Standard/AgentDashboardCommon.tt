@@ -1,227 +1,365 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+# TODO delete me
+## nofilter(TidyAll::Plugin::OTRS::Common::Origin)
+
+<div class="dashboardTicketFilter">
+    <ul>
+        <li><a class="active">All (<span>19</span>)</a></li>
+        <li><a>Open tickets (<span>3</span>)</a></li>
+        <li><a>Escalated Tickets (<span>6</span>)</a></li>
+        <li><a>Running Proccess Tickets (<span>13</span>)</a></li>
+        <li><a>Ticket queue overview (<span>2</span>)</a></li>
+    </ul>
+</div>
 
 <div class="SidebarColumn">
     <div class="DontPrint WidgetSimple Collapsed Animate SettingsWidget">
         <div class="Header">
             <div class="WidgetAction Toggle">
-                <a href="#" title="[% Translate("Show or hide the content") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+                <h2>[% Translate("Settings") | html %]</h2>
+                <a href="#" title="[% Translate(" Show or hide the content") | html %]">
+                    <!--<i class="fa fa-caret-right"></i>-->
+                    <i class="fa fa-caret-down"></i>
+                </a>
             </div>
-            <h2>[% Translate("Settings") | html %]</h2>
         </div>
         <div class="Content">
-            <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="Action" value="[% Env("Action") %]"/>
-                <input type="hidden" name="Subaction" value="UpdateSettings"/>
-                <input type="hidden" name="CustomerID" value="[% Data.CustomerID | html %]"/>
-                <input type="hidden" name="CustomerUserID" value="[% Data.CustomerUserID | html %]"/>
-                <ul>
-[% RenderBlockStart("ContentSettings") %]
-                    <li>
-                        <span title="[% Translate(Data.Description) | html %]">
-                            <label for="Settings[% Data.Name | html %]">
-                                <input type="checkbox" name="Backend" id="Settings[% Data.Name | html %]" value="[% Data.Name | html %]" [% Data.Checked %] [% Data.Readonly %]/>
-                                [% Translate(Data.Title) | html %]
-                            </label>
-                        </span>
+            <form action="[% Env(" CGIHandle") %]" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="Action" value="[% Env(" Action") %]" />
+                <input type="hidden" name="Subaction" value="UpdateSettings" />
+                <input type="hidden" name="CustomerID" value="[% Data.CustomerID | html %]" />
+                <input type="hidden" name="CustomerUserID" value="[% Data.CustomerUserID | html %]" />
+
+                <span>
+                    <input type="text" id="FilterAvailableWidgets" name="FilterAvailableWidgets"  class="FilterAvailableWidgets" value="" title="[% Translate("Filter available widgets") | html %]" placeholder="[% Translate("Filter available widgets") | html %]..."/>
+                        <ul class="dropdown-search-menu scroll-bar-styled"></ul>
+                </span>
+
+                <label class="title uppercase">Active Widgets</label>
+                <ul class="active-widgets-list">
+                    [% RenderBlockStart("ContentSettings") %]
+                    <li data-widget-name="[% Data.Name | html %]">
+# ---
+# forwwward
+# ---
+#                        <span title="[% Translate(Data.Description) | html %]">
+#                            <label for="Settings[% Data.Name | html %]">
+#                                <input type="checkbox" name="Backend" id="Settings[% Data.Name | html %]"
+#                                    value="[% Data.Name | html %]" [% Data.Checked %] [% Data.Readonly %] />
+#                                [% Translate(Data.Title) | html %]
+#                            </label>
+#                        </span>
+# ---
+                        <input type="checkbox" name="Backend" id="Settings[% Data.Name | html %]" class="active-widget-checkbox"
+                        value="[% Data.Name | html %]" data-widget-name="[% Data.Name | html %]" data-widget-title="[% Translate(Data.Title) | html %]" [% Data.Checked %] [% Data.Readonly %] >
+
+                        <span title="[% Translate(Data.Description) | html %]">[% Translate(Data.Title) | html %]</span>
+
+                        <a class="icon-hover" data-widget-remove data-widget-name="[% Data.Name | html %]" data-widget-title="[% Translate(Data.Title) | html %]"><i class="fa fa-close"></i></a>
+# ---
                     </li>
-[% RenderBlockEnd("ContentSettings") %]
+                    [% RenderBlockEnd("ContentSettings") %]
                 </ul>
-                <div class="Buttons NoMargin">
-                    <button class="Button CallForAction" accesskey="g" title="[% Translate("Save settings") | html %] (g)" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save settings") | html %]</span></button>
-                </div>
+
+                <span>
+                    <button class="btn-main btn-primary" accesskey="g" title="[% Translate(" Save changes") | html %]
+                        (g)" type="submit" value="[% Translate(" Save") | html %]">
+                        <span>[% Translate("Save changes") | html %]</span>
+                    </button>
+                </span>
             </form>
         </div>
     </div>
 
-[% RenderBlockStart("ContentSmall") %]
+    [% RenderBlockStart("ContentSmall") %]
     <div class="WidgetSimple CanDrag" id="Dashboard[% Data.Name | html %]-box">
         <div class="Header">
-            <div class="ActionMenu">
-[% RenderBlockStart("ContentSmallPreferences") %]
-                <div class="WidgetAction Settings">
-                    <a href="#" id="Dashboard[% Data.Name | html %]-toggle" title="[% Translate("Settings") | html %]">
-                        <i class="fa fa-cog"></i>
-                    </a>
-                </div>
-[% RenderBlockEnd("ContentSmallPreferences") %]
-[% RenderBlockStart("ContentSmallRefresh") %]
-                <div class="WidgetAction Refresh">
-                    <a href="#" id="Dashboard[% Data.Name | html %]_toggle" title="[% Translate("Refresh") | html %]">
-                        <i class="fa fa-refresh"></i>
-                    </a>
-                </div>
-[% RenderBlockEnd("ContentSmallRefresh") %]
-[% RenderBlockStart("ContentSmallRemove") %]
-                 <div class="WidgetAction Close">
-                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=UpdateRemove;Name=[% Data.Name | uri %];CustomerID=[% Data.CustomerID | uri %];CustomerUserID=[% Data.CustomerUserID | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Close this widget") | html %]">
-                        <i class="fa fa-times"></i>
-                    </a>
-                </div>
-[% RenderBlockEnd("ContentSmallRemove") %]
-                <div class="Clear"></div>
-            </div>
             <h2 title="[% Translate(Data.Description) | html %]">[% Translate(Data.Title) | html %]</h2>
+            <div class="ActionMenu">
+                <a class="Btn-Menu-Vertical">
+                    <span>
+                        <i class="fa fa-ellipsis-v"></i>
+                    </span>
+                </a>
+
+                <ul class="ActionMenuList">
+                    <li>
+                        [% RenderBlockStart("ContentSmallPreferences") %]
+                        <div class="WidgetAction Settings">
+                            <a href="#" id="Dashboard[% Data.Name | html %]-toggle" title="[% Translate(" Settings") | html %]">
+                                <span class="iconWrapper">
+                                    <i class="fa fa-cog"></i>
+                                </span>
+                                <span class="textWrapper">Settings</span>
+                             </a>
+                        </div>
+                        [% RenderBlockEnd("ContentSmallPreferences") %]
+                    </li>
+
+                    <li>
+                        [% RenderBlockStart("ContentSmallRefresh") %]
+                        <div class="WidgetAction Refresh">
+                            <a href="#" id="Dashboard[% Data.Name | html %]_toggle" title="[% Translate(" Refresh") | html %]">
+                                <span class="iconWrapper">
+                                    <i class="fa fa-refresh"></i>
+                                </span>
+                                <span class="textWrapper">Refresh</span>
+                            </a>
+                        </div>
+                        [% RenderBlockEnd("ContentSmallRefresh") %]
+                    </li>
+
+                    <li>
+                        [% RenderBlockStart("ContentSmallRemove") %]
+                        <div class="WidgetAction Close">
+                            <a href="[% Env(" Baselink") %]Action=[% Env("Action") %];Subaction=UpdateRemove;Name=[% Data.Name |
+                        uri %];CustomerID=[% Data.CustomerID | uri %];CustomerUserID=[% Data.CustomerUserID | uri %];[%
+                        Env("ChallengeTokenParam") | html %]" title="[% Translate(" Close this widget") | html %]">
+                                <span class="iconWrapper">
+                                    <i class="fa fa-times"></i>
+                                </span>
+                                <span class="textWrapper">Hide</span>
+                            </a>
+                        </div>
+                        [% RenderBlockEnd("ContentSmallRemove") %]
+                    </li>
+                </ul>
+                <!--<div class="Clear"></div>-->
+            </div>
         </div>
+
         <div class="Content">
             <div id="Dashboard[% Data.Name | html %]-setting" class="Hidden">
-                <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" name="Dashboard[% Data.NameForm | html %]_setting_form" id="Dashboard[% Data.NameForm | html %]_setting_form">
-                    <input type="hidden" name="Action" value="[% Env("Action") %]"/>
-                    <input type="hidden" name="Subaction" value="UpdatePreferences"/>
-                    <input type="hidden" name="Name" value="[% Data.Name | html %]"/>
-                    <input type="hidden" name="CustomerID" value="[% Data.CustomerID | html %]"/>
-                    <input type="hidden" name="CustomerUserID" value="[% Data.CustomerUserID | html %]"/>
+                <form action="[% Env(" CGIHandle") %]" method="post" enctype="multipart/form-data"
+                    name="Dashboard[% Data.NameForm | html %]_setting_form"
+                    id="Dashboard[% Data.NameForm | html %]_setting_form">
+                    <input type="hidden" name="Action" value="[% Env("Action") %]" />
+                    <input type="hidden" name="Subaction" value="UpdatePreferences" />
+                    <input type="hidden" name="Name" value="[% Data.Name | html %]" />
+                    <input type="hidden" name="CustomerID" value="[% Data.CustomerID | html %]" />
+                    <input type="hidden" name="CustomerUserID" value="[% Data.CustomerUserID | html %]" />
+
                     <fieldset class="TableLike DontPrint">
-[% RenderBlockStart("ContentSmallPreferencesItem") %]
-[% RenderBlockStart("ContentSmallPreferencesItemOption") %]
-                        <label for="[% Data.NamePref | html %]">[% Translate(Data.Desc) | html %]:</label>
-                        <div class="Field DontPrint">
-                            [% Data.Option %]
-                        </div>
-                        <div class="Clear"></div>
-[% RenderBlockEnd("ContentSmallPreferencesItemOption") %]
-[% RenderBlockStart("ContentSmallPreferencesItemInput") %]
-                        <label class="DontPrint" for="[% Data.NamePref | html %]">[% Translate(Data.Desc) | html %]:</label>
-                        <div class="Field DontPrint">
-                            <input type="text" class="W100pc" name="[% Data.NamePref | html %]" value="[% Data.Data | html %]"/>
-                        </div>
-                        <div class="Clear"></div>
-[% RenderBlockEnd("ContentSmallPreferencesItemInput") %]
-[% RenderBlockStart("ContentSmallPreferencesItemTextArea") %]
-                        <label class="DontPrint" for="[% Data.NamePref | html %]">[% Translate(Data.Desc) | html %]:</label>
-                        <div class="Field DontPrint">
-                            <textarea rows="[% Data.Rows | html %]" cols="[% Data.Cols | html %]" name="[% Data.NamePref | html %]">[% Data.Data | html %]</textarea>
-                        </div>
-                        <div class="Clear"></div>
-[% RenderBlockEnd("ContentSmallPreferencesItemTextArea") %]
-[% RenderBlockEnd("ContentSmallPreferencesItem") %]
-                        <div class="SpacingTop Center">
-                            <button id="Dashboard[% Data.Name | html %]_submit" class="button DontPrint CallForAction Primary" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save Changes") | html %]</span></button>
-                            <button id="Dashboard[% Data.Name | html %]_cancel" class="button DontPrint CallForAction" type="submit" value="[% Translate("Cancel") | html %]"><span>[% Translate("Cancel") | html %]</span></button>
+                        [% RenderBlockStart("ContentSmallPreferencesItem") %]
+
+                            [% RenderBlockStart("ContentSmallPreferencesItemOption") %]
+                                <div class="row-wrapper">
+                                    <label for="[% Data.NamePref | html %]">[% Translate(Data.Desc) | html %]:</label>
+                                    <div class="Field DontPrint">
+                                        [% Data.Option %]
+                                        <i class="fa fa-caret-down"></i>
+                                    </div>
+                                </div>
+                            [% RenderBlockEnd("ContentSmallPreferencesItemOption") %]
+
+                            [% RenderBlockStart("ContentSmallPreferencesItemInput") %]
+                                <div class="row-wrapper">
+                                    <label class="DontPrint" for="[% Data.NamePref | html %]">[% Translate(Data.Desc) | html %]:</label>
+                                    <div class="Field DontPrint">
+                                        <input  type="text"
+                                                class="W100pc"
+                                                name="[% Data.NamePref | html %]"
+                                                value="[% Data.Data | html %]" />
+                                    </div>
+                                </div>
+                            [% RenderBlockEnd("ContentSmallPreferencesItemInput") %]
+
+                            [% RenderBlockStart("ContentSmallPreferencesItemTextArea") %]
+                                <div class="row-wrapper">
+                                    <label class="DontPrint" for="[% Data.NamePref | html %]">[% Translate(Data.Desc) | html %]:</label>
+                                    <div class="Field DontPrint">
+                                        <textarea   rows="[% Data.Rows | html %]"
+                                                    cols="[% Data.Cols | html %]"
+                                                    name="[% Data.NamePref | html %]">[% Data.Data | html %]</textarea>
+                                    </div>
+                                </div>
+                            [% RenderBlockEnd("ContentSmallPreferencesItemTextArea") %]
+
+                        [% RenderBlockEnd("ContentSmallPreferencesItem") %]
+
+                        <div class="btn-container">
+                            <button id="Dashboard[% Data.Name | html %]_submit"
+                                    class="DontPrint btn-main btn-primary"
+                                    type="submit"
+                                    value="[% Translate("Save") | html %]">
+                                <span>[% Translate("Save Changes") | html %]</span>
+                            </button>
+                            <button id="Dashboard[% Data.Name | html %]_cancel"
+                                    class="DontPrint btn-main btn-cancel-ghost"
+                                    type="submit" value="[% Translate(" Cancel") | html %]">
+                                <span>[% Translate("Cancel") | html %]</span>
+                            </button>
                         </div>
                     </fieldset>
                 </form>
             </div>
-            <div id="Dashboard[% Data.Name | html %]">
-                [% Data.Content %]
-            </div>
-[% RenderBlockStart("ContentSmallMore") %]
-            <a href="[% Data.Link %]" title="[% Translate(Data.LinkTitle) | html %]" class="small">[% Translate("more") | html %] &#187;</a>
-[% RenderBlockEnd("ContentSmallMore") %]
+            <div id="Dashboard[% Data.Name | html %]">[% Data.Content %]</div>
+            [% RenderBlockStart("ContentSmallMore") %]
+                <a href="[% Data.Link %]" title="[% Translate(Data.LinkTitle) | html %]" class="small">
+                    [% Translate("more") | html %] &#187;
+                </a>
+            [% RenderBlockEnd("ContentSmallMore") %]
         </div>
     </div>
-[% RenderBlockEnd("ContentSmall") %]
+    [% RenderBlockEnd("ContentSmall") %]
 </div>
 
 <div class="ContentColumn">
 
-[% RenderBlockStart("MainMenu") %]
+    [% RenderBlockStart("MainMenu") %]
     <div class="ActionRow SpacingBottom">
         <ul class="Actions">
-[% RenderBlockStart("MainMenuItem") %]
+            [% RenderBlockStart("MainMenuItem") %]
             <li>
                 <a href="[% Data.Link | Interpolate %]">
                     [% Translate(Data.Name) | html %]
                 </a>
             </li>
-[% RenderBlockEnd("MainMenuItem") %]
+            [% RenderBlockEnd("MainMenuItem") %]
         </ul>
-        <div class="Clear"></div>
+        <!--<div class="Clear"></div>-->
     </div>
-[% RenderBlockEnd("MainMenu") %]
+    [% RenderBlockEnd("MainMenu") %]
 
-[% RenderBlockStart("ContentLarge") %]
+    [% RenderBlockStart("ContentLarge") %]
     <div class="WidgetSimple CanDrag" id="Dashboard[% Data.Name | html %]-box">
         <div class="Header">
+            <h2 title="[% Translate(Data.Description) | html %]">[% Translate(Data.Title) | html %] <span class="badge margin-left_sm">TODO</span></h2>
             <div class="ActionMenu">
-[% RenderBlockStart("ContentLargePreferences") %]
-                <div class="WidgetAction Settings">
-                    <a href="#" id="Dashboard[% Data.Name | html %]-toggle" title="[% Translate("Settings") | html %]">
-                        <i class="fa fa-cog"></i>
-                    </a>
-                </div>
-[% RenderBlockEnd("ContentLargePreferences") %]
-[% RenderBlockStart("ContentLargeRemove") %]
-                 <div class="WidgetAction Close">
-                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=UpdateRemove;Name=[% Data.Name | uri %];CustomerID=[% Data.CustomerID | uri %];CustomerUserID=[% Data.CustomerUserID | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Close this widget") | html %]">
-                        <i class="fa fa-times"></i>
-                    </a>
-                </div>
-[% RenderBlockEnd("ContentLargeRemove") %]
-                <div class="Clear"></div>
+                <a class="Btn-Menu-Vertical">
+                    <span>
+                        <i class="fa fa-ellipsis-v"></i>
+                    </span>
+                </a>
+
+                <ul class="ActionMenuList">
+                    <li>
+                        [% RenderBlockStart("ContentLargePreferences") %]
+                        <div class="WidgetAction Settings">
+                            <a href="#" id="Dashboard[% Data.Name | html %]-toggle" title="[% Translate(" Settings") | html %]">
+                                <span class="iconWrapper">
+                                    <i class="fa fa-cog"></i>
+                                </span>
+                                <span class="textWrapper">Settings</span>
+                            </a>
+                        </div>
+                        [% RenderBlockEnd("ContentLargePreferences") %]
+                    </li>
+                    <li>
+                        [% RenderBlockStart("ContentLargeRemove") %]
+                        <div class="WidgetAction Close">
+                            <a href="[% Env(" Baselink") %]Action=[% Env("Action") %];Subaction=UpdateRemove;Name=[% Data.Name |
+                                uri %];CustomerID=[% Data.CustomerID | uri %];CustomerUserID=[% Data.CustomerUserID | uri %];[%
+                                Env("ChallengeTokenParam") | html %]" title="[% Translate(" Close this widget") | html %]">
+                                <span class="iconWrapper">
+                                    <i class="fa fa-times"></i>
+                                </span>
+                                <span class="textWrapper">Hide</span>
+                            </a>
+                        </div>
+                        [% RenderBlockEnd("ContentLargeRemove") %]
+                    </li>
+                </ul>
             </div>
-            <h2 title="[% Translate(Data.Description) | html %]">[% Translate(Data.Title) | html %]</h2>
         </div>
 
         <div class="Content">
             <div id="Dashboard[% Data.Name | html %]-setting" class="Hidden">
-                <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" name="Dashboard[% Data.NameForm | html %]_setting_form" id="Dashboard[% Data.NameForm | html %]_setting_form" class="WidgetSettingsForm">
-                    <input type="hidden" name="Action" value="[% Env("Action") %]"/>
-                    <input type="hidden" name="Subaction" value="UpdatePreferences"/>
-                    <input type="hidden" name="Name" value="[% Data.Name | html %]"/>
-                    <input type="hidden" name="CustomerID" value="[% Data.CustomerID | html %]"/>
-                    <input type="hidden" name="CustomerUserID" value="[% Data.CustomerUserID | html %]"/>
+                <form action="[% Env(" CGIHandle") %]" method="post" enctype="multipart/form-data"
+                    name="Dashboard[% Data.NameForm | html %]_setting_form"
+                    id="Dashboard[% Data.NameForm | html %]_setting_form" class="WidgetSettingsForm">
+                    <input type="hidden" name="Action" value="[% Env("Action") %]" />
+                    <input type="hidden" name="Subaction" value="UpdatePreferences" />
+                    <input type="hidden" name="Name" value="[% Data.Name | html %]" />
+                    <input type="hidden" name="CustomerID" value="[% Data.CustomerID | html %]" />
+                    <input type="hidden" name="CustomerUserID" value="[% Data.CustomerUserID | html %]" />
+
                     <fieldset class="TableLike FixedLabelSmall DontPrint">
-[% RenderBlockStart("ContentLargePreferencesItem") %]
-[% RenderBlockStart("ContentLargePreferencesItemOption") %]
-                        <label class="DontPrint" for="[% Data.NamePref | html %]">[% Translate(Data.Desc) | html %]:</label>
-                        <div class="DontPrint Field">
-                            [% Data.Option %]
-                        </div>
-                        <div class="Clear"></div>
-[% RenderBlockEnd("ContentLargePreferencesItemOption") %]
-[% RenderBlockStart("ContentLargePreferencesItemInput") %]
-                        <label class="DontPrint" for="[% Data.NamePref | html %]">[% Translate(Data.Desc) | html %]:</label>
-                        <div class="Field DontPrint">
-                            <input type="text" class="W20pc" name="[% Data.NamePref | html %]" value="[% Data.Data | html %]"/>
-                        </div>
-                        <div class="Clear"></div>
-[% RenderBlockEnd("ContentLargePreferencesItemInput") %]
-[% RenderBlockStart("ContentLargePreferencesItemTextArea") %]
-                        <label class="DontPrint" for="[% Data.NamePref | html %]">[% Translate(Data.Desc) | html %]:</label>
-                        <div class="Field DontPrint">
-                            <textarea rows="[% Data.Rows | html %]" cols="[% Data.Cols %]" name="[% Data.NamePref | html %]">[% Data.Data | html %]</textarea>
-                        </div>
-                        <div class="Clear"></div>
-[% RenderBlockEnd("ContentLargePreferencesItemTextArea") %]
-[% RenderBlockStart("ContentLargePreferencesItemAllocationList") %]
-                        <input type="hidden" name="[% Data.NamePref | html %]" class="ColumnsJSON" value="[% Data.Columns | html %]" />
-                        <input type="hidden" class="ColumnsEnabledJSON" value="[% Data.ColumnsEnabled | html %]" />
-                        <input type="hidden" class="ColumnsAvailableJSON" value="[% Data.ColumnsAvailable | html %]" />
-                        <label class="DontPrint">[% Translate(Data.Desc) | html %]:</label>
-                        <div class="Field DontPrint LayoutGrid AllocationListContainer">
-                            <div class="Size1of2">
-                                <ul class="Tablelike">
-                                    <li class="Header">[% Translate("Available Columns") | html %]</li>
-                                </ul>
-                                <div class="FilterInputContainer">
-                                    <input type="text" class="FilterAvailableFields" name="FilterAvailableFields" value="" title="[% Translate("Filter available fields") | html %]" placeholder="[% Translate("Filter available fields") | html %]..." />
+                        [% RenderBlockStart("ContentLargePreferencesItem") %]
+
+                            [% RenderBlockStart("ContentLargePreferencesItemOption") %]
+                            <div class="ticket-modal">
+                                <label class="DontPrint" for="[% Data.NamePref | html %]">[% Translate(Data.Desc) | html %]:</label>
+                                <div class="DontPrint Field">
+                                    <span class="inner-field">
+                                        [% Data.Option %]
+                                        <i class="fa fa-caret-down"></i>
+                                    </span>
                                 </div>
-                                <ul class="AllocationList Tablelike AvailableFields" id="AvailableField-Dashboard[% Data.Name | html %]"></ul>
                             </div>
-                            <div class="Size1of2">
-                                <ul class="Tablelike">
-                                    <li class="Header">[% Translate("Visible Columns (order by drag & drop)") | html %]</li>
-                                </ul>
-                                <ul class="AllocationList Tablelike AssignedFields OrderNumbers" id="AssignedFields-Dashboard[% Data.Name | html %]"></ul>
+                            [% RenderBlockEnd("ContentLargePreferencesItemOption") %]
+
+                            [% RenderBlockStart("ContentLargePreferencesItemInput") %]
+                            <label class="DontPrint" for="[% Data.NamePref | html %]">[% Translate(Data.Desc) | html %]:</label>
+                            <div class="Field DontPrint">
+                                <input type="text" class="W20pc" name="[% Data.NamePref | html %]"
+                                    value="[% Data.Data | html %]" />
                             </div>
-                        </div>
-                        <div class="Clear"></div>
-[% RenderBlockEnd("ContentLargePreferencesItemAllocationList") %]
-[% RenderBlockStart("ContentLargePreferencesItemRawHTML") %]
-                        [% Data.HTML %]
-[% RenderBlockEnd("ContentLargePreferencesItemRawHTML") %]
-[% RenderBlockEnd("ContentLargePreferencesItem") %]
-                        <div class="Buttons">
-                            <button id="Dashboard[% Data.Name | html %]_submit" class="CallForAction DontPrint" type="submit" value="[% Translate("Submit") | html %]"><span>[% Translate("Save Changes") | html %]</span></button>
-                            &nbsp;[% Translate("or") | html %]&nbsp;
-                            <button id="Dashboard[% Data.Name | html %]_cancel" class="CallForAction DontPrint" type="submit" value="[% Translate("Cancel") | html %]"><span>[% Translate("Cancel") | html %]</span></button>
+                            <!--<div class="Clear"></div>-->
+                            [% RenderBlockEnd("ContentLargePreferencesItemInput") %]
+
+                            [% RenderBlockStart("ContentLargePreferencesItemTextArea") %]
+                            <label class="DontPrint" for="[% Data.NamePref | html %]">[% Translate(Data.Desc) | html %]:</label>
+                            <div class="Field DontPrint">
+                                <textarea rows="[% Data.Rows | html %]" cols="[% Data.Cols %]"
+                                    name="[% Data.NamePref | html %]">[% Data.Data | html %]</textarea>
+                            </div>
+                            <!--<div class="Clear"></div>-->
+                            [% RenderBlockEnd("ContentLargePreferencesItemTextArea") %]
+
+                            [% RenderBlockStart("ContentLargePreferencesItemAllocationList") %]
+                            <div class="ticket-modal modal-col-wrapper">
+                                <input type="hidden" name="[% Data.NamePref | html %]" class="ColumnsJSON"
+                                    value="[% Data.Columns | html %]" />
+                                <input type="hidden" class="ColumnsEnabledJSON" value="[% Data.ColumnsEnabled | html %]" />
+                                <input type="hidden" class="ColumnsAvailableJSON" value="[% Data.ColumnsAvailable | html %]" />
+
+                                <label class="DontPrint">[% Translate(Data.Desc) | html %]:</label>
+                                <div class="Field DontPrint LayoutGrid AllocationListContainer modal-col-container">
+                                    <div class="Size1of2 modal-col1">
+                                        <ul class="Tablelike">
+                                            <li class="Header">[% Translate("Available Columns") | html %]</li>
+                                        </ul>
+                                        <div class="FilterInputContainer">
+                                            <input type="text" class="FilterAvailableFields" name="FilterAvailableFields"
+                                                value="" title="[% Translate(" Filter available fields") | html %]"
+                                                placeholder="[% Translate(" Filter available fields") | html %]..." />
+                                        </div>
+                                        <ul class="AllocationList Tablelike AvailableFields"
+                                            id="AvailableField-Dashboard[% Data.Name | html %]"></ul>
+                                    </div>
+                                    <div class="Size1of2 modal-col2">
+                                        <ul class="Tablelike">
+                                            <li class="Header">[% Translate("Visible Columns (order by drag & drop)") | html %]
+                                            </li>
+                                        </ul>
+                                        <ul class="AllocationList Tablelike AssignedFields OrderNumbers"
+                                            id="AssignedFields-Dashboard[% Data.Name | html %]"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                            [% RenderBlockEnd("ContentLargePreferencesItemAllocationList") %]
+
+                            [% RenderBlockStart("ContentLargePreferencesItemRawHTML") %]
+                                [% Data.HTML %]
+                            [% RenderBlockEnd("ContentLargePreferencesItemRawHTML") %]
+
+                        [% RenderBlockEnd("ContentLargePreferencesItem") %]
+                        <div class="Buttons align-right">
+                            <button id="Dashboard[% Data.Name | html %]_cancel" class="btn-main btn-width-md btn-cancel-ghost DontPrint" type="submit" value="[% Translate(" Cancel") | html %]">
+                                <span>[% Translate("Cancel") | html %]</span>
+                            </button>
+                            <span class="text-divider">[% Translate("or") | html %]</span>
+                            <button id="Dashboard[% Data.Name | html %]_submit" class="btn-main btn-width-md btn-primary DontPrint" type="submit" value="[% Translate(" Submit") | html %]">
+                                <span>[% Translate("Save Changes") | html %]</span>
+                            </button>
                         </div>
                     </fieldset>
                 </form>
@@ -230,11 +368,10 @@
             <div id="Dashboard[% Data.Name | html %]">
                 [% Data.Content %]
             </div>
-[% RenderBlockStart("ContentLargeMore") %]
-            <a href="[% Data.Link %]" title="[% Translate(Data.LinkTitle) | html %]" class="small">[% Translate("more") | html %] &#187;</a>
-[% RenderBlockEnd("ContentLargeMore") %]
+            [% RenderBlockStart("ContentLargeMore") %]
+                <a href="[% Data.Link %]" title="[% Translate(Data.LinkTitle) | html %]" class="small">[% Translate("more") | html %] &#187;</a>
+            [% RenderBlockEnd("ContentLargeMore") %]
         </div>
     </div>
-[% RenderBlockEnd("ContentLarge") %]
+    [% RenderBlockEnd("ContentLarge") %]
 </div>
-<div class="Clear"></div>
