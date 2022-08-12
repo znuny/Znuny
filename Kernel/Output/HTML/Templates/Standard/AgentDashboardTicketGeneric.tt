@@ -178,7 +178,7 @@
 [% RenderBlockEnd("ContentLargeTicketGenericEscalationTime") %]
 [% RenderBlockStart("ContentLargeTicketGenericColumn") %]
                 <td>
-                    <div title="[% Data.GenericValue | html %]">[% Data.GenericValue | truncate(40) | html %]</div>
+                    <div title="[% Data.GenericValue | html %]" class="[% Data.Class | html %]">[% Data.GenericValue | truncate(40) | html %]</div>
                 </td>
 [% RenderBlockEnd("ContentLargeTicketGenericColumn") %]
 [% RenderBlockStart("ContentLargeTicketTitle") %]
@@ -188,7 +188,7 @@
 [% RenderBlockEnd("ContentLargeTicketTitle") %]
 [% RenderBlockStart("ContentLargeTicketGenericColumnTranslatable") %]
                 <td>
-                    <div title="[% Translate(Data.GenericValue) | html %]">[% Translate(Data.GenericValue) | html %]</div>
+                    <div title="[% Translate(Data.GenericValue) | html %]" class="[% Data.Class | html %]">[% Translate(Data.GenericValue) | html %]</div>
                 </td>
 [% RenderBlockEnd("ContentLargeTicketGenericColumnTranslatable") %]
 [% RenderBlockStart("ContentLargeTicketGenericColumnTime") %]

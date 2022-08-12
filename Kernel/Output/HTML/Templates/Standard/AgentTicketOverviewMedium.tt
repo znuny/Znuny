@@ -137,7 +137,7 @@
                             <label>[% Translate("Created") | html %]</label>[% Data.Created | Localize("TimeLong") %]
                         </td>
                         <td>
-                            <label>[% Translate("State") | html %]</label><div title="[% Translate(Data.State) | html %]">[% Translate(Data.State) | html %]</div>
+                            <label>[% Translate("State") | html %]</label><div title="[% Translate(Data.State) | html %]" class="[% Data.PillClass | html %]">[% Translate(Data.State) | html %]</div>
                         </td>
                         <td>
 [% RenderBlockStart("Type") %]

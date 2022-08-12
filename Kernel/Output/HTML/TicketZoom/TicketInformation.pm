@@ -15,7 +15,7 @@ use strict;
 use warnings;
 
 use Kernel::Language qw(Translatable);
-use Kernel::System::VariableCheck qw(IsHashRefWithData);
+use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
 
@@ -484,6 +484,13 @@ sub Run {
                 },
             );
         }
+    }
+
+    my $CSSSelector = $LayoutObject->CleanUpCSSSelector(
+        CSSSelector => $Ticket{State},
+    );
+    if ( IsStringWithData($CSSSelector) ) {
+        $Param{PillClass} = 'pill pill-' . $CSSSelector;
     }
 
     my $Output = $LayoutObject->Output(

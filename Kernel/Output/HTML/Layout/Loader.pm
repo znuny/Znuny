@@ -936,6 +936,51 @@ sub SkinValidate {
     return;
 }
 
+=head2 LoaderCreateDynamicCSS()
+
+Creates CSS string from CSS modules and adds it to HTMLHead.tt.
+
+    my $Success = $LayoutObject->LoaderCreateDynamicCSS();
+
+CSS Result:
+
+    .pill-closed-successful {
+        background: #3DD598;
+    }
+    .pill-new {
+        background: #50B5FF;
+    }
+    .pill-pending-auto-close {
+        background: #FF8A25;
+    }
+    .pill-pending-auto-close- {
+        background: #FF8A25;
+    }
+    .pill-pending-reminder {
+        background: #FF8A25;
+    }
+
+Returns:
+
+    my $Success = 1;
+
+=cut
+
+sub LoaderCreateDynamicCSS {
+    my ( $Self, %Param ) = @_;
+
+    my $CSS = $Self->CreateDynamicCSS();
+
+    $Self->Block(
+        Name => 'DynamicCSS',
+        Data => {
+            CSS => $CSS,
+        },
+    );
+
+    return 1;
+}
+
 1;
 
 =head1 TERMS AND CONDITIONS

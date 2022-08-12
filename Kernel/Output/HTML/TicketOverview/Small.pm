@@ -1643,6 +1643,16 @@ sub Run {
                     }
                 }
 
+                # add pill class
+                if ( $TicketColumn eq 'State' ) {
+                    my $CSSSelector = $LayoutObject->CleanUpCSSSelector(
+                        CSSSelector => $Article{State},
+                    );
+                    if ( IsStringWithData($CSSSelector) ) {
+                        $CSSClass .= 'pill pill-' . $CSSSelector;
+                    }
+                }
+
                 $LayoutObject->Block(
                     Name => "RecordTicketColumn$BlockType",
                     Data => {

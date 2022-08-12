@@ -205,6 +205,7 @@
         <Data Key="comments" Type="Quote" Translatable="1">New ticket created by customer.</Data>
         <Data Key="type_id">1</Data>
         <Data Key="valid_id">1</Data>
+        <Data Key="color" Type="Quote">#50B5FF</Data>
         <Data Key="create_by">1</Data>
         <Data Key="create_time">current_timestamp</Data>
         <Data Key="change_by">1</Data>
@@ -216,6 +217,7 @@
         <Data Key="comments" Type="Quote" Translatable="1">Ticket is closed successful.</Data>
         <Data Key="type_id">3</Data>
         <Data Key="valid_id">1</Data>
+        <Data Key="color" Type="Quote">#3DD598</Data>
         <Data Key="create_by">1</Data>
         <Data Key="create_time">current_timestamp</Data>
         <Data Key="change_by">1</Data>
@@ -227,6 +229,7 @@
         <Data Key="comments" Type="Quote" Translatable="1">Ticket is closed unsuccessful.</Data>
         <Data Key="type_id">3</Data>
         <Data Key="valid_id">1</Data>
+        <Data Key="color" Type="Quote">#FC5A5A</Data>
         <Data Key="create_by">1</Data>
         <Data Key="create_time">current_timestamp</Data>
         <Data Key="change_by">1</Data>
@@ -238,6 +241,7 @@
         <Data Key="comments" Type="Quote" Translatable="1">Open tickets.</Data>
         <Data Key="type_id">2</Data>
         <Data Key="valid_id">1</Data>
+        <Data Key="color" Type="Quote">#FFC542</Data>
         <Data Key="create_by">1</Data>
         <Data Key="create_time">current_timestamp</Data>
         <Data Key="change_by">1</Data>
@@ -249,6 +253,7 @@
         <Data Key="comments" Type="Quote" Translatable="1">Customer removed ticket.</Data>
         <Data Key="type_id">6</Data>
         <Data Key="valid_id">1</Data>
+        <Data Key="color" Type="Quote">#8D8D9B</Data>
         <Data Key="create_by">1</Data>
         <Data Key="create_time">current_timestamp</Data>
         <Data Key="change_by">1</Data>
@@ -260,6 +265,7 @@
         <Data Key="comments" Type="Quote" Translatable="1">Ticket is pending for agent reminder.</Data>
         <Data Key="type_id">4</Data>
         <Data Key="valid_id">1</Data>
+        <Data Key="color" Type="Quote">#FF8A25</Data>
         <Data Key="create_by">1</Data>
         <Data Key="create_time">current_timestamp</Data>
         <Data Key="change_by">1</Data>
@@ -271,6 +277,7 @@
         <Data Key="comments" Type="Quote" Translatable="1">Ticket is pending for automatic close.</Data>
         <Data Key="type_id">5</Data>
         <Data Key="valid_id">1</Data>
+        <Data Key="color" Type="Quote">#FF8A25</Data>
         <Data Key="create_by">1</Data>
         <Data Key="create_time">current_timestamp</Data>
         <Data Key="change_by">1</Data>
@@ -282,6 +289,7 @@
         <Data Key="comments" Type="Quote" Translatable="1">Ticket is pending for automatic close.</Data>
         <Data Key="type_id">5</Data>
         <Data Key="valid_id">1</Data>
+        <Data Key="color" Type="Quote">#FF8A25</Data>
         <Data Key="create_by">1</Data>
         <Data Key="create_time">current_timestamp</Data>
         <Data Key="change_by">1</Data>
@@ -293,6 +301,7 @@
         <Data Key="comments" Type="Quote" Translatable="1">State for merged tickets.</Data>
         <Data Key="type_id">7</Data>
         <Data Key="valid_id">1</Data>
+        <Data Key="color" Type="Quote">#FF8A25</Data>
         <Data Key="create_by">1</Data>
         <Data Key="create_time">current_timestamp</Data>
         <Data Key="change_by">1</Data>

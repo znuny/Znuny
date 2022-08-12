@@ -70,7 +70,7 @@ sub Run {
         $LayoutObject->ChallengeTokenCheck();
 
         my ( %GetParam, %Errors );
-        for my $Parameter (qw(ID Name TypeID Comment ValidID)) {
+        for my $Parameter (qw(ID Name TypeID Comment Color ValidID)) {
             $GetParam{$Parameter} = $ParamObject->GetParam( Param => $Parameter ) || '';
         }
 
@@ -240,7 +240,7 @@ sub Run {
         $LayoutObject->ChallengeTokenCheck();
 
         my ( %GetParam, %Errors );
-        for my $Parameter (qw(ID TypeID Name Comment ValidID)) {
+        for my $Parameter (qw(ID TypeID Name Comment Color ValidID)) {
             $GetParam{$Parameter} = $ParamObject->GetParam( Param => $Parameter ) || '';
         }
 

@@ -1300,6 +1300,7 @@ sub Header {
 
     # Generate the minified CSS and JavaScript files and the tags referencing them (see LayoutLoader)
     $Self->LoaderCreateAgentCSSCalls();
+    $Self->LoaderCreateDynamicCSS();
 
     my %AgentLogo;
 

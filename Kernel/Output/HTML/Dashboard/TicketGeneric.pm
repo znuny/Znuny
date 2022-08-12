@@ -1963,6 +1963,14 @@ sub Run {
                     $DataValue = $Ticket{$Column};
                 }
 
+                # add pill class
+                if ( $Column eq 'State' ) {
+                    my $CSSSelector = $LayoutObject->CleanUpCSSSelector(
+                        CSSSelector => $Ticket{State},
+                    );
+                    $CSSClass .= 'pill pill-' . $CSSSelector;
+                }
+
                 if ( $Column eq 'Title' ) {
                     $LayoutObject->Block(
                         Name => "ContentLargeTicketTitle",

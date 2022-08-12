@@ -554,6 +554,7 @@ CREATE TABLE ticket_state (
     comments VARCHAR (250) NULL,
     type_id SMALLINT NOT NULL,
     valid_id SMALLINT NOT NULL,
+    color VARCHAR (25) NOT NULL,
     create_time timestamp(0) NOT NULL,
     create_by INTEGER NOT NULL,
     change_time timestamp(0) NOT NULL,

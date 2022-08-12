@@ -510,6 +510,15 @@ sub TableCreateComplex {
                     else {
                         $Hash{'Content'} = $Ticket->{$Column};
                     }
+
+                    if ( $Column eq 'State' ) {
+                        my $CSSSelector = $Self->{LayoutObject}->CleanUpCSSSelector(
+                            CSSSelector => $Ticket->{$Column},
+                        );
+                        if ( IsStringWithData($CSSSelector) ) {
+                            $Hash{'CssClass'} .= 'pill pill-' . $CSSSelector;
+                        }
+                    }
                 }
 
                 # Dynamic fields
