@@ -1,6 +1,6 @@
 [% INCLUDE 'includes/copyright.tt' -%]
 
-Summary:      The Znuny help desk.
+Summary:      The Znuny LTS help desk.
 Name:         znuny
 Version:      0.0
 License:      GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007

@@ -860,7 +860,7 @@ INSERT INTO article_data_mime_plain (id, article_id, body, create_by, create_tim
     (1, 1, 'From: Znuny LTS <hello@znuny.org>
 To: Your Znuny Helpdesk <znuny@localhost>
 Subject: Znuny says hi!
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain\; charset=utf-8
 Content-Transfer-Encoding: 8bit
 
 We welcome you to Znuny, our ticketing solution based on the well-known OTRS ((Community Edition)) which we forked to make things different.
