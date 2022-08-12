@@ -1,3 +1,6 @@
+# 6.4.3 2022-??-??
+ - 2022-08-10 Fixed accounted time field missing in AgentTicketBulk action.
+
 # 6.4.2 2022-07-28
  - 2022-07-28 Fixed check for recipients in mention notifications. [#270)(https://github.com/znuny/Znuny/issues/270)
  - 2022-07-28 Added missing module registration to customer interface.

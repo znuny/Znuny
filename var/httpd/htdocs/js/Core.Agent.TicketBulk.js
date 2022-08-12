@@ -40,6 +40,10 @@ Core.Agent.TicketBulk = (function (TargetNS) {
             RequiredWidgetFieldIDs = [
                 'Subject', 'Body',
                 'EmailSubject', 'EmailBody'
+            ],
+            TimeUnitsSelectFieldIDs = [
+                'TimeUnitsMinutes', 'TimeUnitsSeconds', 'TimeUnitsHours',
+                'EmailTimeUnitsMinutes', 'EmailTimeUnitsSeconds', 'EmailTimeUnitsHours'
             ];
 
         // Initialize autocomplete feature on ticket number field.
@@ -106,13 +110,29 @@ Core.Agent.TicketBulk = (function (TargetNS) {
             WindowObject.Core.UI.Popup.FirePopupEvent('URL', { URL: TicketBulkURL }, false);
         });
 
+        if (
+            Core.Config.Get('TimeUnitsInputType') == 'Text'
+            && Core.Config.Get('TimeUnitsRequired')
+        ) {
+            RequiredWidgetFieldIDs = $.merge(RequiredWidgetFieldIDs, ['TimeUnits', 'EmailTimeUnits']);
+        }
+
         // Toggle required fields of widgets depending on their visibility.
         $('.WidgetAction.Toggle a').on('click', function() {
             ToggleRequiredWidgetFields(RequiredWidgetFieldIDs);
+            if (
+                Core.Config.Get('TimeUnitsInputType') == 'Dropdown'
+                && Core.Config.Get('TimeUnitsRequired')
+            ) {
+                ToggleRequiredWidgetFields(TimeUnitsSelectFieldIDs, 'Validate_TimeUnits');
+            }
         });
 
         // Initialize required visible fields of widgets once.
         ToggleRequiredWidgetFields(RequiredWidgetFieldIDs);
+        if (Core.Config.Get('TimeUnitsInputType') == 'Dropdown' && Core.Config.Get('TimeUnitsRequired')) {
+            ToggleRequiredWidgetFields(TimeUnitsSelectFieldIDs, 'Validate_TimeUnits');
+        }
 
         // get the Recipients on expanding of the email widget
         $('#EmailSubject').closest('.WidgetSimple').find('.Header .Toggle a').on('click', function() {
@@ -309,10 +329,12 @@ Core.Agent.TicketBulk = (function (TargetNS) {
      * @memberof Core.Agent.TicketBulk.Init
      * @function
      * @param {Object} RequiredWidgetFieldIDs
+     * @param {String} AdditionalClass
      * @description
      *      Toggles mandatory fields if they are visible/being used in an expanded widget.
+     *      Specify AdditionalClass to work with additional class.
      */
-    function ToggleRequiredWidgetFields(RequiredWidgetFieldIDs) {
+    function ToggleRequiredWidgetFields(RequiredWidgetFieldIDs, AdditionalClass) {
 
         // Check each relevant field for visibility and toggle
         // class Validate_Required (visible: add / invisible: remove).
@@ -322,9 +344,18 @@ Core.Agent.TicketBulk = (function (TargetNS) {
 
             if (WidgetExpanded || $('#' + FieldID).is(':visible')) {
                 $('#' + FieldID).addClass('Validate_Required');
+
+                if (AdditionalClass) {
+                    $('#' + FieldID).addClass(AdditionalClass);
+                }
+
+                return;
             }
-            else {
-                $('#' + FieldID).removeClass('Validate_Required');
+
+            $('#' + FieldID).removeClass('Validate_Required');
+
+            if (AdditionalClass) {
+                $('#' + FieldID).removeClass(AdditionalClass);
             }
         });
     }
