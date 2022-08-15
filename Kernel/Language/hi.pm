@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.272478632478632;
+    $Self->{Completeness}        = 0.271282051282051;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8319,20 +8319,20 @@ Thanks for your help!
             'इस टिकट में सभी शामिल प्रतिनिधियों की एक सूची दिखाता है,प्रतिनिधि अंतरफलक में ज़ूम टिकट के टिकट प्राथमिकता स्क्रीन में।',
         'Shows a list of all the involved agents on this ticket, in the ticket responsible screen of the agent interface.' =>
             'इस टिकट में सभी शामिल प्रतिनिधियों की एक सूची दिखाता है,प्रतिनिधि अंतरफलक के टिकट उत्तरदायी स्क्रीन में।',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the close ticket screen of the agent interface.' =>
-            'सभी संभावित प्रतिनिधियों की एक सूची दिखाता है(सभी प्रतिनिधि श्रेणी/टिकट में टिप्पणी अनुमतियों के साथ) निर्धारित करने के लिए जिसको इस नोट के बारे में सूचित किया जाना चाहिए,प्रतिनिधि अंतरफलक के बंद टिकट स्क्रीन में।',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket free text screen of the agent interface.' =>
-            'सभी संभावित प्रतिनिधियों की एक सूची दिखाता है(सभी प्रतिनिधि श्रेणी/टिकट में टिप्पणी अनुमतियों के साथ) निर्धारित करने के लिए जिसको इस नोट के बारे में सूचित किया जाना चाहिए,प्रतिनिधि अंतरफलक के टिकट मुक्त पाठ स्क्रीन में।',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket note screen of the agent interface.' =>
-            'सभी संभावित प्रतिनिधियों की एक सूची दिखाता है(सभी प्रतिनिधि श्रेणी/टिकट में टिप्पणी अनुमतियों के साथ) निर्धारित करने के लिए जिसको इस नोट के बारे में सूचित किया जाना चाहिए,प्रतिनिधि अंतरफलक के टिकट टिप्पणी स्क्रीन में।',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
-            'सभी संभावित प्रतिनिधियों की एक सूची दिखाता है(सभी प्रतिनिधि श्रेणी/टिकट में टिप्पणी अनुमतियों के साथ) निर्धारित करने के लिए जिसको इस नोट के बारे में सूचित किया जाना चाहिए,प्रतिनिधि अंतरफलक में ज़ूम टिकट के टिकट स्वामी स्क्रीन में।',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
-            'सभी संभावित प्रतिनिधियों की एक सूची दिखाता है(सभी प्रतिनिधि श्रेणी/टिकट में टिप्पणी अनुमतियों के साथ) निर्धारित करने के लिए जिसको इस नोट के बारे में सूचित किया जाना चाहिए,प्रतिनिधि अंतरफलक में ज़ूम टिकट के टिकट विचाराधीन स्क्रीन में।',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
-            'सभी संभावित प्रतिनिधियों की एक सूची दिखाता है(सभी प्रतिनिधि श्रेणी/टिकट में टिप्पणी अनुमतियों के साथ) निर्धारित करने के लिए जिसको इस नोट के बारे में सूचित किया जाना चाहिए,प्रतिनिधि अंतरफलक में ज़ूम टिकट के टिकट प्राथमिकता स्क्रीन में।',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface.' =>
-            'सभी संभावित प्रतिनिधियों की एक सूची दिखाता है(सभी प्रतिनिधि श्रेणी/टिकट में टिप्पणी अनुमतियों के साथ) निर्धारित करने के लिए जिसको इस नोट के बारे में सूचित किया जाना चाहिए,प्रतिनिधि अंतरफलक के टिकट उत्तरदायी स्क्रीन में।',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the close ticket screen of the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket free text screen of the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket note screen of the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface.' =>
+            '',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             'टिकट अवलोकन का पूर्वावलोकन दिखाता है(ग्राहक जानकारी => 1- ग्राहक जानकारी भी दिखाता है,CustomerInfoMaxSize ग्राहक जानकारी के अक्षरों में अधिकतम आकार)।',
         'Shows all both ro and rw queues in the queue view.' => 'श्रेणी दृश्य में दोनों सभी ro और rw श्रेणीयो को दिखाता है।',

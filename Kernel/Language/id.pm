@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.678119658119658;
+    $Self->{Completeness}        = 0.676923076923077;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -8330,20 +8330,20 @@ Helpdesk Team Anda
             'Menunjukkan daftar semua agen yang terlibat pada tiket ini, di layar prioritas tiket dari tiket yang diperbesar di antarmuka agen.',
         'Shows a list of all the involved agents on this ticket, in the ticket responsible screen of the agent interface.' =>
             'Menunjukkan daftar semua agen yang terlibat pada tiket ini, dalam tiket layar yang bertanggung jawab dari antarmuka agen.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the close ticket screen of the agent interface.' =>
-            'Menunjukkan daftar semua agen yang mungkin (semua agen dengan izin catatan di antrian / tiket) untuk menentukan siapa yang harus diberitahu tentang catatan ini, di layar tiket penutupan antarmuka agen.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket free text screen of the agent interface.' =>
-            'Menunjukkan daftar semua agen yang mungkin (semua agen dengan izin catatan di antrian / tiket) untuk menentukan siapa yang harus diberitahu tentang catatan ini, dalam tiket layar teks bebas dari antarmuka agen.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket note screen of the agent interface.' =>
-            'Menunjukkan daftar semua agen yang mungkin (semua agen dengan izin catatan di antrian / tiket) untuk menentukan siapa yang harus diberitahu tentang catatan ini, dalam tiket layar teks bebas dari antarmuka agen.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
-            'Menunjukkan daftar semua agen yang mungkin (semua agen dengan izin catatan di antrian / tiket) untuk menentukan siapa yang harus diberitahu tentang catatan ini, di layar pemilik tiket dari tiket yang diperbesar di antarmuka agen.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
-            'Menunjukkan daftar semua agen yang mungkin (semua agen dengan izin catatan di antrian / tiket) untuk menentukan siapa yang harus diberitahu tentang catatan ini, dalam tiket tertunda layar tiket diperbesar dalam antarmuka agen.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
-            'Menunjukkan daftar semua agen yang mungkin (semua agen dengan izin catatan di antrian / tiket) untuk menentukan siapa yang harus diberitahu tentang catatan ini, di layar prioritas tiket dari tiket yang diperbesar di antarmuka agen.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface.' =>
-            'Menunjukkan daftar semua agen yang mungkin (semua agen dengan izin catatan di antrian / tiket) untuk menentukan siapa yang harus diberitahu tentang catatan ini, dalam tiket layar yang bertanggung jawab dari antarmuka agen.',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the close ticket screen of the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket free text screen of the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket note screen of the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface.' =>
+            '',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             'Menunjukkan preview dari gambaran tiket (CustomerInfo => 1 - menunjukkan juga pelanggan-Info, CustomerInfo Max Ukuran max ukuran dalam karakter Pelanggan-Info.).',
         'Shows all both ro and rw queues in the queue view.' => 'Menunjukkan semua baik antrian ro dan rw dalam tampilan antrian.',

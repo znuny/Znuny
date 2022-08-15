@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.347521367521368;
+    $Self->{Completeness}        = 0.346324786324786;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8324,20 +8324,20 @@ Thanks for your help!
             'Affiche une liste des agents qui participent au traitement de la demande dans l\'écran de priorité de la synthèse de la demande de l\'interface agent.',
         'Shows a list of all the involved agents on this ticket, in the ticket responsible screen of the agent interface.' =>
             'Affiche une liste des agents qui participent au traitement de la demande dans l\'écran du responsable de la demande de l\'interface agent.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the close ticket screen of the agent interface.' =>
-            'Affiche une liste de tous les agents qui ont les permissions requises de la file ou de la demande afin de déterminer lequel ou lesquels devraient être informés de ces permissions dans l\'écran de fermeture de la demande de l\'interface agent.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket free text screen of the agent interface.' =>
-            'Affiche une liste de tous les agents qui ont les permissions requises de la file ou de la demande afin de déterminer lequel ou lesquels devraient être informés de ces permissions dans l\'écran de texte libre de la demande de l\'interface agent.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket note screen of the agent interface.' =>
-            'Affiche une liste de tous les agents qui ont les permissions requises de la file ou de la demande afin de déterminer lequel ou lesquels devraient être informés de ces permissions dans l\'écran de notes de la demande de l\'interface agent.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
-            'Affiche une liste de tous les agents qui ont les permissions requises de la file ou de la demande afin de déterminer lequel ou lesquels devraient être informés de ces permissions dans l\'écran du propriétaire de la synthèse de la demande de l\'interface agent.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
-            'Affiche une liste de tous les agents qui ont les permissions requises de la file ou de la demande afin de déterminer lequel ou lesquels devraient être informés de ces permissions dans l\'écran de mise en attente de la synthèse de la demande de l\'interface agent.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
-            'Affiche une liste de tous les agents qui ont les permissions requises de la file ou de la demande afin de déterminer lequel ou lesquels devraient être informés de ces permissions dans l\'écran de priorité de la synthèse de la demande de l\'interface agent.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface.' =>
-            'Affiche une liste de tous les agents qui ont les permissions requises de la file ou de la demande afin de déterminer lequel ou lesquels devraient être informés de ces permissions dans l\'écran du responsable de la demande de l\'interface agent.',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the close ticket screen of the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket free text screen of the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket note screen of the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface.' =>
+            '',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             'Affiche la visualisation de la demande en format « L » (Grand) (« CustomerInfo => 1 - » affiche l\'information relative aux clients, et « CustomerInfoMaxSize » affiche la taille maximale, en caractères, de l\'information relative aux clients.)',
         'Shows all both ro and rw queues in the queue view.' => 'Affiche les files en lecture seule et en lecture et écriture dans la vue des files.',

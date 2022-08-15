@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.967692307692308;
+    $Self->{Completeness}        = 0.966495726495726;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -8327,20 +8327,20 @@ Thanks for your help!
             '에이전트 인터페이스의 확대된 티켓의 티켓 우선 순위 화면에서 이 티켓에 관련된 모든 에이전트의 목록을 표시합니다.',
         'Shows a list of all the involved agents on this ticket, in the ticket responsible screen of the agent interface.' =>
             '에이전트 인터페이스의 티켓 책임 화면에서 이 티켓에 관련된 모든 에이전트의 목록을 표시합니다.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the close ticket screen of the agent interface.' =>
-            '가능한 모든 에이전트 (대기열 / 티켓에 대한 메모 권한이있는 모든 에이전트)의 목록을 표시하여 에이전트 인터페이스의 티켓 닫기 화면에서이 메모에 대한 정보를 알릴 사용자를 결정합니다.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket free text screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓없는 텍스트 화면에서 가능한 모든 에이전트 (큐 / 티켓에 대한 메모 권한이있는 모든 에이전트)의 목록을 표시하여이 참고 사항에 대해 사용자에게 알릴 정보를 결정합니다.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket note screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 메모 화면에서 가능한 모든 에이전트 (대기열 / 티켓에 대한 메모 권한을 가진 모든 에이전트)의 목록을 표시하여이 참고 사항에 대해 사용자에게 알릴 정보를 결정합니다.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스의 확대 된 티켓의 티켓 소유자 화면에서 가능한 모든 에이전트 (대기열 / 티켓에 대한 메모 권한이있는 모든 에이전트)의 목록을 표시하여이 참고 사항에 대해 사용자에게 알릴 사용자를 결정합니다.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
-            '가능한 모든 상담원 (대기열 / 티켓에 대한 메모 권한이있는 모든 상담원)의 목록을 표시하여 상담원 인터페이스의 확대 된 티켓의 티켓 보류 화면에서이 메모에 대한 정보를받는 사람을 결정합니다.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
-            '상담원 인터페이스의 확대 된 티켓의 티켓 우선 순위 화면에서 가능한 모든 상담원 (대기열 / 티켓에 대한 메모 권한이있는 모든 상담원)의 목록을 표시하여이 메모에 대한 정보를 알릴 사용자를 결정합니다.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 책임 화면에서 가능한 모든 에이전트 (대기열 / 티켓에 대한 메모 권한이있는 모든 에이전트)의 목록을 표시하여이 참고 사항에 대한 정보를 제공해야합니다.',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the close ticket screen of the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket free text screen of the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket note screen of the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface.' =>
+            '',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             '티켓 개요의 미리보기를 표시합니다 (CustomerInfo => 1 - Customer-Info, CustomerInfoMaxSize 최대 크기는 Customer-Info의 문자로 표시).',
         'Shows all both ro and rw queues in the queue view.' => '대기열보기에서 ro 및 rw 대기열을 모두 표시합니다.',

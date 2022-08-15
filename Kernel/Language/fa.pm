@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.693675213675214;
+    $Self->{Completeness}        = 0.692478632478633;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -8333,20 +8333,20 @@ Thanks for your help!
             'یک لیست از تمام عوامل درگیر این بلیط، در روی صفحه نمایش اولویت بلیط یک بلیط بزرگنمایی در رابط عامل را نشان می دهد.',
         'Shows a list of all the involved agents on this ticket, in the ticket responsible screen of the agent interface.' =>
             'یک لیست از تمام عوامل درگیر این بلیط، بلیط در صفحه نمایش مسئول رابط عامل نشان می دهد.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the close ticket screen of the agent interface.' =>
-            'یک لیست از تمام عوامل ممکن است (تمام عوامل با مجوز توجه داشته باشید صف / بلیط) به تعیین که باید در مورد این یادداشت مطلع، در صفحه نمایش بلیط نزدیک رابط عامل نشان می دهد.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket free text screen of the agent interface.' =>
-            'یک لیست از تمام عوامل ممکن است (تمام عوامل با مجوز توجه داشته باشید صف / بلیط) به تعیین که باید در مورد این یادداشت مطلع، در بلیط صفحه نمایش های متنی رایگان از رابط عامل نشان می دهد.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket note screen of the agent interface.' =>
-            'یک لیست از تمام عوامل ممکن است (تمام عوامل با مجوز توجه داشته باشید صف / بلیط) به تعیین که باید در مورد این یادداشت مطلع، در روی صفحه نمایش توجه داشته باشید بلیط رابط عامل نشان می دهد.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
-            'یک لیست از تمام عوامل ممکن است (تمام عوامل با مجوز توجه داشته باشید صف / بلیط) به تعیین که باید در مورد این یادداشت مطلع، در صفحه نمایش صاحب بلیط یک بلیط بزرگنمایی در رابط عامل را نشان می دهد.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
-            'یک لیست از تمام عوامل ممکن است (تمام عوامل با مجوز توجه داشته باشید صف / بلیط) به تعیین که باید در مورد این یادداشت مطلع، در بلیط صفحه نمایش در حال بررسی یک بلیط بزرگنمایی در رابط عامل را نشان می دهد.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
-            'یک لیست از تمام عوامل ممکن است (تمام عوامل با مجوز توجه داشته باشید صف / بلیط) به تعیین که باید در مورد این یادداشت مطلع، در صفحه نمایش اولویت بلیط یک بلیط بزرگنمایی در رابط عامل را نشان می دهد.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface.' =>
-            'یک لیست از تمام عوامل ممکن است (تمام عوامل با مجوز توجه داشته باشید صف / بلیط) به تعیین که باید در مورد این یادداشت مطلع، در بلیط صفحه نمایش مسئول رابط عامل نشان می دهد.',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the close ticket screen of the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket free text screen of the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket note screen of the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface.' =>
+            '',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             'یک پیش نمایش کلی بلیط (- نشان می دهد نیز مشتری اطلاعات، CustomerInfoMaxSize حداکثر اندازه در شخصیت مشتری اطلاعات. CustomerInfo => 1) نشان می دهد.',
         'Shows all both ro and rw queues in the queue view.' => 'همه هر دو صف RO و RW در نظر صف نشان می دهد.',

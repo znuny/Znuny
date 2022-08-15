@@ -24744,3 +24744,31 @@ msgstr ""
 msgid "Maximum length of displayed attachment filenames in the article preview of ticket zoom view."
 msgstr ""
 
+#. SysConfig
+msgid "Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the close ticket screen of the agent interface."
+msgstr ""
+
+#. SysConfig
+msgid "Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket free text screen of the agent interface."
+msgstr ""
+
+#. SysConfig
+msgid "Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket note screen of the agent interface."
+msgstr ""
+
+#. SysConfig
+msgid "Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket owner screen of a zoomed ticket in the agent interface."
+msgstr ""
+
+#. SysConfig
+msgid "Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket pending screen of a zoomed ticket in the agent interface."
+msgstr ""
+
+#. SysConfig
+msgid "Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket priority screen of a zoomed ticket in the agent interface."
+msgstr ""
+
+#. SysConfig
+msgid "Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface."
+msgstr ""
+

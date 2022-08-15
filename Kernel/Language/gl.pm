@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.515042735042735;
+    $Self->{Completeness}        = 0.513846153846154;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8316,20 +8316,20 @@ Thanks for your help!
             'Mostra unha lista de tódolos axentes implicados neste ticket, na pantalla prioridade de ticket dun ticket zoom da interface de axente.',
         'Shows a list of all the involved agents on this ticket, in the ticket responsible screen of the agent interface.' =>
             'Mostra unha lista de tódolos axentes implicados neste ticket, na pantalla responsable de ticket da interface de axente.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the close ticket screen of the agent interface.' =>
-            'Mostra unha lista de tódolos posibles axentes (tódolos axentes con permisos de nota na cola/ticket) para determinar quen debe ser informado sobre esta nota, na pantalla ticket pechado da interface de axente.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket free text screen of the agent interface.' =>
-            'Mostra unha lista de tódolos posibles axentes (tódolos axentes con permisos de nota na cola/ticket) para determinar quen debe ser informado sobre esta nota, na pantalla texto libre de ticket da interface de axente.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket note screen of the agent interface.' =>
-            'Mostra unha lista de tódolos posibles axentes (tódolos axentes con permisos de nota na cola/ticket) para determinar quen debe ser informado sobre esta nota, na pantalla nota de ticket da interface de axente.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
-            'Mostra unha lista de tódolos posibles axentes (tódolos axentes con permisos de nota na cola/ticket) para determinar quen debe ser informado sobre esta nota, na pantalla propietario de ticket dun ticket zoom na interface de axente.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
-            'Mostra unha lista de tódolos posibles axentes (tódolos axentes con permisos de nota na cola/ticket) para determinar quen debe ser informado sobre esta nota, na pantalla de ticket pendente  dun ticket zoom na interface de axente.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
-            'Mostra unha lista de tódolos posibles axentes (tódolos axentes con permisos de nota na cola/ticket) para determinar quen debe ser informado sobre esta nota, na pantalla prioridade de ticket dun ticket zoom na interface de axente.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface.' =>
-            'Mostra unha lista de tódolos posibles axentes (tódolos axentes con permisos de nota na cola/ticket) para determinar quen debe ser informado sobre esta nota, na pantalla responsable de ticket da interface de axente.',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the close ticket screen of the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket free text screen of the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket note screen of the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface.' =>
+            '',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             'Mostra unha vista previa da vista xeral de ticket (ClienteInfo => 1 - mostra tamén Cliente-Info, ClienteInfoMaxTamaño max. tamaño en carácteres de Cliente-Info).',
         'Shows all both ro and rw queues in the queue view.' => 'Mostra ambas as dúas colas ro and rw na vista da cola.',
