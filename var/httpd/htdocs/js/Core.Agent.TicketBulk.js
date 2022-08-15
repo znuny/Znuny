@@ -216,11 +216,11 @@ Core.Agent.TicketBulk = (function (TargetNS) {
                 UsedType;
 
             var HasCheckbox = false,
-                IsChecked         = DynamicFieldConfigs[DynamicFieldName]['IsChecked'] || false,
-                RequireActivation = DynamicFieldConfigs[DynamicFieldName]['RequireActivation'] || false;
+                IsChecked         = (DynamicFieldConfigs[DynamicFieldName]['IsChecked'] === 'true'),
+                RequireActivation = (DynamicFieldConfigs[DynamicFieldName]['RequireActivation'] === 'true');
 
             // check if this current DynamicField has a hidden checkbox "DynamicFieldUsed"
-            if ($('#' +  DynamicFieldName + 'Used').length) {
+            if ($('#' +  DynamicFieldName + UsedSuffix).length) {
                 HasCheckbox = true;
             }
 
