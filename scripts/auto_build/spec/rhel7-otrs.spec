@@ -12,7 +12,7 @@
 # "bin/otrs.Console.pl Dev::Tools::RPMSpecGenerate". All changes will be lost.
 #
 
-Summary:      The Znuny LTS help desk.
+Summary:      The Znuny LTS service desk.
 Name:         znuny
 Version:      0.0
 License:      GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007

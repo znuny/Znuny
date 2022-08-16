@@ -1356,7 +1356,7 @@ ArticleDataTables:
         <Data Key="id" Type="AutoIncrement">1</Data>
         <Data Key="article_id">1</Data>
         <Data Key="a_from" Type="Quote">Znuny LTS &lt;hello@znuny.org&gt;</Data>
-        <Data Key="a_to" Type="Quote">Your Znuny Helpdesk &lt;znuny@localhost&gt;</Data>
+        <Data Key="a_to" Type="Quote">Your Znuny service desk &lt;znuny@localhost&gt;</Data>
         <Data Key="a_subject" Type="Quote">Znuny says hi!</Data>
         <Data Key="a_body" Type="Quote">We welcome you to Znuny, our ticketing solution based on the well-known OTRS ((Community Edition)) which we forked to make things different.
 
@@ -1387,7 +1387,7 @@ Your Znuny Team
         <Data Key="id" Type="AutoIncrement">1</Data>
         <Data Key="article_id">1</Data>
         <Data Key="body" Type="Quote">From: Znuny LTS &lt;hello@znuny.org&gt;
-To: Your Znuny Helpdesk &lt;znuny@localhost&gt;
+To: Your Znuny service desk &lt;znuny@localhost&gt;
 Subject: Znuny says hi!
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
