@@ -190,8 +190,8 @@ if applicable the created ArticleID.
         Success         => 1,                       # 0 or 1
         ErrorMessage    => '',                      # in case of error
         Data            => {                        # result data payload after Operation
-            TicketID    => 123,                     # Ticket  ID number in OTRS (help desk system)
-            ArticleID   => 43,                      # Article ID number in OTRS (help desk system)
+            TicketID    => 123,                     # Ticket ID in Znuny
+            ArticleID   => 43,                      # Article ID in Znuny
             Error => {                              # should not return errors
                     ErrorCode    => 'TicketUpdate.ErrorCode'
                     ErrorMessage => 'Error Description'
