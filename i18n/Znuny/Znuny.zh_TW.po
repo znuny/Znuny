@@ -24007,7 +24007,7 @@ msgstr ""
 msgid "Authentication type"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "OAuth2 token configuration"
 msgstr ""
 

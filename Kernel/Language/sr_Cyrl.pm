@@ -1175,6 +1175,7 @@ sub Data {
         'JWT authentication: Additional header data' => '',
         'Additional header data for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3' =>
             '',
+        'OAuth2 token configuration' => '',
         'Content type' => '',
         'The default content type added to HTTP header to use for POST and PUT requests.' =>
             '',
@@ -1385,7 +1386,6 @@ sub Data {
         'Delete account' => 'Обриши налог',
         'Fetch mail' => 'Преузми пошту',
         'Do you really want to delete this mail account?' => 'Да ли стварно желите да обришете овај имејл налог?',
-        'OAuth2 token configuration' => '',
         'Example: mail.example.com' => 'Пример: mail.example.com',
         'IMAP Folder' => 'IMAP фолдер',
         'Only modify this if you need to fetch mail from a different folder than INBOX.' =>

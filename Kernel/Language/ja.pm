@@ -1180,6 +1180,7 @@ sub Data {
         'JWT authentication: Additional header data' => '',
         'Additional header data for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3' =>
             '',
+        'OAuth2 token configuration' => '',
         'Content type' => '',
         'The default content type added to HTTP header to use for POST and PUT requests.' =>
             '',
@@ -1390,7 +1391,6 @@ sub Data {
         'Delete account' => 'アカウント削除',
         'Fetch mail' => 'メールを取得',
         'Do you really want to delete this mail account?' => '本当にこのメールアカウントを削除しますか？',
-        'OAuth2 token configuration' => '',
         'Example: mail.example.com' => '例: mail.example.com',
         'IMAP Folder' => 'IMAPフォルダー',
         'Only modify this if you need to fetch mail from a different folder than INBOX.' =>

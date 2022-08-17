@@ -1175,6 +1175,7 @@ sub Data {
         'JWT authentication: Additional header data' => '',
         'Additional header data for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3' =>
             '',
+        'OAuth2 token configuration' => '',
         'Content type' => '',
         'The default content type added to HTTP header to use for POST and PUT requests.' =>
             '',
@@ -1385,7 +1386,6 @@ sub Data {
         'Delete account' => '계정 삭제',
         'Fetch mail' => '메일 가져오기',
         'Do you really want to delete this mail account?' => '정말로 이 메일 계정을 삭제 하시겠습니까?',
-        'OAuth2 token configuration' => '',
         'Example: mail.example.com' => '예 : mail.example.com',
         'IMAP Folder' => 'IMAP 폴더',
         'Only modify this if you need to fetch mail from a different folder than INBOX.' =>

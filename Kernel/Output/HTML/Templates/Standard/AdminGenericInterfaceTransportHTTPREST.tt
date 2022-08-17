@@ -357,6 +357,20 @@
                                 </div>
                             [% END %]
 
+                            <div class="OAuth2TokenConfigField [% Data.OAuth2TokenConfigHidden | html %]">
+                                <fieldset class="TableLike">
+                                    <label class="Mandatory" for="OAuth2TokenConfigID">
+                                        <span class="Marker">*</span> [% Translate("OAuth2 token configuration") | html %]:
+                                    </label>
+                                    <div class="Field">
+                                        [% Data.OAuth2TokenConfigIDStrg %]
+                                        <div id="OAuth2TokenConfigIDError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                        <div id="OAuth2TokenConfigIDServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                    </div>
+                                    <div class="Clear"></div>
+                                </fieldset>
+                            </div>
+
                             <label for="ContentType">[% Translate("Content type") | html %]:</label>
                             <div class="Field">
                                 [% Data.ContentTypeStrg %]

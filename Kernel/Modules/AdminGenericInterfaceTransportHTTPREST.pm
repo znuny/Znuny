@@ -253,8 +253,7 @@ sub Run {
             # Payload and additional header data must be in correct form (Key1=Value1;Key2=Value2 etc.).
             FIELDNAME:
             for my $FieldName (qw(JWTAuthPayload JWTAuthAdditionalHeaderData)) {
-                next FIELDNAME if !defined $GetParam->{$FieldName};
-                next FIELDNAME if !length $GetParam->{$FieldName};
+                next FIELDNAME if !IsStringWithData( $GetParam->{$FieldName} );
 
                 my %FieldConfig;
 
@@ -280,6 +279,30 @@ sub Run {
                 # Only set config to hash if there were no errors.
                 # If an error occurs, the entered string will be kept to be displayed again.
                 $TransportConfig->{Authentication}->{$FieldName} = \%FieldConfig;
+            }
+        }
+
+        # OAuth2 token config
+        elsif (
+            $GetParam->{AuthType}
+            && $GetParam->{AuthType} eq 'OAuth2Token'
+            )
+        {
+            for my $ParamName (
+                qw(
+                AuthType
+                OAuth2TokenConfigID
+                )
+                )
+            {
+                $TransportConfig->{Authentication}->{$ParamName} = $GetParam->{$ParamName};
+            }
+            NEEDED:
+            for my $Needed (qw( OAuth2TokenConfigID  )) {
+                next NEEDED if IsStringWithData( $GetParam->{$Needed} );
+
+                $Error{ $Needed . 'ServerError' }        = 'ServerError';
+                $Error{ $Needed . 'ServerErrorMessage' } = Translatable('This field is required');
             }
         }
 
@@ -478,10 +501,15 @@ sub Run {
 sub _ShowEdit {
     my ( $Self, %Param ) = @_;
 
-    my $LayoutObject          = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $LogObject             = $Kernel::OM->Get('Kernel::System::Log');
-    my $JWTObject             = $Kernel::OM->Get('Kernel::System::JSONWebToken');
-    my $X509CertificateObject = $Kernel::OM->Get('Kernel::System::X509Certificate');
+    my $LayoutObject            = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $LogObject               = $Kernel::OM->Get('Kernel::System::Log');
+    my $JWTObject               = $Kernel::OM->Get('Kernel::System::JSONWebToken');
+    my $X509CertificateObject   = $Kernel::OM->Get('Kernel::System::X509Certificate');
+    my $OAuth2TokenConfigObject = $Kernel::OM->Get('Kernel::System::OAuth2TokenConfig');
+    my $ValidObject             = $Kernel::OM->Get('Kernel::System::Valid');
+
+    my @ValidIDs = $ValidObject->ValidIDsGet();
+    my $ValidID  = shift @ValidIDs;
 
     my $JWTObjectIsSupported = $JWTObject->IsSupported();
     $Param{JWTObjectIsSupported} = $JWTObjectIsSupported;
@@ -514,6 +542,8 @@ sub _ShowEdit {
 
         JWTAuthKeyFilePath JWTAuthKeyFilePassword JWTAuthAlgorithm
         JWTAuthCertificateFilePath JWTAuthTTL JWTAuthPayload JWTAuthAdditionalHeaderData
+
+        OAuth2TokenConfigID
         )
         )
     {
@@ -585,16 +615,22 @@ sub _ShowEdit {
         );
 
         # Create Authentication types select.
-        my @AuthMethods = ('BasicAuth');
-        push @AuthMethods, 'JWT' if $JWTObjectIsSupported;
+        my %AuthTypes = (
+            BasicAuth   => 'BasicAuth',
+            OAuth2Token => 'OAuth2 token',
+        );
+        if ($JWTObjectIsSupported) {
+            $AuthTypes{JWT} = 'JWT';
+        }
 
         $Param{AuthenticationStrg} = $LayoutObject->BuildSelection(
-            Data          => \@AuthMethods,
-            Name          => 'AuthType',
-            SelectedValue => $Param{AuthType} || '-',
-            PossibleNone  => 1,
-            Sort          => 'AlphanumericValue',
-            Class         => 'Modernize',
+            Data         => \%AuthTypes,
+            Name         => 'AuthType',
+            SelectedID   => $Param{AuthType} || '-',
+            PossibleNone => 1,
+            Sort         => 'AlphanumericValue',
+            Class        => 'Modernize',
+            Translation  => 1,
         );
 
         # Hide and disable authentication methods if they are not selected.
@@ -629,21 +665,23 @@ sub _ShowEdit {
             }
 
             # Check that a JWT can be generated
-            my $PasswordTestJWT = $JWTObject->Encode(
-                Payload     => {},
-                Algorithm   => 'RS512',
-                KeyFilePath => $Param{JWTAuthKeyFilePath},
-                KeyPassword => $Param{JWTAuthKeyFilePassword},    # might be undef or empty
-            );
-            if ( !$PasswordTestJWT ) {
-                $Param{JWTAuthKeyFilePossibleError} = 1;
+            if ( $Param{JWTAuthKeyFilePath} ) {
+                my $PasswordTestJWT = $JWTObject->Encode(
+                    Payload     => {},
+                    Algorithm   => 'RS512',
+                    KeyFilePath => $Param{JWTAuthKeyFilePath},
+                    KeyPassword => $Param{JWTAuthKeyFilePassword},    # might be undef or empty
+                );
+                if ( !$PasswordTestJWT ) {
+                    $Param{JWTAuthKeyFilePossibleError} = 1;
 
-                if (
-                    defined $Param{JWTAuthKeyFilePassword}
-                    && length $Param{JWTAuthKeyFilePassword}
-                    )
-                {
-                    $Param{JWTAuthKeyFilePasswordPossibleError} = 1;
+                    if (
+                        defined $Param{JWTAuthKeyFilePassword}
+                        && length $Param{JWTAuthKeyFilePassword}
+                        )
+                    {
+                        $Param{JWTAuthKeyFilePasswordPossibleError} = 1;
+                    }
                 }
             }
 
@@ -665,6 +703,23 @@ sub _ShowEdit {
                 }
             }
         }
+
+        # OAuth2 token config selection
+        my @OAuth2TokenConfigs = $OAuth2TokenConfigObject->DataListGet(
+            UserID => $Self->{UserID},
+        );
+        my %OAuthTokenConfigSelection = map { $_->{ID} => $_->{Name} }
+            grep { $_->{ValidID} == $ValidID }
+            @OAuth2TokenConfigs;
+
+        $Param{OAuth2TokenConfigIDStrg} = $LayoutObject->BuildSelection(
+            Data         => \%OAuthTokenConfigSelection,
+            Name         => 'OAuth2TokenConfigID',
+            SelectedID   => $Param{OAuth2TokenConfigID} || '-',
+            PossibleNone => 1,
+            Sort         => 'AlphanumericValue',
+            Class        => 'Modernize',
+        );
 
         # Create use Proxy select.
         $Param{UseProxyStrg} = $LayoutObject->BuildSelection(
@@ -872,6 +927,7 @@ sub _GetParams {
         SSLNoHostnameVerification ContentType
         JWTAuthKeyFilePath JWTAuthKeyFilePassword JWTAuthAlgorithm
         JWTAuthCertificateFilePath JWTAuthTTL JWTAuthPayload JWTAuthAdditionalHeaderData
+        OAuth2TokenConfigID
         )
         )
     {

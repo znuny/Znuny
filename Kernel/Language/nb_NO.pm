@@ -1184,6 +1184,7 @@ sub Data {
         'JWT authentication: Additional header data' => '',
         'Additional header data for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3' =>
             '',
+        'OAuth2 token configuration' => '',
         'Content type' => '',
         'The default content type added to HTTP header to use for POST and PUT requests.' =>
             '',
@@ -1394,7 +1395,6 @@ sub Data {
         'Delete account' => 'Slett konto',
         'Fetch mail' => 'Hent e-post',
         'Do you really want to delete this mail account?' => '',
-        'OAuth2 token configuration' => '',
         'Example: mail.example.com' => 'F.eks.: mail.eksempel.com',
         'IMAP Folder' => 'IMAP mappe',
         'Only modify this if you need to fetch mail from a different folder than INBOX.' =>

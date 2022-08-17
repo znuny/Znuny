@@ -1182,6 +1182,7 @@ sub Data {
         'JWT authentication: Additional header data' => '',
         'Additional header data for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3' =>
             '',
+        'OAuth2 token configuration' => '',
         'Content type' => '',
         'The default content type added to HTTP header to use for POST and PUT requests.' =>
             '',
@@ -1392,7 +1393,6 @@ sub Data {
         'Delete account' => '删除帐号',
         'Fetch mail' => '查收邮件',
         'Do you really want to delete this mail account?' => '您确定要删除这个邮件帐户吗？',
-        'OAuth2 token configuration' => '',
         'Example: mail.example.com' => '样例：mail.example.com',
         'IMAP Folder' => 'IMAP文件夹',
         'Only modify this if you need to fetch mail from a different folder than INBOX.' =>

@@ -504,8 +504,9 @@ receive the response and return its data.
 sub RequesterPerformRequest {
     my ( $Self, %Param ) = @_;
 
-    my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
-    my $JSONObject   = $Kernel::OM->Get('Kernel::System::JSON');
+    my $EncodeObject      = $Kernel::OM->Get('Kernel::System::Encode');
+    my $JSONObject        = $Kernel::OM->Get('Kernel::System::JSON');
+    my $OAuth2TokenObject = $Kernel::OM->Get('Kernel::System::OAuth2Token');
 
     # Check transport config.
     if ( !IsHashRefWithData( $Self->{TransportConfig} ) ) {
@@ -1065,17 +1066,47 @@ sub RequesterPerformRequest {
         my $AdditionalHeaders = $Config->{AdditionalHeaders};
 
         # Insert data into placeholders.
-        # Currently, the only placeholder supported is OTRS_JWT.
         my %PlaceholderData;
         if (
-            $JWTObjectIsSupported
-            && IsHashRefWithData( $Config->{Authentication} )
+            IsHashRefWithData( $Config->{Authentication} )
             && IsStringWithData( $Config->{Authentication}->{AuthType} )
-            && $Config->{Authentication}->{AuthType} eq 'JWT'
-            && IsStringWithData($JWT)
             )
         {
-            $PlaceholderData{OTRS_JWT} = $JWT;
+
+            # JWT
+            if (
+                $Config->{Authentication}->{AuthType} eq 'JWT'
+                && $JWTObjectIsSupported
+                && IsStringWithData($JWT)
+                )
+            {
+                $PlaceholderData{OTRS_JWT} = $JWT;
+            }
+
+            # OAuth2 token
+            if (
+                $Config->{Authentication}->{AuthType} eq 'OAuth2Token'
+                && $Config->{Authentication}->{OAuth2TokenConfigID}
+                )
+            {
+                my $OAuth2Token = $OAuth2TokenObject->GetToken(
+                    TokenConfigID => $Config->{Authentication}->{OAuth2TokenConfigID},
+                    UserID        => 1,
+                );
+                if ( !IsStringWithData($OAuth2Token) ) {
+                    my $ErrorMessage
+                        = "OAuth2 token for config with ID $Config->{Authentication}->{OAuth2TokenConfigID} could not be retrieved.";
+                    $Self->{DebuggerObject}->Error(
+                        Summary => $ErrorMessage,
+                    );
+                    return {
+                        Success      => 0,
+                        ErrorMessage => $ErrorMessage,
+                    };
+                }
+
+                $PlaceholderData{OTRS_OAUTH2_TOKEN} = $OAuth2Token;
+            }
         }
 
         HEADERFIELDNAME:

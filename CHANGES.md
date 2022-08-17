@@ -1,4 +1,5 @@
 # 6.4.3 2022-??-??
+ - 2022-08-17 Added OAuth2 token support to HTTP::REST generic interface requester.
  - 2022-08-10 Fixed accounted time field missing in AgentTicketBulk action.
  - 2022-08-02 Changed user of mention notification in the ticket history to the one triggering the notification. Thanks to Tim Püttmanns, maxence. [PR#273](https://github.com/znuny/Znuny/pull/273).
 

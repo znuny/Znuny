@@ -1175,6 +1175,7 @@ sub Data {
         'JWT authentication: Additional header data' => 'JWT-Authentifizierung: Zusätzliche Header-Daten',
         'Additional header data for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3' =>
             'Zusätzliche Header-Daten für JWT. Geben Sie Key- und Value-Paare an (durch ; getrennt), z. B.: Key1=Value1;Key2=Value2;Key3=Value3',
+        'OAuth2 token configuration' => 'OAuth2-Token-Konfiguration',
         'Content type' => 'Content-Type',
         'The default content type added to HTTP header to use for POST and PUT requests.' =>
             'Default-Content-Type, der für POST- und PUT-Requests zum HTTP-Header hinzugefügt wird.',
@@ -1385,7 +1386,6 @@ sub Data {
         'Delete account' => 'E-Mail-Konto löschen',
         'Fetch mail' => 'E-Mails abholen',
         'Do you really want to delete this mail account?' => 'Möchten Sie dieses E-Mail-Konto wirklich löschen?',
-        'OAuth2 token configuration' => 'OAuth2-Token-Konfiguration',
         'Example: mail.example.com' => 'Beispiel: mail.example.com',
         'IMAP Folder' => 'IMAP-Ordner',
         'Only modify this if you need to fetch mail from a different folder than INBOX.' =>
