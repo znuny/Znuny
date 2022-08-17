@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.935431273438774;
+    $Self->{Completeness}        = 0.934289907060166;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -6724,8 +6724,8 @@ sub Data {
             '定义服务人员界面工单自定义字段界面的默认备注正文。',
         'Shows a list of all the involved agents on this ticket, in the ticket free text screen of the agent interface.' =>
             '在服务人员界面工单自定义字段屏幕，显示这个工单相关的所有服务人员列表。',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket free text screen of the agent interface.' =>
-            '在服务人员界面工单自定义字段屏幕，显示这个工单所有可能的服务人员（需要具有这个队列或工单的备注权限）列表，用于确定谁将收到关于这个备注的通知。',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket free text screen of the agent interface.' =>
+            '',
         'Defines if the note in the ticket free text screen of the agent interface is visible for the customer by default.' =>
             '定义默认情况下客户是否可以看到服务人员界面工单自定义字段屏幕中的备注。',
         'Shows the ticket priority options in the ticket free text screen of the agent interface.' =>
@@ -6862,8 +6862,8 @@ sub Data {
             '设置服务人员界面关闭工单屏幕添加备注的的默认正文文本。',
         'Shows a list of all the involved agents on this ticket, in the close ticket screen of the agent interface.' =>
             '在服务人员界面关闭工单屏幕，显示这个工单相关的所有服务人员列表。',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the close ticket screen of the agent interface.' =>
-            '在服务人员界面关闭工单屏幕，显示这个工单所有可能的服务人员（需要具有这个队列或工单的备注权限）列表，用于确定谁将收到关于这个备注的通知。',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the close ticket screen of the agent interface.' =>
+            '',
         'Defines if the note in the close ticket screen of the agent interface is visible for the customer by default.' =>
             '定义默认情况下客户是否可以看到服务人员界面关闭工单屏幕中的备注。',
         'Shows the ticket priority options in the close ticket screen of the agent interface.' =>
@@ -6906,8 +6906,8 @@ sub Data {
             '设置服务人员界面工单备注屏幕添加备注的的默认正文文本。',
         'Shows a list of all the involved agents on this ticket, in the ticket note screen of the agent interface.' =>
             '在服务人员界面工单备注屏幕，显示这个工单相关的所有服务人员列表。',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket note screen of the agent interface.' =>
-            '在服务人员界面工单备注屏幕，显示这个工单所有可能的服务人员（需要具有这个队列或工单的备注权限）列表，用于确定谁将收到关于这个备注的通知。',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket note screen of the agent interface.' =>
+            '',
         'Defines if the note in the ticket note screen of the agent interface is visible for the customer by default.' =>
             '定义默认情况下客户是否可以看到服务人员界面工单备注屏幕中的备注。',
         'Shows the ticket priority options in the ticket note screen of the agent interface.' =>
@@ -6950,8 +6950,8 @@ sub Data {
             '设置服务人员界面工单所有者屏幕添加备注的的默认正文文本。',
         'Shows a list of all the involved agents on this ticket, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
             '在服务人员界面工单所有者屏幕，显示这个工单相关的所有服务人员列表。',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
-            '在服务人员界面工单所有者屏幕，显示这个工单所有可能的服务人员（需要具有这个队列或工单的备注权限）列表，用于确定谁将收到关于这个备注的通知。',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
+            '',
         'Defines if the note in the ticket owner screen of the agent interface is visible for the customer by default.' =>
             '定义默认情况下客户是否可以看到服务人员界面工单所有者屏幕中的备注。',
         'Shows the ticket priority options in the ticket owner screen of a zoomed ticket in the agent interface.' =>
@@ -6994,8 +6994,8 @@ sub Data {
             '设置服务人员界面工单挂起屏幕添加备注的的默认正文文本。',
         'Shows a list of all the involved agents on this ticket, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
             '在服务人员界面工单挂起屏幕，显示这个工单相关的所有服务人员列表。',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
-            '在服务人员界面工单挂起屏幕，显示这个工单所有可能的服务人员（需要具有这个队列或工单的备注权限）列表，用于确定谁将收到关于这个备注的通知。',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
+            '',
         'Defines if the note in the ticket pending screen of the agent interface is visible for the customer by default.' =>
             '定义默认情况下客户是否可以看到服务人员界面工单挂起屏幕中的备注。',
         'Shows the ticket priority options in the ticket pending screen of a zoomed ticket in the agent interface.' =>
@@ -7038,8 +7038,8 @@ sub Data {
             '设置服务人员界面工单优先级屏幕添加备注的的默认正文文本。',
         'Shows a list of all the involved agents on this ticket, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
             '在服务人员界面工单优先级屏幕，显示这个工单相关的所有服务人员列表。',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
-            '在服务人员界面工单优先级屏幕，显示这个工单所有可能的服务人员（需要具有这个队列或工单的备注权限）列表，用于确定谁将收到关于这个备注的通知。',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
+            '',
         'Defines if the note in the ticket priority screen of the agent interface is visible for the customer by default.' =>
             '定义默认情况下客户是否可以看到服务人员界面工单优先级屏幕中的备注。',
         'Shows the ticket priority options in the ticket priority screen of a zoomed ticket in the agent interface.' =>
@@ -7082,8 +7082,8 @@ sub Data {
             '设置服务人员界面工单负责人屏幕添加备注的的默认正文文本。',
         'Shows a list of all the involved agents on this ticket, in the ticket responsible screen of the agent interface.' =>
             '在服务人员界面工单负责人屏幕，显示这个工单相关的所有服务人员列表。',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface.' =>
-            '在服务人员界面工单负责人屏幕，显示这个工单所有可能的服务人员（需要具有这个队列或工单的备注权限）列表，用于确定谁将收到关于这个备注的通知。',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface.' =>
+            '',
         'Defines if the note in the ticket responsible screen of the agent interface is visible for the customer by default.' =>
             '定义默认情况下客户是否可以看到服务人员界面工单负责人屏幕中的备注。',
         'Shows the ticket priority options in the ticket responsible screen of the agent interface.' =>

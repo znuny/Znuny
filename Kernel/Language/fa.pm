@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.646665579651068;
+    $Self->{Completeness}        = 0.64552421327246;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -6723,8 +6723,8 @@ sub Data {
             'تعریف می کند که بدن به طور پیش فرض از توجه داشته باشید در بلیط صفحه نمایش های متنی رایگان از رابط عامل.',
         'Shows a list of all the involved agents on this ticket, in the ticket free text screen of the agent interface.' =>
             'یک لیست از تمام عوامل درگیر این بلیط، بلیط در صفحه نمایش های متنی رایگان از رابط عامل نشان می دهد.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket free text screen of the agent interface.' =>
-            'یک لیست از تمام عوامل ممکن است (تمام عوامل با مجوز توجه داشته باشید صف / بلیط) به تعیین که باید در مورد این یادداشت مطلع، در بلیط صفحه نمایش های متنی رایگان از رابط عامل نشان می دهد.',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket free text screen of the agent interface.' =>
+            '',
         'Defines if the note in the ticket free text screen of the agent interface is visible for the customer by default.' =>
             '',
         'Shows the ticket priority options in the ticket free text screen of the agent interface.' =>
@@ -6861,8 +6861,8 @@ sub Data {
             'به طور پیش فرض متن برای یادداشت اضافه شده در صفحه نمایش بلیط نزدیک رابط عامل تنظیم می کند.',
         'Shows a list of all the involved agents on this ticket, in the close ticket screen of the agent interface.' =>
             'یک لیست از تمام عوامل درگیر این بلیط، در روی صفحه نمایش بلیط نزدیک رابط عامل نشان می دهد.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the close ticket screen of the agent interface.' =>
-            'یک لیست از تمام عوامل ممکن است (تمام عوامل با مجوز توجه داشته باشید صف / بلیط) به تعیین که باید در مورد این یادداشت مطلع، در صفحه نمایش بلیط نزدیک رابط عامل نشان می دهد.',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the close ticket screen of the agent interface.' =>
+            '',
         'Defines if the note in the close ticket screen of the agent interface is visible for the customer by default.' =>
             '',
         'Shows the ticket priority options in the close ticket screen of the agent interface.' =>
@@ -6905,8 +6905,8 @@ sub Data {
             'به طور پیش فرض متن برای یادداشت اضافه شده در صفحه نمایش توجه داشته باشید بلیط رابط عامل تنظیم می کند.',
         'Shows a list of all the involved agents on this ticket, in the ticket note screen of the agent interface.' =>
             'یک لیست از تمام عوامل درگیر این بلیط، در روی صفحه نمایش توجه داشته باشید بلیط رابط عامل نشان می دهد.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket note screen of the agent interface.' =>
-            'یک لیست از تمام عوامل ممکن است (تمام عوامل با مجوز توجه داشته باشید صف / بلیط) به تعیین که باید در مورد این یادداشت مطلع، در روی صفحه نمایش توجه داشته باشید بلیط رابط عامل نشان می دهد.',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket note screen of the agent interface.' =>
+            '',
         'Defines if the note in the ticket note screen of the agent interface is visible for the customer by default.' =>
             '',
         'Shows the ticket priority options in the ticket note screen of the agent interface.' =>
@@ -6949,8 +6949,8 @@ sub Data {
             'به طور پیش فرض متن برای یادداشت اضافه شده در صفحه نمایش صاحب بلیط یک بلیط بزرگنمایی در رابط عامل از مجموعه.',
         'Shows a list of all the involved agents on this ticket, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
             'یک لیست از تمام عوامل درگیر این بلیط، در صفحه صاحب بلیط یک بلیط بزرگنمایی در رابط عامل را نشان می دهد.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
-            'یک لیست از تمام عوامل ممکن است (تمام عوامل با مجوز توجه داشته باشید صف / بلیط) به تعیین که باید در مورد این یادداشت مطلع، در صفحه نمایش صاحب بلیط یک بلیط بزرگنمایی در رابط عامل را نشان می دهد.',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
+            '',
         'Defines if the note in the ticket owner screen of the agent interface is visible for the customer by default.' =>
             '',
         'Shows the ticket priority options in the ticket owner screen of a zoomed ticket in the agent interface.' =>
@@ -6993,8 +6993,8 @@ sub Data {
             'به طور پیش فرض متن برای یادداشت اضافه شده در صفحه نمایش بلیط در انتظار یک بلیط بزرگنمایی در رابط عامل از مجموعه.',
         'Shows a list of all the involved agents on this ticket, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
             'یک لیست از تمام عوامل درگیر این بلیط، در روی صفحه نمایش بلیط در انتظار یک بلیط بزرگنمایی در رابط عامل را نشان می دهد.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
-            'یک لیست از تمام عوامل ممکن است (تمام عوامل با مجوز توجه داشته باشید صف / بلیط) به تعیین که باید در مورد این یادداشت مطلع، در بلیط صفحه نمایش در حال بررسی یک بلیط بزرگنمایی در رابط عامل را نشان می دهد.',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
+            '',
         'Defines if the note in the ticket pending screen of the agent interface is visible for the customer by default.' =>
             '',
         'Shows the ticket priority options in the ticket pending screen of a zoomed ticket in the agent interface.' =>
@@ -7037,8 +7037,8 @@ sub Data {
             'به طور پیش فرض متن برای یادداشت اضافه شده در صفحه نمایش اولویت بلیط یک بلیط بزرگنمایی در رابط عامل از مجموعه.',
         'Shows a list of all the involved agents on this ticket, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
             'یک لیست از تمام عوامل درگیر این بلیط، در روی صفحه نمایش اولویت بلیط یک بلیط بزرگنمایی در رابط عامل را نشان می دهد.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
-            'یک لیست از تمام عوامل ممکن است (تمام عوامل با مجوز توجه داشته باشید صف / بلیط) به تعیین که باید در مورد این یادداشت مطلع، در صفحه نمایش اولویت بلیط یک بلیط بزرگنمایی در رابط عامل را نشان می دهد.',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
+            '',
         'Defines if the note in the ticket priority screen of the agent interface is visible for the customer by default.' =>
             '',
         'Shows the ticket priority options in the ticket priority screen of a zoomed ticket in the agent interface.' =>
@@ -7081,8 +7081,8 @@ sub Data {
             'به طور پیش فرض متن برای یادداشت اضافه شده در بلیط صفحه نمایش مسئول رابط عامل تنظیم می کند.',
         'Shows a list of all the involved agents on this ticket, in the ticket responsible screen of the agent interface.' =>
             'یک لیست از تمام عوامل درگیر این بلیط، بلیط در صفحه نمایش مسئول رابط عامل نشان می دهد.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface.' =>
-            'یک لیست از تمام عوامل ممکن است (تمام عوامل با مجوز توجه داشته باشید صف / بلیط) به تعیین که باید در مورد این یادداشت مطلع، در بلیط صفحه نمایش مسئول رابط عامل نشان می دهد.',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface.' =>
+            '',
         'Defines if the note in the ticket responsible screen of the agent interface is visible for the customer by default.' =>
             '',
         'Shows the ticket priority options in the ticket responsible screen of the agent interface.' =>

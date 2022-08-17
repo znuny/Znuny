@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.8788521115278;
+    $Self->{Completeness}        = 0.878199902168596;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -6722,8 +6722,8 @@ sub Data {
             'Define o corpo padrão da nota na tela de ticket de campos livres da interface de agente.',
         'Shows a list of all the involved agents on this ticket, in the ticket free text screen of the agent interface.' =>
             'Mostra a lista de todos os agentes envolvidos neste ticket na tela de campos livres de ticket na interface de agente.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket free text screen of the agent interface.' =>
-            'Mostra a lista de todos os agentes possíveis (todos agentes com permissões de nota na fila/ticket) para determinar quem deve ser informado sobre essa nota na tela de campos livres de ticket na interface de agente.',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket free text screen of the agent interface.' =>
+            '',
         'Defines if the note in the ticket free text screen of the agent interface is visible for the customer by default.' =>
             'Define se a nota da tela de campo livre de ticket da interface de agente for visível para o cliente como padrão.',
         'Shows the ticket priority options in the ticket free text screen of the agent interface.' =>
@@ -6860,8 +6860,8 @@ sub Data {
             'Define o texto de corpo padrão para notas adicionadas na tela de fechamento de ticket na interface de agente.',
         'Shows a list of all the involved agents on this ticket, in the close ticket screen of the agent interface.' =>
             'Mostra uma lista de todos agentes envolvidos neste ticket na tela de fechamento de ticket da interface de agente.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the close ticket screen of the agent interface.' =>
-            'Mostra lista de todos agentes possíveis (todos agentes com permissão de nota na fila/ticket) para determinar quem pode ser infomado sobre esta nota na tela de fechamento de ticket da interface de agente.',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the close ticket screen of the agent interface.' =>
+            '',
         'Defines if the note in the close ticket screen of the agent interface is visible for the customer by default.' =>
             'Define se a nota da tela de fechamento na interface de agente é visível como padrão para o cliente.',
         'Shows the ticket priority options in the close ticket screen of the agent interface.' =>
@@ -6904,8 +6904,8 @@ sub Data {
             'Define o texto de corpo padrão para notas adicionadas na tela de nota de ticket na interface de agente.',
         'Shows a list of all the involved agents on this ticket, in the ticket note screen of the agent interface.' =>
             'Mostra uma lista de todos agentes envolvidos neste ticket na tela de nota de ticket da interface de agente.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket note screen of the agent interface.' =>
-            'Mostra lista de todos agentes possíveis (todos agentes com permissão de nota na fila/ticket) para determinar quem pode ser infomado sobre esta nota na tela de nota de ticket da interface de agente.',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket note screen of the agent interface.' =>
+            '',
         'Defines if the note in the ticket note screen of the agent interface is visible for the customer by default.' =>
             'Define se a nota da tela de nota de ticket na interface de agente é visível como padrão para o cliente.',
         'Shows the ticket priority options in the ticket note screen of the agent interface.' =>
@@ -6948,7 +6948,7 @@ sub Data {
             '',
         'Shows a list of all the involved agents on this ticket, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
             'Mostra uma lista de todos agentes envolvidos neste ticket na tela de proprietário de ticket da interface de agente.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
             '',
         'Defines if the note in the ticket owner screen of the agent interface is visible for the customer by default.' =>
             'Define se a nota da tela proprietári de ticket na interface de agente é visível como padrão para o cliente.',
@@ -6992,7 +6992,7 @@ sub Data {
             '',
         'Shows a list of all the involved agents on this ticket, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
             '',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
             '',
         'Defines if the note in the ticket pending screen of the agent interface is visible for the customer by default.' =>
             'Define se a nota da tela de ticket pendente na interface de agente é visível como padrão para o cliente.',
@@ -7036,7 +7036,7 @@ sub Data {
             '',
         'Shows a list of all the involved agents on this ticket, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
             '',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
             '',
         'Defines if the note in the ticket priority screen of the agent interface is visible for the customer by default.' =>
             'Define se a nota da tela de prioridade de ticket na interface de agente é visível como padrão para o cliente.',
@@ -7080,8 +7080,8 @@ sub Data {
             'Define o texto de corpo padrão para notas adicionadas na tela de responsável por ticket na interface de agente.',
         'Shows a list of all the involved agents on this ticket, in the ticket responsible screen of the agent interface.' =>
             'Mostra uma lista de todos agentes envolvidos neste ticket na tela de responsável pelo ticket da interface de agente.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface.' =>
-            'Mostra lista de todos agentes possíveis (todos agentes com permissões de nota na fila/ticket) para determinar quem pode ser infomado sobre esta nota na tela de responsável pelo ticket da interface de agente.',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface.' =>
+            '',
         'Defines if the note in the ticket responsible screen of the agent interface is visible for the customer by default.' =>
             'Define se a nota da tela de responsável pelo ticket na interface de agente é visível como padrão para o cliente.',
         'Shows the ticket priority options in the ticket responsible screen of the agent interface.' =>
