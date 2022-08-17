@@ -84,7 +84,7 @@ sub SendNotification {
     my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
 
     NEEDED:
-    for my $Needed (qw(TicketID ArticleID Recipients)) {
+    for my $Needed (qw(TicketID ArticleID Recipients UserID)) {
         next NEEDED if defined $Param{$Needed};
 
         $LogObject->Log(
@@ -165,9 +165,9 @@ sub AddMention {
         return;
     }
 
-    my $TicketID  = $Param{TicketID};
-    my $ArticleID = $Param{ArticleID};
-    my $RecipientUserID    = $Param{Recipient}->{UserID};
+    my $TicketID        = $Param{TicketID};
+    my $ArticleID       = $Param{ArticleID};
+    my $RecipientUserID = $Param{Recipient}->{UserID};
 
     my $Mentions = $Self->GetTicketMentions(
         TicketID => $TicketID,
@@ -501,7 +501,7 @@ sub GetDashboardWidgetTicketData {
 
         # Note: This will only use the creation time of the newest article
         # per ticket.
-        $CustomColumns{ $Mention->{TicketID} }->{Translatable('LastMention')} = $Mention->{CreateTime};
+        $CustomColumns{ $Mention->{TicketID} }->{ Translatable('LastMention') } = $Mention->{CreateTime};
     }
 
     my %Data = (

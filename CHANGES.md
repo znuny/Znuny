@@ -1,5 +1,6 @@
 # 6.4.3 2022-??-??
  - 2022-08-10 Fixed accounted time field missing in AgentTicketBulk action.
+ - 2022-08-02 Changed user of mention notification in the ticket history to the one triggering the notification. Thanks to Tim Püttmanns, maxence. [PR#273](https://github.com/znuny/Znuny/pull/273).
 
 # 6.4.2 2022-07-28
  - 2022-07-28 Fixed check for recipients in mention notifications. [#270)(https://github.com/znuny/Znuny/issues/270)
