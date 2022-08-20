@@ -1,5 +1,5 @@
 package Selenium::Remote::RemoteConnection;
-$Selenium::Remote::RemoteConnection::VERSION = '1.38';
+$Selenium::Remote::RemoteConnection::VERSION = '1.36';
 use strict;
 use warnings;
 
@@ -49,8 +49,7 @@ sub check_status {
         croak "Could not connect to SeleniumWebDriver: $_";
     };
 
-    my $cmdOut = $status->{cmd_status} || '';
-    if ( $cmdOut ne 'OK' ) {
+    if ( $status->{cmd_status} ne 'OK' ) {
 
         # Could be grid, see if we can talk to it
         $status = undef;
@@ -58,7 +57,7 @@ sub check_status {
           $self->request( { method => 'GET', url => 'grid/api/hub/status' } );
     }
 
-    unless ( $cmdOut eq 'OK' ) {
+    unless ( $status->{cmd_status} eq 'OK' ) {
         croak "Selenium server did not return proper status";
     }
 }
@@ -236,7 +235,7 @@ Selenium::Remote::RemoteConnection - Connect to a selenium server
 
 =head1 VERSION
 
-version 1.38
+version 1.36
 
 =head1 SYNOPSIS
 

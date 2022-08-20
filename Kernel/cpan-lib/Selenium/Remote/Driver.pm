@@ -1,5 +1,5 @@
 package Selenium::Remote::Driver;
-$Selenium::Remote::Driver::VERSION = '1.38';
+$Selenium::Remote::Driver::VERSION = '1.36';
 use strict;
 use warnings;
 
@@ -404,8 +404,7 @@ sub _execute_command {
         return $self->commands->parse_response( $res, $resp );
     }
     else {
-        #Tell the use about the offending setting.
-        croak "Couldn't retrieve command settings properly ".$res->{command}."\n";
+        croak "Couldn't retrieve command settings properly\n";
     }
 }
 
@@ -1880,7 +1879,7 @@ Selenium::Remote::Driver - Perl Client for Selenium Remote Driver
 
 =head1 VERSION
 
-version 1.38
+version 1.36
 
 =head1 SYNOPSIS
 
@@ -2029,13 +2028,6 @@ You can get around that by passing an extra flag to the sub, or setting:
 
 When in WC3 Webdriver mode.
 
-=head2 FINDERS
-
-This constant is a hashref map of the old element finder aliases from wd2 to wd3.
-
-    use Data::Dumper;
-    print Dumper($Selenium::Remote::Driver::FINDERS);
-
 =head2 WC3 WEBDRIVER CURRENT STATUS
 
 That said, the following 'sanity tests' in the at/ (acceptance test) directory of the module passed on the following versions:
@@ -2084,24 +2076,6 @@ WD3 enabled server with chromedriver enabled.
 
 Also, if you instantiate the object in WC3 mode (which is the default), the remote driver will throw exceptions you have no choice but to catch,
 rather than falling back to JSONWire methods where applicable like geckodriver does.
-
-As of chrome 75 (and it's appropriate driver versions), the WC3 spec has finally been implemented.
-As such, to use chrome older than this, you will have to manually force on JSONWire mode:
-
-    $Selenium::Remote::Driver::FORCE_WD2=1;
-
-=head2 Notes on Running Selenium at Scale via selenium.jar
-
-When running many, many tests in parallel you can eventually reach resource exhaustion.
-You have to instruct the Selenium JAR to do some cleanup to avoid explosions:
-
-Inside of your selenium server's node.json (running a grid), you would put in the following:
-
-"configuration" :
-{
-"cleanUpCycle":2000
-}
-Or run the selenium jar with the -cleanupCycle parameter. Of course use whatever # of seconds is appropriate to your situation.
 
 =head1 CONSTRUCTOR
 
@@ -2759,7 +2733,7 @@ Synonymous with mouse_move_to_location
 
  Usage:
     my $window_size = $driver->get_window_size();
-    print $window_size->{'height'}, $window_size->{'width'};
+    print $window_size->{'height'}, $window_size->('width');
 
 =head2 get_window_position
 
@@ -3731,7 +3705,7 @@ Aditya Ivaturi <ivaturi@gmail.com>
 
 =head1 CONTRIBUTORS
 
-=for stopwords Allen Lew A.MacLeay Andy Jack Bas Bloemsaat Blake GH Brian Horakh Charles Howes Chris Davies Daniel Fackrell Dave Rolsky Dmitry Karasik Doug Bell Dylan Streb Eric Johnson Gabor Szabo George S. Baugh Gerhard Jungwirth Gordon Child GreatFlamingFoo Ivan Kurmanov Joe Higton Jon Hermansen Keita Sugama Ken Swanson lembark Luke Closs Martin Gruner Matthew Spahr Max O'Cull Michael Prokop mk654321 Peter Mottram (SysPete) Phil Kania Mitchell Prateek Goyal Richard Sailer Robert Utter rouzier Tetsuya Tatsumi Tod Hagan Tom Hukins Vangelis Katsikaros Vishwanath Janmanchi Viťas Strádal Yves Lavoie
+=for stopwords Allen Lew A.MacLeay Andy Jack Bas Bloemsaat Blake GH Brian Horakh Charles Howes Chris Davies Daniel Fackrell Dave Rolsky Dmitry Karasik Doug Bell Eric Johnson Gabor Szabo George S. Baugh Gerhard Jungwirth Gordon Child GreatFlamingFoo Ivan Kurmanov Joe Higton Jon Hermansen Keita Sugama Ken Swanson lembark Luke Closs Martin Gruner Matthew Spahr Max O'Cull Michael Prokop Peter Mottram (SysPete) Phil Kania Mitchell Prateek Goyal Richard Sailer Robert Utter rouzier Tetsuya Tatsumi Tod Hagan Tom Hukins Vangelis Katsikaros Vishwanath Janmanchi Viťas Strádal Yves Lavoie
 
 =over 4
 
@@ -3786,10 +3760,6 @@ Dmitry Karasik <dmitry@karasik.eu.org>
 =item *
 
 Doug Bell <doug@preaction.me>
-
-=item *
-
-Dylan Streb <dylan.streb@oneil.com>
 
 =item *
 
@@ -3858,10 +3828,6 @@ Max O'Cull <maxattax97@gmail.com>
 =item *
 
 Michael Prokop <mprokop@sipwise.com>
-
-=item *
-
-mk654321 <kosmichal@gmail.com>
 
 =item *
 
