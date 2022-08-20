@@ -52,6 +52,12 @@ jobs:
     needs: znunycodepolicy
 
     services:
+      chrome:
+        image: selenium/standalone-chrome:3.141.59-oxygen
+        options: --shm-size="2g"
+        volumes:
+          - ${{ github.workspace }}:/opt/otrs
+
       mariadb:
         image: mariadb:10
         env:
@@ -104,6 +110,7 @@ jobs:
           sed -i 's/\(.*{Database}.*\)otrs/\1'"${MYSQL_DATABASE}"'/' /opt/otrs/Kernel/Config.pm
           sed -i 's/\(.*{DatabaseUser}.*\)otrs/\1'"${MYSQL_USER}"'/' /opt/otrs/Kernel/Config.pm
           sed -i 's/\(.*{DatabasePw}.*\)some-pass/\1'"${MYSQL_PASSWORD}"'/' /opt/otrs/Kernel/Config.pm
+          sed -i 's/\(.*\$DIBI\$.*\)/\1\n    \$Self->{"TestHTTPHostname"} = "172.18.0.2";\n    \$Self->{"SeleniumTestsConfig"} = {\n        remote_server_addr  => "chrome",\n        port                => "4444",\n        platform            => "ANY",\n        browser_name        => "chrome",\n        extra_capabilities => {\n            chromeOptions => {\n                # disable-infobars makes sure window size calculations are ok\n                args => [ "disable-infobars" ],\n            },\n        },\n    },\n/' /opt/otrs/Kernel/Config.pm
           mkdir -p /opt/otrs/var/tmp
           mysql -h mariadb -u "${MYSQL_USERNAME}" -p"${MYSQL_PASSWORD}" otrs < /opt/otrs/scripts/database/otrs-schema.mysql.sql
           mysql -h mariadb -u "${MYSQL_USERNAME}" -p"${MYSQL_PASSWORD}" otrs < /opt/otrs/scripts/database/otrs-initial_insert.mysql.sql
@@ -120,5 +127,15 @@ jobs:
           # Insert tests/options to run here if you're not interested in the whole suite
           TEST_OPTIONS: ""
         run: |
+          chmod 777 -R /opt/otrs/scripts/test/sample
           su -c "bin/otrs.CheckSum.pl -a create" - otrs
           su -c "bin/otrs.Console.pl Dev::UnitTest::Run ${TEST_OPTIONS}" - otrs
+
+      - name: Archive screenshots from selenium
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Download all selenium screenshots
+          retention-days: 1
+          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/*.png
+          if-no-files-found: ignore
