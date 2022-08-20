@@ -103,7 +103,6 @@ $Selenium->RunTest(
             AdminQueueTemplates
             AdminTemplate
             AdminTemplateAttachment
-            AdminRegistration
             AdminRole
             AdminRoleGroup
             AdminRoleUser
