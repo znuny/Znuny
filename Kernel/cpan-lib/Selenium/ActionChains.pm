@@ -1,5 +1,5 @@
 package Selenium::ActionChains;
-$Selenium::ActionChains::VERSION = '1.39';
+$Selenium::ActionChains::VERSION = '1.38';
 use strict;
 use warnings;
 
@@ -129,11 +129,9 @@ sub key_down {
     if ( defined($element) ) {
         $self->click($element);
     }
-    foreach my $v (@$value) {
-        push @{ $self->actions },
-          sub { $self->driver->general_action( actions => [ { type => 'key', id => 'key', actions => [ { type => 'keyDown', value => $v } ] } ] ) };
-    }
-    return $self;
+    push @{ $self->actions },
+      sub { $self->driver->send_keys_to_active_element(@$value) };
+    $self;
 }
 
 sub key_up {
@@ -142,11 +140,9 @@ sub key_up {
     if ( defined($element) ) {
         $self->click($element);
     }
-    foreach my $v (@$value) {
-        push @{ $self->actions },
-          sub { $self->driver->$self->driver->general_action( actions => [ { type => 'key', id => 'key', actions => [ { type => 'keyUp', value => $v } ] } ] ) };
-    }
-    return $self;
+    push @{ $self->actions },
+      sub { $self->driver->send_keys_to_active_element(@$value) };
+    $self;
 }
 
 sub send_keys {
@@ -178,7 +174,7 @@ Selenium::ActionChains - Action chains for Selenium::Remote::Driver
 
 =head1 VERSION
 
-version 1.39
+version 1.38
 
 =head1 SYNOPSIS
 
