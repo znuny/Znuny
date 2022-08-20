@@ -171,6 +171,11 @@ sub new {
     $Self->{BaseURL} = $Kernel::OM->Get('Kernel::Config')->Get('HttpType') . '://';
     $Self->{BaseURL} .= Kernel::System::UnitTest::Helper->GetTestHTTPHostname();
 
+    # Force usage of legacy webdriver methods in Chrome until things are more stable.
+    if ( lc $SeleniumTestsConfig{browser_name} eq 'chrome' ) {
+        $Self->{is_wd3} = 0;
+    }
+
     # Remember the start system time for the selenium test run.
     $Self->{TestStartSystemTime} = time;    ## no critic
 
