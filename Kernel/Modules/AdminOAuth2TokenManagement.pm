@@ -145,17 +145,12 @@ sub _DeleteTokenConfig {
         );
     }
 
-    my @UsedOAuth2TokenConfigListGet = $OAuth2TokenConfigObject->UsedOAuth2TokenConfigListGet();
-    my @UsedConfig                   = grep { $TokenConfigID eq $_->{ID} } @UsedOAuth2TokenConfigListGet;
-
-    if (@UsedConfig) {
-        my $Message;
-        for my $Config (@UsedConfig) {
-            $Message .= $Config->{Scope} . ' - ID: ' . $Config->{ScopeID} . ' ';
-        }
-
+    my $OAuth2TokenConfigIsInUse = $OAuth2TokenConfigObject->IsOAuth2TokenConfigInUse(
+        ID => $TokenConfigID,
+    );
+    if ($OAuth2TokenConfigIsInUse) {
         return $LayoutObject->ErrorScreen(
-            Message => "OAuth2 token configuration is still used: " . $Message,
+            Message => "OAuth2 token configuration with ID $TokenConfigID is in use and cannot be deleted.",
             Comment => Translatable('Please contact the administrator.'),
         );
     }
@@ -191,12 +186,14 @@ sub _Overview {
     my @TokenConfigs = $OAuth2TokenConfigObject->DataListGet(
         UserID => $Self->{UserID},
     );
-    my @UsedOAuth2TokenConfigListGet = $OAuth2TokenConfigObject->UsedOAuth2TokenConfigListGet();
 
-    CONFIG:
+    TOKENCONFIG:
     for my $TokenConfig (@TokenConfigs) {
-        my @UsedConfig = grep { $TokenConfig->{ID} eq $_->{ID} } @UsedOAuth2TokenConfigListGet;
-        next CONFIG if !@UsedConfig;
+        my $OAuth2TokenConfigIsInUse = $OAuth2TokenConfigObject->IsOAuth2TokenConfigInUse(
+            ID => $TokenConfig->{ID},
+        );
+        next TOKENCONFIG if !$OAuth2TokenConfigIsInUse;
+
         $TokenConfig->{Used} = 1;
     }
 
