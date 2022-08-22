@@ -1,3 +1,6 @@
+# 6.0.46 2022-xx-xx
+ - 2022-08-22 Added check to prevent infinite loop to Core.UI.InputFields.js.
+
 # 6.0.45 2022-07-27
  - 2022-07-05 Attachment filenames in ticket zoom will now be truncated if they are too long to be displayed correctly.
  - 2022-06-23 Fixed issue with high CPU load on parsing e-mails in PostMaster filter DetectAttachment.
