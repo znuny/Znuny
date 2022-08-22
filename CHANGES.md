@@ -1,4 +1,5 @@
 # 6.4.3 2022-??-??
+ - 2022-08-22 Fixed evaluation of parameter TicketID in Kernel::Output::HTML::Article::Base::ArticleActions. Thanks to @LotharZok, maxence. [PR#278](https://github.com/znuny/Znuny/pull/278).
  - 2022-08-22 Added check to prevent infinite loop to Core.UI.InputFields.js.
  - 2022-08-17 Added OAuth2 token support to HTTP::REST generic interface requester.
  - 2022-08-10 Fixed accounted time field missing in AgentTicketBulk action.
