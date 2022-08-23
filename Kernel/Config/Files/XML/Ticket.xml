@@ -11102,6 +11102,7 @@
                 <Item>AgentTicketZoom</Item>
                 <Item>AgentLinkObject</Item>
                 <Item>AgentSplitSelection</Item>
+                <Item>CustomerTicketMessage</Item>
                 <Item>CustomerTicketPrint</Item>
                 <Item>CustomerTicketProcess</Item>
                 <Item>CustomerTicketZoom</Item>
