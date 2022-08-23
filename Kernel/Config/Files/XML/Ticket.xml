@@ -2246,6 +2246,13 @@
             <Item ValueType="String"></Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###CustomerIDRaw" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
+        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
+        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
+        <Value>
+            <Item ValueType="String"></Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###CustomerUserLogin" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
         <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
         <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
