@@ -96,14 +96,16 @@
                             </p>
                         </div>
                         <div class="Size1of2">
-                           <a name="ProcessID" id="ProcessID" data-processid="[% Data.ProcessID %]"></a>
-                            <input type="text" id="FilterAvailableActivityDialogs" class="FilterAvailableProcessItem" name="FilterAvailableActivityDialogs" value="" title="[% Translate("Filter available Activity Dialogs") | html %]" placeholder="[% Translate("Filter available Activity Dialogs") | html %]..." />
-                            <input type="checkbox" checked id="ActivityDialogScopeFilter" class="ScopeFilter" data-scope-filter="ActivityDialog" name="ActivityDialogScopeFilter"><i class="fa fa-globe" title="[% Translate('Also show global %s', Translate('Activity Dialogs')) | html %]"></i>
                             <ul class="Tablelike W90pc SpacingTop">
                                 <li class="Header">
                                     [% Translate("Available Activity Dialogs") | html %]
                                 </li>
                             </ul>
+                            <div class="FilterInputContainer W90pc">
+                                <a name="ProcessID" id="ProcessID" data-processid="[% Data.ProcessID %]"></a>
+                                <input type="text" id="FilterAvailableActivityDialogs" class="FilterAvailableProcessItem" name="FilterAvailableActivityDialogs" value="" title="[% Translate("Filter available Activity Dialogs") | html %]" placeholder="[% Translate("Filter available Activity Dialogs") | html %]..." />
+                                <input type="checkbox" checked id="ActivityDialogScopeFilter" class="ScopeFilter" data-scope-filter="ActivityDialog" name="ActivityDialogScopeFilter"><i class="fa fa-globe" title="[% Translate('Also show global %s', Translate('Activity Dialogs')) | html %]"></i>
+                            </div>
                             <ul class="AllocationList Tablelike W90pc" id="AvailableActivityDialogs">
 [% RenderBlockStart("AvailableActivityDialogRow") %]
                                 <li data-id="[% Data.ID | html %]" title="[% Translate('Name: %s, EntityID: %s', Data.Name, Data.EntityID) | html %]" data-entity-type="ActivityDialog" data-scope="[% Data.Scope %]" data-scope-entity-id="[% Data.ScopeEntityID %]">
@@ -131,6 +133,9 @@
                                     [% Translate("Assigned Activity Dialogs") | html %]
                                 </li>
                             </ul>
+                            <div class="FilterInputContainer W90pc">
+                                <input type="text" id="FilterAssignedActivityDialogs" class="FilterAssignedProcessItem" name="FilterAssignedActivityDialogs" value="" title="[% Translate("Filter Assigned Activity Dialogs") | html %]" placeholder="[% Translate("Filter Assigned Activity Dialogs") | html %]..." />
+                            </div>
                             <ul class="AllocationList Tablelike W90pc" id="AssignedActivityDialogs">
 [% RenderBlockStart("AssignedActivityDialogRow") %]
                                 <li data-id="[% Data.ID | html %]" title="[% Translate("Name: %s, EntityID: %s", Data.Name, Data.EntityID) | html %]">

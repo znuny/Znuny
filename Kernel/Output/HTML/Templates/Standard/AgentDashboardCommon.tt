@@ -325,7 +325,8 @@
                                 <div class="Field DontPrint LayoutGrid AllocationListContainer modal-col-container">
                                     <div class="Size1of2 modal-col1">
                                         <ul class="Tablelike">
-                                            <li class="Header">[% Translate("Available Columns") | html %]</li>
+                                            <li class="Header">[% Translate("Available Columns") | html %]
+                                            </li>
                                         </ul>
                                         <div class="FilterInputContainer">
                                             <input type="text" class="FilterAvailableFields" name="FilterAvailableFields"
@@ -340,6 +341,11 @@
                                             <li class="Header">[% Translate("Visible Columns (order by drag & drop)") | html %]
                                             </li>
                                         </ul>
+                                        <div class="FilterInputContainer">
+                                            <input type="text" class="FilterAssignedFields" name="FilterAssignedFields"
+                                                value="" title="[% Translate(" Filter assigned fields") | html %]"
+                                                placeholder="[% Translate(" Filter assigned fields") | html %]..." />
+                                        </div>
                                         <ul class="AllocationList Tablelike AssignedFields OrderNumbers"
                                             id="AssignedFields-Dashboard[% Data.Name | html %]"></ul>
                                     </div>

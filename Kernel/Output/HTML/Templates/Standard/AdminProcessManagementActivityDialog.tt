@@ -159,13 +159,15 @@
                             </p>
                         </div>
                         <div class="Size1of2">
-                            <input type="text" id="FilterAvailableFields" class="W75pc" name="FilterAvailableFields" value="" title="[% Translate("Filter available fields") | html %]" placeholder="[% Translate("Filter available fields") | html %]..." />
-                            <ul class="Tablelike W90pc SpacingTop">
+                            <ul class="Tablelike  SpacingTop">
                                 <li class="Header">
                                     [% Translate("Available Fields") | html %]
                                 </li>
                             </ul>
-                            <ul class="AllocationList Tablelike W90pc" id="AvailableFields">
+                            <div class="FilterInputContainer">
+                                <input type="text" id="FilterAvailableFields" name="FilterAvailableFields" value="" title="[% Translate("Filter available fields") | html %]" placeholder="[% Translate("Filter available fields") | html %]..." />
+                            </div>
+                            <ul class="AllocationList Tablelike  AvailableFields" id="AvailableFields">
 [% RenderBlockStart("AvailableFieldRow") %]
                                 <li title="[% Data.FieldnameTranslated | html %]" data-name-translated="[% Data.FieldnameTranslated | html %]" data-id="[% Data.Field | html %]" data-config="">
                                     [% Data.FieldnameTranslated | html %]
@@ -179,12 +181,17 @@
                             </ul>
                         </div>
                         <div class="Size1of2">
-                            <ul class="Tablelike W90pc">
+                            <ul class="Tablelike">
                                 <li class="Header">
                                     [% Translate("Assigned Fields") | html %]
                                 </li>
                             </ul>
-                            <ul class="AllocationList Tablelike W90pc" id="AssignedFields">
+                            <div class="FilterInputContainer">
+                                <input type="text" id="FilterAssignedFields" class="FilterAssignedFields" name="FilterAssignedFields"
+                                    value="" title="[% Translate(" Filter assigned fields") | html %]"
+                                    placeholder="[% Translate(" Filter assigned fields") | html %]..." />
+                            </div>
+                            <ul class="AllocationList Tablelike AssignedFields OrderNumbers" id="AssignedFields">
 [% RenderBlockStart("AssignedFieldRow") %]
                                 <li data-name-translated="[% Translate(Data.Field) | html %]" data-id="[% Data.Field | html %]" data-entity="[% Data.Field | html %]" data-config="[% Data.FieldConfig | html %]" title="Name: [% Translate(Data.Field) | html %]">
                                     [% Translate(Data.Field) | html %]

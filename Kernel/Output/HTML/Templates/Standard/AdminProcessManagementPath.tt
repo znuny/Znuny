@@ -73,12 +73,14 @@
                             </p>
                         </div>
                         <div class="Size1of2">
-                            <input type="text" id="FilterAvailableTransitionActions" class="W75pc" name="FilterAvailableTransitionActions" value="" title="[% Translate("Filter available Transition Actions") | html %]" placeholder="[% Translate("Filter available Transition Actions") | html %]..." />
                             <ul class="Tablelike W90pc SpacingTop">
                                 <li class="Header">
                                     [% Translate("Available Transition Actions") | html %]
                                 </li>
                             </ul>
+                            <div class="FilterInputContainer W90pc">
+                                <input type="text" id="FilterAvailableTransitionActions" class="W75pc" name="FilterAvailableTransitionActions" value="" title="[% Translate("Filter available Transition Actions") | html %]" placeholder="[% Translate("Filter available Transition Actions") | html %]..." />
+                             </div>
                             <ul class="AllocationList Tablelike W90pc" id="AvailableTransitionActions">
 [% RenderBlockStart("AvailableTransitionActionRow") %]
                                 <li data-id="[% Data.ID | html %]" id="[% Data.EntityID | html %]" title="[% Translate("Name: %s, EntityID: %s", Data.Name, Data.EntityID) | html %]">
@@ -101,6 +103,9 @@
                                     [% Translate("Assigned Transition Actions") | html %]
                                 </li>
                             </ul>
+                            <div class="FilterInputContainer W90pc">
+                                <input type="text" id="FilterAssignedTransitionActions" class="W75pc" name="FilterAssignedTransitionActions" value="" title="[% Translate("Filter assigned Transition Actions") | html %]" placeholder="[% Translate("Filter assigned Transition Actions") | html %]..." />
+                             </div>
                             <ul class="AllocationList Tablelike W90pc" id="AssignedTransitionActions">
                             </ul>
                         </div>
