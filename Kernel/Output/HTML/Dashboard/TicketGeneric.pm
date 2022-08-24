@@ -1965,10 +1965,9 @@ sub Run {
 
                 # add pill class
                 if ( $Column eq 'State' ) {
-                    my $CSSSelector = $LayoutObject->CleanUpCSSSelector(
-                        CSSSelector => $Ticket{State},
-                    );
-                    $CSSClass .= 'pill pill-' . $CSSSelector;
+                    if ( IsStringWithData( $Ticket{StateID} ) ) {
+                        $CSSClass .= 'pill StateID-' . $Ticket{StateID};
+                    }
                 }
 
                 if ( $Column eq 'Title' ) {

@@ -397,33 +397,33 @@ INSERT INTO ticket_type (name, valid_id, create_by, create_time, change_by, chan
 -- ----------------------------------------------------------
 --  insert into table ticket_priority
 -- ----------------------------------------------------------
-INSERT INTO ticket_priority (name, valid_id, create_by, create_time, change_by, change_time)
+INSERT INTO ticket_priority (name, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    ('1 very low', 1, 1, current_timestamp, 1, current_timestamp);
+    ('1 very low', 1, '#03c4f0', 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table ticket_priority
 -- ----------------------------------------------------------
-INSERT INTO ticket_priority (name, valid_id, create_by, create_time, change_by, change_time)
+INSERT INTO ticket_priority (name, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    ('2 low', 1, 1, current_timestamp, 1, current_timestamp);
+    ('2 low', 1, '#83bfc8', 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table ticket_priority
 -- ----------------------------------------------------------
-INSERT INTO ticket_priority (name, valid_id, create_by, create_time, change_by, change_time)
+INSERT INTO ticket_priority (name, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    ('3 normal', 1, 1, current_timestamp, 1, current_timestamp);
+    ('3 normal', 1, '#cdcdcd', 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table ticket_priority
 -- ----------------------------------------------------------
-INSERT INTO ticket_priority (name, valid_id, create_by, create_time, change_by, change_time)
+INSERT INTO ticket_priority (name, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    ('4 high', 1, 1, current_timestamp, 1, current_timestamp);
+    ('4 high', 1, '#ffaaaa', 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table ticket_priority
 -- ----------------------------------------------------------
-INSERT INTO ticket_priority (name, valid_id, create_by, create_time, change_by, change_time)
+INSERT INTO ticket_priority (name, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    ('5 very high', 1, 1, current_timestamp, 1, current_timestamp);
+    ('5 very high', 1, '#ff505e', 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table ticket_lock_type
 -- ----------------------------------------------------------

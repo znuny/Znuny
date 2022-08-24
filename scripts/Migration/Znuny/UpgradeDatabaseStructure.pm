@@ -40,6 +40,11 @@ sub Run {
             Module  => 'StateColor',
         },
         {
+            Message =>
+                'Add new column "color" to table "ticket_priority" and also add a default value for initial priorities.',
+            Module => 'PriorityColor',
+        },
+        {
             Message => 'Create table smime_keys',
             Module  => 'SMIMEKeys',
         },

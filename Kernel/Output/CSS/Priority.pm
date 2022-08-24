@@ -6,7 +6,7 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-package Kernel::Output::CSS::State;
+package Kernel::Output::CSS::Priority;
 
 use strict;
 use warnings;
@@ -15,7 +15,7 @@ use parent 'Kernel::Output::CSS::Base';
 
 our @ObjectDependencies = (
     'Kernel::Output::HTML::Layout',
-    'Kernel::System::State',
+    'Kernel::System::Priority',
 );
 
 use Kernel::System::VariableCheck qw(:all);
@@ -35,28 +35,29 @@ Returns:
 sub CreateCSS {
     my ( $Self, %Param ) = @_;
 
-    my $StateObject  = $Kernel::OM->Get('Kernel::System::State');
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $PriorityObject = $Kernel::OM->Get('Kernel::System::Priority');
+    my $LayoutObject   = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
-    my %StateList = $StateObject->StateList(
+    my %PriorityList = $PriorityObject->PriorityList(
         UserID => 1,
         Valid  => 1,
     );
 
-    return '' if !%StateList;
+    return '' if !%PriorityList;
 
     my %Data;
 
-    STATEID:
-    for my $StateID ( sort keys %StateList ) {
-        my %State = $StateObject->StateGet(
-            ID => $StateID,
+    PriorityID:
+    for my $PriorityID ( sort keys %PriorityList ) {
+        my %Priority = $PriorityObject->PriorityGet(
+            PriorityID => $PriorityID,
+            UserID     => 1,
         );
-        next STATEID if !%State;
-        next STATEID if !IsStringWithData( $State{Color} );
+        next PriorityID if !%Priority;
+        next PriorityID if !IsStringWithData( $Priority{Color} );
 
-        $Data{ '.StateID-' . $StateID } = {
-            background => $State{Color},
+        $Data{ '.PriorityID-' . $PriorityID } = {
+            background => $Priority{Color},
         };
     }
 

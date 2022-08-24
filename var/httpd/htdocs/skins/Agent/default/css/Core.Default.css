@@ -1,6 +1,6 @@
 /*
 Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 
 This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (GPL). If you
@@ -23,6 +23,7 @@ body {
     font-size: 12px;
     text-align: left;
     position: relative;
+    background: var(--main-bg-color);
 }
 
 .RTL {
@@ -171,13 +172,13 @@ body {
  */
 
 a {
-    color: #F92;
+    color: var(--primary-color);
     text-decoration: none;
 }
 
 a:hover,
 a:focus {
-    color: #F72;
+    color: var(--primary-color-darker);
 }
 
 /**
@@ -193,6 +194,7 @@ h2 {
     font-size: 14px;
     color: #474747;
     margin-bottom: 10px;
+    /*font-family: Inter;*/
 }
 
 h3 {
@@ -370,23 +372,34 @@ dd {
 
 div.DnDUploadBox {
     overflow-y: hidden;
-    width: 622px;
+    width: 605px;
     padding: 0 !important;
 }
 
+div.DnDUploadBox:hover {
+    cursor: pointer;
+}
+
 div.DnDUpload {
-    border: 1px solid #ccc;
-    color: #aaa;
-    min-height: 60px;
-    text-align: center;
     position: relative;
-    margin-bottom: 5px;
-    max-width: 622px;
+    display: flex;
+    flex-flow: column;
+    gap: var(--padding-xs);
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-md);
+    margin-bottom: var(--margin-xs);
+    color: var(--gray-semi-dark);
+    width: 100%;
+    max-width: var(--main-field-size) !important;
+    min-height: 60px;
     box-sizing: border-box;
+    border-radius: var(--border-radius-md);
+    border: var(--border-width) dashed var(--border-color);
 }
 
 span.ReadyForUpload {
-    padding: 30px 0px 5px;
+    padding: 50px 0px 25px;
     display: block;
 }
 
@@ -408,7 +421,7 @@ div.DnDUpload.DragOver {
 
 div.DnDUpload i {
     position: absolute;
-    top: 10px;
+    top: 30px;
     left: 50%;
     margin-left: -20px;
     font-size: 20px;
@@ -532,11 +545,12 @@ table.AttachmentList.DataTable thead th {
 }
 
 .SpacingTop {
-    margin-top: 13px;
+    margin: 0;
+    /*margin-top: 13px;*/
 }
 
 .SpacingTopSmall {
-    margin-top: 8px;
+    margin-top: var(--margin-lg);
 }
 
 .SpacingTopLarge {
@@ -593,6 +607,7 @@ table.AttachmentList.DataTable thead th {
 .Clear {
     float: none !important;
     clear: both !important;
+    padding: 0 !important;
 }
 
 .ClearNone {
@@ -616,7 +631,10 @@ table.AttachmentList.DataTable thead th {
  */
 .MainBox {
     position: relative;
-    padding: 16px 10px 7px 10px;
+    padding: var(--main-page-padding);
+    background: var(--main-bg-color);
+    /* this min-heigh is causing a y-axis overflow
+    min-height: calc(100vh - 138px);*/
 }
 
 .RTL .MainBox {
@@ -625,11 +643,13 @@ table.AttachmentList.DataTable thead th {
 
 .OverviewBox {
     position: relative;
+    padding: var(--main-page-padding) var(--main-page-padding) 0;
+    background-color: var(--main-bg-color);
 }
 
 .MainBox > h1 {
     margin: 0;
-    padding: 10px 8px 15px 8px;
+    padding: none;
     position: relative;
 }
 
@@ -668,8 +688,9 @@ table.AttachmentList.DataTable thead th {
 }
 
 .OverviewBox > h1 {
-    margin: 10px 0px;
-    padding: 8px 11px 7px;
+    font-size: var(--h1-font-size);
+    margin: 0;
+    padding: var(--size-20) 0;
     position: relative;
 }
 
@@ -678,17 +699,19 @@ table.AttachmentList.DataTable thead th {
  */
 
 .BreadCrumb {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    font-weight: var(--semi-bold);
     list-style-type: none;
-    margin: 0px 2px 15px 0px;
-    padding: 7px 15px 4px 0px;
-    background: #f5f5f5;
+    margin: 0;
+    padding: var(--padding-sm) 0 var(--main-page-padding) 0;
+    background: transparent;
     position: relative;
-    padding-left: 0px;
-    padding-right: 15px;
     overflow-y: hidden;
     overflow-x: auto;
     white-space: nowrap;
-    box-shadow: 1px 1px 0px #e9e9e9;
+    box-shadow: none;
 }
 
 .RTL .BreadCrumb {
@@ -697,24 +720,44 @@ table.AttachmentList.DataTable thead th {
 }
 
 .BreadCrumb li {
-    display: inline-block;
-    margin: 0px 2px 0px 2px;
-    padding-left: 35px;
-    color: #777;
+    display: flex;
+    align-content: center;
+    /*margin: 0px 10px 0px 0px;*/
+    padding-left: var(--padding-md);
     position: relative;
     white-space: nowrap;
-    vertical-align: middle;
+    text-transform: uppercase;
 }
 
-.BreadCrumb li > a,
+/*.BreadCrumb li > a,
 .BreadCrumb li > span {
     line-height: 14px;
     display: inline-block;
     padding: 0px 2px 3px 2px;
+}*/
+
+.BreadCrumb li i {
+    font-size: var(--font-size-xl);
+    color: var(--bread-crumb);
+}
+
+.BreadCrumb li > span {
+    color: var(--bread-crumb-active);
+    font-size: var(--font-size-lg);
+    font-weight: var(--semi-bold);
 }
 
 .BreadCrumb li:first-child {
-    padding-left: 20px;
+    padding-left: 0;
+}
+
+.BreadCrumb li:last-child {
+    padding-right: 0;
+    padding-left: var(--padding-md);
+}
+
+.BreadCrumb li:last-child a{
+    color: var(--bread-crumb-active);
 }
 
 .BreadCrumb li:first-child a i {
@@ -728,23 +771,25 @@ table.AttachmentList.DataTable thead th {
 
 .RTL .BreadCrumb li {
     padding-left: 0px;
-    padding-right: 35px;
+    padding-right: 20px;
 }
 
 .RTL .BreadCrumb li:first-child {
     padding-right: 20px;
 }
 
-.BreadCrumb li:first-child:after,
+/*.BreadCrumb li:first-child:after,
 .BreadCrumb li:first-child:before {
     display: none;
-}
+}*/
 
 .BreadCrumb a {
-    color: #000;
     position: relative;
+    color: var(--bread-crumb);
+    font-size: var(--font-size-sm);
 }
 
+/*  'after' and 'before' pseudo-elements have been replaced by <i> icon
 .BreadCrumb a:after {
     position: absolute;
     left: 0px;
@@ -763,21 +808,21 @@ table.AttachmentList.DataTable thead th {
 
 .BreadCrumb li:before,
 .BreadCrumb li:after {
-    top: 50%;
+    top: 4px;
     border: solid transparent;
     content: " ";
     height: 0;
     width: 0;
     position: absolute;
     pointer-events: none;
-    border-width: 22px;
-    margin-top: -24px;
+    border-width: 6px;
+    margin-top: 1px;
 }
 
 .BreadCrumb li:after {
     left: 0px;
     border-color: rgba(255, 255, 255, 0);
-    border-left-color: #fff;
+    border-left-color: var(--bread-crumb);
 }
 
 .RTL .BreadCrumb li:after {
@@ -788,18 +833,18 @@ table.AttachmentList.DataTable thead th {
 }
 
 .BreadCrumb li:before {
-    left: -5px;
+    left: -2px;
     border-color: rgba(238, 238, 238, 0);
-    border-left-color: #f5f5f5;
+    border-left-color: var(--main-bg-color);
     z-index: 2;
 }
 
 .RTL .BreadCrumb li:before {
     left: auto;
-    right: -5px;
-    border-right-color: #f5f5f5;
+    right: -2px;
+    border-right-color: transparent;
     border-left-color: transparent;
-}
+}*/
 
 /**
  * @subsection  Standard Widths
@@ -868,7 +913,7 @@ table.AttachmentList.DataTable thead th {
     margin: 0px;
     background: #F7AE40;
     position: relative;
-    z-index: 1;
+    z-index: 0;
 }
 
 .MessageBox.WithIcon {
@@ -977,11 +1022,20 @@ form .MessageBox{
 /**
  * @subsection  Flag
  */
+.Flag {
+    line-height: inherit;
+    transition: var(--main-transition);
+    width: var(--flag-width);
+    height: var(--flag-height);
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
 
 .Flag.Small {
-    width: 17px;
-    height: 8px;
-    margin: 0px auto;
+    width: var(--flag-small-width);
+    height: var(--flag-small-height);
+    margin: 0;
 }
 
 .Flag span {
@@ -990,7 +1044,7 @@ form .MessageBox{
     text-indent: -9999px;
     cursor: pointer;
     /* set a default color for priorities */
-    background-color: #cdcdcd;
+    border-radius: var(--border-radius-xs);
 }
 
 .Flag span.Escalated {
@@ -1005,38 +1059,18 @@ form .MessageBox{
     background-color: #ffdd50;
 }
 
-.Flag span.PriorityID-1 {
-    background-color: #03c4f0;
-}
-
-.Flag span.PriorityID-2 {
-    background-color: #83bfc8;
-}
-
-.Flag span.PriorityID-3 {
-    background-color: #cdcdcd;
-}
-
-.Flag span.PriorityID-4 {
-    background-color: #ffaaaa;
-}
-
-.Flag span.PriorityID-5 {
-    background-color: #ff505e;
-}
-
 /**
  * @subsection  "Unread" star
  */
 span.UnreadArticles,
 div.UnreadArticles {
-    display: block;
+    /*display: block;*/
     width: 16px;
     height: 15px;
-    margin-left: 6px;
+    margin-left: 0;
     font-weight: normal;
     position: relative;
-    padding: 0px 3px !important;
+    /*padding: 0px !important;*/
 }
 
 span.UnreadArticles i,
@@ -1046,8 +1080,8 @@ div.UnreadArticles i {
     left: 0px;
     top: 0px;
     z-index: 2;
-    font-size: 14px;
-    color: #ddd;
+    font-size: 16px;
+    color: var(--border-color);
 }
 
 span.UnreadArticles em,
@@ -1057,21 +1091,21 @@ div.UnreadArticles em {
 
 span.UnreadArticles i:first-child,
 div.UnreadArticles i:first-child {
-    color: #777 !important;
+    color: var(--border-color);
     font-size: 16px;
     z-index: 1;
-    left: -1px;
-    top: -1px;
+    left: 0;
+    top: 0;
 }
 
 span.UnreadArticles.Remarkable i,
 div.UnreadArticles.Remarkable i {
-    color: #F2BD0E;
+    color: var(--color-icon-favorite);
 }
 
 span.UnreadArticles.Ordinary,
 div.UnreadArticles.Ordinary {
-    color: #ddd;
+    color: var(--border-color);
 }
 
 tbody tr:hover span.UnreadArticles i {
@@ -1117,18 +1151,14 @@ span.ImportantArticles i {
 /**
  * @subsection  Datepicker
  */
-.DatepickerIcon {
-    margin: 1px 0 0 4px;
-    height: 16px;
-    width: 16px;
-    display: inline-block;
-    vertical-align: top;
-    color: #333;
+.DatepickerIcon i {
+    color: var(--gray-semi-dark);
+    font-size: var(--font-size-md);
 }
 
-.RTL .DatepickerIcon {
+/*.RTL .DatepickerIcon {
     margin: 0 4px 0 0;
-}
+}*/
 
 /* Vacation Days */
 td.Highlight a.ui-state-default {
@@ -1142,13 +1172,6 @@ td.Highlight a.ui-state-default {
     background: linear-gradient(to bottom,  #fff0a5 0%,#ffe45c 100%) !important;
 }
 
-/* Today */
-.ui-datepicker-current-day {
-}
-
-/*Weekend*/
-.ui-datepicker-week-end {
-}
 
 /**
  * @subsection  Autocompletion
@@ -1166,7 +1189,7 @@ td.Highlight a.ui-state-default {
 }
 
 .ui-overlay-autocomplete {
-    z-index: 6103 !important;
+    z-index: 6100 !important;
 }
 
 .ui-autocomplete .ui-menu-item-wrapper.ui-state-active {
@@ -1253,10 +1276,12 @@ iframe.TextOption.CustomerUserAddressBook {
  * @subsection global message format
  */
 .ArticleBody {
-    font-family: monospace,fixed;
+    /*font-family: Roboto;*/
+    font-size: var(--font-size-sm);
+    font-weight: var(--medium);
+    color: var(--black);
     word-wrap: break-word;
-    background: #FFF;
-    padding: 10px;
+    background: var(--white);
     min-height: 70px;
 }
 
@@ -1375,15 +1400,35 @@ iframe.TextOption.CustomerUserAddressBook {
 }
 
 .ui-widget-header {
-    background: #eee !important;
-    border: 0px !important;
-    font-weight: normal !important;
+    background: none !important;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-between;
+    border: 0 !important;
+    padding: 0 0 var(--padding-md) 0 !important;
+}
+
+.ui-widget.ui-widget-content {
+    /*font-family: Inter;*/
+    border-radius: var(--border-radius-sm) !important;
+    padding: var(--padding-md) !important;
+    margin-top: 22px;
+    margin-left: -2px !important;
+    border: var(--border-width) var(--border-solid) var(--border-color) !important;
 }
 
 .ui-state-default,
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default {
-    background: #f2f2f2 !important;
+    background: none !important;
+    border: 0 !important;
+    border-radius: var(--border-radius-sm);
+    color: var(--black);
+    font-weight: var(--normal);
+    font-size: 14px;
+    line-height: 32px;
+    text-align: center;
 }
 
 .ui-state-hover,
@@ -1392,7 +1437,7 @@ iframe.TextOption.CustomerUserAddressBook {
 .ui-state-focus,
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
-    background: #ddd !important;
+    background: var(--gray-semi-light);
 }
 
 /**
@@ -1761,6 +1806,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     margin: 4px;
     position: relative;
     vertical-align: bottom;
+    bottom: 6px;
 }
 
 .AJAXLoader:after,
@@ -1779,8 +1825,6 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
     font-family: FontAwesome;
     font-size: 14px;
     color: #777;
-}
-
 }
 
 /*
@@ -1837,10 +1881,9 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
     .TableFilterContainer .FilterRemove {
         position: absolute;
-        right: 6px;
-        top: 50%;
+        right:11px;
+        top: -3px;
         font-size: 12px;
-        margin-top: -6px;
         display: none;
         color: #aaa;
         transition: color ease 0.3s;
@@ -1858,4 +1901,5 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         box-sizing: border-box;
         width: 100%;
     }
+}
 }

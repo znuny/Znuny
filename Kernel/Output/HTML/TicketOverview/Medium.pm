@@ -543,13 +543,9 @@ sub _Show {
         Subject      => $Article{Subject} || '',
     );
 
-    my $CSSSelector = $LayoutObject->CleanUpCSSSelector(
-        CSSSelector => $Ticket{State},
-    );
-
     my $PillClass;
-    if ( IsStringWithData($CSSSelector) ) {
-        $PillClass = 'pill pill-' . $CSSSelector;
+    if ( IsStringWithData( $Ticket{StateID} ) ) {
+        $PillClass .= 'pill StateID-' . $Ticket{StateID};
     }
 
     $LayoutObject->Block(

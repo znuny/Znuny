@@ -339,6 +339,7 @@ CREATE TABLE ticket_priority (
     id SMALLINT NOT NULL AUTO_INCREMENT,
     name VARCHAR (200) NOT NULL,
     valid_id SMALLINT NOT NULL,
+    color VARCHAR (25) NOT NULL,
     create_time DATETIME NOT NULL,
     create_by INTEGER NOT NULL,
     change_time DATETIME NOT NULL,

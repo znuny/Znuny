@@ -486,11 +486,8 @@ sub Run {
         }
     }
 
-    my $CSSSelector = $LayoutObject->CleanUpCSSSelector(
-        CSSSelector => $Ticket{State},
-    );
-    if ( IsStringWithData($CSSSelector) ) {
-        $Param{PillClass} = 'pill pill-' . $CSSSelector;
+    if ( IsStringWithData( $Ticket{StateID} ) ) {
+        $Param{PillClass} .= 'pill StateID-' . $Ticket{StateID};
     }
 
     my $Output = $LayoutObject->Output(

@@ -60,7 +60,7 @@ add new states
         Comment => 'some comment',
         ValidID => 1,
         TypeID  => 1,
-        Color   => '#FFFFFF',
+        Color   => '#FF8A25',
         UserID  => 123,
     );
 
@@ -142,7 +142,7 @@ returns
         TypeID     => 1,
         ValidID    => 1,
         Comment    => "New ticket created by customer.",
-        Color      => "#FFFFFF",
+        Color      => "#FF8A25",
         CreateTime => "2010-11-29 11:04:04",
         ChangeTime => "2010-11-29 11:04:04",
     );
@@ -245,7 +245,7 @@ update state attributes
         Comment => 'some comment',
         ValidID => 1,
         TypeID  => 1,
-        Color   => '#FFFFFF',
+        Color   => '#FF8A25',
         UserID  => 123,
     );
 

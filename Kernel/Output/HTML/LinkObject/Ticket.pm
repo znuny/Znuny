@@ -511,13 +511,8 @@ sub TableCreateComplex {
                         $Hash{'Content'} = $Ticket->{$Column};
                     }
 
-                    if ( $Column eq 'State' ) {
-                        my $CSSSelector = $Self->{LayoutObject}->CleanUpCSSSelector(
-                            CSSSelector => $Ticket->{$Column},
-                        );
-                        if ( IsStringWithData($CSSSelector) ) {
-                            $Hash{'CssClass'} .= 'pill pill-' . $CSSSelector;
-                        }
+                    if ( $Column eq 'State' && IsStringWithData( $Ticket->{StateID} ) ) {
+                        $Hash{'CssClass'} .= 'pill StateID-' . $Ticket->{StateID};
                     }
                 }
 

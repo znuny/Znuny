@@ -579,8 +579,8 @@ sub _Show {
     );
 
     my $PillClass;
-    if ( IsStringWithData($CSSSelector) ) {
-        $PillClass = 'pill pill-' . $CSSSelector;
+    if ( IsStringWithData( $Ticket{StateID} ) ) {
+        $PillClass .= 'pill StateID-' . $Ticket{StateID};
     }
 
     $LayoutObject->Block(

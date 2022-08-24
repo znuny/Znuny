@@ -510,6 +510,7 @@ CREATE TABLE ticket_priority (
     id serial NOT NULL,
     name VARCHAR (200) NOT NULL,
     valid_id SMALLINT NOT NULL,
+    color VARCHAR (25) NOT NULL,
     create_time timestamp(0) NOT NULL,
     create_by INTEGER NOT NULL,
     change_time timestamp(0) NOT NULL,

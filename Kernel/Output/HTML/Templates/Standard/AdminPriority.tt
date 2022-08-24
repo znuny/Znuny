@@ -98,6 +98,7 @@
                         <tr>
                             <th>[% Translate("Name") | html %]</th>
                             <th>[% Translate("Validity") | html %]</th>
+                            <th>[% Translate("Color") | html %]</th>
                             <th>[% Translate("Changed") | html %]</th>
                             <th>[% Translate("Created") | html %]</th>
                         </tr>
@@ -119,6 +120,9 @@
                             </td>
                             <td>
                                 [% Translate(Data.Valid) | html %]
+                            </td>
+                            <td>
+                                <span class="pill" style="background:[% Data.Color | html %]" title="open">[% Data.Color | html %]</span>
                             </td>
                             <td>[% Data.ChangeTime | Localize("TimeShort") %]</td>
                             <td>[% Data.CreateTime | Localize("TimeShort") %]</td>
@@ -168,6 +172,8 @@
                             </div>
                         </div>
                         <div class="Clear"></div>
+
+                        [% Data.ColorPicker %]
 
                         <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]:</label>
                         <div class="Field">

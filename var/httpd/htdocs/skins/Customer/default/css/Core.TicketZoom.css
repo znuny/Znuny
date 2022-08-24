@@ -42,26 +42,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     float: right;
 }
 
-.Flag span.PriorityID-1 {
-    background-color:#03c4f0;
-}
-
-.Flag span.PriorityID-2 {
-    background-color:#83bfc8;
-}
-
-.Flag span.PriorityID-3 {
-    background-color:#cdcdcd;
-}
-
-.Flag span.PriorityID-4 {
-    background-color:#ffaaaa;
-}
-
-.Flag span.PriorityID-5 {
-    background-color:#ff505e;
-}
-
 .Flag {
     top: 15px;
     left: 6px;

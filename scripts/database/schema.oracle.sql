@@ -904,6 +904,7 @@ CREATE TABLE ticket_priority (
     id NUMBER (5, 0) NOT NULL,
     name VARCHAR2 (200) NOT NULL,
     valid_id NUMBER (5, 0) NOT NULL,
+    color VARCHAR2 (25) NOT NULL,
     create_time DATE NOT NULL,
     create_by NUMBER (12, 0) NOT NULL,
     change_time DATE NOT NULL,
