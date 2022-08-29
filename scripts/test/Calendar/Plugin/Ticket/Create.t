@@ -177,8 +177,6 @@ my $Update = $TicketCreatePluginObject->Update(
             PriorityID                  => 1,
             QueueID                     => 1,
             ResponsibleUserID           => 1,
-            SLAID                       => 1,
-            ServiceID                   => 1,
             StateID                     => 1,
             TicketCreateTime            => '2022-04-07 21:11:00',
             TicketCreateTimeType        => 'StartTime',
@@ -266,8 +264,6 @@ my $Success = $PluginObject->DataDelete(
                     PriorityID                  => 1,
                     QueueID                     => [ 1, 2 ],
                     ResponsibleUserID           => 1,
-                    SLAID                       => 1,
-                    ServiceID                   => 1,
                     StateID                     => 1,
                     TicketCreateTime            => '2022-04-07 21:11:00',
                     TicketCreateTimeType        => 'StartTime',
@@ -345,6 +341,12 @@ for my $Test (@Tests) {
         PluginKey     => 'TicketCreate',
         UserID        => 1,
     );
+
+    $Self->True(
+        %Data,
+        'TicketCreated',
+    );
+
     $Self->Is(
         $Data{Config}->{TicketCreated},
         1,

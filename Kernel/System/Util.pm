@@ -257,6 +257,7 @@ sub GetInstalledDBCRUDObjects {
     my @FilePaths = $MainObject->DirectoryRead(
         Directory => $KernelSystemPath,
         Filter    => '*.pm',
+        Recursive => 1,
     );
 
     my @DBCRUDObjects;
@@ -272,7 +273,7 @@ sub GetInstalledDBCRUDObjects {
         next FILEPATH if ${$FileContentRef} !~ m{^package (.*?);$}m;
         my $DBCRUDPackage = $1;
         next FILEPATH if $DBCRUDPackage eq 'Kernel::System::DBCRUD';
-        next FILEPATH if $DBCRUDPackage eq 'Kernel::System::DBCRUDTest';
+        next FILEPATH if $DBCRUDPackage eq 'Kernel::System::UnitTest::DBCRUD';
 
         my $DBCRUDObject = $Kernel::OM->Get($DBCRUDPackage);
         next FILEPATH if !$DBCRUDObject;

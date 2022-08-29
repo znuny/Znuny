@@ -538,28 +538,26 @@ sub InitConfig {
 
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
     my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
 
     $Self->{Columns} = {
         ID => {
-            Column => 'id',
+            Column       => 'id',
+            SearchTarget => 0,
         },
         AppointmentID => {
             Column       => 'appointment_id',
             SearchTarget => 1,
-            Export       => 1,
-            ImportID     => 1,
         },
         PluginKey => {
             Column       => 'plugin_key',
             SearchTarget => 1,
-            Export       => 1,
-            ImportID     => 1,
         },
         Config => {
             Column       => 'config',
-            DisableWhere => 1,
+            SearchTarget => 0,
             ContentJSON  => 1,
-            SearchTarget => 1,
+            DisableWhere => 1,
         },
         CreateTime => {
             Column       => 'create_time',
@@ -613,7 +611,11 @@ sub InitConfig {
         next PLUGIN if !$GenericModule;
 
         if ( !$MainObject->Require($GenericModule) ) {
-            $MainObject->Die("Can't load plugin module $GenericModule! $@");
+            $LogObject->Log(
+                Priority => 'error',
+                Message  => "Can't load plugin module $GenericModule! $@",
+            );
+            next PLUGIN;
         }
 
         $Self->{Plugins}->{$PluginKey}           = $PluginConfig->{$PluginKey};

@@ -297,7 +297,8 @@ $Selenium->RunTest(
             Valid => 1,
             Key   => 'Package::RepositoryList',
             Value => {
-                'ftp://ftp.example.com/pub/otrs/misc/packages/' => '[Example] ftp://ftp.example.com/'
+                Name => "Example repository 1",
+                URL  => "https://addons.znuny.com/api/addon_repos/",
             },
         );
 
@@ -306,8 +307,8 @@ $Selenium->RunTest(
 
         $NavigateToAdminPackageManager->();
         $Selenium->InputFieldValueSet(
-            Element => '#Soruce',
-            Value   => 'ftp://ftp.example.com/pub/otrs/misc/packages/',
+            Element => '#Source',
+            Value   => 'https://addons.znuny.com/api/addon_repos/',
         );
 
         $ClickAction->("//button[\@name=\'GetRepositoryList']");
@@ -336,5 +337,7 @@ if ($TestPackage) {
         'Test package is cleaned up'
     );
 }
+
+$HelperObject->CustomFileCleanup();
 
 1;
