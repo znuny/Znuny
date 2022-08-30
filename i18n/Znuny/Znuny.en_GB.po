@@ -14888,375 +14888,375 @@ msgstr "New account created. Sent login information to %s. Please check your ema
 msgid "Action \"%s\" not found!"
 msgstr "Action \"%s\" not found!"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "invalid-temporarily"
 msgstr "invalid-temporarily"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Group for default access."
 msgstr "Group for default access."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Group of all administrators."
 msgstr "Group of all administrators."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Group for statistics access."
 msgstr "Group for statistics access."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "new"
 msgstr "new"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All new state types (default: viewable)."
 msgstr "All new state types (default: viewable)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "open"
 msgstr "open"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All open state types (default: viewable)."
 msgstr "All open state types (default: viewable)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "closed"
 msgstr "closed"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All closed state types (default: not viewable)."
 msgstr "All closed state types (default: not viewable)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "pending reminder"
 msgstr "pending reminder"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All 'pending reminder' state types (default: viewable)."
 msgstr "All 'pending reminder' state types (default: viewable)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "pending auto"
 msgstr "pending auto"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All 'pending auto *' state types (default: viewable)."
 msgstr "All 'pending auto *' state types (default: viewable)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "removed"
 msgstr "removed"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All 'removed' state types (default: not viewable)."
 msgstr "All 'removed' state types (default: not viewable)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "merged"
 msgstr "merged"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "State type for merged tickets (default: not viewable)."
 msgstr "State type for merged tickets (default: not viewable)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "New ticket created by customer."
 msgstr "New ticket created by customer."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "closed successful"
 msgstr "closed successful"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket is closed successful."
 msgstr "Ticket is closed successful."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "closed unsuccessful"
 msgstr "closed unsuccessful"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket is closed unsuccessful."
 msgstr "Ticket is closed unsuccessful."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Open tickets."
 msgstr "Open tickets."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Customer removed ticket."
 msgstr "Customer removed ticket."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket is pending for agent reminder."
 msgstr "Ticket is pending for agent reminder."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "pending auto close+"
 msgstr "pending auto close+"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket is pending for automatic close."
 msgstr "Ticket is pending for automatic close."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "pending auto close-"
 msgstr "pending auto close-"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "State for merged tickets."
 msgstr "State for merged tickets."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "system standard salutation (en)"
 msgstr "system standard salutation (en)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Standard Salutation."
 msgstr "Standard Salutation."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "system standard signature (en)"
 msgstr "system standard signature (en)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Standard Signature."
 msgstr "Standard Signature."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Standard Address."
 msgstr "Standard Address."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "possible"
 msgstr "possible"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Follow-ups for closed tickets are possible. Ticket will be reopened."
 msgstr "Follow-ups for closed tickets are possible. Ticket will be reopened."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "reject"
 msgstr "reject"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Follow-ups for closed tickets are not possible. No new ticket will be created."
 msgstr "Follow-ups for closed tickets are not possible. No new ticket will be created."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "new ticket"
 msgstr "new ticket"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Follow-ups for closed tickets are not possible. A new ticket will be created."
 msgstr ""
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Postmaster queue."
 msgstr "Postmaster queue."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All default incoming tickets."
 msgstr "All default incoming tickets."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All junk tickets."
 msgstr "All junk tickets."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All misc tickets."
 msgstr "All misc tickets."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "auto reply"
 msgstr "auto reply"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Automatic reply which will be sent out after a new ticket has been created."
 msgstr "Automatic reply which will be sent out after a new ticket has been created."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "auto reject"
 msgstr "auto reject"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Automatic reject which will be sent out after a follow-up has been rejected (in case queue follow-up option is \"reject\")."
 msgstr "Automatic reject which will be sent out after a follow-up has been rejected (in case queue follow-up option is \"reject\")."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "auto follow up"
 msgstr "auto follow up"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Automatic confirmation which is sent out after a follow-up has been received for a ticket (in case queue follow-up option is \"possible\")."
 msgstr "Automatic confirmation which is sent out after a follow-up has been received for a ticket (in case queue follow-up option is \"possible\")."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "auto reply/new ticket"
 msgstr "auto reply/new ticket"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Automatic response which will be sent out after a follow-up has been rejected and a new ticket has been created (in case queue follow-up option is \"new ticket\")."
 msgstr "Automatic response which will be sent out after a follow-up has been rejected and a new ticket has been created (in case queue follow-up option is \"new ticket\")."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "auto remove"
 msgstr "auto remove"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Auto remove will be sent out after a customer removed the request."
 msgstr "Auto remove will be sent out after a customer removed the request."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "default reply (after new ticket has been created)"
 msgstr "default reply (after new ticket has been created)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "default reject (after follow-up and rejected of a closed ticket)"
 msgstr "default reject (after follow-up and rejected of a closed ticket)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "default follow-up (after a ticket follow-up has been added)"
 msgstr "default follow-up (after a ticket follow-up has been added)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "default reject/new ticket created (after closed follow-up with new ticket creation)"
 msgstr "default reject/new ticket created (after closed follow-up with new ticket creation)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Unclassified"
 msgstr "Unclassified"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "1 very low"
 msgstr "1 very low"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "2 low"
 msgstr "2 low"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "3 normal"
 msgstr "3 normal"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "4 high"
 msgstr "4 high"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "5 very high"
 msgstr "5 very high"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "unlock"
 msgstr "unlock"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "lock"
 msgstr "lock"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "tmp_lock"
 msgstr "tmp_lock"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "agent"
 msgstr "agent"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "system"
 msgstr "system"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "customer"
 msgstr "customer"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket create notification"
 msgstr "Ticket create notification"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification each time a new ticket is created in one of your \"My Queues\" or \"My Services\"."
 msgstr "You will receive a notification each time a new ticket is created in one of your \"My Queues\" or \"My Services\"."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket follow-up notification (unlocked)"
 msgstr "Ticket follow-up notification (unlocked)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification if a customer sends a follow-up to an unlocked ticket which is in your \"My Queues\" or \"My Services\"."
 msgstr "You will receive a notification if a customer sends a follow-up to an unlocked ticket which is in your \"My Queues\" or \"My Services\"."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket follow-up notification (locked)"
 msgstr "Ticket follow-up notification (locked)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification if a customer sends a follow-up to a locked ticket of which you are the ticket owner or responsible."
 msgstr "You will receive a notification if a customer sends a follow-up to a locked ticket of which you are the ticket owner or responsible."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket lock timeout notification"
 msgstr "Ticket lock timeout notification"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification as soon as a ticket owned by you is automatically unlocked."
 msgstr "You will receive a notification as soon as a ticket owned by you is automatically unlocked."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket owner update notification"
 msgstr "Ticket owner update notification"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket responsible update notification"
 msgstr "Ticket responsible update notification"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket new note notification"
 msgstr "Ticket new note notification"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket queue update notification"
 msgstr "Ticket queue update notification"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification if a ticket is moved into one of your \"My Queues\"."
 msgstr "You will receive a notification if a ticket is moved into one of your \"My Queues\"."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket pending reminder notification (locked)"
 msgstr "Ticket pending reminder notification (locked)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket pending reminder notification (unlocked)"
 msgstr "Ticket pending reminder notification (unlocked)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket escalation notification"
 msgstr "Ticket escalation notification"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket escalation warning notification"
 msgstr "Ticket escalation warning notification"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket service update notification"
 msgstr "Ticket service update notification"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification if a ticket's service is changed to one of your \"My Services\"."
 msgstr "You will receive a notification if a ticket's service is changed to one of your \"My Services\"."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Appointment reminder notification"
 msgstr ""
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification each time a reminder time is reached for one of your appointments."
 msgstr ""
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket email delivery failure notification"
 msgstr ""
 
@@ -25201,7 +25201,7 @@ msgstr ""
 msgid "Module to grant access to the mentioned agents of a ticket."
 msgstr ""
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Mention notification"
 msgstr ""
 

@@ -919,7 +919,7 @@ Returns:
 
     my @TranslationStrings = (
         {
-            Location => "XML Definition:  scripts/database/otrs-initial_insert.xml",
+            Location => "XML Definition:  scripts/database/initial_insert.xml",
             Source   => 'This field is required',
         }
     );
@@ -941,7 +941,7 @@ sub GetXMLTranslatableStrings {
         Filter    => '*.xml',
     );
 
-    push @XMLFiles, "scripts/database/otrs-initial_insert.xml";
+    push @XMLFiles, "scripts/database/initial_insert.xml";
 
     if ( $Param{ModuleDirectory} ) {
         @XMLFiles = $MainObject->DirectoryRead(

@@ -105,9 +105,9 @@ jobs:
           sed -i 's/\(.*{DatabaseUser}.*\)otrs/\1'"${MYSQL_USER}"'/' /opt/otrs/Kernel/Config.pm
           sed -i 's/\(.*{DatabasePw}.*\)some-pass/\1'"${MYSQL_PASSWORD}"'/' /opt/otrs/Kernel/Config.pm
           mkdir -p /opt/otrs/var/tmp
-          mysql -h mariadb -u "${MYSQL_USERNAME}" -p"${MYSQL_PASSWORD}" otrs < /opt/otrs/scripts/database/otrs-schema.mysql.sql
-          mysql -h mariadb -u "${MYSQL_USERNAME}" -p"${MYSQL_PASSWORD}" otrs < /opt/otrs/scripts/database/otrs-initial_insert.mysql.sql
-          mysql -h mariadb -u "${MYSQL_USERNAME}" -p"${MYSQL_PASSWORD}" otrs < /opt/otrs/scripts/database/otrs-schema-post.mysql.sql
+          mysql -h mariadb -u "${MYSQL_USERNAME}" -p"${MYSQL_PASSWORD}" otrs < /opt/otrs/scripts/database/schema.mysql.sql
+          mysql -h mariadb -u "${MYSQL_USERNAME}" -p"${MYSQL_PASSWORD}" otrs < /opt/otrs/scripts/database/initial_insert.mysql.sql
+          mysql -h mariadb -u "${MYSQL_USERNAME}" -p"${MYSQL_PASSWORD}" otrs < /opt/otrs/scripts/database/schema-post.mysql.sql
           touch /opt/otrs/installed
           /opt/otrs/bin/otrs.SetPermissions.pl
           su -c "bin/otrs.Console.pl Maint::Config::Rebuild" - otrs

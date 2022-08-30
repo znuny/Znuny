@@ -7914,7 +7914,7 @@ sub Data {
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
 
-        # XML Definition: scripts/database/otrs-initial_insert.xml
+        # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'tạm thời không hợp lệ',
         'Group for default access.' => '',
         'Group of all administrators.' => '',

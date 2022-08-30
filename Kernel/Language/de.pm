@@ -7915,7 +7915,7 @@ sub Data {
             'Benachrichtigungsmodul für Agenten-Interface, das die Anzahl der Erwähnungen anzeigt.',
         'Module to grant access to the mentioned agents of a ticket.' => 'Modul, das Zugriff für die erwähnten Agenten eines Tickets gewährt.',
 
-        # XML Definition: scripts/database/otrs-initial_insert.xml
+        # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'ungültig-temporär',
         'Group for default access.' => 'Gruppe für den Standardzugriff.',
         'Group of all administrators.' => 'Gruppe aller Administratoren.',

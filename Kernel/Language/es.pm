@@ -7928,7 +7928,7 @@ El control del acceso adicional para demostrar o no demostrar éste enlace puede
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
 
-        # XML Definition: scripts/database/otrs-initial_insert.xml
+        # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'temporalmente-no-válido',
         'Group for default access.' => 'Grupo para acceso por defecto.',
         'Group of all administrators.' => 'Grupo de todos los administradores.',

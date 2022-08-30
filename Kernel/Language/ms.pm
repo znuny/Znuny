@@ -7916,7 +7916,7 @@ Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDa
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
 
-        # XML Definition: scripts/database/otrs-initial_insert.xml
+        # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'tidak sah-sementara',
         'Group for default access.' => 'Kumpulan untuk akses lalai.',
         'Group of all administrators.' => 'Kumpulan seluruh pentadbir.',

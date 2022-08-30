@@ -7928,7 +7928,7 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
 
-        # XML Definition: scripts/database/otrs-initial_insert.xml
+        # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'non valido-temporaneamente',
         'Group for default access.' => 'Gruppo per l\'accesso predefinito.',
         'Group of all administrators.' => 'Gruppo di tutti gli amministratori.',

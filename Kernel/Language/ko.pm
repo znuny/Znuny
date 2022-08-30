@@ -7915,7 +7915,7 @@ sub Data {
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
 
-        # XML Definition: scripts/database/otrs-initial_insert.xml
+        # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '유효하지 않은 일시적',
         'Group for default access.' => '기본 액세스 그룹.',
         'Group of all administrators.' => '모든 관리자 그룹.',

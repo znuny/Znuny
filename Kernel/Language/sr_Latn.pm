@@ -7921,7 +7921,7 @@ sub Data {
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
 
-        # XML Definition: scripts/database/otrs-initial_insert.xml
+        # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'nevažeći-privremeno',
         'Group for default access.' => 'Grupa za podrazumevan pristup.',
         'Group of all administrators.' => 'Grupa svih administratora.',

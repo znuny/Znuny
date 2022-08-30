@@ -7931,7 +7931,7 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
 
-        # XML Definition: scripts/database/otrs-initial_insert.xml
+        # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '無効-暫定',
         'Group for default access.' => '一般ユーザ用のデフォルトグループ',
         'Group of all administrators.' => '管理者用グループ',

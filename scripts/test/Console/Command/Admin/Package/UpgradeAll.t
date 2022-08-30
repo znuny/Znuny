@@ -21,8 +21,8 @@ my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
 # Initialize test database based on fresh OTRS 6 schema.
 my $Success = $HelperObject->ProvideTestDatabase(
     DatabaseXMLFiles => [
-        "$Home/scripts/database/otrs-schema.xml",
-        "$Home/scripts/database/otrs-initial_insert.xml",
+        "$Home/scripts/database/schema.xml",
+        "$Home/scripts/database/initial_insert.xml",
     ],
 );
 if ( !$Success ) {
