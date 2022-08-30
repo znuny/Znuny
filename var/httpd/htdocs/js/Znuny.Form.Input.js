@@ -1,5 +1,5 @@
 // --
-// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (AGPL). If you
@@ -126,6 +126,12 @@ Znuny.Form.Input = (function (TargetNS) {
             Body:           'RichText',
             Customer:       'CustomerAutoComplete',
             CustomerUserID: 'CustomerAutoComplete',
+        },
+
+        AgentAppointmentCalendarOverview: {
+            QueueID:            'QueueID',
+            TypeID:             'TypeID',
+            TicketCreateOffset: 'TicketCreateOffset',
         },
 
         CustomerTicketProcess: {
@@ -1432,13 +1438,13 @@ Znuny.Form.Input = (function (TargetNS) {
                     );
 
                     if (PendingStateIDsFound.length) {
-                        $('#Month').parent().prev().show();
-                        $('#Month').parent().show();
+                        $('#Month, #PendingTimeMonth').parent().prev().show();
+                        $('#Month, #PendingTimeMonth').parent().show();
                         return;
                     }
 
-                    $('#Month').parent().prev().hide();
-                    $('#Month').parent().hide();
+                    $('#Month, #PendingTimeMonth').parent().prev().hide();
+                    $('#Month, #PendingTimeMonth').parent().hide();
                 }
             )
             .trigger('change.PendingStateDateTimeSelectionToggle');

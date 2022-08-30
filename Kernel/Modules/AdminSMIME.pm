@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -397,8 +397,10 @@ sub Run {
     elsif ( $Self->{Subaction} eq 'SignerRelations' ) {
 
         # look for needed parameters
-        my $CertFingerprint = $ParamObject->GetParam( Param => 'Fingerprint' ) || '';
-        my $Output          = $Self->_SignerCertificateOverview( CertFingerprint => $CertFingerprint );
+        my $CertificateID = $ParamObject->GetParam( Param => 'CertificateID' );
+        my $Output        = $Self->_SignerCertificateOverview(
+            CertificateID => $CertificateID
+        );
 
         return $Output;
     }
@@ -412,8 +414,10 @@ sub Run {
         $LayoutObject->ChallengeTokenCheck();
 
         # look for needed parameters
-        my $CertFingerprint = $ParamObject->GetParam( Param => 'CertFingerprint' ) || '';
-        my $CAFingerprint   = $ParamObject->GetParam( Param => 'CAFingerprint' )   || '';
+        my $CertFingerprint = $ParamObject->GetParam( Param => 'CertFingerprint' ) // '';
+        my $CertificateID   = $ParamObject->GetParam( Param => 'CertificateID' )   // '';
+        my $CAFingerprint   = $ParamObject->GetParam( Param => 'CAFingerprint' )   // '';
+        my $CAID            = $ParamObject->GetParam( Param => 'CAID' )            // '';
 
         if ( !$CertFingerprint || !$CAFingerprint ) {
             return $LayoutObject->ErrorScreen(
@@ -443,15 +447,15 @@ sub Run {
 
         if ($Error) {
             $Output = $Self->_SignerCertificateOverview(
-                CertFingerprint => $CertFingerprint,
-                Message         => \%Message,
+                CertificateID => $CertificateID,
+                Message       => \%Message,
             );
         }
         else {
             my $Result = $SMIMEObject->SignerCertRelationAdd(
-                CertFingerprint => $CertFingerprint,
-                CAFingerprint   => $CAFingerprint,
-                UserID          => $Self->{UserID},
+                CertificateID => $CertificateID,
+                CAID          => $CAID,
+                UserID        => $Self->{UserID},
             );
 
             if ($Result) {
@@ -464,8 +468,8 @@ sub Run {
             }
 
             $Output = $Self->_SignerCertificateOverview(
-                CertFingerprint => $CertFingerprint,
-                Message         => \%Message,
+                CertificateID => $CertificateID,
+                Message       => \%Message,
             );
         }
 
@@ -482,7 +486,8 @@ sub Run {
 
         # look for needed parameters
         my $CertFingerprint = $ParamObject->GetParam( Param => 'CertFingerprint' ) || '';
-        my $CAFingerprint   = $ParamObject->GetParam( Param => 'CAFingerprint' )   || '';
+        my $CertificateID   = $ParamObject->GetParam( Param => 'CertificateID' );
+        my $CAFingerprint   = $ParamObject->GetParam( Param => 'CAFingerprint' ) || '';
 
         if ( !$CertFingerprint && !$CAFingerprint ) {
             return $LayoutObject->ErrorScreen(
@@ -507,8 +512,8 @@ sub Run {
 
         if ($Error) {
             $Output = $Self->_SignerCertificateOverview(
-                CertFingerprint => $CertFingerprint,
-                Message         => \%Message,
+                CertificateID => $CertificateID,
+                Message       => \%Message,
             );
         }
         else {
@@ -528,8 +533,8 @@ sub Run {
             }
 
             $Output = $Self->_SignerCertificateOverview(
-                CertFingerprint => $CertFingerprint,
-                Message         => \%Message,
+                CertificateID => $CertificateID,
+                Message       => \%Message,
             );
         }
 
@@ -641,10 +646,11 @@ sub _Overview {
         );
     }
 
-    my @List = ();
+    my @List;
     if ($SMIMEObject) {
-        @List = $SMIMEObject->Search();
+        @List = $SMIMEObject->KeysList();
     }
+
     $LayoutObject->Block( Name => 'Overview' );
     $LayoutObject->Block(
         Name => 'OverviewResult',
@@ -702,34 +708,34 @@ sub _SignerCertificateOverview {
     # get layout object
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
-    if ( !$Param{CertFingerprint} ) {
-        return $LayoutObject->ErrorScreen(
-            Message => Translatable('Needed Fingerprint'),
-        );
-    }
-
     my $SMIMEObject = $Kernel::OM->Get('Kernel::System::Crypt::SMIME');
 
     my @SignerCertResults = $SMIMEObject->PrivateSearch(
-        Search => $Param{CertFingerprint},
+        Search     => $Param{CertificateID},
+        SearchType => 'id'
     );
+
     my %SignerCert;
     %SignerCert = %{ $SignerCertResults[0] } if @SignerCertResults;
 
+    my $CertFingerprint = $SignerCert{Fingerprint};
+
     # get all certificates
-    my @AvailableCerts = $SMIMEObject->CertificateSearch();
+    my @AvailableCerts = $SMIMEObject->KeysList();
 
     # get all relations for that certificate @ActualRelations
     my @ActualRelations = $SMIMEObject->SignerCertRelationGet(
-        CertFingerprint => $Param{CertFingerprint},
+        CertFingerprint => $CertFingerprint
     );
 
     # get needed data from actual relations
     my @RelatedCerts;
     for my $RelatedCert (@ActualRelations) {
         my @Certificate = $SMIMEObject->CertificateSearch(
-            Search => $RelatedCert->{CAFingerprint},
+            SearchType => 'fingerprint',
+            Search     => $RelatedCert->{CAFingerprint},
         );
+
         push @RelatedCerts, $Certificate[0] if $Certificate[0];
     }
 
@@ -739,7 +745,7 @@ sub _SignerCertificateOverview {
     my %RelatedCerts = map { $_->{Fingerprint} => 1 } @RelatedCerts;
     @ShowCertList = grep {
         !defined $RelatedCerts{ $_->{Fingerprint} }
-            && $_->{Fingerprint} ne $Param{CertFingerprint}
+            && $_->{Fingerprint} ne $CertFingerprint
     } @AvailableCerts;
 
     $LayoutObject->Block( Name => 'Overview' );
@@ -760,7 +766,8 @@ sub _SignerCertificateOverview {
                 Name => 'RelatedCertsRow',
                 Data => {
                     %{$ActualRelation},
-                    CertFingerprint => $Param{CertFingerprint},
+                    CertFingerprint => $CertFingerprint,
+                    ParentID        => $Param{CertificateID}
                 },
             );
         }
@@ -777,7 +784,8 @@ sub _SignerCertificateOverview {
                 Name => 'AvailableCertsRow',
                 Data => {
                     %{$AvailableCert},
-                    CertFingerprint => $Param{CertFingerprint},
+                    CertFingerprint => $CertFingerprint,
+                    ParentID        => $Param{CertificateID}
                 },
             );
         }

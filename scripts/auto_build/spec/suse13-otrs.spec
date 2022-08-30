@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -162,7 +162,7 @@ rm -rf $RPM_BUILD_ROOT
 /opt/otrs/Kernel/Output*
 /opt/otrs/Kernel/System*
 /opt/otrs/scripts*
-/opt/otrs/i18n/otrs/*
+/opt/otrs/i18n/Znuny/*
 
 %dir /opt/otrs/var/
 %dir /opt/otrs/var/article/
@@ -176,6 +176,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir /opt/otrs/var/tmp/
 %dir /opt/otrs/var/stats/
 /opt/otrs/var/stats/*.xml
+%dir /opt/otrs/var/stats/formatdefinition/excel/
+/opt/otrs/var/stats/formatdefinition/excel/*
 %dir /opt/otrs/var/processes/examples/
 /opt/otrs/var/processes/examples/*
 %dir /opt/otrs/var/webservices/examples/

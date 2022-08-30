@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -23,10 +23,10 @@ $Selenium->RunTest(
         my $CustomerUserObject    = $Kernel::OM->Get('Kernel::System::CustomerUser');
         my $TicketObject          = $Kernel::OM->Get('Kernel::System::Ticket');
         my $ConfigObject          = $Kernel::OM->Get('Kernel::Config');
-        my $Helper                = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Disable email checks when create new customer user.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
@@ -37,7 +37,7 @@ $Selenium->RunTest(
 
         # Create test customer companies, create customer user and ticket for each one.
         for ( 0 .. 2 ) {
-            my $RandomID = $Helper->GetRandomID();
+            my $RandomID = $HelperObject->GetRandomID();
 
             my $CustomerCompanyID = $CustomerCompanyObject->CustomerCompanyAdd(
                 CustomerID             => 'Company' . $RandomID,
@@ -100,7 +100,7 @@ $Selenium->RunTest(
             push @TicketIDs, $TicketID;
         }
 
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 

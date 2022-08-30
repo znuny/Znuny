@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -19,13 +19,13 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # get signature object
 my $SignatureObject = $Kernel::OM->Get('Kernel::System::Signature');
 
 # add signature
-my $SignatureName = $Helper->GetRandomID();
+my $SignatureName = $HelperObject->GetRandomID();
 my $SignatureText = "Your OTRS-Team
 
 <OTRS_CURRENT_UserFirstname> <OTRS_CURRENT_UserLastname>

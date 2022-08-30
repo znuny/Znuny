@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -65,8 +65,10 @@ Runs TransitionAction DynamicFieldRemove.
 
         # Config is the hash stored in a Process::TransitionAction's config key
         Config                   => {
-            MasterSlave => 'Master',
-            UserID      => 123,                 # optional, to override the UserID from the logged user
+            FieldName   => 1,                   # required, name of field to be deleted without
+                                                # DynamicField_ decorator.
+            UserID      => 123,                 # optional, to override the logged in user.
+                                                # Fields with the name UserID cannot be deleted.
         }
     );
 

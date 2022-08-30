@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -216,8 +216,6 @@ my @Tests = (
 TEST:
 for my $Test (@Tests) {
 
-    use Data::Dumper;
-    print STDERR 'Debug Dump  - $Test->{Data} = ' . Dumper( \$Test->{Data} ) . "\n";
     my $Function = $Test->{Function};
 
     my $Success = $ZnunyHelperObject->$Function( @{ $Test->{Data} } );

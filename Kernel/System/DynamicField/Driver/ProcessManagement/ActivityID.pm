@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -122,6 +122,7 @@ sub DisplayValueRender {
         );
     }
     my $Value = $Activity->{Name} // '';
+    $Value = $Param{LayoutObject}->{LanguageObject}->Translate($Value);
     my $Title = $Value;
 
     # HTMLOutput transformations

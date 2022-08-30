@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -13,7 +13,7 @@ use utf8;
 
 use vars (qw($Self));
 
-my $Helper        = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
 my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
 
@@ -33,19 +33,13 @@ if ( $NumberOfPackagesInstalled > 8 ) {
 }
 
 # Make sure to enable cloud services.
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'CloudServices::Disabled',
     Value => 0,
 );
 
-$Helper->ConfigSettingChange(
-    Valid => 1,
-    Key   => 'Package::AllowNotVerifiedPackages',
-    Value => 0,
-);
-
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 # Override Request() from WebUserAgent to always return some test data without making any
 #   actual web service calls. This should prevent instability in case cloud services are
@@ -68,7 +62,7 @@ use warnings;
 }
 1;
 EOS
-$Helper->CustomCodeActivate(
+$HelperObject->CustomCodeActivate(
     Code       => $CustomCode,
     Identifier => 'AdminPackageManager' . $RandomID,
 );
@@ -124,7 +118,7 @@ my $ClickAction = sub {
 
 $Selenium->RunTest(
     sub {
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # For the sake of stability, check if test package is already installed.
         my $TestPackage = $PackageObject->RepositoryGet(
@@ -143,7 +137,7 @@ $Selenium->RunTest(
         }
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die 'Did not get test user';
 
@@ -207,13 +201,6 @@ $Selenium->RunTest(
                 'The installation of packages which are not verified by the OTRS Group is not possible by default.'
             ) > 0,
             'Message for aborting installation of package is displayed'
-        );
-
-        # Continue with package installation.
-        $Helper->ConfigSettingChange(
-            Valid => 1,
-            Key   => 'Package::AllowNotVerifiedPackages',
-            Value => 1,
         );
 
         # Allow web server to pick up the changed config setting.
@@ -306,11 +293,12 @@ $Selenium->RunTest(
         );
 
         # Set default repository list.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Package::RepositoryList',
             Value => {
-                'ftp://ftp.example.com/pub/otrs/misc/packages/' => '[Example] ftp://ftp.example.com/'
+                Name => "Example repository 1",
+                URL  => "https://addons.znuny.com/api/addon_repos/",
             },
         );
 
@@ -319,8 +307,8 @@ $Selenium->RunTest(
 
         $NavigateToAdminPackageManager->();
         $Selenium->InputFieldValueSet(
-            Element => '#Soruce',
-            Value   => 'ftp://ftp.example.com/pub/otrs/misc/packages/',
+            Element => '#Source',
+            Value   => 'https://addons.znuny.com/api/addon_repos/',
         );
 
         $ClickAction->("//button[\@name=\'GetRepositoryList']");
@@ -349,5 +337,7 @@ if ($TestPackage) {
         'Test package is cleaned up'
     );
 }
+
+$HelperObject->CustomFileCleanup();
 
 1;

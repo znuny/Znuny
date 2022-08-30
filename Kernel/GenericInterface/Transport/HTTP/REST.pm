@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -504,8 +504,9 @@ receive the response and return its data.
 sub RequesterPerformRequest {
     my ( $Self, %Param ) = @_;
 
-    my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
-    my $JSONObject   = $Kernel::OM->Get('Kernel::System::JSON');
+    my $EncodeObject      = $Kernel::OM->Get('Kernel::System::Encode');
+    my $JSONObject        = $Kernel::OM->Get('Kernel::System::JSON');
+    my $OAuth2TokenObject = $Kernel::OM->Get('Kernel::System::OAuth2Token');
 
     # Check transport config.
     if ( !IsHashRefWithData( $Self->{TransportConfig} ) ) {
@@ -701,10 +702,76 @@ sub RequesterPerformRequest {
                 )
             {
                 $Headers->{'Proxy-Authorization'} = 'Basic ' . encode_base64(
-                    $Config->{Proxy}->{ProxyUser} . ':' . $Config->{Proxy}->{ProxyPassword}
+                    $Config->{Proxy}->{ProxyUser} . ':' . $Config->{Proxy}->{ProxyPassword},
+                    '',
                 );
             }
         }
+    }
+
+    #
+    # JWT support
+    #
+    my $JWTObject             = $Kernel::OM->Get('Kernel::System::JSONWebToken');
+    my $X509CertificateObject = $Kernel::OM->Get('Kernel::System::X509Certificate');
+
+    my $JWTObjectIsSupported             = $JWTObject->IsSupported();
+    my $X509CertificateObjectIsSupported = $X509CertificateObject->IsSupported();
+
+    my $JWT;
+
+    if (
+        $JWTObjectIsSupported
+        && IsHashRefWithData( $Config->{Authentication} )
+        && IsStringWithData( $Config->{Authentication}->{AuthType} )
+        && $Config->{Authentication}->{AuthType} eq 'JWT'
+        )
+    {
+        my %JWTPlaceholderData;
+
+        # Fetch data from X.509 certificate, if configured and supported
+        # to be able to insert it into configured placeholders of payload and additional header data
+        # of the JWT.
+        if (
+            $X509CertificateObjectIsSupported
+            && $Config->{Authentication}->{JWTAuthCertificateFilePath}
+            )
+        {
+            my $X509Certificate = $X509CertificateObject->Parse(
+                FilePath => $Config->{Authentication}->{JWTAuthCertificateFilePath},
+            ) // {};
+
+            for my $X509CertificateKey ( sort keys %{$X509Certificate} ) {
+                my $X509CertificateValue = $X509Certificate->{$X509CertificateKey} // '';
+                $JWTPlaceholderData{ 'OTRS_JWT_Cert' . $X509CertificateKey } = $X509CertificateValue;
+            }
+        }
+
+        # Calculate expiration date and insert it into placeholders of payload and additional header data
+        # of the JWT.
+        my $TTL            = int( $Config->{Authentication}->{JWTAuthTTL} );
+        my $DateTimeObject = $Kernel::OM->Create(
+            'Kernel::System::DateTime',
+            ObjectParams => {
+                TimeZone => 'UTC',
+            }
+        );
+        $DateTimeObject->Add( Seconds => $TTL );
+        $JWTPlaceholderData{OTRS_JWT_ExpirationDateTimestamp} = $DateTimeObject->ToEpoch();
+        $JWTPlaceholderData{OTRS_JWT_ExpirationDateString}    = $DateTimeObject->Format(
+            Format => '%Y-%m-%dT%H:%M:%S %{time_zone_long_name}',
+        );
+
+        my $Payload              = $Config->{Authentication}->{JWTAuthPayload}              // {};
+        my $AdditionalHeaderData = $Config->{Authentication}->{JWTAuthAdditionalHeaderData} // {};
+        $JWT = $JWTObject->Encode(
+            Payload              => $Payload,
+            Algorithm            => $Config->{Authentication}->{JWTAuthAlgorithm},
+            KeyFilePath          => $Config->{Authentication}->{JWTAuthKeyFilePath},
+            KeyPassword          => $Config->{Authentication}->{JWTAuthKeyFilePassword},
+            AdditionalHeaderData => $AdditionalHeaderData,
+            PlaceholderData      => \%JWTPlaceholderData,
+        );
     }
 
     # Add authentication options if configured (hard wired to basic authentication at the moment).
@@ -717,8 +784,21 @@ sub RequesterPerformRequest {
         )
     {
         $Headers->{Authorization} = 'Basic ' . encode_base64(
-            $Config->{Authentication}->{BasicAuthUser} . ':' . $Config->{Authentication}->{BasicAuthPassword}
+            $Config->{Authentication}->{BasicAuthUser} . ':' . $Config->{Authentication}->{BasicAuthPassword},
+            '',
         );
+    }
+
+    # JWT header
+    elsif (
+        $JWTObjectIsSupported
+        && IsHashRefWithData( $Config->{Authentication} )
+        && IsStringWithData( $Config->{Authentication}->{AuthType} )
+        && $Config->{Authentication}->{AuthType} eq 'JWT'
+        && IsStringWithData($JWT)
+        )
+    {
+        $Headers->{Authorization} = "Bearer $JWT";
     }
 
     my $RestCommand = $Config->{DefaultCommand};
@@ -983,6 +1063,68 @@ sub RequesterPerformRequest {
     }
 
     if ( IsHashRefWithData( $Config->{AdditionalHeaders} ) ) {
+        my $AdditionalHeaders = $Config->{AdditionalHeaders};
+
+        # Insert data into placeholders.
+        my %PlaceholderData;
+        if (
+            IsHashRefWithData( $Config->{Authentication} )
+            && IsStringWithData( $Config->{Authentication}->{AuthType} )
+            )
+        {
+
+            # JWT
+            if (
+                $Config->{Authentication}->{AuthType} eq 'JWT'
+                && $JWTObjectIsSupported
+                && IsStringWithData($JWT)
+                )
+            {
+                $PlaceholderData{OTRS_JWT} = $JWT;
+            }
+
+            # OAuth2 token
+            if (
+                $Config->{Authentication}->{AuthType} eq 'OAuth2Token'
+                && $Config->{Authentication}->{OAuth2TokenConfigID}
+                )
+            {
+                my $OAuth2Token = $OAuth2TokenObject->GetToken(
+                    TokenConfigID => $Config->{Authentication}->{OAuth2TokenConfigID},
+                    UserID        => 1,
+                );
+                if ( !IsStringWithData($OAuth2Token) ) {
+                    my $ErrorMessage
+                        = "OAuth2 token for config with ID $Config->{Authentication}->{OAuth2TokenConfigID} could not be retrieved.";
+                    $Self->{DebuggerObject}->Error(
+                        Summary => $ErrorMessage,
+                    );
+                    return {
+                        Success      => 0,
+                        ErrorMessage => $ErrorMessage,
+                    };
+                }
+
+                $PlaceholderData{OTRS_OAUTH2_TOKEN} = $OAuth2Token;
+            }
+        }
+
+        HEADERFIELDNAME:
+        for my $HeaderFieldname ( sort keys %{$AdditionalHeaders} ) {
+            my $HeaderValue = $AdditionalHeaders->{$HeaderFieldname};
+            next HEADERFIELDNAME if !defined $HeaderValue;
+
+            for my $Placeholder ( sort keys %PlaceholderData ) {
+                my $PlaceholderValue = $PlaceholderData{$Placeholder} // '';
+                $HeaderValue =~ s{<$Placeholder>}{$PlaceholderValue}g;
+            }
+
+            # Remove unknown placeholders.
+            $HeaderValue =~ s{<OTRS_.*?>}{}g;
+
+            $AdditionalHeaders->{$HeaderFieldname} = $HeaderValue;
+        }
+
         %{$Headers} = (
             %{$Headers},
             %{ $Config->{AdditionalHeaders} },

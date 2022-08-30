@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -69,16 +69,12 @@ my %ExpectedResults = (
     'Check UTF-8.'                                                            => 1,
     'Defines the next state of a ticket.'                                     => 1,
     'Event module that updates customer user object name for dynamic fields.' => 1,
-    'Frontend module registration.'                                           => 1,
     'Left'                                                                    => 1,
     'Loader module registration for the agent interface.'                     => 1,
-    'Overview of all open Tickets.'                                           => 1,
     'Parameters with UTF8 ∂ç≈ßčćđšžå'                             => 1,
     'Reminder Tickets'                                                        => 1,
     'Restores a ticket from the archive.'                                     => 1,
     'Right'                                                                   => 1,
-    'Service view'                                                            => 1,
-    'ServiceView'                                                             => 1,
     'Sets the default body text for notes.'                                   => 1,
     'Shows a list of all the involved agents.'                                => 1,
     'Specifies the available note types.'                                     => 1,

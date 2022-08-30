@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -25,7 +25,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # UIse DoNotSendEmail email backend.
 my $Success = $ConfigObject->Set(
@@ -82,7 +82,7 @@ $Self->True(
 );
 
 # Create a new user for current test.
-my $UserLogin = $Helper->TestUserCreate(
+my $UserLogin = $HelperObject->TestUserCreate(
     Groups => ['admin'],
 );
 my %UserData = $Kernel::OM->Get('Kernel::System::User')->GetUserData(
@@ -91,7 +91,7 @@ my %UserData = $Kernel::OM->Get('Kernel::System::User')->GetUserData(
 my $UserID = $UserData{UserID};
 
 # Create a new customer user for current test.
-my $CustomerUserLogin = $Helper->TestCustomerUserCreate();
+my $CustomerUserLogin = $HelperObject->TestCustomerUserCreate();
 
 my %TicketCreateTemplate = (
     Title        => 'Ticket Title',

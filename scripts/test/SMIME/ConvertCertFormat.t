@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -28,7 +28,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $HomeDir = $ConfigObject->Get('Home');
 
@@ -155,7 +155,7 @@ my $CertificateSearch = sub {
         4 => 'unittest4@example.org',
         5 => 'unittest5@example.org',
     );
-    for my $SearchString ( values %Search, 'smimeuser1@test.com' ) {
+    for my $SearchString ( values %Search, 'john.doe@example.com' ) {
 
         my @Certificat = $SMIMEObject->CertificateSearch( Search => $SearchString );
         if ( defined $Certificat[0]->{Filename} && !grep { $_->{Filename} eq $Certificat[0]->{Filename} } @Result ) {

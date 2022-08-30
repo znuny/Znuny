@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -96,12 +96,15 @@ sub Request {
         );
     }
 
+    $Param{Data} //= {};
+
     my $ResultData = $RequesterObject->Run(
         WebserviceID => $WebserviceData->{ID},
         Invoker      => $Param{Invoker},
         Data         => {
+            %{ $Param{Data} },
             SearchTerms => $Param{SearchTerms},
-            UserID      => $Param{UserID}
+            UserID      => $Param{UserID},
         },
     );
 

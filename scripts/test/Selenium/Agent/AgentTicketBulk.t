@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,7 +18,7 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper             = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $GroupObject        = $Kernel::OM->Get('Kernel::System::Group');
         my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
         my $QueueObject        = $Kernel::OM->Get('Kernel::System::Queue');
@@ -33,28 +33,28 @@ $Selenium->RunTest(
         );
 
         # Enable bulk feature.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::BulkFeature',
             Value => 1,
         );
 
         # Enable required lock feature in bulk.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketBulk###RequiredLock',
             Value => 1,
         );
 
         # Enable ticket responsible feature.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Responsible',
             Value => 1,
         );
 
         my $Config = $ConfigObject->Get('Ticket::Frontend::AgentTicketResponsible');
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketResponsible',
             Value => {
@@ -65,20 +65,20 @@ $Selenium->RunTest(
         );
 
         # Enable ticket type feature.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Type',
             Value => 1,
         );
 
         # Disable richtext editor.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => '0'
         );
 
-        my $RandomNumber = $Helper->GetRandomNumber();
+        my $RandomNumber = $HelperObject->GetRandomNumber();
         my $Success;
 
         # Create groups.
@@ -106,7 +106,7 @@ $Selenium->RunTest(
         my $Language = "de";
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups   => [ 'admin', 'users', @GroupNames ],
             Language => $Language,
         ) || die "Did not get test user";
@@ -451,6 +451,14 @@ $Selenium->RunTest(
             1,
             "Ticket remind locked after undo in bulk feature - $Tickets[0]->{TicketNumber}"
         );
+
+        # Check for previous owner.
+        $Self->Is(
+            $Tickets[3]->{OwnerID},
+            1,
+            "Ticket owner remain after undo in bulk feature - $Tickets[3]->{TicketNumber}"
+        );
+
         $Selenium->VerifiedRefresh();
 
         # Select test tickets and click on "bulk".
@@ -613,7 +621,7 @@ $Selenium->RunTest(
         for my $ConfigValue ( 0 .. 1 ) {
 
             # Set if everyone or just agents with rw permissions in the queue for the ticket would be shown.
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => 'Ticket::ChangeOwnerToEveryone',
                 Value => $ConfigValue,
@@ -667,7 +675,7 @@ $Selenium->RunTest(
         $Selenium->close();
 
         # Check if dialog appears for locked ticket which are owned by another agent. See bug#14447
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketBulk###RequiredLock',
             Value => 1,

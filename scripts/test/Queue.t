@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -26,9 +26,9 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my $QueueRand = 'Some::Queue' . $Helper->GetRandomID();
+my $QueueRand = 'Some::Queue' . $HelperObject->GetRandomID();
 my $QueueID   = $QueueObject->QueueAdd(
     Name                => $QueueRand,
     ValidID             => 1,
@@ -210,7 +210,7 @@ $Self->True(
 );
 
 #add another queue for testing update queue with existing name
-my $Queue2Rand = 'Some::Queue2' . $Helper->GetRandomID();
+my $Queue2Rand = 'Some::Queue2' . $HelperObject->GetRandomID();
 my $QueueID2   = $QueueObject->QueueAdd(
     Name            => $Queue2Rand,
     ValidID         => 1,
@@ -230,7 +230,7 @@ $Self->True(
 push( @IDs, $QueueID2 );
 
 #add subqueue
-my $SubQueueName = '::SubQueue' . $Helper->GetRandomID();
+my $SubQueueName = '::SubQueue' . $HelperObject->GetRandomID();
 my $SubQueue1    = $Queue2Rand . $SubQueueName;
 my $QueueID3     = $QueueObject->QueueAdd(
     Name            => $SubQueue1,
@@ -554,7 +554,7 @@ for my $TemplateType ( sort keys %TemplatesByType ) {
 
 # QueueStandardTemplateMemeberAdd() tests
 my $UserID   = 1;
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 # create a new template
 my $TemplateID = $StandardTemplateObject->StandardTemplateAdd(

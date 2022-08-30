@@ -1,6 +1,6 @@
 # --
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -12,13 +12,9 @@ package Kernel::System::MailAccount::POP3TLS;
 use strict;
 use warnings;
 
-use Net::POP3;
-
 use parent qw(Kernel::System::MailAccount::POP3);
 
-our @ObjectDependencies = (
-    'Kernel::System::Log',
-);
+our @ObjectDependencies;
 
 # Use Net::SSLGlue::POP3 on systems with older Net::POP3 modules that cannot handle POP3TLS.
 BEGIN {
@@ -29,56 +25,15 @@ BEGIN {
     }
 }
 
-sub Connect {
+sub _GetStartTLSOptions {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
-    for my $Needed (qw(Login Password Host Timeout Debug)) {
-        if ( !defined $Param{$Needed} ) {
-            return (
-                Successful => 0,
-                Message    => "Need $Needed!",
-            );
-        }
-    }
-
-    my $Type = 'POP3TLS';
-
-    # connect to host
-    my $PopObject = Net::POP3->new(
-        $Param{Host},
-        Timeout => $Param{Timeout},
-        Debug   => $Param{Debug},
-    );
-
-    if ( !$PopObject ) {
-        return (
-            Successful => 0,
-            Message    => "$Type: Can't connect to $Param{Host}"
-        );
-    }
-
-    $PopObject->starttls(
+    my %StartTLSOptions = (
         SSL             => 1,
         SSL_verify_mode => 0,
     );
 
-    # authentication
-    my $NOM = $PopObject->login( $Param{Login}, $Param{Password} );
-    if ( !defined $NOM ) {
-        $PopObject->quit();
-        return (
-            Successful => 0,
-            Message    => "$Type: Auth for user $Param{Login}/$Param{Host} failed!"
-        );
-    }
-
-    return (
-        Successful => 1,
-        PopObject  => $PopObject,
-        NOM        => $NOM,
-        Type       => $Type,
-    );
+    return %StartTLSOptions;
 }
 
 1;

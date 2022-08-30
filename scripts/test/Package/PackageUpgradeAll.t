@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -19,7 +19,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $Cleanup = $Kernel::OM->Get('Kernel::System::DB')->Do(
     SQL => 'DELETE from package_repository',
@@ -36,9 +36,12 @@ my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
 $ConfigObject->Set(
     Key   => 'Package::RepositoryList',
-    Value => {
-        local => 'local',
-    },
+    Value => [
+        {
+            Name => 'local',
+            URL  => 'local',
+        },
+    ],
 );
 $ConfigObject->Set(
     Key   => 'Package::RepositoryRoot',
@@ -79,8 +82,8 @@ my @Tests = (
             TestITSMChangeManagement          => '6.2.1',
             TestITSMServiceLevelManagement    => '6.2.1',
         },
-        PackageOnlineList => 'PackageOnlineListITSM6220.asc',
-        ExpectedResult    => {
+        RepositoryPackageList => 'PackageOnlineListITSM6220.asc',
+        ExpectedResult        => {
             Success        => 1,
             AlreadyUpdated => {},
             Failed         => {},
@@ -122,8 +125,8 @@ my @Tests = (
             TestITSMChangeManagement          => '6.2.1',
             TestITSMServiceLevelManagement    => '6.2.1',
         },
-        PackageOnlineList => 'PackageOnlineListITSM6220.asc',
-        ExpectedResult    => {
+        RepositoryPackageList => 'PackageOnlineListITSM6220.asc',
+        ExpectedResult        => {
             Success        => 1,
             AlreadyUpdated => {},
             Failed         => {},
@@ -170,8 +173,8 @@ my @Tests = (
             TestITSMChangeManagement          => '6.2.1',
             TestITSMServiceLevelManagement    => '6.2.1',
         },
-        PackageOnlineList => 'PackageOnlineListITSM6220MissingITSMCore.asc',
-        ExpectedResult    => {
+        RepositoryPackageList => 'PackageOnlineListITSM6220MissingITSMCore.asc',
+        ExpectedResult        => {
             Success        => 0,
             AlreadyUpdated => {},
             Failed         => {
@@ -240,15 +243,13 @@ for my $Test (@Tests) {
     }
 
     $Kernel::OM->ObjectsDiscard(
-        Objects => [ 'Kernel::System::OTRSBusiness', 'Kernel::System::Package' ],
+        Objects => ['Kernel::System::Package'],
     );
 
     # Redefine key features to prevent real network communications and use local results for this test.
     no warnings qw( once redefine );    ## no critic
-    local *Kernel::System::OTRSBusiness::OTRSBusinessIsInstalled  = sub { return 0; };
-    local *Kernel::System::OTRSBusiness::OTRSBusinessIsUpdateable = sub { return 0; };
-    local *Kernel::System::Package::PackageOnlineList             = sub {
-        return do "$TestPath/$Test->{PackageOnlineList}";
+    local *Kernel::System::Package::RepositoryPackageListGet = sub {
+        return do "$TestPath/$Test->{RepositoryPackageList}";
     };
     local *Kernel::System::Package::PackageOnlineGet = sub {
         my ( $Self, %Param ) = @_;
@@ -263,7 +264,6 @@ for my $Test (@Tests) {
     use warnings;
 
     # Recreate objects with the redefined functions.
-    my $OTRSBusinessObject = $Kernel::OM->Get('Kernel::System::OTRSBusiness');
     $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
 
     # Check current installed packages
@@ -313,7 +313,7 @@ for my $Test (@Tests) {
 }
 continue {
     $Kernel::OM->ObjectsDiscard(
-        Objects => [ 'Kernel::System::OTRSBusiness', 'Kernel::System::Package' ],
+        Objects => ['Kernel::System::Package'],
     );
 }
 

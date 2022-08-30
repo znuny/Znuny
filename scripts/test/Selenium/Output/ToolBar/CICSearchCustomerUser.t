@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -20,9 +20,9 @@ $Selenium->RunTest(
     sub {
 
         # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
@@ -38,19 +38,19 @@ $Selenium->RunTest(
             Size        => '10',
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'Frontend::ToolBarModule###14-Ticket::CICSearchCustomerUser',
             Value => \%CICSearchCustomerUser,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::ToolBarModule###14-Ticket::CICSearchCustomerUser',
             Value => \%CICSearchCustomerUser,
         );
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -66,8 +66,8 @@ $Selenium->RunTest(
         );
 
         # create test company
-        my $TestCustomerID    = $Helper->GetRandomID() . 'CID';
-        my $TestCompanyName   = 'Company' . $Helper->GetRandomID();
+        my $TestCustomerID    = $HelperObject->GetRandomID() . 'CID';
+        my $TestCompanyName   = 'Company' . $HelperObject->GetRandomID();
         my $CustomerCompanyID = $Kernel::OM->Get('Kernel::System::CustomerCompany')->CustomerCompanyAdd(
             CustomerID             => $TestCustomerID,
             CustomerCompanyName    => $TestCompanyName,
@@ -87,7 +87,7 @@ $Selenium->RunTest(
         );
 
         # create test customer
-        my $TestCustomerLogin = "Customer" . $Helper->GetRandomID();
+        my $TestCustomerLogin = "Customer" . $HelperObject->GetRandomID();
         my $TestCustomerEmail = $TestCustomerLogin . "\@localhost.com";
         my $CustomerID        = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
             Source         => 'CustomerUser',

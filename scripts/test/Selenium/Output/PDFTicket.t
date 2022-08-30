@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -26,31 +26,31 @@ if ( $Selenium->{browser_name} ne 'firefox' ) {
 $Selenium->RunTest(
     sub {
 
-        my $Helper   = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $RandomID = $Helper->GetRandomID();
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $RandomID     = $HelperObject->GetRandomID();
 
         # Do not check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Enable ticket Responsible feature.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Responsible',
             Value => 1
         );
 
         # Enable ticket Type feature.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Type',
             Value => 1
         );
 
         # Enable ticket service feature.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 1
@@ -121,7 +121,7 @@ $Selenium->RunTest(
         for my $UserCount ( 1 .. 2 ) {
 
             # Create test User and login.
-            my $TestUserLogin = $Helper->TestUserCreate(
+            my $TestUserLogin = $HelperObject->TestUserCreate(
                 Groups => ['users'],
             ) || die "Did not get test user";
 
@@ -283,7 +283,7 @@ $Selenium->RunTest(
         }
 
         # Create Dynamic Fields.
-        my $RandomNumber = substr $Helper->GetRandomNumber(), -7;
+        my $RandomNumber = substr $HelperObject->GetRandomNumber(), -7;
         my %DynamicFields = (
             Dropdown => {
                 Name       => 'DFDropdown' . $RandomNumber,
@@ -388,7 +388,7 @@ $Selenium->RunTest(
         }
 
         # Enable created DynamicFields to be visible in AgentTicketPrint.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketPrint###DynamicField',
             Value => {
@@ -399,7 +399,7 @@ $Selenium->RunTest(
         );
 
         # Enable created DynamicFields to be visible in CustomerTicketPrint.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::CustomerTicketPrint###DynamicField',
             Value => {
@@ -410,7 +410,7 @@ $Selenium->RunTest(
         );
 
         # Enable Ticket attributes in CustomerTicketZoom screen => CustomerTicketPrint.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::CustomerTicketZoom###AttributesView',
             Value => {
@@ -457,7 +457,7 @@ $Selenium->RunTest(
         );
 
         # Create test User and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 

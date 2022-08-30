@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,12 +18,12 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
 $ConfigObject->{DefaultLanguage} = 'en';
 
-my $TestUserLogin = $Helper->TestUserCreate(
+my $TestUserLogin = $HelperObject->TestUserCreate(
     Groups => [ 'admin', 'users', ],
 );
 my $UserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
@@ -203,7 +203,7 @@ for my $Test (@Tests) {
     );
     my $SystemTime = $DateTimeObject->ToEpoch();
 
-    $Helper->FixedTimeSet($SystemTime);
+    $HelperObject->FixedTimeSet($SystemTime);
 
     use Kernel::System::OTRSBusiness;
 

@@ -1839,6 +1839,8 @@ CREATE TABLE mail_account (
     queue_id INTEGER NOT NULL,
     trusted SMALLINT NOT NULL,
     imap_folder VARCHAR (250) NULL,
+    authentication_type VARCHAR (100) DEFAULT 'password' NOT NULL,
+    oauth2_token_config_id INTEGER NULL,
     comments VARCHAR (250) NULL,
     valid_id SMALLINT NOT NULL,
     create_time timestamp(0) NOT NULL,
@@ -2848,6 +2850,20 @@ CREATE TABLE calendar_appointment (
     PRIMARY KEY(id)
 );
 -- ----------------------------------------------------------
+--  create table calendar_appointment_plugin
+-- ----------------------------------------------------------
+CREATE TABLE calendar_appointment_plugin (
+    id serial NOT NULL,
+    appointment_id SMALLINT NOT NULL,
+    plugin_key VARCHAR (1000) NOT NULL,
+    config VARCHAR NULL,
+    create_time timestamp(0) NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time timestamp(0) NOT NULL,
+    change_by INTEGER NOT NULL,
+    PRIMARY KEY(id)
+);
+-- ----------------------------------------------------------
 --  create table calendar_appointment_ticket
 -- ----------------------------------------------------------
 CREATE TABLE calendar_appointment_ticket (
@@ -3115,6 +3131,137 @@ IF NOT EXISTS (
     WHERE LOWER(indexname) = LOWER('form_draft_object_type_object_id_action')
     ) THEN
     CREATE INDEX form_draft_object_type_object_id_action ON form_draft (object_type, object_id, action);
+END IF;
+END$$;
+;
+-- ----------------------------------------------------------
+--  create table smime_keys
+-- ----------------------------------------------------------
+CREATE TABLE smime_keys (
+    id serial NOT NULL,
+    key_hash VARCHAR (8) NOT NULL,
+    key_type VARCHAR (255) NOT NULL,
+    file_name VARCHAR (255) NOT NULL,
+    email_address VARCHAR (255) NULL,
+    expiration_date timestamp(0) NULL,
+    fingerprint VARCHAR (59) NULL,
+    subject VARCHAR (255) NULL,
+    create_time timestamp(0) NULL,
+    change_time timestamp(0) NULL,
+    create_by INTEGER NULL,
+    change_by INTEGER NULL,
+    PRIMARY KEY(id)
+);
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_indexes
+    WHERE LOWER(indexname) = LOWER('smime_keys_file_name')
+    ) THEN
+    CREATE INDEX smime_keys_file_name ON smime_keys (file_name);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_indexes
+    WHERE LOWER(indexname) = LOWER('smime_keys_key_hash')
+    ) THEN
+    CREATE INDEX smime_keys_key_hash ON smime_keys (key_hash);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_indexes
+    WHERE LOWER(indexname) = LOWER('smime_keys_key_type')
+    ) THEN
+    CREATE INDEX smime_keys_key_type ON smime_keys (key_type);
+END IF;
+END$$;
+;
+-- ----------------------------------------------------------
+--  create table oauth2_token_config
+-- ----------------------------------------------------------
+CREATE TABLE oauth2_token_config (
+    id serial NOT NULL,
+    name VARCHAR (250) NOT NULL,
+    config VARCHAR (5000) NOT NULL,
+    valid_id SMALLINT NOT NULL,
+    create_time timestamp(0) NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time timestamp(0) NOT NULL,
+    change_by INTEGER NOT NULL,
+    PRIMARY KEY(id),
+    CONSTRAINT oauth2_token_config_name UNIQUE (name)
+);
+-- ----------------------------------------------------------
+--  create table oauth2_token
+-- ----------------------------------------------------------
+CREATE TABLE oauth2_token (
+    id serial NOT NULL,
+    token_config_id INTEGER NOT NULL,
+    authorization_code VARCHAR (2000) NULL,
+    token VARCHAR (2000) NULL,
+    token_expiration_date timestamp(0) NULL,
+    refresh_token VARCHAR (2000) NULL,
+    refresh_token_expiration_date timestamp(0) NULL,
+    error_message VARCHAR (2000) NULL,
+    error_description VARCHAR (2000) NULL,
+    error_code VARCHAR (250) NULL,
+    create_time timestamp(0) NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time timestamp(0) NOT NULL,
+    change_by INTEGER NOT NULL,
+    PRIMARY KEY(id),
+    CONSTRAINT oauth2_token_config_id UNIQUE (token_config_id)
+);
+-- ----------------------------------------------------------
+--  create table mention
+-- ----------------------------------------------------------
+CREATE TABLE mention (
+    id serial NOT NULL,
+    user_id INTEGER NULL,
+    ticket_id INTEGER NULL,
+    article_id INTEGER NULL,
+    create_time timestamp(0) NULL,
+    PRIMARY KEY(id)
+);
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_indexes
+    WHERE LOWER(indexname) = LOWER('mention_article_id')
+    ) THEN
+    CREATE INDEX mention_article_id ON mention (article_id);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_indexes
+    WHERE LOWER(indexname) = LOWER('mention_ticket_id')
+    ) THEN
+    CREATE INDEX mention_ticket_id ON mention (ticket_id);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_indexes
+    WHERE LOWER(indexname) = LOWER('mention_user_id')
+    ) THEN
+    CREATE INDEX mention_user_id ON mention (user_id);
 END IF;
 END$$;
 ;

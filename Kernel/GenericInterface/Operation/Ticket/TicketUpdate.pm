@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # Copyright (C) 2021 maxence business consulting GmbH, http://www.maxence.de
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
@@ -190,8 +190,8 @@ if applicable the created ArticleID.
         Success         => 1,                       # 0 or 1
         ErrorMessage    => '',                      # in case of error
         Data            => {                        # result data payload after Operation
-            TicketID    => 123,                     # Ticket  ID number in OTRS (help desk system)
-            ArticleID   => 43,                      # Article ID number in OTRS (help desk system)
+            TicketID    => 123,                     # Ticket ID in Znuny
+            ArticleID   => 43,                      # Article ID in Znuny
             Error => {                              # should not return errors
                     ErrorCode    => 'TicketUpdate.ErrorCode'
                     ErrorMessage => 'Error Description'

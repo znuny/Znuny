@@ -161,6 +161,7 @@
         <Value>
             <Hash>
                 <!-- Views -->
+                <Item Key="Ticket::Frontend::AgentTicketBulk###DynamicField">AgentTicketBulk</Item>
                 <Item Key="Ticket::Frontend::AgentTicketClose###DynamicField">AgentTicketClose</Item>
                 <Item Key="Ticket::Frontend::AgentTicketCompose###DynamicField">AgentTicketCompose</Item>
                 <Item Key="Ticket::Frontend::AgentTicketEmail###DynamicField">AgentTicketEmail</Item>
@@ -199,14 +200,16 @@
         <Value>
             <Hash>
                 <!-- DefaultColumns -->
-                <Item Key="Ticket::Frontend::AgentTicketStatusView###DefaultColumns">AgentTicketStatusView</Item>
+                <Item Key="Ticket::Frontend::AgentTicketEscalationView###DefaultColumns">AgentTicketEscalationView</Item>
+                <Item Key="Ticket::Frontend::AgentTicketLockedView###DefaultColumns">AgentTicketLockedView</Item>
+                <Item Key="Ticket::Frontend::AgentTicketOwnerView###DefaultColumns">AgentTicketOwnerView</Item>
                 <Item Key="Ticket::Frontend::AgentTicketQueue###DefaultColumns">AgentTicketQueue</Item>
                 <Item Key="Ticket::Frontend::AgentTicketResponsibleView###DefaultColumns">AgentTicketResponsibleView</Item>
-                <Item Key="Ticket::Frontend::AgentTicketWatchView###DefaultColumns">AgentTicketWatchView</Item>
-                <Item Key="Ticket::Frontend::AgentTicketLockedView###DefaultColumns">AgentTicketLockedView</Item>
-                <Item Key="Ticket::Frontend::AgentTicketEscalationView###DefaultColumns">AgentTicketEscalationView</Item>
                 <Item Key="Ticket::Frontend::AgentTicketSearch###DefaultColumns">AgentTicketSearch</Item>
                 <Item Key="Ticket::Frontend::AgentTicketService###DefaultColumns">AgentTicketService</Item>
+                <Item Key="Ticket::Frontend::AgentTicketStatusView###DefaultColumns">AgentTicketStatusView</Item>
+                <Item Key="Ticket::Frontend::AgentTicketWatchView###DefaultColumns">AgentTicketWatchView</Item>
+
                 <!-- DefaultColumns and Dashboard Widgets -->
                 <Item Key="DashboardBackend###0100-TicketPendingReminder">DashboardWidget TicketPendingReminder</Item>
                 <Item Key="DashboardBackend###0110-TicketEscalation">DashboardWidget TicketEscalation</Item>
@@ -264,6 +267,20 @@
         <Value>
             <Hash>
             </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="GenericInterface::Invoker::Ticket::Generic::HandleResponse::MaximumParallelInstances" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^[1-9]\d*$">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="LibXML::EnableHugeXMLDataSupport" Required="1" Valid="1">
+        <Description Translatable="1">Enables support for huge XML data in load_xml calls of CPAN library XML::LibXML. This should only be enabled if absolutely needed. Disabling this option (default) protects against denial of service through entity expansion attacks. Before enabling this option ensure that alternative measures to protect the application against this type of attack have been taken.</Description>
+        <Navigation>Core::Ticket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
         </Value>
     </Setting>
 
@@ -399,7 +416,7 @@
     </Setting>
     <Setting Name="CustomerFrontend::Module###AJAXDynamicFieldWebservice" Required="1" Valid="1">
         <Description Translatable="1">Frontend module for the customer interface that provides the AJAX interface for the web service dynamic field backends.</Description>
-        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Navigation>Frontend::Customer::ModuleRegistration</Navigation>
         <Value>
             <Item ValueType="FrontendRegistration">
                 <Hash>
@@ -497,6 +514,177 @@
         <Navigation>Core::DynamicFieldWebservice</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="DynamicFieldWebservice::FieldMapping" Required="0" Valid="1">
+        <Description Translatable="1">Mapping for field values received from form. This setting is necessary for the correct identification of the form fields. Key means value type, value means possible representation in views.</Description>
+        <Navigation>Core::DynamicFieldWebservice</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Queue">
+                    <Array>
+                        <Item>NewQueueID</Item>
+                        <Item>Dest</Item>
+                        <Item>DestQueueID</Item>
+                        <Item>QueueID</Item>
+                    </Array>
+                </Item>
+                <Item Key="CustomerUser">
+                    <Array>
+                        <Item>ToCustomer</Item>
+                        <Item>FromCustomer</Item>
+                        <Item>CustomerUserID</Item>
+                    </Array>
+                </Item>
+                <Item Key="Customer">
+                    <Array>
+                        <Item>CustomerID</Item>
+                    </Array>
+                </Item>
+                <Item Key="Owner">
+                    <Array>
+                        <Item>NewOwnerID</Item>
+                        <Item>NewUserID</Item>
+                        <Item>OwnerID</Item>
+                    </Array>
+                </Item>
+                <Item Key="Responsible">
+                    <Array>
+                        <Item>NewResponsibleID</Item>
+                        <Item>ResponsibleID</Item>
+                    </Array>
+                </Item>
+                <Item Key="State">
+                    <Array>
+                        <Item>NextStateID</Item>
+                        <Item>EmailStateID</Item>
+                        <Item>ComposeStateID</Item>
+                        <Item>NewStateID</Item>
+                        <Item>StateID</Item>
+                    </Array>
+                </Item>
+                <Item Key="Priority">
+                    <Array>
+                        <Item>NewPriorityID</Item>
+                        <Item>PriorityID</Item>
+                    </Array>
+                </Item>
+                <Item Key="Type">
+                    <Array>
+                        <Item>TypeID</Item>
+                    </Array>
+                </Item>
+                <Item Key="Service">
+                    <Array>
+                        <Item>ServiceID</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="DynamicFieldWebservice::CustomFieldMapping" Required="0" Valid="1">
+        <Description Translatable="1">Mapping for field values received from form which have multiple values. This setting is needed when the view shows the values of a particular field in a custom way (e.g. selectable customer user in ticket creation view). This setting is always respected first. There is also the possibility to specify an order for checking fields. (Field of customer user in ticket creation view can be saved as CustomerUser or just simple e-mail. First we need to check if CustomerKey is present (CustomerKey -> ID of CustomerUser). If not, then simply take plain text (CustomerTicketText -> E-mail)).</Description>
+        <Navigation>Core::DynamicFieldWebservice</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CustomerUser">
+                    <Hash>
+                        <Item Key="CustomerSelected">
+                            <Hash>
+                                <Item Key="1">CustomerKey</Item>
+                                <Item Key="2">CustomerTicketText</Item>
+                            </Hash>
+                        </Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="DynamicFieldWebservice::AdditionalAttributes###Standard" Required="0" Valid="1">
+        <Description Translatable="1">Options and default field set for attributes. Values of this setting will always be passed as simple form value without possibility to further configure it in AdminDynamicField view. The keys with which the form values will be sent to the invoker can be edited in the "Default" section of this setting.</Description>
+        <Navigation>Core::DynamicFieldWebservice</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Option">
+                    <Hash>
+                        <Item Key="CustomerUser">CustomerUser</Item>
+                        <Item Key="Customer">Customer</Item>
+                        <Item Key="DynamicField">DynamicField</Item>
+                    </Hash>
+                </Item>
+                <Item Key="Default">
+                    <Hash>
+                        <Item Key="CustomerUser">CustomerUserID</Item>
+                        <Item Key="Customer">Customer</Item>
+                        <Item Key="DynamicField">DynamicField</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="DynamicFieldWebservice::AdditionalAttributes###Selectable" Required="0" Valid="1">
+        <Description Translatable="1">Options and default field set for selectable attributes. Values which will be passed to invoker (ID or Name or both) can be configured in AdminDynamicField view. The keys with which the form values (ID or Name) will be sent to the invoker can be edited in the "Default" section of this setting. Example usage for field Queue: Field with selected ID and Name will send QueueID = 3 and Queue = Raw.</Description>
+        <Navigation>Core::DynamicFieldWebservice</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Option">
+                    <Hash>
+                        <Item Key="Queue">Queue</Item>
+                        <Item Key="State">State</Item>
+                        <Item Key="Priority">Priority</Item>
+                        <Item Key="Type">Type</Item>
+                        <Item Key="Service">Service</Item>
+                        <Item Key="Owner">Owner</Item>
+                        <Item Key="Responsible">Responsible</Item>
+                    </Hash>
+                </Item>
+                <Item Key="Default">
+                    <Hash>
+                        <Item Key="Queue">
+                            <Hash>
+                                <Item Key="ID">QueueID</Item>
+                                <Item Key="Name">Queue</Item>
+                            </Hash>
+                        </Item>
+                        <Item Key="State">
+                            <Hash>
+                                <Item Key="ID">StateID</Item>
+                                <Item Key="Name">State</Item>
+                            </Hash>
+                        </Item>
+                        <Item Key="Priority">
+                            <Hash>
+                                <Item Key="ID">PriorityID</Item>
+                                <Item Key="Name">Priority</Item>
+                            </Hash>
+                        </Item>
+                        <Item Key="Type">
+                            <Hash>
+                                <Item Key="ID">TypeID</Item>
+                                <Item Key="Name">Type</Item>
+                            </Hash>
+                        </Item>
+                        <Item Key="Service">
+                            <Hash>
+                                <Item Key="ID">ServiceID</Item>
+                                <Item Key="Name">Service</Item>
+                            </Hash>
+                        </Item>
+                        <Item Key="Owner">
+                            <Hash>
+                                <Item Key="ID">OwnerID</Item>
+                                <Item Key="Name">Owner</Item>
+                            </Hash>
+                        </Item>
+                        <Item Key="Responsible">
+                            <Hash>
+                                <Item Key="ID">ResponsibleID</Item>
+                                <Item Key="Name">Responsible</Item>
+                            </Hash>
+                        </Item>
+                    </Hash>
+                </Item>
+            </Hash>
         </Value>
     </Setting>
 
@@ -1348,4 +1536,1080 @@
         </Value>
     </Setting>
 
+    <!--
+        Advanced Bulk Action
+    -->
+    <Setting Name="Ticket::Frontend::AgentTicketBulk###Service" Required="0" Valid="1">
+        <Description Translatable="1">Sets the service in the ticket bulk screen in the agent interface (Ticket::Service needs to be enabled).</Description>
+        <Navigation>Frontend::Agent::View::TicketBulk</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketBulk###DynamicField" Required="0" Valid="1">
+        <Description Translatable="1">Dynamic fields shown in the ticket bulk screen of the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketBulk</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem ValueType="Select">
+                    <Item ValueType="Option" Value="0" Translatable="1">0 - Disabled</Item>
+                    <Item ValueType="Option" Value="1" Translatable="1">1 - Enabled</Item>
+                    <Item ValueType="Option" Value="2" Translatable="1">2 - Enabled and required</Item>
+                </DefaultItem>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketBulk###DynamicFieldRequireActivation" Required="0" Valid="1">
+        <Description Translatable="1">This configuration defines if a dynamic field has to be checked in the agent ticket bulk view to get set for each ticket. This prevents unwanted overwrite of dynamic field values with their default or even empty values.</Description>
+        <Navigation>Frontend::Agent::View::TicketBulk</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+
+    <!--
+        DBCRUD (formerly known as database backend)
+    -->
+    <Setting Name="DBCRUD###Export###DefaultFormat" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Default format for export files.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">yml</Item>
+        </Value>
+    </Setting>
+    <Setting Name="DBCRUD###Export###CSV###Separator" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Separator for exported CSV files.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">;</Item>
+        </Value>
+    </Setting>
+    <Setting Name="DBCRUD###Export###CSV###Quote" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Quoting character for exported CSV files.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">"</Item>
+        </Value>
+    </Setting>
+    <Setting Name="DBCRUD::EventModulePost###9990-DBCRUD" Required="0" Valid="1">
+        <Description Translatable="1">Handles changes to data of modules which use the DBCRUD base module.</Description>
+        <Navigation>Core::Event::Ticket</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::DBCRUD::Event::DBCRUD</Item>
+                <Item Key="Transaction">1</Item>
+                <Item Key="Event">.*(Add|Update|Delete|Export|Import|Copy)</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!--
+        OAuth2 token management
+    -->
+    <Setting Name="DBCRUD::OAuth2TokenConfig::CacheTTL" Required="1" Valid="1">
+        <Description Translatable="1">Cache settings for DBCRUD modules (default: 1 day).</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+$">86400</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Module###AdminOAuth2TokenManagement" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1"></Item>
+                    <Item Key="NavBarName">AdminOAuth2TokenManagement</Item>
+                    <Item Key="Title" Translatable="1">AdminOAuth2TokenManagement</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::NavigationModule###AdminOAuth2TokenManagement" Required="0" Valid="1">
+        <Description Translatable="1">Admin area navigation for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Group">
+                    <Array>
+                        <Item>admin</Item>
+                    </Array>
+                </Item>
+                <Item Key="GroupRo">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
+                <Item Key="Name" Translatable="1">OAuth2</Item>
+                <Item Key="Block">Communication</Item>
+                <Item Key="Description" Translatable="1">Manage OAuth2 tokens and their configurations.</Item>
+                <Item Key="IconBig">fa-id-badge</Item>
+                <Item Key="IconSmall"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AdminOAuth2TokenManagement###200-OAuth2TokenManagement" Required="1" Valid="1">
+        <Description Translatable="1">Loader module registration for AdminOAuth2TokenManagement.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item></Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.OAuth2TokenManagement.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::NotifyModule###100-OAuth2TokenManagementTokenExpired" Required="1" Valid="1">
+        <Description Translatable="1">Displays notifications for missing and expired OAuth2 tokens.</Description>
+        <Navigation>Frontend::Agent::FrontendNotification</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::Notification::OAuth2TokenManagementTokenExpired</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!--
+        Mail accounts
+    -->
+    <Setting Name="SendmailModule::AuthenticationType" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Authentication type for sendmail module. If 'OAuth2 token' has been selected, SendmailModule::OAuth2TokenConfigName must also be configured.</Description>
+        <Navigation>Core::Email</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="password">
+                <Item ValueType="Option" Value="password" Translatable="1">Password</Item>
+                <Item ValueType="Option" Value="oauth2_token" Translatable="1">OAuth2 token</Item>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="SendmailModule::OAuth2TokenConfigName" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Name of the OAuth2 token configuration to use for sending mails if 'OAuth2 token' was configured in SendmailModule::AuthenticationType.</Description>
+        <Navigation>Core::Email</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex=""></Item>
+        </Value>
+    </Setting>
+    <Setting Name="MailAccount::POP3::Auth::SplitOAuth2MethodAndToken::Hosts" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Hosts that need a separate info about authentication method and token (instead of both in one line). Most commonly needed for Office 365 and Outlook.</Description>
+        <Navigation>Core::Email</Navigation>
+        <Value>
+            <Array>
+                <Item>outlook.office365.com</Item>
+                <Item>pop-mail.outlook.com</Item>
+            </Array>
+        </Value>
+    </Setting>
+
+    <!--
+        TimeUnits
+    -->
+    <Setting Name="Ticket::Frontend::AccountTimeType" Required="1" Valid="1">
+        <Description Translatable="1">Activates time accounting.</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="Text">
+                <Item ValueType="Option" Value="Text" Translatable="1">Text</Item>
+                <Item ValueType="Option" Value="Dropdown" Translatable="1">Dropdown</Item>
+            </Item>
+        </Value>
+    </Setting>
+
+    <Setting Name="Ticket::Frontend::AccountTime::Dropdown###001-TimeUnits" Required="0" Valid="1">
+        <Description Translatable="1">This option enables a dropdown which will be displayed instead of the time unit input field.</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Label" Translatable="1">Hours</Item>
+                <Item Key="DataSelected"></Item>
+                <Item Key="Data">
+                    <Hash>
+                        <Item Key="3600">1</Item>
+                        <Item Key="7200">2</Item>
+                        <Item Key="10800">3</Item>
+                        <Item Key="14400">4</Item>
+                        <Item Key="18000">5</Item>
+                        <Item Key="21600">6</Item>
+                        <Item Key="25200">7</Item>
+                        <Item Key="28800">8</Item>
+                        <Item Key="32400">9</Item>
+                        <Item Key="36000">10</Item>
+                        <Item Key="39600">11</Item>
+                        <Item Key="43200">12</Item>
+                        <Item Key="46800">13</Item>
+                        <Item Key="50400">14</Item>
+                        <Item Key="54000">15</Item>
+                        <Item Key="57600">16</Item>
+                        <Item Key="61200">17</Item>
+                        <Item Key="64800">18</Item>
+                        <Item Key="68400">19</Item>
+                        <Item Key="72000">20</Item>
+                        <Item Key="75600">21</Item>
+                        <Item Key="79200">22</Item>
+                        <Item Key="82800">23</Item>
+                        <Item Key="86400">24</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AccountTime::Dropdown###002-TimeUnits" Required="0" Valid="1">
+        <Description Translatable="1">This option enables a dropdown which will be displayed instead of the time unit input field.</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Label" Translatable="1">Minutes</Item>
+                <Item Key="DataSelected"></Item>
+                <Item Key="Data">
+                    <Hash>
+                        <Item Key="60">1</Item>
+                        <Item Key="120">2</Item>
+                        <Item Key="180">3</Item>
+                        <Item Key="240">4</Item>
+                        <Item Key="300">5</Item>
+                        <Item Key="360">6</Item>
+                        <Item Key="420">7</Item>
+                        <Item Key="480">8</Item>
+                        <Item Key="540">9</Item>
+                        <Item Key="600">10</Item>
+                        <Item Key="660">11</Item>
+                        <Item Key="720">12</Item>
+                        <Item Key="780">13</Item>
+                        <Item Key="840">14</Item>
+                        <Item Key="900">15</Item>
+                        <Item Key="960">16</Item>
+                        <Item Key="1020">17</Item>
+                        <Item Key="1080">18</Item>
+                        <Item Key="1140">19</Item>
+                        <Item Key="1200">20</Item>
+                        <Item Key="1260">21</Item>
+                        <Item Key="1320">22</Item>
+                        <Item Key="1380">23</Item>
+                        <Item Key="1440">24</Item>
+                        <Item Key="1500">25</Item>
+                        <Item Key="1560">26</Item>
+                        <Item Key="1620">27</Item>
+                        <Item Key="1680">28</Item>
+                        <Item Key="1740">29</Item>
+                        <Item Key="1800">30</Item>
+                        <Item Key="1860">31</Item>
+                        <Item Key="1920">32</Item>
+                        <Item Key="1980">33</Item>
+                        <Item Key="2040">34</Item>
+                        <Item Key="2100">35</Item>
+                        <Item Key="2160">36</Item>
+                        <Item Key="2220">37</Item>
+                        <Item Key="2280">38</Item>
+                        <Item Key="2340">39</Item>
+                        <Item Key="2400">40</Item>
+                        <Item Key="2460">41</Item>
+                        <Item Key="2520">42</Item>
+                        <Item Key="2580">43</Item>
+                        <Item Key="2640">44</Item>
+                        <Item Key="2700">45</Item>
+                        <Item Key="2760">46</Item>
+                        <Item Key="2820">47</Item>
+                        <Item Key="2880">48</Item>
+                        <Item Key="2940">49</Item>
+                        <Item Key="3000">50</Item>
+                        <Item Key="3060">51</Item>
+                        <Item Key="3120">52</Item>
+                        <Item Key="3180">53</Item>
+                        <Item Key="3240">54</Item>
+                        <Item Key="3300">55</Item>
+                        <Item Key="3360">56</Item>
+                        <Item Key="3420">57</Item>
+                        <Item Key="3480">58</Item>
+                        <Item Key="3540">59</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AccountTime::Dropdown###003-TimeUnits" Required="0" Valid="1">
+        <Description Translatable="1">This option enables a dropdown which will be displayed instead of the time unit input field.</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Label" Translatable="1">Seconds</Item>
+                <Item Key="DataSelected"></Item>
+                <Item Key="Data">
+                    <Hash>
+                        <Item Key="1">1</Item>
+                        <Item Key="2">2</Item>
+                        <Item Key="3">3</Item>
+                        <Item Key="4">4</Item>
+                        <Item Key="5">5</Item>
+                        <Item Key="6">6</Item>
+                        <Item Key="7">7</Item>
+                        <Item Key="8">8</Item>
+                        <Item Key="9">9</Item>
+                        <Item Key="10">10</Item>
+                        <Item Key="11">11</Item>
+                        <Item Key="12">12</Item>
+                        <Item Key="13">13</Item>
+                        <Item Key="14">14</Item>
+                        <Item Key="15">15</Item>
+                        <Item Key="16">16</Item>
+                        <Item Key="17">17</Item>
+                        <Item Key="18">18</Item>
+                        <Item Key="19">19</Item>
+                        <Item Key="20">20</Item>
+                        <Item Key="21">21</Item>
+                        <Item Key="22">22</Item>
+                        <Item Key="23">23</Item>
+                        <Item Key="24">24</Item>
+                        <Item Key="25">25</Item>
+                        <Item Key="26">26</Item>
+                        <Item Key="27">27</Item>
+                        <Item Key="28">28</Item>
+                        <Item Key="29">29</Item>
+                        <Item Key="30">30</Item>
+                        <Item Key="31">31</Item>
+                        <Item Key="32">32</Item>
+                        <Item Key="33">33</Item>
+                        <Item Key="34">34</Item>
+                        <Item Key="35">35</Item>
+                        <Item Key="36">36</Item>
+                        <Item Key="37">37</Item>
+                        <Item Key="38">38</Item>
+                        <Item Key="39">39</Item>
+                        <Item Key="40">40</Item>
+                        <Item Key="41">41</Item>
+                        <Item Key="42">42</Item>
+                        <Item Key="43">43</Item>
+                        <Item Key="44">44</Item>
+                        <Item Key="45">45</Item>
+                        <Item Key="46">46</Item>
+                        <Item Key="47">47</Item>
+                        <Item Key="48">48</Item>
+                        <Item Key="49">49</Item>
+                        <Item Key="50">50</Item>
+                        <Item Key="51">51</Item>
+                        <Item Key="52">52</Item>
+                        <Item Key="53">53</Item>
+                        <Item Key="54">54</Item>
+                        <Item Key="55">55</Item>
+                        <Item Key="56">56</Item>
+                        <Item Key="57">57</Item>
+                        <Item Key="58">58</Item>
+                        <Item Key="59">59</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+
+    <!--
+        AgentTicketOwnerView / OwnerToolbar
+    -->
+    <Setting Name="Frontend::Module###AgentTicketOwnerView" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Owner Tickets</Item>
+                    <Item Key="Title">Owner Tickets</Item>
+                    <Item Key="NavBarName">Ticket</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AgentTicketOwnerView###002-Ticket" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.AgentTicketQueue.css</Item>
+                        <Item>Core.AllocationList.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.UI.AllocationList.js</Item>
+                        <Item>Core.Agent.Overview.js</Item>
+                        <Item>Core.Agent.TableFilters.js</Item>
+                        <Item>Core.Agent.TicketSplit.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Navigation###AgentTicketOwnerView###002-Ticket" Required="0" Valid="0">
+        <Description Translatable="1">Main menu item registration.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketOwnerView###SortBy::Default" Required="1" Valid="1">
+        <Description Translatable="1">Defines the default ticket attribute for ticket sorting in the owner view of the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketOwnerView</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="Age">
+                <Item ValueType="Option" Value="Age">Age</Item>
+                <Item ValueType="Option" Value="TicketNumber">TicketNumber</Item>
+                <Item ValueType="Option" Value="Title">Title</Item>
+                <Item ValueType="Option" Value="Queue">Queue</Item>
+                <Item ValueType="Option" Value="Priority">Priority</Item>
+                <Item ValueType="Option" Value="EscalationTime">EscalationTime</Item>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketOwnerView###Order::Default" Required="1" Valid="1">
+        <Description Translatable="1">Defines the default ticket order in the owner view of the agent interface. Up: oldest on top. Down: latest on top.</Description>
+        <Navigation>Frontend::Agent::View::TicketOwnerView</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="Up">
+                <Item ValueType="Option" Value="Down">Down</Item>
+                <Item ValueType="Option" Value="Up">Up</Item>
+            </Item>
+        </Value>
+    </Setting>
+   <Setting Name="Ticket::Frontend::AgentTicketOwnerView###DefaultColumns" Required="0" Valid="1">
+        <Description Translatable="1">Columns that can be filtered in the owner view of the agent interface. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed.</Description>
+        <Navigation>Frontend::Agent::View::TicketOwnerView</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem ValueType="Select">
+                    <Item ValueType="Option" Value="0" Translatable="1">0 - Disabled</Item>
+                    <Item ValueType="Option" Value="1" Translatable="1">1 - Available</Item>
+                    <Item ValueType="Option" Value="2" Translatable="1">2 - Enabled by default</Item>
+                </DefaultItem>
+                <Item Key="Age" SelectedID="2"></Item>
+                <Item Key="Changed" SelectedID="1"></Item>
+                <Item Key="Created" SelectedID="1"></Item>
+                <Item Key="CustomerCompanyName" SelectedID="1"></Item>
+                <Item Key="CustomerID" SelectedID="2"></Item>
+                <Item Key="CustomerName" SelectedID="1"></Item>
+                <Item Key="CustomerUserID" SelectedID="1"></Item>
+                <Item Key="EscalationResponseTime" SelectedID="1"></Item>
+                <Item Key="EscalationSolutionTime" SelectedID="1"></Item>
+                <Item Key="EscalationTime" SelectedID="1"></Item>
+                <Item Key="EscalationUpdateTime" SelectedID="1"></Item>
+                <Item Key="TicketNumber" SelectedID="2"></Item>
+                <Item Key="Lock" SelectedID="2"></Item>
+                <Item Key="Owner" SelectedID="2"></Item>
+                <Item Key="PendingTime" SelectedID="1"></Item>
+                <Item Key="Queue" SelectedID="2"></Item>
+                <Item Key="Responsible" SelectedID="1"></Item>
+                <Item Key="Priority" SelectedID="1"></Item>
+                <Item Key="Sender" SelectedID="2"></Item>
+                <Item Key="Service" SelectedID="1"></Item>
+                <Item Key="State" SelectedID="2"></Item>
+                <Item Key="SLA" SelectedID="1"></Item>
+                <Item Key="Subject" SelectedID="1"></Item>
+                <Item Key="Title" SelectedID="2"></Item>
+                <Item Key="Type" SelectedID="1"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::ToolBarModule###191-Ticket::TicketOwner" Required="0" Valid="1">
+        <Description Translatable="1">Agent interface notification module to see the number of tickets an agent is owner for. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
+        <Navigation>Frontend::Agent::ToolBar</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::ToolBar::TicketOwner</Item>
+                <Item Key="CssClass">Owner</Item>
+                <Item Key="CssClassNew">Owner New</Item>
+                <Item Key="CssClassReached">Owner Reached</Item>
+                <Item Key="Icon">fa fa-user</Item>
+                <Item Key="IconNew">fa fa-user</Item>
+                <Item Key="IconReached">fa fa-user</Item>
+                <Item Key="AccessKey"></Item>
+                <Item Key="AccessKeyNew"></Item>
+                <Item Key="AccessKeyReached"></Item>
+                <Item Key="Priority">1030031</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!--
+        CalendarBasedTicketCreation
+    -->
+    <Setting Name="AppointmentCalendar::Plugin###TicketCreate" Required="0" Valid="1">
+        <Description Translatable="1">Defines the ticket plugin for calendar appointments.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Calendar::Plugin::Ticket::Create</Item>
+                <Item Key="Name" Translatable="1">Ticket creation</Item>
+                <Item Key="Block">Ticket</Item>
+                <Item Key="Prio">1000</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AgentAppointmentCalendarOverview###500-AppointmentCalendar::Plugin::TicketCreate" Required="1" Valid="1">
+        <Description Translatable="1">Loader module registration for AgentAppointmentEdit.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item></Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.AppointmentCalendar.Plugin.TicketCreate.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###StateType" Required="1" Valid="1">
+        <Description Translatable="1">Defines the next possible ticket states for calendar based tickets.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Array>
+                <Item>new</Item>
+                <Item>open</Item>
+                <Item>closed</Item>
+                <Item>pending reminder</Item>
+                <Item>pending auto</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###StateDefault" Required="1" Valid="1">
+        <Description Translatable="1">Defines the default next state.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">new</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###PriorityDefault" Required="0" Valid="1">
+        <Description Translatable="1">Defines the default ticket priority for calendar based tickets.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="Priority" ValueRegex="">3 normal</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###ProcessTreeView" Required="0" Valid="1">
+        <Description Translatable="1">Defines if the processes should be displayed in TreeView.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###Group" Required="0" Valid="1">
+        <Description Translatable="1">Enables calendar based ticket creation feature only for the listed groups.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Array>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###Title" Required="0" Valid="1">
+        <Description Translatable="1">Defines the default ticket title for calendar based tickets.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">Calendar based ticket</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###Body" Required="0" Valid="1">
+        <Description Translatable="1">Defines the default ticket body for calendar based tickets.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">Calendar based ticket</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###ArticleChannelName" Required="0" Valid="1">
+        <Description Translatable="1">Defines the default article channel name for calendar based tickets.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">Internal</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###ArticleIsVisibleForCustomer" Required="0" Valid="1">
+        <Description Translatable="1">Defines the default visibility of articles for calendar based tickets.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###SenderType" Required="0" Valid="1">
+        <Description Translatable="1">Defines the default sender type for calendar based tickets.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">system</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###From" Required="0" Valid="1">
+        <Description Translatable="1">Defines the default from for calendar based tickets.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">Calendar</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###HistoryType" Required="0" Valid="1">
+        <Description Translatable="1">Defines the default history type for calendar based tickets.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">NewTicket</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###HistoryComment" Required="0" Valid="1">
+        <Description Translatable="1">Defines the default history comment for calendar based tickets.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">Calendar based ticket</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###ContentType" Required="0" Valid="1">
+        <Description Translatable="1">Defines the default content type for calendar based tickets.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">text/plain; charset=ISO-8859-15</Item>
+        </Value>
+    </Setting>
+    <Setting Name="AppointmentCalendar::Plugin::TicketCreate###TicketCreateCatchUpThreshold" Required="0" Valid="1">
+        <Description Translatable="1">Threshold (in minutes) for catching up with ticket creation for appointments. Tickets for due appointments will only be created if their planned creation date is not older than the configured amount of minutes. This prevents creation of tickets for e. g. recurring appointments if the ticket creation will be executed some time later.</Description>
+        <Navigation>Core::AppointmentCalendar::Plugin::Ticket::Create</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+$">5</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###CalendarTicketCreate" Required="1" Valid="1">
+        <Description Translatable="1">Creates the calendar-based tickets regularly.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">CalendarTicketCreate</Item>
+                <Item Key="Schedule">*/2 * * * *</Item>
+                <Item Key="Module">Kernel::System::Console::Command::Maint::Calendar::Ticket::Generate</Item>
+                <Item Key="Function">Execute</Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###CalendarTicketCreateCleanup" Required="1" Valid="1">
+        <Description Translatable="1">Cleans up the calendar-based tickets regularly.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">CalendarTicketCreateCleanup</Item>
+                <Item Key="Schedule">0 2 * * *</Item>
+                <Item Key="Module">Kernel::System::Console::Command::Maint::Calendar::Ticket::Cleanup</Item>
+                <Item Key="Function">Execute</Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!-- Limitation of number of quoted lines in AgenTicketForward -->
+    <Setting Name="Ticket::Frontend::ForwardQuoteMaxLines" Required="0" Valid="0">
+        <Description Translatable="1">Maximum number of quoted lines to be added to forwarded messages.</Description>
+        <Navigation>Frontend::Agent::View::TicketForward</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^[1-9][0-9]*$">99</Item>
+        </Value>
+    </Setting>
+
+    <!-- S/MIME key storage -->
+    <Setting Name="Daemon::SchedulerCronTaskManager::Task###ReindexSMIMECertificates" Required="0" Valid="1">
+        <Description Translatable="1">Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig.</Description>
+        <Navigation>Daemon::SchedulerCronTaskManager::Task</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="TaskName">ReindexSMIMECertificates</Item>
+                <Item Key="Schedule">02 02 * * *</Item> <!-- default each day at 02:02 AM -->
+                <Item Key="Module">Kernel::System::Console::Command::Maint::SMIME::ReindexKeys</Item>
+                <Item Key="Function">Execute</Item>
+                <Item Key="MaximumParallelInstances">1</Item>
+                <Item Key="Params">
+                    <Array>
+                        <Item>all</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!--
+        Agent ticket zoom
+    -->
+    <Setting Name="Ticket::Frontend::AgentTicketZoom::DisplayedAttachmentFilenameMaxLength" Required="1" Valid="1">
+        <Description Translatable="1">Maximum length of displayed attachment filenames in the article preview of ticket zoom view.</Description>
+        <Navigation>Frontend::Agent::View::TicketZoom</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^[1-9]\d*$">50</Item>
+        </Value>
+    </Setting>
+
+    <!--
+        RTE autocompletion
+    -->
+    <Setting Name="Frontend::Module###AJAXRichTextAutocompletion" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Autompletion for rich text editor.</Item>
+                    <Item Key="Title">Autompletion for rich text editor</Item>
+                    <Item Key="NavBarName">Autompletion for rich text editor</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="CustomerFrontend::Module###AJAXRichTextAutocompletion" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the customer interface.</Description>
+        <Navigation>Frontend::Customer::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Autompletion for rich text editor.</Item>
+                    <Item Key="Title">Autompletion for rich text editor</Item>
+                    <Item Key="NavBarName">Autompletion for rich text editor</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Autocompletion::General" Required="0" Valid="1">
+        <Description Translatable="1">General settings for autocompletion in rich text editor.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="ItemTemplate">&lt;li data-id="{id}"&gt;{selection_list_title}&lt;/li&gt;</Item>
+                <Item Key="OutputTemplate">{inserted_value}</Item>
+                <Item Key="MinSearchLength">3</Item>
+                <!-- <Item Key="PreviewLength">50</Item> -->
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Autocompletion::Modules###Example" Required="0" Valid="0">
+        <Description Translatable="1">Rich text editor configuration for autocompletion module.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Trigger">!EX</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Autocompletion::Modules###Template" Required="0" Valid="1">
+        <Description Translatable="1">Rich text editor configuration for autocompletion module to support templates.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Trigger">##</Item>
+                <Item Key="SearchFields">
+                    <Array>
+                        <Item>Name</Item>
+                        <Item>Comment</Item>
+                        <Item>Template</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!--
+        Mentions in RTE
+    -->
+    <Setting Name="Mentions###Notifications" Required="0" Valid="1">
+        <Description Translatable="1">Defines which notifications about mentions should be sent.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="Article">
+                <Item ValueType="Option" Value="Article" Translatable="1">Mentioned in article</Item>
+                <Item ValueType="Option" Value="Ticket" Translatable="1">Mentioned in ticket</Item>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Mentions###ToolbarCount" Required="0" Valid="1">
+        <Description Translatable="1">Defines if the toolbar mention icon should count mentions.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Mentions::RichTextEditor###Triggers" Required="0" Valid="1">
+        <Description Translatable="1">Frontend registration of triggers for mention plugin of CKEditor.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="User">@</Item>
+                <Item Key="Group">@@</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Mentions::RichTextEditor###Templates" Required="0" Valid="1">
+        <Description Translatable="1">Frontend registration of input/output templates for mention plugin of CKEditor.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Users">
+                    <Hash>
+                        <Item Key="ItemTemplate">&lt;li class="Mention" data-id="{id}"&gt;{fullname} ({email})&lt;/li&gt;</Item>
+                        <Item Key="OutputTemplate">&lt;a class="Mention" href="mailto:{email}"&gt;@{username}&lt;/a&gt; </Item>
+                    </Hash>
+                </Item>
+                <Item Key="Groups">
+                    <Hash>
+                        <Item Key="ItemTemplate">&lt;li class="Mention" data-id="{id}"&gt;{name} ({mentionLabel})&lt;/li&gt;</Item>
+                        <Item Key="OutputTemplate">&lt;a class="GroupMention" href="mailto:{emails}"&gt;{name}&lt;/a&gt; </Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Module###Mentions" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">Mentions.</Item>
+                    <Item Key="Title" Translatable="1">Mentions</Item>
+                    <Item Key="NavBarName">Mentions</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::EventModulePost###Mentions" Required="0" Valid="1">
+        <Description Translatable="1">Event handler for mentions.</Description>
+        <Navigation>Core::Event::Ticket</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Ticket::Event::Mentions</Item>
+                <Item Key="Transaction">1</Item>
+                <Item Key="Event">ArticleCreate</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketZoom###Widgets###0299-Mentions" Required="0" Valid="1">
+        <Description Translatable="1">AgentTicketZoom widget that displays ticket data in the side bar.</Description>
+        <Navigation>Frontend::Agent::View::TicketZoom</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketZoom::Mentions</Item>
+                <Item Key="Location">Sidebar</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AgentTicketZoom###0100-Mentions" Required="1" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Znuny.Agent.MentionAction.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AgentTicketMentionView###0100-Mentions" Required="1" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Znuny.Agent.TicketMention.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="DashboardBackend###0300-LastMentions" Required="0" Valid="1">
+        <Description Translatable="1">Parameters for the dashboard backend of the last mention widget.</Description>
+        <Navigation>Frontend::Agent::View::Dashboard</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::Dashboard::TicketGeneric</Item>
+                <Item Key="Title" Translatable="1">Last Mentions</Item>
+                <Item Key="Description" Translatable="1">Shows last mention of tickets.</Item>
+                <Item Key="IncludesMentions">1</Item>
+                <Item Key="Attributes">ModuleLookup</Item>
+                <Item Key="Filter">Locked</Item>
+                <Item Key="Time">UntilTime</Item>
+                <Item Key="Limit">10</Item>
+                <Item Key="Permission">rw</Item>
+                <Item Key="Block">ContentLarge</Item>
+                <Item Key="Group"></Item>
+                <Item Key="Default">1</Item>
+                <Item Key="CacheTTLLocal">0.5</Item>
+                <Item Key="DefaultColumns">
+                    <Hash>
+                        <DefaultItem ValueType="Select">
+                            <Item ValueType="Option" Value="0" Translatable="1">0 - Disabled</Item>
+                            <Item ValueType="Option" Value="1" Translatable="1">1 - Available</Item>
+                            <Item ValueType="Option" Value="2" Translatable="1">2 - Enabled by default</Item>
+                        </DefaultItem>
+                        <Item Key="Age" SelectedID="2"></Item>
+                        <Item Key="Changed" SelectedID="1"></Item>
+                        <Item Key="Created" SelectedID="1"></Item>
+                        <Item Key="CustomerCompanyName" SelectedID="1"></Item>
+                        <Item Key="CustomerID" SelectedID="1"></Item>
+                        <Item Key="CustomerName" SelectedID="1"></Item>
+                        <Item Key="CustomerUserID" SelectedID="1"></Item>
+                        <Item Key="EscalationResponseTime" SelectedID="1"></Item>
+                        <Item Key="EscalationSolutionTime" SelectedID="1"></Item>
+                        <Item Key="EscalationTime" SelectedID="1"></Item>
+                        <Item Key="EscalationUpdateTime" SelectedID="1"></Item>
+                        <Item Key="TicketNumber" SelectedID="2"></Item>
+                        <Item Key="Lock" SelectedID="1"></Item>
+                        <Item Key="Owner" SelectedID="1"></Item>
+                        <Item Key="PendingTime" SelectedID="1"></Item>
+                        <Item Key="Queue" SelectedID="1"></Item>
+                        <Item Key="Responsible" SelectedID="1"></Item>
+                        <Item Key="Priority" SelectedID="1"></Item>
+                        <Item Key="Service" SelectedID="1"></Item>
+                        <Item Key="State" SelectedID="1"></Item>
+                        <Item Key="SLA" SelectedID="1"></Item>
+                        <Item Key="Title" SelectedID="2"></Item>
+                        <Item Key="Type" SelectedID="1"></Item>
+                        <Item Key="LastMention" SelectedID="2"></Item>
+                    </Hash>
+                </Item>
+                <Item Key="Mandatory">0</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Agent::CommonCSS###999-Mentions" Required="1" Valid="1">
+        <Description Translatable="1">List of CSS files to always be loaded for the customer interface.</Description>
+        <Navigation>Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>Znuny.RichTextEditor.css</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::ToolBarModule###191-Ticket::TicketMention" Required="0" Valid="1">
+        <Description Translatable="1">Agent interface notification module to show the number of mentions.</Description>
+        <Navigation>Frontend::Agent::ToolBar</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::ToolBar::TicketMention</Item>
+                <Item Key="CssClass">Mention</Item>
+                <Item Key="CssClassNew">Mention New</Item>
+                <Item Key="Icon">fa fa-comment</Item>
+                <Item Key="IconNew">fa fa-comment</Item>
+                <Item Key="IconReached">fa fa-comment</Item>
+                <Item Key="AccessKey"></Item>
+                <Item Key="Priority">1030040</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Permission###6-MentionCheck" Required="0" Valid="1">
+        <Description Translatable="1">Module to grant access to the mentioned agents of a ticket.</Description>
+        <Navigation>Core::Ticket::Permission</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Ticket::Permission::MentionCheck</Item>
+                <Item Key="Required">0</Item>
+                <Item Key="Granted">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Module###AgentTicketMentionView" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">Mentions.</Item>
+                    <Item Key="Title" Translatable="1">Mentions</Item>
+                    <Item Key="NavBarName">Mentions</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AgentTicketMentionView###002-Ticket" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.AgentTicketQueue.css</Item>
+                        <Item>Core.AllocationList.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.UI.AllocationList.js</Item>
+                        <Item>Core.Agent.TableFilters.js</Item>
+                        <Item>Core.Agent.Overview.js</Item>
+                        <Item>Core.Agent.TicketSplit.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
 </otrs_config>

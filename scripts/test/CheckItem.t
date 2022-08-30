@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -23,10 +23,6 @@ my $CheckItemObject = $Kernel::OM->Get('Kernel::System::CheckItem');
 $ConfigObject->Set(
     Key   => 'CheckMXRecord',
     Value => 0,
-);
-$ConfigObject->Set(
-    Key   => 'CheckEmailAddresses',
-    Value => 1,
 );
 
 # email address checks
@@ -72,6 +68,16 @@ my @Tests = (
     {
         Email => 'foo=bar@[192.22.2]',
         Valid => 0,
+    },
+    {
+        Email     => 'somebody',
+        Valid     => 0,
+        SysConfig => [
+            {
+                Key   => 'CheckEmailAddresses',
+                Value => 1,
+            }
+        ]
     },
 
     # Valid
@@ -126,6 +132,16 @@ my @Tests = (
     {
         Email => 'foo=bar@[192.123.22.2]',
         Valid => 1,
+    },
+    {
+        Email     => 'somebody',
+        Valid     => 1,
+        SysConfig => [
+            {
+                Key   => 'CheckEmailAddresses',
+                Value => 0,
+            }
+        ]
     },
 
     # Unicode domains
@@ -183,10 +199,21 @@ my @Tests = (
         Email => 'Test <test@home.com> (Test)',
         Valid => 1,
     },
-
 );
 
 for my $Test (@Tests) {
+    $ConfigObject->Set(
+        Key   => 'CheckEmailAddresses',
+        Value => 1,
+    );
+
+    if ( $Test->{SysConfig} ) {
+        for my $SysConfig ( @{ $Test->{SysConfig} } ) {
+            $ConfigObject->Set(
+                %{$SysConfig}
+            );
+        }
+    }
 
     # check address
     my $Valid = $CheckItemObject->CheckEmail( Address => $Test->{Email} );
@@ -205,6 +232,11 @@ for my $Test (@Tests) {
         );
     }
 }
+
+$ConfigObject->Set(
+    Key   => 'CheckEmailAddresses',
+    Value => 1,
+);
 
 # AreEmailAddressesValid()
 @Tests = (

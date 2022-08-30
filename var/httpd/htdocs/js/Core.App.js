@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -544,6 +544,12 @@ Core.App = (function (TargetNS) {
                 if (Core && Core.UI && Core.UI.Popup && Core.UI.Popup.HasOpenPopups()) {
                     return;
                 }
+
+                // If there is an input value in the toolbar TicketSearchFulltext, don't refresh
+                if ($('#Fulltext').length && $('#Fulltext').val().length) {
+                    return;
+                }
+
                 // Now we can reload
                 window.location.reload();
             }, RefreshSeconds * 1000);

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -20,12 +20,12 @@ $Selenium->RunTest(
     sub {
 
         # Get needed objects.
-        my $Helper             = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
         my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
         # Create test customer user.
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate(
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
         ) || die "Did not get test customer user";
 
         # Create test ticket.
@@ -48,7 +48,7 @@ $Selenium->RunTest(
         );
 
         # Create dynamic field.
-        my $RandomNumber     = $Helper->GetRandomNumber();
+        my $RandomNumber     = $HelperObject->GetRandomNumber();
         my $DynamicFieldName = 'DF' . $RandomNumber;
         my $DynamicFieldLink = "https://www.example.com";
         my $DynamicFieldID   = $DynamicFieldObject->DynamicFieldAdd(
@@ -88,7 +88,7 @@ $Selenium->RunTest(
         );
 
         # Set SysConfig to show dynamic field in CustomerTicketZoom screen.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::CustomerTicketZoom###DynamicField',
             Value => {

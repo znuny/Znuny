@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -42,7 +42,7 @@ my @Tests = (
         CommandModule => 'Kernel::System::Console::Command::Help',
         Parameter     => 'Lis',
         ExitCode      => 0,
-        STDOUT        => 'List all installed OTRS packages',
+        STDOUT        => 'List all installed packages',
     },
     {
         Name          => "Expected invalid 'Parameter'",

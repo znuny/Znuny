@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -117,9 +117,10 @@ sub Run {
     # get params
     my %Form;
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
-    $Form{SourceObject} = $ParamObject->GetParam( Param => 'SourceObject' );
-    $Form{SourceKey}    = $ParamObject->GetParam( Param => 'SourceKey' );
-    $Form{Mode}         = $ParamObject->GetParam( Param => 'Mode' ) || 'Normal';
+    $Form{SourceObject}  = $ParamObject->GetParam( Param => 'SourceObject' );
+    $Form{SourceKey}     = $ParamObject->GetParam( Param => 'SourceKey' );
+    $Form{Mode}          = $ParamObject->GetParam( Param => 'Mode' ) || 'Normal';
+    $Form{InitialSearch} = $ParamObject->GetParam( Param => 'InitialSearch' );
 
     # check needed stuff
     if ( !$Form{SourceObject} || !$Form{SourceKey} ) {
@@ -614,12 +615,13 @@ sub Run {
         || $Kernel::OM->Get('Kernel::Config')->Get('Frontend::AgentLinkObject::WildcardSearch')
         )
     {
-
         $SearchList = $LinkObject->ObjectSearch(
-            Object       => $Form{TargetObject},
-            SubObject    => $Form{TargetSubObject},
-            SearchParams => \%SearchParam,
-            UserID       => $Self->{UserID},
+            Object        => $Form{TargetObject},
+            SubObject     => $Form{TargetSubObject},
+            InitialSearch => $Form{InitialSearch},
+            SourceKey     => $Form{SourceKey},
+            SearchParams  => \%SearchParam,
+            UserID        => $Self->{UserID},
         );
     }
 

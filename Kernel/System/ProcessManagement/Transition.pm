@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -804,7 +804,11 @@ sub TransitionCheck {
                 }
 
                 # runs all TransitionValidation except String, Array, Hash, Regexp, Module
-                elsif (  $TransitionValidation{ $ActualCondition->{Fields}->{$FieldName}->{Type} }->{Module} && $ValidateModuleObject ) {
+                elsif (
+                    $TransitionValidation{ $ActualCondition->{Fields}->{$FieldName}->{Type} }->{Module}
+                    && $ValidateModuleObject
+                    )
+                {
 
                     # Handle "Data" Param to ValidateModule's "Validate" subroutine.
                     # use ValidateModule 'Module' to run another ValidateModule

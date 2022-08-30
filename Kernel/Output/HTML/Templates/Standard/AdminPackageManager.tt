@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -200,8 +200,8 @@
                     [% IF Data.RequiredMaximumVersion %]
                     <p><span class="MaximumRequired">[% Translate("This package can only be installed on Znuny version %s or older.", Data.RequiredMaximumVersion) | html %] </span></p>
                     [% END %]
-                    [% IF !Data.RequiredMinimumVersion && Data.RequiredFramework %]
-                    <p><span class="MaximumRequired">[% Translate("This package can only be installed on Znuny version %s or newer.", Data.RequiredFramework) | html %] </span></p>
+                    [% IF !Data.RequiredMinimumVersion && !Data.RequiredMaximumVersion && Data.RequiredFramework %]
+                    <p><span class="MaximumRequired">[% Translate("This package can only be installed on Znuny version %s.", Data.RequiredFramework) | html %] </span></p>
                     [% END %]
                     <h2 class="SpacingTop">[% Translate("Why should I keep Znuny up to date?") | html %]</h2>
                     <ul class="Default">
@@ -356,26 +356,6 @@
                                 </button>
                             </form>
                         </li>
- [% RenderBlockStart("CloudServicesWarning") %]
-                        <li>
-                            <p class="FieldExplanation Error">
-                                [% Translate("Cloud services are currently disabled.") | html %]
-                                </br>
-                                [% Translate("OTRS Verify™ can not continue!") | html %]
-                            </p>
-                            <form action="[% Env("CGIHandle") %]" method="post">
-                                <input type="hidden" name="Action" value="AdminSystemConfiguration"/>
-                                <input type="hidden" name="Subaction" value="Edit"/>
-                                <input type="hidden" name="SysConfigGroup" value="CloudService"/>
-                                <input type="hidden" name="SysConfigSubGroup" value="Core"/>
-                                <fieldset>
-                                    <button class="Fullsize CallForAction LittleSpacingTop Center" type="submit" value="[% Translate("Enable cloud services") | html %]">
-                                        <span><i class="fa fa-cloud"></i> [% Translate("Enable cloud services") | html %]</span>
-                                    </button>
-                                </fieldset>
-                            </form>
-                        </li>
-[% RenderBlockEnd("CloudServicesWarning") %]
                         [% IF Data.InstalledPackages %]
                         <li>
                             <a href="#" class="CallForAction Fullsize Center UpgradeAll PackageAction"><span><i class="fa fa-arrow-circle-o-up"></i>[% Translate("Update all installed packages") | html %]</span></a>
@@ -471,9 +451,6 @@
 [% RenderBlockStart("ShowLocalPackage") %]
                             <tr>
                                 <td>
-#[% RenderBlockStart("ShowLocalPackageVerifyLogo") %]
-#                                    <img src="[% Config("Frontend::ImagePath") %]/otrs-verify-small.png" class="OTRSVerifyLogo" alt="[% Translate("This package is verified by OTRSverify (tm)") | html %]" />
-#[% RenderBlockEnd("ShowLocalPackageVerifyLogo") %]
                                     <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=View;Name=[% Data.Name | uri %];Version=[% Data.Version | uri %]">[% Data.Name | html %]</a>
                                 </td>
                                 <td>

@@ -1,16 +1,18 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::SpellCheck)
 
 package Kernel::Language;
 
 use strict;
 use warnings;
+use Pod::Strip;
 
 use Exporter qw(import);
 our @EXPORT_OK = qw(Translatable);    ## no critic
@@ -25,6 +27,7 @@ our @ObjectDependencies = (
     'Kernel::System::DateTime',
     'Kernel::System::Log',
     'Kernel::System::Main',
+    'Kernel::System::SysConfig',
 );
 
 =head1 NAME
@@ -54,16 +57,15 @@ create a language object. Do not use it directly, instead use:
 sub new {
     my ( $Type, %Param ) = @_;
 
-    # allocate new hash for object
     my $Self = {%Param};
     bless( $Self, $Type );
 
     # 0=off; 1=on; 2=get all not translated words; 3=get all requests
     $Self->{Debug} = 0;
 
-    # get needed object
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
     my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
 
     # user language
     $Self->{UserLanguage} = $Param{UserLanguage}
@@ -81,26 +83,29 @@ sub new {
 
     # Debug
     if ( $Self->{Debug} > 0 ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'debug',
             Message  => "UserLanguage = $Self->{UserLanguage}",
         );
     }
 
-    my $Home = $ConfigObject->Get('Home') . '/';
+    $Self->{Home}         = $ConfigObject->Get('Home') . '/';
+    $Self->{DefaultTheme} = $ConfigObject->Get('DefaultTheme');
+    $Self->{UsedWords}    = {};
+    $Self->{UsedInJS}     = {};
 
     my $LanguageFile = "Kernel::Language::$Self->{UserLanguage}";
 
     # load text catalog ...
     if ( !$MainObject->Require($LanguageFile) ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => "Sorry, can't locate or load $LanguageFile "
                 . "translation! Check the Kernel/Language/$Self->{UserLanguage}.pm (perl -cw)!",
         );
     }
     else {
-        push @{ $Self->{LanguageFiles} }, "$Home/Kernel/Language/$Self->{UserLanguage}.pm";
+        push @{ $Self->{LanguageFiles} }, "$Self->{Home}/Kernel/Language/$Self->{UserLanguage}.pm";
     }
 
     my $LanguageFileDataMethod = $LanguageFile->can('Data');
@@ -111,7 +116,7 @@ sub new {
 
             # Debug info.
             if ( $Self->{Debug} > 0 ) {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                $LogObject->Log(
                     Priority => 'debug',
                     Message  => "Kernel::Language::$Self->{UserLanguage} load ... done.",
                 );
@@ -119,7 +124,7 @@ sub new {
         }
     }
     else {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => "Sorry, can't load $LanguageFile! Check if it provides Data method",
         );
@@ -134,14 +139,14 @@ sub new {
 
         # looking to addition translation files
         my @Files = $MainObject->DirectoryRead(
-            Directory => $Home . "Kernel/Language/",
+            Directory => $Self->{Home} . "Kernel/Language/",
             Filter    => "$Self->{UserLanguage}_*.pm",
         );
         FILE:
         for my $File (@Files) {
 
             # get module name based on file name
-            my $Module = $File =~ s/^$Home(.*)\.pm$/$1/rg;
+            my $Module = $File =~ s/^$Self->{Home}(.*)\.pm$/$1/rg;
             $Module =~ s/\/\//\//g;
             $Module =~ s/\//::/g;
 
@@ -165,7 +170,7 @@ sub new {
 
             # load translation module
             if ( !$MainObject->Require($Module) ) {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                $LogObject->Log(
                     Priority => 'error',
                     Message  => "Sorry, can't load $Module! Check the $File (perl -cw)!",
                 );
@@ -178,7 +183,7 @@ sub new {
             my $ModuleDataMethod = $Module->can('Data');
 
             if ( !$ModuleDataMethod ) {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                $LogObject->Log(
                     Priority => 'error',
                     Message  => "Sorry, can't load $Module! Check if it provides Data method.",
                 );
@@ -190,7 +195,7 @@ sub new {
 
                 # debug info
                 if ( $Self->{Debug} > 0 ) {
-                    $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    $LogObject->Log(
                         Priority => 'debug',
                         Message  => "$Module load ... done.",
                     );
@@ -211,7 +216,7 @@ sub new {
 
                     # Debug info.
                     if ( $Self->{Debug} > 0 ) {
-                        $Kernel::OM->Get('Kernel::System::Log')->Log(
+                        $LogObject->Log(
                             Priority => 'Debug',
                             Message  => "$CustomTranslationModule load ... done.",
                         );
@@ -219,7 +224,7 @@ sub new {
                 }
             }
             else {
-                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                $LogObject->Log(
                     Priority => 'error',
                     Message  => "Sorry, can't load $CustomTranslationModule! Check if it provides Data method.",
                 );
@@ -245,6 +250,20 @@ sub new {
 
 this is a no-op to mark a text as translatable in the Perl code.
 
+Example:
+
+    my $Selection = $LayoutObject BuildSelection (
+        Data => {
+            'and' => Translatable('and'),
+            'or'  => Translatable('or'),
+            'xor' => Translatable('xor'),
+        },
+        Name        => "ConditionLinking[_INDEX_]",
+        Sort        => 'AlphanumericKey',
+        Translation => 1,
+        Class       => 'Modernize W50pc',
+    );
+
 =cut
 
 sub Translatable {
@@ -255,7 +274,7 @@ sub Translatable {
 
 translate a text with placeholders.
 
-        my $Text = $LanguageObject->Translate('Hello %s!', 'world');
+    my $Text = $LanguageObject->Translate('Hello %s!', 'world');
 
 =cut
 
@@ -298,6 +317,8 @@ Invalid strings will also be returned with an error logged.
 sub FormatTimeString {
     my ( $Self, $String, $Config, $Short ) = @_;
 
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
     return '' if !$String;
 
     $Config ||= 'DateFormat';
@@ -315,7 +336,7 @@ sub FormatTimeString {
         );
 
         if ( !$DateTimeObject ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message  => "Invalid date/time string $String.",
             );
@@ -369,7 +390,7 @@ sub FormatTimeString {
 
     # Invalid string passed? (don't log for ISO dates)
     if ( $String !~ /^(\d{2}:\d{2}:\d{2})$/ ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'notice',
             Message  => "No FormatTimeString() translation found for '$String' string!",
         );
@@ -561,6 +582,553 @@ sub LanguageChecksum {
     }
 
     return Digest::MD5::md5_hex($LanguageString);
+}
+
+=head2 GetTTTemplateTranslatableStrings()
+
+Returns an array of translation strings from tt templates.
+
+    my @TranslationStrings = $LanguageObject->GetTTTemplateTranslatableStrings(
+        ModuleDirectory => "$Home/...",  # optional, translates the Znuny module in the given directory
+    );
+
+Returns:
+
+    my @TranslationStrings = (
+        {
+            Location => "TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt",
+            Source   => 'Actions',
+        }
+    );
+
+=cut
+
+sub GetTTTemplateTranslatableStrings {
+    my ( $Self, %Param ) = @_;
+
+    my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+
+    my @TranslationStrings;
+    $Param{ModuleDirectory} ||= '';
+
+    my $TemplatesDirectory = $Param{ModuleDirectory}
+        ? "$Param{ModuleDirectory}/Kernel/Output/HTML/Templates/$Self->{DefaultTheme}"
+        : "$Self->{Home}/Kernel/Output/HTML/Templates/$Self->{DefaultTheme}";
+
+    my @TemplateList;
+    if ( -d $TemplatesDirectory ) {
+        @TemplateList = $MainObject->DirectoryRead(
+            Directory => $TemplatesDirectory,
+            Filter    => '*.tt',
+            Recursive => 1,
+        );
+    }
+
+    my $CustomTemplatesDir = "$Param{ModuleDirectory}/Custom/Kernel/Output/HTML/Templates/$Self->{DefaultTheme}";
+    if ( $Param{ModuleDirectory} && -d $CustomTemplatesDir ) {
+        my @CustomTemplateList = $MainObject->DirectoryRead(
+            Directory => $CustomTemplatesDir,
+            Filter    => '*.tt',
+            Recursive => 1,
+        );
+        push @TemplateList, @CustomTemplateList;
+    }
+
+    for my $File (@TemplateList) {
+
+        my $ContentRef = $MainObject->FileRead(
+            Location => $File,
+            Mode     => 'utf8',
+        );
+
+        if ( !ref $ContentRef ) {
+            die "Can't open $File: $!";
+        }
+
+        my $Content = ${$ContentRef};
+
+        $File =~ s{^.*/(Kernel/.+?)}{$1}smx;
+
+        # do translation
+        $Content =~ s{
+            Translate\(
+                \s*
+                (["'])(.*?)(?<!\\)\1
+        }
+        {
+            my $Word = $2 // '';
+
+            # unescape any \" or \' signs
+            $Word =~ s{\\"}{"}smxg;
+            $Word =~ s{\\'}{'}smxg;
+
+            if ( $Word && !$Self->{UsedWords}->{$Word}++ ) {
+
+                push @TranslationStrings, {
+                    Location => "TT Template: $File",
+                    Source   => $Word,
+                };
+            }
+
+            '';
+        }egx;
+    }
+
+    return @TranslationStrings;
+}
+
+=head2 GetJSTemplateTranslatableStrings()
+
+Returns an array of translation strings from JS templates.
+
+    my @TranslationStrings = $LanguageObject->GetJSTemplateTranslatableStrings(
+        ModuleDirectory  => "$Home/...",  # optional, translates the Znuny module in the given directory
+    );
+
+Returns:
+
+    my @TranslationStrings = (
+        {
+            Location => "JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/TicketZoom/FormDraftDeleteDialog.html.tmpl",
+            Source   => 'Cancel',
+        }
+    );
+
+=cut
+
+sub GetJSTemplateTranslatableStrings {
+    my ( $Self, %Param ) = @_;
+
+    my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+
+    my @TranslationStrings;
+    $Param{ModuleDirectory} ||= '';
+
+    # Add strings from .html.tmpl files (JavaScript templates).
+    my $JSTemplatesDirectory = $Param{ModuleDirectory}
+        ? "$Param{ModuleDirectory}/Kernel/Output/JavaScript/Templates/$Self->{DefaultTheme}"
+        : "$Self->{Home}/Kernel/Output/JavaScript/Templates/$Self->{DefaultTheme}";
+
+    my @JSTemplateList;
+    if ( -d $JSTemplatesDirectory ) {
+        @JSTemplateList = $MainObject->DirectoryRead(
+            Directory => $JSTemplatesDirectory,
+            Filter    => '*.html.tmpl',
+            Recursive => 1,
+        );
+    }
+
+    my $CustomJSTemplatesDir
+        = "$Param{ModuleDirectory}/Custom/Kernel/Output/JavaScript/Templates/$Self->{DefaultTheme}";
+    if ( $Param{ModuleDirectory} && -d $CustomJSTemplatesDir ) {
+        my @CustomJSTemplateList = $MainObject->DirectoryRead(
+            Directory => $CustomJSTemplatesDir,
+            Filter    => '*.html.tmpl',
+            Recursive => 1,
+        );
+        push @JSTemplateList, @CustomJSTemplateList;
+    }
+
+    for my $File (@JSTemplateList) {
+
+        my $ContentRef = $MainObject->FileRead(
+            Location => $File,
+            Mode     => 'utf8',
+        );
+
+        if ( !ref $ContentRef ) {
+            die "Can't open $File: $!";
+        }
+
+        my $Content = ${$ContentRef};
+
+        $File =~ s{^.*/(Kernel/.+?)}{$1}smx;
+
+        # Find strings marked for translation.
+        $Content =~ s{
+            \{\{
+            \s*
+            (["'])(.*?)(?<!\\)\1
+            \s*
+            \|
+            \s*
+            Translate
+        }
+        {
+            my $Word = $2 // '';
+
+            # Unescape any \" or \' signs.
+            $Word =~ s{\\"}{"}smxg;
+            $Word =~ s{\\'}{'}smxg;
+
+            if ( $Word && !$Self->{UsedWords}->{$Word}++ ) {
+                push @TranslationStrings, {
+                    Location => "JS Template: $File",
+                    Source   => $Word,
+                };
+            }
+
+            # Also save that this string was used in JS (for later use in Loader).
+            $Self->{UsedInJS}->{$Word} = 1;
+
+            '';
+        }egx;
+    }
+
+    return @TranslationStrings;
+}
+
+=head2 GetPerlModuleTranslatableStrings()
+
+Returns an array of translation strings from Perl modules mark with Translatable or Translate.
+
+    my @TranslationStrings = $LanguageObject->GetPerlModuleTranslatableStrings(
+        ModuleDirectory  => "$Home/...",  # optional, translates the Znuny module in the given directory
+    );
+
+Returns:
+
+    my @TranslationStrings = (
+        {
+            Location => "Perl Module: Kernel/Modules/AdminACL.pm",
+            Source   => 'This field is required',
+        }
+    );
+
+=cut
+
+sub GetPerlModuleTranslatableStrings {
+    my ( $Self, %Param ) = @_;
+
+    my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+
+    my @TranslationStrings;
+    $Param{ModuleDirectory} ||= '';
+
+    # add translatable strings from Perl code
+    my $PerlModuleDirectory = $Param{ModuleDirectory}
+        ? "$Param{ModuleDirectory}/Kernel"
+        : "$Self->{Home}/Kernel";
+
+    my @PerlModuleList;
+    if ( -d $PerlModuleDirectory ) {
+        @PerlModuleList = $MainObject->DirectoryRead(
+            Directory => $PerlModuleDirectory,
+            Filter    => '*.pm',
+            Recursive => 1,
+        );
+    }
+
+    # include Custom folder for modules
+    my $CustomKernelDir = "$Param{ModuleDirectory}/Custom/Kernel";
+    if ( $Param{ModuleDirectory} && -d $CustomKernelDir ) {
+        my @CustomPerlModuleList = $MainObject->DirectoryRead(
+            Directory => $CustomKernelDir,
+            Filter    => '*.pm',
+            Recursive => 1,
+        );
+        push @PerlModuleList, @CustomPerlModuleList;
+    }
+
+    # Include some additional folders for modules.
+    for my $AdditionalFolder ( 'var/packagesetup', 'var/processes/examples', 'var/webservices/examples' ) {
+        if ( $Param{ModuleDirectory} && -d "$Param{ModuleDirectory}/$AdditionalFolder" ) {
+            my @PackageSetupModuleList = $MainObject->DirectoryRead(
+                Directory => "$Param{ModuleDirectory}/$AdditionalFolder",
+                Filter    => '*.pm',
+                Recursive => 1,
+            );
+            push @PerlModuleList, @PackageSetupModuleList;
+        }
+    }
+
+    FILE:
+    for my $File (@PerlModuleList) {
+
+        next FILE if ( $File =~ m{cpan-lib}xms );
+        next FILE if ( $File =~ m{Kernel/Config/Files}xms );
+
+        my $ContentRef = $MainObject->FileRead(
+            Location => $File,
+            Mode     => 'utf8',
+        );
+
+        if ( !ref $ContentRef ) {
+            die "Can't open $File: $!";
+        }
+
+        $File =~ s{^.*/(Kernel/)}{$1}smx;
+        $File =~ s{^.*/(var/)}{$1}smx;
+
+        my $Content = ${$ContentRef};
+
+        # Remove POD
+        my $PodStrip = Pod::Strip->new();
+        $PodStrip->replace_with_comments(1);
+        my $Code;
+        $PodStrip->output_string( \$Code );
+        $PodStrip->parse_string_document($Content);
+
+        # Purge all comments
+        $Code =~ s{^ \s* # .*? \n}{\n}xmsg;
+
+        # do translation
+        $Code =~ s{
+            (?:
+                ->Translate | Translatable
+            )
+            \(
+                \s*
+                (["'])(.*?)(?<!\\)\1
+        }
+        {
+            my $Word = $2 // '';
+
+            # unescape any \" or \' signs
+            $Word =~ s{\\"}{"}smxg;
+            $Word =~ s{\\'}{'}smxg;
+
+            # Ignore strings containing variables
+            my $SkipWord;
+            $SkipWord = 1 if $Word =~ m{\$}xms;
+
+            if ( $Word && !$SkipWord && !$Self->{UsedWords}->{$Word}++ ) {
+
+                push @TranslationStrings, {
+                    Location => "Perl Module: $File",
+                    Source => $Word,
+                };
+
+            }
+            '';
+        }egx;
+    }
+
+    return @TranslationStrings;
+}
+
+=head2 GetXMLTranslatableStrings()
+
+Returns an array of translation strings from JS templates.
+
+    my @TranslationStrings = $LanguageObject->GetXMLTranslatableStrings(
+        ModuleDirectory  => "$Home/...",  # optional, translates the Znuny module in the given directory
+    );
+
+Returns:
+
+    my @TranslationStrings = (
+        {
+            Location => "XML Definition:  scripts/database/otrs-initial_insert.xml",
+            Source   => 'This field is required',
+        }
+    );
+
+=cut
+
+sub GetXMLTranslatableStrings {
+    my ( $Self, %Param ) = @_;
+
+    my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+
+    my @TranslationStrings;
+    $Param{ModuleDirectory} ||= '';
+
+    # add translatable strings from DB XML
+    my @XMLFiles = $MainObject->DirectoryRead(
+        Directory => "Kernel/Config/Files/XML",
+        Recursive => 1,
+        Filter    => '*.xml',
+    );
+
+    push @XMLFiles, "scripts/database/otrs-initial_insert.xml";
+
+    if ( $Param{ModuleDirectory} ) {
+        @XMLFiles = $MainObject->DirectoryRead(
+            Directory => "$Param{ModuleDirectory}",
+            Recursive => 1,
+            Filter    => '*.sopm',
+        );
+    }
+
+    FILE:
+    for my $File (@XMLFiles) {
+
+        my $ContentRef = $MainObject->FileRead(
+            Location => $File,
+            Mode     => 'utf8',
+        );
+
+        if ( !ref $ContentRef ) {
+            die "Can't open $File: $!";
+        }
+
+        $File =~ s{^.*/(scripts/)}{$1}smx;
+        $File =~ s{//}{/}g;
+        if ( $Param{ModuleDirectory} ) {
+            $File =~ s{^.*/(.+\.sopm)}{$1}smx;
+        }
+
+        my $Content = ${$ContentRef};
+        next FILE if !$Content;
+
+        # do translation
+        $Content =~ s{
+            <(Data|Description)[^>]+Translatable="1"[^>]*>(.*?)</\1>
+        }
+        {
+            my $Word = $2 // '';
+            if ( $Word && !$Self->{UsedWords}->{$Word}++ ) {
+                push @TranslationStrings, {
+                    Location => "XML Definition: $File",
+                    Source   => $Word,
+                };
+            }
+            '';
+        }egx;
+    }
+
+    return @TranslationStrings;
+}
+
+=head2 GetJSTranslatableStrings()
+
+Returns an array of translation strings from JS.
+
+    my @TranslationStrings = $LanguageObject->GetJSTranslatableStrings(
+        ModuleDirectory  => "$Home/...",  # optional, translates the Znuny module in the given directory
+    );
+
+Returns:
+
+    my @TranslationStrings = (
+        {
+            Location => "JS File: var/httpd/htdocs/js/Core.Agent.Admin.ACL",
+            Source   => 'Add all',
+        }
+    );
+
+=cut
+
+sub GetJSTranslatableStrings {
+    my ( $Self, %Param ) = @_;
+
+    my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+
+    my @TranslationStrings;
+    $Param{ModuleDirectory} ||= '';
+
+    # add translatable strings from JavaScript code
+    my $JSDirectory = $Param{ModuleDirectory}
+        ? "$Param{ModuleDirectory}/var/httpd/htdocs/js"
+        : "$Self->{Home}/var/httpd/htdocs/js";
+
+    my @JSFileList;
+    if ( -d $JSDirectory ) {
+        @JSFileList = $MainObject->DirectoryRead(
+            Directory => $JSDirectory,
+            Filter    => '*.js',
+            Recursive => 1,
+        );
+    }
+
+    FILE:
+    for my $File (@JSFileList) {
+
+        my $ContentRef = $MainObject->FileRead(
+            Location => $File,
+            Mode     => 'utf8',
+        );
+
+        if ( !ref $ContentRef ) {
+            die "Can't open $File: $!";
+        }
+
+        # skip js cache files
+        next FILE if ( $File =~ m{\/js\/js-cache\/}xmsg );
+
+        my $Content = ${$ContentRef};
+
+        # skip third-party files without custom markers
+        if ( $File =~ m{\/js\/thirdparty\/}xmsg ) {
+            next FILE if ( $Content !~ m{\/\/\s*OTRS}xmsg );
+        }
+
+        $File =~ s{^.*\/(var/httpd/htdocs/js.+?)}{$1}smx;
+
+        # Purge all comments
+        $Content =~ s{^ \s* // .*? \n}{\n}xmsg;
+
+        # do translation
+        $Content =~ s{
+            (?:
+                Core.Language.Translate
+            )
+            \(
+                \s*
+                (["'])(.*?)(?<!\\)\1
+        }
+        {
+            my $Word = $2 // '';
+
+            # unescape any \" or \' signs
+            $Word =~ s{\\"}{"}smxg;
+            $Word =~ s{\\'}{'}smxg;
+
+            if ( $Word && !$Self->{UsedWords}->{$Word}++ ) {
+
+                push @TranslationStrings, {
+                    Location => "JS File: $File",
+                    Source   => $Word,
+                };
+
+            }
+
+            # also save that this string was used in JS (for later use in Loader)
+            $Self->{UsedInJS}->{$Word} = 1;
+
+            '';
+        }egx;
+    }
+
+    return @TranslationStrings;
+}
+
+=head2 GetSysConfigTranslatableStrings()
+
+Returns an array of translation strings from SysConfig.
+
+    my @TranslationStrings = $LanguageObject->GetSysConfigTranslatableStrings();
+
+Returns:
+
+    my @TranslationStrings = (
+        {
+            Location => "SysConfig",
+            Source   => 'Add all',
+        }
+    );
+
+=cut
+
+sub GetSysConfigTranslatableStrings {
+    my ( $Self, %Param ) = @_;
+
+    my @Strings = $Kernel::OM->Get('Kernel::System::SysConfig')->ConfigurationTranslatableStrings();
+    my @TranslationStrings;
+
+    STRING:
+    for my $String ( sort @Strings ) {
+
+        next STRING if !$String || $Self->{UsedWords}->{$String}++;
+
+        push @TranslationStrings, {
+            Location => 'SysConfig',
+            Source   => $String,
+        };
+    }
+
+    return @TranslationStrings;
 }
 
 1;

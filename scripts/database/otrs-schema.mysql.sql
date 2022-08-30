@@ -1018,6 +1018,8 @@ CREATE TABLE mail_account (
     queue_id INTEGER NOT NULL,
     trusted SMALLINT NOT NULL,
     imap_folder VARCHAR (250) NULL,
+    authentication_type VARCHAR (100) NOT NULL DEFAULT 'password',
+    oauth2_token_config_id INTEGER NULL,
     comments VARCHAR (250) NULL,
     valid_id SMALLINT NOT NULL,
     create_time DATETIME NOT NULL,
@@ -1707,6 +1709,20 @@ CREATE TABLE calendar_appointment (
     PRIMARY KEY(id)
 );
 # ----------------------------------------------------------
+#  create table calendar_appointment_plugin
+# ----------------------------------------------------------
+CREATE TABLE calendar_appointment_plugin (
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    appointment_id SMALLINT NOT NULL,
+    plugin_key TEXT NOT NULL,
+    config MEDIUMTEXT NULL,
+    create_time DATETIME NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time DATETIME NOT NULL,
+    change_by INTEGER NOT NULL,
+    PRIMARY KEY(id)
+);
+# ----------------------------------------------------------
 #  create table calendar_appointment_ticket
 # ----------------------------------------------------------
 CREATE TABLE calendar_appointment_ticket (
@@ -1826,4 +1842,75 @@ CREATE TABLE form_draft (
     change_by INTEGER NOT NULL,
     PRIMARY KEY(id),
     INDEX form_draft_object_type_object_id_action (object_type, object_id, action)
+);
+# ----------------------------------------------------------
+#  create table smime_keys
+# ----------------------------------------------------------
+CREATE TABLE smime_keys (
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    key_hash VARCHAR (8) NOT NULL,
+    key_type VARCHAR (255) NOT NULL,
+    file_name VARCHAR (255) NOT NULL,
+    email_address VARCHAR (255) NULL,
+    expiration_date DATETIME NULL,
+    fingerprint VARCHAR (59) NULL,
+    subject VARCHAR (255) NULL,
+    create_time DATETIME NULL,
+    change_time DATETIME NULL,
+    create_by INTEGER NULL,
+    change_by INTEGER NULL,
+    PRIMARY KEY(id),
+    INDEX smime_keys_file_name (file_name),
+    INDEX smime_keys_key_hash (key_hash),
+    INDEX smime_keys_key_type (key_type)
+);
+# ----------------------------------------------------------
+#  create table oauth2_token_config
+# ----------------------------------------------------------
+CREATE TABLE oauth2_token_config (
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    name VARCHAR (250) NOT NULL,
+    config TEXT NOT NULL,
+    valid_id SMALLINT NOT NULL,
+    create_time DATETIME NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time DATETIME NOT NULL,
+    change_by INTEGER NOT NULL,
+    PRIMARY KEY(id),
+    UNIQUE INDEX oauth2_token_config_name (name)
+);
+# ----------------------------------------------------------
+#  create table oauth2_token
+# ----------------------------------------------------------
+CREATE TABLE oauth2_token (
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    token_config_id INTEGER NOT NULL,
+    authorization_code TEXT NULL,
+    token TEXT NULL,
+    token_expiration_date DATETIME NULL,
+    refresh_token TEXT NULL,
+    refresh_token_expiration_date DATETIME NULL,
+    error_message TEXT NULL,
+    error_description TEXT NULL,
+    error_code VARCHAR (250) NULL,
+    create_time DATETIME NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time DATETIME NOT NULL,
+    change_by INTEGER NOT NULL,
+    PRIMARY KEY(id),
+    UNIQUE INDEX oauth2_token_config_id (token_config_id)
+);
+# ----------------------------------------------------------
+#  create table mention
+# ----------------------------------------------------------
+CREATE TABLE mention (
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    user_id INTEGER NULL,
+    ticket_id INTEGER NULL,
+    article_id INTEGER NULL,
+    create_time DATETIME NULL,
+    PRIMARY KEY(id),
+    INDEX mention_article_id (article_id),
+    INDEX mention_ticket_id (ticket_id),
+    INDEX mention_user_id (user_id)
 );

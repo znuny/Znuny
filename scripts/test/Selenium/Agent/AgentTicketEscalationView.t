@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -20,9 +20,9 @@ $Selenium->RunTest(
     sub {
 
         # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
@@ -34,29 +34,29 @@ $Selenium->RunTest(
         for my $Day (@Days) {
             $Week{$Day} = [ 0 .. 23 ];
         }
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'TimeWorkingHours',
             Value => \%Week,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'TimeWorkingHours',
             Value => \%Week,
         );
 
         # disable default Vacation days
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'TimeVacationDays',
             Value => {},
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'TimeVacationDays',
             Value => {},
         );
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -72,7 +72,7 @@ $Selenium->RunTest(
         );
 
         # add test customer for testing
-        my $TestCustomer = 'Customer' . $Helper->GetRandomID();
+        my $TestCustomer = 'Customer' . $HelperObject->GetRandomID();
         my $UserLogin    = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserAdd(
             Source         => 'CustomerUser',
             UserFirstname  => $TestCustomer,
@@ -91,28 +91,28 @@ $Selenium->RunTest(
             # create queue that will escalate tickets in 1 working hour
             {
                 Name         => 'Today',
-                Queue        => "Queue" . $Helper->GetRandomID(),
+                Queue        => "Queue" . $HelperObject->GetRandomID(),
                 SolutionTime => 1 * 60,
             },
 
             # create queue that will escalate tickets in 24 working hours
             {
                 Name         => 'Tomorrow',
-                Queue        => "Queue" . $Helper->GetRandomID(),
+                Queue        => "Queue" . $HelperObject->GetRandomID(),
                 SolutionTime => 24 * 60,
             },
 
             # create queue that will escalate tickets in 1 working week
             {
                 Name         => 'NextWeek',
-                Queue        => "Queue" . $Helper->GetRandomID(),
+                Queue        => "Queue" . $HelperObject->GetRandomID(),
                 SolutionTime => 7 * 24 * 60,
             },
 
             # create queue that will escalate tickets in 2 working weeks
             {
                 Name         => 'AfterNextWeek',
-                Queue        => "Queue" . $Helper->GetRandomID(),
+                Queue        => "Queue" . $HelperObject->GetRandomID(),
                 SolutionTime => 14 * 24 * 60,
             },
         );

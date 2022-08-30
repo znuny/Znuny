@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -52,9 +52,9 @@
 </div>
 <div class="Clear"></div>
 
-<label class="Mandatory" for="SearchKeys"><span class="Marker">*</span> [% Translate("Key for search") | html %]:</label>
+<label for="SearchKeys">[% Translate("Key for search") | html %]:</label>
 <div class="Field">
-    <input id="SearchKeys" class="W50pc [% Data.SearchKeysServerError | html %] Validate_Required" type="text" maxlength="200" value="[% Data.SearchKeys | html %]" name="SearchKeys"/>
+    <input id="SearchKeys" class="W50pc [% Data.SearchKeysServerError | html %]" type="text" maxlength="200" value="[% Data.SearchKeys | html %]" name="SearchKeys"/>
     <div id="SearchKeysServerError" class="TooltipErrorMessage"><p>[% Translate(Data.SearchKeysServerErrorMessage) | html %]</p></div>
     <p class="FieldExplanation">[% Translate("The keys (separated by comma) that will be searched when using the autocomplete while entering a value for the dynamic field.") | html %]</p>
 </div>
@@ -100,7 +100,7 @@
 <div class="Field">
     <input id="Limit" class="W50pc [% Data.LimitServerError | html %]" type="text" maxlength="3" value="[% Data.Limit | html %]" name="Limit"/>
     <div id="LimitServerError" class="TooltipErrorMessage"><p>[% Translate(Data.LimitServerErrorMessage) | html %]</p></div>
-    <p class="FieldExplanation">[% Translate("Maximum number of results for web service queries, e.g. for autcomplete selection list.") | html %]</p>
+    <p class="FieldExplanation">[% Translate("Maximum number of results for web service queries, e.g. for autocomplete selection list.") | html %]</p>
 </div>
 <div class="Clear"></div>
 

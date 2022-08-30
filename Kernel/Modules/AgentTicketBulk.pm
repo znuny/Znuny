@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -20,9 +20,17 @@ our $ObjectManagerDisabled = 1;
 sub new {
     my ( $Type, %Param ) = @_;
 
-    # allocate new hash for object
     my $Self = {%Param};
     bless( $Self, $Type );
+
+    my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+    my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+
+    $Self->{DynamicField} = $DynamicFieldObject->DynamicFieldListGet(
+        Valid       => 1,
+        ObjectType  => [ 'Ticket', 'Article' ],
+        FieldFilter => $ConfigObject->Get("Ticket::Frontend::$Self->{Action}")->{DynamicField} // {},
+    );
 
     return $Self;
 }
@@ -30,7 +38,6 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    # get needed objects
     my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
@@ -44,7 +51,6 @@ sub Run {
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
 
-        # check needed stuff
         if ( !@TicketIDs ) {
             return $LayoutObject->ErrorScreen(
                 Message => Translatable('Can\'t lock Tickets, no TicketIDs are given!'),
@@ -54,7 +60,7 @@ sub Run {
 
         my $Message = '';
 
-        TICKET_ID:
+        TICKETID:
         for my $TicketID (@TicketIDs) {
 
             my $Access = $TicketObject->TicketPermission(
@@ -68,15 +74,38 @@ sub Run {
                 return $LayoutObject->NoPermission( WithHeader => 'yes' );
             }
 
+            # get history lines to set previous owner
+            my @HistoryLines = $TicketObject->HistoryGet(
+                TicketID => $TicketID,
+                UserID   => $Self->{UserID},
+            );
+
+            my @TicketBulkActionHistoryEntries = grep {
+                $_->{HistoryType} eq 'Bulk'
+                    && $_->{Name} eq 'Ticket bulk action.'
+                    && $_->{CreateBy} == $Self->{UserID}
+            } @HistoryLines;
+
+            if (@TicketBulkActionHistoryEntries) {
+                my $NewestTicketBulkActionHistoryEntry = pop @TicketBulkActionHistoryEntries;
+                my $LastOwnerID                        = $NewestTicketBulkActionHistoryEntry->{OwnerID};
+
+                # set previous owner
+                $TicketObject->TicketOwnerSet(
+                    TicketID  => $TicketID,
+                    NewUserID => $LastOwnerID,
+                    UserID    => $Self->{UserID},
+                );
+            }
+
             # set unlock
             my $Lock = $TicketObject->TicketLockSet(
                 TicketID => $TicketID,
                 Lock     => 'unlock',
                 UserID   => $Self->{UserID},
             );
-            if ( !$Lock ) {
-                $Message .= "$TicketID,";
-            }
+            next TICKETID if $Lock;
+            $Message .= "$TicketID,";
         }
 
         if ( $Message ne '' ) {
@@ -203,6 +232,39 @@ sub Run {
                 Name       => 'PriorityID',
                 Data       => \%PriorityList,
                 SelectedID => $GetParam{PriorityID},
+            };
+        }
+
+        # services
+        if ( $ConfigObject->Get('Ticket::Service') && $Config->{Service} ) {
+            my $TreeView = 0;
+            if ( $ConfigObject->Get('Ticket::Frontend::ListType') eq 'tree' ) {
+                $TreeView = 1;
+            }
+
+            $GetParam{ServiceID} = $ParamObject->GetParam( Param => 'ServiceID' ) // '';
+
+            my @TicketIDs = grep { defined $_ } $ParamObject->GetArray( Param => 'TicketID' );
+
+            my $Services = $Self->_GetServices(
+                %GetParam,
+                TicketIDs => \@TicketIDs,
+                QueueID   => $GetParam{QueueID},
+                UserID    => $Self->{UserID},
+            );
+
+            # reset previous ServiceID to reset SLA-List if no service is selected
+            if ( !$Param{ServiceID} || !$Services->{ $Param{ServiceID} } ) {
+                $Param{ServiceID} = '';
+            }
+
+            push @JSONData, {
+                Name         => 'ServiceID',
+                Data         => $Services,
+                SelectedID   => $GetParam{ServiceID},
+                TreeView     => $TreeView,
+                Sort         => 'TreeView',
+                PossibleNone => 1,
             };
         }
 
@@ -422,7 +484,6 @@ sub Run {
             @ValidTicketIDs = @TicketIDs;
         }
 
-        # check needed stuff
         if ( !@ValidTicketIDs ) {
             if ( $Config->{RequiredLock} ) {
                 return $LayoutObject->ErrorScreen(
@@ -453,6 +514,32 @@ sub Run {
         my %Error;
         my %Time;
         my %GetParam;
+
+        my %DynamicFieldValues;
+        my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+
+        # cycle trough the activated dynamic fields of this screen
+        DYNAMICFIELD:
+        for my $DynamicFieldConfig ( @{ $Self->{DynamicField} } ) {
+            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+
+            $DynamicFieldValues{ $DynamicFieldConfig->{Name} } = $DynamicFieldBackendObject->EditFieldValueGet(
+                DynamicFieldConfig => $DynamicFieldConfig,
+                ParamObject        => $ParamObject,
+                LayoutObject       => $LayoutObject,
+            );
+        }
+
+        # convert dynamic field values into a structure for ACLs
+        my %DynamicFieldACLParameters;
+        DYNAMICFIELD:
+        for my $DynamicField ( sort keys %DynamicFieldValues ) {
+            next DYNAMICFIELD if !$DynamicField;
+            next DYNAMICFIELD if !$DynamicFieldValues{$DynamicField};
+
+            $DynamicFieldACLParameters{ 'DynamicField_' . $DynamicField } = $DynamicFieldValues{$DynamicField};
+        }
+        $GetParam{DynamicField} = \%DynamicFieldACLParameters;
 
         # get bulk modules from SysConfig
         my $BulkModuleConfig = $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Frontend::BulkModule') || {};
@@ -504,7 +591,7 @@ sub Run {
 
             # get all parameters
             for my $Key (
-                qw(OwnerID Owner ResponsibleID Responsible PriorityID Priority QueueID Queue Subject
+                qw(ServiceID OwnerID Owner ResponsibleID Responsible PriorityID Priority QueueID Queue Subject
                 Body IsVisibleForCustomer TypeID StateID State MergeToSelection MergeTo LinkTogether
                 EmailSubject EmailBody EmailTimeUnits
                 LinkTogetherParent Unlock MergeToChecked MergeToOldestChecked)
@@ -664,6 +751,10 @@ sub Run {
         my $Counter       = 1;
         $Param{TicketsWereLocked} = 0;
 
+        my %DynamicFieldHTML;
+        my %ACLCompatGetParam;
+        $ACLCompatGetParam{OwnerID} = $GetParam{OwnerID};
+
         # if the tickets are to merged, precompute the ticket to merge to.
         # (it's the same for all tickets, so do it only once):
         my $MainTicketID;
@@ -704,7 +795,7 @@ sub Run {
 
         my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
-        TICKET_ID:
+        TICKETID:
         for my $TicketID (@TicketIDs) {
             my %Ticket = $TicketObject->TicketGet(
                 TicketID      => $TicketID,
@@ -721,14 +812,14 @@ sub Run {
 
                 # error screen, don't show ticket
                 push @TicketsWithError, $Ticket{TicketNumber};
-                next TICKET_ID;
+                next TICKETID;
             }
 
             # check if it's already locked by somebody else
             if ( $Config->{RequiredLock} ) {
                 if ( grep ( { $_ eq $TicketID } @IgnoreLockedTicketIDs ) ) {
                     push @TicketsWithError, $Ticket{TicketNumber};
-                    next TICKET_ID;
+                    next TICKETID;
                 }
                 elsif ( $Ticket{Lock} eq 'unlock' ) {
                     $LockedTickets .= "LockedTicketID=" . $TicketID . ';';
@@ -739,6 +830,13 @@ sub Run {
                         TicketID => $TicketID,
                         Lock     => 'lock',
                         UserID   => $Self->{UserID},
+                    );
+
+                    $TicketObject->HistoryAdd(
+                        Name         => 'Ticket bulk action.',
+                        HistoryType  => 'Bulk',
+                        TicketID     => $TicketID,
+                        CreateUserID => $Self->{UserID},
                     );
 
                     # set user id
@@ -758,6 +856,61 @@ sub Run {
 
             # remember selected ticket ids
             push @TicketIDSelected, $TicketID;
+
+            # cycle through the activated dynamic fields of this screen
+            DYNAMICFIELD:
+            for my $DynamicFieldConfig ( @{ $Self->{DynamicField} } ) {
+                next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+
+                my $PossibleValuesFilter;
+
+                my $IsACLReducible = $DynamicFieldBackendObject->HasBehavior(
+                    DynamicFieldConfig => $DynamicFieldConfig,
+                    Behavior           => 'IsACLReducible',
+                );
+
+                if ($IsACLReducible) {
+                    my $PossibleValues = $DynamicFieldBackendObject->PossibleValuesGet(
+                        DynamicFieldConfig => $DynamicFieldConfig,
+                    );
+
+                    # check if field has PossibleValues property in its configuration
+                    if ( IsHashRefWithData($PossibleValues) ) {
+
+                        # convert possible values key => value to key => key for ACLs using a hash slice
+                        my %AclData = %{$PossibleValues};
+                        @AclData{ keys %AclData } = keys %AclData;
+
+                        # set possible values filter from ACLs
+                        my $ACL = $TicketObject->TicketAcl(
+                            %GetParam,
+                            %ACLCompatGetParam,
+                            Action        => $Self->{Action},
+                            ReturnType    => 'Ticket',
+                            ReturnSubType => 'DynamicField_' . $DynamicFieldConfig->{Name},
+                            Data          => \%AclData,
+                            UserID        => $Self->{UserID},
+                        );
+                        if ($ACL) {
+                            my %Filter = $TicketObject->TicketAclData();
+
+                            # convert filter key => key back to key => value
+                            %{$PossibleValuesFilter} = map { $_ => $PossibleValues->{$_} }
+                                keys %Filter;
+                        }
+                    }
+                }
+
+                my $IsMandatory = $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2;
+                $DynamicFieldHTML{ $DynamicFieldConfig->{Name} } = $DynamicFieldBackendObject->EditFieldRender(
+                    DynamicFieldConfig   => $DynamicFieldConfig,
+                    PossibleValuesFilter => $PossibleValuesFilter,
+                    LayoutObject         => $LayoutObject,
+                    ParamObject          => $ParamObject,
+                    AJAXUpdate           => 0,
+                    Mandatory            => $IsMandatory,
+                );
+            }
 
             # do some actions on tickets
             if ( ( $Self->{Subaction} eq 'Do' ) && ( !%Error ) ) {
@@ -1063,35 +1216,38 @@ sub Run {
                         TicketNumber => $GetParam{'LinkTogetherParent'},
                     );
 
+                    TICKETIDPARTNER:
                     for my $TicketIDPartner (@TicketIDs) {
-                        if ( $MainTicketID ne $TicketID ) {
-                            $LinkObject->LinkAdd(
-                                SourceObject => 'Ticket',
-                                SourceKey    => $MainTicketID,
-                                TargetObject => 'Ticket',
-                                TargetKey    => $TicketID,
-                                Type         => 'ParentChild',
-                                State        => 'Valid',
-                                UserID       => $Self->{UserID},
-                            );
-                        }
+
+                        next TICKETIDPARTNER if $MainTicketID eq $TicketID;
+                        $LinkObject->LinkAdd(
+                            SourceObject => 'Ticket',
+                            SourceKey    => $MainTicketID,
+                            TargetObject => 'Ticket',
+                            TargetKey    => $TicketID,
+                            Type         => 'ParentChild',
+                            State        => 'Valid',
+                            UserID       => $Self->{UserID},
+                        );
                     }
                 }
 
                 # link together
                 if ( $GetParam{'LinkTogether'} ) {
+                    TICKETIDPARTNER:
                     for my $TicketIDPartner (@TicketIDs) {
-                        if ( $TicketID ne $TicketIDPartner ) {
-                            $LinkObject->LinkAdd(
-                                SourceObject => 'Ticket',
-                                SourceKey    => $TicketID,
-                                TargetObject => 'Ticket',
-                                TargetKey    => $TicketIDPartner,
-                                Type         => 'Normal',
-                                State        => 'Valid',
-                                UserID       => $Self->{UserID},
-                            );
-                        }
+
+                        next TICKETIDPARTNER if $TicketID == $TicketIDPartner;
+
+                        $LinkObject->LinkAdd(
+                            SourceObject => 'Ticket',
+                            SourceKey    => $TicketID,
+                            TargetObject => 'Ticket',
+                            TargetKey    => $TicketIDPartner,
+                            Type         => 'Normal',
+                            State        => 'Valid',
+                            UserID       => $Self->{UserID},
+                        );
                     }
                 }
 
@@ -1122,6 +1278,45 @@ sub Run {
                     }
                 }
 
+                # set ticket dynamic fields
+                # cycle through the activated dynamic fields of this screen
+                DYNAMICFIELD:
+                for my $DynamicFieldConfig ( @{ $Self->{DynamicField} } ) {
+                    next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+                    next DYNAMICFIELD if $DynamicFieldConfig->{ObjectType} ne 'Ticket';
+
+                    my $DynamicFieldSet = $ParamObject->GetParam(
+                        Param => 'DynamicField_' . $DynamicFieldConfig->{Name} . 'Used'
+                    );
+                    next DYNAMICFIELD if !$DynamicFieldSet && $Config->{DynamicFieldRequireActivation};
+
+                    my $Success = $DynamicFieldBackendObject->ValueSet(
+                        DynamicFieldConfig => $DynamicFieldConfig,
+                        ObjectID           => $TicketID,
+                        Value              => $DynamicFieldValues{ $DynamicFieldConfig->{Name} },
+                        UserID             => $Self->{UserID},
+                    );
+                }
+
+                # set new service
+                if ( $ConfigObject->Get('Ticket::Service') && $Config->{Service} ) {
+                    if ( $GetParam{ServiceID} ) {
+                        $TicketObject->TicketServiceSet(
+                            %GetParam,
+                            %ACLCompatGetParam,
+                            ServiceID => $GetParam{ServiceID},
+                            TicketID  => $TicketID,
+                            UserID    => $Self->{UserID},
+                        );
+                    }
+                    if ( $GetParam{SLAID} ) {
+                        $TicketObject->TicketSLASet(
+                            SLAID    => $GetParam{SLAID},
+                            TicketID => $TicketID,
+                            UserID   => $Self->{UserID},
+                        );
+                    }
+                }
                 $ActionFlag = 1;
             }
             $Counter++;
@@ -1179,10 +1374,11 @@ sub Run {
             %Param,
             %GetParam,
             %Time,
-            TicketIDs     => \@TicketIDSelected,
-            LockedTickets => $LockedTickets,
-            Errors        => \%Error,
-            BulkModules   => \@BulkModules,
+            TicketIDs        => \@TicketIDSelected,
+            LockedTickets    => $LockedTickets,
+            Errors           => \%Error,
+            BulkModules      => \@BulkModules,
+            DynamicFieldHTML => \%DynamicFieldHTML,
         );
         $Output .= $LayoutObject->Footer(
             Type => 'Small',
@@ -1290,8 +1486,8 @@ sub _GetRecipientList {
 sub _Mask {
     my ( $Self, %Param ) = @_;
 
-    # get layout object
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
 
     # prepare errors!
     if ( $Param{Errors} ) {
@@ -1494,43 +1690,36 @@ sub _Mask {
 
     # show time accounting box
     if ( $ConfigObject->Get('Ticket::Frontend::AccountTime') ) {
-        $Param{TimeUnitsRequired} = (
-            $ConfigObject->Get('Ticket::Frontend::NeedAccountedTime')
-            ? 'Validate_DependingRequiredAND Validate_Depending_Subject'
-            : ''
-        );
-        $Param{TimeUnitsRequiredEmail} = (
-            $ConfigObject->Get('Ticket::Frontend::NeedAccountedTime')
-            ? 'Validate_DependingRequiredAND Validate_Depending_EmailSubject'
-            : ''
+        my $IsTimeUnitsRequired = $ConfigObject->Get('Ticket::Frontend::NeedAccountedTime');
+        $LayoutObject->AddJSData(
+            Key   => 'TimeUnitsRequired',
+            Value => $IsTimeUnitsRequired // '',
         );
 
-        if ( $ConfigObject->Get('Ticket::Frontend::NeedAccountedTime') ) {
-            $LayoutObject->Block(
-                Name => 'TimeUnitsLabelMandatory',
-                Data => { TimeUnitsRequired => $Param{TimeUnitsRequired} },
-            );
-            $LayoutObject->Block(
-                Name => 'TimeUnitsLabelMandatoryEmail',
-                Data => { TimeUnitsRequired => $Param{TimeUnitsRequiredEmail} },
-            );
-        }
-        else {
-            $LayoutObject->Block(
-                Name => 'TimeUnitsLabel',
-                Data => \%Param,
-            );
-            $LayoutObject->Block(
-                Name => 'TimeUnitsLabelEmail',
-                Data => \%Param,
-            );
-        }
+        my $TimeUnitsInputType = $ConfigObject->Get('Ticket::Frontend::AccountTimeType') // 'Text';
+        $LayoutObject->AddJSData(
+            Key   => 'TimeUnitsInputType',
+            Value => $TimeUnitsInputType,
+        );
+
+        $Param{TimeUnitsBlock} = $LayoutObject->TimeUnits(
+            ID        => 'TimeUnits',
+            Name      => 'TimeUnits',
+            TimeUnits => $Param{TimeUnits},
+        );
+
         $LayoutObject->Block(
-            Name => 'TimeUnits',
+            Name => 'NoteTimeUnits',
             Data => \%Param,
         );
+
+        $Param{EmailTimeUnitsBlock} = $LayoutObject->TimeUnits(
+            ID        => 'EmailTimeUnits',
+            Name      => 'EmailTimeUnits',
+            TimeUnits => $Param{EmailTimeUnits},
+        );
         $LayoutObject->Block(
-            Name => 'TimeUnitsEmail',
+            Name => 'EmailTimeUnits',
             Data => \%Param,
         );
     }
@@ -1589,6 +1778,104 @@ sub _Mask {
         $LayoutObject->Block(
             Name => 'CancelClosePopup',
             Data => {%Param},
+        );
+    }
+
+    my @DynamicFieldNames;
+    my %DynamicFieldConfigs;
+
+    # cycle trough the activated dynamic fields of this screen
+    DYNAMICFIELD:
+    for my $DynamicFieldConfig ( @{ $Self->{DynamicField} } ) {
+        next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+
+        # skip fields for which HTML could not be retrieved
+        if ( !IsHashRefWithData( $Param{DynamicFieldHTML}->{ $DynamicFieldConfig->{Name} } ) ) {
+            next DYNAMICFIELD;
+        }
+
+        # get HTML strings from ParamObject
+        my $IsChecked         = 'false';
+        my $RequireActivation = 'false';
+        my $DynamicFieldHTML  = $Param{DynamicFieldHTML}->{ $DynamicFieldConfig->{Name} };
+
+        if ( $Config->{DynamicFieldRequireActivation} ) {
+            $RequireActivation = 'true';
+            my $DynamicFieldSet = $ParamObject->GetParam(
+                Param => 'DynamicField_' . $DynamicFieldConfig->{Name} . 'Used'
+            );
+            if ($DynamicFieldSet) {
+                $IsChecked = 'true';
+            }
+        }
+
+        $LayoutObject->Block(
+            Name => 'DynamicField',
+            Data => {
+                Name  => $DynamicFieldConfig->{Name},
+                Label => $DynamicFieldHTML->{Label},
+                Field => $DynamicFieldHTML->{Field},
+            },
+        );
+
+        $DynamicFieldConfigs{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = {
+            Name              => $DynamicFieldConfig->{Name},
+            RequireActivation => $RequireActivation || 'false',
+            IsChecked         => $IsChecked || 'false',
+        };
+
+        push @DynamicFieldNames, 'DynamicField_' . $DynamicFieldConfig->{Name};
+    }
+
+    # send data to JS
+    $LayoutObject->AddJSData(
+        Key   => 'DynamicFieldNames',
+        Value => \@DynamicFieldNames,
+    );
+    $LayoutObject->AddJSData(
+        Key   => 'DynamicFieldConfigs',
+        Value => \%DynamicFieldConfigs,
+    );
+
+    my $TreeView = 0;
+    if ( $ConfigObject->Get('Ticket::Frontend::ListType') eq 'tree' ) {
+        $TreeView = 1;
+    }
+
+    # services
+    if ( $ConfigObject->Get('Ticket::Service') && $Config->{Service} ) {
+        my $Services = $Self->_GetServices(
+            %Param,
+            TicketIDs => $Param{TicketIDs},
+            QueueID   => $Param{QueueID},
+            UserID    => $Self->{UserID},
+        );
+
+        # reset previous ServiceID to reset SLA-List if no service is selected
+        if ( !$Param{ServiceID} || !$Services->{ $Param{ServiceID} } ) {
+            $Param{ServiceID} = '';
+        }
+
+        my $CSSClass = "Modernize " . ( $Config->{ServiceMandatory} ? 'Validate_Required ' : '' );
+
+        $Param{ServiceStrg} = $LayoutObject->BuildSelection(
+            Data         => $Services,
+            Name         => 'ServiceID',
+            SelectedID   => $Param{ServiceID},
+            Class        => $CSSClass,
+            PossibleNone => 1,
+            TreeView     => $TreeView,
+            Sort         => 'TreeView',
+            Translation  => 0,
+            Max          => 200,
+        );
+
+        $LayoutObject->Block(
+            Name => 'Service',
+            Data => {
+                ServiceMandatory => $Config->{ServiceMandatory} || 0,
+                %Param,
+            },
         );
     }
 
@@ -1812,6 +2099,74 @@ sub _GetPriorities {
         UserID => $Self->{UserID},
     );
     return %PriorityList;
+}
+
+sub _GetServices {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $QueueObject  = $Kernel::OM->Get('Kernel::System::Queue');
+
+    # Assemble customer user IDs of all selected tickets.
+    my $DefaultServiceUnknownCustomer = $ConfigObject->Get('Ticket::Service::Default::UnknownCustomer');
+
+    my $TicketIDs = $Param{TicketIDs};
+    return {} if !IsArrayRefWithData($TicketIDs);
+
+    my $SelectedQueueID = $Param{QueueID};
+
+    # Assemble common services of customer users.
+    my %Services;
+
+    TICKETID:
+    for my $TicketID ( @{$TicketIDs} ) {
+        my %Ticket = $TicketObject->TicketGet(
+            TicketID => $TicketID,
+            UserID   => $Self->{UserID},
+        );
+
+        # If one of the tickets cannot be found, don't show any selectable services.
+        return {} if !%Ticket;
+
+        my $CustomerUserID = $Ticket{CustomerUserID} || '<DEFAULT>';
+
+        my %CustomerUserServices = $TicketObject->TicketServiceList(
+            %Param,
+
+            # If a queue was selected in the bulk action dialog, use it instead
+            # of the queue of the ticket. This ensures that ACLs work.
+            QueueID        => $SelectedQueueID || $Ticket{QueueID},
+            TicketID       => $Ticket{TicketID},
+            CustomerUserID => $CustomerUserID,
+            UserID         => $Self->{UserID},
+        );
+
+        # If there are no services available, there cannot be any other common services
+        # among the customer users.
+        return {} if !%CustomerUserServices;
+
+        # First ticket, take all available services.
+        if ( !%Services ) {
+            %Services = %CustomerUserServices;
+            next TICKETID;
+        }
+
+        # Set all services to undef that are not available to the current customer user.
+        SERVICEID:
+        for my $ServiceID ( sort keys %Services ) {
+            next SERVICEID if defined $Services{$ServiceID} && defined $CustomerUserServices{$ServiceID};
+
+            $Services{$ServiceID} = undef;
+        }
+
+        return {} if !%Services;
+    }
+
+    # Delete all services that are not defined
+    %Services = map { $_ => $Services{$_} } grep { defined $Services{$_} } keys %Services;
+
+    return \%Services;
 }
 
 1;

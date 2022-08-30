@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -24,7 +24,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $Hook = $ConfigObject->Get('Ticket::Hook');
 
@@ -155,7 +155,7 @@ $Self->True(
 );
 
 # add a new Job
-my $Name   = $Helper->GetRandomID();
+my $Name   = $HelperObject->GetRandomID();
 my %NewJob = (
     Name => $Name,
     Data => {
@@ -195,7 +195,6 @@ my %NewJob = (
         NewLockID                    => 2,
         DynamicField_TicketFreeKey2  => 'Test',
         DynamicField_TicketFreeText2 => 'Value 2',
-        NewCMD                       => '',
         NewParamKey1                 => '',
         NewParamValue1               => '',
         NewParamKey2                 => '',
@@ -609,14 +608,14 @@ for my $DynamicFieldID (@DynamicfieldIDs) {
 }
 
 # Check LastClose functionality (see bug#14774).
-my $TestJobName   = 'Job' . $Helper->GetRandomID();
+my $TestJobName   = 'Job' . $HelperObject->GetRandomID();
 my $OldPriorityID = 3;
 my $NewPriorityID = 1;
 
-$Helper->FixedTimeSet();
+$HelperObject->FixedTimeSet();
 
 # Go 7 days to the past.
-$Helper->FixedTimeAddSeconds( -60 * 60 * 24 * 7 );
+$HelperObject->FixedTimeAddSeconds( -60 * 60 * 24 * 7 );
 
 # Add generic agent job - select a ticket with LastClose in last 3 days and set its priority to very low.
 # At first job run, ticket has not to be found because last close is 4 days ago ('last 3 days' doesn't match this value).
@@ -673,7 +672,7 @@ my @Tests = (
 for my $Test (@Tests) {
 
     # Add one day.
-    $Helper->FixedTimeAddSeconds( 60 * 60 * 24 );
+    $HelperObject->FixedTimeAddSeconds( 60 * 60 * 24 );
 
     my $Success = $TicketObject->TicketStateSet(
         State    => $Test->{State},
@@ -687,7 +686,7 @@ for my $Test (@Tests) {
 }
 
 # Unset fixed time because the job has to run in present.
-$Helper->FixedTimeUnset();
+$HelperObject->FixedTimeUnset();
 
 # Run the job - test ticket has not to be found.
 $Self->True(
@@ -707,10 +706,10 @@ $Self->Is(
     "First job run - PriorityID is still '$OldPriorityID'",
 );
 
-$Helper->FixedTimeSet();
+$HelperObject->FixedTimeSet();
 
 # Continue with ticket state changes (go 4 days to the past).
-$Helper->FixedTimeAddSeconds( -60 * 60 * 24 * 4 );
+$HelperObject->FixedTimeAddSeconds( -60 * 60 * 24 * 4 );
 
 # Open the ticket 3 days ago and close 2 days ago.
 @Tests = (
@@ -727,7 +726,7 @@ $Helper->FixedTimeAddSeconds( -60 * 60 * 24 * 4 );
 for my $Test (@Tests) {
 
     # Add one day.
-    $Helper->FixedTimeAddSeconds( 60 * 60 * 24 );
+    $HelperObject->FixedTimeAddSeconds( 60 * 60 * 24 );
 
     my $Success = $TicketObject->TicketStateSet(
         State    => $Test->{State},
@@ -741,7 +740,7 @@ for my $Test (@Tests) {
 }
 
 # Unset fixed time because the job has to run in present.
-$Helper->FixedTimeUnset();
+$HelperObject->FixedTimeUnset();
 
 # Run the job again - test ticket has to be found.
 $Self->True(

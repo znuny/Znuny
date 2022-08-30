@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -20,10 +20,10 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # Create test dynamic field.
-my $FieldName      = 'ETNR' . $Helper->GetRandomID();
+my $FieldName      = 'ETNR' . $HelperObject->GetRandomID();
 my $DynamicFieldID = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldAdd(
     Name       => $FieldName,
     Label      => $FieldName,
@@ -43,7 +43,7 @@ $Self->True(
 
 my @ExternalTicketIDs;
 for my $Count ( 0 .. 2 ) {
-    push @ExternalTicketIDs, $Helper->GetRandomNumber();
+    push @ExternalTicketIDs, $HelperObject->GetRandomNumber();
 }
 
 my @Tests = (
@@ -262,14 +262,14 @@ my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 for my $Test (@Tests) {
 
     # Set PreFilterModule.
-    $Helper->ConfigSettingChange(
+    $HelperObject->ConfigSettingChange(
         Valid => 1,
         Key   => 'PostMaster::PreFilterModule',
         Value => $Test->{PreFilterModule},
     );
 
     # Set CheckFollowUpModule.
-    $Helper->ConfigSettingChange(
+    $HelperObject->ConfigSettingChange(
         Valid => 1,
         Key   => 'PostMaster::CheckFollowUpModule',
         Value => $Test->{CheckFollowUpModule},
@@ -278,7 +278,7 @@ for my $Test (@Tests) {
     for my $Module ( @{ $Test->{NumberGeneratorModules} } ) {
 
         # Set number generator.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::NumberGenerator',
             Value => "Kernel::System::Ticket::Number::$Module->{Name}",

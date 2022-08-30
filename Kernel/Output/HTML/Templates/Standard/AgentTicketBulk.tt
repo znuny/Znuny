@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -48,7 +48,7 @@
 
                             <label class="Mandatory" for="Subject"><span class="Marker">*</span> [% Translate("Subject") | html %]:</label>
                             <div class="Field">
-                                <input type="text" class="Validate_DependingRequiredAND Validate_Depending_Body [% Data.SubjectInvalid %] W75pc" id="Subject" name="Subject" value="[% Data.Subject | html %]" />
+                                <input type="text" class="Validate_Required [% Data.SubjectInvalid %] W75pc" id="Subject" name="Subject" value="[% Data.Subject | html %]" />
                                 <div id="SubjectError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                                 <div id="SubjectServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                             </div>
@@ -56,7 +56,7 @@
 
                             <label class="Mandatory" for="Body"><span class="Marker">*</span> [% Translate("Text") | html %]:</label>
                             <div class="RichTextField Field">
-                                <textarea id="Body" class="RichText Validate_DependingRequiredAND Validate_Depending_Subject [% Data.BodyInvalid %]" name="Body" rows="15" cols="[% Config("Ticket::Frontend::TextAreaNote") %]">[% Data.Body | html %]</textarea>
+                                <textarea id="Body" class="RichText Validate_Required [% Data.BodyInvalid %]" name="Body" rows="15" cols="[% Config("Ticket::Frontend::TextAreaNote") %]">[% Data.Body | html %]</textarea>
                                 <div id="BodyError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                                 <div id="BodyServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                             </div>
@@ -67,20 +67,11 @@
                                 <input type="checkbox" id="IsVisibleForCustomer" name="IsVisibleForCustomer" value="1" [% IF Data.IsVisibleForCustomer %]checked="checked"[% END %]/>
                             </div>
                             <div class="Clear"></div>
-[% RenderBlockStart("TimeUnitsLabel") %]
-                            <label for="TimeUnits">[% Translate("Time units") | html %] [% Translate(Config("Ticket::Frontend::TimeUnits")) | html %]:</label>
-[% RenderBlockEnd("TimeUnitsLabel") %]
-[% RenderBlockStart("TimeUnitsLabelMandatory") %]
-                            <label class="Mandatory" for="TimeUnits"><span class="Marker">*</span>[% Translate("Time units") | html %] [% Translate(Config("Ticket::Frontend::TimeUnits")) | html %]:</label>
-[% RenderBlockEnd("TimeUnitsLabelMandatory") %]
-[% RenderBlockStart("TimeUnits") %]
-                            <div class="Field">
-                                <input type="text" class="Validate_TimeUnits W50pc [% Data.TimeUnitsRequired | html %] [% Data.TimeUnitsInvalid | html %]" id="TimeUnits" name="TimeUnits" value="[% Data.TimeUnits | html %]"/>
-                                <div id="TimeUnitsError" class="TooltipErrorMessage"><p>[% Translate("Invalid time!") | html %]</p></div>
-                                <div id="TimeUnitsServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                            </div>
-                            <div class="Clear"></div>
-[% RenderBlockEnd("TimeUnits") %]
+
+[% RenderBlockStart("NoteTimeUnits") %]
+                            [% Data.TimeUnitsBlock %]
+[% RenderBlockEnd("NoteTimeUnits") %]
+
                         </fieldset>
                     </div>
                 </div>
@@ -104,7 +95,7 @@
 
                             <label class="Mandatory" for="EmailSubject"><span class="Marker">*</span> [% Translate("Subject") | html %]:</label>
                             <div class="Field">
-                                <input type="text" class="Validate_DependingRequiredAND Validate_Depending_EmailBody [% Data.SubjectInvalid %] W75pc" id="EmailSubject" name="EmailSubject" value="[% Data.EmailSubject | html %]" />
+                                <input type="text" class="Validate_Required  [% Data.SubjectInvalid %] W75pc" id="EmailSubject" name="EmailSubject" value="[% Data.EmailSubject | html %]" />
                                 <div id="EmailSubjectError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                                 <div id="EmailSubjectServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                             </div>
@@ -112,25 +103,14 @@
 
                             <label class="Mandatory" for="EmailBody"><span class="Marker">*</span> [% Translate("Text") | html %]:</label>
                             <div class="RichTextField Field">
-                                <textarea id="EmailBody" class="RichText Validate_DependingRequiredAND Validate_Depending_EmailSubject [% Data.BodyInvalid %]" name="EmailBody" rows="15" cols="[% Config("Ticket::Frontend::TextAreaNote") %]">[% Data.EmailBody | html %]</textarea>
+                                <textarea id="EmailBody" class="RichText Validate_Required [% Data.BodyInvalid %]" name="EmailBody" rows="15" cols="[% Config("Ticket::Frontend::TextAreaNote") %]">[% Data.EmailBody | html %]</textarea>
                                 <div id="EmailBodyError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                                 <div id="EmailBodyServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                             </div>
                             <div class="Clear"></div>
-[% RenderBlockStart("TimeUnitsLabelEmail") %]
-                            <label for="EmailTimeUnits">[% Translate("Time units") | html %] [% Translate(Config("Ticket::Frontend::TimeUnits")) | html %]:</label>
-[% RenderBlockEnd("TimeUnitsLabelEmail") %]
-[% RenderBlockStart("TimeUnitsLabelMandatoryEmail") %]
-                            <label class="Mandatory" for="EmailTimeUnits"><span class="Marker">*</span>[% Translate("Time units") | html %] [% Translate(Config("Ticket::Frontend::TimeUnits")) | html %]:</label>
-[% RenderBlockEnd("TimeUnitsLabelMandatoryEmail") %]
-[% RenderBlockStart("TimeUnitsEmail") %]
-                            <div class="Field">
-                                <input type="text" class="Validate_EmailTimeUnits W20pc [% Data.EmailTimeUnitsRequired | html %] [% Data.EmailTimeUnitsInvalid | html %]" id="EmailTimeUnits" name="EmailTimeUnits" value="[% Data.EmailTimeUnits | html %]"/>
-                                <div id="EmailTimeUnitsError" class="TooltipErrorMessage"><p>[% Translate("Invalid time!") | html %]</p></div>
-                                <div id="EmailTimeUnitsServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                            </div>
-                            <div class="Clear"></div>
-[% RenderBlockEnd("TimeUnitsEmail") %]
+[% RenderBlockStart("EmailTimeUnits") %]
+                            [% Data.EmailTimeUnitsBlock %]
+[% RenderBlockEnd("EmailTimeUnits") %]
                         </fieldset>
                     </div>
                 </div>
@@ -167,6 +147,32 @@
                         [% Data.MoveQueuesStrg %]
                     </div>
                     <div class="Clear"></div>
+
+[% RenderBlockStart("Service") %]
+                    [% IF Data.ServiceMandatory %]
+                        <label class="Mandatory" for="ServiceID"><span class="Marker">*</span>[% Translate("Service") | html %]:</label>
+                    [% ELSE %]
+                        <label for="ServiceID">[% Translate("Service") | html %]:</label>
+                    [% END %]
+                    <div class="Field">
+                        [% Data.ServiceStrg %]
+                        [% IF Data.ServiceMandatory %]
+                            <div id="ServiceIDError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                        [% END %]
+                        <div id="ServiceIDServerError" class="TooltipErrorMessage"><p>[% Translate("Service invalid.") | html %]</p></div>
+                    </div>
+                    <div class="Clear"></div>
+[% RenderBlockEnd("Service") %]
+
+[% RenderBlockStart("ServiceMandatory") %]
+                    <label class="Mandatory" for="ServiceID"><span class="Marker">*</span>[% Translate("Service") | html %]:</label>
+                    <div class="Field">
+                        [% Data.ServiceStrg %]
+                        <div id="ServiceIDError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                        <div id="ServiceIDServerError" class="TooltipErrorMessage"><p>[% Translate("Service invalid.") | html %]</p></div>
+                    </div>
+                    <div class="Clear"></div>
+[% RenderBlockEnd("ServiceMandatory") %]
 
 [% RenderBlockStart("Owner") %]
                     <label for="OwnerID">[% Translate("Owner") | html %]:</label>
@@ -229,6 +235,15 @@
 [% FOREACH CONTENT IN Data.BulkModuleContent %]
                     [% CONTENT %]
 [% END %]
+[% RenderBlockStart("DynamicField") %]
+                    <div class="Row Row_DynamicField_[% Data.Name | html %]">
+                    [% Data.Label %]
+                        <div class="Field">
+                        [% Data.Field %]
+                        </div>
+                        <div class="Clear"></div>
+                    </div>
+[% RenderBlockEnd("DynamicField") %]
                 </fieldset>
             </div>
         </div>

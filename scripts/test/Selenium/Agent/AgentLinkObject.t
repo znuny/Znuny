@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,32 +18,32 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # Set link object view mode to simple.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'LinkObject::ViewMode',
             Value => 'Simple',
         );
 
         # Set Ticket::SubjectSize.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::SubjectSize',
             Value => '60',
         );
 
         # Disable Ticket::ArchiveSystem.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::ArchiveSystem',
             Value => 0,
         );
 
         # Create test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -99,7 +99,7 @@ $Selenium->RunTest(
         $Selenium->accept_alert();
 
         # Enable Ticket::ArchiveSystem.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::ArchiveSystem',
             Value => 1,
@@ -203,7 +203,7 @@ $Selenium->RunTest(
 
         # Test ticket title length in complex view for linked tickets, see bug #11511.
         # Set link object view mode to complex.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'LinkObject::ViewMode',
             Value => 'Complex',
@@ -588,7 +588,7 @@ $Selenium->RunTest(
         # Create Calendar.
         my $CalendarObject    = $Kernel::OM->Get('Kernel::System::Calendar');
         my $AppointmentObject = $Kernel::OM->Get('Kernel::System::Calendar::Appointment');
-        my $RandomID          = $Helper->GetRandomID();
+        my $RandomID          = $HelperObject->GetRandomID();
         my %Calendar          = $CalendarObject->CalendarCreate(
             CalendarName => "Calendar-$RandomID",
             Color        => '#3A87AD',

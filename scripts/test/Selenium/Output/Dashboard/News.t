@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -19,11 +19,11 @@ $Selenium->RunTest(
     sub {
 
         # Get needed objects.
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # make sure to enable cloud services
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CloudServices::Disabled',
             Value => 0,
@@ -31,7 +31,7 @@ $Selenium->RunTest(
 
         # Disable all dashboard plugins.
         my $Config = $ConfigObject->Get('DashboardBackend');
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 0,
             Key   => 'DashboardBackend',
             Value => $Config,
@@ -43,7 +43,7 @@ $Selenium->RunTest(
             Default => 1,
         );
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'DashboardBackend###0405-News',
             Value => $NewsConfig{EffectiveValue},
@@ -51,7 +51,7 @@ $Selenium->RunTest(
 
         my @NewsData;
         for ( 0 .. 1 ) {
-            my $Number = $Helper->GetRandomNumber();
+            my $Number = $HelperObject->GetRandomNumber();
             push @NewsData, {
                 Title => "UT Breaking News - $Number",
                 Link  => "https://www.otrs.com/$Number",
@@ -90,7 +90,7 @@ $Selenium->RunTest(
             Pretty => 1,
         );
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Override Request() from WebUserAgent to always return some test data without making any
         #   actual web service calls. This should prevent instability in case cloud services are
@@ -116,7 +116,7 @@ $CloudServiceResponseJSON
 }
 1;
 EOS
-        $Helper->CustomCodeActivate(
+        $HelperObject->CustomCodeActivate(
             Code       => $CustomCode,
             Identifier => 'News' . $RandomID,
         );
@@ -128,7 +128,7 @@ EOS
         );
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -153,6 +153,9 @@ EOS
                 "News dashboard plugin with title '$Item->{Title}' and link '$Item->{Link}' - found",
             );
         }
+
+        $HelperObject->CustomFileCleanup();
+
     }
 );
 

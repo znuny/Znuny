@@ -596,6 +596,16 @@
             </Array>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketProcess###ProcessListTreeView" Required="1" Valid="1">
+        <Description Translatable="1">Shows existing parent/child (separated by ::) process lists in the form of a tree or a list.</Description>
+        <Navigation>Frontend::Agent::View::TicketProcess</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="0">
+                <Item ValueType="Option" Value="1" Translatable="1">Tree view</Item>
+                <Item ValueType="Option" Value="0" Translatable="1">List view</Item>
+            </Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::CustomerTicketProcess###StateType" Required="1" Valid="1">
         <Description Translatable="1">Determines the next possible ticket states, for process tickets in the customer interface.</Description>
         <Navigation>Frontend::Customer::View::TicketProcess</Navigation>
@@ -604,6 +614,16 @@
                 <Item>new</Item>
                 <Item>open</Item>
             </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::CustomerTicketProcess###ProcessListTreeView" Required="1" Valid="1">
+        <Description Translatable="1">Shows existing parent/child (separated by ::) process lists in the form of a tree or a list.</Description>
+        <Navigation>Frontend::Customer::View::TicketProcess</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="0">
+                <Item ValueType="Option" Value="1" Translatable="1">Tree view</Item>
+                <Item ValueType="Option" Value="0" Translatable="1">List view</Item>
+            </Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketProcess::CustomerIDReadOnly" Required="1" Valid="1">
@@ -743,7 +763,33 @@
                         <Item Key="NotificationCustomRelativeUnitCount">(* required for Custom) 12 (number of time units)</Item>
                         <Item Key="NotificationCustomRelativeUnit">(* required for Custom) minutes|hours|days</Item>
                         <Item Key="NotificationCustomRelativePointOfTime">(* required for Custom) beforestart|afterstart|beforeend|afterend (Possible notification types for the "relative" type)</Item>
-                        <Item Key="DynamicField_AppointmentID">(optional) 123 (dynamic field for saving the appointment ID (suitable for linking the appointment later)</Item>
+                        <Item Key="DynamicField_AppointmentID">(optional) AppointmentID (dynamic field for saving the appointment ID (suitable for linking the appointment later)</Item>
+                    </Hash>
+                </Item>
+                <Item Key="AppointmentUpdate">
+                    <Hash>
+                        <Item Key="CalendarName">Calendar 1</Item>
+                        <Item Key="AppointmentID">123</Item>
+                        <Item Key="Title">Webinar</Item>
+                        <Item Key="Description">Webinar</Item>
+                        <Item Key="StartTime">2016-01-01 00:00:00</Item>
+                        <Item Key="EndTime">2016-01-02 00:00:00</Item>
+                        <Item Key="Recurring">(optional) 1</Item>
+                        <Item Key="RecurrenceType">(* required if Recurring) Daily|Weekly|Monthly|Yearly|CustomWeekly|CustomMonthly|CustomYearly</Item>
+                        <Item Key="RecurrenceCount">(optional) 1</Item>
+                        <Item Key="RecurrenceFrequency">(* required if RecurringType "Custom*")1, 3, 5</Item>
+                        <Item Key="RecurrenceUntil">(optional) 2016-01-10 00:00:00</Item>
+                        <Item Key="NotificationTime">(optional) 2016-01-01 17:00:00</Item>
+                        <Item Key="NotificationTemplate">(optional) Custom</Item>
+                        <Item Key="NotificationCustom">(* required for Custom) relative</Item>
+                        <Item Key="NotificationCustomRelativeUnitCount">(* required for Custom) 12 (number of time units)</Item>
+                        <Item Key="NotificationCustomRelativeUnit">(* required for Custom) minutes|hours|days</Item>
+                        <Item Key="NotificationCustomRelativePointOfTime">(* required for Custom) beforestart|afterstart|beforeend|afterend (Possible notification types for the "relative" type)</Item>
+                    </Hash>
+                </Item>
+                <Item Key="AppointmentRemove">
+                    <Hash>
+                        <Item Key="AppointmentID">123</Item>
                     </Hash>
                 </Item>
                 <Item Key="ArticleSend">

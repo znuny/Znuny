@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -20,18 +20,18 @@ $Selenium->RunTest(
     sub {
 
         # get needed objects
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # enable customer group support
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CustomerGroupSupport',
             Value => 1,
         );
 
         # create test customer
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate(
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
         ) || die "Did not get test customer user";
 
         # create test tickets
@@ -60,7 +60,7 @@ $Selenium->RunTest(
         }
 
         # create test group
-        my $GroupName = 'Group' . $Helper->GetRandomID();
+        my $GroupName = 'Group' . $HelperObject->GetRandomID();
         my $GroupID   = $Kernel::OM->Get('Kernel::System::Group')->GroupAdd(
             Name    => $GroupName,
             ValidID => 1,
@@ -83,7 +83,7 @@ $Selenium->RunTest(
             }
         }
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CustomerFrontend::Navigation###CustomerTicketOverview###002-Ticket',
             Value => $FrontendCustomerTicketOverview,

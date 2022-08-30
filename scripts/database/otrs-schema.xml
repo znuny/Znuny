@@ -1607,6 +1607,8 @@
     <Column Name="queue_id" Required="true" Type="INTEGER"/>
     <Column Name="trusted" Required="true" Type="SMALLINT"/>
     <Column Name="imap_folder" Required="false" Size="250" Type="VARCHAR"/>
+    <Column Name="authentication_type" Required="true" Size="100" Type="VARCHAR" Default="password"/>
+    <Column Name="oauth2_token_config_id" Required="false" Type="INTEGER"/>
     <Column Name="comments" Required="false" Size="250" Type="VARCHAR"/>
     <Column Name="valid_id" Required="true" Type="SMALLINT"/>
     <Column Name="create_time" Required="true" Type="DATE"/>
@@ -1619,6 +1621,9 @@
     <ForeignKey ForeignTable="users">
         <Reference Local="create_by" Foreign="id"/>
         <Reference Local="change_by" Foreign="id"/>
+    </ForeignKey>
+    <ForeignKey ForeignTable="oauth2_token_config">
+        <Reference Local="oauth2_token_config_id" Foreign="id"/>
     </ForeignKey>
 </Table>
 
@@ -2570,6 +2575,22 @@
     </ForeignKey>
 </Table>
 
+<!-- calender appointment plugin -->
+<Table Name="calendar_appointment_plugin">
+    <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
+    <Column Name="appointment_id" Required="true" Type="SMALLINT"/>
+    <Column Name="plugin_key" Required="true" Size="1000" Type="VARCHAR"/>
+    <Column Name="config" Required="false" Size="1000000" Type="VARCHAR"/>
+    <Column Name="create_time" Required="true" Type="DATE"/>
+    <Column Name="create_by" Required="true" Type="INTEGER"/>
+    <Column Name="change_time" Required="true" Type="DATE"/>
+    <Column Name="change_by" Required="true" Type="INTEGER"/>
+    <ForeignKey ForeignTable="users">
+        <Reference Local="create_by" Foreign="id"/>
+        <Reference Local="change_by" Foreign="id"/>
+    </ForeignKey>
+</Table>
+
 <Table Name="calendar_appointment_ticket">
     <Column Name="calendar_id" Required="true" Type="BIGINT" />
     <Column Name="ticket_id" Required="true" Type="BIGINT" />
@@ -2738,6 +2759,101 @@
         <Reference Local="create_by" Foreign="id" />
         <Reference Local="change_by" Foreign="id" />
     </ForeignKey>
+</Table>
+
+<!-- S/MIME keys -->
+<Table Name="smime_keys">
+    <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER" />
+    <Column Name="key_hash" Required="true" Size="8" Type="VARCHAR" />
+    <Column Name="key_type" Required="true" Size="255" Type="VARCHAR" />
+    <Column Name="file_name" Required="true" Size="255" Type="VARCHAR" />
+    <Column Name="email_address" Required="false" Size="255" Type="VARCHAR" />
+    <Column Name="expiration_date" Required="false" Type="DATE" />
+    <Column Name="fingerprint" Required="false" Size="59" Type="VARCHAR" />
+    <Column Name="subject" Required="false" Size="255" Type="VARCHAR" />
+    <Column Name="create_time" Required="false" Type="DATE" />
+    <Column Name="change_time" Required="false" Type="DATE" />
+    <Column Name="create_by" Required="false" Type="INTEGER" />
+    <Column Name="change_by" Required="false" Type="INTEGER" />
+    <Index Name="smime_keys_key_hash">
+        <IndexColumn Name="key_hash" />
+    </Index>
+    <Index Name="smime_keys_key_type">
+        <IndexColumn Name="key_type" />
+    </Index>
+    <Index Name="smime_keys_file_name">
+        <IndexColumn Name="file_name" />
+    </Index>
+    <ForeignKey ForeignTable="users">
+        <Reference Local="create_by" Foreign="id" />
+        <Reference Local="change_by" Foreign="id" />
+    </ForeignKey>
+</Table>
+
+<!-- OAuth 2 tokens and configs -->
+<Table Name="oauth2_token_config">
+    <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
+    <Column Name="name" Required="true" Size="250" Type="VARCHAR"/>
+    <Column Name="config" Required="true" Size="5000" Type="VARCHAR"/>
+    <Column Name="valid_id" Required="true" Type="SMALLINT"/>
+    <Column Name="create_time" Required="true" Type="DATE"/>
+    <Column Name="create_by" Required="true" Type="INTEGER"/>
+    <Column Name="change_time" Required="true" Type="DATE"/>
+    <Column Name="change_by" Required="true" Type="INTEGER"/>
+    <Unique Name="oauth2_token_config_name">
+        <UniqueColumn Name="name"/>
+    </Unique>
+    <ForeignKey ForeignTable="valid">
+        <Reference Local="valid_id" Foreign="id"/>
+    </ForeignKey>
+    <ForeignKey ForeignTable="users">
+        <Reference Local="create_by" Foreign="id"/>
+        <Reference Local="change_by" Foreign="id"/>
+    </ForeignKey>
+</Table>
+
+<Table Name="oauth2_token">
+    <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
+    <Column Name="token_config_id" Required="true" Type="INTEGER"/>
+    <Column Name="authorization_code" Required="false" Size="2000" Type="VARCHAR"/>
+    <Column Name="token" Required="false" Size="2000" Type="VARCHAR"/>
+    <Column Name="token_expiration_date" Required="false" Type="DATE"/>
+    <Column Name="refresh_token" Required="false" Size="2000" Type="VARCHAR"/>
+    <Column Name="refresh_token_expiration_date" Required="false" Type="DATE"/>
+    <Column Name="error_message" Required="false" Size="2000" Type="VARCHAR"/>
+    <Column Name="error_description" Required="false" Size="2000" Type="VARCHAR"/>
+    <Column Name="error_code" Required="false" Size="250" Type="VARCHAR"/>
+    <Column Name="create_time" Required="true" Type="DATE"/>
+    <Column Name="create_by" Required="true" Type="INTEGER"/>
+    <Column Name="change_time" Required="true" Type="DATE"/>
+    <Column Name="change_by" Required="true" Type="INTEGER"/>
+    <Unique Name="oauth2_token_config_id">
+        <UniqueColumn Name="token_config_id"/>
+                </Unique>
+    <ForeignKey ForeignTable="oauth2_token_config">
+        <Reference Local="token_config_id" Foreign="id"/>
+    </ForeignKey>
+    <ForeignKey ForeignTable="users">
+        <Reference Local="create_by" Foreign="id"/>
+        <Reference Local="change_by" Foreign="id"/>
+    </ForeignKey>
+</Table>
+
+<Table Name="mention">
+    <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
+    <Column Name="user_id" Type="INTEGER"/>
+    <Column Name="ticket_id" Type="INTEGER"/>
+    <Column Name="article_id" Type="INTEGER"/>
+    <Column Name="create_time" Type="DATE"/>
+    <Index Name="mention_user_id">
+        <IndexColumn Name="user_id"/>
+    </Index>
+    <Index Name="mention_ticket_id">
+        <IndexColumn Name="ticket_id"/>
+    </Index>
+    <Index Name="mention_article_id">
+        <IndexColumn Name="article_id"/>
+    </Index>
 </Table>
 
 </database>

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -21,12 +21,12 @@ $Kernel::OM->ObjectParamAdd(
     },
 );
 
-my $Helper            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $SysConfigDBObject = $Kernel::OM->Get('Kernel::System::SysConfig::DB');
 my $SysConfigObject   = $Kernel::OM->Get('Kernel::System::SysConfig');
 my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
 
-my $RandomID    = $Helper->GetRandomID();
+my $RandomID    = $HelperObject->GetRandomID();
 my $SettingName = "Test$RandomID-";
 my $UserID      = 1;
 my @SettingDirtyNames;
@@ -145,7 +145,7 @@ for my $Index ( 1 .. 3 ) {
 }
 
 # set user details
-my ( $UserLogin, $TestUserID ) = $Helper->TestUserCreate();
+my ( $UserLogin, $TestUserID ) = $HelperObject->TestUserCreate();
 
 $Self->True(
     $TestUserID,

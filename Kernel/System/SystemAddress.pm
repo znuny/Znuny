@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -574,8 +574,9 @@ sub NameExistsCheck {
     my ( $Self, %Param ) = @_;
 
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+
     return if !$DBObject->Prepare(
-        SQL  => 'SELECT id FROM system_address WHERE value0 = ?',
+        SQL  => 'SELECT id FROM system_address WHERE LOWER(value0) = LOWER(?)',
         Bind => [ \$Param{Name} ],
     );
 
