@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -10,20 +10,26 @@
 <div class="AppointmentTooltip Hidden">
     <div class="Icons">
     {% if CalEvent.allDay %}
-        <i class="fa fa-sun-o" />
+        <i class="fa fa-sun-o"></i>
     {% endif %}
     {% if CalEvent.recurring %}
-        <i class="fa fa-repeat" />
+        <i class="fa fa-repeat"></i>
     {% endif %}
     {% if CalEvent.parentId %}
-        <i class="fa fa-link" />
+        <i class="fa fa-child"></i>
     {% endif %}
     {% if CalEvent.notification %}
-        <i class="fa fa-bell" />
+        <i class="fa fa-bell"></i>
     {% endif %}
     {% if CalEvent.ticketAppointmentType %}
-        <i class="fa fa-char-{{ TicketAppointmentConfig[CalEvent.ticketAppointmentType].Mark }}" />
+        <i class="fa fa-char-{{ TicketAppointmentConfig[CalEvent.ticketAppointmentType].Mark }}"></i>
     {% endif %}
+    {% if CalEvent.pluginData %}
+        {% for PluginKey, PluginValue in PluginList %}
+            <i class="fa fa-{{ CalEvent.pluginData[PluginKey]['Icon'] }}"></i>
+        {% endfor %}
+    {% endif %}
+
     </div>
     <fieldset>
         <legend><span>{{ 'Basic information' | Translate }}</span></legend>
@@ -81,16 +87,20 @@
         <div class="Clear"></div>
     {% endif %}
     </fieldset>
-{% if CalEvent.pluginData %}
-    <fieldset>
-        <legend><span>{{ 'Link' | Translate }}</span></legend>
-    {% for PluginKey, PluginValue in PluginList %}
-        <label>{{ PluginValue.PluginName }}:</label>
-        <p class="Value">{{ CalEvent.pluginData[PluginKey] | escape | replace('\\n', '<br>') | safe }}</p>
-        <div class="Clear"></div>
+
+{% if CalEvent.pluginDataGroup %}
+    {% for Group, PluginKeyData in CalEvent.pluginDataGroup | dictsort | reverse %}
+        <fieldset>
+            <legend><span>{{ Group | Translate }}</span></legend>
+            {% for PluginKey, PluginData in PluginKeyData %}
+                <label>{{ PluginList[PluginKey].Name | Translate }}:</label>
+                <p class="Value">{{ PluginKeyData[PluginKey]['Value'] | escape | replace('\\n', '<br>') | safe }}</p>
+                <div class="Clear"></div>
+            {% endfor %}
+        </fieldset>
     {% endfor %}
-    </fieldset>
 {% endif %}
+
 {% if CalEvent.notificationDate %}
     <fieldset>
         <legend><span>{{ 'Notification' | Translate }}</span></legend>

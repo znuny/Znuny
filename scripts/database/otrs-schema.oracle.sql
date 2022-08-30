@@ -3074,6 +3074,8 @@ CREATE TABLE mail_account (
     queue_id NUMBER (12, 0) NOT NULL,
     trusted NUMBER (5, 0) NOT NULL,
     imap_folder VARCHAR2 (250) NULL,
+    authentication_type VARCHAR2 (100) DEFAULT 'password' NOT NULL,
+    oauth2_token_config_id NUMBER (12, 0) NULL,
     comments VARCHAR2 (250) NULL,
     valid_id NUMBER (5, 0) NOT NULL,
     create_time DATE NOT NULL,
@@ -5245,6 +5247,57 @@ END;
 --
 ;
 -- ----------------------------------------------------------
+--  create table calendar_appointment_plugin
+-- ----------------------------------------------------------
+CREATE TABLE calendar_appointment_plugin (
+    id NUMBER (12, 0) NOT NULL,
+    appointment_id NUMBER (5, 0) NOT NULL,
+    plugin_key VARCHAR2 (1000) NOT NULL,
+    config CLOB NULL,
+    create_time DATE NOT NULL,
+    create_by NUMBER (12, 0) NOT NULL,
+    change_time DATE NOT NULL,
+    change_by NUMBER (12, 0) NOT NULL
+);
+ALTER TABLE calendar_appointment_plugin ADD CONSTRAINT PK_calendar_appointment_plugin PRIMARY KEY (id);
+BEGIN
+    EXECUTE IMMEDIATE 'DROP SEQUENCE SE_calendar_appointment_pl68';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE SEQUENCE SE_calendar_appointment_pl68
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+CACHE 20
+ORDER
+;
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TRIGGER SE_calendar_appointment_pl68_t';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE OR REPLACE TRIGGER SE_calendar_appointment_pl68_t
+BEFORE INSERT ON calendar_appointment_plugin
+FOR EACH ROW
+BEGIN
+    IF :new.id IS NULL THEN
+        SELECT SE_calendar_appointment_pl68.nextval
+        INTO :new.id
+        FROM DUAL;
+    END IF;
+END;
+/
+--
+;
+-- ----------------------------------------------------------
 --  create table calendar_appointment_ticket
 -- ----------------------------------------------------------
 CREATE TABLE calendar_appointment_ticket (
@@ -5723,6 +5776,267 @@ END;
 ;
 BEGIN
     EXECUTE IMMEDIATE 'CREATE INDEX form_draft_object_type_objecaf ON form_draft (object_type, object_id, action)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+-- ----------------------------------------------------------
+--  create table smime_keys
+-- ----------------------------------------------------------
+CREATE TABLE smime_keys (
+    id NUMBER (12, 0) NOT NULL,
+    key_hash VARCHAR2 (8) NOT NULL,
+    key_type VARCHAR2 (255) NOT NULL,
+    file_name VARCHAR2 (255) NOT NULL,
+    email_address VARCHAR2 (255) NULL,
+    expiration_date DATE NULL,
+    fingerprint VARCHAR2 (59) NULL,
+    subject VARCHAR2 (255) NULL,
+    create_time DATE NULL,
+    change_time DATE NULL,
+    create_by NUMBER (12, 0) NULL,
+    change_by NUMBER (12, 0) NULL
+);
+ALTER TABLE smime_keys ADD CONSTRAINT PK_smime_keys PRIMARY KEY (id);
+BEGIN
+    EXECUTE IMMEDIATE 'DROP SEQUENCE SE_smime_keys';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE SEQUENCE SE_smime_keys
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+CACHE 20
+ORDER
+;
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TRIGGER SE_smime_keys_t';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE OR REPLACE TRIGGER SE_smime_keys_t
+BEFORE INSERT ON smime_keys
+FOR EACH ROW
+BEGIN
+    IF :new.id IS NULL THEN
+        SELECT SE_smime_keys.nextval
+        INTO :new.id
+        FROM DUAL;
+    END IF;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX smime_keys_file_name ON smime_keys (file_name)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX smime_keys_key_hash ON smime_keys (key_hash)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX smime_keys_key_type ON smime_keys (key_type)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+-- ----------------------------------------------------------
+--  create table oauth2_token_config
+-- ----------------------------------------------------------
+CREATE TABLE oauth2_token_config (
+    id NUMBER (12, 0) NOT NULL,
+    name VARCHAR2 (250) NOT NULL,
+    config CLOB NOT NULL,
+    valid_id NUMBER (5, 0) NOT NULL,
+    create_time DATE NOT NULL,
+    create_by NUMBER (12, 0) NOT NULL,
+    change_time DATE NOT NULL,
+    change_by NUMBER (12, 0) NOT NULL,
+    CONSTRAINT oauth2_token_config_name UNIQUE (name)
+);
+ALTER TABLE oauth2_token_config ADD CONSTRAINT PK_oauth2_token_config PRIMARY KEY (id);
+BEGIN
+    EXECUTE IMMEDIATE 'DROP SEQUENCE SE_oauth2_token_config';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE SEQUENCE SE_oauth2_token_config
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+CACHE 20
+ORDER
+;
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TRIGGER SE_oauth2_token_config_t';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE OR REPLACE TRIGGER SE_oauth2_token_config_t
+BEFORE INSERT ON oauth2_token_config
+FOR EACH ROW
+BEGIN
+    IF :new.id IS NULL THEN
+        SELECT SE_oauth2_token_config.nextval
+        INTO :new.id
+        FROM DUAL;
+    END IF;
+END;
+/
+--
+;
+-- ----------------------------------------------------------
+--  create table oauth2_token
+-- ----------------------------------------------------------
+CREATE TABLE oauth2_token (
+    id NUMBER (12, 0) NOT NULL,
+    token_config_id NUMBER (12, 0) NOT NULL,
+    authorization_code VARCHAR2 (2000) NULL,
+    token VARCHAR2 (2000) NULL,
+    token_expiration_date DATE NULL,
+    refresh_token VARCHAR2 (2000) NULL,
+    refresh_token_expiration_date DATE NULL,
+    error_message VARCHAR2 (2000) NULL,
+    error_description VARCHAR2 (2000) NULL,
+    error_code VARCHAR2 (250) NULL,
+    create_time DATE NOT NULL,
+    create_by NUMBER (12, 0) NOT NULL,
+    change_time DATE NOT NULL,
+    change_by NUMBER (12, 0) NOT NULL,
+    CONSTRAINT oauth2_token_config_id UNIQUE (token_config_id)
+);
+ALTER TABLE oauth2_token ADD CONSTRAINT PK_oauth2_token PRIMARY KEY (id);
+BEGIN
+    EXECUTE IMMEDIATE 'DROP SEQUENCE SE_oauth2_token';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE SEQUENCE SE_oauth2_token
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+CACHE 20
+ORDER
+;
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TRIGGER SE_oauth2_token_t';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE OR REPLACE TRIGGER SE_oauth2_token_t
+BEFORE INSERT ON oauth2_token
+FOR EACH ROW
+BEGIN
+    IF :new.id IS NULL THEN
+        SELECT SE_oauth2_token.nextval
+        INTO :new.id
+        FROM DUAL;
+    END IF;
+END;
+/
+--
+;
+-- ----------------------------------------------------------
+--  create table mention
+-- ----------------------------------------------------------
+CREATE TABLE mention (
+    id NUMBER (12, 0) NOT NULL,
+    user_id NUMBER (12, 0) NULL,
+    ticket_id NUMBER (12, 0) NULL,
+    article_id NUMBER (12, 0) NULL,
+    create_time DATE NULL
+);
+ALTER TABLE mention ADD CONSTRAINT PK_mention PRIMARY KEY (id);
+BEGIN
+    EXECUTE IMMEDIATE 'DROP SEQUENCE SE_mention';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE SEQUENCE SE_mention
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+CACHE 20
+ORDER
+;
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TRIGGER SE_mention_t';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE OR REPLACE TRIGGER SE_mention_t
+BEFORE INSERT ON mention
+FOR EACH ROW
+BEGIN
+    IF :new.id IS NULL THEN
+        SELECT SE_mention.nextval
+        INTO :new.id
+        FROM DUAL;
+    END IF;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX mention_article_id ON mention (article_id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX mention_ticket_id ON mention (ticket_id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX mention_user_id ON mention (user_id)';
 EXCEPTION
   WHEN OTHERS THEN NULL;
 END;

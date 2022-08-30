@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -491,7 +491,7 @@ sub ObjectsDiscard {
         push @AllObjects, $Object;
     }
 
-    # During an OTRS package upgrade the packagesetup code module has just
+    # During a package upgrade the packagesetup code module has just
     # recently been copied to it's location in the file system.
     # In a persistent Perl environment an old version of the module might still be loaded,
     # as watchdogs like Apache2::Reload haven't had a chance to reload it.

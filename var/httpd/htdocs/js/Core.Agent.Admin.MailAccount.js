@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -75,7 +75,9 @@ Core.Agent.Admin = Core.Agent.Admin || {};
     * @memberof Core.Agent.Admin.MailAccount
     * @function
     * @description
-    *      This function registers onchange events for showing IMAP Folder and Queue field
+    *      This function registers onchange events for showing IMAP Folder and Queue field.
+    *      Also the password and OAuth2 token selection field will be shown/hidden depending
+    *      on authentication type selection.
     */
     TargetNS.Init = function () {
 
@@ -103,6 +105,33 @@ Core.Agent.Admin = Core.Agent.Admin || {};
         Core.UI.Table.InitTableFilter($("#FilterMailAccounts"), $("#MailAccounts"));
 
         TargetNS.MailAccountDelete();
+
+        // Selection of authentication method
+        $('#AuthenticationType').on('change', function() {
+            var AuthenticationType = $(this).val();
+
+            switch(AuthenticationType) {
+                case 'oauth2_token':
+                    $('div.Row_Password').hide();
+                    $('#PasswordAdd').removeClass('Validate_Required');
+                    $('#PasswordEdit').removeClass('Validate_Required');
+
+                    $('div.Row_OAuth2TokenConfigID').show();
+                    $('#OAuth2TokenConfigID').addClass('Validate_Required');
+                    break;
+                case 'password':
+                default:
+                    $('div.Row_Password').show();
+                    $('#PasswordAdd').addClass('Validate_Required');
+                    $('#PasswordEdit').addClass('Validate_Required');
+
+                    $('div.Row_OAuth2TokenConfigID').hide();
+                    $('#OAuth2TokenConfigID').removeClass('Validate_Required');
+                    break;
+            }
+
+            Core.UI.InputFields.Activate();
+        }).trigger('change');
     };
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');

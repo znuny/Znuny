@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -14,6 +14,7 @@ use warnings;
 
 use Net::LDAP;
 use Net::LDAP::Util qw(escape_filter_value);
+use URI;
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -73,6 +74,7 @@ sub new {
         || 'DN';
     $Self->{DestCharset} = $ConfigObject->Get( 'AuthSyncModule::LDAP::Charset' . $Param{Count} )
         || 'utf-8';
+    $Self->{NestedGroupSearch} = $ConfigObject->Get( 'AuthSyncModule::LDAP::NestedGroupSearch' . $Param{Count} );
 
     # ldap filter always used
     $Self->{AlwaysFilter} = $ConfigObject->Get( 'AuthSyncModule::LDAP::AlwaysFilter' . $Param{Count} ) || '';
@@ -388,6 +390,34 @@ sub Sync {
             my $Valid;
             for my $Entry ( $Result->all_entries() ) {
                 $Valid = $Entry->dn();
+            }
+
+            # only consider nested group search if we got no result
+            if (
+                !$Valid
+                && $Self->{NestedGroupSearch}
+                )
+            {
+
+                # check if nested group search is ENABLED
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'debug',
+                    Message  => 'Performing an extended nested group search.',
+                );
+
+                my $NestedGroupResult = $Self->_NestedGroupSearch( $LDAP, $GroupDN, $UserDN );
+
+                # check if user was found with nested group search
+                if ($NestedGroupResult) {
+                    $Kernel::OM->Get('Kernel::System::Log')->Log(
+                        Priority => 'info',
+                        Message  => "User: $Param{User} membership for group "
+                            . "GroupDN='$GroupDN' confirmed through nested group search.",
+                    );
+
+                    # change the result to be valid
+                    $Valid = $UserDN;
+                }
             }
 
             # log if there is no LDAP entry
@@ -794,6 +824,132 @@ sub _ConvertFrom {
         From => $Self->{DestCharset},
         To   => $Charset,
     );
+}
+
+sub _NestedGroupSearch {
+    my ( $Self, $LDAP, $GroupDN, $UserDN ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    $LogObject->Log(
+        Priority => 'debug',
+        Message  => "Nested group search to check if user $UserDN is a member of group $GroupDN.",
+    );
+
+    # protect against circular nesting (=infinite loop)
+    my $FoundGroups = {};
+
+    # call the actual search function
+    my $MemberFound = 0;
+    $Self->_NestedGroupSearchMemberFind( $LDAP, $GroupDN, $UserDN, $FoundGroups, \$MemberFound );
+
+    my $GroupCount = keys %{$FoundGroups};
+    $LogObject->Log(
+        Priority => 'debug',
+        Message  => 'Nested group search remembered '
+            . "$GroupCount group objects to prevent an infinite loop.",
+    );
+
+    return $MemberFound;
+}
+
+sub _NestedGroupSearchMemberFind {
+    my ( $Self, $LDAP, $GroupDN, $UserDN, $FoundGroups, $MemberFound ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    # check for infinite loop
+    if ( $FoundGroups->{$GroupDN} ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Nested group search found circular nesting in "
+                . "$GroupDN (while searching for user $UserDN)",
+        );
+        return;
+    }
+
+    # check if the user is a member of this group
+    my $Result = $LDAP->compare(
+        $GroupDN,
+        attr  => 'uniquemember',
+        value => $UserDN,
+    );
+    return if !$Result;
+
+    if ( $Result->code() == Net::LDAP::Constant::LDAP_COMPARE_TRUE() ) {
+        $LogObject->Log(
+            Priority => 'debug',
+            Message  => "Nested group search result: $UserDN is a member of $GroupDN",
+        );
+        ${$MemberFound} = 1;
+        return;
+    }
+
+    #
+    # not a member, continue search
+    #
+
+    # get list of group members
+    my @GroupAttributes = qw( uniquemember objectclass memberurl );
+    $Result = $LDAP->search(
+        base       => $GroupDN,
+        filter     => '(|(objectclass=groupOfUniqueNames)(objectclass=groupOfUrls))',
+        Attributes => \@GroupAttributes,
+    );
+    return if !$Result;
+
+    my $Entry = $Result->pop_entry();
+    return if !$Entry;
+
+    $LogObject->Log(
+        Priority => 'debug',
+        Message  => "Nested group search in GroupDN " . $Entry->dn(),
+    );
+
+    # add group to list
+    # if it is seen again, it will be ignoreed to avoid an infinite loop
+    $FoundGroups->{ $Entry->dn() } = 1;
+
+    # search in dynamic groups
+    my $URLValues = $Entry->get_value( 'memberurl', asref => 1 ) // [];
+    URLVALUE:
+    for my $URLValue ( @{$URLValues} ) {
+        my $Uri        = URI->new($URLValue);
+        my $Filter     = $Uri->filter();
+        my @Attributes = $Uri->attributes();
+
+        $Result = $LDAP->search(
+            base       => $UserDN,
+            scope      => 'base',
+            filter     => $Filter,
+            Attributes => \@Attributes,
+        );
+        next URLVALUE if !$Result;
+
+        # check if entry was found
+        $Entry = $Result->pop_entry();
+        next URLVALUE if !$Entry;
+
+        ${$MemberFound} = 1;
+        return;
+    }
+
+    # search in static groups
+    my $MemberValues = $Entry->get_value( 'uniquemember', asref => 1 ) // [];
+    VALUE:
+    for my $Value ( @{$MemberValues} ) {
+
+        # call search function again for each member
+        $Self->_NestedGroupSearchMemberFind( $LDAP, $Value, $UserDN, $FoundGroups, $MemberFound );
+
+        # stop if match was found
+        last VALUE if ${$MemberFound};
+    }
+
+    # abort on LDAP errors
+    die $Result->error() if $Result->code();
+
+    return;
 }
 
 1;

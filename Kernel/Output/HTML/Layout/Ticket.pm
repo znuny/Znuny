@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -480,6 +480,7 @@ sub AgentQueueListOption {
     my $ValueNoQueue;
     my $MoveStr           = $Self->{LanguageObject}->Translate('Move');
     my $ValueOfQueueNoKey = "- " . $MoveStr . " -";
+
     DATA:
     for my $DataKey ( sort { $Data{$a} cmp $Data{$b} } keys %Data ) {
 
@@ -1113,6 +1114,111 @@ sub TicketMetaItems {
     }
 
     return @Result;
+}
+
+=head2 TimeUnits()
+
+Returns HTML block consisting of label and field for time units.
+
+    my $TimeUnitsBlock = $LayoutObject->TimeUnits(
+        ID                => 'TimeUnits',       # (optional) the HTML ID for this element, if not provided, the name will be used as ID as well
+        Name              => 'TimeUnits',       # name of element
+        TimeUnits         => '123',
+        TimeUnitsRequired => '1',
+    );
+
+Returns:
+
+    my $TimeUnitsBlock =  '<label for="TimeUnits">Time units  (work units):</label>
+    <div class="Field">
+        <input type="text" name="TimeUnits" id="TimeUnits" value="" class="W50pc Validate_TimeUnits  "/>
+        <div id="TimeUnitsError" class="TooltipErrorMessage"><p>Invalid time!</p></div>
+        <div id="TimeUnitsServerError" class="TooltipErrorMessage"><p>This field is required.</p></div>
+    </div>
+    <div class="Clear"></div>'
+
+=cut
+
+sub TimeUnits {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    $Param{ID}                ||= 'TimeUnits';
+    $Param{Name}              ||= 'TimeUnits';
+    $Param{TimeUnitsRequired} ||= $ConfigObject->Get('Ticket::Frontend::NeedAccountedTime');
+
+    my $Type = $ConfigObject->Get('Ticket::Frontend::AccountTimeType') || 'Text';
+
+    if ( $Param{TimeUnitsRequired} ) {
+        $Self->Block(
+            Name => 'TimeUnitsLabelMandatory',
+            Data => \%Param,
+        );
+        $Param{TimeUnitsRequiredClass} ||= 'Validate_Required';
+    }
+    else {
+        $Self->Block(
+            Name => 'TimeUnitsLabel',
+            Data => \%Param,
+        );
+        $Param{TimeUnitsRequiredClass} = '';
+    }
+
+    $Self->Block(
+        Name => 'TimeUnits' . $Type,
+        Data => \%Param,
+    );
+
+    if ( $Type eq 'Dropdown' ) {
+
+        my $Config = $ConfigObject->Get( 'Ticket::Frontend::AccountTime::' . $Type );
+        my $DefaultTimeUnits;
+
+        for my $Item ( sort keys %{$Config} ) {
+
+            my $Label = $Config->{$Item}->{Label};
+            $DefaultTimeUnits += $Config->{$Item}->{DataSelected} || 0;
+
+            my $Field = $Self->BuildSelection(
+                Class => $Param{ID} . ' TimeUnitDropdown Modernize ' . $Param{TimeUnitsRequiredClass},
+                Data  => {
+                    %{ $Config->{$Item}->{Data} },
+                },
+                ID           => $Param{ID} . $Label,
+                Name         => $Param{Name} . $Label,
+                SelectedID   => $Config->{$Item}->{DataSelected},
+                PossibleNone => 1,
+                Sort         => 'NumericValue',
+                Translation  => 0,
+                OnChange     => 'Core.Agent.TicketAction.SetTimeUnits(\'' . $Param{ID} . '\');',
+            );
+
+            $Self->Block(
+                Name => $Type,
+                Data => {
+                    %Param,
+                    Label => $Label,
+                    Field => $Field,
+                },
+            );
+        }
+
+        $Param{TimeUnits} //= $DefaultTimeUnits;
+        $Self->Block(
+            Name => 'TimeUnits',
+            Data => \%Param,
+        );
+    }
+
+    my $TimeUnitsStrg = $Self->Output(
+        TemplateFile => 'Ticket/TimeUnits',
+        Data         => {
+            %Param,
+        },
+    );
+
+    return $TimeUnitsStrg;
 }
 
 1;

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -583,6 +583,9 @@ sub LoadDefaults {
 #        'users',
 #    ];
 
+    # Utilize extended nested group search? (may impact performance)
+#    $Self->{'AuthSyncModule::LDAP::NestedGroupSearch'} = 1;
+
     # AuthSyncModule::LDAP::UserSyncGroupsDefinition
     # (If "LDAP" was selected for AuthModule and you want to sync LDAP
     # groups to otrs groups, define the following.)
@@ -909,15 +912,15 @@ sub LoadDefaults {
     # --------------------------------------------------- #
     # MIME-Viewer for online to html converter
     # --------------------------------------------------- #
-    # (e. g. xlhtml (xls2html), http://chicago.sourceforge.net/xlhtml/)
-#    $Self->{'MIME-Viewer'}->{'application/excel'} = 'xlhtml';
+    # (e.g. xlhtml (xls2html), http://chicago.sourceforge.net/xlhtml/)
+#     $Self->{'MIME-Viewer'}->{'application/excel'} = 'xlhtml';
     # MIME-Viewer for online to html converter
-    # (e. g. wv (word2html), http://wvware.sourceforge.net/)
-#    $Self->{'MIME-Viewer'}->{'application/msword'} = 'wvWare';
-    # (e. g. pdftohtml (pdf2html), http://pdftohtml.sourceforge.net/)
-#    $Self->{'MIME-Viewer'}->{'application/pdf'} = 'pdftohtml -stdout -i';
-    # (e. g. xml2html (xml2html))
-#    $Self->{'MIME-Viewer'}->{'text/xml'} = $Self->{Home}.'/scripts/tools/xml2html.pl';
+    # (e.g. wv (word2html), http://wvware.sourceforge.net/)
+#     $Self->{'MIME-Viewer'}->{'application/msword'} = 'wvWare';
+    # (e.g. pdftohtml (pdf2html), http://pdftohtml.sourceforge.net/)
+#     $Self->{'MIME-Viewer'}->{'application/pdf'} = 'pdftohtml -stdout -i';
+    # (e.g. xml2html (xml2html))
+#     $Self->{'MIME-Viewer'}->{'text/xml'} = $Self->{Home}.'/scripts/tools/xml2html.pl';
 
     # --------------------------------------------------- #
     # directories                                         #
@@ -941,6 +944,7 @@ sub LoadDefaults {
 
     # Customer Common CSS
     $Self->{'Loader::Customer::CommonCSS'}->{'000-Framework'} = [
+        'Core.Color.css',
         'Core.Reset.css',
         'Core.Default.css',
         'Core.Form.css',
@@ -957,6 +961,7 @@ sub LoadDefaults {
 
     # Agent Common CSS
     $Self->{'Loader::Agent::CommonCSS'}->{'000-Framework'} = [
+        'Core.Color.css',
         'Core.Reset.css',
         'Core.Default.css',
         'Core.Header.css',
@@ -985,13 +990,13 @@ sub LoadDefaults {
 
     # Customer Common JS
     $Self->{'Loader::Customer::CommonJS'}->{'000-Framework'} = [
-        'thirdparty/jquery-3.5.1/jquery.js',
+        'thirdparty/jquery-3.6.0/jquery.js',
         'thirdparty/jquery-browser-detection/jquery-browser-detection.js',
         'thirdparty/jquery-validate-1.16.0/jquery.validate.js',
-        'thirdparty/jquery-ui-1.12.1/jquery-ui.js',
+        'thirdparty/jquery-ui-1.13.1/jquery-ui.js',
         'thirdparty/jquery-pubsub/pubsub.js',
         'thirdparty/jquery-jstree-3.3.7/jquery.jstree.js',
-        'thirdparty/nunjucks-3.0.1/nunjucks.js',
+        'thirdparty/nunjucks-3.2.2/nunjucks.min.js',
         'Core.Init.js',
         'Core.Debug.js',
         'Core.Exception.js',
@@ -1023,14 +1028,14 @@ sub LoadDefaults {
 
     # Agent Common JS
     $Self->{'Loader::Agent::CommonJS'}->{'000-Framework'} = [
-        'thirdparty/jquery-3.5.1/jquery.js',
+        'thirdparty/jquery-3.6.0/jquery.js',
         'thirdparty/jquery-browser-detection/jquery-browser-detection.js',
-        'thirdparty/jquery-ui-1.12.1/jquery-ui.js',
+        'thirdparty/jquery-ui-1.13.1/jquery-ui.js',
         'thirdparty/jquery-ui-touch-punch-0.2.3/jquery.ui.touch-punch.js',
         'thirdparty/jquery-validate-1.16.0/jquery.validate.js',
         'thirdparty/jquery-pubsub/pubsub.js',
         'thirdparty/jquery-jstree-3.3.7/jquery.jstree.js',
-        'thirdparty/nunjucks-3.0.1/nunjucks.js',
+        'thirdparty/nunjucks-3.2.2/nunjucks.min.js',
         'thirdparty/jscolor-2.4.6/jscolor.js',
         'Core.Init.js',
         'Core.JavaScriptEnhancements.js',

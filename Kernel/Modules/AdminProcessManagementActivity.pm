@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -22,7 +22,6 @@ our $ObjectManagerDisabled = 1;
 sub new {
     my ( $Type, %Param ) = @_;
 
-    # allocate new hash for object
     my $Self = {%Param};
     bless( $Self, $Type );
 
@@ -47,6 +46,18 @@ sub Run {
     $Self->{ScreensPath} = $Kernel::OM->Get('Kernel::System::JSON')->Decode(
         Data => $SessionData{ProcessManagementScreensPath}
     );
+
+    # get parameter from web browser
+    my $GetParam = $Self->_GetParams() // {};
+    if (
+        !$GetParam->{ProcessEntityID}
+        && IsArrayRefWithData( $Self->{ScreensPath} )
+        && IsHashRefWithData( $Self->{ScreensPath}->[-1] )
+        && $Self->{ScreensPath}->[-1]->{ProcessEntityID}
+        )
+    {
+        $GetParam->{ProcessEntityID} = $Self->{ScreensPath}->[-1]->{ProcessEntityID};
+    }
 
     # get needed objects
     my $LayoutObject        = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
@@ -77,12 +88,9 @@ sub Run {
         # get activity data
         my $ActivityData;
 
-        # get parameter from web browser
-        my $GetParam = $Self->_GetParams();
-
         # set new configuration
         $ActivityData->{Name}   = $GetParam->{Name};
-        $ActivityData->{Config} = {};
+        $ActivityData->{Config} = $GetParam->{Config};
 
         # set the rest of the config
         if ( IsArrayRefWithData( $GetParam->{ActivityDialogs} ) ) {
@@ -128,6 +136,20 @@ sub Run {
             # add server error error class
             $Error{NameServerError}        = 'ServerError';
             $Error{NameServerErrorMessage} = Translatable('This field is required');
+        }
+
+        if ( !$GetParam->{Config}->{Scope} ) {
+
+            # add server error error class
+            $Error{ScopeError}        = 'ServerError';
+            $Error{ScopeErrorMessage} = Translatable('This field is required');
+        }
+
+        if ( $GetParam->{Config}->{Scope} eq 'Process' && !$GetParam->{Config}->{ScopeEntityID} ) {
+
+            # add server error error class
+            $Error{ScopeEntityIDError}        = 'ServerError';
+            $Error{ScopeEntityIDErrorMessage} = Translatable('This field is required');
         }
 
         # if there is an error return to edit screen
@@ -214,10 +236,11 @@ sub Run {
             return $Self->_PopupResponse(
                 Redirect => 1,
                 Screen   => {
-                    Action    => $RedirectAction,
-                    Subaction => $RedirectSubaction,
-                    ID        => $RedirectID,
-                    EntityID  => $RedirectID,
+                    Action          => $RedirectAction,
+                    Subaction       => $RedirectSubaction,
+                    ID              => $RedirectID,
+                    EntityID        => $RedirectID,
+                    ProcessEntityID => $GetParam->{ProcessEntityID},
                 },
                 ConfigJSON => $ActivityConfig,
             );
@@ -296,13 +319,10 @@ sub Run {
         # get Activity Data
         my $ActivityData;
 
-        # get parameter from web browser
-        my $GetParam = $Self->_GetParams();
-
         # set new configuration
         $ActivityData->{Name}     = $GetParam->{Name};
         $ActivityData->{EntityID} = $GetParam->{EntityID};
-        $ActivityData->{Config}   = {};
+        $ActivityData->{Config}   = $GetParam->{Config};
 
         # set the rest of the config
         if ( IsArrayRefWithData( $GetParam->{ActivityDialogs} ) ) {
@@ -423,10 +443,11 @@ sub Run {
             return $Self->_PopupResponse(
                 Redirect => 1,
                 Screen   => {
-                    Action    => $RedirectAction,
-                    Subaction => $RedirectSubaction,
-                    ID        => $RedirectID,
-                    EntityID  => $RedirectID,
+                    Action          => $RedirectAction,
+                    Subaction       => $RedirectSubaction,
+                    ID              => $RedirectID,
+                    EntityID        => $RedirectID,
+                    ProcessEntityID => $GetParam->{ProcessEntityID},
                 },
                 ConfigJSON => $ActivityConfig,
             );
@@ -658,6 +679,9 @@ sub _GetActivityConfig {
 sub _ShowEdit {
     my ( $Self, %Param ) = @_;
 
+    my $GetParam = $Self->_GetParams();
+    $GetParam->{ProcessEntityID} ||= $Self->{ScreensPath}->[-1]->{ProcessEntityID};
+
     # get Activity information
     my $ActivityData = $Param{ActivityData} || {};
 
@@ -678,10 +702,11 @@ sub _ShowEdit {
         $LayoutObject->Block(
             Name => 'GoBack',
             Data => {
-                Action    => $Self->{ScreensPath}->[-1]->{Action}    || '',
-                Subaction => $Self->{ScreensPath}->[-1]->{Subaction} || '',
-                ID        => $Self->{ScreensPath}->[-1]->{ID}        || '',
-                EntityID  => $Self->{ScreensPath}->[-1]->{EntityID}  || '',
+                Action          => $Self->{ScreensPath}->[-1]->{Action}          || '',
+                Subaction       => $Self->{ScreensPath}->[-1]->{Subaction}       || '',
+                ID              => $Self->{ScreensPath}->[-1]->{ID}              || '',
+                EntityID        => $Self->{ScreensPath}->[-1]->{EntityID}        || '',
+                ProcessEntityID => $Self->{ScreensPath}->[-1]->{ProcessEntityID} || '',
             },
         );
     }
@@ -749,10 +774,12 @@ sub _ShowEdit {
             $LayoutObject->Block(
                 Name => 'AvailableActivityDialogRow',
                 Data => {
-                    ID          => $ActivityDialogData->{ID},
-                    EntityID    => $ActivityDialogData->{EntityID},
-                    Name        => $ActivityDialogData->{Name},
-                    AvailableIn => $AvailableIn,
+                    ID            => $ActivityDialogData->{ID},
+                    EntityID      => $ActivityDialogData->{EntityID},
+                    Name          => $ActivityDialogData->{Name},
+                    Scope         => $ActivityDialogData->{Config}->{Scope} || 'Global',
+                    ScopeEntityID => $ActivityDialogData->{Config}->{ScopeEntityID},
+                    AvailableIn   => $AvailableIn,
                 },
             );
         }
@@ -784,10 +811,12 @@ sub _ShowEdit {
             $LayoutObject->Block(
                 Name => 'AssignedActivityDialogRow',
                 Data => {
-                    ID          => $ActivityDialogData->{ID},
-                    EntityID    => $ActivityDialogData->{EntityID},
-                    Name        => $ActivityDialogData->{Name},
-                    AvailableIn => $AvailableIn,
+                    ID            => $ActivityDialogData->{ID},
+                    EntityID      => $ActivityDialogData->{EntityID},
+                    Name          => $ActivityDialogData->{Name},
+                    Scope         => $ActivityDialogData->{Config}->{Scope} || 'Global',
+                    ScopeEntityID => $ActivityDialogData->{Config}->{ScopeEntityID},
+                    AvailableIn   => $AvailableIn,
                 },
             );
         }
@@ -852,15 +881,46 @@ sub _ShowEdit {
         $Param{Title} = Translatable('Create New Activity');
     }
 
+    $Param{ScopeSelection} = $LayoutObject->BuildSelection(
+        Data => {
+            Global  => 'Global',
+            Process => 'Process',
+        },
+        Name           => 'Scope',
+        ID             => 'Scope',
+        SelectedID     => $ActivityData->{Config}->{Scope} || 'Global',
+        Sort           => 'IndividualKey',
+        SortIndividual => [ 'Global', 'Process' ],
+        Translation    => 1,
+        Class          => 'Modernize W50pc ',
+    );
+
+    my $ProcessList = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process')->ProcessList(
+        UserID      => 1,
+        UseEntities => 1,
+    );
+
+    $Param{ScopeEntityIDSelection} = $LayoutObject->BuildSelection(
+        Data        => $ProcessList,
+        Name        => 'ScopeEntityID',
+        ID          => 'ScopeEntityID',
+        SelectedID  => $ActivityData->{Config}->{ScopeEntityID} // $GetParam->{ProcessEntityID},
+        Sort        => 'AlphanumericValue',
+        Translation => 1,
+        Class       => 'Modernize W50pc ',
+    );
+
     my $Output = $LayoutObject->Header(
         Value => $Param{Title},
         Type  => 'Small',
     );
+
     $Output .= $LayoutObject->Output(
         TemplateFile => "AdminProcessManagementActivity",
         Data         => {
             %Param,
             %{$ActivityData},
+            ProcessEntityID => $GetParam->{ProcessEntityID},
         },
     );
 
@@ -872,12 +932,12 @@ sub _ShowEdit {
 sub _GetParams {
     my ( $Self, %Param ) = @_;
 
-    my $GetParam;
+    my $GetParam    = {};
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
     # get parameters from web browser
     for my $ParamName (
-        qw( Name EntityID )
+        qw( Name EntityID ProcessEntityID)
         )
     {
         $GetParam->{$ParamName} = $ParamObject->GetParam( Param => $ParamName ) || '';
@@ -894,6 +954,13 @@ sub _GetParams {
         $GetParam->{ActivityDialogs} = '';
     }
 
+    for my $ParamName (qw( Scope ScopeEntityID )) {
+        $GetParam->{Config}->{$ParamName} = $ParamObject->GetParam( Param => $ParamName ) || '';
+    }
+    $GetParam->{Config}->{Scope} //= 'Global';
+    if ( $GetParam->{Config}->{Scope} eq 'Global' ) {
+        delete $GetParam->{Config}->{ScopeEntityID};
+    }
     return $GetParam;
 }
 
@@ -937,10 +1004,11 @@ sub _PushSessionScreen {
 
     # add screen to the screen path
     push @{ $Self->{ScreensPath} }, {
-        Action    => $Self->{Action} || '',
-        Subaction => $Param{Subaction},
-        ID        => $Param{ID},
-        EntityID  => $Param{EntityID},
+        Action          => $Self->{Action} || '',
+        Subaction       => $Param{Subaction},
+        ID              => $Param{ID},
+        EntityID        => $Param{EntityID},
+        ProcessEntityID => $Param{ProcessEntityID},
     };
 
     # convert screens path to string (JSON)

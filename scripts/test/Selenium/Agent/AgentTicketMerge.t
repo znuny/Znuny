@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,7 +18,7 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # Create test tickets.
@@ -49,7 +49,7 @@ $Selenium->RunTest(
         }
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 

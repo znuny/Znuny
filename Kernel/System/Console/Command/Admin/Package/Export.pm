@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -22,17 +22,17 @@ our @ObjectDependencies = (
 sub Configure {
     my ( $Self, %Param ) = @_;
 
-    $Self->Description('Export the contents of an OTRS package to a directory.');
+    $Self->Description('Export the content of a package to a directory.');
     $Self->AddOption(
         Name        => 'target-directory',
-        Description => "Export contents of the package to the specified directory.",
+        Description => "Export content of the package to the specified directory.",
         Required    => 1,
         HasValue    => 1,
         ValueRegex  => qr/.*/smx,
     );
     $Self->AddArgument(
         Name        => 'source-path',
-        Description => "Specify the path to an OTRS package (opm) file that should be exported.",
+        Description => "Specify the path to a package (opm) file that will be exported.",
         Required    => 1,
         ValueRegex  => qr/.*/smx,
     );
@@ -99,7 +99,6 @@ sub Run {
         $Self->Print("<green>Exported files of package $SourcePath to $TargetDirectory.</green>\n");
         return $Self->ExitCodeOk();
     }
-
 }
 
 1;

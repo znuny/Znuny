@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -23,8 +23,8 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-my $QueueName = "queue" . $Helper->GetRandomID();
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $QueueName    = "queue" . $HelperObject->GetRandomID();
 
 # try to execute command without any options
 $ExitCode = $CommandObject->Execute();
@@ -51,7 +51,7 @@ $Self->Is(
 );
 
 # provide illegal system-address-name
-my $SystemAddressName = "address" . $Helper->GetRandomID();
+my $SystemAddressName = "address" . $HelperObject->GetRandomID();
 $ExitCode = $CommandObject->Execute(
     '--name', "$QueueName-second", '--group', 'admin', '--system-address-name',
     $SystemAddressName

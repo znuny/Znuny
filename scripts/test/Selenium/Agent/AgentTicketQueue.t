@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,38 +18,38 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # Do not check email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Change settings Ticket::Frontend::AgentTicketQueue###VisualAlarms to 'Yes'.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketQueue###VisualAlarms',
             Value => 1,
         );
 
         # Change settings Ticket::Frontend::AgentTicketQueue###Blink to 'Yes'.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketQueue###Blink',
             Value => 1,
         );
 
         # Change settings Ticket::Frontend::AgentTicketQueue###HighlightAge1 to 10 minutes.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketQueue###HighlightAge1',
             Value => 10,
         );
 
         # Change settings Ticket::Frontend::AgentTicketQueue###HighlightAge2 to 20 minutes.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketQueue###HighlightAge2',
             Value => 20,
@@ -57,7 +57,7 @@ $Selenium->RunTest(
 
         # Create test user.
         my $Language      = 'de';
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups   => [ 'admin', 'users' ],
             Language => $Language,
         ) || die "Did not get test user";
@@ -73,7 +73,7 @@ $Selenium->RunTest(
         for my $Item ( 1 .. 4 ) {
 
             my $QueueID;
-            my $QueueName = 'Queue' . $Helper->GetRandomID();
+            my $QueueName = 'Queue' . $HelperObject->GetRandomID();
             if ( $Item == 3 ) {
                 $QueueName = 'Delete';
                 $QueueID   = $QueueObject->QueueLookup( Queue => $QueueName );
@@ -182,7 +182,7 @@ $Selenium->RunTest(
         my @TicketIDs;
         for my $TicketCreate (@Tests) {
 
-            $Helper->FixedTimeSet( $TicketCreate->{FixedTimeSet} ) if defined $TicketCreate->{FixedTimeSet};
+            $HelperObject->FixedTimeSet( $TicketCreate->{FixedTimeSet} ) if defined $TicketCreate->{FixedTimeSet};
 
             my $TicketID = $TicketObject->TicketCreate(
                 Title         => 'Selenium Test Ticket',
@@ -334,7 +334,7 @@ $Selenium->RunTest(
 
         # Enable config 'Ticket::Frontend::Overview::PreviewArticleSenderTypes' and set value
         # to not show customer articles in preview mode.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::Overview::PreviewArticleSenderTypes',
             Value => {
@@ -473,7 +473,7 @@ $Selenium->RunTest(
         }
 
         # Unset fixed time.
-        $Helper->FixedTimeUnset();
+        $HelperObject->FixedTimeUnset();
 
     }
 );

@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -86,6 +86,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
 
         // Initialize ajax call for updating default config parameter
         TargetNS.InitDefaultConfigParameters();
+
+        // Init handling of scope filter change
+        TargetNS.InitScopeFilter();
     };
 
     /**
@@ -821,8 +824,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
         // get new Accordion HTML via AJAX and replace the accordion with this HTML
         // re-initialize accordion functions (accordion, filters, DnD)
         var Data = {
-                Action: 'AdminProcessManagement',
-                Subaction: 'UpdateAccordion'
+                Action:          'AdminProcessManagement',
+                Subaction:       'UpdateAccordion',
+                ProcessEntityID: $('#ProcessEntityID').val()
             },
             ActiveElementIndex = parseInt($('ul#ProcessElements > li.Active').index(), 10),
             ActiveElementValue = $('ul#ProcessElements > li:eq(' + ActiveElementIndex + ') .ProcessElementFilter').val();
@@ -848,6 +852,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
 
             // Init DnD on Accordion
             TargetNS.InitAccordionDnD();
+
+            // init handling of scope filter
+            TargetNS.InitScopeFilter();
 
             // Initialize the different create and edit links/buttons
             InitProcessPopups();
@@ -1044,6 +1051,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             return false;
         });
 
+        // Init Scope Filters
+        TargetNS.InitScopeFilter();
+
         // Init Diagram Canvas
         TargetNS.Canvas.Init();
     };
@@ -1083,6 +1093,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
 
             Form.submit();
         });
+
+        // Init handling of scope filter change
+        TargetNS.InitScopeFilterSelection();
 
         // Init handling of closing popup with the OS functionality ("X")
         $(window).off("beforeunload.PMPopup").on("beforeunload.PMPopup", function () {
@@ -1194,49 +1207,58 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                 'Center',
                 true,
                 [
-                     {
-                         Label: Core.Language.Translate('Save'),
-                         Class: 'Primary',
-                         Function: function () {
-                             var FieldConfigElement = {};
+                    {
+                        Label: Core.Language.Translate('Save'),
+                        Class: 'Primary',
+                        Function: function () {
+                            var FieldConfigElement = {},
+                                StandardTemplateIDs = [];
 
-                             FieldConfigElement.DescriptionShort = $('#DescShort').val();
-                             FieldConfigElement.DescriptionLong = $('#DescLong').val();
-                             FieldConfigElement.DefaultValue = $('#DefaultValue').val();
-                             FieldConfigElement.Display = $('#Display').val();
+                            FieldConfigElement.DescriptionShort = $('#DescShort').val();
+                            FieldConfigElement.DescriptionLong = $('#DescLong').val();
+                            FieldConfigElement.DefaultValue = $('#DefaultValue').val();
+                            FieldConfigElement.Display = $('#Display').val();
 
-                             if (Fieldname === 'Article') {
-                                 if (typeof FieldConfigElement.Config === 'undefined'){
+                            if (Fieldname === 'Article') {
+                                if (typeof FieldConfigElement.Config === 'undefined'){
                                      FieldConfigElement.Config = {};
-                                 }
-                                 FieldConfigElement.Config.CommunicationChannel = $('#CommunicationChannel').val();
+                                }
+                                FieldConfigElement.Config.CommunicationChannel = $('#CommunicationChannel').val();
 
-                                 FieldConfigElement.Config.IsVisibleForCustomer = '0';
-                                 if ($('#IsVisibleForCustomer').prop('checked')) {
+                                FieldConfigElement.Config.IsVisibleForCustomer = '0';
+                                if ($('#IsVisibleForCustomer').prop('checked')) {
                                     FieldConfigElement.Config.IsVisibleForCustomer = '1';
-                                 }
+                                }
 
-                                 // show error if not customer visible article is set for an interface different than AgentInterface
-                                 if ($('#Interface').val() !== 'AgentInterface' && !$('#IsVisibleForCustomer').prop('checked')){
-                                     window.alert(Core.Language.Translate('Customer interface does not support articles not visible for customers.'));
-                                     return false;
-                                 }
+                                // show error if no customer visible article is set for an interface different than AgentInterface
+                                if ($('#Interface').val() !== 'AgentInterface' && !$('#IsVisibleForCustomer').prop('checked')){
+                                    window.alert(Core.Language.Translate('Customer interface does not support articles not visible for customers.'));
+                                    return false;
+                                }
 
-                                 // add the time units value to the fieldconfig
-                                 FieldConfigElement.Config.TimeUnits = $('#TimeUnits').val();
-                             }
+                                // add the time units value to the field config
+                                FieldConfigElement.Config.TimeUnits = $('#TimeUnits').val();
 
-                             $Element.closest('li').data('config', Core.JSON.Stringify(FieldConfigElement));
+                                // add the StandardTemplate IDs to the field config
+                                $('#StandardTemplateID option:selected').each(function() {
+                                    StandardTemplateIDs.push($(this).val());
+                                });
+                                FieldConfigElement.Config.StandardTemplateID = StandardTemplateIDs;
 
-                             Core.UI.Dialog.CloseDialog($('.Dialog'));
-                         }
-                     },
-                     {
-                         Label: Core.Language.Translate('Cancel'),
-                         Function: function () {
-                             Core.UI.Dialog.CloseDialog($('.Dialog'));
-                         }
-                     }
+                                FieldConfigElement.Config.StandardTemplateAutoFill = $('#StandardTemplateAutoFill').prop('checked') ? '1' : '0';
+                            }
+
+                            $Element.closest('li').data('config', Core.JSON.Stringify(FieldConfigElement));
+
+                            Core.UI.Dialog.CloseDialog($('.Dialog'));
+                        }
+                    },
+                    {
+                        Label: Core.Language.Translate('Cancel'),
+                        Function: function () {
+                            Core.UI.Dialog.CloseDialog($('.Dialog'));
+                        }
+                    }
                 ]
             );
 
@@ -1282,6 +1304,15 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                     if (FieldConfig.Config.TimeUnits) {
                         $('#TimeUnits').val(FieldConfig.Config.TimeUnits);
                     }
+
+                    if (FieldConfig.Config.StandardTemplateID) {
+                        $.each(FieldConfig.Config.StandardTemplateID, function(Index, ID) {
+                            $('#StandardTemplateID option[value=' + ID + ']').prop('selected', true).trigger('redraw.InputField');
+                        });
+                    }
+                    if (FieldConfig.Config.StandardTemplateAutoFill === '1') {
+                        $('#StandardTemplateAutoFill').prop("checked", true);
+                    }
                 }
             }
 
@@ -1307,6 +1338,13 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                 $('#TimeUnitsContainer').removeClass('Hidden');
                 $('#TimeUnitsContainer').prev('label').css('display', 'block');
                 $('#TimeUnitsContainer .Modernize').trigger('redraw.InputField');
+
+                $('#StandardTemplateContainer').removeClass('Hidden');
+                $('#StandardTemplateContainer').prev('label').css('display', 'block');
+                $('#StandardTemplateContainer .Modernize').trigger('redraw.InputField');
+
+                $('#StandardTemplateAutoFillContainer').removeClass('Hidden');
+                $('#StandardTemplateAutoFillContainer').prev('label').css('display', 'block');
             }
             else {
 
@@ -1318,10 +1356,19 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
 
                 $('#TimeUnitsContainer').addClass('Hidden');
                 $('#TimeUnitsContainer').prev('label').css('display', 'none');
+
+                $('#StandardTemplateContainer').addClass('Hidden');
+                $('#StandardTemplateContainer').prev('label').css('display', 'none');
+
+                $('#StandardTemplateAutoFillContainer').addClass('Hidden');
+                $('#StandardTemplateAutoFillContainer').prev('label').css('display', 'none');
             }
 
             return false;
         });
+
+        // Init handling of scope filter change
+        TargetNS.InitScopeFilterSelection();
 
         // Init handling of closing popup with the OS functionality ("X")
         $(window).off("beforeunload.PMPopup").on("beforeunload.PMPopup", function () {
@@ -1412,6 +1459,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             Form.submit();
         });
 
+        // Init handling of scope filter change
+        TargetNS.InitScopeFilterSelection();
+
         // Init handling of closing popup with the OS functionality ("X")
         $(window).off("beforeunload.PMPopup").on("beforeunload.PMPopup", function () {
             window.opener.Core.Agent.Admin.ProcessManagement.HandlePopupClose();
@@ -1422,7 +1472,6 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
         });
 
         Core.UI.InputFields.Init();
-
     };
 
     /**
@@ -1478,6 +1527,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
 
             Form.submit();
         });
+
+        // Init handling of scope filter change
+        TargetNS.InitScopeFilterSelection();
 
         // Init handling of closing popup with the OS functionality ("X")
         $(window).off("beforeunload.PMPopup").on("beforeunload.PMPopup", function () {
@@ -1795,6 +1847,118 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             $('#ConfigParams').append($Element);
         });
     }
+
+    /**
+     * @private
+     * @name InitScopeFilter
+     * @memberof Core.Agent.Admin.ProcessManagement
+     * @function
+     * @description
+     *     initialises all scope filters for AdminProcessManagement
+     */
+    TargetNS.InitScopeFilter = function() {
+
+        var $ScopeFilterElements = $('[data-scope-filter]'),
+            ScopeEntityID = $('#ProcessEntityID').val();
+
+        if(!ScopeEntityID) { return; }
+
+        $ScopeFilterElements.each(function(){
+            var $ProcessElementFilter = $(this).parent().find('input.ProcessElementFilter, input.FilterAvailableProcessItem'),
+                $GlobeIcon            = $(this).next('.fa-globe'),
+                $ScopeFilterCheckbox  = $(this);
+
+            // Add a keydown event to the process element filter because the "global scope" checkbox
+            // shall be automatically set if the filter is used.
+            // This is because Core.UI.Table filters over all elements of the table, not only the visible ones.
+            if ($ProcessElementFilter.length) {
+                $ProcessElementFilter.off('keydown.InitScopeFilter').on('keydown.InitScopeFilter', function() {
+                    $ScopeFilterCheckbox.prop('checked', true).trigger('change');
+                });
+            }
+
+            // Click on globe should also set/unset checkbox.
+            $GlobeIcon.off('click.InitScopeFilter').on('click.InitScopeFilter', function() {
+                $ScopeFilterCheckbox.trigger('click');
+            });
+
+            $(this).off('change.InitScopeFilter').on('change.InitScopeFilter', function () {
+                var EntityType = $(this).data('scopeFilter'),
+                    FilterType         = 'Process',
+                    ScopeEntityID      = $('#ProcessEntityID').val(),
+                    $HideScopeElements = $('[data-entity-type=' + EntityType + ']'),
+                    $ShowGlobalScopeElements,
+                    $ShowScopeElements,
+                    $ElementsToRemove     = $('li[data-scope=Process][data-scope-entity-id != ' + ScopeEntityID + ']');
+
+                // Remove elements from other processes and that are not global.
+                // This is due to Core.UI.Table filtering elements without regard to scope
+                // so the filter would show all elements (also from other processes) instead only the ones from the
+                // current process and global ones.
+                $ElementsToRemove.remove();
+
+                $ShowScopeElements = $('[data-entity-type=' + EntityType + '][data-scope=' + FilterType +'][data-scope-entity-id=' + ScopeEntityID + ']');
+
+                // change / improve this FilterType if you need more types
+                if(this.checked) {
+                    FilterType = 'Global';
+                    $ShowGlobalScopeElements = $('[data-entity-type=' + EntityType + '][data-scope=Global]');
+                }
+
+                $HideScopeElements.each(function(){
+                    $(this).hide();
+                });
+                $ShowScopeElements.each(function(){
+                    $(this).show();
+                });
+                if($ShowGlobalScopeElements){
+                    $ShowGlobalScopeElements.each(function(){
+                        $(this).show();
+                    });
+                }
+            });
+            $(this).trigger('change');
+        });
+    };
+
+    /**
+     * @private
+     * @name InitScopeFilterSelection
+     * @memberof Core.Agent.Admin.ProcessManagement
+     * @function
+     * @description
+     *     initialises all Scope Filter Selection
+     *     depending on which scope has been selected, a different selection is displayed
+     */
+    TargetNS.InitScopeFilterSelection = function() {
+
+        var $Scope = $('#Scope'),
+            Scope;
+        if(!$Scope) { return; }
+
+        Scope = $Scope.val();
+        if(Scope == 'Global') {
+            $('label[for="ScopeEntityID"]').hide().next().hide().next().hide();
+        }
+
+        $Scope.change(function() {
+
+            // the ScopeEntityID element will be shown/hidden depending on the scope
+            var $ScopeEntityID = $('#ScopeEntityID'),
+                Scope = $Scope.val();
+
+            if(!$ScopeEntityID) { return; }
+
+            // show/hide the 3 items on the ScopeEntityID Process line depending on the current scope
+            if(Scope == 'Global') {
+                // hide the 3 items on the ScopeEntityID Process line
+                $('label[for="ScopeEntityID"]').hide().next().hide().next().hide();
+            } else {
+                // show the 3 items on the ScopeEntityID Process line
+                $('label[for="ScopeEntityID"]').show().next().show().next().show();
+            }
+        });
+    };
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');
 

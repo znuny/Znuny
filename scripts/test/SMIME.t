@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -27,7 +27,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # get configuration
 my $HomeDir = $ConfigObject->Get('Home');
@@ -58,13 +58,6 @@ my $OpenSSLMajorVersion;
 # get the openssl major version, e.g. 1 for version 1.0.0
 if ( $OpenSSLVersionString =~ m{ \A (?: (?: Open|Libre)SSL )? \s* ( \d )  }xmsi ) {
     $OpenSSLMajorVersion = $1;
-}
-
-# openssl version 1.0.0 uses different hash algorithm... in the future release of openssl this might
-#change again in such case a better version detection will be needed
-my $UseNewHashes;
-if ( $OpenSSLMajorVersion >= 1 ) {
-    $UseNewHashes = 1;
 }
 
 # set config
@@ -142,6 +135,12 @@ if ( !$SMIMEObject ) {
     return 1;
 }
 
+my @CertificatesOld      = $SMIMEObject->CertificateList();
+my $CertificatesCountOld = @CertificatesOld;
+
+my $PrivateOld      = $SMIMEObject->PrivateList();
+my $PrivateCountOld = keys %{$PrivateOld};
+
 my %Search = (
     1 => 'unittest@example.org',
     2 => 'unittest2@example.org',
@@ -150,17 +149,10 @@ my %Search = (
     5 => 'unittest5@example.org',
 );
 
-# 0.9.x hashes
-my $CheckHash1 = '980a83c7';
-my $CheckHash2 = '999bcb2f';
-my $CheckHash3 = 'c3857c0d';
-
 # 1.0.0 hashes
-if ($UseNewHashes) {
-    $CheckHash1 = 'f62a2257';
-    $CheckHash2 = '35c7d865';
-    $CheckHash3 = 'a2ba8622';
-}
+my $CheckHash1 = 'f62a2257';
+my $CheckHash2 = '35c7d865';
+my $CheckHash3 = 'a2ba8622';
 
 my %Check = (
     1 => {
@@ -403,11 +395,11 @@ for my $Count ( 1 .. 3 ) {
         "#$Count PrivateAdd()",
     );
 
-    my @Keys = $SMIMEObject->PrivateSearch( Search => $Search{$Count} );
+    my @Keys = $SMIMEObject->PrivateFileSearch( Search => $Search{$Count} );
 
     $Self->True(
         $Keys[0] || '',
-        "#$Count PrivateSearch()",
+        "#$Count PrivateFileSearch()",
     );
 
     my $CertificateString = $SMIMEObject->CertificateGet(
@@ -660,71 +652,63 @@ my $GetCertificateDataFromFiles = sub {
     return ( ${$CertStringRef}, ${$PrivateStringRef}, ${$PrivateSecretRef} );
 };
 
-# OpenSSL 0.9.x correct hashes
-my $OTRSRootCAHash   = '1a01713f';
-my $OTRSRDCAHash     = '7807c24e';
-my $OTRSLabCAHash    = '2fc24258';
-my $OTRSUserCertHash = 'eab039b6';
-
 # OpenSSL 1.0.0 correct hashes
-if ($UseNewHashes) {
-    $OTRSRootCAHash   = '7835cf94';
-    $OTRSRDCAHash     = 'b5d19fb9';
-    $OTRSLabCAHash    = '19545811';
-    $OTRSUserCertHash = '4d400195';
-}
+my $ZnunyRootCAHash  = 'dfde6898';
+my $ZnunySub1CAHash  = '5fcf9bdc';
+my $ZnunySub2CAHash  = '37de711c';
+my $OTRSUserCertHash = '097aa832';
 
 # create certificates table
 my %Certificates;
 
 # get data from files
 my ( $CertificateString, $PrivateString, $PrivateSecret ) = $GetCertificateDataFromFiles->(
-    "SMIMECACertificate-OTRSLab.crt",
-    "SMIMECAPrivateKey-OTRSLab.pem",
-    "SMIMECAPrivateKeyPass-OTRSLab.crt",
+    "SMIMECACertificate-Znuny-Sub1.crt",
+    "SMIMECAPrivateKey-Znuny-Sub1.pem",
+    "SMIMECAPrivateKeyPass-Znuny-Sub1.crt",
 );
 
 # fill certificates table
-$Certificates{OTRSLabCA} = {
-    Hash          => $OTRSLabCAHash,
-    Fingerprint   => '28:10:65:6D:C7:FD:1B:37:BE:B5:73:44:9F:D9:C8:95:57:34:B0:A1',
+$Certificates{ZnunySub1CA} = {
+    Hash          => $ZnunySub1CAHash,
+    Fingerprint   => '56:6C:2D:6B:4F:DA:F7:6C:73:16:C0:CF:D5:12:17:CB:61:22:83:DF',
     String        => $CertificateString,
     PrivateSecret => $PrivateSecret,
-    PrivateHash   => $OTRSLabCAHash,
+    PrivateHash   => $ZnunySub1CAHash,
     PrivateString => $PrivateString,
 };
 
 # get data from files
 ( $CertificateString, $PrivateString, $PrivateSecret ) = $GetCertificateDataFromFiles->(
-    "SMIMECACertificate-OTRSRD.crt",
-    "SMIMECAPrivateKey-OTRSRD.pem",
-    "SMIMECAPrivateKeyPass-OTRSRD.crt",
+    "SMIMECACertificate-Znuny-Sub2.crt",
+    "SMIMECAPrivateKey-Znuny-Sub2.pem",
+    "SMIMECAPrivateKeyPass-Znuny-Sub2.crt",
 );
 
 # fill certificates table
-$Certificates{OTRSRDCA} = {
-    Hash          => $OTRSRDCAHash,
-    Fingerprint   => '3F:F1:41:8A:CF:39:30:53:DB:27:B0:08:3A:58:54:ED:31:D2:8A:FC',
+$Certificates{ZnunySub2CA} = {
+    Hash          => $ZnunySub2CAHash,
+    Fingerprint   => '09:96:79:95:C5:8F:9E:E9:DA:FB:76:7B:E1:F0:FA:89:68:71:AE:E3',
     String        => $CertificateString,
     PrivateSecret => $PrivateSecret,
-    PrivateHash   => $OTRSRDCAHash,
+    PrivateHash   => $ZnunySub2CAHash,
     PrivateString => $PrivateString,
 };
 
 # get data from files
 ( $CertificateString, $PrivateString, $PrivateSecret ) = $GetCertificateDataFromFiles->(
-    "SMIMECACertificate-OTRSRoot.crt",
-    "SMIMECAPrivateKey-OTRSRoot.pem",
-    "SMIMECAPrivateKeyPass-OTRSRoot.crt",
+    "SMIMECACertificate-Znuny-Root.crt",
+    "SMIMECAPrivateKey-Znuny-Root.pem",
+    "SMIMECAPrivateKeyPass-Znuny-Root.crt",
 );
 
 # fill certificates table
-$Certificates{OTRSRootCA} = {
-    Hash          => $OTRSRootCAHash,
-    Fingerprint   => 'BB:F7:B5:5B:52:AE:2D:4F:5A:B5:BD:E5:56:C5:D0:D9:38:3F:76:18',
+$Certificates{ZnunyRootCA} = {
+    Hash          => $ZnunyRootCAHash,
+    Fingerprint   => '52:1D:E1:0A:78:AC:FB:AE:2C:E9:64:13:5C:8B:73:22:48:70:88:24',
     String        => $CertificateString,
     PrivateSecret => $PrivateSecret,
-    PrivateHash   => $OTRSRootCAHash,
+    PrivateHash   => $ZnunyRootCAHash,
     PrivateString => $PrivateString,
 };
 
@@ -742,7 +726,7 @@ $Certificates{OTRSRootCA} = {
     my %SMIMEUser1Certificate;
     %SMIMEUser1Certificate = (
         Hash          => $OTRSUserCertHash,
-        Fingerprint   => 'F1:1F:83:42:14:DB:0F:FD:2E:F7:C5:84:36:8B:07:72:48:2C:C9:C0',
+        Fingerprint   => 'DF:8F:CA:42:A7:42:46:70:EF:69:36:CE:FF:C4:34:18:D8:45:7F:E9',
         String        => $CertificateString,
         PrivateSecret => $PrivateSecret,
         PrivateHash   => $OTRSUserCertHash,
@@ -755,12 +739,24 @@ $Certificates{OTRSRootCA} = {
 
     $SMIMEUser1Certificate{Filename} = $Result{Filename};
 
+    my @SMIMEUser1Cert = $SMIMEObject->CertificateSearch(
+        Search     => $Result{Filename},
+        SearchType => 'filename',
+    );
+    my %SMIMEUser1CertAttribute = %{ $SMIMEUser1Cert[0] };
+
     %Result = $SMIMEObject->PrivateAdd(
         Private => $SMIMEUser1Certificate{PrivateString},
         Secret  => $SMIMEUser1Certificate{PrivateSecret},
     );
 
     $SMIMEUser1Certificate{PrivateFilename} = $Result{Filename};
+
+    my @SMIMEUser1Priv = $SMIMEObject->PrivateSearch(
+        Search     => $Result{Filename},
+        SearchType => 'filename',
+    );
+    my %SMIMEUser1PrivAttribute = %{ $SMIMEUser1Priv[0] };
 
     # sign a message with smimeuser1
     my $Message =
@@ -783,8 +779,8 @@ $Certificates{OTRSRootCA} = {
         'Sign(), failed certificate chain verification, needed CA certificates not embedded',
     );
 
-    # add CA certificates to the local cert storage (OTRSLabCA and OTRSRDCA)
-    for my $Cert (qw( OTRSLabCA OTRSRDCA )) {
+    # add CA certificates to the local cert storage (ZnunySub2CA)
+    for my $Cert (qw( ZnunySub2CA )) {
         $SMIMEObject->CertificateAdd(
             Certificate => $Certificates{$Cert}->{String},
         );
@@ -810,13 +806,17 @@ $Certificates{OTRSRootCA} = {
 
     # add the root CA cert to the trusted certificates path
     $SMIMEObject->CertificateAdd(
-        Certificate => $Certificates{OTRSRootCA}->{String},
+        Certificate => $Certificates{ZnunyRootCA}->{String},
+    );
+
+    $SMIMEObject->CertificateAdd(
+        Certificate => $Certificates{ZnunySub1CA}->{String},
     );
 
     # verify now must works
     %Data = $SMIMEObject->Verify(
         Message => $Sign,
-        CACert  => "$CertPath/$OTRSRootCAHash.0",
+        CACert  => "$CertPath/$ZnunyRootCAHash.0",
     );
 
     # it must work
@@ -830,9 +830,9 @@ $Certificates{OTRSRootCA} = {
 
     # add relation
     my $Success = $SMIMEObject->SignerCertRelationAdd(
-        CertFingerprint => 'XX:XX:XX:XX:XX:XX:XX:XX:XX:XX',
-        CAFingerprint   => 'XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:',
-        UserID          => 1,
+        CAID          => 1,    # Interal and External certificate has the same ID.
+        CertificateID => 1,
+        UserID        => 1,
     );
     $Self->False(
         $Success,
@@ -857,22 +857,37 @@ $Certificates{OTRSRootCA} = {
         'SignerCertRelationGet(), fail, wrong ID',
     );
 
+    my @TestRelationCertificatesList = $SMIMEObject->CertificateSearch(
+        SearchType => 'fingerprint',
+        Search     => $Certificates{ZnunySub2CA}->{Fingerprint},
+    );
+
+    my %TestRelationCertificate = %{ $TestRelationCertificatesList[0] };
+
     # true cert
     # add relation
     $Success = $SMIMEObject->SignerCertRelationAdd(
-        CertFingerprint => $SMIMEUser1Certificate{Fingerprint},
-        CAFingerprint   => $Certificates{OTRSRDCA}->{Fingerprint},
-        UserID          => 1,
+        CertificateID => $SMIMEUser1PrivAttribute{CertificateID},
+        CAID          => $TestRelationCertificate{CertificateID},
+        UserID        => 1,
     );
+
     $Self->True(
         $Success,
         'SignerCertRelationAdd(), add relation for certificate',
     );
 
+    @TestRelationCertificatesList = $SMIMEObject->CertificateSearch(
+        SearchType => 'fingerprint',
+        Search     => $Certificates{ZnunySub1CA}->{Fingerprint},
+    );
+
+    %TestRelationCertificate = %{ $TestRelationCertificatesList[0] };
+
     $Success = $SMIMEObject->SignerCertRelationAdd(
-        CertFingerprint => $SMIMEUser1Certificate{Fingerprint},
-        CAFingerprint   => $Certificates{OTRSLabCA}->{Fingerprint},
-        UserID          => 1,
+        CertificateID => $SMIMEUser1PrivAttribute{CertificateID},
+        CAID          => $TestRelationCertificate{CertificateID},
+        UserID        => 1,
     );
     $Self->True(
         $Success,
@@ -888,7 +903,7 @@ $Certificates{OTRSRootCA} = {
     # verify now must works
     %Data = $SMIMEObject->Verify(
         Message => $Sign,
-        CACert  => "$CertPath/$OTRSRootCAHash.0",
+        CACert  => "$CertPath/$ZnunyRootCAHash.0",
     );
 
     # it must works
@@ -1131,13 +1146,8 @@ BpHuCHy9nGFvhO7+foE1HG3lETI+IZNq8A==
 -----END CERTIFICATE-----',
     };
 
-    # 0.9.x hash
-    my $CommonHash = 'b93941b5';
-
     # 1.0.0 hash
-    if ($UseNewHashes) {
-        $CommonHash = '9d993e95';
-    }
+    my $CommonHash = '9d993e95';
 
     TEST:
     for my $Number ( 0 .. 4 ) {
@@ -1360,7 +1370,8 @@ HZ4=
 ',
     };
 
-    my $OriginalPrivateListCount = $SMIMEObject->PrivateList();
+    my $OriginalPrivateList      = $SMIMEObject->PrivateList();
+    my $OriginalPrivateListCount = keys %{$OriginalPrivateList};
 
     # test privates
     TEST:
@@ -1411,10 +1422,10 @@ HZ4=
                 "Searched parameter otrs-smime\@test.com returned correct number of keys",
             );
 
-            my @PrivateList = $SMIMEObject->PrivateList();
-            $ResultNumber = scalar @PrivateList;
+            my $PrivateList = $SMIMEObject->PrivateList();
+            $ResultNumber = keys %{$PrivateList};
             $Self->Is(
-                $ResultNumber,
+                $ResultNumber - $PrivateCountOld,
                 5,
                 "Private list must be return also $ResultNumber",
             );
@@ -1432,8 +1443,8 @@ HZ4=
 
         # is linked to the correct certificate? - ADD TEST
 
-        @Result       = $SMIMEObject->PrivateList();
-        $ResultNumber = scalar @Result;
+        my $Result = $SMIMEObject->PrivateList();
+        $ResultNumber = keys %{$Result};
         $Self->Is(
             $ResultNumber,
             $Counter + $OriginalPrivateListCount,
@@ -1477,11 +1488,12 @@ HZ4=
         );
 
         my @Result = $SMIMEObject->CertificateSearch(
-            Search => $CertInfo{ 'SmimeTest_' . $Number }->{Fingerprint}
+            SearchType => 'fingerprint',
+            Search     => $CertInfo{ 'SmimeTest_' . $Number }->{Fingerprint}
         );
         $Self->False(
             ( scalar @Result ),
-            "# CertificateSearch(), certificate not found, successfully deleted",
+            "# CertificateFileSearch(), certificate not found, successfully deleted",
         );
     }
 
@@ -2102,135 +2114,135 @@ HZ4=
 
         # set wrong hashes
         my %WrongHashes = (
-            OTRSRootCA => 'aaaaaaaa',
-            OTRSRDCA   => 'bbbbbbbb',
-            OTRSLabCA  => 'cccccccc',
+            ZnunyRootCA => 'aaaaaaaa',
+            ZnunySub2CA => 'bbbbbbbb',
+            ZnunySub1CA => 'cccccccc',
         );
 
         my @Tests = (
             {
                 Name     => '3 Certs, PKs and PSs',
                 WrongCAs => {
-                    OTRSRootCA => {
-                        WrongCAFile                  => "$WrongHashes{OTRSRootCA}.0",
-                        WrongCAFileContent           => $Certificates{OTRSRootCA}->{String},
-                        WrongCAPrivateKeyFileContent => $Certificates{OTRSRootCA}->{PrivateString},
+                    ZnunyRootCA => {
+                        WrongCAFile                  => "$WrongHashes{ZnunyRootCA}.0",
+                        WrongCAFileContent           => $Certificates{ZnunyRootCA}->{String},
+                        WrongCAPrivateKeyFileContent => $Certificates{ZnunyRootCA}->{PrivateString},
                         WrongCAPrivateSecretFileContent =>
-                            $Certificates{OTRSRootCA}->{PrivateSecret},
+                            $Certificates{ZnunyRootCA}->{PrivateSecret},
                         WrongRelations => [
                             {
-                                CertHash        => $WrongHashes{OTRSRootCA},
-                                CertFingerprint => $Certificates{OTRSRootCA}->{Fingerprint},
-                                CAHash          => $WrongHashes{OTRSRDCA},
-                                CAFingerprint   => $Certificates{OTRSRDCA}->{Fingerprint},
+                                CertHash        => $WrongHashes{ZnunyRootCA},
+                                CertFingerprint => $Certificates{ZnunyRootCA}->{Fingerprint},
+                                CAHash          => $WrongHashes{ZnunySub2CA},
+                                CAFingerprint   => $Certificates{ZnunySub2CA}->{Fingerprint},
 
                             },
                             {
-                                CertHash        => $WrongHashes{OTRSRootCA},
-                                CertFingerprint => $Certificates{OTRSRootCA}->{Fingerprint},
-                                CAHash          => $WrongHashes{OTRSLabCA},
-                                CAFingerprint   => $Certificates{OTRSLabCA}->{Fingerprint},
+                                CertHash        => $WrongHashes{ZnunyRootCA},
+                                CertFingerprint => $Certificates{ZnunyRootCA}->{Fingerprint},
+                                CAHash          => $WrongHashes{ZnunySub1CA},
+                                CAFingerprint   => $Certificates{ZnunySub1CA}->{Fingerprint},
 
                             },
                         ],
                     },
-                    OTRSRDCA => {
-                        WrongCAFile                     => "$WrongHashes{OTRSRDCA}.0",
-                        WrongCAFileContent              => $Certificates{OTRSRDCA}->{String},
-                        WrongCAPrivateKeyFileContent    => $Certificates{OTRSRDCA}->{PrivateString},
-                        WrongCAPrivateSecretFileContent => $Certificates{OTRSRDCA}->{PrivateSecret},
+                    ZnunySub2CA => {
+                        WrongCAFile                     => "$WrongHashes{ZnunySub2CA}.0",
+                        WrongCAFileContent              => $Certificates{ZnunySub2CA}->{String},
+                        WrongCAPrivateKeyFileContent    => $Certificates{ZnunySub2CA}->{PrivateString},
+                        WrongCAPrivateSecretFileContent => $Certificates{ZnunySub2CA}->{PrivateSecret},
                         WrongRelations                  => [
                             {
-                                CertHash        => $WrongHashes{OTRSRDCA},
-                                CertFingerprint => $Certificates{OTRSRDCA}->{Fingerprint},
-                                CAHash          => $WrongHashes{OTRSRootCA},
-                                CAFingerprint   => $Certificates{OTRSRootCA}->{Fingerprint},
+                                CertHash        => $WrongHashes{ZnunySub2CA},
+                                CertFingerprint => $Certificates{ZnunySub2CA}->{Fingerprint},
+                                CAHash          => $WrongHashes{ZnunyRootCA},
+                                CAFingerprint   => $Certificates{ZnunyRootCA}->{Fingerprint},
 
                             },
                             {
-                                CertHash        => $WrongHashes{OTRSRDCA},
-                                CertFingerprint => $Certificates{OTRSRDCA}->{Fingerprint},
-                                CAHash          => $WrongHashes{OTRSLabCA},
-                                CAFingerprint   => $Certificates{OTRSLabCA}->{Fingerprint},
+                                CertHash        => $WrongHashes{ZnunySub2CA},
+                                CertFingerprint => $Certificates{ZnunySub2CA}->{Fingerprint},
+                                CAHash          => $WrongHashes{ZnunySub1CA},
+                                CAFingerprint   => $Certificates{ZnunySub1CA}->{Fingerprint},
 
                             },
                         ],
                     },
-                    OTRSLabCA => {
-                        WrongCAFile                  => "$WrongHashes{OTRSLabCA}.0",
-                        WrongCAFileContent           => $Certificates{OTRSLabCA}->{String},
-                        WrongCAPrivateKeyFileContent => $Certificates{OTRSLabCA}->{PrivateString},
+                    ZnunySub1CA => {
+                        WrongCAFile                  => "$WrongHashes{ZnunySub1CA}.0",
+                        WrongCAFileContent           => $Certificates{ZnunySub1CA}->{String},
+                        WrongCAPrivateKeyFileContent => $Certificates{ZnunySub1CA}->{PrivateString},
                         WrongCAPrivateSecretFileContent =>
-                            $Certificates{OTRSRootCA}->{PrivateSecret},
+                            $Certificates{ZnunyRootCA}->{PrivateSecret},
                         WrongRelations => [
                             {
-                                CertHash        => $WrongHashes{OTRSLabCA},
-                                CertFingerprint => $Certificates{OTRSLabCA}->{Fingerprint},
-                                CAHash          => $WrongHashes{OTRSRootCA},
-                                CAFingerprint   => $Certificates{OTRSRootCA}->{Fingerprint},
+                                CertHash        => $WrongHashes{ZnunySub1CA},
+                                CertFingerprint => $Certificates{ZnunySub1CA}->{Fingerprint},
+                                CAHash          => $WrongHashes{ZnunyRootCA},
+                                CAFingerprint   => $Certificates{ZnunyRootCA}->{Fingerprint},
 
                             },
                             {
-                                CertHash        => $WrongHashes{OTRSLabCA},
-                                CertFingerprint => $Certificates{OTRSLabCA}->{Fingerprint},
-                                CAHash          => $WrongHashes{OTRSRDCA},
-                                CAFingerprint   => $Certificates{OTRSRDCA}->{Fingerprint},
+                                CertHash        => $WrongHashes{ZnunySub1CA},
+                                CertFingerprint => $Certificates{ZnunySub1CA}->{Fingerprint},
+                                CAHash          => $WrongHashes{ZnunySub2CA},
+                                CAFingerprint   => $Certificates{ZnunySub2CA}->{Fingerprint},
 
                             },
                         ],
                     },
                 },
                 CorrectCAs => {
-                    OTRSRootCA => {
+                    ZnunyRootCA => {
                         CorrectRelations => [
                             {
-                                CertHash        => $Certificates{OTRSRootCA}->{Hash},
-                                CertFingerprint => $Certificates{OTRSRootCA}->{Fingerprint},
-                                CAHash          => $Certificates{OTRSRDCA}->{Hash},
-                                CAFingerprint   => $Certificates{OTRSRDCA}->{Fingerprint},
+                                CertHash        => $Certificates{ZnunyRootCA}->{Hash},
+                                CertFingerprint => $Certificates{ZnunyRootCA}->{Fingerprint},
+                                CAHash          => $Certificates{ZnunySub2CA}->{Hash},
+                                CAFingerprint   => $Certificates{ZnunySub2CA}->{Fingerprint},
 
                             },
                             {
-                                CertHash        => $Certificates{OTRSRootCA}->{Hash},
-                                CertFingerprint => $Certificates{OTRSRootCA}->{Fingerprint},
-                                CAHash          => $Certificates{OTRSLabCA}->{Hash},
-                                CAFingerprint   => $Certificates{OTRSLabCA}->{Fingerprint},
+                                CertHash        => $Certificates{ZnunyRootCA}->{Hash},
+                                CertFingerprint => $Certificates{ZnunyRootCA}->{Fingerprint},
+                                CAHash          => $Certificates{ZnunySub1CA}->{Hash},
+                                CAFingerprint   => $Certificates{ZnunySub1CA}->{Fingerprint},
 
                             },
                         ],
                     },
-                    OTRSRDCA => {
+                    ZnunySub2CA => {
                         CorrectRelations => [
                             {
-                                CertHash        => $Certificates{OTRSRDCA}->{Hash},
-                                CertFingerprint => $Certificates{OTRSRDCA}->{Fingerprint},
-                                CAHash          => $Certificates{OTRSRootCA}->{Hash},
-                                CAFingerprint   => $Certificates{OTRSRootCA}->{Fingerprint},
+                                CertHash        => $Certificates{ZnunySub2CA}->{Hash},
+                                CertFingerprint => $Certificates{ZnunySub2CA}->{Fingerprint},
+                                CAHash          => $Certificates{ZnunyRootCA}->{Hash},
+                                CAFingerprint   => $Certificates{ZnunyRootCA}->{Fingerprint},
 
                             },
                             {
-                                CertHash        => $Certificates{OTRSRDCA}->{Hash},
-                                CertFingerprint => $Certificates{OTRSRDCA}->{Fingerprint},
-                                CAHash          => $Certificates{OTRSLabCA}->{Hash},
-                                CAFingerprint   => $Certificates{OTRSLabCA}->{Fingerprint},
+                                CertHash        => $Certificates{ZnunySub2CA}->{Hash},
+                                CertFingerprint => $Certificates{ZnunySub2CA}->{Fingerprint},
+                                CAHash          => $Certificates{ZnunySub1CA}->{Hash},
+                                CAFingerprint   => $Certificates{ZnunySub1CA}->{Fingerprint},
 
                             },
                         ],
                     },
-                    OTRSLabCA => {
+                    ZnunySub1CA => {
                         CorrectRelations => [
                             {
-                                CertHash        => $Certificates{OTRSLabCA}->{Hash},
-                                CertFingerprint => $Certificates{OTRSLabCA}->{Fingerprint},
-                                CAHash          => $Certificates{OTRSRootCA}->{Hash},
-                                CAFingerprint   => $Certificates{OTRSRootCA}->{Fingerprint},
+                                CertHash        => $Certificates{ZnunySub1CA}->{Hash},
+                                CertFingerprint => $Certificates{ZnunySub1CA}->{Fingerprint},
+                                CAHash          => $Certificates{ZnunyRootCA}->{Hash},
+                                CAFingerprint   => $Certificates{ZnunyRootCA}->{Fingerprint},
 
                             },
                             {
-                                CertHash        => $Certificates{OTRSLabCA}->{Hash},
-                                CertFingerprint => $Certificates{OTRSLabCA}->{Fingerprint},
-                                CAHash          => $Certificates{OTRSRDCA}->{Hash},
-                                CAFingerprint   => $Certificates{OTRSRDCA}->{Fingerprint},
+                                CertHash        => $Certificates{ZnunySub1CA}->{Hash},
+                                CertFingerprint => $Certificates{ZnunySub1CA}->{Fingerprint},
+                                CAHash          => $Certificates{ZnunySub2CA}->{Hash},
+                                CAFingerprint   => $Certificates{ZnunySub2CA}->{Fingerprint},
                             },
                         ],
                     },
@@ -2243,12 +2255,12 @@ HZ4=
             {
                 Name     => '1 Cert, No PKs No PSs',
                 WrongCAs => {
-                    OTRSRootCA => {
-                        WrongCAFile                  => "$WrongHashes{OTRSRootCA}.0",
-                        WrongCAFileContent           => $Certificates{OTRSRootCA}->{String},
-                        WrongCAPrivateKeyFileContent => $Certificates{OTRSRootCA}->{PrivateString},
+                    ZnunyRootCA => {
+                        WrongCAFile                  => "$WrongHashes{ZnunyRootCA}.0",
+                        WrongCAFileContent           => $Certificates{ZnunyRootCA}->{String},
+                        WrongCAPrivateKeyFileContent => $Certificates{ZnunyRootCA}->{PrivateString},
                         WrongCAPrivateSecretFileContent =>
-                            $Certificates{OTRSRootCA}->{PrivateSecret},
+                            $Certificates{ZnunyRootCA}->{PrivateSecret},
                     },
                 },
                 UsePrivateKeys    => 0,
@@ -2259,12 +2271,12 @@ HZ4=
             {
                 Name     => '1 Cert, 1 PKs No PSs',
                 WrongCAs => {
-                    OTRSRootCA => {
-                        WrongCAFile                  => "$WrongHashes{OTRSRootCA}.0",
-                        WrongCAFileContent           => $Certificates{OTRSRootCA}->{String},
-                        WrongCAPrivateKeyFileContent => $Certificates{OTRSRootCA}->{PrivateString},
+                    ZnunyRootCA => {
+                        WrongCAFile                  => "$WrongHashes{ZnunyRootCA}.0",
+                        WrongCAFileContent           => $Certificates{ZnunyRootCA}->{String},
+                        WrongCAPrivateKeyFileContent => $Certificates{ZnunyRootCA}->{PrivateString},
                         WrongCAPrivateSecretFileContent =>
-                            $Certificates{OTRSRootCA}->{PrivateSecret},
+                            $Certificates{ZnunyRootCA}->{PrivateSecret},
                     },
                 },
                 UsePrivateKeys    => 1,
@@ -2275,12 +2287,12 @@ HZ4=
             {
                 Name     => '1 Cert, No PKs 1 PSs',
                 WrongCAs => {
-                    OTRSRootCA => {
-                        WrongCAFile                  => "$WrongHashes{OTRSRootCA}.0",
-                        WrongCAFileContent           => $Certificates{OTRSRootCA}->{String},
-                        WrongCAPrivateKeyFileContent => $Certificates{OTRSRootCA}->{PrivateString},
+                    ZnunyRootCA => {
+                        WrongCAFile                  => "$WrongHashes{ZnunyRootCA}.0",
+                        WrongCAFileContent           => $Certificates{ZnunyRootCA}->{String},
+                        WrongCAPrivateKeyFileContent => $Certificates{ZnunyRootCA}->{PrivateString},
                         WrongCAPrivateSecretFileContent =>
-                            $Certificates{OTRSRootCA}->{PrivateSecret},
+                            $Certificates{ZnunyRootCA}->{PrivateSecret},
                     },
                 },
                 UsePrivateKeys    => 0,
@@ -2296,9 +2308,15 @@ HZ4=
             # define Wrong CA certificates, private keys and secrets
             my %WrongCAs = %{ $Test->{WrongCAs} };
 
+            # CAs have to be in a certain order for this test.
+            my @WrongCAs;
+            for my $CA (qw(ZnunySub1CA ZnunySub2CA ZnunyRootCA)) {
+                push @WrongCAs, $CA if $Test->{WrongCAs}->{$CA};
+            }
+
             # set the correct CA data
             my %CorrectCAs;
-            for my $CAName ( sort keys %WrongCAs ) {
+            for my $CAName (@WrongCAs) {
 
                 my $Index;
 
@@ -2323,7 +2341,7 @@ HZ4=
             }
 
             #create new CA file set with wrong names
-            for my $CAName ( sort keys %WrongCAs ) {
+            for my $CAName (@WrongCAs) {
                 $CreateWrongCAFiles->(
                     $CAName,
                     $WrongCAs{$CAName}->{WrongCAFile},
@@ -2343,7 +2361,7 @@ HZ4=
 
                 # create certificates relations manually
                 CERTIFICATE:
-                for my $CertName ( sort keys %WrongCAs ) {
+                for my $CertName (@WrongCAs) {
 
                     my $CertificateHash;
                     my $CertificateFingerprint;
@@ -2351,7 +2369,7 @@ HZ4=
                     my $CAFingerprint;
 
                     CA:
-                    for my $CAName ( sort keys %WrongCAs ) {
+                    for my $CAName (@WrongCAs) {
                         next CA if $CAName eq $CertName;
 
                         # set relation data
@@ -2417,7 +2435,7 @@ HZ4=
             }
 
             # check certificates with correct names
-            for my $CAName ( sort keys %WrongCAs ) {
+            for my $CAName (@WrongCAs) {
                 $CheckCorrectCAFiles->(
                     $CAName,
                     $WrongCAs{$CAName}->{WrongCAFile},
@@ -2557,7 +2575,7 @@ HZ4=
 {
 
     # add certificates
-    for my $CA (qw( OTRSRootCA OTRSLabCA )) {
+    for my $CA (qw( ZnunyRootCA ZnunySub1CA )) {
         my %Result = $SMIMEObject->CertificateAdd(
             Certificate => $Certificates{$CA}->{String},
         );
@@ -2579,7 +2597,7 @@ HZ4=
         {
             Name   => 'Wrong Filename',
             Params => {
-                Filename => "$Certificates{OTRSRDCA}->{Hash}.0",
+                Filename => "$Certificates{ZnunySub2CA}->{Hash}.0",
             },
             Success => 0,
         },
@@ -2587,14 +2605,14 @@ HZ4=
             Name   => 'Missing Hash',
             Params => {
                 Hash        => '',
-                Fingerprint => $Certificates{OTRSRootCA}->{Fingerprint},
+                Fingerprint => $Certificates{ZnunyRootCA}->{Fingerprint},
             },
             Success => 0,
         },
         {
             Name   => 'Missing Fingerprint',
             Params => {
-                Hash        => $Certificates{OTRSRootCA}->{Hash},
+                Hash        => $Certificates{ZnunyRootCA}->{Hash},
                 Fingerprint => '',
             },
             Success => 0,
@@ -2602,31 +2620,31 @@ HZ4=
         {
             Name   => 'Wrong Hash',
             Params => {
-                Hash        => $Certificates{OTRSLabCA}->{Hash},
-                Fingerprint => $Certificates{OTRSRootCA}->{Fingerprint},
+                Hash        => $Certificates{ZnunySub1CA}->{Hash},
+                Fingerprint => $Certificates{ZnunyRootCA}->{Fingerprint},
             },
             Success => 0,
         },
         {
             Name   => 'Wrong Fingerprint',
             Params => {
-                Hash        => $Certificates{OTRSRootCA}->{Hash},
-                Fingerprint => $Certificates{OTRSLabCA}->{Fingerprint},
+                Hash        => $Certificates{ZnunyRootCA}->{Hash},
+                Fingerprint => $Certificates{ZnunySub1CA}->{Fingerprint},
             },
             Success => 0,
         },
         {
             Name   => 'Correct Filename',
             Params => {
-                Filename => "$Certificates{OTRSRootCA}->{Hash}.0",
+                Filename => "$Certificates{ZnunyRootCA}->{Hash}.0",
             },
             Success => 1,
         },
         {
             Name   => 'Correct Hash, Fingerprint',
             Params => {
-                Hash        => $Certificates{OTRSRootCA}->{Hash},
-                Fingerprint => $Certificates{OTRSRootCA}->{Fingerprint},
+                Hash        => $Certificates{ZnunyRootCA}->{Hash},
+                Fingerprint => $Certificates{ZnunyRootCA}->{Fingerprint},
             },
             Success => 1,
         },
@@ -2672,11 +2690,11 @@ HZ4=
 
     # compare both methods
     my $CertificateText1 = $SMIMEObject->CertificateRead(
-        Filename => "$Certificates{OTRSRootCA}->{Hash}.0",
+        Filename => "$Certificates{ZnunyRootCA}->{Hash}.0",
     );
     my $CertificateText2 = $SMIMEObject->CertificateRead(
-        Hash        => $Certificates{OTRSRootCA}->{Hash},
-        Fingerprint => $Certificates{OTRSRootCA}->{Fingerprint},
+        Hash        => $Certificates{ZnunyRootCA}->{Hash},
+        Fingerprint => $Certificates{ZnunyRootCA}->{Fingerprint},
     );
 
     $Self->Is(
@@ -2686,7 +2704,7 @@ HZ4=
     );
 
     # clean system, remove certificates
-    for my $CA (qw( OTRSRootCA OTRSLabCA )) {
+    for my $CA (qw( ZnunyRootCA ZnunySub1CA )) {
         my %Result = $SMIMEObject->CertificateRemove(
             Hash        => $Certificates{$CA}->{Hash},
             Fingerprint => $Certificates{$CA}->{Fingerprint},
@@ -2914,11 +2932,11 @@ for my $Count ( 1 .. 3 ) {
         "#$Count Certificated Attributes Cached before and after private must be different",
     );
 
-    my @Keys = $SMIMEObject->PrivateSearch( Search => $Search{$Count} );
+    my @Keys = $SMIMEObject->PrivateFileSearch( Search => $Search{$Count} );
 
     $Self->True(
         $Keys[0] || '',
-        "#$Count PrivateSearch()",
+        "#$Count PrivateFileSearch()",
     );
 }
 

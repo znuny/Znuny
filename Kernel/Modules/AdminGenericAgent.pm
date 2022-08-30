@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -112,7 +112,7 @@ sub Run {
             NewParamValue1 NewParamValue2 NewParamValue3 NewParamValue4
             NewParamKey5 NewParamKey6 NewParamKey7 NewParamKey8
             NewParamValue5 NewParamValue6 NewParamValue7 NewParamValue8
-            NewLockID NewDelete NewCMD NewSendNoNotification NewArchiveFlag
+            NewLockID NewDelete NewSendNoNotification NewArchiveFlag
             ScheduleLastRun Valid
             )
             )
@@ -899,7 +899,6 @@ sub _MaskUpdate {
         Class      => 'Modernize',
     );
 
-    $JobData{AllowCustomScriptExecution} = $ConfigObject->Get('Ticket::GenericAgentAllowCustomScriptExecution') || 0;
     $JobData{AllowCustomModuleExecution} = $ConfigObject->Get('Ticket::GenericAgentAllowCustomModuleExecution') || 0;
 
     $LayoutObject->Block(

@@ -1,4 +1,103 @@
-# 6.3.1 2021-??-??
+# 6.4.3 2022-??-??
+ - 2022-08-24 Enabled pending time selection for process ticket dialogs depending on selected ticket state. Thanks to Tim Püttmanns, maxence. [PR#271](https://github.com/znuny/Znuny/pull/271)
+ - 2022-08-22 Fixed evaluation of parameter TicketID in Kernel::Output::HTML::Article::Base::ArticleActions. Thanks to @LotharZok, maxence. [PR#278](https://github.com/znuny/Znuny/pull/278)
+ - 2022-08-22 Added check to prevent infinite loop to Core.UI.InputFields.js.
+ - 2022-08-17 Added OAuth2 token support to HTTP::REST generic interface requester.
+ - 2022-08-10 Fixed accounted time field missing in AgentTicketBulk action.
+ - 2022-08-02 Changed user of mention notification in the ticket history to the one triggering the notification. Thanks to Tim Püttmanns, maxence. [PR#273](https://github.com/znuny/Znuny/pull/273)
+
+# 6.4.2 2022-07-28
+ - 2022-07-28 Fixed check for recipients in mention notifications. [#270)(https://github.com/znuny/Znuny/issues/270)
+ - 2022-07-28 Added missing module registration to customer interface.
+ - 2022-07-28 Fixed content type of output of AJAX backend modules Kernel/Modules/AJAXRichTextAutocompletion.pm and Kernel/Modules/Mentions.pm.
+ - 2022-07-28 Package Znuny-SMIME will now be uninstalled on Znuny upgrade.
+
+# 6.4.1 2022-07-27
+ - 2022-07-21 Fixed creation of tickets for recurring appointments.
+ - 2022-07-20 Other users now can be referenced/mentioned in rich text editor and will be notified about it.
+ - 2022-07-05 Attachment filenames in ticket zoom will now be truncated if they are too long to be displayed correctly.
+ - 2022-06-29 Added support for nested group search to LDAP modules based on [PR#11](https://github.com/znuny/Znuny/pull/11). Thanks to Frank Wall (@fraenki).
+ - 2022-06-23 Fixed issue with high CPU load on parsing e-mails in PostMaster filter DetectAttachment.
+ - 2022-06-22 Fixed OAuth2 authentication when using POP3 with Microsoft Office 365 or Outlook. [#259](https://github.com/znuny/Znuny/issues/259)
+ - 2022-06-21 Added support for tag OTRS_TicketArticleCreateEvent and attachments to invoker Ticket::Generic.
+ - 2022-06-21 Added support for JSON web tokens (JWT).
+ - 2022-06-20 Improved S/MIME key storage.
+ - 2022-06-17 Added support for autocompletion to CKEditor.
+ - 2022-06-09 Added S/MIME check for sender header. Thanks to @akmet [PR#68](https://github.com/znuny/Znuny/pull/68).
+ - 2022-05-31 Maximum number of lines of quote in body of a message now can be limited in AgentTicketForward and AgentTicketCompose.
+ - 2022-05-30 Fixed use of URL parameter in Kernel::System::Calendar::Plugin::Ticket::Link::LinkList and Kernel::System::Calendar::Export::ICal::Export.
+ - 2022-05-25 Initial search in dialog AgentLinkObject is now limited to tickets which belong to the same customer ID.
+ - 2022-05-24 Sanitized output of ACL Perl config file when dumping and deploying it to avoid unexpected execution of arbitrary Perl code.
+ - 2022-05-19 Sector Nord AG: Fixed transition action for recurring appointments with specific recurrence frequency. Thanks to Sector Nord AG (@jsinagowitz). [#219](https://github.com/znuny/Znuny/pull/219)
+ - 2022-05-10 Mandatory fields in expanded bulk action widgets now will be handled correctly as mandatory.
+ - 2022-05-04 Fixed select fields not being shown in modernized mode after submit with input errors.
+ - 2022-04-21 Added standard templates to [Agent/Customer]TicketProcess.
+ - 2022-03-14 Fixed sending notifications to invalid customer users.
+ - 2022-03-11 Removed system registration.
+
+# 6.3.4 2022-06-15
+ - 2022-05-30 Fixed use of URL parameter in Kernel::System::Calendar::Plugin::Ticket::Link::LinkList and Kernel::System::Calendar::Export::ICal::Export.
+ - 2022-05-24 Sanitized output of ACL Perl config file when dumping and deploying it to avoid unexpected execution of arbitrary Perl code.
+
+# 6.3.3 2022-04-28
+ - 2022-04-27 Deactivated Perl code execution for Template::Toolkit. Thanks to Sven Oesterling (OTOBO).
+ - 2022-04-25 Kernel::System::DynamicField::Webservice::DisplayValueGet() now also searches for the stored value to retrieve the display value.
+ - 2022-04-25 Deprecated structures in SysConfig option Package::RepositoryList (e.g. from old ITSM packages) will now be ignored instead of throwing an error.
+
+# 6.3.2 2022-04-20
+ - 2022-04-20 Removed unwanted line breaks from base64 encoded authorization header in Kernel::GenericInterface::Transport::HTTP::REST.
+ - 2022-04-13 Fixed refresh in overviews if fulltext search in toolbar is not enabled. [#237](https://github.com/znuny/Znuny/issues/237)
+ - 2022-04-01 Fixed encoding for autocompletion in dynamic field edit view of type Webservice.
+ - 2022-03-31 Fixed check of UntilTime in Kernel::System::Ticket::Event::TicketPendingTimeReset. [#221)(https://github.com/znuny/Znuny/issues/221)
+ - 2022-03-28 Added support for online package repositories again.
+ - 2022-03-24 Fixed XSS vulnerability in package manager GUI (CVE-2022-0475).
+ - 2022-03-24 Deactivated support for execution of configurable system commands from Sendmail and PostMaster pre-filter configurations (CVE-2021-36100).
+ - 2022-03-24 The system command in SysConfig option "MIME-Viewer" now is only configurable via Kernel/Config.pm (CVE-2021-36100).
+ - 2022-03-23 Removed dashboard widget support for execution of system commands (CVE-2021-36100).
+ - 2022-03-23 Improved DynamicFieldObject _SanitizeConfig - ReservedKeywords will now be removed.
+ - 2022-03-23 Removed configurable system commands from generic agents (CVE-2021-36100).
+ - 2022-03-22 Added missing CKEditor codemirror plugin.
+ - 2022-03-22 Fixed accidental deletion of OAuth2 token values on request for new token.
+ - 2022-03-17 Added PreRun function to Dev/Tools/TranslationsUpdate to check for symbolic links.
+ - 2022-03-15 Added new SysConfig option LibXML::EnableHugeXMLDataSupport to enable support for huge XML data in load_xml calls of CPAN library XML::LibXML.
+ - 2022-03-11 Removed 'send support bundle' to OTRS Group.
+ - 2022-03-11 CPAN module Mail::IMAPClient will now be correctly reported as required by bin/otrs.CheckModules.pl [#222](https://github.com/znuny/Znuny/issues/222).
+
+# 6.3.1 2022-03-09
+ - 2022-03-07 Integrated package Znuny4OTRS-CalendarBasedTicketCreation.
+ - 2022-03-07 Original owners of tickets will now be set again when cancelling a ticket bulk action.
+ - 2022-03-02 Sector Nord AG: Fixed AgentAppointmentCalendarOverview AppointmentTooltip (#216). Thanks to Sector Nord AG (@jsinagowitz). [#216](https://github.com/znuny/Znuny/pull/216)
+ - 2022-03-02 Integrated package Znuny4OTRS-OwnerToolbar.
+ - 2022-02-25 Fixed Bug - Since version 6.0.31 the size of embedded images within the RTE cannot be changed via click & drag anymore [#98](https://github.com/znuny/Znuny/issues/98).
+ - 2022-02-25 Fixed Bug - Fixed subject regex for rfc822 attachments on email parsing operation. No error will be thrown anymore if subject is missing/empty.
+ - 2022-02-21 Integrated package Znuny4OTRS-AdvancedTimeUnit.
+ - 2022-02-21 Added scope flag to AdminProcessManagement to reduce possible overflow selection. Thanks to Michel Rodriguez [@mirod](https://github.com/mirod).
+ - 2022-02-18 Added 'autolink' extraPlugin to CKEditor.
+ - 2022-02-18 Added 'textwatcher', 'autocomplete' and 'textmatch' as extraPlugins to CKEditor global config.
+ - 2022-02-17 Integrated package Znuny4OTRS-MailAccounts.
+ - 2022-02-17 Integrated package Znuny4OTRS-OAuth2TokenManagement.
+ - 2022-02-17 Updated CKEditor from version 4.16.0 to 4.17.1.
+ - 2022-02-16 Sector Nord AG: Added ProcessManagement TransitionAction - AppointmentUpdate and AppointmentRemove. Thanks to Sector Nord AG (@jsinagowitz). [#196](https://github.com/znuny/Znuny/pull/196)
+ - 2022-02-15 Fixed config navigation path for customer frontend module AJAXDynamicFieldWebservice. Thanks to Renée Bäcker (@reneeb). [#193](https://github.com/znuny/Znuny/pull/193)
+ - 2022-02-14 Integrated package Znuny-DatabaseBackend.
+ - 2022-02-11 Fixed Bug - Show menu items when showing the error screen. [#210](https://github.com/znuny/Znuny/issues/210)
+ - 2022-02-07 Added clear log action to AdminLog.
+ - 2022-02-03 Fixed Bug - Dashboard-TicketQueueOverview refresh [#156](https://github.com/znuny/Znuny/issues/156).
+ - 2022-02-03 Updated jQuery UI from 1.12.1 to 1.13.1.
+ - 2022-02-03 Fixed unnecessary error message - 'Use of uninitialized value in pattern match...'
+ - 2022-02-03 Fixed link detection matches trailing dot.
+ - 2022-02-01 Fixed description of option Kernel::System::Ticket::Number::Random in SysConfig.
+ - 2022-01-22 Updated third party jquery to 3.6.0. [#168](https://git.znuny.com/Znuny/Public/Znuny/-/issues/168)
+ - 2022-01-18 List all configured calendars in support data collector (#185). Thanks to Renée Bäcker (@reneeb). [#185](https://github.com/znuny/Znuny/pull/185)
+ - 2022-01-18 Fixed broken SmartTag example CUSTOMER_BODY (#191). Thanks to Shawn Beasley (@dignin). [#191](https://github.com/znuny/Znuny/pull/191)
+ - 2022-01-13 Added jq function also for regex matches in GenericInterface/Event/Handler.
+ - 2022-01-11 Fixed Bug - Email overwritten when editing an agent.
+ - 2022-01-07 Integrated package Znuny4OTRS-RandomTicketNumberGenerator.
+ - 2022-01-07 Parameter %Param are now passed to function Kernel::System::Email::Check. Thanks to Renée Bäcker (@reneeb). [#26](https://github.com/znuny/Znuny/pull/26)
+ - 2022-01-07 Integrated package Znuny4OTRS-AdvancedBulkAction.
+ - 2022-01-06 Fixed Bug - The page refresh stops the fulltext search via toolbar. [#182](https://github.com/znuny/Znuny/issues/182)
+ - 2021-12-27 Integrated package Znuny4OTRS-ExcelStats.
+ - 2021-12-27 Added ITSMConfigurationManagement compatibility.
  - 2021-12-14 Added ProcessListTreeView in AgentTicketProcess and CustomerTicketProcess.
  - 2021-12-14 Added missing translation for process and activity in CustomerTicketZoom.tt.
  - 2021-12-14 Removed translation for process in AdminProcessManagement.
@@ -9,9 +108,9 @@
  - 2021-11-25 Removed error log if !IsHashRefWithData( Config ) in `SanitizeConfig`. This is to strict and not needed.
  - 2021-11-25 Sector Nord AG: Replaced hardcoded attributes with a dynamic Sysconfig in Kernel/System/Ticket/Event/NotificationEvent.pm (#171). Thanks to @LuBroering (Lukas Bröring SectorNord AG). [#171](https://github.com/znuny/Znuny/pull/171)
  - 2021-11-25 Add option '--no-tablespaces' to scripts/backup.pl (#136). Thanks to @meisterheister. [#136](https://github.com/znuny/Znuny/pull/136)
- - 2021-11-25 Prevents error message "no TicketID" on sending an answer if no TicketID exists (#133). Thanks to @reneeb. [#133](https://github.com/znuny/Znuny/pull/133)
- - 2021-11-25 Fixed - "No TicketID is given!" on each outgoing reply (#170). Thanks to @reneeb. [#170](https://github.com/znuny/Znuny/issues/170)
- - 2021-11-25 Fixed - Bug - Regression Error Message in Log (#126). Thanks to @reneeb. [#126](https://github.com/znuny/Znuny/issues/126)
+ - 2021-11-25 Prevents error message "no TicketID" on sending an answer if no TicketID exists (#133). Thanks to Renée Bäcker (@reneeb). [#133](https://github.com/znuny/Znuny/pull/133)
+ - 2021-11-25 Fixed - "No TicketID is given!" on each outgoing reply (#170). Thanks to Renée Bäcker (@reneeb). [#170](https://github.com/znuny/Znuny/issues/170)
+ - 2021-11-25 Fixed - Bug - Regression Error Message in Log (#126). Thanks to Renée Bäcker (@reneeb). [#126](https://github.com/znuny/Znuny/issues/126)
 
 # 6.2.2 2021-12-15
  - 2021-12-14 Added ProcessListTreeView in AgentTicketProcess and CustomerTicketProcess.
@@ -28,8 +127,8 @@
  - 2021-11-25 Sector Nord AG: Replaced hardcoded attributes with a dynamic Sysconfig in Kernel/System/Ticket/Event/NotificationEvent.pm (#171). Thanks to @LuBroering (Lukas Bröring SectorNord AG). [#171](https://github.com/znuny/Znuny/issues/171)
  - 2021-11-25 Add option '--no-tablespaces' to scripts/backup.pl (#136). Thanks to @meisterheister. [#136](https://github.com/znuny/Znuny/issues/136)
  - 2021-11-25 Prevents error message "no TicketID" on sending an answer if no TicketID exists (#133). Thanks to @Reedu. [#133](https://github.com/znuny/Znuny/issues/133)
- - 2021-11-25 Fixed - "No TicketID is given!" on each outgoing reply #170 https://github.com/znuny/Znuny/issues/170.Thanks to @Reedu. [#133](https://github.com/znuny/Znuny/issues/133)
- - 2021-11-25 Fixed - Bug - Regression Error Message in Log #126 https://github.com/znuny/Znuny/issues/126. Thanks to @Reedu. [#133](https://github.com/znuny/Znuny/issues/133)
+ - 2021-11-25 Fixed - "No TicketID is given!" on each outgoing reply (#170). Thanks to Renée Bäcker (@reneeb). [#170](https://github.com/znuny/Znuny/issues/170)
+ - 2021-11-25 Fixed - Bug - Regression Error Message in Log (#126). Thanks to Renée Bäcker (@reneeb). [#126](https://github.com/znuny/Znuny/issues/126)
  - 2021-11-15 Fixed CPANUpdate console command to also work on FreeBSD. Thanks to @papeng. [#162](https://github.com/znuny/Znuny/issues/162)
 
 # 6.2.1 2021-10-27
@@ -50,7 +149,7 @@
  - 2021-10-06 Added support for content type application/xml to generic interface REST transport.
  - 2021-10-06 Added option to keep attributes of XML in generic interface XSLT mapping.
  - 2021-10-06 Sector Nord AG: Added optional check condition in TransitionActions. Thanks to Sector Nord AG (@paulfolkers). [#144](https://github.com/znuny/Znuny/pull/144)
- - 2021-10-06 Sector Nord AG: Added TransitionAction parameter placeholder. Thanks to Sector Nord AG (@tjsinagowitz). [#145](https://github.com/znuny/Znuny/pull/145)
+ - 2021-10-06 Sector Nord AG: Added TransitionAction parameter placeholder. Thanks to Sector Nord AG (@jsinagowitz). [#145](https://github.com/znuny/Znuny/pull/145)
  - 2021-10-05 Sector Nord AG: Added ticket event and event module TicketAllChildrenClosed. Thanks to Sector Nord AG (@paulfolkers). [#143](https://github.com/znuny/Znuny/pull/143)
  - 2021-10-01 Added initial config for Frontend::Navigation###AdminCustomerUserCustomer###001-Framework. Thanks to Kevin Janssen (@BuTzZ). [#146](https://github.com/znuny/Znuny/pull/146)
  - 2021-10-01 Disabled connection to external RSS during unit testing.
@@ -104,6 +203,46 @@
  - 2021-06-15 Use ticket title as the default appointment title (#90). Thanks to Renée Bäcker (@reneeb). [#90](https://github.com/znuny/Znuny/pull/90)
  - 2021-06-15 Column list validation before saving agent preferences (#84). Thanks to Paweł Bogusławski (@pboguslawski). [#84](https://github.com/znuny/Znuny/pull/84)
 
+# 6.0.45 2022-07-27
+ - 2022-07-05 Attachment filenames in ticket zoom will now be truncated if they are too long to be displayed correctly.
+ - 2022-06-23 Fixed issue with high CPU load on parsing e-mails in PostMaster filter DetectAttachment.
+
+# 6.0.44 2022-06-15
+ - 2022-06-09 Added S/MIME check for sender header. Thanks to @akmet [PR#68](https://github.com/znuny/Znuny/pull/68).
+ - 2022-05-24 Sanitized output of ACL Perl config file when dumping and deploying it to avoid unexpected execution of arbitrary Perl code.
+ - 2022-05-09 Mandatory fields in expanded bulk action widgets now will be handled correctly as mandatory.
+ - 2022-05-04 Fixed select fields not being shown in modernized mode after submit with input errors.
+
+# 6.0.43 2022-05-04
+ - 2022-05-02 Fixed migration module RemoveGenericAgentSystemCommandCalls.
+
+# 6.0.42 2022-04-28
+ - 2022-04-27 Deactivated Perl code execution for Template::Toolkit. Thanks to Sven Oesterling (OTOBO).
+
+# 6.0.41 2022-04-20
+ - 2022-04-13 Fixed refresh in overviews if fulltext search in toolbar is not enabled. [#237](https://github.com/znuny/Znuny/issues/237)
+ - 2022-03-31 Fixed check of UntilTime in Kernel::System::Ticket::Event::TicketPendingTimeReset. [#221)(https://github.com/znuny/Znuny/issues/221)
+ - 2022-03-24 Fixed XSS vulnerability in package manager GUI (CVE-2022-0475).
+ - 2022-03-24 Deactivated support for execution of configurable system commands from Sendmail and PostMaster pre-filter configurations (CVE-2021-36100).
+ - 2022-03-24 The system command in SysConfig option "MIME-Viewer" now is only configurable via Kernel/Config.pm (CVE-2021-36100).
+ - 2022-03-23 Removed dashboard widget support for execution of system commands (CVE-2021-36100).
+ - 2022-03-23 Removed configurable system commands from generic agents (CVE-2021-36100).
+ - 2022-03-22 Added missing CKEditor codemirror plugin.
+ - 2022-03-14 Fixed sending notifications to invalid customer users.
+
+# 6.0.40 2022-03-09
+ - 2022-03-07 Original owners of tickets will now be set again when cancelling a ticket bulk action.
+ - 2022-03-02 Sector Nord AG: Fixed AgentAppointmentCalendarOverview AppointmentTooltip (#216). Thanks to Sector Nord AG (@jsinagowitz). [#216](https://github.com/znuny/Znuny/pull/216)
+ - 2022-02-25 Fixed Bug - Since version 6.0.31 the size of embedded images within the RTE cannot be changed via click & drag anymore [#98](https://github.com/znuny/Znuny/issues/98).
+ - 2022-02-25 Fixed Bug - Fixed subject regex for rfc822 attachments on email parsing operation. No error will be thrown anymore if subject is missing/empty.
+ - 2022-02-18 Updated CKEditor from version 4.16.0 to 4.17.1.
+ - 2022-02-11 Fixed Bug - Show menu items when showing the error screen. [#210](https://github.com/znuny/Znuny/issues/210)
+ - 2022-02-03 Fixed Bug - Dashboard-TicketQueueOverview refresh [#156](https://github.com/znuny/Znuny/issues/156).
+ - 2022-02-03 Updated jQuery UI from 1.12.1 to 1.13.1.
+ - 2022-02-03 Fixed link detection matches trailing dot.
+ - 2022-01-11 Fixed Bug - Email overwritten when editing an agent.
+ - 2022-01-06 Fixed Bug - The page refresh stops the fulltext search via toolbar. [#182](https://github.com/znuny/Znuny/issues/182)
+
 # 6.0.39 2021-12-15
  - 2021-12-14 Added ProcessListTreeView in AgentTicketProcess and CustomerTicketProcess.
  - 2021-12-14 Added missing translation for process and activity in CustomerTicketZoom.tt.
@@ -117,8 +256,8 @@
  - 2021-11-25 Sector Nord AG: Replaced hardcoded attributes with a dynamic Sysconfig in Kernel/System/Ticket/Event/NotificationEvent.pm (#171). Thanks to @LuBroering (Lukas Bröring SectorNord AG). [#171](https://github.com/znuny/Znuny/issues/171)
  - 2021-11-25 Add option '--no-tablespaces' to scripts/backup.pl (#136). Thanks to @meisterheister. [#136](https://github.com/znuny/Znuny/issues/136)
  - 2021-11-25 Prevents error message "no TicketID" on sending an answer if no TicketID exists (#133). Thanks to @Reedu. [#133](https://github.com/znuny/Znuny/issues/133)
- - 2021-11-25 Fixed - "No TicketID is given!" on each outgoing reply #170 https://github.com/znuny/Znuny/issues/170.Thanks to @Reedu. [#133](https://github.com/znuny/Znuny/issues/133)
- - 2021-11-25 Fixed - Bug - Regression Error Message in Log #126 https://github.com/znuny/Znuny/issues/126. Thanks to @Reedu. [#133](https://github.com/znuny/Znuny/issues/133)
+ - 2021-11-25 Fixed - "No TicketID is given!" on each outgoing reply (#170). Thanks to @Reedu. [#170](https://github.com/znuny/Znuny/issues/170)
+ - 2021-11-25 Fixed - Bug - Regression Error Message in Log (#126). Thanks to Renée Bäcker (@reneeb). [#126](https://github.com/znuny/Znuny/issues/126)
  - 2021-11-15 Fixed CPANUpdate console command to also work on FreeBSD. Thanks to @papeng. [#162](https://github.com/znuny/Znuny/issues/162)
 
 # 6.0.38 2021-10-27

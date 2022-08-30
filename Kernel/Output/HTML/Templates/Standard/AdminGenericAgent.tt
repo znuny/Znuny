@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -860,17 +860,6 @@
                             [% Data.SendNoNotificationOption %]
                         </div>
                         <div class="Clear"></div>
-
-[% IF Data.AllowCustomScriptExecution %]
-                        <label for="NewCMD">[% Translate("CMD") | html %]:</label>
-                        <div class="Field">
-                            <input type="text" name="NewCMD" id="NewCMD" value="[% Data.NewCMD | html %]" size="40"/>
-                            <p class="FieldExplanation">
-                                ([% Translate("This command will be executed. ARG[0] will be the ticket number. ARG[1] the ticket id.") | html %])
-                            </p>
-                        </div>
-                        <div class="Clear"></div>
-[% END %]
 
                         <label for="NewDelete">[% Translate("Delete tickets") | html %]:</label>
                         <div class="Field">

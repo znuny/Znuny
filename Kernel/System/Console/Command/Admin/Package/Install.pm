@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -23,7 +23,7 @@ our @ObjectDependencies = (
 sub Configure {
     my ( $Self, %Param ) = @_;
 
-    $Self->Description('Install an OTRS package.');
+    $Self->Description('Install a package.');
     $Self->AddOption(
         Name        => 'force',
         Description => 'Force package installation even if validation fails.',
@@ -33,7 +33,7 @@ sub Configure {
     $Self->AddArgument(
         Name => 'location',
         Description =>
-            "Specify a file path, a remote repository (https://download.znuny.org/releases/packages/:Package-1.0.0.opm) or just any online repository (online:Package).",
+            "Specify a file path, a remote repository (https://download.znuny.org/releases/packages/:Package-1.0.0.opm) or just any online repository by its configured name (e.g. 'MyRepository:Package').",
         Required   => 1,
         ValueRegex => qr/.*/smx,
     );
@@ -63,30 +63,10 @@ sub Run {
         String => $FileString,
     );
 
-    my $Verified = $PackageObject->PackageVerify(
-        Package   => $FileString,
-        Structure => \%Structure,
-    ) || 'verified';
-    my %VerifyInfo = $PackageObject->PackageVerifyInfo();
-
-    # Check if installation of packages, which are not verified by us, is possible.
-    my $PackageAllowNotVerifiedPackages = $Kernel::OM->Get('Kernel::Config')->Get('Package::AllowNotVerifiedPackages');
-
-    if ( $Verified ne 'verified' ) {
-
-        if ( !$PackageAllowNotVerifiedPackages ) {
-
-            $Self->PrintError(
-                "$Structure{Name}->{Content}-$Structure{Version}->{Content} is not verified by the OTRS Group!\n\nThe installation of packages which are not verified by the OTRS Group is not possible by default."
-            );
-            return $Self->ExitCodeError();
-        }
-        else {
-
-            $Self->Print(
-                "<yellow>Package $Structure{Name}->{Content}-$Structure{Version}->{Content} not verified by the OTRS Group! It is recommended not to use this package.</yellow>\n"
-            );
-        }
+    # check if package is installed
+    if ( $Kernel::OM->Get('Kernel::System::Package')->PackageIsInstalled( Name => $Structure{Name}->{Content} ) ) {
+        $Self->PrintError("Package is already installed.");
+        return $Self->ExitCodeError();
     }
 
     # intro screen

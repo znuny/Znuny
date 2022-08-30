@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -35,7 +35,7 @@ if ( $PreviousDaemonStatus =~ m{Daemon running}i ) {
     sleep $SleepTime;
 }
 
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $SchedulerDBObject = $Kernel::OM->Get('Kernel::System::Daemon::SchedulerDB');
 my $TaskWorkerObject  = $Kernel::OM->Get('Kernel::System::Daemon::DaemonModules::SchedulerTaskWorker');
@@ -77,7 +77,7 @@ $Self->True(
 );
 $RunTasks->();
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
@@ -194,7 +194,7 @@ TESTCASE:
 for my $Test (@Tests) {
 
     # prevent mails send
-    $Helper->ConfigSettingChange(
+    $HelperObject->ConfigSettingChange(
         Key   => 'SendmailModule',
         Value => 'Kernel::System::Email::DoNotSendEmail',
         Valid => 1,

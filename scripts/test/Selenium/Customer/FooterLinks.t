@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -20,15 +20,15 @@ $Selenium->RunTest(
     sub {
 
         # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # create test customer user
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate() || die "Did not get test customer user";
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate() || die "Did not get test customer user";
 
         my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
 
         # First page load, no links shown.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 0,
             Key   => 'PublicFrontend::FooterLinks',
             Value => {},
@@ -43,7 +43,7 @@ $Selenium->RunTest(
         );
 
         # Display link for OTRS Homepage.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'PublicFrontend::FooterLinks',
             Value => {
@@ -65,7 +65,7 @@ $Selenium->RunTest(
         );
 
         # Check public interface as well.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'PublicFrontend::CommonParam###Action',
             Value => 'PublicDefault',

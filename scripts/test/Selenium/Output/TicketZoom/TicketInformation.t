@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -19,12 +19,12 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # Disable 'Ticket Information', 'Customer Information' and 'Linked Objects' widgets in AgentTicketZoom screen.
         for my $WidgetDisable (qw(0100-TicketInformation 0200-CustomerInformation 0300-LinkTable)) {
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 0,
                 Key   => "Ticket::Frontend::AgentTicketZoom###Widgets###$WidgetDisable",
                 Value => '',
@@ -32,29 +32,29 @@ $Selenium->RunTest(
         }
 
         # enable ticket service, type, responsible
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'Ticket::Service',
             Value => 1,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Service',
             Value => 1
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'Ticket::Type',
             Value => 1,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Type',
             Value => 1
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'Ticket::Responsible',
             Value => 1,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Responsible',
             Value => 1
@@ -67,22 +67,22 @@ $Selenium->RunTest(
         for my $Day (@Days) {
             $Week{$Day} = [ 0 .. 23 ];
         }
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'TimeWorkingHours',
             Value => \%Week,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'TimeWorkingHours',
             Value => \%Week,
         );
 
         # Disable default Vacation days.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'TimeVacationDays',
             Value => {},
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'TimeVacationDays',
             Value => {},
@@ -91,7 +91,7 @@ $Selenium->RunTest(
         my $UserObject = $Kernel::OM->Get('Kernel::System::User');
 
         # Create test responsible user.
-        my $ResponsibleUser = $Helper->TestUserCreate(
+        my $ResponsibleUser = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -101,7 +101,7 @@ $Selenium->RunTest(
         );
 
         # Create test user.
-        my $UserLogin = $Helper->TestUserCreate(
+        my $UserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -111,7 +111,7 @@ $Selenium->RunTest(
         );
 
         # Get test ticket data.
-        my $RandomID   = $Helper->GetRandomID();
+        my $RandomID   = $HelperObject->GetRandomID();
         my %TicketData = (
             Age           => '0 m',
             Type          => "Type$RandomID",
@@ -212,7 +212,7 @@ $Selenium->RunTest(
         );
 
         # Enable test dynamic field to show in AgentTicketZoom screen in 'Ticket Information' widget.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketZoom###DynamicField',
             Value => {
@@ -287,7 +287,7 @@ $Selenium->RunTest(
         );
 
         # Reset 'Ticket Information' widget sysconfig, enable it and refresh screen.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketZoom###Widgets###0100-TicketInformation',
             Value => {

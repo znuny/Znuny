@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -25,12 +25,12 @@ $Kernel::OM->ObjectParamAdd(
         SkipSSLVerify => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my $RandomID = $Helper->GetRandomNumber();
+my $RandomID = $HelperObject->GetRandomNumber();
 
 # create new users for current test
-my $UserLogin1 = $Helper->TestUserCreate(
+my $UserLogin1 = $HelperObject->TestUserCreate(
     Groups => ['users'],
 );
 my $Password1 = $UserLogin1;
@@ -39,7 +39,7 @@ my $UserID1 = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
     UserLogin => $UserLogin1,
 );
 
-my $UserLogin2 = $Helper->TestUserCreate(
+my $UserLogin2 = $HelperObject->TestUserCreate(
     Groups => ['users'],
 );
 my $Password2 = $UserLogin2;
@@ -48,7 +48,7 @@ my $UserID2 = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
     UserLogin => $UserLogin2,
 );
 
-my $UserLogin3 = $Helper->TestUserCreate(
+my $UserLogin3 = $HelperObject->TestUserCreate(
     Groups => ['users'],
 );
 my $Password3 = $UserLogin3;
@@ -57,7 +57,7 @@ my $UserID3 = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
     UserLogin => $UserLogin3,
 );
 
-my $UserLogin4 = $Helper->TestUserCreate(
+my $UserLogin4 = $HelperObject->TestUserCreate(
     Groups => ['users'],
 );
 my $Password4 = $UserLogin4;
@@ -97,7 +97,7 @@ $Self->True(
 );
 
 # Get remote host with some precautions for certain unit test systems.
-my $Host = $Helper->GetTestHTTPHostname();
+my $Host = $HelperObject->GetTestHTTPHostname();
 
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
@@ -179,22 +179,22 @@ $Self->Is(
     'DebuggerObject instantiate correctly',
 );
 
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'SessionCheckRemoteIP',
     Value => 0,
 );
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'SessionMaxTime',
     Value => 10,
 );
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'SessionMaxIdleTime',
     Value => 5,
 );
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'SessionModule',
     Value => 'Kernel::System::AuthSession::DB',
@@ -202,7 +202,7 @@ $Helper->ConfigSettingChange(
 
 my $SessionObject = $Kernel::OM->Get('Kernel::System::AuthSession');
 
-$Helper->FixedTimeSet();
+$HelperObject->FixedTimeSet();
 
 my $Epoch = $Kernel::OM->Create('Kernel::System::DateTime')->ToEpoch();
 
@@ -215,7 +215,7 @@ my $SessionID1 = $SessionObject->CreateSessionID(
     UserLastRequest => $Epoch + 20,
 );
 
-$Helper->FixedTimeAddSeconds(11);
+$HelperObject->FixedTimeAddSeconds(11);
 
 $Epoch = $Kernel::OM->Create('Kernel::System::DateTime')->ToEpoch();
 
@@ -228,7 +228,7 @@ my $SessionID2 = $SessionObject->CreateSessionID(
     UserLastRequest => $Epoch,
 );
 
-$Helper->FixedTimeAddSeconds(6);
+$HelperObject->FixedTimeAddSeconds(6);
 
 $Epoch = $Kernel::OM->Create('Kernel::System::DateTime')->ToEpoch();
 

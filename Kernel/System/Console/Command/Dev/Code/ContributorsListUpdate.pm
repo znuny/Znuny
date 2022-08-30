@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -38,7 +38,7 @@ sub Run {
     map { $Seen{$_}++ } @Lines;
 
     my $FileHandle = IO::File->new( 'AUTHORS.md', 'w' );
-    $FileHandle->print("The following persons contributed to OTRS:\n\n");
+    $FileHandle->print("The following persons contributed to Znuny:\n\n");
 
     AUTHOR:
     for my $Author ( sort keys %Seen ) {

@@ -1,6 +1,6 @@
 /*
 Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 
 This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (GPL). If you
@@ -92,29 +92,9 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     height: 20px;
     background: url(../img/signet_small_bw_closed.png);
     background-size: cover;
-    animation-name: znuny-eat;
+    animation-name: ZnunyEat;
     animation-duration: 0.7s;
     animation-iteration-count: infinite
-}
-
-@keyframes znuny-eat {
-
-  0% {
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 50% 50%);
-  }
-  25% {
-    clip-path: polygon(0% 30%, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 75%, 50% 50%);
-  }
-  50% {
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-  }
-  75% {
-    clip-path: polygon(0% 30%, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 75%, 50% 50%);
-  }
-  100% {
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 50% 50%);
-  }
-
 }
 
 .LoginBox,

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -20,11 +20,11 @@ $Selenium->RunTest(
     sub {
 
         # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # enable ticket responsible and watch feature
         for my $SysConfigResWatch (qw( Responsible Watcher )) {
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => "Ticket::$SysConfigResWatch",
                 Value => 1
@@ -32,7 +32,7 @@ $Selenium->RunTest(
         }
 
         # Set to change queue for ticket in a new window.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::MoveType',
             Value => 'link'
@@ -92,11 +92,11 @@ $Selenium->RunTest(
 
         # enable delete and spam menu in sysconfig
         for my $SysConfigItem (@TicketMenu) {
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Key   => $SysConfigItem->{Key},
                 Value => $SysConfigItem->{SysConfigItem},
             );
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => $SysConfigItem->{Key},
                 Value => $SysConfigItem->{SysConfigItem},
@@ -104,7 +104,7 @@ $Selenium->RunTest(
         }
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 

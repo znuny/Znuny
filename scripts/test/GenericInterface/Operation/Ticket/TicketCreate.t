@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -29,57 +29,57 @@ $Kernel::OM->ObjectParamAdd(
         DisableAsyncCalls => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-$Helper->{DestroyLog} = 1;
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+$HelperObject->{DestroyLog} = 1;
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'Ticket::Type',
     Value => 1,
 );
 
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'Ticket::Service',
     Value => 1,
 );
 
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'Ticket::Frontend::AccountTime',
     Value => 1,
 );
 
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'Ticket::Frontend::NeedAccountedTime',
     Value => 1,
 );
 
 # disable DNS lookups
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'CheckMXRecord',
     Value => 0,
 );
 
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'CheckEmailAddresses',
     Value => 1,
 );
 
 # disable SessionCheckRemoteIP setting
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'SessionCheckRemoteIP',
     Value => 0,
 );
 
 # enable customer groups support
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'CustomerGroupSupport',
     Value => 1,
@@ -99,10 +99,10 @@ $Self->Is(
     'Disabled SSL certificates verification in environment'
 );
 
-my $TestOwnerLogin        = $Helper->TestUserCreate();
-my $TestResponsibleLogin  = $Helper->TestUserCreate();
-my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate();
-my $TestUserLogin         = $Helper->TestUserCreate(
+my $TestOwnerLogin        = $HelperObject->TestUserCreate();
+my $TestResponsibleLogin  = $HelperObject->TestUserCreate();
+my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate();
+my $TestUserLogin         = $HelperObject->TestUserCreate(
     Groups => [ 'admin', 'users', ],
 );
 
@@ -504,7 +504,7 @@ $Self->True(
 );
 
 # get remote host with some precautions for certain unit test systems
-my $Host = $Helper->GetTestHTTPHostname();
+my $Host = $HelperObject->GetTestHTTPHostname();
 
 # prepare web service config
 my $RemoteSystem =
@@ -518,7 +518,7 @@ my $RemoteSystem =
 
 my $WebserviceConfig = {
     Description => 'Test for Ticket Connector using SOAP transport backend.',
-    Debugger => {
+    Debugger    => {
         DebugThreshold => 'debug',
         TestMode       => 1,
     },
@@ -584,25 +584,25 @@ $Self->Is(
 );
 
 # create a new user for current test
-my $UserLogin = $Helper->TestUserCreate(
+my $UserLogin = $HelperObject->TestUserCreate(
     Groups => [ 'admin', 'users' ],
 );
 my $Password = $UserLogin;
 
 # create a new user without permissions for current test
-my $UserLogin2 = $Helper->TestUserCreate();
+my $UserLogin2 = $HelperObject->TestUserCreate();
 my $Password2  = $UserLogin2;
 
 # create a customer where a ticket will use and will have permissions
-my $CustomerUserLogin = $Helper->TestCustomerUserCreate();
+my $CustomerUserLogin = $HelperObject->TestCustomerUserCreate();
 my $CustomerPassword  = $CustomerUserLogin;
 
 # create a customer that will not have permissions
-my $CustomerUserLogin2 = $Helper->TestCustomerUserCreate();
+my $CustomerUserLogin2 = $HelperObject->TestCustomerUserCreate();
 my $CustomerPassword2  = $CustomerUserLogin2;
 
 # Create a customer with email address.
-my $CustomerRand       = 'email-customer-' . $Helper->GetRandomID();
+my $CustomerRand       = 'email-customer-' . $HelperObject->GetRandomID();
 my $EmailCustomerRand  = $CustomerRand . '@localhost.com';
 my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
 
@@ -4510,14 +4510,14 @@ TEST:
 for my $Test (@Tests) {
 
     if ( $Test->{Type} && $Test->{Type} eq 'EmailCustomerUser' ) {
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
     }
     else {
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'CheckEmailAddresses',
             Value => 1,
@@ -4553,7 +4553,6 @@ for my $Test (@Tests) {
             %{ $Test->{RequestData} },
         },
     );
-
 
     # check result
     $Self->Is(
@@ -4786,7 +4785,13 @@ for my $Test (@Tests) {
         }
         for my $DynamicField (@RequestedDynamicFields) {
 
-            if ($DynamicField->{FieldType} && $DynamicField->{FieldType} eq 'Date' && $DynamicField->{Value} && $DynamicField->{Value} =~ m{ \A \d{4}-\d{2}-\d{2} \z }xms ) {
+            if (
+                $DynamicField->{FieldType}
+                && $DynamicField->{FieldType} eq 'Date'
+                && $DynamicField->{Value}
+                && $DynamicField->{Value} =~ m{ \A \d{4}-\d{2}-\d{2} \z }xms
+                )
+            {
                 $DynamicField->{Value} .= ' 00:00:00';
             }
 
@@ -4927,7 +4932,6 @@ for my $Test (@Tests) {
             "$Test->{Name} - Local result ErrorMessage (outside Data hash) got removed to compare"
                 . " local and remote tests."
         );
-
 
         $Self->IsDeeply(
             $LocalResult,

@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -9,8 +9,12 @@
 
 "use strict";
 
-var Core = Core || {};
+var Core = Core || {},
+    Znuny = Znuny || {};
+
 Core.Agent = Core.Agent || {};
+Znuny.Form = Znuny.Form || {};
+Znuny.Form.Input = Znuny.Form.Input || {};
 
 /**
  * @namespace Core.Agent.TicketProcess
@@ -109,6 +113,7 @@ Core.Agent.TicketProcess = (function (TargetNS) {
                         });
                         $ElementToUpdate.fadeIn();
                         Core.UI.InputFields.Activate($ElementToUpdate);
+                        Znuny.Form.Input.Init();
                         try {
                             /*eslint-disable no-eval */
                             eval(JavaScriptString);
@@ -189,6 +194,17 @@ Core.Agent.TicketProcess = (function (TargetNS) {
         if ($('#ProcessEntityID').val() !== "") {
             $('#ProcessEntityID').trigger('change');
         }
+
+        // change standard template
+        $(document).off("change.StandardTemplateID").on("change.StandardTemplateID", '#StandardTemplateID', function () {
+            var $Form = $(this).closest('form');
+
+            Core.Agent.TicketAction.ConfirmTemplateOverwrite('RichText', $(this), function () {
+                Core.AJAX.FormUpdate($Form, 'AJAXUpdate', 'StandardTemplateID');
+            });
+            return false;
+        });
+
     };
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');

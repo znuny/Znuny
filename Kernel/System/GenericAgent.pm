@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -1444,37 +1444,6 @@ sub _JobRunTicket {
             TicketID    => $Param{TicketID},
             UserID      => $Param{UserID},
             ArchiveFlag => $Param{Config}->{New}->{ArchiveFlag},
-        );
-    }
-
-    # cmd
-    my $AllowCustomScriptExecution
-        = $Kernel::OM->Get('Kernel::Config')->Get('Ticket::GenericAgentAllowCustomScriptExecution') || 0;
-
-    if ( $Param{Config}->{New}->{CMD} && $AllowCustomScriptExecution ) {
-        if ( $Self->{NoticeSTDOUT} ) {
-            print "  - Execute '$Param{Config}->{New}->{CMD}' for Ticket $Ticket.\n";
-        }
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'notice',
-            Message  => "Execute '$Param{Config}->{New}->{CMD}' for Ticket $Ticket.",
-        );
-        system("$Param{Config}->{New}->{CMD} $Param{TicketNumber} $Param{TicketID} ");
-
-        if ( $? ne 0 ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'notice',
-                Message  => "Command returned a nonzero return code: rc=$?, err=$!",
-            );
-        }
-    }
-    elsif ( $Param{Config}->{New}->{CMD} && !$AllowCustomScriptExecution ) {
-        if ( $Self->{NoticeSTDOUT} ) {
-            print "  - Execute '$Param{Config}->{New}->{CMD}' is not allowed by the system configuration..\n";
-        }
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => "Execute '$Param{Config}->{New}->{CMD}' is not allowed by the system configuration..",
         );
     }
 

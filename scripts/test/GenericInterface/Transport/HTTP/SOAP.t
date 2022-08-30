@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -23,7 +23,7 @@ $Kernel::OM->ObjectParamAdd(
         SkipSSLVerify => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # add web service to be used (empty config)
 my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
@@ -32,7 +32,7 @@ $Self->Is(
     ref $WebserviceObject,
     "Create web service object",
 );
-my $WebserviceName = 'SOAP' . $Helper->GetRandomID();
+my $WebserviceName = 'SOAP' . $HelperObject->GetRandomID();
 my $WebserviceID   = $WebserviceObject->WebserviceAdd(
     Name   => $WebserviceName,
     Config => {
@@ -54,7 +54,7 @@ $Self->True(
 );
 
 # get remote host with some precautions for certain unit test systems
-my $Host = $Helper->GetTestHTTPHostname();
+my $Host = $HelperObject->GetTestHTTPHostname();
 
 # prepare web service config
 my $RemoteSystem =

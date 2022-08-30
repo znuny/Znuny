@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,7 +18,7 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper                = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
         my $CustomerUserObject    = $Kernel::OM->Get('Kernel::System::CustomerUser');
 
@@ -29,7 +29,7 @@ $Selenium->RunTest(
         );
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -97,7 +97,7 @@ $Selenium->RunTest(
         my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
 
         # Create test Customer.
-        my $CustomerName = 'Customer' . $Helper->GetRandomID();
+        my $CustomerName = 'Customer' . $HelperObject->GetRandomID();
         my $CustomerID   = $CustomerCompanyObject->CustomerCompanyAdd(
             CustomerID          => $CustomerName,
             CustomerCompanyName => $CustomerName,
@@ -110,7 +110,7 @@ $Selenium->RunTest(
         );
 
         # create second test Customer (primary Customer of CustomerUser)
-        my $CustomerName2 = 'Customer' . $Helper->GetRandomID();
+        my $CustomerName2 = 'Customer' . $HelperObject->GetRandomID();
         my $CustomerID2   = $CustomerCompanyObject->CustomerCompanyAdd(
             CustomerID          => $CustomerName2,
             CustomerCompanyName => $CustomerName2,
@@ -123,7 +123,7 @@ $Selenium->RunTest(
         );
 
         # create test CustomerUser
-        my $CustomerUserName = "CustomerUser" . $Helper->GetRandomID();
+        my $CustomerUserName = "CustomerUser" . $HelperObject->GetRandomID();
         my $CustomerUserID   = $CustomerUserObject->CustomerUserAdd(
             UserFirstname  => $CustomerUserName,
             UserLastname   => $CustomerUserName,

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -23,12 +23,12 @@ $Selenium->RunTest(
 
         # get needed object
 
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # disable all dashboard plugins
         my $Config = $ConfigObject->Get('DashboardBackend');
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 0,
             Key   => 'DashboardBackend',
             Value => \%$Config,
@@ -40,7 +40,7 @@ $Selenium->RunTest(
         );
 
         # enable EventsTicketCalendar and set it to load as default plugin
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'DashboardBackend###0280-DashboardEventsTicketCalendar',
             Value => {
@@ -50,7 +50,7 @@ $Selenium->RunTest(
         );
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -13,29 +13,24 @@ use utf8;
 
 use vars (qw($Self));
 
-# get needed objects
 my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
 my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
 
-# get OTRS Version
-my $OTRSVersion = $ConfigObject->Get('Version');
+# get Framework Version
+my $Version = $ConfigObject->Get('Version');
 
 # leave only major and minor level versions
-$OTRSVersion =~ s{ (\d+ \. \d+) .+ }{$1}msx;
+$Version =~ s{ (\d+ \. \d+) .+ }{$1}msx;
 
 # add x as patch level version
-$OTRSVersion .= '.x';
+$Version .= '.x';
 
 # find out if it is an developer installation with files
 # from the version control system.
+my $Home = $ConfigObject->Get('Home');
+
 my $DeveloperSystem = 0;
-my $Home            = $ConfigObject->Get('Home');
-my $Version         = $ConfigObject->Get('Version');
-if (
-    !-e $Home . '/ARCHIVE'
-    && $Version =~ m{git}
-    )
-{
+if ( !-e $Home . '/ARCHIVE' ) {
     $DeveloperSystem = 1;
 }
 
@@ -45,21 +40,21 @@ if ( !$DeveloperSystem ) {
     # install package normally
     my $String = '<?xml version="1.0" encoding="utf-8" ?>
     <otrs_package version="1.0">
-      <Name>Test</Name>
+      <Name>PackageUninstallMerged</Name>
       <Version>0.0.1</Version>
-      <Vendor>OTRS AG</Vendor>
-      <URL>https://otrs.com/</URL>
+      <Vendor>Znuny GmbH</Vendor>
+      <URL>https://znuny.org/</URL>
       <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
       <ChangeLog>2005-11-10 New package (some test &lt; &gt; &amp;).</ChangeLog>
       <Description Lang="en">A test package (some test &lt; &gt; &amp;).</Description>
       <Description Lang="de">Ein Test Paket (some test &lt; &gt; &amp;).</Description>
       <ModuleRequired Version="1.112">Encode</ModuleRequired>
-      <Framework>' . $OTRSVersion . '</Framework>
+      <Framework>' . $Version . '</Framework>
       <BuildDate>2005-11-10 21:17:16</BuildDate>
       <BuildHost>yourhost.example.com</BuildHost>
       <Filelist>
-        <File Location="Test" Permission="644" Encode="Base64">aGVsbG8K</File>
-        <File Location="var/Test" Permission="644" Encode="Base64">aGVsbG8K</File>
+        <File Location="TestPackageUninstallMerged" Permission="644" Encode="Base64">aGVsbG8K</File>
+        <File Location="var/TestPackageUninstallMerged" Permission="644" Encode="Base64">aGVsbG8K</File>
       </Filelist>
     </otrs_package>
     ';
@@ -70,7 +65,7 @@ if ( !$DeveloperSystem ) {
         $PackageInstall,
         'PackageInstall() - package installed with true',
     );
-    for my $File (qw( Test var/Test )) {
+    for my $File (qw( TestPackageUninstallMerged var/TestPackageUninstallMerged )) {
         my $RealFile = $Home . '/' . $File;
         $RealFile =~ s/\/\//\//g;
         $Self->True(
@@ -85,26 +80,26 @@ if ( !$DeveloperSystem ) {
     # remain
     $String = '<?xml version="1.0" encoding="utf-8" ?>
     <otrs_package version="1.0">
-      <Name>Test</Name>
+      <Name>PackageUninstallMerged</Name>
       <Version>0.0.1</Version>
-      <Vendor>OTRS AG</Vendor>
-      <URL>https://otrs.com/</URL>
+      <Vendor>Znuny GmbH</Vendor>
+      <URL>https://znuny.org/</URL>
       <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
       <ChangeLog>2005-11-10 New package (some test &lt; &gt; &amp;).</ChangeLog>
       <Description Lang="en">A test package (some test &lt; &gt; &amp;).</Description>
       <Description Lang="de">Ein Test Paket (some test &lt; &gt; &amp;).</Description>
       <ModuleRequired Version="1.112">Encode</ModuleRequired>
-      <Framework>' . $OTRSVersion . '</Framework>
+      <Framework>' . $Version . '</Framework>
       <BuildDate>2005-11-10 21:17:16</BuildDate>
       <BuildHost>yourhost.example.com</BuildHost>
       <Filelist>
-        <File Location="Test" Permission="644" Encode="Base64">aGVsbG8K</File>
-        <File Location="var/Test" Permission="644" Encode="Base64">aGVsbG8K</File>
+        <File Location="TestPackageUninstallMerged" Permission="644" Encode="Base64">aGVsbG8K</File>
+        <File Location="var/TestPackageUninstallMerged" Permission="644" Encode="Base64">aGVsbG8K</File>
         <File Location="bin/otrs.CheckSum.pl" Permission="755" Encode="Base64">aGVsbG8K</File>
       </Filelist>
     </otrs_package>
     ';
-    my $PackageName = 'Test';
+    my $PackageName = 'PackageUninstallMerged';
 
     # the modifications has to be at DB level, otherwise a .save file will be generated for the
     # framework file, and we are trying to prevent it
@@ -142,7 +137,7 @@ if ( !$DeveloperSystem ) {
 
     # check that the original files from the package does not exist anymore
     # these files are suppose to be old files that are not required anymore by the merged package
-    for my $File (qw( Test var/Test bin/otrs.CheckSum.pl.save )) {
+    for my $File (qw( TestPackageUninstallMerged var/TestPackageUninstallMerged bin/otrs.CheckSum.pl.save )) {
         my $RealFile = $Home . '/' . $File;
         $RealFile =~ s/\/\//\//g;
         $Self->False(

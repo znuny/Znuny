@@ -1,0 +1,60 @@
+---
+- Config:
+    ClientID:
+    ClientSecret:
+    Requests:
+      AuthorizationCode:
+        Request:
+          AutofilledParametersMapping:
+            client_id: ClientID
+            redirect_uri: RedirectURL
+            scope: Scope
+            state: State
+          Parameters:
+            response_mode: query
+            response_type: code
+          URL: https://login.microsoftonline.com/consumers/oauth2/v2.0/authorize
+        Response:
+          ParametersMapping:
+            code: AuthorizationCode
+            state: State
+      TokenByAuthorizationCode:
+        Request:
+          AutofilledParametersMapping:
+            client_id: ClientID
+            client_secret: ClientSecret
+            code: AuthorizationCode
+            redirect_uri: RedirectURL
+          Parameters:
+            grant_type: authorization_code
+          URL: https://login.microsoftonline.com/consumers/oauth2/v2.0/token
+        Response:
+          ParametersMapping:
+            access_token: Token
+            error: ErrorMessage
+            error_codes: ErrorCode
+            error_description: ErrorDescription
+            expires_in: TokenExpirationDate
+            refresh_token: RefreshToken
+      TokenByRefreshToken:
+        Request:
+          AutofilledParametersMapping:
+            client_id: ClientID
+            client_secret: ClientSecret
+            refresh_token: RefreshToken
+          Parameters:
+            grant_type: refresh_token
+          URL: https://login.microsoftonline.com/consumers/oauth2/v2.0/token
+        Response:
+          ParametersMapping:
+            access_token: Token
+            error: ErrorMessage
+            error_codes: ErrorCode
+            error_description: ErrorDescription
+            expires_in: TokenExpirationDate
+            refresh_token: RefreshToken
+    Scope: https://outlook.office.com/IMAP.AccessAsUser.All https://outlook.office.com/POP.AccessAsUser.All https://outlook.office.com/SMTP.Send offline_access
+    Notifications:
+        NotifyOnExpiredToken: 1
+        NotifyOnExpiredRefreshToken: 1
+  Name: Microsoft Outlook (consumers)

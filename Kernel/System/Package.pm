@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -28,7 +28,6 @@ use parent qw(Kernel::System::EventHandler);
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Cache',
-    'Kernel::System::CloudService::Backend::Run',
     'Kernel::System::DB',
     'Kernel::System::DateTime',
     'Kernel::System::Encode',
@@ -37,7 +36,6 @@ our @ObjectDependencies = (
     'Kernel::System::Loader',
     'Kernel::System::Log',
     'Kernel::System::Main',
-    'Kernel::System::OTRSBusiness',
     'Kernel::System::Scheduler',
     'Kernel::System::SystemData',
     'Kernel::System::XML',
@@ -66,14 +64,11 @@ create an object
 sub new {
     my ( $Type, %Param ) = @_;
 
-    # allocate new hash for object
     my $Self = {};
     bless( $Self, $Type );
 
-    # get needed objects
     $Self->{ConfigObject} = $Kernel::OM->Get('Kernel::Config');
-
-    $Self->{PackageMap} = {
+    $Self->{PackageMap}   = {
         Name            => 'SCALAR',
         Version         => 'SCALAR',
         Vendor          => 'SCALAR',
@@ -128,9 +123,6 @@ sub new {
     # reserve space for merged packages
     $Self->{MergedPackages} = {};
 
-    # check if cloud services are disabled
-    $Self->{CloudServicesDisabled} = $Self->{ConfigObject}->Get('CloudServices::Disabled') || 0;
-
     return $Self;
 }
 
@@ -155,7 +147,6 @@ sub RepositoryList {
         $Result = 'Short';
     }
 
-    # get cache object
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
     # check cache
@@ -165,8 +156,8 @@ sub RepositoryList {
     );
     return @{$Cache} if $Cache;
 
-    # get database object
-    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+    my $DBObject   = $Kernel::OM->Get('Kernel::System::DB');
+    my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
     # get repository list
     $DBObject->Prepare(
@@ -174,9 +165,6 @@ sub RepositoryList {
                 FROM package_repository
                 ORDER BY name, create_time',
     );
-
-    # get main object
-    my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
     # fetch the data
     my @Data;
@@ -223,7 +211,6 @@ sub RepositoryList {
         }
     }
 
-    # set cache
     $CacheObject->Set(
         Type  => 'RepositoryList',
         Key   => $Result . 'List',
@@ -255,7 +242,6 @@ get a package from local repository
 sub RepositoryGet {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     for my $Needed (qw(Name Version)) {
         if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -266,7 +252,6 @@ sub RepositoryGet {
         }
     }
 
-    # get cache object
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
     # check cache
@@ -278,7 +263,6 @@ sub RepositoryGet {
     return $Cache    if $Cache && $Param{Result} && $Param{Result} eq 'SCALAR';
     return ${$Cache} if $Cache;
 
-    # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     # get repository
@@ -314,7 +298,6 @@ sub RepositoryGet {
         return;
     }
 
-    # set cache
     $CacheObject->Set(
         Type  => 'RepositoryGet',
         Key   => $CacheKey,
@@ -332,7 +315,6 @@ add a package to local repository
 
     $PackageObject->RepositoryAdd(
         String    => $FileString,
-        FromCloud => 0,             # optional 1 or 0, it indicates if package came from Cloud or not
     );
 
 =cut
@@ -340,7 +322,6 @@ add a package to local repository
 sub RepositoryAdd {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     if ( !defined $Param{String} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -348,9 +329,6 @@ sub RepositoryAdd {
         );
         return;
     }
-
-    # get from cloud flag
-    $Param{FromCloud} //= 0;
 
     # get package attributes
     my %Structure = $Self->PackageParse(%Param);
@@ -385,7 +363,6 @@ sub RepositoryAdd {
         DisableWarnings => 1,
     );
 
-    # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     if ($PackageExists) {
@@ -439,7 +416,6 @@ remove a package from local repository
 sub RepositoryRemove {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     if ( !defined $Param{Name} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -477,7 +453,6 @@ install a package
     $PackageObject->PackageInstall(
         String    => $FileString,
         Force     => 1,             # optional 1 or 0, for to install package even if validation fails
-        FromCloud => 1,             # optional 1 or 0, it indicates if package's origin is Cloud or not
     );
 
 =cut
@@ -485,7 +460,6 @@ install a package
 sub PackageInstall {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     if ( !defined $Param{String} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -498,9 +472,6 @@ sub PackageInstall {
     #   during the installation.
     $Self->_RepositoryCacheClear();
 
-    # get from cloud flag
-    my $FromCloud = $Param{FromCloud} || 0;
-
     # conflict check
     my %Structure = $Self->PackageParse(%Param);
 
@@ -509,7 +480,7 @@ sub PackageInstall {
         if ( !$Param{Force} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'notice',
-                Message  => 'Package already installed, try upgrade!',
+                Message  => 'Package already installed, trying upgrade!',
             );
             return $Self->PackageUpgrade(%Param);
         }
@@ -602,8 +573,7 @@ sub PackageInstall {
 
     # add package
     return if !$Self->RepositoryAdd(
-        String    => $Param{String},
-        FromCloud => $FromCloud,
+        String => $Param{String},
     );
 
     # update package status
@@ -680,7 +650,6 @@ reinstall files of a package
 sub PackageReinstall {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     if ( !defined $Param{String} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -695,6 +664,15 @@ sub PackageReinstall {
 
     # parse source file
     my %Structure = $Self->PackageParse(%Param);
+
+    # check if package is installed
+    if ( !$Self->PackageIsInstalled( Name => $Structure{Name}->{Content} ) ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'notice',
+            Message  => 'Package is not installed.',
+        );
+        return;
+    }
 
     # write permission check
     return if !$Self->_FileSystemCheck();
@@ -789,7 +767,6 @@ upgrade a package
 sub PackageUpgrade {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     if ( !defined $Param{String} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -823,10 +800,10 @@ sub PackageUpgrade {
 
     if ( !$Installed ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'notice',
-            Message  => 'Package is not installed, try a installation!',
+            Priority => 'error',
+            Message  => 'Package is not installed, try an installation!',
         );
-        return $Self->PackageInstall(%Param);
+        return;
     }
 
     # write permission check
@@ -1216,7 +1193,6 @@ uninstall a package
 sub PackageUninstall {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     if ( !defined $Param{String} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -1317,25 +1293,24 @@ sub PackageUninstall {
     return 1;
 }
 
-=head2 PackageOnlineRepositories()
+=head2 RootRepositoryListGet()
 
-returns a list of available online repositories
+Returns a list of available root repositories. These are the ones contained in the XML file
+configured in SysConfig option Package::RepositoryRoot.
 
-    my %List = $PackageObject->PackageOnlineRepositories();
+    my %List = $PackageObject->RootRepositoryListGet();
 
 =cut
 
-sub PackageOnlineRepositories {
+sub RootRepositoryListGet {
     my ( $Self, %Param ) = @_;
 
-    # check if online repository should be fetched
     return () if !$Self->{ConfigObject}->Get('Package::RepositoryRoot');
 
     # get repository list
     my $XML = '';
     URL:
     for my $URL ( @{ $Self->{ConfigObject}->Get('Package::RepositoryRoot') } ) {
-
         $XML = $Self->_Download( URL => $URL );
 
         last URL if $XML;
@@ -1371,153 +1346,186 @@ sub PackageOnlineRepositories {
     return %List;
 }
 
-=head2 PackageOnlineList()
+=head2 ConfiguredRepositoryListGet()
 
-returns a list of available on-line packages
+Returns the combined configuration of all configured repositories from
+Package::RepositoryRoot and Package::RepositoryList.
 
-    my @List = $PackageObject->PackageOnlineList(
-        URL                => '',
-        Lang               => 'en',
-        Cache              => 0,    # (optional) do not use cached data
-        FromCloud          => 1,    # optional 1 or 0, it indicates if a Cloud Service
-                                    #  should be used for getting the packages list
-        IncludeSameVersion => 1,    # (optional) to also get packages already installed and with the same version
+    my %RepositoryList = $PackageObject->ConfiguredRepositoryListGet();
+
+Returns:
+
+    my %RepositoryList = (
+        'Freebie Features' => {
+            URL   => 'https://download.znuny.org/releases/packages/',
+        },
+        'Znuny Open Source Add-ons' => {
+            URL   => 'https://addons.znuny.com/api/addon_repos/public/',
+        },
+        'Znuny GmbH' => {
+            URL   => 'https://addons.znuny.com/api/addon_repos/',
+            AuthHeaderKey   => '...',
+            AuthHeaderValue => '...',
+        },
+        'Customer Z' => {
+            URL             => 'https://addons.znuny.com/api/addon_repos/',
+            AuthHeaderKey   => '...',
+            AuthHeaderValue => '...',
+        },
     );
 
 =cut
 
-sub PackageOnlineList {
+sub ConfiguredRepositoryListGet {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
-    for my $Needed (qw(URL Lang)) {
+    my %RepositoryList;
+
+    my %RootRepositoryList = $Self->RootRepositoryListGet();
+    for my $RootRepositoryURL ( sort keys %RootRepositoryList ) {
+        my $RootRepositoryName = $RootRepositoryList{$RootRepositoryURL};
+
+        $RepositoryList{$RootRepositoryName} = {
+            URL => $RootRepositoryURL,
+        };
+    }
+
+    my $RepositoryListFromConfig = $Self->{ConfigObject}->Get('Package::RepositoryList') // [];
+
+    # Throw away old config structure to avoid problems (e.g. from ITSM bundle or ITSMCore
+    # which overwrite Package::RepositoryList).
+    $RepositoryListFromConfig = [] if ref $RepositoryListFromConfig ne 'ARRAY';
+
+    REPOSITORYFROMCONFIG:
+    for my $RepositoryFromConfig ( @{$RepositoryListFromConfig} ) {
+        $RepositoryList{ $RepositoryFromConfig->{Name} } = {
+            URL => $RepositoryFromConfig->{URL},
+        };
+
+        next REPOSITORYFROMCONFIG if !IsStringWithData( $RepositoryFromConfig->{AuthHeaderKey} );
+        next REPOSITORYFROMCONFIG if !IsStringWithData( $RepositoryFromConfig->{AuthHeaderValue} );
+
+        $RepositoryList{ $RepositoryFromConfig->{Name} }->{AuthHeaderKey}   = $RepositoryFromConfig->{AuthHeaderKey};
+        $RepositoryList{ $RepositoryFromConfig->{Name} }->{AuthHeaderValue} = $RepositoryFromConfig->{AuthHeaderValue};
+    }
+
+    return %RepositoryList;
+}
+
+=head2 RepositoryPackageListGet()
+
+Returns a list of available packages for the given source repository.
+
+    my @List = $PackageObject->RepositoryPackageListGet(
+        Source             => 'Example repository 1', # the value of key 'Name' in item of SysConfig option Package::RepositoryList or a direct download URL
+        Lang               => 'en',
+        Cache              => 0,    # (optional) use cached data
+        IncludeSameVersion => 1,    # (optional) also get packages already installed and with the same version
+    );
+
+=cut
+
+sub RepositoryPackageListGet {
+    my ( $Self, %Param ) = @_;
+
+    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
+    my $LogObject   = $Kernel::OM->Get('Kernel::System::Log');
+
+    for my $Needed (qw(Source Lang)) {
         if ( !defined $Param{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message  => "$Needed not defined!",
             );
             return;
         }
     }
-    if ( !defined $Param{Cache} ) {
-
-        if ( $Param{URL} =~ m{ \.otrs\.org\/ }xms ) {
-            $Param{Cache} = 1;
-        }
-        else {
-            $Param{Cache} = 0;
-        }
-    }
 
     $Param{IncludeSameVersion} //= 0;
 
-    # get cache object
-    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
-
     # check cache
-    my $CacheKey = $Param{URL} . '-' . $Param{Lang} . '-' . $Param{IncludeSameVersion};
+    my $CacheKey = $Param{Source} . '-' . $Param{Lang} . '-' . $Param{IncludeSameVersion};
     if ( $Param{Cache} ) {
         my $Cache = $CacheObject->Get(
-            Type => 'PackageOnlineList',
+            Type => 'RepositoryPackageList',
             Key  => $CacheKey,
         );
         return @{$Cache} if $Cache;
     }
 
     my @Packages;
+
+    # Default: Handle source as direct URL.
+    my %DownloadParams = (
+        URL => $Param{Source} . '/otrs.xml',
+    );
+
+    # If Source is a known repository name, use its URL and credentials instead.
+    my %RepositoryList = $Self->ConfiguredRepositoryListGet();
+    if ( $RepositoryList{ $Param{Source} } ) {
+        my $Repository = $RepositoryList{ $Param{Source} };
+
+        $DownloadParams{URL}             = $Repository->{URL} . '/otrs.xml';
+        $DownloadParams{AuthHeaderKey}   = $Repository->{AuthHeaderKey};
+        $DownloadParams{AuthHeaderValue} = $Repository->{AuthHeaderValue};
+    }
+
     my %Package;
     my $Filelist;
-    if ( !$Param{FromCloud} ) {
+    my $XML = $Self->_Download(%DownloadParams);
+    return if !$XML;
 
-        my $XML = $Self->_Download( URL => $Param{URL} . '/otrs.xml' );
-        return if !$XML;
+    my @XMLARRAY = $Kernel::OM->Get('Kernel::System::XML')->XMLParse( String => $XML );
 
-        my @XMLARRAY = $Kernel::OM->Get('Kernel::System::XML')->XMLParse( String => $XML );
-
-        if ( !@XMLARRAY ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => Translatable('Unable to parse repository index document.'),
-            );
-            return;
-        }
-
-        TAG:
-        for my $Tag (@XMLARRAY) {
-
-            # remember package
-            if ( $Tag->{TagType} eq 'End' && $Tag->{Tag} eq 'Package' ) {
-                if (%Package) {
-                    push @Packages, {%Package};
-                }
-                next TAG;
-            }
-
-            # just use start tags
-            next TAG if $Tag->{TagType} ne 'Start';
-
-            # reset package data
-            if ( $Tag->{Tag} eq 'Package' ) {
-                %Package  = ();
-                $Filelist = 0;
-            }
-            elsif ( $Tag->{Tag} eq 'Framework' ) {
-                push @{ $Package{Framework} }, $Tag;
-            }
-            elsif ( $Tag->{Tag} eq 'Filelist' ) {
-                $Filelist = 1;
-            }
-            elsif ( $Filelist && $Tag->{Tag} eq 'FileDoc' ) {
-                push @{ $Package{Filelist} }, $Tag;
-            }
-            elsif ( $Tag->{Tag} eq 'Description' ) {
-                if ( !$Package{Description} ) {
-                    $Package{Description} = $Tag->{Content};
-                }
-                if ( $Tag->{Lang} eq $Param{Lang} ) {
-                    $Package{Description} = $Tag->{Content};
-                }
-            }
-            elsif ( $Tag->{Tag} eq 'PackageRequired' ) {
-                push @{ $Package{PackageRequired} }, $Tag;
-            }
-            else {
-                $Package{ $Tag->{Tag} } = $Tag->{Content};
-            }
-        }
-
-    }
-    else {
-
-        # On this case a cloud service is used, a URL is not
-        # needed, instead a operation name, present on the URL
-        # parameter in order to match with the previous structure
-        my $Operation = $Param{URL};
-
-        # get list from cloud
-        my $ListResult = $Self->CloudFileGet(
-            Operation => $Operation,
-            Data      => {
-                Language        => $Param{Lang},
-                PackageRequired => 1,
-            },
+    if ( !@XMLARRAY ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => Translatable('Unable to parse repository index document.'),
         );
+        return;
+    }
 
-        # check result structure
-        return if !IsHashRefWithData($ListResult);
+    TAG:
+    for my $Tag (@XMLARRAY) {
 
-        my $CurrentFramework = $Kernel::OM->Get('Kernel::Config')->Get('Version');
-        FRAMEWORKVERSION:
-        for my $FrameworkVersion ( sort keys %{$ListResult} ) {
-            my $FrameworkVersionMatch = $FrameworkVersion;
-            $FrameworkVersionMatch =~ s/\./\\\./g;
-            $FrameworkVersionMatch =~ s/x/.+?/gi;
-
-            if ( $CurrentFramework =~ m{ \A $FrameworkVersionMatch }xms ) {
-
-                @Packages = @{ $ListResult->{$FrameworkVersion} };
-                last FRAMEWORKVERSION;
+        # remember package
+        if ( $Tag->{TagType} eq 'End' && $Tag->{Tag} eq 'Package' ) {
+            if (%Package) {
+                push @Packages, {%Package};
             }
+            next TAG;
+        }
+
+        # just use start tags
+        next TAG if $Tag->{TagType} ne 'Start';
+
+        # reset package data
+        if ( $Tag->{Tag} eq 'Package' ) {
+            %Package  = ();
+            $Filelist = 0;
+        }
+        elsif ( $Tag->{Tag} eq 'Framework' ) {
+            push @{ $Package{Framework} }, $Tag;
+        }
+        elsif ( $Tag->{Tag} eq 'Filelist' ) {
+            $Filelist = 1;
+        }
+        elsif ( $Filelist && $Tag->{Tag} eq 'FileDoc' ) {
+            push @{ $Package{Filelist} }, $Tag;
+        }
+        elsif ( $Tag->{Tag} eq 'Description' ) {
+            if ( !$Package{Description} ) {
+                $Package{Description} = $Tag->{Content};
+            }
+            if ( $Tag->{Lang} eq $Param{Lang} ) {
+                $Package{Description} = $Tag->{Content};
+            }
+        }
+        elsif ( $Tag->{Tag} eq 'PackageRequired' ) {
+            push @{ $Package{PackageRequired} }, $Tag;
+        }
+        else {
+            $Package{ $Tag->{Tag} } = $Tag->{Content};
         }
     }
 
@@ -1551,7 +1559,7 @@ sub PackageOnlineList {
     # return if there are packages, just not for this framework version
     if ( @Packages && !$PackageForRequestedFramework ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
+            Priority => 'notice',
             Message =>
                 Translatable(
                 'No packages for your framework version found in this repository, it only contains packages for other framework versions.'
@@ -1635,7 +1643,7 @@ sub PackageOnlineList {
     # set cache
     if ( $Param{Cache} ) {
         $CacheObject->Set(
-            Type  => 'PackageOnlineList',
+            Type  => 'RepositoryPackageList',
             Key   => $CacheKey,
             Value => \@Packages,
             TTL   => 60 * 60,
@@ -1647,10 +1655,10 @@ sub PackageOnlineList {
 
 =head2 PackageOnlineGet()
 
-download of an online package and put it into the local repository
+download online package and put it into the local repository
 
     $PackageObject->PackageOnlineGet(
-        Source => 'http://host.example.com/',
+        Source => 'http://host.example.com/', # or the name of a configured repository in Package::RepositoryList
         File   => 'SomePackage-1.0.opm',
     );
 
@@ -1659,7 +1667,6 @@ download of an online package and put it into the local repository
 sub PackageOnlineGet {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     for my $Needed (qw(File Source)) {
         if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -1670,43 +1677,41 @@ sub PackageOnlineGet {
         }
     }
 
-    #check if file might be retrieved from cloud
-    my $RepositoryCloudList;
-    if ( !$Self->{CloudServicesDisabled} ) {
-        $RepositoryCloudList = $Self->RepositoryCloudList();
-    }
-    if ( IsHashRefWithData($RepositoryCloudList) && $RepositoryCloudList->{ $Param{Source} } ) {
+    my $FileName = $Param{File};
 
-        my $PackageFromCloud;
-
-        # On this case a cloud service is used, Source contains an
-        # operation name in order to match with the previous structure
-        my $Operation = $Param{Source} . 'FileGet';
-
-        # download package from cloud
-        my $PackageResult = $Self->CloudFileGet(
-            Operation => $Operation,
-            Data      => {
-                File => $Param{File},
-            },
-        );
-
-        if (
-            IsHashRefWithData($PackageResult)
-            && $PackageResult->{Package}
-            )
-        {
-            $PackageFromCloud = $PackageResult->{Package};
+    # Try to map filename without version/suffix 'opm' to the real filename in repository
+    my @Packages = $Self->RepositoryPackageListGet(
+        Source             => $Param{Source},
+        Lang               => $Kernel::OM->Get('Kernel::Config')->Get('DefaultLanguage'),
+        IncludeSameVersion => 1,
+    );
+    if (@Packages) {
+        my $MatchingPackageByFileNameFound = grep { $_->{File} eq $FileName } @Packages;
+        if ( !$MatchingPackageByFileNameFound ) {
+            my @MatchingPackagesByPackageName = grep { $_->{Name} eq $FileName } @Packages;
+            if (@MatchingPackagesByPackageName) {
+                my $Package = shift @MatchingPackagesByPackageName;
+                $FileName = $Package->{File};
+            }
         }
-        elsif ( IsStringWithData($PackageResult) ) {
-            return 'ErrorMessage:' . $PackageResult;
-
-        }
-
-        return $PackageFromCloud;
     }
 
-    return $Self->_Download( URL => $Param{Source} . '/' . $Param{File} );
+    # Default: Handle source as direct URL.
+    my %DownloadParams = (
+        URL => $Param{Source} . '/' . $FileName,
+    );
+
+    # If Source is a known repository name, use its URL and credentials instead.
+    my %RepositoryList = $Self->ConfiguredRepositoryListGet();
+    if ( $RepositoryList{ $Param{Source} } ) {
+        my $Repository = $RepositoryList{ $Param{Source} };
+
+        $DownloadParams{URL}             = $Repository->{URL} . '/' . $FileName;
+        $DownloadParams{AuthHeaderKey}   = $Repository->{AuthHeaderKey};
+        $DownloadParams{AuthHeaderValue} = $Repository->{AuthHeaderValue};
+    }
+
+    return $Self->_Download(%DownloadParams);
 }
 
 =head2 DeployCheck()
@@ -1724,7 +1729,6 @@ check if package (files) is deployed, returns true if it's ok
 sub DeployCheck {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     for my $Needed (qw(Name Version)) {
         if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -1824,348 +1828,6 @@ sub DeployCheckInfo {
     return ();
 }
 
-=head2 PackageVerify()
-
-check if package is verified by the vendor
-
-    $PackageObject->PackageVerify(
-        Package   => $Package,
-        Structure => \%Structure,
-    );
-
-or
-
-    $PackageObject->PackageVerify(
-        Package => $Package,
-        Name    => 'FAQ',
-    );
-
-=cut
-
-sub PackageVerify {
-    my ( $Self, %Param ) = @_;
-
-    # Return "verified" for now. "Verified" logo will currently not be shown in package manager.
-    return 'verified';
-
-    #     # check needed stuff
-    #     if ( !$Param{Package} ) {
-    #         $Kernel::OM->Get('Kernel::System::Log')->Log(
-    #             Priority => 'error',
-    #             Message  => "Need Package!",
-    #         );
-
-    #         return;
-    #     }
-    #     if ( !$Param{Structure} && !$Param{Name} ) {
-    #         $Kernel::OM->Get('Kernel::System::Log')->Log(
-    #             Priority => 'error',
-    #             Message  => 'Need Structure or Name!',
-    #         );
-
-    #         return;
-    #     }
-
-#     # Check if installation of packages, which are not verified by us, is possible.
-#     my $PackageAllowNotVerifiedPackages = $Kernel::OM->Get('Kernel::Config')->Get('Package::AllowNotVerifiedPackages');
-
-    #     # define package verification info
-    #     my $PackageVerifyInfo;
-
-    #     if ($PackageAllowNotVerifiedPackages) {
-
-#         $PackageVerifyInfo = {
-#             Description =>
-#                 Translatable(
-#                 "<p>If you continue to install this package, the following issues may occur:</p><ul><li>Security problems</li><li>Stability problems</li><li>Performance problems</li></ul><p>Please note that issues that are caused by working with this package are not covered by OTRS service contracts.</p>"
-#                 ),
-#             Title =>
-#                 Translatable('Package not verified by the OTRS Group! It is recommended not to use this package.'),
-#             PackageInstallPossible => 1,
-#         };
-#     }
-#     else {
-
-#         $PackageVerifyInfo = {
-#             Description =>
-#                 Translatable(
-#                 '<p>The installation of packages which are not verified by the OTRS Group is not possible by default. You can activate the installation of not verified packages via the "AllowNotVerifiedPackages" system configuration setting.</p>'
-#                 ),
-#             Title =>
-#                 Translatable('Package not verified by the OTRS Group! It is recommended not to use this package.'),
-#             PackageInstallPossible => 0,
-#         };
-#     }
-
-    #     # return package as verified if cloud services are disabled
-    #     if ( $Self->{CloudServicesDisabled} ) {
-
-    #         my $Verify = $PackageAllowNotVerifiedPackages ? 'verified' : 'not_verified';
-
-    #         if ( $Verify eq 'not_verified' ) {
-    #             $PackageVerifyInfo->{VerifyCSSClass} = 'NotVerifiedPackage';
-    #         }
-
-    #         $Self->{PackageVerifyInfo} = $PackageVerifyInfo;
-
-    #         return $Verify;
-    #     }
-
-    #     # investigate name
-    #     my $Name = $Param{Structure}->{Name}->{Content} || $Param{Name};
-
-    #     # correct any 'dos-style' line endings - http://bugs.otrs.org/show_bug.cgi?id=9838
-    #     $Param{Package} =~ s{\r\n}{\n}xmsg;
-
-    #     # create MD5 sum
-    #     my $Sum = $Kernel::OM->Get('Kernel::System::Main')->MD5sum( String => $Param{Package} );
-
-    #     # get cache object
-    #     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
-
-    #     # lookup cache
-    #     my $CachedValue = $CacheObject->Get(
-    #         Type => 'PackageVerification',
-    #         Key  => $Sum,
-    #     );
-    #     if ($CachedValue) {
-
-    #         if ( $CachedValue eq 'not_verified' ) {
-
-    #             $PackageVerifyInfo->{VerifyCSSClass} = 'NotVerifiedPackage';
-    #         }
-
-    #         $Self->{PackageVerifyInfo} = $PackageVerifyInfo;
-
-    #         return $CachedValue;
-    #     }
-
-    #     my $CloudService = 'PackageManagement';
-    #     my $Operation    = 'PackageVerify';
-
-    #     # prepare cloud service request
-    #     my %RequestParams = (
-    #         RequestData => {
-    #             $CloudService => [
-    #                 {
-    #                     Operation => $Operation,
-    #                     Data      => {
-    #                         Package => [
-    #                             {
-    #                                 Name   => $Name,
-    #                                 MD5sum => $Sum,
-    #                             }
-    #                         ],
-    #                     },
-    #                 },
-    #             ],
-    #         },
-    #     );
-
-    #     # get cloud service object
-    #     my $CloudServiceObject = $Kernel::OM->Get('Kernel::System::CloudService::Backend::Run');
-
-    #     # dispatch the cloud service request
-    #     my $RequestResult = $CloudServiceObject->Request(%RequestParams);
-
-    #     # as this is the only operation an unsuccessful request means that the operation was also
-    #     # unsuccessful, in such case set the package as verified
-    #     return 'unknown' if !IsHashRefWithData($RequestResult);
-
-    #     my $OperationResult = $CloudServiceObject->OperationResultGet(
-    #         RequestResult => $RequestResult,
-    #         CloudService  => $CloudService,
-    #         Operation     => $Operation,
-    #     );
-
-    #     # if there was no result for this specific operation or the operation was not success, then
-    #     # set the package as verified
-    #     return 'unknown' if !IsHashRefWithData($OperationResult);
-    #     return 'unknown' if !$OperationResult->{Success};
-
-    #     my $VerificationData = $OperationResult->{Data};
-
-    #     # extract response
-    #     my $PackageVerify = $VerificationData->{$Name};
-
-    #     return 'unknown' if !$PackageVerify;
-    #     return 'unknown' if $PackageVerify ne 'not_verified' && $PackageVerify ne 'verified';
-
-    #     # set package verification info
-    #     if ( $PackageVerify eq 'not_verified' ) {
-
-    #         $PackageVerifyInfo->{VerifyCSSClass} = 'NotVerifiedPackage';
-
-    #         $Self->{PackageVerifyInfo} = $PackageVerifyInfo;
-    #     }
-
-    #     # set cache
-    #     $CacheObject->Set(
-    #         Type  => 'PackageVerification',
-    #         Key   => $Sum,
-    #         Value => $PackageVerify,
-    #         TTL   => 30 * 24 * 60 * 60,       # 30 days
-    #     );
-
-    #     return $PackageVerify;
-}
-
-=head2 PackageVerifyInfo()
-
-returns the info of the latest PackageVerify()
-
-    my %Hash = $PackageObject->PackageVerifyInfo();
-
-=cut
-
-sub PackageVerifyInfo {
-    my ( $Self, %Param ) = @_;
-
-    return () if !$Self->{PackageVerifyInfo};
-    return () if ref $Self->{PackageVerifyInfo} ne 'HASH';
-    return () if !%{ $Self->{PackageVerifyInfo} };
-
-    return %{ $Self->{PackageVerifyInfo} };
-}
-
-=head2 PackageVerifyAll()
-
-check if all installed packages are installed by the vendor
-returns a hash with package names and verification status.
-
-    my %VerificationInfo = $PackageObject->PackageVerifyAll();
-
-returns:
-
-    %VerificationInfo = (
-        FAQ     => 'verified',
-        Support => 'verified',
-        MyHack  => 'not_verified',
-    );
-
-=cut
-
-sub PackageVerifyAll {
-    my ( $Self, %Param ) = @_;
-
-    # Return "verified" for now. "Verified" logo will currently not be shown in package manager.
-    my @PackageList = $Self->RepositoryList(
-        Result => 'Short',
-    );
-
-    my %Result;
-    for my $Package (@PackageList) {
-        $Result{ $Package->{Name} } = 'verified';
-    }
-
-    return %Result;
-
-    #     # get installed package list
-    #     my @PackageList = $Self->RepositoryList(
-    #         Result => 'Short',
-    #     );
-
-    #     return () if !@PackageList;
-
-    #     # create a mapping of Package Name => md5 pairs
-    #     my %PackageList = map { $_->{Name} => $_->{MD5sum} } @PackageList;
-
-    #     # get cache object
-    #     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
-
-    #     my @PackagesToVerify;
-
-    #     # first check the cache for each package
-    #     for my $Package (@PackageList) {
-
-    #         my $Verification = $CacheObject->Get(
-    #             Type => 'PackageVerification',
-    #             Key  => $Package->{MD5sum},
-    #         );
-
-    #         # add to result if we have it already
-    #         if ($Verification) {
-    #             $Result{ $Package->{Name} } = $Verification;
-    #         }
-    #         else {
-    #             $Result{ $Package->{Name} } = 'unknown';
-    #             push @PackagesToVerify, {
-    #                 Name   => $Package->{Name},
-    #                 MD5sum => $Package->{MD5sum},
-    #             };
-    #         }
-    #     }
-
-    #     return %Result if !@PackagesToVerify;
-    #     return %Result if $Self->{CloudServicesDisabled};
-
-    #     my $CloudService = 'PackageManagement';
-    #     my $Operation    = 'PackageVerify';
-
-    #     # prepare cloud service request
-    #     my %RequestParams = (
-    #         RequestData => {
-    #             $CloudService => [
-    #                 {
-    #                     Operation => $Operation,
-    #                     Data      => {
-    #                         Package => \@PackagesToVerify,
-    #                     },
-    #                 },
-    #             ],
-    #         },
-    #     );
-
-    #     # get cloud service object
-    #     my $CloudServiceObject = $Kernel::OM->Get('Kernel::System::CloudService::Backend::Run');
-
-    #     # dispatch the cloud service request
-    #     my $RequestResult = $CloudServiceObject->Request(%RequestParams);
-
-    #     # as this is the only operation an unsuccessful request means that the operation was also
-    #     # unsuccessful, then return all packages as verified (or cache)
-    #     return %Result if !IsHashRefWithData($RequestResult);
-
-    #     my $OperationResult = $CloudServiceObject->OperationResultGet(
-    #         RequestResult => $RequestResult,
-    #         CloudService  => $CloudService,
-    #         Operation     => $Operation,
-    #     );
-
-    #     # if no operation result found or it was not successful the return all packages as verified
-    #     # (or cache)
-    #     return %Result if !IsHashRefWithData($OperationResult);
-    #     return %Result if !$OperationResult->{Success};
-
-    #     my $VerificationData = $OperationResult->{Data};
-
-    #     PACKAGE:
-    #     for my $Package ( sort keys %Result ) {
-
-    #         next PACKAGE if !$Package;
-    #         next PACKAGE if !$VerificationData->{$Package};
-
-    #         # extract response
-    #         my $PackageVerify = $VerificationData->{$Package};
-
-    #         next PACKAGE if !$PackageVerify;
-    #         next PACKAGE if $PackageVerify ne 'not_verified' && $PackageVerify ne 'verified';
-
-    #         # process result
-    #         $Result{$Package} = $PackageVerify;
-
-    #         # set cache
-    #         $CacheObject->Set(
-    #             Type  => 'PackageVerification',
-    #             Key   => $PackageList{$Package},
-    #             Value => $PackageVerify,
-    #             TTL   => 30 * 24 * 60 * 60,        # 30 days
-    #         );
-    #     }
-
-    #     return %Result;
-}
-
 =head2 PackageBuild()
 
 build an opm package
@@ -2218,7 +1880,6 @@ sub PackageBuild {
     my $XML  = '';
     my $Home = $Param{Home} || $Self->{ConfigObject}->Get('Home');
 
-    # check needed stuff
     for my $Needed (qw(Name Version Vendor License Description)) {
         if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -2493,7 +2154,6 @@ parse a package
 sub PackageParse {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     if ( !defined $Param{String} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -2697,7 +2357,6 @@ export files of an package
 sub PackageExport {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     for my $Needed (qw(String Home)) {
         if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -2740,7 +2399,6 @@ returns true if the package is already installed
 sub PackageIsInstalled {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     if ( !$Param{String} && !$Param{Name} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -2754,7 +2412,6 @@ sub PackageIsInstalled {
         $Param{Name} = $Structure{Name}->{Content};
     }
 
-    # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     $DBObject->Prepare(
@@ -2928,7 +2585,6 @@ Compare a framework array with the current framework.
 sub AnalyzePackageFrameworkRequirements {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     if ( !defined $Param{Framework} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -3113,7 +2769,7 @@ Updates installed packages to their latest version. Also updates OTRS Business S
     );
 
     %Result = (
-        Updated => {                # updated packages to the latest on-line repository version
+        Updated => {                # updated packages to the latest remote repository version
             PackageA => 1,
             PackageB => 1,
             PackageC => 1,
@@ -3136,11 +2792,11 @@ Updates installed packages to their latest version. Also updates OTRS Business S
                 PackageF => 1,
                 # ...
             },
-            NotFound => {           # packages not listed in the on-line repositories
+            NotFound => {           # packages not listed in the remote repositories
                 PackageG => 1,
                 # ...
             },
-            WrongVersion => {       # packages that requires a mayor version that the available in the on-line repositories
+            WrongVersion => {       # packages that require a major version that is not available in the remote repositories
                 PackageH => 1,
                 # ...
             },
@@ -3200,7 +2856,7 @@ sub PackageUpgradeAll {
     my %OnlinePackages = $Self->_PackageOnlineListGet();
 
     my @PackageOnlineList   = @{ $OnlinePackages{PackageList} };
-    my %PackageSoruceLookup = %{ $OnlinePackages{PackageLookup} };
+    my %PackageSourceLookup = %{ $OnlinePackages{PackageLookup} };
 
     my @PackageInstalledList = $Self->RepositoryList(
         Result => 'short',
@@ -3257,21 +2913,8 @@ sub PackageUpgradeAll {
 
     PACKAGENAME:
     for my $PackageName ( sort { $InstallOrder{$b} <=> $InstallOrder{$a} } keys %InstallOrder ) {
+        my $MetaPackage = $PackageSourceLookup{$PackageName};
 
-        if ( $PackageName eq 'OTRSBusiness' ) {
-            my $UpdateSuccess = $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessUpdate();
-
-            if ( !$UpdateSuccess ) {
-                $Success = 0;
-                $Failed{UpdateError}->{$PackageName} = 1;
-                next PACKAGENAME;
-            }
-
-            $Updated{'OTRS Business Solution™'} = 1;
-            next PACKAGENAME;
-        }
-
-        my $MetaPackage = $PackageSoruceLookup{$PackageName};
         next PACKAGENAME if !$MetaPackage;
 
         if ( $MetaPackage->{Version} eq ( $InstalledVersions{$PackageName} || '' ) ) {
@@ -3295,15 +2938,14 @@ sub PackageUpgradeAll {
         }
 
         my $Package = $Self->PackageOnlineGet(
-            Source => $MetaPackage->{URL},
+            Source => $MetaPackage->{Source},
             File   => $MetaPackage->{File},
         );
 
         if ( !$InstalledVersions{$PackageName} ) {
             my $InstallSuccess = $Self->PackageInstall(
-                String    => $Package,
-                FromCloud => $MetaPackage->{FromCloud},
-                Force     => $Param{Force} || 0,
+                String => $Package,
+                Force  => $Param{Force} || 0,
             );
             if ( !$InstallSuccess ) {
                 $Success = 0;
@@ -3375,8 +3017,8 @@ Gets a list of packages and its corresponding install order including is package
     install order means to install first.
 
     my %Result = $PackageObject->PackageInstallOrderListGet(
-        InstalledPackages => \@PakageList,      # as returned from RepositoryList(Result => 'short')
-        OnlinePackages    => \@PakageList,      # as returned from PackageOnlineList()
+        InstalledPackages => \@PackageList,      # as returned from RepositoryList(Result => 'short')
+        OnlinePackages    => \@PackageList,      # as returned from PackageOnlineList()
     );
 
     %Result = (
@@ -3392,11 +3034,11 @@ Gets a list of packages and its corresponding install order including is package
                 PackageE => 1,
                 # ...
             },
-            NotFound => {           # packages not listed in the on-line repositories
+            NotFound => {           # packages not listed in the remote repositories
                 PackageF => 1,
                 # ...
             },
-            WrongVersion => {        # packages that requires a mayor version that the available in the on-line repositories
+            WrongVersion => {        # packages that require a major version that is not available in the remote repositories
                 PackageG => 1,
                 # ...
             },
@@ -3428,12 +3070,6 @@ sub PackageInstallOrderListGet {
 
     my %InstallOrder;
     my %Failed;
-
-    my $OTRSBusinessObject = $Kernel::OM->Get('Kernel::System::OTRSBusiness');
-
-    if ( $OTRSBusinessObject->OTRSBusinessIsInstalled() && $OTRSBusinessObject->OTRSBusinessIsUpdateable() ) {
-        $InstallOrder{OTRSBusiness} = 9999;
-    }
 
     my $DependenciesSuccess = $Self->_PackageInstallOrderListGet(
         Callers             => {},
@@ -3564,7 +3200,6 @@ sub PackageUpgradeAllIsRunning {
 sub _Download {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     if ( !defined $Param{URL} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -3578,8 +3213,18 @@ sub _Download {
         Proxy   => $Self->{ConfigObject}->Get('Package::Proxy'),
     );
 
+    my %Header;
+    if (
+        IsStringWithData( $Param{AuthHeaderKey} )
+        && IsStringWithData( $Param{AuthHeaderValue} )
+        )
+    {
+        $Header{ $Param{AuthHeaderKey} } = $Param{AuthHeaderValue};
+    }
+
     my %Response = $WebUserAgentObject->Request(
-        URL => $Param{URL},
+        URL    => $Param{URL},
+        Header => \%Header,
     );
 
     return if !$Response{Content};
@@ -3589,7 +3234,6 @@ sub _Download {
 sub _Database {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     if ( !defined $Param{Database} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -3606,7 +3250,6 @@ sub _Database {
         return;
     }
 
-    # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     my @SQL = $DBObject->SQLProcessor(
@@ -3631,7 +3274,6 @@ sub _Database {
 sub _Code {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     for my $Needed (qw(Code Type Structure)) {
         if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -3693,7 +3335,6 @@ sub _Code {
 sub _OSCheck {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     if ( !defined $Param{OS} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -3760,7 +3401,6 @@ Otherwise undef is returned in scalar context.
 sub _CheckVersion {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     for my $Needed (qw(VersionNew VersionInstalled Type)) {
         if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -3836,7 +3476,6 @@ sub _CheckVersion {
 sub _CheckPackageRequired {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     if ( !defined $Param{PackageRequired} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -3902,7 +3541,6 @@ sub _CheckPackageRequired {
 sub _CheckModuleRequired {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     if ( !defined $Param{ModuleRequired} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -3975,7 +3613,6 @@ sub _CheckModuleRequired {
 sub _CheckPackageDepends {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     if ( !defined $Param{Name} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -4013,7 +3650,6 @@ sub _CheckPackageDepends {
 sub _PackageFileCheck {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     if ( !defined $Param{Structure} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -4055,7 +3691,6 @@ sub _PackageFileCheck {
 sub _FileInstall {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     for my $Needed (qw(File)) {
         if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -4170,7 +3805,6 @@ sub _FileInstall {
 sub _FileRemove {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     for my $Needed (qw(File)) {
         if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -4224,8 +3858,9 @@ sub _FileRemove {
             Mode     => 'binmode',
         );
         if ( $Content && ${$Content} ne $Param{File}->{Content} ) {
-            print STDERR "Notice: Backup for changed file: $RealFile.backup\n";
-            copy( $RealFile, "$RealFile.custom_backup" );
+            my $BackupFilePath = "$RealFile.custom_backup";
+            print STDERR "Notice: Backup for changed file: $BackupFilePath\n";
+            copy( $RealFile, $BackupFilePath );
         }
     }
 
@@ -4397,7 +4032,6 @@ CodeUninstall are not called.
 sub _PackageUninstallMerged {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     if ( !$Param{Name} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -4518,7 +4152,6 @@ sub _PackageUninstallMerged {
 sub _MergedPackages {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     if ( !defined $Param{Structure}->{PackageMerge} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -4685,7 +4318,6 @@ sub _MergedPackages {
 sub _CheckDBInstalledOrMerged {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     if ( !defined $Param{Database} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -4754,151 +4386,9 @@ sub _CheckDBInstalledOrMerged {
     return \@Parts;
 }
 
-=head2 RepositoryCloudList()
-
-returns a list of available cloud repositories
-
-    my $List = $PackageObject->RepositoryCloudList();
-
-=cut
-
-sub RepositoryCloudList {
-    my ( $Self, %Param ) = @_;
-
-    # get cache object
-    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
-
-    # check cache
-    my $CacheKey = "Repository::List::From::Cloud";
-    my $Cache    = $CacheObject->Get(
-        Type => 'RepositoryCloudList',
-        Key  => $CacheKey,
-    );
-
-    $Param{NoCache} //= 0;
-
-    # check if use cache is needed
-    if ( !$Param{NoCache} ) {
-        return $Cache if IsHashRefWithData($Cache);
-    }
-
-    my $RepositoryResult = $Self->CloudFileGet(
-        Operation => 'RepositoryListAvailable',
-    );
-
-    return if !IsHashRefWithData($RepositoryResult);
-
-    # set cache
-    $CacheObject->Set(
-        Type  => 'RepositoryCloudList',
-        Key   => $CacheKey,
-        Value => $RepositoryResult,
-        TTL   => 60 * 60,
-    );
-
-    return $RepositoryResult;
-}
-
-=head2 CloudFileGet()
-
-returns a file from cloud
-
-    my $List = $PackageObject->CloudFileGet(
-        Operation => 'OperationName', # used as operation name by the Cloud Service API
-                                      # Possible operation names:
-                                      # - RepositoryListAvailable
-                                      # - FAOListAssigned
-                                      # - FAOListAssignedFileGet
-    );
-
-=cut
-
-sub CloudFileGet {
-    my ( $Self, %Param ) = @_;
-
-    return if $Self->{CloudServicesDisabled};
-
-    # check needed stuff
-    if ( !defined $Param{Operation} ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => 'Operation not defined!',
-        );
-        return;
-    }
-
-    my %Data;
-    if ( IsHashRefWithData( $Param{Data} ) ) {
-        %Data = %{ $Param{Data} };
-    }
-
-    my $CloudService = 'PackageManagement';
-
-    # prepare cloud service request
-    my %RequestParams = (
-        RequestData => {
-            $CloudService => [
-                {
-                    Operation => $Param{Operation},
-                    Data      => \%Data,
-                },
-            ],
-        },
-    );
-
-    # get cloud service object
-    my $CloudServiceObject = $Kernel::OM->Get('Kernel::System::CloudService::Backend::Run');
-
-    # dispatch the cloud service request
-    my $RequestResult = $CloudServiceObject->Request(%RequestParams);
-
-    # as this is the only operation an unsuccessful request means that the operation was also
-    # unsuccessful
-    if ( !IsHashRefWithData($RequestResult) ) {
-        my $ErrorMessage = "Can't connect to cloud server!";
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => $ErrorMessage,
-        );
-        return $ErrorMessage;
-    }
-
-    my $OperationResult = $CloudServiceObject->OperationResultGet(
-        RequestResult => $RequestResult,
-        CloudService  => $CloudService,
-        Operation     => $Param{Operation},
-    );
-
-    if ( !IsHashRefWithData($OperationResult) ) {
-        my $ErrorMessage = "Can't get result from server";
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => $ErrorMessage,
-        );
-        return $ErrorMessage;
-    }
-    elsif ( !$OperationResult->{Success} ) {
-        my $ErrorMessage = $OperationResult->{ErrorMessage}
-            || "Can't get list from server!";
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => $ErrorMessage,
-        );
-        return $ErrorMessage;
-    }
-
-    # return if not correct structure
-    return if !IsHashRefWithData( $OperationResult->{Data} );
-
-    # return repo list
-    return $OperationResult->{Data};
-
-}
-
 sub _ConfigurationDeploy {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     for my $Needed (qw(Package Action)) {
         if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -5024,8 +4514,6 @@ sub _PackageInstallOrderListGet {
     PACKAGENAME:
     for my $PackageName ( sort keys %{ $Param{TargetPackages} } ) {
 
-        next PACKAGENAME if $PackageName eq 'OTRSBusiness';
-
         # Prevent cyclic dependencies.
         if ( $Param{Callers}->{$PackageName} ) {
             $Param{Failed}->{Cyclic}->{$PackageName} = 1;
@@ -5035,14 +4523,14 @@ sub _PackageInstallOrderListGet {
 
         my $OnlinePackage = $Param{OnlinePackageLookup}->{$PackageName};
 
-        # Check if the package can be obtained on-line.
+        # Check if the package can be obtained remotely.
         if ( !$OnlinePackage || !IsHashRefWithData($OnlinePackage) ) {
             $Param{Failed}->{NotFound}->{$PackageName} = 1;
             $Success = 0;
             next PACKAGENAME;
         }
 
-        # Check if the version of the on-line package is grater (or equal) to the required version,
+        # Check if the version of the remote package is grater (or equal) to the required version,
         #   in case of equal, reference still counts, but at update or install package must be
         #   skipped.
         if ( $OnlinePackage->{Version} ne $Param{TargetPackages}->{$PackageName} ) {
@@ -5113,7 +4601,7 @@ sub _PackageInstallOrderListGet {
 
 =head2 _PackageOnlineListGet()
 
-Helper function that gets the full list of available on-line packages.
+Helper function that gets the full list of available remote packages.
 
     my %OnlinePackages = $PackageObject->_PackageOnlineListGet();
 
@@ -5150,7 +4638,6 @@ Returns:
         PackageLookup  => {
             Test => {
                    URL        => 'http://otrs.org/',
-                    FromCloud => 1,                     # 1 or 0,
                     Version   => '6.0.20',
                     File      => 'Test-6.0.20.opm',
             },
@@ -5161,117 +4648,36 @@ Returns:
 =cut
 
 sub _PackageOnlineListGet {
-
     my ( $Self, %Param ) = @_;
 
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
-    my %RepositoryList = $Self->_ConfiguredRepositoryDefinitionGet();
-
-    # Show cloud repositories if system is registered.
-    my $RepositoryCloudList;
-    my $RegistrationState = $Kernel::OM->Get('Kernel::System::SystemData')->SystemDataGet(
-        Key => 'Registration::State',
-    ) || '';
-
-    if ( $RegistrationState eq 'registered' && !$Self->{CloudServicesDisabled} ) {
-        $RepositoryCloudList = $Self->RepositoryCloudList( NoCache => 1 );
-    }
-
-    my %RepositoryListAll = ( %RepositoryList, %{ $RepositoryCloudList || {} } );
+    my %RepositoryList = $Self->ConfiguredRepositoryListGet();
 
     my @PackageOnlineList;
-    my %PackageSoruceLookup;
+    my %PackageSourceLookup;
 
-    for my $URL ( sort keys %RepositoryListAll ) {
-
-        my $FromCloud = 0;
-        if ( $RepositoryCloudList->{$URL} ) {
-            $FromCloud = 1;
-
-        }
-
-        my @OnlineList = $Self->PackageOnlineList(
-            URL                => $URL,
+    for my $Source ( sort keys %RepositoryList ) {
+        my @OnlineList = $Self->RepositoryPackageListGet(
+            Source             => $Source,
             Lang               => 'en',
             Cache              => 1,
-            FromCloud          => $FromCloud,
             IncludeSameVersion => 1,
         );
 
         @PackageOnlineList = ( @PackageOnlineList, @OnlineList );
 
         for my $Package (@OnlineList) {
-            $PackageSoruceLookup{ $Package->{Name} } = {
-                URL       => $URL,
-                FromCloud => $FromCloud,
-                Version   => $Package->{Version},
-                File      => $Package->{File},
+            $PackageSourceLookup{ $Package->{Name} } = {
+                Source  => $Source,
+                Version => $Package->{Version},
+                File    => $Package->{File},
             };
         }
     }
 
     return (
         PackageList   => \@PackageOnlineList,
-        PackageLookup => \%PackageSoruceLookup,
+        PackageLookup => \%PackageSourceLookup,
     );
-}
-
-=head2 _ConfiguredRepositoryDefinitionGet()
-
-Helper function that gets the full list of configured package repositories updated for the current
-framework version.
-
-    my %RepositoryList = $PackageObject->_ConfiguredRepositoryDefinitionGet();
-
-Returns:
-
-    %RepositoryList = (
-        'https://download.znuny.org/releases/packages' => 'OTRS Freebie Features',
-        # ...,
-    );
-
-=cut
-
-sub _ConfiguredRepositoryDefinitionGet {
-    my ( $Self, %Param ) = @_;
-
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
-    my %RepositoryList;
-    if ( $ConfigObject->Get('Package::RepositoryList') ) {
-        %RepositoryList = %{ $ConfigObject->Get('Package::RepositoryList') };
-    }
-    if ( $ConfigObject->Get('Package::RepositoryRoot') ) {
-        %RepositoryList = ( %RepositoryList, $Self->PackageOnlineRepositories() );
-    }
-
-    return () if !%RepositoryList;
-
-    # Make sure ITSM repository matches the current framework version.
-    my @Matches
-        = grep { $_ =~ m{https://download\.znuny\.org/releases/itsm/packages\d+/}msxi } sort keys %RepositoryList;
-
-    return %RepositoryList if !@Matches;
-
-    my @FrameworkVersionParts = split /\./, $Self->{ConfigObject}->Get('Version');
-    my $FrameworkVersion      = $FrameworkVersionParts[0];
-
-    my $CurrentITSMRepository = "https://download.znuny.org/releases/itsm/packages$FrameworkVersion/";
-
-    # Delete all old ITSM repositories, but leave the current if exists
-    for my $Repository (@Matches) {
-        if ( $Repository ne $CurrentITSMRepository ) {
-            delete $RepositoryList{$Repository};
-        }
-    }
-
-    return %RepositoryList if exists $RepositoryList{$CurrentITSMRepository};
-
-    # Make sure that current ITSM repository is in the list.
-    $RepositoryList{$CurrentITSMRepository} = "OTRS::ITSM $FrameworkVersion Master";
-
-    return %RepositoryList;
 }
 
 =head2 _RepositoryCacheClear()
@@ -5311,7 +4717,6 @@ check if package configuration files are deployed correctly.
 sub _ConfigurationFilesDeployCheck {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     for my $Needed (qw(Name Version)) {
         if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -19,17 +19,17 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => 0
         );
 
         # Enable Type feature.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Type',
             Value => 1
@@ -86,7 +86,7 @@ $Selenium->RunTest(
             }
         }
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Create Ticket types.
         my $TypeObject = $Kernel::OM->Get('Kernel::System::Type');
@@ -112,7 +112,7 @@ $Selenium->RunTest(
 
         my @ACLs = (
             {
-                Name           => '1-ACL' . $Helper->GetRandomID(),
+                Name           => '1-ACL' . $HelperObject->GetRandomID(),
                 Comment        => 'Selenium Process ACL',
                 Description    => 'Description',
                 StopAfterMatch => 1,
@@ -141,7 +141,7 @@ $Selenium->RunTest(
                 UserID  => 1,
             },
             {
-                Name           => '2-ACL' . $Helper->GetRandomID(),
+                Name           => '2-ACL' . $HelperObject->GetRandomID(),
                 Comment        => 'Selenium Process ACL',
                 Description    => 'Description',
                 StopAfterMatch => 1,
@@ -212,7 +212,7 @@ $Selenium->RunTest(
         }
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
         ) || die "Did not get test user";
 
@@ -279,7 +279,7 @@ $Selenium->RunTest(
         );
 
         # Create test customer user and login.
-        my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate(
+        my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
         ) || die "Did not get test customer user";
 
         $Selenium->Login(
@@ -353,8 +353,8 @@ $Selenium->RunTest(
             "DynamicField filtered options count",
         );
 
-        my $SubjectRandom  = 'Subject' . $Helper->GetRandomID();
-        my $ContentRandom  = 'Content' . $Helper->GetRandomID();
+        my $SubjectRandom  = 'Subject' . $HelperObject->GetRandomID();
+        my $ContentRandom  = 'Content' . $HelperObject->GetRandomID();
         my $AttachmentName = "StdAttachment-Test1.txt";
         my $AttachmentLocation
             = $Kernel::OM->Get('Kernel::Config')->Get('Home') . "/scripts/test/sample/StdAttachment/$AttachmentName";

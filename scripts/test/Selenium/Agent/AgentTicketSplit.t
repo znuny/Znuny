@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,23 +18,23 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper               = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject         = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject         = $Kernel::OM->Get('Kernel::System::Ticket');
         my $SystemAddressObject  = $Kernel::OM->Get('Kernel::System::SystemAddress');
         my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
             ChannelName => 'Email',
         );
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # Disable check of email addresses.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
             Value => 0,
         );
 
         # Do not check RichText.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Frontend::RichText',
             Value => '0',
@@ -141,7 +141,7 @@ $Selenium->RunTest(
         }
 
         # Create and login test user.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -357,7 +357,7 @@ $Selenium->RunTest(
 
         # Disable 'Frontend::Module###AgentTicketEmail' does not remove split target 'Email ticket'.
         # See bug#13690 (https://bugs.otrs.org/show_bug.cgi?id=13690) for more information.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 0,
             Key   => "Frontend::Module###AgentTicketEmail",
         );
@@ -397,7 +397,7 @@ $Selenium->RunTest(
 
         # Check customer information widget (https://bugs.otrs.org/show_bug.cgi?id=14414).
         # Enable AgentTicketEmail frontend module.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => "Frontend::Module###AgentTicketEmail",
             Value => $AgentTicketEmailConfig{EffectiveValue},
@@ -407,7 +407,7 @@ $Selenium->RunTest(
         my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
         my @TestCustomerUsers;
         for ( 1 .. 3 ) {
-            my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate(
+            my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate(
                 Groups => ['admin'],
             ) || die 'Did not get test customer user';
 
@@ -418,7 +418,7 @@ $Selenium->RunTest(
             push @TestCustomerUsers, \%TestCustomerUserData;
         }
 
-        my $TestRandomID = $Helper->GetRandomID();
+        my $TestRandomID = $HelperObject->GetRandomID();
 
         # Create test ticket with second customer user.
         my $TestTicketID = $TicketObject->TicketCreate(

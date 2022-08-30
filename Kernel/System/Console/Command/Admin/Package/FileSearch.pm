@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -21,7 +21,7 @@ our @ObjectDependencies = (
 sub Configure {
     my ( $Self, %Param ) = @_;
 
-    $Self->Description('Find a file in an installed OTRS package.');
+    $Self->Description('Find a file in an installed package.');
     $Self->AddArgument(
         Name        => 'search-path',
         Description => "Filename or path to search for.",
@@ -35,7 +35,7 @@ sub Configure {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    $Self->Print("<yellow>Searching in installed OTRS packages...</yellow>\n");
+    $Self->Print("<yellow>Searching in installed packages...</yellow>\n");
 
     my $Hit      = 0;
     my $Filepath = $Self->GetArgument('search-path');
@@ -72,7 +72,7 @@ sub Run {
         return $Self->ExitCodeOk();
     }
 
-    $Self->PrintError("File $Filepath was not found in an installed OTRS package.\n");
+    $Self->PrintError("File $Filepath was not found in an installed package.\n");
     return $Self->ExitCodeError();
 }
 

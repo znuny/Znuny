@@ -1,0 +1,36 @@
+# --
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+[% RenderBlockStart("TimeUnitsLabel") %]
+    <label for="TimeUnits">[% Translate("Time units") | html %] [% Translate(Config("Ticket::Frontend::TimeUnits")) | html %]:</label>
+[% RenderBlockEnd("TimeUnitsLabel") %]
+
+[% RenderBlockStart("TimeUnitsLabelMandatory") %]
+    <label class="Mandatory" for="TimeUnits"><span class="Marker">*</span>[% Translate("Time units") | html %] [% Translate(Config("Ticket::Frontend::TimeUnits")) | html %]:</label>
+[% RenderBlockEnd("TimeUnitsLabelMandatory") %]
+
+[% RenderBlockStart("TimeUnitsText") %]
+    <div class="Field">
+        <input type="text" id="[% Data.ID | html %]" name="[% Data.Name | html %]" value="[% Data.TimeUnits | html %]" class="W50pc Validate_TimeUnits [% Data.TimeUnitsRequiredClass | html %] [% Data.TimeUnitsInvalid | html %]"/>
+        <div id="TimeUnitsError" class="TooltipErrorMessage"><p>[% Translate("Invalid time!") | html %]</p></div>
+        <div id="TimeUnitsServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+    </div>
+    <div class="Clear"></div>
+[% RenderBlockEnd("TimeUnitsText") %]
+
+[% RenderBlockStart("TimeUnitsDropdown") %]
+    <div class="Field">
+[% RenderBlockStart("TimeUnits") %]
+        <input type="hidden" id="[% Data.ID | html %]" name="[% Data.Name | html %]" value="[% Data.TimeUnits | html %]" class="W50pc Validate_TimeUnits [% Data.TimeUnitsRequiredClass | html %] [% Data.TimeUnitsInvalid | html %]"/>
+[% RenderBlockEnd("TimeUnits") %]
+[% RenderBlockStart("Dropdown") %]
+        [% Translate(Data.Label) | html %]: [% Data.Field %]
+[% RenderBlockEnd("Dropdown") %]
+    </div>
+    <div class="Clear"></div>
+[% RenderBlockEnd("TimeUnitsDropdown") %]

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -61,7 +61,7 @@ sub Run {
             )
         {
             my ($ImageID) = ( $Attachment->{ContentID} =~ m{^<(.*)>$}ixms );
-            if ( grep { $_->{Content} =~ m{<img.*src=.*['|"]cid:\Q$ImageID\E['|"].*>}ixms } @Attachments ) {
+            if ( grep { $_->{Content} =~ m{<img.*src=.*['|"]cid:\Q$ImageID\E['|"].*>}xms } @Attachments ) {
                 $AttachmentInline = 1;
             }
         }

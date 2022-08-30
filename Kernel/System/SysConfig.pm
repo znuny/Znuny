@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -2230,6 +2230,7 @@ sub ConfigurationTranslatableStrings {
     for my $Key ( sort keys %{ $Self->{ConfigurationTranslatableStrings} } ) {
         push @Strings, $Key;
     }
+
     return @Strings;
 }
 
@@ -4441,8 +4442,8 @@ Returns:
             Files => [],
         },
         OTRS => {
-            DisplayName => 'OTRS',
-            Files       => ['Calendar.xml', CloudServices.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml', 'ProcessManagement.xml', 'Ticket.xml' ],
+            DisplayName => 'Znuny',
+            Files       => ['Calendar.xml', CloudServices.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml', 'ProcessManagement.xml', 'Ticket.xml', 'Znuny.xml' ],
         },
         # ...
     );
@@ -4472,10 +4473,11 @@ sub ConfigurationCategoriesGet {
             Files       => [],
         },
         OTRS => {
-            DisplayName => 'OTRS',
+            DisplayName => 'Znuny',
             Files       => [
                 'Calendar.xml', 'CloudServices.xml', 'Daemon.xml', 'Framework.xml',
                 'GenericInterface.xml', 'ProcessManagement.xml', 'Ticket.xml',
+                'Znuny.xml',
             ],
         },
     );
@@ -5163,6 +5165,7 @@ sub _ConfigurationTranslatableStrings {
             {
                 return if !$Param{Data}->{Content};
                 return if $Param{Data}->{Content} =~ /^\d+$/;
+
                 $Self->{ConfigurationTranslatableStrings}->{ $Param{Data}->{Content} } = 1;
             }
             $Self->_ConfigurationTranslatableStrings( Data => $Param{Data}->{$Key} );

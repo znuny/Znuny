@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -23,17 +23,17 @@ use Kernel::System::SupportDataCollector::PluginBase;
 my $CacheObject                = $Kernel::OM->Get('Kernel::System::Cache');
 my $MainObject                 = $Kernel::OM->Get('Kernel::System::Main');
 my $SupportDataCollectorObject = $Kernel::OM->Get('Kernel::System::SupportDataCollector');
-my $Helper                     = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject               = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # test the support data collect asynchronous function
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'SupportDataCollector::DisablePlugins',
     Value => [
         'Kernel::System::SupportDataCollector::Plugin::OTRS::PackageDeployment',
     ],
 );
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'SupportDataCollector::IdentifierFilterBlacklist',
     Value => [
@@ -98,7 +98,7 @@ $TimeStart = [ Time::HiRes::gettimeofday() ];
 
 %Result = $SupportDataCollectorObject->Collect(
     WebTimeout => 240,
-    Hostname   => $Helper->GetTestHTTPHostname(),
+    Hostname   => $HelperObject->GetTestHTTPHostname(),
 );
 
 $TimeElapsed = Time::HiRes::tv_interval($TimeStart);

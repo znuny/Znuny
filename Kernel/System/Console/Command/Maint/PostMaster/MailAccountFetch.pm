@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -93,18 +93,18 @@ sub Run {
     my ( $Self, %Param ) = @_;
 
     my $MailAccountObject = $Kernel::OM->Get('Kernel::System::MailAccount');
-    my %List              = $MailAccountObject->MailAccountList( Valid => 1 );
 
     my $Debug         = $Self->GetOption('debug');
     my $Timeout       = $Self->GetOption('timeout') || 600;
     my $MailAccountID = $Self->GetOption('mail-account-id');
 
-    if ( !%List ) {
-        if ($MailAccountID) {
-            $Self->PrintError("Could not find mail account $MailAccountID.");
-            return $Self->ExitCodeError();
-        }
+    my %MailAccounts = $MailAccountObject->MailAccountList( Valid => 1 );
+    if ( $MailAccountID && !$MailAccounts{$MailAccountID} ) {
+        $Self->PrintError("Could not find mail account with ID $MailAccountID.");
+        return $Self->ExitCodeError();
+    }
 
+    if ( !%MailAccounts ) {
         $Self->Print("\n<yellow>No configured mail accounts found!</yellow>\n\n");
         return $Self->ExitCodeOk();
     }
@@ -145,13 +145,10 @@ sub Run {
 
     # We're in the child process.
     if ( !$PID ) {
-
         my $ErrorCount;
-        my $FetchedCount;
 
         KEY:
-        for my $Key ( sort keys %List ) {
-
+        for my $Key ( sort keys %MailAccounts ) {
             next KEY if ( $MailAccountID && $Key != $MailAccountID );
 
             my %Data = $MailAccountObject->MailAccountGet( ID => $Key );
@@ -185,26 +182,12 @@ sub Run {
                 print STDERR $ErrorMessage;
             }
 
-            if ($Status) {
-                $FetchedCount++;
-            }
-            else {
+            if ( !$Status ) {
                 $ErrorCount++;
             }
         }
 
-        my $ExitCode = $Self->ExitCodeOk();
-
-        if ($ErrorCount) {
-
-            # Error messages printed by backend.
-            $ExitCode = $Self->ExitCodeError();
-        }
-
-        if ( !$FetchedCount && $MailAccountID ) {
-            $Self->PrintError("Could not find mail account $MailAccountID.");
-            $ExitCode = $Self->ExitCodeError();
-        }
+        my $ExitCode = $ErrorCount ? $Self->ExitCodeError() : $Self->ExitCodeOk();
 
         # Close child process at the end.
         exit $ExitCode;
@@ -240,6 +223,7 @@ sub Run {
     alarm 0;
 
     $Self->Print("<green>Done.</green>\n\n");
+
     return $Self->ExitCodeOk();
 }
 

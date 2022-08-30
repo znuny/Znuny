@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -67,11 +67,13 @@ add new Activity
 returns the id of the created activity if success or undef otherwise
 
     my $ID = $ActivityObject->ActivityAdd(
-        EntityID    => 'A1'              # mandatory, exportable unique identifier
-        Name        => 'NameOfActivity', # mandatory
-        Config      => $ConfigHashRef,   # mandatory, activity configuration to be stored in YAML
-                                         #   format
-        UserID      => 123,              # mandatory
+        EntityID => 'A1'                                                # mandatory, exportable unique identifier
+        Name     => 'NameOfActivity',                                   # mandatory
+        Config   => {                                                   # mandatory, activity configuration to be stored in YAML format
+            Scope         => 'Global'                                   # mandatory, default 'Global' (Process|Global)
+            ScopeEntityID => 'Process-9690ae9ae455d8614d570149b8ab1199' # ScopeEntityID, used if specific scope is set e.g. 'Process'
+        },
+        UserID   => 123,                                                # mandatory
     );
 
 Returns:
@@ -83,7 +85,6 @@ Returns:
 sub ActivityAdd {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     for my $Key (qw(EntityID Name Config UserID)) {
         if ( !$Param{$Key} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -129,6 +130,15 @@ sub ActivityAdd {
         return;
     }
 
+    $Param{Config}->{Scope} //= 'Global';
+    if ( $Param{Config}->{Scope} ne 'Global' && !$Param{Config}->{ScopeEntityID} ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Need ScopeEntityID if specific scope is set.",
+        );
+        return;
+    }
+
     # dump config as string
     my $Config = $Kernel::OM->Get('Kernel::System::YAML')->Dump( Data => $Param{Config} );
 
@@ -139,8 +149,7 @@ sub ActivityAdd {
     # sql
     return if !$DBObject->Do(
         SQL => '
-            INSERT INTO pm_activity (entity_id, name, config, create_time, create_by, change_time,
-                change_by)
+            INSERT INTO pm_activity (entity_id, name, config, create_time, create_by, change_time, change_by)
             VALUES (?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
         Bind => [
             \$Param{EntityID}, \$Param{Name}, \$Config, \$Param{UserID}, \$Param{UserID},
@@ -235,7 +244,10 @@ Returns:
         ID             => 123,
         EntityID       => 'A1',
         Name           => 'some name',
-        Config         => $ConfigHashRef,
+        Config         => {
+            Scope         => 'Global',
+            ScopeEntityID => undef,
+        },
         ActiviyDialogs => ['AD1','AD2','AD3'],
         CreateTime     => '2012-07-04 15:08:00',
         ChangeTime     => '2012-07-04 15:08:00',
@@ -245,7 +257,10 @@ Returns:
         ID           => 123,
         EntityID     => 'P1',
         Name         => 'some name',
-        Config       => $ConfigHashRef,
+        Config         => {
+            Scope         => 'Process',
+            ScopeEntityID => 'Process-9690ae9ae455d8614d570149b8ab1199',
+        },
         ActivityDialogs => {
             'AD1' => 'ActivityDialog1',
             'AD2' => 'ActivityDialog2',
@@ -396,12 +411,14 @@ update Activity attributes
 returns 1 if success or undef otherwise
 
     my $Success = $ActivityObject->ActivityUpdate(
-        ID          => 123,             # mandatory
-        EntityID    => 'A1'             # mandatory, exportable unique identifier
-        Name        => 'NameOfProcess', # mandatory
-        Config      => $ConfigHashRef,  # mandatory, process configuration to be stored in YAML
-                                        #   format
-        UserID      => 123,             # mandatory
+        ID       => 123,                                                 # mandatory
+        EntityID => 'A1',                                                # mandatory, exportable unique identifier
+        Name     => 'NameOfProcess',                                     # mandatory
+        Config   => {                                                    # mandatory, process configuration to be stored in YAML
+            Scope         => 'Global',                                   # mandatory, default 'Global' (Process|Global)
+            ScopeEntityID => 'Process-9690ae9ae455d8614d570149b8ab1199', # ScopeEntityID, used if specific scope is set e.g. 'Process'
+        }
+        UserID   => 123,                                                 # mandatory
     );
 
 =cut
@@ -451,6 +468,15 @@ sub ActivityUpdate {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => "Config needs to be a valid Hash reference!",
+        );
+        return;
+    }
+
+    $Param{Config}->{Scope} //= 'Global';
+    if ( $Param{Config}->{Scope} ne 'Global' && !$Param{Config}->{ScopeEntityID} ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Need ScopeEntityID if specific scope is set.",
         );
         return;
     }

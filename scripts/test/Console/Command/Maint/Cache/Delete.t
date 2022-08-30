@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,7 +18,7 @@ my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Maint::C
 
 my ( $Result, $ExitCode );
 
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # create cache object and disable inmemory caching to force
 # the cache to read from file system
@@ -27,8 +27,8 @@ $CacheObject->Configure(
     CacheInMemory => 0,
 );
 
-my $ObjectType = $Helper->GetRandomID();
-my $ObjectKey  = $Helper->GetRandomNumber();
+my $ObjectType = $HelperObject->GetRandomID();
+my $ObjectKey  = $HelperObject->GetRandomNumber();
 
 # create dummy cache entry
 my $CacheSet = $CacheObject->Set(
@@ -63,8 +63,8 @@ $Self->Is(
 );
 
 # create another dummy cache entry with TTL 1 day
-$ObjectType = $Helper->GetRandomID();
-$ObjectKey  = $Helper->GetRandomNumber();
+$ObjectType = $HelperObject->GetRandomID();
+$ObjectKey  = $HelperObject->GetRandomNumber();
 
 $CacheSet = $CacheObject->Set(
     Type  => $ObjectType,
@@ -99,8 +99,8 @@ $Self->Is(
 );
 
 # create another dummy cache entry with TTL 1 day
-$ObjectType = $Helper->GetRandomID();
-$ObjectKey  = $Helper->GetRandomNumber();
+$ObjectType = $HelperObject->GetRandomID();
+$ObjectKey  = $HelperObject->GetRandomNumber();
 
 $CacheSet = $CacheObject->Set(
     Type  => $ObjectType,

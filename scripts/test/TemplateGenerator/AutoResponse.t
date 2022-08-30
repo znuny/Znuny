@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -21,7 +21,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 $ConfigObject->Set(
     Key   => 'CheckEmailAddresses',
@@ -58,13 +58,13 @@ $Self->True(
     'Set default language to English',
 );
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 # Create customer users.
-my $TestUserLoginEN = $Helper->TestCustomerUserCreate(
+my $TestUserLoginEN = $HelperObject->TestCustomerUserCreate(
     Language => 'en',
 );
-my $TestUserLoginDE = $Helper->TestCustomerUserCreate(
+my $TestUserLoginDE = $HelperObject->TestCustomerUserCreate(
     Language => 'de',
 );
 
@@ -294,7 +294,7 @@ $Self->True(
 );
 
 # Set fixed time.
-$Helper->FixedTimeSet(
+$HelperObject->FixedTimeSet(
     $Kernel::OM->Create(
         'Kernel::System::DateTime',
         ObjectParams => {
@@ -304,7 +304,7 @@ $Helper->FixedTimeSet(
 );
 
 # Create test customer user.
-my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate();
+my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate();
 
 # Create test ticket.
 my $TestTicketID = $TicketObject->TicketCreate(

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -20,6 +20,21 @@
     [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
 
     <div class="SidebarColumn">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <div class="WidgetAction Toggle">
+                    <a href="#" title="[% Translate("Toggle this widget") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+                </div>
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=AdminLog;Subaction=Clear" id="ClearLogEntries" class="CallForAction Fullsize Center"><span><i class="fa fa-trash-o"></i>[% Translate("Clear log entries") | html %]</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
         <div class="WidgetSimple">
             <div class="Header">
                 <h2><label for="FilterLogEntries">[% Translate("Filter for Log Entries") | html %]</label></h2>

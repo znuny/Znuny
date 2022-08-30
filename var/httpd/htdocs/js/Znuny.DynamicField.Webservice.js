@@ -1,5 +1,5 @@
 // --
-// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (AGPL). If you
@@ -139,11 +139,16 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
                     DynamicFieldName: DynamicFieldName,
                     SearchTerms:      Value,
                     TicketID:         TicketID
-                };
+                },
+                SerializedFormData = TargetNS.SerializeForm($('#DynamicField_' + DynamicFieldName)),
+                InputValues        = TargetNS.GetInputValues($('#DynamicField_' + DynamicFieldName));
 
-            if (Value.length < AutocompleteMinLength){
+            if (Value.length < AutocompleteMinLength) {
                 return;
             }
+
+            Data = $.extend(Data, SerializedFormData);
+            Data.FormFields = InputValues;
 
             ActiveAJAXCall = true;
             Core.AJAX.ToggleAJAXLoader(SelectedValueFieldName, true);
@@ -257,12 +262,15 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
                         Subaction:        'Autocomplete',
                         DynamicFieldName: DynamicFieldName,
                         SearchTerms:      Request.term,
-                        TicketID:         TicketID
+                        TicketID:         TicketID,
+                        View:             Core.Config.Get('Action')
                     },
-                    SerializedFormData = TargetNS.SerializeForm($('#DynamicField_' + DynamicFieldName));
+                    SerializedFormData = TargetNS.SerializeForm($('#DynamicField_' + DynamicFieldName)),
+                    InputValues = TargetNS.GetInputValues($('#DynamicField_' + DynamicFieldName));
 
                 Data = $.extend(Data, SerializedFormData);
 
+                Data.FormFields = InputValues;
                 $('#AJAXLoader' + $AutocompleteElement.attr('id')).show();
 
                 $Element.data(
@@ -355,7 +363,12 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
                 Subaction:        'AutoFill',
                 DynamicFieldName: DynamicFieldName,
                 SearchTerms:      Value,
-            };
+            },
+            SerializedFormData = TargetNS.SerializeForm($('#DynamicField_' + DynamicFieldName)),
+            InputValues        = TargetNS.GetInputValues($('#DynamicField_' + DynamicFieldName));
+
+        Data = $.extend(Data, SerializedFormData);
+        Data.FormFields = InputValues;
 
         Core.AJAX.FunctionCall(
             URL,
@@ -480,6 +493,38 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
                 QueryString[Name] = $(this).val();
             });
         }
+        return QueryString;
+    };
+
+    TargetNS.GetInputValues = function ($Element) {
+        var QueryString = {},
+            DynamicFieldName = $Element.attr('name');
+
+        if (isJQueryObject($Element) && $Element.length) {
+            $Element.closest('form').find('input:not(:file), textarea, select').filter(':not([disabled=disabled])').each(function () {
+                var Name = $(this).attr('name') || '';
+
+                if (!Name.length){
+                    return;
+                }
+
+                if (Name == DynamicFieldName || Name == 'Action' || Name == 'Subaction' || Name.match('Autocomplete')) return;
+
+                if( $(this).attr('type') == 'checkbox' ) {
+                    QueryString[Name] = {
+                        ID: $(this).prop('checked') ? 1 : 0
+                    };
+                    return;
+                }
+
+                QueryString[Name] = {
+                    ID:   $(this).val(),
+                    Name: $(this).children('option:selected').text()
+                };
+
+            });
+        }
+
         return QueryString;
     };
 

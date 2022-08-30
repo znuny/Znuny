@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -22,10 +22,10 @@ $Selenium->RunTest(
     sub {
 
         # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # enable PGP
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'PGP',
             Value => 1
@@ -61,17 +61,17 @@ $Selenium->RunTest(
         my $Home = $ConfigObject->Get('Home');
 
         # create test PGP path and set it in sysConfig
-        my $PGPPath = $Home . '/var/tmp/pgp' . $Helper->GetRandomID();
+        my $PGPPath = $Home . '/var/tmp/pgp' . $HelperObject->GetRandomID();
         mkpath( [$PGPPath], 0, 0770 );    ## no critic
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'PGP::Options',
             Value => "--homedir $PGPPath --batch --no-tty --yes",
         );
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestCustomerUserCreate(
+        my $TestUserLogin = $HelperObject->TestCustomerUserCreate(
             Groups   => ['admin'],
             Language => 'en'
         ) || die "Did not get test user";

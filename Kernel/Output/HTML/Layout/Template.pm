@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -141,7 +141,6 @@ sub Output {
         $Self->{TemplateProviderObject} = Kernel::Output::Template::Provider->new(
             {
                 INCLUDE_PATH => \@TemplateFolders,
-                EVAL_PERL    => 1,
                 COMPILE_EXT  => '.ttc',
             }
         );
@@ -157,7 +156,6 @@ sub Output {
 
         my $Context = Template::Context->new(
             {
-                EVAL_PERL      => 1,
                 STASH          => Template::Stash::XS->new(),
                 LOAD_TEMPLATES => [ $Self->{TemplateProviderObject} ],
                 LOAD_PLUGINS   => [$Plugins],

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -78,7 +78,14 @@ sub Run {
     }
 
     # Calendar time zones
-    for my $Counter ( 1 .. 9 ) {
+    my $Maximum = $ConfigObject->Get("MaximumCalendarNumber") || 50;
+
+    COUNTER:
+    for my $Counter ( '', 1 .. $Maximum ) {
+        my $CalendarName = $ConfigObject->Get( 'TimeZone::Calendar' . $Counter . 'Name' );
+
+        next COUNTER if !$CalendarName;
+
         my $CalendarTimeZone = $ConfigObject->Get( 'TimeZone::Calendar' . $Counter );
 
         if ( defined $CalendarTimeZone ) {

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -62,108 +62,73 @@ $Self->True(
 
 my $Home = $ConfigObject->Get('Home');
 
-my @Tests = (
-
-);
-
 my $FileTempObject = $Kernel::OM->Get('Kernel::System::FileTemp');
 
-for my $AllowCustomScriptExecution ( 0, 1 ) {
+ALLOWCUSTOMMODULEEXECUTION:
+for my $AllowCustomModuleExecution ( 0, 1 ) {
 
-    for my $AllowCustomModuleExecution ( 0, 1 ) {
+    $ConfigObject->Set(
+        Key   => 'Ticket::GenericAgentAllowCustomModuleExecution',
+        Value => $AllowCustomModuleExecution,
+    );
 
-        $ConfigObject->Set(
-            Key   => 'Ticket::GenericAgentAllowCustomScriptExecution',
-            Value => $AllowCustomScriptExecution,
+    my ( $FileHandle, $FileName ) = $FileTempObject->TempFile();
+
+    $Self->True(
+        -e $FileName ? 1 : 0,
+        "GenericAgent ModuleExecution: $AllowCustomModuleExecution TmpFile $FileName created"
+    );
+
+    my $Name = 'job' . $Helper->GetRandomID();
+
+    my %NewJob = (
+        Name => $Name,
+        Data => {
+            TicketNumber => $Ticket{TicketNumber},
+        },
+    );
+
+    $NewJob{Data}->{NewModule}      = 'scripts::test::sample::GenericAgent::CustomCode::DeleteTmp';
+    $NewJob{Data}->{NewParamKey1}   = 'FileName';
+    $NewJob{Data}->{NewParamValue1} = $FileName;
+
+    my $JobAdd = $GenericAgentObject->JobAdd(
+        %NewJob,
+        UserID => 1,
+    );
+    $Self->True(
+        $JobAdd || '',
+        "GenericAgent ModuleExecution: $AllowCustomModuleExecution JobAdd() - $Name",
+    );
+
+    $Self->True(
+        $GenericAgentObject->JobRun(
+            Job    => $Name,
+            UserID => 1,
+        ),
+        "GenericAgent ModuleExecution: $AllowCustomModuleExecution JobRun() - $Name",
+    );
+
+    my $JobDelete = $GenericAgentObject->JobDelete(
+        Name   => $Name,
+        UserID => 1,
+    );
+    $Self->True(
+        $JobDelete || '',
+        "GenericAgent ModuleExecution: $AllowCustomModuleExecution JobDelete() - $Name",
+    );
+
+    if ($AllowCustomModuleExecution) {
+        $Self->False(
+            -e $FileName ? 1 : 0,
+            "GenericAgent ModuleExecution: $AllowCustomModuleExecution TmpFile $FileName exists with false"
         );
-        $ConfigObject->Set(
-            Key   => 'Ticket::GenericAgentAllowCustomModuleExecution',
-            Value => $AllowCustomModuleExecution,
-        );
-
-        MODE:
-        for my $Mode (qw(Module CMD)) {
-
-            my ( $FileHandle, $FileName ) = $FileTempObject->TempFile();
-
-            $Self->True(
-                -e $FileName ? 1 : 0,
-                "GenericAgent ScriptExecution: $AllowCustomScriptExecution ModuleExecution: $AllowCustomModuleExecution Mode: $Mode TmpFile $FileName created"
-            );
-
-            my $Name = 'job' . $Helper->GetRandomID();
-
-            my %NewJob = (
-                Name => $Name,
-                Data => {
-                    TicketNumber => $Ticket{TicketNumber},
-                },
-            );
-            if ( $Mode eq 'Module' ) {
-                $NewJob{Data}->{NewModule}      = 'scripts::test::sample::GenericAgent::CustomCode::DeleteTmp';
-                $NewJob{Data}->{NewParamKey1}   = 'FileName';
-                $NewJob{Data}->{NewParamValue1} = $FileName;
-            }
-            else {
-                $NewJob{Data}->{NewCMD} = "$Home/scripts/test/sample/GenericAgent/CustomCode/DeleteTmp.pl $FileName";
-            }
-
-            my $JobAdd = $GenericAgentObject->JobAdd(
-                %NewJob,
-                UserID => 1,
-            );
-            $Self->True(
-                $JobAdd || '',
-                "GenericAgent ScriptExecution: $AllowCustomScriptExecution ModuleExecution: $AllowCustomModuleExecution Mode $Mode JobAdd() - $Name",
-            );
-
-            $Self->True(
-                $GenericAgentObject->JobRun(
-                    Job    => $Name,
-                    UserID => 1,
-                ),
-                "GenericAgent ScriptExecution: $AllowCustomScriptExecution ModuleExecution: $AllowCustomModuleExecution Mode $Mode JobRun() - $Name",
-            );
-
-            my $JobDelete = $GenericAgentObject->JobDelete(
-                Name   => $Name,
-                UserID => 1,
-            );
-            $Self->True(
-                $JobDelete || '',
-                "GenericAgent ScriptExecution: $AllowCustomScriptExecution ModuleExecution: $AllowCustomModuleExecution Mode $Mode JobDelete() - $Name",
-            );
-
-            if ( $Mode eq 'Module' ) {
-                if ($AllowCustomModuleExecution) {
-                    $Self->False(
-                        -e $FileName ? 1 : 0,
-                        "GenericAgent ScriptExecution: $AllowCustomScriptExecution ModuleExecution: $AllowCustomModuleExecution Mode $Mode TmpFile $FileName exists with false"
-                    );
-                    next MODE;
-                }
-                $Self->True(
-                    -e $FileName ? 1 : 0,
-                    "GenericAgent ScriptExecution: $AllowCustomScriptExecution ModuleExecution: $AllowCustomModuleExecution Mode $Mode TmpFile $FileName exists (no custom module executed)"
-                );
-            }
-            else {
-                if ($AllowCustomScriptExecution) {
-                    $Self->False(
-                        -e $FileName ? 1 : 0,
-                        "GenericAgent ScriptExecution: $AllowCustomScriptExecution ModuleExecution: $AllowCustomModuleExecution Mode $Mode TmpFile $FileName exists with false"
-                    );
-                    next MODE;
-                }
-                $Self->True(
-                    -e $FileName ? 1 : 0,
-                    "GenericAgent ScriptExecution: $AllowCustomScriptExecution ModuleExecution: $AllowCustomModuleExecution Mode $Mode TmpFile $FileName exists (no custom script executed)"
-                );
-            }
-        }
+        next ALLOWCUSTOMMODULEEXECUTION;
     }
+    $Self->True(
+        -e $FileName ? 1 : 0,
+        "GenericAgent ModuleExecution: $AllowCustomModuleExecution TmpFile $FileName exists (no custom module executed)"
+    );
 }
-
-# cleanup is done by RestoreDatabase
 
 1;

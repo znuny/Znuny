@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -12,8 +12,6 @@ use utf8;
 
 use vars (qw($Self));
 
-use Kernel::System::VariableCheck qw(:all);
-
 $Kernel::OM->ObjectParamAdd(
     'Kernel::System::UnitTest::Helper' => {
         RestoreDatabase => 1,
@@ -22,7 +20,6 @@ $Kernel::OM->ObjectParamAdd(
 
 my $AppointmentObject = $Kernel::OM->Get('Kernel::System::Calendar::Appointment');
 my $CalendarObject    = $Kernel::OM->Get('Kernel::System::Calendar');
-my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
 my $GroupObject       = $Kernel::OM->Get('Kernel::System::Group');
 my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $TicketObject      = $Kernel::OM->Get('Kernel::System::Ticket');
@@ -34,8 +31,9 @@ my $GroupID = $GroupObject->GroupLookup(
     Group => 'users',
 );
 
-my %Calendar = $CalendarObject->CalendarCreate(
-    CalendarName => 'Calendar 1',
+my $CalendarName = 'Calendar ' . $HelperObject->GetRandomNumber();
+my %Calendar     = $CalendarObject->CalendarCreate(
+    CalendarName => $CalendarName,
     GroupID      => $GroupID,
     Color        => '#FF7700',
     UserID       => 1,
@@ -44,8 +42,8 @@ my %Calendar = $CalendarObject->CalendarCreate(
 
 my @DynamicFields = (
     {
-        Name       => 'appid',
-        Label      => 'appid',
+        Name       => 'AppointmentID',
+        Label      => 'AppointmentID',
         ObjectType => 'Ticket',
         FieldType  => 'Text',
         Config     => {
@@ -65,48 +63,100 @@ my %Ticket = $TicketObject->TicketGet(
     UserID        => 1,
 );
 
-my $TransitionActionResult = $TransitionActionObject->Run(
-    UserID                   => 1,
-    Ticket                   => \%Ticket,
-    ProcessEntityID          => 'P123',
-    ActivityEntityID         => 'A123',
-    TransitionEntityID       => 'T123',
-    TransitionActionEntityID => 'TA123',
-    Config                   => {
-        CalendarName               => 'Calendar 1',
-        Title                      => 'Webinar',
-        StartTime                  => '2016-01-01',
-        EndTime                    => '2016-01-02',
-        DynamicField_AppointmentID => 'appid',
-        UserID                     => 1,
+my $AppointmentTitle1 = 'Appointment ' . $HelperObject->GetRandomNumber();
+my $AppointmentTitle2 = 'Appointment ' . $HelperObject->GetRandomNumber();
+my @Tests             = (
+    {
+        Name   => 'Create appointment',
+        Config => {
+            CalendarName               => $CalendarName,
+            Title                      => $AppointmentTitle1,
+            StartTime                  => '2022-01-01',
+            EndTime                    => '2022-01-02',
+            DynamicField_AppointmentID => 'AppointmentID',
+            UserID                     => 1
+        },
+        Result => {
+            Title     => $AppointmentTitle1,
+            StartTime => '2022-01-01 00:00:00',
+            EndTime   => '2022-01-02 00:00:00',
+        },
+    },
+    {
+        Name   => 'Create recurring appointment',
+        Config => {
+            CalendarName               => $CalendarName,
+            Title                      => $AppointmentTitle2,
+            StartTime                  => '2022-02-01 10:00:00',
+            EndTime                    => '2022-02-02 11:00:00',
+            DynamicField_AppointmentID => 'AppointmentID',
+            UserID                     => 1,
+            Recurring                  => '1',
+            RecurrenceType             => 'CustomWeekly',
+            RecurrenceFrequency        => '2, 3',
+            RecurrenceID               => '2022-02-01 09:30:00',
+            RecurrenceInterval         => 2,
+            RecurrenceUntil            => '',
+        },
+        Result => {
+            Title               => $AppointmentTitle2,
+            StartTime           => '2022-02-01 10:00:00',
+            EndTime             => '2022-02-02 11:00:00',
+            RecurrenceFrequency => [
+                2, 3
+            ],
+            RecurrenceID       => '2022-02-01 09:30:00',
+            RecurrenceInterval => '2',
+            RecurrenceType     => 'CustomWeekly',
+            Recurring          => '1'
+        },
     },
 );
 
-$Self->True(
-    $TransitionActionResult,
-    'TransitionActionObject->Run()',
-);
+for my $Test (@Tests) {
 
-%Ticket = $TicketObject->TicketGet(
-    TicketID      => $TicketID,
-    DynamicFields => 1,
-    UserID        => 1,
-);
+    # run function
+    my $TransitionActionResult = $TransitionActionObject->Run(
+        UserID                   => 1,
+        Ticket                   => \%Ticket,
+        ProcessEntityID          => 'P123',
+        ActivityEntityID         => 'A123',
+        TransitionEntityID       => 'T123',
+        TransitionActionEntityID => 'TA123',
+        Config                   => {
+            %{ $Test->{Config} }
+        },
+    );
 
-$Self->True(
-    $Ticket{DynamicField_appid},
-    'DynamicField_AppointmentID got filled correctly',
-);
+    $Self->True(
+        $TransitionActionResult,
+        'TransitionActionObject->Run()',
+    );
 
-my %Appointment = $AppointmentObject->AppointmentGet(
-    AppointmentID => $Ticket{DynamicField_appid},
-    CalendarID    => $Calendar{CalendarID},
-);
+    %Ticket = $TicketObject->TicketGet(
+        TicketID      => $TicketID,
+        DynamicFields => 1,
+        UserID        => 1,
+    );
 
-$Self->Is(
-    $Appointment{Title},
-    'Webinar',
-    'Appointment got created successfully',
-);
+    $Self->True(
+        $Ticket{DynamicField_AppointmentID},
+        'DynamicField_AppointmentID got filled correctly',
+    );
+
+    my %Appointment = $AppointmentObject->AppointmentGet(
+        AppointmentID => $Ticket{DynamicField_AppointmentID},
+        CalendarID    => $Calendar{CalendarID},
+    );
+
+    for my $Field ( sort keys %{ $Test->{Result} } ) {
+
+        $Self->IsDeeply(
+            $Appointment{$Field},
+            $Test->{Result}->{$Field},
+            $Test->{Name} . ' - appointment field ' . $Field . ' is correct',
+        );
+    }
+}
 
 1;

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -26,7 +26,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 for my $Module (qw(DB FS)) {
 
@@ -48,7 +48,7 @@ for my $Module (qw(DB FS)) {
         "#$Module - FormIDCreate()",
     );
 
-    my $InvalidFormID = $Helper->GetRandomID();
+    my $InvalidFormID = $HelperObject->GetRandomID();
 
     # file checks
     for my $File (qw(xls txt doc png pdf)) {
@@ -63,7 +63,7 @@ for my $Module (qw(DB FS)) {
         $EncodeObject->EncodeOutput( \$Content );
 
         my $MD5         = md5_hex($Content);
-        my $ContentID   = $Helper->GetRandomID();
+        my $ContentID   = $HelperObject->GetRandomID();
         my $Disposition = 'inline';
 
         if ( $File eq 'txt' ) {

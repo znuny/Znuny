@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -15,7 +15,7 @@ use vars (qw($Self));
 
 local $ENV{SCRIPT_NAME} = 'index.pl';
 
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 $Kernel::OM->ObjectParamAdd(
     'Kernel::Output::HTML::Layout' => {
@@ -26,7 +26,7 @@ $Kernel::OM->ObjectParamAdd(
 my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
 # Disable global external content blocking.
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'Ticket::Frontend::BlockLoadingRemoteContent',
     Value => 0,

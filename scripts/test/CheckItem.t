@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -24,7 +24,6 @@ $ConfigObject->Set(
     Key   => 'CheckMXRecord',
     Value => 0,
 );
-
 
 # email address checks
 my @Tests = (
@@ -71,8 +70,8 @@ my @Tests = (
         Valid => 0,
     },
     {
-        Email => 'somebody',
-        Valid => 0,
+        Email     => 'somebody',
+        Valid     => 0,
         SysConfig => [
             {
                 Key   => 'CheckEmailAddresses',
@@ -135,8 +134,8 @@ my @Tests = (
         Valid => 1,
     },
     {
-        Email => 'somebody',
-        Valid => 1,
+        Email     => 'somebody',
+        Valid     => 1,
         SysConfig => [
             {
                 Key   => 'CheckEmailAddresses',
@@ -144,6 +143,7 @@ my @Tests = (
             }
         ]
     },
+
     # Unicode domains
     {
         Email => 'mail@xn--f1aefnbl.xn--p1ai',
@@ -202,16 +202,15 @@ my @Tests = (
 );
 
 for my $Test (@Tests) {
-
     $ConfigObject->Set(
         Key   => 'CheckEmailAddresses',
         Value => 1,
     );
 
-    if ($Test->{SysConfig}){
-        for my $SySConfig (@{$Test->{SysConfig}}){
+    if ( $Test->{SysConfig} ) {
+        for my $SysConfig ( @{ $Test->{SysConfig} } ) {
             $ConfigObject->Set(
-                %{$SySConfig}
+                %{$SysConfig}
             );
         }
     }

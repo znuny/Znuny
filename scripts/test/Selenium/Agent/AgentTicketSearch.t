@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,22 +18,22 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Disable warn on stop word usage.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::SearchIndex::WarnOnStopWordUsage',
             Value => 0,
         );
 
         # Enable ModernizeFormFields.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'ModernizeFormFields',
             Value => 1,
         );
 
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
         my $DFTextName         = 'Text' . $RandomID;
@@ -105,7 +105,7 @@ $Selenium->RunTest(
 
         my %LookupDynamicFieldNames = map { $DynamicFields{$_}->{Name} => 1 } sort keys %DynamicFields;
 
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketSearch###DynamicField',
             Value => \%LookupDynamicFieldNames,
@@ -122,7 +122,7 @@ $Selenium->RunTest(
                 String => '2017-05-04 23:00:00',
             },
         );
-        $Helper->FixedTimeSet($SystemTime);
+        $HelperObject->FixedTimeSet($SystemTime);
 
         my @TicketIDs;
         my $TitleRandom  = "Title" . $RandomID;
@@ -174,7 +174,7 @@ $Selenium->RunTest(
             UserID    => 1,
         );
 
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -274,7 +274,7 @@ $Selenium->RunTest(
         );
 
         # Enable warn on stop word usage.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::SearchIndex::WarnOnStopWordUsage',
             Value => 1,
@@ -672,7 +672,7 @@ $Selenium->RunTest(
         );
 
         # Verify tree selection view in AgentTicketSearch for multiple fields. See bug#14494.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'ModernizeFormFields',
             Value => 0,
         );

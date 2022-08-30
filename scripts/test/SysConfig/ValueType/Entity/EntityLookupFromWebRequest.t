@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -97,7 +97,7 @@ $Self->IsNot(
 
 my $SystemAddressID = $Kernel::OM->Get('Kernel::System::SystemAddress')->SystemAddressAdd(
     Name     => $RandomID,
-    Realname => $RandomID . '@zuny.com',
+    Realname => $RandomID . '@znuny.com',
     ValidID  => 1,
     QueueID  => 1,
     Comment  => $RandomID,
@@ -114,7 +114,7 @@ my $UserID = $Kernel::OM->Get('Kernel::System::User')->UserAdd(
     UserFirstname => 'Mr',
     UserLastname  => 'Znuny',
     UserLogin     => $RandomID . 'znuny',
-    UserEmail     => $RandomID . '@zuny.com',
+    UserEmail     => $RandomID . '@znuny.com',
     ValidID       => 1,
     ChangeUserID  => 1,
 );

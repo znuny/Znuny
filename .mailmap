@@ -1,0 +1,94 @@
+# .mailmap - gitmailmap - it is used to map author and committer names and email addresses to canonical real names and email addresses.
+# This mapping is needed to create a clean contributor list in AUTHORS.md
+# So if you have changed your name or email address, we can correct it here.
+
+André Brás <andre.bras@otrs.com> Andre Bras <andre.bras@otrs.com>
+Balázs Úr <balazs.ur@otrs.com> Balázs Úr <urbalazs@gmail.com>
+Balázs Úr <balazs.ur@otrs.com> Úr Balázs <urbalazs@gmail.com>
+Belnet <info@belnet.be> <root@otrs-dev.(none)>
+Belnet <info@belnet.be> <root@otrs-test.fw.belnet.be>
+Bernhard Schmalhofer <Bernhard.Schmalhofer@gmx.de> Bernhard Schmalhofer <bernhard.schmalhofer@otrs.com>
+Carlos Garcia <carlos.garcia@otrs.com> Carlos García <carlos.garcia@otrs.com>
+Carlos Garcia <carlos.garcia@otrs.com> Carlos Javier Garcia Cardenas <Carlos@CarlosGarcia.lan>
+Carlos Garcia <carlos.garcia@otrs.com> CarlosGarcia <carlos.garcia@otrs.com>
+Carlos Rodriguez <carlos.rodriguez@otrs.com> Carlos RodrÃguez <carlos.rodriguez@otrs.com>
+Carlos Rodriguez <carlos.rodriguez@otrs.com> Carlos Rodríguez <carlos.rodriguez@otrs.com>
+Denny Korsukéwitz <dennykorsukewitz@gmail.com> Denny Korsukewitz <dennykorsukewitz@gmail.com>
+Denny Korsukéwitz <dennykorsukewitz@gmail.com> Denny Korsukéwitz <dk@znuny.com>
+Denny Korsukéwitz <dennykorsukewitz@gmail.com> dennykorsukewitz <dennykorsukewitz@gmail.com>
+Denny Korsukéwitz <dennykorsukewitz@gmail.com> dennykorsukewitz <dk@znuny.com>
+Dusan Vuckovic <dusan.vuckovic@otrs.com> Dusan Vuckovic <edusan.vuckovic@otrs.com>
+Dusan Vuckovic <dusan.vuckovic@otrs.com> vuckovicd <dusan.vuckovic@muehlbVuckovicauer.de>
+Elias Probst <elias.probst@otrs.com> <mail@eliasprobst.eu>
+Gerald Young <gerald.young@noynim.com> Gerald Young <help@gwy.org>
+Henrik Vetter <hv@znuny.com> Tronsy <77062636+Tronsy@users.noreply.github.com>
+Jens Bothe <jens.bothe@otrs.com> jensoliver <jojo@jbothe.de>
+Jens Pfeifer <jp@znuny.com> Jens Pfeifer <jens.pfeifer@otrs.com>
+Jens Pfeifer <jp@znuny.com> Jens Pfeifer <jens.pfeifer@znuny.com>
+Jens Pfeifer <jp@znuny.com> Jens Pfeifer <mail@jenspfeifer.de>
+Kamil Furtek <kfurtek@dev.opgksoftware.com> Kamil Furtek <kfurtek@opgksoftware.com>
+Konrad Gumienny <kgumienny@dev.opgksoftware.com> Konrad <kgumienny@dev.opgksoftware.com>
+Konrad Gumienny <kgumienny@dev.opgksoftware.com> Konrad Gumienny <kgumienny@opgksoftware.com>
+Johannes Hörburger <johannes.hoerburger@otrs.com>
+Johannes Nickel <jn@znuny.com> Johannes Nickel <hanne_hal@me.com>
+Johannes Nickel <jn@znuny.com> Johannes Nickel <hanneshal@users.noreply.github.com>
+Marc Bonsels <marc.bonsels@otrs.com> Marc A. Bonsels <marc.bonsels@otrs.com>
+Marc Nilius <marc.nilius@otrs.com> <marc.nilius@libertello.de>
+Marc Nilius <marc.nilius@otrs.com> Marc Nilius <marc.nilius@libertello.de>
+Marco Buchholz <marco.buchholz@otrs.com> Marco Bucholz <marco.buchholz@otrs.com>
+Marco Buchholz <marco.buchholz@otrs.com> marb <>
+Martin Edenhofer <martin.edenhofer@otrs.com> anonymous <>
+Mathias Bräunling <mathias.braeunling@otrs.com> MBRG <mathias.braeunling@otrs.com>
+Mathias Bräunling <mathias.braeunling@otrs.com> Mathias B <mathias.braeunling@otrs.com>
+Michiel Beijen <michiel.beijen@otrs.com> <michiel.beijen@gmail.com>
+Milan Rakic <mrakic@s7designcreative.com> Milan Rakic <mrakic@7designcreative.com>
+Milan Rakic <mrakic@s7designcreative.com> Milan Rakic <mrakic@S7designcreative.com>
+Milan Rakic <mrakic@s7designcreative.com> Milan Rakic <mrakic@s7designcreatieve.com>
+Milan Rakic <mrakic@s7designcreative.com> Milan Rakic <mrakic@s7designcreative>
+Milan Rakic <mrakic@s7designcreative.com> Milan Rakid <mrakic@s7designcreative.com>
+Moritz Lenz <mlenz@noris.net> Moritz Lenz <moritz@faui2k3.org>
+Nils Leideck <nils.leideck@otrs.com> Nils Leideck <nils.leideck@leidex.net>
+Nils Leideck <nils.leideck@otrs.com> nilei <nils.leideck@leidex.net>
+Paul Folkers <83212096+paulfolkers@users.noreply.github.com> Paul Folkers (Sector Nord AG) <83212096+paulfolkers@users.noreply.github.com>
+Paul Folkers <83212096+paulfolkers@users.noreply.github.com> paulfolkers <83212096+paulfolkers@users.noreply.github.com>
+Renée Bäcker <info@perl-services.de> <github@renee-baecker.de>
+Renée Bäcker <info@perl-services.de> <renee.baecker@otrs.com>
+Renée Bäcker <info@perl-services.de> Renee <reb@perl-services.de>
+Renée Bäcker <info@perl-services.de> reneeb <info@perl-services.de>
+Renée Bäcker <info@perl-services.de> reneeb <reb@perl-services.de>
+Roy Kaldung <rk@znuny.com> Roy Kaldung <roy@kaldung.com>
+Sanjin Vik <svik@s7designcreative.com> Sanjin Vik <scik@s7designcreative.com>
+Sanjin Vik <svik@s7designcreative.com> Sanjin Vik <svik@7designcreative.com>
+Sanjin Vik <svik@s7designcreative.com> Sanjin Vik <svik@s7designcrative.com>
+Sanjin Vik <svik@s7designcreative.com> Sanjin Vik <svik@s7designcreativa.com>
+Sanjin Vik <svik@s7designcreative.com> Sanjin Vik <svik@s7sdesigncreative.com>
+Shawn Beasley <shawn.beasley@znuny.com> Shawn Beasley <shawn.beasley@otrs.com>
+Shawn Beasley <shawn.beasley@znuny.com> Shawn Beasley <digitalninja74@gmail.com>
+Shawn Beasley <shawn.beasley@znuny.com> Shawn Beasley <shawn.beasley@icloud.com>
+Sławomir Niedbała <sniedbala@dev.opgksoftware.com> Slawomir Niedbala <sniedbala@opgksoftware.com>
+Sławomir Niedbała <sniedbala@dev.opgksoftware.com> Slawomir Niedbala <sniedbala@opgksoftware.com>
+Sławomir Niedbała <sniedbala@dev.opgksoftware.com> Slawomir Niedbala <sniedbala@dev.opgksoftware.com>
+Sławomir Niedbała <sniedbala@dev.opgksoftware.com> Slawomir <sniedbala@opgksoftware.com>
+Sławomir Niedbała <sniedbala@dev.opgksoftware.com> Sławomir Niedbała <sniedbala@opgksoftware.com>
+Thorsten Eckel <te@znuny.com> Thorsten <thorsteneckel@posteo.de>
+Thorsten Eckel <te@znuny.com> Thorsten Eckel <te@zammad.com>
+Thorsten Eckel <te@znuny.com> Thorsten Eckel <thorsten.eckel@otrs.com>
+Thorsten Eckel <te@znuny.com> Thorsten Eckel <thorsten.eckel@zhuny.com>
+Torsten Thau <Torsten.Thau@cape-it.de> tt <>
+Wojciech Kuchta <klapi85@gmail.com> Wojciech Kuchta <wojciech.kuchta@allegro.pl>
+Yuri Myasoedov <ymyasoedov@yandex.ru> Yuri Myasoedov <yuriy.myasoedov@open.ru>
+Zoran Ilibasic <zilibasic@s7designcreative.com> Zoran Ilibasic <zilibasic@S7designcreative.com>
+Zoran Ilibasic <zilibasic@s7designcreative.com> Zoran Ilibasic <zilibasic@s7deisgncreative.com>
+Zoran Ilibasic <zilibasic@s7designcreative.com> Zoran Ilibasic <zilibasic@s7desigcreative.com>
+Zoran Ilibasic <zilibasic@s7designcreative.com> Zoran Ilibasic <zilibasic@s7desingcreative.com>
+tipue <tim.puettmanns@maxence.de> tipue <80031303+tipue-dev@users.noreply.github.com>
+
+# Assign unknown entries to anonymous
+anonymous <unknown@anonymous> Weblate Admin <operations@znuny.com>
+anonymous <unknown@anonymous> Weblate <noreply@weblate.org>
+anonymous <unknown@anonymous> atif <>
+anonymous <unknown@anonymous> nicolas <>
+anonymous <unknown@anonymous> otrsintern <otrsintern@gmail.com>
+anonymous <unknown@anonymous> robert <>
+anonymous <unknown@anonymous> root <root@OTRSDev.OTRSDev>
+anonymous <unknown@anonymous> wiktor <>

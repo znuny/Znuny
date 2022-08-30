@@ -1998,6 +1998,17 @@ BEGIN
 IF NOT EXISTS (
     SELECT 1
     FROM pg_constraint
+    WHERE LOWER(conname) = LOWER('FK_mail_account_oauth2_token_config_id_id')
+    ) THEN
+    ALTER TABLE mail_account ADD CONSTRAINT FK_mail_account_oauth2_token_config_id_id FOREIGN KEY (oauth2_token_config_id) REFERENCES oauth2_token_config (id);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_constraint
     WHERE LOWER(conname) = LOWER('FK_mail_account_create_by_id')
     ) THEN
     ALTER TABLE mail_account ADD CONSTRAINT FK_mail_account_create_by_id FOREIGN KEY (create_by) REFERENCES users (id);
@@ -2834,6 +2845,28 @@ BEGIN
 IF NOT EXISTS (
     SELECT 1
     FROM pg_constraint
+    WHERE LOWER(conname) = LOWER('FK_calendar_appointment_plugin_create_by_id')
+    ) THEN
+    ALTER TABLE calendar_appointment_plugin ADD CONSTRAINT FK_calendar_appointment_plugin_create_by_id FOREIGN KEY (create_by) REFERENCES users (id);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_constraint
+    WHERE LOWER(conname) = LOWER('FK_calendar_appointment_plugin_change_by_id')
+    ) THEN
+    ALTER TABLE calendar_appointment_plugin ADD CONSTRAINT FK_calendar_appointment_plugin_change_by_id FOREIGN KEY (change_by) REFERENCES users (id);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_constraint
     WHERE LOWER(conname) = LOWER('FK_calendar_appointment_ticket_calendar_id_id')
     ) THEN
     ALTER TABLE calendar_appointment_ticket ADD CONSTRAINT FK_calendar_appointment_ticket_calendar_id_id FOREIGN KEY (calendar_id) REFERENCES calendar (id);
@@ -2925,6 +2958,94 @@ IF NOT EXISTS (
     WHERE LOWER(conname) = LOWER('FK_form_draft_change_by_id')
     ) THEN
     ALTER TABLE form_draft ADD CONSTRAINT FK_form_draft_change_by_id FOREIGN KEY (change_by) REFERENCES users (id);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_constraint
+    WHERE LOWER(conname) = LOWER('FK_smime_keys_create_by_id')
+    ) THEN
+    ALTER TABLE smime_keys ADD CONSTRAINT FK_smime_keys_create_by_id FOREIGN KEY (create_by) REFERENCES users (id);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_constraint
+    WHERE LOWER(conname) = LOWER('FK_smime_keys_change_by_id')
+    ) THEN
+    ALTER TABLE smime_keys ADD CONSTRAINT FK_smime_keys_change_by_id FOREIGN KEY (change_by) REFERENCES users (id);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_constraint
+    WHERE LOWER(conname) = LOWER('FK_oauth2_token_config_create_by_id')
+    ) THEN
+    ALTER TABLE oauth2_token_config ADD CONSTRAINT FK_oauth2_token_config_create_by_id FOREIGN KEY (create_by) REFERENCES users (id);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_constraint
+    WHERE LOWER(conname) = LOWER('FK_oauth2_token_config_change_by_id')
+    ) THEN
+    ALTER TABLE oauth2_token_config ADD CONSTRAINT FK_oauth2_token_config_change_by_id FOREIGN KEY (change_by) REFERENCES users (id);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_constraint
+    WHERE LOWER(conname) = LOWER('FK_oauth2_token_config_valid_id_id')
+    ) THEN
+    ALTER TABLE oauth2_token_config ADD CONSTRAINT FK_oauth2_token_config_valid_id_id FOREIGN KEY (valid_id) REFERENCES valid (id);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_constraint
+    WHERE LOWER(conname) = LOWER('FK_oauth2_token_token_config_id_id')
+    ) THEN
+    ALTER TABLE oauth2_token ADD CONSTRAINT FK_oauth2_token_token_config_id_id FOREIGN KEY (token_config_id) REFERENCES oauth2_token_config (id);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_constraint
+    WHERE LOWER(conname) = LOWER('FK_oauth2_token_create_by_id')
+    ) THEN
+    ALTER TABLE oauth2_token ADD CONSTRAINT FK_oauth2_token_create_by_id FOREIGN KEY (create_by) REFERENCES users (id);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_constraint
+    WHERE LOWER(conname) = LOWER('FK_oauth2_token_change_by_id')
+    ) THEN
+    ALTER TABLE oauth2_token ADD CONSTRAINT FK_oauth2_token_change_by_id FOREIGN KEY (change_by) REFERENCES users (id);
 END IF;
 END$$;
 ;

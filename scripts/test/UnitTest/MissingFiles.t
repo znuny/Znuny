@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -49,6 +49,7 @@ my %Setting = $SysConfigObject->SettingGet(
 );
 
 my @ExpectedSettingClean = (
+    'Core.Color.css',
     'Core.Reset.css',
     'Core.Default.css',
     'Core.Header.css',
@@ -137,6 +138,7 @@ $CacheObject->CleanUp();
 );
 
 my @ExpectedSetting = (
+    'Core.Color.css',
     'Core.Reset.css',
     'Core.Default.css',
     'Core.Header.css',

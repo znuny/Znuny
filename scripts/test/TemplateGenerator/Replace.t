@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -26,10 +26,10 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my $RandomID = $Helper->GetRandomID();
-my ( $TestUserLogin, $UserID ) = $Helper->TestUserCreate(
+my $RandomID = $HelperObject->GetRandomID();
+my ( $TestUserLogin, $UserID ) = $HelperObject->TestUserCreate(
     Groups => ['users'],
 );
 
@@ -105,7 +105,7 @@ for my $DynamicField (@DynamicFieldsToAdd) {
 # constructor.
 my $TemplateGeneratorObject = $Kernel::OM->Get('Kernel::System::TemplateGenerator');
 
-my $TestCustomerLogin = $Helper->TestCustomerUserCreate(
+my $TestCustomerLogin = $HelperObject->TestCustomerUserCreate(
     Language => $UserLanguage,
 );
 
@@ -116,7 +116,7 @@ my %TestCustomerData = $CustomerUserObject->CustomerUserDataGet(
 # Add a random secret for the customer user.
 $CustomerUserObject->SetPreferences(
     Key    => 'UserGoogleAuthenticatorSecretKey',
-    Value  => $Helper->GetRandomID(),
+    Value  => $HelperObject->GetRandomID(),
     UserID => $TestCustomerLogin,
 );
 
@@ -127,7 +127,7 @@ $CustomerUserObject->TokenGenerate(
 
 my @TestUsers;
 for ( 1 .. 4 ) {
-    my $TestUserLogin = $Helper->TestUserCreate(
+    my $TestUserLogin = $HelperObject->TestUserCreate(
         Language => $UserLanguage,
     );
     my %TestUser = $UserObject->GetUserData(
@@ -137,7 +137,7 @@ for ( 1 .. 4 ) {
     # Add a random secret for the user.
     $UserObject->SetPreferences(
         Key    => 'UserGoogleAuthenticatorSecretKey',
-        Value  => $Helper->GetRandomID(),
+        Value  => $HelperObject->GetRandomID(),
         UserID => $TestUser{UserID},
     );
 
@@ -158,7 +158,7 @@ my $SystemTime = $Kernel::OM->Create(
 )->ToEpoch();
 
 # Set the fixed time.
-$Helper->FixedTimeSet($SystemTime);
+$HelperObject->FixedTimeSet($SystemTime);
 
 # Create test queue with escalation times.
 my $QueueID = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
@@ -227,7 +227,7 @@ my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->
 );
 
 # Add 5 minutes for escalation times evaluation.
-$Helper->FixedTimeAddSeconds(300);
+$HelperObject->FixedTimeAddSeconds(300);
 
 my $ArticleID = $ArticleBackendObject->ArticleCreate(
     TicketID             => $TicketID,
@@ -300,16 +300,6 @@ my @Tests = (
         RichText => 0,
         Template => 'Test <OTRS_CUSTOMER_SUBJECT[3]>',
         Result   => 'Test otr [...]',
-    },
-    {
-        Name => 'OTRS customer subject 20 letters + garbarge',    # <OTRS_CUSTOMER_SUBJECT[20]>
-        Data => {
-            From    => 'test@home.com',
-            Subject => 'RE: otrs',
-        },
-        RichText => 0,
-        Template => 'Test <OTRS_CUSTOMER_SUBJECT[20]>',
-        Result   => 'Test otrs',
     },
     {
         Name => 'OTRS responsible firstname',                     # <OTRS_RESPONSIBLE_UserFirstname>
@@ -882,7 +872,7 @@ $Self->True(
     "AppointmentID $AppointmentID is created.",
 );
 
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'Frontend::RichText',
     Value => 1,

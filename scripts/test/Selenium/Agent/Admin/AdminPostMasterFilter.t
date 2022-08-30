@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -37,12 +37,12 @@ my $PostMasterFilterSubmit = sub {
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         my $Language = 'de';
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Language => $Language,
             Groups   => ['admin'],
         ) || die "Did not get test user";
@@ -151,7 +151,7 @@ $Selenium->RunTest(
         $Selenium->find_element( "#SetValue1", 'css' )->clear();
 
         # Add first test PostMasterFilter.
-        my $PostMasterName     = "postmasterfilter" . $Helper->GetRandomID();
+        my $PostMasterName     = "postmasterfilter" . $HelperObject->GetRandomID();
         my $PostMasterBody     = "Selenium test for PostMasterFilter";
         my $PostMasterPriority = "2 low";
 

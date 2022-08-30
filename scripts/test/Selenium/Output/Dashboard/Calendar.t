@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -20,7 +20,7 @@ $Selenium->RunTest(
     sub {
 
         # get needed objects
-        my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # use a calendar with the same business hours for every day so that the UT runs correctly
@@ -30,22 +30,22 @@ $Selenium->RunTest(
         for my $Day (@Days) {
             $Week{$Day} = [ 0 .. 23 ];
         }
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'TimeWorkingHours',
             Value => \%Week,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'TimeWorkingHours',
             Value => \%Week,
         );
 
         # disable default Vacation days
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'TimeVacationDays',
             Value => {},
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'TimeVacationDays',
             Value => {},
@@ -53,14 +53,14 @@ $Selenium->RunTest(
 
         # disable other dashboard modules
         my $Config = $ConfigObject->Get('DashboardBackend');
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 0,
             Key   => 'DashboardBackend',
             Value => \%$Config,
         );
 
         # restore ticket calendar sysconfig
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'DashboardBackend###0260-TicketCalendar',
             Value => {
@@ -77,7 +77,7 @@ $Selenium->RunTest(
         );
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -93,7 +93,7 @@ $Selenium->RunTest(
         );
 
         # create test queue
-        my $QueueName = "Queue" . $Helper->GetRandomID();
+        my $QueueName = "Queue" . $HelperObject->GetRandomID();
         my $QueueID   = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
             Name              => $QueueName,
             ValidID           => 1,

@@ -1,6 +1,6 @@
 /*
 Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 
 This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (GPL). If you
@@ -18,11 +18,11 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
  * @subsection  Header
  */
 #Header {
-    height: 72px;
-    padding: 10px 0 12px;
-    background: #333;
-    color: #FFF;
-    position: relative;
+    height:       72px;
+    padding:      10px 0 12px;
+    background:   #333;
+    color:        #FFF;
+    position:     relative;
 }
 
 /**
@@ -121,17 +121,10 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 body.Visible-ScreenXL #ToolBar li.UserAvatar:hover > a,
 body.Visible-ScreenXL #ToolBar li.UserAvatar > a.Active {
-    animation-name: border-fill;
-    animation-duration: 0.3s;
+    animation-name: BorderFill;
+    animation-duration: 0.5s;
     animation-timing-function: ease;
     animation-fill-mode: forwards;
-}
-
-@keyframes border-fill {
-    0%   { border-bottom: 2px solid #f92; }
-    25%  { border-bottom: 2px solid #f92; border-left: 2px solid #f92; }
-    50%  { border-bottom: 2px solid #f92; border-left: 2px solid #f92; border-top: 2px solid #f92; }
-    100% { border-bottom: 2px solid #f92; border-left: 2px solid #f92; border-top: 2px solid #f92; border-right: 2px solid #f92; }
 }
 
 #ToolBar li.UserAvatar img {
@@ -362,7 +355,7 @@ body.Visible-ScreenXL #ToolBar li.UserAvatar div a:hover {
 }
 
 .NavContainerZIndex{
-    z-index: 5500 !important;
+    z-index: 6101 !important;
 }
 
 #NavigationContainer #Navigation {

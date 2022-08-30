@@ -1,0 +1,182 @@
+# --
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
+    <h1 class="InvisibleText">[% Translate("Queue Management") | html %]</h1>
+
+    [% BreadcrumbPath = [
+            {
+                Name => Translate('Manage OAuth2 tokens and their configurations'),
+                Link => Env("Action"),
+            },
+        ]
+    %]
+
+    [% IF Data.ID %]
+        [% USE EditTitle = String(Translate("Edit")) %]
+        [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.Name ) }) %]
+    [% ELSIF Data.TokenConfigTemplateFilename %]
+        [% USE AddByTemplateTitle = String(Translate("Add by template")) %]
+        [% BreadcrumbPath.push({ Name => AddByTemplateTitle.append( ': ', Data.TokenConfigTemplateName ) }) %]
+    [% END %]
+
+    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+    <div class="Clear"></div>
+    <div class="SidebarColumn">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="ContentColumn">
+        <form id="EntityUpdate" action="[% Env("CGIHandle") %]" method="post" class="Validate PreventMultipleSubmits">
+            <input type="hidden" id="Action" name="Action" value="[% Env("Action") %]"/>
+            <input type="hidden" id="Subaction" name="Subaction" value="SaveTokenConfig"/>
+            <input type="hidden" id="ID" name="ID" value="[% Data.ID | html %]"/>
+            <input type="hidden" id="TokenConfigTemplateFilename" name="TokenConfigTemplateFilename" value="[% Data.TokenConfigTemplateFilename | html %]"/>
+            <input type="hidden" id="TokenConfigTemplateName" name="TokenConfigTemplateName" value="[% Data.TokenConfigTemplateName | html %]"/>
+            <input type="hidden" id="ContinueAfterSave" name="ContinueAfterSave" value=""/>
+
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("Base configuration") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <fieldset class="TableLike">
+                        <label class="Mandatory" for="Name">
+                            <span class="Marker">*</span> [% Translate("Name") | html %]:
+                        </label>
+                        <div class="Field">
+                            <input type="text" id="Name" name="Name" value="[% Data.Name | html %]" class="W20pc Validate_Required [% Data.NameInvalid | html %]" maxlength="250" />
+                            <div id="NameError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                            <div id="NameServerError" class="TooltipErrorMessage">
+[% RenderBlockStart("NameRequiredServerError") %]
+                                <p>[% Translate("This field is required.") | html %]</p>
+[% RenderBlockEnd("NameRequiredServerError") %]
+[% RenderBlockStart("NameExistsServerError") %]
+                                <p>[% Translate("An OAuth2 token configuration with this name already exists.") | html %]</p>
+[% RenderBlockEnd("NameExistsServerError") %]
+                            </div>
+                        </div>
+                        <div class="Clear"></div>
+
+                        <label class="Mandatory" for="ClientID">
+                            <span class="Marker">*</span> [% Translate("Client ID") | html %]:
+                        </label>
+                        <div class="Field">
+                            <input type="text" id="ClientID" name="ClientID" value="[% Data.ClientID | html %]" class="W20pc Validate_Required [% Data.ClientIDInvalid | html %]" />
+                            <div id="ClientIDError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                            <div id="ClientIDServerError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                        </div>
+                        <div class="Clear"></div>
+
+                        <label class="Mandatory" for="ClientSecret">
+                            <span class="Marker">*</span> [% Translate("Client secret") | html %]:
+                        </label>
+                        <div class="Field">
+                            <input type="text" id="ClientSecret" name="ClientSecret" value="[% Data.ClientSecret | html %]" class="W20pc Validate_Required [% Data.ClientSecretInvalid | html %]" />
+                            <div id="ClientSecretError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                            <div id="ClientSecretServerError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                        </div>
+                        <div class="Clear"></div>
+
+                        <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]:</label>
+                        <div class="Field">
+                            [% Data.ValidIDSelection %]
+                            <div id="ValidIDError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                            <div id="ValidIDServerError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                        </div>
+                        <div class="Clear"></div>
+
+                        [% IF Data.TemplateName %]
+                            <label>[% Translate("Template") | html %]:</label>
+                                <p class="Value">
+                                    [% Data.TemplateName | html %]
+                                    <br />
+                                    <span class="FieldExplanation">
+                                        [% Translate("This is the template that was used to create this OAuth2 token configuration.") | html %]
+                                    </span>
+                                </p>
+                            <div class="Clear"></div>
+                        [% END %]
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("Notifications") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <fieldset class="TableLike">
+                        <label for="NotifyOnExpiredToken">[% Translate("Expired token") | html %]:</label>
+                        <div class="Field">
+                            <input type="checkbox" name="NotifyOnExpiredToken" id="NotifyOnExpiredToken" value="1" [% Data.NotifyOnExpiredToken ? 'checked="checked"' : '' %] />
+                            <p class="FieldExplanation">
+                                [% Translate("Shows a notification for admins below the top menu if the OAuth2 token has expired.") | html %]
+                            </p>
+                        </div>
+                        <div class="Clear"></div>
+
+                        <label for="NotifyOnExpiredRefreshToken">[% Translate("Expired refresh token") | html %]:</label>
+                        <div class="Field">
+                            <input type="checkbox" name="NotifyOnExpiredRefreshToken" id="NotifyOnExpiredRefreshToken" value="1" [% Data.NotifyOnExpiredRefreshToken ? 'checked="checked"' : '' %] />
+                            <p class="FieldExplanation">
+                                [% Translate("Shows a notification for admins below the top menu if the OAuth2 refresh token has expired.") | html %]
+                            </p>
+                        </div>
+                        <div class="Clear"></div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("Save") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <fieldset class="TableLike">
+                        <div class="Field SpacingTop">
+                            <button class="CallForAction Primary" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                            [% Translate("or") | html %]
+                            <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
+                            [% Translate("or") | html %]
+                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %]"><span>[% Translate("Cancel") | html %]</span></a>
+                        </div>
+                        <div class="Clear"></div>
+                    </fieldset>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="Clear"></div>
+</div>
