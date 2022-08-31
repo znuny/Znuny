@@ -126,7 +126,7 @@ $Self->True(
 
 $Self->Is(
     $Events[0]->{Event},
-    'ArticleTransmissionErrorCreate',
+    'ArticleCreateTransmissionError',
     'Check correct event name after transmission error create'
 );
 
@@ -155,7 +155,7 @@ $Self->Is(
 
 $Self->Is(
     $Events[1]->{Event},
-    'ArticleTransmissionErrorUpdate',
+    'ArticleUpdateTransmissionError',
     'Check correct event name after transmission error update'
 );
 
