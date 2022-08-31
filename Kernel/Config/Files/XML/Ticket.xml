@@ -10500,8 +10500,8 @@
                 <Item>ArticleEmailSendingQueued</Item>
                 <Item>ArticleEmailSendingSent</Item>
                 <Item>ArticleEmailSendingError</Item>
-                <Item>ArticleTransmissionErrorCreate</Item>
-                <Item>ArticleTransmissionErrorUpdate</Item>
+                <Item>ArticleCreateTransmissionError</Item>
+                <Item>ArticleUpdateTransmissionError</Item>
                 <Item>UserMention</Item>
             </Array>
         </Value>
