@@ -816,7 +816,7 @@ sub ArticleCreateTransmissionError {
 
     # event
     $Self->EventHandler(
-        Event => 'ArticleTransmissionErrorCreate',
+        Event => 'ArticleCreateTransmissionError',
         Data  => {
             ArticleID => $Param{ArticleID},
             TicketID  => $TicketID,
@@ -950,7 +950,7 @@ sub ArticleUpdateTransmissionError {
 
     # event
     $Self->EventHandler(
-        Event => 'ArticleTransmissionErrorUpdate',
+        Event => 'ArticleUpdateTransmissionError',
         Data  => {
             ArticleID => $Param{ArticleID},
             TicketID  => $TicketID,
