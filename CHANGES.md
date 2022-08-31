@@ -3,6 +3,7 @@
  - 2022-08-24 Enabled pending time selection for process ticket dialogs depending on selected ticket state. Thanks to Tim Püttmanns, maxence. [PR#271](https://github.com/znuny/Znuny/pull/271)
  - 2022-08-22 Fixed evaluation of parameter TicketID in Kernel::Output::HTML::Article::Base::ArticleActions. Thanks to @LotharZok, maxence. [PR#278](https://github.com/znuny/Znuny/pull/278)
  - 2022-08-22 Added check to prevent infinite loop to Core.UI.InputFields.js.
+ - 2022-08-18 Fixed usage of time zones that have become obsolete. Thanks to Christian Ullrich. [#281](https://github.com/znuny/Znuny/issues/281)
  - 2022-08-17 Added OAuth2 token support to HTTP::REST generic interface requester.
  - 2022-08-10 Fixed accounted time field missing in AgentTicketBulk action.
  - 2022-08-02 Changed user of mention notification in the ticket history to the one triggering the notification. Thanks to Tim Püttmanns, maxence. [PR#273](https://github.com/znuny/Znuny/pull/273)

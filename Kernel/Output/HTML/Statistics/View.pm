@@ -185,7 +185,9 @@ sub StatsParamsWidget {
             // $Stat->{TimeZone}
             // Kernel::System::DateTime->OTRSTimeZoneGet();
 
-        my %TimeZoneBuildSelection = $Self->_TimeZoneBuildSelection();
+        my %TimeZoneBuildSelection = $Self->_TimeZoneBuildSelection(
+            IncludeTimeZone => $SelectedTimeZone,
+        );
 
         my %Frontend;
         $Frontend{SelectTimeZone} = $LayoutObject->BuildSelection(
@@ -820,7 +822,9 @@ sub GeneralSpecificationsWidget {
                 // Kernel::System::DateTime->OTRSTimeZoneGet();
         }
 
-        my %TimeZoneBuildSelection = $Self->_TimeZoneBuildSelection();
+        my %TimeZoneBuildSelection = $Self->_TimeZoneBuildSelection(
+            IncludeTimeZone => $SelectedTimeZone,
+        );
 
         $Stat->{SelectTimeZone} = $LayoutObject->BuildSelection(
             %TimeZoneBuildSelection,
@@ -2377,7 +2381,9 @@ sub _GetValidTimeZone {
 sub _TimeZoneBuildSelection {
     my ( $Self, %Param ) = @_;
 
-    my $TimeZones = Kernel::System::DateTime->TimeZoneList();
+    my $TimeZones = Kernel::System::DateTime->TimeZoneList(
+        IncludeTimeZone => $Param{IncludeTimeZone},
+    );
 
     my %TimeZoneBuildSelection = (
         Data => { map { $_ => $_ } @{$TimeZones} },
