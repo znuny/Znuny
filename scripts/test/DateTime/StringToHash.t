@@ -159,7 +159,7 @@ my @TestConfigs = (
             Hour     => 7,
             Minute   => 0,
             Second   => 9,
-            TimeZone => 'UTC',
+            TimeZone => 'Z',
         },
     },
 );

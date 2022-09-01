@@ -1,5 +1,6 @@
 # 6.0.46 2022-xx-xx
  - 2022-08-22 Added check to prevent infinite loop to Core.UI.InputFields.js.
+ - 2022-08-18 Fixed usage of time zones that have become obsolete. Thanks to Christian Ullrich. [#281](https://github.com/znuny/Znuny/issues/281)
 
 # 6.0.45 2022-07-27
  - 2022-07-05 Attachment filenames in ticket zoom will now be truncated if they are too long to be displayed correctly.
