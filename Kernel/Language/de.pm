@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.993640958747758;
+    $Self->{Completeness}        = 0.99396706342736;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3913,7 +3913,7 @@ sub Data {
         'Package could not be upgraded' => 'Paket konnte nicht aktualisiert werden',
         'Repository List' => 'Verzeichnisliste',
         'No packages found in selected repository. Please check log for more info!' =>
-            'Keine Pakte im gewählten Verzeichnis gefunden. Bitte prüfen Sie das Systemprotokoll für mehr Informationen!',
+            'Keine Pakete im gewählten Verzeichnis gefunden. Bitte prüfen Sie das Systemprotokoll für mehr Informationen!',
         'Can\'t connect to OTRS Feature Add-on list server!' => 'Kann nicht zum OTRS Feature-Add-on-Listenserver verbinden!',
         'Can\'t get OTRS Feature Add-on list from server!' => 'Kann OTRS Feature-Add-on-Listen nicht vom Server laden!',
         'Can\'t get OTRS Feature Add-on from server!' => 'Kann OTRS Feature-Add-on nicht vom Server laden!',
@@ -6458,7 +6458,7 @@ sub Data {
         'IndexAccelerator: to choose your backend TicketViewAccelerator module. "RuntimeDB" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). "StaticDB" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command "bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild" for initial index creation.' =>
             'IndexAccelerator: Auswahl des Backend-Moduls für TicketViewAccelerator. "RuntimeDB" generiert jede Queue-Ansicht dynamisch aus der Tickettabelle (keine Performance-Probleme bis zu etwa 60.000 Tickets insgesamt und 6.000 offenen Tickets im System). "StaticDB" ist das stärkste Modul, es benutzt zusätzliche Tabelle für den Ticket-Index, die wie eine Übersicht funktioniert (empfohlen bei mehr als 80.000 Tickets insgesamt und 6.000 offenen Tickets im System). Benutzen Sie das Kommando "bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild" für den initialen Indexaufbau.',
         'Saves the attachments of articles. "DB" stores all data in the database (not recommended for storing big attachments). "FS" stores the data on the filesystem; this is faster but the webserver should run under the OTRS user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when "FS" is used.' =>
-            'Speicherung von Artikel-Ahängen. "DB" legt alle Daten in der Datenbank ab (nicht empfohlen für große Anhänge). "FS" legt alle Daten im Dateisystem ab; dies ist schneller, jedoch sollte der Webserver mit dem OTRS-Benutzer betrieben werden. Sie können im laufenden Betrieb ohne Datenverlust zwischen den Modulen wechseln. Bitte beachten Sie, dass das Suchen nach Anhängen für "FS" nicht unterstützt wird.',
+            'Speicherung von Artikel-Anhängen. "DB" legt alle Daten in der Datenbank ab (nicht empfohlen für große Anhänge). "FS" legt alle Daten im Dateisystem ab; dies ist schneller, jedoch sollte der Webserver mit dem OTRS-Benutzer betrieben werden. Sie können im laufenden Betrieb ohne Datenverlust zwischen den Modulen wechseln. Bitte beachten Sie, dass das Suchen nach Anhängen für "FS" nicht unterstützt wird.',
         'Specifies whether all storage backends should be checked when looking for attachments. This is only required for installations where some attachments are in the file system, and others in the database.' =>
             'Legt fest, ob bei der Suche nach Anhängen alle Storage-Backends geprüft werden sollen. Dies wird nur bei Installationen benötigt, bei denen sich Anhänge sowohl im Dateisystem, als auch in der Datenbank befinden.',
         'Specifies the directory to store the data in, if "FS" was selected for ArticleStorage.' =>
@@ -8667,7 +8667,7 @@ Ihr Helpdesk-Team
         'Customer User Information Center Search.' => 'Suche Kundenbenutzer-Informationszentrum.',
         'Customer User Information Center search.' => 'Kundenbenutzer-Informationszentrum-Suche.',
         'Customer User Information Center.' => 'Kundenbenutzer-Informationszentrum.',
-        'Customer User-Customer Relations' => '',
+        'Customer User-Customer Relations' => 'Beziehungen zwischen Kundenbenutzern und Kunden',
         'Customer Users ↔ Customers' => 'Kundenbenutzer ↔ Kunden',
         'Customer Users ↔ Groups' => 'Kundenbenutzer ↔ Gruppen',
         'Customer Users ↔ Services' => 'Kundenbenutzer ↔ Services',
@@ -8799,7 +8799,7 @@ Ihr Helpdesk-Team
         'If enabled, the different overviews (Dashboard, LockedView, QueueView) will automatically refresh after the specified time.' =>
             'Wenn diese Option aktiviert ist, werden die verschiedenen Übersichtsseiten (Dashboard, LockedView, Queue-Ansicht) automatisch nach der angegebenen Zeit aktualisiert.',
         'If you\'re going to be out of office, you may wish to let other users know by setting the exact dates of your absence.' =>
-            'Informiert andere Benutzer über den genauen Zeitraum ihrer Abwesenheit.',
+            'Informiert andere Benutzer über den genauen Zeitraum Ihrer Abwesenheit.',
         'Import appointments screen.' => 'Termin-Import Oberfläche.',
         'Incoming Phone Call.' => 'Eingehender Telefonanruf.',
         'Indonesian' => 'Indonesisch',
@@ -8821,7 +8821,7 @@ Ihr Helpdesk-Team
         'Last Screen Overview' => 'Letzte Masken-Übersicht',
         'Last customer subject' => 'Letzter Kunden-Betreff',
         'Last view - limit' => 'Letzte Ansicht - Limit',
-        'Last view - position' => 'Letzte Ansicht - Postition',
+        'Last view - position' => 'Letzte Ansicht - Position',
         'Last view - types' => 'Letzte Ansicht - Typen',
         'Lastname Firstname' => 'Nachname Vorname',
         'Lastname Firstname (UserLogin)' => 'Nachname Vorname (BenutzerAnmeldung)',
@@ -8857,7 +8857,7 @@ Ihr Helpdesk-Team
         'Macedonian' => 'Mazedonisch',
         'Mail Accounts' => 'E-Mailkonten',
         'Malay' => 'Malaysisch',
-        'Manage Customer User-Customer Relations.' => '',
+        'Manage Customer User-Customer Relations.' => 'Beziehungen zwischen Kundenbenutzern und Kunden verwalten.',
         'Manage OAuth2 tokens and their configurations.' => 'Verwalten von OAuth2-Token und deren Konfigurationen.',
         'Manage OTRS Group cloud services.' => 'Cloud-Services der OTRS Gruppe verwalten.',
         'Manage PGP keys for email encryption.' => 'PGP-Schlüssel für E-Mail-Verschlüsselung verwalten.',
