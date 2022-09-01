@@ -11009,7 +11009,9 @@ msgstr "Verzeichnisliste"
 
 #. Perl Module: Kernel/Modules/AdminPackageManager.pm
 msgid "No packages found in selected repository. Please check log for more info!"
-msgstr "Keine Pakete im gewählten Verzeichnis gefunden. Bitte prüfen Sie das Systemprotokoll für mehr Informationen!"
+msgstr ""
+"Keine Pakete im gewählten Verzeichnis gefunden. Bitte prüfen Sie das "
+"Systemprotokoll für mehr Informationen!"
 
 #. Perl Module: Kernel/Modules/AdminPackageManager.pm
 msgid "Package not verified due a communication issue with verification server!"
@@ -25443,4 +25445,3 @@ msgstr "Zeigt in der \"Ticket-Priorität\"-Ansicht der Agenten-Oberfläche eine 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface."
 msgstr "Zeigt in der \"Ticket-Verantwortlicher\"-Ansicht der Agenten-Oberfläche eine Liste aller möglichen Agenten (alle Agenten mit mindestens RO-Berechtigung für Notizen in diesem Ticket/dieser Queue), die informiert werden sollen."
-
