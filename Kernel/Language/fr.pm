@@ -34,7 +34,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.403554541007663;
+    $Self->{Completeness}        = 0.403357235984355;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5014,6 +5014,11 @@ sub Data {
         'This field is required or' => 'Le champ est requis ou',
         'The field content is too long!' => 'Le contenu du champ est trop long',
         'Maximum size is %s characters.' => 'La taille maximum est de %s caractères. ',
+
+        # Perl Module: Kernel/System/MailQueue.pm
+        'Error while validating Message data.' => '',
+        'Error while validating Sender email address.' => '',
+        'Error while validating Recipient email address.' => '',
 
         # Perl Module: Kernel/System/Mention.pm
         'LastMention' => '',

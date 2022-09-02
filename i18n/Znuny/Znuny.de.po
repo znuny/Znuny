@@ -25444,3 +25444,15 @@ msgstr "Zeigt in der \"Ticket-Priorität\"-Ansicht der Agenten-Oberfläche eine 
 msgid "Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface."
 msgstr "Zeigt in der \"Ticket-Verantwortlicher\"-Ansicht der Agenten-Oberfläche eine Liste aller möglichen Agenten (alle Agenten mit mindestens RO-Berechtigung für Notizen in diesem Ticket/dieser Queue), die informiert werden sollen."
 
+#. Perl Module: Kernel/System/MailQueue.pm
+msgid "Error while validating Message data."
+msgstr "Fehler bei der Validierung der Nachrichtendaten."
+
+#. Perl Module: Kernel/System/MailQueue.pm
+msgid "Error while validating Sender email address."
+msgstr "Fehler bei der Validierung der Absender-E-Mail-Adresse."
+
+#. Perl Module: Kernel/System/MailQueue.pm
+msgid "Error while validating Recipient email address."
+msgstr "Fehler bei der Validierung der E-Mail-Adresse des Empfängers."
+
