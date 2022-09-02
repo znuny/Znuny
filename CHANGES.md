@@ -1,5 +1,6 @@
 # 6.4.3 2022-??-??
- - 2022-09-02 Bugfix and Feature for 0050-CIC-CustomerUserList. Thanks to Kevin Janssen (@BuTzZ). [#147](https://github.com/znuny/Znuny/pull/147)
+ - 2022-09-02 Fixed default display value for dynamic fields of type 'Webservice'.
+ - 2022-09-02 Bugfix and Feature for 0050-CIC-CustomerUserList. Thanks to Kevin Janssen (@BuTzZ). [PR#147](https://github.com/znuny/Znuny/pull/147)
  - 2022-09-01 Added missing 'Translatable' flag for 'Message sending error'.Thanks to Paweł Bogusławski (@pboguslawski). [PR#131](https://github.com/znuny/Znuny/pull/131)
  - 2022-08-31 Added events for article email backend transmission errors. Thanks to Renée Bäcker. [PR#176](https://github.com/znuny/Znuny/pull/176)
  - 2022-08-24 Enabled pending time selection for process ticket dialogs depending on selected ticket state. Thanks to Tim Püttmanns, maxence. [PR#271](https://github.com/znuny/Znuny/pull/271)

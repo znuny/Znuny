@@ -153,6 +153,7 @@ sub Test {
             $Data->{DisplayValue} = $DisplayValue;
         }
     }
+
     $Result->{Search}          = $Self->{Search};
     $Result->{Data}            = $Results;
     $Result->{StoredValue}     = \@StoredValue;
@@ -993,7 +994,6 @@ sub _DisplayValueAssemble {
     if ( !defined $BackendConfig->{DisplayedValues} || !length $BackendConfig->{DisplayedValues} ) {
         $DisplayKeyValuesConfig = $BackendConfig->{StoredValue};
     }
-
     return if !$DisplayKeyValuesConfig;
 
     my @DisplayKeyValues = split /\s*,\s*/, $DisplayKeyValuesConfig;
@@ -1313,7 +1313,7 @@ sub _BackendConfigGet {
     my %DefaultValues = (
         Backend         => 'DirectRequest',
         StoredValue     => 'Key',
-        DisplayedValues => 'Value',
+        DisplayedValues => '',
         DefaultValue    => '',
         Link            => '',
     );
