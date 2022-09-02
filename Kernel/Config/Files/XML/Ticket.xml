@@ -5047,6 +5047,14 @@
                 <Item Key="Block">ToolBarSearchFulltext</Item>
                 <Item Key="Size">10</Item>
                 <Item Key="Priority">1990020</Item>
+                <Item Key="Data">
+                    <Hash>
+                        <Item Key="AdditionalSearchParameters">
+                            <Hash>
+                            </Hash>
+                        </Item>
+                    </Hash>
+                </Item>
             </Hash>
         </Value>
     </Setting>
