@@ -13,7 +13,7 @@
 </span>
 [% RenderBlockEnd("ContentLargeCustomerUserListNavBar") %]
 [% RenderBlockStart("ContentLargeCustomerIDAdd") %]
-<a class="CallForAction SpacingBottom" href="[% Env("Baselink") %]Action=AdminCustomerUserCustomer;Subaction=Customer;ID=[% Data.CustomerID | uri %]"><span><i class="fa fa-plus-square"></i> [% Translate("Change CustomerID Relations") | html %]</span></a>
+<a class="CallForAction SpacingBottom" href="[% Env("Baselink") %]Action=AdminCustomerUserCustomer;Subaction=Customer;ID=[% Data.CustomerID | uri %]"><span><i class="fa fa-plus-square"></i> [% Translate("Change Customer Relations") | html %]</span></a>
 [% RenderBlockEnd("ContentLargeCustomerIDAdd") %]
 
 [% RenderBlockStart("ContentLargeCustomerUserAdd") %]
