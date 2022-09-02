@@ -25,7 +25,7 @@ $OTRSVersion .= '.x';
 
 my $String = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
-  <Name>Test</Name>
+  <Name>PackageVerify</Name>
   <Version>0.0.1</Version>
   <Vendor>OTRS AG</Vendor>
   <URL>https://otrs.com/</URL>
@@ -62,15 +62,15 @@ my $String = '<?xml version="1.0" encoding="utf-8" ?>
     <TableDrop Name="test_package"/>
   </DatabaseUninstall>
   <Filelist>
-    <File Location="Test" Permission="644" Encode="Base64">aGVsbG8K</File>
-    <File Location="var/Test" Permission="644" Encode="Base64">aGVsbG8K</File>
+    <File Location="PackageVerify" Permission="644" Encode="Base64">aGVsbG8K</File>
+    <File Location="var/PackageVerify" Permission="644" Encode="Base64">aGVsbG8K</File>
   </Filelist>
 </otrs_package>
 ';
 
 my $StringSecond = "<?xml version='1.0' encoding='utf-8' ?>
 <otrs_package version='1.0'>
-  <Name>TestSecond</Name>
+  <Name>PackageVerifySecond</Name>
   <Version>0.0.1</Version>
   <Vendor>OTRS AG</Vendor>
   <URL>https://otrs.com/</URL>
@@ -83,8 +83,8 @@ my $StringSecond = "<?xml version='1.0' encoding='utf-8' ?>
   <BuildDate>2005-11-10 21:17:16</BuildDate>
   <BuildHost>yourhost.example.com</BuildHost>
   <Filelist>
-    <File Location='TestSecond' Permission='644' Encode='Base64'>aGVsbG8K</File>
-    <File Location='var/TestSecond' Permission='644' Encode='Base64'>aGVsbG8K</File>
+    <File Location='PackageVerifySecond' Permission='644' Encode='Base64'>aGVsbG8K</File>
+    <File Location='var/PackageVerifySecond' Permission='644' Encode='Base64'>aGVsbG8K</File>
   </Filelist>
 </otrs_package>
 ";
@@ -99,27 +99,27 @@ local *Kernel::System::CloudService::Backend::Run::Request = sub {
     my $Packages = $Param{RequestData}->{PackageManagement}->[0]->{Data}->{Package};
 
     if ( scalar @{$Packages} == 1 ) {
-        if ( $Packages->[0]->{Name} eq 'Test' ) {
+        if ( $Packages->[0]->{Name} eq 'PackageVerify' ) {
             return {
                 PackageManagement => [
                     {
                         Success   => '1',
                         Operation => 'PackageVerify',
                         Data      => {
-                            Test => 'not_verified',
+                            PackageVerify => 'not_verified',
                         },
                     }
                 ],
             };
         }
-        elsif ( $Packages->[0]->{Name} eq 'TestSecond' ) {
+        elsif ( $Packages->[0]->{Name} eq 'PackageVerifySecond' ) {
             return {
                 PackageManagement => [
                     {
                         Success   => '1',
                         Operation => 'PackageVerify',
                         Data      => {
-                            TestSecond => 'verified',
+                            PackageVerifySecond => 'verified',
                         },
                     }
                 ],
@@ -133,8 +133,8 @@ local *Kernel::System::CloudService::Backend::Run::Request = sub {
                     Success   => '1',
                     Operation => 'PackageVerify',
                     Data      => {
-                        Test       => 'not_verified',
-                        TestSecond => 'not_verified',
+                        PackageVerify       => 'not_verified',
+                        PackageVerifySecond => 'not_verified',
                     },
                 }
             ],
@@ -147,21 +147,21 @@ local *Kernel::System::CloudService::Backend::Run::Request = sub {
 #
 my @Tests = (
     {
-        Name        => "PackageVerify - Package 'Test'",
+        Name        => "PackageVerify - Package 'PackageVerify'",
         Package     => $String,
-        PackageName => 'Test',
+        PackageName => 'PackageVerify',
         Result      => 'verified',
     },
     {
-        Name        => "PackageVerify - Package 'TestSecond'",
+        Name        => "PackageVerify - Package 'PackageVerifySecond'",
         Package     => $StringSecond,
-        PackageName => 'TestSecond',
+        PackageName => 'PackageVerifySecond',
         Result      => 'verified',
     },
     {
-        Name              => "PackageVerify - Package 'TestSecond'",
+        Name              => "PackageVerify - Package 'PackageVerifySecond'",
         Package           => $StringSecond,
-        PackageName       => 'TestSecond',
+        PackageName       => 'PackageVerifySecond',
         ChangeLineEndings => 1,
         Result            => 'verified',
     },
@@ -187,11 +187,11 @@ for my $Test (@Tests) {
 
 my @Packages = (
     {
-        Name    => 'Test',
+        Name    => 'PackageVerify',
         Package => $String,
     },
     {
-        Name    => 'TestSecond',
+        Name    => 'PackageVerifySecond',
         Package => $StringSecond,
     },
 );
@@ -211,7 +211,7 @@ for my $Package (@Packages) {
 #
 my %VerifyAll = $PackageObject->PackageVerifyAll();
 
-for my $PackageName (qw( Test TestSecond )) {
+for my $PackageName (qw( PackageVerify PackageVerifySecond )) {
     $Self->Is(
         $VerifyAll{$PackageName},
         'verified',

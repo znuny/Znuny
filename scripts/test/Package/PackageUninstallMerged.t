@@ -28,14 +28,10 @@ $OTRSVersion .= '.x';
 
 # find out if it is an developer installation with files
 # from the version control system.
+my $Home = $ConfigObject->Get('Home');
+
 my $DeveloperSystem = 0;
-my $Home            = $ConfigObject->Get('Home');
-my $Version         = $ConfigObject->Get('Version');
-if (
-    !-e $Home . '/ARCHIVE'
-    && $Version =~ m{git}
-    )
-{
+if ( !-e $Home . '/ARCHIVE' ) {
     $DeveloperSystem = 1;
 }
 
@@ -45,7 +41,7 @@ if ( !$DeveloperSystem ) {
     # install package normally
     my $String = '<?xml version="1.0" encoding="utf-8" ?>
     <otrs_package version="1.0">
-      <Name>Test</Name>
+      <Name>PackageUninstallMerged</Name>
       <Version>0.0.1</Version>
       <Vendor>OTRS AG</Vendor>
       <URL>https://otrs.com/</URL>
@@ -58,8 +54,8 @@ if ( !$DeveloperSystem ) {
       <BuildDate>2005-11-10 21:17:16</BuildDate>
       <BuildHost>yourhost.example.com</BuildHost>
       <Filelist>
-        <File Location="Test" Permission="644" Encode="Base64">aGVsbG8K</File>
-        <File Location="var/Test" Permission="644" Encode="Base64">aGVsbG8K</File>
+        <File Location="TestPackageUninstallMerged" Permission="644" Encode="Base64">aGVsbG8K</File>
+        <File Location="var/TestPackageUninstallMerged" Permission="644" Encode="Base64">aGVsbG8K</File>
       </Filelist>
     </otrs_package>
     ';
@@ -70,7 +66,7 @@ if ( !$DeveloperSystem ) {
         $PackageInstall,
         'PackageInstall() - package installed with true',
     );
-    for my $File (qw( Test var/Test )) {
+    for my $File (qw( TestPackageUninstallMerged var/TestPackageUninstallMerged )) {
         my $RealFile = $Home . '/' . $File;
         $RealFile =~ s/\/\//\//g;
         $Self->True(
@@ -85,7 +81,7 @@ if ( !$DeveloperSystem ) {
     # remain
     $String = '<?xml version="1.0" encoding="utf-8" ?>
     <otrs_package version="1.0">
-      <Name>Test</Name>
+      <Name>PackageUninstallMerged</Name>
       <Version>0.0.1</Version>
       <Vendor>OTRS AG</Vendor>
       <URL>https://otrs.com/</URL>
@@ -98,13 +94,13 @@ if ( !$DeveloperSystem ) {
       <BuildDate>2005-11-10 21:17:16</BuildDate>
       <BuildHost>yourhost.example.com</BuildHost>
       <Filelist>
-        <File Location="Test" Permission="644" Encode="Base64">aGVsbG8K</File>
-        <File Location="var/Test" Permission="644" Encode="Base64">aGVsbG8K</File>
+        <File Location="TestPackageUninstallMerged" Permission="644" Encode="Base64">aGVsbG8K</File>
+        <File Location="var/TestPackageUninstallMerged" Permission="644" Encode="Base64">aGVsbG8K</File>
         <File Location="bin/otrs.CheckSum.pl" Permission="755" Encode="Base64">aGVsbG8K</File>
       </Filelist>
     </otrs_package>
     ';
-    my $PackageName = 'Test';
+    my $PackageName = 'PackageUninstallMerged';
 
     # the modifications has to be at DB level, otherwise a .save file will be generated for the
     # framework file, and we are trying to prevent it
@@ -142,7 +138,7 @@ if ( !$DeveloperSystem ) {
 
     # check that the original files from the package does not exist anymore
     # these files are suppose to be old files that are not required anymore by the merged package
-    for my $File (qw( Test var/Test bin/otrs.CheckSum.pl.save )) {
+    for my $File (qw( TestPackageUninstallMerged var/TestPackageUninstallMerged bin/otrs.CheckSum.pl.save )) {
         my $RealFile = $Home . '/' . $File;
         $RealFile =~ s/\/\//\//g;
         $Self->False(
