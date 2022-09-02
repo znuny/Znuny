@@ -302,6 +302,16 @@ my @Tests = (
         Result   => 'Test otr [...]',
     },
     {
+        Name => 'OTRS customer subject 20 letters + garbarge',    # <OTRS_CUSTOMER_SUBJECT[20]>
+        Data => {
+            From    => 'test@home.com',
+            Subject => 'otrs 123456789012345678901234567890',
+        },
+        RichText => 0,
+        Template => 'Test <OTRS_CUSTOMER_SUBJECT[20]>',
+        Result   => 'Test otrs 123456789012345 [...]',
+    },
+    {
         Name => 'OTRS responsible firstname',                     # <OTRS_RESPONSIBLE_UserFirstname>
         Data => {
             From => 'test@home.com',

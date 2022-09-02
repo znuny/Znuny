@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.157834664927442;
+    $Self->{Completeness}        = 0.157757496740548;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -5005,6 +5005,11 @@ sub Data {
         'This field is required or' => '',
         'The field content is too long!' => 'Lauka saturs ir pārāk garš!',
         'Maximum size is %s characters.' => 'Maksimālais izmērs ir %s zīmes.',
+
+        # Perl Module: Kernel/System/MailQueue.pm
+        'Error while validating Message data.' => '',
+        'Error while validating Sender email address.' => '',
+        'Error while validating Recipient email address.' => '',
 
         # Perl Module: Kernel/System/Mention.pm
         'LastMention' => '',
