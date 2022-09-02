@@ -11009,9 +11009,7 @@ msgstr "Verzeichnisliste"
 
 #. Perl Module: Kernel/Modules/AdminPackageManager.pm
 msgid "No packages found in selected repository. Please check log for more info!"
-msgstr ""
-"Keine Pakete im gewählten Verzeichnis gefunden. Bitte prüfen Sie das "
-"Systemprotokoll für mehr Informationen!"
+msgstr "Keine Pakete im gewählten Verzeichnis gefunden. Bitte prüfen Sie das Systemprotokoll für mehr Informationen!"
 
 #. Perl Module: Kernel/Modules/AdminPackageManager.pm
 msgid "Package not verified due a communication issue with verification server!"
@@ -25457,3 +25455,4 @@ msgstr "Fehler bei der Validierung der Absender-E-Mail-Adresse."
 #. Perl Module: Kernel/System/MailQueue.pm
 msgid "Error while validating Recipient email address."
 msgstr "Fehler bei der Validierung der E-Mail-Adresse des Empfängers."
+
