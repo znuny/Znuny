@@ -44,28 +44,28 @@ my $RandomID = $HelperObject->GetRandomID();
 # Override Request() from WebUserAgent to always return some test data without making any
 #   actual web service calls. This should prevent instability in case cloud services are
 #   unavailable at the exact moment of this test run.
-my $CustomCode = <<"EOS";
-sub Kernel::Config::Files::ZZZZUnitTestAdminPackageManager${RandomID}::Load {} # no-op, avoid warning logs
-use Kernel::System::WebUserAgent;
-package Kernel::System::WebUserAgent;
-use strict;
-use warnings;
-## nofilter(TidyAll::Plugin::OTRS::Perl::TestSubs)
-{
-    no warnings 'redefine';
-    sub Request {
-        return (
-            Status  => '200 OK',
-            Content => '{"Success":1,"Results":{"PackageManagement":[{"Operation":"PackageVerify","Data":{"Test":"not_verified","TestPackageIncompatible":"not_verified"},"Success":"1"}]},"ErrorMessage":""},
-        );
-    }
-}
-1;
-EOS
-$HelperObject->CustomCodeActivate(
-    Code       => $CustomCode,
-    Identifier => 'AdminPackageManager' . $RandomID,
-);
+# my $CustomCode = <<"EOS";
+# sub Kernel::Config::Files::ZZZZUnitTestAdminPackageManager${RandomID}::Load {} # no-op, avoid warning logs
+# use Kernel::System::WebUserAgent;
+# package Kernel::System::WebUserAgent;
+# use strict;
+# use warnings;
+# ## nofilter(TidyAll::Plugin::OTRS::Perl::TestSubs)
+# {
+#     no warnings 'redefine';
+#     sub Request {
+#         return (
+#             Status  => '200 OK',
+#             Content => '{"Success":1,"Results":{"PackageManagement":[{"Operation":"PackageVerify","Data":{"Test":"not_verified","TestPackageIncompatible":"not_verified"},"Success":"1"}]},"ErrorMessage":""},
+#         );
+#     }
+# }
+# 1;
+# EOS
+# $HelperObject->CustomCodeActivate(
+#     Code       => $CustomCode,
+#     Identifier => 'AdminPackageManager' . $RandomID,
+# );
 
 my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
@@ -178,43 +178,6 @@ $Selenium->RunTest(
 
         # Install test package.
         my $Location = $ConfigObject->Get('Home') . '/scripts/test/sample/PackageManager/TestPackage.opm';
-
-        $Selenium->find_element( '#FileUpload', 'css' )->send_keys($Location);
-
-        $ClickAction->("//button[contains(.,'Install Package')]");
-
-        # Check breadcrumb on Install screen.
-        $CheckBreadcrumb->(
-            BreadcrumbText => 'Install Package:',
-        );
-
-        # Package is not verified, so it's not possible to continue with the installation.
-        $Self->Is(
-            $Selenium->execute_script("return \$('button[type=\"submit\"][value=\"Continue\"]').length"),
-            '0',
-            'Continue button not available because package is not verified'
-        );
-
-        $Self->True(
-            index(
-                $Selenium->get_page_source(),
-                'The installation of packages which are not verified by the OTRS Group is not possible by default.'
-            ) > 0,
-            'Message for aborting installation of package is displayed'
-        );
-
-        # Allow web server to pick up the changed config setting.
-        sleep 1;
-
-        $NavigateToAdminPackageManager->();
-
-        # Check for notification.
-        $Self->True(
-            $Selenium->execute_script(
-                'return $("div.MessageBox.Error p:contains(\'The installation of packages which are not verified by the OTRS Group is activated. These packages could threaten your whole system! It is recommended not to use unverified packages.\')").length',
-            ),
-            'Install warning for not verified packages is displayed',
-        );
 
         $Selenium->find_element( '#FileUpload', 'css' )->send_keys($Location);
 
