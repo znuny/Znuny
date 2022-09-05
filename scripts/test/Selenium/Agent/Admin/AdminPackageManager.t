@@ -41,32 +41,6 @@ $HelperObject->ConfigSettingChange(
 
 my $RandomID = $HelperObject->GetRandomID();
 
-# Override Request() from WebUserAgent to always return some test data without making any
-#   actual web service calls. This should prevent instability in case cloud services are
-#   unavailable at the exact moment of this test run.
-# my $CustomCode = <<"EOS";
-# sub Kernel::Config::Files::ZZZZUnitTestAdminPackageManager${RandomID}::Load {} # no-op, avoid warning logs
-# use Kernel::System::WebUserAgent;
-# package Kernel::System::WebUserAgent;
-# use strict;
-# use warnings;
-# ## nofilter(TidyAll::Plugin::OTRS::Perl::TestSubs)
-# {
-#     no warnings 'redefine';
-#     sub Request {
-#         return (
-#             Status  => '200 OK',
-#             Content => '{"Success":1,"Results":{"PackageManagement":[{"Operation":"PackageVerify","Data":{"Test":"not_verified","TestPackageIncompatible":"not_verified"},"Success":"1"}]},"ErrorMessage":""},
-#         );
-#     }
-# }
-# 1;
-# EOS
-# $HelperObject->CustomCodeActivate(
-#     Code       => $CustomCode,
-#     Identifier => 'AdminPackageManager' . $RandomID,
-# );
-
 my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 my $CheckBreadcrumb = sub {
