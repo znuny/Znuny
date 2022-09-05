@@ -47,6 +47,7 @@ jobs:
           cd "${GITHUB_WORKSPACE}/znuny"
           git init
           "${GITHUB_WORKSPACE}/codepolicy/bin/otrs.CodePolicy.pl" --all
+
   CPANAudit:
     name: CPANAudit
     runs-on: ubuntu-latest
@@ -67,6 +68,7 @@ jobs:
         run: |
           su -c "bin/otrs.Console.pl Dev::Code::CPANAudit" - otrs
           exit $?
+
   Contributors:
     name: Contributors
     runs-on: ubuntu-latest
@@ -87,6 +89,7 @@ jobs:
         run: |
           su -c "bin/otrs.Console.pl Dev::Code::ContributorsListUpdate" - otrs
           if [[ $(git diff --exit-code AUTHORS.md) ]]; then echo 'The ContributorsList is not updated.' && exit 1; else echo 'The ContributorsList is updated.' && exit 0; fi
+
   Database-Schema:
     name: Database:Schema
     runs-on: ubuntu-latest
@@ -114,6 +117,7 @@ jobs:
           su -c "bin/otrs.Console.pl Dev::Tools::Database::XML2SQL --database-type=all --source-path=${SCHEMA_FILE} --target-directory=scripts/database --target-filename=$SCHEMA_FILE_NAME --split-files" - otrs
           git diff --exit-code scripts/database/*schema*
           if [[ $(git diff --exit-code scripts/database/*schema*) ]]; then echo 'The database schemas are not updated.' && exit 1; else echo 'All database schemas are updated.' && exit 0; fi
+
   Database-InitialInsert:
     name: Database:InitialInsert
     runs-on: ubuntu-latest
@@ -141,6 +145,7 @@ jobs:
           su -c "bin/otrs.Console.pl Dev::Tools::Database::XML2SQL --database-type=all --source-path=$INITIAL_INSERT_FILE --target-directory=scripts/database --target-filename=$INITIAL_INSERT_FILE_NAME" - otrs
           git diff --exit-code scripts/database/*initial_insert*
           if [[ $(git diff --exit-code scripts/database/*initial_insert*) ]]; then echo 'The database initial inserts are not updated.' && exit 1; else echo 'All database initial inserts are updated.' && exit 0; fi
+
   Migration:
     name: Migration
     runs-on: ubuntu-latest
@@ -176,6 +181,7 @@ jobs:
           MIGRATEFILE=$(find scripts -type f -name 'MigrateToZnuny*.pl' -or -type f -name 'DBUpdate-to-*.pl')
           su -c "$MIGRATEFILE --non-interactive" - otrs
           if [[ "$?" -ne 0 ]]; then echo "The migration was not successful." && exit 1; else echo "The migration was successful." && exit 0; fi
+
   RPMSpec:
     name: RPMSpec
     runs-on: ubuntu-latest
@@ -213,6 +219,7 @@ jobs:
           su -c "bin/otrs.Console.pl Dev::Tools::RPMSpecGenerate" - otrs
           git diff --exit-code scripts/auto_build/spec/
           if [[ $(git diff --exit-code scripts/auto_build/spec/) ]]; then echo "The RPMSpec's are not updated." && exit 1; else echo "All RPMSpec's are updated." && exit 0; fi
+
   UnitTest-MySQL:
     name: UnitTest:MySQL
     runs-on: ubuntu-latest
