@@ -673,17 +673,21 @@ sub _RenderAjax {
             );
             $FieldsProcessed{ $Self->{NameToID}{$CurrentField} } = 1;
         }
-        elsif ( $Self->{NameToID}{$CurrentField} eq 'Article' && $Param{GetParam}->{StandardTemplateID} && $Param{GetParam}->{ElementChanged} eq 'StandardTemplateID' ) {
+        elsif ($Self->{NameToID}{$CurrentField} eq 'Article'
+            && $Param{GetParam}->{ElementChanged} eq 'StandardTemplateID' )
+        {
             next DIALOGFIELD if $FieldsProcessed{ $Self->{NameToID}{$CurrentField} };
 
             my $TemplateGeneratorObject = $Kernel::OM->Get('Kernel::System::TemplateGenerator');
             my $StandardTemplateObject  = $Kernel::OM->Get('Kernel::System::StandardTemplate');
             my $StdAttachmentObject     = $Kernel::OM->Get('Kernel::System::StdAttachment');
             my $UploadCacheObject       = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
+
             my $StandardTemplateText;
             my @TicketAttachments;
+
             if ( IsPositiveInteger( $Param{GetParam}->{StandardTemplateID} ) ) {
-                my  %StandardTemplate = $StandardTemplateObject->StandardTemplateGet(
+                my %StandardTemplate = $StandardTemplateObject->StandardTemplateGet(
                     ID => $Param{GetParam}->{StandardTemplateID},
                 );
 
@@ -730,7 +734,7 @@ sub _RenderAjax {
                 @JSONCollector,
                 {
                     Name => 'RichText',
-                    Data => $StandardTemplateText || '',
+                    Data => $StandardTemplateText // '',
                 },
                 {
                     Name     => 'TicketAttachments',
