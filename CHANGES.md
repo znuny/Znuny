@@ -1,4 +1,5 @@
 # 6.4.3 2022-??-??
+ - 2022-09-05 Added 'AdditionalSearchParameters' to Toolbar TicketSearchFulltext to define the standard search more precisely. Thanks to maxence (@tipue-dev). [#284](https://github.com/znuny/Znuny/pull/284)
  - 2022-09-02 Fixed moved elements not being shown when filter is active in AdminDynamicFieldScreenConfiguration.
  - 2022-09-02 Fixed default display value for dynamic fields of type 'Webservice'.
  - 2022-09-02 Bugfix and Feature for 0050-CIC-CustomerUserList. Thanks to Kevin Janssen (@BuTzZ). [PR#147](https://github.com/znuny/Znuny/pull/147)
