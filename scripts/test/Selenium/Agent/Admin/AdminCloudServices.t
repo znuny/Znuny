@@ -59,6 +59,12 @@ $Selenium->RunTest(
             "'Support data collector' link is found on screen.",
         );
 
+        # check 'Register this system' button
+        $Self->True(
+            $Selenium->find_element("//a[contains(\@href, \'Action=AdminRegistration' )]"),
+            "'Register this system' button is found on screen.",
+        );
+
         # check breadcrumb on screen
         my $Count = 1;
         for my $BreadcrumbText ('Cloud Service Management') {
