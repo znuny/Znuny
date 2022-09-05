@@ -263,6 +263,7 @@ jobs:
         run: |
           su -c "bin/otrs.CheckSum.pl -a create" - otrs
           su -c "bin/otrs.Console.pl Dev::UnitTest::Run ${{ inputs.unittest_options }}" - otrs
+
   SeleniumTest-MySQL:
     name: SeleniumTest:MySQL
     runs-on: ubuntu-latest
