@@ -14893,375 +14893,375 @@ msgstr "Akun baru telah dibuat. Kirimkan informasi login kepada %s. Silahkan unt
 msgid "Action \"%s\" not found!"
 msgstr "Action \"%s\" tidak ditemukan!"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "invalid-temporarily"
 msgstr "tidak valid sementara"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Group for default access."
 msgstr "Kelompok untuk akses default."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Group of all administrators."
 msgstr "Grup semua administrator"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Group for statistics access."
 msgstr "Grup untuk akses statistik"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "new"
 msgstr "baru"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All new state types (default: viewable)."
 msgstr "Semua jenis state (default: paparkan)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "open"
 msgstr "buka"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All open state types (default: viewable)."
 msgstr "Semua jenis keadaan terbuka (default: dapat dilihat)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "closed"
 msgstr "tertutup"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All closed state types (default: not viewable)."
 msgstr "Semua jenis keadaan tertutup (default: tidak dapat dilihat)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "pending reminder"
 msgstr "Pengingat Ditunda"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All 'pending reminder' state types (default: viewable)."
 msgstr "Semua 'pending pengingat' jenis state (default: dapat dilihat)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "pending auto"
 msgstr "otomatis ditunda"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All 'pending auto *' state types (default: viewable)."
 msgstr "Semua 'tertunda secara auto *' jenis state (default: dapat dilihat)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "removed"
 msgstr "dihapus"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All 'removed' state types (default: not viewable)."
 msgstr "Semua 'dihapus' jenis state (default: Tidak bisa Dilihat)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "merged"
 msgstr "Tergabung"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "State type for merged tickets (default: not viewable)."
 msgstr "Jenis state untuk tiket gabungan (default: tidak dapat dilihat)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "New ticket created by customer."
 msgstr "tiket baru dibuat oleh pelanggan"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "closed successful"
 msgstr "Berhasil ditutup"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket is closed successful."
 msgstr "Tiket sukses ditutup."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "closed unsuccessful"
 msgstr "Tidak berhasil ditutup"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket is closed unsuccessful."
 msgstr "Tiket tidak berhasil ditutup "
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Open tickets."
 msgstr "Buka tiket"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Customer removed ticket."
 msgstr "Pelanggan menghapus tiket"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket is pending for agent reminder."
 msgstr "Tiket tertunda untuk pengingat agen."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "pending auto close+"
 msgstr "Tutup tertunda secara otomatis +"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket is pending for automatic close."
 msgstr "Tiket tertunda untuk otomatis dekat."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "pending auto close-"
 msgstr "Tutup tertunda secara otomatis -"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "State for merged tickets."
 msgstr "State untuk penggabungan tiket"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "system standard salutation (en)"
 msgstr "Sistem standar salutasi"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Standard Salutation."
 msgstr "Standar salutasi"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "system standard signature (en)"
 msgstr "Sistem tandatangan standar "
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Standard Signature."
 msgstr "Tandatangan standar"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Standard Address."
 msgstr "Alamat standar"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "possible"
 msgstr "Memungkinkan"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Follow-ups for closed tickets are possible. Ticket will be reopened."
 msgstr "Kemungkinan Tindak lanjut untuk tiket yang tertutup. Tiket akan dibuka kembali."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "reject"
 msgstr "Tolak"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Follow-ups for closed tickets are not possible. No new ticket will be created."
 msgstr "Tindak lanjut untuk tiket tertutup tidak mungkin. Tidak ada tiket baru akan dibuat."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "new ticket"
 msgstr "Tiket baru"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Follow-ups for closed tickets are not possible. A new ticket will be created."
 msgstr ""
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Postmaster queue."
 msgstr "Antrian Postmaster."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All default incoming tickets."
 msgstr "Semua bawaan tiket masuk."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All junk tickets."
 msgstr "Semua sampah tiket"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All misc tickets."
 msgstr "Semua tiket misc."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "auto reply"
 msgstr "balas secara otomatis"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Automatic reply which will be sent out after a new ticket has been created."
 msgstr "Balasan otomatis yang akan dikirim setelah tiket baru telah dibuat."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "auto reject"
 msgstr "Tolak secara otomatis"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Automatic reject which will be sent out after a follow-up has been rejected (in case queue follow-up option is \"reject\")."
 msgstr "Otomatis menolak yang akan dikirim setelah tindak lanjut telah ditolak (dalam antrian kasus tindak lanjut opsi \"menolak\")."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "auto follow up"
 msgstr "Lanjutkan secara otomatis"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Automatic confirmation which is sent out after a follow-up has been received for a ticket (in case queue follow-up option is \"possible\")."
 msgstr "Konfirmasi otomatis yang dikirim keluar setelah tindak lanjut telah menerima tiket (dalam antrian kasus opsi tindak lanjut adalah \"mungkin\")."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "auto reply/new ticket"
 msgstr "balas/baru tiket secara otomatis"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Automatic response which will be sent out after a follow-up has been rejected and a new ticket has been created (in case queue follow-up option is \"new ticket\")."
 msgstr "Respon otomatis yang akan dikirim setelah tindak lanjut telah ditolak dan tiket baru telah dibuat (dalam antrian kasus opsi tindak lanjut adalah \"tiket baru\")."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "auto remove"
 msgstr "hapus secara otomatis"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Auto remove will be sent out after a customer removed the request."
 msgstr "Menghapus secara otomatis akan dihantar keluar setelah pelanggan menghapus permintaan"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "default reply (after new ticket has been created)"
 msgstr "balasan default (setelah tiket baru telah dibuat)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "default reject (after follow-up and rejected of a closed ticket)"
 msgstr "Default menolak (setelah tindak lanjut dan menolak dari tiket tertutup)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "default follow-up (after a ticket follow-up has been added)"
 msgstr "bawaan tindak lanjut (setelah tiket tindak lanjut telah ditambahkan)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "default reject/new ticket created (after closed follow-up with new ticket creation)"
 msgstr "default menolak/tiket baru dibuat (setelah ditutup tindak lanjut dengan penciptaan tiket baru)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Unclassified"
 msgstr "Tidak bisa diklasifikasikan"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "1 very low"
 msgstr "1 sangat rendah"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "2 low"
 msgstr "2 rendah"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "3 normal"
 msgstr "3 normal"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "4 high"
 msgstr "4 tinggi"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "5 very high"
 msgstr "5 sangat tinggi"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "unlock"
 msgstr "buka kunci"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "lock"
 msgstr "kunci"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "tmp_lock"
 msgstr "tmp_lock"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "agent"
 msgstr "agen"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "system"
 msgstr "sistem"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "customer"
 msgstr "pelanggan"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket create notification"
 msgstr "Tiket buat pemberitahuan"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification each time a new ticket is created in one of your \"My Queues\" or \"My Services\"."
 msgstr "Anda akan menerima pemberitahuan setiap kali tiket baru dibuat di salah satu Anda \"My Antrian\" atau \"Layanan Saya\"."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket follow-up notification (unlocked)"
 msgstr "Tindak lanjut pemberitahuan ticket (tidak dikunci)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification if a customer sends a follow-up to an unlocked ticket which is in your \"My Queues\" or \"My Services\"."
 msgstr "Anda akan menerima sebuah pemberitahuan apabila pelanggan menghantarkan tindak lanjutan untuk membuka tiket dimana di \"MY Queues\" atau \"My Services\"."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket follow-up notification (locked)"
 msgstr "Pemberitahuan tiket tindak lanjut (dikunci)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification if a customer sends a follow-up to a locked ticket of which you are the ticket owner or responsible."
 msgstr "Anda akan menerima sebuah pemberitahuan apabila pelanggan menghantar tindak lanjutan tiket yang dikunci dimana pemilik tiket atau tanggung jawab"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket lock timeout notification"
 msgstr "Notifikasi waktu untuk mengunci tiket telah usai"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification as soon as a ticket owned by you is automatically unlocked."
 msgstr "Anda akan menerima pemberitahuan segera tiket milik Anda secara otomatis membuka."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket owner update notification"
 msgstr "Pemberitahuan pembaruan pemilik tiket"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket responsible update notification"
 msgstr "Tiket bertanggung jawab memperbarui notifikasi"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket new note notification"
 msgstr "Notifikasi catatan tiket baru"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket queue update notification"
 msgstr "Pemberitahuan tiket pembaruan antrian "
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification if a ticket is moved into one of your \"My Queues\"."
 msgstr "Anda akan menerima pemberitahuan jika tiket dipindahkan ke salah satu dari \"My Queues\" Anda."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket pending reminder notification (locked)"
 msgstr "Pemberitahuan pengingat tiket tertunda (terkunci)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket pending reminder notification (unlocked)"
 msgstr "Pemberitahuan tiket tertunda (tidak terkunci)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket escalation notification"
 msgstr "Pemberitahuan eskalasi tiket"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket escalation warning notification"
 msgstr "Pemberitahuan amaran eskalasi tiket"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket service update notification"
 msgstr "Pemberitahuan tiket layanan diperbarui"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification if a ticket's service is changed to one of your \"My Services\"."
 msgstr "Anda akan menerima pemberitahuan jika layanan tiket berubah menjadi salah satu dari Anda \"My Services\"."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Appointment reminder notification"
 msgstr ""
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification each time a reminder time is reached for one of your appointments."
 msgstr ""
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket email delivery failure notification"
 msgstr ""
 
@@ -25207,7 +25207,7 @@ msgstr ""
 msgid "Module to grant access to the mentioned agents of a ticket."
 msgstr ""
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Mention notification"
 msgstr ""
 
@@ -25289,5 +25289,17 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface."
+msgstr ""
+
+#. Perl Module: Kernel/System/MailQueue.pm
+msgid "Error while validating Message data."
+msgstr ""
+
+#. Perl Module: Kernel/System/MailQueue.pm
+msgid "Error while validating Sender email address."
+msgstr ""
+
+#. Perl Module: Kernel/System/MailQueue.pm
+msgid "Error while validating Recipient email address."
 msgstr ""
 

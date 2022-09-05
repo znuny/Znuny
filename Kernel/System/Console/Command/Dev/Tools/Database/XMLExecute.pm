@@ -24,7 +24,7 @@ our @ObjectDependencies = (
 sub Configure {
     my ( $Self, %Param ) = @_;
 
-    $Self->Description('Convert an OTRS database XML file to SQL and execute it in the current database.');
+    $Self->Description('Convert a database XML file to SQL and execute it in the current database.');
     $Self->AddArgument(
         Name        => 'source-path',
         Description => "Specify the location of the database XML file to be executed.",

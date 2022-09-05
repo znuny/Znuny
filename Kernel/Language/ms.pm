@@ -24,7 +24,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.561063101255503;
+    $Self->{Completeness}        = 0.560788787483703;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5005,6 +5005,11 @@ sub Data {
         'The field content is too long!' => 'Kandungan medan terlalu panjang!',
         'Maximum size is %s characters.' => 'Saiz maksimum ialah %s karakter.',
 
+        # Perl Module: Kernel/System/MailQueue.pm
+        'Error while validating Message data.' => '',
+        'Error while validating Sender email address.' => '',
+        'Error while validating Recipient email address.' => '',
+
         # Perl Module: Kernel/System/Mention.pm
         'LastMention' => '',
 
@@ -7916,7 +7921,7 @@ Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDa
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
 
-        # XML Definition: scripts/database/otrs-initial_insert.xml
+        # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'tidak sah-sementara',
         'Group for default access.' => 'Kumpulan untuk akses lalai.',
         'Group of all administrators.' => 'Kumpulan seluruh pentadbir.',

@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.714495353008316;
+    $Self->{Completeness}        = 0.714146023468057;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5013,6 +5013,11 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'The field content is too long!' => 'その領域の内容が長すぎます。',
         'Maximum size is %s characters.' => '最大サイズは%s文字です。',
 
+        # Perl Module: Kernel/System/MailQueue.pm
+        'Error while validating Message data.' => '',
+        'Error while validating Sender email address.' => '',
+        'Error while validating Recipient email address.' => '',
+
         # Perl Module: Kernel/System/Mention.pm
         'LastMention' => '',
 
@@ -7931,7 +7936,7 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
 
-        # XML Definition: scripts/database/otrs-initial_insert.xml
+        # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '無効-暫定',
         'Group for default access.' => '一般ユーザ用のデフォルトグループ',
         'Group of all administrators.' => '管理者用グループ',

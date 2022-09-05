@@ -23,7 +23,7 @@ Kernel::System::DBCRUD::Format::YAML - DBCRUD YAML lib
 
 =head1 SYNOPSIS
 
-All ticket DynamicFieldRelations CSV functions.
+All DBCRUD format YAML functions.
 
 =head1 PUBLIC INTERFACE
 

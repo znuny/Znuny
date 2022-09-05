@@ -993,11 +993,11 @@ receive all calls sent over system C<DBObject>.
 All database contents will be automatically dropped when the Helper object is destroyed.
 
     $HelperObject->ProvideTestDatabase(
-        DatabaseXMLString => $XML,      # (optional) OTRS database XML schema to execute
+        DatabaseXMLString => $XML,      # (optional) database XML schema to execute
                                         # or
         DatabaseXMLFiles => [           # (optional) List of XML files to load and execute
-            '/opt/otrs/scripts/database/otrs-schema.xml',
-            '/opt/otrs/scripts/database/otrs-initial_insert.xml',
+            '/opt/otrs/scripts/database/schema.xml',
+            '/opt/otrs/scripts/database/initial_insert.xml',
         ],
     );
 

@@ -2246,6 +2246,13 @@
             <Item ValueType="String"></Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###CustomerIDRaw" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
+        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
+        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
+        <Value>
+            <Item ValueType="String"></Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###CustomerUserLogin" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
         <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
         <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
@@ -5047,6 +5054,14 @@
                 <Item Key="Block">ToolBarSearchFulltext</Item>
                 <Item Key="Size">10</Item>
                 <Item Key="Priority">1990020</Item>
+                <Item Key="Data">
+                    <Hash>
+                        <Item Key="AdditionalSearchParameters">
+                            <Hash>
+                            </Hash>
+                        </Item>
+                    </Hash>
+                </Item>
             </Hash>
         </Value>
     </Setting>
@@ -10493,6 +10508,8 @@
                 <Item>ArticleEmailSendingQueued</Item>
                 <Item>ArticleEmailSendingSent</Item>
                 <Item>ArticleEmailSendingError</Item>
+                <Item>ArticleCreateTransmissionError</Item>
+                <Item>ArticleUpdateTransmissionError</Item>
                 <Item>UserMention</Item>
             </Array>
         </Value>
@@ -11095,6 +11112,7 @@
                 <Item>AgentTicketZoom</Item>
                 <Item>AgentLinkObject</Item>
                 <Item>AgentSplitSelection</Item>
+                <Item>CustomerTicketMessage</Item>
                 <Item>CustomerTicketPrint</Item>
                 <Item>CustomerTicketProcess</Item>
                 <Item>CustomerTicketZoom</Item>

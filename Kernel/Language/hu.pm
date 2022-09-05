@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.934289907060166;
+    $Self->{Completeness}        = 0.933833116036506;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5012,6 +5012,11 @@ sub Data {
         'The field content is too long!' => 'A mező tartalma túl hosszú!',
         'Maximum size is %s characters.' => 'A legnagyobb méret %s karakter.',
 
+        # Perl Module: Kernel/System/MailQueue.pm
+        'Error while validating Message data.' => '',
+        'Error while validating Sender email address.' => '',
+        'Error while validating Recipient email address.' => '',
+
         # Perl Module: Kernel/System/Mention.pm
         'LastMention' => '',
 
@@ -7921,7 +7926,7 @@ sub Data {
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
 
-        # XML Definition: scripts/database/otrs-initial_insert.xml
+        # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'átmenetileg érvénytelen',
         'Group for default access.' => 'Csoport az alapértelmezett hozzáféréshez.',
         'Group of all administrators.' => 'Az összes adminisztrátor csoportja.',

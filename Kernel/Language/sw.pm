@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.449046143812164;
+    $Self->{Completeness}        = 0.448826597131682;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -5009,6 +5009,11 @@ sub Data {
         'The field content is too long!' => 'Yaliyomo katika uga ni mengi sana!',
         'Maximum size is %s characters.' => 'Upeo wa juu wa ukubwa ni % miundo.',
 
+        # Perl Module: Kernel/System/MailQueue.pm
+        'Error while validating Message data.' => '',
+        'Error while validating Sender email address.' => '',
+        'Error while validating Recipient email address.' => '',
+
         # Perl Module: Kernel/System/Mention.pm
         'LastMention' => '',
 
@@ -7921,7 +7926,7 @@ Mfano:
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
 
-        # XML Definition: scripts/database/otrs-initial_insert.xml
+        # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'isiyo halali kwa muda mfupi',
         'Group for default access.' => '',
         'Group of all administrators.' => '',

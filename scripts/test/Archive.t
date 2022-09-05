@@ -13,6 +13,42 @@ use utf8;
 
 use vars (qw($Self));
 
+my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+my $Home = $ConfigObject->Get('Home');
+$Home =~ s{\/\z}{};
+
+# create an ARCHIVE file on developer systems to continue working
+my $ArchiveGeneratorTool = $Home . '/bin/otrs.CheckSum.pl';
+
+# if tool is not present we can't continue
+if ( !-e $ArchiveGeneratorTool ) {
+    $Self->True(
+        0,
+        "$ArchiveGeneratorTool does not exist, we can't continue",
+    );
+    return;
+}
+
+# execute ARCHIVE generator tool
+my $Result = `$ArchiveGeneratorTool -a create 2>&1`;
+
+if ( !-e $Home . '/ARCHIVE' || -z $Home . '/ARCHIVE' ) {
+
+    # if ARCHIVE file is not present we can't continue
+    $Self->True(
+        0,
+        "ARCHIVE file is not generated, we can't continue. Script output was: $Result",
+    );
+    return;
+}
+else {
+    $Self->True(
+        1,
+        "ARCHIVE file is generated for UnitTest purpose. Script output was: $Result",
+    );
+}
+
 my $ChecksumFileNotPresent = sub {
     $Self->False(
         1,
@@ -23,7 +59,6 @@ my $ChecksumFileNotPresent = sub {
 
 my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
-my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
 
 my $ChecksumFile = "$Home/ARCHIVE";
 

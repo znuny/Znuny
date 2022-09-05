@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.302462090330996;
+    $Self->{Completeness}        = 0.302314211212516;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5006,6 +5006,11 @@ sub Data {
         'The field content is too long!' => 'Conținutul câmpului este prea lung!',
         'Maximum size is %s characters.' => 'Dimensiunea maximă este de %s caractere.',
 
+        # Perl Module: Kernel/System/MailQueue.pm
+        'Error while validating Message data.' => '',
+        'Error while validating Sender email address.' => '',
+        'Error while validating Recipient email address.' => '',
+
         # Perl Module: Kernel/System/Mention.pm
         'LastMention' => '',
 
@@ -7915,7 +7920,7 @@ sub Data {
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
 
-        # XML Definition: scripts/database/otrs-initial_insert.xml
+        # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'invalid-temporar',
         'Group for default access.' => '',
         'Group of all administrators.' => '',

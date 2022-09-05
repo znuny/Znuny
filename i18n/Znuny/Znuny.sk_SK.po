@@ -14889,375 +14889,375 @@ msgstr "Konto bolo vytvorené. Prihlasovacie údaje boli odoslané na %s. Skontr
 msgid "Action \"%s\" not found!"
 msgstr ""
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "invalid-temporarily"
 msgstr "dočasne neplatný"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Group for default access."
 msgstr "Skupina pre predvolený prístup."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Group of all administrators."
 msgstr "Skupina pre všetky správce."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Group for statistics access."
 msgstr "Skupina pre štatistický prístup."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "new"
 msgstr "nový"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All new state types (default: viewable)."
 msgstr "Všetky nové typy stavov (predvoľba: viditeľný)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "open"
 msgstr "otvorený"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All open state types (default: viewable)."
 msgstr "Všetky otvorené typy stavov (predvoľba: viditeľný)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "closed"
 msgstr "zatvorený"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All closed state types (default: not viewable)."
 msgstr "Všetky uzatvorené typy stavov (predvoľba: nie je viditeľný)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "pending reminder"
 msgstr "nevybavená pripomienka"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All 'pending reminder' state types (default: viewable)."
 msgstr "Všetky typy stavov 'nevybavená pripomienka' (predvoľba: viditeľný)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "pending auto"
 msgstr "automaticky nevybaviť"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All 'pending auto *' state types (default: viewable)."
 msgstr "Všetky typy stavov 'automaticky nevybavený *' (predvoľba: viditeľný)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "removed"
 msgstr "odstránený"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All 'removed' state types (default: not viewable)."
 msgstr "Všetky typy stavov 'odstránený' (predvoľba: nie je viditeľný)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "merged"
 msgstr "zlúčené"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "State type for merged tickets (default: not viewable)."
 msgstr "Typ stavu pro zlúčené tikety (predvoľba: nie je viditeľný)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "New ticket created by customer."
 msgstr "Nový tiket vytvorený zákazníkom."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "closed successful"
 msgstr "úspešne zatvorený"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket is closed successful."
 msgstr "Tiket je uzatvorený úspešne."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "closed unsuccessful"
 msgstr "zatvorený neúspešne"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket is closed unsuccessful."
 msgstr "Tiket je uzatvorený neúspešne."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Open tickets."
 msgstr "Otvorené tikety."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Customer removed ticket."
 msgstr "Zákazník tiket odstránil."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket is pending for agent reminder."
 msgstr "Tiket čaká na upomienku agenta."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "pending auto close+"
 msgstr "počas automatického zatvárania +"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket is pending for automatic close."
 msgstr "Tiket čaká na automatické uzatvorenie."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "pending auto close-"
 msgstr "počas automatického zatvárania -"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "State for merged tickets."
 msgstr "Stav pre zlúčené tikety."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "system standard salutation (en)"
 msgstr "štandardné systémové oslovenie (en)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Standard Salutation."
 msgstr "Štandardné oslovenie."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "system standard signature (en)"
 msgstr "štandardný systémový podpis (en)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Standard Signature."
 msgstr "Štandardný podpis."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Standard Address."
 msgstr "Štandardná adresa."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "possible"
 msgstr "možné"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Follow-ups for closed tickets are possible. Ticket will be reopened."
 msgstr "Následné správy pre uzatvorené tikety sú možné. Tiket bude opäť otvorený."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "reject"
 msgstr "odmietnuté"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Follow-ups for closed tickets are not possible. No new ticket will be created."
 msgstr "Následné správy pre uzatvorené tikety nie sú možné. Nový tiket nie bude vytvorený."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "new ticket"
 msgstr "nový tiket"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Follow-ups for closed tickets are not possible. A new ticket will be created."
 msgstr "Následné správy pre uzatvorené tikety nie sú možné. Bude vytvorený nový tiket."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Postmaster queue."
 msgstr "Rad postmastera."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All default incoming tickets."
 msgstr "Všetky predvolené prichádzajúcí tikety."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All junk tickets."
 msgstr "Všetky odhodené tikety."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All misc tickets."
 msgstr "Všetky zmiešané tikety."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "auto reply"
 msgstr "automatická odozva"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Automatic reply which will be sent out after a new ticket has been created."
 msgstr "Automatická odpoveď po vytváranie nového tiketu."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "auto reject"
 msgstr "automatické zamietnutie"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Automatic reject which will be sent out after a follow-up has been rejected (in case queue follow-up option is \"reject\")."
 msgstr "Automatické odmietnutie ktoré bude odosláno po odmietnuti následnej správy k uzatvorenému tiketu (v prípadě nastavenej predvoľby \"zamietnuť\")."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "auto follow up"
 msgstr "automatické nasledovanie"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Automatic confirmation which is sent out after a follow-up has been received for a ticket (in case queue follow-up option is \"possible\")."
 msgstr "Automatické potvrdenie, ktoré bude odosláno po príjmu následnej správy k tiketu (v prípadě nastavenej predvoľby \"možné\")."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "auto reply/new ticket"
 msgstr "automatická odozva/nový ticket"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Automatic response which will be sent out after a follow-up has been rejected and a new ticket has been created (in case queue follow-up option is \"new ticket\")."
 msgstr "Automatická odpoveď, ktorá bude odoslána po odmietnutí následnej správy a vytvoreném novém tiketu (v prípadě nastavenej predvoľby \"nový tiket\")."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "auto remove"
 msgstr "automatické vymazanie"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Auto remove will be sent out after a customer removed the request."
 msgstr "Automatické odstranenie bude odosláno v prípade odstranenia požiadavky zákazníkom."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "default reply (after new ticket has been created)"
 msgstr "predvolená odpoveď (po vytvorení nového tiketu)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "default reject (after follow-up and rejected of a closed ticket)"
 msgstr "predvolené odmietnutie (po následnej správe a odmietnutí uzatvoreného tiketu)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "default follow-up (after a ticket follow-up has been added)"
 msgstr "predvolená následná odpoveď (po pridání následnej správy k tiketu)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "default reject/new ticket created (after closed follow-up with new ticket creation)"
 msgstr "predvolené odmietnutie/nový tiket vytvorený (po vytvorenie nového tiketu pri prijatej následnej správe k uzatvorenému tiketu)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Unclassified"
 msgstr ""
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "1 very low"
 msgstr "1 veľmi nízka"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "2 low"
 msgstr "2 nízka"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "3 normal"
 msgstr "3 normálna"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "4 high"
 msgstr "4 vysoká"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "5 very high"
 msgstr "5 veľmi vysoká"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "unlock"
 msgstr "odomknúť"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "lock"
 msgstr "zamknúť"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "tmp_lock"
 msgstr ""
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "agent"
 msgstr "agent"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "system"
 msgstr "systém"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "customer"
 msgstr "zákazník"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket create notification"
 msgstr "Oznámenie vytvoreného tiketu"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification each time a new ticket is created in one of your \"My Queues\" or \"My Services\"."
 msgstr "Dostanete oznámenie vždy pri vytvorenie nového tiketu buď v \"Moje rady\" alebo \"Moje služby\"."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket follow-up notification (unlocked)"
 msgstr "Oznámenie následnej správy tiketu (neuzamknutý)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification if a customer sends a follow-up to an unlocked ticket which is in your \"My Queues\" or \"My Services\"."
 msgstr "Dostanete oznámenie pri príjmu následnej správy od zákazníka k neuzamknutému tiketu, ktorý je v \"Moje rady\" alebo \"Moje služby\"."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket follow-up notification (locked)"
 msgstr "Oznámenie následnej správy k tiketu (uzamknutý)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification if a customer sends a follow-up to a locked ticket of which you are the ticket owner or responsible."
 msgstr "Dostanete oznámenie pri príjmu následnej správy od zákazníka k uzamknutému tiketu, ktorý vlastníte alebo máte na vlastnú zodpovednosť."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket lock timeout notification"
 msgstr "Notifikácia o prekročení časového limit uzamknutia tiketu."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification as soon as a ticket owned by you is automatically unlocked."
 msgstr "Dostanete oznámenie kedže tiket, ktorý vlastníte, bode odomknutý."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket owner update notification"
 msgstr "Oznámenie aktualizácie vlastníka tiketu"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket responsible update notification"
 msgstr "Oznámenie aktualizácie zodpovednosti k tiketu"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket new note notification"
 msgstr "Oznámenie novej poznámky k tiketu"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket queue update notification"
 msgstr "Oznámenie aktualizácie radu tiketu"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification if a ticket is moved into one of your \"My Queues\"."
 msgstr "Dostanete oznámenie pri presunu tiketu do jedné z vašich radov v \"Moje rady\"."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket pending reminder notification (locked)"
 msgstr "Oznámenie počas pripomenutie tiketu (uzamknutý)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket pending reminder notification (unlocked)"
 msgstr "Oznámenie počas pripomenutie tiketu (neuzamknutý)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket escalation notification"
 msgstr "Oznámenie vystupňovanie tiketu"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket escalation warning notification"
 msgstr "Oznámenie varovania pri vystupňovanie tiketu"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket service update notification"
 msgstr "Oznámenie aktualizácie služby tiketu"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification if a ticket's service is changed to one of your \"My Services\"."
 msgstr "Dostanete oznámenie pri zmene služby niektorého vašho tiketu v \"Moje služby\"."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Appointment reminder notification"
 msgstr "Oznámenie pripomenutie stretnutia"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification each time a reminder time is reached for one of your appointments."
 msgstr "Dostanete oznámenie v čase pripomenutie jedné z vášich stretnutie."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket email delivery failure notification"
 msgstr "Oznámenie zlýhania doručenia emailu"
 
@@ -25186,7 +25186,7 @@ msgstr ""
 msgid "Module to grant access to the mentioned agents of a ticket."
 msgstr ""
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Mention notification"
 msgstr ""
 
@@ -25268,5 +25268,17 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface."
+msgstr ""
+
+#. Perl Module: Kernel/System/MailQueue.pm
+msgid "Error while validating Message data."
+msgstr ""
+
+#. Perl Module: Kernel/System/MailQueue.pm
+msgid "Error while validating Sender email address."
+msgstr ""
+
+#. Perl Module: Kernel/System/MailQueue.pm
+msgid "Error while validating Recipient email address."
 msgstr ""
 

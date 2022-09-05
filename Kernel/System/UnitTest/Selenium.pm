@@ -162,7 +162,7 @@ sub new {
 
     #$Self->debug_on();
 
-    # set screen size from config or use defauls
+    # set screen size from config or use defaults
     my $Height = $SeleniumTestsConfig{window_height} || 1200;
     my $Width  = $SeleniumTestsConfig{window_width}  || 1400;
 

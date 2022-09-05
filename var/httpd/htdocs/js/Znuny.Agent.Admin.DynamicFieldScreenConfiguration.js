@@ -98,6 +98,10 @@ Znuny.Agent.Admin.DynamicFieldScreenConfiguration = (function (TargetNS) {
                                 $Element.appendTo('ul#'+ Target + 'Elements');
 
                                 RenameElement($Element, Target);
+
+                                // Regardless of filters: Show the elements that have been moved
+                                // so the user knows what is happening.
+                                $Element.show();
                             }
                         );
 

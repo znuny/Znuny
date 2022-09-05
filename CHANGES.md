@@ -1,7 +1,18 @@
 # 6.4.3 2022-??-??
+ - 2022-09-05 Added 'AdditionalSearchParameters' to Toolbar TicketSearchFulltext to define the standard search more precisely. Thanks to maxence (@tipue-dev). [#284](https://github.com/znuny/Znuny/pull/284)
+ - 2022-09-02 Fixed moved elements not being shown when filter is active in AdminDynamicFieldScreenConfiguration.
+ - 2022-09-02 Fixed default display value for dynamic fields of type 'Webservice'.
+ - 2022-09-02 Bugfix and Feature for 0050-CIC-CustomerUserList. Thanks to Kevin Janssen (@BuTzZ). [PR#147](https://github.com/znuny/Znuny/pull/147)
+ - 2022-09-01 Added missing 'Translatable' flag for 'Message sending error'.Thanks to Paweł Bogusławski (@pboguslawski). [PR#131](https://github.com/znuny/Znuny/pull/131)
+ - 2022-08-31 Bugfix for process and process templates. Thanks to @LuBroering (Lukas Bröring SectorNord AG). [PR#276](https://github.com/znuny/Znuny/pull/276). Thanks to maxence (@tipue-dev). [#277](https://github.com/znuny/Znuny/pull/277)
+ - 2022-08-31 Added events for article email backend transmission errors. Thanks to Renée Bäcker. [PR#176](https://github.com/znuny/Znuny/pull/176)
+ - 2022-08-24 Enabled pending time selection for process ticket dialogs depending on selected ticket state. Thanks to Tim Püttmanns, maxence. [PR#271](https://github.com/znuny/Znuny/pull/271)
+ - 2022-08-22 Fixed evaluation of parameter TicketID in Kernel::Output::HTML::Article::Base::ArticleActions. Thanks to @LotharZok, maxence. [PR#278](https://github.com/znuny/Znuny/pull/278)
+ - 2022-08-22 Added check to prevent infinite loop to Core.UI.InputFields.js.
+ - 2022-08-18 Fixed usage of time zones that have become obsolete. Thanks to Christian Ullrich. [#281](https://github.com/znuny/Znuny/issues/281)
  - 2022-08-17 Added OAuth2 token support to HTTP::REST generic interface requester.
  - 2022-08-10 Fixed accounted time field missing in AgentTicketBulk action.
- - 2022-08-02 Changed user of mention notification in the ticket history to the one triggering the notification. Thanks to Tim Püttmanns, maxence. [PR#273](https://github.com/znuny/Znuny/pull/273).
+ - 2022-08-02 Changed user of mention notification in the ticket history to the one triggering the notification. Thanks to Tim Püttmanns, maxence. [PR#273](https://github.com/znuny/Znuny/pull/273)
 
 # 6.4.2 2022-07-28
  - 2022-07-28 Fixed check for recipients in mention notifications. [#270)(https://github.com/znuny/Znuny/issues/270)

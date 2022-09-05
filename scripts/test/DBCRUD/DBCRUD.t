@@ -486,7 +486,7 @@ $Self->IsDeeply(
         ContentJSON => {
             ID    => 1,
             First => {
-                ID    => '2',
+                ID    => $CopyData{ContentJSON}->{First}->{ID},
                 Value => '2',
             }
         },

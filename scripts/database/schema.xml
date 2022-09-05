@@ -2802,7 +2802,7 @@
     <Column Name="change_by" Required="true" Type="INTEGER"/>
     <Unique Name="oauth2_token_config_name">
         <UniqueColumn Name="name"/>
-                </Unique>
+    </Unique>
     <ForeignKey ForeignTable="valid">
         <Reference Local="valid_id" Foreign="id"/>
     </ForeignKey>

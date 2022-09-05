@@ -25,7 +25,7 @@ Kernel::System::DBCRUD::Format::CSV - DBCRUD CSV lib
 
 =head1 SYNOPSIS
 
-All ticket DBCRUD CSV functions.
+All DBCRUD format CSV functions.
 
 =head1 PUBLIC INTERFACE
 
