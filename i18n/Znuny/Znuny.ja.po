@@ -16,15 +16,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-07-01 07:05+0000\n"
-"PO-Revision-Date: 2020-02-22 12:18+0000\n"
-"Last-Translator: HISATOSHI OONISHI <hisatoshi.onishi@gmail.com>\n"
-"Language-Team: Japanese <https://translate.app.otrs.com/projects/otrs-6/otrs/ja/>\n"
+"PO-Revision-Date: 2022-09-06 09:06+0000\n"
+"Last-Translator: Kozo Sakurai <sakurai@io-architect.com>\n"
+"Language-Team: Japanese <https://translations.znuny.org/projects/znuny/znuny/"
+"ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.10.3\n"
+"X-Generator: Weblate 4.13.1\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "ACL Management"
@@ -2050,7 +2051,7 @@ msgstr "ダイナミック・フィールド"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldScreenConfiguration.tt
 msgid "Add dynamic field"
-msgstr ""
+msgstr "ダイナミック・フィールドを追加"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Create times"
@@ -25319,4 +25320,3 @@ msgstr ""
 #. Perl Module: Kernel/System/MailQueue.pm
 msgid "Error while validating Recipient email address."
 msgstr ""
-
