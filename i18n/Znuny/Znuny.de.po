@@ -24144,26 +24144,6 @@ msgstr "Erzeugt eine Unit-Test-Datei für dieses Ticket und sendet diese an Znun
 msgid "Creates a unit test file for this ticket."
 msgstr "Erzeugt eine Unit-Test-Datei für dieses Ticket."
 
-#. SysConfig
-msgid "Customizable system name. If empty, config item 'Home' is being used for display."
-msgstr ""
-
-#. SysConfig
-msgid "Defines if fred is visible or hidden."
-msgstr ""
-
-#. SysConfig
-msgid "Defines the height of the Fred console in pixel."
-msgstr ""
-
-#. SysConfig
-msgid "Defines the opacity of the Fred console, e.g. 0.9 for 10% transparency."
-msgstr ""
-
-#. SysConfig
-msgid "Defines the width of the Fred console in percent."
-msgstr ""
-
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Domains accessed through WebUserAgent module for which no proxy should be used. Separate domains by semicolon."
 msgstr "Domains, auf die durch das WebUserAgent-Modul zugegriffen wird und für die kein Proxy verwendet werden soll. Mehrere Domains können durch Semikolon getrennt hinterlegt werden."
@@ -24193,10 +24173,6 @@ msgid "Frontend module registration for the admin interface."
 msgstr "Frontend-Modulregistrierung im Admin-Interface."
 
 #. SysConfig
-msgid "Frontend module registration for the devel fred object in the admin area."
-msgstr ""
-
-#. SysConfig
 msgid "Hide"
 msgstr "Ausblenden"
 
@@ -24219,10 +24195,6 @@ msgstr "Letzte Ansicht - Typen"
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "List of actions that will be ignored."
 msgstr "Liste von Aktionen, die ignoriert werden."
-
-#. SysConfig
-msgid "List of config settings which should be available for quick switch. Please add only settings with possible values 0 or 1 (No/Yes)."
-msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "List of sub-actions that will be ignored."
@@ -24308,61 +24280,9 @@ msgstr "Zeigt nur gültige dynamische Felder in der Auswahl für den Export (Adm
 msgid "Shows only valid dynamic fields in screen configuration (AdminDynamicFieldScreenConfiguration) if enabled."
 msgstr "Zeigt nur gültige dynamische Felder in der Maskenkonfiguration (AdminDynamicFieldScreenConfiguration), falls aktiviert."
 
-#. SysConfig
-msgid "Subscribe the output filter at the system."
-msgstr ""
-
-#. SysConfig
-msgid "This option defines the background color for the sytem name box."
-msgstr ""
-
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Ticket event module that stores values of the selected web service record into the configured additional dynamic fields."
 msgstr "Ticket-Event-Modul zur Speicherung von Werten des gewählten Webservice-Datensatzes in den konfigurierten zusätzlichen dynamischen Feldern."
-
-#. SysConfig
-msgid "Turn on if you want a JavaScript code quality checker. Only works in CVS Head / OTRS 3 with jQuery."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want an realtime HTML-checker."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want an realtime SQL statement log function."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want the translation debugger."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to filter the output of the STDERRLog. You can add a regular expression to filter the output."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to see the STDERRLog."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to see the data in the environment of the layout object."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to see the data in the serverside session object."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to use the config log mechanism."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to use the config switch mechanism."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to use the fred console."
-msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "URL to the OTRS cloud service proxy service. The http or https prefix will be added, depending on SysConfig option 'PackageRepositoryURLSchema'."
@@ -24383,10 +24303,6 @@ msgstr "Webservice (Text)"
 #. SysConfig
 msgid "Webservice dynamic field AJAX interface"
 msgstr "AJAX-Schnittstelle für dynamische Webservice-Felder"
-
-#. SysConfig
-msgid "Which order should the config log data have?"
-msgstr ""
 
 #. SysConfig
 msgid "Znuny.org - News"
