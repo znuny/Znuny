@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.99397001303781;
+    $Self->{Completeness}        = 0.994456220446763;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7850,7 +7850,6 @@ sub Data {
         'Handles changes to data of modules which use the DBCRUD base module.' =>
             'Verarbeitet Änderungen an Daten von Modulen, die das DBCRUD-Modul als Basis nutzen.',
         'Cache settings for DBCRUD modules (default: 1 day).' => 'Cache-Einstellungen für DBCRUD-Module (Standardwert: 1 Tag).',
-        'Loader module registration for AdminOAuth2TokenManagement.' => '',
         'Displays notifications for missing and expired OAuth2 tokens.' =>
             'Zeigt Benachrichtigungen für fehlende und abgelaufene OAuth2-Token an.',
         'Authentication type for sendmail module. If \'OAuth2 token\' has been selected, SendmailModule::OAuth2TokenConfigName must also be configured.' =>
@@ -7869,7 +7868,6 @@ sub Data {
             'Filterbare Spalten in der betreffenden Ansicht des Agentenbereichs. Hinweis: Nur Ticket-Attribute, Dynamische Felder (DynamicField_NameX) und Kundenattribute (z. B. CustomerUserPhone, CustomerCompanyName) sind zulässig.',
         'Agent interface notification module to see the number of tickets an agent is owner for. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             'Agenten-Schnittstellen Benachrichtigungs-Modul zum Anzeigen der Anzahl der Tickets, für die der Agent besitzer ist. Zusätzliche Zugriffssteuerung zum Zeigen oder Verstecken dieses Links können durch Nutzung des Schlüssels "Group" und Inhalten wie "rw:group1;move_into:group2" realisiert werden.',
-        'Loader module registration for AgentAppointmentEdit.' => '',
         'Defines the next possible ticket states for calendar based tickets.' =>
             'Definiert die nächstmöglichen Ticketzustände für kalenderbasierte Tickets.',
         'Defines the default next state.' => 'Definiert den standardmäßigen nächsten Zustand in der Agentenschnittstelle.',
@@ -8512,7 +8510,6 @@ Ihr Helpdesk-Team
             'Admin-Konfigurationsdialog für die dynamischen Feldtypen WebserviceText und WebserviceMultiselect',
         'Admin modules overview.' => 'Admin Modul Übersicht.',
         'Admin.' => 'Admin.',
-        'AdminOAuth2TokenManagement' => '',
         'Administration' => 'Administration',
         'Agent Customer Search' => 'Kundensuche Agentenbereich',
         'Agent Customer Search.' => 'Kundensuche Agentenbereich.',

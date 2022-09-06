@@ -1630,7 +1630,7 @@
                     </Item>
                     <Item Key="Description" Translatable="1"></Item>
                     <Item Key="NavBarName">AdminOAuth2TokenManagement</Item>
-                    <Item Key="Title" Translatable="1">AdminOAuth2TokenManagement</Item>
+                    <Item Key="Title" Translatable="1">Manage OAuth2 tokens and their configurations.</Item>
                 </Hash>
             </Item>
         </Value>
@@ -1659,7 +1659,7 @@
         </Value>
     </Setting>
     <Setting Name="Loader::Module::AdminOAuth2TokenManagement###200-OAuth2TokenManagement" Required="1" Valid="1">
-        <Description Translatable="1">Loader module registration for AdminOAuth2TokenManagement.</Description>
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
         <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
         <Value>
             <Hash>
@@ -2073,7 +2073,7 @@
         </Value>
     </Setting>
     <Setting Name="Loader::Module::AgentAppointmentCalendarOverview###500-AppointmentCalendar::Plugin::TicketCreate" Required="1" Valid="1">
-        <Description Translatable="1">Loader module registration for AgentAppointmentEdit.</Description>
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
         <Navigation>Frontend::Agent::ModuleRegistration::Loader</Navigation>
         <Value>
             <Hash>
