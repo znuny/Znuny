@@ -36,6 +36,23 @@
     <Column Name="change_time" Required="true" Type="DATE"/>
 </Table>
 
+<!-- activity -->
+<Table Name="activity">
+    <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
+    <Column Name="user_id" Required="true" Type="INTEGER"/>
+    <Column Name="activity_type" Required="true" Size="200" Type="VARCHAR"/>
+    <Column Name="activity_title" Required="true" Size="255" Type="VARCHAR"/>
+    <Column Name="activity_text" Required="false" Type="LONGBLOB" />
+    <Column Name="activity_state" Required="false" Size="255" Type="VARCHAR"/>
+    <Column Name="activity_link" Required="false" Size="255" Type="VARCHAR"/>
+    <Column Name="create_time" Required="true" Type="DATE"/>
+    <Column Name="create_by" Required="true" Type="INTEGER"/>
+    <ForeignKey ForeignTable="users">
+        <Reference Local="user_id" Foreign="id"/>
+        <Reference Local="create_by" Foreign="id"/>
+    </ForeignKey>
+</Table>
+
 <!-- Ticket attribute related ACLs -->
 <Table Name="acl_ticket_attribute_relations">
     <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="BIGINT"/>

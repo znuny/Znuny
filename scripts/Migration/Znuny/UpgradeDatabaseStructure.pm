@@ -56,6 +56,10 @@ sub Run {
             Message => 'Add table and notification event for user mention support',
             Module  => 'Mentions',
         },
+        {
+            Message => 'Add new activity table',
+            Module  => 'Activity',
+        },
     );
 
     return 1   if !@Tasks;

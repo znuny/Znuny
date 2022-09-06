@@ -31,6 +31,21 @@ CREATE TABLE acl_sync (
     change_time timestamp(0) NOT NULL
 );
 -- ----------------------------------------------------------
+--  create table activity
+-- ----------------------------------------------------------
+CREATE TABLE activity (
+    id serial NOT NULL,
+    user_id INTEGER NOT NULL,
+    activity_type VARCHAR (200) NOT NULL,
+    activity_title VARCHAR (255) NOT NULL,
+    activity_text TEXT NULL,
+    activity_state VARCHAR (255) NULL,
+    activity_link VARCHAR (255) NULL,
+    create_time timestamp(0) NOT NULL,
+    create_by INTEGER NOT NULL,
+    PRIMARY KEY(id)
+);
+-- ----------------------------------------------------------
 --  create table acl_ticket_attribute_relations
 -- ----------------------------------------------------------
 CREATE TABLE acl_ticket_attribute_relations (

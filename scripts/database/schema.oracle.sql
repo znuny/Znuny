@@ -69,6 +69,58 @@ CREATE TABLE acl_sync (
     change_time DATE NOT NULL
 );
 -- ----------------------------------------------------------
+--  create table activity
+-- ----------------------------------------------------------
+CREATE TABLE activity (
+    id NUMBER (12, 0) NOT NULL,
+    user_id NUMBER (12, 0) NOT NULL,
+    activity_type VARCHAR2 (200) NOT NULL,
+    activity_title VARCHAR2 (255) NOT NULL,
+    activity_text CLOB NULL,
+    activity_state VARCHAR2 (255) NULL,
+    activity_link VARCHAR2 (255) NULL,
+    create_time DATE NOT NULL,
+    create_by NUMBER (12, 0) NOT NULL
+);
+ALTER TABLE activity ADD CONSTRAINT PK_activity PRIMARY KEY (id);
+BEGIN
+    EXECUTE IMMEDIATE 'DROP SEQUENCE SE_activity';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE SEQUENCE SE_activity
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+CACHE 20
+ORDER
+;
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TRIGGER SE_activity_t';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE OR REPLACE TRIGGER SE_activity_t
+BEFORE INSERT ON activity
+FOR EACH ROW
+BEGIN
+    IF :new.id IS NULL THEN
+        SELECT SE_activity.nextval
+        INTO :new.id
+        FROM DUAL;
+    END IF;
+END;
+/
+--
+;
+-- ----------------------------------------------------------
 --  create table acl_ticket_attribute_relations
 -- ----------------------------------------------------------
 CREATE TABLE acl_ticket_attribute_relations (

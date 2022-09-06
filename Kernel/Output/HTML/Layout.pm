@@ -21,14 +21,15 @@ use Kernel::Language qw(Translatable);
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::Language',
+    'Kernel::System::Activity',
     'Kernel::System::AuthSession',
     'Kernel::System::Cache',
     'Kernel::System::Chat',
     'Kernel::System::CustomerGroup',
     'Kernel::System::CustomerUser',
     'Kernel::System::DateTime',
-    'Kernel::System::Group',
     'Kernel::System::Encode',
+    'Kernel::System::Group',
     'Kernel::System::HTMLUtils',
     'Kernel::System::JSON',
     'Kernel::System::LastViews',
@@ -1256,7 +1257,7 @@ sub Header {
 
     my $Type = $Param{Type} || '';
 
-    if (!$Self->{UserToolBar}){
+    if ( !$Self->{UserToolBar} ) {
         $Param{HideToolBar} = 'hide';
     }
 
@@ -1480,11 +1481,17 @@ sub Header {
 
                 # For ToolBarSearchFulltext module take into consideration SearchInArchive settings.
                 # See bug#13790 (https://bugs.otrs.org/show_bug.cgi?id=13790).
-                if ( $ConfigObject->Get('Ticket::ArchiveSystem') && $Modules{$Key}->{Block} eq 'ToolBarSearch' ){
-                    $Modules{$Key}->{SearchInArchive} = $ConfigObject->Get('Ticket::Frontend::AgentTicketSearch')->{Defaults}->{SearchInArchive};
+                if ( $ConfigObject->Get('Ticket::ArchiveSystem') && $Modules{$Key}->{Block} eq 'ToolBarSearch' ) {
+                    $Modules{$Key}->{SearchInArchive}
+                        = $ConfigObject->Get('Ticket::Frontend::AgentTicketSearch')->{Defaults}->{SearchInArchive};
                 }
 
-                if ( $Modules{$Key}->{Block} eq 'ToolBarSearch' && $Self->{UserToolBarSearchBackend} eq 'ToolBarSearchBackend' . $Modules{$Key}->{Name}){
+                if (
+                    $Modules{$Key}->{Block} eq 'ToolBarSearch'
+                    && $Self->{UserToolBarSearchBackend}
+                    && $Self->{UserToolBarSearchBackend} eq 'ToolBarSearchBackend' . $Modules{$Key}->{Name}
+                    )
+                {
                     $Modules{$Key}->{Checked} = 'checked="checked"';
                 }
 
@@ -1511,7 +1518,7 @@ sub Header {
             );
             if ( defined $ToolBarLastViewsHTML && length $ToolBarLastViewsHTML ) {
                 $Self->Block(
-                    Name => 'LastViewsToolBar',
+                    Name => 'ToolBarLastViews',
                     Data => {
                         ToolBarLastViewsHTML => $ToolBarLastViewsHTML,
                     },
@@ -1557,6 +1564,42 @@ sub Header {
                 },
             );
         }
+
+        my $ActivityObject = $Kernel::OM->Get('Kernel::System::Activity');
+        my @Activities     = $ActivityObject->ListGet(
+            UserID => $Self->{UserID},
+        );
+
+        my $Count       = scalar @Activities;
+        my $NewActivity = grep { $_->{State} eq 'new' } @Activities;
+
+        my $ActivityBellClass = '';
+        if ($NewActivity) {
+            $ActivityBellClass = 'activity-new';
+        }
+
+        $Self->Block(
+            Name => 'Activity',
+            Data => {
+                Count             => $Count,
+                ActivityBellClass => $ActivityBellClass,
+            },
+        );
+
+        for my $Activity (@Activities) {
+            $Self->Block(
+                Name => 'ActivityList',
+                Data => {
+                    %{$Activity},
+                    LinkTarget => $Self->{UserActivityLinkTarget} || '_self',
+                },
+            );
+        }
+
+        $Self->AddJSData(
+            Key   => 'UserActivityLinkTarget',
+            Value => $Self->{UserActivityLinkTarget} || '_self',
+        );
 
         # show logged in notice
         if ( $Param{ShowPrefLink} ) {
@@ -3323,7 +3366,7 @@ sub NavigationBar {
         }
     }
 
-    # run notification modules
+    # run notify modules
     my $FrontendNotifyModuleConfig = $ConfigObject->Get('Frontend::NotifyModule');
     if ( ref $FrontendNotifyModuleConfig eq 'HASH' ) {
         my %Jobs = %{$FrontendNotifyModuleConfig};

@@ -1046,6 +1046,7 @@ sub LoadDefaults {
         'Core.Data.js',
         'Core.Config.js',
         'Core.Language.js',
+        'Core.Activity.js',
         'Core.Template.js',
         'Core.JSON.js',
         'Core.App.js',

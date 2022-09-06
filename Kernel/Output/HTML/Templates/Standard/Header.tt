@@ -6,8 +6,6 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-# TODO delete me
-## nofilter(TidyAll::Plugin::OTRS::Common::Origin)
 
 [%- INCLUDE "HTTPHeaders.tt" -%]
 
@@ -15,17 +13,13 @@
 <html>
 [% InsertTemplate("Copyright.tt") %]
 [% InsertTemplate("HTMLHead.tt") %]
+
 <body class="[% Data.BodyClass | html %]">
     <a name="Top"></a>
     <div id="AppWrapper">
         <div id="Header" class="ARIARoleBanner">
             <div id="Logo"></div>
-# ---
-# Forwwward
-# ---
-#
-            <ul id="ToolBar">
-                [% RenderBlockStart("ToolBar") %]
+            <ul id="HeaderToolBar">
                 <li class="UserAvatar dropdown-divider">
                     <a class="icon-hover-md" href="#">
                         [% IF Data.Avatar %]
@@ -41,13 +35,12 @@
                             <span class="UserAvatar_title">Marketing Administrator</span>
                         </div>
 
-                        [% IF Data.OTRSBusinessIsInstalled %]
-                        <a href="[% Env("Baselink") %]Action=AgentNotificationView" title="[% Translate("View notifications") | html %]">
-                        <i class="fa fa-flag-o"></i>
-                            <strong>[% Translate("Notifications") | html %]</strong>
-                        </a>
-                        [% END %]
+                        [% RenderBlockStart("LastViewsAvatar") %]
+                            <label>[% Translate("Last viewed") | html %]</label>
+                            [% Data.AvatarLastViewsHTML %]
+                        [% RenderBlockEnd("LastViewsAvatar") %]
 
+                        <label>Account</label>
                         <span>
                             [% RenderBlockStart("Login") %]
                                 <a href="[% Env("Baselink") %]Action=AgentPreferences" title="[% Translate("Edit personal preferences") | html %]">
@@ -63,151 +56,59 @@
                                 </a>
                             [% RenderBlockEnd("Logout") %]
                         </span>
-
-                        [% RenderBlockStart("LastViewsAvatar") %]
-                            <span>[% Translate("Last viewed") | html %]</span>
-                            [% Data.AvatarLastViewsHTML %]
-                        [% RenderBlockEnd("LastViewsAvatar") %]
                     </div>
-
                 </li>
 
-                <li class="icon-container dropdown-container">
-                    <a class="NotificationIcon icon-hover-md">
+                [% RenderBlockStart("Activity") %]
+                <li class="UserActivity icon-container dropdown-container">
+                    <a class="ActivityIcon icon-hover-md">
                         <span class="btn-wrapper">
                             <i class="fa fa-bell"></i>
-                            <span class="notif-new"></span>
+                            <span id='ActivityBellState'class="[% Data.ActivityBellClass | html %]"></span>
                         </span>
                     </a>
-                    <ul class="dropdown-menu notif-dropdown right">
-
+                    <div class="dropdown-menu activity-dropdown right">
                         <span>
-                            <label class="title uppercase">Notifications</label>
-                            <a href="" title="Clear all notifications">Clear all</a>
+                            <label class="title uppercase">[% Translate("Activities") | html %]
+                                <span id='ActivityCounter' class="ActivityCounter">([% Data.Count %])</span>
+                            </label>
+                            <a href="#" id="ActivityDeleteAll" title="[% Translate('Delete all activities') | html %]">[% Translate("Delete all") | html %]</a>
+                            <a href="#" id="ActivityMarkAsSeenAll" title="[% Translate('Mark all activities as seen') | html %]">[% Translate("Seen all") | html %]</a>
                         </span>
-                        <ul>
-                            <li>
-                                <a class="dropdown-item">
+                        <ul class="ActivityList">
+                            [% RenderBlockStart("ActivityList") %]
+                            <li class="Activity" data-activity-id="[% Data.ID %]" data-activity-state="[% Data.State %]">
+                                <a href="[% Data.Link %]" target="[% Data.LinkTarget %]" class="activity-link activity dropdown-item">
                                     <span class="iconWrapper">
-                                        <i class="notif-icon fa fa-phone"></i>
-                                        <span class="notif-new"></span>
+                                        <i class="activity-icon [% Data.Icon %]"></i>
+                                        <span class="ActivityState activity-[% Data.State %]"></span>
                                     </span>
-                                    <span>
-                                        <p class="notif-title">Phone ticket - Ticket#290...</p>
-                                        <p class="notif-message">Here are some more details about the notification.</p>
-                                        <p class="notif-time">Now</p>
+                                    <span class="textWrapper">
+                                        <p class="activity-title">[% Data.Title %]</p>
+                                        <p class="activity-text">[% Data.Text %]</p>
+                                        <p class="activity-time">[% Data.CreateTime | Localize("TimeShort") %]</p>
                                     </span>
-                                    <span class="icon-hover">
+                                    <span class="activity-delete icon-hover" data-activity-id="[% Data.ID %]">
                                         <i class="fa fa-close"></i>
                                     </span>
                                 </a>
                             </li>
-
-                            <li>
-                                <a class="dropdown-item">
-                                    <span class="iconWrapper">
-                                        <i class="notif-icon fa fa-reply"></i>
-                                    </span>
-                                    <span>
-                                        <p class="notif-title">Customer Reply</p>
-                                        <p class="notif-message">“I have a problem, I can't do this thing and I need help. Can you...”</p>
-                                        <p class="notif-time">11:43AM</p>
-                                    </span>
-                                    <span class="icon-hover">
-                                        <i class="fa fa-close"></i>
-                                    </span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item">
-                                    <span class="iconWrapper">
-                                        <i class="notif-icon fa fa-envelope-open"></i>
-                                    </span>
-                                    <span>
-                                        <p class="notif-title">Email ticket - Ticket#243...</p>
-                                        <p class="notif-message">Here are some more details about the notification.</p>
-                                        <p class="notif-time">1 day ago</p>
-                                    </span>
-                                    <span class="icon-hover">
-                                        <i class="fa fa-close"></i>
-                                    </span>
-                                </a>
-                            </li>
+                            [% RenderBlockEnd("ActivityList") %]
                         </ul>
-                    </ul>
+                    </div>
                 </li>
-
-#   Forwwward
-                <!--
-                <li class="btn-container dropdown-container">
-                    <a class="btn-main btn-primary-ghost btn-dropdown">
-                        <span class="btn-wrapper">
-                            <i class="fa fa-link"></i>
-                            <span class="btn-text">Quick Links</span>
-                        </span>
-                    </a>
-                    <ul class="subMenuQuickLinkItems dropdown-menu">
-    #                    [% RenderBlockStart("ToolBarQuickLinkItem") %]
-                        <li class="[% Data.Class | html %]">
-                            <a class="dropdown-item" href="[% Data.Link %]" target="[% Data.Target | html %]" accesskey="[% Data.AccessKey | html %]" title="[% Translate(Data.Description) | html %]: [% Data.Count | html %][% Data.AccessKeyReference | html %]">
-                                <span class="iconWrapper">
-                                    <i class="icon-small fa fa-clock-o icon-show-reached"></i>
-                                    <i class="icon-small fa fa-star icon-show-new"></i>
-                                    <i class="[% Data.Icon | html %]"></i>
-                                    <span class="Counter">[% Data.Count | html %]</span>
-                                </span>
-                                <span class="textWrapper">[% Translate(Data.Description) | html %] </span>
-                            </a>
-                        </li>
-    #                    [% RenderBlockEnd("ToolBarQuickLinkItem") %]
-                    </ul>
-                </li>
-
-                <li class="dropdown-container">
-                    <a class="btn-main btn-primary-ghost btn-dropdown">
-                        <span class="btn-wrapper">
-                            <i class="fa fa-plus"></i>
-                            <span class="btn-text">Create</span>
-                        </span>
-                    </a>
-                    <ul class="subMenuCreateItems dropdown-menu">
-    #                    [% RenderBlockStart("ToolBarCreateItem") %]
-                        <li class="[% Data.Class | html %]">
-                            <a class="dropdown-item" href="[% Data.Link %]" target="[% Data.Target | html %]" accesskey="[% Data.AccessKey | html %]" title="[% Translate(Data.Description) | html %]: [% Data.Count | html %][% Data.AccessKeyReference | html %]">
-                                <span class="iconWrapper">
-                                    <i class="icon-small fa fa-clock-o icon-show-reached"></i>
-                                    <i class="icon-small fa fa-star icon-show-new"></i>
-                                    <i class="[% Data.Icon | html %]"></i>
-                                    <span class="Counter">[% Data.Count | html %]</span>
-                                </span>
-                                <span class="textWrapper">[% Translate(Data.Description) | html %] </span>
-                            </a>
-                        </li>
-    #                    [% RenderBlockEnd("ToolBarCreateItem") %]
-                    </ul>
-                </li>-->
-
-
-
-                [% RenderBlockEnd("ToolBar") %]
+                [% RenderBlockEnd("Activity") %]
 
                 [% RenderBlockStart("DebugRTLButton") %]
                 <li class="ItemDebugRTL">
                     <button type="button" class="DebugRTL">Simulate RTL</button>
                 </li>
                 [% RenderBlockEnd("DebugRTLButton") %]
-
-    <!-- TODO Denny check this LastViews function -->
-                [% RenderBlockStart("LastViewsToolBar") %]
-                <div class="LastViewToolBar">
-                    [% Data.ToolBarLastViewsHTML %]
-                </div>
-                [% RenderBlockEnd("LastViewsToolBar") %]
             </ul>
         </div>
 
-        <div class="toolbar-row-wrapper [% Data.HideToolBar | html %]">
+        [% RenderBlockStart("ToolBar") %]
+        <div id="ToolBar" class="toolbar-row-wrapper [% Data.HideToolBar | html %]">
             <div class="toolbar-row">
                 <div class="component-wrapper component-overviews">
                     <label>[% Translate('Overviews') | html %]</label>
@@ -268,10 +169,21 @@
                         [% RenderBlockEnd("ToolBarPersonalViews") %]
                     </ul>
                 </div>
+
+                [% RenderBlockStart("ToolBarLastViews") %]
+                <div class="component-wrapper component-last-views">
+                    <label>[% Translate('Last Views') | html %]</label>
+                    <ul>
+                        [% Data.ToolBarLastViewsHTML %]
+                    </ul>
+                </div>
+                [% RenderBlockEnd("ToolBarLastViews") %]
+
                 <div class="component-wrapper component-search align-right-auto">
                     <div class="search-bar-container">
-                        <label>[% Translate(Search) | html %]</label>
+                        <label>[% Translate('Search tools') | html %]</label>
                         <form action="[% Env("CGIHandle") %]" method="post" name="ToolBarSearch">
+                            <i class="fa fa-search"></i>
                             <input type="hidden" name="Action" value="AgentTicketSearch"/>
                             <input type="hidden" name="Subaction" value="Search"/>
                             <input type="hidden" name="SearchTemplate" value="[% Translate("Search") | html %]"/>
@@ -280,23 +192,28 @@
                                 <input type="hidden" name="SearchInArchive" value="[% Data.SearchInArchive | html %]"/>
                             [% END %]
 
-                            <input type="text" id="ToolBarSearchTerm" name="ToolBarSearchTerm" class="search-bar" value="[% Data.ToolBarSearchTerm | html %]" placeholder="[% Translate(Data.ToolBarSearchTerm) | html %]" title="[% Translate(Data.Description) | html %]"/>
+                            <input type="text" id="ToolBarSearchTerm" name="ToolBarSearchTerm" class="search-bar" />
 
-                            <div class="search-dropdown-top">
-                                [% RenderBlockStart("ToolBarSearch") %]
+                            <div class="component-wrapper">
+                                <div class="search-dropdown-top">
+                                    [% RenderBlockStart("ToolBarSearch") %]
+                                    <label class="dropdown-item">
+                                        <input type="radio" id="ToolBarSearchBackend[% Data.Name %]" name="ToolBarSearchBackend"  value="ToolBarSearchBackend[% Data.Name %]" title="[% Translate(Data.Description) | html %]" [% Data.Checked | html %]/>
+                                        [% Translate(Data.Description) | html %]
+                                    </label>
+                                    [% RenderBlockEnd("ToolBarSearch") %]
+                                </div>
+                                <div class="search-dropdown-bottom">
                                     <div>
-                                        <input type="radio" id="ToolBarSearchBackend[% Data.Name %]" name="ToolBarSearchBackend"  value="ToolBarSearchBackend[% Data.Name %]" title="[% Translate(Data.Description) | html %]" [% Data.Checked | html %]>
-                                        <label for="[% Data.Name %]">[% Translate(Data.Description) | html %]</label>
+                                        <label>Search profiles</label>
                                     </div>
-                                [% RenderBlockEnd("ToolBarSearch") %]
+                                    [% RenderBlockStart("ToolBarSearchProfile") %]
+                                        [% Data.Link %]
+                                    [% RenderBlockEnd("ToolBarSearchProfile") %]
+                                </div>
                             </div>
                         </form>
 
-                        <div class="search-dropdown-bottom">
-                            [% RenderBlockStart("ToolBarSearchProfile") %]
-                                [% Data.Link %]
-                            [% RenderBlockEnd("ToolBarSearchProfile") %]
-                        </div>
                     </div>
                 </div>
             </div>
@@ -304,3 +221,4 @@
                 <i class="fa fa-caret-up"></i>
             </a>
         </div>
+        [% RenderBlockEnd("ToolBar") %]
