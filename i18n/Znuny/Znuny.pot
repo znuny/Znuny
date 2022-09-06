@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-09-01 12:21+0000\n"
+"POT-Creation-Date: 2022-09-06 10:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20355,10 +20355,6 @@ msgid "Cache settings for DBCRUD modules (default: 1 day)."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "Loader module registration for AdminOAuth2TokenManagement."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Displays notifications for missing and expired OAuth2 tokens."
 msgstr ""
 
@@ -20392,10 +20388,6 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Agent interface notification module to see the number of tickets an agent is owner for. Additional access control to show or not show this link can be done by using Key \"Group\" and Content like \"rw:group1;move_into:group2\"."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "Loader module registration for AgentAppointmentEdit."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
@@ -21999,10 +21991,6 @@ msgstr ""
 
 #. SysConfig
 msgid "Admin."
-msgstr ""
-
-#. SysConfig
-msgid "AdminOAuth2TokenManagement"
 msgstr ""
 
 #. SysConfig

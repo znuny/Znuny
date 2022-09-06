@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.628748370273794;
+    $Self->{Completeness}        = 0.629218979292353;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2299,7 +2299,7 @@ sub Data {
         'Edit ticket attribute relations' => '',
         'Import CSV or Excel file' => '',
         'Attribute' => 'Attribute',
-        'Last update' => '',
+        'Last update' => 'Last update',
         'Are you sure you want to delete entry \'%s\'?' => '',
         'Download previously imported file' => '',
         'The file needs to be in CSV (UTF-8) or Excel format. Both header columns need to contain the names of valid ticket attributes. The name of the uploaded file must be unique and must not be in use by another ticket attribute relations record.' =>
@@ -7853,7 +7853,6 @@ sub Data {
         'Handles changes to data of modules which use the DBCRUD base module.' =>
             '',
         'Cache settings for DBCRUD modules (default: 1 day).' => '',
-        'Loader module registration for AdminOAuth2TokenManagement.' => '',
         'Displays notifications for missing and expired OAuth2 tokens.' =>
             '',
         'Authentication type for sendmail module. If \'OAuth2 token\' has been selected, SendmailModule::OAuth2TokenConfigName must also be configured.' =>
@@ -7872,7 +7871,6 @@ sub Data {
             '',
         'Agent interface notification module to see the number of tickets an agent is owner for. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             '',
-        'Loader module registration for AgentAppointmentEdit.' => '',
         'Defines the next possible ticket states for calendar based tickets.' =>
             '',
         'Defines the default next state.' => '',
@@ -8516,7 +8514,6 @@ Thanks for your help!
             '',
         'Admin modules overview.' => '',
         'Admin.' => '',
-        'AdminOAuth2TokenManagement' => '',
         'Administration' => '',
         'Agent Customer Search' => '',
         'Agent Customer Search.' => '',
