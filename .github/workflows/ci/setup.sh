@@ -26,6 +26,11 @@ fi
 su -c "bin/otrs.CheckSum.pl -a create" - otrs
 touch /opt/otrs/installed
 
+# prepare Selenium tests
+if [[ "$GITHUB_JOB" =~ ^Selenium ]]; then
+    .github/workflows/ci/config-selenium.sh
+fi
+
 if [ "$DB" ]; then
     su -c "bin/otrs.Console.pl Maint::Config::Rebuild" - otrs
     su -c "bin/otrs.Console.pl Admin::Config::Update --setting-name CheckEmailAddresses --value 0" - otrs
