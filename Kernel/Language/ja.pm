@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.714495353008316;
+    $Self->{Completeness}        = 0.714658405348117;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -611,7 +611,7 @@ sub Data {
         'Overview' => '一覧',
         'Screens' => '',
         'Default columns' => '',
-        'Add dynamic field' => '',
+        'Add dynamic field' => 'ダイナミック・フィールドを追加',
         'Filter' => 'フィルター',
         'You can assign elements by dragging and dropping them to the lists of available, disabled, assigned and required elements.' =>
             '',

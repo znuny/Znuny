@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.994456220446763;
+    $Self->{Completeness}        = 0.997391162563183;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -573,7 +573,7 @@ sub Data {
         'Years in the future to display (default: 5 years).' => 'Jahre in der Zukunft, die angezeigt werden (Standard: 5).',
         'Show link' => 'Link anzeigen',
         'Reserved keywords. The following placeholders are not allowed:' =>
-            '',
+            'Reservierte Schlüsselwörter. Die folgenden Platzhalter sind nicht erlaubt:',
         'Here you can specify an optional HTTP link for the field value in Overviews and Zoom screens.' =>
             'Hier können Sie einen optionalen HTTP-Link für den Feldwert in Übersichten und Ansichtsseiten angeben.',
         'If special characters (&, @, :, /, etc.) should not be encoded, use \'url\' instead of \'uri\' filter.' =>
@@ -640,10 +640,10 @@ sub Data {
         'This is the default term for the click search.' => 'Dies ist der Standardbegriff für die Klicksuche.',
         'Initial default search term' => 'Initialer Standardwert für die Suche',
         'This is the default search term when the mask is loaded.' => 'Dies ist der Standardbegriff für die Suche, wenn die Maske geladen wird.',
-        'Attributes' => '',
+        'Attributes' => 'Attribute',
         'Attributes for invoker execution (initially default values will be used).' =>
             'Attribute für Invoker-Ausführung (initial werden Defaultwerte verwendet).',
-        'Attribute keys' => '',
+        'Attribute keys' => 'Attribut-Schlüssel',
         'Custom attribute form for invoker execution.' => 'Benutzerdefiniertes Attributformular für die Invoker-Ausführung.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
@@ -1156,7 +1156,7 @@ sub Data {
         'JWT authentication: Key file password' => 'JWT-Authentifizierung: Key-Datei-Passwort',
         'ATTENTION: Password and/or key file (see above) seem to be invalid.' =>
             'ACHTUNG: Password und/oder Key-Datei (siehe oben) scheinen ungültig zu sein.',
-        'JWT authentication: Certificate file' => '',
+        'JWT authentication: Certificate file' => 'JWT-Authentifizierung: Zertifikatsdatei',
         'ATTENTION: Certificate file could not be parsed.' => 'ACHTUNG: Zertifikat-Datei konnte nicht gelesen werden.',
         'ATTENTION: Certificate is expired.' => 'ACHTUNG: Zertifikat ist abgelaufen.',
         'Path to X.509 certificate file (PEM). Data of the certificate can be used for the payload and/or header data of the JWT.' =>
@@ -2943,7 +2943,7 @@ sub Data {
         'Back to admin overview' => 'Zurück zur Übersicht',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
-        'Ticket Creation' => '',
+        'Ticket Creation' => 'Ticketerstellung',
         'Link' => 'Verknüpfen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Link.tt
@@ -3868,7 +3868,7 @@ sub Data {
         'Visible to customer' => 'Sichtbar für Kunde',
 
         # Perl Module: Kernel/Modules/AdminOAuth2TokenManagement.pm
-        'Authorization code parameters not found.' => '',
+        'Authorization code parameters not found.' => 'Autorisierungscode-Parameter nicht gefunden.',
 
         # Perl Module: Kernel/Modules/AdminOTRSBusiness.pm
         'Your system was successfully upgraded to %s.' => 'Ihr System wurde erfolgreich auf die %s erweitert.',
@@ -4321,7 +4321,7 @@ sub Data {
         'You need move permissions!' => 'Sie benötigen die "Verschieben"-Berechtigung!',
 
         # Perl Module: Kernel/Modules/AgentTicketOwnerView.pm
-        'My Owned Tickets' => '',
+        'My Owned Tickets' => 'Meine eigenen Tickets',
 
         # Perl Module: Kernel/Modules/AgentTicketPhone.pm
         'Chat is not active.' => 'Der Chat ist nicht aktiv.',
@@ -4923,9 +4923,9 @@ sub Data {
         'New mentions' => 'Neue Erwähnungen',
 
         # Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
-        'Owned Tickets New' => '',
+        'Owned Tickets New' => 'Eigene Tickets Neu',
         'Owned Tickets Reminder Reached' => '',
-        'Owned Tickets Total' => '',
+        'Owned Tickets Total' => 'Eigene Tickets Gesamt',
 
         # Perl Module: Kernel/Output/HTML/ToolBar/TicketResponsible.pm
         'Responsible Tickets New' => 'Neue verantwortliche Tickets',
@@ -5539,7 +5539,7 @@ sub Data {
         'List of colors in hexadecimal RGB which will be available for selection during calendar creation. Make sure the colors are dark enough so white text can be overlayed on them.' =>
             'Liste an Farben in Hexadezimal RGB, welche verschiedenen Benutzerkalendern zugewiesen werden. Stellen Sie sicher, dass die Farben dunkel genug sind, um weißen Text darauf darzustellen. Sofern die Anzahl der Kalender die Anzahl der verfügbaren Farben überschreitet, wird diese Liste erneut von Anfang an genutzt.',
         'Defines available groups for the appointment calendar screen.' =>
-            '',
+            'Definiert die verfügbaren Gruppen für das Terminkalenderansicht.',
         'Defines the ticket plugin for calendar appointments.' => 'Legt das Ticket-Plugin für Termine fest.',
         'Links appointments and tickets with a "Normal" type link.' => 'Verknüpft Termine und Tickets mit einem Link vom Typ "Normal".',
         'Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = "complex"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js.' =>
@@ -5714,7 +5714,7 @@ sub Data {
         'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
             'Das Logo, das für das Design "hoher Kontrast" im Agenten-Interface angezeigt wird. Mehr Informationen finden Sie in der Einstellung "AgentLogo".',
         'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
-            'Das Logo, das in der Abmelde-Box der Agenten-Oberfläche angezeigt wird. Die URL zu dem Bild kann entweder eine relative URL zum Designverzeichnis mit dem Bild sein, oder eine vollständige URL zu einem anderen Webserver.',
+            'Das Logo, das in der Anmelde-Box der Agenten-Oberfläche angezeigt wird. Die URL zu dem Bild kann entweder eine relative URL zum Designverzeichnis mit dem Bild sein, oder eine vollständige URL zu einem anderen Webserver.',
         'Defines the URL base path of icons, CSS and Java Script.' => 'Definiert den URL-Basispfad von Symbolen, CSS und JavaScript.',
         'Defines the URL image path of icons for navigation.' => 'Definiert den URL des Bildpfads von Symbolen für die Navigation.',
         'Defines the URL CSS path.' => 'Definiert den URL-CSS-Pfad.',
@@ -6172,7 +6172,7 @@ sub Data {
         'Frontend module registration for the customer interface.' => 'Frontend-Modulregistrierung für den Kundenbereich.',
         'Activates the available themes on the system. Value 1 means active, 0 means inactive.' =>
             'Aktiviert die verfügbaren Skins auf dem System. Wert 1 bedeutet aktiv, 0 bedeutet inaktiv.',
-        'Defines the default value for the action parameter.' => '',
+        'Defines the default value for the action parameter.' => 'Legt den Standardwert für den Aktionsparameter fest.',
         'Defines the shown links in the footer area of the customer and public interface of this OTRS system. The value in "Key" is the external URL, the value in "Content" is the shown label.' =>
             'Definiert die angezeigten Verknüpfungen im Fußbereich des Öffentlichen- und Kunden-Interface dieses OTRS Systems. Der Wert in "Schlüssel" ist die externe URL, der Wert in "Inhalt" das angezeigte Label.',
         'Defines the default value for the action parameter for the public frontend. The action parameter is used in the scripts of the system.' =>
@@ -6392,7 +6392,7 @@ sub Data {
         'Determines the next possible ticket states, for process tickets in the agent interface.' =>
             'Definiert den Nächstmöglichen Ticket-Status für Prozess-Tickets im Agenten-Interface.',
         'Shows existing parent/child (separated by ::) process lists in the form of a tree or a list.' =>
-            '',
+            'Zeigt vorhandene Eltern/Kind (durch :: getrennte) Prozesslisten in Form eines Baums oder einer Liste an.',
         'Determines the next possible ticket states, for process tickets in the customer interface.' =>
             'Bestimmt die die möglichen Folge-Ticket-Status für Prozesstickets im Kundenbereich.',
         'Controls if CustomerID is read-only in the agent interface.' => 'Legt fest, ob die Kundennummer im Agentenbereich als nur lesend angezeigt wird.',
@@ -6652,7 +6652,7 @@ sub Data {
         'Defines the default ticket order (after priority sort) in the escalation view of the agent interface. Up: oldest on top. Down: latest on top.' =>
             'Steuert die Ticket-Sortierung (nach der Sortierung nach Priorität) für die Eskalations-Ansicht des Agentenbereichs. Auf: Älteste oben. Ab: Neuste oben.',
         'Allows extended search conditions in ticket search of the agent interface. With this feature you can search e. g. ticket title with this kind of conditions like "(*key1*&amp;&amp;*key2*)" or "(*key1*||*key2*)".' =>
-            '',
+            'Ermöglicht erweiterte Suchbedingungen in der Ticketsuche der Agentenschnittstelle. Mit dieser Funktion können Sie z. B. den Titel eines Tickets mit Bedingungen wie "(*key1*&amp;&amp;*key2*)" oder "(*key1*||*key2*)" suchen.',
         'Maximum number of tickets to be displayed in the result of a search in the agent interface.' =>
             'Maximale Anzahl von Tickets, die im Suchergebnis des Agenten-Interfaces angezeigt werden sollen.',
         'Number of tickets to be displayed in each page of a search result in the agent interface.' =>
@@ -7494,7 +7494,7 @@ sub Data {
         'Defines the default ticket order of a search result in the customer interface. Up: oldest on top. Down: latest on top.' =>
             'Steuert die Ticket-Sortierung für die Suchergebnis-Ansicht des Kundenbereichs. Auf: Älteste oben. Ab: Neuste oben.',
         'Allows extended search conditions in ticket search of the customer interface. With this feature you can search e. g. ticket title with this kind of conditions like "(*key1*&amp;&amp;*key2*)" or "(*key1*||*key2*)".' =>
-            '',
+            'Ermöglicht erweiterte Suchbedingungen in der Ticketsuche der Kundenschnittstelle. Mit dieser Funktion können Sie z. B. den Titel eines Tickets mit Bedingungen wie "(*key1*&amp;&amp;*key2*)" oder "(*key1*||*key2*)" suchen.',
         'If enabled, the customer can search for tickets in all services (regardless what services are assigned to the customer).' =>
             'Wenn aktiviert, können Kunden nach Tickets mit allen Services suchen (unabhängig davon, welche Services dem jeweiligen Kunden zugewiesen sind).',
         'Defines all the parameters for the ShownTickets object in the customer preferences of the customer interface.' =>
@@ -7519,7 +7519,7 @@ sub Data {
         'Sets the default body text for notes added in the ticket move screen of the agent interface.' =>
             'Definiert den Standard Body-Text für Notizen in der "Ticket Verschieben" Ansicht in der Agenten-Oberfläche.',
         'Allows extended search conditions in ticket search of the generic agent interface. With this feature you can search e. g. ticket title with this kind of conditions like "(*key1*&amp;&amp;*key2*)" or "(*key1*||*key2*)".' =>
-            '',
+            'Ermöglicht erweiterte Suchbedingungen in der Ticketsuche der generischen Agentenschnittstelle. Mit dieser Funktion können Sie z. B. den Titel eines Tickets mit Bedingungen wie "(*key1*&amp;&amp;*key2*)" oder "(*key1*||*key2*)" suchen.',
         'Set the limit of tickets that will be executed on a single genericagent job execution.' =>
             'Legt die maximale Anzahl an Tickets fest, die pro GenericAgent-Job-Ausführung bearbeitet werden.',
         'Allows generic agent to execute custom modules.' => 'Ermöglicht es dem GenericAgent, benutzerdefinierte Module auszuführen.',
@@ -7531,7 +7531,7 @@ sub Data {
         'List of all queue events to be displayed in the GUI.' => 'Liste alle Queue-Ereignisse, die in der Benutzeroberfläche angezeigt werden.',
         'Event module that performs an update statement on TicketIndex to rename the queue name there if needed and if StaticDB is actually used.' =>
             'Ereignismodul, das ein Update-Statement auf TicketIndex ausführt, um die Queue umzubenennen (wenn nötig und wenn StaticDB genutzt wird).',
-        'Ignores not ticket related attributes.' => '',
+        'Ignores not ticket related attributes.' => 'Ignoriert nicht ticketbezogene Attribute.',
         'Transport selection for ticket notifications. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
             'Transportselektion der Terminbenachrichtigungen. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.',
         'ACL module that allows closing parent tickets only if all its children are already closed ("State" shows which states are not available for the parent ticket until all child tickets are closed).' =>
@@ -8908,7 +8908,7 @@ Ihr Helpdesk-Team
         'Notified about solution time escalation.' => 'Über Lösungszeit-Eskalation benachrichtigt.',
         'Notified about update time escalation.' => 'Über Aktualisierungszeit-Eskalation benachrichtigt.',
         'Number of displayed tickets' => 'Anzahl der angezeigten Tickets',
-        'OAuth2' => '',
+        'OAuth2' => 'OAuth2',
         'OAuth2 token' => 'OAuth2-Token',
         'OTRS Group Services' => 'Dienstleistungen der OTRS Gruppe',
         'Open an external link!' => 'Externen Link öffnen!',
@@ -9044,7 +9044,7 @@ Ihr Helpdesk-Team
         'Slovak' => 'Slowakisch',
         'Slovenian' => 'Slowenisch',
         'Small' => 'Klein',
-        'Snippet' => '',
+        'Snippet' => 'Snippet',
         'Software Package Manager.' => 'Softwarepaketverwaltung.',
         'Solution time' => 'Lösungszeit',
         'SolutionDiffInMin' => 'Lösungszeitdifferenz in Minuten',

@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.629055926952552;
+    $Self->{Completeness}        = 0.629218979292353;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2299,7 +2299,7 @@ sub Data {
         'Edit ticket attribute relations' => '',
         'Import CSV or Excel file' => '',
         'Attribute' => 'Attribute',
-        'Last update' => '',
+        'Last update' => 'Last update',
         'Are you sure you want to delete entry \'%s\'?' => '',
         'Download previously imported file' => '',
         'The file needs to be in CSV (UTF-8) or Excel format. Both header columns need to contain the names of valid ticket attributes. The name of the uploaded file must be unique and must not be in use by another ticket attribute relations record.' =>
