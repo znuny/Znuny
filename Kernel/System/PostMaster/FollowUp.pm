@@ -17,6 +17,8 @@ our @ObjectDependencies = (
     'Kernel::System::DateTime',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
+    'Kernel::System::Log',
+    'Kernel::System::Service',
     'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
     'Kernel::System::User',
@@ -323,22 +325,49 @@ sub Run {
         );
     }
 
-    # set ticket service
+    # Ticket service handling.
+
     if ( $GetParam{'X-OTRS-FollowUp-Service'} ) {
 
-        $TicketObject->TicketServiceSet(
-            Service  => $GetParam{'X-OTRS-FollowUp-Service'},
-            TicketID => $Param{TicketID},
-            UserID   => $Param{InmailUserID},
+        # Get all valid services.
+        my %ValidServices = reverse $Kernel::OM->Get('Kernel::System::Service')->ServiceList(
+           Valid        => 1,
+           KeepChildren => $ConfigObject->Get('Ticket::Service::KeepChildren') // 0,
+           UserID       => $Param{InmailUserID},
         );
 
-        $Self->{CommunicationLogObject}->ObjectLog(
-            ObjectLogType => 'Message',
-            Priority      => 'Debug',
-            Key           => 'Kernel::System::PostMaster::FollowUp',
-            Value =>
-                "Services update via 'X-OTRS-FollowUp-Service'! Service: $GetParam{'X-OTRS-FollowUp-Service'}.",
-        );
+        if (!$ValidServices{$GetParam{'X-OTRS-FollowUp-Service'}}) {
+
+            # If service with given name does not exist or is invalid don't set it if not active.
+
+            $Self->{CommunicationLogObject}->ObjectLog(
+                ObjectLogType => 'Message',
+                Priority      => 'Debug',
+                Key           => 'Kernel::System::PostMaster::FollowUp',
+                Value =>
+                    "Ticket service won't be updated to '$GetParam{'X-OTRS-FollowUp-Service'}' (does not exist or is invalid or is a child of invalid service).",
+            );
+
+            $GetParam{'X-OTRS-FollowUp-Service'} = '';
+        }
+        else {
+
+            # If service with given name exists, update ticket service.
+
+            $TicketObject->TicketServiceSet(
+                Service  => $GetParam{'X-OTRS-FollowUp-Service'},
+                TicketID => $Param{TicketID},
+                UserID   => $Param{InmailUserID},
+            );
+
+            $Self->{CommunicationLogObject}->ObjectLog(
+                ObjectLogType => 'Message',
+                Priority      => 'Debug',
+                Key           => 'Kernel::System::PostMaster::FollowUp',
+                Value =>
+                    "Ticket service updated via 'X-OTRS-FollowUp-Service' to '$GetParam{'X-OTRS-FollowUp-Service'}'.",
+            );
+        }
     }
 
     # set ticket sla
