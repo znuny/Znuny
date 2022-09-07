@@ -271,30 +271,29 @@ sub Run {
         Value         => "Going to create new ticket.",
     );
 
+    # Ticket service handling.
+
     if ( $GetParam{'X-OTRS-Service'} ) {
-        my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
 
-        # Check if service exists.
-        my %ServiceData = $ServiceObject->ServiceGet(
-            Name   => $GetParam{'X-OTRS-Service'},
-            UserID => $Param{InmailUserID},
+        # Get all valid services.
+        my %ValidServices = reverse $Kernel::OM->Get('Kernel::System::Service')->ServiceList(
+           Valid        => 1,
+           KeepChildren => $ConfigObject->Get('Ticket::Service::KeepChildren') // 0,
+           UserID       => $Param{InmailUserID},
         );
 
-        # Get all service list filtering by KeepChildren SysConfig if available.
-        my %ServiceList = $ServiceObject->ServiceList(
-            Valid        => 1,
-            KeepChildren => $ConfigObject->Get('Ticket::Service::KeepChildren') // 0,
-            UserID       => $Param{InmailUserID},
-        );
+        if (!$ValidServices{$GetParam{'X-OTRS-Service'}}) {
 
-        if ( $ServiceData{ServiceID} ne '' && !$ServiceList{ $ServiceData{ServiceID} } ) {
+            # If service with given name does not exist or is invalid don't set it if not active.
+
             $Self->{CommunicationLogObject}->ObjectLog(
                 ObjectLogType => 'Message',
                 Priority      => 'Debug',
                 Key           => 'Kernel::System::PostMaster::NewTicket',
                 Value =>
-                    "Service $GetParam{'X-OTRS-Service'} does not exists or is invalid or is a child of invalid service.",
+                    "Ticket service won't be set to '$GetParam{'X-OTRS-Service'}' (does not exist or is invalid or is a child of invalid service).",
             );
+
             $GetParam{'X-OTRS-Service'} = '';
         }
     }
