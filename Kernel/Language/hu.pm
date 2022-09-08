@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.934289907060166;
+    $Self->{Completeness}        = 0.934137593739811;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8815,6 +8815,7 @@ Az Ön segélyszolgálat csapata
         'Inline' => 'Beágyazott',
         'Input' => 'Beviteli mező',
         'Interface language' => 'Felület nyelve',
+        'Internal' => '',
         'Internal communication channel.' => 'Belső kommunikációs csatorna.',
         'International Workers\' Day' => 'A munka ünnepe',
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>

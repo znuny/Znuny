@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.464373063753465;
+    $Self->{Completeness}        = 0.464297358982719;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -8799,6 +8799,7 @@ Thanks for your help!
         'Inline' => '',
         'Input' => '',
         'Interface language' => 'Мова інтерфейсу',
+        'Internal' => '',
         'Internal communication channel.' => '',
         'International Workers\' Day' => 'Міжнародний день трудящих',
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>

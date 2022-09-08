@@ -25380,3 +25380,7 @@ msgstr "Legt fest, ob fred sichtbar oder verborgen ist."
 msgid "Which order should the config log data have?"
 msgstr ""
 
+#. SysConfig
+msgid "Internal"
+msgstr "Intern"
+

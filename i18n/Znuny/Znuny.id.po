@@ -25303,3 +25303,7 @@ msgstr ""
 msgid "Error while validating Recipient email address."
 msgstr ""
 
+#. SysConfig
+msgid "Internal"
+msgstr ""
+

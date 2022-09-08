@@ -25300,3 +25300,7 @@ msgstr "Błąd w trakcie weryfikacji adresu nadawcy."
 msgid "Error while validating Recipient email address."
 msgstr "Błąd w trakcie weryfikacji adresu odbiorcy."
 
+#. SysConfig
+msgid "Internal"
+msgstr ""
+
