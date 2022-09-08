@@ -1,4 +1,5 @@
 # 6.0.46 2022-xx-xx
+ - 2022-09-07 Fixed log flooding via Net::LDAP. Reduction of LDAP_SIZELIMIT_EXCEEDED messages. Thanks to Paweł Bogusławski (@pboguslawski). [PR#178](https://github.com/znuny/Znuny/pull/178)
  - 2022-09-07 Improved nonexistent and invalid service names handling in postmaster filters. Thanks to Paweł Bogusławski (@pboguslawski). [PR#197](https://github.com/znuny/Znuny/pull/197)
  - 2022-08-22 Added check to prevent infinite loop to Core.UI.InputFields.js.
  - 2022-08-18 Fixed usage of time zones that have become obsolete. Thanks to Christian Ullrich. [#281](https://github.com/znuny/Znuny/issues/281)
