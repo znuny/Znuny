@@ -1,4 +1,5 @@
 # 6.4.3 2022-??-??
+ - 2022-09-08 Fixed LDAP user sync. Fixes undef/empty string comparisons that may occur between data stored in DB and data coming from LDAP. Thanks to Paweł Bogusławski (@pboguslawski). [PR#74](https://github.com/znuny/Znuny/pull/74)
  - 2022-09-08 Changed previous upstream name to 'Internal' channel name. Thanks to Paweł Bogusławski (@pboguslawski). [PR#95](https://github.com/znuny/Znuny/pull/95)
  - 2022-09-07 Fixed log flooding via Net::LDAP. Reduction of LDAP_SIZELIMIT_EXCEEDED messages. Thanks to Paweł Bogusławski (@pboguslawski). [PR#178](https://github.com/znuny/Znuny/pull/178)
  - 2022-09-05 Added 'AdditionalSearchParameters' to Toolbar TicketSearchFulltext to define the standard search more precisely. Thanks to maxence (@tipue-dev). [#284](https://github.com/znuny/Znuny/pull/284)
