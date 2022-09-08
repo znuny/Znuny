@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -20,7 +20,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # get ticket object
 my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
@@ -57,7 +57,7 @@ my %TicketConfig = (
 );
 
 # freeze time
-$Helper->FixedTimeSet();
+$HelperObject->FixedTimeSet();
 
 my $TicketID1 = $TicketObject->TicketCreate(%TicketConfig);
 $Self->IsNot(
@@ -67,7 +67,7 @@ $Self->IsNot(
 );
 
 # make sure the next ticket is created 1 minute after
-$Helper->FixedTimeAddSeconds(60);
+$HelperObject->FixedTimeAddSeconds(60);
 
 my $TicketID2 = $TicketObject->TicketCreate(%TicketConfig);
 $Self->IsNot(

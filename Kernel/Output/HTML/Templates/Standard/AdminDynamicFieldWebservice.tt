@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -202,7 +202,8 @@
 [% RenderBlockStart("Link") %]
                         <label for="Link">[% Translate("Show link") | html %]:</label>
                         <div class="Field">
-                            <input id="Link" class="W50pc" type="text" maxlength="500" value="[% Data.Link | html %]" name="Link"/>
+                            <input id="Link" class="W50pc Validate_LinkReservedKeywordsInData" type="text" maxlength="500" value="[% Data.Link | html %]" name="Link"/>
+                            <div id="LinkError" class="TooltipErrorMessage"><p>[% Translate("Reserved keywords. The following placeholders are not allowed:") | html %]<br><span>[</span>% Data.(Link|LinkPreview|Title|Value) %<span>]</span></p></div>
                             <p class="FieldExplanation">
                                 [% Translate("Here you can specify an optional HTTP link for the field value in Overviews and Zoom screens.") | html %]
                                 <br/>
@@ -211,9 +212,10 @@
                         </div>
                         <div class="Clear"></div>
 
-                        <label for="Link">[% Translate("Link for preview") | html %]:</label>
+                        <label for="LinkPreview">[% Translate("Link for preview") | html %]:</label>
                         <div class="Field">
-                            <input id="LinkPreview" class="W50pc" type="text" maxlength="500" value="[% Data.LinkPreview | html %]" name="LinkPreview"/>
+                            <input id="LinkPreview" class="W50pc Validate_LinkReservedKeywordsInData" type="text" maxlength="500" value="[% Data.LinkPreview | html %]" name="LinkPreview"/>
+                            <div id="LinkPreviewError" class="TooltipErrorMessage"><p>[% Translate("Reserved keywords. The following placeholders are not allowed:") | html %]<br><span>[</span>% Data.(Link|LinkPreview|Title|Value) %<span>]</span></p></div>
                             <p class="FieldExplanation">
                                 [% Translate("If filled in, this URL will be used for a preview which is shown when this link is hovered in ticket zoom. Please note that for this to work, the regular URL field above needs to be filled in, too.") | html %]
                             </p>
@@ -221,6 +223,28 @@
                         <div class="Clear"></div>
 
 [% RenderBlockEnd("Link") %]
+                        <label for="InputFieldWidth">[% Translate("Attributes") | html %]:</label>
+                        <div class="Field">
+                            [% Data.AdditionalAttributes %]
+                            <p class="FieldExplanation">[% Translate("Attributes for invoker execution (initially default values will be used).") | html %]</p>
+                        </div>
+                        <div class="Clear"></div>
+
+[% RenderBlockStart("AttributeKey") %]
+                        <label for="InputFieldWidth">[% Translate("Attribute keys") | html %]:</label>
+                        <div class="Field">
+                            [% RenderBlockStart("SelectableAttributeKeyRow") %]
+                                [% Data.AtributeLabel %]:<br>
+                                [% RenderBlockStart("AttributeType") %]
+                                    <input type="checkbox" class="AttributeCheckbox" [% Data.AttributeIDChecked %] value="[% Data.AttributeKey %]" name="[% Data.AttributeKey %]">[% Data.AttributeLabel %]
+                                [% RenderBlockEnd("AttributeType") %]
+                                </br>
+                            [% RenderBlockEnd("SelectableAttributeKeyRow") %]
+
+                            <p class="FieldExplanation">[% Translate("Custom attribute form for invoker execution.") | html %]</p>
+                        </div>
+                        <div class="Clear"></div>
+[% RenderBlockEnd("AttributeKey") %]
 
                     </fieldset>
                 </div>

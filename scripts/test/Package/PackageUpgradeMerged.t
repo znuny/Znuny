@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,14 +18,14 @@ my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
 my $DBObject      = $Kernel::OM->Get('Kernel::System::DB');
 my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
 
-# get OTRS Version
-my $OTRSVersion = $ConfigObject->Get('Version');
+# get Version
+my $Version = $ConfigObject->Get('Version');
 
 # leave only major and minor level versions
-$OTRSVersion =~ s{ (\d+ \. \d+) .+ }{$1}msx;
+$Version =~ s{ (\d+ \. \d+) .+ }{$1}msx;
 
 # add x as patch level version
-$OTRSVersion .= '.x';
+$Version .= '.x';
 
 my $Home = $ConfigObject->Get('Home');
 
@@ -37,19 +37,19 @@ my $MergeOne = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
   <Name>MergeOne</Name>
   <Version>2.0.1</Version>
-  <Vendor>OTRS AG</Vendor>
-  <URL>https://otrs.com/</URL>
+  <Vendor>Znuny GmbH</Vendor>
+  <URL>https://znuny.org/</URL>
   <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
   <ChangeLog>2012-04-28 New package (some test &lt; &gt; &amp;).</ChangeLog>
   <Description Lang="en">A test package (some test &lt; &gt; &amp;).</Description>
   <Description Lang="de">Ein Test Paket (some test &lt; &gt; &amp;).</Description>
   <ModuleRequired Version="1.112">Encode</ModuleRequired>
-  <Framework>' . $OTRSVersion . '</Framework>
+  <Framework>' . $Version . '</Framework>
   <BuildDate>2012-05-02 21:17:16</BuildDate>
   <BuildHost>yourhost.example.com</BuildHost>
   <Filelist>
-    <File Location="Test" Permission="644" Encode="Base64">aGVsbG8K</File>
-    <File Location="var/Test" Permission="644" Encode="Base64">aGVsbG8K</File>
+    <File Location="TestPackageUpgrageMerged" Permission="644" Encode="Base64">aGVsbG8K</File>
+    <File Location="var/TestPackageUpgrageMerged" Permission="644" Encode="Base64">aGVsbG8K</File>
     <File Location="DeleteMe" Permission="644" Encode="Base64">aGVsbG8K</File>
   </Filelist>
 </otrs_package>
@@ -75,7 +75,7 @@ $Self->True(
 );
 
 # package from file should exist on file system
-for my $File (qw( Test var/Test DeleteMe)) {
+for my $File (qw( TestPackageUpgrageMerged var/TestPackageUpgrageMerged DeleteMe)) {
     my $RealFile = $Home . '/' . $File;
     $RealFile =~ s/\/\//\//g;
     $Self->True(
@@ -88,19 +88,19 @@ my $MainPackageOne = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
     <Name>TestMainPackage</Name>
     <Version>1.0.1</Version>
-    <Vendor>OTRS AG</Vendor>
-    <URL>https://otrs.com/</URL>
+    <Vendor>Znuny GmbH</Vendor>
+    <URL>https://znuny.org/</URL>
     <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
     <ChangeLog>2005-11-10 New package (some test &lt; &gt; &amp;).</ChangeLog>
     <Description Lang="en">A test package (some test &lt; &gt; &amp;).</Description>
     <Description Lang="de">Ein Test Paket (some test &lt; &gt; &amp;).</Description>
     <ModuleRequired Version="1.112">Encode</ModuleRequired>
-    <Framework>' . $OTRSVersion . '</Framework>
+    <Framework>' . $Version . '</Framework>
     <BuildDate>2005-11-10 21:17:16</BuildDate>
     <BuildHost>yourhost.example.com</BuildHost>
     <Filelist>
-    <File Location="Test" Permission="644" Encode="Base64">aGVsbG8K</File>
-    <File Location="var/Test" Permission="644" Encode="Base64">aGVsbG8K</File>
+    <File Location="TestPackageUpgrageMerged" Permission="644" Encode="Base64">aGVsbG8K</File>
+    <File Location="var/TestPackageUpgrageMerged" Permission="644" Encode="Base64">aGVsbG8K</File>
     <File Location="bin/otrs.CheckDB.pl" Permission="755" Encode="Base64">aGVsbG8K</File>
     </Filelist>
     <PackageMerge Name="MergeOne" TargetVersion="2.0.0">
@@ -141,19 +141,19 @@ my $MainPackageTwo = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
     <Name>TestMainPackage</Name>
     <Version>1.0.1</Version>
-    <Vendor>OTRS AG</Vendor>
-    <URL>https://otrs.com/</URL>
+    <Vendor>Znuny GmbH</Vendor>
+    <URL>https://znuny.org/</URL>
     <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
     <ChangeLog>2005-11-10 New package (some test &lt; &gt; &amp;).</ChangeLog>
     <Description Lang="en">A test package (some test &lt; &gt; &amp;).</Description>
     <Description Lang="de">Ein Test Paket (some test &lt; &gt; &amp;).</Description>
     <ModuleRequired Version="1.112">Encode</ModuleRequired>
-    <Framework>' . $OTRSVersion . '</Framework>
+    <Framework>' . $Version . '</Framework>
     <BuildDate>2005-11-10 21:17:16</BuildDate>
     <BuildHost>yourhost.example.com</BuildHost>
     <Filelist>
-    <File Location="Test" Permission="644" Encode="Base64">aGVsbG8K</File>
-    <File Location="var/Test" Permission="644" Encode="Base64">aGVsbG8K</File>
+    <File Location="TestPackageUpgrageMerged" Permission="644" Encode="Base64">aGVsbG8K</File>
+    <File Location="var/TestPackageUpgrageMerged" Permission="644" Encode="Base64">aGVsbG8K</File>
     <File Location="bin/otrs.CheckDB.pl" Permission="755" Encode="Base64">aGVsbG8K</File>
     </Filelist>
     <PackageMerge Name="MergeOne" TargetVersion="2.0.1">
@@ -359,11 +359,11 @@ my $MergeThree = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
   <Name>MergeThree</Name>
   <Version>3.0.1</Version>
-  <Vendor>OTRS AG</Vendor>
-  <URL>https://otrs.com/</URL>
+  <Vendor>Znuny GmbH</Vendor>
+  <URL>https://znuny.org/</URL>
   <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
   <Description Lang="en">The third test package.</Description>
-  <Framework>' . $OTRSVersion . '</Framework>
+  <Framework>' . $Version . '</Framework>
   <BuildDate>2014-05-02 17:59:59</BuildDate>
   <BuildHost>myhost.example.com</BuildHost>
   <Filelist>
@@ -376,16 +376,16 @@ my $MainPackageFour = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
     <Name>TestMainPackageFour</Name>
     <Version>1.0.1</Version>
-    <Vendor>OTRS AG</Vendor>
-    <URL>https://otrs.com/</URL>
+    <Vendor>Znuny GmbH</Vendor>
+    <URL>https://znuny.org/</URL>
     <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
     <ChangeLog>2014-04-28 New package (some test &lt; &gt; &amp;).</ChangeLog>
     <Description Lang="en">A test package (some test &lt; &gt; &amp;).</Description>
-    <Framework>' . $OTRSVersion . '</Framework>
+    <Framework>' . $Version . '</Framework>
     <BuildDate>2014-04-28 16:16:16</BuildDate>
     <BuildHost>yourhost.example.com</BuildHost>
     <Filelist>
-    <File Location="Test" Permission="644" Encode="Base64">aGVsbG8K</File>
+    <File Location="TestPackageUpgrageMerged" Permission="644" Encode="Base64">aGVsbG8K</File>
     <File Location="DeleteMe" Permission="644" Encode="Base64">aGVsbG8K</File>
     </Filelist>
 
@@ -642,11 +642,11 @@ my $PackageFour = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
   <Name>PackageFour</Name>
   <Version>4.0.1</Version>
-  <Vendor>OTRS AG</Vendor>
-  <URL>https://otrs.com/</URL>
+  <Vendor>Znuny GmbH</Vendor>
+  <URL>https://znuny.org/</URL>
   <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
   <Description Lang="en">The third test package.</Description>
-  <Framework>' . $OTRSVersion . '</Framework>
+  <Framework>' . $Version . '</Framework>
   <BuildDate>2014-05-02 17:59:59</BuildDate>
   <BuildHost>myhost.example.com</BuildHost>
   <Filelist>
@@ -686,11 +686,11 @@ $PackageFour = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
   <Name>PackageFour</Name>
   <Version>4.0.2</Version>
-  <Vendor>OTRS AG</Vendor>
-  <URL>https://otrs.com/</URL>
+  <Vendor>Znuny GmbH</Vendor>
+  <URL>https://znuny.org/</URL>
   <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
   <Description Lang="en">The third test package.</Description>
-  <Framework>' . $OTRSVersion . '</Framework>
+  <Framework>' . $Version . '</Framework>
   <BuildDate>2014-09-02 17:59:59</BuildDate>
   <BuildHost>myhost.example.com</BuildHost>
   <Filelist>

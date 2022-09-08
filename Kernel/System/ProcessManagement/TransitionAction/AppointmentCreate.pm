@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -12,14 +12,11 @@ use strict;
 use warnings;
 use utf8;
 
-use Kernel::System::VariableCheck qw(:all);
-
 use parent qw(Kernel::System::ProcessManagement::TransitionAction::Base);
 
 our @ObjectDependencies = (
     'Kernel::System::Calendar',
     'Kernel::System::Calendar::Appointment',
-    'Kernel::System::DateTime',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
 );
@@ -165,7 +162,7 @@ sub Run {
     for my $Param (qw(TeamID ResourceID RecurrenceFrequency RecurrenceExclude )) {
         next PARAM if !defined $Param{Config}->{$Param};
 
-        $Param{Config}->{$Param} = split /\s*,\s*/, $Param{Config}->{$Param};
+        $Param{Config}->{$Param} = [ split /\s*,\s*/, $Param{Config}->{$Param} ];
     }
 
     # be sure that the date parameters are always in the correct format
@@ -210,35 +207,6 @@ sub Run {
     );
 
     return 1;
-}
-
-=head2 _ValidDateTimeConvert()
-
-Converts the date to always be a datetime format.
-
-    my $TimeStamp = $AppointmentCreateActionObject->_ValidDateTimeConvert(
-        String => '2019-01-01',
-    );
-
-Returns:
-
-    my $TimeStamp = '2019-01-01 00:00:00';
-
-=cut
-
-sub _ValidDateTimeConvert {
-    my ( $Self, %Param ) = @_;
-
-    return if !$Param{String};
-
-    my $DateTimeObject = $Kernel::OM->Create(
-        'Kernel::System::DateTime',
-        ObjectParams => {
-            String => $Param{String},
-        },
-    );
-
-    return $DateTimeObject->ToString();
 }
 
 1;

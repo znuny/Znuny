@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -12,25 +12,30 @@ package Kernel::System::MailAccount::POP3;
 use strict;
 use warnings;
 
+use parent qw(Kernel::System::MailAccount::Base);
+
 use Net::POP3;
+use Net::POP3::XOAuth2;
 
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::CommunicationLog',
     'Kernel::System::Log',
     'Kernel::System::Main',
+    'Kernel::System::OAuth2Token',
     'Kernel::System::PostMaster',
 );
 
 sub new {
     my ( $Type, %Param ) = @_;
 
-    # allocate new hash for object
     my $Self = {%Param};
     bless( $Self, $Type );
 
     # reset limit
     $Self->{Limit} = 0;
+
+    $Self->{MailAccountModuleName} = $Self->_GetMailAccountModuleName();
 
     return $Self;
 }
@@ -38,37 +43,102 @@ sub new {
 sub Connect {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
-    for my $Needed (qw(Login Password Host Timeout Debug)) {
-        if ( !defined $Param{$Needed} ) {
+    my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
+    my $OAuth2TokenObject = $Kernel::OM->Get('Kernel::System::OAuth2Token');
+
+    NEEDED:
+    for my $Needed (qw(Login Host Timeout Debug)) {
+        next NEEDED if defined $Param{$Needed};
+
+        return (
+            Successful => 0,
+            Message    => "Need $Needed!",
+        );
+    }
+
+    # Check authentication type and its needed params.
+    my $AuthenticationType = $Param{AuthenticationType} // 'password';
+
+    if ( $AuthenticationType eq 'password' ) {
+        if ( !defined $Param{Password} ) {
             return (
                 Successful => 0,
-                Message    => "Need $Needed!",
+                Message    => 'Param Password is missing.',
             );
         }
     }
+    elsif ( $AuthenticationType eq 'oauth2_token' ) {
+        if ( !defined $Param{OAuth2TokenConfigID} ) {
+            return (
+                Successful => 0,
+                Message    => 'Param OAuth2TokenConfigID is missing.',
+            );
+        }
+    }
+    else {
+        return (
+            Successful => 0,
+            Message    => "Authentication type $AuthenticationType is not supported.",
+        );
+    }
+
+    my %SSLOptions = $Self->_GetSSLOptions();
 
     # connect to host
     my $PopObject = Net::POP3->new(
         $Param{Host},
         Timeout => $Param{Timeout},
         Debug   => $Param{Debug},
+        %SSLOptions,
     );
 
     if ( !$PopObject ) {
         return (
             Successful => 0,
-            Message    => "POP3: Can't connect to $Param{Host}"
+            Message    => "$Self->{MailAccountModuleName}: Can't connect to $Param{Host}"
         );
     }
 
+    my %StartTLSOptions = $Self->_GetStartTLSOptions();
+    if (%StartTLSOptions) {
+        $PopObject->starttls(%StartTLSOptions);
+    }
+
     # authentication
-    my $NOM = $PopObject->login( $Param{Login}, $Param{Password} );
+    my $NOM;
+    if ( $AuthenticationType eq 'password' ) {
+        $NOM = $PopObject->login( $Param{Login}, $Param{Password} );
+    }
+    elsif ( $AuthenticationType eq 'oauth2_token' ) {
+        my $OAuth2Token = $OAuth2TokenObject->GetToken(
+            TokenConfigID => $Param{OAuth2TokenConfigID},
+            UserID        => 1,
+        );
+        if ( !$OAuth2Token ) {
+            return (
+                Successful => 0,
+                Message    => 'OAuth2 token could not be retrieved.',
+            );
+        }
+
+        # Check if auth header and token must be sent separately for this host.
+        # This mainly is being used by Office 365 and Outlook.
+        # Also see:
+        # https://docs.microsoft.com/en-us/Exchange/client-developer/legacy-protocols/
+        #     how-to-authenticate-an-imap-pop-smtp-application-by-using-oauth#pop-protocol-exchange
+        my $SplitOAuth2MethodAndTokenHosts
+            = $ConfigObject->Get('MailAccount::POP3::Auth::SplitOAuth2MethodAndToken::Hosts') // [];
+        my %SplitOAuth2MethodAndTokenHosts = map { lc $_ => 1 } @{$SplitOAuth2MethodAndTokenHosts};
+        my $SplitOAuth2MethodAndToken      = $SplitOAuth2MethodAndTokenHosts{ lc $Param{Host} } ? 1 : 0;
+
+        $NOM = $PopObject->xoauth2( $Param{Login}, $OAuth2Token, $SplitOAuth2MethodAndToken );
+    }
+
     if ( !defined $NOM ) {
         $PopObject->quit();
         return (
             Successful => 0,
-            Message    => "POP3: Auth for user $Param{Login}/$Param{Host} failed!"
+            Message    => "$Self->{MailAccountModuleName}: Auth for user $Param{Login}/$Param{Host} failed!",
         );
     }
 
@@ -76,7 +146,7 @@ sub Connect {
         Successful => 1,
         PopObject  => $PopObject,
         NOM        => $NOM,
-        Type       => 'POP3',
+        Type       => $Self->{MailAccountModuleName},
     );
 }
 
@@ -116,7 +186,7 @@ sub Fetch {
             $CommunicationLogObject->ObjectLog(
                 ObjectLogType => 'Connection',
                 Priority      => 'Error',
-                Key           => 'Kernel::System::MailAccount::POP3',
+                Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
                 Value         => "$Needed not defined!",
             );
 
@@ -136,7 +206,7 @@ sub Fetch {
             $CommunicationLogObject->ObjectLog(
                 ObjectLogType => 'Connection',
                 Priority      => 'Error',
-                Key           => 'Kernel::System::MailAccount::POP3',
+                Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
                 Value         => "Need $Needed!",
             );
 
@@ -171,18 +241,20 @@ sub Fetch {
     $CommunicationLogObject->ObjectLog(
         ObjectLogType => 'Connection',
         Priority      => 'Debug',
-        Key           => 'Kernel::System::MailAccount::POP3',
+        Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
         Value         => "Open connection to '$Param{Host}' ($Param{Login}).",
     );
 
     my %Connect = ();
     eval {
         %Connect = $Self->Connect(
-            Host     => $Param{Host},
-            Login    => $Param{Login},
-            Password => $Param{Password},
-            Timeout  => 15,
-            Debug    => $Debug
+            Host                => $Param{Host},
+            Login               => $Param{Login},
+            Password            => $Param{Password},
+            AuthenticationType  => $Param{AuthenticationType},     # might be undef
+            OAuth2TokenConfigID => $Param{OAuth2TokenConfigID},    # might be undef
+            Timeout             => 15,
+            Debug               => $Debug
         );
         return 1;
     } || do {
@@ -190,7 +262,7 @@ sub Fetch {
         %Connect = (
             Successful => 0,
             Message =>
-                "Something went wrong while trying to connect to 'POP3 => $Param{Login}/$Param{Host}': ${ Error }",
+                "Something went wrong while trying to connect to '$Self->{MailAccountModuleName} => $Param{Login}/$Param{Host}': ${ Error }",
         );
     };
 
@@ -198,7 +270,7 @@ sub Fetch {
         $CommunicationLogObject->ObjectLog(
             ObjectLogType => 'Connection',
             Priority      => 'Error',
-            Key           => 'Kernel::System::MailAccount::POP3',
+            Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
             Value         => $Connect{Message},
         );
 
@@ -265,7 +337,7 @@ sub Fetch {
         $CommunicationLogObject->ObjectLog(
             ObjectLogType => 'Connection',
             Priority      => 'Notice',
-            Key           => 'Kernel::System::MailAccount::POP3',
+            Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
             Value         => "No messages available ($Param{Login}/$Param{Host}).",
         );
     }
@@ -277,7 +349,7 @@ sub Fetch {
         $CommunicationLogObject->ObjectLog(
             ObjectLogType => 'Connection',
             Priority      => 'Notice',
-            Key           => 'Kernel::System::MailAccount::POP3',
+            Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
             Value         => "$MessageCount messages available for fetching ($Param{Login}/$Param{Host}).",
         );
 
@@ -296,7 +368,7 @@ sub Fetch {
                 $CommunicationLogObject->ObjectLog(
                     ObjectLogType => 'Connection',
                     Priority      => 'Info',
-                    Key           => 'Kernel::System::MailAccount::POP3',
+                    Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
                     Value         => "Reconnect session after $MaxPopEmailSession messages.",
                 );
 
@@ -323,7 +395,7 @@ sub Fetch {
             $CommunicationLogObject->ObjectLog(
                 ObjectLogType => 'Connection',
                 Priority      => 'Debug',
-                Key           => 'Kernel::System::MailAccount::POP3',
+                Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
                 Value         => "Prepare fetching of message '$Messageno/$NOM' (Size: $MessageSize) from server.",
             );
 
@@ -338,7 +410,7 @@ sub Fetch {
                 $CommunicationLogObject->ObjectLog(
                     ObjectLogType => 'Connection',
                     Priority      => 'Error',
-                    Key           => 'Kernel::System::MailAccount::POP3',
+                    Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
                     Value =>
                         "Cannot fetch message '$Messageno/$NOM' with size '$MessageSize' ($MessageSizeKB KB)."
                         . "Maximum allowed message size is '$MaxEmailSize KB'!",
@@ -358,7 +430,7 @@ sub Fetch {
                     $CommunicationLogObject->ObjectLog(
                         ObjectLogType => 'Connection',
                         Priority      => 'Debug',
-                        Key           => 'Kernel::System::MailAccount::POP3',
+                        Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
                         Value => 'Safety protection: waiting 1 second before fetching next message from server.',
                     );
 
@@ -375,7 +447,7 @@ sub Fetch {
                     $CommunicationLogObject->ObjectLog(
                         ObjectLogType => 'Connection',
                         Priority      => 'Error',
-                        Key           => 'Kernel::System::MailAccount::POP3',
+                        Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
                         Value         => "Could not fetch message '$Messageno', answer from server was empty.",
                     );
 
@@ -386,7 +458,7 @@ sub Fetch {
                     $CommunicationLogObject->ObjectLog(
                         ObjectLogType => 'Connection',
                         Priority      => 'Debug',
-                        Key           => 'Kernel::System::MailAccount::POP3',
+                        Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
                         Value         => "Message '$Messageno' successfully received from server.",
                     );
 
@@ -420,14 +492,14 @@ sub Fetch {
                         my $File = $Self->_ProcessFailed( Email => $Lines );
 
                         my $ErrorMessage = "$AuthType: Can't process mail, mail saved ("
-                            . "$File, report it on http://bugs.otrs.org/)!";
+                            . "$File, report it on https://github.com/znuny/Znuny/issues)!";
 
                         $CommunicationLogObject->ObjectLog(
                             ObjectLogType => 'Message',
                             Priority      => 'Error',
-                            Key           => 'Kernel::System::MailAccount::POP3',
+                            Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
                             Value =>
-                                "Could not process message. Raw mail saved ($File, report it on http://bugs.otrs.org/)!",
+                                "Could not process message. Raw mail saved ($File, report it on https://github.com/znuny/Znuny/issues)!",
                         );
 
                         $MessageStatus = 'Failed';
@@ -447,7 +519,7 @@ sub Fetch {
                 $CommunicationLogObject->ObjectLog(
                     ObjectLogType => 'Connection',
                     Priority      => 'Debug',
-                    Key           => 'Kernel::System::MailAccount::POP3',
+                    Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
                     Value         => "Message '$Messageno' marked for deletion.",
                 );
 
@@ -469,7 +541,7 @@ sub Fetch {
     $CommunicationLogObject->ObjectLog(
         ObjectLogType => 'Connection',
         Priority      => 'Info',
-        Key           => 'Kernel::System::MailAccount::POP3',
+        Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
         Value         => "Fetched $FetchCounter message(s) from server ($Param{Login}/$Param{Host}).",
     );
 
@@ -482,7 +554,7 @@ sub Fetch {
     $CommunicationLogObject->ObjectLog(
         ObjectLogType => 'Connection',
         Priority      => 'Debug',
-        Key           => 'Kernel::System::MailAccount::POP3',
+        Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
         Value         => "Connection to '$Param{Host}' closed.",
     );
 
@@ -502,7 +574,6 @@ sub Fetch {
 sub _ProcessFailed {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
     if ( !defined $Param{Email} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
@@ -517,7 +588,6 @@ sub _ProcessFailed {
         $Content .= $Line;
     }
 
-    # get main object
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
     my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home') . '/var/spool/';

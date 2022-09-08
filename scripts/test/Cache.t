@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -16,7 +16,7 @@ use vars (qw($Self));
 # get needed objects
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
-my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # get home directory
 my $HomeDir = $ConfigObject->Get('Home');
@@ -78,7 +78,7 @@ for my $ModuleFile (@BackendModuleFiles) {
 
         # set fixed time
         if ( $FixedTimeCompatibleBackends{$Module} ) {
-            $Helper->FixedTimeSet();
+            $HelperObject->FixedTimeSet();
         }
 
         my $CacheSet = $CacheObject->Set(
@@ -221,7 +221,7 @@ for my $ModuleFile (@BackendModuleFiles) {
 
         # wait 7 seconds
         if ( $FixedTimeCompatibleBackends{$Module} ) {
-            $Helper->FixedTimeAddSeconds(7);
+            $HelperObject->FixedTimeAddSeconds(7);
         }
         else {
             sleep 7;
@@ -257,7 +257,7 @@ for my $ModuleFile (@BackendModuleFiles) {
 
         # wait 3 seconds
         if ( $FixedTimeCompatibleBackends{$Module} ) {
-            $Helper->FixedTimeAddSeconds(3);
+            $HelperObject->FixedTimeAddSeconds(3);
         }
         else {
             sleep 3;
@@ -280,7 +280,7 @@ for my $ModuleFile (@BackendModuleFiles) {
 
         # wait 3 seconds
         if ( $FixedTimeCompatibleBackends{$Module} ) {
-            $Helper->FixedTimeAddSeconds(3);
+            $HelperObject->FixedTimeAddSeconds(3);
         }
         else {
             sleep 3;
@@ -407,7 +407,7 @@ for my $ModuleFile (@BackendModuleFiles) {
 
         # unset fixed time
         if ( $FixedTimeCompatibleBackends{$Module} ) {
-            $Helper->FixedTimeUnset();
+            $HelperObject->FixedTimeUnset();
         }
 
         my $String1 = '';
@@ -440,7 +440,7 @@ for my $ModuleFile (@BackendModuleFiles) {
             }
 
             # create key
-            my $Key = $Helper->GetRandomNumber();
+            my $Key = $HelperObject->GetRandomNumber();
 
             # copy strings to safe the reference
             my $StringRef1 = $String1;

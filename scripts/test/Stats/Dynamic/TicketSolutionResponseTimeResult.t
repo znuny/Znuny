@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -34,9 +34,9 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 my @QueueNames;
 my @QueueIDs;
@@ -168,7 +168,7 @@ for my $Ticket (@Tickets) {
     )->ToEpoch();
 
     # set the fixed time
-    $Helper->FixedTimeSet($SystemTime);
+    $HelperObject->FixedTimeSet($SystemTime);
 
     # create the ticket
     my $TicketID = $TicketObject->TicketCreate(
@@ -183,7 +183,7 @@ for my $Ticket (@Tickets) {
 
     if ( $Ticket->{TicketData}->{AddSecondsBeforeClose} ) {
 
-        $Helper->FixedTimeAddSeconds( $Ticket->{TicketData}->{AddSecondsBeforeClose} );
+        $HelperObject->FixedTimeAddSeconds( $Ticket->{TicketData}->{AddSecondsBeforeClose} );
 
         # Now close the ticket, because the statistic select only closed tickets.
         $TicketObject->TicketStateSet(
@@ -201,7 +201,7 @@ for my $Ticket (@Tickets) {
     push @TicketIDs, \%TicketData;
 }
 continue {
-    $Helper->FixedTimeUnset();
+    $HelperObject->FixedTimeUnset();
 }
 
 my %StateList = $Kernel::OM->Get('Kernel::System::State')->StateList(
@@ -415,7 +415,7 @@ for my $Test (@Tests) {
             String => $Test->{TimeStamp},
         }
     )->ToEpoch();
-    $Helper->FixedTimeSet($SystemTime);
+    $HelperObject->FixedTimeSet($SystemTime);
 
     # print test case description
     if ( $Test->{Description} ) {
@@ -458,7 +458,7 @@ for my $Test (@Tests) {
 }
 continue {
 
-    $Helper->FixedTimeUnset();
+    $HelperObject->FixedTimeUnset();
 
     $TestCount++;
 }

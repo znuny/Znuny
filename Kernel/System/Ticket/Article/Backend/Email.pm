@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -809,6 +809,21 @@ sub ArticleCreateTransmissionError {
         Bind => \@Bind,
     );
 
+    my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+    my $TicketID      = $ArticleObject->TicketIDLookup(
+        ArticleID => $Param{ArticleID},
+    );
+
+    # event
+    $Self->EventHandler(
+        Event => 'ArticleCreateTransmissionError',
+        Data  => {
+            ArticleID => $Param{ArticleID},
+            TicketID  => $TicketID,
+        },
+        UserID => $Param{UserID} || 1,
+    );
+
     return 1;
 }
 
@@ -926,6 +941,21 @@ sub ArticleUpdateTransmissionError {
     return if !$Kernel::OM->Get('Kernel::System::DB')->Do(
         SQL  => $SQL,
         Bind => \@Bind,
+    );
+
+    my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+    my $TicketID      = $ArticleObject->TicketIDLookup(
+        ArticleID => $Param{ArticleID},
+    );
+
+    # event
+    $Self->EventHandler(
+        Event => 'ArticleUpdateTransmissionError',
+        Data  => {
+            ArticleID => $Param{ArticleID},
+            TicketID  => $TicketID,
+        },
+        UserID => $Param{UserID} || 1,
     );
 
     return 1;

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -20,18 +20,18 @@ $Selenium->RunTest(
     sub {
 
         # get helper object
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # disable all dashboard plugins
         my $Config = $Kernel::OM->Get('Kernel::Config')->Get('DashboardBackend');
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 0,
             Key   => 'DashboardBackend',
             Value => \%$Config,
         );
 
         # reset TicketQueueOverview dashboard sysconfig
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'DashboardBackend###0270-TicketQueueOverview',
             Value => {
@@ -54,7 +54,7 @@ $Selenium->RunTest(
         );
 
         # create test queue
-        my $QueueName = "Queue" . $Helper->GetRandomID();
+        my $QueueName = "Queue" . $HelperObject->GetRandomID();
         my $QueueID   = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
             Name            => $QueueName,
             ValidID         => 1,
@@ -96,7 +96,7 @@ $Selenium->RunTest(
         }
 
         # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 

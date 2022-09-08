@@ -26,6 +26,9 @@ Jens Bothe <jens.bothe@otrs.com> jensoliver <jojo@jbothe.de>
 Jens Pfeifer <jp@znuny.com> Jens Pfeifer <jens.pfeifer@otrs.com>
 Jens Pfeifer <jp@znuny.com> Jens Pfeifer <jens.pfeifer@znuny.com>
 Jens Pfeifer <jp@znuny.com> Jens Pfeifer <mail@jenspfeifer.de>
+Kamil Furtek <kfurtek@dev.opgksoftware.com> Kamil Furtek <kfurtek@opgksoftware.com>
+Konrad Gumienny <kgumienny@dev.opgksoftware.com> Konrad <kgumienny@dev.opgksoftware.com>
+Konrad Gumienny <kgumienny@dev.opgksoftware.com> Konrad Gumienny <kgumienny@opgksoftware.com>
 Johannes Hörburger <johannes.hoerburger@otrs.com>
 Johannes Nickel <jn@znuny.com> Johannes Nickel <hanne_hal@me.com>
 Johannes Nickel <jn@znuny.com> Johannes Nickel <hanneshal@users.noreply.github.com>
@@ -59,7 +62,14 @@ Sanjin Vik <svik@s7designcreative.com> Sanjin Vik <svik@7designcreative.com>
 Sanjin Vik <svik@s7designcreative.com> Sanjin Vik <svik@s7designcrative.com>
 Sanjin Vik <svik@s7designcreative.com> Sanjin Vik <svik@s7designcreativa.com>
 Sanjin Vik <svik@s7designcreative.com> Sanjin Vik <svik@s7sdesigncreative.com>
-Shawn Beasley <shawn.beasley@otrs.com> Shawn Beasley <digitalninja74@gmail.com>
+Shawn Beasley <shawn.beasley@znuny.com> Shawn Beasley <shawn.beasley@otrs.com>
+Shawn Beasley <shawn.beasley@znuny.com> Shawn Beasley <digitalninja74@gmail.com>
+Shawn Beasley <shawn.beasley@znuny.com> Shawn Beasley <shawn.beasley@icloud.com>
+Sławomir Niedbała <sniedbala@dev.opgksoftware.com> Slawomir Niedbala <sniedbala@opgksoftware.com>
+Sławomir Niedbała <sniedbala@dev.opgksoftware.com> Slawomir Niedbala <sniedbala@opgksoftware.com>
+Sławomir Niedbała <sniedbala@dev.opgksoftware.com> Slawomir Niedbala <sniedbala@dev.opgksoftware.com>
+Sławomir Niedbała <sniedbala@dev.opgksoftware.com> Slawomir <sniedbala@opgksoftware.com>
+Sławomir Niedbała <sniedbala@dev.opgksoftware.com> Sławomir Niedbała <sniedbala@opgksoftware.com>
 Thorsten Eckel <te@znuny.com> Thorsten <thorsteneckel@posteo.de>
 Thorsten Eckel <te@znuny.com> Thorsten Eckel <te@zammad.com>
 Thorsten Eckel <te@znuny.com> Thorsten Eckel <thorsten.eckel@otrs.com>
@@ -74,6 +84,7 @@ Zoran Ilibasic <zilibasic@s7designcreative.com> Zoran Ilibasic <zilibasic@s7desi
 tipue <tim.puettmanns@maxence.de> tipue <80031303+tipue-dev@users.noreply.github.com>
 
 # Assign unknown entries to anonymous
+anonymous <unknown@anonymous> Weblate Admin <operations@znuny.com>
 anonymous <unknown@anonymous> Weblate <noreply@weblate.org>
 anonymous <unknown@anonymous> atif <>
 anonymous <unknown@anonymous> nicolas <>

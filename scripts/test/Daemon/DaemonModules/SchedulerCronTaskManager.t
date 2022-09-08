@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -55,7 +55,7 @@ if ( $PreviousDaemonStatus =~ m{Daemon running}i ) {
 # get needed objects
 my $TaskWorkerObject  = $Kernel::OM->Get('Kernel::System::Daemon::DaemonModules::SchedulerTaskWorker');
 my $SchedulerDBObject = $Kernel::OM->Get('Kernel::System::Daemon::SchedulerDB');
-my $Helper            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $RunTasks = sub {
 
@@ -91,15 +91,15 @@ $ConfigObject->Set(
 );
 
 # freeze time
-$Helper->FixedTimeSet();
+$HelperObject->FixedTimeSet();
 
 my $CurSysDTObject = $Kernel::OM->Create('Kernel::System::DateTime');
 
 # go back in time to have 0 seconds in the current minute
-$Helper->FixedTimeAddSeconds( $CurSysDTObject->Get()->{Second} - 60 );
+$HelperObject->FixedTimeAddSeconds( $CurSysDTObject->Get()->{Second} - 60 );
 
 # get random ID
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 my @Tests = (
     {
@@ -200,7 +200,7 @@ for my $Test (@Tests) {
         my $StartSystemTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
         my $SecondsAdd            = ( 60 - $StartSystemTimeObject->Get()->{Second} );
 
-        $Helper->FixedTimeAddSeconds($SecondsAdd);
+        $HelperObject->FixedTimeAddSeconds($SecondsAdd);
 
         my $EndSystemTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
 
@@ -217,7 +217,7 @@ for my $Test (@Tests) {
     # add seconds if needed
     if ( $Test->{SecondsAdd} ) {
         my $StartSystemTime = $Kernel::OM->Create('Kernel::System::DateTime')->ToEpoch();
-        $Helper->FixedTimeAddSeconds( $Test->{SecondsAdd} );
+        $HelperObject->FixedTimeAddSeconds( $Test->{SecondsAdd} );
         my $EndSystemTime = $Kernel::OM->Create('Kernel::System::DateTime')->ToEpoch();
         printf(
             "  Added %s seconds to time from %s to %s\n",

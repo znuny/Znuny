@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -53,7 +53,7 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # don't validate email addresses
 $ConfigObject->Set(
@@ -128,7 +128,7 @@ for my $Test (@Tests) {
     );
 
     # create test queue
-    my $QueueName = 'Queue' . $Helper->GetRandomID();
+    my $QueueName = 'Queue' . $HelperObject->GetRandomID();
     my $QueueID   = $QueueObject->QueueAdd(
         Name            => $QueueName,
         ValidID         => 1,
@@ -147,7 +147,7 @@ for my $Test (@Tests) {
     push @QueueIDs, $QueueID;
 
     # create test auto-response
-    my $AutoResponseName = 'AutoResponse' . $Helper->GetRandomID();
+    my $AutoResponseName = 'AutoResponse' . $HelperObject->GetRandomID();
     my $AutoResponseID   = $AutoResponseObject->AutoResponseAdd(
         Name        => $AutoResponseName,
         ValidID     => 1,

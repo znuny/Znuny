@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -29,7 +29,7 @@ my $String = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
   <Name>TestPackage1</Name>
   <Version>0.0.1</Version>
-  <Vendor>OTRS AG</Vendor>
+  <Vendor>Znuny GmbH</Vendor>
   <URL>https://otrs.com/</URL>
   <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
   <ChangeLog>2005-11-10 New package (some test &lt; &gt; &amp;).</ChangeLog>
@@ -46,7 +46,7 @@ my $String2 = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
   <Name>TestPackage2</Name>
   <Version>0.0.1</Version>
-  <Vendor>OTRS AG</Vendor>
+  <Vendor>Znuny GmbH</Vendor>
   <URL>https://otrs.com/</URL>
   <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
   <Description Lang="en">A test package (some test &lt; &gt; &amp;).</Description>
@@ -85,10 +85,10 @@ my @Tests = (
                 Files       => [],
             },
             OTRS => {
-                DisplayName => 'OTRS',
+                DisplayName => 'Znuny',
                 Files       => [
                     'Calendar.xml', 'CloudServices.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml',
-                    'ProcessManagement.xml', 'Ticket.xml'
+                    'ProcessManagement.xml', 'Ticket.xml', 'Znuny.xml'
                 ],
             },
         },
@@ -106,10 +106,10 @@ my @Tests = (
                 Files       => [],
             },
             OTRS => {
-                DisplayName => 'OTRS',
+                DisplayName => 'Znuny',
                 Files       => [
                     'Calendar.xml', 'CloudServices.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml',
-                    'ProcessManagement.xml', 'Ticket.xml'
+                    'ProcessManagement.xml', 'Ticket.xml', 'Znuny.xml'
                 ],
             },
             TestPackage1 => {
@@ -131,10 +131,10 @@ my @Tests = (
                 Files       => [],
             },
             OTRS => {
-                DisplayName => 'OTRS',
+                DisplayName => 'Znuny',
                 Files       => [
                     'Calendar.xml', 'CloudServices.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml',
-                    'ProcessManagement.xml', 'Ticket.xml'
+                    'ProcessManagement.xml', 'Ticket.xml', 'Znuny.xml'
                 ],
             },
             TestPackage1 => {

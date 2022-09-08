@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -19,6 +19,7 @@ use Kernel::System::VariableCheck qw(:all);
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::Output::HTML::Layout',
+    'Kernel::System::Main',
 );
 
 =head1 NAME
@@ -230,6 +231,57 @@ sub DataStructureRemoveElements {
     }
 
     return $Param{Data};
+}
+
+=head2 GetInstalledDBCRUDObjects()
+
+    Returns installed DBCRUD objects.
+
+    my $DBCRUDObjects = $UtilObject->GetInstalledDBCRUDObjects();
+
+    Returns:
+    my $DBCRUDObjects = [
+        # DBCRUD objects as returned by $Kernel::OM->Get('Kernel::System::...')
+    ];
+
+=cut
+
+sub GetInstalledDBCRUDObjects {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
+
+    my $KernelSystemPath = $ConfigObject->Get('Home') . '/Kernel/System';
+
+    my @FilePaths = $MainObject->DirectoryRead(
+        Directory => $KernelSystemPath,
+        Filter    => '*.pm',
+        Recursive => 1,
+    );
+
+    my @DBCRUDObjects;
+
+    FILEPATH:
+    for my $FilePath (@FilePaths) {
+        my $FileContentRef = $MainObject->FileRead(
+            Location => $FilePath,
+        );
+        next FILEPATH if ref $FileContentRef ne 'SCALAR';
+        next FILEPATH if ${$FileContentRef} !~ m{^use parent\b.*?\bKernel::System::DBCRUD\b}m;
+
+        next FILEPATH if ${$FileContentRef} !~ m{^package (.*?);$}m;
+        my $DBCRUDPackage = $1;
+        next FILEPATH if $DBCRUDPackage eq 'Kernel::System::DBCRUD';
+        next FILEPATH if $DBCRUDPackage eq 'Kernel::System::UnitTest::DBCRUD';
+
+        my $DBCRUDObject = $Kernel::OM->Get($DBCRUDPackage);
+        next FILEPATH if !$DBCRUDObject;
+
+        push @DBCRUDObjects, $DBCRUDObject;
+    }
+
+    return \@DBCRUDObjects;
 }
 
 1;

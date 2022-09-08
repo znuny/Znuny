@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -22,9 +22,9 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 my $WebserviceID = $WebserviceObject->WebserviceAdd(
     Config => {
@@ -68,7 +68,7 @@ my @Tests = (
         Name   => 'Without WebserviceID',
         Config => {
             CommunicationID => $MainObject->MD5sum(
-                String => $SystemTime . $Helper->GetRandomID(),
+                String => $SystemTime . $HelperObject->GetRandomID(),
             ),
             CommunicationType => 'Provider',       # 'Provider' or 'Requester'
             RemoteIP          => '192.168.0.1',    # optional
@@ -102,7 +102,7 @@ my @Tests = (
         Name   => 'Without CommunicationType',
         Config => {
             CommunicationID => $MainObject->MD5sum(
-                String => $SystemTime . $Helper->GetRandomID(),
+                String => $SystemTime . $HelperObject->GetRandomID(),
             ),
             WebserviceID => $WebserviceID,
             RemoteIP     => '192.168.0.1',
@@ -120,7 +120,7 @@ my @Tests = (
         Name   => 'Without RemoteIP',
         Config => {
             CommunicationID => $MainObject->MD5sum(
-                String => $SystemTime . $Helper->GetRandomID(),
+                String => $SystemTime . $HelperObject->GetRandomID(),
             ),
             WebserviceID      => $WebserviceID,
             CommunicationType => 'Provider',
@@ -139,7 +139,7 @@ my @Tests = (
         SuccessAdd => '1',
         Config     => {
             CommunicationID => $MainObject->MD5sum(
-                String => $SystemTime . $Helper->GetRandomID(),
+                String => $SystemTime . $HelperObject->GetRandomID(),
             ),
             CommunicationType => 'Provider',
             RemoteIP          => '192.168.0.1',
@@ -156,7 +156,7 @@ my @Tests = (
         SuccessAdd => '1',
         Config     => {
             CommunicationID => $MainObject->MD5sum(
-                String => $SystemTime . $Helper->GetRandomID(),
+                String => $SystemTime . $HelperObject->GetRandomID(),
             ),
             CommunicationType => 'Provider',
             RemoteIP          => '192.168.0.1',
@@ -175,7 +175,7 @@ my @Tests = (
         SuccessAdd => '1',
         Config     => {
             CommunicationID => $MainObject->MD5sum(
-                String => $SystemTime . $Helper->GetRandomID(),
+                String => $SystemTime . $HelperObject->GetRandomID(),
             ),
             CommunicationType => 'Provider',
             RemoteIP          => '',
@@ -193,7 +193,7 @@ my @Tests = (
         SuccessAdd => '1',
         Config     => {
             CommunicationID => $MainObject->MD5sum(
-                String => $SystemTime . $Helper->GetRandomID(),
+                String => $SystemTime . $HelperObject->GetRandomID(),
             ),
             CommunicationType => 'Requester',
             RemoteIP          => '192.168.0.1',
@@ -211,7 +211,7 @@ my @Tests = (
         SuccessAdd => '1',
         Config     => {
             CommunicationID => $MainObject->MD5sum(
-                String => $SystemTime . $Helper->GetRandomID(),
+                String => $SystemTime . $HelperObject->GetRandomID(),
             ),
             CommunicationType => 'Requester',
             RemoteIP          => '',

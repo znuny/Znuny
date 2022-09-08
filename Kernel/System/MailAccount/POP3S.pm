@@ -1,10 +1,9 @@
 # --
-# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
-# the enclosed file COPYING for license information (GPL). If you
-# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
 package Kernel::System::MailAccount::POP3S;
@@ -12,70 +11,19 @@ package Kernel::System::MailAccount::POP3S;
 use strict;
 use warnings;
 
-use Net::POP3;
-
 use parent qw(Kernel::System::MailAccount::POP3);
 
-our @ObjectDependencies = (
-    'Kernel::System::Log',
-);
+our @ObjectDependencies;
 
-# Use Net::SSLGlue::POP3 on systems with older Net::POP3 modules that cannot handle POP3S.
-BEGIN {
-    if ( !defined &Net::POP3::starttls ) {
-        ## nofilter(TidyAll::Plugin::OTRS::Perl::Require)
-        ## nofilter(TidyAll::Plugin::OTRS::Perl::SyntaxCheck)
-        require Net::SSLGlue::POP3;
-    }
-}
-
-sub Connect {
+sub _GetSSLOptions {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
-    for my $Needed (qw(Login Password Host Timeout Debug)) {
-        if ( !defined $Param{$Needed} ) {
-            return (
-                Successful => 0,
-                Message    => "Need $Needed!",
-            );
-        }
-    }
-
-    my $Type = 'POP3S';
-
-    # connect to host
-    my $PopObject = Net::POP3->new(
-        $Param{Host},
-        Timeout         => $Param{Timeout},
-        Debug           => $Param{Debug},
+    my %SSLOptions = (
         SSL             => 1,
         SSL_verify_mode => 0,
     );
 
-    if ( !$PopObject ) {
-        return (
-            Successful => 0,
-            Message    => "$Type: Can't connect to $Param{Host}"
-        );
-    }
-
-    # authentication
-    my $NOM = $PopObject->login( $Param{Login}, $Param{Password} );
-    if ( !defined $NOM ) {
-        $PopObject->quit();
-        return (
-            Successful => 0,
-            Message    => "$Type: Auth for user $Param{Login}/$Param{Host} failed!"
-        );
-    }
-
-    return (
-        Successful => 1,
-        PopObject  => $PopObject,
-        NOM        => $NOM,
-        Type       => $Type,
-    );
+    return %SSLOptions;
 }
 
 1;

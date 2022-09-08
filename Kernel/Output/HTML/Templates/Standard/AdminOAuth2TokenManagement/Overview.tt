@@ -1,0 +1,187 @@
+# --
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
+    <h1 class="InvisibleText">[% Translate("Manage OAuth2 tokens and their configurations") | html %] - [% Translate(Data.Action) | html %]</h1>
+
+    [% BreadcrumbPath = [
+            {
+                Name => Translate("Manage OAuth2 tokens and their configurations"),
+                Link => Env("Action"),
+            },
+        ]
+    %]
+
+    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+    <div class="Clear"></div>
+    <div class="SidebarColumn">
+        [% IF Data.TokenConfigTemplateSelection %]
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("Actions") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <ul class="ActionList">
+                        <li>
+                            <h4><label for="[% Data.TokenConfigTemplateFilePath | html %]">[% Translate('Add OAuth2 token configuration') | html %]</label></h4>
+                            [% Data.TokenConfigTemplateSelection %]
+                            <div class="FieldExplanation">
+                                <p>[% Translate("Add a new OAuth2 token configuration based on the selected template.") | html %]</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        [% END %]
+
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Import and export") | html %]</h2>
+            </div>
+
+            <div class="Content">
+                <p class="FieldExplanation">
+                    [% Translate("Upload a YAML file to import token configurations. See documentation on OAuth2 token management for further details.") | html %]
+                </p>
+                <ul class="ActionList SpacingTop">
+                    <li>
+                        <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits">
+                            <input type="hidden" id="ChallengeToken" name="ChallengeToken" value="[% Env("UserChallengeToken") | JSON %]">
+                            <input type="hidden" id="Action" name="Action" value="AdminOAuth2TokenManagement"/>
+                            <input type="hidden" id="Subaction" name="Subaction" value="ImportTokenConfigurations"/>
+                            <input id="FileUpload" name="FileUpload" type="file" size="18" class="Fixed W100pc Validate_Required"/>
+                            <fieldset class="SpacingTop">
+                                <input type="checkbox" id="OverwriteExistingTokenConfigurations" name="OverwriteExistingTokenConfigurations" value="1"/>
+                                <label for="OverwriteExistingTokenConfigurations">
+                                    [% Translate("Overwrite existing token configurations") | html %]
+                                </label>
+                            </fieldset>
+                            <button class="CallForAction Fullsize Center SpacingTop" type="submit">
+                                <span><i class="fa fa-upload"></i>
+                                    [% Translate("Import token configurations") | html %]
+                                </span>
+                            </button>
+                        </form>
+                    </li>
+                    [% IF Data.TokenConfigs && Data.TokenConfigs.size %]
+                        <li>
+                            <a href="[% Env("Baselink") %]Action=AdminOAuth2TokenManagement;Subaction=ExportTokenConfigurations" class="CallForAction Fullsize Center">
+                                <span><i class="fa fa-download"></i>
+                                    [% Translate("Export token configurations") | html %]
+                                </span>
+                            </a>
+                        </li>
+                    [% END %]
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="ContentColumn">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("OAuth2 token configurations") | html %]</h2>
+            </div>
+
+            <div>
+                <table class="DataTable">
+                    <thead>
+                        <tr>
+                            <th>[% Translate("Name") | html %]</th>
+                            <th>[% Translate("Token status") | html %]</th>
+                            <th>[% Translate("Refresh token status") | html %]</th>
+                            <th>[% Translate("Validity of token configuration") | html %]</th>
+                            <th>[% Translate("Actions") | html %]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        [% IF Data.TokenConfigs && Data.TokenConfigs.size %]
+                            [% FOR TokenConfig IN Data.TokenConfigs %]
+                                [% TokenData = TokenConfig.TokenData %]
+                                [% TokenExpirationDate = TokenData.TokenExpirationDate | Localize("TimeShort") %]
+                                [% RefreshTokenExpirationDate = TokenData.RefreshTokenExpirationDate | Localize("TimeShort") %]
+
+                                <tr class="[% IF Data.ValidIDs.item(TokenConfig.ValidID) != 'valid' %] Invalid[% END %]">
+                                    <td>
+                                        <a href="[% Env("Baselink") %]Action=AdminOAuth2TokenManagement;Subaction=EditTokenConfig;ID=[% TokenConfig.TokenConfigID | uri %]" title="[% TokenConfig.Name | html %]" class="MasterActionLink">[% TokenConfig.Name %]</a>
+                                    </td>
+                                    <td>
+                                        [% IF TokenData.LastTokenRequestFailed %]
+                                            [% Translate("Last token request failed.") | html %]
+                                        [% ELSE %]
+                                            [% IF TokenData.TokenPresent %]
+                                                [% IF TokenData.TokenHasExpired %]
+                                                    [% Translate("Token has expired on %s.", TokenExpirationDate) | html %]
+                                                [% ELSE %]
+                                                    [% Translate("Token is valid until %s.", TokenExpirationDate) | html %]
+                                                [% END %]
+                                            [% ELSE %]
+                                                [% Translate("No token was requested yet.") | html %]
+                                            [% END %]
+                                        [% END %]
+                                    </td>
+                                    <td>
+                                        [% IF TokenData.RefreshTokenRequestConfigured %]
+                                            [% IF TokenData.LastTokenRequestFailed %]
+                                                [% Translate("Last (refresh) token request failed.") | html %]
+                                            [% ELSE %]
+                                                [% IF TokenData.RefreshTokenPresent %]
+                                                    [% IF TokenData.RefreshTokenHasExpired %]
+                                                        [% IF RefreshTokenExpirationDate %]
+                                                            [% Translate("Refresh token has expired on %s.", RefreshTokenExpirationDate) | html %]
+                                                        [% ELSE %]
+                                                            [% Translate("Refresh token has expired.") | html %]
+                                                        [% END %]
+                                                    [% ELSE %]
+                                                        [% IF RefreshTokenExpirationDate %]
+                                                            [% Translate("Refresh token is valid until %s.", RefreshTokenExpirationDate) | html %]
+                                                        [% ELSE %]
+                                                            [% Translate("Refresh token is valid (without expiration date).") | html %]
+                                                        [% END %]
+                                                    [% END %]
+                                                [% ELSE %]
+                                                    [% Translate("No refresh token was requested yet.") | html %]
+                                                [% END %]
+                                            [% END %]
+                                        [% ELSE %]
+                                            [% Translate("Refresh token request is not configured.") | html %]
+                                        [% END %]
+                                    </td>
+                                    <td>
+                                        [% Translate(Data.ValidIDs.item(TokenConfig.ValidID)) | html %]
+                                    </td>
+                                    <td>
+                                        <a class="CallForAction AsPopup PopupType_AdminOAuth2TokenManagement" href="[% TokenData.AuthorizationCodeRequestURL | html %]" title="[% Translate("Request new token") | html %]">
+                                            <span>[% Translate("Request new token") | html %]</span>
+                                        </a>
+                                        &nbsp;
+                                        [% IF !TokenConfig.Used %]
+                                            <a class="CallForAction" data-action-delete-token-config href="[% Env("Baselink") %]Action=AdminOAuth2TokenManagement;Subaction=DeleteTokenConfig;ID=[% TokenConfig.TokenConfigID | uri %]" title="[% Translate("Delete this token and its configuration.") | html %]">
+                                                <span>[% Translate("Delete") | html %]</span>
+                                            </a>
+                                        [% END %]
+                                    </td>
+                                </tr>
+                            [% END %]
+                        [% ELSE %]
+                            <tr>
+                                <td colspan="5">
+                                    [% Translate("No data found.") | html %]
+                                </td>
+                            </tr>
+                        [% END %]
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="Clear"></div>
+
+    </div>
+</div>

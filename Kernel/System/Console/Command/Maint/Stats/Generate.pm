@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -13,6 +13,9 @@ use strict;
 use warnings;
 
 use parent qw(Kernel::System::Console::BaseCommand);
+
+use Kernel::System::VariableCheck qw(:all);
+use Kernel::System::DateTime;
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -184,6 +187,17 @@ sub PreRun {
     $Self->{Format}    = $Self->GetOption('format')    || 'CSV';
     $Self->{Separator} = $Self->GetOption('separator') || ';';
 
+    # Check time zone, if given
+    my $TimeZone = $Self->GetOption('timezone');
+    if ( IsStringWithData($TimeZone) ) {
+        my $TimeZoneIsValid = Kernel::System::DateTime->IsTimeZoneValid( TimeZone => $TimeZone );
+        if ( !$TimeZoneIsValid ) {
+            die "Given time zone $TimeZone is invalid.\n";
+        }
+
+        $Self->{TimeZone} = $TimeZone;
+    }
+
     return;
 }
 
@@ -245,10 +259,8 @@ sub Run {
     elsif ( $Stat->{StatType} eq 'dynamic' ) {
         %GetParam = %{$Stat};
 
-        # overwrite the default stats timezone with the given timezone
-        my $TimeZone = $Self->GetOption('timezone');
-        if ( defined $TimeZone && length $TimeZone ) {
-            $GetParam{TimeZone} = $TimeZone;
+        if ( IsStringWithData( $Self->{TimeZone} ) ) {
+            $GetParam{TimeZone} = $Self->{TimeZone};
         }
     }
 

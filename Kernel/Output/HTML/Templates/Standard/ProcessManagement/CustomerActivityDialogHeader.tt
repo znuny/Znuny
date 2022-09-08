@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -13,7 +13,7 @@
             <input type="hidden" name="Action" value="[% Env("Action") %]"/>
             <input type="hidden" name="Subaction" value="[% Data.Subaction | html %]"/>
             <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]"/>
-            <input type="hidden" name="ProcessEntityID" value="[% Data.ProcessEntityID | html %]"/>
+            <input type="hidden" ID="ProcessEntityID" name="ProcessEntityID" value="[% Data.ProcessEntityID | html %]"/>
             <input type="hidden" name="ActivityDialogEntityID" value="[% Data.ActivityDialogEntityID | html %]"/>
             <input type="hidden" name="Expand" id="Expand" value=""/>
             <input type="hidden" name="AJAXDialog" id="AJAXDialog" value="[% Data.AJAXDialog | html %]"/>

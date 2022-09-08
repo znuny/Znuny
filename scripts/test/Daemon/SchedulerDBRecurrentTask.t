@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -33,7 +33,7 @@ if ( $PreviousDaemonStatus =~ m{Daemon running}i ) {
     sleep $SleepTime;
 }
 
-my $Helper            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $SchedulerDBObject = $Kernel::OM->Get('Kernel::System::Daemon::SchedulerDB');
 
 $Self->Is(
@@ -77,13 +77,13 @@ $CacheObject->CleanUp(
 );
 
 # freeze time
-$Helper->FixedTimeSet();
+$HelperObject->FixedTimeSet();
 
 my $SystemTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
 my $SecsDiff         = 60 - $SystemTimeObject->Get()->{Second};
 
 # fix time to have 0 seconds in the current minute
-$Helper->FixedTimeAddSeconds($SecsDiff);
+$HelperObject->FixedTimeAddSeconds($SecsDiff);
 
 my $DateTime   = $Kernel::OM->Create('Kernel::System::DateTime');
 my $SystemTime = $DateTime->ToEpoch();
@@ -292,7 +292,7 @@ for my $Test (@Tests) {
 
     if ( $Test->{AddSecondsBefore} ) {
         my $StartSystemTime = $Kernel::OM->Create('Kernel::System::DateTime')->ToEpoch();
-        $Helper->FixedTimeAddSeconds( $Test->{AddSecondsBefore} );
+        $HelperObject->FixedTimeAddSeconds( $Test->{AddSecondsBefore} );
         my $EndSystemTime = $Kernel::OM->Create('Kernel::System::DateTime')->ToEpoch();
         print("  Added $Test->{AddSecondsBefore} seconds to time from $StartSystemTime to $EndSystemTime\n");
     }
@@ -529,7 +529,7 @@ for my $Test (@Tests) {
             "$Test->{Name} RecurrentTaskExecute() - result with true",
         );
 
-        $Helper->FixedTimeAddSeconds(60);
+        $HelperObject->FixedTimeAddSeconds(60);
     }
 
     my @List = $SchedulerDBObject->TaskList(
@@ -618,7 +618,7 @@ $Self->Is(
 for my $Test (@Tests) {
 
     if ( $Test->{AddSeconds} ) {
-        $Helper->FixedTimeAddSeconds( $Test->{AddSeconds} );
+        $HelperObject->FixedTimeAddSeconds( $Test->{AddSeconds} );
     }
 
     $SchedulerDBObject->RecurrentTaskUnlockExpired(

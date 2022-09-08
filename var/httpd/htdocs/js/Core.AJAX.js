@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -88,8 +88,9 @@ Core.AJAX = (function (TargetNS) {
         Core.Exception.HandleFinalError(new Core.Exception.ApplicationError(ErrorMessage, 'CommunicationError'));
     }
 
+
     /**
-     * @private
+     * @public
      * @name ToggleAJAXLoader
      * @memberof Core.AJAX
      * @function
@@ -98,7 +99,7 @@ Core.AJAX = (function (TargetNS) {
      * @description
      *      Shows and hides an ajax loader for every element which is updates via ajax.
      */
-    function ToggleAJAXLoader(FieldID, Show) {
+    TargetNS.ToggleAJAXLoader = function (FieldID, Show) {
         var $Element = $('#' + FieldID),
             $Loader = $('#' + AJAXLoaderPrefix + FieldID),
             LoaderHTML = '<span id="' + AJAXLoaderPrefix + FieldID + '" class="AJAXLoader"></span>';
@@ -480,7 +481,7 @@ Core.AJAX = (function (TargetNS) {
 
         if (FieldsToUpdate) {
             $.each(FieldsToUpdate, function (Index, Value) {
-                ToggleAJAXLoader(Value, true);
+                TargetNS.ToggleAJAXLoader(Value, true);
             });
         }
 
@@ -512,7 +513,7 @@ Core.AJAX = (function (TargetNS) {
             complete: function () {
                 if (FieldsToUpdate) {
                     $.each(FieldsToUpdate, function (Index, Value) {
-                        ToggleAJAXLoader(Value, false);
+                        TargetNS.ToggleAJAXLoader(Value, false);
                     });
                 }
             },

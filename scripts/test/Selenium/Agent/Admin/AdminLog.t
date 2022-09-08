@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,11 +18,11 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
-        my $Helper    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Set log module in sysconfig.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'LogModule',
             Value => 'Kernel::System::Log::SysLog',
@@ -44,7 +44,7 @@ $Selenium->RunTest(
 
         # Create log entries.
         for ( 0 .. 1 ) {
-            my $LogMessage = 'LogMessage' . $Helper->GetRandomNumber();
+            my $LogMessage = 'LogMessage' . $HelperObject->GetRandomNumber();
 
             $LogObject->Log(
                 Priority => 'error',
@@ -55,7 +55,7 @@ $Selenium->RunTest(
         }
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
@@ -141,6 +141,34 @@ $Selenium->RunTest(
         $Self->True(
             $Selenium->execute_script("return \$('#LogEntries .Error:eq(0)').text().indexOf('$UserTimeZone') !== -1"),
             "Log time stamp is in user preference time zone ($UserTimeZone) format."
+        );
+
+        # Login test user again.
+        $Selenium->Login(
+            Type     => 'Agent',
+            User     => $TestUserLogin,
+            Password => $TestUserLogin,
+        );
+
+        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminLog");
+
+        $Self->True(
+            $Selenium->execute_script(
+                "return \$('#LogEntries tbody tr').length == 4"
+            ),
+            "4 log entries exists in the table",
+        );
+
+        $Selenium->find_element( '#ClearLogEntries', 'css' )->click();
+
+        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminLog");
+
+        # Check for expected result.
+        $Self->True(
+            $Selenium->execute_script(
+                "return \$(\"#LogEntries tr td:contains('No data found')\").length == 1"
+            ),
+            "No log entries exists in the table",
         );
 
         # Clear log.

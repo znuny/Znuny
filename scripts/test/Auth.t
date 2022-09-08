@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -19,7 +19,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # get config object
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
@@ -46,7 +46,7 @@ $ConfigObject->Set(
 );
 
 my $TestUserID;
-my $UserRand = 'example-user' . $Helper->GetRandomID();
+my $UserRand = 'example-user' . $HelperObject->GetRandomID();
 
 # get user object
 my $UserObject = $Kernel::OM->Get('Kernel::System::User');
@@ -243,12 +243,12 @@ for my $CryptType (qw(plain crypt apr1 md5 sha1 sha2 sha512 bcrypt)) {
 @Tests = (
     {
         Password  => 'test111test111test111',
-        UserLogin => 'example-user' . $Helper->GetRandomID(),
+        UserLogin => 'example-user' . $HelperObject->GetRandomID(),
         CryptType => 'crypt',
     },
     {
         Password  => 'test222test222test222',
-        UserLogin => 'example-user' . $Helper->GetRandomID(),
+        UserLogin => 'example-user' . $HelperObject->GetRandomID(),
         CryptType => 'sha1',
     }
 );

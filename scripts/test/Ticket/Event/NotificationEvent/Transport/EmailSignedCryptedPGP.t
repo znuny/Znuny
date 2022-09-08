@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -29,26 +29,26 @@ $Kernel::OM->ObjectParamAdd(
 
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # Disable email addresses checking.
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Key   => 'CheckEmailAddresses',
     Value => 0,
 );
 
-my $PGPPath = $ConfigObject->Get('Home') . "/var/tmp/pgp" . $Helper->GetRandomID();
+my $PGPPath = $ConfigObject->Get('Home') . "/var/tmp/pgp" . $HelperObject->GetRandomID();
 mkpath( [$PGPPath], 0, 0770 );    ## no critic
 
 # Enable PGP in config.
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'PGP',
     Value => 1,
 );
 
 # Set PGP path in config.
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'PGP::Options',
     Value => "--homedir $PGPPath --batch --no-tty --yes",
@@ -73,7 +73,7 @@ my $SendEmails = sub {
     return @ToReturn;
 };
 
-my $RandomID = $Helper->GetRandomNumber();
+my $RandomID = $HelperObject->GetRandomNumber();
 
 # use Test email backend
 my $Success = $ConfigObject->Set(

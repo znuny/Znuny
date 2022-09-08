@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -12,8 +12,12 @@
     [% Data.SiteNavBar %]
 </span>
 [% RenderBlockEnd("ContentLargeCustomerUserListNavBar") %]
+[% RenderBlockStart("ContentLargeCustomerIDAdd") %]
+<a class="CallForAction SpacingBottom" href="[% Env("Baselink") %]Action=AdminCustomerUserCustomer;Subaction=Customer;ID=[% Data.CustomerID | uri %]"><span><i class="fa fa-plus-square"></i> [% Translate("Change Customer Relations") | html %]</span></a>
+[% RenderBlockEnd("ContentLargeCustomerIDAdd") %]
+
 [% RenderBlockStart("ContentLargeCustomerUserAdd") %]
-<h2><a class="CallForAction" href="[% Env("Baselink") %]Action=AdminCustomerUser;Subaction=Add;CustomerID=[% Data.CustomerID | uri %]"><span><i class="fa fa-plus-square"></i> [% Translate("Add Customer User") | html %]</span></a></h2>
+<a class="CallForAction SpacingBottom" href="[% Env("Baselink") %]Action=AdminCustomerUser;Subaction=Add;CustomerID=[% Data.CustomerID | uri %]"><span><i class="fa fa-plus-square"></i> [% Translate("Add Customer User") | html %]</span></a>
 [% RenderBlockEnd("ContentLargeCustomerUserAdd") %]
 
 <table class="DataTable">

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,7 +18,7 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # Use a calendar with the same business hours for every day so that the UT runs correctly
         #   on every day of the week and outside usual business hours.
@@ -27,22 +27,22 @@ $Selenium->RunTest(
         for my $Day (@Days) {
             $Week{$Day} = [ 0 .. 23 ];
         }
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'TimeWorkingHours',
             Value => \%Week,
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'TimeWorkingHours',
             Value => \%Week,
         );
 
         # Disable default Vacation days.
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Key   => 'TimeVacationDays',
             Value => {},
         );
-        $Helper->ConfigSettingChange(
+        $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'TimeVacationDays',
             Value => {},
@@ -51,7 +51,7 @@ $Selenium->RunTest(
         # Do not check email addresses and mx records,
         #   change settings in both runtime and disk configuration.
         for my $Key (qw(CheckEmailAddresses CheckMXRecord)) {
-            $Helper->ConfigSettingChange(
+            $HelperObject->ConfigSettingChange(
                 Valid => 1,
                 Key   => $Key,
                 Value => 0,
@@ -63,19 +63,19 @@ $Selenium->RunTest(
         my @QueueConfig = (
             {
                 # First created Queue does not have Update time set, value is 0 for created ticket.
-                Name              => 'Queue' . $Helper->GetRandomID(),
+                Name              => 'Queue' . $HelperObject->GetRandomID(),
                 FirstResponseTime => 50,
                 SolutionTime      => 60,
             },
             {
                 # Second created Queue does not have First response time set, value is 0 for created ticket.
-                Name         => 'Queue' . $Helper->GetRandomID(),
+                Name         => 'Queue' . $HelperObject->GetRandomID(),
                 UpdateTime   => 70,
                 SolutionTime => 80,
             },
             {
                 # Third created Queue does not have Solution time set, value is 0 for created ticket.
-                Name              => 'Queue' . $Helper->GetRandomID(),
+                Name              => 'Queue' . $HelperObject->GetRandomID(),
                 FirstResponseTime => 60,
                 UpdateTime        => 30,
             },
@@ -98,7 +98,7 @@ $Selenium->RunTest(
             push @QueueIDs, $QueueID;
         }
 
-        my $RandomNumber = $Helper->GetRandomNumber();
+        my $RandomNumber = $HelperObject->GetRandomNumber();
 
         # Add special characters to CustomerID. See bug#14982.
         # Create CustomerCompany.
@@ -195,7 +195,7 @@ $Selenium->RunTest(
         }
 
         # Create test user and login.
-        my $TestUserLogin = $Helper->TestUserCreate(
+        my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 

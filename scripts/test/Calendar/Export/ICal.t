@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -31,10 +31,10 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # create test user
-my ( $UserLogin, $UserID ) = $Helper->TestUserCreate();
+my ( $UserLogin, $UserID ) = $HelperObject->TestUserCreate();
 
 $Self->True(
     $UserID,
@@ -42,7 +42,7 @@ $Self->True(
 );
 
 # create test group
-my $GroupName = 'test-calendar-group-' . $Helper->GetRandomID();
+my $GroupName = 'test-calendar-group-' . $HelperObject->GetRandomID();
 my $GroupID   = $GroupObject->GroupAdd(
     Name    => $GroupName,
     ValidID => 1,
@@ -83,7 +83,7 @@ if ( $Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::Calenda
     my $TeamObject = $Kernel::OM->Get('Kernel::System::Calendar::Team');
 
     # create test team
-    my $TeamName = 'test-team-' . $Helper->GetRandomID();
+    my $TeamName = 'test-team-' . $HelperObject->GetRandomID();
     $Success = $TeamObject->TeamAdd(
         Name    => $TeamName,
         GroupID => $GroupID,
@@ -117,7 +117,7 @@ if ( $Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::Calenda
 }
 
 # create a test calendar for export
-my $ExportCalendarName = 'Export ' . $Helper->GetRandomID();
+my $ExportCalendarName = 'Export ' . $HelperObject->GetRandomID();
 my %ExportCalendar     = $CalendarObject->CalendarCreate(
     CalendarName => $ExportCalendarName,
     Color        => '#3A87AD',
@@ -297,7 +297,7 @@ $Self->True(
 );
 
 # create a test calendar for import
-my $ImportCalendarName = 'Import ' . $Helper->GetRandomID();
+my $ImportCalendarName = 'Import ' . $HelperObject->GetRandomID();
 my %ImportCalendar     = $CalendarObject->CalendarCreate(
     CalendarName => $ImportCalendarName,
     Color        => '#EC9073',

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.96799864544531;
+    $Self->{Completeness}        = 0.905282034561461;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -34,7 +34,7 @@ sub Data {
     $Self->{ThousandSeparator} = '';
     $Self->{Translation} = {
 
-        # Template: AdminACL
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
         'ACL Management' => 'ACL 관리',
         'Actions' => '행동',
         'Create New ACL' => '새 ACL',
@@ -65,7 +65,7 @@ sub Data {
         'No data found.' => '데이터가 없음',
         'No matches found.' => '일치하는 것을 찾을 수 없음',
 
-        # Template: AdminACLEdit
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
         'Edit ACL %s' => 'ACL 수정 %s',
         'Edit ACL' => 'ACL 수정',
         'Go to overview' => '오버뷰로 가기',
@@ -90,11 +90,11 @@ sub Data {
         'Cancel' => '취소',
         'Do you really want to delete this ACL?' => '정말로 이 ACL을 지우시겠습니까?',
 
-        # Template: AdminACLNew
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLNew.tt
         'Create a new ACL by submitting the form data. After creating the ACL, you will be able to add configuration items in edit mode.' =>
             '양식 데이터를 제출하여 새 ACL을 작성하십시오. ACL을 생성 한 후 편집 모드에서 구성 항목을 추가 할 수 있습니다',
 
-        # Template: AdminAppointmentCalendarManage
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentCalendarManage.tt
         'Calendar Management' => '캘린더 관리',
         'Add Calendar' => '캘린더 추가',
         'Edit Calendar' => '캘린더 수정',
@@ -149,7 +149,7 @@ sub Data {
         'Add Rule' => '규칙 추가',
         'Submit' => '제출',
 
-        # Template: AdminAppointmentImport
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentImport.tt
         'Appointment Import' => '약속 가져오기',
         'Go back' => '뒤로',
         'Uploaded file must be in valid iCal format (.ics).' => '업로드 된 파일은 유효한 iCal 형식 (.ics)이어야합니다.',
@@ -162,7 +162,7 @@ sub Data {
         'Upload calendar' => '캘린터 업로드',
         'Import appointments' => '약속 Import',
 
-        # Template: AdminAppointmentNotificationEvent
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
         'Appointment Notification Management' => '약속 알림 관리',
         'Add Notification' => '알림 추가',
         'Edit Notification' => '알림 수정',
@@ -212,7 +212,6 @@ sub Data {
         'This is the default value for assigned recipient agents who didn\'t make a choice for this notification in their preferences yet. If the box is enabled, the notification will be sent to such agents.' =>
             '이것은 자신의 환경 설정에서이 통지에 대해 아직 선택하지 않은 할당 된 수신자 에이전트의 기본값입니다. 이 상자가 활성화되면 해당 에이전트에 알림이 전송됩니다.',
         'This feature is currently not available.' => '현재 이 기능을 사용할 수 없습니다.',
-        'Upgrade to %s' => '%s (으)로 업그레이드',
         'Please activate this transport in order to use it.' => '사용하려면이 운송을 활성화하십시오.',
         'No data found' => '데이터가 없습니다.',
         'No notification method found.' => '알림 방법이 없습니다.',
@@ -236,7 +235,7 @@ sub Data {
         'Config options' => '구성 옵션',
         'Example notification' => '알림 예',
 
-        # Template: AdminAppointmentNotificationEventTransportEmailSettings
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEventTransportEmailSettings.tt
         'Additional recipient email addresses' => '추가받는 사람 전자 메일 주소',
         'This field must have less then 200 characters.' => '',
         'Article visible for customer' => '고객이 볼 수있는 기사',
@@ -250,7 +249,7 @@ sub Data {
         'If signing key/certificate is missing' => '서명 키 / 인증서가 누락 된 경우',
         'If encryption key/certificate is missing' => '암호화 키 / 인증서가 누락 된 경우',
 
-        # Template: AdminAttachment
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
         'Attachment Management' => '첨부파일 관리',
         'Add Attachment' => '첨부파일 추가',
         'Edit Attachment' => '첨부파일 편집',
@@ -262,7 +261,7 @@ sub Data {
         'Do you really want to delete this attachment?' => '첨부 파일을 정말로 삭제 하시겠습니까?',
         'Attachment' => '부착',
 
-        # Template: AdminAutoResponse
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
         'Auto Response Management' => '자동 응답 관리',
         'Add Auto Response' => '자동 응답 추가',
         'Edit Auto Response' => '자동 응답 수정',
@@ -285,7 +284,7 @@ sub Data {
             '티켓 동적 필드의 옵션은 드롭 다운 및 다중선택 필드에 유용한 값을 표시합니다.',
         'Example response' => '응답 예',
 
-        # Template: AdminCloudServiceSupportDataCollector
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
         'Cloud Service Management' => '클라우드 서비스 관리',
         'Support Data Collector' => '지원 데이터 수집기',
         'Support data collector' => '지원 데이터 수집기',
@@ -305,17 +304,16 @@ sub Data {
         'System Registration is disabled for your system. Please check your configuration.' =>
             '시스템 등록은 시스템에서 사용할 수 없습니다. 구성을 확인하십시오.',
 
-        # Template: AdminCloudServices
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServices.tt
         'System registration is a service of OTRS Group, which provides a lot of advantages!' =>
             '시스템 등록은 많은 장점을 제공하는 OTRS Group의 서비스입니다!',
         'Please note that the use of OTRS cloud services requires the system to be registered.' =>
             'OTRS 클라우드 서비스를 사용하려면 시스템을 등록해야합니다.',
-        'Register this system' => '이 시스템 등록',
         'Here you can configure available cloud services that communicate securely with %s.' =>
             '%s와 안전하게 통신 할 수있는 클라우드 서비스를 구성 할 수 있습니다.',
         'Available Cloud Services' => '사용가능한 클라우드 서비스',
 
-        # Template: AdminCommunicationLog
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLog.tt
         'Communication Log' => '통신 로그',
         'Time Range' => '',
         'Show only communication logs created in specific time range.' =>
@@ -349,7 +347,7 @@ sub Data {
         'No communications found.' => '통신이 없습니다.',
         '%s s' => '%s 개',
 
-        # Template: AdminCommunicationLogAccounts
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogAccounts.tt
         'Account Status' => '계정 상태',
         'Back to overview' => '',
         'Filter for Accounts' => '',
@@ -367,17 +365,17 @@ sub Data {
         'End Time' => '종료 시간',
         'No communication log entries found.' => '통신 로그 항목을 찾을 수 없습니다.',
 
-        # Template: AdminCommunicationLogCommunications
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogCommunications.tt
         'Duration' => '지속',
 
-        # Template: AdminCommunicationLogObjectLog
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogObjectLog.tt
         '#' => '#',
         'Priority' => '우선순위',
         'Module' => '기준 치수',
         'Information' => '정보',
         'No log entries found.' => '로그 항목을 찾을 수 없습니다.',
 
-        # Template: AdminCommunicationLogZoom
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogZoom.tt
         'Detail view for %s communication started at %s' => '%s에서 시작된 %s 통신에 대한 상세보기',
         'Filter for Log Entries' => '로그 항목 필터링',
         'Filter for log entries' => '로그 항목 필터링',
@@ -387,7 +385,7 @@ sub Data {
         'Communication Log Details' => '통신 로그 세부 정보',
         'Please select an entry from the list.' => '목록에서 항목을 선택하십시오.',
 
-        # Template: AdminCustomerCompany
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
         'Customer Management' => '고객 관리',
         'Add Customer' => '고객 추가',
         'Edit Customer' => '고객 편집',
@@ -401,7 +399,7 @@ sub Data {
         'Please note' => '주의 사항',
         'This customer backend is read only!' => '이 고객 백엔드는 읽기전용입니다!',
 
-        # Template: AdminCustomerGroup
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
         'Manage Customer-Group Relations' => '고객-그룹 관계 관리',
         'Notice' => '공지',
         'This feature is disabled!' => '부가기능이 불가능으로 설정됨!',
@@ -431,7 +429,7 @@ sub Data {
         'Full read and write access to the tickets in this group/queue.' =>
             '이 그룹/대기열의 티켓에 대한 전체 읽기 및 쓰기 액세스',
 
-        # Template: AdminCustomerUser
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Customer User Management' => '고객 사용자 관리',
         'Add Customer User' => '고객 사용자 추가',
         'Edit Customer User' => '고객 사용자 편집',
@@ -466,7 +464,7 @@ sub Data {
         'Table above shows granted customer access for the customer user by permission context. The matrix takes into account all inherited access (e.g. via customer groups). Note: The table does not consider changes made to this form without submitting it.' =>
             '위의 표는 권한 컨텍스트를 통해 고객 사용자에 대해 부여 된 고객 액세스를 보여줍니다. 행렬은 모든 상속 된 액세스 (예 : 고객 그룹을 통해)를 고려합니다. 참고 :이 표는 제출하지 않고이 양식의 변경 사항을 고려하지 않습니다',
 
-        # Template: AdminCustomerUserCustomer
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
         'Manage Customer User-Customer Relations' => '고객 사용자 - 고객 관계 관리',
         'Select the customer user:customer relations.' => '고객 사용자 : 고객 관계를 선택하십시오.',
         'Customer Users' => '고객 사용자',
@@ -476,7 +474,7 @@ sub Data {
         'Active' => '유효한',
         'Toggle active state for %s' => '%s의 활성 상태 토글',
 
-        # Template: AdminCustomerUserGroup
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
         'Manage Customer User-Group Relations' => '고객 사용자 - 그룹 관계 관리',
         'Just use this feature if you want to define group permissions for customer users.' =>
             '고객 사용자에 대한 그룹 권한을 정의하려면 이 기능을 사용하십시오.',
@@ -491,32 +489,27 @@ sub Data {
             '아무 것도 선택하지 않으면이 그룹에 권한이 없습니다 (티켓을 고객 사용자가 사용할 수 없음).',
         'Customer User Default Groups:' => '고객 사용자 기본 그룹 : ',
 
-        # Template: AdminCustomerUserService
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
         'Manage Customer User-Service Relations' => '',
         'Edit default services' => '기본 서비스 수정',
         'Filter for Services' => '서비스 필터링',
         'Filter for services' => '서비스 필터링',
         'Services' => '서비스',
 
-        # Template: AdminDynamicField
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
         'Dynamic Fields Management' => '동적 필드 관리',
         'Add new field for object' => '객체에 대한 새 필드 추가',
         'Filter for Dynamic Fields' => '동적 필드 필터링',
         'Filter for dynamic fields' => '동적 필드 필터링',
-        'More Business Fields' => '더 많은 사업 분야',
-        'Would you like to benefit from additional dynamic field types for businesses? Upgrade to %s to get access to the following field types:' =>
-            '비즈니스를위한 추가적인 동적 필드 유형의 혜택을 원하십니까? 다음 필드 유형에 액세스하려면 %s로 업그레이드하십시오.',
-        'Database' => '데이터베이스',
-        'Use external databases as configurable data sources for this dynamic field.' =>
-            '이 동적 필드에 대해 외부 데이터베이스를 구성 가능한 데이터 소스로 사용하십시오.',
-        'Web service' => '웹 서비스',
-        'External web services can be configured as data sources for this dynamic field.' =>
-            '외부 웹 서비스는 이 동적 필드의 데이터 소스로 구성될 수 있습니다.',
-        'Contact with data' => '데이터 연락처',
-        'This feature allows to add (multiple) contacts with data to tickets.' =>
-            '이 기능을 사용하면 데이터가 있는 연락처를 티켓에 추가 할 수 있습니다.',
         'To add a new field, select the field type from one of the object\'s list, the object defines the boundary of the field and it can\'t be changed after the field creation.' =>
             '새 필드를 추가하려면 객체 목록 중 하나에서 필드 유형을 선택하십시오. 객체는 필드의 경계를 정의하며 필드 작성 후에는 변경할 수 없습니다.',
+        'Import and export of configurations' => '',
+        'Upload a file in YAML format (as provided by the export) to import dynamic field configurations.' =>
+            '',
+        'Overwrite existing configurations' => '',
+        'Import configurations' => '',
+        'Export configurations' => '',
+        'Dynamic fields ↔ Screens' => '',
         'Dynamic Fields List' => '동적 필드 목록',
         'Dynamic fields per page' => '페이지 당 동적 필드',
         'Label' => '상표',
@@ -524,7 +517,7 @@ sub Data {
         'Object' => '목적',
         'Delete this field' => '이 입력란을 삭제하십시오.',
 
-        # Template: AdminDynamicFieldCheckbox
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
         'Dynamic Fields' => '동적 필드',
         'Go back to overview' => '개요로 돌아가기',
         'General' => '일반',
@@ -552,7 +545,21 @@ sub Data {
         'Default value' => '기본값',
         'This is the default value for this field.' => '이 필드의 기본값입니다.',
 
-        # Template: AdminDynamicFieldDateTime
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldConfigurationImportExport.tt
+        'Dynamic field configurations: %s' => '',
+        'Select the dynamic fields you want to import and click on \'Import\'.' =>
+            '',
+        'Select the dynamic fields whose configuration you want to export and click on \'Export\' to generate a YAML file.' =>
+            '',
+        'Dynamic fields' => '동적 필드',
+        'For the following dynamic fields a configuration cannot be imported because of an invalid backend.' =>
+            '',
+        'Select all field configurations' => '',
+        'Select all screen configurations' => '',
+        'The uploaded file does not contain configuration(s), is not a YAML file, is damaged or has the wrong structure.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldDateTime.tt
         'Default date difference' => '기본 날짜 차이',
         'This field must be numeric.' => '이 필드는 숫자여야 합니다.',
         'The difference from NOW (in seconds) to calculate the field default value (e.g. 3600 or -60).' =>
@@ -565,6 +572,8 @@ sub Data {
         'Years in the future' => '미래의 해',
         'Years in the future to display (default: 5 years).' => '장래에 표시 할 연도 (기본값 : 5 년).',
         'Show link' => '링크 표시',
+        'Reserved keywords. The following placeholders are not allowed:' =>
+            '',
         'Here you can specify an optional HTTP link for the field value in Overviews and Zoom screens.' =>
             '개요 및 확대 / 축소 화면에서 필드 값에 대한 선택적 HTTP 링크를 지정할 수 있습니다.',
         'If special characters (&, @, :, /, etc.) should not be encoded, use \'url\' instead of \'uri\' filter.' =>
@@ -576,7 +585,7 @@ sub Data {
         'Restrict entering of dates' => '날짜 입력 제한',
         'Here you can restrict the entering of dates of tickets.' => '여기에서 티켓 날짜 입력을 제한할 수 있습니다.',
 
-        # Template: AdminDynamicFieldDropdown
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldDropdown.tt
         'Possible values' => '가능한 값',
         'Key' => '키',
         'Value' => '값',
@@ -594,7 +603,24 @@ sub Data {
         'You need to add the translations manually into the language translation files.' =>
             '언어 변환 파일에 수동으로 번역을 추가해야 합니다.',
 
-        # Template: AdminDynamicFieldText
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldScreenConfiguration.tt
+        'Assignment of dynamic fields to screens' => '',
+        'Overview' => '개요',
+        'Screens' => '',
+        'Default columns' => '',
+        'Add dynamic field' => '',
+        'Filter' => '필터',
+        'You can assign elements by dragging and dropping them to the lists of available, disabled, assigned and required elements.' =>
+            '',
+        'Filter available elements' => '',
+        'Assign selected elements to this list' => '',
+        'Select all' => '전체선택',
+        'Filter disabled elements' => '',
+        'Filter assigned elements' => '',
+        'Filter required elements' => '',
+        'Reset' => '리셋',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldText.tt
         'Number of rows' => '행 수',
         'Specify the height (in lines) for this field in the edit mode.' =>
             '편집 모드에서이 필드의 높이를 (줄 단위로) 지정하십시오.',
@@ -609,7 +635,78 @@ sub Data {
         'Error Message' => '에러 메시지',
         'Add RegEx' => '정규 표현식 추가',
 
-        # Template: AdminEmail
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice.tt
+        'Default search term' => '',
+        'This is the default term for the click search.' => '',
+        'Initial default search term' => '',
+        'This is the default search term when the mask is loaded.' => '',
+        'Attributes' => '',
+        'Attributes for invoker execution (initially default values will be used).' =>
+            '',
+        'Attribute keys' => '',
+        'Custom attribute form for invoker execution.' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
+        'Web service' => '웹 서비스',
+        'Web service which will be used for this dynamic field.' => '',
+        'Invoker to search for records' => '',
+        'Invoker which will be used for this dynamic field. Searches for the search term(s) and returns an array as result. Note: The invoker needs to be enabled in the web service you specified above.' =>
+            '',
+        'Invoker to get a record' => '',
+        'Invoker which will be used for this dynamic field. Returns a hash of the record that will be found when searching for its identifier in the field configured in \'key for stored value\' below. Note: The invoker needs to be enabled in the web service you specified above.' =>
+            '',
+        'Backend' => '백엔드',
+        'Backend which will be used for this dynamic field.' => '',
+        'Backend documentation' => '',
+        'Key for search' => '',
+        'The keys (separated by comma) that will be searched when using the autocomplete while entering a value for the dynamic field.' =>
+            '',
+        'Key for stored value' => '',
+        'The key whose value will be stored in the dynamic field.' => '',
+        'Key to display' => '',
+        'The keys (separated by comma) that will be shown when the value of the dynamic field is being displayed. This also affects the value displayed in the autocomplete field when entering a value. If this field is left empty, the stored value from above will be displayed.' =>
+            '',
+        'Template Type' => '',
+        'This configuration determines how the values of the dynamic field are output in templates or masks.' =>
+            '',
+        'Separator to display between multi-key values' => '',
+        'The separator to show between the values if there\'s more than one key configured to be displayed above. If left empty, a single space will be used as separator. Use <space> to add spaces.' =>
+            '',
+        'Limit' => '한도',
+        'Maximum number of results for web service queries, e.g. for autocomplete selection list.' =>
+            '',
+        'Autocomplete min. input length' => '',
+        'Minimum length of input for autocomplete field to trigger search.' =>
+            '',
+        'Query delay' => '',
+        'Delay (in milliseconds) until the AJAX request will be sent.' =>
+            '',
+        'Autocompletion for search fields' => '',
+        'Use autocompletion for search fields instead of a static selection of values that are currently selected in OTRS (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch.' =>
+            '',
+        'Input field width' => '',
+        'Width of the input field (percentage).' => '',
+        'Additional dynamic field storage' => '',
+        'Dynamic field' => '',
+        'Restore values' => '',
+        'These dynamic fields are also filled with values from the same record.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Test.tt
+        'Test settings' => '',
+        'Error while testing configuration. Please check the configuration.' =>
+            '',
+        'Test was successful.' => '',
+        'Test this dynamic field exactly as it is displayed in the editing dialogs.' =>
+            '',
+        'Enter a search term to test the current settings.' => '',
+        'Click "Test settings"' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/TestData.tt
+        'DisplayValue' => '',
+        'StoredValue' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminEmail.tt
         'Admin Message' => '관리자 메시지',
         'With this module, administrators can send messages to agents, group or role members.' =>
             '이 모듈을 사용하여 관리자는 에이전트, 그룹 또는 역할 구성원에게 메시지를 보낼 수 있습니다.',
@@ -624,7 +721,7 @@ sub Data {
         'Body' => '신체',
         'Send' => '보내다',
 
-        # Template: AdminGenericAgent
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
         'Generic Agent Job Management' => '',
         'Edit Job' => '',
         'Add Job' => '',
@@ -675,8 +772,6 @@ sub Data {
         'Owner' => '소유자',
         'Responsible' => '책임있는',
         'Ticket lock' => '티켓 잠금',
-        'Dynamic fields' => '동적 필드',
-        'Add dynamic field' => '',
         'Create times' => '생성시간',
         'No create time settings.' => '생성 시간이 설정되지 않았습니다.',
         'Ticket created' => '티켓이 생성되었습니다.',
@@ -737,9 +832,6 @@ sub Data {
         'Time units' => '시간 단위',
         'Execute Ticket Commands' => '티켓 명령 실행',
         'Send agent/customer notifications on changes' => '변경 사항에 대한 상담원 / 고객 알림 보내기',
-        'CMD' => 'CMD',
-        'This command will be executed. ARG[0] will be the ticket number. ARG[1] the ticket id.' =>
-            '이 명령이 실행됩니다. ARG [0]이 티켓 번호입니다. ARG [1] 티켓 ID.',
         'Delete tickets' => '티켓 삭제',
         'Warning: All affected tickets will be removed from the database and cannot be restored!' =>
             '경고 : 영향을받는 모든 티켓이 데이터베이스에서 제거되어 복원 할 수 없습니다!',
@@ -755,7 +847,7 @@ sub Data {
         'Affected Tickets' => '영향받은 티켓',
         'Age' => '생성이후',
 
-        # Template: AdminGenericInterfaceDebugger
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceDebugger.tt
         'GenericInterface Web Service Management' => 'GenericInterface 웹 서비스 관리',
         'Web Service Management' => '웹서비스 관리',
         'Debugger' => '디버거',
@@ -773,10 +865,9 @@ sub Data {
         'Filter from' => '필터 : ',
         'Filter to' => '~에 필터링',
         'Filter by remote IP' => '원격 IP로 필터링',
-        'Limit' => '한도',
         'Refresh' => '새롭게 하다',
 
-        # Template: AdminGenericInterfaceErrorHandlingDefault
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceErrorHandlingDefault.tt
         'Add ErrorHandling' => 'ErrorHandling 추가',
         'Edit ErrorHandling' => 'ErrorHandling 편집',
         'Do you really want to delete this error handling module?' => '이 오류 처리 모듈을 정말로 삭제 하시겠습니까?',
@@ -823,7 +914,7 @@ sub Data {
             '모듈이 실행 된 후 처리가 중단되어야하는지, 남은 모듈을 모두 건너 뛰는 지 또는 같은 백엔드의 모듈 만 건너 뛰는지를 정의하십시오.',
         'Default behavior is to resume, processing the next module.' => '기본 동작은 다음 모듈을 다시 시작하여 처리하는 것입니다.',
 
-        # Template: AdminGenericInterfaceErrorHandlingRequestRetry
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceErrorHandlingRequestRetry.tt
         'This module allows to configure scheduled retries for failed requests.' =>
             '이 모듈을 사용하여 실패한 요청에 대한 스케줄 된 재시도를 구성할 수 있습니다.',
         'Default behavior of GenericInterface web services is to send each request exactly once and not to reschedule after errors.' =>
@@ -870,7 +961,7 @@ sub Data {
         'Note: Maximum retry period might not be reached if a maximum retry count is configured as well and reached earlier.' =>
             '참고 : 최대 재시도 횟수가 구성되어 있고 이전에 도달 한 경우 최대 재시도 기간에 도달하지 못할 수 있습니다.',
 
-        # Template: AdminGenericInterfaceInvokerDefault
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
         'Add Invoker' => '호출자 추가',
         'Edit Invoker' => '호출자 편집',
         'Do you really want to delete this invoker?' => '이 호출자를 정말로 삭제 하시겠습니까?',
@@ -898,8 +989,10 @@ sub Data {
             '비동기 이벤트 트리거는 백그라운드에서 OTRS Scheduler Daemon에 의해 처리됩니다 (권장).',
         'Synchronous event triggers would be processed directly during the web request.' =>
             '동기 이벤트 트리거는 웹 요청 중에 직접 처리됩니다.',
+        'Add all attachments' => '',
+        'Add all attachments to invoker payload.' => '',
 
-        # Template: AdminGenericInterfaceInvokerEvent
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerEvent.tt
         'GenericInterface Invoker Event Settings for Web Service %s' => '웹 서비스 %s의 GenericInterface Invoker 이벤트 설정',
         'Go back to' => '돌아가기',
         'Delete all conditions' => '모든 조건 삭제',
@@ -918,7 +1011,7 @@ sub Data {
         'And can\'t be repeated on the same condition.' => '그리고 같은 조건에서 반복될 수는 없습니다.',
         'Add New Condition' => '새 조건 추가',
 
-        # Template: AdminGenericInterfaceMappingSimple
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingSimple.tt
         'Mapping Simple' => '단순 매핑',
         'Default rule for unmapped keys' => '맵핑되지 않은 키의 기본 규칙',
         'This rule will apply for all keys with no mapping rule.' => '이 규칙은 매핑 규칙이없는 모든 키에 적용됩니다.',
@@ -940,7 +1033,7 @@ sub Data {
         'Add value mapping' => '값 매핑 추가',
         'Do you really want to delete this key mapping?' => '이 키 매핑을 정말로 삭제 하시겠습니까?',
 
-        # Template: AdminGenericInterfaceMappingXSLT
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingXSLT.tt
         'General Shortcuts' => '일반 단축키',
         'MacOS Shortcuts' => 'MacOS 단축키',
         'Comment code' => '주석 코드',
@@ -963,6 +1056,11 @@ sub Data {
             '이전 요청 / 응답 단계에서 생성 된 하나 이상의 데이터 집합을 표시 가능한 데이터에 포함되도록 선택합니다.',
         'These sets will appear in the data structure at \'/DataInclude/<DataSetName>\' (see debugger output of actual requests for details).' =>
             '이러한 세트는 \'/ DataInclude / 1\'의 데이터 구조에 표시됩니다 (자세한 내용은 실제 요청의 디버거 출력 참조).',
+        'Force array for tags' => '',
+        'Enter tags separated by space for which array representation should be forced.' =>
+            '',
+        'Keep XML attributes' => '',
+        'Only needed for content type XML.' => '',
         'Data key regex filters (before mapping)' => '데이터 키 정규식 필터 (매핑 전)',
         'Data key regex filters (after mapping)' => '데이터 키 정규식 필터 (매핑 후)',
         'Regular expressions' => '정규 표현식',
@@ -991,7 +1089,7 @@ sub Data {
         'Regular expressions defined here will be applied after the XSLT mapping.' =>
             '여기에 정의 된 정규 표현식은 XSLT 매핑 후에 적용됩니다.',
 
-        # Template: AdminGenericInterfaceOperationDefault
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceOperationDefault.tt
         'Add Operation' => '작업 추가',
         'Edit Operation' => '조작 편집',
         'Do you really want to delete this operation?' => '정말로 이 작업을 삭제 하시겠습니까?',
@@ -1010,7 +1108,7 @@ sub Data {
         'Include Ticket Data' => '티켓 데이터 포함',
         'Include ticket data in response.' => '',
 
-        # Template: AdminGenericInterfaceTransportHTTPREST
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
         'Network Transport' => '네트워크 전송',
         'Properties' => '속성',
         'Route mapping for Operation' => '운영을 위한 경로 매핑',
@@ -1019,6 +1117,11 @@ sub Data {
         'Valid request methods for Operation' => 'Operation에 대한 유효한 요청 메소드',
         'Limit this Operation to specific request methods. If no method is selected all requests will be accepted.' =>
             '이 작동을 특정 요청 방법으로 제한하십시오. 메서드를 선택하지 않으면 모든 요청이 수락됩니다.',
+        'Parser backend for operation' => '',
+        'Defines the incoming data format.' => '',
+        'Parser backend parameter' => '',
+        'Please click \'Save\' to get the corresponding backend parameter if the parser backend was changed.' =>
+            '',
         'Maximum message length' => '최대 메시지 길이',
         'This field should be an integer number.' => '이 필드는 정수여야 합니다.',
         'Here you can specify the maximum size (in bytes) of REST messages that OTRS will process.' =>
@@ -1033,6 +1136,9 @@ sub Data {
             '웹 서비스에 액세스하기위한 특정 위치를 나타내는 URI.',
         'e.g https://www.otrs.com:10745/api/v1.0 (without trailing backslash)' =>
             '예 : https://www.otrs.com:10745/api/v1.0( 후행 백 슬래시 없음)',
+        'Disable SSL hostname certificate verification' => '',
+        'Disables hostname certificate verification. This is not recommended and should only be used in test environments.' =>
+            '',
         'Timeout' => '제한시간',
         'Timeout value for requests.' => '요청에 대한 시간 초과값 입니다.',
         'Authentication' => '입증',
@@ -1042,6 +1148,37 @@ sub Data {
         'The user name to be used to access the remote system.' => '원격 시스템에 액세스하는 데 사용할 사용자 이름.',
         'BasicAuth Password' => 'BasicAuth 비밀번호',
         'The password for the privileged user.' => '권한있는 사용자의 암호입니다.',
+        'JWT authentication: Key file' => '',
+        'ATTENTION: Key file and/or password (if needed, see below) seem to be invalid.' =>
+            '',
+        'Path to private key file (PEM or DER). The key will be used to sign the JWT.' =>
+            '',
+        'JWT authentication: Key file password' => '',
+        'ATTENTION: Password and/or key file (see above) seem to be invalid.' =>
+            '',
+        'JWT authentication: Certificate file' => '',
+        'ATTENTION: Certificate file could not be parsed.' => '',
+        'ATTENTION: Certificate is expired.' => '',
+        'Path to X.509 certificate file (PEM). Data of the certificate can be used for the payload and/or header data of the JWT.' =>
+            '',
+        'JWT authentication: Algorithm' => '',
+        'JWT authentication: TTL' => '',
+        'TTL (time to live) in seconds for the JWT. This value will be used to calculate the expiration date which will be available in placeholders ExpirationDateTimestamp and ExpirationDateString.' =>
+            '',
+        'JWT authentication: Payload' => '',
+        'Payload for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3' =>
+            '',
+        'Available placeholders (prefixed with OTRS_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion.' =>
+            '',
+        'Placeholder usage example: Key1=<OTRS_JWT_ExpirationDateTimestamp>' =>
+            '',
+        'JWT authentication: Additional header data' => '',
+        'Additional header data for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3' =>
+            '',
+        'OAuth2 token configuration' => '',
+        'Content type' => '',
+        'The default content type added to HTTP header to use for POST and PUT requests.' =>
+            '',
         'Use Proxy Options' => '프록시 옵션 사용',
         'Show or hide Proxy options to connect to the remote system.' => '원격 시스템에 연결하기위한 프록시 옵션 표시 또는 숨기기.',
         'Proxy Server' => '프록시 서버',
@@ -1082,8 +1219,10 @@ sub Data {
             '이 Invoker (선택 사항)로 요청에 사용할 특정 HTTP 명령입니다.',
         'Default command' => '기본 명령',
         'The default HTTP command to use for the requests.' => '요청에 사용할 기본 HTTP 명령입니다.',
+        'Additional request headers' => '',
+        'Add request header' => '',
 
-        # Template: AdminGenericInterfaceTransportHTTPSOAP
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt
         'e.g. https://local.otrs.com:8000/Webservice/Example' => '예 : https://local.otrs.com:8000/Webservice/Example',
         'Set SOAPAction' => 'SOAPAction 설정',
         'Set to "Yes" in order to send a filled SOAPAction header.' => '채워진 SOAPAction 헤더를 보내려면 "Yes"로 설정하십시오.',
@@ -1106,6 +1245,9 @@ sub Data {
         'URI to give SOAP methods a context, reducing ambiguities.' => 'URI는 SOAP 메소드에 컨텍스트를 제공하여 모호성을 줄입니다.',
         'e.g urn:otrs-com:soap:functions or http://www.otrs.com/GenericInterface/actions' =>
             '예 : urn : otrs-com : soap : 함수 또는 http://www.otrs.com/GenericInterface/actions',
+        'Omit namespace prefix' => '',
+        'Omits the namespace prefix (e. g. namesp1:) in root tag of SOAP message.' =>
+            '',
         'Request name scheme' => '요청 이름 체계',
         'Select how SOAP request function wrapper should be constructed.' =>
             'SOAP 요청 함수 랩퍼를 구성하는 방법을 선택하십시오.',
@@ -1124,16 +1266,27 @@ sub Data {
         'Response name free text' => '응답 이름 자유 텍스트',
         'Here you can specify the maximum size (in bytes) of SOAP messages that OTRS will process.' =>
             '여기서 OTRS가 처리 할 SOAP 메시지의 최대 크기 (바이트)를 지정할 수 있습니다.',
+        'Fixed namespace prefix' => '',
+        'Use a fixed namespace prefix (e. g. myns:) for the root tag of a SOAP message.' =>
+            '',
+        'Suffix for response tag' => '',
+        'Usually OTRS expects a response tag like "&lt;Operation&gt;Response". This setting can change the "Response" part, e. g. to "Result".' =>
+            '',
         'Encoding' => '부호화',
         'The character encoding for the SOAP message contents.' => 'SOAP 메시지 내용의 문자 인코딩입니다.',
         'e.g utf-8, latin1, iso-8859-1, cp1250, Etc.' => '예를 들어 utf-8, latin1, iso-8859-1, cp1250 등',
+        'User' => '사용자',
+        'Password' => '암호',
+        'Disable SSL hostname verification' => '',
+        'Disables (setting "Yes") or enables (setting "No", default) the SSL hostname verification.' =>
+            '',
         'Sort options' => '정렬 옵션',
         'Add new first level element' => '새로운 첫번째 레벨 요소 추가',
         'Element' => '요소',
         'Outbound sort order for xml fields (structure starting below function name wrapper) - see documentation for SOAP transport.' =>
             'xml 필드에 대한 아웃 바운드 정렬 순서 (함수 이름 래퍼 아래에서 시작하는 구조) - SOAP 전송에 대한 설명서를 참조하십시오.',
 
-        # Template: AdminGenericInterfaceWebservice
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceWebservice.tt
         'Add Web Service' => '웹 서비스 추가',
         'Edit Web Service' => '웹 서비스 편집',
         'Clone Web Service' => '웹 서비스 복제',
@@ -1151,13 +1304,7 @@ sub Data {
         'Delete web service' => '웹 서비스 삭제',
         'Do you really want to delete this web service?' => '이 웹 서비스를 정말로 삭제 하시겠습니까?',
         'Ready2Adopt Web Services' => 'Ready2Adopt 웹 서비스',
-        'Here you can activate Ready2Adopt web services showcasing our best practices that are a part of %s.' =>
-            '여기 %s의 일부인 모범 사례를 보여주는 Ready2Adopt 웹 서비스를 활성화 할 수 있습니다.',
-        'Please note that these web services may depend on other modules only available with certain %s contract levels (there will be a notification with further details when importing).' =>
-            '이 웹 서비스는 특정 %s 계약 수준에서만 사용 가능한 다른 모듈에 의존 할 수 있습니다 (가져올 때 자세한 내용이있는 알림이 있음).',
         'Import Ready2Adopt web service' => 'Ready2Adopt 웹 서비스 가져 오기',
-        'Would you like to benefit from web services created by experts? Upgrade to %s to import some sophisticated Ready2Adopt web services.' =>
-            '전문가가 만든 웹 서비스의 혜택을 원하십니까? 일부 정교한 Ready2Adopt 웹 서비스를 가져 오려면 %s로 업그레이드하십시오.',
         'After you save the configuration you will be redirected again to the edit screen.' =>
             '구성을 저장하면 편집 화면으로 다시 이동합니다.',
         'If you want to return to overview please click the "Go to overview" button.' =>
@@ -1174,7 +1321,6 @@ sub Data {
         'Error Handling Modules' => '오류 처리 모듈',
         'Error handling modules are used to react in case of errors during the communication. Those modules are executed in a specific order, which can be changed by drag and drop.' =>
             '오류 처리 모듈은 통신 중 오류가 발생했을 때 반응하는 데 사용됩니다. 이러한 모듈은 특정 순서로 실행되며 끌어서 놓기로 변경할 수 있습니다.',
-        'Backend' => '백엔드',
         'Add error handling module' => '오류 처리 모듈 추가',
         'Operations are individual system functions which remote systems can request.' =>
             '운영은 원격 시스템이 요청할 수있는 개별 시스템 기능입니다.',
@@ -1187,7 +1333,7 @@ sub Data {
         'At least one %s has a controller that is either not active or not present, please check the controller registration or delete the %s' =>
             '하나 이상의 %s 컨트롤러가 활성화되지 않았거나 존재하지 않습니다. 컨트롤러 등록을 확인하거나 %s를 삭제하십시오',
 
-        # Template: AdminGenericInterfaceWebserviceHistory
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceWebserviceHistory.tt
         'History' => '역사',
         'Go back to Web Service' => '웹 서비스로 돌아 가기',
         'Here you can view older versions of the current web service\'s configuration, export or even restore them.' =>
@@ -1202,7 +1348,7 @@ sub Data {
             '이 버전의 웹 서비스 구성을 정말로 복원 하시겠습니까?',
         'Your current web service configuration will be overwritten.' => '현재 웹 서비스 구성을 덮어 씁니다.',
 
-        # Template: AdminGroup
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
         'Group Management' => '그룹 관리',
         'Add Group' => '그룹 추가',
         'Edit Group' => '그룹 편집',
@@ -1212,15 +1358,16 @@ sub Data {
             '서로 다른 에이전트 그룹 (예 : 구매 부서, 지원 부서, 판매 부서 등)에 대한 액세스 권한을 처리 할 새 그룹을 만듭니다.',
         'It\'s useful for ASP solutions. ' => 'ASP 솔루션에 유용합니다.',
 
-        # Template: AdminLog
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'System Log' => '시스템 로그',
+        'Clear log entries' => '',
         'Here you will find log information about your system.' => '여기서 시스템에 대한 로그 정보를 찾을 수 있습니다.',
         'Hide this message' => '이 메시지 숨기기',
         'Recent Log Entries' => '최근 로그 항목',
         'Facility' => '쉬움',
         'Message' => '메시지',
 
-        # Template: AdminMailAccount
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
         'Mail Account Management' => '메일 계정 관리',
         'Add Mail Account' => '메일 계정 추가',
         'Edit Mail Account for host' => '호스트용 메일 계정 편집',
@@ -1235,10 +1382,10 @@ sub Data {
             '나가는 이메일은 %s의 Sendmail * 설정을 통해 구성 할 수 있습니다.',
         'System Configuration' => '시스템 설정',
         'Host' => '호스트',
+        'Authentication type' => '',
         'Delete account' => '계정 삭제',
         'Fetch mail' => '메일 가져오기',
         'Do you really want to delete this mail account?' => '정말로 이 메일 계정을 삭제 하시겠습니까?',
-        'Password' => '암호',
         'Example: mail.example.com' => '예 : mail.example.com',
         'IMAP Folder' => 'IMAP 폴더',
         'Only modify this if you need to fetch mail from a different folder than INBOX.' =>
@@ -1247,10 +1394,9 @@ sub Data {
         'Dispatching' => '파견',
         'Edit Mail Account' => '메일 계정 편집',
 
-        # Template: AdminNavigationBar
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
         'Administration Overview' => '관리 개요',
         'Filter for Items' => '항목 필터링',
-        'Filter' => '필터',
         'Favorites' => '즐겨찾기',
         'You can add favorites by moving your cursor over items on the right side and clicking the star icon.' =>
             '오른쪽에있는 항목 위로 커서를 이동하고 별 모양 아이콘을 클릭하여 즐겨 찾기를 추가 할 수 있습니다.',
@@ -1260,7 +1406,7 @@ sub Data {
         'Sorry, your search didn\'t match any items.' => '죄송합니다. 검색 결과와 일치하지 않습니다.',
         'Set as favorite' => '즐겨찾기로 설정',
 
-        # Template: AdminNotificationEvent
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
         'Ticket Notification Management' => '티켓 알림 관리',
         'Here you can upload a configuration file to import Ticket Notifications to your system. The file needs to be in .yml format as exported by the Ticket Notification module.' =>
             '여기서 구성 파일을 업로드하여 시스템에 티켓 알림을 가져올 수 있습니다. 티켓 알림 모듈에서 내 보낸 파일은 .yml 형식이어야합니다.',
@@ -1301,12 +1447,68 @@ sub Data {
         'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
             '티켓 동적 필드는 드롭 다운 및 Multiselect 필드에 유용한 값을 표시합니다. ',
 
-        # Template: AdminNotificationEventTransportEmailSettings
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => '',
         'You can use OTRS-tags like <OTRS_TICKET_DynamicField_...> to insert values from the current ticket.' =>
             '<OTRS_TICKET_DynamicField _...>와 같은 OTRS 태그를 사용하여 현재 티켓의 값을 삽입 할 수 있습니다.',
 
-        # Template: AdminOTRSBusinessInstalled
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportWebserviceSettings.tt
+        'Web service name' => '',
+        'Invoker' => '',
+        'Asynchronous event triggers will be handled as separate process by the scheduler daemon (recommended).' =>
+            '',
+        'Synchronous event triggers will be processed directly during the web request.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
+        'Queue Management' => '',
+        'Manage OAuth2 tokens and their configurations' => '',
+        'Add by template' => '',
+        'Base configuration' => '',
+        'An OAuth2 token configuration with this name already exists.' =>
+            '',
+        'Client ID' => '',
+        'Client secret' => '',
+        'Template' => '템플릿',
+        'This is the template that was used to create this OAuth2 token configuration.' =>
+            '',
+        'Notifications' => '알림',
+        'Expired token' => '',
+        'Shows a notification for admins below the top menu if the OAuth2 token has expired.' =>
+            '',
+        'Expired refresh token' => '',
+        'Shows a notification for admins below the top menu if the OAuth2 refresh token has expired.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
+        'Add OAuth2 token configuration' => '',
+        'Add a new OAuth2 token configuration based on the selected template.' =>
+            '',
+        'Import and export' => '',
+        'Upload a YAML file to import token configurations. See documentation on OAuth2 token management for further details.' =>
+            '',
+        'Overwrite existing token configurations' => '',
+        'Import token configurations' => '',
+        'Export token configurations' => '',
+        'OAuth2 token configurations' => '',
+        'Token status' => '',
+        'Refresh token status' => '',
+        'Validity of token configuration' => '',
+        'Last token request failed.' => '',
+        'Token has expired on %s.' => '',
+        'Token is valid until %s.' => '',
+        'No token was requested yet.' => '',
+        'Last (refresh) token request failed.' => '',
+        'Refresh token has expired on %s.' => '',
+        'Refresh token has expired.' => '',
+        'Refresh token is valid until %s.' => '',
+        'Refresh token is valid (without expiration date).' => '',
+        'No refresh token was requested yet.' => '',
+        'Refresh token request is not configured.' => '',
+        'Request new token' => '',
+        'Delete this token and its configuration.' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessInstalled.tt
         'Manage %s' => '%s 관리',
         'Downgrade to ((OTRS)) Community Edition' => '',
         'Read documentation' => '설명서 읽기',
@@ -1333,7 +1535,8 @@ sub Data {
         'Congratulations, your %s is correctly installed and up to date!' =>
             '축하합니다. %s가 올바르게 설치되고 최신 상태입니다!',
 
-        # Template: AdminOTRSBusinessNotInstalled
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessNotInstalled.tt
+        'Upgrade to %s' => '%s (으)로 업그레이드',
         'Go to the OTRS customer portal' => 'OTRS 고객 포털로 이동하십시오.',
         '%s will be available soon. Please check again in a few days.' =>
             '%s는 곧 제공될 예정입니다. 며칠 후에 다시 확인하십시오.',
@@ -1348,12 +1551,12 @@ sub Data {
         'Please visit our customer portal and file a request.' => '고객 포털을 방문하여 요청을 제출하십시오.',
         'Everything else will be done as part of your contract.' => '그 밖의 모든 것은 계약의 일부로 수행됩니다.',
         'Your installed OTRS version is %s.' => '설치된 OTRS 버전은 %s입니다.',
-        'To install this package, you need to update to Znuny %s or higher.' =>
-            '이 패키지를 설치하려면 %s 이상의 Znuny로 업데이트해야합니다.',
+        'To install this package, you need to update to OTRS %s or higher.' =>
+            '',
         'To install this package, the Maximum OTRS Version is %s.' => '이 패키지를 설치하려면 최대 OTRS 버전은 %s입니다.',
         'To install this package, the required Framework version is %s.' =>
             '이 패키지를 설치하려면 필요한 Framework 버전이 %s입니다.',
-        'Why should I keep Znuny up to date?' => '왜 Znuny를 최신 상태로 유지해야합니까?',
+        'Why should I keep OTRS up to date?' => '',
         'You will receive updates about relevant security issues.' => '관련 보안 문제에 대한 업데이트가 제공됩니다.',
         'You will receive updates for all other relevant OTRS issues' => '다른 모든 관련 OTRS 문제에 대한 업데이트를 받게됩니다.',
         'With your existing contract you can only use a small part of the %s.' =>
@@ -1361,9 +1564,9 @@ sub Data {
         'If you would like to take full advantage of the %s get your contract upgraded now! Contact %s.' =>
             '%s를 최대한 활용하고 싶다면 계약을 지금 업그레이드하십시오! 연락처 %s',
 
-        # Template: AdminOTRSBusinessUninstall
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessUninstall.tt
         'Cancel downgrade and go back' => '다운그레이드 취소하고 돌아가기',
-        'Go to OTRS Package Manager' => 'OTRS 패키지 관리자로 이동하십시오.',
+        'Go to Package Manager' => '',
         'Sorry, but currently you can\'t downgrade due to the following packages which depend on %s:' =>
             '죄송하지만 현재 %s에 의존하는 다음 패키지 때문에 다운 그레이드 할 수 없습니다 :',
         'Vendor' => '공급 업체',
@@ -1380,7 +1583,7 @@ sub Data {
         'Ticket Attachment View' => '티켓 첨부보기',
         'The %s skin' => '%s 스킨',
 
-        # Template: AdminPGP
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminPGP.tt
         'PGP Management' => 'PGP 관리',
         'Add PGP Key' => 'PGP 키 추가',
         'PGP support is disabled' => 'PGP 지원이 비활성화되었습니다.',
@@ -1401,7 +1604,7 @@ sub Data {
         'Delete this key' => '이 키 삭제',
         'PGP key' => 'PGP 키',
 
-        # Template: AdminPackageManager
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
         'Package Manager' => '패키지 관리자',
         'Uninstall Package' => '패키지 제거',
         'Uninstall package' => '패키지 제거',
@@ -1410,18 +1613,18 @@ sub Data {
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             '이 패키지를 정말로 다시 설치 하시겠습니까? 수동으로 변경하면 손실됩니다.',
         'Go to updating instructions' => '',
+        'Go to znuny.org' => '',
         'package information' => '패키지 정보',
-        'Package installation requires a patch level update of Znuny.' => '패키지를 설치하려면 Znuny의 패치 레벨 업데이트가 필요합니다.',
-        'Package update requires a patch level update of Znuny.' => '패키지 업데이트에는 Znuny의 패치 수준 업데이트가 필요합니다.',
-        'If you are a OTRS Business Solution™ customer, please visit our customer portal and file a request.' =>
-            'OTRS Business Solution ™ 고객 인 경우 고객 포털을 방문하여 요청을 제출하십시오.',
-        'Please note that your installed Znuny version is %s.' => '설치된 OTRS 버전은 %s입니다.',
+        'Package installation requires a patch level update of Znuny.' =>
+            '패키지를 설치하려면 OTRS의 패치 레벨 업데이트가 필요합니다. ',
+        'Package update requires a patch level update of Znuny.' => '패키지 업데이트에는 OTRS의 패치 수준 업데이트가 필요합니다. ',
+        'Please note that your installed Znuny version is %s.' => '설치된 Znuny 버전은 %s입니다.',
         'To install this package, you need to update Znuny to version %s or newer.' =>
             '이 패키지를 설치하려면 Znuny를 버전 %s 이상으로 업데이트해야합니다.',
         'This package can only be installed on Znuny version %s or older.' =>
             '이 패키지는 Znuny 버전 %s 또는 그 이상에서만 설치할 수 있습니다.',
-        'This package can only be installed on Znuny version %s or newer.' =>
-            '',
+        'This package can only be installed on Znuny version %s.' => '',
+        'Why should I keep Znuny up to date?' => '왜 Znuny를 최신 상태로 유지해야합니까?',
         'You will receive updates for all other relevant Znuny issues.' =>
             '다른 모든 관련 Znuny 문제에 대한 업데이트가 제공됩니다.',
         'How can I do a patch level update if I don’t have a contract?' =>
@@ -1437,22 +1640,15 @@ sub Data {
             '데이터베이스가 %s 크기 이상의 패키지를 수락하는지 확인하십시오 (현재 패키지는 최대 %s MB 만 허용). 오류를 피하기 위해 데이터베이스의 max_allowed_packet 설정을 조정하십시오.',
         'Install' => '설치',
         'Update repository information' => '저장소 정보 업데이트',
-        'Cloud services are currently disabled.' => '클라우드 서비스는 현재 사용할 수 없습니다.',
-        'OTRS Verify™ can not continue!' => 'OTRS Verify ™를 계속할 수 없습니다!',
-        'Enable cloud services' => '클라우드 서비스 사용',
         'Update all installed packages' => '설치된 모든 패키지를 업데이트 하십시오.',
         'Online Repository' => '온라인 저장소',
         'Action' => '동작',
         'Module documentation' => '모듈 문서',
         'Local Repository' => '로컬 저장소',
-        'This package is verified by OTRSverify (tm)' => '이 패키지는 OTRSverify (tm)에 의해 검증됩니다.',
         'Uninstall' => '제거',
         'Package not correctly deployed! Please reinstall the package.' =>
             '패키지가 올바르게 배치되지 않았습니다! 패키지를 다시 설치하십시오.',
         'Reinstall' => '재설치',
-        'Features for %s customers only' => '%s 고객 전용 기능',
-        'With %s, you can benefit from the following optional features. Please make contact with %s if you need more information.' =>
-            '%s를 사용하면 다음과 같은 옵션 기능을 활용할 수 있습니다. 더 자세한 정보가 필요하시면 %s로 연락하십시오.',
         'Package Information' => '패키지 정보',
         'Download package' => '패키지 다운로드',
         'Rebuild package' => '패키지 다시 빌드',
@@ -1470,7 +1666,7 @@ sub Data {
         'File Differences for File %s' => '파일 %s의 파일 차이점',
         'File differences for file %s' => '파일 %s의 파일 차이점',
 
-        # Template: AdminPerformanceLog
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminPerformanceLog.tt
         'Performance Log' => '성능 로그',
         'Range' => '범위',
         'last' => '마지막',
@@ -1481,8 +1677,6 @@ sub Data {
         'Disable it here!' => '여기에서 사용 중지 하십시오!',
         'Logfile too large!' => '로그파일이 너무 큽니다!',
         'The logfile is too large, you need to reset it' => '로그 파일이 너무 커서 재설정해야 합니다.',
-        'Reset' => '리셋',
-        'Overview' => '개요',
         'Interface' => '인터페이스',
         'Requests' => '요청',
         'Min Response' => '최소 응답',
@@ -1494,7 +1688,7 @@ sub Data {
         'Max' => '최대',
         'Average' => '평균',
 
-        # Template: AdminPostMasterFilter
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminPostMasterFilter.tt
         'PostMaster Filter Management' => 'PostMaster 필터 관리',
         'Add PostMaster Filter' => 'PostMaster 필터 추가',
         'Edit PostMaster Filter' => '포스트 마스터 필터 편집',
@@ -1524,7 +1718,7 @@ sub Data {
         'The field needs to be a literal word.' => '필드는 문자 그대로의 단어여야 합니다.',
         'Header' => '머리글',
 
-        # Template: AdminPriority
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminPriority.tt
         'Priority Management' => '우선 순위 관리',
         'Add Priority' => '우선 순위 추가',
         'Edit Priority' => '우선 순위 편집',
@@ -1534,7 +1728,7 @@ sub Data {
             '이 우선 순위는 SysConfig 설정에 있으며 새로운 우선 순위를 가리 키도록 설정을 업데이트해야합니다!',
         'This priority is used in the following config settings:' => '이 우선 순위는 다음 구성 설정에서 사용됩니다.',
 
-        # Template: AdminProcessManagement
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
         'Process Management' => '공정 관리',
         'Filter for Processes' => '프로세스 필터링',
         'Filter for processes' => '',
@@ -1547,8 +1741,6 @@ sub Data {
         'Ready2Adopt Processes' => 'Ready2Adopt 프로세스',
         'Here you can activate Ready2Adopt processes showcasing our best practices. Please note that some additional configuration may be required.' =>
             '여기에서 우수 사례를 보여주는 Ready2Adopt 프로세스를 활성화 할 수 있습니다. 추가 구성이 필요할 수 있습니다.',
-        'Would you like to benefit from processes created by experts? Upgrade to %s to import some sophisticated Ready2Adopt processes.' =>
-            '전문가가 만든 프로세스의 혜택을 원하십니까? 일부 정교한 Ready2Adopt 프로세스를 가져 오려면 %s로 업그레이드하십시오.',
         'Import Ready2Adopt process' => 'Ready2Adopt 프로세스 가져 오기',
         'To create a new Process you can either import a Process that was exported from another system or create a complete new one.' =>
             '새 프로세스를 만들려면 다른 시스템에서 내 보낸 프로세스를 가져 오거나 완전히 새로운 프로세스를 생성 할 수 있습니다.',
@@ -1560,25 +1752,29 @@ sub Data {
         'Export Process Configuration' => '프로세스 구성 내보내기',
         'Copy Process' => '프로세스 복사',
 
-        # Template: AdminProcessManagementActivity
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Cancel & close' => '취소 및 닫기',
         'Go Back' => '돌아가기',
         'Please note, that changing this activity will affect the following processes' =>
             '이 활동을 변경하면 다음 프로세스에 영향을 미칩니다.',
         'Activity' => '활동',
         'Activity Name' => '활동명',
+        'Scope' => '',
+        'Scope Entity ID' => '',
+        'This field is required for activities with a scope.' => '',
         'Activity Dialogs' => '활동 대화상자',
         'You can assign Activity Dialogs to this Activity by dragging the elements with the mouse from the left list to the right list.' =>
             '마우스로 요소를 왼쪽 목록에서 오른쪽 목록으로 드래그하여 활동 대화 상자를 이 활동에 지정할 수 있습니다.',
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             '드래그 앤 드롭을 사용하여 목록 내의 요소를 정렬 할 수도 있습니다.',
         'Filter available Activity Dialogs' => '사용 가능한 필터 대화상자',
+        'Also show global %s' => '',
         'Available Activity Dialogs' => '사용 가능한 활동 대화상자',
         'Name: %s, EntityID: %s' => '이름 : %s, EntityID : %s',
         'Create New Activity Dialog' => '새 활동 만들기 대화 상자',
         'Assigned Activity Dialogs' => '할당된 활동 대화상자',
 
-        # Template: AdminProcessManagementActivityDialog
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
         'Please note that changing this activity dialog will affect the following activities' =>
             '이 활동 대화상자를 변경하면 다음 활동에 영향을 미칩니다.',
         'Please note that customer users will not be able to see or use the following fields: Owner, Responsible, Lock, PendingTime and CustomerID.' =>
@@ -1593,6 +1789,7 @@ sub Data {
         'The selected permission does not exist.' => '선택한 권한이 없습니다.',
         'Required Lock' => '필수 잠금',
         'The selected required lock does not exist.' => '선택한 필수 잠금이 없습니다.',
+        'This field is required for activitiy dialogs with a scope.' => '',
         'Submit Advice Text' => 'Submit Advice Text',
         'Submit Button Text' => '제출 버튼 텍스트',
         'You can assign Fields to this Activity Dialog by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1602,9 +1799,11 @@ sub Data {
         'Assigned Fields' => '할당된 필드',
         'Communication Channel' => '통신 채널',
         'Is visible for customer' => '고객에게 표시됩니다.',
+        'Text Template' => '텍스트 템플릿',
+        'Auto fill' => '',
         'Display' => '다스플레이',
 
-        # Template: AdminProcessManagementPath
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => '통로',
         'Edit this transition' => '이 전환 편집',
         'Transition Actions' => '전환 액션',
@@ -1615,7 +1814,7 @@ sub Data {
         'Create New Transition Action' => '새 전환 액션 만들기',
         'Assigned Transition Actions' => '할당된 전환 액션',
 
-        # Template: AdminProcessManagementProcessAccordion
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessAccordion.tt
         'Activities' => '활동',
         'Filter Activities...' => '활동 필터링...',
         'Create New Activity' => '새 활동 만들기',
@@ -1625,7 +1824,7 @@ sub Data {
         'Create New Transition' => '새 전환 만들기',
         'Filter Transition Actions...' => '필터 전환 액션...',
 
-        # Template: AdminProcessManagementProcessEdit
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
         'Edit Process' => '프로세스 편집',
         'Print process information' => '프로세스 정보 인쇄',
         'Delete Process' => '프로세스 삭제',
@@ -1661,11 +1860,11 @@ sub Data {
         'Do you really want to remove this transition from the canvas? This can only be undone by leaving this screen without saving.' =>
             '이 전환을 캔버스에서 정말로 제거 하시겠습니까? 저장하지 않고이 화면을 나가면 취소 할 수 있습니다.',
 
-        # Template: AdminProcessManagementProcessNew
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessNew.tt
         'In this screen, you can create a new process. In order to make the new process available to users, please make sure to set its state to \'Active\' and synchronize after completing your work.' =>
             '이 화면에서 새 프로세스를 만들 수 있습니다. 사용자가 새 프로세스를 사용할 수있게하려면 상태를 \'활성\'으로 설정하고 작업 완료 후 동기화하십시오.',
 
-        # Template: AdminProcessManagementProcessPrint
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessPrint.tt
         'cancel & close' => '취소 및 닫기',
         'Start Activity' => '활동 시작',
         'Contains %s dialog(s)' => '%s 대화 상자(s)를 포함합니다.',
@@ -1678,24 +1877,25 @@ sub Data {
         'Module name' => '모듈 이름',
         'Transition actions are not being used in this process.' => '전환 작업은 이 프로세스에서 사용되지 않습니다.',
 
-        # Template: AdminProcessManagementTransition
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementTransition.tt
         'Please note that changing this transition will affect the following processes' =>
             '이 전환을 변경하면 다음 프로세스에 영항을 미칩니다.',
         'Transition' => '전환',
         'Transition Name' => '전환 이름',
+        'This field is required for transitions with a scope.' => '',
 
-        # Template: AdminProcessManagementTransitionAction
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementTransitionAction.tt
         'Please note that changing this transition action will affect the following processes' =>
             '이 전환 작업을 변경하면 다음 프로세스에 영향을 미칩니다.',
         'Transition Action' => '전환 액션',
         'Transition Action Name' => '전환 액션 이름',
         'Transition Action Module' => '전환 액션 모듈',
+        'This field is required for transition actions with a scope.' => '',
         'Config Parameters' => '구성 매개 변수',
         'Add a new Parameter' => '새 매개 변수 추가',
         'Remove this Parameter' => '이 매개 변수 제거',
 
-        # Template: AdminQueue
-        'Queue Management' => '',
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
         'Add Queue' => '대기열 추가',
         'Edit Queue' => '대기열 편집',
         'Filter for Queues' => '대기열 필터링',
@@ -1735,7 +1935,7 @@ sub Data {
         'The signature for email answers.' => '이메일 답변을 위한 서명.',
         'This queue is used in the following config settings:' => '이 대기열은 다음 구성 설정에서 사용됩니다.',
 
-        # Template: AdminQueueAutoResponse
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueueAutoResponse.tt
         'Manage Queue-Auto Response Relations' => '대기열 관리 - 자동 응답 관계 관리',
         'Change Auto Response Relations for Queue' => '대기열에 대한 자동 응답관계 변경',
         'This filter allow you to show queues without auto responses' => '이 필터를 사용하면 자동응답 없이 대기열을 표시할 수 있습니다.',
@@ -1744,98 +1944,13 @@ sub Data {
         'Show All Queues' => '모든 대기열 표시',
         'Auto Responses' => '자동 응답',
 
-        # Template: AdminQueueTemplates
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueueTemplates.tt
         'Manage Template-Queue Relations' => '템플릿 - 대기열 관계 관리',
         'Filter for Templates' => '템플릿 필터링',
         'Filter for templates' => '',
         'Templates' => '템플릿',
 
-        # Template: AdminRegistration
-        'System Registration Management' => '시스템 등록 관리',
-        'Edit System Registration' => '시스템 등록 편집',
-        'System Registration Overview' => '시스템 등록 개요',
-        'Register System' => '시스템 등록',
-        'Validate OTRS-ID' => 'OTRS-ID 확인',
-        'Deregister System' => 'Deregister System',
-        'Edit details' => '세부 정보 수정',
-        'Show transmitted data' => '전송된 데이터 표시',
-        'Deregister system' => 'Deregister system',
-        'Overview of registered systems' => '등록된 시스템 개요',
-        'This system is registered with OTRS Group.' => '이 시스템은 OTRS 그룹에 등록되어 있습니다.',
-        'System type' => '시스템 유형',
-        'Unique ID' => '고유 ID',
-        'Last communication with registration server' => '등록 서버와의 마지막 통신',
-        'System Registration not Possible' => '시스템 등록이 불가능합니다.',
-        'Please note that you can\'t register your system if OTRS Daemon is not running correctly!' =>
-            'OTRS 데몬이 올바르게 실행되지 않으면 시스템을 등록 할 수 없습니다.',
-        'Instructions' => '명령',
-        'System Deregistration not Possible' => '시스템 등록 취소가 불가능합니다.',
-        'Please note that you can\'t deregister your system if you\'re using the %s or having a valid service contract.' =>
-            '%s를 사용 중이거나 유효한 서비스 계약이있는 경우 시스템 등록을 취소 할 수 없습니다.',
-        'OTRS-ID Login' => 'OTRS-ID 로그인',
-        'Read more' => '더 많은 것을 읽으십시오',
-        'You need to log in with your OTRS-ID to register your system.' =>
-            '시스템을 등록하려면 OTRS-ID로 로그인해야합니다.',
-        'Your OTRS-ID is the email address you used to sign up on the OTRS.com webpage.' =>
-            'OTRS-ID는 OTRS.com 웹 페이지에 가입 할 때 사용한 이메일 주소입니다.',
-        'Data Protection' => '데이터 보호',
-        'What are the advantages of system registration?' => '시스템 등록의 이점은 무엇입니까?',
-        'You will receive updates about relevant security releases.' => '관련 보안 릴리스에 대한 업데이트가 제공됩니다.',
-        'With your system registration we can improve our services for you, because we have all relevant information available.' =>
-            '시스템 등록을 통해 우리는 모든 관련 정보를 이용할 수 있으므로 귀하를 위해 서비스를 개선 할 수 있습니다.',
-        'This is only the beginning!' => '이것은 단지 시작일뿐입니다!',
-        'We will inform you about our new services and offerings soon.' =>
-            '조만간 새로운 서비스와 제품에 대해 알려 드리겠습니다.',
-        'Can I use OTRS without being registered?' => 'OTRS를 등록하지 않고도 사용할 수 있습니까?',
-        'System registration is optional.' => '시스템 등록은 선택 사항입니다.',
-        'You can download and use OTRS without being registered.' => '등록없이 OTRS를 다운로드하여 사용할 수 있습니다.',
-        'Is it possible to deregister?' => '등록 취소가 가능합니까?',
-        'You can deregister at any time.' => '언제든지 등록 취소 할 수 있습니다.',
-        'Which data is transfered when registering?' => '등록할 때 어떤 데이터가 전송됩니까?',
-        'A registered system sends the following data to OTRS Group:' => '등록 된 시스템은 다음 데이터를 OTRS 그룹에 보냅니다.',
-        'Fully Qualified Domain Name (FQDN), OTRS version, Database, Operating System and Perl version.' =>
-            'FQDN (정규화 된 도메인 이름), OTRS 버전, 데이터베이스, 운영 체제 및 Perl 버전',
-        'Why do I have to provide a description for my system?' => '왜 내 시스템에 대한 설명을 제공해야 합니까?',
-        'The description of the system is optional.' => '시스템 설명은 선택 사항 입니다.',
-        'The description and system type you specify help you to identify and manage the details of your registered systems.' =>
-            '지정하는 설명 W 시스템 유형은 등록 된 시스템의 세부 사항을 식별하고 관리하는 데 도움을줍니다.',
-        'How often does my OTRS system send updates?' => 'OTRS 시스템은 얼마나 자주 업데이트를 보내나요?',
-        'Your system will send updates to the registration server at regular intervals.' =>
-            '시스템은 일정한 간격으로 등록 서버에 업데이트를 보냅니다.',
-        'Typically this would be around once every three days.' => '일반적으로 3일에 1번 정도입니다.',
-        'If you deregister your system, you will lose these benefits:' =>
-            '시스템 등록을 취소하면 다음과 같은 이점을 잃게 됩니다.',
-        'You need to log in with your OTRS-ID to deregister your system.' =>
-            '시스템 등록을 취소하려면 OTRS-ID로 로그인해야합니다.',
-        'OTRS-ID' => 'OTRS-ID ',
-        'You don\'t have an OTRS-ID yet?' => '아직 OTRS-ID가 없습니까?',
-        'Sign up now' => '지금 등록하세요',
-        'Forgot your password?' => '비밀번호를 잊어 버렸습니까?',
-        'Retrieve a new one' => '새 항목 가져 오기',
-        'Next' => '다음',
-        'This data will be frequently transferred to OTRS Group when you register this system.' =>
-            '이 시스템을 등록 할 때이 데이터는 OTRS 그룹으로 자주 전송됩니다.',
-        'Attribute' => '속성',
-        'FQDN' => 'FQDN',
-        'OTRS Version' => 'OTRS 버전',
-        'Operating System' => '운영 체제',
-        'Perl Version' => '펄 버전',
-        'Optional description of this system.' => '이 시스템에 대한 선택적 설명.',
-        'Register' => '기록',
-        'Continuing with this step will deregister the system from OTRS Group.' =>
-            '이 단계를 계속하면 OTRS 그룹의 시스템 등록이 취소됩니다.',
-        'Deregister' => '위임자',
-        'You can modify registration settings here.' => '여기에서 등록 설정을 수정할 수 있습니다.',
-        'Overview of Transmitted Data' => '전송된 데이터의 개요',
-        'There is no data regularly sent from your system to %s.' => '시스템에서 %s로 정기적으로 전송되는 데이터는 없습니다.',
-        'The following data is sent at minimum every 3 days from your system to %s.' =>
-            '다음 데이터는 최소 3 일마다 시스템에서 %s로 전송됩니다.',
-        'The data will be transferred in JSON format via a secure https connection.' =>
-            '데이터는 안전한 https 연결을 통해 JSON 형식으로 전송됩니다.',
-        'System Registration Data' => '시스템 등록 데이터',
-        'Support Data' => '지원 데이터',
-
-        # Template: AdminRole
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => '역할 관리',
         'Add Role' => '역할 추가',
         'Edit Role' => '역할 편집',
@@ -1846,7 +1961,7 @@ sub Data {
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             '정의 된 역할이 없습니다. \'추가\'버튼을 사용하여 새 역할을 만드십시오.',
 
-        # Template: AdminRoleGroup
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRoleGroup.tt
         'Manage Role-Group Relations' => '역할 그룹 관계 관리',
         'Roles' => '역할',
         'Select the role:group permissions.' => '역할 : 그룹 권한을 선택 하십시오.',
@@ -1866,7 +1981,7 @@ sub Data {
         'Permissions to change the ticket priority in this group/queue.' =>
             '이 그룹 / 큐에서 티켓 우선 순위를 변경할 권한.',
 
-        # Template: AdminRoleUser
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRoleUser.tt
         'Manage Agent-Role Relations' => '에이전트 역할 관계 관리',
         'Add Agent' => '상담원 추가',
         'Filter for Agents' => '에이전트 필터링',
@@ -1874,14 +1989,14 @@ sub Data {
         'Agents' => '에이전트',
         'Manage Role-Agent Relations' => '역할 - 에이전트 관계 관리',
 
-        # Template: AdminSLA
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSLA.tt
         'SLA Management' => 'SLA 관리',
         'Edit SLA' => 'SLA 편집',
         'Add SLA' => 'SLA 추가',
         'Filter for SLAs' => 'SLA 필터링',
         'Please write only numbers!' => '숫자만 써주세요!',
 
-        # Template: AdminSMIME
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
         'S/MIME Management' => 'S / MIME 관리',
         'Add Certificate' => '인증서 추가',
         'Add Private Key' => '비공개 키 추가',
@@ -1916,12 +2031,12 @@ sub Data {
         'Filter for S/MIME certs' => 'S / MIME 인증서 필터링',
         'Relate this certificate' => '이 인증서 연관',
 
-        # Template: AdminSMIMECertRead
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIMECertRead.tt
         'S/MIME Certificate' => 'S / MIME 인증서',
         'Close this dialog' => '이 대화 상자를 닫습니다.',
         'Certificate Details' => '인증서 세부 정보',
 
-        # Template: AdminSalutation
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSalutation.tt
         'Salutation Management' => '인사말 관리',
         'Add Salutation' => '인사말 추가',
         'Edit Salutation' => '인사말 편집',
@@ -1930,14 +2045,14 @@ sub Data {
         'e. g.' => '예를들면',
         'Example salutation' => '예시 인사말',
 
-        # Template: AdminSecureMode
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => '보안 모드가 활성화되어야 합니다!',
         'Secure mode will (normally) be set after the initial installation is completed.' =>
             '보안 모드는 초기 설치가 완료된 후 (일반적으로) 설정됩니다.',
         'If secure mode is not activated, activate it via SysConfig because your application is already running.' =>
             '보안 모드가 활성화되어 있지 않으면 응용 프로그램이 이미 실행 중이기 때문에 SysConfig를 통해 활성화하십시오.',
 
-        # Template: AdminSelectBox
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSelectBox.tt
         'SQL Box' => 'SQL 박스',
         'Filter for Results' => '결과 필터링',
         'Filter for results' => '결과 필터링',
@@ -1956,7 +2071,7 @@ sub Data {
         '%s Results' => '결과 %s개',
         'Query is executed.' => '쿼리가 실행됩니다.',
 
-        # Template: AdminService
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
         'Service Management' => '서비스 관리',
         'Add Service' => '서비스 추가',
         'Edit Service' => '서비스 편집',
@@ -1964,7 +2079,7 @@ sub Data {
             '서비스 이름의 최대 길이는 200 자 (서브 서비스 포함)입니다.',
         'Sub-service of' => '의 서브 서비스',
 
-        # Template: AdminSession
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
         'Session Management' => '세션 관리',
         'Detail Session View for %s (%s)' => '%s (%s)에 대한 세부 세션보기',
         'All sessions' => '모든 세션',
@@ -1977,11 +2092,10 @@ sub Data {
         'Filter for Sessions' => '세션 필터링',
         'Filter for sessions' => '세션 필터링',
         'Session' => '세션',
-        'User' => '사용자',
         'Kill' => '종료',
         'Detail View for SessionID: %s - %s' => 'SessionID 세부 정보보기 : %s - %s',
 
-        # Template: AdminSignature
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSignature.tt
         'Signature Management' => '시그니처 관리',
         'Add Signature' => '시그니처 추가',
         'Edit Signature' => '시그니처 편집',
@@ -1989,7 +2103,7 @@ sub Data {
         'Filter for signatures' => '시그니처 필터링',
         'Example signature' => '서명의 예',
 
-        # Template: AdminState
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
         'State Management' => '주 관리',
         'Add State' => '주 추가',
         'Edit State' => '주 편집',
@@ -2004,35 +2118,22 @@ sub Data {
             '',
         'This state is used in the following config settings:' => '이 상태는 다음 구성 설정에서 사용됩니다.',
 
-        # Template: AdminSupportDataCollector
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
+        'Cloud services are currently disabled.' => '클라우드 서비스는 현재 사용할 수 없습니다.',
         'Sending support data to OTRS Group is not possible!' => 'OTRS 그룹에 지원 데이터를 보낼 수 없습니다!',
         'Enable Cloud Services' => '클라우드 서비스 사용',
-        'This data is sent to OTRS Group on a regular basis. To stop sending this data please update your system registration.' =>
-            '이 데이터는 정기적으로 OTRS 그룹에 전송됩니다. 이 데이터의 전송을 중지하려면 시스템 등록을 업데이트하십시오.',
-        'You can manually trigger the Support Data sending by pressing this button:' =>
-            '이 버튼을 눌러 Support Data를 수동으로 트리거 할 수 있습니다 :',
-        'Send Update' => '업데이트 보내기',
-        'Currently this data is only shown in this system.' => '현재 이 데이터는 이 시스템에만 표시됩니다.',
+        'Enable cloud services' => '클라우드 서비스 사용',
         'A support bundle (including: system registration information, support data, a list of installed packages and all locally modified source code files) can be generated by pressing this button:' =>
             '이 단추를 누르면 지원 번들 (시스템 등록 정보, 지원 데이터, 설치된 패키지 목록 및 모든 로컬로 수정 된 소스 코드 파일 포함)을 생성 할 수 있습니다.',
         'Generate Support Bundle' => '지원 번들 생성',
         'The Support Bundle has been Generated' => '지원 번들이 생성 되었습니다.',
-        'Please choose one of the following options.' => '다음 옵션 중 하나를 선택 하십시오.',
-        'Send by Email' => '이메일로 보내기',
-        'The support bundle is too large to send it by email, this option has been disabled.' =>
-            '지원 번들이 너무 커서 전자 메일로 보낼 수 없으면이 옵션이 비활성화되었습니다.',
-        'The email address for this user is invalid, this option has been disabled.' =>
-            '이 사용자의 이메일 주소가 유효하지 않습니다.이 옵션은 사용 중지되었습니다.',
-        'Sending' => '보내다',
-        'The support bundle will be sent to OTRS Group via email automatically.' =>
-            '지원 번들은 이메일을 통해 OTRS 그룹에 자동으로 전송됩니다.',
-        'Download File' => '다운로드 파일',
-        'A file containing the support bundle will be downloaded to the local system. Please save the file and send it to the OTRS Group, using an alternate method.' =>
-            '지원 번들이 들어있는 파일은 로컬 시스템에 다운로드됩니다. 파일을 저장하고 대체 방법을 사용하여 OTRS 그룹에 보내십시오.',
+        'A file containing the support bundle will be downloaded to the local system.' =>
+            '지원 번들이 들어있는 파일은 로컬 시스템에 다운로드됩니다.',
+        'Support Data' => '지원 데이터',
         'Error: Support data could not be collected (%s).' => '오류 : 지원 데이터를 수집 할 수 없습니다 (%s).',
         'Details' => '세부',
 
-        # Template: AdminSystemAddress
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
         'System Email Addresses Management' => '시스템 전자 메일 주소 관리',
         'Add System Email Address' => '시스템 전자 메일 주소 추가',
         'Edit System Email Address' => '시스템 전자 메일 주소 편집',
@@ -2050,7 +2151,7 @@ sub Data {
         'This system address cannot be set to invalid, because it is used in one or more queue(s) or auto response(s).' =>
             '',
 
-        # Template: AdminSystemConfiguration
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfiguration.tt
         'online administrator documentation' => '온라인 관리자 문서',
         'System configuration' => '시스템 설정',
         'Navigate through the available settings by using the tree in the navigation box on the left side.' =>
@@ -2063,7 +2164,7 @@ sub Data {
         'There are currently no settings available. Please make sure to run \'otrs.Console.pl Maint::Config::Rebuild\' before using the software.' =>
             '현재 사용할 수있는 설정이 없습니다. 소프트웨어를 사용하기 전에 \'otrs.Console.pl Maint :: Config :: Rebuild\'를 실행하십시오. ',
 
-        # Template: AdminSystemConfigurationDeployment
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationDeployment.tt
         'Changes Deployment' => '변경 사항 배포',
         'Help' => '도움',
         'This is an overview of all settings which will be part of the deployment if you start it now. You can compare each setting to its former state by clicking the icon on the top right.' =>
@@ -2091,11 +2192,11 @@ sub Data {
             '고급 모드로 전환하면 다른 사용자가 배포 가능한 설정을 변경할 수 있습니다.',
         'Deploy selected changes' => '선택한 변경 사항 배포',
 
-        # Template: AdminSystemConfigurationGroup
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationGroup.tt
         'This group doesn\'t contain any settings. Please try navigating to one of its sub groups.' =>
             '이 그룹에는 설정이 없습니다. 하위 그룹 중 하나를 탐색 해보십시오.',
 
-        # Template: AdminSystemConfigurationImportExport
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationImportExport.tt
         'Import & Export' => '수입 수출',
         'Upload a file to be imported to your system (.yml format as exported from the System Configuration module).' =>
             '시스템에 가져올 파일을 업로드하십시오 (시스템 구성 모듈에서 내 보낸 .yml 형식).',
@@ -2106,7 +2207,7 @@ sub Data {
         'Include user settings' => '사용자 설정 포함',
         'Export current configuration' => '현재 구성 내보내기',
 
-        # Template: AdminSystemConfigurationSearch
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationSearch.tt
         'Search for' => '검색',
         'Search for category' => '카테고리 검색',
         'Settings I\'m currently editing' => '설정 현재 편집 중입니다.',
@@ -2117,16 +2218,24 @@ sub Data {
         'You\'re currently not editing any settings.' => '현재 설정을 수정하지 않으셨습니다.',
         'You\'re currently editing %s setting(s).' => '현재 %s개의 설정 변경 중입니다.',
 
-        # Template: AdminSystemConfigurationSearchDialog
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationSearchDialog.tt
         'Category' => '범주',
         'Run search' => '검색 실행',
 
-        # Template: AdminSystemConfigurationView
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
         'View a custom List of Settings' => '사용자 정의 설정 목록보기',
         'View single Setting: %s' => '단일보기 설정 : %s',
         'Go back to Deployment Details' => '배치 세부 사항으로 돌아가기',
 
-        # Template: AdminSystemMaintenance
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
+        'System file support' => '',
+        'Delete cache' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
+        'Permissions' => '권한',
+        'Package' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
         'System Maintenance Management' => '시스템 유지 보수 관리',
         'Schedule New System Maintenance' => '새로운 시스템 유지 보수 일정 계획',
         'Filter for System Maintenances' => '시스템 유지 관리를 위한 필터',
@@ -2138,7 +2247,7 @@ sub Data {
         'Stop date' => '종료 날짜',
         'Delete System Maintenance' => '시스템 유지 보수 삭제',
 
-        # Template: AdminSystemMaintenanceEdit
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenanceEdit.tt
         'Edit System Maintenance' => '시스템 유지 보수 편집',
         'Edit System Maintenance Information' => '시스템 유지 보수 정보 편집',
         'Date invalid!' => '날짜가 잘못 되었습니다!',
@@ -2152,7 +2261,7 @@ sub Data {
         'Customer Sessions' => '고객 세션',
         'Kill all Sessions, except for your own' => '자기만의 것을 제외한 모든 세션을 죽이십시오.',
 
-        # Template: AdminTemplate
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplate.tt
         'Template Management' => '',
         'Add Template' => '템플릿 추가',
         'Edit Template' => '템플릿 편집',
@@ -2163,7 +2272,6 @@ sub Data {
         'Delete this entry' => '이 항목 삭제',
         'Do you really want to delete this template?' => '이 템플릿을 정말로 삭제 하시겠습니까?',
         'A standard template with this name already exists!' => '이 이름을 가진 표준 템플릿이 이미 존재합니다!',
-        'Template' => '템플릿',
         'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
             '',
         'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
@@ -2177,12 +2285,28 @@ sub Data {
         'The current ticket state is' => '현재 티켓 상태는 다음과 같습니다.',
         'Your email address is' => '귀하의 이메일 주소 : ',
 
-        # Template: AdminTemplateAttachment
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplateAttachment.tt
         'Manage Template-Attachment Relations' => '',
         'Toggle active for all' => '모든 사용자에게 전환 사용',
         'Link %s to selected %s' => '%s를 선택한 %s에 연결',
 
-        # Template: AdminType
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
+        'Ticket attribute relations' => '',
+        'Add ticket attribute relations' => '',
+        'Edit ticket attribute relations' => '',
+        'Import CSV or Excel file' => '',
+        'Attribute' => '속성',
+        'Last update' => '',
+        'Are you sure you want to delete entry \'%s\'?' => '',
+        'Download previously imported file' => '',
+        'The file needs to be in CSV (UTF-8) or Excel format. Both header columns need to contain the names of valid ticket attributes. The name of the uploaded file must be unique and must not be in use by another ticket attribute relations record.' =>
+            '',
+        'Add missing possible dynamic field values' => '',
+        'Attribute values' => '',
+        'If a value is colored red, it is missing from the possible values list of the dynamic field configuration.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminType.tt
         'Type Management' => '유형 관리',
         'Add Type' => '유형 추가',
         'Edit Type' => '유형 편집',
@@ -2193,7 +2317,7 @@ sub Data {
             '이 유형은 SysConfig 설정에 있으며, 새 유형을 가리 키도록 설정을 업데이트해야합니다!',
         'This type is used in the following config settings:' => '이 유형은 다음 구성 설정에서 사용됩니다.',
 
-        # Template: AdminUser
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminUser.tt
         'Agent Management' => '상담원 관리',
         'Edit Agent' => '상담원 수정',
         'Edit personal preferences for this agent' => '이 상담원의 개인 설정 수정',
@@ -2213,10 +2337,10 @@ sub Data {
         'Table above shows effective group permissions for the agent. The matrix takes into account all inherited permissions (e.g. via roles).' =>
             '위의 표는 에이전트에 대한 효과적인 그룹 사용 권한을 보여줍니다. 행렬은 상속 된 모든 권한 (예 : 역할을 통해)을 고려합니다.',
 
-        # Template: AdminUserGroup
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminUserGroup.tt
         'Manage Agent-Group Relations' => '상담원-그룹 관계 관리',
 
-        # Template: AgentAppointmentAgendaOverview
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentAgendaOverview.tt
         'Agenda Overview' => 'Agenda 개요',
         'Manage Calendars' => '캘린더 관리',
         'Add Appointment' => '약속 추가',
@@ -2229,11 +2353,11 @@ sub Data {
         'No calendars found. Please add a calendar first by using Manage Calendars page.' =>
             '캘린더가 없습니다. 먼저 캘린더 관리 페이지를 사용하여 캘린더를 추가하십시오.',
 
-        # Template: AgentAppointmentCalendarOverview
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
         'Add new Appointment' => '새 약속 추가',
         'Calendars' => '캘린더',
 
-        # Template: AgentAppointmentEdit
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
         'Basic information' => '기본 정보',
         'Date/Time' => '날짜/시간',
         'Invalid date!' => '잘못된 날짜',
@@ -2288,22 +2412,20 @@ sub Data {
         'December' => '12월',
         'Dec' => '12',
         'Relative point of time' => '상대 시간',
-        'Link' => '링크',
-        'Remove entry' => '삭제',
 
-        # Template: AgentCustomerInformationCenter
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerInformationCenter.tt
         'Customer Information Center' => '고객 정보 센터',
 
-        # Template: AgentCustomerInformationCenterSearch
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerInformationCenterSearch.tt
         'Customer User' => '고객 사용자',
 
-        # Template: AgentCustomerTableView
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerTableView.tt
         'Note: Customer is invalid!' => '고객이 바르지 않습니다.',
         'Start chat' => '채팅 시작',
         'Video call' => '비디오 전화',
         'Audio call' => '오디오 전화',
 
-        # Template: AgentCustomerUserAddressBook
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
         'Customer User Address Book' => '고객 사용자 주소록',
         'Search for recipients and add the results as \'%s\'.' => '수신자를 검색하고 결과를 \'%s\'로 추가하세요.',
         'Search template' => '템플릿 검색',
@@ -2317,19 +2439,18 @@ sub Data {
             '식별자가 \'(Customer)\'인 속성은 고객의 속성입니다',
         '(e. g. Term* or *Term*)' => '(예를 들어, 용어 * 또는 * 용어 *)',
 
-        # Template: AgentCustomerUserAddressBookOverview
-        'Select all' => '전체선택',
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBookOverview.tt
         'The customer user is already selected in the ticket mask.' => '티켓 마스크에서 고객 사용자가 이미 선택되었습니다.',
         'Select this customer user' => '이 고객 사용자 선택',
         'Add selected customer user to' => '선택한 고객 사용자를 추가',
 
-        # Template: AgentCustomerUserAddressBookOverviewNavBar
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBookOverviewNavBar.tt
         'Change search options' => '검색 옵션을 변경',
 
-        # Template: AgentCustomerUserInformationCenter
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserInformationCenter.tt
         'Customer User Information Center' => '고객 사용자 정보 센터',
 
-        # Template: AgentDaemonInfo
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
         'The OTRS Daemon is a daemon process that performs asynchronous tasks, e.g. ticket escalation triggering, email sending, etc.' =>
             'OTRS Daemon은 비동기 작업을 수행하는 데몬 프로세스입니다. 티켓 에스컬레이션 트리거링, 이메일 전송 등',
         'A running OTRS Daemon is mandatory for correct system operation.' =>
@@ -2342,10 +2463,10 @@ sub Data {
         'After 5 minutes, check that the OTRS Daemon is running in the system (\'bin/otrs.Daemon.pl status\').' =>
             '5 분 후, OTRS 데몬이 시스템에서 실행 중인지 확인하십시오 ( \'bin / otrs.Daemon.pl status\').',
 
-        # Template: AgentDashboard
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboard.tt
         'Dashboard' => '현황판',
 
-        # Template: AgentDashboardAppointmentCalendar
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardAppointmentCalendar.tt
         'New Appointment' => '새 약속',
         'Tomorrow' => '내일',
         'Soon' => '곧',
@@ -2353,17 +2474,17 @@ sub Data {
         'Start' => '시작',
         'none' => '없음',
 
-        # Template: AgentDashboardCalendarOverview
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCalendarOverview.tt
         'in' => '...에서',
 
-        # Template: AgentDashboardCommon
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
         'Save settings' => '설정 저장',
         'Close this widget' => '이 위젯 닫기',
         'more' => '더',
         'Available Columns' => '가능한 컬럼',
         'Visible Columns (order by drag & drop)' => '보여지는 컬럼(드래그드롭으로 순서정렬 가능)',
 
-        # Template: AgentDashboardCustomerIDList
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
         'Change Customer Relations' => '고객 관계 변경',
         'Open' => '진행중',
         'Closed' => '종료됨',
@@ -2371,33 +2492,33 @@ sub Data {
         '%s closed ticket(s) of %s' => '종료된 티켓 중 %s / %s',
         'Edit customer ID' => '고객 ID 수정',
 
-        # Template: AgentDashboardCustomerIDStatus
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDStatus.tt
         'Escalated tickets' => 'Escalated 티켓',
         'Open tickets' => '진행중 티켓',
         'Closed tickets' => '종료된 티켓',
         'All tickets' => '모든 티켓',
         'Archived tickets' => '보관된 티켓',
 
-        # Template: AgentDashboardCustomerUserInformation
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserInformation.tt
         'Note: Customer User is invalid!' => '노트: 고객 사용자가 바르지 않습니다.',
 
-        # Template: AgentDashboardCustomerUserList
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
         'Customer user information' => '고객 사용자 정보',
         'Phone ticket' => '폰 티켓',
         'Email ticket' => '이메일 티켓',
         'New phone ticket from %s' => '%s로 새 폰 티켓',
         'New email ticket to %s' => '새 이메일 티켓을 %s로',
 
-        # Template: AgentDashboardProductNotify
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardProductNotify.tt
         '%s %s is available!' => '%s %s 가능',
         'Please update now.' => '업데이트해주세요.',
         'Release Note' => '노트해 주세요.',
         'Level' => '레벨',
 
-        # Template: AgentDashboardRSSOverview
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardRSSOverview.tt
         'Posted %s ago.' => '작성한지 %s 지남',
 
-        # Template: AgentDashboardStats
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardStats.tt
         'The configuration for this statistic widget contains errors, please review your settings.' =>
             '이 통계 위젯의 구성에 오류가 있습니다. 설정을 검토하십시오.',
         'Download as SVG file' => 'SVG로 다운로드',
@@ -2412,7 +2533,7 @@ sub Data {
         'This statistic can currently not be used because its configuration needs to be corrected by the statistics administrator.' =>
             '이 통계는 통계 관리자가 구성을 수정해야하기 때문에 현재 사용할 수 없습니다.',
 
-        # Template: AgentDashboardTicketGeneric
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketGeneric.tt
         'Assigned to customer user' => '고객 사용자에게 할당 됨',
         'Accessible for customer user' => '고객 사용자가 엑세스 가능',
         'My locked tickets' => '내 잠긴 티켓',
@@ -2422,20 +2543,20 @@ sub Data {
         'Tickets in My Services' => '내 서비스의 티켓',
         'Service Time' => '서비스 시간',
 
-        # Template: AgentDashboardTicketQueueOverview
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketQueueOverview.tt
         'Total' => '총',
 
-        # Template: AgentDashboardUserOnline
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardUserOnline.tt
         'out of office' => '부재중',
 
-        # Template: AgentDashboardUserOutOfOffice
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardUserOutOfOffice.tt
         'until' => '까지',
 
-        # Template: AgentInfo
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentInfo.tt
         'To accept some news, a license or some changes.' => '일부 뉴스, 라이센스 또는 일부 변경 사항을 수락합니다.',
         'Yes, accepted.' => '예, 수락됨',
 
-        # Template: AgentLinkObject
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentLinkObject.tt
         'Manage links for %s' => '관리하려면 %s',
         'Create new links' => '새로운 링크 생성',
         'Manage existing links' => '링크 관리',
@@ -2444,12 +2565,12 @@ sub Data {
         'There are currently no links. Please click \'Create new Links\' on the top to link this item to other objects.' =>
             '현재 링크가 없습니다. 이 항목을 다른 개체에 링크하려면 상단의 \'새 링크 만들기\'를 클릭하십시오.',
 
-        # Template: AgentOTRSBusinessBlockScreen
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentOTRSBusinessBlockScreen.tt
         'Unauthorized usage of %s detected' => '%s의 무단 사용이 감지되었습니다.',
         'If you decide to downgrade to ((OTRS)) Community Edition, you will lose all database tables and data related to %s.' =>
             '',
 
-        # Template: AgentPreferences
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
         'Edit your preferences' => '환경설정 수정',
         'Personal Preferences' => '개인 환경 설정',
         'Preferences' => '환경설정',
@@ -2473,24 +2594,24 @@ sub Data {
         'This setting can currently not be saved.' => '이 설정은 현재 저장할 수 없습니다.',
         'This setting can currently not be saved' => '이 설정은 현재 저장할 수 없습니다.',
         'Save this setting' => '이 설정 저장',
-        'Did you know? You can help translating OTRS at %s.' => '아시나요? OTRS를 %s에서 번역 할 수 있습니다.',
+        'Did you know? You can help translating Znuny at %s.' => '',
 
-        # Template: SettingsList
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences/SettingsList.tt
         'Reset to default' => '기본값으로 재설정',
 
-        # Template: AgentPreferencesOverview
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferencesOverview.tt
         'Choose from the groups on the right to find the settings you\'d wish to change.' =>
             '오른쪽 그룹을 선택하여 변경하려는 설정을 찾으십시오.',
         'Did you know?' => '아시나요?',
         'You can change your avatar by registering with your email address %s on %s' =>
             '%s 에 %s의 이메일 주소로 등록하여 아바타를 변경할 수 있습니다.',
 
-        # Template: AgentSplitSelection
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentSplitSelection.tt
         'Target' => '목적',
         'Process' => '프로세스',
         'Split' => '분리',
 
-        # Template: AgentStatisticsAdd
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
         'Statistics Management' => '',
         'Add Statistics' => '통계 추가',
         'Read more about statistics in OTRS' => 'OTRS의 통계에 대해 자세히 알아보십시오.',
@@ -2503,17 +2624,17 @@ sub Data {
         'General Specification' => '일반 사양',
         'Create Statistic' => '통계 생성',
 
-        # Template: AgentStatisticsEdit
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsEdit.tt
         'Edit Statistics' => '',
         'Run now' => '지금 실행',
         'Statistics Preview' => '통계 미리보기',
         'Save Statistic' => '통계 저장',
 
-        # Template: AgentStatisticsImport
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsImport.tt
         'Import Statistics' => '',
         'Import Statistics Configuration' => '통계 설정 Import',
 
-        # Template: AgentStatisticsOverview
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
         'Statistics' => '통계',
         'Run' => '실행',
         'Edit statistic "%s".' => '통계 "%s"을 수정하십시오.',
@@ -2522,7 +2643,7 @@ sub Data {
         'Delete statistic "%s"' => '통계 "%s"  삭제',
         'Delete statistic %s' => '통계 "%s" 삭제',
 
-        # Template: AgentStatisticsView
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
         'Statistics Overview' => '통계 개요',
         'View Statistics' => '',
         'Statistics Information' => '통계 정보',
@@ -2535,7 +2656,7 @@ sub Data {
         'This statistic contains configuration errors and can currently not be used.' =>
             '이 통계에는 구성 오류가 있으며 현재 사용할 수 없습니다.',
 
-        # Template: AgentTicketActionCommon
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
         'Change Free Text of %s%s%s' => '%s%s%s의 자유 텍스트 변경 ',
         'Change Owner of %s%s%s' => '%s%s%s의 소유자 변경',
         'Close %s%s%s' => '닫기 %s%s%s',
@@ -2566,11 +2687,9 @@ sub Data {
         'Here you can select additional agents which should receive a notification regarding the new article.' =>
             '여기에서 새 기사와 관련된 알림을 받을 추가 상담원을 선택할 수 있습니다.',
         'Text will also be received by' => '다음에 의해 텍스트도 받게 됩니다.',
-        'Text Template' => '텍스트 템플릿',
         'Setting a template will overwrite any text or attachment.' => '템플릿을 설정하면 텍스트나 첨부파일을 덮어씁니다.',
-        'Invalid time!' => '시간이 잘못 되었습니다!',
 
-        # Template: AgentTicketBounce
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
         'Bounce %s%s%s' => '바운스 %s%s%s',
         'Bounce to' => '바운스',
         'You need a email address.' => '이메일 주소가 필요합니다.',
@@ -2580,7 +2699,7 @@ sub Data {
         'Inform sender' => '발신자에게 알리기',
         'Send mail' => '이메일 전송',
 
-        # Template: AgentTicketBulk
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBulk.tt
         'Ticket Bulk Action' => '티켓 일괄 작업',
         'Send Email' => '이메일 전송',
         'Merge' => '합침',
@@ -2592,7 +2711,7 @@ sub Data {
         'Unlock tickets' => '티켓 잠금 해제',
         'Execute Bulk Action' => '일괄 작업 실행',
 
-        # Template: AgentTicketCompose
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
         'Compose Answer for %s%s%s' => '%s%s%s에 대한 답변 작성',
         'This address is registered as system address and cannot be used: %s' =>
             '이 주소는 시스템 주소로 등록되어 있으므로 사용할 수 없습니다 : %s',
@@ -2609,12 +2728,12 @@ sub Data {
         'Remove Bcc' => '숨은 참조 제거',
         'Date Invalid!' => '잘못된 날짜!',
 
-        # Template: AgentTicketCustomer
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
         'Change Customer of %s%s%s' => '고객을 %s%s%s로 변경하십시오.',
         'Customer Information' => '고객 정보',
         'Customer user' => '고객 사용자',
 
-        # Template: AgentTicketEmail
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
         'Create New Email Ticket' => '새 전자 메일 티켓 만들기',
         'Example Template' => '템플릿 예제',
         'From queue' => '대기열에서',
@@ -2624,13 +2743,13 @@ sub Data {
         'Remove Ticket Customer User' => '티켓 고객 사용자 제거',
         'Get all' => '모든 것을 가져라',
 
-        # Template: AgentTicketEmailOutbound
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
         'Outbound Email for %s%s%s' => '%s%s%s의 발신 이메일',
 
-        # Template: AgentTicketEmailResend
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => '%s%s%s에게 이메일 다시 보내기',
 
-        # Template: AgentTicketEscalation
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
         'Ticket %s: first response time is over (%s/%s)!' => '티켓 %s: 첫 번째 응답 시간이 끝났습니다 (%s/ %s)!',
         'Ticket %s: first response time will be over in %s/%s!' => '티켓 %s : 첫 번째 응답 시간은 %s/ %s로 끝납니다!',
         'Ticket %s: update time is over (%s/%s)!' => '티켓 %s : 업데이트 시간이 끝났습니다 (%s / %s)!',
@@ -2638,17 +2757,17 @@ sub Data {
         'Ticket %s: solution time is over (%s/%s)!' => '티켓 %s : 해결 시간이 끝났습니다 (%s / %s)!',
         'Ticket %s: solution time will be over in %s/%s!' => '티켓 %s : 해결 시간은 %s / %s로 끝납니다!',
 
-        # Template: AgentTicketForward
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketForward.tt
         'Forward %s%s%s' => '전달 %s%s%s',
 
-        # Template: AgentTicketHistory
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
         'History of %s%s%s' => '%s%s%s의 기록',
         'Filter for history items' => '기록 항목 필터링',
         'Expand/collapse all' => '모두 펼치기 / 접기',
         'CreateTime' => 'Created',
         'Article' => '조',
 
-        # Template: AgentTicketMerge
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMerge.tt
         'Merge %s%s%s' => '병합 %s%s%s',
         'Merge Settings' => '병합 설정',
         'You need to use a ticket number!' => '티켓 번호를 사용해야합니다!',
@@ -2659,12 +2778,12 @@ sub Data {
         'Inform Sender' => 'Inform Sender',
         'Need a valid email address.' => '유효한 이메일 주소가 필요합니다.',
 
-        # Template: AgentTicketMove
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
         'Move %s%s%s' => '%s%s%s 로 이동',
         'New Queue' => '새로운 대기열',
         'Move' => '이동',
 
-        # Template: AgentTicketOverviewMedium
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
         'No ticket data found.' => '티켓이 없습니다.',
         'Open / Close ticket action menu' => '티켓 열기 / 닫기 액션 메뉴',
         'Select this ticket' => '이 티켓 선택',
@@ -2675,18 +2794,19 @@ sub Data {
         'Move ticket to a different queue' => '티켓을 다른 대기열로 이동',
         'Change queue' => '대기열 변경',
 
-        # Template: AgentTicketOverviewNavBar
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
         'Remove active filters for this screen.' => '이 화면에서 활성 필터를 제거하십시오.',
+        'Remove mention' => '',
         'Tickets per page' => '페이지 당 티켓',
 
-        # Template: AgentTicketOverviewPreview
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
         'Missing channel' => '누란된 채널',
 
-        # Template: AgentTicketOverviewSmall
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewSmall.tt
         'Reset overview' => '개요 재설정',
         'Column Filters Form' => '열 필터 양식',
 
-        # Template: AgentTicketPhone
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhone.tt
         'Split Into New Phone Ticket' => '새로운 폰 티켓으로 분리',
         'Save Chat Into New Phone Ticket' => '채팅을 새로운 폰 티켓으로 저장',
         'Create New Phone Ticket' => '새로운 폰 티켓 생성',
@@ -2695,21 +2815,21 @@ sub Data {
         'Chat protocol' => '채팅 프로토콜',
         'The chat will be appended as a separate article.' => '채팅은 별도의 기사로 추가됩니다.',
 
-        # Template: AgentTicketPhoneCommon
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhoneCommon.tt
         'Phone Call for %s%s%s' => '%s%s%s 통화 중입니다.',
 
-        # Template: AgentTicketPlain
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPlain.tt
         'View Email Plain Text for %s%s%s' => '%s%s%s에 대한 이메일보기 일반 텍스트',
         'Plain' => '명백한',
         'Download this email' => '이 이메일 다운로드',
 
-        # Template: AgentTicketProcess
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcess.tt
         'Create New Process Ticket' => '새 프로세스 티켓 만들기',
 
-        # Template: AgentTicketProcessSmall
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcessSmall.tt
         'Enroll Ticket into a Process' => '티켓을 프로세스에 등록',
 
-        # Template: AgentTicketSearch
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketSearch.tt
         'Profile link' => '프로필 링크',
         'Output' => '산출',
         'Fulltext' => 'Fulltext',
@@ -2741,7 +2861,7 @@ sub Data {
         'Ticket Escalation Time (between)' => '티켓 에스컬레이션 시간 (사이)',
         'Archive Search' => '아카이브 검색',
 
-        # Template: AgentTicketZoom
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
         'Sender Type' => '발신자 유형',
         'Save filter settings as default' => '필터 설정을 기본값으로 저장',
         'Event Type' => '이벤트 유형',
@@ -2774,13 +2894,13 @@ sub Data {
         'No more events found. Please try changing the filter settings.' =>
             '이벤트가 더이상 없습니다. 필터 설정을 변경하십시오.',
 
-        # Template: Chat
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/Chat.tt
         '#%s' => '#%s',
         'via %s' => '%s를 통해',
         'by %s' => '%s에 의해',
         'Toggle article details' => '기사 세부 정보 토글',
 
-        # Template: MIMEBase
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
         'This message is being processed. Already tried to send %s time(s). Next try will be %s.' =>
             '이 메시지는 처리 중입니다. 이미 %s의 시간(s)을 보냈습니다. 다음 시도는 %s입니다.',
         'To open links in the following article, you might need to press Ctrl or Cmd or Shift key while clicking the link (depending on your browser and OS).' =>
@@ -2791,10 +2911,13 @@ sub Data {
         'Unknown' => '알 수 없는',
         'View' => '전망',
 
-        # Template: LinkTable
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
         'Linked Objects' => '연결된 개체',
 
-        # Template: TicketInformation
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/MentionsTable.tt
+        'Mentions' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => '아카이브',
         'This ticket is archived.' => '이 티켓은 보관 처리됩니다.',
         'Note: Type is invalid!' => '참고 : 유형이 유효하지 않습니다!',
@@ -2803,7 +2926,7 @@ sub Data {
         '%s Ticket(s)' => '%s개 티켓',
         'Accounted time' => '소요 시간',
 
-        # Template: Invalid
+        # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
         'Preview of this article is not possible because %s channel is missing in the system.' =>
             '시스템에서 %s의 채널이 누락되었으므로이 기사의 미리보기를 사용할 수 없습니다.',
         'This feature is part of the %s. Please contact us at %s for an upgrade.' =>
@@ -2811,25 +2934,32 @@ sub Data {
         'Please re-install %s package in order to display this article.' =>
             '이 기사를 표시하려면 %s의 패키지를 다시 설치하십시오.',
 
-        # Template: AttachmentBlocker
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AttachmentBlocker.tt
         'To protect your privacy, remote content was blocked.' => '개인 정보를 보호하기 위해 원격 콘텐츠가 차단되었습니다.',
         'Load blocked content.' => '차단된 콘텐츠를 로드합니다.',
 
-        # Template: Breadcrumb
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => '홈',
         'Back to admin overview' => '관리자 개요로 돌아가기',
 
-        # Template: CloudServicesDisabled
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
+        'Ticket Creation' => '',
+        'Link' => '링크',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Link.tt
+        'Remove entry' => '삭제',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CloudServicesDisabled.tt
         'This Feature Requires Cloud Services' => '이 기능에는 클라우드 서비스가 필요합니다.',
         'You can' => '너는 할 수있다.',
         'go back to the previous page' => '이전 페이지로 돌아가기',
 
-        # Template: CustomerAccept
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerAccept.tt
         'Dear Customer,' => '친애하는 고객,',
         'thank you for using our services.' => '우리의 서비스를 이용해주셔서 감사합니다.',
         'Yes, I accept your license.' => '',
 
-        # Template: TicketCustomerIDSelection
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerCompany/TicketCustomerIDSelection.tt
         'The customer ID is not changeable, no other customer ID can be assigned to this ticket.' =>
             '고객 ID는 변경할 수 없으며이 티켓에 다른 고객 ID를 지정할 수 없습니다.',
         'First select a customer user, then you can select a customer ID to assign to this ticket.' =>
@@ -2838,22 +2968,21 @@ sub Data {
         'From all Customer IDs' => '모든 고객 ID에서',
         'From assigned Customer IDs' => '할당 된 고객 ID로부터',
 
-        # Template: CustomerError
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'An Error Occurred' => '에러 발생됨',
         'Error Details' => '오류 정보',
         'Traceback' => '역 추적',
 
-        # Template: CustomerFooter
-        '%s powered by %s™' => '%s powered by %s™',
-        'Powered by %s™' => 'Powered by %s™',
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
+        'Powered by %s' => '',
 
-        # Template: CustomerFooterJS
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooterJS.tt
         '%s detected possible network issues. You could either try reloading this page manually or wait until your browser has re-established the connection on its own.' =>
             '',
         'The connection has been re-established after a temporary connection loss. Due to this, elements on this page could have stopped to work correctly. In order to be able to use all elements correctly again, it is strongly recommended to reload this page.' =>
             '연결이 일시적으로 끊어진 후 다시 설정되었습니다. 이로 인해이 페이지의 요소가 올바르게 작동하지 않을 수 있습니다. 모든 요소를 ​​올바르게 다시 사용할 수있게하려면이 페이지를 다시로드하는 것이 좋습니다.',
 
-        # Template: CustomerLogin
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
         'JavaScript Not Available' => 'JavaScript를 사용할 수 없음',
         'In order to experience this software, you\'ll need to enable JavaScript in your browser.' =>
             '이 소프트웨어를 사용하려면 브라우저에서 JavaScript를 활성화해야합니다.',
@@ -2873,6 +3002,7 @@ sub Data {
         'Your 2 Factor Token' => '당신의 2 팩터 토큰',
         'Log In' => '로그인',
         'Not yet registered?' => '아직 등록되지 않았습니까?',
+        'Sign up now' => '지금 등록하세요',
         'Back' => '뒤',
         'Request New Password' => '새 비밀번호 요청',
         'Your User Name' => '사용자 이름',
@@ -2884,20 +3014,20 @@ sub Data {
         'Your Last Name' => '당신의 성',
         'Your email address (this will become your username)' => '귀하의 이메일 주소 (귀하의 사용자 이름이됩니다)',
 
-        # Template: CustomerNavigationBar
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerNavigationBar.tt
         'Incoming Chat Requests' => '들어오는 채팅 요청',
         'Edit personal preferences' => '개인 환경 설정 편집',
         'Logout %s' => '로그 아웃 %s',
 
-        # Template: CustomerTicketMessage
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
         'Service level agreement' => '서비스 수준 계약',
 
-        # Template: CustomerTicketOverview
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketOverview.tt
         'Welcome!' => '환영!',
         'Please click the button below to create your first ticket.' => '첫 번째 티켓을 만드려면 아래 버튼을 클릭하십시오.',
         'Create your first ticket' => '첫 번째 티켓 만들기',
 
-        # Template: CustomerTicketSearch
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => '프로필',
         'e. g. 10*5155 or 105658*' => '이자형. 지. 10 * 5155 또는 105658 *',
         'CustomerID' => '고객 ID',
@@ -2918,44 +3048,38 @@ sub Data {
         'Pick a profile name' => '프로필 이름 선택',
         'Output to' => '출력',
 
-        # Template: CustomerTicketSearchResultShort
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearchResultShort.tt
         'of' => '의',
         'Page' => '페이지',
         'Search Results for' => '에 대한 검색 결과',
         'Remove this Search Term.' => '이 검색 용어를 제거하십시오.',
 
-        # Template: CustomerTicketZoom
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketZoom.tt
         'Start a chat from this ticket' => '이 티켓에서 채팅 시작',
         'Next Steps' => '다음 단계',
         'Reply' => '댓글',
 
-        # Template: Chat
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketZoom/ArticleRender/Chat.tt
         'Expand article' => '기사 펼치기',
 
-        # Template: CustomerWarning
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerWarning.tt
         'Warning' => '경고',
 
-        # Template: DashboardEventsTicketCalendar
+        # TT Template: Kernel/Output/HTML/Templates/Standard/DashboardEventsTicketCalendar.tt
         'Event Information' => '이벤트 정보',
         'Ticket fields' => '타켓 필드',
 
-        # Template: Error
-        'Really a bug? 5 out of 10 bug reports result from a wrong or incomplete installation of OTRS.' =>
-            '정말 버그입니까? 10가지 중 5 가지 버그 리포트는 OTRS의 잘못되었거나 불완전한 설치로 인해 발생합니다.',
-        'With %s, our experts take care of correct installation and cover your back with support and periodic security updates.' =>
-            '%s의 비용으로 전문가가 정확한 설치를 처리하고 지원 및 정기 보안 업데이트로 등을 제공합니다.',
-        'Contact our service team now.' => '지금 서비스 팀에 문의하십시오.',
-        'Send a bugreport' => 'bugreport 보내기',
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
         'Expand' => '넓히다',
 
-        # Template: AttachmentList
+        # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
         'Click to delete this attachment.' => '첨부파일을 삭제하려면 클릭하십시오.',
 
-        # Template: DraftButtons
+        # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/DraftButtons.tt
         'Update draft' => '초안 업데이트',
         'Save as new draft' => '새 초안으로 저장',
 
-        # Template: DraftNotifications
+        # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/DraftNotifications.tt
         'You have loaded the draft "%s".' => '"%s"초안을 로드했습니다.',
         'You have loaded the draft "%s". You last changed it %s.' => '"%s"초안을 로드했습니다. 마지막으로 %s로 변경했습니다.',
         'You have loaded the draft "%s". It was last changed %s by %s.' =>
@@ -2963,15 +3087,14 @@ sub Data {
         'Please note that this draft is outdated because the ticket was modified since this draft was created.' =>
             '이 초안이 작성된 이후 티켓이 수정되었기 때문에 이 초안은 구식입니다.',
 
-        # Template: Header
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Header.tt
         'View notifications' => '알림보기',
-        'Notifications' => '알림',
-        'Notifications (OTRS Business Solution™)' => '알림 (OTRS Business Solution ™)',
         'Personal preferences' => '개인 환경설정',
         'Logout' => '로그아웃',
         'You are logged in as' => '귀하는 다음 계정으로 로그인했습니다.',
+        'Last viewed' => '',
 
-        # Template: Installer
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => '자바스트립트를 사용할 수 없습니다.',
         'Step %s' => '%s 단계',
         'License' => '특허',
@@ -2979,17 +3102,12 @@ sub Data {
         'General Specifications and Mail Settings' => '일반 사양 및 메일 설정',
         'Finish' => '끝',
         'Welcome to %s' => '%s에 오신 것을 환영합니다.',
-        'Germany' => '',
         'Phone' => '전화',
-        'United States' => '',
-        'Mexico' => '',
-        'Hungary' => '',
-        'Brazil' => '',
-        'Singapore' => '',
-        'Hong Kong' => '',
         'Web site' => '웹 사이트',
+        'Community' => '',
+        'Next' => '다음',
 
-        # Template: InstallerConfigureMail
+        # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => '아웃 바운드 메일 구성',
         'Outbound mail type' => '발신 메일 유형',
         'Select outbound mail type.' => '아웃바운드 메일 유형을 선택하십시오.',
@@ -3016,17 +3134,17 @@ sub Data {
         'Check mail configuration' => '메일 구성 확인',
         'Skip this step' => '이 단계를 건너뛰기',
 
-        # Template: InstallerDBResult
+        # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => '끝난',
         'Error' => '오류',
         'Database setup successful!' => '데이터베이스 설정이 설공적으로 완료되었습니다!',
 
-        # Template: InstallerDBStart
+        # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
         'Install Type' => '설치 유형',
         'Create a new database for OTRS' => 'OTRS를위한 새로운 데이터베이스 생성',
         'Use an existing database for OTRS' => 'OTRS에 기존 데이터베이스 사용',
 
-        # Template: InstallerDBmssql
+        # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmssql.tt
         'If you have set a root password for your database, it must be entered here. If not, leave this field empty.' =>
             '데이터베이스의 루트 암호를 설정 한 경우 여기에 입력해야합니다. 그렇지 않은 경우이 필드를 비워 두십시오.',
         'Database name' => '데이터베이스 이름',
@@ -3039,27 +3157,27 @@ sub Data {
             '제한된 권한을 가진 새로운 데이터베이스 사용자가이 OTRS 시스템에 대해 생성됩니다.',
         'Repeat Password' => '비밀번호 반복',
         'Generated password' => '생성된 암호',
+        'Database' => '데이터베이스',
 
-        # Template: InstallerDBmysql
+        # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmysql.tt
         'Passwords do not match' => '비밀번호가 일치하지 않습니다.',
 
-        # Template: InstallerDBoracle
+        # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBoracle.tt
         'SID' => 'SID',
         'Port' => '포트',
 
-        # Template: InstallerFinish
+        # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerFinish.tt
         'To be able to use OTRS you have to enter the following line in your command line (Terminal/Shell) as root.' =>
             'OTRS를 사용하려면 명령 줄 (터미널 / 쉘)에 다음 행을 루트로 입력해야합니다.',
         'Restart your webserver' => '웹 서버 다시 시작',
         'After doing so your OTRS is up and running.' => '그렇게하면 OTRS가 실행됩니다.',
         'Start page' => '시작 페이지',
-        'Your OTRS Team' => 'OTRS 팀',
 
-        # Template: InstallerLicense
+        # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerLicense.tt
         'Don\'t accept license' => '면허를 받지마라.',
         'Accept license and continue' => '라이센스 수락 및 계속',
 
-        # Template: InstallerSystem
+        # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerSystem.tt
         'SystemID' => '시스템 ID',
         'The identifier of the system. Each ticket number and each HTTP session ID contain this number.' =>
             '시스템 식별자. 각 티켓 ​​번호와 각 HTTP 세션 ID에는이 번호가 들어 있습니다.',
@@ -3079,74 +3197,73 @@ sub Data {
         'Email addresses that are manually entered are checked against the MX records found in DNS. Don\'t use this option if your DNS is slow or does not resolve public addresses.' =>
             '수동으로 입력 한 전자 메일 주소는 DNS에있는 MX 레코드와 비교하여 검사됩니다. DNS가 느리거나 공개 주소를 확인하지 못하면이 옵션을 사용하지 마십시오.',
 
-        # Template: LinkObject
+        # TT Template: Kernel/Output/HTML/Templates/Standard/LinkObject.tt
         'Delete link' => '링크 삭제',
         'Delete Link' => '링크 삭제',
         'Object#' => '목적#',
         'Add links' => '링크 추가',
         'Delete links' => '링크 삭제',
 
-        # Template: Login
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
         'Lost your password?' => '비밀번호를 잊어 버렸습니까?',
         'Back to login' => '로그인으로 돌아 가기',
 
-        # Template: MetaFloater
+        # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '미리보기 콘텐츠 크기 조정',
         'Open URL in new tab' => '새 탭에서 URL 열기',
         'Close preview' => '미리보기 닫기',
         'A preview of this website can\'t be provided because it didn\'t allow to be embedded.' =>
             '이 웹 사이트의 미리보기는 삽입할 수 없기 때문에 제공할 수 없습니다.',
 
-        # Template: MobileNotAvailableWidget
+        # TT Template: Kernel/Output/HTML/Templates/Standard/MobileNotAvailableWidget.tt
         'Feature not Available' => '사용할 수없는 기능',
         'Sorry, but this feature of OTRS is currently not available for mobile devices. If you\'d like to use it, you can either switch to desktop mode or use your regular desktop device.' =>
             '죄송합니다. 현재 OTRS의이 기능은 휴대 기기에서 사용할 수 없습니다. 이 기능을 사용하려면 데스크톱 모드로 전환하거나 일반 데스크톱 장치를 사용할 수 있습니다.',
 
-        # Template: Motd
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Motd.tt
         'Message of the Day' => '오늘의 메시지',
         'This is the message of the day. You can edit this in %s.' => '오늘의 메시지입니다. 이것을 %s에서 편집 할 수 있습니다.',
 
-        # Template: NoPermission
+        # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => '불충분한 권리',
         'Back to the previous page' => '이전 페이지로 돌아가기',
 
-        # Template: Alert
+        # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '경보',
         'Powered by' => 'Powered by',
 
-        # Template: Pagination
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
         'Show first page' => '첫 페이지 표시',
         'Show previous pages' => '이전 페이지 보기',
         'Show page %s' => '%s페이지보기',
         'Show next pages' => '다음 페이지보기',
         'Show last page' => '마지막 페이지 표시',
 
-        # Template: PictureUpload
+        # TT Template: Kernel/Output/HTML/Templates/Standard/PictureUpload.tt
         'Need FormID!' => 'FormID가 필요합니다!',
         'No file found!' => '파일을 찾을 수 없습니다!',
         'The file is not an image that can be shown inline!' => '파일은 인라인으로 표시할 수 있는 이미지가 아닙니다!',
 
-        # Template: PreferencesNotificationEvent
+        # TT Template: Kernel/Output/HTML/Templates/Standard/PreferencesNotificationEvent.tt
         'No user configurable notifications found.' => '사용자가 구성할 수 있는 알림이 없습니다.',
         'Receive messages for notification \'%s\' by transport method \'%s\'.' =>
             '\'%s\' 알림 메시지를 전송 방법 \'%s\'을 통해 수신합니다.',
 
-        # Template: ActivityDialogHeader
+        # TT Template: Kernel/Output/HTML/Templates/Standard/ProcessManagement/ActivityDialogHeader.tt
         'Process Information' => '프로세스 정보',
         'Dialog' => '대화',
 
-        # Template: Article
+        # TT Template: Kernel/Output/HTML/Templates/Standard/ProcessManagement/Article.tt
         'Inform Agent' => '에이전트에게 알리기',
 
-        # Template: PublicDefault
+        # TT Template: Kernel/Output/HTML/Templates/Standard/PublicDefault.tt
         'Welcome' => '환영',
         'This is the default public interface of OTRS! There was no action parameter given.' =>
             '이것은 OTRS의 기본 공용 인터페이스입니다! 주어진 행동 매개 변수가 없습니다.',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             '공용 인터페이스가있는 FAQ 모듈과 같이 (패키지 관리자)를 통해 사용자 정의 공용 모듈을 설치할 수 있습니다.',
 
-        # Template: GeneralSpecificationsWidget
-        'Permissions' => '권한',
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/GeneralSpecificationsWidget.tt
         'You can select one or more groups to define access for different agents.' =>
             '하나 이상의 그룹을 선택하여 다른 에이전트에 대한 엑세스를 정의할 수 있습니다.',
         'Result formats' => '결과 포맷',
@@ -3168,7 +3285,7 @@ sub Data {
             '대시 보드 위젯을 활성화하면 대시 보드에서 이 통계에 대한 캐싱이 활성화됩니다.',
         'If set to invalid end users can not generate the stat.' => '무효로 설정된 경우 최종사용자는 통계를 생성할 수 없습니다.',
 
-        # Template: PreviewWidget
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/PreviewWidget.tt
         'There are problems in the configuration of this statistic:' => '이 통계 구성에 문제가 있습니다.',
         'You may now configure the X-axis of your statistic.' => '이제 통계의 X 축을 구성 할 수 있습니다.',
         'This statistic does not provide preview data.' => '이 통계는 미리보기 데이터를 제공하지 않습니다.',
@@ -3181,7 +3298,7 @@ sub Data {
         'Y-axis' => 'Y축',
         'Configure Filter' => '필터 구성',
 
-        # Template: RestrictionsWidget
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/RestrictionsWidget.tt
         'Please select only one element or turn off the button \'Fixed\'.' =>
             '요소 하나만 선택하거나 \'고정\'버튼을 해제하십시오.',
         'Absolute period' => '절대 기간',
@@ -3192,7 +3309,7 @@ sub Data {
         'Do not allow changes to this element when the statistic is generated.' =>
             '통계가 생성될 때 이 요소에 대한 변경을 허용하지 마십시오.',
 
-        # Template: StatsParamsWidget
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/StatsParamsWidget.tt
         'Format' => '체재',
         'Exchange Axis' => '교환 축',
         'Configurable Params of Static Stat' => '정적 통계의 구성 가능한 매개 변수',
@@ -3201,21 +3318,21 @@ sub Data {
         'show more' => '자세히보기',
         'show less' => '적은 것을 보여준다',
 
-        # Template: D3
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/StatsResultRender/D3.tt
         'Download SVG' => 'SVG 다운로드',
         'Download PNG' => 'PNG 다운로드',
 
-        # Template: XAxisWidget
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/XAxisWidget.tt
         'The selected time period defines the default time frame for this statistic to collect data from.' =>
             '선택한 기간은 이 통계가 데이터를 수집하는 기본 시간 프레임을 정의합니다.',
         'Defines the time unit that will be used to split the selected time period into reporting data points.' =>
             '선택한 기간을 보고 데이터 요소로 분할하는데 사용할 시간 단위를 정의합니다.',
 
-        # Template: YAxisWidget
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/YAxisWidget.tt
         'Please remember that the scale for the Y-axis has to be larger than the scale for the X-axis (e.g. X-axis => Month, Y-Axis => Year).' =>
             'Y 축의 축척은 X 축의 축척보다 커야합니다 (예 : X 축 => 월, Y 축 => 연도).',
 
-        # Template: SettingsList
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
         'This setting is disabled.' => '이 설정은 사용할 수 없습니다.',
         'This setting is fixed but not deployed yet!' => '이 설정은 고정되어 있지만 아직 배포되지 않았습니다!',
         'This setting is currently being overridden in %s and can\'t thus be changed here!' =>
@@ -3251,21 +3368,21 @@ sub Data {
         'This group doesn\'t contain any settings. Please try navigating to one of its sub groups or another group.' =>
             '이 그룹에는 설정이 없습니다. 하위 그룹 또는 다른 그룹으로 이동해보십시오.',
 
-        # Template: SettingsListCompare
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsListCompare.tt
         'Now' => '지금',
         'User modification' => '사용자 수정',
         'enabled' => '사용 가능',
         'disabled' => '불구가 된',
         'Setting state' => '상태 설정 중',
 
-        # Template: Actions
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/Sidebar/Actions.tt
         'Edit search' => '검색 수정',
         'Go back to admin: ' => '관리자에게 돌아가기 : ',
         'Deployment' => '전개',
         'My favourite settings' => '내가 가장 좋아하는 설정',
         'Invalid settings' => '설정이 잘못되었습니다.',
 
-        # Template: DynamicActions
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/Sidebar/DynamicActions.tt
         'Filter visible settings...' => '표시 설정 필터링...',
         'Enable edit mode for all settings' => '모든 설정에 대해 편집 모드 사용',
         'Save all edited settings' => '편집된 모든 설정 저장',
@@ -3273,7 +3390,7 @@ sub Data {
         'All actions from this widget apply to the visible settings on the right only.' =>
             '이 위젯의 모든 동작은 오른쪽의 보이는 설정에만 적용됩니다.',
 
-        # Template: Help
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/Sidebar/Help.tt
         'Currently edited by me.' => '현재 나를 편집했습니다.',
         'Modified but not yet deployed.' => '수정되었지만 아직 배치되지 않았습니다.',
         'Currently edited by another user.' => '다른 사용자가 현재 편집 중입니다.',
@@ -3281,57 +3398,56 @@ sub Data {
         'Save current setting.' => '현재 설정을 저장하십시오.',
         'Cancel editing current setting.' => '현재 설정 편집 취소.',
 
-        # Template: Navigation
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/Sidebar/Navigation.tt
         'Navigation' => '항해',
 
-        # Template: OTRSBusinessTeaser
-        'With %s, System Configuration supports versioning, rollback and user-specific configuration settings.' =>
-            '%s에서 시스템 환경설정은 버전 관리, 롤백 및 사용자 별 구성 설정을 지원합니다.',
-
-        # Template: Test
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Test.tt
         'OTRS Test Page' => 'OTRS 테스트 페이지',
         'Unlock' => '잠금해제',
         'Welcome %s %s' => '환영합니다 %s %s',
         'Counter' => '계수기',
 
-        # Template: Warning
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Ticket/TimeUnits.tt
+        'Invalid time!' => '시간이 잘못 되었습니다!',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Warning.tt
         'Go back to the previous page' => '이전 페이지로 돌아가기',
 
-        # JS Template: CalendarSettingsDialog
+        # JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/AppointmentCalendar/CalendarSettingsDialog.html.tmpl
         'Show' => '보여주다',
 
-        # JS Template: FormDraftAddDialog
+        # JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/FormDraftAddDialog.html.tmpl
         'Draft title' => '초안 제목',
 
-        # JS Template: ArticleViewSettingsDialog
+        # JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/TicketZoom/ArticleViewSettingsDialog.html.tmpl
         'Article display' => '기사 표시',
 
-        # JS Template: FormDraftDeleteDialog
+        # JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/TicketZoom/FormDraftDeleteDialog.html.tmpl
         'Do you really want to delete "%s"?' => '"%s"을 정말로 삭제 하시겠습니까?',
         'Confirm' => '확인',
 
-        # JS Template: WidgetLoading
+        # JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/WidgetLoading.html.tmpl
         'Loading, please wait...' => '로딩 중 기다려주세요...',
 
-        # JS Template: UploadContainer
+        # JS Template: Kernel/Output/JavaScript/Templates/Standard/AjaxDnDUpload/UploadContainer.html.tmpl
         'Click to select a file for upload.' => '업로드 할 파일을 선택하려면 클릭하십시오.',
         'Click to select files or just drop them here.' => '여기를 클릭하여 파일을 선택하거나 그냥 클릭하십시오.',
         'Click to select a file or just drop it here.' => '클릭하여 파일을 선택하거나 여기에 놓으십시오.',
         'Uploading...' => '업로드 중...',
 
-        # JS Template: InformationDialog
+        # JS Template: Kernel/Output/JavaScript/Templates/Standard/PackageManager/InformationDialog.html.tmpl
         'Process state' => '프로세스 상태',
         'Running' => '달리는',
         'Finished' => '끝마친',
         'No package information available.' => '사용할 수있는 패키지 정보가 없습니다.',
 
-        # JS Template: AddButton
+        # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddButton.html.tmpl
         'Add new entry' => '새 항목 추가',
 
-        # JS Template: AddHashKey
+        # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/AddHashKey.html.tmpl
         'Add key' => '키 추가',
 
-        # JS Template: DialogDeployment
+        # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DialogDeployment.html.tmpl
         'Deployment comment...' => '배포 설명...',
         'This field can have no more than 250 characters.' => '',
         'Deploying, please wait...' => '배포 중입니다. 잠시 기다려주십시오...',
@@ -3339,7 +3455,7 @@ sub Data {
         'Deploy now' => '지금 배포',
         'Try again' => '다시 시도하십시오.',
 
-        # JS Template: DialogReset
+        # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DialogReset.html.tmpl
         'Reset options' => '재설정 옵션',
         'Reset setting on global level.' => '글로벌 수준에서 설정을 다시 설정하십시오.',
         'Reset globally' => '전 세계적으로 재설정',
@@ -3349,7 +3465,7 @@ sub Data {
         'Do you really want to reset this setting to it\'s default value?' =>
             '이 설정을 기본값으로 재설정 하시겠습니까?',
 
-        # JS Template: HelpDialog
+        # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/HelpDialog.html.tmpl
         'You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built.' =>
             '범주 선택을 사용하여 아래 탐색 트리를 선택한 범주의 항목으로 제한 할 수 있습니다. 카테고리를 선택하자마자 트리가 다시 빌드됩니다.',
 
@@ -3513,9 +3629,6 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminDynamicField.pm
         'Fields configuration is not valid' => '필드 설정이 바르지 않습니다.',
         'Objects configuration is not valid' => '오브젝트 설정이 바르지 않습니다.',
-        'Database (%s)' => '데이터베이스 (%s)',
-        'Web service (%s)' => '웹 서비스 (%s)',
-        'Contact with data (%s)' => '데이터와의 접촉 (%s)',
         'Could not reset Dynamic Field order properly, please check the error log for more details.' =>
             '동적 필드 순서를 제대로 재설정 할 수 없습니다. 자세한 내용은 오류 로그를 확인하십시오.',
 
@@ -3543,6 +3656,23 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminDynamicFieldDropdown.pm
         'This field value is duplicated.' => '이 필드 값은 중복됩니다.',
+
+        # Perl Module: Kernel/Modules/AdminDynamicFieldScreenConfiguration.pm
+        'Settings were saved.' => '',
+        'System was not able to save the setting!' => '',
+        'Setting is locked by another user!' => '다른 사용자가 설정을 잠갔습니다!',
+        'System was not able to reset the setting!' => '시스템에서 설정을 재설정 할 수 없었습니다!',
+        'Settings were reset.' => '',
+        'Screens for dynamic field %s' => '',
+        'Dynamic fields for screen %s' => '',
+        'Default columns for screen %s' => '',
+
+        # Perl Module: Kernel/Modules/AdminDynamicFieldWebservice.pm
+        'Could not get config for dynamic field %s' => '',
+        'The field must contain only ASCII letters and numbers.' => '',
+        'Dynamic field is configured more than once.' => '',
+        'Dynamic field does not exist or is invalid.' => '',
+        'Only dynamic fields for tickets are allowed.' => '',
 
         # Perl Module: Kernel/Modules/AdminEmail.pm
         'Select at least one recipient.' => '받는 사람을 한 명 이상 선택하십시오.',
@@ -3679,6 +3809,13 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminGenericInterfaceTransportHTTPREST.pm
         'Need valid Subaction!' => '유효한 서브 액션이 필요합니다!',
         'This field should be an integer.' => '이 필드는 정수여야 합니다.',
+        'Invalid key file and/or password (if needed, see below).' => '',
+        'Invalid password and/or key file (see above).' => '',
+        'Certificate is expired.' => '',
+        'Certificate file could not be parsed.' => '',
+        'Please enter a time in seconds (at least 10 seconds).' => '',
+        'Please enter data in expected form (see explanation of field).' =>
+            '',
         'File or Directory not found.' => '파일 또는 디렉터리를 찾을 수 없음.',
 
         # Perl Module: Kernel/Modules/AdminGenericInterfaceWebservice.pm
@@ -3726,8 +3863,12 @@ sub Data {
         'Customer user of the ticket' => '티켓의 고객 사용자',
         'All recipients of the first article' => '첫 번째 기사의 모든 수신자',
         'All recipients of the last article' => '마지막 기사의 모든 수신자',
+        'All users who are mentioned in a ticket' => '',
         'Invisible to customer' => '',
         'Visible to customer' => '',
+
+        # Perl Module: Kernel/Modules/AdminOAuth2TokenManagement.pm
+        'Authorization code parameters not found.' => '',
 
         # Perl Module: Kernel/Modules/AdminOTRSBusiness.pm
         'Your system was successfully upgraded to %s.' => '시스템이 %s로 성공적으로 업그레이드되었습니다.',
@@ -3755,8 +3896,6 @@ sub Data {
         'Can\'t read %s!' => '%s를 읽을 수 없습니다!',
         'File is OK' => '파일은 정상입니다.',
         'Package has locally modified files.' => '패키지에 로컬로 수정된 파일이 있습니다.',
-        'Package not verified by the OTRS Group! It is recommended not to use this package.' =>
-            '패키지가 OTRS 그룹에 의해 확인되지 않았습니다! 이 패키지를 사용하지 않는 것이 좋습니다.',
         'Not Started' => '시작되지 않음',
         'Updated' => '업데이트 됨',
         'Already up-to-date' => '이미 최신',
@@ -3775,8 +3914,6 @@ sub Data {
         'Repository List' => '저장소 목록',
         'No packages found in selected repository. Please check log for more info!' =>
             '',
-        'Package not verified due a communication issue with verification server!' =>
-            '확인 서버와의 통신 문제로 인해 패키지가 확인되지 않았습니다!',
         'Can\'t connect to OTRS Feature Add-on list server!' => 'OTRS 기능 추가 기능 목록 서버에 연결할 수 없습니다!',
         'Can\'t get OTRS Feature Add-on list from server!' => '서버에서 OTRS 기능 추가 기능 목록을 가져올 수 없습니다!',
         'Can\'t get OTRS Feature Add-on from server!' => '서버에서 OTRS 기능 추가 기능을 가져올 수 없습니다!',
@@ -3861,7 +3998,6 @@ sub Data {
         'Could not get data for TransitionID %s' => 'TransitionID %s에 대한 데이터를 가져올 수 없습니다.',
         'There was an error updating the Transition' => '전환을 업데이트 하는 중 오류가 발생했습니다.',
         'Edit Transition "%s"' => '전환 편집 "%s"',
-        'Transition validation module' => '전환 유효성 검사 모듈',
 
         # Perl Module: Kernel/Modules/AdminProcessManagementTransitionAction.pm
         'At least one valid config parameter is required.' => '하나 이상의 유효한 config 매개 변수가 필요합니다.',
@@ -3888,12 +4024,6 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminQueueTemplates.pm
         'Change Queue Relations for Template' => '템플릿에 대한 대기열 관계 변경',
         'Change Template Relations for Queue' => '대기열에 대한 템플릿 관계 변경',
-
-        # Perl Module: Kernel/Modules/AdminRegistration.pm
-        'Production' => '생산',
-        'Test' => '테스트',
-        'Training' => '훈련',
-        'Development' => '개발',
 
         # Perl Module: Kernel/Modules/AdminRole.pm
         'Role updated!' => '역할이 업데이트 되었습니다!',
@@ -3925,7 +4055,6 @@ sub Data {
         'Relation deleted!' => '관계가 삭제되었습니다!',
         'Impossible to delete relation!' => '관계를 삭제할 수 없습니다!',
         'Certificate %s could not be read!' => '인증서 %s을 읽을 수 없습니다.',
-        'Needed Fingerprint' => '필요한 지문',
         'Handle Private Certificate Relations' => '개인 인증서 관계 처리',
 
         # Perl Module: Kernel/Modules/AdminSalutation.pm
@@ -3964,13 +4093,16 @@ sub Data {
             '%s(%s)가 현재 작업 중이므로이 설정으로 작업 할 수 없습니다.',
         'Missing setting name!' => '설정 이름이 없습니다!',
         'Missing ResetOptions!' => '누락 된 ResetOptions!',
-        'Setting is locked by another user!' => '다른 사용자가 설정을 잠갔습니다!',
         'System was not able to lock the setting!' => '시스템이 설정을 잠글 수 없습니다!',
-        'System was not able to reset the setting!' => '시스템에서 설정을 재설정 할 수 없었습니다!',
         'System was unable to update setting!' => '시스템이 설정을 업데이트 할 수 없습니다!',
         'Missing setting name.' => '설정 이름이 없습니다.',
         'Setting not found.' => '설정을 찾을 수 없습니다.',
         'Missing Settings!' => '설정이 없습니다!',
+
+        # Perl Module: Kernel/Modules/AdminSystemFiles.pm
+        'Package files - %s' => '',
+        '(Files where only the permissions have been changed will not be displayed.)' =>
+            '',
 
         # Perl Module: Kernel/Modules/AdminSystemMaintenance.pm
         'Start date shouldn\'t be defined after Stop date!' => '시작일은 종요일 이후에 정의되어서는 안됩니다!',
@@ -4178,11 +4310,18 @@ sub Data {
         'Reminder Reached' => '알림발생',
         'My Locked Tickets' => '나의 잠긴 티켓',
 
+        # Perl Module: Kernel/Modules/AgentTicketMentionView.pm
+        'New mention' => '',
+        'My Mentions' => '',
+
         # Perl Module: Kernel/Modules/AgentTicketMerge.pm
         'Can\'t merge ticket with itself!' => '티켓을 합칠 수 없습니다.',
 
         # Perl Module: Kernel/Modules/AgentTicketMove.pm
         'You need move permissions!' => '이동할 권한이 없습니다.',
+
+        # Perl Module: Kernel/Modules/AgentTicketOwnerView.pm
+        'My Owned Tickets' => '',
 
         # Perl Module: Kernel/Modules/AgentTicketPhone.pm
         'Chat is not active.' => '채팅이 Active 되지 않음',
@@ -4251,6 +4390,8 @@ sub Data {
         'Missing ProcessEntityID in Ticket %s!' => '티켓 %s에 ProcessEntityID가 누락되었습니다!',
         'Could not set DynamicField value for %s of Ticket with ID "%s" in ActivityDialog "%s"!' =>
             '%s의 DynamicField값 설정할 수 없음 - 티켓 ID "%s" - ActivityDialog "%s"!',
+        'Could not set attachments for ticket with ID %s in activity dialog "%s"!' =>
+            '',
         'Could not set PendingTime for Ticket with ID "%s" in ActivityDialog "%s"!' =>
             'PendingTime 설정할 수 없음 - 티켓 ID "%s" - ActivityDialog "%s"!',
         'Wrong ActivityDialog Field config: %s can\'t be Display => 1 / Show field (Please change its configuration to be Display => 0 / Do not show field or Display => 2 / Show field as mandatory)!' =>
@@ -4361,7 +4502,6 @@ sub Data {
         'Show one article' => '기사 한 개 표시',
         'Show all articles' => '모든 기사 표시',
         'Show Ticket Timeline View' => '티켓 타임 라인보기 표시',
-        'Show Ticket Timeline View (%s)' => '티켓 타임라인 보기 (%s)',
 
         # Perl Module: Kernel/Modules/AjaxAttachment.pm
         'Got no FormID.' => 'FormID 없음.',
@@ -4444,6 +4584,9 @@ sub Data {
             '오류 : 데이터베이스의 innodb_log_file_size 값을 최소 %s MB (현재 : %s MB, 권장 : %s MB)로 설정하십시오. 자세한 내용은 %s를보십시오.',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             '잘못된 데이터베이스 정렬 (%s는 %s이지만 utf8이어야합니다).',
+
+        # Perl Module: Kernel/Modules/Mentions.pm
+        '%s users will be mentioned' => '',
 
         # Perl Module: Kernel/Modules/PublicCalendar.pm
         'No %s!' => '아니 %s!',
@@ -4613,6 +4756,7 @@ sub Data {
         'Show Tree Selection' => '트리 선택 표시',
         'Split Quote' => '분할 견적',
         'Remove Quote' => '견적을 제거하십시오',
+        'Last Views' => '',
 
         # Perl Module: Kernel/Output/HTML/Layout/LinkObject.pm
         'Linked as' => '로 연결된',
@@ -4631,7 +4775,6 @@ sub Data {
         'Archive search' => '보관 검색',
 
         # Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
-        '%s Upgrade to %s now! %s' => '%s 지금 %s로 업그레이드하십시오! %s',
         'Please verify your license data!' => '라이센스 데이터를 확인 하십시오!',
         'The license for your %s is about to expire. Please make contact with %s to renew your contract!' =>
             '%s에 대한 라이센스가 곧 만료됩니다. 계약을 갱신 하시려면%s와 연락하십시오!',
@@ -4659,13 +4802,13 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Notification/DaemonCheck.pm
         'OTRS Daemon is not running.' => 'OTRS 데몬이 실행되고 있지 않습니다.',
 
+        # Perl Module: Kernel/Output/HTML/Notification/OAuth2TokenManagementTokenExpired.pm
+        'OAuth2 token for "%s" has expired.' => '',
+        'OAuth2 refresh token for "%s" has expired.' => '',
+
         # Perl Module: Kernel/Output/HTML/Notification/OutofOfficeCheck.pm
         'You have Out of Office enabled, would you like to disable it?' =>
             '부재 중 기능을 사용하도록 설정 했습니까? 사용하지 않도록 설정 하시겠습니까?',
-
-        # Perl Module: Kernel/Output/HTML/Notification/PackageManagerCheckNotVerifiedPackages.pm
-        'The installation of packages which are not verified by the OTRS Group is activated. These packages could threaten your whole system! It is recommended not to use unverified packages.' =>
-            '',
 
         # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationInvalidCheck.pm
         'You have %s invalid setting(s) deployed. Click here to show invalid settings.' =>
@@ -4774,6 +4917,16 @@ sub Data {
         'Locked Tickets Reminder Reached' => '잠긴 티켓 알리미에 도달 했습니다.',
         'Locked Tickets Total' => '잠긴 티켓 합계',
 
+        # Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
+        'Total mentions' => '',
+        'Total new mentions' => '',
+        'New mentions' => '',
+
+        # Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
+        'Owned Tickets New' => '',
+        'Owned Tickets Reminder Reached' => '',
+        'Owned Tickets Total' => '',
+
         # Perl Module: Kernel/Output/HTML/ToolBar/TicketResponsible.pm
         'Responsible Tickets New' => '책임 티켓',
         'Responsible Tickets Reminder Reached' => '책임감 있는 티켓 알림 도달',
@@ -4818,6 +4971,9 @@ sub Data {
         'Send unsigned notification' => '서명되지 않은 알림 보내기',
         'Send unencrypted notification' => '암호화되지 않은 알림을 보냅니다.',
 
+        # Perl Module: Kernel/System/Calendar/Plugin/Ticket/Create.pm
+        'On the date' => '',
+
         # Perl Module: Kernel/System/Console/Command/Dev/Tools/Config2Docbook.pm
         'Configuration Options Reference' => '구성 옵션 참조',
         'This setting can not be changed.' => '이 설정은 변경할 수 없습니다.',
@@ -4850,6 +5006,14 @@ sub Data {
         'The field content is too long!' => '입력란 내용이 너무 깁니다.',
         'Maximum size is %s characters.' => '최대 크기는%s자입니다.',
 
+        # Perl Module: Kernel/System/MailQueue.pm
+        'Error while validating Message data.' => '',
+        'Error while validating Sender email address.' => '',
+        'Error while validating Recipient email address.' => '',
+
+        # Perl Module: Kernel/System/Mention.pm
+        'LastMention' => '',
+
         # Perl Module: Kernel/System/NotificationEvent.pm
         'Couldn\'t read Notification configuration file. Please make sure the file is valid.' =>
             '알림 구성 파일을 읽을 수 없습니다. 파일이 유효한지 확인하십시오.',
@@ -4865,10 +5029,6 @@ sub Data {
         'File is not installed!' => '파일이 설치되지 않았습니다!',
         'File is different!' => '파일이 다릅니다!',
         'Can\'t read file!' => '파일을 읽을 수 없습니다!',
-        '<p>If you continue to install this package, the following issues may occur:</p><ul><li>Security problems</li><li>Stability problems</li><li>Performance problems</li></ul><p>Please note that issues that are caused by working with this package are not covered by OTRS service contracts.</p>' =>
-            '<p>1이 패키지를 계속 설치하면 다음과 같은 문제가 발생할 수 있습니다. </p><ul><li>보안 문제</li><li>안정성 문제</li><li>성능 문제</li></ul><p>이 패키지로 작업하여 발생하는 문제는 OTRS 서비스 계약의 적용을받지 않습니다.</p>',
-        '<p>The installation of packages which are not verified by the OTRS Group is not possible by default. You can activate the installation of not verified packages via the "AllowNotVerifiedPackages" system configuration setting.</p>' =>
-            '',
 
         # Perl Module: Kernel/System/ProcessManagement/DB/Process.pm
         'The process "%s" and all of its data has been imported successfully.' =>
@@ -5008,11 +5168,6 @@ sub Data {
         'The setting \'max_allowed_packet\' must be higher than 64 MB.' =>
             '\'max_allowed_packet\'설정은 64MB보다 커야합니다.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Performance.pm
-        'Query Cache Size' => '쿼리 캐시 크기',
-        'The setting \'query_cache_size\' should be used (higher than 10 MB but not more than 512 MB).' =>
-            '\'query_cache_size\'설정을 사용해야합니다 (10MB 이상 512MB 이하).',
-
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/StorageEngine.pm
         'Default Storage Engine' => '기본 저장소 엔진',
         'Table Storage Engine' => '테이블 스토리지 엔진',
@@ -5052,6 +5207,7 @@ sub Data {
         'PostgreSQL 9.2 or higher is required.' => 'PostgreSQL 9.2 이상이 필요합니다.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
+        'Operating System' => '운영 체제',
         'OTRS Disk Partition' => 'OTRS 디스크 파티션',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskSpace.pm
@@ -5086,6 +5242,9 @@ sub Data {
             '',
         'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
             '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
+        'Perl Version' => '펄 버전',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/Swap.pm
         'Free Swap Space (%)' => '무료 스왑 공간 (%)',
@@ -5176,9 +5335,6 @@ sub Data {
         'Package Installation Status' => '패키지 설치 상태',
         'Some packages have locally modified files.' => '일부 패키지에는 로컬로 수정된 파일이 있습니다.',
         'Some packages are not correctly installed.' => '일부 패키지가 올바르게 설치되지 않았습니다.',
-        'Package Verification Status' => '패키지 확인 상태',
-        'Some packages are not verified by the OTRS Group! It is recommended not to use this packages.' =>
-            '일부 패키지는 OTRS 그룹에 의해 검증되지 않습니다! 이 패키지를 사용하지 않는 것이 좋습니다.',
         'Package Framework Version Status' => '패키지 프레임 워크 버전 상태',
         'Some packages are not allowed for the current framework version.' =>
             '일부 패키지는 현재 프레임 워크 버전에 허용되지 않습니다.',
@@ -5247,6 +5403,9 @@ sub Data {
         'UI - Special Statistics' => 'UI - 특수 통계',
         'Agents using custom main menu ordering' => '사용자 정의 주 메뉴 순서를 사용하는 에이전트',
         'Agents using favourites for the admin overview' => '관리자 개요에 즐겨찾기를 사용하는 에이전트',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
+        'OTRS Version' => 'OTRS 버전',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
         'Webserver' => '웹 서버',
@@ -5369,7 +5528,2397 @@ sub Data {
         # Perl Module: Kernel/System/Web/InterfaceInstaller.pm
         'Action "%s" not found!' => 'Action "%s"을 찾을 수 없습니다!',
 
-        # Database XML / SOPM Definition: scripts/database/otrs-initial_insert.xml
+        # XML Definition: Kernel/Config/Files/XML/Calendar.xml
+        'Frontend module registration for the public interface.' => '',
+        'Frontend module registration for the agent interface.' => '에이전트 인터페이스에 대한 프론트 엔드 모듈 등록.',
+        'Loader module registration for the agent interface.' => '에이전트 인터페이스에 대한 로더 모듈 등록.',
+        'Main menu item registration.' => '기본 메뉴 항목 등록.',
+        'Admin area navigation for the agent interface.' => '에이전트 인터페이스의 관리 영역 탐색.',
+        'Maximum number of active calendars in overview screens. Please note that large number of active calendars can have a performance impact on your server by making too much simultaneous calls.' =>
+            '개요 화면의 최대 활성 캘린더 수입니다. 많은 수의 활성 캘린더가 동시 호출을 너무 많이하여 서버에 성능에 영향을 줄 수 있습니다.',
+        'List of colors in hexadecimal RGB which will be available for selection during calendar creation. Make sure the colors are dark enough so white text can be overlayed on them.' =>
+            '달력을 만들 때 선택할 수있는 16 진수 RGB 색상 목록입니다. 흰색 텍스트를 오버레이 할 수 있도록 색이 충분히 어두워 졌는지 확인하십시오.',
+        'Defines available groups for the appointment calendar screen.' =>
+            '',
+        'Defines the ticket plugin for calendar appointments.' => '일정 약속을 위한 티켓 플러그인을 정의합니다.',
+        'Links appointments and tickets with a "Normal" type link.' => '약속과 티켓을 "일반"유형 링크로 연결합니다.',
+        'Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = "complex"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js.' =>
+            '링크 객체 위젯에서 설정 버튼을 사용할 수있는 액션 정의 (LinkObject :: ViewMode = "complex"). 이러한 작업은 다음 JS 및 CSS 파일을 등록해야합니다. Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js.',
+        'Define which columns are shown in the linked appointment widget (LinkObject::ViewMode = "complex"). Possible settings: 0 = Disabled, 1 = Available, 2 = Enabled by default.' =>
+            '연결된 약속 위젯에 표시 할 열을 정의하십시오 (LinkObject :: ViewMode = "complex"). 가능한 설정 : 0 = 사용 안 함, 1 = 사용 가능, 2 = 기본적으로 사용함.',
+        'OTRS doesn\'t support recurring Appointments without end date or number of iterations. During import process, it might happen that ICS file contains such Appointments. Instead, system creates all Appointments in the past, plus Appointments for the next N months (120 months/10 years by default).' =>
+            'OTRS는 끝 날짜 또는 반복 횟수가없는 되풀이 약속을 지원하지 않습니다. 가져 오기 프로세스 중에 ICS 파일에 이러한 약속이 포함될 수 있습니다. 대신, 시스템은 과거의 모든 약속과 다음 N 개월 (기본적으로 120 개월 / 10 년)의 약속을 작성합니다.',
+        'Defines the ticket appointment type backend for ticket escalation time.' =>
+            '티켓 에스컬레이션 시간에 대한 티켓 약속 유형 백엔드를 정의합니다.',
+        'Defines the ticket appointment type backend for ticket pending time.' =>
+            '티켓 보류 시간에 대한 티켓 약속 유형 백엔드를 정의합니다.',
+        'Defines the ticket appointment type backend for ticket dynamic field date time.' =>
+            '티켓 동적 필드 날짜 시간에 대한 티켓 약속 유형 백엔드를 정의합니다.',
+        'Defines the list of params that can be passed to ticket search function.' =>
+            '티켓 검색 기능에 전달할 수있는 매개변수의 목록을 정의합니다.',
+        'Defines the event object types that will be handled via AdminAppointmentNotificationEvent.' =>
+            'AdminAppointmentNotificationEvent를 통해 처리 할 이벤트 객체 유형을 정의합니다.',
+        'List of all calendar events to be displayed in the GUI.' => 'GUI에 표시 할 모든 캘린더 이벤트 목록입니다.',
+        'List of all appointment events to be displayed in the GUI.' => 'GUI에 표시 할 모든 약속 이벤트 목록입니다.',
+        'Appointment calendar event module that prepares notification entries for appointments.' =>
+            '약속에 대한 알림 항목을 준비하는 약속 일정 이벤트 모듈입니다.',
+        'Uses richtext for viewing and editing ticket notification.' => '티켓 통지를보고 편집하기 위해 richtext를 사용합니다.',
+        'Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).' =>
+            '이 화면의 서식있는 텍스트 편집기 구성 요소의 너비를 정의합니다. 숫자 (픽셀) 또는 퍼센트 값 (상대)을 입력하십시오.',
+        'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).' =>
+            '이 화면의 서식있는 텍스트 편집기 구성 요소의 높이를 정의합니다. 숫자 (픽셀) 또는 퍼센트 값 (상대)을 입력하십시오.',
+        'Transport selection for appointment notifications. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
+            '약속 알림을위한 전송 선택. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
+        'Defines the number of character per line used in case an HTML article preview replacement on TemplateGenerator for EventNotifications.' =>
+            'EventNotifications에 대한 TemplateGenerator의 HTML 기사 미리보기 바꾸기에 사용되는 줄당 문자 수를 정의합니다.',
+        'Defines all the parameters for this notification transport.' => '이 알림 전송에 대한 모든 매개 변수를 정의합니다.',
+        'Appointment calendar event module that updates the ticket with data from ticket appointment.' =>
+            '티켓 약속의 데이터로 티켓을 업데이트 하는 약속 캘린더 이벤트 모듈입니다.',
+        'Defines the parameters for the dashboard backend. "Limit" defines the number of entries displayed by default. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" defines the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
+            '대시 보드 백엔드의 매개 변수를 정의합니다. "제한"은 기본적으로 표시되는 항목 수를 정의합니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 또는 사용자가 수동으로 활성화해야하는지 여부를 나타냅니다. "CacheTTLLocal"은 플러그인의 캐시 만기 기간을 분 단위로 정의합니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
+        'Shows a link in the menu for creating a calendar appointment linked to the ticket directly from the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
+            '에이전트 인터페이스의 티켓 확대보기에서 직접 티켓에 링크 된 일정 약속을 만드는 링크를 메뉴에 표시합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
+        'Defines an icon with link to the google map page of the current location in appointment edit screen.' =>
+            '약속 편집 화면에서 현재 위치의 Google지도 페이지로 연결되는 아이콘을 정의합니다.',
+        'Triggers add or update of automatic calendar appointments based on certain ticket times.' =>
+            '특정 티켓 시간을 기준으로 자동 달력 약속을 추가하거나 업데이트 합니다.',
+
+        # XML Definition: Kernel/Config/Files/XML/CloudServices.xml
+        'Defines if the communication between this system and OTRS Group servers that provide cloud services is possible. If set to \'Disable cloud services\', some functionality will be lost such as system registration, support data sending, upgrading to and use of OTRS Business Solution™, OTRS Verify™, OTRS News and product News dashboard widgets, among others.' =>
+            '클라우드 서비스를 제공하는이 시스템과 OTRS 그룹 서버 간의 통신이 가능한지 여부를 정의합니다. \'클라우드 서비스 사용 안 함\'으로 설정하면 시스템 등록, 지원 데이터 전송, OTRS Business Solution ™, OTRS Verify ™, OTRS News 및 제품 뉴스 대시 보드 위젯 등의 업그레이드 및 사용과 같은 일부 기능이 손실됩니다.',
+        'Cloud service admin module registration for the transport layer.' =>
+            '전송 계층에 대한 클라우드 서비스 관리 모듈 등록',
+
+        # XML Definition: Kernel/Config/Files/XML/Daemon.xml
+        'Defines the module to display a notification in the agent interface if the OTRS Daemon is not running.' =>
+            'OTRS 데몬이 실행되고 있지 않은 경우 에이전트 인터페이스에 알림을 표시 할 모듈을 정의합니다.',
+        'List of CSS files to always be loaded for the agent interface.' =>
+            '에이전트 인터페이스 용으로 항상로드 될 CSS 파일 목록입니다.',
+        'List of JS files to always be loaded for the agent interface.' =>
+            '에이전트 인터페이스 용으로 항상로드 될 JS 파일 목록.',
+        'Type of daemon log rotation to use: Choose \'OTRS\' to let OTRS system to handle the file rotation, or choose \'External\' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration.' =>
+            '사용할 데몬 로그 회전 유형 : OTRS 시스템이 파일 순환을 처리하도록하려면 \'OTRS\'를 선택하고 제3자 회전 메커니즘 (즉, logrotate)을 사용하려면 \'외부\'를 선택하십시오. 참고 : 외부 회전 메커니즘은 자체적으로 독립적인 구성이 필요합니다.',
+        'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if &lt;$OTRSHome&gt;/var/run/ can not be used.' =>
+            '',
+        'Defines the number of days to keep the daemon log files.' => '데몬 로그 파일을 보관할 기간을 정의합니다.',
+        'If enabled the daemon will redirect the standard output stream to a log file.' =>
+            '사용 가능하면 데몬은 표준 출력 스트림을 로그 파일로 재지정합니다.',
+        'If enabled the daemon will redirect the standard error stream to a log file.' =>
+            '사용 가능하면 데몬은 표준 오류 스트림을 로그 파일로 재지정합니다.',
+        'The daemon registration for the scheduler generic agent task manager.' =>
+            '스케줄러 제네릭 에이전트 작업 관리자에 대한 데몬 등록입니다.',
+        'The daemon registration for the scheduler cron task manager.' =>
+            '스케줄러 cron 작업 관리자에 대한 데몬 등록.',
+        'The daemon registration for the scheduler future task manager.' =>
+            '스케줄러 미래 작업 관리자에 대한 데몬 등록.',
+        'The daemon registration for the scheduler task worker.' => '스케줄러 태스크 작업자에 대한 데몬 등록.',
+        'The daemon registration for the system configuration deployment sync manager.' =>
+            '시스템 구성 배포 동기화 관리자에 대한 데몬 등록입니다.',
+        'Defines the maximum number of tasks to be executed as the same time.' =>
+            '같은 시간에 실행될 최대 작업 수를 정의합니다.',
+        'Specifies the email addresses to get notification messages from scheduler tasks.' =>
+            '스케줄러 테스크에서 알림 메시지를 가져올 이메일 주소를 지정합니다.',
+        'Defines the maximum number of affected tickets per job.' => '작업 당 영향을 받는 티켓의 최대 수를 정의합니다.',
+        'Defines a sleep time in microseconds between tickets while they are been processed by a job.' =>
+            '작업에 의해 처리된 티켓 사이의 슬립시간을 정의합니다. 마이크로 초',
+        'Delete expired cache from core modules.' => '만료된 캐시를 코어 모듈에서 삭제하십시오.',
+        'Delete expired upload cache hourly.' => '만료된 업로드 캐시를 매시간 삭제하십시오.',
+        'Delete expired loader cache weekly (Sunday mornings).' => '매주 만료된 로더 캐시를 삭제하십시오 (일요일 오전).',
+        'Fetch emails via fetchmail.' => 'fetchmail을 통해 이메일을 가져옵니다.',
+        'Fetch emails via fetchmail (using SSL).' => 'fetchmail (SSL 사용)을 통해 전자 메일을 가져옵니다.',
+        'Generate dashboard statistics.' => '대시 보드 통계를 생성합니다.',
+        'Triggers ticket escalation events and notification events for escalation.' =>
+            '에스컬레이션을 위해 티켓 에스컬레이션 이벤트 및 알림 이벤트를 트리거합니다.',
+        'Process pending tickets.' => '대기중인 티켓 처리.',
+        'Reprocess mails from spool directory that could not be imported in the first place.' =>
+            '처음부터 가져올 수 없었던 스풀 디렉토리의 메일을 다시 처리하십시오.',
+        'Fetch incoming emails from configured mail accounts.' => '구성된 메일 계정에서 수신 전자 메일을 가져옵니다.',
+        'Rebuild the ticket index for AgentTicketQueue.' => 'AgentTicketQueue 티켓 색인을 다시 작성하십시오.',
+        'Delete expired sessions.' => '만료된 세션을 삭제하십시오.',
+        'Unlock tickets that are past their unlock timeout.' => '잠금 해제 시간 초과가 된 티켓의 잠금을 해제하십시오.',
+        'Renew existing SMIME certificates from customer backend. Note: SMIME and SMIME::FetchFromCustomer needs to be enabled in SysConfig and customer backend needs to be configured to fetch UserSMIMECertificate attribute.' =>
+            '고객 백엔드에서 기존 SMIME 인증서를 갱신하십시오. 참고 : SysConfig에서 SMIME 및 SMIME :: FetchFromCustomer를 활성화해야하며 고객 백엔드가 UserSMIMECertificate 특성을 가져 오도록 구성해야합니다.',
+        'Checks for articles that needs to be updated in the article search index.' =>
+            '기사 검색 색인에서 업데이트 해야하는 기사를 확인합니다.',
+        'Checks for queued outgoing emails to be sent.' => '보낸 대기중인 보내는 전자 메일을 확인합니다.',
+        'Checks for communication log entries to be deleted.' => '삭제할 통신 로그 항목을 확인합니다.',
+        'Executes a custom command or module. Note: if module is used, function is required.' =>
+            '사용자 지정 명령 또는 모듈을 실행합니다. 참고 : 모듈을 사용하는 경우 기능이 필요합니다.',
+        'Run file based generic agent jobs (Note: module name needs to be specified in -configuration-module param e.g. "Kernel::System::GenericAgent").' =>
+            '파일 기반 일반 에이전트 작업 실행 (참고 : 모듈 이름은 -configuration-module 매개 변수 예 : "Kernel :: System :: GenericAgent")에서 지정해야합니다.',
+        'Collect support data for asynchronous plug-in modules.' => '비동기 플러그인 모듈에 대한 지원 데이터를 수집하십시오.',
+        'Defines the default the number of seconds (from current time) to re-schedule a generic interface failed task.' =>
+            '일반적인 인터페이스 실패 작업을 다시 예약하기 위해 기본값 (현재 시간부터)을 정의합니다.',
+        'Removes old system configuration deployments (Sunday mornings).' =>
+            '이전 시스템 구성 배포 (일요일 오전)를 제거합니다.',
+        'Removes old ticket number counters (each 10 minutes).' => '',
+        'Removes old generic interface debug log entries created before the specified amount of days.' =>
+            '',
+        'Delete expired ticket draft entries.' => '만료된 티켓 초안 항목을 삭제하십시오.',
+
+        # XML Definition: Kernel/Config/Files/XML/Framework.xml
+        'Disables the web installer (http://yourhost.example.com/otrs/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
+            '시스템이 하이재킹되지 않도록 웹 설치 프로그램 (http://yourhost.example.com/otrs/installer.pl)을 비활성화합니다. 사용하도록 설정하지 않으면 시스템을 다시 설치하고 현재 기본 구성을 사용하여 설치 프로그램 스크립트에서 질문을 미리 채 웁니다. 활성화 된 경우 GenericAgent, PackageManager 및 SQL Box도 비활성화됩니다.',
+        'Enables or disables the debug mode over frontend interface.' => '프론트 엔드 인터페이스에서 디버그 모드를 활성화 또는 비활성화합니다. ',
+        'Delivers extended debugging information in the frontend in case any AJAX errors occur, if enabled.' =>
+            '활성화 된 경우 AJAX 오류가 발생할 경우 프론트 엔드에 확장 디버깅 정보를 제공합니다.',
+        'Enables or disables the caching for templates. WARNING: Do NOT disable template caching for production environments for it will cause a massive performance drop! This setting should only be disabled for debugging reasons!' =>
+            '템플릿에 대한 캐싱을 사용하거나 사용하지 않도록 설정합니다. 경고 : 프로덕션 환경에서 템플릿 캐싱을 사용하지 않도록 설정하면 성능이 크게 떨어질 수 있습니다. 이 설정은 디버깅을 이유로 사용하지 않아야 합니다!',
+        'Sets the configuration level of the administrator. Depending on the config level, some sysconfig options will be not shown. The config levels are in in ascending order: Expert, Advanced, Beginner. The higher the config level is (e.g. Beginner is the highest), the less likely is it that the user can accidentally configure the system in a way that it is not usable any more.' =>
+            '관리자의 구성 수준을 설정합니다. 구성 수준에 따라 일부 sysconfig 옵션이 표시되지 않습니다. 구성 수준은 오름차순으로되어 있습니다 : 전문가, 고급, 초보자. 구성 수준이 높을수록 (예 : 초보자가 가장 높음), 사용자가 실수로 더 이상 사용할 수없는 방식으로 시스템을 구성 할 가능성이 줄어 듭니다.',
+        'Controls if the admin is allowed to import a saved system configuration in SysConfig.' =>
+            '관리자가 SysConfig에서 저장된 시스템 구성을 가져올 수 있는지 여부를 제어합니다.',
+        'Defines the name of the application, shown in the web interface, tabs and title bar of the web browser.' =>
+            '웹 인터페이스, 탭 및 웹 브라우저의 제목 표시 줄에 표시된 응용 프로그램의 이름을 정의합니다.',
+        'Defines the system identifier. Every ticket number and http session string contains this ID. This ensures that only tickets which belong to your system will be processed as follow-ups (useful when communicating between two instances of OTRS).' =>
+            '시스템 식별자를 정의합니다. 모든 티켓 번호와 http 세션 문자열에는이 ID가 들어 있습니다. 이렇게하면 시스템에 속한 티켓 만 후속 조치로 처리됩니다 (OTRS의 두 인스턴스간에 통신 할 때 유용함).',
+        'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
+            '시스템의 정규화 된 도메인 이름을 정의합니다. 이 설정은 응용 프로그램에서 사용하는 모든 형식의 메시징에있는 변수 인 OTRS_CONFIG_FQDN으로 사용되어 시스템 내의 티켓에 대한 링크를 만듭니다.',
+        'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the OTRS Daemon).' =>
+            '\'PublicSupportDataCollector\'공용 모듈 (예 : OTRS 데몬에서 사용)을 사용하여 지원 데이터 수집을위한 HTTP 호스트 이름을 정의합니다.',
+        'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the OTRS Daemon).' =>
+            '공개 모듈 \'PublicSupportDataCollector\'(예 : OTRS 데몬에서 사용)를 사용하여 지원 데이터 수집에 대한 시간 초과 (최소, 20 초)를 정의합니다.',
+        'Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server\'s settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, OTRS_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
+            '응용 프로그램을 제공하기 위해 웹 서버에서 사용하는 프로토콜 유형을 정의합니다. https 프로토콜이 일반 http 대신 사용되는 경우 여기에 지정해야합니다. 이것은 웹 서버의 설정이나 동작에 영향을 미치지 않으므로 응용 프로그램에 대한 액세스 방법을 변경하지 않으며, 틀린 경우 응용 프로그램에 로그인하지 못하게하지 않습니다. 이 설정은 응용 프로그램에서 사용하는 모든 형식의 메시징에서 찾을 수있는 OTRS_CONFIG_HttpType 변수로만 사용되어 시스템 내의 티켓에 대한 링크를 만듭니다.',
+        'Whether to force redirect all requests from http to https protocol. Please check that your web server is configured correctly for https protocol before enable this option.' =>
+            'http에서 https 프로토콜로 모든 요청을 강제로 리디렉션할지 여부입니다. 이 옵션을 활성화하기 전에 웹 서버가 https 프로토콜에 맞게 올바르게 구성되어 있는지 확인하십시오.',
+        'Sets the prefix to the scripts folder on the server, as configured on the web server. This setting is used as a variable, OTRS_CONFIG_ScriptAlias which is found in all forms of messaging used by the application, to build links to the tickets within the system.' =>
+            '접두어를 웹 서버에 구성된대로 서버의 scripts 폴더에 설정합니다. 이 설정은 응용 프로그램에서 사용하는 모든 형식의 메시징에서 발견되는 변수 인 OTRS_CONFIG_ScriptAlias로 사용되어 시스템 내의 티켓에 대한 링크를 작성합니다.',
+        'Defines the system administrator\'s email address. It will be displayed in the error screens of the application.' =>
+            '시스템 관리자의 전자 메일 주소를 정의합니다. 응용 프로그램의 오류 화면에 표시됩니다.',
+        'Company name which will be included in outgoing emails as an X-Header.' =>
+            '발신 이메일에 X-Header로 포함될 회사 이름.',
+        'Defines the default front-end language. All the possible values are determined by the available language files on the system (see the next setting).' =>
+            '기본 프런트 엔드 언어를 정의합니다. 가능한 모든 값은 시스템에서 사용 가능한 언어 파일에 의해 결정됩니다 (다음 설정 참조).',
+        'Defines all the languages that are available to the application. Specify only English names of languages here.' =>
+            '응용 프로그램에서 사용할 수 있는 모든 언어를 정의합니다. 여기에 영어의 영어이름만 지정하십시오.',
+        'Defines all the languages that are available to the application. Specify only native names of languages here.' =>
+            '응용 프로그램에서 사용할 수있는 모든 언어를 정의합니다. 여기에는 언어의 고유이름만 지정하십시오.',
+        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.otrs.com/doc/.' =>
+            '에이전트 및 고객이 사용할 기본 프런트 엔드 (HTML) 테마를 정의합니다. 원한다면 자신 만의 테마를 추가 할 수 있습니다. https://doc.otrs.com/doc/ 에있는 관리자 설명서를 참조하십시오.',
+        'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
+            '에이전트와 고객을 구별하기 위해 응용 프로그램 내에서 도메인별로 사용되도록 다른 테마를 구성 할 수 있습니다. 정규식 (정규식)을 사용하면 키 / 내용 쌍을 도메인과 일치하도록 구성 할 수 있습니다. "Key"의 값은 도메인과 일치해야하며 "Content"의 값은 시스템의 유효한 테마 여야합니다. 올바른 형식의 정규식에 대한 예제 항목을 참조하십시오.',
+        'The headline shown in the customer interface.' => '고객 인터페이스에 표시되는 헤드 라인.',
+        'The logo shown in the header of the customer interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
+            '고객 인터페이스의 머리글에 표시된 로고입니다. 이미지의 URL은 스킨 이미지 디렉토리에 대한 상대 URL이거나 원격 웹 서버에 대한 전체 URL 일 수 있습니다.',
+        'The logo shown in the header of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
+            '에이전트 인터페이스의 헤더에 표시된 로고. 이미지의 URL은 스킨 이미지 디렉토리에 대한 상대 URL이거나 원격 웹 서버에 대한 전체 URL 일 수 있습니다.',
+        'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
+            '스킨 "기본"에 대한 에이전트 인터페이스의 머리글에 표시된 로고입니다. 자세한 설명은 "AgentLogo"를 참조하십시오.',
+        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
+            '스킨 "슬림"을위한 에이전트 인터페이스의 헤더에 표시된 로고. 자세한 설명은 "AgentLogo"를 참조하십시오.',
+        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
+            '피부 "아이보리"의 에이전트 인터페이스 헤더에 표시된 로고입니다. 자세한 설명은 "AgentLogo"를 참조하십시오.',
+        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
+            '스킨 "아이보리 - 슬림"을위한 에이전트 인터페이스의 헤더에 표시된 로고. 자세한 설명은 "AgentLogo"를 참조하십시오.',
+        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
+            '',
+        'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
+            '에이전트 인터페이스의 로그인 상자 상단에 표시된 로고입니다. 이미지의 URL은 스킨 이미지 디렉토리에 대한 상대 URL이거나 원격 웹 서버에 대한 전체 URL 일 수 있습니다.',
+        'Defines the URL base path of icons, CSS and Java Script.' => '아이콘, CSS 및 Java Script의 URL 기본 경로를 정의합니다.',
+        'Defines the URL image path of icons for navigation.' => '탐색을위한 아이콘의 URL 이미지 경로를 정의합니다.',
+        'Defines the URL CSS path.' => 'URL CSS 경로를 정의합니다.',
+        'Defines the URL java script path.' => 'URL java 스크립트 경로를 정의합니다.',
+        'Uses richtext for viewing and editing: articles, salutations, signatures, standard templates, auto responses and notifications.' =>
+            '기사, 인사말, 서명, 표준 템플릿, 자동 응답 및 알림과 같은보기 및 편집을 위해 richtext를 사용합니다.',
+        'Defines the URL rich text editor path.' => 'URL 서식있는 텍스트 편집기 경로를 정의합니다.',
+        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            '서식있는 텍스트 편집기 구성 요소의 너비를 정의합니다. 숫자 (픽셀) 또는 퍼센트 값 (상대)을 입력하십시오.',
+        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            '서식있는 텍스트 편집기 구성 요소의 높이를 정의합니다. 숫자 (픽셀) 또는 퍼센트 값 (상대)을 입력하십시오.',
+        'Defines the default CSS used in rich text editors.' => '서식있는 텍스트 편집기에 사용되는 기본 CSS를 정의합니다.',
+        'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.).' =>
+            '확장 모드를 사용해야하는지 정의합니다 (테이블, 바꾸기, 아래 첨자, 위 첨자, 단어 붙여 넣기 등 사용 가능).',
+        'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.) in customer interface.' =>
+            '고객 인터페이스에서 확장 모드를 사용해야하는지 (테이블, 바꾸기, 아래첨자, 위 첨자, 단어에서 붙여넣기 등 사용가능) 정의합니다.',
+        'Disable autocomplete in the login screen.' => '',
+        'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
+            'HTTP 헤더 "X-Frame-Options : SAMEORIGIN"을 사용하지 않도록 설정하여 OTRS를 다른 웹 사이트의 IFrame으로 포함 할 수 있습니다. 이 HTTP 헤더를 비활성화하면 보안 문제가 발생할 수 있습니다! 자신이하는 일을 아는 경우에만 사용을 중지하십시오!',
+        'Disable HTTP header "Content-Security-Policy" to allow loading of external script contents. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
+            '외부 스크립트 내용로드를 허용하려면 HTTP 헤더 "Content-Security-Policy"를 비활성화하십시오. 이 HTTP 헤더를 비활성화하면 보안 문제가 발생할 수 있습니다! 자신이하는 일을 아는 경우에만 사용을 중지하십시오!',
+        'Automated line break in text messages after x number of chars.' =>
+            'X 문자 수 후에 문자 메시지의 자동 줄바꿈',
+        'Sets the number of lines that are displayed in text messages (e.g. ticket lines in the QueueZoom).' =>
+            '문자 메시지에 표시되는 줄 수를 설정합니다 (예 : QueueZoom의 티켓 줄).',
+        'Turns on drag and drop for the main navigation.' => '기본 탐색에 대한 드래그 앤 드롭을 켭니다.',
+        'Defines the date input format used in forms (option or input fields).' =>
+            '양식 (옵션 또는 입력 필드)에 사용되는 날짜 입력 형식을 정의합니다.',
+        'Defines the available steps in time selections. Select "Minute" to be able to select all minutes of one hour from 1-59. Select "30 Minutes" to only make full and half hours available.' =>
+            '시간 선택에서 사용 가능한 단계를 정의합니다. 1-59까지 1 시간 동안 모든 분을 선택할 수 있으려면 "분"을 선택하십시오. 풀 30 시간 만 사용하려면 "30 Minutes"를 선택하십시오.',
+        'Shows time in long format (days, hours, minutes), if enabled; or in short format (days, hours), if not enabled.' =>
+            '사용 가능한 경우 긴 형식 (일, 시간, 분)으로 시간을 표시합니다. 또는 짧은 형식 (일, 시간)으로 설정할 수 있습니다.',
+        'Allows choosing between showing the attachments of a ticket in the browser (inline) or just make them downloadable (attachment).' =>
+            '브라우저에서 티켓의 첨부 파일 표시 (인라인) 또는 다운로드 만 가능 (첨부) 중에서 선택할 수 있습니다.',
+        'Makes the application check the MX record of email addresses before sending an email or submitting a telephone or email ticket.' =>
+            '전자 메일을 보내거나 전화 또는 전자 메일 티켓을 제출하기 전에 응용 프로그램에서 전자 메일 주소의 MX 레코드를 확인하게합니다.',
+        'Defines the address of a dedicated DNS server, if necessary, for the "CheckMXRecord" look-ups.' =>
+            '필요한 경우 "CheckMXRecord"조회를 위해 전용 DNS 서버의 주소를 정의합니다.',
+        'Makes the application check the syntax of email addresses.' => '응용 프로그램이 전자 메일 주소의 구문을 검사하도록 합니다.',
+        'Defines a regular expression that excludes some addresses from the syntax check (if "CheckEmailAddresses" is set to "Yes"). Please enter a regex in this field for email addresses, that aren\'t syntactically valid, but are necessary for the system (i.e. "root@localhost").' =>
+            '구문 검사에서 일부 주소를 제외하는 정규 표현식을 정의합니다 ( "CheckEmailAddresses"가 "Yes"로 설정된 경우). 문법적으로 유효하지는 않지만 시스템에 필요한 전자 메일 주소 (예 : "root @ localhost")는이 필드에 정규식을 입력하십시오.',
+        'Defines a regular expression that filters all email addresses that should not be used in the application.' =>
+            '응용 프로그램에서 사용해서는 안되는 모든 전자 메일 주소를 필터링하는 정규식을 정의합니다.',
+        'Determines the way the linked objects are displayed in each zoom mask.' =>
+            '링크된 개체가 각 줌 마스크에 표시되는 방식을 결정합니다.',
+        'Determines if a button to delete a link should be displayed next to each link in each zoom mask.' =>
+            '링크를 삭제할 버튼이 각 줌 마스크의 각 링크 옆에 표시되어야 하는지 여부를 결정합니다.',
+        'Defines the link type \'Normal\'. If the source name and the target name contain the same value, the resulting link is a non-directional one; otherwise, the result is a directional link.' =>
+            '\'Normal\'링크 유형을 정의합니다. 소스 이름과 대상 이름이 동일한 값을 포함하면 결과 링크는 비 방향성 링크입니다. 그렇지 않은 경우 결과는 방향 링크입니다.',
+        'Defines the link type \'ParentChild\'. If the source name and the target name contain the same value, the resulting link is a non-directional one; otherwise, the result is a directional link.' =>
+            '링크 유형 \'ParentChild\'를 정의합니다. 소스 이름과 대상 이름이 동일한 값을 포함하면 결과 링크는 비 방향성 링크입니다. 그렇지 않은 경우 결과는 방향 링크입니다.',
+        'Defines the link type groups. The link types of the same group cancel one another. Example: If ticket A is linked per a \'Normal\' link with ticket B, then these tickets could not be additionally linked with link of a \'ParentChild\' relationship.' =>
+            '링크 유형 그룹을 정의합니다. 같은 그룹의 링크 유형은 서로 취소합니다. 예 : 항공권 A가 티켓 B와 \'일반\'링크별로 링크 된 경우이 티켓을 \'ParentChild\'관계의 링크와 추가로 연결할 수 없습니다.',
+        'Defines the log module for the system. "File" writes all messages in a given logfile, "SysLog" uses the syslog daemon of the system, e.g. syslogd.' =>
+            '시스템의 로그 모듈을 정의합니다. "파일"은 주어진 로그 파일에 모든 메시지를 쓰고 "syslog"는 시스템의 syslog 데몬을 사용합니다. syslogd.',
+        'If "SysLog" was selected for LogModule, a special log facility can be specified.' =>
+            'LogModule에 대해 "SysLog"가 선택되면 특수 로그 기능을 지정할 수 있습니다.',
+        'If "SysLog" was selected for LogModule, the charset that should be used for logging can be specified.' =>
+            'LogModule에 "SysLog"를 선택하면 로깅에 사용해야하는 charset을 지정할 수 있습니다.',
+        'If "file" was selected for LogModule, a logfile must be specified. If the file doesn\'t exist, it will be created by the system.' =>
+            'LogModule에 대해 "file"을 선택하면 로그 파일을 지정해야합니다. 파일이 없으면 시스템에 의해 작성됩니다.',
+        'Adds a suffix with the actual year and month to the OTRS log file. A logfile for every month will be created.' =>
+            'OTRS 로그 파일에 실제 연도와 월이있는 접미어를 추가합니다. 매월 로그 파일이 생성됩니다.',
+        'Set the minimum log level. If you select \'error\', just errors are logged. With \'debug\' you get all logging messages. The order of log levels is: \'debug\', \'info\', \'notice\' and \'error\'.' =>
+            '최소 로그 레벨을 설정하십시오. \'오류\'를 선택하면 오류 만 기록됩니다. \'디버그\'를 사용하면 모든 로깅 메시지를 얻을 수 있습니다. 로그 수준의 순서는 \'debug\', \'info\', \'notice\'및 \'error\'입니다.',
+        'Defines the module to send emails. "DoNotSendEmail" doesn\'t send emails at all. Any of the "SMTP" mechanisms use a specified (external) mailserver. "Sendmail" directly uses the sendmail binary of your operating system. "Test" doesn\'t send emails, but writes them to $OTRS_HOME/var/tmp/CacheFileStorable/EmailTest/ for testing purposes.' =>
+            '',
+        'If any of the "SMTP" mechanisms was selected as SendmailModule, the mailhost that sends out the mails must be specified.' =>
+            '"SMTP"메커니즘 중 하나가 SendmailModule로 선택된 경우 메일을 보내는 메일 호스트를 지정해야합니다.',
+        'If any of the "SMTP" mechanisms was selected as SendmailModule, the port where your mailserver is listening for incoming connections must be specified.' =>
+            '"SMTP"메커니즘 중 하나가 SendmailModule로 선택된 경우 메일 서버가 들어오는 연결을 수신하는 포트를 지정해야합니다.',
+        'If any of the "SMTP" mechanisms was selected as SendmailModule, and authentication to the mail server is needed, an username must be specified.' =>
+            '"SMTP"메커니즘 중 하나가 SendmailModule로 선택되고 메일 서버에 대한 인증이 필요하면 사용자 이름을 지정해야합니다.',
+        'If any of the "SMTP" mechanisms was selected as SendmailModule, and authentication to the mail server is needed, a password must be specified.' =>
+            '"SMTP"메커니즘 중 하나가 SendmailModule로 선택되고 메일 서버에 대한 인증이 필요하면 암호를 지정해야합니다.',
+        'Sends all outgoing email via bcc to the specified address. Please use this only for backup reasons.' =>
+            '모든 발신 이메일을 bcc를 통해 지정된 주소로 보냅니다. 백업 목적으로 만 사용하십시오.',
+        'If set, this address is used as envelope sender in outgoing messages (not notifications - see below). If no address is specified, the envelope sender is equal to queue e-mail address.' =>
+            '설정된 경우 이 주소는 발신 메일에서 봉투 발신자로 사용됩니다 ( 알림이 아님 - 아래 참조). 주소를 지정하지 않으면 봉투 송신자는 대기열 전자 우편 주소와 같습니다.',
+        'If set, this address is used as envelope sender header in outgoing notifications. If no address is specified, the envelope sender header is empty (unless SendmailNotificationEnvelopeFrom::FallbackToEmailFrom is set).' =>
+            '설정된 경우이 주소는 보내는 알림의 봉투 보낸 사람 헤더로 사용됩니다. 주소를 지정하지 않으면 봉투 송신자 헤더가 비어 있습니다 (SendmailNotificationEnvelopeFrom :: FallbackToEmailFrom이 설정되지 않은 경우).',
+        'If no SendmailNotificationEnvelopeFrom is specified, this setting makes it possible to use the email\'s from address instead of an empty envelope sender (required in certain mail server configurations).' =>
+            'SendmailNotificationEnvelopeFrom이 지정되지 않은 경우이 설정을 사용하면 빈 봉투 발신자 대신 (특정 전자 메일 서버 구성에서 필요) 전자 메일의 보낸 사람 주소를 사용할 수 있습니다.',
+        'Forces encoding of outgoing emails (7bit|8bit|quoted-printable|base64).' =>
+            '보내는 전자 메일을 강제로 인코딩합니다 (7bit | 8bit | quoted-printable | base64).',
+        'Defines default headers for outgoing emails.' => '보내는 전자 메일의 기본 헤더를 정의합니다.',
+        'Registers a log module, that can be used to log communication related information.' =>
+            '통신 관련 정보를 기록하는데 사용할 수있는 로그 모듈을 등록합니다.',
+        'Defines the number of hours a successful communication will be stored.' =>
+            '성공적인 통신을 저장할 시간을 정의합니다.',
+        'Defines the number of hours a communication will be stored, whichever its status.' =>
+            '통신이 저장될 시간을 분으로 정의합니다',
+        'MailQueue configuration settings.' => 'MailQueue 구성 설정.',
+        'Define which avatar engine should be used for the agent avatar on the header and the sender images in AgentTicketZoom. If \'None\' is selected, initials will be displayed instead. Please note that selecting anything other than \'None\' will transfer the encrypted email address of the particular user to an external service.' =>
+            '에이전트 아바타에 사용할 아바타 엔진과 AgentTicketZoom의 보낸 사람 이미지를 정의하십시오. \'없음\'을 선택하면 대신 이니셜이 표시됩니다. \'없음\'이외의 다른 것을 선택하면 특정 사용자의 암호화 된 이메일 주소가 외부 서비스로 전송됩니다.',
+        'Define which avatar default image should be used for the current agent if no gravatar is assigned to the mail address of the agent. Check https://gravatar.com/site/implement/images/ for further information.' =>
+            '',
+        'Define which avatar default image should be used for the article view if no gravatar is assigned to the mail address. Check https://gravatar.com/site/implement/images/ for further information.' =>
+            '',
+        'Defines an alternate URL, where the login link refers to.' => '로그인 링크가 참조하는 대체 URL을 정의합니다.',
+        'Defines an alternate URL, where the logout link refers to.' => '로그 아웃 링크가 참조하는 대체 URL을 정의합니다.',
+        'Defines a useful module to load specific user options or to display news.' =>
+            '특정 사용자 옵션을 로드하거나 뉴스를 표시하는데 유용한 모듈을 정의합니다.',
+        'Defines the key to be checked with Kernel::Modules::AgentInfo module. If this user preferences key is true, the message is accepted by the system.' =>
+            'Kernel :: Modules :: AgentInfo 모듈로 확인할 키를 정의합니다. 이 사용자 기본 설정 키가 true이면 시스템에서 메시지를 수락합니다.',
+        'File that is displayed in the Kernel::Modules::AgentInfo module, if located under Kernel/Output/HTML/Templates/Standard/AgentInfo.tt.' =>
+            'Kernel :: Outputs / HTML / Templates / Standard / AgentInfo.tt 아래에있는 경우 Kernel :: Modules :: AgentInfo 모듈에 표시되는 파일.',
+        'Defines the module to generate code for periodic page reloads.' =>
+            '정기적 페이지 제로드를 위한 코드를 생성하는 모듈을 정의합니다.',
+        'Defines the module to display a notification in different interfaces on different occasions for OTRS Business Solution™.' =>
+            'OTRS Business Solution ™의 여러 경우에 서로 다른 인터페이스에 알림을 표시 할 모듈을 정의합니다.',
+        'Defines the module to display a notification in the agent interface, if the system is used by the admin user (normally you shouldn\'t work as admin).' =>
+            '관리자 사용자가 시스템을 사용하는 경우 에이전트 인터페이스에 알림을 표시 할 모듈을 정의합니다 (일반적으로 관리자로 사용하면 안 됨).',
+        'Defines the module to display a notification in the agent interface, if the agent session limit prior warning is reached.' =>
+            '에이전트 세션 제한 사전 경고에 도달하면 에이전트 인터페이스에 알림을 표시 할 모듈을 정의합니다.',
+        'Defines the module that shows all the currently logged in agents in the agent interface.' =>
+            '에이전트 인터페이스에 현재 로그인 되어 있는 모든 에이전트를 표시하는 모듈을 정의합니다.',
+        'Defines the module that shows all the currently logged in customers in the agent interface.' =>
+            '에이전트 인터페이스에 현재 로그인 한 모든 고객을 표시하는 모듈을 정의합니다.',
+        'Defines the module to display a notification in the agent interface, if there are modified sysconfig settings that are not deployed yet.' =>
+            '아직 배포되지 않은 수정 된 sysconfig 설정이있는 경우 에이전트 인터페이스에 알림을 표시 할 모듈을 정의합니다.',
+        'Defines the module to display a notification in the agent interface, if there are invalid sysconfig settings deployed.' =>
+            '잘못된 sysconfig 설정이 배포 된 경우 에이전트 인터페이스에 알림을 표시 할 모듈을 정의합니다.',
+        'Defines the module to display a notification in the agent interface, if the agent is logged in while having out-of-office active.' =>
+            '에이전트가 부재중 상태로 로그인되어 있는 경우 에이전트 인터페이스에 알림을 표시할 모듈을 정의합니다.',
+        'Defines the module to display a notification in the agent interface, if the agent is logged in while having system maintenance active.' =>
+            '시스템 유지 관리가 활성화 된 상태에서 에이전트가 로그인 한 경우 에이전트 인터페이스에 알림을 표시할 모듈을 정의합니다.',
+        'Defines the module to display a notification in the agent interface if the system configuration is out of sync.' =>
+            '시스템 구성이 동기화되지 않은 경우 에이전트 인터페이스에 알림을 표시 할 모듈을 정의합니다.',
+        'Defines the module to display a notification in the agent interface, if the agent has not yet selected a time zone.' =>
+            '에이전트가 아직 시간대를 선택하지 않은 경우 에이전트 인터페이스에 알림을 표시할 모듈을 정의합니다.',
+        'Defines the module that shows a generic notification in the agent interface. Either "Text" - if configured - or the contents of "File" will be displayed.' =>
+            '에이전트 인터페이스에서 일반 알림을 표시하는 모듈을 정의합니다. "텍스트"- 구성된 경우 - 또는 "파일"의 내용이 표시됩니다.',
+        'Defines the module used to store the session data. With "DB" the frontend server can be splitted from the db server. "FS" is faster.' =>
+            '세션 데이터를 저장하는 데 사용되는 모듈을 정의합니다. "DB"를 사용하면 프론트 엔드 서버를 db 서버에서 분리 할 수 ​​있습니다. "FS"가 빠릅니다.',
+        'Defines the name of the session key. E.g. Session, SessionID or OTRS.' =>
+            '세션 키의 이름을 정의합니다. 예 : 세션, 세션 ID 또는 OTRS.',
+        'Defines the name of the key for customer sessions.' => '고객 세션의 키 이름을 정의합니다.',
+        'Turns on the remote ip address check. It should not be enabled if the application is used, for example, via a proxy farm or a dialup connection, because the remote ip address is mostly different for the requests.' =>
+            '원격 IP 주소 확인을 켭니다. 예를 들어 프록시 팜이나 전화 접속 연결을 통해 응용 프로그램을 사용하는 경우에는 원격 IP 주소가 대부분 요청마다 다릅니다.',
+        'Deletes a session if the session id is used with an invalid remote IP address.' =>
+            '세션 ID가 유효하지 않은 원격 IP주소와 함께 사용되면 세션을 삭제합니다.',
+        'Defines the maximal valid time (in seconds) for a session id.' =>
+            '세션 ID의 최대 유효 시간 (초)을 정의합니다.',
+        'Sets the inactivity time (in seconds) to pass before a session is killed and a user is logged out.' =>
+            '세션이 종료되고 사용자가 로그 아웃하기 전에 비 활동 시간 (초)을 설정합니다.',
+        'Deletes requested sessions if they have timed out.' => '요청한 세션이 시간 초과된 경우 삭제합니다.',
+        'Makes the session management use html cookies. If html cookies are disabled or if the client browser disabled html cookies, then the system will work as usual and append the session id to the links.' =>
+            '세션 관리가 html 쿠키를 사용하게합니다. html 쿠키가 비활성화되거나 클라이언트 브라우저가 html 쿠키를 비활성화 한 경우 시스템은 평소와 같이 작동하고 링크에 세션 ID를 추가합니다.',
+        'Stores cookies after the browser has been closed.' => '브라우저가 닫힌 후에 쿠키를 저장합니다.',
+        'Protection against CSRF (Cross Site Request Forgery) exploits (for more info see https://en.wikipedia.org/wiki/Cross-site_request_forgery).' =>
+            '',
+        'Sets the maximum number of active agents within the timespan defined in SessionMaxIdleTime before a prior warning will be visible for the logged in agents.' =>
+            '로그인 된 에이전트에 대해 이전 경고가 표시되기 전에 SessionMaxIdleTime에 정의 된 시간 범위 내에서 활성 에이전트의 최대 수를 설정합니다.',
+        'Sets the maximum number of active agents within the timespan defined in SessionMaxIdleTime.' =>
+            'SessionMaxIdleTime에 정의 된 시간 범위 내에서 활성 에이전트의 최대 수를 설정합니다.',
+        'Sets the maximum number of active sessions per agent within the timespan defined in SessionMaxIdleTime.' =>
+            'SessionMaxIdleTime에 정의 된 시간 범위 내에서 에이전트 당 최대 활성 세션 수를 설정합니다.',
+        'Sets the maximum number of active customers within the timespan defined in SessionMaxIdleTime.' =>
+            'SessionMaxIdleTime에 정의 된 시간 범위 내의 활성 고객의 최대 수를 설정합니다.',
+        'Sets the maximum number of active sessions per customers within the timespan defined in SessionMaxIdleTime.' =>
+            'SessionMaxIdleTime에 정의 된 시간 범위 내에서 고객 당 활성 세션의 최대 수를 설정합니다.',
+        'If "FS" was selected for SessionModule, a directory where the session data will be stored must be specified.' =>
+            'SessionModule에 대해 "FS"가 선택되면 세션 데이터가 저장 될 디렉토리를 지정해야합니다.',
+        'If "DB" was selected for SessionModule, a table in database where session data will be stored must be specified.' =>
+            'SessionModule에 대해 "DB"가 선택되면 세션 데이터가 저장 될 데이터베이스의 테이블을 지정해야합니다.',
+        'Defines the period of time (in minutes) before agent is marked as "away" due to inactivity (e.g. in the "Logged-In Users" widget or for the chat).' =>
+            '비활성 상태 (예 : \'로그인 사용자\'위젯 또는 채팅)로 인해 상담원이 \'자리 비움\'으로 표시되기까지의 시간 (분)을 정의합니다.',
+        'Defines the period of time (in minutes) before customer is marked as "away" due to inactivity (e.g. in the "Logged-In Users" widget or for the chat).' =>
+            '비활성 상태 (예 : \'로그인 사용자\'위젯 또는 채팅)로 인해 고객이 \'자리 비움\'으로 표시되기까지의 시간 (분)을 정의합니다.',
+        'This setting is deprecated. Set OTRSTimeZone instead.' => '이 설정은 사용되지 않습니다. 대신 OTRSTimeZone을 설정하십시오.',
+        'Sets the time zone being used internally by OTRS to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.' =>
+            'OTRS에 의해 내부적으로 사용되는 시간대를 e로 설정합니다. 지. 날짜와 시간을 데이터베이스에 저장하십시오. 경고 :이 설정은 일단 설정하고 티켓 또는 날짜 / 시간이 포함 된 다른 데이터를 작성한 후에 변경하면 안됩니다.',
+        'Sets the time zone that will be assigned to newly created users and will be used for users that haven\'t yet set a time zone. This is the time zone being used as default to convert date and time between the OTRS time zone and the user\'s time zone.' =>
+            '새로 생성 된 사용자에게 할당되고 아직 시간대를 설정하지 않은 사용자에게 사용될 시간대를 설정합니다. 이 시간대는 OTRS 시간대와 사용자 시간대 사이의 날짜와 시간을 변환하기 위해 기본값으로 사용됩니다.',
+        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) OTRSTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
+            '사용하도록 설정하면 아직 시간대를 선택하지 않은 사용자에게 알림이 전송됩니다. 참고 : (1) 사용자가 아직 시간대를 선택하지 않았으며 (2) OTRSTimeZone과 UserDefaultTimeZone이 일치하고 (3) UTC로 설정되지 않은 경우 알림이 표시되지 않습니다.',
+        'Maximum Number of a calendar shown in a dropdown.' => '드롭 다운에 표시된 최대 달력 수입니다.',
+        'Define the start day of the week for the date picker.' => '날짜 선택 도구의 시작 요일을 정의하십시오.',
+        'Adds the permanent vacation days.' => '영구 휴가 일을 추가합니다.',
+        'Adds the one time vacation days.' => '한 번 휴가를 추가합니다.',
+        'Defines the hours and week days to count the working time.' => '근무 시간을 계산할 시간과 요일을 정의합니다.',
+        'Defines the name of the indicated calendar.' => '표시된 달력의 이름을 정의합니다.',
+        'Defines the time zone of the indicated calendar, which can be assigned later to a specific queue.' =>
+            '지정된 일정에 나중에 할당할 수 있는 지정된 달력의 표준 시간대를 정의합니다.',
+        'Define the start day of the week for the date picker for the indicated calendar.' =>
+            '표시된 달력의 날짜 선택 도구에 대한 시작 요일을 정의하십시오.',
+        'Adds the permanent vacation days for the indicated calendar.' =>
+            '지정된 달력에 대한 영구 휴가 일을 추가합니다.',
+        'Adds the one time vacation days for the indicated calendar.' => '표시된 달력에 대해 휴가일을 한 번 추가합니다.',
+        'Defines the hours and week days of the indicated calendar, to count the working time.' =>
+            '작업 시간을 계산하기 위해 표시된 달력의 시간과 요일을 정의합니다.',
+        'Defines the maximal size (in bytes) for file uploads via the browser. Warning: Setting this option to a value which is too low could cause many masks in your OTRS instance to stop working (probably any mask which takes input from the user).' =>
+            '브라우저를 통한 파일 업로드의 최대 크기 (바이트)를 정의합니다. 경고 :이 옵션을 너무 낮은 값으로 설정하면 OTRS 인스턴스의 많은 마스크가 작동을 멈출 수 있습니다 (사용자가 입력 한 마스크 일 가능성이 있음).',
+        'Selects the module to handle uploads via the web interface. "DB" stores all uploads in the database, "FS" uses the file system.' =>
+            '웹 인터페이스를 통해 업로드를 처리 할 모듈을 선택합니다. "DB"는 모든 업로드를 데이터베이스에 저장하고 "FS"는 파일 시스템을 사용합니다.',
+        'Specifies the text that should appear in the log file to denote a CGI script entry.' =>
+            '로그 파일에 표시 할 텍스트를 지정하여 CGI 스크립트 항목을 나타냅니다.',
+        'Defines the filter that processes the text in the articles, in order to highlight URLs.' =>
+            'URL을 강조 표시하기 위해 기사의 텍스트를 처리하는 필터를 정의합니다.',
+        'Activates lost password feature for agents, in the agent interface.' =>
+            '에이전트 인터페이스에서 에이전트에 대해 손실된 암호 기능을 활성화합니다.',
+        'Shows the message of the day on login screen of the agent interface.' =>
+            '에이전트 인터페이스의 로그인 화면에서 오늘의 메시지를 표시합니다.',
+        'Runs the system in "Demo" mode. If enabled, agents can change preferences, such as selection of language and theme via the agent web interface. These changes are only valid for the current session. It will not be possible for agents to change their passwords.' =>
+            '시스템을 "데모"모드로 실행합니다. 이 옵션을 사용하면 상담원 웹 인터페이스를 통해 언어 및 테마 선택과 같은 기본 설정을 변경할 수 있습니다. 이러한 변경은 현재 세션에서만 유효합니다. 에이전트가 암호를 변경할 수는 없습니다.',
+        'Allows the administrators to login as other users, via the users administration panel.' =>
+            '관리자가 사용자 관리 패널을 통해 다른 사용자로 로그인 할 수있게 합니다.',
+        'Allows the administrators to login as other customers, via the customer user administration panel.' =>
+            '관리자가 고객 사용자 관리 패널을 통해 다른 고객으로 로그인 할 수 있습니다.',
+        'Specifies the group where the user needs rw permissions so that he can access the "SwitchToCustomer" feature.' =>
+            '"SwitchToCustomer"기능에 액세스 할 수 있도록 사용자에게 rw 권한이 필요한 그룹을 지정합니다.',
+        'Sets the timeout (in seconds) for http/ftp downloads.' => 'http / ftp 다운로드에 대한 시간 초과 (초)를 설정합니다.',
+        'Defines the connections for http/ftp, via a proxy.' => '프록시를 통해 http / ftp에 대한 연결을 정의합니다.',
+        'Turns off SSL certificate validation, for example if you use a transparent HTTPS proxy. Use at your own risk!' =>
+            '투명한 HTTPS 프록시를 사용하는 경우와 같이 SSL 인증서 유효성 검사를 끕니다. 자신의 책임하에 사용하십시오!',
+        'Enables file upload in the package manager frontend.' => '패키지 관리자 프론트 엔드에서 파일 업로드를 사용 가능하게 합니다.',
+        'Defines the location to get online repository list for additional packages. The first available result will be used.' =>
+            '추가 패키지 온라인 저장소 목록을 가져올 위치를 정의합니다. 첫 번째 가능한 결과가 사용됩니다.',
+        'List of online package repositories.' => '',
+        'Defines the IP regular expression for accessing the local repository. You need to enable this to have access to your local repository and the package::RepositoryList is required on the remote host.' =>
+            '로컬 저장소에 액세스하기위한 IP 정규식을 정의합니다. 이것을 사용하여 로컬 저장소에 액세스 할 수 있어야하며 패키지 :: RepositoryList가 원격 호스트에 필요합니다.',
+        'Sets the timeout (in seconds) for package downloads. Overwrites "WebUserAgent::Timeout".' =>
+            '패키지 다운로드의 시간 초과 (초)를 설정합니다. "WebUserAgent :: Timeout"을 덮어 씁니다.',
+        'Fetches packages via proxy. Overwrites "WebUserAgent::Proxy".' =>
+            '프록시를 통해 패키지를 가져옵니다. "WebUserAgent :: Proxy"를 덮어 씁니다.',
+        'If this setting is enabled, local modifications will not be highlighted as errors in the package manager and support data collector.' =>
+            '이 설정을 사용하면 로컬 수정 내용이 패키지 관리자 및 지원 데이터 수집기에서 오류로 강조 표시되지 않습니다.',
+        'Package event module file a scheduler task for update registration.' =>
+            '패키지 이벤트 모듈은 업데이트 등록을 위한 스케줄러 태스크를 파일로 작성합니다.',
+        'List of all Package events to be displayed in the GUI.' => 'GUI에 표시 할 모든 패키지 이벤트 목록.',
+        'List of all DynamicField events to be displayed in the GUI.' => 'GUI에 표시 할 모든 DynamicField 이벤트 목록입니다.',
+        'List of all LinkObject events to be displayed in the GUI.' => 'GUI에 표시 될 모든 LinkObject 이벤트 목록입니다.',
+        'DynamicField object registration.' => 'DynamicField 개체 등록.',
+        'Defines the username to access the SOAP handle (bin/cgi-bin/rpc.pl).' =>
+            'SOAP 핸들 (bin / cgi-bin / rpc.pl)에 액세스하기위한 사용자 이름을 정의합니다.',
+        'Defines the password to access the SOAP handle (bin/cgi-bin/rpc.pl).' =>
+            'SOAP 핸들 (bin / cgi-bin / rpc.pl)에 액세스하기위한 암호를 정의합니다.',
+        'Enable keep-alive connection header for SOAP responses.' => 'SOAP 응답에 대해 연결 유지 연결 헤더를 사용합니다.',
+        'Specifies the path of the file for the logo in the page header (gif|jpg|png).' =>
+            '',
+        'Size of the logo in the page header.' => '',
+        'Defines the standard size of PDF pages.' => 'PDF 페이지의 표준 크기를 정의합니다.',
+        'Defines the maximum number of pages per PDF file.' => 'PDF 파일 당 최대 페이지 수를 정의합니다.',
+        'Defines the path and TTF-File to handle proportional font in PDF documents.' =>
+            'PDF 문서에서 비례 글꼴을 처리 할 경로와 TTF-File을 정의합니다.',
+        'Defines the path and TTF-File to handle bold proportional font in PDF documents.' =>
+            'PDF 문서에서 굵은 글꼴을 처리 할 경로와 TTF 파일을 정의합니다.',
+        'Defines the path and TTF-File to handle italic proportional font in PDF documents.' =>
+            'PDF 문서에서 기울임 꼴 비례 글꼴을 처리 할 경로와 TTF-File을 정의합니다.',
+        'Defines the path and TTF-File to handle bold italic proportional font in PDF documents.' =>
+            'PDF 문서에서 굵은 기울임 꼴 비례 글꼴을 처리 할 경로와 TTF-File을 정의합니다.',
+        'Defines the path and TTF-File to handle monospaced font in PDF documents.' =>
+            'PDF 문서에서 고정 폭 글꼴을 처리 할 경로와 TTF-File을 정의합니다.',
+        'Defines the path and TTF-File to handle bold monospaced font in PDF documents.' =>
+            'PDF 문서에서 굵은 고정 폭 글꼴을 처리 할 경로와 TTF-File을 정의합니다.',
+        'Defines the path and TTF-File to handle italic monospaced font in PDF documents.' =>
+            'PDF 문서에서 이탤릭체로 고정 폭 글꼴을 처리 할 경로와 TTF 파일을 정의합니다.',
+        'Defines the path and TTF-File to handle bold italic monospaced font in PDF documents.' =>
+            'PDF 문서에서 굵은 기울임 꼴 고정 폭 글꼴을 처리 할 경로와 TTF-File을 정의합니다.',
+        'Enables PGP support. When PGP support is enabled for signing and encrypting mail, it is HIGHLY recommended that the web server runs as the OTRS user. Otherwise, there will be problems with the privileges when accessing .gnupg folder.' =>
+            'PGP 지원을 사용합니다. 메일 서명 및 암호화에 대해 PGP 지원을 사용하는 경우 웹 서버를 OTRS 사용자로 실행하는 것이 좋습니다. 그렇지 않으면 .gnupg 폴더에 액세스 할 때 권한에 문제가 있습니다.',
+        'Defines the path to PGP binary.' => 'PGP 바이너리 경로를 정의합니다.',
+        'Sets the options for PGP binary.' => 'PGP 바이너리의 옵션을 설정합니다.',
+        'Sets the preferred digest to be used for PGP binary.' => 'PGP 바이너리에 사용할 선호 다이제스트를 설정합니다.',
+        'Sets the password for private PGP key.' => '비공개 PGP 키의 암호를 설정합니다.',
+        'Enable this if you trust in all your public and private pgp keys, even if they are not certified with a trusted signature.' =>
+            '신뢰할 수있는 서명으로 인증되지 않았더라도 모든 공용 및 개인용 PGP 키를 신뢰하는 경우이 옵션을 활성화하십시오.',
+        'Configure your own log text for PGP.' => 'PGP에 대한 자체 로그 텍스트를 구성하십시오.',
+        'Sets the method PGP will use to sing and encrypt emails. Note Inline method is not compatible with RichText messages.' =>
+            'PGP가 전자 메일을 노래하고 암호화하는 데 사용할 방법을 설정합니다. 참고 인라인 메서드는 서식있는 텍스트 메시지와 호환되지 않습니다.',
+        'Enables S/MIME support.' => 'S / MIME 지원을 사용합니다.',
+        'Defines the path to open ssl binary. It may need a HOME env ($ENV{HOME} = \'/var/lib/wwwrun\';).' =>
+            'ssl 바이너리를 여는 경로를 정의합니다. HOME 환경 변수 ($ ENV {HOME} = \'/ var / lib / wwwrun\';)가 필요합니다.',
+        'Specifies the directory where SSL certificates are stored.' => 'SSL 인증서가 저장되는 디렉토리를 지정합니다.',
+        'Specifies the directory where private SSL certificates are stored.' =>
+            '개인 SSL 인증서가 저장되는 디렉토리를 지정합니다.',
+        'Cache time in seconds for the SSL certificate attributes.' => 'SSL 인증서 속성의 캐시 시간 초.',
+        'Enables fetch S/MIME from CustomerUser backend support.' => '고객사용자 백 엔드 지원에서 S / MIME을 가져올 수 있습니다.',
+        'Specifies the name that should be used by the application when sending notifications. The sender name is used to build the complete display name for the notification master (i.e. "OTRS Notifications" otrs@your.example.com).' =>
+            '알림을 보낼 때 응용 프로그램에서 사용해야하는 이름을 지정합니다. 발신자 이름은 알림 마스터의 전체 표시 이름 (예 : "OTRS Notifications"otrs@your.example.com)을 작성하는 데 사용됩니다.',
+        'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "OTRS Notifications" otrs@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
+            '알림을 보낼 때 응용 프로그램에서 사용해야하는 전자 메일 주소를 지정합니다. 이메일 주소는 알림 마스터의 전체 표시 이름 (예 : "OTRS Notifications"otrs@your.example.com)을 작성하는 데 사용됩니다. OTRS_CONFIG_FQDN 변수를 설정에 사용하거나 다른 이메일 주소를 선택할 수 있습니다.',
+        'Defines the subject for notification mails sent to agents, with token about new requested password.' =>
+            '에이전트에게 보낸 알림 메일의 제목을 정의하고 요청 된 새 비밀번호에 대한 토큰을 사용합니다.',
+        'Defines the body text for notification mails sent to agents, with token about new requested password.' =>
+            '에이전트에게 보낸 알림 메일의 본문 텍스트를 정의하고 요청된 새 비밀번호에 대한 토큰을 지정합니다.',
+        'Defines the subject for notification mails sent to agents, about new password.' =>
+            '에이전트에 보내는 알림 메일의 제목과 새 암호를 정의합니다.',
+        'Defines the body text for notification mails sent to agents, about new password.' =>
+            '에이전트에 보내는 알림 메일의 본문 텍스트를 새 암호로 정의합니다.',
+        'Standard available permissions for agents within the application. If more permissions are needed, they can be entered here. Permissions must be defined to be effective. Some other good permissions have also been provided built-in: note, close, pending, customer, freetext, move, compose, responsible, forward, and bounce. Make sure that "rw" is always the last registered permission.' =>
+            '응용 프로그램 내의 에이전트에 대한 표준 사용 권한. 더 많은 권한이 필요하면 여기에 입력 할 수 있습니다. 권한은 효과가 있도록 정의되어야합니다. 메모, 닫기, 보류 중, 고객, 프리 텍스트, 이동, 작성, 책임, 전달 및 반송과 같은 기타 훌륭한 사용 권한도 내장되어 있습니다. "rw"가 항상 마지막으로 등록 된 권한인지 확인하십시오.',
+        'Defines the standard permissions available for customers within the application. If more permissions are needed, you can enter them here. Permissions must be hard coded to be effective. Please ensure, when adding any of the afore mentioned permissions, that the "rw" permission remains the last entry.' =>
+            '응용 프로그램 내에서 고객이 사용할 수있는 표준 사용 권한을 정의합니다. 더 많은 권한이 필요하면 여기에 입력 할 수 있습니다. 사용 권한은 효과적 이도록 하드 코딩해야합니다. 앞서 언급 한 권한 중 하나를 추가 할 때 "rw"권한이 마지막 항목으로 남아 있는지 확인하십시오.',
+        'This setting allows you to override the built-in country list with your own list of countries. This is particularly handy if you just want to use a small select group of countries.' =>
+            '이 설정을 사용하면 기본 제공 국가 목록을 자신의 국가 목록으로 대체할 수 있습니다. 소규모 그룹을 선택하고 싶을 때 특히 편리합니다.',
+        'Enables performance log (to log the page response time). It will affect the system performance. Frontend::Module###AdminPerformanceLog must be enabled.' =>
+            '성능 로그를 사용 가능하게합니다 (페이지 응답 시간을 기록). 시스템 성능에 영향을줍니다. Frontend :: Module ### AdminPerformanceLog가 활성화되어 있어야합니다.',
+        'Specifies the path of the file for the performance log.' => '성능 로그 파일의 경로를 지정합니다.',
+        'Defines the maximum size (in MB) of the log file.' => '로그 파일의 최대 크기 (MB)를 정의합니다.',
+        'Defines the two-factor module to authenticate agents.' => '에이전트를 인증할 2요소 모듈을 정의합니다.',
+        'Defines the agent preferences key where the shared secret key is stored.' =>
+            '공유 비밀 키가 저장되는 에이전트 기본 설정 키를 정의합니다.',
+        'Defines if agents should be allowed to login if they have no shared secret stored in their preferences and therefore are not using two-factor authentication.' =>
+            '상담원이 기본 설정에 공유 암호가 저장되어 있지 않아 이중 인증을 사용하지 않는 경우 로그인을 허용해야하는지 여부를 정의합니다.',
+        'Defines if the previously valid token should be accepted for authentication. This is slightly less secure but gives users 30 seconds more time to enter their one-time password.' =>
+            '이전에 유효한 토큰이 인증을 위해 수락되어야 하는지 여부를 정의합니다. 이는 보안이 다소 떨어지지만 사용자가 일회용 암호를 입력하는데 30초 이상 더 많은 시간을 줍니다.',
+        'Defines the name of the table where the user preferences are stored.' =>
+            '사용자 기본 설정이 저장된 테이블의 이름을 정의합니다.',
+        'Defines the column to store the keys for the preferences table.' =>
+            '환경 설정 테이블의 키를 저장할 열을 정의합니다.',
+        'Defines the name of the column to store the data in the preferences table.' =>
+            '환경 설정 테이블에 데이터를 저장할 열의 이름을 정의합니다.',
+        'Defines the name of the column to store the user identifier in the preferences table.' =>
+            '환경 설정 테이블에 사용자 식별자를 저장할 열의 이름을 정의합니다.',
+        'Defines the config parameters of this item, to be shown in the preferences view. \'PasswordRegExp\' allows to match passwords against a regular expression. Define the minimum number of characters using \'PasswordMinSize\'. Define if at least 2 lowercase and 2 uppercase letter characters are needed by setting the appropriate option to \'1\'. \'PasswordMin2Characters\' defines if the password needs to contain at least 2 letter characters (set to 0 or 1). \'PasswordNeedDigit\' controls the need of at least 1 digit (set to 0 or 1 to control). \'PasswordMaxLoginFailed\' allows to set an agent to invalid-temporarily if max failed logins reached. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
+            '환경 설정보기에 표시 할이 항목의 구성 매개 변수를 정의합니다. \'PasswordRegExp\'는 정규 표현식과 암호를 일치시킵니다. \'PasswordMinSize\'를 사용하여 최소 문자 수를 정의하십시오. 적절한 옵션을 \'1\'로 설정하여 최소한 2 개의 소문자와 2 개의 대문자가 필요한지 정의하십시오. \'PasswordMin2Characters\'는 암호가 2 자 이상의 문자 (0 또는 1로 설정)를 포함해야 하는지를 정의합니다. \'PasswordNeedDigit\'은 최소 1 자리 숫자의 필요성을 제어합니다 (제어하려면 0 또는 1로 설정). \'PasswordMaxLoginFailed\'는 최대 실패 로그인에 도달하면 에이전트를 유효하지 않게 임시로 설정할 수 있습니다. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
+        'Defines the config parameters of this item, to be shown in the preferences view. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
+            '환경 설정보기에 표시 할이 항목의 구성 매개 변수를 정의합니다. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
+        'Gives end users the possibility to override the separator character for CSV files, defined in the translation files. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
+            '최종 사용자에게 번역 파일에 정의 된 CSV 파일의 구분 문자를 무시할 수 있습니다. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
+        'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
+            '사용자 아바타를 정의합니다. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
+        'Defines the user identifier for the customer panel.' => '고객 패널에 대한 사용자 ID를 정의합니다.',
+        'Activates support for customer and customer user groups.' => '고객 및 고객 사용자 그룹에 대한 지원을 활성화합니다.',
+        'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
+            '모든 고객 사용자가있을 그룹을 정의합니다 (CustomerGroupSupport가 사용 가능하고이 그룹에 대한 모든 고객 사용자를 관리하지 않으려는 경우).',
+        'Defines the groups every customer will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer for these groups).' =>
+            '모든 고객이 속할 그룹을 정의합니다 (CustomerGroupSupport가 사용 가능하고이 그룹의 모든 고객을 관리하지 않으려는 경우).',
+        'Defines a permission context for customer to group assignment.' =>
+            '고객 대 그룹 할당에 대한 사용 권한 컨텍스트를 정의합니다.',
+        'Defines the module that shows the currently logged in agents in the customer interface.' =>
+            '현재 로그인 한 상담원을 고객 인터페이스에 표시하는 모듈을 정의합니다.',
+        'Defines the module that shows the currently logged in customers in the customer interface.' =>
+            '현재 로그인 한 고객을 고객 인터페이스에 표시하는 모듈을 정의합니다.',
+        'Defines the module to display a notification in the customer interface, if the customer is logged in while having system maintenance active.' =>
+            '시스템 유지 보수가 활성화 된 상태에서 고객이 로그인 한 경우 고객 인터페이스에 알림을 표시 할 모듈을 정의합니다.',
+        'Defines the module to display a notification in the customer interface, if the customer user has not yet selected a time zone.' =>
+            '고객 사용자가 아직 시간대를 선택하지 않은 경우 고객 인터페이스에 알림을 표시할 모듈을 정의합니다.',
+        'Defines an alternate login URL for the customer panel..' => '고객 패널에 대한 대체 로그인 URL을 정의합니다.',
+        'Defines an alternate logout URL for the customer panel.' => '고객 패널에 대한 대체 로그 아웃 URL을 정의합니다.',
+        'Defines a customer item, which generates a google maps icon at the end of a customer info block.' =>
+            '고객 정보 블록의 끝에 Google지도 아이콘을 생성하는 고객 항목을 정의합니다.',
+        'Defines a customer item, which generates a google icon at the end of a customer info block.' =>
+            '고객 정보 블록의 끝에 Google 아이콘을 생성하는 고객 항목을 정의합니다.',
+        'Defines a customer item, which generates a LinkedIn icon at the end of a customer info block.' =>
+            '고객 정보 블록의 끝에 LinkedIn 아이콘을 생성하는 고객 항목을 정의합니다.',
+        'Defines a customer item, which generates a XING icon at the end of a customer info block.' =>
+            '고객 정보 블록의 끝에 XING 아이콘을 생성하는 고객 항목을 정의합니다.',
+        'This module and its PreRun() function will be executed, if defined, for every request. This module is useful to check some user options or to display news about new applications.' =>
+            '이 모듈과 PreRun () 함수는 모든 요청에 ​​대해 정의 된 경우 실행됩니다. 이 모듈은 일부 사용자 옵션을 확인하거나 새 응용 프로그램에 대한 뉴스를 표시하는 데 유용합니다.',
+        'Defines the key to check with CustomerAccept. If this user preferences key is true, then the message is accepted by the system.' =>
+            'CustomerAccept로 확인할 키를 정의합니다. 이 사용자 기본 설정 키가 true이면 시스템에서 메시지를 수락합니다.',
+        'Defines the path of the shown info file, that is located under Kernel/Output/HTML/Templates/Standard/CustomerAccept.tt.' =>
+            'Kernel / Output / HTML / Templates / Standard / CustomerAccept.tt에있는 표시된 정보 파일의 경로를 정의합니다.',
+        'Activates lost password feature for customers.' => '고객을 위해 손실된 암호 기능을 활성화합니다.',
+        'Enables customers to create their own accounts.' => '고객이 자신의 계정을 만들 수 있습니다.',
+        'If active, one of the regular expressions has to match the user\'s email address to allow registration.' =>
+            '활성화 되어있는 경우 등록을 허용하는 정규 표현식이 사용자의 전자 메일 주소와 일치하지 않을 수 있습니다.',
+        'If active, none of the regular expressions may match the user\'s email address to allow registration.' =>
+            '활성화되어 있는 경우 등록을 허용하는 정규 표현식이 사용자의 전자 메일 주소와 일치하지 않을 수 있습니다.',
+        'Defines the subject for notification mails sent to customers, with token about new requested password.' =>
+            '새로운 요청된 비밀번호에 대한 토큰과 함께 고객에게 발송된 통지 메일의 제목을 정의합니다.',
+        'Defines the body text for notification mails sent to customers, with token about new requested password.' =>
+            '새로운 요청된 비밀번호에 대한 토큰과 함께 고객에게 발송된 통지 메일의 본문 텍스트를 정의합니다.',
+        'Defines the subject for notification mails sent to customers, about new password.' =>
+            '고객에게 보낸 알림 메일 제목과 새 비밀번호를 정의합니다.',
+        'Defines the body text for notification mails sent to customers, about new password.' =>
+            '새 비밀번호에 대한 알림 메일의 본문 텍스트를 고객에게 전달합니다.',
+        'Defines the subject for notification mails sent to customers, about new account.' =>
+            '새 계정에 대한 고객에게 발송된 알림 메일 제목을 정의합니다.',
+        'Defines the body text for notification mails sent to customers, about new account.' =>
+            '새 계정에 대한 고객에게 발송된 알림메일의 본문 텍스트를 정의합니다.',
+        'Defines the module to authenticate customers.' => '고객을 인증할 모듈을 정의합니다.',
+        'If "DB" was selected for Customer::AuthModule, the encryption type of passwords must be specified.' =>
+            'Customer :: AuthModule에 대해 "DB"가 선택되면 암호의 암호화 유형을 지정해야합니다.',
+        'If "bcrypt" was selected for CryptType, use cost specified here for bcrypt hashing. Currently max. supported cost value is 31.' =>
+            'CryptType에 대해 "bcrypt"를 선택한 경우 bcrypt 해싱에 여기에 지정된 비용을 사용하십시오. 현재 최대 지원 비용 값은 31입니다.',
+        'If "DB" was selected for Customer::AuthModule, the name of the table where your customer data should be stored must be specified.' =>
+            'Customer :: AuthModule에 대해 "DB"가 선택되면 고객 데이터를 저장해야하는 테이블의 이름을 지정해야합니다.',
+        'If "DB" was selected for Customer::AuthModule, the name of the column for the CustomerKey in the customer table must be specified.' =>
+            'Customer :: AuthModule에 대해 "DB"가 선택되면 customer 테이블의 CustomerKey에 대한 열의 이름을 지정해야합니다.',
+        'If "DB" was selected for Customer::AuthModule, the column name for the CustomerPassword in the customer table must be specified.' =>
+            'Customer :: AuthModule에 대해 "DB"가 선택되면 customer 테이블의 CustomerPassword에 대한 열 이름을 지정해야합니다.',
+        'If "DB" was selected for Customer::AuthModule, the DSN for the connection to the customer table must be specified.' =>
+            'Customer :: AuthModule에 대해 "DB"를 선택한 경우 고객 테이블에 대한 연결에 대한 DSN을 지정해야합니다.',
+        'If "DB" was selected for Customer::AuthModule, a username to connect to the customer table can be specified.' =>
+            'Customer :: AuthModule에 대해 "DB"가 선택되면 고객 테이블에 연결할 사용자 이름을 지정할 수 있습니다.',
+        'If "DB" was selected for Customer::AuthModule, a password to connect to the customer table can be specified.' =>
+            'Customer :: AuthModule에 대해 "DB"가 선택되면 고객 테이블에 연결할 암호를 지정할 수 있습니다.',
+        'If "DB" was selected for Customer::AuthModule, a database driver (normally autodetection is used) can be specified.' =>
+            'Customer :: AuthModule에 대해 "DB"가 선택되면 데이터베이스 드라이버 (일반적으로 자동 감지가 사용됨)를 지정할 수 있습니다.',
+        'If "HTTPBasicAuth" was selected for Customer::AuthModule, you can specify to strip leading parts of user names (e. g. for domains like example_domain\user to user).' =>
+            '',
+        'If "HTTPBasicAuth" was selected for Customer::AuthModule, you can specify (by using a RegExp) to strip parts of REMOTE_USER (e. g. for to remove trailing domains). RegExp-Note, $1 will be the new Login.' =>
+            'Customer :: AuthModule에 대해 "HTTPBasicAuth"를 선택한 경우 (예 : RegExp를 사용하여) REMOTE_USER의 일부를 제거하도록 지정할 수 있습니다 (예 : 후행 도메인 제거). RegExp-Note, $ 1이 새로운 로그인이됩니다.',
+        'If "LDAP" was selected for Customer::AuthModule, the LDAP host can be specified.' =>
+            'Customer :: AuthModule에 대해 "LDAP"를 선택한 경우 LDAP 호스트를 지정할 수 있습니다.',
+        'If "LDAP" was selected for Customer::AuthModule, the BaseDN must be specified.' =>
+            'Customer :: AuthModule에서 "LDAP"를 선택한 경우 BaseDN을 지정해야합니다.',
+        'If "LDAP" was selected for Customer::AuthModule, the user identifier must be specified.' =>
+            'Customer :: AuthModule에 대해 "LDAP"를 선택한 경우 사용자 식별자를 지정해야합니다.',
+        'If "LDAP" was selected for Customer::Authmodule, you can check if the user is allowed to authenticate because he is in a posixGroup, e.g. user needs to be in a group xyz to use OTRS. Specify the group, who may access the system.' =>
+            'Customer :: Authmodule에 대해 "LDAP"가 선택된 경우 사용자가 posixGroup에 있기 때문에 인증 할 수 있는지 확인할 수 있습니다. 사용자는 OTRS를 사용하려면 그룹 xyz에 있어야합니다. 시스템에 액세스 할 수있는 그룹을 지정하십시오.',
+        'If "LDAP" was selected for Customer::AuthModule, you can specify access attributes here.' =>
+            'Customer :: AuthModule에 대해 "LDAP"를 선택한 경우 여기에서 액세스 속성을 지정할 수 있습니다.',
+        'If "LDAP" was selected for Customer::AuthModule, user attributes can be specified. For LDAP posixGroups use UID, for non LDAP posixGroups use full user DN.' =>
+            'Customer :: AuthModule에 대해 "LDAP"가 선택되면 사용자 속성을 지정할 수 있습니다. LDAP posixGroups의 경우 UID를 사용하고 비 LDAP의 경우 posixGroups는 전체 사용자 DN을 사용합니다.',
+        'If "LDAP" was selected for Customer::AuthModule and your users have only anonymous access to the LDAP tree, but you want to search through the data, you can do this with a user who has access to the LDAP directory. Specify the username for this special user here.' =>
+            'Customer :: AuthModule에 "LDAP"가 선택되고 사용자가 LDAP 트리에 익명으로 액세스 할 수 있지만 데이터를 검색하려는 경우 LDAP 디렉토리에 액세스 할 수있는 사용자에게이 작업을 수행 할 수 있습니다. 이 특별한 사용자의 사용자 이름을 여기에 지정하십시오.',
+        'If "LDAP" was selected for Customer::AuthModule and your users have only anonymous access to the LDAP tree, but you want to search through the data, you can do this with a user who has access to the LDAP directory. Specify the password for this special user here.' =>
+            'Customer :: AuthModule에 "LDAP"가 선택되고 사용자가 LDAP 트리에 익명으로 액세스 할 수 있지만 데이터를 검색하려는 경우 LDAP 디렉토리에 액세스 할 수있는 사용자에게이 작업을 수행 할 수 있습니다. 이 특별 사용자의 암호를 여기에 지정하십시오.',
+        'If "LDAP" was selected, you can add a filter to each LDAP query, e.g. (mail=*), (objectclass=user) or (!objectclass=computer).' =>
+            '"LDAP"를 선택한 경우 각 LDAP 쿼리에 필터를 추가 할 수 있습니다. (메일 = *), (objectclass = 사용자) 또는 (! objectclass = 컴퓨터).',
+        'If "LDAP" was selected for Customer::AuthModule and if you want to add a suffix to every customer login name, specifiy it here, e. g. you just want to write the username user but in your LDAP directory exists user@domain.' =>
+            'Customer :: AuthModule에 대해 "LDAP"가 선택되고 모든 고객 로그인 이름에 접미어를 추가하려는 경우 여기서 여기를 지정하십시오. 지. 사용자 이름 사용자를 쓰고 싶지만 LDAP 디렉토리에는 user @ domain이 있어야합니다.',
+        'If "LDAP" was selected for Customer::AuthModule and special paramaters are needed for the Net::LDAP perl module, you can specify them here. See "perldoc Net::LDAP" for more information about the parameters.' =>
+            'Customer :: AuthModule에서 "LDAP"가 선택되고 Net :: LDAP perl 모듈에 특수 매개 변수가 필요한 경우 여기에서 지정할 수 있습니다. 매개 변수에 대한 자세한 정보는 "perldoc Net :: LDAP"를 참조하십시오.',
+        'If "LDAP" was selected for Customer::AuthModule, you can specify if the applications will stop if e. g. a connection to a server can\'t be established due to network problems.' =>
+            'Customer :: AuthModule에 대해 "LDAP"가 선택된 경우, e. 지. 네트워크 문제로 인해 서버에 연결할 수 없습니다.',
+        'If "Radius" was selected for Customer::AuthModule, the radius host must be specified.' =>
+            'Customer :: AuthModule에서 "반경"을 선택한 경우 반지름 호스트를 지정해야합니다.',
+        'If "Radius" was selected for Customer::AuthModule, the password to authenticate to the radius host must be specified.' =>
+            'Customer :: AuthModule에서 "반경"을 선택한 경우 반지름 호스트에 인증 할 암호를 지정해야합니다.',
+        'If "Radius" was selected for Customer::AuthModule, you can specify if the applications will stop if e. g. a connection to a server can\'t be established due to network problems.' =>
+            'Customer :: AuthModule에 대해 "반경"을 선택한 경우 e. 지. 네트워크 문제로 인해 서버에 연결할 수 없습니다.',
+        'Defines the two-factor module to authenticate customers.' => '고객을 인증할 2요소 모듈을 정의합니다.',
+        'Defines the customer preferences key where the shared secret key is stored.' =>
+            '공유 비밀 키가 저장되는 고객 기본 설정 키를 정의합니다.',
+        'Defines if customers should be allowed to login if they have no shared secret stored in their preferences and therefore are not using two-factor authentication.' =>
+            '공유 설정이 환경 설정에 저장되어 있지 않아 이중 인증을 사용하지 않는 경우 고객이 로그인 할 수 있도록 허용해야하는지 정의합니다.',
+        'Defines the parameters for the customer preferences table.' => '고객 환경 설정 테이블의 매개 변수를 정의합니다.',
+        'Defines all the parameters for this item in the customer preferences. \'PasswordRegExp\' allows to match passwords against a regular expression. Define the minimum number of characters using \'PasswordMinSize\'. Define if at least 2 lowercase and 2 uppercase letter characters are needed by setting the appropriate option to \'1\'. \'PasswordMin2Characters\' defines if the password needs to contain at least 2 letter characters (set to 0 or 1). \'PasswordNeedDigit\' controls the need of at least 1 digit (set to 0 or 1 to control).' =>
+            '고객 환경 설정에서이 항목의 모든 매개 변수를 정의합니다. \'PasswordRegExp\'는 정규 표현식과 암호를 일치시킵니다. \'PasswordMinSize\'를 사용하여 최소 문자 수를 정의하십시오. 적절한 옵션을 \'1\'로 설정하여 최소한 2 개의 소문자와 2 개의 대문자가 필요한지 정의하십시오. \'PasswordMin2Characters\'는 암호가 2 자 이상의 문자 (0 또는 1로 설정)를 포함해야 하는지를 정의합니다. \'PasswordNeedDigit\'은 최소 1 자리 숫자의 필요성을 제어합니다 (제어하려면 0 또는 1로 설정).',
+        'Defines the config parameters of this item, to be shown in the preferences view.' =>
+            '환경 설정 보기에 표시할 이 항목의 구성 매개 변수를 정의합니다.',
+        'Defines all the parameters for this item in the customer preferences.' =>
+            '고객 환경 설정에서 이 항목의 모든 매개 변수를 정의합니다.',
+        'Parameters for the pages (in which the communication log entries are shown) of the communication log overview.' =>
+            '통신 로그 개요의 페이지 (통신 로그 항목이 표시된 페이지)의 매개 변수.',
+        'Search backend router.' => '검색 백엔드 라우터.',
+        'JavaScript function for the search frontend.' => '검색 프론트 엔드 용 JavaScript 함수.',
+        'Main menu registration.' => '기본 메뉴 등록.',
+        'Parameters for the dashboard backend of the customer company information of the agent interface. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.' =>
+            '에이전트 인터페이스의 고객 회사 정보의 대시 보드 백엔드에 대한 매개 변수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다.',
+        'Parameters for the dashboard backend of the customer user information of the agent interface. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.' =>
+            '에이전트 인터페이스의 고객 사용자 정보의 대시 보드 백엔드에 대한 매개 변수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다.',
+        'Search backend default router.' => '백엔드 기본 라우터를 검색합니다.',
+        'Defines available groups for the admin overview screen.' => '관리자 개요 화면에 사용할 수 있는 그룹을 정의합니다.',
+        'Frontend module registration (show personal favorites as sub navigation items of \'Admin\').' =>
+            '프론트 엔드 모듈 등록 (개인 즐겨 찾기를 \'Admin\'의 하위 네비게이션 항목으로 표시).',
+        'Frontend module registration (disable company link if no company feature is used).' =>
+            '프론트 엔드 모듈 등록 (회사 기능이 사용되지 않는 경우 회사 링크 비활성화).',
+        'Frontend module registration for the customer interface.' => '고객 인터페이스에 대한 프론트 엔드 모듈 등록.',
+        'Activates the available themes on the system. Value 1 means active, 0 means inactive.' =>
+            '시스템에서 사용 가능한 테마를 활성화합니다. 값 1은 활성을 의미하고 0은 비활성을 의미합니다.',
+        'Defines the default value for the action parameter.' => '',
+        'Defines the shown links in the footer area of the customer and public interface of this OTRS system. The value in "Key" is the external URL, the value in "Content" is the shown label.' =>
+            '',
+        'Defines the default value for the action parameter for the public frontend. The action parameter is used in the scripts of the system.' =>
+            'public frontend에 대한 action 매개 변수의 기본값을 정의합니다. action 매개 변수는 시스템의 스크립트에서 사용됩니다.',
+        'Sets the stats hook.' => '통계 후크를 설정합니다.',
+        'Start number for statistics counting. Every new stat increments this number.' =>
+            '통계 계산의 시작 번호입니다. 모든 새로운 통계는 이 숫자를 증가시킵니다.',
+        'Defines the default maximum number of statistics per page on the overview screen.' =>
+            '개요 화면에서 페이지 당 기본 최대 통계 수를 정의합니다.',
+        'Defines the default selection at the drop down menu for dynamic objects (Form: Common Specification).' =>
+            '동적 객체의 드롭 다운 메뉴에서 기본 선택을 정의합니다 (형식 : 공통 사양).',
+        'Defines the default selection at the drop down menu for permissions (Form: Common Specification).' =>
+            '권한 (양식 : 공통 사양)에 대한 드롭 다운 메뉴에서 기본 선택을 정의합니다.',
+        'Defines the default selection at the drop down menu for stats format (Form: Common Specification). Please insert the format key (see Stats::Format).' =>
+            '통계 형식 (양식 : 공통 사양)에 대한 드롭 다운 메뉴에서 기본 선택을 정의합니다. 형식 키를 삽입하십시오 (Stats :: Format 참조).',
+        'Defines the search limit for the stats.' => '통계에 대한 검색 제한을 정의합니다.',
+        'Defines all the possible stats output formats.' => '가능한 모든 통계 출력형식을 정의합니다.',
+        'Allows agents to exchange the axis of a stat if they generate one.' =>
+            '에이전트가 통계를 생성할 경우 에이전트가 축을 교환할 수 있습니다.',
+        'Allows agents to generate individual-related stats.' => '상담원이 개인 관련 통계를 생성할 수 있습니다.',
+        'Allows invalid agents to generate individual-related stats.' => '잘못된 에이전트가 개인 관련 통계를 생성할 수 있습니다.',
+        'Shows all the customer identifiers in a multi-select field (not useful if you have a lot of customer identifiers).' =>
+            '다중 선택 필드에 모든 고객 식별자를 표시합니다(많은 고객 식별자가 있는 경우 유용하지 않음).',
+        'Shows all the customer user identifiers in a multi-select field (not useful if you have a lot of customer user identifiers).' =>
+            '다중 선택 필드에 모든 고객 사용자 식별자를 표시합니다 (많은 고객 사용자 식별자가 있는 경우 유용하지 않음).',
+        'Defines the default maximum number of X-axis attributes for the time scale.' =>
+            '시간 스케일에 대한 X 축 속성의 기본 최대 수를 정의합니다.',
+        'OTRS can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>
+            'OTRS는 전체 텍스트 검색이나 통계 생성과 같은 값 비싼 작업에 대해 하나 이상의 읽기 전용 미러 데이터베이스를 사용할 수 있습니다. 여기서 첫 번째 미러 데이터베이스에 대해 DSN을 지정할 수 있습니다.',
+        'Specify the username to authenticate for the first mirror database.' =>
+            '첫 번째 미러 데이터베이스에 대해 인증할 사용자 이름을 지정하십시오.',
+        'Specify the password to authenticate for the first mirror database.' =>
+            '첫 번째 미러 데이터베이스에 대해 인증할 암호를 지정하십시오.',
+        'Configure any additional readonly mirror databases that you want to use.' =>
+            '사용할 추가 읽기 전용 미러 데이터베이스를 구성하십시오.',
+        'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" defines the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
+            '대시 보드 백엔드의 매개 변수를 정의합니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 또는 사용자가 수동으로 활성화해야하는지 여부를 나타냅니다. "CacheTTLLocal"은 플러그인의 캐시 만기 기간을 분 단위로 정의합니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
+        'Defines the parameters for the dashboard backend. "Limit" defines the number of entries displayed by default. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
+            '대시 보드 백엔드의 매개 변수를 정의합니다. "제한"은 기본적으로 표시되는 항목 수를 정의합니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 또는 사용자가 수동으로 활성화해야하는지 여부를 나타냅니다. "CacheTTL"은 플러그인의 캐시 만기 기간을 나타냅니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
+        'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
+            '대시 보드 백엔드의 매개 변수를 정의합니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 또는 사용자가 수동으로 활성화해야하는지 여부를 나타냅니다. "CacheTTL"은 플러그인의 캐시 만기 기간을 나타냅니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
+        'Shows the message of the day (MOTD) in the agent dashboard. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
+            '에이전트 대시 보드에 오늘의 메시지 (MOTD)를 표시합니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "Default"는 플러그인이 기본적으로 활성화되어 있는지 또는 사용자가 수동으로 활성화해야하는지 여부를 나타냅니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
+        'Starts a wildcard search of the active object after the link object mask is started.' =>
+            '링크 개체 마스크가 시작된 후 활성 개체의 와일드 카드 검색을 시작합니다.',
+        'Defines a filter to process the text in the articles, in order to highlight predefined keywords.' =>
+            '미리 정의된 키워드를 강조 표시하기 위해 기사의 텍스트를 처리하는 필터를 정의합니다.',
+        'Defines a filter for html output to add links behind CVE numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
+            'CVE 번호 뒤에 링크를 추가하는 html 출력을위한 필터를 정의합니다. Image 요소는 두 가지 입력 종류를 허용합니다. 한 번에 이미지의 이름 (예 : faq.png). 이 경우 OTRS 이미지 경로가 사용됩니다. 두 번째 가능성은 링크를 이미지에 삽입하는 것입니다.',
+        'Defines a filter for html output to add links behind bugtraq numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
+            'bugtraq 번호 뒤에 링크를 추가하기위한 html 출력을위한 필터를 정의합니다. Image 요소는 두 가지 입력 종류를 허용합니다. 한 번에 이미지의 이름 (예 : faq.png). 이 경우 OTRS 이미지 경로가 사용됩니다. 두 번째 가능성은 링크를 이미지에 삽입하는 것입니다.',
+        'Defines a filter for html output to add links behind MSBulletin numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
+            'MSBulletin 번호 뒤에 링크를 추가하기 위해 html 출력을위한 필터를 정의합니다. Image 요소는 두 가지 입력 종류를 허용합니다. 한 번에 이미지의 이름 (예 : faq.png). 이 경우 OTRS 이미지 경로가 사용됩니다. 두 번째 가능성은 링크를 이미지에 삽입하는 것입니다.',
+        'Define a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
+            '정의 된 문자열 뒤에 링크를 추가하기 위해 html 출력을위한 필터를 정의하십시오. Image 요소는 두 가지 입력 종류를 허용합니다. 한 번에 이미지의 이름 (예 : faq.png). 이 경우 OTRS 이미지 경로가 사용됩니다. 두 번째 가능성은 링크를 이미지에 삽입하는 것입니다.',
+        'Defines a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
+            '정의 된 문자열 뒤에 링크를 추가하는 html 출력을위한 필터를 정의합니다. Image 요소는 두 가지 입력 종류를 허용합니다. 한 번에 이미지의 이름 (예 : faq.png). 이 경우 OTRS 이미지 경로가 사용됩니다. 두 번째 가능성은 링크를 이미지에 삽입하는 것입니다.',
+        'If enabled, the OTRS version tag will be removed from the Webinterface, the HTTP headers and the X-Headers of outgoing mails. NOTE: If you change this option, please make sure to delete the cache.' =>
+            '사용 설정하면 OTRS 버전 태그가 웹 인터페이스, 나가는 메일의 HTTP 헤더 및 X 헤더에서 삭제됩니다. 참고 :이 옵션을 변경하면 캐시를 삭제하십시오.',
+        'If enabled, OTRS will deliver all CSS files in minified form.' =>
+            '사용하도록 설정하면 OTRS는 모든 CSS 파일을 축소 된 형식으로 제공합니다.',
+        'If enabled, OTRS will deliver all JavaScript files in minified form.' =>
+            '사용하도록 설정하면 OTRS는 모든 JavaScript 파일을 축소 된 형식으로 제공합니다.',
+        'List of responsive CSS files to always be loaded for the agent interface.' =>
+            '에이전트 인터페이스 용으로 항상로드되는 반응 형 CSS 파일 목록입니다.',
+        'List of CSS files to always be loaded for the customer interface.' =>
+            '고객 인터페이스를 위해 항상로드 될 CSS 파일 목록.',
+        'List of responsive CSS files to always be loaded for the customer interface.' =>
+            '응답 성 CSS 파일 목록은 고객 인터페이스 용으로 항상로드됩니다.',
+        'List of JS files to always be loaded for the customer interface.' =>
+            '고객 인터페이스 용으로 항상로드 될 JS 파일 목록.',
+        'If enabled, the first level of the main menu opens on mouse hover (instead of click only).' =>
+            '이 옵션을 사용하면 메인 메뉴의 첫 번째 레벨이 마우스를 올리면 열리게 됩니다 (클릭만 하는 대신).',
+        'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
+            '에이전트의 성 및 성을 표시하는 순서를 지정합니다.',
+        'Default skin for the agent interface.' => '에이전트 인터페이스의 기본 스킨입니다.',
+        'Default skin for the agent interface (slim version).' => '에이전트 인터페이스 (슬림버전)의 기본 스킨입니다.',
+        'Balanced white skin by Felix Niklas.' => 'Felix Niklas의 균형 잡힌 하얀 피부.',
+        'Balanced white skin by Felix Niklas (slim version).' => 'Felix Niklas (슬림 버전)의 균형 잡힌 하얀 피부.',
+        'High contrast skin for visually impaired users.' => '시각 장애가 있는 사용자를 위한 고 대비 피부.',
+        'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
+            '에이전트 인터페이스에서 사용해야하는 에이전트 스킨의 InternalName입니다. Frontend :: Agent :: Skins에서 사용 가능한 스킨을 확인하십시오.',
+        'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
+            '응용 프로그램 내에서 도메인별로 사용되도록 다른 스킨을 구성 할 수 있습니다 예 : 다른 에이전트를 구분할 수 있음. 정규식 (정규식)을 사용하면 키 / 내용 쌍을 도메인과 일치하도록 구성 할 수 있습니다. "Key"의 값은 도메인과 일치해야하며 "Content"의 값은 시스템의 유효한 스킨이어야합니다. 올바른 형식의 정규식에 대한 예제 항목을 참조하십시오.',
+        'Default skin for the customer interface.' => '고객 인터페이스의 기본 스킨입니다.',
+        'The customer skin\'s InternalName which should be used in the customer interface. Please check the available skins in Frontend::Customer::Skins.' =>
+            '고객 인터페이스에서 사용해야하는 고객 스킨의 InternalName입니다. Frontend :: Customer :: Skins에서 사용 가능한 스킨을 확인하십시오.',
+        'It is possible to configure different skins, for example to distinguish between diferent customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
+            '서로 다른 스킨을 구성하여 서로 다른 고객을 구별하고 응용 프로그램 내에서 도메인별로 사용할 수 있습니다. 정규식 (정규식)을 사용하면 키 / 내용 쌍을 도메인과 일치하도록 구성 할 수 있습니다. "Key"의 값은 도메인과 일치해야하며 "Content"의 값은 시스템의 유효한 스킨이어야합니다. 올바른 형식의 정규식에 대한 예제 항목을 참조하십시오.',
+        'Shows time use complete description (days, hours, minutes), if enabled; or just first letter (d, h, m), if not enabled.' =>
+            '사용 가능한 경우 시간 사용 완료 설명 (일, 시간, 분)을 표시합니다. 또는 활성화되지 않은 경우 첫 번째 문자 (d, h, m).',
+        'Runs an initial wildcard search of the existing customer users when accessing the AdminCustomerUser module.' =>
+            'AdminCustomerUser 모듈에 액세스 할 때 기존 고객 사용자의 초기 와일드 카드 검색을 실행합니다.',
+        'Controls if the autocomplete field will be used for the customer ID selection in the AdminCustomerUser interface.' =>
+            '자동 완성 필드가 AdminCustomerUser 인터페이스의 고객 ID 선택에 사용되는지 여부를 제어합니다.',
+        'Runs an initial wildcard search of the existing customer company when accessing the AdminCustomerCompany module.' =>
+            'AdminCustomerCompany 모듈에 액세스 할 때 기존 고객 회사의 초기 와일드 카드 검색을 실행합니다.',
+        'Controls if the admin is allowed to make changes to the database via AdminSelectBox.' =>
+            '관리자가 AdminSelectBox를 통해 데이터베이스를 변경할 수 있는지 여부를 제어합니다.',
+        'List of all CustomerUser events to be displayed in the GUI.' => 'GUI에 표시 될 모든 고객사용자 이벤트 목록입니다.',
+        'List of all CustomerCompany events to be displayed in the GUI.' =>
+            'GUI에 표시 될 모든 CustomerCompany 이벤트 목록.',
+        'Event module that updates customer users after an update of the Customer.' =>
+            '고객 업데이트 후 고객 사용자를 업데이트 하는 이벤트 모듈입니다.',
+        'Event module that updates customer company object name for dynamic fields.' =>
+            '동적 필드에 대한 고객 회사 개체 이름을 업데이트하는 이벤트 모듈입니다.',
+        'Event module that updates customer user search profiles if login changes.' =>
+            '로그인이 변경되면 고객 사용자 검색 프로파일을 업데이트 하는 이벤트 모듈입니다.',
+        'Event module that updates customer user service membership if login changes.' =>
+            '로그인이 변경되면 고객 사용자 서비스 멤버십을 업데이트 하는 이벤트 모듈입니다.',
+        'Event module that updates customer user object name for dynamic fields.' =>
+            '동적 필드에 대한 고객 사용자 개체 이름을 업데이트 하는 이벤트 모듈입니다.',
+        'Selects the cache backend to use.' => '사용할 캐시 백엔드를 선택합니다.',
+        'If enabled, the cache data be held in memory.' => '활성화된 경우 캐시 데이터가 메모리에 보관됩니다.',
+        'If enabled, the cache data will be stored in cache backend.' => '활성화된 경우 캐시 데이터가 캐시 백엔드에 저장됩니다.',
+        'Specify how many sub directory levels to use when creating cache files. This should prevent too many cache files being in one directory.' =>
+            '캐시 파일을 만들 때 사용할 하위 디렉토리 수준 수를 지정하십시오. 이렇게하면 너무 많은 캐시 파일이 하나의 디렉토리에 있는 것을 방지할 수 있습니다.',
+        'Defines the config options for the autocompletion feature.' => '자동 완성 기능의 구성 옵션을 정의합니다.',
+        'Defines the list of possible next actions on an error screen, a full path is required, then is possible to add external links if needed.' =>
+            '오류 화면에서 가능한 다음 작업 목록을 정의하고 전체 경로가 필요하며 필요한 경우 외부 링크를 추가할 수 있습니다.',
+        'Sets the minutes a notification is shown for notice about upcoming system maintenance period.' =>
+            '다가오는 시스템 유지 보수 기간에 대한 알림을 표시하는 시간을 설정합니다.',
+        'Sets the default message for the notification is shown on a running system maintenance period.' =>
+            '실행중인 시스템 유지 보수 기간에 알림의 기본 메시지가 표시되도록 설정합니다.',
+        'Sets the default message for the login screen on Agent and Customer interface, it\'s shown when a running system maintenance period is active.' =>
+            '에이전트 시스템 및 고객 인터페이스의 로그인 화면에 대한 기본 메시지를 설정합니다. 이는 실행중인 시스템 유지 보수 기간이 활성 상태 일 때 표시됩니다.',
+        'Sets the default error message for the login screen on Agent and Customer interface, it\'s shown when a running system maintenance period is active.' =>
+            '에이전트 시스템 및 고객 인터페이스의 로그인 화면에 대한 기본 오류 메시지를 설정합니다. 이는 실행중인 시스템 유지 보수 기간이 활성 일 때 표시됩니다.',
+        'Specify the channel to be used to fetch OTRS Business Solution™ updates. Warning: Development releases might not be complete, your system might experience unrecoverable errors and on extreme cases could become unresponsive!' =>
+            'OTRS Business Solution ™ 업데이트를 가져 오는 데 사용할 채널을 지정하십시오. 경고 : 개발 릴리스가 완전하지 않을 수 있습니다. 시스템에 복구 할 수없는 오류가 발생할 수 있으며 극단적 인 경우에 응답하지 않을 수 있습니다!',
+        'Use new type of select and autocomplete fields in agent interface, where applicable (InputFields).' =>
+            '적용 가능한 경우 에이전트 인터페이스에서 새로운 유형의 선택 및 자동 완성 필드를 사용하십시오 (InputFields).',
+        'Use new type of select and autocomplete fields in customer interface, where applicable (InputFields).' =>
+            '해당되는 경우 고객 인터페이스에서 새로운 유형의 선택 및 자동 완성 필드를 사용하십시오 (InputFields).',
+        'Defines the fall-back path to open fetchmail binary. Note: The name of the binary needs to be \'fetchmail\', if it is different please use a symbolic link.' =>
+            'fetchmail 바이너리를 여는 폴백 경로를 정의합니다. 참고 : 바이너리의 이름은 \'fetchmail\'이어야하며, 다른 경우 심볼릭 링크를 사용하십시오.',
+        'Defines an overview module to show the address book view of a customer user list.' =>
+            'Customer User List의 주소록보기를 보여주는 개요 모듈을 정의합니다.',
+        'Specifies the group where the user needs rw permissions so that they can edit other users preferences.' =>
+            '다른 사용자 기본 설정을 편집 할 수 있도록 사용자에게 rw 권한이 필요한 그룹을 지정합니다.',
+        'Defines email communication channel.' => '전자 메일 통신 채널을 정의합니다.',
+        'Defines internal communication channel.' => '내부 통신 채널을 정의합니다.',
+        'Defines phone communication channel.' => '전화 통신 채널을 정의합니다.',
+        'Defines chat communication channel.' => '채팅 통신 채널을 정의합니다.',
+        'Defines groups for preferences items.' => '기본 설정 항목에 대한 그룹을 정의합니다.',
+        'Defines how many deployments the system should keep.' => '시스템이 유지해야하는 배포 수를 정의합니다.',
+        'Defines the search parameters for the AgentCustomerUserAddressBook screen. With the setting \'CustomerTicketTextField\' the values for the recipient field can be specified.' =>
+            'AgentCustomerUserAddressBook 화면에 대한 검색 매개 변수를 정의합니다. \'CustomerTicketTextField\'설정을 사용하면받는 사람 필드의 값을 지정할 수 있습니다.',
+        'Defines the default filter fields in the customer user address book search (CustomerUser or CustomerCompany). For the CustomerCompany fields a prefix \'CustomerCompany_\' must be added.' =>
+            '고객 사용자 주소록 검색 (CustomerUser 또는 CustomerCompany)의 기본 필터 필드를 정의합니다. CustomerCompany 필드의 경우 접두사 \'CustomerCompany_\'를 추가해야합니다.',
+        'Defines the shown columns and the position in the AgentCustomerUserAddressBook result screen.' =>
+            'AgentCustomerUserAddressBook 결과 화면에 표시된 열과 위치를 정의합니다.',
+        'Example package autoload configuration.' => '패키지 자동로드 구성 예제.',
+        'Activates week number for datepickers.' => '',
+
+        # XML Definition: Kernel/Config/Files/XML/GenericInterface.xml
+        'Performs the configured action for each event (as an Invoker) for each configured web service.' =>
+            '구성된 각 웹 서비스의 각 이벤트 (Invoker)에 대해 구성된 작업을 수행합니다.',
+        'Cache time in seconds for the web service config backend.' => '웹 서비스 설정 백엔드의 캐시 시간 초.',
+        'Cache time in seconds for agent authentication in the GenericInterface.' =>
+            'GenericInterface에서 에이전트 인증을위한 캐시 시간.',
+        'Cache time in seconds for customer authentication in the GenericInterface.' =>
+            'GenericInterface에서 고객 인증을위한 캐시 시간 초. ',
+        'GenericInterface module registration for the transport layer.' =>
+            '전송 레이어의 GenericInterface 모듈 등록.',
+        'GenericInterface module registration for the operation layer.' =>
+            '조작 계층에 대한 GenericInterface 모듈 등록.',
+        'GenericInterface module registration for the invoker layer.' => '호출자 레이어의 GenericInterface 모듈 등록.',
+        'GenericInterface module registration for the mapping layer.' => '매핑 레이어의 GenericInterface 모듈 등록.',
+        'Defines the default visibility of the article to customer for this operation.' =>
+            '이 작업을 위해 고객에게 기사의 기본 가시성을 정의합니다.',
+        'Defines the history type for this operation, which gets used for ticket history in the agent interface.' =>
+            '에이전트 인터페이스의 티켓 기록에 사용되는이 작업의 기록 유형을 정의합니다.',
+        'Defines the history comment for this operation, which gets used for ticket history in the agent interface.' =>
+            '에이전트 인터페이스의 티켓 기록에 사용되는이 작업의 기록 주석을 정의합니다.',
+        'Defines the default auto response type of the article for this operation.' =>
+            '이 작업에 대한 아티클의 기본 자동 응답 유형을 정의합니다.',
+        'Defines the maximum size in KiloByte of GenericInterface responses that get logged to the gi_debugger_entry_content table.' =>
+            'gi_debugger_entry_content 테이블에 기록되는 GenericInterface 응답의 최대 크기를 KiloByte로 정의합니다.',
+        'Maximum number of tickets to be displayed in the result of this operation.' =>
+            '이 작업의 결과로 표시될 최대 티켓 수입니다.',
+        'Defines the default ticket attribute for ticket sorting of the ticket search result of this operation.' =>
+            '이 작업의 티켓 검색 결과에 대한 티켓 정렬을 위한 기본 티켓 특성을 정의합니다.',
+        'Defines the default ticket order in the ticket search result of the this operation. Up: oldest on top. Down: latest on top.' =>
+            '이 작업의 티켓 검색 결과에서 기본 티켓 순서를 정의합니다. 위로 : 가종 오래된 것. 아래 : 위에 최신',
+        'GenericInterface module registration for an error handling module.' =>
+            '오류 처리 모듈에 대한 GenericInterface 모듈 등록.',
+
+        # XML Definition: Kernel/Config/Files/XML/ProcessManagement.xml
+        'Frontend module registration (disable ticket processes screen if no process available).' =>
+            '프론트 엔드 모듈 등록 (사용 가능한 프로세스가없는 경우 티켓 프로세스 화면을 사용하지 않음).',
+        'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate).' =>
+            '',
+        'This option defines the dynamic field in which a Process Management process entity id is stored.' =>
+            '이 옵션은 프로세스 관리 프로세스 엔티티 ID가 저장되는 동적 필드를 정의합니다.',
+        'This option defines the dynamic field in which a Process Management activity entity id is stored.' =>
+            '이 옵션은 프로세스 관리 활동 엔티티ID가 저장되는 동적 필드를 정의합니다.',
+        'This option defines the process tickets default queue.' => '이 옵션은 프로세스 티켓 기본 큐를 정의합니다.',
+        'This option defines the process tickets default state.' => '이 옵션은 프로세스 티켓 기본 상태를 정의합니다.',
+        'This option defines the process tickets default lock.' => '이 옵션은 프로세스 티켓 기본 잠금을 정의합니다.',
+        'This option defines the process tickets default priority.' => '이 옵션은 프로세스 티켓의 기본 우선 순위를 정의합니다.',
+        'Display settings to override defaults for Process Tickets.' => '프로세스 티켓의 기본값을 대체하는 설정 표시.',
+        'Dynamic fields groups for process widget. The key is the name of the group, the value contains the fields to be shown. Example: \'Key =&gt; My Group\', \'Content: Name_X, NameY\'.' =>
+            '',
+        'Dynamic fields shown in the process widget in ticket zoom screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 확대 / 축소 화면에서 프로세스 위젯에 표시되는 동적 필드입니다.',
+        'Shows a link in the menu to enroll a ticket into a process in the ticket zoom view of the agent interface.' =>
+            '메뉴에 링크를 표시하여 에이전트 인터페이스의 티켓 확대보기에서 티켓을 프로세스에 등록합니다.',
+        'Loader module registration for the customer interface.' => '',
+        'Frontend module registration (disable ticket processes screen if no process available) for Customer.' =>
+            '프런트 엔드 모듈 등록 (사용 가능한 프로세스가 없을 경우 티켓 프로세스 화면을 비활성화).',
+        'Default ProcessManagement entity prefixes for entity IDs that are automatically generated.' =>
+            '자동으로 생성되는 엔티티 ID에 대한 기본 ProcessManagement 엔티티 접두사입니다.',
+        'Cache time in seconds for the DB process backend.' => 'DB 프로세스 백엔드의 캐시 시간 초. ',
+        'Cache time in seconds for the ticket process navigation bar output module.' =>
+            '티켓 프로세스 탐색 모음 출력 모듈의 캐시 시간 초.',
+        'Determines the next possible ticket states, for process tickets in the agent interface.' =>
+            '에이전트 인터페이스에서 프로세스 티켓에 대한 다음 가능한 티켓 상태를 결정합니다.',
+        'Shows existing parent/child (separated by ::) process lists in the form of a tree or a list.' =>
+            '',
+        'Determines the next possible ticket states, for process tickets in the customer interface.' =>
+            '고객 인터페이스의 프로세스 티켓에 대한 다음 가능한 티켓 상태를 결정합니다.',
+        'Controls if CustomerID is read-only in the agent interface.' => 'CustomerID가 에이전트 인터페이스에서 읽기 전용인지 여부를 제어합니다.',
+        'If enabled debugging information for transitions is logged.' => '활성화 된 경우 전환에 대한 디버깅 정보가 기록됩니다.',
+        'Defines the priority in which the information is logged and presented.' =>
+            '정보가 기록되고 표시되는 우선 순위를 정의합니다.',
+        'Filter for debugging Transitions. Note: More filters can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;.' =>
+            '',
+        'Parameters for the dashboard backend of the running process tickets overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
+            '실행중인 프로세스 티켓의 대시 보드 백엔드에 대한 매개 변수 에이전트 인터페이스의 개요. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
+        'DynamicField backend registration.' => 'DynamicField 백엔드 등록.',
+        'Defines the default keys and values for the transition action module parameters. Mandatory fields are marked with "(* required)". Note: For most of the keys the AttributeID can also be used, e.g. "Owner" can be "OwnerID". Keys that define the same Attribute should only be used once, e.g. "Owner" and "OwnerID" are redundant.' =>
+            '',
+
+        # XML Definition: Kernel/Config/Files/XML/Ticket.xml
+        'The identifier for a ticket, e.g. Ticket#, Call#, MyTicket#. The default is Ticket#.' =>
+            '티켓 식별자 예 : 티켓 #, 콜 #, 마이 티켓 #. 기본값은 Ticket #입니다.',
+        'The divider between TicketHook and ticket number. E.g \': \'.' =>
+            'TicketHook과 티켓 번호 사이의 구분선. 예 : \':\'.',
+        'Max size of the subjects in an email reply and in some overview screens.' =>
+            '전자 메일 회신 및 일부 개요 화면에서 주체의 최대 크기입니다.',
+        'The text at the beginning of the subject in an email reply, e.g. RE, AW, or AS.' =>
+            '이메일 답장에서 제목의 시작 부분에있는 텍스트입니다 예 : RE, AW 또는 AS.',
+        'The text at the beginning of the subject when an email is forwarded, e.g. FW, Fwd, or WG.' =>
+            '이메일이 전달 될 때 제목의 시작 부분에있는 텍스트입니다 예 : FW, FWD 또는 WG.',
+        'The format of the subject. \'Left\' means \'[TicketHook#:12345] Some Subject\', \'Right\' means \'Some Subject [TicketHook#:12345]\', \'None\' means \'Some Subject\' and no ticket number. In the latter case you should verify that the setting PostMaster::CheckFollowUpModule###0200-References is activated to recognize followups based on email headers.' =>
+            '주제의 형식. \'Left\'는 \'[TicketHook # : 12345]\'Some Subject \',\'Right \'는\'Some Subject [TicketHook # : 12345] \',\'None \'은\'Some Subject \'를 의미하며 티켓 번호는 없음을 의미합니다. 후자의 경우 PostMaster :: CheckFollowUpModule ### 0200-References 설정이 활성화되어 전자 메일 머리글을 기반으로 한 후속 작업을 인식하는지 확인해야합니다.',
+        'A list of dynamic fields that are merged into the main ticket during a merge operation. Only dynamic fields that are empty in the main ticket will be set.' =>
+            '병합 작업 중에 주 티켓에 병합되는 동적 필드 목록입니다. 기본 티켓에서 비어있는 동적 필드만 설정됩니다.',
+        'Name of custom queue. The custom queue is a queue selection of your preferred queues and can be selected in the preferences settings.' =>
+            '사용자 정의 대기열의 이름입니다. 사용자 정의 대기열은 기본 설정 대기열의 대기열 선택이며 환경 설정에서 선택할 수 있습니다.',
+        'Name of custom service. The custom service is a service selection of your preferred services and can be selected in the preferences settings.' =>
+            '사용자 지정 서비스의 이름입니다. 사용자 지정 서비스는 기본 설정 서비스에서 선택한 서비스이며 기본 설정에서 선택할 수 있습니다.',
+        'Ignore system sender article types (e. g. auto responses or email notifications) to be flagged as \'Unread Article\' in AgentTicketZoom or expanded automatically in Large view screens.' =>
+            'AgentTicketZoom에서 시스템 발신자 기사 유형 (예 : 자동 응답 또는 이메일 알림)을 \'읽지 않은 기사\'로 표시하거나 큰보기 화면에서 자동으로 확장하도록 무시합니다.',
+        'Changes the owner of tickets to everyone (useful for ASP). Normally only agent with rw permissions in the queue of the ticket will be shown.' =>
+            '모든 사람에게 티켓 소유자를 변경합니다 (ASP에 유용함). 일반적으로 티켓 대기열에 rw 권한이있는 에이전트 만 표시됩니다.',
+        'Enables ticket responsible feature, to keep track of a specific ticket.' =>
+            '티켓 관련 기능을 사용하여 특정 티켓을 추적합니다.',
+        'Automatically sets the owner of a ticket as the responsible for it (if ticket responsible feature is enabled). This will only work by manually actions of the logged in user. It does not work for automated actions e.g. GenericAgent, Postmaster and GenericInterface.' =>
+            '티켓의 소유자를 자동으로 책임자로 설정합니다 (티켓 책임 기능이 활성화 된 경우). 이것은 로그인 한 사용자의 수동 작업으로 만 작동합니다. 자동 작업에는 작동하지 않습니다. GenericAgent, 전자 메일 관리자 및 GenericInterface.',
+        'Automatically change the state of a ticket with an invalid owner once it is unlocked. Maps from a state type to a new ticket state.' =>
+            '유효하지 않은 소유자가 잠금 해제된 티켓의 상태를 자동으로 변경합니다. 상태 유형에서 새 티켓 상태로 매핑합니다.',
+        'Enables ticket type feature.' => '티켓 유형 기능을 사용합니다.',
+        'Defines the default ticket type.' => '기본 티켓 유형을 정의합니다.',
+        'Allows defining services and SLAs for tickets (e. g. email, desktop, network, ...), and escalation attributes for SLAs (if ticket service/SLA feature is enabled).' =>
+            '티켓 (예 : 전자 메일, 데스크톱, 네트워크, ...)에 대한 서비스 및 SLA 및 SLA에 대한 에스컬레이션 특성 (티켓 서비스 / SLA 기능이 활성화 된 경우)을 정의 할 수 있습니다.',
+        'Retains all services in listings even if they are children of invalid elements.' =>
+            '서비스가 잘못된 요소의 하위 항목인 경우에도 목록의 모든 서비스를 유지합니다.',
+        'Allows default services to be selected also for non existing customers.' =>
+            '기존 고객이 아닌 경우에도 기본 서비스를 선택할 수 있습니다.',
+        'Activates the ticket archive system to have a faster system by moving some tickets out of the daily scope. To search for these tickets, the archive flag has to be enabled in the ticket search.' =>
+            '일일 범위에서 일부 티켓을 이동하여 티켓 아카이브 시스템이 더 빠른 시스템을 갖도록 활성화합니다. 이 티켓을 검색하려면 티켓 검색에서 아카이브 플래그를 사용 가능하게 설정해야 합니다.',
+        'Controls if the ticket and article seen flags are removed when a ticket is archived.' =>
+            '티켓을 보관할 때 티켓 및 집필 플래그가 제거되는지 여부를 제어합니다.',
+        'Removes the ticket watcher information when a ticket is archived.' =>
+            '티켓 보관시 티켓 감시자 정보를 제거합니다.',
+        'Activates the ticket archive system search in the customer interface.' =>
+            '고객 인터페이스에서 티켓 아카이브 시스템 검색을 활성화합니다.',
+        'Selects the ticket number generator module. "AutoIncrement" increments the ticket number, the SystemID and the counter are used with SystemID.counter format (e.g. 1010138, 1010139). With "Date" the ticket numbers will be generated by the current date, the SystemID and the counter. The format looks like Year.Month.Day.SystemID.counter (e.g. 200206231010138, 200206231010139). With "DateChecksum"  the counter will be appended as checksum to the string of date and SystemID. The checksum will be rotated on a daily basis. The format looks like Year.Month.Day.SystemID.Counter.CheckSum (e.g. 2002070110101520, 2002070110101535). With "Random" the ticket numbers will be generated by 12 random numbers. The format looks like SystemID.RandomNumbers (e.g. 10123456789012).' =>
+            '',
+        'Checks the SystemID in ticket number detection for follow-ups. If not enabled, SystemID will be changed after using the system.' =>
+            '후속 조치를 위해 티켓 번호 검색에서 SystemID를 확인합니다. 활성화되지 않은 경우 시스템을 사용한 후 SystemID가 변경됩니다.',
+        'Sets the minimal ticket counter size if "AutoIncrement" was selected as TicketNumberGenerator. Default is 5, this means the counter starts from 10000.' =>
+            '"AutoIncrement"가 TicketNumberGenerator로 선택된 경우 최소 티켓 카운터 크기를 설정합니다. 기본값은 5이며, 이는 카운터가 10000에서 시작 함을 의미합니다. ',
+        'Enables the minimal ticket counter size (if "Date" was selected as TicketNumberGenerator).' =>
+            '최소 티켓 카운터 크기를 활성화합니다 ( "Date"가 TicketNumberGenerator로 선택된 경우).',
+        'IndexAccelerator: to choose your backend TicketViewAccelerator module. "RuntimeDB" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). "StaticDB" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command "bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild" for initial index creation.' =>
+            'IndexAccelerator : 백엔드 TicketViewAccelerator 모듈을 선택합니다. "RuntimeDB"는 티켓 테이블에서 각 큐 뷰를 생성합니다 (성능상의 문제없이 최대 약 60,000 개의 티켓과 시스템의 6.000 개 티켓). "StaticDB"는보기와 같이 작동하는 별도의 티켓 색인 표를 사용하는 가장 강력한 모듈입니다 (80.000 개 이상의 티켓이 시스템에 저장되어있는 경우 권장). 초기 색인 작성은 "bin / otrs.Console.pl Maint :: Ticket :: QueueIndexRebuild"명령을 사용하십시오.',
+        'Saves the attachments of articles. "DB" stores all data in the database (not recommended for storing big attachments). "FS" stores the data on the filesystem; this is faster but the webserver should run under the OTRS user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when "FS" is used.' =>
+            '기사의 첨부 파일을 저장합니다. "DB"는 모든 데이터를 데이터베이스에 저장합니다 (큰 첨부 파일 저장에는 권장되지 않음). "FS"는 데이터를 파일 시스템에 저장합니다. 이것은 더 빠르지 만 웹 서버는 OTRS 사용자 하에서 실행되어야합니다. 데이터 손실없이 이미 생산중인 시스템에서도 모듈 간을 전환 할 수 있습니다. 참고 : "FS"를 사용하면 첨부 파일 이름을 검색 할 수 없습니다.',
+        'Specifies whether all storage backends should be checked when looking for attachments. This is only required for installations where some attachments are in the file system, and others in the database.' =>
+            '첨부 파일을 찾을 때 모든 저장소 백엔드를 검사할지 여부를 지정합니다. 일부 첨부 파일이 파일 시스템에 있고 다른 파일 시스템에 있는 설치에만 필요합니다.',
+        'Specifies the directory to store the data in, if "FS" was selected for ArticleStorage.' =>
+            'ArticleStorage에 대해 "FS"를 선택한 경우 데이터를 저장할 디렉토리를 지정합니다.',
+        'Specifies whether the (MIMEBase) article attachments will be indexed and searchable.' =>
+            '(MIMEBase) 아티클 첨부 파일을 인덱싱하여 검색 할 수 있는지 여부를 지정합니다.',
+        'The duration in minutes after emitting an event, in which the new escalation notify and start events are suppressed.' =>
+            '새 에스컬레이션 알림 및 시작 이벤트가 표시되지 않는 이벤트 발생 후 경과 분입니다.',
+        'Restores a ticket from the archive (only if the event is a state change to any open available state).' =>
+            '아카이브에서 티켓을 복원합니다(이벤트가 사용 가능한 열린 상태로 상태가 변경된 경우에만).',
+        'Updates the ticket index accelerator.' => '티켓 인덱스 가속기를 업데이트 합니다.',
+        'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
+            '다른 대기열로 이동된 티켓의 소유자를 재설정하고 잠금 해제합니다.',
+        'Forces to choose a different ticket state (from current) after lock action. Define the current state as key, and the next state after lock action as content.' =>
+            '잠금 조치 후 다른 티켓 상태 (현재 상태에서)를 강제로 선택합니다. 현재 상태를 키로 정의하고, 잠금 조치 후 다음 상태를 내용으로 정의하십시오.',
+        'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>
+            '첫 번째 소유자가 업데이트된 후 티켓의 책임을 자동으로 설정합니다 (티켓이 아직 설정되지 않은 경우).',
+        'When agent creates a ticket, whether or not the ticket is automatically locked to the agent.' =>
+            '에이전트가 티켓을 만들 때 티켓이 에이전트에 자동으로 잠겨있는지 여부.',
+        'Sets the PendingTime of a ticket to 0 if the state is changed to a non-pending state.' =>
+            '상태가 비 보류 상태로 변경되면 티켓의 PendingTime을 0으로 설정합니다.',
+        'Sends the notifications which are configured in the admin interface under "Ticket Notifications".' =>
+            '"티켓 통지"에서 관리 인터페이스에 구성된 통지를 보냅니다.',
+        'Updates the ticket escalation index after a ticket attribute got updated.' =>
+            '티켓 특성이 업데이트 된 후 티켓 에스컬레이션 인덱스를 업데이트 합니다.',
+        'Ticket event module that triggers the escalation stop events.' =>
+            '에스컬레이션 중지 이벤트를 트리거하는 티켓 이벤트 모듈.',
+        'Forces to unlock tickets after being moved to another queue.' =>
+            '다른 대기열로 이동한 후 강제로 티켓의 잠금을 해제합니다.',
+        'Update Ticket "Seen" flag if every article got seen or a new Article got created.' =>
+            '모든 기사가 보거나 새로운 기사가 생성되면 티켓을 읽습니다.',
+        'Event module that updates tickets after an update of the Customer.' =>
+            '고객 사용자의 업데이트 후 티켓을 업데이트 하는 이벤트 모듈입니다.',
+        'Event module that updates tickets after an update of the Customer User.' =>
+            '고객 사용자의 업데이트 후 티켓을 업데이트 하는 이벤트 모듈입니다.',
+        'Define a mapping between variables of the customer user data (keys) and dynamic fields of a ticket (values). The purpose is to store customer user data in ticket dynamic fields. The dynamic fields must be present in the system and should be enabled for AgentTicketFreeText, so that they can be set/updated manually by the agent. They mustn\'t be enabled for AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer. If they were, they would have precedence over the automatically set values. To use this mapping, you have to also activate the Ticket::EventModulePost###4100-DynamicFieldFromCustomerUser setting.' =>
+            '고객 사용자 데이터 (키)의 변수와 티켓의 동적 필드 (값) 간의 매핑을 정의하십시오. 그 목적은 티켓 동적 필드에 고객 사용자 데이터를 저장하는 것입니다. 동적 필드는 시스템에 있어야하며 에이전트에서 수동으로 설정하거나 업데이트 할 수 있도록 AgentTicketFreeText에 대해 활성화해야합니다. AgentTicketPhone, AgentTicketEmail 및 AgentTicketCustomer에는 사용할 수 없습니다. 그럴 경우 자동으로 설정된 값보다 우선합니다. 이 매핑을 사용하려면 Ticket :: EventModulePost ### 4100-DynamicFieldFromCustomerUser 설정을 활성화해야합니다.',
+        'This event module stores attributes from CustomerUser as DynamicFields tickets. Please see DynamicFieldFromCustomerUser::Mapping setting for how to configure the mapping.' =>
+            '이 이벤트 모듈은 CustomerUser의 특성을 DynamicFields 티켓으로 저장합니다. 매핑을 구성하는 방법은 DynamicFieldFromCustomerUser::Mapping 설정을 참조하십시오.',
+        'Overloads (redefines) existing functions in Kernel::System::Ticket. Used to easily add customizations.' =>
+            'Kernel :: System :: Ticket의 기존 함수를 오버로드 (재정의)합니다. 쉽게 사용자 정의를 추가하는 데 사용됩니다.',
+        'Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild".' =>
+            '',
+        'Defines whether to index archived tickets for fulltext searches.' =>
+            '전체 텍스트 검색을 위해 보관된 티켓의 색인을 생성할지 여부를 정의합니다.',
+        'Force the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.' =>
+            '필터를 실행하거나 정지 단어 목록을 적용하지 않고 기사 검색 색인에서 원본 기사 텍스트의 저장을 강제 실행합니다. 이렇게하면 검색 색인의 크기가 커지고 전체 텍스트 검색 속도가 느려질 수 있습니다.',
+        'Display a warning and prevent search when using stop words within fulltext search.' =>
+            '전체 텍스트 검색 내에서 중지 단어를 사용할 때 경고를 표시하고 검색을 차단합니다.',
+        'Basic fulltext index settings. Execute "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild" in order to generate a new index.' =>
+            '',
+        'Fulltext index regex filters to remove parts of the text.' => '전체 텍스트 색인 정규식 필터는 텍스트의 일부를 제거합니다.',
+        'English stop words for fulltext index. These words will be removed from the search index.' =>
+            '전체 텍스트 색인에 대한 영어 중지 단어. 이 단어는 검색 색인에서 제거됩니다.',
+        'German stop words for fulltext index. These words will be removed from the search index.' =>
+            '전체 텍스트 색인에 대한 독일어 중지 단어. 이 단어는 검색 색인에서 제거됩니다.',
+        'Dutch stop words for fulltext index. These words will be removed from the search index.' =>
+            '전체 텍스트 색인에 대한 네덜란드어 중지 단어. 이 단어는 검색 색인에서 제거됩니다.',
+        'Spanish stop words for fulltext index. These words will be removed from the search index.' =>
+            '전체 텍스트 색인에 대한 스페인어 중지 단어. 이 단어는 검색 색인에서 제거됩니다.',
+        'French stop words for fulltext index. These words will be removed from the search index.' =>
+            '전체 텍스트 인덱스에 대한 프랑스어 중지 단어. 이 단어는 검색 색인에서 제거됩니다.',
+        'Italian stop words for fulltext index. These words will be removed from the search index.' =>
+            '전체 텍스트 색인에 대한 이탈리아어 중지 단어. 이 단어는 검색 색인에서 제거됩니다.',
+        'Customizable stop words for fulltext index. These words will be removed from the search index.' =>
+            '전체 텍스트 인덱스에 대한 사용자 지정 가능한 중지 단어. 이 단어는 검색 색인에서 제거됩니다.',
+        'Allows having a small format ticket overview (CustomerInfo =&gt; 1 - shows also the customer information).' =>
+            '',
+        'Allows having a medium format ticket overview (CustomerInfo =&gt; 1 - shows also the customer information).' =>
+            '',
+        'Shows a preview of the ticket overview (CustomerInfo =&gt; 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
+            '',
+        'Defines which article sender types should be shown in the preview of a ticket.' =>
+            '티켓 미리보기에 표시할 기사 발신자 유형을 정의합니다.',
+        'Sets the count of articles visible in preview mode of ticket overviews.' =>
+            '티켓 개요의 미리보기 모드에서 볼 수 있는 기사의 수를 설정합니다.',
+        'Defines if the first article should be displayed as expanded, that is visible for the related customer. If nothing defined, latest article will be expanded.' =>
+            '첫 번째 기사를 확장된 것으로 표시할지, 관련 고객에게 표시할지 여부를 정의합니다. 아무것도 정의하지 않으면 최신 기사가 확장됩니다.',
+        'Time in seconds that gets added to the actual time if setting a pending-state (default: 86400 = 1 day).' =>
+            '보류 중 상태 (기본값 : 86400 = 1 일)를 설정하면 실제 시간에 추가되는 시간 초입니다.',
+        'Define the max depth of queues.' => '대기열의 최대 깊이를 정의하십시오.',
+        'Shows existing parent/child queue lists in the system in the form of a tree or a list.' =>
+            '시스템의 기존 상위/하위 대기열 목록을 트리 또는 목록 형태로 표시합니다.',
+        'Enables or disables the ticket watcher feature, to keep track of tickets without being the owner nor the responsible.' =>
+            '티켓 워처 기능을 사용 또는 사용 중지하여 소유자 또는 책임자가 아닌 티켓을 추적합니다.',
+        'Enables ticket watcher feature only for the listed groups.' => '나열된 그룹에 대해서만 티켓 감시자 기능을 사용합니다.',
+        'Enables ticket bulk action feature for the agent frontend to work on more than one ticket at a time.' =>
+            '에이전트 프론트 엔드의 티켓 대량 작업 기능을 사용하여 한 번에 둘 이상의 티켓에서 작업할 수 있습니다.',
+        'Enables ticket bulk action feature only for the listed groups.' =>
+            '나열된 그룹에 대해서만 티켓 대량 작업 기능을 사용합니다.',
+        'Defines time in minutes since last modification for drafts of specified type before they are considered expired.' =>
+            '만료된 것으로 간주되기 전에 지정된 유형의 초안에 대한 최종 수정 이후의 시간을 분으로 정의합니다.',
+        'Shows a link to see a zoomed email ticket in plain text.' => '확대 / 축소된 전자 메일 티켓을 일반 텍스트로 보려면 링크를 표시합니다.',
+        'Shows all the articles of the ticket (expanded) in the agent zoom view.' =>
+            '에이전트 확대 / 축소보기에서 티켓의 모든 항목을 표시합니다(확장된).',
+        'Shows the articles sorted normally or in reverse, under ticket zoom in the agent interface.' =>
+            '에이전트 인터페이스의 티켓 확대/축소에서 기사를 정상적으로 또는 역순으로 정렬하여 표시합니다.',
+        'Shows the article head information in the agent zoom view.' => '',
+        'Shows a count of attachments in the ticket zoom, if the article has attachments.' =>
+            '기사에 첨부 파일이 있는 경우 티켓 확대 / 축소의 첨부 파일 수를 표시합니다.',
+        'Displays the accounted time for an article in the ticket zoom view.' =>
+            '티켓 확대보기에서 기사의 계정 시간을 표시합니다.',
+        'Activates the article filter in the zoom view to specify which articles should be shown.' =>
+            '확대 / 축소 보기에서 기사 필터를 활성화하여 표시할 기사를 지정합니다.',
+        'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
+            '티켓 확대보기에서 현재 티켓과 동일한 CustomerID를 가진 모든 티켓 수를 표시합니다.',
+        'Shows the ticket history (reverse ordered) in the agent interface.' =>
+            '에이전트 인터페이스에서 티켓 내역을 (역순으로) 표시합니다.',
+        'Controls how to display the ticket history entries as readable values.' =>
+            '티켓 기록 항목을 읽을 수 있는 값으로 표시하는 방법을 제어합니다.',
+        'Permitted width for compose email windows.' => '전자 메일 작성용으로 허용된 너비.',
+        'Permitted width for compose note windows.' => '노트 작성 윈도우의 너비 허용.',
+        'Max size (in rows) of the informed agents box in the agent interface.' =>
+            '에이전트 인터페이스의 정보 저장소 에이전트 상자의 최대 크기 (행 수)',
+        'Max size (in rows) of the involved agents box in the agent interface.' =>
+            '에이전트 인터페이스의 관련 상담원 상자의 최대 크기 (행).',
+        'Makes the application block external content loading.' => '',
+        'Shows the customer user information (phone and email) in the compose screen.' =>
+            '작성 화면에서 고객 사용자 정보(전화 및 전자메일)를 표시합니다.',
+        'Max size (in characters) of the customer information table (phone and email) in the compose screen.' =>
+            '작성 화면의 고객 정보 테이블 (전화 및 이메일)의 최대 크기 (문자 수).',
+        'Maximum size (in characters) of the customer information table in the ticket zoom view.' =>
+            '티켓 확대보기의 고객 정보 테이블의 최대 크기 (문자 수)',
+        'Maximum length (in characters) of the dynamic field in the sidebar of the ticket zoom view.' =>
+            '티켓 확대보기의 사이드 바에 있는 동적 필드의 최대 길이(문자 수).',
+        'Maximum length (in characters) of the dynamic field in the article of the ticket zoom view.' =>
+            '티켓 확대보기의 기사에서 동적 필드의 최대 길이(문자 수)',
+        'Controls if customers have the ability to sort their tickets.' =>
+            '고객이 티켓을 정렬할 수 있는지 여부를 제어합니다.',
+        'This option will deny the access to customer company tickets, which are not created by the customer user.' =>
+            '이 옵션은 고객 사용자가 생성하지 않은 고객 회사 티켓에 대한 액세스를 거부합니다.',
+        'Custom text for the page shown to customers that have no tickets yet (if you need those text translated add them to a custom translation module).' =>
+            '티켓이 없는 고객에게 표시되는 페이지의 사용자 정의 텍스트(번역된 텍스트가 필요한 경우 사용자 정의 번역 모듈에 추가).',
+        'Shows either the last customer article\'s subject or the ticket title in the small format overview.' =>
+            '마지막 고객 기사의 제목이나 작은 제목 개요의 티켓 제목을 표시합니다.',
+        'Show the current owner in the customer interface.' => '고객 인터페이스에 현재 소유자를 표시하십시오.',
+        'Show the current queue in the customer interface.' => '고객 인터페이스에 현재 대기열을 표시하십시오.',
+        'Dynamic fields shown in the ticket overview screen of the customer interface.' =>
+            '동적 인터페이스는 고객 인터페이스의 티켓 개요 화면에 표시됩니다.',
+        'Strips empty lines on the ticket preview in the queue view.' => '대기열 보기의 티켓 미리보기에서 빈 줄을 제거합니다.',
+        'Shows all both ro and rw queues in the queue view.' => '대기열보기에서 ro 및 rw 대기열을 모두 표시합니다.',
+        'Show queues even when only locked tickets are in.' => '잠긴 티켓만 있는 경우에도 대기열을 표시하십시오.',
+        'Enable highlighting queues based on ticket age.' => '티켓 수명에 따라 강조 표시 대기열을 활성화합니다.',
+        'Sets the age in minutes (first level) for highlighting queues that contain untouched tickets.' =>
+            '손길이 닿지 않은 티켓이있는 대기열을 강조 표시 할 때의 경과 시간 (1 단계)을 설정합니다.',
+        'Sets the age in minutes (second level) for highlighting queues that contain untouched tickets.' =>
+            '변경되지 않은 티켓이 포함된 대기열을 강조 표시할 때의 경과 시간 (초 단위)을 설정합니다.',
+        'Activates a blinking mechanism of the queue that contains the oldest ticket.' =>
+            '가장 오래된 티켓을 포함하는 큐의 깜박이는 메커니즘을 활성화합니다.',
+        'Include tickets of subqueues per default when selecting a queue.' =>
+            '큐를 선택할 때 기본값 당 서브 큐 티켓을 포함하십시오.',
+        'Sorts the tickets (ascendingly or descendingly) when a single queue is selected in the queue view and after the tickets are sorted by priority. Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top). Use the QueueID for the key and 0 or 1 for value.' =>
+            '대기열보기에서 하나의 대기열을 선택한 경우와 티켓을 우선 순위별로 정렬 한 후에 티켓을 정렬합니다 (오름차순 또는 내림차순). 값 : 0 = 오름차순 (가장 오래된 것, 기본값), 1 = 내림차순 (맨 위에 가장 어린 것). 키에는 QueueID를 사용하고 값에는 0 또는 1을 사용하십시오.',
+        'Defines the default sort criteria for all queues displayed in the queue view.' =>
+            '대기열 보기에 표시된 모든 대기열의 기본 정렬 기준을 정의합니다.',
+        'Defines if a pre-sorting by priority should be done in the queue view.' =>
+            '대기열 뷰에서 우선 순위 별 사전 정렬을 수향해야하는지 여부를 정의합니다.',
+        'Defines the default sort order for all queues in the queue view, after priority sort.' =>
+            '우선 순위 정렬 후 대기열 보기의 모든 대기열에 대한 기본 정렬 순서를 정의합니다.',
+        'Strips empty lines on the ticket preview in the service view.' =>
+            '서비스보기의 티켓 미리보기에서 빈 줄을 제거합니다.',
+        'Shows all both ro and rw tickets in the service view.' => '서비스보기에서 ro와 rw 티켓을 모두 표시합니다.',
+        'Sorts the tickets (ascendingly or descendingly) when a single queue is selected in the service view and after the tickets are sorted by priority. Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top). Use the ServiceID for the key and 0 or 1 for value.' =>
+            '서비스보기에서 하나의 대기열을 선택한 경우와 티켓을 우선 순위별로 정렬 한 후에 티켓을 정렬합니다 (오름차순 또는 내림차순). 값 : 0 = 오름차순 (가장 오래된 것, 기본값), 1 = 내림차순 (맨 위에 가장 어린 것). 키에는 ServiceID를 사용하고 값에는 0 또는 1을 사용하십시오.',
+        'Defines the default sort criteria for all services displayed in the service view.' =>
+            '서비스 보기에 표시된 모든 서비스에 대한 기본 정렬 기준을 정의합니다.',
+        'Defines if a pre-sorting by priority should be done in the service view.' =>
+            '우선 순위 별 사전 정렬을 서비스 보기에서 수행해야하는지 여부를 정의합니다.',
+        'Defines the default sort order for all services in the service view, after priority sort.' =>
+            '우선 순위 정렬 후 서비스 보기의 모든 서비스에 대한 기본 정렬 순서를 정의합니다.',
+        'Activates time accounting.' => '시간 계산을 활성화 합니다.',
+        'Sets the prefered time units (e.g. work units, hours, minutes).' =>
+            '선호 시간 단위 (예 : 작업 단위, 시간, 분)를 설정합니다.',
+        'Defines if time accounting is mandatory in the agent interface. If enabled, a note must be entered for all ticket actions (no matter if the note itself is configured as active or is originally mandatory for the individual ticket action screen).' =>
+            '상담원 인터페이스에서 시간 계산이 필수인지 정의합니다. 활성화 된 경우 모든 티켓 동작에 대해 노트를 입력해야 합니다 (노트 자체가 활성으로 구성되어 있거나 원래 개별 티켓 동작 화면에 필수적이든간에).',
+        'Defines if time accounting must be set to all tickets in bulk action.' =>
+            '일괄 처리로 시간 계산을 모든 티켓으로 설정해야하는지 여부를 정의합니다.',
+        'Defines the default ticket attribute for ticket sorting in the status view of the agent interface.' =>
+            '에이전트 인터페이스의 상태 보기에서 티켓 정렬에 대한 기본 속성을 정의합니다.',
+        'Defines the default ticket order (after priority sort) in the status view of the agent interface. Up: oldest on top. Down: latest on top.' =>
+            '에이전트 인터페이스의 상태보기에서 기본 티켓 순서 (우선 순위 정렬 후)를 정의합니다. 위로 : 가장 오래된 것. 아래 : 위에 최신.',
+        'Defines the required permission to show a ticket in the escalation view of the agent interface.' =>
+            '에이전트 인터페이스의 에스컬레이션 보기에 티켓을 표시하는데 필요한 권한을 정의합니다.',
+        'Defines the default ticket attribute for ticket sorting in the escalation view of the agent interface.' =>
+            '에이전트 인터페이스의 에스컬레이션 보기에서 티켓 정렬에 대한 기본 티켓 속성을 정의합니다.',
+        'Defines the default ticket order (after priority sort) in the escalation view of the agent interface. Up: oldest on top. Down: latest on top.' =>
+            '에이전트 인터페이스의 에스컬레이션보기에서 기본 티켓 순서 (우선 순위 정렬 후)를 정의합니다. 위로 : 가장 오래된 것. 아래 : 위에 최신.',
+        'Allows extended search conditions in ticket search of the agent interface. With this feature you can search e. g. ticket title with this kind of conditions like "(*key1*&amp;&amp;*key2*)" or "(*key1*||*key2*)".' =>
+            '',
+        'Maximum number of tickets to be displayed in the result of a search in the agent interface.' =>
+            '에이전트 인터페이스의 검색 결과에 표시할 최대 티켓 수입니다.',
+        'Number of tickets to be displayed in each page of a search result in the agent interface.' =>
+            '에이전트 인터페이스에서 검색 결과의 각 페이지에 표시할 티넷 수입니다.',
+        'Number of lines (per ticket) that are shown by the search utility in the agent interface.' =>
+            '에이전트 인터페이스에서 검색 유틸리티가 표시하는 행당 (티켓 당) 수.',
+        'Defines the default ticket attribute for ticket sorting of the ticket search result of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 검색 결과에 대한 티켓 정렬을 위한 기본 티켓 속성을 정의합니다.',
+        'Defines the default ticket order in the ticket search result of the agent interface. Up: oldest on top. Down: latest on top.' =>
+            '에이전트 인터페이스의 티켓 검색 결과에서 기본 티켓 순서를 정의합니다. 위로 : 가장 오래된 것. 아래 : 위에 최신.',
+        'Exports the whole article tree in search result (it can affect the system performance).' =>
+            '검색 결과에 전체 아티클 트리를 내보냅니다 (시스템 성능에 영향을 미칠 수 있음).',
+        'Data used to export the search result in CSV format.' => '검색 결과를 CSV 형식으로 내보내는데 사용되는 데이터입니다.',
+        'Includes article create times in the ticket search of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 검색에서 기사 작성 시간을 포함합니다.',
+        'Defines the default shown ticket search attribute for ticket search screen.' =>
+            '티켓 검색 화면에 대해 표시된 기본 티켓 검색 속성을 정의합니다.',
+        'Default data to use on attribute for ticket search screen. Example: "TicketCreateTimePointFormat=year;TicketCreateTimePointStart=Last;TicketCreateTimePoint=2;".' =>
+            '티켓 검색 화면의 속성에 사용할 기본 데이터입니다. 예 : "TicketCreateTimePointFormat = year; TicketCreateTimePointStart = 마지막; TicketCreateTimePoint = 2;".',
+        'Default data to use on attribute for ticket search screen. Example: "TicketCreateTimeStartYear=2010;TicketCreateTimeStartMonth=10;TicketCreateTimeStartDay=4;TicketCreateTimeStopYear=2010;TicketCreateTimeStopMonth=11;TicketCreateTimeStopDay=3;".' =>
+            '티켓 검색 화면의 속성에 사용할 기본 데이터입니다. 예 : "TicketCreateTimeStartYear = 2010, TicketCreateTimeStartMonth = 10, TicketCreateTimeStopDay = 4, TicketCreateTimeStopYear = 2010, TicketCreateTimeStopMonth = 11, TicketCreateTimeStopDay = 3; ',
+        'Defines the default ticket attribute for ticket sorting in the locked ticket view of the agent interface.' =>
+            '에이전트 인터페이스의 잠긴 티켓 보기에서 티켓 정렬에 대한 기본 티켓 속성을 정의합니다.',
+        'Defines the default ticket order in the ticket locked view of the agent interface. Up: oldest on top. Down: latest on top.' =>
+            '에이전트 인터페이스의 티켓 잠김보기에서 기본 티켓 순서를 정의합니다. 위로 : 가장 오래된 것. 아래 : 위에 최신.',
+        'Defines the default ticket attribute for ticket sorting in the responsible view of the agent interface.' =>
+            '에이전트 인터페이스의 담당 뷰에서 티켓 정렬에 대한 기본 티켓 속성을 정의합니다.',
+        'Defines the default ticket order in the responsible view of the agent interface. Up: oldest on top. Down: latest on top.' =>
+            '에이전트 인터페이스의 담당 뷰에서 기본 티켓 순서를 정의합니다. 위로 : 가장 오래된 것. 아래 : 위에 최신.',
+        'Defines the default ticket attribute for ticket sorting in the watch view of the agent interface.' =>
+            '에이전트 인터페이스의 보기에서 티켓 정렬에 대한 기본 티켓 속성을 정의합니다.',
+        'Defines the default ticket order in the watch view of the agent interface. Up: oldest on top. Down: latest on top.' =>
+            '에이전트 인터페이스의보기보기에서 기본 티켓 순서를 정의합니다. 위로 : 가장 오래된 것. 아래 : 위에 최신.',
+        'Required permissions to use the ticket free text screen in the agent interface.' =>
+            '에이전트 인터페이스에서 티켓없는 텍스트 화면을 사용하는데 필요한 권한입니다.',
+        'Defines if a ticket lock is required in the ticket free text screen of the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
+            '에이전트 인터페이스의 티켓 프리 텍스트 화면에 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 잠겨 있지 않은 경우 티켓이 잠기고 현재 에이전트가 자동으로 소유자로 설정 됨).',
+        'Sets the ticket type in the ticket free text screen of the agent interface (Ticket::Type needs to be enabled).' =>
+            '에이전트 인터페이스의 티켓 프리 텍스트 화면에 티켓 유형을 설정합니다 (Ticket :: Type을 활성화해야합니다).',
+        'Sets the service in the ticket free text screen of the agent interface (Ticket::Service needs to be enabled).' =>
+            '에이전트 인터페이스의 티켓 프리 텍스트 화면에 서비스를 설정합니다 (Ticket :: Service를 활성화해야 함).',
+        'Sets if service must be selected by the agent.' => '에이전트가 서비스를 선택해야하는지 여부를 설정합니다.',
+        'Sets if SLA must be selected by the agent.' => '에이전트가 SLA를 선택해야하는지 여부를 설정합니다.',
+        'Sets the queue in the ticket free text screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 프리 텍스트 화면에 대기열을 설정합니다.',
+        'Sets if queue must be selected by the agent.' => '에이전트가 대기열을 선택해야하는지 여부를 설정합니다.',
+        'Sets the ticket owner in the ticket free text screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 프리 텍스트 화면에 티켓 소유자를 설정합니다.',
+        'Sets if ticket owner must be selected by the agent.' => '에이전트가 티켓 소유자를 선택해야하는지 설정합니다.',
+        'Sets the responsible agent of the ticket in the ticket free text screen of the agent interface.' =>
+            '티켓의 담당 에이전트를 에이전트 인터페이스의 티켓 프리 텍스트 화면에 설정합니다.',
+        'Sets if ticket responsible must be selected by the agent.' => '책임 티켓을 에이전트가 선택해야하는지 설정합니다.',
+        'Sets the state of a ticket in the ticket free text screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 프리 텍스트 화면에서 티켓의 상태를 설정합니다.',
+        'Sets if state must be selected by the agent.' => '에이전트가 상태를 선택해야하는지 설정합니다.',
+        'Defines the next state of a ticket after adding a note, in the ticket free text screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓없는 텍스트 화면에 메모를 추가한 후 티켓의 다음 상태를 정의합니다.',
+        'Defines the default next state of a ticket after adding a note, in the ticket free text screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓없는 텍스트 화면에 메모를 추가한 후 티켓의 기본 다음 상태를 정의합니다.',
+        'Allows adding notes in the ticket free text screen of the agent interface. Can be overwritten by Ticket::Frontend::NeedAccountedTime.' =>
+            '에이전트 인터페이스의 티켓없는 텍스트 화면에 메모를 추가 할 수 있습니다. Ticket :: Frontend :: NeedAccountedTime으로 덮어 쓸 수 있습니다.',
+        'Sets if note must be filled in by the agent. Can be overwritten by Ticket::Frontend::NeedAccountedTime.' =>
+            '에이전트가 노트를 입력해야하는지 설정합니다. Ticket :: Frontend :: NeedAccountedTime으로 덮어 쓸 수 있습니다.',
+        'Defines the default subject of a note in the ticket free text screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 프리 텍스트 화면에서 노트의 기본 제목을 정의합니다.',
+        'Defines the default body of a note in the ticket free text screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 비어있는 텍스트 화면에서 노트의 기본 본문을 정의합니다.',
+        'Shows a list of all the involved agents on this ticket, in the ticket free text screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓없는 텍스트 화면에 이 티켓의 모든 관련 에이전트 목록을 표시합니다.',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket free text screen of the agent interface.' =>
+            '',
+        'Defines if the note in the ticket free text screen of the agent interface is visible for the customer by default.' =>
+            '상담원 인터페이스의 티켓 프리 텍스트 화면에있는 노트가 기본적으로 고객에게 표시되는지 여부를 정의합니다.',
+        'Shows the ticket priority options in the ticket free text screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓없는 텍스트 화면에서 티켓 우선 순위 옵션을 표시합니다.',
+        'Defines the default ticket priority in the ticket free text screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓없는 텍스트 화면에서 기본 티켓 우선 순위를 정의합니다.',
+        'Shows the title field in the ticket free text screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 없는 텍스트 화면에 제목 필드를 표시합니다.',
+        'Allows to save current work as draft in the ticket free text screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 없는 텍스트 화면에 현재 작업을 초안으로 저장할 수 있습니다.',
+        'Defines the history type for the ticket free text screen action, which gets used for ticket history.' =>
+            '티켓 기록에 사용되는 티켓 비어있는 텍스트 화면 조치에 대한 기록 유형을 정의합니다.',
+        'Defines the history comment for the ticket free text screen action, which gets used for ticket history.' =>
+            '티켓 기록에 사용되는 티켓 비어있는 텍스트 화면 작업에 대한 기록 주석을 정의합니다.',
+        'Required permissions to use the ticket phone outbound screen in the agent interface.' =>
+            '에이전트 인터페이스에서 티켓 전화 아웃 바운드 화면을 사용하는 데 필요한 권한입니다.',
+        'Defines if a ticket lock is required in the ticket phone outbound screen of the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
+            '에이전트 인터페이스의 티켓 전화 아웃 바운드 화면에서 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 아직 잠겨 있지 않은 경우 티켓이 잠기고 현재 에이전트가 자동으로 소유자로 설정 됨).',
+        'Defines the default sender type for phone tickets in the ticket phone outbound screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 전화 아웃바운드 화면에서 전화 티켓의 기본 발신자 유형을 정의합니다.',
+        'Defines the default subject for phone tickets in the ticket phone outbound screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 전화 아웃바운드 화면에서 전화 티켓의 기본 제목을 정의합니다.',
+        'Defines the default note body text for phone tickets in the ticket phone outbound screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 전화 아웃바운드 화면에서 전화 티켓의 기본 노트 본문 텍스트를 정의합니다.',
+        'Defines the default ticket next state after adding a phone note in the ticket phone outbound screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 폰 아웃바운드 화면에 전화 메모를 추가한 후 기본 티켓 다음 상태를 정의합니다.',
+        'Next possible ticket states after adding a phone note in the ticket phone outbound screen of the agent interface.' =>
+            '가능한 다음 티켓 상태는 상담원 인터페이스의 티켓 전화 아웃 바운드 화면에 전화 메모를 추가한 후의 상태입니다.',
+        'Defines the history type for the ticket phone outbound screen action, which gets used for ticket history in the agent interface.' =>
+            '에이전트 인터페이스의 티켓 기록에 사용되는 티켓 전화 아웃 바운드 화면 작업의 기록 유형을 정의합니다.',
+        'Defines the history comment for the ticket phone outbound screen action, which gets used for ticket history in the agent interface.' =>
+            '에이전트 인터페이스의 티켓 기록에 사용되는 티켓 전화 아웃 바운드 화면 작업에 대한 기록 주석을 정의합니다.',
+        'Allows to save current work as draft in the ticket phone outbound screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 폰 아웃바운드 화면에 현재 작업을 초안으로 저장할 수 있습니다.',
+        'Required permissions to use the ticket phone inbound screen in the agent interface.' =>
+            '에이전트 인터페이스의 티켓 인바운드 화면을 사용하는 데 필요한 권한입니다.',
+        'Defines if a ticket lock is required in the ticket phone inbound screen of the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
+            '에이전트 인터페이스의 티켓 인바운드 화면에 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 아직 잠겨 있지 않은 경우 티켓이 잠기고 현재 에이전트가 자동으로 소유자로 설정 됨).',
+        'Defines the default sender type for phone tickets in the ticket phone inbound screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 인바운드 화면에서 전화 티켓의 기본 발신자 유형을 정의합니다.',
+        'Defines the default subject for phone tickets in the ticket phone inbound screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 인바운드 화면에서 전화 티켓의 기본제목을 정의합니다.',
+        'Defines the default note body text for phone tickets in the ticket phone inbound screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 인바운드 화면에서 전화 티켓의 기본 노트 본문 텍스트를 정의합니다.',
+        'Defines the default ticket next state after adding a phone note in the ticket phone inbound screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 인바운드 화면에 전화 메모를 추가한 후 기본 티켓 다음 상태를 정의합니다.',
+        'Next possible ticket states after adding a phone note in the ticket phone inbound screen of the agent interface.' =>
+            '다음 가능한 티켓 상태는 에이전트 인터페이스의 티켓 인바운드 인바운드 화면에 전화 메모를 추가한 후의 상태입니다.',
+        'Defines the history type for the ticket phone inbound screen action, which gets used for ticket history in the agent interface.' =>
+            '티켓 인터페이스 인바운드 화면 작업에 대한 기록 유형을 정의합니다.이 기록은 에이전트 인터페이스의 티켓 기록에 사용됩니다.',
+        'Defines the history comment for the ticket phone inbound screen action, which gets used for ticket history in the agent interface.' =>
+            '에이전트 인터페이스의 티켓 기록에 사용되는 티켓 전화 인바운드 화면 작업에 대한 기록 주석을 정의합니다.',
+        'Allows to save current work as draft in the ticket phone inbound screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 인바운드 인바운드 화면에 현재 작업을 초안으로 저장할 수 있습니다.',
+        'Shows an owner selection in phone and email tickets in the agent interface.' =>
+            '상담원 인터페이스의 전화 및 전자 메일 티켓에서 소유자 선택을 표시합니다.',
+        'Show a responsible selection in phone and email tickets in the agent interface.' =>
+            '상담원 인터페이스에서 전화 및 전자 메일 티켓에 책임감 있는 선택을 표시합니다.',
+        'Defines the recipient target of the phone ticket and the sender of the email ticket ("Queue" shows all queues, "System address" displays all system addresses) in the agent interface.' =>
+            '에이전트 티켓에서 전화 티켓의받는 사람 대상과 전자 메일 티켓의 보낸 사람을 정의합니다 ( "대기열"은 모든 대기열을 나타내며 "시스템 주소"는 모든 시스템 주소를 표시합니다).',
+        'Determines the strings that will be shown as recipient (To:) of the phone ticket and as sender (From:) of the email ticket in the agent interface. For Queue as NewQueueSelectionType "&lt;Queue&gt;" shows the names of the queues and for SystemAddress "&lt;Realname&gt; &lt;&lt;Email&gt;&gt;" shows the name and email of the recipient.' =>
+            '',
+        'Determines which options will be valid of the recipient (phone ticket) and the sender (email ticket) in the agent interface.' =>
+            '상담원 인터페이스에서 수신자 (전화 티켓) 및 발신자 (전자 메일 티켓)에 대해 유효한 옵션을 결정합니다.',
+        'Shows customer history tickets in AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer.' =>
+            'AgentTicketPhone, AgentTicketEmail 및 AgentTicketCustomer에 고객 기록 티켓을 표시합니다.',
+        'If enabled, TicketPhone and TicketEmail will be open in new windows.' =>
+            '사용하도록 설정하면 TicketPhone 및 TicketEmail이 새 창에서 열립니다.',
+        'Sets the default priority for new phone tickets in the agent interface.' =>
+            '에이전트 인터페이스에서 새 전화 티켓의 기본 우선 순위를 설정합니다.',
+        'Sets the default sender type for new phone ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 새 전화 티켓의 기본 발신자 유형을 설정합니다.',
+        'Sets the default article customer visibility for new phone tickets in the agent interface.' =>
+            '에이전트 인터페이스에서 새 전화 티켓에 대한 기본 아티클 고객 가시성을 설정합니다.',
+        'Controls if more than one from entry can be set in the new phone ticket in the agent interface.' =>
+            '항목에서 둘 이상이 상담원 인터페이스의 새 전화 티켓에 설정될 수 있는지 여부를 제어합니다.',
+        'Sets the default subject for new phone tickets (e.g. \'Phone call\') in the agent interface.' =>
+            '상담원 인터페이스에서 새 전화 티켓의 기본 제목 (예 : \'전화 통화\')을 설정합니다.',
+        'Sets the default note text for new telephone tickets. E.g \'New ticket via call\' in the agent interface.' =>
+            '새 전화 티켓의 기본 메모 텍스트를 설정합니다. 예 : 상담원 인터페이스의 \'통화를 통한 신규 티켓\'',
+        'Sets the default next state for new phone tickets in the agent interface.' =>
+            '에이전트 인터페이스에서 새 전화 티켓의 기본 다음 상태를 설정합니다.',
+        'Determines the next possible ticket states, after the creation of a new phone ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 새 전화 티켓을 만든 후 가능한 다음 티켓 상태를 결정합니다.',
+        'Defines the history type for the phone ticket screen action, which gets used for ticket history in the agent interface.' =>
+            '에이전트 티켓 인터페이스에서 티켓 기록에 사용되는 전화 티켓 화면 작업의 기록 유형을 정의합니다.',
+        'Defines the history comment for the phone ticket screen action, which gets used for ticket history in the agent interface.' =>
+            '에이전트 티켓 인터페이스에서 티켓 기록에 사용되는 전화 티켓 화면 작업에 대한 기록 주석을 정의합니다.',
+        'Sets the default link type of splitted tickets in the agent interface.' =>
+            '에이전트 인터페이스에서 분할 된 티켓의 기본 링크 유형을 설정합니다.',
+        'Sets the default priority for new email tickets in the agent interface.' =>
+            '에이전트 인터페이스에서 새 전자 메일 티켓의 기본 우선 순위를 설정합니다.',
+        'Sets the default article customer visibility for new email tickets in the agent interface.' =>
+            '에이전트 인터페이스에서 새 전자 메일 티켓에 대한 기본 아티클 고객 가시성을 설정합니다.',
+        'Sets the default sender type for new email tickets in the agent interface.' =>
+            '에이전트 인터페이스에서 새 전자 메일 티켓의 기본 보낸 사람 유형을 설정합니다.',
+        'Sets the default subject for new email tickets (e.g. \'email Outbound\') in the agent interface.' =>
+            '에이전트 인터페이스에서 새 이메일 티켓의 기본 제목 (예 : \'이메일 발신\')을 설정합니다.',
+        'Sets the default text for new email tickets in the agent interface.' =>
+            '에이전트 인터페이스에서 새 전자 메일 티켓의 기본 텍스트를 설정합니다.',
+        'Sets the default next ticket state, after the creation of an email ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 전자 메일 티켓을 만든 후 기본 티켓 상태를 설정합니다.',
+        'Determines the next possible ticket states, after the creation of a new email ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 새 전자 메일 티켓을 만든 후 가능한 다음 티켓 상태를 결정합니다.',
+        'Defines the history type for the email ticket screen action, which gets used for ticket history in the agent interface.' =>
+            '에이전트 인터페이스에서 티켓 기록에 사용되는 전자 메일 티켓 화면 작업의 기록 유형을 정의합니다.',
+        'Defines the history comment for the email ticket screen action, which gets used for ticket history in the agent interface.' =>
+            '에이전트 인터페이스에서 티켓 기록에 사용되는 전자 메일 티켓 화면 작업에 대한 기록 주석을 정의합니다.',
+        'Required permissions to use the close ticket screen in the agent interface.' =>
+            '에이전트 인터페이스에서 티켓 닫기 화면을 사용하는데 필요한 권한입니다.',
+        'Defines if a ticket lock is required in the close ticket screen of the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
+            '에이전트 인터페이스의 닫기 티켓 화면에서 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 아직 잠겨 있지 않은 경우 티켓이 잠기고 현재 에이전트가 자동으로 소유자로 설정됨).',
+        'Sets the ticket type in the close ticket screen of the agent interface (Ticket::Type needs to be enabled).' =>
+            '에이전트 인터페이스의 티켓 닫기 화면에서 티켓 유형을 설정합니다 (Ticket :: Type을 활성화해야합니다).',
+        'Sets the service in the close ticket screen of the agent interface (Ticket::Service needs to be enabled).' =>
+            '에이전트 인터페이스의 닫기 티켓 화면에 서비스를 설정합니다 (Ticket :: Service를 활성화해야 함).',
+        'Sets the queue in the ticket close screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대 / 축소된 티켓의 티켓 닫기 화면에서 대기열을 설정합니다.',
+        'Sets the ticket owner in the close ticket screen of the agent interface.' =>
+            '에이전트 인터페이스의 닫기 티켓 화면에서 티켓 소유자를 설정합니다.',
+        'Sets the responsible agent of the ticket in the close ticket screen of the agent interface.' =>
+            '에이전트 인터페이스의 닫기 티켓 화면에서 티켓의 담당 에이전트를 설정합니다.',
+        'Sets the state of a ticket in the close ticket screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 닫기 화면에서 티켓의 상태를 설정합니다.',
+        'Defines the next state of a ticket after adding a note, in the close ticket screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 닫기 화면에서 메모를 추가한 후 티켓의 다음 상태를 정의합니다.',
+        'Defines the default next state of a ticket after adding a note, in the close ticket screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 닫기 화면에서 메모를 추가한 후 티켓의 기본 다음 상태를 정의합니다.',
+        'Allows adding notes in the close ticket screen of the agent interface. Can be overwritten by Ticket::Frontend::NeedAccountedTime.' =>
+            '에이전트 인터페이스의 닫기 티켓 화면에 메모를 추가 할 수 있습니다. Ticket :: Frontend :: NeedAccountedTime으로 덮어 쓸 수 있습니다.',
+        'Sets the default subject for notes added in the close ticket screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 닫기 화면에 추가 된 노트의 기본 제목을 설정합니다.',
+        'Sets the default body text for notes added in the close ticket screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 닫이 화면에 추가된 메모의 기본 본문 텍스트를 설정합니다.',
+        'Shows a list of all the involved agents on this ticket, in the close ticket screen of the agent interface.' =>
+            '에이전트 인터페이스의 닫기 티켓 화면에서 이 티켓에 관련된 모든 에이전트의 목록을 표시합니다.',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the close ticket screen of the agent interface.' =>
+            '',
+        'Defines if the note in the close ticket screen of the agent interface is visible for the customer by default.' =>
+            '상담원 인터페이스의 닫기 티켓 화면에 있는 메모가 기본적으로 고객에게 표시되는지 여부를 정의합니다.',
+        'Shows the ticket priority options in the close ticket screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 닫기 화면에서 티켓 우선 순위 옵션을 표시합니다.',
+        'Defines the default ticket priority in the close ticket screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 닫기 화면에서 기본 티켓 우선 순위를 정의합니다.',
+        'Shows the title field in the close ticket screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 닫기 화면에 제목 필드를 표시합니다.',
+        'Allows to save current work as draft in the close ticket screen of the agent interface.' =>
+            '에이전트 인터페이스의 닫기 티켓 화면에서 현재 작업을 초안으로 저장할 수 있습니다.',
+        'Defines the history type for the close ticket screen action, which gets used for ticket history in the agent interface.' =>
+            '에이전트 인터페이스의 티켓 기록에 사용되는 티켓 닫기 화면 작업의 기록 유형을 정의합니다.',
+        'Defines the history comment for the close ticket screen action, which gets used for ticket history in the agent interface.' =>
+            '에이전트 인터페이스의 티켓 기록에 사용되는 닫기 티켓 화면 작업에 대한 기록 주석을 정의합니다.',
+        'Required permissions to use the ticket note screen in the agent interface.' =>
+            '에아전트 인터페이스에서 티켓 메모 화면을 사용하는데 필요한 권한입니다.',
+        'Defines if a ticket lock is required in the ticket note screen of the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
+            '에이전트 인터페이스의 티켓 메모 화면에 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 아직 잠겨 있지 않은 경우 티켓이 잠기고 현재 에이전트가 소유자로 자동 설정 됨).',
+        'Sets the ticket type in the ticket note screen of the agent interface (Ticket::Type needs to be enabled).' =>
+            '에이전트 인터페이스의 티켓 메모 화면에서 티켓 유형을 설정합니다 (Ticket :: Type을 활성화해야합니다).',
+        'Sets the service in the ticket note screen of the agent interface (Ticket::Service needs to be enabled).' =>
+            '에이전트 인터페이스의 티켓 메모 화면에 서비스를 설정합니다 (Ticket :: Service를 활성화해야 함).',
+        'Sets the queue in the ticket note screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 메모 화면에 대기열을 설정합니다.',
+        'Sets the ticket owner in the ticket note screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 메모 화면에서 티켓 소유자를 설정합니다.',
+        'Sets the responsible agent of the ticket in the ticket note screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 메모 화면에서 티켓의 담당 에이전트를 설정합니다.',
+        'Sets the state of a ticket in the ticket note screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 메모 화면에서 티켓의 상태를 설정합니다.',
+        'Defines the next state of a ticket after adding a note, in the ticket note screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 메모 화면에서 메모를 추가 한 후 티켓의 다음 상태를 정의합니다.',
+        'Defines the default next state of a ticket after adding a note, in the ticket note screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 메모 화면에 메모를 추가한 후 티켓의 기본 다음 상태를 정의합니다.',
+        'Allows adding notes in the ticket note screen of the agent interface. Can be overwritten by Ticket::Frontend::NeedAccountedTime.' =>
+            '에이전트 인터페이스의 티켓 메모 화면에 메모를 추가 할 수 있습니다. Ticket :: Frontend :: NeedAccountedTime으로 덮어 쓸 수 있습니다.',
+        'Sets the default subject for notes added in the ticket note screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 메모 화면에 추가 된 노트의 기본 제목을 설정합니다.',
+        'Sets the default body text for notes added in the ticket note screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 메모 화면에 추가 된 노트의 기본 본문 텍스트를 설정합니다.',
+        'Shows a list of all the involved agents on this ticket, in the ticket note screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 메모 화면에서 이 티켓에 관련된 모든 에이전트의 목록을 표시합니다.',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket note screen of the agent interface.' =>
+            '',
+        'Defines if the note in the ticket note screen of the agent interface is visible for the customer by default.' =>
+            '상담원 인터페이스의 티켓 메모 화면에있는 메모가 기본적으로 고객에게 표시되는지 여부를 정의합니다.',
+        'Shows the ticket priority options in the ticket note screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 메모 화면에서 티켓 우선 순위 옵션을 표시합니다.',
+        'Defines the default ticket priority in the ticket note screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 메모 화면에서 기본 티켓 우선 순위를 정의합니다.',
+        'Shows the title field in the ticket note screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 메모 화면에 제목 필드를 표시합니다.',
+        'Allows to save current work as draft in the ticket note screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 메모 화면에서 현재 작업을 초안으로 저장할 수 있습니다.',
+        'Defines the history type for the ticket note screen action, which gets used for ticket history in the agent interface.' =>
+            '에이전트 인터페이스의 티켓 기록에 사용되는 티켓 메모 화면 작업의 기록 유형을 정의합니다.',
+        'Defines the history comment for the ticket note screen action, which gets used for ticket history in the agent interface.' =>
+            '에이전트 인터페이스의 티켓 기록에 사용되는 티켓 메모 화면 작업에 대한 기록 주석을 정의합니다.',
+        'Required permissions to use the ticket owner screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대 / 축소된 티켓의 티켓 소유자 화면을 사용하는데 필요한 권한입니다.',
+        'Defines if a ticket lock is required in the ticket owner screen of a zoomed ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
+            '에이전트 인터페이스의 확대 / 축소 된 티켓의 티켓 소유자 화면에 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 잠겨 있지 않은 경우 티켓이 잠기고 현재 에이전트가 소유자로 자동 설정 됨).',
+        'Sets the ticket type in the ticket owner screen of a zoomed ticket in the agent interface (Ticket::Type needs to be enabled).' =>
+            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 소유자 화면에 티켓 유형을 설정합니다 (Ticket :: Type을 활성화해야합니다).',
+        'Sets the service in the ticket owner screen of a zoomed ticket in the agent interface (Ticket::Service needs to be enabled).' =>
+            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 소유자 화면에 서비스를 설정합니다 (Ticket :: Service를 활성화해야 함).',
+        'Sets the queue in the ticket owner screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 소유자 화면에 대기열을 설정합니다.',
+        'Sets the ticket owner in the ticket owner screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스의 확대 된 티켓의 티켓 소유자 화면에서 티켓 소유자를 설정합니다.',
+        'Sets the responsible agent of the ticket in the ticket owner screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스의 확대 된 티켓의 티켓 소유자 화면에 티켓의 책임자를 설정합니다.',
+        'Sets the state of the ticket in the ticket owner screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스의 확대 된 티켓의 티켓 소유자 화면에서 티켓의 상태를 설정합니다.',
+        'Defines the next state of a ticket after adding a note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스의 확대 된 티켓의 티켓 소유자 화면에 노트를 추가 한 후 티켓의 다음 상태를 정의합니다.',
+        'Defines the default next state of a ticket after adding a note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스의 확대 / 축소 된 티켓의 티켓 소유자 화면에 노트를 추가한 후 티켓의 기본 다음 상태를 정의합니다.',
+        'Allows adding notes in the ticket owner screen of a zoomed ticket in the agent interface. Can be overwritten by Ticket::Frontend::NeedAccountedTime.' =>
+            '에이전트 인터페이스에서 확대 된 티켓의 티켓 소유자 화면에 노트를 추가 할 수 있습니다. Ticket :: Frontend :: NeedAccountedTime으로 덮어 쓸 수 있습니다.',
+        'Sets the default subject for notes added in the ticket owner screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대 된 티켓의 티켓 소유자 화면에 추가 된 노트의 기본 제목을 설정합니다.',
+        'Sets the default body text for notes added in the ticket owner screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 소유자 화면에 추가 된 노트의 기본 본문 텍스트를 설정합니다.',
+        'Shows a list of all the involved agents on this ticket, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스의 확대된 티켓의 티켓 소유자 화면에서 이 티켓에 관련된 모든 에이전트의 목록을 표시합니다.',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Defines if the note in the ticket owner screen of the agent interface is visible for the customer by default.' =>
+            '에이전트 인터페이스의 티켓 소유자 화면에있는 노트가 기본적으로 고객에게 표시되는지 여부를 정의합니다.',
+        'Shows the ticket priority options in the ticket owner screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대된 티켓의 티켓 소유자 화면에 티켓 우선 순위 옵션을 표시합니다.',
+        'Defines the default ticket priority in the ticket owner screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스의 확대된 티켓의 티켓 소유자 화면에서 기본 티켓 우선 순위를 정의합니다.',
+        'Shows the title field in the ticket owner screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대/축소된 티켓의 티켓 소유자 화면에 제목 필드를 표시합니다.',
+        'Allows to save current work as draft in the ticket owner screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 소유자 화면에 현재 작업을 초안으로 저장할 수 있습니다.',
+        'Defines the history type for the ticket owner screen action, which gets used for ticket history in the agent interface.' =>
+            '에이전트 인터페이스 화면의 티켓 기록에 사용되는 티켓 소유자 화면 작업의 기록 유형을 정의합니다.',
+        'Defines the history comment for the ticket owner screen action, which gets used for ticket history in the agent interface.' =>
+            '에이전트 인터페이스에서 티켓 기록에 사용되는 티켓 소유자 화면 작업에 대한 기록 주석을 정의합니다.',
+        'Required permissions to use the ticket pending screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 보류 화면을 사용하는 데 필요한 권한입니다.',
+        'Defines if a ticket lock is required in the ticket pending screen of a zoomed ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
+            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 보류 화면에 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 잠겨 있지 않은 경우 티켓이 잠기고 현재 에이전트가 소유자로 자동 설정 됨).',
+        'Sets the ticket type in the ticket pending screen of a zoomed ticket in the agent interface (Ticket::Type needs to be enabled).' =>
+            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 보류 화면에 티켓 유형을 설정합니다 (Ticket :: Type을 활성화해야합니다).',
+        'Sets the service in the ticket pending screen of a zoomed ticket in the agent interface (Ticket::Service needs to be enabled).' =>
+            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 보류 화면에 서비스를 설정합니다 (Ticket :: Service를 활성화해야 함).',
+        'Sets the queue in the ticket pending screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 보류 화면에 대기열을 설정합니다.',
+        'Sets the ticket owner in the ticket pending screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 보류 화면에 티켓 소유자를 설정합니다.',
+        'Sets the responsible agent of the ticket in the ticket pending screen of a zoomed ticket in the agent interface.' =>
+            '티켓의 담당 에이전트를 에이전트 인터페이스의 확대 된 티켓의 티켓 보류 화면에 설정합니다.',
+        'Sets the state of the ticket in the ticket pending screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 보류 화면에 티켓의 상태를 설정합니다.',
+        'Defines the next state of a ticket after adding a note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스의 확대 된 티켓의 티켓 보류 화면에 노트를 추가 한 후 티켓의 다음 상태를 정의합니다.',
+        'Defines the default next state of a ticket after adding a note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대된 티켓의 티켓 보류 화면에 노트를 추가한 후 티켓의 기본 다음 상태를 정의합니다.',
+        'Allows adding notes in the ticket pending screen of a zoomed ticket in the agent interface. Can be overwritten by Ticket::Frontend::NeedAccountedTime.' =>
+            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 보류 화면에 메모를 추가 할 수 있습니다. Ticket :: Frontend :: NeedAccountedTime으로 덮어 쓸 수 있습니다.',
+        'Sets the default subject for notes added in the ticket pending screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 보류 화면에 추가 된 노트의 기본 제목을 설정합니다.',
+        'Sets the default body text for notes added in the ticket pending screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대 / 축소된 티켓의 티켓 보류 화면에 추가된 노트의 기본 본문 텍스트를 설정합니다.',
+        'Shows a list of all the involved agents on this ticket, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스의 확대된 티켓의 티켓 보류 화면에 이 티켓에 이 티켓에 포함된 모든 관련 에이전트의 목록을 표시합니다.',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Defines if the note in the ticket pending screen of the agent interface is visible for the customer by default.' =>
+            '에이전트 인터페이스의 티켓 보류 화면에있는 메모가 기본적으로 고객에게 표시되는지 여부를 정의합니다.',
+        'Shows the ticket priority options in the ticket pending screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대/축소된 티켓의 티켓 보류 화면에 티켓 우선 순위 옵션을 표시합니다.',
+        'Defines the default ticket priority in the ticket pending screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대/축소된  티켓의 티켓 보류 화면에서 기본 티켓 우선 순위를 정의합니다.',
+        'Shows the title field in the ticket pending screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대/축소된 티켓의 티켓 보류 화면에 제목 필드를 표시합니다.',
+        'Allows to save current work as draft in the ticket pending screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 보류 화면에 현재 작업을 초안으로 저장할 수 있습니다.',
+        'Defines the history type for the ticket pending screen action, which gets used for ticket history in the agent interface.' =>
+            '에이전트 인터페이스에서 티켓 히스토리에 사용되는 티켓 보류 화면 조치의 히스토리 유형을 정의합니다.',
+        'Defines the history comment for the ticket pending screen action, which gets used for ticket history in the agent interface.' =>
+            '에이전트 인터페이스에서 티켓 기록에 사용되는 티켓 보류 화면 조치에 대한 기록 주석을 정의합니다.',
+        'Required permissions to use the ticket priority screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 우선 순위 화면을 사용하는 데 필요한 권한입니다.',
+        'Defines if a ticket lock is required in the ticket priority screen of a zoomed ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
+            '에이전트 인터페이스의 줌 된 티켓의 티켓 우선 순위 화면에 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 잠겨 있지 않은 경우 티켓이 잠기고 현재 에이전트가 소유자로 자동 설정 됨).',
+        'Sets the ticket type in the ticket priority screen of a zoomed ticket in the agent interface (Ticket::Type needs to be enabled).' =>
+            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 우선 순위 화면에 티켓 유형을 설정합니다 (Ticket :: Type을 활성화해야합니다).',
+        'Sets the service in the ticket priority screen of a zoomed ticket in the agent interface (Ticket::Service needs to be enabled).' =>
+            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 우선 순위 화면에 서비스를 설정합니다 (Ticket :: Service를 활성화해야 함).',
+        'Sets the queue in the ticket priority screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 우선 순위 화면에 대기열을 설정합니다.',
+        'Sets the ticket owner in the ticket priority screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대 된 티켓의 티켓 우선 순위 화면에 티켓 소유자를 설정합니다.',
+        'Sets the responsible agent of the ticket in the ticket priority screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 우선 순위 화면에 티켓의 책임자를 설정합니다.',
+        'Sets the state of the ticket in the ticket priority screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스의 확대 된 티켓의 티켓 우선 순위 화면에서 티켓의 상태를 설정합니다.',
+        'Defines the next state of a ticket after adding a note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스의 확대 된 티켓의 티켓 우선 순위 화면에 노트를 추가 한 후 티켓의 다음 상태를 정의합니다.',
+        'Defines the default next state of a ticket after adding a note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대된 티켓의 티켓 우선 순위 화면에 노트를 추가한 후 티켓의 기본 다음 상태를 정의합니다.',
+        'Allows adding notes in the ticket priority screen of a zoomed ticket in the agent interface. Can be overwritten by Ticket::Frontend::NeedAccountedTime.' =>
+            '에이전트 인터페이스에서 확대 된 티켓의 티켓 우선 순위 화면에 노트를 추가 할 수 있습니다. Ticket :: Frontend :: NeedAccountedTime으로 덮어 쓸 수 있습니다.',
+        'Sets the default subject for notes added in the ticket priority screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 우선 순위 화면에 추가 된 노트의 기본 제목을 설정합니다.',
+        'Sets the default body text for notes added in the ticket priority screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 우선 순위 화면에 추가 된 노트의 기본 본문 텍스트를 설정합니다.',
+        'Shows a list of all the involved agents on this ticket, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스의 확대된 티켓의 티켓 우선 순위 화면에서 이 티켓에 관련된 모든 에이전트의 목록을 표시합니다.',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Defines if the note in the ticket priority screen of the agent interface is visible for the customer by default.' =>
+            '에이전트 인터페이스의 티켓 우선 순위화면에 있는 노트가 기본적으로 고객에게 표시되는지 여부를 정의합니다.',
+        'Shows the ticket priority options in the ticket priority screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대된 티켓의 티켓 우선 순위 화면에 티켓 우선 순위 옵션을 표시합니다.',
+        'Defines the default ticket priority in the ticket priority screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스의 확대된 티켓의 티켓우선순위 화면에서 기본 티켓 우선 순위를 정의합니다.',
+        'Shows the title field in the ticket priority screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대/축소된 티켓의 티켓 우선 순위 화면에 제목 필드를 표시합니다.',
+        'Allows to save current work as draft in the ticket priority screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 우선 순위 화면에 현재 작업을 초안으로 저장할 수 있습니다.',
+        'Defines the history type for the ticket priority screen action, which gets used for ticket history in the agent interface.' =>
+            '에이전트 인터페이스의 티켓 기록에 사용되는 티켓 우선 순위 화면 작업의 기록 유형을 정의합니다.',
+        'Defines the history comment for the ticket priority screen action, which gets used for ticket history in the agent interface.' =>
+            '에이전트 인터페이스의 티켓 기록에 사용되는 티켓 우선 순위 화면 작업에 대한 기록 주석을 정의합니다.',
+        'Required permissions to use the ticket responsible screen in the agent interface.' =>
+            '에이전트 인터페이스에서 티켓 책임 화면을 사용하는데 필요한 권한입니다.',
+        'Defines if a ticket lock is required in the ticket responsible screen of the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
+            '에이전트 인터페이스의 티켓 책임 화면에 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 아직 잠겨있지 않은 경우 티켓이 잠기고 현재 에이전트가 자동으로 소유자로 설정됨).',
+        'Sets the ticket type in the ticket responsible screen of the agent interface (Ticket::Type needs to be enabled).' =>
+            '에이전트 인터페이스의 티켓 책임 화면에 티켓 유형을 설정합니다 (Ticket :: Type을 활성화해야합니다).',
+        'Sets the service in the ticket responsible screen of the agent interface (Ticket::Service needs to be enabled).' =>
+            '에이전트 인터페이스의 티켓 책임 화면에 서비스를 설정합니다 (Ticket :: Service를 활성화해야 함).',
+        'Sets the queue in the ticket responsible screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 책임 화면에 대기열을 설정합니다.',
+        'Sets the ticket owner in the ticket responsible screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 책임 화면에 티켓 소유자를 설정합니다.',
+        'Sets the responsible agent of the ticket in the ticket responsible screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 책임 화면에 티켓의 담당 에이전트를 설정합니다.',
+        'Sets the state of a ticket in the ticket responsible screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 담당 화면에서 티켓의 상태를 설정합니다.',
+        'Defines the next state of a ticket after adding a note, in the ticket responsible screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 책임 화면에 메모를 추가 한 후 티켓의 다음 상태를 정의합니다.',
+        'Defines the default next state of a ticket after adding a note, in the ticket responsible screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 책임 화면에 메모를 추가한 후 티켓의 기본 다음 상태를 정의합니다.',
+        'Allows adding notes in the ticket responsible screen of the agent interface. Can be overwritten by Ticket::Frontend::NeedAccountedTime.' =>
+            '에이전트 인터페이스의 티켓 책임 화면에 메모를 추가 할 수 있습니다. Ticket :: Frontend :: NeedAccountedTime으로 덮어 쓸 수 있습니다.',
+        'Sets the default subject for notes added in the ticket responsible screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 담당 화면에 추가 된 노트의 기본 제목을 설정합니다.',
+        'Sets the default body text for notes added in the ticket responsible screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 책임 화면에 추가 된 노트의 기본 본문 텍스트를 설정합니다.',
+        'Shows a list of all the involved agents on this ticket, in the ticket responsible screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 책임 화면에서 이 티켓에 관련된 모든 에이전트의 목록을 표시합니다.',
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface.' =>
+            '',
+        'Defines if the note in the ticket responsible screen of the agent interface is visible for the customer by default.' =>
+            '에이전트 인터페이스의 티켓 담당 화면에 있는 노트가 기본적으로 고객에게 표시되는지 여부를 정의합니다.',
+        'Shows the ticket priority options in the ticket responsible screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 책임 화면에 티켓 우선 순위 옵션을 표시합니다.',
+        'Defines the default ticket priority in the ticket responsible screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 책임 화면에서 기본 티켓 우선 순위를 정의합니다.',
+        'Shows the title field in the ticket responsible screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 책임 화면에 제목 필드를 표시합니다.',
+        'Allows to save current work as draft in the ticket responsible screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 책임 화면에 현재 작업을 초안으로 저장할 수 있습니다.',
+        'Defines the history type for the ticket responsible screen action, which gets used for ticket history in the agent interface.' =>
+            '에이전트 인터페이스의 티켓 기록에 사용되는 티켓 책임 화면 조치의 히스토리 유형을 정의합니다.',
+        'Defines the history comment for the ticket responsible screen action, which gets used for ticket history in the agent interface.' =>
+            '에이전트 인터페이스의 티켓 기록에 사용되는 티켓 책임 화면 조치에 대한 기록 주석을 정의합니다.',
+        'Automatically lock and set owner to current Agent after selecting for an Bulk Action.' =>
+            '대량 작업을 선택한 후 자동으로 소유자를 현재 에이전트로 잠그고 설정합니다.',
+        'Sets the ticket type in the ticket bulk screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 대량 화면에서 티켓 유형을 설정합니다.',
+        'Sets the ticket owner in the ticket bulk screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 대량 화면에서 티켓 소유자를 설정합니다.',
+        'Sets the responsible agent of the ticket in the ticket bulk screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 대량 화면에서 티켓의 담당 에이전트를 설정합니다.',
+        'Sets the state of a ticket in the ticket bulk screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 대량 화면에서 티켓의 상태를 설정합니다.',
+        'Defines the next state of a ticket, in the ticket bulk screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 대량 화면에서 티켓의 다음 상태를 정의합니다.',
+        'Defines the default next state of a ticket, in the ticket bulk screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 대량 화면에서 티켓의 기본 다음 상태를 정의합니다.',
+        'Shows the ticket priority options in the ticket bulk screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 대량 화면에서 티켓 우선 순위 옵션을 표시합니다.',
+        'Defines the default ticket priority in the ticket bulk screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 대량 화면에서 기본 티켓 우선 순위를 정의합니다.',
+        'Defines if the note in the ticket bulk screen of the agent interface is visible for the customer by default.' =>
+            '에이전트 인터페이스의 티켓 대량 화면에 있는 노트가 기본적으로 고객에게 표시되는지 여부를 정의합니다.',
+        'Determines if the list of possible queues to move to ticket into should be displayed in a dropdown list or in a new window in the agent interface. If "New Window" is set you can add a move note to the ticket.' =>
+            '티켓으로 이동할 수있는 대기열 목록을 드롭 다운 목록이나 에이전트 인터페이스의 새 창에 표시할지 결정합니다. "새 창"이 설정되면 티켓에 이동 노트를 추가 할 수 있습니다.',
+        'Automatically lock and set owner to current Agent after opening the move ticket screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 이동 화면을 연 다음 자동으로 현재 에이전트를 잠그고 소유자를 설정합니다.',
+        'Allows to set a new ticket state in the move ticket screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 이동 화면에서 새 티켓 상태를 설정할 수 있습니다.',
+        'Defines the next state of a ticket after being moved to another queue, in the move ticket screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 이동 화면에서 다른 대기열로 이동 한 후 티켓의 다음 상태를 정의합니다.',
+        'Shows the ticket priority options in the move ticket screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 이동 화면에서 티켓 우선 순위 옵션을 표시합니다.',
+        'Allows to save current work as draft in the ticket move screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 이동 화면에서 현재 작업을 초안으로 저장할 수 있습니다.',
+        'Required permissions to use the ticket bounce screen in the agent interface.' =>
+            '에이전트 인터페이스에서 티켓 바운스 화면을 사용하는데 필요한 권한입니다.',
+        'Defines if a ticket lock is required in the ticket bounce screen of the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
+            '에이전트 인터페이스의 티켓 바운스 화면에서 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 아직 잠겨있지 않은 경우 티켓이 잠기고 현재 에이전트가 자동으로 소유자로 설정됨).',
+        'Defines the default next state of a ticket after being bounced, in the ticket bounce screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 바운스 화면에서 바운스 된 후 티켓의 기본 다음 상태를 정의합니다.',
+        'Defines the next state of a ticket after being bounced, in the ticket bounce screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 바운스 화면에서 바운스 된 후 티켓의 다음 상태를 정의합니다.',
+        'Defines the default ticket bounced notification for customer/sender in the ticket bounce screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 바운스 화면에서 고객 / 발신자에 대한 기본 티켓 반송 알림을 정의합니다.',
+        'Required permissions to use the ticket compose screen in the agent interface.' =>
+            '에이전트 인터페이스의 티켓 작성 화면을 사용하는데 필요한 권한입니다.',
+        'Defines if a ticket lock is required in the ticket compose screen of the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
+            '에이전트 인터페이스 티켓 작성 화면에 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 잠겨있지 않은 경우 티켓이 잠기고 현재 에이전트가 자동으로 소유자로 설정됨).',
+        'Defines the default next state of a ticket if it is composed / answered in the ticket compose screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 작성 화면에서 작성 / 응답된 티켓의 기본 다음 상태를 정의합니다.',
+        'Defines the next possible states after composing / answering a ticket in the ticket compose screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 작성 화면에서 티켓을 작성 / 응답한 후 가능한 다음 상태를 정의합니다.',
+        'Defines if the message in the ticket compose screen of the agent interface is visible for the customer by default.' =>
+            '고객이 기본적으로 에이전트 인터페이스의 티켓 작성 화면에 메시지가 표시되는지 여부를 정의합니다.',
+        'Allows to save current work as draft in the ticket compose screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 작성 화면에서 현재 작업을 초안으로 저장할 수 있습니다.',
+        'Defines the format of responses in the ticket compose screen of the agent interface ([% Data.OrigFrom | html %] is From 1:1, [% Data.OrigFromName | html %] is only realname of From).' =>
+            '에이전트 인터페이스 ([% Data.OrigFrom | html %]는 From 1 : 1, [% Data.OrigFromName | html %]는 From의 실제 이름 임)의 티켓 작성 화면에서 응답 형식을 정의합니다.',
+        'Defines the used character for plaintext email quotes in the ticket compose screen of the agent interface. If this is empty or inactive, original emails will not be quoted but appended to the response.' =>
+            '에이전트 인터페이스의 티켓 작성 화면에서 일반 텍스트 전자 메일 따옴표에 사용되는 문자를 정의합니다. 비어 있거나 비활성 인 경우 원래 이메일은 인용되지 않고 응답에 추가됩니다.',
+        'Defines the maximum number of quoted lines to be added to responses.' =>
+            '응답에 추가할 따옴표 붙은 최대 줄 수를 정의합니다.',
+        'Adds customers email addresses to recipients in the ticket compose screen of the agent interface. The customers email address won\'t be added if the article type is email-internal.' =>
+            '상담원 인터페이스의 티켓 작성 화면에서 고객 전자 메일 주소를 받는 사람에게 추가합니다. 기사 유형이 이메일 내부인 경우 고객 이메일 주소는 추가되지 않습니다.',
+        'Replaces the original sender with current customer\'s email address on compose answer in the ticket compose screen of the agent interface.' =>
+            '상담원 인터페이스의 티켓 작성 화면에서 작성 응답에 원래 보낸 사람을 현재 고객의 전자 메일 주소로 바꿉니다.',
+        'Required permissions to use the ticket forward screen in the agent interface.' =>
+            '에이전트 인터페이스에서 티켓 전달 화면을 사용하는데 필요한 권한입니다.',
+        'Defines if a ticket lock is required in the ticket forward screen of the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
+            '에이전트 인터페이스의 티켓 전달 화면에 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 아직 잠겨 있지 않은 경우 티켓이 잠기고 현재 에이전트가 소유자로 자동 설정 됨).',
+        'Defines the default next state of a ticket after being forwarded, in the ticket forward screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 전달 화면에서 전달된 후 티켓의 기본 다음 상태를 정의합니다.',
+        'Defines the next possible states after forwarding a ticket in the ticket forward screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 전달 화면에서 티켓을 전달한 후 가능한 다음 상태를 정의합니다.',
+        'Defines if the message in the ticket forward screen of the agent interface is visible for the customer by default.' =>
+            '에이전트 인터페이스의 티켓 전달 화면에 있는 메시지가 기본적으로 고객에게 표시되는지 여부를 정의합니다.',
+        'Allows to save current work as draft in the ticket forward screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 전달 화면에서 현재 작업을 초안으로 저장할 수 있습니다.',
+        'Required permissions to use the email outbound screen in the agent interface.' =>
+            '에이전트 인터페이스에서 전자 메일 아웃 바운드 화면을 사용하는데 필요한 권한입니다.',
+        'Defines if a ticket lock is required in the email outbound screen of the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
+            '에이전트 인터페이스의 전자 메일 아웃바운드 화면에 티켓 잠금이 필요한지 여부를 정의합니다 ( 티켓이 아직 잠겨있지 않은 경우 티켓이 잠기고 현재 에이전트가 자동으로 소유자로 설정됨).',
+        'Defines the default next state of a ticket after the message has been sent, in the email outbound screen of the agent interface.' =>
+            '에이전트 인터페이스의 전자 메일 아웃바운드 화면에서 메시지를 보낸 후 티켓의 기본 다음 상태를 정의합니다.',
+        'Defines the next possible states after sending a message in the email outbound screen of the agent interface.' =>
+            '에이전트 인터페이스의 전자 메일 아웃바운드 화면에서 메시지를 보낸 후 가능한 다음 상태를 정의합니다.',
+        'Defines if the message in the email outbound screen of the agent interface is visible for the customer by default.' =>
+            '상담원 인터페이스의 전자 메일 아웃바운드 화면에 있는 메시지가 기본적으로 고객에게 표시되는지 여부를 정의합니다.',
+        'Required permissions to use the email resend screen in the agent interface.' =>
+            '에이전트 인터페이스에서 전자 메일 다시 보내기 화면을 사용하는데 필요한 권한입니다.',
+        'Defines if a ticket lock is required in the email resend screen of the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
+            '에이전트 인터페이스의 전자 메일 재전송 화면에서 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 잠겨있지 않은 경우 티켓이 잠기고 현재 에이전트가 자동으로 소유자로 설정됨).',
+        'Defines if the message in the email resend screen of the agent interface is visible for the customer by default.' =>
+            '상담원 인터페이스의 전자 메일 다시보내기 화면에 있는 메시지가 기본적으로 고객에게 표시되는지 여부를 정의합니다.',
+        'Allows to save current work as draft in the email outbound screen of the agent interface.' =>
+            '에이전트 인터페이스의 전자 메일 아웃바운드 화면에 현재 작업 내용을 초안으로 저장할 수 있습니다.',
+        'Required permissions to use the ticket merge screen of a zoomed ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 확대 / 축소된 티켓의 티켓 병합 화면을 사용하는데 필요한 권한입니다.',
+        'Defines if a ticket lock is required in the ticket merge screen of a zoomed ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
+            '에이전트 인터페이스의 확대 / 축소 된 티켓의 티켓 병합 화면에 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 잠겨 있지 않은 경우 티켓이 잠기고 현재 에이전트가 소유자로 자동 설정 됨).',
+        'Required permissions to change the customer of a ticket in the agent interface.' =>
+            '에이전트 인터페이스에서 티켓의 고객을 변경하는데 필요한 권한입니다.',
+        'Defines if a ticket lock is required to change the customer of a ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
+            '에이전트 인터페이스의 티켓 고객을 변경하기 위해 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 아직 잠겨 있지 않은 경우 티켓이 잠기고 현재 에이전트가 자동으로 소유자로 설정 됨).',
+        'When tickets are merged, the customer can be informed per email by setting the check box "Inform Sender". In this text area, you can define a pre-formatted text which can later be modified by the agents.' =>
+            '티켓이 병합되면 고객에게 "보낸 사람에게 알림"확인란을 설정하여 전자 메일별로 알릴 수 있습니다. 이 텍스트 영역에서는 나중에 에이전트로 수정할 수있는 미리 형식이 지정된 텍스트를 정의 할 수 있습니다.',
+        'When tickets are merged, a note will be added automatically to the ticket which is no longer active. Here you can define the subject of this note (this subject cannot be changed by the agent).' =>
+            '티켓이 병합되면 더이상 활성화되지 않은 티켓에 자동으로 노트가 추가됩니다. 여기에서 이 메모의 제목을 정의할 수 있습니다.(이 주제는 상담원이 변경할 수 없음)',
+        'When tickets are merged, a note will be added automatically to the ticket which is no longer active. Here you can define the body of this note (this text cannot be changed by the agent).' =>
+            '티켓이 병합되면 더이상 활성화되지 않은 티켓에 자동으로 노트가 추가됩니다. 여기에서 이 메모의 본문을 정의할 수 있습니다. (이 텍스트는 상담원이 변경할 수 없습니다)',
+        'Defines the default viewable sender types of a ticket (default: customer).' =>
+            '티켓의 기본 볼 수있는 보낸 사람 유형을 정의합니다 (기본값 : 고객).',
+        'Defines the viewable locks of a ticket. NOTE: When you change this setting, make sure to delete the cache in order to use the new value. Default: unlock, tmp_lock.' =>
+            '티켓의 표시 가능 잠금을 정의합니다. 참고 :이 설정을 변경할 때 새 값을 사용하려면 캐시를 삭제해야합니다. 기본값 : 잠금 해제, tmp_lock.',
+        'Defines the valid state types for a ticket. If a ticket is in a state which have any state type from this setting, this ticket will be considered as open, otherwise as closed.' =>
+            '',
+        'Defines the valid states for unlocked tickets. To unlock tickets the script "bin/otrs.Console.pl Maint::Ticket::UnlockTimeout" can be used.' =>
+            '잠금 해제 된 티켓의 유효한 상태를 정의합니다. 티켓의 잠금을 해제하려면 "bin / otrs.Console.pl Maint :: Ticket :: UnlockTimeout"스크립트를 사용할 수 있습니다.',
+        'Sends reminder notifications of unlocked ticket after reaching the reminder date (only sent to ticket owner).' =>
+            '미리 알림 날짜에 도달 한 후 잠금 해제 된 티켓에 대한 미리 알림을 전송합니다 (티켓 소유자에게만 전송 됨).',
+        'Disables sending reminder notifications to the responsible agent of a ticket (Ticket::Responsible needs to be enabled).' =>
+            '책임있는 에이전트에게 티켓 알림을 보내는 것을 비활성화합니다 (Ticket :: Responsible을 활성화해야합니다).',
+        'Defines the state type of the reminder for pending tickets.' => '보류 중인 티켓에 대한 미리 알림의 상태 유형을 정의합니다.',
+        'Determines the possible states for pending tickets that changed state after reaching time limit.' =>
+            '제한 시간에 도달한 후 상태가 변경된 보류중인 티켓의 가능한 상태를 결정합니다.',
+        'Defines which states should be set automatically (Content), after the pending time of state (Key) has been reached.' =>
+            '보류 상태 (키)에 도달 한 후 자동으로 설정할 상태 (내용)를 정의합니다.',
+        'Defines an external link to the database of the customer (e.g. \'http://yourhost/customer.php?CID=[% Data.CustomerID %]\' or \'\').' =>
+            '고객의 데이터베이스에 대한 외부 링크를 정의합니다 (예 : \'http://yourhost/customer.php?CID=[% Data.CustomerID %]\' or \'\').',
+        'Defines the target attribute in the link to external customer database. E.g. \'target="cdb"\'.' =>
+            '외부 고객 데이터베이스 링크의 대상 속성을 정의합니다. 예 : \'target = "cdb"\'.',
+        'Defines the target attribute in the link to external customer database. E.g. \'AsPopup PopupType_TicketAction\'.' =>
+            '외부 고객 데이터베이스 링크의 대상 속성을 정의합니다. 예 : \'AsPopup PopupType_TicketAction\'.',
+        'Toolbar Item for a shortcut. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
+            '도구 모음 단축키 항목입니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다.',
+        'Agent interface notification module to see the number of tickets an agent is responsible for. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
+            '에이전트 인터페이스 통지 모듈은 에이전트가 담당하는 티켓 수를 확인합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다.',
+        'Agent interface notification module to see the number of watched tickets. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
+            '감시 된 티켓 수를보기위한 에이전트 인터페이스 알림 모듈. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다.',
+        'Agent interface notification module to see the number of locked tickets. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
+            '잠긴 티켓 수를보기위한 에이전트 인터페이스 알림 모듈. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다.',
+        'Agent interface notification module to see the number of tickets in My Services. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
+            '내 서비스에서 티켓 수를 확인할 수있는 에이전트 인터페이스 알림 모듈 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다.',
+        'Agent interface module to access search profiles via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
+            '탐색 인터페이스를 통해 검색 프로파일에 액세스하는 에이전트 인터페이스 모듈. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다.',
+        'Agent interface module to access fulltext search via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
+            '탐색 인터페이스를 통해 전체 텍스트 검색에 액세스 할 수있는 에이전트 인터페이스 모듈. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다.',
+        'Agent interface module to access CIC search via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
+            '탐색 인터페이스를 통해 CIC 검색에 액세스하는 에이전트 인터페이스 모듈. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다.',
+        'Module to generate html OpenSearch profile for short ticket search in the agent interface.' =>
+            '에이전트 인터페이스에서 짧은 티켓 검색을위한 html OpenSearch 프로파일을 생성하는 모듈.',
+        'Module to show notifications and escalations (ShownMax: max. shown escalations, EscalationInMinutes: Show ticket which will escalation in, CacheTime: Cache of calculated escalations in seconds).' =>
+            '알림 및 에스컬레이션을 표시하는 모듈 (ShownMax : 최대 에스컬레이션 에스컬레이션, EscalationInMinutes : 에스컬레이션 할 티켓 표시, CacheTime : 계산 된 에스컬레이션의 캐시 초).',
+        'Customer item (icon) which shows the open tickets of this customer as info block. Setting CustomerUserLogin to 1 searches for tickets based on login name rather than CustomerID.' =>
+            '고객의 오픈 티켓을 정보 블록으로 보여주는 고객 아이템 (아이콘). CustomerUserLogin을 1로 설정하면 CustomerID가 아닌 로그인 이름을 기반으로하는 티켓이 검색됩니다.',
+        'Customer item (icon) which shows the closed tickets of this customer as info block. Setting CustomerUserLogin to 1 searches for tickets based on login name rather than CustomerID.' =>
+            '이 고객의 닫힌 티켓을 정보 블록으로 표시하는 고객 아이템 (아이콘). CustomerUserLogin을 1로 설정하면 CustomerID가 아닌 로그인 이름을 기반으로하는 티켓이 검색됩니다.',
+        'Agent interface article notification module to check PGP.' => 'PGP를 확인하는 에이전트 인터페이스 기사 알림 모듈',
+        'Agent interface module to check incoming emails in the Ticket-Zoom-View if the S/MIME-key is available and true.' =>
+            'S / MIME 키가 사용 가능하고 참이면 Ticket-Zoom-View에서 수신 전자 메일을 확인하는 에이전트 인터페이스 모듈.',
+        'Agent interface article notification module to check S/MIME.' =>
+            'S / MIME을 확인하는 에이전트 인터페이스 기사 알림 모듈.',
+        'Module to define the email security options to use (PGP or S/MIME).' =>
+            '사용할 이메일 보안 옵션을 정의하는 모듈 (PGP 또는 S / MIME).',
+        'Module to compose signed messages (PGP or S/MIME).' => '서명 된 메시지를 구성하는 모듈 (PGP 또는 S / MIME).',
+        'Module to encrypt composed messages (PGP or S/MIME).' => '구성된 메시지를 암호화하는 모듈 (PGP 또는 S / MIME).',
+        'Shows a link to download article attachments in the zoom view of the article in the agent interface.' =>
+            '에이전트 인터페이스의 기사 확대 / 축소보기에서 기사 첨부 파일을 다운로드 하는 링크를 표시합니다.',
+        'Shows a link to access article attachments via a html online viewer in the zoom view of the article in the agent interface.' =>
+            '에이전트 인터페이스의 기사 확대보기에서 html 온라인 뷰어를 통해 기사 첨부물에 액세스하는 링크를 표시합니다.',
+        'Shows a link in the menu to go back in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
+            '메뉴에 링크가 표시되어 상담원 인터페이스의 티켓 확대보기로 돌아갑니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
+        'Shows a link in the menu to lock/unlock tickets in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
+            '에이전트 인터페이스의 티켓 확대보기에서 티켓을 잠 그거나 잠금 해제 할 수있는 링크를 메뉴에 표시합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
+        'Shows a link in the menu to access the history of a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
+            '메뉴에 링크를 표시하여 에이전트 인터페이스의 티켓 확대보기에서 티켓 기록에 액세스합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
+        'Shows a link in the menu to print a ticket or an article in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
+            '메뉴에서 티켓이나 기사를 에이전트 인터페이스의 티켓 확대보기로 인쇄 할 수있는 링크를 표시합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
+        'Shows a link in the menu to see the priority of a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
+            '메뉴에 링크를 표시하여 에이전트 인터페이스의 티켓 확대보기에서 티켓의 우선 순위를 확인합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
+        'Shows a link in the menu to add a free text field in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
+            '메뉴에 링크를 표시하여 에이전트 인터페이스의 티켓 확대보기에 자유 텍스트 필드를 추가합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
+        'Shows a link in the menu that allows linking a ticket with another object in the ticket zoom view of the agent interface.  Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
+            '메뉴에서 티켓을 에이전트 인터페이스의 티켓 확대보기에서 다른 오브젝트와 링크 할 수있는 링크를 표시합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
+        'Shows a link in the menu to change the owner of a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
+            '',
+        'Shows a link in the menu to change the responsible agent of a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
+            '',
+        'Shows a link in the menu to change the customer who requested the ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
+            '',
+        'Shows a link in the menu to add a note in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
+            '메뉴에 링크를 표시하여 상담원 인터페이스의 티켓 확대보기에 메모를 추가합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
+        'Shows a link in the menu to add a phone call outbound in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
+            '',
+        'Shows a link in the menu to add a phone call inbound in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
+            '',
+        'Shows a link in the menu to send an outbound email in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
+            '메뉴에 링크를 표시하여 에이전트 인터페이스의 티켓 확대보기에서 아웃 바운드 전자 메일을 보냅니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
+        'Shows a link in the menu that allows merging tickets in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
+            '에이전트 인터페이스의 티켓 확대보기에서 티켓을 병합 할 수있는 링크를 메뉴에 표시합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
+        'Shows a link in the menu to set a ticket as pending in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
+            '메뉴에 링크를 표시하여 에이전트 인터페이스의 티켓 확대보기에서 보류중인 티켓을 설정합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
+        'Shows a link in the menu for subscribing / unsubscribing from a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
+            '에이전트 인터페이스의 티켓 확대보기에서 티켓을 구독하거나 탈퇴하기위한 링크를 메뉴에 표시합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
+        'Shows a link in the menu to close a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
+            '메뉴에 링크를 표시하여 에이전트 인터페이스의 티켓 확대보기에서 티켓을 닫습니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
+        'Shows a link in the menu to delete a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
+            '메뉴에 링크를 표시하여 에이전트 인터페이스의 티켓 확대보기에서 티켓을 삭제합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
+        'Shows a link to set a ticket as junk in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
+            '에이전트 인터페이스의 티켓 확대보기에서 티켓을 쓰레기로 설정하는 링크를 표시합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
+        'Shows link to external page in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
+            '에이전트 인터페이스의 티켓 확대보기에서 외부 페이지에 대한 링크를 표시합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다.',
+        'This setting shows the sorting attributes in all overview screen, not only in queue view.' =>
+            '이 설정은 대기열보기 뿐만 아니라 모든 개요 화면에서 정렬 속성을 표시합니다.',
+        'Defines from which ticket attributes the agent can select the result order.' =>
+            '에이전트가 결과 순서를 선택할 수 있는 티켓 속성을 정의합니다.',
+        'Shows a link in the menu to lock / unlock a ticket in the ticket overviews of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 개요에서 티켓을 잠그거나 잠금 해제할 수 있는 링크를 메뉴에 표시합니다.',
+        'Shows a link in the menu to zoom a ticket in the ticket overviews of the agent interface.' =>
+            '메뉴에 링크를 표시하여 에이전트 인터페이스의 티켓 개요에서 티켓을 확대 / 축소합니다.',
+        'Shows a link in the menu to see the history of a ticket in every ticket overview of the agent interface.' =>
+            '메뉴에 링크를 표시하여 에이전트 인터페이스의 모든 티켓 개요에 있는 티켓의 내역을 확인합니다.',
+        'Shows a link in the menu to set the priority of a ticket in every ticket overview of the agent interface.' =>
+            '메뉴에 링크를 표시하여 에이전트 인터페이스의 모든 티켓 개요에 있는 티켓의 우선 순위를 설정합니다.',
+        'Shows a link in the menu to add a note to a ticket in every ticket overview of the agent interface.' =>
+            '메뉴에 링크를 표시하여 상담원 인터페이스의 모든 티켓 개요에 있는 티켓에 메모를 추가합니다.',
+        'Shows a link in the menu to close a ticket in every ticket overview of the agent interface.' =>
+            '메뉴의 링크를 표시하여 에이전트 인터페이스의 모든 티켓 개요에서 티켓을 닫습니다.',
+        'Shows a link in the menu to move a ticket in every ticket overview of the agent interface.' =>
+            '메뉴에 링크를 표시하여 에이전트 인터페이스의 모든 티켓 개요에서 티켓을 이동합니다.',
+        'Shows a link in the menu to delete a ticket in every ticket overview of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
+            '메뉴에 링크를 표시하여 에이전트 인터페이스의 모든 티켓 개요에서 티켓을 삭제합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다.',
+        'Shows a link in the menu to set a ticket as junk in every ticket overview of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
+            '메뉴에 링크를 표시하여 에이전트 인터페이스의 모든 티켓 개요에 티켓을 정크로 설정합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다.',
+        'Module to grant access to the owner of a ticket.' => '티켓 소유자에게 액세스 권한을 부여하는 모듈입니다.',
+        'Optional queue limitation for the OwnerCheck permission module. If set, permission is only granted for tickets in the specified queues.' =>
+            'OwnerCheck 권한 모듈에 대한 선택적 큐 제한입니다. 설정된 경우 지정된 큐의 티켓에 대해서만 사용 권한이 부여됩니다.',
+        'Module to grant access to the agent responsible of a ticket.' =>
+            '티켓 책임자에게 액세스 권한을 부여하는 모듈.',
+        'Optional queue limitation for the ResponsibleCheck permission module. If set, permission is only granted for tickets in the specified queues.' =>
+            'ResponsibleCheck 권한 모듈에 대한 선택적 큐 제한입니다. 설정된 경우 지정된 큐의 티켓에 대해서만 사용 권한이 부여됩니다.',
+        'Module to check the group permissions for the access to tickets.' =>
+            '티켓 액세스 권한에 대한 그룹 권한을 확인하는 모듈',
+        'Module to grant access to the watcher agents of a ticket.' => '감시자에게 티켓의 액세스 권한을 부여하는 모듈.',
+        'Module to grant access to the creator of a ticket.' => '티켓을 만든 사람에게 액세스 권한을 부여하는 모듈입니다.',
+        'Optional queue limitation for the CreatorCheck permission module. If set, permission is only granted for tickets in the specified queues.' =>
+            'CreatorCheck 권한 모듈의 선택적 큐 제한 사항입니다. 설정된 경우 지정된 큐의 티켓에 대해서만 사용 권한이 부여됩니다.',
+        'Module to grant access to any agent that has been involved in a ticket in the past (based on ticket history entries).' =>
+            '모듈은 (티켓 내역 항목을 기반으로) 과거 티켓과 관련된 모든 에이전트에 액세스 권한을 부여합니다.',
+        'Optional queue limitation for the InvolvedCheck permission module. If set, permission is only granted for tickets in the specified queues.' =>
+            'InvolvedCheck 권한 모듈에 대한 선택적 큐 제한입니다. 설정된 경우 지정된 큐의 티켓에 대해서만 사용 권한이 부여됩니다.',
+        'Module to check the group permissions for customer access to tickets.' =>
+            '모듈이 티켓에 대한 고객 액세스에 대한 그룹 권한을 확인합니다.',
+        'Module to grant access if the CustomerUserID of the ticket matches the CustomerUserID of the customer.' =>
+            '티켓의 고객사용자ID가 고객의 고객사용자ID와 일치하면 액세스 권한 부여 모듈.',
+        'Module to grant access if the CustomerID of the ticket matches the CustomerID of the customer.' =>
+            '티켓의 CustomerID가 고객의 CustomerID와 일치하는 경우 액세스 권한을 부여하는 모듈입니다.',
+        'Module to grant access if the CustomerID of the customer has necessary group permissions.' =>
+            '고객의 고객 ID에 필요한 그룹 권한이 있는 경우 액세스 권한을 부여하는 모듈입니다.',
+        'Defines how the From field from the emails (sent from answers and email tickets) should look like.' =>
+            '보낸 사람(응답 및 전자 메일 티켓에서 보낸 전자 메일) 필드가 어떻게 표시되는지 정의합니다.',
+        'Defines the separator between the agents real name and the given queue email address.' =>
+            '에이전트 실명과 주어진 대기열 전자메일 주소 사이의 구분 기호를 정의합니다.',
+        'Parameters for the dashboard backend of the ticket pending reminder overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
+            '에이전트 인터페이스의 티켓 보류 알림 요약의 대시 보드 백엔드에 대한 매개 변수입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다. 참고 : Ticket 속성과 Dynamic Fields (DynamicField_NameX) 만 DefaultColumn에 허용됩니다.',
+        'Parameters for the dashboard backend of the ticket escalation overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
+            '에이전트 인터페이스의 티켓 에스컬레이션 개요의 대시 보드 백엔드에 대한 매개 변수입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다. 참고 : Ticket 속성과 Dynamic Fields (DynamicField_NameX) 만 DefaultColumn에 허용됩니다.',
+        'Parameters for the dashboard backend of the new tickets overview of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
+            '새 티켓의 대시 보드 백엔드에 대한 매개 변수 에이전트 인터페이스 개요입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다. 참고 : Ticket 속성과 Dynamic Fields (DynamicField_NameX) 만 DefaultColumn에 허용됩니다.',
+        'Parameters for the dashboard backend of the open tickets overview of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
+            '에이전트 인터페이스의 열린 티켓 개요의 대시 보드 백엔드에 대한 매개 변수입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다. 참고 : Ticket 속성과 Dynamic Fields (DynamicField_NameX) 만 DefaultColumn에 허용됩니다.',
+        'Parameters for the dashboard backend of the ticket stats of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
+            '에이전트 인터페이스의 티켓 통계 대시 보드 백엔드에 대한 매개 변수입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
+        'Parameters for the dashboard backend of the upcoming events widget of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
+            '에이전트 인터페이스의 다가오는 이벤트 위젯의 대시 보드 백엔드에 대한 매개 변수입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
+        'Parameters for the dashboard backend of the queue overview widget of the agent interface. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "QueuePermissionGroup" is not mandatory, queues are only listed if they belong to this permission group if you enable it. "States" is a list of states, the key is the sort order of the state in the widget. "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
+            '에이전트 인터페이스의 대기열 개요 위젯의 대시 보드 백엔드에 대한 매개 변수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "QueuePermissionGroup"은 필수는 아니지만 큐를 사용하는 경우이 사용 권한 그룹에 속한 큐만 나열됩니다. "상태"는 상태 목록이며, 키는 위젯에있는 상태의 정렬 순서입니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
+        'Parameters for the dashboard backend of the ticket events calendar of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
+            '에이전트 인터페이스의 티켓 이벤트 달력의 대시 보드 백엔드에 대한 매개 변수입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
+        'Defines the calendar width in percent. Default is 95%.' => '달력의 너비를 백분율로 정의합니다. 기본값은 95%입니다.',
+        'Defines queues that\'s tickets are used for displaying as calendar events.' =>
+            '달력 이벤트로 표시하기 위해 티켓을 사용하는 대기열을 정의합니다.',
+        'Define dynamic field name for start time. This field has to be manually added to the system as Ticket: "Date / Time" and must be activated in ticket creation screens and/or in any other ticket action screens.' =>
+            '시작 시간의 동적 필드 이름을 정의하십시오. 이 필드는 티켓 : "날짜 / 시간"으로 시스템에 수동으로 추가되어야하며 티켓 생성 화면 및 / 또는 기타 티켓 동작 화면에서 활성화해야합니다.',
+        'Define dynamic field name for end time. This field has to be manually added to the system as Ticket: "Date / Time" and must be activated in ticket creation screens and/or in any other ticket action screens.' =>
+            '종료 시간의 동적 필드 이름을 정의하십시오. 이 필드는 티켓 : "날짜 / 시간"으로 시스템에 수동으로 추가되어야하며 티켓 생성 화면 및 / 또는 기타 티켓 동작 화면에서 활성화해야합니다.',
+        'Defines the dynamic fields that are used for displaying on calendar events.' =>
+            '달력 이벤트에 표시하는데 사용되는 동적 필드를 정의합니다.',
+        'Defines the ticket fields that are going to be displayed calendar events. The "Key" defines the field or ticket attribute and the "Content" defines the display name.' =>
+            '달력 이벤트를 표시 할 티켓 필드를 정의합니다. "Key"는 필드 또는 티켓 속성을 정의하고 "Content"는 표시 이름을 정의합니다.',
+        'Defines if the values for filters should be retrieved from all available tickets. If enabled, only values which are actually used in any ticket will be available for filtering. Please note: The list of customers will always be retrieved like this.' =>
+            '사용 가능한 모든 티켓에서 필터 값을 검색해야하는지 여부를 정의합니다. 활성화 된 경우 실제로 티켓에서 사용되는 값만 필터링에 사용할 수 있습니다. 참고 : 고객 목록은 항상 이와 같이 검색됩니다.',
+        'Parameters for the dashboard backend of the customer user list overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.' =>
+            '고객 사용자 목록의 대시 보드 백엔드 매개 변수는 에이전트 인터페이스 개요입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다.',
+        'Parameters for the dashboard backend of the ticket pending reminder overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
+            '에이전트 인터페이스의 티켓 보류 알림 요약의 대시 보드 백엔드에 대한 매개 변수입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. 참고 : Ticket 속성과 Dynamic Fields (DynamicField_NameX) 만 DefaultColumn에 허용됩니다.',
+        'Parameters for the dashboard backend of the ticket escalation overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
+            '에이전트 인터페이스의 티켓 에스컬레이션 개요의 대시 보드 백엔드에 대한 매개 변수입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. 참고 : Ticket 속성과 Dynamic Fields (DynamicField_NameX) 만 DefaultColumn에 허용됩니다.',
+        'Parameters for the dashboard backend of the new tickets overview of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
+            '새 티켓의 대시 보드 백엔드에 대한 매개 변수 에이전트 인터페이스 개요입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. 참고 : Ticket 속성과 Dynamic Fields (DynamicField_NameX) 만 DefaultColumn에 허용됩니다.',
+        'Parameters for the dashboard backend of the open tickets overview of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
+            '에이전트 인터페이스의 열린 티켓 개요의 대시 보드 백엔드에 대한 매개 변수입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. 참고 : Ticket 속성과 Dynamic Fields (DynamicField_NameX) 만 DefaultColumn에 허용됩니다.',
+        'Parameters for the dashboard backend of the customer id status widget of the agent interface . "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.' =>
+            '에이전트 인터페이스의 고객 ID 상태 위젯의 대시 보드 백엔드에 대한 매개 변수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다.',
+        'Parameters for the dashboard backend of the customer id list overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.' =>
+            '고객 ID의 대시 보드 백엔드에 대한 매개 변수 에이전트 인터페이스 개요. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다.',
+        'Parameters for the dashboard backend of the ticket pending reminder overview of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
+            '',
+        'Parameters for the dashboard backend of the ticket escalation overview of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
+            '',
+        'Parameters for the CustomQueue object in the preference view of the agent interface. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
+            '에이전트 인터페이스의 환경 설정 뷰에서 CustomQueue 객체의 매개 변수입니다. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
+        'Parameters for the CustomService object in the preference view of the agent interface. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
+            '에이전트 인터페이스의 환경 설정보기에서 CustomService 객체의 매개 변수입니다. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
+        'Parameters for the RefreshTime object in the preference view of the agent interface. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
+            '에이전트 인터페이스의 환경 설정 뷰에있는 RefreshTime 객체의 매개 변수입니다. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
+        'Parameters for the pages (in which the tickets are shown) of the small ticket overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
+            '작은 티켓 개요의 페이지 (티켓이 표시된 페이지)의 매개 변수. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
+        'Parameters for the column filters of the small ticket overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
+            '작은 티켓 개요의 열 필터에 대한 매개 변수입니다. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
+        'Parameters for the pages (in which the tickets are shown) of the medium ticket overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
+            '매체 티켓 개요의 페이지 (티켓이 표시된 페이지)의 매개 변수. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
+        'Parameters for the pages (in which the tickets are shown) of the ticket preview overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
+            '티켓 미리보기 개요의 페이지 (티켓이 표시된 페이지)의 매개 변수입니다. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
+        'Parameters for the CreateNextMask object in the preference view of the agent interface. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
+            '에이전트 인터페이스의 기본 설정보기에있는 CreateNextMask 객체의 매개 변수입니다. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
+        'Parameters of the example queue attribute Comment2.' => '예제 큐 속성 Comment2의 매개 변수.',
+        'Parameters of the example service attribute Comment2.' => '예제 서비스 속성 Comment2의 매개 변수.',
+        'Parameters of the example SLA attribute Comment2.' => '예제 SLA 속성 Comment2의 매개 변수.',
+        'Sends customer notifications just to the mapped customer.' => '매핑된 고객에게 고객 알림만 보냅니다.',
+        'Specifies if an agent should receive email notification of his own actions.' =>
+            '상담원이 자신의 작업에 대한 전자 메일 알림을 수신해야하는지 여부를 지정합니다.',
+        'Determines the next screen after new customer ticket in the customer interface.' =>
+            '고객 인터페이스에서 새 고객 티켓 다음 화면을 결정합니다.',
+        'Allows customers to set the ticket priority in the customer interface.' =>
+            '고객이 고객 인터페이스에서 티켓 우선순위를 설정할 수 있습니다.',
+        'Defines the default priority of new customer tickets in the customer interface.' =>
+            '고객 인터페이스에서 새 고객 티켓의 기본 우선 순위를 정의합니다.',
+        'Allows customers to set the ticket queue in the customer interface. If this is not enabled, QueueDefault should be configured.' =>
+            '',
+        'Defines the default queue for new customer tickets in the customer interface.' =>
+            '고객 인터페이스에서 새 고객 티켓의 기본 큐를 정의합니다.',
+        'Allows customers to set the ticket type in the customer interface. If this is not enabled, TicketTypeDefault should be configured.' =>
+            '',
+        'Defines the default ticket type for new customer tickets in the customer interface.' =>
+            '고객 인터페이스에서 새 고객 티켓의 기본 티켓 유형을 정의합니다.',
+        'Allows customers to set the ticket service in the customer interface.' =>
+            '고객이 고객 인터페이스에서 티켓 서비스를 설정할 수 있습니다.',
+        'Allows customers to set the ticket SLA in the customer interface.' =>
+            '고객이 고객 인터페이스에서 티켓 SLA를 설정할 수 있습니다.',
+        'Sets if service must be selected by the customer.' => '고객이 서비스를 선택해야하는지 여부를 설정합니다.',
+        'Sets if SLA must be selected by the customer.' => '고객이 SLA를 선택해야하는지 여부를 설정합니다.',
+        'Defines the default state of new customer tickets in the customer interface.' =>
+            '고객 인터페이스에서 새 고객 티켓의 기본 상태를 정의합니다.',
+        'Sender type for new tickets from the customer inteface.' => '고객 인터페이스에서 보낸 새 티켓의 발신자 유형입니다.',
+        'Defines the default history type in the customer interface.' => '고객 인터페이스에서 기본 기록 유형을 정의합니다.',
+        'Comment for new history entries in the customer interface.' => '고객 인터페이스의 새로운 기록 항목에 대한 설명.',
+        'Defines the recipient target of the tickets ("Queue" shows all queues, "SystemAddress" shows only the queues which are assigned to system addresses) in the customer interface.' =>
+            '티켓의 수신자 대상을 정의합니다 ( "대기열"은 모든 대기열을 나타내며 "시스템 주소"는 시스템 주소에 할당 된 대기열 만 표시 함).',
+        'Determines the strings that will be shown as recipient (To:) of the ticket in the customer interface. For Queue as CustomerPanelSelectionType, "&lt;Queue&gt;" shows the names of the queues, and for SystemAddress, "&lt;Realname&gt; &lt;&lt;Email&gt;&gt;" shows the name and email of the recipient.' =>
+            '',
+        'Determines which queues will be valid for ticket\'s recepients in the customer interface.' =>
+            '고객 인터페이스에서 티켓의 수신인에 대해 유효한 대기열을 결정합니다.',
+        'Module for To-selection in new ticket screen in the customer interface.' =>
+            '고객 인터페이스의 새 티켓 화면에서 선택 대상 모듈.',
+        'Determines the next screen after the follow-up screen of a zoomed ticket in the customer interface.' =>
+            '고객 인터페이스에서 확대 된 티켓의 후속 화면 이후의 다음 화면을 결정합니다.',
+        'Defines the default sender type for tickets in the ticket zoom screen of the customer interface.' =>
+            '고객 인터페이스의 티켓 확대 / 축소 화면에서 티켓의 기본 보낸 사람 유형을 정의합니다.',
+        'Defines the history type for the ticket zoom action, which gets used for ticket history in the customer interface.' =>
+            '고객 인터페이스의 티켓 기록에 사용되는 티켓 확대 / 축소 작업의 기록 유형을 정의합니다.',
+        'Defines the history comment for the ticket zoom action, which gets used for ticket history in the customer interface.' =>
+            '고객 인터페이스에서 티켓 기록에 사용되는 티켓 확대 작업에 대한 기록 주석을 정의합니다.',
+        'Allows customers to change the ticket priority in the customer interface.' =>
+            '고객이 고객 인터페이스에서 티켓 우선순위를 변경할 수 있습니다.',
+        'Defines the default priority of follow-up customer tickets in the ticket zoom screen in the customer interface.' =>
+            '고객 인터페이스의 티켓 확대 / 축소 화면에서 후속 고객 티켓의 기본 우선 순위를 정의합니다.',
+        'Allows choosing the next compose state for customer tickets in the customer interface.' =>
+            '고객 인터페이스에서 고객 티켓에 대한 다음 작성 상태를 선택할 수 있습니다.',
+        'Defines the default next state for a ticket after customer follow-up in the customer interface.' =>
+            '고객 인터페이스에서 고객 후속 조치 후 티켓의 기본 다음 상태를 정의합니다.',
+        'Defines the next possible states for customer tickets in the customer interface.' =>
+            '고객 인터페이스에서 고객 티켓에 대한 다음 가능한 상태를 정의합니다.',
+        'Shows the enabled ticket attributes in the customer interface (0 = Disabled and 1 = Enabled).' =>
+            '사용 가능한 티켓 특성을 고객 인터페이스에 표시합니다 (0 = 사용 안 함, 1 = 사용함).',
+        'Shows all the articles of the ticket (expanded) in the customer zoom view.' =>
+            '고객 확대보기에서 티켓의 모든 기사를 표시합니다(확장 된).',
+        'Defines the displayed style of the From field in notes that are visible for customers. A default agent name can be defined in Ticket::Frontend::CustomerTicketZoom###DefaultAgentName setting.' =>
+            '',
+        'Defines the default agent name in the ticket zoom view of the customer interface.' =>
+            '',
+        'Maximum number of tickets to be displayed in the result of a search in the customer interface.' =>
+            '고객 인터페이스에서 검색 결과에 표시할 최대 티켓 수입니다.',
+        'Number of tickets to be displayed in each page of a search result in the customer interface.' =>
+            '고객 인터페이스에서 검색 결과의 각 페이지에 표시할 티켓 수입니다.',
+        'Defines the default ticket attribute for ticket sorting in a ticket search of the customer interface.' =>
+            '고객 인터페이스의 티켓 검색에서 티켓 정렬에 대한 기본 티켓 속성을 정의합니다.',
+        'Defines the default ticket order of a search result in the customer interface. Up: oldest on top. Down: latest on top.' =>
+            '고객 인터페이스에서 검색 결과의 기본 티켓 순서를 정의합니다. 위로 : 가장 오래된 것. 아래 : 위에 최신.',
+        'Allows extended search conditions in ticket search of the customer interface. With this feature you can search e. g. ticket title with this kind of conditions like "(*key1*&amp;&amp;*key2*)" or "(*key1*||*key2*)".' =>
+            '',
+        'If enabled, the customer can search for tickets in all services (regardless what services are assigned to the customer).' =>
+            '사용하도록 설정된 경우 고객은 모든 서비스의 티켓을 검색할 수 있습니다 (고객에게 할당된 서비스에 관계없음).',
+        'Defines all the parameters for the ShownTickets object in the customer preferences of the customer interface.' =>
+            '고객 인터페이스의 고객 기본 설정에서 ShownTickets 객체의 모든 매개 변수를 정의합니다.',
+        'Defines all the parameters for the RefreshTime object in the customer preferences of the customer interface.' =>
+            '고객 인터페이스의 고객 환경 설정에서 RefreshTime 객체의 모든 매개 변수를 정의합니다.',
+        'Defines the default used Frontend-Module if no Action parameter given in the url on the agent interface.' =>
+            '에이전트 인터페이스의 url에 Action 매개 변수가 지정되지 않은 경우 사용 된 기본 프론트 엔드 모듈을 정의합니다.',
+        'Default queue ID used by the system in the agent interface.' => '에이전트 인터페이스에서 시스템이 사용하는 기본 대기열 ID입니다.',
+        'Default ticket ID used by the system in the agent interface.' =>
+            '에이전트 인터페이스에서 시스템이 사용하는 기본 티켓 ID 입니다.',
+        'Defines the default used Frontend-Module if no Action parameter given in the url on the customer interface.' =>
+            '고객 인터페이스의 URL에 Action 매개 변수가 지정되지 않은 경우 사용 된 기본 프론트 엔드 모듈을 정의합니다.',
+        'Default ticket ID used by the system in the customer interface.' =>
+            '고객 인터페이스에서 시스템이 사용하는 기본 티켓 ID입니다.',
+        'Module to generate html OpenSearch profile for short ticket search in the customer interface.' =>
+            '모듈은 고객 인터페이스에서 짧은 티켓 검색을위한 html OpenSearch 프로파일을 생성합니다.',
+        'Determines the next screen after the ticket is moved. LastScreenOverview will return the last overview screen (e.g. search results, queueview, dashboard). TicketZoom will return to the TicketZoom.' =>
+            '티켓을 이동 한 후 다음 화면을 결정합니다. LastScreenOverview는 마지막 개요 화면 (예 : 검색 결과, 대기열보기, 대시 보드)을 반환합니다. TicketZoom은 TicketZoom으로 돌아갑니다.',
+        'Sets the default subject for notes added in the ticket move screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 이동 화면에 추가된 노트의 기본 제목을 설정합니다.',
+        'Sets the default body text for notes added in the ticket move screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 이동 화면에 추가 된 노트의 기본 본문 텍스트를 설정합니다.',
+        'Allows extended search conditions in ticket search of the generic agent interface. With this feature you can search e. g. ticket title with this kind of conditions like "(*key1*&amp;&amp;*key2*)" or "(*key1*||*key2*)".' =>
+            '',
+        'Set the limit of tickets that will be executed on a single genericagent job execution.' =>
+            '단일 generic 에이전트 작업 실행시 실행될 티켓의 한계를 설정하십시오.',
+        'Allows generic agent to execute custom modules.' => '',
+        'Unlock tickets whenever a note is added and the owner is out of office.' =>
+            '메모가 추가되고 소유자가 부재할 때마다 티켓을 잠금 해제하십시오.',
+        'Include unknown customers in ticket filter.' => '티켓 필터에 알 수없는 고객을 포함시킵니다.',
+        'List of all ticket events to be displayed in the GUI.' => 'GUI에 표시 될 모든 티켓 이벤트 목록입니다.',
+        'List of all article events to be displayed in the GUI.' => 'GUI에 표시 할 모든 기사 이벤트 목록입니다.',
+        'List of all queue events to be displayed in the GUI.' => 'GUI에 표시 될 모든 대기열 이벤트 목록.',
+        'Event module that performs an update statement on TicketIndex to rename the queue name there if needed and if StaticDB is actually used.' =>
+            '필요한 경우 및 StaticDB가 실제로 사용되는 경우 큐 이름을 바꾸기 위해 TicketIndex에서 업데이트 문을 수행하는 이벤트 모듈입니다.',
+        'Ignores not ticket related attributes.' => '',
+        'Transport selection for ticket notifications. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
+            '티켓 알림을위한 전송 선택. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
+        'ACL module that allows closing parent tickets only if all its children are already closed ("State" shows which states are not available for the parent ticket until all child tickets are closed).' =>
+            '모든 자식 티켓이 이미 닫힌 경우에만 부모 티켓을 닫을 수있는 ACL 모듈 ( "상태"는 모든 자식 티켓이 닫힐 때까지 부모 티켓에 사용할 수없는 상태를 보여줍니다).',
+        'Default ACL values for ticket actions.' => '티켓 조치에 대한 기본 ACL 값.',
+        'Defines which items are available in first level of the ACL structure.' =>
+            'ACL 구조의 첫 번째 레벨에서 사용할 수있는 항목을 정의합니다.',
+        'Defines which items are available in second level of the ACL structure.' =>
+            'ACL 구조의 두 번째 레벨에서 사용할 수있는 항목을 정의합니다.',
+        'Defines which items are available for \'Action\' in third level of the ACL structure.' =>
+            'ACL 구조의 세 번째 레벨에서 \'작업\'에 사용할 수있는 항목을 정의합니다.',
+        'Cache time in seconds for the DB ACL backend.' => 'DB ACL 백엔드의 캐시 시간 초.',
+        'If enabled debugging information for ACLs is logged.' => '활성화 된 경우 ACL에 대한 디버깅 정보가 기록됩니다.',
+        'Filter for debugging ACLs. Note: More ticket attributes can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;.' =>
+            '',
+        'Maximal auto email responses to own email-address a day (Loop-Protection).' =>
+            '하루 동안 자신의 이메일 주소에 대한 최대 자동 이메일 응답(반복 방지).',
+        'Maximal auto email responses to own email-address a day, configurable by email address (Loop-Protection).' =>
+            '전자 메일 주소 (루프 보호)로 구성 가능한 하루 전자 메일 주소에 대한 최대 자동 전자 메일 응답.',
+        'Maximal size in KBytes for mails that can be fetched via POP3/POP3S/IMAP/IMAPS (KBytes).' =>
+            'POP3 / POP3S / IMAP / IMAPS (KBytes)를 통해 가져올 수있는 메일의 최대 크기입니다.',
+        'The maximum number of mails fetched at once before reconnecting to the server.' =>
+            '서버에 다시 연결하기 전에 한 번에 가져온 최대 메일 수입니다.',
+        'Default loop protection module.' => '기본 루프 보호 모듈.',
+        'Path for the log file (it only applies if "FS" was selected for LoopProtectionModule and it is mandatory).' =>
+            '로그 파일 경로 (LoopProtectionModule에 대해 "FS"가 선택되고 필수 항목 인 경우에만 적용됩니다).',
+        'Converts HTML mails into text messages.' => 'HTML 메일을 텍스트 메시지로 변환합니다.',
+        'Specifies user id of the postmaster data base.' => '전자 메일 관리자 데이터베이스의 사용자 ID를 지정합니다.',
+        'Defines the postmaster default queue.' => '전자 메일 관리자 기본 큐를 정의합니다.',
+        'Defines the default priority of new tickets.' => '새 티켓의 기본 우선순위를 정의합니다.',
+        'Defines the default state of new tickets.' => '새 티켓의 기본 상태를 정의합니다.',
+        'Defines the state of a ticket if it gets a follow-up.' => '후속 조치를 받는 티켓의 상태를 정의합니다.',
+        'Defines the state of a ticket if it gets a follow-up and the ticket was already closed.' =>
+            '후속 조치를 받았고 티켓이 이미 폐쇄된 경우 티켓의 상태를 정의합니다.',
+        'Defines the PostMaster header to be used on the filter for keeping the current state of the ticket.' =>
+            '티켓의 현재 상태를 유지하기 위해 필터에 사용할 PostMaster 헤더를 정의합니다.',
+        'Sends agent follow-up notification only to the owner, if a ticket is unlocked (the default is to send the notification to all agents).' =>
+            '티켓 잠금이 해제 된 경우 소유자에게만 에이전트 후속 알림을 보냅니다. (기본값은 모든 에이전트에게 알림을 보내는 것입니다).',
+        'Defines the number of header fields in frontend modules for add and update postmaster filters. It can be up to 99 fields.' =>
+            '포스트 마스터 필터 추가 및 업데이트를 위한 프론트 엔드 모듈의 헤더 필드 수를 정의합니다. 최대 99개의 필드가 가능합니다.',
+        'Indicates if a bounce e-mail should always be treated as normal follow-up.' =>
+            '반송 전자 메일을 항상 정상적인 후속조치로 처리해야하는지 나타냅니다.',
+        'Defines all the X-headers that should be scanned.' => '검사해야할 모든 X- 헤더를 정의합니다.',
+        'Module to filter and manipulate incoming messages. Block/ignore all spam email with From: noreply@ address.' =>
+            '들어오는 메시지를 필터링하고 조작하는 모듈입니다. 보낸 사람 : noreply @ 주소로 모든 스팸 전자 메일을 차단 / 무시합니다.',
+        'Module to filter and manipulate incoming messages. Get a 4 digit number to ticket free text, use regex in Match e. g. From =&gt; \'(.+?)@.+?\', and use () as [***] in Set =&gt;.' =>
+            '',
+        'Blocks all the incoming emails that do not have a valid ticket number in subject with From: @example.com address.' =>
+            '보낸 사람 : @ example.com 주소로 유효한 티켓 번호가없는 수신 전자 메일을 모두 차단합니다.',
+        'Defines the sender for rejected emails.' => '거부된 전자메일에 대한 보낸 사람을 정의합니다.',
+        'Defines the subject for rejected emails.' => '거부된 전자메일의 제목을 정의합니다.',
+        'Defines the body text for rejected emails.' => '거부된 전자 메일의 본문 텍스트를 정의합니다.',
+        'Module to use database filter storage.' => '모듈은 데이터베이스 필터 저장소를 사용합니다.',
+        'Module to check if arrived emails should be marked as internal (because of original forwarded internal email). IsVisibleForCustomer and SenderType define the values for the arrived email/article.' =>
+            '도착한 전자 메일이 내부 전자 메일로 표시되어야하는지 확인하는 모듈입니다 (원래 전달 된 내부 전자 메일 때문에). IsVisibleForCustomer 및 SenderType은 도착한 전자 메일 / 기사의 값을 정의합니다.',
+        'Recognize if a ticket is a follow-up to an existing ticket using an external ticket number. Note: the first capturing group from the \'NumberRegExp\' expression will be used as the ticket number value.' =>
+            '',
+        'Module to filter encrypted bodies of incoming messages.' => '들어오는 메시지의 암호화 된 본문을 필터링하는 모듈입니다.',
+        'Module to fetch customer users SMIME certificates of incoming messages.' =>
+            '들어오는 메시지의 고객 사용자 SMIME 인증서를 가져 오는 모듈.',
+        'Module to check if a incoming e-mail message is bounce.' => '들어오는 전자 메일 메시지가 바운드되는지 확인하는 모듈입니다.',
+        'Module used to detect if attachments are present.' => '첨부 파일이 있는지 감지하는데 사용되는 모듈입니다.',
+        'Executes follow-up checks on OTRS Header \'X-OTRS-Bounce\'.' => 'OTRS Header \'X-OTRS-Bounce\'에 대한 후속 검사를 실행합니다.',
+        'Checks if an E-Mail is a followup to an existing ticket by searching the subject for a valid ticket number.' =>
+            '유효한 티켓 번호를 검색하여 전자 메일이 기존 티켓의 후속 조치인지 확인합니다.',
+        'Executes follow-up checks on In-Reply-To or References headers for mails that don\'t have a ticket number in the subject.' =>
+            '제목에 티켓 번호가없는 메일에 대한 In-Reply-To 또는 References 헤더의 후속 검사를 실행합니다.',
+        'Executes follow-up checks on email body for mails that don\'t have a ticket number in the subject.' =>
+            '제목에 티켓 번호가 없는 메일에 대한 이메일 본문에 대한 후속 검사를 실행합니다.',
+        'Executes follow-up checks on attachment contents for mails that don\'t have a ticket number in the subject.' =>
+            '제목에 티켓 번호가 없는 메일의 첨부파일 내용에 대한 후속 검사를 실행합니다.',
+        'Executes follow-up checks on the raw source email for mails that don\'t have a ticket number in the subject.' =>
+            '제목에 티켓 번호가 없는 메일의 원시 원본 전자 메일에 대한 후속 검사를 실행합니다.',
+        'Checks if an email is a follow-up to an existing ticket with external ticket number which can be found by ExternalTicketNumberRecognition filter module.' =>
+            '',
+        'Controls if CustomerID is automatically copied from the sender address for unknown customers.' =>
+            '알 수없는 고객의 보낸 사람 주소에서 CustomerID가 자동으로 복사되는지 여부를 제어합니다.',
+        'If this regex matches, no message will be send by the autoresponder.' =>
+            '이 정규식이 일치하면 자동 응답으로 보낼 메시지가 없습니다.',
+        'If this option is enabled, tickets created via the web interface, via Customers or Agents, will receive an autoresponse if configured. If this option is not enabled, no autoresponses will be sent.' =>
+            '이 옵션을 사용하면 Customers 나 Agents를 통해 웹 인터페이스를 통해 생성 된 티켓은 자동 응답을받습니다. 이 옵션을 사용하지 않으면 자동 응답이 전송되지 않습니다.',
+        'Links 2 tickets with a "Normal" type link.' => '2 개의 티켓을 "일반"유형 링크로 연결합니다.',
+        'Links 2 tickets with a "ParentChild" type link.' => '2 개의 티켓을 "ParentChild"유형 링크로 연결합니다.',
+        'Defines, which tickets of which ticket state types should not be listed in linked ticket lists.' =>
+            '티켓 상태 유형이 링크된 티켓 목록에 나열되어서는 안되는 티켓을 정의합니다.',
+        'For these state types the ticket numbers are striked through in the link table.' =>
+            '이러한 상태 유형의 경우 티켓 번호는 링크 테이블에서 제거됩니다.',
+        'Module to generate ticket statistics.' => '티켓 통계를 생성하는 모듈.',
+        'Determines if the statistics module may generate ticket lists.' =>
+            '통계 모듈이 티켓 목록을 생성할 수 있는지 여부를 결정합니다.',
+        'Module to generate accounted time ticket statistics.' => '모듈은 계산된 타임 티켓 통계를 생성합니다.',
+        'Module to generate ticket solution and response time statistics.' =>
+            '티켓 솔루션 및 응답 시간 통계를 생성하는 모듈.',
+        'Set the default height (in pixels) of inline HTML articles in AgentTicketZoom.' =>
+            'AgentTicketZoom에서 인라인 HTML 기사의 기본 높이 (픽셀 단위)를 설정합니다.',
+        'Set the maximum height (in pixels) of inline HTML articles in AgentTicketZoom.' =>
+            'AgentTicketZoom에서 인라인 HTML 기사의 최대 높이 (픽셀 단위)를 설정합니다.',
+        'The maximal number of articles expanded on a single page in AgentTicketZoom.' =>
+            'AgentTicketZoom의 단일 페이지에서 확장 된 기사의 최대 수입니다.',
+        'The maximal number of articles shown on a single page in AgentTicketZoom.' =>
+            'AgentTicketZoom의 단일 페이지에 표시되는 기사의 최대 수입니다.',
+        'Show article as rich text even if rich text writing is disabled.' =>
+            '리치 텍스트 쓰기가 비활성화된 경우에도 기사를 리치 텍스트로 표시하십시오.',
+        'Parameters for the pages (in which the dynamic fields are shown) of the dynamic fields overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
+            '동적 필드 개요의 페이지 (동적 필드가 표시되는 페이지)의 매개 변수입니다. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
+        'Dynamic fields shown in the ticket close screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 닫기 화면에 표시된 동적 필드입니다.',
+        'Dynamic fields shown in the ticket compose screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 작성 화면에 표시된 동적 필드',
+        'Dynamic fields shown in the ticket email screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 전자 메일 화면에 표시된 동적 필드입니다.',
+        'Dynamic fields shown in the ticket free text screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 프리 텍스트 화면에 표시된 동적 필드입니다.',
+        'Dynamic fields shown in the ticket forward screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 전달 화면에 표시되는 동적 필드입니다.',
+        'Dynamic fields shown in the email outbound screen of the agent interface.' =>
+            '에이전트 인터페이스의 전자 메일 아웃바운드 화면에 표시되는 동적 필드입니다.',
+        'Dynamic fields shown in the ticket move screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 이동 화면에 표시된 동적 필드',
+        'Dynamic fields shown in the ticket note screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 메모 화면에 표시된 동적 필드입니다.',
+        'Dynamic fields shown in the ticket owner screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 소유자 화면에 표시된 동적 필드입니다.',
+        'Dynamic fields shown in the ticket pending screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 보류 화면에 표시되는 동적 필드입니다.',
+        'Dynamic fields shown in the ticket phone screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 전화 화면에 표시된 동적 필드입니다.',
+        'Dynamic fields shown in the ticket phone inbound screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 전화 인바운드 화면에 표시되는 동적 필드입니다.',
+        'Dynamic fields shown in the ticket phone outbound screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 전화 아웃바운드 화면에 표시되는 동적 필드입니다.',
+        'Dynamic fields shown in the ticket priority screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 우선 순위 화면에 표시된 동적 필드입니다.',
+        'Dynamic fields shown in the ticket responsible screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 담당 화면에 표시되는 동적 필드입니다.',
+        'Dynamic fields options shown in the ticket message screen of the customer interface. NOTE. If you want to display these fields also in the ticket zoom of the customer interface, you have to enable them in CustomerTicketZoom###DynamicField.' =>
+            '동적 필드 옵션은 고객 인터페이스의 티켓 메시지 화면에 표시됩니다. 노트. 이러한 필드를 고객 인터페이스의 티켓 확대에도 표시하려면 CustomerTicketZoom ### DynamicField에서 활성화해야합니다.',
+        'Dynamic fields shown in the ticket small format overview screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 소형 형식 개요 화면에 표시된 동적 필드입니다.',
+        'Dynamic fields shown in the ticket medium format overview screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 중간 형식 개요 화면에 표시된 동적 필드입니다.',
+        'Dynamic fields shown in the ticket preview format overview screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 미리보기 형식 개요 화면에 표시된 동적 필드입니다.',
+        'Dynamic fields shown in the sidebar of the ticket zoom screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 확대 / 축소 화면의 사이드 바에 표시된 동적 필드입니다.',
+        'AgentTicketZoom widget that displays ticket data in the side bar.' =>
+            '사이드 바에 티켓 데이터를 표시하는 AgentTicketZoom 위젯.',
+        'AgentTicketZoom widget that displays customer information for the ticket in the side bar.' =>
+            '사이드 바에 티켓에 대한 고객 정보를 표시하는 AgentTicketZoom 위젯.',
+        'AgentTicketZoom widget that displays a table of objects linked to the ticket.' =>
+            '티켓에 연결된 객체 테이블을 표시하는 AgentTicketZoom 위젯입니다.',
+        'Dynamic fields shown in the ticket zoom screen of the customer interface.' =>
+            '동적 인터페이스는 고객 인터페이스의 티켓 확대 / 축소 화면에 표시됩니다.',
+        'Dynamic fields options shown in the ticket reply section in the ticket zoom screen of the customer interface.' =>
+            '동적 필드 옵션은 고객 인터페이스의 티켓 확대 / 축소 화면에서 티켓 응답 섹션에 표시됩니다.',
+        'Dynamic fields shown in the ticket print screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 인쇄 화면에 표시되는 동적 필드.',
+        'Dynamic fields shown in the ticket print screen of the customer interface.' =>
+            '동적 인터페이스는 고객 인터페이스의 티켓 인쇄 화면에 표시됩니다.',
+        'Dynamic fields shown in the ticket search screen of the agent interface.' =>
+            '에이전트 인터페이스의 티켓 검색 화면에 표시되는 동적 필드.',
+        'Defines the default shown ticket search attribute for ticket search screen. Example: "Key" must have the name of the Dynamic Field in this case \'X\', "Content" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: \'a text\', Dropdown: \'1\', Date/Time: \'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' and or \'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7\';.' =>
+            '티켓 검색 화면에 대해 표시된 기본 티켓 검색 속성을 정의합니다. 예 : \'Key\'는 Dynamic Field의 이름을 가져야합니다. \'X\', \'Content\'는 동적 필드 유형, Text : \'a text\', 드롭 다운 : \'1\'에 따라 동적 필드의 값을 가져야합니다. , 날짜 / 시간 : \'Search_DynamicField_XTimeSlotStartYear = 1974; Search_DynamicField_XTimeSlotStartMonth = 01; Search_DynamicField_XTimeSlotStartDay = 26; Search_DynamicField_XTimeSlotStartHour = 00; Search_DynamicField_XTimeSlotStartMinute = 00; Search_DynamicField_XTimeSlotStartSecond = 00; Search_DynamicField_XTimeSlotStopYear = 2013; Search_DynamicField_XTimeSlotStopMonth = 01; Search_DynamicField_XTimeSlotStopDay = 26; Search_DynamicField_XTimeSlotStopHour = 23; Search_DynamicField_XTimeSlotStopMinute = 59; Search_DynamicField_XTimeSlotStopSecond = 59; \' and \'또는 Search_DynamicField_XTimePointFormat = 주; Search_DynamicField_XTimePointStart = 이전; Search_DynamicField_XTimePointValue = 7 \';',
+        'Dynamic Fields used to export the search result in CSV format.' =>
+            '검색 결과를 CSV 형식으로 내보내는 데 사용되는 동적 필드입니다.',
+        'Dynamic fields shown in the ticket search screen of the customer interface.' =>
+            '동적 필드는 고객 인터페이스의 티켓 검색 화면에 표시됩니다.',
+        'Dynamic fields shown in the ticket search overview results screen of the customer interface.' =>
+            '고객 인터페이스의 티켓 검색 개요 결과 화면에 표시된 동적 필드.',
+        'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
+            '',
+        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.otrs.com/doc/), chapter "Ticket Event Module".' =>
+            '기본 TicketDynamicField 설정을 구성합니다. "Name"은 사용할 동적 필드를 정의하고, "Value"는 설정할 데이터이고 "Event"는 트리거 이벤트를 정의합니다. 개발자 설명서 (https://doc.otrs.com/doc/), "Ticket Event Module"장을 확인하십시오.',
+        'Defines the list of types for templates.' => '템플릿의 유형 목록을 정의합니다.',
+        'List of default Standard Templates which are assigned automatically to new Queues upon creation.' =>
+            '생성시 새 대기열에 자동으로 할당되는 기본 표준 템플릿 목록입니다.',
+        'General ticket data shown in the ticket overviews (fall-back). Note that TicketNumber can not be disabled, because it is necessary.' =>
+            '티켓 개요에 표시된 일반 티켓 데이터 (폴백). TicketNumber는 필요하므로 비활성화 할 수 없습니다.',
+        'Columns that can be filtered in the status view of the agent interface. Note: Only Ticket attributes, Dynamic Fields (DynamicField_NameX) and Customer attributes (e.g. CustomerUserPhone, CustomerCompanyName, ...) are allowed.' =>
+            '에이전트 인터페이스의 상태보기에서 필터링 할 수있는 열입니다. 참고 : 티켓 속성, 동적 필드 (DynamicField_NameX) 및 고객 속성 (예 : CustomerUserPhone, CustomerCompanyName, ...) 만 허용됩니다.',
+        'Columns that can be filtered in the queue view of the agent interface. Note: Only Ticket attributes, Dynamic Fields (DynamicField_NameX) and Customer attributes (e.g. CustomerUserPhone, CustomerCompanyName, ...) are allowed.' =>
+            '에이전트 인터페이스의 대기열보기에서 필터링 할 수있는 열입니다. 참고 : 티켓 속성, 동적 필드 (DynamicField_NameX) 및 고객 속성 (예 : CustomerUserPhone, CustomerCompanyName, ...) 만 허용됩니다.',
+        'Columns that can be filtered in the responsible view of the agent interface. Note: Only Ticket attributes, Dynamic Fields (DynamicField_NameX) and Customer attributes (e.g. CustomerUserPhone, CustomerCompanyName, ...) are allowed.' =>
+            '에이전트 인터페이스의 담당 뷰에서 필터링 할 수있는 열입니다. 참고 : 티켓 속성, 동적 필드 (DynamicField_NameX) 및 고객 속성 (예 : CustomerUserPhone, CustomerCompanyName, ...) 만 허용됩니다.',
+        'Columns that can be filtered in the watch view of the agent interface. Note: Only Ticket attributes, Dynamic Fields (DynamicField_NameX) and Customer attributes (e.g. CustomerUserPhone, CustomerCompanyName, ...) are allowed.' =>
+            '에이전트 인터페이스의보기보기에서 필터링 할 수있는 열입니다. 참고 : 티켓 속성, 동적 필드 (DynamicField_NameX) 및 고객 속성 (예 : CustomerUserPhone, CustomerCompanyName, ...) 만 허용됩니다.',
+        'Columns that can be filtered in the locked view of the agent interface. Note: Only Ticket attributes, Dynamic Fields (DynamicField_NameX) and Customer attributes (e.g. CustomerUserPhone, CustomerCompanyName, ...) are allowed.' =>
+            '에이전트 인터페이스의 잠긴보기에서 필터링 할 수있는 열입니다. 참고 : 티켓 속성, 동적 필드 (DynamicField_NameX) 및 고객 속성 (예 : CustomerUserPhone, CustomerCompanyName, ...) 만 허용됩니다.',
+        'Columns that can be filtered in the escalation view of the agent interface. Note: Only Ticket attributes, Dynamic Fields (DynamicField_NameX) and Customer attributes (e.g. CustomerUserPhone, CustomerCompanyName, ...) are allowed.' =>
+            '에이전트 인터페이스의 에스컬레이션보기에서 필터링 할 수있는 열. 참고 : 티켓 속성, 동적 필드 (DynamicField_NameX) 및 고객 속성 (예 : CustomerUserPhone, CustomerCompanyName, ...) 만 허용됩니다.',
+        'Columns that can be filtered in the ticket search result view of the agent interface. Note: Only Ticket attributes, Dynamic Fields (DynamicField_NameX) and Customer attributes (e.g. CustomerUserPhone, CustomerCompanyName, ...) are allowed.' =>
+            '에이전트 인터페이스의 티켓 검색 결과보기에서 필터링 할 수있는 열입니다. 참고 : 티켓 속성, 동적 필드 (DynamicField_NameX) 및 고객 속성 (예 : CustomerUserPhone, CustomerCompanyName, ...) 만 허용됩니다.',
+        'Columns that can be filtered in the service view of the agent interface. Note: Only Ticket attributes, Dynamic Fields (DynamicField_NameX) and Customer attributes (e.g. CustomerUserPhone, CustomerCompanyName, ...) are allowed.' =>
+            '에이전트 인터페이스의 서비스보기에서 필터링 할 수있는 열입니다. 참고 : 티켓 속성, 동적 필드 (DynamicField_NameX) 및 고객 속성 (예 : CustomerUserPhone, CustomerCompanyName, ...) 만 허용됩니다.',
+        'Frontend module registration (disable AgentTicketService link if Ticket Service feature is not used).' =>
+            '프론트 엔드 모듈 등록 (티켓 서비스 기능을 사용하지 않는 경우 AgentTicketService 링크를 비활성화).',
+        'Default display type for recipient (To,Cc) names in AgentTicketZoom and CustomerTicketZoom.' =>
+            'AgentTicketZoom 및 CustomerTicketZoom의받는 사람 (받는 사람, 참조) 이름의 기본 표시 유형입니다.',
+        'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
+            'AgentTicketZoom 및 CustomerTicketZoom의 보낸 사람 (보낸 사람) 이름의 기본 표시 유형입니다.',
+        'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
+            '연결된 티켓 위젯에 표시 할 열을 정의하십시오 (LinkObject :: ViewMode = "complex"). 참고 : Ticket 속성과 Dynamic Fields (DynamicField_NameX) 만 DefaultColumn에 허용됩니다.',
+        'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
+            'Ticket :: Frontend :: ZoomCollectMetaFilters에서 구성된 필터를 사용하여 아티클에서 메타 정보를 수집할지 여부.',
+        'Defines a filter to collect CVE numbers from article texts in AgentTicketZoom. The results will be displayed in a meta box next to the article. Fill in URLPreview if you would like to see a preview when moving your mouse cursor above the link element. This could be the same URL as in URL, but also an alternate one. Please note that some websites deny being displayed within an iframe (e.g. Google) and thus won\'t work with the preview mode.' =>
+            'AgentTicketZoom의 기사 텍스트에서 CVE 번호를 수집하는 필터를 정의합니다. 결과는 기사 옆의 메타 상자에 표시됩니다. 링크 요소 위로 마우스 커서를 이동할 때 미리보기를 보려면 URLPreview를 채 웁니다. URL과 동일한 URL 일 수도 있지만 대체 URL 일 수도 있습니다. 일부 웹 사이트는 iframe (예 : Google)에 표시되지 않으므로 미리보기 모드에서는 작동하지 않습니다.',
+        'Sets the default link type of split tickets in the agent interface.' =>
+            '에이전트 인터페이스에서 분할 티켓의 기본 링크 유형을 설정합니다.',
+        'Defines available article actions for Internal articles.' => '내부 기사에 대해 사용가능한 기사 조치를 정의합니다.',
+        'Defines available article actions for Phone articles.' => '전화 기사에 대해 사용가능한 기사 조치를 정의합니다.',
+        'Defines available article actions for Email articles.' => '전자 메일 아티클에 대해 사용 가능한 아티클 동작을 정의합니다.',
+        'Defines available article actions for Chat articles.' => '채팅 기사에 대해 사용 가능한 기사 작업을 정의합니다.',
+        'Defines available article actions for invalid articles.' => '유효하지 않은 기사에 대해 사용 가능한 기사 조치를 정의합니다.',
+        'Disables the redirection to the last screen overview / dashboard after a ticket is closed.' =>
+            '',
+        'Defines the default queue for new tickets in the agent interface.' =>
+            '에이전트 인터페이스에서 새 티켓의 기본 대기열을 정의합니다.',
+
+        # XML Definition: Kernel/Config/Files/XML/Znuny.xml
+        'Access package repositories via HTTP or HTTPS.' => '',
+        'URL to the OTRS cloud service proxy service. The http or https prefix will be added, depending on SysConfig option \'PackageRepositoryURLSchema\'.' =>
+            '',
+        'Enables/disables the Znuny package verification. If disabled, all packages are shown as verified. It\'s still recommended to use only verified packages.' =>
+            '',
+        'Screens for which it is possible to enable or disable dynamic fields.' =>
+            '',
+        'Screens for which it is possible to enable or disable default columns.' =>
+            '',
+        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
+            '',
+        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
+            '',
+        'Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic.' =>
+            '',
+        'Enables support for huge XML data in load_xml calls of CPAN library XML::LibXML. This should only be enabled if absolutely needed. Disabling this option (default) protects against denial of service through entity expansion attacks. Before enabling this option ensure that alternative measures to protect the application against this type of attack have been taken.' =>
+            '',
+        'Shows a link in the menu to create a unit test for the current ticket.' =>
+            '',
+        'Shows a link in the menu to create and send a unit test for the current ticket.' =>
+            '',
+        'Dynamic field backend registration.' => '',
+        'Frontend module for the agent interface that provides the AJAX interface for the web service dynamic field backends.' =>
+            '',
+        'Frontend module for the customer interface that provides the AJAX interface for the web service dynamic field backends.' =>
+            '',
+        'Ticket event module that stores values of the selected web service record into the configured additional dynamic fields.' =>
+            '',
+        'It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
+            '',
+        'Mapping for field values received from form. This setting is necessary for the correct identification of the form fields. Key means value type, value means possible representation in views.' =>
+            '',
+        'Mapping for field values received from form which have multiple values. This setting is needed when the view shows the values of a particular field in a custom way (e.g. selectable customer user in ticket creation view). This setting is always respected first. There is also the possibility to specify an order for checking fields. (Field of customer user in ticket creation view can be saved as CustomerUser or just simple e-mail. First we need to check if CustomerKey is present (CustomerKey -> ID of CustomerUser). If not, then simply take plain text (CustomerTicketText -> E-mail)).' =>
+            '',
+        'Options and default field set for attributes. Values of this setting will always be passed as simple form value without possibility to further configure it in AdminDynamicField view. The keys with which the form values will be sent to the invoker can be edited in the "Default" section of this setting.' =>
+            '',
+        'Options and default field set for selectable attributes. Values which will be passed to invoker (ID or Name or both) can be configured in AdminDynamicField view. The keys with which the form values (ID or Name) will be sent to the invoker can be edited in the "Default" section of this setting. Example usage for field Queue: Field with selected ID and Name will send QueueID = 3 and Queue = Raw.' =>
+            '',
+        'Template for the out-of-office message shown to the user in the frontend. Placeholders for out-of-office information can be used via ###PlaceholderName###. Possible placeholders are: StartYear, StartMonth, StartDay, EndYear, EndMonth, EndDay, DaysRemaining.' =>
+            '',
+        'Message that will be shown if the agent is currently logged in.' =>
+            '',
+        'Message that will be shown if the agent is currently logged out.' =>
+            '',
+        'Assignment between action and attributes.' => '',
+        'Possible types for agent interface.' => '',
+        'Possible types for customer interface.' => '',
+        'Assignment between type and icon.' => '',
+        'List of actions that will be ignored.' => '',
+        'List of sub-actions that will be ignored.' => '',
+        'Registers a user preferences module for LastViewsLimit.' => '',
+        'Registers a user preferences module for LastViewsPosition.' => '',
+        'Registers a user preferences module for LastViewsType.' => '',
+        'Pre-application module to store the current view.' => '',
+        'Domains accessed through WebUserAgent module for which no proxy should be used. Separate domains by semicolon.' =>
+            '',
+        'User agent string to use for the WebUserAgent module. Leave empty to use the default user agent string.' =>
+            '',
+        'Agent recipient information which will be passed to the web service.' =>
+            '',
+        'Customer recipient information which will be passed to the web service.' =>
+            '',
+        'Parameter name for additional recipients.' => '',
+        'Shows only valid dynamic fields in screen configuration (AdminDynamicFieldScreenConfiguration) if enabled.' =>
+            '',
+        'Shows only valid dynamic fields in dynamic field export selection (AdminDynamicFieldConfigurationImportExport) if enabled.' =>
+            '',
+        'Config keys and their action to activate dynamic fields in different screens, grouped by object type.' =>
+            '',
+        'Dynamic field screen config keys and their action for all screens that don\'t allow dynamic fields to be mandatory.' =>
+            '',
+        'Frontend module registration for the admin interface.' => '',
+        'The user\'s Mattermost username.' => '',
+        'Loader module registration for the admin interface.' => '',
+        'Adds ticket attribute relations based on CSV/Excel data.' => '',
+        'Available/allowed actions for ticket attribute relations.' => '',
+        'Always adds empty values to the ticket attribute relations so that it is not needed to add them to the CSV/Excel data.' =>
+            '',
+        'Triggers event \'TicketAllChildrenClosed\' if all child tickets of a parent ticket have been closed/merged/removed.' =>
+            '',
+        'Ticket event module which sends new ticket notifications even for tickets without articles.' =>
+            '',
+        'Name of the dynamic field in which the attachment file IDs of the transition will be stored.' =>
+            '',
+        'Keep dynamic field attachments after each transition.' => '',
+        'Format string for output of attachments in the selection list. "%1$d": article number; "%2$s": filename; "%3$s": translated object type (e.g. Article => Artikel); "%4$s": translated attachment label (e.g. "Anhang").' =>
+            '',
+        'Sets the service in the ticket bulk screen in the agent interface (Ticket::Service needs to be enabled).' =>
+            '',
+        'Dynamic fields shown in the ticket bulk screen of the agent interface.' =>
+            '',
+        'This configuration defines if a dynamic field has to be checked in the agent ticket bulk view to get set for each ticket. This prevents unwanted overwrite of dynamic field values with their default or even empty values.' =>
+            '',
+        'Default format for export files.' => '',
+        'Separator for exported CSV files.' => '',
+        'Quoting character for exported CSV files.' => '',
+        'Handles changes to data of modules which use the DBCRUD base module.' =>
+            '',
+        'Cache settings for DBCRUD modules (default: 1 day).' => '',
+        'Displays notifications for missing and expired OAuth2 tokens.' =>
+            '',
+        'Authentication type for sendmail module. If \'OAuth2 token\' has been selected, SendmailModule::OAuth2TokenConfigName must also be configured.' =>
+            '',
+        'Name of the OAuth2 token configuration to use for sending mails if \'OAuth2 token\' was configured in SendmailModule::AuthenticationType.' =>
+            '',
+        'Hosts that need a separate info about authentication method and token (instead of both in one line). Most commonly needed for Office 365 and Outlook.' =>
+            '',
+        'This option enables a dropdown which will be displayed instead of the time unit input field.' =>
+            '',
+        'Defines the default ticket attribute for ticket sorting in the owner view of the agent interface.' =>
+            '',
+        'Defines the default ticket order in the owner view of the agent interface. Up: oldest on top. Down: latest on top.' =>
+            '',
+        'Columns that can be filtered in the owner view of the agent interface. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed.' =>
+            '',
+        'Agent interface notification module to see the number of tickets an agent is owner for. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
+            '',
+        'Defines the next possible ticket states for calendar based tickets.' =>
+            '',
+        'Defines the default next state.' => '',
+        'Defines the default ticket priority for calendar based tickets.' =>
+            '',
+        'Defines if the processes should be displayed in TreeView.' => '',
+        'Enables calendar based ticket creation feature only for the listed groups.' =>
+            '',
+        'Defines the default ticket title for calendar based tickets.' =>
+            '',
+        'Defines the default ticket body for calendar based tickets.' => '',
+        'Defines the default article channel name for calendar based tickets.' =>
+            '',
+        'Defines the default visibility of articles for calendar based tickets.' =>
+            '',
+        'Defines the default sender type for calendar based tickets.' => '',
+        'Defines the default from for calendar based tickets.' => '',
+        'Defines the default history type for calendar based tickets.' =>
+            '',
+        'Defines the default history comment for calendar based tickets.' =>
+            '',
+        'Defines the default content type for calendar based tickets.' =>
+            '',
+        'Threshold (in minutes) for catching up with ticket creation for appointments. Tickets for due appointments will only be created if their planned creation date is not older than the configured amount of minutes. This prevents creation of tickets for e. g. recurring appointments if the ticket creation will be executed some time later.' =>
+            '',
+        'Creates the calendar-based tickets regularly.' => '',
+        'Cleans up the calendar-based tickets regularly.' => '',
+        'Maximum number of quoted lines to be added to forwarded messages.' =>
+            '',
+        'Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig.' =>
+            '',
+        'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
+            '',
+        'General settings for autocompletion in rich text editor.' => '',
+        'Rich text editor configuration for autocompletion module.' => '',
+        'Rich text editor configuration for autocompletion module to support templates.' =>
+            '',
+        'Defines which notifications about mentions should be sent.' => '',
+        'Defines if the toolbar mention icon should count mentions.' => '',
+        'Frontend registration of triggers for mention plugin of CKEditor.' =>
+            '',
+        'Frontend registration of input/output templates for mention plugin of CKEditor.' =>
+            '',
+        'Event handler for mentions.' => '',
+        'Parameters for the dashboard backend of the last mention widget.' =>
+            '',
+        'Agent interface notification module to show the number of mentions.' =>
+            '',
+        'Module to grant access to the mentioned agents of a ticket.' => '',
+
+        # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '유효하지 않은 일시적',
         'Group for default access.' => '기본 액세스 그룹.',
         'Group of all administrators.' => '모든 관리자 그룹.',
@@ -5480,36 +8029,37 @@ sub Data {
         'You will receive a notification each time a reminder time is reached for one of your appointments.' =>
             '약속 중 하나에 대해 미리 알림 시간에 도달할 때마다 알림을 받게 됩니다.',
         'Ticket email delivery failure notification' => '티켓 전자 메일 배달 실패 알림',
+        'Mention notification' => '',
 
-        # JS File: Core.AJAX
+        # JS File: var/httpd/htdocs/js/Core.AJAX.js
         'Error during AJAX communication. Status: %s, Error: %s' => 'AJAX 통신 중 오류가 발생했습니다. 상태 : %s, 오류 : %s',
         'This window must be called from compose window.' => '이 창은 작성 창에서 호출해야합니다.',
 
-        # JS File: Core.Agent.Admin.ACL
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.ACL.js
         'Add all' => '모두 추가',
         'An item with this name is already present.' => '이 이름을 가진 항목이 이미 있습니다.',
         'This item still contains sub items. Are you sure you want to remove this item including its sub items?' =>
             '이 항목에는 여전히 하위 항목이 있습니다. 하위 항목을 포함하여 이 항목을 제거 하시겠습니까?',
 
-        # JS File: Core.Agent.Admin.AppointmentCalendar.Manage
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.AppointmentCalendar.Manage.js
         'More' => '더',
         'Less' => '적게',
         'Press Ctrl+C (Cmd+C) to copy to clipboard' => 'Ctrl + C (Cmd + C)를 눌러 클립 보드에 복사하십시오.',
 
-        # JS File: Core.Agent.Admin.Attachment
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.Attachment.js
         'Delete this Attachment' => '이 첨부 파일 삭제',
         'Deleting attachment...' => '첨부 파일을 삭제하는 중...',
         'There was an error deleting the attachment. Please check the logs for more information.' =>
             '첨부 파일을 삭제하는 중 오류가 발생했습니다. 자세한 내용은 로그를 확인하십시오.',
         'Attachment was deleted successfully.' => '첨부 파일을 삭제했습니다.',
 
-        # JS File: Core.Agent.Admin.DynamicField
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.DynamicField.js
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!' =>
             '이 동적 필드를 정말로 삭제 하시겠습니까? 관련된 모든 데이터가 손실됩니다!',
         'Delete field' => '입력란 삭제',
         'Deleting the field and its data. This may take a while...' => '필드 및 해당 데이터 삭제. 이 작업은 다소 시간이 걸릴 수 있습니다...',
 
-        # JS File: Core.Agent.Admin.GenericAgent
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
         'Remove this dynamic field' => '',
         'Remove selection' => '선택 항목 삭제',
         'Do you really want to delete this generic agent job?' => '',
@@ -5518,56 +8068,60 @@ sub Data {
         'This event is already attached to the job, Please use a different one.' =>
             '이 이벤트는 이미 작업에 첨부되어 있습니다. 다른 이벤트를 사용하십시오.',
 
-        # JS File: Core.Agent.Admin.GenericInterfaceDebugger
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceDebugger.js
         'An error occurred during communication.' => '통신 중에 오류가 발생했습니다.',
         'Request Details' => '요청 세부 정보',
         'Request Details for Communication ID' => '통신 ID 요청 세부 정보',
         'Show or hide the content.' => '내용을 표시하거나 숨깁니다.',
         'Clear debug log' => '디버그 로그 지우기',
 
-        # JS File: Core.Agent.Admin.GenericInterfaceErrorHandling
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceErrorHandling.js
         'Delete error handling module' => '오류 처리 모듈 삭제',
 
-        # JS File: Core.Agent.Admin.GenericInterfaceInvoker
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvoker.js
         'It is not possible to add a new event trigger because the event is not set.' =>
             '',
         'Delete this Invoker' => '이 호출자 삭제',
 
-        # JS File: Core.Agent.Admin.GenericInterfaceInvokerEvent
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceInvokerEvent.js
         'Sorry, the only existing condition can\'t be removed.' => '죄송합니다. 기존 상태만 제거 할 수 없습니다.',
         'Sorry, the only existing field can\'t be removed.' => '죄송합니다. 기존 필드만 제거 할 수 없습니다.',
         'Delete conditions' => '조건 삭제',
 
-        # JS File: Core.Agent.Admin.GenericInterfaceMapping
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceMapping.js
         'Mapping for Key %s' => '키 %s에 대한 매핑',
         'Mapping for Key' => '키 매핑',
         'Delete this Key Mapping' => '이 키 매핑 삭제',
 
-        # JS File: Core.Agent.Admin.GenericInterfaceOperation
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceOperation.js
         'Delete this Operation' => '이 작업 삭제',
 
-        # JS File: Core.Agent.Admin.GenericInterfaceWebservice
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericInterfaceWebservice.js
         'Clone web service' => '웹 서비스 복제',
         'Delete operation' => '작업 삭제',
         'Delete invoker' => '호출자 삭제',
 
-        # JS File: Core.Agent.Admin.Group
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.Group.js
         'WARNING: When you change the name of the group \'admin\', before making the appropriate changes in the SysConfig, you will be locked out of the administrations panel! If this happens, please rename the group back to admin per SQL statement.' =>
             '경고 : SysConfig에서 적절한 변경을 수행하기 전에 \'admin\'그룹의 이름을 변경하면 관리 패널에서 잠길 것입니다! 이 경우 SQL 문에 따라 admin으로 다시 그룹 이름을 변경하십시오.',
 
-        # JS File: Core.Agent.Admin.MailAccount
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.MailAccount.js
         'Delete this Mail Account' => '이 메일 계정 삭제',
         'Deleting the mail account and its data. This may take a while...' =>
             '메일 계정 및 해당 데이터 삭제. 이 작업은 다소 시간이 걸릴 수 있습니다...',
 
-        # JS File: Core.Agent.Admin.NotificationEvent
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.NotificationEvent.js
         'Do you really want to delete this notification language?' => '이 알림 언어를 정말로 삭제 하시겠습니까?',
         'Do you really want to delete this notification?' => '이 알림을 정말로 삭제 하시겠습니까?',
 
-        # JS File: Core.Agent.Admin.PGP
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.OAuth2TokenManagement.js
+        'Do you really want to delete this token and its configuration?' =>
+            '',
+
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.PGP.js
         'Do you really want to delete this key?' => '',
 
-        # JS File: Core.Agent.Admin.PackageManager
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.PackageManager.js
         'There is a package upgrade process running, click here to see status information about the upgrade progress.' =>
             '패키지 업그레이드 프로세스가 실행 중입니다. 여기를 클릭하면 업그레이드 진행 상태에 대한 상태 정보를 볼 수 있습니다.',
         'A package upgrade was recently finished. Click here to see the results.' =>
@@ -5585,12 +8139,12 @@ sub Data {
         'Are you sure you want to update all installed packages?' => '설치된 패키지를 모두 업데이트 하시겠습니까?',
         'No response from get package upgrade run status.' => '',
 
-        # JS File: Core.Agent.Admin.PostMasterFilter
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.PostMasterFilter.js
         'Delete this PostMasterFilter' => '이 PostMasterFilter 삭제',
         'Deleting the postmaster filter and its data. This may take a while...' =>
             '전자 메일 관리자 필터 및 해당 데이터 삭제. 이 작업은 다소 시간이 걸릴 수 있습니다...',
 
-        # JS File: Core.Agent.Admin.ProcessManagement.Canvas
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.ProcessManagement.Canvas.js
         'Remove Entity from canvas' => '캔버스에서 엔티티 제거',
         'No TransitionActions assigned.' => '과도 행동이 할당되지 않았습니다.',
         'No dialogs assigned yet. Just pick an activity dialog from the list on the left and drag it here.' =>
@@ -5599,7 +8153,7 @@ sub Data {
             '이 활동은 시작 활동이기 때문에 삭제할 수 없습니다.',
         'Remove the Transition from this Process' => '이 프로세스에서 전환 제거',
 
-        # JS File: Core.Agent.Admin.ProcessManagement
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.ProcessManagement.js
         'As soon as you use this button or link, you will leave this screen and its current state will be saved automatically. Do you want to continue?' =>
             '이 버튼이나 링크를 사용하자마자 이 화면을 떠나고 현재 상태가 자동으로 저장됩니다. 계속 하시겠습니까?',
         'Delete Entity' => '엔티티 삭제',
@@ -5617,11 +8171,12 @@ sub Data {
         'Customer interface does not support articles not visible for customers.' =>
             '고객 인터페이스는 고객이 볼 수없는 기사를 지원하지 않습니다.',
         'Sorry, the only existing parameter can\'t be removed.' => '죄송합니다. 기존 매개변수만 제거 할 수 없습니다.',
+        'Are you sure you want to overwrite the config parameters?' => '',
 
-        # JS File: Core.Agent.Admin.SMIME
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SMIME.js
         'Do you really want to delete this certificate?' => '정말로 이 인증서를 삭제하시겠습니까?',
 
-        # JS File: Core.Agent.Admin.SupportDataCollector
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SupportDataCollector.js
         'Sending Update...' => '업데이트 전송 중...',
         'Support Data information was successfully sent.' => '지원 데이터 정보가 성공적으로 전송되었습니다.',
         'Was not possible to send Support Data information.' => '지원 데이터 정보를 보낼 수 없었습니다.',
@@ -5630,9 +8185,8 @@ sub Data {
         'It was not possible to generate the Support Bundle.' => '지원 번들을 생성할 수 없었습니다.',
         'Generate Result' => '결과 생성',
         'Support Bundle' => '지원 번들',
-        'The mail could not be sent' => '메일을 보낼 수 없습니다.',
 
-        # JS File: Core.Agent.Admin.SysConfig.Entity
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SysConfig.Entity.js
         'It is not possible to set this entry to invalid. All affected configuration settings have to be changed beforehand.' =>
             '이 항목을 유효하지 않게 설정할 수는 없습니다. 영향을 받는 모든 구성 설정을 미리 변경해야 합니다.',
         'Cannot proceed' => '진행할 수 없습니다.',
@@ -5644,7 +8198,7 @@ sub Data {
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.' =>
             '현재 보고 있는 항목은 아직 배포되지 않은 구성 설정의 일부이므로 현재 상태로 편집할 수 없습니다. 설정이 배포될 때까지 기다려주십시오. 다음에 해야할 일이 확실치 않으면 시스템 관리자에게 문의하십시오.',
 
-        # JS File: Core.Agent.Admin.SystemConfiguration
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SystemConfiguration.js
         'Loading...' => '로딩 중...',
         'Search the System Configuration' => '시스템 구성 검색',
         'Please enter at least one search word to find anything.' => '검색할 단어를 하나 이상 입력하십시오.',
@@ -5662,16 +8216,16 @@ sub Data {
             '값이 있는 키는 이름을 바꿀 수 없습니다. 대신 이 키/값 쌍을 제거하고 나중에 다시 추가하십시오.',
         'Unlock setting.' => '잠금 해제 설정.',
 
-        # JS File: Core.Agent.Admin.SystemMaintenance
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SystemMaintenance.js
         'Do you really want to delete this scheduled system maintenance?' =>
             '이 예약된 시스템 유지관리를 정말로 삭제 하시겠습니까?',
 
-        # JS File: Core.Agent.Admin.Template
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.Template.js
         'Delete this Template' => '이 템플릿 삭제',
         'Deleting the template and its data. This may take a while...' =>
             '템플릿 및 해당 데이터 삭제. 이 작업은 다소 시간이 걸릴 수 있습니다...',
 
-        # JS File: Core.Agent.AppointmentCalendar
+        # JS File: var/httpd/htdocs/js/Core.Agent.AppointmentCalendar.js
         'Jump' => '도약',
         'Timeline Month' => '타임라인 달',
         'Timeline Week' => '타임라인 주',
@@ -5697,37 +8251,37 @@ sub Data {
         'Are you sure you want to delete this appointment? This operation cannot be undone.' =>
             '이 약속을 삭제 하시겠습니까? 이 작업은 실행 취소할 수 없습니다.',
 
-        # JS File: Core.Agent.CustomerSearch
+        # JS File: var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
         'First select a customer user, then select a customer ID to assign to this ticket.' =>
             '먼저 고객 사용자를 선택한 다음이 티켓에 지정할 고객 ID를 선택하십시오.',
         'Duplicated entry' => '중복 입력',
         'It is going to be deleted from the field, please try again.' => '현장에서 삭제 될 예정입니다. 다시 시도하십시오.',
 
-        # JS File: Core.Agent.CustomerUserAddressBook
+        # JS File: var/httpd/htdocs/js/Core.Agent.CustomerUserAddressBook.js
         'Please enter at least one search value or * to find anything.' =>
             '검색 값을 하나 이상 입력하거나 *를 입력하십시오.',
 
-        # JS File: Core.Agent.Daemon
+        # JS File: var/httpd/htdocs/js/Core.Agent.Daemon.js
         'Information about the OTRS Daemon' => 'OTRS 데몬에 대한 정보',
 
-        # JS File: Core.Agent.Dashboard
+        # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => '유효한 입력을 위해 빨간색으로 표시된 필드를 확인하십시오.',
         'month' => '달',
         'Remove active filters for this widget.' => '이 위젯에 대한 활성 필터를 제거하십시오.',
 
-        # JS File: Core.Agent.LinkObject.SearchForm
+        # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => '잠시만 기다려주십시오...',
         'Searching for linkable objects. This may take a while...' => '링크 가능한 객체 검색. 이 작업은 다소 시간이 걸릴 수 있습니다...',
 
-        # JS File: Core.Agent.LinkObject
+        # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.js
         'Do you really want to delete this link?' => '이 링크를 정말로 삭제 하시겠습니까?',
 
-        # JS File: Core.Agent.Login
+        # JS File: var/httpd/htdocs/js/Core.Agent.Login.js
         'Are you using a browser plugin like AdBlock or AdBlockPlus? This can cause several issues and we highly recommend you to add an exception for this domain.' =>
             'AdBlock 또는 AdBlockPlus와 같은 브라우저 플러그인을 사용하고 있습니까? 이로 인해 여러 가지 문제가 발생할 수 있으며이 도메인에 예외를 추가하는 것이 좋습니다.',
         'Do not show this warning again.' => '이 경고를 다시 표시하지 마십시오.',
 
-        # JS File: Core.Agent.Preferences
+        # JS File: var/httpd/htdocs/js/Core.Agent.Preferences.js
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.' =>
             '죄송합니다. 하지만 필수로 표시된 알림에 대해서는 모든 방법을 사용 중지 할 수 없습니다.',
         'Sorry, but you can\'t disable all methods for this notification.' =>
@@ -5737,71 +8291,71 @@ sub Data {
         'An unknown error occurred. Please contact the administrator.' =>
             '알 수없는 오류가 발생했습니다. 관리자에게 문의하십시오.',
 
-        # JS File: Core.Agent.Responsive
+        # JS File: var/httpd/htdocs/js/Core.Agent.Responsive.js
         'Switch to desktop mode' => '데스크톱 모드로 전환',
 
-        # JS File: Core.Agent.Search
+        # JS File: var/httpd/htdocs/js/Core.Agent.Search.js
         'Please remove the following words from your search as they cannot be searched for:' =>
             '검색할 수 없으므로 다음 단어를 검색에서 제거하십시오.',
 
-        # JS File: Core.Agent.SharedSecretGenerator
+        # JS File: var/httpd/htdocs/js/Core.Agent.SharedSecretGenerator.js
         'Generate' => '',
 
-        # JS File: Core.Agent.SortedTree
+        # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
             '이 요소는 하위 요소를 가지며 현재 제거할 수 없습니다.',
 
-        # JS File: Core.Agent.Statistics
+        # JS File: var/httpd/htdocs/js/Core.Agent.Statistics.js
         'Do you really want to delete this statistic?' => '정말로 이 통계를 삭제 하시겠습니까?',
 
-        # JS File: Core.Agent.TicketAction
+        # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
         'Select a customer ID to assign to this ticket' => '이 티켓에 지정할 고객 ID를 선택하십시오.',
         'Do you really want to continue?' => '계속하시겠습니까?',
 
-        # JS File: Core.Agent.TicketBulk
+        # JS File: var/httpd/htdocs/js/Core.Agent.TicketBulk.js
         ' ...and %s more' => '...  %s 더',
         ' ...show less' => '... 덜 보임',
 
-        # JS File: Core.Agent.TicketFormDraft
+        # JS File: var/httpd/htdocs/js/Core.Agent.TicketFormDraft.js
         'Add new draft' => '새 초안 추가',
         'Delete draft' => '초안 삭제',
         'There are no more drafts available.' => '더이상 사용할 수있는 초안이 없습니다.',
         'It was not possible to delete this draft.' => '이 초안을 삭제할 수 없습니다.',
 
-        # JS File: Core.Agent.TicketZoom
+        # JS File: var/httpd/htdocs/js/Core.Agent.TicketZoom.js
         'Article filter' => '기사 필터',
         'Apply' => '적용하다',
         'Event Type Filter' => '이벤트 유형 필터',
 
-        # JS File: Core.Agent
+        # JS File: var/httpd/htdocs/js/Core.Agent.js
         'Slide the navigation bar' => '탐색 바 슬라이드 하기',
         'Please turn off Compatibility Mode in Internet Explorer!' => 'Internet Explorer에서 호환 모드를 해제하십시오!',
         'Find out more' => '더 찾아봐',
 
-        # JS File: Core.App.Responsive
+        # JS File: var/httpd/htdocs/js/Core.App.Responsive.js
         'Switch to mobile mode' => '모바일 모드로 전환',
 
-        # JS File: Core.App
+        # JS File: var/httpd/htdocs/js/Core.App.js
         'Error: Browser Check failed!' => '오류 : 브라우저 확인에 실패했습니다!',
         'Reload page' => '페이지 새로고침',
         'Reload page (%ss)' => '',
 
-        # JS File: Core.Debug
+        # JS File: var/httpd/htdocs/js/Core.Debug.js
         'Namespace %s could not be initialized, because %s could not be found.' =>
             'Namespace %s을 초기화 할 수 없습니다. %s을 찾을 수 없으므로',
 
-        # JS File: Core.Exception
+        # JS File: var/httpd/htdocs/js/Core.Exception.js
         'An error occurred! Please check the browser error log for more details!' =>
             '에러 발생됨! 자세한 내용은 브라우저 오류 로그를 확인하십시오!',
 
-        # JS File: Core.Form.Validate
+        # JS File: var/httpd/htdocs/js/Core.Form.Validate.js
         'One or more errors occurred!' => '하나 이상의 오류가 발생했습니다!',
 
-        # JS File: Core.Installer
+        # JS File: var/httpd/htdocs/js/Core.Installer.js
         'Mail check successful.' => '메일 검사가 완료되었습니다.',
         'Error in the mail settings. Please correct and try again.' => '메일 설정에 오류가 있습니다. 수정하고 다시 시도하십시오.',
 
-        # JS File: Core.SystemConfiguration
+        # JS File: var/httpd/htdocs/js/Core.SystemConfiguration.js
         'Open this node in a new window' => '새 창에서 이 노드 열기',
         'Please add values for all keys before saving the setting.' => '설정을 저장하기 전에 모든 키의 값을 추가하십시오.',
         'The key must not be empty.' => '키는 비워 둘 수 없습니다.',
@@ -5809,12 +8363,12 @@ sub Data {
         'Do you really want to revert this setting to its historical value?' =>
             '이 설정을 이전 값으로 되돌리시겠습니까?',
 
-        # JS File: Core.UI.Datepicker
+        # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
         'Open date selection' => '영업일 선택',
         'Invalid date (need a future date)!' => '날짜가 잘못 되었습니다 (미래 날짜 필요)!',
         'Invalid date (need a past date)!' => '날짜가 잘못 되었습니다 (지난 날짜 필요)!',
 
-        # JS File: Core.UI.InputFields
+        # JS File: var/httpd/htdocs/js/Core.UI.InputFields.js
         'Not available' => '사용 불가',
         'and %s more...' => '그리고 %s 더 ...',
         'Show current selection' => '현재 선택 항목 표시',
@@ -5823,7 +8377,7 @@ sub Data {
         'Filters' => '필터',
         'Clear search' => '명확한 검색',
 
-        # JS File: Core.UI.Popup
+        # JS File: var/httpd/htdocs/js/Core.UI.Popup.js
         'If you now leave this page, all open popup windows will be closed, too!' =>
             '지금 이 페이지를 떠나면 열려있는 모든 팝업 창이 닫힙니다.',
         'A popup of this screen is already open. Do you want to close it and load this one instead?' =>
@@ -5831,7 +8385,7 @@ sub Data {
         'Could not open popup window. Please disable any popup blockers for this application.' =>
             '팝업 창을 열 수 없습니다. 이 응용 프로그램에 대한 팝업 차단기를 비활성화하십시오.',
 
-        # JS File: Core.UI.Table.Sort
+        # JS File: var/httpd/htdocs/js/Core.UI.Table.Sort.js
         'Ascending sort applied, ' => '오름차순 정렬 적용,',
         'Descending sort applied, ' => '내림차순 정렬 적용,',
         'No sort applied, ' => '적용된 정렬 없음,',
@@ -5840,13 +8394,13 @@ sub Data {
         'activate to apply a descending sort' => '내림차순 정렬을 적용하려면 활성화',
         'activate to remove the sort' => '활성화하여 정렬을 제거하십시오.',
 
-        # JS File: Core.UI.Table
+        # JS File: var/httpd/htdocs/js/Core.UI.Table.js
         'Remove the filter' => '필터를 제거하십시오.',
 
-        # JS File: Core.UI.TreeSelection
+        # JS File: var/httpd/htdocs/js/Core.UI.TreeSelection.js
         'There are currently no elements available to select from.' => '현재 선택할 수 있는 요소가 없습니다.',
 
-        # JS File: Core.UI
+        # JS File: var/httpd/htdocs/js/Core.UI.js
         'Please only select one file for upload.' => '업로드 할 파일을 하나만 선택하십시오.',
         'Sorry, you can only upload one file here.' => '죄송합니다. 여기에 하나의 파일만 업로드 할 수 있습니다.',
         'Sorry, you can only upload %s files.' => '죄송합니다. %s 파일 만 업로드 할 수 있습니다.',
@@ -5862,20 +8416,20 @@ sub Data {
         'An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator.' =>
             '첨부파일을 삭제할 때 알 수없는 오류가 발생했습니다. 다시 시도하십시오. 오류가 계속되면 시스템 관리자에게 문의하십시오.',
 
-        # JS File: Core.Language.UnitTest
+        # JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
         'yes' => '예',
         'no' => '아니오',
         'This is %s' => '이것은 %s입니다.',
         'Complex %s with %s arguments' => '%s 인수가있는 복합 %s',
 
-        # JS File: OTRSLineChart
+        # JS File: var/httpd/htdocs/js/thirdparty/nvd3-1.7.1/models/OTRSLineChart.js
         'No Data Available.' => '자료 없음.',
 
-        # JS File: OTRSMultiBarChart
+        # JS File: var/httpd/htdocs/js/thirdparty/nvd3-1.7.1/models/OTRSMultiBarChart.js
         'Grouped' => '그룹화 된',
         'Stacked' => '누적된',
 
-        # JS File: OTRSStackedAreaChart
+        # JS File: var/httpd/htdocs/js/thirdparty/nvd3-1.7.1/models/OTRSStackedAreaChart.js
         'Stream' => '흐름',
         'Expanded' => '퍼지는',
 
@@ -5913,7 +8467,6 @@ Thanks for your help!
         '(UserLogin) Firstname Lastname' => '(사용자 로그인) 이름 성',
         '(UserLogin) Lastname Firstname' => '(사용자 로그인) 성 이름',
         '(UserLogin) Lastname, Firstname' => '(UserLogin) 성, 이름',
-        '*** out of office until %s (%s d left) ***' => '*** %s까지 부재중(%s 남음) ***',
         '0 - Disabled' => '0 - 사용 중지됨',
         '1 - Available' => '1 - 사용 가능',
         '1 - Enabled' => '1 - 사용',
@@ -5930,28 +8483,13 @@ Thanks for your help!
         '5 Minutes' => '5분',
         'A TicketWatcher Module.' => 'TicketWatcher 모듈.',
         'A Website' => '웹 사이트',
-        'A list of dynamic fields that are merged into the main ticket during a merge operation. Only dynamic fields that are empty in the main ticket will be set.' =>
-            '병합 작업 중에 주 티켓에 병합되는 동적 필드 목록입니다. 기본 티켓에서 비어있는 동적 필드만 설정됩니다.',
         'A picture' => '사진',
-        'ACL module that allows closing parent tickets only if all its children are already closed ("State" shows which states are not available for the parent ticket until all child tickets are closed).' =>
-            '모든 자식 티켓이 이미 닫힌 경우에만 부모 티켓을 닫을 수있는 ACL 모듈 ( "상태"는 모든 자식 티켓이 닫힐 때까지 부모 티켓에 사용할 수없는 상태를 보여줍니다).',
+        'AJAX functions for notification event transport web service.' =>
+            '',
+        'AJAX interface for the web service dynamic field backends.' => '',
         'Access Control Lists (ACL)' => '액세스 제어 목록 (ACL)',
         'AccountedTime' => 'AccountedTime',
-        'Activates a blinking mechanism of the queue that contains the oldest ticket.' =>
-            '가장 오래된 티켓을 포함하는 큐의 깜박이는 메커니즘을 활성화합니다.',
-        'Activates lost password feature for agents, in the agent interface.' =>
-            '에이전트 인터페이스에서 에이전트에 대해 손실된 암호 기능을 활성화합니다.',
-        'Activates lost password feature for customers.' => '고객을 위해 손실된 암호 기능을 활성화합니다.',
-        'Activates support for customer and customer user groups.' => '고객 및 고객 사용자 그룹에 대한 지원을 활성화합니다.',
-        'Activates the article filter in the zoom view to specify which articles should be shown.' =>
-            '확대 / 축소 보기에서 기사 필터를 활성화하여 표시할 기사를 지정합니다.',
-        'Activates the available themes on the system. Value 1 means active, 0 means inactive.' =>
-            '시스템에서 사용 가능한 테마를 활성화합니다. 값 1은 활성을 의미하고 0은 비활성을 의미합니다.',
-        'Activates the ticket archive system search in the customer interface.' =>
-            '고객 인터페이스에서 티켓 아카이브 시스템 검색을 활성화합니다.',
-        'Activates the ticket archive system to have a faster system by moving some tickets out of the daily scope. To search for these tickets, the archive flag has to be enabled in the ticket search.' =>
-            '일일 범위에서 일부 티켓을 이동하여 티켓 아카이브 시스템이 더 빠른 시스템을 갖도록 활성화합니다. 이 티켓을 검색하려면 티켓 검색에서 아카이브 플래그를 사용 가능하게 설정해야 합니다.',
-        'Activates time accounting.' => '시간 계산을 활성화 합니다.',
+        'Activation of dynamic fields for screens.' => '',
         'ActivityID' => '활동 ID',
         'Add a note to this ticket' => '이 티켓에 메모 추가',
         'Add an inbound phone call to this ticket' => '이 티켓에 인바운드 전화통화 추가',
@@ -5966,19 +8504,11 @@ Thanks for your help!
         'Added subscription for user "%s".' => 'Added subscription for user "%s".',
         'Added system request (%s).' => '시스템 요구 사항을 추가했습니다 (%s).',
         'Added web request from customer.' => '고객의 웹 요청을 추가했습니다.',
-        'Adds a suffix with the actual year and month to the OTRS log file. A logfile for every month will be created.' =>
-            'OTRS 로그 파일에 실제 연도와 월이있는 접미어를 추가합니다. 매월 로그 파일이 생성됩니다.',
-        'Adds customers email addresses to recipients in the ticket compose screen of the agent interface. The customers email address won\'t be added if the article type is email-internal.' =>
-            '상담원 인터페이스의 티켓 작성 화면에서 고객 전자 메일 주소를 받는 사람에게 추가합니다. 기사 유형이 이메일 내부인 경우 고객 이메일 주소는 추가되지 않습니다.',
-        'Adds the one time vacation days for the indicated calendar.' => '표시된 달력에 대해 휴가일을 한 번 추가합니다.',
-        'Adds the one time vacation days.' => '한 번 휴가를 추가합니다.',
-        'Adds the permanent vacation days for the indicated calendar.' =>
-            '지정된 달력에 대한 영구 휴가 일을 추가합니다.',
-        'Adds the permanent vacation days.' => '영구 휴가 일을 추가합니다.',
         'Admin' => '관리자',
         'Admin Area.' => '관리자 영역',
         'Admin Notification' => '관리자 알림',
-        'Admin area navigation for the agent interface.' => '에이전트 인터페이스의 관리 영역 탐색.',
+        'Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect' =>
+            '',
         'Admin modules overview.' => '관리 모듈 개요.',
         'Admin.' => '관리자.',
         'Administration' => '관리',
@@ -5990,35 +8520,9 @@ Thanks for your help!
         'Agent Statistics.' => '에이전트 통계.',
         'Agent User Search' => '에이전트 사용자 검색',
         'Agent User Search.' => '에이전트 사용자 검색.',
-        'Agent interface article notification module to check PGP.' => 'PGP를 확인하는 에이전트 인터페이스 기사 알림 모듈',
-        'Agent interface article notification module to check S/MIME.' =>
-            'S / MIME을 확인하는 에이전트 인터페이스 기사 알림 모듈.',
-        'Agent interface module to access CIC search via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
-            '탐색 인터페이스를 통해 CIC 검색에 액세스하는 에이전트 인터페이스 모듈. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다.',
-        'Agent interface module to access fulltext search via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
-            '탐색 인터페이스를 통해 전체 텍스트 검색에 액세스 할 수있는 에이전트 인터페이스 모듈. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다.',
-        'Agent interface module to access search profiles via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
-            '탐색 인터페이스를 통해 검색 프로파일에 액세스하는 에이전트 인터페이스 모듈. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다.',
-        'Agent interface module to check incoming emails in the Ticket-Zoom-View if the S/MIME-key is available and true.' =>
-            'S / MIME 키가 사용 가능하고 참이면 Ticket-Zoom-View에서 수신 전자 메일을 확인하는 에이전트 인터페이스 모듈.',
-        'Agent interface notification module to see the number of locked tickets. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
-            '잠긴 티켓 수를보기위한 에이전트 인터페이스 알림 모듈. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다.',
-        'Agent interface notification module to see the number of tickets an agent is responsible for. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
-            '에이전트 인터페이스 통지 모듈은 에이전트가 담당하는 티켓 수를 확인합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다.',
-        'Agent interface notification module to see the number of tickets in My Services. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
-            '내 서비스에서 티켓 수를 확인할 수있는 에이전트 인터페이스 알림 모듈 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다.',
-        'Agent interface notification module to see the number of watched tickets. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
-            '감시 된 티켓 수를보기위한 에이전트 인터페이스 알림 모듈. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다.',
-        'AgentTicketZoom widget that displays a table of objects linked to the ticket.' =>
-            '티켓에 연결된 객체 테이블을 표시하는 AgentTicketZoom 위젯입니다.',
-        'AgentTicketZoom widget that displays customer information for the ticket in the side bar.' =>
-            '사이드 바에 티켓에 대한 고객 정보를 표시하는 AgentTicketZoom 위젯.',
-        'AgentTicketZoom widget that displays ticket data in the side bar.' =>
-            '사이드 바에 티켓 데이터를 표시하는 AgentTicketZoom 위젯.',
         'Agents ↔ Groups' => '에이전트 ↔ 그룹',
         'Agents ↔ Roles' => '에이전트 ↔ 역할',
         'All CustomerIDs of a customer user.' => '고객 사용자의 모든 고객 ID.',
-        'All attachments (OTRS Business Solution™)' => '모든 첨부 파일 (OTRS Business Solution ™)',
         'All customer users of a CustomerID' => 'CustomerID의 모든 고객 사용자',
         'All escalated tickets' => '모든 에스컬레이션된 티켓',
         'All new tickets, these tickets have not been worked on yet' => '모든 새로운 티켓이 그 티켓은 아직 작동하지 않았습니다.',
@@ -6026,97 +8530,20 @@ Thanks for your help!
             '열려있는 모든 티켓, 이 티켓들은 이미 작업되었습니다.',
         'All tickets with a reminder set where the reminder date has been reached' =>
             '미리 알림이 있는 모든 티켓은 미리 알림 날짜에 도달했습니다.',
-        'Allows adding notes in the close ticket screen of the agent interface. Can be overwritten by Ticket::Frontend::NeedAccountedTime.' =>
-            '에이전트 인터페이스의 닫기 티켓 화면에 메모를 추가 할 수 있습니다. Ticket :: Frontend :: NeedAccountedTime으로 덮어 쓸 수 있습니다.',
-        'Allows adding notes in the ticket free text screen of the agent interface. Can be overwritten by Ticket::Frontend::NeedAccountedTime.' =>
-            '에이전트 인터페이스의 티켓없는 텍스트 화면에 메모를 추가 할 수 있습니다. Ticket :: Frontend :: NeedAccountedTime으로 덮어 쓸 수 있습니다.',
-        'Allows adding notes in the ticket note screen of the agent interface. Can be overwritten by Ticket::Frontend::NeedAccountedTime.' =>
-            '에이전트 인터페이스의 티켓 메모 화면에 메모를 추가 할 수 있습니다. Ticket :: Frontend :: NeedAccountedTime으로 덮어 쓸 수 있습니다.',
-        'Allows adding notes in the ticket owner screen of a zoomed ticket in the agent interface. Can be overwritten by Ticket::Frontend::NeedAccountedTime.' =>
-            '에이전트 인터페이스에서 확대 된 티켓의 티켓 소유자 화면에 노트를 추가 할 수 있습니다. Ticket :: Frontend :: NeedAccountedTime으로 덮어 쓸 수 있습니다.',
-        'Allows adding notes in the ticket pending screen of a zoomed ticket in the agent interface. Can be overwritten by Ticket::Frontend::NeedAccountedTime.' =>
-            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 보류 화면에 메모를 추가 할 수 있습니다. Ticket :: Frontend :: NeedAccountedTime으로 덮어 쓸 수 있습니다.',
-        'Allows adding notes in the ticket priority screen of a zoomed ticket in the agent interface. Can be overwritten by Ticket::Frontend::NeedAccountedTime.' =>
-            '에이전트 인터페이스에서 확대 된 티켓의 티켓 우선 순위 화면에 노트를 추가 할 수 있습니다. Ticket :: Frontend :: NeedAccountedTime으로 덮어 쓸 수 있습니다.',
-        'Allows adding notes in the ticket responsible screen of the agent interface. Can be overwritten by Ticket::Frontend::NeedAccountedTime.' =>
-            '에이전트 인터페이스의 티켓 책임 화면에 메모를 추가 할 수 있습니다. Ticket :: Frontend :: NeedAccountedTime으로 덮어 쓸 수 있습니다.',
-        'Allows agents to exchange the axis of a stat if they generate one.' =>
-            '에이전트가 통계를 생성할 경우 에이전트가 축을 교환할 수 있습니다.',
-        'Allows agents to generate individual-related stats.' => '상담원이 개인 관련 통계를 생성할 수 있습니다.',
-        'Allows choosing between showing the attachments of a ticket in the browser (inline) or just make them downloadable (attachment).' =>
-            '브라우저에서 티켓의 첨부 파일 표시 (인라인) 또는 다운로드 만 가능 (첨부) 중에서 선택할 수 있습니다.',
-        'Allows choosing the next compose state for customer tickets in the customer interface.' =>
-            '고객 인터페이스에서 고객 티켓에 대한 다음 작성 상태를 선택할 수 있습니다.',
-        'Allows customers to change the ticket priority in the customer interface.' =>
-            '고객이 고객 인터페이스에서 티켓 우선순위를 변경할 수 있습니다.',
-        'Allows customers to set the ticket SLA in the customer interface.' =>
-            '고객이 고객 인터페이스에서 티켓 SLA를 설정할 수 있습니다.',
-        'Allows customers to set the ticket priority in the customer interface.' =>
-            '고객이 고객 인터페이스에서 티켓 우선순위를 설정할 수 있습니다.',
-        'Allows customers to set the ticket queue in the customer interface. If this is not enabled, QueueDefault should be configured.' =>
-            '',
-        'Allows customers to set the ticket service in the customer interface.' =>
-            '고객이 고객 인터페이스에서 티켓 서비스를 설정할 수 있습니다.',
-        'Allows customers to set the ticket type in the customer interface. If this is not enabled, TicketTypeDefault should be configured.' =>
-            '',
-        'Allows default services to be selected also for non existing customers.' =>
-            '기존 고객이 아닌 경우에도 기본 서비스를 선택할 수 있습니다.',
-        'Allows defining services and SLAs for tickets (e. g. email, desktop, network, ...), and escalation attributes for SLAs (if ticket service/SLA feature is enabled).' =>
-            '티켓 (예 : 전자 메일, 데스크톱, 네트워크, ...)에 대한 서비스 및 SLA 및 SLA에 대한 에스컬레이션 특성 (티켓 서비스 / SLA 기능이 활성화 된 경우)을 정의 할 수 있습니다.',
         'Allows extended search conditions in ticket search of the agent interface. With this feature you can search e. g. ticket title with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".' =>
             '에이전트 인터페이스의 티켓 검색에서 확장 된 검색 조건을 허용합니다. 이 기능을 사용하면 e. 지. "(* key1 * && * key2 *)"또는 "(* key1 * || * key2 *)"와 같은 조건의 티켓 제목',
         'Allows extended search conditions in ticket search of the customer interface. With this feature you can search e. g. ticket title with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".' =>
             '고객 인터페이스의 티켓 검색에서 확장 된 검색 조건을 허용합니다. 이 기능을 사용하면 e. 지. "(* key1 * && * key2 *)"또는 "(* key1 * || * key2 *)"와 같은 조건의 티켓 제목을 사용하십시오.',
         'Allows extended search conditions in ticket search of the generic agent interface. With this feature you can search e. g. ticket title with this kind of conditions like "(*key1*&&*key2*)" or "(*key1*||*key2*)".' =>
             '일반 에이전트 인터페이스의 티켓 검색에서 확장 된 검색 조건을 허용합니다. 이 기능을 사용하면 e. 지. "(* key1 * && * key2 *)"또는 "(* key1 * || * key2 *)"와 같은 조건의 티켓 제목을 사용하십시오.',
-        'Allows generic agent to execute custom command line scripts.' =>
-            '',
-        'Allows generic agent to execute custom modules.' => '',
         'Allows having a medium format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             '중간 형식 티켓 개요 (CustomerInfo => 1 - 고객 정보도 표시)를 허용합니다.',
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             '작은 형식의 티켓 개요를 가질 수 있습니다 (CustomerInfo => 1 - 고객 정보 표시).',
-        'Allows invalid agents to generate individual-related stats.' => '잘못된 에이전트가 개인 관련 통계를 생성할 수 있습니다.',
-        'Allows the administrators to login as other customers, via the customer user administration panel.' =>
-            '관리자가 고객 사용자 관리 패널을 통해 다른 고객으로 로그인 할 수 있습니다.',
-        'Allows the administrators to login as other users, via the users administration panel.' =>
-            '관리자가 사용자 관리 패널을 통해 다른 사용자로 로그인 할 수있게 합니다.',
-        'Allows to save current work as draft in the close ticket screen of the agent interface.' =>
-            '에이전트 인터페이스의 닫기 티켓 화면에서 현재 작업을 초안으로 저장할 수 있습니다.',
-        'Allows to save current work as draft in the email outbound screen of the agent interface.' =>
-            '에이전트 인터페이스의 전자 메일 아웃바운드 화면에 현재 작업 내용을 초안으로 저장할 수 있습니다.',
-        'Allows to save current work as draft in the ticket compose screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 작성 화면에서 현재 작업을 초안으로 저장할 수 있습니다.',
-        'Allows to save current work as draft in the ticket forward screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 전달 화면에서 현재 작업을 초안으로 저장할 수 있습니다.',
-        'Allows to save current work as draft in the ticket free text screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 없는 텍스트 화면에 현재 작업을 초안으로 저장할 수 있습니다.',
-        'Allows to save current work as draft in the ticket move screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 이동 화면에서 현재 작업을 초안으로 저장할 수 있습니다.',
-        'Allows to save current work as draft in the ticket note screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 메모 화면에서 현재 작업을 초안으로 저장할 수 있습니다.',
-        'Allows to save current work as draft in the ticket owner screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 소유자 화면에 현재 작업을 초안으로 저장할 수 있습니다.',
-        'Allows to save current work as draft in the ticket pending screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 보류 화면에 현재 작업을 초안으로 저장할 수 있습니다.',
-        'Allows to save current work as draft in the ticket phone inbound screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 인바운드 인바운드 화면에 현재 작업을 초안으로 저장할 수 있습니다.',
-        'Allows to save current work as draft in the ticket phone outbound screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 폰 아웃바운드 화면에 현재 작업을 초안으로 저장할 수 있습니다.',
-        'Allows to save current work as draft in the ticket priority screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 우선 순위 화면에 현재 작업을 초안으로 저장할 수 있습니다.',
-        'Allows to save current work as draft in the ticket responsible screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 책임 화면에 현재 작업을 초안으로 저장할 수 있습니다.',
-        'Allows to set a new ticket state in the move ticket screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 이동 화면에서 새 티켓 상태를 설정할 수 있습니다.',
         'Always show RichText if available' => '가능한 경우 리치 텍스트 표시',
         'Answer' => '응답',
         'Appointment Calendar overview page.' => '약속 일정 개요 페이지.',
         'Appointment Notifications' => '약속 알림',
-        'Appointment calendar event module that prepares notification entries for appointments.' =>
-            '약속에 대한 알림 항목을 준비하는 약속 일정 이벤트 모듈입니다.',
-        'Appointment calendar event module that updates the ticket with data from ticket appointment.' =>
-            '티켓 약속의 데이터로 티켓을 업데이트 하는 약속 캘린더 이벤트 모듈입니다.',
         'Appointment edit screen.' => '약속 수정 화면',
         'Appointment list' => '약속 목록',
         'Appointment list.' => '약속 목록',
@@ -6125,42 +8552,12 @@ Thanks for your help!
         'Arabic (Saudi Arabia)' => '아랍어 (사우디 아라비아)',
         'ArticleTree' => 'ArticleTree',
         'Attachment Name' => '첨부명',
-        'Automated line break in text messages after x number of chars.' =>
-            'X 문자 수 후에 문자 메시지의 자동 줄바꿈',
-        'Automatically change the state of a ticket with an invalid owner once it is unlocked. Maps from a state type to a new ticket state.' =>
-            '유효하지 않은 소유자가 잠금 해제된 티켓의 상태를 자동으로 변경합니다. 상태 유형에서 새 티켓 상태로 매핑합니다.',
-        'Automatically lock and set owner to current Agent after opening the move ticket screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 이동 화면을 연 다음 자동으로 현재 에이전트를 잠그고 소유자를 설정합니다.',
-        'Automatically lock and set owner to current Agent after selecting for an Bulk Action.' =>
-            '대량 작업을 선택한 후 자동으로 소유자를 현재 에이전트로 잠그고 설정합니다.',
-        'Automatically sets the owner of a ticket as the responsible for it (if ticket responsible feature is enabled). This will only work by manually actions of the logged in user. It does not work for automated actions e.g. GenericAgent, Postmaster and GenericInterface.' =>
-            '티켓의 소유자를 자동으로 책임자로 설정합니다 (티켓 책임 기능이 활성화 된 경우). 이것은 로그인 한 사용자의 수동 작업으로 만 작동합니다. 자동 작업에는 작동하지 않습니다. GenericAgent, 전자 메일 관리자 및 GenericInterface.',
-        'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>
-            '첫 번째 소유자가 업데이트된 후 티켓의 책임을 자동으로 설정합니다 (티켓이 아직 설정되지 않은 경우).',
         'Avatar' => '화신',
-        'Balanced white skin by Felix Niklas (slim version).' => 'Felix Niklas (슬림 버전)의 균형 잡힌 하얀 피부.',
-        'Balanced white skin by Felix Niklas.' => 'Felix Niklas의 균형 잡힌 하얀 피부.',
         'Based on global RichText setting' => '전역 서식있는 텍스트 설정에 기반',
-        'Basic fulltext index settings. Execute "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild" in order to generate a new index.' =>
-            '',
-        'Blocks all the incoming emails that do not have a valid ticket number in subject with From: @example.com address.' =>
-            '보낸 사람 : @ example.com 주소로 유효한 티켓 번호가없는 수신 전자 메일을 모두 차단합니다.',
         'Bounced to "%s".' => 'Bounced to "%s".',
         'Bulgarian' => '불가리아 사람',
         'Bulk Action' => '일괄 작업',
-        'CMD example setup. Ignores emails where external CMD returns some output on STDOUT (email will be piped into STDIN of some.bin).' =>
-            'CMD 예제 설정. 외부 CMD가 STDOUT에서 일부 출력을 반환하는 전자 메일을 무시합니다 (전자 메일은 some.bin의 STDIN으로 파이프됩니다).',
         'CSV Separator' => 'CSV 구분 기호',
-        'Cache time in seconds for agent authentication in the GenericInterface.' =>
-            'GenericInterface에서 에이전트 인증을위한 캐시 시간.',
-        'Cache time in seconds for customer authentication in the GenericInterface.' =>
-            'GenericInterface에서 고객 인증을위한 캐시 시간 초. ',
-        'Cache time in seconds for the DB ACL backend.' => 'DB ACL 백엔드의 캐시 시간 초.',
-        'Cache time in seconds for the DB process backend.' => 'DB 프로세스 백엔드의 캐시 시간 초. ',
-        'Cache time in seconds for the SSL certificate attributes.' => 'SSL 인증서 속성의 캐시 시간 초.',
-        'Cache time in seconds for the ticket process navigation bar output module.' =>
-            '티켓 프로세스 탐색 모음 출력 모듈의 캐시 시간 초.',
-        'Cache time in seconds for the web service config backend.' => '웹 서비스 설정 백엔드의 캐시 시간 초.',
         'Calendar manage screen.' => '캘린더 관리 화면.',
         'Catalan' => '카탈로니아 사람',
         'Change password' => '비밀번호 변경',
@@ -6185,23 +8582,8 @@ Thanks for your help!
         'Changed state from "%s" to "%s".' => '상태를 "%s"에서 "%s"로 변경했습니다.',
         'Changed title from "%s" to "%s".' => '제목을 "%s"에서 "%s"로 변경했습니다.',
         'Changed type from "%s" (%s) to "%s" (%s).' => '유형을 "%s"(%s)에서 "%s"(%s)로 변경했습니다.',
-        'Changes the owner of tickets to everyone (useful for ASP). Normally only agent with rw permissions in the queue of the ticket will be shown.' =>
-            '모든 사람에게 티켓 소유자를 변경합니다 (ASP에 유용함). 일반적으로 티켓 대기열에 rw 권한이있는 에이전트 만 표시됩니다.',
         'Chat communication channel.' => '채팅 통신 채널.',
         'Checkbox' => '체크 박스',
-        'Checks for articles that needs to be updated in the article search index.' =>
-            '기사 검색 색인에서 업데이트 해야하는 기사를 확인합니다.',
-        'Checks for communication log entries to be deleted.' => '삭제할 통신 로그 항목을 확인합니다.',
-        'Checks for queued outgoing emails to be sent.' => '보낸 대기중인 보내는 전자 메일을 확인합니다.',
-        'Checks if an E-Mail is a followup to an existing ticket by searching the subject for a valid ticket number.' =>
-            '유효한 티켓 번호를 검색하여 전자 메일이 기존 티켓의 후속 조치인지 확인합니다.',
-        'Checks if an email is a follow-up to an existing ticket with external ticket number which can be found by ExternalTicketNumberRecognition filter module.' =>
-            '',
-        'Checks the SystemID in ticket number detection for follow-ups. If not enabled, SystemID will be changed after using the system.' =>
-            '후속 조치를 위해 티켓 번호 검색에서 SystemID를 확인합니다. 활성화되지 않은 경우 시스템을 사용한 후 SystemID가 변경됩니다.',
-        'Checks the availability of OTRS Business Solution™ for this system.' =>
-            '이 시스템에 대한 OTRS Business Solution ™의 가용성을 확인합니다.',
-        'Checks the entitlement status of OTRS Business Solution™.' => 'OTRS Business Solution ™의 자격 상태를 확인합니다.',
         'Child' => '어린이',
         'Chinese (Simplified)' => '중국어(간체)',
         'Chinese (Traditional)' => '중국(전통)',
@@ -6216,27 +8598,7 @@ Thanks for your help!
         'Closed tickets (customer user)' => '폐쇄된 티켓 (고객 사용자)',
         'Closed tickets (customer)' => '정기권(고객)',
         'Cloud Services' => '클라우드 서비스',
-        'Cloud service admin module registration for the transport layer.' =>
-            '전송 계층에 대한 클라우드 서비스 관리 모듈 등록',
-        'Collect support data for asynchronous plug-in modules.' => '비동기 플러그인 모듈에 대한 지원 데이터를 수집하십시오.',
         'Column ticket filters for Ticket Overviews type "Small".' => '티켓 개요에 대한 열 티켓 필터는 "Small"입니다.',
-        'Columns that can be filtered in the escalation view of the agent interface. Note: Only Ticket attributes, Dynamic Fields (DynamicField_NameX) and Customer attributes (e.g. CustomerUserPhone, CustomerCompanyName, ...) are allowed.' =>
-            '에이전트 인터페이스의 에스컬레이션보기에서 필터링 할 수있는 열. 참고 : 티켓 속성, 동적 필드 (DynamicField_NameX) 및 고객 속성 (예 : CustomerUserPhone, CustomerCompanyName, ...) 만 허용됩니다.',
-        'Columns that can be filtered in the locked view of the agent interface. Note: Only Ticket attributes, Dynamic Fields (DynamicField_NameX) and Customer attributes (e.g. CustomerUserPhone, CustomerCompanyName, ...) are allowed.' =>
-            '에이전트 인터페이스의 잠긴보기에서 필터링 할 수있는 열입니다. 참고 : 티켓 속성, 동적 필드 (DynamicField_NameX) 및 고객 속성 (예 : CustomerUserPhone, CustomerCompanyName, ...) 만 허용됩니다.',
-        'Columns that can be filtered in the queue view of the agent interface. Note: Only Ticket attributes, Dynamic Fields (DynamicField_NameX) and Customer attributes (e.g. CustomerUserPhone, CustomerCompanyName, ...) are allowed.' =>
-            '에이전트 인터페이스의 대기열보기에서 필터링 할 수있는 열입니다. 참고 : 티켓 속성, 동적 필드 (DynamicField_NameX) 및 고객 속성 (예 : CustomerUserPhone, CustomerCompanyName, ...) 만 허용됩니다.',
-        'Columns that can be filtered in the responsible view of the agent interface. Note: Only Ticket attributes, Dynamic Fields (DynamicField_NameX) and Customer attributes (e.g. CustomerUserPhone, CustomerCompanyName, ...) are allowed.' =>
-            '에이전트 인터페이스의 담당 뷰에서 필터링 할 수있는 열입니다. 참고 : 티켓 속성, 동적 필드 (DynamicField_NameX) 및 고객 속성 (예 : CustomerUserPhone, CustomerCompanyName, ...) 만 허용됩니다.',
-        'Columns that can be filtered in the service view of the agent interface. Note: Only Ticket attributes, Dynamic Fields (DynamicField_NameX) and Customer attributes (e.g. CustomerUserPhone, CustomerCompanyName, ...) are allowed.' =>
-            '에이전트 인터페이스의 서비스보기에서 필터링 할 수있는 열입니다. 참고 : 티켓 속성, 동적 필드 (DynamicField_NameX) 및 고객 속성 (예 : CustomerUserPhone, CustomerCompanyName, ...) 만 허용됩니다.',
-        'Columns that can be filtered in the status view of the agent interface. Note: Only Ticket attributes, Dynamic Fields (DynamicField_NameX) and Customer attributes (e.g. CustomerUserPhone, CustomerCompanyName, ...) are allowed.' =>
-            '에이전트 인터페이스의 상태보기에서 필터링 할 수있는 열입니다. 참고 : 티켓 속성, 동적 필드 (DynamicField_NameX) 및 고객 속성 (예 : CustomerUserPhone, CustomerCompanyName, ...) 만 허용됩니다.',
-        'Columns that can be filtered in the ticket search result view of the agent interface. Note: Only Ticket attributes, Dynamic Fields (DynamicField_NameX) and Customer attributes (e.g. CustomerUserPhone, CustomerCompanyName, ...) are allowed.' =>
-            '에이전트 인터페이스의 티켓 검색 결과보기에서 필터링 할 수있는 열입니다. 참고 : 티켓 속성, 동적 필드 (DynamicField_NameX) 및 고객 속성 (예 : CustomerUserPhone, CustomerCompanyName, ...) 만 허용됩니다.',
-        'Columns that can be filtered in the watch view of the agent interface. Note: Only Ticket attributes, Dynamic Fields (DynamicField_NameX) and Customer attributes (e.g. CustomerUserPhone, CustomerCompanyName, ...) are allowed.' =>
-            '에이전트 인터페이스의보기보기에서 필터링 할 수있는 열입니다. 참고 : 티켓 속성, 동적 필드 (DynamicField_NameX) 및 고객 속성 (예 : CustomerUserPhone, CustomerCompanyName, ...) 만 허용됩니다.',
-        'Comment for new history entries in the customer interface.' => '고객 인터페이스의 새로운 기록 항목에 대한 설명.',
         'Comment2' => '의견 2',
         'Communication' => '통신',
         'Communication & Notifications' => '통신 및 알림',
@@ -6246,43 +8608,19 @@ Thanks for your help!
         'CommunicationLog Overview Limit' => 'CommunicationLog 개요 제한',
         'Company Status' => '회사 현황',
         'Company Tickets.' => '회사 티켓.',
-        'Company name which will be included in outgoing emails as an X-Header.' =>
-            '발신 이메일에 X-Header로 포함될 회사 이름.',
         'Compat module for AgentZoom to AgentTicketZoom.' => 'AgentZoom과 AgentTicketZoom의 호환성 모듈.',
         'Complex' => '복잡한',
         'Compose' => '조립하다',
         'Configure Processes.' => '프로세스 구성.',
         'Configure and manage ACLs.' => 'ACL 구성 및 관리',
-        'Configure any additional readonly mirror databases that you want to use.' =>
-            '사용할 추가 읽기 전용 미러 데이터베이스를 구성하십시오.',
         'Configure sending of support data to OTRS Group for improved support.' =>
             '향상된 지원을 위해 OTRS 그룹에 지원 데이터를 보내도록 구성합니다.',
         'Configure which screen should be shown after a new ticket has been created.' =>
             '새 티켓이 작성된 후 표시할 화면을 구성하십시오.',
-        'Configure your own log text for PGP.' => 'PGP에 대한 자체 로그 텍스트를 구성하십시오.',
-        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.otrs.com/doc/), chapter "Ticket Event Module".' =>
-            '기본 TicketDynamicField 설정을 구성합니다. "Name"은 사용할 동적 필드를 정의하고, "Value"는 설정할 데이터이고 "Event"는 트리거 이벤트를 정의합니다. 개발자 설명서 (https://doc.otrs.com/doc/), "Ticket Event Module"장을 확인하십시오.',
-        'Controls how to display the ticket history entries as readable values.' =>
-            '티켓 기록 항목을 읽을 수 있는 값으로 표시하는 방법을 제어합니다.',
-        'Controls if CustomerID is automatically copied from the sender address for unknown customers.' =>
-            '알 수없는 고객의 보낸 사람 주소에서 CustomerID가 자동으로 복사되는지 여부를 제어합니다.',
-        'Controls if CustomerID is read-only in the agent interface.' => 'CustomerID가 에이전트 인터페이스에서 읽기 전용인지 여부를 제어합니다.',
-        'Controls if customers have the ability to sort their tickets.' =>
-            '고객이 티켓을 정렬할 수 있는지 여부를 제어합니다.',
-        'Controls if more than one from entry can be set in the new phone ticket in the agent interface.' =>
-            '항목에서 둘 이상이 상담원 인터페이스의 새 전화 티켓에 설정될 수 있는지 여부를 제어합니다.',
-        'Controls if the admin is allowed to import a saved system configuration in SysConfig.' =>
-            '관리자가 SysConfig에서 저장된 시스템 구성을 가져올 수 있는지 여부를 제어합니다.',
-        'Controls if the admin is allowed to make changes to the database via AdminSelectBox.' =>
-            '관리자가 AdminSelectBox를 통해 데이터베이스를 변경할 수 있는지 여부를 제어합니다.',
-        'Controls if the autocomplete field will be used for the customer ID selection in the AdminCustomerUser interface.' =>
-            '자동 완성 필드가 AdminCustomerUser 인터페이스의 고객 ID 선택에 사용되는지 여부를 제어합니다.',
-        'Controls if the ticket and article seen flags are removed when a ticket is archived.' =>
-            '티켓을 보관할 때 티켓 및 집필 플래그가 제거되는지 여부를 제어합니다.',
-        'Converts HTML mails into text messages.' => 'HTML 메일을 텍스트 메시지로 변환합니다.',
         'Create New process ticket.' => '새 프로세스 티켓을 만듭니다.',
         'Create Ticket' => '티켓 만들기',
         'Create a new calendar appointment linked to this ticket' => '이 티켓에 연결된 새 일정 약속을 만듭니다.',
+        'Create a unit test file' => '',
         'Create and manage Service Level Agreements (SLAs).' => 'SLA (Service Level Agreements) 작성 및 관리',
         'Create and manage agents.' => '에이전트 생성 및 관리.',
         'Create and manage appointment notifications.' => '약속 알림을 작성하고 관리하십시오.',
@@ -6314,11 +8652,12 @@ Thanks for your help!
         'Create tickets.' => '티켓을 만드십시오.',
         'Created ticket [%s] in "%s" with priority "%s" and state "%s".' =>
             '티켓 [%s] 생성 : "%s", 우선 순위 -"%s" , 상태 -"%s"',
+        'Creates a unit test file for this ticket and sends it to Znuny.' =>
+            '',
+        'Creates a unit test file for this ticket.' => '',
         'Croatian' => '크로아티아 사람',
         'Custom RSS Feed' => '사용자 정의 RSS 피드',
         'Custom RSS feed.' => '사용자 정의 RSS 피드.',
-        'Custom text for the page shown to customers that have no tickets yet (if you need those text translated add them to a custom translation module).' =>
-            '티켓이 없는 고객에게 표시되는 페이지의 사용자 정의 텍스트(번역된 텍스트가 필요한 경우 사용자 정의 번역 모듈에 추가).',
         'Customer Administration' => '고객 관리',
         'Customer Companies' => '고객사',
         'Customer IDs' => '고객 ID',
@@ -6331,13 +8670,10 @@ Thanks for your help!
         'Customer User Information Center Search.' => '고객 사용자 정보 센터 검색',
         'Customer User Information Center search.' => '고객 사용자 정보 센터 검색',
         'Customer User Information Center.' => '고객 사용자 정보 센터',
+        'Customer User-Customer Relations' => '',
         'Customer Users ↔ Customers' => '고객 사용자 ↔ 고객',
         'Customer Users ↔ Groups' => '고객 사용자 ↔ 그룹',
         'Customer Users ↔ Services' => '고객 사용자 ↔ 서비스',
-        'Customer item (icon) which shows the closed tickets of this customer as info block. Setting CustomerUserLogin to 1 searches for tickets based on login name rather than CustomerID.' =>
-            '이 고객의 닫힌 티켓을 정보 블록으로 표시하는 고객 아이템 (아이콘). CustomerUserLogin을 1로 설정하면 CustomerID가 아닌 로그인 이름을 기반으로하는 티켓이 검색됩니다.',
-        'Customer item (icon) which shows the open tickets of this customer as info block. Setting CustomerUserLogin to 1 searches for tickets based on login name rather than CustomerID.' =>
-            '고객의 오픈 티켓을 정보 블록으로 보여주는 고객 아이템 (아이콘). CustomerUserLogin을 1로 설정하면 CustomerID가 아닌 로그인 이름을 기반으로하는 티켓이 검색됩니다.',
         'Customer preferences.' => '고객 환경설정',
         'Customer ticket overview' => '고객 티켓 개요',
         'Customer ticket search.' => '고객 티켓 검색',
@@ -6347,832 +8683,30 @@ Thanks for your help!
         'CustomerName' => '고객 이름',
         'CustomerUser' => '고객사용자',
         'Customers ↔ Groups' => '고객 ↔ 그룹',
-        'Customizable stop words for fulltext index. These words will be removed from the search index.' =>
-            '전체 텍스트 인덱스에 대한 사용자 지정 가능한 중지 단어. 이 단어는 검색 색인에서 제거됩니다.',
         'Czech' => '체코',
         'Danish' => '덴마크어',
         'Dashboard overview.' => '현황판 개요',
-        'Data used to export the search result in CSV format.' => '검색 결과를 CSV 형식으로 내보내는데 사용되는 데이터입니다.',
         'Date / Time' => '날짜 / 시간',
         'Default (Slim)' => '기본값 (슬림)',
-        'Default ACL values for ticket actions.' => '티켓 조치에 대한 기본 ACL 값.',
-        'Default ProcessManagement entity prefixes for entity IDs that are automatically generated.' =>
-            '자동으로 생성되는 엔티티 ID에 대한 기본 ProcessManagement 엔티티 접두사입니다.',
         'Default agent name' => '',
-        'Default data to use on attribute for ticket search screen. Example: "TicketCreateTimePointFormat=year;TicketCreateTimePointStart=Last;TicketCreateTimePoint=2;".' =>
-            '티켓 검색 화면의 속성에 사용할 기본 데이터입니다. 예 : "TicketCreateTimePointFormat = year; TicketCreateTimePointStart = 마지막; TicketCreateTimePoint = 2;".',
-        'Default data to use on attribute for ticket search screen. Example: "TicketCreateTimeStartYear=2010;TicketCreateTimeStartMonth=10;TicketCreateTimeStartDay=4;TicketCreateTimeStopYear=2010;TicketCreateTimeStopMonth=11;TicketCreateTimeStopDay=3;".' =>
-            '티켓 검색 화면의 속성에 사용할 기본 데이터입니다. 예 : "TicketCreateTimeStartYear = 2010, TicketCreateTimeStartMonth = 10, TicketCreateTimeStopDay = 4, TicketCreateTimeStopYear = 2010, TicketCreateTimeStopMonth = 11, TicketCreateTimeStopDay = 3; ',
-        'Default display type for recipient (To,Cc) names in AgentTicketZoom and CustomerTicketZoom.' =>
-            'AgentTicketZoom 및 CustomerTicketZoom의받는 사람 (받는 사람, 참조) 이름의 기본 표시 유형입니다.',
-        'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
-            'AgentTicketZoom 및 CustomerTicketZoom의 보낸 사람 (보낸 사람) 이름의 기본 표시 유형입니다.',
-        'Default loop protection module.' => '기본 루프 보호 모듈.',
-        'Default queue ID used by the system in the agent interface.' => '에이전트 인터페이스에서 시스템이 사용하는 기본 대기열 ID입니다.',
-        'Default skin for the agent interface (slim version).' => '에이전트 인터페이스 (슬림버전)의 기본 스킨입니다.',
-        'Default skin for the agent interface.' => '에이전트 인터페이스의 기본 스킨입니다.',
-        'Default skin for the customer interface.' => '고객 인터페이스의 기본 스킨입니다.',
-        'Default ticket ID used by the system in the agent interface.' =>
-            '에이전트 인터페이스에서 시스템이 사용하는 기본 티켓 ID 입니다.',
-        'Default ticket ID used by the system in the customer interface.' =>
-            '고객 인터페이스에서 시스템이 사용하는 기본 티켓 ID입니다.',
         'Default value for NameX' => 'NameX의 기본값',
-        'Define Actions where a settings button is available in the linked objects widget (LinkObject::ViewMode = "complex"). Please note that these Actions must have registered the following JS and CSS files: Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js.' =>
-            '링크 객체 위젯에서 설정 버튼을 사용할 수있는 액션 정의 (LinkObject :: ViewMode = "complex"). 이러한 작업은 다음 JS 및 CSS 파일을 등록해야합니다. Core.AllocationList.css, Core.UI.AllocationList.js, Core.UI.Table.Sort.js, Core.Agent.TableFilters.js.',
-        'Define a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
-            '정의 된 문자열 뒤에 링크를 추가하기 위해 html 출력을위한 필터를 정의하십시오. Image 요소는 두 가지 입력 종류를 허용합니다. 한 번에 이미지의 이름 (예 : faq.png). 이 경우 OTRS 이미지 경로가 사용됩니다. 두 번째 가능성은 링크를 이미지에 삽입하는 것입니다.',
-        'Define a mapping between variables of the customer user data (keys) and dynamic fields of a ticket (values). The purpose is to store customer user data in ticket dynamic fields. The dynamic fields must be present in the system and should be enabled for AgentTicketFreeText, so that they can be set/updated manually by the agent. They mustn\'t be enabled for AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer. If they were, they would have precedence over the automatically set values. To use this mapping, you have to also activate the Ticket::EventModulePost###4100-DynamicFieldFromCustomerUser setting.' =>
-            '고객 사용자 데이터 (키)의 변수와 티켓의 동적 필드 (값) 간의 매핑을 정의하십시오. 그 목적은 티켓 동적 필드에 고객 사용자 데이터를 저장하는 것입니다. 동적 필드는 시스템에 있어야하며 에이전트에서 수동으로 설정하거나 업데이트 할 수 있도록 AgentTicketFreeText에 대해 활성화해야합니다. AgentTicketPhone, AgentTicketEmail 및 AgentTicketCustomer에는 사용할 수 없습니다. 그럴 경우 자동으로 설정된 값보다 우선합니다. 이 매핑을 사용하려면 Ticket :: EventModulePost ### 4100-DynamicFieldFromCustomerUser 설정을 활성화해야합니다.',
-        'Define dynamic field name for end time. This field has to be manually added to the system as Ticket: "Date / Time" and must be activated in ticket creation screens and/or in any other ticket action screens.' =>
-            '종료 시간의 동적 필드 이름을 정의하십시오. 이 필드는 티켓 : "날짜 / 시간"으로 시스템에 수동으로 추가되어야하며 티켓 생성 화면 및 / 또는 기타 티켓 동작 화면에서 활성화해야합니다.',
-        'Define dynamic field name for start time. This field has to be manually added to the system as Ticket: "Date / Time" and must be activated in ticket creation screens and/or in any other ticket action screens.' =>
-            '시작 시간의 동적 필드 이름을 정의하십시오. 이 필드는 티켓 : "날짜 / 시간"으로 시스템에 수동으로 추가되어야하며 티켓 생성 화면 및 / 또는 기타 티켓 동작 화면에서 활성화해야합니다.',
-        'Define the max depth of queues.' => '대기열의 최대 깊이를 정의하십시오.',
         'Define the queue comment 2.' => '큐 설명 정의 2.',
         'Define the service comment 2.' => '서비스 주석 정의2.',
         'Define the sla comment 2.' => 'sla 주석 정의 2.',
-        'Define the start day of the week for the date picker for the indicated calendar.' =>
-            '표시된 달력의 날짜 선택 도구에 대한 시작 요일을 정의하십시오.',
-        'Define the start day of the week for the date picker.' => '날짜 선택 도구의 시작 요일을 정의하십시오.',
-        'Define which avatar default image should be used for the article view if no gravatar is assigned to the mail address. Check https://gravatar.com/site/implement/images/ for further information.' =>
-            '',
-        'Define which avatar default image should be used for the current agent if no gravatar is assigned to the mail address of the agent. Check https://gravatar.com/site/implement/images/ for further information.' =>
-            '',
-        'Define which avatar engine should be used for the agent avatar on the header and the sender images in AgentTicketZoom. If \'None\' is selected, initials will be displayed instead. Please note that selecting anything other than \'None\' will transfer the encrypted email address of the particular user to an external service.' =>
-            '에이전트 아바타에 사용할 아바타 엔진과 AgentTicketZoom의 보낸 사람 이미지를 정의하십시오. \'없음\'을 선택하면 대신 이니셜이 표시됩니다. \'없음\'이외의 다른 것을 선택하면 특정 사용자의 암호화 된 이메일 주소가 외부 서비스로 전송됩니다.',
-        'Define which columns are shown in the linked appointment widget (LinkObject::ViewMode = "complex"). Possible settings: 0 = Disabled, 1 = Available, 2 = Enabled by default.' =>
-            '연결된 약속 위젯에 표시 할 열을 정의하십시오 (LinkObject :: ViewMode = "complex"). 가능한 설정 : 0 = 사용 안 함, 1 = 사용 가능, 2 = 기본적으로 사용함.',
-        'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
-            '연결된 티켓 위젯에 표시 할 열을 정의하십시오 (LinkObject :: ViewMode = "complex"). 참고 : Ticket 속성과 Dynamic Fields (DynamicField_NameX) 만 DefaultColumn에 허용됩니다.',
-        'Defines a customer item, which generates a LinkedIn icon at the end of a customer info block.' =>
-            '고객 정보 블록의 끝에 LinkedIn 아이콘을 생성하는 고객 항목을 정의합니다.',
-        'Defines a customer item, which generates a XING icon at the end of a customer info block.' =>
-            '고객 정보 블록의 끝에 XING 아이콘을 생성하는 고객 항목을 정의합니다.',
-        'Defines a customer item, which generates a google icon at the end of a customer info block.' =>
-            '고객 정보 블록의 끝에 Google 아이콘을 생성하는 고객 항목을 정의합니다.',
-        'Defines a customer item, which generates a google maps icon at the end of a customer info block.' =>
-            '고객 정보 블록의 끝에 Google지도 아이콘을 생성하는 고객 항목을 정의합니다.',
-        'Defines a filter for html output to add links behind CVE numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
-            'CVE 번호 뒤에 링크를 추가하는 html 출력을위한 필터를 정의합니다. Image 요소는 두 가지 입력 종류를 허용합니다. 한 번에 이미지의 이름 (예 : faq.png). 이 경우 OTRS 이미지 경로가 사용됩니다. 두 번째 가능성은 링크를 이미지에 삽입하는 것입니다.',
-        'Defines a filter for html output to add links behind MSBulletin numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
-            'MSBulletin 번호 뒤에 링크를 추가하기 위해 html 출력을위한 필터를 정의합니다. Image 요소는 두 가지 입력 종류를 허용합니다. 한 번에 이미지의 이름 (예 : faq.png). 이 경우 OTRS 이미지 경로가 사용됩니다. 두 번째 가능성은 링크를 이미지에 삽입하는 것입니다.',
-        'Defines a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
-            '정의 된 문자열 뒤에 링크를 추가하는 html 출력을위한 필터를 정의합니다. Image 요소는 두 가지 입력 종류를 허용합니다. 한 번에 이미지의 이름 (예 : faq.png). 이 경우 OTRS 이미지 경로가 사용됩니다. 두 번째 가능성은 링크를 이미지에 삽입하는 것입니다.',
-        'Defines a filter for html output to add links behind bugtraq numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
-            'bugtraq 번호 뒤에 링크를 추가하기위한 html 출력을위한 필터를 정의합니다. Image 요소는 두 가지 입력 종류를 허용합니다. 한 번에 이미지의 이름 (예 : faq.png). 이 경우 OTRS 이미지 경로가 사용됩니다. 두 번째 가능성은 링크를 이미지에 삽입하는 것입니다.',
-        'Defines a filter to collect CVE numbers from article texts in AgentTicketZoom. The results will be displayed in a meta box next to the article. Fill in URLPreview if you would like to see a preview when moving your mouse cursor above the link element. This could be the same URL as in URL, but also an alternate one. Please note that some websites deny being displayed within an iframe (e.g. Google) and thus won\'t work with the preview mode.' =>
-            'AgentTicketZoom의 기사 텍스트에서 CVE 번호를 수집하는 필터를 정의합니다. 결과는 기사 옆의 메타 상자에 표시됩니다. 링크 요소 위로 마우스 커서를 이동할 때 미리보기를 보려면 URLPreview를 채 웁니다. URL과 동일한 URL 일 수도 있지만 대체 URL 일 수도 있습니다. 일부 웹 사이트는 iframe (예 : Google)에 표시되지 않으므로 미리보기 모드에서는 작동하지 않습니다.',
-        'Defines a filter to process the text in the articles, in order to highlight predefined keywords.' =>
-            '미리 정의된 키워드를 강조 표시하기 위해 기사의 텍스트를 처리하는 필터를 정의합니다.',
-        'Defines a permission context for customer to group assignment.' =>
-            '고객 대 그룹 할당에 대한 사용 권한 컨텍스트를 정의합니다.',
-        'Defines a regular expression that excludes some addresses from the syntax check (if "CheckEmailAddresses" is set to "Yes"). Please enter a regex in this field for email addresses, that aren\'t syntactically valid, but are necessary for the system (i.e. "root@localhost").' =>
-            '구문 검사에서 일부 주소를 제외하는 정규 표현식을 정의합니다 ( "CheckEmailAddresses"가 "Yes"로 설정된 경우). 문법적으로 유효하지는 않지만 시스템에 필요한 전자 메일 주소 (예 : "root @ localhost")는이 필드에 정규식을 입력하십시오.',
-        'Defines a regular expression that filters all email addresses that should not be used in the application.' =>
-            '응용 프로그램에서 사용해서는 안되는 모든 전자 메일 주소를 필터링하는 정규식을 정의합니다.',
-        'Defines a sleep time in microseconds between tickets while they are been processed by a job.' =>
-            '작업에 의해 처리된 티켓 사이의 슬립시간을 정의합니다. 마이크로 초',
-        'Defines a useful module to load specific user options or to display news.' =>
-            '특정 사용자 옵션을 로드하거나 뉴스를 표시하는데 유용한 모듈을 정의합니다.',
-        'Defines all the X-headers that should be scanned.' => '검사해야할 모든 X- 헤더를 정의합니다.',
-        'Defines all the languages that are available to the application. Specify only English names of languages here.' =>
-            '응용 프로그램에서 사용할 수 있는 모든 언어를 정의합니다. 여기에 영어의 영어이름만 지정하십시오.',
-        'Defines all the languages that are available to the application. Specify only native names of languages here.' =>
-            '응용 프로그램에서 사용할 수있는 모든 언어를 정의합니다. 여기에는 언어의 고유이름만 지정하십시오.',
-        'Defines all the parameters for the RefreshTime object in the customer preferences of the customer interface.' =>
-            '고객 인터페이스의 고객 환경 설정에서 RefreshTime 객체의 모든 매개 변수를 정의합니다.',
-        'Defines all the parameters for the ShownTickets object in the customer preferences of the customer interface.' =>
-            '고객 인터페이스의 고객 기본 설정에서 ShownTickets 객체의 모든 매개 변수를 정의합니다.',
-        'Defines all the parameters for this item in the customer preferences.' =>
-            '고객 환경 설정에서 이 항목의 모든 매개 변수를 정의합니다.',
-        'Defines all the parameters for this item in the customer preferences. \'PasswordRegExp\' allows to match passwords against a regular expression. Define the minimum number of characters using \'PasswordMinSize\'. Define if at least 2 lowercase and 2 uppercase letter characters are needed by setting the appropriate option to \'1\'. \'PasswordMin2Characters\' defines if the password needs to contain at least 2 letter characters (set to 0 or 1). \'PasswordNeedDigit\' controls the need of at least 1 digit (set to 0 or 1 to control).' =>
-            '고객 환경 설정에서이 항목의 모든 매개 변수를 정의합니다. \'PasswordRegExp\'는 정규 표현식과 암호를 일치시킵니다. \'PasswordMinSize\'를 사용하여 최소 문자 수를 정의하십시오. 적절한 옵션을 \'1\'로 설정하여 최소한 2 개의 소문자와 2 개의 대문자가 필요한지 정의하십시오. \'PasswordMin2Characters\'는 암호가 2 자 이상의 문자 (0 또는 1로 설정)를 포함해야 하는지를 정의합니다. \'PasswordNeedDigit\'은 최소 1 자리 숫자의 필요성을 제어합니다 (제어하려면 0 또는 1로 설정).',
-        'Defines all the parameters for this notification transport.' => '이 알림 전송에 대한 모든 매개 변수를 정의합니다.',
-        'Defines all the possible stats output formats.' => '가능한 모든 통계 출력형식을 정의합니다.',
-        'Defines an alternate URL, where the login link refers to.' => '로그인 링크가 참조하는 대체 URL을 정의합니다.',
-        'Defines an alternate URL, where the logout link refers to.' => '로그 아웃 링크가 참조하는 대체 URL을 정의합니다.',
-        'Defines an alternate login URL for the customer panel..' => '고객 패널에 대한 대체 로그인 URL을 정의합니다.',
-        'Defines an alternate logout URL for the customer panel.' => '고객 패널에 대한 대체 로그 아웃 URL을 정의합니다.',
-        'Defines an external link to the database of the customer (e.g. \'http://yourhost/customer.php?CID=[% Data.CustomerID %]\' or \'\').' =>
-            '고객의 데이터베이스에 대한 외부 링크를 정의합니다 (예 : \'http://yourhost/customer.php?CID=[% Data.CustomerID %]\' or \'\').',
-        'Defines an icon with link to the google map page of the current location in appointment edit screen.' =>
-            '약속 편집 화면에서 현재 위치의 Google지도 페이지로 연결되는 아이콘을 정의합니다.',
-        'Defines an overview module to show the address book view of a customer user list.' =>
-            'Customer User List의 주소록보기를 보여주는 개요 모듈을 정의합니다.',
-        'Defines available article actions for Chat articles.' => '채팅 기사에 대해 사용 가능한 기사 작업을 정의합니다.',
-        'Defines available article actions for Email articles.' => '전자 메일 아티클에 대해 사용 가능한 아티클 동작을 정의합니다.',
-        'Defines available article actions for Internal articles.' => '내부 기사에 대해 사용가능한 기사 조치를 정의합니다.',
-        'Defines available article actions for Phone articles.' => '전화 기사에 대해 사용가능한 기사 조치를 정의합니다.',
-        'Defines available article actions for invalid articles.' => '유효하지 않은 기사에 대해 사용 가능한 기사 조치를 정의합니다.',
-        'Defines available groups for the admin overview screen.' => '관리자 개요 화면에 사용할 수 있는 그룹을 정의합니다.',
-        'Defines chat communication channel.' => '채팅 통신 채널을 정의합니다.',
-        'Defines default headers for outgoing emails.' => '보내는 전자 메일의 기본 헤더를 정의합니다.',
-        'Defines email communication channel.' => '전자 메일 통신 채널을 정의합니다.',
-        'Defines from which ticket attributes the agent can select the result order.' =>
-            '에이전트가 결과 순서를 선택할 수 있는 티켓 속성을 정의합니다.',
-        'Defines groups for preferences items.' => '기본 설정 항목에 대한 그룹을 정의합니다.',
-        'Defines how many deployments the system should keep.' => '시스템이 유지해야하는 배포 수를 정의합니다.',
-        'Defines how the From field from the emails (sent from answers and email tickets) should look like.' =>
-            '보낸 사람(응답 및 전자 메일 티켓에서 보낸 전자 메일) 필드가 어떻게 표시되는지 정의합니다.',
-        'Defines if a pre-sorting by priority should be done in the queue view.' =>
-            '대기열 뷰에서 우선 순위 별 사전 정렬을 수향해야하는지 여부를 정의합니다.',
-        'Defines if a pre-sorting by priority should be done in the service view.' =>
-            '우선 순위 별 사전 정렬을 서비스 보기에서 수행해야하는지 여부를 정의합니다.',
-        'Defines if a ticket lock is required in the close ticket screen of the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
-            '에이전트 인터페이스의 닫기 티켓 화면에서 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 아직 잠겨 있지 않은 경우 티켓이 잠기고 현재 에이전트가 자동으로 소유자로 설정됨).',
-        'Defines if a ticket lock is required in the email outbound screen of the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
-            '에이전트 인터페이스의 전자 메일 아웃바운드 화면에 티켓 잠금이 필요한지 여부를 정의합니다 ( 티켓이 아직 잠겨있지 않은 경우 티켓이 잠기고 현재 에이전트가 자동으로 소유자로 설정됨).',
-        'Defines if a ticket lock is required in the email resend screen of the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
-            '에이전트 인터페이스의 전자 메일 재전송 화면에서 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 잠겨있지 않은 경우 티켓이 잠기고 현재 에이전트가 자동으로 소유자로 설정됨).',
-        'Defines if a ticket lock is required in the ticket bounce screen of the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
-            '에이전트 인터페이스의 티켓 바운스 화면에서 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 아직 잠겨있지 않은 경우 티켓이 잠기고 현재 에이전트가 자동으로 소유자로 설정됨).',
-        'Defines if a ticket lock is required in the ticket compose screen of the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
-            '에이전트 인터페이스 티켓 작성 화면에 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 잠겨있지 않은 경우 티켓이 잠기고 현재 에이전트가 자동으로 소유자로 설정됨).',
-        'Defines if a ticket lock is required in the ticket forward screen of the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
-            '에이전트 인터페이스의 티켓 전달 화면에 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 아직 잠겨 있지 않은 경우 티켓이 잠기고 현재 에이전트가 소유자로 자동 설정 됨).',
-        'Defines if a ticket lock is required in the ticket free text screen of the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
-            '에이전트 인터페이스의 티켓 프리 텍스트 화면에 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 잠겨 있지 않은 경우 티켓이 잠기고 현재 에이전트가 자동으로 소유자로 설정 됨).',
-        'Defines if a ticket lock is required in the ticket merge screen of a zoomed ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
-            '에이전트 인터페이스의 확대 / 축소 된 티켓의 티켓 병합 화면에 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 잠겨 있지 않은 경우 티켓이 잠기고 현재 에이전트가 소유자로 자동 설정 됨).',
-        'Defines if a ticket lock is required in the ticket note screen of the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
-            '에이전트 인터페이스의 티켓 메모 화면에 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 아직 잠겨 있지 않은 경우 티켓이 잠기고 현재 에이전트가 소유자로 자동 설정 됨).',
-        'Defines if a ticket lock is required in the ticket owner screen of a zoomed ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
-            '에이전트 인터페이스의 확대 / 축소 된 티켓의 티켓 소유자 화면에 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 잠겨 있지 않은 경우 티켓이 잠기고 현재 에이전트가 소유자로 자동 설정 됨).',
-        'Defines if a ticket lock is required in the ticket pending screen of a zoomed ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
-            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 보류 화면에 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 잠겨 있지 않은 경우 티켓이 잠기고 현재 에이전트가 소유자로 자동 설정 됨).',
-        'Defines if a ticket lock is required in the ticket phone inbound screen of the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
-            '에이전트 인터페이스의 티켓 인바운드 화면에 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 아직 잠겨 있지 않은 경우 티켓이 잠기고 현재 에이전트가 자동으로 소유자로 설정 됨).',
-        'Defines if a ticket lock is required in the ticket phone outbound screen of the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
-            '에이전트 인터페이스의 티켓 전화 아웃 바운드 화면에서 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 아직 잠겨 있지 않은 경우 티켓이 잠기고 현재 에이전트가 자동으로 소유자로 설정 됨).',
-        'Defines if a ticket lock is required in the ticket priority screen of a zoomed ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
-            '에이전트 인터페이스의 줌 된 티켓의 티켓 우선 순위 화면에 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 잠겨 있지 않은 경우 티켓이 잠기고 현재 에이전트가 소유자로 자동 설정 됨).',
-        'Defines if a ticket lock is required in the ticket responsible screen of the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
-            '에이전트 인터페이스의 티켓 책임 화면에 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 아직 잠겨있지 않은 경우 티켓이 잠기고 현재 에이전트가 자동으로 소유자로 설정됨).',
-        'Defines if a ticket lock is required to change the customer of a ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
-            '에이전트 인터페이스의 티켓 고객을 변경하기 위해 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 아직 잠겨 있지 않은 경우 티켓이 잠기고 현재 에이전트가 자동으로 소유자로 설정 됨).',
-        'Defines if agents should be allowed to login if they have no shared secret stored in their preferences and therefore are not using two-factor authentication.' =>
-            '상담원이 기본 설정에 공유 암호가 저장되어 있지 않아 이중 인증을 사용하지 않는 경우 로그인을 허용해야하는지 여부를 정의합니다.',
-        'Defines if customers should be allowed to login if they have no shared secret stored in their preferences and therefore are not using two-factor authentication.' =>
-            '공유 설정이 환경 설정에 저장되어 있지 않아 이중 인증을 사용하지 않는 경우 고객이 로그인 할 수 있도록 허용해야하는지 정의합니다.',
-        'Defines if the communication between this system and OTRS Group servers that provide cloud services is possible. If set to \'Disable cloud services\', some functionality will be lost such as system registration, support data sending, upgrading to and use of OTRS Business Solution™, OTRS Verify™, OTRS News and product News dashboard widgets, among others.' =>
-            '클라우드 서비스를 제공하는이 시스템과 OTRS 그룹 서버 간의 통신이 가능한지 여부를 정의합니다. \'클라우드 서비스 사용 안 함\'으로 설정하면 시스템 등록, 지원 데이터 전송, OTRS Business Solution ™, OTRS Verify ™, OTRS News 및 제품 뉴스 대시 보드 위젯 등의 업그레이드 및 사용과 같은 일부 기능이 손실됩니다.',
-        'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.) in customer interface.' =>
-            '고객 인터페이스에서 확장 모드를 사용해야하는지 (테이블, 바꾸기, 아래첨자, 위 첨자, 단어에서 붙여넣기 등 사용가능) 정의합니다.',
-        'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.).' =>
-            '확장 모드를 사용해야하는지 정의합니다 (테이블, 바꾸기, 아래 첨자, 위 첨자, 단어 붙여 넣기 등 사용 가능).',
-        'Defines if the first article should be displayed as expanded, that is visible for the related customer. If nothing defined, latest article will be expanded.' =>
-            '첫 번째 기사를 확장된 것으로 표시할지, 관련 고객에게 표시할지 여부를 정의합니다. 아무것도 정의하지 않으면 최신 기사가 확장됩니다.',
-        'Defines if the message in the email outbound screen of the agent interface is visible for the customer by default.' =>
-            '상담원 인터페이스의 전자 메일 아웃바운드 화면에 있는 메시지가 기본적으로 고객에게 표시되는지 여부를 정의합니다.',
-        'Defines if the message in the email resend screen of the agent interface is visible for the customer by default.' =>
-            '상담원 인터페이스의 전자 메일 다시보내기 화면에 있는 메시지가 기본적으로 고객에게 표시되는지 여부를 정의합니다.',
-        'Defines if the message in the ticket compose screen of the agent interface is visible for the customer by default.' =>
-            '고객이 기본적으로 에이전트 인터페이스의 티켓 작성 화면에 메시지가 표시되는지 여부를 정의합니다.',
-        'Defines if the message in the ticket forward screen of the agent interface is visible for the customer by default.' =>
-            '에이전트 인터페이스의 티켓 전달 화면에 있는 메시지가 기본적으로 고객에게 표시되는지 여부를 정의합니다.',
-        'Defines if the note in the close ticket screen of the agent interface is visible for the customer by default.' =>
-            '상담원 인터페이스의 닫기 티켓 화면에 있는 메모가 기본적으로 고객에게 표시되는지 여부를 정의합니다.',
-        'Defines if the note in the ticket bulk screen of the agent interface is visible for the customer by default.' =>
-            '에이전트 인터페이스의 티켓 대량 화면에 있는 노트가 기본적으로 고객에게 표시되는지 여부를 정의합니다.',
-        'Defines if the note in the ticket free text screen of the agent interface is visible for the customer by default.' =>
-            '상담원 인터페이스의 티켓 프리 텍스트 화면에있는 노트가 기본적으로 고객에게 표시되는지 여부를 정의합니다.',
-        'Defines if the note in the ticket note screen of the agent interface is visible for the customer by default.' =>
-            '상담원 인터페이스의 티켓 메모 화면에있는 메모가 기본적으로 고객에게 표시되는지 여부를 정의합니다.',
-        'Defines if the note in the ticket owner screen of the agent interface is visible for the customer by default.' =>
-            '에이전트 인터페이스의 티켓 소유자 화면에있는 노트가 기본적으로 고객에게 표시되는지 여부를 정의합니다.',
-        'Defines if the note in the ticket pending screen of the agent interface is visible for the customer by default.' =>
-            '에이전트 인터페이스의 티켓 보류 화면에있는 메모가 기본적으로 고객에게 표시되는지 여부를 정의합니다.',
-        'Defines if the note in the ticket priority screen of the agent interface is visible for the customer by default.' =>
-            '에이전트 인터페이스의 티켓 우선 순위화면에 있는 노트가 기본적으로 고객에게 표시되는지 여부를 정의합니다.',
-        'Defines if the note in the ticket responsible screen of the agent interface is visible for the customer by default.' =>
-            '에이전트 인터페이스의 티켓 담당 화면에 있는 노트가 기본적으로 고객에게 표시되는지 여부를 정의합니다.',
-        'Defines if the previously valid token should be accepted for authentication. This is slightly less secure but gives users 30 seconds more time to enter their one-time password.' =>
-            '이전에 유효한 토큰이 인증을 위해 수락되어야 하는지 여부를 정의합니다. 이는 보안이 다소 떨어지지만 사용자가 일회용 암호를 입력하는데 30초 이상 더 많은 시간을 줍니다.',
-        'Defines if the values for filters should be retrieved from all available tickets. If enabled, only values which are actually used in any ticket will be available for filtering. Please note: The list of customers will always be retrieved like this.' =>
-            '사용 가능한 모든 티켓에서 필터 값을 검색해야하는지 여부를 정의합니다. 활성화 된 경우 실제로 티켓에서 사용되는 값만 필터링에 사용할 수 있습니다. 참고 : 고객 목록은 항상 이와 같이 검색됩니다.',
-        'Defines if time accounting is mandatory in the agent interface. If enabled, a note must be entered for all ticket actions (no matter if the note itself is configured as active or is originally mandatory for the individual ticket action screen).' =>
-            '상담원 인터페이스에서 시간 계산이 필수인지 정의합니다. 활성화 된 경우 모든 티켓 동작에 대해 노트를 입력해야 합니다 (노트 자체가 활성으로 구성되어 있거나 원래 개별 티켓 동작 화면에 필수적이든간에).',
-        'Defines if time accounting must be set to all tickets in bulk action.' =>
-            '일괄 처리로 시간 계산을 모든 티켓으로 설정해야하는지 여부를 정의합니다.',
-        'Defines internal communication channel.' => '내부 통신 채널을 정의합니다.',
-        'Defines out of office message template. Two string parameters (%s) available: end date and number of days left.' =>
-            '부재 중 메시지 템플릿을 정의합니다. 사용 가능한 두 개의 문자열 매개 변수 (%s) : 종료 날짜 및 남은 일 수.',
-        'Defines phone communication channel.' => '전화 통신 채널을 정의합니다.',
-        'Defines queues that\'s tickets are used for displaying as calendar events.' =>
-            '달력 이벤트로 표시하기 위해 티켓을 사용하는 대기열을 정의합니다.',
-        'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the OTRS Daemon).' =>
-            '\'PublicSupportDataCollector\'공용 모듈 (예 : OTRS 데몬에서 사용)을 사용하여 지원 데이터 수집을위한 HTTP 호스트 이름을 정의합니다.',
-        'Defines the IP regular expression for accessing the local repository. You need to enable this to have access to your local repository and the package::RepositoryList is required on the remote host.' =>
-            '로컬 저장소에 액세스하기위한 IP 정규식을 정의합니다. 이것을 사용하여 로컬 저장소에 액세스 할 수 있어야하며 패키지 :: RepositoryList가 원격 호스트에 필요합니다.',
-        'Defines the PostMaster header to be used on the filter for keeping the current state of the ticket.' =>
-            '티켓의 현재 상태를 유지하기 위해 필터에 사용할 PostMaster 헤더를 정의합니다.',
-        'Defines the URL CSS path.' => 'URL CSS 경로를 정의합니다.',
-        'Defines the URL base path of icons, CSS and Java Script.' => '아이콘, CSS 및 Java Script의 URL 기본 경로를 정의합니다.',
-        'Defines the URL image path of icons for navigation.' => '탐색을위한 아이콘의 URL 이미지 경로를 정의합니다.',
-        'Defines the URL java script path.' => 'URL java 스크립트 경로를 정의합니다.',
-        'Defines the URL rich text editor path.' => 'URL 서식있는 텍스트 편집기 경로를 정의합니다.',
-        'Defines the address of a dedicated DNS server, if necessary, for the "CheckMXRecord" look-ups.' =>
-            '필요한 경우 "CheckMXRecord"조회를 위해 전용 DNS 서버의 주소를 정의합니다.',
-        'Defines the agent preferences key where the shared secret key is stored.' =>
-            '공유 비밀 키가 저장되는 에이전트 기본 설정 키를 정의합니다.',
-        'Defines the available steps in time selections. Select "Minute" to be able to select all minutes of one hour from 1-59. Select "30 Minutes" to only make full and half hours available.' =>
-            '시간 선택에서 사용 가능한 단계를 정의합니다. 1-59까지 1 시간 동안 모든 분을 선택할 수 있으려면 "분"을 선택하십시오. 풀 30 시간 만 사용하려면 "30 Minutes"를 선택하십시오.',
-        'Defines the body text for notification mails sent to agents, about new password.' =>
-            '에이전트에 보내는 알림 메일의 본문 텍스트를 새 암호로 정의합니다.',
-        'Defines the body text for notification mails sent to agents, with token about new requested password.' =>
-            '에이전트에게 보낸 알림 메일의 본문 텍스트를 정의하고 요청된 새 비밀번호에 대한 토큰을 지정합니다.',
-        'Defines the body text for notification mails sent to customers, about new account.' =>
-            '새 계정에 대한 고객에게 발송된 알림메일의 본문 텍스트를 정의합니다.',
-        'Defines the body text for notification mails sent to customers, about new password.' =>
-            '새 비밀번호에 대한 알림 메일의 본문 텍스트를 고객에게 전달합니다.',
-        'Defines the body text for notification mails sent to customers, with token about new requested password.' =>
-            '새로운 요청된 비밀번호에 대한 토큰과 함께 고객에게 발송된 통지 메일의 본문 텍스트를 정의합니다.',
-        'Defines the body text for rejected emails.' => '거부된 전자 메일의 본문 텍스트를 정의합니다.',
-        'Defines the calendar width in percent. Default is 95%.' => '달력의 너비를 백분율로 정의합니다. 기본값은 95%입니다.',
-        'Defines the column to store the keys for the preferences table.' =>
-            '환경 설정 테이블의 키를 저장할 열을 정의합니다.',
-        'Defines the config options for the autocompletion feature.' => '자동 완성 기능의 구성 옵션을 정의합니다.',
-        'Defines the config parameters of this item, to be shown in the preferences view.' =>
-            '환경 설정 보기에 표시할 이 항목의 구성 매개 변수를 정의합니다.',
-        'Defines the config parameters of this item, to be shown in the preferences view. \'PasswordRegExp\' allows to match passwords against a regular expression. Define the minimum number of characters using \'PasswordMinSize\'. Define if at least 2 lowercase and 2 uppercase letter characters are needed by setting the appropriate option to \'1\'. \'PasswordMin2Characters\' defines if the password needs to contain at least 2 letter characters (set to 0 or 1). \'PasswordNeedDigit\' controls the need of at least 1 digit (set to 0 or 1 to control). \'PasswordMaxLoginFailed\' allows to set an agent to invalid-temporarily if max failed logins reached. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
-            '환경 설정보기에 표시 할이 항목의 구성 매개 변수를 정의합니다. \'PasswordRegExp\'는 정규 표현식과 암호를 일치시킵니다. \'PasswordMinSize\'를 사용하여 최소 문자 수를 정의하십시오. 적절한 옵션을 \'1\'로 설정하여 최소한 2 개의 소문자와 2 개의 대문자가 필요한지 정의하십시오. \'PasswordMin2Characters\'는 암호가 2 자 이상의 문자 (0 또는 1로 설정)를 포함해야 하는지를 정의합니다. \'PasswordNeedDigit\'은 최소 1 자리 숫자의 필요성을 제어합니다 (제어하려면 0 또는 1로 설정). \'PasswordMaxLoginFailed\'는 최대 실패 로그인에 도달하면 에이전트를 유효하지 않게 임시로 설정할 수 있습니다. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
-        'Defines the config parameters of this item, to be shown in the preferences view. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
-            '환경 설정보기에 표시 할이 항목의 구성 매개 변수를 정의합니다. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
-        'Defines the connections for http/ftp, via a proxy.' => '프록시를 통해 http / ftp에 대한 연결을 정의합니다.',
-        'Defines the customer preferences key where the shared secret key is stored.' =>
-            '공유 비밀 키가 저장되는 고객 기본 설정 키를 정의합니다.',
-        'Defines the date input format used in forms (option or input fields).' =>
-            '양식 (옵션 또는 입력 필드)에 사용되는 날짜 입력 형식을 정의합니다.',
-        'Defines the default CSS used in rich text editors.' => '서식있는 텍스트 편집기에 사용되는 기본 CSS를 정의합니다.',
-        'Defines the default agent name in the ticket zoom view of the customer interface.' =>
-            '',
-        'Defines the default auto response type of the article for this operation.' =>
-            '이 작업에 대한 아티클의 기본 자동 응답 유형을 정의합니다.',
-        'Defines the default body of a note in the ticket free text screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 비어있는 텍스트 화면에서 노트의 기본 본문을 정의합니다.',
-        'Defines the default filter fields in the customer user address book search (CustomerUser or CustomerCompany). For the CustomerCompany fields a prefix \'CustomerCompany_\' must be added.' =>
-            '고객 사용자 주소록 검색 (CustomerUser 또는 CustomerCompany)의 기본 필터 필드를 정의합니다. CustomerCompany 필드의 경우 접두사 \'CustomerCompany_\'를 추가해야합니다.',
-        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.otrs.com/doc/.' =>
-            '에이전트 및 고객이 사용할 기본 프런트 엔드 (HTML) 테마를 정의합니다. 원한다면 자신 만의 테마를 추가 할 수 있습니다. https://doc.otrs.com/doc/ 에있는 관리자 설명서를 참조하십시오.',
-        'Defines the default front-end language. All the possible values are determined by the available language files on the system (see the next setting).' =>
-            '기본 프런트 엔드 언어를 정의합니다. 가능한 모든 값은 시스템에서 사용 가능한 언어 파일에 의해 결정됩니다 (다음 설정 참조).',
-        'Defines the default history type in the customer interface.' => '고객 인터페이스에서 기본 기록 유형을 정의합니다.',
-        'Defines the default maximum number of X-axis attributes for the time scale.' =>
-            '시간 스케일에 대한 X 축 속성의 기본 최대 수를 정의합니다.',
-        'Defines the default maximum number of statistics per page on the overview screen.' =>
-            '개요 화면에서 페이지 당 기본 최대 통계 수를 정의합니다.',
-        'Defines the default next state for a ticket after customer follow-up in the customer interface.' =>
-            '고객 인터페이스에서 고객 후속 조치 후 티켓의 기본 다음 상태를 정의합니다.',
-        'Defines the default next state of a ticket after adding a note, in the close ticket screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 닫기 화면에서 메모를 추가한 후 티켓의 기본 다음 상태를 정의합니다.',
-        'Defines the default next state of a ticket after adding a note, in the ticket free text screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓없는 텍스트 화면에 메모를 추가한 후 티켓의 기본 다음 상태를 정의합니다.',
-        'Defines the default next state of a ticket after adding a note, in the ticket note screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 메모 화면에 메모를 추가한 후 티켓의 기본 다음 상태를 정의합니다.',
-        'Defines the default next state of a ticket after adding a note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스의 확대 / 축소 된 티켓의 티켓 소유자 화면에 노트를 추가한 후 티켓의 기본 다음 상태를 정의합니다.',
-        'Defines the default next state of a ticket after adding a note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대된 티켓의 티켓 보류 화면에 노트를 추가한 후 티켓의 기본 다음 상태를 정의합니다.',
-        'Defines the default next state of a ticket after adding a note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대된 티켓의 티켓 우선 순위 화면에 노트를 추가한 후 티켓의 기본 다음 상태를 정의합니다.',
-        'Defines the default next state of a ticket after adding a note, in the ticket responsible screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 책임 화면에 메모를 추가한 후 티켓의 기본 다음 상태를 정의합니다.',
-        'Defines the default next state of a ticket after being bounced, in the ticket bounce screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 바운스 화면에서 바운스 된 후 티켓의 기본 다음 상태를 정의합니다.',
-        'Defines the default next state of a ticket after being forwarded, in the ticket forward screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 전달 화면에서 전달된 후 티켓의 기본 다음 상태를 정의합니다.',
-        'Defines the default next state of a ticket after the message has been sent, in the email outbound screen of the agent interface.' =>
-            '에이전트 인터페이스의 전자 메일 아웃바운드 화면에서 메시지를 보낸 후 티켓의 기본 다음 상태를 정의합니다.',
-        'Defines the default next state of a ticket if it is composed / answered in the ticket compose screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 작성 화면에서 작성 / 응답된 티켓의 기본 다음 상태를 정의합니다.',
-        'Defines the default next state of a ticket, in the ticket bulk screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 대량 화면에서 티켓의 기본 다음 상태를 정의합니다.',
-        'Defines the default note body text for phone tickets in the ticket phone inbound screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 인바운드 화면에서 전화 티켓의 기본 노트 본문 텍스트를 정의합니다.',
-        'Defines the default note body text for phone tickets in the ticket phone outbound screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 전화 아웃바운드 화면에서 전화 티켓의 기본 노트 본문 텍스트를 정의합니다.',
-        'Defines the default priority of follow-up customer tickets in the ticket zoom screen in the customer interface.' =>
-            '고객 인터페이스의 티켓 확대 / 축소 화면에서 후속 고객 티켓의 기본 우선 순위를 정의합니다.',
-        'Defines the default priority of new customer tickets in the customer interface.' =>
-            '고객 인터페이스에서 새 고객 티켓의 기본 우선 순위를 정의합니다.',
-        'Defines the default priority of new tickets.' => '새 티켓의 기본 우선순위를 정의합니다.',
-        'Defines the default queue for new customer tickets in the customer interface.' =>
-            '고객 인터페이스에서 새 고객 티켓의 기본 큐를 정의합니다.',
-        'Defines the default queue for new tickets in the agent interface.' =>
-            '에이전트 인터페이스에서 새 티켓의 기본 대기열을 정의합니다.',
-        'Defines the default selection at the drop down menu for dynamic objects (Form: Common Specification).' =>
-            '동적 객체의 드롭 다운 메뉴에서 기본 선택을 정의합니다 (형식 : 공통 사양).',
-        'Defines the default selection at the drop down menu for permissions (Form: Common Specification).' =>
-            '권한 (양식 : 공통 사양)에 대한 드롭 다운 메뉴에서 기본 선택을 정의합니다.',
-        'Defines the default selection at the drop down menu for stats format (Form: Common Specification). Please insert the format key (see Stats::Format).' =>
-            '통계 형식 (양식 : 공통 사양)에 대한 드롭 다운 메뉴에서 기본 선택을 정의합니다. 형식 키를 삽입하십시오 (Stats :: Format 참조).',
-        'Defines the default sender type for phone tickets in the ticket phone inbound screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 인바운드 화면에서 전화 티켓의 기본 발신자 유형을 정의합니다.',
-        'Defines the default sender type for phone tickets in the ticket phone outbound screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 전화 아웃바운드 화면에서 전화 티켓의 기본 발신자 유형을 정의합니다.',
-        'Defines the default sender type for tickets in the ticket zoom screen of the customer interface.' =>
-            '고객 인터페이스의 티켓 확대 / 축소 화면에서 티켓의 기본 보낸 사람 유형을 정의합니다.',
-        'Defines the default shown ticket search attribute for ticket search screen (AllTickets/ArchivedTickets/NotArchivedTickets).' =>
-            '티켓 검색 화면 (AllTickets / ArchivedTickets / NotArchivedTickets)에 대해 표시된 기본 티켓 검색 속성을 정의합니다.',
-        'Defines the default shown ticket search attribute for ticket search screen.' =>
-            '티켓 검색 화면에 대해 표시된 기본 티켓 검색 속성을 정의합니다.',
-        'Defines the default shown ticket search attribute for ticket search screen. Example: "Key" must have the name of the Dynamic Field in this case \'X\', "Content" must have the value of the Dynamic Field depending on the Dynamic Field type,  Text: \'a text\', Dropdown: \'1\', Date/Time: \'Search_DynamicField_XTimeSlotStartYear=1974; Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDay=26; Search_DynamicField_XTimeSlotStartHour=00; Search_DynamicField_XTimeSlotStartMinute=00; Search_DynamicField_XTimeSlotStartSecond=00; Search_DynamicField_XTimeSlotStopYear=2013; Search_DynamicField_XTimeSlotStopMonth=01; Search_DynamicField_XTimeSlotStopDay=26; Search_DynamicField_XTimeSlotStopHour=23; Search_DynamicField_XTimeSlotStopMinute=59; Search_DynamicField_XTimeSlotStopSecond=59;\' and or \'Search_DynamicField_XTimePointFormat=week; Search_DynamicField_XTimePointStart=Before; Search_DynamicField_XTimePointValue=7\';.' =>
-            '티켓 검색 화면에 대해 표시된 기본 티켓 검색 속성을 정의합니다. 예 : \'Key\'는 Dynamic Field의 이름을 가져야합니다. \'X\', \'Content\'는 동적 필드 유형, Text : \'a text\', 드롭 다운 : \'1\'에 따라 동적 필드의 값을 가져야합니다. , 날짜 / 시간 : \'Search_DynamicField_XTimeSlotStartYear = 1974; Search_DynamicField_XTimeSlotStartMonth = 01; Search_DynamicField_XTimeSlotStartDay = 26; Search_DynamicField_XTimeSlotStartHour = 00; Search_DynamicField_XTimeSlotStartMinute = 00; Search_DynamicField_XTimeSlotStartSecond = 00; Search_DynamicField_XTimeSlotStopYear = 2013; Search_DynamicField_XTimeSlotStopMonth = 01; Search_DynamicField_XTimeSlotStopDay = 26; Search_DynamicField_XTimeSlotStopHour = 23; Search_DynamicField_XTimeSlotStopMinute = 59; Search_DynamicField_XTimeSlotStopSecond = 59; \' and \'또는 Search_DynamicField_XTimePointFormat = 주; Search_DynamicField_XTimePointStart = 이전; Search_DynamicField_XTimePointValue = 7 \';',
-        'Defines the default sort criteria for all queues displayed in the queue view.' =>
-            '대기열 보기에 표시된 모든 대기열의 기본 정렬 기준을 정의합니다.',
-        'Defines the default sort criteria for all services displayed in the service view.' =>
-            '서비스 보기에 표시된 모든 서비스에 대한 기본 정렬 기준을 정의합니다.',
-        'Defines the default sort order for all queues in the queue view, after priority sort.' =>
-            '우선 순위 정렬 후 대기열 보기의 모든 대기열에 대한 기본 정렬 순서를 정의합니다.',
-        'Defines the default sort order for all services in the service view, after priority sort.' =>
-            '우선 순위 정렬 후 서비스 보기의 모든 서비스에 대한 기본 정렬 순서를 정의합니다.',
-        'Defines the default state of new customer tickets in the customer interface.' =>
-            '고객 인터페이스에서 새 고객 티켓의 기본 상태를 정의합니다.',
-        'Defines the default state of new tickets.' => '새 티켓의 기본 상태를 정의합니다.',
-        'Defines the default subject for phone tickets in the ticket phone inbound screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 인바운드 화면에서 전화 티켓의 기본제목을 정의합니다.',
-        'Defines the default subject for phone tickets in the ticket phone outbound screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 전화 아웃바운드 화면에서 전화 티켓의 기본 제목을 정의합니다.',
-        'Defines the default subject of a note in the ticket free text screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 프리 텍스트 화면에서 노트의 기본 제목을 정의합니다.',
-        'Defines the default the number of seconds (from current time) to re-schedule a generic interface failed task.' =>
-            '일반적인 인터페이스 실패 작업을 다시 예약하기 위해 기본값 (현재 시간부터)을 정의합니다.',
-        'Defines the default ticket attribute for ticket sorting in a ticket search of the customer interface.' =>
-            '고객 인터페이스의 티켓 검색에서 티켓 정렬에 대한 기본 티켓 속성을 정의합니다.',
-        'Defines the default ticket attribute for ticket sorting in the escalation view of the agent interface.' =>
-            '에이전트 인터페이스의 에스컬레이션 보기에서 티켓 정렬에 대한 기본 티켓 속성을 정의합니다.',
-        'Defines the default ticket attribute for ticket sorting in the locked ticket view of the agent interface.' =>
-            '에이전트 인터페이스의 잠긴 티켓 보기에서 티켓 정렬에 대한 기본 티켓 속성을 정의합니다.',
-        'Defines the default ticket attribute for ticket sorting in the responsible view of the agent interface.' =>
-            '에이전트 인터페이스의 담당 뷰에서 티켓 정렬에 대한 기본 티켓 속성을 정의합니다.',
-        'Defines the default ticket attribute for ticket sorting in the status view of the agent interface.' =>
-            '에이전트 인터페이스의 상태 보기에서 티켓 정렬에 대한 기본 속성을 정의합니다.',
-        'Defines the default ticket attribute for ticket sorting in the watch view of the agent interface.' =>
-            '에이전트 인터페이스의 보기에서 티켓 정렬에 대한 기본 티켓 속성을 정의합니다.',
-        'Defines the default ticket attribute for ticket sorting of the ticket search result of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 검색 결과에 대한 티켓 정렬을 위한 기본 티켓 속성을 정의합니다.',
-        'Defines the default ticket attribute for ticket sorting of the ticket search result of this operation.' =>
-            '이 작업의 티켓 검색 결과에 대한 티켓 정렬을 위한 기본 티켓 특성을 정의합니다.',
-        'Defines the default ticket bounced notification for customer/sender in the ticket bounce screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 바운스 화면에서 고객 / 발신자에 대한 기본 티켓 반송 알림을 정의합니다.',
-        'Defines the default ticket next state after adding a phone note in the ticket phone inbound screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 인바운드 화면에 전화 메모를 추가한 후 기본 티켓 다음 상태를 정의합니다.',
-        'Defines the default ticket next state after adding a phone note in the ticket phone outbound screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 폰 아웃바운드 화면에 전화 메모를 추가한 후 기본 티켓 다음 상태를 정의합니다.',
-        'Defines the default ticket order (after priority sort) in the escalation view of the agent interface. Up: oldest on top. Down: latest on top.' =>
-            '에이전트 인터페이스의 에스컬레이션보기에서 기본 티켓 순서 (우선 순위 정렬 후)를 정의합니다. 위로 : 가장 오래된 것. 아래 : 위에 최신.',
-        'Defines the default ticket order (after priority sort) in the status view of the agent interface. Up: oldest on top. Down: latest on top.' =>
-            '에이전트 인터페이스의 상태보기에서 기본 티켓 순서 (우선 순위 정렬 후)를 정의합니다. 위로 : 가장 오래된 것. 아래 : 위에 최신.',
-        'Defines the default ticket order in the responsible view of the agent interface. Up: oldest on top. Down: latest on top.' =>
-            '에이전트 인터페이스의 담당 뷰에서 기본 티켓 순서를 정의합니다. 위로 : 가장 오래된 것. 아래 : 위에 최신.',
-        'Defines the default ticket order in the ticket locked view of the agent interface. Up: oldest on top. Down: latest on top.' =>
-            '에이전트 인터페이스의 티켓 잠김보기에서 기본 티켓 순서를 정의합니다. 위로 : 가장 오래된 것. 아래 : 위에 최신.',
-        'Defines the default ticket order in the ticket search result of the agent interface. Up: oldest on top. Down: latest on top.' =>
-            '에이전트 인터페이스의 티켓 검색 결과에서 기본 티켓 순서를 정의합니다. 위로 : 가장 오래된 것. 아래 : 위에 최신.',
-        'Defines the default ticket order in the ticket search result of the this operation. Up: oldest on top. Down: latest on top.' =>
-            '이 작업의 티켓 검색 결과에서 기본 티켓 순서를 정의합니다. 위로 : 가종 오래된 것. 아래 : 위에 최신',
-        'Defines the default ticket order in the watch view of the agent interface. Up: oldest on top. Down: latest on top.' =>
-            '에이전트 인터페이스의보기보기에서 기본 티켓 순서를 정의합니다. 위로 : 가장 오래된 것. 아래 : 위에 최신.',
-        'Defines the default ticket order of a search result in the customer interface. Up: oldest on top. Down: latest on top.' =>
-            '고객 인터페이스에서 검색 결과의 기본 티켓 순서를 정의합니다. 위로 : 가장 오래된 것. 아래 : 위에 최신.',
-        'Defines the default ticket priority in the close ticket screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 닫기 화면에서 기본 티켓 우선 순위를 정의합니다.',
-        'Defines the default ticket priority in the ticket bulk screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 대량 화면에서 기본 티켓 우선 순위를 정의합니다.',
-        'Defines the default ticket priority in the ticket free text screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓없는 텍스트 화면에서 기본 티켓 우선 순위를 정의합니다.',
-        'Defines the default ticket priority in the ticket note screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 메모 화면에서 기본 티켓 우선 순위를 정의합니다.',
-        'Defines the default ticket priority in the ticket owner screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스의 확대된 티켓의 티켓 소유자 화면에서 기본 티켓 우선 순위를 정의합니다.',
-        'Defines the default ticket priority in the ticket pending screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대/축소된  티켓의 티켓 보류 화면에서 기본 티켓 우선 순위를 정의합니다.',
-        'Defines the default ticket priority in the ticket priority screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스의 확대된 티켓의 티켓우선순위 화면에서 기본 티켓 우선 순위를 정의합니다.',
-        'Defines the default ticket priority in the ticket responsible screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 책임 화면에서 기본 티켓 우선 순위를 정의합니다.',
-        'Defines the default ticket type for new customer tickets in the customer interface.' =>
-            '고객 인터페이스에서 새 고객 티켓의 기본 티켓 유형을 정의합니다.',
-        'Defines the default ticket type.' => '기본 티켓 유형을 정의합니다.',
-        'Defines the default used Frontend-Module if no Action parameter given in the url on the agent interface.' =>
-            '에이전트 인터페이스의 url에 Action 매개 변수가 지정되지 않은 경우 사용 된 기본 프론트 엔드 모듈을 정의합니다.',
-        'Defines the default used Frontend-Module if no Action parameter given in the url on the customer interface.' =>
-            '고객 인터페이스의 URL에 Action 매개 변수가 지정되지 않은 경우 사용 된 기본 프론트 엔드 모듈을 정의합니다.',
-        'Defines the default value for the action parameter for the public frontend. The action parameter is used in the scripts of the system.' =>
-            'public frontend에 대한 action 매개 변수의 기본값을 정의합니다. action 매개 변수는 시스템의 스크립트에서 사용됩니다.',
-        'Defines the default viewable sender types of a ticket (default: customer).' =>
-            '티켓의 기본 볼 수있는 보낸 사람 유형을 정의합니다 (기본값 : 고객).',
-        'Defines the default visibility of the article to customer for this operation.' =>
-            '이 작업을 위해 고객에게 기사의 기본 가시성을 정의합니다.',
-        'Defines the displayed style of the From field in notes that are visible for customers. A default agent name can be defined in Ticket::Frontend::CustomerTicketZoom###DefaultAgentName setting.' =>
-            '',
-        'Defines the dynamic fields that are used for displaying on calendar events.' =>
-            '달력 이벤트에 표시하는데 사용되는 동적 필드를 정의합니다.',
-        'Defines the event object types that will be handled via AdminAppointmentNotificationEvent.' =>
-            'AdminAppointmentNotificationEvent를 통해 처리 할 이벤트 객체 유형을 정의합니다.',
-        'Defines the fall-back path to open fetchmail binary. Note: The name of the binary needs to be \'fetchmail\', if it is different please use a symbolic link.' =>
-            'fetchmail 바이너리를 여는 폴백 경로를 정의합니다. 참고 : 바이너리의 이름은 \'fetchmail\'이어야하며, 다른 경우 심볼릭 링크를 사용하십시오.',
-        'Defines the filter that processes the text in the articles, in order to highlight URLs.' =>
-            'URL을 강조 표시하기 위해 기사의 텍스트를 처리하는 필터를 정의합니다.',
-        'Defines the format of responses in the ticket compose screen of the agent interface ([% Data.OrigFrom | html %] is From 1:1, [% Data.OrigFromName | html %] is only realname of From).' =>
-            '에이전트 인터페이스 ([% Data.OrigFrom | html %]는 From 1 : 1, [% Data.OrigFromName | html %]는 From의 실제 이름 임)의 티켓 작성 화면에서 응답 형식을 정의합니다.',
-        'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
-            '시스템의 정규화 된 도메인 이름을 정의합니다. 이 설정은 응용 프로그램에서 사용하는 모든 형식의 메시징에있는 변수 인 OTRS_CONFIG_FQDN으로 사용되어 시스템 내의 티켓에 대한 링크를 만듭니다.',
-        'Defines the groups every customer user will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer user for these groups).' =>
-            '모든 고객 사용자가있을 그룹을 정의합니다 (CustomerGroupSupport가 사용 가능하고이 그룹에 대한 모든 고객 사용자를 관리하지 않으려는 경우).',
-        'Defines the groups every customer will be in (if CustomerGroupSupport is enabled and you don\'t want to manage every customer for these groups).' =>
-            '모든 고객이 속할 그룹을 정의합니다 (CustomerGroupSupport가 사용 가능하고이 그룹의 모든 고객을 관리하지 않으려는 경우).',
-        'Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).' =>
-            '이 화면의 서식있는 텍스트 편집기 구성 요소의 높이를 정의합니다. 숫자 (픽셀) 또는 퍼센트 값 (상대)을 입력하십시오.',
-        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            '서식있는 텍스트 편집기 구성 요소의 높이를 정의합니다. 숫자 (픽셀) 또는 퍼센트 값 (상대)을 입력하십시오.',
-        'Defines the history comment for the close ticket screen action, which gets used for ticket history in the agent interface.' =>
-            '에이전트 인터페이스의 티켓 기록에 사용되는 닫기 티켓 화면 작업에 대한 기록 주석을 정의합니다.',
-        'Defines the history comment for the email ticket screen action, which gets used for ticket history in the agent interface.' =>
-            '에이전트 인터페이스에서 티켓 기록에 사용되는 전자 메일 티켓 화면 작업에 대한 기록 주석을 정의합니다.',
-        'Defines the history comment for the phone ticket screen action, which gets used for ticket history in the agent interface.' =>
-            '에이전트 티켓 인터페이스에서 티켓 기록에 사용되는 전화 티켓 화면 작업에 대한 기록 주석을 정의합니다.',
-        'Defines the history comment for the ticket free text screen action, which gets used for ticket history.' =>
-            '티켓 기록에 사용되는 티켓 비어있는 텍스트 화면 작업에 대한 기록 주석을 정의합니다.',
-        'Defines the history comment for the ticket note screen action, which gets used for ticket history in the agent interface.' =>
-            '에이전트 인터페이스의 티켓 기록에 사용되는 티켓 메모 화면 작업에 대한 기록 주석을 정의합니다.',
-        'Defines the history comment for the ticket owner screen action, which gets used for ticket history in the agent interface.' =>
-            '에이전트 인터페이스에서 티켓 기록에 사용되는 티켓 소유자 화면 작업에 대한 기록 주석을 정의합니다.',
-        'Defines the history comment for the ticket pending screen action, which gets used for ticket history in the agent interface.' =>
-            '에이전트 인터페이스에서 티켓 기록에 사용되는 티켓 보류 화면 조치에 대한 기록 주석을 정의합니다.',
-        'Defines the history comment for the ticket phone inbound screen action, which gets used for ticket history in the agent interface.' =>
-            '에이전트 인터페이스의 티켓 기록에 사용되는 티켓 전화 인바운드 화면 작업에 대한 기록 주석을 정의합니다.',
-        'Defines the history comment for the ticket phone outbound screen action, which gets used for ticket history in the agent interface.' =>
-            '에이전트 인터페이스의 티켓 기록에 사용되는 티켓 전화 아웃 바운드 화면 작업에 대한 기록 주석을 정의합니다.',
-        'Defines the history comment for the ticket priority screen action, which gets used for ticket history in the agent interface.' =>
-            '에이전트 인터페이스의 티켓 기록에 사용되는 티켓 우선 순위 화면 작업에 대한 기록 주석을 정의합니다.',
-        'Defines the history comment for the ticket responsible screen action, which gets used for ticket history in the agent interface.' =>
-            '에이전트 인터페이스의 티켓 기록에 사용되는 티켓 책임 화면 조치에 대한 기록 주석을 정의합니다.',
-        'Defines the history comment for the ticket zoom action, which gets used for ticket history in the customer interface.' =>
-            '고객 인터페이스에서 티켓 기록에 사용되는 티켓 확대 작업에 대한 기록 주석을 정의합니다.',
-        'Defines the history comment for this operation, which gets used for ticket history in the agent interface.' =>
-            '에이전트 인터페이스의 티켓 기록에 사용되는이 작업의 기록 주석을 정의합니다.',
-        'Defines the history type for the close ticket screen action, which gets used for ticket history in the agent interface.' =>
-            '에이전트 인터페이스의 티켓 기록에 사용되는 티켓 닫기 화면 작업의 기록 유형을 정의합니다.',
-        'Defines the history type for the email ticket screen action, which gets used for ticket history in the agent interface.' =>
-            '에이전트 인터페이스에서 티켓 기록에 사용되는 전자 메일 티켓 화면 작업의 기록 유형을 정의합니다.',
-        'Defines the history type for the phone ticket screen action, which gets used for ticket history in the agent interface.' =>
-            '에이전트 티켓 인터페이스에서 티켓 기록에 사용되는 전화 티켓 화면 작업의 기록 유형을 정의합니다.',
-        'Defines the history type for the ticket free text screen action, which gets used for ticket history.' =>
-            '티켓 기록에 사용되는 티켓 비어있는 텍스트 화면 조치에 대한 기록 유형을 정의합니다.',
-        'Defines the history type for the ticket note screen action, which gets used for ticket history in the agent interface.' =>
-            '에이전트 인터페이스의 티켓 기록에 사용되는 티켓 메모 화면 작업의 기록 유형을 정의합니다.',
-        'Defines the history type for the ticket owner screen action, which gets used for ticket history in the agent interface.' =>
-            '에이전트 인터페이스 화면의 티켓 기록에 사용되는 티켓 소유자 화면 작업의 기록 유형을 정의합니다.',
-        'Defines the history type for the ticket pending screen action, which gets used for ticket history in the agent interface.' =>
-            '에이전트 인터페이스에서 티켓 히스토리에 사용되는 티켓 보류 화면 조치의 히스토리 유형을 정의합니다.',
-        'Defines the history type for the ticket phone inbound screen action, which gets used for ticket history in the agent interface.' =>
-            '티켓 인터페이스 인바운드 화면 작업에 대한 기록 유형을 정의합니다.이 기록은 에이전트 인터페이스의 티켓 기록에 사용됩니다.',
-        'Defines the history type for the ticket phone outbound screen action, which gets used for ticket history in the agent interface.' =>
-            '에이전트 인터페이스의 티켓 기록에 사용되는 티켓 전화 아웃 바운드 화면 작업의 기록 유형을 정의합니다.',
-        'Defines the history type for the ticket priority screen action, which gets used for ticket history in the agent interface.' =>
-            '에이전트 인터페이스의 티켓 기록에 사용되는 티켓 우선 순위 화면 작업의 기록 유형을 정의합니다.',
-        'Defines the history type for the ticket responsible screen action, which gets used for ticket history in the agent interface.' =>
-            '에이전트 인터페이스의 티켓 기록에 사용되는 티켓 책임 화면 조치의 히스토리 유형을 정의합니다.',
-        'Defines the history type for the ticket zoom action, which gets used for ticket history in the customer interface.' =>
-            '고객 인터페이스의 티켓 기록에 사용되는 티켓 확대 / 축소 작업의 기록 유형을 정의합니다.',
-        'Defines the history type for this operation, which gets used for ticket history in the agent interface.' =>
-            '에이전트 인터페이스의 티켓 기록에 사용되는이 작업의 기록 유형을 정의합니다.',
-        'Defines the hours and week days of the indicated calendar, to count the working time.' =>
-            '작업 시간을 계산하기 위해 표시된 달력의 시간과 요일을 정의합니다.',
-        'Defines the hours and week days to count the working time.' => '근무 시간을 계산할 시간과 요일을 정의합니다.',
-        'Defines the key to be checked with Kernel::Modules::AgentInfo module. If this user preferences key is true, the message is accepted by the system.' =>
-            'Kernel :: Modules :: AgentInfo 모듈로 확인할 키를 정의합니다. 이 사용자 기본 설정 키가 true이면 시스템에서 메시지를 수락합니다.',
-        'Defines the key to check with CustomerAccept. If this user preferences key is true, then the message is accepted by the system.' =>
-            'CustomerAccept로 확인할 키를 정의합니다. 이 사용자 기본 설정 키가 true이면 시스템에서 메시지를 수락합니다.',
-        'Defines the link type \'Normal\'. If the source name and the target name contain the same value, the resulting link is a non-directional one; otherwise, the result is a directional link.' =>
-            '\'Normal\'링크 유형을 정의합니다. 소스 이름과 대상 이름이 동일한 값을 포함하면 결과 링크는 비 방향성 링크입니다. 그렇지 않은 경우 결과는 방향 링크입니다.',
-        'Defines the link type \'ParentChild\'. If the source name and the target name contain the same value, the resulting link is a non-directional one; otherwise, the result is a directional link.' =>
-            '링크 유형 \'ParentChild\'를 정의합니다. 소스 이름과 대상 이름이 동일한 값을 포함하면 결과 링크는 비 방향성 링크입니다. 그렇지 않은 경우 결과는 방향 링크입니다.',
-        'Defines the link type groups. The link types of the same group cancel one another. Example: If ticket A is linked per a \'Normal\' link with ticket B, then these tickets could not be additionally linked with link of a \'ParentChild\' relationship.' =>
-            '링크 유형 그룹을 정의합니다. 같은 그룹의 링크 유형은 서로 취소합니다. 예 : 항공권 A가 티켓 B와 \'일반\'링크별로 링크 된 경우이 티켓을 \'ParentChild\'관계의 링크와 추가로 연결할 수 없습니다.',
-        'Defines the list of online repositories. Another installations can be used as repository, for example: Key="http://example.com/otrs/public.pl?Action=PublicRepository;File=" and Content="Some Name".' =>
-            '온라인 리포지토리의 목록을 정의합니다. 다른 설치를 저장소로 사용할 수 있습니다 예 : Key= "http://example.com/otrs/public.pl?Action=PublicRepository;File= "and Content="Some Name".',
-        'Defines the list of params that can be passed to ticket search function.' =>
-            '티켓 검색 기능에 전달할 수있는 매개변수의 목록을 정의합니다.',
-        'Defines the list of possible next actions on an error screen, a full path is required, then is possible to add external links if needed.' =>
-            '오류 화면에서 가능한 다음 작업 목록을 정의하고 전체 경로가 필요하며 필요한 경우 외부 링크를 추가할 수 있습니다.',
-        'Defines the list of types for templates.' => '템플릿의 유형 목록을 정의합니다.',
-        'Defines the location to get online repository list for additional packages. The first available result will be used.' =>
-            '추가 패키지 온라인 저장소 목록을 가져올 위치를 정의합니다. 첫 번째 가능한 결과가 사용됩니다.',
-        'Defines the log module for the system. "File" writes all messages in a given logfile, "SysLog" uses the syslog daemon of the system, e.g. syslogd.' =>
-            '시스템의 로그 모듈을 정의합니다. "파일"은 주어진 로그 파일에 모든 메시지를 쓰고 "syslog"는 시스템의 syslog 데몬을 사용합니다. syslogd.',
-        'Defines the maximal size (in bytes) for file uploads via the browser. Warning: Setting this option to a value which is too low could cause many masks in your OTRS instance to stop working (probably any mask which takes input from the user).' =>
-            '브라우저를 통한 파일 업로드의 최대 크기 (바이트)를 정의합니다. 경고 :이 옵션을 너무 낮은 값으로 설정하면 OTRS 인스턴스의 많은 마스크가 작동을 멈출 수 있습니다 (사용자가 입력 한 마스크 일 가능성이 있음).',
-        'Defines the maximal valid time (in seconds) for a session id.' =>
-            '세션 ID의 최대 유효 시간 (초)을 정의합니다.',
-        'Defines the maximum number of affected tickets per job.' => '작업 당 영향을 받는 티켓의 최대 수를 정의합니다.',
-        'Defines the maximum number of pages per PDF file.' => 'PDF 파일 당 최대 페이지 수를 정의합니다.',
-        'Defines the maximum number of quoted lines to be added to responses.' =>
-            '응답에 추가할 따옴표 붙은 최대 줄 수를 정의합니다.',
-        'Defines the maximum number of tasks to be executed as the same time.' =>
-            '같은 시간에 실행될 최대 작업 수를 정의합니다.',
-        'Defines the maximum size (in MB) of the log file.' => '로그 파일의 최대 크기 (MB)를 정의합니다.',
-        'Defines the maximum size in KiloByte of GenericInterface responses that get logged to the gi_debugger_entry_content table.' =>
-            'gi_debugger_entry_content 테이블에 기록되는 GenericInterface 응답의 최대 크기를 KiloByte로 정의합니다.',
-        'Defines the module that shows a generic notification in the agent interface. Either "Text" - if configured - or the contents of "File" will be displayed.' =>
-            '에이전트 인터페이스에서 일반 알림을 표시하는 모듈을 정의합니다. "텍스트"- 구성된 경우 - 또는 "파일"의 내용이 표시됩니다.',
-        'Defines the module that shows all the currently logged in agents in the agent interface.' =>
-            '에이전트 인터페이스에 현재 로그인 되어 있는 모든 에이전트를 표시하는 모듈을 정의합니다.',
-        'Defines the module that shows all the currently logged in customers in the agent interface.' =>
-            '에이전트 인터페이스에 현재 로그인 한 모든 고객을 표시하는 모듈을 정의합니다.',
-        'Defines the module that shows the currently logged in agents in the customer interface.' =>
-            '현재 로그인 한 상담원을 고객 인터페이스에 표시하는 모듈을 정의합니다.',
-        'Defines the module that shows the currently logged in customers in the customer interface.' =>
-            '현재 로그인 한 고객을 고객 인터페이스에 표시하는 모듈을 정의합니다.',
-        'Defines the module to authenticate customers.' => '고객을 인증할 모듈을 정의합니다.',
-        'Defines the module to display a notification if cloud services are disabled.' =>
-            '클라우드 서비스가 비활성화 된 경우 알림을 표시할 모듈을 정의합니다.',
-        'Defines the module to display a notification in different interfaces on different occasions for OTRS Business Solution™.' =>
-            'OTRS Business Solution ™의 여러 경우에 서로 다른 인터페이스에 알림을 표시 할 모듈을 정의합니다.',
-        'Defines the module to display a notification in the agent interface if the OTRS Daemon is not running.' =>
-            'OTRS 데몬이 실행되고 있지 않은 경우 에이전트 인터페이스에 알림을 표시 할 모듈을 정의합니다.',
-        'Defines the module to display a notification in the agent interface if the system configuration is out of sync.' =>
-            '시스템 구성이 동기화되지 않은 경우 에이전트 인터페이스에 알림을 표시 할 모듈을 정의합니다.',
-        'Defines the module to display a notification in the agent interface, if the agent has not yet selected a time zone.' =>
-            '에이전트가 아직 시간대를 선택하지 않은 경우 에이전트 인터페이스에 알림을 표시할 모듈을 정의합니다.',
-        'Defines the module to display a notification in the agent interface, if the agent is logged in while having out-of-office active.' =>
-            '에이전트가 부재중 상태로 로그인되어 있는 경우 에이전트 인터페이스에 알림을 표시할 모듈을 정의합니다.',
-        'Defines the module to display a notification in the agent interface, if the agent is logged in while having system maintenance active.' =>
-            '시스템 유지 관리가 활성화 된 상태에서 에이전트가 로그인 한 경우 에이전트 인터페이스에 알림을 표시할 모듈을 정의합니다.',
-        'Defines the module to display a notification in the agent interface, if the agent session limit prior warning is reached.' =>
-            '에이전트 세션 제한 사전 경고에 도달하면 에이전트 인터페이스에 알림을 표시 할 모듈을 정의합니다.',
-        'Defines the module to display a notification in the agent interface, if the installation of not verified packages is activated (only shown to admins).' =>
-            '',
-        'Defines the module to display a notification in the agent interface, if the system is used by the admin user (normally you shouldn\'t work as admin).' =>
-            '관리자 사용자가 시스템을 사용하는 경우 에이전트 인터페이스에 알림을 표시 할 모듈을 정의합니다 (일반적으로 관리자로 사용하면 안 됨).',
-        'Defines the module to display a notification in the agent interface, if there are invalid sysconfig settings deployed.' =>
-            '잘못된 sysconfig 설정이 배포 된 경우 에이전트 인터페이스에 알림을 표시 할 모듈을 정의합니다.',
-        'Defines the module to display a notification in the agent interface, if there are modified sysconfig settings that are not deployed yet.' =>
-            '아직 배포되지 않은 수정 된 sysconfig 설정이있는 경우 에이전트 인터페이스에 알림을 표시 할 모듈을 정의합니다.',
-        'Defines the module to display a notification in the customer interface, if the customer is logged in while having system maintenance active.' =>
-            '시스템 유지 보수가 활성화 된 상태에서 고객이 로그인 한 경우 고객 인터페이스에 알림을 표시 할 모듈을 정의합니다.',
-        'Defines the module to display a notification in the customer interface, if the customer user has not yet selected a time zone.' =>
-            '고객 사용자가 아직 시간대를 선택하지 않은 경우 고객 인터페이스에 알림을 표시할 모듈을 정의합니다.',
-        'Defines the module to generate code for periodic page reloads.' =>
-            '정기적 페이지 제로드를 위한 코드를 생성하는 모듈을 정의합니다.',
-        'Defines the module to send emails. "DoNotSendEmail" doesn\'t send emails at all. Any of the "SMTP" mechanisms use a specified (external) mailserver. "Sendmail" directly uses the sendmail binary of your operating system. "Test" doesn\'t send emails, but writes them to $OTRS_HOME/var/tmp/CacheFileStorable/EmailTest/ for testing purposes.' =>
-            '',
-        'Defines the module used to store the session data. With "DB" the frontend server can be splitted from the db server. "FS" is faster.' =>
-            '세션 데이터를 저장하는 데 사용되는 모듈을 정의합니다. "DB"를 사용하면 프론트 엔드 서버를 db 서버에서 분리 할 수 ​​있습니다. "FS"가 빠릅니다.',
-        'Defines the name of the application, shown in the web interface, tabs and title bar of the web browser.' =>
-            '웹 인터페이스, 탭 및 웹 브라우저의 제목 표시 줄에 표시된 응용 프로그램의 이름을 정의합니다.',
-        'Defines the name of the column to store the data in the preferences table.' =>
-            '환경 설정 테이블에 데이터를 저장할 열의 이름을 정의합니다.',
-        'Defines the name of the column to store the user identifier in the preferences table.' =>
-            '환경 설정 테이블에 사용자 식별자를 저장할 열의 이름을 정의합니다.',
-        'Defines the name of the indicated calendar.' => '표시된 달력의 이름을 정의합니다.',
-        'Defines the name of the key for customer sessions.' => '고객 세션의 키 이름을 정의합니다.',
-        'Defines the name of the session key. E.g. Session, SessionID or OTRS.' =>
-            '세션 키의 이름을 정의합니다. 예 : 세션, 세션 ID 또는 OTRS.',
-        'Defines the name of the table where the user preferences are stored.' =>
-            '사용자 기본 설정이 저장된 테이블의 이름을 정의합니다.',
-        'Defines the next possible states after composing / answering a ticket in the ticket compose screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 작성 화면에서 티켓을 작성 / 응답한 후 가능한 다음 상태를 정의합니다.',
-        'Defines the next possible states after forwarding a ticket in the ticket forward screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 전달 화면에서 티켓을 전달한 후 가능한 다음 상태를 정의합니다.',
-        'Defines the next possible states after sending a message in the email outbound screen of the agent interface.' =>
-            '에이전트 인터페이스의 전자 메일 아웃바운드 화면에서 메시지를 보낸 후 가능한 다음 상태를 정의합니다.',
-        'Defines the next possible states for customer tickets in the customer interface.' =>
-            '고객 인터페이스에서 고객 티켓에 대한 다음 가능한 상태를 정의합니다.',
-        'Defines the next state of a ticket after adding a note, in the close ticket screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 닫기 화면에서 메모를 추가한 후 티켓의 다음 상태를 정의합니다.',
-        'Defines the next state of a ticket after adding a note, in the ticket free text screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓없는 텍스트 화면에 메모를 추가한 후 티켓의 다음 상태를 정의합니다.',
-        'Defines the next state of a ticket after adding a note, in the ticket note screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 메모 화면에서 메모를 추가 한 후 티켓의 다음 상태를 정의합니다.',
-        'Defines the next state of a ticket after adding a note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스의 확대 된 티켓의 티켓 소유자 화면에 노트를 추가 한 후 티켓의 다음 상태를 정의합니다.',
-        'Defines the next state of a ticket after adding a note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스의 확대 된 티켓의 티켓 보류 화면에 노트를 추가 한 후 티켓의 다음 상태를 정의합니다.',
-        'Defines the next state of a ticket after adding a note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스의 확대 된 티켓의 티켓 우선 순위 화면에 노트를 추가 한 후 티켓의 다음 상태를 정의합니다.',
-        'Defines the next state of a ticket after adding a note, in the ticket responsible screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 책임 화면에 메모를 추가 한 후 티켓의 다음 상태를 정의합니다.',
-        'Defines the next state of a ticket after being bounced, in the ticket bounce screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 바운스 화면에서 바운스 된 후 티켓의 다음 상태를 정의합니다.',
-        'Defines the next state of a ticket after being moved to another queue, in the move ticket screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 이동 화면에서 다른 대기열로 이동 한 후 티켓의 다음 상태를 정의합니다.',
-        'Defines the next state of a ticket, in the ticket bulk screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 대량 화면에서 티켓의 다음 상태를 정의합니다.',
-        'Defines the number of character per line used in case an HTML article preview replacement on TemplateGenerator for EventNotifications.' =>
-            'EventNotifications에 대한 TemplateGenerator의 HTML 기사 미리보기 바꾸기에 사용되는 줄당 문자 수를 정의합니다.',
-        'Defines the number of days to keep the daemon log files.' => '데몬 로그 파일을 보관할 기간을 정의합니다.',
-        'Defines the number of header fields in frontend modules for add and update postmaster filters. It can be up to 99 fields.' =>
-            '포스트 마스터 필터 추가 및 업데이트를 위한 프론트 엔드 모듈의 헤더 필드 수를 정의합니다. 최대 99개의 필드가 가능합니다.',
-        'Defines the number of hours a communication will be stored, whichever its status.' =>
-            '통신이 저장될 시간을 분으로 정의합니다',
-        'Defines the number of hours a successful communication will be stored.' =>
-            '성공적인 통신을 저장할 시간을 정의합니다.',
-        'Defines the parameters for the customer preferences table.' => '고객 환경 설정 테이블의 매개 변수를 정의합니다.',
-        'Defines the parameters for the dashboard backend. "Cmd" is used to specify command with parameters. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
-            '대시 보드 백엔드의 매개 변수를 정의합니다. "Cmd"는 매개 변수가있는 명령을 지정하는 데 사용됩니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 또는 사용자가 수동으로 활성화해야하는지 여부를 나타냅니다. "CacheTTL"은 플러그인의 캐시 만기 기간을 나타냅니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
-        'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
-            '대시 보드 백엔드의 매개 변수를 정의합니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 또는 사용자가 수동으로 활성화해야하는지 여부를 나타냅니다. "CacheTTL"은 플러그인의 캐시 만기 기간을 나타냅니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
-        'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" defines the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
-            '대시 보드 백엔드의 매개 변수를 정의합니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 또는 사용자가 수동으로 활성화해야하는지 여부를 나타냅니다. "CacheTTLLocal"은 플러그인의 캐시 만기 기간을 분 단위로 정의합니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
-        'Defines the parameters for the dashboard backend. "Limit" defines the number of entries displayed by default. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
-            '대시 보드 백엔드의 매개 변수를 정의합니다. "제한"은 기본적으로 표시되는 항목 수를 정의합니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 또는 사용자가 수동으로 활성화해야하는지 여부를 나타냅니다. "CacheTTL"은 플러그인의 캐시 만기 기간을 나타냅니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
-        'Defines the parameters for the dashboard backend. "Limit" defines the number of entries displayed by default. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" defines the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
-            '대시 보드 백엔드의 매개 변수를 정의합니다. "제한"은 기본적으로 표시되는 항목 수를 정의합니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 또는 사용자가 수동으로 활성화해야하는지 여부를 나타냅니다. "CacheTTLLocal"은 플러그인의 캐시 만기 기간을 분 단위로 정의합니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
-        'Defines the password to access the SOAP handle (bin/cgi-bin/rpc.pl).' =>
-            'SOAP 핸들 (bin / cgi-bin / rpc.pl)에 액세스하기위한 암호를 정의합니다.',
-        'Defines the path and TTF-File to handle bold italic monospaced font in PDF documents.' =>
-            'PDF 문서에서 굵은 기울임 꼴 고정 폭 글꼴을 처리 할 경로와 TTF-File을 정의합니다.',
-        'Defines the path and TTF-File to handle bold italic proportional font in PDF documents.' =>
-            'PDF 문서에서 굵은 기울임 꼴 비례 글꼴을 처리 할 경로와 TTF-File을 정의합니다.',
-        'Defines the path and TTF-File to handle bold monospaced font in PDF documents.' =>
-            'PDF 문서에서 굵은 고정 폭 글꼴을 처리 할 경로와 TTF-File을 정의합니다.',
-        'Defines the path and TTF-File to handle bold proportional font in PDF documents.' =>
-            'PDF 문서에서 굵은 글꼴을 처리 할 경로와 TTF 파일을 정의합니다.',
-        'Defines the path and TTF-File to handle italic monospaced font in PDF documents.' =>
-            'PDF 문서에서 이탤릭체로 고정 폭 글꼴을 처리 할 경로와 TTF 파일을 정의합니다.',
-        'Defines the path and TTF-File to handle italic proportional font in PDF documents.' =>
-            'PDF 문서에서 기울임 꼴 비례 글꼴을 처리 할 경로와 TTF-File을 정의합니다.',
-        'Defines the path and TTF-File to handle monospaced font in PDF documents.' =>
-            'PDF 문서에서 고정 폭 글꼴을 처리 할 경로와 TTF-File을 정의합니다.',
-        'Defines the path and TTF-File to handle proportional font in PDF documents.' =>
-            'PDF 문서에서 비례 글꼴을 처리 할 경로와 TTF-File을 정의합니다.',
-        'Defines the path of the shown info file, that is located under Kernel/Output/HTML/Templates/Standard/CustomerAccept.tt.' =>
-            'Kernel / Output / HTML / Templates / Standard / CustomerAccept.tt에있는 표시된 정보 파일의 경로를 정의합니다.',
-        'Defines the path to PGP binary.' => 'PGP 바이너리 경로를 정의합니다.',
-        'Defines the path to open ssl binary. It may need a HOME env ($ENV{HOME} = \'/var/lib/wwwrun\';).' =>
-            'ssl 바이너리를 여는 경로를 정의합니다. HOME 환경 변수 ($ ENV {HOME} = \'/ var / lib / wwwrun\';)가 필요합니다.',
-        'Defines the period of time (in minutes) before agent is marked as "away" due to inactivity (e.g. in the "Logged-In Users" widget or for the chat).' =>
-            '비활성 상태 (예 : \'로그인 사용자\'위젯 또는 채팅)로 인해 상담원이 \'자리 비움\'으로 표시되기까지의 시간 (분)을 정의합니다.',
-        'Defines the period of time (in minutes) before customer is marked as "away" due to inactivity (e.g. in the "Logged-In Users" widget or for the chat).' =>
-            '비활성 상태 (예 : \'로그인 사용자\'위젯 또는 채팅)로 인해 고객이 \'자리 비움\'으로 표시되기까지의 시간 (분)을 정의합니다.',
-        'Defines the postmaster default queue.' => '전자 메일 관리자 기본 큐를 정의합니다.',
-        'Defines the priority in which the information is logged and presented.' =>
-            '정보가 기록되고 표시되는 우선 순위를 정의합니다.',
-        'Defines the recipient target of the phone ticket and the sender of the email ticket ("Queue" shows all queues, "System address" displays all system addresses) in the agent interface.' =>
-            '에이전트 티켓에서 전화 티켓의받는 사람 대상과 전자 메일 티켓의 보낸 사람을 정의합니다 ( "대기열"은 모든 대기열을 나타내며 "시스템 주소"는 모든 시스템 주소를 표시합니다).',
-        'Defines the recipient target of the tickets ("Queue" shows all queues, "SystemAddress" shows only the queues which are assigned to system addresses) in the customer interface.' =>
-            '티켓의 수신자 대상을 정의합니다 ( "대기열"은 모든 대기열을 나타내며 "시스템 주소"는 시스템 주소에 할당 된 대기열 만 표시 함).',
-        'Defines the required permission to show a ticket in the escalation view of the agent interface.' =>
-            '에이전트 인터페이스의 에스컬레이션 보기에 티켓을 표시하는데 필요한 권한을 정의합니다.',
-        'Defines the search limit for the stats.' => '통계에 대한 검색 제한을 정의합니다.',
-        'Defines the search parameters for the AgentCustomerUserAddressBook screen. With the setting \'CustomerTicketTextField\' the values for the recipient field can be specified.' =>
-            'AgentCustomerUserAddressBook 화면에 대한 검색 매개 변수를 정의합니다. \'CustomerTicketTextField\'설정을 사용하면받는 사람 필드의 값을 지정할 수 있습니다.',
-        'Defines the sender for rejected emails.' => '거부된 전자메일에 대한 보낸 사람을 정의합니다.',
-        'Defines the separator between the agents real name and the given queue email address.' =>
-            '에이전트 실명과 주어진 대기열 전자메일 주소 사이의 구분 기호를 정의합니다.',
-        'Defines the shown columns and the position in the AgentCustomerUserAddressBook result screen.' =>
-            'AgentCustomerUserAddressBook 결과 화면에 표시된 열과 위치를 정의합니다.',
-        'Defines the shown links in the footer area of the customer and public interface of this OTRS system. The value in "Key" is the external URL, the value in "Content" is the shown label.' =>
-            '',
-        'Defines the standard permissions available for customers within the application. If more permissions are needed, you can enter them here. Permissions must be hard coded to be effective. Please ensure, when adding any of the afore mentioned permissions, that the "rw" permission remains the last entry.' =>
-            '응용 프로그램 내에서 고객이 사용할 수있는 표준 사용 권한을 정의합니다. 더 많은 권한이 필요하면 여기에 입력 할 수 있습니다. 사용 권한은 효과적 이도록 하드 코딩해야합니다. 앞서 언급 한 권한 중 하나를 추가 할 때 "rw"권한이 마지막 항목으로 남아 있는지 확인하십시오.',
-        'Defines the standard size of PDF pages.' => 'PDF 페이지의 표준 크기를 정의합니다.',
-        'Defines the state of a ticket if it gets a follow-up and the ticket was already closed.' =>
-            '후속 조치를 받았고 티켓이 이미 폐쇄된 경우 티켓의 상태를 정의합니다.',
-        'Defines the state of a ticket if it gets a follow-up.' => '후속 조치를 받는 티켓의 상태를 정의합니다.',
-        'Defines the state type of the reminder for pending tickets.' => '보류 중인 티켓에 대한 미리 알림의 상태 유형을 정의합니다.',
-        'Defines the subject for notification mails sent to agents, about new password.' =>
-            '에이전트에 보내는 알림 메일의 제목과 새 암호를 정의합니다.',
-        'Defines the subject for notification mails sent to agents, with token about new requested password.' =>
-            '에이전트에게 보낸 알림 메일의 제목을 정의하고 요청 된 새 비밀번호에 대한 토큰을 사용합니다.',
-        'Defines the subject for notification mails sent to customers, about new account.' =>
-            '새 계정에 대한 고객에게 발송된 알림 메일 제목을 정의합니다.',
-        'Defines the subject for notification mails sent to customers, about new password.' =>
-            '고객에게 보낸 알림 메일 제목과 새 비밀번호를 정의합니다.',
-        'Defines the subject for notification mails sent to customers, with token about new requested password.' =>
-            '새로운 요청된 비밀번호에 대한 토큰과 함께 고객에게 발송된 통지 메일의 제목을 정의합니다.',
-        'Defines the subject for rejected emails.' => '거부된 전자메일의 제목을 정의합니다.',
-        'Defines the system administrator\'s email address. It will be displayed in the error screens of the application.' =>
-            '시스템 관리자의 전자 메일 주소를 정의합니다. 응용 프로그램의 오류 화면에 표시됩니다.',
-        'Defines the system identifier. Every ticket number and http session string contains this ID. This ensures that only tickets which belong to your system will be processed as follow-ups (useful when communicating between two instances of OTRS).' =>
-            '시스템 식별자를 정의합니다. 모든 티켓 번호와 http 세션 문자열에는이 ID가 들어 있습니다. 이렇게하면 시스템에 속한 티켓 만 후속 조치로 처리됩니다 (OTRS의 두 인스턴스간에 통신 할 때 유용함).',
-        'Defines the target attribute in the link to external customer database. E.g. \'AsPopup PopupType_TicketAction\'.' =>
-            '외부 고객 데이터베이스 링크의 대상 속성을 정의합니다. 예 : \'AsPopup PopupType_TicketAction\'.',
-        'Defines the target attribute in the link to external customer database. E.g. \'target="cdb"\'.' =>
-            '외부 고객 데이터베이스 링크의 대상 속성을 정의합니다. 예 : \'target = "cdb"\'.',
-        'Defines the ticket appointment type backend for ticket dynamic field date time.' =>
-            '티켓 동적 필드 날짜 시간에 대한 티켓 약속 유형 백엔드를 정의합니다.',
-        'Defines the ticket appointment type backend for ticket escalation time.' =>
-            '티켓 에스컬레이션 시간에 대한 티켓 약속 유형 백엔드를 정의합니다.',
-        'Defines the ticket appointment type backend for ticket pending time.' =>
-            '티켓 보류 시간에 대한 티켓 약속 유형 백엔드를 정의합니다.',
-        'Defines the ticket fields that are going to be displayed calendar events. The "Key" defines the field or ticket attribute and the "Content" defines the display name.' =>
-            '달력 이벤트를 표시 할 티켓 필드를 정의합니다. "Key"는 필드 또는 티켓 속성을 정의하고 "Content"는 표시 이름을 정의합니다.',
-        'Defines the ticket plugin for calendar appointments.' => '일정 약속을 위한 티켓 플러그인을 정의합니다.',
-        'Defines the time zone of the indicated calendar, which can be assigned later to a specific queue.' =>
-            '지정된 일정에 나중에 할당할 수 있는 지정된 달력의 표준 시간대를 정의합니다.',
-        'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the OTRS Daemon).' =>
-            '공개 모듈 \'PublicSupportDataCollector\'(예 : OTRS 데몬에서 사용)를 사용하여 지원 데이터 수집에 대한 시간 초과 (최소, 20 초)를 정의합니다.',
-        'Defines the two-factor module to authenticate agents.' => '에이전트를 인증할 2요소 모듈을 정의합니다.',
-        'Defines the two-factor module to authenticate customers.' => '고객을 인증할 2요소 모듈을 정의합니다.',
-        'Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server\'s settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, OTRS_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
-            '응용 프로그램을 제공하기 위해 웹 서버에서 사용하는 프로토콜 유형을 정의합니다. https 프로토콜이 일반 http 대신 사용되는 경우 여기에 지정해야합니다. 이것은 웹 서버의 설정이나 동작에 영향을 미치지 않으므로 응용 프로그램에 대한 액세스 방법을 변경하지 않으며, 틀린 경우 응용 프로그램에 로그인하지 못하게하지 않습니다. 이 설정은 응용 프로그램에서 사용하는 모든 형식의 메시징에서 찾을 수있는 OTRS_CONFIG_HttpType 변수로만 사용되어 시스템 내의 티켓에 대한 링크를 만듭니다.',
-        'Defines the used character for plaintext email quotes in the ticket compose screen of the agent interface. If this is empty or inactive, original emails will not be quoted but appended to the response.' =>
-            '에이전트 인터페이스의 티켓 작성 화면에서 일반 텍스트 전자 메일 따옴표에 사용되는 문자를 정의합니다. 비어 있거나 비활성 인 경우 원래 이메일은 인용되지 않고 응답에 추가됩니다.',
-        'Defines the user identifier for the customer panel.' => '고객 패널에 대한 사용자 ID를 정의합니다.',
-        'Defines the username to access the SOAP handle (bin/cgi-bin/rpc.pl).' =>
-            'SOAP 핸들 (bin / cgi-bin / rpc.pl)에 액세스하기위한 사용자 이름을 정의합니다.',
-        'Defines the users avatar. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
-            '사용자 아바타를 정의합니다. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
-        'Defines the valid state types for a ticket. If a ticket is in a state which have any state type from this setting, this ticket will be considered as open, otherwise as closed.' =>
-            '',
-        'Defines the valid states for unlocked tickets. To unlock tickets the script "bin/otrs.Console.pl Maint::Ticket::UnlockTimeout" can be used.' =>
-            '잠금 해제 된 티켓의 유효한 상태를 정의합니다. 티켓의 잠금을 해제하려면 "bin / otrs.Console.pl Maint :: Ticket :: UnlockTimeout"스크립트를 사용할 수 있습니다.',
-        'Defines the viewable locks of a ticket. NOTE: When you change this setting, make sure to delete the cache in order to use the new value. Default: unlock, tmp_lock.' =>
-            '티켓의 표시 가능 잠금을 정의합니다. 참고 :이 설정을 변경할 때 새 값을 사용하려면 캐시를 삭제해야합니다. 기본값 : 잠금 해제, tmp_lock.',
-        'Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).' =>
-            '이 화면의 서식있는 텍스트 편집기 구성 요소의 너비를 정의합니다. 숫자 (픽셀) 또는 퍼센트 값 (상대)을 입력하십시오.',
-        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            '서식있는 텍스트 편집기 구성 요소의 너비를 정의합니다. 숫자 (픽셀) 또는 퍼센트 값 (상대)을 입력하십시오.',
-        'Defines time in minutes since last modification for drafts of specified type before they are considered expired.' =>
-            '만료된 것으로 간주되기 전에 지정된 유형의 초안에 대한 최종 수정 이후의 시간을 분으로 정의합니다.',
-        'Defines whether to index archived tickets for fulltext searches.' =>
-            '전체 텍스트 검색을 위해 보관된 티켓의 색인을 생성할지 여부를 정의합니다.',
-        'Defines which article sender types should be shown in the preview of a ticket.' =>
-            '티켓 미리보기에 표시할 기사 발신자 유형을 정의합니다.',
-        'Defines which items are available for \'Action\' in third level of the ACL structure.' =>
-            'ACL 구조의 세 번째 레벨에서 \'작업\'에 사용할 수있는 항목을 정의합니다.',
-        'Defines which items are available in first level of the ACL structure.' =>
-            'ACL 구조의 첫 번째 레벨에서 사용할 수있는 항목을 정의합니다.',
-        'Defines which items are available in second level of the ACL structure.' =>
-            'ACL 구조의 두 번째 레벨에서 사용할 수있는 항목을 정의합니다.',
-        'Defines which states should be set automatically (Content), after the pending time of state (Key) has been reached.' =>
-            '보류 상태 (키)에 도달 한 후 자동으로 설정할 상태 (내용)를 정의합니다.',
-        'Defines, which tickets of which ticket state types should not be listed in linked ticket lists.' =>
-            '티켓 상태 유형이 링크된 티켓 목록에 나열되어서는 안되는 티켓을 정의합니다.',
-        'Delete expired cache from core modules.' => '만료된 캐시를 코어 모듈에서 삭제하십시오.',
-        'Delete expired loader cache weekly (Sunday mornings).' => '매주 만료된 로더 캐시를 삭제하십시오 (일요일 오전).',
-        'Delete expired sessions.' => '만료된 세션을 삭제하십시오.',
-        'Delete expired ticket draft entries.' => '만료된 티켓 초안 항목을 삭제하십시오.',
-        'Delete expired upload cache hourly.' => '만료된 업로드 캐시를 매시간 삭제하십시오.',
         'Delete this ticket' => '이 티켓 삭제',
         'Deleted link to ticket "%s".' => 'Deleted link to ticket "%s".',
-        'Deletes a session if the session id is used with an invalid remote IP address.' =>
-            '세션 ID가 유효하지 않은 원격 IP주소와 함께 사용되면 세션을 삭제합니다.',
-        'Deletes requested sessions if they have timed out.' => '요청한 세션이 시간 초과된 경우 삭제합니다.',
-        'Delivers extended debugging information in the frontend in case any AJAX errors occur, if enabled.' =>
-            '활성화 된 경우 AJAX 오류가 발생할 경우 프론트 엔드에 확장 디버깅 정보를 제공합니다.',
         'Deploy and manage OTRS Business Solution™.' => 'OTRS Business Solution ™ 배포 및 관리',
         'Detached' => '분리된',
-        'Determines if a button to delete a link should be displayed next to each link in each zoom mask.' =>
-            '링크를 삭제할 버튼이 각 줌 마스크의 각 링크 옆에 표시되어야 하는지 여부를 결정합니다.',
-        'Determines if the list of possible queues to move to ticket into should be displayed in a dropdown list or in a new window in the agent interface. If "New Window" is set you can add a move note to the ticket.' =>
-            '티켓으로 이동할 수있는 대기열 목록을 드롭 다운 목록이나 에이전트 인터페이스의 새 창에 표시할지 결정합니다. "새 창"이 설정되면 티켓에 이동 노트를 추가 할 수 있습니다.',
-        'Determines if the statistics module may generate ticket lists.' =>
-            '통계 모듈이 티켓 목록을 생성할 수 있는지 여부를 결정합니다.',
-        'Determines the next possible ticket states, after the creation of a new email ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 새 전자 메일 티켓을 만든 후 가능한 다음 티켓 상태를 결정합니다.',
-        'Determines the next possible ticket states, after the creation of a new phone ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 새 전화 티켓을 만든 후 가능한 다음 티켓 상태를 결정합니다.',
-        'Determines the next possible ticket states, for process tickets in the agent interface.' =>
-            '에이전트 인터페이스에서 프로세스 티켓에 대한 다음 가능한 티켓 상태를 결정합니다.',
-        'Determines the next possible ticket states, for process tickets in the customer interface.' =>
-            '고객 인터페이스의 프로세스 티켓에 대한 다음 가능한 티켓 상태를 결정합니다.',
-        'Determines the next screen after new customer ticket in the customer interface.' =>
-            '고객 인터페이스에서 새 고객 티켓 다음 화면을 결정합니다.',
-        'Determines the next screen after the follow-up screen of a zoomed ticket in the customer interface.' =>
-            '고객 인터페이스에서 확대 된 티켓의 후속 화면 이후의 다음 화면을 결정합니다.',
-        'Determines the next screen after the ticket is moved. LastScreenOverview will return the last overview screen (e.g. search results, queueview, dashboard). TicketZoom will return to the TicketZoom.' =>
-            '티켓을 이동 한 후 다음 화면을 결정합니다. LastScreenOverview는 마지막 개요 화면 (예 : 검색 결과, 대기열보기, 대시 보드)을 반환합니다. TicketZoom은 TicketZoom으로 돌아갑니다.',
-        'Determines the possible states for pending tickets that changed state after reaching time limit.' =>
-            '제한 시간에 도달한 후 상태가 변경된 보류중인 티켓의 가능한 상태를 결정합니다.',
         'Determines the strings that will be shown as recipient (To:) of the phone ticket and as sender (From:) of the email ticket in the agent interface. For Queue as NewQueueSelectionType "<Queue>" shows the names of the queues and for SystemAddress "<Realname> <<Email>>" shows the name and email of the recipient.' =>
             '에이전트 티켓에서 전화 티켓의받는 사람 (To :) 및 전자 메일 티켓의 보낸 사람 (From :)으로 표시 될 문자열을 결정합니다. Queue as NewQueueSelectionType "1"은 대기열의 이름을 표시하고 SystemAddress의 "2 3"은받는 사람의 이름과 전자 메일을 표시합니다.',
         'Determines the strings that will be shown as recipient (To:) of the ticket in the customer interface. For Queue as CustomerPanelSelectionType, "<Queue>" shows the names of the queues, and for SystemAddress, "<Realname> <<Email>>" shows the name and email of the recipient.' =>
             '고객 인터페이스에서 티켓의받는 사람 (To :)으로 표시 될 문자열을 결정합니다. Queue는 CustomerPanelSelectionType으로, "1"은 대기열의 이름을 표시하고 SystemAddress의 경우 "2 3"은 수신자의 이름과 전자 메일을 표시합니다.',
-        'Determines the way the linked objects are displayed in each zoom mask.' =>
-            '링크된 개체가 각 줌 마스크에 표시되는 방식을 결정합니다.',
-        'Determines which options will be valid of the recipient (phone ticket) and the sender (email ticket) in the agent interface.' =>
-            '상담원 인터페이스에서 수신자 (전화 티켓) 및 발신자 (전자 메일 티켓)에 대해 유효한 옵션을 결정합니다.',
-        'Determines which queues will be valid for ticket\'s recepients in the customer interface.' =>
-            '고객 인터페이스에서 티켓의 수신인에 대해 유효한 대기열을 결정합니다.',
-        'Disable HTTP header "Content-Security-Policy" to allow loading of external script contents. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
-            '외부 스크립트 내용로드를 허용하려면 HTTP 헤더 "Content-Security-Policy"를 비활성화하십시오. 이 HTTP 헤더를 비활성화하면 보안 문제가 발생할 수 있습니다! 자신이하는 일을 아는 경우에만 사용을 중지하십시오!',
-        'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
-            'HTTP 헤더 "X-Frame-Options : SAMEORIGIN"을 사용하지 않도록 설정하여 OTRS를 다른 웹 사이트의 IFrame으로 포함 할 수 있습니다. 이 HTTP 헤더를 비활성화하면 보안 문제가 발생할 수 있습니다! 자신이하는 일을 아는 경우에만 사용을 중지하십시오!',
-        'Disable autocomplete in the login screen.' => '',
+        'Development' => '개발',
         'Disable cloud services' => '클라우드 서비스 사용 중지',
-        'Disables sending reminder notifications to the responsible agent of a ticket (Ticket::Responsible needs to be enabled).' =>
-            '책임있는 에이전트에게 티켓 알림을 보내는 것을 비활성화합니다 (Ticket :: Responsible을 활성화해야합니다).',
-        'Disables the redirection to the last screen overview / dashboard after a ticket is closed.' =>
-            '',
-        'Disables the web installer (http://yourhost.example.com/otrs/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
-            '시스템이 하이재킹되지 않도록 웹 설치 프로그램 (http://yourhost.example.com/otrs/installer.pl)을 비활성화합니다. 사용하도록 설정하지 않으면 시스템을 다시 설치하고 현재 기본 구성을 사용하여 설치 프로그램 스크립트에서 질문을 미리 채 웁니다. 활성화 된 경우 GenericAgent, PackageManager 및 SQL Box도 비활성화됩니다.',
-        'Display a warning and prevent search when using stop words within fulltext search.' =>
-            '전체 텍스트 검색 내에서 중지 단어를 사용할 때 경고를 표시하고 검색을 차단합니다.',
         'Display communication log entries.' => '통신 로그 항목을 표시하십시오.',
-        'Display settings to override defaults for Process Tickets.' => '프로세스 티켓의 기본값을 대체하는 설정 표시.',
-        'Displays the accounted time for an article in the ticket zoom view.' =>
-            '티켓 확대보기에서 기사의 계정 시간을 표시합니다.',
-        'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
-            '티켓 확대보기에서 현재 티켓과 동일한 CustomerID를 가진 모든 티켓 수를 표시합니다.',
         'Down' => '하위',
         'Dropdown' => '쓰러지다',
         'Dutch' => '네덜란드 사람',
-        'Dutch stop words for fulltext index. These words will be removed from the search index.' =>
-            '전체 텍스트 색인에 대한 네덜란드어 중지 단어. 이 단어는 검색 색인에서 제거됩니다.',
         'Dynamic Fields Checkbox Backend GUI' => '동적 필드 확인란 백엔드 GUI',
         'Dynamic Fields Date Time Backend GUI' => '동적 필드 날짜 시간 백엔드 GUI',
         'Dynamic Fields Drop-down Backend GUI' => '동적 필드 드롭 다운 백엔드 GUI',
@@ -7180,72 +8714,10 @@ Thanks for your help!
         'Dynamic Fields Multiselect Backend GUI' => '동적 필드 다중 선택 백엔드 GUI',
         'Dynamic Fields Overview Limit' => '동적 필드 개요 제한',
         'Dynamic Fields Text Backend GUI' => '동적 필드 텍스트 백엔드 GUI',
-        'Dynamic Fields used to export the search result in CSV format.' =>
-            '검색 결과를 CSV 형식으로 내보내는 데 사용되는 동적 필드입니다.',
         'Dynamic fields groups for process widget. The key is the name of the group, the value contains the fields to be shown. Example: \'Key => My Group\', \'Content: Name_X, NameY\'.' =>
             '프로세스 위젯의 동적 필드 그룹. 키는 그룹의 이름이고, 값은 표시 할 필드를 포함합니다. 예 : \'Key => My Group\', \'Content : Name_X, NameY\'.',
         'Dynamic fields limit per page for Dynamic Fields Overview.' => '동적 필드 개요에 대한 페이지 당 동적 필드 제한',
-        'Dynamic fields options shown in the ticket message screen of the customer interface. NOTE. If you want to display these fields also in the ticket zoom of the customer interface, you have to enable them in CustomerTicketZoom###DynamicField.' =>
-            '동적 필드 옵션은 고객 인터페이스의 티켓 메시지 화면에 표시됩니다. 노트. 이러한 필드를 고객 인터페이스의 티켓 확대에도 표시하려면 CustomerTicketZoom ### DynamicField에서 활성화해야합니다.',
-        'Dynamic fields options shown in the ticket reply section in the ticket zoom screen of the customer interface.' =>
-            '동적 필드 옵션은 고객 인터페이스의 티켓 확대 / 축소 화면에서 티켓 응답 섹션에 표시됩니다.',
-        'Dynamic fields shown in the email outbound screen of the agent interface.' =>
-            '에이전트 인터페이스의 전자 메일 아웃바운드 화면에 표시되는 동적 필드입니다.',
-        'Dynamic fields shown in the process widget in ticket zoom screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 확대 / 축소 화면에서 프로세스 위젯에 표시되는 동적 필드입니다.',
-        'Dynamic fields shown in the sidebar of the ticket zoom screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 확대 / 축소 화면의 사이드 바에 표시된 동적 필드입니다.',
-        'Dynamic fields shown in the ticket close screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 닫기 화면에 표시된 동적 필드입니다.',
-        'Dynamic fields shown in the ticket compose screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 작성 화면에 표시된 동적 필드',
-        'Dynamic fields shown in the ticket email screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 전자 메일 화면에 표시된 동적 필드입니다.',
-        'Dynamic fields shown in the ticket forward screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 전달 화면에 표시되는 동적 필드입니다.',
-        'Dynamic fields shown in the ticket free text screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 프리 텍스트 화면에 표시된 동적 필드입니다.',
-        'Dynamic fields shown in the ticket medium format overview screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 중간 형식 개요 화면에 표시된 동적 필드입니다.',
-        'Dynamic fields shown in the ticket move screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 이동 화면에 표시된 동적 필드',
-        'Dynamic fields shown in the ticket note screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 메모 화면에 표시된 동적 필드입니다.',
-        'Dynamic fields shown in the ticket overview screen of the customer interface.' =>
-            '동적 인터페이스는 고객 인터페이스의 티켓 개요 화면에 표시됩니다.',
-        'Dynamic fields shown in the ticket owner screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 소유자 화면에 표시된 동적 필드입니다.',
-        'Dynamic fields shown in the ticket pending screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 보류 화면에 표시되는 동적 필드입니다.',
-        'Dynamic fields shown in the ticket phone inbound screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 전화 인바운드 화면에 표시되는 동적 필드입니다.',
-        'Dynamic fields shown in the ticket phone outbound screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 전화 아웃바운드 화면에 표시되는 동적 필드입니다.',
-        'Dynamic fields shown in the ticket phone screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 전화 화면에 표시된 동적 필드입니다.',
-        'Dynamic fields shown in the ticket preview format overview screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 미리보기 형식 개요 화면에 표시된 동적 필드입니다.',
-        'Dynamic fields shown in the ticket print screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 인쇄 화면에 표시되는 동적 필드.',
-        'Dynamic fields shown in the ticket print screen of the customer interface.' =>
-            '동적 인터페이스는 고객 인터페이스의 티켓 인쇄 화면에 표시됩니다.',
-        'Dynamic fields shown in the ticket priority screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 우선 순위 화면에 표시된 동적 필드입니다.',
-        'Dynamic fields shown in the ticket responsible screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 담당 화면에 표시되는 동적 필드입니다.',
-        'Dynamic fields shown in the ticket search overview results screen of the customer interface.' =>
-            '고객 인터페이스의 티켓 검색 개요 결과 화면에 표시된 동적 필드.',
-        'Dynamic fields shown in the ticket search screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 검색 화면에 표시되는 동적 필드.',
-        'Dynamic fields shown in the ticket search screen of the customer interface.' =>
-            '동적 필드는 고객 인터페이스의 티켓 검색 화면에 표시됩니다.',
-        'Dynamic fields shown in the ticket small format overview screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 소형 형식 개요 화면에 표시된 동적 필드입니다.',
-        'Dynamic fields shown in the ticket zoom screen of the customer interface.' =>
-            '동적 인터페이스는 고객 인터페이스의 티켓 확대 / 축소 화면에 표시됩니다.',
         'DynamicField' => 'DynamicField',
-        'DynamicField backend registration.' => 'DynamicField 백엔드 등록.',
-        'DynamicField object registration.' => 'DynamicField 개체 등록.',
         'DynamicField_%s' => 'DynamicField_%s',
         'E-Mail Outbound' => '전자 메일 아웃 바운드',
         'Edit Customer Companies.' => '고객 회사 편집.',
@@ -7256,39 +8728,10 @@ Thanks for your help!
         'Email Outbound' => '이메일 발신',
         'Email Resend' => '이메일 재전송',
         'Email communication channel.' => '이메일 커뮤니케이션 채널.',
-        'Enable highlighting queues based on ticket age.' => '티켓 수명에 따라 강조 표시 대기열을 활성화합니다.',
-        'Enable keep-alive connection header for SOAP responses.' => 'SOAP 응답에 대해 연결 유지 연결 헤더를 사용합니다.',
-        'Enable this if you trust in all your public and private pgp keys, even if they are not certified with a trusted signature.' =>
-            '신뢰할 수있는 서명으로 인증되지 않았더라도 모든 공용 및 개인용 PGP 키를 신뢰하는 경우이 옵션을 활성화하십시오.',
         'Enabled filters.' => '필터를 사용합니다.',
-        'Enables PGP support. When PGP support is enabled for signing and encrypting mail, it is HIGHLY recommended that the web server runs as the OTRS user. Otherwise, there will be problems with the privileges when accessing .gnupg folder.' =>
-            'PGP 지원을 사용합니다. 메일 서명 및 암호화에 대해 PGP 지원을 사용하는 경우 웹 서버를 OTRS 사용자로 실행하는 것이 좋습니다. 그렇지 않으면 .gnupg 폴더에 액세스 할 때 권한에 문제가 있습니다.',
-        'Enables S/MIME support.' => 'S / MIME 지원을 사용합니다.',
-        'Enables customers to create their own accounts.' => '고객이 자신의 계정을 만들 수 있습니다.',
-        'Enables fetch S/MIME from CustomerUser backend support.' => '고객사용자 백 엔드 지원에서 S / MIME을 가져올 수 있습니다.',
-        'Enables file upload in the package manager frontend.' => '패키지 관리자 프론트 엔드에서 파일 업로드를 사용 가능하게 합니다.',
-        'Enables or disables the caching for templates. WARNING: Do NOT disable template caching for production environments for it will cause a massive performance drop! This setting should only be disabled for debugging reasons!' =>
-            '템플릿에 대한 캐싱을 사용하거나 사용하지 않도록 설정합니다. 경고 : 프로덕션 환경에서 템플릿 캐싱을 사용하지 않도록 설정하면 성능이 크게 떨어질 수 있습니다. 이 설정은 디버깅을 이유로 사용하지 않아야 합니다!',
-        'Enables or disables the debug mode over frontend interface.' => '프론트 엔드 인터페이스에서 디버그 모드를 활성화 또는 비활성화합니다. ',
-        'Enables or disables the ticket watcher feature, to keep track of tickets without being the owner nor the responsible.' =>
-            '티켓 워처 기능을 사용 또는 사용 중지하여 소유자 또는 책임자가 아닌 티켓을 추적합니다.',
-        'Enables performance log (to log the page response time). It will affect the system performance. Frontend::Module###AdminPerformanceLog must be enabled.' =>
-            '성능 로그를 사용 가능하게합니다 (페이지 응답 시간을 기록). 시스템 성능에 영향을줍니다. Frontend :: Module ### AdminPerformanceLog가 활성화되어 있어야합니다.',
-        'Enables the minimal ticket counter size (if "Date" was selected as TicketNumberGenerator).' =>
-            '최소 티켓 카운터 크기를 활성화합니다 ( "Date"가 TicketNumberGenerator로 선택된 경우).',
-        'Enables ticket bulk action feature for the agent frontend to work on more than one ticket at a time.' =>
-            '에이전트 프론트 엔드의 티켓 대량 작업 기능을 사용하여 한 번에 둘 이상의 티켓에서 작업할 수 있습니다.',
-        'Enables ticket bulk action feature only for the listed groups.' =>
-            '나열된 그룹에 대해서만 티켓 대량 작업 기능을 사용합니다.',
-        'Enables ticket responsible feature, to keep track of a specific ticket.' =>
-            '티켓 관련 기능을 사용하여 특정 티켓을 추적합니다.',
-        'Enables ticket type feature.' => '티켓 유형 기능을 사용합니다.',
-        'Enables ticket watcher feature only for the listed groups.' => '나열된 그룹에 대해서만 티켓 감시자 기능을 사용합니다.',
         'English (Canada)' => '영어 (캐나다)',
         'English (United Kingdom)' => '영어 (영국)',
         'English (United States)' => '영어 (미국)',
-        'English stop words for fulltext index. These words will be removed from the search index.' =>
-            '전체 텍스트 색인에 대한 영어 중지 단어. 이 단어는 검색 색인에서 제거됩니다.',
         'Enroll process for this ticket' => '이 티켓에 대한 프로세스 등록',
         'Enter your shared secret to enable two factor authentication. WARNING: Make sure that you add the shared secret to your generator application and the application works well. Otherwise you will be not able to login anymore without the two factor token.' =>
             '',
@@ -7300,47 +8743,10 @@ Thanks for your help!
             '이벤트 모듈 등록. 성능 향상을 위해 트리거 이벤트를 정의 할 수 있습니다 (예 : Event => TicketCreate).',
         'Event module registration. For more performance you can define a trigger event (e. g. Event => TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
             '이벤트 모듈 등록. 성능 향상을 위해 트리거 이벤트를 정의 할 수 있습니다 (예 : Event => TicketCreate). 모든 티켓 동적 필드가 동일한 이벤트를 필요로하는 경우에만 가능합니다.',
-        'Event module that performs an update statement on TicketIndex to rename the queue name there if needed and if StaticDB is actually used.' =>
-            '필요한 경우 및 StaticDB가 실제로 사용되는 경우 큐 이름을 바꾸기 위해 TicketIndex에서 업데이트 문을 수행하는 이벤트 모듈입니다.',
-        'Event module that updates customer company object name for dynamic fields.' =>
-            '동적 필드에 대한 고객 회사 개체 이름을 업데이트하는 이벤트 모듈입니다.',
-        'Event module that updates customer user object name for dynamic fields.' =>
-            '동적 필드에 대한 고객 사용자 개체 이름을 업데이트 하는 이벤트 모듈입니다.',
-        'Event module that updates customer user search profiles if login changes.' =>
-            '로그인이 변경되면 고객 사용자 검색 프로파일을 업데이트 하는 이벤트 모듈입니다.',
-        'Event module that updates customer user service membership if login changes.' =>
-            '로그인이 변경되면 고객 사용자 서비스 멤버십을 업데이트 하는 이벤트 모듈입니다.',
-        'Event module that updates customer users after an update of the Customer.' =>
-            '고객 업데이트 후 고객 사용자를 업데이트 하는 이벤트 모듈입니다.',
-        'Event module that updates tickets after an update of the Customer User.' =>
-            '고객 사용자의 업데이트 후 티켓을 업데이트 하는 이벤트 모듈입니다.',
-        'Event module that updates tickets after an update of the Customer.' =>
-            '고객 사용자의 업데이트 후 티켓을 업데이트 하는 이벤트 모듈입니다.',
         'Events Ticket Calendar' => '이벤트 티켓 캘린더',
-        'Example package autoload configuration.' => '패키지 자동로드 구성 예제.',
         'Execute SQL statements.' => 'SQL 문을 실행하십시오.',
-        'Executes a custom command or module. Note: if module is used, function is required.' =>
-            '사용자 지정 명령 또는 모듈을 실행합니다. 참고 : 모듈을 사용하는 경우 기능이 필요합니다.',
-        'Executes follow-up checks on In-Reply-To or References headers for mails that don\'t have a ticket number in the subject.' =>
-            '제목에 티켓 번호가없는 메일에 대한 In-Reply-To 또는 References 헤더의 후속 검사를 실행합니다.',
-        'Executes follow-up checks on OTRS Header \'X-OTRS-Bounce\'.' => 'OTRS Header \'X-OTRS-Bounce\'에 대한 후속 검사를 실행합니다.',
-        'Executes follow-up checks on attachment contents for mails that don\'t have a ticket number in the subject.' =>
-            '제목에 티켓 번호가 없는 메일의 첨부파일 내용에 대한 후속 검사를 실행합니다.',
-        'Executes follow-up checks on email body for mails that don\'t have a ticket number in the subject.' =>
-            '제목에 티켓 번호가 없는 메일에 대한 이메일 본문에 대한 후속 검사를 실행합니다.',
-        'Executes follow-up checks on the raw source email for mails that don\'t have a ticket number in the subject.' =>
-            '제목에 티켓 번호가 없는 메일의 원시 원본 전자 메일에 대한 후속 검사를 실행합니다.',
-        'Exports the whole article tree in search result (it can affect the system performance).' =>
-            '검색 결과에 전체 아티클 트리를 내보냅니다 (시스템 성능에 영향을 미칠 수 있음).',
         'External' => '외부',
         'External Link' => '외부 링크',
-        'Fetch emails via fetchmail (using SSL).' => 'fetchmail (SSL 사용)을 통해 전자 메일을 가져옵니다.',
-        'Fetch emails via fetchmail.' => 'fetchmail을 통해 이메일을 가져옵니다.',
-        'Fetch incoming emails from configured mail accounts.' => '구성된 메일 계정에서 수신 전자 메일을 가져옵니다.',
-        'Fetches packages via proxy. Overwrites "WebUserAgent::Proxy".' =>
-            '프록시를 통해 패키지를 가져옵니다. "WebUserAgent :: Proxy"를 덮어 씁니다.',
-        'File that is displayed in the Kernel::Modules::AgentInfo module, if located under Kernel/Output/HTML/Templates/Standard/AgentInfo.tt.' =>
-            'Kernel :: Outputs / HTML / Templates / Standard / AgentInfo.tt 아래에있는 경우 Kernel :: Modules :: AgentInfo 모듈에 표시되는 파일.',
         'Filter for debugging ACLs. Note: More ticket attributes can be added in the format <OTRS_TICKET_Attribute> e.g. <OTRS_TICKET_Priority>.' =>
             'ACL 디버깅 용 필터. 참고 : 더 많은 티켓 속성을 1과 같은 형식으로 추가 할 수 있습니다. 2.',
         'Filter for debugging Transitions. Note: More filters can be added in the format <OTRS_TICKET_Attribute> e.g. <OTRS_TICKET_Priority>.' =>
@@ -7356,43 +8762,14 @@ Thanks for your help!
         'FirstResponseInMin' => 'FirstResponseInMin',
         'Firstname Lastname' => '이름 성',
         'Firstname Lastname (UserLogin)' => '이름 성 (UserLogin)',
-        'For these state types the ticket numbers are striked through in the link table.' =>
-            '이러한 상태 유형의 경우 티켓 번호는 링크 테이블에서 제거됩니다.',
-        'Force the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.' =>
-            '필터를 실행하거나 정지 단어 목록을 적용하지 않고 기사 검색 색인에서 원본 기사 텍스트의 저장을 강제 실행합니다. 이렇게하면 검색 색인의 크기가 커지고 전체 텍스트 검색 속도가 느려질 수 있습니다.',
-        'Forces encoding of outgoing emails (7bit|8bit|quoted-printable|base64).' =>
-            '보내는 전자 메일을 강제로 인코딩합니다 (7bit | 8bit | quoted-printable | base64).',
-        'Forces to choose a different ticket state (from current) after lock action. Define the current state as key, and the next state after lock action as content.' =>
-            '잠금 조치 후 다른 티켓 상태 (현재 상태에서)를 강제로 선택합니다. 현재 상태를 키로 정의하고, 잠금 조치 후 다음 상태를 내용으로 정의하십시오.',
-        'Forces to unlock tickets after being moved to another queue.' =>
-            '다른 대기열로 이동한 후 강제로 티켓의 잠금을 해제합니다.',
         'Forwarded to "%s".' => 'Forwarded to "%s".',
         'Free Fields' => '자유 필드',
         'French' => '프랑스 국민',
         'French (Canada)' => '프랑스어(캐나다)',
-        'French stop words for fulltext index. These words will be removed from the search index.' =>
-            '전체 텍스트 인덱스에 대한 프랑스어 중지 단어. 이 단어는 검색 색인에서 제거됩니다.',
         'Frontend' => '프론트 엔드',
-        'Frontend module registration (disable AgentTicketService link if Ticket Service feature is not used).' =>
-            '프론트 엔드 모듈 등록 (티켓 서비스 기능을 사용하지 않는 경우 AgentTicketService 링크를 비활성화).',
-        'Frontend module registration (disable company link if no company feature is used).' =>
-            '프론트 엔드 모듈 등록 (회사 기능이 사용되지 않는 경우 회사 링크 비활성화).',
-        'Frontend module registration (disable ticket processes screen if no process available) for Customer.' =>
-            '프런트 엔드 모듈 등록 (사용 가능한 프로세스가 없을 경우 티켓 프로세스 화면을 비활성화).',
-        'Frontend module registration (disable ticket processes screen if no process available).' =>
-            '프론트 엔드 모듈 등록 (사용 가능한 프로세스가없는 경우 티켓 프로세스 화면을 사용하지 않음).',
-        'Frontend module registration (show personal favorites as sub navigation items of \'Admin\').' =>
-            '프론트 엔드 모듈 등록 (개인 즐겨 찾기를 \'Admin\'의 하위 네비게이션 항목으로 표시).',
-        'Frontend module registration for the agent interface.' => '에이전트 인터페이스에 대한 프론트 엔드 모듈 등록.',
-        'Frontend module registration for the customer interface.' => '고객 인터페이스에 대한 프론트 엔드 모듈 등록.',
-        'Frontend module registration for the public interface.' => '',
         'Full value' => '최대 가치',
-        'Fulltext index regex filters to remove parts of the text.' => '전체 텍스트 색인 정규식 필터는 텍스트의 일부를 제거합니다.',
         'Fulltext search' => '전체 텍스트 검색',
         'Galician' => '갈리시아 사람',
-        'General ticket data shown in the ticket overviews (fall-back). Note that TicketNumber can not be disabled, because it is necessary.' =>
-            '티켓 개요에 표시된 일반 티켓 데이터 (폴백). TicketNumber는 필요하므로 비활성화 할 수 없습니다.',
-        'Generate dashboard statistics.' => '대시 보드 통계를 생성합니다.',
         'Generic Info module.' => '일반 정보 모듈.',
         'GenericAgent' => 'GenericAgent',
         'GenericInterface Debugger GUI' => 'GenericInterface 디버거 GUI',
@@ -7405,21 +8782,9 @@ Thanks for your help!
         'GenericInterface Web Service GUI' => 'GenericInterface 웹 서비스 GUI',
         'GenericInterface Web Service History GUI' => 'GenericInterface 웹 서비스 기록 GUI',
         'GenericInterface Web Service Mapping GUI' => 'GenericInterface 웹 서비스 매핑 GUI',
-        'GenericInterface module registration for an error handling module.' =>
-            '오류 처리 모듈에 대한 GenericInterface 모듈 등록.',
-        'GenericInterface module registration for the invoker layer.' => '호출자 레이어의 GenericInterface 모듈 등록.',
-        'GenericInterface module registration for the mapping layer.' => '매핑 레이어의 GenericInterface 모듈 등록.',
-        'GenericInterface module registration for the operation layer.' =>
-            '조작 계층에 대한 GenericInterface 모듈 등록.',
-        'GenericInterface module registration for the transport layer.' =>
-            '전송 레이어의 GenericInterface 모듈 등록.',
         'German' => '독일 사람',
-        'German stop words for fulltext index. These words will be removed from the search index.' =>
-            '전체 텍스트 색인에 대한 독일어 중지 단어. 이 단어는 검색 색인에서 제거됩니다.',
         'Gives customer users group based access to tickets from customer users of the same customer (ticket CustomerID is a CustomerID of the customer user).' =>
             '동일한 고객 (고객 ID의 티켓은 고객 사용자의 고객 ID)의 고객 사용자로부터 티켓에 대한 그룹 기반 액세스를 고객에게 제공합니다.',
-        'Gives end users the possibility to override the separator character for CSV files, defined in the translation files. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
-            '최종 사용자에게 번역 파일에 정의 된 CSV 파일의 구분 문자를 무시할 수 있습니다. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
         'Global Search Module.' => '글로벌 검색 모듈.',
         'Go to dashboard!' => '대시 보드로 이동!',
         'Good PGP signature.' => '',
@@ -7429,169 +8794,39 @@ Thanks for your help!
         'Graph: Stacked Area Chart' => '그래프 : 누적 영역 차트',
         'Greek' => '그리스 사람',
         'Hebrew' => '헤브라이 사람',
-        'Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild".' =>
-            '',
         'High Contrast' => '고 대비',
-        'High contrast skin for visually impaired users.' => '시각 장애가 있는 사용자를 위한 고 대비 피부.',
         'Hindi' => '힌디 어',
         'Hungarian' => '헝가리 인',
-        'If "DB" was selected for Customer::AuthModule, a database driver (normally autodetection is used) can be specified.' =>
-            'Customer :: AuthModule에 대해 "DB"가 선택되면 데이터베이스 드라이버 (일반적으로 자동 감지가 사용됨)를 지정할 수 있습니다.',
-        'If "DB" was selected for Customer::AuthModule, a password to connect to the customer table can be specified.' =>
-            'Customer :: AuthModule에 대해 "DB"가 선택되면 고객 테이블에 연결할 암호를 지정할 수 있습니다.',
-        'If "DB" was selected for Customer::AuthModule, a username to connect to the customer table can be specified.' =>
-            'Customer :: AuthModule에 대해 "DB"가 선택되면 고객 테이블에 연결할 사용자 이름을 지정할 수 있습니다.',
-        'If "DB" was selected for Customer::AuthModule, the DSN for the connection to the customer table must be specified.' =>
-            'Customer :: AuthModule에 대해 "DB"를 선택한 경우 고객 테이블에 대한 연결에 대한 DSN을 지정해야합니다.',
-        'If "DB" was selected for Customer::AuthModule, the column name for the CustomerPassword in the customer table must be specified.' =>
-            'Customer :: AuthModule에 대해 "DB"가 선택되면 customer 테이블의 CustomerPassword에 대한 열 이름을 지정해야합니다.',
-        'If "DB" was selected for Customer::AuthModule, the encryption type of passwords must be specified.' =>
-            'Customer :: AuthModule에 대해 "DB"가 선택되면 암호의 암호화 유형을 지정해야합니다.',
-        'If "DB" was selected for Customer::AuthModule, the name of the column for the CustomerKey in the customer table must be specified.' =>
-            'Customer :: AuthModule에 대해 "DB"가 선택되면 customer 테이블의 CustomerKey에 대한 열의 이름을 지정해야합니다.',
-        'If "DB" was selected for Customer::AuthModule, the name of the table where your customer data should be stored must be specified.' =>
-            'Customer :: AuthModule에 대해 "DB"가 선택되면 고객 데이터를 저장해야하는 테이블의 이름을 지정해야합니다.',
-        'If "DB" was selected for SessionModule, a table in database where session data will be stored must be specified.' =>
-            'SessionModule에 대해 "DB"가 선택되면 세션 데이터가 저장 될 데이터베이스의 테이블을 지정해야합니다.',
-        'If "FS" was selected for SessionModule, a directory where the session data will be stored must be specified.' =>
-            'SessionModule에 대해 "FS"가 선택되면 세션 데이터가 저장 될 디렉토리를 지정해야합니다.',
-        'If "HTTPBasicAuth" was selected for Customer::AuthModule, you can specify (by using a RegExp) to strip parts of REMOTE_USER (e. g. for to remove trailing domains). RegExp-Note, $1 will be the new Login.' =>
-            'Customer :: AuthModule에 대해 "HTTPBasicAuth"를 선택한 경우 (예 : RegExp를 사용하여) REMOTE_USER의 일부를 제거하도록 지정할 수 있습니다 (예 : 후행 도메인 제거). RegExp-Note, $ 1이 새로운 로그인이됩니다.',
-        'If "HTTPBasicAuth" was selected for Customer::AuthModule, you can specify to strip leading parts of user names (e. g. for domains like example_domain\user to user).' =>
-            '',
-        'If "LDAP" was selected for Customer::AuthModule and if you want to add a suffix to every customer login name, specifiy it here, e. g. you just want to write the username user but in your LDAP directory exists user@domain.' =>
-            'Customer :: AuthModule에 대해 "LDAP"가 선택되고 모든 고객 로그인 이름에 접미어를 추가하려는 경우 여기서 여기를 지정하십시오. 지. 사용자 이름 사용자를 쓰고 싶지만 LDAP 디렉토리에는 user @ domain이 있어야합니다.',
-        'If "LDAP" was selected for Customer::AuthModule and special paramaters are needed for the Net::LDAP perl module, you can specify them here. See "perldoc Net::LDAP" for more information about the parameters.' =>
-            'Customer :: AuthModule에서 "LDAP"가 선택되고 Net :: LDAP perl 모듈에 특수 매개 변수가 필요한 경우 여기에서 지정할 수 있습니다. 매개 변수에 대한 자세한 정보는 "perldoc Net :: LDAP"를 참조하십시오.',
-        'If "LDAP" was selected for Customer::AuthModule and your users have only anonymous access to the LDAP tree, but you want to search through the data, you can do this with a user who has access to the LDAP directory. Specify the password for this special user here.' =>
-            'Customer :: AuthModule에 "LDAP"가 선택되고 사용자가 LDAP 트리에 익명으로 액세스 할 수 있지만 데이터를 검색하려는 경우 LDAP 디렉토리에 액세스 할 수있는 사용자에게이 작업을 수행 할 수 있습니다. 이 특별 사용자의 암호를 여기에 지정하십시오.',
-        'If "LDAP" was selected for Customer::AuthModule and your users have only anonymous access to the LDAP tree, but you want to search through the data, you can do this with a user who has access to the LDAP directory. Specify the username for this special user here.' =>
-            'Customer :: AuthModule에 "LDAP"가 선택되고 사용자가 LDAP 트리에 익명으로 액세스 할 수 있지만 데이터를 검색하려는 경우 LDAP 디렉토리에 액세스 할 수있는 사용자에게이 작업을 수행 할 수 있습니다. 이 특별한 사용자의 사용자 이름을 여기에 지정하십시오.',
-        'If "LDAP" was selected for Customer::AuthModule, the BaseDN must be specified.' =>
-            'Customer :: AuthModule에서 "LDAP"를 선택한 경우 BaseDN을 지정해야합니다.',
-        'If "LDAP" was selected for Customer::AuthModule, the LDAP host can be specified.' =>
-            'Customer :: AuthModule에 대해 "LDAP"를 선택한 경우 LDAP 호스트를 지정할 수 있습니다.',
-        'If "LDAP" was selected for Customer::AuthModule, the user identifier must be specified.' =>
-            'Customer :: AuthModule에 대해 "LDAP"를 선택한 경우 사용자 식별자를 지정해야합니다.',
-        'If "LDAP" was selected for Customer::AuthModule, user attributes can be specified. For LDAP posixGroups use UID, for non LDAP posixGroups use full user DN.' =>
-            'Customer :: AuthModule에 대해 "LDAP"가 선택되면 사용자 속성을 지정할 수 있습니다. LDAP posixGroups의 경우 UID를 사용하고 비 LDAP의 경우 posixGroups는 전체 사용자 DN을 사용합니다.',
-        'If "LDAP" was selected for Customer::AuthModule, you can specify access attributes here.' =>
-            'Customer :: AuthModule에 대해 "LDAP"를 선택한 경우 여기에서 액세스 속성을 지정할 수 있습니다.',
-        'If "LDAP" was selected for Customer::AuthModule, you can specify if the applications will stop if e. g. a connection to a server can\'t be established due to network problems.' =>
-            'Customer :: AuthModule에 대해 "LDAP"가 선택된 경우, e. 지. 네트워크 문제로 인해 서버에 연결할 수 없습니다.',
-        'If "LDAP" was selected for Customer::Authmodule, you can check if the user is allowed to authenticate because he is in a posixGroup, e.g. user needs to be in a group xyz to use OTRS. Specify the group, who may access the system.' =>
-            'Customer :: Authmodule에 대해 "LDAP"가 선택된 경우 사용자가 posixGroup에 있기 때문에 인증 할 수 있는지 확인할 수 있습니다. 사용자는 OTRS를 사용하려면 그룹 xyz에 있어야합니다. 시스템에 액세스 할 수있는 그룹을 지정하십시오.',
-        'If "LDAP" was selected, you can add a filter to each LDAP query, e.g. (mail=*), (objectclass=user) or (!objectclass=computer).' =>
-            '"LDAP"를 선택한 경우 각 LDAP 쿼리에 필터를 추가 할 수 있습니다. (메일 = *), (objectclass = 사용자) 또는 (! objectclass = 컴퓨터).',
-        'If "Radius" was selected for Customer::AuthModule, the password to authenticate to the radius host must be specified.' =>
-            'Customer :: AuthModule에서 "반경"을 선택한 경우 반지름 호스트에 인증 할 암호를 지정해야합니다.',
-        'If "Radius" was selected for Customer::AuthModule, the radius host must be specified.' =>
-            'Customer :: AuthModule에서 "반경"을 선택한 경우 반지름 호스트를 지정해야합니다.',
-        'If "Radius" was selected for Customer::AuthModule, you can specify if the applications will stop if e. g. a connection to a server can\'t be established due to network problems.' =>
-            'Customer :: AuthModule에 대해 "반경"을 선택한 경우 e. 지. 네트워크 문제로 인해 서버에 연결할 수 없습니다.',
-        'If "Sendmail" was selected as SendmailModule, the location of the sendmail binary and the needed options must be specified.' =>
-            '"Sendmail"이 SendmailModule로 선택된 경우 sendmail 바이너리의 위치와 필요한 옵션을 지정해야합니다.',
-        'If "SysLog" was selected for LogModule, a special log facility can be specified.' =>
-            'LogModule에 대해 "SysLog"가 선택되면 특수 로그 기능을 지정할 수 있습니다.',
-        'If "SysLog" was selected for LogModule, the charset that should be used for logging can be specified.' =>
-            'LogModule에 "SysLog"를 선택하면 로깅에 사용해야하는 charset을 지정할 수 있습니다.',
-        'If "bcrypt" was selected for CryptType, use cost specified here for bcrypt hashing. Currently max. supported cost value is 31.' =>
-            'CryptType에 대해 "bcrypt"를 선택한 경우 bcrypt 해싱에 여기에 지정된 비용을 사용하십시오. 현재 최대 지원 비용 값은 31입니다.',
-        'If "file" was selected for LogModule, a logfile must be specified. If the file doesn\'t exist, it will be created by the system.' =>
-            'LogModule에 대해 "file"을 선택하면 로그 파일을 지정해야합니다. 파일이 없으면 시스템에 의해 작성됩니다.',
-        'If active, none of the regular expressions may match the user\'s email address to allow registration.' =>
-            '활성화되어 있는 경우 등록을 허용하는 정규 표현식이 사용자의 전자 메일 주소와 일치하지 않을 수 있습니다.',
-        'If active, one of the regular expressions has to match the user\'s email address to allow registration.' =>
-            '활성화 되어있는 경우 등록을 허용하는 정규 표현식이 사용자의 전자 메일 주소와 일치하지 않을 수 있습니다.',
-        'If any of the "SMTP" mechanisms was selected as SendmailModule, and authentication to the mail server is needed, a password must be specified.' =>
-            '"SMTP"메커니즘 중 하나가 SendmailModule로 선택되고 메일 서버에 대한 인증이 필요하면 암호를 지정해야합니다.',
-        'If any of the "SMTP" mechanisms was selected as SendmailModule, and authentication to the mail server is needed, an username must be specified.' =>
-            '"SMTP"메커니즘 중 하나가 SendmailModule로 선택되고 메일 서버에 대한 인증이 필요하면 사용자 이름을 지정해야합니다.',
-        'If any of the "SMTP" mechanisms was selected as SendmailModule, the mailhost that sends out the mails must be specified.' =>
-            '"SMTP"메커니즘 중 하나가 SendmailModule로 선택된 경우 메일을 보내는 메일 호스트를 지정해야합니다.',
-        'If any of the "SMTP" mechanisms was selected as SendmailModule, the port where your mailserver is listening for incoming connections must be specified.' =>
-            '"SMTP"메커니즘 중 하나가 SendmailModule로 선택된 경우 메일 서버가 들어오는 연결을 수신하는 포트를 지정해야합니다.',
-        'If enabled debugging information for ACLs is logged.' => '활성화 된 경우 ACL에 대한 디버깅 정보가 기록됩니다.',
-        'If enabled debugging information for transitions is logged.' => '활성화 된 경우 전환에 대한 디버깅 정보가 기록됩니다.',
-        'If enabled the daemon will redirect the standard error stream to a log file.' =>
-            '사용 가능하면 데몬은 표준 오류 스트림을 로그 파일로 재지정합니다.',
-        'If enabled the daemon will redirect the standard output stream to a log file.' =>
-            '사용 가능하면 데몬은 표준 출력 스트림을 로그 파일로 재지정합니다.',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if <$OTRSHome>/var/run/ can not be used.' =>
             '이 설정을 사용하면 데몬은이 디렉토리를 사용하여 PID 파일을 만듭니다. 참고 : 변경하기 전에 데몬을 중지하고 <$ OTRSHome> / var / run /을 사용할 수없는 경우에만이 설정을 사용하십시오.',
-        'If enabled, OTRS will deliver all CSS files in minified form.' =>
-            '사용하도록 설정하면 OTRS는 모든 CSS 파일을 축소 된 형식으로 제공합니다.',
-        'If enabled, OTRS will deliver all JavaScript files in minified form.' =>
-            '사용하도록 설정하면 OTRS는 모든 JavaScript 파일을 축소 된 형식으로 제공합니다.',
-        'If enabled, TicketPhone and TicketEmail will be open in new windows.' =>
-            '사용하도록 설정하면 TicketPhone 및 TicketEmail이 새 창에서 열립니다.',
-        'If enabled, the OTRS version tag will be removed from the Webinterface, the HTTP headers and the X-Headers of outgoing mails. NOTE: If you change this option, please make sure to delete the cache.' =>
-            '사용 설정하면 OTRS 버전 태그가 웹 인터페이스, 나가는 메일의 HTTP 헤더 및 X 헤더에서 삭제됩니다. 참고 :이 옵션을 변경하면 캐시를 삭제하십시오.',
-        'If enabled, the cache data be held in memory.' => '활성화된 경우 캐시 데이터가 메모리에 보관됩니다.',
-        'If enabled, the cache data will be stored in cache backend.' => '활성화된 경우 캐시 데이터가 캐시 백엔드에 저장됩니다.',
-        'If enabled, the customer can search for tickets in all services (regardless what services are assigned to the customer).' =>
-            '사용하도록 설정된 경우 고객은 모든 서비스의 티켓을 검색할 수 있습니다 (고객에게 할당된 서비스에 관계없음).',
         'If enabled, the different overviews (Dashboard, LockedView, QueueView) will automatically refresh after the specified time.' =>
             '활성화 된 경우 다른 개요 (Dashboard, LockedView, QueueView)가 지정된 시간 후에 자동으로 새로 고침됩니다.',
-        'If enabled, the first level of the main menu opens on mouse hover (instead of click only).' =>
-            '이 옵션을 사용하면 메인 메뉴의 첫 번째 레벨이 마우스를 올리면 열리게 됩니다 (클릭만 하는 대신).',
-        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) OTRSTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
-            '사용하도록 설정하면 아직 시간대를 선택하지 않은 사용자에게 알림이 전송됩니다. 참고 : (1) 사용자가 아직 시간대를 선택하지 않았으며 (2) OTRSTimeZone과 UserDefaultTimeZone이 일치하고 (3) UTC로 설정되지 않은 경우 알림이 표시되지 않습니다.',
-        'If no SendmailNotificationEnvelopeFrom is specified, this setting makes it possible to use the email\'s from address instead of an empty envelope sender (required in certain mail server configurations).' =>
-            'SendmailNotificationEnvelopeFrom이 지정되지 않은 경우이 설정을 사용하면 빈 봉투 발신자 대신 (특정 전자 메일 서버 구성에서 필요) 전자 메일의 보낸 사람 주소를 사용할 수 있습니다.',
-        'If set, this address is used as envelope sender header in outgoing notifications. If no address is specified, the envelope sender header is empty (unless SendmailNotificationEnvelopeFrom::FallbackToEmailFrom is set).' =>
-            '설정된 경우이 주소는 보내는 알림의 봉투 보낸 사람 헤더로 사용됩니다. 주소를 지정하지 않으면 봉투 송신자 헤더가 비어 있습니다 (SendmailNotificationEnvelopeFrom :: FallbackToEmailFrom이 설정되지 않은 경우).',
-        'If set, this address is used as envelope sender in outgoing messages (not notifications - see below). If no address is specified, the envelope sender is equal to queue e-mail address.' =>
-            '설정된 경우 이 주소는 발신 메일에서 봉투 발신자로 사용됩니다 ( 알림이 아님 - 아래 참조). 주소를 지정하지 않으면 봉투 송신자는 대기열 전자 우편 주소와 같습니다.',
-        'If this option is enabled, tickets created via the web interface, via Customers or Agents, will receive an autoresponse if configured. If this option is not enabled, no autoresponses will be sent.' =>
-            '이 옵션을 사용하면 Customers 나 Agents를 통해 웹 인터페이스를 통해 생성 된 티켓은 자동 응답을받습니다. 이 옵션을 사용하지 않으면 자동 응답이 전송되지 않습니다.',
-        'If this regex matches, no message will be send by the autoresponder.' =>
-            '이 정규식이 일치하면 자동 응답으로 보낼 메시지가 없습니다.',
-        'If this setting is enabled, it is possible to install packages which are not verified by OTRS Group. These packages could threaten your whole system!' =>
-            '',
-        'If this setting is enabled, local modifications will not be highlighted as errors in the package manager and support data collector.' =>
-            '이 설정을 사용하면 로컬 수정 내용이 패키지 관리자 및 지원 데이터 수집기에서 오류로 강조 표시되지 않습니다.',
         'If you\'re going to be out of office, you may wish to let other users know by setting the exact dates of your absence.' =>
             '부재중이라면 부재자의 정확한 날짜를 설정하여 다른 사용자에게 알릴 수 있습니다.',
-        'Ignore system sender article types (e. g. auto responses or email notifications) to be flagged as \'Unread Article\' in AgentTicketZoom or expanded automatically in Large view screens.' =>
-            'AgentTicketZoom에서 시스템 발신자 기사 유형 (예 : 자동 응답 또는 이메일 알림)을 \'읽지 않은 기사\'로 표시하거나 큰보기 화면에서 자동으로 확장하도록 무시합니다.',
         'Import appointments screen.' => '약속 가져오기 화면.',
-        'Include tickets of subqueues per default when selecting a queue.' =>
-            '큐를 선택할 때 기본값 당 서브 큐 티켓을 포함하십시오.',
-        'Include unknown customers in ticket filter.' => '티켓 필터에 알 수없는 고객을 포함시킵니다.',
-        'Includes article create times in the ticket search of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 검색에서 기사 작성 시간을 포함합니다.',
         'Incoming Phone Call.' => '수신 전화.',
-        'IndexAccelerator: to choose your backend TicketViewAccelerator module. "RuntimeDB" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). "StaticDB" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command "bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild" for initial index creation.' =>
-            'IndexAccelerator : 백엔드 TicketViewAccelerator 모듈을 선택합니다. "RuntimeDB"는 티켓 테이블에서 각 큐 뷰를 생성합니다 (성능상의 문제없이 최대 약 60,000 개의 티켓과 시스템의 6.000 개 티켓). "StaticDB"는보기와 같이 작동하는 별도의 티켓 색인 표를 사용하는 가장 강력한 모듈입니다 (80.000 개 이상의 티켓이 시스템에 저장되어있는 경우 권장). 초기 색인 작성은 "bin / otrs.Console.pl Maint :: Ticket :: QueueIndexRebuild"명령을 사용하십시오.',
-        'Indicates if a bounce e-mail should always be treated as normal follow-up.' =>
-            '반송 전자 메일을 항상 정상적인 후속조치로 처리해야하는지 나타냅니다.',
         'Indonesian' => '인도네시아인',
         'Inline' => '인라인',
         'Input' => '입력',
         'Interface language' => '인터페이스 언어',
+        'Internal' => '',
         'Internal communication channel.' => '내부 통신 채널.',
         'International Workers\' Day' => '국제 노동의 날',
-        'It is possible to configure different skins, for example to distinguish between diferent agents, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
-            '응용 프로그램 내에서 도메인별로 사용되도록 다른 스킨을 구성 할 수 있습니다 예 : 다른 에이전트를 구분할 수 있음. 정규식 (정규식)을 사용하면 키 / 내용 쌍을 도메인과 일치하도록 구성 할 수 있습니다. "Key"의 값은 도메인과 일치해야하며 "Content"의 값은 시스템의 유효한 스킨이어야합니다. 올바른 형식의 정규식에 대한 예제 항목을 참조하십시오.',
-        'It is possible to configure different skins, for example to distinguish between diferent customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid skin on your system. Please see the example entries for the proper form of the regex.' =>
-            '서로 다른 스킨을 구성하여 서로 다른 고객을 구별하고 응용 프로그램 내에서 도메인별로 사용할 수 있습니다. 정규식 (정규식)을 사용하면 키 / 내용 쌍을 도메인과 일치하도록 구성 할 수 있습니다. "Key"의 값은 도메인과 일치해야하며 "Content"의 값은 시스템의 유효한 스킨이어야합니다. 올바른 형식의 정규식에 대한 예제 항목을 참조하십시오.',
-        'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
-            '에이전트와 고객을 구별하기 위해 응용 프로그램 내에서 도메인별로 사용되도록 다른 테마를 구성 할 수 있습니다. 정규식 (정규식)을 사용하면 키 / 내용 쌍을 도메인과 일치하도록 구성 할 수 있습니다. "Key"의 값은 도메인과 일치해야하며 "Content"의 값은 시스템의 유효한 테마 여야합니다. 올바른 형식의 정규식에 대한 예제 항목을 참조하십시오.',
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
             '',
         'Italian' => '이탈리아 사람',
-        'Italian stop words for fulltext index. These words will be removed from the search index.' =>
-            '전체 텍스트 색인에 대한 이탈리아어 중지 단어. 이 단어는 검색 색인에서 제거됩니다.',
         'Ivory' => '아이보리',
         'Ivory (Slim)' => '아이보리(슬림)',
         'Japanese' => '일본어',
-        'JavaScript function for the search frontend.' => '검색 프론트 엔드 용 JavaScript 함수.',
         'Korean' => '',
         'Language' => '언어',
         'Large' => '큰',
+        'Last Mentions' => '',
         'Last Screen Overview' => '마지막 화면 개요',
         'Last customer subject' => '마지막 고객 주제',
+        'Last view - limit' => '',
+        'Last view - position' => '',
+        'Last view - types' => '',
         'Lastname Firstname' => '성 이름',
         'Lastname Firstname (UserLogin)' => '성 이름 (UserLogin)',
         'Lastname, Firstname' => '성, 이름',
@@ -7612,40 +8847,8 @@ Thanks for your help!
         'Link templates to attachments.' => '',
         'Link templates to queues.' => '템플리트를 대기열에 링크하십시오.',
         'Link this ticket to other objects' => '이 티켓을 다른 객체에 연결하십시오.',
-        'Links 2 tickets with a "Normal" type link.' => '2 개의 티켓을 "일반"유형 링크로 연결합니다.',
-        'Links 2 tickets with a "ParentChild" type link.' => '2 개의 티켓을 "ParentChild"유형 링크로 연결합니다.',
-        'Links appointments and tickets with a "Normal" type link.' => '약속과 티켓을 "일반"유형 링크로 연결합니다.',
-        'List of CSS files to always be loaded for the agent interface.' =>
-            '에이전트 인터페이스 용으로 항상로드 될 CSS 파일 목록입니다.',
-        'List of CSS files to always be loaded for the customer interface.' =>
-            '고객 인터페이스를 위해 항상로드 될 CSS 파일 목록.',
-        'List of JS files to always be loaded for the agent interface.' =>
-            '에이전트 인터페이스 용으로 항상로드 될 JS 파일 목록.',
-        'List of JS files to always be loaded for the customer interface.' =>
-            '고객 인터페이스 용으로 항상로드 될 JS 파일 목록.',
-        'List of all CustomerCompany events to be displayed in the GUI.' =>
-            'GUI에 표시 될 모든 CustomerCompany 이벤트 목록.',
-        'List of all CustomerUser events to be displayed in the GUI.' => 'GUI에 표시 될 모든 고객사용자 이벤트 목록입니다.',
-        'List of all DynamicField events to be displayed in the GUI.' => 'GUI에 표시 할 모든 DynamicField 이벤트 목록입니다.',
-        'List of all LinkObject events to be displayed in the GUI.' => 'GUI에 표시 될 모든 LinkObject 이벤트 목록입니다.',
-        'List of all Package events to be displayed in the GUI.' => 'GUI에 표시 할 모든 패키지 이벤트 목록.',
-        'List of all appointment events to be displayed in the GUI.' => 'GUI에 표시 할 모든 약속 이벤트 목록입니다.',
-        'List of all article events to be displayed in the GUI.' => 'GUI에 표시 할 모든 기사 이벤트 목록입니다.',
-        'List of all calendar events to be displayed in the GUI.' => 'GUI에 표시 할 모든 캘린더 이벤트 목록입니다.',
-        'List of all queue events to be displayed in the GUI.' => 'GUI에 표시 될 모든 대기열 이벤트 목록.',
-        'List of all ticket events to be displayed in the GUI.' => 'GUI에 표시 될 모든 티켓 이벤트 목록입니다.',
-        'List of colors in hexadecimal RGB which will be available for selection during calendar creation. Make sure the colors are dark enough so white text can be overlayed on them.' =>
-            '달력을 만들 때 선택할 수있는 16 진수 RGB 색상 목록입니다. 흰색 텍스트를 오버레이 할 수 있도록 색이 충분히 어두워 졌는지 확인하십시오.',
-        'List of default Standard Templates which are assigned automatically to new Queues upon creation.' =>
-            '생성시 새 대기열에 자동으로 할당되는 기본 표준 템플릿 목록입니다.',
-        'List of responsive CSS files to always be loaded for the agent interface.' =>
-            '에이전트 인터페이스 용으로 항상로드되는 반응 형 CSS 파일 목록입니다.',
-        'List of responsive CSS files to always be loaded for the customer interface.' =>
-            '응답 성 CSS 파일 목록은 고객 인터페이스 용으로 항상로드됩니다.',
         'List view' => '목록보기',
         'Lithuanian' => '리투아니아 사람',
-        'Loader module registration for the agent interface.' => '에이전트 인터페이스에 대한 로더 모듈 등록.',
-        'Loader module registration for the customer interface.' => '',
         'Lock / unlock this ticket' => '이 티켓 잠금 / 잠금 해제',
         'Locked Tickets' => '잠긴 티켓',
         'Locked Tickets.' => '잠긴 티켓.',
@@ -7657,16 +8860,9 @@ Thanks for your help!
         'Loop protection: no auto-response sent to "%s".' => '루프 보호 : 자동 응답이 "%s"로 전송되지 않습니다.',
         'Macedonian' => '',
         'Mail Accounts' => '메일 계정',
-        'MailQueue configuration settings.' => 'MailQueue 구성 설정.',
-        'Main menu item registration.' => '기본 메뉴 항목 등록.',
-        'Main menu registration.' => '기본 메뉴 등록.',
-        'Makes the application block external content loading.' => '',
-        'Makes the application check the MX record of email addresses before sending an email or submitting a telephone or email ticket.' =>
-            '전자 메일을 보내거나 전화 또는 전자 메일 티켓을 제출하기 전에 응용 프로그램에서 전자 메일 주소의 MX 레코드를 확인하게합니다.',
-        'Makes the application check the syntax of email addresses.' => '응용 프로그램이 전자 메일 주소의 구문을 검사하도록 합니다.',
-        'Makes the session management use html cookies. If html cookies are disabled or if the client browser disabled html cookies, then the system will work as usual and append the session id to the links.' =>
-            '세션 관리가 html 쿠키를 사용하게합니다. html 쿠키가 비활성화되거나 클라이언트 브라우저가 html 쿠키를 비활성화 한 경우 시스템은 평소와 같이 작동하고 링크에 세션 ID를 추가합니다.',
         'Malay' => '말레이 사람',
+        'Manage Customer User-Customer Relations.' => '',
+        'Manage OAuth2 tokens and their configurations.' => '',
         'Manage OTRS Group cloud services.' => 'OTRS 그룹 클라우드 서비스를 관리합니다.',
         'Manage PGP keys for email encryption.' => '전자 메일 암호화를위한 PGP 키 관리.',
         'Manage POP3 or IMAP accounts to fetch email from.' => 'POP3 또는 IMAP 계정을 관리하여 전자 메일을 가져옵니다.',
@@ -7675,98 +8871,27 @@ Thanks for your help!
         'Manage different calendars.' => '다른 캘린더를 관리하십시오.',
         'Manage existing sessions.' => '기존 세션을 관리합니다.',
         'Manage support data.' => '지원 데이터를 관리합니다.',
-        'Manage system registration.' => '시스템 등록을 관리합니다.',
+        'Manage system files.' => '',
         'Manage tasks triggered by event or time based execution.' => '이벤트 또는 시간 기반 실행에 의해 트리거된 작업을 관리합니다.',
+        'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => '스팸으로 표시하십시오!',
         'Mark this ticket as junk!' => '이 티켓을 정크로 표시하십시오!',
-        'Max size (in characters) of the customer information table (phone and email) in the compose screen.' =>
-            '작성 화면의 고객 정보 테이블 (전화 및 이메일)의 최대 크기 (문자 수).',
-        'Max size (in rows) of the informed agents box in the agent interface.' =>
-            '에이전트 인터페이스의 정보 저장소 에이전트 상자의 최대 크기 (행 수)',
-        'Max size (in rows) of the involved agents box in the agent interface.' =>
-            '에이전트 인터페이스의 관련 상담원 상자의 최대 크기 (행).',
-        'Max size of the subjects in an email reply and in some overview screens.' =>
-            '전자 메일 회신 및 일부 개요 화면에서 주체의 최대 크기입니다.',
-        'Maximal auto email responses to own email-address a day (Loop-Protection).' =>
-            '하루 동안 자신의 이메일 주소에 대한 최대 자동 이메일 응답(반복 방지).',
-        'Maximal auto email responses to own email-address a day, configurable by email address (Loop-Protection).' =>
-            '전자 메일 주소 (루프 보호)로 구성 가능한 하루 전자 메일 주소에 대한 최대 자동 전자 메일 응답.',
-        'Maximal size in KBytes for mails that can be fetched via POP3/POP3S/IMAP/IMAPS (KBytes).' =>
-            'POP3 / POP3S / IMAP / IMAPS (KBytes)를 통해 가져올 수있는 메일의 최대 크기입니다.',
-        'Maximum Number of a calendar shown in a dropdown.' => '드롭 다운에 표시된 최대 달력 수입니다.',
-        'Maximum length (in characters) of the dynamic field in the article of the ticket zoom view.' =>
-            '티켓 확대보기의 기사에서 동적 필드의 최대 길이(문자 수)',
-        'Maximum length (in characters) of the dynamic field in the sidebar of the ticket zoom view.' =>
-            '티켓 확대보기의 사이드 바에 있는 동적 필드의 최대 길이(문자 수).',
-        'Maximum number of active calendars in overview screens. Please note that large number of active calendars can have a performance impact on your server by making too much simultaneous calls.' =>
-            '개요 화면의 최대 활성 캘린더 수입니다. 많은 수의 활성 캘린더가 동시 호출을 너무 많이하여 서버에 성능에 영향을 줄 수 있습니다.',
-        'Maximum number of tickets to be displayed in the result of a search in the agent interface.' =>
-            '에이전트 인터페이스의 검색 결과에 표시할 최대 티켓 수입니다.',
-        'Maximum number of tickets to be displayed in the result of a search in the customer interface.' =>
-            '고객 인터페이스에서 검색 결과에 표시할 최대 티켓 수입니다.',
-        'Maximum number of tickets to be displayed in the result of this operation.' =>
-            '이 작업의 결과로 표시될 최대 티켓 수입니다.',
-        'Maximum size (in characters) of the customer information table in the ticket zoom view.' =>
-            '티켓 확대보기의 고객 정보 테이블의 최대 크기 (문자 수)',
+        'Mattermost Username' => '',
         'Medium' => '중간의',
+        'Mentioned in article' => '',
+        'Mentioned in ticket' => '',
+        'Mentions.' => '',
         'Merge this ticket and all articles into another ticket' => '이 티켓과 모든 기사를 다른 티켓으로 병합하십시오.',
         'Merged Ticket (%s/%s) to (%s/%s).' => '합쳐진 티켓 (%s/%s) ~ (%s/ 1 %s).',
         'Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>.' => 'Merged Ticket 1 to 2.',
         'Minute' => '분',
         'Miscellaneous' => '기타',
-        'Module for To-selection in new ticket screen in the customer interface.' =>
-            '고객 인터페이스의 새 티켓 화면에서 선택 대상 모듈.',
-        'Module to check if a incoming e-mail message is bounce.' => '들어오는 전자 메일 메시지가 바운드되는지 확인하는 모듈입니다.',
-        'Module to check if arrived emails should be marked as internal (because of original forwarded internal email). IsVisibleForCustomer and SenderType define the values for the arrived email/article.' =>
-            '도착한 전자 메일이 내부 전자 메일로 표시되어야하는지 확인하는 모듈입니다 (원래 전달 된 내부 전자 메일 때문에). IsVisibleForCustomer 및 SenderType은 도착한 전자 메일 / 기사의 값을 정의합니다.',
-        'Module to check the group permissions for customer access to tickets.' =>
-            '모듈이 티켓에 대한 고객 액세스에 대한 그룹 권한을 확인합니다.',
-        'Module to check the group permissions for the access to tickets.' =>
-            '티켓 액세스 권한에 대한 그룹 권한을 확인하는 모듈',
-        'Module to compose signed messages (PGP or S/MIME).' => '서명 된 메시지를 구성하는 모듈 (PGP 또는 S / MIME).',
-        'Module to define the email security options to use (PGP or S/MIME).' =>
-            '사용할 이메일 보안 옵션을 정의하는 모듈 (PGP 또는 S / MIME).',
-        'Module to encrypt composed messages (PGP or S/MIME).' => '구성된 메시지를 암호화하는 모듈 (PGP 또는 S / MIME).',
-        'Module to fetch customer users SMIME certificates of incoming messages.' =>
-            '들어오는 메시지의 고객 사용자 SMIME 인증서를 가져 오는 모듈.',
-        'Module to filter and manipulate incoming messages. Block/ignore all spam email with From: noreply@ address.' =>
-            '들어오는 메시지를 필터링하고 조작하는 모듈입니다. 보낸 사람 : noreply @ 주소로 모든 스팸 전자 메일을 차단 / 무시합니다.',
         'Module to filter and manipulate incoming messages. Get a 4 digit number to ticket free text, use regex in Match e. g. From => \'(.+?)@.+?\', and use () as [***] in Set =>.' =>
             '들어오는 메시지를 필터링하고 조작하는 모듈입니다. 항공권 프리 텍스트에 4 자리 숫자를 가져오고 Match e에서 regex를 사용하십시오. 지. From => \'(. +?) @. +?\'그리고 Set =>에서 [***]로 ()를 사용하십시오.',
-        'Module to filter encrypted bodies of incoming messages.' => '들어오는 메시지의 암호화 된 본문을 필터링하는 모듈입니다.',
-        'Module to generate accounted time ticket statistics.' => '모듈은 계산된 타임 티켓 통계를 생성합니다.',
-        'Module to generate html OpenSearch profile for short ticket search in the agent interface.' =>
-            '에이전트 인터페이스에서 짧은 티켓 검색을위한 html OpenSearch 프로파일을 생성하는 모듈.',
-        'Module to generate html OpenSearch profile for short ticket search in the customer interface.' =>
-            '모듈은 고객 인터페이스에서 짧은 티켓 검색을위한 html OpenSearch 프로파일을 생성합니다.',
-        'Module to generate ticket solution and response time statistics.' =>
-            '티켓 솔루션 및 응답 시간 통계를 생성하는 모듈.',
-        'Module to generate ticket statistics.' => '티켓 통계를 생성하는 모듈.',
-        'Module to grant access if the CustomerID of the customer has necessary group permissions.' =>
-            '고객의 고객 ID에 필요한 그룹 권한이 있는 경우 액세스 권한을 부여하는 모듈입니다.',
-        'Module to grant access if the CustomerID of the ticket matches the CustomerID of the customer.' =>
-            '티켓의 CustomerID가 고객의 CustomerID와 일치하는 경우 액세스 권한을 부여하는 모듈입니다.',
-        'Module to grant access if the CustomerUserID of the ticket matches the CustomerUserID of the customer.' =>
-            '티켓의 고객사용자ID가 고객의 고객사용자ID와 일치하면 액세스 권한 부여 모듈.',
-        'Module to grant access to any agent that has been involved in a ticket in the past (based on ticket history entries).' =>
-            '모듈은 (티켓 내역 항목을 기반으로) 과거 티켓과 관련된 모든 에이전트에 액세스 권한을 부여합니다.',
-        'Module to grant access to the agent responsible of a ticket.' =>
-            '티켓 책임자에게 액세스 권한을 부여하는 모듈.',
-        'Module to grant access to the creator of a ticket.' => '티켓을 만든 사람에게 액세스 권한을 부여하는 모듈입니다.',
-        'Module to grant access to the owner of a ticket.' => '티켓 소유자에게 액세스 권한을 부여하는 모듈입니다.',
-        'Module to grant access to the watcher agents of a ticket.' => '감시자에게 티켓의 액세스 권한을 부여하는 모듈.',
-        'Module to show notifications and escalations (ShownMax: max. shown escalations, EscalationInMinutes: Show ticket which will escalation in, CacheTime: Cache of calculated escalations in seconds).' =>
-            '알림 및 에스컬레이션을 표시하는 모듈 (ShownMax : 최대 에스컬레이션 에스컬레이션, EscalationInMinutes : 에스컬레이션 할 티켓 표시, CacheTime : 계산 된 에스컬레이션의 캐시 초).',
-        'Module to use database filter storage.' => '모듈은 데이터베이스 필터 저장소를 사용합니다.',
-        'Module used to detect if attachments are present.' => '첨부 파일이 있는지 감지하는데 사용되는 모듈입니다.',
         'Multiselect' => '다중선택',
         'My Queues' => '나의 대기열',
         'My Services' => '나의 서비스',
         'My Tickets.' => '나의 티켓',
-        'Name of custom queue. The custom queue is a queue selection of your preferred queues and can be selected in the preferences settings.' =>
-            '사용자 정의 대기열의 이름입니다. 사용자 정의 대기열은 기본 설정 대기열의 대기열 선택이며 환경 설정에서 선택할 수 있습니다.',
-        'Name of custom service. The custom service is a service selection of your preferred services and can be selected in the preferences settings.' =>
-            '사용자 지정 서비스의 이름입니다. 사용자 지정 서비스는 기본 설정 서비스에서 선택한 서비스이며 기본 설정에서 선택할 수 있습니다.',
         'NameX' => 'NameX',
         'New Ticket' => '새 티켓',
         'New Tickets' => '새 티켓',
@@ -7774,12 +8899,8 @@ Thanks for your help!
         'New Year\'s Day' => '새해첫날',
         'New Year\'s Eve' => '새해 전날',
         'New process ticket' => '새 프로세스 티켓',
+        'News' => '',
         'News about OTRS releases!' => 'OTRS 출시에 대한 뉴스!',
-        'News about OTRS.' => 'OTRS에 관한 뉴스.',
-        'Next possible ticket states after adding a phone note in the ticket phone inbound screen of the agent interface.' =>
-            '다음 가능한 티켓 상태는 에이전트 인터페이스의 티켓 인바운드 인바운드 화면에 전화 메모를 추가한 후의 상태입니다.',
-        'Next possible ticket states after adding a phone note in the ticket phone outbound screen of the agent interface.' =>
-            '가능한 다음 티켓 상태는 상담원 인터페이스의 티켓 전화 아웃 바운드 화면에 전화 메모를 추가한 후의 상태입니다.',
         'No public key found.' => '',
         'No valid OpenPGP data found.' => '',
         'None' => '없음',
@@ -7789,36 +8910,17 @@ Thanks for your help!
         'Notified about solution time escalation.' => '솔루션 시간 확대에 대한 알림',
         'Notified about update time escalation.' => '업데이트 시간 이관에 대한 알림.',
         'Number of displayed tickets' => '표시된 티켓 수',
-        'Number of lines (per ticket) that are shown by the search utility in the agent interface.' =>
-            '에이전트 인터페이스에서 검색 유틸리티가 표시하는 행당 (티켓 당) 수.',
-        'Number of tickets to be displayed in each page of a search result in the agent interface.' =>
-            '에이전트 인터페이스에서 검색 결과의 각 페이지에 표시할 티넷 수입니다.',
-        'Number of tickets to be displayed in each page of a search result in the customer interface.' =>
-            '고객 인터페이스에서 검색 결과의 각 페이지에 표시할 티켓 수입니다.',
+        'OAuth2' => '',
+        'OAuth2 token' => '',
         'OTRS Group Services' => 'OTRS 그룹 서비스',
-        'OTRS News' => 'OTRS 뉴스',
-        'OTRS can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>
-            'OTRS는 전체 텍스트 검색이나 통계 생성과 같은 값 비싼 작업에 대해 하나 이상의 읽기 전용 미러 데이터베이스를 사용할 수 있습니다. 여기서 첫 번째 미러 데이터베이스에 대해 DSN을 지정할 수 있습니다.',
-        'OTRS doesn\'t support recurring Appointments without end date or number of iterations. During import process, it might happen that ICS file contains such Appointments. Instead, system creates all Appointments in the past, plus Appointments for the next N months (120 months/10 years by default).' =>
-            'OTRS는 끝 날짜 또는 반복 횟수가없는 되풀이 약속을 지원하지 않습니다. 가져 오기 프로세스 중에 ICS 파일에 이러한 약속이 포함될 수 있습니다. 대신, 시스템은 과거의 모든 약속과 다음 N 개월 (기본적으로 120 개월 / 10 년)의 약속을 작성합니다.',
         'Open an external link!' => '외부 링크 열기',
         'Open tickets (customer user)' => '진행중 티켓 (고객 사용자)',
         'Open tickets (customer)' => '진행중 티켓 (고객)',
         'Option' => '옵션',
-        'Optional queue limitation for the CreatorCheck permission module. If set, permission is only granted for tickets in the specified queues.' =>
-            'CreatorCheck 권한 모듈의 선택적 큐 제한 사항입니다. 설정된 경우 지정된 큐의 티켓에 대해서만 사용 권한이 부여됩니다.',
-        'Optional queue limitation for the InvolvedCheck permission module. If set, permission is only granted for tickets in the specified queues.' =>
-            'InvolvedCheck 권한 모듈에 대한 선택적 큐 제한입니다. 설정된 경우 지정된 큐의 티켓에 대해서만 사용 권한이 부여됩니다.',
-        'Optional queue limitation for the OwnerCheck permission module. If set, permission is only granted for tickets in the specified queues.' =>
-            'OwnerCheck 권한 모듈에 대한 선택적 큐 제한입니다. 설정된 경우 지정된 큐의 티켓에 대해서만 사용 권한이 부여됩니다.',
-        'Optional queue limitation for the ResponsibleCheck permission module. If set, permission is only granted for tickets in the specified queues.' =>
-            'ResponsibleCheck 권한 모듈에 대한 선택적 큐 제한입니다. 설정된 경우 지정된 큐의 티켓에 대해서만 사용 권한이 부여됩니다.',
         'Other Customers' => '다른 고객들',
         'Out Of Office' => '부재중',
         'Out Of Office Time' => '부재중 시간',
         'Out of Office users.' => '부재중 사용자',
-        'Overloads (redefines) existing functions in Kernel::System::Ticket. Used to easily add customizations.' =>
-            'Kernel :: System :: Ticket의 기존 함수를 오버로드 (재정의)합니다. 쉽게 사용자 정의를 추가하는 데 사용됩니다.',
         'Overview Escalated Tickets.' => 'Escalated 티켓 개요',
         'Overview Refresh Time' => '개요 리프레쉬 시간',
         'Overview of all Tickets per assigned Queue.' => '할당된 대기열 당 모든 티켓 개요.',
@@ -7830,81 +8932,10 @@ Thanks for your help!
         'PGP Key' => 'PGP 키',
         'PGP Key Management' => 'PGP 키 관리',
         'PGP Keys' => 'PGP 키',
-        'Package event module file a scheduler task for update registration.' =>
-            '패키지 이벤트 모듈은 업데이트 등록을 위한 스케줄러 태스크를 파일로 작성합니다.',
-        'Parameters for the CreateNextMask object in the preference view of the agent interface. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
-            '에이전트 인터페이스의 기본 설정보기에있는 CreateNextMask 객체의 매개 변수입니다. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
-        'Parameters for the CustomQueue object in the preference view of the agent interface. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
-            '에이전트 인터페이스의 환경 설정 뷰에서 CustomQueue 객체의 매개 변수입니다. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
-        'Parameters for the CustomService object in the preference view of the agent interface. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
-            '에이전트 인터페이스의 환경 설정보기에서 CustomService 객체의 매개 변수입니다. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
-        'Parameters for the RefreshTime object in the preference view of the agent interface. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
-            '에이전트 인터페이스의 환경 설정 뷰에있는 RefreshTime 객체의 매개 변수입니다. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
-        'Parameters for the column filters of the small ticket overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
-            '작은 티켓 개요의 열 필터에 대한 매개 변수입니다. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
-        'Parameters for the dashboard backend of the customer company information of the agent interface. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.' =>
-            '에이전트 인터페이스의 고객 회사 정보의 대시 보드 백엔드에 대한 매개 변수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다.',
-        'Parameters for the dashboard backend of the customer id list overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.' =>
-            '고객 ID의 대시 보드 백엔드에 대한 매개 변수 에이전트 인터페이스 개요. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다.',
-        'Parameters for the dashboard backend of the customer id status widget of the agent interface . "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.' =>
-            '에이전트 인터페이스의 고객 ID 상태 위젯의 대시 보드 백엔드에 대한 매개 변수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다.',
-        'Parameters for the dashboard backend of the customer user information of the agent interface. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.' =>
-            '에이전트 인터페이스의 고객 사용자 정보의 대시 보드 백엔드에 대한 매개 변수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다.',
-        'Parameters for the dashboard backend of the customer user list overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin.' =>
-            '고객 사용자 목록의 대시 보드 백엔드 매개 변수는 에이전트 인터페이스 개요입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다.',
-        'Parameters for the dashboard backend of the new tickets overview of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
-            '새 티켓의 대시 보드 백엔드에 대한 매개 변수 에이전트 인터페이스 개요입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다. 참고 : Ticket 속성과 Dynamic Fields (DynamicField_NameX) 만 DefaultColumn에 허용됩니다.',
-        'Parameters for the dashboard backend of the new tickets overview of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
-            '새 티켓의 대시 보드 백엔드에 대한 매개 변수 에이전트 인터페이스 개요입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. 참고 : Ticket 속성과 Dynamic Fields (DynamicField_NameX) 만 DefaultColumn에 허용됩니다.',
-        'Parameters for the dashboard backend of the open tickets overview of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
-            '에이전트 인터페이스의 열린 티켓 개요의 대시 보드 백엔드에 대한 매개 변수입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다. 참고 : Ticket 속성과 Dynamic Fields (DynamicField_NameX) 만 DefaultColumn에 허용됩니다.',
-        'Parameters for the dashboard backend of the open tickets overview of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
-            '에이전트 인터페이스의 열린 티켓 개요의 대시 보드 백엔드에 대한 매개 변수입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. 참고 : Ticket 속성과 Dynamic Fields (DynamicField_NameX) 만 DefaultColumn에 허용됩니다.',
-        'Parameters for the dashboard backend of the queue overview widget of the agent interface. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "QueuePermissionGroup" is not mandatory, queues are only listed if they belong to this permission group if you enable it. "States" is a list of states, the key is the sort order of the state in the widget. "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
-            '에이전트 인터페이스의 대기열 개요 위젯의 대시 보드 백엔드에 대한 매개 변수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "QueuePermissionGroup"은 필수는 아니지만 큐를 사용하는 경우이 사용 권한 그룹에 속한 큐만 나열됩니다. "상태"는 상태 목록이며, 키는 위젯에있는 상태의 정렬 순서입니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
-        'Parameters for the dashboard backend of the running process tickets overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
-            '실행중인 프로세스 티켓의 대시 보드 백엔드에 대한 매개 변수 에이전트 인터페이스의 개요. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
-        'Parameters for the dashboard backend of the ticket escalation overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
-            '에이전트 인터페이스의 티켓 에스컬레이션 개요의 대시 보드 백엔드에 대한 매개 변수입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다. 참고 : Ticket 속성과 Dynamic Fields (DynamicField_NameX) 만 DefaultColumn에 허용됩니다.',
-        'Parameters for the dashboard backend of the ticket escalation overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
-            '에이전트 인터페이스의 티켓 에스컬레이션 개요의 대시 보드 백엔드에 대한 매개 변수입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. 참고 : Ticket 속성과 Dynamic Fields (DynamicField_NameX) 만 DefaultColumn에 허용됩니다.',
-        'Parameters for the dashboard backend of the ticket escalation overview of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
-            '',
-        'Parameters for the dashboard backend of the ticket events calendar of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
-            '에이전트 인터페이스의 티켓 이벤트 달력의 대시 보드 백엔드에 대한 매개 변수입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
-        'Parameters for the dashboard backend of the ticket pending reminder overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
-            '에이전트 인터페이스의 티켓 보류 알림 요약의 대시 보드 백엔드에 대한 매개 변수입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다. 참고 : Ticket 속성과 Dynamic Fields (DynamicField_NameX) 만 DefaultColumn에 허용됩니다.',
-        'Parameters for the dashboard backend of the ticket pending reminder overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
-            '에이전트 인터페이스의 티켓 보류 알림 요약의 대시 보드 백엔드에 대한 매개 변수입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. 참고 : Ticket 속성과 Dynamic Fields (DynamicField_NameX) 만 DefaultColumn에 허용됩니다.',
-        'Parameters for the dashboard backend of the ticket pending reminder overview of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
-            '',
-        'Parameters for the dashboard backend of the ticket stats of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
-            '에이전트 인터페이스의 티켓 통계 대시 보드 백엔드에 대한 매개 변수입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
-        'Parameters for the dashboard backend of the upcoming events widget of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
-            '에이전트 인터페이스의 다가오는 이벤트 위젯의 대시 보드 백엔드에 대한 매개 변수입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
-        'Parameters for the pages (in which the communication log entries are shown) of the communication log overview.' =>
-            '통신 로그 개요의 페이지 (통신 로그 항목이 표시된 페이지)의 매개 변수.',
-        'Parameters for the pages (in which the dynamic fields are shown) of the dynamic fields overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
-            '동적 필드 개요의 페이지 (동적 필드가 표시되는 페이지)의 매개 변수입니다. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
-        'Parameters for the pages (in which the tickets are shown) of the medium ticket overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
-            '매체 티켓 개요의 페이지 (티켓이 표시된 페이지)의 매개 변수. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
-        'Parameters for the pages (in which the tickets are shown) of the small ticket overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
-            '작은 티켓 개요의 페이지 (티켓이 표시된 페이지)의 매개 변수. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
-        'Parameters for the pages (in which the tickets are shown) of the ticket preview overview. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
-            '티켓 미리보기 개요의 페이지 (티켓이 표시된 페이지)의 매개 변수입니다. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
-        'Parameters of the example SLA attribute Comment2.' => '예제 SLA 속성 Comment2의 매개 변수.',
-        'Parameters of the example queue attribute Comment2.' => '예제 큐 속성 Comment2의 매개 변수.',
-        'Parameters of the example service attribute Comment2.' => '예제 서비스 속성 Comment2의 매개 변수.',
         'Parent' => '부모의',
         'ParentChild' => '부모 자녀',
-        'Path for the log file (it only applies if "FS" was selected for LoopProtectionModule and it is mandatory).' =>
-            '로그 파일 경로 (LoopProtectionModule에 대해 "FS"가 선택되고 필수 항목 인 경우에만 적용됩니다).',
         'Pending time' => '보류 시간',
         'People' => '사람들',
-        'Performs the configured action for each event (as an Invoker) for each configured web service.' =>
-            '구성된 각 웹 서비스의 각 이벤트 (Invoker)에 대해 구성된 작업을 수행합니다.',
-        'Permitted width for compose email windows.' => '전자 메일 작성용으로 허용된 너비.',
-        'Permitted width for compose note windows.' => '노트 작성 윈도우의 너비 허용.',
         'Persian' => '페르시아인',
         'Phone Call Inbound' => '전화 통화 인바운드',
         'Phone Call Outbound' => '전화 통화 발신',
@@ -7930,12 +8961,9 @@ Thanks for your help!
         'Process Management Transition Action GUI' => '프로세스 관리 전환 액션 GUI',
         'Process Management Transition GUI' => '프로세스 관리 전환 GUI',
         'Process Ticket.' => '프로세스 티켓.',
-        'Process pending tickets.' => '대기중인 티켓 처리.',
         'ProcessID' => 'ProcessID',
         'Processes & Automation' => '프로세스 및 자동화',
         'Product News' => '제품 뉴스',
-        'Protection against CSRF (Cross Site Request Forgery) exploits (for more info see https://en.wikipedia.org/wiki/Cross-site_request_forgery).' =>
-            '',
         'Provides a matrix overview of the tickets per state per queue' =>
             '큐당 상태 별 티켓 개요를 제공합니다.',
         'Provides customer users access to tickets even if the tickets are not assigned to a customer user of the same customer ID(s), based on permission groups.' =>
@@ -7944,133 +8972,50 @@ Thanks for your help!
         'Public calendar.' => '공개 캘린더',
         'Queue view' => '대기열 보기',
         'Queues ↔ Auto Responses' => '',
-        'Rebuild the ticket index for AgentTicketQueue.' => 'AgentTicketQueue 티켓 색인을 다시 작성하십시오.',
-        'Recognize if a ticket is a follow-up to an existing ticket using an external ticket number. Note: the first capturing group from the \'NumberRegExp\' expression will be used as the ticket number value.' =>
-            '',
         'Refresh interval' => '리프레쉬 간격',
-        'Registers a log module, that can be used to log communication related information.' =>
-            '통신 관련 정보를 기록하는데 사용할 수있는 로그 모듈을 등록합니다.',
         'Reminder Tickets' => '잊지 말아야 할 티켓',
         'Removed subscription for user "%s".' => '"%s" 사용자에 대한 가입이 삭제되었습니다.',
-        'Removes old generic interface debug log entries created before the specified amount of days.' =>
-            '',
-        'Removes old system configuration deployments (Sunday mornings).' =>
-            '이전 시스템 구성 배포 (일요일 오전)를 제거합니다.',
-        'Removes old ticket number counters (each 10 minutes).' => '',
-        'Removes the ticket watcher information when a ticket is archived.' =>
-            '티켓 보관시 티켓 감시자 정보를 제거합니다.',
-        'Renew existing SMIME certificates from customer backend. Note: SMIME and SMIME::FetchFromCustomer needs to be enabled in SysConfig and customer backend needs to be configured to fetch UserSMIMECertificate attribute.' =>
-            '고객 백엔드에서 기존 SMIME 인증서를 갱신하십시오. 참고 : SysConfig에서 SMIME 및 SMIME :: FetchFromCustomer를 활성화해야하며 고객 백엔드가 UserSMIMECertificate 특성을 가져 오도록 구성해야합니다.',
-        'Replaces the original sender with current customer\'s email address on compose answer in the ticket compose screen of the agent interface.' =>
-            '상담원 인터페이스의 티켓 작성 화면에서 작성 응답에 원래 보낸 사람을 현재 고객의 전자 메일 주소로 바꿉니다.',
         'Reports' => '보고서',
-        'Reports (OTRS Business Solution™)' => '보고서 (OTRS Business Solution™)',
-        'Reprocess mails from spool directory that could not be imported in the first place.' =>
-            '처음부터 가져올 수 없었던 스풀 디렉토리의 메일을 다시 처리하십시오.',
-        'Required permissions to change the customer of a ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 티켓의 고객을 변경하는데 필요한 권한입니다.',
-        'Required permissions to use the close ticket screen in the agent interface.' =>
-            '에이전트 인터페이스에서 티켓 닫기 화면을 사용하는데 필요한 권한입니다.',
-        'Required permissions to use the email outbound screen in the agent interface.' =>
-            '에이전트 인터페이스에서 전자 메일 아웃 바운드 화면을 사용하는데 필요한 권한입니다.',
-        'Required permissions to use the email resend screen in the agent interface.' =>
-            '에이전트 인터페이스에서 전자 메일 다시 보내기 화면을 사용하는데 필요한 권한입니다.',
-        'Required permissions to use the ticket bounce screen in the agent interface.' =>
-            '에이전트 인터페이스에서 티켓 바운스 화면을 사용하는데 필요한 권한입니다.',
-        'Required permissions to use the ticket compose screen in the agent interface.' =>
-            '에이전트 인터페이스의 티켓 작성 화면을 사용하는데 필요한 권한입니다.',
-        'Required permissions to use the ticket forward screen in the agent interface.' =>
-            '에이전트 인터페이스에서 티켓 전달 화면을 사용하는데 필요한 권한입니다.',
-        'Required permissions to use the ticket free text screen in the agent interface.' =>
-            '에이전트 인터페이스에서 티켓없는 텍스트 화면을 사용하는데 필요한 권한입니다.',
-        'Required permissions to use the ticket merge screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대 / 축소된 티켓의 티켓 병합 화면을 사용하는데 필요한 권한입니다.',
-        'Required permissions to use the ticket note screen in the agent interface.' =>
-            '에아전트 인터페이스에서 티켓 메모 화면을 사용하는데 필요한 권한입니다.',
-        'Required permissions to use the ticket owner screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대 / 축소된 티켓의 티켓 소유자 화면을 사용하는데 필요한 권한입니다.',
-        'Required permissions to use the ticket pending screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 보류 화면을 사용하는 데 필요한 권한입니다.',
-        'Required permissions to use the ticket phone inbound screen in the agent interface.' =>
-            '에이전트 인터페이스의 티켓 인바운드 화면을 사용하는 데 필요한 권한입니다.',
-        'Required permissions to use the ticket phone outbound screen in the agent interface.' =>
-            '에이전트 인터페이스에서 티켓 전화 아웃 바운드 화면을 사용하는 데 필요한 권한입니다.',
-        'Required permissions to use the ticket priority screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 우선 순위 화면을 사용하는 데 필요한 권한입니다.',
-        'Required permissions to use the ticket responsible screen in the agent interface.' =>
-            '에이전트 인터페이스에서 티켓 책임 화면을 사용하는데 필요한 권한입니다.',
         'Resend Ticket Email.' => '티켓 전자 메일을 다시 보냅니다.',
         'Resent email to "%s".' => '이메일을 "%s"로 다시 보내십시오.',
-        'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
-            '다른 대기열로 이동된 티켓의 소유자를 재설정하고 잠금 해제합니다.',
-        'Resource Overview (OTRS Business Solution™)' => '리소스 개요 (OTRS Business Solution ™)',
         'Responsible Tickets' => '책임 티켓',
         'Responsible Tickets.' => '책임 티켓.',
-        'Restores a ticket from the archive (only if the event is a state change to any open available state).' =>
-            '아카이브에서 티켓을 복원합니다(이벤트가 사용 가능한 열린 상태로 상태가 변경된 경우에만).',
-        'Retains all services in listings even if they are children of invalid elements.' =>
-            '서비스가 잘못된 요소의 하위 항목인 경우에도 목록의 모든 서비스를 유지합니다.',
         'Right' => '권리',
         'Roles ↔ Groups' => '역할 ↔ 그룹',
         'Romanian' => '',
-        'Run file based generic agent jobs (Note: module name needs to be specified in -configuration-module param e.g. "Kernel::System::GenericAgent").' =>
-            '파일 기반 일반 에이전트 작업 실행 (참고 : 모듈 이름은 -configuration-module 매개 변수 예 : "Kernel :: System :: GenericAgent")에서 지정해야합니다.',
         'Running Process Tickets' => '프로세스 티켓 실행',
-        'Runs an initial wildcard search of the existing customer company when accessing the AdminCustomerCompany module.' =>
-            'AdminCustomerCompany 모듈에 액세스 할 때 기존 고객 회사의 초기 와일드 카드 검색을 실행합니다.',
-        'Runs an initial wildcard search of the existing customer users when accessing the AdminCustomerUser module.' =>
-            'AdminCustomerUser 모듈에 액세스 할 때 기존 고객 사용자의 초기 와일드 카드 검색을 실행합니다.',
-        'Runs the system in "Demo" mode. If enabled, agents can change preferences, such as selection of language and theme via the agent web interface. These changes are only valid for the current session. It will not be possible for agents to change their passwords.' =>
-            '시스템을 "데모"모드로 실행합니다. 이 옵션을 사용하면 상담원 웹 인터페이스를 통해 언어 및 테마 선택과 같은 기본 설정을 변경할 수 있습니다. 이러한 변경은 현재 세션에서만 유효합니다. 에이전트가 암호를 변경할 수는 없습니다.',
         'Russian' => '러시아인',
         'S/MIME Certificates' => 'S / MIME 인증서',
         'SMS' => 'SMS',
-        'SMS (Short Message Service)' => 'SMS (단문 메시지 서비스)',
         'Salutations' => '인사말',
-        'Sample command output' => '샘플 명령 출력',
-        'Saves the attachments of articles. "DB" stores all data in the database (not recommended for storing big attachments). "FS" stores the data on the filesystem; this is faster but the webserver should run under the OTRS user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when "FS" is used.' =>
-            '기사의 첨부 파일을 저장합니다. "DB"는 모든 데이터를 데이터베이스에 저장합니다 (큰 첨부 파일 저장에는 권장되지 않음). "FS"는 데이터를 파일 시스템에 저장합니다. 이것은 더 빠르지 만 웹 서버는 OTRS 사용자 하에서 실행되어야합니다. 데이터 손실없이 이미 생산중인 시스템에서도 모듈 간을 전환 할 수 있습니다. 참고 : "FS"를 사용하면 첨부 파일 이름을 검색 할 수 없습니다.',
         'Schedule a maintenance period.' => '유지 보수 기간을 예약하십시오.',
         'Screen after new ticket' => '새로운 티켓 후에 화면',
         'Search Customer' => '고객 검색',
         'Search Ticket.' => '티켓 검색.',
         'Search Tickets.' => '티켓 검색.',
         'Search User' => '사용자 검색',
-        'Search backend default router.' => '백엔드 기본 라우터를 검색합니다.',
-        'Search backend router.' => '검색 백엔드 라우터.',
         'Search.' => '검색.',
         'Second Christmas Day' => '두 번째 크리스마스',
         'Second Queue' => '두 번째 대기열',
+        'Seconds' => '',
         'Select after which period ticket overviews should refresh automatically.' =>
             '티켓 개요가 자동으로 새로 고쳐져야하는 기간을 선택하십시오.',
+        'Select how many last views should be shown.' => '',
         'Select how many tickets should be shown in overviews by default.' =>
             '개요별로 표시할 티켓 수를 기본적으로 선택하십시오.',
         'Select the main interface language.' => '기본 인터페이스 언어를 선택하십시오.',
         'Select the separator character used in CSV files (stats and searches). If you don\'t select a separator here, the default separator for your language will be used.' =>
             'CSV 파일 (통계 및 검색)에 사용되는 구분 문자를 선택하십시오. 여기에서 구분 기호를 선택하지 않으면 언어의 기본 구분 기호가 사용됩니다.',
+        'Select where to display the last views.' => '',
+        'Select which types should be displayed.' => '',
         'Select your frontend Theme.' => '프론트 엔드 테마를 선택하십시오.',
         'Select your personal time zone. All times will be displayed relative to this time zone.' =>
             '개인 시간대를 선택하십시오. 모든 시간은이 시간대를 기준으로 표시됩니다.',
         'Select your preferred layout for the software.' => '소프트웨어의 기본 레이아웃을 선택하십시오.',
         'Select your preferred theme for OTRS.' => 'OTRS에 대한 선호 테마를 선택하십시오.',
-        'Selects the cache backend to use.' => '사용할 캐시 백엔드를 선택합니다.',
-        'Selects the module to handle uploads via the web interface. "DB" stores all uploads in the database, "FS" uses the file system.' =>
-            '웹 인터페이스를 통해 업로드를 처리 할 모듈을 선택합니다. "DB"는 모든 업로드를 데이터베이스에 저장하고 "FS"는 파일 시스템을 사용합니다.',
-        'Selects the ticket number generator module. "AutoIncrement" increments the ticket number, the SystemID and the counter are used with SystemID.counter format (e.g. 1010138, 1010139). With "Date" the ticket numbers will be generated by the current date, the SystemID and the counter. The format looks like Year.Month.Day.SystemID.counter (e.g. 200206231010138, 200206231010139). With "DateChecksum"  the counter will be appended as checksum to the string of date and SystemID. The checksum will be rotated on a daily basis. The format looks like Year.Month.Day.SystemID.Counter.CheckSum (e.g. 2002070110101520, 2002070110101535).' =>
-            '티켓 번호 생성기 모듈을 선택합니다. "AutoIncrement"는 티켓 번호를 증가시키고, SystemID 및 카운터는 SystemID.counter 형식 (예 : 1010138, 1010139)과 함께 사용됩니다. "날짜"를 사용하면 티켓 번호가 현재 날짜, 시스템 ID 및 카운터에 의해 생성됩니다. 형식은 Year.Month.Day.SystemID.counter와 같습니다 (예 : 200206231010138, 200206231010139). "DateChecksum"을 사용하면 카운터가 date 및 SystemID 문자열에 체크섬으로 추가됩니다. 체크섬은 매일 회전됩니다. 형식은 Year.Month.Day.SystemID.Counter.CheckSum과 같습니다 (예 : 2002070110101520, 2002070110101535).',
+        'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => '이 티켓에서 보내는 메일을 새로 보냅니다.',
         'Send notifications to users.' => '사용자에게 알림을 보냅니다.',
-        'Sender type for new tickets from the customer inteface.' => '고객 인터페이스에서 보낸 새 티켓의 발신자 유형입니다.',
-        'Sends agent follow-up notification only to the owner, if a ticket is unlocked (the default is to send the notification to all agents).' =>
-            '티켓 잠금이 해제 된 경우 소유자에게만 에이전트 후속 알림을 보냅니다. (기본값은 모든 에이전트에게 알림을 보내는 것입니다).',
-        'Sends all outgoing email via bcc to the specified address. Please use this only for backup reasons.' =>
-            '모든 발신 이메일을 bcc를 통해 지정된 주소로 보냅니다. 백업 목적으로 만 사용하십시오.',
-        'Sends customer notifications just to the mapped customer.' => '매핑된 고객에게 고객 알림만 보냅니다.',
-        'Sends registration information to OTRS group.' => 'OTRS 그룹에 등록 정보를 보냅니다.',
-        'Sends reminder notifications of unlocked ticket after reaching the reminder date (only sent to ticket owner).' =>
-            '미리 알림 날짜에 도달 한 후 잠금 해제 된 티켓에 대한 미리 알림을 전송합니다 (티켓 소유자에게만 전송 됨).',
-        'Sends the notifications which are configured in the admin interface under "Ticket Notifications".' =>
-            '"티켓 통지"에서 관리 인터페이스에 구성된 통지를 보냅니다.',
         'Sent "%s" notification to "%s" via "%s".' => '"%s"알림을 "%s"에  "%s"을 통해 보냈습니다.',
         'Sent auto follow-up to "%s".' => '자동 추적을 "%s"로 보냈습니다.',
         'Sent auto reject to "%s".' => '자동 거부를 "%s"로 보냈습니다.',
@@ -8086,408 +9031,14 @@ Thanks for your help!
         'Set a new password by filling in your current password and a new one.' =>
             '현재 암호와 새 암호를 입력하여 새 암호를 설정하십시오.',
         'Set sender email addresses for this system.' => '이 시스템의 보낸 사람 전자 메일 주소를 설정하십시오.',
-        'Set the default height (in pixels) of inline HTML articles in AgentTicketZoom.' =>
-            'AgentTicketZoom에서 인라인 HTML 기사의 기본 높이 (픽셀 단위)를 설정합니다.',
-        'Set the limit of tickets that will be executed on a single genericagent job execution.' =>
-            '단일 generic 에이전트 작업 실행시 실행될 티켓의 한계를 설정하십시오.',
-        'Set the maximum height (in pixels) of inline HTML articles in AgentTicketZoom.' =>
-            'AgentTicketZoom에서 인라인 HTML 기사의 최대 높이 (픽셀 단위)를 설정합니다.',
-        'Set the minimum log level. If you select \'error\', just errors are logged. With \'debug\' you get all logging messages. The order of log levels is: \'debug\', \'info\', \'notice\' and \'error\'.' =>
-            '최소 로그 레벨을 설정하십시오. \'오류\'를 선택하면 오류 만 기록됩니다. \'디버그\'를 사용하면 모든 로깅 메시지를 얻을 수 있습니다. 로그 수준의 순서는 \'debug\', \'info\', \'notice\'및 \'error\'입니다.',
         'Set this ticket to pending' => '이 티켓을 보류 중으로 설정하십시오.',
-        'Sets if SLA must be selected by the agent.' => '에이전트가 SLA를 선택해야하는지 여부를 설정합니다.',
-        'Sets if SLA must be selected by the customer.' => '고객이 SLA를 선택해야하는지 여부를 설정합니다.',
-        'Sets if note must be filled in by the agent. Can be overwritten by Ticket::Frontend::NeedAccountedTime.' =>
-            '에이전트가 노트를 입력해야하는지 설정합니다. Ticket :: Frontend :: NeedAccountedTime으로 덮어 쓸 수 있습니다.',
-        'Sets if queue must be selected by the agent.' => '에이전트가 대기열을 선택해야하는지 여부를 설정합니다.',
-        'Sets if service must be selected by the agent.' => '에이전트가 서비스를 선택해야하는지 여부를 설정합니다.',
-        'Sets if service must be selected by the customer.' => '고객이 서비스를 선택해야하는지 여부를 설정합니다.',
-        'Sets if state must be selected by the agent.' => '에이전트가 상태를 선택해야하는지 설정합니다.',
-        'Sets if ticket owner must be selected by the agent.' => '에이전트가 티켓 소유자를 선택해야하는지 설정합니다.',
-        'Sets if ticket responsible must be selected by the agent.' => '책임 티켓을 에이전트가 선택해야하는지 설정합니다.',
-        'Sets the PendingTime of a ticket to 0 if the state is changed to a non-pending state.' =>
-            '상태가 비 보류 상태로 변경되면 티켓의 PendingTime을 0으로 설정합니다.',
-        'Sets the age in minutes (first level) for highlighting queues that contain untouched tickets.' =>
-            '손길이 닿지 않은 티켓이있는 대기열을 강조 표시 할 때의 경과 시간 (1 단계)을 설정합니다.',
-        'Sets the age in minutes (second level) for highlighting queues that contain untouched tickets.' =>
-            '변경되지 않은 티켓이 포함된 대기열을 강조 표시할 때의 경과 시간 (초 단위)을 설정합니다.',
-        'Sets the configuration level of the administrator. Depending on the config level, some sysconfig options will be not shown. The config levels are in in ascending order: Expert, Advanced, Beginner. The higher the config level is (e.g. Beginner is the highest), the less likely is it that the user can accidentally configure the system in a way that it is not usable any more.' =>
-            '관리자의 구성 수준을 설정합니다. 구성 수준에 따라 일부 sysconfig 옵션이 표시되지 않습니다. 구성 수준은 오름차순으로되어 있습니다 : 전문가, 고급, 초보자. 구성 수준이 높을수록 (예 : 초보자가 가장 높음), 사용자가 실수로 더 이상 사용할 수없는 방식으로 시스템을 구성 할 가능성이 줄어 듭니다.',
-        'Sets the count of articles visible in preview mode of ticket overviews.' =>
-            '티켓 개요의 미리보기 모드에서 볼 수 있는 기사의 수를 설정합니다.',
-        'Sets the default article customer visibility for new email tickets in the agent interface.' =>
-            '에이전트 인터페이스에서 새 전자 메일 티켓에 대한 기본 아티클 고객 가시성을 설정합니다.',
-        'Sets the default article customer visibility for new phone tickets in the agent interface.' =>
-            '에이전트 인터페이스에서 새 전화 티켓에 대한 기본 아티클 고객 가시성을 설정합니다.',
-        'Sets the default body text for notes added in the close ticket screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 닫이 화면에 추가된 메모의 기본 본문 텍스트를 설정합니다.',
-        'Sets the default body text for notes added in the ticket move screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 이동 화면에 추가 된 노트의 기본 본문 텍스트를 설정합니다.',
-        'Sets the default body text for notes added in the ticket note screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 메모 화면에 추가 된 노트의 기본 본문 텍스트를 설정합니다.',
-        'Sets the default body text for notes added in the ticket owner screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 소유자 화면에 추가 된 노트의 기본 본문 텍스트를 설정합니다.',
-        'Sets the default body text for notes added in the ticket pending screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대 / 축소된 티켓의 티켓 보류 화면에 추가된 노트의 기본 본문 텍스트를 설정합니다.',
-        'Sets the default body text for notes added in the ticket priority screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 우선 순위 화면에 추가 된 노트의 기본 본문 텍스트를 설정합니다.',
-        'Sets the default body text for notes added in the ticket responsible screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 책임 화면에 추가 된 노트의 기본 본문 텍스트를 설정합니다.',
-        'Sets the default error message for the login screen on Agent and Customer interface, it\'s shown when a running system maintenance period is active.' =>
-            '에이전트 시스템 및 고객 인터페이스의 로그인 화면에 대한 기본 오류 메시지를 설정합니다. 이는 실행중인 시스템 유지 보수 기간이 활성 일 때 표시됩니다.',
-        'Sets the default link type of split tickets in the agent interface.' =>
-            '에이전트 인터페이스에서 분할 티켓의 기본 링크 유형을 설정합니다.',
-        'Sets the default link type of splitted tickets in the agent interface.' =>
-            '에이전트 인터페이스에서 분할 된 티켓의 기본 링크 유형을 설정합니다.',
-        'Sets the default message for the login screen on Agent and Customer interface, it\'s shown when a running system maintenance period is active.' =>
-            '에이전트 시스템 및 고객 인터페이스의 로그인 화면에 대한 기본 메시지를 설정합니다. 이는 실행중인 시스템 유지 보수 기간이 활성 상태 일 때 표시됩니다.',
-        'Sets the default message for the notification is shown on a running system maintenance period.' =>
-            '실행중인 시스템 유지 보수 기간에 알림의 기본 메시지가 표시되도록 설정합니다.',
-        'Sets the default next state for new phone tickets in the agent interface.' =>
-            '에이전트 인터페이스에서 새 전화 티켓의 기본 다음 상태를 설정합니다.',
-        'Sets the default next ticket state, after the creation of an email ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 전자 메일 티켓을 만든 후 기본 티켓 상태를 설정합니다.',
-        'Sets the default note text for new telephone tickets. E.g \'New ticket via call\' in the agent interface.' =>
-            '새 전화 티켓의 기본 메모 텍스트를 설정합니다. 예 : 상담원 인터페이스의 \'통화를 통한 신규 티켓\'',
-        'Sets the default priority for new email tickets in the agent interface.' =>
-            '에이전트 인터페이스에서 새 전자 메일 티켓의 기본 우선 순위를 설정합니다.',
-        'Sets the default priority for new phone tickets in the agent interface.' =>
-            '에이전트 인터페이스에서 새 전화 티켓의 기본 우선 순위를 설정합니다.',
-        'Sets the default sender type for new email tickets in the agent interface.' =>
-            '에이전트 인터페이스에서 새 전자 메일 티켓의 기본 보낸 사람 유형을 설정합니다.',
-        'Sets the default sender type for new phone ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 새 전화 티켓의 기본 발신자 유형을 설정합니다.',
-        'Sets the default subject for new email tickets (e.g. \'email Outbound\') in the agent interface.' =>
-            '에이전트 인터페이스에서 새 이메일 티켓의 기본 제목 (예 : \'이메일 발신\')을 설정합니다.',
-        'Sets the default subject for new phone tickets (e.g. \'Phone call\') in the agent interface.' =>
-            '상담원 인터페이스에서 새 전화 티켓의 기본 제목 (예 : \'전화 통화\')을 설정합니다.',
-        'Sets the default subject for notes added in the close ticket screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 닫기 화면에 추가 된 노트의 기본 제목을 설정합니다.',
-        'Sets the default subject for notes added in the ticket move screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 이동 화면에 추가된 노트의 기본 제목을 설정합니다.',
-        'Sets the default subject for notes added in the ticket note screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 메모 화면에 추가 된 노트의 기본 제목을 설정합니다.',
-        'Sets the default subject for notes added in the ticket owner screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대 된 티켓의 티켓 소유자 화면에 추가 된 노트의 기본 제목을 설정합니다.',
-        'Sets the default subject for notes added in the ticket pending screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 보류 화면에 추가 된 노트의 기본 제목을 설정합니다.',
-        'Sets the default subject for notes added in the ticket priority screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 우선 순위 화면에 추가 된 노트의 기본 제목을 설정합니다.',
-        'Sets the default subject for notes added in the ticket responsible screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 담당 화면에 추가 된 노트의 기본 제목을 설정합니다.',
-        'Sets the default text for new email tickets in the agent interface.' =>
-            '에이전트 인터페이스에서 새 전자 메일 티켓의 기본 텍스트를 설정합니다.',
-        'Sets the inactivity time (in seconds) to pass before a session is killed and a user is logged out.' =>
-            '세션이 종료되고 사용자가 로그 아웃하기 전에 비 활동 시간 (초)을 설정합니다.',
-        'Sets the maximum number of active agents within the timespan defined in SessionMaxIdleTime before a prior warning will be visible for the logged in agents.' =>
-            '로그인 된 에이전트에 대해 이전 경고가 표시되기 전에 SessionMaxIdleTime에 정의 된 시간 범위 내에서 활성 에이전트의 최대 수를 설정합니다.',
-        'Sets the maximum number of active agents within the timespan defined in SessionMaxIdleTime.' =>
-            'SessionMaxIdleTime에 정의 된 시간 범위 내에서 활성 에이전트의 최대 수를 설정합니다.',
-        'Sets the maximum number of active customers within the timespan defined in SessionMaxIdleTime.' =>
-            'SessionMaxIdleTime에 정의 된 시간 범위 내의 활성 고객의 최대 수를 설정합니다.',
-        'Sets the maximum number of active sessions per agent within the timespan defined in SessionMaxIdleTime.' =>
-            'SessionMaxIdleTime에 정의 된 시간 범위 내에서 에이전트 당 최대 활성 세션 수를 설정합니다.',
-        'Sets the maximum number of active sessions per customers within the timespan defined in SessionMaxIdleTime.' =>
-            'SessionMaxIdleTime에 정의 된 시간 범위 내에서 고객 당 활성 세션의 최대 수를 설정합니다.',
-        'Sets the method PGP will use to sing and encrypt emails. Note Inline method is not compatible with RichText messages.' =>
-            'PGP가 전자 메일을 노래하고 암호화하는 데 사용할 방법을 설정합니다. 참고 인라인 메서드는 서식있는 텍스트 메시지와 호환되지 않습니다.',
-        'Sets the minimal ticket counter size if "AutoIncrement" was selected as TicketNumberGenerator. Default is 5, this means the counter starts from 10000.' =>
-            '"AutoIncrement"가 TicketNumberGenerator로 선택된 경우 최소 티켓 카운터 크기를 설정합니다. 기본값은 5이며, 이는 카운터가 10000에서 시작 함을 의미합니다. ',
-        'Sets the minutes a notification is shown for notice about upcoming system maintenance period.' =>
-            '다가오는 시스템 유지 보수 기간에 대한 알림을 표시하는 시간을 설정합니다.',
-        'Sets the number of lines that are displayed in text messages (e.g. ticket lines in the QueueZoom).' =>
-            '문자 메시지에 표시되는 줄 수를 설정합니다 (예 : QueueZoom의 티켓 줄).',
-        'Sets the options for PGP binary.' => 'PGP 바이너리의 옵션을 설정합니다.',
-        'Sets the password for private PGP key.' => '비공개 PGP 키의 암호를 설정합니다.',
-        'Sets the prefered time units (e.g. work units, hours, minutes).' =>
-            '선호 시간 단위 (예 : 작업 단위, 시간, 분)를 설정합니다.',
-        'Sets the preferred digest to be used for PGP binary.' => 'PGP 바이너리에 사용할 선호 다이제스트를 설정합니다.',
-        'Sets the prefix to the scripts folder on the server, as configured on the web server. This setting is used as a variable, OTRS_CONFIG_ScriptAlias which is found in all forms of messaging used by the application, to build links to the tickets within the system.' =>
-            '접두어를 웹 서버에 구성된대로 서버의 scripts 폴더에 설정합니다. 이 설정은 응용 프로그램에서 사용하는 모든 형식의 메시징에서 발견되는 변수 인 OTRS_CONFIG_ScriptAlias로 사용되어 시스템 내의 티켓에 대한 링크를 작성합니다.',
-        'Sets the queue in the ticket close screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대 / 축소된 티켓의 티켓 닫기 화면에서 대기열을 설정합니다.',
-        'Sets the queue in the ticket free text screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 프리 텍스트 화면에 대기열을 설정합니다.',
-        'Sets the queue in the ticket note screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 메모 화면에 대기열을 설정합니다.',
-        'Sets the queue in the ticket owner screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 소유자 화면에 대기열을 설정합니다.',
-        'Sets the queue in the ticket pending screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 보류 화면에 대기열을 설정합니다.',
-        'Sets the queue in the ticket priority screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 우선 순위 화면에 대기열을 설정합니다.',
-        'Sets the queue in the ticket responsible screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 책임 화면에 대기열을 설정합니다.',
-        'Sets the responsible agent of the ticket in the close ticket screen of the agent interface.' =>
-            '에이전트 인터페이스의 닫기 티켓 화면에서 티켓의 담당 에이전트를 설정합니다.',
-        'Sets the responsible agent of the ticket in the ticket bulk screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 대량 화면에서 티켓의 담당 에이전트를 설정합니다.',
-        'Sets the responsible agent of the ticket in the ticket free text screen of the agent interface.' =>
-            '티켓의 담당 에이전트를 에이전트 인터페이스의 티켓 프리 텍스트 화면에 설정합니다.',
-        'Sets the responsible agent of the ticket in the ticket note screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 메모 화면에서 티켓의 담당 에이전트를 설정합니다.',
-        'Sets the responsible agent of the ticket in the ticket owner screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스의 확대 된 티켓의 티켓 소유자 화면에 티켓의 책임자를 설정합니다.',
-        'Sets the responsible agent of the ticket in the ticket pending screen of a zoomed ticket in the agent interface.' =>
-            '티켓의 담당 에이전트를 에이전트 인터페이스의 확대 된 티켓의 티켓 보류 화면에 설정합니다.',
-        'Sets the responsible agent of the ticket in the ticket priority screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 우선 순위 화면에 티켓의 책임자를 설정합니다.',
-        'Sets the responsible agent of the ticket in the ticket responsible screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 책임 화면에 티켓의 담당 에이전트를 설정합니다.',
-        'Sets the service in the close ticket screen of the agent interface (Ticket::Service needs to be enabled).' =>
-            '에이전트 인터페이스의 닫기 티켓 화면에 서비스를 설정합니다 (Ticket :: Service를 활성화해야 함).',
-        'Sets the service in the ticket free text screen of the agent interface (Ticket::Service needs to be enabled).' =>
-            '에이전트 인터페이스의 티켓 프리 텍스트 화면에 서비스를 설정합니다 (Ticket :: Service를 활성화해야 함).',
-        'Sets the service in the ticket note screen of the agent interface (Ticket::Service needs to be enabled).' =>
-            '에이전트 인터페이스의 티켓 메모 화면에 서비스를 설정합니다 (Ticket :: Service를 활성화해야 함).',
-        'Sets the service in the ticket owner screen of a zoomed ticket in the agent interface (Ticket::Service needs to be enabled).' =>
-            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 소유자 화면에 서비스를 설정합니다 (Ticket :: Service를 활성화해야 함).',
-        'Sets the service in the ticket pending screen of a zoomed ticket in the agent interface (Ticket::Service needs to be enabled).' =>
-            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 보류 화면에 서비스를 설정합니다 (Ticket :: Service를 활성화해야 함).',
-        'Sets the service in the ticket priority screen of a zoomed ticket in the agent interface (Ticket::Service needs to be enabled).' =>
-            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 우선 순위 화면에 서비스를 설정합니다 (Ticket :: Service를 활성화해야 함).',
-        'Sets the service in the ticket responsible screen of the agent interface (Ticket::Service needs to be enabled).' =>
-            '에이전트 인터페이스의 티켓 책임 화면에 서비스를 설정합니다 (Ticket :: Service를 활성화해야 함).',
-        'Sets the state of a ticket in the close ticket screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 닫기 화면에서 티켓의 상태를 설정합니다.',
-        'Sets the state of a ticket in the ticket bulk screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 대량 화면에서 티켓의 상태를 설정합니다.',
-        'Sets the state of a ticket in the ticket free text screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 프리 텍스트 화면에서 티켓의 상태를 설정합니다.',
-        'Sets the state of a ticket in the ticket note screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 메모 화면에서 티켓의 상태를 설정합니다.',
-        'Sets the state of a ticket in the ticket responsible screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 담당 화면에서 티켓의 상태를 설정합니다.',
-        'Sets the state of the ticket in the ticket owner screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스의 확대 된 티켓의 티켓 소유자 화면에서 티켓의 상태를 설정합니다.',
-        'Sets the state of the ticket in the ticket pending screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 보류 화면에 티켓의 상태를 설정합니다.',
-        'Sets the state of the ticket in the ticket priority screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스의 확대 된 티켓의 티켓 우선 순위 화면에서 티켓의 상태를 설정합니다.',
-        'Sets the stats hook.' => '통계 후크를 설정합니다.',
-        'Sets the ticket owner in the close ticket screen of the agent interface.' =>
-            '에이전트 인터페이스의 닫기 티켓 화면에서 티켓 소유자를 설정합니다.',
-        'Sets the ticket owner in the ticket bulk screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 대량 화면에서 티켓 소유자를 설정합니다.',
-        'Sets the ticket owner in the ticket free text screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 프리 텍스트 화면에 티켓 소유자를 설정합니다.',
-        'Sets the ticket owner in the ticket note screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 메모 화면에서 티켓 소유자를 설정합니다.',
-        'Sets the ticket owner in the ticket owner screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스의 확대 된 티켓의 티켓 소유자 화면에서 티켓 소유자를 설정합니다.',
-        'Sets the ticket owner in the ticket pending screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 보류 화면에 티켓 소유자를 설정합니다.',
-        'Sets the ticket owner in the ticket priority screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대 된 티켓의 티켓 우선 순위 화면에 티켓 소유자를 설정합니다.',
-        'Sets the ticket owner in the ticket responsible screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 책임 화면에 티켓 소유자를 설정합니다.',
-        'Sets the ticket type in the close ticket screen of the agent interface (Ticket::Type needs to be enabled).' =>
-            '에이전트 인터페이스의 티켓 닫기 화면에서 티켓 유형을 설정합니다 (Ticket :: Type을 활성화해야합니다).',
-        'Sets the ticket type in the ticket bulk screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 대량 화면에서 티켓 유형을 설정합니다.',
-        'Sets the ticket type in the ticket free text screen of the agent interface (Ticket::Type needs to be enabled).' =>
-            '에이전트 인터페이스의 티켓 프리 텍스트 화면에 티켓 유형을 설정합니다 (Ticket :: Type을 활성화해야합니다).',
-        'Sets the ticket type in the ticket note screen of the agent interface (Ticket::Type needs to be enabled).' =>
-            '에이전트 인터페이스의 티켓 메모 화면에서 티켓 유형을 설정합니다 (Ticket :: Type을 활성화해야합니다).',
-        'Sets the ticket type in the ticket owner screen of a zoomed ticket in the agent interface (Ticket::Type needs to be enabled).' =>
-            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 소유자 화면에 티켓 유형을 설정합니다 (Ticket :: Type을 활성화해야합니다).',
-        'Sets the ticket type in the ticket pending screen of a zoomed ticket in the agent interface (Ticket::Type needs to be enabled).' =>
-            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 보류 화면에 티켓 유형을 설정합니다 (Ticket :: Type을 활성화해야합니다).',
-        'Sets the ticket type in the ticket priority screen of a zoomed ticket in the agent interface (Ticket::Type needs to be enabled).' =>
-            '에이전트 인터페이스에서 확대 / 축소 된 티켓의 티켓 우선 순위 화면에 티켓 유형을 설정합니다 (Ticket :: Type을 활성화해야합니다).',
-        'Sets the ticket type in the ticket responsible screen of the agent interface (Ticket::Type needs to be enabled).' =>
-            '에이전트 인터페이스의 티켓 책임 화면에 티켓 유형을 설정합니다 (Ticket :: Type을 활성화해야합니다).',
-        'Sets the time zone being used internally by OTRS to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.' =>
-            'OTRS에 의해 내부적으로 사용되는 시간대를 e로 설정합니다. 지. 날짜와 시간을 데이터베이스에 저장하십시오. 경고 :이 설정은 일단 설정하고 티켓 또는 날짜 / 시간이 포함 된 다른 데이터를 작성한 후에 변경하면 안됩니다.',
-        'Sets the time zone that will be assigned to newly created users and will be used for users that haven\'t yet set a time zone. This is the time zone being used as default to convert date and time between the OTRS time zone and the user\'s time zone.' =>
-            '새로 생성 된 사용자에게 할당되고 아직 시간대를 설정하지 않은 사용자에게 사용될 시간대를 설정합니다. 이 시간대는 OTRS 시간대와 사용자 시간대 사이의 날짜와 시간을 변환하기 위해 기본값으로 사용됩니다.',
-        'Sets the timeout (in seconds) for http/ftp downloads.' => 'http / ftp 다운로드에 대한 시간 초과 (초)를 설정합니다.',
-        'Sets the timeout (in seconds) for package downloads. Overwrites "WebUserAgent::Timeout".' =>
-            '패키지 다운로드의 시간 초과 (초)를 설정합니다. "WebUserAgent :: Timeout"을 덮어 씁니다.',
         'Shared Secret' => '공유된 비밀',
-        'Show a responsible selection in phone and email tickets in the agent interface.' =>
-            '상담원 인터페이스에서 전화 및 전자 메일 티켓에 책임감 있는 선택을 표시합니다.',
-        'Show article as rich text even if rich text writing is disabled.' =>
-            '리치 텍스트 쓰기가 비활성화된 경우에도 기사를 리치 텍스트로 표시하십시오.',
-        'Show command line output.' => '명령 행 출력보기.',
-        'Show queues even when only locked tickets are in.' => '잠긴 티켓만 있는 경우에도 대기열을 표시하십시오.',
-        'Show the current owner in the customer interface.' => '고객 인터페이스에 현재 소유자를 표시하십시오.',
-        'Show the current queue in the customer interface.' => '고객 인터페이스에 현재 대기열을 표시하십시오.',
         'Show the history for this ticket' => '이 티켓의 기록 표시',
         'Show the ticket history' => '티켓 기록보기',
-        'Shows a count of attachments in the ticket zoom, if the article has attachments.' =>
-            '기사에 첨부 파일이 있는 경우 티켓 확대 / 축소의 첨부 파일 수를 표시합니다.',
-        'Shows a link in the menu for creating a calendar appointment linked to the ticket directly from the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
-            '에이전트 인터페이스의 티켓 확대보기에서 직접 티켓에 링크 된 일정 약속을 만드는 링크를 메뉴에 표시합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
-        'Shows a link in the menu for subscribing / unsubscribing from a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
-            '에이전트 인터페이스의 티켓 확대보기에서 티켓을 구독하거나 탈퇴하기위한 링크를 메뉴에 표시합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
-        'Shows a link in the menu that allows linking a ticket with another object in the ticket zoom view of the agent interface.  Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
-            '메뉴에서 티켓을 에이전트 인터페이스의 티켓 확대보기에서 다른 오브젝트와 링크 할 수있는 링크를 표시합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
-        'Shows a link in the menu that allows merging tickets in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
-            '에이전트 인터페이스의 티켓 확대보기에서 티켓을 병합 할 수있는 링크를 메뉴에 표시합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
-        'Shows a link in the menu to access the history of a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
-            '메뉴에 링크를 표시하여 에이전트 인터페이스의 티켓 확대보기에서 티켓 기록에 액세스합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
-        'Shows a link in the menu to add a free text field in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
-            '메뉴에 링크를 표시하여 에이전트 인터페이스의 티켓 확대보기에 자유 텍스트 필드를 추가합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
-        'Shows a link in the menu to add a note in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
-            '메뉴에 링크를 표시하여 상담원 인터페이스의 티켓 확대보기에 메모를 추가합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
-        'Shows a link in the menu to add a note to a ticket in every ticket overview of the agent interface.' =>
-            '메뉴에 링크를 표시하여 상담원 인터페이스의 모든 티켓 개요에 있는 티켓에 메모를 추가합니다.',
-        'Shows a link in the menu to add a phone call inbound in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
-            '',
-        'Shows a link in the menu to add a phone call outbound in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
-            '',
-        'Shows a link in the menu to change the customer who requested the ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
-            '',
-        'Shows a link in the menu to change the owner of a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
-            '',
-        'Shows a link in the menu to change the responsible agent of a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
-            '',
-        'Shows a link in the menu to close a ticket in every ticket overview of the agent interface.' =>
-            '메뉴의 링크를 표시하여 에이전트 인터페이스의 모든 티켓 개요에서 티켓을 닫습니다.',
-        'Shows a link in the menu to close a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
-            '메뉴에 링크를 표시하여 에이전트 인터페이스의 티켓 확대보기에서 티켓을 닫습니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
-        'Shows a link in the menu to delete a ticket in every ticket overview of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
-            '메뉴에 링크를 표시하여 에이전트 인터페이스의 모든 티켓 개요에서 티켓을 삭제합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다.',
-        'Shows a link in the menu to delete a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
-            '메뉴에 링크를 표시하여 에이전트 인터페이스의 티켓 확대보기에서 티켓을 삭제합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
-        'Shows a link in the menu to enroll a ticket into a process in the ticket zoom view of the agent interface.' =>
-            '메뉴에 링크를 표시하여 에이전트 인터페이스의 티켓 확대보기에서 티켓을 프로세스에 등록합니다.',
-        'Shows a link in the menu to go back in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
-            '메뉴에 링크가 표시되어 상담원 인터페이스의 티켓 확대보기로 돌아갑니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
-        'Shows a link in the menu to lock / unlock a ticket in the ticket overviews of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 개요에서 티켓을 잠그거나 잠금 해제할 수 있는 링크를 메뉴에 표시합니다.',
-        'Shows a link in the menu to lock/unlock tickets in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
-            '에이전트 인터페이스의 티켓 확대보기에서 티켓을 잠 그거나 잠금 해제 할 수있는 링크를 메뉴에 표시합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
-        'Shows a link in the menu to move a ticket in every ticket overview of the agent interface.' =>
-            '메뉴에 링크를 표시하여 에이전트 인터페이스의 모든 티켓 개요에서 티켓을 이동합니다.',
-        'Shows a link in the menu to print a ticket or an article in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
-            '메뉴에서 티켓이나 기사를 에이전트 인터페이스의 티켓 확대보기로 인쇄 할 수있는 링크를 표시합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
-        'Shows a link in the menu to see the history of a ticket in every ticket overview of the agent interface.' =>
-            '메뉴에 링크를 표시하여 에이전트 인터페이스의 모든 티켓 개요에 있는 티켓의 내역을 확인합니다.',
-        'Shows a link in the menu to see the priority of a ticket in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
-            '메뉴에 링크를 표시하여 에이전트 인터페이스의 티켓 확대보기에서 티켓의 우선 순위를 확인합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
-        'Shows a link in the menu to send an outbound email in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
-            '메뉴에 링크를 표시하여 에이전트 인터페이스의 티켓 확대보기에서 아웃 바운드 전자 메일을 보냅니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
-        'Shows a link in the menu to set a ticket as junk in every ticket overview of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
-            '메뉴에 링크를 표시하여 에이전트 인터페이스의 모든 티켓 개요에 티켓을 정크로 설정합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다.',
-        'Shows a link in the menu to set a ticket as pending in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
-            '메뉴에 링크를 표시하여 에이전트 인터페이스의 티켓 확대보기에서 보류중인 티켓을 설정합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
-        'Shows a link in the menu to set the priority of a ticket in every ticket overview of the agent interface.' =>
-            '메뉴에 링크를 표시하여 에이전트 인터페이스의 모든 티켓 개요에 있는 티켓의 우선 순위를 설정합니다.',
-        'Shows a link in the menu to zoom a ticket in the ticket overviews of the agent interface.' =>
-            '메뉴에 링크를 표시하여 에이전트 인터페이스의 티켓 개요에서 티켓을 확대 / 축소합니다.',
-        'Shows a link to access article attachments via a html online viewer in the zoom view of the article in the agent interface.' =>
-            '에이전트 인터페이스의 기사 확대보기에서 html 온라인 뷰어를 통해 기사 첨부물에 액세스하는 링크를 표시합니다.',
-        'Shows a link to download article attachments in the zoom view of the article in the agent interface.' =>
-            '에이전트 인터페이스의 기사 확대 / 축소보기에서 기사 첨부 파일을 다운로드 하는 링크를 표시합니다.',
-        'Shows a link to see a zoomed email ticket in plain text.' => '확대 / 축소된 전자 메일 티켓을 일반 텍스트로 보려면 링크를 표시합니다.',
-        'Shows a link to set a ticket as junk in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2". To cluster menu items use for Key "ClusterName" and for the Content any name you want to see in the UI. Use "ClusterPriority" to configure the order of a certain cluster within the toolbar.' =>
-            '에이전트 인터페이스의 티켓 확대보기에서 티켓을 쓰레기로 설정하는 링크를 표시합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다. 클러스터 항목 메뉴를 사용하려면 Key "ClusterName"에 사용하고 Content 이름에는 UI에 표시합니다. "ClusterPriority"를 사용하여 툴바에서 특정 클러스터의 순서를 구성하십시오.',
-        'Shows a list of all the involved agents on this ticket, in the close ticket screen of the agent interface.' =>
-            '에이전트 인터페이스의 닫기 티켓 화면에서 이 티켓에 관련된 모든 에이전트의 목록을 표시합니다.',
-        'Shows a list of all the involved agents on this ticket, in the ticket free text screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓없는 텍스트 화면에 이 티켓의 모든 관련 에이전트 목록을 표시합니다.',
-        'Shows a list of all the involved agents on this ticket, in the ticket note screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 메모 화면에서 이 티켓에 관련된 모든 에이전트의 목록을 표시합니다.',
-        'Shows a list of all the involved agents on this ticket, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스의 확대된 티켓의 티켓 소유자 화면에서 이 티켓에 관련된 모든 에이전트의 목록을 표시합니다.',
-        'Shows a list of all the involved agents on this ticket, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스의 확대된 티켓의 티켓 보류 화면에 이 티켓에 이 티켓에 포함된 모든 관련 에이전트의 목록을 표시합니다.',
-        'Shows a list of all the involved agents on this ticket, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스의 확대된 티켓의 티켓 우선 순위 화면에서 이 티켓에 관련된 모든 에이전트의 목록을 표시합니다.',
-        'Shows a list of all the involved agents on this ticket, in the ticket responsible screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 책임 화면에서 이 티켓에 관련된 모든 에이전트의 목록을 표시합니다.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the close ticket screen of the agent interface.' =>
-            '가능한 모든 에이전트 (대기열 / 티켓에 대한 메모 권한이있는 모든 에이전트)의 목록을 표시하여 에이전트 인터페이스의 티켓 닫기 화면에서이 메모에 대한 정보를 알릴 사용자를 결정합니다.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket free text screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓없는 텍스트 화면에서 가능한 모든 에이전트 (큐 / 티켓에 대한 메모 권한이있는 모든 에이전트)의 목록을 표시하여이 참고 사항에 대해 사용자에게 알릴 정보를 결정합니다.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket note screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 메모 화면에서 가능한 모든 에이전트 (대기열 / 티켓에 대한 메모 권한을 가진 모든 에이전트)의 목록을 표시하여이 참고 사항에 대해 사용자에게 알릴 정보를 결정합니다.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스의 확대 된 티켓의 티켓 소유자 화면에서 가능한 모든 에이전트 (대기열 / 티켓에 대한 메모 권한이있는 모든 에이전트)의 목록을 표시하여이 참고 사항에 대해 사용자에게 알릴 사용자를 결정합니다.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
-            '가능한 모든 상담원 (대기열 / 티켓에 대한 메모 권한이있는 모든 상담원)의 목록을 표시하여 상담원 인터페이스의 확대 된 티켓의 티켓 보류 화면에서이 메모에 대한 정보를받는 사람을 결정합니다.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
-            '상담원 인터페이스의 확대 된 티켓의 티켓 우선 순위 화면에서 가능한 모든 상담원 (대기열 / 티켓에 대한 메모 권한이있는 모든 상담원)의 목록을 표시하여이 메모에 대한 정보를 알릴 사용자를 결정합니다.',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 책임 화면에서 가능한 모든 에이전트 (대기열 / 티켓에 대한 메모 권한이있는 모든 에이전트)의 목록을 표시하여이 참고 사항에 대한 정보를 제공해야합니다.',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             '티켓 개요의 미리보기를 표시합니다 (CustomerInfo => 1 - Customer-Info, CustomerInfoMaxSize 최대 크기는 Customer-Info의 문자로 표시).',
-        'Shows a teaser link in the menu for the ticket attachment view of OTRS Business Solution™.' =>
-            '메뉴에 OTRS Business Solution ™의 티켓 첨부보기에 대한 티저 링크를 표시합니다.',
-        'Shows all both ro and rw queues in the queue view.' => '대기열보기에서 ro 및 rw 대기열을 모두 표시합니다.',
-        'Shows all both ro and rw tickets in the service view.' => '서비스보기에서 ro와 rw 티켓을 모두 표시합니다.',
-        'Shows all open tickets (even if they are locked) in the escalation view of the agent interface.' =>
-            '에이전트 인터페이스의 에스컬레이션 보기에서 열려있는 모든 티켓(잠긴 경우에도 있음)을 표시합니다.',
-        'Shows all the articles of the ticket (expanded) in the agent zoom view.' =>
-            '에이전트 확대 / 축소보기에서 티켓의 모든 항목을 표시합니다(확장된).',
-        'Shows all the articles of the ticket (expanded) in the customer zoom view.' =>
-            '고객 확대보기에서 티켓의 모든 기사를 표시합니다(확장 된).',
-        'Shows all the customer identifiers in a multi-select field (not useful if you have a lot of customer identifiers).' =>
-            '다중 선택 필드에 모든 고객 식별자를 표시합니다(많은 고객 식별자가 있는 경우 유용하지 않음).',
-        'Shows all the customer user identifiers in a multi-select field (not useful if you have a lot of customer user identifiers).' =>
-            '다중 선택 필드에 모든 고객 사용자 식별자를 표시합니다 (많은 고객 사용자 식별자가 있는 경우 유용하지 않음).',
-        'Shows an owner selection in phone and email tickets in the agent interface.' =>
-            '상담원 인터페이스의 전화 및 전자 메일 티켓에서 소유자 선택을 표시합니다.',
-        'Shows customer history tickets in AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer.' =>
-            'AgentTicketPhone, AgentTicketEmail 및 AgentTicketCustomer에 고객 기록 티켓을 표시합니다.',
-        'Shows either the last customer article\'s subject or the ticket title in the small format overview.' =>
-            '마지막 고객 기사의 제목이나 작은 제목 개요의 티켓 제목을 표시합니다.',
-        'Shows existing parent/child queue lists in the system in the form of a tree or a list.' =>
-            '시스템의 기존 상위/하위 대기열 목록을 트리 또는 목록 형태로 표시합니다.',
         'Shows information on how to start OTRS Daemon' => 'OTRS 데몬을 시작하는 방법에 대한 정보를 보여줍니다.',
-        'Shows link to external page in the ticket zoom view of the agent interface. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
-            '에이전트 인터페이스의 티켓 확대보기에서 외부 페이지에 대한 링크를 표시합니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다.',
-        'Shows the article head information in the agent zoom view.' => '',
-        'Shows the articles sorted normally or in reverse, under ticket zoom in the agent interface.' =>
-            '에이전트 인터페이스의 티켓 확대/축소에서 기사를 정상적으로 또는 역순으로 정렬하여 표시합니다.',
-        'Shows the customer user information (phone and email) in the compose screen.' =>
-            '작성 화면에서 고객 사용자 정보(전화 및 전자메일)를 표시합니다.',
-        'Shows the enabled ticket attributes in the customer interface (0 = Disabled and 1 = Enabled).' =>
-            '사용 가능한 티켓 특성을 고객 인터페이스에 표시합니다 (0 = 사용 안 함, 1 = 사용함).',
-        'Shows the message of the day (MOTD) in the agent dashboard. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
-            '에이전트 대시 보드에 오늘의 메시지 (MOTD)를 표시합니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "Default"는 플러그인이 기본적으로 활성화되어 있는지 또는 사용자가 수동으로 활성화해야하는지 여부를 나타냅니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
-        'Shows the message of the day on login screen of the agent interface.' =>
-            '에이전트 인터페이스의 로그인 화면에서 오늘의 메시지를 표시합니다.',
-        'Shows the ticket history (reverse ordered) in the agent interface.' =>
-            '에이전트 인터페이스에서 티켓 내역을 (역순으로) 표시합니다.',
-        'Shows the ticket priority options in the close ticket screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 닫기 화면에서 티켓 우선 순위 옵션을 표시합니다.',
-        'Shows the ticket priority options in the move ticket screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 이동 화면에서 티켓 우선 순위 옵션을 표시합니다.',
-        'Shows the ticket priority options in the ticket bulk screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 대량 화면에서 티켓 우선 순위 옵션을 표시합니다.',
-        'Shows the ticket priority options in the ticket free text screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓없는 텍스트 화면에서 티켓 우선 순위 옵션을 표시합니다.',
-        'Shows the ticket priority options in the ticket note screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 메모 화면에서 티켓 우선 순위 옵션을 표시합니다.',
-        'Shows the ticket priority options in the ticket owner screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대된 티켓의 티켓 소유자 화면에 티켓 우선 순위 옵션을 표시합니다.',
-        'Shows the ticket priority options in the ticket pending screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대/축소된 티켓의 티켓 보류 화면에 티켓 우선 순위 옵션을 표시합니다.',
-        'Shows the ticket priority options in the ticket priority screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대된 티켓의 티켓 우선 순위 화면에 티켓 우선 순위 옵션을 표시합니다.',
-        'Shows the ticket priority options in the ticket responsible screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 책임 화면에 티켓 우선 순위 옵션을 표시합니다.',
-        'Shows the title field in the close ticket screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 닫기 화면에 제목 필드를 표시합니다.',
-        'Shows the title field in the ticket free text screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 없는 텍스트 화면에 제목 필드를 표시합니다.',
-        'Shows the title field in the ticket note screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 메모 화면에 제목 필드를 표시합니다.',
-        'Shows the title field in the ticket owner screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대/축소된 티켓의 티켓 소유자 화면에 제목 필드를 표시합니다.',
-        'Shows the title field in the ticket pending screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대/축소된 티켓의 티켓 보류 화면에 제목 필드를 표시합니다.',
-        'Shows the title field in the ticket priority screen of a zoomed ticket in the agent interface.' =>
-            '에이전트 인터페이스에서 확대/축소된 티켓의 티켓 우선 순위 화면에 제목 필드를 표시합니다.',
-        'Shows the title field in the ticket responsible screen of the agent interface.' =>
-            '에이전트 인터페이스의 티켓 책임 화면에 제목 필드를 표시합니다.',
-        'Shows time in long format (days, hours, minutes), if enabled; or in short format (days, hours), if not enabled.' =>
-            '사용 가능한 경우 긴 형식 (일, 시간, 분)으로 시간을 표시합니다. 또는 짧은 형식 (일, 시간)으로 설정할 수 있습니다.',
-        'Shows time use complete description (days, hours, minutes), if enabled; or just first letter (d, h, m), if not enabled.' =>
-            '사용 가능한 경우 시간 사용 완료 설명 (일, 시간, 분)을 표시합니다. 또는 활성화되지 않은 경우 첫 번째 문자 (d, h, m).',
+        'Shows last mention of tickets.' => '',
         'Signature data.' => '',
         'Signatures' => '서명',
         'Simple' => '단순한',
@@ -8495,93 +9046,28 @@ Thanks for your help!
         'Slovak' => '슬로바키아 사람',
         'Slovenian' => '슬로베니아',
         'Small' => '작은',
+        'Snippet' => '',
         'Software Package Manager.' => '소프트웨어 패키지 관리자.',
         'Solution time' => '솔루션 시간',
         'SolutionDiffInMin' => 'SolutionDiffInMin',
         'SolutionInMin' => 'SolutionInMin',
         'Some description!' => '어떤 묘사!',
         'Some picture description!' => '어떤 그림 설명!',
-        'Sorts the tickets (ascendingly or descendingly) when a single queue is selected in the queue view and after the tickets are sorted by priority. Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top). Use the QueueID for the key and 0 or 1 for value.' =>
-            '대기열보기에서 하나의 대기열을 선택한 경우와 티켓을 우선 순위별로 정렬 한 후에 티켓을 정렬합니다 (오름차순 또는 내림차순). 값 : 0 = 오름차순 (가장 오래된 것, 기본값), 1 = 내림차순 (맨 위에 가장 어린 것). 키에는 QueueID를 사용하고 값에는 0 또는 1을 사용하십시오.',
-        'Sorts the tickets (ascendingly or descendingly) when a single queue is selected in the service view and after the tickets are sorted by priority. Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top). Use the ServiceID for the key and 0 or 1 for value.' =>
-            '서비스보기에서 하나의 대기열을 선택한 경우와 티켓을 우선 순위별로 정렬 한 후에 티켓을 정렬합니다 (오름차순 또는 내림차순). 값 : 0 = 오름차순 (가장 오래된 것, 기본값), 1 = 내림차순 (맨 위에 가장 어린 것). 키에는 ServiceID를 사용하고 값에는 0 또는 1을 사용하십시오.',
         'Spam' => '스팸',
-        'Spam Assassin example setup. Ignores emails that are marked with SpamAssassin.' =>
-            '스팸 어쌔신 예제 설정. SpamAssassin으로 표시된 이메일을 무시합니다.',
-        'Spam Assassin example setup. Moves marked mails to spam queue.' =>
-            '스팸 어쌔신 예제 설정. 표시된 메일을 스팸 대기열로 이동합니다.',
         'Spanish' => '스페인 사람',
         'Spanish (Colombia)' => '스페인어(콜롬비아)',
         'Spanish (Mexico)' => '스페인어(멕시코)',
-        'Spanish stop words for fulltext index. These words will be removed from the search index.' =>
-            '전체 텍스트 색인에 대한 스페인어 중지 단어. 이 단어는 검색 색인에서 제거됩니다.',
-        'Specifies if an agent should receive email notification of his own actions.' =>
-            '상담원이 자신의 작업에 대한 전자 메일 알림을 수신해야하는지 여부를 지정합니다.',
-        'Specifies the directory to store the data in, if "FS" was selected for ArticleStorage.' =>
-            'ArticleStorage에 대해 "FS"를 선택한 경우 데이터를 저장할 디렉토리를 지정합니다.',
-        'Specifies the directory where SSL certificates are stored.' => 'SSL 인증서가 저장되는 디렉토리를 지정합니다.',
-        'Specifies the directory where private SSL certificates are stored.' =>
-            '개인 SSL 인증서가 저장되는 디렉토리를 지정합니다.',
-        'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "OTRS Notifications" otrs@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
-            '알림을 보낼 때 응용 프로그램에서 사용해야하는 전자 메일 주소를 지정합니다. 이메일 주소는 알림 마스터의 전체 표시 이름 (예 : "OTRS Notifications"otrs@your.example.com)을 작성하는 데 사용됩니다. OTRS_CONFIG_FQDN 변수를 설정에 사용하거나 다른 이메일 주소를 선택할 수 있습니다.',
-        'Specifies the email addresses to get notification messages from scheduler tasks.' =>
-            '스케줄러 테스크에서 알림 메시지를 가져올 이메일 주소를 지정합니다.',
-        'Specifies the group where the user needs rw permissions so that he can access the "SwitchToCustomer" feature.' =>
-            '"SwitchToCustomer"기능에 액세스 할 수 있도록 사용자에게 rw 권한이 필요한 그룹을 지정합니다.',
-        'Specifies the group where the user needs rw permissions so that they can edit other users preferences.' =>
-            '다른 사용자 기본 설정을 편집 할 수 있도록 사용자에게 rw 권한이 필요한 그룹을 지정합니다.',
-        'Specifies the name that should be used by the application when sending notifications. The sender name is used to build the complete display name for the notification master (i.e. "OTRS Notifications" otrs@your.example.com).' =>
-            '알림을 보낼 때 응용 프로그램에서 사용해야하는 이름을 지정합니다. 발신자 이름은 알림 마스터의 전체 표시 이름 (예 : "OTRS Notifications"otrs@your.example.com)을 작성하는 데 사용됩니다.',
-        'Specifies the order in which the firstname and the lastname of agents will be displayed.' =>
-            '에이전트의 성 및 성을 표시하는 순서를 지정합니다.',
-        'Specifies the path of the file for the logo in the page header (gif|jpg|png, 700 x 100 pixel).' =>
-            '페이지 머리글에 로고 파일 경로를 지정합니다 (gif | jpg | png, 700 x 100 픽셀).',
-        'Specifies the path of the file for the performance log.' => '성능 로그 파일의 경로를 지정합니다.',
-        'Specifies the path to the converter that allows the view of Microsoft Excel files, in the web interface.' =>
-            '웹 인터페이스에서 Microsoft Excel 파일보기를 허용하는 변환기의 경로를 지정합니다.',
-        'Specifies the path to the converter that allows the view of Microsoft Word files, in the web interface.' =>
-            '웹 인터페이스에서 Microsoft Word 파일보기를 허용하는 변환기의 경로를 지정합니다.',
-        'Specifies the path to the converter that allows the view of PDF documents, in the web interface.' =>
-            '웹 인터페이스에서 PDF 문서의보기를 허용하는 변환기의 경로를 지정합니다.',
-        'Specifies the path to the converter that allows the view of XML files, in the web interface.' =>
-            '웹 인터페이스에서 XML 파일보기를 허용하는 변환기의 경로를 지정합니다.',
-        'Specifies the text that should appear in the log file to denote a CGI script entry.' =>
-            '로그 파일에 표시 할 텍스트를 지정하여 CGI 스크립트 항목을 나타냅니다.',
-        'Specifies user id of the postmaster data base.' => '전자 메일 관리자 데이터베이스의 사용자 ID를 지정합니다.',
-        'Specifies whether all storage backends should be checked when looking for attachments. This is only required for installations where some attachments are in the file system, and others in the database.' =>
-            '첨부 파일을 찾을 때 모든 저장소 백엔드를 검사할지 여부를 지정합니다. 일부 첨부 파일이 파일 시스템에 있고 다른 파일 시스템에 있는 설치에만 필요합니다.',
-        'Specifies whether the (MIMEBase) article attachments will be indexed and searchable.' =>
-            '(MIMEBase) 아티클 첨부 파일을 인덱싱하여 검색 할 수 있는지 여부를 지정합니다.',
-        'Specify how many sub directory levels to use when creating cache files. This should prevent too many cache files being in one directory.' =>
-            '캐시 파일을 만들 때 사용할 하위 디렉토리 수준 수를 지정하십시오. 이렇게하면 너무 많은 캐시 파일이 하나의 디렉토리에 있는 것을 방지할 수 있습니다.',
-        'Specify the channel to be used to fetch OTRS Business Solution™ updates. Warning: Development releases might not be complete, your system might experience unrecoverable errors and on extreme cases could become unresponsive!' =>
-            'OTRS Business Solution ™ 업데이트를 가져 오는 데 사용할 채널을 지정하십시오. 경고 : 개발 릴리스가 완전하지 않을 수 있습니다. 시스템에 복구 할 수없는 오류가 발생할 수 있으며 극단적 인 경우에 응답하지 않을 수 있습니다!',
-        'Specify the password to authenticate for the first mirror database.' =>
-            '첫 번째 미러 데이터베이스에 대해 인증할 암호를 지정하십시오.',
-        'Specify the username to authenticate for the first mirror database.' =>
-            '첫 번째 미러 데이터베이스에 대해 인증할 사용자 이름을 지정하십시오.',
         'Stable' => '안정된',
-        'Standard available permissions for agents within the application. If more permissions are needed, they can be entered here. Permissions must be defined to be effective. Some other good permissions have also been provided built-in: note, close, pending, customer, freetext, move, compose, responsible, forward, and bounce. Make sure that "rw" is always the last registered permission.' =>
-            '응용 프로그램 내의 에이전트에 대한 표준 사용 권한. 더 많은 권한이 필요하면 여기에 입력 할 수 있습니다. 권한은 효과가 있도록 정의되어야합니다. 메모, 닫기, 보류 중, 고객, 프리 텍스트, 이동, 작성, 책임, 전달 및 반송과 같은 기타 훌륭한 사용 권한도 내장되어 있습니다. "rw"가 항상 마지막으로 등록 된 권한인지 확인하십시오.',
-        'Start number for statistics counting. Every new stat increments this number.' =>
-            '통계 계산의 시작 번호입니다. 모든 새로운 통계는 이 숫자를 증가시킵니다.',
         'Started response time escalation.' => '응답',
         'Started solution time escalation.' => '응답 시간 확대를 시작했습니다.',
         'Started update time escalation.' => '업데이트 시간 에스컬레이션을 시작했습니다.',
-        'Starts a wildcard search of the active object after the link object mask is started.' =>
-            '링크 개체 마스크가 시작된 후 활성 개체의 와일드 카드 검색을 시작합니다.',
         'Stat#' => '통계#',
         'States' => '상태',
-        'Statistic Reports overview.' => '통계 보고서 개요.',
         'Statistics overview.' => '통계 개요.',
         'Status view' => '상태 보기',
         'Stopped response time escalation.' => '응답 시간 에스컬레이션이 중지되었습니다.',
         'Stopped solution time escalation.' => '중지된 솔루션 시간 에스컬레이션.',
         'Stopped update time escalation.' => '업데이트 시간 에스컬레이션이 중지되었습니다.',
-        'Stores cookies after the browser has been closed.' => '브라우저가 닫힌 후에 쿠키를 저장합니다.',
-        'Strips empty lines on the ticket preview in the queue view.' => '대기열 보기의 티켓 미리보기에서 빈 줄을 제거합니다.',
-        'Strips empty lines on the ticket preview in the service view.' =>
-            '서비스보기의 티켓 미리보기에서 빈 줄을 제거합니다.',
         'Support Agent' => '',
         'Swahili' => '스와힐리어',
         'Swedish' => '스웨덴어',
@@ -8600,84 +9086,17 @@ Thanks for your help!
         'The PGP signature with the keyid has not been verified successfully.' =>
             '',
         'The PGP signature with the keyid is good.' => '',
-        'The agent skin\'s InternalName which should be used in the agent interface. Please check the available skins in Frontend::Agent::Skins.' =>
-            '에이전트 인터페이스에서 사용해야하는 에이전트 스킨의 InternalName입니다. Frontend :: Agent :: Skins에서 사용 가능한 스킨을 확인하십시오.',
-        'The customer skin\'s InternalName which should be used in the customer interface. Please check the available skins in Frontend::Customer::Skins.' =>
-            '고객 인터페이스에서 사용해야하는 고객 스킨의 InternalName입니다. Frontend :: Customer :: Skins에서 사용 가능한 스킨을 확인하십시오.',
-        'The daemon registration for the scheduler cron task manager.' =>
-            '스케줄러 cron 작업 관리자에 대한 데몬 등록.',
-        'The daemon registration for the scheduler future task manager.' =>
-            '스케줄러 미래 작업 관리자에 대한 데몬 등록.',
-        'The daemon registration for the scheduler generic agent task manager.' =>
-            '스케줄러 제네릭 에이전트 작업 관리자에 대한 데몬 등록입니다.',
-        'The daemon registration for the scheduler task worker.' => '스케줄러 태스크 작업자에 대한 데몬 등록.',
-        'The daemon registration for the system configuration deployment sync manager.' =>
-            '시스템 구성 배포 동기화 관리자에 대한 데몬 등록입니다.',
-        'The divider between TicketHook and ticket number. E.g \': \'.' =>
-            'TicketHook과 티켓 번호 사이의 구분선. 예 : \':\'.',
-        'The duration in minutes after emitting an event, in which the new escalation notify and start events are suppressed.' =>
-            '새 에스컬레이션 알림 및 시작 이벤트가 표시되지 않는 이벤트 발생 후 경과 분입니다.',
-        'The format of the subject. \'Left\' means \'[TicketHook#:12345] Some Subject\', \'Right\' means \'Some Subject [TicketHook#:12345]\', \'None\' means \'Some Subject\' and no ticket number. In the latter case you should verify that the setting PostMaster::CheckFollowUpModule###0200-References is activated to recognize followups based on email headers.' =>
-            '주제의 형식. \'Left\'는 \'[TicketHook # : 12345]\'Some Subject \',\'Right \'는\'Some Subject [TicketHook # : 12345] \',\'None \'은\'Some Subject \'를 의미하며 티켓 번호는 없음을 의미합니다. 후자의 경우 PostMaster :: CheckFollowUpModule ### 0200-References 설정이 활성화되어 전자 메일 머리글을 기반으로 한 후속 작업을 인식하는지 확인해야합니다.',
-        'The headline shown in the customer interface.' => '고객 인터페이스에 표시되는 헤드 라인.',
-        'The identifier for a ticket, e.g. Ticket#, Call#, MyTicket#. The default is Ticket#.' =>
-            '티켓 식별자 예 : 티켓 #, 콜 #, 마이 티켓 #. 기본값은 Ticket #입니다.',
-        'The logo shown in the header of the agent interface for the skin "High Contrast". See "AgentLogo" for further description.' =>
-            '',
-        'The logo shown in the header of the agent interface for the skin "default". See "AgentLogo" for further description.' =>
-            '스킨 "기본"에 대한 에이전트 인터페이스의 머리글에 표시된 로고입니다. 자세한 설명은 "AgentLogo"를 참조하십시오.',
-        'The logo shown in the header of the agent interface for the skin "ivory". See "AgentLogo" for further description.' =>
-            '피부 "아이보리"의 에이전트 인터페이스 헤더에 표시된 로고입니다. 자세한 설명은 "AgentLogo"를 참조하십시오.',
-        'The logo shown in the header of the agent interface for the skin "ivory-slim". See "AgentLogo" for further description.' =>
-            '스킨 "아이보리 - 슬림"을위한 에이전트 인터페이스의 헤더에 표시된 로고. 자세한 설명은 "AgentLogo"를 참조하십시오.',
-        'The logo shown in the header of the agent interface for the skin "slim". See "AgentLogo" for further description.' =>
-            '스킨 "슬림"을위한 에이전트 인터페이스의 헤더에 표시된 로고. 자세한 설명은 "AgentLogo"를 참조하십시오.',
-        'The logo shown in the header of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
-            '에이전트 인터페이스의 헤더에 표시된 로고. 이미지의 URL은 스킨 이미지 디렉토리에 대한 상대 URL이거나 원격 웹 서버에 대한 전체 URL 일 수 있습니다.',
-        'The logo shown in the header of the customer interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
-            '고객 인터페이스의 머리글에 표시된 로고입니다. 이미지의 URL은 스킨 이미지 디렉토리에 대한 상대 URL이거나 원격 웹 서버에 대한 전체 URL 일 수 있습니다.',
-        'The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server.' =>
-            '에이전트 인터페이스의 로그인 상자 상단에 표시된 로고입니다. 이미지의 URL은 스킨 이미지 디렉토리에 대한 상대 URL이거나 원격 웹 서버에 대한 전체 URL 일 수 있습니다.',
-        'The maximal number of articles expanded on a single page in AgentTicketZoom.' =>
-            'AgentTicketZoom의 단일 페이지에서 확장 된 기사의 최대 수입니다.',
-        'The maximal number of articles shown on a single page in AgentTicketZoom.' =>
-            'AgentTicketZoom의 단일 페이지에 표시되는 기사의 최대 수입니다.',
-        'The maximum number of mails fetched at once before reconnecting to the server.' =>
-            '서버에 다시 연결하기 전에 한 번에 가져온 최대 메일 수입니다.',
         'The secret you supplied is invalid. The secret must only contain letters (A-Z, uppercase) and numbers (2-7) and must consist of 16 characters.' =>
             '제공 한 비밀 정보가 유효하지 않습니다. 비밀은 문자 (A-Z, 대문자)와 숫자 (2-7) 만 포함하고 16 자로 구성되어야합니다.',
-        'The text at the beginning of the subject in an email reply, e.g. RE, AW, or AS.' =>
-            '이메일 답장에서 제목의 시작 부분에있는 텍스트입니다 예 : RE, AW 또는 AS.',
-        'The text at the beginning of the subject when an email is forwarded, e.g. FW, Fwd, or WG.' =>
-            '이메일이 전달 될 때 제목의 시작 부분에있는 텍스트입니다 예 : FW, FWD 또는 WG.',
         'The value of the From field' => '',
         'Theme' => '테마',
-        'This event module stores attributes from CustomerUser as DynamicFields tickets. Please see DynamicFieldFromCustomerUser::Mapping setting for how to configure the mapping.' =>
-            '이 이벤트 모듈은 CustomerUser의 특성을 DynamicFields 티켓으로 저장합니다. 매핑을 구성하는 방법은 DynamicFieldFromCustomerUser::Mapping 설정을 참조하십시오.',
         'This is a Description for Comment on Framework.' => '이것은 Framework에 대한 설명을위한 설명입니다.',
         'This is a Description for DynamicField on Framework.' => '이것은 Framework의 DynamicField에 대한 설명입니다.',
         'This is the default orange - black skin for the customer interface.' =>
             '이것은 고객 인터페이스의 기본 오렌지색 검정색 스킨입니다.',
         'This is the default orange - black skin.' => '이것은 기본 오랜지색 검은색 피부입니다.',
         'This key is not certified with a trusted signature!' => '',
-        'This module and its PreRun() function will be executed, if defined, for every request. This module is useful to check some user options or to display news about new applications.' =>
-            '이 모듈과 PreRun () 함수는 모든 요청에 ​​대해 정의 된 경우 실행됩니다. 이 모듈은 일부 사용자 옵션을 확인하거나 새 응용 프로그램에 대한 뉴스를 표시하는 데 유용합니다.',
         'This module is part of the admin area of OTRS.' => '이 모듈은 OTRS의 관리 영역의 일부입니다.',
-        'This option defines the dynamic field in which a Process Management activity entity id is stored.' =>
-            '이 옵션은 프로세스 관리 활동 엔티티ID가 저장되는 동적 필드를 정의합니다.',
-        'This option defines the dynamic field in which a Process Management process entity id is stored.' =>
-            '이 옵션은 프로세스 관리 프로세스 엔티티 ID가 저장되는 동적 필드를 정의합니다.',
-        'This option defines the process tickets default lock.' => '이 옵션은 프로세스 티켓 기본 잠금을 정의합니다.',
-        'This option defines the process tickets default priority.' => '이 옵션은 프로세스 티켓의 기본 우선 순위를 정의합니다.',
-        'This option defines the process tickets default queue.' => '이 옵션은 프로세스 티켓 기본 큐를 정의합니다.',
-        'This option defines the process tickets default state.' => '이 옵션은 프로세스 티켓 기본 상태를 정의합니다.',
-        'This option will deny the access to customer company tickets, which are not created by the customer user.' =>
-            '이 옵션은 고객 사용자가 생성하지 않은 고객 회사 티켓에 대한 액세스를 거부합니다.',
-        'This setting allows you to override the built-in country list with your own list of countries. This is particularly handy if you just want to use a small select group of countries.' =>
-            '이 설정을 사용하면 기본 제공 국가 목록을 자신의 국가 목록으로 대체할 수 있습니다. 소규모 그룹을 선택하고 싶을 때 특히 편리합니다.',
-        'This setting is deprecated. Set OTRSTimeZone instead.' => '이 설정은 사용되지 않습니다. 대신 OTRSTimeZone을 설정하십시오.',
-        'This setting shows the sorting attributes in all overview screen, not only in queue view.' =>
-            '이 설정은 대기열보기 뿐만 아니라 모든 개요 화면에서 정렬 속성을 표시합니다.',
         'This will allow the system to send text messages via SMS.' => '이렇게하면 시스템이 SMS를 통해 문자 메시지를 보낼 수 있습니다.',
         'Ticket Close.' => '티켓 닫기.',
         'Ticket Compose Bounce Email.' => '티켓 작성 반송 이메일.',
@@ -8705,8 +9124,7 @@ Thanks for your help!
         'Ticket Zoom' => '티켓 확대/축소',
         'Ticket Zoom.' => '티켓 확대/축소.',
         'Ticket bulk module.' => '티켓 벌크 모듈.',
-        'Ticket event module that triggers the escalation stop events.' =>
-            '에스컬레이션 중지 이벤트를 트리거하는 티켓 이벤트 모듈.',
+        'Ticket creation' => '',
         'Ticket limit per page for Ticket Overview "Medium".' => '티켓 개요 "보통"에 대한 페이지 당 티켓 한도.',
         'Ticket limit per page for Ticket Overview "Preview".' => '티켓 개요 "미리보기"에 대한 페이지 당 티켓 한도.',
         'Ticket limit per page for Ticket Overview "Small".' => '티켓 개요 "Small"에 대한 페이지 당 티켓 한도.',
@@ -8718,61 +9136,24 @@ Thanks for your help!
         'Ticket zoom view.' => '티켓 줌뷰',
         'TicketNumber' => '티켓번호',
         'Tickets.' => '티켓',
-        'Time in seconds that gets added to the actual time if setting a pending-state (default: 86400 = 1 day).' =>
-            '보류 중 상태 (기본값 : 86400 = 1 일)를 설정하면 실제 시간에 추가되는 시간 초입니다.',
         'To accept login information, such as an EULA or license.' => 'EULA 또는 라이센스와 같은 로그인 정보를 수락합니다.',
         'To download attachments.' => '첨부 파일을 다운로드 하려면.',
         'To view HTML attachments.' => 'HTML 첨부 파일을 봅니다.',
-        'Toggles display of OTRS FeatureAddons list in PackageManager.' =>
-            'PackageManager의 OTRS FeatureAddons 목록 표시를 토글합니다.',
-        'Toolbar Item for a shortcut. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
-            '도구 모음 단축키 항목입니다. 이 링크를 표시하거나 표시하지 않으려는 추가 액세스 제어는 키 "그룹"과 "rw : group1; move_into : group2"와 같은 내용을 사용하여 수행 할 수 있습니다.',
-        'Transport selection for appointment notifications. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
-            '약속 알림을위한 전송 선택. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
-        'Transport selection for ticket notifications. Please note: setting \'Active\' to 0 will only prevent agents from editing settings of this group in their personal preferences, but will still allow administrators to edit the settings of another user\'s behalf. Use \'PreferenceGroup\' to control in which area these settings should be shown in the user interface.' =>
-            '티켓 알림을위한 전송 선택. 참고 : \'활성\'을 0으로 설정하면 상담원이이 그룹의 개인 환경 설정에서 설정을 편집하지 못하게되지만 관리자가 다른 사용자를 대신하여 설정을 편집 할 수 있습니다. \'PreferenceGroup\'을 사용하여 이러한 설정을 사용자 인터페이스에 표시 할 영역을 제어하십시오.',
         'Tree view' => '트리뷰',
-        'Triggers add or update of automatic calendar appointments based on certain ticket times.' =>
-            '특정 티켓 시간을 기준으로 자동 달력 약속을 추가하거나 업데이트 합니다.',
-        'Triggers ticket escalation events and notification events for escalation.' =>
-            '에스컬레이션을 위해 티켓 에스컬레이션 이벤트 및 알림 이벤트를 트리거합니다.',
         'Turkish' => '터키어',
-        'Turns off SSL certificate validation, for example if you use a transparent HTTPS proxy. Use at your own risk!' =>
-            '투명한 HTTPS 프록시를 사용하는 경우와 같이 SSL 인증서 유효성 검사를 끕니다. 자신의 책임하에 사용하십시오!',
-        'Turns on drag and drop for the main navigation.' => '기본 탐색에 대한 드래그 앤 드롭을 켭니다.',
-        'Turns on the remote ip address check. It should not be enabled if the application is used, for example, via a proxy farm or a dialup connection, because the remote ip address is mostly different for the requests.' =>
-            '원격 IP 주소 확인을 켭니다. 예를 들어 프록시 팜이나 전화 접속 연결을 통해 응용 프로그램을 사용하는 경우에는 원격 IP 주소가 대부분 요청마다 다릅니다.',
         'Tweak the system as you wish.' => '원하는대로 시스템을 조정하십시오.',
-        'Type of daemon log rotation to use: Choose \'OTRS\' to let OTRS system to handle the file rotation, or choose \'External\' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration.' =>
-            '사용할 데몬 로그 회전 유형 : OTRS 시스템이 파일 순환을 처리하도록하려면 \'OTRS\'를 선택하고 제3자 회전 메커니즘 (즉, logrotate)을 사용하려면 \'외부\'를 선택하십시오. 참고 : 외부 회전 메커니즘은 자체적으로 독립적인 구성이 필요합니다.',
         'Ukrainian' => '우크라이나 말',
-        'Unlock tickets that are past their unlock timeout.' => '잠금 해제 시간 초과가 된 티켓의 잠금을 해제하십시오.',
-        'Unlock tickets whenever a note is added and the owner is out of office.' =>
-            '메모가 추가되고 소유자가 부재할 때마다 티켓을 잠금 해제하십시오.',
         'Unlocked ticket.' => '잠금해제된 티켓',
         'Up' => '위',
         'Upcoming Events' => '다가오는 이벤트',
-        'Update Ticket "Seen" flag if every article got seen or a new Article got created.' =>
-            '모든 기사가 보거나 새로운 기사가 생성되면 티켓을 읽습니다.',
         'Update time' => '업데이트 시간',
-        'Updates the ticket escalation index after a ticket attribute got updated.' =>
-            '티켓 특성이 업데이트 된 후 티켓 에스컬레이션 인덱스를 업데이트 합니다.',
-        'Updates the ticket index accelerator.' => '티켓 인덱스 가속기를 업데이트 합니다.',
         'Upload your PGP key.' => 'PGP 키를 업로드하십시오.',
         'Upload your S/MIME certificate.' => 'S / MIME 인증서를 업로드하십시오.',
-        'Use new type of select and autocomplete fields in agent interface, where applicable (InputFields).' =>
-            '적용 가능한 경우 에이전트 인터페이스에서 새로운 유형의 선택 및 자동 완성 필드를 사용하십시오 (InputFields).',
-        'Use new type of select and autocomplete fields in customer interface, where applicable (InputFields).' =>
-            '해당되는 경우 고객 인터페이스에서 새로운 유형의 선택 및 자동 완성 필드를 사용하십시오 (InputFields).',
         'User Profile' => '사용자 프로필',
         'UserFirstname' => '사용자이름',
         'UserLastname' => '사용자성',
         'Users, Groups & Roles' => '사용자, 그룹과 역할',
-        'Uses richtext for viewing and editing ticket notification.' => '티켓 통지를보고 편집하기 위해 richtext를 사용합니다.',
-        'Uses richtext for viewing and editing: articles, salutations, signatures, standard templates, auto responses and notifications.' =>
-            '기사, 인사말, 서명, 표준 템플릿, 자동 응답 및 알림과 같은보기 및 편집을 위해 richtext를 사용합니다.',
         'Vietnam' => '베트남',
-        'View all attachments of the current ticket' => '현재 티켓의 첨부 파일 모두보기',
         'View performance benchmark results.' => '실적 벤치 마크 결과를 봅니다.',
         'Watch this ticket' => '티켓보기',
         'Watched Tickets' => '이미본티켓',
@@ -8783,19 +9164,10 @@ Thanks for your help!
         'We are performing scheduled maintenance. We should be back online shortly.' =>
             '우리는 예정된 유지보수를 수행하고 있습니다. 우리는 곧 온라인으로 돌아와야 합니다.',
         'Web Services' => '웹서비스',
-        'Web View' => '웹보기',
-        'When agent creates a ticket, whether or not the ticket is automatically locked to the agent.' =>
-            '에이전트가 티켓을 만들 때 티켓이 에이전트에 자동으로 잠겨있는지 여부.',
-        'When tickets are merged, a note will be added automatically to the ticket which is no longer active. Here you can define the body of this note (this text cannot be changed by the agent).' =>
-            '티켓이 병합되면 더이상 활성화되지 않은 티켓에 자동으로 노트가 추가됩니다. 여기에서 이 메모의 본문을 정의할 수 있습니다. (이 텍스트는 상담원이 변경할 수 없습니다)',
-        'When tickets are merged, a note will be added automatically to the ticket which is no longer active. Here you can define the subject of this note (this subject cannot be changed by the agent).' =>
-            '티켓이 병합되면 더이상 활성화되지 않은 티켓에 자동으로 노트가 추가됩니다. 여기에서 이 메모의 제목을 정의할 수 있습니다.(이 주제는 상담원이 변경할 수 없음)',
-        'When tickets are merged, the customer can be informed per email by setting the check box "Inform Sender". In this text area, you can define a pre-formatted text which can later be modified by the agents.' =>
-            '티켓이 병합되면 고객에게 "보낸 사람에게 알림"확인란을 설정하여 전자 메일별로 알릴 수 있습니다. 이 텍스트 영역에서는 나중에 에이전트로 수정할 수있는 미리 형식이 지정된 텍스트를 정의 할 수 있습니다.',
-        'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
-            'Ticket :: Frontend :: ZoomCollectMetaFilters에서 구성된 필터를 사용하여 아티클에서 메타 정보를 수집할지 여부.',
-        'Whether to force redirect all requests from http to https protocol. Please check that your web server is configured correctly for https protocol before enable this option.' =>
-            'http에서 https 프로토콜로 모든 요청을 강제로 리디렉션할지 여부입니다. 이 옵션을 활성화하기 전에 웹 서버가 https 프로토콜에 맞게 올바르게 구성되어 있는지 확인하십시오.',
+        'Web service (Multiselect)' => '',
+        'Web service (Text)' => '',
+        'Web service dynamic field AJAX interface' => '',
+        'Webservice' => '',
         'Yes, but hide archived tickets' => '예, 보관된 티켓은 숨깁니다.',
         'Your email with ticket number "<OTRS_TICKET>" is bounced to "<OTRS_BOUNCE_TO>". Contact this address for further information.' =>
             '티켓 번호가 "1"인 이메일은 "2"로 반송됩니다. 자세한 내용은이 주소로 문의하십시오.',
@@ -8805,7 +9177,11 @@ Thanks for your help!
             '선호하는 대기열에 대한 대기열 선택. 또한 활성화된 경우 이메일을 통해 대기열에 대한 알림을 받습니다.',
         'Your service selection of your preferred services. You also get notified about those services via email if enabled.' =>
             '원하는 서비스에 대한 귀하의 서비스 선택. 또한 활성화된 경우 이메일을 통해 해당 서비스에 대한 알림을 받습니다.',
+        'Your username in Mattermost without the leading @' => '',
+        'Znuny.org - News' => '',
         'Zoom' => '줌',
+        'all tickets' => '',
+        'archived tickets' => '',
         'attachment' => '첨부',
         'bounce' => '바운스',
         'compose' => '짓다',
@@ -8815,6 +9191,7 @@ Thanks for your help!
         'info' => '정보',
         'inline' => '인라인',
         'normal' => '표준',
+        'not archived tickets' => '',
         'notice' => '알림',
         'pending' => '지연',
         'phone' => '전화',
@@ -8859,6 +9236,7 @@ Thanks for your help!
         'Apr',
         'April',
         'Are you sure you want to delete this appointment? This operation cannot be undone.',
+        'Are you sure you want to overwrite the config parameters?',
         'Are you sure you want to update all installed packages?',
         'Are you using a browser plugin like AdBlock or AdBlockPlus? This can cause several issues and we highly recommend you to add an exception for this domain.',
         'Article display',
@@ -8892,7 +9270,6 @@ Thanks for your help!
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
-        'Data Protection',
         'Date/Time',
         'Day',
         'Dec',
@@ -8939,6 +9316,7 @@ Thanks for your help!
         'Do you really want to delete this notification?',
         'Do you really want to delete this scheduled system maintenance?',
         'Do you really want to delete this statistic?',
+        'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',
         'Don\'t save, update manually',
@@ -8992,7 +9370,6 @@ Thanks for your help!
         'Just this occurrence',
         'Keys with values can\'t be renamed. Please remove this key/value pair instead and re-add it afterwards.',
         'Less',
-        'Link',
         'Loading, please wait...',
         'Loading...',
         'Location',
@@ -9121,7 +9498,6 @@ Thanks for your help!
         'Support Data information was successfully sent.',
         'Switch to desktop mode',
         'Switch to mobile mode',
-        'System Registration',
         'Team',
         'Th',
         'The browser you are using is too old.',
@@ -9131,7 +9507,6 @@ Thanks for your help!
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',
-        'The mail could not be sent',
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',

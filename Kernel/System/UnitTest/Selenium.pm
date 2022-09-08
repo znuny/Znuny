@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -162,7 +162,7 @@ sub new {
 
     #$Self->debug_on();
 
-    # set screen size from config or use defauls
+    # set screen size from config or use defaults
     my $Height = $SeleniumTestsConfig{window_height} || 1200;
     my $Width  = $SeleniumTestsConfig{window_width}  || 1400;
 
@@ -170,6 +170,11 @@ sub new {
 
     $Self->{BaseURL} = $Kernel::OM->Get('Kernel::Config')->Get('HttpType') . '://';
     $Self->{BaseURL} .= Kernel::System::UnitTest::Helper->GetTestHTTPHostname();
+
+    # Force usage of legacy webdriver methods in Chrome until things are more stable.
+    if ( lc $SeleniumTestsConfig{browser_name} eq 'chrome' ) {
+        $Self->{is_wd3} = 0;
+    }
 
     # Remember the start system time for the selenium test run.
     $Self->{TestStartSystemTime} = time;    ## no critic
@@ -1952,7 +1957,11 @@ sub _CaptureScreenshot {
     # trying to extract the name of the test file right from the UnitTestObject
     # kind of hacky but there is no other place where to get this information
     my $TestFile = 'UnknownTestFile';
-    if ( $Self->{UnitTestDriverObject}->{TestFile} =~ m{scripts\/test\/(.+?)\.t$} ) {
+    if (
+        $Self->{UnitTestDriverObject}->{TestFile}
+        && $Self->{UnitTestDriverObject}->{TestFile} =~ m{scripts\/test\/(.+?)\.t$}
+        )
+    {
         $TestFile = $1;
 
         # make folder path a filename

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -14,7 +14,7 @@ use utf8;
 
 use vars (qw($Self));
 
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
@@ -24,19 +24,19 @@ my $ChildCount = $Kernel::OM->Get('Kernel::Config')->Get('UnitTest::TicketCreate
 
 my $UserObject = $Kernel::OM->Get('Kernel::System::User');
 
-my $TestUserLogin1 = $Helper->TestUserCreate(
+my $TestUserLogin1 = $HelperObject->TestUserCreate(
     Groups => [ 'admin', 'users' ],
 ) || die "Did not get test user";
 my $TestUserID1 = $UserObject->UserLookup(
     UserLogin => $TestUserLogin1,
 );
-my $TestUserLogin2 = $Helper->TestUserCreate(
+my $TestUserLogin2 = $HelperObject->TestUserCreate(
     Groups => [ 'admin', 'users' ],
 ) || die "Did not get test user";
 my $TestUserID2 = $UserObject->UserLookup(
     UserLogin => $TestUserLogin2,
 );
-my $TestUserLogin3 = $Helper->TestUserCreate(
+my $TestUserLogin3 = $HelperObject->TestUserCreate(
     Groups => [ 'admin', 'users' ],
 ) || die "Did not get test user";
 my $TestUserID3 = $UserObject->UserLookup(

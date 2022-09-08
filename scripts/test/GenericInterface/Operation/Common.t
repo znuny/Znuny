@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -25,9 +25,9 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
 # create web service object
 my $WebserviceObject = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
@@ -99,7 +99,7 @@ $Self->Is(
 );
 
 # set user details
-my $UserLogin    = $Helper->TestUserCreate();
+my $UserLogin    = $HelperObject->TestUserCreate();
 my $UserPassword = $UserLogin;
 my $UserID       = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
     UserLogin => $UserLogin,
@@ -112,7 +112,7 @@ my $UserSessionID = $SessionOperationObject->CreateSessionID(
 );
 
 # set customer user details
-my $CustomerUserLogin     = $Helper->TestCustomerUserCreate();
+my $CustomerUserLogin     = $HelperObject->TestCustomerUserCreate();
 my $CustomerUserPassword  = $CustomerUserLogin;
 my $CustomerUserID        = $CustomerUserLogin;
 my $CustomerUserSessionID = $SessionOperationObject->CreateSessionID(

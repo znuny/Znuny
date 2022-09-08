@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -181,8 +181,8 @@ my @Tests = (
 
 );
 
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-$Helper->FixedTimeSet();
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+$HelperObject->FixedTimeSet();
 
 for my $Test (@Tests) {
 
@@ -199,7 +199,7 @@ for my $Test (@Tests) {
     );
 
     # Add more than 1 minute in order to set task to execute.
-    $Helper->FixedTimeAddSeconds(62);
+    $HelperObject->FixedTimeAddSeconds(62);
 
     # With DB populated and time passed set tasks to execute again.
     $Success = $SchedulerDBObject->CronTaskToExecute(

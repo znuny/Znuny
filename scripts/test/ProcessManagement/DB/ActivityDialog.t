@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -16,26 +16,34 @@ use vars (qw($Self));
 
 use Kernel::System::VariableCheck qw(:all);
 
-# get needed objects
-my $CacheObject          = $Kernel::OM->Get('Kernel::System::Cache');
-my $ActivityDialogObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::ActivityDialog');
-
-# get helper object
 $Kernel::OM->ObjectParamAdd(
     'Kernel::System::UnitTest::Helper' => {
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+
+my $CacheObject          = $Kernel::OM->Get('Kernel::System::Cache');
+my $ActivityDialogObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::ActivityDialog');
+my $HelperObject         = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # set fixed time
-$Helper->FixedTimeSet();
+$HelperObject->FixedTimeSet();
 
 # define needed variables
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 my $UserID   = 1;
 
+my $ProcessEntityID = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Entity')->EntityIDGenerate(
+    EntityType => 'Process',
+    UserID     => 1,
+);
+
 my $EntityID = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Entity')->EntityIDGenerate(
+    EntityType => 'ActivityDialog',
+    UserID     => 1,
+);
+
+my $ActivityDialogEntityID = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Entity')->EntityIDGenerate(
     EntityType => 'ActivityDialog',
     UserID     => 1,
 );
@@ -335,6 +343,78 @@ my @Tests = (
         },
         Success => 1,
     },
+    {
+        Name   => 'ActivityDialogAdd Test 16: Scope Global',
+        Config => {
+            EntityID => "$ActivityDialogEntityID-1",
+            Name     => "$ActivityDialogEntityID-1",
+            Config   => {
+                DescriptionShort =>
+                    'a Description -äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ',
+                Fields => {
+                    PriorityID => {
+                        DescriptionShort => 'Short description',
+                        DescriptionLong  => 'Longer description',
+                        Display          => 0,
+                        DefaultValue     => 1,
+                    },
+                    StateID => {
+                        DescriptionShort => 'Short description',
+                        DescriptionLong  => 'Longer description',
+                        Display          => 0,
+                        DefaultValue     => 1,
+                    },
+                    QueueID => {
+                        DescriptionShort => 'Short description',
+                        DescriptionLong  => 'Longer description',
+                        Display          => 0,
+                        DefaultValue     => 1,
+                    },
+                },
+                FieldOrder    => [ 'PriotityID', 'StateID', 'QueueID' ],
+                Scope         => 'Global',
+                ScopeEntityID => undef,
+            },
+            UserID => $UserID,
+        },
+        Success => 1,
+    },
+    {
+        Name   => 'ActivityDialogAdd Test 17: Scope Process',
+        Config => {
+            EntityID => "$ActivityDialogEntityID-2",
+            Name     => "$ActivityDialogEntityID-2",
+            Config   => {
+                DescriptionShort =>
+                    'a Description -äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ',
+                Fields => {
+                    PriorityID => {
+                        DescriptionShort => 'Short description',
+                        DescriptionLong  => 'Longer description',
+                        Display          => 0,
+                        DefaultValue     => 1,
+                    },
+                    StateID => {
+                        DescriptionShort => 'Short description',
+                        DescriptionLong  => 'Longer description',
+                        Display          => 0,
+                        DefaultValue     => 1,
+                    },
+                    QueueID => {
+                        DescriptionShort => 'Short description',
+                        DescriptionLong  => 'Longer description',
+                        Display          => 0,
+                        DefaultValue     => 1,
+                    },
+                },
+                FieldOrder    => [ 'PriotityID', 'StateID', 'QueueID' ],
+                Scope         => 'Global',
+                ScopeEntityID => $ProcessEntityID,
+            },
+            UserID => $UserID,
+        },
+        Success => 1,
+    },
 );
 
 my %AddedActivityDialogs;
@@ -455,6 +535,24 @@ my @AddedActivityDialogsList = map {$_} sort { $a <=> $b } keys %AddedActivityDi
         Config => {
             ID       => undef,
             EntityID => $AddedActivityDialogs{ $AddedActivityDialogsList[2] }->{EntityID},
+            UserID   => $UserID,
+        },
+        Success => 1,
+    },
+    {
+        Name   => 'ActivityDialogGet Test 12: Scope Global',
+        Config => {
+            ID       => undef,
+            EntityID => "$ActivityDialogEntityID-1",
+            UserID   => $UserID,
+        },
+        Success => 1,
+    },
+    {
+        Name   => 'ActivityDialogGet Test 13: Scope Process',
+        Config => {
+            ID       => undef,
+            EntityID => "$ActivityDialogEntityID-2",
             UserID   => $UserID,
         },
         Success => 1,
@@ -704,6 +802,37 @@ for my $Test (@Tests) {
         Success  => 1,
         UpdateDB => 0,
     },
+    {
+        Name   => 'ActivityDialogUpdate Test 11: Scope Global',
+        Config => {
+            ID       => $AddedActivityDialogsList[0],
+            EntityID => $RandomID . '-U',
+            Name     => "ActivityDialog-$RandomID -U",
+            Config   => {
+                Description => 'a Description-U',
+                Scope       => 'Global',
+            },
+            UserID => $UserID,
+        },
+        Success  => 1,
+        UpdateDB => 0,
+    },
+    {
+        Name   => 'ActivityDialogUpdate Test 12: Scope Process',
+        Config => {
+            ID       => $AddedActivityDialogsList[0],
+            EntityID => $RandomID . '-U',
+            Name     => "ActivityDialog-$RandomID -U",
+            Config   => {
+                Description   => 'a Description-U',
+                Scope         => 'Process',
+                ScopeEntityID => 'Process-9690ae9ae455d8614d570149b8ab1199',
+            },
+            UserID => $UserID,
+        },
+        Success  => 1,
+        UpdateDB => 0,
+    },
 );
 
 for my $Test (@Tests) {
@@ -720,7 +849,7 @@ for my $Test (@Tests) {
         print "Force a gap between create and update ActivityDialog, Waiting 2s\n";
 
         # wait 2 seconds
-        $Helper->FixedTimeAddSeconds(2);
+        $HelperObject->FixedTimeAddSeconds(2);
 
         my $Success = $ActivityDialogObject->ActivityDialogUpdate( %{ $Test->{Config} } );
 

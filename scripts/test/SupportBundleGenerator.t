@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -45,10 +45,10 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # Disabled the package deployment plugins, to avoid timeout issues in the test.
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'SupportDataCollector::DisablePlugins',
     Value => [
@@ -62,7 +62,7 @@ $Home =~ s{\/\z}{};
 
 my $ArchiveExists;
 my $Success;
-my $RandomNumber = $Helper->GetRandomNumber();
+my $RandomNumber = $HelperObject->GetRandomNumber();
 if ( !-e $Home . '/ARCHIVE' ) {
 
     # perfect time to test the missing ARCHVIVE
@@ -146,7 +146,7 @@ my $TestPackage = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
   <Name>Test - ' . $RandomNumber . '</Name>
   <Version>0.0.1</Version>
-  <Vendor>OTRS AG</Vendor>
+  <Vendor>Znuny GmbH</Vendor>
   <URL>https://otrs.com/</URL>
   <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
   <ChangeLog>2005-11-10 New package (some test &lt; &gt; &amp;).</ChangeLog>
@@ -217,7 +217,7 @@ for my $Test (@Tests) {
         for my $File ( @{ $Test->{ModifyFiles} } ) {
 
             # this operation is destructive be aware of it!
-            my $Content = $Helper->GetRandomID();
+            my $Content = $HelperObject->GetRandomID();
             $Content .= "\n";
             my $FileLocation = $MainObject->FileWrite(
                 Location => $File,
@@ -559,7 +559,7 @@ $Self->IsDeeply(
 );
 
 # Generate ZZZZUnitTestMaskPasswords.pm to check later for mask passwords.
-my $MaskPasswordFile    = 'ZZZZUnitTest' . $Helper->GetRandomNumber() . 'MaskPasswords';
+my $MaskPasswordFile    = 'ZZZZUnitTest' . $HelperObject->GetRandomNumber() . 'MaskPasswords';
 my $MaskPasswordContent = <<"EOF";
 # OTRS config file (automatically generated)
 # VERSION:1.1

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -30,10 +30,10 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # define needed variables
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 my $Home     = $Kernel::OM->Get('Kernel::Config')->Get('Home');
 my $UserID   = 1;
 
@@ -490,7 +490,7 @@ for my $Test (@Tests) {
         $FileRef = $Kernel::OM->Get('Kernel::System::Main')->FileRead(
             Location => $Home . '/scripts/test/sample/ProcessManagement/' . $Test->{ProcessFile},
         );
-        my $RandomID = $Helper->GetRandomID();
+        my $RandomID = $HelperObject->GetRandomID();
 
         # convert process to Perl for easy handling
         $ProcessData = $YAMLObject->Load( Data => $$FileRef );

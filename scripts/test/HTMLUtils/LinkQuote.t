@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -184,9 +184,23 @@ my @Tests = (
         Target => '',
     },
     {
+        Input => '<html>www.heise.de.</html>',
+        Result =>
+            '<html><a href="http://www.heise.de" title="http://www.heise.de">www.heise.de</a>.</html>',
+        Name   => 'LinkQuote with plain domains.',
+        Target => '',
+    },
+    {
         Input => '<html>www.heise-online.de/Suffix</html>',
         Result =>
             '<html><a href="http://www.heise-online.de/Suffix" title="http://www.heise-online.de/Suffix">www.heise-online.de/Suffix</a></html>',
+        Name   => 'LinkQuote with plain domains with a dash.',
+        Target => '',
+    },
+    {
+        Input => '<html>www.heise-online.de/Suffix.</html>',
+        Result =>
+            '<html><a href="http://www.heise-online.de/Suffix" title="http://www.heise-online.de/Suffix">www.heise-online.de/Suffix</a>.</html>',
         Name   => 'LinkQuote with plain domains with a dash.',
         Target => '',
     },

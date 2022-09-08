@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -840,12 +840,36 @@ sub _ConditionCheck {
                 }
 
                 # Make sure there is data to compare.
-                if ( $Param{Data}->{$FieldName} ) {
-
+                if (
+                    $Param{Data}->{$FieldName}
+                    || (
+                        $Self->{JqIsAvailable}
+                        && $FieldName =~ m{\Ajq\#(.+)}msi
+                    )
+                    )
+                {
                     my $Match;
 
+                    if ( $Self->{JqIsAvailable} && $FieldName =~ m{\Ajq\#(.+)}msi ) {
+                        my $JqExpression = $1;
+
+                        my $CompareValue;
+                        eval {
+                            $CompareValue = Jq::jq( $JqExpression, $Param{Data} );
+                        };
+
+                        if (
+                            defined $CompareValue
+                            && defined $ActualCondition->{Fields}->{$FieldName}->{Match}
+                            && $CompareValue =~ $ActualCondition->{Fields}->{$FieldName}->{Match}
+                            )
+                        {
+                            $Match = 1;
+                        }
+                    }
+
                     # Check if field data is a string and compare directly.
-                    if (
+                    elsif (
                         ref $Param{Data}->{$FieldName} eq ''
                         && $Param{Data}->{$FieldName} =~ $ActualCondition->{Fields}->{$FieldName}->{Match}
                         )

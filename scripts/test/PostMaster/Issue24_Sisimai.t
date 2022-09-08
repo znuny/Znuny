@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2021 Perl-Services.de
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -22,7 +22,7 @@ $Kernel::OM->ObjectParamAdd(
     },
 );
 
-my $Helper       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -17,8 +17,9 @@ use parent qw(Kernel::System::Console::BaseCommand);
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::System::Main',
     'Kernel::Output::HTML::Layout',
+    'Kernel::System::DateTime',
+    'Kernel::System::Main',
 );
 
 sub Configure {
@@ -49,6 +50,9 @@ sub Run {
         Filter    => "*.spec.tt",
     );
 
+    my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
+    my $CurrentYear    = $DateTimeObject->Format( Format => '%Y' );
+
     for my $SpecFileTemplate (@SpecFileTemplates) {
         my $SpecFileName = $SpecFileTemplate;
         $SpecFileName =~ s{^.*/spec/templates/}{};
@@ -56,6 +60,9 @@ sub Run {
 
         my $Output = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Output(
             TemplateFile => $SpecFileName,
+            Data         => {
+                CurrentYear => $CurrentYear,
+            },
         );
         my $TargetPath = "$Home/scripts/auto_build/spec/$SpecFileName";
         my $Written    = $Kernel::OM->Get('Kernel::System::Main')->FileWrite(

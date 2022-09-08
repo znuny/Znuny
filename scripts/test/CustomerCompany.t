@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -24,7 +24,7 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $Data         = $ConfigObject->Get('CustomerCompany');
 my $DefaultValue = $Data->{Params}->{Table};
@@ -88,7 +88,7 @@ my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
 
 for my $Key ( 1 .. 3, 'ä', 'カス' ) {
 
-    my $CompanyRand = 'Example-Customer-Company' . $Key . $Helper->GetRandomID();
+    my $CompanyRand = 'Example-Customer-Company' . $Key . $HelperObject->GetRandomID();
 
     my $CustomerID = $CustomerCompanyObject->CustomerCompanyAdd(
         CustomerID             => $CompanyRand,
@@ -285,7 +285,7 @@ $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
 
 for my $Key ( 1 .. 3, 'ä', 'カス' ) {
 
-    my $CompanyRand = 'Example-Customer-Company' . $Key . $Helper->GetRandomID();
+    my $CompanyRand = 'Example-Customer-Company' . $Key . $HelperObject->GetRandomID();
 
     my $CustomerID = $CustomerCompanyObject->CustomerCompanyAdd(
         CustomerID             => $CompanyRand,
@@ -443,7 +443,7 @@ $Self->False(
 );
 
 # Create Invalid customer company.
-my $CompanyInvalid    = 'Invalid' . $Helper->GetRandomID();
+my $CompanyInvalid    = 'Invalid' . $HelperObject->GetRandomID();
 my $CustomerCompanyID = $CustomerCompanyObject->CustomerCompanyAdd(
     CustomerID             => $CompanyInvalid,
     CustomerCompanyName    => $CompanyInvalid . '- Inc',

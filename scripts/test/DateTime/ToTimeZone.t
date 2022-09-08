@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -248,5 +248,73 @@ for my $TestConfig (@TestConfigs) {
         'DateTime object must be unchanged after failed ToTimeZone().',
     );
 }
+
+#
+# Tests for creating DateTime object with time zone link.
+# Time zone links are obsolete time zone names that are mapped to other valid time zones.
+# It must be possible to use these but internally they should be mapped to the valid time zone.
+# The DateTime object then also must report the valid time zone.
+#
+my %RealByLinkedTimeZones = DateTime::TimeZone->links();
+
+# Reduce to three linked time zones for tests.
+my $LinkedTimeZoneCounter = 0;
+for my $LinkedTimeZone ( sort keys %RealByLinkedTimeZones ) {
+    $LinkedTimeZoneCounter++;
+    delete $RealByLinkedTimeZones{$LinkedTimeZone} if $LinkedTimeZoneCounter > 3;
+}
+
+#
+# Tests for ToTimeZone with linked time zone.
+#
+LINKEDTIMEZONE:
+for my $LinkedTimeZone ( sort keys %RealByLinkedTimeZones ) {
+    my $RealTimeZone = $RealByLinkedTimeZones{$LinkedTimeZone};
+
+    my $DateTimeObject = $Kernel::OM->Create(
+        'Kernel::System::DateTime',
+        ObjectParams => {
+            TimeZone => 'Europe/Berlin',
+        }
+    );
+
+    $Self->True(
+        ref $DateTimeObject,
+        "Creation of DateTime object must have been successful.",
+    ) || next LINKEDTIMEZONE;
+
+    $DateTimeObject->ToTimeZone( TimeZone => $LinkedTimeZone );
+
+    my $DateTimeData = $DateTimeObject->Get();
+    $Self->Is(
+        scalar $DateTimeData->{TimeZone},
+        $RealTimeZone,
+        "DateTime object switched to linked time zone $LinkedTimeZone must have been set to real time zone $RealTimeZone.",
+    );
+}
+
+#
+# Test for ToTimeZone with invalid time zone.
+#
+$DateTimeObject = $Kernel::OM->Create(
+    'Kernel::System::DateTime',
+    ObjectParams => {
+        TimeZone => 'Europe/Berlin',
+    }
+);
+
+$Self->True(
+    ref $DateTimeObject,
+    "Creation of DateTime object must have been successful.",
+) || next LINKEDTIMEZONE;
+
+$DateTimeObject->ToTimeZone( TimeZone => 'INVALIDTIMEZONE' );
+
+my $DateTimeData = $DateTimeObject->Get();
+$Self->Is(
+    scalar $DateTimeData->{TimeZone},
+    'Europe/Berlin',
+    "DateTime object switched to invalid time zone must still be set to time zone 'Europe/Berlin'.",
+);
 
 1;

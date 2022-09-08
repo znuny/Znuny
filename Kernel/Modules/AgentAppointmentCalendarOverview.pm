@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -44,6 +44,7 @@ sub Run {
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $GroupObject  = $Kernel::OM->Get('Kernel::System::Group');
+    my $PluginObject = $Kernel::OM->Get('Kernel::System::Calendar::Plugin');
 
     # Get user's permissions to associated modules which are displayed as links.
     for my $Module (qw(AdminAppointmentCalendarManage)) {
@@ -243,11 +244,17 @@ sub Run {
         }
 
         # get plugin list
-        $Param{PluginList} = $Kernel::OM->Get('Kernel::System::Calendar::Plugin')->PluginList();
+        $Param{PluginList} = $PluginObject->PluginList();
 
         $LayoutObject->AddJSData(
             Key   => 'PluginList',
             Value => $Param{PluginList},
+        );
+
+        @{ $Param{PluginGroups} } = $PluginObject->PluginGroups();
+        $LayoutObject->AddJSData(
+            Key   => 'PluginGroups',
+            Value => $Param{PluginGroups},
         );
 
         # get registered ticket appointment types

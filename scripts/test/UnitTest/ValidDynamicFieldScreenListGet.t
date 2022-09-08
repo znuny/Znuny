@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -43,6 +43,7 @@ my $ExpectedValidDynamicFieldScreenListHash = {
         'DashboardBackend###0140-RunningTicketProcess'                       => 'DashboardWidget RunningTicketProcess',
         'Ticket::Frontend::AgentTicketEscalationView###DefaultColumns'       => 'AgentTicketEscalationView',
         'Ticket::Frontend::AgentTicketLockedView###DefaultColumns'           => 'AgentTicketLockedView',
+        'Ticket::Frontend::AgentTicketOwnerView###DefaultColumns'            => 'AgentTicketOwnerView',
         'Ticket::Frontend::AgentTicketQueue###DefaultColumns'                => 'AgentTicketQueue',
         'Ticket::Frontend::AgentTicketResponsibleView###DefaultColumns'      => 'AgentTicketResponsibleView',
         'Ticket::Frontend::AgentTicketSearch###DefaultColumns'               => 'AgentTicketSearch',
@@ -51,6 +52,7 @@ my $ExpectedValidDynamicFieldScreenListHash = {
         'Ticket::Frontend::AgentTicketWatchView###DefaultColumns'            => 'AgentTicketWatchView',
     },
     'DynamicFieldScreens' => {
+        'Ticket::Frontend::AgentTicketBulk###DynamicField'              => 'AgentTicketBulk',
         'Ticket::Frontend::AgentTicketClose###DynamicField'             => 'AgentTicketClose',
         'Ticket::Frontend::AgentTicketCompose###DynamicField'           => 'AgentTicketCompose',
         'Ticket::Frontend::AgentTicketEmail###DynamicField'             => 'AgentTicketEmail',
@@ -98,6 +100,7 @@ my $ExpectedValidDynamicFieldScreenListArray = {
         'DashboardBackend###0140-RunningTicketProcess',
         'Ticket::Frontend::AgentTicketEscalationView###DefaultColumns',
         'Ticket::Frontend::AgentTicketLockedView###DefaultColumns',
+        'Ticket::Frontend::AgentTicketOwnerView###DefaultColumns',
         'Ticket::Frontend::AgentTicketQueue###DefaultColumns',
         'Ticket::Frontend::AgentTicketResponsibleView###DefaultColumns',
         'Ticket::Frontend::AgentTicketSearch###DefaultColumns',
@@ -106,6 +109,7 @@ my $ExpectedValidDynamicFieldScreenListArray = {
         'Ticket::Frontend::AgentTicketWatchView###DefaultColumns'
     ],
     'DynamicFieldScreens' => [
+        'Ticket::Frontend::AgentTicketBulk###DynamicField',
         'Ticket::Frontend::AgentTicketClose###DynamicField',
         'Ticket::Frontend::AgentTicketCompose###DynamicField',
         'Ticket::Frontend::AgentTicketEmail###DynamicField',

@@ -406,7 +406,7 @@
         <Description Translatable="1">Defines the URL rich text editor path.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Frontend::WebPath&gt;js/thirdparty/ckeditor-4.16.0/</Item>
+            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Frontend::WebPath&gt;js/thirdparty/ckeditor-4.17.1/</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::RichTextWidth" Required="1" Valid="1">
@@ -665,13 +665,6 @@
         <Navigation>Core::Email</Navigation>
         <Value>
             <Item ValueType="PerlModule" ValueFilter="Kernel/System/Email/*.pm">Kernel::System::Email::Sendmail</Item>
-        </Value>
-    </Setting>
-    <Setting Name="SendmailModule::CMD" Required="1" Valid="1" ConfigLevel="200">
-        <Description Translatable="1">If "Sendmail" was selected as SendmailModule, the location of the sendmail binary and the needed options must be specified.</Description>
-        <Navigation>Core::Email</Navigation>
-        <Value>
-            <Item ValueType="String" ValueRegex="">/usr/sbin/sendmail -i -f</Item>
         </Value>
     </Setting>
     <Setting Name="SendmailModule::Host" Required="1" Valid="1" ConfigLevel="200">
@@ -2630,34 +2623,6 @@
             <Item ValueType="String" ValueRegex="">admin</Item>
         </Value>
     </Setting>
-    <Setting Name="MIME-Viewer###application/excel" Required="0" Valid="0">
-        <Description Translatable="1">Specifies the path to the converter that allows the view of Microsoft Excel files, in the web interface.</Description>
-        <Navigation>Frontend::Agent::MIMEViewer</Navigation>
-        <Value>
-            <Item ValueType="String" ValueRegex="">xlhtml</Item>
-        </Value>
-    </Setting>
-    <Setting Name="MIME-Viewer###application/msword" Required="0" Valid="0">
-        <Description Translatable="1">Specifies the path to the converter that allows the view of Microsoft Word files, in the web interface.</Description>
-        <Navigation>Frontend::Agent::MIMEViewer</Navigation>
-        <Value>
-            <Item ValueType="String" ValueRegex="">wvWare</Item>
-        </Value>
-    </Setting>
-    <Setting Name="MIME-Viewer###application/pdf" Required="0" Valid="0">
-        <Description Translatable="1">Specifies the path to the converter that allows the view of PDF documents, in the web interface.</Description>
-        <Navigation>Frontend::Agent::MIMEViewer</Navigation>
-        <Value>
-            <Item ValueType="String" ValueRegex="">pdftohtml -stdout -i</Item>
-        </Value>
-    </Setting>
-    <Setting Name="MIME-Viewer###text/xml" Required="0" Valid="0">
-        <Description Translatable="1">Specifies the path to the converter that allows the view of XML files, in the web interface.</Description>
-        <Navigation>Frontend::Agent::MIMEViewer</Navigation>
-        <Value>
-            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Home&gt;/scripts/tools/xml2html.pl</Item>
-        </Value>
-    </Setting>
     <Setting Name="WebUserAgent::Timeout" Required="1" Valid="1" ConfigLevel="200">
         <Description Translatable="1">Sets the timeout (in seconds) for http/ftp downloads.</Description>
         <Navigation>Core::WebUserAgent</Navigation>
@@ -2696,12 +2661,24 @@
         </Value>
     </Setting>
     <Setting Name="Package::RepositoryList" Required="0" Valid="0" ConfigLevel="200">
-        <Description Translatable="1">Defines the list of online repositories. Another installations can be used as repository, for example: Key="http://example.com/otrs/public.pl?Action=PublicRepository;File=" and Content="Some Name".</Description>
+        <Description Translatable="1">List of online package repositories.</Description>
         <Navigation>Core::Package</Navigation>
         <Value>
-            <Hash>
-                <Item Key="ftp://ftp.example.com/pub/otrs/misc/packages/">[Example] ftp://ftp.example.com/</Item>
-            </Hash>
+            <Array>
+                <DefaultItem>
+                    <Hash>
+                        <DefaultItem ValueType="String"></DefaultItem>
+                    </Hash>
+                </DefaultItem>
+                <Item>
+                    <Hash>
+                        <Item Key="Name">Example repository 1</Item>
+                        <Item Key="URL">https://addons.znuny.com/api/addon_repos/</Item>
+                        <Item Key="AuthHeaderKey">Authorization</Item>
+                        <Item Key="AuthHeaderValue">Token token=123</Item>
+                    </Hash>
+                </Item>
+            </Array>
         </Value>
     </Setting>
     <Setting Name="Package::RepositoryAccessRegExp" Required="0" Valid="0">
@@ -2730,20 +2707,6 @@
         <Navigation>Core::Package</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
-        </Value>
-    </Setting>
-    <Setting Name="Package::ShowFeatureAddons" Required="0" Valid="1" ConfigLevel="200">
-        <Description Translatable="1">Toggles display of OTRS FeatureAddons list in PackageManager.</Description>
-        <Navigation>Core::Package</Navigation>
-        <Value>
-            <Item ValueType="Checkbox">1</Item>
-        </Value>
-    </Setting>
-    <Setting Name="Package::AllowNotVerifiedPackages" Required="0" Valid="1" ConfigLevel="100">
-        <Description Translatable="1">If this setting is enabled, it is possible to install packages which are not verified by OTRS Group. These packages could threaten your whole system!</Description>
-        <Navigation>Core::Package</Navigation>
-        <Value>
-            <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
     <Setting Name="Package::EventModulePost###9000-SupportDataSend" Required="0" Valid="1">
@@ -4233,7 +4196,7 @@ via the Preferences button after logging in.
                 </Item>
                 <Item Key="JavaScript">
                     <Array>
-                        <Item>thirdparty/momentjs-2.18.1/moment.min.js</Item>
+                        <Item>thirdparty/momentjs-2.29.1/moment.min.js</Item>
                         <Item>thirdparty/fullcalendar-3.10.2/fullcalendar.min.js</Item>
                         <Item>thirdparty/d3-3.5.6/d3.min.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/nvd3.min.js</Item>
@@ -6417,81 +6380,6 @@ via the Preferences button after logging in.
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::Module###AdminRegistration" Required="0" Valid="1">
-        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
-        <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
-        <Value>
-            <Item ValueType="FrontendRegistration">
-                <Hash>
-                    <Item Key="GroupRo">
-                        <Array>
-                        </Array>
-                    </Item>
-                    <Item Key="Group">
-                        <Array>
-                            <Item>admin</Item>
-                        </Array>
-                    </Item>
-                    <Item Key="Description">Admin</Item>
-                    <Item Key="Title" Translatable="1">System Registration</Item>
-                    <Item Key="NavBarName">Admin</Item>
-                </Hash>
-            </Item>
-        </Value>
-    </Setting>
-    <Setting Name="Loader::Module::AdminRegistration###001-Framework" Required="0" Valid="1">
-        <Description Translatable="1">Loader module registration for the agent interface.</Description>
-        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="CSS">
-                    <Array>
-                        <Item>Core.Agent.Admin.Registration.css</Item>
-                    </Array>
-                </Item>
-                <Item Key="JavaScript">
-                    <Array>
-                        <Item>Core.Agent.Admin.Registration.js</Item>
-                    </Array>
-                </Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Frontend::Navigation###AdminRegistration###001-Framework" Required="0" Valid="0">
-        <Description Translatable="1">Main menu item registration.</Description>
-        <Navigation>Frontend::Admin::ModuleRegistration::MainMenu</Navigation>
-        <Value>
-            <Array>
-                <DefaultItem ValueType="FrontendNavigation">
-                    <Hash>
-                    </Hash>
-                </DefaultItem>
-            </Array>
-        </Value>
-    </Setting>
-    <Setting Name="Frontend::NavigationModule###AdminRegistration" Required="0" Valid="0">
-        <Description Translatable="1">Admin area navigation for the agent interface.</Description>
-        <Navigation>Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Group">
-                    <Array>
-                        <Item>admin</Item>
-                    </Array>
-                </Item>
-                <Item Key="GroupRo">
-                    <Array>
-                    </Array>
-                </Item>
-                <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
-                <Item Key="Name" Translatable="1">System Registration</Item>
-                <Item Key="Block">OTRSGroup</Item>
-                <Item Key="Description" Translatable="1">Manage system registration.</Item>
-                <Item Key="IconBig">fa-edit</Item>
-                <Item Key="IconSmall"></Item>
-            </Hash>
-        </Value>
-    </Setting>
     <Setting Name="Frontend::Module###AdminOTRSBusiness" Required="0" Valid="0">
         <Description Translatable="1">Frontend module registration for the agent interface.</Description>
         <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
@@ -7739,23 +7627,6 @@ via the Preferences button after logging in.
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="DashboardBackend###0420-CmdOutput" Required="0" Valid="0">
-        <Description Translatable="1">Defines the parameters for the dashboard backend. "Cmd" is used to specify command with parameters. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.</Description>
-        <Navigation>Frontend::Agent::View::Dashboard</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Module">Kernel::Output::HTML::Dashboard::CmdOutput</Item>
-                <Item Key="Title" Translatable="1">Sample command output</Item>
-                <Item Key="Description" Translatable="1">Show command line output.</Item>
-                <Item Key="Block">ContentSmall</Item>
-                <Item Key="Group"></Item>
-                <Item Key="Default">0</Item>
-                <Item Key="CacheTTL">60</Item>
-                <Item Key="Cmd">/bin/echo Configure me please.</Item>
-                <Item Key="Mandatory">0</Item>
-            </Hash>
-        </Value>
-    </Setting>
     <Setting Name="DashboardBackend###0200-Image" Required="0" Valid="0">
         <Description Translatable="1">Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.</Description>
         <Navigation>Frontend::Agent::View::Dashboard</Navigation>
@@ -8057,6 +7928,7 @@ via the Preferences button after logging in.
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Array>
+                <Item>Core.Color.css</Item>
                 <Item>Core.Reset.css</Item>
                 <Item>Core.Default.css</Item>
                 <Item>Core.Header.css</Item>
@@ -8094,14 +7966,14 @@ via the Preferences button after logging in.
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Array>
-                <Item>thirdparty/jquery-3.5.1/jquery.js</Item>
+                <Item>thirdparty/jquery-3.6.0/jquery.js</Item>
                 <Item>thirdparty/jquery-browser-detection/jquery-browser-detection.js</Item>
-                <Item>thirdparty/jquery-ui-1.12.1/jquery-ui.js</Item>
+                <Item>thirdparty/jquery-ui-1.13.1/jquery-ui.js</Item>
                 <Item>thirdparty/jquery-ui-touch-punch-0.2.3/jquery.ui.touch-punch.js</Item>
                 <Item>thirdparty/jquery-validate-1.16.0/jquery.validate.js</Item>
                 <Item>thirdparty/jquery-pubsub/pubsub.js</Item>
                 <Item>thirdparty/jquery-jstree-3.3.7/jquery.jstree.js</Item>
-                <Item>thirdparty/nunjucks-3.0.1/nunjucks.js</Item>
+                <Item>thirdparty/nunjucks-3.2.2/nunjucks.min.js</Item>
                 <Item>thirdparty/jscolor-2.4.6/jscolor.js</Item>
                 <Item>Core.Init.js</Item>
                 <Item>Core.JavaScriptEnhancements.js</Item>
@@ -8158,7 +8030,7 @@ via the Preferences button after logging in.
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Array>
-                <Item>thirdparty/ckeditor-4.16.0/ckeditor.js</Item>
+                <Item>thirdparty/ckeditor-4.17.1/ckeditor.js</Item>
             </Array>
         </Value>
     </Setting>
@@ -8167,6 +8039,7 @@ via the Preferences button after logging in.
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Array>
+                <Item>Core.Color.css</Item>
                 <Item>Core.Reset.css</Item>
                 <Item>Core.Default.css</Item>
                 <Item>Core.Form.css</Item>
@@ -8196,13 +8069,13 @@ via the Preferences button after logging in.
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Array>
-                <Item>thirdparty/jquery-3.5.1/jquery.js</Item>
+                <Item>thirdparty/jquery-3.6.0/jquery.js</Item>
                 <Item>thirdparty/jquery-browser-detection/jquery-browser-detection.js</Item>
                 <Item>thirdparty/jquery-validate-1.16.0/jquery.validate.js</Item>
-                <Item>thirdparty/jquery-ui-1.12.1/jquery-ui.js</Item>
+                <Item>thirdparty/jquery-ui-1.13.1/jquery-ui.js</Item>
                 <Item>thirdparty/jquery-pubsub/pubsub.js</Item>
                 <Item>thirdparty/jquery-jstree-3.3.7/jquery.jstree.js</Item>
-                <Item>thirdparty/nunjucks-3.0.1/nunjucks.js</Item>
+                <Item>thirdparty/nunjucks-3.2.2/nunjucks.min.js</Item>
                 <Item>Core.Init.js</Item>
                 <Item>Core.Debug.js</Item>
                 <Item>Core.Exception.js</Item>
@@ -8247,7 +8120,7 @@ via the Preferences button after logging in.
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Array>
-                <Item>thirdparty/ckeditor-4.16.0/ckeditor.js</Item>
+                <Item>thirdparty/ckeditor-4.17.1/ckeditor.js</Item>
             </Array>
         </Value>
     </Setting>
@@ -8879,7 +8752,7 @@ via the Preferences button after logging in.
         <Navigation>Core::CommunicationChannel</Navigation>
         <Value>
             <Hash>
-                <Item Key="Name" Translatable="1">OTRS</Item>
+                <Item Key="Name" Translatable="1">Internal</Item>
                 <Item Key="Icon">fa-cloud</Item>
                 <Item Key="Description" Translatable="1">Internal communication channel.</Item>
                 <Item Key="Module">Kernel::System::CommunicationChannel::Internal</Item>

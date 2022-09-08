@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -22,7 +22,7 @@ our @ObjectDependencies = (
 sub Configure {
     my ( $Self, %Param ) = @_;
 
-    $Self->Description('List all known OTRS package repsitories.');
+    $Self->Description('Lists all known package repositories.');
 
     return;
 }
@@ -30,38 +30,35 @@ sub Configure {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    $Self->Print("<yellow>Listing OTRS package repositories...</yellow>\n");
+    my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
+
+    $Self->Print("<yellow>Listing package repositories...</yellow>\n");
 
     my $Count = 0;
-    my %List;
-    if ( $Kernel::OM->Get('Kernel::Config')->Get('Package::RepositoryList') ) {
-        %List = %{ $Kernel::OM->Get('Kernel::Config')->Get('Package::RepositoryList') };
-    }
-    %List = ( %List, $Kernel::OM->Get('Kernel::System::Package')->PackageOnlineRepositories() );
-
+    my %List  = $PackageObject->ConfiguredRepositoryListGet();
     if ( !%List ) {
         $Self->PrintError("No package repositories configured.");
         return $Self->ExitCodeError();
     }
 
-    for my $URL ( sort { $List{$a} cmp $List{$b} } keys %List ) {
+    for my $Source ( sort keys %List ) {
         $Count++;
         print "+----------------------------------------------------------------------------+\n";
-        print "| $Count) Name: $List{$URL}\n";
-        print "|    URL:  $URL\n";
+        print "| $Count) Name: $Source\n";
+        print "|    URL:  $List{$Source}->{URL}\n";
     }
     print "+----------------------------------------------------------------------------+\n";
     print "\n";
 
-    $Self->Print("<yellow>Listing OTRS package repository contents...</yellow>\n");
+    $Self->Print("<yellow>Listing package repository content...</yellow>\n");
 
-    for my $URL ( sort { $List{$a} cmp $List{$b} } keys %List ) {
+    for my $Source ( sort keys %List ) {
         print
             "+----------------------------------------------------------------------------+\n";
-        print "| Package Overview for Repository $List{$URL}:\n";
-        my @Packages = $Kernel::OM->Get('Kernel::System::Package')->PackageOnlineList(
-            URL  => $URL,
-            Lang => $Kernel::OM->Get('Kernel::Config')->Get('DefaultLanguage'),
+        print "| Package overview for repository $Source:\n";
+        my @Packages = $Kernel::OM->Get('Kernel::System::Package')->RepositoryPackageListGet(
+            Source => $Source,
+            Lang   => $Kernel::OM->Get('Kernel::Config')->Get('DefaultLanguage'),
         );
         my $PackageCount = 0;
         PACKAGE:
@@ -84,7 +81,7 @@ sub Run {
             print "|    URL:         $Package->{URL}\n";
             print "|    License:     $Package->{License}\n";
             print "|    Description: $Package->{Description}\n";
-            print "|    Install:     $URL:$Package->{File}\n";
+            print "|    Install:     $Source:$Package->{File}\n";
         }
         print
             "+----------------------------------------------------------------------------+\n";

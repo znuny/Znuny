@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -15,22 +15,20 @@ use vars (qw($Self));
 
 use File::Copy;
 
-# get needed objects
 my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
 my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
 my $CacheObject   = $Kernel::OM->Get('Kernel::System::Cache');
 my $DBObject      = $Kernel::OM->Get('Kernel::System::DB');
 my $MainObject    = $Kernel::OM->Get('Kernel::System::Main');
 
-# get helper object
 $Kernel::OM->ObjectParamAdd(
     'Kernel::System::UnitTest::Helper' => {
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my $Home = $ConfigObject->Get('Home');
+my $Version = $ConfigObject->Get('Version');
+my $Home    = $ConfigObject->Get('Home');
 
 my $CachePopulate = sub {
     my $CacheSet = $CacheObject->Set(
@@ -66,17 +64,8 @@ my $CacheClearedCheck = sub {
     );
 };
 
-my $String = '<?xml version="1.0" encoding="utf-8" ?>
-<otrs_package version="1.0">
-  <Name>Test</Name>
-  <Version>0.0.1</Version>
-  <Vendor>OTRS AG</Vendor>
-  <URL>https://otrs.com/</URL>
-  <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
-  <ChangeLog>2005-11-10 New package (some test &lt; &gt; &amp;).</ChangeLog>
-  <Description Lang="en">A test package (some test &lt; &gt; &amp;).</Description>
-  <Description Lang="de">Ein Test Paket (some test &lt; &gt; &amp;).</Description>
-  <ModuleRequired Version="1.112">Encode</ModuleRequired>
+my $VersionString = '
+  <Framework>' . $Version . '</Framework>
   <Framework>6.2.x</Framework>
   <Framework>6.1.x</Framework>
   <Framework>6.0.x</Framework>
@@ -89,8 +78,21 @@ my $String = '<?xml version="1.0" encoding="utf-8" ?>
   <Framework>2.3.x</Framework>
   <Framework>2.2.x</Framework>
   <Framework>2.1.x</Framework>
-  <Framework>2.0.x</Framework>
-  <BuildDate>2005-11-10 21:17:16</BuildDate>
+  <Framework>2.0.x</Framework>';
+
+my $String = '<?xml version="1.0" encoding="utf-8" ?>
+<otrs_package version="1.0">
+  <Name>Test</Name>
+  <Version>0.0.1</Version>
+  <Vendor>Znuny GmbH</Vendor>
+  <URL>https://otrs.com/</URL>
+  <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+  <ChangeLog>2005-11-10 New package (some test &lt; &gt; &amp;).</ChangeLog>
+  <Description Lang="en">A test package (some test &lt; &gt; &amp;).</Description>
+  <Description Lang="de">Ein Test Paket (some test &lt; &gt; &amp;).</Description>
+  <ModuleRequired Version="1.112">Encode</ModuleRequired>'
+    . $VersionString .
+    '<BuildDate>2005-11-10 21:17:16</BuildDate>
   <BuildHost>yourhost.example.com</BuildHost>
   <CodeInstall>
    # just a test &lt;some&gt; plus some &amp; text
@@ -127,27 +129,15 @@ my $StringSecond = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
   <Name>TestSecond</Name>
   <Version>0.0.1</Version>
-  <Vendor>OTRS AG</Vendor>
+  <Vendor>Znuny GmbH</Vendor>
   <URL>https://otrs.com/</URL>
   <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
   <ChangeLog>2005-11-10 New package (some test &lt; &gt; &amp;).</ChangeLog>
   <Description Lang="en">A test package (some test &lt; &gt; &amp;).</Description>
   <Description Lang="de">Ein Test Paket (some test &lt; &gt; &amp;).</Description>
-  <ModuleRequired Version="1.112">Encode</ModuleRequired>
-  <Framework>6.2.x</Framework>
-  <Framework>6.1.x</Framework>
-  <Framework>6.0.x</Framework>
-  <Framework>3.3.x</Framework>
-  <Framework>3.2.x</Framework>
-  <Framework>3.1.x</Framework>
-  <Framework>3.0.x</Framework>
-  <Framework>2.5.x</Framework>
-  <Framework>2.4.x</Framework>
-  <Framework>2.3.x</Framework>
-  <Framework>2.2.x</Framework>
-  <Framework>2.1.x</Framework>
-  <Framework>2.0.x</Framework>
-  <BuildDate>2005-11-10 21:17:16</BuildDate>
+  <ModuleRequired Version="1.112">Encode</ModuleRequired>'
+    . $VersionString .
+    '<BuildDate>2005-11-10 21:17:16</BuildDate>
   <BuildHost>yourhost.example.com</BuildHost>
   <Filelist>
     <File Location="TestSecond" Permission="644" Encode="Base64">aGVsbG8K</File>
@@ -340,7 +330,7 @@ $String = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
   <Name>Test</Name>
   <Version>0.0.1</Version>
-  <Vendor>OTRS AG</Vendor>
+  <Vendor>Znuny GmbH</Vendor>
   <URL>https://otrs.com/</URL>
   <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
   <ChangeLog>2005-11-10 New package (some test &lt; &gt; &amp;).</ChangeLog>
@@ -403,26 +393,14 @@ $String = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
   <Name>Test2</Name>
   <Version>0.0.1</Version>
-  <Vendor>OTRS AG</Vendor>
+  <Vendor>Znuny GmbH</Vendor>
   <URL>https://otrs.com/</URL>
   <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
   <Description Lang="en">A test package.</Description>
   <Description Lang="de">Ein Test Paket.</Description>
-  <PackageRequired Version="0.1">SomeNotExistingModule</PackageRequired>
-  <Framework>6.2.x</Framework>
-  <Framework>6.1.x</Framework>
-  <Framework>6.0.x</Framework>
-  <Framework>3.3.x</Framework>
-  <Framework>3.2.x</Framework>
-  <Framework>3.1.x</Framework>
-  <Framework>3.0.x</Framework>
-  <Framework>2.5.x</Framework>
-  <Framework>2.4.x</Framework>
-  <Framework>2.3.x</Framework>
-  <Framework>2.2.x</Framework>
-  <Framework>2.1.x</Framework>
-  <Framework>2.0.x</Framework>
-  <BuildDate>2005-11-10 21:17:16</BuildDate>
+  <PackageRequired Version="0.1">SomeNotExistingModule</PackageRequired>'
+    . $VersionString .
+    '<BuildDate>2005-11-10 21:17:16</BuildDate>
   <BuildHost>yourhost.example.com</BuildHost>
   <Filelist>
     <File Location="Test" Permission="644" Encode="Base64">aGVsbG8K</File>
@@ -440,26 +418,14 @@ $String = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
   <Name>TestOSDetection1</Name>
   <Version>0.0.1</Version>
-  <Vendor>OTRS AG</Vendor>
+  <Vendor>Znuny GmbH</Vendor>
   <URL>https://otrs.com/</URL>
   <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
   <Description Lang="en">A test package.</Description>
   <Description Lang="de">Ein Test Paket.</Description>
-  <OS>NonExistingOS</OS>
-  <Framework>6.2.x</Framework>
-  <Framework>6.1.x</Framework>
-  <Framework>6.0.x</Framework>
-  <Framework>3.3.x</Framework>
-  <Framework>3.2.x</Framework>
-  <Framework>3.1.x</Framework>
-  <Framework>3.0.x</Framework>
-  <Framework>2.5.x</Framework>
-  <Framework>2.4.x</Framework>
-  <Framework>2.3.x</Framework>
-  <Framework>2.2.x</Framework>
-  <Framework>2.1.x</Framework>
-  <Framework>2.0.x</Framework>
-  <BuildDate>2005-11-10 21:17:16</BuildDate>
+  <OS>NonExistingOS</OS>'
+    . $VersionString .
+    '<BuildDate>2005-11-10 21:17:16</BuildDate>
   <BuildHost>yourhost.example.com</BuildHost>
   <Filelist>
     <File Location="Test" Permission="644" Encode="Base64">aGVsbG8K</File>
@@ -477,7 +443,7 @@ $String = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
   <Name>TestOSDetection2</Name>
   <Version>0.0.1</Version>
-  <Vendor>OTRS AG</Vendor>
+  <Vendor>Znuny GmbH</Vendor>
   <URL>https://otrs.com/</URL>
   <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
   <Description Lang="en">A test package.</Description>
@@ -485,21 +451,9 @@ $String = '<?xml version="1.0" encoding="utf-8" ?>
   <OS>darwin</OS>
   <OS>linux</OS>
   <OS>freebsd</OS>
-  <OS>MSWin32</OS>
-  <Framework>6.2.x</Framework>
-  <Framework>6.1.x</Framework>
-  <Framework>6.0.x</Framework>
-  <Framework>3.3.x</Framework>
-  <Framework>3.2.x</Framework>
-  <Framework>3.1.x</Framework>
-  <Framework>3.0.x</Framework>
-  <Framework>2.5.x</Framework>
-  <Framework>2.4.x</Framework>
-  <Framework>2.3.x</Framework>
-  <Framework>2.2.x</Framework>
-  <Framework>2.1.x</Framework>
-  <Framework>2.0.x</Framework>
-  <BuildDate>2005-11-10 21:17:16</BuildDate>
+  <OS>MSWin32</OS>'
+    . $VersionString .
+    '<BuildDate>2005-11-10 21:17:16</BuildDate>
   <BuildHost>yourhost.example.com</BuildHost>
   <Filelist>
     <File Location="Test" Permission="644" Encode="Base64">aGVsbG8K</File>
@@ -524,26 +478,14 @@ $String = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
   <Name>Test2</Name>
   <Version>0.0.1</Version>
-  <Vendor>OTRS AG</Vendor>
+  <Vendor>Znuny GmbH</Vendor>
   <URL>https://otrs.com/</URL>
   <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
   <Description Lang="en">A test package.</Description>
   <Description Lang="de">Ein Test Paket.</Description>
-  <ModuleRequired Version="0.1">SomeNotExistingModule</ModuleRequired>
-  <Framework>6.2.x</Framework>
-  <Framework>6.1.x</Framework>
-  <Framework>6.0.x</Framework>
-  <Framework>3.3.x</Framework>
-  <Framework>3.2.x</Framework>
-  <Framework>3.1.x</Framework>
-  <Framework>3.0.x</Framework>
-  <Framework>2.5.x</Framework>
-  <Framework>2.4.x</Framework>
-  <Framework>2.3.x</Framework>
-  <Framework>2.2.x</Framework>
-  <Framework>2.1.x</Framework>
-  <Framework>2.0.x</Framework>
-  <BuildDate>2005-11-10 21:17:16</BuildDate>
+  <ModuleRequired Version="0.1">SomeNotExistingModule</ModuleRequired>'
+    . $VersionString .
+    '<BuildDate>2005-11-10 21:17:16</BuildDate>
   <BuildHost>yourhost.example.com</BuildHost>
   <Filelist>
     <File Location="Test" Permission="644" Encode="Base64">aGVsbG8K</File>
@@ -560,26 +502,14 @@ $String = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
   <Name>Test2</Name>
   <Version>0.0.1</Version>
-  <Vendor>OTRS AG</Vendor>
+  <Vendor>Znuny GmbH</Vendor>
   <URL>https://otrs.com/</URL>
   <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
   <Description Lang="en">A test package.</Description>
   <Description Lang="de">Ein Test Paket.</Description>
-  <ModuleRequired Version="12.999">Encode</ModuleRequired>
-  <Framework>6.2.x</Framework>
-  <Framework>6.1.x</Framework>
-  <Framework>6.0.x</Framework>
-  <Framework>3.3.x</Framework>
-  <Framework>3.2.x</Framework>
-  <Framework>3.1.x</Framework>
-  <Framework>3.0.x</Framework>
-  <Framework>2.5.x</Framework>
-  <Framework>2.4.x</Framework>
-  <Framework>2.3.x</Framework>
-  <Framework>2.2.x</Framework>
-  <Framework>2.1.x</Framework>
-  <Framework>2.0.x</Framework>
-  <BuildDate>2005-11-10 21:17:16</BuildDate>
+  <ModuleRequired Version="12.999">Encode</ModuleRequired>'
+    . $VersionString .
+    '<BuildDate>2005-11-10 21:17:16</BuildDate>
   <BuildHost>yourhost.example.com</BuildHost>
   <Filelist>
     <File Location="Test" Permission="644" Encode="Base64">aGVsbG8K</File>
@@ -598,25 +528,13 @@ my $String1 = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
   <Name>Test2</Name>
   <Version>0.0.1</Version>
-  <Vendor>OTRS AG</Vendor>
+  <Vendor>Znuny GmbH</Vendor>
   <URL>https://otrs.com/</URL>
   <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
   <Description Lang="en">A test package.</Description>
-  <Description Lang="de">Ein Test Paket.</Description>
-  <Framework>6.2.x</Framework>
-  <Framework>6.1.x</Framework>
-  <Framework>6.0.x</Framework>
-  <Framework>3.3.x</Framework>
-  <Framework>3.2.x</Framework>
-  <Framework>3.1.x</Framework>
-  <Framework>3.0.x</Framework>
-  <Framework>2.5.x</Framework>
-  <Framework>2.4.x</Framework>
-  <Framework>2.3.x</Framework>
-  <Framework>2.2.x</Framework>
-  <Framework>2.1.x</Framework>
-  <Framework>2.0.x</Framework>
-  <BuildDate>2005-11-10 21:17:16</BuildDate>
+  <Description Lang="de">Ein Test Paket.</Description>'
+    . $VersionString .
+    '<BuildDate>2005-11-10 21:17:16</BuildDate>
   <BuildHost>yourhost.example.com</BuildHost>
   <Filelist>
     <File Location="Test" Permission="644" Encode="Base64">aGVsbG8K</File>
@@ -632,25 +550,13 @@ my $String2 = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
   <Name>Test3</Name>
   <Version>0.0.1</Version>
-  <Vendor>OTRS AG</Vendor>
+  <Vendor>Znuny GmbH</Vendor>
   <URL>https://otrs.com/</URL>
   <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
   <Description Lang="en">A test package.</Description>
-  <Description Lang="de">Ein Test Paket.</Description>
-  <Framework>6.2.x</Framework>
-  <Framework>6.1.x</Framework>
-  <Framework>6.0.x</Framework>
-  <Framework>3.3.x</Framework>
-  <Framework>3.2.x</Framework>
-  <Framework>3.1.x</Framework>
-  <Framework>3.0.x</Framework>
-  <Framework>2.5.x</Framework>
-  <Framework>2.4.x</Framework>
-  <Framework>2.3.x</Framework>
-  <Framework>2.2.x</Framework>
-  <Framework>2.1.x</Framework>
-  <Framework>2.0.x</Framework>
-  <BuildDate>2005-11-10 21:17:16</BuildDate>
+  <Description Lang="de">Ein Test Paket.</Description>'
+    . $VersionString .
+    '<BuildDate>2005-11-10 21:17:16</BuildDate>
   <BuildHost>yourhost.example.com</BuildHost>
   <Filelist>
     <File Location="Test" Permission="644" Encode="Base64">aGVsbG8K</File>
@@ -667,25 +573,13 @@ my $String3 = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
   <Name>Test3</Name>
   <Version>0.0.2</Version>
-  <Vendor>OTRS AG</Vendor>
+  <Vendor>Znuny GmbH</Vendor>
   <URL>https://otrs.com/</URL>
   <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
   <Description Lang="en">A test package.</Description>
-  <Description Lang="de">Ein Test Paket.</Description>
-  <Framework>6.2.x</Framework>
-  <Framework>6.1.x</Framework>
-  <Framework>6.0.x</Framework>
-  <Framework>3.3.x</Framework>
-  <Framework>3.2.x</Framework>
-  <Framework>3.1.x</Framework>
-  <Framework>3.0.x</Framework>
-  <Framework>2.5.x</Framework>
-  <Framework>2.4.x</Framework>
-  <Framework>2.3.x</Framework>
-  <Framework>2.2.x</Framework>
-  <Framework>2.1.x</Framework>
-  <Framework>2.0.x</Framework>
-  <BuildDate>2005-11-10 21:17:16</BuildDate>
+  <Description Lang="de">Ein Test Paket.</Description>'
+    . $VersionString .
+    '<BuildDate>2005-11-10 21:17:16</BuildDate>
   <BuildHost>yourhost.example.com</BuildHost>
   <Filelist>
     <File Location="Test3" Permission="644" Encode="Base64">aGVsbG8K</File>
@@ -697,25 +591,13 @@ my $String3a = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
   <Name>Test3</Name>
   <Version>0.0.3</Version>
-  <Vendor>OTRS AG</Vendor>
+  <Vendor>Znuny GmbH</Vendor>
   <URL>https://otrs.com/</URL>
   <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
   <Description Lang="en">A test package.</Description>
-  <Description Lang="de">Ein Test Paket.</Description>
-  <Framework>6.2.x</Framework>
-  <Framework>6.1.x</Framework>
-  <Framework>6.0.x</Framework>
-  <Framework>3.3.x</Framework>
-  <Framework>3.2.x</Framework>
-  <Framework>3.1.x</Framework>
-  <Framework>3.0.x</Framework>
-  <Framework>2.5.x</Framework>
-  <Framework>2.4.x</Framework>
-  <Framework>2.3.x</Framework>
-  <Framework>2.2.x</Framework>
-  <Framework>2.1.x</Framework>
-  <Framework>2.0.x</Framework>
-  <BuildDate>2005-11-10 21:17:16</BuildDate>
+  <Description Lang="de">Ein Test Paket.</Description>'
+    . $VersionString .
+    '<BuildDate>2005-11-10 21:17:16</BuildDate>
   <BuildHost>yourhost.example.com</BuildHost>
   <Filelist>
     <File Location="Test" Permission="644" Encode="Base64">aGVsbG8K</File>
@@ -735,24 +617,13 @@ my $String3b = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
   <Name>Test3</Name>
   <Version>0.0.3</Version>
-  <Vendor>OTRS AG</Vendor>
+  <Vendor>Znuny GmbH</Vendor>
   <URL>https://otrs.com/</URL>
   <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
   <Description Lang="en">A test package.</Description>
-  <Description Lang="de">Ein Test Paket.</Description>
-  <Framework>6.2.x</Framework>
-  <Framework>6.1.x</Framework>
-  <Framework>6.0.x</Framework>
-  <Framework>3.3.x</Framework>
-  <Framework>3.2.x</Framework>
-  <Framework>3.1.x</Framework>
-  <Framework>3.0.x</Framework>
-  <Framework>2.5.x</Framework>
-  <Framework>2.4.x</Framework>
-  <Framework>2.3.x</Framework>
-  <Framework>2.2.x</Framework>
-  <Framework>2.1.x</Framework>
-  <Framework>2.0.x</Framework>
+  <Description Lang="de">Ein Test Paket.</Description>'
+    . $VersionString .
+    '
   <BuildDate>2005-11-10 21:17:16</BuildDate>
   <BuildHost>yourhost.example.com</BuildHost>
   <CodeUpgrade Type="pre" Version="0.0.4">
@@ -848,7 +719,7 @@ $String = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
   <Name>Test2</Name>
   <Version>0.0.1</Version>
-  <Vendor>OTRS AG</Vendor>
+  <Vendor>Znuny GmbH</Vendor>
   <URL>https://otrs.com/</URL>
   <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
   <Description Lang="en">A test package.</Description>
@@ -870,7 +741,7 @@ $String = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
   <Name>Test2</Name>
   <Version>0.0.1</Version>
-  <Vendor>OTRS AG</Vendor>
+  <Vendor>Znuny GmbH</Vendor>
   <URL>https://otrs.com/</URL>
   <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
   <Description Lang="en">A test package.</Description>
@@ -892,25 +763,13 @@ $String = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
   <Name>Test2</Name>
   <Version>0.0.1</Version>
-  <Vendor>OTRS AG</Vendor>
+  <Vendor>Znuny GmbH</Vendor>
   <URL>https://otrs.com/</URL>
   <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
   <Description Lang="en">A test package.</Description>
-  <Description Lang="de">Ein Test Paket.</Description>
-  <Framework>6.2.x</Framework>
-  <Framework>6.1.x</Framework>
-  <Framework>6.0.x</Framework>
-  <Framework>3.3.x</Framework>
-  <Framework>3.2.x</Framework>
-  <Framework>3.1.x</Framework>
-  <Framework>3.0.x</Framework>
-  <Framework>2.5.x</Framework>
-  <Framework>2.4.x</Framework>
-  <Framework>2.3.x</Framework>
-  <Framework>2.2.x</Framework>
-  <Framework>2.1.x</Framework>
-  <Framework>2.0.x</Framework>
-  <BuildDate>2005-11-10 21:17:16</BuildDate>
+  <Description Lang="de">Ein Test Paket.</Description>'
+    . $VersionString .
+    '<BuildDate>2005-11-10 21:17:16</BuildDate>
   <BuildHost>yourhost.example.com</BuildHost>
   <Filelist>
     <File Location="Test" Permission="644" Encode="Base64">aGVsbG8K</File>
@@ -968,25 +827,13 @@ $String = '<?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
   <Name>Test2</Name>
   <Version>0.0.1</Version>
-  <Vendor>OTRS AG</Vendor>
+  <Vendor>Znuny GmbH</Vendor>
   <URL>https://otrs.com/</URL>
   <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
   <Description Lang="en">A test package.</Description>
-  <Description Lang="de">Ein Test Paket.</Description>
-  <Framework>6.2.x</Framework>
-  <Framework>6.1.x</Framework>
-  <Framework>6.0.x</Framework>
-  <Framework>3.3.x</Framework>
-  <Framework>3.2.x</Framework>
-  <Framework>3.1.x</Framework>
-  <Framework>3.0.x</Framework>
-  <Framework>2.5.x</Framework>
-  <Framework>2.4.x</Framework>
-  <Framework>2.3.x</Framework>
-  <Framework>2.2.x</Framework>
-  <Framework>2.1.x</Framework>
-  <Framework>2.0.x</Framework>
-  <BuildDate>2005-11-10 21:17:16</BuildDate>
+  <Description Lang="de">Ein Test Paket.</Description>'
+    . $VersionString .
+    '<BuildDate>2005-11-10 21:17:16</BuildDate>
   <BuildHost>yourhost.example.com</BuildHost>
   <Filelist>
     <File Location="Test" Permission="644" Encode="Base64">aGVsbG8K</File>
@@ -1054,19 +901,13 @@ my $FileNotAllowedString = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>
 <otrs_package version=\"1.0\">
   <Name>FilesNotAllowed</Name>
   <Version>0.0.1</Version>
-  <Vendor>OTRS AG</Vendor>
+  <Vendor>Znuny GmbH</Vendor>
   <URL>https://otrs.com/</URL>
   <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
   <Description Lang=\"en\">A test package.</Description>
-  <Description Lang=\"de\">Ein Test Paket.</Description>
-  <Framework>6.2.x</Framework>
-  <Framework>6.1.x</Framework>
-  <Framework>6.0.x</Framework>
-  <Framework>3.3.x</Framework>
-  <Framework>3.2.x</Framework>
-  <Framework>3.1.x</Framework>
-  <Framework>3.0.x</Framework>
-  <BuildDate>2005-11-10 21:17:16</BuildDate>
+  <Description Lang=\"de\">Ein Test Paket.</Description>"
+    . $VersionString .
+    "<BuildDate>2005-11-10 21:17:16</BuildDate>
   <BuildHost>yourhost.example.com</BuildHost>
   <Filelist>\n";
 for my $FileNotAllowed ( @{$FilesNotAllowed} ) {
@@ -1114,12 +955,7 @@ $Self->True(
 # find out if it is an developer installation with files
 # from the version control system.
 my $DeveloperSystem = 0;
-my $Version         = $ConfigObject->Get('Version');
-if (
-    !-e $Home . '/ARCHIVE'
-    && $Version =~ m{git}
-    )
-{
+if ( !-e $Home . '/ARCHIVE' ) {
     $DeveloperSystem = 1;
 }
 
@@ -1134,25 +970,13 @@ if ( !$DeveloperSystem ) {
     <otrs_package version="1.0">
       <Name>TestFrameworkFileCheck</Name>
       <Version>0.0.1</Version>
-      <Vendor>OTRS AG</Vendor>
+      <Vendor>Znuny GmbH</Vendor>
       <URL>https://otrs.com/</URL>
       <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
       <Description Lang="en">A test package.</Description>
-      <Description Lang="de">Ein Test Paket.</Description>
-      <Framework>6.2.x</Framework>
-      <Framework>6.1.x</Framework>
-      <Framework>6.0.x</Framework>
-      <Framework>3.3.x</Framework>
-      <Framework>3.2.x</Framework>
-      <Framework>3.1.x</Framework>
-      <Framework>3.0.x</Framework>
-      <Framework>2.5.x</Framework>
-      <Framework>2.4.x</Framework>
-      <Framework>2.3.x</Framework>
-      <Framework>2.2.x</Framework>
-      <Framework>2.1.x</Framework>
-      <Framework>2.0.x</Framework>
-      <BuildDate>2005-11-10 21:17:16</BuildDate>
+      <Description Lang="de">Ein Test Paket.</Description>'
+        . $VersionString .
+        '<BuildDate>2005-11-10 21:17:16</BuildDate>
       <BuildHost>yourhost.example.com</BuildHost>
       <Filelist>
         <File Location="bin/otrs.CheckSum.pl" Permission="644" Encode="Base64">aGVsbG8K</File>
@@ -1220,25 +1044,13 @@ if ( !$DeveloperSystem ) {
     <otrs_package version="1.0">
       <Name>TestFrameworkFileCheck</Name>
       <Version>0.0.1</Version>
-      <Vendor>OTRS AG</Vendor>
+      <Vendor>Znuny GmbH</Vendor>
       <URL>https://otrs.com/</URL>
       <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
       <Description Lang="en">A test package.</Description>
-      <Description Lang="de">Ein Test Paket.</Description>
-      <Framework>6.2.x</Framework>
-      <Framework>6.1.x</Framework>
-      <Framework>6.0.x</Framework>
-      <Framework>3.3.x</Framework>
-      <Framework>3.2.x</Framework>
-      <Framework>3.1.x</Framework>
-      <Framework>3.0.x</Framework>
-      <Framework>2.5.x</Framework>
-      <Framework>2.4.x</Framework>
-      <Framework>2.3.x</Framework>
-      <Framework>2.2.x</Framework>
-      <Framework>2.1.x</Framework>
-      <Framework>2.0.x</Framework>
-      <BuildDate>2005-11-10 21:17:16</BuildDate>
+      <Description Lang="de">Ein Test Paket.</Description>'
+        . $VersionString .
+        '<BuildDate>2005-11-10 21:17:16</BuildDate>
       <BuildHost>yourhost.example.com</BuildHost>
       <Filelist>
         <File Location="bin/otrs.CheckSum.pl" Permission="644" Encode="Base64">aGVsbG8K</File>

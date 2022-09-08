@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -796,7 +796,7 @@ Hi &lt;OTRS_NOTIFICATION_RECIPIENT_UserFirstname&gt;,
 ticket [&lt;OTRS_CONFIG_TicketHook&gt;&lt;OTRS_TICKET_TicketNumber&gt;] has been created in queue &lt;OTRS_TICKET_Queue&gt;.
 
 &lt;OTRS_CUSTOMER_REALNAME&gt; wrote:
-&lt;OTRS_CUSTOMER_Body[30]&gt;
+&lt;OTRS_CUSTOMER_BODY[30]&gt;
 
 &lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentTicketZoom;TicketID=&lt;OTRS_TICKET_TicketID&gt;
 

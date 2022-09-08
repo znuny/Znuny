@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,11 +18,13 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::DateTime',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
     'Kernel::System::Encode',
     'Kernel::System::HTMLUtils',
     'Kernel::System::Log',
+    'Kernel::System::StdAttachment',
     'Kernel::System::TemplateGenerator',
     'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
@@ -833,6 +835,35 @@ sub _ConvertScalar2ArrayRef {
     }
 
     return \@Data;
+}
+
+=head2 _ValidDateTimeConvert()
+
+Converts the date to always be a datetime format.
+
+    my $TimeStamp = $AppointmentUpdateActionObject->_ValidDateTimeConvert(
+        String => '2019-01-01',
+    );
+
+Returns:
+
+    my $TimeStamp = '2019-01-01 00:00:00';
+
+=cut
+
+sub _ValidDateTimeConvert {
+    my ( $Self, %Param ) = @_;
+
+    return if !$Param{String};
+
+    my $DateTimeObject = $Kernel::OM->Create(
+        'Kernel::System::DateTime',
+        ObjectParams => {
+            String => $Param{String},
+        },
+    );
+
+    return $DateTimeObject->ToString();
 }
 
 1;

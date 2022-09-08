@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -634,7 +634,7 @@ sub Run {
 
         # Create database tables and insert initial values.
         my @SQLPost;
-        for my $SchemaFile (qw(otrs-schema otrs-initial_insert)) {
+        for my $SchemaFile (qw(schema initial_insert)) {
             if ( !-f "$DirOfSQLFiles/$SchemaFile.xml" ) {
                 $LayoutObject->FatalError(
                     Message => $LayoutObject->{LanguageObject}
@@ -661,7 +661,7 @@ sub Run {
             );
 
             # If we parsed the schema, catch post instructions.
-            @SQLPost = $DBObject->SQLProcessorPost() if $SchemaFile eq 'otrs-schema';
+            @SQLPost = $DBObject->SQLProcessorPost() if $SchemaFile eq 'schema';
 
             for my $SQL (@SQL) {
                 $DBObject->Do( SQL => $SQL );

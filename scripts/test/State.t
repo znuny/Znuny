@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -22,10 +22,10 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 # add state
-my $StateName = 'state' . $Helper->GetRandomID();
+my $StateName = 'state' . $HelperObject->GetRandomID();
 my $StateID   = $StateObject->StateAdd(
     Name    => $StateName,
     Comment => 'some comment',
@@ -149,7 +149,7 @@ $Self->Is(
     "StateGet() - '999999' not found",
 );
 
-my $NoDataState = 'no_data_state' . $Helper->GetRandomID();
+my $NoDataState = 'no_data_state' . $HelperObject->GetRandomID();
 %State = $StateObject->StateGet( Name => $NoDataState );
 
 $ErrorMessage = $LogObject->GetLogEntry(

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -21,16 +21,16 @@ $Kernel::OM->ObjectParamAdd(
         RestoreDatabase => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-$Helper->FixedTimeSet();
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+$HelperObject->FixedTimeSet();
 
 # Get SysConfig DB object.
 my $SysConfigDBObject = $Kernel::OM->Get('Kernel::System::SysConfig::DB');
 
 # Special tests for settings during a deployment.
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
-my ( $TestUserLogin, $UserID ) = $Helper->TestUserCreate();
+my ( $TestUserLogin, $UserID ) = $HelperObject->TestUserCreate();
 
 # Create a new default setting.
 my $DefaultID0 = $SysConfigDBObject->DefaultSettingAdd(
@@ -376,7 +376,7 @@ my $PrepareLockTests = sub {
     }
 
     if ( $Test->{AddSeconds} ) {
-        $Helper->FixedTimeAddSeconds( $Test->{AddSeconds} );
+        $HelperObject->FixedTimeAddSeconds( $Test->{AddSeconds} );
     }
 
     return $ExclusiveLockGUID;
@@ -1090,7 +1090,7 @@ my %DeploymentsGet;
 
 for my $DeploymentSource (@DeploymentsAdd) {
 
-    $Helper->FixedTimeAddSeconds(5);
+    $HelperObject->FixedTimeAddSeconds(5);
 
     # Lock and add a deployment.
     my $ExclusiveLockGUID = $SysConfigDBObject->DeploymentLock(
@@ -1305,23 +1305,23 @@ my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 my %UserDeployments;
 
 # Tests for user specific deployments
-my $TestUserLogin1 = $Helper->TestUserCreate();
+my $TestUserLogin1 = $HelperObject->TestUserCreate();
 my $UserID1        = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
     UserLogin => $TestUserLogin1,
 );
-my $TestUserLogin2 = $Helper->TestUserCreate();
+my $TestUserLogin2 = $HelperObject->TestUserCreate();
 my $UserID2        = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
     UserLogin => $TestUserLogin2,
 );
-my $TestUserLogin3 = $Helper->TestUserCreate();
+my $TestUserLogin3 = $HelperObject->TestUserCreate();
 my $UserID3        = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
     UserLogin => $TestUserLogin3,
 );
-my $TestUserLogin4 = $Helper->TestUserCreate();
+my $TestUserLogin4 = $HelperObject->TestUserCreate();
 my $UserID4        = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
     UserLogin => $TestUserLogin4,
 );
-my $TestUserLogin5 = $Helper->TestUserCreate();
+my $TestUserLogin5 = $HelperObject->TestUserCreate();
 my $UserID5        = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
     UserLogin => $TestUserLogin5,
 );

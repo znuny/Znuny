@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -33,50 +33,50 @@ $Kernel::OM->ObjectParamAdd(
         SkipSSLVerify => 1,
     },
 );
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my $RandomID = $Helper->GetRandomID();
+my $RandomID = $HelperObject->GetRandomID();
 
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'Ticket::Type',
     Value => 1,
 );
 
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'Ticket::Frontend::AccountTime',
     Value => 1,
 );
 
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'Ticket::Frontend::NeedAccountedTime',
     Value => 1,
 );
 
 # disable DNS lookups
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'CheckMXRecord',
     Value => 0,
 );
 
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'CheckEmailAddresses',
     Value => 1,
 );
 
 # disable SessionCheckRemoteIP setting
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'SessionCheckRemoteIP',
     Value => 0,
 );
 
 # enable customer groups support
-$Helper->ConfigSettingChange(
+$HelperObject->ConfigSettingChange(
     Valid => 1,
     Key   => 'CustomerGroupSupport',
     Value => 1,
@@ -89,10 +89,10 @@ $Self->Is(
     'Disabled SSL certificates verification in environment'
 );
 
-my $TestOwnerLogin        = $Helper->TestUserCreate();
-my $TestResponsibleLogin  = $Helper->TestUserCreate();
-my $TestCustomerUserLogin = $Helper->TestCustomerUserCreate();
-my $TestUserLogin         = $Helper->TestUserCreate(
+my $TestOwnerLogin        = $HelperObject->TestUserCreate();
+my $TestResponsibleLogin  = $HelperObject->TestUserCreate();
+my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate();
+my $TestUserLogin         = $HelperObject->TestUserCreate(
     Groups => [ 'admin', 'users', ],
 );
 my $UserObject = $Kernel::OM->Get('Kernel::System::User');
@@ -321,7 +321,7 @@ my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
 # create new dynamic field
 my $DynamicFieldID = $DynamicFieldObject->DynamicFieldAdd(
-    Name       => 'TestDynamicFieldGI' . $Helper->GetRandomNumber(),
+    Name       => 'TestDynamicFieldGI' . $HelperObject->GetRandomNumber(),
     Label      => 'GI Test Field',
     FieldOrder => 9991,
     FieldType  => 'DateTime',
@@ -337,7 +337,7 @@ my $DynamicFieldID = $DynamicFieldObject->DynamicFieldAdd(
 );
 
 my $DynamicFieldID2 = $DynamicFieldObject->DynamicFieldAdd(
-    Name       => 'TestDynamicFieldGI2' . $Helper->GetRandomNumber(),
+    Name       => 'TestDynamicFieldGI2' . $HelperObject->GetRandomNumber(),
     Label      => 'GI Test Field2',
     FieldOrder => 9992,
     FieldType  => 'Text',
@@ -406,7 +406,7 @@ $Self->True(
 );
 
 # get remote host with some precautions for certain unit test systems
-my $Host = $Helper->GetTestHTTPHostname();
+my $Host = $HelperObject->GetTestHTTPHostname();
 
 # prepare web service config
 my $RemoteSystem =
@@ -490,21 +490,21 @@ $Self->Is(
 );
 
 # create a new user for current test
-my $UserLogin = $Helper->TestUserCreate(
+my $UserLogin = $HelperObject->TestUserCreate(
     Groups => [ 'admin', 'users' ],
 );
 my $Password = $UserLogin;
 
 # create a new user without permissions for current test
-my $UserLogin2 = $Helper->TestUserCreate();
+my $UserLogin2 = $HelperObject->TestUserCreate();
 my $Password2  = $UserLogin2;
 
 # create a customer where a ticket will use and will have permissions
-my $CustomerUserLogin = $Helper->TestCustomerUserCreate();
+my $CustomerUserLogin = $HelperObject->TestCustomerUserCreate();
 my $CustomerPassword  = $CustomerUserLogin;
 
 # create a customer that will not have permissions
-my $CustomerUserLogin2 = $Helper->TestCustomerUserCreate();
+my $CustomerUserLogin2 = $HelperObject->TestCustomerUserCreate();
 my $CustomerPassword2  = $CustomerUserLogin2;
 
 # start requester with our web service
@@ -671,6 +671,13 @@ for my $Test (@Tests) {
     # tests supposed to succeed
     if ( $Test->{SuccessCreate} ) {
 
+        my $Article = $LocalResult->{Data}->{Ticket}->{Article} // {};
+
+        # Use first article if multiple articles were returned
+        if ( IsArrayRefWithData($Article) ) {
+            $Article = $Article->[0] // {};
+        }
+
         # local results
         $Self->True(
             $LocalResult->{Data}->{TicketID},
@@ -726,13 +733,13 @@ for my $Test (@Tests) {
         );
 
         $Self->Is(
-            $LocalResult->{Data}->{Ticket}->{Article}->{Body},
+            $Article->{Body},
             $Test->{RequestData}->{Article}->{Body},
             "$Test->{Name} - Article body Ok.",
         );
 
         $Self->Is(
-            $LocalResult->{Data}->{Ticket}->{Article}->{From},
+            $Article->{From},
             $Test->{RequestData}->{Article}->{From},
             "$Test->{Name} - Article from Ok.",
         );
@@ -757,7 +764,7 @@ for my $Test (@Tests) {
         }
 
         LOCALRESULTARTICLE:
-        for my $Field ( @{ $LocalResult->{Data}->{Ticket}->{Article}->{DynamicField} } ) {
+        for my $Field ( @{ $Article->{DynamicField} } ) {
             next LOCALRESULTARTICLE if $Field->{Name} ne $DynamicFieldData2->{Name};
             $CompareDynamicFieldLocal{Article} = $Field;
         }
@@ -769,7 +776,7 @@ for my $Test (@Tests) {
         );
 
         $Self->Is(
-            $LocalResult->{Data}->{Ticket}->{Article}->{Attachment}->[0]->{Filename},
+            $Article->{Attachment}->[0]->{Filename},
             $Test->{RequestData}->{Attachment}->[0]->{Filename},
             "$Test->{Name} - Attachment filename Ok.",
         );

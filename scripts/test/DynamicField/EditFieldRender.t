@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,12 +18,12 @@ use Kernel::Output::HTML::Layout;
 use Kernel::System::VariableCheck qw(:all);
 
 # get needed objects
-my $Helper          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $DFBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 my $ParamObject     = $Kernel::OM->Get('Kernel::System::Web::Request');
 
 # use a fixed year to compare the time selection results
-$Helper->FixedTimeSet(
+$HelperObject->FixedTimeSet(
     $Kernel::OM->Create(
         'Kernel::System::DateTime',
         ObjectParams => {

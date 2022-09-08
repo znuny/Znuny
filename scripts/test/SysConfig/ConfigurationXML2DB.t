@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -842,143 +842,6 @@ my @Tests = (
                 'ChangeBy'                 => 1,
                 'UserModificationPossible' => '0',
                 'UserPreferencesGroup'     => '',
-                'Description'              => 'Frontend module registration.',
-                'EffectiveValue'           => {
-                    Description => 'Overview of all open Tickets.',
-                    Title       => 'ServiceView',
-                    NavBarName  => 'Ticket',
-                    NavBar      => [
-                        {
-                            Description => 'Overview of all open Tickets.',
-                            Name        => 'Service view',
-                            Link        => 'Action=AgentTicketService',
-                            NavBar      => 'Ticket',
-                            Prio        => '105',
-                        },
-                    ],
-                },
-                'UserModificationActive' => '0',
-                'ExclusiveLockGUID'      => '0',
-                'ExclusiveLockUserID'    => undef,
-                'HasConfigLevel'         => '100',
-                'IsDirty'                => '1',
-                'IsInvisible'            => '0',
-                'IsReadonly'             => '0',
-                'IsRequired'             => '0',
-                'IsValid'                => '1',
-                'Name'                   => 'Frontend::Module###AgentTicketService',
-                'Navigation'             => 'Frontend::Agent::ModuleRegistration',
-                'XMLFilename'            => 'Sample.xml',
-                'XMLContentParsed'       => {
-                    'Description' => [
-                        {
-                            'Content'      => 'Frontend module registration.',
-                            'Translatable' => '1',
-                        },
-                    ],
-                    'Name'       => 'Frontend::Module###AgentTicketService',
-                    'Navigation' => [
-                        {
-                            'Content' => 'Frontend::Agent::ModuleRegistration',
-                        },
-                    ],
-                    'Required' => '0',
-                    'Valid'    => '1',
-                    'Value'    => [
-                        {
-                            'Hash' => [
-                                {
-                                    'Item' => [
-                                        {
-                                            'Content'      => 'Overview of all open Tickets.',
-                                            'Key'          => 'Description',
-                                            'Translatable' => '1',
-                                        },
-                                        {
-                                            'Content'      => 'ServiceView',
-                                            'Key'          => 'Title',
-                                            'Translatable' => '1',
-                                        },
-                                        {
-                                            'Content' => 'Ticket',
-                                            'Key'     => 'NavBarName',
-                                        },
-                                        {
-                                            'Array' => [
-                                                {
-                                                    'Item' => [
-                                                        {
-                                                            'Hash' => [
-                                                                {
-                                                                    'Item' => [
-                                                                        {
-                                                                            'Content' =>
-                                                                                'Overview of all open Tickets.',
-                                                                            'Key'          => 'Description',
-                                                                            'Translatable' => '1',
-                                                                        },
-                                                                        {
-                                                                            'Content'      => 'Service view',
-                                                                            'Key'          => 'Name',
-                                                                            'Translatable' => '1',
-                                                                        },
-                                                                        {
-                                                                            'Content' => 'Action=AgentTicketService',
-                                                                            'Key'     => 'Link',
-                                                                        },
-                                                                        {
-                                                                            'Content' => 'Ticket',
-                                                                            'Key'     => 'NavBar',
-                                                                        },
-                                                                        {
-                                                                            'Content' => '105',
-                                                                            'Key'     => 'Prio',
-                                                                        },
-                                                                    ],
-                                                                },
-                                                            ],
-                                                        },
-                                                    ],
-                                                },
-                                            ],
-                                            'Key' => 'NavBar',
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                    ],
-                },
-                'XMLContentRaw' => '<Setting Name="Frontend::Module###AgentTicketService" Required="0" Valid="1">
-        <Description Translatable="1">Frontend module registration.</Description>
-        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Description" Translatable="1">Overview of all open Tickets.</Item>
-                <Item Key="Title" Translatable="1">ServiceView</Item>
-                <Item Key="NavBarName">Ticket</Item>
-                <Item Key="NavBar">
-                    <Array>
-                        <Item>
-                            <Hash>
-                                <Item Key="Description" Translatable="1">Overview of all open Tickets.</Item>
-                                <Item Key="Name" Translatable="1">Service view</Item>
-                                <Item Key="Link">Action=AgentTicketService</Item>
-                                <Item Key="NavBar">Ticket</Item>
-                                <Item Key="Prio">105</Item>
-                            </Hash>
-                        </Item>
-                    </Array>
-                </Item>
-            </Hash>
-        </Value>
-    </Setting>',
-            },
-            {
-                'CreateBy'                 => 1,
-                'ChangeBy'                 => 1,
-                'UserModificationPossible' => '0',
-                'UserPreferencesGroup'     => '',
                 'Description'              => 'Sets the default body text for notes.',
                 'EffectiveValue'           => '',
                 'UserModificationActive'   => '0',
@@ -1204,6 +1067,59 @@ my @Tests = (
             {
                 CreateBy                 => 1,
                 ChangeBy                 => 1,
+                Name                     => 'EmptyString',
+                Description              => 'Test.',
+                IsValid                  => 1,
+                IsRequired               => 0,
+                IsInvisible              => 0,
+                IsReadonly               => 0,
+                HasConfigLevel           => 100,
+                UserModificationPossible => 0,
+                UserPreferencesGroup     => '',
+                Navigation               => 'Dev',
+                IsDirty                  => 1,
+                UserModificationActive   => '0',
+                ExclusiveLockGUID        => '0',
+                ExclusiveLockUserID      => undef,
+                XMLFilename              => 'Sample.xml',
+                XMLContentRaw =>
+                    '<Setting Name="EmptyString" Required="0" Valid="1">
+        <Description>Test.</Description>
+        <Navigation>Dev</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex=""></Item>
+        </Value>
+    </Setting>',
+                XMLContentParsed => {
+                    Description => [
+                        {
+                            'Content' => 'Test.',
+                        },
+                    ],
+                    Name       => 'EmptyString',
+                    Navigation => [
+                        {
+                            Content => 'Dev',
+                        }
+                    ],
+                    Required => '0',
+                    Valid    => '1',
+                    Value    => [
+                        {
+                            Item => [
+                                {
+                                    'ValueRegex' => '',
+                                    'ValueType'  => 'String',
+                                },
+                            ],
+                        },
+                    ],
+                },
+                EffectiveValue => '',
+            },
+            {
+                CreateBy                 => 1,
+                ChangeBy                 => 1,
                 Name                     => 'EmptyHash',
                 Description              => 'Test.',
                 IsValid                  => 1,
@@ -1213,7 +1129,7 @@ my @Tests = (
                 HasConfigLevel           => 100,
                 UserModificationPossible => 0,
                 UserPreferencesGroup     => '',
-                Navigation               => 'Core::CustomerUser',
+                Navigation               => 'Dev',
                 IsDirty                  => 1,
                 UserModificationActive   => '0',
                 ExclusiveLockGUID        => '0',
@@ -1222,7 +1138,7 @@ my @Tests = (
                 XMLContentRaw =>
                     '<Setting Name="EmptyHash" Required="0" Valid="1">
         <Description>Test.</Description>
-        <Navigation>Core::CustomerUser</Navigation>
+        <Navigation>Dev</Navigation>
         <Value>
             <Hash>
             </Hash>
@@ -1237,7 +1153,7 @@ my @Tests = (
                     Name       => 'EmptyHash',
                     Navigation => [
                         {
-                            Content => 'Core::CustomerUser',
+                            Content => 'Dev',
                         }
                     ],
                     Required => '0',
@@ -1266,7 +1182,7 @@ my @Tests = (
                 HasConfigLevel           => 100,
                 UserModificationPossible => 0,
                 UserPreferencesGroup     => '',
-                Navigation               => 'Core::CustomerUser',
+                Navigation               => 'Dev',
                 IsDirty                  => 1,
                 UserModificationActive   => '0',
                 ExclusiveLockGUID        => '0',
@@ -1275,7 +1191,7 @@ my @Tests = (
                 XMLContentRaw =>
                     '<Setting Name="EmptyArray" Required="0" Valid="1">
         <Description>Test.</Description>
-        <Navigation>Core::CustomerUser</Navigation>
+        <Navigation>Dev</Navigation>
         <Value>
             <Array>
             </Array>
@@ -1290,7 +1206,166 @@ my @Tests = (
                     Name       => 'EmptyArray',
                     Navigation => [
                         {
-                            Content => 'Core::CustomerUser',
+                            Content => 'Dev',
+                        }
+                    ],
+                    Required => '0',
+                    Valid    => '1',
+                    Value    => [
+                        {
+                            Array => [
+                                {
+                                    'Content' => "\n            "
+                                },
+                            ],
+                        },
+                    ],
+                },
+                EffectiveValue => [],
+            },
+            {
+                CreateBy                 => 1,
+                ChangeBy                 => 1,
+                Name                     => 'Empty###String',
+                Description              => 'Test.',
+                IsValid                  => 1,
+                IsRequired               => 0,
+                IsInvisible              => 0,
+                IsReadonly               => 0,
+                HasConfigLevel           => 100,
+                UserModificationPossible => 0,
+                UserPreferencesGroup     => '',
+                Navigation               => 'Dev',
+                IsDirty                  => 1,
+                UserModificationActive   => '0',
+                ExclusiveLockGUID        => '0',
+                ExclusiveLockUserID      => undef,
+                XMLFilename              => 'Sample.xml',
+                XMLContentRaw =>
+                    '<Setting Name="Empty###String" Required="0" Valid="1">
+        <Description>Test.</Description>
+        <Navigation>Dev</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex=""></Item>
+        </Value>
+    </Setting>',
+                XMLContentParsed => {
+                    Description => [
+                        {
+                            'Content' => 'Test.',
+                        },
+                    ],
+                    Name       => 'Empty###String',
+                    Navigation => [
+                        {
+                            Content => 'Dev',
+                        }
+                    ],
+                    Required => '0',
+                    Valid    => '1',
+                    Value    => [
+                        {
+                            Item => [
+                                {
+                                    'ValueRegex' => '',
+                                    'ValueType'  => 'String',
+                                },
+                            ],
+                        },
+                    ],
+                },
+                EffectiveValue => '',
+            },
+            {
+                CreateBy                 => 1,
+                ChangeBy                 => 1,
+                Name                     => 'Empty###Hash',
+                Description              => 'Test.',
+                IsValid                  => 1,
+                IsRequired               => 0,
+                IsInvisible              => 0,
+                IsReadonly               => 0,
+                HasConfigLevel           => 100,
+                UserModificationPossible => 0,
+                UserPreferencesGroup     => '',
+                Navigation               => 'Dev',
+                IsDirty                  => 1,
+                UserModificationActive   => '0',
+                ExclusiveLockGUID        => '0',
+                ExclusiveLockUserID      => undef,
+                XMLFilename              => 'Sample.xml',
+                XMLContentRaw =>
+                    '<Setting Name="Empty###Hash" Required="0" Valid="1">
+        <Description>Test.</Description>
+        <Navigation>Dev</Navigation>
+        <Value>
+            <Hash>
+            </Hash>
+        </Value>
+    </Setting>',
+                XMLContentParsed => {
+                    Description => [
+                        {
+                            'Content' => 'Test.',
+                        },
+                    ],
+                    Name       => 'Empty###Hash',
+                    Navigation => [
+                        {
+                            Content => 'Dev',
+                        }
+                    ],
+                    Required => '0',
+                    Valid    => '1',
+                    Value    => [
+                        {
+                            Hash => [
+                                {
+                                    'Content' => "\n            "
+                                },
+                            ],
+                        },
+                    ],
+                },
+                EffectiveValue => {},
+            },
+            {
+                CreateBy                 => 1,
+                ChangeBy                 => 1,
+                Name                     => 'Empty###Array',
+                Description              => 'Test.',
+                IsValid                  => 1,
+                IsRequired               => 0,
+                IsInvisible              => 0,
+                IsReadonly               => 0,
+                HasConfigLevel           => 100,
+                UserModificationPossible => 0,
+                UserPreferencesGroup     => '',
+                Navigation               => 'Dev',
+                IsDirty                  => 1,
+                UserModificationActive   => '0',
+                ExclusiveLockGUID        => '0',
+                ExclusiveLockUserID      => undef,
+                XMLFilename              => 'Sample.xml',
+                XMLContentRaw =>
+                    '<Setting Name="Empty###Array" Required="0" Valid="1">
+        <Description>Test.</Description>
+        <Navigation>Dev</Navigation>
+        <Value>
+            <Array>
+            </Array>
+        </Value>
+    </Setting>',
+                XMLContentParsed => {
+                    Description => [
+                        {
+                            'Content' => 'Test.',
+                        },
+                    ],
+                    Name       => 'Empty###Array',
+                    Navigation => [
+                        {
+                            Content => 'Dev',
                         }
                     ],
                     Required => '0',
@@ -1309,67 +1384,68 @@ my @Tests = (
             },
         ],
     },
-    {
-        # It contains same setting "Ticket::Hook" but the XML filename is different.
-        #     Make sure that it's recognized with a new filename.
-        Description => 'Load another sample XML file.',
-        Config      => {
-            UserID    => 1,
-            Directory => "$ConfigObject->{Home}/scripts/test/sample/SysConfig/XMLFilename/",
-            CleanUp   => 1,
-        },
-        ExpectedResult => [
-            {
-                "ChangeBy"                 => 1,
-                "CreateBy"                 => 1,
-                "Description"              => "The identifier for a ticket.",
-                "EffectiveValue"           => "Ticket#",
-                "ExclusiveLockGUID"        => 0,
-                "ExclusiveLockUserID"      => undef,
-                "HasConfigLevel"           => 100,
-                "IsDirty"                  => 1,
-                "IsInvisible"              => 0,
-                "IsReadonly"               => 0,
-                "IsRequired"               => 1,
-                "IsValid"                  => 1,
-                "Name"                     => "Ticket::Hook",
-                "Navigation"               => "Core::Ticket",
-                "UserModificationActive"   => 0,
-                "UserModificationPossible" => 0,
-                "UserPreferencesGroup"     => "",
-                "XMLContentParsed"         => {
-                    "Description" => [
-                        {
-                            "Content"      => "The identifier for a ticket.",
-                            "Translatable" => 1,
-                        },
-                    ],
-                    "Name"       => "Ticket::Hook",
-                    "Navigation" => [
-                        {
-                            "Content" => "Core::Ticket"
-                        },
-                    ],
-                    "Required" => 1,
-                    "Valid"    => 1,
-                    "Value"    => [
-                        {
-                            "Item" => [
-                                {
-                                    "Content"    => "Ticket#",
-                                    "ValueRegex" => "",
-                                    "ValueType"  => "String",
-                                },
-                            ],
-                        },
-                    ],
-                },
-                "XMLContentRaw" =>
-                    "<Setting Name=\"Ticket::Hook\" Required=\"1\" Valid=\"1\">\n        <Description Translatable=\"1\">The identifier for a ticket.</Description>\n        <Navigation>Core::Ticket</Navigation>\n        <Value>\n            <Item ValueType=\"String\" ValueRegex=\"\">Ticket#</Item>\n        </Value>\n    </Setting>",
-                "XMLFilename" => "SampleFilename.xml",
-            },
-        ],
-    },
+
+#     {
+#         # It contains same setting "Ticket::Hook" but the XML filename is different.
+#         #     Make sure that it's recognized with a new filename.
+#         Description => 'Load another sample XML file.',
+#         Config      => {
+#             UserID    => 1,
+#             Directory => "$ConfigObject->{Home}/scripts/test/sample/SysConfig/XMLFilename/",
+#             CleanUp   => 1,
+#         },
+#         ExpectedResult => [
+#             {
+#                 "ChangeBy"                 => 1,
+#                 "CreateBy"                 => 1,
+#                 "Description"              => "The identifier for a ticket.",
+#                 "EffectiveValue"           => "Ticket#",
+#                 "ExclusiveLockGUID"        => 0,
+#                 "ExclusiveLockUserID"      => undef,
+#                 "HasConfigLevel"           => 100,
+#                 "IsDirty"                  => 1,
+#                 "IsInvisible"              => 0,
+#                 "IsReadonly"               => 0,
+#                 "IsRequired"               => 1,
+#                 "IsValid"                  => 1,
+#                 "Name"                     => "Ticket::Hook",
+#                 "Navigation"               => "Core::Ticket",
+#                 "UserModificationActive"   => 0,
+#                 "UserModificationPossible" => 0,
+#                 "UserPreferencesGroup"     => "",
+#                 "XMLContentParsed"         => {
+#                     "Description" => [
+#                         {
+#                             "Content"      => "The identifier for a ticket.",
+#                             "Translatable" => 1,
+#                         },
+#                     ],
+#                     "Name"       => "Ticket::Hook",
+#                     "Navigation" => [
+#                         {
+#                             "Content" => "Core::Ticket"
+#                         },
+#                     ],
+#                     "Required" => 1,
+#                     "Valid"    => 1,
+#                     "Value"    => [
+#                         {
+#                             "Item" => [
+#                                 {
+#                                     "Content"    => "Ticket#",
+#                                     "ValueRegex" => "",
+#                                     "ValueType"  => "String",
+#                                 },
+#                             ],
+#                         },
+#                     ],
+#                 },
+#                 "XMLContentRaw" =>
+#                     "<Setting Name=\"Ticket::Hook\" Required=\"1\" Valid=\"1\">\n        <Description Translatable=\"1\">The identifier for a ticket.</Description>\n        <Navigation>Core::Ticket</Navigation>\n        <Value>\n            <Item ValueType=\"String\" ValueRegex=\"\">Ticket#</Item>\n        </Value>\n    </Setting>",
+#                 "XMLFilename" => "SampleFilename.xml",
+#             },
+#         ],
+#     },
 );
 
 for my $Test (@Tests) {
