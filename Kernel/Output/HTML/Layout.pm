@@ -6190,17 +6190,17 @@ sub SetRichTextParameters {
     my %RichTextSettings = %{ $ConfigObject->Get("Frontend::RichText::Settings") || {} };
 
     # overwrite RichTextSettings if module specific settings exist (e.g. RichTextHeight)
-    for my $RichTextSettingKey (keys %RichTextSettings) {
-        if ($Param{Data}->{'RichText' . $RichTextSettingKey}) {
-            $RichTextSettings{$RichTextSettingKey} = $Param{Data}->{'RichText' . $RichTextSettingKey};
+    for my $RichTextSettingKey ( sort keys %RichTextSettings ) {
+        if ( $Param{Data}->{ 'RichText' . $RichTextSettingKey } ) {
+            $RichTextSettings{$RichTextSettingKey} = $Param{Data}->{ 'RichText' . $RichTextSettingKey };
         }
     }
 
     # get needed variables
-    my $RichTextType         = $Param{Data}->{RichTextType}   || '';
-    my $PictureUploadAction  = $Param{Data}->{RichTextPictureUploadAction} || '';
-    my $TextDir              = $Self->{TextDirection}                      || '';
-    my $EditingAreaCSS       = 'body.cke_editable { ' . $ConfigObject->Get("Frontend::RichText::DefaultCSS") . ' }';
+    my $RichTextType        = $Param{Data}->{RichTextType}                || '';
+    my $PictureUploadAction = $Param{Data}->{RichTextPictureUploadAction} || '';
+    my $TextDir             = $Self->{TextDirection}                      || '';
+    my $EditingAreaCSS      = 'body.cke_editable { ' . $ConfigObject->Get("Frontend::RichText::DefaultCSS") . ' }';
 
     # decide if we need to use the enhanced mode (with tables)
     my @Toolbar;
@@ -6287,7 +6287,6 @@ sub SetRichTextParameters {
         Key   => 'RichText',
         Value => {
             TicketID       => $Param{Data}->{TicketID} || '',
-            %RichTextSettings,
             TextDir        => $TextDir,
             EditingAreaCSS => $EditingAreaCSS,
             Lang           => {
@@ -6298,6 +6297,7 @@ sub SetRichTextParameters {
             ToolbarWithoutImage => $ToolbarWithoutImage[0],
             PictureUploadAction => $PictureUploadAction,
             Type                => $RichTextType,
+            %RichTextSettings,
         },
     );
 
@@ -6335,15 +6335,15 @@ sub CustomerSetRichTextParameters {
     my %RichTextSettings = %{ $ConfigObject->Get("Frontend::RichText::Settings") || {} };
 
     # overwrite RichTextSettings if module specific settings exist (e.g. RichTextHeight)
-    for my $RichTextSettingKey (keys %RichTextSettings) {
-        if ($Param{Data}->{'RichText' . $RichTextSettingKey}) {
-            $RichTextSettings{$RichTextSettingKey} = $Param{Data}->{'RichText' . $RichTextSettingKey};
+    for my $RichTextSettingKey ( sort keys %RichTextSettings ) {
+        if ( $Param{Data}->{ 'RichText' . $RichTextSettingKey } ) {
+            $RichTextSettings{$RichTextSettingKey} = $Param{Data}->{ 'RichText' . $RichTextSettingKey };
         }
     }
 
-    my $TextDir              = $Self->{TextDirection} || '';
-    my $PictureUploadAction  = $Param{Data}->{RichTextPictureUploadAction} || '';
-    my $EditingAreaCSS       = 'body { ' . $ConfigObject->Get("Frontend::RichText::DefaultCSS") . ' }';
+    my $TextDir             = $Self->{TextDirection}                      || '';
+    my $PictureUploadAction = $Param{Data}->{RichTextPictureUploadAction} || '';
+    my $EditingAreaCSS      = 'body { ' . $ConfigObject->Get("Frontend::RichText::DefaultCSS") . ' }';
 
     # decide if we need to use the enhanced mode (with tables)
     my @Toolbar;
@@ -6422,7 +6422,6 @@ sub CustomerSetRichTextParameters {
     $Self->AddJSData(
         Key   => 'RichText',
         Value => {
-            %RichTextSettings,
             TextDir        => $TextDir,
             EditingAreaCSS => $EditingAreaCSS,
             Lang           => {
@@ -6431,6 +6430,7 @@ sub CustomerSetRichTextParameters {
             Toolbar             => $Toolbar[0],
             ToolbarWithoutImage => $ToolbarWithoutImage[0],
             PictureUploadAction => $PictureUploadAction,
+            %RichTextSettings,
         },
     );
 
