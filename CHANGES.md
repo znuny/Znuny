@@ -13,6 +13,7 @@
  - 2022-08-22 Fixed evaluation of parameter TicketID in Kernel::Output::HTML::Article::Base::ArticleActions. Thanks to @LotharZok, maxence. [PR#278](https://github.com/znuny/Znuny/pull/278)
  - 2022-08-22 Added check to prevent infinite loop to Core.UI.InputFields.js.
  - 2022-08-18 Fixed usage of time zones that have become obsolete. Thanks to Christian Ullrich. [#281](https://github.com/znuny/Znuny/issues/281)
+ - 2022-08-17 Sector Nord AG: Added support for HTML content of dynamic fields to transition action TicketCreate (analog to TicketArticleCreate). Thanks to Sector Nord AG (Lukas Bröring). [#235](https://github.com/znuny/Znuny/pull/235)
  - 2022-08-17 Added OAuth2 token support to HTTP::REST generic interface requester.
  - 2022-08-10 Fixed accounted time field missing in AgentTicketBulk action.
  - 2022-08-02 Changed user of mention notification in the ticket history to the one triggering the notification. Thanks to Tim Püttmanns, maxence. [PR#273](https://github.com/znuny/Znuny/pull/273)

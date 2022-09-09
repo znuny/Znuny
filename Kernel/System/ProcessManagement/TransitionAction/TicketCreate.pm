@@ -139,7 +139,6 @@ sub Run {
     # override UserID if specified as a parameter in the TA config
     $Param{UserID} = $Self->_OverrideUserID(%Param);
 
-    
     my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
@@ -159,6 +158,7 @@ sub Run {
                     DynamicFieldConfig => $DynamicFieldConfig,
                     Behavior           => 'IsHTMLContent',
                 );
+
                 # Avoid double conversion to HTML for dynamic fields with HTML content.
                 next MATCH if $IsHTMLContent;
                 $Param{Ticket}->{$Match} = $HTMLUtilsObject->ToHTML(
