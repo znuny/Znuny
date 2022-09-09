@@ -163,12 +163,6 @@ $Selenium->RunTest(
                 'return typeof(Core) == "object" && typeof(Core.App) == "object" && Core.App.PageLoadComplete'
         );
 
-        $CheckBreadcrumb->(
-            BreadcrumbText => 'Install Package:',
-        );
-
-        $ClickAction->("//button[\@value='Continue'][\@type='submit']");
-
         my $PackageCheck = $PackageObject->PackageIsInstalled(
             Name => 'Test',
         );
@@ -217,26 +211,28 @@ $Selenium->RunTest(
         $Location = $ConfigObject->Get('Home') . '/scripts/test/sample/PackageManager/TestPackageIncompatible.opm';
         $Selenium->find_element( '#FileUpload', 'css' )->send_keys($Location);
 
-        $ClickAction->("//button[contains(.,'Install Package')]");
+        $Selenium->execute_script('window.Core.App.PageLoadComplete = false;');
 
-        $ClickAction->("//button[\@value='Continue'][\@type='submit']");
+        $ClickAction->("//button[contains(.,'Install Package')]");
 
         # Check if info for incompatible package is shown.
         $Self->True(
             $Selenium->execute_script(
-                "return \$('.WidgetSimple .Content h2:contains(\"Package installation requires a patch level update of OTRS\")').length;"
+                "return \$('.WidgetSimple .Content h2:contains(\"Package installation requires a patch level update of Znuny\")').length;"
             ),
             'Info for incompatible package is shown'
         );
+
+        my $Test = $ConfigObject->Get("Package::RepositoryList");
 
         # Set default repository list.
         $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Package::RepositoryList',
-            Value => {
+            Value => [{
                 Name => "Example repository 1",
                 URL  => "https://addons.znuny.com/api/addon_repos/",
-            },
+            }],
         );
 
         # Allow web server to pick up the changed SysConfig.
@@ -245,7 +241,7 @@ $Selenium->RunTest(
         $NavigateToAdminPackageManager->();
         $Selenium->InputFieldValueSet(
             Element => '#Source',
-            Value   => 'https://addons.znuny.com/api/addon_repos/',
+            Value   => 'Example repository 1',
         );
 
         $ClickAction->("//button[\@name=\'GetRepositoryList']");
