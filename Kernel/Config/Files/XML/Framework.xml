@@ -402,11 +402,32 @@
             <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
-    <Setting Name="Frontend::RichTextPath" Required="1" Valid="1" ConfigLevel="200">
+    <Setting Name="Frontend::RichText::Path" Required="1" Valid="1" ConfigLevel="200">
         <Description Translatable="1">Defines the URL rich text editor path.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Frontend::WebPath&gt;js/thirdparty/ckeditor-4.17.1/</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::DefaultCSS" Required="1" Valid="1">
+        <Description Translatable="1">Defines the default CSS used in rich text editors.</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">font-family:Geneva,Helvetica,Arial,sans-serif; font-size: 12px;</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::EnhancedMode" Required="1" Valid="1">
+        <Description Translatable="1">Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.).</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::EnhancedMode::Customer" Required="1" Valid="1">
+        <Description Translatable="1">Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.) in customer interface.</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::RichText::Settings###Width" Required="1" Valid="1">
@@ -421,13 +442,6 @@
         <Navigation>Frontend::Base</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="^\d+%?$">320</Item>
-        </Value>
-    </Setting>
-    <Setting Name="Frontend::RichText::DefaultCSS" Required="1" Valid="1">
-        <Description Translatable="1">Defines the default CSS used in rich text editors.</Description>
-        <Navigation>Frontend::Base</Navigation>
-        <Value>
-            <Item ValueType="String" ValueRegex="">font-family:Geneva,Helvetica,Arial,sans-serif; font-size: 12px;</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::RichText::Settings###FontSizes" Required="1" Valid="1">
@@ -456,20 +470,6 @@
         <Navigation>Frontend::Base</Navigation>
         <Value>
             <Item ValueType="String">div[type]{*}; img[*]; col[width]; style[*]{*}; *[id](*)</Item>
-        </Value>
-    </Setting>
-    <Setting Name="Frontend::RichText::EnhancedMode" Required="1" Valid="1">
-        <Description Translatable="1">Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.).</Description>
-        <Navigation>Frontend::Base</Navigation>
-        <Value>
-            <Item ValueType="Checkbox">0</Item>
-        </Value>
-    </Setting>
-    <Setting Name="Frontend::RichText::EnhancedMode::Customer" Required="1" Valid="1">
-        <Description Translatable="1">Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.) in customer interface.</Description>
-        <Navigation>Frontend::Base</Navigation>
-        <Value>
-            <Item ValueType="Checkbox">0</Item>
         </Value>
     </Setting>
     <Setting Name="DisableLoginAutocomplete" Required="0" Valid="1">
