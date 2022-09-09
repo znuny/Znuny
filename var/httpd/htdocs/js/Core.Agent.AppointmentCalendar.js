@@ -295,9 +295,9 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                 var $IconContainer,
                     $Icon,
                     pluginData,
-                    filter, 
-                    title, 
-                    description;
+                    Filter = $('#FilterAppointments').val(),
+                    Title,
+                    Description;
 
                 if (CalEvent.allDay
                     || CalEvent.recurring
@@ -352,33 +352,27 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                     $Element.find('.fc-content')
                         .prepend($IconContainer);
                 }
-                //Appointmentfilter
-                filter = $('#FilterAppointments').val();
-                title;
-                description;
-                filter ? filter = filter.toLowerCase() : '';
-                CalEvent.title ? title = CalEvent.title.toLowerCase() : {};
-                CalEvent.description ? description = CalEvent.description.toLowerCase() : {};
 
-                // If we have a description we can try to filter
-                if (description) {
-                    description = description.includes(filter);
+                // FilterAppointments
+                Filter ? Filter = Filter.toLowerCase() : '';
+                CalEvent.title ? Title = CalEvent.title.toLowerCase() : {};
+                CalEvent.description ? Description = CalEvent.description.toLowerCase() : {};
+
+                // If we have a description we can try to Filter
+                if (Description) {
+                    Description = Description.includes(Filter);
                 }
 
                 // If we have a title we can try to filter
-                if (title) {
-                    title = title.includes(filter);
+                if (Title) {
+                    Title = Title.includes(Filter);
                 }
-                if(
-                    title
-                    || description
-                    || filter.length < 1
-                    ) {
+
+                if( Title || Description || Filter.length < 1) {
                     return true;
-                } else {
-                    return false;
                 }
-                //End Appointmentfilter
+                return false;
+
             },
             eventResizeStart: function(CalEvent) {
                 CurrentAppointment.start = CalEvent.start;
