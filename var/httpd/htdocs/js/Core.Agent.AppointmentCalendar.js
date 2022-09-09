@@ -465,7 +465,7 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
             resourceLabelText: Core.Language.Translate('Resources')
         });
         
-        // Activate Appointmentfilter
+        // Activate FilterAppointments
         $('#FilterAppointments').on('keyup',function(){
             $CalendarObj.fullCalendar('rerenderEvents');
         })
