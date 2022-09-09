@@ -1037,7 +1037,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLog.tt
 msgid "%s s"
-msgstr ""
+msgstr "%s s"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogAccounts.tt
 msgid "Account Status"
@@ -2100,24 +2100,20 @@ msgid "Ticket changed between"
 msgstr "Sak endret mellom"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
-#, fuzzy
 msgid "Last close times"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
-#, fuzzy
 msgid "No last close time settings."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
-#, fuzzy
 msgid "Ticket last close"
-msgstr ""
+msgstr "Sak sist lukket"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
-#, fuzzy
 msgid "Ticket last close between"
-msgstr ""
+msgstr "Sak sist lukket mellom"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Close times"
@@ -3949,7 +3945,7 @@ msgstr "Les dokumentasjonen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessInstalled.tt
 msgid "%s makes contact regularly with cloud.otrs.com to check on available updates and the validity of the underlying contract."
-msgstr ""
+msgstr "%s kontakter cloud.otrs.com med jevne mellemrom for å søke etter oppdateringer og sjekke gyldigheten av underliggende kontrakt."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessInstalled.tt
 msgid "Unauthorized Usage Detected"
@@ -5877,7 +5873,7 @@ msgstr "Kjør spørring"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSelectBox.tt
 msgid "%s Results"
-msgstr ""
+msgstr "%s resultater"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSelectBox.tt
 msgid "Query is executed."
@@ -8289,7 +8285,7 @@ msgstr "Tilgjengelighet"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
 msgid "%s Ticket(s)"
-msgstr ""
+msgstr "%s sak(er)"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
 msgid "Accounted time"
@@ -8389,7 +8385,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooterJS.tt
 msgid "%s detected possible network issues. You could either try reloading this page manually or wait until your browser has re-established the connection on its own."
-msgstr ""
+msgstr "%s oppdaget mulige nettverksproblemer. Du kan enten prøv å laste siden på nytt manuelt, eller vente til nettleseren din har gjenopprettet forbindelsen selv."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooterJS.tt
 msgid "The connection has been re-established after a temporary connection loss. Due to this, elements on this page could have stopped to work correctly. In order to be able to use all elements correctly again, it is strongly recommended to reload this page."
@@ -9821,7 +9817,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
-msgstr ""
+msgstr "%s (kopi) %s"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "Please note that ACL restrictions will be ignored for the Superuser account (UserID 1)."
@@ -9945,7 +9941,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
 msgid "%s (copy)"
-msgstr ""
+msgstr "%s (kopi)"
 
 #. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
 msgid "There was an error creating the Notification"
@@ -11769,7 +11765,7 @@ msgstr "Kan ikke slette sammenkoblingen med %s!"
 
 #. Perl Module: Kernel/Modules/AgentLinkObject.pm
 msgid "%s Link(s) deleted successfully."
-msgstr ""
+msgstr "%s koblinger vellykket fjernet."
 
 #. Perl Module: Kernel/Modules/AgentLinkObject.pm
 msgid "Can not create link with %s! Object already linked as %s."
@@ -11781,7 +11777,7 @@ msgstr "Kan ikke opprette sammenkobling med %s!"
 
 #. Perl Module: Kernel/Modules/AgentLinkObject.pm
 msgid "%s links added successfully."
-msgstr ""
+msgstr "%s koblinger opprettet med hell."
 
 #. Perl Module: Kernel/Modules/AgentLinkObject.pm
 msgid "The object %s cannot link with other object!"
@@ -11917,7 +11913,7 @@ msgstr "Sluttmelding"
 
 #. Perl Module: Kernel/Modules/AgentTicketBounce.pm
 msgid "%s is needed!"
-msgstr ""
+msgstr "%s er påkrevd!"
 
 #. Perl Module: Kernel/Modules/AgentTicketBounce.pm
 msgid "Plain article not found for article %s!"
@@ -13213,23 +13209,23 @@ msgstr "Kryss av for å aktivere denne datoen"
 
 #. Perl Module: Kernel/Output/HTML/Layout.pm
 msgid "%s TB"
-msgstr ""
+msgstr "%s TB"
 
 #. Perl Module: Kernel/Output/HTML/Layout.pm
 msgid "%s GB"
-msgstr ""
+msgstr "%s GB"
 
 #. Perl Module: Kernel/Output/HTML/Layout.pm
 msgid "%s MB"
-msgstr ""
+msgstr "%s MB"
 
 #. Perl Module: Kernel/Output/HTML/Layout.pm
 msgid "%s KB"
-msgstr ""
+msgstr "%s KB"
 
 #. Perl Module: Kernel/Output/HTML/Layout.pm
 msgid "%s B"
-msgstr ""
+msgstr "%s B"
 
 #. Perl Module: Kernel/Output/HTML/Layout.pm
 msgid "No Permission!"
@@ -14481,7 +14477,7 @@ msgstr "Installasjonsstatus for pakker"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
 msgid "Some packages have locally modified files."
-msgstr ""
+msgstr "Noen pakker har filer som er endret lokalt."
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
 msgid "Some packages are not correctly installed."
@@ -16758,7 +16754,7 @@ msgstr "Avtaleliste."
 msgid "Appointment notifications"
 msgstr "Varsler om avtale"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
 msgid "Appointments"
 msgstr "Avtaler"
 
@@ -19984,10 +19980,9 @@ msgstr ""
 
 #. SysConfig
 msgid "Go to dashboard!"
-msgstr "Gå til kontrollpanel"
+msgstr "Gå til kontrollpanel!"
 
 #. SysConfig
-#, fuzzy
 msgid "Good PGP signature."
 msgstr ""
 
@@ -20964,12 +20959,10 @@ msgid "Next possible ticket states after adding a phone note in the ticket phone
 msgstr ""
 
 #. SysConfig
-#, fuzzy
 msgid "No public key found."
 msgstr ""
 
 #. SysConfig
-#, fuzzy
 msgid "No valid OpenPGP data found."
 msgstr ""
 
@@ -22690,7 +22683,6 @@ msgid "Shows time use complete description (days, hours, minutes), if enabled; o
 msgstr ""
 
 #. SysConfig
-#, fuzzy
 msgid "Signature data."
 msgstr ""
 
@@ -22752,7 +22744,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Spam"
-msgstr ""
+msgstr "Søppelpost"
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Spam Assassin example setup. Ignores emails that are marked with SpamAssassin."
@@ -22991,7 +22983,6 @@ msgid "Thai"
 msgstr "Tailandsk"
 
 #. SysConfig
-#, fuzzy
 msgid "The PGP signature is expired."
 msgstr ""
 
@@ -24173,7 +24164,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Go to znuny.org"
-msgstr ""
+msgstr "Gå til znuny.org"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
 msgid "Scope"
@@ -24213,7 +24204,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
 msgid "Package"
-msgstr ""
+msgstr "Pakke"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
 msgid "Ticket attribute relations"
@@ -24233,7 +24224,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
 msgid "Last update"
-msgstr ""
+msgstr "Siste oppdatering"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
 msgid "Are you sure you want to delete entry '%s'?"
@@ -25141,7 +25132,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/Mentions.pm
 msgid "%s users will be mentioned"
-msgstr ""
+msgstr "%s brukere vil bli omtalt"
 
 #. Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
 msgid "Total mentions"
@@ -25285,5 +25276,13 @@ msgstr ""
 
 #. Perl Module: Kernel/System/MailQueue.pm
 msgid "Error while validating Recipient email address."
+msgstr ""
+
+#. SysConfig
+msgid "Internal"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
+msgid "Filter for Appointments"
 msgstr ""
 

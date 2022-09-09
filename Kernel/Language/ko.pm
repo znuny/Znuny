@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.904986962190352;
+    $Self->{Completeness}        = 0.905282034561461;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2355,6 +2355,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
         'Add new Appointment' => '새 약속 추가',
+        'Appointments' => '약속',
         'Calendars' => '캘린더',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
@@ -7850,7 +7851,6 @@ sub Data {
         'Handles changes to data of modules which use the DBCRUD base module.' =>
             '',
         'Cache settings for DBCRUD modules (default: 1 day).' => '',
-        'Loader module registration for AdminOAuth2TokenManagement.' => '',
         'Displays notifications for missing and expired OAuth2 tokens.' =>
             '',
         'Authentication type for sendmail module. If \'OAuth2 token\' has been selected, SendmailModule::OAuth2TokenConfigName must also be configured.' =>
@@ -7869,7 +7869,6 @@ sub Data {
             '',
         'Agent interface notification module to see the number of tickets an agent is owner for. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             '',
-        'Loader module registration for AgentAppointmentEdit.' => '',
         'Defines the next possible ticket states for calendar based tickets.' =>
             '',
         'Defines the default next state.' => '',
@@ -8513,7 +8512,6 @@ Thanks for your help!
             '',
         'Admin modules overview.' => '관리 모듈 개요.',
         'Admin.' => '관리자.',
-        'AdminOAuth2TokenManagement' => '',
         'Administration' => '관리',
         'Agent Customer Search' => '고객 검색',
         'Agent Customer Search.' => '상담원 고객 검색.',
@@ -8551,7 +8549,6 @@ Thanks for your help!
         'Appointment list' => '약속 목록',
         'Appointment list.' => '약속 목록',
         'Appointment notifications' => '약속 알림',
-        'Appointments' => '약속',
         'Arabic (Saudi Arabia)' => '아랍어 (사우디 아라비아)',
         'ArticleTree' => 'ArticleTree',
         'Attachment Name' => '첨부명',
@@ -8812,6 +8809,7 @@ Thanks for your help!
         'Inline' => '인라인',
         'Input' => '입력',
         'Interface language' => '인터페이스 언어',
+        'Internal' => '',
         'Internal communication channel.' => '내부 통신 채널.',
         'International Workers\' Day' => '국제 노동의 날',
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>

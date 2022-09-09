@@ -45,15 +45,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-07-01 07:05+0000\n"
-"PO-Revision-Date: 2022-03-29 15:01+0000\n"
-"Last-Translator: Daniel Sprenger <daniel.sprenger@tu-dresden.de>\n"
+"PO-Revision-Date: 2022-09-06 10:58+0000\n"
+"Last-Translator: Denny Korsukéwitz <dk@znuny.com>\n"
 "Language-Team: German <https://translations.znuny.org/projects/znuny/znuny/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.11.2\n"
+"X-Generator: Weblate 4.13.1\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "ACL Management"
@@ -16792,7 +16792,7 @@ msgstr "Terminliste."
 msgid "Appointment notifications"
 msgstr "Terminbenachrichtigungen"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
 msgid "Appointments"
 msgstr "Termine"
 
@@ -23118,7 +23118,7 @@ msgstr "Das Logo, das im Kunden-Interface angezeigt wird. Die URL zu dem Bild ka
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server."
-msgstr "Das Logo, das in der Abmelde-Box der Agenten-Oberfläche angezeigt wird. Die URL zu dem Bild kann entweder eine relative URL zum Designverzeichnis mit dem Bild sein, oder eine vollständige URL zu einem anderen Webserver."
+msgstr "Das Logo, das in der Anmelde-Box der Agenten-Oberfläche angezeigt wird. Die URL zu dem Bild kann entweder eine relative URL zum Designverzeichnis mit dem Bild sein, oder eine vollständige URL zu einem anderen Webserver."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "The maximal number of articles expanded on a single page in AgentTicketZoom."
@@ -23978,7 +23978,7 @@ msgstr "Deaktiviert die SSL-Hostname-Verifikation. Es wird empfohlen, dies nicht
 
 #. Template: AdminGenericInterfaceTransportHTTPREST
 msgid "ContentType"
-msgstr ""
+msgstr "ContentType"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "The default content type added to HTTP header to use for POST and PUT requests."
@@ -24144,26 +24144,6 @@ msgstr "Erzeugt eine Unit-Test-Datei für dieses Ticket und sendet diese an Znun
 msgid "Creates a unit test file for this ticket."
 msgstr "Erzeugt eine Unit-Test-Datei für dieses Ticket."
 
-#. SysConfig
-msgid "Customizable system name. If empty, config item 'Home' is being used for display."
-msgstr ""
-
-#. SysConfig
-msgid "Defines if fred is visible or hidden."
-msgstr ""
-
-#. SysConfig
-msgid "Defines the height of the Fred console in pixel."
-msgstr ""
-
-#. SysConfig
-msgid "Defines the opacity of the Fred console, e.g. 0.9 for 10% transparency."
-msgstr ""
-
-#. SysConfig
-msgid "Defines the width of the Fred console in percent."
-msgstr ""
-
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Domains accessed through WebUserAgent module for which no proxy should be used. Separate domains by semicolon."
 msgstr "Domains, auf die durch das WebUserAgent-Modul zugegriffen wird und für die kein Proxy verwendet werden soll. Mehrere Domains können durch Semikolon getrennt hinterlegt werden."
@@ -24193,10 +24173,6 @@ msgid "Frontend module registration for the admin interface."
 msgstr "Frontend-Modulregistrierung im Admin-Interface."
 
 #. SysConfig
-msgid "Frontend module registration for the devel fred object in the admin area."
-msgstr ""
-
-#. SysConfig
 msgid "Hide"
 msgstr "Ausblenden"
 
@@ -24219,10 +24195,6 @@ msgstr "Letzte Ansicht - Typen"
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "List of actions that will be ignored."
 msgstr "Liste von Aktionen, die ignoriert werden."
-
-#. SysConfig
-msgid "List of config settings which should be available for quick switch. Please add only settings with possible values 0 or 1 (No/Yes)."
-msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "List of sub-actions that will be ignored."
@@ -24308,61 +24280,9 @@ msgstr "Zeigt nur gültige dynamische Felder in der Auswahl für den Export (Adm
 msgid "Shows only valid dynamic fields in screen configuration (AdminDynamicFieldScreenConfiguration) if enabled."
 msgstr "Zeigt nur gültige dynamische Felder in der Maskenkonfiguration (AdminDynamicFieldScreenConfiguration), falls aktiviert."
 
-#. SysConfig
-msgid "Subscribe the output filter at the system."
-msgstr ""
-
-#. SysConfig
-msgid "This option defines the background color for the sytem name box."
-msgstr ""
-
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Ticket event module that stores values of the selected web service record into the configured additional dynamic fields."
 msgstr "Ticket-Event-Modul zur Speicherung von Werten des gewählten Webservice-Datensatzes in den konfigurierten zusätzlichen dynamischen Feldern."
-
-#. SysConfig
-msgid "Turn on if you want a JavaScript code quality checker. Only works in CVS Head / OTRS 3 with jQuery."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want an realtime HTML-checker."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want an realtime SQL statement log function."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want the translation debugger."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to filter the output of the STDERRLog. You can add a regular expression to filter the output."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to see the STDERRLog."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to see the data in the environment of the layout object."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to see the data in the serverside session object."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to use the config log mechanism."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to use the config switch mechanism."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to use the fred console."
-msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "URL to the OTRS cloud service proxy service. The http or https prefix will be added, depending on SysConfig option 'PackageRepositoryURLSchema'."
@@ -24383,10 +24303,6 @@ msgstr "Webservice (Text)"
 #. SysConfig
 msgid "Webservice dynamic field AJAX interface"
 msgstr "AJAX-Schnittstelle für dynamische Webservice-Felder"
-
-#. SysConfig
-msgid "Which order should the config log data have?"
-msgstr ""
 
 #. SysConfig
 msgid "Znuny.org - News"
@@ -24814,15 +24730,15 @@ msgstr "Dieses Feld ist für Übergangsaktionen mit einem Geltungsbereich erford
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
 msgid "Ticket Creation"
-msgstr ""
+msgstr "Ticketerstellung"
 
 #. Perl Module: Kernel/Modules/AdminOAuth2TokenManagement.pm
 msgid "Authorization code parameters not found."
-msgstr ""
+msgstr "Autorisierungscode-Parameter nicht gefunden."
 
 #. Perl Module: Kernel/Modules/AgentTicketOwnerView.pm
 msgid "My Owned Tickets"
-msgstr ""
+msgstr "Meine eigenen Tickets"
 
 #. Perl Module: Kernel/Output/HTML/Notification/OAuth2TokenManagementTokenExpired.pm
 msgid "OAuth2 token for \"%s\" has expired."
@@ -24834,7 +24750,7 @@ msgstr "OAuth2-Refresh-Token für \"%s\" ist abgelaufen."
 
 #. Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
 msgid "Owned Tickets New"
-msgstr ""
+msgstr "Eigene Tickets Neu"
 
 #. Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
 msgid "Owned Tickets Reminder Reached"
@@ -24842,7 +24758,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
 msgid "Owned Tickets Total"
-msgstr ""
+msgstr "Eigene Tickets Gesamt"
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.OAuth2TokenManagement.js
 msgid "Do you really want to delete this token and its configuration?"
@@ -24882,7 +24798,7 @@ msgstr "Default-Format für Exportdateien."
 
 #. XML Definition: Kernel/Config/Files/XML/Calendar.xml
 msgid "Defines available groups for the appointment calendar screen."
-msgstr ""
+msgstr "Definiert die verfügbaren Gruppen für das Terminkalenderansicht."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Defines if the processes should be displayed in TreeView."
@@ -24962,7 +24878,7 @@ msgstr "Verarbeitet Änderungen an Daten von Modulen, die das DBCRUD-Modul als B
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Ignores not ticket related attributes."
-msgstr ""
+msgstr "Ignoriert nicht ticketbezogene Attribute."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Loader module registration for AdminOAuth2TokenManagement."
@@ -24982,7 +24898,7 @@ msgstr "Name der OAuth2-Token-Konfiguration für den Versand von E-Mails, falls 
 
 #. SysConfig
 msgid "OAuth2"
-msgstr ""
+msgstr "OAuth2"
 
 #. SysConfig
 msgid "OAuth2 token"
@@ -25010,7 +24926,7 @@ msgstr "Setzt den Service in der Ticket-Sammelaktion in der Agentenoberfläche (
 
 #. XML Definition: Kernel/Config/Files/XML/ProcessManagement.xml
 msgid "Shows existing parent/child (separated by ::) process lists in the form of a tree or a list."
-msgstr ""
+msgstr "Zeigt vorhandene Eltern/Kind (durch :: getrennte) Prozesslisten in Form eines Baums oder einer Liste an."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "This configuration defines if a dynamic field has to be checked in the agent ticket bulk view to get set for each ticket. This prevents unwanted overwrite of dynamic field values with their default or even empty values."
@@ -25058,7 +24974,7 @@ msgstr "Liste der Online-Paket-Repositorys."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldDateTime.tt
 msgid "Reserved keywords. The following placeholders are not allowed:"
-msgstr ""
+msgstr "Reservierte Schlüsselwörter. Die folgenden Platzhalter sind nicht erlaubt:"
 
 #. XML Definition: Kernel/Config/Files/XML/Daemon.xml
 msgid "If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if &lt;$OTRSHome&gt;/var/run/ can not be used."
@@ -25066,7 +24982,7 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the default value for the action parameter."
-msgstr ""
+msgstr "Legt den Standardwert für den Aktionsparameter fest."
 
 #. XML Definition: Kernel/Config/Files/XML/ProcessManagement.xml
 msgid "Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate)."
@@ -25094,7 +25010,7 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows extended search conditions in ticket search of the agent interface. With this feature you can search e. g. ticket title with this kind of conditions like \"(*key1*&amp;&amp;*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr ""
+msgstr "Ermöglicht erweiterte Suchbedingungen in der Ticketsuche der Agentenschnittstelle. Mit dieser Funktion können Sie z. B. den Titel eines Tickets mit Bedingungen wie \"(*key1*&amp;&amp;*key2*)\" oder \"(*key1*||*key2*)\" suchen."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Determines the strings that will be shown as recipient (To:) of the phone ticket and as sender (From:) of the email ticket in the agent interface. For Queue as NewQueueSelectionType \"&lt;Queue&gt;\" shows the names of the queues and for SystemAddress \"&lt;Realname&gt; &lt;&lt;Email&gt;&gt;\" shows the name and email of the recipient."
@@ -25106,11 +25022,11 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows extended search conditions in ticket search of the customer interface. With this feature you can search e. g. ticket title with this kind of conditions like \"(*key1*&amp;&amp;*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr ""
+msgstr "Ermöglicht erweiterte Suchbedingungen in der Ticketsuche der Kundenschnittstelle. Mit dieser Funktion können Sie z. B. den Titel eines Tickets mit Bedingungen wie \"(*key1*&amp;&amp;*key2*)\" oder \"(*key1*||*key2*)\" suchen."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows extended search conditions in ticket search of the generic agent interface. With this feature you can search e. g. ticket title with this kind of conditions like \"(*key1*&amp;&amp;*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr ""
+msgstr "Ermöglicht erweiterte Suchbedingungen in der Ticketsuche der generischen Agentenschnittstelle. Mit dieser Funktion können Sie z. B. den Titel eines Tickets mit Bedingungen wie \"(*key1*&amp;&amp;*key2*)\" oder \"(*key1*||*key2*)\" suchen."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Filter for debugging ACLs. Note: More ticket attributes can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;."
@@ -25190,7 +25106,7 @@ msgstr "ACHTUNG: Password und/oder Key-Datei (siehe oben) scheinen ungültig zu 
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "JWT authentication: Certificate file"
-msgstr ""
+msgstr "JWT-Authentifizierung: Zertifikatsdatei"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "ATTENTION: Certificate file could not be parsed."
@@ -25286,7 +25202,7 @@ msgstr "Rich-Text-Editor-Konfiguration für Autocompletion-Modul zur Unterstütz
 
 #. SysConfig
 msgid "Snippet"
-msgstr ""
+msgstr "Snippet"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
 msgid "Remove mention"
@@ -25386,7 +25302,7 @@ msgstr "Zeigt letzte Erwähnung von Tickets."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice.tt
 msgid "Attributes"
-msgstr ""
+msgstr "Attribute"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice.tt
 msgid "Attributes for invoker execution (initially default values will be used)."
@@ -25394,7 +25310,7 @@ msgstr "Attribute für Invoker-Ausführung (initial werden Defaultwerte verwende
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice.tt
 msgid "Attribute keys"
-msgstr ""
+msgstr "Attribut-Schlüssel"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice.tt
 msgid "Custom attribute form for invoker execution."
@@ -25455,4 +25371,20 @@ msgstr "Fehler bei der Validierung der Absender-E-Mail-Adresse."
 #. Perl Module: Kernel/System/MailQueue.pm
 msgid "Error while validating Recipient email address."
 msgstr "Fehler bei der Validierung der E-Mail-Adresse des Empfängers."
+
+#. SysConfig
+msgid "Defines if fred is visible or hidden."
+msgstr "Legt fest, ob fred sichtbar oder verborgen ist."
+
+#. SysConfig
+msgid "Which order should the config log data have?"
+msgstr ""
+
+#. SysConfig
+msgid "Internal"
+msgstr "Intern"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
+msgid "Filter for Appointments"
+msgstr ""
 

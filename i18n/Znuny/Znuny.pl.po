@@ -16771,7 +16771,7 @@ msgstr "Lista wydarzeń."
 msgid "Appointment notifications"
 msgstr "Powiadomienia wydarzeń"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
 msgid "Appointments"
 msgstr "Wydarzenia"
 
@@ -25299,4 +25299,12 @@ msgstr "Błąd w trakcie weryfikacji adresu nadawcy."
 #. Perl Module: Kernel/System/MailQueue.pm
 msgid "Error while validating Recipient email address."
 msgstr "Błąd w trakcie weryfikacji adresu odbiorcy."
+
+#. SysConfig
+msgid "Internal"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
+msgid "Filter for Appointments"
+msgstr ""
 

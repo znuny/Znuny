@@ -16815,7 +16815,7 @@ msgstr "Lista de compromissos."
 msgid "Appointment notifications"
 msgstr "Notificações de compromisso"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
 msgid "Appointments"
 msgstr "Compromissos"
 
@@ -24190,26 +24190,6 @@ msgstr ""
 msgid "Customer recipient information which will be passed to the web service."
 msgstr ""
 
-#. SysConfig
-msgid "Customizable system name. If empty, config item 'Home' is being used for display."
-msgstr ""
-
-#. SysConfig
-msgid "Defines if fred is visible or hidden."
-msgstr ""
-
-#. SysConfig
-msgid "Defines the height of the Fred console in pixel."
-msgstr ""
-
-#. SysConfig
-msgid "Defines the opacity of the Fred console, e.g. 0.9 for 10% transparency."
-msgstr ""
-
-#. SysConfig
-msgid "Defines the width of the Fred console in percent."
-msgstr ""
-
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Domains accessed through WebUserAgent module for which no proxy should be used. Separate domains by semicolon."
 msgstr ""
@@ -24239,10 +24219,6 @@ msgid "Frontend module registration for the admin interface."
 msgstr ""
 
 #. SysConfig
-msgid "Frontend module registration for the devel fred object in the admin area."
-msgstr ""
-
-#. SysConfig
 msgid "Hide"
 msgstr ""
 
@@ -24264,10 +24240,6 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "List of actions that will be ignored."
-msgstr ""
-
-#. SysConfig
-msgid "List of config settings which should be available for quick switch. Please add only settings with possible values 0 or 1 (No/Yes)."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
@@ -24366,64 +24338,12 @@ msgstr ""
 msgid "Shows only valid dynamic fields in screen configuration (AdminDynamicFieldScreenConfiguration) if enabled."
 msgstr ""
 
-#. SysConfig
-msgid "Subscribe the output filter at the system."
-msgstr ""
-
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Template for the out-of-office message shown to the user in the frontend. Placeholders for out-of-office information can be used via ###PlaceholderName###. Possible placeholders are: StartYear, StartMonth, StartDay, EndYear, EndMonth, EndDay, DaysRemaining."
 msgstr ""
 
-#. SysConfig
-msgid "This option defines the background color for the sytem name box."
-msgstr ""
-
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Ticket event module that stores values of the selected web service record into the configured additional dynamic fields."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want a JavaScript code quality checker. Only works in CVS Head / OTRS 3 with jQuery."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want an realtime HTML-checker."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want an realtime SQL statement log function."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want the translation debugger."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to filter the output of the STDERRLog. You can add a regular expression to filter the output."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to see the STDERRLog."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to see the data in the environment of the layout object."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to see the data in the serverside session object."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to use the config log mechanism."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to use the config switch mechanism."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to use the fred console."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
@@ -24444,10 +24364,6 @@ msgstr ""
 
 #. SysConfig
 msgid "Webservice (Text)"
-msgstr ""
-
-#. SysConfig
-msgid "Which order should the config log data have?"
 msgstr ""
 
 #. SysConfig
@@ -25452,5 +25368,13 @@ msgstr ""
 
 #. Perl Module: Kernel/System/MailQueue.pm
 msgid "Error while validating Recipient email address."
+msgstr ""
+
+#. SysConfig
+msgid "Internal"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
+msgid "Filter for Appointments"
 msgstr ""
 

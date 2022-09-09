@@ -16766,7 +16766,7 @@ msgstr "약속 목록"
 msgid "Appointment notifications"
 msgstr "약속 알림"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
 msgid "Appointments"
 msgstr "약속"
 
@@ -25295,5 +25295,13 @@ msgstr ""
 
 #. Perl Module: Kernel/System/MailQueue.pm
 msgid "Error while validating Recipient email address."
+msgstr ""
+
+#. SysConfig
+msgid "Internal"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
+msgid "Filter for Appointments"
 msgstr ""
 
