@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -32,8 +32,8 @@ sub new {
         UserID => $Self->{UserID},
     );
 
-    $Self->{PrefKeyShown}   = 'UserDashboardPref' . $Self->{Name} . '-Shown';
-    $Self->{PageShown}      = $Preferences{ $Self->{PrefKeyShown} };
+    $Self->{PrefKeyShown} = 'UserDashboardPref' . $Self->{Name} . '-Shown';
+    $Self->{PageShown}    = $Preferences{ $Self->{PrefKeyShown} };
 
     return $Self;
 }
@@ -68,7 +68,7 @@ sub Config {
 
     return (
         %{ $Self->{Config} },
-        CacheKey => 'MyLastChangedTickets'
+        CacheKey => 'MyLastChangedTickets-'
             . $Self->{UserID} . '-'
             . $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{UserLanguage},
     );
@@ -81,32 +81,19 @@ sub Run {
     my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
     my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
-    my $UseRefresh = $ConfigObject->Get('DashboardMyLastChangedTickets::UseRefresh');
-    if ( $UseRefresh ) {
-        $LayoutObject->Block(
-            Name => 'Refresh',
-            Data => {
-                Name => $Self->{Name},
-            },
-        );
-    }
 
     my %Preferences = $UserObject->GetPreferences(
         UserID => $Self->{UserID},
     );
 
     my $UserLimit = $Preferences{ $Self->{PrefKeyShown} };
-    my $Limit     = $UserLimit || $ConfigObject->Get( 'DashboardMyLastChangedTickets::Limit' );
+    my $Limit     = $UserLimit || $Self->{Config}->{Limit} || 10;
 
-    my $SQL = qq~
-        SELECT ticket_id, MAX(change_time) max_t
-        FROM ticket_history
-        WHERE change_by = ?
-        GROUP BY ticket_id
-        ORDER BY max_t desc
-    ~;
+    my $SQL = 'SELECT ticket_id, MAX(change_time) max_t '
+        . 'FROM ticket_history '
+        . 'WHERE change_by = ? '
+        . 'GROUP BY ticket_id '
+        . 'ORDER BY max_t desc';
 
     return if !$DBObject->Prepare(
         SQL   => $SQL,
@@ -125,7 +112,7 @@ sub Run {
         );
     }
     else {
-        for my $TicketID ( @TicketIDs ) {
+        for my $TicketID (@TicketIDs) {
             my %Ticket = $TicketObject->TicketGet(
                 TicketID => $TicketID,
                 UserID   => $Self->{UserID},
@@ -140,7 +127,6 @@ sub Run {
         }
     }
 
-    # render content
     my $Content = $LayoutObject->Output(
         TemplateFile => 'AgentDashboardMyLastChangedTickets',
         Data         => {
@@ -148,9 +134,7 @@ sub Run {
         },
     );
 
-    # return content
     return $Content;
 }
 
 1;
-
