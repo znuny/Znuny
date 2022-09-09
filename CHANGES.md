@@ -1,4 +1,5 @@
-# 6.4.3 2022-??-??
+# 6.4.3 2022-09-21
+ - 2022-09-08 Added AppointmentFilter to AgentAppointmentCalendarOverview. Thanks to Kevin Janssen (@BuTzZ). [PR#181](https://github.com/znuny/Znuny/pull/181)
  - 2022-09-08 Fixed LDAP user sync. Fixes undef/empty string comparisons that may occur between data stored in DB and data coming from LDAP. Thanks to Paweł Bogusławski (@pboguslawski). [PR#74](https://github.com/znuny/Znuny/pull/74)
  - 2022-09-08 Changed previous upstream name to 'Internal' channel name. Thanks to Paweł Bogusławski (@pboguslawski). [PR#95](https://github.com/znuny/Znuny/pull/95)
  - 2022-09-07 Fixed log flooding via Net::LDAP. Reduction of LDAP_SIZELIMIT_EXCEEDED messages. Thanks to Paweł Bogusławski (@pboguslawski). [PR#178](https://github.com/znuny/Znuny/pull/178)
