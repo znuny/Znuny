@@ -2361,6 +2361,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
         'Add new Appointment' => '予約の登録',
+        'Appointments' => '予約',
         'Calendars' => 'カレンダー',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
@@ -8562,7 +8563,6 @@ Thanks for your help!
         'Appointment list' => '予約リスト',
         'Appointment list.' => '予約リスト',
         'Appointment notifications' => '予約通知',
-        'Appointments' => '予約',
         'Arabic (Saudi Arabia)' => '',
         'ArticleTree' => '',
         'Attachment Name' => '添付ファイル名',

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-09-08 11:22+0000\n"
+"POT-Creation-Date: 2022-09-09 19:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -6968,6 +6968,10 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
 msgid "Add new Appointment"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
+msgid "Appointments"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
@@ -22111,10 +22115,6 @@ msgstr ""
 
 #. SysConfig
 msgid "Appointment notifications"
-msgstr ""
-
-#. SysConfig
-msgid "Appointments"
 msgstr ""
 
 #. SysConfig

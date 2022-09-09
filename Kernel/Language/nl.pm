@@ -2361,6 +2361,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
         'Add new Appointment' => 'Nieuwe afspraak toevoegen',
+        'Appointments' => '',
         'Calendars' => 'Kalenders',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
@@ -8554,7 +8555,6 @@ Het Helpdesk Team
         'Appointment list' => '',
         'Appointment list.' => '',
         'Appointment notifications' => '',
-        'Appointments' => '',
         'Arabic (Saudi Arabia)' => 'Arabisch (Saudi Arabië)',
         'ArticleTree' => 'Interactie-boom',
         'Attachment Name' => 'Bijlage naam',

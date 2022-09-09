@@ -2354,6 +2354,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
         'Add new Appointment' => '',
+        'Appointments' => '',
         'Calendars' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
@@ -8550,7 +8551,6 @@ Kumpulan MejaBantuan Anda
         'Appointment list' => '',
         'Appointment list.' => '',
         'Appointment notifications' => '',
-        'Appointments' => '',
         'Arabic (Saudi Arabia)' => 'Arab (Arab Saudi)',
         'ArticleTree' => 'PokokArtikel',
         'Attachment Name' => 'Nama Lampiran',

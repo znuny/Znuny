@@ -2358,6 +2358,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
         'Add new Appointment' => 'Lägg till ny kalenderhändelse',
+        'Appointments' => 'Kalenderhändelser',
         'Calendars' => 'Kalendrar',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
@@ -8540,7 +8541,6 @@ Thanks for your help!
         'Appointment list' => 'Kalenderhändelser',
         'Appointment list.' => 'Kalenderhändelser.',
         'Appointment notifications' => 'Kalenderhändelsepåminnelser',
-        'Appointments' => 'Kalenderhändelser',
         'Arabic (Saudi Arabia)' => '',
         'ArticleTree' => '',
         'Attachment Name' => '',

@@ -2364,6 +2364,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
         'Add new Appointment' => 'Legg til ny avtale',
+        'Appointments' => 'Avtaler',
         'Calendars' => 'Kalendere',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
@@ -8546,7 +8547,6 @@ Thanks for your help!
         'Appointment list' => 'Avtaleliste',
         'Appointment list.' => 'Avtaleliste.',
         'Appointment notifications' => 'Varsler om avtale',
-        'Appointments' => 'Avtaler',
         'Arabic (Saudi Arabia)' => 'Arabisk (Saudi Arabia)',
         'ArticleTree' => '',
         'Attachment Name' => 'Vedleggsnavn',

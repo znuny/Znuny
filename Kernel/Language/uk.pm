@@ -2356,6 +2356,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
         'Add new Appointment' => 'Додати нову Подію',
+        'Appointments' => 'Події',
         'Calendars' => 'Календарі',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
@@ -8538,7 +8539,6 @@ Thanks for your help!
         'Appointment list' => 'Перелік подій',
         'Appointment list.' => 'Перелік подій',
         'Appointment notifications' => 'Повідомлення по події',
-        'Appointments' => 'Події',
         'Arabic (Saudi Arabia)' => '',
         'ArticleTree' => '',
         'Attachment Name' => 'Назва Додатка',

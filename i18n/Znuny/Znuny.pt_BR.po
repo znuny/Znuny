@@ -16815,7 +16815,7 @@ msgstr "Lista de compromissos."
 msgid "Appointment notifications"
 msgstr "Notificações de compromisso"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
 msgid "Appointments"
 msgstr "Compromissos"
 
@@ -25372,5 +25372,9 @@ msgstr ""
 
 #. SysConfig
 msgid "Internal"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
+msgid "Filter for Appointments"
 msgstr ""
 

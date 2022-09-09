@@ -2361,6 +2361,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
         'Add new Appointment' => 'Új időpont hozzáadása',
+        'Appointments' => 'Időpontok',
         'Calendars' => 'Naptárak',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
@@ -8554,7 +8555,6 @@ Az Ön segélyszolgálat csapata
         'Appointment list' => 'Időpontlista',
         'Appointment list.' => 'Időpontlista.',
         'Appointment notifications' => 'Időpont-értesítések',
-        'Appointments' => 'Időpontok',
         'Arabic (Saudi Arabia)' => 'Arab (Szaúd-Arábia)',
         'ArticleTree' => 'Bejegyzés fa',
         'Attachment Name' => 'Melléklet neve',

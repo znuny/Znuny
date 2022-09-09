@@ -16801,7 +16801,7 @@ msgstr "Список мероприятий."
 msgid "Appointment notifications"
 msgstr "Уведомления о мероприятиях"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
 msgid "Appointments"
 msgstr "Мероприятия"
 
@@ -25334,5 +25334,9 @@ msgstr ""
 
 #. SysConfig
 msgid "Internal"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
+msgid "Filter for Appointments"
 msgstr ""
 

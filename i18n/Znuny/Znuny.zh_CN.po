@@ -16775,7 +16775,7 @@ msgstr "预约列表。"
 msgid "Appointment notifications"
 msgstr "预约通知"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
 msgid "Appointments"
 msgstr "预约"
 
@@ -25301,5 +25301,9 @@ msgstr ""
 
 #. SysConfig
 msgid "Internal"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
+msgid "Filter for Appointments"
 msgstr ""
 

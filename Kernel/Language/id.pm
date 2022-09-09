@@ -2356,6 +2356,7 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
         'Add new Appointment' => '',
+        'Appointments' => '',
         'Calendars' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
@@ -8551,7 +8552,6 @@ Helpdesk Team Anda
         'Appointment list' => '',
         'Appointment list.' => '',
         'Appointment notifications' => '',
-        'Appointments' => '',
         'Arabic (Saudi Arabia)' => 'Arab (Saudi Arabia)',
         'ArticleTree' => 'ArticleTree',
         'Attachment Name' => 'Lampirkan nama',

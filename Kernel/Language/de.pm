@@ -2355,6 +2355,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
         'Add new Appointment' => 'Einen neuen Termin hinzufügen',
+        'Appointments' => 'Termine',
         'Calendars' => 'Kalender',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
@@ -8547,7 +8548,6 @@ Ihr Helpdesk-Team
         'Appointment list' => 'Terminliste',
         'Appointment list.' => 'Terminliste.',
         'Appointment notifications' => 'Terminbenachrichtigungen',
-        'Appointments' => 'Termine',
         'Arabic (Saudi Arabia)' => 'Arabisch (Saudi-Arabien)',
         'ArticleTree' => 'Artikelbaum',
         'Attachment Name' => 'Name des Anhangs',

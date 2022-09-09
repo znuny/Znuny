@@ -2367,6 +2367,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
         'Add new Appointment' => 'Добавить новое мероприятие',
+        'Appointments' => 'Мероприятия',
         'Calendars' => 'Календари',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
@@ -8560,7 +8561,6 @@ Thanks for your help!
         'Appointment list' => 'Список мероприятий',
         'Appointment list.' => 'Список мероприятий.',
         'Appointment notifications' => 'Уведомления о мероприятиях',
-        'Appointments' => 'Мероприятия',
         'Arabic (Saudi Arabia)' => 'Арабский (Саудовская Аравия)',
         'ArticleTree' => 'Дерево сообщений',
         'Attachment Name' => 'Имя вложения',

@@ -2355,6 +2355,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
         'Add new Appointment' => '새 약속 추가',
+        'Appointments' => '약속',
         'Calendars' => '캘린더',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
@@ -8548,7 +8549,6 @@ Thanks for your help!
         'Appointment list' => '약속 목록',
         'Appointment list.' => '약속 목록',
         'Appointment notifications' => '약속 알림',
-        'Appointments' => '약속',
         'Arabic (Saudi Arabia)' => '아랍어 (사우디 아라비아)',
         'ArticleTree' => 'ArticleTree',
         'Attachment Name' => '첨부명',

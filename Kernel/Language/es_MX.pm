@@ -2355,6 +2355,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
         'Add new Appointment' => 'Añadir nueva cita',
+        'Appointments' => 'Citas',
         'Calendars' => 'Calendarios',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
@@ -8548,7 +8549,6 @@ Tu Equipo de Soporte
         'Appointment list' => 'Lista de citas',
         'Appointment list.' => 'Lista de citas.',
         'Appointment notifications' => 'Notificaciones de citas',
-        'Appointments' => 'Citas',
         'Arabic (Saudi Arabia)' => 'Árabe (Arabia Saudita)',
         'ArticleTree' => 'ArticleTree',
         'Attachment Name' => 'Nombre del Archivo Adjunto',
