@@ -255,13 +255,18 @@ sub Log {
 
     # write shm cache log
     if ( lc $Priority ne 'debug' && $Self->{IPC} ) {
-
         $Priority = lc $Priority;
 
         my $Data   = $LogTime . ";;$Priority;;$Self->{LogPrefix};;$Message\n";    ## no critic
         my $String = $Self->GetLog();
 
-        shmwrite( $Self->{IPCSHMKey}, $Data . $String, 0, $Self->{IPCSize} ) || die $!;
+        # Fix for issue #286 (GitHub) / #328 (internal): Encode output.
+        my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
+
+        my $Output = $Data . $String;
+        $EncodeObject->EncodeOutput( \$Output );
+
+        shmwrite( $Self->{IPCSHMKey}, $Output, 0, $Self->{IPCSize} ) || die $!;
     }
 
     return 1;
