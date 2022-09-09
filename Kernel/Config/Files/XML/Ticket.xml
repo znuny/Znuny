@@ -6166,6 +6166,24 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="DashboardBackend###0255-MyLastChangedTickets" Required="0" Valid="1">
+        <Description Translatable="1">MyLastChangedTickets dashboard widget.</Description>
+        <Navigation>Frontend::Agent::View::Dashboard</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::Dashboard::MyLastChangedTickets</Item>
+                <Item Key="Title" Translatable="1">My last changed tickets</Item>
+                <Item Key="Permission">rw</Item>
+                <Item Key="OwnerOnly"></Item>
+                <Item Key="Block">ContentSmall</Item>
+                <Item Key="Limit">10</Item>
+                <Item Key="Group"></Item>
+                <Item Key="Default">1</Item>
+                <Item Key="CacheTTL">2</Item>
+                <Item Key="Mandatory">0</Item>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="DashboardBackend###0260-TicketCalendar" Required="0" Valid="1">
         <Description Translatable="1">Parameters for the dashboard backend of the upcoming events widget of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.</Description>
         <Navigation>Frontend::Agent::View::Dashboard</Navigation>
@@ -6287,31 +6305,6 @@
         <Navigation>Frontend::Agent::View::Dashboard::TicketFilters</Navigation>
         <Value>
             <Item ValueType="Checkbox">1</Item>
-        </Value>
-    </Setting>
-    <Setting Name="DashboardBackend###0322-MyLastChangedTickets" Required="0" Valid="1">
-        <Description Translatable="1">MyLastChangedTickets dashboard widget.</Description>
-        <Navigation>Frontend::Agent::View::Dashboard</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Module">Kernel::Output::HTML::Dashboard::MyLastChangedTickets</Item>
-                <Item Key="Title" Translatable="1">My last changed tickets</Item>
-                <Item Key="Permission">rw</Item>
-                <Item Key="OwnerOnly"></Item>
-                <Item Key="Block">ContentSmall</Item>
-                <Item Key="Limit">6</Item>
-                <Item Key="Group"></Item>
-                <Item Key="Default">1</Item>
-                <Item Key="CacheTTL">2</Item>
-                <Item Key="Mandatory">0</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="DashboardMyLastChangedTickets::Limit" Required="1" Valid="1">
-        <Description Translatable="1">Defines the number of tickets shown in the widget.</Description>
-        <Navigation>Frontend::Agent::View::Dashboard::MyLastChangedTickets</Navigation>
-        <Value>
-            <Item ValueType="String" ValueRegex="^\d+$">10</Item>
         </Value>
     </Setting>
     <Setting Name="AgentCustomerInformationCenter::Backend###0050-CIC-CustomerUserList" Required="0" Valid="1">
