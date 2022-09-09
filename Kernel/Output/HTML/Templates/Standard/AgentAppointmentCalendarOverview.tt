@@ -34,6 +34,14 @@
                 </ul>
             </div>
         </div>
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Appointments") | html %]</h2>
+            </div>
+            <div class="Content">
+                <input type="text" id="FilterAppointments" name="FilterAppointments" class="FilterBox" placeholder="[% Translate('Just start typing to filter...') | html %]" value="" title="[% Translate('Filter for Appointments') | html %]">
+            </div>
+        </div>
 [% RenderBlockStart("CalendarWidget") %]
         <div class="WidgetSimple">
             <div class="Header">
@@ -101,7 +109,6 @@
                     <div class="Clear"></div>
                 </div>
                 <h2>[% Translate("Calendar") | html %]</h2>
-                <input type="text" id="FilterAppointments" class="" placeholder="[% Translate("Just start typing to filter...") | html %]" name="FilterAppointments" value="" title="[% Translate("Filter for Appointments") | html %]" size="150">
             </div>
             <div class="Content ">
 
