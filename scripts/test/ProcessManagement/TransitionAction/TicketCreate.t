@@ -273,7 +273,7 @@ line breaks
 and a few more line
 
 breaks.',
-    UserID   => 1,
+    UserID => 1,
 );
 
 $Self->True(
@@ -1081,37 +1081,37 @@ my @Tests = (
         Article        => 1,
         CheckFromValue => 1,
     },
-    
+
     {
         Name   => 'Correct Ticket->DynamicField_Field4_Value to Body',
         Config => {
             UserID => $UserID,
             Ticket => \%Ticket,
             Config => {
-                Title         => 'ProcessManagement::TransitionAction::TicketCreate::13::' . $RandomID,
-                CustomerID                     => '123465',
-                CustomerUser                   => 'customer@example.com',
-                OwnerID                        => 1,
-                TypeID                         => 1,
-                ResponsibleID                  => 1,
-                PendingTime                    => '2014-12-23 23:05:00',
-                SenderType                     => 'agent',
-                CommunicationChannel           => 'Internal',
-                IsVisibleForCustomer           => 0,
-                ContentType                    => 'text/plain; charset=ISO-8859-15',
-                Subject                        => '<OTRS_CUSTOMER_BODY>',
-                Body                           => "<OTRS_TICKET_DynamicField_Field4$RandomID" . '_Value>',
-                HistoryType                    => 'OwnerUpdate',
-                HistoryComment                 => 'Some free text!',
-                NoAgentNotify                  => 0,
-                LinkAs                         => 'Parent',
-                TimeUnit                       => 123,
+                Title                => 'ProcessManagement::TransitionAction::TicketCreate::13::' . $RandomID,
+                CustomerID           => '123465',
+                CustomerUser         => 'customer@example.com',
+                OwnerID              => 1,
+                TypeID               => 1,
+                ResponsibleID        => 1,
+                PendingTime          => '2014-12-23 23:05:00',
+                SenderType           => 'agent',
+                CommunicationChannel => 'Internal',
+                IsVisibleForCustomer => 0,
+                ContentType          => 'text/plain; charset=ISO-8859-15',
+                Subject              => '<OTRS_CUSTOMER_BODY>',
+                Body                 => "<OTRS_TICKET_DynamicField_Field4$RandomID" . '_Value>',
+                HistoryType          => 'OwnerUpdate',
+                HistoryComment       => 'Some free text!',
+                NoAgentNotify        => 0,
+                LinkAs               => 'Parent',
+                TimeUnit             => 123,
             },
         },
-        Success => 1,
-        Article => 1,
+        Success          => 1,
+        Article          => 1,
         HTMLContentCheck => 1,
-        HTMLText => 'A text with<br/>
+        HTMLText         => 'A text with<br/>
 <br/>
 line breaks<br/>
 and a few more line<br/>
@@ -1301,7 +1301,7 @@ for my $Test (@Tests) {
                         DynamicFieldConfig => $DynamicFieldConfig,
                         Value              => $DisplayValue,
                     );
-                    
+
                     if ( $Test->{HTMLContentCheck} ) {
                         $Self->Is(
                             $Test->{HTMLText},

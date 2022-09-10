@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.933833116036506;
+    $Self->{Completeness}        = 0.934137593739811;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2362,6 +2362,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
         'Add new Appointment' => '添加新的预约',
+        'Appointments' => '预约',
         'Calendars' => '日历',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
@@ -7857,7 +7858,6 @@ sub Data {
         'Handles changes to data of modules which use the DBCRUD base module.' =>
             '',
         'Cache settings for DBCRUD modules (default: 1 day).' => '',
-        'Loader module registration for AdminOAuth2TokenManagement.' => '',
         'Displays notifications for missing and expired OAuth2 tokens.' =>
             '',
         'Authentication type for sendmail module. If \'OAuth2 token\' has been selected, SendmailModule::OAuth2TokenConfigName must also be configured.' =>
@@ -7876,7 +7876,6 @@ sub Data {
             '',
         'Agent interface notification module to see the number of tickets an agent is owner for. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             '',
-        'Loader module registration for AgentAppointmentEdit.' => '',
         'Defines the next possible ticket states for calendar based tickets.' =>
             '',
         'Defines the default next state.' => '',
@@ -8519,7 +8518,6 @@ Thanks for your help!
             '',
         'Admin modules overview.' => '系统管理模块概览。',
         'Admin.' => '系统管理。',
-        'AdminOAuth2TokenManagement' => '',
         'Administration' => '管理',
         'Agent Customer Search' => '服务人员搜索客户',
         'Agent Customer Search.' => '服务人员搜索客户。',
@@ -8557,7 +8555,6 @@ Thanks for your help!
         'Appointment list' => '预约列表',
         'Appointment list.' => '预约列表。',
         'Appointment notifications' => '预约通知',
-        'Appointments' => '预约',
         'Arabic (Saudi Arabia)' => '阿拉伯语（沙特阿拉伯）',
         'ArticleTree' => '信件树',
         'Attachment Name' => '附件名',
@@ -8818,6 +8815,7 @@ Thanks for your help!
         'Inline' => '内联',
         'Input' => '输入',
         'Interface language' => '界面语言',
+        'Internal' => '',
         'Internal communication channel.' => '内部通信渠道。',
         'International Workers\' Day' => '五一劳动节',
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>

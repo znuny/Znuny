@@ -34,7 +34,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.389178617992177;
+    $Self->{Completeness}        = 0.393055102706228;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -354,7 +354,7 @@ sub Data {
         'Settings' => 'Innstillinger',
         'Entries per page' => '',
         'No communications found.' => '',
-        '%s s' => '',
+        '%s s' => '%s s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogAccounts.tt
         'Account Status' => '',
@@ -796,8 +796,8 @@ sub Data {
         'Ticket changed between' => 'Sak endret mellom',
         'Last close times' => '',
         'No last close time settings.' => '',
-        'Ticket last close' => '',
-        'Ticket last close between' => '',
+        'Ticket last close' => 'Sak sist lukket',
+        'Ticket last close between' => 'Sak sist lukket mellom',
         'Close times' => 'Stengningstidspunkt',
         'No close time settings.' => 'Ingen stengetid-innstilling',
         'Ticket closed' => 'Sak låst',
@@ -1522,7 +1522,7 @@ sub Data {
         'Downgrade to ((OTRS)) Community Edition' => '',
         'Read documentation' => 'Les dokumentasjonen',
         '%s makes contact regularly with cloud.otrs.com to check on available updates and the validity of the underlying contract.' =>
-            '',
+            '%s kontakter cloud.otrs.com med jevne mellemrom for å søke etter oppdateringer og sjekke gyldigheten av underliggende kontrakt.',
         'Unauthorized Usage Detected' => 'Uautorisert bruk oppdaget',
         'This system uses the %s without a proper license! Please make contact with %s to renew or activate your contract!' =>
             'Dette systemet bruker %s uten en gyldig lisens! Vær vennlig å ta kontakt med %s for å fornye eller aktivere din kontrakt!',
@@ -1622,7 +1622,7 @@ sub Data {
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Vil du virkelig re-installere pakken? Alle manuelle endringer vil bli borte.',
         'Go to updating instructions' => '',
-        'Go to znuny.org' => '',
+        'Go to znuny.org' => 'Gå til znuny.org',
         'package information' => '',
         'Package installation requires a patch level update of Znuny.' =>
             '',
@@ -2077,7 +2077,7 @@ sub Data {
             'Det mangler minst ett parameter i bindingen. Vennligst sjekk den.',
         'Result format' => 'Format for resultatet',
         'Run Query' => 'Kjør spørring',
-        '%s Results' => '',
+        '%s Results' => '%s resultater',
         'Query is executed.' => 'Spørringen er utført.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
@@ -2242,7 +2242,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'Tilgang',
-        'Package' => '',
+        'Package' => 'Pakke',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
         'System Maintenance Management' => '',
@@ -2305,7 +2305,7 @@ sub Data {
         'Edit ticket attribute relations' => '',
         'Import CSV or Excel file' => '',
         'Attribute' => 'Attributt',
-        'Last update' => '',
+        'Last update' => 'Siste oppdatering',
         'Are you sure you want to delete entry \'%s\'?' => '',
         'Download previously imported file' => '',
         'The file needs to be in CSV (UTF-8) or Excel format. Both header columns need to contain the names of valid ticket attributes. The name of the uploaded file must be unique and must not be in use by another ticket attribute relations record.' =>
@@ -2364,6 +2364,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
         'Add new Appointment' => 'Legg til ny avtale',
+        'Appointments' => 'Avtaler',
         'Calendars' => 'Kalendere',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
@@ -2932,7 +2933,7 @@ sub Data {
         'Note: Type is invalid!' => 'Merk: Typen er ugyldig!',
         'Pending till' => 'Utsatt til',
         'Locked' => 'Tilgjengelighet',
-        '%s Ticket(s)' => '',
+        '%s Ticket(s)' => '%s sak(er)',
         'Accounted time' => 'Benyttet tid',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
@@ -2987,7 +2988,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooterJS.tt
         '%s detected possible network issues. You could either try reloading this page manually or wait until your browser has re-established the connection on its own.' =>
-            '',
+            '%s oppdaget mulige nettverksproblemer. Du kan enten prøv å laste siden på nytt manuelt, eller vente til nettleseren din har gjenopprettet forbindelsen selv.',
         'The connection has been re-established after a temporary connection loss. Due to this, elements on this page could have stopped to work correctly. In order to be able to use all elements correctly again, it is strongly recommended to reload this page.' =>
             '',
 
@@ -3512,7 +3513,7 @@ sub Data {
         'There was an error synchronizing the ACLs.' => '',
         'ACL %s could not be deleted' => '',
         'There was an error getting data for ACL with ID %s' => '',
-        '%s (copy) %s' => '',
+        '%s (copy) %s' => '%s (kopi) %s',
         'Please note that ACL restrictions will be ignored for the Superuser account (UserID 1).' =>
             '',
         'Exact match' => '',
@@ -3551,7 +3552,7 @@ sub Data {
         'There was an error getting data for Notification with ID:%s!' =>
             '',
         'Unknown Notification %s!' => '',
-        '%s (copy)' => '',
+        '%s (copy)' => '%s (kopi)',
         'There was an error creating the Notification' => '',
         'Notifications could not be Imported due to a unknown error, please check OTRS logs for more information' =>
             '',
@@ -4206,10 +4207,10 @@ sub Data {
         'Need SourceObject and SourceKey!' => '',
         'You need ro permission!' => '',
         'Can not delete link with %s!' => 'Kan ikke slette sammenkoblingen med %s!',
-        '%s Link(s) deleted successfully.' => '',
+        '%s Link(s) deleted successfully.' => '%s koblinger vellykket fjernet.',
         'Can not create link with %s! Object already linked as %s.' => '',
         'Can not create link with %s!' => 'Kan ikke opprette sammenkobling med %s!',
-        '%s links added successfully.' => '',
+        '%s links added successfully.' => '%s koblinger opprettet med hell.',
         'The object %s cannot link with other object!' => '',
 
         # Perl Module: Kernel/Modules/AgentPreferences.pm
@@ -4254,7 +4255,7 @@ sub Data {
         'End message' => 'Sluttmelding',
 
         # Perl Module: Kernel/Modules/AgentTicketBounce.pm
-        '%s is needed!' => '',
+        '%s is needed!' => '%s er påkrevd!',
         'Plain article not found for article %s!' => '',
         'Article does not belong to ticket %s!' => '',
         'Can\'t bounce email!' => '',
@@ -4595,7 +4596,7 @@ sub Data {
             '',
 
         # Perl Module: Kernel/Modules/Mentions.pm
-        '%s users will be mentioned' => '',
+        '%s users will be mentioned' => '%s brukere vil bli omtalt',
 
         # Perl Module: Kernel/Modules/PublicCalendar.pm
         'No %s!' => '',
@@ -4755,11 +4756,11 @@ sub Data {
         'Hours' => 'Timer',
         'Minutes' => 'Minutter',
         'Check to activate this date' => 'Kryss av for å aktivere denne datoen',
-        '%s TB' => '',
-        '%s GB' => '',
-        '%s MB' => '',
-        '%s KB' => '',
-        '%s B' => '',
+        '%s TB' => '%s TB',
+        '%s GB' => '%s GB',
+        '%s MB' => '%s MB',
+        '%s KB' => '%s KB',
+        '%s B' => '%s B',
         'No Permission!' => 'Ingen rettigheter!',
         'No Permission' => '',
         'Show Tree Selection' => 'Vis Trestruktur',
@@ -5342,7 +5343,7 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
         'Package Installation Status' => 'Installasjonsstatus for pakker',
-        'Some packages have locally modified files.' => '',
+        'Some packages have locally modified files.' => 'Noen pakker har filer som er endret lokalt.',
         'Some packages are not correctly installed.' => 'Noen pakker er ikke riktig installert.',
         'Package Framework Version Status' => '',
         'Some packages are not allowed for the current framework version.' =>
@@ -7859,7 +7860,6 @@ sub Data {
         'Handles changes to data of modules which use the DBCRUD base module.' =>
             '',
         'Cache settings for DBCRUD modules (default: 1 day).' => '',
-        'Loader module registration for AdminOAuth2TokenManagement.' => '',
         'Displays notifications for missing and expired OAuth2 tokens.' =>
             '',
         'Authentication type for sendmail module. If \'OAuth2 token\' has been selected, SendmailModule::OAuth2TokenConfigName must also be configured.' =>
@@ -7878,7 +7878,6 @@ sub Data {
             '',
         'Agent interface notification module to see the number of tickets an agent is owner for. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             '',
-        'Loader module registration for AgentAppointmentEdit.' => '',
         'Defines the next possible ticket states for calendar based tickets.' =>
             '',
         'Defines the default next state.' => '',
@@ -8511,7 +8510,6 @@ Thanks for your help!
             '',
         'Admin modules overview.' => '',
         'Admin.' => '',
-        'AdminOAuth2TokenManagement' => '',
         'Administration' => 'Administrasjon',
         'Agent Customer Search' => '',
         'Agent Customer Search.' => '',
@@ -8549,7 +8547,6 @@ Thanks for your help!
         'Appointment list' => 'Avtaleliste',
         'Appointment list.' => 'Avtaleliste.',
         'Appointment notifications' => 'Varsler om avtale',
-        'Appointments' => 'Avtaler',
         'Arabic (Saudi Arabia)' => 'Arabisk (Saudi Arabia)',
         'ArticleTree' => '',
         'Attachment Name' => 'Vedleggsnavn',
@@ -8787,7 +8784,7 @@ Thanks for your help!
         'Gives customer users group based access to tickets from customer users of the same customer (ticket CustomerID is a CustomerID of the customer user).' =>
             '',
         'Global Search Module.' => '',
-        'Go to dashboard!' => 'Gå til kontrollpanel',
+        'Go to dashboard!' => 'Gå til kontrollpanel!',
         'Good PGP signature.' => '',
         'Google Authenticator' => '',
         'Graph: Bar Chart' => '',
@@ -8810,6 +8807,7 @@ Thanks for your help!
         'Inline' => '',
         'Input' => 'Tilføre',
         'Interface language' => 'Språk for grensesnittet',
+        'Internal' => '',
         'Internal communication channel.' => '',
         'International Workers\' Day' => 'Internasjonale arbeidernes dag',
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
@@ -9053,7 +9051,7 @@ Thanks for your help!
         'SolutionInMin' => '',
         'Some description!' => 'Noe beskrivelse!',
         'Some picture description!' => 'Noe bilde beskrivelse!',
-        'Spam' => '',
+        'Spam' => 'Søppelpost',
         'Spanish' => 'Spansk',
         'Spanish (Colombia)' => 'Spansk (Kolombia)',
         'Spanish (Mexico)' => 'Spansk (Mexico)',

@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.448826597131682;
+    $Self->{Completeness}        = 0.44897293772416;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2358,6 +2358,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
         'Add new Appointment' => '',
+        'Appointments' => '',
         'Calendars' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
@@ -7856,7 +7857,6 @@ Mfano:
         'Handles changes to data of modules which use the DBCRUD base module.' =>
             '',
         'Cache settings for DBCRUD modules (default: 1 day).' => '',
-        'Loader module registration for AdminOAuth2TokenManagement.' => '',
         'Displays notifications for missing and expired OAuth2 tokens.' =>
             '',
         'Authentication type for sendmail module. If \'OAuth2 token\' has been selected, SendmailModule::OAuth2TokenConfigName must also be configured.' =>
@@ -7875,7 +7875,6 @@ Mfano:
             '',
         'Agent interface notification module to see the number of tickets an agent is owner for. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             '',
-        'Loader module registration for AgentAppointmentEdit.' => '',
         'Defines the next possible ticket states for calendar based tickets.' =>
             '',
         'Defines the default next state.' => '',
@@ -8508,7 +8507,6 @@ Thanks for your help!
             '',
         'Admin modules overview.' => '',
         'Admin.' => '',
-        'AdminOAuth2TokenManagement' => '',
         'Administration' => 'Utawala',
         'Agent Customer Search' => '',
         'Agent Customer Search.' => '',
@@ -8546,7 +8544,6 @@ Thanks for your help!
         'Appointment list' => '',
         'Appointment list.' => '',
         'Appointment notifications' => '',
-        'Appointments' => '',
         'Arabic (Saudi Arabia)' => '',
         'ArticleTree' => 'Mti wa makala',
         'Attachment Name' => 'Jina la kiambatanishi',
@@ -8807,6 +8804,7 @@ Thanks for your help!
         'Inline' => '',
         'Input' => 'Ingizo',
         'Interface language' => 'Lugha ya kiolesura',
+        'Internal' => '',
         'Internal communication channel.' => '',
         'International Workers\' Day' => 'Siku ya kimataifa ya wafanyakazi. ',
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>

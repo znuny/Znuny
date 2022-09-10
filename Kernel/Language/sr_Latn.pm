@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.930247718383312;
+    $Self->{Completeness}        = 0.930551027062276;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2361,6 +2361,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
         'Add new Appointment' => 'Dodaj novi termin',
+        'Appointments' => 'Termini',
         'Calendars' => 'Kalendari',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
@@ -7856,7 +7857,6 @@ sub Data {
         'Handles changes to data of modules which use the DBCRUD base module.' =>
             '',
         'Cache settings for DBCRUD modules (default: 1 day).' => '',
-        'Loader module registration for AdminOAuth2TokenManagement.' => '',
         'Displays notifications for missing and expired OAuth2 tokens.' =>
             '',
         'Authentication type for sendmail module. If \'OAuth2 token\' has been selected, SendmailModule::OAuth2TokenConfigName must also be configured.' =>
@@ -7875,7 +7875,6 @@ sub Data {
             '',
         'Agent interface notification module to see the number of tickets an agent is owner for. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             '',
-        'Loader module registration for AgentAppointmentEdit.' => '',
         'Defines the next possible ticket states for calendar based tickets.' =>
             '',
         'Defines the default next state.' => '',
@@ -8519,7 +8518,6 @@ Vaša tehnička podrška
             '',
         'Admin modules overview.' => 'Pregled administratorskih modula.',
         'Admin.' => 'Admin.',
-        'AdminOAuth2TokenManagement' => '',
         'Administration' => 'Administracija',
         'Agent Customer Search' => 'Pretraga klijenata za operatere',
         'Agent Customer Search.' => 'Pretraga klijenata za operatere.',
@@ -8557,7 +8555,6 @@ Vaša tehnička podrška
         'Appointment list' => 'Lista termina',
         'Appointment list.' => 'Lista termina.',
         'Appointment notifications' => 'Obaveštenja o terminu',
-        'Appointments' => 'Termini',
         'Arabic (Saudi Arabia)' => 'Arapski (Saudijska arabija)',
         'ArticleTree' => 'Članak u obliku drveta',
         'Attachment Name' => 'Naziv priloga',
@@ -8818,6 +8815,7 @@ Vaša tehnička podrška
         'Inline' => 'Neposredno',
         'Input' => 'Unos',
         'Interface language' => 'Jezik interfejsa',
+        'Internal' => '',
         'Internal communication channel.' => 'Interni komunikacioni kanal.',
         'International Workers\' Day' => 'Međunarodni praznik rada',
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
