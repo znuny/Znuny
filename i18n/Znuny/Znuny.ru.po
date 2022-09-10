@@ -16801,7 +16801,7 @@ msgstr "Список мероприятий."
 msgid "Appointment notifications"
 msgstr "Уведомления о мероприятиях"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
 msgid "Appointments"
 msgstr "Мероприятия"
 
@@ -25330,5 +25330,13 @@ msgstr ""
 
 #. Perl Module: Kernel/System/MailQueue.pm
 msgid "Error while validating Recipient email address."
+msgstr ""
+
+#. SysConfig
+msgid "Internal"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
+msgid "Filter for Appointments"
 msgstr ""
 

@@ -16792,7 +16792,7 @@ msgstr "Terminliste."
 msgid "Appointment notifications"
 msgstr "Terminbenachrichtigungen"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
 msgid "Appointments"
 msgstr "Termine"
 
@@ -25378,5 +25378,13 @@ msgstr "Legt fest, ob fred sichtbar oder verborgen ist."
 
 #. SysConfig
 msgid "Which order should the config log data have?"
+msgstr ""
+
+#. SysConfig
+msgid "Internal"
+msgstr "Intern"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
+msgid "Filter for Appointments"
 msgstr ""
 

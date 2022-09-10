@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.714658405348117;
+    $Self->{Completeness}        = 0.714541897619824;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2361,6 +2361,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
         'Add new Appointment' => '予約の登録',
+        'Appointments' => '予約',
         'Calendars' => 'カレンダー',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
@@ -8562,7 +8563,6 @@ Thanks for your help!
         'Appointment list' => '予約リスト',
         'Appointment list.' => '予約リスト',
         'Appointment notifications' => '予約通知',
-        'Appointments' => '予約',
         'Arabic (Saudi Arabia)' => '',
         'ArticleTree' => '',
         'Attachment Name' => '添付ファイル名',
@@ -8823,6 +8823,7 @@ Thanks for your help!
         'Inline' => '',
         'Input' => '入力',
         'Interface language' => 'インターフェイスの言語',
+        'Internal' => '',
         'Internal communication channel.' => '内部コミュニケーション・チャネル',
         'International Workers\' Day' => '国際労働者の日',
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>

@@ -34,7 +34,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.403554541007663;
+    $Self->{Completeness}        = 0.403488751222693;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2364,6 +2364,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
         'Add new Appointment' => 'Ajouter un nouveau rendez-vous',
+        'Appointments' => '',
         'Calendars' => 'Calendriers',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
@@ -8546,7 +8547,6 @@ Thanks for your help!
         'Appointment list' => '',
         'Appointment list.' => '',
         'Appointment notifications' => 'Notifications des rendez-vous',
-        'Appointments' => '',
         'Arabic (Saudi Arabia)' => '',
         'ArticleTree' => '',
         'Attachment Name' => 'Nom de la Pièce Jointe',
@@ -8807,6 +8807,7 @@ Thanks for your help!
         'Inline' => '',
         'Input' => '',
         'Interface language' => 'Langue de l\'interface',
+        'Internal' => '',
         'Internal communication channel.' => '',
         'International Workers\' Day' => 'Fête internationale des travailleurs',
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
