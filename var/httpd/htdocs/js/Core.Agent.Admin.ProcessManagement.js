@@ -1355,7 +1355,7 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                     }
                 });
 
-                if ($('#StandardTemplateID').val().length >= 2){
+                if ($('#StandardTemplateID').length && $('#StandardTemplateID').val().length >= 2){
                     $('#StandardTemplateAutoFillContainer').addClass('Hidden');
                     $('#StandardTemplateAutoFillContainer').prev('label').css('display', 'none');
                     $('#StandardTemplateAutoFill').prop('checked', false);
