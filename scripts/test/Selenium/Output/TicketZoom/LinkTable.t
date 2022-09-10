@@ -131,9 +131,8 @@ $Selenium->RunTest(
         $Selenium->VerifiedRefresh();
 
         # Verify there is 'Linked Objects' widget, it's enabled.
-        $Self->Is(
-            $Selenium->find_element( '.Header>h2', 'css' )->get_text(),
-            'Linked Objects',
+        $Self->True(
+            index( $Selenium->get_page_source(), "Linked Objects" ) != -1,
             'Linked Objects widget is enabled',
         );
 
@@ -177,9 +176,10 @@ $Selenium->RunTest(
         );
 
         # Verify 'Linked Objects' widget is in the side bar with simple view.
-        $Self->Is(
-            $Selenium->find_element( '.SidebarColumn .Header>h2', 'css' )->get_text(),
-            'Linked Objects',
+        $Self->True(
+            $Selenium->execute_script(
+                "return \$('.SidebarColumn .Header>h2:contains(Linked Object)').length"
+            ),
             'Linked Objects widget is positioned in the side bar with simple view',
         );
 
