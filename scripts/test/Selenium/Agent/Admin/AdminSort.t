@@ -50,16 +50,20 @@ $Selenium->RunTest(
             @NavigationCheck = (
                 'Általános ügyintéző',
                 'Dinamikus mezők',
+                'Dynamic fields ↔ Screens',
                 'Folyamatkezelés',
                 'Hozzáférés-vezérlési listák (ACL)',
+                'Ticket attribute relations',
                 'Webszolgáltatások',
             );
         }
         else {
             @NavigationCheck = (
                 'Dinamikus mezők',
+                'Dynamic fields ↔ Screens',
                 'Folyamatkezelés',
                 'Hozzáférés-vezérlési listák (ACL)',
+                'Ticket attribute relations',
                 'Webszolgáltatások',
             );
         }
