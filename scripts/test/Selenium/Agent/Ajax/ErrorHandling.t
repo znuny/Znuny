@@ -243,7 +243,7 @@ JAVASCRIPT
 
         # Open the owner change dialog.
         $Selenium->execute_script("\$('.Cluster ul ul').addClass('ForceVisible');");
-        $Selenium->find_element("//a[contains(\@href, \'Action=AgentTicketOwner' )]")->click();
+        $Selenium->find_element("//div[\@class='ContentColumn']//a[contains(\@href, \'Action=AgentTicketOwner' )]")->click();
 
         $Selenium->WaitFor( WindowCount => 2 );
         my $Handles = $Selenium->get_window_handles();
