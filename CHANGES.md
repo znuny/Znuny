@@ -1,4 +1,5 @@
 # 6.4.3 2022-09-21
+ - 2022-09-12 Fixed time units always mandatory in AgentTicketBulk. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#290](https://github.com/znuny/Znuny/pull/290)
  - 2022-09-12 Fixed activity dialog error on missing templates (StandardTemplate). Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#291](https://github.com/znuny/Znuny/pull/291)
  - 2022-09-08 Added AppointmentFilter to AgentAppointmentCalendarOverview. Thanks to Kevin Janssen (@BuTzZ). [PR#181](https://github.com/znuny/Znuny/pull/181)
  - 2022-09-08 Fixed LDAP user sync. Fixes undef/empty string comparisons that may occur between data stored in DB and data coming from LDAP. Thanks to Paweł Bogusławski (@pboguslawski). [PR#74](https://github.com/znuny/Znuny/pull/74)
