@@ -115,7 +115,9 @@ $Selenium->RunTest(
 
         # Verify there is no 'Linked Objects' widget, it's disabled.
         $Self->True(
-            index( $Selenium->get_page_source(), "Linked Objects" ) == -1,
+            $Selenium->execute_script(
+                "return \$('.LinkTable .Header>h2').length == 0"
+            ),
             "Linked Objects widget is disabled",
         );
 
