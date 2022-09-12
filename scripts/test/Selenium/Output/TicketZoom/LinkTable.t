@@ -131,8 +131,10 @@ $Selenium->RunTest(
         $Selenium->VerifiedRefresh();
 
         # Verify there is 'Linked Objects' widget, it's enabled.
-        $Self->True(
-            index( $Selenium->get_page_source(), "Linked Objects" ) != -1,
+
+        $Self->Is(
+            $Selenium->find_element( '.LinkTable .Header>h2', 'css' )->get_text(),
+            'Linked Objects',
             'Linked Objects widget is enabled',
         );
 
