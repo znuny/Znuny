@@ -1709,7 +1709,7 @@ sub _Mask {
         );
 
         $LayoutObject->Block(
-            Name => 'NoteTimeUnits',
+            Name => 'TimeUnits',
             Data => \%Param,
         );
 
