@@ -1794,12 +1794,17 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                     $PluginDataObj = $('#Plugin_' + Core.App.EscapeSelector(PluginKey) + '_LinkList'),
                     PluginData = JSON.parse($PluginDataObj.val()),
                     LinkID = $RemoveObj.data('linkId').toString(),
-                    $Parent = $RemoveObj.parent();
+                    $Parent = $RemoveObj.parent(),
+                    $PluginContainer = $Parent.parent();
 
                 PluginData.splice(PluginData.indexOf(LinkID), 1);
                 $PluginDataObj.val(JSON.stringify(PluginData));
 
                 $Parent.remove();
+                
+                if ( $PluginContainer.children().length == 0 ) {
+                    $PluginContainer.text('');
+                }
 
                 return false;
             });
