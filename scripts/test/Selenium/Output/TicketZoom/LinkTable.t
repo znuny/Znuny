@@ -154,7 +154,7 @@ $Selenium->RunTest(
 
         # Verify there is no collapsed elements on the screen.
         $Self->True(
-            $Selenium->find_element("//div[contains(\@class, 'WidgetSimple DontPrint Expanded')]"),
+            $Selenium->find_element("//div[contains(\@class, 'WidgetSimple LinkTable DontPrint Expanded')]"),
             "Linked Objects Widget is expanded",
         );
 
@@ -176,10 +176,9 @@ $Selenium->RunTest(
         );
 
         # Verify 'Linked Objects' widget is in the side bar with simple view.
-        $Self->True(
-            $Selenium->execute_script(
-                "return \$('.SidebarColumn .Header>h2:contains(Linked Object)').length"
-            ),
+        $Self->Is(
+            $Selenium->find_element( '.LinkTable .Header>h2', 'css' )->get_text(),
+            'Linked Objects',
             'Linked Objects widget is positioned in the side bar with simple view',
         );
 
