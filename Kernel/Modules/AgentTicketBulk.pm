@@ -1693,7 +1693,7 @@ sub _Mask {
         my $IsTimeUnitsRequired = $ConfigObject->Get('Ticket::Frontend::NeedAccountedTime');
         $LayoutObject->AddJSData(
             Key   => 'TimeUnitsRequired',
-            Value => $IsTimeUnitsRequired // '',
+            Value => $IsTimeUnitsRequired || '',
         );
 
         my $TimeUnitsInputType = $ConfigObject->Get('Ticket::Frontend::AccountTimeType') // 'Text';
@@ -1709,7 +1709,7 @@ sub _Mask {
         );
 
         $LayoutObject->Block(
-            Name => 'NoteTimeUnits',
+            Name => 'TimeUnits',
             Data => \%Param,
         );
 
