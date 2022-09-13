@@ -20,6 +20,7 @@ my $SeleniumTest = sub {
     my $ZnunyHelperObject  = $Kernel::OM->Get('Kernel::System::ZnunyHelper');
     my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
     my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+    my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
 
     # Add dynamic fields
     for my $Count ( 0 .. 3 ) {
@@ -188,6 +189,39 @@ my $SeleniumTest = sub {
             );
         }
     }
+
+    for my $SettingName ('Ticket::Frontend::AgentTicketNote###DynamicField', 'Ticket::Frontend::AgentTicketQueue###DefaultColumns') {
+        my %Setting = $SysConfigObject->SettingGet(
+            Name      => $SettingName,
+            Translate => 0,
+        );
+
+        my $Guid = $SysConfigObject->SettingLock(
+            UserID    => 1,
+            DefaultID => $Setting{DefaultID},
+            Force     => 1,
+        );
+        $Self->True(
+            $Guid,
+            "Lock setting before reset($SettingName).",
+        );
+
+        my $Success = $SysConfigObject->SettingReset(
+            Name              => $SettingName,
+            ExclusiveLockGUID => $Guid,
+            UserID            => 1,
+        );
+        $Self->True(
+            $Success,
+            "Setting $SettingName reset to the default value.",
+        );
+
+        $SysConfigObject->SettingUnlock(
+            DefaultID => $Setting{DefaultID},
+        );
+    }
+
+    $ZnunyHelperObject->_RebuildConfig();
 };
 
 $SeleniumObject->RunTest($SeleniumTest);

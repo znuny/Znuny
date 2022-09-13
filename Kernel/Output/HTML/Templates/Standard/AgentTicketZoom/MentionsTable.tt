@@ -7,7 +7,7 @@
 # --
 <div class="WidgetSimple">
     <div class="Header">
-        <div class="WidgetAction Toggle">
+        <div class="WidgetAction Mentions Toggle">
             <a href="#" title="[% Translate("Show or hide the content") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
         </div>
         <h2>[% Translate("Mentions") | html %]</h2>

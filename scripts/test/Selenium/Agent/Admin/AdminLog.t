@@ -154,7 +154,7 @@ $Selenium->RunTest(
 
         $Self->True(
             $Selenium->execute_script(
-                "return \$('#LogEntries tbody tr').length == 4"
+                "return \$('#LogEntries tbody tr:visible').length == 2"
             ),
             "4 log entries exists in the table",
         );

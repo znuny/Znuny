@@ -337,10 +337,9 @@ $Selenium->RunTest(
             "Dynamic field '$DynamicFieldName' is added",
         );
 
-        # set test dynamic field to date in the past, but do not activate it
-        # validation used to kick in even if checkbox in front wasn't activated
-        # see bug#12210 for more information
         $Selenium->find_element( "#DynamicField_${DynamicFieldName}Year", 'css' )->send_keys('2015');
+
+        $Selenium->find_element( "#DynamicField_${DynamicFieldName}Used", 'css' )->click();
 
         # save job
         $Selenium->find_element( "#Submit", 'css' )->VerifiedClick();

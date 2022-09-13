@@ -515,6 +515,10 @@ $Selenium->RunTest(
 
         $Selenium->find_element( "#Subject",        'css' )->send_keys('Test');
         $Selenium->find_element( "#Body",           'css' )->send_keys('Test');
+
+        $Selenium->find_element( "#EmailSubject",   'css' )->send_keys('Test');
+        $Selenium->find_element( "#EmailBody",      'css' )->send_keys('Test');
+
         $Selenium->find_element( "#submitRichText", 'css' )->click();
 
         # Return to status view.

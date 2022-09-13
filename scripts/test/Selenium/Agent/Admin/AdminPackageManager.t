@@ -41,32 +41,6 @@ $HelperObject->ConfigSettingChange(
 
 my $RandomID = $HelperObject->GetRandomID();
 
-# Override Request() from WebUserAgent to always return some test data without making any
-#   actual web service calls. This should prevent instability in case cloud services are
-#   unavailable at the exact moment of this test run.
-my $CustomCode = <<"EOS";
-sub Kernel::Config::Files::ZZZZUnitTestAdminPackageManager${RandomID}::Load {} # no-op, avoid warning logs
-use Kernel::System::WebUserAgent;
-package Kernel::System::WebUserAgent;
-use strict;
-use warnings;
-## nofilter(TidyAll::Plugin::OTRS::Perl::TestSubs)
-{
-    no warnings 'redefine';
-    sub Request {
-        return (
-            Status  => '200 OK',
-            Content => '{"Success":1,"Results":{"PackageManagement":[{"Operation":"PackageVerify","Data":{"Test":"not_verified","TestPackageIncompatible":"not_verified"},"Success":"1"}]},"ErrorMessage":""},
-        );
-    }
-}
-1;
-EOS
-$HelperObject->CustomCodeActivate(
-    Code       => $CustomCode,
-    Identifier => 'AdminPackageManager' . $RandomID,
-);
-
 my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 my $CheckBreadcrumb = sub {
@@ -181,43 +155,6 @@ $Selenium->RunTest(
 
         $Selenium->find_element( '#FileUpload', 'css' )->send_keys($Location);
 
-        $ClickAction->("//button[contains(.,'Install Package')]");
-
-        # Check breadcrumb on Install screen.
-        $CheckBreadcrumb->(
-            BreadcrumbText => 'Install Package:',
-        );
-
-        # Package is not verified, so it's not possible to continue with the installation.
-        $Self->Is(
-            $Selenium->execute_script("return \$('button[type=\"submit\"][value=\"Continue\"]').length"),
-            '0',
-            'Continue button not available because package is not verified'
-        );
-
-        $Self->True(
-            index(
-                $Selenium->get_page_source(),
-                'The installation of packages which are not verified by the OTRS Group is not possible by default.'
-            ) > 0,
-            'Message for aborting installation of package is displayed'
-        );
-
-        # Allow web server to pick up the changed config setting.
-        sleep 1;
-
-        $NavigateToAdminPackageManager->();
-
-        # Check for notification.
-        $Self->True(
-            $Selenium->execute_script(
-                'return $("div.MessageBox.Error p:contains(\'The installation of packages which are not verified by the OTRS Group is activated. These packages could threaten your whole system! It is recommended not to use unverified packages.\')").length',
-            ),
-            'Install warning for not verified packages is displayed',
-        );
-
-        $Selenium->find_element( '#FileUpload', 'css' )->send_keys($Location);
-
         $Selenium->execute_script('window.Core.App.PageLoadComplete = false;');
         $Selenium->find_element("//button[contains(.,'Install Package')]")->click();
         $Selenium->WaitFor(
@@ -225,12 +162,6 @@ $Selenium->RunTest(
             JavaScript =>
                 'return typeof(Core) == "object" && typeof(Core.App) == "object" && Core.App.PageLoadComplete'
         );
-
-        $CheckBreadcrumb->(
-            BreadcrumbText => 'Install Package:',
-        );
-
-        $ClickAction->("//button[\@value='Continue'][\@type='submit']");
 
         my $PackageCheck = $PackageObject->PackageIsInstalled(
             Name => 'Test',
@@ -280,26 +211,28 @@ $Selenium->RunTest(
         $Location = $ConfigObject->Get('Home') . '/scripts/test/sample/PackageManager/TestPackageIncompatible.opm';
         $Selenium->find_element( '#FileUpload', 'css' )->send_keys($Location);
 
-        $ClickAction->("//button[contains(.,'Install Package')]");
+        $Selenium->execute_script('window.Core.App.PageLoadComplete = false;');
 
-        $ClickAction->("//button[\@value='Continue'][\@type='submit']");
+        $ClickAction->("//button[contains(.,'Install Package')]");
 
         # Check if info for incompatible package is shown.
         $Self->True(
             $Selenium->execute_script(
-                "return \$('.WidgetSimple .Content h2:contains(\"Package installation requires a patch level update of OTRS\")').length;"
+                "return \$('.WidgetSimple .Content h2:contains(\"Package installation requires a patch level update of Znuny\")').length;"
             ),
             'Info for incompatible package is shown'
         );
+
+        my $Test = $ConfigObject->Get("Package::RepositoryList");
 
         # Set default repository list.
         $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Package::RepositoryList',
-            Value => {
+            Value => [{
                 Name => "Example repository 1",
                 URL  => "https://addons.znuny.com/api/addon_repos/",
-            },
+            }],
         );
 
         # Allow web server to pick up the changed SysConfig.
@@ -308,7 +241,7 @@ $Selenium->RunTest(
         $NavigateToAdminPackageManager->();
         $Selenium->InputFieldValueSet(
             Element => '#Source',
-            Value   => 'https://addons.znuny.com/api/addon_repos/',
+            Value   => 'Example repository 1',
         );
 
         $ClickAction->("//button[\@name=\'GetRepositoryList']");
