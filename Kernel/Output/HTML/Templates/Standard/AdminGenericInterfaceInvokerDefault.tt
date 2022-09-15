@@ -218,9 +218,9 @@
                             <div class="Clear"></div>
                         [% END %]
 
-                        <label for="AllAttachments">[% Translate("Add all attachments") | html %]:</label>
+                        <label for="GetAllArticleAttachments">[% Translate("Add all attachments") | html %]:</label>
                         <div class="Field">
-                            [% Data.AllAttachmentsStrg %]
+                            [% Data.GetAllArticleAttachmentsStrg %]
                             <p class="FieldExplanation">
                                 [% Translate("Add all attachments to invoker payload.") | html %]
                             </p>
