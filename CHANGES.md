@@ -222,6 +222,13 @@
  - 2021-06-15 Use ticket title as the default appointment title (#90). Thanks to Renée Bäcker (@reneeb). [#90](https://github.com/znuny/Znuny/pull/90)
  - 2021-06-15 Column list validation before saving agent preferences (#84). Thanks to Paweł Bogusławski (@pboguslawski). [#84](https://github.com/znuny/Znuny/pull/84)
 
+# 6.0.46 2022-09-21
+ - 2022-09-07 Fixed log flooding via Net::LDAP. Reduction of LDAP_SIZELIMIT_EXCEEDED messages. Thanks to Paweł Bogusławski (@pboguslawski). [PR#178](https://github.com/znuny/Znuny/pull/178)
+ - 2022-09-07 Improved nonexistent and invalid service names handling in postmaster filters. Thanks to Paweł Bogusławski (@pboguslawski). [PR#197](https://github.com/znuny/Znuny/pull/197)
+ - 2022-08-26 Fixed encoding of log output. Thanks to Roland Jäger and Bernhard Schmalhofer. [#286](https://github.com/znuny/Znuny/issues/286)
+ - 2022-08-22 Added check to prevent infinite loop to Core.UI.InputFields.js.
+ - 2022-08-18 Fixed usage of time zones that have become obsolete. Thanks to Christian Ullrich. [#281](https://github.com/znuny/Znuny/issues/281)
+
 # 6.0.45 2022-07-27
  - 2022-07-05 Attachment filenames in ticket zoom will now be truncated if they are too long to be displayed correctly.
  - 2022-06-23 Fixed issue with high CPU load on parsing e-mails in PostMaster filter DetectAttachment.
