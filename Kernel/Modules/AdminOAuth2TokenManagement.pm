@@ -104,22 +104,21 @@ sub _RequestTokenByAuthorizationCode {
         AuthorizationCode => $AuthorizationCodeParameters{AuthorizationCode},
         UserID            => $Self->{UserID},
     );
-    if ( !%Token ) {
-        return $LayoutObject->ErrorScreen(
-            Message =>
-                "Error requesting token for token config ID $AuthorizationCodeParameters{TokenConfigID} with authorization code '$AuthorizationCodeParameters{AuthorizationCode}'.",
-            Comment => Translatable('Please contact the administrator.'),
-        );
-    }
 
     my $TokenErrorMessage = $OAuth2TokenObject->GetTokenErrorMessage(
         TokenConfigID => $AuthorizationCodeParameters{TokenConfigID},
         UserID        => $Self->{UserID},
     );
-    if ( defined $TokenErrorMessage && length $TokenErrorMessage ) {
+
+    if ( !%Token || IsStringWithData($TokenErrorMessage) ) {
+        my $Message
+            = "Error requesting token for token config ID $AuthorizationCodeParameters{TokenConfigID} with authorization code '$AuthorizationCodeParameters{AuthorizationCode}'.";
+        if ( IsStringWithData($TokenErrorMessage) ) {
+            $Message .= " Error: $TokenErrorMessage";
+        }
+
         return $LayoutObject->ErrorScreen(
-            Message =>
-                "Error requesting token for token config ID $AuthorizationCodeParameters{TokenConfigID} with authorization code '$AuthorizationCodeParameters{AuthorizationCode}': $TokenErrorMessage.",
+            Message => $Message,
             Comment => Translatable('Please contact the administrator.'),
         );
     }

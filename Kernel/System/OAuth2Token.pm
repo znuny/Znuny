@@ -317,7 +317,7 @@ sub GetAuthorizationCodeParameters {
     if ( !$TokenConfigID ) {
         $LogObject->Log(
             Priority => 'error',
-            Message  => 'Token config ID could not retrieved from response to authorization code request.',
+            Message  => 'Token config ID could not be retrieved from response to authorization code request.',
         );
         return;
     }
@@ -531,11 +531,16 @@ sub RequestTokenByAuthorizationCode {
         return;
     }
 
+    my $TokenErrorMessage = $Self->GetTokenErrorMessage(
+        TokenConfigID => $Param{TokenConfigID},
+        UserID        => $Param{UserID},
+    ) // '';
+
     if ( $Response{Status} ne '200 OK' ) {
         $LogObject->Log(
             Priority => 'error',
             Message =>
-                "Response for request for token config with ID $Param{TokenConfigID} and request type '$RequestType' was not '200 OK'.",
+                "Response for request for token config with ID $Param{TokenConfigID} and request type '$RequestType' was not '200 OK'. $TokenErrorMessage",
         );
         return;
     }
@@ -548,7 +553,7 @@ sub RequestTokenByAuthorizationCode {
         $LogObject->Log(
             Priority => 'error',
             Message =>
-                "Error fetching token for token config with ID $Param{TokenConfigID} after updating it with response data of request of type '$RequestType'.",
+                "Error fetching token for token config with ID $Param{TokenConfigID} after updating it with response data of request of type '$RequestType'. $TokenErrorMessage",
         );
         return;
     }
@@ -732,11 +737,16 @@ sub RequestTokenByRefreshToken {
         return;
     }
 
+    my $TokenErrorMessage = $Self->GetTokenErrorMessage(
+        TokenConfigID => $Param{TokenConfigID},
+        UserID        => $Param{UserID},
+    ) // '';
+
     if ( $Response{Status} ne '200 OK' ) {
         $LogObject->Log(
             Priority => 'error',
             Message =>
-                "Response for request for token config with ID $Param{TokenConfigID} and request type '$RequestType' was not '200 OK'.",
+                "Response for request for token config with ID $Param{TokenConfigID} and request type '$RequestType' was not '200 OK'. $TokenErrorMessage",
         );
         return;
     }
@@ -749,7 +759,7 @@ sub RequestTokenByRefreshToken {
         $LogObject->Log(
             Priority => 'error',
             Message =>
-                "Error fetching token for token config with ID $Param{TokenConfigID} after updating it with response data of request of type '$RequestType'.",
+                "Error fetching token for token config with ID $Param{TokenConfigID} after updating it with response data of request of type '$RequestType'. $TokenErrorMessage",
         );
         return;
     }
