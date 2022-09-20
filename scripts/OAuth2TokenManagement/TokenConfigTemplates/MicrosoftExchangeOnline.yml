@@ -13,7 +13,7 @@
           Parameters:
             response_mode: query
             response_type: code
-          URL: https://login.microsoftonline.com/consumers/oauth2/v2.0/authorize
+          URL: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
         Response:
           ParametersMapping:
             code: AuthorizationCode
@@ -27,7 +27,7 @@
             redirect_uri: RedirectURL
           Parameters:
             grant_type: authorization_code
-          URL: https://login.microsoftonline.com/consumers/oauth2/v2.0/token
+          URL: https://login.microsoftonline.com/common/oauth2/v2.0/token
         Response:
           ParametersMapping:
             access_token: Token
@@ -44,7 +44,7 @@
             refresh_token: RefreshToken
           Parameters:
             grant_type: refresh_token
-          URL: https://login.microsoftonline.com/consumers/oauth2/v2.0/token
+          URL: https://login.microsoftonline.com/common/oauth2/v2.0/token
         Response:
           ParametersMapping:
             access_token: Token
@@ -57,4 +57,4 @@
     Notifications:
         NotifyOnExpiredToken: 1
         NotifyOnExpiredRefreshToken: 1
-  Name: Microsoft Outlook (consumers)
+  Name: Microsoft Exchange Online

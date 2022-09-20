@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.878056732963808;
+    $Self->{Completeness}        = 0.877627505295747;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1474,6 +1474,9 @@ sub Data {
             '',
         'Client ID' => '',
         'Client secret' => '',
+        'URL for authorization code' => '',
+        'URL for token by authorization code' => '',
+        'URL for token by refresh token' => '',
         'Template' => 'Modelo',
         'This is the template that was used to create this OAuth2 token configuration.' =>
             '',

@@ -62,7 +62,7 @@
                             <span class="Marker">*</span> [% Translate("Name") | html %]:
                         </label>
                         <div class="Field">
-                            <input type="text" id="Name" name="Name" value="[% Data.Name | html %]" class="W20pc Validate_Required [% Data.NameInvalid | html %]" maxlength="250" />
+                            <input type="text" id="Name" name="Name" value="[% Data.Name | html %]" class="W33pc Validate_Required [% Data.NameInvalid | html %]" maxlength="250" />
                             <div id="NameError" class="TooltipErrorMessage">
                                 <p>[% Translate("This field is required.") | html %]</p>
                             </div>
@@ -81,7 +81,7 @@
                             <span class="Marker">*</span> [% Translate("Client ID") | html %]:
                         </label>
                         <div class="Field">
-                            <input type="text" id="ClientID" name="ClientID" value="[% Data.ClientID | html %]" class="W20pc Validate_Required [% Data.ClientIDInvalid | html %]" />
+                            <input type="text" id="ClientID" name="ClientID" value="[% Data.ClientID | html %]" class="W33pc Validate_Required [% Data.ClientIDInvalid | html %]" />
                             <div id="ClientIDError" class="TooltipErrorMessage">
                                 <p>[% Translate("This field is required.") | html %]</p>
                             </div>
@@ -95,11 +95,53 @@
                             <span class="Marker">*</span> [% Translate("Client secret") | html %]:
                         </label>
                         <div class="Field">
-                            <input type="text" id="ClientSecret" name="ClientSecret" value="[% Data.ClientSecret | html %]" class="W20pc Validate_Required [% Data.ClientSecretInvalid | html %]" />
+                            <input type="text" id="ClientSecret" name="ClientSecret" value="[% Data.ClientSecret | html %]" class="W33pc Validate_Required [% Data.ClientSecretInvalid | html %]" />
                             <div id="ClientSecretError" class="TooltipErrorMessage">
                                 <p>[% Translate("This field is required.") | html %]</p>
                             </div>
                             <div id="ClientSecretServerError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                        </div>
+                        <div class="Clear"></div>
+
+                        <label class="Mandatory" for="AuthorizationCodeRequestURL">
+                            <span class="Marker">*</span> [% Translate("URL for authorization code") | html %]:
+                        </label>
+                        <div class="Field">
+                            <input type="text" id="AuthorizationCodeRequestURL" name="AuthorizationCodeRequestURL" value="[% Data.AuthorizationCodeRequestURL | html %]" class="W33pc Validate_Required [% Data.AuthorizationCodeRequestURLInvalid | html %]" />
+                            <div id="AuthorizationCodeRequestURLError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                            <div id="AuthorizationCodeRequestURLServerError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                        </div>
+                        <div class="Clear"></div>
+
+                        <label class="Mandatory" for="TokenByAuthorizationCodeRequestURL">
+                            <span class="Marker">*</span> [% Translate("URL for token by authorization code") | html %]:
+                        </label>
+                        <div class="Field">
+                            <input type="text" id="TokenByAuthorizationCodeRequestURL" name="TokenByAuthorizationCodeRequestURL" value="[% Data.TokenByAuthorizationCodeRequestURL | html %]" class="W33pc Validate_Required [% Data.TokenByAuthorizationCodeRequestURLInvalid | html %]" />
+                            <div id="TokenByAuthorizationCodeRequestURLError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                            <div id="TokenByAuthorizationCodeRequestURLServerError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                        </div>
+                        <div class="Clear"></div>
+
+                        <label class="Mandatory" for="TokenByRefreshTokenRequestURL">
+                            <span class="Marker">*</span> [% Translate("URL for token by refresh token") | html %]:
+                        </label>
+                        <div class="Field">
+                            <input type="text" id="TokenByRefreshTokenRequestURL" name="TokenByRefreshTokenRequestURL" value="[% Data.TokenByRefreshTokenRequestURL | html %]" class="W33pc Validate_Required [% Data.TokenByRefreshTokenRequestURLInvalid | html %]" />
+                            <div id="TokenByRefreshTokenRequestURLError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                            <div id="TokenByRefreshTokenRequestURLServerError" class="TooltipErrorMessage">
                                 <p>[% Translate("This field is required.") | html %]</p>
                             </div>
                         </div>

@@ -25388,3 +25388,15 @@ msgstr "Intern"
 msgid "Filter for Appointments"
 msgstr ""
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
+msgid "URL for authorization code"
+msgstr "URL für Autorisierungscode"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
+msgid "URL for token by authorization code"
+msgstr "URL für Token per Autorisierungscode"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
+msgid "URL for token by refresh token"
+msgstr "URL für Token per Refresh-Token"
+

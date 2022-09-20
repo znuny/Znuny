@@ -314,11 +314,17 @@ sub _EditTokenConfig {
     $Output .= $LayoutObject->Output(
         TemplateFile => 'AdminOAuth2TokenManagement/Edit',
         Data         => {
-            ID                          => $TokenConfigID,
-            TemplateName                => $TokenConfig{Config}->{TemplateName},
-            Name                        => $TokenConfig{Name},
-            ClientID                    => $TokenConfig{Config}->{ClientID},
-            ClientSecret                => $TokenConfig{Config}->{ClientSecret},
+            ID           => $TokenConfigID,
+            TemplateName => $TokenConfig{Config}->{TemplateName},
+            Name         => $TokenConfig{Name},
+            ClientID     => $TokenConfig{Config}->{ClientID},
+            ClientSecret => $TokenConfig{Config}->{ClientSecret},
+            AuthorizationCodeRequestURL =>
+                $TokenConfig{Config}->{Requests}->{AuthorizationCode}->{Request}->{URL},
+            TokenByAuthorizationCodeRequestURL =>
+                $TokenConfig{Config}->{Requests}->{TokenByAuthorizationCode}->{Request}->{URL},
+            TokenByRefreshTokenRequestURL =>
+                $TokenConfig{Config}->{Requests}->{TokenByRefreshToken}->{Request}->{URL},
             NotifyOnExpiredToken        => $TokenConfig{Config}->{Notifications}->{NotifyOnExpiredToken},
             NotifyOnExpiredRefreshToken => $TokenConfig{Config}->{Notifications}->{NotifyOnExpiredRefreshToken},
             ValidIDSelection            => $ValidIDSelection,
@@ -378,9 +384,15 @@ sub _AddTokenConfigByTemplateFile {
             TokenConfigTemplateName     => $TokenConfigTemplate->{Name},
 
             # Leave name initially empty for admin to fill out.
-            Name                 => '',
-            ClientID             => $TokenConfigTemplate->{Config}->{ClientID},
-            ClientSecret         => $TokenConfigTemplate->{Config}->{ClientSecret},
+            Name         => '',
+            ClientID     => $TokenConfigTemplate->{Config}->{ClientID},
+            ClientSecret => $TokenConfigTemplate->{Config}->{ClientSecret},
+            AuthorizationCodeRequestURL =>
+                $TokenConfigTemplate->{Config}->{Requests}->{AuthorizationCode}->{Request}->{URL},
+            TokenByAuthorizationCodeRequestURL =>
+                $TokenConfigTemplate->{Config}->{Requests}->{TokenByAuthorizationCode}->{Request}->{URL},
+            TokenByRefreshTokenRequestURL =>
+                $TokenConfigTemplate->{Config}->{Requests}->{TokenByRefreshToken}->{Request}->{URL},
             NotifyOnExpiredToken => $TokenConfigTemplate->{Config}->{Notifications}->{NotifyOnExpiredToken},
             NotifyOnExpiredRefreshToken =>
                 $TokenConfigTemplate->{Config}->{Notifications}->{NotifyOnExpiredRefreshToken},
@@ -404,7 +416,8 @@ sub _SaveTokenConfig {
     my %GetParam;
     for my $GetParam (
         qw(
-        ID TokenConfigTemplateFilename TokenConfigTemplateName Name ClientID ClientSecret ValidID
+        ID TokenConfigTemplateFilename TokenConfigTemplateName Name ClientID ClientSecret
+        AuthorizationCodeRequestURL TokenByAuthorizationCodeRequestURL TokenByRefreshTokenRequestURL ValidID
         NotifyOnExpiredToken NotifyOnExpiredRefreshToken ContinueAfterSave
         )
         )
@@ -416,7 +429,10 @@ sub _SaveTokenConfig {
 
     # Check for required fields
     REQUIREDFIELD:
-    for my $RequiredField (qw(Name ClientID ClientSecret ValidID)) {
+    for my $RequiredField (
+        qw(Name ClientID ClientSecret AuthorizationCodeRequestURL TokenByAuthorizationCodeRequestURL TokenByRefreshTokenRequestURL ValidID)
+        )
+    {
         next REQUIREDFIELD if defined $GetParam{$RequiredField} && length $GetParam{$RequiredField};
 
         $Errors{ $RequiredField . 'Invalid' } = 'ServerError';
@@ -467,15 +483,18 @@ sub _SaveTokenConfig {
         $Output .= $LayoutObject->Output(
             TemplateFile => 'AdminOAuth2TokenManagement/Edit',
             Data         => {
-                ID                          => $GetParam{ID},
-                TokenConfigTemplateFilename => $GetParam{TokenConfigTemplateFilename},
-                TokenConfigTemplateName     => $GetParam{TokenConfigTemplateName},
-                Name                        => $GetParam{Name},
-                ClientID                    => $GetParam{ClientID},
-                ClientSecret                => $GetParam{ClientSecret},
-                NotifyOnExpiredToken        => $GetParam{NotifyOnExpiredToken},
-                NotifyOnExpiredRefreshToken => $GetParam{NotifyOnExpiredRefreshToken},
-                ValidIDSelection            => $ValidIDSelection,
+                ID                                 => $GetParam{ID},
+                TokenConfigTemplateFilename        => $GetParam{TokenConfigTemplateFilename},
+                TokenConfigTemplateName            => $GetParam{TokenConfigTemplateName},
+                Name                               => $GetParam{Name},
+                ClientID                           => $GetParam{ClientID},
+                ClientSecret                       => $GetParam{ClientSecret},
+                AuthorizationCodeRequestURL        => $GetParam{AuthorizationCodeRequestURL},
+                TokenByAuthorizationCodeRequestURL => $GetParam{TokenByAuthorizationCodeRequestURL},
+                TokenByRefreshTokenRequestURL      => $GetParam{TokenByRefreshTokenRequestURL},
+                NotifyOnExpiredToken               => $GetParam{NotifyOnExpiredToken},
+                NotifyOnExpiredRefreshToken        => $GetParam{NotifyOnExpiredRefreshToken},
+                ValidIDSelection                   => $ValidIDSelection,
                 %Errors,
             },
         );
@@ -498,9 +517,15 @@ sub _SaveTokenConfig {
             );
         }
 
-        $TokenConfig{Name}                                            = $GetParam{Name};
-        $TokenConfig{Config}->{ClientID}                              = $GetParam{ClientID};
-        $TokenConfig{Config}->{ClientSecret}                          = $GetParam{ClientSecret};
+        $TokenConfig{Name}                   = $GetParam{Name};
+        $TokenConfig{Config}->{ClientID}     = $GetParam{ClientID};
+        $TokenConfig{Config}->{ClientSecret} = $GetParam{ClientSecret};
+        $TokenConfig{Config}->{Requests}->{AuthorizationCode}->{Request}->{URL}
+            = $GetParam{AuthorizationCodeRequestURL};
+        $TokenConfig{Config}->{Requests}->{TokenByAuthorizationCode}->{Request}->{URL}
+            = $GetParam{TokenByAuthorizationCodeRequestURL};
+        $TokenConfig{Config}->{Requests}->{TokenByRefreshToken}->{Request}->{URL}
+            = $GetParam{TokenByRefreshTokenRequestURL};
         $TokenConfig{Config}->{Notifications}->{NotifyOnExpiredToken} = $GetParam{NotifyOnExpiredToken} ? 1 : 0;
         $TokenConfig{Config}->{Notifications}->{NotifyOnExpiredRefreshToken}
             = $GetParam{NotifyOnExpiredRefreshToken} ? 1 : 0;
@@ -531,10 +556,16 @@ sub _SaveTokenConfig {
         }
 
         my %TokenConfig = %{$TokenConfigTemplate};
-        $TokenConfig{Name}                                            = $GetParam{Name};
-        $TokenConfig{Config}->{TemplateName}                          = $GetParam{TokenConfigTemplateName};
-        $TokenConfig{Config}->{ClientID}                              = $GetParam{ClientID};
-        $TokenConfig{Config}->{ClientSecret}                          = $GetParam{ClientSecret};
+        $TokenConfig{Name}                   = $GetParam{Name};
+        $TokenConfig{Config}->{TemplateName} = $GetParam{TokenConfigTemplateName};
+        $TokenConfig{Config}->{ClientID}     = $GetParam{ClientID};
+        $TokenConfig{Config}->{ClientSecret} = $GetParam{ClientSecret};
+        $TokenConfig{Config}->{Requests}->{AuthorizationCode}->{Request}->{URL}
+            = $GetParam{AuthorizationCodeRequestURL};
+        $TokenConfig{Config}->{Requests}->{TokenByAuthorizationCode}->{Request}->{URL}
+            = $GetParam{TokenByAuthorizationCodeRequestURL};
+        $TokenConfig{Config}->{Requests}->{TokenByRefreshToken}->{Request}->{URL}
+            = $GetParam{TokenByRefreshTokenRequestURL};
         $TokenConfig{Config}->{Notifications}->{NotifyOnExpiredToken} = $GetParam{NotifyOnExpiredToken} ? 1 : 0;
         $TokenConfig{Config}->{Notifications}->{NotifyOnExpiredRefreshToken}
             = $GetParam{NotifyOnExpiredRefreshToken} ? 1 : 0;
