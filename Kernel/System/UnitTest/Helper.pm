@@ -112,13 +112,14 @@ sub new {
         $Self->{RestoreDatabase} = 1;
         my $StartedTransaction = $Self->BeginWork();
         $Self->{UnitTestDriverObject}->True( $StartedTransaction, 'Started database transaction.' );
-
     }
 
     # Disable scheduling of asynchronous tasks using C<AsynchronousExecutor> component of System daemon.
     if ( $Param{DisableAsyncCalls} ) {
         $Self->DisableAsyncCalls();
     }
+
+    $Self->_DisableDefaultSysConfigSettings();
 
     if ( $Param{DisableSysConfigs} ) {
         $Self->DisableSysConfigs(
@@ -923,6 +924,27 @@ sub DisableAsyncCalls {
         Valid => 1,
         Key   => 'DisableAsyncCalls',
         Value => 1,
+    );
+
+    return 1;
+}
+
+=head2 _DisableDefaultSysConfigSettings()
+
+These SysConfig options are disabled by default.
+
+=cut
+
+sub _DisableDefaultSysConfigSettings {
+    my ( $Self, %Param ) = @_;
+
+    my @DisableSysConfigs = (
+        'Ticket::EventModulePost###999-NotifyOnEmptyProcessTickets',
+        'Ticket::EventModulePost###Mentions',
+    );
+
+    $Self->DisableSysConfigs(
+        DisableSysConfigs => \@DisableSysConfigs,
     );
 
     return 1;

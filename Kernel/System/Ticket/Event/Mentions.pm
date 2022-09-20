@@ -41,16 +41,18 @@ sub Run {
     my $Triggers = $ConfigObject->Get('Mentions::RichTextEditor')->{Triggers};
 
     my $Body = $LayoutObject->ArticlePreview(
-        TicketID  => $Param{Data}{TicketID},
-        ArticleID => $Param{Data}{ArticleID}
+        TicketID  => $Param{Data}->{TicketID},
+        ArticleID => $Param{Data}->{ArticleID},
     );
     return {} if !IsStringWithData($Body);
 
-    my @Recipients = ( $Body =~ m{<a class="Mention" href=".*?" target=".*?">$Triggers->{User}(.*?)<\/a>}sg );
-    my %Recipients = map { $_ => 1 } @Recipients;
+    my $TriggerUser  = $Triggers->{User};
+    my $TriggerGroup = $Triggers->{Group};
 
-    my @RecipientGroups
-        = ( $Body =~ m{<a class="GroupMention" href=".*?" target=".*?">$Triggers->{Group}(.*?)<\/a>}sg );
+    my @Recipients      = ( $Body =~ m{<a class="Mention" href=".*?" target=".*?">$TriggerUser(.*?)<\/a>}sg );
+    my %Recipients      = map { $_ => 1 } @Recipients;
+    my @RecipientGroups = ( $Body =~ m{<a class="GroupMention" href=".*?" target=".*?">$TriggerGroup(.*?)<\/a>}sg );
+
     my $GroupUsers = {};
     if (@RecipientGroups) {
         $GroupUsers = $Self->_GetUserFromGroup(
@@ -70,8 +72,8 @@ sub Run {
 
     $MentionObject->SendNotification(
         Recipients => \%Recipients,
-        TicketID   => $Param{Data}{TicketID},
-        ArticleID  => $Param{Data}{ArticleID},
+        TicketID   => $Param{Data}->{TicketID},
+        ArticleID  => $Param{Data}->{ArticleID},
         UserID     => $Param{UserID},
     );
 
@@ -107,7 +109,6 @@ sub _GetUserFromGroup {
     my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
 
     my $Groups = $Param{Groups};
-
     my %Recipients;
 
     GROUP:
@@ -115,7 +116,6 @@ sub _GetUserFromGroup {
         my $GroupID = $GroupObject->GroupLookup(
             Group => $Group,
         );
-
         next GROUP if !$GroupID;
 
         my %UserList = $GroupObject->PermissionGroupUserGet(
@@ -125,7 +125,6 @@ sub _GetUserFromGroup {
 
         %Recipients = ( %Recipients, %UserList );
     }
-
     %Recipients = map { $_ => 1 } values %Recipients;
 
     return \%Recipients;
