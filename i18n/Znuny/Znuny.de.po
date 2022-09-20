@@ -25400,3 +25400,11 @@ msgstr "URL für Token per Autorisierungscode"
 msgid "URL for token by refresh token"
 msgstr "URL für Token per Refresh-Token"
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "These groups won't be selectable to be mentioned."
+msgstr "Diese Gruppen stehen nicht für Erwähnungen zur Auswahl."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Limits number of users (per article) that will be marked as mentioned and be notified. Users (and users from mentioned groups) that exceed this limit will silently be ignored."
+msgstr "Begrenzt die Anzahl der Benutzer (pro Artikel), die als erwähnt markiert und benachrichtigt werden sollen. Benutzer (und Benutzer aus erwähnten Gruppen), die dieses Limit überschreiten, werden ohne Hinweis ignoriert."
+

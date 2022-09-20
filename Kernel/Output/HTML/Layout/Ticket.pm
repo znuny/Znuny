@@ -1147,7 +1147,7 @@ sub TimeUnits {
     # that have been used by other templates in the process (e.g. 'TimeUnits' in AgentTicketBulk template).
     my $LocalLayoutObject = Kernel::Output::HTML::Layout->new();
 
-    my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     $Param{ID}                ||= 'TimeUnits';
     $Param{Name}              ||= 'TimeUnits';

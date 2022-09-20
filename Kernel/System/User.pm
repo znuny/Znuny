@@ -1321,8 +1321,8 @@ sub SetPreferences {
     );
 
     # No update needed (treat undef and empty strings as equal).
-    my $UserValue = $User{ $Param{Key} } // '';
-    my $ParamValue = $Param{Value} // '';
+    my $UserValue  = $User{ $Param{Key} } // '';
+    my $ParamValue = $Param{Value}        // '';
     return 1 if $UserValue eq $ParamValue;
 
     # get user preferences config

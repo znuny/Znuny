@@ -270,7 +270,7 @@ sub Sync {
         if ( %SyncUser && !$UserID ) {
             $UserID = $UserObject->UserAdd(
                 UserLogin => $Param{User},
-                %SyncUser, # Must contain other parameters required by UserAdd.
+                %SyncUser,    # Must contain other parameters required by UserAdd.
                 UserType     => 'User',
                 ValidID      => 1,
                 ChangeUserID => 1,
@@ -334,6 +334,7 @@ sub Sync {
             my $AttributeChange;
             ATTRIBUTE:
             for my $Attribute ( sort keys %SyncUser ) {
+
                 # Treat undef and empty strings as equal.
                 my $SyncUserAttribute = $SyncUser{$Attribute} // '';
                 my $UserDataAttribute = $UserData{$Attribute} // '';
@@ -344,10 +345,10 @@ sub Sync {
 
             if ($AttributeChange) {
                 $UserObject->UserUpdate(
-                    ValidID   => $UserData{ValidID}, # May be not present in %SyncUser and is required by UserUpdate.
+                    ValidID   => $UserData{ValidID},    # May be not present in %SyncUser and is required by UserUpdate.
                     UserID    => $UserID,
                     UserLogin => $Param{User},
-                    %SyncUser, # Must contain other parameters required by UserUpdate.
+                    %SyncUser,                          # Must contain other parameters required by UserUpdate.
                     UserType     => 'User',
                     ChangeUserID => 1,
                 );

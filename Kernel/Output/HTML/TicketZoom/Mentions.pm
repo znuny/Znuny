@@ -38,23 +38,20 @@ sub Run {
         );
         next MENTION if !%User;
 
-        my $Removable = 0;
-        if (
-            $Param{Ticket}->{OwnerID} == $Self->{UserID}
-            || $Mention->{UserID} == $Self->{UserID}
-            )
-        {
-            $Removable = 1;
-        }
+        my $UserCanRemoveMention = $MentionObject->CanUserRemoveMention(
+            TicketID        => $Param{Ticket}->{TicketID},
+            MentionedUserID => $Mention->{UserID},
+            UserID          => $Self->{UserID},              # user who wants to remove the mention
+        );
 
         $Users{ $User{UserID} } = 1;
-        my $UserDescription = "$User{UserLogin} ($User{UserEmail})";
+
         $LayoutObject->Block(
             Name => "User",
             Data => {
-                UserFullname => $UserDescription,
+                UserFullname => $User{UserFullname},
                 UserID       => $User{UserID},
-                Removable    => $Removable,
+                Removable    => $UserCanRemoveMention,
             }
         );
     }

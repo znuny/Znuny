@@ -224,13 +224,13 @@ Core.UI.RichTextEditor = (function (TargetNS) {
 
             CKEDITOR.config.mentions = [
                 {
-                    feed:           getUserData,
+                    feed:           getMentionUserData,
                     marker:         MentionsConfig.Triggers.User,
                     itemTemplate:   MentionsConfig.Templates.Users.ItemTemplate,
                     outputTemplate: MentionsConfig.Templates.Users.OutputTemplate
                 },
                 {
-                    feed:           getGroupData,
+                    feed:           getMentionGroupData,
                     marker:         MentionsConfig.Triggers.Group,
                     itemTemplate:   MentionsConfig.Templates.Groups.ItemTemplate,
                     outputTemplate: MentionsConfig.Templates.Groups.OutputTemplate
@@ -573,7 +573,7 @@ Core.UI.RichTextEditor = (function (TargetNS) {
         }
     };
 
-    function getUserData(opts, callback) {
+    function getMentionUserData(opts, callback) {
         Core.AJAX.FunctionCall(
             Core.Config.Get('Baselink'),
             {
@@ -591,7 +591,7 @@ Core.UI.RichTextEditor = (function (TargetNS) {
         );
     }
 
-    function getGroupData(opts, callback) {
+    function getMentionGroupData(opts, callback) {
         Core.AJAX.FunctionCall(
             Core.Config.Get('Baselink'),
             {

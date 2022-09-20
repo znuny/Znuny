@@ -25305,3 +25305,11 @@ msgstr ""
 msgid "URL for token by refresh token"
 msgstr ""
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "These groups won't be selectable to be mentioned."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Limits number of users (per article) that will be marked as mentioned and be notified. Users (and users from mentioned groups) that exceed this limit will silently be ignored."
+msgstr ""
+

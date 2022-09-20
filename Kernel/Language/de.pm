@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.997392862962359;
+    $Self->{Completeness}        = 0.997393712330998;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7911,6 +7911,9 @@ sub Data {
             'Rich-Text-Editor-Konfiguration für Autocompletion-Modul zur Unterstützung von Vorlagen.',
         'Defines which notifications about mentions should be sent.' => 'Bestimmt, welche Benachrichtigungen über Erwähnungen versendet werden sollen.',
         'Defines if the toolbar mention icon should count mentions.' => 'Erwähnungs-Icon in Toolbar soll Anzahl der Erwähnungen anzeigen.',
+        'These groups won\'t be selectable to be mentioned.' => 'Diese Gruppen stehen nicht für Erwähnungen zur Auswahl.',
+        'Limits number of users (per article) that will be marked as mentioned and be notified. Users (and users from mentioned groups) that exceed this limit will silently be ignored.' =>
+            'Begrenzt die Anzahl der Benutzer (pro Artikel), die als erwähnt markiert und benachrichtigt werden sollen. Benutzer (und Benutzer aus erwähnten Gruppen), die dieses Limit überschreiten, werden ohne Hinweis ignoriert.',
         'Frontend registration of triggers for mention plugin of CKEditor.' =>
             'Frontend-Registrierung für Trigger des CKEditor-Mention-Plugins.',
         'Frontend registration of input/output templates for mention plugin of CKEditor.' =>

@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.448753462603878;
+    $Self->{Completeness}        = 0.448607265026877;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -7917,6 +7917,9 @@ Mfano:
             '',
         'Defines which notifications about mentions should be sent.' => '',
         'Defines if the toolbar mention icon should count mentions.' => '',
+        'These groups won\'t be selectable to be mentioned.' => '',
+        'Limits number of users (per article) that will be marked as mentioned and be notified. Users (and users from mentioned groups) that exceed this limit will silently be ignored.' =>
+            '',
         'Frontend registration of triggers for mention plugin of CKEditor.' =>
             '',
         'Frontend registration of input/output templates for mention plugin of CKEditor.' =>

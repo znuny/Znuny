@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.184129053283363;
+    $Self->{Completeness}        = 0.184069066623229;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7911,6 +7911,9 @@ sub Data {
             '',
         'Defines which notifications about mentions should be sent.' => '',
         'Defines if the toolbar mention icon should count mentions.' => '',
+        'These groups won\'t be selectable to be mentioned.' => '',
+        'Limits number of users (per article) that will be marked as mentioned and be notified. Users (and users from mentioned groups) that exceed this limit will silently be ignored.' =>
+            '',
         'Frontend registration of triggers for mention plugin of CKEditor.' =>
             '',
         'Frontend registration of input/output templates for mention plugin of CKEditor.' =>

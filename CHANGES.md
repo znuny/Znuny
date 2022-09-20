@@ -1,4 +1,5 @@
 # 6.4.3 2022-09-21
+ - 2022-09-20 Misc. improvements for user mentions.
  - 2022-09-19 Added input fields for OAuth2 token request URLs to admin dialog. [#294](https://github.com/znuny/Znuny/issues/294)
  - 2022-09-16 Fixed handling of out-of-office flag in generic interface operation User::OutOfOffice.
  - 2022-09-15 Fixed option "add all attachments" not being available in dialog AdminGenericInterfaceInvokerDefault and not being evaluated in invoker Ticket::Generic.

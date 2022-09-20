@@ -806,8 +806,10 @@ sub _RenderAjax {
             );
             $FieldsProcessed{ $Self->{NameToID}{$CurrentField} } = 1;
         }
-        elsif ($Self->{NameToID}{$CurrentField} eq 'Article'
-            && $Param{GetParam}->{ElementChanged} eq 'StandardTemplateID' )
+        elsif (
+            $Self->{NameToID}{$CurrentField} eq 'Article'
+            && $Param{GetParam}->{ElementChanged} eq 'StandardTemplateID'
+            )
         {
             next DIALOGFIELD if $FieldsProcessed{ $Self->{NameToID}{$CurrentField} };
 

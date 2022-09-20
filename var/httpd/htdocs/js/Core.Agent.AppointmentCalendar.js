@@ -368,7 +368,7 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                     Title = Title.includes(Filter);
                 }
 
-                if( Title || Description || Filter.length < 1) {
+                if(Title || Description || Filter.length < 1) {
                     return true;
                 }
                 return false;
@@ -464,7 +464,7 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
             ],
             resourceLabelText: Core.Language.Translate('Resources')
         });
-        
+
         // Activate FilterAppointments
         $('#FilterAppointments').on('keyup',function(){
             $CalendarObj.fullCalendar('rerenderEvents');

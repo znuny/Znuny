@@ -2380,6 +2380,22 @@
             <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
+    <Setting Name="Mentions###BlockedGroups" Required="0" Valid="1">
+        <Description Translatable="1">These groups won't be selectable to be mentioned.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Array>
+                <Item></Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Mentions###Limit" Required="0" Valid="1">
+        <Description Translatable="1">Limits number of users (per article) that will be marked as mentioned and be notified. Users (and users from mentioned groups) that exceed this limit will silently be ignored.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="[1-9]\d*">20</Item>
+        </Value>
+    </Setting>
     <Setting Name="Mentions::RichTextEditor###Triggers" Required="0" Valid="1">
         <Description Translatable="1">Frontend registration of triggers for mention plugin of CKEditor.</Description>
         <Navigation>Core</Navigation>
@@ -2397,14 +2413,14 @@
             <Hash>
                 <Item Key="Users">
                     <Hash>
-                        <Item Key="ItemTemplate">&lt;li class="Mention" data-id="{id}"&gt;{fullname} ({email})&lt;/li&gt;</Item>
-                        <Item Key="OutputTemplate">&lt;a class="Mention" href="mailto:{email}"&gt;@{username}&lt;/a&gt; </Item>
+                        <Item Key="ItemTemplate">&lt;li class="Mention" data-id="{id}"&gt;{fullname}&lt;/li&gt;</Item>
+                        <Item Key="OutputTemplate">&lt;a class="Mention" href="#"&gt;@{username}&lt;/a&gt; </Item>
                     </Hash>
                 </Item>
                 <Item Key="Groups">
                     <Hash>
                         <Item Key="ItemTemplate">&lt;li class="Mention" data-id="{id}"&gt;{name} ({mentionLabel})&lt;/li&gt;</Item>
-                        <Item Key="OutputTemplate">&lt;a class="GroupMention" href="mailto:{emails}"&gt;{name}&lt;/a&gt; </Item>
+                        <Item Key="OutputTemplate">&lt;a class="GroupMention" href="#"&gt;{name}&lt;/a&gt; </Item>
                     </Hash>
                 </Item>
             </Hash>
@@ -2612,4 +2628,5 @@
             </Hash>
         </Value>
     </Setting>
+
 </otrs_config>
