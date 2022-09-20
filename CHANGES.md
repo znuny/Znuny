@@ -1,5 +1,6 @@
 # 6.4.3 2022-09-21
  - 2022-09-19 Added input fields for OAuth2 token request URLs to admin dialog. [#294](https://github.com/znuny/Znuny/issues/294)
+ - 2022-09-16 Fixed handling of out-of-office flag in generic interface operation User::OutOfOffice.
  - 2022-09-15 Fixed option "add all attachments" not being available in dialog AdminGenericInterfaceInvokerDefault and not being evaluated in invoker Ticket::Generic.
  - 2022-09-13 Fixed visible PluginContainer (AppointmentCalendar) when empty. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#292](https://github.com/znuny/Znuny/pull/292)
  - 2022-09-12 Fixed time units always mandatory in AgentTicketBulk. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#290](https://github.com/znuny/Znuny/pull/290)
