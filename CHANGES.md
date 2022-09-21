@@ -1,4 +1,4 @@
-# 6.0.46 2022-xx-xx
+# 6.0.46 2022-09-21
  - 2022-09-07 Fixed log flooding via Net::LDAP. Reduction of LDAP_SIZELIMIT_EXCEEDED messages. Thanks to Paweł Bogusławski (@pboguslawski). [PR#178](https://github.com/znuny/Znuny/pull/178)
  - 2022-09-07 Improved nonexistent and invalid service names handling in postmaster filters. Thanks to Paweł Bogusławski (@pboguslawski). [PR#197](https://github.com/znuny/Znuny/pull/197)
  - 2022-08-26 Fixed encoding of log output. Thanks to Roland Jäger and Bernhard Schmalhofer. [#286](https://github.com/znuny/Znuny/issues/286)
