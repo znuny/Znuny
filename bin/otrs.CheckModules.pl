@@ -395,6 +395,17 @@ my @NeededModules = (
         },
     },
     {
+        Module    => 'iCal::Parser',
+        Required  => 1,
+        Comment   => 'Required for calendar events.',
+        InstTypes => {
+            aptget => 'libical-parser-perl',
+            emerge => 'perl-core/iCal-Parser',
+            zypper => 'perl-iCal-Parser',
+            ports  => 'devel/p5-iCal-Parser',
+        },
+    },
+    {
         Module              => 'IO::Socket::SSL',
         Required            => 0,
         Comment             => 'Required for SSL connections to web and mail servers.',
@@ -650,6 +661,17 @@ my @NeededModules = (
             emerge => 'perl-core/Time-HiRes',
             zypper => 'perl-Time-HiRes',
             ports  => 'devel/p5-Time-HiRes',
+        },
+    },
+    {
+        Module    => 'Time::Piece',
+        Required  => 1,
+        Comment   => 'Required for calendar events.',
+        InstTypes => {
+            aptget => 'libtime-piece-perl',
+            emerge => 'perl-core/Time-Piece',
+            zypper => 'perl-Time-Piece',
+            ports  => 'devel/p5-Time-Piece',
         },
     },
     {

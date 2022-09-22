@@ -160,6 +160,14 @@ ul.Tablelike li.Header + li {
     overflow: visible;
 }
 
+.WidgetSimple > .Content > .WidgetMessage.CalendarEvents span.ShowCalendarEventsInfoOverlay {
+    cursor: pointer;
+}
+
+.WidgetSimple > .Content > .WidgetMessage.CalendarEvents span.ShowCalendarEventsInfoOverlay:hover {
+    filter: brightness(70%);
+}
+
 .WidgetSimple.QueueOverview > .Content {
     padding-bottom: 2px;
 }

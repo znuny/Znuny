@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.904544714122821;
+    $Self->{Completeness}        = 0.903073670515531;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2907,6 +2907,12 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
         'This message is being processed. Already tried to send %s time(s). Next try will be %s.' =>
             '이 메시지는 처리 중입니다. 이미 %s의 시간(s)을 보냈습니다. 다음 시도는 %s입니다.',
+        'This message contains events' => '',
+        'This message contains an event' => '',
+        'Show more information' => '',
+        'Start: %s, End: %s' => '',
+        'Calendar events details' => '',
+        'Calendar event details' => '',
         'To open links in the following article, you might need to press Ctrl or Cmd or Shift key while clicking the link (depending on your browser and OS).' =>
             '다음 문서에서 링크를 열려면 Ctrl 또는 Cmd 또는 Shift 키를 누른 상태에서 링크를 클릭해야합니다 (브라우저 및 OS에 따라 다름).',
         'Close this message' => '이 메시지를 닫습니다.',
@@ -4977,6 +4983,12 @@ sub Data {
 
         # Perl Module: Kernel/System/Calendar/Plugin/Ticket/Create.pm
         'On the date' => '',
+
+        # Perl Module: Kernel/System/CalendarEvents.pm
+        'on' => '',
+        'of year' => '',
+        'of month' => '',
+        'all-day' => '',
 
         # Perl Module: Kernel/System/Console/Command/Dev/Tools/Config2Docbook.pm
         'Configuration Options Reference' => '구성 옵션 참조',

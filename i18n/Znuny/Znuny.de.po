@@ -25408,3 +25408,43 @@ msgstr "Diese Gruppen stehen nicht für Erwähnungen zur Auswahl."
 msgid "Limits number of users (per article) that will be marked as mentioned and be notified. Users (and users from mentioned groups) that exceed this limit will silently be ignored."
 msgstr "Begrenzt die Anzahl der Benutzer (pro Artikel), die als erwähnt markiert und benachrichtigt werden sollen. Benutzer (und Benutzer aus erwähnten Gruppen), die dieses Limit überschreiten, werden ohne Hinweis ignoriert."
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "This message contains events"
+msgstr "Diese Nachricht enthält Events."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "This message contains an event"
+msgstr "Diese Nachricht enthält ein Event."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "Show more information"
+msgstr "Mehr Informationen anzeigen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "Start: %s, End: %s"
+msgstr "Start: %s, Ende: %s"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "Calendar events details"
+msgstr "Kalender-Events-Details"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "Calendar event details"
+msgstr "Kalender-Event-Details"
+
+#. Perl Module: Kernel/System/CalendarEvents.pm
+msgid "on"
+msgstr "an"
+
+#. Perl Module: Kernel/System/CalendarEvents.pm
+msgid "of year"
+msgstr "des Jahres"
+
+#. Perl Module: Kernel/System/CalendarEvents.pm
+msgid "of month"
+msgstr "des Monats"
+
+#. Perl Module: Kernel/System/CalendarEvents.pm
+msgid "all-day"
+msgstr "ganztägig"
+

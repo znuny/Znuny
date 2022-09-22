@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-09-20 08:06+0000\n"
+"POT-Creation-Date: 2022-09-22 08:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -8567,6 +8567,30 @@ msgid "This message is being processed. Already tried to send %s time(s). Next t
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "This message contains events"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "This message contains an event"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "Show more information"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "Start: %s, End: %s"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "Calendar events details"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "Calendar event details"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
 msgid "To open links in the following article, you might need to press Ctrl or Cmd or Shift key while clicking the link (depending on your browser and OS)."
 msgstr ""
 
@@ -14048,6 +14072,22 @@ msgstr ""
 
 #. Perl Module: Kernel/System/Calendar/Plugin/Ticket/Create.pm
 msgid "On the date"
+msgstr ""
+
+#. Perl Module: Kernel/System/CalendarEvents.pm
+msgid "on"
+msgstr ""
+
+#. Perl Module: Kernel/System/CalendarEvents.pm
+msgid "of year"
+msgstr ""
+
+#. Perl Module: Kernel/System/CalendarEvents.pm
+msgid "of month"
+msgstr ""
+
+#. Perl Module: Kernel/System/CalendarEvents.pm
+msgid "all-day"
 msgstr ""
 
 #. Perl Module: Kernel/System/Console/Command/Dev/Tools/Config2Docbook.pm

@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.546994624531683;
+    $Self->{Completeness}        = 0.546105057732965;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2910,6 +2910,12 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
         'This message is being processed. Already tried to send %s time(s). Next try will be %s.' =>
             '',
+        'This message contains events' => '',
+        'This message contains an event' => '',
+        'Show more information' => '',
+        'Start: %s, End: %s' => '',
+        'Calendar events details' => '',
+        'Calendar event details' => '',
         'To open links in the following article, you might need to press Ctrl or Cmd or Shift key while clicking the link (depending on your browser and OS).' =>
             'ในการเปิดการเชื่อมโยงในบทความต่อไปนี้คุณอาจต้องกด Ctrl หรือ Cmd หรือ Shift ค้างไว้ขณะที่คลิกที่ลิงค์ (ขึ้นอยู่กับเบราว์เซอร์ของคุณและ OS)',
         'Close this message' => 'ปิดข้อความนี้',
@@ -4980,6 +4986,12 @@ sub Data {
 
         # Perl Module: Kernel/System/Calendar/Plugin/Ticket/Create.pm
         'On the date' => '',
+
+        # Perl Module: Kernel/System/CalendarEvents.pm
+        'on' => '',
+        'of year' => '',
+        'of month' => '',
+        'all-day' => '',
 
         # Perl Module: Kernel/System/Console/Command/Dev/Tools/Config2Docbook.pm
         'Configuration Options Reference' => 'ตัวเลือกการกำหนดค่าอ้างอิง',

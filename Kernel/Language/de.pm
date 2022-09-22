@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.997393712330998;
+    $Self->{Completeness}        = 0.997397950886323;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2907,6 +2907,12 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
         'This message is being processed. Already tried to send %s time(s). Next try will be %s.' =>
             'Diese Nachricht wird gerade verarbeitet. Das Versenden wurde bereits %s mal probiert. Nächster Versuch um %s.',
+        'This message contains events' => 'Diese Nachricht enthält Events.',
+        'This message contains an event' => 'Diese Nachricht enthält ein Event.',
+        'Show more information' => 'Mehr Informationen anzeigen',
+        'Start: %s, End: %s' => 'Start: %s, Ende: %s',
+        'Calendar events details' => 'Kalender-Events-Details',
+        'Calendar event details' => 'Kalender-Event-Details',
         'To open links in the following article, you might need to press Ctrl or Cmd or Shift key while clicking the link (depending on your browser and OS).' =>
             'Um die Links im folgenden Artikel zu öffnen, kann es notwendig sein Strg oder Shift zu drücken, während auf den Link geklickt wird (abhängig vom verwendeten Browser und Betriebssystem).',
         'Close this message' => 'Diese Nachricht schließen',
@@ -4977,6 +4983,12 @@ sub Data {
 
         # Perl Module: Kernel/System/Calendar/Plugin/Ticket/Create.pm
         'On the date' => 'Am Datum',
+
+        # Perl Module: Kernel/System/CalendarEvents.pm
+        'on' => 'an',
+        'of year' => 'des Jahres',
+        'of month' => 'des Monats',
+        'all-day' => 'ganztägig',
 
         # Perl Module: Kernel/System/Console/Command/Dev/Tools/Config2Docbook.pm
         'Configuration Options Reference' => 'Referenz der Konfigurationsoptionen',
