@@ -1,5 +1,5 @@
-image: $CI_JOB_IMAGE
+image: $JOB_IMAGE
 
 include:
-  - project: $CI_INCLUDE_PROJECT
-    file: $CI_INCLUDE_FILE
+  - project: $INCLUDE_PROJECT
+    file: $INCLUDE_FILE
