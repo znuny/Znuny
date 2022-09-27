@@ -19,9 +19,12 @@ Znuny.Agent.TicketMention = (function (TargetNS) {
         var Data = {
             Action:    'Mentions',
             Subaction: 'Remove',
+            MentionedUserID: $('#RemoveMention').data('user-id'),
         };
 
-        $('#RemoveMention').on('click',function(){
+        $('#RemoveMention').on('click',function(Event){
+            Event.preventDefault();
+
             $('.MasterAction').each(function(){
                 var TicketID  = $(this).attr('id').replace('TicketID_', '');
                 Data.TicketID = TicketID;
