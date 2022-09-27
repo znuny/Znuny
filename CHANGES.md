@@ -1,4 +1,5 @@
 # 6.4.4 2022-??-??
+ - 2022-08-27 Fixed TransitionValidation CheckValueGet() - Added already replaced value 'FieldValue'.
  - 2022-08-27 Added FilterViews for FilterAppointments function.
  - 2022-08-27 Changed way of ticket acl checking for AgentTicketActionCommon from name to login.
  - 2022-08-26 Fixed Bug in SupportDataCollector plugin for default user.
