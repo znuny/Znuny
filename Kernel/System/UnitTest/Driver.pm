@@ -71,6 +71,9 @@ sub new {
     $Self->{ResultDataFile} = $Kernel::OM->Get('Kernel::Config')->Get('Home') . '/var/tmp/UnitTest.dump';
     unlink $Self->{ResultDataFile};    # purge if exists
 
+    # add TestFile
+    $Self->{TestFile} = $Param{TestFile};
+
     return $Self;
 }
 
@@ -476,8 +479,8 @@ sub AttachSeleniumScreenshot {
 
     push @{ $Self->{ResultData}->{Results}->{ $Self->{TestCount} }->{Screenshots} },
         {
-        Filename => $Param{Filename},
-        Content  => $Param{Content},
+            Filename => $Param{Filename},
+            Content  => $Param{Content},
         };
 
     return;

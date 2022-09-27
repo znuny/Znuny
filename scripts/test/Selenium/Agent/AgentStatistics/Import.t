@@ -117,7 +117,7 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentStatistics;Subaction=Import");
 
         # Import test selenium statistic.
-        my $LocationNotExistingObject = $ConfigObject->Get('Home')
+        my $LocationNotExistingObject = $Selenium->{Home}
             . "/scripts/test/sample/Stats/Stats.Static.NotExisting.xml";
         $Selenium->find_element( "#File", 'css' )->send_keys($LocationNotExistingObject);
 
@@ -142,7 +142,7 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentStatistics;Subaction=Import");
 
         # Import test selenium statistic.
-        my $Location = $ConfigObject->Get('Home')
+        my $Location = $Selenium->{Home}
             . "/scripts/test/sample/Stats/Stats.TicketOverview.de.xml";
         $Selenium->find_element( "#File", 'css' )->send_keys($Location);
 

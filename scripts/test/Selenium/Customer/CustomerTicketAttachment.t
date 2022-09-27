@@ -62,7 +62,7 @@ $Selenium->RunTest(
         my $SubjectRandom  = "Subject" . $HelperObject->GetRandomID();
         my $TextRandom     = "Text" . $HelperObject->GetRandomID();
         my $AttachmentName = "StdAttachment-Test1.txt";
-        my $Location       = $Kernel::OM->Get('Kernel::Config')->Get('Home')
+        my $Location       = $Selenium->{Home}
             . "/scripts/test/sample/StdAttachment/$AttachmentName";
 
         # Hide DnDUpload and show input field.

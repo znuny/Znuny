@@ -337,6 +337,7 @@ sub _HandleFile {
                 Verbose      => $Self->{Verbose},
                 ANSI         => $Self->{ANSI},
                 DataDiffType => $Param{DataDiffType},
+                TestFile     => $Param{File},
             },
         );
 

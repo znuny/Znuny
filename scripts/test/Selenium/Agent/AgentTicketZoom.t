@@ -163,7 +163,7 @@ $Selenium->RunTest(
 
         # Get image attachment.
         my $AttachmentName = "StdAttachment-Test1.png";
-        my $Location       = $ConfigObject->Get('Home')
+        my $Location       = $Selenium->{Home}
             . "/scripts/test/sample/StdAttachment/$AttachmentName";
         my $ContentRef = $Kernel::OM->Get('Kernel::System::Main')->FileRead(
             Location => $Location,

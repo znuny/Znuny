@@ -77,7 +77,7 @@ $Selenium->RunTest(
         );
 
         # Write test sample email as article plain.
-        my $Location = $ConfigObject->Get('Home')
+        my $Location = $Selenium->{Home}
             . "/scripts/test/sample/EmailParser/PostMaster-Test1.box";
 
         my $ContentRef = $Kernel::OM->Get('Kernel::System::Main')->FileRead(

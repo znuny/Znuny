@@ -262,7 +262,7 @@ jobs:
       - name: Run UnitTests
         run: |
           su -c "bin/otrs.CheckSum.pl -a create" - otrs
-          su -c "bin/otrs.Console.pl Dev::UnitTest::Run ${{ inputs.unittest_options }}" - otrs
+          su -c "bin/otrs.Console.pl Dev::UnitTest::Run ${{ inputs.unittest_options }} --exclude-directory Selenium" - otrs
 
   Selenium-Base:
     name: Selenium:Base
@@ -275,6 +275,7 @@ jobs:
       MYSQL_ROOT_PASSWORD: "secret"
       MYSQL_PASSWORD: "secret"
       MYSQL_DATABASE: "otrs"
+      SELENIUM_SCREENSHOTS: "true"
     services:
       mariadb:
         image: mariadb:10
@@ -303,7 +304,7 @@ jobs:
       - name: Run UnitTests
         run: |
           su -c "bin/otrs.CheckSum.pl -a create" - otrs
-          su -c "bin/otrs.Console.pl Dev::UnitTest::Run --directory UnitTest/Selenium" - otrs
+          su -c "bin/otrs.Console.pl Dev::UnitTest::Run --directory Selenium/Base" - otrs
 
       - name: Archive screenshots from selenium
         if: failure()
@@ -311,7 +312,7 @@ jobs:
         with:
           name: Download all selenium screenshots
           retention-days: 1
-          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/*.png
+          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/**/*
           if-no-files-found: ignore
 
 
@@ -326,6 +327,7 @@ jobs:
       MYSQL_ROOT_PASSWORD: "secret"
       MYSQL_PASSWORD: "secret"
       MYSQL_DATABASE: "otrs"
+      SELENIUM_SCREENSHOTS: "true"
     services:
       mariadb:
         image: mariadb:10
@@ -362,7 +364,7 @@ jobs:
         with:
           name: Download all selenium screenshots
           retention-days: 1
-          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/*.png
+          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/**/*
           if-no-files-found: ignore
 
 
@@ -377,6 +379,7 @@ jobs:
       MYSQL_ROOT_PASSWORD: "secret"
       MYSQL_PASSWORD: "secret"
       MYSQL_DATABASE: "otrs"
+      SELENIUM_SCREENSHOTS: "true"
     services:
       mariadb:
         image: mariadb:10
@@ -413,7 +416,7 @@ jobs:
         with:
           name: Download all selenium screenshots
           retention-days: 1
-          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/*.png
+          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/**/*
           if-no-files-found: ignore
 
 
@@ -428,6 +431,7 @@ jobs:
       MYSQL_ROOT_PASSWORD: "secret"
       MYSQL_PASSWORD: "secret"
       MYSQL_DATABASE: "otrs"
+      SELENIUM_SCREENSHOTS: "true"
     services:
       mariadb:
         image: mariadb:10
@@ -464,7 +468,7 @@ jobs:
         with:
           name: Download all selenium screenshots
           retention-days: 1
-          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/*.png
+          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/**/*
           if-no-files-found: ignore
 
 
@@ -479,6 +483,7 @@ jobs:
       MYSQL_ROOT_PASSWORD: "secret"
       MYSQL_PASSWORD: "secret"
       MYSQL_DATABASE: "otrs"
+      SELENIUM_SCREENSHOTS: "true"
     services:
       mariadb:
         image: mariadb:10
@@ -515,7 +520,7 @@ jobs:
         with:
           name: Download all selenium screenshots
           retention-days: 1
-          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/*.png
+          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/**/*
           if-no-files-found: ignore
 
 
@@ -530,6 +535,7 @@ jobs:
       MYSQL_ROOT_PASSWORD: "secret"
       MYSQL_PASSWORD: "secret"
       MYSQL_DATABASE: "otrs"
+      SELENIUM_SCREENSHOTS: "true"
     services:
       mariadb:
         image: mariadb:10
@@ -566,7 +572,7 @@ jobs:
         with:
           name: Download all selenium screenshots
           retention-days: 1
-          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/*.png
+          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/**/*
           if-no-files-found: ignore
 
 
@@ -581,6 +587,7 @@ jobs:
       MYSQL_ROOT_PASSWORD: "secret"
       MYSQL_PASSWORD: "secret"
       MYSQL_DATABASE: "otrs"
+      SELENIUM_SCREENSHOTS: "true"
     services:
       mariadb:
         image: mariadb:10
@@ -617,5 +624,6 @@ jobs:
         with:
           name: Download all selenium screenshots
           retention-days: 1
-          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/*.png
+          path: |
+            /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/**/*
           if-no-files-found: ignore

@@ -12,7 +12,7 @@ sed -i 's/\(.*\$DIBI\$.*\)/\1                                                 \
         extra_capabilities => {                                               \
             chromeOptions => {                                                \
                 # disable-infobars makes sure window size calculations are ok \
-                args => [ "disable-infobars" ],                               \
+                args => [ "disable-gpu", "disable-infobars" ],                \
             },                                                                \
         },                                                                    \
     },\n/' /opt/otrs/Kernel/Config.pm

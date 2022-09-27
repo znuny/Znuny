@@ -323,10 +323,11 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketPhone");
 
         # Select <Queue>.
-        my $QueueValue = "$QueueID1||<Queue>$RandomID";
+        my $QueueValue = "<Queue>$RandomID";
+        my $QueueValueSet = $QueueID1 . "||" . $QueueValue;
         $Selenium->InputFieldValueSet(
             Element => '#Dest',
-            Value   => $QueueValue,
+            Value   => $QueueValueSet,
         );
 
         # Wait for loader.
@@ -334,26 +335,28 @@ $Selenium->RunTest(
 
         # Check Queue #1 is displayed as selected.
         $Self->Is(
-            $Selenium->find_element( '#Dest', 'css' )->get_value(),
+            $Selenium->InputGet( Attribute => 'Dest', Options => { KeyOrValue => 'Value' } ),
             $QueueValue,
             'Queue #1 is selected.',
         );
 
         # Check Queue #1 is displayed properly.
         $Self->Is(
-            $Selenium->find_element( '#Dest', 'css' )->get_value(),
-            $QueueID1 . "||<Queue>$RandomID",
+            $Selenium->InputGet( Attribute => 'Dest', Options => { KeyOrValue => 'Value' } ),
+            $QueueValue,
             'Queue #1 is selected.',
         );
 
         # Select SubQueue on loading screen.
         # Bug#12819 ( https://bugs.otrs.org/show_bug.cgi?id=12819 ) - queue contains spaces in the name.
         # Navigate to AgentTicketPhone screen again to check selecting a queue after loading screen.
-        $QueueValue = $QueueID2 . "||Junk::SubQueue $RandomID  $RandomID";
+        $QueueValue    = "Junk::SubQueue $RandomID  $RandomID";
+        $QueueValueSet = $QueueID2 . "||" . $QueueValue;
+
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketPhone");
         $Selenium->InputFieldValueSet(
             Element => '#Dest',
-            Value   => $QueueValue,
+            Value   => $QueueValueSet,
         );
 
         # Wait for loader.
@@ -361,7 +364,7 @@ $Selenium->RunTest(
 
         # Check SubQueue is displayed properly.
         $Self->Is(
-            $Selenium->find_element( '#Dest', 'css' )->get_value(),
+            $Selenium->InputGet( Attribute => 'Dest', Options => { KeyOrValue => 'Value' } ),
             $QueueValue,
             'Queue #2 is selected.',
         );

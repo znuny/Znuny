@@ -346,7 +346,7 @@ JAVASCRIPT
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # Import existing template without overwrite.
-        my $Location = $ConfigObject->Get('Home')
+        my $Location = $Selenium->{Home}
             . "/scripts/test/sample/NotificationEvent/Export_Notification_Appointment_reminder_notification.yml";
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
 
@@ -364,7 +364,7 @@ JAVASCRIPT
         );
 
         # Import existing template with overwrite.
-        $Location = $ConfigObject->Get('Home')
+        $Location = $Selenium->{Home}
             . "/scripts/test/sample/NotificationEvent/Export_Notification_Appointment_reminder_notification.yml";
         $Selenium->find_element( "#FileUpload",                     'css' )->send_keys($Location);
         $Selenium->find_element( "#OverwriteExistingNotifications", 'css' )->click();

@@ -31,6 +31,13 @@ $Selenium->RunTest(
         mkpath( [$CertPath],    0, 0770 );    ## no critic
         mkpath( [$PrivatePath], 0, 0770 );    ## no critic
 
+        # enable SecureMode
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'SecureMode',
+            Value => 1,
+        );
+
         # make sure to enable cloud services
         $HelperObject->ConfigSettingChange(
             Valid => 1,
