@@ -1,4 +1,5 @@
 # 6.4.4 2022-??-??
+ - 2022-08-27 Changed way of ticket acl checking for AgentTicketActionCommon from name to login.
  - 2022-08-26 Fixed Bug in SupportDataCollector plugin for default user.
  - 2022-08-10 Added support for ICS calendar events attachments/string data. Added information section and modal dialog for calendar events to AgentTicketZoom view.
 
