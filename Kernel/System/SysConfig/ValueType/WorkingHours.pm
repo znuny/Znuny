@@ -190,7 +190,7 @@ sub EffectiveValueGet {
 
         HOUR:
         for my $Hour ( @{ $Component->{Item} } ) {
-            next HOUR if !$Hour->{Content};
+            next HOUR if $Hour->{Content} !~ m{^([0-9]|1[0-9]|2[0-3])$}msx;
 
             push @{ $Result{ $Component->{ValueName} } }, $Hour->{Content};
         }
