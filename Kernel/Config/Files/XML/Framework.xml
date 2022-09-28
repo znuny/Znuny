@@ -402,25 +402,11 @@
             <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
-    <Setting Name="Frontend::RichTextPath" Required="1" Valid="1" ConfigLevel="200">
+    <Setting Name="Frontend::RichText::Path" Required="1" Valid="1" ConfigLevel="200">
         <Description Translatable="1">Defines the URL rich text editor path.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Frontend::WebPath&gt;js/thirdparty/ckeditor-4.17.1/</Item>
-        </Value>
-    </Setting>
-    <Setting Name="Frontend::RichTextWidth" Required="1" Valid="1">
-        <Description Translatable="1">Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).</Description>
-        <Navigation>Frontend::Base</Navigation>
-        <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">620</Item>
-        </Value>
-    </Setting>
-    <Setting Name="Frontend::RichTextHeight" Required="1" Valid="1">
-        <Description Translatable="1">Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).</Description>
-        <Navigation>Frontend::Base</Navigation>
-        <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">320</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::RichText::DefaultCSS" Required="1" Valid="1">
@@ -442,6 +428,48 @@
         <Navigation>Frontend::Base</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Settings###Width" Required="1" Valid="1">
+        <Description Translatable="1">Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+%?$">620</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Settings###Height" Required="1" Valid="1">
+        <Description Translatable="1">Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+%?$">320</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Settings###FontSizes" Required="1" Valid="1">
+        <Description Translatable="1">Defines the selectable font sizes in the rich text editor.</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Item ValueType="String">8px;10px;12px;14px;16px;18px;20px;22px;24px;26px;28px;30px;</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Settings###FontNames" Required="1" Valid="1">
+        <Description Translatable="1">Defines the selectable fonts in the rich text editor.</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Item ValueType="String">Arial/Arial, Helvetica, sans-serif;Calibri/Calibri, sans-serif;Comic Sans MS/Comic Sans MS, cursive;Courier New/Courier New, Courier, monospace;Georgia/Georgia, serif;Lucida Sans Unicode/Lucida Sans Unicode, Lucida Grande, sans-serif;Tahoma/Tahoma, Geneva, sans-serif;Times New Roman/Times New Roman, Times, serif;Trebuchet MS/Trebuchet MS, Helvetica, sans-serif;Verdana/Verdana, Geneva, sans-serif</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Settings###ExtraPlugins" Required="0" Valid="1">
+        <Description Translatable="1">Defines additional plugins for use in the rich text editor.</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Item ValueType="String">splitquote,contextmenu_linkopen,textwatcher,autocomplete,textmatch,autolink,image2,mentions</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Settings###ExtraAllowedContent" Required="0" Valid="1">
+        <Description Translatable="1">Defines extra content that is allowed for use in the rich text editor.</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Item ValueType="String">div[type]{*}; img[*]; col[width]; style[*]{*}; *[id](*)</Item>
         </Value>
     </Setting>
     <Setting Name="DisableLoginAutocomplete" Required="0" Valid="1">
