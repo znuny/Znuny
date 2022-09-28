@@ -34,7 +34,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.628557489022605;
+    $Self->{Completeness}        = 0.62814887046969;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -5751,14 +5751,19 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
         'Uses richtext for viewing and editing: articles, salutations, signatures, standard templates, auto responses and notifications.' =>
             'Puoi utilizzare l\'editor RichText per modificare: articoli, saluti, firme, templates standard, risposte automatiche e notifiche.',
         'Defines the URL rich text editor path.' => 'Definisce la path URL del rich text editor.',
-        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            '',
-        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            '',
         'Defines the default CSS used in rich text editors.' => '',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.).' =>
             '',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.) in customer interface.' =>
+            '',
+        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            '',
+        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            '',
+        'Defines the selectable font sizes in the rich text editor.' => '',
+        'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines additional plugins for use in the rich text editor.' => '',
+        'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>

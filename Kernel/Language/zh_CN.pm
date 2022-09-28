@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.931858838835583;
+    $Self->{Completeness}        = 0.931253047294003;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -5745,15 +5745,20 @@ sub Data {
         'Uses richtext for viewing and editing: articles, salutations, signatures, standard templates, auto responses and notifications.' =>
             '查看和编辑以下内容时使用富文本：信件、问候语、签名、标准模板、自动响应和通知。',
         'Defines the URL rich text editor path.' => '定义富文本编辑器的URL地址。',
-        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            '定义富文本编辑器组件的宽度。输入数值（像素值）或百分比值（相对值）。',
-        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            '定义富文本编辑器组件的高度。输入数值（像素值）或百分比值（相对值）。',
         'Defines the default CSS used in rich text editors.' => '定义用于富文本编辑器的默认CSS。',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.).' =>
             '定义是否使用增强模式（启用表格、替换、下标、上标、从WORD粘贴等功能）。',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.) in customer interface.' =>
             '定义客户界面是否使用增强模式（启用表格、替换、下标、上标、从WORD粘贴等功能）。',
+        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            '定义富文本编辑器组件的宽度。输入数值（像素值）或百分比值（相对值）。',
+        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            '定义富文本编辑器组件的高度。输入数值（像素值）或百分比值（相对值）。',
+        'Defines the selectable font sizes in the rich text editor.' => '',
+        'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines additional plugins for use in the rich text editor.' => '',
+        'Defines extra content that is allowed for use in the rich text editor.' =>
+            '',
         'Disable autocomplete in the login screen.' => '在登录屏幕中禁用自动完成功能。',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             '禁用HHTP头"X-Frame-Options: SAMEORIGIN" 以便允许OTRS可以包含在其它网址的IFrame框架中。禁用这个HTTP头可能有安全问题！仅在您知道您在干什么时才禁用它！',

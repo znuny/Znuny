@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.546105057732965;
+    $Self->{Completeness}        = 0.545750040630587;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -5741,14 +5741,19 @@ sub Data {
         'Uses richtext for viewing and editing: articles, salutations, signatures, standard templates, auto responses and notifications.' =>
             '',
         'Defines the URL rich text editor path.' => 'กำหนดเส้นทางแก้ไขข้อความของ URL ',
-        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            'กำหนดความกว้างสำหรับส่วนประกอบของการแก้ไขข้อความสำหรับหน้าจอนี้ ป้อนจำนวน (พิกเซล) หรือค่าร้อยละ (เทียบ)',
-        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            'กำหนดความสูงสำหรับคอมโพเนนต์แก้ไขข้อความ ใส่หมายเลข (พิกเซล) หรือค่าร้อยละ (เทียบ)',
         'Defines the default CSS used in rich text editors.' => 'กำหนด CSS เริ่มต้นที่ใช้ในการแก้ไขข้อความ',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.).' =>
             'กำหนดหากโหมดเสริมควรถูกใช้ (ช่วยให้สามารถใช้ตาราง, แทนที่,ดรรชนีล่าง,ดรรชนีบน,วางจากประโยคและอื่น ๆ )',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.) in customer interface.' =>
+            '',
+        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            'กำหนดความกว้างสำหรับส่วนประกอบของการแก้ไขข้อความสำหรับหน้าจอนี้ ป้อนจำนวน (พิกเซล) หรือค่าร้อยละ (เทียบ)',
+        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            'กำหนดความสูงสำหรับคอมโพเนนต์แก้ไขข้อความ ใส่หมายเลข (พิกเซล) หรือค่าร้อยละ (เทียบ)',
+        'Defines the selectable font sizes in the rich text editor.' => '',
+        'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines additional plugins for use in the rich text editor.' => '',
+        'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>

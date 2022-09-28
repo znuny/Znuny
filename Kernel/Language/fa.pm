@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.643844527565458;
+    $Self->{Completeness}        = 0.643425971071022;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -5744,15 +5744,20 @@ sub Data {
         'Uses richtext for viewing and editing: articles, salutations, signatures, standard templates, auto responses and notifications.' =>
             'استفاده از richtext برای مشاهده و ویرایش: مقالات، درود، امضا، قالب استاندارد، پاسخ خودکار و اطلاعیه ها.',
         'Defines the URL rich text editor path.' => 'تعریف می کند URL غنی مسیر ویرایشگر متن.',
-        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            'پهنای برای غنی جزء ویرایشگر متن. تعداد (پیکسل) یا ارزش درصد (نسبی) را وارد کنید.',
-        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            'تعریف می کند که ارتفاع برای غنی جزء ویرایشگر متن. تعداد (پیکسل) یا ارزش درصد (نسبی) را وارد کنید.',
         'Defines the default CSS used in rich text editors.' => 'تعریف می کند که CSS به طور پیش فرض مورد استفاده در ویرایشگرهای متن غنی است.',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.).' =>
             'تعریف می کند اگر حالت پیشرفته استفاده شود (را قادر می سازد استفاده از جدول، جایگزین، زیرنویس، بالانویس، چسباندن از Word، و غیره).',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.) in customer interface.' =>
             'تعریف می کند اگر حالت پیشرفته استفاده شود (را قادر می سازد استفاده از جدول، جایگزین، زیرنویس، بالانویس، چسباندن از Word، و غیره) در رابط مشتری می باشد.',
+        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            'پهنای برای غنی جزء ویرایشگر متن. تعداد (پیکسل) یا ارزش درصد (نسبی) را وارد کنید.',
+        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            'تعریف می کند که ارتفاع برای غنی جزء ویرایشگر متن. تعداد (پیکسل) یا ارزش درصد (نسبی) را وارد کنید.',
+        'Defines the selectable font sizes in the rich text editor.' => '',
+        'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines additional plugins for use in the rich text editor.' => '',
+        'Defines extra content that is allowed for use in the rich text editor.' =>
+            '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             'غیر فعال کردن HTTP هدر \ "X-قاب گزینه ها: SAMEORIGIN " اجازه می دهد OTRS به عنوان یک iframe در وب سایت های دیگر گنجانده شده است. غیر فعال کردن این هدر HTTP می تواند یک مسئله امنیتی! فقط آن را غیر فعال کنید، اگر شما می دانید آنچه شما انجام می دهند!',

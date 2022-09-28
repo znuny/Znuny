@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-09-22 08:23+0000\n"
+"POT-Creation-Date: 2022-09-23 12:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15775,14 +15775,6 @@ msgid "Defines the URL rich text editor path."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative)."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative)."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the default CSS used in rich text editors."
 msgstr ""
 
@@ -15792,6 +15784,30 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.) in customer interface."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative)."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative)."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the selectable font sizes in the rich text editor."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the selectable fonts in the rich text editor."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines additional plugins for use in the rich text editor."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines extra content that is allowed for use in the rich text editor."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml

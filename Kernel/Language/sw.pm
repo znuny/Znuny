@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.447877703691657;
+    $Self->{Completeness}        = 0.447586543149683;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -5741,14 +5741,19 @@ sub Data {
         'Uses richtext for viewing and editing: articles, salutations, signatures, standard templates, auto responses and notifications.' =>
             'Inatumia makala tajiri kwa kuangalia na kuhariri: makala, salamu, saini, vielezo vyenye viwango, majibu otomatiki na taarifa.',
         'Defines the URL rich text editor path.' => 'Inafafanua njia ya mhariri wa nakala tajiri ya URL.',
-        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            'Inafafanua upana kwa ajili ya kijenzi wa kihariri cha matini tajiri. Ingiza namba (pikseli) au thamani ya asilimia (inayohusiana).',
-        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            'Inafafanua urefu kwa kijenzi cha mhariri wa matini tajini kwa skrini hii. Ingiza namba (Pikseli) au thamani ya asilimia (Inayohusika).refu wa ',
         'Defines the default CSS used in rich text editors.' => 'Inafafanua CSS chaguo-msingi inayotumika katika wahariri wa matini tondoti.',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.).' =>
             'Inafafanua kama hali timizi ya uimarishaji itumike(Wezesha matumizi ya jedwali, kubadilisha,hati chini, hati juu, Bandika kutoka kwenye Word, n.k.).',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.) in customer interface.' =>
+            '',
+        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            'Inafafanua upana kwa ajili ya kijenzi wa kihariri cha matini tajiri. Ingiza namba (pikseli) au thamani ya asilimia (inayohusiana).',
+        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            'Inafafanua urefu kwa kijenzi cha mhariri wa matini tajini kwa skrini hii. Ingiza namba (Pikseli) au thamani ya asilimia (Inayohusika).refu wa ',
+        'Defines the selectable font sizes in the rich text editor.' => '',
+        'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines additional plugins for use in the rich text editor.' => '',
+        'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>

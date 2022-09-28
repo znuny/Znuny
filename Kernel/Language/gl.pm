@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.4763376158725;
+    $Self->{Completeness}        = 0.476027953843653;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5738,14 +5738,19 @@ sub Data {
         'Uses richtext for viewing and editing: articles, salutations, signatures, standard templates, auto responses and notifications.' =>
             'Usa texto rico para ver y editar: artigos, saúdos, sinaturas, modelos estandard, auto respostas e notificacións.',
         'Defines the URL rich text editor path.' => 'Define a ruta de texto enriquecido URL',
-        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            'Define a anchura para o compoñente do editor de texto rico. Introduzca número (pixeis) ou valor da porcentaxe (relativa).',
-        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            'Define a altura para o compoñente de editor de texto rico. Introduza en número (pixeis) ou valor porcentual (relativo).',
         'Defines the default CSS used in rich text editors.' => 'Define o CSS utilizado por defecto en editores de texto enriquecido.',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.).' =>
             'Define se o modo realzado debería ser utilizado (permite uso de mesa, substituír, subscript, superscript, pegar dende palabra, etc).',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.) in customer interface.' =>
+            '',
+        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            'Define a anchura para o compoñente do editor de texto rico. Introduzca número (pixeis) ou valor da porcentaxe (relativa).',
+        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            'Define a altura para o compoñente de editor de texto rico. Introduza en número (pixeis) ou valor porcentual (relativo).',
+        'Defines the selectable font sizes in the rich text editor.' => '',
+        'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines additional plugins for use in the rich text editor.' => '',
+        'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>

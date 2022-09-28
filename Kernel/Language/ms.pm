@@ -24,7 +24,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.559603187510164;
+    $Self->{Completeness}        = 0.55923939541687;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5737,14 +5737,19 @@ sub Data {
         'Uses richtext for viewing and editing: articles, salutations, signatures, standard templates, auto responses and notifications.' =>
             'Menggunakan richtext untuk melihat dan mengedit : artikel, tanda hormat, tandatangan, templat standard, respon auto dan pemberitahuan.',
         'Defines the URL rich text editor path.' => 'Mentakrifkan laluan URL editor teks kaya.',
-        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            'Mentakrifkan kelebaran untuk komponen editor teks beraneka. Masukkan nombor (piksel) atau nilai peratus (relatif).',
-        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            'Mentakrifkan ketinggian untuk komponent editor teks beraneka. Masukkan nombor (piksel) atau nilai peratus (relatif).',
         'Defines the default CSS used in rich text editors.' => 'Mentakrifkan CSS asal yang digunakan dalam editor teks kaya.',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.).' =>
             'Mentakrifkan jika mod dipertingkatkan harus digunakan (membolehkan penggunaan jadual, penggantian, subskrip, superskrip, tampal dari perkataan, dll).',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.) in customer interface.' =>
+            '',
+        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            'Mentakrifkan kelebaran untuk komponen editor teks beraneka. Masukkan nombor (piksel) atau nilai peratus (relatif).',
+        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            'Mentakrifkan ketinggian untuk komponent editor teks beraneka. Masukkan nombor (piksel) atau nilai peratus (relatif).',
+        'Defines the selectable font sizes in the rich text editor.' => '',
+        'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines additional plugins for use in the rich text editor.' => '',
+        'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>

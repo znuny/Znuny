@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.928281021304277;
+    $Self->{Completeness}        = 0.927677555663904;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5738,15 +5738,20 @@ sub Data {
         'Uses richtext for viewing and editing: articles, salutations, signatures, standard templates, auto responses and notifications.' =>
             'Користи richtekt формат за преглед и уређивање: чланака, поздрава, потписа, стандардних шаблона, аутоматских одговора и обавештења.',
         'Defines the URL rich text editor path.' => 'Дефинише URL Reach Text Editor путању.',
-        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            'Одређује ширину за компоненту rich text editor. Унеси број (пиксели) или процентуалну вредност (релативну).',
-        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            'Одређује висину за компоненту Rich Text Editor. Унеси број (пиксели) или процентуалну вредност (релативну).',
         'Defines the default CSS used in rich text editors.' => 'Дефинише подразумевани CSS употребљен у RTF уређивању.',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.).' =>
             'Određuje da li treba da se koristi poboljšani režim (omogućava korišćenje tabele, zamene, indeksiranja, eksponiranja, umetanja iz Word-a, itd.).',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.) in customer interface.' =>
             'Дефинише да ли ће се користити побољшани режим (омогућава коришћење табела, замене, индексирања, експонирања, уметања из Word-a, итд) у интерфејсу клијента.',
+        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            'Одређује ширину за компоненту rich text editor. Унеси број (пиксели) или процентуалну вредност (релативну).',
+        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            'Одређује висину за компоненту Rich Text Editor. Унеси број (пиксели) или процентуалну вредност (релативну).',
+        'Defines the selectable font sizes in the rich text editor.' => '',
+        'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines additional plugins for use in the rich text editor.' => '',
+        'Defines extra content that is allowed for use in the rich text editor.' =>
+            '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             'Онемогућава HTTP заглавље "X-Frame-Options: SAMEORIGIN" ради учитавања OTRS у оквиру IFRAME на другим странама. Онемогућавање овог HTTP заглавља сноси сигурносни ризик! Искључите га само ако знате шта радите!',

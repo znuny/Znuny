@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.903073670515531;
+    $Self->{Completeness}        = 0.902486591906387;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -5738,15 +5738,20 @@ sub Data {
         'Uses richtext for viewing and editing: articles, salutations, signatures, standard templates, auto responses and notifications.' =>
             '기사, 인사말, 서명, 표준 템플릿, 자동 응답 및 알림과 같은보기 및 편집을 위해 richtext를 사용합니다.',
         'Defines the URL rich text editor path.' => 'URL 서식있는 텍스트 편집기 경로를 정의합니다.',
-        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            '서식있는 텍스트 편집기 구성 요소의 너비를 정의합니다. 숫자 (픽셀) 또는 퍼센트 값 (상대)을 입력하십시오.',
-        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            '서식있는 텍스트 편집기 구성 요소의 높이를 정의합니다. 숫자 (픽셀) 또는 퍼센트 값 (상대)을 입력하십시오.',
         'Defines the default CSS used in rich text editors.' => '서식있는 텍스트 편집기에 사용되는 기본 CSS를 정의합니다.',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.).' =>
             '확장 모드를 사용해야하는지 정의합니다 (테이블, 바꾸기, 아래 첨자, 위 첨자, 단어 붙여 넣기 등 사용 가능).',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.) in customer interface.' =>
             '고객 인터페이스에서 확장 모드를 사용해야하는지 (테이블, 바꾸기, 아래첨자, 위 첨자, 단어에서 붙여넣기 등 사용가능) 정의합니다.',
+        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            '서식있는 텍스트 편집기 구성 요소의 너비를 정의합니다. 숫자 (픽셀) 또는 퍼센트 값 (상대)을 입력하십시오.',
+        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            '서식있는 텍스트 편집기 구성 요소의 높이를 정의합니다. 숫자 (픽셀) 또는 퍼센트 값 (상대)을 입력하십시오.',
+        'Defines the selectable font sizes in the rich text editor.' => '',
+        'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines additional plugins for use in the rich text editor.' => '',
+        'Defines extra content that is allowed for use in the rich text editor.' =>
+            '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             'HTTP 헤더 "X-Frame-Options : SAMEORIGIN"을 사용하지 않도록 설정하여 OTRS를 다른 웹 사이트의 IFrame으로 포함 할 수 있습니다. 이 HTTP 헤더를 비활성화하면 보안 문제가 발생할 수 있습니다! 자신이하는 일을 아는 경우에만 사용을 중지하십시오!',

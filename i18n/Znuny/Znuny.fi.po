@@ -25355,3 +25355,19 @@ msgstr ""
 msgid "all-day"
 msgstr ""
 
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the selectable font sizes in the rich text editor."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the selectable fonts in the rich text editor."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines additional plugins for use in the rich text editor."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines extra content that is allowed for use in the rich text editor."
+msgstr ""
+

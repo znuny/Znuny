@@ -37,7 +37,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.867132867132867;
+    $Self->{Completeness}        = 0.866569153258573;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5750,15 +5750,20 @@ sub Data {
         'Uses richtext for viewing and editing: articles, salutations, signatures, standard templates, auto responses and notifications.' =>
             'Использует форматированный текст для просмотра и редактирования: сообщений, приветствий, подписей, стандартных шаблонов, автоответов и уведомлений.',
         'Defines the URL rich text editor path.' => 'Задает путь в виде URL к rich text editor',
-        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            'Задает ширину окна текстового редактора. Введите число (пикселов) или значение в процентах.',
-        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            'Задает высоту окна текстового редактора. Введите число пикселей и значение в процентах.',
         'Defines the default CSS used in rich text editors.' => 'Задает стандартные CSS, используемые в текстовом редакторе (rich text editor).',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.).' =>
             'Включает расширенные средства редактирования.',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.) in customer interface.' =>
             'Включает расширенные средства редактирования (использование таблиц, замены, подстрочный индекс, надстрочный индекс, вставить из слова и т. д.) в интерфейсе клиента.',
+        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            'Задает ширину окна текстового редактора. Введите число (пикселов) или значение в процентах.',
+        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            'Задает высоту окна текстового редактора. Введите число пикселей и значение в процентах.',
+        'Defines the selectable font sizes in the rich text editor.' => '',
+        'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines additional plugins for use in the rich text editor.' => '',
+        'Defines extra content that is allowed for use in the rich text editor.' =>
+            '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             'Отключить HTTP-заголовок "X-Frame-Options: SAMEORIGIN", чтобы разрешить встраивать OTRS в IFrame на других сайтах. Отключение этого заголовка может вызвать проблемы с безопасностью! Отключайте только если уверены в своих действиях!',
