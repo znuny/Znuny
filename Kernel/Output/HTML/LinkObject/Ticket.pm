@@ -538,6 +538,7 @@ sub TableCreateComplex {
                         DynamicFieldConfig => $DynamicFieldConfig,
                         Value              => $Value,
                         ValueMaxChars      => 20,
+                        HTMLOutput         => 0,
                         LayoutObject       => $Self->{LayoutObject},
                     );
 
