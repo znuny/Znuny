@@ -239,7 +239,7 @@ sub Run {
             );
         }
 
-        if ( $ParamObject->GetParam( Param => 'Notification' ) eq 'Add' ) {
+        if ( ($ParamObject->GetParam( Param => 'Notification' ) || '') eq 'Add' ) {
 
             # add notification
             push @NotifyData, {
@@ -248,7 +248,7 @@ sub Run {
             };
         }
 
-        if ( $ParamObject->GetParam( Param => 'Notification' ) eq 'Update' ) {
+        if ( ($ParamObject->GetParam( Param => 'Notification' ) || '') eq 'Update' ) {
 
             # add notification
             push @NotifyData, {
