@@ -1,12 +1,13 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
 // did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 // --
-
+//  TODO delete me
+// nofilter(TidyAll::Plugin::OTRS::Common::Origin)
 "use strict";
 
 var Core = Core || {};
@@ -224,9 +225,20 @@ Core.UI.Dialog = (function (TargetNS) {
 
         var $Dialog, $Content, $ButtonFooter, HTMLBackup, DialogCopy, DialogCopySelector,
             DialogHTML,
+            DialogClass = '',
             FullsizeMode = false;
 
-        DialogHTML = '<div class="Dialog">';
+        if (Params['HTML'] && isJQueryObject(Params['HTML']) && Params['HTML'].innerWidth() <= 450){
+            DialogClass = 'modal-sm';
+        }
+        if (Params['HTML'] && isJQueryObject(Params['HTML']) && Params['HTML'].innerWidth() <= 750){
+            DialogClass = 'modal-md';
+        }
+        if (Params['HTML'] && isJQueryObject(Params['HTML']) && Params['HTML'].innerWidth() <= 1000){
+            DialogClass = 'modal-lg';
+        }
+
+        DialogHTML = '<div class="Dialog ' + DialogClass + '">';
         if (!Params.HideHeader) {
             DialogHTML += '<div class="Header"><a class="Close" title="' + Core.Language.Translate('Close this dialog') + '" href="#"><i class="fa fa-times"></i></a></div>';
         }
@@ -419,7 +431,12 @@ Core.UI.Dialog = (function (TargetNS) {
                     if (Value.Class) {
                         Classes += ' ' + Value.Class;
                     }
-                    $ButtonFooter.append('<button id="DialogButton' + (Index - 0 + 1) + '" class="' + Classes + '" type="button"><span>' + Value.Label + '</span></button> ');
+// ---
+// FORWWWARD
+// ---
+                    //added "btn-primary" & "btn-main" class
+                    $ButtonFooter.append('<button id="DialogButton' + (Index - 0 + 1) + '" class="' + Classes + ' btn-primary btn-main" type="button"><span>' + Value.Label + '</span></button> ');
+// ---
                 });
                 $ButtonFooter.appendTo($Content);
             }
@@ -478,11 +495,6 @@ Core.UI.Dialog = (function (TargetNS) {
 
         // Check window height and adjust the scrollable height of InnerContent
         AdjustScrollableHeight(Params.AllowAutoGrow);
-
-        // add resize css attribute
-        $('.Dialog:visible .Content').css('resize', 'both');
-        $('.Dialog:visible .Content').css('max-height', 'fit-content');
-        $('.Dialog:visible .Content .InnerContent').css('max-height', 'fit-content');
 
         // Adjust dialog position on mobile devices
         if (FullsizeMode) {
