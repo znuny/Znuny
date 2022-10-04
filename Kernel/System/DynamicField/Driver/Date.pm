@@ -348,7 +348,6 @@ sub EditFieldRender {
         $FieldName . 'Class'  => $FieldClass,
         DiffTime              => $DiffTime,
         $FieldName . Required => $Param{Mandatory} || 0,
-        $FieldName . Optional => 1,
         Validate              => 1,
         %{$FieldConfig},
         %YearsPeriodRange,
@@ -393,6 +392,10 @@ EOF
         %Param,
         Mandatory => $Param{Mandatory} || '0',
         FieldName => $FieldName . 'Used',
+
+        # add optional checkbox to DateTime field
+        Prefix                => $FieldName,
+        $FieldName . Optional => 1,
     );
 
     my $Data = {

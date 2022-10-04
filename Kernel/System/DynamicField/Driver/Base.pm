@@ -169,6 +169,30 @@ EOF
     }
     $HTMLString .= ":\n";
 
+    # optional checkbox
+    my $Prefix   = $Param{Prefix} || '';
+    my $Optional = $Param{ $Prefix . 'Optional' } || 0;
+
+    if ($Optional) {
+        my $Used    = $Param{ $Prefix . 'Used' } || 0;
+        my $Class   = $Param{ $Prefix . 'Class' } || '';
+        my $Checked = '';
+        if ($Used) {
+            $Checked = ' checked="checked"';
+        }
+
+        $HTMLString .= "<input type=\"checkbox\" name=\""
+            . $Prefix
+            . "Used\" id=\"" . $Prefix . "Used\" value=\"1\""
+            . $Checked
+            . " class=\"$Class\""
+            . " title=\""
+            . $Param{LayoutObject}->{LanguageObject}->Translate('Check to activate this date')
+            . "\" "
+            . ( $Param{Disabled} ? 'disabled="disabled"' : '' )
+            . "/>&nbsp;";
+    }
+
     # closing tag
     $HTMLString .= <<"EOF";
 </label>
