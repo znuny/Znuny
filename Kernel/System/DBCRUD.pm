@@ -36,6 +36,15 @@ our @ObjectDependencies = (
     'Kernel::System::DBCRUD::Format',
 );
 
+
+=head2 new()
+
+Don't use the constructor directly, use the ObjectManager instead:
+
+    my $DBCRUDObject = $Kernel::OM->Get('Kernel::System::DBCRUD');
+
+=cut
+
 sub new {
     my ( $Type, %Param ) = @_;
 

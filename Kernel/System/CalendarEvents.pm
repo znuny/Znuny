@@ -14,9 +14,9 @@ use warnings;
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
-    'Kernel::System::Log',
     'Kernel::Output::HTML::Layout',
     'Kernel::System::Cache',
+    'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::Ticket::Article',
 );
@@ -73,22 +73,23 @@ Parses calendar events of specified data.
         String      => $ArticleContent, # parse specified text content
         Attachments => { # parse attachments
             Data => {
-              '4' => {
-                       'Disposition' => 'attachment',
-                       'ContentType' => 'text/calendar; charset=UTF-8; name="Some calendar name.ics"',
-                       'Filename' => 'calendar.ics',
-                       'FilesizeRaw' => '949'
-                     },
-              '1' => {
-                       'Disposition' => 'attachment',
-                       'ContentType' => 'text/calendar; charset=UTF-8; name="Some calendar name1.ics"',
-                       'Filename' => 'calendar1.ics',
-                       'FilesizeRaw' => '2967'
-                     },
+                '4' => {
+                    'Disposition' => 'attachment',
+                    'ContentType' => 'text/calendar; charset=UTF-8; name="Some calendar name.ics"',
+                    'Filename'    => 'calendar.ics',
+                    'FilesizeRaw' => '949'
+                },
+                '1' => {
+                    'Disposition' => 'attachment',
+                    'ContentType' => 'text/calendar; charset=UTF-8; name="Some calendar name1.ics"',
+                    'Filename'    => 'calendar1.ics',
+                    'FilesizeRaw' => '2967'
+                },
             },
             Type => "Article", # specify type of attachments
         },
         ToTimeZone => $UserTimeZone,
+    );
 
 =cut
 
