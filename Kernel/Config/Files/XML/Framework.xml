@@ -402,7 +402,7 @@
             <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
-    <Setting Name="Frontend::RichText::Path" Required="1" Valid="1" ConfigLevel="200">
+    <Setting Name="Frontend::RichTextPath" Required="1" Valid="1" ConfigLevel="200">
         <Description Translatable="1">Defines the URL rich text editor path.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
