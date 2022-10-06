@@ -21,6 +21,7 @@ our @ObjectDependencies = (
     'Kernel::System::DynamicField::Backend',
     'Kernel::Config',
     'Kernel::System::Group',
+    'Kernel::System::JSON',
     'Kernel::System::Log',
     'Kernel::Output::HTML::Layout',
     'Kernel::System::User',
