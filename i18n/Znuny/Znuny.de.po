@@ -13143,7 +13143,7 @@ msgstr "Produktneuigkeiten können nicht vom Server abgerufen werden!"
 msgid "Can't connect to %s!"
 msgstr "Kein Verbindungsaufbau zu %s möglich!"
 
-#. Perl Module: Kernel/Output/HTML/Dashboard/TicketGeneric.pm
+#. Perl Module: Kernel/Output/HTML/Dashboard/MyLastChangedTickets.pm
 msgid "Shown Tickets"
 msgstr "Gezeigte Tickets"
 
@@ -25463,4 +25463,16 @@ msgstr "Definiert zusätzliche Plugins für die Verwendung im Rich-Text-Editor."
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines extra content that is allowed for use in the rich text editor."
 msgstr "Definiert zusätzliche Inhalte, die für die Verwendung im Rich-Text-Editor zugelassen sind."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
+msgid "No tickets found."
+msgstr "Keine Tickets gefunden."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "MyLastChangedTickets dashboard widget."
+msgstr ""
+
+#. SysConfig
+msgid "My last changed tickets"
+msgstr ""
 
