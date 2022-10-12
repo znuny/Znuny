@@ -25387,3 +25387,7 @@ msgstr ""
 msgid "My last changed tickets"
 msgstr ""
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
+msgid "Access token scope"
+msgstr ""
+
