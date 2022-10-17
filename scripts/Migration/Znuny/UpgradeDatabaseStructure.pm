@@ -51,6 +51,10 @@ sub Run {
             Message => 'Increase size of columns of database tables oauth2_token_config and oauth2_token',
             Module  => 'OAuth2Token',
         },
+        {
+            Message => 'Increase size of column of database table calendar_appointment_plugin',
+            Module  => 'CalendarAppointmentID',
+        },
     );
 
     return 1   if !@Tasks;
