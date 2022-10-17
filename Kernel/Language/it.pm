@@ -34,7 +34,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.62814887046969;
+    $Self->{Completeness}        = 0.62774078284879;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1481,6 +1481,7 @@ sub Data {
         'URL for authorization code' => '',
         'URL for token by authorization code' => '',
         'URL for token by refresh token' => '',
+        'Access token scope' => '',
         'Template' => 'Modello',
         'This is the template that was used to create this OAuth2 token configuration.' =>
             '',
@@ -2521,6 +2522,9 @@ sub Data {
         'Email ticket' => 'Ticket da Email',
         'New phone ticket from %s' => 'Nuovo Ticket telefonico da %s',
         'New email ticket to %s' => 'Nuovo Ticket via email da %s',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
+        'No tickets found.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardProductNotify.tt
         '%s %s is available!' => '%s %s è disponibile!',
@@ -4724,6 +4728,9 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Dashboard/EventsTicketCalendar.pm
         'The start time of a ticket has been set after the end time!' => '',
 
+        # Perl Module: Kernel/Output/HTML/Dashboard/MyLastChangedTickets.pm
+        'Shown Tickets' => 'Ticket visualizzati',
+
         # Perl Module: Kernel/Output/HTML/Dashboard/News.pm
         'Can\'t connect to OTRS News server!' => '',
         'Can\'t get OTRS News from server!' => '',
@@ -4736,7 +4743,6 @@ sub Data {
         'Can\'t connect to %s!' => '',
 
         # Perl Module: Kernel/Output/HTML/Dashboard/TicketGeneric.pm
-        'Shown Tickets' => 'Ticket visualizzati',
         'Shown Columns' => 'Mostra colonne',
         'filter not active' => 'filtro non attivo',
         'filter active' => 'filtro attivo',
@@ -7401,6 +7407,7 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
             '',
         'Parameters for the dashboard backend of the ticket stats of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
+        'MyLastChangedTickets dashboard widget.' => '',
         'Parameters for the dashboard backend of the upcoming events widget of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
         'Parameters for the dashboard backend of the queue overview widget of the agent interface. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "QueuePermissionGroup" is not mandatory, queues are only listed if they belong to this permission group if you enable it. "States" is a list of states, the key is the sort order of the state in the widget. "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
@@ -8917,6 +8924,7 @@ Thanks for your help!
         'My Queues' => 'Le mie code',
         'My Services' => 'I miei servizi',
         'My Tickets.' => 'I miei ticket.',
+        'My last changed tickets' => '',
         'NameX' => 'NomeX',
         'New Ticket' => 'Nuovo ticket',
         'New Tickets' => 'Nuovi ticket',

@@ -325,6 +325,8 @@ sub _EditTokenConfig {
                 $TokenConfig{Config}->{Requests}->{TokenByAuthorizationCode}->{Request}->{URL},
             TokenByRefreshTokenRequestURL =>
                 $TokenConfig{Config}->{Requests}->{TokenByRefreshToken}->{Request}->{URL},
+            Scope =>
+                $TokenConfig{Config}->{Scope},
             NotifyOnExpiredToken        => $TokenConfig{Config}->{Notifications}->{NotifyOnExpiredToken},
             NotifyOnExpiredRefreshToken => $TokenConfig{Config}->{Notifications}->{NotifyOnExpiredRefreshToken},
             ValidIDSelection            => $ValidIDSelection,
@@ -393,6 +395,8 @@ sub _AddTokenConfigByTemplateFile {
                 $TokenConfigTemplate->{Config}->{Requests}->{TokenByAuthorizationCode}->{Request}->{URL},
             TokenByRefreshTokenRequestURL =>
                 $TokenConfigTemplate->{Config}->{Requests}->{TokenByRefreshToken}->{Request}->{URL},
+            Scope =>
+                $TokenConfigTemplate->{Config}->{Scope},
             NotifyOnExpiredToken => $TokenConfigTemplate->{Config}->{Notifications}->{NotifyOnExpiredToken},
             NotifyOnExpiredRefreshToken =>
                 $TokenConfigTemplate->{Config}->{Notifications}->{NotifyOnExpiredRefreshToken},
@@ -417,7 +421,7 @@ sub _SaveTokenConfig {
     for my $GetParam (
         qw(
         ID TokenConfigTemplateFilename TokenConfigTemplateName Name ClientID ClientSecret
-        AuthorizationCodeRequestURL TokenByAuthorizationCodeRequestURL TokenByRefreshTokenRequestURL ValidID
+        AuthorizationCodeRequestURL TokenByAuthorizationCodeRequestURL TokenByRefreshTokenRequestURL Scope ValidID
         NotifyOnExpiredToken NotifyOnExpiredRefreshToken ContinueAfterSave
         )
         )
@@ -492,6 +496,7 @@ sub _SaveTokenConfig {
                 AuthorizationCodeRequestURL        => $GetParam{AuthorizationCodeRequestURL},
                 TokenByAuthorizationCodeRequestURL => $GetParam{TokenByAuthorizationCodeRequestURL},
                 TokenByRefreshTokenRequestURL      => $GetParam{TokenByRefreshTokenRequestURL},
+                Scope                              => $GetParam{Scope},
                 NotifyOnExpiredToken               => $GetParam{NotifyOnExpiredToken},
                 NotifyOnExpiredRefreshToken        => $GetParam{NotifyOnExpiredRefreshToken},
                 ValidIDSelection                   => $ValidIDSelection,
@@ -526,6 +531,7 @@ sub _SaveTokenConfig {
             = $GetParam{TokenByAuthorizationCodeRequestURL};
         $TokenConfig{Config}->{Requests}->{TokenByRefreshToken}->{Request}->{URL}
             = $GetParam{TokenByRefreshTokenRequestURL};
+        $TokenConfig{Config}->{Scope} = $GetParam{Scope};
         $TokenConfig{Config}->{Notifications}->{NotifyOnExpiredToken} = $GetParam{NotifyOnExpiredToken} ? 1 : 0;
         $TokenConfig{Config}->{Notifications}->{NotifyOnExpiredRefreshToken}
             = $GetParam{NotifyOnExpiredRefreshToken} ? 1 : 0;
@@ -566,6 +572,7 @@ sub _SaveTokenConfig {
             = $GetParam{TokenByAuthorizationCodeRequestURL};
         $TokenConfig{Config}->{Requests}->{TokenByRefreshToken}->{Request}->{URL}
             = $GetParam{TokenByRefreshTokenRequestURL};
+        $TokenConfig{Config}->{Scope} = $GetParam{Scope};
         $TokenConfig{Config}->{Notifications}->{NotifyOnExpiredToken} = $GetParam{NotifyOnExpiredToken} ? 1 : 0;
         $TokenConfig{Config}->{Notifications}->{NotifyOnExpiredRefreshToken}
             = $GetParam{NotifyOnExpiredRefreshToken} ? 1 : 0;
