@@ -2854,7 +2854,7 @@ CREATE TABLE calendar_appointment (
 -- ----------------------------------------------------------
 CREATE TABLE calendar_appointment_plugin (
     id serial NOT NULL,
-    appointment_id SMALLINT NOT NULL,
+    appointment_id BIGINT NOT NULL,
     plugin_key VARCHAR (1000) NOT NULL,
     config VARCHAR NULL,
     create_time timestamp(0) NOT NULL,

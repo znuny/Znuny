@@ -2578,7 +2578,7 @@
 <!-- calender appointment plugin -->
 <Table Name="calendar_appointment_plugin">
     <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
-    <Column Name="appointment_id" Required="true" Type="SMALLINT"/>
+    <Column Name="appointment_id" Required="true" Type="BIGINT"/>
     <Column Name="plugin_key" Required="true" Size="1000" Type="VARCHAR"/>
     <Column Name="config" Required="false" Size="1000000" Type="VARCHAR"/>
     <Column Name="create_time" Required="true" Type="DATE"/>
