@@ -156,8 +156,9 @@ Example:
 Called URL: index.pl?Action=AdminSystemConfiguration;Subaction=Save;Name=Config::Option::Valid
 
     my @ParamNames = $ParamObject->GetParamNames();
+
     print join " :: ", @ParamNames;
-    #prints Action :: Subaction :: Name
+    # prints Action :: Subaction :: Name
 
 =cut
 

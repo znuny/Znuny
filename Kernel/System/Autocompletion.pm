@@ -19,6 +19,14 @@ our @ObjectDependencies = (
     'Kernel::System::Log',
 );
 
+=head2 new()
+
+Don't use the constructor directly, use the ObjectManager instead:
+
+    my $AutocompletionObject = $Kernel::OM->Get('Kernel::System::Autocompletion');
+
+=cut
+
 sub new {
     my ( $Type, %Param ) = @_;
     my $Self = {%Param};

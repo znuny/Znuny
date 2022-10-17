@@ -112,7 +112,9 @@ sub CreateUnitTest {
 
 =head2 GetHeader()
 
-This function creates the unittest header
+Creates the unittest header
+
+    my $Output = $TicketToUnitTestObject->GetHeader();
 
 Returns:
 
@@ -332,6 +334,11 @@ TIMESET
 
 This function creates an hash of all ticket attributes of current history entry
 
+    my %TicketAttributes = $TicketToUnitTestObject->GetTicketAttributes(
+        TicketAttributes => \%TicketAttributes,
+        HistoryTicket    => \%HistoryTicket,
+    );
+
 Returns:
 
     my %TicketAttributes = {
@@ -414,7 +421,9 @@ sub GetTicketAttributes {
 
 =head2 GetFooter()
 
-This function creates the unittest Footer
+Creates the unittest Footer.
+
+    my $Output = $TicketToUnitTestObject->GetFooter();
 
 Returns:
 
