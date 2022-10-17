@@ -286,6 +286,10 @@ $Selenium->RunTest(
         $Selenium->find_element("//button[\@id='MappingInboundConfigureButton']")->VerifiedClick();
 
         # Verify saved data.
+        $Selenium->WaitFor(
+            JavaScript => 'return $("#Template").val()[0] != "";'
+        );
+
         $Self->Is(
             $Selenium->find_element( "#Template", 'css' )->get_value(),
             $XSLTData,

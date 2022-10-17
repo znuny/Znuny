@@ -40,6 +40,172 @@ create an object
 
 =cut
 
+=head2 DataAdd()
+
+Add data to table.
+
+    my $Success = $OAuth2TokenConfigObject->DataAdd(
+        ID         => '...',
+        Name       => '...',
+        Config     => '...',
+        ValidID    => '...',
+        CreateTime => '...',
+        CreateBy   => '...',
+        ChangeTime => '...',
+        ChangeBy   => '...',
+    );
+
+Returns:
+
+    my $Success = 1;
+
+=cut
+
+
+=head2 DataUpdate()
+
+Update data attributes.
+
+    my $Success = $OAuth2TokenConfigObject->DataUpdate(
+        ID     => 1234,
+        UserID => 1,
+
+        # all other attributes are optional
+        Name       => '...',
+        Config     => '...',
+        ValidID    => '...',
+        CreateTime => '...',
+        CreateBy   => '...',
+        ChangeTime => '...',
+        ChangeBy   => '...',
+    );
+
+Returns:
+
+    my $Success = 1; # 1|0
+
+=cut
+
+
+=head2 DataGet()
+
+Get data attributes.
+
+    my %Data = $OAuth2TokenConfigObject->DataGet(
+        ID         => '...', # optional
+        Name       => '...', # optional
+        Config     => '...', # optional
+        ValidID    => '...', # optional
+        CreateTime => '...', # optional
+        CreateBy   => '...', # optional
+        ChangeTime => '...', # optional
+        ChangeBy   => '...', # optional
+    );
+
+Returns:
+
+    my %Data = (
+        ID         => '...',
+        Name       => '...',
+        Config     => '...',
+        ValidID    => '...',
+        CreateTime => '...',
+        CreateBy   => '...',
+        ChangeTime => '...',
+        ChangeBy   => '...',
+    );
+
+=cut
+
+=head2 DataListGet()
+
+Get list data with attributes.
+
+    my @Data = $OAuth2TokenConfigObject->DataListGet(
+        ID         => '...', # optional
+        Name       => '...', # optional
+        Config     => '...', # optional
+        ValidID    => '...', # optional
+        CreateTime => '...', # optional
+        CreateBy   => '...', # optional
+        ChangeTime => '...', # optional
+        ChangeBy   => '...', # optional
+    );
+
+Returns:
+
+    my @Data = (
+        {
+            ID         => '...',
+            Name       => '...',
+            Config     => '...',
+            ValidID    => '...',
+            CreateTime => '...',
+            CreateBy   => '...',
+            ChangeTime => '...',
+            ChangeBy   => '...',
+        },
+        ...
+    );
+
+=cut
+
+
+=head2 DataDelete()
+
+Remove data from table.
+
+    my $Success = $OAuth2TokenConfigObject->DataDelete(
+        ID         => '...', # optional
+        Name       => '...', # optional
+        Config     => '...', # optional
+        ValidID    => '...', # optional
+        CreateTime => '...', # optional
+        CreateBy   => '...', # optional
+        ChangeTime => '...', # optional
+        ChangeBy   => '...', # optional
+    );
+
+Returns:
+
+    my $Success = 1;
+
+=cut
+
+=head2 DataSearch()
+
+Search for value in defined attributes.
+
+    my %Data = $OAuth2TokenConfigObject->DataSearch(
+        Search     => 'test*test',
+        ID         => '...', # optional
+        Name       => '...', # optional
+        Config     => '...', # optional
+        ValidID    => '...', # optional
+        CreateTime => '...', # optional
+        CreateBy   => '...', # optional
+        ChangeTime => '...', # optional
+        ChangeBy   => '...', # optional
+    );
+
+Returns:
+
+    my %Data = (
+        '1' => {
+            ID         => '...',
+            Name       => '...',
+            Config     => '...',
+            ValidID    => '...',
+            CreateTime => '...',
+            CreateBy   => '...',
+            ChangeTime => '...',
+            ChangeBy   => '...',
+        },
+        ...
+    );
+
+=cut
+
 =head2 InitConfig()
 
 init config for object

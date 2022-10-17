@@ -262,7 +262,7 @@ jobs:
       - name: Run UnitTests
         run: |
           su -c "bin/otrs.CheckSum.pl -a create" - otrs
-          su -c "bin/otrs.Console.pl Dev::UnitTest::Run ${{ inputs.unittest_options }}" - otrs
+          su -c "bin/otrs.Console.pl Dev::UnitTest::Run ${{ inputs.unittest_options }} --exclude-directory Selenium" - otrs
 
   Selenium-Base:
     name: Selenium:Base
@@ -275,6 +275,7 @@ jobs:
       MYSQL_ROOT_PASSWORD: "secret"
       MYSQL_PASSWORD: "secret"
       MYSQL_DATABASE: "otrs"
+      SELENIUM_SCREENSHOTS: "true"
     services:
       mariadb:
         image: mariadb:10
@@ -303,7 +304,7 @@ jobs:
       - name: Run UnitTests
         run: |
           su -c "bin/otrs.CheckSum.pl -a create" - otrs
-          su -c "bin/otrs.Console.pl Dev::UnitTest::Run --directory UnitTest/Selenium" - otrs
+          su -c "bin/otrs.Console.pl Dev::UnitTest::Run --directory Selenium/Base" - otrs
 
       - name: Archive screenshots from selenium
         if: failure()
@@ -311,8 +312,61 @@ jobs:
         with:
           name: Download all selenium screenshots
           retention-days: 1
-          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/*.png
+          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/**/*
           if-no-files-found: ignore
+
+
+  Selenium-Admin:
+    name: Selenium:Admin
+    runs-on: ubuntu-latest
+    container: debian:10-slim
+    needs: UnitTest-MySQL
+    env:
+      DB: mysql
+      MYSQL_USER: "otrs"
+      MYSQL_ROOT_PASSWORD: "secret"
+      MYSQL_PASSWORD: "secret"
+      MYSQL_DATABASE: "otrs"
+      SELENIUM_SCREENSHOTS: "true"
+    services:
+      mariadb:
+        image: mariadb:10
+        env:
+          MYSQL_USER: "otrs"
+          MYSQL_ROOT_PASSWORD: "secret"
+          MYSQL_PASSWORD: "secret"
+          MYSQL_DATABASE: "otrs"
+      chrome:
+        image: selenium/standalone-chrome:3.141.59-oxygen
+        options: --shm-size="2g"
+        volumes:
+          - ${{ github.workspace }}:/opt/otrs
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        env:
+          fetch-depth: "1"
+
+      - name: Install dependencies
+        run: .github/workflows/ci/dependencies.sh
+
+      - name: Setup Znuny
+        run: .github/workflows/ci/setup.sh
+
+      - name: Run UnitTests
+        run: |
+          su -c "bin/otrs.CheckSum.pl -a create" - otrs
+          su -c "bin/otrs.Console.pl Dev::UnitTest::Run --directory Selenium/Agent/Admin" - otrs
+
+      - name: Archive screenshots from selenium
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Download all selenium screenshots
+          retention-days: 1
+          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/**/*
+          if-no-files-found: ignore
+
 
   Selenium-Agent:
     name: Selenium:Agent
@@ -325,6 +379,7 @@ jobs:
       MYSQL_ROOT_PASSWORD: "secret"
       MYSQL_PASSWORD: "secret"
       MYSQL_DATABASE: "otrs"
+      SELENIUM_SCREENSHOTS: "true"
     services:
       mariadb:
         image: mariadb:10
@@ -353,7 +408,7 @@ jobs:
       - name: Run UnitTests
         run: |
           su -c "bin/otrs.CheckSum.pl -a create" - otrs
-          su -c "bin/otrs.Console.pl Dev::UnitTest::Run --directory Selenium/Agent" - otrs
+          su -c "bin/otrs.Console.pl Dev::UnitTest::Run --directory Selenium/Agent --exclude-directory Selenium/Agent/Admin" - otrs
 
       - name: Archive screenshots from selenium
         if: failure()
@@ -361,8 +416,9 @@ jobs:
         with:
           name: Download all selenium screenshots
           retention-days: 1
-          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/*.png
+          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/**/*
           if-no-files-found: ignore
+
 
   Selenium-Customer:
     name: Selenium:Customer
@@ -375,6 +431,7 @@ jobs:
       MYSQL_ROOT_PASSWORD: "secret"
       MYSQL_PASSWORD: "secret"
       MYSQL_DATABASE: "otrs"
+      SELENIUM_SCREENSHOTS: "true"
     services:
       mariadb:
         image: mariadb:10
@@ -411,7 +468,7 @@ jobs:
         with:
           name: Download all selenium screenshots
           retention-days: 1
-          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/*.png
+          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/**/*
           if-no-files-found: ignore
 
 
@@ -426,6 +483,7 @@ jobs:
       MYSQL_ROOT_PASSWORD: "secret"
       MYSQL_PASSWORD: "secret"
       MYSQL_DATABASE: "otrs"
+      SELENIUM_SCREENSHOTS: "true"
     services:
       mariadb:
         image: mariadb:10
@@ -462,7 +520,7 @@ jobs:
         with:
           name: Download all selenium screenshots
           retention-days: 1
-          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/*.png
+          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/**/*
           if-no-files-found: ignore
 
 
@@ -477,6 +535,7 @@ jobs:
       MYSQL_ROOT_PASSWORD: "secret"
       MYSQL_PASSWORD: "secret"
       MYSQL_DATABASE: "otrs"
+      SELENIUM_SCREENSHOTS: "true"
     services:
       mariadb:
         image: mariadb:10
@@ -513,7 +572,7 @@ jobs:
         with:
           name: Download all selenium screenshots
           retention-days: 1
-          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/*.png
+          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/**/*
           if-no-files-found: ignore
 
 
@@ -528,6 +587,7 @@ jobs:
       MYSQL_ROOT_PASSWORD: "secret"
       MYSQL_PASSWORD: "secret"
       MYSQL_DATABASE: "otrs"
+      SELENIUM_SCREENSHOTS: "true"
     services:
       mariadb:
         image: mariadb:10
@@ -564,5 +624,6 @@ jobs:
         with:
           name: Download all selenium screenshots
           retention-days: 1
-          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/*.png
+          path: |
+            /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/**/*
           if-no-files-found: ignore

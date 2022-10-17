@@ -224,7 +224,7 @@ my @NeededModules = (
         Required  => 0,
         Comment   => 'X509 certificate support.',
         InstTypes => {
-            aptget => 'libcrypt-openssl-x509',
+            aptget => 'libcrypt-openssl-x509-perl',
             emerge => 'dev-perl/Crypt-OpenSSL-X509',
             zypper => 'perl-Crypt-OpenSSL-X509',
             ports  => 'security/p5-Crypt-OpenSSL-X509',
@@ -392,6 +392,17 @@ my @NeededModules = (
             emerge => 'dev-perl/Hash-Merge',
             zypper => 'perl-Hash-Merge',
             ports  => 'textproc/p5-Hash-Merge',
+        },
+    },
+    {
+        Module    => 'iCal::Parser',
+        Required  => 1,
+        Comment   => 'Required for calendar events.',
+        InstTypes => {
+            aptget => 'libical-parser-perl',
+            emerge => 'perl-core/iCal-Parser',
+            zypper => 'perl-iCal-Parser',
+            ports  => 'devel/p5-iCal-Parser',
         },
     },
     {
@@ -650,6 +661,17 @@ my @NeededModules = (
             emerge => 'perl-core/Time-HiRes',
             zypper => 'perl-Time-HiRes',
             ports  => 'devel/p5-Time-HiRes',
+        },
+    },
+    {
+        Module    => 'Time::Piece',
+        Required  => 1,
+        Comment   => 'Required for calendar events.',
+        InstTypes => {
+            aptget => 'libtime-piece-perl',
+            emerge => 'perl-core/Time-Piece',
+            zypper => 'perl-Time-Piece',
+            ports  => 'devel/p5-Time-Piece',
         },
     },
     {

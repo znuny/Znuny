@@ -147,7 +147,7 @@ my $SeleniumTest = sub {
 
     $Success = $SeleniumObject->InputSet(
         Attribute   => 'ServiceID',
-        WaitForAJAX => 0,
+        WaitForAJAX => 1,
         Content     => $Service,
         Options     => {
             KeyOrValue    => 'Value',

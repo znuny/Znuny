@@ -235,14 +235,7 @@ sub Run {
             $OutOfOfficePreferenceData{ 'OutOfOffice' . $DatePart . 'Day' }   = $3;
         }
 
-        $OutOfOfficePreferenceData{OutOfOffice} = $OutOfOfficeEntry->{OutOfOffice} // 0;
-        if (
-            !$OutOfOfficePreferenceData{OutOfOffice}
-            && keys %OutOfOfficePreferenceData == 7
-            )
-        {
-            $OutOfOfficePreferenceData{OutOfOffice} = 1;
-        }
+        $OutOfOfficePreferenceData{OutOfOffice} = $OutOfOfficeEntry->{OutOfOffice} ? 1 : 0;
 
         ATTRIBUTE:
         for my $Attribute (

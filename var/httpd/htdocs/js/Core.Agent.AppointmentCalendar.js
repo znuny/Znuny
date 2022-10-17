@@ -215,6 +215,7 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                 }
             },
             viewRender: function(View) {
+                var FilterViews;
 
                 // Check if we are on a timeline view.
                 if (View.name === 'timelineWeek' || View.name === 'timelineDay') {
@@ -250,6 +251,13 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                     );
                 }
                 CurrentView = View.name;
+
+                FilterViews = ["month", "agendaWeek", "agendaDay"];
+                if (FilterViews.includes(CurrentView)){
+                    $('.WidgetSimple.Appointments').show();
+                }else{
+                    $('.WidgetSimple.Appointments').hide();
+                }
             },
             select: function(Start, End, JSEvent, View, Resource) {
                 var Data = {
@@ -291,9 +299,13 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                 UpdateAppointment(Data);
             },
             eventRender: function(CalEvent, $Element) {
+
                 var $IconContainer,
                     $Icon,
-                    pluginData;
+                    pluginData,
+                    Filter = $('#FilterAppointments').val(),
+                    Title,
+                    Description;
 
                 if (CalEvent.allDay
                     || CalEvent.recurring
@@ -348,6 +360,27 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                     $Element.find('.fc-content')
                         .prepend($IconContainer);
                 }
+
+                // FilterAppointments
+                Filter ? Filter = Filter.toLowerCase() : '';
+                CalEvent.title ? Title = CalEvent.title.toLowerCase() : {};
+                CalEvent.description ? Description = CalEvent.description.toLowerCase() : {};
+
+                // If we have a description we can try to Filter
+                if (Description) {
+                    Description = Description.includes(Filter);
+                }
+
+                // If we have a title we can try to filter
+                if (Title) {
+                    Title = Title.includes(Filter);
+                }
+
+                if(Title || Description || Filter.length < 1) {
+                    return true;
+                }
+                return false;
+
             },
             eventResizeStart: function(CalEvent) {
                 CurrentAppointment.start = CalEvent.start;
@@ -439,6 +472,14 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
             ],
             resourceLabelText: Core.Language.Translate('Resources')
         });
+
+        // Activate FilterAppointments
+        $('#FilterAppointments').on('keyup',function(){
+            var FilterViews = ["month", "agendaWeek", "agendaDay"];
+            if (FilterViews.includes(CurrentView)){
+                $CalendarObj.fullCalendar('rerenderEvents');
+            }
+        })
 
         // Initialize datepicker
         $DatepickerObj.datepicker({
@@ -1764,12 +1805,17 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                     $PluginDataObj = $('#Plugin_' + Core.App.EscapeSelector(PluginKey) + '_LinkList'),
                     PluginData = JSON.parse($PluginDataObj.val()),
                     LinkID = $RemoveObj.data('linkId').toString(),
-                    $Parent = $RemoveObj.parent();
+                    $Parent = $RemoveObj.parent(),
+                    $PluginContainer = $Parent.parent();
 
                 PluginData.splice(PluginData.indexOf(LinkID), 1);
                 $PluginDataObj.val(JSON.stringify(PluginData));
 
                 $Parent.remove();
+
+                if ($PluginContainer.children().length == 0) {
+                    $PluginContainer.text('');
+                }
 
                 return false;
             });

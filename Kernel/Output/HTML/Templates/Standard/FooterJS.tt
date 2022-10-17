@@ -11,7 +11,7 @@
 <script type="text/javascript">//<![CDATA[
     "use strict";
 
-    var CKEDITOR_BASEPATH = [% Config("Frontend::RichTextPath") | JSON %];
+    var CKEDITOR_BASEPATH = [% Config("Frontend::RichText::Path") | JSON %];
 //]]></script>
 [% RenderBlockStart("CommonJS") %]
 <script type="text/javascript" src="[% Config("Frontend::JavaScriptPath") | html %][% Data.JSDirectory | html %][% Data.Filename | html %]"></script>

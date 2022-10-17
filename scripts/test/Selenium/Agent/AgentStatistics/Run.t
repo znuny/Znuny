@@ -48,7 +48,7 @@ $Selenium->RunTest(
         );
 
         # Import test selenium statistic.
-        my $Location = $ConfigObject->Get('Home')
+        my $Location = $Selenium->{Home}
             . "/scripts/test/sample/Stats/Stats.TicketOverview.de.xml";
         $Selenium->find_element( "#File", 'css' )->send_keys($Location);
         $Selenium->find_element("//button[\@value='Import'][\@type='submit']")->VerifiedClick();

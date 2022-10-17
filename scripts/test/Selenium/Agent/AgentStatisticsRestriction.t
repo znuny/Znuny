@@ -67,7 +67,7 @@ $Selenium->RunTest(
         # Import test sample statistics.
         my $ConfigObject     = $Kernel::OM->Get('Kernel::Config');
         my $StatisticContent = $Kernel::OM->Get('Kernel::System::Main')->FileRead(
-            Location => $ConfigObject->Get('Home')
+            Location => $Selenium->{Home}
                 . '/scripts/test/sample/Stats/Stats.TestTicketList.en.xml',
         );
 

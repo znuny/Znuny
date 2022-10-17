@@ -1711,7 +1711,7 @@ sub TicketDeepGet {
 
 Returns all attachments of the the article with the given ID (base-64 encoded).
 
-    my $Attachments = $Znuny4OTRSAdvancedGIObject->_GetBase64EncodedArticleAttachments(
+    my $Attachments = $TicketObject->_GetBase64EncodedArticleAttachments(
         TicketID  => 123,
         ArticleID => 123,
     );

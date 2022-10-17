@@ -14,11 +14,12 @@ use warnings;
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
-    'Kernel::System::Mention',
-    'Kernel::System::Group',
-    'Kernel::System::User',
-    'Kernel::Output::HTML::Layout',
     'Kernel::Config',
+    'Kernel::Output::HTML::Layout',
+    'Kernel::System::CommunicationChannel',
+    'Kernel::System::Log',
+    'Kernel::System::Mention',
+    'Kernel::System::Ticket::Article',
 );
 
 sub new {
@@ -34,102 +35,63 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $MentionObject = $Kernel::OM->Get('Kernel::System::Mention');
-    my $LayoutObject  = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+    my $LogObject                  = $Kernel::OM->Get('Kernel::System::Log');
+    my $ConfigObject               = $Kernel::OM->Get('Kernel::Config');
+    my $LayoutObject               = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ArticleObject              = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+    my $CommunicationChannelObject = $Kernel::OM->Get('Kernel::System::CommunicationChannel');
+    my $MentionObject              = $Kernel::OM->Get('Kernel::System::Mention');
 
-    my $Triggers = $ConfigObject->Get('Mentions::RichTextEditor')->{Triggers};
-
-    my $Body = $LayoutObject->ArticlePreview(
-        TicketID  => $Param{Data}{TicketID},
-        ArticleID => $Param{Data}{ArticleID}
+    my %Article = $ArticleObject->ArticleGet(
+        TicketID  => $Param{Data}->{TicketID},
+        ArticleID => $Param{Data}->{ArticleID},
     );
-    return {} if !IsStringWithData($Body);
+    return 1 if !%Article;
 
-    my @Recipients = ( $Body =~ m{<a class="Mention" href=".*?" target=".*?">$Triggers->{User}(.*?)<\/a>}sg );
-    my %Recipients = map { $_ => 1 } @Recipients;
-
-    my @RecipientGroups
-        = ( $Body =~ m{<a class="GroupMention" href=".*?" target=".*?">$Triggers->{Group}(.*?)<\/a>}sg );
-    my $GroupUsers = {};
-    if (@RecipientGroups) {
-        $GroupUsers = $Self->_GetUserFromGroup(
-            Groups => \@RecipientGroups,
-        ) // {};
-    }
-
-    %Recipients = ( %Recipients, %{$GroupUsers} );
-    return {} if !%Recipients;
-
-    $Self->_GetRecipientAddresses(
-        Recipients => \%Recipients,
+    my %CommunicationChannel = $CommunicationChannelObject->ChannelGet(
+        ChannelID => $Article{CommunicationChannelID},
     );
 
-    # If addresses could not be parsed/verified.
-    return {} if !%Recipients;
+    # Ignore all articles that were not created by an agent.
+    # Note that also phone tickets are always created by an agent, regardless of sender type.
+    return 1 if $Article{SenderType} ne 'agent' && $CommunicationChannel{ChannelName} ne 'Phone';
 
-    $MentionObject->SendNotification(
-        Recipients => \%Recipients,
-        TicketID   => $Param{Data}{TicketID},
-        ArticleID  => $Param{Data}{ArticleID},
-        UserID     => $Param{UserID},
+    # Use preview body because HTML is needed.
+    my $HTMLBody = $LayoutObject->ArticlePreview(
+        TicketID  => $Param{Data}->{TicketID},
+        ArticleID => $Param{Data}->{ArticleID},
     );
+    return 1 if !IsStringWithData($HTMLBody);
 
-    return \%Recipients;
-}
+    my $MentionsConfig = $ConfigObject->Get('Mentions') // {};
+    my $MentionsLimit  = $MentionsConfig->{Limit}       // 20;
 
-sub _GetRecipientAddresses {
-    my ( $Self, %Param ) = @_;
+    my $MentionedUserIDs = $MentionObject->GetMentionedUserIDsFromString(
+        HTMLString      => $HTMLBody,
+        PlainTextString => $Article{Body} // '',
+        Limit           => $MentionsLimit,
+    );
+    return 1 if !IsArrayRefWithData($MentionedUserIDs);
 
-    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+    MENTIONEDUSERID:
+    for my $MentionedUserID ( sort @{$MentionedUserIDs} ) {
 
-    my $Recipients = $Param{Recipients};
-
-    for my $Recipient ( sort keys %{$Recipients} ) {
-        my %User = $UserObject->GetUserData(
-            User => $Recipient,
+        # AddMention also triggers event UserMention which sends a notification to the user.
+        my $Success = $MentionObject->AddMention(
+            TicketID        => $Param{Data}->{TicketID},
+            ArticleID       => $Param{Data}->{ArticleID},
+            MentionedUserID => $MentionedUserID,
+            UserID          => $Param{UserID},
         );
+        next MENTIONEDUSERID if $Success;
 
-        my %UserData;
-        for my $Attribute (qw(UserID UserEmail)) {
-            $UserData{$Attribute} = $User{$Attribute};
-        }
-
-        $Recipients->{$Recipient} = \%UserData;
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Error adding mention for user ID $Param{UserID} to ticket with ID $Param{Data}->{TicketID}.",
+        );
     }
 
     return 1;
-}
-
-sub _GetUserFromGroup {
-    my ( $Self, %Param ) = @_;
-
-    my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
-
-    my $Groups = $Param{Groups};
-
-    my %Recipients;
-
-    GROUP:
-    for my $Group ( @{$Groups} ) {
-        my $GroupID = $GroupObject->GroupLookup(
-            Group => $Group,
-        );
-
-        next GROUP if !$GroupID;
-
-        my %UserList = $GroupObject->PermissionGroupUserGet(
-            GroupID => $GroupID,
-            Type    => 'ro',
-        );
-
-        %Recipients = ( %Recipients, %UserList );
-    }
-
-    %Recipients = map { $_ => 1 } values %Recipients;
-
-    return \%Recipients;
-
 }
 
 1;

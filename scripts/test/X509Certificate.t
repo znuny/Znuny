@@ -64,7 +64,7 @@ $Self->IsDeeply(
 );
 
 $X509Certificate = $X509CertificateObject->Parse(
-    FilePath => "$Home/scripts/test/Znuny4OTRSAdvancedGI/example/NONEXISTING.pem",
+    FilePath => "$Home/scripts/test/sample/X509Certificate/NONEXISTING.pem",
 );
 
 $Self->False(

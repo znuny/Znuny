@@ -112,13 +112,14 @@ sub new {
         $Self->{RestoreDatabase} = 1;
         my $StartedTransaction = $Self->BeginWork();
         $Self->{UnitTestDriverObject}->True( $StartedTransaction, 'Started database transaction.' );
-
     }
 
     # Disable scheduling of asynchronous tasks using C<AsynchronousExecutor> component of System daemon.
     if ( $Param{DisableAsyncCalls} ) {
         $Self->DisableAsyncCalls();
     }
+
+    $Self->_DisableDefaultSysConfigSettings();
 
     if ( $Param{DisableSysConfigs} ) {
         $Self->DisableSysConfigs(
@@ -369,7 +370,7 @@ sub BeginWork {
 
 Rolls back the current database transaction.
 
-    $HelperObject->Rollback()
+    $HelperObject->Rollback();
 
 =cut
 
@@ -432,13 +433,19 @@ the current system time will be used.
 All calls to methods of Kernel::System::Time and Kernel::System::DateTime will
 use the given time afterwards.
 
-    my $Timestamp = $HelperObject->FixedTimeSet(366475757);         # with Timestamp
-    my $Timestamp = $HelperObject->FixedTimeSet($DateTimeObject);   # with previously created DateTime object
-    my $Timestamp = $HelperObject->FixedTimeSet();                  # set to current date and time
+    # with Timestamp
+    my $Timestamp = $HelperObject->FixedTimeSet(366475757);
+
+    # with previously created DateTime object
+    my $Timestamp = $HelperObject->FixedTimeSet($DateTimeObject);
+
+    # set to current date and time
+    my $Timestamp = $HelperObject->FixedTimeSet();
 
 Returns:
 
-    my $Timestamp = 1454420017;    # date/time as seconds
+    # date/time as seconds
+    my $Timestamp = 1454420017;
 
 =cut
 
@@ -923,6 +930,27 @@ sub DisableAsyncCalls {
         Valid => 1,
         Key   => 'DisableAsyncCalls',
         Value => 1,
+    );
+
+    return 1;
+}
+
+=head2 _DisableDefaultSysConfigSettings()
+
+These SysConfig options are disabled by default.
+
+=cut
+
+sub _DisableDefaultSysConfigSettings {
+    my ( $Self, %Param ) = @_;
+
+    my @DisableSysConfigs = (
+        'Ticket::EventModulePost###999-NotifyOnEmptyProcessTickets',
+        'Ticket::EventModulePost###Mentions',
+    );
+
+    $Self->DisableSysConfigs(
+        DisableSysConfigs => \@DisableSysConfigs,
     );
 
     return 1;

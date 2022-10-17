@@ -2794,7 +2794,7 @@
 <Table Name="oauth2_token_config">
     <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
     <Column Name="name" Required="true" Size="250" Type="VARCHAR"/>
-    <Column Name="config" Required="true" Size="5000" Type="VARCHAR"/>
+    <Column Name="config" Required="true" Size="100000" Type="VARCHAR"/>
     <Column Name="valid_id" Required="true" Type="SMALLINT"/>
     <Column Name="create_time" Required="true" Type="DATE"/>
     <Column Name="create_by" Required="true" Type="INTEGER"/>
@@ -2815,14 +2815,14 @@
 <Table Name="oauth2_token">
     <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
     <Column Name="token_config_id" Required="true" Type="INTEGER"/>
-    <Column Name="authorization_code" Required="false" Size="2000" Type="VARCHAR"/>
-    <Column Name="token" Required="false" Size="2000" Type="VARCHAR"/>
+    <Column Name="authorization_code" Required="false" Size="100000" Type="VARCHAR"/>
+    <Column Name="token" Required="false" Size="100000" Type="VARCHAR"/>
     <Column Name="token_expiration_date" Required="false" Type="DATE"/>
-    <Column Name="refresh_token" Required="false" Size="2000" Type="VARCHAR"/>
+    <Column Name="refresh_token" Required="false" Size="100000" Type="VARCHAR"/>
     <Column Name="refresh_token_expiration_date" Required="false" Type="DATE"/>
-    <Column Name="error_message" Required="false" Size="2000" Type="VARCHAR"/>
-    <Column Name="error_description" Required="false" Size="2000" Type="VARCHAR"/>
-    <Column Name="error_code" Required="false" Size="250" Type="VARCHAR"/>
+    <Column Name="error_message" Required="false" Size="100000" Type="VARCHAR"/>
+    <Column Name="error_description" Required="false" Size="100000" Type="VARCHAR"/>
+    <Column Name="error_code" Required="false" Size="1000" Type="VARCHAR"/>
     <Column Name="create_time" Required="true" Type="DATE"/>
     <Column Name="create_by" Required="true" Type="INTEGER"/>
     <Column Name="change_time" Required="true" Type="DATE"/>

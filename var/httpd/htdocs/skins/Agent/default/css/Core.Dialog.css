@@ -278,5 +278,13 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     overflow: auto;
 }
 
+.Dialog.Modal > .Content > .InnerContent > .FieldOverlay.CalendarEventsOverlay {
+    word-break: break-word;
+}
+
+.Dialog.Modal > .Content > .InnerContent > .FieldOverlay.CalendarEventsOverlay fieldset img {
+    max-width: 100%;
+    max-height: 600px;
+}
 
 } /* end @media */

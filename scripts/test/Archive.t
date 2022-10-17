@@ -59,7 +59,6 @@ my $ChecksumFileNotPresent = sub {
 
 my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
-
 my $ChecksumFile = "$Home/ARCHIVE";
 
 # Checksum file content as an array ref.

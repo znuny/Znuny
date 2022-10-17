@@ -68,9 +68,9 @@
                             </div>
                             <div class="Clear"></div>
 
-[% RenderBlockStart("NoteTimeUnits") %]
+[% RenderBlockStart("TimeUnits") %]
                             [% Data.TimeUnitsBlock %]
-[% RenderBlockEnd("NoteTimeUnits") %]
+[% RenderBlockEnd("TimeUnits") %]
 
                         </fieldset>
                     </div>

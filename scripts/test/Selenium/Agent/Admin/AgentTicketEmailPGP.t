@@ -62,7 +62,7 @@ $Selenium->RunTest(
 
             # Add test PGP key.
             $Selenium->find_element("//a[contains(\@href, \'Action=AdminPGP;Subaction=Add' )]")->VerifiedClick();
-            my $Location = $ConfigObject->Get('Home')
+            my $Location = $Selenium->{Home}
                 . "/scripts/test/sample/Crypt/PGPPrivateKey-$Key.asc";
 
             $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);

@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.997391587870884;
+    $Self->{Completeness}        = 0.997076498294624;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1469,6 +1469,10 @@ sub Data {
             'Es existiert bereits eine OAuth2-Token-Konfiguration mit diesem Namen.',
         'Client ID' => 'Client-ID',
         'Client secret' => 'Client-Secret',
+        'URL for authorization code' => 'URL für Autorisierungscode',
+        'URL for token by authorization code' => 'URL für Token per Autorisierungscode',
+        'URL for token by refresh token' => 'URL für Token per Refresh-Token',
+        'Access token scope' => 'Access-Token-Scope',
         'Template' => 'Vorlage',
         'This is the template that was used to create this OAuth2 token configuration.' =>
             'Dies ist die Vorlage, die zur Erstellung dieser OAuth2-Token-Konfiguration verwendet wurde.',
@@ -2355,6 +2359,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
         'Add new Appointment' => 'Einen neuen Termin hinzufügen',
+        'Appointments' => 'Termine',
         'Calendars' => 'Kalender',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
@@ -2508,6 +2513,9 @@ sub Data {
         'Email ticket' => 'E-Mail-Ticket',
         'New phone ticket from %s' => 'Neues Telefon-Ticket von %s',
         'New email ticket to %s' => 'Neues E-Mail-Ticket an %s',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
+        'No tickets found.' => 'Keine Tickets gefunden.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardProductNotify.tt
         '%s %s is available!' => '%s %s ist nun verfügbar!',
@@ -2903,6 +2911,12 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
         'This message is being processed. Already tried to send %s time(s). Next try will be %s.' =>
             'Diese Nachricht wird gerade verarbeitet. Das Versenden wurde bereits %s mal probiert. Nächster Versuch um %s.',
+        'This message contains events' => 'Diese Nachricht enthält Events.',
+        'This message contains an event' => 'Diese Nachricht enthält ein Event.',
+        'Show more information' => 'Mehr Informationen anzeigen',
+        'Start: %s, End: %s' => 'Start: %s, Ende: %s',
+        'Calendar events details' => 'Kalender-Events-Details',
+        'Calendar event details' => 'Kalender-Event-Details',
         'To open links in the following article, you might need to press Ctrl or Cmd or Shift key while clicking the link (depending on your browser and OS).' =>
             'Um die Links im folgenden Artikel zu öffnen, kann es notwendig sein Strg oder Shift zu drücken, während auf den Link geklickt wird (abhängig vom verwendeten Browser und Betriebssystem).',
         'Close this message' => 'Diese Nachricht schließen',
@@ -4705,6 +4719,9 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Dashboard/EventsTicketCalendar.pm
         'The start time of a ticket has been set after the end time!' => 'Die Startzeit eines Tickets wurde auf einen Zeitpunkt nach der Endzeit gesetzt!',
 
+        # Perl Module: Kernel/Output/HTML/Dashboard/MyLastChangedTickets.pm
+        'Shown Tickets' => 'Gezeigte Tickets',
+
         # Perl Module: Kernel/Output/HTML/Dashboard/News.pm
         'Can\'t connect to OTRS News server!' => 'Kein Verbindungsaufbau zum Server mit den OTRS Neuigkeiten möglich!',
         'Can\'t get OTRS News from server!' => 'OTRS Neuigkeiten können nicht vom Server abgerufen werden!',
@@ -4717,7 +4734,6 @@ sub Data {
         'Can\'t connect to %s!' => 'Kein Verbindungsaufbau zu %s möglich!',
 
         # Perl Module: Kernel/Output/HTML/Dashboard/TicketGeneric.pm
-        'Shown Tickets' => 'Gezeigte Tickets',
         'Shown Columns' => 'Gezeigte Spalten',
         'filter not active' => 'Filter nicht aktiv',
         'filter active' => 'Filter aktiv',
@@ -4973,6 +4989,12 @@ sub Data {
 
         # Perl Module: Kernel/System/Calendar/Plugin/Ticket/Create.pm
         'On the date' => 'Am Datum',
+
+        # Perl Module: Kernel/System/CalendarEvents.pm
+        'on' => 'an',
+        'of year' => 'des Jahres',
+        'of month' => 'des Monats',
+        'all-day' => 'ganztägig',
 
         # Perl Module: Kernel/System/Console/Command/Dev/Tools/Config2Docbook.pm
         'Configuration Options Reference' => 'Referenz der Konfigurationsoptionen',
@@ -5722,15 +5744,20 @@ sub Data {
         'Uses richtext for viewing and editing: articles, salutations, signatures, standard templates, auto responses and notifications.' =>
             'Nutzt richtext zum betrachten und bearbeiten von: Artikeln, Begrüßungen, Signaturen, Standard Vorlagen, Automatische Antworten und Benachrichtigungen.',
         'Defines the URL rich text editor path.' => 'Definiert den URL-RichTextEditor-Pfad.',
-        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            'Definiert die Breite der RichText-Editor Komponente. Geben Sie einen Zahlen- (Pixel) oder Prozenwert (relativ) an.',
-        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            'Steuert die Höhe der Richtext-Editor-Komponente. Geben Sie eine Zahl (für die Höhe in Pixeln) oder einen prozentualen Wert (für eine relative Höhe) an.',
         'Defines the default CSS used in rich text editors.' => 'Definiert die genutzte Standard-CSS in RichText-Editoren.',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.).' =>
             'Bestimmt, ob der erweiterte Modus genutzt werden soll (schaltet die Benutzung von Tabellen, Suchen & Ersetzen, Tiefstellen, Hochstellen, aus Word einfügen, etc. frei).',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.) in customer interface.' =>
             'Legt fest, ob im Kundenbereich der erweiterte Modus genutzt werden soll (erlaubt die Nutzung von Tabellen, Ersetzen, Hochstellen, Tiefstellen, Einfügen aus Word, usw.).',
+        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            'Definiert die Breite der RichText-Editor Komponente. Geben Sie einen Zahlen- (Pixel) oder Prozenwert (relativ) an.',
+        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            'Steuert die Höhe der Richtext-Editor-Komponente. Geben Sie eine Zahl (für die Höhe in Pixeln) oder einen prozentualen Wert (für eine relative Höhe) an.',
+        'Defines the selectable font sizes in the rich text editor.' => 'Legt die wählbaren Schriftgrößen im Rich-Text-Editor fest.',
+        'Defines the selectable fonts in the rich text editor.' => 'Legt die auswählbaren Schriftarten im Rich-Text-Editor fest.',
+        'Defines additional plugins for use in the rich text editor.' => 'Definiert zusätzliche Plugins für die Verwendung im Rich-Text-Editor.',
+        'Defines extra content that is allowed for use in the rich text editor.' =>
+            'Definiert zusätzliche Inhalte, die für die Verwendung im Rich-Text-Editor zugelassen sind.',
         'Disable autocomplete in the login screen.' => 'Deaktiviert die Autovervollständigung im Anmeldebildschirm.',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             'Wenn der HTTP-Header "X-Frame-Options: SAMEORIGIN" ausgeschaltet ist, kann OTRS als IFrame in andere Websites integriert werden. Dies stellt eine Sicherheitslücke dar! Daher sollte diese Einstellung nur deaktivieren werden, wenn Sie sich über die Konsequenzen im Klaren sind!',
@@ -7367,6 +7394,7 @@ sub Data {
             'Legt die Parameter für das Dashboard-Backend fest. "Limit" legt die Anzahl an Einträgen fest, die standardmäßig angezeigt werden. "Group" beschränkt den Zugang zum jeweiligen Dashlet (z. B. Group: admin;group1;group2). "Default" bestimmt, ob das Dashlet standardmäßig aktiv ist oder vom Nutzer manuell aktiviert werden muss. "CacheTTLLocal" bestimmt die Cachingdauer für das Dashlet in Minuten. Mit "Mandatory" kann das Dashlet so konfiguriert werden, dass Nutzer es nicht ausblenden können. Hinweis: Für DefaultColumns sind nur Ticketattribute und dynamische Felder (DynamicField_NameX) möglich.',
         'Parameters for the dashboard backend of the ticket stats of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             'Legt die Parameter für das Dashboard-Backend fest. "Limit" legt die Anzahl an Einträgen fest, die standardmäßig angezeigt werden. "Group" beschränkt den Zugang zum jeweiligen Dashlet (z. B. Group: admin;group1;group2). "Default" bestimmt, ob das Dashlet standardmäßig aktiv ist oder vom Nutzer manuell aktiviert werden muss. "CacheTTLLocal" bestimmt die Cachingdauer für das Dashlet in Minuten. Mit "Mandatory" kann das Dashlet so konfiguriert werden, dass Nutzer es nicht ausblenden können.',
+        'MyLastChangedTickets dashboard widget.' => '',
         'Parameters for the dashboard backend of the upcoming events widget of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             'Legt die Parameter für das Dashboard-Backend fest. "Limit" legt die Anzahl an Einträgen fest, die standardmäßig angezeigt werden. "Group" beschränkt den Zugang zum jeweiligen Dashlet (z. B. Group: admin;group1;group2). "Default" bestimmt, ob das Dashlet standardmäßig aktiv ist oder vom Nutzer manuell aktiviert werden muss. "CacheTTLLocal" bestimmt die Cachingdauer für das Dashlet in Minuten. Mit "Mandatory" kann das Dashlet so konfiguriert werden, dass Nutzer es nicht ausblenden können.',
         'Parameters for the dashboard backend of the queue overview widget of the agent interface. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "QueuePermissionGroup" is not mandatory, queues are only listed if they belong to this permission group if you enable it. "States" is a list of states, the key is the sort order of the state in the widget. "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
@@ -7907,6 +7935,9 @@ sub Data {
             'Rich-Text-Editor-Konfiguration für Autocompletion-Modul zur Unterstützung von Vorlagen.',
         'Defines which notifications about mentions should be sent.' => 'Bestimmt, welche Benachrichtigungen über Erwähnungen versendet werden sollen.',
         'Defines if the toolbar mention icon should count mentions.' => 'Erwähnungs-Icon in Toolbar soll Anzahl der Erwähnungen anzeigen.',
+        'These groups won\'t be selectable to be mentioned.' => 'Diese Gruppen stehen nicht für Erwähnungen zur Auswahl.',
+        'Limits number of users (per article) that will be marked as mentioned and be notified. Users (and users from mentioned groups) that exceed this limit will silently be ignored.' =>
+            'Begrenzt die Anzahl der Benutzer (pro Artikel), die als erwähnt markiert und benachrichtigt werden sollen. Benutzer (und Benutzer aus erwähnten Gruppen), die dieses Limit überschreiten, werden ohne Hinweis ignoriert.',
         'Frontend registration of triggers for mention plugin of CKEditor.' =>
             'Frontend-Registrierung für Trigger des CKEditor-Mention-Plugins.',
         'Frontend registration of input/output templates for mention plugin of CKEditor.' =>
@@ -8547,7 +8578,6 @@ Ihr Helpdesk-Team
         'Appointment list' => 'Terminliste',
         'Appointment list.' => 'Terminliste.',
         'Appointment notifications' => 'Terminbenachrichtigungen',
-        'Appointments' => 'Termine',
         'Arabic (Saudi Arabia)' => 'Arabisch (Saudi-Arabien)',
         'ArticleTree' => 'Artikelbaum',
         'Attachment Name' => 'Name des Anhangs',
@@ -8891,6 +8921,7 @@ Ihr Helpdesk-Team
         'My Queues' => 'Meine Queues',
         'My Services' => 'Meine Services',
         'My Tickets.' => 'Meine Tickets.',
+        'My last changed tickets' => '',
         'NameX' => 'NameX',
         'New Ticket' => 'Neues Ticket',
         'New Tickets' => 'Neue Tickets',

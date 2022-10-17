@@ -1693,7 +1693,7 @@ sub _Mask {
         my $IsTimeUnitsRequired = $ConfigObject->Get('Ticket::Frontend::NeedAccountedTime');
         $LayoutObject->AddJSData(
             Key   => 'TimeUnitsRequired',
-            Value => $IsTimeUnitsRequired // '',
+            Value => $IsTimeUnitsRequired || '',
         );
 
         my $TimeUnitsInputType = $ConfigObject->Get('Ticket::Frontend::AccountTimeType') // 'Text';
@@ -1709,7 +1709,7 @@ sub _Mask {
         );
 
         $LayoutObject->Block(
-            Name => 'NoteTimeUnits',
+            Name => 'TimeUnits',
             Data => \%Param,
         );
 
@@ -1804,7 +1804,9 @@ sub _Mask {
             my $DynamicFieldSet = $ParamObject->GetParam(
                 Param => 'DynamicField_' . $DynamicFieldConfig->{Name} . 'Used'
             );
-            if ($DynamicFieldSet) {
+
+            # set DynamicField_NAMEUsed checkbox to true if it is set before or if mandatory (2)
+            if ( $DynamicFieldSet || $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2 ) {
                 $IsChecked = 'true';
             }
         }
@@ -1948,9 +1950,11 @@ sub _GetTypes {
 sub _GetOwners {
     my ( $Self, %Param ) = @_;
 
+    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+
     # Get all users.
-    my %AllGroupsMembers = $Kernel::OM->Get('Kernel::System::User')->UserList(
-        Type  => 'Long',
+    my %AllGroupsMembers = $UserObject->UserList(
+        Type  => 'Short',
         Valid => 1
     );
 
@@ -2007,16 +2011,28 @@ sub _GetOwners {
         UserID        => $Self->{UserID},
     );
 
-    return $TicketObject->TicketAclData() if $ACL;
+    if ($ACL) {
+        %OwnerList = $TicketObject->TicketAclData();
+    }
+
+    my %AllGroupsMembersFullnames = $UserObject->UserList(
+        Type  => 'Long',
+        Valid => 1,
+    );
+
+    @OwnerList{ keys %OwnerList } = @AllGroupsMembersFullnames{ keys %OwnerList };
+
     return %OwnerList;
 }
 
 sub _GetResponsibles {
     my ( $Self, %Param ) = @_;
 
+    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+
     # Get all users.
-    my %AllGroupsMembers = $Kernel::OM->Get('Kernel::System::User')->UserList(
-        Type  => 'Long',
+    my %AllGroupsMembers = $UserObject->UserList(
+        Type  => 'Short',
         Valid => 1
     );
 
@@ -2073,7 +2089,17 @@ sub _GetResponsibles {
         UserID        => $Self->{UserID},
     );
 
-    return $TicketObject->TicketAclData() if $ACL;
+    if ($ACL) {
+        %ResponsibleList = $TicketObject->TicketAclData();
+    }
+
+    my %AllGroupsMembersFullnames = $UserObject->UserList(
+        Type  => 'Long',
+        Valid => 1,
+    );
+
+    @ResponsibleList{ keys %ResponsibleList } = @AllGroupsMembersFullnames{ keys %ResponsibleList };
+
     return %ResponsibleList;
 }
 

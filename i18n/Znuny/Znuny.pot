@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-09-08 11:22+0000\n"
+"POT-Creation-Date: 2022-10-12 08:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4379,6 +4379,22 @@ msgid "Client secret"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
+msgid "URL for authorization code"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
+msgid "URL for token by authorization code"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
+msgid "URL for token by refresh token"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
+msgid "Access token scope"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
 msgid "Template"
 msgstr ""
 
@@ -6971,6 +6987,10 @@ msgid "Add new Appointment"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
+msgid "Appointments"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
 msgid "Calendars"
 msgstr ""
 
@@ -7420,6 +7440,10 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerUserList.tt
 msgid "New email ticket to %s"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
+msgid "No tickets found."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardProductNotify.tt
@@ -8548,6 +8572,30 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
 msgid "This message is being processed. Already tried to send %s time(s). Next try will be %s."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "This message contains events"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "This message contains an event"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "Show more information"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "Start: %s, End: %s"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "Calendar events details"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "Calendar event details"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
@@ -13442,6 +13490,10 @@ msgstr ""
 msgid "The start time of a ticket has been set after the end time!"
 msgstr ""
 
+#. Perl Module: Kernel/Output/HTML/Dashboard/MyLastChangedTickets.pm
+msgid "Shown Tickets"
+msgstr ""
+
 #. Perl Module: Kernel/Output/HTML/Dashboard/News.pm
 msgid "Can't connect to OTRS News server!"
 msgstr ""
@@ -13460,10 +13512,6 @@ msgstr ""
 
 #. Perl Module: Kernel/Output/HTML/Dashboard/RSS.pm
 msgid "Can't connect to %s!"
-msgstr ""
-
-#. Perl Module: Kernel/Output/HTML/Dashboard/TicketGeneric.pm
-msgid "Shown Tickets"
 msgstr ""
 
 #. Perl Module: Kernel/Output/HTML/Dashboard/TicketGeneric.pm
@@ -14032,6 +14080,22 @@ msgstr ""
 
 #. Perl Module: Kernel/System/Calendar/Plugin/Ticket/Create.pm
 msgid "On the date"
+msgstr ""
+
+#. Perl Module: Kernel/System/CalendarEvents.pm
+msgid "on"
+msgstr ""
+
+#. Perl Module: Kernel/System/CalendarEvents.pm
+msgid "of year"
+msgstr ""
+
+#. Perl Module: Kernel/System/CalendarEvents.pm
+msgid "of month"
+msgstr ""
+
+#. Perl Module: Kernel/System/CalendarEvents.pm
+msgid "all-day"
 msgstr ""
 
 #. Perl Module: Kernel/System/Console/Command/Dev/Tools/Config2Docbook.pm
@@ -15719,14 +15783,6 @@ msgid "Defines the URL rich text editor path."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative)."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative)."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the default CSS used in rich text editors."
 msgstr ""
 
@@ -15736,6 +15792,30 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.) in customer interface."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative)."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative)."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the selectable font sizes in the rich text editor."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the selectable fonts in the rich text editor."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines additional plugins for use in the rich text editor."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines extra content that is allowed for use in the rich text editor."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
@@ -19255,6 +19335,10 @@ msgid "Parameters for the dashboard backend of the ticket stats of the agent int
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "MyLastChangedTickets dashboard widget."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Parameters for the dashboard backend of the upcoming events widget of the agent interface. \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin. \"Mandatory\" determines if the plugin is always shown and can not be removed by agents."
 msgstr ""
 
@@ -20488,6 +20572,14 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Defines if the toolbar mention icon should count mentions."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "These groups won't be selectable to be mentioned."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Limits number of users (per article) that will be marked as mentioned and be notified. Users (and users from mentioned groups) that exceed this limit will silently be ignored."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
@@ -22114,10 +22206,6 @@ msgid "Appointment notifications"
 msgstr ""
 
 #. SysConfig
-msgid "Appointments"
-msgstr ""
-
-#. SysConfig
 msgid "Arabic (Saudi Arabia)"
 msgstr ""
 
@@ -23403,6 +23491,10 @@ msgstr ""
 
 #. SysConfig
 msgid "My Tickets."
+msgstr ""
+
+#. SysConfig
+msgid "My last changed tickets"
 msgstr ""
 
 #. SysConfig

@@ -99,7 +99,7 @@ $Selenium->RunTest(
             $Count++;
         }
 
-        my $Location1 = $ConfigObject->Get('Home')
+        my $Location1 = $Selenium->{Home}
             . "/scripts/test/sample/Crypt/PGPPrivateKey-1.asc";
 
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location1);
@@ -107,7 +107,7 @@ $Selenium->RunTest(
 
         # Add second test PGP key.
         $Selenium->find_element("//a[contains(\@href, \'Action=AdminPGP;Subaction=Add' )]")->VerifiedClick();
-        my $Location2 = $ConfigObject->Get('Home')
+        my $Location2 = $Selenium->{Home}
             . "/scripts/test/sample/Crypt/PGPPrivateKey-2.asc";
 
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location2);

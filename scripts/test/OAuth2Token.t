@@ -21,6 +21,7 @@ $Kernel::OM->ObjectParamAdd(
     },
 );
 
+my $HelperObject            = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $ZnunyHelperObject       = $Kernel::OM->Get('Kernel::System::ZnunyHelper');
 my $ConfigObject            = $Kernel::OM->Get('Kernel::Config');
 my $OAuth2TokenObject       = $Kernel::OM->Get('Kernel::System::OAuth2Token');

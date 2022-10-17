@@ -97,6 +97,59 @@
         [% END %]
 [% RenderBlockEnd("TransmissionStatusMessage") %]
 
+[% RenderBlockStart("CalendarEvents") %]
+            <div class="CalendarEvents WidgetMessage Top Warning">
+                <div>
+                    [% IF Data.MultipleEvents %]
+                        [% Translate("This message contains events") | html %]:
+                    [% ELSE %]
+                        [% Translate("This message contains an event") | html %]:
+                    [% END %]
+                    <span class="ShowCalendarEventsInfoOverlay" title="[% Translate("Show more information") | html %]">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                    </span>
+                </div>
+[% RenderBlockStart("CalendarEventsMessageRow") %]
+                <p>
+                    [% Translate("Start: %s, End: %s", Data.Start, Data.End) | html %]
+                </p>
+[% RenderBlockEnd("CalendarEventsMessageRow") %]
+
+            <div class="FieldContainer Hidden">
+                <label title="[% IF Data.MultipleEvents %][% Translate("Calendar events details") | html %][% ELSE %][% Translate("Calendar event details") | html %][% END %]"></label>
+                <div class="InnerContent">
+[% RenderBlockStart("CalendarEvent") %]
+                    <div class="EventContainer">
+                        <fieldset class="TableLike FixedLabelSmall Narrow">
+[% RenderBlockStart("CalendarEventPropertyRow") %]
+                        <label>[% Data.Label | html %]:</label>
+                        <p class="Value">[% Data.Value %]</p>
+[% RenderBlockStart("CalendarEventPropertyRowImage") %]
+                        [% IF Data.DataType == "base64" %]
+                            <img src="data:[% Data.ContentType | html %];base64,[% Data.Content | html %]"/>
+                        [% END %]
+[% RenderBlockEnd("CalendarEventPropertyRowImage") %]
+[% RenderBlockStart("CalendarEventPropertyRowFrequency") %]
+                        <label>[% Translate("Frequency") | html %]:</label>
+                        <p class="Value">[% Data.FrequencyStrg | html %]</p>
+[% RenderBlockEnd("CalendarEventPropertyRowFrequency") %]
+[% RenderBlockStart("CalendarEventPropertyRowDownload") %]
+                        <span class="Download Value" title="[% Translate("Download") | html %]">
+                            <a href = "[% Env("Baselink") %]Action=AgentTicketAttachment;TicketID=[% Data.TicketID | html %];ArticleID=[% Data.ArticleID | html %];FileID=[% Data.FileID | html %];">
+                            <i class="fa fa-download"></i>
+                            </a>
+                        </span>
+[% RenderBlockEnd("CalendarEventPropertyRowDownload") %]
+[% RenderBlockEnd("CalendarEventPropertyRow") %]
+                        </fieldset>
+                    </div>
+[% RenderBlockEnd("CalendarEvent") %]
+                </div>
+            </div>
+
+            </div>
+[% RenderBlockEnd("CalendarEvents") %]
+
 [% RenderBlockStart("BrowserLinkMessage") %]
 # Show info, that links within the iframe must be clicked with strg/cmd/shift (depending on the used browser and os)
 # to open the links in a new window without the security permissions given to the iframe

@@ -13143,7 +13143,7 @@ msgstr "Produktneuigkeiten können nicht vom Server abgerufen werden!"
 msgid "Can't connect to %s!"
 msgstr "Kein Verbindungsaufbau zu %s möglich!"
 
-#. Perl Module: Kernel/Output/HTML/Dashboard/TicketGeneric.pm
+#. Perl Module: Kernel/Output/HTML/Dashboard/MyLastChangedTickets.pm
 msgid "Shown Tickets"
 msgstr "Gezeigte Tickets"
 
@@ -16792,7 +16792,7 @@ msgstr "Terminliste."
 msgid "Appointment notifications"
 msgstr "Terminbenachrichtigungen"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
 msgid "Appointments"
 msgstr "Termine"
 
@@ -25383,4 +25383,100 @@ msgstr ""
 #. SysConfig
 msgid "Internal"
 msgstr "Intern"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
+msgid "Filter for Appointments"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
+msgid "URL for authorization code"
+msgstr "URL für Autorisierungscode"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
+msgid "URL for token by authorization code"
+msgstr "URL für Token per Autorisierungscode"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
+msgid "URL for token by refresh token"
+msgstr "URL für Token per Refresh-Token"
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "These groups won't be selectable to be mentioned."
+msgstr "Diese Gruppen stehen nicht für Erwähnungen zur Auswahl."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Limits number of users (per article) that will be marked as mentioned and be notified. Users (and users from mentioned groups) that exceed this limit will silently be ignored."
+msgstr "Begrenzt die Anzahl der Benutzer (pro Artikel), die als erwähnt markiert und benachrichtigt werden sollen. Benutzer (und Benutzer aus erwähnten Gruppen), die dieses Limit überschreiten, werden ohne Hinweis ignoriert."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "This message contains events"
+msgstr "Diese Nachricht enthält Events."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "This message contains an event"
+msgstr "Diese Nachricht enthält ein Event."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "Show more information"
+msgstr "Mehr Informationen anzeigen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "Start: %s, End: %s"
+msgstr "Start: %s, Ende: %s"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "Calendar events details"
+msgstr "Kalender-Events-Details"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "Calendar event details"
+msgstr "Kalender-Event-Details"
+
+#. Perl Module: Kernel/System/CalendarEvents.pm
+msgid "on"
+msgstr "an"
+
+#. Perl Module: Kernel/System/CalendarEvents.pm
+msgid "of year"
+msgstr "des Jahres"
+
+#. Perl Module: Kernel/System/CalendarEvents.pm
+msgid "of month"
+msgstr "des Monats"
+
+#. Perl Module: Kernel/System/CalendarEvents.pm
+msgid "all-day"
+msgstr "ganztägig"
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the selectable font sizes in the rich text editor."
+msgstr "Legt die wählbaren Schriftgrößen im Rich-Text-Editor fest."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the selectable fonts in the rich text editor."
+msgstr "Legt die auswählbaren Schriftarten im Rich-Text-Editor fest."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines additional plugins for use in the rich text editor."
+msgstr "Definiert zusätzliche Plugins für die Verwendung im Rich-Text-Editor."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines extra content that is allowed for use in the rich text editor."
+msgstr "Definiert zusätzliche Inhalte, die für die Verwendung im Rich-Text-Editor zugelassen sind."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
+msgid "No tickets found."
+msgstr "Keine Tickets gefunden."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "MyLastChangedTickets dashboard widget."
+msgstr ""
+
+#. SysConfig
+msgid "My last changed tickets"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
+msgid "Access token scope"
+msgstr "Access-Token-Scope"
 

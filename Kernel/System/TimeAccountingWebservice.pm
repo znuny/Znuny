@@ -49,7 +49,7 @@ Searches for time accounting entries and returns a specific result based on titl
 
     my @TimeAccountingEntries = $TimeAccountingWebserviceObject->TimeAccountingSearch(
         Start  => '2017-01-01 10:00:00',
-        End   => '2018-01-01 10:00:00',
+        End    => '2018-01-01 10:00:00',
         UserID => 123,
     );
 

@@ -224,13 +224,13 @@ Core.UI.RichTextEditor = (function (TargetNS) {
 
             CKEDITOR.config.mentions = [
                 {
-                    feed:           getUserData,
+                    feed:           getMentionUserData,
                     marker:         MentionsConfig.Triggers.User,
                     itemTemplate:   MentionsConfig.Templates.Users.ItemTemplate,
                     outputTemplate: MentionsConfig.Templates.Users.OutputTemplate
                 },
                 {
-                    feed:           getGroupData,
+                    feed:           getMentionGroupData,
                     marker:         MentionsConfig.Triggers.Group,
                     itemTemplate:   MentionsConfig.Templates.Groups.ItemTemplate,
                     outputTemplate: MentionsConfig.Templates.Groups.OutputTemplate
@@ -317,15 +317,16 @@ Core.UI.RichTextEditor = (function (TargetNS) {
             removePlugins:             RemovedCKEditorPlugins,
             forcePasteAsPlainText:     false,
             format_tags:               'p;h1;h2;h3;h4;h5;h6;pre',
-            fontSize_sizes:            '8px;10px;12px;16px;18px;20px;22px;24px;26px;28px;30px;',
-            extraAllowedContent:       'div[type]{*}; img[*]; col[width]; style[*]{*}; *[id](*)',
+            fontSize_sizes:            Core.Config.Get('RichText.FontSizes', '8px;10px;12px;14px;16px;18px;20px;22px;24px;26px;28px;30px;'),
+            font_names:                Core.Config.Get('RichText.FontNames', ''),
+            extraAllowedContent:       Core.Config.Get('RichText.ExtraAllowedContent', 'div[type]{*}; img[*]; col[width]; style[*]{*}; *[id](*)'),
             enterMode:                 CKEDITOR.ENTER_BR,
             shiftEnterMode:            CKEDITOR.ENTER_BR,
             contentsLangDirection:     Core.Config.Get('RichText.TextDir', 'ltr'),
             toolbar:                   CheckFormID($EditorArea).length ? Core.Config.Get('RichText.Toolbar') : Core.Config.Get('RichText.ToolbarWithoutImage'),
             filebrowserBrowseUrl:      '',
             filebrowserUploadUrl:      UploadURL,
-            extraPlugins:              'splitquote,contextmenu_linkopen,textwatcher,autocomplete,textmatch,autolink,image2,mentions',
+            extraPlugins:              Core.Config.Get('RichText.ExtraPlugins','splitquote,contextmenu_linkopen,textwatcher,autocomplete,textmatch,autolink,image2,mentions'),
             entities:                  false,
             skin:                      'moono-lisa'
         };
@@ -573,7 +574,7 @@ Core.UI.RichTextEditor = (function (TargetNS) {
         }
     };
 
-    function getUserData(opts, callback) {
+    function getMentionUserData(opts, callback) {
         Core.AJAX.FunctionCall(
             Core.Config.Get('Baselink'),
             {
@@ -591,7 +592,7 @@ Core.UI.RichTextEditor = (function (TargetNS) {
         );
     }
 
-    function getGroupData(opts, callback) {
+    function getMentionGroupData(opts, callback) {
         Core.AJAX.FunctionCall(
             Core.Config.Get('Baselink'),
             {

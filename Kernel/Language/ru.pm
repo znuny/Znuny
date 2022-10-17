@@ -37,7 +37,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.86925334202804;
+    $Self->{Completeness}        = 0.866006171836934;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1481,6 +1481,10 @@ sub Data {
             '',
         'Client ID' => '',
         'Client secret' => '',
+        'URL for authorization code' => '',
+        'URL for token by authorization code' => '',
+        'URL for token by refresh token' => '',
+        'Access token scope' => '',
         'Template' => 'Шаблон',
         'This is the template that was used to create this OAuth2 token configuration.' =>
             '',
@@ -2367,6 +2371,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
         'Add new Appointment' => 'Добавить новое мероприятие',
+        'Appointments' => 'Мероприятия',
         'Calendars' => 'Календари',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
@@ -2520,6 +2525,9 @@ sub Data {
         'Email ticket' => 'Заявка по почте',
         'New phone ticket from %s' => 'Новая телефонная заявка от %s',
         'New email ticket to %s' => 'Новая заявка по почте в %s',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
+        'No tickets found.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardProductNotify.tt
         '%s %s is available!' => '%s %s доступен!',
@@ -2915,6 +2923,12 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
         'This message is being processed. Already tried to send %s time(s). Next try will be %s.' =>
             'Это сообщение обрабатывается. Было попыток отправить %s. Следующая попытка будет через %s.',
+        'This message contains events' => '',
+        'This message contains an event' => '',
+        'Show more information' => '',
+        'Start: %s, End: %s' => '',
+        'Calendar events details' => '',
+        'Calendar event details' => '',
         'To open links in the following article, you might need to press Ctrl or Cmd or Shift key while clicking the link (depending on your browser and OS).' =>
             'Для открытия ссылки в следующем сообщении/заметке необходимо нажать и удерживать клавишу Ctrl или Cmd или Shift и кликнуть по ссылке (зависит от вашего браузера и ОС).',
         'Close this message' => 'Закрыть это сообщение',
@@ -4717,6 +4731,9 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Dashboard/EventsTicketCalendar.pm
         'The start time of a ticket has been set after the end time!' => 'Время начала для заявки установлено после времени окончания!',
 
+        # Perl Module: Kernel/Output/HTML/Dashboard/MyLastChangedTickets.pm
+        'Shown Tickets' => 'Показываемые заявки',
+
         # Perl Module: Kernel/Output/HTML/Dashboard/News.pm
         'Can\'t connect to OTRS News server!' => 'Невозможно подключиться к серверу новостей OTRS!',
         'Can\'t get OTRS News from server!' => 'Невозможно получить новости с сервера новостей OTRS!',
@@ -4729,7 +4746,6 @@ sub Data {
         'Can\'t connect to %s!' => 'Не удается подключиться к %s!',
 
         # Perl Module: Kernel/Output/HTML/Dashboard/TicketGeneric.pm
-        'Shown Tickets' => 'Показываемые заявки',
         'Shown Columns' => 'Показываемые колонки',
         'filter not active' => 'фильтр не активен',
         'filter active' => 'фильтр активирован',
@@ -4985,6 +5001,12 @@ sub Data {
 
         # Perl Module: Kernel/System/Calendar/Plugin/Ticket/Create.pm
         'On the date' => '',
+
+        # Perl Module: Kernel/System/CalendarEvents.pm
+        'on' => '',
+        'of year' => '',
+        'of month' => '',
+        'all-day' => '',
 
         # Perl Module: Kernel/System/Console/Command/Dev/Tools/Config2Docbook.pm
         'Configuration Options Reference' => 'Справочник параметров настройки',
@@ -5734,15 +5756,20 @@ sub Data {
         'Uses richtext for viewing and editing: articles, salutations, signatures, standard templates, auto responses and notifications.' =>
             'Использует форматированный текст для просмотра и редактирования: сообщений, приветствий, подписей, стандартных шаблонов, автоответов и уведомлений.',
         'Defines the URL rich text editor path.' => 'Задает путь в виде URL к rich text editor',
-        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            'Задает ширину окна текстового редактора. Введите число (пикселов) или значение в процентах.',
-        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            'Задает высоту окна текстового редактора. Введите число пикселей и значение в процентах.',
         'Defines the default CSS used in rich text editors.' => 'Задает стандартные CSS, используемые в текстовом редакторе (rich text editor).',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.).' =>
             'Включает расширенные средства редактирования.',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.) in customer interface.' =>
             'Включает расширенные средства редактирования (использование таблиц, замены, подстрочный индекс, надстрочный индекс, вставить из слова и т. д.) в интерфейсе клиента.',
+        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            'Задает ширину окна текстового редактора. Введите число (пикселов) или значение в процентах.',
+        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            'Задает высоту окна текстового редактора. Введите число пикселей и значение в процентах.',
+        'Defines the selectable font sizes in the rich text editor.' => '',
+        'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines additional plugins for use in the rich text editor.' => '',
+        'Defines extra content that is allowed for use in the rich text editor.' =>
+            '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             'Отключить HTTP-заголовок "X-Frame-Options: SAMEORIGIN", чтобы разрешить встраивать OTRS в IFrame на других сайтах. Отключение этого заголовка может вызвать проблемы с безопасностью! Отключайте только если уверены в своих действиях!',
@@ -7379,6 +7406,7 @@ sub Data {
             'Параметры для раздела Дайджеста в интерфейсе агента с обзорным списком открытых заявок. "Limit" - число записей, отображаемых по умолчанию. "Group" используется для ограничения доступа к разделу (например, Group: admin;group1;group2;). "Default" определяет, будет ли раздел доступен по умолчанию или агент должен активировать его вручную. "CacheTTLLocal" - время обновления кэша в минутах для этого раздела. "Mandatory" определяет, будет ли раздел отображаться всегда без возможности убрать его агентами. Примечание: только Атрибуты заявки и Дополнительные поля (DynamicField_NameX) допустимы для использования в DefaultColumns.',
         'Parameters for the dashboard backend of the ticket stats of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             'Параметры для раздела Дайджеста в интерфейсе агента со статистиками по заявкам. "Limit" - число записей, отображаемых по умолчанию. "Group" используется для ограничения доступа к разделу (например, Group: admin;group1;group2;). "Default" определяет, будет ли раздел доступен по умолчанию или агент должен активировать его вручную. "CacheTTLLocal" - время обновления кэша в минутах для этого раздела. "Mandatory" определяет, будет ли раздел отображаться всегда без возможности убрать его агентами.',
+        'MyLastChangedTickets dashboard widget.' => '',
         'Parameters for the dashboard backend of the upcoming events widget of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             'Параметры для раздела Дайджеста в интерфейсе агента с информацией о предстоящих событиях, отложенных с напоминанием. "Limit" - число записей, отображаемых по умолчанию. "Group" используется для ограничения доступа к разделу (например, Group: admin;group1;group2;). "Default" определяет, будет ли раздел доступен по умолчанию или агент должен активировать его вручную. "CacheTTLLocal" - время обновления кэша в минутах для этого раздела. "Mandatory" определяет, будет ли раздел отображаться всегда без возможности убрать его агентами.',
         'Parameters for the dashboard backend of the queue overview widget of the agent interface. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "QueuePermissionGroup" is not mandatory, queues are only listed if they belong to this permission group if you enable it. "States" is a list of states, the key is the sort order of the state in the widget. "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
@@ -7919,6 +7947,9 @@ sub Data {
             '',
         'Defines which notifications about mentions should be sent.' => '',
         'Defines if the toolbar mention icon should count mentions.' => '',
+        'These groups won\'t be selectable to be mentioned.' => '',
+        'Limits number of users (per article) that will be marked as mentioned and be notified. Users (and users from mentioned groups) that exceed this limit will silently be ignored.' =>
+            '',
         'Frontend registration of triggers for mention plugin of CKEditor.' =>
             '',
         'Frontend registration of input/output templates for mention plugin of CKEditor.' =>
@@ -8560,7 +8591,6 @@ Thanks for your help!
         'Appointment list' => 'Список мероприятий',
         'Appointment list.' => 'Список мероприятий.',
         'Appointment notifications' => 'Уведомления о мероприятиях',
-        'Appointments' => 'Мероприятия',
         'Arabic (Saudi Arabia)' => 'Арабский (Саудовская Аравия)',
         'ArticleTree' => 'Дерево сообщений',
         'Attachment Name' => 'Имя вложения',
@@ -8904,6 +8934,7 @@ Thanks for your help!
         'My Queues' => 'Мои очереди',
         'My Services' => 'Мои сервисы',
         'My Tickets.' => 'Мои заявки.',
+        'My last changed tickets' => '',
         'NameX' => 'ИмяХ',
         'New Ticket' => 'Новая заявка',
         'New Tickets' => 'Новые Заявки',

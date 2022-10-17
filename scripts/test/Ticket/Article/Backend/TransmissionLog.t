@@ -98,7 +98,7 @@ $Self->True(
 my @Events;
 
 local *Kernel::System::Ticket::Article::Backend::Email::EventHandler = sub {
-    my ($Self, %Param) = @_;
+    my ( $Self, %Param ) = @_;
     push @Events, \%Param;
 };
 
@@ -148,7 +148,7 @@ $Self->True(
 );
 
 $Self->Is(
-    scalar( @Events ),
+    scalar(@Events),
     2,
     'Event array is not empty',
 );

@@ -15,10 +15,8 @@ use vars (qw($Self));
 use Data::Dumper;
 use Kernel::System::VariableCheck qw(:all);
 
-my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
-my $HelperObject   = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-my $UserObject     = $Kernel::OM->Get('Kernel::System::User');
-my $SeleniumObject = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
+my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $OriginalSeleniumConfig = $ConfigObject->Get('SeleniumTestsConfig');
 
@@ -27,19 +25,24 @@ if ( IsHashRefWithData($OriginalSeleniumConfig) ) {
         $OriginalSeleniumConfig,
         "SeleniumTestsConfig exists:\n" . Dumper( \$OriginalSeleniumConfig ),
     );
+}
 
+$OriginalSeleniumConfig = {
+    remote_server_addr => 'selenium',
+    port               => '4444',
+    browser_name       => 'chrome',
+    platform           => 'ANY',
+};
+
+if ( IsHashRefWithData($OriginalSeleniumConfig) ) {
+    $Self->True(
+        $OriginalSeleniumConfig,
+        "New SeleniumTestsConfig exists:\n" . Dumper( \$OriginalSeleniumConfig ),
+    );
 }
-else {
-    $OriginalSeleniumConfig = {
-        remote_server_addr => 'localhost',
-        port               => '4444',
-        browser_name       => 'firefox',
-        platform           => 'ANY',
-        extra_capabilities => {
-            marionette => \0,
-        },
-    };
-}
+
+# do not run for Github
+return 1 if $ENV{PWD} eq '/__w/Znuny/Znuny';
 
 # new with chromeOptions
 $ConfigObject->Set(
@@ -55,6 +58,36 @@ $ConfigObject->Set(
         },
     }
 );
+
+my $SeleniumObject = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
+
+$Self->True(
+    $SeleniumObject->{UnitTestDriverObject}->{ResultData}->{TestOk},
+    'Selenium chromeOptions TestOk',
+);
+
+# check SeleniumTestsConfig via ObjectParamAdd
+$Kernel::OM->ObjectsDiscard(
+    Objects => ['Kernel::System::UnitTest::Selenium'],
+);
+
+$Kernel::OM->ObjectParamAdd(
+    'Kernel::System::UnitTest::Selenium' => {
+        SeleniumTestsConfig => {
+            remote_server_addr => 'selenium',
+            port               => '4444',
+            browser_name       => 'chrome',
+            extra_capabilities => {
+                chromeOptions => {
+                    args => [ "disable-gpu", "disable-infobars" ],
+                },
+                marionette => '',
+            },
+        }
+    },
+);
+
+$SeleniumObject = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 $Self->True(
     $SeleniumObject->{UnitTestDriverObject}->{ResultData}->{TestOk},

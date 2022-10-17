@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.258395826540593;
+    $Self->{Completeness}        = 0.257430566834497;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1472,6 +1472,10 @@ sub Data {
             '',
         'Client ID' => '',
         'Client secret' => '',
+        'URL for authorization code' => '',
+        'URL for token by authorization code' => '',
+        'URL for token by refresh token' => '',
+        'Access token scope' => '',
         'Template' => '',
         'This is the template that was used to create this OAuth2 token configuration.' =>
             '',
@@ -2358,6 +2362,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
         'Add new Appointment' => '',
+        'Appointments' => '',
         'Calendars' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
@@ -2511,6 +2516,9 @@ sub Data {
         'Email ticket' => '',
         'New phone ticket from %s' => '',
         'New email ticket to %s' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
+        'No tickets found.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardProductNotify.tt
         '%s %s is available!' => '%s %s उपलब्ध है',
@@ -2906,6 +2914,12 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
         'This message is being processed. Already tried to send %s time(s). Next try will be %s.' =>
             '',
+        'This message contains events' => '',
+        'This message contains an event' => '',
+        'Show more information' => '',
+        'Start: %s, End: %s' => '',
+        'Calendar events details' => '',
+        'Calendar event details' => '',
         'To open links in the following article, you might need to press Ctrl or Cmd or Shift key while clicking the link (depending on your browser and OS).' =>
             '',
         'Close this message' => '',
@@ -4708,6 +4722,9 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Dashboard/EventsTicketCalendar.pm
         'The start time of a ticket has been set after the end time!' => '',
 
+        # Perl Module: Kernel/Output/HTML/Dashboard/MyLastChangedTickets.pm
+        'Shown Tickets' => 'दिखाए गए टिकट',
+
         # Perl Module: Kernel/Output/HTML/Dashboard/News.pm
         'Can\'t connect to OTRS News server!' => '',
         'Can\'t get OTRS News from server!' => '',
@@ -4720,7 +4737,6 @@ sub Data {
         'Can\'t connect to %s!' => '',
 
         # Perl Module: Kernel/Output/HTML/Dashboard/TicketGeneric.pm
-        'Shown Tickets' => 'दिखाए गए टिकट',
         'Shown Columns' => '',
         'filter not active' => '',
         'filter active' => '',
@@ -4976,6 +4992,12 @@ sub Data {
 
         # Perl Module: Kernel/System/Calendar/Plugin/Ticket/Create.pm
         'On the date' => '',
+
+        # Perl Module: Kernel/System/CalendarEvents.pm
+        'on' => '',
+        'of year' => '',
+        'of month' => '',
+        'all-day' => '',
 
         # Perl Module: Kernel/System/Console/Command/Dev/Tools/Config2Docbook.pm
         'Configuration Options Reference' => '',
@@ -5725,14 +5747,19 @@ sub Data {
         'Uses richtext for viewing and editing: articles, salutations, signatures, standard templates, auto responses and notifications.' =>
             '',
         'Defines the URL rich text editor path.' => 'URL समृद्ध पाठ संपादक पथ को परिभाषित करता है।',
-        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            'समृद्ध पाठ संपादक घटक के लिए चौड़ाई को परिभाषित करता है।(पिक्सेल) संख्या या प्रतिशत मान (सापेक्ष) को लिखें।',
-        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            '',
         'Defines the default CSS used in rich text editors.' => 'समृद्ध पाठ संपादकों में प्रयुक्त तयशुदा CSS को परिभाषित करता है।',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.).' =>
             '',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.) in customer interface.' =>
+            '',
+        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            'समृद्ध पाठ संपादक घटक के लिए चौड़ाई को परिभाषित करता है।(पिक्सेल) संख्या या प्रतिशत मान (सापेक्ष) को लिखें।',
+        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            '',
+        'Defines the selectable font sizes in the rich text editor.' => '',
+        'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines additional plugins for use in the rich text editor.' => '',
+        'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
@@ -7370,6 +7397,7 @@ sub Data {
             '',
         'Parameters for the dashboard backend of the ticket stats of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
+        'MyLastChangedTickets dashboard widget.' => '',
         'Parameters for the dashboard backend of the upcoming events widget of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
         'Parameters for the dashboard backend of the queue overview widget of the agent interface. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "QueuePermissionGroup" is not mandatory, queues are only listed if they belong to this permission group if you enable it. "States" is a list of states, the key is the sort order of the state in the widget. "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
@@ -7910,6 +7938,9 @@ sub Data {
             '',
         'Defines which notifications about mentions should be sent.' => '',
         'Defines if the toolbar mention icon should count mentions.' => '',
+        'These groups won\'t be selectable to be mentioned.' => '',
+        'Limits number of users (per article) that will be marked as mentioned and be notified. Users (and users from mentioned groups) that exceed this limit will silently be ignored.' =>
+            '',
         'Frontend registration of triggers for mention plugin of CKEditor.' =>
             '',
         'Frontend registration of input/output templates for mention plugin of CKEditor.' =>
@@ -8540,7 +8571,6 @@ Thanks for your help!
         'Appointment list' => '',
         'Appointment list.' => '',
         'Appointment notifications' => '',
-        'Appointments' => '',
         'Arabic (Saudi Arabia)' => '',
         'ArticleTree' => '',
         'Attachment Name' => '',
@@ -8884,6 +8914,7 @@ Thanks for your help!
         'My Queues' => 'मेरी श्रेणी',
         'My Services' => '',
         'My Tickets.' => '',
+        'My last changed tickets' => '',
         'NameX' => '',
         'New Ticket' => 'नये टिकट ',
         'New Tickets' => 'नई टिकटें ',

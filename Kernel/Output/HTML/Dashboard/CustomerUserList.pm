@@ -92,14 +92,14 @@ sub Run {
     my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
 
     my $CustomerIDs = { $CustomerUserObject->CustomerSearch( CustomerIDRaw => $Param{CustomerID} ) };
-    
+
     # if we are using multiple CustomerIDs for a CustomerUser, we have to expand our CustomerIDs variable
     my @CustomerUserIDs = $CustomerUserObject->CustomerUserCustomerMemberList(
         CustomerID => $Param{CustomerID},
     );
 
     CUSTOMERUSERID:
-    for my $CustomerUserID (@CustomerUserIDs){
+    for my $CustomerUserID (@CustomerUserIDs) {
         my %CustomerUserList = $CustomerUserObject->CustomerSearch( UserLogin => $CustomerUserID );
         next CUSTOMERUSERID if !%CustomerUserList;
         $CustomerIDs = { %$CustomerIDs, %CustomerUserList };

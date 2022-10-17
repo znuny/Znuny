@@ -26,7 +26,7 @@ $Self->True(
 );
 
 # Load sample XML file.
-my $Directory = $ConfigObject->Get('Home') . '/scripts/test/sample/SysConfig/XML/';
+my $Directory = $ConfigObject->Get('Home') . '/scripts/test/sample/SysConfig/Migration';
 my $XMLLoaded = $SysConfigObject->ConfigurationXML2DB(
     UserID    => 1,
     Directory => $Directory,
@@ -40,7 +40,7 @@ $Self->True(
 );
 
 my %DeploymentResult = $SysConfigObject->ConfigurationDeploy(
-    Comments           => "AdminSystemConfiguration.t deployment",
+    Comments           => "MigrateSysConfigSettings deployment",
     UserID             => 1,
     Force              => 1,
     AllSettings        => 1,
@@ -53,23 +53,6 @@ $Self->True(
 );
 
 my @Tests = (
-    {
-        Name         => 'String - Rename',
-        OriginalData => {
-            Name           => 'EmptyString',
-            EffectiveValue => 'Ticket#',
-            IsValid        => 1,
-        },
-        Data => {
-            'EmptyString' => {
-                Name => 'Empty###String',
-            }
-        },
-        Expected => {
-            Name           => 'Empty###String',
-            EffectiveValue => 'Ticket#',
-        }
-    },
     {
         Name         => 'String - AddEffectiveValue',
         OriginalData => {
@@ -141,29 +124,6 @@ my @Tests = (
         }
     },
 
-    {
-        Name         => 'Array - Rename',
-        OriginalData => {
-            Name           => 'EmptyArray',
-            EffectiveValue => [
-                'thirdparty/jquery-jstree-3.3.1/jquery.jstree.js',
-                'thirdparty/jquery-3.5.1/jquery.js',
-            ],
-            IsValid => 1,
-        },
-        Data => {
-            'EmptyArray' => {
-                Name => 'Empty###Array',
-            }
-        },
-        Expected => {
-            Name           => 'Empty###Array',
-            EffectiveValue => [
-                'thirdparty/jquery-jstree-3.3.1/jquery.jstree.js',
-                'thirdparty/jquery-3.5.1/jquery.js',
-            ],
-        }
-    },
     {
         Name         => 'Array - AddEffectiveValue',
         OriginalData => {
@@ -304,31 +264,7 @@ my @Tests = (
             ]
         }
     },
-    {
-        Name         => 'Hash - Rename',
-        OriginalData => {
-            Name           => 'EmptyHash',
-            EffectiveValue => {
-                'a' => 1,
-                'b' => 2,
-                'c' => 3,
-            },
-            IsValid => 1,
-        },
-        Data => {
-            'EmptyHash' => {
-                Name => 'Empty###Hash',
-            }
-        },
-        Expected => {
-            Name           => 'Empty###Hash',
-            EffectiveValue => {
-                'a' => 1,
-                'b' => 2,
-                'c' => 3,
-            },
-        }
-    },
+
     {
         Name         => 'Hash - AddEffectiveValue',
         OriginalData => {
@@ -341,7 +277,7 @@ my @Tests = (
             IsValid => 1,
         },
         Data => {
-            'EmptyHash' => {
+            EmptyHash => {
                 AddEffectiveValue => {
                     'd' => 4,
                 }
@@ -369,7 +305,7 @@ my @Tests = (
             IsValid => 1,
         },
         Data => {
-            'EmptyHash' => {
+            EmptyHash => {
                 UpdateEffectiveValue => {
                     'b' => {
                         Key   => 'f',
@@ -399,7 +335,7 @@ my @Tests = (
             IsValid => 1,
         },
         Data => {
-            'EmptyHash' => {
+            EmptyHash => {
                 DeleteEffectiveValue => [
                     'a',
                 ]
@@ -425,7 +361,7 @@ my @Tests = (
             IsValid => 1,
         },
         Data => {
-            'EmptyHash' => {
+            EmptyHash => {
                 EffectiveValue => {
                     'a' => 1,
                     'b' => 2,
@@ -486,6 +422,12 @@ eval {
             Name => $SettingName,
         );
 
+        $Self->Is(
+            $ExpectedSetting{Name},
+            $Test->{Expected}->{Name},
+            $Test->{Name} . " - Settings $SettingName are migrated to expected name.",
+        );
+
         $Self->IsDeeply(
             $ExpectedSetting{EffectiveValue},
             $Test->{Expected}->{EffectiveValue},
@@ -515,7 +457,6 @@ eval {
         $SysConfigObject->SettingUnlock(
             DefaultID => $OriginalSetting{DefaultID},
         );
-
     }
 };
 

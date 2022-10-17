@@ -134,7 +134,7 @@ $Selenium->RunTest(
         # Import test Selenium Process if it does not exist.
         if ( !$TestProcessExists ) {
             $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminProcessManagement");
-            my $Location = $ConfigObject->Get('Home') . "/scripts/test/sample/ProcessManagement/$ProcessName.yml";
+            my $Location = $Selenium->{Home} . "/scripts/test/sample/ProcessManagement/$ProcessName.yml";
             $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
 
             $Selenium->find_element( "#OverwriteExistingEntitiesImport", 'css' )->click();

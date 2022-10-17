@@ -49,7 +49,7 @@ $Selenium->RunTest(
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # Import sample email.
-        my $Location   = $ConfigObject->Get('Home') . '/scripts/test/sample/PostMaster/PostMaster-Test26.box';
+        my $Location   = $Selenium->{Home} . '/scripts/test/sample/PostMaster/PostMaster-Test26.box';
         my $ContentRef = $Kernel::OM->Get('Kernel::System::Main')->FileRead(
             Location => $Location,
             Mode     => 'binmode',

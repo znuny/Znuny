@@ -19,9 +19,11 @@ use parent qw(Kernel::System::EventHandler);
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::DB',
+    'Kernel::System::Group',
     'Kernel::System::Log',
     'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
+    'Kernel::System::User',
 );
 
 =head1 NAME
@@ -55,82 +57,15 @@ sub new {
     return $Self;
 }
 
-=head2 SendNotification()
-
-Adds a mention for every given recipient and triggers event 'UserMention'
-of notification "Mention notification" to execute/send it.
-
-    my $Success = $MentionObject->SendNotification(
-        TicketID   => 3252,
-        ArticleID  => 6538,
-        Recipients => {
-            'root@localhost' => {
-                UserID    => 1,
-                UserEmail => 'admin@mycompany.org',
-            },
-            # ...
-        },
-        UserID => 123,
-    );
-
-    Returns true value if all mentions were added successfully.
-
-
-=cut
-
-sub SendNotification {
-    my ( $Self, %Param ) = @_;
-
-    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
-
-    NEEDED:
-    for my $Needed (qw(TicketID ArticleID Recipients UserID)) {
-        next NEEDED if defined $Param{$Needed};
-
-        $LogObject->Log(
-            Priority => 'error',
-            Message  => "Parameter '$Needed' is needed!",
-        );
-        return;
-    }
-
-    if ( !IsHashRefWithData( $Param{Recipients} ) ) {
-        $LogObject->Log(
-            Priority => 'error',
-            Message  => "Parameter 'Recipients' needs to be a hash with data!",
-        );
-        return;
-    }
-
-    my $AllMentionAddsOK = 1;
-
-    RECIPIENT:
-    for my $Recipient ( sort keys %{ $Param{Recipients} } ) {
-        my $Success = $Self->AddMention(
-            TicketID  => $Param{TicketID},
-            ArticleID => $Param{ArticleID},
-            Recipient => $Param{Recipients}->{$Recipient},
-            UserID    => $Param{UserID},
-        );
-
-        $AllMentionAddsOK = 0 if !$Success;
-    }
-
-    return $AllMentionAddsOK;
-}
-
 =head2 AddMention()
 
 Adds a mention and triggers event "UserMention" to send a notification.
 
     my $Success = $MentionObject->AddMention(
-        TicketID  => 3252,
-        ArticleID => 6538,
-        Recipient => {
-            UserID    => 1,
-            UserEmail => 'admin@mycompany.org',
-        },
-        UserID => 1,
+        TicketID        => 3252,
+        ArticleID       => 6538,
+        MentionedUserID => 5,
+        UserID          => 1,
     );
 
     Returns true value on success.
@@ -147,7 +82,7 @@ sub AddMention {
     my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
 
     NEEDED:
-    for my $Needed (qw(TicketID ArticleID Recipient UserID)) {
+    for my $Needed (qw(TicketID ArticleID MentionedUserID UserID)) {
         next NEEDED if defined $Param{$Needed};
 
         $LogObject->Log(
@@ -157,17 +92,9 @@ sub AddMention {
         return;
     }
 
-    if ( !IsHashRefWithData( $Param{Recipient} ) ) {
-        $LogObject->Log(
-            Priority => 'error',
-            Message  => "Parameter 'Recipient' needs to be a hash with data!",
-        );
-        return;
-    }
-
     my $TicketID        = $Param{TicketID};
     my $ArticleID       = $Param{ArticleID};
-    my $RecipientUserID = $Param{Recipient}->{UserID};
+    my $MentionedUserID = $Param{MentionedUserID};
 
     my $Mentions = $Self->GetTicketMentions(
         TicketID => $TicketID,
@@ -175,7 +102,7 @@ sub AddMention {
     return if ref $Mentions ne 'ARRAY';
 
     my $MentionExists = grep {
-        $_->{UserID} == $RecipientUserID
+        $_->{UserID} == $MentionedUserID
             && $_->{TicketID} == $TicketID
             && $_->{ArticleID} == $ArticleID
     } @{$Mentions};
@@ -185,7 +112,7 @@ sub AddMention {
         TicketID => $TicketID,
         Key      => 'MentionSeen',
         Value    => 0,
-        UserID   => $RecipientUserID,
+        UserID   => $MentionedUserID,
     );
     return if !$TicketFlagSet;
 
@@ -196,7 +123,7 @@ sub AddMention {
                 VALUES (?, ?, ?, current_timestamp)
         ',
         Bind => [
-            \$RecipientUserID,
+            \$MentionedUserID,
             \$TicketID,
             \$ArticleID,
         ],
@@ -205,7 +132,7 @@ sub AddMention {
     my $NotificationsConfig = $ConfigObject->Get('Mentions')->{Notifications};
     if ( $NotificationsConfig && $NotificationsConfig eq 'Ticket' ) {
         my $IsUserMentionedTicket = grep {
-            $_->{UserID} == $RecipientUserID
+            $_->{UserID} == $MentionedUserID
                 && $_->{TicketID} == $TicketID
         } @{$Mentions};
 
@@ -217,7 +144,7 @@ sub AddMention {
         Data  => {
             TicketID   => $TicketID,
             ArticleID  => $ArticleID,
-            Recipients => [ $RecipientUserID, ],
+            Recipients => [ $MentionedUserID, ],
         },
         UserID => $Param{UserID},
     );
@@ -225,13 +152,59 @@ sub AddMention {
     return 1;
 }
 
+=head2 CanUserRemoveMention()
+
+Checks if the given user is allowed to remove the given mention.
+
+    my $UserCanRemoveMention = $MentionObject->CanUserRemoveMention(
+        TicketID        => 3252,
+        MentionedUserID => 5,
+        UserID          => 1, # user who wants to remove the mention
+    );
+
+    Returns true value if the user is allowed to remove the mention.
+
+=cut
+
+sub CanUserRemoveMention {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+
+    NEEDED:
+    for my $Needed (qw(TicketID MentionedUserID UserID)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    # User can remove his own mention.
+    return 1 if $Param{MentionedUserID} == $Param{UserID};
+
+    # User can remove any mention from a ticket he owns.
+    my %Ticket = $TicketObject->TicketGet(
+        TicketID => $Param{TicketID},
+        UserID   => $Param{UserID},
+    );
+    return   if !%Ticket;
+    return 1 if $Ticket{OwnerID} == $Param{UserID};
+
+    return;
+}
+
 =head2 RemoveMention()
 
 Removes all mentions of a ticket for a specific user ID.
 
     my $Success = $MentionObject->RemoveMention(
-        TicketID => 3252,
-        UserID   => 5,
+        TicketID        => 3252,
+        MentionedUserID => 5,
+        UserID          => 1, # user who wants to remove the mention
     );
 
     Returns true value on success.
@@ -245,7 +218,7 @@ sub RemoveMention {
     my $DBObject  = $Kernel::OM->Get('Kernel::System::DB');
 
     NEEDED:
-    for my $Needed (qw(TicketID UserID)) {
+    for my $Needed (qw(TicketID MentionedUserID UserID)) {
         next NEEDED if defined $Param{$Needed};
 
         $LogObject->Log(
@@ -255,8 +228,20 @@ sub RemoveMention {
         return;
     }
 
-    my $TicketID = $Param{TicketID};
-    my $UserID   = $Param{UserID};
+    my $UserCanRemoveMention = $Self->CanUserRemoveMention(
+        TicketID        => $Param{TicketID},
+        MentionedUserID => $Param{MentionedUserID},
+        UserID          => $Param{UserID},
+    );
+    if ( !$UserCanRemoveMention ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message =>
+                "User with ID $Param{UserID} is not allowed to remove mention of user with ID $Param{MentionedUserID} from ticket with ID $Param{TicketID}.",
+        );
+
+        return;
+    }
 
     return if !$DBObject->Do(
         SQL => '
@@ -266,7 +251,7 @@ sub RemoveMention {
         ',
         Bind => [
             \$Param{TicketID},
-            \$Param{UserID},
+            \$Param{MentionedUserID},
         ],
     );
 
@@ -510,6 +495,244 @@ sub GetDashboardWidgetTicketData {
     );
 
     return \%Data;
+}
+
+=head2 GetMentionedUserIDsFromString()
+
+    Parses HTML string and returns the IDs of found mentioned users.
+
+    my $MentionedUserIDs = $MentionObject->GetMentionedUserIDsFromString(
+        HTMLString => '...<a class="Mention" href="..." target="...">@root@localhost<\/a>...',
+
+        # optional
+        # plain text string must be given if mentions in quoted text should be ignored.
+        # they are not reliably parsable from the HTML string.
+        PlainTextString => '...@root@localhost...',
+
+        # optional
+        # Limit for number of returned user IDs. The rest will silently be ignored.
+        Limit => 5,
+    );
+
+    Returns:
+    my $MentionedUserIDs = [ 1, 5, ],
+
+=cut
+
+sub GetMentionedUserIDsFromString {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    NEEDED:
+    for my $Needed (qw(HTMLString)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    my $MentionsRichtTextEditorConfig = $ConfigObject->Get('Mentions::RichTextEditor') // {};
+    my $MentionsTriggerConfig         = $MentionsRichtTextEditorConfig->{Triggers};
+    return [] if !IsHashRefWithData($MentionsTriggerConfig);
+
+    my @MentionedUsers = (
+        $Param{HTMLString}
+            =~ m{<a\b[^>]*?\bclass="Mention"[^>]*?>\Q$MentionsTriggerConfig->{User}\E(.*?)<\/a>}sg
+    );
+
+    my @MentionedGroups = (
+        $Param{HTMLString}
+            =~ m{<a\b[^>]*?\bclass="GroupMention"[^>]*?>\Q$MentionsTriggerConfig->{Group}\E(.*?)<\/a>}sg
+    );
+
+    # If plain text has additionally been given, use it to remove quoted text (lines starting
+    # with characters configured in Ticket::Frontend::Quote) and match the remaining
+    # contained mentions with those of the given HTML string.
+    #
+    # This avoids notification for mentions contained in quoted text.
+    #
+    # Mentions cannot be removed from quotations in HTML string because
+    # parsing is not reliably possible.
+    my $QuoteMarker = $ConfigObject->Get('Ticket::Frontend::Quote');
+    if (
+        IsStringWithData( $Param{PlainTextString} )
+        && IsStringWithData($QuoteMarker)
+        )
+    {
+        # Remove every line that starts with a quote marker.
+        ( my $PlainTextStringWithoutQuote = $Param{PlainTextString} ) =~ s{^\Q$QuoteMarker\E.*}{}mig;
+
+        # Drop found mentioned users that are not part of the plain text without quotes.
+        if ( defined $PlainTextStringWithoutQuote ) {
+            @MentionedUsers = grep { $PlainTextStringWithoutQuote =~ m{\[\d+\]\Q$MentionsTriggerConfig->{User}\E$_\b}m }
+                @MentionedUsers;
+        }
+
+        # Drop found mentioned groups that are not part of the plain text without quotes.
+        if ( defined $PlainTextStringWithoutQuote ) {
+            @MentionedGroups
+                = grep { $PlainTextStringWithoutQuote =~ m{\[\d+\]\Q$MentionsTriggerConfig->{Group}\E$_\b}m }
+                @MentionedGroups;
+        }
+    }
+
+    # Filter out blocked groups
+    @MentionedGroups = grep { !$Self->IsGroupBlocked( Group => $_ ) } @MentionedGroups;
+
+    if (@MentionedGroups) {
+        my $GroupUsers = $Self->_GetUsersOfGroups(
+            Groups => \@MentionedGroups,
+        );
+        if ( IsArrayRefWithData($GroupUsers) ) {
+            push @MentionedUsers, @{$GroupUsers};
+        }
+    }
+
+    return [] if !@MentionedUsers;
+
+    # Remove duplicate users but keep their order because of possible configured limit.
+    # Note that the order of users within a group is arbitrary.
+    my %UniqueMentionedUsers;
+    my @UniqueMentionedUsers;
+
+    MENTIONEDUSER:
+    for my $MentionedUser (@MentionedUsers) {
+        next MENTIONEDUSER if $UniqueMentionedUsers{$MentionedUser};
+
+        $UniqueMentionedUsers{$MentionedUser} = 1;
+        push @UniqueMentionedUsers, $MentionedUser;
+    }
+
+    if ( $Param{Limit} ) {
+        @UniqueMentionedUsers = @UniqueMentionedUsers[ 0 .. $Param{Limit} - 1 ];
+    }
+
+    my $MentionedUserIDs = $Self->_GetMentionedUserIDs(
+        MentionedUsers => \@UniqueMentionedUsers,
+    );
+
+    return $MentionedUserIDs;
+}
+
+=head2 IsGroupBlocked()
+
+Checks if the given group is blocked for mentioning by SysConfig option 'Mentions###BlockedGroups'.
+
+    my $GroupIsBlocked = $MentionObject->IsGroupBlocked(
+        Group => 'users',
+    );
+
+    Returns true value of group is blocked.
+
+=cut
+
+sub IsGroupBlocked {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    NEEDED:
+    for my $Needed (qw(Group)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    my $MentionsConfig = $ConfigObject->Get('Mentions') // {};
+
+    my $BlockedGroups = $MentionsConfig->{BlockedGroups} // [];
+    my %BlockedGroups = map { $_ => 1 } @{$BlockedGroups};
+    return if !%BlockedGroups;
+    return if !$BlockedGroups{ $Param{Group} };
+
+    return 1;
+}
+
+sub _GetUsersOfGroups {
+    my ( $Self, %Param ) = @_;
+
+    my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
+    my $LogObject   = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
+    for my $Needed (qw(Groups)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    return if !IsArrayRefWithData( $Param{Groups} );
+    my %Groups = map { $_ => 1 } @{ $Param{Groups} };
+
+    my %Users;
+    GROUP:
+    for my $Group ( sort keys %Groups ) {
+        my $GroupID = $GroupObject->GroupLookup(
+            Group => $Group,
+        );
+        next GROUP if !$GroupID;
+
+        my %GroupUsers = $GroupObject->PermissionGroupUserGet(
+            GroupID => $GroupID,
+            Type    => 'ro',
+        );
+        next GROUP if !%GroupUsers;
+
+        %Users = ( %Users, %GroupUsers );
+    }
+
+    my @Users = values %Users;
+
+    return \@Users;
+}
+
+sub _GetMentionedUserIDs {
+    my ( $Self, %Param ) = @_;
+
+    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+    my $LogObject  = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
+    for my $Needed (qw(MentionedUsers)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    return if !IsArrayRefWithData( $Param{MentionedUsers} );
+
+    my %MentionedUserIDs;
+    USER:
+    for my $User ( @{ $Param{MentionedUsers} } ) {
+        my $UserID = $UserObject->UserLookup(
+            UserLogin => $User,
+        );
+        next USER if !$UserID;
+
+        $MentionedUserIDs{$UserID} = 1;
+    }
+
+    my @MentionedUserIDs = sort keys %MentionedUserIDs;
+
+    return \@MentionedUserIDs;
 }
 
 sub _AssembleOrderByQuery {

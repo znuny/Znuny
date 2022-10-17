@@ -374,7 +374,7 @@ $Selenium->RunTest(
         $Self->Is(
             $Selenium->find_element( '#UserCustomerID', 'css' )->get_value(),
             $RandomID2 . '-not-existing',
-            "#UserCustomerID updated value",
+            "#UserCustomerID updated value not-existing",
         );
 
         $Selenium->find_element( "#UserFirstname", 'css' )->send_keys('-edit');

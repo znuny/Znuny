@@ -8,7 +8,7 @@
 # --
 
 [% RenderBlockStart("LinkTableSimple") %]
-            <div class="WidgetSimple DontPrint">
+            <div class="WidgetSimple LinkTable DontPrint">
                 <div class="Header">
                     <div class="WidgetAction Toggle">
                         <a href="#" title="[% Translate("Show or hide the content") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>

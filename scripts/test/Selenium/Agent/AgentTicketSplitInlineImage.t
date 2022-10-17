@@ -119,7 +119,7 @@ $Selenium->RunTest(
             );
 
             # Import test Selenium Process.
-            $Location = $ConfigObject->Get('Home') . "/scripts/test/sample/ProcessManagement/TestProcess.yml";
+            $Location = $Selenium->{Home} . "/scripts/test/sample/ProcessManagement/TestProcess.yml";
             $Selenium->find_element( "#FileUpload",                      'css' )->send_keys($Location);
             $Selenium->find_element( "#OverwriteExistingEntitiesImport", 'css' )->click();
             $Selenium->WaitFor(
@@ -151,7 +151,7 @@ $Selenium->RunTest(
 
         # Get image attachment.
         my $AttachmentName = "StdAttachment-Test1.png";
-        $Location = $ConfigObject->Get('Home')
+        $Location = $Selenium->{Home}
             . "/scripts/test/sample/StdAttachment/$AttachmentName";
         my $ContentRef = $Kernel::OM->Get('Kernel::System::Main')->FileRead(
             Location => $Location,

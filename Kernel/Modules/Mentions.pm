@@ -11,6 +11,7 @@ package Kernel::Modules::Mentions;
 use strict;
 use warnings;
 
+use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
@@ -27,6 +28,7 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
+    my $LogObject     = $Kernel::OM->Get('Kernel::System::Log');
     my $JSONObject    = $Kernel::OM->Get('Kernel::System::JSON');
     my $ParamObject   = $Kernel::OM->Get('Kernel::System::Web::Request');
     my $LayoutObject  = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
@@ -34,36 +36,47 @@ sub Run {
 
     my $Data = {};
 
-    my $Subaction = $ParamObject->GetParam( Param => 'Subaction' ) || '';
+    my $Subaction = $ParamObject->GetParam( Param => 'Subaction' ) // '';
 
     if ( $Subaction eq "Remove" ) {
-
         my %Params;
-        for my $Needed (qw(TicketID UserID)) {
+
+        NEEDED:
+        for my $Needed (qw(TicketID MentionedUserID)) {
             $Params{$Needed} = $ParamObject->GetParam( Param => $Needed );
+            next NEEDED if defined $Params{$Needed};
+
+            $LogObject->Log(
+                Priority => 'error',
+                Message  => "Parameter $Needed is missing.",
+            );
+            return;
         }
 
-        $Params{UserID} = $Self->{UserID} if !$Params{UserID};
-
         $MentionObject->RemoveMention(
-            TicketID => $Params{TicketID},
-            UserID   => $Params{UserID},
+            TicketID        => $Params{TicketID},
+            MentionedUserID => $Params{MentionedUserID},
+            UserID          => $Self->{UserID},
         );
     }
     elsif ( $Subaction eq "GetUsers" ) {
         my $SearchTerm = $ParamObject->GetParam( Param => "SearchTerm" );
+        my $Users      = $Self->_GetUsers(
+            SearchTerm => $SearchTerm,
+        );
+
         $Data = {
-            Users => $Self->_UsersGet(
-                SearchTerm => $SearchTerm
-            )
+            Users => $Users,
         };
     }
     elsif ( $Subaction eq "GetGroups" ) {
         my $SearchTerm = $ParamObject->GetParam( Param => "SearchTerm" );
+        my $Groups     = $Self->_GetGroups(
+            SearchTerm => $SearchTerm
+        );
+
         $Data = {
-            Groups => $Self->_GroupsGet(
-                SearchTerm => $SearchTerm
-            )
+            Groups => $Groups,
         };
     }
 
@@ -79,12 +92,26 @@ sub Run {
     );
 }
 
-sub _UsersGet {
+sub _GetUsers {
     my ( $Self, %Param ) = @_;
 
+    my $LogObject  = $Kernel::OM->Get('Kernel::System::Log');
     my $UserObject = $Kernel::OM->Get('Kernel::System::User');
 
-    my %UserList = $UserObject->UserList(
+    NEEDED:
+    for my $Needed (qw(SearchTerm)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    return if !IsStringWithData( $Param{SearchTerm} );
+
+    my %Users = $UserObject->UserList(
         Type  => 'Short',
         Valid => 1
     );
@@ -92,73 +119,83 @@ sub _UsersGet {
     my @Users;
 
     USER:
-    for my $User ( sort keys %UserList ) {
-        my %CleanUser;
-        my %User = $UserObject->GetUserData(
+    for my $User ( sort keys %Users ) {
+        my %UserData = $UserObject->GetUserData(
             UserID => $User
         );
 
         next USER
-            if $User{UserFullname} !~ m{\Q$Param{SearchTerm}\E}i
-            && $User{UserEmail} !~ m{\Q$Param{SearchTerm}\E}i;
+            if $UserData{UserFullname} !~ m{\Q$Param{SearchTerm}\E}i
+            && $UserData{UserLogin}    !~ m{\Q$Param{SearchTerm}\E}i
+            && $UserData{UserEmail}    !~ m{\Q$Param{SearchTerm}\E}i;
 
-        $CleanUser{id}       = $User{UserID};
-        $CleanUser{fullname} = $User{UserFullname};
-        $CleanUser{name}     = $User{UserFirstname};
-        $CleanUser{email}    = $User{UserEmail};
-        $CleanUser{username} = $User{UserLogin};
+        my %AssembledUserData = (
+            id       => $UserData{UserID},
+            fullname => $UserData{UserFullname},
+            username => $UserData{UserLogin},
+        );
 
-        push @Users, \%CleanUser;
+        push @Users, \%AssembledUserData;
     }
 
     return \@Users;
 }
 
-sub _GroupsGet {
+sub _GetGroups {
     my ( $Self, %Param ) = @_;
 
-    my $GroupObject  = $Kernel::OM->Get('Kernel::System::Group');
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+    my $LogObject     = $Kernel::OM->Get('Kernel::System::Log');
+    my $LayoutObject  = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $GroupObject   = $Kernel::OM->Get('Kernel::System::Group');
+    my $UserObject    = $Kernel::OM->Get('Kernel::System::User');
+    my $MentionObject = $Kernel::OM->Get('Kernel::System::Mention');
+
+    NEEDED:
+    for my $Needed (qw(SearchTerm)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    return if !IsStringWithData( $Param{SearchTerm} );
 
     my %Groups = $GroupObject->GroupList(
         Valid => 1,
     );
+
+    # Filter for search term and blocked groups
+    %Groups = map { $_ => $Groups{$_} }
+        grep {
+        $Groups{$_} =~ m{\Q$Param{SearchTerm}\E}i
+            && !$MentionObject->IsGroupBlocked( Group => $Groups{$_} )
+        }
+        sort keys %Groups;
 
     my @Groups;
 
     GROUPID:
     for my $GroupID ( sort keys %Groups ) {
         my $Group = $Groups{$GroupID};
-        next GROUPID if index( $Group, $Param{SearchTerm} ) == -1;
 
-        my %UserList = $GroupObject->PermissionGroupUserGet(
+        my %Users = $GroupObject->PermissionGroupUserGet(
             GroupID => $GroupID,
             Type    => 'ro',
         );
 
-        my @UserEmails;
+        my $NumberOfUsers = keys %Users;
+        my $MentionLabel  = $LayoutObject->{LanguageObject}->Translate( '%s users will be mentioned', $NumberOfUsers );
 
-        USER:
-        for my $User ( sort keys %UserList ) {
-            my %User = $UserObject->GetUserData(
-                UserID => $User
-            );
-            next USER if !%User;
+        my %AssembledGroupData = (
+            id           => $GroupID,
+            name         => $Group,
+            mentionLabel => $MentionLabel,
+        );
 
-            push @UserEmails, $User{UserEmail};
-        }
-
-        my %CleanGroup;
-        my $Count        = keys %UserList;
-        my $MentionLabel = $LayoutObject->{LanguageObject}->Translate( '%s users will be mentioned', $Count );
-
-        $CleanGroup{id}           = $GroupID;
-        $CleanGroup{name}         = $Groups{$GroupID};
-        $CleanGroup{mentionLabel} = $MentionLabel;
-        $CleanGroup{emails}       = join( ',', @UserEmails );
-
-        push @Groups, \%CleanGroup;
+        push @Groups, \%AssembledGroupData;
     }
 
     return \@Groups;

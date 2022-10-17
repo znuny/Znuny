@@ -189,7 +189,7 @@ sub _AddAction {
                 Check => 'MappingType',
             },
             {
-                Name => 'AllAttachments',
+                Name => 'GetAllArticleAttachments',
                 Type => 'String',
             },
         ],
@@ -214,9 +214,9 @@ sub _AddAction {
     }
 
     my $InvokerConfig = {
-        Description    => $GetParam->{Description},
-        Type           => $GetParam->{InvokerType},
-        AllAttachments => $GetParam->{AllAttachments},
+        Description              => $GetParam->{Description},
+        Type                     => $GetParam->{InvokerType},
+        GetAllArticleAttachments => $GetParam->{GetAllArticleAttachments},
     };
 
     # Validation errors.
@@ -353,7 +353,7 @@ sub _ChangeAction {
                 Default => 'Ticket',
             },
             {
-                Name => 'AllAttachments',
+                Name => 'GetAllArticleAttachments',
                 Type => 'String',
             },
         ],
@@ -389,8 +389,8 @@ sub _ChangeAction {
         $Errors{InvokerServerError} = 'ServerError';
     }
 
-    $InvokerConfig->{Description}    = $GetParam->{Description};
-    $InvokerConfig->{AllAttachments} = $GetParam->{AllAttachments};
+    $InvokerConfig->{Description}              = $GetParam->{Description};
+    $InvokerConfig->{GetAllArticleAttachments} = $GetParam->{GetAllArticleAttachments};
 
     if (%Errors) {
         return $Self->_ShowScreen(
@@ -820,15 +820,15 @@ sub _ShowScreen {
         );
     }
 
-    if ( $TemplateData{InvokerType} eq 'Znuny4OTRSAdvanced::Generic' ) {
-        $TemplateData{AllAttachmentsStrg} = $LayoutObject->BuildSelection(
+    if ( $TemplateData{InvokerType} eq 'Ticket::Generic' ) {
+        $TemplateData{GetAllArticleAttachmentsStrg} = $LayoutObject->BuildSelection(
             Data => {
                 0 => 'no',
                 1 => 'yes',
             },
-            Name         => 'AllAttachments',
+            Name         => 'GetAllArticleAttachments',
             Sort         => 'AlphanumericValue',
-            SelectedID   => $Param{InvokerConfig}->{AllAttachments} // 0,
+            SelectedID   => $Param{InvokerConfig}->{GetAllArticleAttachments} // 0,
             PossibleNone => 0,
             Class        => 'Modernize',
             Translation  => 1,

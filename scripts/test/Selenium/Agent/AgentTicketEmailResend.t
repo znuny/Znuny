@@ -156,7 +156,7 @@ $Selenium->RunTest(
             my $Value = $ComposeData{$Field};
 
             if ( $Field eq 'FileUpload' ) {
-                $Value = $Kernel::OM->Get('Kernel::Config')->Get('Home')
+                $Value = $Selenium->{Home}
                     . "/scripts/test/sample/StdAttachment/$ComposeData{$Field}";
 
                 # It's necessary to hide drag&drop upload and show input field.

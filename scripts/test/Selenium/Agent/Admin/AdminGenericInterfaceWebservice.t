@@ -50,7 +50,6 @@ $Selenium->RunTest(
         );
 
         my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
-        my $Home        = $ConfigObject->Get('Home');
 
         # Login as test user.
         $Selenium->Login(
@@ -112,7 +111,7 @@ $Selenium->RunTest(
             $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('.Dialog.Modal').length" );
 
             my $File     = $Webservice . '.yml';
-            my $Location = "$Home/scripts/test/sample/Webservice/$File";
+            my $Location = "$Selenium->{Home}/scripts/test/sample/Webservice/$File";
             my $Name     = $WebserviceNames{$Webservice};
 
             if ( $Name ne $Webservice ) {
