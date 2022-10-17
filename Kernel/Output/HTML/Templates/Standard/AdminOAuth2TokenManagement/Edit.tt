@@ -147,6 +147,14 @@
                         </div>
                         <div class="Clear"></div>
 
+                        <label for="Scope">
+                            [% Translate("Access token scope") | html %]:
+                        </label>
+                        <div class="Field">
+                            <input type="text" id="Scope" name="Scope" value="[% Data.Scope | html %]" class="W33pc" />
+                        </div>
+                        <div class="Clear"></div>
+
                         <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]:</label>
                         <div class="Field">
                             [% Data.ValidIDSelection %]

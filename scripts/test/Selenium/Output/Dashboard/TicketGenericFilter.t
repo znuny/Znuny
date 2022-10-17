@@ -22,6 +22,13 @@ $Selenium->RunTest(
         my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
         my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
+        # disable dashboard widget MyLastChangedTickets for this TicketGenericFilter test.
+        $HelperObject->DisableSysConfigs(
+            DisableSysConfigs => [
+                'DashboardBackend###0255-MyLastChangedTickets',
+            ],
+        );
+
         # Create test user.
         my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],

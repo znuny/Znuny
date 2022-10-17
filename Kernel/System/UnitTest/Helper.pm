@@ -370,7 +370,7 @@ sub BeginWork {
 
 Rolls back the current database transaction.
 
-    $HelperObject->Rollback()
+    $HelperObject->Rollback();
 
 =cut
 
@@ -433,13 +433,19 @@ the current system time will be used.
 All calls to methods of Kernel::System::Time and Kernel::System::DateTime will
 use the given time afterwards.
 
-    my $Timestamp = $HelperObject->FixedTimeSet(366475757);         # with Timestamp
-    my $Timestamp = $HelperObject->FixedTimeSet($DateTimeObject);   # with previously created DateTime object
-    my $Timestamp = $HelperObject->FixedTimeSet();                  # set to current date and time
+    # with Timestamp
+    my $Timestamp = $HelperObject->FixedTimeSet(366475757);
+
+    # with previously created DateTime object
+    my $Timestamp = $HelperObject->FixedTimeSet($DateTimeObject);
+
+    # set to current date and time
+    my $Timestamp = $HelperObject->FixedTimeSet();
 
 Returns:
 
-    my $Timestamp = 1454420017;    # date/time as seconds
+    # date/time as seconds
+    my $Timestamp = 1454420017;
 
 =cut
 
