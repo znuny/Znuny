@@ -70,10 +70,9 @@ New files will be licensed using the AGPL Version 3. If you contribute code to t
 - [ ] The code change is tested and works locally.(❗)
 - [ ] There is no commented out code in this PR.(❕)
 - [ ] You improved or added new unit tests.(❕)
-- [ ] Local ZnunyCodePolicy run passes successfully.(❕)
-- [ ] Local unit tests pass.(❕)
-- [ ] GitHub workflow ZnunyCodePolicy passes.(❗)
-- [ ] GitHub workflow unit tests pass.(❗)
+- [ ] Local ZnunyCodePolicy passed.(❕)
+- [ ] Local UnitTests / Selenium passed.(❕)
+- [ ] GitHub workflow CI (UnitTests / Selenium) passed.(❗)
 
 <!--
   Thank you for contributing ❤
