@@ -143,7 +143,7 @@ sub new {
     $Self->{Locale} = $Locale;
 
     # Use private parameter to pass in an already created CPANDateTimeObject (used)
-    #   by the Clone() method).
+    #   by the Clone() function).
     if ( $Param{_CPANDateTimeObject} ) {
         $Self->{CPANDateTimeObject} = $Param{_CPANDateTimeObject};
         return $Self;
@@ -230,7 +230,7 @@ Sets date and time values of this object. You have to give at least one paramete
 Note that the resulting date and time have to be valid. On validation error, the current date and time of the object
 won't be changed.
 
-Note that in order to change the time zone, you have to use method C<L</ToTimeZone()>>.
+Note that in order to change the time zone, you have to use function C<L</ToTimeZone()>>.
 
     # Setting values by hash:
     my $Success = $DateTimeObject->Set(
@@ -296,7 +296,7 @@ sub Set {
     # Create a new DateTime object with the new/added values
     my $CPANDateTimeParams = $Self->_ToCPANDateTimeParamNames( %{$CurrentValues} );
 
-    # Delete parameters that are not allowed for set method
+    # Delete parameters that are not allowed for set function
     delete $CPANDateTimeParams->{time_zone};
 
     my $Result;
@@ -392,7 +392,7 @@ sub Add {
     }
 
     # NOTE: For performance reasons, the following code for calculating date and time
-    # works directly with the CPAN DateTime object instead of methods of Kernel::System::DateTime.
+    # works directly with the CPAN DateTime object instead of functions of Kernel::System::DateTime.
 
     #
     # Working time calculation
@@ -721,7 +721,7 @@ Calculates delta between this and another DateTime object. Optionally calculates
 
     my $Delta = $DateTimeObject->Delta( DateTimeObject => $AnotherDateTimeObject );
 
-Note that the returned values are always positive. Use the comparison methods to see if a date is newer/older/equal.
+Note that the returned values are always positive. Use the comparison functions to see if a date is newer/older/equal.
 
     # Calculate "working time"
     ForWorkingTime => 0, # set to 1 to calculate working time between the two DateTime objects
@@ -997,14 +997,13 @@ Compares dates and returns a value suitable for using Perl's sort function (-1, 
     my $Result = $DateTimeObject->Compare( DateTimeObject => $AnotherDateTimeObject );
 
 You can also use this as a function for Perl's sort:
-
-    my @SortedDateTimeObjects = sort { $a->Compare( DateTimeObject => $b ); } @UnsortedDateTimeObjects:
+    my @SortedDateTimeObjects = sort { $a->Compare( DateTimeObject => $b ) } @UnsortedDateTimeObjects;
 
 Returns:
 
-    $Result = -1;       # if date/time of $DateTimeObject < date/time of $AnotherDateTimeObject
-    $Result = 0;        # if date/time are equal
-    $Result = 1:        # if date/time of $DateTimeObject > date/time of $AnotherDateTimeObject
+    my $Result = -1;       # if date/time of $DateTimeObject < date/time of $AnotherDateTimeObject
+    my $Result = 0;        # if date/time are equal
+    my $Result = 1;        # if date/time of $DateTimeObject > date/time of $AnotherDateTimeObject
 
 =cut
 
@@ -1427,7 +1426,19 @@ Returns an array ref of available time zones.
 
     my $TimeZones = $DateTimeObject->TimeZoneList();
 
-You can also call this method without an object:
+    # You can add an obsolete time zone to the list if the time zone is valid.
+    # This is useful to keep the obsolete time zone from a stored setting
+    # so that it will e.g. be shown as selected when showing a selection list.
+    # Otherwise the user would have to select a new time zone.
+
+    my $TimeZones = $DateTimeObject->TimeZoneList(
+        # Africa/Kinshasa has become obsolete and has been replaced by Africa/Lagos.
+        # This option will add Africa/Kinshasa to the list of time zones nonetheless.
+        # The given time zone must be valid, so 'Some/InvalidTimeZone' will not be added.
+        IncludeTimeZone => 'Africa/Kinshasa',
+    );
+
+You can also call this function without an object:
 
     my $TimeZones = Kernel::System::DateTime->TimeZoneList();
 
@@ -1444,13 +1455,29 @@ Returns:
 =cut
 
 sub TimeZoneList {
+    my ( $Self, %Param ) = @_;
+
     my @TimeZones = @{ DateTime::TimeZone->all_names() };
+    my %TimeZones = map { $_ => 1 } @TimeZones;
 
     # add missing UTC time zone for certain DateTime versions
-    my %TimeZones = map { $_ => 1 } @TimeZones;
     if ( !exists $TimeZones{UTC} ) {
         push @TimeZones, 'UTC';
     }
+
+    # Add missing obsolete (but valid) time zone if given.
+    # This ensures that selected time zones in drop-downs will always
+    # also show an obsolete time zone that was previously selected.
+    if (
+        $Param{IncludeTimeZone}
+        && !exists $TimeZones{ $Param{IncludeTimeZone} }
+        && $Self->IsTimeZoneValid( TimeZone => $Param{IncludeTimeZone} )
+        )
+    {
+        push @TimeZones, $Param{IncludeTimeZone};
+    }
+
+    @TimeZones = sort @TimeZones;
 
     return \@TimeZones;
 }
@@ -1509,12 +1536,13 @@ Checks if the given time zone is valid.
 
     my $Valid = $DateTimeObject->IsTimeZoneValid( TimeZone => 'Europe/Berlin' );
 
+    # You can also call this function without an object:
+    my $Valid = Kernel::System::DateTime->IsTimeZoneValid( TimeZone => 'Europe/Berlin' );
+
 Returns:
-    $ValidID = 1;    # if given time zone is valid, 0 otherwise.
+    $Valid = 1;    # if given time zone is valid, 0 otherwise.
 
 =cut
-
-my %ValidTimeZones;    # Cache for all instances.
 
 sub IsTimeZoneValid {
     my ( $Self, %Param ) = @_;
@@ -1529,14 +1557,58 @@ sub IsTimeZoneValid {
         }
     }
 
+    # Special case: Somehow is_valid_name below returns true value for time zone '0'.
+    return 0 if $Param{TimeZone} eq '0';
+
     # allow DateTime internal time zone in 'floating'
     return 1 if $Param{TimeZone} eq 'floating';
 
-    if ( !%ValidTimeZones ) {
-        %ValidTimeZones = map { $_ => 1 } @{ $Self->TimeZoneList() };
+    return 1 if DateTime::TimeZone->is_valid_name( $Param{TimeZone} );
+
+    return 0;
+}
+
+=head2 GetRealTimeZone()
+
+Returns the real time zone for the given one.
+Some time zones become obsolete/invalid over time but must still be mapped to the current/valid ones.
+DateTime::TimeZone calls this "linked" time zones. For current/valid time zones this function just
+returns the given time zone.
+
+    my $TimeZone = $DateTimeObject->GetRealTimeZone( TimeZone => 'Africa/Addis_Ababa' );
+
+    # You can also call this function without an object:
+    my $TimeZone = Kernel::System::DateTime->GetRealTimeZone( TimeZone => 'Africa/Addis_Ababa' );
+
+Returns:
+    my $TimeZone = 'Africa/Nairobi';
+
+=cut
+
+sub GetRealTimeZone {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
+    for my $Needed (qw(TimeZone)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
     }
 
-    return $ValidTimeZones{ $Param{TimeZone} } ? 1 : 0;
+    my %RealByLinkedTimeZones = DateTime::TimeZone->links();
+    my $RealTimeZone          = $RealByLinkedTimeZones{ $Param{TimeZone} };
+    return $RealTimeZone if $RealTimeZone;
+
+    my $TimeZoneIsValid = $Self->IsTimeZoneValid( TimeZone => $Param{TimeZone} );
+    return $Param{TimeZone} if $TimeZoneIsValid;
+
+    return;
 }
 
 =head2 OTRSTimeZoneGet()
@@ -1545,8 +1617,8 @@ Returns the time zone set for OTRS.
 
     my $OTRSTimeZone = $DateTimeObject->OTRSTimeZoneGet();
 
-    # You can also call this method without an object:
-    #my $OTRSTimeZone = Kernel::System::DateTime->OTRSTimeZoneGet();
+    # You can also call this function without an object:
+    my $OTRSTimeZone = Kernel::System::DateTime->OTRSTimeZoneGet();
 
 Returns:
 
@@ -1565,7 +1637,7 @@ time zone setting.
 
     my $UserDefaultTimeZoneGet = $DateTimeObject->UserDefaultTimeZoneGet();
 
-You can also call this method without an object:
+You can also call this function without an object:
 
     my $UserDefaultTimeZoneGet = Kernel::System::DateTime->UserDefaultTimeZoneGet();
 
@@ -1585,7 +1657,7 @@ Returns the time zone of the system.
 
     my $SystemTimeZone = $DateTimeObject->SystemTimeZoneGet();
 
-You can also call this method without an object:
+You can also call this function without an object:
 
     my $SystemTimeZone = Kernel::System::DateTime->SystemTimeZoneGet();
 
@@ -1603,7 +1675,7 @@ sub SystemTimeZoneGet {
 
 =head2 _ToCPANDateTimeParamNames()
 
-Maps date/time parameter names expected by the methods of this package to the ones expected by CPAN/Perl DateTime
+Maps date/time parameter names expected by the functions of this package to the ones expected by CPAN/Perl DateTime
 package.
 
     my $DateTimeParams = $DateTimeObject->_ToCPANDateTimeParamNames(
@@ -1739,13 +1811,15 @@ sub _StringToHash {
         };
 
         # Check if the rest 'OffsetOrTZ' is an offset or timezone.
-        #   If isn't an offset consider it a timezone
+        #   If it isn't an offset consider it a timezone
         if ( $OffsetOrTZ !~ m/(\+|\-)\d{2}:?\d{2}/i ) {
 
             # Make sure the time zone is valid. Otherwise, assume UTC.
             if ( !$Self->IsTimeZoneValid( TimeZone => $OffsetOrTZ ) ) {
                 $OffsetOrTZ = 'UTC';
             }
+
+            $OffsetOrTZ = $Self->GetRealTimeZone( TimeZone => $OffsetOrTZ );
 
             return {
                 %{$DateTimeHash},

@@ -26,10 +26,12 @@ Rebuilds the system configuration trying to cleanup the database.
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    return $Self->RebuildConfig(
+    $Self->RebuildConfig(
         %Param,
         CleanUpIfPossible => 1,
     );
+
+    return 1;
 }
 
 1;

@@ -385,6 +385,7 @@ sub Export {
                 PluginData     => {
                     AppointmentID => $Appointment{AppointmentID},
                     UserID        => $Param{UserID},
+                    URL           => $PluginList->{$PluginKey}->{URL} // '',
                 }
             );
 

@@ -7,6 +7,7 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
+## nofilter("TidyAll::Plugin::OTRS::Perl::Pod::FunctionPod")
 ## nofilter("TidyAll::Plugin::OTRS::Perl::Pod::SpellCheck")
 
 package Kernel::System::UnitTest::Selenium;
@@ -18,7 +19,7 @@ use utf8;
 
 use Devel::StackTrace();
 use MIME::Base64();
-use File::Path();
+use File::Path qw(mkpath);
 use File::Temp();
 use Time::HiRes();
 use URI::Escape;
@@ -90,17 +91,45 @@ Specify the connection details in C<Config.pm>, like this:
 
 Then you can use the full API of L<Selenium::Remote::Driver> on this object.
 
+    # For testing with other selenium configurations, change the SeleniumTestsConfig directly without changing the Config.
+
+    $Kernel::OM->ObjectParamAdd(
+        'Kernel::System::UnitTest::Selenium' => {
+            SeleniumTestsConfig  => {
+                remote_server_addr => 'selenium',
+                port               => '4444',
+                browser_name       => 'chrome',
+                extra_capabilities => {
+                    chromeOptions => {
+                        args => [ "disable-gpu", "disable-infobars" ],
+                    },
+                    marionette => '',
+                },
+            }
+        },
+    );
+
+    my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
+
 =cut
 
 sub new {
     my ( $Class, %Param ) = @_;
 
     my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-    $Param{UnitTestDriverObject} ||= $HelperObject->UnitTestObjectGet();
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
 
+    $Param{UnitTestDriverObject} ||= $HelperObject->UnitTestObjectGet();
     $Param{UnitTestDriverObject}->True( 1, "Starting up Selenium scenario..." );
 
-    my %SeleniumTestsConfig = %{ $Kernel::OM->Get('Kernel::Config')->Get('SeleniumTestsConfig') // {} };
+    my %SeleniumTestsConfig = %{ $ConfigObject->Get('SeleniumTestsConfig') // {} };
+    if ( $Param{SeleniumTestsConfig} ) {
+        %SeleniumTestsConfig = (
+            %SeleniumTestsConfig,
+            %{ $Param{SeleniumTestsConfig} }
+        );
+    }
 
     if ( !%SeleniumTestsConfig ) {
         my $Self = bless {}, $Class;
@@ -114,10 +143,10 @@ sub new {
         }
     }
 
-    $Kernel::OM->Get('Kernel::System::Main')->RequireBaseClass('Selenium::Remote::Driver')
+    $MainObject->RequireBaseClass('Selenium::Remote::Driver')
         || die "Could not load Selenium::Remote::Driver";
 
-    $Kernel::OM->Get('Kernel::System::Main')->Require('Kernel::System::UnitTest::Selenium::WebElement')
+    $MainObject->RequireBaseClass('Kernel::System::UnitTest::Selenium::WebElement')
         || die "Could not load Kernel::System::UnitTest::Selenium::WebElement";
 
     my $Self;
@@ -142,7 +171,7 @@ sub new {
         die $Exception if $Exception !~ m{Socket timeout reading Marionette handshake data};
 
         # Sleep and try again, bail out if it fails a second time.
-        #   A long sleep of 10 seconds is acceptable here, as it occurs only very rarely.
+        # A long sleep of 10 seconds is acceptable here, as it occurs only very rarely.
         sleep 10;
 
         $Self = $Class->SUPER::new(
@@ -155,21 +184,33 @@ sub new {
         );
     }
 
-    $Self->{UnitTestDriverObject} = $Param{UnitTestDriverObject};
-    $Self->{SeleniumTestsActive}  = 1;
+    $Self->{UnitTestDriverObject}         = $Param{UnitTestDriverObject};
+    $Self->{SeleniumTestsActive}          = 1;
+    $Self->{SeleniumScreenshotsDirectory} = 'SeleniumScreenshots';
+    $Self->{SeleniumDump}                 = $ENV{SELENIUM_DUMP} || $Param{SeleniumTestsConfig}->{SeleniumDump};
+    $Self->{Home}                         = $Self->GetSeleniumHome();
 
     $Self->{UnitTestDriverObject}->{SeleniumData} = { %{ $Self->get_capabilities() }, %{ $Self->status() } };
 
     #$Self->debug_on();
 
-    # set screen size from config or use defauls
+    # set screen size from config or use defaults
     my $Height = $SeleniumTestsConfig{window_height} || 1200;
     my $Width  = $SeleniumTestsConfig{window_width}  || 1400;
 
     $Self->set_window_size( $Height, $Width );
 
-    $Self->{BaseURL} = $Kernel::OM->Get('Kernel::Config')->Get('HttpType') . '://';
-    $Self->{BaseURL} .= Kernel::System::UnitTest::Helper->GetTestHTTPHostname();
+    $Self->{BaseURL} = $ConfigObject->Get('HttpType') . '://';
+    $Self->{BaseURL} .= $HelperObject->GetTestHTTPHostname();
+
+    # Force usage of legacy webdriver methods in Chrome until things are more stable.
+    if ( lc $SeleniumTestsConfig{browser_name} eq 'chrome' ) {
+        $Self->{is_wd3} = 0;
+    }
+
+    if ( defined $SeleniumTestsConfig{is_wd3} ) {
+        $Self->{is_wd3} = $SeleniumTestsConfig{is_wd3};
+    }
 
     # Remember the start system time for the selenium test run.
     $Self->{TestStartSystemTime} = time;    ## no critic
@@ -235,16 +276,12 @@ sub RunTest {
     return 1;
 }
 
-=begin Internal:
-
 =head2 _execute_command()
 
 Override internal command of base class.
 
 We use it to output successful command runs to the UnitTest object.
-Errors will cause an exeption and be caught elsewhere.
-
-=end Internal:
+Errors will cause an exception and be caught elsewhere.
 
 =cut
 
@@ -254,11 +291,18 @@ sub _execute_command {    ## no critic
     my $Result = $Self->SUPER::_execute_command( $Res, $Params );
 
     my $TestName = 'Selenium command success: ';
+    my %DumpData = (
+        Res    => $Res    || {},    ## no critic
+        Params => $Params || {},    ## no critic
+        Time   => time(),
+    );
+
+    if ( $Self->{SeleniumDump} && $Res->{command} ne 'screenshot' ) {
+        $DumpData{Result} = $Result;
+    }
+
     $TestName .= $Kernel::OM->Get('Kernel::System::Main')->Dump(
-        {
-            %{ $Res    || {} },    ## no critic
-            %{ $Params || {} },    ## no critic
-        }
+        \%DumpData
     );
 
     if ( $Self->{SuppressCommandRecording} ) {
@@ -285,6 +329,9 @@ sub get {    ## no critic
     my ( $Self, $URL ) = @_;
 
     if ( $URL !~ m{http[s]?://}smx ) {
+
+        # Chop off leading slashes to avoid duplicates.
+        $URL =~ s{\A/+}{}smx;
         $URL = "$Self->{BaseURL}/$URL";
     }
 
@@ -317,7 +364,7 @@ sub get_alert_text {    ## no critic
 
 =head2 VerifiedGet()
 
-perform a get() call, but wait for the page to be fully loaded (works only within OTRS).
+perform a get() call, but wait for the page to be fully loaded (works only within Znuny).
 Will die() if the verification fails.
 
     $SeleniumObject->VerifiedGet(
@@ -334,14 +381,14 @@ sub VerifiedGet {
     $Self->WaitFor(
         JavaScript =>
             'return typeof(Core) == "object" && typeof(Core.App) == "object" && Core.App.PageLoadComplete'
-    ) || die "OTRS API verification failed after page load.";
+    ) || die "Znuny API verification failed after page load.";
 
     return;
 }
 
 =head2 VerifiedRefresh()
 
-perform a refresh() call, but wait for the page to be fully loaded (works only within OTRS).
+perform a refresh() call, but wait for the page to be fully loaded (works only within Znuny).
 Will die() if the verification fails.
 
     $SeleniumObject->VerifiedRefresh();
@@ -356,7 +403,7 @@ sub VerifiedRefresh {
     $Self->WaitFor(
         JavaScript =>
             'return typeof(Core) == "object" && typeof(Core.App) == "object" && Core.App.PageLoadComplete'
-    ) || die "OTRS API verification failed after page load.";
+    ) || die "Znuny API verification failed after page load.";
 
     return;
 }
@@ -557,7 +604,17 @@ sub SwitchToFrame {
         );
     }
 
-    $Self->switch_to_frame( $Self->find_element( $Param{FrameSelector}, 'css' ) );
+    my $Element = $Self->FindElementSave(
+        Selector     => $Param{FrameSelector},
+        SelectorType => 'css',
+    );
+
+    $Self->{UnitTestDriverObject}->True(
+        scalar $Element->{id},
+        'SwitchToFrame: Element $Param{FrameSelector}.'
+    );
+
+    $Self->switch_to_frame($Element);
 
     return 1;
 }
@@ -645,63 +702,9 @@ sub HandleError {
         $Error .= "\n" . $Self->{_SeleniumStackTrace};
     }
 
+    $Self->CreateScreenshot();
+
     $Self->{UnitTestDriverObject}->False( 1, $Error );
-
-    # Don't create a test entry for the screenshot command,
-    #   to make sure it gets attached to the previous error entry.
-    local $Self->{SuppressCommandRecording} = 1;
-
-    my $Data = $Self->screenshot();
-    return if !$Data;
-    $Data = MIME::Base64::decode_base64($Data);
-
-    # Attach the screenshot to the actual error entry.
-    my $Filename = $Kernel::OM->Get('Kernel::System::UnitTest::Helper')->GetRandomNumber() . '.png';
-    $Self->{UnitTestDriverObject}->AttachSeleniumScreenshot(
-        Filename => $Filename,
-        Content  => $Data
-    );
-
-    #
-    # Store screenshots in a local folder from where they can be opened directly in the browser.
-    #
-    my $LocalScreenshotDir = $Kernel::OM->Get('Kernel::Config')->Get('Home') . '/var/httpd/htdocs/SeleniumScreenshots';
-    mkdir $LocalScreenshotDir || return $Self->False( 1, "Could not create $LocalScreenshotDir." );
-
-    my $HttpType = $Kernel::OM->Get('Kernel::Config')->Get('HttpType');
-    my $Hostname = $Kernel::OM->Get('Kernel::System::UnitTest::Helper')->GetTestHTTPHostname();
-    my $URL      = "$HttpType://$Hostname/"
-        . $Kernel::OM->Get('Kernel::Config')->Get('Frontend::WebPath')
-        . "SeleniumScreenshots/$Filename";
-
-    $Kernel::OM->Get('Kernel::System::Main')->FileWrite(
-        Directory => $LocalScreenshotDir,
-        Filename  => $Filename,
-        Content   => \$Data,
-    ) || return $Self->False( 1, "Could not write file $LocalScreenshotDir/$Filename" );
-
-    #
-    # If a shared screenshot folder is present, then we also store the screenshot there for external use.
-    #
-    if ( -d '/var/otrs-unittest/' && -w '/var/otrs-unittest/' ) {
-
-        my $SharedScreenshotDir = '/var/otrs-unittest/SeleniumScreenshots';
-        mkdir $SharedScreenshotDir || return $Self->False( 1, "Could not create $SharedScreenshotDir." );
-
-        $Kernel::OM->Get('Kernel::System::Main')->FileWrite(
-            Directory => $SharedScreenshotDir,
-            Filename  => $Filename,
-            Content   => \$Data,
-            )
-            || return $Self->{UnitTestDriverObject}->False( 1, "Could not write file $SharedScreenshotDir/$Filename" );
-    }
-
-    {
-        # Make sure the screenshot URL is output even in non-verbose mode to make it visible
-        #   for debugging, but don't register it as a test failure to keep the error count more correct.
-        local $Self->{UnitTestDriverObject}->{Verbose} = 1;
-        $Self->{UnitTestDriverObject}->True( 1, "Saved screenshot in $URL" );
-    }
 
     return;
 }
@@ -963,7 +966,7 @@ Wrapper for the Znuny.Form.Input JavaScript namespace 'Get' function.
 
     my $Result = $SeleniumObject->InputGet(
         Attribute => 'QueueID',
-        Options   => {                          # optinal
+        Options   => {                          # optional
             KeyOrValue => 'Value',              # default is 'Key'
         }
     );
@@ -1197,7 +1200,7 @@ Wrapper for the Znuny.Form.Input JavaScript namespace 'Hide' function.
         Attribute => 'QueueID',
     );
 
-    $Result = 1;
+    my $Result = 1;
 
 =cut
 
@@ -1520,7 +1523,7 @@ sub AJAXCompleted {
     # The idea of this improvement is the following problem case:
     # A InputSet of the Znuny.Form.Input in a selenium test does trigger an ajax request
     # which is completed too fast for the "WaitFor" check above. So the "WaitFor" check jQuery.active
-    # is not set to true and will crash the test completly. In these cases we want to disable
+    # is not set to true and will crash the test completely. In these cases we want to disable
     # the die and the following checks and hope that the ajax request is done successfully.
     if ( !$AJAXStartedLoading ) {
         print STDERR "NOTICE: SeleniumHelper->AJAXCompleted -> jQuery.active check is disabled and failed\n";
@@ -1923,7 +1926,63 @@ sub ElementExistsNot {
     );
 }
 
-sub _CaptureScreenshot {
+=head2 CreateScreenshot()
+
+CreateScreenshot.
+
+    my $Success = $SeleniumObject->CreateScreenshot();
+
+Returns:
+
+    my $Success = 1;
+
+=cut
+
+sub CreateScreenshot {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
+    my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+
+    # Don't create a test entry for the screenshot command,
+    #   to make sure it gets attached to the previous error entry.
+    local $Self->{SuppressCommandRecording} = 1;
+
+    my $Filename            = $Self->GetScreenshotFileName(%Param);
+    my %ScreenshotDirectory = $Self->GetScreenshotDirectory(%Param);
+    my $ScreenshotURL       = $Self->GetScreenshotURL(
+        %ScreenshotDirectory,
+        Filename => $Filename
+    );
+
+    my $Data = $Self->screenshot();
+    if ( !$Data ) {
+        $Self->{UnitTestDriverObject}->False( 1, "Could not create a screenshot" );
+    }
+    $Data = MIME::Base64::decode_base64($Data);
+
+    # Attach the screenshot to the actual error entry.
+    $Self->{UnitTestDriverObject}->AttachSeleniumScreenshot(
+        Filename => $Filename,
+        Content  => $Data
+    );
+
+    $MainObject->FileWrite(
+        Directory => $ScreenshotDirectory{FullPath},
+        Filename  => $Filename,
+        Content   => \$Data,
+    ) || return $Self->False( 1, "Could not write file $ScreenshotDirectory{FullPath}/$Filename" );
+
+    # Make sure the screenshot URL is output even in non-verbose mode to make it visible
+    #   for debugging, but don't register it as a test failure to keep the error count more correct.
+    local $Self->{UnitTestDriverObject}->{Verbose} = 1;
+    $Self->{UnitTestDriverObject}->True( 1, "Saved screenshot in $ScreenshotURL" );
+
+    return 1;
+}
+
+sub CaptureScreenshot {
     my ( $Self, $Hook, $Function ) = @_;
 
     # extract caller information:
@@ -1934,24 +1993,58 @@ sub _CaptureScreenshot {
 
     # taking a screenshot after the SeleniumObject
     # is destroyed is not possible
-    if (
-        $Function eq 'DESTROY'
-        && $Hook eq 'AFTER'
-        )
-    {
-        return;
-    }
+    return if ( $Function eq 'DESTROY' && $Hook eq 'AFTER' );
 
-    # lat object initialization for performance reasons
-    my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
-    my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
+    # late object initialization for performance reasons
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     # someone might want to enable local screenshots only if needed?
     return if $ConfigObject->Get('SeleniumTestsConfig')->{DisableScreenshots};
 
+    my $ScreenshotFileName = $Self->GetScreenshotFileName(
+        Line     => $TestLine,
+        Function => $Function,
+        Hook     => $Hook,
+    );
+    my %ScreenshotDirectory = $Self->GetScreenshotDirectory(
+        Directory => 'Captured',
+    );
+    my $FilePath = $ScreenshotDirectory{FullPath} . '/' . $ScreenshotFileName;
+
+    # finally take the screenshot via the Selenium API
+    # and store it in to the build file path
+    $Self->capture_screenshot($FilePath);
+
+    return 1;
+}
+
+=head2 GetScreenshotFileName()
+
+    my $ScreenshotFileName = $SeleniumObject->GetScreenshotFileName(
+        Filename => 'ZnunyRocks',
+        # or
+        Line     => '359',
+        Function => 'InputFieldID',
+        Hook     => 'BEFORE',
+    );
+
+Returns:
+
+    #                         TIME      - Path to Test       - Line   - Function   - BEFORE or AFTER function
+    my $ScreenshotFileName = '1497085163-Znuny_Selenium_Input-Line=359-InputFieldID-BEFORE.png';
+
+
+=cut
+
+sub GetScreenshotFileName {
+    my ( $Self, %Param ) = @_;
+
+    my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
+
     # trying to extract the name of the test file right from the UnitTestObject
     # kind of hacky but there is no other place where to get this information
     my $TestFile = 'UnknownTestFile';
+
     if (
         $Self->{UnitTestDriverObject}->{TestFile}
         && $Self->{UnitTestDriverObject}->{TestFile} =~ m{scripts\/test\/(.+?)\.t$}
@@ -1963,28 +2056,149 @@ sub _CaptureScreenshot {
         $TestFile =~ s{\/}{_}g;
     }
 
-    # build filename to be most reasonable and easy to follow like e.g.:
-    # Znuny_Selenium_Input-Line 359-InputFieldID-1497085163-BEFORE.png
-    my $SystemTime = $DateTimeObject->ToEpoch();
-    my $Filename   = "$TestFile-Line $TestLine-$Function-$SystemTime-$Hook.png";
+    my $ScreenshotFileName;
+
+    if ( $Param{Filename} ) {
+        $ScreenshotFileName = $Param{Filename};
+    }
+    else {
+
+        # build filename to be most reasonable and easy to follow like e.g.:
+        # 1497085163-Znuny_Selenium_Input-Line=359-InputFieldID-BEFORE.png
+
+        my $SystemTime = $DateTimeObject->ToEpoch();
+        $ScreenshotFileName = "$SystemTime-$TestFile";
+
+        if ( $Param{Line} ) {
+            $ScreenshotFileName .= "-Line=$Param{Line}";
+        }
+
+        if ( $Param{Function} ) {
+            $ScreenshotFileName .= "-$Param{Function}";
+        }
+
+        if ( $Param{Hook} ) {
+            $ScreenshotFileName .= "-$Param{Hook}";
+        }
+    }
+
+    $ScreenshotFileName .= '.png';
+
+    return $ScreenshotFileName;
+}
+
+=head2 GetScreenshotDirectory()
+
+    my %ScreenshotDirectory = $SeleniumObject->GetScreenshotDirectory(
+        Directory => 'Captured',
+    );
+
+Returns:
+
+    my %ScreenshotDirectory = (
+        WebPath  => 'SeleniumScreenshots/Captured',
+        FullPath => '/opt/otrs/var/httpd/htdocs/SeleniumScreenshots/Captured',
+    );
+
+=cut
+
+sub GetScreenshotDirectory {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    my %ScreenshotDirectory;
+
+    # Store screenshots in a local folder from where they can be opened directly in the browser.
+    my $FullPath = $ConfigObject->Get('Home');
 
     # use CI project directory so the CI env can collect the artifacts afterwards
-    # fallback to the tmp directory in local environments
-    my $TargetFolder = $ENV{CI_PROJECT_DIR} || $ConfigObject->Get('Home') . '/var/tmp';
-    my $FilePath     = $TargetFolder . '/' . $Filename;
+    if ( $ENV{CI_PROJECT_DIR} ) {
+        $FullPath = $ENV{CI_PROJECT_DIR} . '/';
+    }
 
-    # finally take the screenshot via the Selenium API
-    # and store it in to the build file path
-    $Self->capture_screenshot($FilePath);
+    $FullPath .= '/var/httpd/htdocs/';
+    $FullPath .= $Self->{SeleniumScreenshotsDirectory};
 
-    return 1;
+    my $WebPath = $ConfigObject->Get('Frontend::WebPath');
+    $WebPath .= $Self->{SeleniumScreenshotsDirectory};
+
+    if ( $Param{Directory} ) {
+        $FullPath .= '/' . $Param{Directory};
+        $WebPath  .= '/' . $Param{Directory};
+    }
+
+    mkpath $FullPath || return $Self->False( 1, "Could not create $FullPath." );
+    %ScreenshotDirectory = (
+        FullPath => $FullPath,
+        WebPath  => $WebPath,
+    );
+
+    return %ScreenshotDirectory;
+}
+
+=head2 GetScreenshotURL()
+
+    my $ScreenshotURL = $SeleniumObject->GetScreenshotURL(
+        WebPath  = '/otrs-web/SeleniumScreenshots/ZnunyRocks/',
+        Filename = 'AgentTicketZoom',
+    );
+
+Returns:
+
+    my $ScreenshotURL = 'URL';
+
+=cut
+
+sub GetScreenshotURL {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+
+    my $HttpType = $ConfigObject->Get('HttpType');
+    my $Hostname = $HelperObject->GetTestHTTPHostname();
+    my $URL      = "$HttpType://$Hostname" . "$Param{WebPath}/$Param{Filename}";
+
+    return $URL;
+}
+
+=head2 GetSeleniumHome()
+
+    my $SeleniumHome = $SeleniumObject->GetSeleniumHome(
+        Directory => '/opt/otrs',
+    );
+
+Returns:
+
+    my $SeleniumHome = '/opt/otrs';
+
+=cut
+
+sub GetSeleniumHome {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    my $SeleniumHome = $ConfigObject->Get('Home');
+
+    # use custom directory
+    if ( $Param{Directory} ) {
+        $SeleniumHome = $Param{Directory};
+    }
+
+    # use CI project directory to use the uploaded artifacts for tests
+    elsif ( $ENV{CI_PROJECT_DIR} ) {
+        $SeleniumHome = $ENV{CI_PROJECT_DIR} . '/';
+    }
+
+    return $SeleniumHome;
 }
 
 # strongly inspired by: https://stackoverflow.com/a/2663723/7900866
-#
 if ( $ENV{SELENIUM_SCREENSHOTS} ) {
     my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
-    my @FunctionBlacklist = ( '_CaptureScreenshot', 'RunTest', 'AJAXCompleted', 'Dumper' );
+    my @FunctionBlacklist = ( 'CaptureScreenshot', 'RunTest', 'AJAXCompleted', 'Dumper' );
 
     my @FunctionWhitelist = map {    ## no critic
         s/^\s+//;                    # strip leading spaces
@@ -2029,7 +2243,7 @@ if ( $ENV{SELENIUM_SCREENSHOTS} ) {
         *{$FullName} = sub {
 
             # take screenshot before the original function gets executed
-            _CaptureScreenshot( $_[0], 'BEFORE', $FunctionName );
+            CaptureScreenshot( $_[0], 'BEFORE', $FunctionName );
 
             # call the original function and store
             # the response in the matching variable type
@@ -2042,7 +2256,7 @@ if ( $ENV{SELENIUM_SCREENSHOTS} ) {
             }
 
             # take screenshot before the original function gets executed
-            _CaptureScreenshot( $_[0], 'AFTER', $FunctionName );
+            CaptureScreenshot( $_[0], 'AFTER', $FunctionName );
 
             # return whatever was expected to get returned
             return ( wantarray && ref $Result eq 'ARRAY' )

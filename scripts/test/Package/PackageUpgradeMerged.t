@@ -48,8 +48,8 @@ my $MergeOne = '<?xml version="1.0" encoding="utf-8" ?>
   <BuildDate>2012-05-02 21:17:16</BuildDate>
   <BuildHost>yourhost.example.com</BuildHost>
   <Filelist>
-    <File Location="Test" Permission="644" Encode="Base64">aGVsbG8K</File>
-    <File Location="var/Test" Permission="644" Encode="Base64">aGVsbG8K</File>
+    <File Location="TestPackageUpgrageMerged" Permission="644" Encode="Base64">aGVsbG8K</File>
+    <File Location="var/TestPackageUpgrageMerged" Permission="644" Encode="Base64">aGVsbG8K</File>
     <File Location="DeleteMe" Permission="644" Encode="Base64">aGVsbG8K</File>
   </Filelist>
 </otrs_package>
@@ -75,7 +75,7 @@ $Self->True(
 );
 
 # package from file should exist on file system
-for my $File (qw( Test var/Test DeleteMe)) {
+for my $File (qw( TestPackageUpgrageMerged var/TestPackageUpgrageMerged DeleteMe)) {
     my $RealFile = $Home . '/' . $File;
     $RealFile =~ s/\/\//\//g;
     $Self->True(
@@ -99,8 +99,8 @@ my $MainPackageOne = '<?xml version="1.0" encoding="utf-8" ?>
     <BuildDate>2005-11-10 21:17:16</BuildDate>
     <BuildHost>yourhost.example.com</BuildHost>
     <Filelist>
-    <File Location="Test" Permission="644" Encode="Base64">aGVsbG8K</File>
-    <File Location="var/Test" Permission="644" Encode="Base64">aGVsbG8K</File>
+    <File Location="TestPackageUpgrageMerged" Permission="644" Encode="Base64">aGVsbG8K</File>
+    <File Location="var/TestPackageUpgrageMerged" Permission="644" Encode="Base64">aGVsbG8K</File>
     <File Location="bin/otrs.CheckDB.pl" Permission="755" Encode="Base64">aGVsbG8K</File>
     </Filelist>
     <PackageMerge Name="MergeOne" TargetVersion="2.0.0">
@@ -152,8 +152,8 @@ my $MainPackageTwo = '<?xml version="1.0" encoding="utf-8" ?>
     <BuildDate>2005-11-10 21:17:16</BuildDate>
     <BuildHost>yourhost.example.com</BuildHost>
     <Filelist>
-    <File Location="Test" Permission="644" Encode="Base64">aGVsbG8K</File>
-    <File Location="var/Test" Permission="644" Encode="Base64">aGVsbG8K</File>
+    <File Location="TestPackageUpgrageMerged" Permission="644" Encode="Base64">aGVsbG8K</File>
+    <File Location="var/TestPackageUpgrageMerged" Permission="644" Encode="Base64">aGVsbG8K</File>
     <File Location="bin/otrs.CheckDB.pl" Permission="755" Encode="Base64">aGVsbG8K</File>
     </Filelist>
     <PackageMerge Name="MergeOne" TargetVersion="2.0.1">
@@ -385,7 +385,7 @@ my $MainPackageFour = '<?xml version="1.0" encoding="utf-8" ?>
     <BuildDate>2014-04-28 16:16:16</BuildDate>
     <BuildHost>yourhost.example.com</BuildHost>
     <Filelist>
-    <File Location="Test" Permission="644" Encode="Base64">aGVsbG8K</File>
+    <File Location="TestPackageUpgrageMerged" Permission="644" Encode="Base64">aGVsbG8K</File>
     <File Location="DeleteMe" Permission="644" Encode="Base64">aGVsbG8K</File>
     </Filelist>
 

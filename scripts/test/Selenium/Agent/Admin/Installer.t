@@ -245,8 +245,8 @@ $Selenium->RunTest(
             );
 
             my @DatabaseXMLFiles = (
-                "$Home/scripts/database/otrs-schema.xml",
-                "$Home/scripts/database/otrs-initial_insert.xml",
+                "$Home/scripts/database/schema.xml",
+                "$Home/scripts/database/initial_insert.xml",
             );
 
             my @Tables = $Kernel::OM->Get('Kernel::System::DB')->ListTables();

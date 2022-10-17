@@ -269,6 +269,14 @@ sub Run {
         DynamicFields => 1,
     );
 
+    # Set ticket mentions as seen.
+    $TicketObject->TicketFlagSet(
+        TicketID => $Self->{TicketID},
+        Key      => 'MentionSeen',
+        Value    => 1,
+        UserID   => $Self->{UserID},
+    );
+
     # get ACL restrictions
     my %PossibleActions;
     my $Counter = 0;

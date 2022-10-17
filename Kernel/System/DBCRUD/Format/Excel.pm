@@ -31,7 +31,7 @@ Kernel::System::DBCRUD::Format::Excel - DBCRUD Excel lib
 
 =head1 SYNOPSIS
 
-All ticket DBCRUD Excel functions.
+All DBCRUD format Excel functions.
 
 =head1 PUBLIC INTERFACE
 

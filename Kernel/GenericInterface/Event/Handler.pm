@@ -861,7 +861,7 @@ sub _ConditionCheck {
                         if (
                             defined $CompareValue
                             && defined $ActualCondition->{Fields}->{$FieldName}->{Match}
-                            && $ActualCondition->{Fields}->{$FieldName}->{Match} =~ $CompareValue
+                            && $CompareValue =~ $ActualCondition->{Fields}->{$FieldName}->{Match}
                             )
                         {
                             $Match = 1;

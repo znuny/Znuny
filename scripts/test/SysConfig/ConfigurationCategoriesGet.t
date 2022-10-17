@@ -85,10 +85,10 @@ my @Tests = (
                 Files       => [],
             },
             OTRS => {
-                DisplayName => 'OTRS',
+                DisplayName => 'Znuny',
                 Files       => [
                     'Calendar.xml', 'CloudServices.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml',
-                    'ProcessManagement.xml', 'Ticket.xml'
+                    'ProcessManagement.xml', 'Ticket.xml', 'Znuny.xml'
                 ],
             },
         },
@@ -106,10 +106,10 @@ my @Tests = (
                 Files       => [],
             },
             OTRS => {
-                DisplayName => 'OTRS',
+                DisplayName => 'Znuny',
                 Files       => [
                     'Calendar.xml', 'CloudServices.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml',
-                    'ProcessManagement.xml', 'Ticket.xml'
+                    'ProcessManagement.xml', 'Ticket.xml', 'Znuny.xml'
                 ],
             },
             TestPackage1 => {
@@ -131,10 +131,10 @@ my @Tests = (
                 Files       => [],
             },
             OTRS => {
-                DisplayName => 'OTRS',
+                DisplayName => 'Znuny',
                 Files       => [
                     'Calendar.xml', 'CloudServices.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml',
-                    'ProcessManagement.xml', 'Ticket.xml'
+                    'ProcessManagement.xml', 'Ticket.xml', 'Znuny.xml'
                 ],
             },
             TestPackage1 => {

@@ -526,6 +526,11 @@ Core.UI.InputFields = (function (TargetNS) {
                     // If first selection, we must shorten it in order to display it
                     if (i === 0) {
                         while (MaxWidth > 0 && OffsetLeft + $SelectionObj.outerWidth() >= MaxWidth) {
+
+                            // break loop if text length is shorter than 3 or only 3 dots exist
+                            if ($TextObj.text().length <= 3 || $TextObj.text() === '...') {
+                                break;
+                            }
                             $TextObj.text(
                                 $TextObj.text().substring(0, $TextObj.text().length - 4)
                                 + '...'

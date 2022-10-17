@@ -140,17 +140,61 @@ Core.Agent.Admin.GenericInterfaceTransportHTTPREST = (function (TargetNS) {
 
         // bind change function to Authentication field
         $('#AuthType').on('change', function(){
+
+            // Basic auth
+            $('.BasicAuthField').addClass('Hidden');
+            $('#BasicAuthUser, #BasicAuthPassword').each(function(){
+                $(this).removeClass('Validate_Required');
+            });
+
             if ($(this).val() === 'BasicAuth') {
                 $('.BasicAuthField').removeClass('Hidden');
-                $('.BasicAuthField').find('#BasicAuthUser').each(function(){
+                $('#BasicAuthUser, #BasicAuthPassword').each(function(){
                     $(this).addClass('Validate_Required');
                 });
             }
-            else {
-                $('.BasicAuthField').addClass('Hidden');
-                $('.BasicAuthField').find('#BasicAuthUser').each(function(){
-                    $(this).removeClass('Validate_Required');
+
+            // JWT
+            $('.JWTAuthField').addClass('Hidden');
+            $('#JWTAuthKeyFilePath, #JWTAuthAlgorithm, #JWTAuthTTL, #JWTAuthPayload').each(function(){
+                $(this).removeClass('Validate_Required');
+            });
+
+            if ($(this).val() === 'JWT') {
+                $('.JWTAuthField').removeClass('Hidden');
+                $('#JWTAuthKeyFilePath, #JWTAuthAlgorithm, #JWTAuthTTL, #JWTAuthPayload').each(function(){
+                    $(this).addClass('Validate_Required');
                 });
+            }
+
+            // OAuth2 token
+            $('.OAuth2TokenConfigField').addClass('Hidden');
+            $('#OAuth2TokenConfigID').each(function(){
+                $(this).removeClass('Validate_Required');
+            });
+
+            if ($(this).val() === 'OAuth2Token') {
+                $('.OAuth2TokenConfigField').removeClass('Hidden');
+                $('#OAuth2TokenConfigID').each(function(){
+                    $(this).addClass('Validate_Required');
+                });
+            }
+        }).trigger('change');
+
+        // This is outside of the change event above because it should not be triggered on every page load.
+        $('#AuthType').on('change', function(){
+
+            if ($(this).val() === 'OAuth2Token') {
+                // Also add a default authorization header with the token placeholder to the request
+                // if the header isn't already present.
+                if (!$('input.DefaultValueKeyItem[value="Authorization"]').length) {
+                    $('#AddValue').trigger('click');
+
+                    // The click above added an empty key/value pair to the top of
+                    // the request headers, so use the first one.
+                    $('input.DefaultValueKeyItem').first().val('Authorization');
+                    $('input.DefaultValueItem').first().val('Bearer <OTRS_OAUTH2_TOKEN>');
+                }
             }
         });
 

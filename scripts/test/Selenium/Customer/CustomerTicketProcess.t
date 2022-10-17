@@ -233,7 +233,7 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminProcessManagement");
 
         # Import test Selenium Process.
-        my $Location = $ConfigObject->Get('Home') . "/scripts/test/sample/ProcessManagement/CustomerTicketProcess.yml";
+        my $Location = $Selenium->{Home} . "/scripts/test/sample/ProcessManagement/CustomerTicketProcess.yml";
 
         $Selenium->WaitFor(
             JavaScript =>
@@ -356,8 +356,7 @@ $Selenium->RunTest(
         my $SubjectRandom  = 'Subject' . $HelperObject->GetRandomID();
         my $ContentRandom  = 'Content' . $HelperObject->GetRandomID();
         my $AttachmentName = "StdAttachment-Test1.txt";
-        my $AttachmentLocation
-            = $Kernel::OM->Get('Kernel::Config')->Get('Home') . "/scripts/test/sample/StdAttachment/$AttachmentName";
+        my $AttachmentLocation = $Selenium->{Home} . "/scripts/test/sample/StdAttachment/$AttachmentName";
 
         $Selenium->find_element( "#Subject",  'css' )->send_keys($SubjectRandom);
         $Selenium->find_element( "#RichText", 'css' )->send_keys($ContentRandom);

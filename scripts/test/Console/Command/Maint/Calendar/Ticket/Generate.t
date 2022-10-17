@@ -16,7 +16,7 @@ use Kernel::System::VariableCheck qw(:all);
 
 $Kernel::OM->ObjectParamAdd(
     'Kernel::System::UnitTest::Helper' => {
-        RestoreDatabase => 1,
+        RestoreDatabase => 0,
     },
 );
 
@@ -153,6 +153,19 @@ for my $Test (@Tests) {
             "$Stream contains '$Test->{ $Stream }' ($Test->{Name})",
         );
     }
+}
+
+# delete all plugin data
+my @Plugins = $PluginObject->DataListGet(
+    UserID => 1,
+);
+
+for my $Plugin (@Plugins){
+
+    $PluginObject->DataDelete(
+        ID     => $Plugin->{ID},
+        UserID => 1,
+    );
 }
 
 1;

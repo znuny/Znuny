@@ -58,14 +58,6 @@ sub Run {
 sub _SupportDataCollectorView {
     my ( $Self, %Param ) = @_;
 
-    my $SystemDataObject  = $Kernel::OM->Get('Kernel::System::SystemData');
-    my $RegistrationState = $SystemDataObject->SystemDataGet(
-        Key => 'Registration::State',
-    ) || '';
-    my $SupportDataSending = $SystemDataObject->SystemDataGet(
-        Key => 'Registration::SupportDataSending',
-    ) || 'No';
-
     my %SupportData = $Kernel::OM->Get('Kernel::System::SupportDataCollector')->Collect(
         UseCache => 1,
     );
@@ -85,20 +77,6 @@ sub _SupportDataCollectorView {
         if ($CloudServicesDisabled) {
             $LayoutObject->Block(
                 Name => 'CloudServicesWarning',
-            );
-        }
-        elsif (
-            $RegistrationState ne 'registered'
-            || $SupportDataSending ne 'Yes'
-            )
-        {
-            $LayoutObject->Block(
-                Name => 'NoteNotRegisteredNotSending',
-            );
-        }
-        else {
-            $LayoutObject->Block(
-                Name => 'NoteRegisteredSending',
             );
         }
         $LayoutObject->Block(

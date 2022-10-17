@@ -114,7 +114,7 @@ $Selenium->RunTest(
             );
 
             # Import test Selenium Process.
-            my $Location = $ConfigObject->Get('Home')
+            my $Location = $Selenium->{Home}
                 . "/scripts/test/sample/ProcessManagement/TestProcessTextArea.yml";
             $Selenium->find_element( "#FileUpload",                      'css' )->send_keys($Location);
             $Selenium->find_element( "#OverwriteExistingEntitiesImport", 'css' )->click();

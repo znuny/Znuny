@@ -218,6 +218,14 @@
                             <div class="Clear"></div>
                         [% END %]
 
+                        <label for="GetAllArticleAttachments">[% Translate("Add all attachments") | html %]:</label>
+                        <div class="Field">
+                            [% Data.GetAllArticleAttachmentsStrg %]
+                            <p class="FieldExplanation">
+                                [% Translate("Add all attachments to invoker payload.") | html %]
+                            </p>
+                        </div>
+
                         <div class="Field SpacingTop">
                             [% IF Data.Mode == 'Change' %]
                                 <button class="CallForAction Primary" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>

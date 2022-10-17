@@ -1343,8 +1343,23 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                 $('#StandardTemplateContainer').prev('label').css('display', 'block');
                 $('#StandardTemplateContainer .Modernize').trigger('redraw.InputField');
 
-                $('#StandardTemplateAutoFillContainer').removeClass('Hidden');
-                $('#StandardTemplateAutoFillContainer').prev('label').css('display', 'block');
+                $('#StandardTemplateID').on('change', function () {
+                    if ($('#StandardTemplateID').val().length == 1){
+                        $('#StandardTemplateAutoFillContainer').removeClass('Hidden');
+                        $('#StandardTemplateAutoFillContainer').prev('label').css('display', 'block');
+                    }
+                    else{
+                        $('#StandardTemplateAutoFillContainer').addClass('Hidden');
+                        $('#StandardTemplateAutoFillContainer').prev('label').css('display', 'none');
+                        $('#StandardTemplateAutoFill').prop('checked', false);
+                    }
+                });
+
+                if ($('#StandardTemplateID').length && $('#StandardTemplateID').val().length >= 2){
+                    $('#StandardTemplateAutoFillContainer').addClass('Hidden');
+                    $('#StandardTemplateAutoFillContainer').prev('label').css('display', 'none');
+                    $('#StandardTemplateAutoFill').prop('checked', false);
+                }
             }
             else {
 

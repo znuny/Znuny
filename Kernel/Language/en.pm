@@ -38,6 +38,8 @@ sub Data {
     $Self->{Translation} = {
         'May_long' => 'May',
 
+        'LastMention' => 'Last mention',
+
         # Last views
         'CustomerInformationCenter'     => 'Customer Information Center',
         'CustomerUserInformationCenter' => 'Customer User Information Center',

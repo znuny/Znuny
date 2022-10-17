@@ -485,6 +485,35 @@ sub Run {
         );
 
     }
+    elsif ( $Self->{Subaction} eq 'ToolbarFetch' ) {
+        my $JSONObject = $Kernel::OM->Get('Kernel::System::JSON');
+
+        my @ToolbarItems = ( $LayoutObject->Header() =~ m{<li class="(.*?)"\>}sg );
+        my %ToolbarItems;
+
+        TOOLBARITEM:
+        for my $ToolbarItem (@ToolbarItems) {
+            next TOOLBARITEM if $ToolbarItem eq 'UserAvatar';
+
+            ( my $ToolbarItemCSS ) = $LayoutObject->Header() =~ m{<li class="$ToolbarItem">(.*?)<\/li>}s;
+
+            $ToolbarItems{Icons}->{$ToolbarItem} = $ToolbarItemCSS;
+        }
+
+        $ToolbarItems{IconsOrder} = \@ToolbarItems;
+
+        my $JSONEncodedToolbarItems = $JSONObject->Encode(
+            Data => \%ToolbarItems,
+        );
+
+        return $LayoutObject->Attachment(
+            ContentType => 'text/html',
+            Charset     => $LayoutObject->{UserCharset},
+            Content     => $JSONEncodedToolbarItems,
+            Type        => 'inline',
+            NoCache     => 1,
+        );
+    }
 
     # store last queue screen
     $SessionObject->UpdateSessionID(

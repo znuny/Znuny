@@ -89,7 +89,7 @@ my $ArticleID = $HelperObject->ArticleCreate(
 $TicketObject->TicketAccountTime(
     TicketID  => $TicketID,
     ArticleID => $ArticleID,
-    TimeUnit  => '10.0',
+    TimeUnit  => '10.55',
     UserID    => $UserData{UserID},
 );
 
@@ -101,7 +101,7 @@ $HelperObject->FixedTimeSet($SystemTime);
 $TicketObject->TicketAccountTime(
     TicketID  => $TicketID,
     ArticleID => $ArticleID,
-    TimeUnit  => '20.0',
+    TimeUnit  => '20.55',
     UserID    => $UserData{UserID},
 );
 
@@ -119,7 +119,7 @@ $HelperObject->FixedTimeSet($SystemTime);
 $TicketObject->TicketAccountTime(
     TicketID  => $TicketID,
     ArticleID => $ArticleID,
-    TimeUnit  => '30.0',
+    TimeUnit  => '30.55',
     UserID    => $UserData{UserID},
 );
 
@@ -142,7 +142,7 @@ my @ExpectedList = (
         'TicketNumber'     => $Ticket{TicketNumber},
         'TicketTitle'      => $Ticket{Title},
         'TicketCustomerID' => $Ticket{CustomerID},
-        'TimeUnit'         => '10.00'
+        'TimeUnit'         => '10.55'
     },
     {
         'Created'          => '2017-01-01 11:00:00',
@@ -150,7 +150,7 @@ my @ExpectedList = (
         'TicketNumber'     => $Ticket{TicketNumber},
         'TicketTitle'      => $Ticket{Title},
         'TicketCustomerID' => $Ticket{CustomerID},
-        'TimeUnit'         => '20.00'
+        'TimeUnit'         => '20.55'
     },
     {
         'Created'          => '2017-01-01 12:00:00',
@@ -158,7 +158,7 @@ my @ExpectedList = (
         'TicketNumber'     => $Ticket{TicketNumber},
         'TicketTitle'      => $Ticket{Title},
         'TicketCustomerID' => $Ticket{CustomerID},
-        'TimeUnit'         => '30.00'
+        'TimeUnit'         => '30.55'
     }
 );
 

@@ -67,7 +67,7 @@ $Selenium->RunTest(
         );
 
         my $StatisticContent = $Kernel::OM->Get('Kernel::System::Main')->FileRead(
-            Location => $ConfigObject->Get('Home')
+            Location => $Selenium->{Home}
                 . '/scripts/test/Selenium/Output/Dashboard/Stats.xml',
         );
 

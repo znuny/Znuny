@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<otrs_config version="2.0" init="Application">
+    <!-- used for scripts/test/SysConfig/Migration/MigrateSysConfigSettings.t -->
+    <Setting Name="EmptyString" Required="0" Valid="1">
+        <Description>Test.</Description>
+        <Navigation>Dev</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex=""></Item>
+        </Value>
+    </Setting>
+    <Setting Name="EmptyHash" Required="0" Valid="1">
+        <Description>Test.</Description>
+        <Navigation>Dev</Navigation>
+        <Value>
+            <Hash>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="EmptyArray" Required="0" Valid="1">
+        <Description>Test.</Description>
+        <Navigation>Dev</Navigation>
+        <Value>
+            <Array>
+            </Array>
+        </Value>
+    </Setting>
+
+    <!-- scripts/test/SysConfig/ConfigurationMigrate.t -->
+    <Setting Name="Frontend::RichText::Path" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Defines the URL rich text editor path.</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Frontend::WebPath&gt;js/thirdparty/ckeditor-4.17.1/</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Settings###Width" Required="1" Valid="1">
+        <Description Translatable="1">Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+%?$">620</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Settings###Height" Required="1" Valid="1">
+        <Description Translatable="1">Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+%?$">320</Item>
+        </Value>
+    </Setting>
+
+</otrs_config>

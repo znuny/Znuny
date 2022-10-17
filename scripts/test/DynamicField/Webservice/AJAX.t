@@ -34,6 +34,7 @@ my $AJAXDynamicFieldWebserviceObject = Kernel::Modules::AJAXDynamicFieldWebservi
 
 $LayoutObject->{UserID} = 1;
 
+my $Result         = $UnitTestWebserviceObject->Result();
 my $WebserviceName = 'DynamicFieldWebservice';
 my $DynamicField   = $WebserviceName . 'AJAX';
 

@@ -69,7 +69,7 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerPreferences");
 
         # change customer SMIME certificate preference
-        my $Location = $ConfigObject->Get('Home')
+        my $Location = $Selenium->{Home}
             . "/scripts/test/sample/SMIME/SMIMECertificate-1.asc";
         $Selenium->find_element( "#UserSMIMEKey",       'css' )->send_keys($Location);
         $Selenium->find_element( "#UserSMIMEKeyUpdate", 'css' )->VerifiedClick();

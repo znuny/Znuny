@@ -16,7 +16,7 @@
         <i class="fa fa-repeat"></i>
     {% endif %}
     {% if CalEvent.parentId %}
-        <i class="fa fa-link"></i>
+        <i class="fa fa-child"></i>
     {% endif %}
     {% if CalEvent.notification %}
         <i class="fa fa-bell"></i>
@@ -89,7 +89,7 @@
     </fieldset>
 
 {% if CalEvent.pluginDataGroup %}
-    {% for Group, PluginKeyData in CalEvent.pluginDataGroup %}
+    {% for Group, PluginKeyData in CalEvent.pluginDataGroup | dictsort | reverse %}
         <fieldset>
             <legend><span>{{ Group | Translate }}</span></legend>
             {% for PluginKey, PluginData in PluginKeyData %}

@@ -303,7 +303,7 @@ $Selenium->RunTest(
 
                     # Upload a file.
                     $Selenium->find_element( "#FileUpload", 'css' )
-                        ->send_keys( $ConfigObject->Get('Home') . "/scripts/test/sample/Main/Main-Test1.pdf" );
+                        ->send_keys( $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.pdf" );
 
                     $Selenium->WaitFor(
                         JavaScript =>
@@ -478,7 +478,7 @@ $Selenium->RunTest(
 
                     # Upload a file.
                     $Selenium->find_element( "#FileUpload", 'css' )
-                        ->send_keys( $ConfigObject->Get('Home') . "/scripts/test/sample/Main/Main-Test1.doc" );
+                        ->send_keys( $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.doc" );
 
                     $Selenium->WaitFor(
                         JavaScript =>

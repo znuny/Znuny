@@ -671,6 +671,13 @@ for my $Test (@Tests) {
     # tests supposed to succeed
     if ( $Test->{SuccessCreate} ) {
 
+        my $Article = $LocalResult->{Data}->{Ticket}->{Article} // {};
+
+        # Use first article if multiple articles were returned
+        if ( IsArrayRefWithData($Article) ) {
+            $Article = $Article->[0] // {};
+        }
+
         # local results
         $Self->True(
             $LocalResult->{Data}->{TicketID},
@@ -726,13 +733,13 @@ for my $Test (@Tests) {
         );
 
         $Self->Is(
-            $LocalResult->{Data}->{Ticket}->{Article}->{Body},
+            $Article->{Body},
             $Test->{RequestData}->{Article}->{Body},
             "$Test->{Name} - Article body Ok.",
         );
 
         $Self->Is(
-            $LocalResult->{Data}->{Ticket}->{Article}->{From},
+            $Article->{From},
             $Test->{RequestData}->{Article}->{From},
             "$Test->{Name} - Article from Ok.",
         );
@@ -757,7 +764,7 @@ for my $Test (@Tests) {
         }
 
         LOCALRESULTARTICLE:
-        for my $Field ( @{ $LocalResult->{Data}->{Ticket}->{Article}->{DynamicField} } ) {
+        for my $Field ( @{ $Article->{DynamicField} } ) {
             next LOCALRESULTARTICLE if $Field->{Name} ne $DynamicFieldData2->{Name};
             $CompareDynamicFieldLocal{Article} = $Field;
         }
@@ -769,7 +776,7 @@ for my $Test (@Tests) {
         );
 
         $Self->Is(
-            $LocalResult->{Data}->{Ticket}->{Article}->{Attachment}->[0]->{Filename},
+            $Article->{Attachment}->[0]->{Filename},
             $Test->{RequestData}->{Attachment}->[0]->{Filename},
             "$Test->{Name} - Attachment filename Ok.",
         );

@@ -407,7 +407,7 @@ DEPRECATED. Don't use this function any more, 'utf-8' is always the internal cha
 Returns the recommended charset for frontend (based on translation
 file or utf-8).
 
-    my $Charset = $LanguageObject->GetRecommendedCharset().
+    my $Charset = $LanguageObject->GetRecommendedCharset();
 
 =cut
 
@@ -421,7 +421,7 @@ sub GetRecommendedCharset {
 
 Returns an array of possible charsets (based on translation file).
 
-    my @Charsets = $LanguageObject->GetPossibleCharsets().
+    my @Charsets = $LanguageObject->GetPossibleCharsets();
 
 =cut
 
@@ -919,7 +919,7 @@ Returns:
 
     my @TranslationStrings = (
         {
-            Location => "XML Definition:  scripts/database/otrs-initial_insert.xml",
+            Location => "XML Definition:  scripts/database/initial_insert.xml",
             Source   => 'This field is required',
         }
     );
@@ -941,7 +941,7 @@ sub GetXMLTranslatableStrings {
         Filter    => '*.xml',
     );
 
-    push @XMLFiles, "scripts/database/otrs-initial_insert.xml";
+    push @XMLFiles, "scripts/database/initial_insert.xml";
 
     if ( $Param{ModuleDirectory} ) {
         @XMLFiles = $MainObject->DirectoryRead(

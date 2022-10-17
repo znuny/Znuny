@@ -13,10 +13,7 @@ use warnings;
 
 use parent qw(scripts::Migration::Base);
 
-our @ObjectDependencies = (
-    'Kernel::System::DB',
-    'Kernel::System::Log',
-);
+our @ObjectDependencies;
 
 =head1 SYNOPSIS
 

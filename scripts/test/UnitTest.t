@@ -13,10 +13,11 @@ use utf8;
 
 use vars (qw($Self));
 
-use Kernel::System::UnitTest;
-
-my $UnitTestObject = Kernel::System::UnitTest::Driver->new(
-    Output => 'none',
+my $UnitTestObject = $Kernel::OM->Create(
+    'Kernel::System::UnitTest::Driver',
+    ObjectParams => {
+        Verbose => 0,
+    },
 );
 
 my @TestTrueFalse = (

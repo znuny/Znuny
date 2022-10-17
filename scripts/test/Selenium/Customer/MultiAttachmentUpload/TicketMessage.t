@@ -53,7 +53,6 @@ $Selenium->RunTest(
         );
 
         my $ScriptAlias              = $ConfigObject->Get('ScriptAlias');
-        my $Home                     = $ConfigObject->Get('Home');
         my $CustomerPanelSessionName = $ConfigObject->Get('CustomerPanelSessionName');
         my $CustomerPanelSessionToken;
 
@@ -90,7 +89,7 @@ $Selenium->RunTest(
             "\$('#FileUpload').css('display', 'block')"
         );
 
-        my $Location = "$Home/scripts/test/sample/Main/Main-Test1.doc";
+        my $Location = "$Selenium->{Home}/scripts/test/sample/Main/Main-Test1.doc";
         $Selenium->find_element( "#FileUpload", 'css' )->clear();
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
         $Selenium->WaitFor(

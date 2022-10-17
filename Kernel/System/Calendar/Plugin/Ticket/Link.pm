@@ -200,7 +200,7 @@ sub Update {
 
 Get all plugin information.
 
-    my %Data = $TicketLinkPluginObject->Get(
+    my $Data = $TicketLinkPluginObject->Get(
         GetParam    => \%GetParam,
         Appointment => \%Appointment,
         Plugin      => \%Plugin,
@@ -209,7 +209,7 @@ Get all plugin information.
 
 Returns:
 
-    my %Data = {};
+    my $Data = {};
 
 =cut
 
@@ -299,6 +299,7 @@ returns a hash of linked tickets to an appointment
     my $Success = $TicketLinkPluginObject->LinkList(
         AppointmentID => 123,
         UserID        => 1,
+        URL           => 'http://znuny.local/index.pl?Action=AgentTicketZoom;TicketID=%s' # optional
     );
 
 =cut
@@ -306,7 +307,7 @@ returns a hash of linked tickets to an appointment
 sub LinkList {
     my ( $Self, %Param ) = @_;
 
-    for my $Needed (qw(AppointmentID UserID URL)) {
+    for my $Needed (qw(AppointmentID UserID)) {
         if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
@@ -316,7 +317,7 @@ sub LinkList {
         }
     }
 
-    my %LinkKeyList = $Kernel::OM->Get('Kernel::System::LinkObject')->LinkKeyListWithData(
+    my %LinkKeyListWithData = $Kernel::OM->Get('Kernel::System::LinkObject')->LinkKeyListWithData(
         Object1 => 'Appointment',
         Key1    => $Param{AppointmentID},
         Object2 => 'Ticket',
@@ -324,13 +325,17 @@ sub LinkList {
         UserID  => $Param{UserID},
     );
 
+    return {} if !%LinkKeyListWithData;
+
     my %Result = map {
         $_ => {
-            LinkID   => $LinkKeyList{$_}->{TicketID},
-            LinkName => $LinkKeyList{$_}->{TicketNumber} . ' ' . $LinkKeyList{$_}->{Title},
-            LinkURL  => sprintf( $Param{URL}, $LinkKeyList{$_}->{TicketID} ),
+            LinkID   => $LinkKeyListWithData{$_}->{TicketID},
+            LinkName => $LinkKeyListWithData{$_}->{TicketNumber} . ' ' . $LinkKeyListWithData{$_}->{Title},
+            LinkURL  => IsStringWithData( $Param{URL} )
+            ? sprintf( $Param{URL}, $LinkKeyListWithData{$_}->{TicketID} )
+            : '',
         }
-    } keys %LinkKeyList;
+    } keys %LinkKeyListWithData;
 
     return \%Result;
 }
@@ -373,6 +378,8 @@ sub LinkDelete {
         State   => 'Valid',
         UserID  => $Param{UserID},
     );
+
+    return 1 if !%LinkKeyList;
 
     my $Success;
     for my $TicketID ( sort keys %LinkKeyList ) {

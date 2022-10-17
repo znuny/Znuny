@@ -147,6 +147,29 @@ my @Tests = (
         },
         Expected => undef,
     },
+    {
+        Name => 'Regexp _ConditionCheck(jq found queue Postmaster by "master")',
+        Data => {
+            ConditionLinking => 'and',
+            Condition        => {
+                1 => {
+                    Type   => 'and',
+                    Fields => {
+                        'jq#.QueueData.Name' => {
+                            Match => '(master|Raw)',
+                            Type  => 'Regexp',
+                        },
+                    },
+                },
+            },
+            Data => {
+                QueueData => {
+                    Name => 'Postmaster',
+                },
+            },
+        },
+        Expected => 1,
+    },
 );
 
 for my $Test (@Tests) {

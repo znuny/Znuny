@@ -12,6 +12,7 @@ package Kernel::System::SysConfig;
 use strict;
 use warnings;
 
+use File::Copy;
 use Time::HiRes();
 use utf8;
 
@@ -4442,8 +4443,8 @@ Returns:
             Files => [],
         },
         OTRS => {
-            DisplayName => 'OTRS',
-            Files       => ['Calendar.xml', CloudServices.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml', 'ProcessManagement.xml', 'Ticket.xml' ],
+            DisplayName => 'Znuny',
+            Files       => ['Calendar.xml', CloudServices.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml', 'ProcessManagement.xml', 'Ticket.xml', 'Znuny.xml' ],
         },
         # ...
     );
@@ -4473,10 +4474,11 @@ sub ConfigurationCategoriesGet {
             Files       => [],
         },
         OTRS => {
-            DisplayName => 'OTRS',
+            DisplayName => 'Znuny',
             Files       => [
                 'Calendar.xml', 'CloudServices.xml', 'Daemon.xml', 'Framework.xml',
                 'GenericInterface.xml', 'ProcessManagement.xml', 'Ticket.xml',
+                'Znuny.xml',
             ],
         },
     );
@@ -6344,6 +6346,76 @@ sub _DefaultSettingAddBulk {
         );
         return;
     }
+
+    return 1;
+}
+
+=head2 CreateZZZAAutoBackup()
+
+Creates config backup files from '/Kernel/Config/Files/*'.
+
+    my $Success = $MigrateToZnunyObject->CreateZZZAAutoBackup();
+
+Returns:
+
+    my $Success = 1;
+
+=cut
+
+sub CreateZZZAAutoBackup {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
+
+    # Updates ZZAAuto.pm to the latest deployment found in the database.
+    $Self->ConfigurationDeploySync();
+
+    my $Home                   = $ConfigObject->Get('Home');
+    my $BackupDir              = "$Home/Kernel/Config/Backups/";
+    my $ZZZAAutoFilePath       = "$Home/Kernel/Config/Files/ZZZAAuto.pm";
+    my $ZZZAAutoBackupFilePath = "$Home/Kernel/Config/Backups/ZZZAAuto.pm";
+
+    return if !-f $ZZZAAutoFilePath;
+
+    # create backups directory if not existing
+    if ( !-d $BackupDir ) {
+        return if !mkdir $BackupDir;
+    }
+
+    return if !copy( $ZZZAAutoFilePath, $ZZZAAutoBackupFilePath );
+
+    return 1;
+}
+
+=head2 DeleteZZZAAutoBackup()
+
+Deletes config backup.
+
+    my $Success = $MigrateToZnunyObject->DeleteZZZAAutoBackup();
+
+Returns:
+
+    my $Success = 1;
+
+=cut
+
+sub DeleteZZZAAutoBackup {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
+
+    my $Home                   = $ConfigObject->Get('Home');
+    my $ZZZAAutoBackupFilePath = "$Home/Kernel/Config/Backups/ZZZAAuto.pm";
+
+    return 1 if !-f $ZZZAAutoBackupFilePath;
+
+    my $Success = $MainObject->FileDelete(
+        Location => $ZZZAAutoBackupFilePath
+    );
+
+    return if !$Success;
 
     return 1;
 }

@@ -35,7 +35,7 @@ $Selenium->RunTest(
         );
 
         # Create test attachment.
-        my $Location = $ConfigObject->Get('Home')
+        my $Location = $Selenium->{Home}
             . "/scripts/test/sample/StdAttachment/StdAttachment-Test1.txt";
 
         my $ContentRef = $MainObject->FileRead(

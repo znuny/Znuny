@@ -40,8 +40,8 @@ $Self->Is(
 my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
 
 my @DatabaseXMLFiles = (
-    "$Home/scripts/database/otrs-schema.xml",
-    "$Home/scripts/database/otrs-initial_insert.xml",
+    "$Home/scripts/database/schema.xml",
+    "$Home/scripts/database/initial_insert.xml",
 );
 
 $Success = $HelperObject->ProvideTestDatabase(

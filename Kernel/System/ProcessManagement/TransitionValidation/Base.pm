@@ -182,7 +182,7 @@ sub CheckValueGet {
         $FieldValue = $Param{FieldName};
     }
 
-    my $CheckValue = $Param{Data}->{$FieldValue};
+    my $CheckValue = $Param{Data}->{$FieldValue} // $FieldValue;
     return $CheckValue if !$CheckValue;
 
     # replace value of CheckValue

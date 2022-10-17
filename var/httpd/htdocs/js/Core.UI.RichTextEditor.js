@@ -9,7 +9,9 @@
 
 "use strict";
 
-var Core = Core || {};
+var Core  = Core || {},
+    Znuny = Znuny || {};
+
 Core.UI = Core.UI || {};
 
 /**
@@ -58,6 +60,131 @@ Core.UI.RichTextEditor = (function (TargetNS) {
     }
 
     /**
+     * @private
+     * @name InitAutocompletion
+     * @memberof Core.UI.RichTextEditor
+     * @function
+     * @param { Editor } Editor - The editor object.
+     * @description
+     *      Initializes autocompletion for editor, if configured.
+     */
+    function InitAutocompletion(Editor) {
+        var AutocompletionSettings = {};
+
+
+        function AutocompletionDataCallback(MatchInfo, Callback) {
+            $.each(AutocompletionSettings.Triggers, function (Trigger) {
+
+                // Always take the current values because they could have been changed by
+                // the user in the form.
+                var AdditionalParams = {
+                    TicketID: $('input[name="TicketID"]').val(), // optional, if present
+                    Action: $('input[name="Action"]').val(), // optional, if present
+                    QueueID: Znuny.Form.Input.Get('QueueID') // optional, if present
+                };
+                var SearchString,
+                    RegExEscapedTrigger = EscapeRegExpCharacters(Trigger);
+
+                if (!MatchInfo.query.match(new RegExp('^' + RegExEscapedTrigger))) {
+                    return;
+                }
+
+                SearchString = MatchInfo.query.replace(new RegExp('^' + RegExEscapedTrigger), '');
+                if (SearchString.length < AutocompletionSettings.MinSearchLength) {
+                    return;
+                }
+
+                Core.AJAX.FunctionCall(
+                    Core.Config.Get('Baselink'),
+                    {
+                        Action:           'AJAXRichTextAutocompletion',
+                        Subaction:        'GetData',
+                        Trigger:          Trigger,
+                        SearchString:     SearchString,
+                        AdditionalParams: AdditionalParams
+                    },
+                    function(Response){
+                        if (!Array.isArray(Response)) {
+                            return;
+                        }
+
+                        Callback(Response);
+                    }
+                );
+            });
+        }
+
+        function AutocompletionTextTestCallback(Range) {
+            if (!Range.collapsed) {
+                return null;
+            }
+
+            return CKEDITOR.plugins.textMatch.match(Range, AutocompletionMatchCallback);
+        }
+
+        function AutocompletionMatchCallback(Text, Offset) {
+            var TriggerMatch;
+
+            $.each(AutocompletionSettings.Triggers, function(Trigger) {
+                var RegExEscapedTrigger = EscapeRegExpCharacters(Trigger);
+
+                if (TriggerMatch) {
+                    return;
+                }
+
+                TriggerMatch = Text.match(new RegExp('(?:^|\\s+)(' + RegExEscapedTrigger + '\\S+)$'));
+            });
+
+            if (!TriggerMatch || TriggerMatch.length != 2) {
+                return;
+            }
+
+            return {
+                start: Offset - TriggerMatch[1].length,
+                end:   Offset
+            };
+        }
+
+        // Taken from: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+        function EscapeRegExpCharacters(String) {
+            return String.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+        }
+
+        // Ensure that HTML will be inserted as HTML, not as text
+        // by overwriting the autocomplete plugin's function getHtmlToInsert.
+        CKEDITOR.plugins.autocomplete.prototype.getHtmlToInsert = function(item) {
+            return this.outputTemplate ? this.outputTemplate.output(item) : item.name;
+        };
+
+        // Initialize CKEditor autocompletion.
+        Core.AJAX.FunctionCall(
+            Core.Config.Get('Baselink'),
+            {
+                Action:    'AJAXRichTextAutocompletion',
+                Subaction: 'GetAutocompletionSettings'
+            },
+            function(Response) {
+                var CKEditorConfig;
+
+                if ($.isEmptyObject(Response)) {
+                    return true;
+                }
+
+                AutocompletionSettings = Response;
+
+                CKEditorConfig = {
+                    textTestCallback: AutocompletionTextTestCallback,
+                    dataCallback    : AutocompletionDataCallback,
+                    itemTemplate    : AutocompletionSettings.ItemTemplate,
+                    outputTemplate  : AutocompletionSettings.OutputTemplate
+                };
+
+                new CKEDITOR.plugins.autocomplete(Editor.editor, CKEditorConfig);
+            }
+        );
+    }
+
+    /**
      * @name InitEditor
      * @memberof Core.UI.RichTextEditor
      * @function
@@ -72,7 +199,8 @@ Core.UI.RichTextEditor = (function (TargetNS) {
             UserLanguage,
             UploadURL = '',
             EditorConfig,
-            RemovedCKEditorPlugins = '';
+            RemovedCKEditorPlugins = '',
+            MentionsConfig = Core.Config.Get('Mentions::RichTextEditor');
 
         if (typeof CKEDITOR === 'undefined') {
             return false;
@@ -88,6 +216,26 @@ Core.UI.RichTextEditor = (function (TargetNS) {
 
         if (EditorID === '') {
             Core.Exception.Throw('RichTextEditor: Need exactly one EditorArea!', 'TypeError');
+        }
+
+        if (MentionsConfig) {
+            $("<input name='MentionRecipients' type='hidden'>").appendTo($('textarea.RichText').closest('form'));
+            $("<input name='MentionGroups' type='hidden'>").appendTo($('textarea.RichText').closest('form'));
+
+            CKEDITOR.config.mentions = [
+                {
+                    feed:           getMentionUserData,
+                    marker:         MentionsConfig.Triggers.User,
+                    itemTemplate:   MentionsConfig.Templates.Users.ItemTemplate,
+                    outputTemplate: MentionsConfig.Templates.Users.OutputTemplate
+                },
+                {
+                    feed:           getMentionGroupData,
+                    marker:         MentionsConfig.Triggers.Group,
+                    itemTemplate:   MentionsConfig.Templates.Groups.ItemTemplate,
+                    outputTemplate: MentionsConfig.Templates.Groups.OutputTemplate
+                }
+            ];
         }
 
         // mark the editor textarea as linked with an RTE instance to avoid multiple instances
@@ -109,6 +257,8 @@ Core.UI.RichTextEditor = (function (TargetNS) {
         });
 
         CKEDITOR.on('instanceReady', function (Editor) {
+            InitAutocompletion(Editor);
+
 
             // specific config for CodeMirror instances (e.g. XSLT editor)
             if (Core.Config.Get('RichText.Type') == 'CodeMirror') {
@@ -130,7 +280,6 @@ Core.UI.RichTextEditor = (function (TargetNS) {
                         cm.replaceSelection(spaces);
                     }
                 });
-
             }
 
             Core.App.Publish('Event.UI.RichTextEditor.InstanceReady', [Editor]);
@@ -158,27 +307,28 @@ Core.UI.RichTextEditor = (function (TargetNS) {
         RemovedCKEditorPlugins += ',elementspath';
 
         EditorConfig = {
-            customConfig: '', // avoid loading external config files
+            customConfig:              '', // avoid loading external config files
             disableNativeSpellChecker: false,
-            defaultLanguage: UserLanguage,
-            language: UserLanguage,
-            width: Core.Config.Get('RichText.Width', 620),
-            resize_minWidth: Core.Config.Get('RichText.Width', 620),
-            height: Core.Config.Get('RichText.Height', 320),
-            removePlugins: RemovedCKEditorPlugins,
-            forcePasteAsPlainText: false,
-            format_tags: 'p;h1;h2;h3;h4;h5;h6;pre',
-            fontSize_sizes: '8px;10px;12px;16px;18px;20px;22px;24px;26px;28px;30px;',
-            extraAllowedContent: 'div[type]{*}; img[*]; col[width]; style[*]{*}; *[id](*)',
-            enterMode: CKEDITOR.ENTER_BR,
-            shiftEnterMode: CKEDITOR.ENTER_BR,
-            contentsLangDirection: Core.Config.Get('RichText.TextDir', 'ltr'),
-            toolbar: CheckFormID($EditorArea).length ? Core.Config.Get('RichText.Toolbar') : Core.Config.Get('RichText.ToolbarWithoutImage'),
-            filebrowserBrowseUrl: '',
-            filebrowserUploadUrl: UploadURL,
-            extraPlugins: 'splitquote,contextmenu_linkopen,textwatcher,autocomplete,textmatch,autolink,image2',
-            entities: false,
-            skin: 'moono-lisa'
+            defaultLanguage:           UserLanguage,
+            language:                  UserLanguage,
+            width:                     Core.Config.Get('RichText.Width', 620),
+            resize_minWidth:           Core.Config.Get('RichText.Width', 620),
+            height:                    Core.Config.Get('RichText.Height', 320),
+            removePlugins:             RemovedCKEditorPlugins,
+            forcePasteAsPlainText:     false,
+            format_tags:               'p;h1;h2;h3;h4;h5;h6;pre',
+            fontSize_sizes:            Core.Config.Get('RichText.FontSizes', '8px;10px;12px;14px;16px;18px;20px;22px;24px;26px;28px;30px;'),
+            font_names:                Core.Config.Get('RichText.FontNames', ''),
+            extraAllowedContent:       Core.Config.Get('RichText.ExtraAllowedContent', 'div[type]{*}; img[*]; col[width]; style[*]{*}; *[id](*)'),
+            enterMode:                 CKEDITOR.ENTER_BR,
+            shiftEnterMode:            CKEDITOR.ENTER_BR,
+            contentsLangDirection:     Core.Config.Get('RichText.TextDir', 'ltr'),
+            toolbar:                   CheckFormID($EditorArea).length ? Core.Config.Get('RichText.Toolbar') : Core.Config.Get('RichText.ToolbarWithoutImage'),
+            filebrowserBrowseUrl:      '',
+            filebrowserUploadUrl:      UploadURL,
+            extraPlugins:              Core.Config.Get('RichText.ExtraPlugins','splitquote,contextmenu_linkopen,textwatcher,autocomplete,textmatch,autolink,image2,mentions'),
+            entities:                  false,
+            skin:                      'moono-lisa'
         };
         /*eslint-enable camelcase */
 
@@ -187,26 +337,26 @@ Core.UI.RichTextEditor = (function (TargetNS) {
             $.extend(EditorConfig, {
 
                 /*eslint-disable camelcase */
-                startupMode: 'source',
+                startupMode:    'source',
                 allowedContent: true,
-                extraPlugins: 'codemirror',
-                codemirror: {
-                    theme: 'default',
-                    lineNumbers: true,
-                    lineWrapping: true,
-                    matchBrackets: true,
-                    autoCloseTags: true,
-                    autoCloseBrackets: true,
-                    enableSearchTools: true,
-                    enableCodeFolding: true,
-                    enableCodeFormatting: true,
-                    autoFormatOnStart: false,
+                extraPlugins:   'codemirror',
+                codemirror:     {
+                    theme:                  'default',
+                    lineNumbers:            true,
+                    lineWrapping:           true,
+                    matchBrackets:          true,
+                    autoCloseTags:          true,
+                    autoCloseBrackets:      true,
+                    enableSearchTools:      true,
+                    enableCodeFolding:      true,
+                    enableCodeFormatting:   true,
+                    autoFormatOnStart:      false,
                     autoFormatOnModeChange: false,
-                    autoFormatOnUncomment: false,
-                    mode: 'htmlmixed',
-                    showTrailingSpace: true,
-                    highlightMatches: true,
-                    styleActiveLine: true
+                    autoFormatOnUncomment:  false,
+                    mode:                   'htmlmixed',
+                    showTrailingSpace:      true,
+                    highlightMatches:       true,
+                    styleActiveLine:        true
                 }
                 /*eslint-disable camelcase */
 
@@ -423,6 +573,42 @@ Core.UI.RichTextEditor = (function (TargetNS) {
             $EditorArea.focus();
         }
     };
+
+    function getMentionUserData(opts, callback) {
+        Core.AJAX.FunctionCall(
+            Core.Config.Get('Baselink'),
+            {
+                Action:     'Mentions',
+                Subaction:  'GetUsers',
+                SearchTerm: opts.query
+            },
+            function(Response) {
+                callback(
+                    $.each(Response.Users, function(User) {
+                        return User.name;
+                    })
+                )
+            }
+        );
+    }
+
+    function getMentionGroupData(opts, callback) {
+        Core.AJAX.FunctionCall(
+            Core.Config.Get('Baselink'),
+            {
+                Action:     'Mentions',
+                Subaction:  'GetGroups',
+                SearchTerm: opts.query
+            },
+            function(Response){
+                callback(
+                    $.each(Response.Groups,function(Group) {
+                        return Group.name;
+                    })
+                );
+            }
+        )
+    }
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');
 

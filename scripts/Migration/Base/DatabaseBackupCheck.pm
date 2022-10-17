@@ -59,21 +59,17 @@ sub CheckPreviousRequirement {
         print "\n        Warning: this script can make changes to your database which are irreversible.\n"
             . "        Make sure you have properly backed up complete database before continuing.\n\n";
     }
-    else {
-        print "\n";
-    }
 
-    print '        Did you backup the database? [Y]es/[N]o: ';
+    print "\n        Did you backup the database? [Y]es/[N]o: ";
 
     my $Answer = <>;
 
     # Remove white space from input.
-    $Answer =~ s{\s}{}smx;
+    $Answer =~ s{\s}{}g;
 
     # Continue only if user answers affirmatively.
-    if ( $Answer =~ m{^y}i ) {
+    if ( $Answer =~ m{\Ay(?:es)?\z}i ) {
         print "\n";
-
         return 1;
     }
 

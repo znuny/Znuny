@@ -88,4 +88,6 @@ $Self->Is(
     "Admin::Package::Upgrade exit code without arguments - Can't upgrade, package 'Test-0.0.2' already installed!",
 );
 
+$HelperObject->CustomFileCleanup();
+
 1;

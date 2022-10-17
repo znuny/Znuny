@@ -163,7 +163,7 @@ $Selenium->RunTest(
 
         # Get image attachment.
         my $AttachmentName = "StdAttachment-Test1.png";
-        my $Location       = $ConfigObject->Get('Home')
+        my $Location       = $Selenium->{Home}
             . "/scripts/test/sample/StdAttachment/$AttachmentName";
         my $ContentRef = $Kernel::OM->Get('Kernel::System::Main')->FileRead(
             Location => $Location,
@@ -270,22 +270,6 @@ $Selenium->RunTest(
             my $Element = $Selenium->find_element("//a[contains(\@href, \'Action=$Action')]");
             $Element->is_enabled();
             $Element->is_displayed();
-        }
-
-        my $OTRSBusinessIsInstalled = $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled();
-        my $OBTeaser                = $LanguageObject->Translate('All attachments (OTRS Business Solution™)');
-        my $OBTeaserFound           = index( $Selenium->get_page_source(), $OBTeaser ) > -1;
-        if ( !$OTRSBusinessIsInstalled ) {
-            $Self->True(
-                $OBTeaserFound,
-                "OTRSBusiness teaser found on page",
-            );
-        }
-        else {
-            $Self->False(
-                $OBTeaserFound,
-                "OTRSBusiness teaser not found on page",
-            );
         }
 
         # Verify article order in zoom screen.

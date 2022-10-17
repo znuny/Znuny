@@ -26,6 +26,13 @@ $Selenium->RunTest(
 
         my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
+        # enable SecureMode
+        $Helper->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'SecureMode',
+            Value => 1,
+        );
+
         # Create test user and login.
         my $TestUserLogin = $Helper->TestUserCreate(
             Groups => [ 'admin', 'users' ],

@@ -9,8 +9,12 @@
 
 "use strict";
 
-var Core = Core || {};
+var Core = Core || {},
+    Znuny = Znuny || {};
+
 Core.Agent = Core.Agent || {};
+Znuny.Form = Znuny.Form || {};
+Znuny.Form.Input = Znuny.Form.Input || {};
 
 /**
  * @namespace Core.Agent.TicketProcess
@@ -109,6 +113,7 @@ Core.Agent.TicketProcess = (function (TargetNS) {
                         });
                         $ElementToUpdate.fadeIn();
                         Core.UI.InputFields.Activate($ElementToUpdate);
+                        Znuny.Form.Input.Init();
                         try {
                             /*eslint-disable no-eval */
                             eval(JavaScriptString);

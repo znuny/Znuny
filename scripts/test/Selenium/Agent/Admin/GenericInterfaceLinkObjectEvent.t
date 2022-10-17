@@ -34,7 +34,6 @@ $Selenium->RunTest(
         );
 
         my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
-        my $Home        = $ConfigObject->Get('Home');
 
         # Login as test user.
         $Selenium->Login(
@@ -55,7 +54,7 @@ $Selenium->RunTest(
         $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('.Dialog.Modal').length;" );
 
         my $File     = 'GenericTicketConnectorREST.yml';
-        my $Location = "$Home/scripts/test/sample/Webservice/$File";
+        my $Location = "$Selenium->{Home}/scripts/test/sample/Webservice/$File";
         my $Name     = "Webservice" . $HelperObject->GetRandomID();
         $Selenium->find_element( "#WebserviceName",     'css' )->send_keys($Name);
         $Selenium->find_element( "#ConfigFile",         'css' )->send_keys($Location);

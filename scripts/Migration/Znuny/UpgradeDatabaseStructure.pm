@@ -43,6 +43,14 @@ sub Run {
             Message => 'Add missing foreign keys that point to database table "article"',
             Module  => 'RecreateForeignKeysToArticleTable',
         },
+        {
+            Message => 'Add table and notification event for user mention support',
+            Module  => 'Mentions',
+        },
+        {
+            Message => 'Increase size of columns of database tables oauth2_token_config and oauth2_token',
+            Module  => 'OAuth2Token',
+        },
     );
 
     return 1   if !@Tasks;

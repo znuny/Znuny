@@ -82,7 +82,6 @@ $Selenium->RunTest(
 
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
         my $ScriptAlias  = $ConfigObject->Get('ScriptAlias');
-        my $Home         = $ConfigObject->Get('Home');
 
         # Check screens.
         for my $Action (
@@ -124,7 +123,7 @@ $Selenium->RunTest(
             $Selenium->execute_script("\$('.DnDUpload').css('display', 'none');");
             $Selenium->execute_script("\$('#FileUpload').css('display', 'block');");
 
-            my $Location = "$Home/scripts/test/sample/Main/Main-Test1.doc";
+            my $Location = "$Selenium->{Home}/scripts/test/sample/Main/Main-Test1.doc";
             $Selenium->find_element( "#FileUpload", 'css' )->clear();
             $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
 

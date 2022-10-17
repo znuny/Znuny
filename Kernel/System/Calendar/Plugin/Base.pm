@@ -16,6 +16,7 @@ package Kernel::System::Calendar::Plugin::Base;
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
+    'Kernel::System::Calendar::Appointment',
     'Kernel::System::Calendar::Plugin',
 );
 
@@ -77,6 +78,36 @@ sub RenderOutput {
 
 updated accordingly as needed.
 
+    variant 1: parent appointment with children (parent)
+
+        param:
+            Recurring = 1
+            ParentID  = undef
+
+        tasks:
+            - update current appointment (parent)
+            - delete children (should have happened before)
+            - add new children
+
+    variant 2: single appointment (single)
+
+        param:
+            Recurring = 0
+            ParentID  = undef
+
+        tasks:
+            - update current appointment (single)
+
+    variant 3: single child appointment is a child of a parent (single child)
+
+        param:
+            Recurring = 0
+            ParentID  = 123
+
+        tasks:
+            - update current appointment (single child)
+
+
     my $Success = $BasePluginObject->Update(
         GetParam    => \%GetParam,
         Appointment => \%Appointment,
@@ -93,10 +124,19 @@ Returns:
 sub Update {
     my ( $Self, %Param ) = @_;
 
-    my $PluginObject = $Kernel::OM->Get('Kernel::System::Calendar::Plugin');
+    my $PluginObject      = $Kernel::OM->Get('Kernel::System::Calendar::Plugin');
+    my $AppointmentObject = $Kernel::OM->Get('Kernel::System::Calendar::Appointment');
 
+    my $AppointmentID = $Param{Appointment}->{AppointmentID};
+
+    my %Appointment = $AppointmentObject->AppointmentGet(
+        AppointmentID => $AppointmentID,
+    );
+    return if !%Appointment;
+
+    # update current appointment (parent|single|single child)
     my %Data = $PluginObject->DataGet(
-        AppointmentID => $Param{Appointment}->{AppointmentID},
+        AppointmentID => $AppointmentID,
         PluginKey     => $Param{Plugin}->{PluginKey},
         UserID        => 1,
     );
@@ -116,6 +156,29 @@ sub Update {
     else {
         $PluginObject->DataAdd(
             AppointmentID => $Param{Appointment}->{AppointmentID},
+            PluginKey     => $Param{Plugin}->{PluginKey},
+            Config        => {
+                %{ $Param{Plugin}->{Param} },
+            },
+            CreateBy => $Param{UserID},
+            ChangeBy => $Param{UserID},
+            UserID   => $Param{UserID},
+        );
+    }
+
+    # if Recurring = 0, then AppointmentID is child appointment and we only update the current appointment
+    # if Recurring = 1, then AppointmentID is parent appointment and we delete and create new all 'child' appointments
+    return 1 if !$Param{GetParam}->{Recurring};
+
+    my @Appointments = $AppointmentObject->AppointmentRecurringGet(
+        AppointmentID => $AppointmentID,
+    );
+
+    # Create/update base plugin entry for the recurring appointments.
+    for my $Appointment (@Appointments) {
+
+        $PluginObject->DataAdd(
+            AppointmentID => $Appointment->{AppointmentID},
             PluginKey     => $Param{Plugin}->{PluginKey},
             Config        => {
                 %{ $Param{Plugin}->{Param} },
@@ -149,22 +212,49 @@ Returns:
 sub Delete {
     my ( $Self, %Param ) = @_;
 
-    my $PluginObject = $Kernel::OM->Get('Kernel::System::Calendar::Plugin');
+    my $PluginObject      = $Kernel::OM->Get('Kernel::System::Calendar::Plugin');
+    my $AppointmentObject = $Kernel::OM->Get('Kernel::System::Calendar::Appointment');
 
-    my $Success = $PluginObject->DataDelete(
-        AppointmentID => $Param{Appointment}->{AppointmentID},
+    my $AppointmentID = $Param{Appointment}->{AppointmentID};
+
+    my %Appointment = $AppointmentObject->AppointmentGet(
+        AppointmentID => $AppointmentID,
+    );
+    return if !%Appointment;
+
+    $PluginObject->DataDelete(
+        AppointmentID => $AppointmentID,
         PluginKey     => $Param{Plugin}->{PluginKey},
         UserID        => 1,
     );
 
-    return $Success;
+    # if Recurring = 0, then AppointmentID is child appointment and we only delete the current appointment
+    # if Recurring = 1, then AppointmentID is parent appointment and we delete all 'child' appointments
+    return 1 if !$Param{GetParam}->{Recurring};
+
+    # Assemble recurring appointments and also add parent appointment to start of array.
+    my @Appointments = $AppointmentObject->AppointmentRecurringGet(
+        AppointmentID => $AppointmentID,
+    );
+
+    for my $Appointment (@Appointments) {
+
+        my $Success = $PluginObject->DataDelete(
+            AppointmentID => $Appointment->{AppointmentID},
+            PluginKey     => $Param{Plugin}->{PluginKey},
+            UserID        => 1,
+        );
+        return if !$Success;
+    }
+
+    return 1;
 }
 
 =head2 Get()
 
 Get all plugin information.
 
-    my %Data = $BasePluginObject->Get(
+    my $Data = $BasePluginObject->Get(
         GetParam    => \%GetParam,
         Appointment => \%Appointment,
         Plugin      => \%Plugin,
@@ -173,7 +263,7 @@ Get all plugin information.
 
 Returns:
 
-    my %Data = {};
+    my $Data = {};
 
 =cut
 

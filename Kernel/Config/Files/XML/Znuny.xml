@@ -269,6 +269,13 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="GenericInterface::Invoker::Ticket::Generic::HandleResponse::MaximumParallelInstances" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^[1-9]\d*$">1</Item>
+        </Value>
+    </Setting>
     <Setting Name="LibXML::EnableHugeXMLDataSupport" Required="1" Valid="1">
         <Description Translatable="1">Enables support for huge XML data in load_xml calls of CPAN library XML::LibXML. This should only be enabled if absolutely needed. Disabling this option (default) protects against denial of service through entity expansion attacks. Before enabling this option ensure that alternative measures to protect the application against this type of attack have been taken.</Description>
         <Navigation>Core::Ticket</Navigation>
@@ -507,6 +514,177 @@
         <Navigation>Core::DynamicFieldWebservice</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="DynamicFieldWebservice::FieldMapping" Required="0" Valid="1">
+        <Description Translatable="1">Mapping for field values received from form. This setting is necessary for the correct identification of the form fields. Key means value type, value means possible representation in views.</Description>
+        <Navigation>Core::DynamicFieldWebservice</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Queue">
+                    <Array>
+                        <Item>NewQueueID</Item>
+                        <Item>Dest</Item>
+                        <Item>DestQueueID</Item>
+                        <Item>QueueID</Item>
+                    </Array>
+                </Item>
+                <Item Key="CustomerUser">
+                    <Array>
+                        <Item>ToCustomer</Item>
+                        <Item>FromCustomer</Item>
+                        <Item>CustomerUserID</Item>
+                    </Array>
+                </Item>
+                <Item Key="Customer">
+                    <Array>
+                        <Item>CustomerID</Item>
+                    </Array>
+                </Item>
+                <Item Key="Owner">
+                    <Array>
+                        <Item>NewOwnerID</Item>
+                        <Item>NewUserID</Item>
+                        <Item>OwnerID</Item>
+                    </Array>
+                </Item>
+                <Item Key="Responsible">
+                    <Array>
+                        <Item>NewResponsibleID</Item>
+                        <Item>ResponsibleID</Item>
+                    </Array>
+                </Item>
+                <Item Key="State">
+                    <Array>
+                        <Item>NextStateID</Item>
+                        <Item>EmailStateID</Item>
+                        <Item>ComposeStateID</Item>
+                        <Item>NewStateID</Item>
+                        <Item>StateID</Item>
+                    </Array>
+                </Item>
+                <Item Key="Priority">
+                    <Array>
+                        <Item>NewPriorityID</Item>
+                        <Item>PriorityID</Item>
+                    </Array>
+                </Item>
+                <Item Key="Type">
+                    <Array>
+                        <Item>TypeID</Item>
+                    </Array>
+                </Item>
+                <Item Key="Service">
+                    <Array>
+                        <Item>ServiceID</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="DynamicFieldWebservice::CustomFieldMapping" Required="0" Valid="1">
+        <Description Translatable="1">Mapping for field values received from form which have multiple values. This setting is needed when the view shows the values of a particular field in a custom way (e.g. selectable customer user in ticket creation view). This setting is always respected first. There is also the possibility to specify an order for checking fields. (Field of customer user in ticket creation view can be saved as CustomerUser or just simple e-mail. First we need to check if CustomerKey is present (CustomerKey -> ID of CustomerUser). If not, then simply take plain text (CustomerTicketText -> E-mail)).</Description>
+        <Navigation>Core::DynamicFieldWebservice</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CustomerUser">
+                    <Hash>
+                        <Item Key="CustomerSelected">
+                            <Hash>
+                                <Item Key="1">CustomerKey</Item>
+                                <Item Key="2">CustomerTicketText</Item>
+                            </Hash>
+                        </Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="DynamicFieldWebservice::AdditionalAttributes###Standard" Required="0" Valid="1">
+        <Description Translatable="1">Options and default field set for attributes. Values of this setting will always be passed as simple form value without possibility to further configure it in AdminDynamicField view. The keys with which the form values will be sent to the invoker can be edited in the "Default" section of this setting.</Description>
+        <Navigation>Core::DynamicFieldWebservice</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Option">
+                    <Hash>
+                        <Item Key="CustomerUser">CustomerUser</Item>
+                        <Item Key="Customer">Customer</Item>
+                        <Item Key="DynamicField">DynamicField</Item>
+                    </Hash>
+                </Item>
+                <Item Key="Default">
+                    <Hash>
+                        <Item Key="CustomerUser">CustomerUserID</Item>
+                        <Item Key="Customer">Customer</Item>
+                        <Item Key="DynamicField">DynamicField</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="DynamicFieldWebservice::AdditionalAttributes###Selectable" Required="0" Valid="1">
+        <Description Translatable="1">Options and default field set for selectable attributes. Values which will be passed to invoker (ID or Name or both) can be configured in AdminDynamicField view. The keys with which the form values (ID or Name) will be sent to the invoker can be edited in the "Default" section of this setting. Example usage for field Queue: Field with selected ID and Name will send QueueID = 3 and Queue = Raw.</Description>
+        <Navigation>Core::DynamicFieldWebservice</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Option">
+                    <Hash>
+                        <Item Key="Queue">Queue</Item>
+                        <Item Key="State">State</Item>
+                        <Item Key="Priority">Priority</Item>
+                        <Item Key="Type">Type</Item>
+                        <Item Key="Service">Service</Item>
+                        <Item Key="Owner">Owner</Item>
+                        <Item Key="Responsible">Responsible</Item>
+                    </Hash>
+                </Item>
+                <Item Key="Default">
+                    <Hash>
+                        <Item Key="Queue">
+                            <Hash>
+                                <Item Key="ID">QueueID</Item>
+                                <Item Key="Name">Queue</Item>
+                            </Hash>
+                        </Item>
+                        <Item Key="State">
+                            <Hash>
+                                <Item Key="ID">StateID</Item>
+                                <Item Key="Name">State</Item>
+                            </Hash>
+                        </Item>
+                        <Item Key="Priority">
+                            <Hash>
+                                <Item Key="ID">PriorityID</Item>
+                                <Item Key="Name">Priority</Item>
+                            </Hash>
+                        </Item>
+                        <Item Key="Type">
+                            <Hash>
+                                <Item Key="ID">TypeID</Item>
+                                <Item Key="Name">Type</Item>
+                            </Hash>
+                        </Item>
+                        <Item Key="Service">
+                            <Hash>
+                                <Item Key="ID">ServiceID</Item>
+                                <Item Key="Name">Service</Item>
+                            </Hash>
+                        </Item>
+                        <Item Key="Owner">
+                            <Hash>
+                                <Item Key="ID">OwnerID</Item>
+                                <Item Key="Name">Owner</Item>
+                            </Hash>
+                        </Item>
+                        <Item Key="Responsible">
+                            <Hash>
+                                <Item Key="ID">ResponsibleID</Item>
+                                <Item Key="Name">Responsible</Item>
+                            </Hash>
+                        </Item>
+                    </Hash>
+                </Item>
+            </Hash>
         </Value>
     </Setting>
 
@@ -1452,7 +1630,7 @@
                     </Item>
                     <Item Key="Description" Translatable="1"></Item>
                     <Item Key="NavBarName">AdminOAuth2TokenManagement</Item>
-                    <Item Key="Title" Translatable="1">AdminOAuth2TokenManagement</Item>
+                    <Item Key="Title" Translatable="1">Manage OAuth2 tokens and their configurations.</Item>
                 </Hash>
             </Item>
         </Value>
@@ -1481,7 +1659,7 @@
         </Value>
     </Setting>
     <Setting Name="Loader::Module::AdminOAuth2TokenManagement###200-OAuth2TokenManagement" Required="1" Valid="1">
-        <Description Translatable="1">Loader module registration for AdminOAuth2TokenManagement.</Description>
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
         <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
         <Value>
             <Hash>
@@ -1895,7 +2073,7 @@
         </Value>
     </Setting>
     <Setting Name="Loader::Module::AgentAppointmentCalendarOverview###500-AppointmentCalendar::Plugin::TicketCreate" Required="1" Valid="1">
-        <Description Translatable="1">Loader module registration for AgentAppointmentEdit.</Description>
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
         <Navigation>Frontend::Agent::ModuleRegistration::Loader</Navigation>
         <Value>
             <Hash>
@@ -2096,6 +2274,358 @@
         <Navigation>Frontend::Agent::View::TicketZoom</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="^[1-9]\d*$">50</Item>
+        </Value>
+    </Setting>
+
+    <!--
+        RTE autocompletion
+    -->
+    <Setting Name="Frontend::Module###AJAXRichTextAutocompletion" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Autompletion for rich text editor.</Item>
+                    <Item Key="Title">Autompletion for rich text editor</Item>
+                    <Item Key="NavBarName">Autompletion for rich text editor</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="CustomerFrontend::Module###AJAXRichTextAutocompletion" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the customer interface.</Description>
+        <Navigation>Frontend::Customer::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Autompletion for rich text editor.</Item>
+                    <Item Key="Title">Autompletion for rich text editor</Item>
+                    <Item Key="NavBarName">Autompletion for rich text editor</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Autocompletion::General" Required="0" Valid="1">
+        <Description Translatable="1">General settings for autocompletion in rich text editor.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="ItemTemplate">&lt;li data-id="{id}"&gt;{selection_list_title}&lt;/li&gt;</Item>
+                <Item Key="OutputTemplate">{inserted_value}</Item>
+                <Item Key="MinSearchLength">3</Item>
+                <!-- <Item Key="PreviewLength">50</Item> -->
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Autocompletion::Modules###Example" Required="0" Valid="0">
+        <Description Translatable="1">Rich text editor configuration for autocompletion module.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Trigger">!EX</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Autocompletion::Modules###Template" Required="0" Valid="1">
+        <Description Translatable="1">Rich text editor configuration for autocompletion module to support templates.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Trigger">##</Item>
+                <Item Key="SearchFields">
+                    <Array>
+                        <Item>Name</Item>
+                        <Item>Comment</Item>
+                        <Item>Template</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!--
+        Mentions in RTE
+    -->
+    <Setting Name="Mentions###Notifications" Required="0" Valid="1">
+        <Description Translatable="1">Defines which notifications about mentions should be sent.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="Article">
+                <Item ValueType="Option" Value="Article" Translatable="1">Mentioned in article</Item>
+                <Item ValueType="Option" Value="Ticket" Translatable="1">Mentioned in ticket</Item>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Mentions###ToolbarCount" Required="0" Valid="1">
+        <Description Translatable="1">Defines if the toolbar mention icon should count mentions.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Mentions###BlockedGroups" Required="0" Valid="1">
+        <Description Translatable="1">These groups won't be selectable to be mentioned.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Array>
+                <Item></Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Mentions###Limit" Required="0" Valid="1">
+        <Description Translatable="1">Limits number of users (per article) that will be marked as mentioned and be notified. Users (and users from mentioned groups) that exceed this limit will silently be ignored.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="[1-9]\d*">20</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Mentions::RichTextEditor###Triggers" Required="0" Valid="1">
+        <Description Translatable="1">Frontend registration of triggers for mention plugin of CKEditor.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="User">@</Item>
+                <Item Key="Group">@@</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Mentions::RichTextEditor###Templates" Required="0" Valid="1">
+        <Description Translatable="1">Frontend registration of input/output templates for mention plugin of CKEditor.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Users">
+                    <Hash>
+                        <Item Key="ItemTemplate">&lt;li class="Mention" data-id="{id}"&gt;{fullname}&lt;/li&gt;</Item>
+                        <Item Key="OutputTemplate">&lt;a class="Mention" href="#"&gt;@{username}&lt;/a&gt; </Item>
+                    </Hash>
+                </Item>
+                <Item Key="Groups">
+                    <Hash>
+                        <Item Key="ItemTemplate">&lt;li class="Mention" data-id="{id}"&gt;{name} ({mentionLabel})&lt;/li&gt;</Item>
+                        <Item Key="OutputTemplate">&lt;a class="GroupMention" href="#"&gt;{name}&lt;/a&gt; </Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Module###Mentions" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">Mentions.</Item>
+                    <Item Key="Title" Translatable="1">Mentions</Item>
+                    <Item Key="NavBarName">Mentions</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::EventModulePost###Mentions" Required="0" Valid="1">
+        <Description Translatable="1">Event handler for mentions.</Description>
+        <Navigation>Core::Event::Ticket</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Ticket::Event::Mentions</Item>
+                <Item Key="Transaction">1</Item>
+                <Item Key="Event">ArticleCreate</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketZoom###Widgets###0299-Mentions" Required="0" Valid="1">
+        <Description Translatable="1">AgentTicketZoom widget that displays ticket data in the side bar.</Description>
+        <Navigation>Frontend::Agent::View::TicketZoom</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketZoom::Mentions</Item>
+                <Item Key="Location">Sidebar</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AgentTicketZoom###0100-Mentions" Required="1" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Znuny.Agent.MentionAction.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AgentTicketMentionView###0100-Mentions" Required="1" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Znuny.Agent.TicketMention.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="DashboardBackend###0300-LastMentions" Required="0" Valid="1">
+        <Description Translatable="1">Parameters for the dashboard backend of the last mention widget.</Description>
+        <Navigation>Frontend::Agent::View::Dashboard</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::Dashboard::TicketGeneric</Item>
+                <Item Key="Title" Translatable="1">Last Mentions</Item>
+                <Item Key="Description" Translatable="1">Shows last mention of tickets.</Item>
+                <Item Key="IncludesMentions">1</Item>
+                <Item Key="Attributes">ModuleLookup</Item>
+                <Item Key="Filter">Locked</Item>
+                <Item Key="Time">UntilTime</Item>
+                <Item Key="Limit">10</Item>
+                <Item Key="Permission">rw</Item>
+                <Item Key="Block">ContentLarge</Item>
+                <Item Key="Group"></Item>
+                <Item Key="Default">1</Item>
+                <Item Key="CacheTTLLocal">0.5</Item>
+                <Item Key="DefaultColumns">
+                    <Hash>
+                        <DefaultItem ValueType="Select">
+                            <Item ValueType="Option" Value="0" Translatable="1">0 - Disabled</Item>
+                            <Item ValueType="Option" Value="1" Translatable="1">1 - Available</Item>
+                            <Item ValueType="Option" Value="2" Translatable="1">2 - Enabled by default</Item>
+                        </DefaultItem>
+                        <Item Key="Age" SelectedID="2"></Item>
+                        <Item Key="Changed" SelectedID="1"></Item>
+                        <Item Key="Created" SelectedID="1"></Item>
+                        <Item Key="CustomerCompanyName" SelectedID="1"></Item>
+                        <Item Key="CustomerID" SelectedID="1"></Item>
+                        <Item Key="CustomerName" SelectedID="1"></Item>
+                        <Item Key="CustomerUserID" SelectedID="1"></Item>
+                        <Item Key="EscalationResponseTime" SelectedID="1"></Item>
+                        <Item Key="EscalationSolutionTime" SelectedID="1"></Item>
+                        <Item Key="EscalationTime" SelectedID="1"></Item>
+                        <Item Key="EscalationUpdateTime" SelectedID="1"></Item>
+                        <Item Key="TicketNumber" SelectedID="2"></Item>
+                        <Item Key="Lock" SelectedID="1"></Item>
+                        <Item Key="Owner" SelectedID="1"></Item>
+                        <Item Key="PendingTime" SelectedID="1"></Item>
+                        <Item Key="Queue" SelectedID="1"></Item>
+                        <Item Key="Responsible" SelectedID="1"></Item>
+                        <Item Key="Priority" SelectedID="1"></Item>
+                        <Item Key="Service" SelectedID="1"></Item>
+                        <Item Key="State" SelectedID="1"></Item>
+                        <Item Key="SLA" SelectedID="1"></Item>
+                        <Item Key="Title" SelectedID="2"></Item>
+                        <Item Key="Type" SelectedID="1"></Item>
+                        <Item Key="LastMention" SelectedID="2"></Item>
+                    </Hash>
+                </Item>
+                <Item Key="Mandatory">0</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Agent::CommonCSS###999-Mentions" Required="1" Valid="1">
+        <Description Translatable="1">List of CSS files to always be loaded for the customer interface.</Description>
+        <Navigation>Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>Znuny.RichTextEditor.css</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::ToolBarModule###191-Ticket::TicketMention" Required="0" Valid="1">
+        <Description Translatable="1">Agent interface notification module to show the number of mentions.</Description>
+        <Navigation>Frontend::Agent::ToolBar</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::ToolBar::TicketMention</Item>
+                <Item Key="CssClass">Mention</Item>
+                <Item Key="CssClassNew">Mention New</Item>
+                <Item Key="Icon">fa fa-comment</Item>
+                <Item Key="IconNew">fa fa-comment</Item>
+                <Item Key="IconReached">fa fa-comment</Item>
+                <Item Key="AccessKey"></Item>
+                <Item Key="Priority">1030040</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Permission###6-MentionCheck" Required="0" Valid="1">
+        <Description Translatable="1">Module to grant access to the mentioned agents of a ticket.</Description>
+        <Navigation>Core::Ticket::Permission</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Ticket::Permission::MentionCheck</Item>
+                <Item Key="Required">0</Item>
+                <Item Key="Granted">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Module###AgentTicketMentionView" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">Mentions.</Item>
+                    <Item Key="Title" Translatable="1">Mentions</Item>
+                    <Item Key="NavBarName">Mentions</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AgentTicketMentionView###002-Ticket" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.AgentTicketQueue.css</Item>
+                        <Item>Core.AllocationList.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.UI.AllocationList.js</Item>
+                        <Item>Core.Agent.TableFilters.js</Item>
+                        <Item>Core.Agent.Overview.js</Item>
+                        <Item>Core.Agent.TicketSplit.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
         </Value>
     </Setting>
 

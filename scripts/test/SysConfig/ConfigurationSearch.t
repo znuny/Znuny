@@ -41,7 +41,7 @@ return if !$DBObject->Prepare(
         WHERE
             sd.xml_filename IN (
                 'Calendar.xml' ,'CloudServices.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml',
-                'ProcessManagement.xml', 'Ticket.xml'
+                'ProcessManagement.xml', 'Ticket.xml', 'Znuny.xml'
             )
             AND is_invisible != '1'
         ",

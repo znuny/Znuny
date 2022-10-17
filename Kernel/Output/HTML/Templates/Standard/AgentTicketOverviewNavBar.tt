@@ -54,7 +54,14 @@
                         </a>
                     </li>
 [% RenderBlockEnd("DocumentActionRowRemoveColumnFilters") %]
-
+[% IF Env('Action') == 'AgentTicketMentionView' %]
+                    <li class="RemoveMention ContextSettings">
+                        <a href="#" id="RemoveMention" title="[% Translate("Remove mention") | html %]">
+                            <i class="fa fa-eye-slash"></i>
+                            <span>[% Translate("Remove mention") | html %]</span>
+                        </a>
+                    </li>
+[% END %]
                     <li class="ContextSettings">
                         <a href="#" id="ShowContextSettingsDialog" title="[% Translate("Settings") | html %]">
                             <i class="fa fa-cog"></i>

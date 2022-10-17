@@ -1438,13 +1438,13 @@ Znuny.Form.Input = (function (TargetNS) {
                     );
 
                     if (PendingStateIDsFound.length) {
-                        $('#Month').parent().prev().show();
-                        $('#Month').parent().show();
+                        $('#Month, #PendingTimeMonth').parent().prev().show();
+                        $('#Month, #PendingTimeMonth').parent().show();
                         return;
                     }
 
-                    $('#Month').parent().prev().hide();
-                    $('#Month').parent().hide();
+                    $('#Month, #PendingTimeMonth').parent().prev().hide();
+                    $('#Month, #PendingTimeMonth').parent().hide();
                 }
             )
             .trigger('change.PendingStateDateTimeSelectionToggle');

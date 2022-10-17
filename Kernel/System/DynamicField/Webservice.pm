@@ -153,6 +153,7 @@ sub Test {
             $Data->{DisplayValue} = $DisplayValue;
         }
     }
+
     $Result->{Search}          = $Self->{Search};
     $Result->{Data}            = $Results;
     $Result->{StoredValue}     = \@StoredValue;
@@ -206,6 +207,7 @@ sub Autocomplete {
         SearchType         => 'LIKE',
         UserID             => $Param{UserID},
         UserType           => $Param{UserType},
+        FieldValues        => $Param{GetParam}->{FieldValues},
     );
 
     return [] if !defined $Results;
@@ -462,6 +464,10 @@ sub Search {
     }
 
     my @RequestResults;
+
+    if ( IsHashRefWithData( $Param{FieldValues} ) ) {
+        %Data = ( %Data, %{ $Param{FieldValues} } );
+    }
 
     # Use one request per search term if InvokerGet is being used because
     # some web services don't report the needed data when using InvokerSearch for this.
@@ -988,7 +994,6 @@ sub _DisplayValueAssemble {
     if ( !defined $BackendConfig->{DisplayedValues} || !length $BackendConfig->{DisplayedValues} ) {
         $DisplayKeyValuesConfig = $BackendConfig->{StoredValue};
     }
-
     return if !$DisplayKeyValuesConfig;
 
     my @DisplayKeyValues = split /\s*,\s*/, $DisplayKeyValuesConfig;
@@ -1308,7 +1313,7 @@ sub _BackendConfigGet {
     my %DefaultValues = (
         Backend         => 'DirectRequest',
         StoredValue     => 'Key',
-        DisplayedValues => 'Value',
+        DisplayedValues => '',
         DefaultValue    => '',
         Link            => '',
     );

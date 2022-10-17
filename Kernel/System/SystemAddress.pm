@@ -574,8 +574,9 @@ sub NameExistsCheck {
     my ( $Self, %Param ) = @_;
 
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+
     return if !$DBObject->Prepare(
-        SQL  => 'SELECT id FROM system_address WHERE value0 = ?',
+        SQL  => 'SELECT id FROM system_address WHERE LOWER(value0) = LOWER(?)',
         Bind => [ \$Param{Name} ],
     );
 

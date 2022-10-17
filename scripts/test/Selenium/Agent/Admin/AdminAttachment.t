@@ -79,7 +79,7 @@ $Selenium->RunTest(
             );
 
             # file checks
-            my $Location = $Home . "/scripts/test/sample/StdAttachment/StdAttachment-Test1.$File";
+            my $Location = $Selenium->{Home} . "/scripts/test/sample/StdAttachment/StdAttachment-Test1.$File";
 
             my $AttachmentName = 'StdAttachment' . $HelperObject->GetRandomNumber();
             $Attachments{$File} = $AttachmentName;

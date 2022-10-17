@@ -156,6 +156,41 @@ perform TicketCreate Operation. This will return the created ticket number.
                 },
             },
 
+            # or array of articles:
+            Article => [
+                {
+                    CommunicationChannel            => 'Email',                    # optional
+                    CommunicationChannelID          => 1,                          # optional
+                    IsVisibleForCustomer            => 1,                          # optional
+                    SenderTypeID                    => 123,                        # optional
+                    SenderType                      => 'some sender type name',    # optional
+                    AutoResponseType                => 'some auto response type',  # optional
+                    From                            => 'some from string',         # optional
+                    Subject                         => 'some subject',
+                    Body                            => 'some body',
+                    ContentType                     => 'some content type',        # ContentType or MimeType and Charset is required
+                    MimeType                        => 'some mime type',
+                    Charset                         => 'some charset',
+                    HistoryType                     => 'some history type',        # optional
+                    HistoryComment                  => 'Some  history comment',    # optional
+                    TimeUnit                        => 123,                        # optional
+                    NoAgentNotify                   => 1,                          # optional
+                    ForceNotificationToUserID       => [1, 2, 3]                   # optional
+                    ExcludeNotificationToUserID     => [1, 2, 3]                   # optional
+                    ExcludeMuteNotificationToUserID => [1, 2, 3]                   # optional
+                    Attachment => [
+                        {
+                            Content     => 'content'                                 # base64 encoded
+                            ContentType => 'some content type'
+                            Filename    => 'some fine name'
+                        },
+                        # ...
+                    ],
+                },
+                # ...
+            ],
+
+
             DynamicField => [                                                  # optional
                 {
                     Name   => 'some name',
@@ -190,9 +225,9 @@ perform TicketCreate Operation. This will return the created ticket number.
         Success         => 1,                       # 0 or 1
         ErrorMessage    => '',                      # in case of error
         Data            => {                        # result data payload after Operation
-            TicketID    => 123,                     # Ticket  ID number in OTRS (help desk system)
-            TicketNumber => 2324454323322           # Ticket Number in OTRS (Help desk system)
-            ArticleID   => 43,                      # Article ID number in OTRS (help desk system)
+            TicketID    => 123,                     # Ticket ID Znuny
+            TicketNumber => 2324454323322           # Ticket number in Znuny
+            ArticleID   => 43,                      # Article ID in Znuny
             Error => {                              # should not return errors
                     ErrorCode    => 'Ticket.Create.ErrorCode'
                     ErrorMessage => 'Error Description'
@@ -377,7 +412,14 @@ sub Run {
     }
 
     # check needed hashes
-    for my $Needed (qw(Ticket Article)) {
+    if ( !IsHashRefWithData( $Param{Data}->{Article} ) && !IsArrayRefWithData( $Param{Data}->{Article} ) ) {
+        return $Self->ReturnError(
+            ErrorCode    => 'TicketCreate.MissingParameter',
+            ErrorMessage => "TicketCreate: Article parameter is missing or not valid!",
+        );
+    }
+
+    for my $Needed (qw(Ticket)) {
         if ( !IsHashRefWithData( $Param{Data}->{$Needed} ) ) {
             return $Self->ReturnError(
                 ErrorCode    => 'TicketCreate.MissingParameter',
@@ -450,66 +492,75 @@ sub Run {
     }
 
     # isolate Article parameter
-    my $Article = $Param{Data}->{Article};
-    $Article->{UserType} = $UserType;
-
-    # remove leading and trailing spaces
-    for my $Attribute ( sort keys %{$Article} ) {
-        if ( ref $Attribute ne 'HASH' && ref $Attribute ne 'ARRAY' ) {
-
-            #remove leading spaces
-            $Article->{$Attribute} =~ s{\A\s+}{};
-
-            #remove trailing spaces
-            $Article->{$Attribute} =~ s{\s+\z}{};
-        }
+    my @Article;
+    if ( IsHashRefWithData( $Param{Data}->{Article} ) ) {
+        push @Article, $Param{Data}->{Article};
     }
-    if ( IsHashRefWithData( $Article->{OrigHeader} ) ) {
-        for my $Attribute ( sort keys %{ $Article->{OrigHeader} } ) {
+    if ( IsArrayRefWithData( $Param{Data}->{Article} ) ) {
+        @Article = @{ $Param{Data}->{Article} };
+    }
+
+    for my $Article (@Article) {
+        $Article->{UserType} = $UserType;
+
+        # remove leading and trailing spaces
+        for my $Attribute ( sort keys %{$Article} ) {
             if ( ref $Attribute ne 'HASH' && ref $Attribute ne 'ARRAY' ) {
 
                 #remove leading spaces
-                $Article->{OrigHeader}->{$Attribute} =~ s{\A\s+}{};
+                $Article->{$Attribute} =~ s{\A\s+}{};
 
                 #remove trailing spaces
-                $Article->{OrigHeader}->{$Attribute} =~ s{\s+\z}{};
+                $Article->{$Attribute} =~ s{\s+\z}{};
             }
         }
-    }
+        if ( IsHashRefWithData( $Article->{OrigHeader} ) ) {
+            for my $Attribute ( sort keys %{ $Article->{OrigHeader} } ) {
+                if ( ref $Attribute ne 'HASH' && ref $Attribute ne 'ARRAY' ) {
 
-    # Check attributes that can be set by sysconfig.
-    if ( !$Article->{AutoResponseType} ) {
-        $Article->{AutoResponseType} = $Self->{Config}->{AutoResponseType} || '';
-    }
+                    #remove leading spaces
+                    $Article->{OrigHeader}->{$Attribute} =~ s{\A\s+}{};
 
-    # TODO: GenericInterface::Operation::TicketCreate###CommunicationChannel
-    if ( !$Article->{CommunicationChannelID} && !$Article->{CommunicationChannel} ) {
-        $Article->{CommunicationChannel} = 'Internal';
-    }
-    if ( !defined $Article->{IsVisibleForCustomer} ) {
-        $Article->{IsVisibleForCustomer} = $Self->{Config}->{IsVisibleForCustomer} // 1;
-    }
-    if ( !$Article->{SenderTypeID} && !$Article->{SenderType} ) {
-        $Article->{SenderType} = $UserType eq 'User' ? 'agent' : 'customer';
-    }
-    if ( !$Article->{HistoryType} ) {
-        $Article->{HistoryType} = $Self->{Config}->{HistoryType} || '';
-    }
-    if ( !$Article->{HistoryComment} ) {
-        $Article->{HistoryComment} = $Self->{Config}->{HistoryComment} || '';
-    }
-
-    # check Article attribute values
-    my $ArticleCheck = $Self->_CheckArticle( Article => $Article );
-
-    if ( !$ArticleCheck->{Success} ) {
-        if ( !$ArticleCheck->{ErrorCode} ) {
-            return {
-                Success => 0,
-                %{$ArticleCheck},
-            };
+                    #remove trailing spaces
+                    $Article->{OrigHeader}->{$Attribute} =~ s{\s+\z}{};
+                }
+            }
         }
-        return $Self->ReturnError( %{$ArticleCheck} );
+
+        # Check attributes that can be set by sysconfig.
+        if ( !$Article->{AutoResponseType} ) {
+            $Article->{AutoResponseType} = $Self->{Config}->{AutoResponseType} || '';
+        }
+
+        # TODO: GenericInterface::Operation::TicketCreate###CommunicationChannel
+        if ( !$Article->{CommunicationChannelID} && !$Article->{CommunicationChannel} ) {
+            $Article->{CommunicationChannel} = 'Internal';
+        }
+        if ( !defined $Article->{IsVisibleForCustomer} ) {
+            $Article->{IsVisibleForCustomer} = $Self->{Config}->{IsVisibleForCustomer} // 1;
+        }
+        if ( !$Article->{SenderTypeID} && !$Article->{SenderType} ) {
+            $Article->{SenderType} = $UserType eq 'User' ? 'agent' : 'customer';
+        }
+        if ( !$Article->{HistoryType} ) {
+            $Article->{HistoryType} = $Self->{Config}->{HistoryType} || '';
+        }
+        if ( !$Article->{HistoryComment} ) {
+            $Article->{HistoryComment} = $Self->{Config}->{HistoryComment} || '';
+        }
+
+        # check Article attribute values
+        my $ArticleCheck = $Self->_CheckArticle( Article => $Article );
+
+        if ( !$ArticleCheck->{Success} ) {
+            if ( !$ArticleCheck->{ErrorCode} ) {
+                return {
+                    Success => 0,
+                    %{$ArticleCheck},
+                };
+            }
+            return $Self->ReturnError( %{$ArticleCheck} );
+        }
     }
 
     my $DynamicField;
@@ -608,7 +659,7 @@ sub Run {
 
     return $Self->_TicketCreate(
         Ticket           => $Ticket,
-        Article          => $Article,
+        Article          => \@Article,
         DynamicFieldList => \@DynamicFieldList,
         AttachmentList   => \@AttachmentList,
         UserID           => $UserID,
@@ -1078,6 +1129,15 @@ sub _CheckArticle {
         }
     }
 
+    if ( $Article->{Attachment} && IsArrayRefWithData( $Article->{Attachment} ) ) {
+        for my $Attachment ( @{ $Article->{Attachment} } ) {
+            my $AttachmentCheck = $Self->_CheckAttachment( Attachment => $Attachment );
+            if ( !$AttachmentCheck->{Success} ) {
+                return $Self->ReturnError( %{$AttachmentCheck} );
+            }
+        }
+    }
+
     # if everything is OK then return Success
     return {
         Success => 1,
@@ -1230,7 +1290,7 @@ creates a ticket with its article and sets dynamic fields and attachments if spe
 
     my $Response = $OperationObject->_TicketCreate(
         Ticket       => $Ticket,                  # all ticket parameters
-        Article      => $Article,                 # all attachment parameters
+        Article      => \@Article,                # all article parameters
         DynamicField => $DynamicField,            # all dynamic field parameters
         Attachment   => $Attachment,             # all attachment parameters
         UserID       => 123,
@@ -1258,7 +1318,7 @@ sub _TicketCreate {
     my ( $Self, %Param ) = @_;
 
     my $Ticket           = $Param{Ticket};
-    my $Article          = $Param{Article};
+    my @Article          = @{ $Param{Article} };
     my $DynamicFieldList = $Param{DynamicFieldList};
     my $AttachmentList   = $Param{AttachmentList};
     my $CustomerUser     = $Ticket->{CustomerUser} || '';
@@ -1438,245 +1498,300 @@ sub _TicketCreate {
         }
     }
 
-    if ( !defined $Article->{NoAgentNotify} ) {
+    my @ArticleIDs;
+    my $ArticleIDNew;
+    for my $Article (@Article) {
+        if ( !defined $Article->{NoAgentNotify} ) {
 
-        # check if new owner is given (then send no agent notify)
-        $Article->{NoAgentNotify} = 0;
-        if ($OwnerID) {
-            $Article->{NoAgentNotify} = 1;
-        }
-    }
-
-    # set Article From
-    my $From;
-
-    # When we are sending the article as an email, set the from address to the ticket's system address
-    if (
-        $Article->{ArticleSend}
-        && !$Article->{From}
-        )
-    {
-        my $QueueID = $TicketObject->TicketQueueID(
-            TicketID => $TicketID,
-        );
-        my %Address = $Kernel::OM->Get('Kernel::System::Queue')->GetSystemAddress(
-            QueueID => $QueueID,
-        );
-        $From = $Address{RealName} . " <" . $Address{Email} . ">";
-    }
-    else {
-        if ( $Article->{From} ) {
-            $From = $Article->{From};
+            # check if new owner is given (then send no agent notify)
+            $Article->{NoAgentNotify} = 0;
+            if ($OwnerID) {
+                $Article->{NoAgentNotify} = 1;
+            }
         }
 
-        # use data from customer user (if customer user is in database)
-        elsif ( IsHashRefWithData( \%CustomerUserData ) ) {
-            $From = '"' . $CustomerUserData{UserFullname} . '"'
-                . ' <' . $CustomerUserData{UserEmail} . '>';
-        }
+        # set Article From
+        my $From;
 
-        # otherwise use customer user as sent from the request (it should be an email)
+        # When we are sending the article as an email, set the from address to the ticket's system address
+        if (
+            $Article->{ArticleSend}
+            && !$Article->{From}
+            )
+        {
+            my $QueueID = $TicketObject->TicketQueueID(
+                TicketID => $TicketID,
+            );
+            my %Address = $Kernel::OM->Get('Kernel::System::Queue')->GetSystemAddress(
+                QueueID => $QueueID,
+            );
+            $From = $Address{RealName} . " <" . $Address{Email} . ">";
+        }
         else {
-            $From = $CustomerUser;
+            if ( $Article->{From} ) {
+                $From = $Article->{From};
+            }
+
+            # use data from customer user (if customer user is in database)
+            elsif ( IsHashRefWithData( \%CustomerUserData ) ) {
+                $From = '"' . $CustomerUserData{UserFullname} . '"'
+                    . ' <' . $CustomerUserData{UserEmail} . '>';
+            }
+
+            # otherwise use customer user as sent from the request (it should be an email)
+            else {
+                $From = $CustomerUser;
+            }
         }
-    }
 
-    # set Article To
-    my $To;
-    my $Cc;
-    my $Bcc;
+        # set Article To
+        my $To;
+        my $Cc;
+        my $Bcc;
 
-    if ( $Article->{ArticleSend} ) {
-        $To  = $Article->{To};
-        $Cc  = $Article->{Cc};
-        $Bcc = $Article->{Bcc};
-    }
-    elsif ( $Ticket->{Queue} ) {
-        $To = $Ticket->{Queue};
-    }
-    else {
-        $To = $Kernel::OM->Get('Kernel::System::Queue')->QueueLookup(
-            QueueID => $Ticket->{QueueID},
-        );
-    }
+        if ( $Article->{ArticleSend} ) {
+            $To  = $Article->{To};
+            $Cc  = $Article->{Cc};
+            $Bcc = $Article->{Bcc};
+        }
+        elsif ( $Ticket->{Queue} ) {
+            $To = $Ticket->{Queue};
+        }
+        else {
+            $To = $Kernel::OM->Get('Kernel::System::Queue')->QueueLookup(
+                QueueID => $Ticket->{QueueID},
+            );
+        }
 
-    # ArticleSend() is only possible for channel 'Email', so set it.
-    if ( $Article->{ArticleSend} ) {
-        $Article->{CommunicationChannel} = 'Email';
-    }
+        # ArticleSend() is only possible for channel 'Email', so set it.
+        if ( $Article->{ArticleSend} ) {
+            $Article->{CommunicationChannel} = 'Email';
+        }
 
-    if ( !$Article->{CommunicationChannel} ) {
+        if ( !$Article->{CommunicationChannel} ) {
 
-        my %CommunicationChannel = $Kernel::OM->Get('Kernel::System::CommunicationChannel')->ChannelGet(
-            ChannelID => $Article->{CommunicationChannelID},
-        );
-        $Article->{CommunicationChannel} = $CommunicationChannel{ChannelName};
-    }
+            my %CommunicationChannel = $Kernel::OM->Get('Kernel::System::CommunicationChannel')->ChannelGet(
+                ChannelID => $Article->{CommunicationChannelID},
+            );
+            $Article->{CommunicationChannel} = $CommunicationChannel{ChannelName};
+        }
 
-    my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
-        ChannelName => $Article->{CommunicationChannel},
-    );
-
-    my $PlainBody = $Article->{Body};
-
-    # Convert article body to plain text, if HTML content was supplied. This is necessary since auto response code
-    #   expects plain text content. Please see bug#13397 for more information.
-    if (
-        ( $Article->{ContentType} && $Article->{ContentType} =~ /text\/html/i )
-        || ( $Article->{MimeType} && $Article->{MimeType} =~ /text\/html/i )
-        )
-    {
-        $PlainBody = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToAscii(
-            String => $Article->{Body},
-        );
-    }
-
-    # Create article.
-    my $Subject = $Article->{Subject};
-    if ( $Article->{ArticleSend} ) {
-
-        my $TicketNumber = $TicketObject->TicketNumberLookup(
-            TicketID => $TicketID,
-            UserID   => $Param{UserID},
+        my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+            ChannelName => $Article->{CommunicationChannel},
         );
 
-        # Build a subject
-        $Subject = $TicketObject->TicketSubjectBuild(
-            TicketNumber => $TicketNumber,
-            Subject      => $Article->{Subject},
-            Type         => 'New',
-            Action       => 'Reply',
+        my $PlainBody = $Article->{Body};
+
+        # Convert article body to plain text, if HTML content was supplied. This is necessary since auto response code
+        #   expects plain text content. Please see bug#13397 for more information.
+        if (
+            ( $Article->{ContentType} && $Article->{ContentType} =~ /text\/html/i )
+            || ( $Article->{MimeType} && $Article->{MimeType} =~ /text\/html/i )
+            )
+        {
+            $PlainBody = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToAscii(
+                String => $Article->{Body},
+            );
+        }
+
+        # Create article.
+        my $Subject = $Article->{Subject};
+        if ( $Article->{ArticleSend} ) {
+
+            my $TicketNumber = $TicketObject->TicketNumberLookup(
+                TicketID => $TicketID,
+                UserID   => $Param{UserID},
+            );
+
+            # Build a subject
+            $Subject = $TicketObject->TicketSubjectBuild(
+                TicketNumber => $TicketNumber,
+                Subject      => $Article->{Subject},
+                Type         => 'New',
+                Action       => 'Reply',
+            );
+
+            if ( !$Subject ) {
+                return {
+                    Success => 0,
+                    ErrorMessage =>
+                        'The subject for the e-mail could not be generated. Please contact the system administrator'
+                };
+            }
+
+            my $Signature = $Kernel::OM->Get('Kernel::System::TemplateGenerator')->Signature(
+                TicketID => $TicketID,
+                UserID   => $Param{UserID},
+                Data     => $Article,
+            );
+
+            if ($Signature) {
+                $Article->{Body} = $Article->{Body} . $Signature;
+
+                if (
+                    ( $Article->{ContentType} && $Article->{ContentType} =~ /text\/html/i )
+                    || ( $Article->{MimeType} && $Article->{MimeType} =~ /text\/html/i )
+                    )
+                {
+                    $PlainBody = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToAscii(
+                        String => $Article->{Body},
+                    );
+                }
+            }
+        }
+
+        # Build Charset if needed (ArticleSend doesn't accept ContentType)
+        my $Charset;
+        if (
+            $Article->{ContentType}
+            && !$Article->{Charset}
+            && $Article->{ContentType} =~ m{\bcharset=("|'|)([^\s"';]+)}ism
+            )
+        {
+            $Charset = $2;
+        }
+        else {
+            $Charset = $Article->{Charset};
+        }
+
+        # Build MimeType if needed (ArticleSend doesn't accept ContentType)
+        my $MimeType;
+        if (
+            $Article->{ContentType}
+            && !$Article->{MimeType}
+            && $Article->{ContentType} =~ m{\A([^;]+)}sm
+            )
+        {
+            $MimeType = $1;
+        }
+        else {
+            $MimeType = $Article->{MimeType};
+        }
+
+        my %ArticleParams = (
+            NoAgentNotify        => $Article->{NoAgentNotify} || 0,
+            TicketID             => $TicketID,
+            SenderTypeID         => $Article->{SenderTypeID} || '',
+            SenderType           => $Article->{SenderType} || '',
+            IsVisibleForCustomer => $Article->{IsVisibleForCustomer},
+            From                 => $From,
+            To                   => $To,
+            Cc                   => $Cc,
+            Bcc                  => $Bcc,
+            Subject              => $Subject,
+            Body                 => $Article->{Body},
+            MimeType             => $MimeType || '',
+            Charset              => $Charset || '',
+            ContentType          => $Article->{ContentType} || '',
+            UserID               => $Param{UserID},
+            HistoryType          => $Article->{HistoryType},
+            HistoryComment       => $Article->{HistoryComment} || '%%',
+            AutoResponseType     => $Article->{AutoResponseType},
+            OrigHeader           => {
+                From    => $From,
+                To      => $To,
+                Subject => $Subject,
+                Body    => $PlainBody,
+            },
         );
 
-        if ( !$Subject ) {
+        # create article
+        my $ArticleID;
+        if ( $Article->{ArticleSend} ) {
+
+            # decode and set attachments
+            if ( IsArrayRefWithData($AttachmentList) ) {
+
+                my @NewAttachments;
+                for my $Attachment ( @{$AttachmentList} ) {
+
+                    push @NewAttachments, {
+                        %{$Attachment},
+                        Content => MIME::Base64::decode_base64( $Attachment->{Content} ),
+                    };
+                }
+                $ArticleParams{Attachment} = \@NewAttachments;
+            }
+
+            # signing and encryption
+            for my $Key (qw( Sign Crypt )) {
+                if ( IsHashRefWithData( $Article->{$Key} ) ) {
+                    $ArticleParams{$Key} = $Article->{$Key};
+                }
+            }
+
+            $ArticleID = $ArticleBackendObject->ArticleSend(%ArticleParams);
+        }
+        else {
+            $ArticleID = $ArticleBackendObject->ArticleCreate(%ArticleParams);
+
+            # set attachments
+            if ( IsArrayRefWithData($AttachmentList) ) {
+
+                for my $Attachment ( @{$AttachmentList} ) {
+                    my $Result = $Self->CreateAttachment(
+                        TicketID   => $TicketID,
+                        Attachment => $Attachment,
+                        ArticleID  => $ArticleID,
+                        UserID     => $Param{UserID}
+                    );
+
+                    if ( !$Result->{Success} ) {
+                        my $ErrorMessage =
+                            $Result->{ErrorMessage} || "Attachment could not be created, please contact"
+                            . " the system administrator";
+
+                        return {
+                            Success      => 0,
+                            ErrorMessage => $ErrorMessage,
+                        };
+                    }
+                }
+            }
+        }
+
+        if ( !$ArticleID ) {
             return {
-                Success => 0,
-                ErrorMessage =>
-                    'The subject for the e-mail could not be generated. Please contact the system administrator'
+                Success      => 0,
+                ErrorMessage => 'Article could not be created, please contact the system administrator',
             };
         }
 
-        my $Signature = $Kernel::OM->Get('Kernel::System::TemplateGenerator')->Signature(
-            TicketID => $TicketID,
-            UserID   => $Param{UserID},
-            Data     => $Article,
-        );
+        push @ArticleIDs, $ArticleID;
 
-        if ($Signature) {
-            $Article->{Body} = $Article->{Body} . $Signature;
+        # time accounting
+        if ( $Article->{TimeUnit} ) {
+            $TicketObject->TicketAccountTime(
+                TicketID  => $TicketID,
+                ArticleID => $ArticleID,
+                TimeUnit  => $Article->{TimeUnit},
+                UserID    => $Param{UserID},
+            );
+        }
 
-            if (
-                ( $Article->{ContentType} && $Article->{ContentType} =~ /text\/html/i )
-                || ( $Article->{MimeType} && $Article->{MimeType} =~ /text\/html/i )
-                )
-            {
-                $PlainBody = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToAscii(
-                    String => $Article->{Body},
+        # set dynamic fields (only for object type 'article')
+        if ( IsArrayRefWithData($DynamicFieldList) ) {
+
+            DYNAMICFIELD:
+            for my $DynamicField ( @{$DynamicFieldList} ) {
+
+                my $IsArticleDynamicField = $Self->ValidateDynamicFieldObjectType(
+                    %{$DynamicField},
+                    Article => 1,
                 );
-            }
-        }
-    }
+                next DYNAMICFIELD if !$IsArticleDynamicField;
 
-    # Build Charset if needed (ArticleSend doesn't accept ContentType)
-    my $Charset;
-    if (
-        $Article->{ContentType}
-        && !$Article->{Charset}
-        && $Article->{ContentType} =~ m{\bcharset=("|'|)([^\s"';]+)}ism
-        )
-    {
-        $Charset = $2;
-    }
-    else {
-        $Charset = $Article->{Charset};
-    }
-
-    # Build MimeType if needed (ArticleSend doesn't accept ContentType)
-    my $MimeType;
-    if (
-        $Article->{ContentType}
-        && !$Article->{MimeType}
-        && $Article->{ContentType} =~ m{\A([^;]+)}sm
-        )
-    {
-        $MimeType = $1;
-    }
-    else {
-        $MimeType = $Article->{MimeType};
-    }
-
-    my %ArticleParams = (
-        NoAgentNotify        => $Article->{NoAgentNotify} || 0,
-        TicketID             => $TicketID,
-        SenderTypeID         => $Article->{SenderTypeID} || '',
-        SenderType           => $Article->{SenderType} || '',
-        IsVisibleForCustomer => $Article->{IsVisibleForCustomer},
-        From                 => $From,
-        To                   => $To,
-        Cc                   => $Cc,
-        Bcc                  => $Bcc,
-        Subject              => $Subject,
-        Body                 => $Article->{Body},
-        MimeType             => $MimeType || '',
-        Charset              => $Charset || '',
-        ContentType          => $Article->{ContentType} || '',
-        UserID               => $Param{UserID},
-        HistoryType          => $Article->{HistoryType},
-        HistoryComment       => $Article->{HistoryComment} || '%%',
-        AutoResponseType     => $Article->{AutoResponseType},
-        OrigHeader           => {
-            From    => $From,
-            To      => $To,
-            Subject => $Subject,
-            Body    => $PlainBody,
-        },
-    );
-
-    # create article
-    my $ArticleID;
-    if ( $Article->{ArticleSend} ) {
-
-        # decode and set attachments
-        if ( IsArrayRefWithData($AttachmentList) ) {
-
-            my @NewAttachments;
-            for my $Attachment ( @{$AttachmentList} ) {
-
-                push @NewAttachments, {
-                    %{$Attachment},
-                    Content => MIME::Base64::decode_base64( $Attachment->{Content} ),
-                };
-            }
-            $ArticleParams{Attachment} = \@NewAttachments;
-        }
-
-        # signing and encryption
-        for my $Key (qw( Sign Crypt )) {
-            if ( IsHashRefWithData( $Article->{$Key} ) ) {
-                $ArticleParams{$Key} = $Article->{$Key};
-            }
-        }
-
-        $ArticleID = $ArticleBackendObject->ArticleSend(%ArticleParams);
-    }
-    else {
-        $ArticleID = $ArticleBackendObject->ArticleCreate(%ArticleParams);
-
-        # set attachments
-        if ( IsArrayRefWithData($AttachmentList) ) {
-
-            for my $Attachment ( @{$AttachmentList} ) {
-                my $Result = $Self->CreateAttachment(
-                    TicketID   => $TicketID,
-                    Attachment => $Attachment,
-                    ArticleID  => $ArticleID,
-                    UserID     => $Param{UserID}
+                my $Result = $Self->SetDynamicFieldValue(
+                    %{$DynamicField},
+                    TicketID  => $TicketID,
+                    ArticleID => $ArticleID,
+                    UserID    => $Param{UserID},
                 );
 
                 if ( !$Result->{Success} ) {
                     my $ErrorMessage =
-                        $Result->{ErrorMessage} || "Attachment could not be created, please contact"
-                        . " the system administrator";
+                        $Result->{ErrorMessage} || "Dynamic Field $DynamicField->{Name} could not be"
+                        . " set, please contact the system administrator";
 
                     return {
                         Success      => 0,
@@ -1687,11 +1802,9 @@ sub _TicketCreate {
         }
     }
 
-    if ( !$ArticleID ) {
-        return {
-            Success      => 0,
-            ErrorMessage => 'Article could not be created, please contact the system administrator',
-        };
+    $ArticleIDNew = \@ArticleIDs;
+    if ( scalar @ArticleIDs eq 1 ) {
+        $ArticleIDNew = $ArticleIDNew->[0];
     }
 
     # set owner (if owner or owner id is given)
@@ -1731,48 +1844,6 @@ sub _TicketCreate {
         );
     }
 
-    # time accounting
-    if ( $Article->{TimeUnit} ) {
-        $TicketObject->TicketAccountTime(
-            TicketID  => $TicketID,
-            ArticleID => $ArticleID,
-            TimeUnit  => $Article->{TimeUnit},
-            UserID    => $Param{UserID},
-        );
-    }
-
-    # set dynamic fields (only for object type 'article')
-    if ( IsArrayRefWithData($DynamicFieldList) ) {
-
-        DYNAMICFIELD:
-        for my $DynamicField ( @{$DynamicFieldList} ) {
-
-            my $IsArticleDynamicField = $Self->ValidateDynamicFieldObjectType(
-                %{$DynamicField},
-                Article => 1,
-            );
-            next DYNAMICFIELD if !$IsArticleDynamicField;
-
-            my $Result = $Self->SetDynamicFieldValue(
-                %{$DynamicField},
-                TicketID  => $TicketID,
-                ArticleID => $ArticleID,
-                UserID    => $Param{UserID},
-            );
-
-            if ( !$Result->{Success} ) {
-                my $ErrorMessage =
-                    $Result->{ErrorMessage} || "Dynamic Field $DynamicField->{Name} could not be"
-                    . " set, please contact the system administrator";
-
-                return {
-                    Success      => 0,
-                    ErrorMessage => $ErrorMessage,
-                };
-            }
-        }
-    }
-
     # get ticket data
     my %TicketData = $TicketObject->TicketGet(
         TicketID      => $TicketID,
@@ -1807,7 +1878,7 @@ sub _TicketCreate {
             Data    => {
                 TicketID     => $TicketID,
                 TicketNumber => $TicketData{TicketNumber},
-                ArticleID    => $ArticleID,
+                ArticleID    => $ArticleIDNew,
             },
         };
     }
@@ -1830,73 +1901,81 @@ sub _TicketCreate {
         $TicketData{DynamicField} = [ sort { $a->{Name} cmp $b->{Name} } values %TicketDynamicFields ];
     }
 
-    # prepare TicketData and get Article
-    my %ArticleData = $ArticleBackendObject->ArticleGet(
-        TicketID      => $TicketID,
-        ArticleID     => $ArticleID,
-        DynamicFields => 1,
-    );
-
-    # prepare Article DynamicFields
-    my @ArticleDynamicFields;
-
-    # remove all dynamic fields form main ticket hash and set them into an array.
-    ARTICLEATTRIBUTE:
-    for my $ArticleAttribute ( sort keys %ArticleData ) {
-        if ( $ArticleAttribute =~ m{\A DynamicField_(.*) \z}msx ) {
-            if ( !exists $TicketDynamicFields{$1} ) {
-                push @ArticleDynamicFields, {
-                    Name  => $1,
-                    Value => $ArticleData{$ArticleAttribute},
-                };
-            }
-
-            delete $ArticleData{$ArticleAttribute};
-        }
-    }
-
-    # add dynamic fields array into 'DynamicField' hash key if any
-    if (@ArticleDynamicFields) {
-        $ArticleData{DynamicField} = \@ArticleDynamicFields;
-    }
-
-    # add attachment if the request includes attachments
-    if ( IsArrayRefWithData($AttachmentList) ) {
-        my %AttachmentIndex = $ArticleBackendObject->ArticleAttachmentIndex(
+    my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+    for my $ArticleID (@ArticleIDs) {
+        my $ArticleBackendObject = $ArticleObject->BackendForArticle(
+            TicketID  => $TicketID,
             ArticleID => $ArticleID,
         );
 
-        my @Attachments;
-        $Kernel::OM->Get('Kernel::System::Main')->Require('MIME::Base64');
-        ATTACHMENT:
-        for my $FileID ( sort keys %AttachmentIndex ) {
-            next ATTACHMENT if !$FileID;
-            my %Attachment = $ArticleBackendObject->ArticleAttachment(
+        # prepare TicketData and get Article
+        my %ArticleData = $ArticleBackendObject->ArticleGet(
+            TicketID      => $TicketID,
+            ArticleID     => $ArticleID,
+            DynamicFields => 1,
+        );
+
+        # prepare Article DynamicFields
+        my @ArticleDynamicFields;
+
+        # remove all dynamic fields form main ticket hash and set them into an array.
+        ARTICLEATTRIBUTE:
+        for my $ArticleAttribute ( sort keys %ArticleData ) {
+            if ( $ArticleAttribute =~ m{\A DynamicField_(.*) \z}msx ) {
+                if ( !exists $TicketDynamicFields{$1} ) {
+                    push @ArticleDynamicFields, {
+                        Name  => $1,
+                        Value => $ArticleData{$ArticleAttribute},
+                    };
+                }
+
+                delete $ArticleData{$ArticleAttribute};
+            }
+        }
+
+        # add dynamic fields array into 'DynamicField' hash key if any
+        if (@ArticleDynamicFields) {
+            $ArticleData{DynamicField} = \@ArticleDynamicFields;
+        }
+
+        # add attachment if the request includes attachments
+        if ( IsArrayRefWithData($AttachmentList) ) {
+            my %AttachmentIndex = $ArticleBackendObject->ArticleAttachmentIndex(
                 ArticleID => $ArticleID,
-                FileID    => $FileID,
             );
 
-            next ATTACHMENT if !IsHashRefWithData( \%Attachment );
+            my @Attachments;
+            $Kernel::OM->Get('Kernel::System::Main')->Require('MIME::Base64');
+            ATTACHMENT:
+            for my $FileID ( sort keys %AttachmentIndex ) {
+                next ATTACHMENT if !$FileID;
+                my %Attachment = $ArticleBackendObject->ArticleAttachment(
+                    ArticleID => $ArticleID,
+                    FileID    => $FileID,
+                );
 
-            # convert content to base64, but prevent 76 chars brake, see bug#14500.
-            $Attachment{Content} = MIME::Base64::encode_base64( $Attachment{Content}, '' );
-            push @Attachments, {%Attachment};
+                next ATTACHMENT if !IsHashRefWithData( \%Attachment );
+
+                # convert content to base64, but prevent 76 chars brake, see bug#14500.
+                $Attachment{Content} = MIME::Base64::encode_base64( $Attachment{Content}, '' );
+                push @Attachments, {%Attachment};
+            }
+
+            # set Attachments data
+            if (@Attachments) {
+                $ArticleData{Attachment} = \@Attachments;
+            }
         }
 
-        # set Attachments data
-        if (@Attachments) {
-            $ArticleData{Attachment} = \@Attachments;
-        }
+        push @{ $TicketData{Article} }, \%ArticleData;
     }
-
-    $TicketData{Article} = \%ArticleData;
 
     return {
         Success => 1,
         Data    => {
             TicketID     => $TicketID,
             TicketNumber => $TicketData{TicketNumber},
-            ArticleID    => $ArticleID,
+            ArticleID    => $ArticleIDNew,
             Ticket       => \%TicketData,
         },
     };

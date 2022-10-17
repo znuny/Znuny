@@ -490,7 +490,7 @@ $Selenium->RunTest(
             "Test NotificationEvent is deleted - $NotifEventRandomID",
         ) || die;
 
-        my $Location = $ConfigObject->Get('Home')
+        my $Location = $Selenium->{Home}
             . "/scripts/test/sample/NotificationEvent/Export_Notification_Ticket_create_notification.yml";
 
         # Import existing template without overwrite.

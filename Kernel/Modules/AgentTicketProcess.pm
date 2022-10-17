@@ -806,7 +806,11 @@ sub _RenderAjax {
             );
             $FieldsProcessed{ $Self->{NameToID}{$CurrentField} } = 1;
         }
-        elsif ( $Self->{NameToID}{$CurrentField} eq 'Article' ) {
+        elsif (
+            $Self->{NameToID}{$CurrentField} eq 'Article'
+            && $Param{GetParam}->{ElementChanged} eq 'StandardTemplateID'
+            )
+        {
             next DIALOGFIELD if $FieldsProcessed{ $Self->{NameToID}{$CurrentField} };
 
             my $TemplateGeneratorObject = $Kernel::OM->Get('Kernel::System::TemplateGenerator');
@@ -814,47 +818,51 @@ sub _RenderAjax {
             my $StdAttachmentObject     = $Kernel::OM->Get('Kernel::System::StdAttachment');
             my $UploadCacheObject       = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
 
-            my %StandardTemplate = $StandardTemplateObject->StandardTemplateGet(
-                ID => $Param{GetParam}->{StandardTemplateID},
-            );
-
-            # remove pre-submitted attachments
-            $UploadCacheObject->FormIDRemove( FormID => $Self->{FormID} );
-
-            my $StandardTemplateText = $TemplateGeneratorObject->_Replace(
-                RichText => $LayoutObject->{BrowserRichText},
-                Text     => $StandardTemplate{Template},
-                Data     => {
-                    %{ $Param{GetParam} },
-                },
-                TicketData => {
-                    %{ $Param{GetParam} },
-                },
-                UserID => $Self->{UserID},
-            );
-
-            # add standard attachments to ticket
+            my $StandardTemplateText;
             my @TicketAttachments;
-            my %AllStdAttachments = $StdAttachmentObject->StdAttachmentStandardTemplateMemberList(
-                StandardTemplateID => $Param{GetParam}->{StandardTemplateID},
-            );
-            for my $ID ( sort keys %AllStdAttachments ) {
-                my %AttachmentsData = $StdAttachmentObject->StdAttachmentGet( ID => $ID );
-                $UploadCacheObject->FormIDAddFile(
-                    FormID      => $Self->{FormID},
-                    Disposition => 'attachment',
-                    %AttachmentsData,
-                );
-            }
 
-            @TicketAttachments = $UploadCacheObject->FormIDGetAllFilesMeta(
-                FormID => $Self->{FormID},
-            );
-
-            for my $Attachment (@TicketAttachments) {
-                $Attachment->{Filesize} = $LayoutObject->HumanReadableDataSize(
-                    Size => $Attachment->{Filesize},
+            if ( IsPositiveInteger( $Param{GetParam}->{StandardTemplateID} ) ) {
+                my %StandardTemplate = $StandardTemplateObject->StandardTemplateGet(
+                    ID => $Param{GetParam}->{StandardTemplateID},
                 );
+
+                # remove pre-submitted attachments
+                $UploadCacheObject->FormIDRemove( FormID => $Self->{FormID} );
+
+                $StandardTemplateText = $TemplateGeneratorObject->_Replace(
+                    RichText => $LayoutObject->{BrowserRichText},
+                    Text     => $StandardTemplate{Template},
+                    Data     => {
+                        %{ $Param{GetParam} },
+                    },
+                    TicketData => {
+                        %{ $Param{GetParam} },
+                    },
+                    UserID => $Self->{UserID},
+                );
+
+                # add standard attachments to ticket
+                my %AllStdAttachments = $StdAttachmentObject->StdAttachmentStandardTemplateMemberList(
+                    StandardTemplateID => $Param{GetParam}->{StandardTemplateID},
+                );
+                for my $ID ( sort keys %AllStdAttachments ) {
+                    my %AttachmentsData = $StdAttachmentObject->StdAttachmentGet( ID => $ID );
+                    $UploadCacheObject->FormIDAddFile(
+                        FormID      => $Self->{FormID},
+                        Disposition => 'attachment',
+                        %AttachmentsData,
+                    );
+                }
+
+                @TicketAttachments = $UploadCacheObject->FormIDGetAllFilesMeta(
+                    FormID => $Self->{FormID},
+                );
+
+                for my $Attachment (@TicketAttachments) {
+                    $Attachment->{Filesize} = $LayoutObject->HumanReadableDataSize(
+                        Size => $Attachment->{Filesize},
+                    );
+                }
             }
 
             push(
@@ -6229,10 +6237,12 @@ sub _LookupValue {
 sub _GetResponsibles {
     my ( $Self, %Param ) = @_;
 
+    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+
     # get users
     my %ShownUsers;
-    my %AllGroupsMembers = $Kernel::OM->Get('Kernel::System::User')->UserList(
-        Type  => 'Long',
+    my %AllGroupsMembers = $UserObject->UserList(
+        Type  => 'Short',
         Valid => 1,
     );
 
@@ -6317,7 +6327,16 @@ sub _GetResponsibles {
         UserID        => $Self->{UserID},
     );
 
-    return { $TicketObject->TicketAclData() } if $ACL;
+    if ($ACL) {
+        %ShownUsers = $TicketObject->TicketAclData();
+    }
+
+    my %AllGroupsMembersFullnames = $UserObject->UserList(
+        Type  => 'Long',
+        Valid => 1,
+    );
+
+    @ShownUsers{ keys %ShownUsers } = @AllGroupsMembersFullnames{ keys %ShownUsers };
 
     return \%ShownUsers;
 }
@@ -6325,10 +6344,12 @@ sub _GetResponsibles {
 sub _GetOwners {
     my ( $Self, %Param ) = @_;
 
+    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+
     # get users
     my %ShownUsers;
-    my %AllGroupsMembers = $Kernel::OM->Get('Kernel::System::User')->UserList(
-        Type  => 'Long',
+    my %AllGroupsMembers = $UserObject->UserList(
+        Type  => 'Short',
         Valid => 1,
     );
 
@@ -6413,7 +6434,16 @@ sub _GetOwners {
         UserID        => $Self->{UserID},
     );
 
-    return { $TicketObject->TicketAclData() } if $ACL;
+    if ($ACL) {
+        %ShownUsers = $TicketObject->TicketAclData();
+    }
+
+    my %AllGroupsMembersFullnames = $UserObject->UserList(
+        Type  => 'Long',
+        Valid => 1,
+    );
+
+    @ShownUsers{ keys %ShownUsers } = @AllGroupsMembersFullnames{ keys %ShownUsers };
 
     return \%ShownUsers;
 }

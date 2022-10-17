@@ -155,9 +155,9 @@ Basic file structure
  - scripts/DBUpdate-to-6.pl
     * Changed. Include SysConfig Migration methods
 
-- scripts/database/otrs-schema.xml
+- scripts/database/schema.xml
     * Changed. Include new SysConfig tables
-- scripts/database/update/otrs-upgrade-to-6.xml
+- scripts/database/update/upgrade-to-6.xml
     * Changed. Include new SysConfig tables
 
  - Kernel/Console/Command/Dev/Migrate/XMLStructure.pm
