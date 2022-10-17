@@ -6187,10 +6187,17 @@ sub SetRichTextParameters {
     my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
     my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
 
+    my %RichTextSettings = %{ $ConfigObject->Get("Frontend::RichText::Settings") || {} };
+
+    # overwrite RichTextSettings if module specific settings exist (e.g. RichTextHeight)
+    for my $RichTextSettingKey ( sort keys %RichTextSettings ) {
+        if ( $Param{Data}->{ 'RichText' . $RichTextSettingKey } ) {
+            $RichTextSettings{$RichTextSettingKey} = $Param{Data}->{ 'RichText' . $RichTextSettingKey };
+        }
+    }
+
     # get needed variables
-    my $ScreenRichTextHeight = $Param{Data}->{RichTextHeight} || $ConfigObject->Get("Frontend::RichTextHeight");
-    my $ScreenRichTextWidth  = $Param{Data}->{RichTextWidth}  || $ConfigObject->Get("Frontend::RichTextWidth");
-    my $RichTextType         = $Param{Data}->{RichTextType}   || '';
+    my $RichTextType        = $Param{Data}->{RichTextType}                || '';
     my $PictureUploadAction = $Param{Data}->{RichTextPictureUploadAction} || '';
     my $TextDir             = $Self->{TextDirection}                      || '';
     my $EditingAreaCSS      = 'body.cke_editable { ' . $ConfigObject->Get("Frontend::RichText::DefaultCSS") . ' }';
@@ -6280,8 +6287,6 @@ sub SetRichTextParameters {
         Key   => 'RichText',
         Value => {
             TicketID       => $Param{Data}->{TicketID} || '',
-            Height         => $ScreenRichTextHeight,
-            Width          => $ScreenRichTextWidth,
             TextDir        => $TextDir,
             EditingAreaCSS => $EditingAreaCSS,
             Lang           => {
@@ -6292,6 +6297,7 @@ sub SetRichTextParameters {
             ToolbarWithoutImage => $ToolbarWithoutImage[0],
             PictureUploadAction => $PictureUploadAction,
             Type                => $RichTextType,
+            %RichTextSettings,
         },
     );
 
@@ -6326,11 +6332,18 @@ sub CustomerSetRichTextParameters {
     my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
     my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
 
-    my $ScreenRichTextHeight = $ConfigObject->Get("Frontend::RichTextHeight");
-    my $ScreenRichTextWidth  = $ConfigObject->Get("Frontend::RichTextWidth");
-    my $TextDir              = $Self->{TextDirection} || '';
-    my $PictureUploadAction  = $Param{Data}->{RichTextPictureUploadAction} || '';
-    my $EditingAreaCSS       = 'body { ' . $ConfigObject->Get("Frontend::RichText::DefaultCSS") . ' }';
+    my %RichTextSettings = %{ $ConfigObject->Get("Frontend::RichText::Settings") || {} };
+
+    # overwrite RichTextSettings if module specific settings exist (e.g. RichTextHeight)
+    for my $RichTextSettingKey ( sort keys %RichTextSettings ) {
+        if ( $Param{Data}->{ 'RichText' . $RichTextSettingKey } ) {
+            $RichTextSettings{$RichTextSettingKey} = $Param{Data}->{ 'RichText' . $RichTextSettingKey };
+        }
+    }
+
+    my $TextDir             = $Self->{TextDirection}                      || '';
+    my $PictureUploadAction = $Param{Data}->{RichTextPictureUploadAction} || '';
+    my $EditingAreaCSS      = 'body { ' . $ConfigObject->Get("Frontend::RichText::DefaultCSS") . ' }';
 
     # decide if we need to use the enhanced mode (with tables)
     my @Toolbar;
@@ -6409,8 +6422,6 @@ sub CustomerSetRichTextParameters {
     $Self->AddJSData(
         Key   => 'RichText',
         Value => {
-            Height         => $ScreenRichTextHeight,
-            Width          => $ScreenRichTextWidth,
             TextDir        => $TextDir,
             EditingAreaCSS => $EditingAreaCSS,
             Lang           => {
@@ -6419,6 +6430,7 @@ sub CustomerSetRichTextParameters {
             Toolbar             => $Toolbar[0],
             ToolbarWithoutImage => $ToolbarWithoutImage[0],
             PictureUploadAction => $PictureUploadAction,
+            %RichTextSettings,
         },
     );
 

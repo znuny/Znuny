@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.903073670515531;
+    $Self->{Completeness}        = 0.901900276108494;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1472,6 +1472,7 @@ sub Data {
         'URL for authorization code' => '',
         'URL for token by authorization code' => '',
         'URL for token by refresh token' => '',
+        'Access token scope' => '',
         'Template' => '템플릿',
         'This is the template that was used to create this OAuth2 token configuration.' =>
             '',
@@ -2512,6 +2513,9 @@ sub Data {
         'Email ticket' => '이메일 티켓',
         'New phone ticket from %s' => '%s로 새 폰 티켓',
         'New email ticket to %s' => '새 이메일 티켓을 %s로',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
+        'No tickets found.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardProductNotify.tt
         '%s %s is available!' => '%s %s 가능',
@@ -4715,6 +4719,9 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Dashboard/EventsTicketCalendar.pm
         'The start time of a ticket has been set after the end time!' => '종료 시간 후에 티켓의 시작 시간이 설정되었습니다!',
 
+        # Perl Module: Kernel/Output/HTML/Dashboard/MyLastChangedTickets.pm
+        'Shown Tickets' => '표시된 티켓',
+
         # Perl Module: Kernel/Output/HTML/Dashboard/News.pm
         'Can\'t connect to OTRS News server!' => 'OTRS 뉴스 서버에 연결할 수 없습니다!',
         'Can\'t get OTRS News from server!' => '서버에서 OTRS 뉴스를 가져올 수 없습니다!',
@@ -4727,7 +4734,6 @@ sub Data {
         'Can\'t connect to %s!' => '%s에 연결할 수 없습니다!',
 
         # Perl Module: Kernel/Output/HTML/Dashboard/TicketGeneric.pm
-        'Shown Tickets' => '표시된 티켓',
         'Shown Columns' => '표시된 열',
         'filter not active' => '필터가 활성화되지 않음',
         'filter active' => '활성 필터',
@@ -5738,15 +5744,20 @@ sub Data {
         'Uses richtext for viewing and editing: articles, salutations, signatures, standard templates, auto responses and notifications.' =>
             '기사, 인사말, 서명, 표준 템플릿, 자동 응답 및 알림과 같은보기 및 편집을 위해 richtext를 사용합니다.',
         'Defines the URL rich text editor path.' => 'URL 서식있는 텍스트 편집기 경로를 정의합니다.',
-        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            '서식있는 텍스트 편집기 구성 요소의 너비를 정의합니다. 숫자 (픽셀) 또는 퍼센트 값 (상대)을 입력하십시오.',
-        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            '서식있는 텍스트 편집기 구성 요소의 높이를 정의합니다. 숫자 (픽셀) 또는 퍼센트 값 (상대)을 입력하십시오.',
         'Defines the default CSS used in rich text editors.' => '서식있는 텍스트 편집기에 사용되는 기본 CSS를 정의합니다.',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.).' =>
             '확장 모드를 사용해야하는지 정의합니다 (테이블, 바꾸기, 아래 첨자, 위 첨자, 단어 붙여 넣기 등 사용 가능).',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.) in customer interface.' =>
             '고객 인터페이스에서 확장 모드를 사용해야하는지 (테이블, 바꾸기, 아래첨자, 위 첨자, 단어에서 붙여넣기 등 사용가능) 정의합니다.',
+        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            '서식있는 텍스트 편집기 구성 요소의 너비를 정의합니다. 숫자 (픽셀) 또는 퍼센트 값 (상대)을 입력하십시오.',
+        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            '서식있는 텍스트 편집기 구성 요소의 높이를 정의합니다. 숫자 (픽셀) 또는 퍼센트 값 (상대)을 입력하십시오.',
+        'Defines the selectable font sizes in the rich text editor.' => '',
+        'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines additional plugins for use in the rich text editor.' => '',
+        'Defines extra content that is allowed for use in the rich text editor.' =>
+            '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             'HTTP 헤더 "X-Frame-Options : SAMEORIGIN"을 사용하지 않도록 설정하여 OTRS를 다른 웹 사이트의 IFrame으로 포함 할 수 있습니다. 이 HTTP 헤더를 비활성화하면 보안 문제가 발생할 수 있습니다! 자신이하는 일을 아는 경우에만 사용을 중지하십시오!',
@@ -7383,6 +7394,7 @@ sub Data {
             '에이전트 인터페이스의 열린 티켓 개요의 대시 보드 백엔드에 대한 매개 변수입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다. 참고 : Ticket 속성과 Dynamic Fields (DynamicField_NameX) 만 DefaultColumn에 허용됩니다.',
         'Parameters for the dashboard backend of the ticket stats of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '에이전트 인터페이스의 티켓 통계 대시 보드 백엔드에 대한 매개 변수입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
+        'MyLastChangedTickets dashboard widget.' => '',
         'Parameters for the dashboard backend of the upcoming events widget of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '에이전트 인터페이스의 다가오는 이벤트 위젯의 대시 보드 백엔드에 대한 매개 변수입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다.',
         'Parameters for the dashboard backend of the queue overview widget of the agent interface. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "QueuePermissionGroup" is not mandatory, queues are only listed if they belong to this permission group if you enable it. "States" is a list of states, the key is the sort order of the state in the widget. "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
@@ -8910,6 +8922,7 @@ Thanks for your help!
         'My Queues' => '나의 대기열',
         'My Services' => '나의 서비스',
         'My Tickets.' => '나의 티켓',
+        'My last changed tickets' => '',
         'NameX' => 'NameX',
         'New Ticket' => '새 티켓',
         'New Tickets' => '새 티켓',

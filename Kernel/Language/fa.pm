@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.643844527565458;
+    $Self->{Completeness}        = 0.643007958421309;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1478,6 +1478,7 @@ sub Data {
         'URL for authorization code' => '',
         'URL for token by authorization code' => '',
         'URL for token by refresh token' => '',
+        'Access token scope' => '',
         'Template' => 'قالب',
         'This is the template that was used to create this OAuth2 token configuration.' =>
             '',
@@ -2518,6 +2519,9 @@ sub Data {
         'Email ticket' => 'تیکت ایمیلی',
         'New phone ticket from %s' => 'درخواست گوشی جدید از %s',
         'New email ticket to %s' => 'درخواست ایمیل جدید به %s',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
+        'No tickets found.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardProductNotify.tt
         '%s %s is available!' => '%s %s موجود است.',
@@ -4721,6 +4725,9 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Dashboard/EventsTicketCalendar.pm
         'The start time of a ticket has been set after the end time!' => 'زمان شروع یک درخواست پس از زمان پایان تنظیم  شده است!',
 
+        # Perl Module: Kernel/Output/HTML/Dashboard/MyLastChangedTickets.pm
+        'Shown Tickets' => 'درخواست‌های نمایش داده شده',
+
         # Perl Module: Kernel/Output/HTML/Dashboard/News.pm
         'Can\'t connect to OTRS News server!' => 'نمی توانید به سرور OTRS اخبار اتصال!',
         'Can\'t get OTRS News from server!' => 'می توانید OTRS اخبار از سرور دریافت کنید!',
@@ -4733,7 +4740,6 @@ sub Data {
         'Can\'t connect to %s!' => 'نمی توانید به اتصال %s !',
 
         # Perl Module: Kernel/Output/HTML/Dashboard/TicketGeneric.pm
-        'Shown Tickets' => 'درخواست‌های نمایش داده شده',
         'Shown Columns' => 'ستون نشان داده شده است',
         'filter not active' => 'فیلتر فعال است',
         'filter active' => 'فیلتر فعال',
@@ -5744,15 +5750,20 @@ sub Data {
         'Uses richtext for viewing and editing: articles, salutations, signatures, standard templates, auto responses and notifications.' =>
             'استفاده از richtext برای مشاهده و ویرایش: مقالات، درود، امضا، قالب استاندارد، پاسخ خودکار و اطلاعیه ها.',
         'Defines the URL rich text editor path.' => 'تعریف می کند URL غنی مسیر ویرایشگر متن.',
-        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            'پهنای برای غنی جزء ویرایشگر متن. تعداد (پیکسل) یا ارزش درصد (نسبی) را وارد کنید.',
-        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            'تعریف می کند که ارتفاع برای غنی جزء ویرایشگر متن. تعداد (پیکسل) یا ارزش درصد (نسبی) را وارد کنید.',
         'Defines the default CSS used in rich text editors.' => 'تعریف می کند که CSS به طور پیش فرض مورد استفاده در ویرایشگرهای متن غنی است.',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.).' =>
             'تعریف می کند اگر حالت پیشرفته استفاده شود (را قادر می سازد استفاده از جدول، جایگزین، زیرنویس، بالانویس، چسباندن از Word، و غیره).',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.) in customer interface.' =>
             'تعریف می کند اگر حالت پیشرفته استفاده شود (را قادر می سازد استفاده از جدول، جایگزین، زیرنویس، بالانویس، چسباندن از Word، و غیره) در رابط مشتری می باشد.',
+        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            'پهنای برای غنی جزء ویرایشگر متن. تعداد (پیکسل) یا ارزش درصد (نسبی) را وارد کنید.',
+        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            'تعریف می کند که ارتفاع برای غنی جزء ویرایشگر متن. تعداد (پیکسل) یا ارزش درصد (نسبی) را وارد کنید.',
+        'Defines the selectable font sizes in the rich text editor.' => '',
+        'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines additional plugins for use in the rich text editor.' => '',
+        'Defines extra content that is allowed for use in the rich text editor.' =>
+            '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             'غیر فعال کردن HTTP هدر \ "X-قاب گزینه ها: SAMEORIGIN " اجازه می دهد OTRS به عنوان یک iframe در وب سایت های دیگر گنجانده شده است. غیر فعال کردن این هدر HTTP می تواند یک مسئله امنیتی! فقط آن را غیر فعال کنید، اگر شما می دانید آنچه شما انجام می دهند!',
@@ -7389,6 +7400,7 @@ sub Data {
             '',
         'Parameters for the dashboard backend of the ticket stats of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
+        'MyLastChangedTickets dashboard widget.' => '',
         'Parameters for the dashboard backend of the upcoming events widget of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
         'Parameters for the dashboard backend of the queue overview widget of the agent interface. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "QueuePermissionGroup" is not mandatory, queues are only listed if they belong to this permission group if you enable it. "States" is a list of states, the key is the sort order of the state in the widget. "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
@@ -8916,6 +8928,7 @@ Thanks for your help!
         'My Queues' => 'لیست درخواست‌های من',
         'My Services' => 'خدمات من',
         'My Tickets.' => 'درخواست من.',
+        'My last changed tickets' => '',
         'NameX' => 'NameX',
         'New Ticket' => 'درخواست جدید',
         'New Tickets' => 'درخواست‌های جدید',

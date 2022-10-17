@@ -34,7 +34,7 @@
                 </ul>
             </div>
         </div>
-        <div class="WidgetSimple">
+        <div class="WidgetSimple Appointments">
             <div class="Header">
                 <h2>[% Translate("Appointments") | html %]</h2>
             </div>

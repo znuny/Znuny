@@ -1,6 +1,15 @@
 # 6.4.4 2022-??-??
- - 2022-08-26 Fixed Bug in SupportDataCollector plugin for default user.
- - 2022-08-10 Added support for ICS calendar events attachments/string data. Added information section and modal dialog for calendar events to AgentTicketZoom view.
+ - 2022-10-11 Added input field for OAuth2 token scope to admin dialog.
+ - 2022-10-07 Integrate DashboardMyLastChangedTickets. Thanks to Renée Bäcker (@reneeb). [PR#177](https://github.com/znuny/Znuny/pull/177)
+ - 2022-10-07 Renamed changed Settings from FrontendRichText::Path to Frontend::RichText::Path. Thanks to Emin Yazi (@eyazi). Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#304](https://github.com/znuny/Znuny/pull/304)
+ - 2022-10-05 Improved usability - AgentTicketBulk - Set DynamicField_NAMEUsed checkbox to true if it is set before or if dynamic field is mandatory.
+ - 2022-09-29 Fixed bug - hour 0 is not possible in the default settings for TimeWorkingHours. Thanks to Sector Nord AG (@LuBroering - Lukas Bröring). [PR#296](https://github.com/znuny/Znuny/pull/296)
+ - 2022-09-28 Sector Nord AG: Added Sysconfig options to control more settings of CKEditor. Thanks to Sector Nord AG (@jsinagowitz). [PR#285](https://github.com/znuny/Znuny/pull/285)
+ - 2022-09-27 Fixed TransitionValidation CheckValueGet() - Added already replaced value 'FieldValue'.
+ - 2022-09-27 Added FilterViews for FilterAppointments function.
+ - 2022-09-27 Changed way of ticket acl checking for AgentTicketActionCommon from name to login.
+ - 2022-09-26 Fixed Bug in SupportDataCollector plugin for default user.
+ - 2022-09-22 Added support for ICS calendar events attachments/string data. Added information section and modal dialog for calendar events to AgentTicketZoom view.
 
 # 6.4.3 2022-09-21
  - 2022-09-20 Misc. improvements for user mentions.

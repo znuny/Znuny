@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.546105057732965;
+    $Self->{Completeness}        = 0.545395484814033;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1472,6 +1472,7 @@ sub Data {
         'URL for authorization code' => '',
         'URL for token by authorization code' => '',
         'URL for token by refresh token' => '',
+        'Access token scope' => '',
         'Template' => 'แม่แบบ',
         'This is the template that was used to create this OAuth2 token configuration.' =>
             '',
@@ -2515,6 +2516,9 @@ sub Data {
         'Email ticket' => 'อีเมล์ตั๋ว',
         'New phone ticket from %s' => 'ตั๋วทางโทรศัพท์ใหม่จาก% s',
         'New email ticket to %s' => 'ตั๋วอีเมลใหม่% s',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
+        'No tickets found.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardProductNotify.tt
         '%s %s is available!' => '%s %s สามารถใช้ได้!',
@@ -4718,6 +4722,9 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Dashboard/EventsTicketCalendar.pm
         'The start time of a ticket has been set after the end time!' => 'เวลาเริ่มต้นของตั๋วจะต้องตั้งค่าหลังเวลาสิ้นสุด!',
 
+        # Perl Module: Kernel/Output/HTML/Dashboard/MyLastChangedTickets.pm
+        'Shown Tickets' => 'ตั๋วที่แสดง',
+
         # Perl Module: Kernel/Output/HTML/Dashboard/News.pm
         'Can\'t connect to OTRS News server!' => '',
         'Can\'t get OTRS News from server!' => '',
@@ -4730,7 +4737,6 @@ sub Data {
         'Can\'t connect to %s!' => '',
 
         # Perl Module: Kernel/Output/HTML/Dashboard/TicketGeneric.pm
-        'Shown Tickets' => 'ตั๋วที่แสดง',
         'Shown Columns' => 'คอลัมน์ที่แสดง',
         'filter not active' => 'ตัวกรองไม่ได้ใช้งาน',
         'filter active' => 'ตัวกรองที่ใช้งาน',
@@ -5741,14 +5747,19 @@ sub Data {
         'Uses richtext for viewing and editing: articles, salutations, signatures, standard templates, auto responses and notifications.' =>
             '',
         'Defines the URL rich text editor path.' => 'กำหนดเส้นทางแก้ไขข้อความของ URL ',
-        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            'กำหนดความกว้างสำหรับส่วนประกอบของการแก้ไขข้อความสำหรับหน้าจอนี้ ป้อนจำนวน (พิกเซล) หรือค่าร้อยละ (เทียบ)',
-        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            'กำหนดความสูงสำหรับคอมโพเนนต์แก้ไขข้อความ ใส่หมายเลข (พิกเซล) หรือค่าร้อยละ (เทียบ)',
         'Defines the default CSS used in rich text editors.' => 'กำหนด CSS เริ่มต้นที่ใช้ในการแก้ไขข้อความ',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.).' =>
             'กำหนดหากโหมดเสริมควรถูกใช้ (ช่วยให้สามารถใช้ตาราง, แทนที่,ดรรชนีล่าง,ดรรชนีบน,วางจากประโยคและอื่น ๆ )',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.) in customer interface.' =>
+            '',
+        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            'กำหนดความกว้างสำหรับส่วนประกอบของการแก้ไขข้อความสำหรับหน้าจอนี้ ป้อนจำนวน (พิกเซล) หรือค่าร้อยละ (เทียบ)',
+        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            'กำหนดความสูงสำหรับคอมโพเนนต์แก้ไขข้อความ ใส่หมายเลข (พิกเซล) หรือค่าร้อยละ (เทียบ)',
+        'Defines the selectable font sizes in the rich text editor.' => '',
+        'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines additional plugins for use in the rich text editor.' => '',
+        'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
@@ -7389,6 +7400,7 @@ sub Data {
             '',
         'Parameters for the dashboard backend of the ticket stats of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
+        'MyLastChangedTickets dashboard widget.' => '',
         'Parameters for the dashboard backend of the upcoming events widget of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
         'Parameters for the dashboard backend of the queue overview widget of the agent interface. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "QueuePermissionGroup" is not mandatory, queues are only listed if they belong to this permission group if you enable it. "States" is a list of states, the key is the sort order of the state in the widget. "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
@@ -8916,6 +8928,7 @@ Thanks for your help!
         'My Queues' => 'คิวของฉัน',
         'My Services' => 'การบริการของฉัน',
         'My Tickets.' => 'ตั๋วของฉัน',
+        'My last changed tickets' => '',
         'NameX' => 'NameX',
         'New Ticket' => 'ตั๋วใหม่',
         'New Tickets' => 'ตั๋วใหม่',

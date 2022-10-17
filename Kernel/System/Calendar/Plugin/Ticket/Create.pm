@@ -1390,7 +1390,7 @@ sub _GetUsers {
 
     my %ShownUsers;
     my %AllGroupsMembers = $UserObject->UserList(
-        Type  => 'Long',
+        Type  => 'Short',
         Valid => 1,
     );
 
@@ -1429,7 +1429,17 @@ sub _GetUsers {
         UserID        => $Param{UserID},
     );
 
-    return { $TicketObject->TicketAclData() } if $ACL;
+    if ($ACL) {
+        %ShownUsers = $TicketObject->TicketAclData();
+    }
+
+    my %AllGroupsMembersFullnames = $UserObject->UserList(
+        Type  => 'Long',
+        Valid => 1,
+    );
+
+    @ShownUsers{ keys %ShownUsers } = @AllGroupsMembersFullnames{ keys %ShownUsers };
+
     return %ShownUsers;
 }
 
@@ -1444,7 +1454,7 @@ sub _GetResponsibles {
 
     my %ShownUsers;
     my %AllGroupsMembers = $UserObject->UserList(
-        Type  => 'Long',
+        Type  => 'Short',
         Valid => 1,
     );
 
@@ -1482,7 +1492,16 @@ sub _GetResponsibles {
         UserID        => $Param{UserID},
     );
 
-    return { $TicketObject->TicketAclData() } if $ACL;
+    if ($ACL) {
+        %ShownUsers = $TicketObject->TicketAclData();
+    }
+
+    my %AllGroupsMembersFullnames = $UserObject->UserList(
+        Type  => 'Long',
+        Valid => 1,
+    );
+
+    @ShownUsers{ keys %ShownUsers } = @AllGroupsMembersFullnames{ keys %ShownUsers };
 
     return %ShownUsers;
 }

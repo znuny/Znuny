@@ -462,9 +462,9 @@ sub CacheGenerate {
 
 deletes all the loader cache files.
 
-Returns a list of deleted files.
-
     my @DeletedFiles = $LoaderObject->CacheDelete();
+
+Returns a list of deleted files.
 
 =cut
 
@@ -539,9 +539,11 @@ sub CacheDelete {
 
 =head2 IsJavaScriptMinifierXSAvailable()
 
-    Tries to load JavaScript::Minifier::XS if available which provides faster creation of minified JavaScript.
+Tries to load JavaScript::Minifier::XS if available which provides faster creation of minified JavaScript.
 
-    Returns true value if JavaScript::Minifier::XS is available and loaded.
+    my $IsJavaScriptMinifierXSAvailable = $LoaderObject->IsJavaScriptMinifierXSAvailable();
+
+Returns true value if JavaScript::Minifier::XS is available and loaded.
 
 =cut
 
@@ -563,9 +565,11 @@ sub IsJavaScriptMinifierXSAvailable {
 
 =head2 IsCSSMinifierXSAvailable()
 
-    Tries to load CSS::Minifier::XS if available which provides faster creation of minified CSS.
+Tries to load CSS::Minifier::XS if available which provides faster creation of minified CSS.
 
-    Returns true value if CSS::Minifier::XS is available and loaded.
+    my $IsCSSMinifierXSAvailable = $LoaderObject->IsCSSMinifierXSAvailable();
+
+Returns true value if CSS::Minifier::XS is available and loaded.
 
 =cut
 

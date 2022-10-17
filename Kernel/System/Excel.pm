@@ -39,7 +39,7 @@ All Excel functions.
 
 create an object
 
-my $ExcelObject = $Kernel::OM->Get('Kernel::System::Excel');
+    my $ExcelObject = $Kernel::OM->Get('Kernel::System::Excel');
 
 =cut
 
