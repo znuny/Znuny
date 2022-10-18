@@ -92,4 +92,10 @@
 
 [% INCLUDE "HTMLHeadBlockEvents.tt" %]
 
+[% RenderBlockStart("DynamicCSS") %]
+    <style type="text/css">
+        [% Data.CSS | html %]
+    </style>
+[% RenderBlockEnd("DynamicCSS") %]
+
 </head>

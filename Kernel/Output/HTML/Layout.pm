@@ -4295,6 +4295,7 @@ sub CustomerHeader {
     # Generate the minified CSS and JavaScript files
     # and the tags referencing them (see LayoutLoader)
     $Self->LoaderCreateCustomerCSSCalls();
+    $Self->LoaderCreateDynamicCSS();
 
     # create & return output
     $Output .= $Self->Output(

@@ -944,20 +944,32 @@ Creates CSS string from CSS modules and adds it to HTMLHead.tt.
 
 CSS Result:
 
-    .pill-closed-successful {
-        background: #3DD598;
-    }
-    .pill-new {
+    .StateID-1 {
         background: #50B5FF;
     }
-    .pill-pending-auto-close {
+    .StateID-2 {
+        background: #3DD598;
+    }
+    .StateID-3 {
+        background: #FC5A5A;
+    }
+    .StateID-4 {
+        background: #FFC542;
+    }
+    .StateID-5 {
+        background: #8D8D9B;
+    }
+    .StateID-6 {
         background: #FF8A25;
     }
-    .pill-pending-auto-close- {
-        background: #FF8A25;
+    .StateID-7 {
+        background: #3DD598;
     }
-    .pill-pending-reminder {
-        background: #FF8A25;
+    .StateID-8 {
+        background: #FC5A5A;
+    }
+    .StateID-9 {
+        background: #8D8D9B;
     }
 
 Returns:
