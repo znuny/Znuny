@@ -1,4 +1,5 @@
 # 6.0.47 2022-??-??
+ - 2022-10-21 Agent error screen now shows navigation bar if possible.
  - 2022-09-29 Fixed bug - hour 0 is not possible in the default settings for TimeWorkingHours. Thanks to Sector Nord AG (@LuBroering - Lukas Bröring). [PR#296](https://github.com/znuny/Znuny/pull/296)
 
 # 6.0.46 2022-09-21
