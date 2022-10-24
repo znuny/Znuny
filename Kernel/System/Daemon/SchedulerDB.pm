@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2022 Informatyka Boguslawski sp. z o.o. sp.k., http://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -578,13 +579,15 @@ sub TaskCleanup {
         # get expiration time. 7 days ago system time
         my $ExpiredTime = $SystemTime - ( 60 * 60 * 24 * 7 );
 
-        my $LockTime = $Kernel::OM->Create(
-            'Kernel::System::DateTime',
-            ObjectParams => {
-                String => $Task{LockTime},
-            },
-        );
-
+        my $LockTime;
+        if ($Task{LockTime}) {
+            $LockTime = $Kernel::OM->Create(
+                'Kernel::System::DateTime',
+                ObjectParams => {
+                    String => $Task{LockTime},
+                },
+            );
+        }
         $LockTime = $LockTime ? $LockTime->ToEpoch() : 0;
 
         # skip if task is not expired
