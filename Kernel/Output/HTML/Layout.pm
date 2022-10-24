@@ -1010,6 +1010,7 @@ sub ErrorScreen {
     my ( $Self, %Param ) = @_;
 
     my $Output = $Self->Header( Title => 'Error' );
+    $Output .= $Self->NavigationBar() if $Self->{UserID};
     $Output .= $Self->Error(%Param);
     $Output .= $Self->Footer();
     return $Output;
