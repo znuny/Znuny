@@ -163,7 +163,7 @@ for my $Test (@Tests) {
     # Turn export into Perl structure.
     if ( $Test->{ExportParams}->{Format} eq 'perl' ) {
         $Export =~ s{\A(\$VAR1)}{\$Export};
-        eval $Export;    ## nofilter(TidyAll::Plugin::OTRS::Perl::PerlCritic)
+        eval $Export;    ## nofilter(TidyAll::Plugin::Znuny::Perl::PerlCritic)
     }
     elsif ( $Test->{ExportParams}->{Format} eq 'yml' ) {
         $Export = $YAMLObject->Load(

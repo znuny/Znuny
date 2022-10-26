@@ -43,7 +43,7 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=Admin");
 
         my $NavigationModule = $ConfigObject->Get('Frontend::NavigationModule');
-        my @NavigationCheck = (
+        my @NavigationCheck  = (
             'Csomagkezelő',
             'Munkamenet-kezelés',
             'Naptárak',

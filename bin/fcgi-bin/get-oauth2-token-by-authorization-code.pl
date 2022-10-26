@@ -17,7 +17,7 @@
 # along with this program. If not, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-## nofilter(TidyAll::Plugin::OTRS::Perl::ParamObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::ParamObject)
 
 use strict;
 use warnings;

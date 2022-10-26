@@ -323,7 +323,7 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketPhone");
 
         # Select <Queue>.
-        my $QueueValue = "<Queue>$RandomID";
+        my $QueueValue    = "<Queue>$RandomID";
         my $QueueValueSet = $QueueID1 . "||" . $QueueValue;
         $Selenium->InputFieldValueSet(
             Element => '#Dest',
@@ -335,14 +335,20 @@ $Selenium->RunTest(
 
         # Check Queue #1 is displayed as selected.
         $Self->Is(
-            $Selenium->InputGet( Attribute => 'Dest', Options => { KeyOrValue => 'Value' } ),
+            $Selenium->InputGet(
+                Attribute => 'Dest',
+                Options   => { KeyOrValue => 'Value' }
+            ),
             $QueueValue,
             'Queue #1 is selected.',
         );
 
         # Check Queue #1 is displayed properly.
         $Self->Is(
-            $Selenium->InputGet( Attribute => 'Dest', Options => { KeyOrValue => 'Value' } ),
+            $Selenium->InputGet(
+                Attribute => 'Dest',
+                Options   => { KeyOrValue => 'Value' }
+            ),
             $QueueValue,
             'Queue #1 is selected.',
         );
@@ -364,7 +370,10 @@ $Selenium->RunTest(
 
         # Check SubQueue is displayed properly.
         $Self->Is(
-            $Selenium->InputGet( Attribute => 'Dest', Options => { KeyOrValue => 'Value' } ),
+            $Selenium->InputGet(
+                Attribute => 'Dest',
+                Options   => { KeyOrValue => 'Value' }
+            ),
             $QueueValue,
             'Queue #2 is selected.',
         );

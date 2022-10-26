@@ -6,6 +6,7 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
 
 package Kernel::System::Calendar::Plugin::Ticket::Link;
 use parent qw(Kernel::System::Calendar::Plugin::Base);
