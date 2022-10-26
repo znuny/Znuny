@@ -21,7 +21,7 @@ use strict;
 use warnings;
 use utf8;
 
-## nofilter(TidyAll::Plugin::OTRS::Perl::Dumper)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Dumper)
 
 # use ../ as lib location
 use File::Basename;

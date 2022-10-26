@@ -102,8 +102,7 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminProcessManagement");
 
         # Import test Selenium Process.
-        my $Location
-            = $Selenium->{Home} . "/scripts/test/sample/ProcessManagement/CustomerTicketOverviewProcess.yml";
+        my $Location = $Selenium->{Home} . "/scripts/test/sample/ProcessManagement/CustomerTicketOverviewProcess.yml";
         $Selenium->find_element( "#FileUpload",                      'css' )->send_keys($Location);
         $Selenium->find_element( "#OverwriteExistingEntitiesImport", 'css' )->click();
         $Selenium->WaitFor(

@@ -5,7 +5,7 @@
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
-## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::SpellCheck)
+## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
 
 package Kernel::System::Util;
 

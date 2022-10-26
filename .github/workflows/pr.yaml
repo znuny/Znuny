@@ -1,0 +1,23 @@
+---
+name: Pull Request
+
+# only trigger on pull request closed events
+on:
+  pull_request:
+    types: [ closed ]
+
+jobs:
+  Merged:
+    # this job will only run if the PR has been merged
+    # and the github.base_ref ends with a 'dev'
+    # $GITHUB_BASE_REF / github.base_ref - target branch of the pull request
+    if: github.event.pull_request.merged == true && endsWith( github.base_ref, 'dev' )
+    runs-on: ubuntu-latest
+    env:
+      CURL_DATA: ${{ secrets.CURL_DATA }}
+      CURL_URL: ${{ secrets.CURL_URL }}
+    steps:
+    - run: |
+        echo "PR #${{ github.event.number }} has been merged."
+        curl $CURL_DATA -F ref=$GITHUB_BASE_REF $CURL_URL > /dev/null 2>&1
+
