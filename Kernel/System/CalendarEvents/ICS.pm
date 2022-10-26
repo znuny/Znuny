@@ -7,7 +7,6 @@
 # --
 
 package Kernel::System::CalendarEvents::ICS;
-## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::SpellCheck)
 
 use strict;
 use warnings;

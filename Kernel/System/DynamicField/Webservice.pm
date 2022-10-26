@@ -5,7 +5,6 @@
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
-## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::SpellCheck)
 
 package Kernel::System::DynamicField::Webservice;
 
@@ -1104,8 +1103,8 @@ sub Template {
     my $TemplateType = $Param{DynamicFieldConfig}->{Config}->{TemplateType} || 'default';
 
     if ( $Param{LayoutObject}->{Action} && $Param{Type} ) {
-        $ContentType  = $ActionTemplateMap{ $Param{LayoutObject}->{Action} }->{ $Param{Type} }->{ContentType};
-        $TemplateType = $ActionTemplateMap{ $Param{LayoutObject}->{Action} }->{ $Param{Type} }->{TemplateType};
+        $ContentType  = $ActionTemplateMap{ $Param{LayoutObject}->{Action} }->{ $Param{Type} }->{ContentType} || $ContentType;
+        $TemplateType = $ActionTemplateMap{ $Param{LayoutObject}->{Action} }->{ $Param{Type} }->{TemplateType} || $TemplateType;
     }
 
     if ( $Param{ContentType} ) {

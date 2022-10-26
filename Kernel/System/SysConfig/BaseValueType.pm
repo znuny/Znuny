@@ -8,7 +8,7 @@
 # --
 
 package Kernel::System::SysConfig::BaseValueType;
-## nofilter(TidyAll::Plugin::OTRS::Perl::LayoutObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
 
 use strict;
 use warnings;

@@ -6,7 +6,7 @@
 // did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 // --
 /* eslint no-eval: 0 */
-// nofilter(TidyAll::Plugin::OTRS::JavaScript::ESLint)
+// nofilter(TidyAll::Plugin::Znuny::JavaScript::ESLint)
 'use strict';
 
 var Znuny = Znuny || {};
