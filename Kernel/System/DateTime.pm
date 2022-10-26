@@ -8,8 +8,9 @@
 # --
 
 package Kernel::System::DateTime;
-## nofilter(TidyAll::Plugin::OTRS::Perl::Time)
-## nofilter(TidyAll::Plugin::OTRS::Perl::Translatable)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Time)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Translatable)
+## nofilter(TidyAll::Plugin::Znuny::Perl::IsIntegerVariableCheck)
 
 use strict;
 use warnings;
@@ -997,14 +998,13 @@ Compares dates and returns a value suitable for using Perl's sort function (-1, 
     my $Result = $DateTimeObject->Compare( DateTimeObject => $AnotherDateTimeObject );
 
 You can also use this as a function for Perl's sort:
-
-    my @SortedDateTimeObjects = sort { $a->Compare( DateTimeObject => $b ); } @UnsortedDateTimeObjects:
+    my @SortedDateTimeObjects = sort { $a->Compare( DateTimeObject => $b ) } @UnsortedDateTimeObjects;
 
 Returns:
 
-    $Result = -1;       # if date/time of $DateTimeObject < date/time of $AnotherDateTimeObject
-    $Result = 0;        # if date/time are equal
-    $Result = 1:        # if date/time of $DateTimeObject > date/time of $AnotherDateTimeObject
+    my $Result = -1;       # if date/time of $DateTimeObject < date/time of $AnotherDateTimeObject
+    my $Result = 0;        # if date/time are equal
+    my $Result = 1;        # if date/time of $DateTimeObject > date/time of $AnotherDateTimeObject
 
 =cut
 
@@ -1431,8 +1431,8 @@ Returns an array ref of available time zones.
     # This is useful to keep the obsolete time zone from a stored setting
     # so that it will e.g. be shown as selected when showing a selection list.
     # Otherwise the user would have to select a new time zone.
-    my $TimeZones = $DateTimeObject->TimeZoneList(
 
+    my $TimeZones = $DateTimeObject->TimeZoneList(
         # Africa/Kinshasa has become obsolete and has been replaced by Africa/Lagos.
         # This option will add Africa/Kinshasa to the list of time zones nonetheless.
         # The given time zone must be valid, so 'Some/InvalidTimeZone' will not be added.

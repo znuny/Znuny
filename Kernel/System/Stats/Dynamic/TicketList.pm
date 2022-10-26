@@ -1373,7 +1373,7 @@ sub GetStatTable {
                         # change raw value from ticket to a plain text value
                         $Ticket{$ParameterName} = $ValueStrg->{Value};
 
-                        ## nofilter(TidyAll::Plugin::OTRS::Perl::LayoutObject)
+                        ## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
                         if ( $DynamicFieldConfig->{Name} =~ /ProcessManagementProcessID|ProcessManagementActivityID/ ) {
                             my $DisplayValue = $DynamicFieldBackendObject->DisplayValueRender(
                                 DynamicFieldConfig => $DynamicFieldConfig,

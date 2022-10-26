@@ -6,6 +6,7 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::CodeStyle::STDERRCheck)
 
 package Kernel::System::Web::Request;
 
@@ -156,8 +157,9 @@ Example:
 Called URL: index.pl?Action=AdminSystemConfiguration;Subaction=Save;Name=Config::Option::Valid
 
     my @ParamNames = $ParamObject->GetParamNames();
+
     print join " :: ", @ParamNames;
-    #prints Action :: Subaction :: Name
+    # prints Action :: Subaction :: Name
 
 =cut
 

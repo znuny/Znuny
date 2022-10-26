@@ -65,5 +65,8 @@ var/httpd/htdocs/skins/Customer/default/css/*Fred*css
 # NYTProf
 nytprof*.out
 
+# coverage
+cover_db/
+
 # ITSM
 var/stats/*.xml.installed

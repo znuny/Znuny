@@ -1804,7 +1804,9 @@ sub _Mask {
             my $DynamicFieldSet = $ParamObject->GetParam(
                 Param => 'DynamicField_' . $DynamicFieldConfig->{Name} . 'Used'
             );
-            if ($DynamicFieldSet) {
+
+            # set DynamicField_NAMEUsed checkbox to true if it is set before or if mandatory (2)
+            if ( $DynamicFieldSet || $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2 ) {
                 $IsChecked = 'true';
             }
         }

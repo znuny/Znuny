@@ -35,7 +35,6 @@ use Kernel::System::WebUserAgent;
 package Kernel::System::WebUserAgent;
 use strict;
 use warnings;
-## nofilter(TidyAll::Plugin::OTRS::Perl::TestSubs)
 {
     no warnings 'redefine';
     sub Request {

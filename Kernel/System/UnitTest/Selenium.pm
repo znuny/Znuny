@@ -6,9 +6,8 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-
-## nofilter("TidyAll::Plugin::OTRS::Perl::Pod::FunctionPod")
-## nofilter("TidyAll::Plugin::OTRS::Perl::Pod::SpellCheck")
+## nofilter(TidyAll::Plugin::Znuny::CodeStyle::STDERRCheck)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Pod::FunctionPod)
 
 package Kernel::System::UnitTest::Selenium;
 
