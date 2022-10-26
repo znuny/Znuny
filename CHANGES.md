@@ -1,4 +1,5 @@
 # 6.4.4 2022-??-??
+ - 2022-10-26 Fixed sorting of SysConfig entity value types.
  - 2022-10-25 Added migration module to add dynamic fields 'TicketCalendarStartTime' and 'TicketCalendarEndTime'.
  - 2022-10-21 Agent error screen now shows navigation bar if possible.
  - 2022-10-11 Added input field for OAuth2 token scope to admin dialog.

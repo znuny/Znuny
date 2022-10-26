@@ -664,7 +664,7 @@ sub _GetCategoriesStrg {
         SelectedID   => $Category || Translatable('All'),
         PossibleNone => 0,
         Translation  => 1,
-        Sort         => 'AlphaNumericKey',
+        Sort         => 'AlphanumericKey',
         Class        => 'Modernize',
         Title        => $Kernel::OM->Get('Kernel::Language')->Translate('Category Search'),
     );
