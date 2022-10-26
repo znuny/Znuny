@@ -160,7 +160,7 @@ my @Plugins = $PluginObject->DataListGet(
     UserID => 1,
 );
 
-for my $Plugin (@Plugins){
+for my $Plugin (@Plugins) {
 
     $PluginObject->DataDelete(
         ID     => $Plugin->{ID},

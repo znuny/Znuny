@@ -7,8 +7,10 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
+## nofilter(TidyAll::Plugin::Znuny::Perl::Require)
+## nofilter(TidyAll::Plugin::Znuny::CodeStyle::STDERRCheck)
+
 package Kernel::System::XML;
-## nofilter(TidyAll::Plugin::OTRS::Perl::Require)
 
 use strict;
 use warnings;

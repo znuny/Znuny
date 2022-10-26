@@ -8,7 +8,7 @@
 # --
 
 package Kernel::Output::Template::Document;
-## no critic(Perl::Critic::Policy::OTRS::RequireCamelCase)
+## nofilter(TidyAll::Plugin::Znuny::Perl::PerlCritic)
 
 use strict;
 use warnings;

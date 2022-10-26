@@ -817,8 +817,6 @@
                 <Item Key="TicketCreate">Ticket Create</Item>
                 <Item Key="TicketOverview">Ticket Overview</Item>
                 <Item Key="FAQ">FAQ</Item>
-                <Item Key="Customer">Customer</Item>
-                <Item Key="CustomerUser">CustomerUser</Item>
                 <Item Key="Preferences">Preferences</Item>
             </Hash>
         </Value>

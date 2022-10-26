@@ -96,8 +96,8 @@ $Selenium->RunTest(
             Value   => $TransitionActionModule,
         );
 
-        $Selenium->execute_script( '$("[name=\"ConfigKey[1]\"]").val("")' );
-        $Selenium->execute_script( '$("#ConfigParams fieldset:not(:first-child) a.RemoveButton").click()' );
+        $Selenium->execute_script('$("[name=\"ConfigKey[1]\"]").val("")');
+        $Selenium->execute_script('$("#ConfigParams fieldset:not(:first-child) a.RemoveButton").click()');
 
         $Selenium->find_element(".//*[\@id='ConfigKey[1]']")->send_keys($TransitionActionKey);
         $Selenium->find_element(".//*[\@id='ConfigValue[1]']")->send_keys($TransitionActionValue);

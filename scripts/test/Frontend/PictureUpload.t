@@ -147,7 +147,7 @@ $Self->True(
     'Response check for CKEditor error handler',
 );
 
-## nofilter(TidyAll::Plugin::OTRS::Whitespace::Tabs)
+## nofilter(TidyAll::Plugin::Znuny::Whitespace::Tabs)
 my $ContentSVG = <<'EOF',
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
