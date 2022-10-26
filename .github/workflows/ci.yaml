@@ -46,7 +46,7 @@ jobs:
         run: |
           cd "${GITHUB_WORKSPACE}/znuny"
           git init
-          "${GITHUB_WORKSPACE}/codepolicy/bin/znuny.CodePolicy.pl" --all
+          "${GITHUB_WORKSPACE}/codepolicy/bin/znuny.CodePolicy.pl" --all-files
 
   CPANAudit:
     name: CPANAudit
