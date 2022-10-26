@@ -353,9 +353,9 @@ $Selenium->RunTest(
             "DynamicField filtered options count",
         );
 
-        my $SubjectRandom  = 'Subject' . $HelperObject->GetRandomID();
-        my $ContentRandom  = 'Content' . $HelperObject->GetRandomID();
-        my $AttachmentName = "StdAttachment-Test1.txt";
+        my $SubjectRandom      = 'Subject' . $HelperObject->GetRandomID();
+        my $ContentRandom      = 'Content' . $HelperObject->GetRandomID();
+        my $AttachmentName     = "StdAttachment-Test1.txt";
         my $AttachmentLocation = $Selenium->{Home} . "/scripts/test/sample/StdAttachment/$AttachmentName";
 
         $Selenium->find_element( "#Subject",  'css' )->send_keys($SubjectRandom);

@@ -6,7 +6,7 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-## nofilter(TidyAll::Plugin::OTRS::TT::ScriptUsage)
+## nofilter(TidyAll::Plugin::Znuny::TT::ScriptUsage)
 
 [% RenderBlockStart("ArticleFilterDialog") %]
 <div id="ArticleFilterDialog" class="Hidden">

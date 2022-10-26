@@ -8,7 +8,7 @@
 # --
 
 package Kernel::System::EventHandler;
-## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::FunctionPod)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Pod::FunctionPod)
 
 use strict;
 use warnings;
