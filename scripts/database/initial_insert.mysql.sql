@@ -3249,3 +3249,25 @@ INSERT INTO dynamic_field (id, internal_field, name, label, field_order, field_t
     (3, 1, 'ProcessManagementAttachment', 'Attachment', 1, 'TextArea', 'Ticket', '---
 DefaultValue: \'\'
 ', 1, 1, current_timestamp, 1, current_timestamp);
+# ----------------------------------------------------------
+#  insert into table dynamic_field
+# ----------------------------------------------------------
+INSERT INTO dynamic_field (id, internal_field, name, label, field_order, field_type, object_type, config, valid_id, create_by, create_time, change_by, change_time)
+    VALUES
+    (4, 0, 'TicketCalendarStartTime', 'Ticket Calendar StartTime', 1, 'DateTime', 'Ticket', '---
+DefaultValue: 0,
+YearsInFuture: 0,
+YearsInPast: 0,
+YearsPeriod: 0,
+', 1, 1, current_timestamp, 1, current_timestamp);
+# ----------------------------------------------------------
+#  insert into table dynamic_field
+# ----------------------------------------------------------
+INSERT INTO dynamic_field (id, internal_field, name, label, field_order, field_type, object_type, config, valid_id, create_by, create_time, change_by, change_time)
+    VALUES
+    (5, 0, 'TicketCalendarEndTime', 'Ticket Calendar EndTime', 1, 'DateTime', 'Ticket', '---
+DefaultValue: 0,
+YearsInFuture: 0,
+YearsInPast: 0,
+YearsPeriod: 0,
+', 1, 1, current_timestamp, 1, current_timestamp);

@@ -1,4 +1,5 @@
 # 6.4.4 2022-??-??
+ - 2022-10-25 Added migration module to add dynamic fields 'TicketCalendarStartTime' and 'TicketCalendarEndTime'.
  - 2022-10-21 Agent error screen now shows navigation bar if possible.
  - 2022-10-11 Added input field for OAuth2 token scope to admin dialog.
  - 2022-10-07 Integrate DashboardMyLastChangedTickets. Thanks to Renée Bäcker (@reneeb). [PR#177](https://github.com/znuny/Znuny/pull/177)
