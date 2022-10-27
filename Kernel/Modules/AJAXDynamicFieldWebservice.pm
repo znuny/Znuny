@@ -360,12 +360,12 @@ sub _SerializeFieldValues {
     my $FieldMapping       = $ConfigObject->Get('DynamicFieldWebservice::FieldMapping')       // {};
     my $CustomFieldMapping = $ConfigObject->Get('DynamicFieldWebservice::CustomFieldMapping') // {};
 
-    my $AdditionalAttributesConfig = $ConfigObject->Get('DynamicFieldWebservice::AdditionalAttributes') // {};
-    my $StandardAttributesConfig   = $AdditionalAttributesConfig->{Standard}                                      // {};
-    my $SelectableAttributesConfig = $AdditionalAttributesConfig->{Selectable}                                    // {};
-    my $DefaultStandardAttributes  = $StandardAttributesConfig->{Default}                                         // {};
-    my $DefaultSelectableAttributes          = $SelectableAttributesConfig->{Default} // {};
-    my $AdditionalSelectableAttributesConfig = $SelectableAttributesConfig->{Option}  // {};
+    my $AdditionalAttributesConfig           = $ConfigObject->Get('DynamicFieldWebservice::AdditionalAttributes') // {};
+    my $StandardAttributesConfig             = $AdditionalAttributesConfig->{Standard}                            // {};
+    my $SelectableAttributesConfig           = $AdditionalAttributesConfig->{Selectable}                          // {};
+    my $DefaultStandardAttributes            = $StandardAttributesConfig->{Default}                               // {};
+    my $DefaultSelectableAttributes          = $SelectableAttributesConfig->{Default}                             // {};
+    my $AdditionalSelectableAttributesConfig = $SelectableAttributesConfig->{Option}                              // {};
 
     my $Params       = $Param{Params};
     my $View         = $Param{View};

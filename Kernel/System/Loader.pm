@@ -6,7 +6,7 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-## nofilter(TidyAll::Plugin::OTRS::Perl::Require)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Require)
 
 package Kernel::System::Loader;
 
@@ -419,7 +419,7 @@ sub CacheGenerate {
     my @Result;
 
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-    ## nofilter(TidyAll::Plugin::OTRS::Perl::LayoutObject)
+    ## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     my %AgentFrontends = %{ $ConfigObject->Get('Frontend::Module') // {} };

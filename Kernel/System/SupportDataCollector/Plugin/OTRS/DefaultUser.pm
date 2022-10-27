@@ -57,7 +57,7 @@ sub Run {
         );
     }
 
-    if ($AuthenticatedUser eq 'root@localhost') {
+    if ( $AuthenticatedUser eq 'root@localhost' ) {
         $Self->AddResultProblem(
             Label => Translatable('Default Admin Password'),
             Value => '',

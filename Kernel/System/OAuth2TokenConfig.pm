@@ -61,7 +61,6 @@ Returns:
 
 =cut
 
-
 =head2 DataUpdate()
 
 Update data attributes.
@@ -85,7 +84,6 @@ Returns:
     my $Success = 1; # 1|0
 
 =cut
-
 
 =head2 DataGet()
 
@@ -149,7 +147,6 @@ Returns:
     );
 
 =cut
-
 
 =head2 DataDelete()
 

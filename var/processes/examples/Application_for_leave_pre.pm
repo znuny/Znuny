@@ -8,7 +8,7 @@
 # --
 
 package var::processes::examples::Application_for_leave_pre;
-## nofilter(TidyAll::Plugin::OTRS::Perl::PerlCritic)
+## nofilter(TidyAll::Plugin::Znuny::Perl::PerlCritic)
 
 use strict;
 use warnings;

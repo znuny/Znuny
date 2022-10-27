@@ -8,7 +8,7 @@
 
 package Kernel::System::SysConfig::ValueType::Entity::User;
 
-## nofilter(TidyAll::Plugin::OTRS::Perl::ParamObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::ParamObject)
 
 use strict;
 use warnings;

@@ -6,8 +6,6 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::SpellCheck)
-
 package Kernel::System::UnitTest::DBCRUD;
 
 use strict;

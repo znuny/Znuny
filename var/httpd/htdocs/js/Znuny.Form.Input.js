@@ -5,7 +5,7 @@
 // the enclosed file COPYING for license information (AGPL). If you
 // did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 // --
-// nofilter(TidyAll::Plugin::OTRS::JavaScript::ESLint)
+// nofilter(TidyAll::Plugin::Znuny::JavaScript::ESLint)
 'use strict';
 
 var Znuny  = Znuny || {};
@@ -463,7 +463,7 @@ Znuny.Form.Input = (function (TargetNS) {
 
                     if (DateStructure[Suffix].toString().length < 2) {
                         DateStructure[Suffix] = '0' + DateStructure[ Suffix ];
-                    };
+                    }
                 });
 
                 // 2020-11-25 14:22:00
