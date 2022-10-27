@@ -578,13 +578,15 @@ sub TaskCleanup {
         # get expiration time. 7 days ago system time
         my $ExpiredTime = $SystemTime - ( 60 * 60 * 24 * 7 );
 
-        my $LockTime = $Kernel::OM->Create(
-            'Kernel::System::DateTime',
-            ObjectParams => {
-                String => $Task{LockTime},
-            },
-        );
-
+        my $LockTime;
+        if ($Task{LockTime}) {
+            $LockTime = $Kernel::OM->Create(
+                'Kernel::System::DateTime',
+                ObjectParams => {
+                    String => $Task{LockTime},
+                },
+            );
+        }
         $LockTime = $LockTime ? $LockTime->ToEpoch() : 0;
 
         # skip if task is not expired
