@@ -5,7 +5,7 @@ set -o pipefail
 
 apt-get update
 apt-get upgrade -y
-apt-get install -y libapache2-mod-perl2 libdbd-mysql-perl \
+apt-get install -y libapache2-mod-perl2 \
   libtimedate-perl libnet-dns-perl libnet-ldap-perl \
   libio-socket-ssl-perl libpdf-api2-perl libdbd-mysql-perl \
   libsoap-lite-perl libtext-csv-xs-perl libjson-xs-perl \
