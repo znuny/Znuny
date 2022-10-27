@@ -327,6 +327,7 @@ sub SettingRender {
         Data          => \@EntityValues,
         Name          => $Param{Name},
         ID            => $Param{Name} . $Param{IDSuffix},
+        Sort          => "AlphanumericValue",
         Disabled      => $Param{RW} ? 0 : 1,
         SelectedValue => $EffectiveValue,
         Title         => $Param{Name},
