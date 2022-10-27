@@ -70,7 +70,9 @@ sub Run {
     my ( $Self, %Param ) = @_;
 
     # get config object
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+    my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $LogObject          = $Kernel::OM->Get('Kernel::System::Log');
 
     my $Queues = $ConfigObject->{DashboardEventsTicketCalendar}->{Queues};
 
@@ -80,6 +82,20 @@ sub Run {
     my $EndTimeDynamicField =
         $ConfigObject->Get('DashboardEventsTicketCalendar::DynamicFieldEndTime')
         || 'TicketCalendarEndTime';
+
+    DYNAMICFIELDNAME:
+    for my $DynamicFieldName ( $StartTimeDynamicField, $EndTimeDynamicField ) {
+        my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
+            Name => $DynamicFieldName,
+        );
+        next DYNAMICFIELDNAME if IsHashRefWithData($DynamicFieldConfig);
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Dynamic field '$DynamicFieldName' (DateTime) is needed for dashboard EventsTicketCalendar!",
+        );
+        return '';
+    }
 
     $Param{CalendarWidth} = $ConfigObject->{DashboardEventsTicketCalendar}->{CalendarWidth};
 
