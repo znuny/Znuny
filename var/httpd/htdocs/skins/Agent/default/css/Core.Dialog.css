@@ -34,7 +34,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
  */
 .Dialog {
     position: absolute;
-    z-index: 6000;
+    z-index: 6102;
     min-width: 150px;
     background: #FFF;
 }
