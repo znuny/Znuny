@@ -240,6 +240,10 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Znuny::MigrateSysConfigSettings',
         },
         {
+            Message => 'Reindex S/MIME certificates',
+            Module  => 'scripts::Migration::Znuny::ReindexSMIMECertificates',
+        },
+        {
             Message => "Add dynamic fields 'TicketCalendarStartTime' and 'TicketCalendarEndTime'.",
             Module  => 'scripts::Migration::Znuny::AddTicketCalendarDynamicFields',
         },

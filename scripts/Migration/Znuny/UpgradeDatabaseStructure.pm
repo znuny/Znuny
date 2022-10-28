@@ -36,7 +36,7 @@ sub Run {
 
     my @Tasks = (
         {
-            Message => 'Create table smime_keys',
+            Message => 'Create/update table smime_keys',
             Module  => 'SMIMEKeys',
         },
         {

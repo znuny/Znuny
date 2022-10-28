@@ -3145,7 +3145,7 @@ CREATE TABLE smime_keys (
     email_address VARCHAR (255) NULL,
     expiration_date timestamp(0) NULL,
     fingerprint VARCHAR (59) NULL,
-    subject VARCHAR (255) NULL,
+    subject VARCHAR NULL,
     create_time timestamp(0) NULL,
     change_time timestamp(0) NULL,
     create_by INTEGER NULL,

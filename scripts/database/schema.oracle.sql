@@ -5793,7 +5793,7 @@ CREATE TABLE smime_keys (
     email_address VARCHAR2 (255) NULL,
     expiration_date DATE NULL,
     fingerprint VARCHAR2 (59) NULL,
-    subject VARCHAR2 (255) NULL,
+    subject CLOB NULL,
     create_time DATE NULL,
     change_time DATE NULL,
     create_by NUMBER (12, 0) NULL,

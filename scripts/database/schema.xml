@@ -2770,7 +2770,7 @@
     <Column Name="email_address" Required="false" Size="255" Type="VARCHAR" />
     <Column Name="expiration_date" Required="false" Type="DATE" />
     <Column Name="fingerprint" Required="false" Size="59" Type="VARCHAR" />
-    <Column Name="subject" Required="false" Size="255" Type="VARCHAR" />
+    <Column Name="subject" Required="false" Size="100000" Type="VARCHAR" />
     <Column Name="create_time" Required="false" Type="DATE" />
     <Column Name="change_time" Required="false" Type="DATE" />
     <Column Name="create_by" Required="false" Type="INTEGER" />
