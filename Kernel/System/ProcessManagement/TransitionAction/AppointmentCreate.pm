@@ -151,7 +151,6 @@ sub Run {
     if ( $Param{Config}->{CalendarName} ) {
         my %Calendar = $CalendarObject->CalendarGet(
             CalendarName => $Param{Config}->{CalendarName},
-            UserID       => 1,
         );
 
         $Param{Config}->{CalendarID} = $Calendar{CalendarID};
