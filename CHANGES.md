@@ -4,11 +4,12 @@
  - 2022-10-26 Fixed sorting of SysConfig entity value types.
  - 2022-10-25 Added migration module to add dynamic fields 'TicketCalendarStartTime' and 'TicketCalendarEndTime'.
  - 2022-10-21 Agent error screen now shows navigation bar if possible.
+ - 2022-10-13 Fixed SQL condition in Kernel::System::CustomerUser::DB::CustomerSearch.
  - 2022-10-12 S/MIME certificates will now be reindexed during Znuny migration.
  - 2022-10-12 Increased size of column "subject" of table "smime_keys".
  - 2022-10-11 Added input field for OAuth2 token scope to admin dialog.
  - 2022-10-07 Integrate DashboardMyLastChangedTickets. Thanks to Renée Bäcker (@reneeb). [PR#177](https://github.com/znuny/Znuny/pull/177)
- - 2022-10-07 Renamed changed Settings from FrontendRichText::Path to Frontend::RichText::Path. Thanks to Emin Yazi (@eyazi), Efflux. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#304](https://github.com/znuny/Znuny/pull/304)
+ - 2022-10-07 Renamed changed settings from FrontendRichText::Path to Frontend::RichText::Path. Thanks to Emin Yazi (@eyazi), Efflux. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#304](https://github.com/znuny/Znuny/pull/304)
  - 2022-10-05 Improved usability - AgentTicketBulk - Set DynamicField_NAMEUsed checkbox to true if it is set before or if dynamic field is mandatory.
  - 2022-09-29 Fixed bug - hour 0 is not possible in the default settings for TimeWorkingHours. Thanks to Sector Nord AG (@LuBroering - Lukas Bröring). [PR#296](https://github.com/znuny/Znuny/pull/296)
  - 2022-09-28 Sector Nord AG: Added Sysconfig options to control more settings of CKEditor. Thanks to Sector Nord AG (@jsinagowitz). [PR#285](https://github.com/znuny/Znuny/pull/285)
