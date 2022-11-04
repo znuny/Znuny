@@ -33,7 +33,7 @@ sub Run {
 
     chdir $Kernel::OM->Get('Kernel::Config')->Get('Home');
 
-    my @Lines = qx{git log --format="%aN <%aE>"};
+    my @Lines = qx{git log --all --format="%aN <%aE>"};
     my %Seen;
     map { $Seen{$_}++ } @Lines;
 
