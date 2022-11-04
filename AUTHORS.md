@@ -38,7 +38,6 @@ The following persons contributed to Znuny:
 * IB Development Team <dev@ib.pl>
 * Igor Djuric <igor.djuric@otrs.com>
 * Jan Steinweg <jan.steinweg@otrs.com>
-* Jannik Sinagowitz <jannik.sinagowitz@sectornord.de>
 * Jaroslav Balaz <jaroslav.balaz@otrs.com>
 * Jens Bothe <jens.bothe@otrs.com>
 * Jens Pfeifer <jp@znuny.com>
@@ -63,7 +62,6 @@ The following persons contributed to Znuny:
 * Martin Gross <martin@pc-coholic.de>
 * Martin Gruner <martin.gruner@otrs.com>
 * Mathias Bräunling <mathias.braeunling@otrs.com>
-* Merkushov Victor <merkushov.victor@gmail.com>
 * Michael Tänzer <neo@nhng.de>
 * Michiel Beijen <michiel.beijen@otrs.com>
 * Milan Rakic <mrakic@s7designcreative.com>
@@ -75,7 +73,6 @@ The following persons contributed to Znuny:
 * Nils Fiedler <nils.fiedler@otrs.com>
 * Nils Leideck <nils.leideck@otrs.com>
 * Norihiro Tanaka <noritnk@kcn.ne.jp>
-* Németh Csaba <csaba@sopron.hu>
 * Oberson Dylan <dylan.oberson@epfl.ch>
 * Oliver Tappe <oliver.tappe@otrs.com>
 * Olivier Sallou <olivier.sallou@irisa.fr>
@@ -103,7 +100,6 @@ The following persons contributed to Znuny:
 * Steva Stevic <svik@s7designcreative.com>
 * Sławomir Niedbała <sniedbala@dev.opgksoftware.com>
 * Theo van Hoesel <Th.J.v.Hoesel+GitHub@gmail.com>
-* Thomas Mueller <mueller@puzzle.ch>
 * Thomas Raith <thomas.raith@otrs.com>
 * Thomas Wouters <thomas@sijn.org>
 * Thorsten Eckel <te@znuny.com>
@@ -111,7 +107,6 @@ The following persons contributed to Znuny:
 * Torsten Thau <Torsten.Thau@cape-it.de>
 * Udo Bretz <udo.bretz@otrs.com>
 * Uwe Dieckmann <uwe.dieckmann@otrs.com>
-* Vladislav Yaroslavlev <vladon@vladon.com>
 * Walter Souto <walter.souto@saude.go.gov.br>
 * Wojciech Kuchta <klapi85@gmail.com>
 * Yuri Myasoedov <ymyasoedov@yandex.ru>
@@ -119,7 +114,6 @@ The following persons contributed to Znuny:
 * akmet <akmet@users.noreply.github.com>
 * anonymous <unknown@anonymous>
 * b1-luettje <53084931+b1-luettje@users.noreply.github.com>
-* cvs2svn <admin@example.com>
 * djurici <igor.djuric@muehlbauer.de>
 * jsinagowitz <91074418+jsinagowitz@users.noreply.github.com>
 * juanmclavero <juanm.clavero@ibsalut.es>

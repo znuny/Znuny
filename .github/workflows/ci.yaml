@@ -87,8 +87,10 @@ jobs:
 
       - name: Check Contributors
         run: |
+          cd /opt/otrs/
+          git init
           su -c "bin/otrs.Console.pl Dev::Code::ContributorsListUpdate" - otrs
-          if [[ $(git diff --exit-code AUTHORS.md) ]]; then echo 'The ContributorsList is not updated.' && exit 1; else echo 'The ContributorsList is updated.' && exit 0; fi
+          if [ "$(git diff --exit-code AUTHORS.md)" ]; then echo 'The ContributorsList is not updated.' && exit 1; else echo 'The ContributorsList is updated.' && exit 0; fi
 
   Database-Schema:
     name: Database:Schema
@@ -116,7 +118,7 @@ jobs:
           echo "Found schema file name $SCHEMA_FILE_NAME"
           su -c "bin/otrs.Console.pl Dev::Tools::Database::XML2SQL --database-type=all --source-path=${SCHEMA_FILE} --target-directory=scripts/database --target-filename=$SCHEMA_FILE_NAME --split-files" - otrs
           git diff --exit-code scripts/database/*schema*
-          if [[ $(git diff --exit-code scripts/database/*schema*) ]]; then echo 'The database schemas are not updated.' && exit 1; else echo 'All database schemas are updated.' && exit 0; fi
+          if [ "$(git diff --exit-code scripts/database/*schema*)" ]; then echo 'The database schemas are not updated.' && exit 1; else echo 'All database schemas are updated.' && exit 0; fi
 
   Database-InitialInsert:
     name: Database:InitialInsert
@@ -144,7 +146,7 @@ jobs:
           echo "Found initial insert file name $INITIAL_INSERT_FILE_NAME"
           su -c "bin/otrs.Console.pl Dev::Tools::Database::XML2SQL --database-type=all --source-path=$INITIAL_INSERT_FILE --target-directory=scripts/database --target-filename=$INITIAL_INSERT_FILE_NAME" - otrs
           git diff --exit-code scripts/database/*initial_insert*
-          if [[ $(git diff --exit-code scripts/database/*initial_insert*) ]]; then echo 'The database initial inserts are not updated.' && exit 1; else echo 'All database initial inserts are updated.' && exit 0; fi
+          if [ "$(git diff --exit-code scripts/database/*initial_insert*)" ]; then echo 'The database initial inserts are not updated.' && exit 1; else echo 'All database initial inserts are updated.' && exit 0; fi
 
   Migration:
     name: Migration
@@ -180,7 +182,7 @@ jobs:
         run: |
           MIGRATEFILE=$(find scripts -type f -name 'MigrateToZnuny*.pl' -or -type f -name 'DBUpdate-to-*.pl')
           su -c "$MIGRATEFILE --non-interactive" - otrs
-          if [[ "$?" -ne 0 ]]; then echo "The migration was not successful." && exit 1; else echo "The migration was successful." && exit 0; fi
+          if [ "$?" -ne 0 ]; then echo "The migration was not successful." && exit 1; else echo "The migration was successful." && exit 0; fi
 
   RPMSpec:
     name: RPMSpec
@@ -218,7 +220,7 @@ jobs:
           git init
           su -c "bin/otrs.Console.pl Dev::Tools::RPMSpecGenerate" - otrs
           git diff --exit-code scripts/auto_build/spec/
-          if [[ $(git diff --exit-code scripts/auto_build/spec/) ]]; then echo "The RPMSpec's are not updated." && exit 1; else echo "All RPMSpec's are updated." && exit 0; fi
+          if [ "$(git diff --exit-code scripts/auto_build/spec/)" ]; then echo "The RPMSpec's are not updated." && exit 1; else echo "All RPMSpec's are updated." && exit 0; fi
 
   UnitTest-MySQL:
     name: UnitTest:MySQL
