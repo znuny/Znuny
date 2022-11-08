@@ -86,6 +86,8 @@ my $BreakLineAfterChars = 60;
 sub PreRun {
     my ( $Self, %Param ) = @_;
 
+    return $Self->ExitCodeOk() if $Self->GetOption('module-directory');
+
     my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
 
     $Self->Print("<yellow>Check for symbolic links...</yellow>\n\n");
