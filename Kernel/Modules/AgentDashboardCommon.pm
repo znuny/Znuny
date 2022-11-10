@@ -486,30 +486,19 @@ sub Run {
 
     }
     elsif ( $Self->{Subaction} eq 'ToolbarFetch' ) {
-        my $JSONObject = $Kernel::OM->Get('Kernel::System::JSON');
-
-        my @ToolbarItems = ( $LayoutObject->Header() =~ m{<li class="(.*?)"\>}sg );
-        my %ToolbarItems;
-
-        TOOLBARITEM:
-        for my $ToolbarItem (@ToolbarItems) {
-            next TOOLBARITEM if $ToolbarItem eq 'UserAvatar';
-
-            ( my $ToolbarItemCSS ) = $LayoutObject->Header() =~ m{<li class="$ToolbarItem">(.*?)<\/li>}s;
-
-            $ToolbarItems{Icons}->{$ToolbarItem} = $ToolbarItemCSS;
+        my $ToolBarModule = $ConfigObject->Get('Frontend::ToolBarModule');
+        my $ToolbarItems;
+        if ( ref $ToolBarModule eq 'HASH' ) {
+            $ToolbarItems = $LayoutObject->ToolbarModules(
+                ToolBarModule => $ToolBarModule,
+                ReturnResult  => 1,
+            );
         }
-
-        $ToolbarItems{IconsOrder} = \@ToolbarItems;
-
-        my $JSONEncodedToolbarItems = $JSONObject->Encode(
-            Data => \%ToolbarItems,
-        );
 
         return $LayoutObject->Attachment(
             ContentType => 'text/html',
             Charset     => $LayoutObject->{UserCharset},
-            Content     => $JSONEncodedToolbarItems,
+            Content     => $ToolbarItems,
             Type        => 'inline',
             NoCache     => 1,
         );

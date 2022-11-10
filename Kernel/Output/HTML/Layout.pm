@@ -1401,97 +1401,9 @@ sub Header {
                 Data => \%Param,
             );
 
-            my %Modules;
-            my %Jobs = %{$ToolBarModule};
-
-            # get group object
-            my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
-
-            MODULE:
-            for my $Job ( sort keys %Jobs ) {
-
-                # load and run module
-                next MODULE if !$MainObject->Require( $Jobs{$Job}->{Module} );
-                my $Object = $Jobs{$Job}->{Module}->new(
-                    %{$Self},    # UserID etc.
-                );
-                next MODULE if !$Object;
-
-                my $ToolBarAccessOk;
-
-                # if group restriction for tool-bar is set, check user permission
-                if ( $Jobs{$Job}->{Group} ) {
-
-                    # remove white-spaces
-                    $Jobs{$Job}->{Group} =~ s{\s}{}xmsg;
-
-                    # get group configurations
-                    my @Items = split( ';', $Jobs{$Job}->{Group} );
-
-                    ITEM:
-                    for my $Item (@Items) {
-
-                        # split values into permission and group
-                        my ( $Permission, $GroupName ) = split( ':', $Item );
-
-                        # log an error if not valid setting
-                        if ( !$Permission || !$GroupName ) {
-                            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                                Priority => 'error',
-                                Message  => "Invalid config for ToolBarModule $Job - Key Group: '$Item'! "
-                                    . "Need something like 'Permission:Group;'",
-                            );
-                        }
-
-                        # get groups for current user
-                        my %Groups = $GroupObject->PermissionUserGet(
-                            UserID => $Self->{UserID},
-                            Type   => $Permission,
-                        );
-
-                        # next job if user have not groups
-                        next ITEM if !%Groups;
-
-                        # check user belongs to the correct group
-                        my %GroupsReverse = reverse %Groups;
-                        next ITEM if !$GroupsReverse{$GroupName};
-
-                        $ToolBarAccessOk = 1;
-
-                        last ITEM;
-                    }
-
-                    # go to the next module if not permissions
-                    # for the current one
-                    next MODULE if !$ToolBarAccessOk;
-                }
-
-                %Modules = ( $Object->Run( %Param, Config => $Jobs{$Job} ), %Modules );
-            }
-
-            # show tool bar items
-            MODULE:
-            for my $Key ( sort keys %Modules ) {
-                next MODULE if !%{ $Modules{$Key} };
-
-                # For ToolBarSearchFulltext module take into consideration SearchInArchive settings.
-                # See bug#13790 (https://bugs.otrs.org/show_bug.cgi?id=13790).
-                if ( $ConfigObject->Get('Ticket::ArchiveSystem') && $Modules{$Key}->{Block} eq 'ToolBarSearchFulltext' )
-                {
-                    $Modules{$Key}->{SearchInArchive}
-                        = $ConfigObject->Get('Ticket::Frontend::AgentTicketSearch')->{Defaults}->{SearchInArchive};
-                }
-
-                $Self->Block(
-                    Name => $Modules{$Key}->{Block},
-                    Data => {
-                        %{ $Modules{$Key} },
-                        AccessKeyReference => $Modules{$Key}->{AccessKey}
-                        ? " ($Modules{$Key}->{AccessKey})"
-                        : '',
-                    },
-                );
-            }
+            $Self->ToolbarModules(
+                ToolBarModule => $ToolBarModule,
+            );
 
             # Show links to last views, if enabled for tool bar.
             my $ToolBarLastViewsHTML = $Self->_BuildLastViewsOutput(
@@ -1588,6 +1500,120 @@ sub Header {
     $Self->_DisableBannerCheck( OutputRef => \$Output );
 
     return $Output;
+}
+
+sub ToolbarModules {
+    my ( $Self, %Param ) = @_;
+
+    my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    my %Modules;
+    my %Jobs = %{$Param{ToolBarModule}};
+    my $Result;
+
+    my %ToolbarModules;
+
+    # get group object
+    my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
+
+    MODULE:
+    for my $Job ( sort keys %Jobs ) {
+
+        # load and run module
+        next MODULE if !$MainObject->Require( $Jobs{$Job}->{Module} );
+        my $Object = $Jobs{$Job}->{Module}->new(
+            %{$Self},    # UserID etc.
+        );
+        next MODULE if !$Object;
+
+        my $ToolBarAccessOk;
+
+        # if group restriction for tool-bar is set, check user permission
+        if ( $Jobs{$Job}->{Group} ) {
+
+            # remove white-spaces
+            $Jobs{$Job}->{Group} =~ s{\s}{}xmsg;
+
+            # get group configurations
+            my @Items = split( ';', $Jobs{$Job}->{Group} );
+
+            ITEM:
+            for my $Item (@Items) {
+
+                # split values into permission and group
+                my ( $Permission, $GroupName ) = split( ':', $Item );
+
+                # log an error if not valid setting
+                if ( !$Permission || !$GroupName ) {
+                    $Kernel::OM->Get('Kernel::System::Log')->Log(
+                        Priority => 'error',
+                        Message  => "Invalid config for ToolBarModule $Job - Key Group: '$Item'! "
+                            . "Need something like 'Permission:Group;'",
+                    );
+                }
+
+                # get groups for current user
+                my %Groups = $GroupObject->PermissionUserGet(
+                    UserID => $Self->{UserID},
+                    Type   => $Permission,
+                );
+
+                # next job if user have not groups
+                next ITEM if !%Groups;
+
+                # check user belongs to the correct group
+                my %GroupsReverse = reverse %Groups;
+                next ITEM if !$GroupsReverse{$GroupName};
+
+                $ToolBarAccessOk = 1;
+
+                last ITEM;
+            }
+
+            # go to the next module if not permissions
+            # for the current one
+            next MODULE if !$ToolBarAccessOk;
+        }
+
+        %Modules = ( $Object->Run( %Param, Config => $Jobs{$Job} ), %Modules );
+    }
+
+    # show tool bar items
+    MODULE:
+    for my $Key ( sort keys %Modules ) {
+        next MODULE if !%{ $Modules{$Key} };
+
+        # For ToolBarSearchFulltext module take into consideration SearchInArchive settings.
+        # See bug#13790 (https://bugs.otrs.org/show_bug.cgi?id=13790).
+        if ( $ConfigObject->Get('Ticket::ArchiveSystem') && $Modules{$Key}->{Block} eq 'ToolBarSearchFulltext' )
+        {
+            $Modules{$Key}->{SearchInArchive}
+                = $ConfigObject->Get('Ticket::Frontend::AgentTicketSearch')->{Defaults}->{SearchInArchive};
+        }
+
+        $Self->Block(
+            Name => $Modules{$Key}->{Block},
+            Data => {
+                %{ $Modules{$Key} },
+                AccessKeyReference => $Modules{$Key}->{AccessKey}
+                ? " ($Modules{$Key}->{AccessKey})"
+                : '',
+                IdentKey => $Key,
+            },
+        );
+
+        if ( $Param{ReturnResult} ) {
+            $Result .= $Self->Output(
+                TemplateFile => "HeaderToolbar",
+                Data         => \%Param
+            );
+        }
+    }
+
+    if ( $Param{ReturnResult} ) {
+        return $Result;
+    }
 }
 
 sub Footer {
