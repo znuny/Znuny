@@ -67,7 +67,7 @@ Core.Agent.Header = (function (TargetNS) {
         var ToolbarRefreshTime = Core.Config.Get('RefreshTimeToolbar'),
             RefreshTime = Core.Config.Get('Refresh');
 
-        if ( RefreshTime || !ToolbarRefreshTime) {
+        if (RefreshTime || !ToolbarRefreshTime) {
             return;
         }
 
