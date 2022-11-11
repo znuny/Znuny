@@ -1011,9 +1011,9 @@ sub _MessageIDCreate {
     my ( $Self, %Param ) = @_;
 
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-    my $ExtFQDN = $ConfigObject->Get('ExtFQDN') || $ConfigObject->Get('FQDN');
+    my $ExternalFQDN = $ConfigObject->Get('ExternalFQDN') || $ConfigObject->Get('FQDN');
 
-    return '<' . time() . '.' . rand(999999) . '@' . $ExtFQDN . '>';
+    return '<' . time() . '.' . rand(999999) . '@' . $ExternalFQDN . '>';
 }
 
 sub _CreateMimeEntity {

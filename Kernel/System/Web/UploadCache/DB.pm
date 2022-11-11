@@ -98,9 +98,9 @@ sub FormIDAddFile {
 
         my $Random = rand 999999;
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-        my $ExtFQDN = $ConfigObject->Get('ExtFQDN') || $ConfigObject->Get('FQDN');
+        my $ExternalFQDN = $ConfigObject->Get('ExternalFQDN') || $ConfigObject->Get('FQDN');
 
-        $ContentID = "$Disposition$Random.$Param{FormID}\@$ExtFQDN";
+        $ContentID = "$Disposition$Random.$Param{FormID}\@$ExternalFQDN";
     }
 
     # write attachment to db
