@@ -260,6 +260,21 @@ sub DisplayValueRender {
     return $Self->SUPER::DisplayValueRender(%Param);
 }
 
+sub ValueLookup {
+    my ( $Self, %Param ) = @_;
+
+    my $DynamicFieldWebserviceObject = $Kernel::OM->Get('Kernel::System::DynamicField::Webservice');
+
+    return $Param{Key} if !IsStringWithData( $Param{Key} );
+
+    my $Value = $DynamicFieldWebserviceObject->DisplayValueGet(
+        DynamicFieldConfig => $Param{DynamicFieldConfig},
+        Value              => $Param{Key},
+    );
+
+    return $Value;
+}
+
 sub SearchFieldRender {
     my ( $Self, %Param ) = @_;
 
