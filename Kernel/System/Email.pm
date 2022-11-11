@@ -8,7 +8,7 @@
 # --
 
 package Kernel::System::Email;
-## nofilter(TidyAll::Plugin::OTRS::Perl::Require)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Require)
 
 use strict;
 use warnings;

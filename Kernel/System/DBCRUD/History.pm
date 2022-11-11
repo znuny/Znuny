@@ -7,9 +7,7 @@
 # --
 
 # because of direct open() calls
-## nofilter(TidyAll::Plugin::OTRS::Perl::PerlCritic)
-
-## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::SpellCheck)
+## nofilter(TidyAll::Plugin::Znuny::Perl::PerlCritic)
 
 package Kernel::System::DBCRUD::History;
 

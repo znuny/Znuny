@@ -8,8 +8,8 @@
 # --
 
 package Kernel::System::Main;
-## nofilter(TidyAll::Plugin::OTRS::Perl::Dumper)
-## nofilter(TidyAll::Plugin::OTRS::Perl::Require)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Dumper)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Require)
 
 use strict;
 use warnings;

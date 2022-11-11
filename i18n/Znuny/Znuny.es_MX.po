@@ -13128,7 +13128,7 @@ msgstr ""
 msgid "Can't connect to %s!"
 msgstr ""
 
-#. Perl Module: Kernel/Output/HTML/Dashboard/TicketGeneric.pm
+#. Perl Module: Kernel/Output/HTML/Dashboard/MyLastChangedTickets.pm
 msgid "Shown Tickets"
 msgstr "Tickets Mostrados"
 
@@ -16169,7 +16169,7 @@ msgstr ""
 "\n"
 "Estimado Cliente,\n"
 "\n"
-"Desafortunadamente no hemos podido detectar un número de ticket válido en su consulta, \n"
+"Desafortunadamente no hemos podido detectar un número de ticket válido en su consulta,\n"
 "por lo que este email no puede ser procesado.\n"
 "\n"
 "Por favor creé un nuevo ticket a través del panel de cliente.\n"
@@ -25384,5 +25384,21 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines extra content that is allowed for use in the rich text editor."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
+msgid "No tickets found."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "MyLastChangedTickets dashboard widget."
+msgstr ""
+
+#. SysConfig
+msgid "My last changed tickets"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
+msgid "Access token scope"
 msgstr ""
 

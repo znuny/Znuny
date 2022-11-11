@@ -14,7 +14,7 @@ use warnings;
 
 use parent qw(Kernel::System::Console::BaseCommand);
 
-## nofilter(TidyAll::Plugin::OTRS::Perl::ObjectManagerCreation)
+## nofilter(TidyAll::Plugin::Znuny::Perl::ObjectManagerCreation)
 
 our @ObjectDependencies = (
     'Kernel::Config',

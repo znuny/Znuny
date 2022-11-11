@@ -68,7 +68,6 @@ sub Dispatch {
     $CommonObject{TicketObject}          = $Kernel::OM->Get('Kernel::System::Ticket');
 
     # We want to keep providing the TimeObject as legacy API for now.
-    ## nofilter(TidyAll::Plugin::OTRS::Migrations::OTRS6::TimeObject)
     $CommonObject{TimeObject} = $Kernel::OM->Get('Kernel::System::Time');
     $CommonObject{UserObject} = $Kernel::OM->Get('Kernel::System::User');
 

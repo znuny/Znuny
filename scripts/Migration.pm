@@ -6,7 +6,7 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::NamePod)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Pod::NamePod)
 
 package scripts::Migration;    ## no critic
 
@@ -238,6 +238,10 @@ sub _TasksGet {
         {
             Message => 'Migrate SysConfig settings',
             Module  => 'scripts::Migration::Znuny::MigrateSysConfigSettings',
+        },
+        {
+            Message => "Add dynamic fields 'TicketCalendarStartTime' and 'TicketCalendarEndTime'.",
+            Module  => 'scripts::Migration::Znuny::AddTicketCalendarDynamicFields',
         },
 
         # NOTE: UninstallMergedPackages has to be called only after
