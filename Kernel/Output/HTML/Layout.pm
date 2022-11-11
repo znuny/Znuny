@@ -1510,9 +1510,6 @@ sub ToolbarModules {
 
     my %Modules;
     my %Jobs = %{$Param{ToolBarModule}};
-    my $Result;
-
-    my %ToolbarModules;
 
     # get group object
     my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
@@ -1599,20 +1596,14 @@ sub ToolbarModules {
                 AccessKeyReference => $Modules{$Key}->{AccessKey}
                 ? " ($Modules{$Key}->{AccessKey})"
                 : '',
-                IdentKey => $Key,
             },
         );
-
-        if ( $Param{ReturnResult} ) {
-            $Result .= $Self->Output(
-                TemplateFile => "HeaderToolbar",
-                Data         => \%Param
-            );
-        }
     }
 
     if ( $Param{ReturnResult} ) {
-        return $Result;
+        return $Self->Output(
+            TemplateFile => "HeaderToolbar",
+        );
     }
 }
 
