@@ -56,14 +56,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-07-01 07:05+0000\n"
-"PO-Revision-Date: 2018-09-20 13:03+0000\n"
-"Last-Translator: possebon <possebon@gmail.com>, 2020\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/otrs/teams/23435/pt_BR/)\n"
+"PO-Revision-Date: 2022-11-12 19:24+0000\n"
+"Last-Translator: José <jjunior@serviceup.com.br>\n"
+"Language-Team: Portuguese (Brazil) <https://translations.znuny.org/projects/"
+"znuny/znuny/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "ACL Management"
@@ -13812,6 +13814,10 @@ msgstr "<p>Se você continuar a instalar este pacote, as seguintes questões pod
 #. Perl Module: Kernel/System/Package.pm
 msgid "<p>The installation of packages which are not verified by the OTRS Group is not possible by default. You can activate the installation of not verified packages via the \"AllowNotVerifiedPackages\" system configuration setting.</p>"
 msgstr ""
+"<p>A instalação de pacotes que não são verificados pela OTRS Group não é "
+"possível por padrão. Você pode ativar a instalação de pacotes não "
+"verificados por meio da configuração do sistema \"AllowNotVerifiedPackages\""
+".</p>"
 
 #. Perl Module: Kernel/System/ProcessManagement/DB/Process.pm
 msgid "The process \"%s\" and all of its data has been imported successfully."
@@ -16233,7 +16239,7 @@ msgstr " 7 minutos"
 
 #. SysConfig
 msgid "\"Slim\" skin which tries to save screen space for power users."
-msgstr ""
+msgstr "Skin \"Slim\" tenta economizar espaço na tela para usuários avançados"
 
 #. SysConfig
 msgid "%s"
@@ -24133,6 +24139,7 @@ msgstr ""
 #. Perl Module: Kernel/Modules/AdminSystemFiles.pm
 msgid "(Files where only the permissions have been changed will not be displayed.)"
 msgstr ""
+"(Os arquivos onde apenas as permissões foram alteradas não serão exibidos.)"
 
 #. Perl Module: Kernel/Output/HTML/Layout.pm
 msgid "Last Views"
@@ -25041,6 +25048,12 @@ msgstr ""
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Enables support for huge XML data in load_xml calls of CPAN library XML::LibXML. This should only be enabled if absolutely needed. Disabling this option (default) protects against denial of service through entity expansion attacks. Before enabling this option ensure that alternative measures to protect the application against this type of attack have been taken."
 msgstr ""
+"Ativa suporte para dados XML enormes em chamadas load_xml da biblioteca CPAN "
+"XML::LibXML. Isso só deve ser ativado se for absolutamente necessário. "
+"Desabilitar esta opção (padrão) protege contra negação de serviço por meio "
+"de ataques de expansão de entidade. Antes de ativar esta opção, certifique-"
+"se de que foram tomadas medidas alternativas para proteger o aplicativo "
+"contra esse tipo de ataque."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
 msgid "Also show global %s"
@@ -25089,6 +25102,8 @@ msgstr ""
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "ATTENTION: Key file and/or password (if needed, see below) seem to be invalid."
 msgstr ""
+"ATENÇÃO: Arquivo de chave e/ou senha (se necessário, veja abaixo) parecem "
+"inválidos."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Path to private key file (PEM or DER). The key will be used to sign the JWT."
@@ -25108,11 +25123,11 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "ATTENTION: Certificate file could not be parsed."
-msgstr ""
+msgstr "ATENÇÃO: Não foi possível analisar o arquivo de certificado."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "ATTENTION: Certificate is expired."
-msgstr ""
+msgstr "ATENÇÃO: Certificado expirado."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Path to X.509 certificate file (PEM). Data of the certificate can be used for the payload and/or header data of the JWT."
@@ -25224,7 +25239,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/Mentions.pm
 msgid "%s users will be mentioned"
-msgstr ""
+msgstr "%s usuários serão mencionados"
 
 #. Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
 msgid "Total mentions"
@@ -25428,7 +25443,7 @@ msgstr ""
 
 #. Perl Module: Kernel/System/CalendarEvents.pm
 msgid "of year"
-msgstr ""
+msgstr "do ano"
 
 #. Perl Module: Kernel/System/CalendarEvents.pm
 msgid "of month"
@@ -25469,4 +25484,3 @@ msgstr ""
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
 msgid "Access token scope"
 msgstr ""
-
