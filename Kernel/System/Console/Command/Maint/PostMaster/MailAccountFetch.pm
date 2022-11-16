@@ -8,6 +8,7 @@
 # --
 
 ## nofilter(TidyAll::Plugin::OTRS::Perl::NoExitInConsoleCommands)
+## nofilter(TidyAll::Plugin::Znuny::CodeStyle::STDERRCheck)
 
 package Kernel::System::Console::Command::Maint::PostMaster::MailAccountFetch;
 

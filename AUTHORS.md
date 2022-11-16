@@ -45,6 +45,7 @@ The following persons contributed to OTRS:
 * Kai Herlemann <43746520+KaiHerlemann@users.noreply.github.com>
 * Kamil Furtek <kfurtek@dev.opgksoftware.com>
 * Keith Moore <tenareth@gmail.com>
+* Konrad Gumienny <kgumienny@dev.opgksoftware.com>
 * Luca Maranzano <liuk@linux.it>
 * Lukas Bröring SectorNord AG <91135132+LuBroering@users.noreply.github.com>
 * Manuel Hecht <manuel.hecht@otrs.com>

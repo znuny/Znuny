@@ -9,6 +9,7 @@
 
 package Kernel::System::XML;
 ## nofilter(TidyAll::Plugin::OTRS::Perl::Require)
+## nofilter(TidyAll::Plugin::Znuny::CodeStyle::STDERRCheck)
 
 use strict;
 use warnings;

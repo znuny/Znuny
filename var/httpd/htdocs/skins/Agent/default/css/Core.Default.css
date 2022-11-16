@@ -1165,7 +1165,7 @@ td.Highlight a.ui-state-default {
 }
 
 .ui-overlay-autocomplete {
-    z-index: 6100 !important;
+    z-index: 6103 !important;
 }
 
 .ui-autocomplete .ui-menu-item-wrapper.ui-state-active {

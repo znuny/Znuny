@@ -10,6 +10,7 @@
 package Kernel::System::DateTime;
 ## nofilter(TidyAll::Plugin::OTRS::Perl::Time)
 ## nofilter(TidyAll::Plugin::OTRS::Perl::Translatable)
+## nofilter(TidyAll::Plugin::Znuny::Perl::IsIntegerVariableCheck)
 
 use strict;
 use warnings;

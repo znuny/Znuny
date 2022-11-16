@@ -12,6 +12,7 @@ package Kernel::System::Log;
 ## nofilter(TidyAll::Plugin::OTRS::Perl::Time)
 ## nofilter(TidyAll::Plugin::OTRS::Perl::Dumper)
 ## nofilter(TidyAll::Plugin::OTRS::Perl::Require)
+## nofilter(TidyAll::Plugin::Znuny::CodeStyle::STDERRCheck)
 
 use strict;
 use warnings;

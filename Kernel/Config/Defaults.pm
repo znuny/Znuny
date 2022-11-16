@@ -11,6 +11,7 @@
 #   update, please use AdminSystemConfiguration to configure your system.
 
 ## nofilter(TidyAll::Plugin::OTRS::Perl::LayoutObject)
+## nofilter(TidyAll::Plugin::Znuny::CodeStyle::STDERRCheck)
 
 package Kernel::Config::Defaults;
 

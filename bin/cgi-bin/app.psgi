@@ -34,6 +34,7 @@ use lib "$Bin/../../Kernel/cpan-lib";
 use lib "$Bin/../../Custom";
 
 ## nofilter(TidyAll::Plugin::OTRS::Perl::SyntaxCheck)
+## nofilter(TidyAll::Plugin::Znuny::CodeStyle::STDERRCheck)
 
 use CGI;
 use CGI::Emulate::PSGI;
