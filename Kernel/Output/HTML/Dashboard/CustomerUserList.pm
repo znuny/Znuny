@@ -13,6 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::Language qw(Translatable);
+use parent qw(Kernel::Output::HTML::Dashboard::Base);
 
 our $ObjectManagerDisabled = 1;
 
@@ -83,6 +84,88 @@ sub Config {
     );
 }
 
+=head2 Header()
+
+Returns additional header content of dashboard (HTML).
+
+    my $Header = $Object->Header();
+
+Returns:
+
+    my $Header = 1;
+
+=cut
+
+sub Header {
+    my ( $Self, %Param ) = @_;
+
+    my $LayoutObject       = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+
+    $LayoutObject->Block(
+        Name => 'HeaderCustomerUserList',
+        Data => {
+            %Param,
+        },
+    );
+
+    # show change customer relations button if the agent has permission
+    my $ChangeCustomerReleationsAccess = $LayoutObject->Permission(
+        Action => 'AdminCustomerUserCustomer',
+        Type   => 'rw',
+    );
+
+    if ($ChangeCustomerReleationsAccess) {
+        $LayoutObject->Block(
+            Name => 'ContentLargeCustomerIDAdd',
+            Data => {
+                CustomerID => $Param{CustomerID},
+            },
+        );
+    }
+
+    # Show add new customer button if:
+    #   - The agent has permission to use the module
+    #   - There are writable customer backends
+    my $AddAccess;
+
+    TYPE:
+    for my $Permission (qw(ro rw)) {
+        $AddAccess = $LayoutObject->Permission(
+            Action => 'AdminCustomerUser',
+            Type   => $Permission,
+        );
+        last TYPE if $AddAccess;
+    }
+
+    # Get writable data sources.
+    my %CustomerSource = $CustomerUserObject->CustomerSourceList(
+        ReadOnly => 0,
+    );
+
+    if ( $AddAccess && scalar keys %CustomerSource ) {
+        $LayoutObject->Block(
+            Name => 'ContentLargeCustomerUserAdd',
+            Data => {
+                CustomerID => $Self->{CustomerID},
+            },
+        );
+
+        $Self->{EditCustomerPermission} = 1;
+    }
+
+    my $Header = $LayoutObject->Output(
+        TemplateFile => 'AgentDashboardCustomerUserList',
+        Data         => {
+            %{ $Self->{Config} },
+            Name => $Self->{Name},
+        },
+        AJAX => $Param{AJAX},
+    );
+
+    return $Header;
+}
+
 sub Run {
     my ( $Self, %Param ) = @_;
 
@@ -110,6 +193,13 @@ sub Run {
 
     # get layout object
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    $LayoutObject->Block(
+        Name => 'ContentCustomerUserList',
+        Data => {
+            %Param,
+        },
+    );
 
     my $LinkPage = 'Subaction=Element;Name='
         . $Self->{Name} . ';'
@@ -165,51 +255,6 @@ sub Run {
                 Name => 'OverviewResultSwitchToCustomer',
             );
         }
-    }
-
-    # show change customer relations button if the agent has permission
-    my $ChangeCustomerReleationsAccess = $LayoutObject->Permission(
-        Action => 'AdminCustomerUserCustomer',
-        Type   => 'rw',
-    );
-
-    if ($ChangeCustomerReleationsAccess) {
-        $LayoutObject->Block(
-            Name => 'ContentLargeCustomerIDAdd',
-            Data => {
-                CustomerID => $Param{CustomerID},
-            },
-        );
-    }
-
-    # Show add new customer button if:
-    #   - The agent has permission to use the module
-    #   - There are writable customer backends
-    my $AddAccess;
-
-    TYPE:
-    for my $Permission (qw(ro rw)) {
-        $AddAccess = $LayoutObject->Permission(
-            Action => 'AdminCustomerUser',
-            Type   => $Permission,
-        );
-        last TYPE if $AddAccess;
-    }
-
-    # Get writable data sources.
-    my %CustomerSource = $CustomerUserObject->CustomerSourceList(
-        ReadOnly => 0,
-    );
-
-    if ( $AddAccess && scalar keys %CustomerSource ) {
-        $LayoutObject->Block(
-            Name => 'ContentLargeCustomerUserAdd',
-            Data => {
-                CustomerID => $Self->{CustomerID},
-            },
-        );
-
-        $Self->{EditCustomerPermission} = 1;
     }
 
     # get the permission for the phone ticket creation
