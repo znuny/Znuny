@@ -1,6 +1,7 @@
 # 6.4.4 2022-??-??
  - 2022-11-10 Fixed overlapping input list in search dialog.
  - 2022-11-09 Fixed displayed value for dynamic field type WebserviceText when template placeholder <OTRS_TICKET_DynamicField_*_Value> is being used. [#297](https://github.com/znuny/Znuny/issues/297)
+ - 2022-11-02 Added missing migration for generic interface mapping module Znuny4OTRSAdvanced.
  - 2022-10-28 Sector Nord AG: Processmanagement AppointmentCreate - removed unnecessary filter on read permission for CalendarName. Thanks to Sector Nord AG (@LuBroering - Lukas Bröring). [PR#302](https://github.com/znuny/Znuny/pull/302)
  - 2022-10-27 Fixed "Invalid date/time string" errors in otrs.Daemon.pl. Thanks to Paweł Bogusławski (@pboguslawski). [PR#311](https://github.com/znuny/Znuny/pull/311)
  - 2022-10-26 Fixed sorting of SysConfig entity value types.

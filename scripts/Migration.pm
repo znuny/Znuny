@@ -7,6 +7,7 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 ## nofilter(TidyAll::Plugin::Znuny::Perl::Pod::NamePod)
+## nofilter(TidyAll::Plugin::Znuny::Perl::ObjectManagerDirectCall)
 
 package scripts::Migration;    ## no critic
 
@@ -230,7 +231,6 @@ sub _TasksGet {
             Message => 'Upgrade database structure',
             Module  => 'scripts::Migration::Znuny::UpgradeDatabaseStructure',
         },
-
         {
             Message => 'Rebuild configuration',
             Module  => 'scripts::Migration::Base::RebuildConfig',
@@ -246,6 +246,10 @@ sub _TasksGet {
         {
             Message => "Add dynamic fields 'TicketCalendarStartTime' and 'TicketCalendarEndTime'.",
             Module  => 'scripts::Migration::Znuny::AddTicketCalendarDynamicFields',
+        },
+        {
+            Message => 'Migrate web service configuration',
+            Module  => 'scripts::Migration::Znuny::MigrateWebserviceConfiguration',
         },
 
         # NOTE: UninstallMergedPackages has to be called only after
