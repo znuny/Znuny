@@ -1,4 +1,4 @@
-# 6.4.4 2022-??-??
+# 6.4.4 2022-11-23
  - 2022-11-10 Fixed overlapping input list in search dialog.
  - 2022-11-09 Fixed displayed value for dynamic field type WebserviceText when template placeholder <OTRS_TICKET_DynamicField_*_Value> is being used. [#297](https://github.com/znuny/Znuny/issues/297)
  - 2022-11-02 Added missing migration for generic interface mapping module Znuny4OTRSAdvanced.
@@ -251,6 +251,14 @@
  - 2021-06-15 Improvements for Dev::Code::CPANUpdate (#38). Thanks to Renée Bäcker (@reneeb). [#38](https://github.com/znuny/Znuny/pull/38)
  - 2021-06-15 Use ticket title as the default appointment title (#90). Thanks to Renée Bäcker (@reneeb). [#90](https://github.com/znuny/Znuny/pull/90)
  - 2021-06-15 Column list validation before saving agent preferences (#84). Thanks to Paweł Bogusławski (@pboguslawski). [#84](https://github.com/znuny/Znuny/pull/84)
+
+# 6.0.47 2022-11-23
+ - 2022-11-10 Fixed overlapping input list in search dialog.
+ - 2022-10-27 Fixed "Invalid date/time string" errors in otrs.Daemon.pl. Thanks to Paweł Bogusławski (@pboguslawski). [PR#311](https://github.com/znuny/Znuny/pull/311)
+ - 2022-10-21 Agent error screen now shows navigation bar if possible.
+ - 2022-10-13 Fixed SQL condition in Kernel::System::CustomerUser::DB::CustomerSearch.
+ - 2022-09-29 Fixed bug - hour 0 is not possible in the default settings for TimeWorkingHours. Thanks to Sector Nord AG (@LuBroering - Lukas Bröring). [PR#296](https://github.com/znuny/Znuny/pull/296)
+ - 2022-09-26 Added missing HTML filter to AgentTicketActionCommon template.
 
 # 6.0.46 2022-09-21
  - 2022-09-07 Fixed log flooding via Net::LDAP. Reduction of LDAP_SIZELIMIT_EXCEEDED messages. Thanks to Paweł Bogusławski (@pboguslawski). [PR#178](https://github.com/znuny/Znuny/pull/178)
