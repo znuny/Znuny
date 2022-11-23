@@ -19,6 +19,7 @@
  - 2022-09-27 Fixed TransitionValidation CheckValueGet() - Added already replaced value 'FieldValue'.
  - 2022-09-27 Added FilterViews for FilterAppointments function.
  - 2022-09-27 Changed way of ticket acl checking for AgentTicketActionCommon from name to login.
+ - 2022-09-26 Added missing HTML filter to AgentTicketZoom/MentionsTable template.
  - 2022-09-26 Fixed Bug in SupportDataCollector plugin for default user.
  - 2022-09-26 Added missing HTML filter to AgentTicketActionCommon template.
  - 2022-09-22 Prepared support for ICS calendar events attachments/string data. Prepared information section and modal dialog for calendar events to AgentTicketZoom view. Both not activated yet due to issues with WET/WEST timezone.
