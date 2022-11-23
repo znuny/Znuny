@@ -39,10 +39,10 @@ my @Tests = (
         RepositoryList => [],
         ExpectedResult => {
             'Freebie Features' => {
-                'URL' => 'https://download.znuny.org/releases/packages/',
+                'URL' => 'https://download.znuny.org/releases/packages',
             },
             'Znuny Open Source Add-ons' => {
-                'URL' => 'https://addons.znuny.com/api/addon_repos/public/',
+                'URL' => 'https://addons.znuny.com/api/addon_repos/public',
             },
         },
     },
@@ -62,10 +62,10 @@ my @Tests = (
         ],
         ExpectedResult => {
             'Freebie Features' => {
-                'URL' => 'https://download.znuny.org/releases/packages/',
+                'URL' => 'https://download.znuny.org/releases/packages',
             },
             'Znuny Open Source Add-ons' => {
-                'URL' => 'https://addons.znuny.com/api/addon_repos/public/',
+                'URL' => 'https://addons.znuny.com/api/addon_repos/public',
             },
             'Test repository' => {
                 URL             => 'https://download.znuny.org',
