@@ -268,7 +268,6 @@ sub Run {
                     );
                 }
 
-
                 return $LayoutObject->Redirect(
                     OP => "Action=AdminQueueTemplates&Subaction=Template&ID=$StandardTemplateID",
                 );

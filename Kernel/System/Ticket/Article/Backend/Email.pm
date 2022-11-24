@@ -610,7 +610,7 @@ sub SendAutoResponse {
             );
 
             my @ValidIDs = $Kernel::OM->Get('Kernel::System::Valid')->ValidIDsGet();
-            my $ValidID = shift @ValidIDs;
+            my $ValidID  = shift @ValidIDs;
 
             if ( %SystemAddress && $SystemAddress{ValidID} == $ValidID ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
