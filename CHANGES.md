@@ -1,3 +1,6 @@
+# 6.5.1 2023-??-??
+ - 2022-09-16 Auto responses now will not be sent if the recipient would be a system address.
+
 # 6.4.4 2022-11-23
  - 2022-11-10 Fixed overlapping input list in search dialog.
  - 2022-11-09 Fixed displayed value for dynamic field type WebserviceText when template placeholder <OTRS_TICKET_DynamicField_*_Value> is being used. [#297](https://github.com/znuny/Znuny/issues/297)
