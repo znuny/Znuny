@@ -643,13 +643,17 @@ sub WritePerlLanguageFile {
         # needed for cvs check-in filter
         my $Separator = "# --";
 
+        my ( $Sec, $Min, $Hour, $Day, $Month, $Year ) = localtime( time() );
+        $Year += 1900;
+        my $CopyrightYear = "2012-$Year";
+
         $NewOut = <<"EOF";
 $Separator
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) $CopyrightYear Znuny GmbH, https://znuny.com/
 $Separator
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
-# the enclosed file COPYING for license information (GPL). If you
-# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 $Separator
 
 package Kernel::Language::$Param{Language}_$Param{Module};
