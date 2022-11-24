@@ -65,6 +65,22 @@
             </div>
         </div>
 [% RenderBlockEnd("Filter") %]
+        <div class='WidgetSimple'>
+            <div class='Header'>
+                <h2>[% Translate('Related Actions') | html %]</h2>
+            </div>
+            <div class='Content'>
+                <ul class='ActionList SpacingTop'>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminProcessManagement' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Process Management') | html %]
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <div class="ContentColumn">

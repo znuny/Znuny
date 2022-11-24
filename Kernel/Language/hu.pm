@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.930648042878025;
+    $Self->{Completeness}        = 0.928965293545248;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -261,6 +261,9 @@ sub Data {
         'Edit Attachment' => 'Melléklet szerkesztése',
         'Filter for Attachments' => 'Szűrő a mellékletekhez',
         'Filter for attachments' => 'Szűrő a mellékletekhez',
+        'Related Actions' => '',
+        'Templates' => 'Sablonok',
+        'Templates ↔ Attachments' => 'Sablonok ↔ Mellékletek',
         'Filename' => 'Fájlnév',
         'Download file' => 'Fájl letöltése',
         'Delete this attachment' => 'Melléklet törlése',
@@ -273,6 +276,7 @@ sub Data {
         'Edit Auto Response' => 'Automatikus válasz szerkesztése',
         'Filter for Auto Responses' => 'Szűrő az automatikus válaszokhoz',
         'Filter for auto responses' => 'Szűrő az automatikus válaszokhoz',
+        'Queues ↔ Auto Responses' => 'Várólisták ↔ Automatikus válaszok',
         'Response' => 'Válasz',
         'Auto response from' => 'Automatikus válasz feladója',
         'Reference' => 'Hivatkozás',
@@ -398,6 +402,8 @@ sub Data {
         'Search' => 'Keresés',
         'Wildcards like \'*\' are allowed.' => 'Helyettesítő karakterek (például „*”) engedélyezettek.',
         'Select' => 'Kiválasztás',
+        'Customer Users' => 'Ügyfél-felhasználók',
+        'Customers ↔ Groups' => 'Ügyfelek ↔ Csoportok',
         'List (only %s shown - more available)' => 'Lista (csak %s látható – több érhető el)',
         'total' => 'összesen',
         'Please enter a search term to look for customers.' => 'Adjon meg egy keresési kifejezést az ügyfelek kereséséhez.',
@@ -420,9 +426,9 @@ sub Data {
         'Select the customer:group permissions.' => 'Az ügyfél:csoport jogosultságok kiválasztása.',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Ha semmi sincs kiválasztva, akkor ebben a csoportban nincsenek jogosultságok (a jegyek nem lesznek elérhetők az ügyfeleknek).',
-        'Search Results' => 'Keresési eredmények',
         'Customers' => 'Ügyfelek',
         'Groups' => 'Csoportok',
+        'Search Results' => 'Keresési eredmények',
         'Change Group Relations for Customer' => 'Csoportkapcsolatok megváltoztatása egy ügyfélnél',
         'Change Customer Relations for Group' => 'Ügyfélkapcsolatok megváltoztatása egy csoportnál',
         'Toggle %s Permission for all' => 'A(z) %s jogosultság ki- vagy bekapcsolása mindenkinek',
@@ -442,6 +448,9 @@ sub Data {
         'Back to search results' => 'Vissza a keresési eredményekhez',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Az ügyfél-felhasználó az ügyfél-előzményekhez és az ügyfélpanelen keresztüli bejelentkezéshez szükséges.',
+        'Customer Users ↔ Customers' => 'Ügyfél-felhasználók ↔ Ügyfelek',
+        'Customer Users ↔ Groups' => 'Ügyfél-felhasználók ↔ Csoportok',
+        'Customer Users ↔ Services' => 'Ügyfél-felhasználók ↔ Szolgáltatások',
         'List (%s total)' => 'Lista (összesen %s)',
         'Username' => 'Felhasználónév',
         'Email' => 'E-mail',
@@ -473,7 +482,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
         'Manage Customer User-Customer Relations' => 'Ügyfél-felhasználó–Ügyfél kapcsolatok kezelése',
         'Select the customer user:customer relations.' => 'Az ügyfél-felhasználó:ügyfél kapcsolatok kiválasztása.',
-        'Customer Users' => 'Ügyfél-felhasználók',
         'Change Customer Relations for Customer User' => 'Ügyfélkapcsolatok megváltoztatása egy ügyfél-felhasználónál',
         'Change Customer User Relations for Customer' => 'Ügyfél-felhasználó kapcsolatok megváltoztatása egy ügyfélnél',
         'Toggle active state for all' => 'Aktivált állapot ki- és bekapcsolása mindenkinek',
@@ -501,6 +509,7 @@ sub Data {
         'Filter for Services' => 'Szűrő a szolgáltatásokhoz',
         'Filter for services' => 'Szűrő a szolgáltatásokhoz',
         'Services' => 'Szolgáltatások',
+        'Service Level Agreements' => 'Szolgáltatási megállapodások',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
         'Dynamic Fields Management' => 'Dinamikus mezők kezelése',
@@ -515,6 +524,7 @@ sub Data {
         'Overwrite existing configurations' => '',
         'Import configurations' => '',
         'Export configurations' => '',
+        'Process Management' => 'Folyamatkezelés',
         'Dynamic fields ↔ Screens' => '',
         'Dynamic Fields List' => 'Dinamikus mezők listája',
         'Dynamic fields per page' => 'Oldalankénti dinamikus mezők',
@@ -1363,6 +1373,8 @@ sub Data {
         'Create new groups to handle access permissions for different groups of agent (e. g. purchasing department, support department, sales department, ...). ' =>
             'Új csoportok létrehozása a hozzáférési jogosultságok kezeléséhez az ügyintézők különböző csoportjainál (például beszerzési részleg, támogató részleg, értékesítési részleg, …). ',
         'It\'s useful for ASP solutions. ' => 'Ez ASP megoldásoknál hasznos. ',
+        'Agents ↔ Groups' => 'Ügyintézők ↔ Csoportok',
+        'Roles ↔ Groups' => 'Szerepek ↔ Csoportok',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'System Log' => 'Rendszernapló',
@@ -1734,12 +1746,12 @@ sub Data {
         'Edit Priority' => 'Prioritás szerkesztése',
         'Filter for Priorities' => 'Szűrő a prioritásokhoz',
         'Filter for priorities' => 'Szűrő a prioritásokhoz',
+        'Configure Priority Visibility and Defaults' => '',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             'Ez a prioritás megtalálható egy rendszerbállításban, az új prioritásra mutató beállítások frissítésének megerősítése szükséges!',
         'This priority is used in the following config settings:' => 'Ez a prioritás a következő konfigurációs beállításokban van használva:',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-        'Process Management' => 'Folyamatkezelés',
         'Filter for Processes' => 'Szűrő a folyamatokhoz',
         'Filter for processes' => 'Szűrő a folyamatokhoz',
         'Create New Process' => 'Új folyamat létrehozása',
@@ -1756,6 +1768,9 @@ sub Data {
             'Egy új folyamat létrehozásához importálhat egy másik rendszerből exportált folyamatot, vagy létrehozhat egy teljesen újat.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'A folyamatokon itt elvégzett módosítás csak akkor lesz hatással a rendszer viselkedésére, ha szinkronizálja a folyamatadatokat. A folyamatok szinkronizálásával az újonnan elvégzett módosítások be lesznek írva a beállításokba.',
+        'Access Control Lists (ACL)' => 'Hozzáférés-vezérlési listák (ACL)',
+        'Generic Agent' => '',
+        'Manage Process Widiget Groups' => '',
         'Processes' => 'Folyamatok',
         'Process name' => 'Folyamat neve',
         'Print' => 'Nyomtatás',
@@ -1910,6 +1925,13 @@ sub Data {
         'Edit Queue' => 'Várólista szerkesztése',
         'Filter for Queues' => 'Szűrő a várólistákhoz',
         'Filter for queues' => 'Szűrő a várólistákhoz',
+        'Email Addresses' => 'E-mail címek',
+        'PostMaster Mail Accounts' => 'Levelezési levélfiókok',
+        'Salutations' => 'Megszólítások',
+        'Signatures' => 'Aláírások',
+        'Templates ↔ Queues' => 'Sablonok ↔ Várólisták',
+        'Configure Working Hours' => '',
+        'Configure Queue Related Settings' => '',
         'A queue with this name already exists!' => 'Már létezik ilyen nevű várólista!',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             'Ez a várólista megtalálható egy rendszerbállításban, az új várólistára mutató beállítások frissítésének megerősítése szükséges!',
@@ -1958,7 +1980,6 @@ sub Data {
         'Manage Template-Queue Relations' => 'Sablon–Várólista kapcsolatok kezelése',
         'Filter for Templates' => 'Szűrő a sablonokhoz',
         'Filter for templates' => 'Szűrő a sablonokhoz',
-        'Templates' => 'Sablonok',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'Szerepkezelés',
@@ -1968,6 +1989,7 @@ sub Data {
         'Filter for roles' => 'Szűrő a szerepekhez',
         'Create a role and put groups in it. Then add the role to the users.' =>
             'Hozzon létre egy szerepet és tegyen bele csoportokat. Azután adja a szerepet a felhasználókhoz.',
+        'Agents ↔ Roles' => 'Ügyintézők ↔ Szerepek',
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             'Nincsenek szerepek meghatározva. Használja a „Hozzáadás” gombot egy új szerep létrehozásához.',
 
@@ -2004,6 +2026,7 @@ sub Data {
         'Edit SLA' => 'SLA szerkesztése',
         'Add SLA' => 'SLA hozzáadása',
         'Filter for SLAs' => 'Szűrő az SLA-khoz',
+        'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => 'Csak számokat írjon!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
@@ -2085,6 +2108,7 @@ sub Data {
         'Service Management' => 'Szolgáltatás kezelés',
         'Add Service' => 'Szolgáltatás hozzáadása',
         'Edit Service' => 'Szolgáltatás szerkesztése',
+        'Configure Service Visibility and Defaults' => '',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             'A szolgáltatás nevének legnagyobb hossza 200 karakter (alszolgáltatásokkal).',
         'Sub-service of' => 'Részszolgáltatása ennek',
@@ -2121,6 +2145,8 @@ sub Data {
         'Filter for states' => 'Szűrő az állapotokhoz',
         'Attention' => 'Figyelem',
         'Please also update the states in SysConfig where needed.' => 'Frissítse az állapotokat a rendszer beállításaiban is, ahol szükséges.',
+        'Configure State Visibility and Defaults' => '',
+        'Configure State Type Visibility and Defaults' => '',
         'This state is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             'Ez az állapot megtalálható egy rendszerbállításban, az új állapotra mutató beállítások frissítésének megerősítése szükséges!',
         'State type' => 'Állapottípus',
@@ -2322,6 +2348,7 @@ sub Data {
         'Edit Type' => 'Típus szerkesztése',
         'Filter for Types' => 'Szűrő a típusokhoz',
         'Filter for types' => 'Szűrő a típusokhoz',
+        'Configure Type Visibility and Defaults' => '',
         'A type with this name already exists!' => 'Már létezik ilyen nevű típus!',
         'This type is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             'Ez a típus megtalálható egy rendszerbállításban, az új típusra mutató beállítások frissítésének megerősítése szükséges!',
@@ -3580,9 +3607,6 @@ sub Data {
             'Az összes ügyintéző, akiknek írási jogosultságuk van az időponthoz (naptárhoz)',
         'Yes, but require at least one active notification method.' => 'Igen, de legalább egy aktív értesítési módszert igényel.',
 
-        # Perl Module: Kernel/Modules/AdminAttachment.pm
-        'Attachment added!' => 'Melléklet hozzáadva!',
-
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => 'Automatikus válasz hozzáadva!',
 
@@ -4138,7 +4162,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminTemplate.pm
         'Template updated!' => 'Sablon frissítve!',
-        'Template added!' => 'Sablon hozzáadva!',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
         'Change Attachment Relations for Template' => 'Mellékletkapcsolatok megváltoztatása egy sablonnál',
@@ -8524,7 +8547,6 @@ Az Ön segélyszolgálat csapata
         'AJAX functions for notification event transport web service.' =>
             '',
         'AJAX interface for the web service dynamic field backends.' => '',
-        'Access Control Lists (ACL)' => 'Hozzáférés-vezérlési listák (ACL)',
         'AccountedTime' => 'Elszámolt idő',
         'Activation of dynamic fields for screens.' => '',
         'ActivityID' => 'Tevékenység-azonosító',
@@ -8557,8 +8579,6 @@ Az Ön segélyszolgálat csapata
         'Agent Statistics.' => 'Ügyintézői statisztikák.',
         'Agent User Search' => 'Ügyintézői felhasználó-keresés',
         'Agent User Search.' => 'Ügyintézői felhasználó-keresés.',
-        'Agents ↔ Groups' => 'Ügyintézők ↔ Csoportok',
-        'Agents ↔ Roles' => 'Ügyintézők ↔ Szerepek',
         'All CustomerIDs of a customer user.' => 'Egy ügyfél-felhasználó összes ügyfél-azonosítója.',
         'All customer users of a CustomerID' => 'Egy ügyfél-azonosító minden ügyfél-felhasználója',
         'All escalated tickets' => 'Minden eszkalált jegy',
@@ -8707,9 +8727,6 @@ Az Ön segélyszolgálat csapata
         'Customer User Information Center search.' => 'Ügyfél-felhasználó információs-központ keresés.',
         'Customer User Information Center.' => 'Ügyfél-felhasználó információs-központ.',
         'Customer User-Customer Relations' => '',
-        'Customer Users ↔ Customers' => 'Ügyfél-felhasználók ↔ Ügyfelek',
-        'Customer Users ↔ Groups' => 'Ügyfél-felhasználók ↔ Csoportok',
-        'Customer Users ↔ Services' => 'Ügyfél-felhasználók ↔ Szolgáltatások',
         'Customer preferences.' => 'Ügyfélbeállítások.',
         'Customer ticket overview' => 'Ügyféljegy-áttekintő',
         'Customer ticket search.' => 'Ügyféljegykeresés.',
@@ -8718,7 +8735,6 @@ Az Ön segélyszolgálat csapata
         'CustomerID search' => 'Ügyfél-azonosító keresés',
         'CustomerName' => 'Ügyfélnév',
         'CustomerUser' => 'Ügyfél-felhasználó',
-        'Customers ↔ Groups' => 'Ügyfelek ↔ Csoportok',
         'Czech' => 'Cseh',
         'Danish' => 'Dán',
         'Dashboard overview.' => 'Vezérlőpult áttekintő.',
@@ -8760,7 +8776,6 @@ Az Ön segélyszolgálat csapata
         'Edit Customer Users.' => 'Ügyfél-felhasználók szerkesztése.',
         'Edit appointment' => 'Időpont szerkesztése',
         'Edit customer company' => 'Ügyfél-vállalat szerkesztése',
-        'Email Addresses' => 'E-mail címek',
         'Email Outbound' => 'Kimenő e-mail',
         'Email Resend' => 'E-mail újraküldés',
         'Email communication channel.' => 'E-mail kommunikációs csatorna.',
@@ -8989,7 +9004,6 @@ Az Ön segélyszolgálat csapata
         'Portuguese' => 'Portugál',
         'Portuguese (Brasil)' => 'Portugál (Brazil)',
         'PostMaster Filters' => 'Levelezési szűrők',
-        'PostMaster Mail Accounts' => 'Levelezési levélfiókok',
         'Print this ticket' => 'Jegy nyomtatása',
         'Priorities' => 'Prioritások',
         'Process Management Activity Dialog GUI' => 'Folyamatkezelés tevékenység párbeszéd grafikus felület',
@@ -9008,7 +9022,6 @@ Az Ön segélyszolgálat csapata
         'Public Calendar' => 'Nyilvános naptár',
         'Public calendar.' => 'Nyilvános naptár.',
         'Queue view' => 'Várólista nézet',
-        'Queues ↔ Auto Responses' => 'Várólisták ↔ Automatikus válaszok',
         'Refresh interval' => 'Frissítési időköz',
         'Reminder Tickets' => 'Emlékeztető jegyek',
         'Removed subscription for user "%s".' => 'Feliratkozás eltávolítva a következő felhasználónál: „%s”.',
@@ -9018,13 +9031,11 @@ Az Ön segélyszolgálat csapata
         'Responsible Tickets' => 'Felelős jegyek',
         'Responsible Tickets.' => 'Felelős jegyek.',
         'Right' => 'Jobb',
-        'Roles ↔ Groups' => 'Szerepek ↔ Csoportok',
         'Romanian' => 'Román',
         'Running Process Tickets' => 'Futó folyamatjegyek',
         'Russian' => 'Orosz',
         'S/MIME Certificates' => 'S/MIME tanúsítványok',
         'SMS' => 'SMS',
-        'Salutations' => 'Megszólítások',
         'Schedule a maintenance period.' => 'Egy karbantartási időszakot ütemez.',
         'Screen after new ticket' => 'Új jegy utáni képernyő',
         'Search Customer' => 'Ügyfél keresése',
@@ -9062,7 +9073,6 @@ Az Ön segélyszolgálat csapata
         'Sent notification to "%s".' => 'Értesítés elküldve neki: „%s”.',
         'Serbian Cyrillic' => 'Szerb (cirill)',
         'Serbian Latin' => 'Szerb (latin)',
-        'Service Level Agreements' => 'Szolgáltatási megállapodások',
         'Service view' => 'Szolgáltatás nézet',
         'ServiceView' => 'Szolgáltatás nézet',
         'Set a new password by filling in your current password and a new one.' =>
@@ -9077,7 +9087,6 @@ Az Ön segélyszolgálat csapata
         'Shows information on how to start OTRS Daemon' => 'Információkat jelenít meg arról, hogy hogyan indítsa az OTRS démont',
         'Shows last mention of tickets.' => '',
         'Signature data.' => 'Aláírási adatok.',
-        'Signatures' => 'Aláírások',
         'Simple' => 'Egyszerű',
         'Skin' => 'Felszín',
         'Slovak' => 'Szlovák',
@@ -9112,8 +9121,6 @@ Az Ön segélyszolgálat csapata
         'System Configuration Deployment' => 'Rendszer-konfigurációs üzembe állítás',
         'System Configuration Group' => 'Rendszerbeállítások csoport',
         'System Maintenance' => 'Rendszerkarbantartás',
-        'Templates ↔ Attachments' => 'Sablonok ↔ Mellékletek',
-        'Templates ↔ Queues' => 'Sablonok ↔ Várólisták',
         'Textarea' => 'Szövegdoboz',
         'Thai' => 'Thai',
         'The PGP signature is expired.' => 'A PGP-aláírás lejárt.',

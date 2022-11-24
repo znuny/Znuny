@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.711872665259055;
+    $Self->{Completeness}        = 0.710509244242621;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -258,6 +258,9 @@ sub Data {
         'Edit Attachment' => '添付ファイルを編集',
         'Filter for Attachments' => '添付ファイルでフィルタ',
         'Filter for attachments' => '添付ファイルのフィルター',
+        'Related Actions' => '',
+        'Templates' => 'テンプレート',
+        'Templates ↔ Attachments' => '',
         'Filename' => 'ファイル名',
         'Download file' => 'ダウンロードファイル',
         'Delete this attachment' => 'この添付ファイルを削除',
@@ -270,6 +273,7 @@ sub Data {
         'Edit Auto Response' => '自動応答編集',
         'Filter for Auto Responses' => '自動応答でフィルタ',
         'Filter for auto responses' => '自動応答でフィルター',
+        'Queues ↔ Auto Responses' => '',
         'Response' => '応答',
         'Auto response from' => '自動応答差出人',
         'Reference' => '用例',
@@ -395,6 +399,8 @@ sub Data {
         'Search' => '検索',
         'Wildcards like \'*\' are allowed.' => 'ワイルドカード（*）が使用できます。',
         'Select' => '選択',
+        'Customer Users' => '顧客ユーザー',
+        'Customers ↔ Groups' => '顧客 ↔ グループ',
         'List (only %s shown - more available)' => '一覧 ( %s 件のみ表示、他候補あり)',
         'total' => '合計',
         'Please enter a search term to look for customers.' => '顧客を検索するための条件を入力してください',
@@ -417,9 +423,9 @@ sub Data {
         'Select the customer:group permissions.' => '顧客：グループ権限を選択',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             '何も選択しない場合、このグループは権限がありません (チケットは顧客が使用できません)',
-        'Search Results' => '検索結果',
         'Customers' => '顧客',
         'Groups' => 'グループ',
+        'Search Results' => '検索結果',
         'Change Group Relations for Customer' => '顧客に対するグループの関連性を変更',
         'Change Customer Relations for Group' => 'グループに対する顧客の関連性を変更',
         'Toggle %s Permission for all' => '%s の全権限を切り替え',
@@ -439,6 +445,9 @@ sub Data {
         'Back to search results' => '検索結果に戻る',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             '顧客ユーザーは顧客履歴の使用と顧客パネルからログインするために必要です。',
+        'Customer Users ↔ Customers' => '顧客ユーザー ↔ 顧客',
+        'Customer Users ↔ Groups' => '顧客ユーザー ↔ グループ',
+        'Customer Users ↔ Services' => '顧客ユーザー ↔ サービス',
         'List (%s total)' => '一覧 (全 %s 件)',
         'Username' => 'ユーザー名',
         'Email' => 'メール',
@@ -470,7 +479,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
         'Manage Customer User-Customer Relations' => '顧客ユーザー - 顧客の関係を管理',
         'Select the customer user:customer relations.' => '顧客ユーザー - 顧客の関係を選択',
-        'Customer Users' => '顧客ユーザー',
         'Change Customer Relations for Customer User' => '顧客ユーザーと顧客の関係を変更',
         'Change Customer User Relations for Customer' => '顧客ユーザーと顧客の関係を変更',
         'Toggle active state for all' => 'すべての有効なステータスを切り替え',
@@ -498,6 +506,7 @@ sub Data {
         'Filter for Services' => 'サービスでフィルタ',
         'Filter for services' => 'サービスでフィルター',
         'Services' => 'サービス',
+        'Service Level Agreements' => 'サービスレベル契約（SLA）',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
         'Dynamic Fields Management' => 'ダイナミック・フィールド の管理',
@@ -512,6 +521,7 @@ sub Data {
         'Overwrite existing configurations' => '',
         'Import configurations' => '',
         'Export configurations' => '',
+        'Process Management' => 'プロセス管理',
         'Dynamic fields ↔ Screens' => '',
         'Dynamic Fields List' => 'ダイナミック・フィールド 一覧',
         'Dynamic fields per page' => 'ページ毎の ダイナミック・フィールド',
@@ -1362,6 +1372,8 @@ sub Data {
         'Create new groups to handle access permissions for different groups of agent (e. g. purchasing department, support department, sales department, ...). ' =>
             '統計グループは統計エリアを取得します。異なるエージェントグループへのアクセス許可を操作するには、グループを新規作成してください。（例：購買部、サポート部、営業部等）',
         'It\'s useful for ASP solutions. ' => 'ASPソリューションが便利です',
+        'Agents ↔ Groups' => '担当者 ↔ グループ',
+        'Roles ↔ Groups' => 'ロールーグループ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'System Log' => 'システムログ',
@@ -1734,12 +1746,12 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Edit Priority' => '優先度を編集',
         'Filter for Priorities' => '優先度でフィルター',
         'Filter for priorities' => '優先度でフィルター',
+        'Configure Priority Visibility and Defaults' => '',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             '',
         'This priority is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-        'Process Management' => 'プロセス管理',
         'Filter for Processes' => 'プロセスでフィルター',
         'Filter for processes' => '',
         'Create New Process' => '新しいプロセスを追加',
@@ -1756,6 +1768,9 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '新規プロセスを作成するには他システムでエクスポートしたプロセスをインポートするか新規に作成してください。',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             '変更はプロセスデータを同期させた場合にのみ反映されます。同期により、行われた変更は実際の設定に反映されます。',
+        'Access Control Lists (ACL)' => 'アクセス制御リスト (ACL)',
+        'Generic Agent' => '',
+        'Manage Process Widiget Groups' => '',
         'Processes' => 'プロセス',
         'Process name' => 'プロセス名',
         'Print' => '印刷',
@@ -1910,6 +1925,13 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Edit Queue' => 'キューを編集',
         'Filter for Queues' => 'キューでフィルター',
         'Filter for queues' => 'キューのフィルター',
+        'Email Addresses' => 'メールアドレス',
+        'PostMaster Mail Accounts' => 'メールアカウント',
+        'Salutations' => '挨拶文',
+        'Signatures' => '署名',
+        'Templates ↔ Queues' => 'テンプレート ↔ キュー',
+        'Configure Working Hours' => '',
+        'Configure Queue Related Settings' => '',
         'A queue with this name already exists!' => '同じ名前のキューが既に存在しています！',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             '',
@@ -1958,7 +1980,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Manage Template-Queue Relations' => 'テンプレート-キューの関連性の管理',
         'Filter for Templates' => 'テンプレートでフィルター',
         'Filter for templates' => '',
-        'Templates' => 'テンプレート',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'ロール管理',
@@ -1968,6 +1989,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Filter for roles' => 'ロールでフィルター',
         'Create a role and put groups in it. Then add the role to the users.' =>
             'ロールを作成してグループを追加後、ユーザーにロールを追加してください。',
+        'Agents ↔ Roles' => '担当者 ↔ ロール',
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             '未定義のロールがあります。新しいロールを作成し、追加ボタンを押してください。',
 
@@ -2004,6 +2026,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Edit SLA' => 'SLAを編集',
         'Add SLA' => 'SLAを追加',
         'Filter for SLAs' => 'SLAでフィルター',
+        'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => '数値しか入力できません。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
@@ -2085,6 +2108,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Service Management' => 'サービス管理',
         'Add Service' => 'サービスの追加',
         'Edit Service' => 'サービスの編集',
+        'Configure Service Visibility and Defaults' => '',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             'サービス名は、(サブサービス名を含めて) 半角200文字以内にする必要があります。',
         'Sub-service of' => '親サービス',
@@ -2121,6 +2145,8 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Filter for states' => 'ステータスでフィルター',
         'Attention' => '注意',
         'Please also update the states in SysConfig where needed.' => 'また、必要に応じてシステム設定のステータスを更新して下さい。',
+        'Configure State Visibility and Defaults' => '',
+        'Configure State Type Visibility and Defaults' => '',
         'This state is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             'このステータスはシステム設定の設定にあり、新しいタイプを指すように設定を更新する必要があります！',
         'State type' => 'ステータスのタイプ',
@@ -2322,6 +2348,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Edit Type' => 'タイプの編集',
         'Filter for Types' => 'タイプでフィルター',
         'Filter for types' => 'タイプでフィルター',
+        'Configure Type Visibility and Defaults' => '',
         'A type with this name already exists!' => 'この名前のタイプは既に存在します!',
         'This type is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
@@ -3581,9 +3608,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'Yes, but require at least one active notification method.' => '',
 
-        # Perl Module: Kernel/Modules/AdminAttachment.pm
-        'Attachment added!' => '添付ファイルを追加しました。',
-
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '自動応答が追加されました！',
 
@@ -4139,7 +4163,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # Perl Module: Kernel/Modules/AdminTemplate.pm
         'Template updated!' => 'テンプレートを更新しました！',
-        'Template added!' => 'テンプレートを追加しました！',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
         'Change Attachment Relations for Template' => 'テンプレートに対する添付ファイルの関連性を変更',
@@ -8532,7 +8555,6 @@ Thanks for your help!
         'AJAX functions for notification event transport web service.' =>
             '',
         'AJAX interface for the web service dynamic field backends.' => '',
-        'Access Control Lists (ACL)' => 'アクセス制御リスト (ACL)',
         'AccountedTime' => '作業時間',
         'Activation of dynamic fields for screens.' => '',
         'ActivityID' => 'ActivityID',
@@ -8565,8 +8587,6 @@ Thanks for your help!
         'Agent Statistics.' => '担当者に関する統計',
         'Agent User Search' => '担当者の検索',
         'Agent User Search.' => '担当者の検索',
-        'Agents ↔ Groups' => '担当者 ↔ グループ',
-        'Agents ↔ Roles' => '担当者 ↔ ロール',
         'All CustomerIDs of a customer user.' => '顧客ユーザーの全てのCustomerID',
         'All customer users of a CustomerID' => '顧客IDの全ての顧客ユーザー',
         'All escalated tickets' => '全エスカレーションチケット',
@@ -8715,9 +8735,6 @@ Thanks for your help!
         'Customer User Information Center search.' => '',
         'Customer User Information Center.' => '',
         'Customer User-Customer Relations' => '',
-        'Customer Users ↔ Customers' => '顧客ユーザー ↔ 顧客',
-        'Customer Users ↔ Groups' => '顧客ユーザー ↔ グループ',
-        'Customer Users ↔ Services' => '顧客ユーザー ↔ サービス',
         'Customer preferences.' => '',
         'Customer ticket overview' => '顧客チケット一覧',
         'Customer ticket search.' => '顧客チケットの検索',
@@ -8726,7 +8743,6 @@ Thanks for your help!
         'CustomerID search' => '顧客IDの検索',
         'CustomerName' => '顧客名',
         'CustomerUser' => 'CustomerUser（顧客ユーザ）',
-        'Customers ↔ Groups' => '顧客 ↔ グループ',
         'Czech' => 'チェコ語',
         'Danish' => 'デンマーク語',
         'Dashboard overview.' => 'ダッシュボード一覧',
@@ -8768,7 +8784,6 @@ Thanks for your help!
         'Edit Customer Users.' => '顧客ユーザーを編集',
         'Edit appointment' => '予約の編集',
         'Edit customer company' => '顧客企業を編集',
-        'Email Addresses' => 'メールアドレス',
         'Email Outbound' => '電子メール発信',
         'Email Resend' => '電子メール再送信',
         'Email communication channel.' => '電子メールのコミュニケーション・チャネル',
@@ -8998,7 +9013,6 @@ Thanks for your help!
         'Portuguese' => 'ポルトガル語',
         'Portuguese (Brasil)' => 'ポルトガル語（ブラジル）',
         'PostMaster Filters' => 'ポストマスター・フィルター',
-        'PostMaster Mail Accounts' => 'メールアカウント',
         'Print this ticket' => 'このチケットを印刷',
         'Priorities' => '優先度',
         'Process Management Activity Dialog GUI' => 'プロセス管理アクティビティダイアログGUI',
@@ -9017,7 +9031,6 @@ Thanks for your help!
         'Public Calendar' => '公開するカレンダー',
         'Public calendar.' => '公開するカレンダー',
         'Queue view' => 'キュー・ビュー',
-        'Queues ↔ Auto Responses' => '',
         'Refresh interval' => '更新間隔',
         'Reminder Tickets' => '保留期限切れチケット',
         'Removed subscription for user "%s".' => 'Removed subscription for user "%s".',
@@ -9027,13 +9040,11 @@ Thanks for your help!
         'Responsible Tickets' => '',
         'Responsible Tickets.' => '',
         'Right' => '権限',
-        'Roles ↔ Groups' => 'ロールーグループ',
         'Romanian' => '',
         'Running Process Tickets' => '実行中のプロセスチケット',
         'Russian' => 'ロシア語',
         'S/MIME Certificates' => 'S/MIME証明書',
         'SMS' => 'SMS',
-        'Salutations' => '挨拶文',
         'Schedule a maintenance period.' => 'メンテナンス期間をスケジュール',
         'Screen after new ticket' => '新規チケット作成後の画面',
         'Search Customer' => '顧客を検索します。',
@@ -9071,7 +9082,6 @@ Thanks for your help!
         'Sent notification to "%s".' => '"%s"への通知を送信しました。',
         'Serbian Cyrillic' => 'セルビア語（キリル文字）',
         'Serbian Latin' => 'セルビア語（ラテン文字）',
-        'Service Level Agreements' => 'サービスレベル契約（SLA）',
         'Service view' => 'サービス・ビュー',
         'ServiceView' => 'サービス・ビュー',
         'Set a new password by filling in your current password and a new one.' =>
@@ -9086,7 +9096,6 @@ Thanks for your help!
         'Shows information on how to start OTRS Daemon' => 'OTRSデーモンの起動手順を紹介します。',
         'Shows last mention of tickets.' => '',
         'Signature data.' => '',
-        'Signatures' => '署名',
         'Simple' => 'シンプル',
         'Skin' => 'スキン',
         'Slovak' => 'スロバキア語',
@@ -9121,8 +9130,6 @@ Thanks for your help!
         'System Configuration Deployment' => 'システム設定のデプロイ',
         'System Configuration Group' => 'システム設定グループ',
         'System Maintenance' => 'システムメンテナンス',
-        'Templates ↔ Attachments' => '',
-        'Templates ↔ Queues' => 'テンプレート ↔ キュー',
         'Textarea' => 'Textarea',
         'Thai' => 'タイ',
         'The PGP signature is expired.' => '',

@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.997076498294624;
+    $Self->{Completeness}        = 0.99772948426857;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -255,6 +255,9 @@ sub Data {
         'Edit Attachment' => 'Anhang bearbeiten',
         'Filter for Attachments' => 'Filter für Anhänge',
         'Filter for attachments' => 'Filter für Anhänge',
+        'Related Actions' => 'Verwandte Aktionen',
+        'Templates' => 'Vorlagen',
+        'Templates ↔ Attachments' => 'Vorlagen ↔ Anhänge',
         'Filename' => 'Dateiname',
         'Download file' => 'Datei herunterladen',
         'Delete this attachment' => 'Diesen Anhang entfernen',
@@ -267,6 +270,7 @@ sub Data {
         'Edit Auto Response' => 'Automatische Antwort bearbeiten',
         'Filter for Auto Responses' => 'Filter für automatische Antworten',
         'Filter for auto responses' => 'Filter für automatische Antworten',
+        'Queues ↔ Auto Responses' => 'Queues ↔ Automatische Antworten',
         'Response' => 'Antwort',
         'Auto response from' => 'Automatische Antwort von',
         'Reference' => 'Referenz',
@@ -392,6 +396,8 @@ sub Data {
         'Search' => 'Suche',
         'Wildcards like \'*\' are allowed.' => 'Platzhalter wie \'*\' sind erlaubt.',
         'Select' => 'Auswahl',
+        'Customer Users' => 'Kundenbenutzer',
+        'Customers ↔ Groups' => 'Kunden ↔ Gruppen',
         'List (only %s shown - more available)' => 'Liste (nur %s angezeigt - mehr verfügbar)',
         'total' => 'gesamt',
         'Please enter a search term to look for customers.' => 'Bitte geben Sie einen Suchbegriff ein, um nach Kunden zu suchen.',
@@ -414,9 +420,9 @@ sub Data {
         'Select the customer:group permissions.' => 'Wählen Sie die Gruppenberechtigungen für Kunden aus.',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Wenn nichts ausgewählt ist, hat der Kunde in dieser Gruppe keine Rechte (und kann nicht auf Tickets zugreifen).',
-        'Search Results' => 'Suchergebnisse',
         'Customers' => 'Kunden',
         'Groups' => 'Gruppen',
+        'Search Results' => 'Suchergebnisse',
         'Change Group Relations for Customer' => 'Gruppenzuordnungen verwalten für Kunden',
         'Change Customer Relations for Group' => 'Kundenzuordnungen verwalten für Gruppe',
         'Toggle %s Permission for all' => 'Recht %s für alle umschalten',
@@ -436,6 +442,9 @@ sub Data {
         'Back to search results' => 'Zurück zum Suchergebnis',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Kundenbenutzer werden für die Bereitstellung einer Kundenhistorie und für die Anmeldung über den Kundenzugang benötigt.',
+        'Customer Users ↔ Customers' => 'Kundenbenutzer ↔ Kunden',
+        'Customer Users ↔ Groups' => 'Kundenbenutzer ↔ Gruppen',
+        'Customer Users ↔ Services' => 'Kundenbenutzer ↔ Services',
         'List (%s total)' => 'Liste (%s insgesamt)',
         'Username' => 'Benutzername',
         'Email' => 'E-Mail',
@@ -467,7 +476,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
         'Manage Customer User-Customer Relations' => 'Beziehungen zwischen Kundenbenutzern und Kunden verwalten',
         'Select the customer user:customer relations.' => 'Beziehung zwischen Kundenbenutzer und Kunde auswählen.',
-        'Customer Users' => 'Kundenbenutzer',
         'Change Customer Relations for Customer User' => 'Kundenbeziehungen für Kundenbenutzer ändern',
         'Change Customer User Relations for Customer' => 'Kundenbenutzerbeziehungen für Kunde ändern',
         'Toggle active state for all' => 'Aktiv-Status für alle umschalten',
@@ -495,6 +503,7 @@ sub Data {
         'Filter for Services' => 'Filter für Services',
         'Filter for services' => 'Filter für Services',
         'Services' => 'Services',
+        'Service Level Agreements' => 'Service-Level-Vereinbarungen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
         'Dynamic Fields Management' => 'Verwaltung Dynamischer Felder',
@@ -509,6 +518,7 @@ sub Data {
         'Overwrite existing configurations' => 'Bestehende Konfigurationen überschreiben',
         'Import configurations' => 'Konfigurationen importieren',
         'Export configurations' => 'Konfigurationen exportieren',
+        'Process Management' => 'Prozessmanagement',
         'Dynamic fields ↔ Screens' => 'Dynamische Felder ↔ Masken',
         'Dynamic Fields List' => 'Dynamische Felder - Liste',
         'Dynamic fields per page' => 'Dynamische Felder pro Seite',
@@ -1357,6 +1367,8 @@ sub Data {
         'Create new groups to handle access permissions for different groups of agent (e. g. purchasing department, support department, sales department, ...). ' =>
             'Erstellen Sie neue Gruppen, um unterschiedliche Berechtigungen für verschiedene Agentengruppen zu realisieren (z. B. Einkauf, Produktion, Verkauf, ...) . ',
         'It\'s useful for ASP solutions. ' => 'Das ist nützlich für ASP-Lösungen. ',
+        'Agents ↔ Groups' => 'Agenten ↔ Gruppen',
+        'Roles ↔ Groups' => 'Rollen ↔ Gruppen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'System Log' => 'Systemprotokoll',
@@ -1560,7 +1572,7 @@ sub Data {
         'To install this package, the Maximum OTRS Version is %s.' => 'Um dieses Paket zu installieren, können sie OTRS bis maximal zur Version %s verwenden.',
         'To install this package, the required Framework version is %s.' =>
             'Um dieses Paket zu installieren, wird die Framework-Version %s benötigt.',
-        'Why should I keep OTRS up to date?' => '',
+        'Why should I keep OTRS up to date?' => 'Warum sollte ich OTRS auf dem neuesten Stand halten?',
         'You will receive updates about relevant security issues.' => 'Sie erhalten Updates über relevante Sicherheitsprobleme.',
         'You will receive updates for all other relevant OTRS issues' => 'Sie erhalten Updates für alle anderen relevanten Probleme im Zusammenhang mit OTRS',
         'With your existing contract you can only use a small part of the %s.' =>
@@ -1728,12 +1740,12 @@ sub Data {
         'Edit Priority' => 'Priorität bearbeiten',
         'Filter for Priorities' => 'Filter für Prioritäten',
         'Filter for priorities' => 'Filter für Prioritäten',
+        'Configure Priority Visibility and Defaults' => 'Prioritätssichtbarkeit und Standardeinstellungen konfigurieren',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             'Diese Priorität ist in einer SysConfig-Einstellung vorhanden. Eine Bestätigung für die Aktualisierung der Einstellung auf die neue Priorität ist notwendig!',
         'This priority is used in the following config settings:' => 'Diese Priorität wird in folgenden Konfigurationseinstellungen verwendet:',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-        'Process Management' => 'Prozessmanagement',
         'Filter for Processes' => 'Filter für Prozesse',
         'Filter for processes' => 'Filter für Prozesse',
         'Create New Process' => 'Neuen Prozess erstellen',
@@ -1750,6 +1762,9 @@ sub Data {
             'Um einen neuen Prozess zu erstellen, können Sie entweder einen Prozess aus einem anderen System importieren, oder einen ganz neuen erstellen.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'Änderungen an den Prozessen wirken sich erst dann aus, wenn Sie die Prozesskonfiguration synchronisieren. Dabei werden alle Änderungen in die Systemkonfiguration übernommen.',
+        'Access Control Lists (ACL)' => 'Access-Control-Lists (ACL)',
+        'Generic Agent' => 'Generic Agent',
+        'Manage Process Widiget Groups' => 'Prozess-Widget-Gruppen verwalten',
         'Processes' => 'Prozesse',
         'Process name' => 'Prozessname',
         'Print' => 'Drucken',
@@ -1904,6 +1919,13 @@ sub Data {
         'Edit Queue' => 'Queue bearbeiten',
         'Filter for Queues' => 'Filter für Queues',
         'Filter for queues' => 'Filter für Queues',
+        'Email Addresses' => 'E-Mail-Adressen',
+        'PostMaster Mail Accounts' => 'Postmaster-E-Mail-Konten',
+        'Salutations' => 'Anreden',
+        'Signatures' => 'Signaturen',
+        'Templates ↔ Queues' => 'Vorlagen ↔ Queues',
+        'Configure Working Hours' => 'Arbeitszeiten Konfigurieren',
+        'Configure Queue Related Settings' => 'Queue-Einstellungen konfigurieren',
         'A queue with this name already exists!' => 'Eine Queue mit diesem Namen ist bereits vorhanden!',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             'Diese Queue ist in einer SysConfig-Einstellung vorhanden. Eine Bestätigung für die Aktualisierung der Einstellung auf die neue Queue ist notwendig!',
@@ -1952,7 +1974,6 @@ sub Data {
         'Manage Template-Queue Relations' => 'Zuordnung von Vorlagen zu Queues verwalten',
         'Filter for Templates' => 'Filter für Vorlagen',
         'Filter for templates' => 'Filter für Vorlagen',
-        'Templates' => 'Vorlagen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'Verwaltung von Rollen',
@@ -1962,6 +1983,7 @@ sub Data {
         'Filter for roles' => 'Filter für Rollen',
         'Create a role and put groups in it. Then add the role to the users.' =>
             'Erstellen Sie Rollen und weisen Sie Gruppen hinzu. Danach fügen Sie Benutzer zu den Rollen hinzu.',
+        'Agents ↔ Roles' => 'Agenten ↔ Rollen',
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             'Bislang sind keine Rollen definiert. Bitte verwenden Sie die Schaltfläche "Rolle hinzufügen", um neue Rollen zu erstellen.',
 
@@ -1998,6 +2020,7 @@ sub Data {
         'Edit SLA' => 'SLA bearbeiten',
         'Add SLA' => 'SLA hinzufügen',
         'Filter for SLAs' => 'Filter für SLAs',
+        'Configure SLA Visibility and Defaults' => 'SLA-Sichtbarkeit und Standardeinstellungen konfigurieren',
         'Please write only numbers!' => 'Bitte geben Sie nur Zahlen ein!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
@@ -2079,6 +2102,7 @@ sub Data {
         'Service Management' => 'Service-Verwaltung',
         'Add Service' => 'Service hinzufügen',
         'Edit Service' => 'Service bearbeiten',
+        'Configure Service Visibility and Defaults' => 'Serivce-Sichtbarkeit und Standardeinstellungen konfigurieren',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             'Die maximale Länge für einen Service-Name (inklusive Unter-Services) beträgt 200 Zeichen.',
         'Sub-service of' => 'Unterservice von',
@@ -2115,6 +2139,8 @@ sub Data {
         'Filter for states' => 'Filter für Status',
         'Attention' => 'Achtung',
         'Please also update the states in SysConfig where needed.' => 'Bitte aktualisieren Sie auch die Status in der SysConfig dort, wo es erforderlich ist.',
+        'Configure State Visibility and Defaults' => 'Status-Sichtbarkeit und Standardeinstellungen konfigurieren',
+        'Configure State Type Visibility and Defaults' => 'Statustyp-Sichtbarkeit und Standardeinstellungen konfigurieren',
         'This state is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             'Dieser Status ist in einer SysConfig-Einstellung vorhanden. Eine Bestätigung für die Aktualisierung der Einstellung auf den neuen Status ist notwendig!',
         'State type' => 'Statustyp',
@@ -2316,6 +2342,7 @@ sub Data {
         'Edit Type' => 'Typ bearbeiten',
         'Filter for Types' => 'Filter für Typen',
         'Filter for types' => 'Filter für Typen',
+        'Configure Type Visibility and Defaults' => 'Typ-Sichtbarkeit und Standardeinstellungen konfigurieren',
         'A type with this name already exists!' => 'Ein Typ mit diesem Namen existiert bereits!',
         'This type is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             'Dieser Typ ist in einer SysConfig-Einstellung vorhanden. Eine Bestätigung für die Aktualisierung der Einstellung auf den neuen Typ ist notwendig!',
@@ -3574,9 +3601,6 @@ sub Data {
             'Alle Agenten mit Schreibberechtigung für den Termin(kalender)',
         'Yes, but require at least one active notification method.' => 'Ja, aber mindestens eine Benachrichtigungsmethode muss aktiviert sein.',
 
-        # Perl Module: Kernel/Modules/AdminAttachment.pm
-        'Attachment added!' => 'Anhang hinzugefügt!',
-
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => 'Automatische Antwort hinzugefügt!',
 
@@ -4132,7 +4156,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminTemplate.pm
         'Template updated!' => 'Vorlage aktualisiert!',
-        'Template added!' => 'Vorlage hinzugefügt!',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
         'Change Attachment Relations for Template' => 'Anhangs-Zuordnungen für Vorlage verändern',
@@ -4940,7 +4963,7 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
         'Owned Tickets New' => 'Eigene Tickets Neu',
-        'Owned Tickets Reminder Reached' => '',
+        'Owned Tickets Reminder Reached' => 'Eigene Tickets, Erinnerungszeit erreicht',
         'Owned Tickets Total' => 'Eigene Tickets Gesamt',
 
         # Perl Module: Kernel/Output/HTML/ToolBar/TicketResponsible.pm
@@ -7394,7 +7417,7 @@ sub Data {
             'Legt die Parameter für das Dashboard-Backend fest. "Limit" legt die Anzahl an Einträgen fest, die standardmäßig angezeigt werden. "Group" beschränkt den Zugang zum jeweiligen Dashlet (z. B. Group: admin;group1;group2). "Default" bestimmt, ob das Dashlet standardmäßig aktiv ist oder vom Nutzer manuell aktiviert werden muss. "CacheTTLLocal" bestimmt die Cachingdauer für das Dashlet in Minuten. Mit "Mandatory" kann das Dashlet so konfiguriert werden, dass Nutzer es nicht ausblenden können. Hinweis: Für DefaultColumns sind nur Ticketattribute und dynamische Felder (DynamicField_NameX) möglich.',
         'Parameters for the dashboard backend of the ticket stats of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             'Legt die Parameter für das Dashboard-Backend fest. "Limit" legt die Anzahl an Einträgen fest, die standardmäßig angezeigt werden. "Group" beschränkt den Zugang zum jeweiligen Dashlet (z. B. Group: admin;group1;group2). "Default" bestimmt, ob das Dashlet standardmäßig aktiv ist oder vom Nutzer manuell aktiviert werden muss. "CacheTTLLocal" bestimmt die Cachingdauer für das Dashlet in Minuten. Mit "Mandatory" kann das Dashlet so konfiguriert werden, dass Nutzer es nicht ausblenden können.',
-        'MyLastChangedTickets dashboard widget.' => '',
+        'MyLastChangedTickets dashboard widget.' => 'Dashboard-Widget "Meine zuletzt geänderten Tickets"',
         'Parameters for the dashboard backend of the upcoming events widget of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             'Legt die Parameter für das Dashboard-Backend fest. "Limit" legt die Anzahl an Einträgen fest, die standardmäßig angezeigt werden. "Group" beschränkt den Zugang zum jeweiligen Dashlet (z. B. Group: admin;group1;group2). "Default" bestimmt, ob das Dashlet standardmäßig aktiv ist oder vom Nutzer manuell aktiviert werden muss. "CacheTTLLocal" bestimmt die Cachingdauer für das Dashlet in Minuten. Mit "Mandatory" kann das Dashlet so konfiguriert werden, dass Nutzer es nicht ausblenden können.',
         'Parameters for the dashboard backend of the queue overview widget of the agent interface. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "QueuePermissionGroup" is not mandatory, queues are only listed if they belong to this permission group if you enable it. "States" is a list of states, the key is the sort order of the state in the widget. "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
@@ -8517,7 +8540,6 @@ Ihr Helpdesk-Team
         'AJAX functions for notification event transport web service.' =>
             'AJAX-Funktionen für Webservice-Transport-Modul der Ticket-Benachrichtigungen.',
         'AJAX interface for the web service dynamic field backends.' => 'AJAX-Schnittstelle für die Webservice-Dynamic-Field-Backends.',
-        'Access Control Lists (ACL)' => 'Access Control Lists (ACL)',
         'AccountedTime' => 'Erfasste Zeit',
         'Activation of dynamic fields for screens.' => 'Aktivierung dynamischer Felder für Masken.',
         'ActivityID' => 'ActivityID',
@@ -8550,8 +8572,6 @@ Ihr Helpdesk-Team
         'Agent Statistics.' => 'Agent Statistiken.',
         'Agent User Search' => 'Nutzersuche Agentenbereich',
         'Agent User Search.' => 'Nutzersuche Agentenbereich.',
-        'Agents ↔ Groups' => 'Agenten ↔ Gruppen',
-        'Agents ↔ Roles' => 'Agenten ↔ Rollen',
         'All CustomerIDs of a customer user.' => 'Alle Kundennummern eines Kundenbenutzers.',
         'All customer users of a CustomerID' => 'Alle Kundenbenutzer einer Kundennummer',
         'All escalated tickets' => 'Alle eskalierten Tickets',
@@ -8700,9 +8720,6 @@ Ihr Helpdesk-Team
         'Customer User Information Center search.' => 'Kundenbenutzer-Informationszentrum-Suche.',
         'Customer User Information Center.' => 'Kundenbenutzer-Informationszentrum.',
         'Customer User-Customer Relations' => 'Beziehungen zwischen Kundenbenutzern und Kunden',
-        'Customer Users ↔ Customers' => 'Kundenbenutzer ↔ Kunden',
-        'Customer Users ↔ Groups' => 'Kundenbenutzer ↔ Gruppen',
-        'Customer Users ↔ Services' => 'Kundenbenutzer ↔ Services',
         'Customer preferences.' => 'Kunden-Einstellungen.',
         'Customer ticket overview' => 'Kunden-Ticket-Übersicht',
         'Customer ticket search.' => 'Kunden-Ticketsuche.',
@@ -8711,7 +8728,6 @@ Ihr Helpdesk-Team
         'CustomerID search' => 'Kundennummern-Suche',
         'CustomerName' => 'Kundenname',
         'CustomerUser' => 'Kundenbenutzer',
-        'Customers ↔ Groups' => 'Kunden ↔ Gruppen',
         'Czech' => 'Tschechisch',
         'Danish' => 'Dänisch',
         'Dashboard overview.' => 'Dashboardübersicht.',
@@ -8753,7 +8769,6 @@ Ihr Helpdesk-Team
         'Edit Customer Users.' => 'Kundenbenutzer bearbeiten.',
         'Edit appointment' => 'Termin bearbeiten',
         'Edit customer company' => 'Kundenunternehmen bearbeiten',
-        'Email Addresses' => 'E-Mail-Adressen',
         'Email Outbound' => 'Ausgehende E-Mail',
         'Email Resend' => 'E-Mail erneut senden',
         'Email communication channel.' => 'Kommunikationskanal E-Mail.',
@@ -8921,7 +8936,7 @@ Ihr Helpdesk-Team
         'My Queues' => 'Meine Queues',
         'My Services' => 'Meine Services',
         'My Tickets.' => 'Meine Tickets.',
-        'My last changed tickets' => '',
+        'My last changed tickets' => 'Meine zuletzt geänderten Tickets',
         'NameX' => 'NameX',
         'New Ticket' => 'Neues Ticket',
         'New Tickets' => 'Neue Tickets',
@@ -8982,7 +8997,6 @@ Ihr Helpdesk-Team
         'Portuguese' => 'Portugiesisch',
         'Portuguese (Brasil)' => 'Portugiesisch (Brasilien)',
         'PostMaster Filters' => 'Postmaster-Filter',
-        'PostMaster Mail Accounts' => 'Postmaster-E-Mail-Konten',
         'Print this ticket' => 'Dieses Ticket drucken',
         'Priorities' => 'Prioritäten',
         'Process Management Activity Dialog GUI' => 'Prozess-Management Aktivität-Dialog Benutzeroberfläche',
@@ -9001,7 +9015,6 @@ Ihr Helpdesk-Team
         'Public Calendar' => 'Öffentlicher Kalender',
         'Public calendar.' => 'Öffentlicher Kalender.',
         'Queue view' => 'Ansicht nach Queues',
-        'Queues ↔ Auto Responses' => 'Queues ↔ Automatische Antworten',
         'Refresh interval' => 'Aktualisierungsintervall',
         'Reminder Tickets' => 'Erinnerungs-Tickets',
         'Removed subscription for user "%s".' => 'Abo für Benutzer "%s" ausgetragen.',
@@ -9011,13 +9024,11 @@ Ihr Helpdesk-Team
         'Responsible Tickets' => 'Verantwortliche Tickets',
         'Responsible Tickets.' => 'Verantwortliche Tickets.',
         'Right' => 'Rechts',
-        'Roles ↔ Groups' => 'Rollen ↔ Gruppen',
         'Romanian' => 'Rumänisch',
         'Running Process Tickets' => 'Aktive Prozess-Tickets',
         'Russian' => 'Russisch',
         'S/MIME Certificates' => 'S/MIME-Zertifikate',
         'SMS' => 'SMS',
-        'Salutations' => 'Anreden',
         'Schedule a maintenance period.' => 'Eine Wartungsperiode planen.',
         'Screen after new ticket' => 'Ansicht nach Ticket-Erstellung',
         'Search Customer' => 'Kunden suchen',
@@ -9055,7 +9066,6 @@ Ihr Helpdesk-Team
         'Sent notification to "%s".' => 'Benachrichtigung versandt an "%s".',
         'Serbian Cyrillic' => 'Kyrillisches Serbisch',
         'Serbian Latin' => 'Lateinisches Serbisch',
-        'Service Level Agreements' => 'Service-Level-Vereinbarungen',
         'Service view' => 'Ansicht nach Services',
         'ServiceView' => 'DienstAnsicht',
         'Set a new password by filling in your current password and a new one.' =>
@@ -9070,7 +9080,6 @@ Ihr Helpdesk-Team
         'Shows information on how to start OTRS Daemon' => 'Informationen über das Starten des OTRS Daemons anzeigen',
         'Shows last mention of tickets.' => 'Zeigt letzte Erwähnung von Tickets.',
         'Signature data.' => 'Signatur-Daten.',
-        'Signatures' => 'Signaturen',
         'Simple' => 'Einfach',
         'Skin' => 'Skin',
         'Slovak' => 'Slowakisch',
@@ -9105,8 +9114,6 @@ Ihr Helpdesk-Team
         'System Configuration Deployment' => 'Inbetriebnahme Systemkonfiguration',
         'System Configuration Group' => 'Systemkonfigurations-Gruppe',
         'System Maintenance' => 'Systemwartung',
-        'Templates ↔ Attachments' => 'Vorlagen ↔ Anhänge',
-        'Templates ↔ Queues' => 'Vorlagen ↔ Queues',
         'Textarea' => 'Textfeld',
         'Thai' => 'Thai',
         'The PGP signature is expired.' => 'Die PGP-Signatur ist abgelaufen.',

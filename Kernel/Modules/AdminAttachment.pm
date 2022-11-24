@@ -186,16 +186,9 @@ sub Run {
                 UserID => $Self->{UserID},
             );
             if ($StdAttachmentID) {
-                $Self->_Overview();
-                my $Output = $LayoutObject->Header();
-                $Output .= $LayoutObject->NavigationBar();
-                $Output .= $LayoutObject->Notify( Info => Translatable('Attachment added!') );
-                $Output .= $LayoutObject->Output(
-                    TemplateFile => 'AdminAttachment',
-                    Data         => \%Param,
+                return $LayoutObject->Redirect(
+                    OP => "Action=AdminTemplateAttachment;Subaction=Attachment;ID=$StdAttachmentID",
                 );
-                $Output .= $LayoutObject->Footer();
-                return $Output;
             }
         }
 

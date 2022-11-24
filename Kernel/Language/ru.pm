@@ -37,7 +37,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.866006171836934;
+    $Self->{Completeness}        = 0.864417774894583;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -267,6 +267,9 @@ sub Data {
         'Edit Attachment' => 'Редактировать вложение',
         'Filter for Attachments' => 'Фильтр для вложений',
         'Filter for attachments' => 'Фильтр вложений',
+        'Related Actions' => '',
+        'Templates' => 'Шаблоны',
+        'Templates ↔ Attachments' => 'Шаблоны ↔ Вложения',
         'Filename' => 'Имя файла',
         'Download file' => 'Скачать файл',
         'Delete this attachment' => 'Удалить это вложение',
@@ -279,6 +282,7 @@ sub Data {
         'Edit Auto Response' => 'Изменить автоответ',
         'Filter for Auto Responses' => 'Фильтр для автоответов',
         'Filter for auto responses' => 'Фильтр для автоответов',
+        'Queues ↔ Auto Responses' => 'Очереди ↔ Автоответы',
         'Response' => 'Ответ',
         'Auto response from' => 'Автоответ от',
         'Reference' => 'Ссылка',
@@ -404,6 +408,8 @@ sub Data {
         'Search' => 'Поиск',
         'Wildcards like \'*\' are allowed.' => 'Разрешены шаблоны типа \'*\'.',
         'Select' => 'Выбор',
+        'Customer Users' => 'Клиенты',
+        'Customers ↔ Groups' => 'Компании ↔ Группы',
         'List (only %s shown - more available)' => 'Список (%s показано, доступно еще)',
         'total' => 'всего',
         'Please enter a search term to look for customers.' => 'Введите запрос для поиска компании.',
@@ -426,9 +432,9 @@ sub Data {
         'Select the customer:group permissions.' => 'Выберите разрешения клиент:группа.',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Если ничего не выбрано, тогда у клиентов в этой группе не будет прав (заявки будут недоступны клиенту).',
-        'Search Results' => 'Результаты поиска',
         'Customers' => 'Клиенты',
         'Groups' => 'Группы',
+        'Search Results' => 'Результаты поиска',
         'Change Group Relations for Customer' => 'Изменить связи групп с клиентами',
         'Change Customer Relations for Group' => 'Изменить связь клиентов с группой',
         'Toggle %s Permission for all' => 'Переключить разрешение «%s» для всех',
@@ -448,6 +454,9 @@ sub Data {
         'Back to search results' => 'Назад к результатам поиска',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Необходимо для наличия данных о клиенте и подключения к системе через интерфейс клиента.',
+        'Customer Users ↔ Customers' => 'Клиенты ↔ Компании',
+        'Customer Users ↔ Groups' => 'Клиенты ↔ Группы',
+        'Customer Users ↔ Services' => 'Клиенты ↔ Сервисы',
         'List (%s total)' => 'Список (%s всего)',
         'Username' => 'Логин',
         'Email' => 'Email',
@@ -479,7 +488,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
         'Manage Customer User-Customer Relations' => 'Управление связями Клиент - Компания клиента',
         'Select the customer user:customer relations.' => 'Выберите связи Клиент:Компания.',
-        'Customer Users' => 'Клиенты',
         'Change Customer Relations for Customer User' => 'Изменить связь Компании с Клиентом',
         'Change Customer User Relations for Customer' => 'Изменить связь Клиента с Компанией',
         'Toggle active state for all' => 'Сделать активным для всех',
@@ -507,6 +515,7 @@ sub Data {
         'Filter for Services' => 'Фильтр для Сервисов',
         'Filter for services' => 'Фильтр для Сервисов',
         'Services' => 'Сервисы',
+        'Service Level Agreements' => 'Соглашения об Уровне Сервиса',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
         'Dynamic Fields Management' => 'Управление динамическими полями',
@@ -521,6 +530,7 @@ sub Data {
         'Overwrite existing configurations' => '',
         'Import configurations' => '',
         'Export configurations' => '',
+        'Process Management' => 'Управление Процессами',
         'Dynamic fields ↔ Screens' => '',
         'Dynamic Fields List' => 'Список динамических полей',
         'Dynamic fields per page' => 'Динамических полей на страницу',
@@ -1369,6 +1379,8 @@ sub Data {
         'Create new groups to handle access permissions for different groups of agent (e. g. purchasing department, support department, sales department, ...). ' =>
             'Создать новые группы, чтобы управлять правами для разных групп агентов (например, департамент закупок, департамент поддержки, департамент продаж, ...).',
         'It\'s useful for ASP solutions. ' => 'Полезно для сервис-провайдеров.',
+        'Agents ↔ Groups' => 'Агенты ↔ Группы',
+        'Roles ↔ Groups' => 'Роли ↔ Группы',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'System Log' => 'Системный журнал',
@@ -1740,12 +1752,12 @@ sub Data {
         'Edit Priority' => 'Изменить приоритет',
         'Filter for Priorities' => 'Фильтр для Приоритетов',
         'Filter for priorities' => 'Фильтр для Приоритетов',
+        'Configure Priority Visibility and Defaults' => '',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             'Это значение приоритета указано в настройках SysConfig, требуется подтверждение для обновления настроек для его использования в системе!',
         'This priority is used in the following config settings:' => 'Этот приоритет используется в следующих параметрах конфигурации:',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-        'Process Management' => 'Управление Процессами',
         'Filter for Processes' => 'Фильтр для Процессов',
         'Filter for processes' => 'Фильтр процессов',
         'Create New Process' => 'Создать новый Процесс',
@@ -1762,6 +1774,9 @@ sub Data {
             'Для создания нового Процесса вы можете импортировать Процесс экспортированный из другой системы или создать полностью новый.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'Изменения в Процессах сделанные здесь будут актуальны после синхронизации данных Процесса. При синхронизации, все вновь внесенные изменения будут записаны в конигурационные файлы системы.',
+        'Access Control Lists (ACL)' => 'Списки управления доступом (ACL)',
+        'Generic Agent' => '',
+        'Manage Process Widiget Groups' => '',
         'Processes' => 'Процессы',
         'Process name' => 'Имя Процесса',
         'Print' => 'Печать',
@@ -1916,6 +1931,13 @@ sub Data {
         'Edit Queue' => 'Изменить очередь',
         'Filter for Queues' => 'Фильтр для очередей',
         'Filter for queues' => 'Фильтр для очередей',
+        'Email Addresses' => 'Адреса email',
+        'PostMaster Mail Accounts' => 'Учетные записи почты для PostMaster',
+        'Salutations' => 'Приветствия',
+        'Signatures' => 'Подписи',
+        'Templates ↔ Queues' => 'Шаблоны ↔ Очереди',
+        'Configure Working Hours' => '',
+        'Configure Queue Related Settings' => '',
         'A queue with this name already exists!' => 'Очередь с таким именем уже существует!',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             'Эта очередь указана в настройках SysConfig, требуется подтверждение для обновления настроек для её использования в системе!',
@@ -1964,7 +1986,6 @@ sub Data {
         'Manage Template-Queue Relations' => 'Управление связями шаблон-очередь',
         'Filter for Templates' => 'Фильтр для Шаблонов',
         'Filter for templates' => 'Фильтр для шаблонов',
-        'Templates' => 'Шаблоны',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'Управление ролями',
@@ -1974,6 +1995,7 @@ sub Data {
         'Filter for roles' => 'Фильтр для Ролей',
         'Create a role and put groups in it. Then add the role to the users.' =>
             'Создайте роль и добавьте в неё группы. Затем распределите роли по пользователям.',
+        'Agents ↔ Roles' => 'Агенты ↔ Роли',
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             'Роли не определены. Пожалуйста, используйте кнопку \'Добавить\' для создания новой роли.',
 
@@ -2010,6 +2032,7 @@ sub Data {
         'Edit SLA' => 'Изменить SLA',
         'Add SLA' => 'Добавить SLA',
         'Filter for SLAs' => 'Фильтр для SLA',
+        'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => 'Сюда можно писать только числа!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
@@ -2091,6 +2114,7 @@ sub Data {
         'Service Management' => 'Управление сервисами',
         'Add Service' => 'Добавить сервис',
         'Edit Service' => 'Изменить Сервис',
+        'Configure Service Visibility and Defaults' => '',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             'Максимальная длина названия сервиса 200 символов (с подсервисами).',
         'Sub-service of' => 'Подсервис сервиса',
@@ -2127,6 +2151,8 @@ sub Data {
         'Filter for states' => 'Фильтр для состояний',
         'Attention' => 'Внимание',
         'Please also update the states in SysConfig where needed.' => 'Пожалуйста, обновите также состояния и в Конфигурации Системы (там, где необходимо).',
+        'Configure State Visibility and Defaults' => '',
+        'Configure State Type Visibility and Defaults' => '',
         'This state is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             'Это состояние указано в настройках SysConfig, требуется подтверждение для обновления настроек для использования нового типа в системе!',
         'State type' => 'Тип состояния',
@@ -2328,6 +2354,7 @@ sub Data {
         'Edit Type' => 'Редактировать тип',
         'Filter for Types' => 'Фильтр для Типов',
         'Filter for types' => 'Фильтр для типов',
+        'Configure Type Visibility and Defaults' => '',
         'A type with this name already exists!' => 'Тип с таким именем уже существует!',
         'This type is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             'Это состояние есть в настройках SysConfig, требуется подтверждение для обновления настроек для использования нового типа в системе!',
@@ -3586,9 +3613,6 @@ sub Data {
             'Все агенты с правом -w/записи на заявку для мероприятия (календаря)',
         'Yes, but require at least one active notification method.' => 'Да, но необходимо указать хотя бы один из способов уведомления.',
 
-        # Perl Module: Kernel/Modules/AdminAttachment.pm
-        'Attachment added!' => 'Вложение добавлено!',
-
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => 'Автоответ добавлен!',
 
@@ -4144,7 +4168,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminTemplate.pm
         'Template updated!' => 'Шаблон обновлен!',
-        'Template added!' => 'Шаблон добавлен!',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
         'Change Attachment Relations for Template' => 'Изменить связь Вложения с Шаблоном',
@@ -8530,7 +8553,6 @@ Thanks for your help!
         'AJAX functions for notification event transport web service.' =>
             '',
         'AJAX interface for the web service dynamic field backends.' => '',
-        'Access Control Lists (ACL)' => 'Списки управления доступом (ACL)',
         'AccountedTime' => 'Затраченное время',
         'Activation of dynamic fields for screens.' => '',
         'ActivityID' => 'ActivityID',
@@ -8563,8 +8585,6 @@ Thanks for your help!
         'Agent Statistics.' => 'Статистика агентов',
         'Agent User Search' => 'Поиск агента',
         'Agent User Search.' => '',
-        'Agents ↔ Groups' => 'Агенты ↔ Группы',
-        'Agents ↔ Roles' => 'Агенты ↔ Роли',
         'All CustomerIDs of a customer user.' => 'Все Компании клиента.',
         'All customer users of a CustomerID' => 'Все клиенты Компании',
         'All escalated tickets' => 'Все эскалированные заявки',
@@ -8713,9 +8733,6 @@ Thanks for your help!
         'Customer User Information Center search.' => 'Поиск в центре информации о клиентах.',
         'Customer User Information Center.' => 'Центр информации о клиентах.',
         'Customer User-Customer Relations' => '',
-        'Customer Users ↔ Customers' => 'Клиенты ↔ Компании',
-        'Customer Users ↔ Groups' => 'Клиенты ↔ Группы',
-        'Customer Users ↔ Services' => 'Клиенты ↔ Сервисы',
         'Customer preferences.' => 'Предпочтения для клиентов.',
         'Customer ticket overview' => 'Обзор клиентской заявки',
         'Customer ticket search.' => 'Поиск клиентских заявок.',
@@ -8724,7 +8741,6 @@ Thanks for your help!
         'CustomerID search' => 'Поиск по CustomerID',
         'CustomerName' => 'Имя Клиента',
         'CustomerUser' => 'Клиент',
-        'Customers ↔ Groups' => 'Компании ↔ Группы',
         'Czech' => 'Чешский',
         'Danish' => 'Датский',
         'Dashboard overview.' => '',
@@ -8766,7 +8782,6 @@ Thanks for your help!
         'Edit Customer Users.' => 'Редактировать пользователей клиента.',
         'Edit appointment' => 'Редактировать мероприятие',
         'Edit customer company' => 'Редактировать компанию клиента',
-        'Email Addresses' => 'Адреса email',
         'Email Outbound' => 'Исходящая эл. почта',
         'Email Resend' => 'Повторная отправка Письма',
         'Email communication channel.' => '',
@@ -8995,7 +9010,6 @@ Thanks for your help!
         'Portuguese' => 'Португальский',
         'Portuguese (Brasil)' => 'Португальский (Бразилия)',
         'PostMaster Filters' => 'Фильтры PostMaster (входящей почты)',
-        'PostMaster Mail Accounts' => 'Учетные записи почты для PostMaster',
         'Print this ticket' => 'Напечатать эту заявку',
         'Priorities' => 'Приоритеты',
         'Process Management Activity Dialog GUI' => 'Управление процессами Интерфейс Диалоги Активности',
@@ -9014,7 +9028,6 @@ Thanks for your help!
         'Public Calendar' => 'Общедоступный календарь',
         'Public calendar.' => 'Общедоступный календарь.',
         'Queue view' => 'Просмотр очередей',
-        'Queues ↔ Auto Responses' => 'Очереди ↔ Автоответы',
         'Refresh interval' => 'Интервал обновления',
         'Reminder Tickets' => 'Заявки с напоминанием',
         'Removed subscription for user "%s".' => 'Удалена подписка для пользователя «%s».',
@@ -9024,13 +9037,11 @@ Thanks for your help!
         'Responsible Tickets' => 'Ответственные заявки',
         'Responsible Tickets.' => 'Ответственные заявки',
         'Right' => 'Правый',
-        'Roles ↔ Groups' => 'Роли ↔ Группы',
         'Romanian' => '',
         'Running Process Tickets' => 'Запущенные Процессные заявки',
         'Russian' => 'Русский',
         'S/MIME Certificates' => 'Сертификаты S/MIME',
         'SMS' => 'SMS',
-        'Salutations' => 'Приветствия',
         'Schedule a maintenance period.' => 'Управлять периодом обслуживания.',
         'Screen after new ticket' => 'Экран после создания новой заявки',
         'Search Customer' => 'Искать клиента',
@@ -9068,7 +9079,6 @@ Thanks for your help!
         'Sent notification to "%s".' => '',
         'Serbian Cyrillic' => 'Сербский Кириллица',
         'Serbian Latin' => 'Сербский Латиница',
-        'Service Level Agreements' => 'Соглашения об Уровне Сервиса',
         'Service view' => 'Обзор сервисов',
         'ServiceView' => 'ServiceView',
         'Set a new password by filling in your current password and a new one.' =>
@@ -9083,7 +9093,6 @@ Thanks for your help!
         'Shows information on how to start OTRS Daemon' => 'Показывает информацию о том как запустить OTRS Daemon',
         'Shows last mention of tickets.' => '',
         'Signature data.' => '',
-        'Signatures' => 'Подписи',
         'Simple' => 'Простой',
         'Skin' => 'Окрас',
         'Slovak' => 'Словацкий',
@@ -9118,8 +9127,6 @@ Thanks for your help!
         'System Configuration Deployment' => '',
         'System Configuration Group' => '',
         'System Maintenance' => 'Обслуживание системы',
-        'Templates ↔ Attachments' => 'Шаблоны ↔ Вложения',
-        'Templates ↔ Queues' => 'Шаблоны ↔ Очереди',
         'Textarea' => 'Textarea/Длинный текст',
         'Thai' => 'Тайский',
         'The PGP signature is expired.' => '',

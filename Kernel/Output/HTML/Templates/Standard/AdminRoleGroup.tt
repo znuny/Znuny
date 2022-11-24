@@ -62,6 +62,29 @@
                 <input type="text" id="FilterGroups" class="FilterBox" placeholder="[% Translate("Just start typing to filter...") | html %]" name="FilterGroups" value="" title="[% Translate("Filter for groups") | html %]" />
             </div>
         </div>
+       <div class='WidgetSimple'>
+            <div class='Header'>
+                <h2>[% Translate('Related Actions') | html %]</h2>
+            </div>
+            <div class='Content'>
+                <ul class='ActionList SpacingTop'>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminRole' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Roles') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminRoleUser' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Agents ↔ Roles') | html %]
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="ContentColumn">
         <div class="WidgetSimple">

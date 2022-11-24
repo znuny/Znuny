@@ -67,6 +67,78 @@
             </div>
         </div>
 [% RenderBlockEnd("Filter") %]
+        <div class='WidgetSimple'>
+            <div class='Header'>
+                <h2>[% Translate('Related Actions') | html %]</h2>
+            </div>
+            <div class='Content'>
+                <ul class='ActionList SpacingTop'>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminSystemAddress' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Email Addresses') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminGroup' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Groups') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminMailAccount' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('PostMaster Mail Accounts') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminSalutation' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Salutations') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminSignature' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Signatures') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminQueueAutoResponse' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Queues ↔ Auto Responses') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminQueueTemplates' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Templates ↔ Queues') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=Search;Search=TimeWorkingHours' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Configure Working Hours') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=Search;Search=%23%23%23Queue' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Configure Queue Related Settings') | html %]
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <div class="ContentColumn">

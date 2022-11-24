@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.219912294948839;
+    $Self->{Completeness}        = 0.21942912747324;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -259,6 +259,9 @@ sub Data {
         'Edit Attachment' => 'Uredi prilog',
         'Filter for Attachments' => 'Filtar za privitke',
         'Filter for attachments' => '',
+        'Related Actions' => '',
+        'Templates' => '',
+        'Templates ↔ Attachments' => '',
         'Filename' => 'Naziv datoteke',
         'Download file' => 'Preuzmi datoteku',
         'Delete this attachment' => 'Obriši ovaj prilog',
@@ -271,6 +274,7 @@ sub Data {
         'Edit Auto Response' => 'Uredi automatski odgovor',
         'Filter for Auto Responses' => 'Filtar za automatske odgovore',
         'Filter for auto responses' => '',
+        'Queues ↔ Auto Responses' => '',
         'Response' => 'Odgovor',
         'Auto response from' => 'Automatski odgovor od',
         'Reference' => 'Reference',
@@ -396,6 +400,8 @@ sub Data {
         'Search' => 'Traži',
         'Wildcards like \'*\' are allowed.' => '',
         'Select' => 'Izaberi',
+        'Customer Users' => 'Korisnici',
+        'Customers ↔ Groups' => '',
         'List (only %s shown - more available)' => '',
         'total' => '',
         'Please enter a search term to look for customers.' => 'Molimo zadajte upit za pronalaženje korisnika.',
@@ -418,9 +424,9 @@ sub Data {
         'Select the customer:group permissions.' => 'Izaberi dozvole za korisnik:grupa',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Ako ništa nije izabrano, onda nema dozvola u ovoj grupi (kartice neće biti dostupne korisniku).',
-        'Search Results' => 'Rezultat pretrage',
         'Customers' => 'Korisnici',
         'Groups' => 'Grupe',
+        'Search Results' => 'Rezultat pretrage',
         'Change Group Relations for Customer' => 'Promijeni Grupne Veze za Korisnika',
         'Change Customer Relations for Group' => 'Promijeni Korisničke Veze za Grupu',
         'Toggle %s Permission for all' => 'Promijeni %s dozvole za sve',
@@ -440,6 +446,9 @@ sub Data {
         'Back to search results' => '',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             '',
+        'Customer Users ↔ Customers' => '',
+        'Customer Users ↔ Groups' => '',
+        'Customer Users ↔ Services' => '',
         'List (%s total)' => '',
         'Username' => 'Korisničko ime',
         'Email' => 'E-pošta',
@@ -471,7 +480,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
         'Manage Customer User-Customer Relations' => '',
         'Select the customer user:customer relations.' => '',
-        'Customer Users' => 'Korisnici',
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
         'Toggle active state for all' => 'Promijeni aktivno stanje za sve',
@@ -499,6 +507,7 @@ sub Data {
         'Filter for Services' => 'Filter za usluge',
         'Filter for services' => '',
         'Services' => 'Usluge',
+        'Service Level Agreements' => 'Sporazumi o razini usluge',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
         'Dynamic Fields Management' => '',
@@ -513,6 +522,7 @@ sub Data {
         'Overwrite existing configurations' => '',
         'Import configurations' => '',
         'Export configurations' => '',
+        'Process Management' => '',
         'Dynamic fields ↔ Screens' => '',
         'Dynamic Fields List' => '',
         'Dynamic fields per page' => '',
@@ -1361,6 +1371,8 @@ sub Data {
         'Create new groups to handle access permissions for different groups of agent (e. g. purchasing department, support department, sales department, ...). ' =>
             'Kreirajte nove grupe da bi ste lakše upravljali dozvolama za različite zaposlenike (npr. prema odjelima)',
         'It\'s useful for ASP solutions. ' => 'Korisno za ASP rješenja.',
+        'Agents ↔ Groups' => 'Operateri <-> Grupe',
+        'Roles ↔ Groups' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'System Log' => 'Dnevnik/zapisnik sustava',
@@ -1732,12 +1744,12 @@ sub Data {
         'Edit Priority' => 'Uredi prioritet',
         'Filter for Priorities' => '',
         'Filter for priorities' => '',
+        'Configure Priority Visibility and Defaults' => '',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             '',
         'This priority is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-        'Process Management' => '',
         'Filter for Processes' => '',
         'Filter for processes' => '',
         'Create New Process' => '',
@@ -1754,6 +1766,9 @@ sub Data {
             '',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             '',
+        'Access Control Lists (ACL)' => '',
+        'Generic Agent' => '',
+        'Manage Process Widiget Groups' => '',
         'Processes' => '',
         'Process name' => '',
         'Print' => 'Ispiši',
@@ -1908,6 +1923,13 @@ sub Data {
         'Edit Queue' => 'Uredi red',
         'Filter for Queues' => 'Filtar za repove',
         'Filter for queues' => '',
+        'Email Addresses' => 'Adrese E-pošte',
+        'PostMaster Mail Accounts' => 'PostMaster računi E-pošte',
+        'Salutations' => 'Pozdravi',
+        'Signatures' => 'Potpisi',
+        'Templates ↔ Queues' => '',
+        'Configure Working Hours' => '',
+        'Configure Queue Related Settings' => '',
         'A queue with this name already exists!' => '',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             '',
@@ -1956,7 +1978,6 @@ sub Data {
         'Manage Template-Queue Relations' => '',
         'Filter for Templates' => '',
         'Filter for templates' => '',
-        'Templates' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'Upravljanje ulogama',
@@ -1966,6 +1987,7 @@ sub Data {
         'Filter for roles' => '',
         'Create a role and put groups in it. Then add the role to the users.' =>
             'Stvori ulogu i dodaj grupe u nju. Zatim dodaj ulogu zaposlenicima.',
+        'Agents ↔ Roles' => 'Operateri <-> Uloge',
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             'Nema definiranih uloga. Koristite tipku za dodavanje nove uloge.',
 
@@ -2002,6 +2024,7 @@ sub Data {
         'Edit SLA' => 'Uredi SLA',
         'Add SLA' => 'Dodaj SLA',
         'Filter for SLAs' => '',
+        'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => 'Molimo pišite samo brojeve!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
@@ -2083,6 +2106,7 @@ sub Data {
         'Service Management' => 'Upravljanje uslugama',
         'Add Service' => 'Dodaj Uslugu',
         'Edit Service' => 'Uredi Uslugu',
+        'Configure Service Visibility and Defaults' => '',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             '',
         'Sub-service of' => 'Pod-usluga od',
@@ -2119,6 +2143,8 @@ sub Data {
         'Filter for states' => '',
         'Attention' => 'Pozor',
         'Please also update the states in SysConfig where needed.' => '',
+        'Configure State Visibility and Defaults' => '',
+        'Configure State Type Visibility and Defaults' => '',
         'This state is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
         'State type' => 'Tip stanja',
@@ -2320,6 +2346,7 @@ sub Data {
         'Edit Type' => 'Uredi tip',
         'Filter for Types' => '',
         'Filter for types' => '',
+        'Configure Type Visibility and Defaults' => '',
         'A type with this name already exists!' => '',
         'This type is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
@@ -3578,9 +3605,6 @@ sub Data {
             '',
         'Yes, but require at least one active notification method.' => '',
 
-        # Perl Module: Kernel/Modules/AdminAttachment.pm
-        'Attachment added!' => 'Dodan prilog!',
-
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
 
@@ -4136,7 +4160,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminTemplate.pm
         'Template updated!' => '',
-        'Template added!' => '',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
         'Change Attachment Relations for Template' => '',
@@ -8511,7 +8534,6 @@ Thanks for your help!
         'AJAX functions for notification event transport web service.' =>
             '',
         'AJAX interface for the web service dynamic field backends.' => '',
-        'Access Control Lists (ACL)' => '',
         'AccountedTime' => '',
         'Activation of dynamic fields for screens.' => '',
         'ActivityID' => '',
@@ -8544,8 +8566,6 @@ Thanks for your help!
         'Agent Statistics.' => '',
         'Agent User Search' => '',
         'Agent User Search.' => '',
-        'Agents ↔ Groups' => 'Operateri <-> Grupe',
-        'Agents ↔ Roles' => 'Operateri <-> Uloge',
         'All CustomerIDs of a customer user.' => '',
         'All customer users of a CustomerID' => '',
         'All escalated tickets' => 'Sve eskalirani kartice',
@@ -8694,9 +8714,6 @@ Thanks for your help!
         'Customer User Information Center search.' => '',
         'Customer User Information Center.' => '',
         'Customer User-Customer Relations' => '',
-        'Customer Users ↔ Customers' => '',
-        'Customer Users ↔ Groups' => '',
-        'Customer Users ↔ Services' => '',
         'Customer preferences.' => '',
         'Customer ticket overview' => '',
         'Customer ticket search.' => '',
@@ -8705,7 +8722,6 @@ Thanks for your help!
         'CustomerID search' => '',
         'CustomerName' => '',
         'CustomerUser' => '',
-        'Customers ↔ Groups' => '',
         'Czech' => '',
         'Danish' => '',
         'Dashboard overview.' => '',
@@ -8747,7 +8763,6 @@ Thanks for your help!
         'Edit Customer Users.' => '',
         'Edit appointment' => '',
         'Edit customer company' => '',
-        'Email Addresses' => 'Adrese E-pošte',
         'Email Outbound' => '',
         'Email Resend' => '',
         'Email communication channel.' => '',
@@ -8976,7 +8991,6 @@ Thanks for your help!
         'Portuguese' => '',
         'Portuguese (Brasil)' => '',
         'PostMaster Filters' => 'PostMaster filtri',
-        'PostMaster Mail Accounts' => 'PostMaster računi E-pošte',
         'Print this ticket' => '',
         'Priorities' => 'Prioriteti',
         'Process Management Activity Dialog GUI' => '',
@@ -8995,7 +9009,6 @@ Thanks for your help!
         'Public Calendar' => '',
         'Public calendar.' => '',
         'Queue view' => 'Pregled reda',
-        'Queues ↔ Auto Responses' => '',
         'Refresh interval' => 'Interval osvježavanja',
         'Reminder Tickets' => 'Kartice podsjetnika',
         'Removed subscription for user "%s".' => 'Pretplata za korisnika "%s" isključena.',
@@ -9005,13 +9018,11 @@ Thanks for your help!
         'Responsible Tickets' => '',
         'Responsible Tickets.' => '',
         'Right' => '',
-        'Roles ↔ Groups' => '',
         'Romanian' => '',
         'Running Process Tickets' => '',
         'Russian' => '',
         'S/MIME Certificates' => 'S/MIME vjerodajnice',
         'SMS' => '',
-        'Salutations' => 'Pozdravi',
         'Schedule a maintenance period.' => '',
         'Screen after new ticket' => 'Ekran poslije otvaranja nove kartice',
         'Search Customer' => 'Traži korisnika',
@@ -9049,7 +9060,6 @@ Thanks for your help!
         'Sent notification to "%s".' => '',
         'Serbian Cyrillic' => '',
         'Serbian Latin' => '',
-        'Service Level Agreements' => 'Sporazumi o razini usluge',
         'Service view' => '',
         'ServiceView' => '',
         'Set a new password by filling in your current password and a new one.' =>
@@ -9064,7 +9074,6 @@ Thanks for your help!
         'Shows information on how to start OTRS Daemon' => '',
         'Shows last mention of tickets.' => '',
         'Signature data.' => '',
-        'Signatures' => 'Potpisi',
         'Simple' => '',
         'Skin' => 'Tema',
         'Slovak' => '',
@@ -9099,8 +9108,6 @@ Thanks for your help!
         'System Configuration Deployment' => '',
         'System Configuration Group' => '',
         'System Maintenance' => '',
-        'Templates ↔ Attachments' => '',
-        'Templates ↔ Queues' => '',
         'Textarea' => '',
         'Thai' => '',
         'The PGP signature is expired.' => '',

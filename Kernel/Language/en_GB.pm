@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.626766282280331;
+    $Self->{Completeness}        = 0.625527084009082;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -258,6 +258,9 @@ sub Data {
         'Edit Attachment' => 'Edit Attachment',
         'Filter for Attachments' => 'Filter for Attachments',
         'Filter for attachments' => '',
+        'Related Actions' => '',
+        'Templates' => 'Templates',
+        'Templates ↔ Attachments' => '',
         'Filename' => 'Filename',
         'Download file' => 'Download file',
         'Delete this attachment' => 'Delete this attachment',
@@ -270,6 +273,7 @@ sub Data {
         'Edit Auto Response' => 'Edit Auto Response',
         'Filter for Auto Responses' => 'Filter for Auto Responses',
         'Filter for auto responses' => '',
+        'Queues ↔ Auto Responses' => '',
         'Response' => 'Response',
         'Auto response from' => 'Auto response from',
         'Reference' => 'Reference',
@@ -395,6 +399,8 @@ sub Data {
         'Search' => 'Search',
         'Wildcards like \'*\' are allowed.' => 'Wildcards like \'*\' are allowed.',
         'Select' => 'Select',
+        'Customer Users' => 'Customer Users',
+        'Customers ↔ Groups' => '',
         'List (only %s shown - more available)' => 'List (only %s shown - more available)',
         'total' => 'total',
         'Please enter a search term to look for customers.' => 'Please enter a search term to look for customers.',
@@ -417,9 +423,9 @@ sub Data {
         'Select the customer:group permissions.' => 'Select the customer:group permissions.',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).',
-        'Search Results' => 'Search Results',
         'Customers' => 'Customers',
         'Groups' => 'Groups',
+        'Search Results' => 'Search Results',
         'Change Group Relations for Customer' => 'Change Group Relations for Customer',
         'Change Customer Relations for Group' => 'Change Customer Relations for Group',
         'Toggle %s Permission for all' => 'Toggle %s Permission for all',
@@ -439,6 +445,9 @@ sub Data {
         'Back to search results' => 'Back to search results',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Customer user are needed to have a customer history and to login via customer panel.',
+        'Customer Users ↔ Customers' => '',
+        'Customer Users ↔ Groups' => '',
+        'Customer Users ↔ Services' => '',
         'List (%s total)' => 'List (%s total)',
         'Username' => 'Username',
         'Email' => 'Email',
@@ -470,7 +479,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
         'Manage Customer User-Customer Relations' => '',
         'Select the customer user:customer relations.' => '',
-        'Customer Users' => 'Customer Users',
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
         'Toggle active state for all' => 'Toggle active state for all',
@@ -498,6 +506,7 @@ sub Data {
         'Filter for Services' => 'Filter for Services',
         'Filter for services' => '',
         'Services' => 'Services',
+        'Service Level Agreements' => 'Service Level Agreements',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
         'Dynamic Fields Management' => 'Dynamic Fields Management',
@@ -512,6 +521,7 @@ sub Data {
         'Overwrite existing configurations' => '',
         'Import configurations' => '',
         'Export configurations' => '',
+        'Process Management' => 'Process Management',
         'Dynamic fields ↔ Screens' => '',
         'Dynamic Fields List' => 'Dynamic Fields List',
         'Dynamic fields per page' => 'Dynamic fields per page',
@@ -1360,6 +1370,8 @@ sub Data {
         'Create new groups to handle access permissions for different groups of agent (e. g. purchasing department, support department, sales department, ...). ' =>
             'Create new groups to handle access permissions for different groups of agent (e. g. purchasing department, support department, sales department, ...). ',
         'It\'s useful for ASP solutions. ' => 'It\'s useful for ASP solutions. ',
+        'Agents ↔ Groups' => '',
+        'Roles ↔ Groups' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'System Log' => 'System Log',
@@ -1731,12 +1743,12 @@ sub Data {
         'Edit Priority' => 'Edit Priority',
         'Filter for Priorities' => '',
         'Filter for priorities' => '',
+        'Configure Priority Visibility and Defaults' => '',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             '',
         'This priority is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-        'Process Management' => 'Process Management',
         'Filter for Processes' => 'Filter for Processes',
         'Filter for processes' => '',
         'Create New Process' => 'Create New Process',
@@ -1753,6 +1765,9 @@ sub Data {
             'To create a new Process you can either import a Process that was exported from another system or create a complete new one.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'Changes to the Processes here only affect the behaviour of the system, if you synchronise the Process data. By synchronising the Processes, the newly made changes will be written to the Configuration.',
+        'Access Control Lists (ACL)' => 'Access Control Lists (ACL)',
+        'Generic Agent' => '',
+        'Manage Process Widiget Groups' => '',
         'Processes' => 'Processes',
         'Process name' => 'Process name',
         'Print' => 'Print',
@@ -1907,6 +1922,13 @@ sub Data {
         'Edit Queue' => 'Edit Queue',
         'Filter for Queues' => 'Filter for Queues',
         'Filter for queues' => '',
+        'Email Addresses' => 'Email Addresses',
+        'PostMaster Mail Accounts' => 'PostMaster Mail Accounts',
+        'Salutations' => 'Salutations',
+        'Signatures' => 'Signatures',
+        'Templates ↔ Queues' => '',
+        'Configure Working Hours' => '',
+        'Configure Queue Related Settings' => '',
         'A queue with this name already exists!' => 'A queue with this name already exists!',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             '',
@@ -1955,7 +1977,6 @@ sub Data {
         'Manage Template-Queue Relations' => 'Manage Template-Queue Relations',
         'Filter for Templates' => 'Filter for Templates',
         'Filter for templates' => '',
-        'Templates' => 'Templates',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'Role Management',
@@ -1965,6 +1986,7 @@ sub Data {
         'Filter for roles' => '',
         'Create a role and put groups in it. Then add the role to the users.' =>
             'Create a role and put groups in it. Then add the role to the users.',
+        'Agents ↔ Roles' => '',
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             'There are no roles defined. Please use the \'Add\' button to create a new role.',
 
@@ -2001,6 +2023,7 @@ sub Data {
         'Edit SLA' => 'Edit SLA',
         'Add SLA' => 'Add SLA',
         'Filter for SLAs' => '',
+        'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => 'Please write only numbers!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
@@ -2082,6 +2105,7 @@ sub Data {
         'Service Management' => 'Service Management',
         'Add Service' => 'Add Service',
         'Edit Service' => 'Edit Service',
+        'Configure Service Visibility and Defaults' => '',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             '',
         'Sub-service of' => 'Sub-service of',
@@ -2118,6 +2142,8 @@ sub Data {
         'Filter for states' => '',
         'Attention' => 'Attention',
         'Please also update the states in SysConfig where needed.' => 'Please also update the states in SysConfig where needed.',
+        'Configure State Visibility and Defaults' => '',
+        'Configure State Type Visibility and Defaults' => '',
         'This state is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
         'State type' => 'State type',
@@ -2319,6 +2345,7 @@ sub Data {
         'Edit Type' => 'Edit Type',
         'Filter for Types' => '',
         'Filter for types' => '',
+        'Configure Type Visibility and Defaults' => '',
         'A type with this name already exists!' => 'A type with this name already exists!',
         'This type is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
@@ -3577,9 +3604,6 @@ sub Data {
             '',
         'Yes, but require at least one active notification method.' => '',
 
-        # Perl Module: Kernel/Modules/AdminAttachment.pm
-        'Attachment added!' => 'Attachment added!',
-
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
 
@@ -4135,7 +4159,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminTemplate.pm
         'Template updated!' => 'Template updated!',
-        'Template added!' => 'Template added!',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
         'Change Attachment Relations for Template' => 'Change Attachment Relations for Template',
@@ -8521,7 +8544,6 @@ Thanks for your help!
         'AJAX functions for notification event transport web service.' =>
             '',
         'AJAX interface for the web service dynamic field backends.' => '',
-        'Access Control Lists (ACL)' => 'Access Control Lists (ACL)',
         'AccountedTime' => 'AccountedTime',
         'Activation of dynamic fields for screens.' => '',
         'ActivityID' => 'ActivityID',
@@ -8554,8 +8576,6 @@ Thanks for your help!
         'Agent Statistics.' => '',
         'Agent User Search' => '',
         'Agent User Search.' => '',
-        'Agents ↔ Groups' => '',
-        'Agents ↔ Roles' => '',
         'All CustomerIDs of a customer user.' => '',
         'All customer users of a CustomerID' => 'All customer users of a CustomerID',
         'All escalated tickets' => 'All escalated tickets',
@@ -8704,9 +8724,6 @@ Thanks for your help!
         'Customer User Information Center search.' => '',
         'Customer User Information Center.' => '',
         'Customer User-Customer Relations' => '',
-        'Customer Users ↔ Customers' => '',
-        'Customer Users ↔ Groups' => '',
-        'Customer Users ↔ Services' => '',
         'Customer preferences.' => 'Customer preferences.',
         'Customer ticket overview' => 'Customer ticket overview',
         'Customer ticket search.' => 'Customer ticket search.',
@@ -8715,7 +8732,6 @@ Thanks for your help!
         'CustomerID search' => 'CustomerID search',
         'CustomerName' => 'CustomerName',
         'CustomerUser' => 'CustomerUser',
-        'Customers ↔ Groups' => '',
         'Czech' => 'Czech',
         'Danish' => 'Danish',
         'Dashboard overview.' => '',
@@ -8757,7 +8773,6 @@ Thanks for your help!
         'Edit Customer Users.' => 'Edit Customer Users.',
         'Edit appointment' => '',
         'Edit customer company' => 'Edit customer company',
-        'Email Addresses' => 'Email Addresses',
         'Email Outbound' => 'Email Outbound',
         'Email Resend' => '',
         'Email communication channel.' => '',
@@ -8986,7 +9001,6 @@ Thanks for your help!
         'Portuguese' => 'Portuguese',
         'Portuguese (Brasil)' => 'Portuguese (Brasil)',
         'PostMaster Filters' => 'PostMaster Filters',
-        'PostMaster Mail Accounts' => 'PostMaster Mail Accounts',
         'Print this ticket' => 'Print this ticket',
         'Priorities' => 'Priorities',
         'Process Management Activity Dialog GUI' => 'Process Management Activity Dialog GUI',
@@ -9005,7 +9019,6 @@ Thanks for your help!
         'Public Calendar' => '',
         'Public calendar.' => '',
         'Queue view' => 'Queue view',
-        'Queues ↔ Auto Responses' => '',
         'Refresh interval' => 'Refresh interval',
         'Reminder Tickets' => 'Reminder Tickets',
         'Removed subscription for user "%s".' => 'Removed subscription for user "%s".',
@@ -9015,13 +9028,11 @@ Thanks for your help!
         'Responsible Tickets' => 'Responsible Tickets',
         'Responsible Tickets.' => 'Responsible Tickets.',
         'Right' => 'Right',
-        'Roles ↔ Groups' => '',
         'Romanian' => '',
         'Running Process Tickets' => 'Running Process Tickets',
         'Russian' => 'Russian',
         'S/MIME Certificates' => 'S/MIME Certificates',
         'SMS' => 'SMS',
-        'Salutations' => 'Salutations',
         'Schedule a maintenance period.' => 'Schedule a maintenance period.',
         'Screen after new ticket' => 'Screen after new ticket',
         'Search Customer' => 'Search Customer',
@@ -9059,7 +9070,6 @@ Thanks for your help!
         'Sent notification to "%s".' => '',
         'Serbian Cyrillic' => 'Serbian Cyrillic',
         'Serbian Latin' => 'Serbian Latin',
-        'Service Level Agreements' => 'Service Level Agreements',
         'Service view' => 'Service view',
         'ServiceView' => 'ServiceView',
         'Set a new password by filling in your current password and a new one.' =>
@@ -9074,7 +9084,6 @@ Thanks for your help!
         'Shows information on how to start OTRS Daemon' => 'Shows information on how to start OTRS Daemon',
         'Shows last mention of tickets.' => '',
         'Signature data.' => '',
-        'Signatures' => 'Signatures',
         'Simple' => 'Simple',
         'Skin' => 'Skin',
         'Slovak' => 'Slovak',
@@ -9109,8 +9118,6 @@ Thanks for your help!
         'System Configuration Deployment' => '',
         'System Configuration Group' => '',
         'System Maintenance' => 'System Maintenance',
-        'Templates ↔ Attachments' => '',
-        'Templates ↔ Queues' => '',
         'Textarea' => 'Textarea',
         'Thai' => 'Thai',
         'The PGP signature is expired.' => '',

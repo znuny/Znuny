@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.621893779438038;
+    $Self->{Completeness}        = 0.620661693156017;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -259,6 +259,9 @@ sub Data {
         'Edit Attachment' => 'Edytuj załącznik',
         'Filter for Attachments' => 'Filtr załączników',
         'Filter for attachments' => 'Filtr dla załączników',
+        'Related Actions' => '',
+        'Templates' => 'Szablony',
+        'Templates ↔ Attachments' => '',
         'Filename' => 'Nazwa pliku',
         'Download file' => 'Pobierz plik',
         'Delete this attachment' => 'Usuń ten załącznik',
@@ -271,6 +274,7 @@ sub Data {
         'Edit Auto Response' => 'Edytuj automatyczną odpowiedź',
         'Filter for Auto Responses' => 'Filtrowanie automatycznych odpowiedzi',
         'Filter for auto responses' => 'Filtr dla automatycznych odpowiedzi',
+        'Queues ↔ Auto Responses' => '',
         'Response' => 'Odpowiedź',
         'Auto response from' => 'Automatyczna odpowiedź od',
         'Reference' => 'Podpowiedzi',
@@ -396,6 +400,8 @@ sub Data {
         'Search' => 'Szukaj',
         'Wildcards like \'*\' are allowed.' => 'Wieloznaczniki (wildcards) takie jak \'*\' są dozwolone.',
         'Select' => 'Zaznacz',
+        'Customer Users' => 'Użytkownicy klienta',
+        'Customers ↔ Groups' => 'Klienci ↔ Grupy',
         'List (only %s shown - more available)' => 'Lista (pokazano tylko %s - jest więcej dostępnych',
         'total' => 'wszystkich',
         'Please enter a search term to look for customers.' => 'Prosimy wprowadź frazę wyszukiwania by odszukać klientów.',
@@ -419,9 +425,9 @@ sub Data {
         'Select the customer:group permissions.' => 'Wybierz uprawnienia klient:grupa',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Jeśli nic nie zostało zaznaczone, wtedy nie ma uprawnień w tej grupie (zgłoszenia nie będą dostępne dla klienta).',
-        'Search Results' => 'Wyniki wyszukiwania',
         'Customers' => 'Klienci',
         'Groups' => 'Grupy',
+        'Search Results' => 'Wyniki wyszukiwania',
         'Change Group Relations for Customer' => 'Zmień relacje grupy dla klienta',
         'Change Customer Relations for Group' => 'Zmień relacje klienta do grup',
         'Toggle %s Permission for all' => 'Przełącz uprawnienie %s dla wszystkich',
@@ -441,6 +447,9 @@ sub Data {
         'Back to search results' => 'Wstecz do wyników wyszukiwania',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Aby posiadać historię klienta i umożliwić mu logowanie się do panelu klienta konieczne jest założenie konta użytkownika klienta.',
+        'Customer Users ↔ Customers' => 'Użytkownicy Klientów ↔ Klienci',
+        'Customer Users ↔ Groups' => 'Użytkownicy Klienta ↔ Grupy',
+        'Customer Users ↔ Services' => 'Użytkownicy Klienta ↔ Usługi',
         'List (%s total)' => 'Lista (%s wszystkich)',
         'Username' => 'Nazwa użytkownika',
         'Email' => 'E-Mail',
@@ -472,7 +481,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
         'Manage Customer User-Customer Relations' => 'Zarządzaj relacjami Użytkownik klienta - Klient',
         'Select the customer user:customer relations.' => 'Wybierz relacje użytkownik klienta:klient',
-        'Customer Users' => 'Użytkownicy klienta',
         'Change Customer Relations for Customer User' => 'Zmień relacje Klienta dla Użytkownika klienta',
         'Change Customer User Relations for Customer' => 'Zmień relacje Użytkownika klienta do Klienta',
         'Toggle active state for all' => 'Przełącz stan aktywności dla wszystkich',
@@ -500,6 +508,7 @@ sub Data {
         'Filter for Services' => 'Filtruj usługi',
         'Filter for services' => 'Filtr usług',
         'Services' => 'Usługi',
+        'Service Level Agreements' => 'Poziomy SLA',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
         'Dynamic Fields Management' => 'Zarządzanie polami dynamicznymi',
@@ -514,6 +523,7 @@ sub Data {
         'Overwrite existing configurations' => '',
         'Import configurations' => '',
         'Export configurations' => '',
+        'Process Management' => 'Zarządzanie procesami',
         'Dynamic fields ↔ Screens' => '',
         'Dynamic Fields List' => 'Lista pól dynamicznych',
         'Dynamic fields per page' => 'Pola dynamiczne na stronę',
@@ -1362,6 +1372,8 @@ sub Data {
         'Create new groups to handle access permissions for different groups of agent (e. g. purchasing department, support department, sales department, ...). ' =>
             'Utwórz nowe grupy aby obsłużyć prawa dostępu dla różnych grup agentów (np. działu zakupu, działu wsparcia, działu sprzedaży, ...). ',
         'It\'s useful for ASP solutions. ' => 'Przydatne dla rozwiązań ASP. ',
+        'Agents ↔ Groups' => 'Agenci ↔ Grupy',
+        'Roles ↔ Groups' => 'Role ↔ Grupy',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'System Log' => 'Log systemu',
@@ -1733,12 +1745,12 @@ sub Data {
         'Edit Priority' => 'Edytuj priorytet',
         'Filter for Priorities' => 'Filtr dla Priorytetów',
         'Filter for priorities' => 'Filtr dla priorytetów',
+        'Configure Priority Visibility and Defaults' => '',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             '',
         'This priority is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-        'Process Management' => 'Zarządzanie procesami',
         'Filter for Processes' => 'Filtr procesów',
         'Filter for processes' => '',
         'Create New Process' => 'Utwórz nowy proces',
@@ -1755,6 +1767,9 @@ sub Data {
             'Aby utworzyć nowy proces, możesz albo zaimportować proces, który został wyeksportowany z innego systemu lub utworzyć całkowicie nowy proces.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'Zmiany wprowadzone tutaj do procesów zostaną uwzględnione w systemie jeśli zsynchronizujesz dane procesów. Wskutek synchronizacji procesów, nowe zmiany będą zapisane do konfiguracji.',
+        'Access Control Lists (ACL)' => 'Lista Kontroli dostępu (ACL)',
+        'Generic Agent' => '',
+        'Manage Process Widiget Groups' => '',
         'Processes' => 'Procesy',
         'Process name' => 'Nazwa procesu',
         'Print' => 'Drukuj',
@@ -1909,6 +1924,13 @@ sub Data {
         'Edit Queue' => 'Edytuj kolejkę',
         'Filter for Queues' => 'Filtrowanie kolejek',
         'Filter for queues' => 'Filtr dla kolejek',
+        'Email Addresses' => 'Adresy e-mail',
+        'PostMaster Mail Accounts' => 'Konta pocztowe systemu',
+        'Salutations' => 'Powitania',
+        'Signatures' => 'Podpisy',
+        'Templates ↔ Queues' => 'Szablony ↔ Kolejki',
+        'Configure Working Hours' => '',
+        'Configure Queue Related Settings' => '',
         'A queue with this name already exists!' => 'Kolejka o tej nazwie już istnieje!',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             '',
@@ -1957,7 +1979,6 @@ sub Data {
         'Manage Template-Queue Relations' => 'Zarządzaj relacjami Szablonowo-Kolejkowymi',
         'Filter for Templates' => 'Filtr szalbonów',
         'Filter for templates' => '',
-        'Templates' => 'Szablony',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'Zarządzanie rolami',
@@ -1967,6 +1988,7 @@ sub Data {
         'Filter for roles' => 'Filtr dla ról',
         'Create a role and put groups in it. Then add the role to the users.' =>
             'Utwórz rolę i dodaj grupę do niej. Potem dodaj rolę do użytkownika.',
+        'Agents ↔ Roles' => 'Agenci ↔ Role',
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             'Nie ma zdefiniowanych ról. Użyj przycisku \'Dodaj rolę\' aby utworzyć nową rolę.',
 
@@ -2003,6 +2025,7 @@ sub Data {
         'Edit SLA' => 'Edytuj SLA',
         'Add SLA' => 'Dodaj SLA',
         'Filter for SLAs' => 'Filtr dla SLA',
+        'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => 'Podaj wyłączenie numery!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
@@ -2084,6 +2107,7 @@ sub Data {
         'Service Management' => 'Konfiguracja usług',
         'Add Service' => 'Dodaj usługę',
         'Edit Service' => 'Edytuj usługę',
+        'Configure Service Visibility and Defaults' => '',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             'Długość nazwy usługi to maksymalnie 200 znaków (razem z podusługą)',
         'Sub-service of' => 'Usługa podrzędna dla',
@@ -2120,6 +2144,8 @@ sub Data {
         'Filter for states' => 'Filtr dla stanów',
         'Attention' => 'Uwaga',
         'Please also update the states in SysConfig where needed.' => 'Zaktualizuj również stan w konfiguracji systemu tam gdzie to konieczne.',
+        'Configure State Visibility and Defaults' => '',
+        'Configure State Type Visibility and Defaults' => '',
         'This state is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
         'State type' => 'Rodzaj stanu',
@@ -2321,6 +2347,7 @@ sub Data {
         'Edit Type' => 'Edytuj typ zgłoszenia',
         'Filter for Types' => '',
         'Filter for types' => '',
+        'Configure Type Visibility and Defaults' => '',
         'A type with this name already exists!' => 'Typ o takiej nazwie już istnieje!',
         'This type is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
@@ -3579,9 +3606,6 @@ sub Data {
             'Wszyscy agenci z prawem zapisu wydarzenia (kalendarza)',
         'Yes, but require at least one active notification method.' => '',
 
-        # Perl Module: Kernel/Modules/AdminAttachment.pm
-        'Attachment added!' => 'Załącznik dodany!',
-
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => 'Automatyczna odpowiedź została dodana!',
 
@@ -4137,7 +4161,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminTemplate.pm
         'Template updated!' => 'Szablon zmieniony!',
-        'Template added!' => 'Szablon dodany!',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
         'Change Attachment Relations for Template' => 'Zmień relacje załącznika dla szablonu',
@@ -8512,7 +8535,6 @@ Thanks for your help!
         'AJAX functions for notification event transport web service.' =>
             '',
         'AJAX interface for the web service dynamic field backends.' => '',
-        'Access Control Lists (ACL)' => 'Lista Kontroli dostępu (ACL)',
         'AccountedTime' => 'Ubiegły czas',
         'Activation of dynamic fields for screens.' => '',
         'ActivityID' => '',
@@ -8545,8 +8567,6 @@ Thanks for your help!
         'Agent Statistics.' => 'Statystyki Agenta',
         'Agent User Search' => '',
         'Agent User Search.' => '',
-        'Agents ↔ Groups' => 'Agenci ↔ Grupy',
-        'Agents ↔ Roles' => 'Agenci ↔ Role',
         'All CustomerIDs of a customer user.' => '',
         'All customer users of a CustomerID' => 'Wszyscy użytkownicy  z identyfikatorem klienta',
         'All escalated tickets' => 'Wszystkie eskalowane zgłoszenia',
@@ -8695,9 +8715,6 @@ Thanks for your help!
         'Customer User Information Center search.' => 'Wyszukiwanie w Centrum Informacji o użytkowniku klienta.',
         'Customer User Information Center.' => 'Centrum Informacji o użytkowniku klienta.',
         'Customer User-Customer Relations' => '',
-        'Customer Users ↔ Customers' => 'Użytkownicy Klientów ↔ Klienci',
-        'Customer Users ↔ Groups' => 'Użytkownicy Klienta ↔ Grupy',
-        'Customer Users ↔ Services' => 'Użytkownicy Klienta ↔ Usługi',
         'Customer preferences.' => 'Właściwości klienta',
         'Customer ticket overview' => '',
         'Customer ticket search.' => '',
@@ -8706,7 +8723,6 @@ Thanks for your help!
         'CustomerID search' => '',
         'CustomerName' => 'Imię i nazwisko użytkownika',
         'CustomerUser' => 'Imię i nazwisko użytkownika',
-        'Customers ↔ Groups' => 'Klienci ↔ Grupy',
         'Czech' => 'Czeski',
         'Danish' => 'Duński',
         'Dashboard overview.' => 'Przegląd pulpitu.',
@@ -8748,7 +8764,6 @@ Thanks for your help!
         'Edit Customer Users.' => 'Edytuj użytkowników klienta.',
         'Edit appointment' => 'Edytuj wydarzenie',
         'Edit customer company' => 'Edytuj firmę klienta',
-        'Email Addresses' => 'Adresy e-mail',
         'Email Outbound' => 'Email Zewnętrzny',
         'Email Resend' => '',
         'Email communication channel.' => '',
@@ -8977,7 +8992,6 @@ Thanks for your help!
         'Portuguese' => 'Portugalski',
         'Portuguese (Brasil)' => 'Portugalski (Brazylia)',
         'PostMaster Filters' => 'Filtrowanie poczty przychodzącej',
-        'PostMaster Mail Accounts' => 'Konta pocztowe systemu',
         'Print this ticket' => 'Wydrukuj to zgłoszenie',
         'Priorities' => 'Priorytety',
         'Process Management Activity Dialog GUI' => 'Zarządzanie procesem interfejsu aktywności dialogu',
@@ -8996,7 +9010,6 @@ Thanks for your help!
         'Public Calendar' => 'Kalendarz Publiczny',
         'Public calendar.' => 'Kalendarz publiczny.',
         'Queue view' => 'Widok kolejek',
-        'Queues ↔ Auto Responses' => '',
         'Refresh interval' => 'Interwał odświeżania',
         'Reminder Tickets' => 'Przypomnienia zgłoszeń',
         'Removed subscription for user "%s".' => 'Usunięto subskrypcje dla użytkownika "%s".',
@@ -9006,13 +9019,11 @@ Thanks for your help!
         'Responsible Tickets' => '',
         'Responsible Tickets.' => '',
         'Right' => 'Prawa',
-        'Roles ↔ Groups' => 'Role ↔ Grupy',
         'Romanian' => '',
         'Running Process Tickets' => '',
         'Russian' => 'Rosyjski',
         'S/MIME Certificates' => 'Certyfikaty S/MIME',
         'SMS' => '',
-        'Salutations' => 'Powitania',
         'Schedule a maintenance period.' => 'Zaplanuj konserwację',
         'Screen after new ticket' => 'Ekran po utworzeniu zgłoszenia',
         'Search Customer' => 'Szukaj klienta',
@@ -9050,7 +9061,6 @@ Thanks for your help!
         'Sent notification to "%s".' => '',
         'Serbian Cyrillic' => '',
         'Serbian Latin' => '',
-        'Service Level Agreements' => 'Poziomy SLA',
         'Service view' => 'Przegląd usług',
         'ServiceView' => 'PrzeglądUsług',
         'Set a new password by filling in your current password and a new one.' =>
@@ -9065,7 +9075,6 @@ Thanks for your help!
         'Shows information on how to start OTRS Daemon' => '',
         'Shows last mention of tickets.' => '',
         'Signature data.' => '',
-        'Signatures' => 'Podpisy',
         'Simple' => 'Prosty',
         'Skin' => 'Skórka',
         'Slovak' => 'Słowacki',
@@ -9100,8 +9109,6 @@ Thanks for your help!
         'System Configuration Deployment' => 'Wdrażanie Konfiguracji Systemu',
         'System Configuration Group' => '',
         'System Maintenance' => 'Konserwacja systemu',
-        'Templates ↔ Attachments' => '',
-        'Templates ↔ Queues' => 'Szablony ↔ Kolejki',
         'Textarea' => 'Pole tekstowe',
         'Thai' => 'Tajski',
         'The PGP signature is expired.' => '',

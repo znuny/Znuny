@@ -45,6 +45,23 @@
             </div>
         </div>
 [% RenderBlockEnd("ActionList") %]
+[% RenderBlockStart("NewActions") %]
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2><label>[% Translate("Actions") | html %]</label></h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=AdminTemplate;Subaction=Add" class="CallForAction Fullsize Center"><span><i class="fa fa-plus-square"></i>[% Translate("Add Template") | html %]</span></a>
+                    </li>
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=AdminAttachment;Subaction=Add" class="CallForAction Fullsize Center"><span><i class="fa fa-plus-square"></i>[% Translate("Add Attachment") | html %]</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+[% RenderBlockEnd("NewActions") %]
 
 [% RenderBlockStart("Filter") %]
         <div class="WidgetSimple">
@@ -76,7 +93,29 @@
         </div>
 
 [% RenderBlockEnd("Filters") %]
-
+        <div class='WidgetSimple'>
+            <div class='Header'>
+                <h2>[% Translate('Related Actions') | html %]</h2>
+            </div>
+            <div class='Content'>
+                <ul class='ActionList SpacingTop'>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminAttachment' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Attachments') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminTemplate' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Templates') | html %]
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <div class="ContentColumn">

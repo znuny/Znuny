@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.193438362839045;
+    $Self->{Completeness}        = 0.192993837171586;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -255,6 +255,9 @@ sub Data {
         'Edit Attachment' => 'Keisti priedą',
         'Filter for Attachments' => 'Filtruoti priedus',
         'Filter for attachments' => '',
+        'Related Actions' => '',
+        'Templates' => '',
+        'Templates ↔ Attachments' => '',
         'Filename' => 'Failo pavadinimas',
         'Download file' => 'Parsisiųsti failą',
         'Delete this attachment' => 'Ištrinti šį priedą',
@@ -267,6 +270,7 @@ sub Data {
         'Edit Auto Response' => 'Redaguoti automatinį atsakymą',
         'Filter for Auto Responses' => 'Filtruoti auto. atsakymus',
         'Filter for auto responses' => '',
+        'Queues ↔ Auto Responses' => '',
         'Response' => 'Atsakymas',
         'Auto response from' => 'Automatinis atsakymas nuo',
         'Reference' => 'Nuoroda (Reference)',
@@ -392,6 +396,8 @@ sub Data {
         'Search' => 'Ieškoti',
         'Wildcards like \'*\' are allowed.' => '',
         'Select' => 'Pasirinkti',
+        'Customer Users' => '',
+        'Customers ↔ Groups' => '',
         'List (only %s shown - more available)' => '',
         'total' => '',
         'Please enter a search term to look for customers.' => 'Prašome įvesti paieškos terminą klientų paieškai.',
@@ -414,9 +420,9 @@ sub Data {
         'Select the customer:group permissions.' => 'Pasirinkite klientą: grupės leidimai.',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Jeigu nėra nieko pasirinkta, tai šioje grupėje nėra nustatytų leidimų (klientui užduotys bus nepasiekiamos).',
-        'Search Results' => 'Paieškos rezultatai',
         'Customers' => 'Klientai',
         'Groups' => 'Grupės',
+        'Search Results' => 'Paieškos rezultatai',
         'Change Group Relations for Customer' => 'Pakeisti klientui grupės sąsajas(ryšius)',
         'Change Customer Relations for Group' => 'Pakeisti grupei kliento sąsajas(ryšius)',
         'Toggle %s Permission for all' => 'Įjungti %s leidimą visiems',
@@ -436,6 +442,9 @@ sub Data {
         'Back to search results' => '',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             '',
+        'Customer Users ↔ Customers' => '',
+        'Customer Users ↔ Groups' => '',
+        'Customer Users ↔ Services' => '',
         'List (%s total)' => '',
         'Username' => 'Naudotojo vardas',
         'Email' => 'El. paštas',
@@ -467,7 +476,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
         'Manage Customer User-Customer Relations' => '',
         'Select the customer user:customer relations.' => '',
-        'Customer Users' => '',
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
         'Toggle active state for all' => 'Perjungti visiems aktyvią būseną',
@@ -495,6 +503,7 @@ sub Data {
         'Filter for Services' => 'Filtruoti paslaugas',
         'Filter for services' => '',
         'Services' => 'Paslaugos',
+        'Service Level Agreements' => 'Aptarnavimo lygio sutartys',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
         'Dynamic Fields Management' => '',
@@ -509,6 +518,7 @@ sub Data {
         'Overwrite existing configurations' => '',
         'Import configurations' => '',
         'Export configurations' => '',
+        'Process Management' => '',
         'Dynamic fields ↔ Screens' => '',
         'Dynamic Fields List' => '',
         'Dynamic fields per page' => '',
@@ -1357,6 +1367,8 @@ sub Data {
         'Create new groups to handle access permissions for different groups of agent (e. g. purchasing department, support department, sales department, ...). ' =>
             'Sukurkite naujas grupes skirtingų agentų grupių leidimams valdyti (pvz. pirkimų skyrius, palaikymo skyrius, pardavimų skyrius, ...). ',
         'It\'s useful for ASP solutions. ' => 'Tai yra naudinga ASP sprendimams. ',
+        'Agents ↔ Groups' => '',
+        'Roles ↔ Groups' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'System Log' => 'Sistemos žurnalas',
@@ -1728,12 +1740,12 @@ sub Data {
         'Edit Priority' => 'Redaguoti prioritetą',
         'Filter for Priorities' => '',
         'Filter for priorities' => '',
+        'Configure Priority Visibility and Defaults' => '',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             '',
         'This priority is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-        'Process Management' => '',
         'Filter for Processes' => '',
         'Filter for processes' => '',
         'Create New Process' => '',
@@ -1750,6 +1762,9 @@ sub Data {
             '',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             '',
+        'Access Control Lists (ACL)' => '',
+        'Generic Agent' => '',
+        'Manage Process Widiget Groups' => '',
         'Processes' => '',
         'Process name' => '',
         'Print' => 'Spausdinti',
@@ -1904,6 +1919,13 @@ sub Data {
         'Edit Queue' => 'Redaguoti eilę',
         'Filter for Queues' => 'Filtruoti eiles',
         'Filter for queues' => '',
+        'Email Addresses' => 'El. pašto adresai',
+        'PostMaster Mail Accounts' => 'PostMaster el. pašto paskyros',
+        'Salutations' => 'Kreipimosi formos(pasveikinimai)',
+        'Signatures' => 'Parašai',
+        'Templates ↔ Queues' => '',
+        'Configure Working Hours' => '',
+        'Configure Queue Related Settings' => '',
         'A queue with this name already exists!' => '',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             '',
@@ -1952,7 +1974,6 @@ sub Data {
         'Manage Template-Queue Relations' => '',
         'Filter for Templates' => '',
         'Filter for templates' => '',
-        'Templates' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'Rolių valdymas',
@@ -1962,6 +1983,7 @@ sub Data {
         'Filter for roles' => '',
         'Create a role and put groups in it. Then add the role to the users.' =>
             'Sukurkite rolę, o tada įdėkite į ją grupes. Tada priskirkite roles naudotojams.',
+        'Agents ↔ Roles' => '',
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             'Nėra apibrėžtų rolių. Prašome paspausti mygtuką "Pridėti" naujoms rolės sukurti.',
 
@@ -1998,6 +2020,7 @@ sub Data {
         'Edit SLA' => 'Redaguoti SLA',
         'Add SLA' => 'Pridėti SLA',
         'Filter for SLAs' => '',
+        'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => 'Prašome rašyti tik numerius!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
@@ -2079,6 +2102,7 @@ sub Data {
         'Service Management' => 'Paslaugų valdymas',
         'Add Service' => 'Pridėti paslaugą',
         'Edit Service' => 'Redaguoti paslaugą',
+        'Configure Service Visibility and Defaults' => '',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             '',
         'Sub-service of' => 'Sub-paslauga',
@@ -2115,6 +2139,8 @@ sub Data {
         'Filter for states' => '',
         'Attention' => 'Dėmesio',
         'Please also update the states in SysConfig where needed.' => '',
+        'Configure State Visibility and Defaults' => '',
+        'Configure State Type Visibility and Defaults' => '',
         'This state is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
         'State type' => 'Būsenos tipas',
@@ -2316,6 +2342,7 @@ sub Data {
         'Edit Type' => 'Redaguoti tipą',
         'Filter for Types' => '',
         'Filter for types' => '',
+        'Configure Type Visibility and Defaults' => '',
         'A type with this name already exists!' => '',
         'This type is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
@@ -3574,9 +3601,6 @@ sub Data {
             '',
         'Yes, but require at least one active notification method.' => '',
 
-        # Perl Module: Kernel/Modules/AdminAttachment.pm
-        'Attachment added!' => 'Priedas pridėtas!',
-
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
 
@@ -4132,7 +4156,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminTemplate.pm
         'Template updated!' => '',
-        'Template added!' => '',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
         'Change Attachment Relations for Template' => '',
@@ -8507,7 +8530,6 @@ Thanks for your help!
         'AJAX functions for notification event transport web service.' =>
             '',
         'AJAX interface for the web service dynamic field backends.' => '',
-        'Access Control Lists (ACL)' => '',
         'AccountedTime' => '',
         'Activation of dynamic fields for screens.' => '',
         'ActivityID' => '',
@@ -8540,8 +8562,6 @@ Thanks for your help!
         'Agent Statistics.' => '',
         'Agent User Search' => '',
         'Agent User Search.' => '',
-        'Agents ↔ Groups' => '',
-        'Agents ↔ Roles' => '',
         'All CustomerIDs of a customer user.' => '',
         'All customer users of a CustomerID' => '',
         'All escalated tickets' => 'Visos eskaluotos triktys',
@@ -8690,9 +8710,6 @@ Thanks for your help!
         'Customer User Information Center search.' => '',
         'Customer User Information Center.' => '',
         'Customer User-Customer Relations' => '',
-        'Customer Users ↔ Customers' => '',
-        'Customer Users ↔ Groups' => '',
-        'Customer Users ↔ Services' => '',
         'Customer preferences.' => '',
         'Customer ticket overview' => '',
         'Customer ticket search.' => '',
@@ -8701,7 +8718,6 @@ Thanks for your help!
         'CustomerID search' => '',
         'CustomerName' => '',
         'CustomerUser' => '',
-        'Customers ↔ Groups' => '',
         'Czech' => '',
         'Danish' => '',
         'Dashboard overview.' => '',
@@ -8743,7 +8759,6 @@ Thanks for your help!
         'Edit Customer Users.' => '',
         'Edit appointment' => '',
         'Edit customer company' => '',
-        'Email Addresses' => 'El. pašto adresai',
         'Email Outbound' => '',
         'Email Resend' => '',
         'Email communication channel.' => '',
@@ -8972,7 +8987,6 @@ Thanks for your help!
         'Portuguese' => '',
         'Portuguese (Brasil)' => '',
         'PostMaster Filters' => 'PostMaster filtrai',
-        'PostMaster Mail Accounts' => 'PostMaster el. pašto paskyros',
         'Print this ticket' => '',
         'Priorities' => 'Prioritetai',
         'Process Management Activity Dialog GUI' => '',
@@ -8991,7 +9005,6 @@ Thanks for your help!
         'Public Calendar' => '',
         'Public calendar.' => '',
         'Queue view' => 'Eilių peržiūra',
-        'Queues ↔ Auto Responses' => '',
         'Refresh interval' => 'Atnaujinimo intervalas',
         'Reminder Tickets' => 'Pranešimai su priminimu',
         'Removed subscription for user "%s".' => '',
@@ -9001,13 +9014,11 @@ Thanks for your help!
         'Responsible Tickets' => '',
         'Responsible Tickets.' => '',
         'Right' => '',
-        'Roles ↔ Groups' => '',
         'Romanian' => '',
         'Running Process Tickets' => '',
         'Russian' => '',
         'S/MIME Certificates' => 'S/MIME sertifikatai',
         'SMS' => '',
-        'Salutations' => 'Kreipimosi formos(pasveikinimai)',
         'Schedule a maintenance period.' => '',
         'Screen after new ticket' => 'Langas po naujo trikties sukūrimo',
         'Search Customer' => 'Ieškoti kliento',
@@ -9045,7 +9056,6 @@ Thanks for your help!
         'Sent notification to "%s".' => '',
         'Serbian Cyrillic' => '',
         'Serbian Latin' => '',
-        'Service Level Agreements' => 'Aptarnavimo lygio sutartys',
         'Service view' => '',
         'ServiceView' => '',
         'Set a new password by filling in your current password and a new one.' =>
@@ -9060,7 +9070,6 @@ Thanks for your help!
         'Shows information on how to start OTRS Daemon' => '',
         'Shows last mention of tickets.' => '',
         'Signature data.' => '',
-        'Signatures' => 'Parašai',
         'Simple' => '',
         'Skin' => 'Apvalkalas',
         'Slovak' => '',
@@ -9095,8 +9104,6 @@ Thanks for your help!
         'System Configuration Deployment' => '',
         'System Configuration Group' => '',
         'System Maintenance' => '',
-        'Templates ↔ Attachments' => '',
-        'Templates ↔ Queues' => '',
         'Textarea' => '',
         'Thai' => '',
         'The PGP signature is expired.' => '',

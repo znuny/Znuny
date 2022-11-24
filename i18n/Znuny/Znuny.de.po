@@ -1443,7 +1443,7 @@ msgstr "Beziehungen zwischen Kundenbenutzern und Kunden verwalten"
 msgid "Select the customer user:customer relations."
 msgstr "Beziehung zwischen Kundenbenutzer und Kunde auswählen."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Customer Users"
 msgstr "Kundenbenutzer"
 
@@ -4647,7 +4647,7 @@ msgstr "Diese Priorität ist in einer SysConfig-Einstellung vorhanden. Eine Best
 msgid "This priority is used in the following config settings:"
 msgstr "Diese Priorität wird in folgenden Konfigurationseinstellungen verwendet:"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
 msgid "Process Management"
 msgstr "Prozessmanagement"
 
@@ -5279,7 +5279,7 @@ msgstr "Filter für Vorlagen"
 msgid "Filter for templates"
 msgstr "Filter für Vorlagen"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueueTemplates.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
 msgid "Templates"
 msgstr "Vorlagen"
 
@@ -16308,9 +16308,9 @@ msgstr "Ein Bild"
 msgid "ACL module that allows closing parent tickets only if all its children are already closed (\"State\" shows which states are not available for the parent ticket until all child tickets are closed)."
 msgstr "ACL Modul das erlaubt Eltern-Tickets nur dann zu schließen, wenn alle seine Kinder-Tickets geschlossen wurden. (\"Status\" zeigt welche Status für das Eltern-Ticket nicht verfügbar sind, bis alle Kinder-Tickets geschlossen sind)."
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Access Control Lists (ACL)"
-msgstr "Access Control Lists (ACL)"
+msgstr "Access-Control-Lists (ACL)"
 
 #. SysConfig
 msgid "AccountedTime"
@@ -16544,11 +16544,11 @@ msgstr "Widget für AgentTicketZoom, das Kundeninformationen des Kunden anzeigt,
 msgid "AgentTicketZoom widget that displays ticket data in the side bar."
 msgstr "Widget für AgentTicketZoom, das weitere Daten des aktuellen Tickets anzeigt."
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
 msgid "Agents ↔ Groups"
 msgstr "Agenten ↔ Gruppen"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
 msgid "Agents ↔ Roles"
 msgstr "Agenten ↔ Rollen"
 
@@ -17452,15 +17452,15 @@ msgstr "Kundenbenutzer-Informationszentrum-Suche."
 msgid "Customer User Information Center."
 msgstr "Kundenbenutzer-Informationszentrum."
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
 msgid "Customer Users ↔ Customers"
 msgstr "Kundenbenutzer ↔ Kunden"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
 msgid "Customer Users ↔ Groups"
 msgstr "Kundenbenutzer ↔ Gruppen"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
 msgid "Customer Users ↔ Services"
 msgstr "Kundenbenutzer ↔ Services"
 
@@ -17504,7 +17504,7 @@ msgstr "Kundenname"
 msgid "CustomerUser"
 msgstr "Kundenbenutzer"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Customers ↔ Groups"
 msgstr "Kunden ↔ Gruppen"
 
@@ -19536,7 +19536,7 @@ msgstr "Termin bearbeiten"
 msgid "Edit customer company"
 msgstr "Kundenunternehmen bearbeiten"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
 msgid "Email Addresses"
 msgstr "E-Mail-Adressen"
 
@@ -21388,7 +21388,7 @@ msgstr "Portugiesisch (Brasilien)"
 msgid "PostMaster Filters"
 msgstr "Postmaster-Filter"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
 msgid "PostMaster Mail Accounts"
 msgstr "Postmaster-E-Mail-Konten"
 
@@ -21464,7 +21464,7 @@ msgstr "Öffentlicher Kalender."
 msgid "Queue view"
 msgstr "Ansicht nach Queues"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
 msgid "Queues ↔ Auto Responses"
 msgstr "Queues ↔ Automatische Antworten"
 
@@ -21628,7 +21628,7 @@ msgstr "Behält alle Services in Auflistungen bei, auch, wenn sie Kind-Services 
 msgid "Right"
 msgstr "Rechts"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
 msgid "Roles ↔ Groups"
 msgstr "Rollen ↔ Gruppen"
 
@@ -21672,7 +21672,7 @@ msgstr "SMS"
 msgid "SMS (Short Message Service)"
 msgstr "SMS (Short Message Service)"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
 msgid "Salutations"
 msgstr "Anreden"
 
@@ -21844,7 +21844,7 @@ msgstr "Kyrillisches Serbisch"
 msgid "Serbian Latin"
 msgstr "Lateinisches Serbisch"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
 msgid "Service Level Agreements"
 msgstr "Service-Level-Vereinbarungen"
 
@@ -22724,7 +22724,7 @@ msgstr "Zeigt die Beschreibung der Zeitfelder in Langform (Tage, Stunden, Minute
 msgid "Signature data."
 msgstr "Signatur-Daten."
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
 msgid "Signatures"
 msgstr "Signaturen"
 
@@ -23004,11 +23004,11 @@ msgstr "Systemkonfigurations-Gruppe"
 msgid "System Maintenance"
 msgstr "Systemwartung"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
 msgid "Templates ↔ Attachments"
 msgstr "Vorlagen ↔ Anhänge"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
 msgid "Templates ↔ Queues"
 msgstr "Vorlagen ↔ Queues"
 
@@ -24030,7 +24030,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessNotInstalled.tt
 msgid "Why should I keep OTRS up to date?"
-msgstr ""
+msgstr "Warum sollte ich OTRS auf dem neuesten Stand halten?"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Go to znuny.org"
@@ -24754,7 +24754,7 @@ msgstr "Eigene Tickets Neu"
 
 #. Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
 msgid "Owned Tickets Reminder Reached"
-msgstr ""
+msgstr "Eigene Tickets, Erinnerungszeit erreicht"
 
 #. Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
 msgid "Owned Tickets Total"
@@ -25470,13 +25470,97 @@ msgstr "Keine Tickets gefunden."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "MyLastChangedTickets dashboard widget."
-msgstr ""
+msgstr "Dashboard-Widget \"Meine zuletzt geänderten Tickets\""
 
 #. SysConfig
 msgid "My last changed tickets"
-msgstr ""
+msgstr "Meine zuletzt geänderten Tickets"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
 msgid "Access token scope"
 msgstr "Access-Token-Scope"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
+msgid "Related Actions"
+msgstr "Verwandte Aktionen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
+msgid "Relatd Actions"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
+msgid "Queues ↔ AUto Responses"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
+msgid "Customers Users"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
+msgid "Agents  ↔ Groups"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
+msgid "Customer ↔ Groups"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPriority.tt
+msgid "Configure Priority Visibility and Defaults"
+msgstr "Prioritätssichtbarkeit und Standardeinstellungen konfigurieren"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
+msgid "Add a Dynamic Field"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Manage Process Widiget Groups"
+msgstr "Prozess-Widget-Gruppen verwalten"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Add a Generic Agent Job"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Add an ACL"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
+msgid "Configure Working Hours"
+msgstr "Arbeitszeiten Konfigurieren"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
+msgid "Configure Queue Related Settings"
+msgstr "Queue-Einstellungen konfigurieren"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSLA.tt
+msgid "Configure SLA Visibility and Defaults"
+msgstr "SLA-Sichtbarkeit und Standardeinstellungen konfigurieren"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
+msgid "Configure Service Visibility and Defaults"
+msgstr "Serivce-Sichtbarkeit und Standardeinstellungen konfigurieren"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
+msgid "Configure State Visibility and Defaults"
+msgstr "Status-Sichtbarkeit und Standardeinstellungen konfigurieren"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
+msgid "Configure State Type Visibility and Defaults"
+msgstr "Statustyp-Sichtbarkeit und Standardeinstellungen konfigurieren"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Action Control Lists"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Generic Agents"
+msgstr "Aufgabenplaner"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminType.tt
+msgid "Configure Type Visibility and Defaults"
+msgstr "Typ-Sichtbarkeit und Standardeinstellungen konfigurieren"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Generic Agent"
+msgstr "Generic Agent"
 

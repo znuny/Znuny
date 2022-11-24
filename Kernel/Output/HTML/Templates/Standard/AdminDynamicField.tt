@@ -119,10 +119,17 @@
 
         <div class='WidgetSimple'>
             <div class='Header'>
-                <h2>[% Translate('Actions') | html %]</h2>
+                <h2>[% Translate('Related Actions') | html %]</h2>
             </div>
             <div class='Content'>
                 <ul class='ActionList SpacingTop'>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminProcessManagement' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Process Management') | html %]
+                            </span>
+                        </a>
+                    </li>
                     <li>
                         <a href='[% Env("Baselink") %]Action=AdminDynamicFieldScreenConfiguration' class='CallForAction Fullsize Center'>
                             <span>

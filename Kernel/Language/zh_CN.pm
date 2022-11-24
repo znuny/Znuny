@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.930648042878025;
+    $Self->{Completeness}        = 0.928965293545248;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -262,6 +262,9 @@ sub Data {
         'Edit Attachment' => '编辑附件',
         'Filter for Attachments' => '附件过滤器',
         'Filter for attachments' => '附件过滤器',
+        'Related Actions' => '',
+        'Templates' => '模板',
+        'Templates ↔ Attachments' => '模板 ↔ 附件',
         'Filename' => '文件名',
         'Download file' => '下载文件',
         'Delete this attachment' => '删除附件',
@@ -274,6 +277,7 @@ sub Data {
         'Edit Auto Response' => '编辑自动响应',
         'Filter for Auto Responses' => '自动响应过滤器',
         'Filter for auto responses' => '自动响应过滤器',
+        'Queues ↔ Auto Responses' => '队列 ↔ 自动回复',
         'Response' => '回复内容',
         'Auto response from' => '自动响应的发件人',
         'Reference' => 'ACL设置参考',
@@ -399,6 +403,8 @@ sub Data {
         'Search' => '搜索',
         'Wildcards like \'*\' are allowed.' => '允许使用通配置符，例如\'*\'。',
         'Select' => '选择',
+        'Customer Users' => '客户用户',
+        'Customers ↔ Groups' => '客户 ↔ 组',
         'List (only %s shown - more available)' => '列表 (目前显示%s-显示更多)',
         'total' => '总共',
         'Please enter a search term to look for customers.' => '请输入搜索条件以便检索客户资料.',
@@ -421,9 +427,9 @@ sub Data {
         'Select the customer:group permissions.' => '选择客户:组权限。',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             '如果没有选择，就不具备该组的任何权限 (客户不能创建或读取工单)。',
-        'Search Results' => '搜索结果',
         'Customers' => '客户',
         'Groups' => '组',
+        'Search Results' => '搜索结果',
         'Change Group Relations for Customer' => '此客户属于哪些组',
         'Change Customer Relations for Group' => '哪些客户属于此组',
         'Toggle %s Permission for all' => '全部授予/取消 %s 权限',
@@ -443,6 +449,9 @@ sub Data {
         'Back to search results' => '返回到搜索结果',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             '工单的客户历史信息需要有客户用户，客户界面登录也需要用客户用户。',
+        'Customer Users ↔ Customers' => '客户用户 ↔ 客户',
+        'Customer Users ↔ Groups' => '客户用户 ↔ 组',
+        'Customer Users ↔ Services' => '客户用户 ↔ 服务',
         'List (%s total)' => '列表（总共 %s）',
         'Username' => '用户名',
         'Email' => '邮件地址',
@@ -474,7 +483,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
         'Manage Customer User-Customer Relations' => '管理客户用户和客户的关联',
         'Select the customer user:customer relations.' => '选择客户用户关联的客户。',
-        'Customer Users' => '客户用户',
         'Change Customer Relations for Customer User' => '修改客户用户和客户的关联',
         'Change Customer User Relations for Customer' => '修改客户关联的用户',
         'Toggle active state for all' => '全部激活/不激活状态',
@@ -502,6 +510,7 @@ sub Data {
         'Filter for Services' => '服务过滤器',
         'Filter for services' => '服务过滤器',
         'Services' => '服务',
+        'Service Level Agreements' => '服务级别协议',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
         'Dynamic Fields Management' => '动态字段管理',
@@ -516,6 +525,7 @@ sub Data {
         'Overwrite existing configurations' => '',
         'Import configurations' => '',
         'Export configurations' => '',
+        'Process Management' => '流程管理',
         'Dynamic fields ↔ Screens' => '',
         'Dynamic Fields List' => '动态字段列表',
         'Dynamic fields per page' => '每页动态字段个数',
@@ -1364,6 +1374,8 @@ sub Data {
         'Create new groups to handle access permissions for different groups of agent (e. g. purchasing department, support department, sales department, ...). ' =>
             '若要为不同的服务人员分配不同的访问权限，应创建新的组。(例如，采购部、支持部、销售部...)。 ',
         'It\'s useful for ASP solutions. ' => '它对ASP解决方案非常有用。 ',
+        'Agents ↔ Groups' => '服务人员 ↔ 组',
+        'Roles ↔ Groups' => '角色 ↔ 组',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'System Log' => '系统日志',
@@ -1735,12 +1747,12 @@ sub Data {
         'Edit Priority' => '编辑优先级',
         'Filter for Priorities' => '优先级过滤器',
         'Filter for priorities' => '优先级过滤器',
+        'Configure Priority Visibility and Defaults' => '',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             '此优先级已存在于系统配置的一个设置中，需要更新设置以确认指向新的优先级！',
         'This priority is used in the following config settings:' => '这个优先级已用于以下的系统配置设置：',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-        'Process Management' => '流程管理',
         'Filter for Processes' => '流程过滤器',
         'Filter for processes' => '流程筛选',
         'Create New Process' => '创建新的流程',
@@ -1757,6 +1769,9 @@ sub Data {
             '为了创建新的流程，你可以导入从其它系统导出的流程配置文件，或者重新创建一个。',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             '对流程所做的一切修改仅保存在数据库中。只有执行部署流程操作后，才会生成或重新生成流程配置文件。',
+        'Access Control Lists (ACL)' => '访问控制列表(ACL)',
+        'Generic Agent' => '',
+        'Manage Process Widiget Groups' => '',
         'Processes' => '流程',
         'Process name' => '流程名称',
         'Print' => '打印',
@@ -1911,6 +1926,13 @@ sub Data {
         'Edit Queue' => '编辑队列',
         'Filter for Queues' => '队列过滤器',
         'Filter for queues' => '队列过滤器',
+        'Email Addresses' => '邮件地址',
+        'PostMaster Mail Accounts' => '邮箱管理员邮件帐户',
+        'Salutations' => '问候语',
+        'Signatures' => '签名',
+        'Templates ↔ Queues' => '模板↔队列',
+        'Configure Working Hours' => '',
+        'Configure Queue Related Settings' => '',
         'A queue with this name already exists!' => '队列名已存在！',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             '这个队列已存在于系统配置的一个设置中，需要更新设置以确认指向新的队列！',
@@ -1959,7 +1981,6 @@ sub Data {
         'Manage Template-Queue Relations' => '管理模板与队列的对应关系',
         'Filter for Templates' => '模板过滤器',
         'Filter for templates' => '模板筛选',
-        'Templates' => '模板',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => '角色管理',
@@ -1969,6 +1990,7 @@ sub Data {
         'Filter for roles' => '角色过滤器',
         'Create a role and put groups in it. Then add the role to the users.' =>
             '创建一个角色并将组加入角色,然后将角色赋给用户.',
+        'Agents ↔ Roles' => '服务人员 ↔ 角色',
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             '还没有定义角色，请使用“添加”按钮来创建一个新的角色。',
 
@@ -2005,6 +2027,7 @@ sub Data {
         'Edit SLA' => '编辑SLA',
         'Add SLA' => '添加SLA',
         'Filter for SLAs' => 'SLA过滤器',
+        'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => '仅可填写数字！',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
@@ -2086,6 +2109,7 @@ sub Data {
         'Service Management' => '服务管理',
         'Add Service' => '添加服务',
         'Edit Service' => '编辑服务',
+        'Configure Service Visibility and Defaults' => '',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             '服务名(含子服务)最大长度为200字符。',
         'Sub-service of' => '上一级服务',
@@ -2122,6 +2146,8 @@ sub Data {
         'Filter for states' => '状态过滤器',
         'Attention' => '注意',
         'Please also update the states in SysConfig where needed.' => '请同时在系统配置中需要的地方更新这些工单状态。',
+        'Configure State Visibility and Defaults' => '',
+        'Configure State Type Visibility and Defaults' => '',
         'This state is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '这个状态已存在于系统配置的一个设置中，需要更新设置以确认指向新的状态！',
         'State type' => '工单状态类型',
@@ -2323,6 +2349,7 @@ sub Data {
         'Edit Type' => '编辑工单类型',
         'Filter for Types' => '类型过滤器',
         'Filter for types' => '类型过滤器',
+        'Configure Type Visibility and Defaults' => '',
         'A type with this name already exists!' => '类型名字已存在!',
         'This type is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '这个类型已存在于系统配置的一个设置中，需要更新设置以确认指向新的类型态！',
@@ -3581,9 +3608,6 @@ sub Data {
             '所有对这个预约（日历）有写权限的服务人员',
         'Yes, but require at least one active notification method.' => '是的，但需要至少一个活动的通知方法。',
 
-        # Perl Module: Kernel/Modules/AdminAttachment.pm
-        'Attachment added!' => '附件已添加！',
-
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '自动响应已添加！',
 
@@ -4139,7 +4163,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminTemplate.pm
         'Template updated!' => '模板已更新！',
-        'Template added!' => '模板已添加！',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
         'Change Attachment Relations for Template' => '为模板指定附件',
@@ -8524,7 +8547,6 @@ Thanks for your help!
         'AJAX functions for notification event transport web service.' =>
             '',
         'AJAX interface for the web service dynamic field backends.' => '',
-        'Access Control Lists (ACL)' => '访问控制列表(ACL)',
         'AccountedTime' => '占用时间',
         'Activation of dynamic fields for screens.' => '',
         'ActivityID' => '活动ID',
@@ -8557,8 +8579,6 @@ Thanks for your help!
         'Agent Statistics.' => '服务人员统计。',
         'Agent User Search' => '服务人员搜索用户',
         'Agent User Search.' => '服务人员搜索用户。',
-        'Agents ↔ Groups' => '服务人员 ↔ 组',
-        'Agents ↔ Roles' => '服务人员 ↔ 角色',
         'All CustomerIDs of a customer user.' => '一个客户用户的所有客户ID。',
         'All customer users of a CustomerID' => '一个客户ID的所有客户用户',
         'All escalated tickets' => '所有升级的工单',
@@ -8707,9 +8727,6 @@ Thanks for your help!
         'Customer User Information Center search.' => '客户用户信息中心搜索。',
         'Customer User Information Center.' => '客户用户信息中心。',
         'Customer User-Customer Relations' => '',
-        'Customer Users ↔ Customers' => '客户用户 ↔ 客户',
-        'Customer Users ↔ Groups' => '客户用户 ↔ 组',
-        'Customer Users ↔ Services' => '客户用户 ↔ 服务',
         'Customer preferences.' => '客户偏好设置。',
         'Customer ticket overview' => '客户工单概览',
         'Customer ticket search.' => '客户工单搜索。',
@@ -8718,7 +8735,6 @@ Thanks for your help!
         'CustomerID search' => '客户ID搜索',
         'CustomerName' => '客户名称',
         'CustomerUser' => '客户',
-        'Customers ↔ Groups' => '客户 ↔ 组',
         'Czech' => '捷克语',
         'Danish' => '丹麦语',
         'Dashboard overview.' => '仪表板概览。',
@@ -8760,7 +8776,6 @@ Thanks for your help!
         'Edit Customer Users.' => '编辑客户用户。',
         'Edit appointment' => '编辑预约',
         'Edit customer company' => '编辑客户单位',
-        'Email Addresses' => '邮件地址',
         'Email Outbound' => '外发邮件',
         'Email Resend' => '邮件重发',
         'Email communication channel.' => '电子邮件通信通道。',
@@ -8989,7 +9004,6 @@ Thanks for your help!
         'Portuguese' => '葡萄牙语',
         'Portuguese (Brasil)' => '葡萄牙语（巴西）',
         'PostMaster Filters' => '邮箱管理员过滤器',
-        'PostMaster Mail Accounts' => '邮箱管理员邮件帐户',
         'Print this ticket' => '打印工单',
         'Priorities' => '优先级',
         'Process Management Activity Dialog GUI' => '流程管理 活动对话框的GUI',
@@ -9008,7 +9022,6 @@ Thanks for your help!
         'Public Calendar' => '公共日历',
         'Public calendar.' => '公共日历。',
         'Queue view' => '队列视图',
-        'Queues ↔ Auto Responses' => '队列 ↔ 自动回复',
         'Refresh interval' => '刷新间隔',
         'Reminder Tickets' => '提醒的工单',
         'Removed subscription for user "%s".' => '用户“%s”已移除的关注。',
@@ -9018,13 +9031,11 @@ Thanks for your help!
         'Responsible Tickets' => '负责的工单',
         'Responsible Tickets.' => '负责的工单.',
         'Right' => '权限',
-        'Roles ↔ Groups' => '角色 ↔ 组',
         'Romanian' => '罗马尼亚',
         'Running Process Tickets' => '运行中的流程工单',
         'Russian' => '俄语',
         'S/MIME Certificates' => 'S/MIME证书',
         'SMS' => '短信',
-        'Salutations' => '问候语',
         'Schedule a maintenance period.' => '计划一个系统维护期。',
         'Screen after new ticket' => '创建新工单后的视图',
         'Search Customer' => '搜索客户',
@@ -9062,7 +9073,6 @@ Thanks for your help!
         'Sent notification to "%s".' => '已发送通知到"%s"。',
         'Serbian Cyrillic' => '塞尔维亚西里尔语',
         'Serbian Latin' => '塞尔维亚拉丁语',
-        'Service Level Agreements' => '服务级别协议',
         'Service view' => '服务视图',
         'ServiceView' => '服务视图',
         'Set a new password by filling in your current password and a new one.' =>
@@ -9077,7 +9087,6 @@ Thanks for your help!
         'Shows information on how to start OTRS Daemon' => '显示如何启动OTRS守护进程的信息',
         'Shows last mention of tickets.' => '',
         'Signature data.' => '签名数据。',
-        'Signatures' => '签名',
         'Simple' => '简单',
         'Skin' => '皮肤',
         'Slovak' => '斯洛伐克语',
@@ -9112,8 +9121,6 @@ Thanks for your help!
         'System Configuration Deployment' => '系统配置部署',
         'System Configuration Group' => '系统配置组',
         'System Maintenance' => '系统维护',
-        'Templates ↔ Attachments' => '模板 ↔ 附件',
-        'Templates ↔ Queues' => '模板↔队列',
         'Textarea' => '文本区域',
         'Thai' => '泰国语',
         'The PGP signature is expired.' => 'PGP签名已过期。',

@@ -175,6 +175,7 @@ sub Run {
         $LayoutObject->Block( Name => 'FilterQueues' );
         $LayoutObject->Block( Name => 'FilterAutoResponses' );
         $LayoutObject->Block( Name => 'ActionList' );
+        $LayoutObject->Block( Name => 'NewActions' );
 
         if ( $Param{Filter} eq 'QueuesWithoutAutoResponses' ) {
             $LayoutObject->Block( Name => 'ShowAllQueues' );

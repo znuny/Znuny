@@ -46,6 +46,9 @@
                     <li>
                         <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ServiceEdit;ServiceID=NEW" class="CallForAction Fullsize Center"><span><i class="fa fa-plus-square"></i>[% Translate("Add Service") | html %]</span></a>
                     </li>
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=AdminCustomerUserService;Subaction=AllocateCustomerUser" class="CallForAction Fullsize Center"><span><i class="fa fa-plus-square"></i>[% Translate("Edit default services") | html %]</span></a>
+                    </li>
 [% RenderBlockEnd("ActionAdd") %]
                 </ul>
             </div>
@@ -62,6 +65,36 @@
             </div>
         </div>
 [% RenderBlockEnd("Filter") %]
+        <div class='WidgetSimple'>
+            <div class='Header'>
+                <h2>[% Translate('Related Actions') | html %]</h2>
+            </div>
+            <div class='Content'>
+                <ul class='ActionList SpacingTop'>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminSLA' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Service Level Agreements') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminCustomerUserService' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Customer Users ↔ Services') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=Search;Search=%23%23%23Service' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Configure Service Visibility and Defaults') | html %]
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <div class="ContentColumn">
