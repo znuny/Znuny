@@ -46,7 +46,7 @@ jobs:
         run: |
           cd "${GITHUB_WORKSPACE}/znuny"
           git init
-          "${GITHUB_WORKSPACE}/codepolicy/bin/znuny.CodePolicy.pl" --all-files
+          "${GITHUB_WORKSPACE}/codepolicy/bin/znuny.CodePolicy.pl" --all-files --mode ci
 
   CPANAudit:
     name: CPANAudit
@@ -77,7 +77,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
         env:
-          fetch-depth: "1"
+          fetch-depth: "0"
 
       - name: Install dependencies
         run: .github/workflows/ci/dependencies.sh
