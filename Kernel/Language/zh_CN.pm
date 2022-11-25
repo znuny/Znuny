@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.928965293545248;
+    $Self->{Completeness}        = 0.928988326848249;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2029,6 +2029,7 @@ sub Data {
         'Filter for SLAs' => 'SLA过滤器',
         'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => '仅可填写数字！',
+        'Minimum Time Between Incidents' => '故障间最短时间',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
         'S/MIME Management' => 'S/MIME管理',
@@ -2113,6 +2114,7 @@ sub Data {
         'Service name maximum length is 200 characters (with Sub-service).' =>
             '服务名(含子服务)最大长度为200字符。',
         'Sub-service of' => '上一级服务',
+        'Criticality' => '紧急度',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
         'Session Management' => '会话管理',

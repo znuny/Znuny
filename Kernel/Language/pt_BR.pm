@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.874472915990918;
+    $Self->{Completeness}        = 0.874513618677043;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2027,6 +2027,7 @@ sub Data {
         'Filter for SLAs' => 'Filtrar por SLA',
         'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => 'Por favor, escreva apenas números!',
+        'Minimum Time Between Incidents' => 'Tempo Mínimo entre Incidentes',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
         'S/MIME Management' => 'Gerenciamento S/MIME',
@@ -2111,6 +2112,7 @@ sub Data {
         'Service name maximum length is 200 characters (with Sub-service).' =>
             'Tamanho máximo do nome do Serviço é de 200 caracteres (incluindo Sub-Serviços)',
         'Sub-service of' => 'Subserviço de',
+        'Criticality' => 'Criticalidade',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
         'Session Management' => 'Gerenciamento de Sessões',

@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.900259487512163;
+    $Self->{Completeness}        = 0.89996757457847;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2022,6 +2022,7 @@ sub Data {
         'Filter for SLAs' => 'SLA 필터링',
         'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => '숫자만 써주세요!',
+        'Minimum Time Between Incidents' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
         'S/MIME Management' => 'S / MIME 관리',
@@ -2106,6 +2107,7 @@ sub Data {
         'Service name maximum length is 200 characters (with Sub-service).' =>
             '서비스 이름의 최대 길이는 200 자 (서브 서비스 포함)입니다.',
         'Sub-service of' => '의 서브 서비스',
+        'Criticality' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
         'Session Management' => '세션 관리',

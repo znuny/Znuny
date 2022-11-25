@@ -13,7 +13,8 @@ use utf8;
 
 use vars (qw($Self));
 
-my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Admin::Service::Add');
+my $CommandObject   = $Kernel::OM->Get('Kernel::System::Console::Command::Admin::Service::Add');
+my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
 
 my ( $Result, $ExitCode );
 
@@ -37,7 +38,15 @@ $Self->Is(
 );
 
 # provide minimum options
-$ExitCode = $CommandObject->Execute( '--name', $ParentServiceName );
+if ($IsITSMInstalled) {
+    $ExitCode = $CommandObject->Execute(
+        '--name', $ParentServiceName, '--criticality', '3 normal', '--type',
+        'Demonstration'
+    );
+}
+else {
+    $ExitCode = $CommandObject->Execute( '--name', $ParentServiceName );
+}
 $Self->Is(
     $ExitCode,
     0,
@@ -45,7 +54,15 @@ $Self->Is(
 );
 
 # same again (should fail because already exists)
-$ExitCode = $CommandObject->Execute( '--name', $ParentServiceName );
+if ($IsITSMInstalled) {
+    $ExitCode = $CommandObject->Execute(
+        '--name', $ParentServiceName, '--criticality', '3 normal', '--type',
+        'Demonstration'
+    );
+}
+else {
+    $ExitCode = $CommandObject->Execute( '--name', $ParentServiceName );
+}
 $Self->Is(
     $ExitCode,
     1,
@@ -53,7 +70,15 @@ $Self->Is(
 );
 
 # invalid parent
-$ExitCode = $CommandObject->Execute( '--name', $ChildServiceName, '--parent-name', $ChildServiceName );
+if ($IsITSMInstalled) {
+    $ExitCode = $CommandObject->Execute(
+        '--name', $ChildServiceName, '--parent-name', $ChildServiceName, '--criticality',
+        '3 normal', '--type', 'Demonstration'
+    );
+}
+else {
+    $ExitCode = $CommandObject->Execute( '--name', $ChildServiceName, '--parent-name', $ChildServiceName );
+}
 $Self->Is(
     $ExitCode,
     1,
@@ -61,7 +86,15 @@ $Self->Is(
 );
 
 # valid parent
-$ExitCode = $CommandObject->Execute( '--name', $ChildServiceName, '--parent-name', $ParentServiceName );
+if ($IsITSMInstalled) {
+    $ExitCode = $CommandObject->Execute(
+        '--name', $ChildServiceName, '--parent-name', $ParentServiceName, '--criticality',
+        '3 normal', '--type', 'Demonstration'
+    );
+}
+else {
+    $ExitCode = $CommandObject->Execute( '--name', $ChildServiceName, '--parent-name', $ParentServiceName );
+}
 $Self->Is(
     $ExitCode,
     0,
@@ -69,7 +102,15 @@ $Self->Is(
 );
 
 # Same again (should fail because already exists).
-$ExitCode = $CommandObject->Execute( '--name', $ChildServiceName, '--parent-name', $ParentServiceName );
+if ($IsITSMInstalled) {
+    $ExitCode = $CommandObject->Execute(
+        '--name', $ChildServiceName, '--parent-name', $ParentServiceName, '--criticality',
+        '3 normal', '--type', 'Demonstration'
+    );
+}
+else {
+    $ExitCode = $CommandObject->Execute( '--name', $ChildServiceName, '--parent-name', $ParentServiceName );
+}
 $Self->Is(
     $ExitCode,
     1,
@@ -77,7 +118,15 @@ $Self->Is(
 );
 
 # Parent and child service same name.
-$ExitCode = $CommandObject->Execute( '--name', $ParentServiceName, '--parent-name', $ParentServiceName );
+if ($IsITSMInstalled) {
+    $ExitCode = $CommandObject->Execute(
+        '--name', $ParentServiceName, '--parent-name', $ParentServiceName, '--criticality',
+        '3 normal', '--type', 'Demonstration'
+    );
+}
+else {
+    $ExitCode = $CommandObject->Execute( '--name', $ParentServiceName, '--parent-name', $ParentServiceName );
+}
 my $ServiceName = $ParentServiceName . '::' . $ParentServiceName;
 $Self->Is(
     $ExitCode,
@@ -86,7 +135,15 @@ $Self->Is(
 );
 
 # Parent (two levels) and child same name.
-$ExitCode    = $CommandObject->Execute( '--name', $ParentServiceName, '--parent-name', $ServiceName );
+if ($IsITSMInstalled) {
+    $ExitCode = $CommandObject->Execute(
+        '--name', $ParentServiceName, '--parent-name', $ServiceName, '--criticality',
+        '3 normal', '--type', 'Demonstration'
+    );
+}
+else {
+    $ExitCode = $CommandObject->Execute( '--name', $ParentServiceName, '--parent-name', $ServiceName );
+}
 $ServiceName = $ServiceName . '::' . $ParentServiceName;
 $Self->Is(
     $ExitCode,

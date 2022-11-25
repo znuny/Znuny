@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.192993837171586;
+    $Self->{Completeness}        = 0.192931258106355;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2022,6 +2022,7 @@ sub Data {
         'Filter for SLAs' => '',
         'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => 'Prašome rašyti tik numerius!',
+        'Minimum Time Between Incidents' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
         'S/MIME Management' => 'S/MIME valdymas',
@@ -2106,6 +2107,7 @@ sub Data {
         'Service name maximum length is 200 characters (with Sub-service).' =>
             '',
         'Sub-service of' => 'Sub-paslauga',
+        'Criticality' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
         'Session Management' => 'Sesijų valdymas',

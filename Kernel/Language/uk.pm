@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.461563412260785;
+    $Self->{Completeness}        = 0.461413748378729;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2023,6 +2023,7 @@ sub Data {
         'Filter for SLAs' => '',
         'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => 'Будь ласка, пишіть тільки цифри!',
+        'Minimum Time Between Incidents' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
         'S/MIME Management' => 'Керування S/MIME',
@@ -2107,6 +2108,7 @@ sub Data {
         'Service name maximum length is 200 characters (with Sub-service).' =>
             'Максимальна довжина імені служби 200 символів (з під-службами).',
         'Sub-service of' => 'Підсервіс сервісу',
+        'Criticality' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
         'Session Management' => 'Керування сеансами',

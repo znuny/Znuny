@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-10-31 13:33+0000\n"
+"POT-Creation-Date: 2022-11-25 11:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -6074,6 +6074,10 @@ msgstr ""
 msgid "Please write only numbers!"
 msgstr ""
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSLA.tt
+msgid "Minimum Time Between Incidents"
+msgstr ""
+
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
 msgid "S/MIME Management"
 msgstr ""
@@ -6312,6 +6316,10 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
 msgid "Sub-service of"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
+msgid "Criticality"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt

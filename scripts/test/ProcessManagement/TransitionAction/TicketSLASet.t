@@ -45,6 +45,39 @@ my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate();
 # set user details
 my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate();
 
+my %ITSMCoreSLA;
+my %ITSMCoreService;
+
+my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
+
+if ($IsITSMInstalled) {
+
+    # get the list of service types from general catalog
+    my $ServiceTypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class => 'ITSM::Service::Type',
+    );
+
+    # build a lookup hash
+    my %ServiceTypeName2ID = reverse %{$ServiceTypeList};
+
+    # get the list of sla types from general catalog
+    my $SLATypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class => 'ITSM::SLA::Type',
+    );
+
+    # build a lookup hash
+    my %SLATypeName2ID = reverse %{$SLATypeList};
+
+    %ITSMCoreSLA = (
+        TypeID => $SLATypeName2ID{Other},
+    );
+
+    %ITSMCoreService = (
+        TypeID      => $ServiceTypeName2ID{Training},
+        Criticality => '3 normal',
+    );
+}
+
 #
 # Create new services
 #
@@ -53,6 +86,7 @@ my @Services = (
         Name    => 'Service0' . $RandomID,
         ValidID => 1,
         UserID  => 1,
+        %ITSMCoreService,
     },
 );
 
@@ -86,18 +120,21 @@ my @SLAs = (
         ServiceIDs => [ $Services[0]->{ServiceID} ],
         ValidID    => 1,
         UserID     => 1,
+        %ITSMCoreSLA,
     },
     {
         Name       => 'SLA1' . $RandomID,
         ServiceIDs => [ $Services[0]->{ServiceID} ],
         ValidID    => 1,
         UserID     => 1,
+        %ITSMCoreSLA,
     },
     {
         Name       => 'SLA2' . $RandomID,
         ServiceIDs => [],
         ValidID    => 1,
         UserID     => 1,
+        %ITSMCoreSLA,
     },
 );
 

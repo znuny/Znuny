@@ -171,6 +171,14 @@
                         </div>
                         <div class="Clear"></div>
 
+                        [% IF Data.IsITSMInstalled %]
+                            <label for="TypeIDs">[% Translate("Type") | html %]:</label>
+                            <div class="Field">
+                                [% Data.TypeOptionStrg %]
+                            </div>
+                            <div class="Clear"></div>
+                        [% END %]
+
                         <label for="ServiceIDs">[% Translate("Service") | html %]:</label>
                         <div class="Field">
                             [% Data.ServiceOptionStrg %]
@@ -215,6 +223,15 @@
                             </p>
                         </div>
                         <div class="Clear"></div>
+
+                        [% IF Data.IsITSMInstalled %]
+                            <label for="MinTimeBetweenIncidents">[% Translate("Minimum Time Between Incidents") | html %] ([% Translate("minutes") | html %]):</label>
+                            <div class="Field">
+                                <input type="text" name="MinTimeBetweenIncidents" id="MinTimeBetweenIncidents" value="[% Data.MinTimeBetweenIncidents | html %]" class="W25pc Validate_Number" maxlength="15"/>
+                                <div id="MinTimeBetweenIncidentsError" class="TooltipErrorMessage"><p>[% Translate("Please write only numbers!") | html %]</p></div>
+                            </div>
+                            <div class="Clear"></div>
+                        [% END %]
 
                         <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]:</label>
                         <div class="Field">

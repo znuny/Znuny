@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.627311060655206;
+    $Self->{Completeness}        = 0.627431906614786;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2023,6 +2023,7 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Filter for SLAs' => '',
         'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => 'Silahkan tulis angka saja',
+        'Minimum Time Between Incidents' => 'Waktu minimal antara insiden',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
         'S/MIME Management' => 'Manajemen S/MIME',
@@ -2107,6 +2108,7 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             '',
         'Sub-service of' => 'Sub-layanan dari',
+        'Criticality' => 'Kritikalitas',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
         'Session Management' => 'Manajemen sesi',

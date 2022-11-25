@@ -19,9 +19,10 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $GroupObject  = $Kernel::OM->Get('Kernel::System::Group');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $TicketObject    = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $GroupObject     = $Kernel::OM->Get('Kernel::System::Group');
+        my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
 
         # Get random variable.
         my $RandomID = $HelperObject->GetRandomID();
@@ -48,11 +49,18 @@ $Selenium->RunTest(
         );
 
         # Create test service.
-        my $ServiceName = 'Selenium' . $HelperObject->GetRandomID();
-        my $ServiceID   = $Kernel::OM->Get('Kernel::System::Service')->ServiceAdd(
+        my $ServiceName   = 'Selenium' . $HelperObject->GetRandomID();
+        my %ServiceValues = (
             Name    => $ServiceName,
             ValidID => 1,
             UserID  => 1,
+        );
+        if ($IsITSMInstalled) {
+            $ServiceValues{TypeID}      = 1;
+            $ServiceValues{Criticality} = '3 normal';
+        }
+        my $ServiceID = $Kernel::OM->Get('Kernel::System::Service')->ServiceAdd(
+            %ServiceValues,
         );
         $Self->True(
             $ServiceID,

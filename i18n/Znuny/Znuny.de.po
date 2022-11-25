@@ -25564,3 +25564,11 @@ msgstr "Typ-Sichtbarkeit und Standardeinstellungen konfigurieren"
 msgid "Generic Agent"
 msgstr "Generic Agent"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSLA.tt
+msgid "Minimum Time Between Incidents"
+msgstr "Minimale Zeit zwischen den Vorfällen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
+msgid "Criticality"
+msgstr "Kritikalität"
+

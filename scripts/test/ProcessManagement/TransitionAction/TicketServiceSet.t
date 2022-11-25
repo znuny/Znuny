@@ -43,6 +43,25 @@ my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate();
 # set user details
 my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate();
 
+my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
+my %ITSMCoreValues;
+
+if ($IsITSMInstalled) {
+
+    # get the list of service types from general catalog
+    my $ServiceTypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class => 'ITSM::Service::Type',
+    );
+
+    # build a lookup hash
+    my %ServiceTypeName2ID = reverse %{$ServiceTypeList};
+
+    %ITSMCoreValues = (
+        TypeID      => $ServiceTypeName2ID{Training},
+        Criticality => '3 normal',
+    );
+}
+
 #
 # Create new services
 #
@@ -51,16 +70,19 @@ my @Services = (
         Name    => 'Service0' . $RandomID,
         ValidID => 1,
         UserID  => 1,
+        %ITSMCoreValues,
     },
     {
         Name    => 'Service1' . $RandomID,
         ValidID => 1,
         UserID  => 1,
+        %ITSMCoreValues,
     },
     {
         Name    => 'Service2' . $RandomID,
         ValidID => 1,
         UserID  => 1,
+        %ITSMCoreValues,
     },
 );
 

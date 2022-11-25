@@ -179,6 +179,20 @@
                         </div>
                         <div class="Clear"></div>
 
+                        [% IF Data.IsITSMInstalled %]
+                            <label for="TypeID">[% Translate("Type") | html %]: </label>
+                            <div class="Field">
+                                [% Data.TypeOptionStrg %]
+                            </div>
+                            <div class="Clear"></div>
+
+                            <label for="Criticality">[% Translate("Criticality") | html %]: </label>
+                            <div class="Field">
+                                [% Data.CriticalityOptionStrg %]
+                            </div>
+                            <div class="Clear"></div>
+                        [% END %]
+
                         <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]:</label>
                         <div class="Field">
                             [% Data.ValidOptionStrg %]

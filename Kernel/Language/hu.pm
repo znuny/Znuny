@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.928965293545248;
+    $Self->{Completeness}        = 0.928988326848249;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2028,6 +2028,7 @@ sub Data {
         'Filter for SLAs' => 'Szűrő az SLA-khoz',
         'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => 'Csak számokat írjon!',
+        'Minimum Time Between Incidents' => 'Az incidensek közti legkisebb idő',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
         'S/MIME Management' => 'S/MIME kezelés',
@@ -2112,6 +2113,7 @@ sub Data {
         'Service name maximum length is 200 characters (with Sub-service).' =>
             'A szolgáltatás nevének legnagyobb hossza 200 karakter (alszolgáltatásokkal).',
         'Sub-service of' => 'Részszolgáltatása ennek',
+        'Criticality' => 'Kritikusság',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
         'Session Management' => 'Munkamenet-kezelés',

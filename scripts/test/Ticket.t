@@ -923,13 +923,48 @@ $TypeObject->TypeUpdate(
     UserID  => 1,
 );
 
-# create a test service
-my $ServiceID = $ServiceObject->ServiceAdd(
+my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
+my %ITSMCoreService;
+my %ITSMCoreSLA;
+
+if ($IsITSMInstalled) {
+
+    # get the list of service types from general catalog
+    my $ServiceTypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class => 'ITSM::Service::Type',
+    );
+
+    # build a lookup hash
+    my %ServiceTypeName2ID = reverse %{$ServiceTypeList};
+
+    # get the list of sla types from general catalog
+    my $SLATypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class => 'ITSM::SLA::Type',
+    );
+
+    # build a lookup hash
+    my %SLATypeName2ID = reverse %{$SLATypeList};
+
+    %ITSMCoreSLA = (
+        TypeID => $SLATypeName2ID{Other},
+    );
+
+    %ITSMCoreService = (
+        TypeID      => $ServiceTypeName2ID{Training},
+        Criticality => '3 normal',
+    );
+}
+
+my %ServiceValues = (
     Name    => 'Service' . $HelperObject->GetRandomID(),
     ValidID => 1,
     Comment => 'Unit Test Comment',
     UserID  => 1,
+    %ITSMCoreService,
 );
+
+# create a test service
+my $ServiceID = $ServiceObject->ServiceAdd(%ServiceValues);
 
 # wait 1 seconds
 $HelperObject->FixedTimeAddSeconds(1);
@@ -999,13 +1034,16 @@ $Self->IsNot(
 # save current change_time
 $ChangeTime = $TicketData{Changed};
 
-# create a test SLA
-my $SLAID = $SLAObject->SLAAdd(
+my %SLAAddValues = (
     Name    => 'SLA' . $HelperObject->GetRandomID(),
     ValidID => 1,
     Comment => 'Unit Test Comment',
     UserID  => 1,
+    %ITSMCoreSLA,
 );
+
+# create a test SLA
+my $SLAID = $SLAObject->SLAAdd(%SLAAddValues);
 
 # wait 5 seconds
 $HelperObject->FixedTimeAddSeconds(5);
@@ -2534,12 +2572,17 @@ for my $Index ( 1 .. 3 ) {
     };
 
     # Create test services.
-    my $ServiceName = $Index . 'Service' . $RandomID;
-    my $ServiceID   = $ServiceObject->ServiceAdd(
+    my $ServiceName   = $Index . 'Service' . $RandomID;
+    my %ServiceValues = (
         Name    => $ServiceName,
         ValidID => 1,
         Comment => 'Unit Test Comment',
         UserID  => 1,
+        %ITSMCoreService,
+    );
+
+    my $ServiceID = $ServiceObject->ServiceAdd(
+        %ServiceValues
     ) || die "ServiceAdd() error.";
 
     push @Services, {
@@ -2548,12 +2591,17 @@ for my $Index ( 1 .. 3 ) {
     };
 
     # Create test SLAs.
-    my $SLAName = $Index . 'SLA' . $RandomID;
-    my $SLAID   = $SLAObject->SLAAdd(
+    my $SLAName      = $Index . 'SLA' . $RandomID;
+    my %SLAAddValues = (
         Name    => $SLAName,
         ValidID => 1,
         Comment => 'Unit Test Comment',
         UserID  => 1,
+        %ITSMCoreSLA,
+    );
+
+    my $SLAID = $SLAObject->SLAAdd(
+        %SLAAddValues
     ) || die "SLAAdd() error.";
 
     push @SLAs, {

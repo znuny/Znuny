@@ -17,6 +17,7 @@ use vars (qw($Self));
 my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
 my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
 my $ServiceObject      = $Kernel::OM->Get('Kernel::System::Service');
+my $IsITSMInstalled    = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
 
 # get helper object
 $Kernel::OM->ObjectParamAdd(
@@ -50,13 +51,20 @@ for my $ServiceID (@OriginalDefaultServices) {
 }
 
 # add service1
-my $ServiceRand1 = 'SomeService' . $HelperObject->GetRandomID();
-my $ServiceID1   = $ServiceObject->ServiceAdd(
+my $ServiceRand1  = 'SomeService' . $HelperObject->GetRandomID();
+my %ServiceValues = (
     Name    => $ServiceRand1,
     Comment => 'Some Comment',
     ValidID => 1,
     UserID  => 1,
 );
+
+if ($IsITSMInstalled) {
+    $ServiceValues{TypeID}      = 1;
+    $ServiceValues{Criticality} = '3 normal';
+}
+
+my $ServiceID1 = $ServiceObject->ServiceAdd(%ServiceValues);
 
 $Self->True(
     $ServiceID1,
@@ -65,12 +73,19 @@ $Self->True(
 
 # add service2
 my $ServiceRand2 = 'SomeService' . $HelperObject->GetRandomID();
-my $ServiceID2   = $ServiceObject->ServiceAdd(
+%ServiceValues = (
     Name    => $ServiceRand2,
     Comment => 'Some Comment',
     ValidID => 1,
     UserID  => 1,
 );
+
+if ($IsITSMInstalled) {
+    $ServiceValues{TypeID}      = 1;
+    $ServiceValues{Criticality} = '3 normal';
+}
+
+my $ServiceID2 = $ServiceObject->ServiceAdd(%ServiceValues);
 
 $Self->True(
     $ServiceID2,

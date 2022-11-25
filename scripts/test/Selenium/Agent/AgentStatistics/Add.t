@@ -18,11 +18,12 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
-        my $SLAObject     = $Kernel::OM->Get('Kernel::System::SLA');
-        my $StatsObject   = $Kernel::OM->Get('Kernel::System::Stats');
-        my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ServiceObject   = $Kernel::OM->Get('Kernel::System::Service');
+        my $SLAObject       = $Kernel::OM->Get('Kernel::System::SLA');
+        my $StatsObject     = $Kernel::OM->Get('Kernel::System::Stats');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+        my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
 
         my $Success = $HelperObject->ConfigSettingChange(
             Valid => 1,
@@ -35,10 +36,18 @@ $Selenium->RunTest(
 
         # Add test services and SLAs.
         for ( 1 .. 5 ) {
-            my $ServiceID = $ServiceObject->ServiceAdd(
+            my %ServiceValues = (
                 Name    => "TestService - " . $HelperObject->GetRandomID(),
                 ValidID => 1,
                 UserID  => 1,
+            );
+            if ($IsITSMInstalled) {
+                $ServiceValues{TypeID}      = 1;
+                $ServiceValues{Criticality} = '3 normal';
+            }
+
+            my $ServiceID = $ServiceObject->ServiceAdd(
+                %ServiceValues,
             );
             $Self->True(
                 $ServiceID,
@@ -53,10 +62,17 @@ $Selenium->RunTest(
             );
             push @ServiceIDs, $ServiceID;
 
-            my $SLAID = $SLAObject->SLAAdd(
+            my %SLAValues = (
                 Name    => "TestSLA - " . $HelperObject->GetRandomID(),
                 ValidID => 1,
                 UserID  => 1,
+            );
+            if ($IsITSMInstalled) {
+                $SLAValues{TypeID} = 1;
+            }
+
+            my $SLAID = $SLAObject->SLAAdd(
+                %SLAValues,
             );
             $Self->True(
                 $SLAID,

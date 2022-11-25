@@ -25,6 +25,7 @@ my $StateObject               = $Kernel::OM->Get('Kernel::System::State');
 my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
 my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 my $StorableObject            = $Kernel::OM->Get('Kernel::System::Storable');
+my $IsITSMInstalled           = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
 
 # get helper object
 $Kernel::OM->ObjectParamAdd(
@@ -107,12 +108,44 @@ $Self->True(
     "QueueAdd() ID ($NewQueueID) added successfully"
 );
 
+my %ITSMCoreSLA;
+my %ITSMCoreService;
+
+if ($IsITSMInstalled) {
+
+    # get the list of service types from general catalog
+    my $ServiceTypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class => 'ITSM::Service::Type',
+    );
+
+    # build a lookup hash
+    my %ServiceTypeName2ID = reverse %{$ServiceTypeList};
+
+    # get the list of sla types from general catalog
+    my $SLATypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class => 'ITSM::SLA::Type',
+    );
+
+    # build a lookup hash
+    my %SLATypeName2ID = reverse %{$SLATypeList};
+
+    %ITSMCoreSLA = (
+        TypeID => $SLATypeName2ID{Other},
+    );
+
+    %ITSMCoreService = (
+        TypeID      => $ServiceTypeName2ID{Training},
+        Criticality => '3 normal',
+    );
+}
+
 # set service options
 my $ServiceName = 'Service_' . $RandomID;
 my $ServiceID   = $ServiceObject->ServiceAdd(
     Name    => $ServiceName,
     ValidID => $ValidList{'valid'},
     UserID  => 1,
+    %ITSMCoreService,
 );
 
 # sanity check
@@ -126,6 +159,7 @@ my $NewServiceID   = $ServiceObject->ServiceAdd(
     Name    => $NewServiceName,
     ValidID => $ValidList{'valid'},
     UserID  => 1,
+    %ITSMCoreService,
 );
 
 # sanity check
@@ -194,6 +228,7 @@ my $SLAID   = $SLAObject->SLAAdd(
     Name    => $SLAName,
     ValidID => $ValidList{'valid'},
     UserID  => 1,
+    %ITSMCoreSLA,
 );
 
 # sanity check
@@ -207,6 +242,7 @@ my $NewSLAID   = $SLAObject->SLAAdd(
     Name    => $NewSLAName,
     ValidID => $ValidList{'valid'},
     UserID  => 1,
+    %ITSMCoreSLA,
 );
 
 # sanity check

@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.710509244242621;
+    $Self->{Completeness}        = 0.710603112840467;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2028,6 +2028,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Filter for SLAs' => 'SLAでフィルター',
         'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => '数値しか入力できません。',
+        'Minimum Time Between Incidents' => 'インシデント間の最小時間',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
         'S/MIME Management' => 'S/MIME管理',
@@ -2112,6 +2113,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Service name maximum length is 200 characters (with Sub-service).' =>
             'サービス名は、(サブサービス名を含めて) 半角200文字以内にする必要があります。',
         'Sub-service of' => '親サービス',
+        'Criticality' => '重要度',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
         'Session Management' => 'セッション管理',

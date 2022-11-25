@@ -21,6 +21,8 @@ sub new {
     my $Self = {%Param};
     bless( $Self, $Type );
 
+    $Self->{IsITSMInstalled} = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
+
     return $Self;
 }
 
@@ -62,9 +64,15 @@ sub Run {
 
         # get params
         my %GetParam;
-        for my $Param (
-            qw(SLAID Name Calendar FirstResponseTime FirstResponseNotify SolutionTime SolutionNotify UpdateTime UpdateNotify ValidID Comment)
-            )
+
+        my @Needed
+            = qw(SLAID Name Calendar FirstResponseTime FirstResponseNotify SolutionTime SolutionNotify UpdateTime UpdateNotify ValidID Comment);
+
+        if ( $Self->{IsITSMInstalled} ) {
+            push @Needed, qw(TypeID MinTimeBetweenIncidents);
+        }
+
+        for my $Param (@Needed)
         {
             $GetParam{$Param} = $ParamObject->GetParam( Param => $Param ) || '';
         }
@@ -311,6 +319,8 @@ sub Run {
             );
         }
 
+        $Param{IsITSMInstalled} = $Self->{IsITSMInstalled};
+
         # generate output
         $Output .= $LayoutObject->Output(
             TemplateFile => 'AdminSLA',
@@ -369,6 +379,20 @@ sub _MaskNew {
         Max         => 200,
         Class       => 'Modernize',
     );
+
+    if ( $Self->{IsITSMInstalled} ) {
+
+        # generate TypeOptionStrg
+        my $TypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+            Class => 'ITSM::SLA::Type',
+        );
+        $Param{TypeOptionStrg} = $LayoutObject->BuildSelection(
+            Data       => $TypeList,
+            Name       => 'TypeID',
+            SelectedID => $SLAData{TypeID},
+            Class      => 'Modernize',
+        );
+    }
 
     # generate CalendarOptionStrg
     my %CalendarList;
@@ -516,6 +540,8 @@ sub _MaskNew {
             }
         }
     }
+
+    $Param{IsITSMInstalled} = $Self->{IsITSMInstalled};
 
     # get output back
     return $LayoutObject->Output(

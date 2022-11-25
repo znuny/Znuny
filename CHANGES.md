@@ -1,4 +1,5 @@
 # 6.5.1 2023-??-??
+ - 2022-11-25 Moved code of ITSMCore to Znuny Framework that will only be executed if ITSM actually is installed.
  - 2022-09-16 Auto responses now will not be sent if the recipient would be a system address.
 
 # 6.4.4 2022-11-23

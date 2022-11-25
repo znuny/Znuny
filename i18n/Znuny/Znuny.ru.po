@@ -25516,3 +25516,11 @@ msgstr ""
 msgid "Generic Agent"
 msgstr ""
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSLA.tt
+msgid "Minimum Time Between Incidents"
+msgstr "Минимальное время между инцидентами"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
+msgid "Criticality"
+msgstr "Критичность"
+
