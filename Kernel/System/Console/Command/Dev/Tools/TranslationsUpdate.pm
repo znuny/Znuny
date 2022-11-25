@@ -643,13 +643,13 @@ sub WritePerlLanguageFile {
         # needed for cvs check-in filter
         my $Separator = "# --";
 
-        my ( $Sec, $Min, $Hour, $Day, $Month, $Year ) = localtime( time() );
-        $Year += 1900;
-        my $CopyrightYear = "2012-$Year";
+        my $DateTimeSettings = $Kernel::OM->Create('Kernel::System::DateTime')->Get();
+        my $HeaderString     = "# Copyright (C) ";
+        $HeaderString .= "2012-$DateTimeSettings->{Year} Znuny GmbH, https://znuny.org/";
 
         $NewOut = <<"EOF";
 $Separator
-# Copyright (C) $CopyrightYear Znuny GmbH, https://znuny.com/
+$HeaderString
 $Separator
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
