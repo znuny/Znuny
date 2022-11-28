@@ -14,21 +14,17 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 @media screen,projection,tv,handheld {
 
-/**
- * @subsection  Filter Ticket
- */
-
- .dashboardTicketFilter {
+.DashboardWidgetExpand {
     display: flex;
     padding: 0 0 var(--padding-lg);
 }
 
-.dashboardTicketFilter ul {
+.DashboardWidgetExpand ul {
     display: flex;
     overflow-x: auto;
 }
 
-.dashboardTicketFilter ul li {
+.DashboardWidgetExpand ul li {
     display: flex;
     list-style: none;
     padding: none;
@@ -37,11 +33,11 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     margin-left: 20px;
 }
 
-.dashboardTicketFilter ul li:first-child {
+.DashboardWidgetExpand ul li:first-child {
     margin-left: 0;
 }
 
-.dashboardTicketFilter ul li a {
+.DashboardWidgetExpand ul li a {
     border-radius: var(--border-radius-sm);
     border: 1px solid var(--border-color);
     padding: var(--size-8) var(--size-20);
@@ -53,14 +49,14 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     cursor: pointer;
 }
 
-.dashboardTicketFilter ul li a:hover {
+.DashboardWidgetExpand ul li a:hover {
     border: 1px solid var(--primary-color-darker);
     color: var(--white);
     background: var(--primary-color-darker);
 }
 
-.dashboardTicketFilter ul li a.active,
-.dashboardTicketFilter ul li a.active:hover   {
+.DashboardWidgetExpand ul li a.active,
+.DashboardWidgetExpand ul li a.active:hover   {
     border: 1px solid var(--primary-color);
     background: var(--primary-color-rgb);
     pointer-events: none;
@@ -152,8 +148,6 @@ div.EventDetails {
 .DashboardUser .UserRow,
 .DashboardUserOnline .UserRow p {
     padding-top: 3px;
-    clear: both;
-    line-height: var(--table-tr-line-hight);
 }
 
 .DashboardUserOnline .UserRow p {
@@ -177,18 +171,18 @@ div.EventDetails {
 
 /* WidgetSimple - Dashboard Appointment Calendar */
 
-#Dashboard0500-AppointmentCalendar-box.WidgetSimple #Dashboard0500-AppointmentCalendar .DashboardActions {
+.DashboardAppointmentCalendar .DashboardActions {
     position: relative;
     top: inherit;
     right: inherit;
     display: inline-block;
 }
 
-#Dashboard0500-AppointmentCalendar-box.WidgetSimple #Dashboard0500-AppointmentCalendar .DashboardActions ul {
+.DashboardAppointmentCalendar .DashboardActions ul {
     padding: var(--padding-md) 0;
 }
 
-#Dashboard0500-AppointmentCalendar-box.WidgetSimple #Dashboard0500-AppointmentCalendar .DashboardActions ul li {
+.DashboardAppointmentCalendar .DashboardActions ul li {
     padding: 0;
 }
 
@@ -196,13 +190,9 @@ div.EventDetails {
     *Id exceptions are being avoided as much as possible, 
     *style now more in comformity with similar widgets
 
-#Dashboard0500-AppointmentCalendar-box.WidgetSimple #Dashboard0500-AppointmentCalendar .DashboardActions ul li a {
+.DashboardAppointmentCalendar.WidgetSimple .DashboardActions ul li a {
     padding: 0 var(--padding-sm);
 }*/
-
-#Dashboard0500-AppointmentCalendar-box.WidgetSimple #Dashboard0500-AppointmentCalendar .DashboardActions ul li:first-child a {
-    padding-left: 0;
-}
 
 /* WidgetSimple - Dashboard Users Online*/
 
@@ -217,9 +207,5 @@ div.EventDetails {
     right: inherit;
     display: inline-block;
 }*/
-  
-input[type=checkbox].active-widget-checkbox {
-    display: none;
-}
 
 } /* end @media */

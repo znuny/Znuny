@@ -172,7 +172,8 @@ Core.Agent.Dashboard = (function (TargetNS) {
             }
         );
 
-        TargetNS.InitSettingsWidget();
+        TargetNS.InitDashboardWidgetSettings();
+        TargetNS.InitDashboardWidgetExpand();
 
         Core.Agent.TableFilters.SetAllocationList();
 
@@ -887,13 +888,13 @@ Core.Agent.Dashboard = (function (TargetNS) {
     };
 
     /**
-     * @name InitSettingsWidget
+     * @name InitDashboardWidgetSettings
      * @memberof Core.Agent.Dashboard
      * @function
      * @description
      *      Initializes the dashboard widget settings.
      */
-    TargetNS.InitSettingsWidget = function () {
+    TargetNS.InitDashboardWidgetSettings = function () {
 
         var InactiveWidgets = {},
             $InactiveList,
@@ -1521,6 +1522,66 @@ Core.Agent.Dashboard = (function (TargetNS) {
                 });
                 return false;
             });
+    }
+
+    /**
+     * @name InitDashboardWidgetExpand
+     * @memberof Core.Agent.Dashboard
+     * @function
+     * @description
+     *      Initializes the dashboard widget expand event.
+     */
+    TargetNS.InitDashboardWidgetExpand = function () {
+
+        var UserDashboardWidgetExpand = Core.Config.Get('UserDashboardWidgetExpand');
+
+        $('.DashboardWidgetExpandListItem').off('click').on('click', function() {
+            UserDashboardWidgetExpand = $(this).attr('data-widget-name');
+
+            if (UserDashboardWidgetExpand == 'All'){
+                Core.Agent.PreferencesUpdate('UserDashboardWidgetExpand', UserDashboardWidgetExpand);
+                Core.App.InternalRedirect({
+                    Action: 'AgentDashboard',
+                });
+                return;
+            }
+
+            TargetNS.ExpandDashboardWidget(UserDashboardWidgetExpand);
+        });
+
+        if (!UserDashboardWidgetExpand){
+            return;
+        }
+        TargetNS.ExpandDashboardWidget(UserDashboardWidgetExpand);
+    }
+
+    /**
+     * @name ExpandDashboardWidget
+     * @memberof Core.Agent.Dashboard
+     * @function
+     * @description
+     *      Expand the given dashboard widget.
+     */
+    TargetNS.ExpandDashboardWidget = function (WidgetName) {
+        var WidgetSelector = 'Dashboard' + WidgetName  + '-box',
+            $DashboardWidgetExpandListItem = $('.DashboardWidgetExpandListItem[data-widget-name="' + WidgetName + '"]');
+
+        $('.DashboardWidgetExpandListItem').find('a').removeClass('active');
+        $DashboardWidgetExpandListItem.find('a').addClass('active');
+
+        if (WidgetName == 'All'){
+            $('.ContentColumn').find('.WidgetSimple').removeClass('Hidden');
+            return;
+        }
+
+        $('#Dashboard' + Core.App.EscapeSelector(WidgetName) + '-box').addClass('Loading');
+
+        Core.AJAX.ContentUpdate($('#Dashboard' + Core.App.EscapeSelector(WidgetName)), Core.Config.Get('Baselink') + 'Action=' + Core.Config.Get('Action') + ';Subaction=WidgetExpand;Name=' + WidgetName, function () {
+                $('#Dashboard' + Core.App.EscapeSelector(WidgetName) + '-box').removeClass('Loading');
+            });
+
+        $('.ContentColumn').find('.WidgetSimple').addClass('Hidden');
+        $('.ContentColumn').find('#' + WidgetSelector).removeClass('Hidden');
     }
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');

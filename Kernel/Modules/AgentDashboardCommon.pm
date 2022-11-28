@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -367,6 +367,38 @@ sub Run {
     }
 
     # deliver element
+    elsif ( $Self->{Subaction} eq 'WidgetExpand' ) {
+
+        my $Name = $ParamObject->GetParam( Param => 'Name' );
+        $UserObject->SetPreferences(
+            UserID => $Self->{UserID},
+            Key    => 'UserDashboardWidgetExpand',
+            Value  => $Name,
+        );
+
+        $Config->{$Name}->{PageShown} = '50';
+
+        my %Element = $Self->_Element(
+            Name    => $Name,
+            Configs => $Config,
+            AJAX    => 1,
+        );
+
+        if ( !%Element ) {
+            $LayoutObject->FatalError(
+                Message => $LayoutObject->{LanguageObject}->Translate( 'Can\'t get element data of %s!', $Name ),
+            );
+        }
+        return $LayoutObject->Attachment(
+            ContentType => 'text/html',
+            Charset     => $LayoutObject->{UserCharset},
+            Content     => ${ $Element{Content} },
+            Type        => 'inline',
+            NoCache     => 1,
+        );
+    }
+
+    # deliver element
     elsif ( $Self->{Subaction} eq 'Element' ) {
 
         my $Name = $ParamObject->GetParam( Param => 'Name' );
@@ -486,19 +518,30 @@ sub Run {
 
     }
     elsif ( $Self->{Subaction} eq 'ToolbarFetch' ) {
-        my $ToolBarModule = $ConfigObject->Get('Frontend::ToolBarModule');
-        my $ToolbarItems;
-        if ( IsHashRefWithData($ToolBarModule) ) {
-            $ToolbarItems = $LayoutObject->ToolbarModules(
-                ToolBarModule => $ToolBarModule,
-                ReturnResult  => 1,
-            );
+        my $JSONObject = $Kernel::OM->Get('Kernel::System::JSON');
+
+        my @ToolbarItems = ( $LayoutObject->Header() =~ m{<li class="(.*?)"\>}sg );
+        my %ToolbarItems;
+
+        TOOLBARITEM:
+        for my $ToolbarItem (@ToolbarItems) {
+            next TOOLBARITEM if $ToolbarItem eq 'UserAvatar';
+
+            ( my $ToolbarItemCSS ) = $LayoutObject->Header() =~ m{<li class="$ToolbarItem">(.*?)<\/li>}s;
+
+            $ToolbarItems{Icons}->{$ToolbarItem} = $ToolbarItemCSS;
         }
+
+        $ToolbarItems{IconsOrder} = \@ToolbarItems;
+
+        my $JSONEncodedToolbarItems = $JSONObject->Encode(
+            Data => \%ToolbarItems,
+        );
 
         return $LayoutObject->Attachment(
             ContentType => 'text/html',
             Charset     => $LayoutObject->{UserCharset},
-            Content     => $ToolbarItems,
+            Content     => $JSONEncodedToolbarItems,
             Type        => 'inline',
             NoCache     => 1,
         );
@@ -617,8 +660,24 @@ sub Run {
         push @Order, $Name;
     }
 
+    if ( !$Self->{UserDashboardWidgetExpand} || $Self->{UserDashboardWidgetExpand} eq 'All' ) {
+        $Param{ClassDashboardWidgetExpandAll} = 'active';
+        $LayoutObject->AddJSData(
+            Key   => 'UserDashboardWidgetExpand',
+            Value => 'All',
+        );
+    }
+
     # get default columns
     my $Columns = $Self->{Config}->{DefaultColumns} || $ConfigObject->Get('DefaultOverviewColumns') || {};
+
+    if ($BackendConfigKey eq 'DashboardBackend' ) {
+        # rendering dashboard widget expand menu
+        $LayoutObject->Block(
+            Name => 'DashboardWidgetExpand',
+            Data => {},
+        );
+    }
 
     # try every backend to load and execute it
     my @ContainerNames;
@@ -637,12 +696,43 @@ sub Run {
         my $NameForm = $Name;
         $NameForm =~ s{-}{}g;
 
+        my $NameClass = $NameForm;
+        $NameClass =~ s{\d*}{}g;
+
         my %JSData = (
-            Name     => $Name,
-            NameForm => $NameForm,
+            Name      => $Name,
+            NameForm  => $NameForm,
+            NameClass => $NameClass,
         );
 
         push @ContainerNames, \%JSData;
+
+        if ($BackendConfigKey eq 'DashboardBackend' && $Element{Config}->{Block} eq 'ContentLarge' ) {
+
+            my $WidgetName = $Name;
+            my $Class;
+            if ( $Self->{UserDashboardWidgetExpand} && $Self->{UserDashboardWidgetExpand} eq $WidgetName ) {
+                $Class = 'active';
+
+                $LayoutObject->AddJSData(
+                    Key   => 'UserDashboardWidgetExpand',
+                    Value => $WidgetName,
+                );
+            }
+
+            # rendering dashboard widget expand list items
+            $LayoutObject->Block(
+                Name => 'DashboardWidgetExpandListItem',
+                Data => {
+                    %{ $Element{Config} },
+                    Name     => $Name,
+                    NameForm => $NameForm,
+                    Header   => ${ $Element{Header} },
+                    Content  => ${ $Element{Content} },
+                    Class    => $Class,
+                },
+            );
+        }
 
         # rendering
         $LayoutObject->Block(
@@ -651,6 +741,8 @@ sub Run {
                 %{ $Element{Config} },
                 Name           => $Name,
                 NameForm       => $NameForm,
+                NameClass      => $NameClass,
+                Header         => ${ $Element{Header} },
                 Content        => ${ $Element{Content} },
                 CustomerID     => $Self->{CustomerID} || '',
                 CustomerUserID => $Self->{CustomerUserID} || '',
@@ -911,6 +1003,7 @@ sub _Element {
     my $Object = $Module->new(
         %{$Self},
         Config                => $Configs->{$Name},
+        PageShown             => $Configs->{$Name}->{PageShown},
         Name                  => $Name,
         CustomerID            => $Self->{CustomerID} || '',
         CustomerUserID        => $Self->{CustomerUserID} || '',
@@ -1016,8 +1109,20 @@ sub _Element {
         );
     }
 
+    my $Header       = '';
+    my $HeaderMethod = $Object->can('Header');
+
+    if ($HeaderMethod) {
+        $Header = $Object->Header(
+            AJAX           => $Param{AJAX},
+            CustomerID     => $Self->{CustomerID} || '',
+            CustomerUserID => $Self->{CustomerUserID} || '',
+        );
+    }
+
     # return result
     return (
+        Header      => \$Header,
         Content     => \$Content,
         Config      => \%Config,
         Preferences => \@Preferences,
