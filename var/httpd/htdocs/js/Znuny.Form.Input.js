@@ -1175,18 +1175,18 @@ Znuny.Form.Input = (function (TargetNS) {
         }
 
         if (Readonly) {
-            $('#' + FieldID).prop('readonly', true);
+            $('#' + FieldID).prop('readonly', true).attr('tabindex', '-1');
 
             if (Type == 'select'){
-                $('#' + FieldID + '_Search').prop('readonly', true);
+                $('#' + FieldID + '_Search').prop('readonly', true).attr('tabindex', '-1');
                 $('#' + FieldID + '_Search').next().find('.Remove').remove();
             }
         }
         else {
-            $('#' + FieldID).prop('readonly', false);
+            $('#' + FieldID).prop('readonly', false).attr('tabindex', '0');
 
             if (Type == 'select'){
-                $('#' + FieldID + '_Search').prop('readonly', false);
+                $('#' + FieldID + '_Search').prop('readonly', false).attr('tabindex', '0');
             }
         }
 

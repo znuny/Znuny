@@ -1351,7 +1351,7 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             // some fields do not have a default value.
             // disable the input field
             if ($.inArray(Fieldname, FieldsWithoutDefaultValue) > -1) {
-                $('#DefaultValue').prop('readonly', true).prop('disabled', true);
+                $('#DefaultValue').prop('readonly', true).attr('tabindex', '-1').prop('disabled', true);
             }
 
             // only article should show Communication channel select.
