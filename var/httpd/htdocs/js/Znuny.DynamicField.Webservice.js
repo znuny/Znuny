@@ -162,7 +162,7 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
                         SelectedIDs;
 
                     Core.AJAX.ToggleAJAXLoader(SelectedValueFieldName, false);
-                    if (!Response) {
+                    if (!Response || (Array.isArray(Response) && !Response.length)) {
                         return;
                     }
 
