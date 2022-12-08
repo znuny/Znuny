@@ -226,11 +226,10 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Base::DatabaseBackupCheck',
         },
 
-        # Znuny specific migration modules
-        {
-            Message => 'Upgrade database structure',
-            Module  => 'scripts::Migration::Znuny::UpgradeDatabaseStructure',
-        },
+        #         {
+        #             Message => 'Upgrade database structure',
+        #             Module  => 'scripts::Migration::Znuny::UpgradeDatabaseStructure',
+        #         },
         {
             Message => 'Rebuild configuration',
             Module  => 'scripts::Migration::Base::RebuildConfig',
@@ -240,16 +239,8 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Znuny::MigrateSysConfigSettings',
         },
         {
-            Message => 'Reindex S/MIME certificates',
-            Module  => 'scripts::Migration::Znuny::ReindexSMIMECertificates',
-        },
-        {
-            Message => "Add dynamic fields 'TicketCalendarStartTime' and 'TicketCalendarEndTime'.",
-            Module  => 'scripts::Migration::Znuny::AddTicketCalendarDynamicFields',
-        },
-        {
-            Message => 'Migrate web service configuration',
-            Module  => 'scripts::Migration::Znuny::MigrateWebserviceConfiguration',
+            Message => 'Migrate dynamic fields',
+            Module  => 'scripts::Migration::Znuny::MigrateDynamicFields',
         },
 
         # NOTE: UninstallMergedPackages has to be called only after
@@ -258,7 +249,6 @@ sub _TasksGet {
             Message => 'Uninstall merged packages',
             Module  => 'scripts::Migration::Znuny::UninstallMergedPackages',
         },
-
         {
             Message => 'Initialize default cron jobs',
             Module  => 'scripts::Migration::Base::InitializeDefaultCronjobs',

@@ -46,14 +46,14 @@ sub Run {
     );
 
     # Note: Znuny and Znuny4OTRS in case one of the packages later will be built with the Znuny prefix
-    my @PackageName = (
-        qw(
-            Znuny-SMIME
-            )
+    my @PackageNames = (
+
+        #         'Znuny-SMIME',
+        #         'Znuny4OTRS-SMIME',
     );
 
     PACKAGENAME:
-    for my $PackageName (@PackageName) {
+    for my $PackageName (@PackageNames) {
         my $Success = $PackageObject->_PackageUninstallMerged(
             Name => $PackageName,
         );

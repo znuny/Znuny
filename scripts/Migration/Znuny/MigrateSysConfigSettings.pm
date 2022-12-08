@@ -43,15 +43,10 @@ sub _GetMigrateSysConfigSettings {
     my ( $Self, %Param ) = @_;
 
     my %MigrateSysConfigSettings = (
-        'Frontend::RichTextPath' => {
-            UpdateName => 'Frontend::RichText::Path',
-        },
-        'Frontend::RichTextWidth' => {
-            UpdateName => 'Frontend::RichText::Settings###Width',
-        },
-        'Frontend::RichTextHeight' => {
-            UpdateName => 'Frontend::RichText::Settings###Height',
-        },
+
+        #         'Frontend::RichTextPath' => {
+        #             UpdateName => 'Frontend::RichText::Path',
+        #         },
     );
 
     return %MigrateSysConfigSettings;

@@ -34,23 +34,13 @@ sub Run {
 
     my $Verbose = $Param{CommandlineOptions}->{Verbose} || 0;
 
+    # TODO: No database upgrade tasks as of now
     my @Tasks = (
-        {
-            Message => 'Create/update table smime_keys',
-            Module  => 'SMIMEKeys',
-        },
-        {
-            Message => 'Add missing foreign keys that point to database table "article"',
-            Module  => 'RecreateForeignKeysToArticleTable',
-        },
-        {
-            Message => 'Add table and notification event for user mention support',
-            Module  => 'Mentions',
-        },
-        {
-            Message => 'Increase size of columns of database tables oauth2_token_config and oauth2_token',
-            Module  => 'OAuth2Token',
-        },
+
+        #         {
+        #             Message => 'Create/update table smime_keys',
+        #             Module  => 'SMIMEKeys',
+        #         },
     );
 
     return 1   if !@Tasks;
