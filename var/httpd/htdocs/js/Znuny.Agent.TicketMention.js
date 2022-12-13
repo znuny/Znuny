@@ -19,6 +19,7 @@ Znuny.Agent.TicketMention = (function (TargetNS) {
         var Data = {
             Action:    'Mentions',
             Subaction: 'Remove',
+            BulkAction: 1
         };
 
         $('#RemoveMention').on('click',function(){

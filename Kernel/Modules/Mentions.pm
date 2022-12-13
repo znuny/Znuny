@@ -41,9 +41,13 @@ sub Run {
     if ( $Subaction eq "Remove" ) {
         my %Params;
 
+        # Agent with bulk action from AgentTicketMentionView can remove only his own mentions.
+        my $BulkAction = $ParamObject->GetParam( Param => 'BulkAction' ) // 0;
+        $Params{MentionedUserID} = $Self->{UserID} if $BulkAction;
+
         NEEDED:
         for my $Needed (qw(TicketID MentionedUserID)) {
-            $Params{$Needed} = $ParamObject->GetParam( Param => $Needed );
+            $Params{$Needed} = $ParamObject->GetParam( Param => $Needed ) if !$Params{$Needed};
             next NEEDED if defined $Params{$Needed};
 
             $LogObject->Log(
