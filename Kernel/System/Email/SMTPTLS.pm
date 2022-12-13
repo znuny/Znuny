@@ -19,8 +19,8 @@ our @ObjectDependencies;
 # Use Net::SSLGlue::SMTP on systems with older Net::SMTP modules that cannot handle SMTPTLS.
 BEGIN {
     if ( !defined &Net::SMTP::starttls ) {
-        ## nofilter(TidyAll::Plugin::OTRS::Perl::Require)
-        ## nofilter(TidyAll::Plugin::OTRS::Perl::SyntaxCheck)
+        ## nofilter(TidyAll::Plugin::Znuny::Perl::Require)
+        ## nofilter(TidyAll::Plugin::Znuny::Perl::SyntaxCheck)
         require Net::SSLGlue::SMTP;
     }
 }

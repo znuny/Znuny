@@ -5,7 +5,6 @@
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
-## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::SpellCheck)
 
 package Kernel::System::Excel;
 
@@ -39,7 +38,7 @@ All Excel functions.
 
 create an object
 
-my $ExcelObject = $Kernel::OM->Get('Kernel::System::Excel');
+    my $ExcelObject = $Kernel::OM->Get('Kernel::System::Excel');
 
 =cut
 

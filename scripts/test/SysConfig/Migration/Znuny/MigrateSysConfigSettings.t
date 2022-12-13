@@ -55,7 +55,6 @@ $Self->True(
     "File location",
 );
 
-
 # Import
 my %ZnunyConfig;
 delete $INC{$TestPath};
@@ -86,12 +85,12 @@ my %Data = (
         UpdateName => 'Frontend::RichText::Path',
     },
     'Frontend::RichTextWidth' => {
-        UpdateName            => 'Frontend::RichText::Settings###Width',
-        EffectiveValue        => '500',     # original 320
+        UpdateName     => 'Frontend::RichText::Settings###Width',
+        EffectiveValue => '500',                                    # original 320
     },
     'Frontend::RichTextHeight' => {
-        UpdateName              => 'Frontend::RichText::Settings###Height',
-        EffectiveValue          => '600',   # original 620
+        UpdateName     => 'Frontend::RichText::Settings###Height',
+        EffectiveValue => '600',                                     # original 620
     },
 );
 
@@ -118,13 +117,13 @@ $Self->True(
     "Config was successfully migrated."
 );
 
-for my $SettingName (sort keys %Expected){
+for my $SettingName ( sort keys %Expected ) {
 
     my %Setting = $SysConfigObject->SettingGet(
         Name => $SettingName,
     );
 
-    for my $Key (sort keys %{$Expected{$SettingName}}){
+    for my $Key ( sort keys %{ $Expected{$SettingName} } ) {
 
         $Self->Is(
             $Setting{$Key},

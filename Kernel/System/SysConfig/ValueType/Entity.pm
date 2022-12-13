@@ -8,7 +8,7 @@
 # --
 
 package Kernel::System::SysConfig::ValueType::Entity;
-## nofilter(TidyAll::Plugin::OTRS::Perl::LayoutObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
 
 use strict;
 use warnings;
@@ -325,6 +325,7 @@ sub SettingRender {
     $HTML .= $Kernel::OM->Get('Kernel::Output::HTML::Layout')->BuildSelection(
         Data          => \@EntityValues,
         Name          => $Param{Name},
+        Sort          => "AlphanumericValue",
         ID            => $Param{Name} . $Param{IDSuffix},
         Disabled      => $Param{RW} ? 0 : 1,
         SelectedValue => $EffectiveValue,

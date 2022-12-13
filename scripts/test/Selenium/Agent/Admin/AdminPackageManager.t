@@ -229,10 +229,12 @@ $Selenium->RunTest(
         $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Package::RepositoryList',
-            Value => [{
-                Name => "Example repository 1",
-                URL  => "https://addons.znuny.com/api/addon_repos/",
-            }],
+            Value => [
+                {
+                    Name => "Example repository 1",
+                    URL  => "https://addons.znuny.com/api/addon_repos/",
+                }
+            ],
         );
 
         # Allow web server to pick up the changed SysConfig.

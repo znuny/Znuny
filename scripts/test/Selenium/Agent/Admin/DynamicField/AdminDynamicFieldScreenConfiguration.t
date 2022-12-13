@@ -20,7 +20,7 @@ my $SeleniumTest = sub {
     my $ZnunyHelperObject  = $Kernel::OM->Get('Kernel::System::ZnunyHelper');
     my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
     my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-    my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
+    my $SysConfigObject    = $Kernel::OM->Get('Kernel::System::SysConfig');
 
     # Add dynamic fields
     for my $Count ( 0 .. 3 ) {
@@ -190,7 +190,11 @@ my $SeleniumTest = sub {
         }
     }
 
-    for my $SettingName ('Ticket::Frontend::AgentTicketNote###DynamicField', 'Ticket::Frontend::AgentTicketQueue###DefaultColumns') {
+    for my $SettingName (
+        'Ticket::Frontend::AgentTicketNote###DynamicField',
+        'Ticket::Frontend::AgentTicketQueue###DefaultColumns'
+        )
+    {
         my %Setting = $SysConfigObject->SettingGet(
             Name      => $SettingName,
             Translate => 0,

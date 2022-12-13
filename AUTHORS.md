@@ -26,6 +26,7 @@ The following persons contributed to Znuny:
 * Dusan Vuckovic <dusan.vuckovic@otrs.com>
 * Elias Probst <elias.probst@otrs.com>
 * Elva Novoa <elva.novoa@otrs.com>
+* Emin Yazi <yazi@efflux.de>
 * Enrique Matías Sánchez (Quique) <cronopios@gmail.com>
 * Felix Niklas <felix.niklas@otrs.com>
 * Florian Edlhuber <florian.edlhuber@otrs.com>

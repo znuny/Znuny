@@ -217,7 +217,7 @@ sub _GetAttachments {
             push @{ $Param{Config}->{Attachment} }, \%Attachment;
         }
 
-        ## nofilter(TidyAll::Plugin::OTRS::Perl::ObjectDependencies)
+        ## nofilter(TidyAll::Plugin::Znuny::Perl::ObjectDependencies)
         # upcoming feature (please do not delete this) # Znuny
         # elsif ($Data{ObjectType} eq 'StdAttachment'){
 

@@ -510,7 +510,7 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
 
                 if (Name == DynamicFieldName || Name == 'Action' || Name == 'Subaction' || Name.match('Autocomplete')) return;
 
-                if( $(this).attr('type') == 'checkbox' ) {
+                if($(this).attr('type') == 'checkbox') {
                     QueryString[Name] = {
                         ID: $(this).prop('checked') ? 1 : 0
                     };

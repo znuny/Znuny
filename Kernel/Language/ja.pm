@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.712798829077899;
+    $Self->{Completeness}        = 0.711872665259055;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1477,6 +1477,7 @@ sub Data {
         'URL for authorization code' => '',
         'URL for token by authorization code' => '',
         'URL for token by refresh token' => '',
+        'Access token scope' => '',
         'Template' => 'テンプレート',
         'This is the template that was used to create this OAuth2 token configuration.' =>
             '',
@@ -2518,6 +2519,9 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Email ticket' => 'メールチケット',
         'New phone ticket from %s' => '%sからの新規電話チケット',
         'New email ticket to %s' => '%s宛の新規メールチケット',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
+        'No tickets found.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardProductNotify.tt
         '%s %s is available!' => '%s %s が利用できます。',
@@ -4722,6 +4726,9 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         # Perl Module: Kernel/Output/HTML/Dashboard/EventsTicketCalendar.pm
         'The start time of a ticket has been set after the end time!' => '',
 
+        # Perl Module: Kernel/Output/HTML/Dashboard/MyLastChangedTickets.pm
+        'Shown Tickets' => 'チケットを表示',
+
         # Perl Module: Kernel/Output/HTML/Dashboard/News.pm
         'Can\'t connect to OTRS News server!' => 'OTRSニュースサーバーに接続できませんでした！',
         'Can\'t get OTRS News from server!' => 'OTRS Newsをサーバから取得できませんでした！',
@@ -4734,7 +4741,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Can\'t connect to %s!' => '%sに接続できませんでした！',
 
         # Perl Module: Kernel/Output/HTML/Dashboard/TicketGeneric.pm
-        'Shown Tickets' => 'チケットを表示',
         'Shown Columns' => '列を表示',
         'filter not active' => 'フィルターは有効化されていません',
         'filter active' => 'フィルターを有効化',
@@ -5745,15 +5751,20 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Uses richtext for viewing and editing: articles, salutations, signatures, standard templates, auto responses and notifications.' =>
             '作成と表示確認にリッチテキストを利用します。: 記事、挨拶、署名、標準テンプレート、自動応答と通知',
         'Defines the URL rich text editor path.' => 'URLリッチテキスト・エディター・パスを定義します。',
-        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            'リッチテキスト・エディター・コンポーネントを定義します。数字（ピクセル）またはパーセント値（相対的）を入力します。',
-        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            '',
         'Defines the default CSS used in rich text editors.' => 'リッチテキスト・エディターで使用されるデフォルトCSSを定義します。',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.).' =>
             '',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.) in customer interface.' =>
             '顧客インタフェースで拡張モードを使用すべきかどうかを定義します(これにより、表・置換機能・各種スクリプト・Wordからの貼り付けなどが利用可能になります)。',
+        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            'リッチテキスト・エディター・コンポーネントを定義します。数字（ピクセル）またはパーセント値（相対的）を入力します。',
+        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            '',
+        'Defines the selectable font sizes in the rich text editor.' => '',
+        'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines additional plugins for use in the rich text editor.' => '',
+        'Defines extra content that is allowed for use in the rich text editor.' =>
+            '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             'HTTPヘッダ"X-Frame-Options: SAMEORIGIN”を無効化し、OTRSを外部のWebサイトの一部としてiframeに埋め込むことを許可します。 このHTTPヘッダを無効にすることにより、セキュリティ上の問題が生じることがあります! 変更内容をよく理解している場合に限り無効化を実行してください!',
@@ -7390,6 +7401,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'Parameters for the dashboard backend of the ticket stats of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
+        'MyLastChangedTickets dashboard widget.' => '',
         'Parameters for the dashboard backend of the upcoming events widget of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
         'Parameters for the dashboard backend of the queue overview widget of the agent interface. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "QueuePermissionGroup" is not mandatory, queues are only listed if they belong to this permission group if you enable it. "States" is a list of states, the key is the sort order of the state in the widget. "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
@@ -8925,6 +8937,7 @@ Thanks for your help!
         'My Queues' => '担当キュー',
         'My Services' => '担当サービス',
         'My Tickets.' => '担当チケット',
+        'My last changed tickets' => '',
         'NameX' => '',
         'New Ticket' => '新規チケット',
         'New Tickets' => '新規チケット',

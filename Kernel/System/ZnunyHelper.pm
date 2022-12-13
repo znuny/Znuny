@@ -7,8 +7,6 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-## nofilter("TidyAll::Plugin::OTRS::Perl::Pod::SpellCheck")
-
 package Kernel::System::ZnunyHelper;
 
 use strict;

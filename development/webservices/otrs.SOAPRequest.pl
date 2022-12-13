@@ -20,7 +20,7 @@
 use strict;
 use warnings;
 
-## nofilter(TidyAll::Plugin::OTRS::Perl::Dumper)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Dumper)
 
 # use ../ as lib location
 use File::Basename;

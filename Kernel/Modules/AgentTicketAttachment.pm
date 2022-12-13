@@ -8,7 +8,7 @@
 # --
 
 package Kernel::Modules::AgentTicketAttachment;
-## nofilter(TidyAll::Plugin::OTRS::Perl::Print)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Print)
 
 use strict;
 use warnings;

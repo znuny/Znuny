@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.748414376321353;
+    $Self->{Completeness}        = 0.747441936007796;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1472,6 +1472,7 @@ sub Data {
         'URL for authorization code' => '',
         'URL for token by authorization code' => '',
         'URL for token by refresh token' => '',
+        'Access token scope' => '',
         'Template' => 'Plantilla',
         'This is the template that was used to create this OAuth2 token configuration.' =>
             '',
@@ -2512,6 +2513,9 @@ sub Data {
         'Email ticket' => 'Email del ticket',
         'New phone ticket from %s' => 'Nuevo ticket telefónico de %s',
         'New email ticket to %s' => 'Nuevo ticket por correo para %s',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
+        'No tickets found.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardProductNotify.tt
         '%s %s is available!' => '%s %s está disponible!',
@@ -4715,6 +4719,9 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Dashboard/EventsTicketCalendar.pm
         'The start time of a ticket has been set after the end time!' => '',
 
+        # Perl Module: Kernel/Output/HTML/Dashboard/MyLastChangedTickets.pm
+        'Shown Tickets' => 'Tickets Mostrados',
+
         # Perl Module: Kernel/Output/HTML/Dashboard/News.pm
         'Can\'t connect to OTRS News server!' => '',
         'Can\'t get OTRS News from server!' => '',
@@ -4727,7 +4734,6 @@ sub Data {
         'Can\'t connect to %s!' => '',
 
         # Perl Module: Kernel/Output/HTML/Dashboard/TicketGeneric.pm
-        'Shown Tickets' => 'Tickets Mostrados',
         'Shown Columns' => 'Mostrar columnas',
         'filter not active' => '',
         'filter active' => '',
@@ -5738,14 +5744,19 @@ sub Data {
         'Uses richtext for viewing and editing: articles, salutations, signatures, standard templates, auto responses and notifications.' =>
             'Utiliza texto enriquecido para ver y editar: artículos, saludos, firmas, plantillas estándar, respuestas automáticas y notificaciones.',
         'Defines the URL rich text editor path.' => 'Define la URL de la ruta del editor de texto enriquecido.',
-        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            'Define la anchura del editor de texto enriquecido. Proporcione un número (pixeles) o un porcentaje (relativo).',
-        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            'Define la altura para el componente del editor de texto enriquecido. Ingrese el número (píxeles) o el valor de porcentaje (relativo).',
         'Defines the default CSS used in rich text editors.' => 'Define valor por defecto para el CSS de los editores de texto enriquecidos.',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.).' =>
             'Define si se debe usar el modo mejorado (permite el uso de la tableta, reemplazar, subescribir, sobrescribir, pegar desde word, etc.).',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.) in customer interface.' =>
+            '',
+        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            'Define la anchura del editor de texto enriquecido. Proporcione un número (pixeles) o un porcentaje (relativo).',
+        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            'Define la altura para el componente del editor de texto enriquecido. Ingrese el número (píxeles) o el valor de porcentaje (relativo).',
+        'Defines the selectable font sizes in the rich text editor.' => '',
+        'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines additional plugins for use in the rich text editor.' => '',
+        'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
         'Disable autocomplete in the login screen.' => 'Deshabilitar el autocompletado en la pantalla de acceso.',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
@@ -7383,6 +7394,7 @@ sub Data {
             '',
         'Parameters for the dashboard backend of the ticket stats of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
+        'MyLastChangedTickets dashboard widget.' => '',
         'Parameters for the dashboard backend of the upcoming events widget of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
         'Parameters for the dashboard backend of the queue overview widget of the agent interface. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "QueuePermissionGroup" is not mandatory, queues are only listed if they belong to this permission group if you enable it. "States" is a list of states, the key is the sort order of the state in the widget. "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
@@ -8467,7 +8479,7 @@ Thanks for your help!
 ' => '
 Estimado Cliente,
 
-Desafortunadamente no hemos podido detectar un número de ticket válido en su consulta, 
+Desafortunadamente no hemos podido detectar un número de ticket válido en su consulta,
 por lo que este email no puede ser procesado.
 
 Por favor creé un nuevo ticket a través del panel de cliente.
@@ -8910,6 +8922,7 @@ Tu Equipo de Soporte
         'My Queues' => 'Mis Filas',
         'My Services' => 'Mis Servicios',
         'My Tickets.' => '',
+        'My last changed tickets' => '',
         'NameX' => '',
         'New Ticket' => 'Nuevo Ticket',
         'New Tickets' => 'Nuevos tickets',

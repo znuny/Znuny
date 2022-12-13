@@ -39,14 +39,14 @@ jobs:
 
       - name: Prepare code policy
         run: |
-          cpanm Code::TidyAll Perl::Critic
-          codepolicy/bin/otrs.CodePolicy.pl --install
+          cpanm --verbose Algorithm::Diff Code::TidyAll Perl::Critic Perl::Tidy Pod::POM XML::Parser
+          codepolicy/bin/znuny.CodePolicy.pl --install-eslint
 
       - name: Run code policy
         run: |
           cd "${GITHUB_WORKSPACE}/znuny"
           git init
-          "${GITHUB_WORKSPACE}/codepolicy/bin/otrs.CodePolicy.pl" --all
+          "${GITHUB_WORKSPACE}/codepolicy/bin/znuny.CodePolicy.pl" --all-files
 
   CPANAudit:
     name: CPANAudit

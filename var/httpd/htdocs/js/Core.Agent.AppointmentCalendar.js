@@ -215,6 +215,7 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                 }
             },
             viewRender: function(View) {
+                var FilterViews;
 
                 // Check if we are on a timeline view.
                 if (View.name === 'timelineWeek' || View.name === 'timelineDay') {
@@ -250,6 +251,13 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                     );
                 }
                 CurrentView = View.name;
+
+                FilterViews = ["month", "agendaWeek", "agendaDay"];
+                if (FilterViews.includes(CurrentView)){
+                    $('.WidgetSimple.Appointments').show();
+                }else{
+                    $('.WidgetSimple.Appointments').hide();
+                }
             },
             select: function(Start, End, JSEvent, View, Resource) {
                 var Data = {
@@ -467,7 +475,10 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
 
         // Activate FilterAppointments
         $('#FilterAppointments').on('keyup',function(){
-            $CalendarObj.fullCalendar('rerenderEvents');
+            var FilterViews = ["month", "agendaWeek", "agendaDay"];
+            if (FilterViews.includes(CurrentView)){
+                $CalendarObj.fullCalendar('rerenderEvents');
+            }
         })
 
         // Initialize datepicker
@@ -1801,8 +1812,8 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                 $PluginDataObj.val(JSON.stringify(PluginData));
 
                 $Parent.remove();
-                
-                if ( $PluginContainer.children().length == 0 ) {
+
+                if ($PluginContainer.children().length == 0) {
                     $PluginContainer.text('');
                 }
 

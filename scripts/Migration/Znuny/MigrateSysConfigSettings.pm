@@ -5,7 +5,7 @@
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
-## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::NamePod)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Pod::NamePod)
 
 package scripts::Migration::Znuny::MigrateSysConfigSettings;    ## no critic
 
@@ -43,15 +43,15 @@ sub _GetMigrateSysConfigSettings {
     my ( $Self, %Param ) = @_;
 
     my %MigrateSysConfigSettings = (
-#         'Frontend::RichTextPath' => {
-#             UpdateName => 'Frontend::RichText::Path',
-#         },
-#         'Frontend::RichTextWidth' => {
-#             UpdateName => 'Frontend::RichText::Settings###Width',
-#         },
-#         'Frontend::RichTextHeight' => {
-#             UpdateName => 'Frontend::RichText::Settings###Height',
-#         },
+        'Frontend::RichTextPath' => {
+            UpdateName => 'Frontend::RichText::Path',
+        },
+        'Frontend::RichTextWidth' => {
+            UpdateName => 'Frontend::RichText::Settings###Width',
+        },
+        'Frontend::RichTextHeight' => {
+            UpdateName => 'Frontend::RichText::Settings###Height',
+        },
     );
 
     return %MigrateSysConfigSettings;
