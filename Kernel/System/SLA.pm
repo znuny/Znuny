@@ -17,6 +17,7 @@ our @ObjectDependencies = (
     'Kernel::System::Cache',
     'Kernel::System::CheckItem',
     'Kernel::System::DB',
+    'Kernel::System::GeneralCatalog',
     'Kernel::System::Log',
     'Kernel::System::Valid',
 );
@@ -55,6 +56,8 @@ sub new {
 
     $Self->{CacheType} = 'SLA';
     $Self->{CacheTTL}  = 60 * 60 * 24 * 20;
+
+    $Self->{IsITSMInstalled} = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
 
     return $Self;
 }
@@ -146,22 +149,27 @@ Returns an SLA as a hash
 Returns:
 
     my %SLAData = (
-          'SLAID'               => '2',
-          'Name'                => 'Diamond Pacific - S2',
-          'Calendar'            => '2',
-          'FirstResponseTime'   => '60',   # in minutes according to business hours
-          'FirstResponseNotify' => '70',   # in percent
-          'UpdateTime'          => '360',  # in minutes according to business hours
-          'UpdateNotify'        => '70',   # in percent
-          'SolutionTime'        => '960',  # in minutes according to business hours
-          'SolutionNotify'      => '80',   # in percent
-          'ServiceIDs'          => [ '4', '7', '8' ],
-          'ValidID'             => '1',
-          'Comment'             => 'Some Comment',
-          'CreateBy'            => '93',
-          'CreateTime'          => '2011-06-16 22:54:54',
-          'ChangeBy'            => '93',
-          'ChangeTime'          => '2011-06-16 22:54:54',
+        'SLAID'               => '2',
+        'Name'                => 'Diamond Pacific - S2',
+        'Calendar'            => '2',
+        'FirstResponseTime'   => '60',   # in minutes according to business hours
+        'FirstResponseNotify' => '70',   # in percent
+        'UpdateTime'          => '360',  # in minutes according to business hours
+        'UpdateNotify'        => '70',   # in percent
+        'SolutionTime'        => '960',  # in minutes according to business hours
+        'SolutionNotify'      => '80',   # in percent
+        'ServiceIDs'          => [ '4', '7', '8' ],
+        'ValidID'             => '1',
+        'Comment'             => 'Some Comment',
+        'CreateBy'            => '93',
+        'CreateTime'          => '2011-06-16 22:54:54',
+        'ChangeBy'            => '93',
+        'ChangeTime'          => '2011-06-16 22:54:54',
+
+        # ITSMCore (if installed)
+        'TypeID'                  => '5',
+        'Type'                    => 'Incident',
+        'MinTimeBetweenIncidents' => '4000',  # in minutes
     );
 
 =cut
@@ -197,11 +205,17 @@ sub SLAGet {
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     # get sla from db
+    my $SQL = "SELECT id, name, calendar_name, first_response_time, first_response_notify, "
+        . "update_time, update_notify, solution_time, solution_notify, "
+        . "valid_id, comments, create_time, create_by, change_time, change_by ";
+
+    if ( $Self->{IsITSMInstalled} ) {
+        $SQL .= ", type_id, min_time_bet_incidents ";
+    }
+
+    $SQL .= "FROM sla WHERE id = ?";
     $DBObject->Prepare(
-        SQL => 'SELECT id, name, calendar_name, first_response_time, first_response_notify, '
-            . 'update_time, update_notify, solution_time, solution_notify, '
-            . 'valid_id, comments, create_time, create_by, change_time, change_by '
-            . 'FROM sla WHERE id = ?',
+        SQL  => $SQL,
         Bind => [
             \$Param{SLAID},
         ],
@@ -226,6 +240,11 @@ sub SLAGet {
         $SLAData{CreateBy}            = $Row[12];
         $SLAData{ChangeTime}          = $Row[13];
         $SLAData{ChangeBy}            = $Row[14];
+
+        if ( $Self->{IsITSMInstalled} ) {
+            $SLAData{TypeID}                  = $Row[15];
+            $SLAData{MinTimeBetweenIncidents} = $Row[16] || 0;
+        }
     }
 
     # check sla
@@ -235,6 +254,15 @@ sub SLAGet {
             Message  => "No such SLAID ($Param{SLAID})!",
         );
         return;
+    }
+
+    if ( $Self->{IsITSMInstalled} ) {
+
+        # get sla type list
+        my $SLATypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+            Class => 'ITSM::SLA::Type',
+        );
+        $SLAData{Type} = $SLATypeList->{ $SLAData{TypeID} } || '';
     }
 
     # get all service ids
@@ -403,6 +431,10 @@ add a sla
         ValidID             => 1,
         Comment             => 'Comment',    # (optional)
         UserID              => 1,
+
+        # ITSMCore (if installed)
+        TypeID                  => 2,
+        MinTimeBetweenIncidents => 3443,     # (optional)
     );
 
 =cut
@@ -411,7 +443,13 @@ sub SLAAdd {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for my $Argument (qw(Name ValidID UserID)) {
+    my @Needed = qw(Name ValidID UserID);
+
+    if ( $Self->{IsITSMInstalled} ) {
+        push @Needed, 'TypeID';
+    }
+
+    for my $Argument (@Needed) {
         if ( !$Param{$Argument} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
@@ -440,6 +478,10 @@ sub SLAAdd {
     $Param{UpdateNotify}        ||= 0;
     $Param{SolutionTime}        ||= 0;
     $Param{SolutionNotify}      ||= 0;
+
+    if ( $Self->{IsITSMInstalled} ) {
+        $Param{MinTimeBetweenIncidents} ||= 0;
+    }
 
     # get check item object
     my $CheckItemObject = $Kernel::OM->Get('Kernel::System::CheckItem');
@@ -479,19 +521,37 @@ sub SLAAdd {
     }
 
     # add sla to database
-    return if !$DBObject->Do(
-        SQL => 'INSERT INTO sla '
-            . '(name, calendar_name, first_response_time, first_response_notify, '
-            . 'update_time, update_notify, solution_time, solution_notify, '
-            . 'valid_id, comments, create_time, create_by, change_time, change_by) VALUES '
-            . '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
-        Bind => [
-            \$Param{Name},                \$Param{Calendar},       \$Param{FirstResponseTime},
-            \$Param{FirstResponseNotify}, \$Param{UpdateTime},     \$Param{UpdateNotify},
-            \$Param{SolutionTime},        \$Param{SolutionNotify}, \$Param{ValidID}, \$Param{Comment},
-            \$Param{UserID}, \$Param{UserID},
-        ],
-    );
+    if ( $Self->{IsITSMInstalled} ) {
+        return if !$DBObject->Do(
+            SQL => 'INSERT INTO sla '
+                . '(name, calendar_name, first_response_time, first_response_notify, '
+                . 'update_time, update_notify, solution_time, solution_notify, '
+                . 'valid_id, comments, create_time, create_by, change_time, change_by, '
+                . 'type_id, min_time_bet_incidents) VALUES '
+                . '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, current_timestamp, ?, current_timestamp, ?, ?, ?)',
+            Bind => [
+                \$Param{Name},                \$Param{Calendar},       \$Param{FirstResponseTime},
+                \$Param{FirstResponseNotify}, \$Param{UpdateTime},     \$Param{UpdateNotify},
+                \$Param{SolutionTime},        \$Param{SolutionNotify}, \$Param{ValidID}, \$Param{Comment},
+                \$Param{UserID}, \$Param{UserID}, \$Param{TypeID}, \$Param{MinTimeBetweenIncidents},
+            ],
+        );
+    }
+    else {
+        return if !$DBObject->Do(
+            SQL => 'INSERT INTO sla '
+                . '(name, calendar_name, first_response_time, first_response_notify, '
+                . 'update_time, update_notify, solution_time, solution_notify, '
+                . 'valid_id, comments, create_time, create_by, change_time, change_by) VALUES '
+                . '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
+            Bind => [
+                \$Param{Name},                \$Param{Calendar},       \$Param{FirstResponseTime},
+                \$Param{FirstResponseNotify}, \$Param{UpdateTime},     \$Param{UpdateNotify},
+                \$Param{SolutionTime},        \$Param{SolutionNotify}, \$Param{ValidID}, \$Param{Comment},
+                \$Param{UserID}, \$Param{UserID},
+            ],
+        );
+    }
 
     # get sla id
     return if !$DBObject->Prepare(
@@ -552,6 +612,10 @@ update a existing sla
         ValidID             => 1,
         Comment             => 'Comment',    # (optional)
         UserID              => 1,
+
+        # ITSMCore
+        TypeID                  => 2,
+        MinTimeBetweenIncidents => 3443,  # (optional)
     );
 
 =cut
@@ -560,7 +624,13 @@ sub SLAUpdate {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for my $Argument (qw(SLAID Name ValidID UserID)) {
+    my @Needed = qw(SLAID Name ValidID UserID);
+
+    if ( $Self->{IsITSMInstalled} ) {
+        push @Needed, 'TypeID';
+    }
+
+    for my $Argument (@Needed) {
         if ( !$Param{$Argument} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
@@ -589,6 +659,10 @@ sub SLAUpdate {
     $Param{UpdateNotify}        ||= 0;
     $Param{SolutionTime}        ||= 0;
     $Param{SolutionNotify}      ||= 0;
+
+    if ( $Self->{IsITSMInstalled} ) {
+        $Param{MinTimeBetweenIncidents} ||= 0;
+    }
 
     # get check item object
     my $CheckItemObject = $Kernel::OM->Get('Kernel::System::CheckItem');
@@ -644,19 +718,37 @@ sub SLAUpdate {
     );
 
     # update service
-    return if !$DBObject->Do(
-        SQL => 'UPDATE sla SET name = ?, calendar_name = ?, '
-            . 'first_response_time = ?, first_response_notify = ?, '
-            . 'update_time = ?, update_notify = ?, solution_time = ?, solution_notify = ?, '
-            . 'valid_id = ?, comments = ?, change_time = current_timestamp, change_by = ? '
-            . 'WHERE id = ?',
-        Bind => [
-            \$Param{Name},                \$Param{Calendar},       \$Param{FirstResponseTime},
-            \$Param{FirstResponseNotify}, \$Param{UpdateTime},     \$Param{UpdateNotify},
-            \$Param{SolutionTime},        \$Param{SolutionNotify}, \$Param{ValidID}, \$Param{Comment},
-            \$Param{UserID}, \$Param{SLAID},
-        ],
-    );
+    if ( $Self->{IsITSMInstalled} ) {
+        return if !$DBObject->Do(
+            SQL => 'UPDATE sla SET name = ?, calendar_name = ?, '
+                . 'first_response_time = ?, first_response_notify = ?, '
+                . 'update_time = ?, update_notify = ?, solution_time = ?, solution_notify = ?, '
+                . 'valid_id = ?, comments = ?, change_time = current_timestamp, change_by = ?, '
+                . 'type_id = ?, min_time_bet_incidents = ? '
+                . 'WHERE id = ?',
+            Bind => [
+                \$Param{Name},                \$Param{Calendar},       \$Param{FirstResponseTime},
+                \$Param{FirstResponseNotify}, \$Param{UpdateTime},     \$Param{UpdateNotify},
+                \$Param{SolutionTime},        \$Param{SolutionNotify}, \$Param{ValidID}, \$Param{Comment},
+                \$Param{UserID},              \$Param{TypeID},         \$Param{MinTimeBetweenIncidents}, \$Param{SLAID},
+            ],
+        );
+    }
+    else {
+        return if !$DBObject->Do(
+            SQL => 'UPDATE sla SET name = ?, calendar_name = ?, '
+                . 'first_response_time = ?, first_response_notify = ?, '
+                . 'update_time = ?, update_notify = ?, solution_time = ?, solution_notify = ?, '
+                . 'valid_id = ?, comments = ?, change_time = current_timestamp, change_by = ? '
+                . 'WHERE id = ?',
+            Bind => [
+                \$Param{Name},                \$Param{Calendar},       \$Param{FirstResponseTime},
+                \$Param{FirstResponseNotify}, \$Param{UpdateTime},     \$Param{UpdateNotify},
+                \$Param{SolutionTime},        \$Param{SolutionNotify}, \$Param{ValidID}, \$Param{Comment},
+                \$Param{UserID}, \$Param{SLAID},
+            ],
+        );
+    }
 
     # remove all existing allocations
     return if !$DBObject->Do(

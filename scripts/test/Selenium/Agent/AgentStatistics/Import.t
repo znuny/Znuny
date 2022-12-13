@@ -18,9 +18,10 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
-        my $SLAObject     = $Kernel::OM->Get('Kernel::System::SLA');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ServiceObject   = $Kernel::OM->Get('Kernel::System::Service');
+        my $SLAObject       = $Kernel::OM->Get('Kernel::System::SLA');
+        my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
 
         my $Config = {
 
@@ -48,6 +49,11 @@ $Selenium->RunTest(
         );
 
         # Add Services.
+        my %ITSMServiceValues;
+        if ($IsITSMInstalled) {
+            $ITSMServiceValues{TypeID}      = 1;
+            $ITSMServiceValues{Criticality} = '3 normal';
+        }
         my @ServiceIDs;
         my %ServicesNameToID;
         SERVICE:
@@ -60,6 +66,7 @@ $Selenium->RunTest(
                 %{$Service},
                 ValidID => 1,
                 UserID  => 1,
+                %ITSMServiceValues,
             );
 
             $Self->True(
@@ -80,6 +87,10 @@ $Selenium->RunTest(
 
         # Add SLAs and connect them with the Services.
         my @SLAIDs;
+        my %ITSMSLAValues;
+        if ($IsITSMInstalled) {
+            $ITSMSLAValues{TypeID} = 1;
+        }
         SLA:
         for my $SLA ( @{ $Config->{SLAs} } ) {
 
@@ -90,6 +101,7 @@ $Selenium->RunTest(
                 %{$SLA},
                 ValidID => 1,
                 UserID  => 1,
+                %ITSMSLAValues,
             );
 
             $Self->True(

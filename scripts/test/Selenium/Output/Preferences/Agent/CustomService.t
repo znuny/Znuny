@@ -21,7 +21,8 @@ $Selenium->RunTest(
     sub {
 
         # get helper object
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
 
         # enable the services
         $HelperObject->ConfigSettingChange(
@@ -59,13 +60,21 @@ $Selenium->RunTest(
         # create two test services
         my @ServiceIDs;
         my @ServiceNames;
+        my %ITSMServiceValues;
+        if ($IsITSMInstalled) {
+            $ITSMServiceValues{TypeID}      = 1;
+            $ITSMServiceValues{Criticality} = '3 normal';
+        }
+
         for my $Service (qw(Parent Child)) {
             my $ServiceName = $Service . 'Service' . $HelperObject->GetRandomID();
-            my $ServiceID   = $ServiceObject->ServiceAdd(
+
+            my $ServiceID = $ServiceObject->ServiceAdd(
                 Name    => $ServiceName,
                 ValidID => 2,                 # invalid
                 Comment => 'Selenium Test',
                 UserID  => 1,
+                %ITSMServiceValues,
             );
             $Self->True(
                 $ServiceID,
@@ -82,6 +91,7 @@ $Selenium->RunTest(
             ParentID  => $ServiceIDs[0],
             ValidID   => 1,
             UserID    => 1,
+            %ITSMServiceValues,
         );
         $Self->True(
             $Success,

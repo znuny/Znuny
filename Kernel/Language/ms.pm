@@ -24,7 +24,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.558876076011044;
+    $Self->{Completeness}        = 0.557951045550332;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -254,6 +254,9 @@ sub Data {
         'Edit Attachment' => 'Audit lampiran',
         'Filter for Attachments' => 'Penapis lampiran',
         'Filter for attachments' => '',
+        'Related Actions' => '',
+        'Templates' => 'Templat',
+        'Templates ↔ Attachments' => '',
         'Filename' => 'Nama fail',
         'Download file' => 'Muat turun fail',
         'Delete this attachment' => 'Padam lampiran ini',
@@ -266,6 +269,7 @@ sub Data {
         'Edit Auto Response' => 'Tambah balasan automatik',
         'Filter for Auto Responses' => 'Penapis untuk Tindak Balas Auto',
         'Filter for auto responses' => '',
+        'Queues ↔ Auto Responses' => '',
         'Response' => 'Tindak balas',
         'Auto response from' => 'Jawapan automatik',
         'Reference' => 'Rujukan(en)',
@@ -391,6 +395,8 @@ sub Data {
         'Search' => 'Carian',
         'Wildcards like \'*\' are allowed.' => 'Kad bebas seperti \'*\' adalah dibenarkan.',
         'Select' => 'Pilih',
+        'Customer Users' => 'Pengguna-pengguna Pelanggan',
+        'Customers ↔ Groups' => '',
         'List (only %s shown - more available)' => 'Senarai (jika %s ditunjukkan - terdapat lebih)',
         'total' => 'jumlah',
         'Please enter a search term to look for customers.' => 'Sila masukkan kata kunci untuk mencari pelanggan.',
@@ -413,9 +419,9 @@ sub Data {
         'Select the customer:group permissions.' => 'Pilih pelanggan: dari kumpulan hak',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Jika tiada apa yang dipilih, maka terdapat tiada kebenaran dalam kumpulan ini (tiket tidak akan disediakan untuk pelanggan).',
-        'Search Results' => 'Search Results',
         'Customers' => 'Pelanggan',
         'Groups' => 'Kumpulan',
+        'Search Results' => 'Search Results',
         'Change Group Relations for Customer' => 'Kumpulan tugasan untuk menguruskan pelanggan',
         'Change Customer Relations for Group' => 'Tukar Perhubungan Pelanggan untuk Kumpulan',
         'Toggle %s Permission for all' => 'Toggle Kebenaran %s untuk semua',
@@ -435,6 +441,9 @@ sub Data {
         'Back to search results' => 'Kembali ke hasil carian',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Pengguna pelanggan diperlukan untuk mempunyai sejarah pelanggan dan untuk log masuk melalui panel pelanggan.',
+        'Customer Users ↔ Customers' => '',
+        'Customer Users ↔ Groups' => '',
+        'Customer Users ↔ Services' => '',
         'List (%s total)' => 'Senarai (%s jumlah)',
         'Username' => 'Nama Pengguna',
         'Email' => 'Emel',
@@ -466,7 +475,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
         'Manage Customer User-Customer Relations' => '',
         'Select the customer user:customer relations.' => '',
-        'Customer Users' => 'Pengguna-pengguna Pelanggan',
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
         'Toggle active state for all' => 'ubah keadaan aktif untuk semua',
@@ -494,6 +502,7 @@ sub Data {
         'Filter for Services' => 'Tapisan Perkhidmatan',
         'Filter for services' => '',
         'Services' => 'Servis',
+        'Service Level Agreements' => 'Tahap Persetujuan Perkhidmatan',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
         'Dynamic Fields Management' => 'Pengurusan Dinamik Bidang',
@@ -508,6 +517,7 @@ sub Data {
         'Overwrite existing configurations' => '',
         'Import configurations' => '',
         'Export configurations' => '',
+        'Process Management' => 'Pengurusan Proses',
         'Dynamic fields ↔ Screens' => '',
         'Dynamic Fields List' => 'Senarai bidang yang dinamik',
         'Dynamic fields per page' => 'Dinamik bidang per halaman',
@@ -1356,6 +1366,8 @@ sub Data {
         'Create new groups to handle access permissions for different groups of agent (e. g. purchasing department, support department, sales department, ...). ' =>
             'Cipta kumpulan baru untuk memberi kebenaran untuk perbezaan kumpulan dari ejen (cth. membeli jabatan, sokongan jabatan, jabatan jualan, ...).',
         'It\'s useful for ASP solutions. ' => 'Ianya berguna untuk solusi ASP.',
+        'Agents ↔ Groups' => '',
+        'Roles ↔ Groups' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'System Log' => 'Log Sistem',
@@ -1727,12 +1739,12 @@ sub Data {
         'Edit Priority' => 'Edit Keutamaan',
         'Filter for Priorities' => '',
         'Filter for priorities' => '',
+        'Configure Priority Visibility and Defaults' => '',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             '',
         'This priority is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-        'Process Management' => 'Pengurusan Proses',
         'Filter for Processes' => 'Penapis untuk Proses',
         'Filter for processes' => '',
         'Create New Process' => 'Cipta Proses Baru',
@@ -1749,6 +1761,9 @@ sub Data {
             'Untuk cipta Proses baru anda boleh sama ada import sebuah Proses yang telah diexport daripada sistem lain atau cipta proses yang baru.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'Perubahan kepada Proses disini hanya akan memberi kesan kepada kelakuan sistem, jika anda menyamakan data Proses. Dengan menyamakan Proses, perubahan yang baru akan ditulis ke Konfigurasi.',
+        'Access Control Lists (ACL)' => 'Senarai Kawalan Akses (ACL)',
+        'Generic Agent' => '',
+        'Manage Process Widiget Groups' => '',
         'Processes' => 'Proses',
         'Process name' => 'Nama Proses',
         'Print' => 'Cetak',
@@ -1903,6 +1918,13 @@ sub Data {
         'Edit Queue' => 'Edit barisan',
         'Filter for Queues' => 'Penapis untuk barisan',
         'Filter for queues' => '',
+        'Email Addresses' => 'Alamat emel',
+        'PostMaster Mail Accounts' => 'Akaun Mel PostMaster',
+        'Salutations' => 'Kata Aluan',
+        'Signatures' => 'Tanda Tangan',
+        'Templates ↔ Queues' => '',
+        'Configure Working Hours' => '',
+        'Configure Queue Related Settings' => '',
         'A queue with this name already exists!' => 'Barisan dengan nama ini sudah wujud!',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             '',
@@ -1951,7 +1973,6 @@ sub Data {
         'Manage Template-Queue Relations' => 'Mengurus Perkaitan Barisan-Templat ',
         'Filter for Templates' => 'Menapis Templat',
         'Filter for templates' => '',
-        'Templates' => 'Templat',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'Pengurusan peranan',
@@ -1961,6 +1982,7 @@ sub Data {
         'Filter for roles' => '',
         'Create a role and put groups in it. Then add the role to the users.' =>
             'Buat peranan dan meletakkan kumpulan di dalamnya. Kemudian menambah peranan kepada pengguna.',
+        'Agents ↔ Roles' => '',
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             'Tiada peranan ditakrifkan. Sila gunakan \'Tambah\' butang untuk mencipta peranan baru.',
 
@@ -1997,7 +2019,9 @@ sub Data {
         'Edit SLA' => 'SLA Edit',
         'Add SLA' => 'SLA Tambah',
         'Filter for SLAs' => '',
+        'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => 'Sila tulis nombor sahaja!',
+        'Minimum Time Between Incidents' => 'Masa minima antara incident',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
         'S/MIME Management' => 'S/MIME-Pengurusan',
@@ -2078,9 +2102,11 @@ sub Data {
         'Service Management' => 'perkhidmatan Pengurusan',
         'Add Service' => 'Tambah Perkhidmatan',
         'Edit Service' => 'Edit Perkhidmatan',
+        'Configure Service Visibility and Defaults' => '',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             '',
         'Sub-service of' => 'Sub-perkhidmatan',
+        'Criticality' => 'Kritikal',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
         'Session Management' => 'Pengurusan sesi',
@@ -2114,6 +2140,8 @@ sub Data {
         'Filter for states' => '',
         'Attention' => 'Perhatian',
         'Please also update the states in SysConfig where needed.' => 'Sila juga mengemaskini keadaan dalam SysConfig mana diperlukan',
+        'Configure State Visibility and Defaults' => '',
+        'Configure State Type Visibility and Defaults' => '',
         'This state is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
         'State type' => 'Jenis Keadaan',
@@ -2315,6 +2343,7 @@ sub Data {
         'Edit Type' => 'Edit Jenis',
         'Filter for Types' => '',
         'Filter for types' => '',
+        'Configure Type Visibility and Defaults' => '',
         'A type with this name already exists!' => 'Jenis dengan nama ini sudah wujud!',
         'This type is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
@@ -3573,9 +3602,6 @@ sub Data {
             '',
         'Yes, but require at least one active notification method.' => '',
 
-        # Perl Module: Kernel/Modules/AdminAttachment.pm
-        'Attachment added!' => 'Lampiran ditambah!',
-
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
 
@@ -4131,7 +4157,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminTemplate.pm
         'Template updated!' => '',
-        'Template added!' => '',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
         'Change Attachment Relations for Template' => 'Tukar Perhubungan Lampiran untuk Templat',
@@ -7949,6 +7974,7 @@ Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDa
         'Agent interface notification module to show the number of mentions.' =>
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
+        'Mapping of non-standard time zones to official ones.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'tidak sah-sementara',
@@ -8520,7 +8546,6 @@ Kumpulan MejaBantuan Anda
         'AJAX functions for notification event transport web service.' =>
             '',
         'AJAX interface for the web service dynamic field backends.' => '',
-        'Access Control Lists (ACL)' => 'Senarai Kawalan Akses (ACL)',
         'AccountedTime' => 'MasaDipertanggungjawab',
         'Activation of dynamic fields for screens.' => '',
         'ActivityID' => 'IDAktiviti',
@@ -8553,8 +8578,6 @@ Kumpulan MejaBantuan Anda
         'Agent Statistics.' => '',
         'Agent User Search' => '',
         'Agent User Search.' => '',
-        'Agents ↔ Groups' => '',
-        'Agents ↔ Roles' => '',
         'All CustomerIDs of a customer user.' => '',
         'All customer users of a CustomerID' => 'Semua pengguna pelanggan PelangganID',
         'All escalated tickets' => 'Semua peningkatan tiket',
@@ -8703,9 +8726,6 @@ Kumpulan MejaBantuan Anda
         'Customer User Information Center search.' => '',
         'Customer User Information Center.' => '',
         'Customer User-Customer Relations' => '',
-        'Customer Users ↔ Customers' => '',
-        'Customer Users ↔ Groups' => '',
-        'Customer Users ↔ Services' => '',
         'Customer preferences.' => '',
         'Customer ticket overview' => '',
         'Customer ticket search.' => '',
@@ -8714,7 +8734,6 @@ Kumpulan MejaBantuan Anda
         'CustomerID search' => 'Carian IDPelanggan',
         'CustomerName' => 'NamaPelanggan',
         'CustomerUser' => '',
-        'Customers ↔ Groups' => '',
         'Czech' => 'Czech',
         'Danish' => 'Denmark',
         'Dashboard overview.' => '',
@@ -8756,7 +8775,6 @@ Kumpulan MejaBantuan Anda
         'Edit Customer Users.' => '',
         'Edit appointment' => '',
         'Edit customer company' => 'Edit syarikat pelanggan',
-        'Email Addresses' => 'Alamat emel',
         'Email Outbound' => '',
         'Email Resend' => '',
         'Email communication channel.' => '',
@@ -8985,7 +9003,6 @@ Kumpulan MejaBantuan Anda
         'Portuguese' => 'Portugis',
         'Portuguese (Brasil)' => 'Portugis (Brazil)',
         'PostMaster Filters' => 'Penapis PostMaster',
-        'PostMaster Mail Accounts' => 'Akaun Mel PostMaster',
         'Print this ticket' => 'Cetak tiket ini',
         'Priorities' => 'Keutamaan',
         'Process Management Activity Dialog GUI' => 'Dialog Aktiviti Pengurusan Proses GUI',
@@ -9004,7 +9021,6 @@ Kumpulan MejaBantuan Anda
         'Public Calendar' => '',
         'Public calendar.' => '',
         'Queue view' => 'Paparan Aturan',
-        'Queues ↔ Auto Responses' => '',
         'Refresh interval' => 'Tempoh selang refresh',
         'Reminder Tickets' => 'Peringatan Tiket',
         'Removed subscription for user "%s".' => 'Langgan Pengguna "%s" yang diadakan.',
@@ -9014,13 +9030,11 @@ Kumpulan MejaBantuan Anda
         'Responsible Tickets' => '',
         'Responsible Tickets.' => '',
         'Right' => 'Kanan',
-        'Roles ↔ Groups' => '',
         'Romanian' => '',
         'Running Process Tickets' => 'Menjalankan Tiket Proses',
         'Russian' => 'Rusia',
         'S/MIME Certificates' => 'Sijil S/MIME',
         'SMS' => 'SMS',
-        'Salutations' => 'Kata Aluan',
         'Schedule a maintenance period.' => 'Menjadualkan satu tempoh penyelenggaraan.',
         'Screen after new ticket' => 'Skrin selepas tiket baru',
         'Search Customer' => 'Carian Pelanggan',
@@ -9058,7 +9072,6 @@ Kumpulan MejaBantuan Anda
         'Sent notification to "%s".' => '',
         'Serbian Cyrillic' => 'Serbia Cyril',
         'Serbian Latin' => 'Serbia Latin',
-        'Service Level Agreements' => 'Tahap Persetujuan Perkhidmatan',
         'Service view' => 'Paparan perkhidmatan',
         'ServiceView' => '',
         'Set a new password by filling in your current password and a new one.' =>
@@ -9073,7 +9086,6 @@ Kumpulan MejaBantuan Anda
         'Shows information on how to start OTRS Daemon' => 'Menunjukkan maklumat untuk memulakan OTRS Daemon.',
         'Shows last mention of tickets.' => '',
         'Signature data.' => '',
-        'Signatures' => 'Tanda Tangan',
         'Simple' => '',
         'Skin' => 'Kulit',
         'Slovak' => 'Slovakia',
@@ -9108,8 +9120,6 @@ Kumpulan MejaBantuan Anda
         'System Configuration Deployment' => '',
         'System Configuration Group' => '',
         'System Maintenance' => ' Penyelenggaraan Sistem',
-        'Templates ↔ Attachments' => '',
-        'Templates ↔ Queues' => '',
         'Textarea' => 'Textarea',
         'Thai' => 'Thai',
         'The PGP signature is expired.' => '',

@@ -619,7 +619,7 @@ END:VCALENDAR
                         'Name'  => 'Calendar 1',
                         'ProdID' =>
                             '-//Microsoft Corporation//Outlook 16.0 MIMEDIR//EN',
-                        'Timezone' => 'PST8PDT'
+                        'Timezone' => 'America/Los_Angeles'
                     }
                 ],
                 'Events' => [
@@ -653,7 +653,7 @@ END:VCALENDAR
                         },
                         'Location'         => 'Default location value.',
                         'Organizer'        => 'organizer1@mail.com',
-                        'OriginalTimeZone' => 'PST8PDT',
+                        'OriginalTimeZone' => 'America/Los_Angeles',
                         'Summary'          => 'Default summary.',
                         'TimeZone'         => 'UTC',
                         'UID' =>

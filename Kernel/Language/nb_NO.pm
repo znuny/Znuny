@@ -34,7 +34,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.391586811758974;
+    $Self->{Completeness}        = 0.39098719403469;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -264,6 +264,9 @@ sub Data {
         'Edit Attachment' => 'Endre vedlegg',
         'Filter for Attachments' => 'Filter for vedlegg',
         'Filter for attachments' => '',
+        'Related Actions' => '',
+        'Templates' => 'Maler',
+        'Templates ↔ Attachments' => '',
         'Filename' => 'Filnavn',
         'Download file' => 'Last ned fil',
         'Delete this attachment' => 'Slett dette vedlegget',
@@ -276,6 +279,7 @@ sub Data {
         'Edit Auto Response' => 'Endre Autosvar',
         'Filter for Auto Responses' => 'Filter for Autosvar',
         'Filter for auto responses' => '',
+        'Queues ↔ Auto Responses' => '',
         'Response' => 'Svar',
         'Auto response from' => 'Autosvar fra',
         'Reference' => 'Referanse',
@@ -401,6 +405,8 @@ sub Data {
         'Search' => 'Søk',
         'Wildcards like \'*\' are allowed.' => 'Jokertegn som \'*\ er tillatt',
         'Select' => 'Velg',
+        'Customer Users' => 'Kunder',
+        'Customers ↔ Groups' => '',
         'List (only %s shown - more available)' => '',
         'total' => 'total',
         'Please enter a search term to look for customers.' => 'Vennligst skriv et søkekriterie for å lete etter kunder',
@@ -423,9 +429,9 @@ sub Data {
         'Select the customer:group permissions.' => 'Velg rettigheter for kunde:gruppe',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Hvis ingenting blir valgt vil det ikke være noen rettigheter for denne gruppen (saker vil ikke være synlige for brukeren).',
-        'Search Results' => 'Søkeresultat',
         'Customers' => 'Kunder',
         'Groups' => 'Grupper',
+        'Search Results' => 'Søkeresultat',
         'Change Group Relations for Customer' => 'Endre grupperettigheter for Kunde',
         'Change Customer Relations for Group' => 'Endre kundekoplinger for gruppe',
         'Toggle %s Permission for all' => 'Slå av/på %s-tilgang for alle',
@@ -445,6 +451,9 @@ sub Data {
         'Back to search results' => 'Tilbake til søkeresultatet',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Kundebrukere trengs for å kunne ha kundehistorikk og mulighet til å logge inn via brukerpanelet.',
+        'Customer Users ↔ Customers' => '',
+        'Customer Users ↔ Groups' => '',
+        'Customer Users ↔ Services' => '',
         'List (%s total)' => '',
         'Username' => 'Brukernavn',
         'Email' => 'E-post',
@@ -476,7 +485,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
         'Manage Customer User-Customer Relations' => '',
         'Select the customer user:customer relations.' => '',
-        'Customer Users' => 'Kunder',
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
         'Toggle active state for all' => 'Slå av/på aktivisering for alle',
@@ -504,6 +512,7 @@ sub Data {
         'Filter for Services' => 'Filter for tjenester',
         'Filter for services' => '',
         'Services' => 'Tjenester',
+        'Service Level Agreements' => 'Tjenestenivåavtaler',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
         'Dynamic Fields Management' => 'Administrasjon: Dynamiske felt',
@@ -518,6 +527,7 @@ sub Data {
         'Overwrite existing configurations' => '',
         'Import configurations' => '',
         'Export configurations' => '',
+        'Process Management' => 'Prosessoppsett',
         'Dynamic fields ↔ Screens' => '',
         'Dynamic Fields List' => 'Liste over dynamiske felt',
         'Dynamic fields per page' => 'Dynamiske felt per side',
@@ -1366,6 +1376,8 @@ sub Data {
         'Create new groups to handle access permissions for different groups of agent (e. g. purchasing department, support department, sales department, ...). ' =>
             'Opprett grupper for å håndtere tilgangsrettigheter for forskjellige grupperinger av saksbehandlinger (f.eks. salgsavdelingen, service, innkjøp, osv.)',
         'It\'s useful for ASP solutions. ' => 'Det er nyttig for ASP-løsninger',
+        'Agents ↔ Groups' => '',
+        'Roles ↔ Groups' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'System Log' => 'Systemlogg',
@@ -1737,12 +1749,12 @@ sub Data {
         'Edit Priority' => 'Endre Prioritering',
         'Filter for Priorities' => '',
         'Filter for priorities' => '',
+        'Configure Priority Visibility and Defaults' => '',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             '',
         'This priority is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-        'Process Management' => 'Prosessoppsett',
         'Filter for Processes' => 'Filter for prosesser',
         'Filter for processes' => '',
         'Create New Process' => 'Opprett ny prosess',
@@ -1759,6 +1771,9 @@ sub Data {
             '',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             '',
+        'Access Control Lists (ACL)' => '',
+        'Generic Agent' => '',
+        'Manage Process Widiget Groups' => '',
         'Processes' => 'Prosesser',
         'Process name' => 'Prosessnavn',
         'Print' => 'Utskrift',
@@ -1913,6 +1928,13 @@ sub Data {
         'Edit Queue' => 'Endre kø',
         'Filter for Queues' => 'Filter for køer',
         'Filter for queues' => '',
+        'Email Addresses' => 'e-postadresser',
+        'PostMaster Mail Accounts' => 'Postmaster e-postkontoer',
+        'Salutations' => 'Hilsninger',
+        'Signatures' => 'Signaturer',
+        'Templates ↔ Queues' => '',
+        'Configure Working Hours' => '',
+        'Configure Queue Related Settings' => '',
         'A queue with this name already exists!' => '',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             '',
@@ -1961,7 +1983,6 @@ sub Data {
         'Manage Template-Queue Relations' => 'Koplinger mellom Mal og Kø',
         'Filter for Templates' => 'Filter for Maler',
         'Filter for templates' => '',
-        'Templates' => 'Maler',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'Administrasjon: Roller',
@@ -1971,6 +1992,7 @@ sub Data {
         'Filter for roles' => '',
         'Create a role and put groups in it. Then add the role to the users.' =>
             'Opprett en rolle og legg grupper til rollen. Legg deretter til saksbehandlere til rollen.',
+        'Agents ↔ Roles' => '',
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             'Ingen roller er definerte. Vennligst bruk "Ny rolle" for å opprett en.',
 
@@ -2007,7 +2029,9 @@ sub Data {
         'Edit SLA' => 'Endre SLA',
         'Add SLA' => 'Ny SLA',
         'Filter for SLAs' => '',
+        'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => 'Vennligst skriv kun siffer',
+        'Minimum Time Between Incidents' => 'Minimumstid mellom Hendelser',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
         'S/MIME Management' => 'Administrasjon: S/MIME',
@@ -2088,9 +2112,11 @@ sub Data {
         'Service Management' => 'Administrasjon: Tjenester',
         'Add Service' => 'Legg til Tjeneste',
         'Edit Service' => 'Endre Tjeneste',
+        'Configure Service Visibility and Defaults' => '',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             '',
         'Sub-service of' => 'Under-tjeneste av',
+        'Criticality' => 'Kritikalitet',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
         'Session Management' => 'Administrasjon: Sesjoner',
@@ -2124,6 +2150,8 @@ sub Data {
         'Filter for states' => '',
         'Attention' => 'OBS',
         'Please also update the states in SysConfig where needed.' => 'Vennligst også oppdatert nødvendige statuser i SysConfig',
+        'Configure State Visibility and Defaults' => '',
+        'Configure State Type Visibility and Defaults' => '',
         'This state is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
         'State type' => 'Statustype',
@@ -2325,6 +2353,7 @@ sub Data {
         'Edit Type' => 'Endre sakstype',
         'Filter for Types' => '',
         'Filter for types' => '',
+        'Configure Type Visibility and Defaults' => '',
         'A type with this name already exists!' => '',
         'This type is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
@@ -3583,9 +3612,6 @@ sub Data {
             '',
         'Yes, but require at least one active notification method.' => '',
 
-        # Perl Module: Kernel/Modules/AdminAttachment.pm
-        'Attachment added!' => 'Vedlegg lagt til!',
-
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
 
@@ -4141,7 +4167,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminTemplate.pm
         'Template updated!' => '',
-        'Template added!' => '',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
         'Change Attachment Relations for Template' => '',
@@ -7957,6 +7982,7 @@ sub Data {
         'Agent interface notification module to show the number of mentions.' =>
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
+        'Mapping of non-standard time zones to official ones.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'midlertidig ugyldig',
@@ -8516,7 +8542,6 @@ Thanks for your help!
         'AJAX functions for notification event transport web service.' =>
             '',
         'AJAX interface for the web service dynamic field backends.' => '',
-        'Access Control Lists (ACL)' => '',
         'AccountedTime' => '',
         'Activation of dynamic fields for screens.' => '',
         'ActivityID' => '',
@@ -8549,8 +8574,6 @@ Thanks for your help!
         'Agent Statistics.' => '',
         'Agent User Search' => '',
         'Agent User Search.' => '',
-        'Agents ↔ Groups' => '',
-        'Agents ↔ Roles' => '',
         'All CustomerIDs of a customer user.' => '',
         'All customer users of a CustomerID' => 'Alle kunder-brukere av et KundeID',
         'All escalated tickets' => 'Alle eskalerte saker',
@@ -8699,9 +8722,6 @@ Thanks for your help!
         'Customer User Information Center search.' => '',
         'Customer User Information Center.' => '',
         'Customer User-Customer Relations' => '',
-        'Customer Users ↔ Customers' => '',
-        'Customer Users ↔ Groups' => '',
-        'Customer Users ↔ Services' => '',
         'Customer preferences.' => '',
         'Customer ticket overview' => '',
         'Customer ticket search.' => '',
@@ -8710,7 +8730,6 @@ Thanks for your help!
         'CustomerID search' => '',
         'CustomerName' => 'Kundenavn',
         'CustomerUser' => '',
-        'Customers ↔ Groups' => '',
         'Czech' => 'Tjekkisk',
         'Danish' => 'Dansk',
         'Dashboard overview.' => '',
@@ -8752,7 +8771,6 @@ Thanks for your help!
         'Edit Customer Users.' => '',
         'Edit appointment' => 'Endre avtale',
         'Edit customer company' => 'Endre kundebedrift',
-        'Email Addresses' => 'e-postadresser',
         'Email Outbound' => '',
         'Email Resend' => '',
         'Email communication channel.' => '',
@@ -8981,7 +8999,6 @@ Thanks for your help!
         'Portuguese' => 'Portugisisk',
         'Portuguese (Brasil)' => 'Portugisisk (Brasil)',
         'PostMaster Filters' => 'Postmaster-filtre',
-        'PostMaster Mail Accounts' => 'Postmaster e-postkontoer',
         'Print this ticket' => 'Skriv ut denne saken',
         'Priorities' => 'Prioriteter',
         'Process Management Activity Dialog GUI' => '',
@@ -9000,7 +9017,6 @@ Thanks for your help!
         'Public Calendar' => 'Offentlig kalender',
         'Public calendar.' => 'Offentlig kalender.',
         'Queue view' => 'Køvisning',
-        'Queues ↔ Auto Responses' => '',
         'Refresh interval' => 'Automatisk innlasting',
         'Reminder Tickets' => 'Saker med påminnelse',
         'Removed subscription for user "%s".' => 'Fjernet abonnement for brukeren «%s».',
@@ -9010,13 +9026,11 @@ Thanks for your help!
         'Responsible Tickets' => '',
         'Responsible Tickets.' => '',
         'Right' => 'Høyre',
-        'Roles ↔ Groups' => '',
         'Romanian' => '',
         'Running Process Tickets' => '',
         'Russian' => 'Russisk',
         'S/MIME Certificates' => 'S/MIME-sertifikater',
         'SMS' => 'SMS',
-        'Salutations' => 'Hilsninger',
         'Schedule a maintenance period.' => '',
         'Screen after new ticket' => 'Skjermbilde etter innlegging av ny sak',
         'Search Customer' => 'Kunde-søk',
@@ -9054,7 +9068,6 @@ Thanks for your help!
         'Sent notification to "%s".' => '',
         'Serbian Cyrillic' => 'Serbisk (Cyrillic)',
         'Serbian Latin' => 'Serbisk (Latin)',
-        'Service Level Agreements' => 'Tjenestenivåavtaler',
         'Service view' => 'Tjeneste visning',
         'ServiceView' => '',
         'Set a new password by filling in your current password and a new one.' =>
@@ -9069,7 +9082,6 @@ Thanks for your help!
         'Shows information on how to start OTRS Daemon' => 'Vis informasjon om hvordan starte OTRS Agenten',
         'Shows last mention of tickets.' => '',
         'Signature data.' => '',
-        'Signatures' => 'Signaturer',
         'Simple' => '',
         'Skin' => 'Webtema',
         'Slovak' => 'Slovakisk',
@@ -9104,8 +9116,6 @@ Thanks for your help!
         'System Configuration Deployment' => '',
         'System Configuration Group' => '',
         'System Maintenance' => 'Vedlikehold av systemet',
-        'Templates ↔ Attachments' => '',
-        'Templates ↔ Queues' => '',
         'Textarea' => 'Tekstareale',
         'Thai' => 'Tailandsk',
         'The PGP signature is expired.' => '',

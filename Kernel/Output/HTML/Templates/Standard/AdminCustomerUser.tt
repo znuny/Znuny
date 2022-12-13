@@ -90,6 +90,43 @@
                 </p>
             </div>
         </div>
+        <div class='WidgetSimple'>
+            <div class='Header'>
+                <h2>[% Translate('Related Actions') | html %]</h2>
+            </div>
+            <div class='Content'>
+                <ul class='ActionList SpacingTop'>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminCustomerCompany' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Customers') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminCustomerUserCustomer' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Customer Users ↔ Customers') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminCustomerUserGroup' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Customer Users ↔ Groups') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminCustomerUserService' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Customer Users ↔ Services') | html %]
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="ContentColumn">
         <div class="WidgetSimple">

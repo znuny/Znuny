@@ -337,7 +337,7 @@
                             <div class="Field">
                                 <input type="hidden" name="UserListWithoutSelection" value="[% Data.UserListWithoutSelection  | html %]" />
 [% RenderBlockStart("InformAgentsWithoutSelectionSingleUser") %]
-                                <span title="[% Data.UserEmail %]">[% Data.UserFullname %]</span>[% RenderBlockStart("InformAgentsWithoutSelectionSingleUserSeparator") %],[% RenderBlockEnd("InformAgentsWithoutSelectionSingleUserSeparator") %]
+                                <span title="[% Data.UserEmail | html %]">[% Data.UserFullname | html %]</span>[% RenderBlockStart("InformAgentsWithoutSelectionSingleUserSeparator") %],[% RenderBlockEnd("InformAgentsWithoutSelectionSingleUserSeparator") %]
 [% RenderBlockEnd("InformAgentsWithoutSelectionSingleUser") %]
                             </div>
                             <div class="Clear"></div>

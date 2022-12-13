@@ -64,6 +64,9 @@ sub Run {
     # get layout object
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
+    # get param object
+    my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
+
     # check if ACL restrictions exist
     if ( IsHashRefWithData( \%AclAction ) ) {
 
@@ -76,7 +79,7 @@ sub Run {
 
     # Check for failed draft loading request.
     if (
-        $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'LoadFormDraft' )
+        $ParamObject->GetParam( Param => 'LoadFormDraft' )
         && !$Self->{LoadedFormDraftID}
         )
     {
@@ -105,7 +108,7 @@ sub Run {
             )
             )
         {
-            $GetParam{$Key} = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => $Key );
+            $GetParam{$Key} = $ParamObject->GetParam( Param => $Key );
         }
 
         my %Ticket       = $TicketObject->TicketGet( TicketID => $Self->{TicketID} );
@@ -114,16 +117,6 @@ sub Run {
 
         # get dynamic field values form http request
         my %DynamicFieldValues;
-
-        # convert dynamic field values into a structure for ACLs
-        my %DynamicFieldACLParameters;
-        DYNAMICFIELD:
-        for my $DynamicFieldItem ( sort keys %DynamicFieldValues ) {
-            next DYNAMICFIELD if !$DynamicFieldItem;
-            next DYNAMICFIELD if !defined $DynamicFieldValues{$DynamicFieldItem};
-
-            $DynamicFieldACLParameters{ 'DynamicField_' . $DynamicFieldItem } = $DynamicFieldValues{$DynamicFieldItem};
-        }
 
         # get config object
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
@@ -192,6 +185,13 @@ sub Run {
                 # convert Filer key => key back to key => value using map
                 %{$PossibleValues} = map { $_ => $PossibleValues->{$_} } keys %Filter;
             }
+
+            # extract the dynamic field value from the web request
+            $DynamicFieldValues{ $DynamicFieldConfig->{Name} } = $DynamicFieldBackendObject->EditFieldValueGet(
+                DynamicFieldConfig => $DynamicFieldConfig,
+                ParamObject        => $ParamObject,
+                LayoutObject       => $LayoutObject,
+            );
 
             my $DataValues = $DynamicFieldBackendObject->BuildSelectionDataGet(
                 DynamicFieldConfig => $DynamicFieldConfig,

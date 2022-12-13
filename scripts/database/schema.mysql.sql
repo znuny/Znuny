@@ -1854,7 +1854,7 @@ CREATE TABLE smime_keys (
     email_address VARCHAR (255) NULL,
     expiration_date DATETIME NULL,
     fingerprint VARCHAR (59) NULL,
-    subject VARCHAR (255) NULL,
+    subject MEDIUMTEXT NULL,
     create_time DATETIME NULL,
     change_time DATETIME NULL,
     create_by INTEGER NULL,

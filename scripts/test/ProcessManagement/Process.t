@@ -106,10 +106,39 @@ my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate();
 # Get ServiceObject.
 my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
 
-my $ServiceID = $ServiceObject->ServiceAdd(
+my $IsITSMInstalled    = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
+my %ServiceTypeName2ID = ();
+my %ServiceValues      = (
     Name    => $RandomID,
     ValidID => 1,
     UserID  => 1,
+);
+
+if ($IsITSMInstalled) {
+
+    # get the list of service types from general catalog
+    my $ServiceTypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class => 'ITSM::Service::Type',
+    );
+
+    # build a lookup hash
+    %ServiceTypeName2ID = reverse %{$ServiceTypeList};
+
+    # get the list of sla types from general catalog
+    my $SLATypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class => 'ITSM::SLA::Type',
+    );
+
+    # build a lookup hash
+    my %SLATypeName2ID = reverse %{$SLATypeList};
+
+    # additional ServiceValues for ITSMCore
+    $ServiceValues{TypeID}      = $ServiceTypeName2ID{Training};
+    $ServiceValues{Criticality} = '3 normal';
+}
+
+my $ServiceID = $ServiceObject->ServiceAdd(
+    %ServiceValues,
 );
 
 $ServiceObject->CustomerUserServiceMemberAdd(
@@ -119,12 +148,18 @@ $ServiceObject->CustomerUserServiceMemberAdd(
     UserID            => 1,
 );
 
-my $SLAID = $Kernel::OM->Get('Kernel::System::SLA')->SLAAdd(
+my %SLAValues = (
     ServiceIDs => [$ServiceID],
     Name       => $RandomID,
     ValidID    => 1,
     UserID     => 1,
 );
+
+if ($IsITSMInstalled) {
+    $SLAValues{TypeID} = $ServiceTypeName2ID{Training};
+}
+
+my $SLAID = $Kernel::OM->Get('Kernel::System::SLA')->SLAAdd(%SLAValues);
 
 my $TicketID = $CommonObject{TicketObject}->TicketCreate(
     Title        => 'Process Unittest Testticket',

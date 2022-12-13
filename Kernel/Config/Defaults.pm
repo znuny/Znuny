@@ -1673,6 +1673,8 @@ via the Preferences button after logging in.
         CustomerCompanySearchSuffix    => '*',
         CustomerCompanySearchListLimit => 250,
         CacheTTL                       => 60 * 60 * 24, # use 0 to turn off cache
+#        # Consider this source read only.
+#        ReadOnly => 1,
 
         Map => [
             # Info about dynamic fields:

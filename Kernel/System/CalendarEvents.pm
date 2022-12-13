@@ -147,7 +147,7 @@ sub Parse {
                 next ATTACHMENTINDEX if !$Data{Content};
                 next ATTACHMENTINDEX if !$Data{ContentType};
 
-                $Data{ContentType} =~ m{^(.+?);.*};
+                next ATTACHMENTINDEX if $Data{ContentType} !~ m{^(.+?);.*};
                 next ATTACHMENTINDEX if !$Self->{PossibleAttachments}->{ContentType}->{$1};
 
                 my $CalendarEventsAttachment = $CacheObject->Get(

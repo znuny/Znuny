@@ -14,7 +14,6 @@ use warnings;
 
 use Data::ICal;
 use Data::ICal::Entry::Event;
-use Date::ICal;
 
 use Kernel::System::VariableCheck qw(:all);
 
@@ -53,9 +52,12 @@ create an object. Do not use it directly, instead use:
 sub new {
     my ( $Type, %Param ) = @_;
 
-    # allocate new hash for object
     my $Self = {%Param};
     bless( $Self, $Type );
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    $Self->{TimeZonesMap} = $ConfigObject->Get('AppointmentCalendar::NonStandardTimeZonesMapping') // {};
 
     return $Self;
 }
@@ -100,6 +102,10 @@ sub Import {
     }
 
     my $UntilLimitedTimestamp = $Param{UntilLimit} || '';
+
+    # Prevent double \n\n for fix below bug#14791
+    $Param{ICal} =~ s/\r\n/\n/g;
+    $Param{ICal} =~ s/\n\r/\n/g;
 
     # Prevent line ending type errors (see bug#14791).
     $Param{ICal} =~ s/\r/\n/g;
@@ -218,7 +224,7 @@ sub Import {
                 'Kernel::System::DateTime',
                 ObjectParams => {
                     String   => $StartTimeICal,
-                    TimeZone => $TimezoneID,
+                    TimeZone => $Self->{TimeZonesMap}->{$TimezoneID} || $TimezoneID,
                 },
             );
 
@@ -253,7 +259,7 @@ sub Import {
                 'Kernel::System::DateTime',
                 ObjectParams => {
                     String   => $EndTimeICal,
-                    TimeZone => $TimezoneID,
+                    TimeZone => $Self->{TimeZonesMap}->{$TimezoneID} || $TimezoneID,
                 },
             );
 
@@ -493,7 +499,7 @@ sub Import {
                             'Kernel::System::DateTime',
                             ObjectParams => {
                                 String   => $ExcludeTimeICal,
-                                TimeZone => $TimezoneID,
+                                TimeZone => $Self->{TimeZonesMap}->{$TimezoneID} || $TimezoneID,
                             },
                         );
 
@@ -622,7 +628,7 @@ sub Import {
                 'Kernel::System::DateTime',
                 ObjectParams => {
                     String   => $RecurrenceIDICal,
-                    TimeZone => $TimezoneID,
+                    TimeZone => $Self->{TimeZonesMap}->{$TimezoneID} || $TimezoneID,
                 },
             );
 

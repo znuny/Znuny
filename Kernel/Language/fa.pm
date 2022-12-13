@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.643007958421309;
+    $Self->{Completeness}        = 0.641757172961582;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -261,6 +261,9 @@ sub Data {
         'Edit Attachment' => 'ویرایش پیوست',
         'Filter for Attachments' => 'فیلتر برای پیوست‌ها',
         'Filter for attachments' => '',
+        'Related Actions' => '',
+        'Templates' => 'قالب ها',
+        'Templates ↔ Attachments' => '',
         'Filename' => 'نام فایل',
         'Download file' => 'بارگیری فایل',
         'Delete this attachment' => 'حذف این پیوست',
@@ -273,6 +276,7 @@ sub Data {
         'Edit Auto Response' => 'ویرایش پاسخ خودکار',
         'Filter for Auto Responses' => 'فیلتر برای پاسخ‌های خودکار',
         'Filter for auto responses' => '',
+        'Queues ↔ Auto Responses' => '',
         'Response' => 'پاسخ',
         'Auto response from' => 'پاسخ خودکار از طرف',
         'Reference' => 'منبع',
@@ -398,6 +402,8 @@ sub Data {
         'Search' => 'جستجو',
         'Wildcards like \'*\' are allowed.' => 'نویسه عام مانند "*" مجاز است.',
         'Select' => 'انتخاب',
+        'Customer Users' => 'مشترکین',
+        'Customers ↔ Groups' => '',
         'List (only %s shown - more available)' => 'فهرست (فقط %s نشان داده شده است - در دسترس تر)',
         'total' => 'مجموع',
         'Please enter a search term to look for customers.' => 'لطفا عبارت جستجو را وارد نمایید تا مشترکین را جستجو نمایید.',
@@ -420,9 +426,9 @@ sub Data {
         'Select the customer:group permissions.' => 'انتخاب دسترسی‌های مشترک:گروه',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'اگرچیزی انتخاب نشود، هیچ دسترسی در این گروه موجود نیست (درخواست‌ها برای مشترک در دسترس نیست)',
-        'Search Results' => 'نتیجه جستجو',
         'Customers' => 'مشترکین',
         'Groups' => 'گروه‌ها',
+        'Search Results' => 'نتیجه جستجو',
         'Change Group Relations for Customer' => 'تغییر ارتباطات گروه برای مشترک',
         'Change Customer Relations for Group' => 'تغییر ارتباطات مشترک برای گروه',
         'Toggle %s Permission for all' => 'اعمال دسترسی %s برای همه',
@@ -442,6 +448,9 @@ sub Data {
         'Back to search results' => 'بازگشت به نتایج جستجو',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'کاربران و ضوابط مورد نیاز برای یک سابقه مشتری و برای ورود به سایت از طریق پنل مشتری می باشد.',
+        'Customer Users ↔ Customers' => '',
+        'Customer Users ↔ Groups' => '',
+        'Customer Users ↔ Services' => '',
         'List (%s total)' => 'فهرست ( تعداد %s)',
         'Username' => 'نام کاربری',
         'Email' => 'ایمیل',
@@ -473,7 +482,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
         'Manage Customer User-Customer Relations' => '',
         'Select the customer user:customer relations.' => '',
-        'Customer Users' => 'مشترکین',
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
         'Toggle active state for all' => 'اعمال وضعیت فعال برای همه',
@@ -501,6 +509,7 @@ sub Data {
         'Filter for Services' => 'فیلتر برای خدمات',
         'Filter for services' => '',
         'Services' => 'خدمات',
+        'Service Level Agreements' => 'توافقات سطح سرویس',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
         'Dynamic Fields Management' => 'مدیریت پویای زمینه',
@@ -515,6 +524,7 @@ sub Data {
         'Overwrite existing configurations' => '',
         'Import configurations' => '',
         'Export configurations' => '',
+        'Process Management' => 'مدیریت فرآیند',
         'Dynamic fields ↔ Screens' => '',
         'Dynamic Fields List' => ' فهرست زمینه حرکتی',
         'Dynamic fields per page' => 'زمینه های پویا در هر صفحه',
@@ -1363,6 +1373,8 @@ sub Data {
         'Create new groups to handle access permissions for different groups of agent (e. g. purchasing department, support department, sales department, ...). ' =>
             'گروه‌های جدید بسازید تا دسترسی‌ها را برای گروه‌های مختلف کارشناسان مدیریت کنید (مثال: بخش خرید، بخش پشتیبانی، بخش فروش و ...)',
         'It\'s useful for ASP solutions. ' => 'این برای راه‌حل‌های ASP مفید می‌باشد.',
+        'Agents ↔ Groups' => '',
+        'Roles ↔ Groups' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'System Log' => 'وقایع ثبت شده سیستم',
@@ -1734,12 +1746,12 @@ sub Data {
         'Edit Priority' => 'ویرایش الویت',
         'Filter for Priorities' => '',
         'Filter for priorities' => '',
+        'Configure Priority Visibility and Defaults' => '',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             '',
         'This priority is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-        'Process Management' => 'مدیریت فرآیند',
         'Filter for Processes' => 'فیلتر برای پردازش',
         'Filter for processes' => '',
         'Create New Process' => 'خلق فرآیند جدید',
@@ -1756,6 +1768,9 @@ sub Data {
             'برای ایجاد یک فرایند جدید شما هم می توانید یک فرایند است که از یک سیستم دیگر صادر شد وارد و یا ایجاد یک جدید کامل.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'تغییرات در فرایندهای اینجا تنها رفتار سیستم را تحت تاثیر قرار، اگر شما داده های فرایند همگام سازی. با هماهنگ سازی فرآیندها، تغییرات تازه ساخته شده را به پیکربندی نوشته شده است.',
+        'Access Control Lists (ACL)' => 'فهرست سطخ دسترسی (ACL)',
+        'Generic Agent' => '',
+        'Manage Process Widiget Groups' => '',
         'Processes' => 'فرایند ها',
         'Process name' => 'نام فرایند',
         'Print' => 'چاپ',
@@ -1910,6 +1925,13 @@ sub Data {
         'Edit Queue' => 'ویرایش صف درخواست',
         'Filter for Queues' => 'فیلتر برای صف‌های درخواست',
         'Filter for queues' => '',
+        'Email Addresses' => 'آدرس‌های ایمیل',
+        'PostMaster Mail Accounts' => 'حساب‌های ایمیل پستی',
+        'Salutations' => 'عنوان',
+        'Signatures' => 'امضاء',
+        'Templates ↔ Queues' => '',
+        'Configure Working Hours' => '',
+        'Configure Queue Related Settings' => '',
         'A queue with this name already exists!' => 'یک صف با این نام وجود دارد.',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             '',
@@ -1958,7 +1980,6 @@ sub Data {
         'Manage Template-Queue Relations' => 'مدیریت روابط الگو صف',
         'Filter for Templates' => 'فیلتر برای قالب',
         'Filter for templates' => '',
-        'Templates' => 'قالب ها',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'مدیریت نقش',
@@ -1968,6 +1989,7 @@ sub Data {
         'Filter for roles' => '',
         'Create a role and put groups in it. Then add the role to the users.' =>
             'یک نقش بسازید و گروه را در آن قرار دهید سپس نقش را به کاربرها اضافه کنید',
+        'Agents ↔ Roles' => '',
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             'هیچ نقشی ساخته نشده است. لطفا از کلید «افزودن» برای ساخت نقش جدید استفاده نمایید.',
 
@@ -2004,7 +2026,9 @@ sub Data {
         'Edit SLA' => 'ویرایش SLA',
         'Add SLA' => 'افزودن توافقنامه SLA',
         'Filter for SLAs' => '',
+        'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => 'لطفا فقط ارقام را بنویسید!',
+        'Minimum Time Between Incidents' => 'حداقل زمان بین دو رخداد',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
         'S/MIME Management' => 'مدیریت S/MIME',
@@ -2085,9 +2109,11 @@ sub Data {
         'Service Management' => 'مدیریت خدمات',
         'Add Service' => 'افزودن خدمت',
         'Edit Service' => 'ویرایش خدمت',
+        'Configure Service Visibility and Defaults' => '',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             '',
         'Sub-service of' => 'زیرمجموعه‌ای از خدمت',
+        'Criticality' => 'اهمیت',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
         'Session Management' => 'مدیریت Session‌ها',
@@ -2121,6 +2147,8 @@ sub Data {
         'Filter for states' => '',
         'Attention' => 'توجه',
         'Please also update the states in SysConfig where needed.' => 'لطفا کشورهای در SysConfig به روز رسانی که در آن مورد نیاز است.',
+        'Configure State Visibility and Defaults' => '',
+        'Configure State Type Visibility and Defaults' => '',
         'This state is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
         'State type' => 'نوع وضعیت',
@@ -2322,6 +2350,7 @@ sub Data {
         'Edit Type' => 'ویرایش درخواست',
         'Filter for Types' => '',
         'Filter for types' => '',
+        'Configure Type Visibility and Defaults' => '',
         'A type with this name already exists!' => 'یک نوع با این نام وجود دارد.',
         'This type is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
@@ -3580,9 +3609,6 @@ sub Data {
             '',
         'Yes, but require at least one active notification method.' => '',
 
-        # Perl Module: Kernel/Modules/AdminAttachment.pm
-        'Attachment added!' => 'پیوست افزوده شد!',
-
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
 
@@ -4138,7 +4164,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminTemplate.pm
         'Template updated!' => 'الگو به روز شده!',
-        'Template added!' => 'قالب اضافه شده است!',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
         'Change Attachment Relations for Template' => 'روابط تغییر فایل پیوست برای الگو',
@@ -7954,6 +7979,7 @@ sub Data {
         'Agent interface notification module to show the number of mentions.' =>
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
+        'Mapping of non-standard time zones to official ones.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'موقتا غیر معتبر',
@@ -8524,7 +8550,6 @@ Thanks for your help!
         'AJAX functions for notification event transport web service.' =>
             '',
         'AJAX interface for the web service dynamic field backends.' => '',
-        'Access Control Lists (ACL)' => 'فهرست سطخ دسترسی (ACL)',
         'AccountedTime' => 'AccountedTime',
         'Activation of dynamic fields for screens.' => '',
         'ActivityID' => 'ActivityID',
@@ -8557,8 +8582,6 @@ Thanks for your help!
         'Agent Statistics.' => '',
         'Agent User Search' => '',
         'Agent User Search.' => '',
-        'Agents ↔ Groups' => '',
-        'Agents ↔ Roles' => '',
         'All CustomerIDs of a customer user.' => '',
         'All customer users of a CustomerID' => 'همه کاربران مشتری از CustomerID',
         'All escalated tickets' => 'تمام درخواست‌هایی که زمان پاسخگویی آن‌ها رو به پایان است',
@@ -8707,9 +8730,6 @@ Thanks for your help!
         'Customer User Information Center search.' => '',
         'Customer User Information Center.' => '',
         'Customer User-Customer Relations' => '',
-        'Customer Users ↔ Customers' => '',
-        'Customer Users ↔ Groups' => '',
-        'Customer Users ↔ Services' => '',
         'Customer preferences.' => 'ترجیحات مشتری.',
         'Customer ticket overview' => 'مروری درخواست مشتری',
         'Customer ticket search.' => 'جستجو درخواست مشتری.',
@@ -8718,7 +8738,6 @@ Thanks for your help!
         'CustomerID search' => 'جستجو CustomerID',
         'CustomerName' => 'نام مشتری',
         'CustomerUser' => 'CustomerUser',
-        'Customers ↔ Groups' => '',
         'Czech' => 'چک',
         'Danish' => 'دانمارکی',
         'Dashboard overview.' => '',
@@ -8760,7 +8779,6 @@ Thanks for your help!
         'Edit Customer Users.' => 'ویرایش کاربران مشتری',
         'Edit appointment' => '',
         'Edit customer company' => 'ویرایش شرکت مشتری',
-        'Email Addresses' => 'آدرس‌های ایمیل',
         'Email Outbound' => 'عازم ناحیه دور دست ایمیل',
         'Email Resend' => '',
         'Email communication channel.' => '',
@@ -8989,7 +9007,6 @@ Thanks for your help!
         'Portuguese' => 'پرتغالی',
         'Portuguese (Brasil)' => 'پرتغالی (برزیل)',
         'PostMaster Filters' => 'فیلترهای پستی',
-        'PostMaster Mail Accounts' => 'حساب‌های ایمیل پستی',
         'Print this ticket' => 'چاپ این بلیط',
         'Priorities' => 'الویت‌ها',
         'Process Management Activity Dialog GUI' => 'فرآیند مدیریت فعالیت های گفت و گو GUI',
@@ -9008,7 +9025,6 @@ Thanks for your help!
         'Public Calendar' => '',
         'Public calendar.' => '',
         'Queue view' => 'نمای صف درخواست',
-        'Queues ↔ Auto Responses' => '',
         'Refresh interval' => 'بارگذاری مجدد ورودی',
         'Reminder Tickets' => 'درخواست‌های یادآوری شده',
         'Removed subscription for user "%s".' => 'عضویت حذف شده برای کاربر"%s".',
@@ -9018,13 +9034,11 @@ Thanks for your help!
         'Responsible Tickets' => 'کارشناس درخواست',
         'Responsible Tickets.' => 'کارشناس درخواست.',
         'Right' => 'راست',
-        'Roles ↔ Groups' => '',
         'Romanian' => '',
         'Running Process Tickets' => 'در حال اجرا فرآیند درخواست',
         'Russian' => 'روسی',
         'S/MIME Certificates' => 'گواهینامه‌های S/MIME',
         'SMS' => 'پیامک',
-        'Salutations' => 'عنوان',
         'Schedule a maintenance period.' => 'برنامه ریزی یک دوره تعمیر و نگهداری.',
         'Screen after new ticket' => 'وضعیت نمایش پس از دریافت درخواست جدید',
         'Search Customer' => 'جستجوی مشترک',
@@ -9062,7 +9076,6 @@ Thanks for your help!
         'Sent notification to "%s".' => '',
         'Serbian Cyrillic' => 'سیریلیک صربستان',
         'Serbian Latin' => 'صربی لاتین',
-        'Service Level Agreements' => 'توافقات سطح سرویس',
         'Service view' => 'نمای سرویس',
         'ServiceView' => 'ServiceView',
         'Set a new password by filling in your current password and a new one.' =>
@@ -9077,7 +9090,6 @@ Thanks for your help!
         'Shows information on how to start OTRS Daemon' => 'نشان می دهد اطلاعات در مورد چگونگی شروع OTRS دیمون',
         'Shows last mention of tickets.' => '',
         'Signature data.' => '',
-        'Signatures' => 'امضاء',
         'Simple' => 'ساده',
         'Skin' => 'پوسته',
         'Slovak' => 'اسلواکی',
@@ -9112,8 +9124,6 @@ Thanks for your help!
         'System Configuration Deployment' => '',
         'System Configuration Group' => '',
         'System Maintenance' => 'تعمیر و نگهداری سیستم',
-        'Templates ↔ Attachments' => '',
-        'Templates ↔ Queues' => '',
         'Textarea' => 'ناحیه متنی',
         'Thai' => 'تایلندی',
         'The PGP signature is expired.' => '',

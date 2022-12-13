@@ -19,8 +19,9 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+        my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
 
         # Disable 'Ticket Information', 'Customer Information' and 'Linked Objects' widgets in AgentTicketZoom screen.
         for my $WidgetDisable (qw(0100-TicketInformation 0200-CustomerInformation 0300-LinkTable)) {
@@ -156,12 +157,44 @@ $Selenium->RunTest(
             "QueueID $QueueID is created"
         );
 
+        my %ITSMCoreSLA;
+        my %ITSMCoreService;
+
+        if ($IsITSMInstalled) {
+
+            # get the list of service types from general catalog
+            my $ServiceTypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+                Class => 'ITSM::Service::Type',
+            );
+
+            # build a lookup hash
+            my %ServiceTypeName2ID = reverse %{$ServiceTypeList};
+
+            # get the list of sla types from general catalog
+            my $SLATypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+                Class => 'ITSM::SLA::Type',
+            );
+
+            # build a lookup hash
+            my %SLATypeName2ID = reverse %{$SLATypeList};
+
+            %ITSMCoreSLA = (
+                TypeID => $SLATypeName2ID{Other},
+            );
+
+            %ITSMCoreService = (
+                TypeID      => $ServiceTypeName2ID{Training},
+                Criticality => '3 normal',
+            );
+        }
+
         # Create test service.
         my $ServiceID = $Kernel::OM->Get('Kernel::System::Service')->ServiceAdd(
             Name    => $TicketData{Service},
             ValidID => 1,
             Comment => 'Selenium Service',
             UserID  => 1,
+            %ITSMCoreService,
         );
         $Self->True(
             $ServiceID,
@@ -183,6 +216,7 @@ $Selenium->RunTest(
             ValidID           => 1,
             Comment           => 'Selenium SLA',
             UserID            => 1,
+            %ITSMCoreSLA,
         );
         $Self->True(
             $SLAID,
@@ -484,6 +518,12 @@ $Selenium->RunTest(
                 Message => "QueueID $QueueID is deleted",
             },
         );
+        if ($IsITSMInstalled) {
+            push @DeleteData, {
+                SQL     => "DELETE FROM service_preferences WHERE service_id = $ServiceID",
+                Message => "Service preferences for $ServiceID is deleted",
+            };
+        }
 
         # Delete test created items.
         for my $Item (@DeleteData) {

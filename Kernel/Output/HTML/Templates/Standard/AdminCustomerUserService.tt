@@ -93,6 +93,37 @@
             </div>
         </div>
 [% RenderBlockEnd("Filter") %]
+        <div class='WidgetSimple'>
+            <div class='Header'>
+                <h2>[% Translate('Related Actions') | html %]</h2>
+            </div>
+            <div class='Content'>
+                <ul class='ActionList SpacingTop'>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminCustomerUser' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Customer Users') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminService' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Services') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminSLA' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Service Level Agreements') | html %]
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
     </div>
     <div class="ContentColumn">
         <div class="WidgetSimple">

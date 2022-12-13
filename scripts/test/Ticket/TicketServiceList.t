@@ -47,10 +47,30 @@ $Self->True(
     'Type 2 created.',
 );
 
+my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
+my %ITSMCoreService;
+
+if ($IsITSMInstalled) {
+
+    # get the list of service types from general catalog
+    my $ServiceTypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class => 'ITSM::Service::Type',
+    );
+
+    # build a lookup hash
+    my %ServiceTypeName2ID = reverse %{$ServiceTypeList};
+
+    %ITSMCoreService = (
+        TypeID      => $ServiceTypeName2ID{Training},
+        Criticality => '3 normal',
+    );
+}
+
 my $ServiceID1 = $ServiceObject->ServiceAdd(
     Name    => 'TestService1' . $Random,
     ValidID => 1,
     UserID  => 1,
+    %ITSMCoreService,
 );
 $Self->True(
     $ServiceID1,
@@ -60,6 +80,7 @@ my $ServiceID2 = $ServiceObject->ServiceAdd(
     Name    => 'TestService2' . $Random,
     ValidID => 1,
     UserID  => 1,
+    %ITSMCoreService,
 );
 $Self->True(
     $ServiceID2,

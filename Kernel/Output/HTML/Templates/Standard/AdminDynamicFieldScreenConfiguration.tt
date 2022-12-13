@@ -24,7 +24,7 @@
     <div class="SidebarColumn">
         <div class="WidgetSimple">
             <div class="Header">
-                <h2>[% Translate("Actions") | html %]</h2>
+                <h2>[% Translate("Related Actions") | html %]</h2>
             </div>
             <div class="Content">
                 <ul class="ActionList">

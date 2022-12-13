@@ -29,9 +29,11 @@ our @ObjectDependencies = (
     'Kernel::System::Main',
     'Kernel::System::PostMaster::LoopProtection',
     'Kernel::System::State',
+    'Kernel::System::SystemAddress',
     'Kernel::System::TemplateGenerator',
     'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
+    'Kernel::System::Valid',
 );
 
 =head1 NAME
@@ -596,6 +598,27 @@ sub SendAutoResponse {
                     . " option SendNoAutoResponseRegExp (/$NoAutoRegExp/i) matched.",
             );
             next ADDRESS;
+        }
+
+        # Don't send auto response if the sender was a system address (don't send to system address).
+        my $SystemAddressID = $Kernel::OM->Get('Kernel::System::SystemAddress')->SystemAddressLookup(
+            SystemAddress => $Email,
+        );
+        if ($SystemAddressID) {
+            my %SystemAddress = $Kernel::OM->Get('Kernel::System::SystemAddress')->SystemAddressGet(
+                ID => $SystemAddressID,
+            );
+
+            my @ValidIDs = $Kernel::OM->Get('Kernel::System::Valid')->ValidIDsGet();
+            my $ValidID  = shift @ValidIDs;
+
+            if ( %SystemAddress && $SystemAddress{ValidID} == $ValidID ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'info',
+                    Message  => "Sent no auto response to '$Email' because it is a system address."
+                );
+                next ADDRESS;
+            }
         }
 
         push @AutoReplyAddresses, $Address;

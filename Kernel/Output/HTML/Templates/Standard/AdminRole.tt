@@ -74,6 +74,29 @@
                 </p>
             </div>
         </div>
+       <div class='WidgetSimple'>
+            <div class='Header'>
+                <h2>[% Translate('Related Actions') | html %]</h2>
+            </div>
+            <div class='Content'>
+                <ul class='ActionList SpacingTop'>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminRoleGroup' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Roles ↔ Groups') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminRoleUser' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Agents ↔ Roles') | html %]
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="ContentColumn">
         <div class="WidgetSimple">

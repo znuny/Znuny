@@ -77,6 +77,29 @@
                 </p>
             </div>
         </div>
+        <div class='WidgetSimple'>
+            <div class='Header'>
+                <h2>[% Translate('Related Actions') | html %]</h2>
+            </div>
+            <div class='Content'>
+                <ul class='ActionList SpacingTop'>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=Search;Search=%23%23%23State' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Configure State Visibility and Defaults') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=Search;Search=%23%23%23StateType' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Configure State Type Visibility and Defaults') | html %]
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <div class="ContentColumn">

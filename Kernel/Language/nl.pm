@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D-%M-%Y';
     $Self->{DateInputFormat}     = '%D-%M-%Y';
     $Self->{DateInputFormatLong} = '%D-%M-%Y - %T';
-    $Self->{Completeness}        = 0.514049049861946;
+    $Self->{Completeness}        = 0.513049116550494;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -261,6 +261,9 @@ sub Data {
         'Edit Attachment' => 'Bijlage bewerken',
         'Filter for Attachments' => 'Filter op bijlagen',
         'Filter for attachments' => 'Filter op bijlagen',
+        'Related Actions' => '',
+        'Templates' => 'Sjablonen',
+        'Templates ↔ Attachments' => 'Sjablonen ↔ Bijlagen',
         'Filename' => 'Bestandsnaam',
         'Download file' => 'Download bijlage',
         'Delete this attachment' => 'Verwijder bijlage',
@@ -273,6 +276,7 @@ sub Data {
         'Edit Auto Response' => 'Bewerk automatisch antwoord',
         'Filter for Auto Responses' => 'Filter op automatische antwoorden',
         'Filter for auto responses' => 'Filter op automatische antwoorden',
+        'Queues ↔ Auto Responses' => 'Wachtrijen ↔ Automatische antwoorden',
         'Response' => 'Antwoord',
         'Auto response from' => 'Automatisch antwoord van',
         'Reference' => 'Referentie',
@@ -398,6 +402,8 @@ sub Data {
         'Search' => 'Zoeken',
         'Wildcards like \'*\' are allowed.' => 'Wildcards zijn toegestaan.',
         'Select' => 'Selecteer',
+        'Customer Users' => 'Klanten',
+        'Customers ↔ Groups' => 'Bedrijven ↔ Groepen',
         'List (only %s shown - more available)' => 'Lijst (slechts %s getoond - meer beschikbaar)',
         'total' => 'totaal',
         'Please enter a search term to look for customers.' => 'Typ om te zoeken naar klanten.',
@@ -420,9 +426,9 @@ sub Data {
         'Select the customer:group permissions.' => 'Selecteer de permissies voor bedrijf:groep.',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Als niets geselecteerd is, zijn er geen permissies in deze groep (de klant zal geen tickets kunnen zien).',
-        'Search Results' => 'Zoekresultaat',
         'Customers' => 'Bedrijven',
         'Groups' => 'Groepen',
+        'Search Results' => 'Zoekresultaat',
         'Change Group Relations for Customer' => 'Bewerk gekoppelde groepen voor deze klant',
         'Change Customer Relations for Group' => 'Bewerk gekoppelde klanten voor deze groep',
         'Toggle %s Permission for all' => '%s permissies aan/uit',
@@ -442,6 +448,9 @@ sub Data {
         'Back to search results' => 'Terug naar zoekresultaat',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Klanten zijn nodig om een historie te kunnen inzien en om in te loggen via het klantenscherm.',
+        'Customer Users ↔ Customers' => 'Klanten ↔ Bedrijven',
+        'Customer Users ↔ Groups' => 'Klanten ↔ Groepen',
+        'Customer Users ↔ Services' => 'Klanten ↔ Services',
         'List (%s total)' => 'Lijst (%s in totaal)',
         'Username' => 'Gebruikersnaam',
         'Email' => 'E-mail',
@@ -473,7 +482,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
         'Manage Customer User-Customer Relations' => 'Beheer Klant Gebruiker-Klant koppelingen',
         'Select the customer user:customer relations.' => 'Selecteer de klant gebruiker:klant relaties.',
-        'Customer Users' => 'Klanten',
         'Change Customer Relations for Customer User' => 'Bewerk Klan Relaties voor Klant gebruiker',
         'Change Customer User Relations for Customer' => 'Wijzig Klant Gebruiker koppelingen voor Klant',
         'Toggle active state for all' => 'Alles actief aan/uit',
@@ -501,6 +509,7 @@ sub Data {
         'Filter for Services' => 'Filter op services',
         'Filter for services' => 'Filter voor Services',
         'Services' => 'Services',
+        'Service Level Agreements' => 'Service Level Agreements',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
         'Dynamic Fields Management' => 'Beheer van dynamische velden',
@@ -515,6 +524,7 @@ sub Data {
         'Overwrite existing configurations' => '',
         'Import configurations' => '',
         'Export configurations' => '',
+        'Process Management' => 'Procesbeheer',
         'Dynamic fields ↔ Screens' => '',
         'Dynamic Fields List' => 'Lijst met dynamische velden',
         'Dynamic fields per page' => 'Dynamische velden per pagina',
@@ -1363,6 +1373,8 @@ sub Data {
         'Create new groups to handle access permissions for different groups of agent (e. g. purchasing department, support department, sales department, ...). ' =>
             'Maak nieuwe groepen aan om tickets te kunnen scheiden en de juiste wachtrijen aan behandelaars te tonen (bijv. support, sales, management).',
         'It\'s useful for ASP solutions. ' => 'Bruikbaar voor ASP situaties.',
+        'Agents ↔ Groups' => '',
+        'Roles ↔ Groups' => 'Rollen ↔ Groepen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'System Log' => 'Logboek',
@@ -1734,12 +1746,12 @@ sub Data {
         'Edit Priority' => 'Bewerk prioriteit',
         'Filter for Priorities' => 'Filter voor Prioriteiten',
         'Filter for priorities' => 'Filter voor prioriteiten',
+        'Configure Priority Visibility and Defaults' => '',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             '',
         'This priority is used in the following config settings:' => 'Deze prioriteit wordt gebruikt in de volgende configuratieinstellingen:',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-        'Process Management' => 'Procesbeheer',
         'Filter for Processes' => 'Filter op processen',
         'Filter for processes' => 'Filter voor processen',
         'Create New Process' => 'Nieuw proces',
@@ -1756,6 +1768,9 @@ sub Data {
             'Om een nieuw proces aan te maken kunt u een bestand importeren, aangemaakt op een ander systeem, of een compleet nieuw proces aanmaken.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'Wijzigingen aan de processen hebben alleen invloed op het systeem als u de proces-data synchroniseert. Door het synchroniseren van de processen worden de wijzigingen weggeschreven naar de configuratie.',
+        'Access Control Lists (ACL)' => 'Access Control Lists (ACL)',
+        'Generic Agent' => '',
+        'Manage Process Widiget Groups' => '',
         'Processes' => 'Processen',
         'Process name' => 'Naam',
         'Print' => 'Afdrukken',
@@ -1910,6 +1925,13 @@ sub Data {
         'Edit Queue' => 'Bewerk wachtrij',
         'Filter for Queues' => 'Filter op wachtrijen',
         'Filter for queues' => 'Filter op wachtrijen',
+        'Email Addresses' => 'E-mailadressen',
+        'PostMaster Mail Accounts' => 'E-mail accounts',
+        'Salutations' => 'Aanheffen',
+        'Signatures' => 'Handtekeningen',
+        'Templates ↔ Queues' => 'Sjablonen ↔ Wachtrijen',
+        'Configure Working Hours' => '',
+        'Configure Queue Related Settings' => '',
         'A queue with this name already exists!' => 'Er bestaat al een wachtrij met deze naam',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             'Deze wachtrij is beschikbaar in een SysConfig instelling, bevestiging voor het updaten van instellingen naar de nieuwe wachtrij is nodig!',
@@ -1958,7 +1980,6 @@ sub Data {
         'Manage Template-Queue Relations' => 'Beheer Sjabloon - Wachtrij koppelingen',
         'Filter for Templates' => 'Filter op sjablonen',
         'Filter for templates' => 'Filter op sjablonen',
-        'Templates' => 'Sjablonen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'Beheer rollen',
@@ -1968,6 +1989,7 @@ sub Data {
         'Filter for roles' => '',
         'Create a role and put groups in it. Then add the role to the users.' =>
             'Maak een nieuwe rol en koppel deze aan groepen. Vervolgens kunt u rollen toewijzen aan gebruikers.',
+        'Agents ↔ Roles' => 'Behandelaars ↔ Rollen',
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             'Er zijn geen rollen gedefiniëerd. Maak een nieuwe aan.',
 
@@ -2004,7 +2026,9 @@ sub Data {
         'Edit SLA' => 'Bewerk SLA',
         'Add SLA' => 'Nieuwe SLA',
         'Filter for SLAs' => '',
+        'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => 'Gebruik alleen cijfers.',
+        'Minimum Time Between Incidents' => 'Minimale Tijd Tussen Incidenten',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
         'S/MIME Management' => 'S/MIME beheer',
@@ -2085,9 +2109,11 @@ sub Data {
         'Service Management' => 'Service beheer',
         'Add Service' => 'Nieuwe service',
         'Edit Service' => 'Bewerk Service',
+        'Configure Service Visibility and Defaults' => '',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             '',
         'Sub-service of' => 'Onderdeel van',
+        'Criticality' => 'Urgentie',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
         'Session Management' => 'Sessies',
@@ -2121,6 +2147,8 @@ sub Data {
         'Filter for states' => '',
         'Attention' => 'Let op',
         'Please also update the states in SysConfig where needed.' => 'Pas ook de namen van de status aan in SysConfig waar nodig.',
+        'Configure State Visibility and Defaults' => '',
+        'Configure State Type Visibility and Defaults' => '',
         'This state is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
         'State type' => 'Status type',
@@ -2322,6 +2350,7 @@ sub Data {
         'Edit Type' => 'Bewerk type',
         'Filter for Types' => 'Filter voor Types',
         'Filter for types' => 'Filter voor types',
+        'Configure Type Visibility and Defaults' => '',
         'A type with this name already exists!' => 'Er bestaat al een type met deze naam!',
         'This type is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
@@ -3580,9 +3609,6 @@ sub Data {
             '',
         'Yes, but require at least one active notification method.' => 'Ja, maar er is minimaal één actieve melding methode nodig.',
 
-        # Perl Module: Kernel/Modules/AdminAttachment.pm
-        'Attachment added!' => 'Bijlage toegevoegd.',
-
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
 
@@ -4138,7 +4164,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminTemplate.pm
         'Template updated!' => 'Sjabloon bijgewerkt!',
-        'Template added!' => 'Sjabloon toegevoegd!',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
         'Change Attachment Relations for Template' => 'Verander gekoppelde bijlagen voor sjabloon',
@@ -7954,6 +7979,7 @@ sub Data {
         'Agent interface notification module to show the number of mentions.' =>
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
+        'Mapping of non-standard time zones to official ones.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'tijdelijk ongeldig',
@@ -8524,7 +8550,6 @@ Het Helpdesk Team
         'AJAX functions for notification event transport web service.' =>
             '',
         'AJAX interface for the web service dynamic field backends.' => '',
-        'Access Control Lists (ACL)' => 'Access Control Lists (ACL)',
         'AccountedTime' => 'AccountedTime',
         'Activation of dynamic fields for screens.' => '',
         'ActivityID' => 'ActivityID',
@@ -8557,8 +8582,6 @@ Het Helpdesk Team
         'Agent Statistics.' => '',
         'Agent User Search' => '',
         'Agent User Search.' => '',
-        'Agents ↔ Groups' => '',
-        'Agents ↔ Roles' => 'Behandelaars ↔ Rollen',
         'All CustomerIDs of a customer user.' => '',
         'All customer users of a CustomerID' => 'Alle klanten accounts van een CustomerID',
         'All escalated tickets' => 'Alle geëscaleerde tickets',
@@ -8707,9 +8730,6 @@ Het Helpdesk Team
         'Customer User Information Center search.' => 'Zoeken in klant gebruikersinformatie.',
         'Customer User Information Center.' => 'Klant gebruiker informatie overzicht.',
         'Customer User-Customer Relations' => '',
-        'Customer Users ↔ Customers' => 'Klanten ↔ Bedrijven',
-        'Customer Users ↔ Groups' => 'Klanten ↔ Groepen',
-        'Customer Users ↔ Services' => 'Klanten ↔ Services',
         'Customer preferences.' => '',
         'Customer ticket overview' => 'Klant ticket overview',
         'Customer ticket search.' => '',
@@ -8718,7 +8738,6 @@ Het Helpdesk Team
         'CustomerID search' => '',
         'CustomerName' => '',
         'CustomerUser' => '',
-        'Customers ↔ Groups' => 'Bedrijven ↔ Groepen',
         'Czech' => '',
         'Danish' => 'Deens',
         'Dashboard overview.' => '',
@@ -8760,7 +8779,6 @@ Het Helpdesk Team
         'Edit Customer Users.' => '',
         'Edit appointment' => '',
         'Edit customer company' => 'Bedrijf aanpassen',
-        'Email Addresses' => 'E-mailadressen',
         'Email Outbound' => '',
         'Email Resend' => '',
         'Email communication channel.' => '',
@@ -8989,7 +9007,6 @@ Het Helpdesk Team
         'Portuguese' => '',
         'Portuguese (Brasil)' => '',
         'PostMaster Filters' => 'E-mail filters',
-        'PostMaster Mail Accounts' => 'E-mail accounts',
         'Print this ticket' => 'Print dit ticket',
         'Priorities' => 'Prioriteiten',
         'Process Management Activity Dialog GUI' => 'Procesbeheer dialoog',
@@ -9008,7 +9025,6 @@ Het Helpdesk Team
         'Public Calendar' => 'Publieke Kalender',
         'Public calendar.' => 'Publieke kalender.',
         'Queue view' => 'Wachtrijoverzicht',
-        'Queues ↔ Auto Responses' => 'Wachtrijen ↔ Automatische antwoorden',
         'Refresh interval' => 'Interval',
         'Reminder Tickets' => 'Tickets met herinnering',
         'Removed subscription for user "%s".' => 'Removed subscription for user "%s".',
@@ -9018,13 +9034,11 @@ Het Helpdesk Team
         'Responsible Tickets' => 'Verantwoordelijke tickets',
         'Responsible Tickets.' => 'Verantwoordelijke tickets.',
         'Right' => '',
-        'Roles ↔ Groups' => 'Rollen ↔ Groepen',
         'Romanian' => '',
         'Running Process Tickets' => '',
         'Russian' => '',
         'S/MIME Certificates' => 'S/MIME Certificaten',
         'SMS' => '',
-        'Salutations' => 'Aanheffen',
         'Schedule a maintenance period.' => 'Plan een nieuw systeem onderhoudstijdsvak.',
         'Screen after new ticket' => 'Scherm na nieuw ticket',
         'Search Customer' => 'Klanten zoeken',
@@ -9062,7 +9076,6 @@ Het Helpdesk Team
         'Sent notification to "%s".' => '',
         'Serbian Cyrillic' => '',
         'Serbian Latin' => '',
-        'Service Level Agreements' => 'Service Level Agreements',
         'Service view' => '',
         'ServiceView' => '',
         'Set a new password by filling in your current password and a new one.' =>
@@ -9077,7 +9090,6 @@ Het Helpdesk Team
         'Shows information on how to start OTRS Daemon' => '',
         'Shows last mention of tickets.' => '',
         'Signature data.' => '',
-        'Signatures' => 'Handtekeningen',
         'Simple' => '',
         'Skin' => 'Skin',
         'Slovak' => '',
@@ -9112,8 +9124,6 @@ Het Helpdesk Team
         'System Configuration Deployment' => '',
         'System Configuration Group' => '',
         'System Maintenance' => 'Systeemonderhoud',
-        'Templates ↔ Attachments' => 'Sjablonen ↔ Bijlagen',
-        'Templates ↔ Queues' => 'Sjablonen ↔ Wachtrijen',
         'Textarea' => 'Tekstvak',
         'Thai' => '',
         'The PGP signature is expired.' => '',

@@ -7,6 +7,7 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 ## nofilter(TidyAll::Plugin::Znuny::Perl::Pod::NamePod)
+## nofilter(TidyAll::Plugin::Znuny::Perl::ObjectManagerDirectCall)
 
 package scripts::Migration;    ## no critic
 
@@ -225,12 +226,10 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Base::DatabaseBackupCheck',
         },
 
-        # Znuny specific migration modules
-        {
-            Message => 'Upgrade database structure',
-            Module  => 'scripts::Migration::Znuny::UpgradeDatabaseStructure',
-        },
-
+        #         {
+        #             Message => 'Upgrade database structure',
+        #             Module  => 'scripts::Migration::Znuny::UpgradeDatabaseStructure',
+        #         },
         {
             Message => 'Rebuild configuration',
             Module  => 'scripts::Migration::Base::RebuildConfig',
@@ -240,8 +239,8 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Znuny::MigrateSysConfigSettings',
         },
         {
-            Message => "Add dynamic fields 'TicketCalendarStartTime' and 'TicketCalendarEndTime'.",
-            Module  => 'scripts::Migration::Znuny::AddTicketCalendarDynamicFields',
+            Message => 'Migrate dynamic fields',
+            Module  => 'scripts::Migration::Znuny::MigrateDynamicFields',
         },
 
         # NOTE: UninstallMergedPackages has to be called only after
@@ -250,7 +249,6 @@ sub _TasksGet {
             Message => 'Uninstall merged packages',
             Module  => 'scripts::Migration::Znuny::UninstallMergedPackages',
         },
-
         {
             Message => 'Initialize default cron jobs',
             Module  => 'scripts::Migration::Base::InitializeDefaultCronjobs',

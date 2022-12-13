@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.287964917979535;
+    $Self->{Completeness}        = 0.28756686659102;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -255,6 +255,9 @@ sub Data {
         'Edit Attachment' => 'Уреди прикачување',
         'Filter for Attachments' => 'Филтер за Прилози',
         'Filter for attachments' => '',
+        'Related Actions' => '',
+        'Templates' => 'Шаблони',
+        'Templates ↔ Attachments' => '',
         'Filename' => 'Име на датотека',
         'Download file' => 'Преземи документ',
         'Delete this attachment' => 'Избриши го ова прикачување',
@@ -267,6 +270,7 @@ sub Data {
         'Edit Auto Response' => 'Уреди автоматски одговор',
         'Filter for Auto Responses' => 'Филтер за Автоматски Одговори',
         'Filter for auto responses' => '',
+        'Queues ↔ Auto Responses' => '',
         'Response' => 'Одговор',
         'Auto response from' => 'Форма на автоматски одговор',
         'Reference' => 'Референца',
@@ -392,6 +396,8 @@ sub Data {
         'Search' => 'Барај',
         'Wildcards like \'*\' are allowed.' => 'Дозволени се глобални знаци како "*".',
         'Select' => 'Избери',
+        'Customer Users' => '',
+        'Customers ↔ Groups' => '',
         'List (only %s shown - more available)' => '',
         'total' => '',
         'Please enter a search term to look for customers.' => 'Ве молиме внесете термин за пребарување за пронаоѓање на клиентот.',
@@ -414,9 +420,9 @@ sub Data {
         'Select the customer:group permissions.' => 'Селектирај го потрушувачот:групни дозволи.',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Ако ништо не е селектирано, тогаш нема да има дозволи во оваа група(тикети нема да бидат достапни за овој потрошувач).',
-        'Search Results' => 'Резултати од барањето',
         'Customers' => 'Корисници',
         'Groups' => 'Групи',
+        'Search Results' => 'Резултати од барањето',
         'Change Group Relations for Customer' => 'Промени група за односи со клиенти',
         'Change Customer Relations for Group' => 'Промени Потрошувачки Релации за Група',
         'Toggle %s Permission for all' => 'Промени % s Дозвола за сите',
@@ -436,6 +442,9 @@ sub Data {
         'Back to search results' => 'Назад до резултатите од барањето',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Корисник-клиент е потребен за да имаат историјата на корисник и да се најавите преку кориснички панел.',
+        'Customer Users ↔ Customers' => '',
+        'Customer Users ↔ Groups' => '',
+        'Customer Users ↔ Services' => '',
         'List (%s total)' => '',
         'Username' => 'Корисничко име',
         'Email' => 'е-пошта',
@@ -467,7 +476,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
         'Manage Customer User-Customer Relations' => '',
         'Select the customer user:customer relations.' => '',
-        'Customer Users' => '',
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
         'Toggle active state for all' => 'Префрли активна состојба за сите',
@@ -495,6 +503,7 @@ sub Data {
         'Filter for Services' => 'Филтер за Услуги',
         'Filter for services' => '',
         'Services' => 'Услуги',
+        'Service Level Agreements' => 'Договор за Ниво на Услуги',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
         'Dynamic Fields Management' => 'Управување со динамички полиња',
@@ -509,6 +518,7 @@ sub Data {
         'Overwrite existing configurations' => '',
         'Import configurations' => '',
         'Export configurations' => '',
+        'Process Management' => 'Управување со Процес',
         'Dynamic fields ↔ Screens' => '',
         'Dynamic Fields List' => 'Листа со динамички полиња',
         'Dynamic fields per page' => 'Динамички полиња по страници',
@@ -1357,6 +1367,8 @@ sub Data {
         'Create new groups to handle access permissions for different groups of agent (e. g. purchasing department, support department, sales department, ...). ' =>
             'Креирај нови групи за да се справи со дозволи за пристап на различни групи на агент (на пример: одделот за купување, одделот за поддршка, одделот за продажба, ...).',
         'It\'s useful for ASP solutions. ' => 'Корисно е за ASP решенија.',
+        'Agents ↔ Groups' => '',
+        'Roles ↔ Groups' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'System Log' => 'Системско Пријавување',
@@ -1728,12 +1740,12 @@ sub Data {
         'Edit Priority' => 'Уреди Приоритет',
         'Filter for Priorities' => '',
         'Filter for priorities' => '',
+        'Configure Priority Visibility and Defaults' => '',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             '',
         'This priority is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-        'Process Management' => 'Управување со Процес',
         'Filter for Processes' => 'Филтрирај за Процесите',
         'Filter for processes' => '',
         'Create New Process' => 'Креирај нов процес',
@@ -1750,6 +1762,9 @@ sub Data {
             'За да креирате нов процес можете да увезете еден процес кој е извезена од друг систем или да создадете комплетено нов.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'Промени во овие Процесите само што влијајат на однесувањето на системот, ако ги синхронизирате Процесираните податови. Со синхронизирање на Процесите, новите направени промени ќе бидат запишани во Конфигурацијата.',
+        'Access Control Lists (ACL)' => 'Листи за контрола на пристап (ЛКП)',
+        'Generic Agent' => '',
+        'Manage Process Widiget Groups' => '',
         'Processes' => 'Процеси',
         'Process name' => 'Име на процес',
         'Print' => 'Испечати',
@@ -1904,6 +1919,13 @@ sub Data {
         'Edit Queue' => 'Измени Ред',
         'Filter for Queues' => 'Филтер за Редици',
         'Filter for queues' => '',
+        'Email Addresses' => '',
+        'PostMaster Mail Accounts' => '',
+        'Salutations' => 'Поздрави',
+        'Signatures' => 'Потписи',
+        'Templates ↔ Queues' => '',
+        'Configure Working Hours' => '',
+        'Configure Queue Related Settings' => '',
         'A queue with this name already exists!' => 'Веќе постои ред со ова име!',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             '',
@@ -1952,7 +1974,6 @@ sub Data {
         'Manage Template-Queue Relations' => 'Менаџирај Шаблон-Ред Релации',
         'Filter for Templates' => 'Филтер за Шаблони',
         'Filter for templates' => '',
-        'Templates' => 'Шаблони',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'Управување со Улоги',
@@ -1962,6 +1983,7 @@ sub Data {
         'Filter for roles' => '',
         'Create a role and put groups in it. Then add the role to the users.' =>
             'Креирај нова улога и додади група во истата. Потоа додади улога на корисниците.',
+        'Agents ↔ Roles' => '',
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             'Нема дефинирано улоги. Ве молиме употребето го копчето \'Додади\' за да креирате нова улога.',
 
@@ -1998,7 +2020,9 @@ sub Data {
         'Edit SLA' => 'Измени SLA',
         'Add SLA' => 'Додади SLA',
         'Filter for SLAs' => '',
+        'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => 'Ве молиме пишувајте само броеви!',
+        'Minimum Time Between Incidents' => 'Минимално време помеѓу проблем',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
         'S/MIME Management' => 'Управување со S/MIME',
@@ -2079,9 +2103,11 @@ sub Data {
         'Service Management' => 'Управување со Сервиси',
         'Add Service' => 'Додади Сервис',
         'Edit Service' => 'Измени Сервис',
+        'Configure Service Visibility and Defaults' => '',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             '',
         'Sub-service of' => 'Под-сервис на',
+        'Criticality' => 'Критично',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
         'Session Management' => 'Управување со Сесии',
@@ -2115,6 +2141,8 @@ sub Data {
         'Filter for states' => '',
         'Attention' => 'Внимание',
         'Please also update the states in SysConfig where needed.' => 'Ве молиме дополнети ја состојбата на SysConfig каде што е потребно.',
+        'Configure State Visibility and Defaults' => '',
+        'Configure State Type Visibility and Defaults' => '',
         'This state is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
         'State type' => 'Тип на состојба',
@@ -2316,6 +2344,7 @@ sub Data {
         'Edit Type' => 'Измени тип',
         'Filter for Types' => '',
         'Filter for types' => '',
+        'Configure Type Visibility and Defaults' => '',
         'A type with this name already exists!' => 'Веќе постои тип со исто име!',
         'This type is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
@@ -3574,9 +3603,6 @@ sub Data {
             '',
         'Yes, but require at least one active notification method.' => '',
 
-        # Perl Module: Kernel/Modules/AdminAttachment.pm
-        'Attachment added!' => 'Додади прилог!',
-
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
 
@@ -4132,7 +4158,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminTemplate.pm
         'Template updated!' => '',
-        'Template added!' => '',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
         'Change Attachment Relations for Template' => 'Измени Релации на Прилози за Шаблон',
@@ -7948,6 +7973,7 @@ sub Data {
         'Agent interface notification module to show the number of mentions.' =>
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
+        'Mapping of non-standard time zones to official ones.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'невалиден-привремено',
@@ -8507,7 +8533,6 @@ Thanks for your help!
         'AJAX functions for notification event transport web service.' =>
             '',
         'AJAX interface for the web service dynamic field backends.' => '',
-        'Access Control Lists (ACL)' => 'Листи за контрола на пристап (ЛКП)',
         'AccountedTime' => '',
         'Activation of dynamic fields for screens.' => '',
         'ActivityID' => '',
@@ -8540,8 +8565,6 @@ Thanks for your help!
         'Agent Statistics.' => '',
         'Agent User Search' => '',
         'Agent User Search.' => '',
-        'Agents ↔ Groups' => '',
-        'Agents ↔ Roles' => '',
         'All CustomerIDs of a customer user.' => '',
         'All customer users of a CustomerID' => '',
         'All escalated tickets' => 'Сите тикети кои ескалираат',
@@ -8690,9 +8713,6 @@ Thanks for your help!
         'Customer User Information Center search.' => '',
         'Customer User Information Center.' => '',
         'Customer User-Customer Relations' => '',
-        'Customer Users ↔ Customers' => '',
-        'Customer Users ↔ Groups' => '',
-        'Customer Users ↔ Services' => '',
         'Customer preferences.' => '',
         'Customer ticket overview' => '',
         'Customer ticket search.' => '',
@@ -8701,7 +8721,6 @@ Thanks for your help!
         'CustomerID search' => '',
         'CustomerName' => '',
         'CustomerUser' => '',
-        'Customers ↔ Groups' => '',
         'Czech' => '',
         'Danish' => '',
         'Dashboard overview.' => '',
@@ -8743,7 +8762,6 @@ Thanks for your help!
         'Edit Customer Users.' => '',
         'Edit appointment' => '',
         'Edit customer company' => '',
-        'Email Addresses' => '',
         'Email Outbound' => '',
         'Email Resend' => '',
         'Email communication channel.' => '',
@@ -8972,7 +8990,6 @@ Thanks for your help!
         'Portuguese' => '',
         'Portuguese (Brasil)' => '',
         'PostMaster Filters' => '',
-        'PostMaster Mail Accounts' => '',
         'Print this ticket' => 'Печати го тикетот',
         'Priorities' => 'Приоритети',
         'Process Management Activity Dialog GUI' => '',
@@ -8991,7 +9008,6 @@ Thanks for your help!
         'Public Calendar' => '',
         'Public calendar.' => '',
         'Queue view' => '',
-        'Queues ↔ Auto Responses' => '',
         'Refresh interval' => '',
         'Reminder Tickets' => 'Потсетник за Билети',
         'Removed subscription for user "%s".' => '',
@@ -9001,13 +9017,11 @@ Thanks for your help!
         'Responsible Tickets' => '',
         'Responsible Tickets.' => '',
         'Right' => '',
-        'Roles ↔ Groups' => '',
         'Romanian' => '',
         'Running Process Tickets' => '',
         'Russian' => '',
         'S/MIME Certificates' => 'S/MIME Сертификати',
         'SMS' => '',
-        'Salutations' => 'Поздрави',
         'Schedule a maintenance period.' => '',
         'Screen after new ticket' => 'Екран по нов тикет',
         'Search Customer' => '',
@@ -9045,7 +9059,6 @@ Thanks for your help!
         'Sent notification to "%s".' => '',
         'Serbian Cyrillic' => '',
         'Serbian Latin' => '',
-        'Service Level Agreements' => 'Договор за Ниво на Услуги',
         'Service view' => '',
         'ServiceView' => '',
         'Set a new password by filling in your current password and a new one.' =>
@@ -9060,7 +9073,6 @@ Thanks for your help!
         'Shows information on how to start OTRS Daemon' => '',
         'Shows last mention of tickets.' => '',
         'Signature data.' => '',
-        'Signatures' => 'Потписи',
         'Simple' => '',
         'Skin' => '',
         'Slovak' => '',
@@ -9095,8 +9107,6 @@ Thanks for your help!
         'System Configuration Deployment' => '',
         'System Configuration Group' => '',
         'System Maintenance' => '',
-        'Templates ↔ Attachments' => '',
-        'Templates ↔ Queues' => '',
         'Textarea' => '',
         'Thai' => '',
         'The PGP signature is expired.' => '',

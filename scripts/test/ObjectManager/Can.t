@@ -46,6 +46,12 @@ if ( !$Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::Calend
     $SkipTeam = 1;
 }
 
+my $SkipITSM;
+my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
+if ( !$IsITSMInstalled ) {
+    $SkipITSM = 1;
+}
+
 my $Home = $ConfigObject->Get('Home');
 
 # get main object
@@ -105,6 +111,7 @@ for my $Directory ( sort @DirectoriesToSearch ) {
             next OPERATION if $1 eq 'Kernel::System::Calendar'              && $SkipCalendar;
             next OPERATION if $1 eq 'Kernel::System::Calendar::Appointment' && $SkipCalendar;
             next OPERATION if $1 eq 'Kernel::System::Calendar::Team'        && $SkipTeam;
+            next OPERATION if $1 eq 'Kernel::System::GeneralCatalog'        && $SkipITSM;
 
             # load object
             my $Object = $Kernel::OM->Get("$1");

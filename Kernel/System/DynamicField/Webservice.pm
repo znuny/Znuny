@@ -1039,8 +1039,10 @@ This function is only needed for WebserviceMultiselect (multiselect).
 
     my $Value = $DynamicFieldWebserviceObject->Template(
         DynamicFieldConfig => \%DynamicFieldConfig,
-        Value              => ['first','second', 'third'],
-        ContentType        => 'ASCII', # HTML is default
+        Value              => ['first','second', 'third'], # or a scalar value
+        Type               => 'Value', # optional; or 'Title'
+        ContentType        => 'ASCII', # optional; 'HTML' is default,
+        TemplateType       => 'default', # optional; or: 'separator', 'wordwrap', 'list'
     );
 
 Returns:
@@ -1103,8 +1105,10 @@ sub Template {
     my $TemplateType = $Param{DynamicFieldConfig}->{Config}->{TemplateType} || 'default';
 
     if ( $Param{LayoutObject}->{Action} && $Param{Type} ) {
-        $ContentType  = $ActionTemplateMap{ $Param{LayoutObject}->{Action} }->{ $Param{Type} }->{ContentType} || $ContentType;
-        $TemplateType = $ActionTemplateMap{ $Param{LayoutObject}->{Action} }->{ $Param{Type} }->{TemplateType} || $TemplateType;
+        $ContentType
+            = $ActionTemplateMap{ $Param{LayoutObject}->{Action} }->{ $Param{Type} }->{ContentType} || $ContentType;
+        $TemplateType
+            = $ActionTemplateMap{ $Param{LayoutObject}->{Action} }->{ $Param{Type} }->{TemplateType} || $TemplateType;
     }
 
     if ( $Param{ContentType} ) {

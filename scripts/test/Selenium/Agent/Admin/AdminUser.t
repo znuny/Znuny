@@ -18,7 +18,8 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
 
         # Do not check email addresses.
         $HelperObject->ConfigSettingChange(
@@ -221,12 +222,20 @@ $Selenium->RunTest(
             "QueueID $QueueID is created.",
         );
 
-        my $ServiceName = 'TestService' . $RandomID;
-        my $ServiceID   = $Kernel::OM->Get('Kernel::System::Service')->ServiceAdd(
+        my $ServiceName   = 'TestService' . $RandomID;
+        my %ServiceValues = (
             Name    => $ServiceName,
             Comment => 'Selenium Test',
             ValidID => 1,
             UserID  => 1,
+        );
+        if ($IsITSMInstalled) {
+            $ServiceValues{TypeID}      = 1;
+            $ServiceValues{Criticality} = '3 normal';
+        }
+
+        my $ServiceID = $Kernel::OM->Get('Kernel::System::Service')->ServiceAdd(
+            %ServiceValues,
         );
         $Self->True(
             $ServiceID,

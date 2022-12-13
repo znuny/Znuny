@@ -118,6 +118,43 @@
 
             </div>
         </div>
+        <div class='WidgetSimple'>
+            <div class='Header'>
+                <h2>[% Translate('Related Actions') | html %]</h2>
+            </div>
+            <div class='Content'>
+                <ul class='ActionList SpacingTop'>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminACL' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate("Access Control Lists (ACL)") | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminDynamicField' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Dynamic Fields') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminGenericAgent' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate("Generic Agent") | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=View;Setting=Ticket%3A%3AFrontend%3A%3AAgentTicketZoom%23%23%23ProcessWidgetDynamicFieldGroups;ChallengeToken=KDtGaGclmu2ObuGcZSWayxkbvL5rOa5p;" class="CallForAction Fullsize Center">
+                            <span>
+                                [% Translate("Manage Process Widiget Groups") | html %]
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <div class="ContentColumn">

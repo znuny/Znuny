@@ -685,7 +685,7 @@ sub GetFieldSelections {
 
 =head2 CustomerIDList()
 
-return a list of with all known unique CustomerIDs of the registered customers users (no SearchTerm),
+return a list of all known unique CustomerIDs of the registered customer users (no SearchTerm),
 or a filtered list where the CustomerIDs must contain a search term.
 
     my @CustomerIDs = $CustomerUserObject->CustomerIDList(

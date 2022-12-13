@@ -34,6 +34,7 @@ $Selenium->RunTest(
         my $StateObject     = $Kernel::OM->Get('Kernel::System::State');
         my $DBObject        = $Kernel::OM->Get('Kernel::System::DB');
         my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
 
         my $RandomID = $HelperObject->GetRandomID();
         my $Success;
@@ -107,12 +108,44 @@ $Selenium->RunTest(
             "QueueID $QueueID is created",
         );
 
+        my %ITSMCoreSLA;
+        my %ITSMCoreService;
+
+        if ($IsITSMInstalled) {
+
+            # get the list of service types from general catalog
+            my $ServiceTypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+                Class => 'ITSM::Service::Type',
+            );
+
+            # build a lookup hash
+            my %ServiceTypeName2ID = reverse %{$ServiceTypeList};
+
+            # get the list of sla types from general catalog
+            my $SLATypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+                Class => 'ITSM::SLA::Type',
+            );
+
+            # build a lookup hash
+            my %SLATypeName2ID = reverse %{$SLATypeList};
+
+            %ITSMCoreSLA = (
+                TypeID => $SLATypeName2ID{Other},
+            );
+
+            %ITSMCoreService = (
+                TypeID      => $ServiceTypeName2ID{Training},
+                Criticality => '3 normal',
+            );
+        }
+
         # Create test service.
         my $ServiceName = 'Service' . $RandomID;
         my $ServiceID   = $ServiceObject->ServiceAdd(
             Name    => $ServiceName,
             ValidID => 1,
             UserID  => 1,
+            %ITSMCoreService,
         );
         $Self->True(
             $ServiceID,
@@ -134,6 +167,7 @@ $Selenium->RunTest(
             Name       => $SLAName,
             ValidID    => 1,
             UserID     => 1,
+            %ITSMCoreSLA,
         );
         $Self->True(
             $TicketID,
@@ -520,6 +554,18 @@ $Selenium->RunTest(
             $Success,
             "Relation SLAID $SLAID referenced to service ID $ServiceID is deleted",
         );
+
+        if ($IsITSMInstalled) {
+
+            # Delete created test service preferences.
+            $Success = $DBObject->Do(
+                SQL => "DELETE FROM service_preferences WHERE service_id = $ServiceID",
+            );
+            $Self->True(
+                $Success,
+                "ServiceID $ServiceID prefereneces is deleted",
+            );
+        }
 
         # Delete created test service.
         $Success = $DBObject->Do(

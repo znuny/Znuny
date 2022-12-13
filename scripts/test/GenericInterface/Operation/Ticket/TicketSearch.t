@@ -105,14 +105,22 @@ $Self->True(
 );
 
 # get service object
-my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
+my $ServiceObject   = $Kernel::OM->Get('Kernel::System::Service');
+my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
 
-# create new service
-my $ServiceID = $ServiceObject->ServiceAdd(
+my %ServiceValues = (
     Name    => 'TestService' . $RandomID,
     ValidID => 1,
     UserID  => 1,
 );
+
+if ($IsITSMInstalled) {
+    $ServiceValues{TypeID}      = 1;
+    $ServiceValues{Criticality} = '3 normal';
+}
+
+# create new service
+my $ServiceID = $ServiceObject->ServiceAdd(%ServiceValues);
 
 # sanity check
 $Self->True(
