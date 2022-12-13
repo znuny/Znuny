@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.997730220492866;
+    $Self->{Completeness}        = 0.997730588426001;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7973,6 +7973,7 @@ sub Data {
         'Agent interface notification module to show the number of mentions.' =>
             'Benachrichtigungsmodul für Agenten-Interface, das die Anzahl der Erwähnungen anzeigt.',
         'Module to grant access to the mentioned agents of a ticket.' => 'Modul, das Zugriff für die erwähnten Agenten eines Tickets gewährt.',
+        'Mapping of non-standard time zones to official ones.' => 'Mapping von Nicht-Standard-Zeitzonen zu offiziellen Zeitzonen.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'ungültig-temporär',

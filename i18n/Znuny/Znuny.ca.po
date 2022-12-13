@@ -25476,3 +25476,7 @@ msgstr ""
 msgid "Criticality"
 msgstr ""
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Mapping of non-standard time zones to official ones."
+msgstr ""
+

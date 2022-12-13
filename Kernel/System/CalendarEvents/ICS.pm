@@ -46,20 +46,9 @@ sub new {
     my $Self = {%Param};
     bless( $Self, $Type );
 
-    $Self->{TimeZonesMap} = {
-        'Pacific Standard Time'   => 'PST8PDT',
-        'W. Europe Standard Time' => 'WET',
-        'Mountain Standard Time'  => 'MST7MDT',
-        'Central Standard Time'   => 'CST6CDT',
-        'Eastern Standard Time'   => 'EST5EDT',
-        'Etc/GMT+10'              => 'HST',
-        'Etc/GMT+5'               => 'EST',
-        'Etc/GMT+7'               => 'MST',
-        'ROK'                     => 'Asia/Seoul',
-        'ROC'                     => 'Asia/Taipei',
-        'Cuba'                    => 'America/Havana',
-        'Jamaica'                 => 'America/Jamaica',
-    };
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    $Self->{TimeZonesMap} = $ConfigObject->Get('AppointmentCalendar::NonStandardTimeZonesMapping') // {};
 
     $Self->{GlobalPropertiesMap} = {
         Events => {

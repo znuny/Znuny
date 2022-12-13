@@ -25491,3 +25491,7 @@ msgstr "故障间最短时间"
 msgid "Criticality"
 msgstr "紧急度"
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Mapping of non-standard time zones to official ones."
+msgstr ""
+

@@ -1,4 +1,5 @@
 # 6.5.1 2023-??-??
+ - 2022-12-13 Added non-standard time zone mapping for iCal/ICS handling.
  - 2022-12-07 Added independent ToolBar::TicketProcess. This is only visible when a valid process exists.
  - 2022-11-25 Moved code of ITSMCore to Znuny Framework that will only be executed if ITSM actually is installed.
  - 2022-11-24 Fixed handling of empty result for frontend autocompletion of dynamic field type WebserviceMultiselect.

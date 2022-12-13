@@ -25503,3 +25503,7 @@ msgstr "Temps minimal entre les incidents"
 msgid "Criticality"
 msgstr "Criticité"
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Mapping of non-standard time zones to official ones."
+msgstr ""
+

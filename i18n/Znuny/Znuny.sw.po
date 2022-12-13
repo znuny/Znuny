@@ -25483,3 +25483,7 @@ msgstr "Kima cha chini cha muda kati ya matukio"
 msgid "Criticality"
 msgstr "Umuhimu"
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Mapping of non-standard time zones to official ones."
+msgstr ""
+
