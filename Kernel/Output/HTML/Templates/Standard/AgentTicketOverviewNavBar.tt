@@ -56,7 +56,7 @@
 [% RenderBlockEnd("DocumentActionRowRemoveColumnFilters") %]
 [% IF Env('Action') == 'AgentTicketMentionView' %]
                     <li class="RemoveMention ContextSettings">
-                        <a href="#" id="RemoveMention" data-user-id="[% Env('UserID') | html %]" title="[% Translate("Remove mention") | html %]">
+                        <a href="#" id="RemoveMention" title="[% Translate("Remove mention") | html %]">
                             <i class="fa fa-eye-slash"></i>
                             <span>[% Translate("Remove mention") | html %]</span>
                         </a>
