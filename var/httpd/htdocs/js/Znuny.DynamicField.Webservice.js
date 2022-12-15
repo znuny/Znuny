@@ -161,6 +161,8 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
                         Selected = [],
                         SelectedIDs;
 
+                    ActiveAJAXCall = false;
+
                     Core.AJAX.ToggleAJAXLoader(SelectedValueFieldName, false);
                     if (!Response || (Array.isArray(Response) && !Response.length)) {
                         return;
@@ -169,7 +171,6 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
                     // additional check if current search term is equal to sent search term
                     CurrentValue = SearchTerm || $AutocompleteElement.val() || '';
                     if (CurrentValue != Value){
-                        ActiveAJAXCall = false;
                         AutocompleteMultiselect($AutocompleteElement);
                         return;
                     }
@@ -204,8 +205,6 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
                     if (!jQuery.isEmptyObject(SelectedIDs)){
                         Znuny.Form.Input.Set(SelectedValueFieldName, SelectedIDs);
                     }
-
-                    ActiveAJAXCall = false;
                 },
                 'json'
             );
