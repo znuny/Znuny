@@ -64,7 +64,9 @@ sub Run {
         $UserType =~ s/Interface//;
     }
 
-    my %GetParam = $Self->_GetParams();
+    my %GetParam = $ParamObject->GetParams(
+        Raw => 1
+    );
 
     my $FieldValues = $Self->_SerializeFieldValues(
         Params       => \%GetParam,
@@ -325,30 +327,6 @@ sub _Test {
 
     $Result->{TestDataHTML} = $TestDataHTML;
     return $Result;
-}
-
-sub _GetParams {
-    my ( $Self, %Param ) = @_;
-
-    my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
-
-    my %GetParams;
-
-    my @ParamNames = $ParamObject->GetParamNames();
-    for my $ParamName (@ParamNames) {
-        $GetParams{$ParamName} = $ParamObject->GetParam( Param => $ParamName );
-
-        my @Param = $ParamObject->GetArray(
-            Param => $ParamName,
-            Raw   => 1,
-        );
-
-        if ( @Param && scalar @Param gt 1 ) {
-            $GetParams{$ParamName} = \@Param;
-        }
-    }
-
-    return %GetParams;
 }
 
 sub _SerializeFieldValues {
