@@ -794,7 +794,7 @@ sub TicketCreate {
             ServiceID         => $Param{Config}->{ServiceID},
             SLAID             => $Param{Config}->{SLAID},
             OwnerID           => $Param{Config}->{OwnerID} || 1,
-            ResponsibleUserID => $Param{Config}->{ResponsibleUserID},
+            ResponsibleID     => $Param{Config}->{ResponsibleUserID},
             CustomerID        => $Param{Config}->{CustomerID},
             CustomerUser      => $Param{Config}->{CustomerUserID},
             UserID            => $Param{UserID},
