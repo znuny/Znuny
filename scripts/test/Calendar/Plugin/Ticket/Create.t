@@ -26,6 +26,7 @@ my $GroupObject              = $Kernel::OM->Get('Kernel::System::Group');
 my $PluginObject             = $Kernel::OM->Get('Kernel::System::Calendar::Plugin');
 my $TicketCreatePluginObject = $Kernel::OM->Get('Kernel::System::Calendar::Plugin::Ticket::Create');
 my $LinkObject               = $Kernel::OM->Get('Kernel::System::LinkObject');
+my $TicketObject             = $Kernel::OM->Get('Kernel::System::Ticket');
 
 $HelperObject->FixedTimeSetByTimeStamp('2022-04-07 21:11:00');
 
