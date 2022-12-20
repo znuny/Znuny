@@ -38,7 +38,7 @@ sub Run {
     map { $Seen{$_}++ } @Lines;
 
     my $FileHandle = IO::File->new( 'AUTHORS.md', 'w' );
-    $FileHandle->print("The following persons contributed to OTRS:\n\n");
+    $FileHandle->print("The following persons contributed to Znuny:\n\n");
 
     AUTHOR:
     for my $Author ( sort keys %Seen ) {

@@ -117,7 +117,6 @@ my $UserLogin = $HelperObject->TestUserCreate(
 my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
 my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
 
-
 my %UserData = $UserObject->GetUserData(
     User => $UserLogin,
 );
@@ -162,7 +161,6 @@ my $CustomerUserLogin1 = $HelperObject->TestCustomerUserCreate();
 my %CustomerUser1 = $CustomerUserObject->CustomerUserDataGet(
     User => $CustomerUserLogin1,
 );
-
 
 # get a random id
 my $RandomID = $HelperObject->GetRandomID();
@@ -332,7 +330,6 @@ $CustomerUserObject->CustomerUserUpdate(
     UserID  => 1,
 );
 
-
 my $ArticleObject        = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 my $ArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Email' );
 
@@ -441,7 +438,6 @@ $Self->True(
     $CustomerArticleID1InvalidCustomer,
     "Article is created - ID $CustomerArticleID1InvalidCustomer",
 );
-
 
 my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
 my $DynamicFieldValueObject   = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');

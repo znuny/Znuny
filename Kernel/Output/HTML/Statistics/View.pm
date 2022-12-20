@@ -9,8 +9,6 @@
 
 package Kernel::Output::HTML::Statistics::View;
 
-## nofilter(TidyAll::Plugin::OTRS::Perl::PodChecker)
-
 use strict;
 use warnings;
 

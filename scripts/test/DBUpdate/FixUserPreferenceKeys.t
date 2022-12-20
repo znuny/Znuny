@@ -11,8 +11,6 @@ use strict;
 use warnings;
 use utf8;
 
-## nofilter(TidyAll::Plugin::OTRS::Migrations::OTRS6::PermissionDataNotInSession)
-
 use vars (qw($Self));
 
 $Kernel::OM->ObjectParamAdd(

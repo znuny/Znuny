@@ -9,7 +9,7 @@
 
 package Kernel::Output::Template::Provider;
 ## no critic(Perl::Critic::Policy::OTRS::RequireCamelCase)
-## nofilter(TidyAll::Plugin::OTRS::Perl::SyntaxCheck)
+## nofilter(TidyAll::Plugin::Znuny::Perl::SyntaxCheck)
 ## nofilter(TidyAll::Plugin::Znuny::Perl::PerlCritic)
 
 use strict;

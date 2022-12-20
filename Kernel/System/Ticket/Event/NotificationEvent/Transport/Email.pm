@@ -8,8 +8,8 @@
 # --
 
 package Kernel::System::Ticket::Event::NotificationEvent::Transport::Email;
-## nofilter(TidyAll::Plugin::OTRS::Perl::LayoutObject)
-## nofilter(TidyAll::Plugin::OTRS::Perl::ParamObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::ParamObject)
 
 use strict;
 use warnings;

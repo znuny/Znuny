@@ -113,7 +113,7 @@ sub Run {
     # Create a new scope to be sure to destroy local object of the test files.
     {
         # Make sure every UT uses its own clean environment.
-        ## nofilter(TidyAll::Plugin::OTRS::Perl::ObjectManagerCreation)
+        ## nofilter(TidyAll::Plugin::Znuny::Perl::ObjectManagerCreation)
         local $Kernel::OM = Kernel::System::ObjectManager->new(
             'Kernel::System::Log' => {
                 LogPrefix => 'OTRS-otrs.UnitTest',

@@ -1615,7 +1615,7 @@ sub TicketSearch {
         if ( $Param{ $Key . 'OlderDate' } ) {
             if (
                 $Param{ $Key . 'OlderDate' }
-                !~ /(\d\d\d\d)-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)/
+                !~ /\A(\d\d\d\d)-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)\z/
                 )
             {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -1648,15 +1648,14 @@ sub TicketSearch {
             }
             $CompareOlderNewerDate = $SystemTime;
 
-            $SQLExt .= " AND ($ArticleTime{$Key} <= '" . $Param{ $Key . 'OlderDate' } . "')";
-
+            $SQLExt .= " AND ($ArticleTime{$Key} <= '" . $SystemTime->ToString() . "')";
         }
 
         # get articles created newer than xxxx-xx-xx xx:xx date
         if ( $Param{ $Key . 'NewerDate' } ) {
             if (
                 $Param{ $Key . 'NewerDate' }
-                !~ /(\d\d\d\d)-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)/
+                !~ /\A(\d\d\d\d)-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)\z/
                 )
             {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -1695,7 +1694,7 @@ sub TicketSearch {
             # don't execute queries if older/newer date restriction show now valid timeframe
             return if $CompareOlderNewerDate && $SystemTime > $CompareOlderNewerDate;
 
-            $SQLExt .= " AND ($ArticleTime{$Key} >= '" . $Param{ $Key . 'NewerDate' } . "')";
+            $SQLExt .= " AND ($ArticleTime{$Key} >= '" . $SystemTime->ToString() . "')";
         }
     }
 
@@ -1756,7 +1755,7 @@ sub TicketSearch {
             # check time format
             if (
                 $Param{ $Key . 'OlderDate' }
-                !~ /\d\d\d\d-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)/
+                !~ /\A\d\d\d\d-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)\z/
                 )
             {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -1797,7 +1796,7 @@ sub TicketSearch {
         if ( $Param{ $Key . 'NewerDate' } ) {
             if (
                 $Param{ $Key . 'NewerDate' }
-                !~ /\d\d\d\d-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)/
+                !~ /\A\d\d\d\d-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)\z/
                 )
             {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -1868,7 +1867,7 @@ sub TicketSearch {
         # check time format
         if (
             $Param{TicketChangeTimeOlderDate}
-            !~ /\d\d\d\d-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)/
+            !~ /\A\d\d\d\d-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)\z/
             )
         {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -1901,15 +1900,14 @@ sub TicketSearch {
         );
         return if !$THRef;
 
-        $SQLExt .= " AND ${ THRef }.create_time <= '"
-            . $DBObject->Quote( $Param{TicketChangeTimeOlderDate} ) . "'";
+        $SQLExt .= " AND ${ THRef }.create_time <= '" . $DBObject->Quote( $Time->ToString() ) . "'";
     }
 
     # get tickets based on ticket history changed newer than xxxx-xx-xx xx:xx date
     if ( $Param{TicketChangeTimeNewerDate} ) {
         if (
             $Param{TicketChangeTimeNewerDate}
-            !~ /\d\d\d\d-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)/
+            !~ /\A\d\d\d\d-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)\z/
             )
         {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -1947,8 +1945,7 @@ sub TicketSearch {
         );
         return if !$THRef;
 
-        $SQLExt .= " AND ${ THRef }.create_time >= '"
-            . $DBObject->Quote( $Param{TicketChangeTimeNewerDate} ) . "'";
+        $SQLExt .= " AND ${ THRef }.create_time >= '" . $DBObject->Quote( $Time->ToString() ) . "'";
     }
 
     # get tickets changed older than x minutes
@@ -1980,7 +1977,7 @@ sub TicketSearch {
         # check time format
         if (
             $Param{TicketLastChangeTimeOlderDate}
-            !~ /\d\d\d\d-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)/
+            !~ /\A\d\d\d\d-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)\z/
             )
         {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -2008,15 +2005,14 @@ sub TicketSearch {
         }
         $CompareLastChangeTimeOlderNewerDate = $Time;
 
-        $SQLExt .= " AND st.change_time <= '"
-            . $DBObject->Quote( $Param{TicketLastChangeTimeOlderDate} ) . "'";
+        $SQLExt .= " AND st.change_time <= '" . $DBObject->Quote( $Time->ToString() ) . "'";
     }
 
     # get tickets changed newer than xxxx-xx-xx xx:xx date
     if ( $Param{TicketLastChangeTimeNewerDate} ) {
         if (
             $Param{TicketLastChangeTimeNewerDate}
-            !~ /\d\d\d\d-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)/
+            !~ /\A\d\d\d\d-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)\z/
             )
         {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -2050,8 +2046,7 @@ sub TicketSearch {
         return
             if $CompareLastChangeTimeOlderNewerDate && $Time > $CompareLastChangeTimeOlderNewerDate;
 
-        $SQLExt .= " AND st.change_time >= '"
-            . $DBObject->Quote( $Param{TicketLastChangeTimeNewerDate} ) . "'";
+        $SQLExt .= " AND st.change_time >= '" . $DBObject->Quote( $Time->ToString() ) . "'";
     }
 
     # get tickets closed older than x minutes
@@ -2087,7 +2082,7 @@ sub TicketSearch {
         # check time format
         if (
             $Param{TicketCloseTimeOlderDate}
-            !~ /\d\d\d\d-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)/
+            !~ /\A\d\d\d\d-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)\z/
             )
         {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -2130,7 +2125,7 @@ sub TicketSearch {
                 $THRef,
                 ( join ', ', sort @List ),
                 $THRef,
-                $DBObject->Quote( $Param{TicketCloseTimeOlderDate} )
+                $DBObject->Quote( $Time->ToString() ),
             );
         }
     }
@@ -2144,7 +2139,7 @@ sub TicketSearch {
 
         if (
             $Param{TicketCloseTimeNewerDate}
-            !~ /\d\d\d\d-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)/
+            !~ /\A\d\d\d\d-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)\z/
             )
         {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -2192,7 +2187,7 @@ sub TicketSearch {
                 $THRef,
                 ( join ', ', sort @List ),
                 $THRef,
-                $DBObject->Quote( $Param{TicketCloseTimeNewerDate} )
+                $DBObject->Quote( $Time->ToString() ),
             );
         }
     }
@@ -2230,7 +2225,7 @@ sub TicketSearch {
         # Check time format.
         if (
             $Param{TicketLastCloseTimeOlderDate}
-            !~ /\d\d\d\d-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)/
+            !~ /\A\d\d\d\d-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)\z/
             )
         {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -2288,7 +2283,7 @@ sub TicketSearch {
                 $THRef,
                 ( join ', ', sort @List ),
                 $THRef,
-                $DBObject->Quote( $Param{TicketLastCloseTimeOlderDate} ),
+                $DBObject->Quote( $Time->ToString() ),
                 $THRef,
                 ( join ', ', sort @StateID ),
                 ( join ', ', sort @List )
@@ -2305,7 +2300,7 @@ sub TicketSearch {
 
         if (
             $Param{TicketLastCloseTimeNewerDate}
-            !~ /\d\d\d\d-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)/
+            !~ /\A\d\d\d\d-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)\z/
             )
         {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -2368,7 +2363,7 @@ sub TicketSearch {
                 $THRef,
                 ( join ', ', sort @List ),
                 $THRef,
-                $DBObject->Quote( $Param{TicketLastCloseTimeNewerDate} ),
+                $DBObject->Quote( $Time->ToString() ),
                 $THRef,
                 ( join ', ', sort @StateID ),
                 ( join ', ', sort @List )
@@ -2425,7 +2420,7 @@ sub TicketSearch {
         # check time format
         if (
             $Param{TicketPendingTimeOlderDate}
-            !~ /\d\d\d\d-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)/
+            !~ /\A\d\d\d\d-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)\z/
             )
         {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -2460,7 +2455,7 @@ sub TicketSearch {
     if ( $Param{TicketPendingTimeNewerDate} ) {
         if (
             $Param{TicketPendingTimeNewerDate}
-            !~ /\d\d\d\d-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)/
+            !~ /\A\d\d\d\d-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)\z/
             )
         {
             $Kernel::OM->Get('Kernel::System::Log')->Log(

@@ -8,7 +8,7 @@
 # --
 
 package Kernel::Modules::AdminProcessManagement;
-## nofilter(TidyAll::Plugin::OTRS::Perl::Dumper)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Dumper)
 
 use strict;
 use warnings;

@@ -9,8 +9,6 @@
 
 package scripts::DBUpdateTo6::UpgradeDatabaseStructure::FixUserPreferenceKeys;    ## no critic
 
-## nofilter(TidyAll::Plugin::OTRS::Migrations::OTRS6::PermissionDataNotInSession)
-
 use strict;
 use warnings;
 

@@ -579,7 +579,7 @@ sub TaskCleanup {
         my $ExpiredTime = $SystemTime - ( 60 * 60 * 24 * 7 );
 
         my $LockTime;
-        if ($Task{LockTime}) {
+        if ( $Task{LockTime} ) {
             $LockTime = $Kernel::OM->Create(
                 'Kernel::System::DateTime',
                 ObjectParams => {

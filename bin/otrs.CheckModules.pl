@@ -105,7 +105,7 @@ our %DistToInstType = (
 
 our $OSDist;
 eval {
-    require Linux::Distribution;    ## nofilter(TidyAll::Plugin::OTRS::Perl::Require)
+    require Linux::Distribution;    ## nofilter(TidyAll::Plugin::Znuny::Perl::Require)
     import Linux::Distribution;
     $OSDist = Linux::Distribution::distribution_name() || '';
 };

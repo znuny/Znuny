@@ -10,7 +10,7 @@
 package Kernel::System::CustomerUser::LDAP;
 
 # Throws errors when using LDAP_SIZELIMIT_EXCEEDED constant so disabled for now.
-## nofilter(TidyAll::Plugin::OTRS::Perl::SyntaxCheck)
+## nofilter(TidyAll::Plugin::Znuny::Perl::SyntaxCheck)
 
 use strict;
 use warnings;
@@ -1223,7 +1223,7 @@ sub CustomerIDList {
     # log ldap errors
     if ( $Result->code() ) {
 
-        if ( $Result->code() == LDAP_SIZELIMIT_EXCEEDED) {
+        if ( $Result->code() == LDAP_SIZELIMIT_EXCEEDED ) {
 
             # LDAP_SIZELIMIT_EXCEEDED result is ok if there
             # are more items in LDAP than search limit defined in Znuny or

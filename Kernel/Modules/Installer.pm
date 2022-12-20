@@ -8,8 +8,8 @@
 # --
 
 package Kernel::Modules::Installer;
-## nofilter(TidyAll::Plugin::OTRS::Perl::DBObject)
-## nofilter(TidyAll::Plugin::OTRS::Perl::Print)
+## nofilter(TidyAll::Plugin::Znuny::Perl::DBObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Print)
 
 use strict;
 use warnings;

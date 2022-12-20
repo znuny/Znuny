@@ -5843,7 +5843,7 @@ Thanks for your help!
 ' => '
 Estimado Cliente,
 
-Desafortunadamente no hemos podido detectar un número de ticket válido en su consulta, por lo que este email no puede ser procesado .
+Desafortunadamente no hemos podido detectar un número de ticket válido en su consulta, por lo que este email no puede ser procesado.
 
 Por favor cree un nuevo ticket a través del panel de cliente.
 

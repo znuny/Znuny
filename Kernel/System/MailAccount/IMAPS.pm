@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 # There are currently errors on Perl 5.20 on Travis, disable this check for now.
-## nofilter(TidyAll::Plugin::OTRS::Perl::SyntaxCheck)
+## nofilter(TidyAll::Plugin::Znuny::Perl::SyntaxCheck)
 use IO::Socket::SSL;
 
 use parent qw(Kernel::System::MailAccount::IMAP);

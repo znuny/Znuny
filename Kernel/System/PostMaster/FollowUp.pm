@@ -331,12 +331,12 @@ sub Run {
 
         # Get all valid services.
         my %ValidServices = reverse $Kernel::OM->Get('Kernel::System::Service')->ServiceList(
-           Valid        => 1,
-           KeepChildren => $ConfigObject->Get('Ticket::Service::KeepChildren') // 0,
-           UserID       => $Param{InmailUserID},
+            Valid        => 1,
+            KeepChildren => $ConfigObject->Get('Ticket::Service::KeepChildren') // 0,
+            UserID       => $Param{InmailUserID},
         );
 
-        if (!$ValidServices{$GetParam{'X-OTRS-FollowUp-Service'}}) {
+        if ( !$ValidServices{ $GetParam{'X-OTRS-FollowUp-Service'} } ) {
 
             # If service with given name does not exist or is invalid don't set it if not active.
 

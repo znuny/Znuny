@@ -1,3 +1,6 @@
+# 6.0.48 2022-12-20
+ - 2022-12-13 Fixed SQL injection in TicketSearch.pm. Thanks for hints to Tim Püttmanns, maxence.
+
 # 6.0.47 2022-11-23
  - 2022-11-10 Fixed overlapping input list in search dialog.
  - 2022-10-27 Fixed "Invalid date/time string" errors in otrs.Daemon.pl. Thanks to Paweł Bogusławski (@pboguslawski). [PR#311](https://github.com/znuny/Znuny/pull/311)
