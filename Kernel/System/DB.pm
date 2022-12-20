@@ -349,6 +349,32 @@ sub Quote {
         return $Text;
     }
 
+    # quote DateTime
+    if ( $Type eq 'DateTime' ) {
+        if ( $Text !~ m{\A(\d\d\d\d)-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)\z} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Caller   => 1,
+                Priority => 'error',
+                Message  => "Invalid DateTime in query '$Text'!",
+            );
+            return;
+        }
+        return $Text;
+    }
+
+    # quote Date
+    if ( $Type eq 'Date' ) {
+        if ( $Text !~ m{\A(\d\d\d\d)-(\d\d|\d)-(\d\d|\d)\z} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Caller   => 1,
+                Priority => 'error',
+                Message  => "Invalid Date in query '$Text'!",
+            );
+            return;
+        }
+        return $Text;
+    }
+
     # quote like strings
     if ( $Type eq 'Like' ) {
         return ${ $Self->{Backend}->Quote( \$Text, $Type ) };
