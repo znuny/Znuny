@@ -374,14 +374,17 @@ for my $Test (@Tests) {
     );
 
     my %Tickets = $TicketObject->TicketSearch(
-        UserID => 1,
-        ResponsibleIDs => [ $UserID,],
-        Result => 'HASH',
+        UserID         => 1,
+        ResponsibleIDs => [ $UserID, ],
+        Result         => 'HASH',
     );
 
-    for my $TicketID (keys %Tickets){
+    for my $TicketID ( sort keys %Tickets ) {
 
-        my %Ticket = $TicketObject->TicketGet($UserID=>1, TicketID =>$TicketID,);
+        my %Ticket = $TicketObject->TicketGet(
+            $UserID  => 1,
+            TicketID => $TicketID,
+        );
         $Self->True(
             $Ticket{ResponsibleID} gt 1,
             'Ticket responsible UserID is NOT Admin OTRS (Id: 1) but as expected: "' . $UserID ? $UserID : '' . '"',
