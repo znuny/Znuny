@@ -115,8 +115,6 @@ for my $PluginKey ( sort keys %{$PluginConfig} ) {
     }
 }
 
-my $ResponsibleUserID;
-
 # check ticket plugin if registered
 if ($PluginKeyTicket) {
 
@@ -142,8 +140,6 @@ if ($PluginKeyTicket) {
         $UserID,
         "Test user $UserID created",
     );
-
-    $ResponsibleUserID = $UserID;
 
     my $RandomID = $HelperObject->GetRandomID();
 
@@ -362,7 +358,7 @@ my @Tests = (
             'Plugin_TicketCreate_TypeID'                      => '105',
             'Plugin_TicketCreate_OffsetUnit'                  => '60',
             'Plugin_TicketCreate_SLAID'                       => '1',
-            'Plugin_TicketCreate_ResponsibleUserID'           => $ResponsibleUserID,
+            'Plugin_TicketCreate_ResponsibleUserID'           => '1',
             'Plugin_TicketCreate_ServiceID'                   => '1',
             'Plugin_TicketCreate_OwnerID'                     => '1',
             'Plugin_TicketCreate_StateID'                     => '1',
@@ -384,7 +380,7 @@ my @Tests = (
                 'TypeID'            => '105',
                 'OffsetUnit'        => '60',
                 'SLAID'             => '1',
-                'ResponsibleUserID' => $ResponsibleUserID,
+                'ResponsibleUserID' => '1',
                 'ServiceID'         => '1',
                 'OwnerID'           => '1',
                 'StateID'           => '1',
@@ -410,7 +406,7 @@ my @Tests = (
             'Plugin[TicketCreate][Config][TypeID]'                      => '105',
             'Plugin[TicketCreate][Config][OffsetUnit]'                  => '60',
             'Plugin[TicketCreate][Config][SLAID]'                       => '1',
-            'Plugin[TicketCreate][Config][ResponsibleUserID]'           => $ResponsibleUserID,
+            'Plugin[TicketCreate][Config][ResponsibleUserID]'           => '1',
             'Plugin[TicketCreate][Config][ServiceID]'                   => '1',
             'Plugin[TicketCreate][Config][OwnerID]'                     => '1',
             'Plugin[TicketCreate][Config][StateID]'                     => '1',
@@ -432,7 +428,7 @@ my @Tests = (
                 'TypeID'            => '105',
                 'OffsetUnit'        => '60',
                 'SLAID'             => '1',
-                'ResponsibleUserID' => $ResponsibleUserID,
+                'ResponsibleUserID' => '1',
                 'ServiceID'         => '1',
                 'OwnerID'           => '1',
                 'StateID'           => '1',
