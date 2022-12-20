@@ -1,5 +1,5 @@
 # 6.4.5 2022-12-20
- - 2022-12-13 Fixed SQL injection in TicketSearch.pm. Thanks for hints to Tim Püttmanns, maxence.
+ - 2022-12-13 Fixed SQL injection in TicketSearch.pm (CVE-2022-4427). Thanks for hints to Tim Püttmanns, maxence.
 
 # 6.4.4 2022-11-23
  - 2022-11-10 Fixed overlapping input list in search dialog.
@@ -256,7 +256,7 @@
  - 2021-06-15 Column list validation before saving agent preferences (#84). Thanks to Paweł Bogusławski (@pboguslawski). [#84](https://github.com/znuny/Znuny/pull/84)
 
 # 6.0.48 2022-12-20
- - 2022-12-13 Fixed SQL injection in TicketSearch.pm. Thanks for hints to Tim Püttmanns, maxence.
+ - 2022-12-13 Fixed SQL injection in TicketSearch.pm (CVE-2022-4427). Thanks for hints to Tim Püttmanns, maxence.
 
 # 6.0.47 2022-11-23
  - 2022-11-10 Fixed overlapping input list in search dialog.
