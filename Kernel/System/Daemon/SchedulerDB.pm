@@ -1557,7 +1557,7 @@ sub CronTaskSummary {
         next JOBNAME if !$JobConfig;
         next JOBNAME if !$JobConfig->{Schedule};
 
-        $TaskLookup{$Config->{$JobName}->{TaskName}} = $JobConfig->{Schedule};
+        $TaskLookup{ $Config->{$JobName}->{TaskName} } = $JobConfig->{Schedule};
     }
 
     return $Self->RecurrentTaskSummary(

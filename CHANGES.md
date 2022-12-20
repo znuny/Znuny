@@ -1,3 +1,6 @@
+# 6.4.5 2022-12-20
+ - 2022-12-13 Fixed SQL injection in TicketSearch.pm. Thanks for hints to Tim Püttmanns, maxence.
+
 # 6.4.4 2022-11-23
  - 2022-11-10 Fixed overlapping input list in search dialog.
  - 2022-11-09 Fixed displayed value for dynamic field type WebserviceText when template placeholder <OTRS_TICKET_DynamicField_*_Value> is being used. [#297](https://github.com/znuny/Znuny/issues/297)
@@ -251,6 +254,9 @@
  - 2021-06-15 Improvements for Dev::Code::CPANUpdate (#38). Thanks to Renée Bäcker (@reneeb). [#38](https://github.com/znuny/Znuny/pull/38)
  - 2021-06-15 Use ticket title as the default appointment title (#90). Thanks to Renée Bäcker (@reneeb). [#90](https://github.com/znuny/Znuny/pull/90)
  - 2021-06-15 Column list validation before saving agent preferences (#84). Thanks to Paweł Bogusławski (@pboguslawski). [#84](https://github.com/znuny/Znuny/pull/84)
+
+# 6.0.48 2022-12-20
+ - 2022-12-13 Fixed SQL injection in TicketSearch.pm. Thanks for hints to Tim Püttmanns, maxence.
 
 # 6.0.47 2022-11-23
  - 2022-11-10 Fixed overlapping input list in search dialog.
