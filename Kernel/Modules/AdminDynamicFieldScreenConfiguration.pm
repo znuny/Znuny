@@ -278,7 +278,7 @@ sub _ShowOverview {
 
     $LayoutObject->Block( Name => 'Overview' );
 
-    for my $DynamicFieldScreen ( sort keys %DynamicFieldScreens ) {
+    for my $DynamicFieldScreen ( sort { $DynamicFieldScreens{$a} cmp $DynamicFieldScreens{$b} } keys %DynamicFieldScreens ) {
         $LayoutObject->Block(
             Name => 'DynamicFieldScreenOverviewRow',
             Data => {
@@ -288,7 +288,7 @@ sub _ShowOverview {
         );
     }
 
-    for my $DefaultColumnsScreen ( sort keys %DefaultColumnsScreens ) {
+    for my $DefaultColumnsScreen ( sort { $DefaultColumnsScreens{$a} cmp $DefaultColumnsScreens{$b} } keys %DefaultColumnsScreens ) {
         $LayoutObject->Block(
             Name => 'DefaultColumnsScreenOverviewRow',
             Data => {
@@ -419,7 +419,7 @@ sub _ShowEdit {
         },
     );
 
-    for my $Element ( sort keys %OtherElements ) {
+    for my $Element ( sort { $OtherElements{$a} cmp $OtherElements{$b} } keys %OtherElements ) {
         $LayoutObject->Block(
             Name => 'ActionOverviewRowEdit',
             Data => {
