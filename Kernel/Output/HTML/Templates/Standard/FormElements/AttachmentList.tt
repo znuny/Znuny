@@ -72,6 +72,9 @@
     data-file-types="[% FileTypes | html %]"
     data-max-size-per-file="[% MaxSizePerFile | html %]"
     data-max-size-per-file-hr="[% IF MaxSizePerFile %][% MaxSizePerFile | Localize('Filesize') | html %][% END %]"
+
+#   See Kernel::System::Main::FilenameCleanUp for max. length of filename (200 instead of 220 because meta file name extensions (like .ContentType) count to the file length)
+    data-max-filename-length="200"
     data-form-id="[% FormID | html %]"
     type="file"
     size="40"

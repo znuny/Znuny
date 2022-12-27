@@ -12,6 +12,8 @@ package Kernel::System::Web::UploadCache::FS;
 use strict;
 use warnings;
 
+use File::Basename;
+
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Log',
@@ -256,16 +258,18 @@ sub FormIDGetAllFilesData {
 
     my $Counter = 0;
 
-    FILE:
-    for my $File (@List) {
+    FILEPATH:
+    for my $FilePath (@List) {
 
         # ignore meta files
-        next FILE if $File =~ /\.ContentType$/;
-        next FILE if $File =~ /\.ContentID$/;
-        next FILE if $File =~ /\.Disposition$/;
+        next FILEPATH if $FilePath =~ /\.ContentType$/;
+        next FILEPATH if $FilePath =~ /\.ContentID$/;
+        next FILEPATH if $FilePath =~ /\.Disposition$/;
 
         $Counter++;
-        my $FileSize = -s $File;
+        my $FileSize = -s $FilePath;
+
+        my $Filename = basename($FilePath);
 
         # human readable file size
         if ( defined $FileSize ) {
@@ -276,22 +280,22 @@ sub FormIDGetAllFilesData {
             }
         }
         my $Content = $MainObject->FileRead(
-            Location => $File,
+            Location => $FilePath,
             Mode     => 'binmode',    # optional - binmode|utf8
         );
-        next FILE if !$Content;
+        next FILEPATH if !$Content;
 
         my $ContentType = $MainObject->FileRead(
-            Location => "$File.ContentType",
-            Mode     => 'binmode',             # optional - binmode|utf8
+            Location => "$FilePath.ContentType",
+            Mode     => 'binmode',                 # optional - binmode|utf8
         );
-        next FILE if !$ContentType;
+        next FILEPATH if !$ContentType;
 
         my $ContentID = $MainObject->FileRead(
-            Location => "$File.ContentID",
-            Mode     => 'binmode',             # optional - binmode|utf8
+            Location => "$FilePath.ContentID",
+            Mode     => 'binmode',                 # optional - binmode|utf8
         );
-        next FILE if !$ContentID;
+        next FILEPATH if !$ContentID;
 
         # verify if content id is empty, set to undef
         if ( !${$ContentID} ) {
@@ -299,20 +303,18 @@ sub FormIDGetAllFilesData {
         }
 
         my $Disposition = $MainObject->FileRead(
-            Location => "$File.Disposition",
-            Mode     => 'binmode',             # optional - binmode|utf8
+            Location => "$FilePath.Disposition",
+            Mode     => 'binmode',                 # optional - binmode|utf8
         );
-        next FILE if !$Disposition;
+        next FILEPATH if !$Disposition;
 
-        # strip filename
-        $File =~ s/^.*\/(.+?)$/$1/;
         push(
             @Data,
             {
                 Content     => ${$Content},
                 ContentID   => ${$ContentID},
                 ContentType => ${$ContentType},
-                Filename    => $File,
+                Filename    => $Filename,
                 Filesize    => $FileSize,
                 FileID      => $Counter,
                 Disposition => ${$Disposition},
@@ -354,16 +356,18 @@ sub FormIDGetAllFilesMeta {
 
     my $Counter = 0;
 
-    FILE:
-    for my $File (@List) {
+    FILEPATH:
+    for my $FilePath (@List) {
 
         # ignore meta files
-        next FILE if $File =~ /\.ContentType$/;
-        next FILE if $File =~ /\.ContentID$/;
-        next FILE if $File =~ /\.Disposition$/;
+        next FILEPATH if $FilePath =~ /\.ContentType$/;
+        next FILEPATH if $FilePath =~ /\.ContentID$/;
+        next FILEPATH if $FilePath =~ /\.Disposition$/;
 
         $Counter++;
-        my $FileSize = -s $File;
+        my $FileSize = -s $FilePath;
+
+        my $Filename = basename($FilePath);
 
         # human readable file size
         if ( defined $FileSize ) {
@@ -375,16 +379,16 @@ sub FormIDGetAllFilesMeta {
         }
 
         my $ContentType = $MainObject->FileRead(
-            Location => "$File.ContentType",
-            Mode     => 'binmode',             # optional - binmode|utf8
+            Location => "$FilePath.ContentType",
+            Mode     => 'binmode',                 # optional - binmode|utf8
         );
-        next FILE if !$ContentType;
+        next FILEPATH if !$ContentType;
 
         my $ContentID = $MainObject->FileRead(
-            Location => "$File.ContentID",
-            Mode     => 'binmode',             # optional - binmode|utf8
+            Location => "$FilePath.ContentID",
+            Mode     => 'binmode',                 # optional - binmode|utf8
         );
-        next FILE if !$ContentID;
+        next FILEPATH if !$ContentID;
 
         # verify if content id is empty, set to undef
         if ( !${$ContentID} ) {
@@ -392,19 +396,17 @@ sub FormIDGetAllFilesMeta {
         }
 
         my $Disposition = $MainObject->FileRead(
-            Location => "$File.Disposition",
-            Mode     => 'binmode',             # optional - binmode|utf8
+            Location => "$FilePath.Disposition",
+            Mode     => 'binmode',                 # optional - binmode|utf8
         );
-        next FILE if !$Disposition;
+        next FILEPATH if !$Disposition;
 
-        # strip filename
-        $File =~ s/^.*\/(.+?)$/$1/;
         push(
             @Data,
             {
                 ContentID   => ${$ContentID},
                 ContentType => ${$ContentType},
-                Filename    => $File,
+                Filename    => $Filename,
                 Filesize    => $FileSize,
                 FileID      => $Counter,
                 Disposition => ${$Disposition},

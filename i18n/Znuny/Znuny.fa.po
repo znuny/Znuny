@@ -25498,3 +25498,7 @@ msgstr "اهمیت"
 msgid "Mapping of non-standard time zones to official ones."
 msgstr ""
 
+#. JS File: var/httpd/htdocs/js/Core.UI.js
+msgid "The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s"
+msgstr ""
+
