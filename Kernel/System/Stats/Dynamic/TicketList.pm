@@ -1639,10 +1639,10 @@ sub _TicketAttributes {
         Number       => Translatable('Number'),               # only a counter for a better readability
         TicketNumber => $ConfigObject->Get('Ticket::Hook'),
 
-        #TicketID       => 'TicketID',
-        Age   => 'Age',
-        Title => 'Title',
-        Queue => 'Queue',
+        TicketID => 'TicketID',
+        Age      => 'Age',
+        Title    => 'Title',
+        Queue    => 'Queue',
 
         #QueueID        => 'QueueID',
         State => 'State',
@@ -1750,6 +1750,7 @@ sub _SortedAttributes {
     my @SortedAttributes = qw(
         Number
         TicketNumber
+        TicketID
         Age
         Title
         Created

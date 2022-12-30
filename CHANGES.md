@@ -1,4 +1,5 @@
 # 6.5.1 2023-??-??
+ - 2022-12-29 Reenabled TicketID for reporting (Dynamic/TicketList).
  - 2022-12-19 Added check for maximum filename length to file uploads.
  - 2022-12-16 Added new function Kernel::System::Web::Request::GetParams() to get request parameters.
  - 2022-12-13 Fixed SQL injection in TicketSearch.pm (CVE-2022-4427). Thanks for hints to Tim Püttmanns, maxence.
