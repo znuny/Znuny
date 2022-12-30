@@ -242,6 +242,10 @@ sub _TasksGet {
             Message => 'Migrate dynamic fields',
             Module  => 'scripts::Migration::Znuny::MigrateDynamicFields',
         },
+        {
+            Message => 'Migrate notification events',
+            Module  => 'scripts::Migration::Znuny::MigrateNotificationEvents',
+        },
 
         # NOTE: UninstallMergedPackages has to be called only after
         # SysConfig settings of the merged packages have been migrated.

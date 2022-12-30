@@ -1675,6 +1675,15 @@ sub _Replace {
     # replace it
     $HashGlobalReplace->( $Tag, %Ticket, %DynamicFieldDisplayValues );
 
+    # OTRS_TICKET_LAST_ARTICLE_ID
+    my $ArticleObject     = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+    my @LastTicketArticle = $ArticleObject->ArticleList(
+        TicketID => $Ticket{TicketID},
+        OnlyLast => 1,
+    );
+    my $LastTicketArticleID = @LastTicketArticle ? $LastTicketArticle[0]->{ArticleID} : '';
+    $Param{Text} =~ s/$Start OTRS_TICKET_LAST_ARTICLE_ID $End/$LastTicketArticleID/gixms;
+
     # COMPAT
     $Param{Text} =~ s/$Start OTRS_TICKET_ID $End/$Ticket{TicketID}/gixms;
     $Param{Text} =~ s/$Start OTRS_TICKET_NUMBER $End/$Ticket{TicketNumber}/gixms;
@@ -1703,8 +1712,6 @@ sub _Replace {
     # - if ArticleID is sent, data is from selected article.
     # - if ArticleID is not sent, data is from last customer/agent/any article.
     if ( $Param{Template} && $Ticket{TicketID} ) {
-        my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
-
         if ( $Param{Template} eq 'Note' ) {
 
             # Get last article from agent.
