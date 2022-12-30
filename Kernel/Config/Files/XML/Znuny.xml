@@ -2292,9 +2292,9 @@
                         <Array>
                         </Array>
                     </Item>
-                    <Item Key="Description">Autompletion for rich text editor.</Item>
-                    <Item Key="Title">Autompletion for rich text editor</Item>
-                    <Item Key="NavBarName">Autompletion for rich text editor</Item>
+                    <Item Key="Description">Autocompletion for rich text editor.</Item>
+                    <Item Key="Title">Autocompletion for rich text editor</Item>
+                    <Item Key="NavBarName">Autocompletion for rich text editor</Item>
                 </Hash>
             </Item>
         </Value>
@@ -2313,9 +2313,30 @@
                         <Array>
                         </Array>
                     </Item>
-                    <Item Key="Description">Autompletion for rich text editor.</Item>
-                    <Item Key="Title">Autompletion for rich text editor</Item>
-                    <Item Key="NavBarName">Autompletion for rich text editor</Item>
+                    <Item Key="Description">Autocompletion for rich text editor.</Item>
+                    <Item Key="Title">Autocompletion for rich text editor</Item>
+                    <Item Key="NavBarName">Autocompletion for rich text editor</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="PublicFrontend::Module###AJAXRichTextAutocompletion" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the public interface.</Description>
+        <Navigation>Frontend::Public::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Autocompletion for rich text editor.</Item>
+                    <Item Key="Title">Autocompletion for rich text editor</Item>
+                    <Item Key="NavBarName">Autocompletion for rich text editor</Item>
                 </Hash>
             </Item>
         </Value>
