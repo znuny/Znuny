@@ -18,8 +18,7 @@ Znuny.Agent.TicketMention = (function (TargetNS) {
     TargetNS.Init = function () {
         var Data = {
             Action:    'Mentions',
-            Subaction: 'Remove',
-            MentionedUserID: $('#RemoveMention').data('user-id'),
+            Subaction: 'Remove'
         };
 
         $('#RemoveMention').on('click',function(Event){
