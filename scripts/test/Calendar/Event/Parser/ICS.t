@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021-2023 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -92,17 +92,17 @@ $Self->{AttachmentDataProperties} = {
     },
     DTStart => {
         Default => [
-            '20220510T100000Z',
+            '20230510T100000Z',
         ],
     },
     DTEnd => {
         Default => [
-            '20220510T123000Z',
+            '20230510T123000Z',
         ],
     },
     DTStamp => {
         Default => [
-            '20220209T114135Z',
+            '20230209T114135Z',
         ],
     },
     ProdID => {
@@ -112,12 +112,12 @@ $Self->{AttachmentDataProperties} = {
     },
     Created => {
         Default => [
-            '20220209T114050Z',
+            '20230209T114050Z',
         ],
     },
     LastModified => {
         Default => [
-            '20220209T114133Z'
+            '20230209T114133Z'
         ],
     },
     Summary => {
@@ -412,7 +412,7 @@ my $AttachmentsData = [
                                     'Minute' => 30,
                                     'Month'  => 5,
                                     'Second' => 0,
-                                    'Year'   => 2022
+                                    'Year'   => 2023
                                 },
                                 'Start' => {
                                     'Day'    => 10,
@@ -420,7 +420,7 @@ my $AttachmentsData = [
                                     'Minute' => 0,
                                     'Month'  => 5,
                                     'Second' => 0,
-                                    'Year'   => 2022
+                                    'Year'   => 2023
                                 }
                             }
                         ],
@@ -452,9 +452,9 @@ VERSION:2.0
 CALSCALE:GREGORIAN
 METHOD:REQUEST
 BEGIN:VEVENT
-DTSTART:20220726T160000Z
-DTEND:20220726T163000Z
-DTSTAMP:20220722T094347Z
+DTSTART:20230726T160000Z
+DTEND:20230726T163000Z
+DTSTAMP:20230722T094347Z
 ORGANIZER;CN=$Organizer->{Default}->[0]:mailto:$Organizer->{Default}->[0]
 UID:$UID->{Default}->[0]\@google.com
 ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=
@@ -463,9 +463,9 @@ ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;RSVP=TRUE
  ;CN=$Attendee->{Default}->[1];X-NUM-GUESTS=0:mailto:$Attendee->{Default}->[1]
 X-GOOGLE-CONFERENCE:https://meet.google.com/meet-code
 X-MICROSOFT-CDO-OWNERAPPTID:-9999999999
-CREATED:20220722T094346Z
+CREATED:20230722T094346Z
 DESCRIPTION:$Description->{Google}->[0]
-LAST-MODIFIED:20220722T094346Z
+LAST-MODIFIED:20230722T094346Z
 LOCATION: $Location->{Default}->[0]
 SEQUENCE:0
 STATUS:CONFIRMED
@@ -495,7 +495,7 @@ END:VCALENDAR
                         'Dates'            => [
                             {
                                 'End' => {
-                                    'Year'   => 2022,
+                                    'Year'   => 2023,
                                     'Hour'   => 16,
                                     'Month'  => 7,
                                     'Day'    => 26,
@@ -503,7 +503,7 @@ END:VCALENDAR
                                     'Minute' => 30
                                 },
                                 'Start' => {
-                                    'Year'   => 2022,
+                                    'Year'   => 2023,
                                     'Hour'   => 16,
                                     'Month'  => 7,
                                     'Day'    => 26,
@@ -559,12 +559,12 @@ BEGIN:VEVENT
 ATTENDEE;CN=$Attendee->{Default}->[0];RSVP=TRUE:mailto:$Attendee->{Default}->[0]
 ATTENDEE;CN=$Attendee->{Default}->[1];ROLE=OPT-PARTICIPANT;RSVP=TRUE:mailto:$Attendee->{Default}->[1]
 CLASS:PUBLIC
-CREATED:20220131T105203Z
+CREATED:20230131T105203Z
 DESCRIPTION: $Description->{Default}->[0]
-DTEND;TZID=\"Pacific Standard Time\":20220202T113000
-DTSTAMP:20220131T105203Z
-DTSTART;TZID=\"Pacific Standard Time\":20220202T110000
-LAST-MODIFIED:20220131T105203Z
+DTEND;TZID=\"Pacific Standard Time\":20230202T113000
+DTSTAMP:20230131T105203Z
+DTSTART;TZID=\"Pacific Standard Time\":20230202T110000
+LAST-MODIFIED:20230131T105203Z
 LOCATION:$Location->{Default}->[0]
 ORGANIZER;CN=$Organizer->{Default}->[0]:mailto:$Organizer->{Default}->[0]
 PRIORITY:9
@@ -597,7 +597,7 @@ X-MICROSOFT-CDO-IMPORTANCE:0
 X-MICROSOFT-CDO-INTENDEDSTATUS:BUSY
 X-MICROSOFT-DISALLOW-COUNTER:FALSE
 X-MS-OLK-APPTLASTSEQUENCE:2
-X-MS-OLK-APPTSEQTIME:20220131T104458Z
+X-MS-OLK-APPTSEQTIME:20230131T104458Z
 X-MS-OLK-AUTOSTARTCHECK:FALSE
 X-MS-OLK-CONFTYPE:0
 BEGIN:VALARM
@@ -633,7 +633,7 @@ END:VCALENDAR
                                     'Minute' => 30,
                                     'Month'  => 2,
                                     'Second' => 0,
-                                    'Year'   => 2022
+                                    'Year'   => 2023
                                 },
                                 'Start' => {
                                     'Day'    => 2,
@@ -641,7 +641,7 @@ END:VCALENDAR
                                     'Minute' => 0,
                                     'Month'  => 2,
                                     'Second' => 0,
-                                    'Year'   => 2022
+                                    'Year'   => 2023
                                 }
                             }
                         ],
@@ -690,16 +690,16 @@ RRULE:FREQ=YEARLY;BYDAY=-1SU;BYMONTH=10
 END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
-CREATED:20220209T115543Z
-LAST-MODIFIED:20220209T115627Z
-DTSTAMP:20220209T115627Z
+CREATED:20230209T115543Z
+LAST-MODIFIED:20230209T115627Z
+DTSTAMP:20230209T115627Z
 UID:5ad4aa23-4z81-468f-96f6-5a4ff3bv2376
 SUMMARY:$Summary->{Default}->[0]
 ORGANIZER;PARTSTAT=NEEDS-ACTION;ROLE=REQ-PARTICIPANT:mailto:$Organizer->{Default}->[0]
 ATTENDEE;CN=Znuny System - test;PARTSTAT=NEEDS-ACTION;ROLE=REQ-PARTI
  CIPANT:mailto:$Attendee->{Default}->[0]
-DTSTART;TZID=Europe/Warsaw:20220517T130000
-DTEND;TZID=Europe/Warsaw:20220517T140000
+DTSTART;TZID=Europe/Warsaw:20230517T130000
+DTEND;TZID=Europe/Warsaw:20230517T140000
 TRANSP:OPAQUE
 LOCATION:$Location->{Default}->[0]
 END:VEVENT
@@ -730,7 +730,7 @@ END:VCALENDAR
                                     'Minute' => 0,
                                     'Month'  => 5,
                                     'Second' => 0,
-                                    'Year'   => 2022
+                                    'Year'   => 2023
                                 },
                                 'Start' => {
                                     'Day'    => 17,
@@ -738,7 +738,7 @@ END:VCALENDAR
                                     'Minute' => 0,
                                     'Month'  => 5,
                                     'Second' => 0,
-                                    'Year'   => 2022
+                                    'Year'   => 2023
                                 }
                             }
                         ],
@@ -786,7 +786,7 @@ END:VCALENDAR
                                     'Minute' => 30,
                                     'Month'  => 5,
                                     'Second' => 0,
-                                    'Year'   => 2022
+                                    'Year'   => 2023
                                 },
                                 'Start' => {
                                     'Day'    => 10,
@@ -794,7 +794,7 @@ END:VCALENDAR
                                     'Minute' => 0,
                                     'Month'  => 5,
                                     'Second' => 0,
-                                    'Year'   => 2022
+                                    'Year'   => 2023
                                 }
                             }
                         ],
@@ -845,7 +845,7 @@ END:VCALENDAR
                                     'Minute' => 30,
                                     'Month'  => 5,
                                     'Second' => 0,
-                                    'Year'   => 2022
+                                    'Year'   => 2023
                                 },
                                 'Start' => {
                                     'Day'    => 10,
@@ -853,7 +853,7 @@ END:VCALENDAR
                                     'Minute' => 0,
                                     'Month'  => 5,
                                     'Second' => 0,
-                                    'Year'   => 2022
+                                    'Year'   => 2023
                                 }
                             }
                         ],
@@ -931,7 +931,7 @@ my $StringData = [
                                             'Minute' => 30,
                                             'Month'  => 5,
                                             'Second' => 0,
-                                            'Year'   => 2022
+                                            'Year'   => 2023
                                         },
                                         'Start' => {
                                             'Day'    => 10,
@@ -939,7 +939,7 @@ my $StringData = [
                                             'Minute' => 0,
                                             'Month'  => 5,
                                             'Second' => 0,
-                                            'Year'   => 2022
+                                            'Year'   => 2023
                                         }
                                     }
                                 ],
@@ -994,7 +994,7 @@ my $StringData = [
                                             'Minute' => 30,
                                             'Month'  => 5,
                                             'Second' => 0,
-                                            'Year'   => 2022
+                                            'Year'   => 2023
                                         },
                                         'Start' => {
                                             'Day'    => 10,
@@ -1002,7 +1002,7 @@ my $StringData = [
                                             'Minute' => 0,
                                             'Month'  => 5,
                                             'Second' => 0,
-                                            'Year'   => 2022
+                                            'Year'   => 2023
                                         }
                                     }
                                 ],
@@ -1074,7 +1074,7 @@ my $AttachmentsWithStringInvite = {
                                         'Minute' => 30,
                                         'Month'  => 5,
                                         'Second' => 0,
-                                        'Year'   => 2022
+                                        'Year'   => 2023
                                     },
                                     'Start' => {
                                         'Day'    => 10,
@@ -1082,7 +1082,7 @@ my $AttachmentsWithStringInvite = {
                                         'Minute' => 0,
                                         'Month'  => 5,
                                         'Second' => 0,
-                                        'Year'   => 2022
+                                        'Year'   => 2023
                                     }
                                 }
                             ],
