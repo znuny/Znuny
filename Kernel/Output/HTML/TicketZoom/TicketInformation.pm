@@ -496,7 +496,7 @@ sub Run {
     };
 }
 
-# Checks if dynamic fields of types WebserviceText and WebserviceMultiselect
+# Checks if dynamic fields of types WebserviceDropdown and WebserviceMultiselect
 # should be skipped if they have no display value and SysConfig option
 # Ticket::Frontend::AgentTicketZoom###HideWebserviceDynamicFieldsWithoutDisplayValue
 # is enabled.

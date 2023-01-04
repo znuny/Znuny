@@ -23,7 +23,7 @@ Kernel::GenericInterface::Invoker::Test::DynamicFieldWebservice::TestGet
 
 =head1 SYNOPSIS
 
-TestGet invoker for dynamic field type WebserviceText.
+TestGet invoker for dynamic field types WebserviceDropdown and WebserviceMultiselect.
 
 =head1 PUBLIC INTERFACE
 

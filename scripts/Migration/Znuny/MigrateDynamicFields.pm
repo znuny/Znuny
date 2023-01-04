@@ -32,7 +32,8 @@ sub Run {
 
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
-    # Nothing to migrate yet.
+    return if !$Self->_MigrateDynamicFieldWebserviceTextConfig(%Param);
+
     #     return if !$Self->_MigrateDynamicFieldExample(%Param);
 
     $CacheObject->CleanUp(
@@ -40,6 +41,33 @@ sub Run {
     );
     $CacheObject->CleanUp(
         Type => 'DynamicFieldValue',
+    );
+
+    return 1;
+}
+
+# Migrates dynamic fields of type 'WebserviceText' to 'WebserviceDropdown'.
+sub _MigrateDynamicFieldWebserviceTextConfig {
+    my ( $Self, %Param ) = @_;
+
+    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+
+    # Since storage and config is identical for WebserviceText and WebserviceDropdown,
+    # only the field type has to be updated.
+    my $SQL = '
+        UPDATE dynamic_field
+        SET    field_type = ?
+        WHERE  field_type = ?
+    ';
+
+    my @Bind = (
+        \'WebserviceDropdown',
+        \'WebserviceText',
+    );
+
+    return if !$DBObject->Do(
+        SQL  => $SQL,
+        Bind => \@Bind,
     );
 
     return 1;

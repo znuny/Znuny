@@ -24411,7 +24411,7 @@ msgid "Adds ticket attribute relations based on CSV/Excel data."
 msgstr ""
 
 #. SysConfig
-msgid "Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect"
+msgid "Admin configuration dialog for dynamic field types WebserviceDropdown and WebserviceMultiselect"
 msgstr ""
 
 #. SysConfig
@@ -24611,7 +24611,7 @@ msgid "Ignores not ticket related attributes."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty."
+msgid "It might happen that a dynamic field of type WebserviceDropdown or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
@@ -24852,10 +24852,6 @@ msgstr ""
 
 #. SysConfig
 msgid "Web service (Multiselect)"
-msgstr ""
-
-#. SysConfig
-msgid "Web service (Text)"
 msgstr ""
 
 #. SysConfig
@@ -25492,6 +25488,10 @@ msgstr "Tiempo Mínimo Entre Incidentes"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
 msgid "Criticality"
+msgstr ""
+
+#. SysConfig
+msgid "Web service (Dropdown)"
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml

@@ -5,7 +5,7 @@
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
-package Kernel::System::DynamicField::Driver::WebserviceMultiselect;
+package Kernel::System::DynamicField::Driver::WebserviceDropdown;
 
 use strict;
 use warnings;
@@ -13,7 +13,7 @@ use warnings;
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::System::DB;
 
-use parent qw(Kernel::System::DynamicField::Driver::Multiselect);
+use parent qw(Kernel::System::DynamicField::Driver::Dropdown);
 use parent qw(Kernel::System::DynamicField::Driver::BaseWebservice);
 
 our @ObjectDependencies = (
@@ -28,24 +28,18 @@ sub ValueSet {
 
     my $DynamicFieldValueObject = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
 
-    my @Values = ( $Param{Value} );
-    if ( ref $Param{Value} eq 'ARRAY' ) {
-        @Values = @{ $Param{Value} };
-    }
-
     # if there is at least one value to set, this means one or more values are selected,
     #    set those values!
-    if (@Values) {
-        my @ValueText;
-        for my $Item (@Values) {
-            push @ValueText, { ValueText => $Item };
-        }
-
+    if ( IsStringWithData( $Param{Value} ) ) {
         my $Success = $DynamicFieldValueObject->ValueSet(
             FieldID  => $Param{DynamicFieldConfig}->{ID},
             ObjectID => $Param{ObjectID},
-            Value    => \@ValueText,
-            UserID   => $Param{UserID},
+            Value    => [
+                {
+                    ValueText => $Param{Value},
+                },
+            ],
+            UserID => $Param{UserID},
         );
 
         return $Success;
@@ -87,28 +81,18 @@ sub EditFieldRender {
         );
     }
 
-    # check if a value in a template (GenericAgent etc.)
-    # is configured for this dynamic field
-    if (
-        IsHashRefWithData( $Param{Template} )
-        && defined $Param{Template}->{$FieldName}
-        )
-    {
-        $Value = $Param{Template}->{$FieldName};
-    }
-
     # extract the dynamic field value from the web request
     my $FieldValue = $Self->EditFieldValueGet(
         %Param,
     );
 
     # set values from ParamObject if present
-    if ( IsArrayRefWithData($FieldValue) ) {
+    if ( IsStringWithData($FieldValue) ) {
         $Value = $FieldValue;
     }
 
     # check and set class if necessary
-    my $FieldClass = 'DynamicFieldText Modernize';
+    my $FieldClass = 'DynamicFieldDropdown Modernize';
     if ( defined $Param{Class} && $Param{Class} ne '' ) {
         $FieldClass .= ' ' . $Param{Class};
     }
@@ -133,16 +117,6 @@ sub EditFieldRender {
     # set PossibleValues, use PossibleValuesFilter if defined
     my $PossibleValues = $Param{PossibleValuesFilter} // $Self->PossibleValuesGet(%Param);
 
-    # check value
-    my $SelectedValuesArrayRef;
-    if ( defined $Value ) {
-        $SelectedValuesArrayRef = [$Value];
-
-        if ( ref $Value eq 'ARRAY' ) {
-            $SelectedValuesArrayRef = $Value;
-        }
-    }
-
     my $DataValues = $Self->BuildSelectionDataGet(
         DynamicFieldConfig => $Param{DynamicFieldConfig},
         PossibleValues     => $PossibleValues,
@@ -150,13 +124,8 @@ sub EditFieldRender {
     );
 
     # add default value if no DataValues exists
-    if ( !IsHashRefWithData($DataValues) && $Value ) {
-        if ( ref $Value eq 'ARRAY' ) {
-            %{$DataValues} = map { $_ => $_ } @{$Value};
-        }
-        else {
-            $DataValues = { $Value => $Value };
-        }
+    if ( !IsHashRefWithData($DataValues) && IsStringWithData($Value) ) {
+        $DataValues = { $Value => $Value };
     }
     elsif ( !IsHashRefWithData($DataValues) ) {
         $DataValues = { ' ' => ' ' };
@@ -165,13 +134,13 @@ sub EditFieldRender {
     my $HTMLString = $Param{LayoutObject}->BuildSelection(
         Data         => $DataValues || {},
         Name         => $FieldName,
-        SelectedID   => $SelectedValuesArrayRef,
+        SelectedID   => $Value,
         Translation  => $FieldConfig->{TranslatableValues} || 0,
         PossibleNone => 0,
         TreeView     => $FieldConfig->{TreeView} || 0,
         Class        => $FieldClass,
         HTMLQuote    => 1,
-        Multiple     => 1,
+        Multiple     => 0,
     );
 
     if ( $FieldConfig->{TreeView} ) {
@@ -262,7 +231,7 @@ sub EditFieldValueValidate {
     my ( $Self, %Param ) = @_;
 
     # get the field value from the http request
-    my $Values = $Self->EditFieldValueGet(
+    my $Value = $Self->EditFieldValueGet(
         DynamicFieldConfig => $Param{DynamicFieldConfig},
         ParamObject        => $Param{ParamObject},
 
@@ -274,7 +243,7 @@ sub EditFieldValueValidate {
     my $ErrorMessage;
 
     # perform necessary validations
-    if ( $Param{Mandatory} && !IsArrayRefWithData($Values) ) {
+    if ( $Param{Mandatory} && !IsStringWithData($Value) ) {
         return {
             ServerError => 1,
         };
@@ -289,143 +258,22 @@ sub EditFieldValueValidate {
     return $Result;
 }
 
-# this function is used in AgentTicketZoom | ProcessWidgetDynamicField
 sub DisplayValueRender {
     my ( $Self, %Param ) = @_;
 
+    # Fetch display value from dynamic field Webservice.
     my $DynamicFieldWebserviceObject = $Kernel::OM->Get('Kernel::System::DynamicField::Webservice');
 
-    $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
+    return $Self->SUPER::DisplayValueRender(%Param) if !defined $Param{Value};
 
-    # set HTMLOutput as default if not specified
-    if ( !defined $Param{HTMLOutput} ) {
-        $Param{HTMLOutput} = 1;
-    }
-
-    # set Value and Title variables
-    my $Value         = '';
-    my $Title         = '';
-    my $ValueMaxChars = $Param{ValueMaxChars} || '';
-    my $TitleMaxChars = $Param{TitleMaxChars} || '';
-
-    # check value
-    my @Values;
-    if ( ref $Param{Value} eq 'ARRAY' ) {
-        @Values = @{ $Param{Value} };
-    }
-    else {
-        @Values = ( $Param{Value} );
-    }
-
-    # get real values
-    my $PossibleValues     = $Param{DynamicFieldConfig}->{Config}->{PossibleValues};
-    my $TranslatableValues = $Param{DynamicFieldConfig}->{Config}->{TranslatableValues};
-
-    my @ReadableValues;
-    my @ReadableTitles;
-
-    my $ShowValueEllipsis;
-    my $ShowTitleEllipsis;
-
-    ITEM:
-    for my $Item (@Values) {
-        next ITEM if !$Item;
-
-        my $ReadableValue = $Item;
-
-        if ( $PossibleValues->{$Item} ) {
-            $ReadableValue = $PossibleValues->{$Item};
-            if ($TranslatableValues) {
-                $ReadableValue = $Param{LayoutObject}->{LanguageObject}->Translate($ReadableValue);
-            }
-        }
-
-        my $ReadableLength = length $ReadableValue;
-
-        # set title equal value
-        my $ReadableTitle = $ReadableValue;
-
-        # cut strings if needed
-        if ( $ValueMaxChars ne '' ) {
-
-            if ( length $ReadableValue > $ValueMaxChars ) {
-                $ShowValueEllipsis = 1;
-            }
-            $ReadableValue = substr $ReadableValue, 0, $ValueMaxChars;
-
-            # decrease the max parameter
-            $ValueMaxChars = $ValueMaxChars - $ReadableLength;
-            if ( $ValueMaxChars < 0 ) {
-                $ValueMaxChars = 0;
-            }
-        }
-
-        if ( $TitleMaxChars ne '' ) {
-
-            if ( length $ReadableTitle > $ValueMaxChars ) {
-                $ShowTitleEllipsis = 1;
-            }
-            $ReadableTitle = substr $ReadableTitle, 0, $TitleMaxChars;
-
-            # decrease the max parameter
-            $TitleMaxChars = $TitleMaxChars - $ReadableLength;
-            if ( $TitleMaxChars < 0 ) {
-                $TitleMaxChars = 0;
-            }
-        }
-
-        # HTMLOutput transformations
-        if ( $Param{HTMLOutput} ) {
-            $ReadableValue = $Param{LayoutObject}->Ascii2Html(
-                Text => $ReadableValue,
-            );
-
-            $ReadableTitle = $Param{LayoutObject}->Ascii2Html(
-                Text => $ReadableTitle,
-            );
-        }
-
-        if ( length $ReadableValue ) {
-            push @ReadableValues, $ReadableValue;
-        }
-
-        if ( length $ReadableTitle ) {
-            push @ReadableTitles, $ReadableTitle;
-        }
-    }
-
-    $Value = $DynamicFieldWebserviceObject->Template(
-        %Param,
+    my $TicketID = $Param{LayoutObject}->{TicketID};
+    $Param{Value} = $DynamicFieldWebserviceObject->DisplayValueGet(
         DynamicFieldConfig => $Param{DynamicFieldConfig},
-        Value              => \@ReadableValues,
-        Type               => 'Value',
+        Value              => $Param{Value},
+        TicketID           => $TicketID,
     );
 
-    $Title = $DynamicFieldWebserviceObject->Template(
-        %Param,
-        DynamicFieldConfig => $Param{DynamicFieldConfig},
-        Value              => \@ReadableTitles,
-        Type               => 'Title',
-    );
-
-    if ($ShowValueEllipsis) {
-        $Value .= '...';
-    }
-    if ($ShowTitleEllipsis) {
-        $Title .= '...';
-    }
-
-    # this field type does not support the Link Feature
-    my $Link;
-
-    # create return structure
-    my $Data = {
-        Value => $Value,
-        Title => $Title,
-        Link  => $Link,
-    };
-
-    return $Data;
+    return $Self->SUPER::DisplayValueRender(%Param);
 }
 
 # this function is used in AgentTicketCompose via TemplateGenerator
@@ -442,23 +290,15 @@ sub ReadableValueRender {
     my $Value = '';
     my $Title = '';
 
-    # check value
-    my @Values;
-    if ( ref $Param{Value} eq 'ARRAY' ) {
-        @Values = @{ $Param{Value} };
-    }
-    else {
-        @Values = ( $Param{Value} );
+    if ( IsStringWithData( $Param{Value} ) ) {
+        $Value = $DynamicFieldWebserviceObject->Template(
+            %Param,
+            DynamicFieldConfig => $Param{DynamicFieldConfig},
+            Value              => $Param{Value},
+            Type               => 'Value',
+        );
     }
 
-    my @ReadableValues = grep {$_} @Values;
-
-    $Value = $DynamicFieldWebserviceObject->Template(
-        %Param,
-        DynamicFieldConfig => $Param{DynamicFieldConfig},
-        Value              => \@ReadableValues,
-        Type               => 'Value',
-    );
     $Title = $Value;
 
     # cut strings if needed
@@ -634,7 +474,7 @@ sub _AutocompleteSearchFieldRender {
         PossibleNone => 0,
         TreeView     => 0,
         Class        => $FieldClass,
-        Multiple     => 1,
+        Multiple     => 0,
         HTMLQuote    => 1,
     );
 
@@ -706,51 +546,16 @@ sub SearchFieldParameterBuild {
 sub ValueLookup {
     my ( $Self, %Param ) = @_;
 
-    my @Keys;
-    if ( ref $Param{Key} eq 'ARRAY' ) {
-        @Keys = @{ $Param{Key} };
-    }
-    else {
-        @Keys = ( $Param{Key} );
-    }
+    my $DynamicFieldWebserviceObject = $Kernel::OM->Get('Kernel::System::DynamicField::Webservice');
 
-    $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(
-        %Param,
-        Value => $Param{Key},
+    return $Param{Key} if !IsStringWithData( $Param{Key} );
+
+    my $Value = $DynamicFieldWebserviceObject->DisplayValueGet(
+        DynamicFieldConfig => $Param{DynamicFieldConfig},
+        Value              => $Param{Key},
     );
 
-    # get real values
-    my $PossibleValues = $Param{DynamicFieldConfig}->{Config}->{PossibleValues} // {};
-
-    # to store final values
-    my @Values;
-
-    ITEM:
-    for my $Item (@Keys) {
-        next ITEM if !$Item;
-
-        # set the value as the key by default
-        my $Value = $Item;
-
-        # try to convert key to real value
-        if ( $PossibleValues->{$Item} ) {
-            $Value = $PossibleValues->{$Item};
-
-            # check if translation is possible
-            if (
-                defined $Param{LanguageObject}
-                && $Param{DynamicFieldConfig}->{Config}->{TranslatableValues}
-                )
-            {
-
-                # translate value
-                $Value = $Param{LanguageObject}->Translate($Value);
-            }
-        }
-        push @Values, $Value;
-    }
-
-    return \@Values;
+    return $Value;
 }
 
 sub BuildSelectionDataGet {
@@ -913,10 +718,10 @@ sub PossibleValuesGet {
         );
     }
 
-    if ( IsArrayRefWithData( $Param{Value} ) ) {
+    if ( IsStringWithData( $Param{Value} ) ) {
         my $DisplayValue = $DynamicFieldWebserviceObject->DisplayValueGet(
             DynamicFieldConfig => $Param{DynamicFieldConfig},
-            Value              => $Param{Value},
+            Value              => [ $Param{Value} ],
         );
 
         %PossibleValues = (

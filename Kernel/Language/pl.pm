@@ -7842,7 +7842,7 @@ sub Data {
             '',
         'Ticket event module that stores values of the selected web service record into the configured additional dynamic fields.' =>
             '',
-        'It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
+        'It might happen that a dynamic field of type WebserviceDropdown or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
             '',
         'Mapping for field values received from form. This setting is necessary for the correct identification of the form fields. Key means value type, value means possible representation in views.' =>
             '',
@@ -8574,7 +8574,7 @@ Twój Zespół Helpdesk.
         'Admin' => 'Administracja',
         'Admin Area.' => 'Obszar Administratora.',
         'Admin Notification' => 'Powiadomienia administratora',
-        'Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect' =>
+        'Admin configuration dialog for dynamic field types WebserviceDropdown and WebserviceMultiselect' =>
             '',
         'Admin modules overview.' => 'Przegląd modułów Adminsitratora',
         'Admin.' => 'Admin',
@@ -9216,8 +9216,8 @@ Twój Zespół Helpdesk.
         'We are performing scheduled maintenance. We should be back online shortly.' =>
             'Przeprowadzamy zaplanowane prace serwisowe. System zostanie niedługo udostępniony.',
         'Web Services' => 'Serwisy Sieciowe (WS)',
+        'Web service (Dropdown)' => '',
         'Web service (Multiselect)' => '',
-        'Web service (Text)' => '',
         'Web service dynamic field AJAX interface' => '',
         'Webservice' => '',
         'Yes, but hide archived tickets' => 'Tak, ale ukryj zarchiwizowane zgłoszenia',

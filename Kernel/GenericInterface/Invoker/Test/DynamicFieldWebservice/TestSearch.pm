@@ -23,7 +23,7 @@ Kernel::GenericInterface::Invoker::Test::DynamicFieldWebservice::TestSearch
 
 =head1 SYNOPSIS
 
-TestSearch invoker for dynamic field type WebserviceText.
+TestSearch invoker for dynamic field types WebserviceDropdown and WebserviceMultiselect.
 
 =head1 PUBLIC INTERFACE
 

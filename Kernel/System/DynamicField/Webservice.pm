@@ -54,7 +54,7 @@ sub new {
     ];
 
     $Self->{SupportedDynamicFieldTypes} = {
-        WebserviceText        => 1,
+        WebserviceDropdown    => 1,
         WebserviceMultiselect => 1,
     };
 
@@ -78,7 +78,7 @@ Tests given web-service configuration by connecting and querying the web-service
             SearchTerms              => $Param{SearchTerms},
         },
         DynamicFieldName => 'DFName1',      # optional
-        FieldType        => 'WebserviceText',
+        FieldType        => 'WebserviceDropdown',
         UserID           => 1,
         UserType         => 'Agent',                                        # optional 'Agent' or 'Customer'
     );
@@ -1307,7 +1307,7 @@ sub _BackendConfigGet {
     if ( !$Self->{SupportedDynamicFieldTypes}->{ $Param{DynamicFieldConfig}->{FieldType} } ) {
         $LogObject->Log(
             Priority => 'error',
-            Message  => "Unsupported dynamic field type $Param{DynamicField}->{FieldType}.",
+            Message  => "Unsupported dynamic field type $Param{DynamicFieldConfig}->{FieldType}.",
         );
         return;
     }

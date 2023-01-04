@@ -7837,8 +7837,8 @@ sub Data {
             'Frontend-Modul für die Kundenschnittstelle, das die AJAX-Schnittstelle für die Webservice-Dynamic-Field-Backends bereitstellt.',
         'Ticket event module that stores values of the selected web service record into the configured additional dynamic fields.' =>
             'Ticket-Event-Modul zur Speicherung von Werten des gewählten Webservice-Datensatzes in den konfigurierten zusätzlichen dynamischen Feldern.',
-        'It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
-            'Es kann vorkommen, dass ein dynamisches Feld vom Typ WebserviceText oder WebserviceMultiselect auf einen Wert gesetzt wird, der aus einer konfigurierten Webservice-Tabelle geholt wird, aber der Webservice-Datensatz keinen Wert in dem Feld hat, das als angezeigter Wert konfiguriert ist. Aktivieren Sie diese Einstellung, um diese dynamischen Felder im Ticketinformations-Widget von AgentTicketZoom auszublenden, damit sie nicht als leer angezeigt werden.',
+        'It might happen that a dynamic field of type WebserviceDropdown or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
+            'Es kann vorkommen, dass ein dynamisches Feld vom Typ WebserviceDropdown oder WebserviceMultiselect auf einen Wert gesetzt wird, der aus einer konfigurierten Webservice-Tabelle geholt wird, aber der Webservice-Datensatz keinen Wert in dem Feld hat, das als angezeigter Wert konfiguriert ist. Aktivieren Sie diese Einstellung, um diese dynamischen Felder im Ticketinformations-Widget von AgentTicketZoom auszublenden, damit sie nicht als leer angezeigt werden.',
         'Mapping for field values received from form. This setting is necessary for the correct identification of the form fields. Key means value type, value means possible representation in views.' =>
             'Mapping für die vom Formular empfangenen Feldwerte. Diese Einstellung ist für die korrekte Identifizierung der Formularfelder notwendig. Schlüssel ist Typ, Inhalt ist möglicher Name im Formular.',
         'Mapping for field values received from form which have multiple values. This setting is needed when the view shows the values of a particular field in a custom way (e.g. selectable customer user in ticket creation view). This setting is always respected first. There is also the possibility to specify an order for checking fields. (Field of customer user in ticket creation view can be saved as CustomerUser or just simple e-mail. First we need to check if CustomerKey is present (CustomerKey -> ID of CustomerUser). If not, then simply take plain text (CustomerTicketText -> E-mail)).' =>
@@ -8569,8 +8569,8 @@ Ihr Helpdesk-Team
         'Admin' => 'Admin',
         'Admin Area.' => 'Administratorbereich.',
         'Admin Notification' => 'Admin-Benachrichtigung',
-        'Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect' =>
-            'Admin-Konfigurationsdialog für die dynamischen Feldtypen WebserviceText und WebserviceMultiselect',
+        'Admin configuration dialog for dynamic field types WebserviceDropdown and WebserviceMultiselect' =>
+            'Admin-Konfigurationsdialog für die dynamischen Feldtypen WebserviceDropdown und WebserviceMultiselect',
         'Admin modules overview.' => 'Admin Modul Übersicht.',
         'Admin.' => 'Admin.',
         'Administration' => 'Administration',
@@ -9211,8 +9211,8 @@ Ihr Helpdesk-Team
         'We are performing scheduled maintenance. We should be back online shortly.' =>
             'Wir führen eine geplante Wartung durch. Wir werden bald wieder online sein.',
         'Web Services' => 'Webservices',
+        'Web service (Dropdown)' => 'Webservice (Einfachauswahl)',
         'Web service (Multiselect)' => 'Webservice (Mehrfachauswahl)',
-        'Web service (Text)' => 'Webservice (Text)',
         'Web service dynamic field AJAX interface' => 'AJAX-Schnittstelle für dynamische Webservice-Felder',
         'Webservice' => 'Webservice',
         'Yes, but hide archived tickets' => 'Ja, aber archivierte Tickets verstecken',
