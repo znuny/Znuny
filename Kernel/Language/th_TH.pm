@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.544246353322528;
+    $Self->{Completeness}        = 0.543805668016194;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1651,6 +1651,12 @@ sub Data {
             'ในกรณีที่คุณมีคำถามอื่นๆเรายินดีที่จะตอบคำถามเหล่านั้น',
         'Install Package' => 'ติดตั้งแพคเกจ',
         'Update Package' => '',
+        'Package' => '',
+        'Required package %s is already installed.' => '',
+        'Required Perl module %s is already installed.' => '',
+        'Required package %s needs to get installed!' => '',
+        'Required package %s needs to get updated to version %s!' => '',
+        'Required Perl module %s needs to get installed or updated!' => '',
         'Continue' => 'ดำเนินการต่อ',
         'Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'กรุณาตรวจสอบให้แน่ใจว่าฐานข้อมูลของคุณรับขนาดแพคเกจมากกว่า %s MB  (ขณะนี้สามารถยอมรับเฉพาะแพคเกจที่มีขนาดถึง %s MB) กรุณาปรับตั้งค่า max_allowed_packet ของฐานข้อมูลของคุณเพื่อหลีกเลี่ยงข้อผิดพลาด',
@@ -2268,7 +2274,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'การอนุญาต',
-        'Package' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
         'System Maintenance Management' => 'การจัดการการบำรุงรักษาระบบ',

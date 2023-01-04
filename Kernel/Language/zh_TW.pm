@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.314748784440843;
+    $Self->{Completeness}        = 0.314493927125506;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1654,6 +1654,12 @@ sub Data {
             '如果您還有其它問題，我們非常願意答復您。',
         'Install Package' => '安裝軟件包',
         'Update Package' => '',
+        'Package' => '',
+        'Required package %s is already installed.' => '',
+        'Required Perl module %s is already installed.' => '',
+        'Required package %s needs to get installed!' => '',
+        'Required package %s needs to get updated to version %s!' => '',
+        'Required Perl module %s needs to get installed or updated!' => '',
         'Continue' => '繼續',
         'Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '請確認您的數據庫能夠接收大於%sMB的數據包（目前能夠接收的最大數據包為%sMB）。為了避免程序報錯，請調整數據庫max_allowed_packet参數。',
@@ -2268,7 +2274,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => '權限',
-        'Package' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
         'System Maintenance Management' => '',

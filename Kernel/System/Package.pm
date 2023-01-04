@@ -852,7 +852,7 @@ sub PackageUpgrade {
     }
 
     # check version
-    my $CheckVersion = $Self->_CheckVersion(
+    my $CheckVersion = $Self->CheckVersion(
         VersionNew       => $Structure{Version}->{Content},
         VersionInstalled => $InstalledVersion,
         Type             => 'Max',
@@ -913,7 +913,7 @@ sub PackageUpgrade {
             if ( $Part->{Version} ) {
 
                 # skip code upgrade block if its version is bigger than the new package version
-                my $CheckVersion = $Self->_CheckVersion(
+                my $CheckVersion = $Self->CheckVersion(
                     VersionNew       => $Part->{Version},
                     VersionInstalled => $Structure{Version}->{Content},
                     Type             => 'Max',
@@ -921,7 +921,7 @@ sub PackageUpgrade {
 
                 next PART if $CheckVersion;
 
-                $CheckVersion = $Self->_CheckVersion(
+                $CheckVersion = $Self->CheckVersion(
                     VersionNew       => $Part->{Version},
                     VersionInstalled => $InstalledVersion,
                     Type             => 'Min',
@@ -994,7 +994,7 @@ sub PackageUpgrade {
 
             if ( $Part->{TagLevel} == 3 && $Part->{Version} ) {
 
-                my $CheckVersion = $Self->_CheckVersion(
+                my $CheckVersion = $Self->CheckVersion(
                     VersionNew       => $Part->{Version},
                     VersionInstalled => $InstalledVersion,
                     Type             => 'Min',
@@ -1093,7 +1093,7 @@ sub PackageUpgrade {
 
             if ( $Part->{TagLevel} == 3 && $Part->{Version} ) {
 
-                my $CheckVersion = $Self->_CheckVersion(
+                my $CheckVersion = $Self->CheckVersion(
                     VersionNew       => $Part->{Version},
                     VersionInstalled => $InstalledVersion,
                     Type             => 'Min',
@@ -1127,7 +1127,7 @@ sub PackageUpgrade {
             if ( $Part->{Version} ) {
 
                 # skip code upgrade block if its version is bigger than the new package version
-                my $CheckVersion = $Self->_CheckVersion(
+                my $CheckVersion = $Self->CheckVersion(
                     VersionNew       => $Part->{Version},
                     VersionInstalled => $Structure{Version}->{Content},
                     Type             => 'Max',
@@ -1135,7 +1135,7 @@ sub PackageUpgrade {
 
                 next PART if $CheckVersion;
 
-                $CheckVersion = $Self->_CheckVersion(
+                $CheckVersion = $Self->CheckVersion(
                     VersionNew       => $Part->{Version},
                     VersionInstalled => $InstalledVersion,
                     Type             => 'Min',
@@ -1292,6 +1292,117 @@ sub PackageUninstall {
     );
 
     return 1;
+}
+
+=head2 GetRequiredPackages()
+
+This function returns an array of hashes that contains information
+about <RequiredPackages> of the .sopm-file.
+
+    my $PackageRequired = $PackageObject->GetRequiredPackages(
+        Structure => \%Structure,       # return of PackageParse()
+    );
+
+Returns:
+
+    my $PackageRequired = (
+      {
+        'Name'                       => 'ITSMCore'
+        'Version'                    => '',
+        'IsInstalled'                => 'Problem',
+        'IsRequiredVersionInstalled' => 0,
+      },
+      {
+        'Name'                       => 'Survey',
+        'Version'                    => '6.5.0'
+        'IsInstalled'                => 'OK',
+        'IsRequiredVersionInstalled' => 1,
+      }
+    );
+
+=cut
+
+sub GetRequiredPackages {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject     = $Kernel::OM->Get('Kernel::System::Log');
+    my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
+
+    NEEDED:
+    for my $Needed (qw(Structure)) {
+
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    NEEDED:
+    for my $Needed (qw(PackageRequired)) {
+
+        next NEEDED if defined $Param{Structure}->{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    my @RepositoryList = $PackageObject->RepositoryList();
+    my @Requirements;
+
+    for my $Element ( sort @{ $Param{Structure}->{PackageRequired} } ) {
+
+        my $PackageIsInstalled = $PackageObject->PackageIsInstalled(
+            Name => $Element->{Content}
+        );
+
+        my $IsInstalled = "Problem";
+        if ($PackageIsInstalled) {
+            $IsInstalled = "OK";
+        }
+
+        my $Version                    = $Element->{Version} // "";
+        my $IsRequiredVersionInstalled = 1;
+
+        # if the required package is already installed, check if the installed version is high enough.
+        if ( $IsInstalled eq "OK" && $Version ne "" ) {
+            my $InstalledVersion = 0;
+
+            LOCAL:
+            for my $Local (@RepositoryList) {
+                next LOCAL if $Local->{Name}->{Content} ne $Element->{Content};
+                next LOCAL if $Local->{Status} ne 'installed';
+
+                $InstalledVersion = $Local->{Version}->{Content};
+                last LOCAL;
+            }
+
+            my $CheckVersion = $PackageObject->CheckVersion(
+                VersionNew       => $Version,
+                VersionInstalled => $InstalledVersion,
+                Type             => 'Min',
+            );
+
+            if ( !$CheckVersion ) {
+                $IsInstalled                = "Problem";
+                $IsRequiredVersionInstalled = 0;
+            }
+        }
+
+        push @Requirements, {
+            Name                       => $Element->{Content},
+            Version                    => $Version,
+            IsInstalled                => $IsInstalled,
+            IsRequiredVersionInstalled => $IsRequiredVersionInstalled,
+        };
+    }
+
+    return \@Requirements;
 }
 
 =head2 RootRepositoryListGet()
@@ -1578,7 +1689,7 @@ sub RepositoryPackageListGet {
         }
         else {
 
-            my $CheckVersion = $Self->_CheckVersion(
+            my $CheckVersion = $Self->CheckVersion(
                 VersionNew       => $Package->{Version},
                 VersionInstalled => $Newest{ $Package->{Name} }->{Version},
                 Type             => 'Min',
@@ -1610,7 +1721,7 @@ sub RepositoryPackageListGet {
             $Newest{$Data}->{Installed} = 1;
 
             if (
-                !$Self->_CheckVersion(
+                !$Self->CheckVersion(
                     VersionNew       => $Newest{$Data}->{Version},
                     VersionInstalled => $Package->{Version}->{Content},
                     Type             => 'Min',
@@ -1622,7 +1733,7 @@ sub RepositoryPackageListGet {
 
             # check if version or lower is already installed
             elsif (
-                !$Self->_CheckVersion(
+                !$Self->CheckVersion(
                     VersionNew       => $Newest{$Data}->{Version},
                     VersionInstalled => $Package->{Version}->{Content},
                     Type             => 'Max',
@@ -3194,6 +3305,176 @@ sub PackageUpgradeAllIsRunning {
     );
 }
 
+=head2 CheckVersion()
+
+Compare the two version strings $VersionNew and $VersionInstalled.
+The type is either 'Min' or 'Max'.
+'Min' returns a true value if $VersionInstalled >= $VersionNew.
+'Max' returns a true value if $VersionInstalled < $VersionNew.
+Otherwise undef is returned in scalar context.
+
+    my $CheckOk = $PackageObject->CheckVersion(
+        VersionNew       => '1.3.92',
+        VersionInstalled => '1.3.91',
+        Type             => 'Min',     # 'Min' or 'Max'
+        ExternalPackage  => 1,         # optional
+    )
+
+=cut
+
+sub CheckVersion {
+    my ( $Self, %Param ) = @_;
+
+    for my $Needed (qw(VersionNew VersionInstalled Type)) {
+        if ( !defined $Param{$Needed} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "$Needed not defined!",
+            );
+            return;
+        }
+    }
+
+    # check Type
+    if ( $Param{Type} ne 'Min' && $Param{Type} ne 'Max' ) {
+
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => 'Invalid Type!',
+        );
+        return;
+    }
+
+    # prepare parts hash
+    my %Parts;
+    TYPE:
+    for my $Type (qw(VersionNew VersionInstalled)) {
+
+        # split version string
+        my @ThisParts = split /\./, $Param{$Type};
+
+        $Parts{$Type} = \@ThisParts;
+        $Parts{ $Type . 'Num' } = scalar @ThisParts;
+    }
+
+    # if it is not an external package, and the versions are different
+    # we want to add a 0 at the end of the shorter version number
+    # (1.2.3 will be modified to 1.2.3.0)
+    # This is important to compare with a test-release version number
+    if ( !$Param{ExternalPackage} && $Parts{VersionNewNum} ne $Parts{VersionInstalledNum} ) {
+
+        TYPE:
+        for my $Type (qw(VersionNew VersionInstalled)) {
+
+            next TYPE if $Parts{ $Type . 'Num' } > 3;
+
+            # add a zero at the end if number has less than 4 digits
+            push @{ $Parts{$Type} }, 0;
+            $Parts{ $Type . 'Num' } = scalar @{ $Parts{$Type} };
+        }
+    }
+
+    COUNT:
+    for my $Count ( 0 .. 5 ) {
+
+        $Parts{VersionNew}->[$Count]       ||= 0;
+        $Parts{VersionInstalled}->[$Count] ||= 0;
+
+        next COUNT if $Parts{VersionNew}->[$Count] eq $Parts{VersionInstalled}->[$Count];
+
+        # compare versions
+        if ( $Param{Type} eq 'Min' ) {
+            return 1 if $Parts{VersionInstalled}->[$Count] >= $Parts{VersionNew}->[$Count];
+            return;
+        }
+        elsif ( $Param{Type} eq 'Max' ) {
+            return 1 if $Parts{VersionInstalled}->[$Count] < $Parts{VersionNew}->[$Count];
+            return;
+        }
+    }
+
+    return 1 if $Param{Type} eq 'Min';
+    return;
+}
+
+=head2 GetRequiredModules()
+
+This function returns an array of hashes that contains information
+about <RequiredModules> of the .sopm-file.
+
+    my $ModuleRequired = $PackageObject->GetRequiredModules(
+        Structure => \%Structure,       # return of PackageParse()
+    );
+
+Returns:
+
+    my $ModuleRequired = (
+        {
+          'Name'        => 'GD::Graph',
+          'Version'     => undef,
+          'IsInstalled' => 'Problem'
+        },
+        {
+          'Name'        => 'Data::Dumper',
+          'Version'     => '2.179',
+          'IsInstalled' => 'OK'
+        }
+    );
+
+=cut
+
+sub GetRequiredModules {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject         = $Kernel::OM->Get('Kernel::System::Log');
+    my $EnvironmentObject = $Kernel::OM->Get('Kernel::System::Environment');
+
+    NEEDED:
+    for my $Needed (qw(Structure)) {
+
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    NEEDED:
+    for my $Needed (qw(ModuleRequired)) {
+
+        next NEEDED if defined $Param{Structure}->{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    my @Requirements;
+
+    for my $Element ( sort @{ $Param{Structure}->{ModuleRequired} } ) {
+        my $Version = $EnvironmentObject->ModuleVersionGet(
+            Module => $Element->{Content},
+        );
+
+        my $IsInstalled = "Problem";
+        if ($Version) {
+            $IsInstalled = "OK";
+        }
+
+        push @Requirements, {
+            Name        => $Element->{Content},
+            Version     => $Version,
+            IsInstalled => $IsInstalled,
+        };
+    }
+
+    return \@Requirements;
+}
+
 =begin Internal:
 
 =cut
@@ -3384,94 +3665,14 @@ sub _OSCheck {
 
 =head2 _CheckVersion()
 
-Compare the two version strings $VersionNew and $VersionInstalled.
-The type is either 'Min' or 'Max'.
-'Min' returns a true value if $VersionInstalled >= $VersionNew.
-'Max' returns a true value if $VersionInstalled < $VersionNew.
-Otherwise undef is returned in scalar context.
-
-    my $CheckOk = $PackageObject->_CheckVersion(
-        VersionNew       => '1.3.92',
-        VersionInstalled => '1.3.91',
-        Type             => 'Min',     # 'Min' or 'Max'
-        ExternalPackage  => 1,         # optional
-    )
+Deprecated. Please use the new CheckVersion() instead of this.
 
 =cut
 
 sub _CheckVersion {
     my ( $Self, %Param ) = @_;
 
-    for my $Needed (qw(VersionNew VersionInstalled Type)) {
-        if ( !defined $Param{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "$Needed not defined!",
-            );
-            return;
-        }
-    }
-
-    # check Type
-    if ( $Param{Type} ne 'Min' && $Param{Type} ne 'Max' ) {
-
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => 'Invalid Type!',
-        );
-        return;
-    }
-
-    # prepare parts hash
-    my %Parts;
-    TYPE:
-    for my $Type (qw(VersionNew VersionInstalled)) {
-
-        # split version string
-        my @ThisParts = split /\./, $Param{$Type};
-
-        $Parts{$Type} = \@ThisParts;
-        $Parts{ $Type . 'Num' } = scalar @ThisParts;
-    }
-
-    # if it is not an external package, and the versions are different
-    # we want to add a 0 at the end of the shorter version number
-    # (1.2.3 will be modified to 1.2.3.0)
-    # This is important to compare with a test-release version number
-    if ( !$Param{ExternalPackage} && $Parts{VersionNewNum} ne $Parts{VersionInstalledNum} ) {
-
-        TYPE:
-        for my $Type (qw(VersionNew VersionInstalled)) {
-
-            next TYPE if $Parts{ $Type . 'Num' } > 3;
-
-            # add a zero at the end if number has less than 4 digits
-            push @{ $Parts{$Type} }, 0;
-            $Parts{ $Type . 'Num' } = scalar @{ $Parts{$Type} };
-        }
-    }
-
-    COUNT:
-    for my $Count ( 0 .. 5 ) {
-
-        $Parts{VersionNew}->[$Count]       ||= 0;
-        $Parts{VersionInstalled}->[$Count] ||= 0;
-
-        next COUNT if $Parts{VersionNew}->[$Count] eq $Parts{VersionInstalled}->[$Count];
-
-        # compare versions
-        if ( $Param{Type} eq 'Min' ) {
-            return 1 if $Parts{VersionInstalled}->[$Count] >= $Parts{VersionNew}->[$Count];
-            return;
-        }
-        elsif ( $Param{Type} eq 'Max' ) {
-            return 1 if $Parts{VersionInstalled}->[$Count] < $Parts{VersionNew}->[$Count];
-            return;
-        }
-    }
-
-    return 1 if $Param{Type} eq 'Min';
-    return;
+    return $Self->CheckVersion(%Param);
 }
 
 sub _CheckPackageRequired {
@@ -3520,7 +3721,7 @@ sub _CheckPackageRequired {
             return;
         }
 
-        my $VersionCheck = $Self->_CheckVersion(
+        my $VersionCheck = $Self->CheckVersion(
             VersionNew       => $Package->{Version},
             VersionInstalled => $InstalledVersion,
             Type             => 'Min',
@@ -3588,7 +3789,7 @@ sub _CheckModuleRequired {
             return 1 if !$InstalledVersion;
 
             # check version
-            my $Ok = $Self->_CheckVersion(
+            my $Ok = $Self->CheckVersion(
                 VersionNew       => $Module->{Version},
                 VersionInstalled => $InstalledVersion,
                 Type             => 'Min',
@@ -4199,7 +4400,7 @@ sub _MergedPackages {
         # for principal package
         $Self->{MergedPackages}->{ $Package->{Name} } = $InstalledVersion;
 
-        my $CheckTargetVersion = $Self->_CheckVersion(
+        my $CheckTargetVersion = $Self->CheckVersion(
             VersionNew       => $TargetVersion,
             VersionInstalled => $InstalledVersion,
             Type             => 'Max',
@@ -4237,7 +4438,7 @@ sub _MergedPackages {
                     if ( $Part->{Version} ) {
 
                         # if VersionNew >= VersionInstalled add code for execution
-                        my $CheckVersion = $Self->_CheckVersion(
+                        my $CheckVersion = $Self->CheckVersion(
                             VersionNew       => $Part->{Version},
                             VersionInstalled => $TargetVersion,
                             Type             => 'Min',
@@ -4272,7 +4473,7 @@ sub _MergedPackages {
 
                     if ( $Part->{TagLevel} == 3 && $Part->{Version} ) {
 
-                        my $CheckVersion = $Self->_CheckVersion(
+                        my $CheckVersion = $Self->CheckVersion(
                             VersionNew       => $Part->{Version},
                             VersionInstalled => $InstalledVersion,
                             Type             => 'Min',
@@ -4535,7 +4736,7 @@ sub _PackageInstallOrderListGet {
         #   in case of equal, reference still counts, but at update or install package must be
         #   skipped.
         if ( $OnlinePackage->{Version} ne $Param{TargetPackages}->{$PackageName} ) {
-            my $CheckOk = $Self->_CheckVersion(
+            my $CheckOk = $Self->CheckVersion(
                 VersionNew       => $OnlinePackage->{Version},
                 VersionInstalled => $Param{TargetPackages}->{$PackageName},
                 Type             => 'Max',

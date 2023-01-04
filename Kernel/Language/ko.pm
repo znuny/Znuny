@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.89967585089141;
+    $Self->{Completeness}        = 0.898947368421053;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1651,6 +1651,12 @@ sub Data {
             '혹시 더 궁금한 점이 있으시면 답변 해드리겠습니다.',
         'Install Package' => '패키지 설치',
         'Update Package' => '패키지 업데이트',
+        'Package' => '',
+        'Required package %s is already installed.' => '',
+        'Required Perl module %s is already installed.' => '',
+        'Required package %s needs to get installed!' => '',
+        'Required package %s needs to get updated to version %s!' => '',
+        'Required Perl module %s needs to get installed or updated!' => '',
         'Continue' => '계속하다',
         'Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '데이터베이스가 %s 크기 이상의 패키지를 수락하는지 확인하십시오 (현재 패키지는 최대 %s MB 만 허용). 오류를 피하기 위해 데이터베이스의 max_allowed_packet 설정을 조정하십시오.',
@@ -2265,7 +2271,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => '권한',
-        'Package' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
         'System Maintenance Management' => '시스템 유지 보수 관리',

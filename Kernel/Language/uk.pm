@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.461264181523501;
+    $Self->{Completeness}        = 0.460890688259109;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1652,6 +1652,12 @@ sub Data {
             'У разі, якщо ви маєте додаткові запитання, ми будемо раді відповісти на них.',
         'Install Package' => 'Установити пакет',
         'Update Package' => '',
+        'Package' => '',
+        'Required package %s is already installed.' => '',
+        'Required Perl module %s is already installed.' => '',
+        'Required package %s needs to get installed!' => '',
+        'Required package %s needs to get updated to version %s!' => '',
+        'Required Perl module %s needs to get installed or updated!' => '',
         'Continue' => 'Продовжити',
         'Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Будь ласка, переконайтеся в тому, що ваша база даних приймає пакунки за розміром більше ніж %s МБ (в даний час приймаються пакунки за розміром до %s МБ). Будь ласка адаптуйте установку max_allowed_packet  вашої бази даних, щоб уникнути помилок.',
@@ -2266,7 +2272,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'Права',
-        'Package' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
         'System Maintenance Management' => 'Керування Обслуговуванням Системи',

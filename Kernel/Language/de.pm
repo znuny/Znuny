@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.99773095623987;
+    $Self->{Completeness}        = 0.997732793522267;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1651,6 +1651,12 @@ sub Data {
             'Sollten Sie weitere Fragen haben, freuen wir uns, diese zu beantworten.',
         'Install Package' => 'Paket installieren',
         'Update Package' => 'Paket Aktualisieren',
+        'Package' => 'Paket',
+        'Required package %s is already installed.' => 'Vorausgesetzes Paket %s ist bereits installiert.',
+        'Required Perl module %s is already installed.' => 'Vorausgesetzes Perl Modul %s ist bereits installiert.',
+        'Required package %s needs to get installed!' => 'Vorausgesetzes Paket %s muss noch installiert werden!',
+        'Required package %s needs to get updated to version %s!' => 'Vorausgesetzes Paket %s muss noch auf Version %s aktuallisiert werden!',
+        'Required Perl module %s needs to get installed or updated!' => 'Vorausgesetzes Perl Modul %s muss noch installiert oder aktuallisiert werden!',
         'Continue' => 'Weiter',
         'Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Stellen Sie sicher, dass Ihre Datenbank Pakete über %s MB akzeptiert (Derzeit werden nur Pakete bis %s MB akzeptiert). Bitte passen Sie die Einstellung max_allowed_packet Ihrer Datenbank-Konfiguration an, um Fehler zu vermeiden.',
@@ -2265,7 +2271,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'Berechtigungen',
-        'Package' => 'Paket',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
         'System Maintenance Management' => 'Systemwartungs-Verwaltung',

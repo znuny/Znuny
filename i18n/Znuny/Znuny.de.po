@@ -24044,7 +24044,7 @@ msgstr "Systemdatei-Support"
 msgid "Delete cache"
 msgstr "Cache löschen"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Package"
 msgstr "Paket"
 
@@ -25579,4 +25579,24 @@ msgstr "Mapping von Nicht-Standard-Zeitzonen zu offiziellen Zeitzonen."
 #. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s"
 msgstr "Die Namen der folgenden Dateien überschreiten die Maximallänge von %s Zeichen und wurden nicht hochgeladen: %s"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required package %s is already installed."
+msgstr "Vorausgesetzes Paket %s ist bereits installiert."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required Perl module %s is already installed."
+msgstr "Vorausgesetzes Perl Modul %s ist bereits installiert."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required package %s needs to get installed!"
+msgstr "Vorausgesetzes Paket %s muss noch installiert werden!"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required package %s needs to get updated to version %s!"
+msgstr "Vorausgesetzes Paket %s muss noch auf Version %s aktuallisiert werden!"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required Perl module %s needs to get installed or updated!"
+msgstr "Vorausgesetzes Perl Modul %s muss noch installiert oder aktuallisiert werden!"
 

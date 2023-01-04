@@ -24,7 +24,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.557860615883306;
+    $Self->{Completeness}        = 0.557408906882591;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1650,6 +1650,12 @@ sub Data {
             'Sekiranya anda mempunya sebarang pertanyaan kami sedia menjawabnya.',
         'Install Package' => 'Pasang Pakej',
         'Update Package' => '',
+        'Package' => '',
+        'Required package %s is already installed.' => '',
+        'Required Perl module %s is already installed.' => '',
+        'Required package %s needs to get installed!' => '',
+        'Required package %s needs to get updated to version %s!' => '',
+        'Required Perl module %s needs to get installed or updated!' => '',
         'Continue' => 'Sambung',
         'Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Sila pastikan pangkalan data anda menerima pakej melebihi saiz %s MB (buat masa ini ia hanya menerima pakej sehingga %s MB). Sila sesuaikan tetapan max_paket_dibenarkan pada pangkalan data anda agar tidak terdapat ralat.',
@@ -2264,7 +2270,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'kebenaran',
-        'Package' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
         'System Maintenance Management' => 'Pengurusan Penyelenggaraan Sistem',

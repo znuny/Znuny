@@ -361,7 +361,7 @@ sub OTRSBusinessIsUpdateable {
             $Self->HandleBusinessVersionCheckCloudServiceResult( OperationResult => $OperationResult );
 
             if ( $OperationResult->{Data}->{LatestVersionForCurrentFramework} ) {
-                return $Kernel::OM->Get('Kernel::System::Package')->_CheckVersion(
+                return $Kernel::OM->Get('Kernel::System::Package')->CheckVersion(
                     VersionNew       => $OperationResult->{Data}->{LatestVersionForCurrentFramework},
                     VersionInstalled => $Package->{Version}->{Content},
                     Type             => 'Max',
@@ -405,7 +405,7 @@ sub OTRSBusinessVersionCheckOffline {
     );
 
     if ( $EntitlementData{LatestVersionForCurrentFramework} ) {
-        $Result{OTRSBusinessUpdateAvailable} = $Kernel::OM->Get('Kernel::System::Package')->_CheckVersion(
+        $Result{OTRSBusinessUpdateAvailable} = $Kernel::OM->Get('Kernel::System::Package')->CheckVersion(
             VersionNew       => $EntitlementData{LatestVersionForCurrentFramework},
             VersionInstalled => $Package->{Version}->{Content},
             Type             => 'Max',

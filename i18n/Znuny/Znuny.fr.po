@@ -24235,7 +24235,7 @@ msgstr ""
 msgid "Delete cache"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Package"
 msgstr ""
 
@@ -25509,5 +25509,25 @@ msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required package %s is already installed."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required Perl module %s is already installed."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required package %s needs to get installed!"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required package %s needs to get updated to version %s!"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required Perl module %s needs to get installed or updated!"
 msgstr ""
 

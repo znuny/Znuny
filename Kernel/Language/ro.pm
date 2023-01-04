@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.300486223662885;
+    $Self->{Completeness}        = 0.300242914979757;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1651,6 +1651,12 @@ sub Data {
             '',
         'Install Package' => 'Instalare pachet',
         'Update Package' => 'Actualizare pachet',
+        'Package' => '',
+        'Required package %s is already installed.' => '',
+        'Required Perl module %s is already installed.' => '',
+        'Required package %s needs to get installed!' => '',
+        'Required package %s needs to get updated to version %s!' => '',
+        'Required Perl module %s needs to get installed or updated!' => '',
         'Continue' => 'Continuare',
         'Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Vă rugăm să vă asigurați că baza de date acceptă pachete cu o dimensiune de peste %s MB (în prezent acceptă doar pachete de până la %s MB). Vă rugăm să adaptați setarea max_allowed_packet a bazei de date pentru a evita erorile.',
@@ -2265,7 +2271,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => '',
-        'Package' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
         'System Maintenance Management' => '',

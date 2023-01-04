@@ -4927,6 +4927,34 @@ msgid "Update Package"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "The package contains cyclic dependencies"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Package"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required package %s is already installed."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required Perl module %s is already installed."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required package %s needs to get installed!"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required package %s needs to get updated to version %s!"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required Perl module %s needs to get installed or updated!"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Continue"
 msgstr ""
 
@@ -6736,10 +6764,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
 msgid "Permissions"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
-msgid "Package"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
@@ -11468,10 +11492,6 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminPackageManager.pm
 msgid "The package needs to be reinstalled"
-msgstr ""
-
-#. Perl Module: Kernel/Modules/AdminPackageManager.pm
-msgid "The package contains cyclic dependencies"
 msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminPackageManager.pm

@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.287520259319287;
+    $Self->{Completeness}        = 0.287287449392713;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1651,6 +1651,12 @@ sub Data {
             'Доколку имате повеќе прашања, со задоволство ќе ви одговориме.',
         'Install Package' => 'Инсталирај Пакет',
         'Update Package' => '',
+        'Package' => '',
+        'Required package %s is already installed.' => '',
+        'Required Perl module %s is already installed.' => '',
+        'Required package %s needs to get installed!' => '',
+        'Required package %s needs to get updated to version %s!' => '',
+        'Required Perl module %s needs to get installed or updated!' => '',
         'Continue' => 'Продолжи',
         'Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Ве молиме осигурајте се дека вашата податочна база прифаќа пакети преку %s MB во големина (моментално прифача пакети до %s MB). Ве молиме адапртирајте го max_allowed_packet setting на вашата податочна база во предолед да избегнете грешки.',
@@ -2265,7 +2271,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'Дозволи',
-        'Package' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
         'System Maintenance Management' => 'Управување со Одржување на Системот',
