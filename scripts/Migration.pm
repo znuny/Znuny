@@ -239,6 +239,10 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Znuny::MigrateSysConfigSettings',
         },
         {
+            Message => 'Migrate DBCRUD UUID columns',
+            Module  => 'scripts::Migration::Znuny::MigrateDBCRUDUUIDColumns',
+        },
+        {
             Message => 'Migrate dynamic fields',
             Module  => 'scripts::Migration::Znuny::MigrateDynamicFields',
         },

@@ -5,71 +5,67 @@
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::Perl::Pod::NamePod)
 
-package Kernel::System::Console::Command::Admin::DBCRUD::AddUUIDColumns;
+package scripts::Migration::Znuny::MigrateDBCRUDUUIDColumns;    ## no critic
 
 use strict;
 use warnings;
 
-use Kernel::System::VariableCheck qw(:all);
+use parent qw(scripts::Migration::Base);
 
-use parent qw(Kernel::System::Console::BaseCommand);
+use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::System::Util',
 );
 
-sub Configure {
-    my ( $Self, %Param ) = @_;
+=head1 SYNOPSIS
 
-    $Self->Description(
-        'Adds a column for a UUID (if missing) to every database table of a DBCRUD module. Also migrates existing UUID columns with a deprecated name (e.g. z4o_database_backend_uuid).'
-    );
+Migrates DBCRUD UUID columns and creates missing ones.
+This is basically the same as executing command Admin::DBCRUD::AddUUIDColumns.
 
-    return;
-}
+=head1 PUBLIC INTERFACE
+
+=cut
 
 sub Run {
     my ( $Self, %Param ) = @_;
 
     my $UtilObject = $Kernel::OM->Get('Kernel::System::Util');
 
-    $Self->Print("<yellow>Checking/creating UUID columns for DBCRUD tables...</yellow>\n\n");
-
     my $InstalledDBCRUDObjects = $UtilObject->GetInstalledDBCRUDObjects();
     if ( !IsArrayRefWithData($InstalledDBCRUDObjects) ) {
-        $Self->Print("No installed DBCRUD modules found.\n");
-        return $Self->ExitCodeOk();
+        print "        No installed DBCRUD modules found.\n";
+        return 1;
     }
 
     DATABASEBACKENDOBJECT:
     for my $DBCRUDObject ( @{$InstalledDBCRUDObjects} ) {
-        $Self->Print(
-            "$DBCRUDObject->{Name}: Column $DBCRUDObject->{UUIDDatabaseTableColumnName} "
-                . "in table $DBCRUDObject->{DatabaseTable}..."
-                . "\n"
-        );
+        print "        $DBCRUDObject->{Name}: Column $DBCRUDObject->{UUIDDatabaseTableColumnName} "
+            . "in table $DBCRUDObject->{DatabaseTable}..."
+            . "\n";
 
         # Migrate columns with old name like z4o_database_backend_uuid before creating
         # a missing one with the new name. This migrates also the history table columns.
         my $UUIDColumnsMigrated = $DBCRUDObject->MigrateUUIDDatabaseTableColumns();
         if ( !$UUIDColumnsMigrated ) {
-            $Self->Print("\t<red>Error migrating column.</red>\n");
+            print "            Error migrating column\n";
             next DATABASEBACKENDOBJECT;
         }
 
         my $UUIDColumnPresent = $DBCRUDObject->IsUUIDDatabaseTableColumnPresent();
         if ($UUIDColumnPresent) {
-            $Self->Print("\t<green>Column already exists.</green>\n");
+            print "            Column already exists\n";
         }
         else {
             my $UUIDColumnCreated = $DBCRUDObject->CreateUUIDDatabaseTableColumn();
             if ( !$UUIDColumnCreated ) {
-                $Self->PrintError("\tColumn could not be created.\n");
+                print "        Column could not be created\n";
                 next DATABASEBACKENDOBJECT;
             }
 
-            $Self->Print("\t<green>Column successfully created.</green>\n");
+            print "            Column successfully created\n";
         }
 
         # Check/create history table UUID column.
@@ -77,22 +73,20 @@ sub Run {
 
         my $UUIDHistoryColumnPresent = $DBCRUDObject->IsUUIDHistoryDatabaseTableColumnPresent();
         if ($UUIDHistoryColumnPresent) {
-            $Self->Print("\t<green>History table UUID column already exists.</green>\n");
+            print "            History table UUID column already exists\n";
             next DATABASEBACKENDOBJECT;
         }
 
         my $UUIDHistoryColumnCreated = $DBCRUDObject->CreateUUIDHistoryDatabaseTableColumn();
         if ( !$UUIDHistoryColumnCreated ) {
-            $Self->Print("\t<red>History table UUID column could not be created.</red>\n");
+            print "            History table UUID column could not be created\n";
             next DATABASEBACKENDOBJECT;
         }
 
-        $Self->Print("\t<green>History table UUID column successfully created.</green>\n");
+        print "            History table UUID column successfully created\n";
     }
 
-    $Self->Print("\n<green>Done.</green>\n");
-
-    return $Self->ExitCodeOk();
+    return 1;
 }
 
 1;
