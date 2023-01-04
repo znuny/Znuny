@@ -1,4 +1,5 @@
 # 6.5.1 2023-??-??
+ - 2022-01-04 Reworked information of LastViews.
  - 2023-01-03 Process activity dialog article fields with subject and body can now be pre-filled. The Body also support RichtText. Thanks to Berner Fachhochschule (bfh.ch) for sponsoring this feature.
  - 2022-12-29 Reenabled TicketID for reporting (Dynamic/TicketList).
  - 2022-12-19 Added check for maximum filename length to file uploads.

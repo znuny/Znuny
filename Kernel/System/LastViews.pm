@@ -16,6 +16,8 @@ our @ObjectDependencies = (
     'Kernel::System::AuthSession',
     'Kernel::System::Log',
     'Kernel::System::Time',
+    'Kernel::System::Main',
+    'Kernel::Language',
 );
 
 use Kernel::System::VariableCheck qw(:all);
@@ -43,9 +45,39 @@ sub new {
     $Self->{SessionKey} = 'UserLastViews';
 
     @{ $Self->{ActionIgnore} } = (
+        'CustomerTicketArticleContent',
         'AgentTicketArticleContent',
         'AgentTicketSearch',
-        'CustomerTicketArticleContent',
+        'AgentTicketNote',
+        'AgentTicketActionCommon',
+        'AgentTicketArticleContent',
+        'AgentTicketAttachment',
+        'AgentTicketBounce',
+        'AgentTicketBulk',
+        'AgentTicketClose',
+        'AgentTicketCompose',
+        'AgentTicketCustomer',
+        'AgentTicketEmailOutbound',
+        'AgentTicketEmailResend',
+        'AgentTicketForward',
+        'AgentTicketFreeText',
+        'AgentTicketHistory',
+        'AgentTicketLockedView',
+        'AgentTicketLock',
+        'AgentTicketMerge',
+        'AgentTicketMove',
+        'AgentTicketOwner',
+        'AgentTicketPending',
+        'AgentTicketPhoneCommon',
+        'AgentTicketPhoneInbound',
+        'AgentTicketPhoneOutbound',
+        'AgentTicketPlain',
+        'AgentTicketPrint',
+        'AgentTicketPriority',
+        'AgentTicketProcess',
+        'AgentTicketResponsible',
+        'AgentTicketToUnitTest',
+        'AgentTicketWatcher',
     );
 
     @{ $Self->{SubactionIgnore} } = (
@@ -74,10 +106,8 @@ Returns:
         Frontend => 'Agent',
         Icon     => 'fa fa-table',
         PopUp    => 0,                  # 0 or 1
-        Params   => {
-            QueueID => '2',
-            View    => '2',
-            Filter  => 'Unlocked',
+        Params => {
+            Title   => 'Raw',
         },
         FrontendIcon => 'fa fa-user',
         URL          => 'Action=AgentTicketQueue;QueueID=2;View=;Filter=Unlocked',
@@ -163,6 +193,24 @@ sub Get {
         $LastView{Name} = $1;
     }
 
+    # replace LastView-parameters for some Modules with more detailed information.
+    my $LastViewParams = $Self->_LastViewParameters(
+        Param    => \%Param,
+        LastView => \%LastView,
+    );
+
+    # complete replacement of LastViewsParams, but add Subaction again
+    $LastViewParams->{Params}->{'Subaction'} = $Param{LastViewsParams}->{Subaction}
+        if defined $Param{LastViewsParams}->{Subaction};
+    $Param{LastViewsParams} = $LastViewParams->{Params};
+
+    # overwrite only some special LastView keys
+    if ( $LastViewParams && $LastViewParams->{LastView} ) {
+        for my $Key ( sort keys %{ $LastViewParams->{LastView} } ) {
+            $LastView{$Key} = $LastViewParams->{LastView}->{$Key};
+        }
+    }
+
     my %ActionMapping = $Self->GetActionMapping();
 
     # used if you have a config for this action
@@ -195,6 +243,289 @@ sub Get {
     );
 
     return %LastView;
+}
+
+=head2 _LastViewParameters()
+
+Returns additional LastView parameters for specific Modules.
+
+    my $LastViewParams = $Self->_LastViewParameters(
+        Param    => \%Param,
+        LastView => \%LastView,
+    );
+
+Returns:
+
+    $LastViewParams = {
+        'LastView' => {
+            'Name' => 'Znuny says hi!'
+        },
+        'Params' => {
+            'Nummer'   => '2021012710123456',
+            'Besitzer' => 'root@localhost'
+        }
+    };
+
+
+=cut
+
+sub _LastViewParameters {
+    my ( $Self, %Param ) = @_;
+
+    my $MainObject     = $Kernel::OM->Get('Kernel::System::Main');
+    my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
+
+    # Overwrite LastView-information for configured Modules.
+    my %TypeConfig = (
+        'Ticket' => {
+            'Module'             => 'Kernel::System::Ticket',
+            'Function'           => 'TicketGet',
+            'FunctionKey'        => 'TicketID',
+            'FunctionReturnType' => 'HASH',
+            'AttributeMapping'   => {
+                'Title'  => 'Title',
+                'Number' => 'TicketNumber',
+                'Owner'  => 'Owner',
+            },
+        },
+        'Statistics' => {
+            'Module'             => 'Kernel::System::Stats',
+            'Function'           => 'StatsGet',
+            'FunctionKey'        => 'StatID',
+            'ParamKey'           => 'StatID',
+            'FunctionReturnType' => 'HASHREF',
+            'AttributeMapping'   => {
+                'Title'  => 'Title',
+                'Number' => 'StatNumber',
+            },
+        },
+    );
+
+    # This config overwrites $TypeConfig for specific actions.
+    my %ActionConfig = (
+
+        # Ticket
+        'AgentTicketQueue' => {
+            'Module'             => 'Kernel::System::Queue',
+            'Function'           => 'QueueGet',
+            'ParamKey'           => 'QueueID',
+            'FunctionKey'        => 'ID',
+            'FunctionReturnType' => 'HASH',
+            'AttributeMapping'   => {
+                'Title' => 'Name',
+            },
+        },
+        'AgentTicketService' => {
+            'Module'              => 'Kernel::System::Service',
+            'Function'            => 'ServiceGet',
+            'FunctionKey'         => 'ServiceID',
+            'FunctionReturnType'  => 'HASH',
+            'AdditionalParamKeys' => {
+                'UserID' => '1',
+            },
+            'AttributeMapping' => {
+                'Title' => 'Name',
+            },
+        },
+
+        # FAQ
+        'AgentFAQZoom' => {
+            'Module'              => 'Kernel::System::FAQ',
+            'Function'            => 'FAQGet',
+            'FunctionKey'         => 'ItemID',
+            'FunctionReturnType'  => 'HASH',
+            'ParamKey'            => 'ItemID',
+            'AdditionalParamKeys' => {
+                'UserID' => '1',
+            },
+            'AttributeMapping' => {
+                'Title'    => 'Title',
+                'Category' => 'CategoryName',
+            },
+        },
+        'AgentFAQCategory' => {
+            'Module'              => 'Kernel::System::FAQ',
+            'Function'            => 'CategoryGet',
+            'FunctionKey'         => 'CategoryID',
+            'FunctionReturnType'  => 'HASH',
+            'ParamKey'            => 'CategoryID',
+            'AdditionalParamKeys' => {
+                'UserID' => '1',
+            },
+            'AttributeMapping' => {
+                'Title'   => 'Name',
+                'Comment' => 'Comment',
+            },
+        },
+
+        # Calendar
+        'AdminAppointmentCalendarManage' => {
+            'Module'             => 'Kernel::System::Calendar',
+            'Function'           => 'CalendarGet',
+            'FunctionKey'        => 'CalendarID',
+            'FunctionReturnType' => 'HASH',
+            'AttributeMapping'   => {
+                'Title' => 'CalendarName',
+            },
+        },
+
+        # Customers
+        'AdminCustomerCompany' => {
+            'Module'             => 'Kernel::System::CustomerCompany',
+            'Function'           => 'CustomerCompanyGet',
+            'FunctionKey'        => 'CustomerID',
+            'FunctionReturnType' => 'HASH',
+            'AttributeMapping'   => {
+                'Title'      => 'CustomerCompanyName',
+                'CustomerID' => 'CustomerID',
+            },
+        },
+        'AdminCustomerUser' => {
+            'Module'             => 'Kernel::System::CustomerUser',
+            'Function'           => 'CustomerName',
+            'FunctionKey'        => 'UserLogin',
+            'ParamKey'           => 'ID',
+            'FunctionReturnType' => 'STRING',
+            'AttributeMapping'   => {
+                'Title' => 'Name',
+            },
+        },
+        'AgentCustomerUserInformationCenter' => {
+            'Module'             => 'Kernel::System::CustomerUser',
+            'Function'           => 'CustomerName',
+            'FunctionKey'        => 'UserLogin',
+            'ParamKey'           => 'CustomerUserID',
+            'FunctionReturnType' => 'STRING',
+            'AttributeMapping'   => {
+                'Title' => 'Name',
+            },
+        },
+    );
+
+    my %LastViewParams;
+    my $Action       = $Param{Param}->{LastViewsParams}->{Action};
+    my $LastViewType = $Param{LastView}->{Type};
+    my $TitleLength  = 42;
+
+    return {} if !$Action;
+
+    # this is a special handling for AdminSystemConfiguration
+    if ( $Action eq "AdminSystemConfiguration" || $Action eq "AdminSystemConfigurationGroup" ) {
+        my $Title;
+        if ( $Action eq "AdminSystemConfigurationGroup" && defined $Param{Param}->{LastViewsParams}->{RootNavigation} )
+        {
+            $Title = substr( $Param{Param}->{LastViewsParams}->{RootNavigation}, 0, $TitleLength );
+            $Title .= " ..." if $Param{Param}->{LastViewsParams}->{RootNavigation} ne $Title;
+        }
+        if ( $Action eq "AdminSystemConfiguration" && defined $Param{Param}->{LastViewsParams}->{Setting} ) {
+            $Title = substr( $Param{Param}->{LastViewsParams}->{Setting}, 0, $TitleLength );
+            $Title .= " ..." if $Param{Param}->{LastViewsParams}->{Setting} ne $Title;
+        }
+
+        $LastViewParams{LastView}->{Name} = $Title;
+        return \%LastViewParams;
+    }
+
+    my %Config = %TypeConfig;
+    if ( $ActionConfig{$Action} ) {
+        %Config       = %ActionConfig;
+        $LastViewType = $Action;
+    }
+
+    my $ModuleName         = $Config{$LastViewType}->{Module};
+    my $Function           = $Config{$LastViewType}->{Function};
+    my $FunctionKey        = $Config{$LastViewType}->{FunctionKey};
+    my $FunctionReturnType = $Config{$LastViewType}->{FunctionReturnType};
+
+    return {} if !$LastViewType;
+    return {} if !$Config{$LastViewType};
+    return {} if !$FunctionReturnType;
+    return {} if !$FunctionKey;
+
+    return {} if !$MainObject->Require( $ModuleName, Silent => 1 );
+    my $Module = $Kernel::OM->Get($ModuleName);
+
+    return {} if !$Module->can($Function);
+
+    # In the most cases FunctionKey == ParamKey, but if not, use configured ParamKey.
+    my $ParamKey = $Config{$LastViewType}->{ParamKey} || $Config{$LastViewType}->{FunctionKey};
+    return {} if !$ParamKey;
+
+    my $ParamValue = $Param{Param}->{LastViewsParams}->{$ParamKey};
+    return {} if !$ParamValue;
+
+    my %AdditionalParams = %{ $Config{$LastViewType}->{AdditionalParamKeys} || {} };
+
+    if ( $FunctionReturnType eq "HASHREF" ) {
+        my $Data = $Module->$Function(
+            $FunctionKey => $ParamValue,
+            %AdditionalParams,
+        );
+        return {} if !$Data;
+
+        for my $Attribute ( sort keys %{ $Config{$LastViewType}->{AttributeMapping} } ) {
+            my $Key = $Config{$LastViewType}->{AttributeMapping}->{$Attribute};
+
+            # Show 'Title' only as the Title of the LastView and not again in Params-list.
+            if ( $Attribute eq "Title" ) {
+                my $Title = substr( $Data->{$Key}, 0, $TitleLength );
+                $Title .= " ..." if $Data->{$Key} ne $Title;
+                $LastViewParams{LastView}->{Name} = $Title;
+            }
+            else {
+                $Attribute = $LanguageObject->Translate($Attribute);
+                $LastViewParams{Params}->{$Attribute} = $Data->{$Key};
+            }
+        }
+    }
+
+    if ( $FunctionReturnType eq "HASH" ) {
+        my %Data = $Module->$Function(
+            $FunctionKey => $ParamValue,
+            %AdditionalParams,
+        );
+        return {} if !%Data;
+
+        for my $Attribute ( sort keys %{ $Config{$LastViewType}->{AttributeMapping} } ) {
+            my $Key = $Config{$LastViewType}->{AttributeMapping}->{$Attribute};
+
+            # Show 'Title' only as the Title of the LastView and not again in Params-list.
+            if ( $Attribute eq "Title" ) {
+                my $Title = substr( $Data{$Key}, 0, $TitleLength );
+                $Title .= " ..." if $Data{$Key} ne $Title;
+                $LastViewParams{LastView}->{Name} = $Title;
+            }
+            else {
+                $Attribute = $LanguageObject->Translate($Attribute);
+                $LastViewParams{Params}->{$Attribute} = $Data{$Key};
+            }
+        }
+    }
+
+    if ( $FunctionReturnType eq "STRING" ) {
+        my $Data = $Module->$Function(
+            $FunctionKey => $ParamValue,
+            %AdditionalParams,
+        );
+        return {} if !$Data;
+
+        for my $Attribute ( sort keys %{ $Config{$LastViewType}->{AttributeMapping} } ) {
+            my $Key = $Config{$LastViewType}->{AttributeMapping}->{$Attribute};
+
+            # Show 'Title' only as the Title of the LastView and not again in Params-list.
+            if ( $Attribute eq "Title" ) {
+                my $Title = substr( $Data, 0, $TitleLength );
+                $Title .= " ..." if $Data ne $Title;
+                $LastViewParams{LastView}->{Name} = $Title;
+            }
+            else {
+                $Attribute = $LanguageObject->Translate($Attribute);
+                $LastViewParams{Params}->{$Attribute} = $Data;
+            }
+        }
+    }
+
+    return \%LastViewParams;
 }
 
 =head2 GetList()
@@ -477,6 +808,15 @@ sub Update {
         SessionID => $Param{SessionID},
         Key       => $SessionKey,
         Value     => \@LastViews,
+    );
+
+    return 1 if !$Param{Request}->{RequestedURL};
+
+    # store last screen
+    $SessionObject->UpdateSessionID(
+        SessionID => $Param{SessionID},
+        Key       => 'LastScreenView',
+        Value     => $Param{Request}->{RequestedURL},
     );
 
     return 1;
