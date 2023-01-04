@@ -888,7 +888,7 @@ Core.Form.Validate = (function (TargetNS) {
      *      Validate a single element.
      */
     TargetNS.ValidateElement = function ($Element) {
-        if (isJQueryObject($Element)) {
+        if (isJQueryObject($Element) && $Element.closest('form').length) {
             return $Element.closest('form').validate().element($Element);
         }
         return false;

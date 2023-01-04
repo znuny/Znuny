@@ -479,6 +479,11 @@ Core.UI.Dialog = (function (TargetNS) {
         // Check window height and adjust the scrollable height of InnerContent
         AdjustScrollableHeight(Params.AllowAutoGrow);
 
+        // add resize css attribute
+        $('.Dialog:visible .Content').css('resize', 'both');
+        $('.Dialog:visible .Content').css('max-height', 'fit-content');
+        $('.Dialog:visible .Content .InnerContent').css('max-height', 'fit-content');
+
         // Adjust dialog position on mobile devices
         if (FullsizeMode) {
             $Dialog.css('top', $(window).scrollTop());

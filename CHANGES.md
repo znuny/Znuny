@@ -1,4 +1,5 @@
 # 6.5.1 2023-??-??
+ - 2023-01-03 Process activity dialog article fields with subject and body can now be pre-filled. The Body also support RichtText. Thanks to Berner Fachhochschule (bfh.ch) for sponsoring this feature.
  - 2022-12-29 Reenabled TicketID for reporting (Dynamic/TicketList).
  - 2022-12-19 Added check for maximum filename length to file uploads.
  - 2022-12-16 Added new function Kernel::System::Web::Request::GetParams() to get request parameters.

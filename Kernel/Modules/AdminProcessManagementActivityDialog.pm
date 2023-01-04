@@ -895,6 +895,23 @@ sub _ShowEdit {
         Class       => 'Modernize',
     );
 
+    if ( $LayoutObject->{BrowserRichText} ) {
+
+        $Param{RichTextCSS} = 'RichText';
+
+        # set up rich text editor
+        $LayoutObject->SetRichTextParameters(
+            Data => \%Param,
+        );
+    }
+
+    $LayoutObject->Block(
+        Name => 'ArticleContainer',
+        Data => {
+            %Param
+        },
+    );
+
     my @ChannelList = $Kernel::OM->Get('Kernel::System::CommunicationChannel')->ChannelList();
 
     # Allow only Internal and Phone communication channels, this has to be hard coded at the moment.
