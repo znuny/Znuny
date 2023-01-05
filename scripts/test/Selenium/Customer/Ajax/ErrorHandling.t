@@ -70,6 +70,11 @@ $Selenium->RunTest(
             'Check for opened alert text',
         );
 
+        # Wait until modal dialog has closed.
+        $Selenium->WaitFor(
+            JavaScript => 'return typeof($) === "function" && $(".Dialog.Modal").length;'
+        );
+
         # Close dialog.
         $Selenium->find_element( '#DialogButton2', 'css' )->click();
 

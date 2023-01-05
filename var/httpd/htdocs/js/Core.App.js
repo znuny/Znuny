@@ -131,7 +131,10 @@ Core.App = (function (TargetNS) {
             });
             return AppropriateBrowser;
         }
-        alert(Core.Language.Translate('Error: Browser Check failed!'));
+        Core.UI.Dialog.ShowAlert(
+            Core.Language.Translate('An Error Occurred'),
+            Core.Language.Translate('Error: Browser Check failed!')
+        );
     };
 
     /**
