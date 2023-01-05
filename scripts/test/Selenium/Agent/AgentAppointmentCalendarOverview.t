@@ -271,7 +271,7 @@ $Selenium->RunTest(
             Element => '#CalendarID',
             Value   => $Calendar1{CalendarID},
         );
-        $Selenium->find_element( '#EndHour', 'css' )->send_keys('18');
+        $Selenium->find_element( '#EndHour',    'css' )->send_keys('18');
         $Selenium->find_element( '#TicketLink', 'css' )->send_keys($TicketNumber);
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("li.ui-menu-item:visible").length;' );
         $Selenium->execute_script("\$('li.ui-menu-item:contains($TicketNumber)').click();");
