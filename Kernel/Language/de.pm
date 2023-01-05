@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # Copyright (C) 2010 Thomas Kaltenbrunner <tkaltenbrunner at opc.de>
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.997730588426001;
+    $Self->{Completeness}        = 0.997732793522267;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1651,6 +1651,12 @@ sub Data {
             'Sollten Sie weitere Fragen haben, freuen wir uns, diese zu beantworten.',
         'Install Package' => 'Paket installieren',
         'Update Package' => 'Paket Aktualisieren',
+        'Package' => 'Paket',
+        'Required package %s is already installed.' => 'Vorausgesetzes Paket %s ist bereits installiert.',
+        'Required Perl module %s is already installed.' => 'Vorausgesetzes Perl Modul %s ist bereits installiert.',
+        'Required package %s needs to get installed!' => 'Vorausgesetzes Paket %s muss noch installiert werden!',
+        'Required package %s needs to get updated to version %s!' => 'Vorausgesetzes Paket %s muss noch auf Version %s aktuallisiert werden!',
+        'Required Perl module %s needs to get installed or updated!' => 'Vorausgesetzes Perl Modul %s muss noch installiert oder aktuallisiert werden!',
         'Continue' => 'Weiter',
         'Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Stellen Sie sicher, dass Ihre Datenbank Pakete über %s MB akzeptiert (Derzeit werden nur Pakete bis %s MB akzeptiert). Bitte passen Sie die Einstellung max_allowed_packet Ihrer Datenbank-Konfiguration an, um Fehler zu vermeiden.',
@@ -2265,7 +2271,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'Berechtigungen',
-        'Package' => 'Paket',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
         'System Maintenance Management' => 'Systemwartungs-Verwaltung',
@@ -7832,8 +7837,8 @@ sub Data {
             'Frontend-Modul für die Kundenschnittstelle, das die AJAX-Schnittstelle für die Webservice-Dynamic-Field-Backends bereitstellt.',
         'Ticket event module that stores values of the selected web service record into the configured additional dynamic fields.' =>
             'Ticket-Event-Modul zur Speicherung von Werten des gewählten Webservice-Datensatzes in den konfigurierten zusätzlichen dynamischen Feldern.',
-        'It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
-            'Es kann vorkommen, dass ein dynamisches Feld vom Typ WebserviceText oder WebserviceMultiselect auf einen Wert gesetzt wird, der aus einer konfigurierten Webservice-Tabelle geholt wird, aber der Webservice-Datensatz keinen Wert in dem Feld hat, das als angezeigter Wert konfiguriert ist. Aktivieren Sie diese Einstellung, um diese dynamischen Felder im Ticketinformations-Widget von AgentTicketZoom auszublenden, damit sie nicht als leer angezeigt werden.',
+        'It might happen that a dynamic field of type WebserviceDropdown or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
+            'Es kann vorkommen, dass ein dynamisches Feld vom Typ WebserviceDropdown oder WebserviceMultiselect auf einen Wert gesetzt wird, der aus einer konfigurierten Webservice-Tabelle geholt wird, aber der Webservice-Datensatz keinen Wert in dem Feld hat, das als angezeigter Wert konfiguriert ist. Aktivieren Sie diese Einstellung, um diese dynamischen Felder im Ticketinformations-Widget von AgentTicketZoom auszublenden, damit sie nicht als leer angezeigt werden.',
         'Mapping for field values received from form. This setting is necessary for the correct identification of the form fields. Key means value type, value means possible representation in views.' =>
             'Mapping für die vom Formular empfangenen Feldwerte. Diese Einstellung ist für die korrekte Identifizierung der Formularfelder notwendig. Schlüssel ist Typ, Inhalt ist möglicher Name im Formular.',
         'Mapping for field values received from form which have multiple values. This setting is needed when the view shows the values of a particular field in a custom way (e.g. selectable customer user in ticket creation view). This setting is always respected first. There is also the possibility to specify an order for checking fields. (Field of customer user in ticket creation view can be saved as CustomerUser or just simple e-mail. First we need to check if CustomerKey is present (CustomerKey -> ID of CustomerUser). If not, then simply take plain text (CustomerTicketText -> E-mail)).' =>
@@ -8465,6 +8470,8 @@ sub Data {
         'The following files are not allowed to be uploaded: %s' => 'Die folgenden Dateien dürfen nicht geändert werden: %s',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             'Folgende Dateien überschreiten die Maximalgröße pro Datei (%s) und wurden nicht aktualisiert: %s',
+        'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
+            'Die Namen der folgenden Dateien überschreiten die Maximallänge von %s Zeichen und wurden nicht hochgeladen: %s',
         'The following files were already uploaded and have not been uploaded again: %s' =>
             'Folgende Dateien waren bereits hochgeladen und wurden nicht erneut verarbeitet: %s',
         'No space left for the following files: %s' => 'Kein Speicherplatz verfügbar für folgende Dateien: %s',
@@ -8562,8 +8569,8 @@ Ihr Helpdesk-Team
         'Admin' => 'Admin',
         'Admin Area.' => 'Administratorbereich.',
         'Admin Notification' => 'Admin-Benachrichtigung',
-        'Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect' =>
-            'Admin-Konfigurationsdialog für die dynamischen Feldtypen WebserviceText und WebserviceMultiselect',
+        'Admin configuration dialog for dynamic field types WebserviceDropdown and WebserviceMultiselect' =>
+            'Admin-Konfigurationsdialog für die dynamischen Feldtypen WebserviceDropdown und WebserviceMultiselect',
         'Admin modules overview.' => 'Admin Modul Übersicht.',
         'Admin.' => 'Admin.',
         'Administration' => 'Administration',
@@ -9204,8 +9211,8 @@ Ihr Helpdesk-Team
         'We are performing scheduled maintenance. We should be back online shortly.' =>
             'Wir führen eine geplante Wartung durch. Wir werden bald wieder online sein.',
         'Web Services' => 'Webservices',
+        'Web service (Dropdown)' => 'Webservice (Einfachauswahl)',
         'Web service (Multiselect)' => 'Webservice (Mehrfachauswahl)',
-        'Web service (Text)' => 'Webservice (Text)',
         'Web service dynamic field AJAX interface' => 'AJAX-Schnittstelle für dynamische Webservice-Felder',
         'Webservice' => 'Webservice',
         'Yes, but hide archived tickets' => 'Ja, aber archivierte Tickets verstecken',
@@ -9547,6 +9554,7 @@ Ihr Helpdesk-Team
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',
+        'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s',
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',

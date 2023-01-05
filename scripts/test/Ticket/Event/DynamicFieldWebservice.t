@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -60,14 +60,14 @@ $Self->True(
 
 my @Tests = (
 
-    # WebserviceText
+    # WebserviceDropdown
     {
-        Name         => 'WebserviceText - SearchKey - Key',
+        Name         => 'WebserviceDropdown - SearchKey - Key',
         DynamicField => {
-            Name       => $Param{DynamicFieldName} . 'Text',
-            Label      => $Param{DynamicFieldName} . 'Text',
+            Name       => $Param{DynamicFieldName} . 'Dropdown',
+            Label      => $Param{DynamicFieldName} . 'Dropdown',
             ObjectType => 'Ticket',
-            FieldType  => 'WebserviceText',
+            FieldType  => 'WebserviceDropdown',
             Config     => {
                 InvokerSearch            => $Param{InvokerSearch},
                 InvokerGet               => $Param{InvokerGet},
@@ -92,12 +92,12 @@ my @Tests = (
         ],
     },
     {
-        Name         => 'WebserviceText - SearchKey - Key and Value',
+        Name         => 'WebserviceDropdown - SearchKey - Key and Value',
         DynamicField => {
-            Name       => $Param{DynamicFieldName} . 'Text',
-            Label      => $Param{DynamicFieldName} . 'Text',
+            Name       => $Param{DynamicFieldName} . 'Dropdown',
+            Label      => $Param{DynamicFieldName} . 'Dropdown',
             ObjectType => 'Ticket',
-            FieldType  => 'WebserviceText',
+            FieldType  => 'WebserviceDropdown',
             Config     => {
                 InvokerSearch            => $Param{InvokerSearch},
                 InvokerGet               => $Param{InvokerGet},

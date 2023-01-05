@@ -361,24 +361,14 @@
     <!--
         Dynamic field web service
     -->
-    <Setting Name="DynamicFields::Driver###WebserviceText" Required="1" Valid="1">
+    <Setting Name="DynamicFields::Driver###WebserviceDropdown" Required="0" Valid="1">
         <Description Translatable="1">Dynamic field backend registration.</Description>
         <Navigation>Core::DynamicFields::DriverRegistration</Navigation>
         <Value>
             <Hash>
-                <Item Key="DisplayName" Translatable="1">Web service (Text)</Item>
-                <Item Key="Module">Kernel::System::DynamicField::Driver::WebserviceText</Item>
+                <Item Key="DisplayName" Translatable="1">Web service (Dropdown)</Item>
+                <Item Key="Module">Kernel::System::DynamicField::Driver::WebserviceDropdown</Item>
                 <Item Key="ConfigDialog">AdminDynamicFieldWebservice</Item>
-                <Item Key="Config">
-                    <Hash>
-                        <Item Key="DefaultValue"></Item>
-                        <Item Key="Link"></Item>
-                        <Item Key="LinkPreview"></Item>
-                        <Item Key="Webservice">Webservice</Item>
-                        <Item Key="InvokerSearch">Invoker</Item>
-                        <Item Key="InvokerGet">Invoker</Item>
-                    </Hash>
-                </Item>
             </Hash>
         </Value>
     </Setting>
@@ -484,7 +474,7 @@
                         </Array>
                     </Item>
                     <Item Key="Description">Admin</Item>
-                    <Item Key="Title" Translatable="1">Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect</Item>
+                    <Item Key="Title" Translatable="1">Admin configuration dialog for dynamic field types WebserviceDropdown and WebserviceMultiselect</Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
             </Item>
@@ -510,7 +500,7 @@
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketZoom###HideWebserviceDynamicFieldsWithoutDisplayValue" Required="1" Valid="1">
-        <Description Translatable="1">It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.</Description>
+        <Description Translatable="1">It might happen that a dynamic field of type WebserviceDropdown or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.</Description>
         <Navigation>Core::DynamicFieldWebservice</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
@@ -2292,9 +2282,9 @@
                         <Array>
                         </Array>
                     </Item>
-                    <Item Key="Description">Autompletion for rich text editor.</Item>
-                    <Item Key="Title">Autompletion for rich text editor</Item>
-                    <Item Key="NavBarName">Autompletion for rich text editor</Item>
+                    <Item Key="Description">Autocompletion for rich text editor.</Item>
+                    <Item Key="Title">Autocompletion for rich text editor</Item>
+                    <Item Key="NavBarName">Autocompletion for rich text editor</Item>
                 </Hash>
             </Item>
         </Value>
@@ -2313,9 +2303,30 @@
                         <Array>
                         </Array>
                     </Item>
-                    <Item Key="Description">Autompletion for rich text editor.</Item>
-                    <Item Key="Title">Autompletion for rich text editor</Item>
-                    <Item Key="NavBarName">Autompletion for rich text editor</Item>
+                    <Item Key="Description">Autocompletion for rich text editor.</Item>
+                    <Item Key="Title">Autocompletion for rich text editor</Item>
+                    <Item Key="NavBarName">Autocompletion for rich text editor</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="PublicFrontend::Module###AJAXRichTextAutocompletion" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the public interface.</Description>
+        <Navigation>Frontend::Public::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Autocompletion for rich text editor.</Item>
+                    <Item Key="Title">Autocompletion for rich text editor</Item>
+                    <Item Key="NavBarName">Autocompletion for rich text editor</Item>
                 </Hash>
             </Item>
         </Value>
