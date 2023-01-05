@@ -1,4 +1,5 @@
 # 6.5.1 2023-??-??
+ - 2023-01-05 Fixed JavaScript error in edit-mode in AdminACL.
  - 2022-01-05 Changed JS alert() function to Core.UI.Dialog.ShowAlert().
  - 2022-01-04 Show PackageRequired- and ModuleRequired-information while package installation & update.
  - 2022-01-04 Reworked information of LastViews.
