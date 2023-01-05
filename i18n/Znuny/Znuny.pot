@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-10-12 08:15+0000\n"
+"POT-Creation-Date: 2022-12-19 10:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -735,6 +735,18 @@ msgid "Filter for attachments"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
+msgid "Related Actions"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
+msgid "Templates"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
+msgid "Templates ↔ Attachments"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
 msgid "Filename"
 msgstr ""
 
@@ -772,6 +784,10 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
 msgid "Filter for auto responses"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
+msgid "Queues ↔ Auto Responses"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
@@ -1159,6 +1175,14 @@ msgid "Select"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
+msgid "Customer Users"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
+msgid "Customers ↔ Groups"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "List (only %s shown - more available)"
 msgstr ""
 
@@ -1227,15 +1251,15 @@ msgid "If nothing is selected, then there are no permissions in this group (tick
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
-msgid "Search Results"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
 msgid "Customers"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
 msgid "Groups"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
+msgid "Search Results"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
@@ -1296,6 +1320,18 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
 msgid "Customer user are needed to have a customer history and to login via customer panel."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+msgid "Customer Users ↔ Customers"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+msgid "Customer Users ↔ Groups"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+msgid "Customer Users ↔ Services"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
@@ -1391,10 +1427,6 @@ msgid "Select the customer user:customer relations."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
-msgid "Customer Users"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
 msgid "Change Customer Relations for Customer User"
 msgstr ""
 
@@ -1470,6 +1502,10 @@ msgstr ""
 msgid "Services"
 msgstr ""
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
+msgid "Service Level Agreements"
+msgstr ""
+
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
 msgid "Dynamic Fields Management"
 msgstr ""
@@ -1508,6 +1544,10 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
 msgid "Export configurations"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
+msgid "Process Management"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
@@ -4066,6 +4106,14 @@ msgstr ""
 msgid "It's useful for ASP solutions. "
 msgstr ""
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
+msgid "Agents ↔ Groups"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
+msgid "Roles ↔ Groups"
+msgstr ""
+
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
 msgid "System Log"
 msgstr ""
@@ -4879,6 +4927,34 @@ msgid "Update Package"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "The package contains cyclic dependencies"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Package"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required package %s is already installed."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required Perl module %s is already installed."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required package %s needs to get installed!"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required package %s needs to get updated to version %s!"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required Perl module %s needs to get installed or updated!"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Continue"
 msgstr ""
 
@@ -5179,15 +5255,15 @@ msgid "Filter for priorities"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPriority.tt
+msgid "Configure Priority Visibility and Defaults"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPriority.tt
 msgid "This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPriority.tt
 msgid "This priority is used in the following config settings:"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-msgid "Process Management"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
@@ -5236,6 +5312,18 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Access Control Lists (ACL)"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Generic Agent"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Manage Process Widiget Groups"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
@@ -5703,6 +5791,34 @@ msgid "Filter for queues"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
+msgid "Email Addresses"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
+msgid "PostMaster Mail Accounts"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
+msgid "Salutations"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
+msgid "Signatures"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
+msgid "Templates ↔ Queues"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
+msgid "Configure Working Hours"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
+msgid "Configure Queue Related Settings"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
 msgid "A queue with this name already exists!"
 msgstr ""
 
@@ -5846,10 +5962,6 @@ msgstr ""
 msgid "Filter for templates"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueueTemplates.tt
-msgid "Templates"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
 msgid "Role Management"
 msgstr ""
@@ -5872,6 +5984,10 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
 msgid "Create a role and put groups in it. Then add the role to the users."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
+msgid "Agents ↔ Roles"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
@@ -5979,7 +6095,15 @@ msgid "Filter for SLAs"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSLA.tt
+msgid "Configure SLA Visibility and Defaults"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSLA.tt
 msgid "Please write only numbers!"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSLA.tt
+msgid "Minimum Time Between Incidents"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
@@ -6211,11 +6335,19 @@ msgid "Edit Service"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
+msgid "Configure Service Visibility and Defaults"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
 msgid "Service name maximum length is 200 characters (with Sub-service)."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
 msgid "Sub-service of"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
+msgid "Criticality"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
@@ -6324,6 +6456,14 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
 msgid "Please also update the states in SysConfig where needed."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
+msgid "Configure State Visibility and Defaults"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
+msgid "Configure State Type Visibility and Defaults"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
@@ -6626,10 +6766,6 @@ msgstr ""
 msgid "Permissions"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
-msgid "Package"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
 msgid "System Maintenance Management"
 msgstr ""
@@ -6856,6 +6992,10 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminType.tt
 msgid "Filter for types"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminType.tt
+msgid "Configure Type Visibility and Defaults"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminType.tt
@@ -10318,10 +10458,6 @@ msgstr ""
 msgid "Yes, but require at least one active notification method."
 msgstr ""
 
-#. Perl Module: Kernel/Modules/AdminAttachment.pm
-msgid "Attachment added!"
-msgstr ""
-
 #. Perl Module: Kernel/Modules/AdminAutoResponse.pm
 msgid "Auto Response added!"
 msgstr ""
@@ -11359,10 +11495,6 @@ msgid "The package needs to be reinstalled"
 msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminPackageManager.pm
-msgid "The package contains cyclic dependencies"
-msgstr ""
-
-#. Perl Module: Kernel/Modules/AdminPackageManager.pm
 msgid "Not found in on-line repositories"
 msgstr ""
 
@@ -11916,10 +12048,6 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminTemplate.pm
 msgid "Template updated!"
-msgstr ""
-
-#. Perl Module: Kernel/Modules/AdminTemplate.pm
-msgid "Template added!"
 msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
@@ -20255,7 +20383,7 @@ msgid "Ticket event module that stores values of the selected web service record
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty."
+msgid "It might happen that a dynamic field of type WebserviceDropdown or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
@@ -20604,6 +20732,10 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Module to grant access to the mentioned agents of a ticket."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Mapping of non-standard time zones to official ones."
 msgstr ""
 
 #. XML Definition: scripts/database/initial_insert.xml
@@ -21811,6 +21943,10 @@ msgid "The following files exceed the maximum allowed size per file of %s and we
 msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.UI.js
+msgid "The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s"
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "The following files were already uploaded and have not been uploaded again: %s"
 msgstr ""
 
@@ -21994,10 +22130,6 @@ msgid "AJAX interface for the web service dynamic field backends."
 msgstr ""
 
 #. SysConfig
-msgid "Access Control Lists (ACL)"
-msgstr ""
-
-#. SysConfig
 msgid "AccountedTime"
 msgstr ""
 
@@ -22074,7 +22206,7 @@ msgid "Admin Notification"
 msgstr ""
 
 #. SysConfig
-msgid "Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect"
+msgid "Admin configuration dialog for dynamic field types WebserviceDropdown and WebserviceMultiselect"
 msgstr ""
 
 #. SysConfig
@@ -22119,14 +22251,6 @@ msgstr ""
 
 #. SysConfig
 msgid "Agent User Search."
-msgstr ""
-
-#. SysConfig
-msgid "Agents ↔ Groups"
-msgstr ""
-
-#. SysConfig
-msgid "Agents ↔ Roles"
 msgstr ""
 
 #. SysConfig
@@ -22666,18 +22790,6 @@ msgid "Customer User-Customer Relations"
 msgstr ""
 
 #. SysConfig
-msgid "Customer Users ↔ Customers"
-msgstr ""
-
-#. SysConfig
-msgid "Customer Users ↔ Groups"
-msgstr ""
-
-#. SysConfig
-msgid "Customer Users ↔ Services"
-msgstr ""
-
-#. SysConfig
 msgid "Customer preferences."
 msgstr ""
 
@@ -22707,10 +22819,6 @@ msgstr ""
 
 #. SysConfig
 msgid "CustomerUser"
-msgstr ""
-
-#. SysConfig
-msgid "Customers ↔ Groups"
 msgstr ""
 
 #. SysConfig
@@ -22863,10 +22971,6 @@ msgstr ""
 
 #. SysConfig
 msgid "Edit customer company"
-msgstr ""
-
-#. SysConfig
-msgid "Email Addresses"
 msgstr ""
 
 #. SysConfig
@@ -23738,10 +23842,6 @@ msgid "PostMaster Filters"
 msgstr ""
 
 #. SysConfig
-msgid "PostMaster Mail Accounts"
-msgstr ""
-
-#. SysConfig
 msgid "Print this ticket"
 msgstr ""
 
@@ -23806,10 +23906,6 @@ msgid "Queue view"
 msgstr ""
 
 #. SysConfig
-msgid "Queues ↔ Auto Responses"
-msgstr ""
-
-#. SysConfig
 msgid "Refresh interval"
 msgstr ""
 
@@ -23846,10 +23942,6 @@ msgid "Right"
 msgstr ""
 
 #. SysConfig
-msgid "Roles ↔ Groups"
-msgstr ""
-
-#. SysConfig
 msgid "Romanian"
 msgstr ""
 
@@ -23867,10 +23959,6 @@ msgstr ""
 
 #. SysConfig
 msgid "SMS"
-msgstr ""
-
-#. SysConfig
-msgid "Salutations"
 msgstr ""
 
 #. SysConfig
@@ -24006,10 +24094,6 @@ msgid "Serbian Latin"
 msgstr ""
 
 #. SysConfig
-msgid "Service Level Agreements"
-msgstr ""
-
-#. SysConfig
 msgid "Service view"
 msgstr ""
 
@@ -24055,10 +24139,6 @@ msgstr ""
 
 #. SysConfig
 msgid "Signature data."
-msgstr ""
-
-#. SysConfig
-msgid "Signatures"
 msgstr ""
 
 #. SysConfig
@@ -24195,14 +24275,6 @@ msgstr ""
 
 #. SysConfig
 msgid "System Maintenance"
-msgstr ""
-
-#. SysConfig
-msgid "Templates ↔ Attachments"
-msgstr ""
-
-#. SysConfig
-msgid "Templates ↔ Queues"
 msgstr ""
 
 #. SysConfig
@@ -24530,11 +24602,11 @@ msgid "Web Services"
 msgstr ""
 
 #. SysConfig
-msgid "Web service (Multiselect)"
+msgid "Web service (Dropdown)"
 msgstr ""
 
 #. SysConfig
-msgid "Web service (Text)"
+msgid "Web service (Multiselect)"
 msgstr ""
 
 #. SysConfig

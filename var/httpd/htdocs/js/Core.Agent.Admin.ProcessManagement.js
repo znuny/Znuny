@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -1200,13 +1200,16 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             }
 
             // Open dialog
-            Core.UI.Dialog.ShowContentDialog(
-                $('#Dialogs #FieldDetails'),
-                Core.Language.Translate('Edit Field Details') + ': ' + FieldNameTranslated,
-                '200px',
-                'Center',
-                true,
-                [
+            Core.UI.Dialog.ShowDialog({
+
+                HTML: $('#Dialogs #FieldDetails'),
+                Title: Core.Language.Translate('Edit Field Details') + ': ' + FieldNameTranslated,
+                PositionTop: '50px',
+                PositionLeft: 'Center',
+                Modal: true,
+                CloseOnClickOutside: false,
+                CloseOnEscape: true,
+                Buttons: [
                     {
                         Label: Core.Language.Translate('Save'),
                         Class: 'Primary',
@@ -1221,8 +1224,13 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
 
                             if (Fieldname === 'Article') {
                                 if (typeof FieldConfigElement.Config === 'undefined'){
-                                     FieldConfigElement.Config = {};
+                                    FieldConfigElement.Config = {};
                                 }
+
+                                CKEDITOR.instances['Body'].updateElement();
+                                FieldConfigElement.Config.Subject = $('#Subject').val();
+                                FieldConfigElement.Config.Body = $('#Body').val();
+
                                 FieldConfigElement.Config.CommunicationChannel = $('#CommunicationChannel').val();
 
                                 FieldConfigElement.Config.IsVisibleForCustomer = '0';
@@ -1259,8 +1267,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                             Core.UI.Dialog.CloseDialog($('.Dialog'));
                         }
                     }
-                ]
-            );
+                ],
+                AllowAutoGrow: true,
+            });
 
             // some fields must be mandatory, if they are present.
             // remove option from dropdown for these fields
@@ -1295,6 +1304,12 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                     if (typeof FieldConfig.Config === 'undefined'){
                         FieldConfig.Config = {};
                     }
+                    if (FieldConfig.Config.Subject) {
+                        $('#Subject').val(FieldConfig.Config.Subject);
+                    }
+                    if (FieldConfig.Config.Body) {
+                        $('#Body').val(FieldConfig.Config.Body);
+                    }
                     if (FieldConfig.Config.CommunicationChannel) {
                         $('#CommunicationChannel').val(FieldConfig.Config.CommunicationChannel);
                     }
@@ -1327,6 +1342,15 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
 
             // only article should show Communication channel select.
             if (Fieldname === 'Article') {
+
+                $('#DefaultValue').parent().addClass('Hidden');
+                $("label[for='DefaultValue']").css('display', 'none');
+
+                $('.ArticleContainer').removeClass('Hidden');
+                $('.ArticleContainer').prev('label').css('display', 'block');
+                $('.ArticleContainer .Modernize').trigger('redraw.InputField');
+
+                Core.UI.RichTextEditor.InitEditor($('textarea.RichTextInDialog'));
 
                 $('#CommunicationChannelContainer').removeClass('Hidden');
                 $('#CommunicationChannelContainer').prev('label').css('display', 'block');
@@ -1362,6 +1386,12 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                 }
             }
             else {
+
+                $('#DefaultValue').parent().removeClass('Hidden');
+                $("label[for='DefaultValue']").css('display', 'block');
+
+                $('.ArticleContainer').addClass('Hidden');
+                $('.ArticleContainer').prev('label').css('display', 'none');
 
                 $('#CommunicationChannelContainer').addClass('Hidden');
                 $('#CommunicationChannelContainer').prev('label').css('display', 'none');

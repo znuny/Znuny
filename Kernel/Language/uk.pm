@@ -1,7 +1,7 @@
 # --
 # Copyright (C) 2010 ÐÐµÐ»ÑÑÐºÐ¸Ð¹ ÐÑÑÐµÐ¼
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.462562936495046;
+    $Self->{Completeness}        = 0.460890688259109;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -256,6 +256,9 @@ sub Data {
         'Edit Attachment' => 'Редагувати вкладення',
         'Filter for Attachments' => 'Фільтр для Прикріплень',
         'Filter for attachments' => '',
+        'Related Actions' => '',
+        'Templates' => 'Шаблони',
+        'Templates ↔ Attachments' => '',
         'Filename' => 'Ім\'я файлу',
         'Download file' => 'Завантажити файл',
         'Delete this attachment' => 'Вилучити це вкладення',
@@ -268,6 +271,7 @@ sub Data {
         'Edit Auto Response' => 'Змінити автовідповідь',
         'Filter for Auto Responses' => 'Фільтр для Авто-Відповідей',
         'Filter for auto responses' => '',
+        'Queues ↔ Auto Responses' => '',
         'Response' => 'Відповідь',
         'Auto response from' => 'Автовідповідь від',
         'Reference' => 'Посилання',
@@ -393,6 +397,8 @@ sub Data {
         'Search' => 'Пошук',
         'Wildcards like \'*\' are allowed.' => 'Підстановочні символи як-то «*» є дозволеними.',
         'Select' => 'Вибір',
+        'Customer Users' => 'Клієнти',
+        'Customers ↔ Groups' => '',
         'List (only %s shown - more available)' => 'тільки %s показано - більше варіантів',
         'total' => 'загально',
         'Please enter a search term to look for customers.' => ' Будь ласка, уведіть пошукове вираження для пошуку клієнтів.',
@@ -415,9 +421,9 @@ sub Data {
         'Select the customer:group permissions.' => 'Выбериет клієнта:дозволу для групи',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Якщо нічого не обрано, то у цієї групи немає прав (заявки не будуть доступними для клієнта).',
-        'Search Results' => 'Результати пошуку',
         'Customers' => 'Клієнти',
         'Groups' => 'Групи',
+        'Search Results' => 'Результати пошуку',
         'Change Group Relations for Customer' => 'Зміна привязки групи до Клієнта',
         'Change Customer Relations for Group' => 'Зміна привязки Клієнта до групи ',
         'Toggle %s Permission for all' => 'Застосувати %s для всіх',
@@ -437,6 +443,9 @@ sub Data {
         'Back to search results' => 'Повернутись до результатів пошуку',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Користувачі-клієнти необхідні для того, щоб мати історію клієнта, а також для входу через панель клієнта.',
+        'Customer Users ↔ Customers' => '',
+        'Customer Users ↔ Groups' => '',
+        'Customer Users ↔ Services' => '',
         'List (%s total)' => 'Список (%s всього)',
         'Username' => 'Ім\'я користувача',
         'Email' => 'Email',
@@ -468,7 +477,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
         'Manage Customer User-Customer Relations' => '',
         'Select the customer user:customer relations.' => '',
-        'Customer Users' => 'Клієнти',
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
         'Toggle active state for all' => 'Встановити активний стан для всіх',
@@ -496,6 +504,7 @@ sub Data {
         'Filter for Services' => 'Фільтр для сервісів',
         'Filter for services' => '',
         'Services' => 'Сервіси',
+        'Service Level Agreements' => 'Угоди про рівень сервісу',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
         'Dynamic Fields Management' => 'Керування динамічними полями',
@@ -510,6 +519,7 @@ sub Data {
         'Overwrite existing configurations' => '',
         'Import configurations' => '',
         'Export configurations' => '',
+        'Process Management' => 'Керування процессом',
         'Dynamic fields ↔ Screens' => '',
         'Dynamic Fields List' => 'Список динамічних полів',
         'Dynamic fields per page' => 'Кількість динамічних полів на сторінку',
@@ -1358,6 +1368,8 @@ sub Data {
         'Create new groups to handle access permissions for different groups of agent (e. g. purchasing department, support department, sales department, ...). ' =>
             'Створення нових груп для обробки прав доступу до різних груп агентів (наприклад відділ закупівель, відділ підтримки, відділ продаж,...).',
         'It\'s useful for ASP solutions. ' => 'Корисно для сервісів-провайдерів.',
+        'Agents ↔ Groups' => '',
+        'Roles ↔ Groups' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'System Log' => 'Системний журнал',
@@ -1640,6 +1652,12 @@ sub Data {
             'У разі, якщо ви маєте додаткові запитання, ми будемо раді відповісти на них.',
         'Install Package' => 'Установити пакет',
         'Update Package' => '',
+        'Package' => '',
+        'Required package %s is already installed.' => '',
+        'Required Perl module %s is already installed.' => '',
+        'Required package %s needs to get installed!' => '',
+        'Required package %s needs to get updated to version %s!' => '',
+        'Required Perl module %s needs to get installed or updated!' => '',
         'Continue' => 'Продовжити',
         'Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Будь ласка, переконайтеся в тому, що ваша база даних приймає пакунки за розміром більше ніж %s МБ (в даний час приймаються пакунки за розміром до %s МБ). Будь ласка адаптуйте установку max_allowed_packet  вашої бази даних, щоб уникнути помилок.',
@@ -1729,12 +1747,12 @@ sub Data {
         'Edit Priority' => 'Змінити пріоритет',
         'Filter for Priorities' => '',
         'Filter for priorities' => '',
+        'Configure Priority Visibility and Defaults' => '',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             '',
         'This priority is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-        'Process Management' => 'Керування процессом',
         'Filter for Processes' => 'Фільтр для процесів',
         'Filter for processes' => '',
         'Create New Process' => 'Створити новий процес',
@@ -1751,6 +1769,9 @@ sub Data {
             'Щоб створити новий процес Ви можете або імпортувати Процес, що був експортований з іншої системи, або створити цілком новий.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'Зміни в процесах тут вплинуть на поведінку системи тільки після синхронізації даних процесу. При синхронізації процесів, нещодавно зроблені зміни будуть записані до конфігурації.',
+        'Access Control Lists (ACL)' => '',
+        'Generic Agent' => '',
+        'Manage Process Widiget Groups' => '',
         'Processes' => 'Процеси',
         'Process name' => 'Ім\'я процесу',
         'Print' => 'Друк',
@@ -1905,6 +1926,13 @@ sub Data {
         'Edit Queue' => 'Змінити черга',
         'Filter for Queues' => 'Фільтр для Черг',
         'Filter for queues' => '',
+        'Email Addresses' => 'Адреси email',
+        'PostMaster Mail Accounts' => '',
+        'Salutations' => 'Привітання',
+        'Signatures' => 'Підписи',
+        'Templates ↔ Queues' => '',
+        'Configure Working Hours' => '',
+        'Configure Queue Related Settings' => '',
         'A queue with this name already exists!' => 'Черга з таким ім\'ям вже існує!',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             '',
@@ -1953,7 +1981,6 @@ sub Data {
         'Manage Template-Queue Relations' => 'Керувати Залежностями Черг-Шаблонів',
         'Filter for Templates' => 'Фільтр по шаблонам',
         'Filter for templates' => '',
-        'Templates' => 'Шаблони',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'Керування ролями',
@@ -1963,6 +1990,7 @@ sub Data {
         'Filter for roles' => '',
         'Create a role and put groups in it. Then add the role to the users.' =>
             'Створіть роль і додайте в неї групи. Потім розподілите ролі по користувачах.',
+        'Agents ↔ Roles' => '',
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             'Ролі не визначені. Будь ласка, використовуйте кнопку \'Додати\' для створення нової ролі.',
 
@@ -1999,7 +2027,9 @@ sub Data {
         'Edit SLA' => 'Змінити SLA',
         'Add SLA' => 'Додати SLA',
         'Filter for SLAs' => '',
+        'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => 'Будь ласка, пишіть тільки цифри!',
+        'Minimum Time Between Incidents' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
         'S/MIME Management' => 'Керування S/MIME',
@@ -2080,9 +2110,11 @@ sub Data {
         'Service Management' => 'Керування сервісами',
         'Add Service' => 'Додати Сервіс',
         'Edit Service' => 'Змінити Сервіс',
+        'Configure Service Visibility and Defaults' => '',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             'Максимальна довжина імені служби 200 символів (з під-службами).',
         'Sub-service of' => 'Підсервіс сервісу',
+        'Criticality' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
         'Session Management' => 'Керування сеансами',
@@ -2116,6 +2148,8 @@ sub Data {
         'Filter for states' => '',
         'Attention' => 'Увага',
         'Please also update the states in SysConfig where needed.' => 'Прохання також оновити стан в SysConfig де це необхідно.',
+        'Configure State Visibility and Defaults' => '',
+        'Configure State Type Visibility and Defaults' => '',
         'This state is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
         'State type' => 'Тип стану',
@@ -2238,7 +2272,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'Права',
-        'Package' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
         'System Maintenance Management' => 'Керування Обслуговуванням Системи',
@@ -2317,6 +2350,7 @@ sub Data {
         'Edit Type' => 'Редагувати тип',
         'Filter for Types' => '',
         'Filter for types' => '',
+        'Configure Type Visibility and Defaults' => '',
         'A type with this name already exists!' => 'Тип з таким ім\'ям вже існує!',
         'This type is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
@@ -3575,9 +3609,6 @@ sub Data {
             'Всі агенти, які мають дозвіл на запис для подій (календар)',
         'Yes, but require at least one active notification method.' => '',
 
-        # Perl Module: Kernel/Modules/AdminAttachment.pm
-        'Attachment added!' => 'Прикріплення додано!',
-
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
 
@@ -4133,7 +4164,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminTemplate.pm
         'Template updated!' => 'Шаблон оновлений!',
-        'Template added!' => 'Шаблон додано!',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
         'Change Attachment Relations for Template' => 'Змінити залежності прикріплення для шаблону',
@@ -7808,7 +7838,7 @@ sub Data {
             '',
         'Ticket event module that stores values of the selected web service record into the configured additional dynamic fields.' =>
             '',
-        'It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
+        'It might happen that a dynamic field of type WebserviceDropdown or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
             '',
         'Mapping for field values received from form. This setting is necessary for the correct identification of the form fields. Key means value type, value means possible representation in views.' =>
             '',
@@ -7949,6 +7979,7 @@ sub Data {
         'Agent interface notification module to show the number of mentions.' =>
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
+        'Mapping of non-standard time zones to official ones.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'тимчасово недійсний',
@@ -8440,6 +8471,8 @@ sub Data {
         'The following files are not allowed to be uploaded: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             '',
+        'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
+            '',
         'The following files were already uploaded and have not been uploaded again: %s' =>
             '',
         'No space left for the following files: %s' => '',
@@ -8508,7 +8541,6 @@ Thanks for your help!
         'AJAX functions for notification event transport web service.' =>
             '',
         'AJAX interface for the web service dynamic field backends.' => '',
-        'Access Control Lists (ACL)' => '',
         'AccountedTime' => '',
         'Activation of dynamic fields for screens.' => '',
         'ActivityID' => '',
@@ -8528,7 +8560,7 @@ Thanks for your help!
         'Admin' => 'Адміністрування',
         'Admin Area.' => '',
         'Admin Notification' => 'Повідомлення адміністратором',
-        'Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect' =>
+        'Admin configuration dialog for dynamic field types WebserviceDropdown and WebserviceMultiselect' =>
             '',
         'Admin modules overview.' => '',
         'Admin.' => 'Адміністратор',
@@ -8541,8 +8573,6 @@ Thanks for your help!
         'Agent Statistics.' => '',
         'Agent User Search' => '',
         'Agent User Search.' => '',
-        'Agents ↔ Groups' => '',
-        'Agents ↔ Roles' => '',
         'All CustomerIDs of a customer user.' => '',
         'All customer users of a CustomerID' => '',
         'All escalated tickets' => 'Усі заявки з загостренням',
@@ -8691,9 +8721,6 @@ Thanks for your help!
         'Customer User Information Center search.' => '',
         'Customer User Information Center.' => '',
         'Customer User-Customer Relations' => '',
-        'Customer Users ↔ Customers' => '',
-        'Customer Users ↔ Groups' => '',
-        'Customer Users ↔ Services' => '',
         'Customer preferences.' => '',
         'Customer ticket overview' => '',
         'Customer ticket search.' => '',
@@ -8702,7 +8729,6 @@ Thanks for your help!
         'CustomerID search' => '',
         'CustomerName' => '',
         'CustomerUser' => '',
-        'Customers ↔ Groups' => '',
         'Czech' => '',
         'Danish' => '',
         'Dashboard overview.' => '',
@@ -8744,7 +8770,6 @@ Thanks for your help!
         'Edit Customer Users.' => '',
         'Edit appointment' => 'Редагувати подію',
         'Edit customer company' => '',
-        'Email Addresses' => 'Адреси email',
         'Email Outbound' => '',
         'Email Resend' => '',
         'Email communication channel.' => '',
@@ -8973,7 +8998,6 @@ Thanks for your help!
         'Portuguese' => '',
         'Portuguese (Brasil)' => '',
         'PostMaster Filters' => '',
-        'PostMaster Mail Accounts' => '',
         'Print this ticket' => 'Роздрукувати цю заявку',
         'Priorities' => 'Пріоритети',
         'Process Management Activity Dialog GUI' => '',
@@ -8992,7 +9016,6 @@ Thanks for your help!
         'Public Calendar' => 'Публічний календар',
         'Public calendar.' => 'Публічний календар',
         'Queue view' => 'Перегляд черги',
-        'Queues ↔ Auto Responses' => '',
         'Refresh interval' => 'Оновляти кожні',
         'Reminder Tickets' => 'Заявки з нагадуванням',
         'Removed subscription for user "%s".' => 'Вилучена підписка для користувача «%s».',
@@ -9002,13 +9025,11 @@ Thanks for your help!
         'Responsible Tickets' => '',
         'Responsible Tickets.' => '',
         'Right' => '',
-        'Roles ↔ Groups' => '',
         'Romanian' => '',
         'Running Process Tickets' => '',
         'Russian' => '',
         'S/MIME Certificates' => 'S/MIME-сертифікати',
         'SMS' => '',
-        'Salutations' => 'Привітання',
         'Schedule a maintenance period.' => '',
         'Screen after new ticket' => 'Розділ після створення нової заявки',
         'Search Customer' => 'Шукати клієнта',
@@ -9046,7 +9067,6 @@ Thanks for your help!
         'Sent notification to "%s".' => '',
         'Serbian Cyrillic' => '',
         'Serbian Latin' => '',
-        'Service Level Agreements' => 'Угоди про рівень сервісу',
         'Service view' => '',
         'ServiceView' => '',
         'Set a new password by filling in your current password and a new one.' =>
@@ -9061,7 +9081,6 @@ Thanks for your help!
         'Shows information on how to start OTRS Daemon' => '',
         'Shows last mention of tickets.' => '',
         'Signature data.' => '',
-        'Signatures' => 'Підписи',
         'Simple' => '',
         'Skin' => 'Оболонка',
         'Slovak' => '',
@@ -9096,8 +9115,6 @@ Thanks for your help!
         'System Configuration Deployment' => '',
         'System Configuration Group' => '',
         'System Maintenance' => '',
-        'Templates ↔ Attachments' => '',
-        'Templates ↔ Queues' => '',
         'Textarea' => '',
         'Thai' => '',
         'The PGP signature is expired.' => '',
@@ -9185,8 +9202,8 @@ Thanks for your help!
         'We are performing scheduled maintenance. We should be back online shortly.' =>
             '',
         'Web Services' => 'Веб сервіси',
+        'Web service (Dropdown)' => '',
         'Web service (Multiselect)' => '',
-        'Web service (Text)' => '',
         'Web service dynamic field AJAX interface' => '',
         'Webservice' => '',
         'Yes, but hide archived tickets' => '',
@@ -9528,6 +9545,7 @@ Thanks for your help!
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',
+        'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s',
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',

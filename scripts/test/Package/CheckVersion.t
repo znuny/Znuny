@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -279,13 +279,13 @@ my @Tests = (
 
 for my $Test (@Tests) {
 
-    my $VersionCheck = $PackageObject->_CheckVersion(
+    my $VersionCheck = $PackageObject->CheckVersion(
         VersionNew       => $Test->{VersionNew},
         VersionInstalled => $Test->{VersionInstalled},
         Type             => $Test->{Type},
     );
 
-    my $Name = "_CheckVersion() - $Test->{Type} ($Test->{VersionNew}:$Test->{VersionInstalled})";
+    my $Name = "CheckVersion() - $Test->{Type} ($Test->{VersionNew}:$Test->{VersionInstalled})";
 
     if ( $Test->{Result} ) {
         $Self->True(

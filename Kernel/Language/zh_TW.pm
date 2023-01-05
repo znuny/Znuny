@@ -3,7 +3,7 @@
 # Copyright (C) 2009 Yiye Huang <yiyehuang at gmail.com>
 # Copyright (C) 2009 Qingjiu Jia <jiaqj at yahoo.com>
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.315413350657788;
+    $Self->{Completeness}        = 0.314493927125506;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -258,6 +258,9 @@ sub Data {
         'Edit Attachment' => '編輯附件',
         'Filter for Attachments' => '過濾附件',
         'Filter for attachments' => '',
+        'Related Actions' => '',
+        'Templates' => '模板',
+        'Templates ↔ Attachments' => '',
         'Filename' => '文件名稱',
         'Download file' => '下載文件',
         'Delete this attachment' => '刪除附件',
@@ -270,6 +273,7 @@ sub Data {
         'Edit Auto Response' => '編輯自動回復',
         'Filter for Auto Responses' => '過濾回復',
         'Filter for auto responses' => '',
+        'Queues ↔ Auto Responses' => '',
         'Response' => '回復内容',
         'Auto response from' => '自動回復的發件人',
         'Reference' => '相關参考',
@@ -395,6 +399,8 @@ sub Data {
         'Search' => '搜索',
         'Wildcards like \'*\' are allowed.' => '允許使用通配置符，例如\'*\'。',
         'Select' => '選擇',
+        'Customer Users' => '用戶',
+        'Customers ↔ Groups' => '',
         'List (only %s shown - more available)' => '',
         'total' => '總計',
         'Please enter a search term to look for customers.' => '請輸入搜索條件以便檢索用戶單位資料.',
@@ -417,9 +423,9 @@ sub Data {
         'Select the customer:group permissions.' => '選擇用戶:組權限。',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             '如果沒有選擇，就不具備該組的任何權限 (用戶不能創建或讀取工單)。',
-        'Search Results' => '搜索結果',
         'Customers' => '用戶單位',
         'Groups' => '組',
+        'Search Results' => '搜索結果',
         'Change Group Relations for Customer' => '此用戶屬於哪些組',
         'Change Customer Relations for Group' => '哪些用戶屬於此組',
         'Toggle %s Permission for all' => '切換%s權限給全部',
@@ -439,6 +445,9 @@ sub Data {
         'Back to search results' => '返回至搜索結果',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             '用戶資料用於記錄工單歷史並允許用戶訪問服務台門戶網站。',
+        'Customer Users ↔ Customers' => '',
+        'Customer Users ↔ Groups' => '',
+        'Customer Users ↔ Services' => '',
         'List (%s total)' => '',
         'Username' => '用戶名',
         'Email' => '郵件地址',
@@ -470,7 +479,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
         'Manage Customer User-Customer Relations' => '',
         'Select the customer user:customer relations.' => '',
-        'Customer Users' => '用戶',
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
         'Toggle active state for all' => '切換激活狀態給全部',
@@ -498,6 +506,7 @@ sub Data {
         'Filter for Services' => '過濾服務',
         'Filter for services' => '',
         'Services' => '服務',
+        'Service Level Agreements' => '服務水平協議',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
         'Dynamic Fields Management' => '動態字段管理',
@@ -512,6 +521,7 @@ sub Data {
         'Overwrite existing configurations' => '',
         'Import configurations' => '',
         'Export configurations' => '',
+        'Process Management' => '流程管理',
         'Dynamic fields ↔ Screens' => '',
         'Dynamic Fields List' => '動態字段列表',
         'Dynamic fields per page' => '每頁動態字段個數',
@@ -1360,6 +1370,8 @@ sub Data {
         'Create new groups to handle access permissions for different groups of agent (e. g. purchasing department, support department, sales department, ...). ' =>
             '若要為不同的服務人員分配不同的訪問權限，應創建新的組。(例如，採購部、支持部、銷售部、...)',
         'It\'s useful for ASP solutions. ' => '這對於ASP解決方案它很有用。',
+        'Agents ↔ Groups' => '',
+        'Roles ↔ Groups' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'System Log' => '系統日誌',
@@ -1642,6 +1654,12 @@ sub Data {
             '如果您還有其它問題，我們非常願意答復您。',
         'Install Package' => '安裝軟件包',
         'Update Package' => '',
+        'Package' => '',
+        'Required package %s is already installed.' => '',
+        'Required Perl module %s is already installed.' => '',
+        'Required package %s needs to get installed!' => '',
+        'Required package %s needs to get updated to version %s!' => '',
+        'Required Perl module %s needs to get installed or updated!' => '',
         'Continue' => '繼續',
         'Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '請確認您的數據庫能夠接收大於%sMB的數據包（目前能夠接收的最大數據包為%sMB）。為了避免程序報錯，請調整數據庫max_allowed_packet参數。',
@@ -1731,12 +1749,12 @@ sub Data {
         'Edit Priority' => '編輯優先級',
         'Filter for Priorities' => '',
         'Filter for priorities' => '',
+        'Configure Priority Visibility and Defaults' => '',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             '',
         'This priority is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-        'Process Management' => '流程管理',
         'Filter for Processes' => '過濾流程',
         'Filter for processes' => '',
         'Create New Process' => '創建新的流程',
@@ -1753,6 +1771,9 @@ sub Data {
             '為了創建新的流程，您可以導入流程配置文件或從新創建它。',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             '對流程所做的一切修改僅保存在數據庫中。只有執行同步操作後，才會生成或重新生成流程配置文件。',
+        'Access Control Lists (ACL)' => '訪問控制列表(ACL)',
+        'Generic Agent' => '',
+        'Manage Process Widiget Groups' => '',
         'Processes' => '流程',
         'Process name' => '流程名稱',
         'Print' => '打印',
@@ -1907,6 +1928,13 @@ sub Data {
         'Edit Queue' => '編輯隊列',
         'Filter for Queues' => '過濾隊列',
         'Filter for queues' => '',
+        'Email Addresses' => '郵件發送地址',
+        'PostMaster Mail Accounts' => '郵件接收地址',
+        'Salutations' => '回復抬頭',
+        'Signatures' => '回復簽名',
+        'Templates ↔ Queues' => '',
+        'Configure Working Hours' => '',
+        'Configure Queue Related Settings' => '',
         'A queue with this name already exists!' => '',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             '',
@@ -1955,7 +1983,6 @@ sub Data {
         'Manage Template-Queue Relations' => '管理模板與隊列的對應關系',
         'Filter for Templates' => '過濾模板',
         'Filter for templates' => '',
-        'Templates' => '模板',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => '角色管理',
@@ -1965,6 +1992,7 @@ sub Data {
         'Filter for roles' => '',
         'Create a role and put groups in it. Then add the role to the users.' =>
             '創建一個角色並將組加入角色,然後將角色赋給用戶.',
+        'Agents ↔ Roles' => '',
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             '有沒有角色定義. 請使用 \'添加\' 按鈕來創建一個新的角色',
 
@@ -2001,7 +2029,9 @@ sub Data {
         'Edit SLA' => '編輯SLA',
         'Add SLA' => '添加SLA',
         'Filter for SLAs' => '',
+        'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => '僅可填寫數字！',
+        'Minimum Time Between Incidents' => '故障間最短時間',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
         'S/MIME Management' => 'S/MIME管理',
@@ -2082,9 +2112,11 @@ sub Data {
         'Service Management' => '服務管理',
         'Add Service' => '添加服務',
         'Edit Service' => '編輯服務',
+        'Configure Service Visibility and Defaults' => '',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             '',
         'Sub-service of' => '子服務',
+        'Criticality' => '重要',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
         'Session Management' => '會話管理',
@@ -2118,6 +2150,8 @@ sub Data {
         'Filter for states' => '',
         'Attention' => '注意',
         'Please also update the states in SysConfig where needed.' => '請同時在SysConfig中需要地方更新這些狀態。',
+        'Configure State Visibility and Defaults' => '',
+        'Configure State Type Visibility and Defaults' => '',
         'This state is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
         'State type' => '工單狀態類型',
@@ -2240,7 +2274,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => '權限',
-        'Package' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
         'System Maintenance Management' => '',
@@ -2319,6 +2352,7 @@ sub Data {
         'Edit Type' => '編輯工單類型',
         'Filter for Types' => '',
         'Filter for types' => '',
+        'Configure Type Visibility and Defaults' => '',
         'A type with this name already exists!' => '',
         'This type is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
@@ -3578,9 +3612,6 @@ sub Data {
             '',
         'Yes, but require at least one active notification method.' => '',
 
-        # Perl Module: Kernel/Modules/AdminAttachment.pm
-        'Attachment added!' => '附件已添加！',
-
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
 
@@ -4136,7 +4167,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminTemplate.pm
         'Template updated!' => '模板已被更新!',
-        'Template added!' => '模板已被添加!',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
         'Change Attachment Relations for Template' => '為模板指定附件',
@@ -7811,7 +7841,7 @@ sub Data {
             '',
         'Ticket event module that stores values of the selected web service record into the configured additional dynamic fields.' =>
             '',
-        'It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
+        'It might happen that a dynamic field of type WebserviceDropdown or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
             '',
         'Mapping for field values received from form. This setting is necessary for the correct identification of the form fields. Key means value type, value means possible representation in views.' =>
             '',
@@ -7952,6 +7982,7 @@ sub Data {
         'Agent interface notification module to show the number of mentions.' =>
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
+        'Mapping of non-standard time zones to official ones.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '暫時無效',
@@ -8444,6 +8475,8 @@ sub Data {
         'The following files are not allowed to be uploaded: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             '',
+        'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
+            '',
         'The following files were already uploaded and have not been uploaded again: %s' =>
             '',
         'No space left for the following files: %s' => '',
@@ -8512,7 +8545,6 @@ Thanks for your help!
         'AJAX functions for notification event transport web service.' =>
             '',
         'AJAX interface for the web service dynamic field backends.' => '',
-        'Access Control Lists (ACL)' => '訪問控制列表(ACL)',
         'AccountedTime' => '佔用時間',
         'Activation of dynamic fields for screens.' => '',
         'ActivityID' => '',
@@ -8532,7 +8564,7 @@ Thanks for your help!
         'Admin' => '系統管理',
         'Admin Area.' => '',
         'Admin Notification' => '管理員通知',
-        'Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect' =>
+        'Admin configuration dialog for dynamic field types WebserviceDropdown and WebserviceMultiselect' =>
             '',
         'Admin modules overview.' => '',
         'Admin.' => '',
@@ -8545,8 +8577,6 @@ Thanks for your help!
         'Agent Statistics.' => '',
         'Agent User Search' => '',
         'Agent User Search.' => '',
-        'Agents ↔ Groups' => '',
-        'Agents ↔ Roles' => '',
         'All CustomerIDs of a customer user.' => '',
         'All customer users of a CustomerID' => '',
         'All escalated tickets' => '所有升級的工單',
@@ -8695,9 +8725,6 @@ Thanks for your help!
         'Customer User Information Center search.' => '',
         'Customer User Information Center.' => '',
         'Customer User-Customer Relations' => '',
-        'Customer Users ↔ Customers' => '',
-        'Customer Users ↔ Groups' => '',
-        'Customer Users ↔ Services' => '',
         'Customer preferences.' => '客戶喜好設定',
         'Customer ticket overview' => '客戶工單概況',
         'Customer ticket search.' => '客戶工單搜尋',
@@ -8706,7 +8733,6 @@ Thanks for your help!
         'CustomerID search' => '',
         'CustomerName' => '用戶名',
         'CustomerUser' => '',
-        'Customers ↔ Groups' => '',
         'Czech' => '',
         'Danish' => '',
         'Dashboard overview.' => '',
@@ -8748,7 +8774,6 @@ Thanks for your help!
         'Edit Customer Users.' => '',
         'Edit appointment' => '',
         'Edit customer company' => '',
-        'Email Addresses' => '郵件發送地址',
         'Email Outbound' => '',
         'Email Resend' => '',
         'Email communication channel.' => '',
@@ -8977,7 +9002,6 @@ Thanks for your help!
         'Portuguese' => '',
         'Portuguese (Brasil)' => '',
         'PostMaster Filters' => '收件過濾器',
-        'PostMaster Mail Accounts' => '郵件接收地址',
         'Print this ticket' => '打印工單',
         'Priorities' => '優先級',
         'Process Management Activity Dialog GUI' => '',
@@ -8996,7 +9020,6 @@ Thanks for your help!
         'Public Calendar' => '',
         'Public calendar.' => '',
         'Queue view' => '隊列視圖',
-        'Queues ↔ Auto Responses' => '',
         'Refresh interval' => '刷新間隔',
         'Reminder Tickets' => '提醒的工單',
         'Removed subscription for user "%s".' => 'Removed subscription for user "%s".',
@@ -9006,13 +9029,11 @@ Thanks for your help!
         'Responsible Tickets' => '',
         'Responsible Tickets.' => '',
         'Right' => '',
-        'Roles ↔ Groups' => '',
         'Romanian' => '',
         'Running Process Tickets' => '時間緊迫的工單',
         'Russian' => '',
         'S/MIME Certificates' => 'S/MIME証書',
         'SMS' => '',
-        'Salutations' => '回復抬頭',
         'Schedule a maintenance period.' => '',
         'Screen after new ticket' => '創建新工單後的視圖',
         'Search Customer' => '搜索用戶',
@@ -9050,7 +9071,6 @@ Thanks for your help!
         'Sent notification to "%s".' => '',
         'Serbian Cyrillic' => '',
         'Serbian Latin' => '',
-        'Service Level Agreements' => '服務水平協議',
         'Service view' => '',
         'ServiceView' => '',
         'Set a new password by filling in your current password and a new one.' =>
@@ -9065,7 +9085,6 @@ Thanks for your help!
         'Shows information on how to start OTRS Daemon' => '',
         'Shows last mention of tickets.' => '',
         'Signature data.' => '',
-        'Signatures' => '回復簽名',
         'Simple' => '簡易',
         'Skin' => '主題',
         'Slovak' => '',
@@ -9100,8 +9119,6 @@ Thanks for your help!
         'System Configuration Deployment' => '',
         'System Configuration Group' => '',
         'System Maintenance' => '系統維護',
-        'Templates ↔ Attachments' => '',
-        'Templates ↔ Queues' => '',
         'Textarea' => '文本塊',
         'Thai' => '泰文',
         'The PGP signature is expired.' => '',
@@ -9189,8 +9206,8 @@ Thanks for your help!
         'We are performing scheduled maintenance. We should be back online shortly.' =>
             '',
         'Web Services' => 'Web服務',
+        'Web service (Dropdown)' => '',
         'Web service (Multiselect)' => '',
-        'Web service (Text)' => '',
         'Web service dynamic field AJAX interface' => '',
         'Webservice' => '',
         'Yes, but hide archived tickets' => '',
@@ -9532,6 +9549,7 @@ Thanks for your help!
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',
+        'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s',
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',
