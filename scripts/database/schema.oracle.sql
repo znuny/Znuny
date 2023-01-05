@@ -5251,13 +5251,15 @@ END;
 -- ----------------------------------------------------------
 CREATE TABLE calendar_appointment_plugin (
     id NUMBER (12, 0) NOT NULL,
+    dbcrud_uuid VARCHAR2 (36) NULL,
     appointment_id NUMBER (5, 0) NOT NULL,
     plugin_key VARCHAR2 (1000) NOT NULL,
     config CLOB NULL,
     create_time DATE NOT NULL,
     create_by NUMBER (12, 0) NOT NULL,
     change_time DATE NOT NULL,
-    change_by NUMBER (12, 0) NOT NULL
+    change_by NUMBER (12, 0) NOT NULL,
+    CONSTRAINT calendar_appointment_plugin_47 UNIQUE (dbcrud_uuid)
 );
 ALTER TABLE calendar_appointment_plugin ADD CONSTRAINT PK_calendar_appointment_plugin PRIMARY KEY (id);
 BEGIN
@@ -5866,6 +5868,7 @@ END;
 -- ----------------------------------------------------------
 CREATE TABLE oauth2_token_config (
     id NUMBER (12, 0) NOT NULL,
+    dbcrud_uuid VARCHAR2 (36) NULL,
     name VARCHAR2 (250) NOT NULL,
     config CLOB NOT NULL,
     valid_id NUMBER (5, 0) NOT NULL,
@@ -5873,7 +5876,8 @@ CREATE TABLE oauth2_token_config (
     create_by NUMBER (12, 0) NOT NULL,
     change_time DATE NOT NULL,
     change_by NUMBER (12, 0) NOT NULL,
-    CONSTRAINT oauth2_token_config_name UNIQUE (name)
+    CONSTRAINT oauth2_token_config_name UNIQUE (name),
+    CONSTRAINT oauth2_token_config_uuid UNIQUE (dbcrud_uuid)
 );
 ALTER TABLE oauth2_token_config ADD CONSTRAINT PK_oauth2_token_config PRIMARY KEY (id);
 BEGIN
@@ -5918,6 +5922,7 @@ END;
 -- ----------------------------------------------------------
 CREATE TABLE oauth2_token (
     id NUMBER (12, 0) NOT NULL,
+    dbcrud_uuid VARCHAR2 (36) NULL,
     token_config_id NUMBER (12, 0) NOT NULL,
     authorization_code CLOB NULL,
     token CLOB NULL,
@@ -5931,7 +5936,8 @@ CREATE TABLE oauth2_token (
     create_by NUMBER (12, 0) NOT NULL,
     change_time DATE NOT NULL,
     change_by NUMBER (12, 0) NOT NULL,
-    CONSTRAINT oauth2_token_config_id UNIQUE (token_config_id)
+    CONSTRAINT oauth2_token_config_id UNIQUE (token_config_id),
+    CONSTRAINT oauth2_token_uuid UNIQUE (dbcrud_uuid)
 );
 ALTER TABLE oauth2_token ADD CONSTRAINT PK_oauth2_token PRIMARY KEY (id);
 BEGIN

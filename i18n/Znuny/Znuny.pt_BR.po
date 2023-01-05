@@ -56,14 +56,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-07-01 07:05+0000\n"
-"PO-Revision-Date: 2018-09-20 13:03+0000\n"
-"Last-Translator: possebon <possebon@gmail.com>, 2020\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/otrs/teams/23435/pt_BR/)\n"
+"PO-Revision-Date: 2022-11-12 19:24+0000\n"
+"Last-Translator: José <jjunior@serviceup.com.br>\n"
+"Language-Team: Portuguese (Brazil) <https://translations.znuny.org/projects/znuny/znuny/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "ACL Management"
@@ -1453,7 +1454,7 @@ msgstr "Gerenciar Relações Usuário Cliente-Cliente"
 msgid "Select the customer user:customer relations."
 msgstr "Selecione o usuário cliente: relações com o cliente."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Customer Users"
 msgstr "Usuários Clientes"
 
@@ -4669,7 +4670,7 @@ msgstr "Essa prioridade está presente em uma definição da Configuração do S
 msgid "This priority is used in the following config settings:"
 msgstr "Essa prioridade é utilizada nas seguintes configurações:"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
 msgid "Process Management"
 msgstr "Gerenciamento de Processos"
 
@@ -5301,7 +5302,7 @@ msgstr "Filtrar por Modelos"
 msgid "Filter for templates"
 msgstr "Filtrar por modelos"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueueTemplates.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
 msgid "Templates"
 msgstr "Modelos"
 
@@ -13811,7 +13812,7 @@ msgstr "<p>Se você continuar a instalar este pacote, as seguintes questões pod
 
 #. Perl Module: Kernel/System/Package.pm
 msgid "<p>The installation of packages which are not verified by the OTRS Group is not possible by default. You can activate the installation of not verified packages via the \"AllowNotVerifiedPackages\" system configuration setting.</p>"
-msgstr ""
+msgstr "<p>A instalação de pacotes que não são verificados pela OTRS Group não é possível por padrão. Você pode ativar a instalação de pacotes não verificados por meio da configuração do sistema \"AllowNotVerifiedPackages\".</p>"
 
 #. Perl Module: Kernel/System/ProcessManagement/DB/Process.pm
 msgid "The process \"%s\" and all of its data has been imported successfully."
@@ -16233,7 +16234,7 @@ msgstr " 7 minutos"
 
 #. SysConfig
 msgid "\"Slim\" skin which tries to save screen space for power users."
-msgstr ""
+msgstr "Skin \"Slim\" tenta economizar espaço na tela para usuários avançados"
 
 #. SysConfig
 msgid "%s"
@@ -16331,7 +16332,7 @@ msgstr "Uma figura"
 msgid "ACL module that allows closing parent tickets only if all its children are already closed (\"State\" shows which states are not available for the parent ticket until all child tickets are closed)."
 msgstr "Módulo ACL que permite fechar os chamados-pais somente se todos os seus filhos já estejam fechados (\"Estado\" mostra quais estados não estão disponíveis para o chamado-pai até que todos os chamados-filhos estejam fechados)."
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Access Control Lists (ACL)"
 msgstr "Listas de Controle de Acesso (ACL)"
 
@@ -16567,11 +16568,11 @@ msgstr ""
 msgid "AgentTicketZoom widget that displays ticket data in the side bar."
 msgstr ""
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
 msgid "Agents ↔ Groups"
 msgstr "Atendentes ↔ Grupos"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
 msgid "Agents ↔ Roles"
 msgstr "Atendentes ↔ Papéis"
 
@@ -17476,15 +17477,15 @@ msgstr "Pesquisa do Centro de Informações do Usuário Cliente."
 msgid "Customer User Information Center."
 msgstr "Centro de Informações do Usuário Cliente."
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
 msgid "Customer Users ↔ Customers"
 msgstr "Usuário Cliente ↔ Clientes"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
 msgid "Customer Users ↔ Groups"
 msgstr "Usuário Cliente ↔ Grupos"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
 msgid "Customer Users ↔ Services"
 msgstr "Usuários Clientes ↔ Serviços"
 
@@ -17528,7 +17529,7 @@ msgstr "Nome do Cliente"
 msgid "CustomerUser"
 msgstr "UsuárioCliente"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Customers ↔ Groups"
 msgstr "Clientes ↔ Grupos"
 
@@ -19560,7 +19561,7 @@ msgstr "Editar compromisso"
 msgid "Edit customer company"
 msgstr "Editar empresa de cliente"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
 msgid "Email Addresses"
 msgstr "Endereços de E-mail"
 
@@ -21415,7 +21416,7 @@ msgstr "Português (Brasil)"
 msgid "PostMaster Filters"
 msgstr "Filtros PostMaster"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
 msgid "PostMaster Mail Accounts"
 msgstr "Contas de E-mail PostMaster"
 
@@ -21491,7 +21492,7 @@ msgstr "Calendário público"
 msgid "Queue view"
 msgstr "Visão de Filas"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
 msgid "Queues ↔ Auto Responses"
 msgstr "Filas ↔ Respostas Automáticas"
 
@@ -21655,7 +21656,7 @@ msgstr "Mantém todos serviços nas listagens mesmo quando eles forem filhos de 
 msgid "Right"
 msgstr "Direita"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
 msgid "Roles ↔ Groups"
 msgstr "Papéis ↔ Grupos"
 
@@ -21699,7 +21700,7 @@ msgstr "SMS"
 msgid "SMS (Short Message Service)"
 msgstr "SMS (Serviço de Mensagens Curtas)"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
 msgid "Salutations"
 msgstr "Saudações"
 
@@ -21871,7 +21872,7 @@ msgstr "Sérvio Cirílico"
 msgid "Serbian Latin"
 msgstr "Sérvio Latim"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
 msgid "Service Level Agreements"
 msgstr "Acordos de Nível de Serviço"
 
@@ -22752,7 +22753,7 @@ msgstr "Horários exibidos utilizam descrição completa (dias, horas, minutos),
 msgid "Signature data."
 msgstr ""
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
 msgid "Signatures"
 msgstr "Assinaturas"
 
@@ -23032,11 +23033,11 @@ msgstr "Grupo de Configuração do Sistema"
 msgid "System Maintenance"
 msgstr "Manutenção do Sistema"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
 msgid "Templates ↔ Attachments"
 msgstr "Modelos ↔ Anexos"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
 msgid "Templates ↔ Queues"
 msgstr "Modelos ↔ Filas"
 
@@ -24078,7 +24079,7 @@ msgstr ""
 msgid "Delete cache"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Package"
 msgstr ""
 
@@ -24132,7 +24133,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminSystemFiles.pm
 msgid "(Files where only the permissions have been changed will not be displayed.)"
-msgstr ""
+msgstr "(Os arquivos onde apenas as permissões foram alteradas não serão exibidos.)"
 
 #. Perl Module: Kernel/Output/HTML/Layout.pm
 msgid "Last Views"
@@ -24155,7 +24156,7 @@ msgid "Activation of dynamic fields for screens."
 msgstr ""
 
 #. SysConfig
-msgid "Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect"
+msgid "Admin configuration dialog for dynamic field types WebserviceDropdown and WebserviceMultiselect"
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
@@ -24223,7 +24224,7 @@ msgid "Hide"
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty."
+msgid "It might happen that a dynamic field of type WebserviceDropdown or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty."
 msgstr ""
 
 #. SysConfig
@@ -24392,10 +24393,6 @@ msgstr ""
 
 #. SysConfig
 msgid "Web service (Multiselect)"
-msgstr ""
-
-#. SysConfig
-msgid "Web service (Text)"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingXSLT.tt
@@ -25040,7 +25037,7 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Enables support for huge XML data in load_xml calls of CPAN library XML::LibXML. This should only be enabled if absolutely needed. Disabling this option (default) protects against denial of service through entity expansion attacks. Before enabling this option ensure that alternative measures to protect the application against this type of attack have been taken."
-msgstr ""
+msgstr "Ativa suporte para dados XML enormes em chamadas load_xml da biblioteca CPAN XML::LibXML. Isso só deve ser ativado se for absolutamente necessário. Desabilitar esta opção (padrão) protege contra negação de serviço por meio de ataques de expansão de entidade. Antes de ativar esta opção, certifique-se de que foram tomadas medidas alternativas para proteger o aplicativo contra esse tipo de ataque."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
 msgid "Also show global %s"
@@ -25088,7 +25085,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "ATTENTION: Key file and/or password (if needed, see below) seem to be invalid."
-msgstr ""
+msgstr "ATENÇÃO: Arquivo de chave e/ou senha (se necessário, veja abaixo) parecem inválidos."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Path to private key file (PEM or DER). The key will be used to sign the JWT."
@@ -25108,11 +25105,11 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "ATTENTION: Certificate file could not be parsed."
-msgstr ""
+msgstr "ATENÇÃO: Não foi possível analisar o arquivo de certificado."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "ATTENTION: Certificate is expired."
-msgstr ""
+msgstr "ATENÇÃO: Certificado expirado."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Path to X.509 certificate file (PEM). Data of the certificate can be used for the payload and/or header data of the JWT."
@@ -25224,7 +25221,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/Mentions.pm
 msgid "%s users will be mentioned"
-msgstr ""
+msgstr "%s usuários serão mencionados"
 
 #. Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
 msgid "Total mentions"
@@ -25428,7 +25425,7 @@ msgstr ""
 
 #. Perl Module: Kernel/System/CalendarEvents.pm
 msgid "of year"
-msgstr ""
+msgstr "do ano"
 
 #. Perl Module: Kernel/System/CalendarEvents.pm
 msgid "of month"
@@ -25468,5 +25465,129 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
 msgid "Access token scope"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
+msgid "Related Actions"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
+msgid "Relatd Actions"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
+msgid "Queues ↔ AUto Responses"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
+msgid "Customers Users"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
+msgid "Agents  ↔ Groups"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
+msgid "Customer ↔ Groups"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPriority.tt
+msgid "Configure Priority Visibility and Defaults"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
+msgid "Add a Dynamic Field"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Manage Process Widiget Groups"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Add a Generic Agent Job"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Add an ACL"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
+msgid "Configure Working Hours"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
+msgid "Configure Queue Related Settings"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSLA.tt
+msgid "Configure SLA Visibility and Defaults"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
+msgid "Configure Service Visibility and Defaults"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
+msgid "Configure State Visibility and Defaults"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
+msgid "Configure State Type Visibility and Defaults"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Action Control Lists"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Generic Agents"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminType.tt
+msgid "Configure Type Visibility and Defaults"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Generic Agent"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSLA.tt
+msgid "Minimum Time Between Incidents"
+msgstr "Tempo Mínimo entre Incidentes"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
+msgid "Criticality"
+msgstr "Criticalidade"
+
+#. SysConfig
+msgid "Web service (Dropdown)"
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Mapping of non-standard time zones to official ones."
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.UI.js
+msgid "The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required package %s is already installed."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required Perl module %s is already installed."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required package %s needs to get installed!"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required package %s needs to get updated to version %s!"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required Perl module %s needs to get installed or updated!"
 msgstr ""
 

@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -528,6 +528,7 @@ Core.UI = (function (TargetNS) {
                 MaxFiles = $FileuploadFieldObj.data('max-files'),
                 MaxSizePerFile = $FileuploadFieldObj.data('max-size-per-file'),
                 MaxSizePerFileHR = $FileuploadFieldObj.data('max-size-per-file-hr'),
+                MaxFilenameLength = $FileuploadFieldObj.data('max-filename-length'),
                 FileTypes = $FileuploadFieldObj.data('file-types'),
                 Upload,
                 XHRObj,
@@ -535,6 +536,8 @@ Core.UI = (function (TargetNS) {
                 FileTypeNotAllowedText,
                 FilesTooBig = [],
                 FilesTooBigText,
+                FilenamesTooLong = [],
+                FilenamesTooLongText,
                 AttemptedToUploadAgain = [],
                 AttemptedToUploadAgainText,
                 NoSpaceLeft = [],
@@ -607,7 +610,7 @@ Core.UI = (function (TargetNS) {
                         'Filename' : File.name,
                         'Filetype' : File.type
                     }),
-                    FileExist;
+                    FileExists;
 
                 // check uploaded file size
                 if (File.size > (WebMaxFileUpload - UsedSpace)) {
@@ -630,13 +633,19 @@ Core.UI = (function (TargetNS) {
                     return true;
                 }
 
+                // check for max file name length
+                if (MaxFilenameLength && File.name.length > MaxFilenameLength) {
+                    FilenamesTooLong.push(File.name);
+                    return true;
+                }
+
                 // don't allow uploading multiple files with the same name
-                FileExist = $ContainerObj.find('.AttachmentList tbody tr td.Filename').filter(function() {
+                FileExists = $ContainerObj.find('.AttachmentList tbody tr td.Filename').filter(function() {
                     if ($(this).text() === File.name) {
                         return $(this);
                     }
                 });
-                if (FileExist.length) {
+                if (FileExists.length) {
                     AttemptedToUploadAgain.push(File.name);
                     return true;
                 }
@@ -743,12 +752,18 @@ Core.UI = (function (TargetNS) {
                 });
             });
 
-            if (FileTypeNotAllowed.length || FilesTooBig.length || NoSpaceLeft.length || AttemptedToUploadAgain.length) {
+            if (FileTypeNotAllowed.length || FilesTooBig.length || FilenamesTooLong.length || NoSpaceLeft.length || AttemptedToUploadAgain.length) {
 
-                FileTypeNotAllowedText = '';
-                FilesTooBigText = '';
+                // we need to empty the relevant file upload field because it would otherwise
+                // transfer the selected files again (only on click select, not on drag & drop)
+                $DropObj.prev('input[type=file]').val('');
+                $DropObj.removeClass('Uploading');
+
+                FileTypeNotAllowedText     = '';
+                FilesTooBigText            = '';
+                FilenamesTooLongText       = '';
                 AttemptedToUploadAgainText = '';
-                NoSpaceLeftText = '';
+                NoSpaceLeftText            = '';
 
                 if (FileTypeNotAllowed.length) {
                     FileTypeNotAllowedText =
@@ -764,6 +779,15 @@ Core.UI = (function (TargetNS) {
                             'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s',
                             MaxSizePerFileHR,
                             '<br>' + FilesTooBig.join(',<br>') + '<br><br>'
+                        );
+                }
+
+                if (FilenamesTooLong.length) {
+                    FilenamesTooLongText =
+                        Core.Language.Translate(
+                            'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s',
+                            MaxFilenameLength,
+                            '<br>' + FilenamesTooLong.join(',<br>') + '<br><br>'
                         );
                 }
 
@@ -788,7 +812,7 @@ Core.UI = (function (TargetNS) {
                             Core.App.HumanReadableDataSize(WebMaxFileUpload)
                         );
                 }
-                Core.UI.Dialog.ShowAlert(Core.Language.Translate('Upload information'), FileTypeNotAllowedText + FilesTooBigText + AttemptedToUploadAgainText + NoSpaceLeftText);
+                Core.UI.Dialog.ShowAlert(Core.Language.Translate('Upload information'), FileTypeNotAllowedText + FilesTooBigText + FilenamesTooLongText + AttemptedToUploadAgainText + NoSpaceLeftText);
             }
         }
 
