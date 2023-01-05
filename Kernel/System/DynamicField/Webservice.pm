@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -54,7 +54,7 @@ sub new {
     ];
 
     $Self->{SupportedDynamicFieldTypes} = {
-        WebserviceText        => 1,
+        WebserviceDropdown    => 1,
         WebserviceMultiselect => 1,
     };
 
@@ -78,7 +78,7 @@ Tests given web-service configuration by connecting and querying the web-service
             SearchTerms              => $Param{SearchTerms},
         },
         DynamicFieldName => 'DFName1',      # optional
-        FieldType        => 'WebserviceText',
+        FieldType        => 'WebserviceDropdown',
         UserID           => 1,
         UserType         => 'Agent',                                        # optional 'Agent' or 'Customer'
     );
@@ -1039,8 +1039,10 @@ This function is only needed for WebserviceMultiselect (multiselect).
 
     my $Value = $DynamicFieldWebserviceObject->Template(
         DynamicFieldConfig => \%DynamicFieldConfig,
-        Value              => ['first','second', 'third'],
-        ContentType        => 'ASCII', # HTML is default
+        Value              => ['first','second', 'third'], # or a scalar value
+        Type               => 'Value', # optional; or 'Title'
+        ContentType        => 'ASCII', # optional; 'HTML' is default,
+        TemplateType       => 'default', # optional; or: 'separator', 'wordwrap', 'list'
     );
 
 Returns:
@@ -1103,8 +1105,10 @@ sub Template {
     my $TemplateType = $Param{DynamicFieldConfig}->{Config}->{TemplateType} || 'default';
 
     if ( $Param{LayoutObject}->{Action} && $Param{Type} ) {
-        $ContentType  = $ActionTemplateMap{ $Param{LayoutObject}->{Action} }->{ $Param{Type} }->{ContentType} || $ContentType;
-        $TemplateType = $ActionTemplateMap{ $Param{LayoutObject}->{Action} }->{ $Param{Type} }->{TemplateType} || $TemplateType;
+        $ContentType
+            = $ActionTemplateMap{ $Param{LayoutObject}->{Action} }->{ $Param{Type} }->{ContentType} || $ContentType;
+        $TemplateType
+            = $ActionTemplateMap{ $Param{LayoutObject}->{Action} }->{ $Param{Type} }->{TemplateType} || $TemplateType;
     }
 
     if ( $Param{ContentType} ) {
@@ -1303,7 +1307,7 @@ sub _BackendConfigGet {
     if ( !$Self->{SupportedDynamicFieldTypes}->{ $Param{DynamicFieldConfig}->{FieldType} } ) {
         $LogObject->Log(
             Priority => 'error',
-            Message  => "Unsupported dynamic field type $Param{DynamicField}->{FieldType}.",
+            Message  => "Unsupported dynamic field type $Param{DynamicFieldConfig}->{FieldType}.",
         );
         return;
     }

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.301283092415137;
+    $Self->{Completeness}        = 0.300242914979757;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -255,6 +255,9 @@ sub Data {
         'Edit Attachment' => 'Editați atașamentul',
         'Filter for Attachments' => 'Filtru pentru atașamente',
         'Filter for attachments' => 'Filtru pentru atașamente',
+        'Related Actions' => '',
+        'Templates' => '',
+        'Templates ↔ Attachments' => '',
         'Filename' => 'Numele fișierului',
         'Download file' => 'Descărcați fișierul',
         'Delete this attachment' => 'Ștergeți acest atașament',
@@ -267,6 +270,7 @@ sub Data {
         'Edit Auto Response' => 'Editați răspunsul automat',
         'Filter for Auto Responses' => 'Filtru pentru răspunsuri automate',
         'Filter for auto responses' => 'Filtru pentru răspunsuri automate',
+        'Queues ↔ Auto Responses' => '',
         'Response' => 'Răspuns',
         'Auto response from' => 'Răspuns automat de la',
         'Reference' => 'Referință',
@@ -392,6 +396,8 @@ sub Data {
         'Search' => 'Căutare',
         'Wildcards like \'*\' are allowed.' => 'Sunt permise semne nedefinite ca „*”.',
         'Select' => 'Selectare',
+        'Customer Users' => 'Clienți utilizatori',
+        'Customers ↔ Groups' => '',
         'List (only %s shown - more available)' => 'Lista (sunt afișate doar %s – sunt disponibile mai multe)',
         'total' => 'total',
         'Please enter a search term to look for customers.' => 'Vă rugăm să introduceți un termen de căutare pentru a căuta clienți.',
@@ -414,9 +420,9 @@ sub Data {
         'Select the customer:group permissions.' => 'Selectarea permisiunilor client:grup.',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Dacă nu este selectat nimic, atunci nu există permisiuni în acest grup (tichetele nu vor fi disponibile pentru client).',
-        'Search Results' => 'Rezultatele căutării',
         'Customers' => 'Clienți',
         'Groups' => 'Grupuri',
+        'Search Results' => 'Rezultatele căutării',
         'Change Group Relations for Customer' => 'Schimbați relațiile de grup pentru client',
         'Change Customer Relations for Group' => 'Schimbați relațiile de client pentru grup',
         'Toggle %s Permission for all' => 'Comutați permisiunile %s pentru toți',
@@ -436,6 +442,9 @@ sub Data {
         'Back to search results' => 'Înapoi la rezultatele căutării',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Utilizatorul client este necesar ca să aibă istoric client și să se conecteze prin intermediul panoului client.',
+        'Customer Users ↔ Customers' => '',
+        'Customer Users ↔ Groups' => '',
+        'Customer Users ↔ Services' => '',
         'List (%s total)' => 'Listă (%s în total)',
         'Username' => 'Nume utilizator',
         'Email' => 'E-mail',
@@ -467,7 +476,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
         'Manage Customer User-Customer Relations' => 'Administrarea relațiilor client-utilizator - client',
         'Select the customer user:customer relations.' => 'Selectați relațiile clientul-utilizator:client.',
-        'Customer Users' => 'Clienți utilizatori',
         'Change Customer Relations for Customer User' => 'Schimbați relațiile la clientul utilizator',
         'Change Customer User Relations for Customer' => 'Schimbați relațiile la clientul utilizator',
         'Toggle active state for all' => 'Comutați starea activă pentru toți',
@@ -495,6 +503,7 @@ sub Data {
         'Filter for Services' => 'Filtru pentru servicii',
         'Filter for services' => 'Filtru pentru servicii',
         'Services' => 'Servicii',
+        'Service Level Agreements' => 'SLA',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
         'Dynamic Fields Management' => 'Administrarea câmpurilor dinamice',
@@ -509,6 +518,7 @@ sub Data {
         'Overwrite existing configurations' => '',
         'Import configurations' => '',
         'Export configurations' => '',
+        'Process Management' => 'Administrarea procesului',
         'Dynamic fields ↔ Screens' => '',
         'Dynamic Fields List' => 'Lista câmpurilor dinamice',
         'Dynamic fields per page' => 'Câmpuri dinamice pe pagină',
@@ -1357,6 +1367,8 @@ sub Data {
         'Create new groups to handle access permissions for different groups of agent (e. g. purchasing department, support department, sales department, ...). ' =>
             'Creează grupuri noi pentru administrarea drepturilor de acces a grupurilor de agenți (de ex. departamentul de achiziții, departamentul de suport, departamentul de vânzări, ...). ',
         'It\'s useful for ASP solutions. ' => '',
+        'Agents ↔ Groups' => '',
+        'Roles ↔ Groups' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'System Log' => 'Jurnalul sistemului',
@@ -1639,6 +1651,12 @@ sub Data {
             '',
         'Install Package' => 'Instalare pachet',
         'Update Package' => 'Actualizare pachet',
+        'Package' => '',
+        'Required package %s is already installed.' => '',
+        'Required Perl module %s is already installed.' => '',
+        'Required package %s needs to get installed!' => '',
+        'Required package %s needs to get updated to version %s!' => '',
+        'Required Perl module %s needs to get installed or updated!' => '',
         'Continue' => 'Continuare',
         'Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Vă rugăm să vă asigurați că baza de date acceptă pachete cu o dimensiune de peste %s MB (în prezent acceptă doar pachete de până la %s MB). Vă rugăm să adaptați setarea max_allowed_packet a bazei de date pentru a evita erorile.',
@@ -1728,12 +1746,12 @@ sub Data {
         'Edit Priority' => 'Editați prioritatea',
         'Filter for Priorities' => '',
         'Filter for priorities' => '',
+        'Configure Priority Visibility and Defaults' => '',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             '',
         'This priority is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-        'Process Management' => 'Administrarea procesului',
         'Filter for Processes' => '',
         'Filter for processes' => '',
         'Create New Process' => '',
@@ -1750,6 +1768,9 @@ sub Data {
             '',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             '',
+        'Access Control Lists (ACL)' => '',
+        'Generic Agent' => '',
+        'Manage Process Widiget Groups' => '',
         'Processes' => 'Procese',
         'Process name' => '',
         'Print' => 'Imprimare',
@@ -1904,6 +1925,13 @@ sub Data {
         'Edit Queue' => 'Editați coada',
         'Filter for Queues' => '',
         'Filter for queues' => '',
+        'Email Addresses' => '',
+        'PostMaster Mail Accounts' => '',
+        'Salutations' => 'Moduri de salut',
+        'Signatures' => 'Semnături',
+        'Templates ↔ Queues' => '',
+        'Configure Working Hours' => '',
+        'Configure Queue Related Settings' => '',
         'A queue with this name already exists!' => 'O coadă cu acest nume există deja!',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             '',
@@ -1952,7 +1980,6 @@ sub Data {
         'Manage Template-Queue Relations' => '',
         'Filter for Templates' => '',
         'Filter for templates' => '',
-        'Templates' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'Administrarea rolurilor',
@@ -1962,6 +1989,7 @@ sub Data {
         'Filter for roles' => '',
         'Create a role and put groups in it. Then add the role to the users.' =>
             '',
+        'Agents ↔ Roles' => '',
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             '',
 
@@ -1998,7 +2026,9 @@ sub Data {
         'Edit SLA' => '',
         'Add SLA' => '',
         'Filter for SLAs' => '',
+        'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => '',
+        'Minimum Time Between Incidents' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
         'S/MIME Management' => 'Administrarea S/MIME',
@@ -2079,9 +2109,11 @@ sub Data {
         'Service Management' => 'Administrarea serviciilor',
         'Add Service' => '',
         'Edit Service' => '',
+        'Configure Service Visibility and Defaults' => '',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             '',
         'Sub-service of' => '',
+        'Criticality' => 'Critic',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
         'Session Management' => 'Administrarea sesiunilor',
@@ -2115,6 +2147,8 @@ sub Data {
         'Filter for states' => '',
         'Attention' => 'Atenție',
         'Please also update the states in SysConfig where needed.' => '',
+        'Configure State Visibility and Defaults' => '',
+        'Configure State Type Visibility and Defaults' => '',
         'This state is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
         'State type' => '',
@@ -2237,7 +2271,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => '',
-        'Package' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
         'System Maintenance Management' => '',
@@ -2316,6 +2349,7 @@ sub Data {
         'Edit Type' => '',
         'Filter for Types' => '',
         'Filter for types' => '',
+        'Configure Type Visibility and Defaults' => '',
         'A type with this name already exists!' => '',
         'This type is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
@@ -3574,9 +3608,6 @@ sub Data {
             '',
         'Yes, but require at least one active notification method.' => '',
 
-        # Perl Module: Kernel/Modules/AdminAttachment.pm
-        'Attachment added!' => 'Fișierul a fost adăugat!',
-
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
 
@@ -4132,7 +4163,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminTemplate.pm
         'Template updated!' => 'Șablon actualizat!',
-        'Template added!' => 'Șablon adăugat!',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
         'Change Attachment Relations for Template' => '',
@@ -7807,7 +7837,7 @@ sub Data {
             '',
         'Ticket event module that stores values of the selected web service record into the configured additional dynamic fields.' =>
             '',
-        'It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
+        'It might happen that a dynamic field of type WebserviceDropdown or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
             '',
         'Mapping for field values received from form. This setting is necessary for the correct identification of the form fields. Key means value type, value means possible representation in views.' =>
             '',
@@ -7948,6 +7978,7 @@ sub Data {
         'Agent interface notification module to show the number of mentions.' =>
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
+        'Mapping of non-standard time zones to official ones.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'invalid-temporar',
@@ -8439,6 +8470,8 @@ sub Data {
         'The following files are not allowed to be uploaded: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             '',
+        'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
+            '',
         'The following files were already uploaded and have not been uploaded again: %s' =>
             '',
         'No space left for the following files: %s' => '',
@@ -8507,7 +8540,6 @@ Thanks for your help!
         'AJAX functions for notification event transport web service.' =>
             '',
         'AJAX interface for the web service dynamic field backends.' => '',
-        'Access Control Lists (ACL)' => '',
         'AccountedTime' => '',
         'Activation of dynamic fields for screens.' => '',
         'ActivityID' => '',
@@ -8527,7 +8559,7 @@ Thanks for your help!
         'Admin' => 'Administrare',
         'Admin Area.' => '',
         'Admin Notification' => 'Notificare către Administrator',
-        'Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect' =>
+        'Admin configuration dialog for dynamic field types WebserviceDropdown and WebserviceMultiselect' =>
             '',
         'Admin modules overview.' => '',
         'Admin.' => '',
@@ -8540,8 +8572,6 @@ Thanks for your help!
         'Agent Statistics.' => '',
         'Agent User Search' => '',
         'Agent User Search.' => '',
-        'Agents ↔ Groups' => '',
-        'Agents ↔ Roles' => '',
         'All CustomerIDs of a customer user.' => '',
         'All customer users of a CustomerID' => '',
         'All escalated tickets' => 'Toate tichetele escaladate',
@@ -8690,9 +8720,6 @@ Thanks for your help!
         'Customer User Information Center search.' => '',
         'Customer User Information Center.' => '',
         'Customer User-Customer Relations' => '',
-        'Customer Users ↔ Customers' => '',
-        'Customer Users ↔ Groups' => '',
-        'Customer Users ↔ Services' => '',
         'Customer preferences.' => '',
         'Customer ticket overview' => '',
         'Customer ticket search.' => '',
@@ -8701,7 +8728,6 @@ Thanks for your help!
         'CustomerID search' => '',
         'CustomerName' => '',
         'CustomerUser' => '',
-        'Customers ↔ Groups' => '',
         'Czech' => '',
         'Danish' => '',
         'Dashboard overview.' => '',
@@ -8743,7 +8769,6 @@ Thanks for your help!
         'Edit Customer Users.' => '',
         'Edit appointment' => '',
         'Edit customer company' => '',
-        'Email Addresses' => '',
         'Email Outbound' => '',
         'Email Resend' => '',
         'Email communication channel.' => '',
@@ -8972,7 +8997,6 @@ Thanks for your help!
         'Portuguese' => '',
         'Portuguese (Brasil)' => '',
         'PostMaster Filters' => '',
-        'PostMaster Mail Accounts' => '',
         'Print this ticket' => 'Imprimă acest tichet',
         'Priorities' => 'Priorități',
         'Process Management Activity Dialog GUI' => '',
@@ -8991,7 +9015,6 @@ Thanks for your help!
         'Public Calendar' => '',
         'Public calendar.' => '',
         'Queue view' => '',
-        'Queues ↔ Auto Responses' => '',
         'Refresh interval' => '',
         'Reminder Tickets' => 'Tichete rapel',
         'Removed subscription for user "%s".' => '',
@@ -9001,13 +9024,11 @@ Thanks for your help!
         'Responsible Tickets' => '',
         'Responsible Tickets.' => '',
         'Right' => '',
-        'Roles ↔ Groups' => '',
         'Romanian' => '',
         'Running Process Tickets' => '',
         'Russian' => '',
         'S/MIME Certificates' => 'Certificate S/MIME',
         'SMS' => '',
-        'Salutations' => 'Moduri de salut',
         'Schedule a maintenance period.' => '',
         'Screen after new ticket' => 'Ecran dupa crearea unui tichet nou',
         'Search Customer' => '',
@@ -9045,7 +9066,6 @@ Thanks for your help!
         'Sent notification to "%s".' => '',
         'Serbian Cyrillic' => '',
         'Serbian Latin' => '',
-        'Service Level Agreements' => 'SLA',
         'Service view' => '',
         'ServiceView' => '',
         'Set a new password by filling in your current password and a new one.' =>
@@ -9060,7 +9080,6 @@ Thanks for your help!
         'Shows information on how to start OTRS Daemon' => '',
         'Shows last mention of tickets.' => '',
         'Signature data.' => 'Date de semnătură.',
-        'Signatures' => 'Semnături',
         'Simple' => '',
         'Skin' => '',
         'Slovak' => '',
@@ -9095,8 +9114,6 @@ Thanks for your help!
         'System Configuration Deployment' => '',
         'System Configuration Group' => '',
         'System Maintenance' => '',
-        'Templates ↔ Attachments' => '',
-        'Templates ↔ Queues' => '',
         'Textarea' => '',
         'Thai' => '',
         'The PGP signature is expired.' => '',
@@ -9184,8 +9201,8 @@ Thanks for your help!
         'We are performing scheduled maintenance. We should be back online shortly.' =>
             'Se realizeaza lucrari de mentenanta. Ar trebui sa revenim online in scurt timp.',
         'Web Services' => 'Servicii Web',
+        'Web service (Dropdown)' => '',
         'Web service (Multiselect)' => '',
-        'Web service (Text)' => '',
         'Web service dynamic field AJAX interface' => '',
         'Webservice' => '',
         'Yes, but hide archived tickets' => 'Da, dar ascunde tichete arhivate',
@@ -9527,6 +9544,7 @@ Thanks for your help!
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',
+        'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s',
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',

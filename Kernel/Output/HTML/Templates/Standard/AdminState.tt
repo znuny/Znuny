@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -75,6 +75,29 @@
                 <p class="FieldExplanation">
                     [% Translate("See also") | html %]: <a href="https://doc.otrs.com/doc" target="_blank">https://doc.otrs.com/doc</a>
                 </p>
+            </div>
+        </div>
+        <div class='WidgetSimple'>
+            <div class='Header'>
+                <h2>[% Translate('Related Actions') | html %]</h2>
+            </div>
+            <div class='Content'>
+                <ul class='ActionList SpacingTop'>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=Search;Search=%23%23%23State' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Configure State Visibility and Defaults') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=Search;Search=%23%23%23StateType' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Configure State Type Visibility and Defaults') | html %]
+                            </span>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
