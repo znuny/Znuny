@@ -231,42 +231,42 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             'Center',
             true,
             [
-               {
-                   Label: Core.Language.Translate('Cancel'),
-                   Function: function () {
-                       Core.UI.Dialog.CloseDialog($('.Dialog'));
-                   }
-               },
-               {
-                   Label: Core.Language.Translate('Delete'),
-                   Class: 'Primary',
-                   Function: function () {
-                       var Data = {
-                               Action: 'AdminProcessManagement',
-                               Subaction: 'ProcessDelete',
-                               ID: ProcessID
-                           };
+                {
+                    Label: Core.Language.Translate('Cancel'),
+                    Function: function () {
+                        Core.UI.Dialog.CloseDialog($('.Dialog'));
+                    }
+                },
+                {
+                    Label: Core.Language.Translate('Delete'),
+                    Class: 'Primary',
+                    Function: function () {
+                        var Data = {
+                                Action: 'AdminProcessManagement',
+                                Subaction: 'ProcessDelete',
+                                ID: ProcessID
+                            };
 
-                       // Change the dialog to an ajax loader
-                       $('.Dialog')
-                           .find('.ContentFooter').empty().end()
-                           .find('.InnerContent').empty().append('<div class="Spacing Center"><span class="AJAXLoader"></span></div>');
+                        // Change the dialog to an ajax loader
+                        $('.Dialog')
+                            .find('.ContentFooter').empty().end()
+                            .find('.InnerContent').empty().append('<div class="Spacing Center"><span class="AJAXLoader"></span></div>');
 
-                       // Call the ajax function
-                       Core.AJAX.FunctionCall(Core.Config.Get('CGIHandle'), Data, function (Response) {
-                           if (!Response || !Response.Success) {
-                               alert(Response.Message);
-                               Core.UI.Dialog.CloseDialog($('.Dialog'));
-                               return false;
-                           }
+                        // Call the ajax function
+                        Core.AJAX.FunctionCall(Core.Config.Get('CGIHandle'), Data, function (Response) {
+                            if (!Response || !Response.Success) {
+                                alert(Response.Message);
+                                Core.UI.Dialog.CloseDialog($('.Dialog'));
+                                return false;
+                            }
 
-                           Core.App.InternalRedirect({
-                               Action: Data.Action
-                           });
-                       }, 'json');
-                   }
-               }
-           ]
+                            Core.App.InternalRedirect({
+                                Action: Data.Action
+                            });
+                        }, 'json');
+                    }
+                }
+            ]
         );
     }
 
@@ -297,44 +297,44 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             'Center',
             true,
             [
-               {
-                   Label: Core.Language.Translate('Cancel'),
-                   Function: function () {
-                       Core.UI.Dialog.CloseDialog($('.Dialog'));
-                   }
-               },
-               {
-                   Label: Core.Language.Translate('Delete'),
-                   Class: 'Primary',
-                   Function: function () {
-                       var Data = {
-                               Action: 'AdminProcessManagement',
-                               Subaction: 'EntityDelete',
-                               EntityType: EntityType,
-                               EntityID: EntityID,
-                               ItemID: ItemID
-                           };
+                {
+                    Label: Core.Language.Translate('Cancel'),
+                    Function: function () {
+                        Core.UI.Dialog.CloseDialog($('.Dialog'));
+                    }
+                },
+                {
+                    Label: Core.Language.Translate('Delete'),
+                    Class: 'Primary',
+                    Function: function () {
+                        var Data = {
+                                Action: 'AdminProcessManagement',
+                                Subaction: 'EntityDelete',
+                                EntityType: EntityType,
+                                EntityID: EntityID,
+                                ItemID: ItemID
+                            };
 
-                       // Change the dialog to an ajax loader
-                       $('.Dialog')
-                           .find('.ContentFooter').empty().end()
-                           .find('.InnerContent').empty().append('<div class="Spacing Center"><span class="AJAXLoader"></span></div>');
+                        // Change the dialog to an ajax loader
+                        $('.Dialog')
+                            .find('.ContentFooter').empty().end()
+                            .find('.InnerContent').empty().append('<div class="Spacing Center"><span  class="AJAXLoader"></span></div>');
 
-                       // Call the ajax function
-                       Core.AJAX.FunctionCall(Core.Config.Get('CGIHandle'), Data, function (Response) {
-                           if (!Response || !Response.Success) {
-                               alert(Response.Message);
-                               Core.UI.Dialog.CloseDialog($('.Dialog'));
-                               return false;
-                           }
+                        // Call the ajax function
+                        Core.AJAX.FunctionCall(Core.Config.Get('CGIHandle'), Data, function (Response) {
+                            if (!Response || !Response.Success) {
+                                alert(Response.Message);
+                                Core.UI.Dialog.CloseDialog($('.Dialog'));
+                                return false;
+                            }
 
-                           // Remove element from accordion
-                           $Element.closest('li').remove();
-                           Core.UI.Dialog.CloseDialog($('.Dialog'));
-                       }, 'json');
-                   }
-               }
-           ]
+                            // Remove element from accordion
+                            $Element.closest('li').remove();
+                            Core.UI.Dialog.CloseDialog($('.Dialog'));
+                        }, 'json');
+                    }
+                }
+            ]
         );
     }
 
@@ -506,7 +506,10 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                     TargetNS.Canvas.MakeDraggable();
                 }
                 else {
-                    alert(Core.Language.Translate('This Activity is already used in the Process. You cannot add it twice!'));
+                    Core.UI.Dialog.ShowAlert(
+                        Core.Language.Translate('An Error Occurred'),
+                        Core.Language.Translate('This Activity is already used in the Process. You cannot add it twice!')
+                    );
                 }
             }
             else {
@@ -648,8 +651,11 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             // if a dummy activity exists, another transition was placed to the canvas but not yet
             // connected to an end point. One cannot place two unconnected transitions on the canvas.
             if ($('#Dummy').length && DummyActivityConnected(ProcessEntityID)) {
-              alert(Core.Language.Translate('An unconnected transition is already placed on the canvas. Please connect this transition first before placing another transition.'));
-              return false;
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An Error Occurred'),
+                    Core.Language.Translate('An unconnected transition is already placed on the canvas. Please connect this transition first before placing another transition.')
+                );
+                return false;
             }
 
             if (typeof Entity !== 'undefined') {
@@ -661,7 +667,10 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                 // If this transition is already bind to this activity
                 // you cannot bind it a second time
                 if (Path[Activity] && typeof Path[Activity][EntityID] !== 'undefined') {
-                    alert(Core.Language.Translate('This Transition is already used for this Activity. You cannot use it twice!'));
+                    Core.UI.Dialog.ShowAlert(
+                        Core.Language.Translate('An Error Occurred'),
+                        Core.Language.Translate('This Transition is already used for this Activity. You cannot use it twice!')
+                    );
                     return false;
                 }
 
@@ -718,7 +727,10 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                     typeof Path[Transition.StartActivity][Transition.TransitionID].TransitionAction !== 'undefined' &&
                     ($.inArray(EntityID, Path[Transition.StartActivity][Transition.TransitionID].TransitionAction) >= 0)
                 ) {
-                    alert(Core.Language.Translate('This TransitionAction is already used in this Path. You cannot use it twice!'));
+                    Core.UI.Dialog.ShowAlert(
+                        Core.Language.Translate('An Error Occurred'),
+                        Core.Language.Translate('This TransitionAction is already used in this Path. You cannot use it twice!')
+                    );
                     return false;
                 }
 
@@ -1455,7 +1467,10 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                 $(this).closest('.WidgetSimple').remove();
             }
             else {
-                alert(Core.Language.Translate("Sorry, the only existing condition can't be removed."));
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An Error Occurred'),
+                    Core.Language.Translate("Sorry, the only existing condition can't be removed.")
+                );
             }
 
             return false;
@@ -1483,7 +1498,10 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                 $(this).parent().closest('fieldset').remove();
             }
             else {
-                alert(Core.Language.Translate("Sorry, the only existing field can't be removed."));
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An Error Occurred'),
+                    Core.Language.Translate("Sorry, the only existing field can't be removed.")
+                );
             }
 
             return false;
@@ -1556,7 +1574,10 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                 $(this).closest('fieldset').remove();
             }
             else {
-                alert(Core.Language.Translate("Sorry, the only existing parameter can't be removed."));
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An Error Occurred'),
+                    Core.Language.Translate("Sorry, the only existing parameter can't be removed.")
+                );
             }
             return false;
         });

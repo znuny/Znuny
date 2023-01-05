@@ -47,8 +47,7 @@ $Selenium->RunTest(
 
         my $StartTimeSettings = $StartTimeObject->Get();
 
-        # Change resolution (desktop mode).
-        $Selenium->set_window_size( 768, 1050 );
+        $Selenium->maximize_window();
 
         # Create test user.
         my $Language      = 'en';
@@ -107,7 +106,8 @@ $Selenium->RunTest(
         $Selenium->WaitFor( JavaScript => "return \$('#CalendarID').length && \$('#EditFormSubmit').length;" );
 
         # Click on Save, without required input fields.
-        $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+        my $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+        $EditFormSubmit->click();
 
         $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('#Title.Error').length" );
         $Self->Is(
@@ -130,7 +130,9 @@ $Selenium->RunTest(
         );
 
         # Click on Save.
-        $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+        $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+        $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+        $EditFormSubmit->click();
 
         # Wait for dialog to close and AJAX to finish.
         $Selenium->WaitFor(
@@ -189,7 +191,9 @@ $Selenium->RunTest(
         $Selenium->find_element( '#RecurrenceCount', 'css' )->send_keys('3');
 
         # Click on Save.
-        $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+        $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+        $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+        $EditFormSubmit->click();
 
         # Wait for AJAX to finish.
         $Selenium->WaitFor(
@@ -281,7 +285,9 @@ $Selenium->RunTest(
         $Selenium->find_element( '#RecurrenceCount', 'css' )->send_keys('3');
 
         # Click on Save.
-        $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+        $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+        $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+        $EditFormSubmit->click();
 
         # Wait for AJAX to finish.
         $Selenium->WaitFor(
@@ -365,7 +371,9 @@ $Selenium->RunTest(
         $Selenium->find_element( '#RecurrenceCount', 'css' )->send_keys('3');
 
         # Click on Save.
-        $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+        $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+        $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+        $EditFormSubmit->click();
 
         # Wait for AJAX to finish.
         $Selenium->WaitFor(
@@ -458,7 +466,9 @@ $Selenium->RunTest(
         $Selenium->find_element( '#RecurrenceCount', 'css' )->send_keys('3');
 
         # Click on Save.
-        $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+        $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+        $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+        $EditFormSubmit->click();
 
         # Wait for dialog to close and AJAX to finish.
         $Selenium->WaitFor(
@@ -621,7 +631,9 @@ $Selenium->RunTest(
         $Selenium->find_element( '#RecurrenceCount', 'css' )->send_keys('6');
 
         # Click on Save.
-        $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+        $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+        $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+        $EditFormSubmit->click();
 
         # Wait for dialog to close and AJAX to finish.
         $Selenium->WaitFor(
@@ -754,7 +766,9 @@ $Selenium->RunTest(
         $Selenium->find_element( '#RecurrenceCount', 'css' )->send_keys('3');
 
         # Click on Save.
-        $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+        $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+        $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+        $EditFormSubmit->click();
 
         # Wait for dialog to close and AJAX to finish.
         $Selenium->WaitFor(
@@ -935,7 +949,9 @@ $Selenium->RunTest(
         $Selenium->find_element( '#RecurrenceCount', 'css' )->send_keys('20');
 
         # Click on Save.
-        $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+        $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+        $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+        $EditFormSubmit->click();
 
         # Wait for dialog to close and AJAX to finish.
         $Selenium->WaitFor(
@@ -1066,7 +1082,9 @@ $Selenium->RunTest(
         $Selenium->find_element( '#RecurrenceCount', 'css' )->send_keys('3');
 
         # Click on Save.
-        $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+        $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+        $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+        $EditFormSubmit->click();
 
         # Wait for dialog to close and AJAX to finish.
         $Selenium->WaitFor(
@@ -1244,7 +1262,9 @@ $Selenium->RunTest(
         $Selenium->find_element( '#RecurrenceCount', 'css' )->send_keys('6');
 
         # Click on Save.
-        $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+        $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+        $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+        $EditFormSubmit->click();
 
         # Wait for dialog to close and AJAX to finish.
         $Selenium->WaitFor(
@@ -1376,7 +1396,9 @@ $Selenium->RunTest(
         $Selenium->find_element( '#RecurrenceCount', 'css' )->send_keys('3');
 
         # Click on Save.
-        $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+        $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+        $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+        $EditFormSubmit->click();
 
         # Wait for dialog to close and AJAX to finish.
         $Selenium->WaitFor(

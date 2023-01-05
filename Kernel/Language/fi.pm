@@ -9265,6 +9265,7 @@ Thanks for your help!
         'Agent',
         'All occurrences',
         'All-day',
+        'An Error Occurred',
         'An error occurred during communication.',
         'An error occurred! Please check the browser error log for more details!',
         'An item with this name is already present.',
