@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # Copyright (C) 2010 Milorad Jovanovic <j.milorad at gmail.com>
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.92707487412701;
+    $Self->{Completeness}        = 0.924372469635628;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -255,6 +255,9 @@ sub Data {
         'Edit Attachment' => 'Уреди прилог',
         'Filter for Attachments' => 'Филтер за прилоге',
         'Filter for attachments' => 'Филтер за прилоге',
+        'Related Actions' => '',
+        'Templates' => 'Шаблони',
+        'Templates ↔ Attachments' => 'Шаблони ↔ прилози',
         'Filename' => 'Назив датотеке',
         'Download file' => 'Преузми датотеку',
         'Delete this attachment' => 'Обриши овај прилог',
@@ -267,6 +270,7 @@ sub Data {
         'Edit Auto Response' => 'Уреди Аутоматски Одговор',
         'Filter for Auto Responses' => 'Филтер за аутоматске одговоре',
         'Filter for auto responses' => 'Филтер за аутоматске одговоре',
+        'Queues ↔ Auto Responses' => 'Редови ↔ аутоматски одговори',
         'Response' => 'Одговор',
         'Auto response from' => 'Аутоматски одговор од',
         'Reference' => 'Референца',
@@ -392,6 +396,8 @@ sub Data {
         'Search' => 'Тражи',
         'Wildcards like \'*\' are allowed.' => 'Џокерски знаци као \'*\' су дозвољени.',
         'Select' => 'Изабери',
+        'Customer Users' => 'Клијенти корисници',
+        'Customers ↔ Groups' => 'Клијенти ↔ групе',
         'List (only %s shown - more available)' => 'Листа (само %s је приказано - расположиво више)',
         'total' => 'укупно',
         'Please enter a search term to look for customers.' => 'Молимо унесите појам претраге за проналажење клијената.',
@@ -414,9 +420,9 @@ sub Data {
         'Select the customer:group permissions.' => 'Изабери клијент:група дозволе.',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Ако ништа није изабрано, онда нема дозвола у овој групи (тикети неће бити доступни клијенту).',
-        'Search Results' => 'Резултат претраге',
         'Customers' => 'Клијенти',
         'Groups' => 'Групе',
+        'Search Results' => 'Резултат претраге',
         'Change Group Relations for Customer' => 'Промени везе са групама за клијента',
         'Change Customer Relations for Group' => 'Промени везе са клијентима за групу',
         'Toggle %s Permission for all' => 'Промени %s дозволе за све',
@@ -436,6 +442,9 @@ sub Data {
         'Back to search results' => 'Врати се на резултате претраге',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Клијент клијент треба да има клијентски историјат и да се пријави преко клијентског панела.',
+        'Customer Users ↔ Customers' => 'Клијент корисници ↔ клијенти',
+        'Customer Users ↔ Groups' => 'Клијенти корисници ↔ Групе',
+        'Customer Users ↔ Services' => 'Клијент корисници ↔ сервиси',
         'List (%s total)' => 'Листа (%s укупно)',
         'Username' => 'Корисничко име',
         'Email' => 'Имејл',
@@ -467,7 +476,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
         'Manage Customer User-Customer Relations' => 'Управљање релацијама клијент корисник-клијент',
         'Select the customer user:customer relations.' => 'Одаберите клијент корисник:клијент релације.',
-        'Customer Users' => 'Клијенти корисници',
         'Change Customer Relations for Customer User' => 'Промени релације са клијентима за клијент корисника',
         'Change Customer User Relations for Customer' => 'Промени релације са клијент корисницима за клијента',
         'Toggle active state for all' => 'Промени активно стање за све',
@@ -495,6 +503,7 @@ sub Data {
         'Filter for Services' => 'Филтер за сервисе',
         'Filter for services' => 'Филтер за сервисе',
         'Services' => 'Услуге',
+        'Service Level Agreements' => 'Споразуми о нивоу услуга',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
         'Dynamic Fields Management' => 'Управљање динамичким пољима',
@@ -509,6 +518,7 @@ sub Data {
         'Overwrite existing configurations' => '',
         'Import configurations' => '',
         'Export configurations' => '',
+        'Process Management' => 'Управљање процесима',
         'Dynamic fields ↔ Screens' => '',
         'Dynamic Fields List' => 'Листа динамичких поља',
         'Dynamic fields per page' => 'Број динамичких поља по страни',
@@ -1357,6 +1367,8 @@ sub Data {
         'Create new groups to handle access permissions for different groups of agent (e. g. purchasing department, support department, sales department, ...). ' =>
             'Направи нове групе за руковање правима приступа разним групама оператера (нпр. одељење набавке, техничка подршка, продаја, ...). ',
         'It\'s useful for ASP solutions. ' => 'Корисно за ASP решења. ',
+        'Agents ↔ Groups' => 'Оператери ↔ групе',
+        'Roles ↔ Groups' => 'Улоге ↔ групе',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'System Log' => 'Системски дневник',
@@ -1639,6 +1651,12 @@ sub Data {
             'У случају да имате додтана питања, биће нам задовољство да одговоримо на њих.',
         'Install Package' => 'Инсталирај пакет',
         'Update Package' => 'Ажурирај пакет',
+        'Package' => '',
+        'Required package %s is already installed.' => '',
+        'Required Perl module %s is already installed.' => '',
+        'Required package %s needs to get installed!' => '',
+        'Required package %s needs to get updated to version %s!' => '',
+        'Required Perl module %s needs to get installed or updated!' => '',
         'Continue' => 'Настави',
         'Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Молимо вас да будете сигурни да ваша база података прихвата пакете величине преко %s MB (тренутно прихвата само пакете до %s MB). Молимо вас да прилагодите подешавања \'max_allowed_packet\' на вашој бази података, да би сте избегли грешке.',
@@ -1728,12 +1746,12 @@ sub Data {
         'Edit Priority' => 'Уреди Приоритет',
         'Filter for Priorities' => 'Филтер за приоритете',
         'Filter for priorities' => 'Филтер за приоритете',
+        'Configure Priority Visibility and Defaults' => '',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             'Овај приоритет се користи у системској конфигурацији, неопходна је додатна потврда за промену подешавања на нову вредност!',
         'This priority is used in the following config settings:' => 'Овај приоритет се користи у следећим системским подешавањима:',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-        'Process Management' => 'Управљање процесима',
         'Filter for Processes' => 'Филтер процеса',
         'Filter for processes' => 'Филтер процеса',
         'Create New Process' => 'Креирај нови процес',
@@ -1750,6 +1768,9 @@ sub Data {
             'За креирање новог процеса можете или увести процес који је извезен из другог система или креирати комплетно нов.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'Промене у процесима једино утичу на понашање система, ако синхронизујете податке процеса. Синхронизовањем процеса, новонаправљене промене ће бити уписане у конфигурацију.',
+        'Access Control Lists (ACL)' => 'Листе за контролу приступа (ACL)',
+        'Generic Agent' => '',
+        'Manage Process Widiget Groups' => '',
         'Processes' => 'Процеси',
         'Process name' => 'Назив процеса',
         'Print' => 'Штампај',
@@ -1904,6 +1925,13 @@ sub Data {
         'Edit Queue' => 'Уреди Ред',
         'Filter for Queues' => 'Филтер за редове',
         'Filter for queues' => 'Филтер за редове',
+        'Email Addresses' => 'Имејл адресе',
+        'PostMaster Mail Accounts' => 'PostMaster мејл налози',
+        'Salutations' => 'Поздрави',
+        'Signatures' => 'Потписи',
+        'Templates ↔ Queues' => 'Шаблони ↔ редови',
+        'Configure Working Hours' => '',
+        'Configure Queue Related Settings' => '',
         'A queue with this name already exists!' => 'Ред са овим називом већ постоји!',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             'Овај ред се користи у системској конфигурацији, неопходна је додатна потврда за промену подешавања на нову вредност!',
@@ -1952,7 +1980,6 @@ sub Data {
         'Manage Template-Queue Relations' => 'Управљање односом шаблон-ред',
         'Filter for Templates' => 'Филтер за шаблоне',
         'Filter for templates' => 'Филтер за шаблоне',
-        'Templates' => 'Шаблони',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'Управљање улогама',
@@ -1962,6 +1989,7 @@ sub Data {
         'Filter for roles' => 'Филтер за улоге',
         'Create a role and put groups in it. Then add the role to the users.' =>
             'Направи улогу и додај групе у њу. Онда додај улогу корисницима.',
+        'Agents ↔ Roles' => 'Оператери ↔ улоге',
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             'Нема дефинисаних улога. употребите дугме \'Add\' за креирање нове улоге.',
 
@@ -1998,7 +2026,9 @@ sub Data {
         'Edit SLA' => 'Уреди SLA',
         'Add SLA' => 'Додај SLA',
         'Filter for SLAs' => 'Филтер за SLA',
+        'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => 'Молимо пишите само бројеве!',
+        'Minimum Time Between Incidents' => 'Минимално време између инцидената',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
         'S/MIME Management' => 'S/MIME управљање',
@@ -2079,9 +2109,11 @@ sub Data {
         'Service Management' => 'Управљање услугама',
         'Add Service' => 'Додај услугу',
         'Edit Service' => 'Уреди услугу',
+        'Configure Service Visibility and Defaults' => '',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             'Максимална дужина назива услуге је 200 карактера (са под-услугом).',
         'Sub-service of' => 'Под-услуга од',
+        'Criticality' => 'Значај',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
         'Session Management' => 'Управљање сесијама',
@@ -2115,6 +2147,8 @@ sub Data {
         'Filter for states' => 'Филтер за стања',
         'Attention' => 'Пажња',
         'Please also update the states in SysConfig where needed.' => 'Молимо да ажурирате стаусе и у системској конфигурацији где је то потребно.',
+        'Configure State Visibility and Defaults' => '',
+        'Configure State Type Visibility and Defaults' => '',
         'This state is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             'Ово стање се користи у системској конфигурацији, неопходна је додатна потврда за промену подешавања на нову вредност! ',
         'State type' => 'Тип статуса',
@@ -2237,7 +2271,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'Дозволе',
-        'Package' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
         'System Maintenance Management' => 'Управљање системом одржавања',
@@ -2316,6 +2349,7 @@ sub Data {
         'Edit Type' => 'Уреди Тип',
         'Filter for Types' => 'Филтер за типове',
         'Filter for types' => 'Филтер за типове',
+        'Configure Type Visibility and Defaults' => '',
         'A type with this name already exists!' => 'Тип са овим називом већ постоји!',
         'This type is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             'Овај тип се користи у системској конфигурацији, неопходна је додатна потврда за промену подешавања на нову вредност!',
@@ -3574,9 +3608,6 @@ sub Data {
             'Сви оператери са дозволом писања у термину (календару)',
         'Yes, but require at least one active notification method.' => 'Да, али тражи бар један активни метод обавештавања.',
 
-        # Perl Module: Kernel/Modules/AdminAttachment.pm
-        'Attachment added!' => 'Додат прилог!',
-
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => 'Аутоматски одговор додат!',
 
@@ -4132,7 +4163,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminTemplate.pm
         'Template updated!' => 'Шаблон ажуриран!',
-        'Template added!' => 'Шаблон додат!',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
         'Change Attachment Relations for Template' => 'Промени релације са прилозима за шаблон',
@@ -7807,7 +7837,7 @@ sub Data {
             '',
         'Ticket event module that stores values of the selected web service record into the configured additional dynamic fields.' =>
             '',
-        'It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
+        'It might happen that a dynamic field of type WebserviceDropdown or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
             '',
         'Mapping for field values received from form. This setting is necessary for the correct identification of the form fields. Key means value type, value means possible representation in views.' =>
             '',
@@ -7948,6 +7978,7 @@ sub Data {
         'Agent interface notification module to show the number of mentions.' =>
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
+        'Mapping of non-standard time zones to official ones.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'неважећи-привремено',
@@ -8439,6 +8470,8 @@ sub Data {
         'The following files are not allowed to be uploaded: %s' => 'Није дозвољено отпремање следећих датотека: %s',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             'Следеће датотеке премашују највећу дозвољену величину од %s и нису биле отпремљене: %s',
+        'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
+            '',
         'The following files were already uploaded and have not been uploaded again: %s' =>
             'Следеће датотеке су већ биле отпремљене и нису додате поново: %s',
         'No space left for the following files: %s' => 'За следеће датотеке нема више места: %s',
@@ -8518,7 +8551,6 @@ Thanks for your help!
         'AJAX functions for notification event transport web service.' =>
             '',
         'AJAX interface for the web service dynamic field backends.' => '',
-        'Access Control Lists (ACL)' => 'Листе за контролу приступа (ACL)',
         'AccountedTime' => 'Обрачунато време',
         'Activation of dynamic fields for screens.' => '',
         'ActivityID' => 'ID активности',
@@ -8538,7 +8570,7 @@ Thanks for your help!
         'Admin' => 'Админ',
         'Admin Area.' => 'Административни простор.',
         'Admin Notification' => 'Администраторска обавештења',
-        'Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect' =>
+        'Admin configuration dialog for dynamic field types WebserviceDropdown and WebserviceMultiselect' =>
             '',
         'Admin modules overview.' => 'Преглед администраторских модула.',
         'Admin.' => 'Админ.',
@@ -8551,8 +8583,6 @@ Thanks for your help!
         'Agent Statistics.' => 'Статистике за интерфејс оператера.',
         'Agent User Search' => 'Претрага корисника за оператере',
         'Agent User Search.' => 'Претрага корисника за оператере.',
-        'Agents ↔ Groups' => 'Оператери ↔ групе',
-        'Agents ↔ Roles' => 'Оператери ↔ улоге',
         'All CustomerIDs of a customer user.' => 'Сви клијент ID клијент корисника.',
         'All customer users of a CustomerID' => 'Сви клијенти корисници за CustomerID',
         'All escalated tickets' => 'Сви ескалирани тикети',
@@ -8701,9 +8731,6 @@ Thanks for your help!
         'Customer User Information Center search.' => 'Претрага клијент корисничког информативног центра.',
         'Customer User Information Center.' => 'Клијент-кориснички информативни центар.',
         'Customer User-Customer Relations' => '',
-        'Customer Users ↔ Customers' => 'Клијент корисници ↔ клијенти',
-        'Customer Users ↔ Groups' => 'Клијенти корисници ↔ Групе',
-        'Customer Users ↔ Services' => 'Клијент корисници ↔ сервиси',
         'Customer preferences.' => 'Клијентске поставке.',
         'Customer ticket overview' => 'Клијентски преглед тикета',
         'Customer ticket search.' => 'Клијентска претрага тикета.',
@@ -8712,7 +8739,6 @@ Thanks for your help!
         'CustomerID search' => 'Претрага ID клијената',
         'CustomerName' => 'Назив клијента',
         'CustomerUser' => 'Клијент корисник',
-        'Customers ↔ Groups' => 'Клијенти ↔ групе',
         'Czech' => 'Чешки',
         'Danish' => 'Дански',
         'Dashboard overview.' => 'Преглед командне табле.',
@@ -8754,7 +8780,6 @@ Thanks for your help!
         'Edit Customer Users.' => 'Уреди клијенте кориснике.',
         'Edit appointment' => 'Измена термина',
         'Edit customer company' => 'Измени фирму клијента',
-        'Email Addresses' => 'Имејл адресе',
         'Email Outbound' => 'Одлазни имејл',
         'Email Resend' => 'Пошаљи поново имејл',
         'Email communication channel.' => 'Комуникациони канал имејла.',
@@ -8983,7 +9008,6 @@ Thanks for your help!
         'Portuguese' => 'Португалски',
         'Portuguese (Brasil)' => 'Португалски (Бразил)',
         'PostMaster Filters' => 'PostMaster филтери',
-        'PostMaster Mail Accounts' => 'PostMaster мејл налози',
         'Print this ticket' => 'Одштампај овај тикет',
         'Priorities' => 'Приоритети',
         'Process Management Activity Dialog GUI' => 'Графички интерфејс дијалога активности у процесима',
@@ -9002,7 +9026,6 @@ Thanks for your help!
         'Public Calendar' => 'Јавни календар',
         'Public calendar.' => 'Јавни календар.',
         'Queue view' => 'Преглед реда',
-        'Queues ↔ Auto Responses' => 'Редови ↔ аутоматски одговори',
         'Refresh interval' => 'Интервал освежавања',
         'Reminder Tickets' => 'Тикети подсетника',
         'Removed subscription for user "%s".' => 'Претплата за корисника "%s" je искључена.',
@@ -9012,13 +9035,11 @@ Thanks for your help!
         'Responsible Tickets' => 'Одговорни тикети',
         'Responsible Tickets.' => 'Одговорни тикети.',
         'Right' => 'Десно',
-        'Roles ↔ Groups' => 'Улоге ↔ групе',
         'Romanian' => 'Румунски',
         'Running Process Tickets' => 'Активни процес тикети',
         'Russian' => 'Руски',
         'S/MIME Certificates' => 'S/MIME сертификати',
         'SMS' => 'СМС',
-        'Salutations' => 'Поздрави',
         'Schedule a maintenance period.' => 'Планирање периода одржавања.',
         'Screen after new ticket' => 'Приказ екрана после отварања новог тикета',
         'Search Customer' => 'Тражи клијента',
@@ -9056,7 +9077,6 @@ Thanks for your help!
         'Sent notification to "%s".' => 'Послато обавештење на "%s".',
         'Serbian Cyrillic' => 'Српски ћирилица',
         'Serbian Latin' => 'Српски латиница',
-        'Service Level Agreements' => 'Споразуми о нивоу услуга',
         'Service view' => 'Преглед услуге',
         'ServiceView' => 'ServiceView',
         'Set a new password by filling in your current password and a new one.' =>
@@ -9071,7 +9091,6 @@ Thanks for your help!
         'Shows information on how to start OTRS Daemon' => 'Приказује информације како покренути OTRS системски сервис',
         'Shows last mention of tickets.' => '',
         'Signature data.' => '',
-        'Signatures' => 'Потписи',
         'Simple' => 'Једноставно',
         'Skin' => 'Изглед',
         'Slovak' => 'Словачки',
@@ -9106,8 +9125,6 @@ Thanks for your help!
         'System Configuration Deployment' => 'Распоређивање системске конфигурације',
         'System Configuration Group' => 'Категорија системске конфигурације',
         'System Maintenance' => 'Одржавање система',
-        'Templates ↔ Attachments' => 'Шаблони ↔ прилози',
-        'Templates ↔ Queues' => 'Шаблони ↔ редови',
         'Textarea' => 'Област текста',
         'Thai' => 'Тајландски',
         'The PGP signature is expired.' => '',
@@ -9195,8 +9212,8 @@ Thanks for your help!
         'We are performing scheduled maintenance. We should be back online shortly.' =>
             'Извршавамо планирано одржавање. ускоро ћемо бити поново активни.',
         'Web Services' => 'Веб сервиси',
+        'Web service (Dropdown)' => '',
         'Web service (Multiselect)' => '',
-        'Web service (Text)' => '',
         'Web service dynamic field AJAX interface' => '',
         'Webservice' => '',
         'Yes, but hide archived tickets' => 'Да, али склони архивиране тикете',
@@ -9538,6 +9555,7 @@ Thanks for your help!
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',
+        'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s',
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',

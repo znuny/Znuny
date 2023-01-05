@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.545395484814033;
+    $Self->{Completeness}        = 0.543805668016194;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -255,6 +255,9 @@ sub Data {
         'Edit Attachment' => 'แก้ไขสิ่งที่แนบมา',
         'Filter for Attachments' => 'ตัวกรองสำหรับสิ่งที่แนบมา',
         'Filter for attachments' => '',
+        'Related Actions' => '',
+        'Templates' => 'รูปแบบ',
+        'Templates ↔ Attachments' => '',
         'Filename' => 'ชื่อไฟล์',
         'Download file' => 'ดาวน์โหลดไฟล์',
         'Delete this attachment' => 'ลบสิ่งที่แนบมานี้',
@@ -267,6 +270,7 @@ sub Data {
         'Edit Auto Response' => 'แก้ไขการตอบสนองอัตโนมัติ',
         'Filter for Auto Responses' => 'ตัวกรองสำหรับการตอบสนองอัตโนมัติ',
         'Filter for auto responses' => '',
+        'Queues ↔ Auto Responses' => '',
         'Response' => 'ตอบสนอง',
         'Auto response from' => 'การตอบสนองอัตโนมัติจาก',
         'Reference' => 'อ้างอิง',
@@ -392,6 +396,8 @@ sub Data {
         'Search' => 'ค้นหา',
         'Wildcards like \'*\' are allowed.' => 'สัญลักษณ์เช่น \'*\' ได้รับอนุญาต',
         'Select' => 'เลือก',
+        'Customer Users' => 'ลูกค้าผู้ใช้',
+        'Customers ↔ Groups' => '',
         'List (only %s shown - more available)' => '',
         'total' => 'ผลรวม',
         'Please enter a search term to look for customers.' => 'กรุณากรอกคำค้นหาที่จะค้นหาลูกค้า',
@@ -414,9 +420,9 @@ sub Data {
         'Select the customer:group permissions.' => 'เลือกลูกค้า: สิทธิ์ของกลุ่ม',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'หากไม่มีอะไรถูกเลือกแล้วจะไม่มีสิทธิ์ในกลุ่มนี้ (ตั๋วจะไม่สามารถใช้ได้สำหรับลูกค้า)',
-        'Search Results' => 'ผลการค้นหา',
         'Customers' => 'ลูกค้า',
         'Groups' => 'กลุ่ม',
+        'Search Results' => 'ผลการค้นหา',
         'Change Group Relations for Customer' => 'เปลี่ยนกลุ่มความสัมพันธ์ระหว่างลูกค้า',
         'Change Customer Relations for Group' => 'เปลี่ยนความสัมพันธ์ของลูกค้าสำหรับกลุ่ม',
         'Toggle %s Permission for all' => 'สลับ %s การอนุญาตทั้งหมด',
@@ -436,6 +442,9 @@ sub Data {
         'Back to search results' => 'กลับไปยังผลการค้นหา',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'ลูกค้าผู้ใช้จำเป็นต้องมีประวัติลูกค้าและเข้าสู่ระบบผ่านทางแผงของลูกค้า',
+        'Customer Users ↔ Customers' => '',
+        'Customer Users ↔ Groups' => '',
+        'Customer Users ↔ Services' => '',
         'List (%s total)' => '',
         'Username' => 'ชื่อผู้ใช้',
         'Email' => 'อีเมล์',
@@ -467,7 +476,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
         'Manage Customer User-Customer Relations' => '',
         'Select the customer user:customer relations.' => '',
-        'Customer Users' => 'ลูกค้าผู้ใช้',
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
         'Toggle active state for all' => 'สลับสถานะการทำงานทั้งหมด',
@@ -495,6 +503,7 @@ sub Data {
         'Filter for Services' => 'ตัวกรองสำหรับการบริการ',
         'Filter for services' => '',
         'Services' => 'การบริการ',
+        'Service Level Agreements' => 'ข้อตกลงระดับการให้บริการ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
         'Dynamic Fields Management' => 'การจัดการDynamic Fields ',
@@ -509,6 +518,7 @@ sub Data {
         'Overwrite existing configurations' => '',
         'Import configurations' => '',
         'Export configurations' => '',
+        'Process Management' => 'กระบวนการจัดการ',
         'Dynamic fields ↔ Screens' => '',
         'Dynamic Fields List' => 'รายการไดมานิคฟิลด์',
         'Dynamic fields per page' => 'ไดมานิคฟิลด์แต่ละหน้า',
@@ -1357,6 +1367,8 @@ sub Data {
         'Create new groups to handle access permissions for different groups of agent (e. g. purchasing department, support department, sales department, ...). ' =>
             'สร้างกลุ่มใหม่เพื่อจัดการสิทธิ์การเข้าถึงสำหรับกลุ่มที่แตกต่างกันของเอเย่นต์ (เช่นฝ่ายจัดซื้อ, ฝ่ายสนับสนุนฝ่ายขาย, ... )',
         'It\'s useful for ASP solutions. ' => 'ซึ่งจะมีประโยชน์สำหรับการแก้ปัญหา ASP',
+        'Agents ↔ Groups' => '',
+        'Roles ↔ Groups' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'System Log' => 'ระบบ Log',
@@ -1639,6 +1651,12 @@ sub Data {
             'ในกรณีที่คุณมีคำถามอื่นๆเรายินดีที่จะตอบคำถามเหล่านั้น',
         'Install Package' => 'ติดตั้งแพคเกจ',
         'Update Package' => '',
+        'Package' => '',
+        'Required package %s is already installed.' => '',
+        'Required Perl module %s is already installed.' => '',
+        'Required package %s needs to get installed!' => '',
+        'Required package %s needs to get updated to version %s!' => '',
+        'Required Perl module %s needs to get installed or updated!' => '',
         'Continue' => 'ดำเนินการต่อ',
         'Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'กรุณาตรวจสอบให้แน่ใจว่าฐานข้อมูลของคุณรับขนาดแพคเกจมากกว่า %s MB  (ขณะนี้สามารถยอมรับเฉพาะแพคเกจที่มีขนาดถึง %s MB) กรุณาปรับตั้งค่า max_allowed_packet ของฐานข้อมูลของคุณเพื่อหลีกเลี่ยงข้อผิดพลาด',
@@ -1729,12 +1747,12 @@ sub Data {
         'Edit Priority' => 'แก้ไขลำดับความสำคัญ',
         'Filter for Priorities' => '',
         'Filter for priorities' => '',
+        'Configure Priority Visibility and Defaults' => '',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             '',
         'This priority is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-        'Process Management' => 'กระบวนการจัดการ',
         'Filter for Processes' => 'ตัวกรองสำหรับกระบวนการต่างๆ',
         'Filter for processes' => '',
         'Create New Process' => 'สร้างการประมวลผลใหม่',
@@ -1751,6 +1769,9 @@ sub Data {
             'เพื่อสร้างขั้นตอนใหม่คุณสามารถสร้างโดยนำเข้าขั้นตอนที่ถูกส่งเข้ามาจากระบบอื่นหรือสร้างใหม่',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'เปลี่ยนแปลงที่ขั้นตอนต่างๆที่นี่ส่งผลกระทบต่อการทำงานของระบบเท่านั้นหากคุณเชื่อมโยงข้อมูลของขั้นตอน โดยการเชื่อมโยงขั้นตอนต่างๆนั้นจะทำให้การเปลี่ยนแปลงที่ทำใหม่ถูกเขียนไปที่ตั้งค่า',
+        'Access Control Lists (ACL)' => 'รายการการควบคุมการเข้าถึง (ACL)',
+        'Generic Agent' => '',
+        'Manage Process Widiget Groups' => '',
         'Processes' => 'ขั้นตอนต่างๆ',
         'Process name' => 'ชื่อขั้นตอน',
         'Print' => 'พิมพ์',
@@ -1906,6 +1927,13 @@ sub Data {
         'Edit Queue' => 'แก้ไขคิว',
         'Filter for Queues' => 'ตัวกรองสำหรับคิว',
         'Filter for queues' => '',
+        'Email Addresses' => 'ที่อยู่อีเมล',
+        'PostMaster Mail Accounts' => 'เมลตัวกรอง PostMaster',
+        'Salutations' => 'คำขึ้นต้น',
+        'Signatures' => 'ลายเซ็น',
+        'Templates ↔ Queues' => '',
+        'Configure Working Hours' => '',
+        'Configure Queue Related Settings' => '',
         'A queue with this name already exists!' => 'คิวที่ใช้ชื่อนี้มีอยู่แล้ว!',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             '',
@@ -1954,7 +1982,6 @@ sub Data {
         'Manage Template-Queue Relations' => 'จัดการความสัมพันธ์ของแม่แบบคิว',
         'Filter for Templates' => 'ตัวกรองสำหรับแม่แบบ',
         'Filter for templates' => '',
-        'Templates' => 'รูปแบบ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'การจัดการบทบาท',
@@ -1964,6 +1991,7 @@ sub Data {
         'Filter for roles' => '',
         'Create a role and put groups in it. Then add the role to the users.' =>
             'สร้างบทบาทและใส่ในกลุ่มนั้น แล้วเพิ่มบทบาทให้กับผู้ใช้',
+        'Agents ↔ Roles' => '',
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             'ไม่มีบทบาทที่กำหนดไว้ กรุณาใช้ปุ่ม \'เพิ่ม\' เพื่อสร้างบทบาทใหม่',
 
@@ -2000,7 +2028,9 @@ sub Data {
         'Edit SLA' => 'แก้ไข SLA ',
         'Add SLA' => 'เพิ่ม SLA ',
         'Filter for SLAs' => '',
+        'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => 'กรุณาเขียนตัวเลขเท่านั้น!',
+        'Minimum Time Between Incidents' => 'เวลาขั้นต่ำระหว่างเหตุการณ์ที่เกิดขึ้น',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
         'S/MIME Management' => 'การจัดการ S/MIME',
@@ -2081,9 +2111,11 @@ sub Data {
         'Service Management' => 'การจัดการบริการ',
         'Add Service' => 'เพิ่มการบริการ',
         'Edit Service' => 'แก้ไขการบริการ',
+        'Configure Service Visibility and Defaults' => '',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             '',
         'Sub-service of' => 'การบริการย่อยของ',
+        'Criticality' => 'วิกฤต',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
         'Session Management' => 'การจัดการเซสชั่น',
@@ -2117,6 +2149,8 @@ sub Data {
         'Filter for states' => '',
         'Attention' => 'ความสนใจ',
         'Please also update the states in SysConfig where needed.' => 'โปรดอัปเดตสถานะใน sysconfig เมื่อจำเป็น',
+        'Configure State Visibility and Defaults' => '',
+        'Configure State Type Visibility and Defaults' => '',
         'This state is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
         'State type' => 'ประเภทสถานะ',
@@ -2240,7 +2274,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'การอนุญาต',
-        'Package' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
         'System Maintenance Management' => 'การจัดการการบำรุงรักษาระบบ',
@@ -2319,6 +2352,7 @@ sub Data {
         'Edit Type' => 'แก้ไขประเภท',
         'Filter for Types' => '',
         'Filter for types' => '',
+        'Configure Type Visibility and Defaults' => '',
         'A type with this name already exists!' => 'ประเภทที่ใช้ชื่อนี้มีอยู่แล้ว!',
         'This type is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
@@ -3577,9 +3611,6 @@ sub Data {
             '',
         'Yes, but require at least one active notification method.' => '',
 
-        # Perl Module: Kernel/Modules/AdminAttachment.pm
-        'Attachment added!' => 'เพิ่มสิ่งที่แนบมาแล้ว!',
-
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
 
@@ -4135,7 +4166,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminTemplate.pm
         'Template updated!' => 'อัพเดตแม่แบบแล้ว!',
-        'Template added!' => 'เพิ่มแม่แบบแล้ว!',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
         'Change Attachment Relations for Template' => 'เปลี่ยนความสัมพันธ์ของสิ่งที่แนบมาสำหรับแม่แบบ',
@@ -7813,7 +7843,7 @@ sub Data {
             '',
         'Ticket event module that stores values of the selected web service record into the configured additional dynamic fields.' =>
             '',
-        'It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
+        'It might happen that a dynamic field of type WebserviceDropdown or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
             '',
         'Mapping for field values received from form. This setting is necessary for the correct identification of the form fields. Key means value type, value means possible representation in views.' =>
             '',
@@ -7954,6 +7984,7 @@ sub Data {
         'Agent interface notification module to show the number of mentions.' =>
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
+        'Mapping of non-standard time zones to official ones.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'ไม่ถูกต้องชั่วคราว',
@@ -8445,6 +8476,8 @@ sub Data {
         'The following files are not allowed to be uploaded: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             '',
+        'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
+            '',
         'The following files were already uploaded and have not been uploaded again: %s' =>
             '',
         'No space left for the following files: %s' => '',
@@ -8524,7 +8557,6 @@ Thanks for your help!
         'AJAX functions for notification event transport web service.' =>
             '',
         'AJAX interface for the web service dynamic field backends.' => '',
-        'Access Control Lists (ACL)' => 'รายการการควบคุมการเข้าถึง (ACL)',
         'AccountedTime' => 'AccountedTime',
         'Activation of dynamic fields for screens.' => '',
         'ActivityID' => 'ActivityID',
@@ -8544,7 +8576,7 @@ Thanks for your help!
         'Admin' => 'ผู้ดูแลระบบ',
         'Admin Area.' => 'ส่วนของแอดมิน',
         'Admin Notification' => 'ผู้ดูแลการแจ้งเตือน',
-        'Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect' =>
+        'Admin configuration dialog for dynamic field types WebserviceDropdown and WebserviceMultiselect' =>
             '',
         'Admin modules overview.' => '',
         'Admin.' => '',
@@ -8557,8 +8589,6 @@ Thanks for your help!
         'Agent Statistics.' => '',
         'Agent User Search' => '',
         'Agent User Search.' => '',
-        'Agents ↔ Groups' => '',
-        'Agents ↔ Roles' => '',
         'All CustomerIDs of a customer user.' => '',
         'All customer users of a CustomerID' => 'ลูกค้าผู้ใช้ทั้งหมดของ CustomerID',
         'All escalated tickets' => 'ตั๋วการขยายทั้งหมด',
@@ -8707,9 +8737,6 @@ Thanks for your help!
         'Customer User Information Center search.' => '',
         'Customer User Information Center.' => '',
         'Customer User-Customer Relations' => '',
-        'Customer Users ↔ Customers' => '',
-        'Customer Users ↔ Groups' => '',
-        'Customer Users ↔ Services' => '',
         'Customer preferences.' => 'การกำหนดลักษณะของลูกค้า',
         'Customer ticket overview' => 'ภาพรวมตั๋วของลูกค้า',
         'Customer ticket search.' => 'การค้นหาตั๋วลูกค้า',
@@ -8718,7 +8745,6 @@ Thanks for your help!
         'CustomerID search' => 'การค้นหาไอดีลูกค้า',
         'CustomerName' => 'CustomerName',
         'CustomerUser' => 'CustomerUser',
-        'Customers ↔ Groups' => '',
         'Czech' => 'ภาษาเช็ก',
         'Danish' => 'ภาษาเดนมาร์ก',
         'Dashboard overview.' => '',
@@ -8760,7 +8786,6 @@ Thanks for your help!
         'Edit Customer Users.' => 'แก้ไขผู้ใช้ลูกค้า',
         'Edit appointment' => '',
         'Edit customer company' => 'แก้ไขลูกค้าบริษัท',
-        'Email Addresses' => 'ที่อยู่อีเมล',
         'Email Outbound' => 'อีเมลขาออก',
         'Email Resend' => '',
         'Email communication channel.' => '',
@@ -8989,7 +9014,6 @@ Thanks for your help!
         'Portuguese' => 'ภาษาโปรตุเกส',
         'Portuguese (Brasil)' => 'ภาษาโปรตุเกส (บราซิล)',
         'PostMaster Filters' => 'ตัวกรอง PostMaster',
-        'PostMaster Mail Accounts' => 'เมลตัวกรอง PostMaster',
         'Print this ticket' => 'พิมพ์ตั๋วนี้',
         'Priorities' => 'ลำดับความสำคัญ',
         'Process Management Activity Dialog GUI' => '',
@@ -9008,7 +9032,6 @@ Thanks for your help!
         'Public Calendar' => '',
         'Public calendar.' => '',
         'Queue view' => 'มุมมองคิว',
-        'Queues ↔ Auto Responses' => '',
         'Refresh interval' => 'ช่วงเวลาการฟื้นฟู',
         'Reminder Tickets' => 'ตั๋วการแจ้งเตือน',
         'Removed subscription for user "%s".' => '',
@@ -9018,13 +9041,11 @@ Thanks for your help!
         'Responsible Tickets' => 'ผู้รับผิดชอบตั๋ว',
         'Responsible Tickets.' => 'ผู้รับผิดชอบตั๋ว',
         'Right' => 'ขวา',
-        'Roles ↔ Groups' => '',
         'Romanian' => '',
         'Running Process Tickets' => '',
         'Russian' => 'ภาษารัสเซีย',
         'S/MIME Certificates' => 'ใบรับรอง S/MIME',
         'SMS' => 'SMS',
-        'Salutations' => 'คำขึ้นต้น',
         'Schedule a maintenance period.' => '',
         'Screen after new ticket' => 'หน้าจอหลังจากตั๋วใหม่',
         'Search Customer' => 'ค้นหาลูกค้า',
@@ -9062,7 +9083,6 @@ Thanks for your help!
         'Sent notification to "%s".' => '',
         'Serbian Cyrillic' => '',
         'Serbian Latin' => '',
-        'Service Level Agreements' => 'ข้อตกลงระดับการให้บริการ',
         'Service view' => 'มุมมองบริการ',
         'ServiceView' => 'มุมมองบริการ',
         'Set a new password by filling in your current password and a new one.' =>
@@ -9077,7 +9097,6 @@ Thanks for your help!
         'Shows information on how to start OTRS Daemon' => '',
         'Shows last mention of tickets.' => '',
         'Signature data.' => '',
-        'Signatures' => 'ลายเซ็น',
         'Simple' => 'ง่าย ๆ',
         'Skin' => 'ผิว',
         'Slovak' => 'ภาษาสโลวาเกีย',
@@ -9112,8 +9131,6 @@ Thanks for your help!
         'System Configuration Deployment' => '',
         'System Configuration Group' => '',
         'System Maintenance' => '',
-        'Templates ↔ Attachments' => '',
-        'Templates ↔ Queues' => '',
         'Textarea' => 'Textarea',
         'Thai' => 'ภาษาไทย',
         'The PGP signature is expired.' => '',
@@ -9201,8 +9218,8 @@ Thanks for your help!
         'We are performing scheduled maintenance. We should be back online shortly.' =>
             '',
         'Web Services' => 'Web Services',
+        'Web service (Dropdown)' => '',
         'Web service (Multiselect)' => '',
-        'Web service (Text)' => '',
         'Web service dynamic field AJAX interface' => '',
         'Webservice' => '',
         'Yes, but hide archived tickets' => '',
@@ -9544,6 +9561,7 @@ Thanks for your help!
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',
+        'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s',
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',

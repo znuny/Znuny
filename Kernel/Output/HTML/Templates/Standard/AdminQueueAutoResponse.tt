@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -53,11 +53,15 @@
                         <a href="[% Env("Baselink") %]Action=AdminQueueAutoResponse" title="[% Translate("This filter allow you to show all queues") | html %]" class="CallForAction Fullsize Center"><span><i class="fa fa-filter"></i>[% Translate("Show All Queues") | html %]</span></a>
                     </li>
 [% RenderBlockEnd("ShowAllQueues") %]
+[% RenderBlockStart("NewActions") %]
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=AdminAutoResponse;Subaction=Add" class="CallForAction Fullsize Center"><span><i class="fa fa-plus-square"></i>[% Translate("Add Auto Response") | html %]</span></a>
+                    </li>
+[% RenderBlockEnd("NewActions") %]
                 </ul>
             </div>
         </div>
 [% RenderBlockEnd("ActionList") %]
-
 [% RenderBlockStart("FilterQueues") %]
         <div class="WidgetSimple">
             <div class="Header">
@@ -78,7 +82,29 @@
             </div>
         </div>
 [% RenderBlockEnd("FilterAutoResponses") %]
-
+        <div class='WidgetSimple'>
+            <div class='Header'>
+                <h2>[% Translate('Related Actions') | html %]</h2>
+            </div>
+            <div class='Content'>
+                <ul class='ActionList SpacingTop'>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminAutoResponse' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Auto Responses') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminQueue' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Queues') | html %]
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <div class="ContentColumn">

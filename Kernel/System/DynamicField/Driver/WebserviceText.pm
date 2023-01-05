@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -258,6 +258,21 @@ sub DisplayValueRender {
     );
 
     return $Self->SUPER::DisplayValueRender(%Param);
+}
+
+sub ValueLookup {
+    my ( $Self, %Param ) = @_;
+
+    my $DynamicFieldWebserviceObject = $Kernel::OM->Get('Kernel::System::DynamicField::Webservice');
+
+    return $Param{Key} if !IsStringWithData( $Param{Key} );
+
+    my $Value = $DynamicFieldWebserviceObject->DisplayValueGet(
+        DynamicFieldConfig => $Param{DynamicFieldConfig},
+        Value              => $Param{Key},
+    );
+
+    return $Value;
 }
 
 sub SearchFieldRender {

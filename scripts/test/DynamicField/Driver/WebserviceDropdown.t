@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -81,10 +81,10 @@ $UnitTestWebserviceObject->Mock(
 
 my @DynamicFields = (
     {
-        Name       => $DynamicField . 'Text',
-        Label      => $DynamicField . 'Text',
+        Name       => $DynamicField . 'Dropdown',
+        Label      => $DynamicField . 'Dropdown',
         ObjectType => 'Ticket',
-        FieldType  => 'WebserviceText',
+        FieldType  => 'WebserviceDropdown',
         Config     => {
             Webservice               => $WebserviceName,
             InvokerSearch            => 'TestSearch',
@@ -124,7 +124,7 @@ $Self->True(
 );
 
 my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
-    Name => $DynamicField . 'Text',
+    Name => $DynamicField . 'Dropdown',
 );
 
 # EditFieldRender
@@ -142,15 +142,16 @@ $Self->IsDeeply(
     $DynamicFieldHTML,
     {
         'Label' =>
-            '<label id="LabelDynamicField_DynamicFieldWebserviceDriverText" for="DynamicField_DynamicFieldWebserviceDriverText">
-DynamicFieldWebserviceDriverText:
+            '<label id="LabelDynamicField_DynamicFieldWebserviceDriverDropdown" for="DynamicField_DynamicFieldWebserviceDriverDropdown">
+DynamicFieldWebserviceDriverDropdown:
 </label>
 ',
         'Field' =>
-            '<input type="hidden" class="Hidden" id="DynamicField_DynamicFieldWebserviceDriverText" name="DynamicField_DynamicFieldWebserviceDriverText" value="" data-dynamic-field-name="DynamicFieldWebserviceDriverText" data-dynamic-field-type="WebserviceText" data-selected-value-field-name="DynamicField_DynamicFieldWebserviceDriverText" data-autocomplete-field-name="DynamicField_DynamicFieldWebserviceDriverTextAutocomplete" data-autocomplete-min-length="3" data-ticket-id="'
-            . $TicketID . '" />
-<input type="text" class="DynamicFieldText W50pc" id="DynamicField_DynamicFieldWebserviceDriverTextAutocomplete" name="DynamicField_DynamicFieldWebserviceDriverTextAutocomplete" title="DynamicFieldWebserviceDriverText" value="" data-selected-autocomplete-display-value="" />
-'
+            '<select  data-dynamic-field-name="DynamicFieldWebserviceDriverDropdown" data-dynamic-field-type="WebserviceDropdown" data-selected-value-field-name="DynamicField_DynamicFieldWebserviceDriverDropdown" data-autocomplete-field-name="DynamicField_DynamicFieldWebserviceDriverDropdown_Search" data-autocomplete-min-length="3" data-query-delay="1" data-default-search-term="" data-ticket-id="'
+            . $TicketID
+            . '" class="DynamicFieldDropdown Modernize W50pc" id="DynamicField_DynamicFieldWebserviceDriverDropdown" name="DynamicField_DynamicFieldWebserviceDriverDropdown">
+  <option value=" ">-</option>
+</select>'
     },
     'EditFieldRender',
 );

@@ -1,6 +1,6 @@
 /*
 Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 
 This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (GPL). If you
@@ -1166,7 +1166,7 @@ td.Highlight a.ui-state-default {
 }
 
 .ui-overlay-autocomplete {
-    z-index: 6100 !important;
+    z-index: 6103 !important;
 }
 
 .ui-autocomplete .ui-menu-item-wrapper.ui-state-active {
