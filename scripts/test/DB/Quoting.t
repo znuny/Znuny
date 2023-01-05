@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -99,6 +99,24 @@ $Self->Is(
     $DBObject->Quote( -0.23, 'Number' ),
     -0.23,
     'Quote() Number - -0.23',
+);
+$Self->Is(
+    $DBObject->Quote( "2022-12-24 12:34:56", 'DateTime' ),
+    "2022-12-24 12:34:56",
+    'Quote() DateTime 2022-12-24 12:34:56',
+);
+$Self->False(
+    scalar $DBObject->Quote( "2022-12-2432 12:34:56", 'DateTime' ),
+    'Quote() DateTime 2022-12-2432 12:34:56',
+);
+$Self->Is(
+    $DBObject->Quote( "2022-12-24", 'Date' ),
+    "2022-12-24",
+    'Quote() Date 2022-12-24',
+);
+$Self->False(
+    scalar $DBObject->Quote( "2022-12-2432", 'Date' ),
+    'Quote() Date 2022-12-2432',
 );
 
 if (

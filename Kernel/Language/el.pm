@@ -2,7 +2,7 @@
 # Copyright (C) 2006 Stelios Maistros <smaistros aegean.gr>
 # Copyright (C) 2006 George Thomas <gthomas aegean.gr>
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.139191164528179;
+    $Self->{Completeness}        = 0.138623481781377;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -257,6 +257,9 @@ sub Data {
         'Edit Attachment' => 'Τροποποιηση Αρχείου',
         'Filter for Attachments' => '',
         'Filter for attachments' => '',
+        'Related Actions' => '',
+        'Templates' => '',
+        'Templates ↔ Attachments' => '',
         'Filename' => 'Όνομα Αρχείου',
         'Download file' => 'Κατεβασμα Αρχείου',
         'Delete this attachment' => 'Διαγραφή Αρχείουθ',
@@ -269,6 +272,7 @@ sub Data {
         'Edit Auto Response' => 'Τροποποίηση Αυτόματης Απάντησης',
         'Filter for Auto Responses' => '',
         'Filter for auto responses' => '',
+        'Queues ↔ Auto Responses' => '',
         'Response' => 'Απάντηση',
         'Auto response from' => '',
         'Reference' => '',
@@ -394,6 +398,8 @@ sub Data {
         'Search' => 'Αναζήτηση',
         'Wildcards like \'*\' are allowed.' => '',
         'Select' => 'Επιλογή',
+        'Customer Users' => 'Χρήστες-Πελάτες',
+        'Customers ↔ Groups' => '',
         'List (only %s shown - more available)' => '',
         'total' => '',
         'Please enter a search term to look for customers.' => '',
@@ -416,9 +422,9 @@ sub Data {
         'Select the customer:group permissions.' => '',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             '',
-        'Search Results' => 'Αποτέλεσμα Αναζήτησης',
         'Customers' => 'Πελατες',
         'Groups' => 'Ομάδες',
+        'Search Results' => 'Αποτέλεσμα Αναζήτησης',
         'Change Group Relations for Customer' => '',
         'Change Customer Relations for Group' => '',
         'Toggle %s Permission for all' => '',
@@ -438,6 +444,9 @@ sub Data {
         'Back to search results' => '',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             '',
+        'Customer Users ↔ Customers' => '',
+        'Customer Users ↔ Groups' => '',
+        'Customer Users ↔ Services' => '',
         'List (%s total)' => '',
         'Username' => 'Ονομα Χρήστη',
         'Email' => 'Ηλεκτρονικό Ταχυδρομείο',
@@ -469,7 +478,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
         'Manage Customer User-Customer Relations' => '',
         'Select the customer user:customer relations.' => '',
-        'Customer Users' => 'Χρήστες-Πελάτες',
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
         'Toggle active state for all' => '',
@@ -497,6 +505,7 @@ sub Data {
         'Filter for Services' => 'Φίλτρο για Υπηρεσίες',
         'Filter for services' => '',
         'Services' => 'Υπηρεσίες',
+        'Service Level Agreements' => 'Συμφωνίες Επιπέδου Υπηρεσίας',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
         'Dynamic Fields Management' => '',
@@ -511,6 +520,7 @@ sub Data {
         'Overwrite existing configurations' => '',
         'Import configurations' => '',
         'Export configurations' => '',
+        'Process Management' => '',
         'Dynamic fields ↔ Screens' => '',
         'Dynamic Fields List' => '',
         'Dynamic fields per page' => '',
@@ -1360,6 +1370,8 @@ sub Data {
         'Create new groups to handle access permissions for different groups of agent (e. g. purchasing department, support department, sales department, ...). ' =>
             '',
         'It\'s useful for ASP solutions. ' => '',
+        'Agents ↔ Groups' => '',
+        'Roles ↔ Groups' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'System Log' => 'Καταγραφές Συστήματος',
@@ -1643,6 +1655,12 @@ sub Data {
             '',
         'Install Package' => 'Εγκατάσταση Πακετου',
         'Update Package' => '',
+        'Package' => '',
+        'Required package %s is already installed.' => '',
+        'Required Perl module %s is already installed.' => '',
+        'Required package %s needs to get installed!' => '',
+        'Required package %s needs to get updated to version %s!' => '',
+        'Required Perl module %s needs to get installed or updated!' => '',
         'Continue' => 'Συνέχεια',
         'Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '',
@@ -1732,12 +1750,12 @@ sub Data {
         'Edit Priority' => '',
         'Filter for Priorities' => '',
         'Filter for priorities' => '',
+        'Configure Priority Visibility and Defaults' => '',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             '',
         'This priority is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-        'Process Management' => '',
         'Filter for Processes' => '',
         'Filter for processes' => '',
         'Create New Process' => '',
@@ -1754,6 +1772,9 @@ sub Data {
             '',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             '',
+        'Access Control Lists (ACL)' => '',
+        'Generic Agent' => '',
+        'Manage Process Widiget Groups' => '',
         'Processes' => '',
         'Process name' => '',
         'Print' => 'Εκτύπωση',
@@ -1908,6 +1929,13 @@ sub Data {
         'Edit Queue' => '',
         'Filter for Queues' => '',
         'Filter for queues' => '',
+        'Email Addresses' => 'Διευθύνσεις Ηλεκτρονικού Ταχυδρομείου',
+        'PostMaster Mail Accounts' => '',
+        'Salutations' => 'Προσφωνήσεις',
+        'Signatures' => 'Υπογραφές',
+        'Templates ↔ Queues' => '',
+        'Configure Working Hours' => '',
+        'Configure Queue Related Settings' => '',
         'A queue with this name already exists!' => '',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             '',
@@ -1956,7 +1984,6 @@ sub Data {
         'Manage Template-Queue Relations' => '',
         'Filter for Templates' => '',
         'Filter for templates' => '',
-        'Templates' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'Διαχείρηση Ρόλων',
@@ -1966,6 +1993,7 @@ sub Data {
         'Filter for roles' => '',
         'Create a role and put groups in it. Then add the role to the users.' =>
             'Δημιουργήστε ενα ρόλο και αναθέστε ομάδες. Μετά προσθέστε τον ρόλο στους χρήστες.',
+        'Agents ↔ Roles' => '',
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             '',
 
@@ -2002,7 +2030,9 @@ sub Data {
         'Edit SLA' => '',
         'Add SLA' => '',
         'Filter for SLAs' => '',
+        'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => '',
+        'Minimum Time Between Incidents' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
         'S/MIME Management' => 'Διαχειριση S/MIME',
@@ -2085,9 +2115,11 @@ sub Data {
         'Service Management' => '',
         'Add Service' => 'Προσθήκη υπηρεσίας',
         'Edit Service' => '',
+        'Configure Service Visibility and Defaults' => '',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             '',
         'Sub-service of' => '',
+        'Criticality' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
         'Session Management' => 'Διαχείριση Σύνδεσης',
@@ -2121,6 +2153,8 @@ sub Data {
         'Filter for states' => '',
         'Attention' => 'Προσοχή',
         'Please also update the states in SysConfig where needed.' => '',
+        'Configure State Visibility and Defaults' => '',
+        'Configure State Type Visibility and Defaults' => '',
         'This state is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
         'State type' => '',
@@ -2243,7 +2277,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => '',
-        'Package' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
         'System Maintenance Management' => '',
@@ -2322,6 +2355,7 @@ sub Data {
         'Edit Type' => '',
         'Filter for Types' => '',
         'Filter for types' => '',
+        'Configure Type Visibility and Defaults' => '',
         'A type with this name already exists!' => '',
         'This type is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
@@ -3580,9 +3614,6 @@ sub Data {
             '',
         'Yes, but require at least one active notification method.' => '',
 
-        # Perl Module: Kernel/Modules/AdminAttachment.pm
-        'Attachment added!' => 'Προστέθηκε επισυναπτόμενο !',
-
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
 
@@ -4138,7 +4169,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminTemplate.pm
         'Template updated!' => '',
-        'Template added!' => '',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
         'Change Attachment Relations for Template' => '',
@@ -7813,7 +7843,7 @@ sub Data {
             '',
         'Ticket event module that stores values of the selected web service record into the configured additional dynamic fields.' =>
             '',
-        'It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
+        'It might happen that a dynamic field of type WebserviceDropdown or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
             '',
         'Mapping for field values received from form. This setting is necessary for the correct identification of the form fields. Key means value type, value means possible representation in views.' =>
             '',
@@ -7954,6 +7984,7 @@ sub Data {
         'Agent interface notification module to show the number of mentions.' =>
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
+        'Mapping of non-standard time zones to official ones.' => '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'Προσωρινά Ακυρο',
@@ -8445,6 +8476,8 @@ sub Data {
         'The following files are not allowed to be uploaded: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             '',
+        'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
+            '',
         'The following files were already uploaded and have not been uploaded again: %s' =>
             '',
         'No space left for the following files: %s' => '',
@@ -8513,7 +8546,6 @@ Thanks for your help!
         'AJAX functions for notification event transport web service.' =>
             '',
         'AJAX interface for the web service dynamic field backends.' => '',
-        'Access Control Lists (ACL)' => '',
         'AccountedTime' => '',
         'Activation of dynamic fields for screens.' => '',
         'ActivityID' => '',
@@ -8533,7 +8565,7 @@ Thanks for your help!
         'Admin' => 'Διαχειριστης',
         'Admin Area.' => '',
         'Admin Notification' => 'Ειδοποίηση Διαχειριστή',
-        'Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect' =>
+        'Admin configuration dialog for dynamic field types WebserviceDropdown and WebserviceMultiselect' =>
             '',
         'Admin modules overview.' => '',
         'Admin.' => '',
@@ -8546,8 +8578,6 @@ Thanks for your help!
         'Agent Statistics.' => '',
         'Agent User Search' => '',
         'Agent User Search.' => '',
-        'Agents ↔ Groups' => '',
-        'Agents ↔ Roles' => '',
         'All CustomerIDs of a customer user.' => '',
         'All customer users of a CustomerID' => '',
         'All escalated tickets' => 'Όλα τα σημαντικότερα δελτία',
@@ -8696,9 +8726,6 @@ Thanks for your help!
         'Customer User Information Center search.' => '',
         'Customer User Information Center.' => '',
         'Customer User-Customer Relations' => '',
-        'Customer Users ↔ Customers' => '',
-        'Customer Users ↔ Groups' => '',
-        'Customer Users ↔ Services' => '',
         'Customer preferences.' => '',
         'Customer ticket overview' => '',
         'Customer ticket search.' => '',
@@ -8707,7 +8734,6 @@ Thanks for your help!
         'CustomerID search' => '',
         'CustomerName' => '',
         'CustomerUser' => '',
-        'Customers ↔ Groups' => '',
         'Czech' => '',
         'Danish' => '',
         'Dashboard overview.' => '',
@@ -8749,7 +8775,6 @@ Thanks for your help!
         'Edit Customer Users.' => '',
         'Edit appointment' => '',
         'Edit customer company' => '',
-        'Email Addresses' => 'Διευθύνσεις Ηλεκτρονικού Ταχυδρομείου',
         'Email Outbound' => '',
         'Email Resend' => '',
         'Email communication channel.' => '',
@@ -8978,7 +9003,6 @@ Thanks for your help!
         'Portuguese' => '',
         'Portuguese (Brasil)' => '',
         'PostMaster Filters' => '',
-        'PostMaster Mail Accounts' => '',
         'Print this ticket' => 'Εκτύπωση αυτού του δελτίου',
         'Priorities' => 'Προτεραιοτητες',
         'Process Management Activity Dialog GUI' => '',
@@ -8997,7 +9021,6 @@ Thanks for your help!
         'Public Calendar' => '',
         'Public calendar.' => '',
         'Queue view' => 'Προβολή Ουρών',
-        'Queues ↔ Auto Responses' => '',
         'Refresh interval' => '',
         'Reminder Tickets' => 'Δελτια Προς Υπενθυμιση',
         'Removed subscription for user "%s".' => 'Removed subscription for user "%s".',
@@ -9007,13 +9030,11 @@ Thanks for your help!
         'Responsible Tickets' => '',
         'Responsible Tickets.' => '',
         'Right' => '',
-        'Roles ↔ Groups' => '',
         'Romanian' => '',
         'Running Process Tickets' => '',
         'Russian' => '',
         'S/MIME Certificates' => 'Πιστοποιητικά S/MIME',
         'SMS' => '',
-        'Salutations' => 'Προσφωνήσεις',
         'Schedule a maintenance period.' => '',
         'Screen after new ticket' => 'Οθόνη μετά την δημιουργία νέου δελτίου',
         'Search Customer' => 'Αναζήτηση Πελάτη',
@@ -9051,7 +9072,6 @@ Thanks for your help!
         'Sent notification to "%s".' => '',
         'Serbian Cyrillic' => '',
         'Serbian Latin' => '',
-        'Service Level Agreements' => 'Συμφωνίες Επιπέδου Υπηρεσίας',
         'Service view' => '',
         'ServiceView' => '',
         'Set a new password by filling in your current password and a new one.' =>
@@ -9066,7 +9086,6 @@ Thanks for your help!
         'Shows information on how to start OTRS Daemon' => '',
         'Shows last mention of tickets.' => '',
         'Signature data.' => '',
-        'Signatures' => 'Υπογραφές',
         'Simple' => '',
         'Skin' => '',
         'Slovak' => '',
@@ -9101,8 +9120,6 @@ Thanks for your help!
         'System Configuration Deployment' => '',
         'System Configuration Group' => '',
         'System Maintenance' => '',
-        'Templates ↔ Attachments' => '',
-        'Templates ↔ Queues' => '',
         'Textarea' => '',
         'Thai' => '',
         'The PGP signature is expired.' => '',
@@ -9190,8 +9207,8 @@ Thanks for your help!
         'We are performing scheduled maintenance. We should be back online shortly.' =>
             '',
         'Web Services' => '',
+        'Web service (Dropdown)' => '',
         'Web service (Multiselect)' => '',
-        'Web service (Text)' => '',
         'Web service dynamic field AJAX interface' => '',
         'Webservice' => '',
         'Yes, but hide archived tickets' => '',
@@ -9533,6 +9550,7 @@ Thanks for your help!
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',
+        'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s',
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',

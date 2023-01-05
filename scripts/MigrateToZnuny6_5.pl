@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ use Getopt::Long;
 
 local $Kernel::OM = Kernel::System::ObjectManager->new(
     'Kernel::System::Log' => {
-        LogPrefix => 'MigrateToZnuny6_4.pl',
+        LogPrefix => 'MigrateToZnuny6_5.pl',
     },
 );
 
@@ -55,9 +55,9 @@ Getopt::Long::GetOptions(
     if ( $Options{Help} ) {
         print <<"EOF";
 
-Migrates Znuny 6.3 to Znuny 6.4.
+Migrates Znuny 6.4 to Znuny 6.5.
 Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 
 Usage: $0
     Options are as follows:

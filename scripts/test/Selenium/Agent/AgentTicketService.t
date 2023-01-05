@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -20,8 +20,9 @@ $Selenium->RunTest(
     sub {
 
         # get needed objects
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+        my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
 
         # do not check email addresses
         $HelperObject->ConfigSettingChange(
@@ -53,6 +54,13 @@ $Selenium->RunTest(
         # create two test services
         my @ServiceIDs;
         my @ServiceNames;
+
+        my %ITSMCoreServiceValues;
+        if ($IsITSMInstalled) {
+            $ITSMCoreServiceValues{TypeID}      = 1;
+            $ITSMCoreServiceValues{Criticality} = '3 normal';
+        }
+
         for my $Service (qw(Parent Child)) {
             my $ServiceName = $Service . 'Service' . $HelperObject->GetRandomID();
             my $ServiceID   = $ServiceObject->ServiceAdd(
@@ -60,6 +68,7 @@ $Selenium->RunTest(
                 ValidID => 1,
                 Comment => 'Selenium Test',
                 UserID  => 1,
+                %ITSMCoreServiceValues,
             );
             $Self->True(
                 $ServiceID,
@@ -76,6 +85,7 @@ $Selenium->RunTest(
             ParentID  => $ServiceIDs[0],
             ValidID   => 1,
             UserID    => 1,
+            %ITSMCoreServiceValues,
         );
         $Self->True(
             $Success,
@@ -89,6 +99,7 @@ $Selenium->RunTest(
             Name      => $ServiceNames[0],
             ValidID   => 2,
             UserID    => 1,
+            %ITSMCoreServiceValues,
         );
         $Self->True(
             $Success,
