@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.305910931174089;
+    $Self->{Completeness}        = 0.305762382648106;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4882,6 +4882,10 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Preferences/Language.pm
         '(in process)' => '(em processamento)',
 
+        # Perl Module: Kernel/Output/HTML/Preferences/MaxArticlesPerPage.pm
+        'Max. number of articles per page must be between 1 and 1000 or empty.' =>
+            '',
+
         # Perl Module: Kernel/Output/HTML/Preferences/OutOfOffice.pm
         'Please specify an end date that is after the start date.' => '',
 
@@ -8923,6 +8927,7 @@ Thanks for your help!
         'Mark as Spam!' => 'Marcar como Spam!',
         'Mark this ticket as junk!' => '',
         'Mattermost Username' => '',
+        'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'Médio',
         'Mentioned in article' => '',
         'Mentioned in ticket' => '',
@@ -9047,6 +9052,8 @@ Thanks for your help!
         'Select how many tickets should be shown in overviews by default.' =>
             '',
         'Select the main interface language.' => '',
+        'Select the maximum articles per page shown in TicketZoom. System default value will apply when entered empty value.' =>
+            '',
         'Select the separator character used in CSV files (stats and searches). If you don\'t select a separator here, the default separator for your language will be used.' =>
             '',
         'Select where to display the last views.' => '',

@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.997732793522267;
+    $Self->{Completeness}        = 0.997733894464228;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4880,6 +4880,10 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Preferences/Language.pm
         '(in process)' => '(in Arbeit)',
 
+        # Perl Module: Kernel/Output/HTML/Preferences/MaxArticlesPerPage.pm
+        'Max. number of articles per page must be between 1 and 1000 or empty.' =>
+            'Max. Anzahl der Artikel pro Seite muss zwischen 1 und 1000 liegen oder nicht gefüllt sein.',
+
         # Perl Module: Kernel/Output/HTML/Preferences/OutOfOffice.pm
         'Please specify an end date that is after the start date.' => 'Bitte geben Sie ein Enddatum an, das nach dem Startdatum liegt.',
 
@@ -8931,6 +8935,7 @@ Ihr Helpdesk-Team
         'Mark as Spam!' => 'Als Spam makieren!',
         'Mark this ticket as junk!' => 'Dieses Ticket als Junk markieren!',
         'Mattermost Username' => 'Mattermost-Benutzername',
+        'Max. number of articles per page in TicketZoom' => 'Max. Anzahl Artikel pro Seite in der Ticket-Detailansicht',
         'Medium' => 'Mittel',
         'Mentioned in article' => 'In Artikel erwähnt',
         'Mentioned in ticket' => 'In Ticket erwähnt',
@@ -9055,6 +9060,8 @@ Ihr Helpdesk-Team
         'Select how many tickets should be shown in overviews by default.' =>
             'Definiert, wieviele Tickets in der Übersicht standardmäßig angezeigt werden.',
         'Select the main interface language.' => 'Wählen Sie die Sprache der Hauptoberfläche.',
+        'Select the maximum articles per page shown in TicketZoom. System default value will apply when entered empty value.' =>
+            'Wählen Sie die maximale Anzahl angezeigter Artikel pro Seite in der Ticket-Detailansicht. Der Systemstandardwert wird angewendet, wenn ein leerer Wert eingegeben wird.',
         'Select the separator character used in CSV files (stats and searches). If you don\'t select a separator here, the default separator for your language will be used.' =>
             'Wählen Sie das Trennzeichen, dass in CSV-Dateien (Statistiken und Suchenergebnisse) benutzt werden soll. Wenn Sie hier kein Zeichen wählen, dann wird das Standard-Trennzeichen gemäß der eingestellten Sprache benutzt.',
         'Select where to display the last views.' => 'Wählen Sie aus, wo die letzten Ansichten angezeigt werden sollen.',

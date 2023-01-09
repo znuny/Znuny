@@ -1,4 +1,5 @@
 # 6.5.1 2023-??-??
+ - 2023-01-09 Integrated package Znuny4OTRS-UserMaxArticlesPerPage.
  - 2023-01-06 Fixed 'ACL misbehaviour in processes' - ActivityEntityID is missing in AgentTicketProcess.pm. [#316](https://github.com/znuny/Znuny/issues/316)
  - 2023-01-05 Fixed JavaScript error in edit-mode in AdminACL.
  - 2023-01-05 Changed JS alert() function to Core.UI.Dialog.ShowAlert().

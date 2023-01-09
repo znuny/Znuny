@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.256518218623482;
+    $Self->{Completeness}        = 0.2563936549045;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4883,6 +4883,10 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Preferences/Language.pm
         '(in process)' => '',
 
+        # Perl Module: Kernel/Output/HTML/Preferences/MaxArticlesPerPage.pm
+        'Max. number of articles per page must be between 1 and 1000 or empty.' =>
+            '',
+
         # Perl Module: Kernel/Output/HTML/Preferences/OutOfOffice.pm
         'Please specify an end date that is after the start date.' => '',
 
@@ -8924,6 +8928,7 @@ Thanks for your help!
         'Mark as Spam!' => 'अवांछनीय मार्क करें',
         'Mark this ticket as junk!' => '',
         'Mattermost Username' => '',
+        'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'मध्यम',
         'Mentioned in article' => '',
         'Mentioned in ticket' => '',
@@ -9048,6 +9053,8 @@ Thanks for your help!
         'Select how many tickets should be shown in overviews by default.' =>
             '',
         'Select the main interface language.' => '',
+        'Select the maximum articles per page shown in TicketZoom. System default value will apply when entered empty value.' =>
+            '',
         'Select the separator character used in CSV files (stats and searches). If you don\'t select a separator here, the default separator for your language will be used.' =>
             'CSV संचिका (आँकड़े और खोजों) में उपयोग कियॆ जानॆवालॆ विभाजक वर्ण को चुनें। यदि आप यहाँ एक विभाजक चयन नहीं करते हैं, तो आपकी भाषा के लिए तयशुदा विभाजक का उपयोग किया जाएगा।',
         'Select where to display the last views.' => '',

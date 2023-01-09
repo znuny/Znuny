@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D-%M-%Y';
     $Self->{DateInputFormat}     = '%D-%M-%Y';
     $Self->{DateInputFormatLong} = '%D-%M-%Y - %T';
-    $Self->{Completeness}        = 0.512550607287449;
+    $Self->{Completeness}        = 0.51230171576562;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4886,6 +4886,10 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Preferences/Language.pm
         '(in process)' => '',
 
+        # Perl Module: Kernel/Output/HTML/Preferences/MaxArticlesPerPage.pm
+        'Max. number of articles per page must be between 1 and 1000 or empty.' =>
+            '',
+
         # Perl Module: Kernel/Output/HTML/Preferences/OutOfOffice.pm
         'Please specify an end date that is after the start date.' => 'Geef een einddatum op die na de startdatum ligt.',
 
@@ -8938,6 +8942,7 @@ Het Helpdesk Team
         'Mark as Spam!' => 'Markeer als spam',
         'Mark this ticket as junk!' => 'Markeer het ticket als junk!',
         'Mattermost Username' => '',
+        'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'Middel',
         'Mentioned in article' => '',
         'Mentioned in ticket' => '',
@@ -9062,6 +9067,8 @@ Het Helpdesk Team
         'Select how many tickets should be shown in overviews by default.' =>
             '',
         'Select the main interface language.' => 'Selecteer uw standaard taal.',
+        'Select the maximum articles per page shown in TicketZoom. System default value will apply when entered empty value.' =>
+            '',
         'Select the separator character used in CSV files (stats and searches). If you don\'t select a separator here, the default separator for your language will be used.' =>
             'Selecteer het scheidingsteken voor CSV bestanden. Als u geen scheidingsteken kiest zal het standaard scheidingsteken voor uw taal gebruikt worden.',
         'Select where to display the last views.' => '',

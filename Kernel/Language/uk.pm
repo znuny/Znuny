@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.460890688259109;
+    $Self->{Completeness}        = 0.460666882486241;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -4881,6 +4881,10 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Preferences/Language.pm
         '(in process)' => '(В процесі)',
 
+        # Perl Module: Kernel/Output/HTML/Preferences/MaxArticlesPerPage.pm
+        'Max. number of articles per page must be between 1 and 1000 or empty.' =>
+            '',
+
         # Perl Module: Kernel/Output/HTML/Preferences/OutOfOffice.pm
         'Please specify an end date that is after the start date.' => 'Будь ласка виберіть кінцеву дату, що йде після початкової.',
 
@@ -8922,6 +8926,7 @@ Thanks for your help!
         'Mark as Spam!' => 'Позначити як спам!',
         'Mark this ticket as junk!' => '',
         'Mattermost Username' => '',
+        'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'Середній',
         'Mentioned in article' => '',
         'Mentioned in ticket' => '',
@@ -9046,6 +9051,8 @@ Thanks for your help!
         'Select how many tickets should be shown in overviews by default.' =>
             '',
         'Select the main interface language.' => '',
+        'Select the maximum articles per page shown in TicketZoom. System default value will apply when entered empty value.' =>
+            '',
         'Select the separator character used in CSV files (stats and searches). If you don\'t select a separator here, the default separator for your language will be used.' =>
             'Оберіть символ розділювача, що використовується у файлах CSV (статистика і пошук). Якщо не оберете розділювач тут, то використовуватиметься стандартний розділювач для Вашої мови.',
         'Select where to display the last views.' => '',

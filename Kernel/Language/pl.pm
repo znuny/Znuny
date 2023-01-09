@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.644210526315789;
+    $Self->{Completeness}        = 0.643897701521528;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4885,6 +4885,10 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Preferences/Language.pm
         '(in process)' => '(w opracowaniu)',
 
+        # Perl Module: Kernel/Output/HTML/Preferences/MaxArticlesPerPage.pm
+        'Max. number of articles per page must be between 1 and 1000 or empty.' =>
+            '',
+
         # Perl Module: Kernel/Output/HTML/Preferences/OutOfOffice.pm
         'Please specify an end date that is after the start date.' => '',
 
@@ -8936,6 +8940,7 @@ Twój Zespół Helpdesk.
         'Mark as Spam!' => 'Oznacz jako spam!',
         'Mark this ticket as junk!' => 'Oznacz to zgłoszenie jako SPAM!',
         'Mattermost Username' => '',
+        'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'Średnie',
         'Mentioned in article' => 'Wzmianka w artykule',
         'Mentioned in ticket' => 'Wzmianka w zgłoszeniu',
@@ -9060,6 +9065,8 @@ Twój Zespół Helpdesk.
         'Select how many tickets should be shown in overviews by default.' =>
             '',
         'Select the main interface language.' => 'Wybierz główny język interfejsu.',
+        'Select the maximum articles per page shown in TicketZoom. System default value will apply when entered empty value.' =>
+            '',
         'Select the separator character used in CSV files (stats and searches). If you don\'t select a separator here, the default separator for your language will be used.' =>
             'Wybierz znak separatora w pliku CSV (statystyki i wyszukiwania). Jeśli nie wskażesz tutaj separatora, użyty zostanie domyślny separator dla twojego języka.',
         'Select where to display the last views.' => 'Wybierz gdzie pokazywać ostatnio przeglądane widoki.',

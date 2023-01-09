@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.924372469635628;
+    $Self->{Completeness}        = 0.923923599870508;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4886,6 +4886,10 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Preferences/Language.pm
         '(in process)' => '(u toku)',
 
+        # Perl Module: Kernel/Output/HTML/Preferences/MaxArticlesPerPage.pm
+        'Max. number of articles per page must be between 1 and 1000 or empty.' =>
+            '',
+
         # Perl Module: Kernel/Output/HTML/Preferences/OutOfOffice.pm
         'Please specify an end date that is after the start date.' => 'Molimo da odredite datum završetka koji je posle datuma početka.',
 
@@ -8938,6 +8942,7 @@ Vaša tehnička podrška
         'Mark as Spam!' => 'Označi kao Spam!',
         'Mark this ticket as junk!' => 'Označi ovaj tiket kao besmislen junk!',
         'Mattermost Username' => '',
+        'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'Srednje',
         'Mentioned in article' => '',
         'Mentioned in ticket' => '',
@@ -9062,6 +9067,8 @@ Vaša tehnička podrška
         'Select how many tickets should be shown in overviews by default.' =>
             'Izaberite koji broj tiketa će biti podrazumevano prikazan u pregledima.',
         'Select the main interface language.' => 'Izaberite glavni jezik interfejsa.',
+        'Select the maximum articles per page shown in TicketZoom. System default value will apply when entered empty value.' =>
+            '',
         'Select the separator character used in CSV files (stats and searches). If you don\'t select a separator here, the default separator for your language will be used.' =>
             'Izaberite separator koji će se koristi u CSV datotekama (statistika i pretrage). Ako ovde ne izaberete separator, koristiće se podrazumevani separator za vaš jezik',
         'Select where to display the last views.' => '',
