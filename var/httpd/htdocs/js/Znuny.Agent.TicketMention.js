@@ -1,5 +1,5 @@
 // --
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (AGPL). If you
@@ -18,7 +18,8 @@ Znuny.Agent.TicketMention = (function (TargetNS) {
     TargetNS.Init = function () {
         var Data = {
             Action:    'Mentions',
-            Subaction: 'Remove'
+            Subaction: 'Remove',
+            BulkAction: 1
         };
 
         $('#RemoveMention').on('click',function(Event){

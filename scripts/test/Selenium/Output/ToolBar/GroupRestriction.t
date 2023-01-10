@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -20,10 +20,34 @@ $Selenium->RunTest(
     sub {
 
         # get helper object
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $GroupObject  = $Kernel::OM->Get('Kernel::System::Group');
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
+        my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $GroupObject   = $Kernel::OM->Get('Kernel::System::Group');
+        my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $DBObject      = $Kernel::OM->Get('Kernel::System::DB');
+        my $ProcessObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process');
+        my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+
+        # create temp process for 160-Ticket::AgentTicketProcess
+        my $RandomID  = $HelperObject->GetRandomID();
+        my $ProcessID = $ProcessObject->ProcessAdd(
+            EntityID      => 'EntityID-1' . $RandomID,
+            Name          => 'Process-1' . $RandomID,
+            StateEntityID => 'S1',
+            Layout        => {},
+            Config        => {
+                Description => 'a Description',
+                Path        => {
+                    'A1-' . $RandomID => {},
+                }
+            },
+            UserID => 1,
+        );
+        my $Location    = $ConfigObject->Get('Home') . '/Kernel/Config/Files/ZZZProcessManagement.pm';
+        my $ProcessDump = $ProcessObject->ProcessDump(
+            ResultType => 'FILE',
+            Location   => $Location,
+            UserID     => 1,
+        );
 
         # enable ticket responsible
         $HelperObject->ConfigSettingChange(

@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -43,7 +43,10 @@ Core.Agent.Preferences = (function (TargetNS) {
 
                 // if there is not at least one transport enabled, omit the actions
                 if (!FoundEnabled) {
-                    alert(Core.Language.Translate("Sorry, but you can't disable all methods for notifications marked as mandatory."));
+                    Core.UI.Dialog.ShowAlert(
+                        Core.Language.Translate('An Error Occurred'),
+                        Core.Language.Translate("Sorry, but you can't disable all methods for notifications marked as mandatory.")
+                    );
                     Event.preventDefault();
                     Event.stopPropagation();
                     return false;
@@ -68,7 +71,10 @@ Core.Agent.Preferences = (function (TargetNS) {
 
                 // if there is not at least one transport enabled, omit the actions
                 if (!FoundEnabled) {
-                    alert(Core.Language.Translate("Sorry, but you can't disable all methods for this notification."));
+                    Core.UI.Dialog.ShowAlert(
+                        Core.Language.Translate('An Error Occurred'),
+                        Core.Language.Translate("Sorry, but you can't disable all methods for this notification.")
+                    );
                     Event.stopPropagation();
                     return false;
                 }

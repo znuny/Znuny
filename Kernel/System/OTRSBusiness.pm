@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -361,7 +361,7 @@ sub OTRSBusinessIsUpdateable {
             $Self->HandleBusinessVersionCheckCloudServiceResult( OperationResult => $OperationResult );
 
             if ( $OperationResult->{Data}->{LatestVersionForCurrentFramework} ) {
-                return $Kernel::OM->Get('Kernel::System::Package')->_CheckVersion(
+                return $Kernel::OM->Get('Kernel::System::Package')->CheckVersion(
                     VersionNew       => $OperationResult->{Data}->{LatestVersionForCurrentFramework},
                     VersionInstalled => $Package->{Version}->{Content},
                     Type             => 'Max',
@@ -405,7 +405,7 @@ sub OTRSBusinessVersionCheckOffline {
     );
 
     if ( $EntitlementData{LatestVersionForCurrentFramework} ) {
-        $Result{OTRSBusinessUpdateAvailable} = $Kernel::OM->Get('Kernel::System::Package')->_CheckVersion(
+        $Result{OTRSBusinessUpdateAvailable} = $Kernel::OM->Get('Kernel::System::Package')->CheckVersion(
             VersionNew       => $EntitlementData{LatestVersionForCurrentFramework},
             VersionInstalled => $Package->{Version}->{Content},
             Type             => 'Max',

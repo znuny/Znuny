@@ -1,5 +1,5 @@
 // --
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (AGPL). If you
@@ -15,7 +15,7 @@ Znuny.DynamicField = Znuny.DynamicField || {};
  * @namespace
  * @exports TargetNS as Znuny.DynamicField.Webservice
  * @description
- *      This namespace contains the special functions for dynamic field types WebserviceText and WebserviceMultiselect.
+ *      This namespace contains the special functions for dynamic field types WebserviceDropdown and WebserviceMultiselect.
  */
 Znuny.DynamicField.Webservice = (function (TargetNS) {
 
@@ -41,8 +41,7 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
             AutocompleteMinLength,
             TicketID,
             QueryDelay,
-            DefaultSearchTerm,
-            IsMultiSelect = $DynamicFieldElement.attr('multiple') ? true : false;
+            DefaultSearchTerm;
 
         if (!$DynamicFieldElement.length) {
             return;
@@ -68,24 +67,16 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
         }
 
         if (
-            DynamicFieldType != 'WebserviceText'
+            DynamicFieldType != 'WebserviceDropdown'
             && DynamicFieldType != 'WebserviceMultiselect'
         ) {
             return;
         }
 
-        if (IsMultiSelect && QueryDelay == null) {
-            return;
-        }
-
-        if (IsMultiSelect) {
-            TargetNS.InitMultiselect(
-                DynamicFieldName, SelectedValueFieldName, AutocompleteFieldName, AutocompleteMinLength, QueryDelay, DefaultSearchTerm, TicketID
-            );
-            return;
-        }
-
-        TargetNS.InitAutocomplete(DynamicFieldName, SelectedValueFieldName, AutocompleteFieldName, AutocompleteMinLength, TicketID);
+        TargetNS.InitSelect(
+            DynamicFieldName, SelectedValueFieldName, AutocompleteFieldName, AutocompleteMinLength, QueryDelay, DefaultSearchTerm, TicketID
+        );
+        return;
     }
 
     TargetNS.InitAdmin = function() {
@@ -102,35 +93,35 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
         });
     };
 
-    TargetNS.InitMultiselect = function (DynamicFieldName, SelectedValueFieldName, AutocompleteFieldName, AutocompleteMinLength, QueryDelay, DefaultSearchTerm, TicketID, AdditionalDFs) {
+    TargetNS.InitSelect = function (DynamicFieldName, SelectedValueFieldName, AutocompleteFieldName, AutocompleteMinLength, QueryDelay, DefaultSearchTerm, TicketID, AdditionalDFs) {
         var ActiveAJAXCall = false;
 
         // Use "live" update for the following events because the autocomplete field might not
         // be present in the DOM yet (e.g. in AdminGenericAgent).
         $('#LabelDynamicField_' + DynamicFieldName+ ' + div, #LabelSearch_DynamicField_' + DynamicFieldName+ ' + div')
-            .off('click.AutocompleteMultiselect', '#' + AutocompleteFieldName)
-            .on('click.AutocompleteMultiselect', '#' + AutocompleteFieldName, function() {
+            .off('click.AutocompleteSelect', '#' + AutocompleteFieldName)
+            .on('click.AutocompleteSelect', '#' + AutocompleteFieldName, function() {
                 if (DefaultSearchTerm){
-                    AutocompleteMultiselect($(this), DefaultSearchTerm);
+                    AutocompleteSelect($(this), DefaultSearchTerm);
                 }
             });
 
         $('#LabelDynamicField_' + DynamicFieldName+ ' + div, #LabelSearch_DynamicField_' + DynamicFieldName+ ' + div')
-            .off('keyup.AutocompleteMultiselect', '#' + AutocompleteFieldName)
-            .on('keyup.AutocompleteMultiselect', '#' + AutocompleteFieldName, function() {
+            .off('keyup.AutocompleteSelect', '#' + AutocompleteFieldName)
+            .on('keyup.AutocompleteSelect', '#' + AutocompleteFieldName, function() {
                 var $ThisAutocompleteElement = $(this);
                 window.setTimeout(
                     function () {
                         if (ActiveAJAXCall){
                             return;
                         }
-                        AutocompleteMultiselect($ThisAutocompleteElement);
+                        AutocompleteSelect($ThisAutocompleteElement);
                     },
                     QueryDelay
                 );
             });
 
-        function AutocompleteMultiselect($AutocompleteElement, SearchTerm) {
+        function AutocompleteSelect($AutocompleteElement, SearchTerm) {
             var URL   = Core.Config.Get('Baselink'),
                 Value = SearchTerm || $AutocompleteElement.val() || '',
                 Data  = {
@@ -161,6 +152,8 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
                         Selected = [],
                         SelectedIDs;
 
+                    ActiveAJAXCall = false;
+
                     Core.AJAX.ToggleAJAXLoader(SelectedValueFieldName, false);
                     if (!Response || (Array.isArray(Response) && !Response.length)) {
                         return;
@@ -169,8 +162,7 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
                     // additional check if current search term is equal to sent search term
                     CurrentValue = SearchTerm || $AutocompleteElement.val() || '';
                     if (CurrentValue != Value){
-                        ActiveAJAXCall = false;
-                        AutocompleteMultiselect($AutocompleteElement);
+                        AutocompleteSelect($AutocompleteElement);
                         return;
                     }
 
@@ -204,8 +196,6 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
                     if (!jQuery.isEmptyObject(SelectedIDs)){
                         Znuny.Form.Input.Set(SelectedValueFieldName, SelectedIDs);
                     }
-
-                    ActiveAJAXCall = false;
                 },
                 'json'
             );
@@ -232,129 +222,6 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
             }
         });
     }
-
-    TargetNS.InitAutocomplete = function (DynamicFieldName, SelectedValueFieldName, AutocompleteFieldName, AutocompleteMinLength, QueryDelay, MaxResultsDisplayed, DefaultSearchTerm, TicketID, AdditionalDFs) {
-        var $Element             = $('#' + SelectedValueFieldName),
-            $AutocompleteElement = $('#' + AutocompleteFieldName);
-
-        // If the entered autocomplete display value differs from the one that was inserted by selecting an autocomplete
-        // from the search results, empty the autocomplete field after leaving the input field so that it will become
-        // clear to the user that an invalid value has been entered.
-        $AutocompleteElement.on('blur', function() {
-            if ($AutocompleteElement.val() !== $AutocompleteElement.attr('data-selected-autocomplete-display-value')) {
-                $Element.val('');
-                $AutocompleteElement.val('');
-            }
-        })
-
-        // start initial search on click event
-        $AutocompleteElement.off('click.autocomplete').on('click.autocomplete', function() {
-            var SearchTerm = DefaultSearchTerm || $AutocompleteElement.val();
-            $AutocompleteElement.autocomplete('search', SearchTerm);
-        })
-
-        Core.UI.Autocomplete.Init(
-            $AutocompleteElement,
-            function (Request, Response) {
-                var URL  = Core.Config.Get('Baselink'),
-                    Data = {
-                        Action:           'AJAXDynamicFieldWebservice',
-                        Subaction:        'Autocomplete',
-                        DynamicFieldName: DynamicFieldName,
-                        SearchTerms:      Request.term,
-                        TicketID:         TicketID,
-                        View:             Core.Config.Get('Action')
-                    },
-                    SerializedFormData = TargetNS.SerializeForm($('#DynamicField_' + DynamicFieldName)),
-                    InputValues = TargetNS.GetInputValues($('#DynamicField_' + DynamicFieldName));
-
-                Data = $.extend(Data, SerializedFormData);
-
-                Data.FormFields = InputValues;
-                $('#AJAXLoader' + $AutocompleteElement.attr('id')).show();
-
-                $Element.data(
-                    'AutoCompleteXHR',
-                    Core.AJAX.FunctionCall(
-                        URL,
-                        Data,
-                        function (Result) {
-                            var Data = [];
-                            $Element.removeData('AutoCompleteXHR');
-
-                            $.each(
-                                Result,
-                                function () {
-                                    Data.push({
-                                        label: this.DisplayValue,
-                                        value: this.StoredValue
-                                    });
-                                }
-                            );
-                            Response(Data);
-                        }
-                    )
-                );
-            },
-            function (Event, UI) {
-                var Label = UI.item.label,
-                    Value = UI.item.value,
-                    InitAutoFill;
-
-                if (typeof Label == "string") {
-                    Label.trim();
-                }
-                if (typeof Value == "string") {
-                    Value.trim();
-                }
-
-                Event.preventDefault();
-                Event.stopPropagation();
-
-                // Fixed bug where ajax loading icon does not get removed
-                // after loading of the elements
-                $AutocompleteElement.data('request-counter', 0);
-                $('#AJAXLoader' + $AutocompleteElement.attr('id')).hide();
-
-                $AutocompleteElement.val(Label);
-                $AutocompleteElement.attr('data-selected-autocomplete-display-value', Label);
-                $Element.val(Value);
-
-                // prepare AutoFill
-                if (AdditionalDFs && AdditionalDFs.length){
-                    $.each(AdditionalDFs, function(Index, DynamicField) {
-                        var Exists = Znuny.Form.Input.Exists('DynamicField_' + DynamicField);
-
-                        if (Exists){
-                            InitAutoFill = 1;
-                            return false;
-                        }
-                    });
-                    if (InitAutoFill){
-                        TargetNS.InitAutoFill(DynamicFieldName,Value);
-                    }
-                }
-
-                Core.App.Publish('Event.Agent.DynamicField.Webservice.Callback',
-                    [
-                        {
-                            Label: Label,
-                            Value: Value,
-                            Field: DynamicFieldName
-                        }
-                    ]
-                );
-            },
-            'DynamicFieldWebservice',
-            {
-                QueryDelay:          QueryDelay,
-                MinQueryLength:      AutocompleteMinLength,
-                MaxResultsDisplayed: MaxResultsDisplayed
-            }
-        );
-
-        return true;
-    };
 
     TargetNS.InitAutoFill = function(DynamicFieldName,Value) {
         var URL  = Core.Config.Get('Baselink'),
@@ -399,13 +266,11 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
             .on('click.dynamicfieldwebservice', function () {
                 var AutocompleteMinLength    = $('#AutocompleteMinLength').val(),
                     QueryDelay          = $('#QueryDelay').val() || 100,
-                    MaxResultsDisplayed = $('#Limit').val(),
                     DefaultSearchTerm   = $('#DefaultSearchTerm').val(),
                     FieldType           = $('[name="FieldType"]').val(),
                     DynamicFieldName    = $('#Name').val(),
                     FieldName           = 'DynamicField_' + DynamicFieldName,
                     AutocompleteFieldName,
-                    DynamicFieldAutocomplete,
                     URL                      = Core.Config.Get('Baselink'),
                     Config                   = [
                         'Webservice', 'InvokerSearch', 'InvokerGet', 'Backend', 'StoredValue', 'SearchKeys', 'DisplayedValues', 'DisplayedValuesSeparator', 'Limit', 'AutocompleteMinLength', 'QueryDelay', 'AdditionalDFStorage', 'InputFieldWidth', 'DefaultValue', 'Link', 'SearchTerms',                     ],
@@ -448,22 +313,9 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
 
                         Core.UI.InputFields.Activate();
 
-                        if (FieldType == 'WebserviceText'){
-                            AutocompleteFieldName    = FieldName + 'Autocomplete';
-                            DynamicFieldAutocomplete = $('#' + FieldName + '[type="text"]');
+                        AutocompleteFieldName = FieldName + '_Search';
 
-                            TargetNS.InitAutocomplete(DynamicFieldName, FieldName, AutocompleteFieldName, AutocompleteMinLength, QueryDelay, MaxResultsDisplayed, DefaultSearchTerm, 0, '');
-
-                            DynamicFieldAutocomplete.on('change', function(){
-                                $('#' + FieldName).attr('type', 'text').attr('disabled','disabled').addClass('W50pc').addClass('InputField_Search').removeClass('Hidden').before(DynamicFieldAutocomplete);
-                            });
-                        }
-
-                        if (FieldType == 'WebserviceMultiselect'){
-                            AutocompleteFieldName = FieldName + '_Search';
-
-                            TargetNS.InitMultiselect(DynamicFieldName, FieldName, AutocompleteFieldName, AutocompleteMinLength, QueryDelay, DefaultSearchTerm, 0, '');
-                        }
+                        TargetNS.InitSelect(DynamicFieldName, FieldName, AutocompleteFieldName, AutocompleteMinLength, QueryDelay, DefaultSearchTerm, 0, '');
                     }
                 )
             });

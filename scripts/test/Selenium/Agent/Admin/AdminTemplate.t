@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,7 +18,9 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject           = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject           = $Kernel::OM->Get('Kernel::Config');
+        my $StandardTemplateObject = $Kernel::OM->Get('Kernel::System::StandardTemplate');
 
         # Create test user and login.
         my $TestUserLogin = $HelperObject->TestUserCreate(
@@ -31,7 +33,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminTemplate screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminTemplate");
@@ -95,6 +97,7 @@ $Selenium->RunTest(
             Value   => 1,
         );
         $Selenium->find_element( "#Submit", 'css' )->VerifiedClick();
+        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminTemplate");
 
         # Check overview screen for test template.
         $Self->True(
@@ -215,7 +218,7 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminTemplate");
 
         # Test template delete button.
-        my $TemplateID = $Kernel::OM->Get('Kernel::System::StandardTemplate')->StandardTemplateLookup(
+        my $TemplateID = $StandardTemplateObject->StandardTemplateLookup(
             StandardTemplate => $TemplateRandomID,
         );
 

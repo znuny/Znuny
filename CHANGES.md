@@ -1,9 +1,26 @@
 # 6.5.1 2023-??-??
+ - 2023-01-09 Integrated package Znuny4OTRS-UserMaxArticlesPerPage.
+ - 2023-01-06 Fixed 'ACL misbehaviour in processes' - ActivityEntityID is missing in AgentTicketProcess.pm. [#316](https://github.com/znuny/Znuny/issues/316)
+ - 2023-01-05 Fixed JavaScript error in edit-mode in AdminACL.
+ - 2023-01-05 Changed JS alert() function to Core.UI.Dialog.ShowAlert().
+ - 2023-01-04 Show PackageRequired- and ModuleRequired-information while package installation & update.
+ - 2023-01-04 Reworked information of LastViews.
+ - 2023-01-03 Process activity dialog article fields with subject and body can now be pre-filled. The Body also support RichtText. Thanks to Berner Fachhochschule (bfh.ch) for sponsoring this feature.
+ - 2022-12-29 Reenabled TicketID for reporting (Dynamic/TicketList).
+ - 2022-12-19 Added check for maximum filename length to file uploads.
+ - 2022-12-16 Added new function Kernel::System::Web::Request::GetParams() to get request parameters.
+ - 2022-12-13 Fixed SQL injection in TicketSearch.pm (CVE-2022-4427). Thanks for hints to Tim Püttmanns, maxence.
  - 2022-12-13 Added non-standard time zone mapping for iCal/ICS handling.
+ - 2022-12-12 Fixed bulk un-mention action via mention view link.
  - 2022-12-07 Added independent ToolBar::TicketProcess. This is only visible when a valid process exists.
+ - 2022-11-30 Replaced dynamic field type WebserviceText with WebserviceDropdown.
  - 2022-11-25 Moved code of ITSMCore to Znuny Framework that will only be executed if ITSM actually is installed.
  - 2022-11-24 Fixed handling of empty result for frontend autocompletion of dynamic field type WebserviceMultiselect.
+ - 2022-11-24 SOAP::Lite: Data of elements with attribute 'xsi:type' now will be returned as a hash or array instead of an arbitrary object that Znuny cannot handle.
  - 2022-09-16 Auto responses now will not be sent if the recipient would be a system address.
+
+# 6.4.5 2022-12-20
+ - 2022-12-13 Fixed SQL injection in TicketSearch.pm (CVE-2022-4427). Thanks for hints to Tim Püttmanns, maxence.
 
 # 6.4.4 2022-11-23
  - 2022-11-10 Fixed overlapping input list in search dialog.
@@ -258,6 +275,9 @@
  - 2021-06-15 Improvements for Dev::Code::CPANUpdate (#38). Thanks to Renée Bäcker (@reneeb). [#38](https://github.com/znuny/Znuny/pull/38)
  - 2021-06-15 Use ticket title as the default appointment title (#90). Thanks to Renée Bäcker (@reneeb). [#90](https://github.com/znuny/Znuny/pull/90)
  - 2021-06-15 Column list validation before saving agent preferences (#84). Thanks to Paweł Bogusławski (@pboguslawski). [#84](https://github.com/znuny/Znuny/pull/84)
+
+# 6.0.48 2022-12-20
+ - 2022-12-13 Fixed SQL injection in TicketSearch.pm (CVE-2022-4427). Thanks for hints to Tim Püttmanns, maxence.
 
 # 6.0.47 2022-11-23
  - 2022-11-10 Fixed overlapping input list in search dialog.
