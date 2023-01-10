@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # Copyright (C) 2003 Gilberto Cezar de Almeida <gibalmeida at hotmail.com>
 # Copyright (C) 2005 Alterado por Glaucia C. Messina (glauglauu@yahoo.com)
 # Copyright (C) 2007-2010 Fabricio Luiz Machado <soprobr gmail.com>
@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.874230145867099;
+    $Self->{Completeness}        = 0.873098089996763;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1656,6 +1656,12 @@ sub Data {
             'No caso de você ter mais perguntas, teremos prazer em respondê-las.',
         'Install Package' => 'Instalar Pacote',
         'Update Package' => 'Atualizar Pacote',
+        'Package' => '',
+        'Required package %s is already installed.' => '',
+        'Required Perl module %s is already installed.' => '',
+        'Required package %s needs to get installed!' => '',
+        'Required package %s needs to get updated to version %s!' => '',
+        'Required Perl module %s needs to get installed or updated!' => '',
         'Continue' => 'Continuar',
         'Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Por favor, certifique-se de que seu banco de dados aceita pacotes com mais de %s MB de tamanho (tamanho máximo suportado é de %s MB). Altere o parâmetro max_allowed_packet do seu banco de dados para evitar erros.',
@@ -2270,7 +2276,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'Permissões',
-        'Package' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
         'System Maintenance Management' => 'Gerenciamento de Manutenção do Sistema',
@@ -4879,6 +4884,10 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/Preferences/Language.pm
         '(in process)' => '(em progresso)',
+
+        # Perl Module: Kernel/Output/HTML/Preferences/MaxArticlesPerPage.pm
+        'Max. number of articles per page must be between 1 and 1000 or empty.' =>
+            '',
 
         # Perl Module: Kernel/Output/HTML/Preferences/OutOfOffice.pm
         'Please specify an end date that is after the start date.' => 'Por favor especifique uma data final posterior à data de início.',
@@ -7837,7 +7846,7 @@ sub Data {
             '',
         'Ticket event module that stores values of the selected web service record into the configured additional dynamic fields.' =>
             '',
-        'It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
+        'It might happen that a dynamic field of type WebserviceDropdown or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
             '',
         'Mapping for field values received from form. This setting is necessary for the correct identification of the form fields. Key means value type, value means possible representation in views.' =>
             '',
@@ -8570,7 +8579,7 @@ Obrigado pela ajuda!
         'Admin' => 'Administração',
         'Admin Area.' => 'Área Admin.',
         'Admin Notification' => 'Notificação Administrativa',
-        'Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect' =>
+        'Admin configuration dialog for dynamic field types WebserviceDropdown and WebserviceMultiselect' =>
             '',
         'Admin modules overview.' => 'Visão geral dos módulos de administração.',
         'Admin.' => 'Administração.',
@@ -8932,6 +8941,7 @@ Obrigado pela ajuda!
         'Mark as Spam!' => 'Marque como Spam',
         'Mark this ticket as junk!' => 'Marcar este chamado como lixo!',
         'Mattermost Username' => '',
+        'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'Médio',
         'Mentioned in article' => '',
         'Mentioned in ticket' => '',
@@ -9056,6 +9066,8 @@ Obrigado pela ajuda!
         'Select how many tickets should be shown in overviews by default.' =>
             'Selecione quantos chamados deverão ser mostrados na visão geral por padrão.',
         'Select the main interface language.' => 'Selecione o idioma principal da interface.',
+        'Select the maximum articles per page shown in TicketZoom. System default value will apply when entered empty value.' =>
+            '',
         'Select the separator character used in CSV files (stats and searches). If you don\'t select a separator here, the default separator for your language will be used.' =>
             'Selecione o caractere separador usado em arquivos CSV (estatísticas e pesquisas). Se você não selecionar um separador aqui, o separador padrão para o seu idioma será usado.',
         'Select where to display the last views.' => '',
@@ -9212,8 +9224,8 @@ Obrigado pela ajuda!
         'We are performing scheduled maintenance. We should be back online shortly.' =>
             'Estamos realizando uma manutenção programada. Estaremos de volta em breve.',
         'Web Services' => 'Web Services',
+        'Web service (Dropdown)' => '',
         'Web service (Multiselect)' => '',
-        'Web service (Text)' => '',
         'Web service dynamic field AJAX interface' => '',
         'Webservice' => '',
         'Yes, but hide archived tickets' => 'Sim, mas oculte chamados arquivados',
@@ -9273,6 +9285,7 @@ Obrigado pela ajuda!
         'Agent',
         'All occurrences',
         'All-day',
+        'An Error Occurred',
         'An error occurred during communication.',
         'An error occurred! Please check the browser error log for more details!',
         'An item with this name is already present.',

@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -240,9 +240,7 @@ sub _AddAction {
         %AdditionalParams,
     };
 
-    if ( $GetParam{FieldType} eq 'WebserviceMultiselect' ) {
-        $FieldConfig->{TreeView} = $GetParam{TreeView};
-    }
+    $FieldConfig->{TreeView} = $GetParam{TreeView};
 
     my $FieldID = $DynamicFieldObject->DynamicFieldAdd(
         Name       => $GetParam{Name},
@@ -525,9 +523,7 @@ sub _ChangeAction {
         %AdditionalParams,
     };
 
-    if ( $GetParam{FieldType} eq 'WebserviceMultiselect' ) {
-        $FieldConfig->{TreeView} = $GetParam{TreeView};
-    }
+    $FieldConfig->{TreeView} = $GetParam{TreeView};
 
     # update dynamic field (FieldType and ObjectType cannot be changed; use old values)
     my $UpdateSuccess = $DynamicFieldObject->DynamicFieldUpdate(

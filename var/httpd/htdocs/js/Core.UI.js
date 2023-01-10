@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -566,13 +566,19 @@ Core.UI = (function (TargetNS) {
             // if the original upload field doesn't have the multiple attribute,
             // prevent uploading of more than one file
             if (!IsMultiple && SelectedFiles.length > 1) {
-                alert(Core.Language.Translate("Please only select one file for upload."));
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An Error Occurred'),
+                    Core.Language.Translate("Please only select one file for upload.")
+                );
                 return false;
             }
 
             // if multiple is not allowed and a file has already been uploaded, don't allow uploading more
             if (!IsMultiple && $FileuploadFieldObj.closest('.Field').find('.AttachmentList tbody tr').length > 0) {
-                alert(Core.Language.Translate("Sorry, you can only upload one file here."));
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An Error Occurred'),
+                    Core.Language.Translate("Sorry, you can only upload one file here.")
+                );
                 return false;
             }
 
@@ -582,7 +588,10 @@ Core.UI = (function (TargetNS) {
             }
 
             if (MaxFiles && SelectedFiles.length > MaxFiles) {
-                alert(Core.Language.Translate("Please only select at most %s files for upload.", [ MaxFiles ]));
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An Error Occurred'),
+                    Core.Language.Translate("Please only select at most %s files for upload.", [ MaxFiles ])
+                );
                 return false;
             }
 
@@ -864,7 +873,10 @@ Core.UI = (function (TargetNS) {
                     });
                 }
                 else {
-                    alert(Core.Language.Translate('An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator.'));
+                    Core.UI.Dialog.ShowAlert(
+                        Core.Language.Translate('An Error Occurred'),
+                        Core.Language.Translate('An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator.')
+                    );
                     $AttachmentListContainerObj.find('.Busy').hide();
                 }
             });
@@ -906,7 +918,10 @@ Core.UI = (function (TargetNS) {
                     // If this certain upload field does not allow uploading more than one file and a file has
                     // already been uploaded, prevent the user from uploading more files.
                     if (!IsMultiple && $(this).closest('.Field').find('.AttachmentList tbody tr').length > 0) {
-                        alert(Core.Language.Translate("Sorry, you can only upload one file here."));
+                        Core.UI.Dialog.ShowAlert(
+                            Core.Language.Translate('An Error Occurred'),
+                            Core.Language.Translate("Sorry, you can only upload one file here.")
+                        );
                         return false;
                     }
 

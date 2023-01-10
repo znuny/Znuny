@@ -12,7 +12,7 @@
 # Copyright (C) 2013 Andrey N. Burdin <BurdinAN at it-sakh.net>
 # Copyright (C) 2013 Yuriy Kolesnikov <ynkolesnikov at gmail.com>
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -37,7 +37,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.86418152350081;
+    $Self->{Completeness}        = 0.863062479766915;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1663,6 +1663,12 @@ sub Data {
             'В случае, если у Вас возникли вопросы, мы будем рады ответить на них.',
         'Install Package' => 'Установить пакет',
         'Update Package' => 'Обновить пакет',
+        'Package' => '',
+        'Required package %s is already installed.' => '',
+        'Required Perl module %s is already installed.' => '',
+        'Required package %s needs to get installed!' => '',
+        'Required package %s needs to get updated to version %s!' => '',
+        'Required Perl module %s needs to get installed or updated!' => '',
         'Continue' => 'Продолжить',
         'Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Убедитесь что ваша СУБД принимает пакеты размером больше %s MB (текущее значение размера пакета - до %s MB). Измените значение параметра max_allowed_packet для вашей СУБД во избежание ошибок.',
@@ -2277,7 +2283,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'Права',
-        'Package' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
         'System Maintenance Management' => 'Управление обслуживанием системы',
@@ -4886,6 +4891,10 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/Preferences/Language.pm
         '(in process)' => '(выполняется)',
+
+        # Perl Module: Kernel/Output/HTML/Preferences/MaxArticlesPerPage.pm
+        'Max. number of articles per page must be between 1 and 1000 or empty.' =>
+            '',
 
         # Perl Module: Kernel/Output/HTML/Preferences/OutOfOffice.pm
         'Please specify an end date that is after the start date.' => 'Пожалуйста, укажите Дату окончания раньше даты начала.',
@@ -7844,7 +7853,7 @@ sub Data {
             '',
         'Ticket event module that stores values of the selected web service record into the configured additional dynamic fields.' =>
             '',
-        'It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
+        'It might happen that a dynamic field of type WebserviceDropdown or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
             '',
         'Mapping for field values received from form. This setting is necessary for the correct identification of the form fields. Key means value type, value means possible representation in views.' =>
             '',
@@ -8577,7 +8586,7 @@ Thanks for your help!
         'Admin' => 'Администрирование',
         'Admin Area.' => 'Панель администратора.',
         'Admin Notification' => 'Уведомление администратором',
-        'Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect' =>
+        'Admin configuration dialog for dynamic field types WebserviceDropdown and WebserviceMultiselect' =>
             '',
         'Admin modules overview.' => '',
         'Admin.' => 'Администратор.',
@@ -8939,6 +8948,7 @@ Thanks for your help!
         'Mark as Spam!' => 'Пометить как спам!',
         'Mark this ticket as junk!' => 'Пометить эту заявку как мусор!',
         'Mattermost Username' => '',
+        'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'Средний',
         'Mentioned in article' => '',
         'Mentioned in ticket' => '',
@@ -9063,6 +9073,8 @@ Thanks for your help!
         'Select how many tickets should be shown in overviews by default.' =>
             'Выберете как много заявок будет показываться в обзоре по умолчанию.',
         'Select the main interface language.' => 'Выберете главный язык интерфейса.',
+        'Select the maximum articles per page shown in TicketZoom. System default value will apply when entered empty value.' =>
+            '',
         'Select the separator character used in CSV files (stats and searches). If you don\'t select a separator here, the default separator for your language will be used.' =>
             'Выберите символ разделителя, используемый в файлах CSV (статистика и поиски). Если вы не выберете его здесь, будет использован разделитель по умолчанию для вашего языка.',
         'Select where to display the last views.' => '',
@@ -9219,8 +9231,8 @@ Thanks for your help!
         'We are performing scheduled maintenance. We should be back online shortly.' =>
             'Проводиться плановое техническое обслуживание. Уже скоро закончим.',
         'Web Services' => 'Веб-сервисы',
+        'Web service (Dropdown)' => '',
         'Web service (Multiselect)' => '',
-        'Web service (Text)' => '',
         'Web service dynamic field AJAX interface' => '',
         'Webservice' => '',
         'Yes, but hide archived tickets' => 'Да, скрыть архивированные заявки',
@@ -9280,6 +9292,7 @@ Thanks for your help!
         'Agent',
         'All occurrences',
         'All-day',
+        'An Error Occurred',
         'An error occurred during communication.',
         'An error occurred! Please check the browser error log for more details!',
         'An item with this name is already present.',

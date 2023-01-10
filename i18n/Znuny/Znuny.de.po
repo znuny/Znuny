@@ -24044,7 +24044,7 @@ msgstr "Systemdatei-Support"
 msgid "Delete cache"
 msgstr "Cache löschen"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Package"
 msgstr "Paket"
 
@@ -24117,8 +24117,8 @@ msgid "Activation of dynamic fields for screens."
 msgstr "Aktivierung dynamischer Felder für Masken."
 
 #. SysConfig
-msgid "Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect"
-msgstr "Admin-Konfigurationsdialog für die dynamischen Feldtypen WebserviceText und WebserviceMultiselect"
+msgid "Admin configuration dialog for dynamic field types WebserviceDropdown and WebserviceMultiselect"
+msgstr "Admin-Konfigurationsdialog für die dynamischen Feldtypen WebserviceDropdown und WebserviceMultiselect"
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Assignment between action and attributes."
@@ -24177,8 +24177,8 @@ msgid "Hide"
 msgstr "Ausblenden"
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty."
-msgstr "Es kann vorkommen, dass ein dynamisches Feld vom Typ WebserviceText oder WebserviceMultiselect auf einen Wert gesetzt wird, der aus einer konfigurierten Webservice-Tabelle geholt wird, aber der Webservice-Datensatz keinen Wert in dem Feld hat, das als angezeigter Wert konfiguriert ist. Aktivieren Sie diese Einstellung, um diese dynamischen Felder im Ticketinformations-Widget von AgentTicketZoom auszublenden, damit sie nicht als leer angezeigt werden."
+msgid "It might happen that a dynamic field of type WebserviceDropdown or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty."
+msgstr "Es kann vorkommen, dass ein dynamisches Feld vom Typ WebserviceDropdown oder WebserviceMultiselect auf einen Wert gesetzt wird, der aus einer konfigurierten Webservice-Tabelle geholt wird, aber der Webservice-Datensatz keinen Wert in dem Feld hat, das als angezeigter Wert konfiguriert ist. Aktivieren Sie diese Einstellung, um diese dynamischen Felder im Ticketinformations-Widget von AgentTicketZoom auszublenden, damit sie nicht als leer angezeigt werden."
 
 #. SysConfig
 msgid "Last view - limit"
@@ -24295,10 +24295,6 @@ msgstr "User-Agent-String zur Verwendung im WebUserAgent-Modul. Leerlassen, um S
 #. SysConfig
 msgid "Web service (Multiselect)"
 msgstr "Webservice (Mehrfachauswahl)"
-
-#. SysConfig
-msgid "Web service (Text)"
-msgstr "Webservice (Text)"
 
 #. SysConfig
 msgid "Webservice dynamic field AJAX interface"
@@ -25572,6 +25568,10 @@ msgstr "Minimale Zeit zwischen den Vorfällen"
 msgid "Criticality"
 msgstr "Kritikalität"
 
+#. SysConfig
+msgid "Web service (Dropdown)"
+msgstr "Webservice (Einfachauswahl)"
+
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Mapping of non-standard time zones to official ones."
 msgstr "Mapping von Nicht-Standard-Zeitzonen zu offiziellen Zeitzonen."
@@ -25579,4 +25579,36 @@ msgstr "Mapping von Nicht-Standard-Zeitzonen zu offiziellen Zeitzonen."
 #. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s"
 msgstr "Die Namen der folgenden Dateien überschreiten die Maximallänge von %s Zeichen und wurden nicht hochgeladen: %s"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required package %s is already installed."
+msgstr "Vorausgesetzes Paket %s ist bereits installiert."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required Perl module %s is already installed."
+msgstr "Vorausgesetzes Perl Modul %s ist bereits installiert."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required package %s needs to get installed!"
+msgstr "Vorausgesetzes Paket %s muss noch installiert werden!"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required package %s needs to get updated to version %s!"
+msgstr "Vorausgesetzes Paket %s muss noch auf Version %s aktuallisiert werden!"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required Perl module %s needs to get installed or updated!"
+msgstr "Vorausgesetzes Perl Modul %s muss noch installiert oder aktuallisiert werden!"
+
+#. Perl Module: Kernel/Output/HTML/Preferences/MaxArticlesPerPage.pm
+msgid "Max. number of articles per page must be between 1 and 1000 or empty."
+msgstr "Max. Anzahl der Artikel pro Seite muss zwischen 1 und 1000 liegen oder nicht gefüllt sein."
+
+#. SysConfig
+msgid "Max. number of articles per page in TicketZoom"
+msgstr "Max. Anzahl Artikel pro Seite in der Ticket-Detailansicht"
+
+#. SysConfig
+msgid "Select the maximum articles per page shown in TicketZoom. System default value will apply when entered empty value."
+msgstr "Wählen Sie die maximale Anzahl angezeigter Artikel pro Seite in der Ticket-Detailansicht. Der Systemstandardwert wird angewendet, wenn ein leerer Wert eingegeben wird."
 

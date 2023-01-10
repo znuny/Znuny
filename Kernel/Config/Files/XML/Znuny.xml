@@ -361,24 +361,14 @@
     <!--
         Dynamic field web service
     -->
-    <Setting Name="DynamicFields::Driver###WebserviceText" Required="1" Valid="1">
+    <Setting Name="DynamicFields::Driver###WebserviceDropdown" Required="0" Valid="1">
         <Description Translatable="1">Dynamic field backend registration.</Description>
         <Navigation>Core::DynamicFields::DriverRegistration</Navigation>
         <Value>
             <Hash>
-                <Item Key="DisplayName" Translatable="1">Web service (Text)</Item>
-                <Item Key="Module">Kernel::System::DynamicField::Driver::WebserviceText</Item>
+                <Item Key="DisplayName" Translatable="1">Web service (Dropdown)</Item>
+                <Item Key="Module">Kernel::System::DynamicField::Driver::WebserviceDropdown</Item>
                 <Item Key="ConfigDialog">AdminDynamicFieldWebservice</Item>
-                <Item Key="Config">
-                    <Hash>
-                        <Item Key="DefaultValue"></Item>
-                        <Item Key="Link"></Item>
-                        <Item Key="LinkPreview"></Item>
-                        <Item Key="Webservice">Webservice</Item>
-                        <Item Key="InvokerSearch">Invoker</Item>
-                        <Item Key="InvokerGet">Invoker</Item>
-                    </Hash>
-                </Item>
             </Hash>
         </Value>
     </Setting>
@@ -484,7 +474,7 @@
                         </Array>
                     </Item>
                     <Item Key="Description">Admin</Item>
-                    <Item Key="Title" Translatable="1">Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect</Item>
+                    <Item Key="Title" Translatable="1">Admin configuration dialog for dynamic field types WebserviceDropdown and WebserviceMultiselect</Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
             </Item>
@@ -510,7 +500,7 @@
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketZoom###HideWebserviceDynamicFieldsWithoutDisplayValue" Required="1" Valid="1">
-        <Description Translatable="1">It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.</Description>
+        <Description Translatable="1">It might happen that a dynamic field of type WebserviceDropdown or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.</Description>
         <Navigation>Core::DynamicFieldWebservice</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
@@ -2877,6 +2867,26 @@
                 <Item Key='Yakutsk'>Asia/Yakutsk</Item>
                 <Item Key='Yakutsk Standard Time'>Asia/Yakutsk</Item>
                 <Item Key='Yukon Standard Time'>America/Whitehorse</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!--
+    UserMaxArticlesPerPage
+    -->
+    <Setting Name="PreferencesGroups###MaxArticlesPerPage" Required="0" Valid="1">
+        <Description Translatable="1">Defines the config parameters of this item, to be shown in the preferences view.</Description>
+        <Navigation>Frontend::Agent::View::Preferences</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::Preferences::MaxArticlesPerPage</Item>
+                <Item Key="PreferenceGroup">Miscellaneous</Item>
+                <Item Key="Label" Translatable="1">Max. number of articles per page in TicketZoom</Item>
+                <Item Key="Key" Translatable="1"></Item>
+                <Item Key="Desc" Translatable="1">Select the maximum articles per page shown in TicketZoom. System default value will apply when entered empty value.</Item>
+                <Item Key="PrefKey">MaxArticlesPerPage</Item>
+                <Item Key="Prio">50</Item>
+                <Item Key="Active">1</Item>
             </Hash>
         </Value>
     </Setting>
