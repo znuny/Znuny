@@ -25600,3 +25600,15 @@ msgstr "Vorausgesetzes Paket %s muss noch auf Version %s aktuallisiert werden!"
 msgid "Required Perl module %s needs to get installed or updated!"
 msgstr "Vorausgesetzes Perl Modul %s muss noch installiert oder aktuallisiert werden!"
 
+#. Perl Module: Kernel/Output/HTML/Preferences/MaxArticlesPerPage.pm
+msgid "Max. number of articles per page must be between 1 and 1000 or empty."
+msgstr "Max. Anzahl der Artikel pro Seite muss zwischen 1 und 1000 liegen oder nicht gefüllt sein."
+
+#. SysConfig
+msgid "Max. number of articles per page in TicketZoom"
+msgstr "Max. Anzahl Artikel pro Seite in der Ticket-Detailansicht"
+
+#. SysConfig
+msgid "Select the maximum articles per page shown in TicketZoom. System default value will apply when entered empty value."
+msgstr "Wählen Sie die maximale Anzahl angezeigter Artikel pro Seite in der Ticket-Detailansicht. Der Systemstandardwert wird angewendet, wenn ein leerer Wert eingegeben wird."
+

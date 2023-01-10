@@ -734,7 +734,7 @@ Core.Agent.Admin.ACL = (function (TargetNS) {
             $(this).next('input').select().focus();
         });
 
-        $('.ACLStructure').on('blur keydown', '.LiveEdit', function(Event) {
+        $('.ACLStructure').on('blur keydown submitevent', '.LiveEdit', function(Event) {
 
             var Value;
 
@@ -832,6 +832,11 @@ Core.Agent.Admin.ACL = (function (TargetNS) {
         });
 
         $('#Submit, #SubmitAndContinue').on('click', function() {
+
+            // trigger submitevent to prepare data item for collect ACLData
+            if ($('.LiveEdit').length >= 1) {
+                $('.LiveEdit').trigger('submitevent');
+            }
 
             // collect data from the input areas
             TargetNS.ConfigMatch = TargetNS.CollectACLData($('#ACLMatch'));

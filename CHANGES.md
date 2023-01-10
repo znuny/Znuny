@@ -1,7 +1,10 @@
 # 6.5.1 2023-??-??
- - 2022-01-05 Changed JS alert() function to Core.UI.Dialog.ShowAlert().
- - 2022-01-04 Show PackageRequired- and ModuleRequired-information while package installation & update.
- - 2022-01-04 Reworked information of LastViews.
+ - 2023-01-09 Integrated package Znuny4OTRS-UserMaxArticlesPerPage.
+ - 2023-01-06 Fixed 'ACL misbehaviour in processes' - ActivityEntityID is missing in AgentTicketProcess.pm. [#316](https://github.com/znuny/Znuny/issues/316)
+ - 2023-01-05 Fixed JavaScript error in edit-mode in AdminACL.
+ - 2023-01-05 Changed JS alert() function to Core.UI.Dialog.ShowAlert().
+ - 2023-01-04 Show PackageRequired- and ModuleRequired-information while package installation & update.
+ - 2023-01-04 Reworked information of LastViews.
  - 2023-01-03 Process activity dialog article fields with subject and body can now be pre-filled. The Body also support RichtText. Thanks to Berner Fachhochschule (bfh.ch) for sponsoring this feature.
  - 2022-12-29 Reenabled TicketID for reporting (Dynamic/TicketList).
  - 2022-12-19 Added check for maximum filename length to file uploads.

@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.898947368421053;
+    $Self->{Completeness}        = 0.898510844933636;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -4880,6 +4880,10 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Preferences/Language.pm
         '(in process)' => '(과정에서)',
 
+        # Perl Module: Kernel/Output/HTML/Preferences/MaxArticlesPerPage.pm
+        'Max. number of articles per page must be between 1 and 1000 or empty.' =>
+            '',
+
         # Perl Module: Kernel/Output/HTML/Preferences/OutOfOffice.pm
         'Please specify an end date that is after the start date.' => '시작일 이후의 종료일을 지정 하십시오.',
 
@@ -8932,6 +8936,7 @@ Thanks for your help!
         'Mark as Spam!' => '스팸으로 표시하십시오!',
         'Mark this ticket as junk!' => '이 티켓을 정크로 표시하십시오!',
         'Mattermost Username' => '',
+        'Max. number of articles per page in TicketZoom' => '',
         'Medium' => '중간의',
         'Mentioned in article' => '',
         'Mentioned in ticket' => '',
@@ -9056,6 +9061,8 @@ Thanks for your help!
         'Select how many tickets should be shown in overviews by default.' =>
             '개요별로 표시할 티켓 수를 기본적으로 선택하십시오.',
         'Select the main interface language.' => '기본 인터페이스 언어를 선택하십시오.',
+        'Select the maximum articles per page shown in TicketZoom. System default value will apply when entered empty value.' =>
+            '',
         'Select the separator character used in CSV files (stats and searches). If you don\'t select a separator here, the default separator for your language will be used.' =>
             'CSV 파일 (통계 및 검색)에 사용되는 구분 문자를 선택하십시오. 여기에서 구분 기호를 선택하지 않으면 언어의 기본 구분 기호가 사용됩니다.',
         'Select where to display the last views.' => '',
