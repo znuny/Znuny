@@ -104,9 +104,6 @@ $Selenium->RunTest(
             UserID  => 1,
         );
 
-        # Change resolution (desktop mode).
-        $Selenium->set_window_size( 768, 1050 );
-
         # Create test user.
         my $Language      = 'en';
         my $TestUserLogin = $HelperObject->TestUserCreate(
@@ -274,8 +271,8 @@ $Selenium->RunTest(
             Element => '#CalendarID',
             Value   => $Calendar1{CalendarID},
         );
-        $Selenium->find_element( '#EndHour',     'css' )->send_keys('18');
-        $Selenium->find_element( '.PluginField', 'css' )->send_keys($TicketNumber);
+        $Selenium->find_element( '#EndHour',    'css' )->send_keys('18');
+        $Selenium->find_element( '#TicketLink', 'css' )->send_keys($TicketNumber);
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("li.ui-menu-item:visible").length;' );
         $Selenium->execute_script("\$('li.ui-menu-item:contains($TicketNumber)').click();");
 

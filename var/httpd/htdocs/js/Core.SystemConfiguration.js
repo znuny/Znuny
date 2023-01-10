@@ -319,7 +319,10 @@ var Core = Core || {};
         // for which a key field has been added but no value has been
         // added, hinder the user from saving the setting
         if ($Widget.find('button.AddKey:visible').length) {
-            alert(Core.Language.Translate('Please add values for all keys before saving the setting.'));
+            Core.UI.Dialog.ShowAlert(
+                Core.Language.Translate('An Error Occurred'),
+                Core.Language.Translate('Please add values for all keys before saving the setting.')
+            );
             return;
         }
 
@@ -897,7 +900,10 @@ var Core = Core || {};
         }
 
         if (!$KeyElement.val()) {
-            alert(Core.Language.Translate('The key must not be empty.'));
+            Core.UI.Dialog.ShowAlert(
+                Core.Language.Translate('An Error Occurred'),
+                Core.Language.Translate('The key must not be empty.')
+            );
             return;
         }
 
@@ -906,7 +912,10 @@ var Core = Core || {};
                 return $(this).val() === Key;
             }).length > 1) {
 
-            alert(Core.Language.Translate("A key with this name ('%s') already exists.", Key));
+            Core.UI.Dialog.ShowAlert(
+                Core.Language.Translate('An Error Occurred'),
+                Core.Language.Translate("A key with this name ('%s') already exists.", Key)
+            );
             return;
         }
 

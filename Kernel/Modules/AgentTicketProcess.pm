@@ -958,7 +958,7 @@ sub _GetParam {
     my $ActivityDialogEntityID = $ParamObject->GetParam(
         Param => 'ActivityDialogEntityID',
     );
-    my $ActivityEntityID;
+    my $ActivityEntityID = $ParamObject->GetParam( Param => 'ActivityEntityID' );
     my %ValuesGotten;
     my $Value;
 
@@ -1731,6 +1731,7 @@ sub _OutputActivityDialog {
             Subaction              => 'StoreActivityDialog',
             TicketID               => $Ticket{TicketID} || '',
             LinkTicketID           => $Self->{LinkTicketID},
+            ActivityEntityID       => $ActivityActivityDialog->{Activity},
             ActivityDialogEntityID => $ActivityActivityDialog->{ActivityDialog},
             ProcessEntityID        => $Param{ProcessEntityID}
                 || $Ticket{
@@ -6588,7 +6589,7 @@ sub _GetQueues {
 
             if ( $ConfigObject->Get('Ticket::Frontend::NewQueueSelectionType') ne 'Queue' )
             {
-                my %SystemAddressData = $Self->{SystemAddress}->SystemAddressGet(
+                my %SystemAddressData = $Kernel::OM->Get('Kernel::System::SystemAddress')->SystemAddressGet(
                     ID => $Queues{$QueueID},
                 );
                 $String =~ s/<Realname>/$SystemAddressData{Realname}/g;

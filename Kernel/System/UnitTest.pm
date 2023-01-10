@@ -97,7 +97,12 @@ sub Run {
     my $Product = $ConfigObject->Get('Product') . " " . $ConfigObject->Get('Version');
     my $Home    = $ConfigObject->Get('Home');
 
+    # Replace ".t" at the end for every "--test"-option to support commands like this:
+    # ./bin/otrs.Console.pl Dev::UnitTest::Run --verbose --test scripts/test/Mentions/MentionsPermissionCheck.t
     my @TestsToExecute = @{ $Param{Tests} // [] };
+
+    # Search and replace ".t" but if not found return $_ that tests without ".t" get inserted into the array again.
+    @TestsToExecute = map { $_ =~ s{\.t\z}{}; $_ } @TestsToExecute;    ## no critic
 
     my $UnitTestBlacklist = $ConfigObject->Get('UnitTest::Blacklist');
     my @BlacklistedTests;

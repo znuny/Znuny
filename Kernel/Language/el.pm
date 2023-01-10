@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.138623481781377;
+    $Self->{Completeness}        = 0.138556167044351;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4886,6 +4886,10 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Preferences/Language.pm
         '(in process)' => '',
 
+        # Perl Module: Kernel/Output/HTML/Preferences/MaxArticlesPerPage.pm
+        'Max. number of articles per page must be between 1 and 1000 or empty.' =>
+            '',
+
         # Perl Module: Kernel/Output/HTML/Preferences/OutOfOffice.pm
         'Please specify an end date that is after the start date.' => '',
 
@@ -8927,6 +8931,7 @@ Thanks for your help!
         'Mark as Spam!' => 'Χαρακτηρισμός ως ανεπυθήμητο!',
         'Mark this ticket as junk!' => '',
         'Mattermost Username' => '',
+        'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'Μεσαίο',
         'Mentioned in article' => '',
         'Mentioned in ticket' => '',
@@ -9051,6 +9056,8 @@ Thanks for your help!
         'Select how many tickets should be shown in overviews by default.' =>
             '',
         'Select the main interface language.' => '',
+        'Select the maximum articles per page shown in TicketZoom. System default value will apply when entered empty value.' =>
+            '',
         'Select the separator character used in CSV files (stats and searches). If you don\'t select a separator here, the default separator for your language will be used.' =>
             'Επιλέξτε τον διαχωριστικό χαρακτήρα για τα δεδομένα του των αρχείων τύπου CSV (περιεχόμενο στατιστικών στοιχείων και αναζητήσεων). Εάν δεν επιλέξετε έναν διαχωριστικό χαρακτήρα εδώ, θα γίνει χρήση του προεπιλεγμένου διαχωριστικού χαρακτήρα για τη γλώσσα σας.',
         'Select where to display the last views.' => '',
@@ -9268,6 +9275,7 @@ Thanks for your help!
         'Agent',
         'All occurrences',
         'All-day',
+        'An Error Occurred',
         'An error occurred during communication.',
         'An error occurred! Please check the browser error log for more details!',
         'An item with this name is already present.',
