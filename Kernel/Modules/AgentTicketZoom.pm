@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -842,6 +842,12 @@ sub MaskAgentZoom {
     # get needed objects
     my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
     my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+    my $SessionObject = $Kernel::OM->Get('Kernel::System::AuthSession');
+
+    # get SessionData
+    my %SessionData = $SessionObject->GetSessionIDData(
+        SessionID => $Self->{SessionID},
+    );
 
     # Create a list of article sender types for lookup
     my %ArticleSenderTypeList = $ArticleObject->ArticleSenderTypeList();
@@ -865,7 +871,9 @@ sub MaskAgentZoom {
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     # generate shown articles
-    my $Limit = $ConfigObject->Get('Ticket::Frontend::MaxArticlesPerPage');
+    my $Limit = $SessionData{MaxArticlesPerPage}
+        ? $SessionData{MaxArticlesPerPage}
+        : $ConfigObject->Get('Ticket::Frontend::MaxArticlesPerPage');
 
     my $Order = $Self->{ZoomExpandSort} eq 'reverse' ? 'DESC' : 'ASC';
     my $Page;

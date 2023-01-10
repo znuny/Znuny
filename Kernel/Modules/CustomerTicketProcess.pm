@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -820,7 +820,7 @@ sub _GetParam {
     my $ActivityDialogEntityID = $ParamObject->GetParam(
         Param => 'ActivityDialogEntityID',
     );
-    my $ActivityEntityID;
+    my $ActivityEntityID = $ParamObject->GetParam( Param => 'ActivityEntityID' );
     my %ValuesGotten;
     my $Value;
 
@@ -1421,6 +1421,7 @@ sub _OutputActivityDialog {
             Subaction              => 'StoreActivityDialog',
             TicketID               => $Ticket{TicketID} || '',
             ActivityDialogEntityID => $ActivityActivityDialog->{ActivityDialog},
+            ActivityEntityID       => $ActivityActivityDialog->{Activity},
             ProcessEntityID        => $Param{ProcessEntityID}
                 || $Ticket{
                 'DynamicField_'

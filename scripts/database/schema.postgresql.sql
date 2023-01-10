@@ -2854,6 +2854,7 @@ CREATE TABLE calendar_appointment (
 -- ----------------------------------------------------------
 CREATE TABLE calendar_appointment_plugin (
     id serial NOT NULL,
+    dbcrud_uuid VARCHAR (36) NULL,
     appointment_id SMALLINT NOT NULL,
     plugin_key VARCHAR (1000) NOT NULL,
     config VARCHAR NULL,
@@ -2861,7 +2862,8 @@ CREATE TABLE calendar_appointment_plugin (
     create_by INTEGER NOT NULL,
     change_time timestamp(0) NOT NULL,
     change_by INTEGER NOT NULL,
-    PRIMARY KEY(id)
+    PRIMARY KEY(id),
+    CONSTRAINT calendar_appointment_plugin_uuid UNIQUE (dbcrud_uuid)
 );
 -- ----------------------------------------------------------
 --  create table calendar_appointment_ticket
@@ -3190,6 +3192,7 @@ END$$;
 -- ----------------------------------------------------------
 CREATE TABLE oauth2_token_config (
     id serial NOT NULL,
+    dbcrud_uuid VARCHAR (36) NULL,
     name VARCHAR (250) NOT NULL,
     config VARCHAR NOT NULL,
     valid_id SMALLINT NOT NULL,
@@ -3198,13 +3201,15 @@ CREATE TABLE oauth2_token_config (
     change_time timestamp(0) NOT NULL,
     change_by INTEGER NOT NULL,
     PRIMARY KEY(id),
-    CONSTRAINT oauth2_token_config_name UNIQUE (name)
+    CONSTRAINT oauth2_token_config_name UNIQUE (name),
+    CONSTRAINT oauth2_token_config_uuid UNIQUE (dbcrud_uuid)
 );
 -- ----------------------------------------------------------
 --  create table oauth2_token
 -- ----------------------------------------------------------
 CREATE TABLE oauth2_token (
     id serial NOT NULL,
+    dbcrud_uuid VARCHAR (36) NULL,
     token_config_id INTEGER NOT NULL,
     authorization_code VARCHAR NULL,
     token VARCHAR NULL,
@@ -3219,7 +3224,8 @@ CREATE TABLE oauth2_token (
     change_time timestamp(0) NOT NULL,
     change_by INTEGER NOT NULL,
     PRIMARY KEY(id),
-    CONSTRAINT oauth2_token_config_id UNIQUE (token_config_id)
+    CONSTRAINT oauth2_token_config_id UNIQUE (token_config_id),
+    CONSTRAINT oauth2_token_uuid UNIQUE (dbcrud_uuid)
 );
 -- ----------------------------------------------------------
 --  create table mention

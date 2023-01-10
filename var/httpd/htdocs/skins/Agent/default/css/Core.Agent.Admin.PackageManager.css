@@ -1,6 +1,6 @@
 /*
 Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 
 This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (GPL). If you
@@ -71,5 +71,51 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     margin-bottom: 5px;
 }
 
+.PackageRequired > li {
+    margin-bottom: 10px;
+}
+
+.PackageRequired > li:last-child {
+    margin-bottom: 0px;
+}
+
+.PackageRequired > li > p {
+    padding: 3px 5px;
+    margin: 2px 0px 2px 28px;
+    display: inline-block;
+}
+
+.PackageRequired > li h3.Heading {
+    position: relative;
+    padding-left: 28px;
+    font-size: 13px;
+    margin-bottom: 0px;
+}
+
+.PackageRequired > li.CheckResultOK:hover > p {
+    color: #000;
+}
+
+.PackageRequired .CheckResultProblem p {
+    background-color: #EDD3D3;
+}
+
+/**
+ * @subsection  Flag
+ */
+
+.PackageRequired .Flag {
+    position: absolute;
+    left: 0px;
+    top: 2px;
+}
+
+.Flag.OK span {
+    background-color: #008000;
+}
+
+.Flag.Problem span {
+    background-color: #ff0000;
+}
 
 } /* end @media */
