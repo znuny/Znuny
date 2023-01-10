@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.298957315086347;
+    $Self->{Completeness}        = 0.28714794431855;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -255,6 +255,9 @@ sub Data {
         'Edit Attachment' => 'Уреди прикачување',
         'Filter for Attachments' => 'Филтер за Прилози',
         'Filter for attachments' => '',
+        'Related Actions' => '',
+        'Templates' => 'Шаблони',
+        'Templates ↔ Attachments' => '',
         'Filename' => 'Име на датотека',
         'Download file' => 'Преземи документ',
         'Delete this attachment' => 'Избриши го ова прикачување',
@@ -267,6 +270,7 @@ sub Data {
         'Edit Auto Response' => 'Уреди автоматски одговор',
         'Filter for Auto Responses' => 'Филтер за Автоматски Одговори',
         'Filter for auto responses' => '',
+        'Queues ↔ Auto Responses' => '',
         'Response' => 'Одговор',
         'Auto response from' => 'Форма на автоматски одговор',
         'Reference' => 'Референца',
@@ -309,7 +313,6 @@ sub Data {
             'Системската регистрација е сервис на OTRS Групацијата, која овозможува многу предности!',
         'Please note that the use of OTRS cloud services requires the system to be registered.' =>
             '',
-        'Register this system' => '',
         'Here you can configure available cloud services that communicate securely with %s.' =>
             '',
         'Available Cloud Services' => '',
@@ -393,6 +396,8 @@ sub Data {
         'Search' => 'Барај',
         'Wildcards like \'*\' are allowed.' => 'Дозволени се глобални знаци како "*".',
         'Select' => 'Избери',
+        'Customer Users' => '',
+        'Customers ↔ Groups' => '',
         'List (only %s shown - more available)' => '',
         'total' => '',
         'Please enter a search term to look for customers.' => 'Ве молиме внесете термин за пребарување за пронаоѓање на клиентот.',
@@ -415,9 +420,9 @@ sub Data {
         'Select the customer:group permissions.' => 'Селектирај го потрушувачот:групни дозволи.',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Ако ништо не е селектирано, тогаш нема да има дозволи во оваа група(тикети нема да бидат достапни за овој потрошувач).',
-        'Search Results' => 'Резултати од барањето',
         'Customers' => 'Корисници',
         'Groups' => 'Групи',
+        'Search Results' => 'Резултати од барањето',
         'Change Group Relations for Customer' => 'Промени група за односи со клиенти',
         'Change Customer Relations for Group' => 'Промени Потрошувачки Релации за Група',
         'Toggle %s Permission for all' => 'Промени % s Дозвола за сите',
@@ -437,6 +442,9 @@ sub Data {
         'Back to search results' => 'Назад до резултатите од барањето',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Корисник-клиент е потребен за да имаат историјата на корисник и да се најавите преку кориснички панел.',
+        'Customer Users ↔ Customers' => '',
+        'Customer Users ↔ Groups' => '',
+        'Customer Users ↔ Services' => '',
         'List (%s total)' => '',
         'Username' => 'Корисничко име',
         'Email' => 'е-пошта',
@@ -468,7 +476,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
         'Manage Customer User-Customer Relations' => '',
         'Select the customer user:customer relations.' => '',
-        'Customer Users' => '',
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
         'Toggle active state for all' => 'Префрли активна состојба за сите',
@@ -496,6 +503,7 @@ sub Data {
         'Filter for Services' => 'Филтер за Услуги',
         'Filter for services' => '',
         'Services' => 'Услуги',
+        'Service Level Agreements' => 'Договор за Ниво на Услуги',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
         'Dynamic Fields Management' => 'Управување со динамички полиња',
@@ -510,6 +518,7 @@ sub Data {
         'Overwrite existing configurations' => '',
         'Import configurations' => '',
         'Export configurations' => '',
+        'Process Management' => 'Управување со Процес',
         'Dynamic fields ↔ Screens' => '',
         'Dynamic Fields List' => 'Листа со динамички полиња',
         'Dynamic fields per page' => 'Динамички полиња по страници',
@@ -641,6 +650,11 @@ sub Data {
         'This is the default term for the click search.' => '',
         'Initial default search term' => '',
         'This is the default search term when the mask is loaded.' => '',
+        'Attributes' => '',
+        'Attributes for invoker execution (initially default values will be used).' =>
+            '',
+        'Attribute keys' => '',
+        'Custom attribute form for invoker execution.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
         'Web service' => '',
@@ -669,7 +683,7 @@ sub Data {
         'The separator to show between the values if there\'s more than one key configured to be displayed above. If left empty, a single space will be used as separator. Use <space> to add spaces.' =>
             '',
         'Limit' => 'Лимит',
-        'Maximum number of results for web service queries, e.g. for autcomplete selection list.' =>
+        'Maximum number of results for web service queries, e.g. for autocomplete selection list.' =>
             '',
         'Autocomplete min. input length' => '',
         'Minimum length of input for autocomplete field to trigger search.' =>
@@ -985,6 +999,8 @@ sub Data {
             '',
         'Synchronous event triggers would be processed directly during the web request.' =>
             'Синхрони предизвикувачи на настано ќе бидат обработени директно во текот на веб-барање.',
+        'Add all attachments' => '',
+        'Add all attachments to invoker payload.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerEvent.tt
         'GenericInterface Invoker Event Settings for Web Service %s' => '',
@@ -1142,6 +1158,34 @@ sub Data {
         'The user name to be used to access the remote system.' => 'Корисничкото име за пристап за одалечен систем.',
         'BasicAuth Password' => '',
         'The password for the privileged user.' => 'Лозинката за привилегиран корисник.',
+        'JWT authentication: Key file' => '',
+        'ATTENTION: Key file and/or password (if needed, see below) seem to be invalid.' =>
+            '',
+        'Path to private key file (PEM or DER). The key will be used to sign the JWT.' =>
+            '',
+        'JWT authentication: Key file password' => '',
+        'ATTENTION: Password and/or key file (see above) seem to be invalid.' =>
+            '',
+        'JWT authentication: Certificate file' => '',
+        'ATTENTION: Certificate file could not be parsed.' => '',
+        'ATTENTION: Certificate is expired.' => '',
+        'Path to X.509 certificate file (PEM). Data of the certificate can be used for the payload and/or header data of the JWT.' =>
+            '',
+        'JWT authentication: Algorithm' => '',
+        'JWT authentication: TTL' => '',
+        'TTL (time to live) in seconds for the JWT. This value will be used to calculate the expiration date which will be available in placeholders ExpirationDateTimestamp and ExpirationDateString.' =>
+            '',
+        'JWT authentication: Payload' => '',
+        'Payload for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3' =>
+            '',
+        'Available placeholders (prefixed with OTRS_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion.' =>
+            '',
+        'Placeholder usage example: Key1=<OTRS_JWT_ExpirationDateTimestamp>' =>
+            '',
+        'JWT authentication: Additional header data' => '',
+        'Additional header data for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3' =>
+            '',
+        'OAuth2 token configuration' => '',
         'Content type' => '',
         'The default content type added to HTTP header to use for POST and PUT requests.' =>
             '',
@@ -1323,6 +1367,8 @@ sub Data {
         'Create new groups to handle access permissions for different groups of agent (e. g. purchasing department, support department, sales department, ...). ' =>
             'Креирај нови групи за да се справи со дозволи за пристап на различни групи на агент (на пример: одделот за купување, одделот за поддршка, одделот за продажба, ...).',
         'It\'s useful for ASP solutions. ' => 'Корисно е за ASP решенија.',
+        'Agents ↔ Groups' => '',
+        'Roles ↔ Groups' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'System Log' => 'Системско Пријавување',
@@ -1352,7 +1398,6 @@ sub Data {
         'Delete account' => 'Избриши профил',
         'Fetch mail' => 'Отвори пошта',
         'Do you really want to delete this mail account?' => '',
-        'OAuth2 token configuration' => '',
         'Example: mail.example.com' => 'Пример: mail.example.com',
         'IMAP Folder' => 'IMAP Папка',
         'Only modify this if you need to fetch mail from a different folder than INBOX.' =>
@@ -1436,6 +1481,10 @@ sub Data {
             '',
         'Client ID' => '',
         'Client secret' => '',
+        'URL for authorization code' => '',
+        'URL for token by authorization code' => '',
+        'URL for token by refresh token' => '',
+        'Access token scope' => '',
         'Template' => 'Шаблон',
         'This is the template that was used to create this OAuth2 token configuration.' =>
             '',
@@ -1533,7 +1582,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessUninstall.tt
         'Cancel downgrade and go back' => 'Прекинете деградирање и вратете се назад',
-        'Go to OTRS Package Manager' => 'Оди до OTRS Менаџерот за Пакети',
+        'Go to Package Manager' => '',
         'Sorry, but currently you can\'t downgrade due to the following packages which depend on %s:' =>
             'Извинете, но моментално вие неможете да деградирате поради следниве пакети кои зависат од %s:',
         'Vendor' => 'Продавач',
@@ -1602,6 +1651,12 @@ sub Data {
             'Доколку имате повеќе прашања, со задоволство ќе ви одговориме.',
         'Install Package' => 'Инсталирај Пакет',
         'Update Package' => '',
+        'Package' => '',
+        'Required package %s is already installed.' => '',
+        'Required Perl module %s is already installed.' => '',
+        'Required package %s needs to get installed!' => '',
+        'Required package %s needs to get updated to version %s!' => '',
+        'Required Perl module %s needs to get installed or updated!' => '',
         'Continue' => 'Продолжи',
         'Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Ве молиме осигурајте се дека вашата податочна база прифаќа пакети преку %s MB во големина (моментално прифача пакети до %s MB). Ве молиме адапртирајте го max_allowed_packet setting на вашата податочна база во предолед да избегнете грешки.',
@@ -1691,12 +1746,12 @@ sub Data {
         'Edit Priority' => 'Уреди Приоритет',
         'Filter for Priorities' => '',
         'Filter for priorities' => '',
+        'Configure Priority Visibility and Defaults' => '',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             '',
         'This priority is used in the following config settings:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-        'Process Management' => 'Управување со Процес',
         'Filter for Processes' => 'Филтрирај за Процесите',
         'Filter for processes' => '',
         'Create New Process' => 'Креирај нов процес',
@@ -1713,6 +1768,9 @@ sub Data {
             'За да креирате нов процес можете да увезете еден процес кој е извезена од друг систем или да создадете комплетено нов.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'Промени во овие Процесите само што влијајат на однесувањето на системот, ако ги синхронизирате Процесираните податови. Со синхронизирање на Процесите, новите направени промени ќе бидат запишани во Конфигурацијата.',
+        'Access Control Lists (ACL)' => 'Листи за контрола на пристап (ЛКП)',
+        'Generic Agent' => '',
+        'Manage Process Widiget Groups' => '',
         'Processes' => 'Процеси',
         'Process name' => 'Име на процес',
         'Print' => 'Испечати',
@@ -1727,7 +1785,7 @@ sub Data {
         'Activity' => 'Активност',
         'Activity Name' => 'Име Активности',
         'Scope' => '',
-        'Scope EntityID' => '',
+        'Scope Entity ID' => '',
         'This field is required for activities with a scope.' => '',
         'Activity Dialogs' => 'Активност Дијалог',
         'You can assign Activity Dialogs to this Activity by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1766,6 +1824,8 @@ sub Data {
         'Assigned Fields' => 'Доделени Полиња',
         'Communication Channel' => '',
         'Is visible for customer' => '',
+        'Text Template' => 'Шаблон за текст',
+        'Auto fill' => '',
         'Display' => 'Прикажи',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
@@ -1865,6 +1925,13 @@ sub Data {
         'Edit Queue' => 'Измени Ред',
         'Filter for Queues' => 'Филтер за Редици',
         'Filter for queues' => '',
+        'Email Addresses' => '',
+        'PostMaster Mail Accounts' => '',
+        'Salutations' => 'Поздрави',
+        'Signatures' => 'Потписи',
+        'Templates ↔ Queues' => '',
+        'Configure Working Hours' => '',
+        'Configure Queue Related Settings' => '',
         'A queue with this name already exists!' => 'Веќе постои ред со ова име!',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             '',
@@ -1913,93 +1980,6 @@ sub Data {
         'Manage Template-Queue Relations' => 'Менаџирај Шаблон-Ред Релации',
         'Filter for Templates' => 'Филтер за Шаблони',
         'Filter for templates' => '',
-        'Templates' => 'Шаблони',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
-        'System Registration Management' => 'Управување со Регистрации на Системот',
-        'Edit System Registration' => '',
-        'System Registration Overview' => '',
-        'Register System' => '',
-        'Validate OTRS-ID' => '',
-        'Deregister System' => 'Дерегистрирај Систем',
-        'Edit details' => 'Измени детали',
-        'Show transmitted data' => 'Прикажи пренесени податоци',
-        'Deregister system' => 'Дерегистрирај систем',
-        'Overview of registered systems' => 'Преглед на регистрирани системи',
-        'This system is registered with OTRS Group.' => 'Системот е регистриран преку OTRS Групацијата.',
-        'System type' => 'Тип на Систем',
-        'Unique ID' => 'Единствен ID',
-        'Last communication with registration server' => 'Последна комуникација со серверот за регистрација',
-        'System Registration not Possible' => '',
-        'Please note that you can\'t register your system if OTRS Daemon is not running correctly!' =>
-            '',
-        'Instructions' => 'Инструкции',
-        'System Deregistration not Possible' => '',
-        'Please note that you can\'t deregister your system if you\'re using the %s or having a valid service contract.' =>
-            'Ве молиме имајте во предвид дека неможете да го де-регистрирате системот доколку го користите %s или имате валиден контакт со сервис.',
-        'OTRS-ID Login' => 'OTRS-ID Најава',
-        'Read more' => 'Прочитај повеќе',
-        'You need to log in with your OTRS-ID to register your system.' =>
-            'Морате да бидете логирани со вашиот OTRS-ID за да го регистрирате вашиот систем.',
-        'Your OTRS-ID is the email address you used to sign up on the OTRS.com webpage.' =>
-            'Твојот OTRS-ID е адресата на е-пошта со која сте се регистрирале на OTRS.com страната.',
-        'Data Protection' => 'Заштита на личните податоци',
-        'What are the advantages of system registration?' => 'Кои се привилегиите од регистрација на системот?',
-        'You will receive updates about relevant security releases.' => 'Ќе добивате надградби за релевантни безбедносни изданија.',
-        'With your system registration we can improve our services for you, because we have all relevant information available.' =>
-            'Со твојата регистрација на системот можеме да ги подобриме нашите сервиси за вас, бидејќи ги имаме достапни сите информации.',
-        'This is only the beginning!' => 'Ова е само почетокот!',
-        'We will inform you about our new services and offerings soon.' =>
-            'Ќе ве информираме за нашите нови сервиси и понуди наскоро.',
-        'Can I use OTRS without being registered?' => 'Дали може да користам не-регистриран OTRS?',
-        'System registration is optional.' => 'Регистрација на системот е опционална.',
-        'You can download and use OTRS without being registered.' => 'Можете да го превземете и користите OTRS без притоа тој да е регистриран.',
-        'Is it possible to deregister?' => 'Дали е возможно да се де-регистрирате?',
-        'You can deregister at any time.' => 'Можете да го де-регистрирате во било кое време.',
-        'Which data is transfered when registering?' => 'Кои податоци се трансферирани при регистрација?',
-        'A registered system sends the following data to OTRS Group:' => 'Регистрираниот систем ги праќа следните податоци до OTRS Групацијата:',
-        'Fully Qualified Domain Name (FQDN), OTRS version, Database, Operating System and Perl version.' =>
-            'Комплетно Квалификувано Име на Домеин (FQDN), OTRS верзија, Датабаза, Оперативен Систем и Perl верзија.',
-        'Why do I have to provide a description for my system?' => 'Зошто морам да наведам опис за мојот систем?',
-        'The description of the system is optional.' => 'Описот на системот е опционален.',
-        'The description and system type you specify help you to identify and manage the details of your registered systems.' =>
-            'Описот и типот на системот го специфирате за да ви помогне да го идентификуваате и менаџирате деталите на вашите регистрирани системи.',
-        'How often does my OTRS system send updates?' => 'Колку често OTRS системот испраќа надградба?',
-        'Your system will send updates to the registration server at regular intervals.' =>
-            'Вашиот систем ќе праќа надградби до регистрацискиот сервер во регуларни интервали.',
-        'Typically this would be around once every three days.' => 'Обично ова ќе биде наоколу на секои три дена.',
-        'If you deregister your system, you will lose these benefits:' =>
-            'Доколку го дерегистрирате вашиот систем, ќе ги изгубите овие бенефиции:',
-        'You need to log in with your OTRS-ID to deregister your system.' =>
-            'Морате да бидете најавени со вашиот OTRS-ID за да го дерегистрирате вашиот систем.',
-        'OTRS-ID' => 'OTRS-ID',
-        'You don\'t have an OTRS-ID yet?' => 'Сеуште немате OTRS-ID?',
-        'Sign up now' => 'Приклучи се веднаш',
-        'Forgot your password?' => 'Ја заборавивте вашата лозинка?',
-        'Retrieve a new one' => 'Побарај нов',
-        'Next' => 'Следен',
-        'This data will be frequently transferred to OTRS Group when you register this system.' =>
-            'Овие податоци ќе бидат префрлувани до OTRS Групацијата кога ќе го регистрирате вашиот систем.',
-        'Attribute' => 'Атрибут',
-        'FQDN' => 'FQDN',
-        'OTRS Version' => 'OTRS верзија',
-        'Database' => 'База на податоци',
-        'Operating System' => 'Оперативен систем',
-        'Perl Version' => 'Perl Верзија',
-        'Optional description of this system.' => 'Опционален опис на овој систем.',
-        'Register' => 'Регистрирај',
-        'Continuing with this step will deregister the system from OTRS Group.' =>
-            'Продолжување со овој чекер ке го дерегистрира системот од OTRS Групацијата.',
-        'Deregister' => 'Дерегистрирај',
-        'You can modify registration settings here.' => 'Можете да ги измените подесувањата за регистрации тука.',
-        'Overview of Transmitted Data' => '',
-        'There is no data regularly sent from your system to %s.' => 'Нема податоци регуларно пратени од вашиот систем до %s.',
-        'The following data is sent at minimum every 3 days from your system to %s.' =>
-            'Следните податоци се испраќаат минимум на секој 3-ти ден од вашиот систем до %s.',
-        'The data will be transferred in JSON format via a secure https connection.' =>
-            'Податоците ќе бидат пренесени во JSON формат преку сигурносна https конекција.',
-        'System Registration Data' => 'Податоци за Регистрација на Системот',
-        'Support Data' => 'Податоци за Поддршка',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
         'Role Management' => 'Управување со Улоги',
@@ -2009,6 +1989,7 @@ sub Data {
         'Filter for roles' => '',
         'Create a role and put groups in it. Then add the role to the users.' =>
             'Креирај нова улога и додади група во истата. Потоа додади улога на корисниците.',
+        'Agents ↔ Roles' => '',
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             'Нема дефинирано улоги. Ве молиме употребето го копчето \'Додади\' за да креирате нова улога.',
 
@@ -2045,7 +2026,9 @@ sub Data {
         'Edit SLA' => 'Измени SLA',
         'Add SLA' => 'Додади SLA',
         'Filter for SLAs' => '',
+        'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => 'Ве молиме пишувајте само броеви!',
+        'Minimum Time Between Incidents' => 'Минимално време помеѓу проблем',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
         'S/MIME Management' => 'Управување со S/MIME',
@@ -2126,9 +2109,11 @@ sub Data {
         'Service Management' => 'Управување со Сервиси',
         'Add Service' => 'Додади Сервис',
         'Edit Service' => 'Измени Сервис',
+        'Configure Service Visibility and Defaults' => '',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             '',
         'Sub-service of' => 'Под-сервис на',
+        'Criticality' => 'Критично',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
         'Session Management' => 'Управување со Сесии',
@@ -2162,6 +2147,8 @@ sub Data {
         'Filter for states' => '',
         'Attention' => 'Внимание',
         'Please also update the states in SysConfig where needed.' => 'Ве молиме дополнети ја состојбата на SysConfig каде што е потребно.',
+        'Configure State Visibility and Defaults' => '',
+        'Configure State Type Visibility and Defaults' => '',
         'This state is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
         'State type' => 'Тип на состојба',
@@ -2174,20 +2161,13 @@ sub Data {
         'Sending support data to OTRS Group is not possible!' => '',
         'Enable Cloud Services' => '',
         'Enable cloud services' => '',
-        'This data is sent to OTRS Group on a regular basis. To stop sending this data please update your system registration.' =>
-            'Податоците се испратени до OTRS Групацијата на регуларна основа. За да прекинете праќање на податоците ве молиме изменете ја вашата регистрација на системот.',
-        'You can manually trigger the Support Data sending by pressing this button:' =>
-            'Можете мануелно да го активирате испраќањето на Податоците за Поддршка со кликање на оваа копче:',
-        'Send Update' => 'Испрати Надградба',
-        'Currently this data is only shown in this system.' => 'Во моментот само овие податоци се прикажани во овој систем.',
         'A support bundle (including: system registration information, support data, a list of installed packages and all locally modified source code files) can be generated by pressing this button:' =>
             'Збир од Податоците за поддршка(вклучувајки: информации за регистрација на системот, податоци за поддршка, листа од инсталирани пакети и локално изменети датотеки на изворни кодови) можат да бидат генерирани со притискање на ова копче:',
         'Generate Support Bundle' => 'Генерирај Збир од Податоци за поддршка',
         'The Support Bundle has been Generated' => '',
-        'Please choose one of the following options.' => 'Ве молиме изберете една од следните опции.',
-        'Download File' => 'Превземи Датотека',
-        'A file containing the support bundle will be downloaded to the local system. Please save the file and send it to the OTRS Group, using an alternate method.' =>
-            'Датотеката што го содржи збирот од податоците за поддршка ќе биде симнат на вашиот локален систем. Ве молиме зачувајте го податокот и пратете го до OTRS Групацијата.',
+        'A file containing the support bundle will be downloaded to the local system.' =>
+            'Датотеката што го содржи збирот од податоците за поддршка ќе биде симнат на вашиот локален систем.',
+        'Support Data' => 'Податоци за Поддршка',
         'Error: Support data could not be collected (%s).' => 'Грешка: Податоците за поддршка не можат да бидат соберени(%s).',
         'Details' => 'Детали',
 
@@ -2291,7 +2271,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'Дозволи',
-        'Package' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
         'System Maintenance Management' => 'Управување со Одржување на Системот',
@@ -2353,6 +2332,7 @@ sub Data {
         'Add ticket attribute relations' => '',
         'Edit ticket attribute relations' => '',
         'Import CSV or Excel file' => '',
+        'Attribute' => 'Атрибут',
         'Last update' => '',
         'Are you sure you want to delete entry \'%s\'?' => '',
         'Download previously imported file' => '',
@@ -2369,6 +2349,7 @@ sub Data {
         'Edit Type' => 'Измени тип',
         'Filter for Types' => '',
         'Filter for types' => '',
+        'Configure Type Visibility and Defaults' => '',
         'A type with this name already exists!' => 'Веќе постои тип со исто име!',
         'This type is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             '',
@@ -2412,6 +2393,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
         'Add new Appointment' => '',
+        'Appointments' => '',
         'Calendars' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentEdit.tt
@@ -2565,6 +2547,9 @@ sub Data {
         'Email ticket' => 'Е-маил тикет',
         'New phone ticket from %s' => 'Нов телефонски тикет од %s',
         'New email ticket to %s' => 'Нов е-маил тикет до %s',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
+        'No tickets found.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardProductNotify.tt
         '%s %s is available!' => '%s %s е достапно!',
@@ -2744,7 +2729,6 @@ sub Data {
         'Here you can select additional agents which should receive a notification regarding the new article.' =>
             'Тука може да избереш дополнителни агенти кои треба да примаат нотификации за новиот натпис..',
         'Text will also be received by' => '',
-        'Text Template' => 'Шаблон за текст',
         'Setting a template will overwrite any text or attachment.' => 'Доколку изберете темплејт, текстот и прикачувањата ќе се пребришат.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
@@ -2854,6 +2838,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
         'Remove active filters for this screen.' => 'Одстрани ги активните филтери за овој приказ.',
+        'Remove mention' => '',
         'Tickets per page' => 'Тикети по страна',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
@@ -2960,6 +2945,12 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
         'This message is being processed. Already tried to send %s time(s). Next try will be %s.' =>
             '',
+        'This message contains events' => '',
+        'This message contains an event' => '',
+        'Show more information' => '',
+        'Start: %s, End: %s' => '',
+        'Calendar events details' => '',
+        'Calendar event details' => '',
         'To open links in the following article, you might need to press Ctrl or Cmd or Shift key while clicking the link (depending on your browser and OS).' =>
             'За да отворите линкови во следните натписи , можеби ќе треба да притиснете Ctrl или Cmd или Shift копчето додека кликнувате на линкот (во зависност од вашиот интернет пребарувач и оперативен систем).',
         'Close this message' => 'Затвори ја оваа порака.',
@@ -2970,6 +2961,9 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
         'Linked Objects' => 'Поврзани Објекти ',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/MentionsTable.tt
+        'Mentions' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Архивирај',
@@ -3056,6 +3050,7 @@ sub Data {
         'Your 2 Factor Token' => '',
         'Log In' => 'Најави се',
         'Not yet registered?' => 'Се уште не сте регистрирани?',
+        'Sign up now' => 'Приклучи се веднаш',
         'Back' => 'Назад',
         'Request New Password' => '',
         'Your User Name' => 'Вашето Корисничко Име',
@@ -3158,6 +3153,7 @@ sub Data {
         'Phone' => 'Телефон',
         'Web site' => '',
         'Community' => '',
+        'Next' => 'Следен',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => '',
@@ -3209,6 +3205,7 @@ sub Data {
             '',
         'Repeat Password' => '',
         'Generated password' => '',
+        'Database' => 'База на податоци',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmysql.tt
         'Passwords do not match' => '',
@@ -3611,9 +3608,6 @@ sub Data {
             '',
         'Yes, but require at least one active notification method.' => '',
 
-        # Perl Module: Kernel/Modules/AdminAttachment.pm
-        'Attachment added!' => 'Додади прилог!',
-
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
 
@@ -3860,6 +3854,13 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminGenericInterfaceTransportHTTPREST.pm
         'Need valid Subaction!' => '',
         'This field should be an integer.' => '',
+        'Invalid key file and/or password (if needed, see below).' => '',
+        'Invalid password and/or key file (see above).' => '',
+        'Certificate is expired.' => '',
+        'Certificate file could not be parsed.' => '',
+        'Please enter a time in seconds (at least 10 seconds).' => '',
+        'Please enter data in expected form (see explanation of field).' =>
+            '',
         'File or Directory not found.' => '',
 
         # Perl Module: Kernel/Modules/AdminGenericInterfaceWebservice.pm
@@ -3907,6 +3908,7 @@ sub Data {
         'Customer user of the ticket' => '',
         'All recipients of the first article' => '',
         'All recipients of the last article' => '',
+        'All users who are mentioned in a ticket' => '',
         'Invisible to customer' => '',
         'Visible to customer' => '',
 
@@ -4068,12 +4070,6 @@ sub Data {
         'Change Queue Relations for Template' => 'Измени Релации на Редици за Шаблон',
         'Change Template Relations for Queue' => 'Измени Шаблонски Релации за Редица',
 
-        # Perl Module: Kernel/Modules/AdminRegistration.pm
-        'Production' => 'Продукција',
-        'Test' => '',
-        'Training' => 'Тренинг',
-        'Development' => '',
-
         # Perl Module: Kernel/Modules/AdminRole.pm
         'Role updated!' => 'Улога е ажурирана!',
         'Role added!' => 'Додадена улога!',
@@ -4104,7 +4100,6 @@ sub Data {
         'Relation deleted!' => '',
         'Impossible to delete relation!' => '',
         'Certificate %s could not be read!' => '',
-        'Needed Fingerprint' => '',
         'Handle Private Certificate Relations' => '',
 
         # Perl Module: Kernel/Modules/AdminSalutation.pm
@@ -4168,7 +4163,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminTemplate.pm
         'Template updated!' => '',
-        'Template added!' => '',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
         'Change Attachment Relations for Template' => 'Измени Релации на Прилози за Шаблон',
@@ -4359,6 +4353,10 @@ sub Data {
         'Pending' => 'Во очекување',
         'Reminder Reached' => 'Потсетникот е постигнат',
         'My Locked Tickets' => 'Мои Заклучени Тикети',
+
+        # Perl Module: Kernel/Modules/AgentTicketMentionView.pm
+        'New mention' => '',
+        'My Mentions' => '',
 
         # Perl Module: Kernel/Modules/AgentTicketMerge.pm
         'Can\'t merge ticket with itself!' => '',
@@ -4631,6 +4629,9 @@ sub Data {
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
             '',
 
+        # Perl Module: Kernel/Modules/Mentions.pm
+        '%s users will be mentioned' => '',
+
         # Perl Module: Kernel/Modules/PublicCalendar.pm
         'No %s!' => '',
         'No such user!' => '',
@@ -4748,6 +4749,9 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Dashboard/EventsTicketCalendar.pm
         'The start time of a ticket has been set after the end time!' => '',
 
+        # Perl Module: Kernel/Output/HTML/Dashboard/MyLastChangedTickets.pm
+        'Shown Tickets' => 'Прикажани Тикети ',
+
         # Perl Module: Kernel/Output/HTML/Dashboard/News.pm
         'Can\'t connect to OTRS News server!' => '',
         'Can\'t get OTRS News from server!' => '',
@@ -4760,7 +4764,6 @@ sub Data {
         'Can\'t connect to %s!' => '',
 
         # Perl Module: Kernel/Output/HTML/Dashboard/TicketGeneric.pm
-        'Shown Tickets' => 'Прикажани Тикети ',
         'Shown Columns' => 'Прикажи Колони',
         'filter not active' => '',
         'filter active' => '',
@@ -4877,6 +4880,10 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Preferences/Language.pm
         '(in process)' => '',
 
+        # Perl Module: Kernel/Output/HTML/Preferences/MaxArticlesPerPage.pm
+        'Max. number of articles per page must be between 1 and 1000 or empty.' =>
+            '',
+
         # Perl Module: Kernel/Output/HTML/Preferences/OutOfOffice.pm
         'Please specify an end date that is after the start date.' => '',
 
@@ -4960,6 +4967,11 @@ sub Data {
         'Locked Tickets Reminder Reached' => 'Заклучен Тикет Потсетник',
         'Locked Tickets Total' => 'Вкупно заклучени билети',
 
+        # Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
+        'Total mentions' => '',
+        'Total new mentions' => '',
+        'New mentions' => '',
+
         # Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
         'Owned Tickets New' => '',
         'Owned Tickets Reminder Reached' => '',
@@ -5012,6 +5024,12 @@ sub Data {
         # Perl Module: Kernel/System/Calendar/Plugin/Ticket/Create.pm
         'On the date' => '',
 
+        # Perl Module: Kernel/System/CalendarEvents.pm
+        'on' => '',
+        'of year' => '',
+        'of month' => '',
+        'all-day' => '',
+
         # Perl Module: Kernel/System/Console/Command/Dev/Tools/Config2Docbook.pm
         'Configuration Options Reference' => '',
         'This setting can not be changed.' => '',
@@ -5043,6 +5061,14 @@ sub Data {
         'This field is required or' => 'Ова поле е задолжително или',
         'The field content is too long!' => 'Содржината на полето е премногу долга!',
         'Maximum size is %s characters.' => 'Максимална големина е %s карактери.',
+
+        # Perl Module: Kernel/System/MailQueue.pm
+        'Error while validating Message data.' => '',
+        'Error while validating Sender email address.' => '',
+        'Error while validating Recipient email address.' => '',
+
+        # Perl Module: Kernel/System/Mention.pm
+        'LastMention' => '',
 
         # Perl Module: Kernel/System/NotificationEvent.pm
         'Couldn\'t read Notification configuration file. Please make sure the file is valid.' =>
@@ -5237,6 +5263,7 @@ sub Data {
         'PostgreSQL 9.2 or higher is required.' => '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
+        'Operating System' => 'Оперативен систем',
         'OTRS Disk Partition' => 'OTRS диск партиција',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskSpace.pm
@@ -5271,6 +5298,9 @@ sub Data {
             '',
         'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
             '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
+        'Perl Version' => 'Perl Верзија',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/Swap.pm
         'Free Swap Space (%)' => 'Слободен swap простор (%)',
@@ -5429,6 +5459,9 @@ sub Data {
         'UI - Special Statistics' => '',
         'Agents using custom main menu ordering' => '',
         'Agents using favourites for the admin overview' => '',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
+        'OTRS Version' => 'OTRS верзија',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
         'Webserver' => 'Сервер',
@@ -5745,14 +5778,19 @@ sub Data {
         'Uses richtext for viewing and editing: articles, salutations, signatures, standard templates, auto responses and notifications.' =>
             '',
         'Defines the URL rich text editor path.' => '',
-        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            '',
-        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
-            '',
         'Defines the default CSS used in rich text editors.' => '',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.).' =>
             '',
         'Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.) in customer interface.' =>
+            '',
+        'Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            '',
+        'Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).' =>
+            '',
+        'Defines the selectable font sizes in the rich text editor.' => '',
+        'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines additional plugins for use in the rich text editor.' => '',
+        'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
         'Disable autocomplete in the login screen.' => '',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
@@ -6745,7 +6783,7 @@ sub Data {
             '',
         'Shows a list of all the involved agents on this ticket, in the ticket free text screen of the agent interface.' =>
             '',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket free text screen of the agent interface.' =>
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket free text screen of the agent interface.' =>
             '',
         'Defines if the note in the ticket free text screen of the agent interface is visible for the customer by default.' =>
             '',
@@ -6883,7 +6921,7 @@ sub Data {
             '',
         'Shows a list of all the involved agents on this ticket, in the close ticket screen of the agent interface.' =>
             '',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the close ticket screen of the agent interface.' =>
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the close ticket screen of the agent interface.' =>
             '',
         'Defines if the note in the close ticket screen of the agent interface is visible for the customer by default.' =>
             '',
@@ -6927,7 +6965,7 @@ sub Data {
             '',
         'Shows a list of all the involved agents on this ticket, in the ticket note screen of the agent interface.' =>
             '',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket note screen of the agent interface.' =>
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket note screen of the agent interface.' =>
             '',
         'Defines if the note in the ticket note screen of the agent interface is visible for the customer by default.' =>
             '',
@@ -6971,7 +7009,7 @@ sub Data {
             '',
         'Shows a list of all the involved agents on this ticket, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
             '',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket owner screen of a zoomed ticket in the agent interface.' =>
             '',
         'Defines if the note in the ticket owner screen of the agent interface is visible for the customer by default.' =>
             '',
@@ -7015,7 +7053,7 @@ sub Data {
             '',
         'Shows a list of all the involved agents on this ticket, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
             '',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket pending screen of a zoomed ticket in the agent interface.' =>
             '',
         'Defines if the note in the ticket pending screen of the agent interface is visible for the customer by default.' =>
             '',
@@ -7059,7 +7097,7 @@ sub Data {
             '',
         'Shows a list of all the involved agents on this ticket, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
             '',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket priority screen of a zoomed ticket in the agent interface.' =>
             '',
         'Defines if the note in the ticket priority screen of the agent interface is visible for the customer by default.' =>
             '',
@@ -7103,7 +7141,7 @@ sub Data {
             '',
         'Shows a list of all the involved agents on this ticket, in the ticket responsible screen of the agent interface.' =>
             '',
-        'Shows a list of all the possible agents (all agents with note permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface.' =>
+        'Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface.' =>
             '',
         'Defines if the note in the ticket responsible screen of the agent interface is visible for the customer by default.' =>
             '',
@@ -7390,6 +7428,7 @@ sub Data {
             '',
         'Parameters for the dashboard backend of the ticket stats of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
+        'MyLastChangedTickets dashboard widget.' => '',
         'Parameters for the dashboard backend of the upcoming events widget of the agent interface. "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
         'Parameters for the dashboard backend of the queue overview widget of the agent interface. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "QueuePermissionGroup" is not mandatory, queues are only listed if they belong to this permission group if you enable it. "States" is a list of states, the key is the sort order of the state in the widget. "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
@@ -7787,6 +7826,8 @@ sub Data {
             '',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
             '',
+        'Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic.' =>
+            '',
         'Enables support for huge XML data in load_xml calls of CPAN library XML::LibXML. This should only be enabled if absolutely needed. Disabling this option (default) protects against denial of service through entity expansion attacks. Before enabling this option ensure that alternative measures to protect the application against this type of attack have been taken.' =>
             '',
         'Shows a link in the menu to create a unit test for the current ticket.' =>
@@ -7800,7 +7841,15 @@ sub Data {
             '',
         'Ticket event module that stores values of the selected web service record into the configured additional dynamic fields.' =>
             '',
-        'It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
+        'It might happen that a dynamic field of type WebserviceDropdown or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.' =>
+            '',
+        'Mapping for field values received from form. This setting is necessary for the correct identification of the form fields. Key means value type, value means possible representation in views.' =>
+            '',
+        'Mapping for field values received from form which have multiple values. This setting is needed when the view shows the values of a particular field in a custom way (e.g. selectable customer user in ticket creation view). This setting is always respected first. There is also the possibility to specify an order for checking fields. (Field of customer user in ticket creation view can be saved as CustomerUser or just simple e-mail. First we need to check if CustomerKey is present (CustomerKey -> ID of CustomerUser). If not, then simply take plain text (CustomerTicketText -> E-mail)).' =>
+            '',
+        'Options and default field set for attributes. Values of this setting will always be passed as simple form value without possibility to further configure it in AdminDynamicField view. The keys with which the form values will be sent to the invoker can be edited in the "Default" section of this setting.' =>
+            '',
+        'Options and default field set for selectable attributes. Values which will be passed to invoker (ID or Name or both) can be configured in AdminDynamicField view. The keys with which the form values (ID or Name) will be sent to the invoker can be edited in the "Default" section of this setting. Example usage for field Queue: Field with selected ID and Name will send QueueID = 3 and Queue = Raw.' =>
             '',
         'Template for the out-of-office message shown to the user in the frontend. Placeholders for out-of-office information can be used via ###PlaceholderName###. Possible placeholders are: StartYear, StartMonth, StartDay, EndYear, EndMonth, EndDay, DaysRemaining.' =>
             '',
@@ -7863,12 +7912,13 @@ sub Data {
         'Handles changes to data of modules which use the DBCRUD base module.' =>
             '',
         'Cache settings for DBCRUD modules (default: 1 day).' => '',
-        'Loader module registration for AdminOAuth2TokenManagement.' => '',
         'Displays notifications for missing and expired OAuth2 tokens.' =>
             '',
         'Authentication type for sendmail module. If \'OAuth2 token\' has been selected, SendmailModule::OAuth2TokenConfigName must also be configured.' =>
             '',
         'Name of the OAuth2 token configuration to use for sending mails if \'OAuth2 token\' was configured in SendmailModule::AuthenticationType.' =>
+            '',
+        'Hosts that need a separate info about authentication method and token (instead of both in one line). Most commonly needed for Office 365 and Outlook.' =>
             '',
         'This option enables a dropdown which will be displayed instead of the time unit input field.' =>
             '',
@@ -7880,7 +7930,6 @@ sub Data {
             '',
         'Agent interface notification module to see the number of tickets an agent is owner for. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             '',
-        'Loader module registration for AgentAppointmentEdit.' => '',
         'Defines the next possible ticket states for calendar based tickets.' =>
             '',
         'Defines the default next state.' => '',
@@ -7908,8 +7957,34 @@ sub Data {
             '',
         'Creates the calendar-based tickets regularly.' => '',
         'Cleans up the calendar-based tickets regularly.' => '',
+        'Maximum number of quoted lines to be added to forwarded messages.' =>
+            '',
+        'Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig.' =>
+            '',
+        'Maximum length of displayed attachment filenames in the article preview of ticket zoom view.' =>
+            '',
+        'General settings for autocompletion in rich text editor.' => '',
+        'Rich text editor configuration for autocompletion module.' => '',
+        'Rich text editor configuration for autocompletion module to support templates.' =>
+            '',
+        'Defines which notifications about mentions should be sent.' => '',
+        'Defines if the toolbar mention icon should count mentions.' => '',
+        'These groups won\'t be selectable to be mentioned.' => '',
+        'Limits number of users (per article) that will be marked as mentioned and be notified. Users (and users from mentioned groups) that exceed this limit will silently be ignored.' =>
+            '',
+        'Frontend registration of triggers for mention plugin of CKEditor.' =>
+            '',
+        'Frontend registration of input/output templates for mention plugin of CKEditor.' =>
+            '',
+        'Event handler for mentions.' => '',
+        'Parameters for the dashboard backend of the last mention widget.' =>
+            '',
+        'Agent interface notification module to show the number of mentions.' =>
+            '',
+        'Module to grant access to the mentioned agents of a ticket.' => '',
+        'Mapping of non-standard time zones to official ones.' => '',
 
-        # XML Definition: scripts/database/otrs-initial_insert.xml
+        # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'невалиден-привремено',
         'Group for default access.' => '',
         'Group of all administrators.' => '',
@@ -8020,6 +8095,7 @@ sub Data {
         'You will receive a notification each time a reminder time is reached for one of your appointments.' =>
             '',
         'Ticket email delivery failure notification' => '',
+        'Mention notification' => '',
 
         # JS File: var/httpd/htdocs/js/Core.AJAX.js
         'Error during AJAX communication. Status: %s, Error: %s' => '',
@@ -8398,6 +8474,8 @@ sub Data {
         'The following files are not allowed to be uploaded: %s' => '',
         'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s' =>
             '',
+        'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s' =>
+            '',
         'The following files were already uploaded and have not been uploaded again: %s' =>
             '',
         'No space left for the following files: %s' => '',
@@ -8466,7 +8544,6 @@ Thanks for your help!
         'AJAX functions for notification event transport web service.' =>
             '',
         'AJAX interface for the web service dynamic field backends.' => '',
-        'Access Control Lists (ACL)' => 'Листи за контрола на пристап (ЛКП)',
         'AccountedTime' => '',
         'Activation of dynamic fields for screens.' => '',
         'ActivityID' => '',
@@ -8486,11 +8563,10 @@ Thanks for your help!
         'Admin' => 'Админ',
         'Admin Area.' => '',
         'Admin Notification' => 'Админ известување',
-        'Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect' =>
+        'Admin configuration dialog for dynamic field types WebserviceDropdown and WebserviceMultiselect' =>
             '',
         'Admin modules overview.' => '',
         'Admin.' => '',
-        'AdminOAuth2TokenManagement' => '',
         'Administration' => '',
         'Agent Customer Search' => '',
         'Agent Customer Search.' => '',
@@ -8500,8 +8576,6 @@ Thanks for your help!
         'Agent Statistics.' => '',
         'Agent User Search' => '',
         'Agent User Search.' => '',
-        'Agents ↔ Groups' => '',
-        'Agents ↔ Roles' => '',
         'All CustomerIDs of a customer user.' => '',
         'All customer users of a CustomerID' => '',
         'All escalated tickets' => 'Сите тикети кои ескалираат',
@@ -8528,7 +8602,6 @@ Thanks for your help!
         'Appointment list' => '',
         'Appointment list.' => '',
         'Appointment notifications' => '',
-        'Appointments' => '',
         'Arabic (Saudi Arabia)' => '',
         'ArticleTree' => '',
         'Attachment Name' => 'Име на Прикаченото',
@@ -8651,9 +8724,6 @@ Thanks for your help!
         'Customer User Information Center search.' => '',
         'Customer User Information Center.' => '',
         'Customer User-Customer Relations' => '',
-        'Customer Users ↔ Customers' => '',
-        'Customer Users ↔ Groups' => '',
-        'Customer Users ↔ Services' => '',
         'Customer preferences.' => '',
         'Customer ticket overview' => '',
         'Customer ticket search.' => '',
@@ -8662,7 +8732,6 @@ Thanks for your help!
         'CustomerID search' => '',
         'CustomerName' => '',
         'CustomerUser' => '',
-        'Customers ↔ Groups' => '',
         'Czech' => '',
         'Danish' => '',
         'Dashboard overview.' => '',
@@ -8681,6 +8750,7 @@ Thanks for your help!
             '',
         'Determines the strings that will be shown as recipient (To:) of the ticket in the customer interface. For Queue as CustomerPanelSelectionType, "<Queue>" shows the names of the queues, and for SystemAddress, "<Realname> <<Email>>" shows the name and email of the recipient.' =>
             '',
+        'Development' => '',
         'Disable cloud services' => '',
         'Display communication log entries.' => '',
         'Down' => 'Доле',
@@ -8703,7 +8773,6 @@ Thanks for your help!
         'Edit Customer Users.' => '',
         'Edit appointment' => '',
         'Edit customer company' => '',
-        'Email Addresses' => '',
         'Email Outbound' => '',
         'Email Resend' => '',
         'Email communication channel.' => '',
@@ -8788,6 +8857,7 @@ Thanks for your help!
         'Inline' => '',
         'Input' => '',
         'Interface language' => '',
+        'Internal' => '',
         'Internal communication channel.' => '',
         'International Workers\' Day' => 'Меѓународниот ден на трудот',
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
@@ -8799,6 +8869,7 @@ Thanks for your help!
         'Korean' => '',
         'Language' => 'Јазик',
         'Large' => 'Голем',
+        'Last Mentions' => '',
         'Last Screen Overview' => '',
         'Last customer subject' => '',
         'Last view - limit' => '',
@@ -8849,13 +8920,16 @@ Thanks for your help!
         'Manage existing sessions.' => '',
         'Manage support data.' => '',
         'Manage system files.' => '',
-        'Manage system registration.' => '',
         'Manage tasks triggered by event or time based execution.' => '',
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Означи како Спам!',
         'Mark this ticket as junk!' => '',
         'Mattermost Username' => '',
+        'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'Медиум',
+        'Mentioned in article' => '',
+        'Mentioned in ticket' => '',
+        'Mentions.' => '',
         'Merge this ticket and all articles into another ticket' => '',
         'Merged Ticket (%s/%s) to (%s/%s).' => '',
         'Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>.' => '',
@@ -8867,6 +8941,7 @@ Thanks for your help!
         'My Queues' => 'Мои редици',
         'My Services' => '',
         'My Tickets.' => '',
+        'My last changed tickets' => '',
         'NameX' => '',
         'New Ticket' => 'Нов Тикет',
         'New Tickets' => 'Нови Тикети',
@@ -8927,7 +9002,6 @@ Thanks for your help!
         'Portuguese' => '',
         'Portuguese (Brasil)' => '',
         'PostMaster Filters' => '',
-        'PostMaster Mail Accounts' => '',
         'Print this ticket' => 'Печати го тикетот',
         'Priorities' => 'Приоритети',
         'Process Management Activity Dialog GUI' => '',
@@ -8946,7 +9020,6 @@ Thanks for your help!
         'Public Calendar' => '',
         'Public calendar.' => '',
         'Queue view' => '',
-        'Queues ↔ Auto Responses' => '',
         'Refresh interval' => '',
         'Reminder Tickets' => 'Потсетник за Билети',
         'Removed subscription for user "%s".' => '',
@@ -8956,13 +9029,11 @@ Thanks for your help!
         'Responsible Tickets' => '',
         'Responsible Tickets.' => '',
         'Right' => '',
-        'Roles ↔ Groups' => '',
         'Romanian' => '',
         'Running Process Tickets' => '',
         'Russian' => '',
         'S/MIME Certificates' => 'S/MIME Сертификати',
         'SMS' => '',
-        'Salutations' => 'Поздрави',
         'Schedule a maintenance period.' => '',
         'Screen after new ticket' => 'Екран по нов тикет',
         'Search Customer' => '',
@@ -8979,6 +9050,8 @@ Thanks for your help!
         'Select how many tickets should be shown in overviews by default.' =>
             '',
         'Select the main interface language.' => '',
+        'Select the maximum articles per page shown in TicketZoom. System default value will apply when entered empty value.' =>
+            '',
         'Select the separator character used in CSV files (stats and searches). If you don\'t select a separator here, the default separator for your language will be used.' =>
             'Избери спеаратор кој ќе го користис во CSV датотека (статистика и пребарувања). Ако не изберете сепаратор тука, стандардно сепаратор за вашиот јазик ќе се користи.',
         'Select where to display the last views.' => '',
@@ -9000,7 +9073,6 @@ Thanks for your help!
         'Sent notification to "%s".' => '',
         'Serbian Cyrillic' => '',
         'Serbian Latin' => '',
-        'Service Level Agreements' => 'Договор за Ниво на Услуги',
         'Service view' => '',
         'ServiceView' => '',
         'Set a new password by filling in your current password and a new one.' =>
@@ -9013,13 +9085,14 @@ Thanks for your help!
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             '',
         'Shows information on how to start OTRS Daemon' => '',
+        'Shows last mention of tickets.' => '',
         'Signature data.' => '',
-        'Signatures' => 'Потписи',
         'Simple' => '',
         'Skin' => '',
         'Slovak' => '',
         'Slovenian' => '',
         'Small' => 'Мал',
+        'Snippet' => '',
         'Software Package Manager.' => '',
         'Solution time' => '',
         'SolutionDiffInMin' => '',
@@ -9048,8 +9121,6 @@ Thanks for your help!
         'System Configuration Deployment' => '',
         'System Configuration Group' => '',
         'System Maintenance' => '',
-        'Templates ↔ Attachments' => '',
-        'Templates ↔ Queues' => '',
         'Textarea' => '',
         'Thai' => '',
         'The PGP signature is expired.' => '',
@@ -9137,8 +9208,8 @@ Thanks for your help!
         'We are performing scheduled maintenance. We should be back online shortly.' =>
             '',
         'Web Services' => 'Веб Услуги',
+        'Web service (Dropdown)' => '',
         'Web service (Multiselect)' => '',
-        'Web service (Text)' => '',
         'Web service dynamic field AJAX interface' => '',
         'Webservice' => '',
         'Yes, but hide archived tickets' => '',
@@ -9198,6 +9269,7 @@ Thanks for your help!
         'Agent',
         'All occurrences',
         'All-day',
+        'An Error Occurred',
         'An error occurred during communication.',
         'An error occurred! Please check the browser error log for more details!',
         'An item with this name is already present.',
@@ -9243,7 +9315,6 @@ Thanks for your help!
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
-        'Data Protection',
         'Date/Time',
         'Day',
         'Dec',
@@ -9472,7 +9543,6 @@ Thanks for your help!
         'Support Data information was successfully sent.',
         'Switch to desktop mode',
         'Switch to mobile mode',
-        'System Registration',
         'Team',
         'Th',
         'The browser you are using is too old.',
@@ -9482,6 +9552,7 @@ Thanks for your help!
         'The following files were already uploaded and have not been uploaded again: %s',
         'The item you\'re currently viewing is part of a not-yet-deployed configuration setting, which makes it impossible to edit it in its current state. Please wait until the setting has been deployed. If you\'re unsure what to do next, please contact your system administrator.',
         'The key must not be empty.',
+        'The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s',
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',

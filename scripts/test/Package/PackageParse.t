@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,14 +18,14 @@ use Kernel::System::VariableCheck qw(:all);
 # get package object
 my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
 
-# get OTRS Version
-my $OTRSVersion = $Kernel::OM->Get('Kernel::Config')->Get('Version');
+# get Framework Version
+my $Version = $Kernel::OM->Get('Kernel::Config')->Get('Version');
 
 # leave only major and minor level versions
-$OTRSVersion =~ s{ (\d+ \. \d+) .+ }{$1}msx;
+$Version =~ s{ (\d+ \. \d+) .+ }{$1}msx;
 
 # add x as patch level version
-$OTRSVersion .= '.x';
+$Version .= '.x';
 
 my @Tests = (
     {
@@ -60,14 +60,14 @@ for a package file.',
     <otrs_package version="1.0">
       <Name>TestPackage</Name>
       <Version>1.0.1</Version>
-      <Vendor>OTRS AG</Vendor>
-      <URL>https://otrs.com/</URL>
+      <Vendor>Znuny GmbH</Vendor>
+      <URL>https://znuny.org/</URL>
       <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
       <ChangeLog>2013-08-14 New package (some test &lt; &gt; &amp;).</ChangeLog>
       <Description Lang="en">A test package (some test &lt; &gt; &amp;).</Description>
       <Description Lang="de">Ein Test Paket (some test &lt; &gt; &amp;).</Description>
       <ModuleRequired Version="1.112">Encode</ModuleRequired>
-      <Framework>' . $OTRSVersion . '</Framework>
+      <Framework>' . $Version . '</Framework>
       <BuildDate>2005-11-10 21:17:16</BuildDate>
       <BuildHost>yourhost.example.com</BuildHost>
       <Filelist>
@@ -109,7 +109,7 @@ for my $Test (@Tests) {
 
         $Self->Is(
             $Structure{Vendor}->{Content},
-            'OTRS AG',
+            'Znuny GmbH',
             "PackageParse() - $Test->{Name} | Vendor",
         );
     }

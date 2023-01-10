@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -43,36 +43,25 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=Admin");
 
         my $NavigationModule = $ConfigObject->Get('Frontend::NavigationModule');
-        my @NavigationCheck;
-
-        # Check if needed frontend module is registered in sysconfig.
-        if ( $ConfigObject->Get('Frontend::Module')->{AdminGenericAgent} ) {
-            @NavigationCheck = (
-                'Általános ügyintéző',
-                'Dinamikus mezők',
-                'Folyamatkezelés',
-                'Hozzáférés-vezérlési listák (ACL)',
-                'Webszolgáltatások',
-            );
-        }
-        else {
-            @NavigationCheck = (
-                'Dinamikus mezők',
-                'Folyamatkezelés',
-                'Hozzáférés-vezérlési listák (ACL)',
-                'Webszolgáltatások',
-            );
-        }
+        my @NavigationCheck  = (
+            'Csomagkezelő',
+            'Munkamenet-kezelés',
+            'Naptárak',
+            'Rendszerbeállítások',
+            'Rendszerkarbantartás',
+            'Rendszernapló',
+            'SQL doboz',
+        );
 
         $Selenium->execute_script(
-            "\$('.WidgetSimple:eq(7) ul')[0].scrollIntoView(true);",
+            "\$('.WidgetSimple:eq(8) ul')[0].scrollIntoView(true);",
         );
 
         # Check if items sort well.
         my $Count = 0;
         for my $Item (@NavigationCheck) {
             my $Navigation = $Selenium->execute_script(
-                "return \$('.WidgetSimple:eq(7) ul li:eq($Count) a span.Title').text().trim()"
+                "return \$('.WidgetSimple:eq(8) ul li:eq($Count) a span.Title').text().trim()"
             );
 
             $Navigation =~ s/\n\s+/@/g;
@@ -86,11 +75,11 @@ $Selenium->RunTest(
 
             # Add item to favourite.
             $Selenium->execute_script(
-                "\$('.WidgetSimple:eq(7) ul li:eq($Count) a span.AddAsFavourite').trigger('click')"
+                "\$('.WidgetSimple:eq(8) ul li:eq($Count) a span.AddAsFavourite').trigger('click')"
             );
 
             my $Favourite = $Selenium->execute_script(
-                "return \$('.WidgetSimple:eq(7) ul li:eq($Count) a span.AddAsFavourite').attr('data-module')"
+                "return \$('.WidgetSimple:eq(8) ul li:eq($Count) a span.AddAsFavourite').attr('data-module')"
             );
 
             $Selenium->WaitFor(

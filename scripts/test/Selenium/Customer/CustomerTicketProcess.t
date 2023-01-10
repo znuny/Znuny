@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -233,7 +233,7 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminProcessManagement");
 
         # Import test Selenium Process.
-        my $Location = $ConfigObject->Get('Home') . "/scripts/test/sample/ProcessManagement/CustomerTicketProcess.yml";
+        my $Location = $Selenium->{Home} . "/scripts/test/sample/ProcessManagement/CustomerTicketProcess.yml";
 
         $Selenium->WaitFor(
             JavaScript =>
@@ -353,11 +353,10 @@ $Selenium->RunTest(
             "DynamicField filtered options count",
         );
 
-        my $SubjectRandom  = 'Subject' . $HelperObject->GetRandomID();
-        my $ContentRandom  = 'Content' . $HelperObject->GetRandomID();
-        my $AttachmentName = "StdAttachment-Test1.txt";
-        my $AttachmentLocation
-            = $Kernel::OM->Get('Kernel::Config')->Get('Home') . "/scripts/test/sample/StdAttachment/$AttachmentName";
+        my $SubjectRandom      = 'Subject' . $HelperObject->GetRandomID();
+        my $ContentRandom      = 'Content' . $HelperObject->GetRandomID();
+        my $AttachmentName     = "StdAttachment-Test1.txt";
+        my $AttachmentLocation = $Selenium->{Home} . "/scripts/test/sample/StdAttachment/$AttachmentName";
 
         $Selenium->find_element( "#Subject",  'css' )->send_keys($SubjectRandom);
         $Selenium->find_element( "#RichText", 'css' )->send_keys($ContentRandom);

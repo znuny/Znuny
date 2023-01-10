@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -39,8 +39,6 @@ sub Param {
     my ( $Self, %Param ) = @_;
 
     my $PreferencesKey   = $Self->{ConfigItem}->{PrefKey};
-    my $TimeZones        = Kernel::System::DateTime->TimeZoneList();
-    my %TimeZones        = map { $_ => $_ } sort @{$TimeZones};
     my $SelectedTimeZone = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => $PreferencesKey );
 
     # Use stored time zone only if it's valid. It can happen that user preferences store an old-style offset which is
@@ -54,6 +52,13 @@ sub Param {
     }
 
     $SelectedTimeZone ||= Kernel::System::DateTime->UserDefaultTimeZoneGet();
+
+    my $TimeZones = Kernel::System::DateTime->TimeZoneList(
+
+        # Ensure that a selected obsolete (but still valid) time zone shows up in the selection.
+        IncludeTimeZone => $SelectedTimeZone,
+    );
+    my %TimeZones = map { $_ => $_ } sort @{$TimeZones};
 
     my @Params = ();
     push(

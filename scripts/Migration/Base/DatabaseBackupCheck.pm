@@ -1,12 +1,12 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::NamePod)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Pod::NamePod)
 
 package scripts::Migration::Base::DatabaseBackupCheck;    ## no critic
 
@@ -59,21 +59,17 @@ sub CheckPreviousRequirement {
         print "\n        Warning: this script can make changes to your database which are irreversible.\n"
             . "        Make sure you have properly backed up complete database before continuing.\n\n";
     }
-    else {
-        print "\n";
-    }
 
-    print '        Did you backup the database? [Y]es/[N]o: ';
+    print "\n        Did you backup the database? [Y]es/[N]o: ";
 
     my $Answer = <>;
 
     # Remove white space from input.
-    $Answer =~ s{\s}{}smx;
+    $Answer =~ s{\s}{}g;
 
     # Continue only if user answers affirmatively.
-    if ( $Answer =~ m{^y}i ) {
+    if ( $Answer =~ m{\Ay(?:es)?\z}i ) {
         print "\n";
-
         return 1;
     }
 

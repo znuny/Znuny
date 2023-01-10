@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -14,6 +14,7 @@ use warnings;
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
+    'Kernel::Config',
     'Kernel::Output::HTML::Layout',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
@@ -52,6 +53,7 @@ sub Run {
         );
     }
 
+    my $View        = $ParamObject->GetParam( Param => 'View' );
     my $Subaction   = $ParamObject->GetParam( Param => 'Subaction' );
     my $SearchTerms = $ParamObject->GetParam( Param => 'SearchTerms' ) || '';
     my $TicketID    = $ParamObject->GetParam( Param => 'TicketID' );
@@ -62,7 +64,17 @@ sub Run {
         $UserType =~ s/Interface//;
     }
 
-    my %GetParam = $Self->_GetParams();
+    my %GetParam = $ParamObject->GetParams(
+        Raw => 1
+    );
+
+    my $FieldValues = $Self->_SerializeFieldValues(
+        Params       => \%GetParam,
+        View         => $View,
+        DynamicField => $DynamicFieldName
+    );
+
+    $GetParam{FieldValues} = $FieldValues;
 
     # get the dynamic fields for this screen
     my $DynamicFieldList = $DynamicFieldObject->DynamicFieldListGet(
@@ -317,28 +329,130 @@ sub _Test {
     return $Result;
 }
 
-sub _GetParams {
+sub _SerializeFieldValues {
     my ( $Self, %Param ) = @_;
 
-    my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+    my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
-    my %GetParams;
+    my $FieldMapping       = $ConfigObject->Get('DynamicFieldWebservice::FieldMapping')       // {};
+    my $CustomFieldMapping = $ConfigObject->Get('DynamicFieldWebservice::CustomFieldMapping') // {};
 
-    my @ParamNames = $ParamObject->GetParamNames();
-    for my $ParamName (@ParamNames) {
-        $GetParams{$ParamName} = $ParamObject->GetParam( Param => $ParamName );
+    my $AdditionalAttributesConfig           = $ConfigObject->Get('DynamicFieldWebservice::AdditionalAttributes') // {};
+    my $StandardAttributesConfig             = $AdditionalAttributesConfig->{Standard}                            // {};
+    my $SelectableAttributesConfig           = $AdditionalAttributesConfig->{Selectable}                          // {};
+    my $DefaultStandardAttributes            = $StandardAttributesConfig->{Default}                               // {};
+    my $DefaultSelectableAttributes          = $SelectableAttributesConfig->{Default}                             // {};
+    my $AdditionalSelectableAttributesConfig = $SelectableAttributesConfig->{Option}                              // {};
 
-        my @Param = $ParamObject->GetArray(
-            Param => $ParamName,
-            Raw   => 1,
-        );
+    my $Params       = $Param{Params};
+    my $View         = $Param{View};
+    my $DynamicField = $Param{DynamicField};
 
-        if ( @Param && scalar @Param gt 1 ) {
-            $GetParams{$ParamName} = \@Param;
+    my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
+        Name => $DynamicField,
+    );
+    return if !IsHashRefWithData($DynamicFieldConfig);
+
+    my $AdditionalAttributes        = $DynamicFieldConfig->{Config}->{AdditionalAttributes};
+    my $AdditionalAttributesMapping = $DynamicFieldConfig->{Config}->{AdditionalAttributeKeys};
+
+    my @FormFields = grep { $_ =~ m{FormFields\[.*\]\[ID\]} } keys %{$Params};
+
+    my %CustomFields;
+
+    CUSTOMFIELD:
+    for my $CustomField ( sort keys %{$CustomFieldMapping} ) {
+        SELECTOR:
+        for my $Selector ( sort keys %{ $CustomFieldMapping->{$CustomField} } ) {
+            my ($SelectorFormField) = grep { $_ =~ m{\Q$Selector\E} } @FormFields;
+            next SELECTOR if !$SelectorFormField;
+
+            my $SelectedID = $Params->{$SelectorFormField};
+            next SELECTOR if !$SelectedID;
+
+            for my $Priority ( sort keys %{ $CustomFieldMapping->{$CustomField}->{$Selector} } ) {
+                my $PriorityValueField = $CustomFieldMapping->{$CustomField}->{$Selector}->{$Priority};
+                my $SelectorValueField = $Params->{ "FormFields[" . $PriorityValueField . "_$SelectedID][ID]" };
+                $CustomFields{$CustomField} = $SelectorValueField;
+
+                next CUSTOMFIELD if $SelectorValueField;
+            }
         }
     }
 
-    return %GetParams;
+    my %FormattedFields;
+    FORMFIELD:
+    for my $FormField (@FormFields) {
+        my ($Field) = $FormField =~ m{FormFields\[(.*?)\]}ms;
+
+        my $Key;
+
+        FIELD:
+        for my $MappedField ( sort keys %{$FieldMapping} ) {
+            next FIELD if !grep { $_ eq $Field } @{ $FieldMapping->{$MappedField} };
+
+            $Key = $MappedField;
+            last FIELD;
+        }
+
+        if ($Key) {
+            next FORMFIELD if !grep { $Key eq $_ } @{$AdditionalAttributes};
+
+            if ( $AdditionalSelectableAttributesConfig->{$Key} ) {
+
+                # Queue needs to be clean.
+                if (
+                    $Key =~ m{Queue}
+                    && $AdditionalAttributesMapping->{Queue}->{ID}
+                    )
+                {
+                    my ($QueueCleanUp) = $Params->{$FormField} =~ /(.*)\|\|/ms;
+                    $FormattedFields{ $DefaultSelectableAttributes->{$Key}->{ID} } = $QueueCleanUp
+                        // $Params->{$FormField};
+                }
+
+                TYPE:
+                for my $Type (qw(ID Name)) {
+                    my $LocalType = "FormFields[$Field][$Type]";
+
+                    next TYPE if $Key eq "Queue" && $Type eq "ID";
+                    next TYPE if $FormattedFields{ $DefaultSelectableAttributes->{$Key}->{$Type} };
+                    next TYPE if !$AdditionalAttributesMapping->{$Key}->{$Type};
+
+                    $FormattedFields{ $DefaultSelectableAttributes->{$Key}->{$Type} }
+                        = $Params->{$LocalType} eq '-' ? '' : $Params->{$LocalType};
+                }
+                next FORMFIELD;
+            }
+
+            next FORMFIELD if $FormattedFields{ $DefaultStandardAttributes->{$Key} };
+
+            # If custom field fetched value set custom, if not take value from params.
+            my $ParamFieldValue = $Params->{$FormField};
+            my $FormattedField  = $ParamFieldValue;
+            if ( $CustomFields{$Key} ) {
+                $FormattedField = $CustomFields{$Key};
+            }
+            elsif ( $ParamFieldValue eq '-' ) {
+                $FormattedField = '';
+            }
+
+            $FormattedFields{ $DefaultStandardAttributes->{$Key} } = $FormattedField;
+        }
+        elsif (
+            $Field =~ m{DynamicField_}ms
+            && grep { $_ eq 'DynamicField' } @{$AdditionalAttributes}
+            )
+        {
+            $FormattedFields{$Field} = $Params->{$FormField};
+            next FORMFIELD;
+        }
+
+        delete( $Params->{$FormField} );
+    }
+
+    return \%FormattedFields;
 }
 
 1;

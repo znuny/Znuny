@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -195,9 +195,24 @@ my $DynamicFieldID3 = $DynamicFieldObject->DynamicFieldAdd(
     ValidID => 1,
     UserID  => 1,
 );
+my $DynamicFieldID4 = $DynamicFieldObject->DynamicFieldAdd(
+    InternalField => 0,
+    Name          => 'Field4' . $RandomID,
+    Label         => 'a description',
+    FieldOrder    => 10000,
+    FieldType     => 'TextArea',
+    ObjectType    => 'Ticket',
+    Config        => {
+        Name        => 'AnyName',
+        Description => 'Description for Dynamic Field.',
+    },
+    Reorder => 1,
+    ValidID => 1,
+    UserID  => 1,
+);
 
 # sanity checks
-for my $DynamicFieldID ( $DynamicFieldID1, $DynamicFieldID2, $DynamicFieldID3 ) {
+for my $DynamicFieldID ( $DynamicFieldID1, $DynamicFieldID2, $DynamicFieldID3, $DynamicFieldID4 ) {
     $Self->True(
         $DynamicFieldID,
         "DynamicFieldADD() - $DynamicFieldID"
@@ -238,6 +253,32 @@ my $DFSetSuccess = $DynamicFieldBackendObject->ValueSet(
 $Self->True(
     $DFSetSuccess,
     "DynamicField ValueSet() for DynamicFieldID $DynamicFieldID3 - with true"
+);
+
+# set a value for TextArea dynamic field
+my $DFSetSuccess2 = $DynamicFieldBackendObject->ValueSet(
+    DynamicFieldConfig => {
+        ID         => $DynamicFieldID4,
+        FieldType  => 'TextArea',
+        ObjectType => 'Ticket',
+        Config     => {
+            Name        => 'AnyName',
+            Description => 'Description for Dynamic Field.',
+        },
+    },
+    ObjectID => $TicketID,
+    Value    => 'A text with
+
+line breaks
+and a few more line
+
+breaks.',
+    UserID => 1,
+);
+
+$Self->True(
+    $DFSetSuccess2,
+    "DynamicField ValueSet() for DynamicFieldID $DynamicFieldID4 - with true"
 );
 
 # get ticket again now with dynamic fields
@@ -1040,6 +1081,43 @@ my @Tests = (
         Article        => 1,
         CheckFromValue => 1,
     },
+
+    {
+        Name   => 'Correct Ticket->DynamicField_Field4_Value to Body',
+        Config => {
+            UserID => $UserID,
+            Ticket => \%Ticket,
+            Config => {
+                Title                => 'ProcessManagement::TransitionAction::TicketCreate::13::' . $RandomID,
+                CustomerID           => '123465',
+                CustomerUser         => 'customer@example.com',
+                OwnerID              => 1,
+                TypeID               => 1,
+                ResponsibleID        => 1,
+                PendingTime          => '2014-12-23 23:05:00',
+                SenderType           => 'agent',
+                CommunicationChannel => 'Internal',
+                IsVisibleForCustomer => 0,
+                ContentType          => 'text/plain; charset=ISO-8859-15',
+                Subject              => '<OTRS_CUSTOMER_BODY>',
+                Body                 => "<OTRS_TICKET_DynamicField_Field4$RandomID" . '_Value>',
+                HistoryType          => 'OwnerUpdate',
+                HistoryComment       => 'Some free text!',
+                NoAgentNotify        => 0,
+                LinkAs               => 'Parent',
+                TimeUnit             => 123,
+            },
+        },
+        Success          => 1,
+        Article          => 1,
+        HTMLContentCheck => 1,
+        HTMLText         => 'A text with<br/>
+<br/>
+line breaks<br/>
+and a few more line<br/>
+<br/>
+breaks.',
+    },
 );
 
 my %ExcludedArtributes = (
@@ -1223,6 +1301,14 @@ for my $Test (@Tests) {
                         DynamicFieldConfig => $DynamicFieldConfig,
                         Value              => $DisplayValue,
                     );
+
+                    if ( $Test->{HTMLContentCheck} ) {
+                        $Self->Is(
+                            $Test->{HTMLText},
+                            $DisplayValueStrg->{Value},
+                            "$ModuleName - Test:'$Test->{Name}' | Attribute: $Attribute has the expected value:"
+                        );
+                    }
 
                     $Self->Is(
                         $Test->{Config}->{Config}->{$Attribute},

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -138,7 +138,7 @@ $Selenium->RunTest(
         }
 
         # Add certificate.
-        my $CertLocation = $ConfigObject->Get('Home')
+        my $CertLocation = $Selenium->{Home}
             . "/scripts/test/sample/SMIME/SMIMECertificate-smimeuser1.crt";
 
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($CertLocation);
@@ -160,7 +160,7 @@ $Selenium->RunTest(
         }
 
         # Add private key.
-        my $PrivateLocation = $ConfigObject->Get('Home')
+        my $PrivateLocation = $Selenium->{Home}
             . "/scripts/test/sample/SMIME/SMIMEPrivateKey-smimeuser1.pem";
 
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($PrivateLocation);
@@ -217,13 +217,13 @@ $Selenium->RunTest(
 
             # Check for test created Certificate and Private key download file name.
             my $Response = $UserAgent->get(
-                $BaseURL . "Action=AdminSMIME;Subaction=Download;Type=$TestSMIME;Filename=4d400195.0"
+                $BaseURL . "Action=AdminSMIME;Subaction=Download;Type=$TestSMIME;Filename=097aa832.0"
             );
             if ( $ResponseLogin->is_success() && $Response->is_success() ) {
 
                 $Self->True(
-                    index( $Response->header('content-disposition'), "4d400195-$TestSMIME.pem" ) > -1,
-                    "Download file name is correct - 4d400195-$TestSMIME.pem",
+                    index( $Response->header('content-disposition'), "097aa832-$TestSMIME.pem" ) > -1,
+                    "Download file name is correct - 097aa832-$TestSMIME.pem",
                 );
             }
 

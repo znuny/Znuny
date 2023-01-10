@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -629,7 +629,8 @@ sub _ShowEdit {
     # get Activity Dialog information
     my $ActivityDialogData = $Param{ActivityDialogData} || {};
 
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $LayoutObject           = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $StandardTemplateObject = $Kernel::OM->Get('Kernel::System::StandardTemplate');
 
     # get parameter from web browser
     my $GetParam = $Self->_GetParams();
@@ -675,18 +676,18 @@ sub _ShowEdit {
 
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-    # add service and SLA fields, if option is activated in sysconfig.
+    # add service and SLA fields, if option is activated in SysConfig.
     if ( $ConfigObject->Get('Ticket::Service') ) {
         $AvailableFieldsList->{Service} = 'ServiceID';
         $AvailableFieldsList->{SLA}     = 'SLAID';
     }
 
-    # add ticket type field, if option is activated in sysconfig.
+    # add ticket type field, if option is activated in SysConfig.
     if ( $ConfigObject->Get('Ticket::Type') ) {
         $AvailableFieldsList->{Type} = 'TypeID';
     }
 
-    # add responsible field, if option is activated in sysconfig.
+    # add responsible field, if option is activated in SysConfig.
     if ( $ConfigObject->Get('Ticket::Responsible') ) {
         $AvailableFieldsList->{Responsible} = 'ResponsibleID';
     }
@@ -894,6 +895,23 @@ sub _ShowEdit {
         Class       => 'Modernize',
     );
 
+    if ( $LayoutObject->{BrowserRichText} ) {
+
+        $Param{RichTextCSS} = 'RichText';
+
+        # set up rich text editor
+        $LayoutObject->SetRichTextParameters(
+            Data => \%Param,
+        );
+    }
+
+    $LayoutObject->Block(
+        Name => 'ArticleContainer',
+        Data => {
+            %Param
+        },
+    );
+
     my @ChannelList = $Kernel::OM->Get('Kernel::System::CommunicationChannel')->ChannelList();
 
     # Allow only Internal and Phone communication channels, this has to be hard coded at the moment.
@@ -919,6 +937,32 @@ sub _ShowEdit {
 
     if ( !$ConfigObject->Get('Ticket::Frontend::NeedAccountedTime') ) {
         $TimeUnitsSelectionList{1} = 'Show Field';
+    }
+
+    # create TimeUnits selection
+    my %StandardTemplates = $StandardTemplateObject->StandardTemplateList(
+        Valid => 1,
+        Type  => 'ProcessManagement',
+    );
+
+    if (%StandardTemplates) {
+        $Param{StandardTemplateSelection} = $LayoutObject->BuildSelection(
+            Data         => \%StandardTemplates,
+            ID           => 'StandardTemplateID',
+            Name         => 'StandardTemplateID',
+            SelectedID   => $Param{StandardTemplateID} || '',
+            Class        => 'Modernize',
+            PossibleNone => 1,
+            Sort         => 'AlphanumericValue',
+            Translation  => 1,
+            Multiple     => 1,
+            Max          => 200,
+        );
+
+        $LayoutObject->Block(
+            Name => 'StandardTemplateContainer',
+            Data => \%Param,
+        );
     }
 
     # create TimeUnits selection

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -156,7 +156,7 @@ $Selenium->RunTest(
             my $Value = $ComposeData{$Field};
 
             if ( $Field eq 'FileUpload' ) {
-                $Value = $Kernel::OM->Get('Kernel::Config')->Get('Home')
+                $Value = $Selenium->{Home}
                     . "/scripts/test/sample/StdAttachment/$ComposeData{$Field}";
 
                 # It's necessary to hide drag&drop upload and show input field.

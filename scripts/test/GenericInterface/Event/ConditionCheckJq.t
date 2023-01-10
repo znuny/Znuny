@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -146,6 +146,29 @@ my @Tests = (
             },
         },
         Expected => undef,
+    },
+    {
+        Name => 'Regexp _ConditionCheck(jq found queue Postmaster by "master")',
+        Data => {
+            ConditionLinking => 'and',
+            Condition        => {
+                1 => {
+                    Type   => 'and',
+                    Fields => {
+                        'jq#.QueueData.Name' => {
+                            Match => '(master|Raw)',
+                            Type  => 'Regexp',
+                        },
+                    },
+                },
+            },
+            Data => {
+                QueueData => {
+                    Name => 'Postmaster',
+                },
+            },
+        },
+        Expected => 1,
     },
 );
 

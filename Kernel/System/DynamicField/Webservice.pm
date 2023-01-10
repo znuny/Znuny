@@ -1,11 +1,10 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
-## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::SpellCheck)
 
 package Kernel::System::DynamicField::Webservice;
 
@@ -55,7 +54,7 @@ sub new {
     ];
 
     $Self->{SupportedDynamicFieldTypes} = {
-        WebserviceText        => 1,
+        WebserviceDropdown    => 1,
         WebserviceMultiselect => 1,
     };
 
@@ -79,7 +78,7 @@ Tests given web-service configuration by connecting and querying the web-service
             SearchTerms              => $Param{SearchTerms},
         },
         DynamicFieldName => 'DFName1',      # optional
-        FieldType        => 'WebserviceText',
+        FieldType        => 'WebserviceDropdown',
         UserID           => 1,
         UserType         => 'Agent',                                        # optional 'Agent' or 'Customer'
     );
@@ -153,6 +152,7 @@ sub Test {
             $Data->{DisplayValue} = $DisplayValue;
         }
     }
+
     $Result->{Search}          = $Self->{Search};
     $Result->{Data}            = $Results;
     $Result->{StoredValue}     = \@StoredValue;
@@ -206,6 +206,7 @@ sub Autocomplete {
         SearchType         => 'LIKE',
         UserID             => $Param{UserID},
         UserType           => $Param{UserType},
+        FieldValues        => $Param{GetParam}->{FieldValues},
     );
 
     return [] if !defined $Results;
@@ -462,6 +463,10 @@ sub Search {
     }
 
     my @RequestResults;
+
+    if ( IsHashRefWithData( $Param{FieldValues} ) ) {
+        %Data = ( %Data, %{ $Param{FieldValues} } );
+    }
 
     # Use one request per search term if InvokerGet is being used because
     # some web services don't report the needed data when using InvokerSearch for this.
@@ -988,7 +993,6 @@ sub _DisplayValueAssemble {
     if ( !defined $BackendConfig->{DisplayedValues} || !length $BackendConfig->{DisplayedValues} ) {
         $DisplayKeyValuesConfig = $BackendConfig->{StoredValue};
     }
-
     return if !$DisplayKeyValuesConfig;
 
     my @DisplayKeyValues = split /\s*,\s*/, $DisplayKeyValuesConfig;
@@ -1035,8 +1039,10 @@ This function is only needed for WebserviceMultiselect (multiselect).
 
     my $Value = $DynamicFieldWebserviceObject->Template(
         DynamicFieldConfig => \%DynamicFieldConfig,
-        Value              => ['first','second', 'third'],
-        ContentType        => 'ASCII', # HTML is default
+        Value              => ['first','second', 'third'], # or a scalar value
+        Type               => 'Value', # optional; or 'Title'
+        ContentType        => 'ASCII', # optional; 'HTML' is default,
+        TemplateType       => 'default', # optional; or: 'separator', 'wordwrap', 'list'
     );
 
 Returns:
@@ -1099,8 +1105,10 @@ sub Template {
     my $TemplateType = $Param{DynamicFieldConfig}->{Config}->{TemplateType} || 'default';
 
     if ( $Param{LayoutObject}->{Action} && $Param{Type} ) {
-        $ContentType  = $ActionTemplateMap{ $Param{LayoutObject}->{Action} }->{ $Param{Type} }->{ContentType};
-        $TemplateType = $ActionTemplateMap{ $Param{LayoutObject}->{Action} }->{ $Param{Type} }->{TemplateType};
+        $ContentType
+            = $ActionTemplateMap{ $Param{LayoutObject}->{Action} }->{ $Param{Type} }->{ContentType} || $ContentType;
+        $TemplateType
+            = $ActionTemplateMap{ $Param{LayoutObject}->{Action} }->{ $Param{Type} }->{TemplateType} || $TemplateType;
     }
 
     if ( $Param{ContentType} ) {
@@ -1299,7 +1307,7 @@ sub _BackendConfigGet {
     if ( !$Self->{SupportedDynamicFieldTypes}->{ $Param{DynamicFieldConfig}->{FieldType} } ) {
         $LogObject->Log(
             Priority => 'error',
-            Message  => "Unsupported dynamic field type $Param{DynamicField}->{FieldType}.",
+            Message  => "Unsupported dynamic field type $Param{DynamicFieldConfig}->{FieldType}.",
         );
         return;
     }
@@ -1308,7 +1316,7 @@ sub _BackendConfigGet {
     my %DefaultValues = (
         Backend         => 'DirectRequest',
         StoredValue     => 'Key',
-        DisplayedValues => 'Value',
+        DisplayedValues => '',
         DefaultValue    => '',
         Link            => '',
     );

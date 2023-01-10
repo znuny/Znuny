@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -22,7 +22,7 @@ our @ObjectDependencies = (
 sub Configure {
     my ( $Self, %Param ) = @_;
 
-    $Self->Description('Create an OTRS package (opm) file from an OTRS package source (sopm) file.');
+    $Self->Description('Create a package (opm) file from a package source (sopm) file.');
     $Self->AddOption(
         Name        => 'version',
         Description => "Specify the version to be used (overrides version from sopm file).",
@@ -40,7 +40,7 @@ sub Configure {
     );
     $Self->AddArgument(
         Name        => 'source-path',
-        Description => "Specify the path to an OTRS package source (sopm) file that should be built.",
+        Description => "Specify the path to a package source (sopm) file that should be built.",
         Required    => 1,
         ValueRegex  => qr/.*/smx,
     );

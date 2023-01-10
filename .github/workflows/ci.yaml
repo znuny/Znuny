@@ -3,54 +3,161 @@ name: CI
 
 # Controls when the action will run.
 on:
-  - push
-  - pull_request
-  - workflow_dispatch
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      unittest_options:
+        description: 'Execute UnitTests with these options. e.g. --test scripts/test/Ticket'
+        default: ''
+        required: false
+        type: string
 
 jobs:
-  znunycodepolicy:
+  ZnunyCodePolicy:
     name: ZnunyCodePolicy
     runs-on: ubuntu-latest
     container: debian:10-slim
-
     steps:
-      - name: Install dependencies
-        run: |
-          apt-get update -y
-          apt-get upgrade -y
-          apt-get install -y cpanminus make gcc npm git gettext libxml-libxml-perl libyaml-perl libxml2-utils libdatetime-perl libtemplate-perl libapache-dbi-perl
-
       - name: Check out repository code
+        uses: actions/checkout@v3
         env:
-          GIT_DEPTH: "1"
-        uses: actions/checkout@v2
+          fetch-depth: "1"
         with:
           path: znuny
 
       - name: Check out code policy
+        uses: actions/checkout@v3
         env:
-          GIT_DEPTH: "1"
-        uses: actions/checkout@v2
+          fetch-depth: "1"
         with:
           repository: znuny/ZnunyCodePolicy
           path: codepolicy
 
+      - name: Install dependencies
+        run: znuny/.github/workflows/ci/dependencies.sh
+
       - name: Prepare code policy
         run: |
-          cpanm Code::TidyAll Perl::Critic
-          codepolicy/bin/otrs.CodePolicy.pl --install
+          cpanm --verbose Algorithm::Diff Code::TidyAll Perl::Critic Perl::Tidy Pod::POM XML::Parser
+          codepolicy/bin/znuny.CodePolicy.pl --install-eslint
 
       - name: Run code policy
         run: |
           cd "${GITHUB_WORKSPACE}/znuny"
-          "${GITHUB_WORKSPACE}/codepolicy/bin/otrs.CodePolicy.pl" --all
+          git init
+          "${GITHUB_WORKSPACE}/codepolicy/bin/znuny.CodePolicy.pl" --all-files --mode ci
 
-  unittests:
-    name: UnitTests
+  CPANAudit:
+    name: CPANAudit
     runs-on: ubuntu-latest
     container: debian:10-slim
-    needs: znunycodepolicy
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        env:
+          fetch-depth: "1"
 
+      - name: Install dependencies
+        run: .github/workflows/ci/dependencies.sh
+
+      - name: Setup Znuny
+        run: .github/workflows/ci/setup.sh
+
+      - name: Check CPANAudit
+        run: |
+          su -c "bin/otrs.Console.pl Dev::Code::CPANAudit" - otrs
+          exit $?
+
+  Contributors:
+    name: Contributors
+    runs-on: ubuntu-latest
+    container: debian:10-slim
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        env:
+          fetch-depth: "0"
+
+      - name: Install dependencies
+        run: .github/workflows/ci/dependencies.sh
+
+      - name: Setup Znuny
+        run: .github/workflows/ci/setup.sh
+
+      - name: Check Contributors
+        run: |
+          git init
+          git config --global --add safe.directory ${GITHUB_WORKSPACE}
+          su -c "bin/otrs.Console.pl Dev::Code::ContributorsListUpdate" - otrs
+          if [ "$(git diff --exit-code AUTHORS.md)" ]; then echo 'The ContributorsList is not updated.' && exit 1; else echo 'The ContributorsList is updated.' && exit 0; fi
+
+  Database-Schema:
+    name: Database:Schema
+    runs-on: ubuntu-latest
+    container: debian:10-slim
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        env:
+          fetch-depth: "1"
+
+      - name: Install dependencies
+        run: .github/workflows/ci/dependencies.sh
+
+      - name: Setup Znuny
+        run: .github/workflows/ci/setup.sh
+
+      - name: Check Database:Schema
+        run: |
+          git init
+          git config --global --add safe.directory ${GITHUB_WORKSPACE}
+          SCHEMA_FILE=$(find scripts/database -type f -name '*schema.xml')
+          SCHEMA_FILE_NAME=$(find scripts/database -type f -name '*schema.xml' | cut -d/ -f3- | sed 's/\.xml$//')
+          echo "Found schema file $SCHEMA_FILE"
+          echo "Found schema file name $SCHEMA_FILE_NAME"
+          su -c "bin/otrs.Console.pl Dev::Tools::Database::XML2SQL --database-type=all --source-path=${SCHEMA_FILE} --target-directory=scripts/database --target-filename=$SCHEMA_FILE_NAME --split-files" - otrs
+          git diff --exit-code scripts/database/*schema*
+          if [ "$(git diff --exit-code scripts/database/*schema*)" ]; then echo 'The database schemas are not updated.' && exit 1; else echo 'All database schemas are updated.' && exit 0; fi
+
+  Database-InitialInsert:
+    name: Database:InitialInsert
+    runs-on: ubuntu-latest
+    container: debian:10-slim
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        env:
+          fetch-depth: "1"
+
+      - name: Install dependencies
+        run: .github/workflows/ci/dependencies.sh
+
+      - name: Setup Znuny
+        run: .github/workflows/ci/setup.sh
+
+      - name: Check Database:InitialInsert
+        run: |
+          git init
+          git config --global --add safe.directory ${GITHUB_WORKSPACE}
+          INITIAL_INSERT_FILE=$(find scripts/database -type f -name '*initial_insert.xml')
+          INITIAL_INSERT_FILE_NAME=$(find scripts/database -type f -name '*initial_insert.xml' | cut -d/ -f3- | sed 's/\.xml$//')
+          echo "Found initial insert file $INITIAL_INSERT_FILE"
+          echo "Found initial insert file name $INITIAL_INSERT_FILE_NAME"
+          su -c "bin/otrs.Console.pl Dev::Tools::Database::XML2SQL --database-type=all --source-path=$INITIAL_INSERT_FILE --target-directory=scripts/database --target-filename=$INITIAL_INSERT_FILE_NAME" - otrs
+          git diff --exit-code scripts/database/*initial_insert*
+          if [ "$(git diff --exit-code scripts/database/*initial_insert*)" ]; then echo 'The database initial inserts are not updated.' && exit 1; else echo 'All database initial inserts are updated.' && exit 0; fi
+
+  Migration:
+    name: Migration
+    runs-on: ubuntu-latest
+    container: debian:10-slim
+    env:
+      DB: mysql
+      MYSQL_USER: "otrs"
+      MYSQL_ROOT_PASSWORD: "secret"
+      MYSQL_PASSWORD: "secret"
+      MYSQL_DATABASE: "otrs"
     services:
       mariadb:
         image: mariadb:10
@@ -59,66 +166,466 @@ jobs:
           MYSQL_ROOT_PASSWORD: "secret"
           MYSQL_PASSWORD: "secret"
           MYSQL_DATABASE: "otrs"
-
     steps:
       - name: Check out repository code
+        uses: actions/checkout@v3
         env:
-          GIT_DEPTH: "1"
-        uses: actions/checkout@v2
+          fetch-depth: "1"
 
       - name: Install dependencies
-        run: |
-          uname -a
-          apt-get update
-          apt-get upgrade -y
-          apt-get install -y libapache2-mod-perl2 libdbd-mysql-perl \
-            libtimedate-perl libnet-dns-perl libnet-ldap-perl \
-            libio-socket-ssl-perl libpdf-api2-perl libdbd-mysql-perl \
-            libsoap-lite-perl libtext-csv-xs-perl libjson-xs-perl \
-            libapache-dbi-perl libxml-libxml-perl libxml-libxslt-perl libspreadsheet-xlsx-perl \
-            libyaml-perl libarchive-zip-perl libcrypt-eksblowfish-perl \
-            libencode-hanextra-perl libmail-imapclient-perl libtemplate-perl \
-            libdatetime-perl libmoo-perl apache2 mariadb-client gnupg2 liblocale-po-perl \
-            libhash-merge-perl \
-            cpanminus make gcc
+        run: .github/workflows/ci/dependencies.sh
 
-      - name: Setup Apache and system user
-        run: |
-          a2dismod mpm_event mpm_worker
-          a2enmod perl deflate filter headers mpm_prefork
-          useradd -d /opt/otrs -c 'OTRS user' -g www-data -s /bin/bash -M otrs
+      - name: Setup Znuny
+        run: .github/workflows/ci/setup.sh
 
-      - name: Setup OTRS
+      - name: Check Migration
+        run: |
+          MIGRATEFILE=$(find scripts -type f -name 'MigrateToZnuny*.pl' -or -type f -name 'DBUpdate-to-*.pl')
+          su -c "$MIGRATEFILE --non-interactive" - otrs
+          if [ "$?" -ne 0 ]; then echo "The migration was not successful." && exit 1; else echo "The migration was successful." && exit 0; fi
+
+  RPMSpec:
+    name: RPMSpec
+    runs-on: ubuntu-latest
+    container: debian:10-slim
+    env:
+      DB: mysql
+      MYSQL_USER: "otrs"
+      MYSQL_ROOT_PASSWORD: "secret"
+      MYSQL_PASSWORD: "secret"
+      MYSQL_DATABASE: "otrs"
+    services:
+      mariadb:
+        image: mariadb:10
         env:
           MYSQL_USER: "otrs"
           MYSQL_ROOT_PASSWORD: "secret"
           MYSQL_PASSWORD: "secret"
           MYSQL_DATABASE: "otrs"
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        env:
+          fetch-depth: "1"
+
+      - name: Install dependencies
+        run: .github/workflows/ci/dependencies.sh
+
+      - name: Setup Znuny
+        run: .github/workflows/ci/setup.sh
+
+      - name: Check RPMSpec
         run: |
-          # yamllint disable rule:line-length
-          ln -sf $PWD /opt/otrs
-          ln -s /opt/otrs/scripts/apache2-httpd.include.conf /etc/apache2/sites-enabled/zzz_otrs.conf
-          apachectl start
-          cp Kernel/Config.pm.dist Kernel/Config.pm
-          sed -i 's/\(.*{DatabaseHost}.*\)127.0.0.1/\1'"mariadb"'/' /opt/otrs/Kernel/Config.pm
-          sed -i 's/\(.*{Database}.*\)otrs/\1'"${MYSQL_DATABASE}"'/' /opt/otrs/Kernel/Config.pm
-          sed -i 's/\(.*{DatabaseUser}.*\)otrs/\1'"${MYSQL_USER}"'/' /opt/otrs/Kernel/Config.pm
-          sed -i 's/\(.*{DatabasePw}.*\)some-pass/\1'"${MYSQL_PASSWORD}"'/' /opt/otrs/Kernel/Config.pm
-          mkdir -p /opt/otrs/var/tmp
-          mysql -h mariadb -u "${MYSQL_USERNAME}" -p"${MYSQL_PASSWORD}" otrs < /opt/otrs/scripts/database/otrs-schema.mysql.sql
-          mysql -h mariadb -u "${MYSQL_USERNAME}" -p"${MYSQL_PASSWORD}" otrs < /opt/otrs/scripts/database/otrs-initial_insert.mysql.sql
-          mysql -h mariadb -u "${MYSQL_USERNAME}" -p"${MYSQL_PASSWORD}" otrs < /opt/otrs/scripts/database/otrs-schema-post.mysql.sql
-          touch /opt/otrs/installed
-          /opt/otrs/bin/otrs.SetPermissions.pl
-          su -c "bin/otrs.Console.pl Maint::Config::Rebuild" - otrs
-          su -c "bin/otrs.Console.pl Admin::Config::Update --setting-name CheckEmailAddresses --value 0" - otrs
-          su -c "bin/otrs.CheckSum.pl -a create" - otrs
-          /opt/otrs/bin/otrs.SetPermissions.pl
+          git init
+          git config --global --add safe.directory ${GITHUB_WORKSPACE}
+          su -c "bin/otrs.Console.pl Dev::Tools::RPMSpecGenerate" - otrs
+          git diff --exit-code scripts/auto_build/spec/
+          if [ "$(git diff --exit-code scripts/auto_build/spec/)" ]; then echo "The RPMSpec's are not updated." && exit 1; else echo "All RPMSpec's are updated." && exit 0; fi
+
+  UnitTest-MySQL:
+    name: UnitTest:MySQL
+    runs-on: ubuntu-latest
+    container: debian:10-slim
+    needs: [
+      ZnunyCodePolicy,
+      CPANAudit,
+      Contributors,
+      Database-Schema,
+      Database-InitialInsert,
+      Migration,
+      RPMSpec,
+    ]
+    env:
+      DB: mysql
+      MYSQL_USER: "otrs"
+      MYSQL_ROOT_PASSWORD: "secret"
+      MYSQL_PASSWORD: "secret"
+      MYSQL_DATABASE: "otrs"
+    services:
+      mariadb:
+        image: mariadb:10
+        env:
+          MYSQL_USER: "otrs"
+          MYSQL_ROOT_PASSWORD: "secret"
+          MYSQL_PASSWORD: "secret"
+          MYSQL_DATABASE: "otrs"
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        env:
+          fetch-depth: "1"
+
+      - name: Install dependencies
+        run: .github/workflows/ci/dependencies.sh
+
+      - name: Setup Znuny
+        run: .github/workflows/ci/setup.sh
 
       - name: Run UnitTests
-        env:
-          # Insert tests/options to run here if you're not interested in the whole suite
-          TEST_OPTIONS: ""
         run: |
           su -c "bin/otrs.CheckSum.pl -a create" - otrs
-          su -c "bin/otrs.Console.pl Dev::UnitTest::Run ${TEST_OPTIONS}" - otrs
+          su -c "bin/otrs.Console.pl Dev::UnitTest::Run ${{ inputs.unittest_options }} --exclude-directory Selenium" - otrs
+
+  Selenium-Base:
+    name: Selenium:Base
+    runs-on: ubuntu-latest
+    container: debian:10-slim
+    needs: UnitTest-MySQL
+    env:
+      DB: mysql
+      MYSQL_USER: "otrs"
+      MYSQL_ROOT_PASSWORD: "secret"
+      MYSQL_PASSWORD: "secret"
+      MYSQL_DATABASE: "otrs"
+      SELENIUM_SCREENSHOTS: "true"
+    services:
+      mariadb:
+        image: mariadb:10
+        env:
+          MYSQL_USER: "otrs"
+          MYSQL_ROOT_PASSWORD: "secret"
+          MYSQL_PASSWORD: "secret"
+          MYSQL_DATABASE: "otrs"
+      chrome:
+        image: selenium/standalone-chrome:3.141.59-oxygen
+        options: --shm-size="2g"
+        volumes:
+          - ${{ github.workspace }}:/opt/otrs
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        env:
+          fetch-depth: "1"
+
+      - name: Install dependencies
+        run: .github/workflows/ci/dependencies.sh
+
+      - name: Setup Znuny
+        run: .github/workflows/ci/setup.sh
+
+      - name: Run UnitTests
+        run: |
+          su -c "bin/otrs.CheckSum.pl -a create" - otrs
+          su -c "bin/otrs.Console.pl Dev::UnitTest::Run --directory Selenium/Base" - otrs
+
+      - name: Archive screenshots from selenium
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Download all selenium screenshots
+          retention-days: 1
+          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/**/*
+          if-no-files-found: ignore
+
+
+  Selenium-Admin:
+    name: Selenium:Admin
+    runs-on: ubuntu-latest
+    container: debian:10-slim
+    needs: UnitTest-MySQL
+    env:
+      DB: mysql
+      MYSQL_USER: "otrs"
+      MYSQL_ROOT_PASSWORD: "secret"
+      MYSQL_PASSWORD: "secret"
+      MYSQL_DATABASE: "otrs"
+      SELENIUM_SCREENSHOTS: "true"
+    services:
+      mariadb:
+        image: mariadb:10
+        env:
+          MYSQL_USER: "otrs"
+          MYSQL_ROOT_PASSWORD: "secret"
+          MYSQL_PASSWORD: "secret"
+          MYSQL_DATABASE: "otrs"
+      chrome:
+        image: selenium/standalone-chrome:3.141.59-oxygen
+        options: --shm-size="2g"
+        volumes:
+          - ${{ github.workspace }}:/opt/otrs
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        env:
+          fetch-depth: "1"
+
+      - name: Install dependencies
+        run: .github/workflows/ci/dependencies.sh
+
+      - name: Setup Znuny
+        run: .github/workflows/ci/setup.sh
+
+      - name: Run UnitTests
+        run: |
+          su -c "bin/otrs.CheckSum.pl -a create" - otrs
+          su -c "bin/otrs.Console.pl Dev::UnitTest::Run --directory Selenium/Agent/Admin" - otrs
+
+      - name: Archive screenshots from selenium
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Download all selenium screenshots
+          retention-days: 1
+          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/**/*
+          if-no-files-found: ignore
+
+
+  Selenium-Agent:
+    name: Selenium:Agent
+    runs-on: ubuntu-latest
+    container: debian:10-slim
+    needs: UnitTest-MySQL
+    env:
+      DB: mysql
+      MYSQL_USER: "otrs"
+      MYSQL_ROOT_PASSWORD: "secret"
+      MYSQL_PASSWORD: "secret"
+      MYSQL_DATABASE: "otrs"
+      SELENIUM_SCREENSHOTS: "true"
+    services:
+      mariadb:
+        image: mariadb:10
+        env:
+          MYSQL_USER: "otrs"
+          MYSQL_ROOT_PASSWORD: "secret"
+          MYSQL_PASSWORD: "secret"
+          MYSQL_DATABASE: "otrs"
+      chrome:
+        image: selenium/standalone-chrome:3.141.59-oxygen
+        options: --shm-size="2g"
+        volumes:
+          - ${{ github.workspace }}:/opt/otrs
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        env:
+          fetch-depth: "1"
+
+      - name: Install dependencies
+        run: .github/workflows/ci/dependencies.sh
+
+      - name: Setup Znuny
+        run: .github/workflows/ci/setup.sh
+
+      - name: Run UnitTests
+        run: |
+          su -c "bin/otrs.CheckSum.pl -a create" - otrs
+          su -c "bin/otrs.Console.pl Dev::UnitTest::Run --directory Selenium/Agent --exclude-directory Selenium/Agent/Admin" - otrs
+
+      - name: Archive screenshots from selenium
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Download all selenium screenshots
+          retention-days: 1
+          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/**/*
+          if-no-files-found: ignore
+
+
+  Selenium-Customer:
+    name: Selenium:Customer
+    runs-on: ubuntu-latest
+    container: debian:10-slim
+    needs: UnitTest-MySQL
+    env:
+      DB: mysql
+      MYSQL_USER: "otrs"
+      MYSQL_ROOT_PASSWORD: "secret"
+      MYSQL_PASSWORD: "secret"
+      MYSQL_DATABASE: "otrs"
+      SELENIUM_SCREENSHOTS: "true"
+    services:
+      mariadb:
+        image: mariadb:10
+        env:
+          MYSQL_USER: "otrs"
+          MYSQL_ROOT_PASSWORD: "secret"
+          MYSQL_PASSWORD: "secret"
+          MYSQL_DATABASE: "otrs"
+      chrome:
+        image: selenium/standalone-chrome:3.141.59-oxygen
+        options: --shm-size="2g"
+        volumes:
+          - ${{ github.workspace }}:/opt/otrs
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        env:
+          fetch-depth: "1"
+
+      - name: Install dependencies
+        run: .github/workflows/ci/dependencies.sh
+
+      - name: Setup Znuny
+        run: .github/workflows/ci/setup.sh
+
+      - name: Run UnitTests
+        run: |
+          su -c "bin/otrs.CheckSum.pl -a create" - otrs
+          su -c "bin/otrs.Console.pl Dev::UnitTest::Run --directory Selenium/Customer" - otrs
+
+      - name: Archive screenshots from selenium
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Download all selenium screenshots
+          retention-days: 1
+          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/**/*
+          if-no-files-found: ignore
+
+
+  Selenium-JavaScript:
+    name: Selenium:JavaScript
+    runs-on: ubuntu-latest
+    container: debian:10-slim
+    needs: UnitTest-MySQL
+    env:
+      DB: mysql
+      MYSQL_USER: "otrs"
+      MYSQL_ROOT_PASSWORD: "secret"
+      MYSQL_PASSWORD: "secret"
+      MYSQL_DATABASE: "otrs"
+      SELENIUM_SCREENSHOTS: "true"
+    services:
+      mariadb:
+        image: mariadb:10
+        env:
+          MYSQL_USER: "otrs"
+          MYSQL_ROOT_PASSWORD: "secret"
+          MYSQL_PASSWORD: "secret"
+          MYSQL_DATABASE: "otrs"
+      chrome:
+        image: selenium/standalone-chrome:3.141.59-oxygen
+        options: --shm-size="2g"
+        volumes:
+          - ${{ github.workspace }}:/opt/otrs
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        env:
+          fetch-depth: "1"
+
+      - name: Install dependencies
+        run: .github/workflows/ci/dependencies.sh
+
+      - name: Setup Znuny
+        run: .github/workflows/ci/setup.sh
+
+      - name: Run UnitTests
+        run: |
+          su -c "bin/otrs.CheckSum.pl -a create" - otrs
+          su -c "bin/otrs.Console.pl Dev::UnitTest::Run --directory Selenium/JavaScript" - otrs
+
+      - name: Archive screenshots from selenium
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Download all selenium screenshots
+          retention-days: 1
+          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/**/*
+          if-no-files-found: ignore
+
+
+  Selenium-Output:
+    name: Selenium:Output
+    runs-on: ubuntu-latest
+    container: debian:10-slim
+    needs: UnitTest-MySQL
+    env:
+      DB: mysql
+      MYSQL_USER: "otrs"
+      MYSQL_ROOT_PASSWORD: "secret"
+      MYSQL_PASSWORD: "secret"
+      MYSQL_DATABASE: "otrs"
+      SELENIUM_SCREENSHOTS: "true"
+    services:
+      mariadb:
+        image: mariadb:10
+        env:
+          MYSQL_USER: "otrs"
+          MYSQL_ROOT_PASSWORD: "secret"
+          MYSQL_PASSWORD: "secret"
+          MYSQL_DATABASE: "otrs"
+      chrome:
+        image: selenium/standalone-chrome:3.141.59-oxygen
+        options: --shm-size="2g"
+        volumes:
+          - ${{ github.workspace }}:/opt/otrs
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        env:
+          fetch-depth: "1"
+
+      - name: Install dependencies
+        run: .github/workflows/ci/dependencies.sh
+
+      - name: Setup Znuny
+        run: .github/workflows/ci/setup.sh
+
+      - name: Run UnitTests
+        run: |
+          su -c "bin/otrs.CheckSum.pl -a create" - otrs
+          su -c "bin/otrs.Console.pl Dev::UnitTest::Run --directory Selenium/Output" - otrs
+
+      - name: Archive screenshots from selenium
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Download all selenium screenshots
+          retention-days: 1
+          path: /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/**/*
+          if-no-files-found: ignore
+
+
+  Selenium-SysConfig:
+    name: Selenium:SysConfig
+    runs-on: ubuntu-latest
+    container: debian:10-slim
+    needs: UnitTest-MySQL
+    env:
+      DB: mysql
+      MYSQL_USER: "otrs"
+      MYSQL_ROOT_PASSWORD: "secret"
+      MYSQL_PASSWORD: "secret"
+      MYSQL_DATABASE: "otrs"
+      SELENIUM_SCREENSHOTS: "true"
+    services:
+      mariadb:
+        image: mariadb:10
+        env:
+          MYSQL_USER: "otrs"
+          MYSQL_ROOT_PASSWORD: "secret"
+          MYSQL_PASSWORD: "secret"
+          MYSQL_DATABASE: "otrs"
+      chrome:
+        image: selenium/standalone-chrome:3.141.59-oxygen
+        options: --shm-size="2g"
+        volumes:
+          - ${{ github.workspace }}:/opt/otrs
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        env:
+          fetch-depth: "1"
+
+      - name: Install dependencies
+        run: .github/workflows/ci/dependencies.sh
+
+      - name: Setup Znuny
+        run: .github/workflows/ci/setup.sh
+
+      - name: Run UnitTests
+        run: |
+          su -c "bin/otrs.CheckSum.pl -a create" - otrs
+          su -c "bin/otrs.Console.pl Dev::UnitTest::Run --directory Selenium/SysConfig" - otrs
+
+      - name: Archive screenshots from selenium
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Download all selenium screenshots
+          retention-days: 1
+          path: |
+            /opt/otrs/var/httpd/htdocs/SeleniumScreenshots/**/*
+          if-no-files-found: ignore

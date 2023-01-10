@@ -1,11 +1,10 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
-## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::SpellCheck)
 
 package Kernel::System::DBCRUD::Format::CSV;
 
@@ -25,7 +24,7 @@ Kernel::System::DBCRUD::Format::CSV - DBCRUD CSV lib
 
 =head1 SYNOPSIS
 
-All ticket DBCRUD CSV functions.
+All DBCRUD format CSV functions.
 
 =head1 PUBLIC INTERFACE
 

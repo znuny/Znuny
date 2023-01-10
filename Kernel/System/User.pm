@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -1304,6 +1304,7 @@ sub SetPreferences {
         UserLastname  => 1,
         UserFullname  => 1,
         UserTitle     => 1,
+        UserType      => 1,
         ChangeTime    => 1,
         CreateTime    => 1,
         ValidID       => 1,
@@ -1319,11 +1320,10 @@ sub SetPreferences {
         NoOutOfOffice => 1,
     );
 
-    # no updated needed
-    return 1
-        if defined $User{ $Param{Key} }
-        && defined $Param{Value}
-        && $User{ $Param{Key} } eq $Param{Value};
+    # No update needed (treat undef and empty strings as equal).
+    my $UserValue  = $User{ $Param{Key} } // '';
+    my $ParamValue = $Param{Value}        // '';
+    return 1 if $UserValue eq $ParamValue;
 
     # get user preferences config
     my $GeneratorModule = $Kernel::OM->Get('Kernel::Config')->Get('User::PreferencesModule')

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -270,30 +270,29 @@ sub Run {
         Value         => "Going to create new ticket.",
     );
 
+    # Ticket service handling.
+
     if ( $GetParam{'X-OTRS-Service'} ) {
-        my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
 
-        # Check if service exists.
-        my %ServiceData = $ServiceObject->ServiceGet(
-            Name   => $GetParam{'X-OTRS-Service'},
-            UserID => $Param{InmailUserID},
-        );
-
-        # Get all service list filtering by KeepChildren SysConfig if available.
-        my %ServiceList = $ServiceObject->ServiceList(
+        # Get all valid services.
+        my %ValidServices = reverse $Kernel::OM->Get('Kernel::System::Service')->ServiceList(
             Valid        => 1,
             KeepChildren => $ConfigObject->Get('Ticket::Service::KeepChildren') // 0,
             UserID       => $Param{InmailUserID},
         );
 
-        if ( $ServiceData{ServiceID} ne '' && !$ServiceList{ $ServiceData{ServiceID} } ) {
+        if ( !$ValidServices{ $GetParam{'X-OTRS-Service'} } ) {
+
+            # If service with given name does not exist or is invalid don't set it if not active.
+
             $Self->{CommunicationLogObject}->ObjectLog(
                 ObjectLogType => 'Message',
                 Priority      => 'Debug',
                 Key           => 'Kernel::System::PostMaster::NewTicket',
                 Value =>
-                    "Service $GetParam{'X-OTRS-Service'} does not exists or is invalid or is a child of invalid service.",
+                    "Ticket service won't be set to '$GetParam{'X-OTRS-Service'}' (does not exist or is invalid or is a child of invalid service).",
             );
+
             $GetParam{'X-OTRS-Service'} = '';
         }
     }
@@ -589,7 +588,7 @@ Message
             Key           => 'Kernel::System::PostMaster::NewTicket',
             Value         => "Can't process email with MessageID <$GetParam{'Message-ID'}>! "
                 . "Please create a bug report with this email (From: $GetParam{From}, Located "
-                . "under var/spool/problem-email*) on http://bugs.otrs.org/!",
+                . "under var/spool/problem-email*) on https://github.com/znuny/Znuny/issues/new/choose !",
         );
 
         $Self->{CommunicationLogObject}->ObjectLog(

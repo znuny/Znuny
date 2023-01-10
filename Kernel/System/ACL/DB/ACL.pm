@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -881,6 +881,18 @@ sub ACLDump {
             $PossibleNot = $ACLData->{ConfigChange}->{PossibleNot};
         }
 
+        # Remove line breaks and quotation marks from name so that
+        # it can be safely used as hash key name in generated ACL Perl file.
+        $ACLData->{Name} =~ s{[\r\n\\'"]}{}smg;
+
+        # Remove any line breaks from comment and user name so that following lines
+        # won't be evaluated as Perl.
+        FIELDNAME:
+        for my $FieldName (qw(CreateBy ChangeBy Comment)) {
+            next FIELDNAME if !IsStringWithData( $ACLData->{$FieldName} );
+            $ACLData->{$FieldName} =~ s{[\r\n]}{}smg;
+        }
+
         $ACLDump{ $ACLData->{Name} } = {
             CreateTime => $ACLData->{CreateTime},
             ChangeTime => $ACLData->{ChangeTime},
@@ -909,12 +921,12 @@ sub ACLDump {
         # create output
         $Output .= $Self->_ACLItemOutput(
             Key        => $ACLName,
-            Value      => $ACLDump{$ACLName}{Values},
-            Comment    => $ACLDump{$ACLName}{Comment},
-            CreateTime => $ACLDump{$ACLName}{CreateTime},
-            ChangeTime => $ACLDump{$ACLName}{ChangeTime},
-            CreateBy   => $ACLDump{$ACLName}{CreateBy},
-            ChangeBy   => $ACLDump{$ACLName}{ChangeBy},
+            Value      => $ACLDump{$ACLName}->{Values},
+            Comment    => $ACLDump{$ACLName}->{Comment},
+            CreateTime => $ACLDump{$ACLName}->{CreateTime},
+            ChangeTime => $ACLDump{$ACLName}->{ChangeTime},
+            CreateBy   => $ACLDump{$ACLName}->{CreateBy},
+            ChangeBy   => $ACLDump{$ACLName}->{ChangeBy},
         );
     }
 

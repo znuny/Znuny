@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -23,7 +23,7 @@ Kernel::System::DBCRUD::Format::YAML - DBCRUD YAML lib
 
 =head1 SYNOPSIS
 
-All ticket DynamicFieldRelations CSV functions.
+All DBCRUD format YAML functions.
 
 =head1 PUBLIC INTERFACE
 

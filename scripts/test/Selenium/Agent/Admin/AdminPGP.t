@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -99,7 +99,7 @@ $Selenium->RunTest(
             $Count++;
         }
 
-        my $Location1 = $ConfigObject->Get('Home')
+        my $Location1 = $Selenium->{Home}
             . "/scripts/test/sample/Crypt/PGPPrivateKey-1.asc";
 
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location1);
@@ -107,7 +107,7 @@ $Selenium->RunTest(
 
         # Add second test PGP key.
         $Selenium->find_element("//a[contains(\@href, \'Action=AdminPGP;Subaction=Add' )]")->VerifiedClick();
-        my $Location2 = $ConfigObject->Get('Home')
+        my $Location2 = $Selenium->{Home}
             . "/scripts/test/sample/Crypt/PGPPrivateKey-2.asc";
 
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location2);

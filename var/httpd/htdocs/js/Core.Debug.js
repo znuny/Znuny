@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -117,7 +117,10 @@ Core.Debug = (function (TargetNS) {
             if (typeof Core.Language !== 'undefined') {
                 ErrorMessage = Core.Language.Translate('Namespace %s could not be initialized, because %s could not be found.', TargetNamespace, RequiredLabel);
             }
-            alert(ErrorMessage);
+            Core.UI.Dialog.ShowAlert(
+                Core.Language.Translate('An Error Occurred'),
+                Core.Language.Translate(ErrorMessage)
+            );
             // don't use Core.Exception here, it may not be available
             throw ErrorMessage;
         }

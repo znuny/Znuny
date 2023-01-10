@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -2110,23 +2110,67 @@ for my $Test (@Tests) {
         delete $LocalResult->{ErrorMessage};
     }
 
+    my %Result = (
+        RequesterResult          => \%{ $RequesterResult                  || {} },
+        LocalResult              => \%{ $LocalResult                      || {} },
+        ExpectedReturnLocalData  => \%{ $Test->{ExpectedReturnLocalData}  || {} },
+        ExpectedReturnRemoteData => \%{ $Test->{ExpectedReturnRemoteData} || {} },
+    );
+
+    for my $ResultType ( sort keys %Result ) {
+
+        my $Result = $Result{$ResultType};
+
+        # make sure that we have always an array (Ticket)
+        if ( IsHashRefWithData( $Result->{Data}->{Ticket} ) ) {
+            $Result->{Data}->{Ticket} = [ $Result->{Data}->{Ticket} ];
+        }
+
+        for my $Ticket ( @{ $Result->{Data}->{Ticket} } ) {
+
+            # make sure that we have always an array (Article)
+            if ( IsHashRefWithData( $Ticket->{Article} ) ) {
+                $Ticket->{Article} = [ $Ticket->{Article} ];
+            }
+
+            ARTICLE:
+            for my $Article ( @{ $Ticket->{Article} } ) {
+
+                # make sure that we have always an array (Attachment)
+                if ( IsHashRefWithData( $Article->{Attachment} ) ) {
+                    $Article->{Attachment} = [ $Article->{Attachment} ];
+                }
+
+                my @Attachments = sort { $a->{Filename} cmp $b->{Filename} } @{ $Article->{Attachment} || [] };
+                next ARTICLE if !@Attachments;
+
+                # remove FileID because of variable order of attachments
+                for my $Attachment (@Attachments) {
+                    delete $Attachment->{FileID};
+                }
+
+                $Article->{Attachment} = \@Attachments;
+            }
+        }
+    }
+
     $Self->IsDeeply(
-        $RequesterResult,
-        $Test->{ExpectedReturnRemoteData},
+        $Result{RequesterResult},
+        $Result{ExpectedReturnRemoteData},
         "$Test->{Name} - Requester success status (needs configured and running web server)",
     );
 
-    if ( $Test->{ExpectedReturnLocalData} ) {
+    if ( $Result{ExpectedReturnLocalData} ) {
         $Self->IsDeeply(
-            $LocalResult,
-            $Test->{ExpectedReturnLocalData},
+            $Result{LocalResult},
+            $Result{ExpectedReturnLocalData},
             "$Test->{Name} - Local result matched with expected local call result.",
         );
     }
     else {
         $Self->IsDeeply(
-            $LocalResult,
-            $Test->{ExpectedReturnRemoteData},
+            $Result{LocalResult},
+            $Result{ExpectedReturnRemoteData},
             "$Test->{Name} - Local result matched with remote result.",
         );
     }

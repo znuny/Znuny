@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -28,8 +28,7 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
         AppointmentDaysCacheRefreshed = false,
         AJAXCounter = 0,
         CurrentView,
-        CalendarSources = {},
-        PluginList = Core.Config.Get('PluginList');
+        CalendarSources = {};
 
     /**
      * @name Init
@@ -216,6 +215,7 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                 }
             },
             viewRender: function(View) {
+                var FilterViews;
 
                 // Check if we are on a timeline view.
                 if (View.name === 'timelineWeek' || View.name === 'timelineDay') {
@@ -251,6 +251,13 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                     );
                 }
                 CurrentView = View.name;
+
+                FilterViews = ["month", "agendaWeek", "agendaDay"];
+                if (FilterViews.includes(CurrentView)){
+                    $('.WidgetSimple.Appointments').show();
+                }else{
+                    $('.WidgetSimple.Appointments').hide();
+                }
             },
             select: function(Start, End, JSEvent, View, Resource) {
                 var Data = {
@@ -292,8 +299,13 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                 UpdateAppointment(Data);
             },
             eventRender: function(CalEvent, $Element) {
+
                 var $IconContainer,
-                    $Icon;
+                    $Icon,
+                    pluginData,
+                    Filter = $('#FilterAppointments').val(),
+                    Title,
+                    Description;
 
                 if (CalEvent.allDay
                     || CalEvent.recurring
@@ -318,7 +330,7 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                     }
                     if (CalEvent.parentId) {
                         $Icon.clone()
-                            .addClass('fa-link')
+                            .addClass('fa-child')
                             .appendTo($IconContainer);
                     }
                     if (CalEvent.notification) {
@@ -331,8 +343,11 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                             .addClass('fa-char-' + Core.Config.Get('TicketAppointmentConfig')[CalEvent.ticketAppointmentType].Mark)
                             .appendTo($IconContainer);
                     }
+
                     if (CalEvent.pluginData) {
-                        $.each(PluginList, function (PluginKey) {
+                        pluginData = Object.keys(CalEvent.pluginData).sort();
+
+                        $.each(pluginData, function (Key,PluginKey) {
                             if (CalEvent.pluginData[PluginKey] && CalEvent.pluginData[PluginKey]['Icon'] !== 'undefined'){
                                 $Icon.clone()
                                     .addClass('fa-' + CalEvent.pluginData[PluginKey]['Icon'])
@@ -345,6 +360,27 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                     $Element.find('.fc-content')
                         .prepend($IconContainer);
                 }
+
+                // FilterAppointments
+                Filter ? Filter = Filter.toLowerCase() : '';
+                CalEvent.title ? Title = CalEvent.title.toLowerCase() : {};
+                CalEvent.description ? Description = CalEvent.description.toLowerCase() : {};
+
+                // If we have a description we can try to Filter
+                if (Description) {
+                    Description = Description.includes(Filter);
+                }
+
+                // If we have a title we can try to filter
+                if (Title) {
+                    Title = Title.includes(Filter);
+                }
+
+                if(Title || Description || Filter.length < 1) {
+                    return true;
+                }
+                return false;
+
             },
             eventResizeStart: function(CalEvent) {
                 CurrentAppointment.start = CalEvent.start;
@@ -436,6 +472,14 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
             ],
             resourceLabelText: Core.Language.Translate('Resources')
         });
+
+        // Activate FilterAppointments
+        $('#FilterAppointments').on('keyup',function(){
+            var FilterViews = ["month", "agendaWeek", "agendaDay"];
+            if (FilterViews.includes(CurrentView)){
+                $CalendarObj.fullCalendar('rerenderEvents');
+            }
+        })
 
         // Initialize datepicker
         $DatepickerObj.datepicker({
@@ -856,7 +900,8 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
             Recurring: AppointmentData.CalEvent.recurring ? '1' : '0',
             TeamID: AppointmentData.CalEvent.teamIds ? AppointmentData.CalEvent.teamIds : undefined,
             ResourceID: AppointmentData.CalEvent.resourceIds ? AppointmentData.CalEvent.resourceIds :
-                AppointmentData.CalEvent.resourceId ? [ AppointmentData.CalEvent.resourceId ] : undefined
+                AppointmentData.CalEvent.resourceId ? [ AppointmentData.CalEvent.resourceId ] : undefined,
+            Plugin: AppointmentData.CalEvent.pluginData,
         };
 
         // Assigned resource didn't change
@@ -1760,12 +1805,17 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                     $PluginDataObj = $('#Plugin_' + Core.App.EscapeSelector(PluginKey) + '_LinkList'),
                     PluginData = JSON.parse($PluginDataObj.val()),
                     LinkID = $RemoveObj.data('linkId').toString(),
-                    $Parent = $RemoveObj.parent();
+                    $Parent = $RemoveObj.parent(),
+                    $PluginContainer = $Parent.parent();
 
                 PluginData.splice(PluginData.indexOf(LinkID), 1);
                 $PluginDataObj.val(JSON.stringify(PluginData));
 
                 $Parent.remove();
+
+                if ($PluginContainer.children().length == 0) {
+                    $PluginContainer.text('');
+                }
 
                 return false;
             });

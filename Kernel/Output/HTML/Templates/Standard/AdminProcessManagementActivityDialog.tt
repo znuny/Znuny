@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -120,7 +120,7 @@
                             </div>
                             <div class="Clear"></div>
 
-                            <label class="Mandatory" for="ScopeEntityID"><span class="Marker">*</span> [% Translate("Scope EntityID") | html %]:</label>
+                            <label class="Mandatory" for="ScopeEntityID"><span class="Marker">*</span> [% Translate("Scope Entity ID") | html %]:</label>
                             <div class="Field">
                                 [% Data.ScopeEntityIDSelection %]
                                 <div id="ScopeEntityIDError" class="TooltipErrorMessage">
@@ -211,7 +211,7 @@
 
 <div id="Dialogs" class="Hidden">
     <div id="FieldDetails">
-        <div style="width: 500px;">
+        <div>
             <fieldset class="TableLike">
                 <label for="DescShort">[% Translate("Description (short)") | html %]:</label>
                 <div class="Field">
@@ -224,6 +224,19 @@
                     <textarea name="DescLong" id="DescLong" class="W50pc"></textarea>
                 </div>
                 <div class="Clear"></div>
+
+[% RenderBlockStart("ArticleContainer") %]
+                <label for="Subject">[% Translate("Subject") | html %]:</label>
+                <div class="Field ArticleContainer">
+                    <input type="text" name="Subject" id="Subject" value="" class="W50pc" />
+                </div>
+                <div class="Clear"></div>
+                <label for="Body">[% Translate("Body") | html %]:</label>
+                <div id="ArticleBodyContainer" class="RichTextField">
+                    <textarea id="Body" name="Body" class="RichTextInDialog" rows="10" cols="40">[% Data.Body | html %]</textarea>
+                </div>
+                <div class="Clear"></div>
+[% RenderBlockEnd("ArticleContainer") %]
 
                 <label for="DefaultValue">[% Translate("Default value") | html %]:</label>
                 <div class="Field">
@@ -242,6 +255,18 @@
                     <input type="checkbox" name="IsVisibleForCustomer" id="IsVisibleForCustomer"/>
                 </div>
                 <div class="Clear"></div>
+
+[% RenderBlockStart("StandardTemplateContainer") %]
+                <label for="StandardTemplateID">[% Translate("Text Template") | html %]:</label>
+                <div class="Field" id="StandardTemplateContainer">
+                    [% Data.StandardTemplateSelection %]
+                </div>
+                <label for="StandardTemplateAutoFill">[% Translate("Auto fill") | html %]:</label>
+                <div class="Field" id="StandardTemplateAutoFillContainer">
+                    <input type="checkbox" name="StandardTemplateAutoFill" id="StandardTemplateAutoFill"/>
+                </div>
+                <div class="Clear"></div>
+[% RenderBlockEnd("StandardTemplateContainer") %]
 
 [% RenderBlockStart("TimeUnitsContainer") %]
                 <label for="TimeUnits">[% Translate("Time units") | html %]:</label>

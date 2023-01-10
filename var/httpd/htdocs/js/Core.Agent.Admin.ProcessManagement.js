@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -231,42 +231,42 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             'Center',
             true,
             [
-               {
-                   Label: Core.Language.Translate('Cancel'),
-                   Function: function () {
-                       Core.UI.Dialog.CloseDialog($('.Dialog'));
-                   }
-               },
-               {
-                   Label: Core.Language.Translate('Delete'),
-                   Class: 'Primary',
-                   Function: function () {
-                       var Data = {
-                               Action: 'AdminProcessManagement',
-                               Subaction: 'ProcessDelete',
-                               ID: ProcessID
-                           };
+                {
+                    Label: Core.Language.Translate('Cancel'),
+                    Function: function () {
+                        Core.UI.Dialog.CloseDialog($('.Dialog'));
+                    }
+                },
+                {
+                    Label: Core.Language.Translate('Delete'),
+                    Class: 'Primary',
+                    Function: function () {
+                        var Data = {
+                                Action: 'AdminProcessManagement',
+                                Subaction: 'ProcessDelete',
+                                ID: ProcessID
+                            };
 
-                       // Change the dialog to an ajax loader
-                       $('.Dialog')
-                           .find('.ContentFooter').empty().end()
-                           .find('.InnerContent').empty().append('<div class="Spacing Center"><span class="AJAXLoader"></span></div>');
+                        // Change the dialog to an ajax loader
+                        $('.Dialog')
+                            .find('.ContentFooter').empty().end()
+                            .find('.InnerContent').empty().append('<div class="Spacing Center"><span class="AJAXLoader"></span></div>');
 
-                       // Call the ajax function
-                       Core.AJAX.FunctionCall(Core.Config.Get('CGIHandle'), Data, function (Response) {
-                           if (!Response || !Response.Success) {
-                               alert(Response.Message);
-                               Core.UI.Dialog.CloseDialog($('.Dialog'));
-                               return false;
-                           }
+                        // Call the ajax function
+                        Core.AJAX.FunctionCall(Core.Config.Get('CGIHandle'), Data, function (Response) {
+                            if (!Response || !Response.Success) {
+                                alert(Response.Message);
+                                Core.UI.Dialog.CloseDialog($('.Dialog'));
+                                return false;
+                            }
 
-                           Core.App.InternalRedirect({
-                               Action: Data.Action
-                           });
-                       }, 'json');
-                   }
-               }
-           ]
+                            Core.App.InternalRedirect({
+                                Action: Data.Action
+                            });
+                        }, 'json');
+                    }
+                }
+            ]
         );
     }
 
@@ -297,44 +297,44 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             'Center',
             true,
             [
-               {
-                   Label: Core.Language.Translate('Cancel'),
-                   Function: function () {
-                       Core.UI.Dialog.CloseDialog($('.Dialog'));
-                   }
-               },
-               {
-                   Label: Core.Language.Translate('Delete'),
-                   Class: 'Primary',
-                   Function: function () {
-                       var Data = {
-                               Action: 'AdminProcessManagement',
-                               Subaction: 'EntityDelete',
-                               EntityType: EntityType,
-                               EntityID: EntityID,
-                               ItemID: ItemID
-                           };
+                {
+                    Label: Core.Language.Translate('Cancel'),
+                    Function: function () {
+                        Core.UI.Dialog.CloseDialog($('.Dialog'));
+                    }
+                },
+                {
+                    Label: Core.Language.Translate('Delete'),
+                    Class: 'Primary',
+                    Function: function () {
+                        var Data = {
+                                Action: 'AdminProcessManagement',
+                                Subaction: 'EntityDelete',
+                                EntityType: EntityType,
+                                EntityID: EntityID,
+                                ItemID: ItemID
+                            };
 
-                       // Change the dialog to an ajax loader
-                       $('.Dialog')
-                           .find('.ContentFooter').empty().end()
-                           .find('.InnerContent').empty().append('<div class="Spacing Center"><span class="AJAXLoader"></span></div>');
+                        // Change the dialog to an ajax loader
+                        $('.Dialog')
+                            .find('.ContentFooter').empty().end()
+                            .find('.InnerContent').empty().append('<div class="Spacing Center"><span  class="AJAXLoader"></span></div>');
 
-                       // Call the ajax function
-                       Core.AJAX.FunctionCall(Core.Config.Get('CGIHandle'), Data, function (Response) {
-                           if (!Response || !Response.Success) {
-                               alert(Response.Message);
-                               Core.UI.Dialog.CloseDialog($('.Dialog'));
-                               return false;
-                           }
+                        // Call the ajax function
+                        Core.AJAX.FunctionCall(Core.Config.Get('CGIHandle'), Data, function (Response) {
+                            if (!Response || !Response.Success) {
+                                alert(Response.Message);
+                                Core.UI.Dialog.CloseDialog($('.Dialog'));
+                                return false;
+                            }
 
-                           // Remove element from accordion
-                           $Element.closest('li').remove();
-                           Core.UI.Dialog.CloseDialog($('.Dialog'));
-                       }, 'json');
-                   }
-               }
-           ]
+                            // Remove element from accordion
+                            $Element.closest('li').remove();
+                            Core.UI.Dialog.CloseDialog($('.Dialog'));
+                        }, 'json');
+                    }
+                }
+            ]
         );
     }
 
@@ -506,7 +506,10 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                     TargetNS.Canvas.MakeDraggable();
                 }
                 else {
-                    alert(Core.Language.Translate('This Activity is already used in the Process. You cannot add it twice!'));
+                    Core.UI.Dialog.ShowAlert(
+                        Core.Language.Translate('An Error Occurred'),
+                        Core.Language.Translate('This Activity is already used in the Process. You cannot add it twice!')
+                    );
                 }
             }
             else {
@@ -648,8 +651,11 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             // if a dummy activity exists, another transition was placed to the canvas but not yet
             // connected to an end point. One cannot place two unconnected transitions on the canvas.
             if ($('#Dummy').length && DummyActivityConnected(ProcessEntityID)) {
-              alert(Core.Language.Translate('An unconnected transition is already placed on the canvas. Please connect this transition first before placing another transition.'));
-              return false;
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An Error Occurred'),
+                    Core.Language.Translate('An unconnected transition is already placed on the canvas. Please connect this transition first before placing another transition.')
+                );
+                return false;
             }
 
             if (typeof Entity !== 'undefined') {
@@ -661,7 +667,10 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                 // If this transition is already bind to this activity
                 // you cannot bind it a second time
                 if (Path[Activity] && typeof Path[Activity][EntityID] !== 'undefined') {
-                    alert(Core.Language.Translate('This Transition is already used for this Activity. You cannot use it twice!'));
+                    Core.UI.Dialog.ShowAlert(
+                        Core.Language.Translate('An Error Occurred'),
+                        Core.Language.Translate('This Transition is already used for this Activity. You cannot use it twice!')
+                    );
                     return false;
                 }
 
@@ -718,7 +727,10 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                     typeof Path[Transition.StartActivity][Transition.TransitionID].TransitionAction !== 'undefined' &&
                     ($.inArray(EntityID, Path[Transition.StartActivity][Transition.TransitionID].TransitionAction) >= 0)
                 ) {
-                    alert(Core.Language.Translate('This TransitionAction is already used in this Path. You cannot use it twice!'));
+                    Core.UI.Dialog.ShowAlert(
+                        Core.Language.Translate('An Error Occurred'),
+                        Core.Language.Translate('This TransitionAction is already used in this Path. You cannot use it twice!')
+                    );
                     return false;
                 }
 
@@ -1200,58 +1212,76 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             }
 
             // Open dialog
-            Core.UI.Dialog.ShowContentDialog(
-                $('#Dialogs #FieldDetails'),
-                Core.Language.Translate('Edit Field Details') + ': ' + FieldNameTranslated,
-                '200px',
-                'Center',
-                true,
-                [
-                     {
-                         Label: Core.Language.Translate('Save'),
-                         Class: 'Primary',
-                         Function: function () {
-                             var FieldConfigElement = {};
+            Core.UI.Dialog.ShowDialog({
 
-                             FieldConfigElement.DescriptionShort = $('#DescShort').val();
-                             FieldConfigElement.DescriptionLong = $('#DescLong').val();
-                             FieldConfigElement.DefaultValue = $('#DefaultValue').val();
-                             FieldConfigElement.Display = $('#Display').val();
+                HTML: $('#Dialogs #FieldDetails'),
+                Title: Core.Language.Translate('Edit Field Details') + ': ' + FieldNameTranslated,
+                PositionTop: '50px',
+                PositionLeft: 'Center',
+                Modal: true,
+                CloseOnClickOutside: false,
+                CloseOnEscape: true,
+                Buttons: [
+                    {
+                        Label: Core.Language.Translate('Save'),
+                        Class: 'Primary',
+                        Function: function () {
+                            var FieldConfigElement = {},
+                                StandardTemplateIDs = [];
 
-                             if (Fieldname === 'Article') {
-                                 if (typeof FieldConfigElement.Config === 'undefined'){
-                                     FieldConfigElement.Config = {};
-                                 }
-                                 FieldConfigElement.Config.CommunicationChannel = $('#CommunicationChannel').val();
+                            FieldConfigElement.DescriptionShort = $('#DescShort').val();
+                            FieldConfigElement.DescriptionLong = $('#DescLong').val();
+                            FieldConfigElement.DefaultValue = $('#DefaultValue').val();
+                            FieldConfigElement.Display = $('#Display').val();
 
-                                 FieldConfigElement.Config.IsVisibleForCustomer = '0';
-                                 if ($('#IsVisibleForCustomer').prop('checked')) {
+                            if (Fieldname === 'Article') {
+                                if (typeof FieldConfigElement.Config === 'undefined'){
+                                    FieldConfigElement.Config = {};
+                                }
+
+                                CKEDITOR.instances['Body'].updateElement();
+                                FieldConfigElement.Config.Subject = $('#Subject').val();
+                                FieldConfigElement.Config.Body = $('#Body').val();
+
+                                FieldConfigElement.Config.CommunicationChannel = $('#CommunicationChannel').val();
+
+                                FieldConfigElement.Config.IsVisibleForCustomer = '0';
+                                if ($('#IsVisibleForCustomer').prop('checked')) {
                                     FieldConfigElement.Config.IsVisibleForCustomer = '1';
-                                 }
+                                }
 
-                                 // show error if not customer visible article is set for an interface different than AgentInterface
-                                 if ($('#Interface').val() !== 'AgentInterface' && !$('#IsVisibleForCustomer').prop('checked')){
-                                     window.alert(Core.Language.Translate('Customer interface does not support articles not visible for customers.'));
-                                     return false;
-                                 }
+                                // show error if no customer visible article is set for an interface different than AgentInterface
+                                if ($('#Interface').val() !== 'AgentInterface' && !$('#IsVisibleForCustomer').prop('checked')){
+                                    window.alert(Core.Language.Translate('Customer interface does not support articles not visible for customers.'));
+                                    return false;
+                                }
 
-                                 // add the time units value to the fieldconfig
-                                 FieldConfigElement.Config.TimeUnits = $('#TimeUnits').val();
-                             }
+                                // add the time units value to the field config
+                                FieldConfigElement.Config.TimeUnits = $('#TimeUnits').val();
 
-                             $Element.closest('li').data('config', Core.JSON.Stringify(FieldConfigElement));
+                                // add the StandardTemplate IDs to the field config
+                                $('#StandardTemplateID option:selected').each(function() {
+                                    StandardTemplateIDs.push($(this).val());
+                                });
+                                FieldConfigElement.Config.StandardTemplateID = StandardTemplateIDs;
 
-                             Core.UI.Dialog.CloseDialog($('.Dialog'));
-                         }
-                     },
-                     {
-                         Label: Core.Language.Translate('Cancel'),
-                         Function: function () {
-                             Core.UI.Dialog.CloseDialog($('.Dialog'));
-                         }
-                     }
-                ]
-            );
+                                FieldConfigElement.Config.StandardTemplateAutoFill = $('#StandardTemplateAutoFill').prop('checked') ? '1' : '0';
+                            }
+
+                            $Element.closest('li').data('config', Core.JSON.Stringify(FieldConfigElement));
+
+                            Core.UI.Dialog.CloseDialog($('.Dialog'));
+                        }
+                    },
+                    {
+                        Label: Core.Language.Translate('Cancel'),
+                        Function: function () {
+                            Core.UI.Dialog.CloseDialog($('.Dialog'));
+                        }
+                    }
+                ],
+                AllowAutoGrow: true,
+            });
 
             // some fields must be mandatory, if they are present.
             // remove option from dropdown for these fields
@@ -1286,6 +1316,12 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                     if (typeof FieldConfig.Config === 'undefined'){
                         FieldConfig.Config = {};
                     }
+                    if (FieldConfig.Config.Subject) {
+                        $('#Subject').val(FieldConfig.Config.Subject);
+                    }
+                    if (FieldConfig.Config.Body) {
+                        $('#Body').val(FieldConfig.Config.Body);
+                    }
                     if (FieldConfig.Config.CommunicationChannel) {
                         $('#CommunicationChannel').val(FieldConfig.Config.CommunicationChannel);
                     }
@@ -1294,6 +1330,15 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                     }
                     if (FieldConfig.Config.TimeUnits) {
                         $('#TimeUnits').val(FieldConfig.Config.TimeUnits);
+                    }
+
+                    if (FieldConfig.Config.StandardTemplateID) {
+                        $.each(FieldConfig.Config.StandardTemplateID, function(Index, ID) {
+                            $('#StandardTemplateID option[value=' + ID + ']').prop('selected', true).trigger('redraw.InputField');
+                        });
+                    }
+                    if (FieldConfig.Config.StandardTemplateAutoFill === '1') {
+                        $('#StandardTemplateAutoFill').prop("checked", true);
                     }
                 }
             }
@@ -1310,6 +1355,15 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             // only article should show Communication channel select.
             if (Fieldname === 'Article') {
 
+                $('#DefaultValue').parent().addClass('Hidden');
+                $("label[for='DefaultValue']").css('display', 'none');
+
+                $('.ArticleContainer').removeClass('Hidden');
+                $('.ArticleContainer').prev('label').css('display', 'block');
+                $('.ArticleContainer .Modernize').trigger('redraw.InputField');
+
+                Core.UI.RichTextEditor.InitEditor($('textarea.RichTextInDialog'));
+
                 $('#CommunicationChannelContainer').removeClass('Hidden');
                 $('#CommunicationChannelContainer').prev('label').css('display', 'block');
                 $('#CommunicationChannelContainer .Modernize').trigger('redraw.InputField');
@@ -1320,8 +1374,36 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                 $('#TimeUnitsContainer').removeClass('Hidden');
                 $('#TimeUnitsContainer').prev('label').css('display', 'block');
                 $('#TimeUnitsContainer .Modernize').trigger('redraw.InputField');
+
+                $('#StandardTemplateContainer').removeClass('Hidden');
+                $('#StandardTemplateContainer').prev('label').css('display', 'block');
+                $('#StandardTemplateContainer .Modernize').trigger('redraw.InputField');
+
+                $('#StandardTemplateID').on('change', function () {
+                    if ($('#StandardTemplateID').val().length == 1){
+                        $('#StandardTemplateAutoFillContainer').removeClass('Hidden');
+                        $('#StandardTemplateAutoFillContainer').prev('label').css('display', 'block');
+                    }
+                    else{
+                        $('#StandardTemplateAutoFillContainer').addClass('Hidden');
+                        $('#StandardTemplateAutoFillContainer').prev('label').css('display', 'none');
+                        $('#StandardTemplateAutoFill').prop('checked', false);
+                    }
+                });
+
+                if ($('#StandardTemplateID').length && $('#StandardTemplateID').val().length >= 2){
+                    $('#StandardTemplateAutoFillContainer').addClass('Hidden');
+                    $('#StandardTemplateAutoFillContainer').prev('label').css('display', 'none');
+                    $('#StandardTemplateAutoFill').prop('checked', false);
+                }
             }
             else {
+
+                $('#DefaultValue').parent().removeClass('Hidden');
+                $("label[for='DefaultValue']").css('display', 'block');
+
+                $('.ArticleContainer').addClass('Hidden');
+                $('.ArticleContainer').prev('label').css('display', 'none');
 
                 $('#CommunicationChannelContainer').addClass('Hidden');
                 $('#CommunicationChannelContainer').prev('label').css('display', 'none');
@@ -1331,6 +1413,12 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
 
                 $('#TimeUnitsContainer').addClass('Hidden');
                 $('#TimeUnitsContainer').prev('label').css('display', 'none');
+
+                $('#StandardTemplateContainer').addClass('Hidden');
+                $('#StandardTemplateContainer').prev('label').css('display', 'none');
+
+                $('#StandardTemplateAutoFillContainer').addClass('Hidden');
+                $('#StandardTemplateAutoFillContainer').prev('label').css('display', 'none');
             }
 
             return false;
@@ -1379,7 +1467,10 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                 $(this).closest('.WidgetSimple').remove();
             }
             else {
-                alert(Core.Language.Translate("Sorry, the only existing condition can't be removed."));
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An Error Occurred'),
+                    Core.Language.Translate("Sorry, the only existing condition can't be removed.")
+                );
             }
 
             return false;
@@ -1407,7 +1498,10 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                 $(this).parent().closest('fieldset').remove();
             }
             else {
-                alert(Core.Language.Translate("Sorry, the only existing field can't be removed."));
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An Error Occurred'),
+                    Core.Language.Translate("Sorry, the only existing field can't be removed.")
+                );
             }
 
             return false;
@@ -1480,7 +1574,10 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                 $(this).closest('fieldset').remove();
             }
             else {
-                alert(Core.Language.Translate("Sorry, the only existing parameter can't be removed."));
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An Error Occurred'),
+                    Core.Language.Translate("Sorry, the only existing parameter can't be removed.")
+                );
             }
             return false;
         });

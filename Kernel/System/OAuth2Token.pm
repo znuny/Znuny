@@ -1,12 +1,12 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-## nofilter(TidyAll::Plugin::OTRS::Perl::ParamObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::ParamObject)
 
 package Kernel::System::OAuth2Token;
 
@@ -46,6 +46,223 @@ All OAuth2Token functions
 create an object
 
     my $OAuth2TokenObject = $Kernel::OM->Get('Kernel::System::OAuth2Token');
+
+=cut
+
+=head2 DataAdd()
+
+Add data to table.
+
+    my $Success = $OAuth2TokenObject->DataAdd(
+        ID                         => '...',
+        TokenConfigID              => '...',
+        AuthorizationCode          => '...',
+        Token                      => '...',
+        TokenExpirationDate        => '...',
+        RefreshToken               => '...',
+        RefreshTokenExpirationDate => '...',
+        ErrorMessage               => '...',
+        ErrorDescription           => '...',
+        ErrorCode                  => '...',
+        CreateTime                 => '...',
+        CreateBy                   => '...',
+        ChangeTime                 => '...',
+        ChangeBy                   => '...',
+    );
+
+Returns:
+
+    my $Success = 1;
+
+=cut
+
+=head2 DataUpdate()
+
+Update data attributes.
+
+    my $Success = $OAuth2TokenObject->DataUpdate(
+        ID                         => 1234,
+        UserID                     => 1,
+
+        # all other attributes are optional
+        TokenConfigID              => '...',
+        AuthorizationCode          => '...',
+        Token                      => '...',
+        TokenExpirationDate        => '...',
+        RefreshToken               => '...',
+        RefreshTokenExpirationDate => '...',
+        ErrorMessage               => '...',
+        ErrorDescription           => '...',
+        ErrorCode                  => '...',
+        CreateTime                 => '...',
+        CreateBy                   => '...',
+        ChangeTime                 => '...',
+        ChangeBy                   => '...',
+    );
+
+Returns:
+
+    my $Success = 1; # 1|0
+
+=cut
+
+=head2 DataGet()
+
+Get data attributes.
+
+    my %Data = $OAuth2TokenObject->DataGet(
+        ID                         => '...', # optional
+        TokenConfigID              => '...', # optional
+        AuthorizationCode          => '...', # optional
+        Token                      => '...', # optional
+        TokenExpirationDate        => '...', # optional
+        RefreshToken               => '...', # optional
+        RefreshTokenExpirationDate => '...', # optional
+        ErrorMessage               => '...', # optional
+        ErrorDescription           => '...', # optional
+        ErrorCode                  => '...', # optional
+        CreateTime                 => '...', # optional
+        CreateBy                   => '...', # optional
+        ChangeTime                 => '...', # optional
+        ChangeBy                   => '...', # optional
+    );
+
+Returns:
+
+    my %Data = (
+        ID                         => '...',
+        TokenConfigID              => '...',
+        AuthorizationCode          => '...',
+        Token                      => '...',
+        TokenExpirationDate        => '...',
+        RefreshToken               => '...',
+        RefreshTokenExpirationDate => '...',
+        ErrorMessage               => '...',
+        ErrorDescription           => '...',
+        ErrorCode                  => '...',
+        CreateTime                 => '...',
+        CreateBy                   => '...',
+        ChangeTime                 => '...',
+        ChangeBy                   => '...',
+    );
+
+=cut
+
+=head2 DataListGet()
+
+Get list data with attributes.
+
+    my @Data = $OAuth2TokenObject->DataListGet(
+        ID                         => '...', # optional
+        TokenConfigID              => '...', # optional
+        AuthorizationCode          => '...', # optional
+        Token                      => '...', # optional
+        TokenExpirationDate        => '...', # optional
+        RefreshToken               => '...', # optional
+        RefreshTokenExpirationDate => '...', # optional
+        ErrorMessage               => '...', # optional
+        ErrorDescription           => '...', # optional
+        ErrorCode                  => '...', # optional
+        CreateTime                 => '...', # optional
+        CreateBy                   => '...', # optional
+        ChangeTime                 => '...', # optional
+        ChangeBy                   => '...', # optional
+    );
+
+Returns:
+
+    my @Data = (
+        {
+            ID                         => '...',
+            TokenConfigID              => '...',
+            AuthorizationCode          => '...',
+            Token                      => '...',
+            TokenExpirationDate        => '...',
+            RefreshToken               => '...',
+            RefreshTokenExpirationDate => '...',
+            ErrorMessage               => '...',
+            ErrorDescription           => '...',
+            ErrorCode                  => '...',
+            CreateTime                 => '...',
+            CreateBy                   => '...',
+            ChangeTime                 => '...',
+            ChangeBy                   => '...',
+        },
+        ...
+    );
+
+=cut
+
+=head2 DataDelete()
+
+Remove data from table.
+
+    my $Success = $OAuth2TokenObject->DataDelete(
+        ID                         => '...', # optional
+        TokenConfigID              => '...', # optional
+        AuthorizationCode          => '...', # optional
+        Token                      => '...', # optional
+        TokenExpirationDate        => '...', # optional
+        RefreshToken               => '...', # optional
+        RefreshTokenExpirationDate => '...', # optional
+        ErrorMessage               => '...', # optional
+        ErrorDescription           => '...', # optional
+        ErrorCode                  => '...', # optional
+        CreateTime                 => '...', # optional
+        CreateBy                   => '...', # optional
+        ChangeTime                 => '...', # optional
+        ChangeBy                   => '...', # optional
+    );
+
+Returns:
+
+    my $Success = 1;
+
+=cut
+
+=head2 DataSearch()
+
+Search for value in defined attributes.
+
+    my %Data = $OAuth2TokenObject->DataSearch(
+        Search                     => 'test*test',
+        ID                         => '...', # optional
+        TokenConfigID              => '...', # optional
+        AuthorizationCode          => '...', # optional
+        Token                      => '...', # optional
+        TokenExpirationDate        => '...', # optional
+        RefreshToken               => '...', # optional
+        RefreshTokenExpirationDate => '...', # optional
+        ErrorMessage               => '...', # optional
+        ErrorDescription           => '...', # optional
+        ErrorCode                  => '...', # optional
+        CreateTime                 => '...', # optional
+        CreateBy                   => '...', # optional
+        ChangeTime                 => '...', # optional
+        ChangeBy                   => '...', # optional
+    );
+
+Returns:
+
+    my %Data = (
+        '1' => {
+            ID                         => '...',
+            TokenConfigID              => '...',
+            AuthorizationCode          => '...',
+            Token                      => '...',
+            TokenExpirationDate        => '...',
+            RefreshToken               => '...',
+            RefreshTokenExpirationDate => '...',
+            ErrorMessage               => '...',
+            ErrorDescription           => '...',
+            ErrorCode                  => '...',
+            CreateTime                 => '...',
+            CreateBy                   => '...',
+            ChangeTime                 => '...',
+            ChangeBy                   => '...',
+        },
+        ...
+    );
 
 =cut
 
@@ -317,7 +534,7 @@ sub GetAuthorizationCodeParameters {
     if ( !$TokenConfigID ) {
         $LogObject->Log(
             Priority => 'error',
-            Message  => 'Token config ID could not retrieved from response to authorization code request.',
+            Message  => 'Token config ID could not be retrieved from response to authorization code request.',
         );
         return;
     }
@@ -531,11 +748,16 @@ sub RequestTokenByAuthorizationCode {
         return;
     }
 
+    my $TokenErrorMessage = $Self->GetTokenErrorMessage(
+        TokenConfigID => $Param{TokenConfigID},
+        UserID        => $Param{UserID},
+    ) // '';
+
     if ( $Response{Status} ne '200 OK' ) {
         $LogObject->Log(
             Priority => 'error',
             Message =>
-                "Response for request for token config with ID $Param{TokenConfigID} and request type '$RequestType' was not '200 OK'.",
+                "Response for request for token config with ID $Param{TokenConfigID} and request type '$RequestType' was not '200 OK'. $TokenErrorMessage",
         );
         return;
     }
@@ -548,7 +770,7 @@ sub RequestTokenByAuthorizationCode {
         $LogObject->Log(
             Priority => 'error',
             Message =>
-                "Error fetching token for token config with ID $Param{TokenConfigID} after updating it with response data of request of type '$RequestType'.",
+                "Error fetching token for token config with ID $Param{TokenConfigID} after updating it with response data of request of type '$RequestType'. $TokenErrorMessage",
         );
         return;
     }
@@ -732,11 +954,16 @@ sub RequestTokenByRefreshToken {
         return;
     }
 
+    my $TokenErrorMessage = $Self->GetTokenErrorMessage(
+        TokenConfigID => $Param{TokenConfigID},
+        UserID        => $Param{UserID},
+    ) // '';
+
     if ( $Response{Status} ne '200 OK' ) {
         $LogObject->Log(
             Priority => 'error',
             Message =>
-                "Response for request for token config with ID $Param{TokenConfigID} and request type '$RequestType' was not '200 OK'.",
+                "Response for request for token config with ID $Param{TokenConfigID} and request type '$RequestType' was not '200 OK'. $TokenErrorMessage",
         );
         return;
     }
@@ -749,7 +976,7 @@ sub RequestTokenByRefreshToken {
         $LogObject->Log(
             Priority => 'error',
             Message =>
-                "Error fetching token for token config with ID $Param{TokenConfigID} after updating it with response data of request of type '$RequestType'.",
+                "Error fetching token for token config with ID $Param{TokenConfigID} after updating it with response data of request of type '$RequestType'. $TokenErrorMessage",
         );
         return;
     }

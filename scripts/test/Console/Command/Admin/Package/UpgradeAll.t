@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -21,8 +21,8 @@ my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
 # Initialize test database based on fresh OTRS 6 schema.
 my $Success = $HelperObject->ProvideTestDatabase(
     DatabaseXMLFiles => [
-        "$Home/scripts/database/otrs-schema.xml",
-        "$Home/scripts/database/otrs-initial_insert.xml",
+        "$Home/scripts/database/schema.xml",
+        "$Home/scripts/database/initial_insert.xml",
     ],
 );
 if ( !$Success ) {

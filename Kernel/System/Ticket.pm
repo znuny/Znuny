@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -1452,6 +1452,9 @@ It also contains all articles and a separate hash of the requested article by pa
         TicketID  => 123,
         ArticleID => 123, # optional
         UserID    => 53,
+
+        # Also fetch all attachments for all articles of the given ticket.
+        GetAllArticleAttachments => 1, # defaults to 0
     );
 
 Returns:
@@ -1546,6 +1549,17 @@ sub TicketDeepGet {
             DynamicFields => 1,
             RealNames     => 1,
         );
+
+        if ( $Param{GetAllArticleAttachments} ) {
+            my $ArticleAttachments = $Self->_GetBase64EncodedArticleAttachments(
+                TicketID  => $Param{TicketID},
+                ArticleID => $ArticleMeta->{ArticleID},
+            );
+
+            if ( IsArrayRefWithData($ArticleAttachments) ) {
+                $Article{Attachment} = $ArticleAttachments;
+            }
+        }
 
         push @{ $Data{Articles} }, $Self->_TicketDeepGetDataCleanUp(
             Data => \%Article,
@@ -1682,7 +1696,62 @@ sub TicketDeepGet {
     # %{} to prevent showing perl references in web service debug log.
     %{ $Data{Article} } = %{ $Articles[0] };
 
-    # get attachment index (without attachments)
+    my $ArticleAttachments = $Self->_GetBase64EncodedArticleAttachments(
+        TicketID  => $Param{TicketID},
+        ArticleID => $Param{ArticleID},
+    );
+    return %Data if !IsArrayRefWithData($ArticleAttachments);
+
+    $Data{Article}->{Attachment} = $ArticleAttachments;
+
+    return %Data;
+}
+
+=head2 _GetBase64EncodedArticleAttachments()
+
+Returns all attachments of the the article with the given ID (base-64 encoded).
+
+    my $Attachments = $TicketObject->_GetBase64EncodedArticleAttachments(
+        TicketID  => 123,
+        ArticleID => 123,
+    );
+
+Returns:
+
+    my $Attachments = [
+        {
+            Content            => '...', # base-64 encoded
+            ContentAlternative => '',
+            ContentID          => '',
+            ContentType        => 'application/pdf',
+            Filename           => 'StdAttachment-Test1.pdf',
+            FilesizeRaw        => 4722,
+            Disposition        => 'attachment',
+            FileID             => 2,
+        },
+
+        # ...
+    ];
+
+=cut
+
+sub _GetBase64EncodedArticleAttachments {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject     = $Kernel::OM->Get('Kernel::System::Log');
+    my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+
+    NEEDED:
+    for my $Needed (qw( TicketID ArticleID )) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
     my %AttachmentIndex = $ArticleObject->ArticleAttachmentIndex(
         TicketID         => $Param{TicketID},
         ArticleID        => $Param{ArticleID},
@@ -1690,7 +1759,7 @@ sub TicketDeepGet {
         ExcludeHTMLBody  => 0,                   # (optional) Exclude HTML body attachment
         ExcludeInline    => 0,                   # (optional) Exclude inline attachments
     );
-    return %Data if !%AttachmentIndex;
+    return [] if !%AttachmentIndex;
 
     my @Attachments;
     ATTACHMENT:
@@ -1700,7 +1769,7 @@ sub TicketDeepGet {
         my %Attachment = $ArticleObject->ArticleAttachment(
             TicketID  => $Param{TicketID},
             ArticleID => $Param{ArticleID},
-            FileID    => $FileID,                # as returned by ArticleAttachmentIndex
+            FileID    => $FileID,
         );
         next ATTACHMENT if !%Attachment;
 
@@ -1710,10 +1779,7 @@ sub TicketDeepGet {
         push @Attachments, \%Attachment;
     }
 
-    # set Attachments data
-    $Data{Article}->{Attachment} = \@Attachments;
-
-    return %Data;
+    return \@Attachments;
 }
 
 =head2 _TicketDeepGetDataCleanUp()

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -93,6 +93,18 @@ sub Run {
 
     my $CustomerIDs = { $CustomerUserObject->CustomerSearch( CustomerIDRaw => $Param{CustomerID} ) };
 
+    # if we are using multiple CustomerIDs for a CustomerUser, we have to expand our CustomerIDs variable
+    my @CustomerUserIDs = $CustomerUserObject->CustomerUserCustomerMemberList(
+        CustomerID => $Param{CustomerID},
+    );
+
+    CUSTOMERUSERID:
+    for my $CustomerUserID (@CustomerUserIDs) {
+        my %CustomerUserList = $CustomerUserObject->CustomerSearch( UserLogin => $CustomerUserID );
+        next CUSTOMERUSERID if !%CustomerUserList;
+        $CustomerIDs = { %$CustomerIDs, %CustomerUserList };
+    }
+
     # add page nav bar
     my $Total = scalar keys %{$CustomerIDs};
 
@@ -153,6 +165,21 @@ sub Run {
                 Name => 'OverviewResultSwitchToCustomer',
             );
         }
+    }
+
+    # show change customer relations button if the agent has permission
+    my $ChangeCustomerReleationsAccess = $LayoutObject->Permission(
+        Action => 'AdminCustomerUserCustomer',
+        Type   => 'rw',
+    );
+
+    if ($ChangeCustomerReleationsAccess) {
+        $LayoutObject->Block(
+            Name => 'ContentLargeCustomerIDAdd',
+            Data => {
+                CustomerID => $Param{CustomerID},
+            },
+        );
     }
 
     # Show add new customer button if:

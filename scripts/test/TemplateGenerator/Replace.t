@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -305,11 +305,11 @@ my @Tests = (
         Name => 'OTRS customer subject 20 letters + garbarge',    # <OTRS_CUSTOMER_SUBJECT[20]>
         Data => {
             From    => 'test@home.com',
-            Subject => 'RE: otrs',
+            Subject => 'otrs 123456789012345678901234567890',
         },
         RichText => 0,
         Template => 'Test <OTRS_CUSTOMER_SUBJECT[20]>',
-        Result   => 'Test otrs',
+        Result   => 'Test otrs 123456789012345 [...]',
     },
     {
         Name => 'OTRS responsible firstname',                     # <OTRS_RESPONSIBLE_UserFirstname>

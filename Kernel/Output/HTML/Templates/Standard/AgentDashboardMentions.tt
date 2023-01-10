@@ -1,0 +1,33 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+<table class="DataTable">
+<thead>
+    <tr>
+        <th>Ticket#</th>
+        <th>Last Mention</th>
+    </tr>
+</thead>
+    <tbody>
+[% RenderBlockStart("MentionRow") %]
+        <tr>
+            <td>
+                <a href="[% Env("Baselink") %]Action=AgentTicketZoom;TicketID=[% Data.TicketID | html %]">[% Data.TicketNumer | html %]</a>
+            </td>
+            <td>
+                [% Data.CreateTime | Localize("TimeShort") | html%]
+            </td>
+        </tr>
+[% RenderBlockEnd("MentionRow") %]
+[% RenderBlockStart("NoMentions") %]
+            <tr>
+                <td>[% Translate("none") | html %]</td>
+            </tr>
+[% RenderBlockEnd("NoMentions") %]
+    </tbody>
+</table>

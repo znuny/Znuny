@@ -1,11 +1,12 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::Perl::CacheCleanup)
 
 package Kernel::System::UnitTest::Helper;
 
@@ -112,13 +113,14 @@ sub new {
         $Self->{RestoreDatabase} = 1;
         my $StartedTransaction = $Self->BeginWork();
         $Self->{UnitTestDriverObject}->True( $StartedTransaction, 'Started database transaction.' );
-
     }
 
     # Disable scheduling of asynchronous tasks using C<AsynchronousExecutor> component of System daemon.
     if ( $Param{DisableAsyncCalls} ) {
         $Self->DisableAsyncCalls();
     }
+
+    $Self->_DisableDefaultSysConfigSettings();
 
     if ( $Param{DisableSysConfigs} ) {
         $Self->DisableSysConfigs(
@@ -369,7 +371,7 @@ sub BeginWork {
 
 Rolls back the current database transaction.
 
-    $HelperObject->Rollback()
+    $HelperObject->Rollback();
 
 =cut
 
@@ -432,13 +434,19 @@ the current system time will be used.
 All calls to methods of Kernel::System::Time and Kernel::System::DateTime will
 use the given time afterwards.
 
-    my $Timestamp = $HelperObject->FixedTimeSet(366475757);         # with Timestamp
-    my $Timestamp = $HelperObject->FixedTimeSet($DateTimeObject);   # with previously created DateTime object
-    my $Timestamp = $HelperObject->FixedTimeSet();                  # set to current date and time
+    # with Timestamp
+    my $Timestamp = $HelperObject->FixedTimeSet(366475757);
+
+    # with previously created DateTime object
+    my $Timestamp = $HelperObject->FixedTimeSet($DateTimeObject);
+
+    # set to current date and time
+    my $Timestamp = $HelperObject->FixedTimeSet();
 
 Returns:
 
-    my $Timestamp = 1454420017;    # date/time as seconds
+    # date/time as seconds
+    my $Timestamp = 1454420017;
 
 =cut
 
@@ -488,9 +496,8 @@ sub FixedTimeAddSeconds {
 }
 
 # See http://perldoc.perl.org/5.10.0/perlsub.html#Overriding-Built-in-Functions
-## nofilter(TidyAll::Plugin::OTRS::Perl::Time)
-## nofilter(TidyAll::Plugin::OTRS::Migrations::OTRS6::TimeObject)
-## nofilter(TidyAll::Plugin::OTRS::Migrations::OTRS6::DateTime)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Time)
+
 sub _MockPerlTimeHandling {
     no warnings 'redefine';    ## no critic
     *CORE::GLOBAL::time = sub {
@@ -541,7 +548,7 @@ sub _MockPerlTimeHandling {
         if ( $INC{$FilePath} ) {
             no warnings 'redefine';    ## no critic
             delete $INC{$FilePath};
-            require $FilePath;         ## nofilter(TidyAll::Plugin::OTRS::Perl::Require)
+            require $FilePath;         ## nofilter(TidyAll::Plugin::Znuny::Perl::Require)
         }
     }
 
@@ -928,6 +935,27 @@ sub DisableAsyncCalls {
     return 1;
 }
 
+=head2 _DisableDefaultSysConfigSettings()
+
+These SysConfig options are disabled by default.
+
+=cut
+
+sub _DisableDefaultSysConfigSettings {
+    my ( $Self, %Param ) = @_;
+
+    my @DisableSysConfigs = (
+        'Ticket::EventModulePost###999-NotifyOnEmptyProcessTickets',
+        'Ticket::EventModulePost###Mentions',
+    );
+
+    $Self->DisableSysConfigs(
+        DisableSysConfigs => \@DisableSysConfigs,
+    );
+
+    return 1;
+}
+
 =head2 DisableSysConfigs()
 
 Disables SysConfigs for current UnitTest.
@@ -993,11 +1021,11 @@ receive all calls sent over system C<DBObject>.
 All database contents will be automatically dropped when the Helper object is destroyed.
 
     $HelperObject->ProvideTestDatabase(
-        DatabaseXMLString => $XML,      # (optional) OTRS database XML schema to execute
+        DatabaseXMLString => $XML,      # (optional) database XML schema to execute
                                         # or
         DatabaseXMLFiles => [           # (optional) List of XML files to load and execute
-            '/opt/otrs/scripts/database/otrs-schema.xml',
-            '/opt/otrs/scripts/database/otrs-initial_insert.xml',
+            '/opt/otrs/scripts/database/schema.xml',
+            '/opt/otrs/scripts/database/initial_insert.xml',
         ],
     );
 

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -17,7 +17,7 @@ use Storable();
 use Term::ANSIColor();
 use Time::HiRes();
 
-use Kernel::System::VariableCheck qw(IsHashRefWithData IsArrayRefWithData);
+use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -62,19 +62,21 @@ sub new {
 run all or some tests located in C<scripts/test/**/*.t> and print the result.
 
     $UnitTestObject->Run(
-        Name                   => ['JSON', 'User'],     # optional, execute certain test files only
-        Directory              => 'Selenium',           # optional, execute tests in subdirectory
-        Verbose                => 1,                    # optional (default 0), only show result details for all tests, not just failing
-        SubmitURL              => $URL,                 # optional, send results to unit test result server
-        SubmitAuth             => '0abc86125f0fd37baae' # optional authentication string for unit test result server
-        SubmitResultAsExitCode => 1,                    # optional, specify if exit code should not indicate if tests were ok/not ok, but if submission was successful instead
-        JobID                  => 12,                   # optional job ID for unit test submission to server
-        Scenario               => 'OTRS 6 git',         # optional scenario identifier for unit test submission to server
-        PostTestScripts        => ['...'],              # Script(s) to execute after a test has been run.
-                                                        #  You can specify %File%, %TestOk% and %TestNotOk% as dynamic arguments.
-        PreSubmitScripts       => ['...'],              # Script(s) to execute after all tests have been executed
-                                                        #  and the results are about to be sent to the server.
-        NumberOfTestRuns       => 10,                   # optional (default 1), number of successive runs for every single unit test
+        Tests                  => ['JSON', 'User'],             # optional, execute certain test files only
+        Directory              => ['Selenium', 'User'],         # optional, execute tests in subdirectory
+        ExcludeDirectory       => ['Selenium/Agent/Admin'],     # optional, all test files in the specified directory will be Excluded.
+        SOPMFile               => ['ITSMCore.sopm'],            # optional, execute all test files which are defined in these sopm.
+        Verbose                => 1,                            # optional (default 0), only show result details for all tests, not just failing
+        SubmitURL              => $URL,                         # optional, send results to unit test result server
+        SubmitAuth             => '0abc86125f0fd37baae'         # optional authentication string for unit test result server
+        SubmitResultAsExitCode => 1,                            # optional, specify if exit code should not indicate if tests were ok/not ok, but if submission was successful instead
+        JobID                  => 12,                           # optional job ID for unit test submission to server
+        Scenario               => 'Znuny 6 git',                # optional scenario identifier for unit test submission to server
+        PostTestScripts        => ['...'],                      # Script(s) to execute after a test has been run.
+                                                                #  You can specify %File%, %TestOk% and %TestNotOk% as dynamic arguments.
+        PreSubmitScripts       => ['...'],                      # Script(s) to execute after all tests have been executed
+                                                                #  and the results are about to be sent to the server.
+        NumberOfTestRuns       => 10,                           # optional (default 1), number of successive runs for every single unit test
     );
 
 Please note that the individual test files are not executed in the main process,
@@ -88,18 +90,19 @@ sub Run {
 
     $Self->{Verbose} = $Param{Verbose};
 
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+    my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
+    my $MainObject    = $Kernel::OM->Get('Kernel::System::Main');
 
     my $Product = $ConfigObject->Get('Product') . " " . $ConfigObject->Get('Version');
     my $Home    = $ConfigObject->Get('Home');
 
-    my $Directory = "$Home/scripts/test";
-    if ( $Param{Directory} ) {
-        $Directory .= "/$Param{Directory}";
-        $Directory =~ s/\.//g;
-    }
-
+    # Replace ".t" at the end for every "--test"-option to support commands like this:
+    # ./bin/otrs.Console.pl Dev::UnitTest::Run --verbose --test scripts/test/Mentions/MentionsPermissionCheck.t
     my @TestsToExecute = @{ $Param{Tests} // [] };
+
+    # Search and replace ".t" but if not found return $_ that tests without ".t" get inserted into the array again.
+    @TestsToExecute = map { $_ =~ s{\.t\z}{}; $_ } @TestsToExecute;    ## no critic
 
     my $UnitTestBlacklist = $ConfigObject->Get('UnitTest::Blacklist');
     my @BlacklistedTests;
@@ -126,11 +129,94 @@ sub Run {
     my $StartTime      = CORE::time();                      # Use non-overridden time().
     my $StartTimeHiRes = [ Time::HiRes::gettimeofday() ];
 
-    my @Files = $Kernel::OM->Get('Kernel::System::Main')->DirectoryRead(
-        Directory => $Directory,
-        Filter    => '*.t',
-        Recursive => 1,
-    );
+    my $Directory = "$Home/scripts/test";
+
+    my @Files;
+    if ( !$Param{Directory} && !$Param{SOPMFile} ) {
+        @Files = $MainObject->DirectoryRead(
+            Directory => $Directory,
+            Filter    => '*.t',
+            Recursive => 1,
+        );
+    }
+
+    if ( IsArrayRefWithData( $Param{Directory} ) ) {
+        @Files = ();
+
+        for my $CurrentDirectory ( @{ $Param{Directory} } ) {
+            $CurrentDirectory =~ s{scripts\/test/}{}g;
+
+            my $TestDirectory = "$Directory/$CurrentDirectory";
+
+            $TestDirectory =~ s{\.}{}g;
+            $TestDirectory =~ s{\/\/}{\/}g;
+            $TestDirectory =~ s{\/$}{}g;
+
+            my @CurrentFiles = $MainObject->DirectoryRead(
+                Directory => $TestDirectory,
+                Filter    => '*.t',
+                Recursive => 1,
+            );
+            push @Files, @CurrentFiles;
+        }
+    }
+
+    my @ExcludeFiles;
+    if ( IsArrayRefWithData( $Param{ExcludeDirectory} ) ) {
+        for my $CurrentDirectory ( @{ $Param{ExcludeDirectory} } ) {
+            $CurrentDirectory =~ s{scripts\/test/}{}g;
+
+            my $ExcludeDirectory = "$Directory/$CurrentDirectory";
+
+            $ExcludeDirectory =~ s{\.}{}g;
+            $ExcludeDirectory =~ s{\/\/}{\/}g;
+            $ExcludeDirectory =~ s{\/$}{}g;
+
+            my @CurrentFiles = $MainObject->DirectoryRead(
+                Directory => $ExcludeDirectory,
+                Filter    => '*.t',
+                Recursive => 1,
+            );
+            push @ExcludeFiles, @CurrentFiles;
+        }
+    }
+
+    if ( IsArrayRefWithData( $Param{SOPMFile} ) ) {
+        SOPMFILE:
+        for my $SOPMFile ( @{ $Param{SOPMFile} } ) {
+            next SOPMFILE if ( !-f $SOPMFile );
+
+            my $Content = $MainObject->FileRead(
+                Location => $SOPMFile,
+                Mode     => 'utf8',
+                Result   => 'SCALAR',
+            );
+            next SOPMFILE if !$Content;
+
+            my %Structure = $PackageObject->PackageParse(
+                String => $Content,
+            );
+            next SOPMFILE if !%Structure;
+            next SOPMFILE if !IsArrayRefWithData( $Structure{Filelist} );
+
+            push @Files,
+                map  { $Home . '/' . $_ }
+                grep {m/\.t/}
+                map  { $_->{Location} } @{ $Structure{Filelist} };
+        }
+    }
+
+    my %Files        = map { $_ => 1 } @Files;
+    my %ExcludeFiles = map { $_ => 1 } @ExcludeFiles;
+
+    @Files = ();
+    FILE:
+    for my $File ( sort keys %Files ) {
+        my $ExcludeFile = grep { $File eq $_ } sort keys %ExcludeFiles;
+        next FILE if $ExcludeFile;
+
+        push @Files, $File;
+    }
 
     my $NumberOfTestRuns = $Param{NumberOfTestRuns};
     if ( !$NumberOfTestRuns ) {
@@ -256,6 +342,7 @@ sub _HandleFile {
                 Verbose      => $Self->{Verbose},
                 ANSI         => $Self->{ANSI},
                 DataDiffType => $Param{DataDiffType},
+                TestFile     => $Param{File},
             },
         );
 

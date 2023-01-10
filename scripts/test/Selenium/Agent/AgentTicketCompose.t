@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -412,9 +412,19 @@ $Selenium->RunTest(
         my $Message = 'Article subject will be empty if the subject contains only the ticket hook!';
 
         $Self->True(
+            $Selenium->execute_script("return \$('.MessageBox.Notice:contains(\"$Message\")').length == 0;"),
+            "No Notification about empty subject is shown",
+        );
+
+        $Selenium->execute_script("\$('#Subject').val( \$('#Subject').val().replace(/].*/, ']') ).trigger('change');");
+
+        $Selenium->WaitFor( JavaScript => "return \$('.MessageBox.Notice:contains(\"$Message\")').length;" );
+        $Self->True(
             $Selenium->execute_script("return \$('.MessageBox.Notice:contains(\"$Message\")').length;"),
             "Notification about empty subject is found",
         );
+
+        $Selenium->execute_script("\$('#Subject').val( \$('#Subject').val() + ' some text' );");
 
         # Check duplication of customer user who doesn't exist in the system (see bug#13784).
         $Selenium->find_element( "#ToCustomer", 'css' )->send_keys( 'Test', "\N{U+E007}" );

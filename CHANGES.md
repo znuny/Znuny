@@ -1,3 +1,117 @@
+# 6.5.1 2023-??-??
+ - 2023-01-09 Integrated package Znuny4OTRS-UserMaxArticlesPerPage.
+ - 2023-01-06 Fixed 'ACL misbehaviour in processes' - ActivityEntityID is missing in AgentTicketProcess.pm. [#316](https://github.com/znuny/Znuny/issues/316)
+ - 2023-01-05 Fixed JavaScript error in edit-mode in AdminACL.
+ - 2023-01-05 Changed JS alert() function to Core.UI.Dialog.ShowAlert().
+ - 2023-01-04 Show PackageRequired- and ModuleRequired-information while package installation & update.
+ - 2023-01-04 Reworked information of LastViews.
+ - 2023-01-03 Process activity dialog article fields with subject and body can now be pre-filled. The Body also support RichtText. Thanks to Berner Fachhochschule (bfh.ch) for sponsoring this feature.
+ - 2022-12-29 Reenabled TicketID for reporting (Dynamic/TicketList).
+ - 2022-12-19 Added check for maximum filename length to file uploads.
+ - 2022-12-16 Added new function Kernel::System::Web::Request::GetParams() to get request parameters.
+ - 2022-12-13 Fixed SQL injection in TicketSearch.pm (CVE-2022-4427). Thanks for hints to Tim Püttmanns, maxence.
+ - 2022-12-13 Added non-standard time zone mapping for iCal/ICS handling.
+ - 2022-12-12 Fixed bulk un-mention action via mention view link.
+ - 2022-12-07 Added independent ToolBar::TicketProcess. This is only visible when a valid process exists.
+ - 2022-11-30 Replaced dynamic field type WebserviceText with WebserviceDropdown.
+ - 2022-11-25 Moved code of ITSMCore to Znuny Framework that will only be executed if ITSM actually is installed.
+ - 2022-11-24 Fixed handling of empty result for frontend autocompletion of dynamic field type WebserviceMultiselect.
+ - 2022-11-24 SOAP::Lite: Data of elements with attribute 'xsi:type' now will be returned as a hash or array instead of an arbitrary object that Znuny cannot handle.
+ - 2022-09-16 Auto responses now will not be sent if the recipient would be a system address.
+
+# 6.4.5 2022-12-20
+ - 2022-12-13 Fixed SQL injection in TicketSearch.pm (CVE-2022-4427). Thanks for hints to Tim Püttmanns, maxence.
+
+# 6.4.4 2022-11-23
+ - 2022-11-10 Fixed overlapping input list in search dialog.
+ - 2022-11-09 Fixed displayed value for dynamic field type WebserviceText when template placeholder <OTRS_TICKET_DynamicField_*_Value> is being used. [#297](https://github.com/znuny/Znuny/issues/297)
+ - 2022-11-02 Added missing migration for generic interface mapping module Znuny4OTRSAdvanced.
+ - 2022-10-28 Sector Nord AG: Processmanagement AppointmentCreate - removed unnecessary filter on read permission for CalendarName. Thanks to Sector Nord AG (@LuBroering - Lukas Bröring). [PR#302](https://github.com/znuny/Znuny/pull/302)
+ - 2022-10-27 Fixed "Invalid date/time string" errors in otrs.Daemon.pl. Thanks to Paweł Bogusławski (@pboguslawski). [PR#311](https://github.com/znuny/Znuny/pull/311)
+ - 2022-10-26 Fixed sorting of SysConfig entity value types.
+ - 2022-10-25 Added migration module to add dynamic fields 'TicketCalendarStartTime' and 'TicketCalendarEndTime'.
+ - 2022-10-21 Agent error screen now shows navigation bar if possible.
+ - 2022-10-13 Fixed SQL condition in Kernel::System::CustomerUser::DB::CustomerSearch.
+ - 2022-10-12 S/MIME certificates will now be reindexed during Znuny migration.
+ - 2022-10-12 Increased size of column "subject" of table "smime_keys".
+ - 2022-10-11 Added input field for OAuth2 token scope to admin dialog.
+ - 2022-10-07 Integrate DashboardMyLastChangedTickets. Thanks to Renée Bäcker (@reneeb). [PR#177](https://github.com/znuny/Znuny/pull/177)
+ - 2022-10-07 Renamed changed settings from FrontendRichText::Path to Frontend::RichText::Path. Thanks to Emin Yazi (@eyazi), Efflux. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#304](https://github.com/znuny/Znuny/pull/304)
+ - 2022-10-05 Improved usability - AgentTicketBulk - Set DynamicField_NAMEUsed checkbox to true if it is set before or if dynamic field is mandatory.
+ - 2022-09-29 Fixed bug - hour 0 is not possible in the default settings for TimeWorkingHours. Thanks to Sector Nord AG (@LuBroering - Lukas Bröring). [PR#296](https://github.com/znuny/Znuny/pull/296)
+ - 2022-09-28 Sector Nord AG: Added Sysconfig options to control more settings of CKEditor. Thanks to Sector Nord AG (@jsinagowitz). [PR#285](https://github.com/znuny/Znuny/pull/285)
+ - 2022-09-27 Fixed TransitionValidation CheckValueGet() - Added already replaced value 'FieldValue'.
+ - 2022-09-27 Added FilterViews for FilterAppointments function.
+ - 2022-09-27 Changed way of ticket acl checking for AgentTicketActionCommon from name to login.
+ - 2022-09-26 Added missing HTML filter to AgentTicketZoom/MentionsTable template.
+ - 2022-09-26 Fixed Bug in SupportDataCollector plugin for default user.
+ - 2022-09-26 Added missing HTML filter to AgentTicketActionCommon template.
+ - 2022-09-22 Prepared support for ICS calendar events attachments/string data. Prepared information section and modal dialog for calendar events to AgentTicketZoom view. Both not activated yet due to issues with WET/WEST timezone.
+
+# 6.4.3 2022-09-21
+ - 2022-09-20 Misc. improvements for user mentions.
+ - 2022-09-19 Added input fields for OAuth2 token request URLs to admin dialog. [#294](https://github.com/znuny/Znuny/issues/294)
+ - 2022-09-16 Fixed handling of out-of-office flag in generic interface operation User::OutOfOffice.
+ - 2022-09-15 Fixed option "add all attachments" not being available in dialog AdminGenericInterfaceInvokerDefault and not being evaluated in invoker Ticket::Generic.
+ - 2022-09-13 Fixed visible PluginContainer (AppointmentCalendar) when empty. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#292](https://github.com/znuny/Znuny/pull/292)
+ - 2022-09-12 Fixed time units always mandatory in AgentTicketBulk. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#290](https://github.com/znuny/Znuny/pull/290)
+ - 2022-09-12 Fixed activity dialog error on missing templates (StandardTemplate). Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#291](https://github.com/znuny/Znuny/pull/291)
+ - 2022-09-09 Increased size of columns of database tables oauth2_token_config and oauth2_token. [#289](https://github.com/znuny/Znuny/issues/289)
+ - 2022-09-08 Added AppointmentFilter to AgentAppointmentCalendarOverview. Thanks to Kevin Janssen (@BuTzZ). [PR#181](https://github.com/znuny/Znuny/pull/181)
+ - 2022-09-08 Fixed LDAP user sync. Fixes undef/empty string comparisons that may occur between data stored in DB and data coming from LDAP. Thanks to Paweł Bogusławski (@pboguslawski). [PR#74](https://github.com/znuny/Znuny/pull/74)
+ - 2022-09-08 Changed previous upstream name to 'Internal' channel name. Thanks to Paweł Bogusławski (@pboguslawski). [PR#95](https://github.com/znuny/Znuny/pull/95)
+ - 2022-09-07 Fixed log flooding via Net::LDAP. Reduction of LDAP_SIZELIMIT_EXCEEDED messages. Thanks to Paweł Bogusławski (@pboguslawski). [PR#178](https://github.com/znuny/Znuny/pull/178)
+ - 2022-09-05 Added 'AdditionalSearchParameters' to Toolbar TicketSearchFulltext to define the standard search more precisely. Thanks to Tim Püttmanns (@tipue-dev), maxence. [#284](https://github.com/znuny/Znuny/pull/284)
+ - 2022-09-02 Fixed moved elements not being shown when filter is active in AdminDynamicFieldScreenConfiguration.
+ - 2022-09-02 Fixed default display value for dynamic fields of type 'Webservice'.
+ - 2022-09-02 Bugfix and Feature for 0050-CIC-CustomerUserList. Thanks to Kevin Janssen (@BuTzZ). [PR#147](https://github.com/znuny/Znuny/pull/147)
+ - 2022-09-01 Added missing 'Translatable' flag for 'Message sending error'.Thanks to Paweł Bogusławski (@pboguslawski). [PR#131](https://github.com/znuny/Znuny/pull/131)
+ - 2022-08-31 Bugfix for process and process templates. Thanks to @LuBroering (Lukas Bröring SectorNord AG). [PR#276](https://github.com/znuny/Znuny/pull/276). Thanks to Tim Püttmanns (@tipue-dev), maxence. [#277](https://github.com/znuny/Znuny/pull/277)
+ - 2022-08-31 Added events for article email backend transmission errors. Thanks to Renée Bäcker. [PR#176](https://github.com/znuny/Znuny/pull/176)
+ - 2022-08-26 Fixed encoding of log output. Thanks to Roland Jäger and Bernhard Schmalhofer. [#286](https://github.com/znuny/Znuny/issues/286)
+ - 2022-08-24 Enabled pending time selection for process ticket dialogs depending on selected ticket state. Thanks to Tim Püttmanns, maxence. [PR#271](https://github.com/znuny/Znuny/pull/271)
+ - 2022-08-22 Turned logging in Kernel::System::LinkObject::LinkAdd() from 'error' to 'notice' for certain cases. Thanks for hint to Paweł Bogusławski.
+ - 2022-08-22 Fixed evaluation of parameter TicketID in Kernel::Output::HTML::Article::Base::ArticleActions. Thanks to @LotharZok, maxence. [PR#278](https://github.com/znuny/Znuny/pull/278)
+ - 2022-08-22 Added check to prevent infinite loop to Core.UI.InputFields.js.
+ - 2022-08-18 Fixed usage of time zones that have become obsolete. Thanks to Christian Ullrich. [#281](https://github.com/znuny/Znuny/issues/281)
+ - 2022-08-17 Sector Nord AG: Added support for HTML content of dynamic fields to transition action TicketCreate (analog to TicketArticleCreate). Thanks to Sector Nord AG (Lukas Bröring). [#235](https://github.com/znuny/Znuny/pull/235)
+ - 2022-08-17 Added OAuth2 token support to HTTP::REST generic interface requester.
+ - 2022-08-10 Fixed accounted time field missing in AgentTicketBulk action.
+ - 2022-08-02 Changed user of mention notification in the ticket history to the one triggering the notification. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#273](https://github.com/znuny/Znuny/pull/273)
+
+# 6.4.2 2022-07-28
+ - 2022-07-28 Fixed check for recipients in mention notifications. [#270)(https://github.com/znuny/Znuny/issues/270)
+ - 2022-07-28 Added missing module registration to customer interface.
+ - 2022-07-28 Fixed content type of output of AJAX backend modules Kernel/Modules/AJAXRichTextAutocompletion.pm and Kernel/Modules/Mentions.pm.
+ - 2022-07-28 Package Znuny-SMIME will now be uninstalled on Znuny upgrade.
+
+# 6.4.1 2022-07-27
+ - 2022-07-21 Fixed creation of tickets for recurring appointments.
+ - 2022-07-20 Other users now can be referenced/mentioned in rich text editor and will be notified about it.
+ - 2022-07-05 Attachment filenames in ticket zoom will now be truncated if they are too long to be displayed correctly.
+ - 2022-06-29 Added support for nested group search to LDAP modules based on [PR#11](https://github.com/znuny/Znuny/pull/11). Thanks to Frank Wall (@fraenki).
+ - 2022-06-23 Fixed issue with high CPU load on parsing e-mails in PostMaster filter DetectAttachment.
+ - 2022-06-22 Fixed OAuth2 authentication when using POP3 with Microsoft Office 365 or Outlook. [#259](https://github.com/znuny/Znuny/issues/259)
+ - 2022-06-21 Added support for tag OTRS_TicketArticleCreateEvent and attachments to invoker Ticket::Generic.
+ - 2022-06-21 Added support for JSON web tokens (JWT).
+ - 2022-06-20 Improved S/MIME key storage.
+ - 2022-06-17 Added support for autocompletion to CKEditor.
+ - 2022-06-09 Added S/MIME check for sender header. Thanks to @akmet [PR#68](https://github.com/znuny/Znuny/pull/68).
+ - 2022-05-31 Maximum number of lines of quote in body of a message now can be limited in AgentTicketForward and AgentTicketCompose.
+ - 2022-05-30 Fixed use of URL parameter in Kernel::System::Calendar::Plugin::Ticket::Link::LinkList and Kernel::System::Calendar::Export::ICal::Export.
+ - 2022-05-25 Initial search in dialog AgentLinkObject is now limited to tickets which belong to the same customer ID.
+ - 2022-05-24 Sanitized output of ACL Perl config file when dumping and deploying it to avoid unexpected execution of arbitrary Perl code.
+ - 2022-05-19 Sector Nord AG: Fixed transition action for recurring appointments with specific recurrence frequency. Thanks to Sector Nord AG (@jsinagowitz). [#219](https://github.com/znuny/Znuny/pull/219)
+ - 2022-05-10 Mandatory fields in expanded bulk action widgets now will be handled correctly as mandatory.
+ - 2022-05-04 Fixed select fields not being shown in modernized mode after submit with input errors.
+ - 2022-04-21 Added standard templates to [Agent/Customer]TicketProcess.
+ - 2022-03-14 Fixed sending notifications to invalid customer users.
+ - 2022-03-11 Removed system registration.
+
+# 6.3.4 2022-06-15
+ - 2022-05-30 Fixed use of URL parameter in Kernel::System::Calendar::Plugin::Ticket::Link::LinkList and Kernel::System::Calendar::Export::ICal::Export.
+ - 2022-05-24 Sanitized output of ACL Perl config file when dumping and deploying it to avoid unexpected execution of arbitrary Perl code.
+
 # 6.3.3 2022-04-28
  - 2022-04-27 Deactivated Perl code execution for Template::Toolkit. Thanks to Sven Oesterling (OTOBO).
  - 2022-04-25 Kernel::System::DynamicField::Webservice::DisplayValueGet() now also searches for the stored value to retrieve the display value.
@@ -115,7 +229,7 @@
  - 2021-10-01 Fixed error "Can't sign: unable to write 'random state'" if sending emails signed with S/MIME (OTRS bug #14522). Thanks to Kai Herlemann (@KaiHerlemann). [#72](https://github.com/znuny/Znuny/pull/72)
  - 2021-08-31 Added generic interface operation SessionRemove. Thanks to Kevin Janssen (@BuTzZ). [#120](https://github.com/znuny/Znuny/pull/120)
  - 2021-08-20 Added SysConfig option to enable week numbers in the datepicker widget. Thanks to Renée Bäcker (@reneeb). [#89](https://github.com/znuny/Znuny/pull/89)
- - 2021-08-20 Added new autocomplete values to input fields. Thanks to maxence (@tipue-dev). [#67](https://github.com/znuny/Znuny/pull/67)
+ - 2021-08-20 Added new autocomplete values to input fields. Thanks to Tim Püttmanns (@tipue-dev), maxence. [#67](https://github.com/znuny/Znuny/pull/67)
 
 # 6.1.2 2021-09-29
  - 2021-09-28 Added missing migration module scripts::MigrateToZnuny6_1::InitializeDefaultCronjobs.
@@ -127,9 +241,9 @@
  - 2021-09-09 Fixed handling of database query results in Kernel::System::Ticket::_TicketGetClosed.
  - 2021-09-01 Fixed permission check in generic interface operation User::OutOfOffice.
  - 2021-08-31 Fixed UI hang on admin group name change (#121). Thanks to Paweł Bogusławski (@pboguslawski). [#121](https://github.com/znuny/Znuny/pull/121)
- - 2021-08-31 Fixed storage switch only executable from main directory (#116). Thanks to maxence (@tipue-dev). [#116](https://github.com/znuny/Znuny/pull/116)
+ - 2021-08-31 Fixed storage switch only executable from main directory (#116). Thanks to Tim Püttmanns (@tipue-dev), maxence. [#116](https://github.com/znuny/Znuny/pull/116)
  - 2021-08-23 Added default value for CurrentComment in ACLUpdate.
- - 2021-08-20 Fixed double encoding for dynamic field filters in ticket overviews (#51). Thanks to maxence (@tipue-dev). [#51](https://github.com/znuny/Znuny/pull/51)
+ - 2021-08-20 Fixed double encoding for dynamic field filters in ticket overviews (#51). Thanks to Tim Püttmanns (@tipue-dev), maxence. [#51](https://github.com/znuny/Znuny/pull/51)
  - 2021-08-20 Fixed #107 - AgentTicketEmailOutbound "Empty subject" notification is not translated (#111.) Thanks to Tronsy (@Tronsy). [#111](https://github.com/znuny/Znuny/pull/111)
 
 # 6.1.1 2021-08-05
@@ -149,7 +263,7 @@
  - 2021-07-02 Integrated package Znuny4OTRS-WebUserAgent.
  - 2021-06-25 Added fix for #29 - linebreak breaks fulltext search (#49). Thanks to Johannes Nickel (@hanneshal). [#49](https://github.com/znuny/Znuny/pull/49)
  - 2021-06-25 Incorrect empty hash initializations fixed (#96). Thanks to Paweł Bogusławski (@pboguslawski). [#96](https://github.com/znuny/Znuny/pull/96)
- - 2021-06-25 Changed breadcrumb for the main action entry to a link. (#91). Thanks to maxence (@tipue-dev). [#91](https://github.com/znuny/Znuny/pull/91)
+ - 2021-06-25 Changed breadcrumb for the main action entry to a link. (#91). Thanks to Tim Püttmanns (@tipue-dev), maxence. [#91](https://github.com/znuny/Znuny/pull/91)
  - 2021-06-25 Integrated package Znuny4OTRS-TimeAccountingWebservice.
  - 2021-06-23 Integrated package Znuny4OTRS-DynamicFieldWebservice.
  - 2021-06-23 Integrated package Znuny4OTRS-GIArticleSend.
@@ -161,6 +275,37 @@
  - 2021-06-15 Improvements for Dev::Code::CPANUpdate (#38). Thanks to Renée Bäcker (@reneeb). [#38](https://github.com/znuny/Znuny/pull/38)
  - 2021-06-15 Use ticket title as the default appointment title (#90). Thanks to Renée Bäcker (@reneeb). [#90](https://github.com/znuny/Znuny/pull/90)
  - 2021-06-15 Column list validation before saving agent preferences (#84). Thanks to Paweł Bogusławski (@pboguslawski). [#84](https://github.com/znuny/Znuny/pull/84)
+
+# 6.0.48 2022-12-20
+ - 2022-12-13 Fixed SQL injection in TicketSearch.pm (CVE-2022-4427). Thanks for hints to Tim Püttmanns, maxence.
+
+# 6.0.47 2022-11-23
+ - 2022-11-10 Fixed overlapping input list in search dialog.
+ - 2022-10-27 Fixed "Invalid date/time string" errors in otrs.Daemon.pl. Thanks to Paweł Bogusławski (@pboguslawski). [PR#311](https://github.com/znuny/Znuny/pull/311)
+ - 2022-10-21 Agent error screen now shows navigation bar if possible.
+ - 2022-10-13 Fixed SQL condition in Kernel::System::CustomerUser::DB::CustomerSearch.
+ - 2022-09-29 Fixed bug - hour 0 is not possible in the default settings for TimeWorkingHours. Thanks to Sector Nord AG (@LuBroering - Lukas Bröring). [PR#296](https://github.com/znuny/Znuny/pull/296)
+ - 2022-09-26 Added missing HTML filter to AgentTicketActionCommon template.
+
+# 6.0.46 2022-09-21
+ - 2022-09-07 Fixed log flooding via Net::LDAP. Reduction of LDAP_SIZELIMIT_EXCEEDED messages. Thanks to Paweł Bogusławski (@pboguslawski). [PR#178](https://github.com/znuny/Znuny/pull/178)
+ - 2022-09-07 Improved nonexistent and invalid service names handling in postmaster filters. Thanks to Paweł Bogusławski (@pboguslawski). [PR#197](https://github.com/znuny/Znuny/pull/197)
+ - 2022-08-26 Fixed encoding of log output. Thanks to Roland Jäger and Bernhard Schmalhofer. [#286](https://github.com/znuny/Znuny/issues/286)
+ - 2022-08-22 Added check to prevent infinite loop to Core.UI.InputFields.js.
+ - 2022-08-18 Fixed usage of time zones that have become obsolete. Thanks to Christian Ullrich. [#281](https://github.com/znuny/Znuny/issues/281)
+
+# 6.0.45 2022-07-27
+ - 2022-07-05 Attachment filenames in ticket zoom will now be truncated if they are too long to be displayed correctly.
+ - 2022-06-23 Fixed issue with high CPU load on parsing e-mails in PostMaster filter DetectAttachment.
+
+# 6.0.44 2022-06-15
+ - 2022-06-09 Added S/MIME check for sender header. Thanks to @akmet [PR#68](https://github.com/znuny/Znuny/pull/68).
+ - 2022-05-24 Sanitized output of ACL Perl config file when dumping and deploying it to avoid unexpected execution of arbitrary Perl code.
+ - 2022-05-09 Mandatory fields in expanded bulk action widgets now will be handled correctly as mandatory.
+ - 2022-05-04 Fixed select fields not being shown in modernized mode after submit with input errors.
+
+# 6.0.43 2022-05-04
+ - 2022-05-02 Fixed migration module RemoveGenericAgentSystemCommandCalls.
 
 # 6.0.42 2022-04-28
  - 2022-04-27 Deactivated Perl code execution for Template::Toolkit. Thanks to Sven Oesterling (OTOBO).
@@ -222,9 +367,9 @@
  - 2021-09-23 Customer users with too many failed login attempts will now be set to "invalid-temporarily" and cannot log in anymore.
  - 2021-09-09 Fixed handling of database query results in Kernel::System::Ticket::_TicketGetClosed.
  - 2021-08-31 Fixed UI hang on admin group name change (#121). Thanks to Paweł Bogusławski (@pboguslawski). [#121](https://github.com/znuny/Znuny/pull/121)
- - 2021-08-31 Fixed storage switch only executable from main directory (#116). Thanks to maxence (@tipue-dev). [#116](https://github.com/znuny/Znuny/pull/116)
+ - 2021-08-31 Fixed storage switch only executable from main directory (#116). Thanks to Tim Püttmanns (@tipue-dev), maxence. [#116](https://github.com/znuny/Znuny/pull/116)
  - 2021-08-23 Added default value for CurrentComment in ACLUpdate.
- - 2021-08-20 Fixed double encoding for dynamic field filters in ticket overviews (#51). Thanks to maxence (@tipue-dev). [#51](https://github.com/znuny/Znuny/pull/51)
+ - 2021-08-20 Fixed double encoding for dynamic field filters in ticket overviews (#51). Thanks to Tim Püttmanns (@tipue-dev), maxence. [#51](https://github.com/znuny/Znuny/pull/51)
  - 2021-08-20 Fixed #107 - AgentTicketEmailOutbound "Empty subject" notification is not translated (#111.) Thanks to Tronsy (@Tronsy). [#111](https://github.com/znuny/Znuny/pull/111)
  - 2021-08-18 Fixed layout bug in BuildSelectionDataRefCreate
 
@@ -236,7 +381,7 @@
  - 2021-07-26 Added permission check to appointment list (CVE-2021-36091). Thanks for hints to Centuran Consulting.
  - 2021-06-25 Linebreak now does not break fulltext search anymore (#49). Thanks to Johannes Nickel (@hanneshal). [#49](https://github.com/znuny/Znuny/pull/49)
  - 2021-06-25 Incorrect empty hash initializations fixed (#96). Thanks to Paweł Bogusławski (@pboguslawski). [#96](https://github.com/znuny/Znuny/pull/96)
- - 2021-06-25 Changed breadcrumb for the main action entry to a link. (#91). Thanks to maxence (@tipue-dev). [#91](https://github.com/znuny/Znuny/pull/91)
+ - 2021-06-25 Changed breadcrumb for the main action entry to a link. (#91). Thanks to Tim Püttmanns (@tipue-dev), maxence. [#91](https://github.com/znuny/Znuny/pull/91)
  - 2021-06-17 Fixed not needed error message in TicketList.pm (#94). Thanks to Paweł Bogusławski (@pboguslawski). [#94](https://github.com/znuny/Znuny/pull/94)
  - 2021-06-15 Do not warn agents about empty article subjects by default (#88). Thanks to Renée Bäcker (@reneeb). [#88]
  - 2021-06-15 Column list validation before saving agent preferences (#84). Thanks to Paweł Bogusławski (@pboguslawski). [#84](https://github.com/znuny/Znuny/pull/84)

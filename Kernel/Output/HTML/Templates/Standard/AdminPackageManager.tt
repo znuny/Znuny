@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -269,7 +269,55 @@
             </div>
         </div>
         <div class="ContentColumn">
-
+            [% IF Data.PackageRequired || Data.ModuleRequired %]
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <div class="WidgetAction Toggle">
+                        <a href="#" title="Show or hide the content"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+                    </div>
+                    <h2>[% Data.Name | html %]</h2>
+                </div>
+                <div class="Content">
+                [% FOREACH Type IN ['PackageRequired', 'ModuleRequired'] %]
+                    [% IF Type == 'PackageRequired' && Data.PackageRequired %]
+                    <h1 class="SpacingTop">[% Translate("Package") | html %]</h1>
+                    [% END %]
+                    [% IF Type == 'ModuleRequired' && Data.ModuleRequired %]
+                    <h1 class="SpacingTop">[% Translate("Module") | html %]</h1>
+                    [% END %]
+                    <ul class="PackageRequired">
+                        [% FOREACH Item IN Data.$Type %]
+                        <li class="CheckResult[% Item.IsInstalled %]">
+                            <h3 class="Heading">
+                                <span title="[% Item.IsInstalled %]" class="Flag Small [% Item.IsInstalled %]">
+                                    <span>[% Item.IsInstalled %]</span>
+                                </span>
+                                [% Item.Name %][% IF Item.Version %] - [% Translate("Version") | html %] [% Item.Version %] [% END %]
+                            </h3>
+                            [% IF Item.IsInstalled == 'OK' %]
+                                [% IF Type == 'PackageRequired' %]
+                                    <p class="Value">[% Translate("Required package %s is already installed.", Item.Name) | html %]</p>
+                                [% ELSE %]
+                                    <p class="Value">[% Translate("Required Perl module %s is already installed.", Item.Name) | html %]</p>
+                                [% END %]
+                            [% ELSE %]
+                                [% IF Type == 'PackageRequired' %]
+                                    [% IF Item.IsRequiredVersionInstalled == 1 %]
+                                        <p class="Value">[% Translate("Required package %s needs to get installed!", Item.Name) | html %]</p>
+                                    [% ELSE %]
+                                        <p class="Value">[% Translate("Required package %s needs to get updated to version %s!", Item.Name, Item.Version) | html %]</p>
+                                    [% END %]
+                                [% ELSE %]
+                                    <p class="Value">[% Translate("Required Perl module %s needs to get installed or updated!", Item.Name) | html %]</p>
+                                [% END %]
+                            [% END %]
+                        </li>
+                        [% END %]
+                    </ul>
+                [% END %]
+                </div>
+            </div>
+            [% END %]
             <div class="WidgetSimple">
                 <div class="Header">
                     <h2>[% Translate(Data.Title) | html %]</h2>

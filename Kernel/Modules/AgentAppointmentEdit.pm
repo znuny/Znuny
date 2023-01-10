@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -1489,8 +1489,9 @@ sub Run {
         $GetParam{UserID} = $Self->{UserID};
 
         # Get passed plugin parameters.
-        my @PluginParams = grep { $_ =~ /^Plugin_/ } keys %GetParam;
+        my @PluginParams = grep { $_ =~ /^Plugin/ } keys %GetParam;
 
+        my @OldRecurringAppointments;
         if (%Appointment) {
 
             # Continue only if coming from edit screen
@@ -1533,6 +1534,10 @@ sub Run {
                 }
             }
 
+            # restore old recurring for plugin data deletion
+            @OldRecurringAppointments = $AppointmentObject->AppointmentRecurringGet(
+                AppointmentID => $Appointment{AppointmentID},
+            );
             $Success = $AppointmentObject->AppointmentUpdate(
                 %Appointment,
                 %GetParam,
@@ -1567,6 +1572,21 @@ sub Run {
                     Param     => $PluginParam{$PluginKey},
                 );
 
+                # delete all old recurring appointments
+                for my $Appointment (@OldRecurringAppointments) {
+                    $PluginObject->PluginFunction(
+                        PluginKey      => $PluginKey,
+                        PluginFunction => 'Delete',
+                        PluginData     => {
+                            GetParam    => \%GetParam,
+                            Appointment => $Appointment,
+                            Plugin      => \%Plugin,
+                            UserID      => $Self->{UserID},
+                        },
+                    );
+                }
+
+                # add or update data
                 $PluginObject->PluginFunction(
                     PluginKey      => $PluginKey,
                     PluginFunction => 'Update',
@@ -1624,6 +1644,9 @@ sub Run {
                         && $_->{ParentID} eq $Appointment{AppointmentID}
                     } @CalendarAppointments;
 
+                $GetParam{Recurring} = grep { defined $_->{ParentID} && $_->{ParentID} eq $Appointment{AppointmentID} }
+                    @CalendarAppointments;
+
                 $Param{PluginList} = $PluginObject->PluginList();
 
                 # Remove all existing links.
@@ -1643,30 +1666,30 @@ sub Run {
                             Message  => "Links could not be deleted for appointment $CurrentAppointmentID!",
                         );
                     }
+                }
 
-                    PLUGIN:
-                    for my $PluginKey ( sort keys %{ $Param{PluginList} } ) {
+                PLUGIN:
+                for my $PluginKey ( sort keys %{ $Param{PluginList} } ) {
 
-                        my %Plugin = (
-                            %{ $Param{PluginList}->{$PluginKey} },
-                            PluginKey => $PluginKey,
-                        );
+                    my %Plugin = (
+                        %{ $Param{PluginList}->{$PluginKey} },
+                        PluginKey => $PluginKey,
+                    );
 
-                        my %Appointment = $AppointmentObject->AppointmentGet(
-                            AppointmentID => $CurrentAppointmentID,
-                        );
+                    my %Appointment = $AppointmentObject->AppointmentGet(
+                        AppointmentID => $Appointment{AppointmentID},
+                    );
 
-                        $PluginObject->PluginFunction(
-                            PluginKey      => $PluginKey,
-                            PluginFunction => 'Delete',
-                            PluginData     => {
-                                GetParam    => \%GetParam,
-                                Appointment => \%Appointment,
-                                Plugin      => \%Plugin,
-                                UserID      => $Self->{UserID},
-                            },
-                        );
-                    }
+                    $PluginObject->PluginFunction(
+                        PluginKey      => $PluginKey,
+                        PluginFunction => 'Delete',
+                        PluginData     => {
+                            GetParam    => \%GetParam,
+                            Appointment => \%Appointment,
+                            Plugin      => \%Plugin,
+                            UserID      => $Self->{UserID},
+                        },
+                    );
                 }
 
                 $Success = $AppointmentObject->AppointmentDelete(

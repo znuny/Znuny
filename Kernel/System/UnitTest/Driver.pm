@@ -1,11 +1,12 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::CodeStyle::STDERRCheck)
 
 package Kernel::System::UnitTest::Driver;
 
@@ -37,7 +38,7 @@ Kernel::System::UnitTest::Driver - unit test file execution wrapper
 
 create unit test driver object. Do not use it directly, instead use:
 
-    my $Driver = $Kernel::OM->Create(
+    my $DriverObject = $Kernel::OM->Create(
         'Kernel::System::UnitTest::Driver',
         ObjectParams => {
             Verbose => $Self->{Verbose},
@@ -70,6 +71,9 @@ sub new {
     # Report results via file.
     $Self->{ResultDataFile} = $Kernel::OM->Get('Kernel::Config')->Get('Home') . '/var/tmp/UnitTest.dump';
     unlink $Self->{ResultDataFile};    # purge if exists
+
+    # add TestFile
+    $Self->{TestFile} = $Param{TestFile};
 
     return $Self;
 }
@@ -111,7 +115,7 @@ sub Run {
     # Create a new scope to be sure to destroy local object of the test files.
     {
         # Make sure every UT uses its own clean environment.
-        ## nofilter(TidyAll::Plugin::OTRS::Perl::ObjectManagerCreation)
+        ## nofilter(TidyAll::Plugin::Znuny::Perl::ObjectManagerCreation)
         local $Kernel::OM = Kernel::System::ObjectManager->new(
             'Kernel::System::Log' => {
                 LogPrefix => 'OTRS-otrs.UnitTest',
@@ -182,7 +186,7 @@ Send a scalar value to this function along with the test's name:
 Internally, the function receives this value and evaluates it to see
 if it's true, returning 1 in this case or undef, otherwise.
 
-    my $TrueResult = $UnitTestObject->True(
+    $UnitTestObject->True(
         $TestValue,
         'Test Name',
     );
@@ -210,6 +214,18 @@ test for a scalar value that evaluates to false.
 
 It has the same interface as L</True()>, but tests
 for a false value instead.
+
+    $UnitTestObject->False(1, 'Test Name');
+
+    $UnitTestObject->False($ParamA, 'Test Name');
+
+Internally, the function receives this value and evaluates it to see
+if it's false, returning 1 in this case or undef, otherwise.
+
+    $UnitTestObject->False(
+        $TestValue,
+        'Test Name',
+    );
 
 =cut
 
@@ -240,7 +256,7 @@ below.
 
 Returns 1 if the values were equal, or undef otherwise.
 
-    my $IsResult = $UnitTestObject->Is(
+    $UnitTestObject->Is(
         $ValueFromFunction,      # test data
         1,                       # expected value
         'Test Name',
@@ -276,8 +292,18 @@ sub Is {
 
 compares two scalar values for inequality.
 
-It has the same interface as L</Is()>, but tests
-for inequality instead.
+It has the same interface as L</Is()>, but tests for inequality instead.
+
+    $UnitTestObject->IsNot($A, $B, 'Test Name');
+
+Returns 1 if the values were not equal, or undef otherwise.
+
+    $UnitTestObject->IsNot(
+        $ValueFromFunction,      # test data
+        1,                       # expected value
+        'Test Name',
+    );
+
 
 =cut
 
@@ -313,13 +339,13 @@ To this function you must send the references to two data structures to be compa
 and the name that the test will take, this is done as shown in the examples
 below.
 
-    $UnitTestObject-> IsDeeply($ParamA, $ParamB, 'Test Name');
+    $UnitTestObject->IsDeeply($ParamA, $ParamB, 'Test Name');
 
 Where $ParamA and $ParamB must be references to a structure (scalar, list or hash).
 
 Returns 1 if the data structures are the same, or undef otherwise.
 
-    my $IsDeeplyResult = $UnitTestObject->IsDeeply(
+    $UnitTestObject->IsDeeply(
         \%ResultHash,           # test data
         \%ExpectedHash,         # expected value
         'Dummy Test Name',
@@ -421,8 +447,19 @@ sub IsDeeply {
 
 compares two data structures for inequality.
 
-It has the same interface as L</IsDeeply()>, but tests
-for inequality instead.
+It has the same interface as L</IsDeeply()>, but tests for inequality instead.
+
+    $UnitTestObject->IsNotDeeply($ParamA, $ParamB, 'Test Name');
+
+Where $ParamA and $ParamB must be references to a structure (scalar, list or hash).
+
+Returns 1 if the data structures are not the same, or undef otherwise.
+
+    $UnitTestObject->IsNotDeeply(
+        \%ResultHash,           # test data
+        \%ExpectedHash,         # expected value
+        'Dummy Test Name',
+    );
 
 =cut
 
@@ -464,7 +501,7 @@ sub IsNotDeeply {
 attach a screenshot taken during Selenium error handling. These will be sent to the server
 together with the test results.
 
-    $Driver->AttachSeleniumScreenshot(
+    $UnitTestObject->AttachSeleniumScreenshot(
         Filename => $Filename,
         Content  => $Data               # raw image data
     );

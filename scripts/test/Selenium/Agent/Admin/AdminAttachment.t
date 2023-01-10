@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -79,7 +79,7 @@ $Selenium->RunTest(
             );
 
             # file checks
-            my $Location = $Home . "/scripts/test/sample/StdAttachment/StdAttachment-Test1.$File";
+            my $Location = $Selenium->{Home} . "/scripts/test/sample/StdAttachment/StdAttachment-Test1.$File";
 
             my $AttachmentName = 'StdAttachment' . $HelperObject->GetRandomNumber();
             $Attachments{$File} = $AttachmentName;

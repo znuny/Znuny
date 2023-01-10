@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -30,6 +30,13 @@ $Selenium->RunTest(
         my $PrivatePath = $ConfigObject->Get('Home') . "/var/tmp/private";
         mkpath( [$CertPath],    0, 0770 );    ## no critic
         mkpath( [$PrivatePath], 0, 0770 );    ## no critic
+
+        # enable SecureMode
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'SecureMode',
+            Value => 1,
+        );
 
         # make sure to enable cloud services
         $HelperObject->ConfigSettingChange(
@@ -103,7 +110,6 @@ $Selenium->RunTest(
             AdminQueueTemplates
             AdminTemplate
             AdminTemplateAttachment
-            AdminRegistration
             AdminRole
             AdminRoleGroup
             AdminRoleUser

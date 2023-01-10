@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -1237,7 +1237,7 @@ sub Run {
                     TICKETIDPARTNER:
                     for my $TicketIDPartner (@TicketIDs) {
 
-                        next TICKETIDPARTNER if $TicketID ne $TicketIDPartner;
+                        next TICKETIDPARTNER if $TicketID == $TicketIDPartner;
 
                         $LinkObject->LinkAdd(
                             SourceObject => 'Ticket',
@@ -1690,18 +1690,22 @@ sub _Mask {
 
     # show time accounting box
     if ( $ConfigObject->Get('Ticket::Frontend::AccountTime') ) {
+        my $IsTimeUnitsRequired = $ConfigObject->Get('Ticket::Frontend::NeedAccountedTime');
+        $LayoutObject->AddJSData(
+            Key   => 'TimeUnitsRequired',
+            Value => $IsTimeUnitsRequired || '',
+        );
 
-        $Param{TimeUnitsRequired} = (
-            $ConfigObject->Get('Ticket::Frontend::NeedAccountedTime')
-            ? 'Validate_DependingRequiredAND Validate_Depending_Subject'
-            : ''
+        my $TimeUnitsInputType = $ConfigObject->Get('Ticket::Frontend::AccountTimeType') // 'Text';
+        $LayoutObject->AddJSData(
+            Key   => 'TimeUnitsInputType',
+            Value => $TimeUnitsInputType,
         );
 
         $Param{TimeUnitsBlock} = $LayoutObject->TimeUnits(
-            ID                => 'TimeUnits',
-            Name              => 'TimeUnits',
-            TimeUnits         => $Param{TimeUnits},
-            TimeUnitsRequired => $Param{TimeUnitsRequired},
+            ID        => 'TimeUnits',
+            Name      => 'TimeUnits',
+            TimeUnits => $Param{TimeUnits},
         );
 
         $LayoutObject->Block(
@@ -1709,17 +1713,10 @@ sub _Mask {
             Data => \%Param,
         );
 
-        $Param{TimeUnitsRequired} = (
-            $ConfigObject->Get('Ticket::Frontend::NeedAccountedTime')
-            ? 'Validate_DependingRequiredAND Validate_Depending_EmailSubject'
-            : ''
-        );
-
         $Param{EmailTimeUnitsBlock} = $LayoutObject->TimeUnits(
-            ID                => 'EmailTimeUnits',
-            Name              => 'EmailTimeUnits',
-            TimeUnits         => $Param{EmailTimeUnits},
-            TimeUnitsRequired => $Param{TimeUnitsRequired},
+            ID        => 'EmailTimeUnits',
+            Name      => 'EmailTimeUnits',
+            TimeUnits => $Param{EmailTimeUnits},
         );
         $LayoutObject->Block(
             Name => 'EmailTimeUnits',
@@ -1807,7 +1804,9 @@ sub _Mask {
             my $DynamicFieldSet = $ParamObject->GetParam(
                 Param => 'DynamicField_' . $DynamicFieldConfig->{Name} . 'Used'
             );
-            if ($DynamicFieldSet) {
+
+            # set DynamicField_NAMEUsed checkbox to true if it is set before or if mandatory (2)
+            if ( $DynamicFieldSet || $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2 ) {
                 $IsChecked = 'true';
             }
         }
@@ -1951,9 +1950,11 @@ sub _GetTypes {
 sub _GetOwners {
     my ( $Self, %Param ) = @_;
 
+    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+
     # Get all users.
-    my %AllGroupsMembers = $Kernel::OM->Get('Kernel::System::User')->UserList(
-        Type  => 'Long',
+    my %AllGroupsMembers = $UserObject->UserList(
+        Type  => 'Short',
         Valid => 1
     );
 
@@ -2010,16 +2011,28 @@ sub _GetOwners {
         UserID        => $Self->{UserID},
     );
 
-    return $TicketObject->TicketAclData() if $ACL;
+    if ($ACL) {
+        %OwnerList = $TicketObject->TicketAclData();
+    }
+
+    my %AllGroupsMembersFullnames = $UserObject->UserList(
+        Type  => 'Long',
+        Valid => 1,
+    );
+
+    @OwnerList{ keys %OwnerList } = @AllGroupsMembersFullnames{ keys %OwnerList };
+
     return %OwnerList;
 }
 
 sub _GetResponsibles {
     my ( $Self, %Param ) = @_;
 
+    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+
     # Get all users.
-    my %AllGroupsMembers = $Kernel::OM->Get('Kernel::System::User')->UserList(
-        Type  => 'Long',
+    my %AllGroupsMembers = $UserObject->UserList(
+        Type  => 'Short',
         Valid => 1
     );
 
@@ -2076,7 +2089,17 @@ sub _GetResponsibles {
         UserID        => $Self->{UserID},
     );
 
-    return $TicketObject->TicketAclData() if $ACL;
+    if ($ACL) {
+        %ResponsibleList = $TicketObject->TicketAclData();
+    }
+
+    my %AllGroupsMembersFullnames = $UserObject->UserList(
+        Type  => 'Long',
+        Valid => 1,
+    );
+
+    @ResponsibleList{ keys %ResponsibleList } = @AllGroupsMembersFullnames{ keys %ResponsibleList };
+
     return %ResponsibleList;
 }
 

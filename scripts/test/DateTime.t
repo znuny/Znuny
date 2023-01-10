@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -29,6 +29,8 @@ if ( grep { $^V eq $_ } @BlacklistPerlVersions ) {
     $Self->True( 1, "Current Perl version $^V is known to be buggy for this test, skipping." );
     return 1;
 }
+
+use DateTime::TimeZone;
 
 use Kernel::System::DateTime;
 
@@ -493,6 +495,41 @@ for my $TestConfig (@TestConfigs) {
 }
 
 #
+# Tests for TimeZoneList()
+#
+my $TimeZones = Kernel::System::DateTime->TimeZoneList();
+my %TimeZones = map { $_ => 1 } @{$TimeZones};
+
+$Self->True(
+    $TimeZones{'Europe/Berlin'},
+    'TimeZoneList() without parameters must return list with time zone "Europe/Berlin".',
+);
+$Self->False(
+    $TimeZones{'Africa/Kinshasa'},
+    'TimeZoneList() without parameters must return list without obsolete time zone "Africa/Kinshasa".',
+);
+
+$TimeZones = Kernel::System::DateTime->TimeZoneList(
+    IncludeTimeZone => 'Africa/Kinshasa',
+);
+%TimeZones = map { $_ => 1 } @{$TimeZones};
+
+$Self->True(
+    $TimeZones{'Africa/Kinshasa'},
+    'TimeZoneList() with parameter IncludeTimeZone must return list with obsolete time zone "Africa/Kinshasa".',
+);
+
+$TimeZones = Kernel::System::DateTime->TimeZoneList(
+    IncludeTimeZone => 'INVALIDTIMEZONE',
+);
+%TimeZones = map { $_ => 1 } @{$TimeZones};
+
+$Self->False(
+    $TimeZones{INVALIDTIMEZONE},
+    'TimeZoneList() with parameter IncludeTimeZone with invalid time zone must return list without invalid time zone.',
+);
+
+#
 # Tests for SystemTimeZoneGet()
 #
 my $ExpectedSystemTimeZone = 'Europe/Berlin';
@@ -504,5 +541,44 @@ $Self->Is(
     $ExpectedSystemTimeZone,
     'System time zone must match expected one.'
 );
+
+#
+# Tests for creating DateTime object with time zone link.
+# Time zone links are obsolete time zone names that are mapped to other valid time zones.
+# It must be possible to use these but internally they should be mapped to the valid time zone.
+# The DateTime object then also must report the valid time zone.
+#
+my %RealByLinkedTimeZones = DateTime::TimeZone->links();
+
+# Reduce to three linked time zones for tests.
+my $LinkedTimeZoneCounter = 0;
+for my $LinkedTimeZone ( sort keys %RealByLinkedTimeZones ) {
+    $LinkedTimeZoneCounter++;
+    delete $RealByLinkedTimeZones{$LinkedTimeZone} if $LinkedTimeZoneCounter > 3;
+}
+
+LINKEDTIMEZONE:
+for my $LinkedTimeZone ( sort keys %RealByLinkedTimeZones ) {
+    my $RealTimeZone = $RealByLinkedTimeZones{$LinkedTimeZone};
+
+    my $DateTimeObject = $Kernel::OM->Create(
+        'Kernel::System::DateTime',
+        ObjectParams => {
+            TimeZone => $LinkedTimeZone,
+        }
+    );
+
+    $Self->True(
+        ref $DateTimeObject,
+        "Creation of DateTime object must have been successful for linked time zone $LinkedTimeZone.",
+    ) || next LINKEDTIMEZONE;
+
+    my $DateTimeData = $DateTimeObject->Get();
+    $Self->Is(
+        scalar $DateTimeData->{TimeZone},
+        $RealTimeZone,
+        "DateTime object created with linked time zone $LinkedTimeZone must have been set to real time zone $RealTimeZone.",
+    );
+}
 
 1;

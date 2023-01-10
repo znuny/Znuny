@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -105,7 +105,7 @@ our %DistToInstType = (
 
 our $OSDist;
 eval {
-    require Linux::Distribution;    ## nofilter(TidyAll::Plugin::OTRS::Perl::Require)
+    require Linux::Distribution;    ## nofilter(TidyAll::Plugin::Znuny::Perl::Require)
     import Linux::Distribution;
     $OSDist = Linux::Distribution::distribution_name() || '';
 };
@@ -206,6 +206,28 @@ my @NeededModules = (
             emerge => 'dev-perl/Crypt-Eksblowfish',
             zypper => 'perl-Crypt-Eksblowfish',
             ports  => 'security/p5-Crypt-Eksblowfish',
+        },
+    },
+    {
+        Module    => 'Crypt::JWT',
+        Required  => 0,
+        Comment   => 'JSON web token support.',
+        InstTypes => {
+            aptget => 'libcrypt-jwt-perl',
+            emerge => 'dev-perl/Crypt-JWT',
+            zypper => 'perl-Crypt-JWT',
+            ports  => 'security/p5-Crypt-JWT',
+        },
+    },
+    {
+        Module    => 'Crypt::OpenSSL::X509',
+        Required  => 0,
+        Comment   => 'X509 certificate support.',
+        InstTypes => {
+            aptget => 'libcrypt-openssl-x509-perl',
+            emerge => 'dev-perl/Crypt-OpenSSL-X509',
+            zypper => 'perl-Crypt-OpenSSL-X509',
+            ports  => 'security/p5-Crypt-OpenSSL-X509',
         },
     },
     {
@@ -373,6 +395,17 @@ my @NeededModules = (
         },
     },
     {
+        Module    => 'iCal::Parser',
+        Required  => 1,
+        Comment   => 'Required for calendar events.',
+        InstTypes => {
+            aptget => 'libical-parser-perl',
+            emerge => 'perl-core/iCal-Parser',
+            zypper => 'perl-iCal-Parser',
+            ports  => 'devel/p5-iCal-Parser',
+        },
+    },
+    {
         Module              => 'IO::Socket::SSL',
         Required            => 0,
         Comment             => 'Required for SSL connections to web and mail servers.',
@@ -537,6 +570,17 @@ my @NeededModules = (
         },
     },
     {
+        Module    => 'Net::LDAP::Constant',
+        Required  => 0,
+        Comment   => 'Required for directory authentication.',
+        InstTypes => {
+            aptget => 'libnet-ldap-perl',
+            emerge => 'dev-perl/perl-ldap',
+            zypper => 'perl-ldap',
+            ports  => 'net/p5-perl-ldap',
+        },
+    },
+    {
         Module              => 'Net::SMTP',
         Required            => 0,
         Comment             => 'Simple Mail Transfer Protocol Client.',
@@ -617,6 +661,17 @@ my @NeededModules = (
             emerge => 'perl-core/Time-HiRes',
             zypper => 'perl-Time-HiRes',
             ports  => 'devel/p5-Time-HiRes',
+        },
+    },
+    {
+        Module    => 'Time::Piece',
+        Required  => 1,
+        Comment   => 'Required for calendar events.',
+        InstTypes => {
+            aptget => 'libtime-piece-perl',
+            emerge => 'perl-core/Time-Piece',
+            zypper => 'perl-Time-Piece',
+            ports  => 'devel/p5-Time-Piece',
         },
     },
     {

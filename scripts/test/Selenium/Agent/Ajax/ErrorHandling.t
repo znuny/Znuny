@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -73,6 +73,9 @@ $Selenium->RunTest(
             ),
             'Check for opened alert text',
         );
+
+        # the footer is in the way some times
+        sleep(1);
 
         # Close dialog.
         $Selenium->find_element( '#DialogButton2', 'css' )->click();
@@ -242,8 +245,8 @@ JAVASCRIPT
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID");
 
         # Open the owner change dialog.
-        $Selenium->execute_script("\$('.Cluster ul ul').addClass('ForceVisible');");
-        $Selenium->find_element("//a[contains(\@href, \'Action=AgentTicketOwner' )]")->click();
+        $Selenium->execute_script("\$('.Cluster ul ul#nav-People-container').addClass('ForceVisible');");
+        $Selenium->execute_script('$(\'#nav-People a[href*="Action=AgentTicketOwner"]\').click()');
 
         $Selenium->WaitFor( WindowCount => 2 );
         my $Handles = $Selenium->get_window_handles();

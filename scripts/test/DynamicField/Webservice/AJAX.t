@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -34,6 +34,7 @@ my $AJAXDynamicFieldWebserviceObject = Kernel::Modules::AJAXDynamicFieldWebservi
 
 $LayoutObject->{UserID} = 1;
 
+my $Result         = $UnitTestWebserviceObject->Result();
 my $WebserviceName = 'DynamicFieldWebservice';
 my $DynamicField   = $WebserviceName . 'AJAX';
 
@@ -71,10 +72,10 @@ my @DynamicFields = (
         },
     },
     {
-        Name       => $DynamicField . 'Text',
-        Label      => $DynamicField . 'Text',
+        Name       => $DynamicField . 'Dropdown',
+        Label      => $DynamicField . 'Dropdown',
         ObjectType => 'Ticket',
-        FieldType  => 'WebserviceText',
+        FieldType  => 'WebserviceDropdown',
         Config     => {
             DefaultValue        => '',
             Link                => '',
@@ -128,44 +129,44 @@ $ZnunyHelperObject->_DynamicFieldsCreate(@DynamicFields);
 
 my @Tests = (
 
-    # WebserviceText
+    # WebserviceDropdown
     {
-        Name  => 'WebserviceText - Autocomplete (nothing)',
+        Name  => 'WebserviceDropdown - Autocomplete (nothing)',
         Param => {
             Subaction        => 'Autocomplete',
             SearchTerms      => 'xxx',
-            FieldType        => 'WebserviceText',
-            DynamicFieldName => $DynamicField . 'Text',
+            FieldType        => 'WebserviceDropdown',
+            DynamicFieldName => $DynamicField . 'Dropdown',
         },
         ExpectedResult => '\[\]',
     },
     {
-        Name  => 'WebserviceText - Autocomplete (succeeding)',
+        Name  => 'WebserviceDropdown - Autocomplete (succeeding)',
         Param => {
             Subaction        => 'Autocomplete',
             SearchTerms      => 'Znuny',
-            FieldType        => 'WebserviceText',
-            DynamicFieldName => $DynamicField . 'Text',
+            FieldType        => 'WebserviceDropdown',
+            DynamicFieldName => $DynamicField . 'Dropdown',
         },
         ExpectedResult => '[{"StoredValue":"Znuny","DisplayValue":"Znuny"}]',
     },
     {
-        Name  => 'WebserviceText - AutoFill (nothing)',
+        Name  => 'WebserviceDropdown - AutoFill (nothing)',
         Param => {
             Subaction        => 'AutoFill',
             SearchTerms      => 'xxx',
-            FieldType        => 'WebserviceText',
-            DynamicFieldName => $DynamicField . 'Text',
+            FieldType        => 'WebserviceDropdown',
+            DynamicFieldName => $DynamicField . 'Dropdown',
         },
         ExpectedResult => '"Field1":null',
     },
     {
-        Name  => 'WebserviceText - AutoFill (succeeding)',
+        Name  => 'WebserviceDropdown - AutoFill (succeeding)',
         Param => {
             Subaction        => 'AutoFill',
             SearchTerms      => 'Znuny',
-            FieldType        => 'WebserviceText',
-            DynamicFieldName => $DynamicField . 'Text',
+            FieldType        => 'WebserviceDropdown',
+            DynamicFieldName => $DynamicField . 'Dropdown',
         },
         ExpectedResult => '"Field1":"Znuny"',
     },

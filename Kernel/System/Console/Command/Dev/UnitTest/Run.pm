@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -30,14 +30,31 @@ sub Configure {
         Required   => 0,
         HasValue   => 1,
         Multiple   => 1,
-        ValueRegex => qr/.*/smx,
+        ValueRegex => qr/.+/smx,
     );
     $Self->AddOption(
         Name        => 'directory',
         Description => "Run all test files in the specified directory.",
         Required    => 0,
         HasValue    => 1,
-        ValueRegex  => qr/.*/smx,
+        Multiple    => 1,
+        ValueRegex  => qr/.+/smx,
+    );
+    $Self->AddOption(
+        Name        => 'exclude-directory',
+        Description => "All test files in the specified directory will be excluded.",
+        Required    => 0,
+        HasValue    => 1,
+        Multiple    => 1,
+        ValueRegex  => qr/.+/smx,
+    );
+    $Self->AddOption(
+        Name        => 'sopm-file',
+        Description => "Run all test files contained in the given SOPM file.",
+        Required    => 0,
+        HasValue    => 1,
+        Multiple    => 1,
+        ValueRegex  => qr/.+/smx,
     );
     $Self->AddOption(
         Name        => 'verbose',
@@ -148,6 +165,8 @@ sub Run {
     my $FunctionResult = $Kernel::OM->Get('Kernel::System::UnitTest')->Run(
         Tests                  => $Self->GetOption('test'),
         Directory              => $Self->GetOption('directory') || $DefaultDirectory,
+        ExcludeDirectory       => $Self->GetOption('exclude-directory'),
+        SOPMFile               => $Self->GetOption('sopm-file'),
         JobID                  => $Self->GetOption('job-id'),
         Scenario               => $Self->GetOption('scenario'),
         SubmitURL              => $Self->GetOption('submit-url'),

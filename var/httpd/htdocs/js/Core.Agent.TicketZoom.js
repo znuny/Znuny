@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -497,6 +497,49 @@ Core.Agent.TicketZoom = (function (TargetNS) {
 
     /**
      * @private
+     * @name InitCalendarEvents
+     * @memberof Core.Agent.TicketZoom
+     * @function
+     * @description
+     *      This function initializes calendar events for article.
+     */
+     function InitCalendarEvents() {
+        var $FieldContainer,
+            OverlayTitle,
+            OverlayHTML;
+
+        $('.CalendarEvents .ShowCalendarEventsInfoOverlay').on('click', function(event) {
+            $FieldContainer = $(this).parent().siblings('.FieldContainer.Hidden');
+            OverlayTitle    = $FieldContainer.find('label').first().attr('title');
+            OverlayHTML     = $FieldContainer.find('.InnerContent').html();
+            event.preventDefault();
+
+            OverlayHTML = '<div class="FieldOverlay CalendarEventsOverlay">' + OverlayHTML + '</div>';
+
+            Core.UI.Dialog.ShowDialog({
+                Modal: true,
+                Title: OverlayTitle,
+                HTML: OverlayHTML,
+                PositionTop: '100px',
+                PositionLeft: 'Center',
+                CloseOnEscape: true,
+                AllowAutoGrow: true,
+                Buttons: [
+                    {
+                        Type: 'Close',
+                        Label: Core.Language.Translate("Close this dialog"),
+                        Function: function() {
+                            Core.UI.Dialog.CloseDialog($('.Dialog:visible'));
+                            return false;
+                        }
+                    }
+                ]
+            });
+        });
+    }
+
+    /**
+     * @private
      * @name InitProcessWidget
      * @memberof Core.Agent.TicketZoom
      * @function
@@ -831,6 +874,11 @@ Core.Agent.TicketZoom = (function (TargetNS) {
                 Core.Agent.TicketSplit.OpenSplitSelection($(this).attr('href'));
                 return false;
             });
+
+            if ($('.CalendarEvents > .FieldContainer > .InnerContent').length > 0) {
+                InitCalendarEvents();
+            }
+
         });
 
         $('a.SplitSelection').unbind('click.SplitSelection').bind('click.SplitSelection', function() {

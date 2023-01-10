@@ -1,5 +1,5 @@
 // --
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (AGPL). If you
@@ -98,6 +98,10 @@ Znuny.Agent.Admin.DynamicFieldScreenConfiguration = (function (TargetNS) {
                                 $Element.appendTo('ul#'+ Target + 'Elements');
 
                                 RenameElement($Element, Target);
+
+                                // Regardless of filters: Show the elements that have been moved
+                                // so the user knows what is happening.
+                                $Element.show();
                             }
                         );
 

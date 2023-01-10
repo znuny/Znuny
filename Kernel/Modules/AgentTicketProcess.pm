@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -26,32 +26,33 @@ sub new {
 
     # global config hash for id dissolution
     $Self->{NameToID} = {
-        Title          => 'Title',
-        State          => 'StateID',
-        StateID        => 'StateID',
-        Priority       => 'PriorityID',
-        PriorityID     => 'PriorityID',
-        Lock           => 'LockID',
-        LockID         => 'LockID',
-        Queue          => 'QueueID',
-        QueueID        => 'QueueID',
-        Customer       => 'CustomerID',
-        CustomerID     => 'CustomerID',
-        CustomerNo     => 'CustomerID',
-        CustomerUserID => 'CustomerUserID',
-        Owner          => 'OwnerID',
-        OwnerID        => 'OwnerID',
-        Type           => 'TypeID',
-        TypeID         => 'TypeID',
-        SLA            => 'SLAID',
-        SLAID          => 'SLAID',
-        Service        => 'ServiceID',
-        ServiceID      => 'ServiceID',
-        Responsible    => 'ResponsibleID',
-        ResponsibleID  => 'ResponsibleID',
-        PendingTime    => 'PendingTime',
-        Article        => 'Article',
-        Attachments    => 'Attachments',
+        Title              => 'Title',
+        State              => 'StateID',
+        StateID            => 'StateID',
+        Priority           => 'PriorityID',
+        PriorityID         => 'PriorityID',
+        Lock               => 'LockID',
+        LockID             => 'LockID',
+        Queue              => 'QueueID',
+        QueueID            => 'QueueID',
+        Customer           => 'CustomerID',
+        CustomerID         => 'CustomerID',
+        CustomerNo         => 'CustomerID',
+        CustomerUserID     => 'CustomerUserID',
+        Owner              => 'OwnerID',
+        OwnerID            => 'OwnerID',
+        Type               => 'TypeID',
+        TypeID             => 'TypeID',
+        SLA                => 'SLAID',
+        SLAID              => 'SLAID',
+        Service            => 'ServiceID',
+        ServiceID          => 'ServiceID',
+        StandardTemplateID => 'StandardTemplateID',
+        Responsible        => 'ResponsibleID',
+        ResponsibleID      => 'ResponsibleID',
+        PendingTime        => 'PendingTime',
+        Article            => 'Article',
+        Attachments        => 'Attachments',
     };
 
     return $Self;
@@ -805,6 +806,80 @@ sub _RenderAjax {
             );
             $FieldsProcessed{ $Self->{NameToID}{$CurrentField} } = 1;
         }
+        elsif (
+            $Self->{NameToID}{$CurrentField} eq 'Article'
+            && $Param{GetParam}->{ElementChanged} eq 'StandardTemplateID'
+            )
+        {
+            next DIALOGFIELD if $FieldsProcessed{ $Self->{NameToID}{$CurrentField} };
+
+            my $TemplateGeneratorObject = $Kernel::OM->Get('Kernel::System::TemplateGenerator');
+            my $StandardTemplateObject  = $Kernel::OM->Get('Kernel::System::StandardTemplate');
+            my $StdAttachmentObject     = $Kernel::OM->Get('Kernel::System::StdAttachment');
+            my $UploadCacheObject       = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
+
+            my $StandardTemplateText;
+            my @TicketAttachments;
+
+            if ( IsPositiveInteger( $Param{GetParam}->{StandardTemplateID} ) ) {
+                my %StandardTemplate = $StandardTemplateObject->StandardTemplateGet(
+                    ID => $Param{GetParam}->{StandardTemplateID},
+                );
+
+                # remove pre-submitted attachments
+                $UploadCacheObject->FormIDRemove( FormID => $Self->{FormID} );
+
+                $StandardTemplateText = $TemplateGeneratorObject->_Replace(
+                    RichText => $LayoutObject->{BrowserRichText},
+                    Text     => $StandardTemplate{Template},
+                    Data     => {
+                        %{ $Param{GetParam} },
+                    },
+                    TicketData => {
+                        %{ $Param{GetParam} },
+                    },
+                    UserID => $Self->{UserID},
+                );
+
+                # add standard attachments to ticket
+                my %AllStdAttachments = $StdAttachmentObject->StdAttachmentStandardTemplateMemberList(
+                    StandardTemplateID => $Param{GetParam}->{StandardTemplateID},
+                );
+                for my $ID ( sort keys %AllStdAttachments ) {
+                    my %AttachmentsData = $StdAttachmentObject->StdAttachmentGet( ID => $ID );
+                    $UploadCacheObject->FormIDAddFile(
+                        FormID      => $Self->{FormID},
+                        Disposition => 'attachment',
+                        %AttachmentsData,
+                    );
+                }
+
+                @TicketAttachments = $UploadCacheObject->FormIDGetAllFilesMeta(
+                    FormID => $Self->{FormID},
+                );
+
+                for my $Attachment (@TicketAttachments) {
+                    $Attachment->{Filesize} = $LayoutObject->HumanReadableDataSize(
+                        Size => $Attachment->{Filesize},
+                    );
+                }
+            }
+
+            push(
+                @JSONCollector,
+                {
+                    Name => 'RichText',
+                    Data => $StandardTemplateText // '',
+                },
+                {
+                    Name     => 'TicketAttachments',
+                    Data     => \@TicketAttachments,
+                    KeepData => 1,
+                },
+            );
+
+            $FieldsProcessed{ $Self->{NameToID}{$CurrentField} } = 1;
+        }
     }
 
     my $JSON = $LayoutObject->BuildSelectionJSON( [@JSONCollector] );
@@ -883,7 +958,7 @@ sub _GetParam {
     my $ActivityDialogEntityID = $ParamObject->GetParam(
         Param => 'ActivityDialogEntityID',
     );
-    my $ActivityEntityID;
+    my $ActivityEntityID = $ParamObject->GetParam( Param => 'ActivityEntityID' );
     my %ValuesGotten;
     my $Value;
 
@@ -1102,7 +1177,8 @@ sub _GetParam {
 
             $ValuesGotten{Article} = 1 if ( $GetParam{Subject} && $GetParam{Body} );
 
-            $GetParam{TimeUnits} = $ParamObject->GetParam( Param => 'TimeUnits' );
+            $GetParam{TimeUnits}          = $ParamObject->GetParam( Param => 'TimeUnits' );
+            $GetParam{StandardTemplateID} = $ParamObject->GetParam( Param => 'StandardTemplateID' );
         }
 
         if ( $CurrentField eq 'CustomerID' ) {
@@ -1652,6 +1728,7 @@ sub _OutputActivityDialog {
             Subaction              => 'StoreActivityDialog',
             TicketID               => $Ticket{TicketID} || '',
             LinkTicketID           => $Self->{LinkTicketID},
+            ActivityEntityID       => $ActivityActivityDialog->{Activity},
             ActivityDialogEntityID => $ActivityActivityDialog->{ActivityDialog},
             ProcessEntityID        => $Param{ProcessEntityID}
                 || $Ticket{
@@ -2776,8 +2853,8 @@ sub _RenderArticle {
         Name             => 'Article',
         MandatoryClass   => '',
         ValidateRequired => '',
-        Subject          => $Param{GetParam}->{Subject},
-        Body             => $Param{GetParam}->{Body},
+        Subject          => $Param{GetParam}->{Subject} || $Param{ActivityDialogField}->{Config}->{Subject},
+        Body             => $Param{GetParam}->{Body} || $Param{ActivityDialogField}->{Config}->{Body},
         LabelSubject     => $Param{ActivityDialogField}->{Config}->{LabelSubject}
             || $LayoutObject->{LanguageObject}->Translate("Subject"),
         LabelBody => $Param{ActivityDialogField}->{Config}->{LabelBody}
@@ -2913,6 +2990,48 @@ sub _RenderArticle {
             Name => 'TimeUnits',
             Data => \%Param,
         );
+    }
+
+    # show StandardTemplates
+    if ( IsArrayRefWithData( $Param{ActivityDialogField}->{Config}->{StandardTemplateID} ) ) {
+        my $StandardTemplateObject = $Kernel::OM->Get('Kernel::System::StandardTemplate');
+
+        my %StandardTemplates = $StandardTemplateObject->StandardTemplateList(
+            Valid => 1,
+            Type  => 'ProcessManagement',
+        );
+
+        STANDARDTEMPLATEID:
+        for my $StandardTemplateID ( sort keys %StandardTemplates ) {
+            my $Exists
+                = grep { $StandardTemplateID eq $_ } @{ $Param{ActivityDialogField}->{Config}->{StandardTemplateID} };
+            next STANDARDTEMPLATEID if $Exists;
+
+            delete $StandardTemplates{$StandardTemplateID};
+        }
+
+        if (%StandardTemplates) {
+            $Param{StandardTemplateStrg} = $LayoutObject->BuildSelection(
+                Data         => \%StandardTemplates,
+                Name         => 'StandardTemplateID',
+                SelectedID   => $Param{GetParam}->{StandardTemplateID} || '',
+                Class        => 'Modernize',
+                PossibleNone => 1,
+                Sort         => 'AlphanumericValue',
+                Translation  => 1,
+                Max          => 200,
+            );
+
+            $LayoutObject->AddJSData(
+                Key   => 'StandardTemplateAutoFill',
+                Value => $Param{ActivityDialogField}->{Config}->{StandardTemplateAutoFill} || 0,
+            );
+
+            $LayoutObject->Block(
+                Name => 'StandardTemplate',
+                Data => \%Param,
+            );
+        }
     }
 
     return {
@@ -6116,10 +6235,12 @@ sub _LookupValue {
 sub _GetResponsibles {
     my ( $Self, %Param ) = @_;
 
+    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+
     # get users
     my %ShownUsers;
-    my %AllGroupsMembers = $Kernel::OM->Get('Kernel::System::User')->UserList(
-        Type  => 'Long',
+    my %AllGroupsMembers = $UserObject->UserList(
+        Type  => 'Short',
         Valid => 1,
     );
 
@@ -6204,7 +6325,16 @@ sub _GetResponsibles {
         UserID        => $Self->{UserID},
     );
 
-    return { $TicketObject->TicketAclData() } if $ACL;
+    if ($ACL) {
+        %ShownUsers = $TicketObject->TicketAclData();
+    }
+
+    my %AllGroupsMembersFullnames = $UserObject->UserList(
+        Type  => 'Long',
+        Valid => 1,
+    );
+
+    @ShownUsers{ keys %ShownUsers } = @AllGroupsMembersFullnames{ keys %ShownUsers };
 
     return \%ShownUsers;
 }
@@ -6212,10 +6342,12 @@ sub _GetResponsibles {
 sub _GetOwners {
     my ( $Self, %Param ) = @_;
 
+    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+
     # get users
     my %ShownUsers;
-    my %AllGroupsMembers = $Kernel::OM->Get('Kernel::System::User')->UserList(
-        Type  => 'Long',
+    my %AllGroupsMembers = $UserObject->UserList(
+        Type  => 'Short',
         Valid => 1,
     );
 
@@ -6300,7 +6432,16 @@ sub _GetOwners {
         UserID        => $Self->{UserID},
     );
 
-    return { $TicketObject->TicketAclData() } if $ACL;
+    if ($ACL) {
+        %ShownUsers = $TicketObject->TicketAclData();
+    }
+
+    my %AllGroupsMembersFullnames = $UserObject->UserList(
+        Type  => 'Long',
+        Valid => 1,
+    );
+
+    @ShownUsers{ keys %ShownUsers } = @AllGroupsMembersFullnames{ keys %ShownUsers };
 
     return \%ShownUsers;
 }
@@ -6445,7 +6586,7 @@ sub _GetQueues {
 
             if ( $ConfigObject->Get('Ticket::Frontend::NewQueueSelectionType') ne 'Queue' )
             {
-                my %SystemAddressData = $Self->{SystemAddress}->SystemAddressGet(
+                my %SystemAddressData = $Kernel::OM->Get('Kernel::System::SystemAddress')->SystemAddressGet(
                     ID => $Queues{$QueueID},
                 );
                 $String =~ s/<Realname>/$SystemAddressData{Realname}/g;

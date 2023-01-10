@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -37,14 +37,14 @@ sub Configure {
         Description => "Which language to use, omit to update all languages.",
         Required    => 0,
         HasValue    => 1,
-        ValueRegex  => qr/.*/smx,
+        ValueRegex  => qr/.+/,
     );
     $Self->AddOption(
         Name        => 'module-directory',
         Description => "Translate the Znuny module in the given directory.",
         Required    => 0,
         HasValue    => 1,
-        ValueRegex  => qr/.*/smx,
+        ValueRegex  => qr/.+/,
     );
     $Self->AddOption(
         Name => 'generate-po',
@@ -85,6 +85,8 @@ my $BreakLineAfterChars = 60;
 
 sub PreRun {
     my ( $Self, %Param ) = @_;
+
+    return $Self->ExitCodeOk() if $Self->GetOption('module-directory');
 
     my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
 
@@ -641,13 +643,17 @@ sub WritePerlLanguageFile {
         # needed for cvs check-in filter
         my $Separator = "# --";
 
+        my $DateTimeSettings = $Kernel::OM->Create('Kernel::System::DateTime')->Get();
+        my $HeaderString     = "# Copyright (C) ";
+        $HeaderString .= "2012-$DateTimeSettings->{Year} Znuny GmbH, https://znuny.org/";
+
         $NewOut = <<"EOF";
 $Separator
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+$HeaderString
 $Separator
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
-# the enclosed file COPYING for license information (GPL). If you
-# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 $Separator
 
 package Kernel::Language::$Param{Language}_$Param{Module};

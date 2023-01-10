@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -34,6 +34,8 @@ our @ObjectDependencies = (
     'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
     'Kernel::System::User',
+    'Kernel::System::Valid',
+    'Kernel::System::Mention',
 );
 
 sub new {
@@ -252,6 +254,8 @@ sub Run {
                 next TRANSPORT;
             }
 
+            my @ValidIDs = $Kernel::OM->Get('Kernel::System::Valid')->ValidIDsGet();
+
             # check if transport is usable
             next TRANSPORT if !$TransportObject->IsUsable();
 
@@ -299,6 +303,17 @@ sub Run {
 
                     # No UserID means it's not a mapped customer.
                     next BUNDLE if !$Bundle->{Recipient}->{UserID};
+                }
+
+                # Check if customer user is invalid.
+                if (
+                    $Bundle->{Recipient}->{Source}
+                    && $Bundle->{Recipient}->{Source} eq 'CustomerUser'
+                    && $Bundle->{Recipient}->{ValidID}
+                    && !grep { $Bundle->{Recipient}->{ValidID} eq $_ } @ValidIDs
+                    )
+                {
+                    next BUNDLE;
                 }
 
                 my $Success = $Self->_SendRecipientNotification(
@@ -584,6 +599,7 @@ sub _RecipientsGet {
         my $CheckItemObject     = $Kernel::OM->Get('Kernel::System::CheckItem');
         my $SystemAddressObject = $Kernel::OM->Get('Kernel::System::SystemAddress');
         my $UserObject          = $Kernel::OM->Get('Kernel::System::User');
+        my $MentionObject       = $Kernel::OM->Get('Kernel::System::Mention');
 
         RECIPIENT:
         for my $Recipient ( @{ $Notification{Data}->{Recipients} } ) {
@@ -710,7 +726,7 @@ sub _RecipientsGet {
                 }
             }
 
-            # Other OTRS packages might add other kind of recipients that are normally handled by
+            # Other packages might add other kind of recipients that are normally handled by
             #   other modules then an elsif condition here is useful.
             elsif ( $Recipient eq 'Customer' ) {
 
@@ -952,6 +968,15 @@ sub _RecipientsGet {
                 $Recipient{Language} = $ConfigObject->Get('DefaultLanguage') || 'en';
 
                 push @RecipientUsers, \%Recipient;
+            }
+            elsif ( $Recipient eq 'AllMentionedUsers' ) {
+                my $TicketMentions = $MentionObject->GetTicketMentions(
+                    TicketID => $Param{Data}->{TicketID},
+                ) // [];
+
+                for my $TicketMention ( @{$TicketMentions} ) {
+                    push @{ $Notification{Data}->{RecipientAgents} }, $TicketMention->{UserID};
+                }
             }
         }
     }

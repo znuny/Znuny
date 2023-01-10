@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -72,7 +72,7 @@ $Selenium->RunTest(
             $Selenium->find_element("//a[contains(\@href, \'Subaction=ShowAddCertificate' )]")->VerifiedClick();
 
             # Add certificate.
-            my $CertLocation = $ConfigObject->Get('Home')
+            my $CertLocation = $Selenium->{Home}
                 . "/scripts/test/sample/SMIME/SMIMEtest3\@example.net-$Key.crt";
 
             $Selenium->find_element( "#FileUpload", 'css' )->send_keys($CertLocation);
@@ -82,7 +82,7 @@ $Selenium->RunTest(
             $Selenium->find_element("//a[contains(\@href, \'Subaction=ShowAddPrivate' )]")->VerifiedClick();
 
             # Add private key.
-            my $PrivateLocation = $ConfigObject->Get('Home')
+            my $PrivateLocation = $Selenium->{Home}
                 . "/scripts/test/sample/SMIME/SMIMEtest3\@example.net-$Key.key";
 
             $Selenium->find_element( "#FileUpload", 'css' )->send_keys($PrivateLocation);

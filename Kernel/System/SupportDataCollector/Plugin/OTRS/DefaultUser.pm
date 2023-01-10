@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -38,7 +38,7 @@ sub Run {
         Valid => '1',
     );
 
-    my $DefaultPassword;
+    my $AuthenticatedUser;
 
     my $SuperUserID;
     USER:
@@ -51,13 +51,13 @@ sub Run {
 
     if ($SuperUserID) {
 
-        $DefaultPassword = $Kernel::OM->Get('Kernel::System::Auth')->Auth(
+        $AuthenticatedUser = $Kernel::OM->Get('Kernel::System::Auth')->Auth(
             User => 'root@localhost',
             Pw   => 'root',
         );
     }
 
-    if ($DefaultPassword) {
+    if ( $AuthenticatedUser eq 'root@localhost' ) {
         $Self->AddResultProblem(
             Label => Translatable('Default Admin Password'),
             Value => '',

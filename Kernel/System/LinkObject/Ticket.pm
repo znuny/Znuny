@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -290,6 +290,20 @@ sub ObjectSearch {
 
     # get ticket object
     my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+
+    if ( !$Param{InitialSearch} || $Param{InitialSearch} ne 'n' ) {
+
+        # get ticket data
+        my %TicketData = $TicketObject->TicketGet(
+            TicketID      => $Param{SourceKey},
+            UserID        => $Param{UserID},
+            DynamicFields => 0,
+        );
+
+        return {} if !$TicketData{CustomerID};
+
+        $Param{SearchParams}->{CustomerID} = $TicketData{CustomerID};
+    }
 
     # search the tickets
     my @TicketIDs = $TicketObject->TicketSearch(

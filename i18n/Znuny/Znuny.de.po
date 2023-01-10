@@ -45,7 +45,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-07-01 07:05+0000\n"
-"PO-Revision-Date: 2022-03-15 10:04+0000\n"
+"PO-Revision-Date: 2022-11-22 08:24+0000\n"
 "Last-Translator: Denny Korsukéwitz <dk@znuny.com>\n"
 "Language-Team: German <https://translations.znuny.org/projects/znuny/znuny/de/>\n"
 "Language: de\n"
@@ -53,7 +53,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.11.2\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "ACL Management"
@@ -1443,7 +1443,7 @@ msgstr "Beziehungen zwischen Kundenbenutzern und Kunden verwalten"
 msgid "Select the customer user:customer relations."
 msgstr "Beziehung zwischen Kundenbenutzer und Kunde auswählen."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Customer Users"
 msgstr "Kundenbenutzer"
 
@@ -1547,7 +1547,7 @@ msgstr "Mehr Business-Felder"
 msgid "Would you like to benefit from additional dynamic field types for businesses? Upgrade to %s to get access to the following field types:"
 msgstr "Möchten Sie von den Vorteilen weiterer Felder profitieren? Aktualisieren Sie zur %s, um diese zusätzlichen Feldtypen freizuschalten:"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmssql.tt
 msgid "Database"
 msgstr "Datenbank"
 
@@ -4647,7 +4647,7 @@ msgstr "Diese Priorität ist in einer SysConfig-Einstellung vorhanden. Eine Best
 msgid "This priority is used in the following config settings:"
 msgstr "Diese Priorität wird in folgenden Konfigurationseinstellungen verwendet:"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
 msgid "Process Management"
 msgstr "Prozessmanagement"
 
@@ -5279,7 +5279,7 @@ msgstr "Filter für Vorlagen"
 msgid "Filter for templates"
 msgstr "Filter für Vorlagen"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueueTemplates.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
 msgid "Templates"
 msgstr "Vorlagen"
 
@@ -5471,7 +5471,7 @@ msgstr "OTRS-ID"
 msgid "You don't have an OTRS-ID yet?"
 msgstr "Sie haben noch keine OTRS-ID?"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Sign up now"
 msgstr "Registrieren Sie sich jetzt"
 
@@ -5483,7 +5483,7 @@ msgstr "Passwort vergessen?"
 msgid "Retrieve a new one"
 msgstr "Neues anfordern"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Next"
 msgstr "Weiter"
 
@@ -5491,7 +5491,7 @@ msgstr "Weiter"
 msgid "This data will be frequently transferred to OTRS Group when you register this system."
 msgstr "Wenn Sie dieses System registrieren, werden folgende Daten in regelmäßigen Abständen an die OTRS Gruppe übertragen."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
 msgid "Attribute"
 msgstr "Attribut"
 
@@ -5499,15 +5499,15 @@ msgstr "Attribut"
 msgid "FQDN"
 msgstr "FQDN"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
 msgid "OTRS Version"
 msgstr "OTRS-Version"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
 msgid "Operating System"
 msgstr "Betriebssystem"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
 msgid "Perl Version"
 msgstr "Perl-Version"
 
@@ -5551,7 +5551,7 @@ msgstr "Die Daten werden im JSON-Format über eine sichere https-Verbindung übe
 msgid "System Registration Data"
 msgstr "Daten der Systemregistrierung"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRegistration.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "Support Data"
 msgstr "Supportdaten"
 
@@ -6087,10 +6087,6 @@ msgstr "Support-Paket erstellen"
 msgid "The Support Bundle has been Generated"
 msgstr "Das Support-Paket wurde erstellt"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-msgid "Please choose one of the following options."
-msgstr "Bitte wählen Sie eine der nachfolgenden Optionen aus."
-
 #. Template: AdminSupportDataCollector
 msgid "Send by Email"
 msgstr "Per E-Mail senden"
@@ -6116,8 +6112,8 @@ msgid "Download File"
 msgstr "Datei herunterladen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-msgid "A file containing the support bundle will be downloaded to the local system. Please save the file and send it to the OTRS Group, using an alternate method."
-msgstr "Das Support-Paket wird als Datei ins lokale Dateisystem heruntergeladen. Bitte speichern Sie die Datei und senden Sie diese auf anderen Wegen an die OTRS Gruppe."
+msgid "A file containing the support bundle will be downloaded to the local system."
+msgstr "Das Support-Paket wird als Datei ins lokale Dateisystem heruntergeladen."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
 msgid "Error: Support data could not be collected (%s)."
@@ -7627,7 +7623,7 @@ msgstr "Hier können Sie zusätzliche Agenten auswählen, die eine Benachrichtig
 msgid "Text will also be received by"
 msgstr "Text wird auch gesendet an"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
 msgid "Text Template"
 msgstr "Textvorlage"
 
@@ -11013,7 +11009,7 @@ msgstr "Verzeichnisliste"
 
 #. Perl Module: Kernel/Modules/AdminPackageManager.pm
 msgid "No packages found in selected repository. Please check log for more info!"
-msgstr "Keine Pakte im gewählten Verzeichnis gefunden. Bitte prüfen Sie das Systemprotokoll für mehr Informationen!"
+msgstr "Keine Pakete im gewählten Verzeichnis gefunden. Bitte prüfen Sie das Systemprotokoll für mehr Informationen!"
 
 #. Perl Module: Kernel/Modules/AdminPackageManager.pm
 msgid "Package not verified due a communication issue with verification server!"
@@ -11335,7 +11331,7 @@ msgstr "Test"
 msgid "Training"
 msgstr "Training"
 
-#. Perl Module: Kernel/Modules/AdminRegistration.pm
+#. SysConfig
 msgid "Development"
 msgstr "Entwicklung"
 
@@ -13147,7 +13143,7 @@ msgstr "Produktneuigkeiten können nicht vom Server abgerufen werden!"
 msgid "Can't connect to %s!"
 msgstr "Kein Verbindungsaufbau zu %s möglich!"
 
-#. Perl Module: Kernel/Output/HTML/Dashboard/TicketGeneric.pm
+#. Perl Module: Kernel/Output/HTML/Dashboard/MyLastChangedTickets.pm
 msgid "Shown Tickets"
 msgstr "Gezeigte Tickets"
 
@@ -14919,375 +14915,375 @@ msgstr "Neues Konto angelegt. Anmeldedaten wurden an %s gesendet. Bitte prüfen 
 msgid "Action \"%s\" not found!"
 msgstr "Aktion \"%s\" nicht gefunden!"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "invalid-temporarily"
 msgstr "ungültig-temporär"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Group for default access."
 msgstr "Gruppe für den Standardzugriff."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Group of all administrators."
 msgstr "Gruppe aller Administratoren."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Group for statistics access."
 msgstr "Gruppe für den Statistikzugriff."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "new"
 msgstr "neu"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All new state types (default: viewable)."
 msgstr "Alle neuen Statustypen (Standard: sichtbar)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "open"
 msgstr "offen"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All open state types (default: viewable)."
 msgstr "Alle offenen Statustypen (Standard: sichtbar)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "closed"
 msgstr "geschlossen"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All closed state types (default: not viewable)."
 msgstr "Alle geschlossenen Statustypen (Standard: nicht sichtbar)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "pending reminder"
 msgstr "warten zur Erinnerung"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All 'pending reminder' state types (default: viewable)."
 msgstr "Alle 'warten auf'-Statustypen (Standard: sichtbar)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "pending auto"
 msgstr "warten auf"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All 'pending auto *' state types (default: viewable)."
 msgstr "Alle 'warten auf automatisch *'-Statustypen (Standard: sichtbar)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "removed"
 msgstr "entfernt"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All 'removed' state types (default: not viewable)."
 msgstr "Alle 'entfernt'-Statustypen (Standard: nicht sichtbar)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "merged"
 msgstr "zusammengefasst"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "State type for merged tickets (default: not viewable)."
 msgstr "Statustyp für zusammengefasste Tickets (Standard: nicht sichtbar)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "New ticket created by customer."
 msgstr "Neues Ticket von Kunden erstellt."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "closed successful"
 msgstr "erfolgreich geschlossen"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket is closed successful."
 msgstr "Ticket erfolgreich geschlossen."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "closed unsuccessful"
 msgstr "erfolglos geschlossen"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket is closed unsuccessful."
 msgstr "Das Ticket ist erfolglos geschlossen."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Open tickets."
 msgstr "Offene Tickets."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Customer removed ticket."
 msgstr "Kunde hat Ticket entfernt."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket is pending for agent reminder."
 msgstr "Das Ticket wartet auf Erinnerung für Agenten."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "pending auto close+"
 msgstr "warten auf erfolgreich schließen"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket is pending for automatic close."
 msgstr "Das Ticket wartet auf automatisches schließen."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "pending auto close-"
 msgstr "warten auf erfolglos schließen"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "State for merged tickets."
 msgstr "Status für zusammengefasste Tickets."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "system standard salutation (en)"
 msgstr "Systemstandardanrede (en)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Standard Salutation."
 msgstr "Standardanrede."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "system standard signature (en)"
 msgstr "Systemstandardsignatur (en)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Standard Signature."
 msgstr "Standard Signatur."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Standard Address."
 msgstr "Standard Adresse."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "possible"
 msgstr "möglich"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Follow-ups for closed tickets are possible. Ticket will be reopened."
 msgstr "Rückfragen für geschlossene Tickets sind möglich. Tickets werden wieder geöffnet."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "reject"
 msgstr "ablehnen"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Follow-ups for closed tickets are not possible. No new ticket will be created."
 msgstr "Rückfragen für geschlossene Tickets sind nicht möglich. Neue Tickets werden nicht erstellt."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "new ticket"
 msgstr "neues Ticket"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Follow-ups for closed tickets are not possible. A new ticket will be created."
 msgstr "Rückfragen für geschlossene Tickets sind nicht möglich. Ein neues Ticket wird erstellt."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Postmaster queue."
 msgstr "Postmaster-Queue."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All default incoming tickets."
 msgstr "Alle eingehenden Tickets."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All junk tickets."
 msgstr "Alle Junk-Tickets."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "All misc tickets."
 msgstr "Alle Misc-Tickets."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "auto reply"
 msgstr "automatische Antwort"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Automatic reply which will be sent out after a new ticket has been created."
 msgstr "Eine automatische Antwort wird versandt, nachdem ein neues Ticket erstellt wurde."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "auto reject"
 msgstr "automatische Ablehnung"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Automatic reject which will be sent out after a follow-up has been rejected (in case queue follow-up option is \"reject\")."
 msgstr "Automatische Ablehnung, die gesendet wird, nachdem eine Rückantwort abgelehnt wurde (falls die Queue-Einstellung für Rückantworten auf \"Ablehnen\" gesetzt ist)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "auto follow up"
 msgstr "automatische Rückfrage"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Automatic confirmation which is sent out after a follow-up has been received for a ticket (in case queue follow-up option is \"possible\")."
 msgstr "Automatische Bestätigung, die gesendet wird, nachdem eine Rückantwort für ein Ticket empfangen wurde (falls die Queue-Einstellung für Rückantworten auf \"Möglich\" gesetzt ist)."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "auto reply/new ticket"
 msgstr "automatische Antwort / neues Ticket"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Automatic response which will be sent out after a follow-up has been rejected and a new ticket has been created (in case queue follow-up option is \"new ticket\")."
 msgstr "Automatische Antwort, die gesendet wird, nachdem eine Rückantwort abgelehnt und ein neues Ticket erstellt wurde (falls die Queue-Einstellung für Rückantworten auf \"Neues Ticket\" gesetzt ist."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "auto remove"
 msgstr "automatisches Entfernen"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Auto remove will be sent out after a customer removed the request."
 msgstr "\"Automatisches Entfernen\" wird versendet, nachdem der Kundenbenutzer die Anfrage entfernt hat."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "default reply (after new ticket has been created)"
 msgstr "Standardantwort (nachdem ein neues Ticket erstellt wurde)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "default reject (after follow-up and rejected of a closed ticket)"
 msgstr "Standardablehnung (nachdem eine Antwort auf ein geschlossenes Ticket eingegangen und diese abgelehnt wurde)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "default follow-up (after a ticket follow-up has been added)"
 msgstr "Standardantwort (nachdem eine Antwort auf ein Ticket eingegangen ist)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "default reject/new ticket created (after closed follow-up with new ticket creation)"
 msgstr "Standardablehnung/Neues Ticket erstellt (nachdem eine Antwort auf ein geschlossenes Ticket eingegangen ist und ein neues Ticket erstellt wurde)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Unclassified"
 msgstr "Unklassifiziert"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "1 very low"
 msgstr "1 sehr niedrig"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "2 low"
 msgstr "2 niedrig"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "3 normal"
 msgstr "3 normal"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "4 high"
 msgstr "4 hoch"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "5 very high"
 msgstr "5 sehr hoch"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "unlock"
 msgstr "frei"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "lock"
 msgstr "gesperrt"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "tmp_lock"
 msgstr "tmp_lock"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "agent"
 msgstr "Agent"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "system"
 msgstr "System"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "customer"
 msgstr "Kunde"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket create notification"
 msgstr "Benachrichtigung über neues Ticket"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification each time a new ticket is created in one of your \"My Queues\" or \"My Services\"."
 msgstr "Sie erhalten eine Benachrichtigung, wenn ein Ticket in Ihren unter \"Meine Queues\" oder \"Meine Services\" ausgewählten Queues oder Services erstellt wird."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket follow-up notification (unlocked)"
 msgstr "Benachrichtigung über Folgeaktionen (entsperrtes Ticket)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification if a customer sends a follow-up to an unlocked ticket which is in your \"My Queues\" or \"My Services\"."
 msgstr "Sie erhalten eine Benachrichtigung, wenn ein Kunde eine Rückmeldung zu einem Ticket sendet, das in Ihren unter \"Meine Queues\" oder \"Meine Services\" ausgewählten Queues oder Services erstellt wurde."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket follow-up notification (locked)"
 msgstr "Benachrichtigung über Folgeaktionen (gesperrtes Ticket)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification if a customer sends a follow-up to a locked ticket of which you are the ticket owner or responsible."
 msgstr "Sie erhalten eine Benachrichtigung, wenn ein Kunde eine Rückmeldung zu einem Ticket sendet, dessen Besitzer oder Verantwortlicher Sie sind."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket lock timeout notification"
 msgstr "Mitteilung bei Überschreiten der Ticket-Sperrzeit"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification as soon as a ticket owned by you is automatically unlocked."
 msgstr "Sie erhalten eine Benachrichtigung, wenn ein Ticket, dessen Besitzer Sie sind, automatisch entsperrt wurde."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket owner update notification"
 msgstr "Benachrichtigung über Änderung des Ticket-Besitzers"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket responsible update notification"
 msgstr "Benachrichtigung über Änderung des Ticket-Verantwortlichen"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket new note notification"
 msgstr "Benachrichtigung über neue Notiz"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket queue update notification"
 msgstr "Benachrichtigung über Änderung der Queue"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification if a ticket is moved into one of your \"My Queues\"."
 msgstr "Sie erhalten eine Benachrichtigung, wenn ein Ticket in eine der Queues verschoben wurde, die Sie unter \"Meine Queues\" ausgewählt haben."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket pending reminder notification (locked)"
 msgstr "Benachrichtigung über Erreichen der Erinnerungszeit (gesperrtes Ticket)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket pending reminder notification (unlocked)"
 msgstr "Benachrichtigung über Erreichen der Erinnerungszeit (entsperrtes Ticket)"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket escalation notification"
 msgstr "Benachrichtigung über erfolgte Ticket-Eskalation"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket escalation warning notification"
 msgstr "Benachrichtigung über baldige Ticket Eskalation"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket service update notification"
 msgstr "Benachrichtigung über Änderung des Services"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification if a ticket's service is changed to one of your \"My Services\"."
 msgstr "Sie erhalten eine Benachrichtigung, wenn für ein Ticket einer der Services ausgewählt wurde, die Sie unter \"Meine Services\" ausgewählt haben."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Appointment reminder notification"
 msgstr "Benachrichtigung über Erreichen der Erinnerungszeit von Terminen"
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "You will receive a notification each time a reminder time is reached for one of your appointments."
 msgstr "Sie erhalten immer dann eine Benachrichtigung, wenn der Benachrichtigungszeitpunkt für einen Ihrer Termine erreicht wurde."
 
-#. XML Definition: scripts/database/otrs-initial_insert.xml
+#. XML Definition: scripts/database/initial_insert.xml
 msgid "Ticket email delivery failure notification"
 msgstr "Benachrichtigung über Fehler beim Versand von E-Mail-Tickets"
 
@@ -16312,9 +16308,9 @@ msgstr "Ein Bild"
 msgid "ACL module that allows closing parent tickets only if all its children are already closed (\"State\" shows which states are not available for the parent ticket until all child tickets are closed)."
 msgstr "ACL Modul das erlaubt Eltern-Tickets nur dann zu schließen, wenn alle seine Kinder-Tickets geschlossen wurden. (\"Status\" zeigt welche Status für das Eltern-Ticket nicht verfügbar sind, bis alle Kinder-Tickets geschlossen sind)."
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Access Control Lists (ACL)"
-msgstr "Access Control Lists (ACL)"
+msgstr "Access-Control-Lists (ACL)"
 
 #. SysConfig
 msgid "AccountedTime"
@@ -16548,11 +16544,11 @@ msgstr "Widget für AgentTicketZoom, das Kundeninformationen des Kunden anzeigt,
 msgid "AgentTicketZoom widget that displays ticket data in the side bar."
 msgstr "Widget für AgentTicketZoom, das weitere Daten des aktuellen Tickets anzeigt."
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
 msgid "Agents ↔ Groups"
 msgstr "Agenten ↔ Gruppen"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
 msgid "Agents ↔ Roles"
 msgstr "Agenten ↔ Rollen"
 
@@ -16796,7 +16792,7 @@ msgstr "Terminliste."
 msgid "Appointment notifications"
 msgstr "Terminbenachrichtigungen"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
 msgid "Appointments"
 msgstr "Termine"
 
@@ -17456,15 +17452,15 @@ msgstr "Kundenbenutzer-Informationszentrum-Suche."
 msgid "Customer User Information Center."
 msgstr "Kundenbenutzer-Informationszentrum."
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
 msgid "Customer Users ↔ Customers"
 msgstr "Kundenbenutzer ↔ Kunden"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
 msgid "Customer Users ↔ Groups"
 msgstr "Kundenbenutzer ↔ Gruppen"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
 msgid "Customer Users ↔ Services"
 msgstr "Kundenbenutzer ↔ Services"
 
@@ -17508,7 +17504,7 @@ msgstr "Kundenname"
 msgid "CustomerUser"
 msgstr "Kundenbenutzer"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Customers ↔ Groups"
 msgstr "Kunden ↔ Gruppen"
 
@@ -19540,7 +19536,7 @@ msgstr "Termin bearbeiten"
 msgid "Edit customer company"
 msgstr "Kundenunternehmen bearbeiten"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
 msgid "Email Addresses"
 msgstr "E-Mail-Adressen"
 
@@ -20314,7 +20310,7 @@ msgstr "Wenn die Einstellung aktiv ist, werden lokale Änderungen nicht als Fehl
 
 #. SysConfig
 msgid "If you're going to be out of office, you may wish to let other users know by setting the exact dates of your absence."
-msgstr "Informiert andere Benutzer über den genauen Zeitraum ihrer Abwesenheit."
+msgstr "Informiert andere Benutzer über den genauen Zeitraum Ihrer Abwesenheit."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Ignore system sender article types (e. g. auto responses or email notifications) to be flagged as 'Unread Article' in AgentTicketZoom or expanded automatically in Large view screens."
@@ -21392,7 +21388,7 @@ msgstr "Portugiesisch (Brasilien)"
 msgid "PostMaster Filters"
 msgstr "Postmaster-Filter"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
 msgid "PostMaster Mail Accounts"
 msgstr "Postmaster-E-Mail-Konten"
 
@@ -21468,7 +21464,7 @@ msgstr "Öffentlicher Kalender."
 msgid "Queue view"
 msgstr "Ansicht nach Queues"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
 msgid "Queues ↔ Auto Responses"
 msgstr "Queues ↔ Automatische Antworten"
 
@@ -21632,7 +21628,7 @@ msgstr "Behält alle Services in Auflistungen bei, auch, wenn sie Kind-Services 
 msgid "Right"
 msgstr "Rechts"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
 msgid "Roles ↔ Groups"
 msgstr "Rollen ↔ Gruppen"
 
@@ -21676,7 +21672,7 @@ msgstr "SMS"
 msgid "SMS (Short Message Service)"
 msgstr "SMS (Short Message Service)"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
 msgid "Salutations"
 msgstr "Anreden"
 
@@ -21686,7 +21682,7 @@ msgstr "Beispielhafte Kommando-Ausgabe"
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Saves the attachments of articles. \"DB\" stores all data in the database (not recommended for storing big attachments). \"FS\" stores the data on the filesystem; this is faster but the webserver should run under the OTRS user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when \"FS\" is used."
-msgstr "Speicherung von Artikel-Ahängen. \"DB\" legt alle Daten in der Datenbank ab (nicht empfohlen für große Anhänge). \"FS\" legt alle Daten im Dateisystem ab; dies ist schneller, jedoch sollte der Webserver mit dem OTRS-Benutzer betrieben werden. Sie können im laufenden Betrieb ohne Datenverlust zwischen den Modulen wechseln. Bitte beachten Sie, dass das Suchen nach Anhängen für \"FS\" nicht unterstützt wird."
+msgstr "Speicherung von Artikel-Anhängen. \"DB\" legt alle Daten in der Datenbank ab (nicht empfohlen für große Anhänge). \"FS\" legt alle Daten im Dateisystem ab; dies ist schneller, jedoch sollte der Webserver mit dem OTRS-Benutzer betrieben werden. Sie können im laufenden Betrieb ohne Datenverlust zwischen den Modulen wechseln. Bitte beachten Sie, dass das Suchen nach Anhängen für \"FS\" nicht unterstützt wird."
 
 #. SysConfig
 msgid "Schedule a maintenance period."
@@ -21848,7 +21844,7 @@ msgstr "Kyrillisches Serbisch"
 msgid "Serbian Latin"
 msgstr "Lateinisches Serbisch"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
 msgid "Service Level Agreements"
 msgstr "Service-Level-Vereinbarungen"
 
@@ -22728,7 +22724,7 @@ msgstr "Zeigt die Beschreibung der Zeitfelder in Langform (Tage, Stunden, Minute
 msgid "Signature data."
 msgstr "Signatur-Daten."
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
 msgid "Signatures"
 msgstr "Signaturen"
 
@@ -23008,11 +23004,11 @@ msgstr "Systemkonfigurations-Gruppe"
 msgid "System Maintenance"
 msgstr "Systemwartung"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
 msgid "Templates ↔ Attachments"
 msgstr "Vorlagen ↔ Anhänge"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
 msgid "Templates ↔ Queues"
 msgstr "Vorlagen ↔ Queues"
 
@@ -23122,7 +23118,7 @@ msgstr "Das Logo, das im Kunden-Interface angezeigt wird. Die URL zu dem Bild ka
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "The logo shown on top of the login box of the agent interface. The URL to the image can be a relative URL to the skin image directory, or a full URL to a remote web server."
-msgstr "Das Logo, das in der Abmelde-Box der Agenten-Oberfläche angezeigt wird. Die URL zu dem Bild kann entweder eine relative URL zum Designverzeichnis mit dem Bild sein, oder eine vollständige URL zu einem anderen Webserver."
+msgstr "Das Logo, das in der Anmelde-Box der Agenten-Oberfläche angezeigt wird. Die URL zu dem Bild kann entweder eine relative URL zum Designverzeichnis mit dem Bild sein, oder eine vollständige URL zu einem anderen Webserver."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "The maximal number of articles expanded on a single page in AgentTicketZoom."
@@ -23614,7 +23610,7 @@ msgstr "Ihre E-Mail mit Ticket-Nummer \"<OTRS_TICKET>\" wurde zu Ticket-Nummer \
 
 #. SysConfig
 msgid "Your queue selection of your preferred queues. You also get notified about those queues via email if enabled."
-msgstr "Die Auswahl ihrer bevorzugten (abbonnierten) Queues. Sie werden auch per E-Mail über diese Queues benachrichtigt, wenn die Einstellung aktiv ist."
+msgstr "Die Auswahl ihrer bevorzugten (abonnierten) Queues. Sie werden auch per E-Mail über diese Queues benachrichtigt, wenn die Einstellung aktiv ist."
 
 #. SysConfig
 msgid "Your service selection of your preferred services. You also get notified about those services via email if enabled."
@@ -23982,7 +23978,7 @@ msgstr "Deaktiviert die SSL-Hostname-Verifikation. Es wird empfohlen, dies nicht
 
 #. Template: AdminGenericInterfaceTransportHTTPREST
 msgid "ContentType"
-msgstr ""
+msgstr "ContentType"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "The default content type added to HTTP header to use for POST and PUT requests."
@@ -24034,7 +24030,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessNotInstalled.tt
 msgid "Why should I keep OTRS up to date?"
-msgstr ""
+msgstr "Warum sollte ich OTRS auf dem neuesten Stand halten?"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Go to znuny.org"
@@ -24048,7 +24044,7 @@ msgstr "Systemdatei-Support"
 msgid "Delete cache"
 msgstr "Cache löschen"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Package"
 msgstr "Paket"
 
@@ -24121,8 +24117,8 @@ msgid "Activation of dynamic fields for screens."
 msgstr "Aktivierung dynamischer Felder für Masken."
 
 #. SysConfig
-msgid "Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect"
-msgstr "Admin-Konfigurationsdialog für die dynamischen Feldtypen WebserviceText und WebserviceMultiselect"
+msgid "Admin configuration dialog for dynamic field types WebserviceDropdown and WebserviceMultiselect"
+msgstr "Admin-Konfigurationsdialog für die dynamischen Feldtypen WebserviceDropdown und WebserviceMultiselect"
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Assignment between action and attributes."
@@ -24147,26 +24143,6 @@ msgstr "Erzeugt eine Unit-Test-Datei für dieses Ticket und sendet diese an Znun
 #. SysConfig
 msgid "Creates a unit test file for this ticket."
 msgstr "Erzeugt eine Unit-Test-Datei für dieses Ticket."
-
-#. SysConfig
-msgid "Customizable system name. If empty, config item 'Home' is being used for display."
-msgstr ""
-
-#. SysConfig
-msgid "Defines if fred is visible or hidden."
-msgstr ""
-
-#. SysConfig
-msgid "Defines the height of the Fred console in pixel."
-msgstr ""
-
-#. SysConfig
-msgid "Defines the opacity of the Fred console, e.g. 0.9 for 10% transparency."
-msgstr ""
-
-#. SysConfig
-msgid "Defines the width of the Fred console in percent."
-msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Domains accessed through WebUserAgent module for which no proxy should be used. Separate domains by semicolon."
@@ -24197,16 +24173,12 @@ msgid "Frontend module registration for the admin interface."
 msgstr "Frontend-Modulregistrierung im Admin-Interface."
 
 #. SysConfig
-msgid "Frontend module registration for the devel fred object in the admin area."
-msgstr ""
-
-#. SysConfig
 msgid "Hide"
 msgstr "Ausblenden"
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty."
-msgstr "Es kann vorkommen, dass ein dynamisches Feld vom Typ WebserviceText oder WebserviceMultiselect auf einen Wert gesetzt wird, der aus einer konfigurierten Webservice-Tabelle geholt wird, aber der Webservice-Datensatz keinen Wert in dem Feld hat, das als angezeigter Wert konfiguriert ist. Aktivieren Sie diese Einstellung, um diese dynamischen Felder im Ticketinformations-Widget von AgentTicketZoom auszublenden, damit sie nicht als leer angezeigt werden."
+msgid "It might happen that a dynamic field of type WebserviceDropdown or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty."
+msgstr "Es kann vorkommen, dass ein dynamisches Feld vom Typ WebserviceDropdown oder WebserviceMultiselect auf einen Wert gesetzt wird, der aus einer konfigurierten Webservice-Tabelle geholt wird, aber der Webservice-Datensatz keinen Wert in dem Feld hat, das als angezeigter Wert konfiguriert ist. Aktivieren Sie diese Einstellung, um diese dynamischen Felder im Ticketinformations-Widget von AgentTicketZoom auszublenden, damit sie nicht als leer angezeigt werden."
 
 #. SysConfig
 msgid "Last view - limit"
@@ -24214,7 +24186,7 @@ msgstr "Letzte Ansicht - Limit"
 
 #. SysConfig
 msgid "Last view - position"
-msgstr "Letzte Ansicht - Postition"
+msgstr "Letzte Ansicht - Position"
 
 #. SysConfig
 msgid "Last view - types"
@@ -24223,10 +24195,6 @@ msgstr "Letzte Ansicht - Typen"
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "List of actions that will be ignored."
 msgstr "Liste von Aktionen, die ignoriert werden."
-
-#. SysConfig
-msgid "List of config settings which should be available for quick switch. Please add only settings with possible values 0 or 1 (No/Yes)."
-msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "List of sub-actions that will be ignored."
@@ -24312,61 +24280,9 @@ msgstr "Zeigt nur gültige dynamische Felder in der Auswahl für den Export (Adm
 msgid "Shows only valid dynamic fields in screen configuration (AdminDynamicFieldScreenConfiguration) if enabled."
 msgstr "Zeigt nur gültige dynamische Felder in der Maskenkonfiguration (AdminDynamicFieldScreenConfiguration), falls aktiviert."
 
-#. SysConfig
-msgid "Subscribe the output filter at the system."
-msgstr ""
-
-#. SysConfig
-msgid "This option defines the background color for the sytem name box."
-msgstr ""
-
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Ticket event module that stores values of the selected web service record into the configured additional dynamic fields."
 msgstr "Ticket-Event-Modul zur Speicherung von Werten des gewählten Webservice-Datensatzes in den konfigurierten zusätzlichen dynamischen Feldern."
-
-#. SysConfig
-msgid "Turn on if you want a JavaScript code quality checker. Only works in CVS Head / OTRS 3 with jQuery."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want an realtime HTML-checker."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want an realtime SQL statement log function."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want the translation debugger."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to filter the output of the STDERRLog. You can add a regular expression to filter the output."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to see the STDERRLog."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to see the data in the environment of the layout object."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to see the data in the serverside session object."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to use the config log mechanism."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to use the config switch mechanism."
-msgstr ""
-
-#. SysConfig
-msgid "Turn on if you want to use the fred console."
-msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "URL to the OTRS cloud service proxy service. The http or https prefix will be added, depending on SysConfig option 'PackageRepositoryURLSchema'."
@@ -24381,16 +24297,8 @@ msgid "Web service (Multiselect)"
 msgstr "Webservice (Mehrfachauswahl)"
 
 #. SysConfig
-msgid "Web service (Text)"
-msgstr "Webservice (Text)"
-
-#. SysConfig
 msgid "Webservice dynamic field AJAX interface"
 msgstr "AJAX-Schnittstelle für dynamische Webservice-Felder"
-
-#. SysConfig
-msgid "Which order should the config log data have?"
-msgstr ""
 
 #. SysConfig
 msgid "Znuny.org - News"
@@ -24526,7 +24434,7 @@ msgstr "Kalenderwochen für Datumsauswahl aktivieren."
 
 #. SysConfig
 msgid "Customer User-Customer Relations"
-msgstr ""
+msgstr "Beziehungen zwischen Kundenbenutzern und Kunden"
 
 #. XML Definition: Kernel/Config/Files/XML/ProcessManagement.xml
 msgid "Defines the default keys and values for the transition action module parameters. Mandatory fields are marked with \"(* required)\". Note: For most of the keys the AttributeID can also be used, e.g. \"Owner\" can be \"OwnerID\". Keys that define the same Attribute should only be used once, e.g. \"Owner\" and \"OwnerID\" are redundant."
@@ -24542,7 +24450,7 @@ msgstr "Anhänge in dynamischem Feld nach jeder Transition beibehalten."
 
 #. SysConfig
 msgid "Manage Customer User-Customer Relations."
-msgstr ""
+msgstr "Beziehungen zwischen Kundenbenutzern und Kunden verwalten."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Name of the dynamic field in which the attachment file IDs of the transition will be stored."
@@ -24644,7 +24552,7 @@ msgstr "Lösche Protokolleinträge"
 msgid "Authentication type"
 msgstr "Authentifikationstyp"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "OAuth2 token configuration"
 msgstr "OAuth2-Token-Konfiguration"
 
@@ -24818,15 +24726,15 @@ msgstr "Dieses Feld ist für Übergangsaktionen mit einem Geltungsbereich erford
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
 msgid "Ticket Creation"
-msgstr ""
+msgstr "Ticketerstellung"
 
 #. Perl Module: Kernel/Modules/AdminOAuth2TokenManagement.pm
 msgid "Authorization code parameters not found."
-msgstr ""
+msgstr "Autorisierungscode-Parameter nicht gefunden."
 
 #. Perl Module: Kernel/Modules/AgentTicketOwnerView.pm
 msgid "My Owned Tickets"
-msgstr ""
+msgstr "Meine eigenen Tickets"
 
 #. Perl Module: Kernel/Output/HTML/Notification/OAuth2TokenManagementTokenExpired.pm
 msgid "OAuth2 token for \"%s\" has expired."
@@ -24838,15 +24746,15 @@ msgstr "OAuth2-Refresh-Token für \"%s\" ist abgelaufen."
 
 #. Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
 msgid "Owned Tickets New"
-msgstr ""
+msgstr "Eigene Tickets Neu"
 
 #. Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
 msgid "Owned Tickets Reminder Reached"
-msgstr ""
+msgstr "Eigene Tickets, Erinnerungszeit erreicht"
 
 #. Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
 msgid "Owned Tickets Total"
-msgstr ""
+msgstr "Eigene Tickets Gesamt"
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.OAuth2TokenManagement.js
 msgid "Do you really want to delete this token and its configuration?"
@@ -24886,7 +24794,7 @@ msgstr "Default-Format für Exportdateien."
 
 #. XML Definition: Kernel/Config/Files/XML/Calendar.xml
 msgid "Defines available groups for the appointment calendar screen."
-msgstr ""
+msgstr "Definiert die verfügbaren Gruppen für das Terminkalenderansicht."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Defines if the processes should be displayed in TreeView."
@@ -24966,7 +24874,7 @@ msgstr "Verarbeitet Änderungen an Daten von Modulen, die das DBCRUD-Modul als B
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Ignores not ticket related attributes."
-msgstr ""
+msgstr "Ignoriert nicht ticketbezogene Attribute."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Loader module registration for AdminOAuth2TokenManagement."
@@ -24986,7 +24894,7 @@ msgstr "Name der OAuth2-Token-Konfiguration für den Versand von E-Mails, falls 
 
 #. SysConfig
 msgid "OAuth2"
-msgstr ""
+msgstr "OAuth2"
 
 #. SysConfig
 msgid "OAuth2 token"
@@ -25014,7 +24922,7 @@ msgstr "Setzt den Service in der Ticket-Sammelaktion in der Agentenoberfläche (
 
 #. XML Definition: Kernel/Config/Files/XML/ProcessManagement.xml
 msgid "Shows existing parent/child (separated by ::) process lists in the form of a tree or a list."
-msgstr ""
+msgstr "Zeigt vorhandene Eltern/Kind (durch :: getrennte) Prozesslisten in Form eines Baums oder einer Liste an."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "This configuration defines if a dynamic field has to be checked in the agent ticket bulk view to get set for each ticket. This prevents unwanted overwrite of dynamic field values with their default or even empty values."
@@ -25062,7 +24970,7 @@ msgstr "Liste der Online-Paket-Repositorys."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldDateTime.tt
 msgid "Reserved keywords. The following placeholders are not allowed:"
-msgstr ""
+msgstr "Reservierte Schlüsselwörter. Die folgenden Platzhalter sind nicht erlaubt:"
 
 #. XML Definition: Kernel/Config/Files/XML/Daemon.xml
 msgid "If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if &lt;$OTRSHome&gt;/var/run/ can not be used."
@@ -25070,7 +24978,7 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the default value for the action parameter."
-msgstr ""
+msgstr "Legt den Standardwert für den Aktionsparameter fest."
 
 #. XML Definition: Kernel/Config/Files/XML/ProcessManagement.xml
 msgid "Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate)."
@@ -25098,7 +25006,7 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows extended search conditions in ticket search of the agent interface. With this feature you can search e. g. ticket title with this kind of conditions like \"(*key1*&amp;&amp;*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr ""
+msgstr "Ermöglicht erweiterte Suchbedingungen in der Ticketsuche der Agentenschnittstelle. Mit dieser Funktion können Sie z. B. den Titel eines Tickets mit Bedingungen wie \"(*key1*&amp;&amp;*key2*)\" oder \"(*key1*||*key2*)\" suchen."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Determines the strings that will be shown as recipient (To:) of the phone ticket and as sender (From:) of the email ticket in the agent interface. For Queue as NewQueueSelectionType \"&lt;Queue&gt;\" shows the names of the queues and for SystemAddress \"&lt;Realname&gt; &lt;&lt;Email&gt;&gt;\" shows the name and email of the recipient."
@@ -25110,11 +25018,11 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows extended search conditions in ticket search of the customer interface. With this feature you can search e. g. ticket title with this kind of conditions like \"(*key1*&amp;&amp;*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr ""
+msgstr "Ermöglicht erweiterte Suchbedingungen in der Ticketsuche der Kundenschnittstelle. Mit dieser Funktion können Sie z. B. den Titel eines Tickets mit Bedingungen wie \"(*key1*&amp;&amp;*key2*)\" oder \"(*key1*||*key2*)\" suchen."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows extended search conditions in ticket search of the generic agent interface. With this feature you can search e. g. ticket title with this kind of conditions like \"(*key1*&amp;&amp;*key2*)\" or \"(*key1*||*key2*)\"."
-msgstr ""
+msgstr "Ermöglicht erweiterte Suchbedingungen in der Ticketsuche der generischen Agentenschnittstelle. Mit dieser Funktion können Sie z. B. den Titel eines Tickets mit Bedingungen wie \"(*key1*&amp;&amp;*key2*)\" oder \"(*key1*||*key2*)\" suchen."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Filter for debugging ACLs. Note: More ticket attributes can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;."
@@ -25135,4 +25043,572 @@ msgstr "Aktiviert die Unterstützung für große XML-Daten in load_xml-Aufrufen 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
 msgid "Also show global %s"
 msgstr "Auch globale %s anzeigen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessUninstall.tt
+msgid "Go to Package Manager"
+msgstr "Zum Paket-Manager wechseln"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
+msgid "Scope Entity ID"
+msgstr "Geltungsbereich-Entitäts-ID"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Auto fill"
+msgstr "automatisch ausfüllen"
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig."
+msgstr "Re-indiziert S/MIME-Zertifikat-Verzeichnisse. Hinweis: S/MIME muss in der SysConfig aktiviert sein."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of quoted lines to be added to forwarded messages."
+msgstr "Maximale Anzahl zitierter Zeilen in weitergeleiteten Nachrichten."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Hosts that need a separate info about authentication method and token (instead of both in one line). Most commonly needed for Office 365 and Outlook."
+msgstr "Hosts, die eine getrennte Info über Authentifizierungsmethode und Token benötigen (anstatt beides in einer Zeile). Wird am häufigsten für Office 365 und Outlook benötigt."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum length of displayed attachment filenames in the article preview of ticket zoom view."
+msgstr "Maximale Länge der angezeigten Dateinamen von Anhängen in der Artikelvorschau der Ticket-Detailansicht."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Add all attachments"
+msgstr "Alle Anhänge hinzufügen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Add all attachments to invoker payload."
+msgstr "Alle Anhänge zur Nutzlast des Invokers hinzufügen."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "JWT authentication: Key file"
+msgstr "JWT-Authentifizierung: Key-Datei"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "ATTENTION: Key file and/or password (if needed, see below) seem to be invalid."
+msgstr "ACHTUNG: Key-Datei und/oder Passwort (falls benötigt, siehe unten) scheinen ungültig zu sein."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "Path to private key file (PEM or DER). The key will be used to sign the JWT."
+msgstr "Pfad zur Datei mit dem privaten Key (PEM oder DER). Der Key wird zum Signieren des JWT verwendet."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "JWT authentication: Key file password"
+msgstr "JWT-Authentifizierung: Key-Datei-Passwort"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "ATTENTION: Password and/or key file (see above) seem to be invalid."
+msgstr "ACHTUNG: Password und/oder Key-Datei (siehe oben) scheinen ungültig zu sein."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "JWT authentication: Certificate file"
+msgstr "JWT-Authentifizierung: Zertifikatsdatei"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "ATTENTION: Certificate file could not be parsed."
+msgstr "ACHTUNG: Zertifikat-Datei konnte nicht gelesen werden."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "ATTENTION: Certificate is expired."
+msgstr "ACHTUNG: Zertifikat ist abgelaufen."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "Path to X.509 certificate file (PEM). Data of the certificate can be used for the payload and/or header data of the JWT."
+msgstr "Pfad zur X.509-Zertifikat-Datei (PEM). Die Daten des Zertifikats können für die Payload und/oder die Header-Daten des JWT verwendet werden."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "JWT authentication: Algorithm"
+msgstr "JWT-Authentifizierung: Algorithmus"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "JWT authentication: TTL"
+msgstr "JWT-Authentifizierung: TTL"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "TTL (time to live) in seconds for the JWT. This value will be used to calculate the expiration date which will be available in placeholders ExpirationDateTimestamp and ExpirationDateString."
+msgstr "TTL (Time to live) in Sekunden für das JWT. Dieser Wert wird zur Berechnung des Ablaufdatums verwendet und steht in den Platzhaltern ExpirationDateTimestamp und ExpirationDateString zur Verfügung."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "JWT authentication: Payload"
+msgstr "JWT-Authentifizierung: Payload"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "Payload for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3"
+msgstr "Payload für JWT. Geben Sie Key- und Value-Paare an (durch ; getrennt), z. B.: Key1=Value1;Key2=Value2;Key3=Value3"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "Available placeholders (prefixed with OTRS_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion."
+msgstr "Verfügbare Platzhalter (OTRS_JWT vorangestellt): ExpirationDateTimestamp, ExpirationDateString. Zusätzlich bei vorhandener Unterstützung von X.509-Zertifikaten: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "Placeholder usage example: Key1=<OTRS_JWT_ExpirationDateTimestamp>"
+msgstr "Beispiel für Platzhalterverwendung: Key1=<OTRS_JWT_ExpirationDateTimestamp>"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "JWT authentication: Additional header data"
+msgstr "JWT-Authentifizierung: Zusätzliche Header-Daten"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "Additional header data for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3"
+msgstr "Zusätzliche Header-Daten für JWT. Geben Sie Key- und Value-Paare an (durch ; getrennt), z. B.: Key1=Value1;Key2=Value2;Key3=Value3"
+
+#. Perl Module: Kernel/Modules/AdminGenericInterfaceTransportHTTPREST.pm
+msgid "Invalid key file and/or password (if needed, see below)."
+msgstr "Ungültige Key-Datei und/oder Passwort (falls benötigt, siehe unten)."
+
+#. Perl Module: Kernel/Modules/AdminGenericInterfaceTransportHTTPREST.pm
+msgid "Invalid password and/or key file (see above)."
+msgstr "Ungültiges Passwort und/oder Key-Datei (siehe oben)."
+
+#. Perl Module: Kernel/Modules/AdminGenericInterfaceTransportHTTPREST.pm
+msgid "Certificate is expired."
+msgstr "Zertifikat ist abgelaufen."
+
+#. Perl Module: Kernel/Modules/AdminGenericInterfaceTransportHTTPREST.pm
+msgid "Certificate file could not be parsed."
+msgstr "Zertifikat-Datei konnte nicht gelesen werden."
+
+#. Perl Module: Kernel/Modules/AdminGenericInterfaceTransportHTTPREST.pm
+msgid "Please enter a time in seconds (at least 10 seconds)."
+msgstr "Bitte geben Sie eine Zeit in Sekunden ein (mind. 10 Sekunden)."
+
+#. Perl Module: Kernel/Modules/AdminGenericInterfaceTransportHTTPREST.pm
+msgid "Please enter data in expected form (see explanation of field)."
+msgstr "Bitte geben Sie die Daten in der erwarteten Form ein (siehe Feldbeschreibung)."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic."
+msgstr "Maximale Anzahl paralleler Instanzen bei Nutzung von OTRS_AsynchronousInvokerExecution im Invoker Ticket::Generic."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
+msgid "Maximum number of results for web service queries, e.g. for autocomplete selection list."
+msgstr "Maximale Anzahl von Ergebnissen für Webservice-Abfragen, z. B. für die automatische Vervollständigung der Auswahlliste."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "General settings for autocompletion in rich text editor."
+msgstr "Allgemeine Einstellungen für Autovervollständigung im Rich-Text-Editor."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Rich text editor configuration for autocompletion module."
+msgstr "Rich-Text-Editor-Konfiguration für Autocompletion-Modul."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Rich text editor configuration for autocompletion module to support templates."
+msgstr "Rich-Text-Editor-Konfiguration für Autocompletion-Modul zur Unterstützung von Vorlagen."
+
+#. SysConfig
+msgid "Snippet"
+msgstr "Snippet"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
+msgid "Remove mention"
+msgstr "Erwähnung entfernen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/MentionsTable.tt
+msgid "Mentions"
+msgstr "Erwähnungen"
+
+#. Perl Module: Kernel/Modules/AdminNotificationEvent.pm
+msgid "All users who are mentioned in a ticket"
+msgstr "Alle Benutzer, die in einem Ticket erwähnt werden."
+
+#. Perl Module: Kernel/Modules/AgentTicketMentionView.pm
+msgid "New mention"
+msgstr "Neue Erwähnung"
+
+#. Perl Module: Kernel/Modules/AgentTicketMentionView.pm
+msgid "My Mentions"
+msgstr "Meine Erwähnungen"
+
+#. Perl Module: Kernel/Modules/Mentions.pm
+msgid "%s users will be mentioned"
+msgstr "%s Benutzer werden erwähnt"
+
+#. Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
+msgid "Total mentions"
+msgstr "Gesamte Erwähnungen"
+
+#. Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
+msgid "Total new mentions"
+msgstr "Gesamte neue Erwähnungen"
+
+#. Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
+msgid "New mentions"
+msgstr "Neue Erwähnungen"
+
+#. Perl Module: Kernel/System/Mention.pm
+msgid "LastMention"
+msgstr "Letzte Erwähnung"
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines which notifications about mentions should be sent."
+msgstr "Bestimmt, welche Benachrichtigungen über Erwähnungen versendet werden sollen."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines if the toolbar mention icon should count mentions."
+msgstr "Erwähnungs-Icon in Toolbar soll Anzahl der Erwähnungen anzeigen."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Frontend registration of triggers for mention plugin of CKEditor."
+msgstr "Frontend-Registrierung für Trigger des CKEditor-Mention-Plugins."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Frontend registration of input/output templates for mention plugin of CKEditor."
+msgstr "Frontend-Registrierung für Template des CKEditor-Mention-Plugins."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Event handler for mentions."
+msgstr "Event-Handler für Erwähnungen."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Parameters for the dashboard backend of the last mention widget."
+msgstr "Parameter für das Dasboard-Widget \"Letzte Erwähnung\"."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Agent interface notification module to show the number of mentions."
+msgstr "Benachrichtigungsmodul für Agenten-Interface, das die Anzahl der Erwähnungen anzeigt."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Module to grant access to the mentioned agents of a ticket."
+msgstr "Modul, das Zugriff für die erwähnten Agenten eines Tickets gewährt."
+
+#. XML Definition: scripts/database/initial_insert.xml
+msgid "Mention notification"
+msgstr "Benachrichtigung für Erwähnung"
+
+#. SysConfig
+msgid "Last Mentions"
+msgstr "Letzte Erwähnungen"
+
+#. SysConfig
+msgid "Mentioned in article"
+msgstr "In Artikel erwähnt"
+
+#. SysConfig
+msgid "Mentioned in ticket"
+msgstr "In Ticket erwähnt"
+
+#. SysConfig
+msgid "Mentions."
+msgstr "Erwähnungen."
+
+#. SysConfig
+msgid "Shows last mention of tickets."
+msgstr "Zeigt letzte Erwähnung von Tickets."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice.tt
+msgid "Attributes"
+msgstr "Attribute"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice.tt
+msgid "Attributes for invoker execution (initially default values will be used)."
+msgstr "Attribute für Invoker-Ausführung (initial werden Defaultwerte verwendet)."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice.tt
+msgid "Attribute keys"
+msgstr "Attribut-Schlüssel"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice.tt
+msgid "Custom attribute form for invoker execution."
+msgstr "Benutzerdefiniertes Attributformular für die Invoker-Ausführung."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Mapping for field values received from form. This setting is necessary for the correct identification of the form fields. Key means value type, value means possible representation in views."
+msgstr "Mapping für die vom Formular empfangenen Feldwerte. Diese Einstellung ist für die korrekte Identifizierung der Formularfelder notwendig. Schlüssel ist Typ, Inhalt ist möglicher Name im Formular."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Mapping for field values received from form which have multiple values. This setting is needed when the view shows the values of a particular field in a custom way (e.g. selectable customer user in ticket creation view). This setting is always respected first. There is also the possibility to specify an order for checking fields. (Field of customer user in ticket creation view can be saved as CustomerUser or just simple e-mail. First we need to check if CustomerKey is present (CustomerKey -> ID of CustomerUser). If not, then simply take plain text (CustomerTicketText -> E-mail))."
+msgstr "Zuordnung für Feldwerte, die vom Formular empfangen werden und mehrere Werte haben. Diese Einstellung wird benötigt, wenn die Ansicht die Werte eines bestimmten Feldes in einer benutzerdefinierten Weise anzeigt (z. B. auswählbarer Kundenbenutzer in der Ansicht zur Ticketerstellung). Diese Einstellung wird immer zuerst beachtet. Es besteht auch die Möglichkeit, eine Reihenfolge für die Überprüfung der Felder festzulegen. (Das Feld des Kundenbenutzers in der Ticket-Erstellungsansicht kann als CustomerUser oder als einfache E-Mail gespeichert werden. Zuerst muss geprüft werden, ob CustomerKey vorhanden ist (CustomerKey -> ID von CustomerUser). Ist dies nicht der Fall, wird einfach der Text verwendet (CustomerTicketText -> E-Mail))."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Options and default field set for attributes. Values of this setting will always be passed as simple form value without possibility to further configure it in AdminDynamicField view. The keys with which the form values will be sent to the invoker can be edited in the \"Default\" section of this setting."
+msgstr "Optionen und Standardfeld für Attribute. Die Werte dieser Einstellung werden immer als einfache Formularwerte übergeben, ohne die Möglichkeit, sie in der Ansicht AdminDynamicField weiter zu konfigurieren. Die Schlüssel, mit denen die Formularwerte an den Invoker gesendet werden, können im Abschnitt \"Default\" dieser Einstellung bearbeitet werden."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Options and default field set for selectable attributes. Values which will be passed to invoker (ID or Name or both) can be configured in AdminDynamicField view. The keys with which the form values (ID or Name) will be sent to the invoker can be edited in the \"Default\" section of this setting. Example usage for field Queue: Field with selected ID and Name will send QueueID = 3 and Queue = Raw."
+msgstr "Optionen und Standardfeld für auswählbare Attribute. Die Werte, die an den Aufrufer übergeben werden (ID oder Name oder beides), können in der Ansicht AdminDynamicField konfiguriert werden. Die Schlüssel, mit denen die Formularwerte (ID oder Name) an den Invoker gesendet werden, können im Abschnitt \"Default\" dieser Einstellung bearbeitet werden. Beispiel für die Verwendung des Feldes Queue: Feld mit ausgewählter ID und Name sendet QueueID = 3 und Queue = Raw."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket free text screen of the agent interface."
+msgstr "Zeigt in der \"Ticket-FreiText\"-Ansicht der Agenten-Oberfläche eine Liste aller möglichen Agenten (alle Agenten mit mindestens RO-Berechtigung in diesem Ticket/dieser Queue), die informiert werden sollen."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the close ticket screen of the agent interface."
+msgstr "Zeigt in der \"Ticket Schließen\"-Ansicht der Agenten-Oberfläche eine Liste aller möglichen Agenten (alle Agenten mit mindestens RO-Berechtigung in diesem Ticket/dieser Queue), die informiert werden sollen."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket note screen of the agent interface."
+msgstr "Zeigt in der \"Ticket-Notiz\"-Ansicht der Agenten-Oberfläche eine Liste aller möglichen Agenten (alle Agenten mit mindestens RO-Berechtigung für Notizen in diesem Ticket/dieser Queue), die informiert werden sollen."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket owner screen of a zoomed ticket in the agent interface."
+msgstr "Zeigt in der \"Ticket-Besitzer\"-Ansicht der Agenten-Oberfläche eine Liste aller möglichen Agenten (alle Agenten mit mindestens RO-Berechtigung für Notizen in diesem Ticket/dieser Queue), die informiert werden sollen."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket pending screen of a zoomed ticket in the agent interface."
+msgstr "Zeigt in der \"Warten auf Erinnerung\"-Ansicht der Agenten-Oberfläche eine Liste aller möglichen Agenten (alle Agenten mit mindestens RO-Berechtigung für Notizen in diesem Ticket/dieser Queue), die informiert werden sollen."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket priority screen of a zoomed ticket in the agent interface."
+msgstr "Zeigt in der \"Ticket-Priorität\"-Ansicht der Agenten-Oberfläche eine Liste aller möglichen Agenten (alle Agenten mit mindestens RO-Berechtigung für Notizen in diesem Ticket/dieser Queue), die informiert werden sollen."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Shows a list of all the possible agents (all agents with at least ro permissions on the queue/ticket) to determine who should be informed about this note, in the ticket responsible screen of the agent interface."
+msgstr "Zeigt in der \"Ticket-Verantwortlicher\"-Ansicht der Agenten-Oberfläche eine Liste aller möglichen Agenten (alle Agenten mit mindestens RO-Berechtigung für Notizen in diesem Ticket/dieser Queue), die informiert werden sollen."
+
+#. Perl Module: Kernel/System/MailQueue.pm
+msgid "Error while validating Message data."
+msgstr "Fehler bei der Validierung der Nachrichtendaten."
+
+#. Perl Module: Kernel/System/MailQueue.pm
+msgid "Error while validating Sender email address."
+msgstr "Fehler bei der Validierung der Absender-E-Mail-Adresse."
+
+#. Perl Module: Kernel/System/MailQueue.pm
+msgid "Error while validating Recipient email address."
+msgstr "Fehler bei der Validierung der E-Mail-Adresse des Empfängers."
+
+#. SysConfig
+msgid "Defines if fred is visible or hidden."
+msgstr "Legt fest, ob fred sichtbar oder verborgen ist."
+
+#. SysConfig
+msgid "Which order should the config log data have?"
+msgstr ""
+
+#. SysConfig
+msgid "Internal"
+msgstr "Intern"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
+msgid "Filter for Appointments"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
+msgid "URL for authorization code"
+msgstr "URL für Autorisierungscode"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
+msgid "URL for token by authorization code"
+msgstr "URL für Token per Autorisierungscode"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
+msgid "URL for token by refresh token"
+msgstr "URL für Token per Refresh-Token"
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "These groups won't be selectable to be mentioned."
+msgstr "Diese Gruppen stehen nicht für Erwähnungen zur Auswahl."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Limits number of users (per article) that will be marked as mentioned and be notified. Users (and users from mentioned groups) that exceed this limit will silently be ignored."
+msgstr "Begrenzt die Anzahl der Benutzer (pro Artikel), die als erwähnt markiert und benachrichtigt werden sollen. Benutzer (und Benutzer aus erwähnten Gruppen), die dieses Limit überschreiten, werden ohne Hinweis ignoriert."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "This message contains events"
+msgstr "Diese Nachricht enthält Events."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "This message contains an event"
+msgstr "Diese Nachricht enthält ein Event."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "Show more information"
+msgstr "Mehr Informationen anzeigen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "Start: %s, End: %s"
+msgstr "Start: %s, Ende: %s"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "Calendar events details"
+msgstr "Kalender-Events-Details"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
+msgid "Calendar event details"
+msgstr "Kalender-Event-Details"
+
+#. Perl Module: Kernel/System/CalendarEvents.pm
+msgid "on"
+msgstr "an"
+
+#. Perl Module: Kernel/System/CalendarEvents.pm
+msgid "of year"
+msgstr "des Jahres"
+
+#. Perl Module: Kernel/System/CalendarEvents.pm
+msgid "of month"
+msgstr "des Monats"
+
+#. Perl Module: Kernel/System/CalendarEvents.pm
+msgid "all-day"
+msgstr "ganztägig"
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the selectable font sizes in the rich text editor."
+msgstr "Legt die wählbaren Schriftgrößen im Rich-Text-Editor fest."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the selectable fonts in the rich text editor."
+msgstr "Legt die auswählbaren Schriftarten im Rich-Text-Editor fest."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines additional plugins for use in the rich text editor."
+msgstr "Definiert zusätzliche Plugins für die Verwendung im Rich-Text-Editor."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines extra content that is allowed for use in the rich text editor."
+msgstr "Definiert zusätzliche Inhalte, die für die Verwendung im Rich-Text-Editor zugelassen sind."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
+msgid "No tickets found."
+msgstr "Keine Tickets gefunden."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "MyLastChangedTickets dashboard widget."
+msgstr "Dashboard-Widget \"Meine zuletzt geänderten Tickets\""
+
+#. SysConfig
+msgid "My last changed tickets"
+msgstr "Meine zuletzt geänderten Tickets"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
+msgid "Access token scope"
+msgstr "Access-Token-Scope"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
+msgid "Related Actions"
+msgstr "Verwandte Aktionen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
+msgid "Relatd Actions"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
+msgid "Queues ↔ AUto Responses"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
+msgid "Customers Users"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
+msgid "Agents  ↔ Groups"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
+msgid "Customer ↔ Groups"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPriority.tt
+msgid "Configure Priority Visibility and Defaults"
+msgstr "Prioritätssichtbarkeit und Standardeinstellungen konfigurieren"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
+msgid "Add a Dynamic Field"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Manage Process Widiget Groups"
+msgstr "Prozess-Widget-Gruppen verwalten"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Add a Generic Agent Job"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Add an ACL"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
+msgid "Configure Working Hours"
+msgstr "Arbeitszeiten Konfigurieren"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
+msgid "Configure Queue Related Settings"
+msgstr "Queue-Einstellungen konfigurieren"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSLA.tt
+msgid "Configure SLA Visibility and Defaults"
+msgstr "SLA-Sichtbarkeit und Standardeinstellungen konfigurieren"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
+msgid "Configure Service Visibility and Defaults"
+msgstr "Serivce-Sichtbarkeit und Standardeinstellungen konfigurieren"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
+msgid "Configure State Visibility and Defaults"
+msgstr "Status-Sichtbarkeit und Standardeinstellungen konfigurieren"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
+msgid "Configure State Type Visibility and Defaults"
+msgstr "Statustyp-Sichtbarkeit und Standardeinstellungen konfigurieren"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Action Control Lists"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Generic Agents"
+msgstr "Aufgabenplaner"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminType.tt
+msgid "Configure Type Visibility and Defaults"
+msgstr "Typ-Sichtbarkeit und Standardeinstellungen konfigurieren"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Generic Agent"
+msgstr "Generic Agent"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSLA.tt
+msgid "Minimum Time Between Incidents"
+msgstr "Minimale Zeit zwischen den Vorfällen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
+msgid "Criticality"
+msgstr "Kritikalität"
+
+#. SysConfig
+msgid "Web service (Dropdown)"
+msgstr "Webservice (Einfachauswahl)"
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Mapping of non-standard time zones to official ones."
+msgstr "Mapping von Nicht-Standard-Zeitzonen zu offiziellen Zeitzonen."
+
+#. JS File: var/httpd/htdocs/js/Core.UI.js
+msgid "The names of the following files exceed the maximum allowed length of %s characters and were not uploaded: %s"
+msgstr "Die Namen der folgenden Dateien überschreiten die Maximallänge von %s Zeichen und wurden nicht hochgeladen: %s"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required package %s is already installed."
+msgstr "Vorausgesetzes Paket %s ist bereits installiert."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required Perl module %s is already installed."
+msgstr "Vorausgesetzes Perl Modul %s ist bereits installiert."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required package %s needs to get installed!"
+msgstr "Vorausgesetzes Paket %s muss noch installiert werden!"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required package %s needs to get updated to version %s!"
+msgstr "Vorausgesetzes Paket %s muss noch auf Version %s aktuallisiert werden!"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Required Perl module %s needs to get installed or updated!"
+msgstr "Vorausgesetzes Perl Modul %s muss noch installiert oder aktuallisiert werden!"
+
+#. Perl Module: Kernel/Output/HTML/Preferences/MaxArticlesPerPage.pm
+msgid "Max. number of articles per page must be between 1 and 1000 or empty."
+msgstr "Max. Anzahl der Artikel pro Seite muss zwischen 1 und 1000 liegen oder nicht gefüllt sein."
+
+#. SysConfig
+msgid "Max. number of articles per page in TicketZoom"
+msgstr "Max. Anzahl Artikel pro Seite in der Ticket-Detailansicht"
+
+#. SysConfig
+msgid "Select the maximum articles per page shown in TicketZoom. System default value will apply when entered empty value."
+msgstr "Wählen Sie die maximale Anzahl angezeigter Artikel pro Seite in der Ticket-Detailansicht. Der Systemstandardwert wird angewendet, wenn ein leerer Wert eingegeben wird."
 

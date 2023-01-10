@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -13,6 +13,9 @@ use warnings;
 
 use Kernel::System::ObjectManager;
 use Kernel::System::VariableCheck qw(:all);
+
+use parent qw(Kernel::System::AsynchronousExecutor);
+use parent qw(Kernel::System::EventHandler);
 
 our $ObjectManagerDisabled = 1;
 
@@ -74,13 +77,16 @@ sub PrepareRequest {
     my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
     my $UtilObject   = $Kernel::OM->Get('Kernel::System::Util');
 
-    my %Ticket = $TicketObject->TicketDeepGet(
-        TicketID  => $Param{Data}->{TicketID},
-        ArticleID => $Param{Data}->{ArticleID},
-        UserID    => 1,
-    );
+    my $InvokerName              = $Param{InvokerName} // 'Generic';
+    my $GetAllArticleAttachments = $Param{Data}->{GetAllArticleAttachments}
+        || $Param{Webservice}->{Config}->{Requester}->{Invoker}->{$InvokerName}->{GetAllArticleAttachments};
 
-    my $InvokerName = $Param{InvokerName} // 'Generic';
+    my %Ticket = $TicketObject->TicketDeepGet(
+        TicketID                 => $Param{Data}->{TicketID},
+        ArticleID                => $Param{Data}->{ArticleID},
+        GetAllArticleAttachments => $GetAllArticleAttachments,
+        UserID                   => 1,
+    );
 
     # Remove configured fields.
     my $OmittedFields = $ConfigObject->Get(
@@ -156,6 +162,7 @@ handle response data of the configured remote web service.
 sub HandleResponse {
     my ( $Self, %Param ) = @_;
 
+    my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
     my $BackendObject      = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
     my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
     my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
@@ -313,6 +320,75 @@ sub HandleResponse {
                 UserID               => 1,
                 %{ $Param{Data}->{$Key} },
             );
+        }
+        elsif ( $Key eq 'OTRS_TicketCreate' ) {
+            $Success = $TicketObject->TicketCreate(
+                %{ $Param{Data}->{$Key} },
+            );
+        }
+        elsif ( $Key eq 'OTRS_AsynchronousInvokerExecution' ) {
+            if ( !IsArrayRefWithData( $Param{Data}->{$Key} ) ) {
+                return $Self->{DebuggerObject}->Error(
+                    Summary =>
+                        "Parameter '$Key' needs to be an array with data.",
+                );
+            }
+
+            INVOKERPARAMETERS:
+            for my $InvokerParameters ( @{ $Param{Data}->{$Key} } ) {
+                if ( !IsHashRefWithData($InvokerParameters) ) {
+                    return $Self->{DebuggerObject}->Error(
+                        Summary =>
+                            "Parameter '$Key' needs to be an array of hashes with data.",
+                    );
+                }
+
+                my $MaximumParallelInstances = $ConfigObject->Get(
+                    'GenericInterface::Invoker::Ticket::Generic::HandleResponse::MaximumParallelInstances'
+                ) // 1;
+
+                my $AsyncCallOK = $Self->AsyncCall(
+                    ObjectName               => 'Kernel::GenericInterface::Requester',
+                    FunctionName             => 'Run',
+                    FunctionParams           => $InvokerParameters,
+                    Attempts                 => 3,
+                    MaximumParallelInstances => $MaximumParallelInstances,
+                );
+                next INVOKERPARAMETERS if $AsyncCallOK;
+
+                return $Self->{DebuggerObject}->Error(
+                    Summary =>
+                        'Error executing asynchronous call of Kernel::GenericInterface::Requester::Run().',
+                );
+            }
+
+            $Success = 1;
+        }
+        elsif ( $Key eq 'OTRS_TicketArticleCreateEvent' ) {
+            $Self->EventHandlerInit(
+                Config => 'Ticket::EventModulePost',
+            );
+
+            my $ArticleIDsString = $Param{Data}->{$Key} // '';
+            my @ArticleIDs       = split /\s*,\s*/, $ArticleIDsString;
+
+            my %UniqueArticleIDs = map { $_ => 1 } grep { $_ =~ m{\A\d+\z} } @ArticleIDs;
+
+            for my $ArticleID ( sort keys %UniqueArticleIDs ) {
+                $Self->EventHandler(
+                    Event => 'ArticleCreate',
+                    Data  => {
+                        ArticleID => $ArticleID,
+                        TicketID  => $Self->{RequestData}->{Ticket}->{TicketID},
+                    },
+                    UserID => 1,
+                );
+            }
+
+            # Handle all queued 'Transaction' events which were collected up to this point.
+            $Self->EventHandlerTransaction();
+
+            $Success = 1;
         }
 
         next RESULT if $Success;

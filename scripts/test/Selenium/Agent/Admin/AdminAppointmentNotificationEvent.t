@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -346,7 +346,7 @@ JAVASCRIPT
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # Import existing template without overwrite.
-        my $Location = $ConfigObject->Get('Home')
+        my $Location = $Selenium->{Home}
             . "/scripts/test/sample/NotificationEvent/Export_Notification_Appointment_reminder_notification.yml";
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
 
@@ -364,7 +364,7 @@ JAVASCRIPT
         );
 
         # Import existing template with overwrite.
-        $Location = $ConfigObject->Get('Home')
+        $Location = $Selenium->{Home}
             . "/scripts/test/sample/NotificationEvent/Export_Notification_Appointment_reminder_notification.yml";
         $Selenium->find_element( "#FileUpload",                     'css' )->send_keys($Location);
         $Selenium->find_element( "#OverwriteExistingNotifications", 'css' )->click();

@@ -1,0 +1,22 @@
+/*--
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+--
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+--*/
+
+.Mention{
+	background: #303038;
+	color: white;
+}
+
+.cke_autocomplete_selected.Mention:hover{
+	background: #2c9cf9;
+	color: white;
+}
+
+.cke_autocomplete_selected.Mention{
+	background: #2c9cf9;
+	color: white;
+}

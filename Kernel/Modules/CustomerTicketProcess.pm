@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -8,7 +8,7 @@
 # --
 
 package Kernel::Modules::CustomerTicketProcess;
-## nofilter(TidyAll::Plugin::OTRS::Perl::DBObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::DBObject)
 
 use strict;
 use warnings;
@@ -27,26 +27,27 @@ sub new {
 
     # global config hash for id dissolution
     $Self->{NameToID} = {
-        Title          => 'Title',
-        State          => 'StateID',
-        StateID        => 'StateID',
-        Lock           => 'LockID',
-        LockID         => 'LockID',
-        Priority       => 'PriorityID',
-        PriorityID     => 'PriorityID',
-        Queue          => 'QueueID',
-        QueueID        => 'QueueID',
-        Customer       => 'CustomerID',
-        CustomerID     => 'CustomerID',
-        CustomerNo     => 'CustomerID',
-        CustomerUserID => 'CustomerUserID',
-        Type           => 'TypeID',
-        TypeID         => 'TypeID',
-        SLA            => 'SLAID',
-        SLAID          => 'SLAID',
-        Service        => 'ServiceID',
-        ServiceID      => 'ServiceID',
-        Article        => 'Article',
+        Title              => 'Title',
+        State              => 'StateID',
+        StateID            => 'StateID',
+        Lock               => 'LockID',
+        LockID             => 'LockID',
+        Priority           => 'PriorityID',
+        PriorityID         => 'PriorityID',
+        Queue              => 'QueueID',
+        QueueID            => 'QueueID',
+        Customer           => 'CustomerID',
+        CustomerID         => 'CustomerID',
+        CustomerNo         => 'CustomerID',
+        CustomerUserID     => 'CustomerUserID',
+        Type               => 'TypeID',
+        TypeID             => 'TypeID',
+        SLA                => 'SLAID',
+        SLAID              => 'SLAID',
+        Service            => 'ServiceID',
+        ServiceID          => 'ServiceID',
+        StandardTemplateID => 'StandardTemplateID',
+        Article            => 'Article',
     };
 
     return $Self;
@@ -672,6 +673,80 @@ sub _RenderAjax {
             );
             $FieldsProcessed{ $Self->{NameToID}{$CurrentField} } = 1;
         }
+        elsif (
+            $Self->{NameToID}{$CurrentField} eq 'Article'
+            && $Param{GetParam}->{ElementChanged} eq 'StandardTemplateID'
+            )
+        {
+            next DIALOGFIELD if $FieldsProcessed{ $Self->{NameToID}{$CurrentField} };
+
+            my $TemplateGeneratorObject = $Kernel::OM->Get('Kernel::System::TemplateGenerator');
+            my $StandardTemplateObject  = $Kernel::OM->Get('Kernel::System::StandardTemplate');
+            my $StdAttachmentObject     = $Kernel::OM->Get('Kernel::System::StdAttachment');
+            my $UploadCacheObject       = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
+
+            my $StandardTemplateText;
+            my @TicketAttachments;
+
+            if ( IsPositiveInteger( $Param{GetParam}->{StandardTemplateID} ) ) {
+                my %StandardTemplate = $StandardTemplateObject->StandardTemplateGet(
+                    ID => $Param{GetParam}->{StandardTemplateID},
+                );
+
+                # remove pre-submitted attachments
+                $UploadCacheObject->FormIDRemove( FormID => $Self->{FormID} );
+
+                $StandardTemplateText = $TemplateGeneratorObject->_Replace(
+                    RichText => $LayoutObject->{BrowserRichText},
+                    Text     => $StandardTemplate{Template},
+                    Data     => {
+                        %{ $Param{GetParam} },
+                    },
+                    TicketData => {
+                        %{ $Param{GetParam} },
+                    },
+                    UserID => $Self->{UserID},
+                );
+
+                # add standard attachments to ticket
+                my %AllStdAttachments = $StdAttachmentObject->StdAttachmentStandardTemplateMemberList(
+                    StandardTemplateID => $Param{GetParam}->{StandardTemplateID},
+                );
+                for my $ID ( sort keys %AllStdAttachments ) {
+                    my %AttachmentsData = $StdAttachmentObject->StdAttachmentGet( ID => $ID );
+                    $UploadCacheObject->FormIDAddFile(
+                        FormID      => $Self->{FormID},
+                        Disposition => 'attachment',
+                        %AttachmentsData,
+                    );
+                }
+
+                @TicketAttachments = $UploadCacheObject->FormIDGetAllFilesMeta(
+                    FormID => $Self->{FormID},
+                );
+
+                for my $Attachment (@TicketAttachments) {
+                    $Attachment->{Filesize} = $LayoutObject->HumanReadableDataSize(
+                        Size => $Attachment->{Filesize},
+                    );
+                }
+            }
+
+            push(
+                @JSONCollector,
+                {
+                    Name => 'RichText',
+                    Data => $StandardTemplateText // '',
+                },
+                {
+                    Name     => 'TicketAttachments',
+                    Data     => \@TicketAttachments,
+                    KeepData => 1,
+                },
+            );
+
+            $FieldsProcessed{ $Self->{NameToID}{$CurrentField} } = 1;
+        }
     }
 
     my $JSON = $LayoutObject->BuildSelectionJSON( [@JSONCollector] );
@@ -745,7 +820,7 @@ sub _GetParam {
     my $ActivityDialogEntityID = $ParamObject->GetParam(
         Param => 'ActivityDialogEntityID',
     );
-    my $ActivityEntityID;
+    my $ActivityEntityID = $ParamObject->GetParam( Param => 'ActivityEntityID' );
     my %ValuesGotten;
     my $Value;
 
@@ -878,7 +953,7 @@ sub _GetParam {
             if ( !IsHashRefWithData($DynamicFieldConfig) ) {
 
                 my $Message
-                    = "DynamicFieldConfig missing for field: $Param{FieldName}, or is not a Ticket Dynamic Field!";
+                    = "DynamicFieldConfig missing for field: $DynamicFieldName, or is not a Ticket Dynamic Field!";
 
                 # log error but does not stop the execution as it could be an old Article
                 # DynamicField, see bug#11666
@@ -961,6 +1036,8 @@ sub _GetParam {
             );
 
             $ValuesGotten{Article} = 1 if ( $GetParam{Subject} && $GetParam{Body} );
+
+            $GetParam{StandardTemplateID} = $ParamObject->GetParam( Param => 'StandardTemplateID' );
         }
 
         if ( $CurrentField eq 'CustomerID' ) {
@@ -1050,6 +1127,7 @@ sub _GetParam {
     # and finally we'll have the special parameters:
     $GetParam{ResponsibleAll} = $ParamObject->GetParam( Param => 'ResponsibleAll' );
     $GetParam{OwnerAll}       = $ParamObject->GetParam( Param => 'OwnerAll' );
+    $GetParam{ElementChanged} = $ParamObject->GetParam( Param => 'ElementChanged' );
 
     return \%GetParam;
 }
@@ -1343,6 +1421,7 @@ sub _OutputActivityDialog {
             Subaction              => 'StoreActivityDialog',
             TicketID               => $Ticket{TicketID} || '',
             ActivityDialogEntityID => $ActivityActivityDialog->{ActivityDialog},
+            ActivityEntityID       => $ActivityActivityDialog->{Activity},
             ProcessEntityID        => $Param{ProcessEntityID}
                 || $Ticket{
                 'DynamicField_'
@@ -2191,6 +2270,48 @@ sub _RenderArticle {
             Name => 'rw:Article:InformAgent',
             Data => \%Param,
         );
+    }
+
+    # show StandardTemplates
+    if ( IsArrayRefWithData( $Param{ActivityDialogField}->{Config}->{StandardTemplateID} ) ) {
+        my $StandardTemplateObject = $Kernel::OM->Get('Kernel::System::StandardTemplate');
+
+        my %StandardTemplates = $StandardTemplateObject->StandardTemplateList(
+            Valid => 1,
+            Type  => 'ProcessManagement',
+        );
+
+        STANDARDTEMPLATEID:
+        for my $StandardTemplateID ( sort keys %StandardTemplates ) {
+            my $Exists
+                = grep { $StandardTemplateID eq $_ } @{ $Param{ActivityDialogField}->{Config}->{StandardTemplateID} };
+            next STANDARDTEMPLATEID if $Exists;
+
+            delete $StandardTemplates{$StandardTemplateID};
+        }
+
+        if (%StandardTemplates) {
+            $Param{StandardTemplateStrg} = $LayoutObject->BuildSelection(
+                Data         => \%StandardTemplates,
+                Name         => 'StandardTemplateID',
+                SelectedID   => $Param{GetParam}->{StandardTemplateID} || '',
+                Class        => 'Modernize W75pc',
+                PossibleNone => 1,
+                Sort         => 'AlphanumericValue',
+                Translation  => 1,
+                Max          => 200,
+            );
+
+            $LayoutObject->AddJSData(
+                Key   => 'StandardTemplateAutoFill',
+                Value => $Param{ActivityDialogField}->{Config}->{StandardTemplateAutoFill} || 0,
+            );
+
+            $LayoutObject->Block(
+                Name => 'StandardTemplate',
+                Data => \%Param,
+            );
+        }
     }
 
     return {
@@ -3288,7 +3409,7 @@ sub _StoreActivityDialog {
             if ( !IsHashRefWithData($DynamicFieldConfig) ) {
 
                 my $Message
-                    = "DynamicFieldConfig missing for field: $Param{FieldName}, or is not a Ticket Dynamic Field!";
+                    = "DynamicFieldConfig missing for field: $DynamicFieldName, or is not a Ticket Dynamic Field!";
 
                 # log error but does not stop the execution as it could be an old Article
                 # DynamicField, see bug#11666
@@ -3701,7 +3822,7 @@ sub _StoreActivityDialog {
             if ( !IsHashRefWithData($DynamicFieldConfig) ) {
 
                 my $Message
-                    = "DynamicFieldConfig missing for field: $Param{FieldName}, or is not a Ticket Dynamic Field!";
+                    = "DynamicFieldConfig missing for field: $DynamicFieldName, or is not a Ticket Dynamic Field!";
 
                 # log error but does not stop the execution as it could be an old Article
                 # DynamicField, see bug#11666

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -286,6 +286,10 @@ $Selenium->RunTest(
         $Selenium->find_element("//button[\@id='MappingInboundConfigureButton']")->VerifiedClick();
 
         # Verify saved data.
+        $Selenium->WaitFor(
+            JavaScript => 'return $("#Template").val()[0] != "";'
+        );
+
         $Self->Is(
             $Selenium->find_element( "#Template", 'css' )->get_value(),
             $XSLTData,

@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // Copyright (C) 2021 maxence business consulting GmbH, http://www.maxence.de
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
@@ -734,7 +734,7 @@ Core.Agent.Admin.ACL = (function (TargetNS) {
             $(this).next('input').select().focus();
         });
 
-        $('.ACLStructure').on('blur keydown', '.LiveEdit', function(Event) {
+        $('.ACLStructure').on('blur keydown submitevent', '.LiveEdit', function(Event) {
 
             var Value;
 
@@ -832,6 +832,11 @@ Core.Agent.Admin.ACL = (function (TargetNS) {
         });
 
         $('#Submit, #SubmitAndContinue').on('click', function() {
+
+            // trigger submitevent to prepare data item for collect ACLData
+            if ($('.LiveEdit').length >= 1) {
+                $('.LiveEdit').trigger('submitevent');
+            }
 
             // collect data from the input areas
             TargetNS.ConfigMatch = TargetNS.CollectACLData($('#ACLMatch'));

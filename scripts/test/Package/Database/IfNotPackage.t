@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -133,8 +133,8 @@ my %Packages = (
 <otrs_package version="1.1">
     <Name>Package1$RandomID</Name>
     <Version>1.0.1</Version>
-    <Vendor>OTRS AG</Vendor>
-    <URL>https://otrs.com/</URL>
+    <Vendor>Znuny GmbH</Vendor>
+    <URL>https://znuny.org/</URL>
     <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
     <Description Lang="en">OTRS Business Solution. For more information, please have a look at the official documentation at https://doc.otrs.com/doc/manual/otrs-business-solution/6.0/en/html/.</Description>
     <Framework>$OTRSVersion</Framework>
@@ -157,8 +157,8 @@ EOF
 <otrs_package version="1.1">
     <Name>Package2$RandomID</Name>
     <Version>1.0.1</Version>
-    <Vendor>OTRS AG</Vendor>
-    <URL>https://otrs.com/</URL>
+    <Vendor>Znuny GmbH</Vendor>
+    <URL>https://znuny.org/</URL>
     <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
     <Description Lang="en">OTRS Business Solution. For more information, please have a look at the official documentation at https://doc.otrs.com/doc/manual/otrs-business-solution/6.0/en/html/.</Description>
     <Framework>$OTRSVersion</Framework>

@@ -1,11 +1,11 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
-## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::SpellCheck)
+## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
 
 package Kernel::System::Util;
 
@@ -257,6 +257,7 @@ sub GetInstalledDBCRUDObjects {
     my @FilePaths = $MainObject->DirectoryRead(
         Directory => $KernelSystemPath,
         Filter    => '*.pm',
+        Recursive => 1,
     );
 
     my @DBCRUDObjects;
@@ -272,7 +273,7 @@ sub GetInstalledDBCRUDObjects {
         next FILEPATH if ${$FileContentRef} !~ m{^package (.*?);$}m;
         my $DBCRUDPackage = $1;
         next FILEPATH if $DBCRUDPackage eq 'Kernel::System::DBCRUD';
-        next FILEPATH if $DBCRUDPackage eq 'Kernel::System::DBCRUDTest';
+        next FILEPATH if $DBCRUDPackage eq 'Kernel::System::UnitTest::DBCRUD';
 
         my $DBCRUDObject = $Kernel::OM->Get($DBCRUDPackage);
         next FILEPATH if !$DBCRUDObject;

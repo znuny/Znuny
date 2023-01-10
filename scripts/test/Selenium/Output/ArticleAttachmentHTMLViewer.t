@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -23,6 +23,10 @@ $Selenium->RunTest(
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+        # run test only if command exists
+        my $Result = qx{pdftohtml};
+        return 1 if !$Result;
 
         # Enable MIME-Viewer for PDF attachment.
         $HelperObject->ConfigSettingChange(
@@ -55,7 +59,7 @@ $Selenium->RunTest(
         );
 
         # Add article to test ticket with PDF test attachment.
-        my $Location = $ConfigObject->Get('Home')
+        my $Location = $Selenium->{Home}
             . "/scripts/test/sample/StdAttachment/StdAttachment-Test1.pdf";
 
         my $ContentRef = $Kernel::OM->Get('Kernel::System::Main')->FileRead(
@@ -100,12 +104,12 @@ $Selenium->RunTest(
 
         # Check are there Download and Viewer links for test attachment.
         $Self->True(
-            $Selenium->find_element("//a[contains(\@title, \'Download' )]"),
+            $Selenium->find_element("//a[contains(\@class, 'DownloadAttachment')]"),
             "Download link for attachment is found"
         );
 
         $Self->True(
-            $Selenium->find_element("//a[contains(\@title, \'View' )]"),
+            $Selenium->find_element("//a[contains(\@class, 'ViewAttachment')]"),
             "View link for attachment is found"
         );
 
@@ -135,7 +139,7 @@ $Selenium->RunTest(
         $Selenium->switch_to_window( $Handles->[0] );
 
         # Import sample email.
-        $Location   = $ConfigObject->Get('Home') . '/scripts/test/sample/PostMaster/PostMaster-Test20.box';
+        $Location   = $Selenium->{Home} . '/scripts/test/sample/PostMaster/PostMaster-Test20.box';
         $ContentRef = $Kernel::OM->Get('Kernel::System::Main')->FileRead(
             Location => $Location,
             Mode     => 'binmode',

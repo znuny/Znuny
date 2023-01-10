@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -235,14 +235,7 @@ sub Run {
             $OutOfOfficePreferenceData{ 'OutOfOffice' . $DatePart . 'Day' }   = $3;
         }
 
-        $OutOfOfficePreferenceData{OutOfOffice} = $OutOfOfficeEntry->{OutOfOffice} // 0;
-        if (
-            !$OutOfOfficePreferenceData{OutOfOffice}
-            && keys %OutOfOfficePreferenceData == 7
-            )
-        {
-            $OutOfOfficePreferenceData{OutOfOffice} = 1;
-        }
+        $OutOfOfficePreferenceData{OutOfOffice} = $OutOfOfficeEntry->{OutOfOffice} ? 1 : 0;
 
         ATTRIBUTE:
         for my $Attribute (

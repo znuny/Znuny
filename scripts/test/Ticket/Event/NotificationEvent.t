@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -114,7 +114,8 @@ my $UserLogin = $HelperObject->TestUserCreate(
 );
 
 # get user object
-my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
+my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
 
 my %UserData = $UserObject->GetUserData(
     User => $UserLogin,
@@ -151,8 +152,15 @@ my $SetInvalid = $UserObject->UserUpdate(
     ChangeUserID => 1,
 );
 
-# create a new customer user for current test
+# create a new customer user for current test.
 my $CustomerUserLogin = $HelperObject->TestCustomerUserCreate();
+
+# create a new customer for invalid test.
+my $CustomerUserLogin1 = $HelperObject->TestCustomerUserCreate();
+
+my %CustomerUser1 = $CustomerUserObject->CustomerUserDataGet(
+    User => $CustomerUserLogin1,
+);
 
 # get a random id
 my $RandomID = $HelperObject->GetRandomID();
@@ -295,6 +303,33 @@ $Self->True(
     "TicketCreate() successful for Ticket ID $TicketID",
 );
 
+# create ticket
+my $CustomerTicketIDInvalidCustomer = $TicketObject->TicketCreate(
+    Title         => 'Customer Ticket Invalid Test',
+    QueueID       => 1,
+    Lock          => 'unlock',
+    Priority      => '3 normal',
+    State         => 'new',
+    CustomerID    => 'example.com',
+    CustomerUser  => $CustomerUserLogin1,
+    OwnerID       => $UserID,
+    ResponsibleID => $UserID,
+    UserID        => $UserID,
+);
+
+# sanity check
+$Self->True(
+    $CustomerTicketIDInvalidCustomer,
+    "TicketCreate() successful for Ticket ID $CustomerTicketIDInvalidCustomer",
+);
+
+$CustomerUserObject->CustomerUserUpdate(
+    %CustomerUser1,
+    ID      => $CustomerUser1{UserID},
+    ValidID => 2,
+    UserID  => 1,
+);
+
 my $ArticleObject        = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 my $ArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Email' );
 
@@ -380,6 +415,28 @@ my $CustomerArticleID1 = $ArticleBackendObject->ArticleCreate(
 $Self->True(
     $CustomerArticleID1,
     "Article is created - ID $ArticleID1",
+);
+
+# create first customer article
+my $CustomerArticleID1InvalidCustomer = $ArticleBackendObject->ArticleCreate(
+    TicketID             => $CustomerTicketIDInvalidCustomer,
+    IsVisibleForCustomer => 1,
+    SenderType           => 'customer',
+    Subject              => 'Article 1',
+    Body                 => 'This is the first article',
+    Charset              => 'ISO-8859-15',
+    MimeType             => 'text/plain',
+    HistoryType          => 'EmailCustomer',
+    HistoryComment       => 'Some free text!',
+    UserID               => 1,
+    From                 => "$CustomerUserLogin1\@localunittest.com",
+    To                   => 'test1@otrsexample.com',
+    Cc                   => 'test2@otrsexample.com',
+);
+
+$Self->True(
+    $CustomerArticleID1InvalidCustomer,
+    "Article is created - ID $CustomerArticleID1InvalidCustomer",
 );
 
 my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
@@ -1363,6 +1420,23 @@ my @Tests = (
             },
         ],
         Success => 1,
+    },
+    {
+        Name => 'CustomerUser Invalid',
+        Data => {
+            Events     => [ 'TicketDynamicFieldUpdate_DFT1' . $RandomID . 'Update' ],
+            Recipients => ['Customer'],
+        },
+        Config => {
+            Event => 'TicketDynamicFieldUpdate_DFT1' . $RandomID . 'Update',
+            Data  => {
+                TicketID => $CustomerTicketIDInvalidCustomer,
+            },
+            Config => {},
+            UserID => 1,
+        },
+        ExpectedResults => [],
+        Success         => 1,
     },
 );
 

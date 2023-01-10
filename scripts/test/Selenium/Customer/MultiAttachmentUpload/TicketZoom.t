@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -69,7 +69,6 @@ $Selenium->RunTest(
         );
 
         my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
-        my $Home        = $ConfigObject->Get('Home');
 
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketZoom;TicketNumber=$TicketNumber");
         $Selenium->find_element("//a[contains(\@id, \'ReplyButton' )]")->click();
@@ -96,7 +95,7 @@ $Selenium->RunTest(
         );
 
         my $CheckFileTypeFilename = 'Test1.png';
-        my $Location              = "$Home/scripts/test/sample/Cache/$CheckFileTypeFilename";
+        my $Location              = "$Selenium->{Home}/scripts/test/sample/Cache/$CheckFileTypeFilename";
         $Selenium->find_element( "#FileUpload", 'css' )->clear();
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $(".Dialog:visible").length' );
@@ -131,7 +130,7 @@ $Selenium->RunTest(
         );
 
         # Now try to upload two files of which one exceeds the max size (.pdf should work (5KB), .png shouldn't (20KB))
-        $Location = "$Home/scripts/test/sample/Cache/Test1.pdf";
+        $Location = "$Selenium->{Home}/scripts/test/sample/Cache/Test1.pdf";
         $Selenium->find_element( "#FileUpload", 'css' )->clear();
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
         $Selenium->WaitFor(
@@ -141,7 +140,7 @@ $Selenium->RunTest(
         sleep 1;
 
         my $CheckMaxAllowedSizeFilename = 'Test1.png';
-        $Location = "$Home/scripts/test/sample/Cache/$CheckMaxAllowedSizeFilename";
+        $Location = "$Selenium->{Home}/scripts/test/sample/Cache/$CheckMaxAllowedSizeFilename";
         $Selenium->find_element( "#FileUpload", 'css' )->clear();
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
         $Selenium->WaitFor(
@@ -176,7 +175,7 @@ $Selenium->RunTest(
 
         # Upload file again.
         my $CheckUploadAgainFilename = 'Test1.pdf';
-        $Location = "$Home/scripts/test/sample/Cache/$CheckUploadAgainFilename";
+        $Location = "$Selenium->{Home}/scripts/test/sample/Cache/$CheckUploadAgainFilename";
         $Selenium->find_element( "#FileUpload", 'css' )->clear();
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $(".Dialog:visible").length' );

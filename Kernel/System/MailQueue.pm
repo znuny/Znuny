@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -15,6 +15,7 @@ use warnings;
 use MIME::Base64;
 
 use Kernel::System::VariableCheck qw(:all);
+use Kernel::Language qw(Translatable);
 
 use parent qw(Kernel::System::EventHandler);
 
@@ -180,7 +181,7 @@ sub Create {
                 CommunicationLogObject => $Param{CommunicationLogObject},
             );
         },
-        ErrorMessage => 'Error while validating Message data.',
+        ErrorMessage => Translatable('Error while validating Message data.'),
     );
 
     # Check if sender and recipent are valid email addresses.
@@ -192,7 +193,7 @@ sub Create {
                 CommunicationLogObject => $Param{CommunicationLogObject},
             );
         },
-        ErrorMessage => 'Error while validating Sender email address.',
+        ErrorMessage => Translatable('Error while validating Sender email address.'),
     );
 
     return if !$OnErrorSetArticleTransmissionError->(
@@ -203,7 +204,7 @@ sub Create {
                 CommunicationLogObject => $Param{CommunicationLogObject},
             );
         },
-        ErrorMessage => 'Error while validating Recipient email address.',
+        ErrorMessage => Translatable('Error while validating Recipient email address.'),
     );
 
     # Check if already exists a mail-queue item for the same article id.

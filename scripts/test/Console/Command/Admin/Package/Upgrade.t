@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -35,7 +35,6 @@ use Kernel::System::WebUserAgent;
 package Kernel::System::WebUserAgent;
 use strict;
 use warnings;
-## nofilter(TidyAll::Plugin::OTRS::Perl::TestSubs)
 {
     no warnings 'redefine';
     sub Request {
@@ -87,5 +86,7 @@ $Self->Is(
     1,
     "Admin::Package::Upgrade exit code without arguments - Can't upgrade, package 'Test-0.0.2' already installed!",
 );
+
+$HelperObject->CustomFileCleanup();
 
 1;

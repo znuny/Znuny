@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -61,13 +61,6 @@ my $OpenSSLMajorVersion;
 # Get the openssl major version, e.g. 1 for version 1.0.0.
 if ( $OpenSSLVersionString =~ m{ \A (?: (?: Open|Libre)SSL )? \s* ( \d )  }xmsi ) {
     $OpenSSLMajorVersion = $1;
-}
-
-# Openssl version 1.0.0 uses different hash algorithm... in the future release of openssl this might
-#   change again in such case a better version detection will be needed.
-my $UseNewHashes;
-if ( $OpenSSLMajorVersion >= 1 ) {
-    $UseNewHashes = 1;
 }
 
 $ConfigObject->Set(
@@ -147,23 +140,12 @@ if ( !$SMIMEObject ) {
     return 1;
 }
 
-# OpenSSL 0.9.x hashes.
-my $Check1Hash       = '980a83c7';
-my $Check2Hash       = '999bcb2f';
-my $OTRSRootCAHash   = '1a01713f';
-my $OTRSRDCAHash     = '7807c24e';
-my $OTRSLabCAHash    = '2fc24258';
-my $OTRSUserCertHash = 'eab039b6';
-
-# OpenSSL 1.0.0 hashes.
-if ($UseNewHashes) {
-    $Check1Hash       = 'f62a2257';
-    $Check2Hash       = '35c7d865';
-    $OTRSRootCAHash   = '7835cf94';
-    $OTRSRDCAHash     = 'b5d19fb9';
-    $OTRSLabCAHash    = '19545811';
-    $OTRSUserCertHash = '4d400195';
-}
+my $Check1Hash       = 'f62a2257';
+my $Check2Hash       = '35c7d865';
+my $ZnunyRootCAHash  = 'dfde6898';
+my $ZnunySub1CAHash  = '5fcf9bdc';
+my $ZnunySub2CAHash  = '37de711c';
+my $OTRSUserCertHash = '097aa832';
 
 my @Certificates = (
     {
@@ -188,25 +170,25 @@ my @Certificates = (
         PrivateSecretFileName => 'SMIMEPrivateKeyPass-smimeuser1.crt',
     },
     {
-        CertificateName       => 'OTRSLabCA',
-        CertificateHash       => $OTRSLabCAHash,
-        CertificateFileName   => 'SMIMECACertificate-OTRSLab.crt',
-        PrivateKeyFileName    => 'SMIMECAPrivateKey-OTRSLab.pem',
-        PrivateSecretFileName => 'SMIMECAPrivateKeyPass-OTRSLab.crt',
+        CertificateName       => 'ZnunySub1CA',
+        CertificateHash       => $ZnunySub1CAHash,
+        CertificateFileName   => 'SMIMECACertificate-Znuny-Sub1.crt',
+        PrivateKeyFileName    => 'SMIMECAPrivateKey-Znuny-Sub1.pem',
+        PrivateSecretFileName => 'SMIMECAPrivateKeyPass-Znuny-Sub1.crt',
     },
     {
-        CertificateName       => 'OTRSRDCA',
-        CertificateHash       => $OTRSRDCAHash,
-        CertificateFileName   => 'SMIMECACertificate-OTRSRD.crt',
-        PrivateKeyFileName    => 'SMIMECAPrivateKey-OTRSRD.pem',
-        PrivateSecretFileName => 'SMIMECAPrivateKeyPass-OTRSRD.crt',
+        CertificateName       => 'ZnunySub2CA',
+        CertificateHash       => $ZnunySub2CAHash,
+        CertificateFileName   => 'SMIMECACertificate-Znuny-Sub2.crt',
+        PrivateKeyFileName    => 'SMIMECAPrivateKey-Znuny-Sub2.pem',
+        PrivateSecretFileName => 'SMIMECAPrivateKeyPass-Znuny-Sub2.crt',
     },
     {
-        CertificateName       => 'OTRSRootCA',
-        CertificateHash       => $OTRSRootCAHash,
-        CertificateFileName   => 'SMIMECACertificate-OTRSRoot.crt',
-        PrivateKeyFileName    => 'SMIMECAPrivateKey-OTRSRoot.pem',
-        PrivateSecretFileName => 'SMIMECAPrivateKeyPass-OTRSRoot.crt',
+        CertificateName       => 'ZnunyRootCA',
+        CertificateHash       => $ZnunyRootCAHash,
+        CertificateFileName   => 'SMIMECACertificate-Znuny-Root.crt',
+        PrivateKeyFileName    => 'SMIMECAPrivateKey-Znuny-Root.pem',
+        PrivateSecretFileName => 'SMIMECAPrivateKeyPass-Znuny-Root.crt',
     },
 );
 
@@ -219,6 +201,8 @@ for my $Certificate (@Certificates) {
         Filename  => $Certificate->{CertificateFileName},
     );
     my %Result = $SMIMEObject->CertificateAdd( Certificate => ${$CertString} );
+    $Certificate->{IndexedFilename} = $Result{Filename};
+
     $Self->True(
         $Result{Successful} || '',
         "#$Certificate->{CertificateName} CertificateAdd() - $Result{Message}",
@@ -245,39 +229,40 @@ for my $Certificate (@Certificates) {
 
 my $CryptObject = $Kernel::OM->Get('Kernel::System::Crypt::SMIME');
 
-my @CertList = $CryptObject->CertificateList();
-
-my $Cert1 = $CertList[0];
-my $Cert2 = $CertList[1];
-
-my %Cert1Attributes = $CryptObject->CertificateAttributes(
-    Certificate => $CryptObject->CertificateGet( Filename => $Cert1 ),
-    Filename    => $Cert1,
+my @PrivateCerts = $CryptObject->PrivateSearch(
+    Search     => $Certificates[0]->{IndexedFilename},
+    SearchType => 'filename',
 );
-my %Cert2Attributes = $CryptObject->CertificateAttributes(
-    Certificate => $CryptObject->CertificateGet( Filename => $Cert2 ),
-    Filename    => $Cert2,
+my %Cert1Attributes = %{ $PrivateCerts[0] };
+
+my @PublicCerts = $CryptObject->CertificateSearch(
+    Search     => $Certificates[1]->{IndexedFilename},
+    SearchType => 'filename',
 );
+my %Cert2Attributes = %{ $PublicCerts[0] };
 
 my @Data = $CryptObject->SignerCertRelationGet(
     CertFingerprint => $Cert1Attributes{Fingerprint},
 );
+
 $Self->False(
     @Data ? 1 : 0,
     'Certificate 1 has no relations',
 );
+
 @Data = $CryptObject->SignerCertRelationGet(
     CertFingerprint => $Cert2Attributes{Fingerprint},
 );
+
 $Self->False(
     @Data ? 1 : 0,
     'Certificate 2 has no relations',
 );
 
 $CryptObject->SignerCertRelationAdd(
-    CertFingerprint => $Cert1Attributes{Fingerprint},
-    CAFingerprint   => $Cert2Attributes{Fingerprint},
-    UserID          => 1,
+    CertificateID => $Cert1Attributes{CertificateID},
+    CAID          => $Cert2Attributes{CertificateID},
+    UserID        => 1,
 );
 
 @Data = $CryptObject->SignerCertRelationGet(
@@ -289,8 +274,9 @@ $Self->True(
 );
 
 my $Success = $CryptObject->CertificateRemove(
-    Filename => $Cert2,
+    Filename => $Certificates[1]->{IndexedFilename},
 );
+
 $Self->True(
     @Data ? 1 : 0,
     'Certificate 2 got removed',

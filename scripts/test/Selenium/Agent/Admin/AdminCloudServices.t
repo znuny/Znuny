@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -57,12 +57,6 @@ $Selenium->RunTest(
         $Self->True(
             $Selenium->find_element("//a[contains(\@href, \'Action=AdminCloudServiceSupportDataCollector' )]"),
             "'Support data collector' link is found on screen.",
-        );
-
-        # check 'Register this system' button
-        $Self->True(
-            $Selenium->find_element("//a[contains(\@href, \'Action=AdminRegistration' )]"),
-            "'Register this system' button is found on screen.",
         );
 
         # check breadcrumb on screen

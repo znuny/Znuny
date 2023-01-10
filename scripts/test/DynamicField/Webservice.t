@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -120,7 +120,7 @@ my @DynamicFields = (
         Name       => $Param{DynamicFieldTextNameInvokerSearch},
         Label      => $Param{DynamicFieldTextNameInvokerSearch},
         ObjectType => 'Ticket',
-        FieldType  => 'WebserviceText',
+        FieldType  => 'WebserviceDropdown',
         Config     => {
             InvokerSearch            => $Param{InvokerSearch},
             InvokerGet               => $Param{InvokerSearch},
@@ -192,7 +192,7 @@ my @DynamicFields = (
         Name       => $Param{DynamicFieldTextNameInvokerGet},
         Label      => $Param{DynamicFieldTextNameInvokerGet},
         ObjectType => 'Ticket',
-        FieldType  => 'WebserviceText',
+        FieldType  => 'WebserviceDropdown',
         Config     => {
             InvokerSearch            => $Param{InvokerSearch},
             InvokerGet               => $Param{InvokerGet},
@@ -306,7 +306,7 @@ $Self->IsDeeply(
         'SearchKeys'               => 'Key',
         'DefaultValue'             => '',
     },
-    '_BackendConfigGet - WebserviceText',
+    '_BackendConfigGet - WebserviceDropdown',
 );
 
 my $DynamicFieldConfigMultiselectInvokerSearch = $DynamicFieldObject->DynamicFieldGet(
@@ -387,7 +387,7 @@ $Self->IsDeeply(
         'SearchKeys'               => 'Key',
         'DefaultValue'             => '',
     },
-    '_BackendConfigGet - WebserviceText',
+    '_BackendConfigGet - WebserviceDropdown',
 );
 
 my $DynamicFieldConfigMultiselectInvokerGet = $DynamicFieldObject->DynamicFieldGet(
@@ -437,7 +437,7 @@ my $BackendObjectTextInvokerGet = $DynamicFieldWebserviceObject->_BackendObjectG
 
 $Self->True(
     $BackendObjectTextInvokerGet,
-    '_BackendObjectGet - WebserviceText',
+    '_BackendObjectGet - WebserviceDropdown',
 );
 
 my $BackendObjectMultiselectInvokerGet = $DynamicFieldWebserviceObject->_BackendObjectGet(
@@ -1119,7 +1119,7 @@ my @Tests = (
                 'Limit'                    => 5,
                 'SearchTerms'              => '***',
             },
-            FieldType        => 'WebserviceText',
+            FieldType        => 'WebserviceDropdown',
             DynamicFieldName => $Param{DynamicFieldTextName},
             UserID           => 1,
         },
@@ -1166,7 +1166,7 @@ my @Tests = (
                 'Limit'                    => 5,
                 'SearchTerms'              => '***',
             },
-            FieldType        => 'WebserviceText',
+            FieldType        => 'WebserviceDropdown',
             DynamicFieldName => $Param{DynamicFieldMultiselectNameInvokerSearch},
             UserID           => 1,
         },
@@ -1213,7 +1213,7 @@ my @Tests = (
                 'Limit'                    => 5,
                 'SearchTerms'              => '***',
             },
-            FieldType        => 'WebserviceText',
+            FieldType        => 'WebserviceDropdown',
             DynamicFieldName => $Param{DynamicFieldTextName},
             UserID           => 1,
         },

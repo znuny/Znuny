@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -23,6 +23,11 @@ $Selenium->RunTest(
         # Disable check email addresses.
         $HelperObject->ConfigSettingChange(
             Key   => 'CheckEmailAddresses',
+            Value => 0,
+        );
+
+        $HelperObject->ConfigSettingChange(
+            Key   => 'CheckMXRecord',
             Value => 0,
         );
 
@@ -175,7 +180,7 @@ $Selenium->RunTest(
 
                 # Upload a file.
                 $Selenium->find_element( "#FileUpload", 'css' )
-                    ->send_keys( $ConfigObject->Get('Home') . "/scripts/test/sample/Main/Main-Test1.pdf" );
+                    ->send_keys( $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.pdf" );
 
                 $Selenium->WaitFor(
                     JavaScript =>
@@ -353,7 +358,7 @@ $Selenium->RunTest(
 
                 # Upload a file.
                 $Selenium->find_element( "#FileUpload", 'css' )
-                    ->send_keys( $ConfigObject->Get('Home') . "/scripts/test/sample/Main/Main-Test1.doc" );
+                    ->send_keys( $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.doc" );
 
                 $Selenium->WaitFor(
                     JavaScript =>

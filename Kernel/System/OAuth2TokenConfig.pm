@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -14,6 +14,8 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::GenericInterface::Webservice',
+    'Kernel::System::Log',
     'Kernel::System::MailAccount',
     'Kernel::System::OAuth2Token',
 );
@@ -35,6 +37,169 @@ All OAuth2TokenConfig functions
 create an object
 
     my $OAuth2TokenConfigObject = $Kernel::OM->Get('Kernel::System::OAuth2TokenConfig');
+
+=cut
+
+=head2 DataAdd()
+
+Add data to table.
+
+    my $Success = $OAuth2TokenConfigObject->DataAdd(
+        ID         => '...',
+        Name       => '...',
+        Config     => '...',
+        ValidID    => '...',
+        CreateTime => '...',
+        CreateBy   => '...',
+        ChangeTime => '...',
+        ChangeBy   => '...',
+    );
+
+Returns:
+
+    my $Success = 1;
+
+=cut
+
+=head2 DataUpdate()
+
+Update data attributes.
+
+    my $Success = $OAuth2TokenConfigObject->DataUpdate(
+        ID     => 1234,
+        UserID => 1,
+
+        # all other attributes are optional
+        Name       => '...',
+        Config     => '...',
+        ValidID    => '...',
+        CreateTime => '...',
+        CreateBy   => '...',
+        ChangeTime => '...',
+        ChangeBy   => '...',
+    );
+
+Returns:
+
+    my $Success = 1; # 1|0
+
+=cut
+
+=head2 DataGet()
+
+Get data attributes.
+
+    my %Data = $OAuth2TokenConfigObject->DataGet(
+        ID         => '...', # optional
+        Name       => '...', # optional
+        Config     => '...', # optional
+        ValidID    => '...', # optional
+        CreateTime => '...', # optional
+        CreateBy   => '...', # optional
+        ChangeTime => '...', # optional
+        ChangeBy   => '...', # optional
+    );
+
+Returns:
+
+    my %Data = (
+        ID         => '...',
+        Name       => '...',
+        Config     => '...',
+        ValidID    => '...',
+        CreateTime => '...',
+        CreateBy   => '...',
+        ChangeTime => '...',
+        ChangeBy   => '...',
+    );
+
+=cut
+
+=head2 DataListGet()
+
+Get list data with attributes.
+
+    my @Data = $OAuth2TokenConfigObject->DataListGet(
+        ID         => '...', # optional
+        Name       => '...', # optional
+        Config     => '...', # optional
+        ValidID    => '...', # optional
+        CreateTime => '...', # optional
+        CreateBy   => '...', # optional
+        ChangeTime => '...', # optional
+        ChangeBy   => '...', # optional
+    );
+
+Returns:
+
+    my @Data = (
+        {
+            ID         => '...',
+            Name       => '...',
+            Config     => '...',
+            ValidID    => '...',
+            CreateTime => '...',
+            CreateBy   => '...',
+            ChangeTime => '...',
+            ChangeBy   => '...',
+        },
+        ...
+    );
+
+=cut
+
+=head2 DataDelete()
+
+Remove data from table.
+
+    my $Success = $OAuth2TokenConfigObject->DataDelete(
+        ID         => '...', # optional
+        Name       => '...', # optional
+        Config     => '...', # optional
+        ValidID    => '...', # optional
+        CreateTime => '...', # optional
+        CreateBy   => '...', # optional
+        ChangeTime => '...', # optional
+        ChangeBy   => '...', # optional
+    );
+
+Returns:
+
+    my $Success = 1;
+
+=cut
+
+=head2 DataSearch()
+
+Search for value in defined attributes.
+
+    my %Data = $OAuth2TokenConfigObject->DataSearch(
+        Search     => 'test*test',
+        ID         => '...', # optional
+        Name       => '...', # optional
+        Config     => '...', # optional
+        ValidID    => '...', # optional
+        CreateTime => '...', # optional
+        CreateBy   => '...', # optional
+        ChangeTime => '...', # optional
+        ChangeBy   => '...', # optional
+    );
+
+Returns:
+
+    my %Data = (
+        '1' => {
+            ID         => '...',
+            Name       => '...',
+            Config     => '...',
+            ValidID    => '...',
+            CreateTime => '...',
+            CreateBy   => '...',
+            ChangeTime => '...',
+            ChangeBy   => '...',
+        },
+        ...
+    );
 
 =cut
 
@@ -142,6 +307,8 @@ sub DataDelete {
 
 =head2 UsedOAuth2TokenConfigListGet()
 
+DEPRECATED. Remove in Znuny 6.5.
+
 Returns a list of used OAuth2 token configs as array.
 
     my @UsedOAuth2TokenConfigListGet = $OAuth2TokenConfigObject->UsedOAuth2TokenConfigListGet(
@@ -223,6 +390,72 @@ sub UsedOAuth2TokenConfigListGet {
         }
     }
     return @UsedOAuth2TokenConfigListGet;
+}
+
+=head2 IsOAuth2TokenConfigInUse()
+
+Checks if the token config with the given ID is in use (e.g. mail account, web service, etc.).
+
+    my $IsInUse = $OAuth2TokenConfigObject->IsOAuth2TokenConfigInUse(
+        ID => 3,
+    );
+
+    Returns true value if in use.
+
+=cut
+
+sub IsOAuth2TokenConfigInUse {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject         = $Kernel::OM->Get('Kernel::System::Log');
+    my $MailAccountObject = $Kernel::OM->Get('Kernel::System::MailAccount');
+    my $WebserviceObject  = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
+
+    NEEDED:
+    for my $Needed (qw( ID )) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    # Check mail accounts.
+    my @MailAccounts = $MailAccountObject->MailAccountGetAll();
+
+    MAILACCOUNT:
+    for my $MailAccount (@MailAccounts) {
+        next MAILACCOUNT if !defined $MailAccount->{OAuth2TokenConfigID};
+        next MAILACCOUNT if $MailAccount->{OAuth2TokenConfigID} != $Param{ID};
+
+        return 1;
+    }
+
+    # Check generic interface requester configs (HTTP::REST).
+    my $Webservices = $WebserviceObject->WebserviceList();
+    return if !IsHashRefWithData($Webservices);
+
+    WEBSERVICEID:
+    for my $WebserviceID ( sort keys %{$Webservices} ) {
+        my $Webservice = $WebserviceObject->WebserviceGet(
+            ID => $WebserviceID,
+        );
+        next WEBSERVICEID if !IsHashRefWithData($Webservice);
+
+        my $AuthenticationConfig = $Webservice->{Config}->{Requester}->{Transport}->{Config}->{Authentication};
+        next WEBSERVICEID if !IsHashRefWithData($AuthenticationConfig);
+
+        next WEBSERVICEID if !$AuthenticationConfig->{AuthType};
+        next WEBSERVICEID if $AuthenticationConfig->{AuthType} ne 'OAuth2Token';
+        next WEBSERVICEID if !$AuthenticationConfig->{OAuth2TokenConfigID};
+        next WEBSERVICEID if $AuthenticationConfig->{OAuth2TokenConfigID} != $Param{ID};
+
+        return 1;
+    }
+
+    return;
 }
 
 1;

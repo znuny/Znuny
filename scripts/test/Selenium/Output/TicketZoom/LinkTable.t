@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -115,7 +115,9 @@ $Selenium->RunTest(
 
         # Verify there is no 'Linked Objects' widget, it's disabled.
         $Self->True(
-            index( $Selenium->get_page_source(), "Linked Objects" ) == -1,
+            $Selenium->execute_script(
+                "return \$('.LinkTable .Header>h2').length == 0"
+            ),
             "Linked Objects widget is disabled",
         );
 
@@ -131,8 +133,9 @@ $Selenium->RunTest(
         $Selenium->VerifiedRefresh();
 
         # Verify there is 'Linked Objects' widget, it's enabled.
+
         $Self->Is(
-            $Selenium->find_element( '.Header>h2', 'css' )->get_text(),
+            $Selenium->find_element( '.LinkTable .Header>h2', 'css' )->get_text(),
             'Linked Objects',
             'Linked Objects widget is enabled',
         );
@@ -155,7 +158,7 @@ $Selenium->RunTest(
 
         # Verify there is no collapsed elements on the screen.
         $Self->True(
-            $Selenium->find_element("//div[contains(\@class, 'WidgetSimple DontPrint Expanded')]"),
+            $Selenium->find_element("//div[contains(\@class, 'WidgetSimple LinkTable DontPrint Expanded')]"),
             "Linked Objects Widget is expanded",
         );
 
@@ -178,7 +181,7 @@ $Selenium->RunTest(
 
         # Verify 'Linked Objects' widget is in the side bar with simple view.
         $Self->Is(
-            $Selenium->find_element( '.SidebarColumn .Header>h2', 'css' )->get_text(),
+            $Selenium->find_element( '.LinkTable .Header>h2', 'css' )->get_text(),
             'Linked Objects',
             'Linked Objects widget is positioned in the side bar with simple view',
         );

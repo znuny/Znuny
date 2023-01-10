@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -49,7 +49,7 @@ Searches for time accounting entries and returns a specific result based on titl
 
     my @TimeAccountingEntries = $TimeAccountingWebserviceObject->TimeAccountingSearch(
         Start  => '2017-01-01 10:00:00',
-        End   => '2018-01-01 10:00:00',
+        End    => '2018-01-01 10:00:00',
         UserID => 123,
     );
 

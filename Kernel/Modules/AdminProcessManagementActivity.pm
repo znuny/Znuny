@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -48,8 +48,16 @@ sub Run {
     );
 
     # get parameter from web browser
-    my $GetParam = $Self->_GetParams();
-    $GetParam->{ProcessEntityID} ||= $Self->{ScreensPath}->[-1]->{ProcessEntityID};
+    my $GetParam = $Self->_GetParams() // {};
+    if (
+        !$GetParam->{ProcessEntityID}
+        && IsArrayRefWithData( $Self->{ScreensPath} )
+        && IsHashRefWithData( $Self->{ScreensPath}->[-1] )
+        && $Self->{ScreensPath}->[-1]->{ProcessEntityID}
+        )
+    {
+        $GetParam->{ProcessEntityID} = $Self->{ScreensPath}->[-1]->{ProcessEntityID};
+    }
 
     # get needed objects
     my $LayoutObject        = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
@@ -924,7 +932,7 @@ sub _ShowEdit {
 sub _GetParams {
     my ( $Self, %Param ) = @_;
 
-    my $GetParam;
+    my $GetParam    = {};
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
     # get parameters from web browser

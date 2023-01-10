@@ -1,6 +1,6 @@
 /*
 Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 
 This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (GPL). If you
@@ -34,7 +34,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
  */
 .Dialog {
     position: absolute;
-    z-index: 6000;
+    z-index: 6102;
     min-width: 150px;
     background: #FFF;
 }
@@ -278,5 +278,13 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     overflow: auto;
 }
 
+.Dialog.Modal > .Content > .InnerContent > .FieldOverlay.CalendarEventsOverlay {
+    word-break: break-word;
+}
+
+.Dialog.Modal > .Content > .InnerContent > .FieldOverlay.CalendarEventsOverlay fieldset img {
+    max-width: 100%;
+    max-height: 600px;
+}
 
 } /* end @media */

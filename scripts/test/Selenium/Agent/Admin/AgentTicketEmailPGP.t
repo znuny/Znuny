@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -62,7 +62,7 @@ $Selenium->RunTest(
 
             # Add test PGP key.
             $Selenium->find_element("//a[contains(\@href, \'Action=AdminPGP;Subaction=Add' )]")->VerifiedClick();
-            my $Location = $ConfigObject->Get('Home')
+            my $Location = $Selenium->{Home}
                 . "/scripts/test/sample/Crypt/PGPPrivateKey-$Key.asc";
 
             $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -344,7 +344,7 @@ sub LinkAdd {
     # check if source and target are the same object
     if ( $Param{SourceObject} eq $Param{TargetObject} && $Param{SourceKey} eq $Param{TargetKey} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
+            Priority => 'notice',
             Message  => 'Impossible to link object with itself!',
         );
         return;
@@ -437,7 +437,7 @@ sub LinkAdd {
         if ( $Existing{StateID} ne $StateID ) {
 
             $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
+                Priority => 'notice',
                 Message  => "Link already exists between these two objects "
                     . "with a different state id '$Existing{StateID}'!",
             );
@@ -455,7 +455,7 @@ sub LinkAdd {
 
         # log error
         $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
+            Priority => 'notice',
             Message  => 'Link already exists between these two objects in opposite direction!',
         );
         return;
@@ -495,7 +495,7 @@ sub LinkAdd {
 
             # existing link type is in a type group with the new link
             $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
+                Priority => 'notice',
                 Message  => 'Another Link already exists within the same type group!',
             );
 

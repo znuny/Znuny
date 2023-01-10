@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -223,6 +223,28 @@
                         <div class="Clear"></div>
 
 [% RenderBlockEnd("Link") %]
+                        <label for="InputFieldWidth">[% Translate("Attributes") | html %]:</label>
+                        <div class="Field">
+                            [% Data.AdditionalAttributes %]
+                            <p class="FieldExplanation">[% Translate("Attributes for invoker execution (initially default values will be used).") | html %]</p>
+                        </div>
+                        <div class="Clear"></div>
+
+[% RenderBlockStart("AttributeKey") %]
+                        <label for="InputFieldWidth">[% Translate("Attribute keys") | html %]:</label>
+                        <div class="Field">
+                            [% RenderBlockStart("SelectableAttributeKeyRow") %]
+                                [% Data.AtributeLabel %]:<br>
+                                [% RenderBlockStart("AttributeType") %]
+                                    <input type="checkbox" class="AttributeCheckbox" [% Data.AttributeIDChecked %] value="[% Data.AttributeKey %]" name="[% Data.AttributeKey %]">[% Data.AttributeLabel %]
+                                [% RenderBlockEnd("AttributeType") %]
+                                </br>
+                            [% RenderBlockEnd("SelectableAttributeKeyRow") %]
+
+                            <p class="FieldExplanation">[% Translate("Custom attribute form for invoker execution.") | html %]</p>
+                        </div>
+                        <div class="Clear"></div>
+[% RenderBlockEnd("AttributeKey") %]
 
                     </fieldset>
                 </div>

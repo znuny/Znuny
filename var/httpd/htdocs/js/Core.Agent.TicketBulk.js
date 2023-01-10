@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -33,7 +33,18 @@ Core.Agent.TicketBulk = (function (TargetNS) {
             $TicketNumberObj = $('#MergeTo'),
             Fields = ['StateID', 'TypeID', 'OwnerID', 'ResponsibleID', 'QueueID', 'PriorityID'],
             DynamicFieldNames = Core.Config.Get('DynamicFieldNames'),
-            ModifiedFields;
+            ModifiedFields,
+
+            // Fields that are only required if they are visible to the user
+            // when a widget gets expanded.
+            RequiredWidgetFieldIDs = [
+                'Subject', 'Body',
+                'EmailSubject', 'EmailBody'
+            ],
+            TimeUnitsSelectFieldIDs = [
+                'TimeUnitsMinutes', 'TimeUnitsSeconds', 'TimeUnitsHours',
+                'EmailTimeUnitsMinutes', 'EmailTimeUnitsSeconds', 'EmailTimeUnitsHours'
+            ];
 
         // Initialize autocomplete feature on ticket number field.
         Core.UI.Autocomplete.Init($TicketNumberObj, function (Request, Response) {
@@ -98,6 +109,30 @@ Core.Agent.TicketBulk = (function (TargetNS) {
         Core.UI.Popup.ExecuteInParentWindow(function(WindowObject) {
             WindowObject.Core.UI.Popup.FirePopupEvent('URL', { URL: TicketBulkURL }, false);
         });
+
+        if (
+            Core.Config.Get('TimeUnitsInputType') == 'Text'
+            && Core.Config.Get('TimeUnitsRequired')
+        ) {
+            RequiredWidgetFieldIDs = $.merge(RequiredWidgetFieldIDs, ['TimeUnits', 'EmailTimeUnits']);
+        }
+
+        // Toggle required fields of widgets depending on their visibility.
+        $('.WidgetAction.Toggle a').on('click', function() {
+            ToggleRequiredWidgetFields(RequiredWidgetFieldIDs);
+            if (
+                Core.Config.Get('TimeUnitsInputType') == 'Dropdown'
+                && Core.Config.Get('TimeUnitsRequired')
+            ) {
+                ToggleRequiredWidgetFields(TimeUnitsSelectFieldIDs, 'Validate_TimeUnits');
+            }
+        });
+
+        // Initialize required visible fields of widgets once.
+        ToggleRequiredWidgetFields(RequiredWidgetFieldIDs);
+        if (Core.Config.Get('TimeUnitsInputType') == 'Dropdown' && Core.Config.Get('TimeUnitsRequired')) {
+            ToggleRequiredWidgetFields(TimeUnitsSelectFieldIDs, 'Validate_TimeUnits');
+        }
 
         // get the Recipients on expanding of the email widget
         $('#EmailSubject').closest('.WidgetSimple').find('.Header .Toggle a').on('click', function() {
@@ -181,11 +216,11 @@ Core.Agent.TicketBulk = (function (TargetNS) {
                 UsedType;
 
             var HasCheckbox = false,
-                IsChecked         = DynamicFieldConfigs[DynamicFieldName]['IsChecked'] || false,
-                RequireActivation = DynamicFieldConfigs[DynamicFieldName]['RequireActivation'] || false;
+                IsChecked         = (DynamicFieldConfigs[DynamicFieldName]['IsChecked'] === 'true'),
+                RequireActivation = (DynamicFieldConfigs[DynamicFieldName]['RequireActivation'] === 'true');
 
             // check if this current DynamicField has a hidden checkbox "DynamicFieldUsed"
-            if ($('#' +  DynamicFieldName + 'Used').length) {
+            if ($('#' +  DynamicFieldName + UsedSuffix).length) {
                 HasCheckbox = true;
             }
 
@@ -288,6 +323,42 @@ Core.Agent.TicketBulk = (function (TargetNS) {
         });
     }
 
+    /**
+     * @private
+     * @name ToggleRequiredWidgetFields
+     * @memberof Core.Agent.TicketBulk.Init
+     * @function
+     * @param {Object} RequiredWidgetFieldIDs
+     * @param {String} AdditionalClass
+     * @description
+     *      Toggles mandatory fields if they are visible/being used in an expanded widget.
+     *      Specify AdditionalClass to work with additional class.
+     */
+    function ToggleRequiredWidgetFields(RequiredWidgetFieldIDs, AdditionalClass) {
+
+        // Check each relevant field for visibility and toggle
+        // class Validate_Required (visible: add / invisible: remove).
+        $.each(RequiredWidgetFieldIDs, function(Index, FieldID) {
+            var $Widget = $('#' + FieldID).closest('div.WidgetSimple'),
+                WidgetExpanded = $Widget.hasClass('Expanded');
+
+            if (WidgetExpanded || $('#' + FieldID).is(':visible')) {
+                $('#' + FieldID).addClass('Validate_Required');
+
+                if (AdditionalClass) {
+                    $('#' + FieldID).addClass(AdditionalClass);
+                }
+
+                return;
+            }
+
+            $('#' + FieldID).removeClass('Validate_Required');
+
+            if (AdditionalClass) {
+                $('#' + FieldID).removeClass(AdditionalClass);
+            }
+        });
+    }
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');
 

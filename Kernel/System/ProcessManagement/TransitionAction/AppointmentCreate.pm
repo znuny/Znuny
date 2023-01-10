@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -151,7 +151,6 @@ sub Run {
     if ( $Param{Config}->{CalendarName} ) {
         my %Calendar = $CalendarObject->CalendarGet(
             CalendarName => $Param{Config}->{CalendarName},
-            UserID       => 1,
         );
 
         $Param{Config}->{CalendarID} = $Calendar{CalendarID};
@@ -162,7 +161,7 @@ sub Run {
     for my $Param (qw(TeamID ResourceID RecurrenceFrequency RecurrenceExclude )) {
         next PARAM if !defined $Param{Config}->{$Param};
 
-        $Param{Config}->{$Param} = split /\s*,\s*/, $Param{Config}->{$Param};
+        $Param{Config}->{$Param} = [ split /\s*,\s*/, $Param{Config}->{$Param} ];
     }
 
     # be sure that the date parameters are always in the correct format

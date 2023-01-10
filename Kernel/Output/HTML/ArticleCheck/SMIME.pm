@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -273,14 +273,20 @@ sub Check {
                     Email => \@OrigEmail,
                 );
 
-                my $OrigFrom   = $ParserObjectOrig->GetParam( WHAT => 'From' );
-                my $OrigSender = $ParserObjectOrig->GetEmailAddress( Email => $OrigFrom );
+                my $OrigFrom        = $ParserObjectOrig->GetParam( WHAT => 'From' );
+                my $OrigFromEmail   = $ParserObjectOrig->GetEmailAddress( Email => $OrigFrom );
+                my $OrigSender      = $ParserObjectOrig->GetParam( WHAT => 'Sender' );
+                my $OrigSenderEmail = $ParserObjectOrig->GetEmailAddress( Email => $OrigSender );
 
                 # compare sender email to signer email
                 my $SignerSenderMatch = 0;
                 SIGNER:
                 for my $Signer ( @{ $SignCheck{Signers} } ) {
-                    if ( $OrigSender =~ m{\A \Q$Signer\E \z}xmsi ) {
+                    if (
+                        $OrigFromEmail =~ m{\A \Q$Signer\E \z}xmsi
+                        || $OrigSenderEmail =~ m{\A \Q$Signer\E \z}xmsi
+                        )
+                    {
                         $SignerSenderMatch = 1;
                         last SIGNER;
                     }
@@ -293,7 +299,7 @@ sub Check {
                     $SignCheck{Message} .= " (signed by "
                         . join( ' | ', @{ $SignCheck{Signers} } )
                         . ")"
-                        . ", but sender address $OrigSender: does not match certificate address!";
+                        . ", but neither $OrigFromEmail nor $OrigSenderEmail match the certificate address!";
                 }
 
                 # Determine if we have decrypted article and attachments before.
@@ -397,14 +403,20 @@ sub Check {
                     Email => \@OrigEmail,
                 );
 
-                my $OrigFrom   = $ParserObjectOrig->GetParam( WHAT => 'From' );
-                my $OrigSender = $ParserObjectOrig->GetEmailAddress( Email => $OrigFrom );
+                my $OrigFrom        = $ParserObjectOrig->GetParam( WHAT => 'From' );
+                my $OrigFromEmail   = $ParserObjectOrig->GetEmailAddress( Email => $OrigFrom );
+                my $OrigSender      = $ParserObjectOrig->GetParam( WHAT => 'Sender' );
+                my $OrigSenderEmail = $ParserObjectOrig->GetEmailAddress( Email => $OrigSender );
 
                 # compare sender email to signer email
                 my $SignerSenderMatch = 0;
                 SIGNER:
                 for my $Signer ( @{ $SignCheck{Signers} } ) {
-                    if ( $OrigSender =~ m{\A \Q$Signer\E \z}xmsi ) {
+                    if (
+                        $OrigFromEmail =~ m{\A \Q$Signer\E \z}xmsi
+                        || $OrigSenderEmail =~ m{\A \Q$Signer\E \z}xmsi
+                        )
+                    {
                         $SignerSenderMatch = 1;
                         last SIGNER;
                     }
@@ -417,7 +429,7 @@ sub Check {
                     $SignCheck{Message} .= " (signed by "
                         . join( ' | ', @{ $SignCheck{Signers} } )
                         . ")"
-                        . ", but sender address $OrigSender: does not match certificate address!";
+                        . ", but neither $OrigFromEmail nor $OrigSenderEmail match the certificate address!";
                 }
 
                 # Determine if we have decrypted article and attachments before.

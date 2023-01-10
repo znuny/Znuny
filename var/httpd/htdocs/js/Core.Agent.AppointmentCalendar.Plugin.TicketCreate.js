@@ -1,5 +1,5 @@
 // --
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (AGPL). If you
@@ -40,8 +40,9 @@ Core.Agent.AppointmentCalendar.Plugin.TicketCreate = (function (TargetNS) {
      */
     TargetNS.Init = function () {
         Core.App.Subscribe('Core.Agent.AppointmentCalendar.AgentAppointmentEdit', function () {
-            var Fields = ['QueueID', 'OwnerID', 'ResponsibleUserID', 'CustomerUserID', 'StateID', 'PriorityID', 'LockID', 'TypeID', 'ServiceID', 'SLAID'],
-                ModifiedFields;
+            var Fields = ['QueueID', 'OwnerID', 'ResponsibleUserID', 'StateID', 'PriorityID', 'LockID', 'TypeID', 'ServiceID', 'SLAID'],
+                ModifiedFields,
+                Action;
 
             if ($('#' + PluginKeySelector + 'TicketCreateTimeType').length > 0) {
 
@@ -54,7 +55,7 @@ Core.Agent.AppointmentCalendar.Plugin.TicketCreate = (function (TargetNS) {
                     ToggleFields();
                 });
 
-                Core.Agent.CustomerSearch.Init($('#CustomerAutoComplete'));
+                Core.Agent.CustomerSearch.Init($('.CustomerAutoComplete'));
 
                 // unbind click dialog - needed to select CustomerUser
                 $('.ui-autocomplete').unbind('click.PluginKeyTicketCreate').bind('click.PluginKeyTicketCreate', function() {
@@ -67,6 +68,33 @@ Core.Agent.AppointmentCalendar.Plugin.TicketCreate = (function (TargetNS) {
                     ModifiedFields.splice(Index, 1);
                     InitFieldUpdate(ChangedElement, ModifiedFields);
                 });
+
+                Core.App.Subscribe('Event.Agent.CustomerSearch.Callback', function(Response) {
+
+                    $('#' + PluginKeySelector + 'CustomerUserID').val(Response.key);
+                    Action =  Core.Config.Get('Action');
+                    Core.Config.Set('Action', 'AgentAppointmentEdit');
+
+                    Core.AJAX.FormUpdate($('#' + PluginKeySelector + 'Attributes'), 'AJAXUpdate', PluginKeySelector + 'CustomerUserID', ModifiedFields);
+
+                    Core.Config.Set('Action', Action);
+                });
+
+                $('#' + PluginKeySelector + 'CustomerAutoComplete').off('change.CustomerAutoComplete').on('change.CustomerAutoComplete', function() {
+                    if ($('#' + PluginKeySelector + 'CustomerAutoComplete').val() == ''){
+
+                        $('#' + PluginKeySelector + 'CustomerUserID').val('');
+                        $('#CustomerID').val('');
+                        Core.Config.Set('Action', 'AgentAppointmentEdit');
+                        Core.AJAX.FormUpdate($('#' + PluginKeySelector + 'Attributes'), 'AJAXUpdate', PluginKeySelector + 'CustomerUserID', ModifiedFields);
+                        Core.Config.Set('Action', Action);
+                    }
+                });
+
+                Core.App.Subscribe('Event.AJAX.FormUpdate.Callback', function() {
+                    Core.App.Publish('Event.UI.InputFields.Resize');
+                });
+
                 return;
             }
         });

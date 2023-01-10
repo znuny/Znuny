@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -69,7 +69,7 @@ sub new {
 
         if ( !$LoadedModule ) {
             $LogObject->Log(
-                Priority => 'info',
+                Priority => 'error',
                 Message  => "# ATTENTION: Can't find backend module for '$Backend'\n\n",
             );
             next BACKEND;
@@ -127,7 +127,12 @@ sub GetContent {
     my $Backend = $Self->{BackendsMap}->{ lc( $Param{Format} ) };
     return 0 if !$Backend;
 
-    my $Content = $Self->{Backends}->{$Backend}->GetContent(%Param);
+    my $Module = $Self->{Backends}->{$Backend};
+    return 0 if !$Module;
+
+    return 0 if !$Module->can('GetContent');
+
+    my $Content = $Module->GetContent(%Param);
 
     return $Content;
 }
@@ -165,6 +170,11 @@ sub SetContent {
 
     my $Backend = $Self->{BackendsMap}->{ lc( $Param{Format} ) };
     return 0 if !$Backend;
+
+    my $Module = $Self->{Backends}->{$Backend};
+    return 0 if !$Module;
+
+    return 0 if !$Module->can('SetContent');
 
     my $Content = $Self->{Backends}->{$Backend}->SetContent(%Param);
 

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -1142,6 +1142,11 @@ Returns:
 sub TimeUnits {
     my ( $Self, %Param ) = @_;
 
+    # Use a new instance of the layout object so that the render block names
+    # of the TimeUnits template don't interfere with render blocks of the same name
+    # that have been used by other templates in the process (e.g. 'TimeUnits' in AgentTicketBulk template).
+    my $LocalLayoutObject = Kernel::Output::HTML::Layout->new();
+
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     $Param{ID}                ||= 'TimeUnits';
@@ -1151,21 +1156,21 @@ sub TimeUnits {
     my $Type = $ConfigObject->Get('Ticket::Frontend::AccountTimeType') || 'Text';
 
     if ( $Param{TimeUnitsRequired} ) {
-        $Self->Block(
+        $LocalLayoutObject->Block(
             Name => 'TimeUnitsLabelMandatory',
             Data => \%Param,
         );
         $Param{TimeUnitsRequiredClass} ||= 'Validate_Required';
     }
     else {
-        $Self->Block(
+        $LocalLayoutObject->Block(
             Name => 'TimeUnitsLabel',
             Data => \%Param,
         );
         $Param{TimeUnitsRequiredClass} = '';
     }
 
-    $Self->Block(
+    $LocalLayoutObject->Block(
         Name => 'TimeUnits' . $Type,
         Data => \%Param,
     );
@@ -1180,7 +1185,7 @@ sub TimeUnits {
             my $Label = $Config->{$Item}->{Label};
             $DefaultTimeUnits += $Config->{$Item}->{DataSelected} || 0;
 
-            my $Field = $Self->BuildSelection(
+            my $Field = $LocalLayoutObject->BuildSelection(
                 Class => $Param{ID} . ' TimeUnitDropdown Modernize ' . $Param{TimeUnitsRequiredClass},
                 Data  => {
                     %{ $Config->{$Item}->{Data} },
@@ -1194,7 +1199,7 @@ sub TimeUnits {
                 OnChange     => 'Core.Agent.TicketAction.SetTimeUnits(\'' . $Param{ID} . '\');',
             );
 
-            $Self->Block(
+            $LocalLayoutObject->Block(
                 Name => $Type,
                 Data => {
                     %Param,
@@ -1205,13 +1210,13 @@ sub TimeUnits {
         }
 
         $Param{TimeUnits} //= $DefaultTimeUnits;
-        $Self->Block(
+        $LocalLayoutObject->Block(
             Name => 'TimeUnits',
             Data => \%Param,
         );
     }
 
-    my $TimeUnitsStrg = $Self->Output(
+    my $TimeUnitsStrg = $LocalLayoutObject->Output(
         TemplateFile => 'Ticket/TimeUnits',
         Data         => {
             %Param,

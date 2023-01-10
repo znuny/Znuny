@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -58,7 +58,6 @@ $Selenium->RunTest(
 
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
         my $ScriptAlias  = $ConfigObject->Get('ScriptAlias');
-        my $Home         = $ConfigObject->Get('Home');
 
         # Navigate to AdminGenericInterfaceWebservice screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminGenericInterfaceWebservice");
@@ -418,11 +417,11 @@ $Selenium->RunTest(
             ProxyHost            => 'http://proxy_hostname:8080',
             ProxyUser            => 'SSLUser' . $RandomID,
             ProxyPassword        => 'SSLPass' . $RandomID,
-            SSLCertificate       => "$Home/scripts/test/sample/SSL/certificate.pem",
-            SSLKey               => "$Home/scripts/test/sample/SSL/certificate.key.pem",
+            SSLCertificate       => "$Selenium->{Home}/scripts/test/sample/SSL/certificate.pem",
+            SSLKey               => "$Selenium->{Home}/scripts/test/sample/SSL/certificate.key.pem",
             SSLPassword          => 'SSLPass' . $RandomID,
-            SSLCAFile            => "$Home/scripts/test/sample/SSL/ca-certificate.pem",
-            SSLCADir             => "$Home/scripts/test/sample/SSL/",
+            SSLCAFile            => "$Selenium->{Home}/scripts/test/sample/SSL/ca-certificate.pem",
+            SSLCADir             => "$Selenium->{Home}/scripts/test/sample/SSL/",
 
         );
         for my $InputField ( sort keys %RequesterInputData ) {

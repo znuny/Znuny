@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -108,7 +108,13 @@ my $QueueID = $ZnunyHelperObject->_QueueCreateIfNotExists(
 );
 
 # HandleResponse
-my $TicketID = $HelperObject->TicketCreate();
+my $TicketID        = $HelperObject->TicketCreate();
+my $ArticleIDEvent1 = $HelperObject->ArticleCreate(
+    TicketID => $TicketID,
+);
+my $ArticleIDEvent2 = $HelperObject->ArticleCreate(
+    TicketID => $TicketID,
+);
 
 my $ResultPrepareRequest = $UnitTestWebserviceObject->InvokerFunctionCall(
     Webservice => 'Generic',
@@ -161,6 +167,7 @@ my $Result = $UnitTestWebserviceObject->InvokerFunctionCall(
                 HistoryType          => 'OwnerUpdate',
                 HistoryComment       => 'Some free text!',
             },
+            OTRS_TicketArticleCreateEvent => "$ArticleIDEvent1 , $ArticleIDEvent2"
         },
     },
     ObjectModifyFunction => sub {
@@ -248,7 +255,7 @@ $Self->IsDeeply(
     \%Article,
     {
         ArticleID              => $ArticleIDs[-1],
-        ArticleNumber          => 1,
+        ArticleNumber          => 3,
         Bcc                    => 'Some Customer C <customer-c@example.com>',
         Body                   => 'the message text',
         Cc                     => 'Some Customer B <customer-b@example.com>',

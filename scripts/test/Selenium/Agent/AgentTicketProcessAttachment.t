@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -105,7 +105,7 @@ $Selenium->RunTest(
         );
 
         # Import test Selenium Process.
-        my $Location = $ConfigObject->Get('Home')
+        my $Location = $Selenium->{Home}
             . "/scripts/test/sample/ProcessManagement/TestProcess.yml";
         $Selenium->find_element( "#FileUpload",                      'css' )->send_keys($Location);
         $Selenium->find_element( "#OverwriteExistingEntitiesImport", 'css' )->click();
@@ -164,7 +164,7 @@ $Selenium->RunTest(
         $Selenium->execute_script("\$('#FileUpload')[0].scrollIntoView(true);");
 
         # Add an attachment.
-        $Location = $ConfigObject->Get('Home') . "/scripts/test/sample/Main/Main-Test1.txt";
+        $Location = $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.txt";
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
 
         # Wait until attachment is uploaded, i.e. until it appears in the attachment list table.

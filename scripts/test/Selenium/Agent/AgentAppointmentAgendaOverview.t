@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -199,20 +199,20 @@ $Selenium->RunTest(
         $Selenium->WaitFor(
             JavaScript => "return typeof(\$) === 'function' && \$('.Dialog.Modal #EditFormDelete').length"
         );
-        sleep 2;
         $Selenium->find_element( "#EditFormDelete", 'css' )->click();
 
-        $Selenium->WaitFor( AlertPresent => 1 );
+        sleep 2;
+        $Selenium->WaitFor( AlertPresent => 1 ) || die "Alert for delete not found";
         $Selenium->accept_alert();
         $Selenium->WaitFor(
             JavaScript =>
                 "return typeof(\$) === 'function' &&  \$('tbody tr:contains($AppointmentNames[2])').length === 0;"
         );
 
-        # Verify all third appointment occurences have been removed.
+        # Verify all third appointment occurrences have been removed.
         $Self->False(
             $Selenium->execute_script("return \$('tbody tr:contains($AppointmentNames[2])').length;"),
-            "All third appointment occurences deleted"
+            "All third appointment occurrences deleted"
         );
     },
 );

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -51,7 +51,7 @@ sub new {
 
 add auto response with attributes
 
-    $AutoResponseObject->AutoResponseAdd(
+    my $AutoResponseID = $AutoResponseObject->AutoResponseAdd(
         Name        => 'Some::AutoResponse',
         ValidID     => 1,
         Subject     => 'Some Subject..',
@@ -190,7 +190,7 @@ sub AutoResponseGet {
 
 update auto response with attributes
 
-    $AutoResponseObject->AutoResponseUpdate(
+    my $Success = $AutoResponseObject->AutoResponseUpdate(
         ID          => 123,
         Name        => 'Some::AutoResponse',
         ValidID     => 1,
@@ -251,9 +251,9 @@ get a hash with data from Auto Response and it's corresponding System Address
         Type    => 'auto reply/new ticket',
     );
 
-Return example:
+Return::
 
-    %QueueAddressData(
+    my %QueueAddressData(
         #Auto Response Data
         'Text'            => 'Your OTRS TeamOTRS! answered by a human asap.',
         'Subject'         => 'New ticket has been created! (RE: <OTRS_CUSTOMER_SUBJECT[24]>)',
@@ -342,7 +342,7 @@ get a list of the Queues that do not have Auto Response
 
 Return example:
 
-    %Queues = (
+    my %Queues = (
         1 => 'Some Name',
         2 => 'Some Name',
     );
@@ -386,7 +386,7 @@ get a list of the Auto Responses
 
 Return example:
 
-    %AutoResponse = (
+    my %AutoResponse = (
         '1' => 'default reply (after new ticket has been created)',
         '2' => 'default reject (after follow up and rejected of a closed ticket)',
         '3' => 'default follow up (after a ticket follow up has been added)',
@@ -444,7 +444,7 @@ get a list of the Auto Response Types
 
 Return example:
 
-    %AutoResponseType = (
+    my %AutoResponseType = (
         '1' => 'auto reply',
         '2' => 'auto reject',
         '3' => 'auto follow up',
@@ -484,11 +484,9 @@ sub AutoResponseTypeList {
 
 assigns a list of auto-responses to a queue
 
-    my @AutoResponseIDs = (1,2,3);
-
-    $AutoResponseObject->AutoResponseQueue (
+    my $Success = $AutoResponseObject->AutoResponseQueue(
         QueueID         => 1,
-        AutoResponseIDs => \@AutoResponseIDs,
+        AutoResponseIDs => [1,2,3],
         UserID          => 1,
     );
 

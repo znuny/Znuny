@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -202,11 +202,44 @@ $Self->True(
 # create service object
 my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
 
+my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
+my %ITSMCoreSLA;
+my %ITSMCoreService;
+
+if ($IsITSMInstalled) {
+
+    # get the list of service types from general catalog
+    my $ServiceTypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class => 'ITSM::Service::Type',
+    );
+
+    # build a lookup hash
+    my %ServiceTypeName2ID = reverse %{$ServiceTypeList};
+
+    # get the list of sla types from general catalog
+    my $SLATypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+        Class => 'ITSM::SLA::Type',
+    );
+
+    # build a lookup hash
+    my %SLATypeName2ID = reverse %{$SLATypeList};
+
+    %ITSMCoreSLA = (
+        TypeID => $SLATypeName2ID{Other},
+    );
+
+    %ITSMCoreService = (
+        TypeID      => $ServiceTypeName2ID{Training},
+        Criticality => '3 normal',
+    );
+}
+
 # create new service
 my $ServiceID = $ServiceObject->ServiceAdd(
     Name    => 'TestService' . $RandomID,
     ValidID => 1,
     UserID  => 1,
+    %ITSMCoreService,
 );
 
 # sanity check
@@ -243,6 +276,7 @@ my $SLAID = $SLAObject->SLAAdd(
     ServiceIDs => [$ServiceID],
     ValidID    => 1,
     UserID     => 1,
+    %ITSMCoreSLA,
 );
 
 # sanity check
@@ -671,6 +705,13 @@ for my $Test (@Tests) {
     # tests supposed to succeed
     if ( $Test->{SuccessCreate} ) {
 
+        my $Article = $LocalResult->{Data}->{Ticket}->{Article} // {};
+
+        # Use first article if multiple articles were returned
+        if ( IsArrayRefWithData($Article) ) {
+            $Article = $Article->[0] // {};
+        }
+
         # local results
         $Self->True(
             $LocalResult->{Data}->{TicketID},
@@ -726,13 +767,13 @@ for my $Test (@Tests) {
         );
 
         $Self->Is(
-            $LocalResult->{Data}->{Ticket}->{Article}->{Body},
+            $Article->{Body},
             $Test->{RequestData}->{Article}->{Body},
             "$Test->{Name} - Article body Ok.",
         );
 
         $Self->Is(
-            $LocalResult->{Data}->{Ticket}->{Article}->{From},
+            $Article->{From},
             $Test->{RequestData}->{Article}->{From},
             "$Test->{Name} - Article from Ok.",
         );
@@ -757,7 +798,7 @@ for my $Test (@Tests) {
         }
 
         LOCALRESULTARTICLE:
-        for my $Field ( @{ $LocalResult->{Data}->{Ticket}->{Article}->{DynamicField} } ) {
+        for my $Field ( @{ $Article->{DynamicField} } ) {
             next LOCALRESULTARTICLE if $Field->{Name} ne $DynamicFieldData2->{Name};
             $CompareDynamicFieldLocal{Article} = $Field;
         }
@@ -769,7 +810,7 @@ for my $Test (@Tests) {
         );
 
         $Self->Is(
-            $LocalResult->{Data}->{Ticket}->{Article}->{Attachment}->[0]->{Filename},
+            $Article->{Attachment}->[0]->{Filename},
             $Test->{RequestData}->{Attachment}->[0]->{Filename},
             "$Test->{Name} - Attachment filename Ok.",
         );

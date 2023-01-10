@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -131,6 +131,7 @@ sub _AddAction {
     my $ParamObject        = $Kernel::OM->Get('Kernel::System::Web::Request');
     my $LayoutObject       = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
 
     my %Errors;
     my %GetParam;
@@ -143,6 +144,8 @@ sub _AddAction {
         $Errors{ $Needed . 'ServerError' }        = 'ServerError';
         $Errors{ $Needed . 'ServerErrorMessage' } = Translatable('This field is required.');
     }
+
+    my @AdditionalAttributes = $ParamObject->GetArray( Param => 'AdditionalAttributes' );
 
     if ( $GetParam{Name} ) {
 
@@ -209,19 +212,35 @@ sub _AddAction {
         return $Output;
     }
 
+    my $AdditionalAttributesConfig = $ConfigObject->Get('DynamicFieldWebservice::AdditionalAttributes') // {};
+    my $StandardAttributesConfig   = $AdditionalAttributesConfig->{Standard}                            // {};
+    my $SelectableAttributesConfig = $AdditionalAttributesConfig->{Selectable}                          // {};
+
+    my $DefaultStandardAttributeSet   = $StandardAttributesConfig->{Default}   // {};
+    my $DefaultSelectableAttributeSet = $SelectableAttributesConfig->{Default} // {};
+
+    for my $InitialAttributes ( sort keys %{$DefaultSelectableAttributeSet} ) {
+        delete $DefaultSelectableAttributeSet->{$InitialAttributes}->{Name};
+    }
+
+    my $DefaultAttributeSet = {
+        %{$DefaultStandardAttributeSet},
+        %{$DefaultSelectableAttributeSet}
+    };
+
     my $FieldConfig = {
-        DefaultValue  => $GetParam{DefaultValue},
-        Link          => $GetParam{Link},
-        LinkPreview   => $GetParam{LinkPreview},
-        Webservice    => $GetParam{Webservice},
-        InvokerSearch => $GetParam{InvokerSearch},
-        InvokerGet    => $GetParam{InvokerGet},
+        DefaultValue            => $GetParam{DefaultValue},
+        Link                    => $GetParam{Link},
+        LinkPreview             => $GetParam{LinkPreview},
+        Webservice              => $GetParam{Webservice},
+        InvokerSearch           => $GetParam{InvokerSearch},
+        InvokerGet              => $GetParam{InvokerGet},
+        AdditionalAttributes    => \@AdditionalAttributes,
+        AdditionalAttributeKeys => $DefaultAttributeSet,
         %AdditionalParams,
     };
 
-    if ( $GetParam{FieldType} eq 'WebserviceMultiselect' ) {
-        $FieldConfig->{TreeView} = $GetParam{TreeView};
-    }
+    $FieldConfig->{TreeView} = $GetParam{TreeView};
 
     my $FieldID = $DynamicFieldObject->DynamicFieldAdd(
         Name       => $GetParam{Name},
@@ -324,6 +343,11 @@ sub _ChangeAction {
     my $LayoutObject       = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ValidObject        = $Kernel::OM->Get('Kernel::System::Valid');
     my $SysConfigObject    = $Kernel::OM->Get('Kernel::System::SysConfig');
+    my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+
+    my $AdditionalAttributesConfig           = $ConfigObject->Get('DynamicFieldWebservice::AdditionalAttributes') // {};
+    my $SelectableAttributesConfig           = $AdditionalAttributesConfig->{Selectable}                          // {};
+    my $AdditionalSelectableAttributesConfig = $SelectableAttributesConfig->{Option}                              // {};
 
     my %Errors;
     my %GetParam;
@@ -335,6 +359,28 @@ sub _ChangeAction {
 
         $Errors{ $Needed . 'ServerError' }        = 'ServerError';
         $Errors{ $Needed . 'ServerErrorMessage' } = Translatable('This field is required.');
+    }
+
+    my @AdditionalAttributes = $ParamObject->GetArray( Param => 'AdditionalAttributes' );
+
+    my %AdditionalAttributeKeys;
+    ADDITIONALATTRIBUTE:
+    for my $AdditionalAttribute (@AdditionalAttributes) {
+        if ( grep { $_ eq $AdditionalAttribute } keys %{$AdditionalSelectableAttributesConfig} ) {
+            my $SelectableAttributesEnabled = 0;
+
+            TYPE:
+            for my $Type (qw(ID Name)) {
+                next TYPE if !$ParamObject->GetParam( Param => $AdditionalAttribute . $Type );
+                $AdditionalAttributeKeys{$AdditionalAttribute}->{$Type} = 1;
+                $SelectableAttributesEnabled = 1;
+            }
+
+            # Prevent passing not selected attribute type.
+            if ( !$SelectableAttributesEnabled ) {
+                $AdditionalAttributeKeys{$AdditionalAttribute}->{ID} = 1;
+            }
+        }
     }
 
     my $FieldID = $ParamObject->GetParam( Param => 'ID' );
@@ -466,18 +512,18 @@ sub _ChangeAction {
     }
 
     my $FieldConfig = {
-        DefaultValue  => $GetParam{DefaultValue},
-        Link          => $GetParam{Link},
-        LinkPreview   => $GetParam{LinkPreview},
-        Webservice    => $GetParam{Webservice},
-        InvokerSearch => $GetParam{InvokerSearch},
-        InvokerGet    => $GetParam{InvokerGet},
+        DefaultValue            => $GetParam{DefaultValue},
+        Link                    => $GetParam{Link},
+        LinkPreview             => $GetParam{LinkPreview},
+        Webservice              => $GetParam{Webservice},
+        InvokerSearch           => $GetParam{InvokerSearch},
+        InvokerGet              => $GetParam{InvokerGet},
+        AdditionalAttributes    => \@AdditionalAttributes,
+        AdditionalAttributeKeys => \%AdditionalAttributeKeys,
         %AdditionalParams,
     };
 
-    if ( $GetParam{FieldType} eq 'WebserviceMultiselect' ) {
-        $FieldConfig->{TreeView} = $GetParam{TreeView};
-    }
+    $FieldConfig->{TreeView} = $GetParam{TreeView};
 
     # update dynamic field (FieldType and ObjectType cannot be changed; use old values)
     my $UpdateSuccess = $DynamicFieldObject->DynamicFieldUpdate(
@@ -559,6 +605,7 @@ sub _ShowScreen {
     my $ParamObject               = $Kernel::OM->Get('Kernel::System::Web::Request');
     my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+    my $ConfigObject              = $Kernel::OM->Get('Kernel::Config');
 
     $Param{DisplayFieldName} = 'New';
 
@@ -763,6 +810,79 @@ sub _ShowScreen {
         Sort         => 'NumericKey',
     );
 
+    my $AdditionalAttributesConfig = $ConfigObject->Get('DynamicFieldWebservice::AdditionalAttributes') // {};
+
+    my $AdditionalStandardAttributesConfig = $AdditionalAttributesConfig->{Standard}        // {};
+    my $AdditionalAttributesMapping        = $AdditionalStandardAttributesConfig->{Option}  // {};
+    my $DefaultAttributeSet                = $AdditionalStandardAttributesConfig->{Default} // {};
+
+    my $AdditionalSelectableAttributesConfig  = $AdditionalAttributesConfig->{Selectable}        // {};
+    my $AdditionalSelectableAttributesMapping = $AdditionalSelectableAttributesConfig->{Option}  // {};
+    my $DefaultSelectableAttributeSet         = $AdditionalSelectableAttributesConfig->{Default} // {};
+
+    my $SelectableAttributes = {
+        %{$AdditionalAttributesMapping},
+        %{$AdditionalSelectableAttributesMapping}
+    };
+
+    $Self->_IsAttributeFeatureEnabled(
+        AdditionalAttributes => $SelectableAttributes,
+    );
+
+    my $AdditionalAttributes = $LayoutObject->BuildSelection(
+        Data          => $SelectableAttributes,
+        Name          => 'AdditionalAttributes',
+        SelectedValue => $Param{AdditionalAttributes},
+        Translation   => 0,
+        Class         => 'Modernize W50pc',
+        Sort          => 'Key',
+        Multiple      => 1
+    );
+
+    if ( IsArrayRefWithData( $Param{AdditionalAttributes} ) ) {
+        my $SelectableAttributesEnabled;
+
+        ATTRIBUTE:
+        for my $AdditionalAttribute ( @{ $Param{AdditionalAttributes} } ) {
+            next ATTRIBUTE if !$AdditionalSelectableAttributesMapping->{$AdditionalAttribute};
+            next ATTRIBUTE if $AdditionalAttribute =~ m{DynamicField};
+
+            if ( !$SelectableAttributesEnabled ) {
+                $LayoutObject->Block(
+                    Name => 'AttributeKey',
+                    Data => {}
+                );
+                $SelectableAttributesEnabled = 1;
+            }
+
+            $LayoutObject->Block(
+                Name => 'SelectableAttributeKeyRow',
+                Data => {
+                    AtributeLabel => $AdditionalAttribute,
+                    AttributeKey  => $AdditionalAttribute,
+                }
+            );
+            for my $Type (qw(ID Name)) {
+                my %Mapping = (
+                    "ID"   => "ID",
+                    "Name" => ""
+                );
+
+                $LayoutObject->Block(
+                    Name => 'AttributeType',
+                    Data => {
+                        AttributeIDChecked => $Param{AdditionalAttributeKeys}->{$AdditionalAttribute}->{$Type}
+                        ? "checked"
+                        : "",
+                        AttributeKey   => $AdditionalAttribute . $Type,
+                        AttributeLabel => $AdditionalAttribute . $Mapping{$Type},
+                        Value          => $Param{AdditionalAttributeKeys}->{$AdditionalAttribute}->{$Type},
+                    }
+                );
+            }
+        }
+    }
+
     $Output .= $LayoutObject->Output(
         TemplateFile => 'AdminDynamicFieldWebservice',
         Data         => {
@@ -774,6 +894,7 @@ sub _ShowScreen {
             Link                     => $Link,
             LinkPreview              => $LinkPreview,
             InputFieldWidthSelection => $InputFieldWidthSelection,
+            AdditionalAttributes     => $AdditionalAttributes,
         },
     );
 
@@ -1291,6 +1412,20 @@ sub _AdditionalDFStorageValidate {
     $Errors{AdditionalDFStorageErrors} = \@StorageErrorMessages;
 
     return %Errors;
+}
+
+sub _IsAttributeFeatureEnabled {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject         = $Kernel::OM->Get('Kernel::Config');
+    my $AdditionalAttributes = $Param{AdditionalAttributes};
+
+    for my $AttributeFeature (qw( Responsible Type Service )) {
+        my $TicketAttribute = $ConfigObject->Get("Ticket::$AttributeFeature");
+        delete $AdditionalAttributes->{$AttributeFeature} if !$TicketAttribute;
+    }
+
+    return 1;
 }
 
 1;
