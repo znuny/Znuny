@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -53,10 +53,10 @@ $Self->True(
 
 my @DynamicFields = (
     {
-        Name       => $DynamicField . 'Text',
-        Label      => $DynamicField . 'Text',
+        Name       => $DynamicField . 'Dropdown',
+        Label      => $DynamicField . 'Dropdown',
         ObjectType => 'Ticket',
-        FieldType  => 'WebserviceText',
+        FieldType  => 'WebserviceDropdown',
         Config     => {
             DefaultValue        => '',
             Link                => '',
@@ -148,49 +148,49 @@ $UnitTestWebserviceObject->Mock(
 
 my @Tests = (
 
-    # WebserviceText
+    # WebserviceDropdown
     {
-        Name                              => 'WebserviceText - CustomSearchForm (nothing)',
-        DynamicFieldName                  => $DynamicField . 'Text',
+        Name                              => 'WebserviceDropdown - CustomSearchForm (nothing)',
+        DynamicFieldName                  => $DynamicField . 'Dropdown',
         Param                             => {},
         ExpectedGetParamResult            => {},
         ExpectedSearchFieldValueGetResult => {
-            "Search_DynamicField_" . $DynamicField . "Text" => [],
+            "Search_DynamicField_" . $DynamicField . "Dropdown" => [],
         },
     },
     {
-        Name             => 'WebserviceText - CustomSearchForm (succeeding)',
-        DynamicFieldName => $DynamicField . 'Text',
+        Name             => 'WebserviceDropdown - CustomSearchForm (succeeding)',
+        DynamicFieldName => $DynamicField . 'Dropdown',
         Param            => {
-            DynamicFieldWebserviceCustomSearchForm          => '1',
-            "Search_DynamicField_" . $DynamicField . "Text" => 'Znuny2',
+            DynamicFieldWebserviceCustomSearchForm              => '1',
+            "Search_DynamicField_" . $DynamicField . "Dropdown" => 'Znuny2',
         },
         ExpectedGetParamResult => {
-            "Search_DynamicField_" . $DynamicField . "Text" => [
+            "Search_DynamicField_" . $DynamicField . "Dropdown" => [
                 'Znuny2'
             ],
         },
         ExpectedSearchFieldValueGetResult => {
-            "Search_DynamicField_" . $DynamicField . "Text" => [
+            "Search_DynamicField_" . $DynamicField . "Dropdown" => [
                 'Znuny2'
             ],
         },
     },
     {
-        Name             => 'WebserviceText - CustomSearchForm (succeeding)',
-        DynamicFieldName => $DynamicField . 'Text',
+        Name             => 'WebserviceDropdown - CustomSearchForm (succeeding)',
+        DynamicFieldName => $DynamicField . 'Dropdown',
         Param            => {
-            DynamicFieldWebserviceCustomSearchForm          => '1',
-            "Search_DynamicField_" . $DynamicField . "Text" => 'Znuny*',
+            DynamicFieldWebserviceCustomSearchForm              => '1',
+            "Search_DynamicField_" . $DynamicField . "Dropdown" => 'Znuny*',
         },
         ExpectedGetParamResult => {
-            "Search_DynamicField_" . $DynamicField . "Text" => [
+            "Search_DynamicField_" . $DynamicField . "Dropdown" => [
                 'Znuny',
                 'Znuny2',
             ],
         },
         ExpectedSearchFieldValueGetResult => {
-            "Search_DynamicField_" . $DynamicField . "Text" => [
+            "Search_DynamicField_" . $DynamicField . "Dropdown" => [
                 'Znuny',
                 'Znuny2',
             ],

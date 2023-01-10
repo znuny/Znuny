@@ -3192,7 +3192,7 @@ Please note, that the delivery of an email article of [<OTRS_CONFIG_Ticket::Hook
 Error Message:
 <OTRS_AGENT_TransmissionStatusMessage>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_AGENT_ArticleID>
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_TICKET_LAST_ARTICLE_ID>
 
 -- <OTRS_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
@@ -3207,7 +3207,7 @@ Felhívjuk a figyelmét, hogy a(z) [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticke
 Hibaüzenet:
 <OTRS_AGENT_TransmissionStatusMessage>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_AGENT_ArticleID>
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_TICKET_LAST_ARTICLE_ID>
 
 -- <OTRS_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------

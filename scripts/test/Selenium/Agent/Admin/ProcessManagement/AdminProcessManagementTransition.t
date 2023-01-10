@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,7 +18,10 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject     = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject     = $Kernel::OM->Get('Kernel::Config');
+        my $TransitionObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Transition');
+        my $ProcessObject    = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process');
 
         # Create test user.
         my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
@@ -35,7 +38,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Go to AdminProcessManagement screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminProcessManagement");
@@ -131,13 +134,12 @@ $Selenium->RunTest(
 
         # Try to remove Field, expecting JS error.
         $Selenium->find_element("//a[\@title='Remove this Field']")->click();
+
+        # Wait until modal dialog has open.
         $Selenium->WaitFor(
-            AlertPresent => 1,
+            JavaScript => 'return typeof($) === "function" && $(".Dialog.Modal #DialogButton1").length'
         );
-        $Self->True(
-            $Selenium->accept_alert(),
-            "Unable to remove only field - JS is success"
-        );
+        $Selenium->find_element( "#DialogButton1", 'css' )->click();
         sleep 1;
 
         # Add new Field.
@@ -269,13 +271,13 @@ $Selenium->RunTest(
         );
 
         $Selenium->find_element("//a[\@name='ConditionRemove[1]']")->click();
+
+        # Wait until modal dialog has open.
         $Selenium->WaitFor(
-            AlertPresent => 1,
+            JavaScript => 'return typeof($) === "function" && $(".Dialog.Modal #DialogButton1").length'
         );
-        $Self->True(
-            $Selenium->accept_alert(),
-            "Unable to remove only condition - JS is success"
-        );
+        $Selenium->find_element( "#DialogButton1", 'css' )->click();
+
         sleep 1;
 
         $Selenium->find_element( "#Submit", 'css' )->click();
@@ -373,7 +375,7 @@ $Selenium->RunTest(
         $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('#ProcessDelete').length" );
 
         # Delete test transition.
-        my $Success = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Transition')->TransitionDelete(
+        my $Success = $TransitionObject->TransitionDelete(
             ID     => $TransitionID,
             UserID => $TestUserID,
         );
@@ -384,7 +386,7 @@ $Selenium->RunTest(
         );
 
         # Delete test process.
-        $Success = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process')->ProcessDelete(
+        $Success = $ProcessObject->ProcessDelete(
             ID     => $ProcessID,
             UserID => $TestUserID,
         );

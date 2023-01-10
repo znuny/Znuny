@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -138,6 +138,29 @@
             </div>
         </div>
 [% RenderBlockEnd("Note") %]
+        <div class='WidgetSimple'>
+            <div class='Header'>
+                <h2>[% Translate('Related Actions') | html %]</h2>
+            </div>
+            <div class='Content'>
+                <ul class='ActionList SpacingTop'>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminCustomerUser' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Customer Users') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminGroup' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Groups') | html %]
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="ContentColumn">
         <div class="WidgetSimple">

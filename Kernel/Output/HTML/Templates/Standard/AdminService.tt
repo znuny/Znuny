@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -46,6 +46,9 @@
                     <li>
                         <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ServiceEdit;ServiceID=NEW" class="CallForAction Fullsize Center"><span><i class="fa fa-plus-square"></i>[% Translate("Add Service") | html %]</span></a>
                     </li>
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=AdminCustomerUserService;Subaction=AllocateCustomerUser" class="CallForAction Fullsize Center"><span><i class="fa fa-plus-square"></i>[% Translate("Edit default services") | html %]</span></a>
+                    </li>
 [% RenderBlockEnd("ActionAdd") %]
                 </ul>
             </div>
@@ -62,6 +65,36 @@
             </div>
         </div>
 [% RenderBlockEnd("Filter") %]
+        <div class='WidgetSimple'>
+            <div class='Header'>
+                <h2>[% Translate('Related Actions') | html %]</h2>
+            </div>
+            <div class='Content'>
+                <ul class='ActionList SpacingTop'>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminSLA' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Service Level Agreements') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminCustomerUserService' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Customer Users ↔ Services') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=Search;Search=%23%23%23Service' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Configure Service Visibility and Defaults') | html %]
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <div class="ContentColumn">
@@ -145,6 +178,20 @@
                             [% Data.ParentOptionStrg %]
                         </div>
                         <div class="Clear"></div>
+
+                        [% IF Data.IsITSMInstalled %]
+                            <label for="TypeID">[% Translate("Type") | html %]: </label>
+                            <div class="Field">
+                                [% Data.TypeOptionStrg %]
+                            </div>
+                            <div class="Clear"></div>
+
+                            <label for="Criticality">[% Translate("Criticality") | html %]: </label>
+                            <div class="Field">
+                                [% Data.CriticalityOptionStrg %]
+                            </div>
+                            <div class="Clear"></div>
+                        [% END %]
 
                         <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]:</label>
                         <div class="Field">
