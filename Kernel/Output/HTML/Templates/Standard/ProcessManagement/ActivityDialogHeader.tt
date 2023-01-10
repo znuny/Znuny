@@ -60,6 +60,7 @@
             <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]"/>
             <input type="hidden" name="LinkTicketID" value="[% Data.LinkTicketID | html %]"/>
             <input type="hidden" name="ProcessEntityID" value="[% Data.ProcessEntityID | html %]"/>
+            <input type="hidden" name="ActivityEntityID" value="[% Data.ActivityEntityID | html %]"/>
             <input type="hidden" name="ActivityDialogEntityID" value="[% Data.ActivityDialogEntityID | html %]"/>
             <input type="hidden" name="Expand" id="Expand" value=""/>
             <input type="hidden" name="IsMainWindow" id="IsMainWindow" value="[% Data.IsMainWindow | html %]"/>

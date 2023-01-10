@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.192712550607287;
+    $Self->{Completeness}        = 0.192618970540628;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4880,6 +4880,10 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Preferences/Language.pm
         '(in process)' => '',
 
+        # Perl Module: Kernel/Output/HTML/Preferences/MaxArticlesPerPage.pm
+        'Max. number of articles per page must be between 1 and 1000 or empty.' =>
+            '',
+
         # Perl Module: Kernel/Output/HTML/Preferences/OutOfOffice.pm
         'Please specify an end date that is after the start date.' => '',
 
@@ -8921,6 +8925,7 @@ Thanks for your help!
         'Mark as Spam!' => 'Pažymėti kaip Spam!',
         'Mark this ticket as junk!' => '',
         'Mattermost Username' => '',
+        'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'Vidutinis',
         'Mentioned in article' => '',
         'Mentioned in ticket' => '',
@@ -9045,6 +9050,8 @@ Thanks for your help!
         'Select how many tickets should be shown in overviews by default.' =>
             '',
         'Select the main interface language.' => '',
+        'Select the maximum articles per page shown in TicketZoom. System default value will apply when entered empty value.' =>
+            '',
         'Select the separator character used in CSV files (stats and searches). If you don\'t select a separator here, the default separator for your language will be used.' =>
             'Pasirinkite skyriklį, kurį norite naudoti CSV failuose (statistikoje ir paieškoje) arba bus naudojamas standartinis Jūsų kalbos skyriklis.',
         'Select where to display the last views.' => '',
@@ -9262,6 +9269,7 @@ Thanks for your help!
         'Agent',
         'All occurrences',
         'All-day',
+        'An Error Occurred',
         'An error occurred during communication.',
         'An error occurred! Please check the browser error log for more details!',
         'An item with this name is already present.',

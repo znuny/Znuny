@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.622834008097166;
+    $Self->{Completeness}        = 0.62253156361282;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4886,6 +4886,10 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/Preferences/Language.pm
         '(in process)' => '(en proceso)',
 
+        # Perl Module: Kernel/Output/HTML/Preferences/MaxArticlesPerPage.pm
+        'Max. number of articles per page must be between 1 and 1000 or empty.' =>
+            '',
+
         # Perl Module: Kernel/Output/HTML/Preferences/OutOfOffice.pm
         'Please specify an end date that is after the start date.' => 'Por favor especifique una fecha de término posterior a la fecha de inicio.',
 
@@ -8945,6 +8949,7 @@ Tu Equipo de Soporte
         'Mark as Spam!' => '¡Marcar como spam!',
         'Mark this ticket as junk!' => '¡Marcar este ticket como basura!',
         'Mattermost Username' => '',
+        'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'Mediano',
         'Mentioned in article' => '',
         'Mentioned in ticket' => '',
@@ -9069,6 +9074,8 @@ Tu Equipo de Soporte
         'Select how many tickets should be shown in overviews by default.' =>
             '',
         'Select the main interface language.' => 'Selecciona el idioma principal de la interfaz.',
+        'Select the maximum articles per page shown in TicketZoom. System default value will apply when entered empty value.' =>
+            '',
         'Select the separator character used in CSV files (stats and searches). If you don\'t select a separator here, the default separator for your language will be used.' =>
             'Seleccione el carácter separador a usar en los archivos CSV (estadísticas y búsquedas). Si no selecciona ningún separador aquí, se usará el separador predeterminado para su idioma.',
         'Select where to display the last views.' => '',
@@ -9286,6 +9293,7 @@ Tu Equipo de Soporte
         'Agent',
         'All occurrences',
         'All-day',
+        'An Error Occurred',
         'An error occurred during communication.',
         'An error occurred! Please check the browser error log for more details!',
         'An item with this name is already present.',
