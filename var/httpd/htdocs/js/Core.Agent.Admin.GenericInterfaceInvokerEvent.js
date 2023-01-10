@@ -54,7 +54,10 @@ Core.Agent.Admin.GenericInterfaceInvokerEvent= (function (TargetNS) {
                 $(this).closest('.WidgetSimple').remove();
             }
             else {
-                alert(Core.Language.Translate("Sorry, the only existing condition can't be removed."));
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An Error Occurred'),
+                    Core.Language.Translate("Sorry, the only existing condition can't be removed.")
+                );
             }
 
             return false;
@@ -82,7 +85,10 @@ Core.Agent.Admin.GenericInterfaceInvokerEvent= (function (TargetNS) {
                 $(this).parent().closest('fieldset').remove();
             }
             else {
-                alert(Core.Language.Translate("Sorry, the only existing field can't be removed."));
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An Error Occurred'),
+                    Core.Language.Translate("Sorry, the only existing field can't be removed.")
+                );
             }
 
             return false;
@@ -165,38 +171,38 @@ Core.Agent.Admin.GenericInterfaceInvokerEvent= (function (TargetNS) {
             true,
             [
                 {
-                     Label: Core.Language.Translate('Cancel'),
-                     Function: function () {
-                         Core.UI.Dialog.CloseDialog($('#DeleteDialog'));
-                     }
+                    Label: Core.Language.Translate('Cancel'),
+                    Function: function () {
+                        Core.UI.Dialog.CloseDialog($('#DeleteDialog'));
+                    }
                 },
 
                 {
-                     Label: Core.Language.Translate('Delete'),
-                     Function: function () {
-                         var Data = {
-                             Action: 'AdminGenericInterfaceInvokerEvent',
-                             Subaction: 'Delete',
-                             WebserviceID: TargetNS.InvokerEvent.WebserviceID,
-                             Invoker: TargetNS.InvokerEvent.Invoker,
-                             Event: TargetNS.InvokerEvent.Event
-                         };
+                    Label: Core.Language.Translate('Delete'),
+                    Function: function () {
+                        var Data = {
+                            Action: 'AdminGenericInterfaceInvokerEvent',
+                            Subaction: 'Delete',
+                            WebserviceID: TargetNS.InvokerEvent.WebserviceID,
+                            Invoker: TargetNS.InvokerEvent.Invoker,
+                            Event: TargetNS.InvokerEvent.Event
+                        };
 
-                         Core.AJAX.FunctionCall(Core.Config.Get('CGIHandle'), Data, function (Response) {
-                             if (!Response || !Response.Success) {
-                                 alert(Core.Language.Translate('An error occurred during communication.'));
-                                 return;
-                             }
+                        Core.AJAX.FunctionCall(Core.Config.Get('CGIHandle'), Data, function (Response) {
+                            if (!Response || !Response.Success) {
+                                alert(Core.Language.Translate('An error occurred during communication.'));
+                                return;
+                            }
 
-                             Core.App.InternalRedirect({
-                                 Action: TargetNS.InvokerEvent.InvokerTypeFrontendModule,
-                                 Subaction: 'Change',
-                                 Invoker: TargetNS.InvokerEvent.Invoker,
-                                 WebserviceID: TargetNS.InvokerEvent.WebserviceID
-                             });
-                         }, 'json');
+                            Core.App.InternalRedirect({
+                                Action: TargetNS.InvokerEvent.InvokerTypeFrontendModule,
+                                Subaction: 'Change',
+                                Invoker: TargetNS.InvokerEvent.Invoker,
+                                WebserviceID: TargetNS.InvokerEvent.WebserviceID
+                            });
+                        }, 'json');
 
-                     }
+                    }
                 }
             ]
         );
