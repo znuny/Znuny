@@ -123,7 +123,10 @@ Core.Installer = (function (TargetNS) {
      */
     function CheckMailConfigCallback(json) {
         if (parseInt(json.Successful, 10) === 1) {
-            alert(Core.Language.Translate('Mail check successful.'));
+            Core.UI.Dialog.ShowAlert(
+                Core.Language.Translate('An Error Occurred'),
+                Core.Language.Translate('Mail check successful.')
+            );
             $('fieldset.errormsg').hide();
             $('input[name=Subaction]').val('Finish');
             $('form').submit();
@@ -131,7 +134,10 @@ Core.Installer = (function (TargetNS) {
         else {
             $('#FormMailResultMessage').html(json.Message);
             $('fieldset.ErrorMsg').show();
-            alert(Core.Language.Translate('Error in the mail settings. Please correct and try again.'));
+            Core.UI.Dialog.ShowAlert(
+                Core.Language.Translate('An Error Occurred'),
+                Core.Language.Translate('Error in the mail settings. Please correct and try again.')
+            );
         }
     }
 
