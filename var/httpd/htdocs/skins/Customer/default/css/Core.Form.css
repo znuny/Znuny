@@ -211,7 +211,6 @@ fieldset h2 + p.Description {
 fieldset h2 + div {
     padding-top: 13px;
     border-top: 1px solid #FFF;
-    overflow: hidden;
 }
 
 fieldset p {
