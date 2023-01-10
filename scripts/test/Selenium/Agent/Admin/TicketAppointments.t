@@ -613,7 +613,10 @@ $Selenium->RunTest(
                 );
                 $Selenium->WaitFor( JavaScript => "return \$('#EditFormSubmit').length;" );
 
-                $Selenium->find_element( '#EditFormSubmit', 'css' )->click();
+                my $EditFormSubmit = $Selenium->find_element( '#EditFormSubmit', 'css' );
+                $Selenium->mouse_move_to_location( element => $EditFormSubmit );
+                $EditFormSubmit->click();
+
                 $Selenium->WaitFor( JavaScript => "return !\$('.Dialog.Modal').length;" );
 
                 $Self->True(

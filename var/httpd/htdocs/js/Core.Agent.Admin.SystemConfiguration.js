@@ -42,40 +42,43 @@ Core.Agent.Admin = Core.Agent.Admin || {};
 
          Core.UI.Dialog.ShowContentDialog('<div class="Spacing Center"><span class="AJAXLoader" title="' + Core.Language.Translate('Loading...') + '"></span></div>', Core.Language.Translate('Loading...'), '10px', 'Center', true);
 
-         Core.AJAX.FunctionCall(
-             Core.Config.Get('CGIHandle'),
-             Data,
-             function (HTML) {
+        Core.AJAX.FunctionCall(
+            Core.Config.Get('CGIHandle'),
+            Data,
+            function (HTML) {
 
-                 // if the waiting dialog was cancelled, do not show the search
-                 //  dialog as well
-                 if (!$('.Dialog:visible').length) {
-                     return;
-                 }
-                 Core.UI.Dialog.ShowContentDialog(HTML, Core.Language.Translate('Search the System Configuration'), '10px', 'Center', true);
+                // if the waiting dialog was cancelled, do not show the search
+                //  dialog as well
+                if (!$('.Dialog:visible').length) {
+                    return;
+                }
+                Core.UI.Dialog.ShowContentDialog(HTML, Core.Language.Translate('Search the System Configuration'), '10px', 'Center', true);
 
-                 // register return key
-                 $('.AdminSystemConfigurationSearchForm').off('keypress.FilterInput').on('keypress.FilterInput', function (Event) {
-                     if ((Event.charCode || Event.keyCode) === 13) {
-                         $('#SearchFormSubmit').trigger('click');
-                         return false;
-                     }
-                 });
+                // register return key
+                $('.AdminSystemConfigurationSearchForm').off('keypress.FilterInput').on('keypress.FilterInput', function (Event) {
+                    if ((Event.charCode || Event.keyCode) === 13) {
+                        $('#SearchFormSubmit').trigger('click');
+                        return false;
+                    }
+                });
 
-                 $('#SearchFormSubmit').off('click.StartSearch').on('click.StartSearch', function() {
+                $('#SearchFormSubmit').off('click.StartSearch').on('click.StartSearch', function() {
 
-                     if (!$('.AdminSystemConfigurationSearchForm input[name=Search]').val()) {
-                         alert(Core.Language.Translate('Please enter at least one search word to find anything.'));
-                         return false;
-                     }
+                    if (!$('.AdminSystemConfigurationSearchForm input[name=Search]').val()) {
+                        Core.UI.Dialog.ShowAlert(
+                            Core.Language.Translate('An Error Occurred'),
+                            Core.Language.Translate('Please enter at least one search word to find anything.')
+                        );
+                        return false;
+                    }
 
-                     $('.AdminSystemConfigurationSearchForm').submit();
-                     Core.UI.Dialog.ShowContentDialog('<div class="Spacing Center"><span class="AJAXLoader" title="' + Core.Language.Translate('Loading...') + '"></span></div>', Core.Language.Translate('Loading...'), '10px', 'Center', true);
-                 });
+                    $('.AdminSystemConfigurationSearchForm').submit();
+                    Core.UI.Dialog.ShowContentDialog('<div class="Spacing Center"><span class="AJAXLoader" title="' + Core.Language.Translate('Loading...') + '"></span></div>', Core.Language.Translate('Loading...'), '10px', 'Center', true);
+                });
 
-             }, 'html'
-         );
-     };
+            }, 'html'
+        );
+    };
 
      /**
      * @public
@@ -159,7 +162,10 @@ Core.Agent.Admin = Core.Agent.Admin || {};
                 }
 
                 if ($DialogContentObj.hasClass('Deploying')) {
-                    alert(Core.Language.Translate('The deployment is already running.'));
+                    Core.UI.Dialog.ShowAlert(
+                        Core.Language.Translate('An Error Occurred'),
+                        Core.Language.Translate('The deployment is already running.')
+                    );
                     return false;
                 }
 
@@ -282,7 +288,10 @@ Core.Agent.Admin = Core.Agent.Admin || {};
 
             // Validation
             if(ResetOptions == "") {
-                alert(Core.Language.Translate("Reset option is required!"));
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An Error Occurred'),
+                    Core.Language.Translate("Reset option is required!")
+                );
                 return;
             }
             Core.UI.Dialog.CloseDialog($(".Dialog"));
@@ -1002,7 +1011,10 @@ Core.Agent.Admin = Core.Agent.Admin || {};
             function(Response) {
 
                 if (Response.Error != null) {
-                    alert(Response.Error);
+                    Core.UI.Dialog.ShowAlert(
+                        Core.Language.Translate('An Error Occurred'),
+                        Core.Language.Translate(Response.Error)
+                    );
                     // hide loader
                     Core.UI.WidgetOverlayHide($Widget);
                     return;
@@ -1138,7 +1150,10 @@ Core.Agent.Admin = Core.Agent.Admin || {};
                     $Widget;
 
                 if (Response.Error) {
-                    alert(Response.Error);
+                    Core.UI.Dialog.ShowAlert(
+                        Core.Language.Translate('An Error Occurred'),
+                        Core.Language.Translate(Response.Error)
+                    );
                     return;
                 }
 

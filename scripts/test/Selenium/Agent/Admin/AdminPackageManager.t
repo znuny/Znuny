@@ -158,9 +158,15 @@ $Selenium->RunTest(
         $Selenium->execute_script('window.Core.App.PageLoadComplete = false;');
         $Selenium->find_element("//button[contains(.,'Install Package')]")->click();
         $Selenium->WaitFor(
-            Time => 120,
-            JavaScript =>
-                'return typeof(Core) == "object" && typeof(Core.App) == "object" && Core.App.PageLoadComplete'
+            Time       => 120,
+            JavaScript => 'return typeof(Core) == "object" && typeof(Core.App) == "object" && Core.App.PageLoadComplete'
+        );
+
+        $Selenium->find_element( ".Primary.CallForAction", 'css' )->VerifiedClick();
+
+        $Selenium->WaitFor(
+            Time       => 120,
+            JavaScript => 'return typeof(Core) == "object" && typeof(Core.App) == "object" && Core.App.PageLoadComplete'
         );
 
         my $PackageCheck = $PackageObject->PackageIsInstalled(
