@@ -3932,7 +3932,7 @@ Please note, that the delivery of an email article of [<OTRS_CONFIG_Ticket::Hook
 Error Message:
 <OTRS_AGENT_TransmissionStatusMessage>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_AGENT_ArticleID>
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_TICKET_LAST_ARTICLE_ID>
 
 -- <OTRS_CONFIG_NotificationSenderName>]]></Data>
     </Insert>
@@ -3949,7 +3949,7 @@ Felhívjuk a figyelmét, hogy a(z) [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticke
 Hibaüzenet:
 <OTRS_AGENT_TransmissionStatusMessage>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_AGENT_ArticleID>
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_TICKET_LAST_ARTICLE_ID>
 
 -- <OTRS_CONFIG_NotificationSenderName>]]></Data>
     </Insert>
@@ -4026,5 +4026,44 @@ DefaultValue: ''
         <Data Key="change_by">1</Data>
         <Data Key="change_time">current_timestamp</Data>
     </Insert>
-
+    <Insert Table="dynamic_field">
+        <Data Key="id" Type="AutoIncrement">4</Data>
+        <Data Key="internal_field">0</Data>
+        <Data Key="name" Type="Quote">TicketCalendarStartTime</Data>
+        <Data Key="label" Type="Quote">Ticket Calendar StartTime</Data>
+        <Data Key="field_order">1</Data>
+        <Data Key="field_type" Type="Quote">DateTime</Data>
+        <Data Key="object_type" Type="Quote">Ticket</Data>
+        <Data Key="config" Type="Quote">---
+DefaultValue: 0,
+YearsInFuture: 0,
+YearsInPast: 0,
+YearsPeriod: 0,
+</Data>
+        <Data Key="valid_id">1</Data>
+        <Data Key="create_by">1</Data>
+        <Data Key="create_time">current_timestamp</Data>
+        <Data Key="change_by">1</Data>
+        <Data Key="change_time">current_timestamp</Data>
+    </Insert>
+    <Insert Table="dynamic_field">
+        <Data Key="id" Type="AutoIncrement">5</Data>
+        <Data Key="internal_field">0</Data>
+        <Data Key="name" Type="Quote">TicketCalendarEndTime</Data>
+        <Data Key="label" Type="Quote">Ticket Calendar EndTime</Data>
+        <Data Key="field_order">1</Data>
+        <Data Key="field_type" Type="Quote">DateTime</Data>
+        <Data Key="object_type" Type="Quote">Ticket</Data>
+        <Data Key="config" Type="Quote">---
+DefaultValue: 0,
+YearsInFuture: 0,
+YearsInPast: 0,
+YearsPeriod: 0,
+</Data>
+        <Data Key="valid_id">1</Data>
+        <Data Key="create_by">1</Data>
+        <Data Key="create_time">current_timestamp</Data>
+        <Data Key="change_by">1</Data>
+        <Data Key="change_time">current_timestamp</Data>
+    </Insert>
 </database>

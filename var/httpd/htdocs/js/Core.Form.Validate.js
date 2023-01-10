@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -888,7 +888,7 @@ Core.Form.Validate = (function (TargetNS) {
      *      Validate a single element.
      */
     TargetNS.ValidateElement = function ($Element) {
-        if (isJQueryObject($Element)) {
+        if (isJQueryObject($Element) && $Element.closest('form').length) {
             return $Element.closest('form').validate().element($Element);
         }
         return false;

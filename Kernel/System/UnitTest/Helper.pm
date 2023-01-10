@@ -1,11 +1,12 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::Perl::CacheCleanup)
 
 package Kernel::System::UnitTest::Helper;
 
@@ -495,9 +496,8 @@ sub FixedTimeAddSeconds {
 }
 
 # See http://perldoc.perl.org/5.10.0/perlsub.html#Overriding-Built-in-Functions
-## nofilter(TidyAll::Plugin::OTRS::Perl::Time)
-## nofilter(TidyAll::Plugin::OTRS::Migrations::OTRS6::TimeObject)
-## nofilter(TidyAll::Plugin::OTRS::Migrations::OTRS6::DateTime)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Time)
+
 sub _MockPerlTimeHandling {
     no warnings 'redefine';    ## no critic
     *CORE::GLOBAL::time = sub {
@@ -548,7 +548,7 @@ sub _MockPerlTimeHandling {
         if ( $INC{$FilePath} ) {
             no warnings 'redefine';    ## no critic
             delete $INC{$FilePath};
-            require $FilePath;         ## nofilter(TidyAll::Plugin::OTRS::Perl::Require)
+            require $FilePath;         ## nofilter(TidyAll::Plugin::Znuny::Perl::Require)
         }
     }
 

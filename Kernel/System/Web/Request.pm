@@ -1,11 +1,12 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::CodeStyle::STDERRCheck)
 
 package Kernel::System::Web::Request;
 
@@ -23,6 +24,7 @@ our @ObjectDependencies = (
     'Kernel::System::CheckItem',
     'Kernel::System::Encode',
     'Kernel::System::FormDraft',
+    'Kernel::System::JSON',
     'Kernel::System::Web::UploadCache',
 );
 
@@ -113,6 +115,11 @@ to get single request parameters. By default, trimming is performed on the data.
         Raw   => 1,       # optional, input data is not changed
     );
 
+
+Returns:
+
+    my $Param = '123';
+
 =cut
 
 sub GetParam {
@@ -145,6 +152,68 @@ sub GetParam {
     return $Value;
 }
 
+=head2 GetParams()
+
+Get all request parameters, Strings and Arrays.
+
+    my %Params = $ParamObject->GetParams(
+        Params           => [ 'TicketID', 'Queue', ]      # optional, only these parameters are fetched and returned
+        Raw              => 1,                            # optional, input data is not changed
+        JSONDecodeParams => ['ParamNameWithJSONData1',]   # optional, this JSON-decodes the given parameters
+    );
+
+Returns:
+
+    my %Params = (
+        TicketID => 1,
+        Queue    => 'Raw',
+        Array    => [
+            1,
+            2,
+        ],
+        'ParamNameWithJSONData1' => {
+            'jsonkey' => 'jsonvalue'
+        },
+    );
+
+=cut
+
+sub GetParams {
+    my ( $Self, %Param ) = @_;
+
+    my $JSONObject = $Kernel::OM->Get('Kernel::System::JSON');
+
+    my @Params = IsArrayRefWithData( $Param{Params} )
+        ? @{ $Param{Params} }
+        : $Self->GetParamNames();
+
+    my @JSONDecodeParams = @{ $Param{JSONDecodeParams} // [] };
+    my %JSONDecodeParams = map { $_ => 1 } @JSONDecodeParams;
+
+    my %GetParams;
+    PARAM:
+    for my $Param ( sort @Params ) {
+        my @Values = $Self->GetArray(
+            Param => $Param,
+            Raw   => $Param{Raw},
+        );
+        next PARAM if !@Values;
+
+        my @ProcessedValues;
+        for my $Value (@Values) {
+            if ( $JSONDecodeParams{$Param} ) {
+                $Value = $JSONObject->Decode( Data => $Value ) // $Value;
+            }
+
+            push @ProcessedValues, $Value;
+        }
+
+        $GetParams{$Param} = ( @ProcessedValues == 1 ) ? $ProcessedValues[0] : \@ProcessedValues;
+    }
+
+    return %GetParams;
+}
+
 =head2 GetParamNames()
 
 to get names of all parameters passed to the script.
@@ -159,6 +228,14 @@ Called URL: index.pl?Action=AdminSystemConfiguration;Subaction=Save;Name=Config:
 
     print join " :: ", @ParamNames;
     # prints Action :: Subaction :: Name
+
+Returns:
+
+    my @ParamNames = (
+        'Array',
+        'TicketID',
+        'Queue',
+    );
 
 =cut
 
@@ -196,6 +273,13 @@ By default, trimming is performed on the data.
     my @Param = $ParamObject->GetArray(
         Param => 'ID',
         Raw   => 1,     # optional, input data is not changed
+    );
+
+Returns:
+
+    my @Param = (
+        1,
+        2,
     );
 
 =cut
@@ -245,7 +329,10 @@ gets file upload data.
         Param  => 'FileParam',  # the name of the request parameter containing the file data
     );
 
-    returns (
+
+Returns:
+
+    my %File = (
         Filename    => 'abc.txt',
         ContentType => 'text/plain',
         Content     => 'Some text',

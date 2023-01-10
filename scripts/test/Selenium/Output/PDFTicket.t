@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -26,8 +26,9 @@ if ( $Selenium->{browser_name} ne 'firefox' ) {
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $RandomID     = $HelperObject->GetRandomID();
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $RandomID        = $HelperObject->GetRandomID();
+        my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
 
         # Do not check email addresses.
         $HelperObject->ConfigSettingChange(
@@ -73,6 +74,49 @@ $Selenium->RunTest(
             "Created QueueID $QueueID"
         );
 
+        my %ITSMCoreSLA;
+        my %ITSMCoreService;
+
+        if ($IsITSMInstalled) {
+
+            # get the list of service types from general catalog
+            my $ServiceTypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+                Class => 'ITSM::Service::Type',
+            );
+
+            # build a lookup hash
+            my %ServiceTypeName2ID = reverse %{$ServiceTypeList};
+
+            # get the list of sla types from general catalog
+            my $SLATypeList = $Kernel::OM->Get('Kernel::System::GeneralCatalog')->ItemList(
+                Class => 'ITSM::SLA::Type',
+            );
+
+            # build a lookup hash
+            my %SLATypeName2ID = reverse %{$SLATypeList};
+
+            %ITSMCoreSLA = (
+                TypeID => $ServiceTypeName2ID{Training},
+            );
+
+            %ITSMCoreService = (
+                TypeID      => $ServiceTypeName2ID{Training},
+                Criticality => '3 normal',
+            );
+
+            # Get the current setting for customer ticket print
+            my %CustomerTicketPrintSysConfig = $Kernel::OM->Get('Kernel::System::SysConfig')->SettingGet(
+                Name => 'CustomerFrontend::Module###CustomerTicketPrint',
+            );
+
+            # Make sure CustomerTicket print is enabled.
+            $HelperObject->ConfigSettingChange(
+                Valid => 1,
+                Key   => 'CustomerFrontend::Module###CustomerTicketPrint',
+                Value => $CustomerTicketPrintSysConfig{EffectiveValue},
+            );
+        }
+
         # Create Service.
         my $ServiceName = 'Servi' . $RandomID;
         my $ServiceID   = $Kernel::OM->Get('Kernel::System::Service')->ServiceAdd(
@@ -80,6 +124,7 @@ $Selenium->RunTest(
             ValidID => 1,
             Comment => 'Selenium Service',
             UserID  => 1,
+            %ITSMCoreService,
         );
         $Self->True(
             $ServiceID,
@@ -97,6 +142,7 @@ $Selenium->RunTest(
             ValidID           => 1,
             Comment           => 'Selenium SLA',
             UserID            => 1,
+            %ITSMCoreSLA,
         );
         $Self->True(
             $QueueID,
@@ -1079,6 +1125,14 @@ $Selenium->RunTest(
                 Message => "QueueID $QueueID is deleted",
             },
         );
+        if ($IsITSMInstalled) {
+            push @DeleteData, {
+                SQL     => "DELETE FROM service_preferences WHERE service_id = ?",
+                Bind    => $ServiceID,
+                Message => "Service preferences for $ServiceID is deleted",
+                },
+                ;
+        }
 
         my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
         for my $Item (@DeleteData) {

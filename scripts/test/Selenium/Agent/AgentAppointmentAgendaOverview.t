@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -199,7 +199,7 @@ $Selenium->RunTest(
         $Selenium->WaitFor(
             JavaScript => "return typeof(\$) === 'function' && \$('.Dialog.Modal #EditFormDelete').length"
         );
-        $Selenium->find_element("#EditFormDelete", 'css')->click();
+        $Selenium->find_element( "#EditFormDelete", 'css' )->click();
 
         sleep 2;
         $Selenium->WaitFor( AlertPresent => 1 ) || die "Alert for delete not found";

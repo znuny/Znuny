@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -7,7 +7,7 @@
 # --
 
 # because of direct open() calls
-## nofilter(TidyAll::Plugin::OTRS::Perl::PerlCritic)
+## nofilter(TidyAll::Plugin::Znuny::Perl::PerlCritic)
 
 package Kernel::System::DBCRUD;
 
@@ -35,7 +35,6 @@ our @ObjectDependencies = (
     'Kernel::System::YAML',
     'Kernel::System::DBCRUD::Format',
 );
-
 
 =head2 new()
 

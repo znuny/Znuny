@@ -3193,7 +3193,7 @@ Please note, that the delivery of an email article of [<OTRS_CONFIG_Ticket::Hook
 Error Message:
 <OTRS_AGENT_TransmissionStatusMessage>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_AGENT_ArticleID>
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_TICKET_LAST_ARTICLE_ID>
 
 -- <OTRS_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
@@ -3208,7 +3208,7 @@ Felhívjuk a figyelmét, hogy a(z) [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticke
 Hibaüzenet:
 <OTRS_AGENT_TransmissionStatusMessage>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_AGENT_ArticleID>
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_TICKET_LAST_ARTICLE_ID>
 
 -- <OTRS_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
@@ -3250,6 +3250,28 @@ INSERT INTO dynamic_field (internal_field, name, label, field_order, field_type,
     VALUES
     (1, 'ProcessManagementAttachment', 'Attachment', 1, 'TextArea', 'Ticket', '---
 DefaultValue: ''''
+', 1, 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table dynamic_field
+-- ----------------------------------------------------------
+INSERT INTO dynamic_field (internal_field, name, label, field_order, field_type, object_type, config, valid_id, create_by, create_time, change_by, change_time)
+    VALUES
+    (0, 'TicketCalendarStartTime', 'Ticket Calendar StartTime', 1, 'DateTime', 'Ticket', '---
+DefaultValue: 0,
+YearsInFuture: 0,
+YearsInPast: 0,
+YearsPeriod: 0,
+', 1, 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table dynamic_field
+-- ----------------------------------------------------------
+INSERT INTO dynamic_field (internal_field, name, label, field_order, field_type, object_type, config, valid_id, create_by, create_time, change_by, change_time)
+    VALUES
+    (0, 'TicketCalendarEndTime', 'Ticket Calendar EndTime', 1, 'DateTime', 'Ticket', '---
+DefaultValue: 0,
+YearsInFuture: 0,
+YearsInPast: 0,
+YearsPeriod: 0,
 ', 1, 1, current_timestamp, 1, current_timestamp);
 SET DEFINE OFF;
 SET SQLBLANKLINES ON;

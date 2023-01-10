@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -958,7 +958,7 @@ sub _GetParam {
     my $ActivityDialogEntityID = $ParamObject->GetParam(
         Param => 'ActivityDialogEntityID',
     );
-    my $ActivityEntityID;
+    my $ActivityEntityID = $ParamObject->GetParam( Param => 'ActivityEntityID' );
     my %ValuesGotten;
     my $Value;
 
@@ -1728,6 +1728,7 @@ sub _OutputActivityDialog {
             Subaction              => 'StoreActivityDialog',
             TicketID               => $Ticket{TicketID} || '',
             LinkTicketID           => $Self->{LinkTicketID},
+            ActivityEntityID       => $ActivityActivityDialog->{Activity},
             ActivityDialogEntityID => $ActivityActivityDialog->{ActivityDialog},
             ProcessEntityID        => $Param{ProcessEntityID}
                 || $Ticket{
@@ -2852,8 +2853,8 @@ sub _RenderArticle {
         Name             => 'Article',
         MandatoryClass   => '',
         ValidateRequired => '',
-        Subject          => $Param{GetParam}->{Subject},
-        Body             => $Param{GetParam}->{Body},
+        Subject          => $Param{GetParam}->{Subject} || $Param{ActivityDialogField}->{Config}->{Subject},
+        Body             => $Param{GetParam}->{Body} || $Param{ActivityDialogField}->{Config}->{Body},
         LabelSubject     => $Param{ActivityDialogField}->{Config}->{LabelSubject}
             || $LayoutObject->{LanguageObject}->Translate("Subject"),
         LabelBody => $Param{ActivityDialogField}->{Config}->{LabelBody}
@@ -6585,7 +6586,7 @@ sub _GetQueues {
 
             if ( $ConfigObject->Get('Ticket::Frontend::NewQueueSelectionType') ne 'Queue' )
             {
-                my %SystemAddressData = $Self->{SystemAddress}->SystemAddressGet(
+                my %SystemAddressData = $Kernel::OM->Get('Kernel::System::SystemAddress')->SystemAddressGet(
                     ID => $Queues{$QueueID},
                 );
                 $String =~ s/<Realname>/$SystemAddressData{Realname}/g;

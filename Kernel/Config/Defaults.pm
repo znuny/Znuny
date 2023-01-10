@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -10,7 +10,8 @@
 # Default configuration for OTRS. All changes to this file will be lost after an
 #   update, please use AdminSystemConfiguration to configure your system.
 
-## nofilter(TidyAll::Plugin::OTRS::Perl::LayoutObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
+## nofilter(TidyAll::Plugin::Znuny::CodeStyle::STDERRCheck)
 
 package Kernel::Config::Defaults;
 
@@ -1672,6 +1673,8 @@ via the Preferences button after logging in.
         CustomerCompanySearchSuffix    => '*',
         CustomerCompanySearchListLimit => 250,
         CacheTTL                       => 60 * 60 * 24, # use 0 to turn off cache
+#        # Consider this source read only.
+#        ReadOnly => 1,
 
         Map => [
             # Info about dynamic fields:
@@ -2102,7 +2105,7 @@ sub Set {
     return 1;
 }
 
-## nofilter(TidyAll::Plugin::OTRS::Perl::Translatable)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Translatable)
 
 # This is a no-op to mark a text as translatable in the Perl code.
 #   We use our own version here instead of importing Language::Translatable to not add a dependency.
@@ -2171,7 +2174,7 @@ sub AutoloadPerlPackages {
             # Don't use the MainObject here to load the file.
             eval {
                 my $FileName = $Package =~ s{::}{/}smxgr;
-                require $FileName . '.pm'; ## nofilter(TidyAll::Plugin::OTRS::Perl::Require)
+                require $FileName . '.pm'; ## nofilter(TidyAll::Plugin::Znuny::Perl::Require)
             };
         }
     }

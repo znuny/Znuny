@@ -22,11 +22,14 @@ Dusan Vuckovic <dusan.vuckovic@otrs.com> vuckovicd <dusan.vuckovic@muehlbVuckovi
 Elias Probst <elias.probst@otrs.com> <mail@eliasprobst.eu>
 Gerald Young <gerald.young@noynim.com> Gerald Young <help@gwy.org>
 Henrik Vetter <hv@znuny.com> Tronsy <77062636+Tronsy@users.noreply.github.com>
+Lukas Bröring <lukas.broering@sectornord.de> lbroering <lukas.broering@sectornord.de>
+Lukas Bröring <lukas.broering@sectornord.de> Lukas Bröring SectorNord AG <91135132+LuBroering@users.noreply.github.com>
 Jens Bothe <jens.bothe@otrs.com> jensoliver <jojo@jbothe.de>
 Jens Pfeifer <jp@znuny.com> Jens Pfeifer <jens.pfeifer@otrs.com>
 Jens Pfeifer <jp@znuny.com> Jens Pfeifer <jens.pfeifer@znuny.com>
 Jens Pfeifer <jp@znuny.com> Jens Pfeifer <mail@jenspfeifer.de>
 Kamil Furtek <kfurtek@dev.opgksoftware.com> Kamil Furtek <kfurtek@opgksoftware.com>
+Kevin Janssen <77158891+BuTzZ@users.noreply.github.com> root <k.janssen@posteo.de>
 Konrad Gumienny <kgumienny@dev.opgksoftware.com> Konrad <kgumienny@dev.opgksoftware.com>
 Konrad Gumienny <kgumienny@dev.opgksoftware.com> Konrad Gumienny <kgumienny@opgksoftware.com>
 Johannes Hörburger <johannes.hoerburger@otrs.com>
@@ -47,10 +50,13 @@ Milan Rakic <mrakic@s7designcreative.com> Milan Rakic <mrakic@s7designcreatieve.
 Milan Rakic <mrakic@s7designcreative.com> Milan Rakic <mrakic@s7designcreative>
 Milan Rakic <mrakic@s7designcreative.com> Milan Rakid <mrakic@s7designcreative.com>
 Moritz Lenz <mlenz@noris.net> Moritz Lenz <moritz@faui2k3.org>
+Niklas Schmitt <ns@znuny.com> Niklas <ns@znuny.com>
 Nils Leideck <nils.leideck@otrs.com> Nils Leideck <nils.leideck@leidex.net>
 Nils Leideck <nils.leideck@otrs.com> nilei <nils.leideck@leidex.net>
-Paul Folkers <83212096+paulfolkers@users.noreply.github.com> Paul Folkers (Sector Nord AG) <83212096+paulfolkers@users.noreply.github.com>
-Paul Folkers <83212096+paulfolkers@users.noreply.github.com> paulfolkers <83212096+paulfolkers@users.noreply.github.com>
+Paul Folkers <paul.folkers@sectornord.de> Paul Folkers (Sector Nord AG) <83212096+paulfolkers@users.noreply.github.com>
+Paul Folkers <paul.folkers@sectornord.de> paulfolkers <83212096+paulfolkers@users.noreply.github.com>
+Paul Folkers <paul.folkers@sectornord.de> paulfolkers <paul.folkers@sectornord.de>
+Paweł Bogusławski <pawel.boguslawski@ib.pl> Pawel Boguslawski <pawel.boguslawski@ib.pl>
 Renée Bäcker <info@perl-services.de> <github@renee-baecker.de>
 Renée Bäcker <info@perl-services.de> <renee.baecker@otrs.com>
 Renée Bäcker <info@perl-services.de> Renee <reb@perl-services.de>
@@ -71,6 +77,7 @@ Sławomir Niedbała <sniedbala@dev.opgksoftware.com> Slawomir Niedbala <sniedbal
 Sławomir Niedbała <sniedbala@dev.opgksoftware.com> Slawomir <sniedbala@dev.opgksoftware.com>
 Sławomir Niedbała <sniedbala@dev.opgksoftware.com> Slawomir <sniedbala@opgksoftware.com>
 Sławomir Niedbała <sniedbala@dev.opgksoftware.com> Sławomir Niedbała <sniedbala@opgksoftware.com>
+Tim Puettmanns <tim.puettmanns@maxence.de> tipue <tim.puettmanns@maxence.de>
 Thorsten Eckel <te@znuny.com> Thorsten <thorsteneckel@posteo.de>
 Thorsten Eckel <te@znuny.com> Thorsten Eckel <te@zammad.com>
 Thorsten Eckel <te@znuny.com> Thorsten Eckel <thorsten.eckel@otrs.com>
@@ -85,8 +92,8 @@ Zoran Ilibasic <zilibasic@s7designcreative.com> Zoran Ilibasic <zilibasic@s7desi
 tipue <tim.puettmanns@maxence.de> tipue <80031303+tipue-dev@users.noreply.github.com>
 
 # Assign unknown entries to anonymous
-anonymous <unknown@anonymous> Weblate Admin <operations@znuny.com>
-anonymous <unknown@anonymous> Weblate <noreply@weblate.org>
+Znuny Weblate <do-not-reply@znuny.com> Weblate Admin <operations@znuny.com>
+Znuny Weblate <do-not-reply@znuny.com> Weblate <noreply@weblate.org>
 anonymous <unknown@anonymous> atif <>
 anonymous <unknown@anonymous> nicolas <>
 anonymous <unknown@anonymous> otrsintern <otrsintern@gmail.com>

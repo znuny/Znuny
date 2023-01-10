@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -7,7 +7,6 @@
 # --
 
 package Kernel::System::CalendarEvents::ICS;
-## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::SpellCheck)
 
 use strict;
 use warnings;
@@ -47,20 +46,9 @@ sub new {
     my $Self = {%Param};
     bless( $Self, $Type );
 
-    $Self->{TimeZonesMap} = {
-        'Pacific Standard Time'   => 'PST8PDT',
-        'W. Europe Standard Time' => 'WET',
-        'Mountain Standard Time'  => 'MST7MDT',
-        'Central Standard Time'   => 'CST6CDT',
-        'Eastern Standard Time'   => 'EST5EDT',
-        'Etc/GMT+10'              => 'HST',
-        'Etc/GMT+5'               => 'EST',
-        'Etc/GMT+7'               => 'MST',
-        'ROK'                     => 'Asia/Seoul',
-        'ROC'                     => 'Asia/Taipei',
-        'Cuba'                    => 'America/Havana',
-        'Jamaica'                 => 'America/Jamaica',
-    };
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    $Self->{TimeZonesMap} = $ConfigObject->Get('AppointmentCalendar::NonStandardTimeZonesMapping') // {};
 
     $Self->{GlobalPropertiesMap} = {
         Events => {

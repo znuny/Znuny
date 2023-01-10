@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -53,13 +53,13 @@ my @DynamicFields = (
         Name       => $DynamicField,
         Label      => $DynamicField,
         ObjectType => 'Ticket',
-        FieldType  => 'WebserviceText',
+        FieldType  => 'WebserviceDropdown',
         Config     => {
             DefaultValue  => '',
             Link          => '',
             InvokerSearch => 'TestSearch',
             InvokerGet    => 'TestGet',
-            Webservice    => $WebserviceName
+            Webservice    => $WebserviceName,
         },
     },
 );

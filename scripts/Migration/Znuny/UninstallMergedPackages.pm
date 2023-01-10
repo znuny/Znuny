@@ -1,12 +1,12 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-## nofilter(TidyAll::Plugin::OTRS::Perl::Pod::NamePod)
+## nofilter(TidyAll::Plugin::Znuny::Perl::Pod::NamePod)
 
 package scripts::Migration::Znuny::UninstallMergedPackages;    ## no critic
 
@@ -46,14 +46,14 @@ sub Run {
     );
 
     # Note: Znuny and Znuny4OTRS in case one of the packages later will be built with the Znuny prefix
-    my @PackageName = (
-        qw(
-            Znuny-SMIME
-            )
+    my @PackageNames = (
+
+        #         'Znuny-SMIME',
+        #         'Znuny4OTRS-SMIME',
     );
 
     PACKAGENAME:
-    for my $PackageName (@PackageName) {
+    for my $PackageName (@PackageNames) {
         my $Success = $PackageObject->_PackageUninstallMerged(
             Name => $PackageName,
         );

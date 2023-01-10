@@ -4946,7 +4946,7 @@
         <Navigation>Frontend::Agent::ToolBar</Navigation>
         <Value>
             <Hash>
-                <Item Key="Module">Kernel::Output::HTML::ToolBar::Link</Item>
+                <Item Key="Module">Kernel::Output::HTML::ToolBar::TicketProcess</Item>
                 <Item Key="Name" Translatable="1">New process ticket</Item>
                 <Item Key="Link">Action=AgentTicketProcess</Item>
                 <Item Key="Action">AgentTicketProcess</Item>
