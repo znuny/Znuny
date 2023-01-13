@@ -1,4 +1,5 @@
 # 6.5.1 2023-??-??
+ - 2023-01-10 Sector Nord AG: Fixed popup description long were cut off in Customer Interface. Thanks to Sector Nord AG (@jsinagowitz). [PR#331](https://github.com/znuny/Znuny/pull/331)
  - 2023-01-09 Integrated package Znuny4OTRS-UserMaxArticlesPerPage.
  - 2023-01-06 Fixed 'ACL misbehaviour in processes' - ActivityEntityID is missing in AgentTicketProcess.pm. [#316](https://github.com/znuny/Znuny/issues/316)
  - 2023-01-05 Fixed JavaScript error in edit-mode in AdminACL.
