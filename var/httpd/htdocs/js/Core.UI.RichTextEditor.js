@@ -316,7 +316,7 @@ Core.UI.RichTextEditor = (function (TargetNS) {
             height:                    Core.Config.Get('RichText.Height', 320),
             removePlugins:             RemovedCKEditorPlugins,
             forcePasteAsPlainText:     false,
-            format_tags:               'p;h1;h2;h3;h4;h5;h6;pre',
+            format_tags:               Core.Config.Get('RichText.FormatTags', 'p;h1;h2;h3;h4;h5;h6;pre'),
             fontSize_sizes:            Core.Config.Get('RichText.FontSizes', '8px;10px;12px;14px;16px;18px;20px;22px;24px;26px;28px;30px;'),
             font_names:                Core.Config.Get('RichText.FontNames', ''),
             extraAllowedContent:       Core.Config.Get('RichText.ExtraAllowedContent', 'div[type]{*}; img[*]; col[width]; style[*]{*}; *[id](*)'),
