@@ -50,7 +50,7 @@ After you filed the issue:
 * If we are able to reproduce the issue, we will label it accordingly and try to fix it.
 
 Special Case:
-Security issues. If you want to report a security issue, please see the [Security.md] (https://github.com/znuny/Znuny/blob/dev/SECURITY.md#how-to-report-a-security-vulnerability)
+Security issues. If you want to report a security issue, please see the [Security.md](https://github.com/znuny/Znuny/blob/dev/SECURITY.md#how-to-report-a-security-vulnerability)
 
 Note: if you don't reply on questions, we will close the issue after 30 days. This is just a measure to keep our issue list clean.
 
@@ -74,7 +74,7 @@ the community members and the team dont know what you want to achieve or what yo
 
 If you need a new feature, feel free to follow these steps:
 
-* Open an issue in the [featufre request repository](https://github.com/znuny/znuny-feature-requests/issues)
+* Open an issue in the [feature request repository](https://github.com/znuny/znuny-feature-requests/issues)
 * Please describe your wish as detailed as possible
 * Keep in mind that it should be a general feature, not one which is only for your specific usecase
 * If similiar features are available, please explain why they won't work for you
