@@ -23,6 +23,7 @@ our @ObjectDependencies = (
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
     'Kernel::System::Group',
+    'Kernel::System::JSON',
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::Queue',
@@ -40,6 +41,22 @@ sub new {
 
     # get UserID param
     $Self->{UserID} = $Param{UserID} || die "Got no UserID!";
+
+    my %Preferences = $Kernel::OM->Get('Kernel::System::User')->GetPreferences(
+        UserID => $Self->{UserID},
+    );
+
+    # get JSON object
+    my $JSONObject = $Kernel::OM->Get('Kernel::System::JSON');
+
+    # set stored filters if present
+    my $StoredFiltersKey = 'UserStoredFilterColumns-' . $Self->{Action};
+    if ( $Preferences{$StoredFiltersKey} ) {
+        my $StoredFilters = $JSONObject->Decode(
+            Data => $Preferences{$StoredFiltersKey},
+        );
+        $Self->{StoredFilters} = $StoredFilters;
+    }
 
     return $Self;
 }
