@@ -1509,7 +1509,7 @@ sub ToolbarModules {
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     my %Modules;
-    my %Jobs = %{$Param{ToolBarModule}};
+    my %Jobs = %{ $Param{ToolBarModule} };
 
     # get group object
     my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
