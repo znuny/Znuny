@@ -488,7 +488,7 @@ sub Run {
     elsif ( $Self->{Subaction} eq 'ToolbarFetch' ) {
         my $ToolBarModule = $ConfigObject->Get('Frontend::ToolBarModule');
         my $ToolbarItems;
-        if ( ref $ToolBarModule eq 'HASH' ) {
+        if ( IsHashRefWithData($ToolBarModule) ) {
             $ToolbarItems = $LayoutObject->ToolbarModules(
                 ToolBarModule => $ToolBarModule,
                 ReturnResult  => 1,
