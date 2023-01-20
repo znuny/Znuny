@@ -1,4 +1,9 @@
 # 6.5.1 2023-??-??
+ - 2023-01-20 Added SysConfig setting to configure format tags in rich text editor. Thanks to Daniel Sprenger (@sprengerdaniel). [PR#334](https://github.com/znuny/Znuny/pull/334)
+ - 2023-01-20 Fixed "NoPermission" screen to use "CustomerNoPermission" for ACL checking. Thanks to Sector Nord AG (@paulfolkers). [PR#333](https://github.com/znuny/Znuny/pull/333)
+ - 2023-01-20 Fixed reloading of the toolbar modules. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#317](https://github.com/znuny/Znuny/pull/317)
+ - 2023-01-20 Fixed hidden TicketOverview filters for Medium and Preview. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#301](https://github.com/znuny/Znuny/pull/301)
+ - 2023-01-20 Fixed uninitialized value warning in AdminSystemMaintenance. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#298](https://github.com/znuny/Znuny/pull/298)
  - 2023-01-10 Sector Nord AG: Fixed popup description long were cut off in Customer Interface. Thanks to Sector Nord AG (@jsinagowitz). [PR#331](https://github.com/znuny/Znuny/pull/331)
  - 2023-01-09 Integrated package Znuny4OTRS-UserMaxArticlesPerPage.
  - 2023-01-06 Fixed 'ACL misbehaviour in processes' - ActivityEntityID is missing in AgentTicketProcess.pm. [#316](https://github.com/znuny/Znuny/issues/316)
