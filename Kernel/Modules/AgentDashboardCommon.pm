@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -161,6 +161,10 @@ sub Run {
     my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
     my $SessionObject      = $Kernel::OM->Get('Kernel::System::AuthSession');
     my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
+
+    my %Preferences = $UserObject->GetPreferences(
+        UserID => $Self->{UserID},
+    );
 
     # update/close item
     if ( $Self->{Subaction} eq 'UpdateRemove' ) {
@@ -660,6 +664,8 @@ sub Run {
         push @Order, $Name;
     }
 
+    $Self->{UserDashboardWidgetExpand} = $Preferences{UserDashboardWidgetExpand} || 'All';
+
     if ( !$Self->{UserDashboardWidgetExpand} || $Self->{UserDashboardWidgetExpand} eq 'All' ) {
         $Param{ClassDashboardWidgetExpandAll} = 'active';
         $LayoutObject->AddJSData(
@@ -671,7 +677,10 @@ sub Run {
     # get default columns
     my $Columns = $Self->{Config}->{DefaultColumns} || $ConfigObject->Get('DefaultOverviewColumns') || {};
 
-    if ($BackendConfigKey eq 'DashboardBackend' ) {
+    $Param{ActiveContentLargeWidgets} = 0;
+
+    if ( $BackendConfigKey eq 'DashboardBackend' ) {
+
         # rendering dashboard widget expand menu
         $LayoutObject->Block(
             Name => 'DashboardWidgetExpand',
@@ -707,8 +716,9 @@ sub Run {
 
         push @ContainerNames, \%JSData;
 
-        if ($BackendConfigKey eq 'DashboardBackend' && $Element{Config}->{Block} eq 'ContentLarge' ) {
+        if ( $BackendConfigKey eq 'DashboardBackend' && $Element{Config}->{Block} eq 'ContentLarge' ) {
 
+            $Param{ActiveContentLargeWidgets}++;
             my $WidgetName = $Name;
             my $Class;
             if ( $Self->{UserDashboardWidgetExpand} && $Self->{UserDashboardWidgetExpand} eq $WidgetName ) {
@@ -854,6 +864,13 @@ sub Run {
             );
         }
     }
+
+    $LayoutObject->Block(
+        Name => 'DashboardWidgetExpandContent',
+        Data => {
+            %Param,
+        },
+    );
 
     # send data to JS
     $LayoutObject->AddJSData(

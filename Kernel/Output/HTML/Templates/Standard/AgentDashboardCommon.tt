@@ -12,15 +12,24 @@
 [% RenderBlockStart("DashboardWidgetExpand") %]
 <div class="DashboardWidgetExpand">
     <ul>
-        <li class="DashboardWidgetExpandListItem" data-widget-name="All">
-            <a class="[% Data.ClassDashboardWidgetExpandAll | html %]">All</a>
-        </li>
+        [% RenderBlockStart("DashboardWidgetExpandContent") %]
+            [% IF Data.ActiveContentLargeWidgets %]
+            <li class="DashboardWidgetExpandListItem" data-widget-name="All">
+                <a class="[% Data.ClassDashboardWidgetExpandAll | html %]">All</a>
+            </li>
+            [% ELSE %]
+            <li>
+                [% Translate('No Data Available.') | html %]
+            </li>
+            [% END %]
+        [% RenderBlockEnd("DashboardWidgetExpandContent") %]
+
         [% RenderBlockStart("DashboardWidgetExpandListItem") %]
-        <li class="DashboardWidgetExpandListItem" data-widget-name="[% Data.Name | html %]" >
-            <a class="[% Data.Class | html %]">
-                [% Translate(Data.Title) | html %]
-            </a>
-        </li>
+            <li class="DashboardWidgetExpandListItem" data-widget-name="[% Data.Name | html %]" >
+                <a class="[% Data.Class | html %]">
+                    [% Translate(Data.Title) | html %]
+                </a>
+            </li>
         [% RenderBlockEnd("DashboardWidgetExpandListItem") %]
     </ul>
 </div>
@@ -55,7 +64,7 @@
                             <ul class="dropdown-search-menu scroll-bar-styled"></ul>
                     </span>
 
-                    <label class="title uppercase">Active Widgets</label>
+                    <label id="ActiveWidgetsLabel" class="title uppercase">[% Translate('Active Widgets') | html %]</label>
                     <ul class="active-widgets-list">
                         [% RenderBlockStart("ContentSettings") %]
                         <li data-widget-name="[% Data.Name | html %]">
@@ -98,7 +107,7 @@
                                     <span class="iconWrapper">
                                         <i class="fa fa-cog"></i>
                                     </span>
-                                    <span class="textWrapper">Settings</span>
+                                    <span class="textWrapper">[% Translate('Settings') | html %]</span>
                                 </a>
                             </div>
                             [% RenderBlockEnd("ContentSmallPreferences") %]
@@ -111,7 +120,7 @@
                                     <span class="iconWrapper">
                                         <i class="fa fa-refresh"></i>
                                     </span>
-                                    <span class="textWrapper">Refresh</span>
+                                    <span class="textWrapper">[% Translate('Refresh') | html %]</span>
                                 </a>
                             </div>
                             [% RenderBlockEnd("ContentSmallRefresh") %]
@@ -126,7 +135,7 @@
                                     <span class="iconWrapper">
                                         <i class="fa fa-times"></i>
                                     </span>
-                                    <span class="textWrapper">Hide</span>
+                                    <span class="textWrapper">[% Translate('Hide') | html %]</span>
                                 </a>
                             </div>
                             [% RenderBlockEnd("ContentSmallRemove") %]
@@ -247,7 +256,7 @@
                                     <span class="iconWrapper">
                                         <i class="fa fa-cog"></i>
                                     </span>
-                                    <span class="textWrapper">Settings</span>
+                                    <span class="textWrapper">[% Translate('Settings') | html %]</span>
                                 </a>
                             </div>
                             [% RenderBlockEnd("ContentLargePreferences") %]
@@ -261,7 +270,7 @@
                                     <span class="iconWrapper">
                                         <i class="fa fa-times"></i>
                                     </span>
-                                    <span class="textWrapper">Hide</span>
+                                    <span class="textWrapper">[% Translate('Hide') | html %]</span>
                                 </a>
                             </div>
                             [% RenderBlockEnd("ContentLargeRemove") %]
