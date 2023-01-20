@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -478,6 +478,11 @@ Core.UI.Dialog = (function (TargetNS) {
 
         // Check window height and adjust the scrollable height of InnerContent
         AdjustScrollableHeight(Params.AllowAutoGrow);
+
+        // add resize css attribute
+        $('.Dialog:visible .Content').css('resize', 'both');
+        $('.Dialog:visible .Content').css('max-height', 'fit-content');
+        $('.Dialog:visible .Content .InnerContent').css('max-height', 'fit-content');
 
         // Adjust dialog position on mobile devices
         if (FullsizeMode) {

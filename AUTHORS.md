@@ -50,7 +50,7 @@ The following persons contributed to Znuny:
 * Konrad Gumienny <kgumienny@dev.opgksoftware.com>
 * LotharZok <111051858+LotharZok@users.noreply.github.com>
 * Luca Maranzano <liuk@linux.it>
-* Lukas Bröring SectorNord AG <91135132+LuBroering@users.noreply.github.com>
+* Lukas Bröring <lukas.broering@sectornord.de>
 * Manuel Hecht <manuel.hecht@otrs.com>
 * Marc Bonsels <marc.bonsels@otrs.com>
 * Marc Nilius <marc.nilius@otrs.com>
@@ -69,6 +69,7 @@ The following persons contributed to Znuny:
 * Never <never.min@gmail.com>
 * NeverMin <never.min@gmail.com>
 * Niels Dimmers <niels@nielsdimmers.nl>
+* Niklas Schmitt <ns@znuny.com>
 * Nils Fiedler <nils.fiedler@otrs.com>
 * Nils Leideck <nils.leideck@otrs.com>
 * Norihiro Tanaka <noritnk@kcn.ne.jp>
@@ -77,7 +78,7 @@ The following persons contributed to Znuny:
 * Olivier Sallou <olivier.sallou@irisa.fr>
 * Patrick Brischler <patrick.brischler@otrs.com>
 * Patrick Rauscher <prauscher@ohai.su>
-* Paul Folkers <83212096+paulfolkers@users.noreply.github.com>
+* Paul Folkers <paul.folkers@sectornord.de>
 * Paul Waring <paul@xk7.net>
 * Paweł Bogusławski <pawel.boguslawski@ib.pl>
 * Peter Krantz <peter@peterkrantz.se>
@@ -102,12 +103,14 @@ The following persons contributed to Znuny:
 * Thomas Raith <thomas.raith@otrs.com>
 * Thomas Wouters <thomas@sijn.org>
 * Thorsten Eckel <te@znuny.com>
+* Tim Puettmanns <tim.puettmanns@maxence.de>
 * Torsten Thau <Torsten.Thau@cape-it.de>
 * Udo Bretz <udo.bretz@otrs.com>
 * Uwe Dieckmann <uwe.dieckmann@otrs.com>
 * Walter Souto <walter.souto@saude.go.gov.br>
 * Wojciech Kuchta <klapi85@gmail.com>
 * Yuri Myasoedov <ymyasoedov@yandex.ru>
+* Znuny Weblate <do-not-reply@znuny.com>
 * Zoran Ilibasic <zilibasic@s7designcreative.com>
 * akmet <akmet@users.noreply.github.com>
 * anonymous <unknown@anonymous>

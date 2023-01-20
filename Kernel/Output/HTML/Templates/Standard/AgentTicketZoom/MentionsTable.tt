@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -15,9 +15,9 @@
     <div class="Content">
         <ul>
 [% RenderBlockStart("User") %]
-            <li style="word-wrap: break-word;">-[% Data.UserFullname %]
+            <li style="word-wrap: break-word;">-[% Data.UserFullname | html %]
                 [% IF Data.Removable %]
-                    <a href="#" data-user-id=[% Data.UserID %] class="MentionRow"><i class="fa fa-trash"></i></a>
+                    <a href="#" data-user-id=[% Data.UserID | html %] class="MentionRow"><i class="fa fa-trash"></i></a>
                 [% END %]
             </li>
 [% RenderBlockEnd("User") %]

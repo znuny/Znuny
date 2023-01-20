@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -97,7 +97,12 @@ sub Run {
     my $Product = $ConfigObject->Get('Product') . " " . $ConfigObject->Get('Version');
     my $Home    = $ConfigObject->Get('Home');
 
+    # Replace ".t" at the end for every "--test"-option to support commands like this:
+    # ./bin/otrs.Console.pl Dev::UnitTest::Run --verbose --test scripts/test/Mentions/MentionsPermissionCheck.t
     my @TestsToExecute = @{ $Param{Tests} // [] };
+
+    # Search and replace ".t" but if not found return $_ that tests without ".t" get inserted into the array again.
+    @TestsToExecute = map { $_ =~ s{\.t\z}{}; $_ } @TestsToExecute;    ## no critic
 
     my $UnitTestBlacklist = $ConfigObject->Get('UnitTest::Blacklist');
     my @BlacklistedTests;

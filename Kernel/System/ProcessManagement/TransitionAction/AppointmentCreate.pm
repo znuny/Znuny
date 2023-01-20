@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -151,7 +151,6 @@ sub Run {
     if ( $Param{Config}->{CalendarName} ) {
         my %Calendar = $CalendarObject->CalendarGet(
             CalendarName => $Param{Config}->{CalendarName},
-            UserID       => 1,
         );
 
         $Param{Config}->{CalendarID} = $Calendar{CalendarID};

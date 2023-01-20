@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -123,7 +123,10 @@ Core.Installer = (function (TargetNS) {
      */
     function CheckMailConfigCallback(json) {
         if (parseInt(json.Successful, 10) === 1) {
-            alert(Core.Language.Translate('Mail check successful.'));
+            Core.UI.Dialog.ShowAlert(
+                Core.Language.Translate('An Error Occurred'),
+                Core.Language.Translate('Mail check successful.')
+            );
             $('fieldset.errormsg').hide();
             $('input[name=Subaction]').val('Finish');
             $('form').submit();
@@ -131,7 +134,10 @@ Core.Installer = (function (TargetNS) {
         else {
             $('#FormMailResultMessage').html(json.Message);
             $('fieldset.ErrorMsg').show();
-            alert(Core.Language.Translate('Error in the mail settings. Please correct and try again.'));
+            Core.UI.Dialog.ShowAlert(
+                Core.Language.Translate('An Error Occurred'),
+                Core.Language.Translate('Error in the mail settings. Please correct and try again.')
+            );
         }
     }
 

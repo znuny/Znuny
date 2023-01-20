@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -683,15 +683,21 @@ Core.Agent = (function (TargetNS) {
 
         if (TargetNS.IECompatibilityMode) {
             TargetNS.SupportedBrowser = false;
-            alert(Core.Language.Translate('Please turn off Compatibility Mode in Internet Explorer!'));
+            Core.UI.Dialog.ShowAlert(
+                Core.Language.Translate('An Error Occurred'),
+                Core.Language.Translate('Please turn off Compatibility Mode in Internet Explorer!')
+            );
         }
 
         if (!TargetNS.SupportedBrowser) {
-            alert(Core.Language.Translate('The browser you are using is too old.')
+            Core.UI.Dialog.ShowAlert(
+                Core.Language.Translate('An Error Occurred'),
+                Core.Language.Translate('The browser you are using is too old.')
                 + ' '
                 + Core.Language.Translate('This software runs with a huge lists of browsers, please upgrade to one of these.')
                 + ' '
-                + Core.Language.Translate('Please see the documentation or ask your admin for further information.'));
+                + Core.Language.Translate('Please see the documentation or ask your admin for further information.')
+            );
         }
 
         Core.App.Responsive.CheckIfTouchDevice();

@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -103,9 +103,6 @@ $Selenium->RunTest(
             ValidID => 1,
             UserID  => 1,
         );
-
-        # Change resolution (desktop mode).
-        $Selenium->set_window_size( 768, 1050 );
 
         # Create test user.
         my $Language      = 'en';
@@ -274,8 +271,8 @@ $Selenium->RunTest(
             Element => '#CalendarID',
             Value   => $Calendar1{CalendarID},
         );
-        $Selenium->find_element( '#EndHour',     'css' )->send_keys('18');
-        $Selenium->find_element( '.PluginField', 'css' )->send_keys($TicketNumber);
+        $Selenium->find_element( '#EndHour',    'css' )->send_keys('18');
+        $Selenium->find_element( '#TicketLink', 'css' )->send_keys($TicketNumber);
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("li.ui-menu-item:visible").length;' );
         $Selenium->execute_script("\$('li.ui-menu-item:contains($TicketNumber)').click();");
 
