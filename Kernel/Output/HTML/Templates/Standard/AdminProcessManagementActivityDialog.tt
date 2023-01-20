@@ -215,7 +215,7 @@
             <fieldset class="TableLike">
                 <label for="DescShort">[% Translate("Description (short)") | html %]:</label>
                 <div class="Field">
-                    <input type="text" name="DescShort" id="DescShort" value="" class="W50pc" maxlength="70"/>
+                    <input type="text" name="DescShort" id="DescShort" value="" class="W50pc"/>
                 </div>
                 <div class="Clear"></div>
 
