@@ -22,14 +22,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-07-01 07:05+0000\n"
-"PO-Revision-Date: 2022-11-19 21:24+0000\n"
+"PO-Revision-Date: 2023-01-04 15:16+0000\n"
 "Last-Translator: Daniel Lisiecki <lisiecki.daniel@gmail.com>\n"
-"Language-Team: Polish <https://translations.znuny.org/projects/znuny/znuny/pl/>\n"
+"Language-Team: Polish <https://translations.znuny.org/projects/znuny/znuny/"
+"pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
+"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
+"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 "X-Generator: Weblate 4.14.1\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
@@ -3131,7 +3134,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Add response header"
-msgstr ""
+msgstr "Dodaj nagłówek odpowiedzi"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Endpoint"
@@ -3579,7 +3582,7 @@ msgstr "Zaplecze"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceWebservice.tt
 msgid "Add error handling module"
-msgstr ""
+msgstr "Dodaj moduł obsługi błędu"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceWebservice.tt
 msgid "Operations are individual system functions which remote systems can request."
@@ -6127,7 +6130,7 @@ msgstr "Edytuj systemowy adres e-mail"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
 msgid "Add System Address"
-msgstr ""
+msgstr "Dodaj adres systemowy"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
 msgid "Filter for System Addresses"
@@ -6963,7 +6966,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBookOverview.tt
 msgid "Add selected customer user to"
-msgstr ""
+msgstr "Dodaj wybranego użytkownika klienta do"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBookOverviewNavBar.tt
 msgid "Change search options"
@@ -14887,7 +14890,7 @@ msgstr "Podany adres e-mail nie jest dopuszczony do rejestracji. Skontaktuj się
 
 #. Perl Module: Kernel/System/Web/InterfaceCustomer.pm
 msgid "Added via Customer Panel (%s)"
-msgstr ""
+msgstr "Dodano przez Panel Klienta (%s)"
 
 #. Perl Module: Kernel/System/Web/InterfaceCustomer.pm
 msgid "Customer user can't be added!"
@@ -16352,15 +16355,15 @@ msgstr "Dodaj notatkę do tego zgłoszenia"
 
 #. SysConfig
 msgid "Add an inbound phone call to this ticket"
-msgstr ""
+msgstr "Dodaj telefon przychodzący do tego zgłoszenia"
 
 #. SysConfig
 msgid "Add an outbound phone call to this ticket"
-msgstr ""
+msgstr "Dodaj telefon wychodzący do tego zgłoszenia"
 
 #. SysConfig
 msgid "Added %s time unit(s), for a total of %s time unit(s)."
-msgstr ""
+msgstr "Dodano %s jednostek czasu, łącznie %s jednostek czasu."
 
 #. SysConfig
 msgid "Added email. %s"
@@ -16368,7 +16371,7 @@ msgstr "Dodano e-mail. %s"
 
 #. SysConfig
 msgid "Added follow-up to ticket [%s]. %s"
-msgstr ""
+msgstr "Dodano kontynuację zgłoszenia [%s]. %s"
 
 #. SysConfig
 msgid "Added link to ticket \"%s\"."
@@ -16376,15 +16379,15 @@ msgstr "Dodano łącze do zgłoszenia \"%s\"."
 
 #. SysConfig
 msgid "Added note (%s)."
-msgstr ""
+msgstr "Dodano notatkę (%s)."
 
 #. SysConfig
 msgid "Added phone call from customer."
-msgstr ""
+msgstr "Dodano połączenie telefoniczne od klienta."
 
 #. SysConfig
 msgid "Added phone call to customer."
-msgstr ""
+msgstr "Dodano połączenie telefoniczne do klienta."
 
 #. SysConfig
 msgid "Added subscription for user \"%s\"."
@@ -16392,7 +16395,7 @@ msgstr "Dodano subskrypcje dla użytkownika \"%s\"."
 
 #. SysConfig
 msgid "Added system request (%s)."
-msgstr ""
+msgstr "Dodano żądanie systemu (%s)."
 
 #. SysConfig
 msgid "Added web request from customer."
@@ -23985,7 +23988,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Add request header"
-msgstr ""
+msgstr "Dodaj nagłówek żądania"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt
 msgid "Omit namespace prefix"
@@ -24053,7 +24056,7 @@ msgstr "Zarządzaj tokenami OAuth2 i ich konfiguracją"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
 msgid "Add by template"
-msgstr ""
+msgstr "Dodaj używając szablonu"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
 msgid "Base configuration"
@@ -24093,11 +24096,11 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
 msgid "Add OAuth2 token configuration"
-msgstr ""
+msgstr "Dodaj konfigurację tokena OAuth2"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
 msgid "Add a new OAuth2 token configuration based on the selected template."
-msgstr ""
+msgstr "Dodaj nową konfigurację tokena OAuth2 w oparciu o wybrany szablon."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
 msgid "Import and export"
@@ -24245,7 +24248,7 @@ msgstr "Relacje atrybutów zgłoszeń"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
 msgid "Add ticket attribute relations"
-msgstr ""
+msgstr "Dodaj relacje atrybutów zgłoszenia"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
 msgid "Edit ticket attribute relations"
@@ -24273,7 +24276,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
 msgid "Add missing possible dynamic field values"
-msgstr ""
+msgstr "Dodaj brakujące możliwe wartości pola dynamicznego"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
 msgid "Attribute values"
@@ -25013,11 +25016,11 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
 msgid "Add all attachments"
-msgstr ""
+msgstr "Dodaj wszystkie załączniki"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
 msgid "Add all attachments to invoker payload."
-msgstr ""
+msgstr "Dodaj wszystkie załączniki do bloku danych wywołania"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "JWT authentication: Key file"
@@ -25437,7 +25440,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
 msgid "Add a Dynamic Field"
-msgstr ""
+msgstr "Dodaj Pole Dynamiczne"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Manage Process Widiget Groups"
@@ -25445,11 +25448,11 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Add a Generic Agent Job"
-msgstr ""
+msgstr "Dodaj Zadanie Agenta Automatycznego"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Add an ACL"
-msgstr ""
+msgstr "Dodaj ACL"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
 msgid "Configure Working Hours"
