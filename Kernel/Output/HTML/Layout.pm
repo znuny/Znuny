@@ -1505,7 +1505,7 @@ sub Header {
 sub ToolbarModules {
     my ( $Self, %Param ) = @_;
 
-    my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+    my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     my %Modules;
