@@ -458,6 +458,13 @@
             <Item ValueType="String">Arial/Arial, Helvetica, sans-serif;Calibri/Calibri, sans-serif;Comic Sans MS/Comic Sans MS, cursive;Courier New/Courier New, Courier, monospace;Georgia/Georgia, serif;Lucida Sans Unicode/Lucida Sans Unicode, Lucida Grande, sans-serif;Tahoma/Tahoma, Geneva, sans-serif;Times New Roman/Times New Roman, Times, serif;Trebuchet MS/Trebuchet MS, Helvetica, sans-serif;Verdana/Verdana, Geneva, sans-serif</Item>
         </Value>
     </Setting>
+    <Setting Name="Frontend::RichText::Settings###FormatTags" Required="1" Valid="1">
+        <Description Translatable="1">Defines the selectable format tags in the rich text editor.</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Item ValueType="String">p;h1;h2;h3;h4;h5;h6;pre</Item>
+        </Value>
+    </Setting>
     <Setting Name="Frontend::RichText::Settings###ExtraPlugins" Required="0" Valid="1">
         <Description Translatable="1">Defines additional plugins for use in the rich text editor.</Description>
         <Navigation>Frontend::Base</Navigation>
