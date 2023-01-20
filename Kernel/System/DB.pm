@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -343,6 +343,32 @@ sub Quote {
                 Caller   => 1,
                 Priority => 'error',
                 Message  => "Invalid number in query '$Text'!",
+            );
+            return;
+        }
+        return $Text;
+    }
+
+    # quote DateTime
+    if ( $Type eq 'DateTime' ) {
+        if ( $Text !~ m{\A(\d\d\d\d)-(\d\d|\d)-(\d\d|\d) (\d\d|\d):(\d\d|\d):(\d\d|\d)\z} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Caller   => 1,
+                Priority => 'error',
+                Message  => "Invalid DateTime in query '$Text'!",
+            );
+            return;
+        }
+        return $Text;
+    }
+
+    # quote Date
+    if ( $Type eq 'Date' ) {
+        if ( $Text !~ m{\A(\d\d\d\d)-(\d\d|\d)-(\d\d|\d)\z} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Caller   => 1,
+                Priority => 'error',
+                Message  => "Invalid Date in query '$Text'!",
             );
             return;
         }

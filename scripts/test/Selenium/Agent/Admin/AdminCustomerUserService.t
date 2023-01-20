@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -18,7 +18,8 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
 
         # Disable check email address.
         $HelperObject->ConfigSettingChange(
@@ -43,12 +44,21 @@ $Selenium->RunTest(
         );
 
         # Create test Service.
-        my $ServiceName = 'SomeService' . $HelperObject->GetRandomID();
-        my $ServiceID   = $Kernel::OM->Get('Kernel::System::Service')->ServiceAdd(
+        my $ServiceName   = 'SomeService' . $HelperObject->GetRandomID();
+        my %ServiceValues = (
             Name    => $ServiceName,
             Comment => 'Some Comment',
             ValidID => 1,
             UserID  => 1,
+        );
+
+        if ($IsITSMInstalled) {
+            $ServiceValues{TypeID}      = 1;
+            $ServiceValues{Criticality} = '3 normal';
+        }
+
+        my $ServiceID = $Kernel::OM->Get('Kernel::System::Service')->ServiceAdd(
+            %ServiceValues,
         );
         $Self->True(
             $ServiceID,

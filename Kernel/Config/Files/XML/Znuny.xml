@@ -361,24 +361,14 @@
     <!--
         Dynamic field web service
     -->
-    <Setting Name="DynamicFields::Driver###WebserviceText" Required="1" Valid="1">
+    <Setting Name="DynamicFields::Driver###WebserviceDropdown" Required="0" Valid="1">
         <Description Translatable="1">Dynamic field backend registration.</Description>
         <Navigation>Core::DynamicFields::DriverRegistration</Navigation>
         <Value>
             <Hash>
-                <Item Key="DisplayName" Translatable="1">Web service (Text)</Item>
-                <Item Key="Module">Kernel::System::DynamicField::Driver::WebserviceText</Item>
+                <Item Key="DisplayName" Translatable="1">Web service (Dropdown)</Item>
+                <Item Key="Module">Kernel::System::DynamicField::Driver::WebserviceDropdown</Item>
                 <Item Key="ConfigDialog">AdminDynamicFieldWebservice</Item>
-                <Item Key="Config">
-                    <Hash>
-                        <Item Key="DefaultValue"></Item>
-                        <Item Key="Link"></Item>
-                        <Item Key="LinkPreview"></Item>
-                        <Item Key="Webservice">Webservice</Item>
-                        <Item Key="InvokerSearch">Invoker</Item>
-                        <Item Key="InvokerGet">Invoker</Item>
-                    </Hash>
-                </Item>
             </Hash>
         </Value>
     </Setting>
@@ -484,7 +474,7 @@
                         </Array>
                     </Item>
                     <Item Key="Description">Admin</Item>
-                    <Item Key="Title" Translatable="1">Admin configuration dialog for dynamic field types WebserviceText and WebserviceMultiselect</Item>
+                    <Item Key="Title" Translatable="1">Admin configuration dialog for dynamic field types WebserviceDropdown and WebserviceMultiselect</Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
             </Item>
@@ -510,7 +500,7 @@
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketZoom###HideWebserviceDynamicFieldsWithoutDisplayValue" Required="1" Valid="1">
-        <Description Translatable="1">It might happen that a dynamic field of type WebserviceText or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.</Description>
+        <Description Translatable="1">It might happen that a dynamic field of type WebserviceDropdown or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty.</Description>
         <Navigation>Core::DynamicFieldWebservice</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
@@ -2292,9 +2282,9 @@
                         <Array>
                         </Array>
                     </Item>
-                    <Item Key="Description">Autompletion for rich text editor.</Item>
-                    <Item Key="Title">Autompletion for rich text editor</Item>
-                    <Item Key="NavBarName">Autompletion for rich text editor</Item>
+                    <Item Key="Description">Autocompletion for rich text editor.</Item>
+                    <Item Key="Title">Autocompletion for rich text editor</Item>
+                    <Item Key="NavBarName">Autocompletion for rich text editor</Item>
                 </Hash>
             </Item>
         </Value>
@@ -2313,9 +2303,30 @@
                         <Array>
                         </Array>
                     </Item>
-                    <Item Key="Description">Autompletion for rich text editor.</Item>
-                    <Item Key="Title">Autompletion for rich text editor</Item>
-                    <Item Key="NavBarName">Autompletion for rich text editor</Item>
+                    <Item Key="Description">Autocompletion for rich text editor.</Item>
+                    <Item Key="Title">Autocompletion for rich text editor</Item>
+                    <Item Key="NavBarName">Autocompletion for rich text editor</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="PublicFrontend::Module###AJAXRichTextAutocompletion" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the public interface.</Description>
+        <Navigation>Frontend::Public::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Autocompletion for rich text editor.</Item>
+                    <Item Key="Title">Autocompletion for rich text editor</Item>
+                    <Item Key="NavBarName">Autocompletion for rich text editor</Item>
                 </Hash>
             </Item>
         </Value>
@@ -2627,4 +2638,256 @@
         </Value>
     </Setting>
 
+    <!--
+        Non-standard time zone mapping for ICS support
+
+        Taken from:
+        https://metacpan.org/pod/DateTime::TimeZone::Local::Win32
+        (https://fastapi.metacpan.org/source/DAPINK/DateTime-TimeZone-Local-Win32-2.05/lib/DateTime/TimeZone/Local/Win32.pm)
+    -->
+    <Setting Name="AppointmentCalendar::NonStandardTimeZonesMapping" Required="0" Valid="1">
+        <Description Translatable="1">Mapping of non-standard time zones to official ones.</Description>
+        <Navigation>Core::AppointmentCalendar::TimeZone</Navigation>
+        <Value>
+            <Hash>
+                <Item Key='Afghanistan Standard Time'>Asia/Kabul</Item>
+                <Item Key='Alaskan'>America/Anchorage</Item>
+                <Item Key='Alaskan Standard Time'>America/Anchorage</Item>
+                <Item Key='Aleutian Standard Time'>America/Adak</Item>
+                <Item Key='Altai Standard Time'>Asia/Barnaul</Item>
+                <Item Key='Arab'>Asia/Riyadh</Item>
+                <Item Key='Arab Standard Time'>Asia/Riyadh</Item>
+                <Item Key='Arabian'>Asia/Muscat</Item>
+                <Item Key='Arabian Standard Time'>Asia/Muscat</Item>
+                <Item Key='Arabic Standard Time'>Asia/Baghdad</Item>
+                <Item Key='Argentina Standard Time'>America/Argentina/Buenos_Aires</Item>
+                <Item Key='Armenian Standard Time'>Asia/Yerevan</Item>
+                <Item Key='Astrakhan Standard Time'>Europe/Astrakhan</Item>
+                <Item Key='Atlantic'>America/Halifax</Item>
+                <Item Key='Atlantic Standard Time'>America/Halifax</Item>
+                <Item Key='AUS Central'>Australia/Darwin</Item>
+                <Item Key='AUS Central Standard Time'>Australia/Darwin</Item>
+                <Item Key='Aus Central W. Standard Time'>Australia/Eucla</Item>
+                <Item Key='AUS Eastern'>Australia/Sydney</Item>
+                <Item Key='AUS Eastern Standard Time'>Australia/Sydney</Item>
+                <Item Key='Azerbaijan Standard Time'>Asia/Baku</Item>
+                <Item Key='Azores'>Atlantic/Azores</Item>
+                <Item Key='Azores Standard Time'>Atlantic/Azores</Item>
+                <Item Key='Bahia Standard Time'>America/Bahia</Item>
+                <Item Key='Bangkok'>Asia/Bangkok</Item>
+                <Item Key='Bangkok Standard Time'>Asia/Bangkok</Item>
+                <Item Key='Bangladesh Standard Time'>Asia/Dhaka</Item>
+                <Item Key='Beijing'>Asia/Shanghai</Item>
+                <Item Key='Belarus Standard Time'>Europe/Minsk</Item>
+                <Item Key='Bougainville Standard Time'>Pacific/Bougainville</Item>
+                <Item Key='Canada Central'>America/Regina</Item>
+                <Item Key='Canada Central Standard Time'>America/Regina</Item>
+                <Item Key='Cape Verde Standard Time'>Atlantic/Cape_Verde</Item>
+                <Item Key='Caucasus'>Asia/Yerevan</Item>
+                <Item Key='Caucasus Standard Time'>Asia/Yerevan</Item>
+                <Item Key='Cen. Australia'>Australia/Adelaide</Item>
+                <Item Key='Cen. Australia Standard Time'>Australia/Adelaide</Item>
+                <Item Key='Central'>America/Chicago</Item>
+                <Item Key='Central America Standard Time'>America/Tegucigalpa</Item>
+                <Item Key='Central Asia'>Asia/Almaty</Item>
+                <Item Key='Central Asia Standard Time'>Asia/Almaty</Item>
+                <Item Key='Central Brazilian Standard Time'>America/Cuiaba</Item>
+                <Item Key='Central Europe'>Europe/Prague</Item>
+                <Item Key='Central Europe Standard Time'>Europe/Prague</Item>
+                <Item Key='Central European'>Europe/Belgrade</Item>
+                <Item Key='Central European Standard Time'>Europe/Warsaw</Item>
+                <Item Key='Central Pacific'>Pacific/Guadalcanal</Item>
+                <Item Key='Central Pacific Standard Time'>Pacific/Guadalcanal</Item>
+                <Item Key='Central Standard Time'>America/Chicago</Item>
+                <Item Key='Central Standard Time (Mexico)'>America/Mexico_City</Item>
+                <Item Key='Chatham Islands Standard Time'>Pacific/Chatham</Item>
+                <Item Key='China'>Asia/Shanghai</Item>
+                <Item Key='China Standard Time'>Asia/Shanghai</Item>
+                <Item Key='Cuba Standard Time'>America/Havana</Item>
+                <Item Key='Dateline'>-1200</Item>
+                <Item Key='Dateline Standard Time'>-1200</Item>
+                <Item Key='E. Africa'>Africa/Nairobi</Item>
+                <Item Key='E. Africa Standard Time'>Africa/Nairobi</Item>
+                <Item Key='E. Australia'>Australia/Brisbane</Item>
+                <Item Key='E. Australia Standard Time'>Australia/Brisbane</Item>
+                <Item Key='E. Europe'>Europe/Helsinki</Item>
+                <Item Key='E. Europe Standard Time'>Europe/Chisinau</Item>
+                <Item Key='E. South America'>America/Sao_Paulo</Item>
+                <Item Key='E. South America Standard Time'>America/Sao_Paulo</Item>
+                <Item Key='Easter Island Standard Time'>Pacific/Easter</Item>
+                <Item Key='Eastern'>America/New_York</Item>
+                <Item Key='Eastern Standard Time'>America/New_York</Item>
+                <Item Key='Eastern Standard Time (Mexico)'>America/Cancun</Item>
+                <Item Key='Egypt'>Africa/Cairo</Item>
+                <Item Key='Egypt Standard Time'>Africa/Cairo</Item>
+                <Item Key='Ekaterinburg'>Asia/Yekaterinburg</Item>
+                <Item Key='Ekaterinburg Standard Time'>Asia/Yekaterinburg</Item>
+                <Item Key='Fiji'>Pacific/Fiji</Item>
+                <Item Key='Fiji Standard Time'>Pacific/Fiji</Item>
+                <Item Key='FLE'>Europe/Helsinki</Item>
+                <Item Key='FLE Standard Time'>Europe/Helsinki</Item>
+                <Item Key='Georgian Standard Time'>Asia/Tbilisi</Item>
+                <Item Key='GFT'>Europe/Athens</Item>
+                <Item Key='GFT Standard Time'>Europe/Athens</Item>
+                <Item Key='GMT'>Europe/London</Item>
+                <Item Key='GMT Standard Time'>Europe/London</Item>
+                <Item Key='Greenland Standard Time'>America/Godthab</Item>
+                <Item Key='Greenwich'>GMT</Item>
+                <Item Key='Greenwich Standard Time'>GMT</Item>
+                <Item Key='GTB'>Europe/Athens</Item>
+                <Item Key='GTB Standard Time'>Europe/Athens</Item>
+                <Item Key='Haiti Standard Time'>America/Port-au-Prince</Item>
+                <Item Key='Hawaiian'>Pacific/Honolulu</Item>
+                <Item Key='Hawaiian Standard Time'>Pacific/Honolulu</Item>
+                <Item Key='India'>Asia/Calcutta</Item>
+                <Item Key='India Standard Time'>Asia/Kolkata</Item>
+                <Item Key='Iran'>Asia/Tehran</Item>
+                <Item Key='Iran Standard Time'>Asia/Tehran</Item>
+                <Item Key='Israel'>Asia/Jerusalem</Item>
+                <Item Key='Israel Standard Time'>Asia/Jerusalem</Item>
+                <Item Key='Jordan Standard Time'>Asia/Amman</Item>
+                <Item Key='Kaliningrad Standard Time'>Europe/Kaliningrad</Item>
+                <Item Key='Kamchatka Standard Time'>Asia/Kamchatka</Item>
+                <Item Key='Korea'>Asia/Seoul</Item>
+                <Item Key='Korea Standard Time'>Asia/Seoul</Item>
+                <Item Key='Libya Standard Time'>Africa/Tripoli</Item>
+                <Item Key='Line Islands Standard Time'>Pacific/Kiritimati</Item>
+                <Item Key='Lord Howe Standard Time'>Australia/Lord_Howe</Item>
+                <Item Key='Magadan Standard Time'>Asia/Magadan</Item>
+                <Item Key='Magallanes Standard Time'>America/Punta_Arenas</Item>
+                <Item Key='Marquesas Standard Time'>Pacific/Marquesas</Item>
+                <Item Key='Mauritius Standard Time'>Indian/Mauritius</Item>
+                <Item Key='Mexico'>America/Mexico_City</Item>
+                <Item Key='Mexico Standard Time'>America/Mexico_City</Item>
+                <Item Key='Mexico Standard Time 2'>America/Chihuahua</Item>
+                <Item Key='Mid-Atlantic'>Atlantic/South_Georgia</Item>
+                <Item Key='Mid-Atlantic Standard Time'>Atlantic/South_Georgia</Item>
+                <Item Key='Middle East Standard Time'>Asia/Beirut</Item>
+                <Item Key='Montevideo Standard Time'>America/Montevideo</Item>
+                <Item Key='Morocco Standard Time'>Africa/Casablanca</Item>
+                <Item Key='Mountain'>America/Denver</Item>
+                <Item Key='Mountain Standard Time'>America/Denver</Item>
+                <Item Key='Mountain Standard Time (Mexico)'>America/Chihuahua</Item>
+                <Item Key='Myanmar Standard Time'>Asia/Rangoon</Item>
+                <Item Key='N. Central Asia Standard Time'>Asia/Novosibirsk</Item>
+                <Item Key='Namibia Standard Time'>Africa/Windhoek</Item>
+                <Item Key='Nepal Standard Time'>Asia/Katmandu</Item>
+                <Item Key='New Zealand'>Pacific/Auckland</Item>
+                <Item Key='New Zealand Standard Time'>Pacific/Auckland</Item>
+                <Item Key='Newfoundland'>America/St_Johns</Item>
+                <Item Key='Newfoundland Standard Time'>America/St_Johns</Item>
+                <Item Key='Norfolk Standard Time'>Pacific/Norfolk</Item>
+                <Item Key='North Asia East Standard Time'>Asia/Irkutsk</Item>
+                <Item Key='North Asia Standard Time'>Asia/Krasnoyarsk</Item>
+                <Item Key='North Korea Standard Time'>Asia/Pyongyang</Item>
+                <Item Key='Omsk Standard Time'>Asia/Omsk</Item>
+                <Item Key='Pacific'>America/Los_Angeles</Item>
+                <Item Key='Pacific SA'>America/Santiago</Item>
+                <Item Key='Pacific SA Standard Time'>America/Santiago</Item>
+                <Item Key='Pacific Standard Time'>America/Los_Angeles</Item>
+                <Item Key='Pacific Standard Time (Mexico)'>America/Tijuana</Item>
+                <Item Key='Pakistan Standard Time'>Asia/Karachi</Item>
+                <Item Key='Paraguay Standard Time'>America/Asuncion</Item>
+                <Item Key='Prague Bratislava'>Europe/Prague</Item>
+                <Item Key='Qyzylorda Standard Time'>Asia/Qyzylorda</Item>
+                <Item Key='Romance'>Europe/Paris</Item>
+                <Item Key='Romance Standard Time'>Europe/Paris</Item>
+                <Item Key='Russia Time Zone 10'>Asia/Srednekolymsk</Item>
+                <Item Key='Russia Time Zone 11'>Asia/Anadyr</Item>
+                <Item Key='Russia Time Zone 3'>Europe/Samara</Item>
+                <Item Key='Russian'>Europe/Moscow</Item>
+                <Item Key='Russian Standard Time'>Europe/Moscow</Item>
+                <Item Key='SA Eastern'>America/Cayenne</Item>
+                <Item Key='SA Eastern Standard Time'>America/Cayenne</Item>
+                <Item Key='SA Pacific'>America/Bogota</Item>
+                <Item Key='SA Pacific Standard Time'>America/Bogota</Item>
+                <Item Key='SA Western'>America/Guyana</Item>
+                <Item Key='SA Western Standard Time'>America/Guyana</Item>
+                <Item Key='Saint Pierre Standard Time'>America/Miquelon</Item>
+                <Item Key='Sakhalin Standard Time'>Asia/Sakhalin</Item>
+                <Item Key='Samoa'>Pacific/Apia</Item>
+                <Item Key='Samoa Standard Time'>Pacific/Apia</Item>
+                <Item Key='Sao Tome Standard Time'>Africa/Sao_Tome</Item>
+                <Item Key='Saratov Standard Time'>Europe/Saratov</Item>
+                <Item Key='Saudi Arabia'>Asia/Riyadh</Item>
+                <Item Key='Saudi Arabia Standard Time'>Asia/Riyadh</Item>
+                <Item Key='SE Asia'>Asia/Bangkok</Item>
+                <Item Key='SE Asia Standard Time'>Asia/Bangkok</Item>
+                <Item Key='Singapore'>Asia/Singapore</Item>
+                <Item Key='Singapore Standard Time'>Asia/Singapore</Item>
+                <Item Key='South Africa'>Africa/Harare</Item>
+                <Item Key='South Africa Standard Time'>Africa/Harare</Item>
+                <Item Key='South Sudan Standard Time'>Africa/Juba</Item>
+                <Item Key='Sri Lanka'>Asia/Colombo</Item>
+                <Item Key='Sri Lanka Standard Time'>Asia/Colombo</Item>
+                <Item Key='Sudan Standard Time'>Africa/Khartoum</Item>
+                <Item Key='Syria Standard Time'>Asia/Damascus</Item>
+                <Item Key='Sydney Standard Time'>Australia/Sydney</Item>
+                <Item Key='Taipei'>Asia/Taipei</Item>
+                <Item Key='Taipei Standard Time'>Asia/Taipei</Item>
+                <Item Key='Tasmania'>Australia/Hobart</Item>
+                <Item Key='Tasmania Standard Time'>Australia/Hobart</Item>
+                <Item Key='Tocantins Standard Time'>America/Araguaina</Item>
+                <Item Key='Tokyo'>Asia/Tokyo</Item>
+                <Item Key='Tokyo Standard Time'>Asia/Tokyo</Item>
+                <Item Key='Tomsk Standard Time'>Asia/Tomsk</Item>
+                <Item Key='Tonga Standard Time'>Pacific/Tongatapu</Item>
+                <Item Key='Transbaikal Standard Time'>Asia/Chita</Item>
+                <Item Key='Turkey Standard Time'>Europe/Istanbul</Item>
+                <Item Key='Turks And Caicos Standard Time'>America/Grand_Turk</Item>
+                <Item Key='Ulaanbaatar Standard Time'>Asia/Ulaanbaatar</Item>
+                <Item Key='US Eastern'>America/Indianapolis</Item>
+                <Item Key='US Eastern Standard Time'>America/Indianapolis</Item>
+                <Item Key='US Mountain'>America/Phoenix</Item>
+                <Item Key='US Mountain Standard Time'>America/Phoenix</Item>
+                <Item Key='UTC'>UTC</Item>
+                <Item Key='UTC+13'>+1300</Item>
+                <Item Key='UTC+12'>+1200</Item>
+                <Item Key='UTC-02'>-0200</Item>
+                <Item Key='UTC-08'>-0800</Item>
+                <Item Key='UTC-09'>-0900</Item>
+                <Item Key='UTC-11'>-1100</Item>
+                <Item Key='Venezuela Standard Time'>America/Caracas</Item>
+                <Item Key='Vladivostok'>Asia/Vladivostok</Item>
+                <Item Key='Vladivostok Standard Time'>Asia/Vladivostok</Item>
+                <Item Key='Volgograd Standard Time'>Europe/Volgograd</Item>
+                <Item Key='W. Australia'>Australia/Perth</Item>
+                <Item Key='W. Australia Standard Time'>Australia/Perth</Item>
+                <Item Key='W. Central Africa Standard Time'>Africa/Luanda</Item>
+                <Item Key='W. Europe'>Europe/Berlin</Item>
+                <Item Key='W. Europe Standard Time'>Europe/Berlin</Item>
+                <Item Key='W. Mongolia Standard Time'>Asia/Hovd</Item>
+                <Item Key='Warsaw'>Europe/Warsaw</Item>
+                <Item Key='West Asia'>Asia/Karachi</Item>
+                <Item Key='West Asia Standard Time'>Asia/Tashkent</Item>
+                <Item Key='West Bank Standard Time'>Asia/Gaza</Item>
+                <Item Key='West Pacific'>Pacific/Guam</Item>
+                <Item Key='West Pacific Standard Time'>Pacific/Guam</Item>
+                <Item Key='Western Brazilian Standard Time'>America/Rio_Branco</Item>
+                <Item Key='Yakutsk'>Asia/Yakutsk</Item>
+                <Item Key='Yakutsk Standard Time'>Asia/Yakutsk</Item>
+                <Item Key='Yukon Standard Time'>America/Whitehorse</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!--
+    UserMaxArticlesPerPage
+    -->
+    <Setting Name="PreferencesGroups###MaxArticlesPerPage" Required="0" Valid="1">
+        <Description Translatable="1">Defines the config parameters of this item, to be shown in the preferences view.</Description>
+        <Navigation>Frontend::Agent::View::Preferences</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::Preferences::MaxArticlesPerPage</Item>
+                <Item Key="PreferenceGroup">Miscellaneous</Item>
+                <Item Key="Label" Translatable="1">Max. number of articles per page in TicketZoom</Item>
+                <Item Key="Key" Translatable="1"></Item>
+                <Item Key="Desc" Translatable="1">Select the maximum articles per page shown in TicketZoom. System default value will apply when entered empty value.</Item>
+                <Item Key="PrefKey">MaxArticlesPerPage</Item>
+                <Item Key="Prio">50</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
 </otrs_config>

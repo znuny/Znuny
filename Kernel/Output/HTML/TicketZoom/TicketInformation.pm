@@ -1,6 +1,6 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -496,7 +496,7 @@ sub Run {
     };
 }
 
-# Checks if dynamic fields of types WebserviceText and WebserviceMultiselect
+# Checks if dynamic fields of types WebserviceDropdown and WebserviceMultiselect
 # should be skipped if they have no display value and SysConfig option
 # Ticket::Frontend::AgentTicketZoom###HideWebserviceDynamicFieldsWithoutDisplayValue
 # is enabled.
