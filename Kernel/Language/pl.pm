@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.643897701521528;
+    $Self->{Completeness}        = 0.647192102281923;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1004,8 +1004,8 @@ sub Data {
             'Wyzwalacze (triggery) zdarzeń asynchronicznych obsługiwane przez harmonogram OTRS pracujący w tle (zalecane)',
         'Synchronous event triggers would be processed directly during the web request.' =>
             'Triggery synchroniczne będą przetwarzane bezpośrednio w trakcie przetwarzania żądania web.',
-        'Add all attachments' => '',
-        'Add all attachments to invoker payload.' => '',
+        'Add all attachments' => 'Dodaj wszystkie załączniki',
+        'Add all attachments to invoker payload.' => 'Dodaj wszystkie załączniki do bloku danych wywołania',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerEvent.tt
         'GenericInterface Invoker Event Settings for Web Service %s' => '',
@@ -1145,7 +1145,7 @@ sub Data {
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             'Ta konfiguracja określa czy przychodzące połączenia powinny być zamknięte lub utrzymane. ',
         'Additional response headers' => '',
-        'Add response header' => '',
+        'Add response header' => 'Dodaj nagłówek odpowiedzi',
         'Endpoint' => 'Punkt końcowy',
         'URI to indicate specific location for accessing a web service.' =>
             '',
@@ -1235,7 +1235,7 @@ sub Data {
         'Default command' => 'Polecenie domyślne',
         'The default HTTP command to use for the requests.' => '',
         'Additional request headers' => '',
-        'Add request header' => '',
+        'Add request header' => 'Dodaj nagłówek żądania',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt
         'e.g. https://local.otrs.com:8000/Webservice/Example' => 'np. https://local.otrs.com:8000/Webservice/Example',
@@ -1336,7 +1336,7 @@ sub Data {
         'Error Handling Modules' => '',
         'Error handling modules are used to react in case of errors during the communication. Those modules are executed in a specific order, which can be changed by drag and drop.' =>
             '',
-        'Add error handling module' => '',
+        'Add error handling module' => 'Dodaj moduł obsługi błędu',
         'Operations are individual system functions which remote systems can request.' =>
             'Operacje to indywidualne funkcje systemowe, które mogą być wywołane przez zdalne systemy.',
         'Invokers prepare data for a request to a remote web service, and process its response data.' =>
@@ -1480,7 +1480,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
         'Queue Management' => '',
         'Manage OAuth2 tokens and their configurations' => 'Zarządzaj tokenami OAuth2 i ich konfiguracją',
-        'Add by template' => '',
+        'Add by template' => 'Dodaj używając szablonu',
         'Base configuration' => '',
         'An OAuth2 token configuration with this name already exists.' =>
             '',
@@ -1502,9 +1502,9 @@ sub Data {
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
-        'Add OAuth2 token configuration' => '',
+        'Add OAuth2 token configuration' => 'Dodaj konfigurację tokena OAuth2',
         'Add a new OAuth2 token configuration based on the selected template.' =>
-            '',
+            'Dodaj nową konfigurację tokena OAuth2 w oparciu o wybrany szablon.',
         'Import and export' => '',
         'Upload a YAML file to import token configurations. See documentation on OAuth2 token management for further details.' =>
             '',
@@ -2180,7 +2180,7 @@ sub Data {
         'System Email Addresses Management' => 'Konfiguracja adresów e-mail Systemu',
         'Add System Email Address' => 'Dodaj systemowy adres e-mail',
         'Edit System Email Address' => 'Edytuj systemowy adres e-mail',
-        'Add System Address' => '',
+        'Add System Address' => 'Dodaj adres systemowy',
         'Filter for System Addresses' => '',
         'Filter for system addresses' => '',
         'All incoming email with this address in To or Cc will be dispatched to the selected queue.' =>
@@ -2334,7 +2334,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
         'Ticket attribute relations' => 'Relacje atrybutów zgłoszeń',
-        'Add ticket attribute relations' => '',
+        'Add ticket attribute relations' => 'Dodaj relacje atrybutów zgłoszenia',
         'Edit ticket attribute relations' => '',
         'Import CSV or Excel file' => '',
         'Attribute' => 'Atrybut',
@@ -2343,7 +2343,7 @@ sub Data {
         'Download previously imported file' => '',
         'The file needs to be in CSV (UTF-8) or Excel format. Both header columns need to contain the names of valid ticket attributes. The name of the uploaded file must be unique and must not be in use by another ticket attribute relations record.' =>
             '',
-        'Add missing possible dynamic field values' => '',
+        'Add missing possible dynamic field values' => 'Dodaj brakujące możliwe wartości pola dynamicznego',
         'Attribute values' => 'Wartości atrybutu',
         'If a value is colored red, it is missing from the possible values list of the dynamic field configuration.' =>
             '',
@@ -2486,7 +2486,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBookOverview.tt
         'The customer user is already selected in the ticket mask.' => '',
         'Select this customer user' => '',
-        'Add selected customer user to' => '',
+        'Add selected customer user to' => 'Dodaj wybranego użytkownika klienta do',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBookOverviewNavBar.tt
         'Change search options' => 'Zmień kryteria wyszukiwania',
@@ -5580,7 +5580,7 @@ sub Data {
             'Wpisany adres e-mail już istnieje. Wystarczy się zalogować lub skorzystać z funkcji resetowania hasła.',
         'This email address is not allowed to register. Please contact support staff.' =>
             'Podany adres e-mail nie jest dopuszczony do rejestracji. Skontaktuj się z Obsługą Kienta.',
-        'Added via Customer Panel (%s)' => '',
+        'Added via Customer Panel (%s)' => 'Dodano przez Panel Klienta (%s)',
         'Customer user can\'t be added!' => 'Nie mozna dodać użytkownika klienta!',
         'Can\'t send account info!' => '',
         'New account created. Sent login information to %s. Please check your email.' =>
@@ -5794,6 +5794,7 @@ sub Data {
             '',
         'Defines the selectable font sizes in the rich text editor.' => '',
         'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines the selectable format tags in the rich text editor.' => '',
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
@@ -8563,17 +8564,17 @@ Twój Zespół Helpdesk.
         'Activation of dynamic fields for screens.' => 'Aktywacja pól dynamicznych na ekranach.',
         'ActivityID' => '',
         'Add a note to this ticket' => 'Dodaj notatkę do tego zgłoszenia',
-        'Add an inbound phone call to this ticket' => '',
-        'Add an outbound phone call to this ticket' => '',
-        'Added %s time unit(s), for a total of %s time unit(s).' => '',
+        'Add an inbound phone call to this ticket' => 'Dodaj telefon przychodzący do tego zgłoszenia',
+        'Add an outbound phone call to this ticket' => 'Dodaj telefon wychodzący do tego zgłoszenia',
+        'Added %s time unit(s), for a total of %s time unit(s).' => 'Dodano %s jednostek czasu, łącznie %s jednostek czasu.',
         'Added email. %s' => 'Dodano e-mail. %s',
-        'Added follow-up to ticket [%s]. %s' => '',
+        'Added follow-up to ticket [%s]. %s' => 'Dodano kontynuację zgłoszenia [%s]. %s',
         'Added link to ticket "%s".' => 'Dodano łącze do zgłoszenia "%s".',
-        'Added note (%s).' => '',
-        'Added phone call from customer.' => '',
-        'Added phone call to customer.' => '',
+        'Added note (%s).' => 'Dodano notatkę (%s).',
+        'Added phone call from customer.' => 'Dodano połączenie telefoniczne od klienta.',
+        'Added phone call to customer.' => 'Dodano połączenie telefoniczne do klienta.',
         'Added subscription for user "%s".' => 'Dodano subskrypcje dla użytkownika "%s".',
-        'Added system request (%s).' => '',
+        'Added system request (%s).' => 'Dodano żądanie systemu (%s).',
         'Added web request from customer.' => '',
         'Admin' => 'Administracja',
         'Admin Area.' => 'Obszar Administratora.',
