@@ -15,6 +15,8 @@ The following persons contributed to Znuny:
 * Carlos Rodriguez <carlos.rodriguez@otrs.com>
 * Christian Schöpplein <christian.schoepplein@otrs.com>
 * Christopher T. Kuhn <christopher.kuhn@otrs.com>
+* Daniel Lisiecki <lisiecki.daniel@gmail.com>
+* Daniel Sprenger <123074686+sprengerdaniel@users.noreply.github.com>
 * Daniel Zamorano <daniel.zamorano@otrs.com>
 * David Crimi <deathpoison.dc@gmail.com>
 * Denis Nelubin <dnelubin@gmail.com>

@@ -25517,3 +25517,7 @@ msgstr ""
 msgid "Select the maximum articles per page shown in TicketZoom. System default value will apply when entered empty value."
 msgstr ""
 
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the selectable format tags in the rich text editor."
+msgstr ""
+

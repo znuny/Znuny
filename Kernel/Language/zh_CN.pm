@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.927484622855293;
+    $Self->{Completeness}        = 0.927334520148891;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -5796,6 +5796,7 @@ sub Data {
             '定义富文本编辑器组件的高度。输入数值（像素值）或百分比值（相对值）。',
         'Defines the selectable font sizes in the rich text editor.' => '',
         'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines the selectable format tags in the rich text editor.' => '',
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
