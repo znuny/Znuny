@@ -278,7 +278,9 @@ sub _ShowOverview {
 
     $LayoutObject->Block( Name => 'Overview' );
 
-    for my $DynamicFieldScreen ( sort { $DynamicFieldScreens{$a} cmp $DynamicFieldScreens{$b} } keys %DynamicFieldScreens ) {
+    for my $DynamicFieldScreen ( sort { $DynamicFieldScreens{$a} cmp $DynamicFieldScreens{$b} }
+        keys %DynamicFieldScreens )
+    {
         $LayoutObject->Block(
             Name => 'DynamicFieldScreenOverviewRow',
             Data => {
