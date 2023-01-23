@@ -290,7 +290,9 @@ sub _ShowOverview {
         );
     }
 
-    for my $DefaultColumnsScreen ( sort { $DefaultColumnsScreens{$a} cmp $DefaultColumnsScreens{$b} } keys %DefaultColumnsScreens ) {
+    for my $DefaultColumnsScreen ( sort { $DefaultColumnsScreens{$a} cmp $DefaultColumnsScreens{$b} }
+        keys %DefaultColumnsScreens )
+    {
         $LayoutObject->Block(
             Name => 'DefaultColumnsScreenOverviewRow',
             Data => {
