@@ -96,6 +96,9 @@
 [% RenderBlockStart("OverviewResult") %]
             <div class="Header">
                 <h2>[% Translate("List") | html %]</h2>
+                <a href="#" class="icon-hover" id="ValidFilter" title="[% Translate("Filter") | html %]">
+                    <i class="fa fa-filter"></i>
+                </a>
             </div>
             <div class="Content">
 

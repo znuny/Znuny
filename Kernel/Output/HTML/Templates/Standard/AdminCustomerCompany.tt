@@ -112,6 +112,9 @@
                             ([% Data.ListAll | html %] [% Translate("total") | html %])
                         [% END %]
                     </h2>
+                    <a href="#" class="icon-hover" id="ValidFilter" title="[% Translate("Filter") | html %]">
+                        <i class="fa fa-filter"></i>
+                    </a>
                 </div>
 [% RenderBlockEnd("OverviewHeader") %]
 [% RenderBlockStart("NoSearchTerms") %]

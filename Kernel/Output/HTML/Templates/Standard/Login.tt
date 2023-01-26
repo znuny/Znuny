@@ -7,6 +7,7 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 ## nofilter(TidyAll::Plugin::Znuny::TT::ScriptUsage)
+
 [%- INCLUDE "HTTPHeaders.tt" -%]
 # With this X-Header, Core.AJAX can recognize that the AJAX request returned the login page (session timeout) and perform a redirect.
 X-OTRS-Login: [% Env("Baselink") %]
@@ -19,13 +20,11 @@ X-OTRS-Login: [% Env("Baselink") %]
     <meta http-equiv="Content-type" content="text/html;charset=utf-8" />
     <link rel="shortcut icon" href="[% Config("Frontend::ImagePath") %]icons/product.ico" type="image/ico" />
     <link rel="apple-touch-icon" href="[% Config("Frontend::ImagePath") %]icons/apple-touch-icon.png" />
-
 [% RenderBlockStart("CommonCSS") %]
     <link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Agent/[% Data.Skin | uri %]/[% Data.CSSDirectory %]/[% Data.Filename %]" />
 [% RenderBlockEnd("CommonCSS") %]
 
     <link rel="stylesheet" href="[% Config("Frontend::WebPath") %]skins/Agent/default/css/thirdparty/ui-theme/jquery-ui.css" />
-
 [% RenderBlockStart("HeaderLogoCSS") %]
     <style type="text/css">
         #Header #Logo {
@@ -37,7 +36,6 @@ X-OTRS-Login: [% Env("Baselink") %]
         }
     </style>
 [% RenderBlockEnd("HeaderLogoCSS") %]
-
 [% RenderBlockStart("LoginLogoCSS") %]
     <style type="text/css">
         #LoginLogo {
@@ -58,13 +56,13 @@ X-OTRS-Login: [% Env("Baselink") %]
           try {
               if (((!isIFrame && !isPopup) || (isIFrame && isPopup)) && (!localStorage.getItem("DesktopMode") || parseInt(localStorage.getItem("DesktopMode"), 10) <= 0)) {
                 var ResponsiveCSS;
-    [% RenderBlockStart("ResponsiveCSS") %]
+[% RenderBlockStart("ResponsiveCSS") %]
                 ResponsiveCSS = doc.createElement("link");
                 ResponsiveCSS.setAttribute("rel", "stylesheet");
                 ResponsiveCSS.setAttribute("type", "text/css");
                 ResponsiveCSS.setAttribute("href", "[% Config("Frontend::WebPath") %]skins/Agent/[% Data.Skin | uri %]/[% Data.CSSDirectory %]/[% Data.Filename %]");
                 doc.getElementsByTagName("head")[0].appendChild(ResponsiveCSS);
-    [% RenderBlockEnd("ResponsiveCSS") %]
+[% RenderBlockEnd("ResponsiveCSS") %]
               }
           }
           catch (Exception) {}
@@ -103,7 +101,6 @@ X-OTRS-Login: [% Env("Baselink") %]
                         [% Translate("Please see the documentation or ask your admin for further information.") | html %]
                     </span>
                 </div>
-
 [% RenderBlockStart("SystemMaintenance") %]
                 <div class="MessageBox WithIcon" id="SystemMaintenance">
                     <i class="fa fa-exclamation-circle"></i>
@@ -113,7 +110,6 @@ X-OTRS-Login: [% Env("Baselink") %]
                 </div>
 [% RenderBlockEnd("SystemMaintenance") %]
             </div>
-
 [% RenderBlockStart("PreLogin") %]
             <div id="LoginBox" class="LoginBox PreLogin">
                 <div class="WidgetSimple">
@@ -131,7 +127,6 @@ X-OTRS-Login: [% Env("Baselink") %]
                 </div>
             </div>
 [% RenderBlockEnd("PreLogin") %]
-
 [% RenderBlockStart("LoginBox") %]
             <div id="LoginBox" class="LoginBox">
                 <div class="[% IF Data.MessageType == 'Success' %]SuccessBox[% ELSIF Data.MessageType == 'Error' %]ErrorBox[% END %]">
@@ -162,7 +157,6 @@ X-OTRS-Login: [% Env("Baselink") %]
                                     <div id="PasswordError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
                                 </div>
                                 <div class="Clear"></div>
-
 [% RenderBlockStart("AuthTwoFactor") %]
                                 <label for="TwoFactorToken" class="InvisibleText [% Data.MandatoryClass | html %]">
 [% RenderBlockStart("AuthTwoFactorMandatory") %]
@@ -187,7 +181,7 @@ X-OTRS-Login: [% Env("Baselink") %]
                                 -->
 
                                 <div class="Field">
-                                    <button type="submit" id="LoginButton" class="Primary CallForAction Fullsize Center" value="[% Translate("Login") | html %]" disabled="disabled"><span>[% Translate("Login") | html %]</span></button>
+                                    <button type="submit" id="LoginButton" class="Primary CallForAction Fullsize Center btn-main btn-primary" value="[% Translate("Login") | html %]" disabled="disabled"><span>[% Translate("Login") | html %]</span></button>
                                 </div>
                                 <div class="Clear"></div>
                             </fieldset>
@@ -201,7 +195,6 @@ X-OTRS-Login: [% Env("Baselink") %]
             </div>
 [% RenderBlockEnd("LostPasswordLink") %]
 [% RenderBlockEnd("LoginBox") %]
-
 [% RenderBlockStart("LostPassword") %]
             <div id="PasswordBox" class="Hidden">
                 <div class="WidgetSimple">
@@ -241,7 +234,7 @@ X-OTRS-Login: [% Env("Baselink") %]
 
         </div>
     </div>
-# loading a file called ads.js would be blocked by ad blockers (e.g. AdBlock or AdBlockPlus) and thus allows for a basic adblocker detection
+    <!-- # loading a file called ads.js would be blocked by ad blockers (e.g. AdBlock or AdBlockPlus) and thus allows for a basic adblocker detection -->
     <script type="text/javascript" src="[% Config("Frontend::JavaScriptPath") %]ads.js"></script>
 
 [% InsertTemplate("Footer.tt") %]

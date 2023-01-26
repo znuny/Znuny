@@ -4877,7 +4877,6 @@ via the Preferences button after logging in.
                 </Item>
                 <Item Key="JavaScript">
                     <Array>
-                        <Item>Core.Agent.Admin.js</Item>
                         <Item>Core.UI.AllocationList.js</Item>
                         <Item>Core.Agent.TableFilters.js</Item>
                     </Array>
@@ -8067,6 +8066,15 @@ via the Preferences button after logging in.
         <Value>
             <Array>
                 <Item>thirdparty/ckeditor-4.17.1/ckeditor.js</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Agent::CommonJS###001-Admin" Required="1" Valid="1">
+        <Description Translatable="1">List of JS files to always be loaded for the admin interface.</Description>
+        <Navigation>Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>Core.Agent.Admin.js</Item>
             </Array>
         </Value>
     </Setting>

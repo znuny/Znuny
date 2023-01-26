@@ -244,6 +244,23 @@ $Selenium->RunTest(
             $Count++;
         }
 
+        # Checks for AdminValidFilter
+        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminAutoResponse");
+        $Self->True(
+            $Selenium->find_element( "#ValidFilter", 'css' )->is_displayed(),
+            "AdminValidFilter - Button to show or hide invalid table elements is displayed.",
+        );
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Self->False(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are not displayed.",
+        );
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Self->True(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are displayed again.",
+        );
+
         # Cleanup
         # Since there are no tickets that rely on our test auto response,
         # we can remove them from the DB.

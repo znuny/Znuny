@@ -1757,7 +1757,6 @@ via the Preferences button after logging in.
             'Core.Agent.Admin.css',
         ],
         JavaScript => [
-            'Core.Agent.Admin.js',
             'Core.UI.AllocationList.js',
             'Core.Agent.TableFilters.js',
         ],

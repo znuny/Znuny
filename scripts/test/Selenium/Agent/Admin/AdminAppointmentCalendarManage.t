@@ -169,6 +169,22 @@ $Selenium->RunTest(
         $Selenium->find_element( '#SearchParam_1_Title',            'css' )->send_keys('Test*');
         $Selenium->find_element( 'form#CalendarFrom button#Submit', 'css' )->VerifiedClick();
 
+        # Checks for AdminValidFilter
+        $Self->True(
+            $Selenium->find_element( "#ValidFilter", 'css' )->is_displayed(),
+            "AdminValidFilter - Button to show or hide invalid table elements is displayed.",
+        );
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Self->False(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are not displayed.",
+        );
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Self->True(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are displayed again.",
+        );
+
         # Filter added calendars.
         $Selenium->find_element( 'input#FilterCalendars', 'css' )->send_keys($RandomID);
         $Selenium->WaitFor(

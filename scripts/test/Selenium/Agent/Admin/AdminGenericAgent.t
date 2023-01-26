@@ -513,6 +513,22 @@ $Selenium->RunTest(
             "There is a class 'Invalid' for test generic job",
         );
 
+        # Checks for AdminValidFilter
+        $Self->True(
+            $Selenium->find_element( "#ValidFilter", 'css' )->is_displayed(),
+            "AdminValidFilter - Button to show or hide invalid table elements is displayed.",
+        );
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Self->False(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are not displayed.",
+        );
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Self->True(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are displayed again.",
+        );
+
         # Delete test job confirmation dialog. See bug#14197.
         $Selenium->find_element("//a[contains(\@href, \'Subaction=Delete;Profile=$GenericAgentJob\' )]")->click();
         $Selenium->WaitFor( AlertPresent => 1 );
