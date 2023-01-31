@@ -18,19 +18,19 @@ jobs:
         run: |
           apt-get update -y
           apt-get upgrade -y
-          apt-get install -y cpanminus make gcc npm git gettext libxml-libxml-perl libyaml-perl libxml2-utils libdatetime-perl libtemplate-perl libapache-dbi-perl
+          apt-get install -y libapache2-mod-perl2 libtimedate-perl libnet-dns-perl libnet-ldap-perl libio-socket-ssl-perl libpdf-api2-perl libdbd-mysql-perl libsoap-lite-perl libtext-csv-xs-perl libjson-xs-perl libapache-dbi-perl libxml-libxml-perl libxml-libxslt-perl libspreadsheet-xlsx-perl libyaml-perl libarchive-zip-perl libcrypt-eksblowfish-perl libencode-hanextra-perl libmail-imapclient-perl libtemplate-perl libdatetime-perl libmoo-perl liblocale-po-perl libhash-merge-perl libxml2-utils libical-parser-perl libexpat1-dev apache2 gnupg2 mariadb-client cpanminus make gcc git npm gettext
 
       - name: Check out repository code
+        uses: actions/checkout@v3
         env:
-          GIT_DEPTH: "1"
-        uses: actions/checkout@v2
+          fetch-depth: "1"
         with:
           path: znuny
 
       - name: Check out code policy
+        uses: actions/checkout@v3
         env:
-          GIT_DEPTH: "1"
-        uses: actions/checkout@v2
+          fetch-depth: "1"
         with:
           repository: znuny/ZnunyCodePolicy
           path: codepolicy
@@ -38,13 +38,13 @@ jobs:
 
       - name: Prepare code policy
         run: |
-          cpanm Code::TidyAll Perl::Critic
-          codepolicy/bin/otrs.CodePolicy.pl --install
+          cpanm --verbose Algorithm::Diff Code::TidyAll Perl::Critic Perl::Tidy Pod::POM XML::Parser
+          codepolicy/bin/znuny.CodePolicy.pl --install-eslint
 
       - name: Run code policy
         run: |
           cd "${GITHUB_WORKSPACE}/znuny"
-          "${GITHUB_WORKSPACE}/codepolicy/bin/otrs.CodePolicy.pl" --all
+          "${GITHUB_WORKSPACE}/codepolicy/bin/znuny.CodePolicy.pl" --all-files --mode ci
 
   unittests:
     name: UnitTests
