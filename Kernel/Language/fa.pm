@@ -2585,6 +2585,7 @@ sub Data {
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => 'درخواست‎های قفل شده من',
+        'My Owned Tickets' => '',
         'My watched tickets' => 'درخواست مشاهده شده من',
         'My responsibilities' => 'مسئولیت من',
         'Tickets in My Queues' => 'درخواستهای در صفهای من',
@@ -4369,9 +4370,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketMove.pm
         'You need move permissions!' => 'شما نیاز به مجوز حرکت دارید !',
-
-        # Perl Module: Kernel/Modules/AgentTicketOwnerView.pm
-        'My Owned Tickets' => '',
 
         # Perl Module: Kernel/Modules/AgentTicketPhone.pm
         'Chat is not active.' => 'چت غیر فعال است.',

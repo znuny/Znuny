@@ -1,4 +1,5 @@
 # 6.5.1 2023-??-??
+ - 2023-01-25 Added Dashboard element filter: My owned tickets.
  - 2023-01-23 Added new event module to store customer company data in ticket dynamic fields: Ticket::EventModulePost DynamicFieldFromCustomerCompany.
  - 2023-01-23 Sort screens in AdminDynamicFieldScreenConfiguration by values (#327). Thanks to Emin Yazi (@eyazi), Efflux. [PR#327](https://github.com/znuny/Znuny/pull/327)
  - 2023-01-20 Added SysConfig setting to configure format tags in rich text editor. Thanks to Daniel Sprenger (@sprengerdaniel). [PR#334](https://github.com/znuny/Znuny/pull/334)

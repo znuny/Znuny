@@ -2585,6 +2585,7 @@ sub Data {
         'Assigned to customer user' => 'Hozzárendelve az ügyfél-felhasználóhoz',
         'Accessible for customer user' => 'Hozzáférhető az ügyfél-felhasználónak',
         'My locked tickets' => 'Saját zárolt jegyek',
+        'My Owned Tickets' => '',
         'My watched tickets' => 'Saját megfigyelt jegyek',
         'My responsibilities' => 'Saját felelősségek',
         'Tickets in My Queues' => 'Jegyek a várólistáimban',
@@ -4369,9 +4370,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketMove.pm
         'You need move permissions!' => 'Áthelyezés jogosultságokra van szüksége!',
-
-        # Perl Module: Kernel/Modules/AgentTicketOwnerView.pm
-        'My Owned Tickets' => '',
 
         # Perl Module: Kernel/Modules/AgentTicketPhone.pm
         'Chat is not active.' => 'A csevegés nem aktív.',

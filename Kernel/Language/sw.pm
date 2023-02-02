@@ -2582,6 +2582,7 @@ sub Data {
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => 'Tiketi zangu zilizofungwa',
+        'My Owned Tickets' => '',
         'My watched tickets' => 'Tiketi zangu zinazoangaliwa',
         'My responsibilities' => 'Majukumu yangu',
         'Tickets in My Queues' => 'Tiketi katika foleni yangu',
@@ -4366,9 +4367,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketMove.pm
         'You need move permissions!' => '',
-
-        # Perl Module: Kernel/Modules/AgentTicketOwnerView.pm
-        'My Owned Tickets' => '',
 
         # Perl Module: Kernel/Modules/AgentTicketPhone.pm
         'Chat is not active.' => '',

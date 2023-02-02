@@ -2581,6 +2581,7 @@ bin/otrs.Daemon.pl status\').',
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => 'Tiket saya terkunci',
+        'My Owned Tickets' => '',
         'My watched tickets' => 'Tiket saya menonton',
         'My responsibilities' => 'Tanggung jawab saya',
         'Tickets in My Queues' => 'Tiket di Antrian saya',
@@ -4365,9 +4366,6 @@ bin/otrs.Daemon.pl status\').',
 
         # Perl Module: Kernel/Modules/AgentTicketMove.pm
         'You need move permissions!' => 'Anda perlu memindahkan permissions!',
-
-        # Perl Module: Kernel/Modules/AgentTicketOwnerView.pm
-        'My Owned Tickets' => '',
 
         # Perl Module: Kernel/Modules/AgentTicketPhone.pm
         'Chat is not active.' => 'Obrolan tidak diaktifkan',

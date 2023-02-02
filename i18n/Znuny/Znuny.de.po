@@ -24732,7 +24732,7 @@ msgstr "Ticketerstellung"
 msgid "Authorization code parameters not found."
 msgstr "Autorisierungscode-Parameter nicht gefunden."
 
-#. Perl Module: Kernel/Modules/AgentTicketOwnerView.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketGeneric.tt
 msgid "My Owned Tickets"
 msgstr "Meine eigenen Tickets"
 

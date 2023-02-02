@@ -2585,6 +2585,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Assigned to customer user' => '顧客ユーザーに割り当てられた',
         'Accessible for customer user' => '顧客ユーザーにアクセス可能',
         'My locked tickets' => 'ロックチケット',
+        'My Owned Tickets' => '',
         'My watched tickets' => '監視チケット',
         'My responsibilities' => '責任チケット',
         'Tickets in My Queues' => '担当キュー内チケット',
@@ -4370,9 +4371,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # Perl Module: Kernel/Modules/AgentTicketMove.pm
         'You need move permissions!' => 'move許可が必要です！',
-
-        # Perl Module: Kernel/Modules/AgentTicketOwnerView.pm
-        'My Owned Tickets' => '',
 
         # Perl Module: Kernel/Modules/AgentTicketPhone.pm
         'Chat is not active.' => 'チャットはアクティブではありません。',

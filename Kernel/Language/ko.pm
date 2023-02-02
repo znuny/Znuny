@@ -2579,6 +2579,7 @@ sub Data {
         'Assigned to customer user' => '고객 사용자에게 할당 됨',
         'Accessible for customer user' => '고객 사용자가 엑세스 가능',
         'My locked tickets' => '내 잠긴 티켓',
+        'My Owned Tickets' => '',
         'My watched tickets' => '내가 본 티켓',
         'My responsibilities' => '내 책임',
         'Tickets in My Queues' => '내 대기열의 티켓',
@@ -4363,9 +4364,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketMove.pm
         'You need move permissions!' => '이동할 권한이 없습니다.',
-
-        # Perl Module: Kernel/Modules/AgentTicketOwnerView.pm
-        'My Owned Tickets' => '',
 
         # Perl Module: Kernel/Modules/AgentTicketPhone.pm
         'Chat is not active.' => '채팅이 Active 되지 않음',
