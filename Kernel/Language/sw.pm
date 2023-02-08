@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.445720757159036;
+    $Self->{Completeness}        = 0.445290970983952;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -227,16 +227,6 @@ sub Data {
         'Message body' => '',
         'Add new notification language' => '',
         'Save Changes' => 'Hifadhi mabadiliko',
-        'Tag Reference' => '',
-        'Notifications are sent to an agent.' => '',
-        'You can use the following tags' => 'Unaweza kutumia lebo zifuatazo',
-        'To get the first 20 character of the appointment title.' => '',
-        'To get the appointment attribute' => '',
-        ' e. g.' => 'Mfano',
-        'To get the calendar attribute' => '',
-        'Attributes of the recipient user for the notification' => '',
-        'Config options' => 'Mchaguo wa usanidi',
-        'Example notification' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEventTransportEmailSettings.tt
         'Additional recipient email addresses' => '',
@@ -276,20 +266,6 @@ sub Data {
         'Queues ↔ Auto Responses' => '',
         'Response' => 'Majibu',
         'Auto response from' => 'Majibu automatiki kutoka',
-        'Reference' => 'Marejeo',
-        'To get the first 20 character of the subject.' => 'Kupata herufi 20 za kwanza za somo',
-        'To get the first 5 lines of the email.' => 'Kupata mistari 5 ya kwanza ya barua pepe.',
-        'To get the name of the ticket\'s customer user (if given).' => '',
-        'To get the article attribute' => 'Kupata sifa za makala',
-        'Options of the current customer user data' => 'Chaguo la data za mtumiaji za mteja wa sasa',
-        'Ticket owner options' => 'Chaguo la mmiliki wa tiketi',
-        'Ticket responsible options' => 'Michaguo ya tiketi husika',
-        'Options of the current user who requested this action' => 'Michaguo ya mtumiaji wa sasa ambae ameomba tendo hili.',
-        'Options of the ticket data' => 'Chaguo la data ya tiketi',
-        'Options of ticket dynamic fields internal key values' => 'Chaguo la thamani za muhimu za ndani za uga wenye nguvu wa tiketi.',
-        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            'Chaguo la thamani za za uga wenye nguvu wa kuonyesa wa tiketi, inatumika katika uga wa Kuangushachini na Chaguowingi.',
-        'Example response' => 'Majibu ya mfano',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
         'Cloud Service Management' => '',
@@ -432,6 +408,7 @@ sub Data {
         'Toggle %s permission for %s' => 'Geuza ruhusa %s kwa %s',
         'Customer Default Groups:' => 'Kikundi chaguo-msingi cha mteja',
         'No changes can be made to these groups.' => 'Hakuna mabadiliko yanayoweza kufanywa katika makundi haya.',
+        'Reference' => 'Marejeo',
         'ro' => 'ro',
         'Read only access to the ticket in this group/queue.' => 'Ufikivu wa kusoma tu kwenda kwenye tiketi katika kikundi hiki/foleni.',
         'rw' => 'soma andikka',
@@ -1443,24 +1420,6 @@ sub Data {
             '',
         'This field is required and must have less than 4000 characters.' =>
             '',
-        'Notifications are sent to an agent or a customer.' => 'Taarifa zimetumwa kwa wakala au mteja',
-        'To get the first 20 character of the subject (of the latest agent article).' =>
-            'Kupata herufi 20 za kwanza za somo (kutoka kwa wakala wa karibuni)',
-        'To get the first 5 lines of the body (of the latest agent article).' =>
-            'Kupata mistari 5 ya kwanza ya kiini (kutoka kwa wakala wa makala wa karibuni)',
-        'To get the first 20 character of the subject (of the latest customer article).' =>
-            'Kupata herufi 20 za kwanza za somo (kutoka kwa makala ya mteja wa karibuni)',
-        'To get the first 5 lines of the body (of the latest customer article).' =>
-            'Kupata mistari 5 ya kwanza ya kiini (kutoka kwa makala ya mteja wa karibuni)',
-        'Attributes of the current customer user data' => '',
-        'Attributes of the current ticket owner user data' => '',
-        'Attributes of the current ticket responsible user data' => '',
-        'Attributes of the current agent user who requested this action' =>
-            '',
-        'Attributes of the ticket data' => '',
-        'Ticket dynamic fields internal key values' => '',
-        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => '',
@@ -2079,8 +2038,6 @@ sub Data {
         'Edit Salutation' => 'Hariri salamu',
         'Filter for Salutations' => '',
         'Filter for salutations' => '',
-        'e. g.' => 'Mfano',
-        'Example salutation' => 'Mfano wa salamu',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => '',
@@ -2140,7 +2097,6 @@ sub Data {
         'Edit Signature' => 'Hariri Saini',
         'Filter for Signatures' => '',
         'Filter for signatures' => '',
-        'Example signature' => 'Saini ya mfano',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
         'State Management' => 'Usimamizi wa hali',
@@ -2312,18 +2268,6 @@ sub Data {
         'Delete this entry' => 'Futa ingizo hili',
         'Do you really want to delete this template?' => 'Kweli uanataka kufuta hiki kiolezo?',
         'A standard template with this name already exists!' => 'Kielezo cha kawaida kwa jina hili tayari kipo!',
-        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'Create type templates only supports this smart tags' => 'Tengeneza aina ya violezo kwa kusaidia tu lebo maizi.',
-        'Example template' => 'Kielezo cha mfano',
-        'The current ticket state is' => 'Hali ya tiketi ya sasa ni',
-        'Your email address is' => 'Anuani yako ya barua pepe ni',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplateAttachment.tt
         'Manage Template-Attachment Relations' => '',
@@ -3314,6 +3258,61 @@ sub Data {
             '',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
+        'To get the appointment attribute' => '',
+        ' e. g.' => 'Mfano',
+        'To get the first 20 character of the appointment title.' => '',
+        'To get the calendar attribute' => '',
+        'Attributes of the recipient user for the notification' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+        'To get the first 20 character of the subject.' => 'Kupata herufi 20 za kwanza za somo',
+        'To get the first 5 lines of the email.' => 'Kupata mistari 5 ya kwanza ya barua pepe.',
+        'To get the name of the ticket\'s customer user (if given).' => '',
+        'To get the article attribute' => 'Kupata sifa za makala',
+        'Options of the current customer user data' => 'Chaguo la data za mtumiaji za mteja wa sasa',
+        'Ticket owner options' => 'Chaguo la mmiliki wa tiketi',
+        'Options of the ticket data' => 'Chaguo la data ya tiketi',
+        'Options of ticket dynamic fields internal key values' => 'Chaguo la thamani za muhimu za ndani za uga wenye nguvu wa tiketi.',
+        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            'Chaguo la thamani za za uga wenye nguvu wa kuonyesa wa tiketi, inatumika katika uga wa Kuangushachini na Chaguowingi.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+        'To get the first 20 character of the subject (of the latest agent article).' =>
+            'Kupata herufi 20 za kwanza za somo (kutoka kwa wakala wa karibuni)',
+        'To get the first 5 lines of the body (of the latest agent article).' =>
+            'Kupata mistari 5 ya kwanza ya kiini (kutoka kwa wakala wa makala wa karibuni)',
+        'To get the first 20 character of the subject (of the latest customer article).' =>
+            'Kupata herufi 20 za kwanza za somo (kutoka kwa makala ya mteja wa karibuni)',
+        'To get the first 5 lines of the body (of the latest customer article).' =>
+            'Kupata mistari 5 ya kwanza ya kiini (kutoka kwa makala ya mteja wa karibuni)',
+        'Attributes of the current customer user data' => '',
+        'Attributes of the current ticket owner user data' => '',
+        'Attributes of the ticket data' => '',
+        'Ticket dynamic fields internal key values' => '',
+        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminSalutation.tt
+        'e. g.' => 'Mfano',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
+        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
+        'Tag Reference' => '',
+        'You can use the following tags' => 'Unaweza kutumia lebo zifuatazo',
+        'Ticket responsible options' => 'Michaguo ya tiketi husika',
+        'Options of the current user who requested this action' => 'Michaguo ya mtumiaji wa sasa ambae ameomba tendo hili.',
+        'Config options' => 'Mchaguo wa usanidi',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/GeneralSpecificationsWidget.tt
         'You can select one or more groups to define access for different agents.' =>

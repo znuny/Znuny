@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y - %T';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.200129428895001;
+    $Self->{Completeness}        = 0.199870319338629;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -225,16 +225,6 @@ sub Data {
         'Message body' => 'Тяло на съобщението',
         'Add new notification language' => 'Дованявене на нова езиково известие',
         'Save Changes' => 'Запази промените',
-        'Tag Reference' => 'Референтен маркер',
-        'Notifications are sent to an agent.' => '',
-        'You can use the following tags' => 'Можете да използвате следните маркери',
-        'To get the first 20 character of the appointment title.' => '',
-        'To get the appointment attribute' => '',
-        ' e. g.' => 'др.',
-        'To get the calendar attribute' => '',
-        'Attributes of the recipient user for the notification' => '',
-        'Config options' => 'Опции за конфигуриране',
-        'Example notification' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEventTransportEmailSettings.tt
         'Additional recipient email addresses' => '',
@@ -274,20 +264,6 @@ sub Data {
         'Queues ↔ Auto Responses' => '',
         'Response' => 'Отговор',
         'Auto response from' => 'Автоматичен отговор от',
-        'Reference' => 'Препратка',
-        'To get the first 20 character of the subject.' => 'За да се вземат първите 20 символа от "Относно" полето',
-        'To get the first 5 lines of the email.' => 'За да се вземат първите 5 реда от съобщението.',
-        'To get the name of the ticket\'s customer user (if given).' => 'За да получите името на потребителя на билета ( ID дадено).',
-        'To get the article attribute' => 'За да получите атрибута на статията',
-        'Options of the current customer user data' => 'Опции на текущите потребителски данни.',
-        'Ticket owner options' => 'Опции на собственика на билета',
-        'Ticket responsible options' => 'Настройки за отговор на билета',
-        'Options of the current user who requested this action' => 'Опции на текущия потребител, който е поискал това действие',
-        'Options of the ticket data' => 'Опции на данните за билетите',
-        'Options of ticket dynamic fields internal key values' => 'Опциите на динамичните полета на билетите за вътрешните стойности',
-        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            'Опциите на динамичните полета на билетите показват стойности, полезни за полетата "Покритие" и "Многофункционалст"',
-        'Example response' => 'Примерен отговор',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
         'Cloud Service Management' => 'Управление на облачните услуги',
@@ -430,6 +406,7 @@ sub Data {
         'Toggle %s permission for %s' => 'Превключване на %s разрешение за %s',
         'Customer Default Groups:' => 'Групи по подразбиране клиенти :',
         'No changes can be made to these groups.' => 'Не могат да се правят промени в тези групи.',
+        'Reference' => 'Препратка',
         'ro' => 'само за четене',
         'Read only access to the ticket in this group/queue.' => 'Достъп само за четене за билетите в тази група/опашка',
         'rw' => 'четене/запис',
@@ -1441,24 +1418,6 @@ sub Data {
             'Информирай поребителя веднъж за деня с един билет използвайси избрания път.',
         'This field is required and must have less than 4000 characters.' =>
             '',
-        'Notifications are sent to an agent or a customer.' => 'Уведомления се изпращат на агент или клиент-потребител',
-        'To get the first 20 character of the subject (of the latest agent article).' =>
-            'За да получите първите 20 знака на темата (на най-новата статия на Агента).',
-        'To get the first 5 lines of the body (of the latest agent article).' =>
-            'За да получите първите 5 реда на тялото (на най-новата статия на Агента).',
-        'To get the first 20 character of the subject (of the latest customer article).' =>
-            'За да получите първите 20 знака на темата (от последната статия на клиента).',
-        'To get the first 5 lines of the body (of the latest customer article).' =>
-            'За да получите първите 5 линии на тялото (от последната статия на клиента).',
-        'Attributes of the current customer user data' => 'Атрибути на текущите потребителски данни',
-        'Attributes of the current ticket owner user data' => 'Атрибути на данните за текущия потребител на собственика на билета',
-        'Attributes of the current ticket responsible user data' => 'Атрибути на текущите потребителски данни, отговорни за билетите',
-        'Attributes of the current agent user who requested this action' =>
-            '',
-        'Attributes of the ticket data' => '',
-        'Ticket dynamic fields internal key values' => '',
-        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => '',
@@ -2077,8 +2036,6 @@ sub Data {
         'Edit Salutation' => '',
         'Filter for Salutations' => '',
         'Filter for salutations' => '',
-        'e. g.' => '',
-        'Example salutation' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => '',
@@ -2138,7 +2095,6 @@ sub Data {
         'Edit Signature' => '',
         'Filter for Signatures' => '',
         'Filter for signatures' => '',
-        'Example signature' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
         'State Management' => 'Управление на статус',
@@ -2310,18 +2266,6 @@ sub Data {
         'Delete this entry' => '',
         'Do you really want to delete this template?' => '',
         'A standard template with this name already exists!' => '',
-        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'Create type templates only supports this smart tags' => '',
-        'Example template' => '',
-        'The current ticket state is' => 'Текущия статус на билета е',
-        'Your email address is' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplateAttachment.tt
         'Manage Template-Attachment Relations' => '',
@@ -3312,6 +3256,61 @@ sub Data {
             '',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
+        'To get the appointment attribute' => '',
+        ' e. g.' => 'др.',
+        'To get the first 20 character of the appointment title.' => '',
+        'To get the calendar attribute' => '',
+        'Attributes of the recipient user for the notification' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+        'To get the first 20 character of the subject.' => 'За да се вземат първите 20 символа от "Относно" полето',
+        'To get the first 5 lines of the email.' => 'За да се вземат първите 5 реда от съобщението.',
+        'To get the name of the ticket\'s customer user (if given).' => 'За да получите името на потребителя на билета ( ID дадено).',
+        'To get the article attribute' => 'За да получите атрибута на статията',
+        'Options of the current customer user data' => 'Опции на текущите потребителски данни.',
+        'Ticket owner options' => 'Опции на собственика на билета',
+        'Options of the ticket data' => 'Опции на данните за билетите',
+        'Options of ticket dynamic fields internal key values' => 'Опциите на динамичните полета на билетите за вътрешните стойности',
+        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            'Опциите на динамичните полета на билетите показват стойности, полезни за полетата "Покритие" и "Многофункционалст"',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+        'To get the first 20 character of the subject (of the latest agent article).' =>
+            'За да получите първите 20 знака на темата (на най-новата статия на Агента).',
+        'To get the first 5 lines of the body (of the latest agent article).' =>
+            'За да получите първите 5 реда на тялото (на най-новата статия на Агента).',
+        'To get the first 20 character of the subject (of the latest customer article).' =>
+            'За да получите първите 20 знака на темата (от последната статия на клиента).',
+        'To get the first 5 lines of the body (of the latest customer article).' =>
+            'За да получите първите 5 линии на тялото (от последната статия на клиента).',
+        'Attributes of the current customer user data' => 'Атрибути на текущите потребителски данни',
+        'Attributes of the current ticket owner user data' => 'Атрибути на данните за текущия потребител на собственика на билета',
+        'Attributes of the ticket data' => '',
+        'Ticket dynamic fields internal key values' => '',
+        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminSalutation.tt
+        'e. g.' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
+        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
+        'Tag Reference' => 'Референтен маркер',
+        'You can use the following tags' => 'Можете да използвате следните маркери',
+        'Ticket responsible options' => 'Настройки за отговор на билета',
+        'Options of the current user who requested this action' => 'Опции на текущия потребител, който е поискал това действие',
+        'Config options' => 'Опции за конфигуриране',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/GeneralSpecificationsWidget.tt
         'You can select one or more groups to define access for different agents.' =>

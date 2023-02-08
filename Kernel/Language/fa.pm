@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.640511244135253;
+    $Self->{Completeness}        = 0.639974063867726;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -230,16 +230,6 @@ sub Data {
         'Message body' => 'پیام بدن',
         'Add new notification language' => 'اضافه کردن زبان اطلاع رسانی جدید',
         'Save Changes' => 'ذخیره‌سازی تغییرات',
-        'Tag Reference' => 'مرجع برچسب',
-        'Notifications are sent to an agent.' => '',
-        'You can use the following tags' => 'شما می‌توانید از برچسب‌های زیر استفاده نمایید.',
-        'To get the first 20 character of the appointment title.' => '',
-        'To get the appointment attribute' => '',
-        ' e. g.' => 'به عنوان مثال',
-        'To get the calendar attribute' => '',
-        'Attributes of the recipient user for the notification' => 'صفات کاربران دریافت کننده برای اطلاع رسانی',
-        'Config options' => 'گزینه‌های پیکربندی',
-        'Example notification' => 'به عنوان مثال اطلاع رسانی ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEventTransportEmailSettings.tt
         'Additional recipient email addresses' => 'دریافت کننده اضافی آدرس ایمیل ',
@@ -279,20 +269,6 @@ sub Data {
         'Queues ↔ Auto Responses' => '',
         'Response' => 'پاسخ',
         'Auto response from' => 'پاسخ خودکار از طرف',
-        'Reference' => 'منبع',
-        'To get the first 20 character of the subject.' => 'برای دریافت ۲۰ حرف اول موضوع',
-        'To get the first 5 lines of the email.' => 'برای دریافت ۵ خط اول نامه',
-        'To get the name of the ticket\'s customer user (if given).' => 'برای دریافت نام کاربر و ضوابط بلیط (در صورت داده شده).',
-        'To get the article attribute' => 'برای گرفتن ویژگی مطلب',
-        'Options of the current customer user data' => 'گزینه‌هایی از داده مشترک کنونی',
-        'Ticket owner options' => 'گزینه‌های صاحب درخواست',
-        'Ticket responsible options' => 'گزینه‌های مسئول درخواست',
-        'Options of the current user who requested this action' => 'گزینه‌هایی از کاربر کنونی که این عملیات را درخواست کرده است',
-        'Options of the ticket data' => 'گزینه‌هایی از داده‌های درخواست',
-        'Options of ticket dynamic fields internal key values' => 'گزینه درخواست رشته پویا ارزش های داخلی کلیدی',
-        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            'گزینه زمینه های پویا بلیط نمایش مقادیر، مفید برای زمینه های کرکره و چندین انتخاب',
-        'Example response' => 'پاسخ نمونه',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
         'Cloud Service Management' => 'مدیریت سرویس های ابری',
@@ -435,6 +411,7 @@ sub Data {
         'Toggle %s permission for %s' => 'تعویض %s اجازه %s',
         'Customer Default Groups:' => 'گروه‌های پیش‌فرض مشترک',
         'No changes can be made to these groups.' => 'هیچ تغییری نمی‌توان به این گروه‌ها اعمال کرد.',
+        'Reference' => 'منبع',
         'ro' => 'فقط خواندنی',
         'Read only access to the ticket in this group/queue.' => 'حق فقط خواندنی برای درخواست‌ها در این گروه /لیست.',
         'rw' => 'خواندنی و نوشتنی',
@@ -1446,24 +1423,6 @@ sub Data {
             'کاربر اطلاع فقط یک بار در روز با بلیط تک با استفاده از یک حمل و نقل انتخاب در مورد.',
         'This field is required and must have less than 4000 characters.' =>
             '',
-        'Notifications are sent to an agent or a customer.' => 'اعلام به یک کارشناس یا مشترک ارسال شد.',
-        'To get the first 20 character of the subject (of the latest agent article).' =>
-            'برای گرفتن ۲۰ کاراکتر اول موضوع (از آخرین نوشته کارشناس).',
-        'To get the first 5 lines of the body (of the latest agent article).' =>
-            'برای گرفتن اولین ۵ خط بدنه (از آخرین نوشته کارشناس).',
-        'To get the first 20 character of the subject (of the latest customer article).' =>
-            'برای گرفتن اولین ۲۰ کاراکتر موضوع (از آخرین نوشته مشتری).',
-        'To get the first 5 lines of the body (of the latest customer article).' =>
-            'برای گرفتن اولین ۵ خط بدنه (از آخرین نوشته مشتری).',
-        'Attributes of the current customer user data' => 'ویژگی های داده های کاربر مشتری فعلی',
-        'Attributes of the current ticket owner user data' => 'ویژگی های درخواست فعلی داده های کاربرمالک',
-        'Attributes of the current ticket responsible user data' => 'ویژگی های درخواست فعلی داده های کاربر مسئول',
-        'Attributes of the current agent user who requested this action' =>
-            'ویژگی های عامل کاربر در حال حاضر که این عمل درخواست شده',
-        'Attributes of the ticket data' => 'ویژگی های درخواست داده ',
-        'Ticket dynamic fields internal key values' => 'درخواست زمینه های پویا ارزش های کلیدی داخلی',
-        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            'بلیط زمینه های پویا نمایش مقادیر، مفید برای زمینه های کرکره و چندین انتخاب',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => '',
@@ -2082,8 +2041,6 @@ sub Data {
         'Edit Salutation' => 'ویرایش عنوان',
         'Filter for Salutations' => '',
         'Filter for salutations' => '',
-        'e. g.' => 'به عنوان مثال',
-        'Example salutation' => 'نمونه عنوان',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => '',
@@ -2143,7 +2100,6 @@ sub Data {
         'Edit Signature' => 'ویرایش امضاء',
         'Filter for Signatures' => '',
         'Filter for signatures' => '',
-        'Example signature' => 'امضای نمونه',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
         'State Management' => 'مدیریت وضعیت',
@@ -2315,18 +2271,6 @@ sub Data {
         'Delete this entry' => 'حذف این ورودی',
         'Do you really want to delete this template?' => 'آیا واقعا مایل به حذف این قالب هستید؟',
         'A standard template with this name already exists!' => 'قالب استاندارد با این نام وجود دارد.',
-        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'Create type templates only supports this smart tags' => 'ایجاد قالب های نوع تنها پشتیبانی از این تگ های هوشمند',
-        'Example template' => 'نمونه قالب',
-        'The current ticket state is' => 'وضعیت فعلی درخواست',
-        'Your email address is' => 'آدرس ایمیل شما:',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplateAttachment.tt
         'Manage Template-Attachment Relations' => '',
@@ -3317,6 +3261,61 @@ sub Data {
             'این به طور پیش فرض رابط عمومی OTRS موجود است! هیچ پارامتر action داده شده وجود دارد.',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             'شما می توانید یک ماژول سفارشی عمومی (از طریق مدیر بسته) نصب، به عنوان مثال ماژول پرسش و پاسخ، که دارای یک رابط عمومی است.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
+        'To get the appointment attribute' => '',
+        ' e. g.' => 'به عنوان مثال',
+        'To get the first 20 character of the appointment title.' => '',
+        'To get the calendar attribute' => '',
+        'Attributes of the recipient user for the notification' => 'صفات کاربران دریافت کننده برای اطلاع رسانی',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+        'To get the first 20 character of the subject.' => 'برای دریافت ۲۰ حرف اول موضوع',
+        'To get the first 5 lines of the email.' => 'برای دریافت ۵ خط اول نامه',
+        'To get the name of the ticket\'s customer user (if given).' => 'برای دریافت نام کاربر و ضوابط بلیط (در صورت داده شده).',
+        'To get the article attribute' => 'برای گرفتن ویژگی مطلب',
+        'Options of the current customer user data' => 'گزینه‌هایی از داده مشترک کنونی',
+        'Ticket owner options' => 'گزینه‌های صاحب درخواست',
+        'Options of the ticket data' => 'گزینه‌هایی از داده‌های درخواست',
+        'Options of ticket dynamic fields internal key values' => 'گزینه درخواست رشته پویا ارزش های داخلی کلیدی',
+        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            'گزینه زمینه های پویا بلیط نمایش مقادیر، مفید برای زمینه های کرکره و چندین انتخاب',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+        'To get the first 20 character of the subject (of the latest agent article).' =>
+            'برای گرفتن ۲۰ کاراکتر اول موضوع (از آخرین نوشته کارشناس).',
+        'To get the first 5 lines of the body (of the latest agent article).' =>
+            'برای گرفتن اولین ۵ خط بدنه (از آخرین نوشته کارشناس).',
+        'To get the first 20 character of the subject (of the latest customer article).' =>
+            'برای گرفتن اولین ۲۰ کاراکتر موضوع (از آخرین نوشته مشتری).',
+        'To get the first 5 lines of the body (of the latest customer article).' =>
+            'برای گرفتن اولین ۵ خط بدنه (از آخرین نوشته مشتری).',
+        'Attributes of the current customer user data' => 'ویژگی های داده های کاربر مشتری فعلی',
+        'Attributes of the current ticket owner user data' => 'ویژگی های درخواست فعلی داده های کاربرمالک',
+        'Attributes of the ticket data' => 'ویژگی های درخواست داده ',
+        'Ticket dynamic fields internal key values' => 'درخواست زمینه های پویا ارزش های کلیدی داخلی',
+        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            'بلیط زمینه های پویا نمایش مقادیر، مفید برای زمینه های کرکره و چندین انتخاب',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminSalutation.tt
+        'e. g.' => 'به عنوان مثال',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
+        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
+        'Tag Reference' => 'مرجع برچسب',
+        'You can use the following tags' => 'شما می‌توانید از برچسب‌های زیر استفاده نمایید.',
+        'Ticket responsible options' => 'گزینه‌های مسئول درخواست',
+        'Options of the current user who requested this action' => 'گزینه‌هایی از کاربر کنونی که این عملیات را درخواست کرده است',
+        'Config options' => 'گزینه‌های پیکربندی',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/GeneralSpecificationsWidget.tt
         'You can select one or more groups to define access for different agents.' =>

@@ -24,7 +24,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.148681443132179;
+    $Self->{Completeness}        = 0.148484357270222;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -223,16 +223,6 @@ sub Data {
         'Message body' => '',
         'Add new notification language' => '',
         'Save Changes' => '',
-        'Tag Reference' => '',
-        'Notifications are sent to an agent.' => '',
-        'You can use the following tags' => 'Bạn có thể sử dụng những thẻ sau đây',
-        'To get the first 20 character of the appointment title.' => '',
-        'To get the appointment attribute' => '',
-        ' e. g.' => 'Thí dụ',
-        'To get the calendar attribute' => '',
-        'Attributes of the recipient user for the notification' => '',
-        'Config options' => 'Tùy chọn cấu hình',
-        'Example notification' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEventTransportEmailSettings.tt
         'Additional recipient email addresses' => '',
@@ -272,20 +262,6 @@ sub Data {
         'Queues ↔ Auto Responses' => '',
         'Response' => 'Phản hồi',
         'Auto response from' => 'Phản hồi tự động từ',
-        'Reference' => 'Tham chiếu',
-        'To get the first 20 character of the subject.' => 'Lấy 20 ký tự đầu tiên của tiêu đề',
-        'To get the first 5 lines of the email.' => 'Lấy 5 dòng đầu tiên của email',
-        'To get the name of the ticket\'s customer user (if given).' => '',
-        'To get the article attribute' => 'Để có được các thuộc tính bài viết',
-        'Options of the current customer user data' => 'Tùy chọn của dữ liệu người dùng của khách hàng hiện tại',
-        'Ticket owner options' => 'Sự lựa chọn chủ sở hữu vé',
-        'Ticket responsible options' => 'Vé tùy chọn chịu trách nhiệm',
-        'Options of the current user who requested this action' => 'Các tùy chọn của người dùng hiện tại yêu cầu hành động này',
-        'Options of the ticket data' => 'Tùy chọn các dữ liệu của vé',
-        'Options of ticket dynamic fields internal key values' => 'Tùy chọn của vé lĩnh vực năng động giá trị chính của nội bộ',
-        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            'Tùy chọn của vé lĩnh vực năng động hiển thị giá trị, hữu ích cho Dropdown và Multiselect lĩnh vực',
-        'Example response' => 'Ví dụ phản hồi',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
         'Cloud Service Management' => 'Quản lý dịch vụ đám mây',
@@ -428,6 +404,7 @@ sub Data {
         'Toggle %s permission for %s' => 'Toggle cho phép% s cho% s',
         'Customer Default Groups:' => 'Nhóm khách hàng mặc định:',
         'No changes can be made to these groups.' => 'Không có thay đổi có thể được thực hiện cho các nhóm này. ',
+        'Reference' => 'Tham chiếu',
         'ro' => 'Chỉ đọc',
         'Read only access to the ticket in this group/queue.' => 'Quyền chỉ đọc truy cập vào thẻ trong nhóm/hàng đợi này.',
         'rw' => 'đọc và ghi',
@@ -1439,24 +1416,6 @@ sub Data {
             '',
         'This field is required and must have less than 4000 characters.' =>
             '',
-        'Notifications are sent to an agent or a customer.' => 'Các thông báo đã được gửi tới điều hành viên hoặc khách hàng.',
-        'To get the first 20 character of the subject (of the latest agent article).' =>
-            '',
-        'To get the first 5 lines of the body (of the latest agent article).' =>
-            '',
-        'To get the first 20 character of the subject (of the latest customer article).' =>
-            '',
-        'To get the first 5 lines of the body (of the latest customer article).' =>
-            '',
-        'Attributes of the current customer user data' => '',
-        'Attributes of the current ticket owner user data' => '',
-        'Attributes of the current ticket responsible user data' => '',
-        'Attributes of the current agent user who requested this action' =>
-            '',
-        'Attributes of the ticket data' => '',
-        'Ticket dynamic fields internal key values' => '',
-        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => '',
@@ -2075,8 +2034,6 @@ sub Data {
         'Edit Salutation' => '',
         'Filter for Salutations' => '',
         'Filter for salutations' => '',
-        'e. g.' => '',
-        'Example salutation' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => '',
@@ -2136,7 +2093,6 @@ sub Data {
         'Edit Signature' => '',
         'Filter for Signatures' => '',
         'Filter for signatures' => '',
-        'Example signature' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
         'State Management' => 'Quản trị trạng thái',
@@ -2308,18 +2264,6 @@ sub Data {
         'Delete this entry' => '',
         'Do you really want to delete this template?' => '',
         'A standard template with this name already exists!' => '',
-        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'Create type templates only supports this smart tags' => '',
-        'Example template' => '',
-        'The current ticket state is' => 'Trạng thái thẻ hiện tại là',
-        'Your email address is' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplateAttachment.tt
         'Manage Template-Attachment Relations' => '',
@@ -3310,6 +3254,61 @@ sub Data {
             '',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
+        'To get the appointment attribute' => '',
+        ' e. g.' => 'Thí dụ',
+        'To get the first 20 character of the appointment title.' => '',
+        'To get the calendar attribute' => '',
+        'Attributes of the recipient user for the notification' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+        'To get the first 20 character of the subject.' => 'Lấy 20 ký tự đầu tiên của tiêu đề',
+        'To get the first 5 lines of the email.' => 'Lấy 5 dòng đầu tiên của email',
+        'To get the name of the ticket\'s customer user (if given).' => '',
+        'To get the article attribute' => 'Để có được các thuộc tính bài viết',
+        'Options of the current customer user data' => 'Tùy chọn của dữ liệu người dùng của khách hàng hiện tại',
+        'Ticket owner options' => 'Sự lựa chọn chủ sở hữu vé',
+        'Options of the ticket data' => 'Tùy chọn các dữ liệu của vé',
+        'Options of ticket dynamic fields internal key values' => 'Tùy chọn của vé lĩnh vực năng động giá trị chính của nội bộ',
+        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            'Tùy chọn của vé lĩnh vực năng động hiển thị giá trị, hữu ích cho Dropdown và Multiselect lĩnh vực',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+        'To get the first 20 character of the subject (of the latest agent article).' =>
+            '',
+        'To get the first 5 lines of the body (of the latest agent article).' =>
+            '',
+        'To get the first 20 character of the subject (of the latest customer article).' =>
+            '',
+        'To get the first 5 lines of the body (of the latest customer article).' =>
+            '',
+        'Attributes of the current customer user data' => '',
+        'Attributes of the current ticket owner user data' => '',
+        'Attributes of the ticket data' => '',
+        'Ticket dynamic fields internal key values' => '',
+        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminSalutation.tt
+        'e. g.' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
+        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
+        'Tag Reference' => '',
+        'You can use the following tags' => 'Bạn có thể sử dụng những thẻ sau đây',
+        'Ticket responsible options' => 'Vé tùy chọn chịu trách nhiệm',
+        'Options of the current user who requested this action' => 'Các tùy chọn của người dùng hiện tại yêu cầu hành động này',
+        'Config options' => 'Tùy chọn cấu hình',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/GeneralSpecificationsWidget.tt
         'You can select one or more groups to define access for different agents.' =>

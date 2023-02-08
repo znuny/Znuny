@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.256269212101602;
+    $Self->{Completeness}        = 0.255795104555033;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -227,16 +227,6 @@ sub Data {
         'Message body' => '',
         'Add new notification language' => '',
         'Save Changes' => 'परिवर्तन  सुरक्षित करें',
-        'Tag Reference' => '',
-        'Notifications are sent to an agent.' => '',
-        'You can use the following tags' => 'आप निम्नलिखित टैग का उपयोग कर सकते हैं।',
-        'To get the first 20 character of the appointment title.' => '',
-        'To get the appointment attribute' => '',
-        ' e. g.' => 'उदा.',
-        'To get the calendar attribute' => '',
-        'Attributes of the recipient user for the notification' => '',
-        'Config options' => 'संरचना के विकल्पों',
-        'Example notification' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEventTransportEmailSettings.tt
         'Additional recipient email addresses' => '',
@@ -276,20 +266,6 @@ sub Data {
         'Queues ↔ Auto Responses' => '',
         'Response' => 'प्रतिक्रिया',
         'Auto response from' => 'स्वत प्रतिक्रिया से',
-        'Reference' => 'संदर्भ में',
-        'To get the first 20 character of the subject.' => 'विषय के पहले 20 वर्ण प्राप्त करने के लिए।',
-        'To get the first 5 lines of the email.' => 'ईमेल की पहली 5 लाइनें प्राप्त करने के लिए।',
-        'To get the name of the ticket\'s customer user (if given).' => '',
-        'To get the article attribute' => 'अनुच्छेद विशेषता प्राप्त करने के लिए।',
-        'Options of the current customer user data' => 'मौजूदा ग्राहक उपयोगकर्ता के आंकड़ॊ के विकल्प',
-        'Ticket owner options' => 'टिकट स्वामी विकल्प',
-        'Ticket responsible options' => 'टिकट उत्तरदायी विकल्प',
-        'Options of the current user who requested this action' => 'वर्तमान उपयोगकर्ता के विकल्प जिसनॆ इस कार्रवाई के लिए अनुरोध किया।',
-        'Options of the ticket data' => 'टिकट आंकड़ॊ के विकल्प',
-        'Options of ticket dynamic fields internal key values' => '',
-        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            '',
-        'Example response' => 'उदाहरण प्रतिक्रिया',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
         'Cloud Service Management' => '',
@@ -432,6 +408,7 @@ sub Data {
         'Toggle %s permission for %s' => 'स्विच %s %s के लिए अनुमति है',
         'Customer Default Groups:' => 'ग्राहक तयशुदा समूहॆ:',
         'No changes can be made to these groups.' => 'इन समूहों में कोई बदलाव नहीं किया जा सकता।',
+        'Reference' => 'संदर्भ में',
         'ro' => 'केवल पढ़ने के लिए',
         'Read only access to the ticket in this group/queue.' => 'इस समूह/श्रेणी के टिकट को केवल पढ़ने के लिए प्रवेश।',
         'rw' => 'पढ़ने और लिखने के लिए',
@@ -1443,24 +1420,6 @@ sub Data {
             '',
         'This field is required and must have less than 4000 characters.' =>
             '',
-        'Notifications are sent to an agent or a customer.' => 'अधिसूचनाएँ एक प्रतिनिधि या एक ग्राहक को भेजी जाती है।',
-        'To get the first 20 character of the subject (of the latest agent article).' =>
-            'विषय के पहले 20 वर्ण (नवीनतम प्रतिनिधि अनुच्छेद में से) प्राप्त करने के लिए।',
-        'To get the first 5 lines of the body (of the latest agent article).' =>
-            'मुख्य-भाग (नवीनतम प्रतिनिधि अनुच्छेद में से एक) के पहले 5 लाइनें प्राप्त करने के लिए।',
-        'To get the first 20 character of the subject (of the latest customer article).' =>
-            'विषय के पहले 20 वर्ण (नवीनतम ग्राहक अनुच्छेद में से) प्राप्त करने के लिए।',
-        'To get the first 5 lines of the body (of the latest customer article).' =>
-            'मुख्य-भाग (नवीनतम ग्राहक अनुच्छेद  के) के पहले 5 लाइनें प्राप्त करने के लिए।',
-        'Attributes of the current customer user data' => '',
-        'Attributes of the current ticket owner user data' => '',
-        'Attributes of the current ticket responsible user data' => '',
-        'Attributes of the current agent user who requested this action' =>
-            '',
-        'Attributes of the ticket data' => '',
-        'Ticket dynamic fields internal key values' => '',
-        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => '',
@@ -2079,8 +2038,6 @@ sub Data {
         'Edit Salutation' => 'अभिवादन संपादित करें',
         'Filter for Salutations' => '',
         'Filter for salutations' => '',
-        'e. g.' => 'उदा.',
-        'Example salutation' => 'अभिवादन के उदाहरण',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => '',
@@ -2140,7 +2097,6 @@ sub Data {
         'Edit Signature' => 'हस्ताक्षर संपादित करें',
         'Filter for Signatures' => '',
         'Filter for signatures' => '',
-        'Example signature' => 'हस्ताक्षर के उदाहरण',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
         'State Management' => 'स्थिति प्रबंधन',
@@ -2312,18 +2268,6 @@ sub Data {
         'Delete this entry' => 'इस प्रविष्टि को हटाएँ',
         'Do you really want to delete this template?' => '',
         'A standard template with this name already exists!' => '',
-        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'Create type templates only supports this smart tags' => '',
-        'Example template' => '',
-        'The current ticket state is' => 'वर्तमान टिकट की स्थिति है ',
-        'Your email address is' => 'आपका ईमेल पता है',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplateAttachment.tt
         'Manage Template-Attachment Relations' => '',
@@ -3314,6 +3258,61 @@ sub Data {
             '',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
+        'To get the appointment attribute' => '',
+        ' e. g.' => 'उदा.',
+        'To get the first 20 character of the appointment title.' => '',
+        'To get the calendar attribute' => '',
+        'Attributes of the recipient user for the notification' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+        'To get the first 20 character of the subject.' => 'विषय के पहले 20 वर्ण प्राप्त करने के लिए।',
+        'To get the first 5 lines of the email.' => 'ईमेल की पहली 5 लाइनें प्राप्त करने के लिए।',
+        'To get the name of the ticket\'s customer user (if given).' => '',
+        'To get the article attribute' => 'अनुच्छेद विशेषता प्राप्त करने के लिए।',
+        'Options of the current customer user data' => 'मौजूदा ग्राहक उपयोगकर्ता के आंकड़ॊ के विकल्प',
+        'Ticket owner options' => 'टिकट स्वामी विकल्प',
+        'Options of the ticket data' => 'टिकट आंकड़ॊ के विकल्प',
+        'Options of ticket dynamic fields internal key values' => '',
+        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+        'To get the first 20 character of the subject (of the latest agent article).' =>
+            'विषय के पहले 20 वर्ण (नवीनतम प्रतिनिधि अनुच्छेद में से) प्राप्त करने के लिए।',
+        'To get the first 5 lines of the body (of the latest agent article).' =>
+            'मुख्य-भाग (नवीनतम प्रतिनिधि अनुच्छेद में से एक) के पहले 5 लाइनें प्राप्त करने के लिए।',
+        'To get the first 20 character of the subject (of the latest customer article).' =>
+            'विषय के पहले 20 वर्ण (नवीनतम ग्राहक अनुच्छेद में से) प्राप्त करने के लिए।',
+        'To get the first 5 lines of the body (of the latest customer article).' =>
+            'मुख्य-भाग (नवीनतम ग्राहक अनुच्छेद  के) के पहले 5 लाइनें प्राप्त करने के लिए।',
+        'Attributes of the current customer user data' => '',
+        'Attributes of the current ticket owner user data' => '',
+        'Attributes of the ticket data' => '',
+        'Ticket dynamic fields internal key values' => '',
+        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminSalutation.tt
+        'e. g.' => 'उदा.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
+        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
+        'Tag Reference' => '',
+        'You can use the following tags' => 'आप निम्नलिखित टैग का उपयोग कर सकते हैं।',
+        'Ticket responsible options' => 'टिकट उत्तरदायी विकल्प',
+        'Options of the current user who requested this action' => 'वर्तमान उपयोगकर्ता के विकल्प जिसनॆ इस कार्रवाई के लिए अनुरोध किया।',
+        'Config options' => 'संरचना के विकल्पों',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/GeneralSpecificationsWidget.tt
         'You can select one or more groups to define access for different agents.' =>

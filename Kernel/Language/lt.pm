@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.192525481313703;
+    $Self->{Completeness}        = 0.191927378829632;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -224,16 +224,6 @@ sub Data {
         'Message body' => '',
         'Add new notification language' => '',
         'Save Changes' => 'Išsaugoti pakeitimus',
-        'Tag Reference' => '',
-        'Notifications are sent to an agent.' => '',
-        'You can use the following tags' => 'Galite naudoti šias žymeles',
-        'To get the first 20 character of the appointment title.' => '',
-        'To get the appointment attribute' => '',
-        ' e. g.' => ' pvz.',
-        'To get the calendar attribute' => '',
-        'Attributes of the recipient user for the notification' => '',
-        'Config options' => 'Konfigūracijos parinktys',
-        'Example notification' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEventTransportEmailSettings.tt
         'Additional recipient email addresses' => '',
@@ -273,20 +263,6 @@ sub Data {
         'Queues ↔ Auto Responses' => '',
         'Response' => 'Atsakymas',
         'Auto response from' => 'Automatinis atsakymas nuo',
-        'Reference' => 'Nuoroda (Reference)',
-        'To get the first 20 character of the subject.' => '',
-        'To get the first 5 lines of the email.' => '',
-        'To get the name of the ticket\'s customer user (if given).' => '',
-        'To get the article attribute' => '',
-        'Options of the current customer user data' => 'Šio kliento naudotojo duomenų parinktys',
-        'Ticket owner options' => 'Trikties savininko parinktys',
-        'Ticket responsible options' => '',
-        'Options of the current user who requested this action' => 'Naudotojo prašiusio šio veiksmo parinktys',
-        'Options of the ticket data' => 'Trikties duomenų parinktys',
-        'Options of ticket dynamic fields internal key values' => '',
-        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            '',
-        'Example response' => 'Atsakymo pavyzdys',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
         'Cloud Service Management' => '',
@@ -429,6 +405,7 @@ sub Data {
         'Toggle %s permission for %s' => 'Įjungti %s leidimą %s',
         'Customer Default Groups:' => 'Standartinės klientų grupės:',
         'No changes can be made to these groups.' => 'Šioms grupėms negalima atlikti jokių pakeitimų.',
+        'Reference' => 'Nuoroda (Reference)',
         'ro' => 'ro',
         'Read only access to the ticket in this group/queue.' => 'Tik skaitymo teisės trikčiai šioje grupėje/eilėje.',
         'rw' => 'rw',
@@ -1440,24 +1417,6 @@ sub Data {
             '',
         'This field is required and must have less than 4000 characters.' =>
             '',
-        'Notifications are sent to an agent or a customer.' => 'Pranešimai yra siunčiami agentui arba klientui.',
-        'To get the first 20 character of the subject (of the latest agent article).' =>
-            'Gauti pirmus 20 temos simbolių (paskutinio agento straipsnio).',
-        'To get the first 5 lines of the body (of the latest agent article).' =>
-            'Gauti pirmas 5 turinio eilutes (paskutinio agento straipsnio).',
-        'To get the first 20 character of the subject (of the latest customer article).' =>
-            'Gauti pirmus 20 temos simbolių (paskutinio kliento straipsnio).',
-        'To get the first 5 lines of the body (of the latest customer article).' =>
-            'Gauti pirmas 5 turinio eilutes (paskutinio kliento straipsnio).',
-        'Attributes of the current customer user data' => '',
-        'Attributes of the current ticket owner user data' => '',
-        'Attributes of the current ticket responsible user data' => '',
-        'Attributes of the current agent user who requested this action' =>
-            '',
-        'Attributes of the ticket data' => '',
-        'Ticket dynamic fields internal key values' => '',
-        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => '',
@@ -2076,8 +2035,6 @@ sub Data {
         'Edit Salutation' => 'Redaguoti kreipimąsi',
         'Filter for Salutations' => '',
         'Filter for salutations' => '',
-        'e. g.' => 'pvz.',
-        'Example salutation' => 'Kreipimosi pavyzdys',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => '',
@@ -2137,7 +2094,6 @@ sub Data {
         'Edit Signature' => 'Redaguoti parašą',
         'Filter for Signatures' => '',
         'Filter for signatures' => '',
-        'Example signature' => 'Parašo pavyzdys',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
         'State Management' => 'Būsenų valdymas',
@@ -2309,18 +2265,6 @@ sub Data {
         'Delete this entry' => 'Ištrinti šį įrašą',
         'Do you really want to delete this template?' => '',
         'A standard template with this name already exists!' => '',
-        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'Create type templates only supports this smart tags' => '',
-        'Example template' => '',
-        'The current ticket state is' => 'Dabartinė trikties būsena yra',
-        'Your email address is' => 'Jūsų el. pašto adresas yra',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplateAttachment.tt
         'Manage Template-Attachment Relations' => '',
@@ -3311,6 +3255,61 @@ sub Data {
             '',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
+        'To get the appointment attribute' => '',
+        ' e. g.' => ' pvz.',
+        'To get the first 20 character of the appointment title.' => '',
+        'To get the calendar attribute' => '',
+        'Attributes of the recipient user for the notification' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+        'To get the first 20 character of the subject.' => '',
+        'To get the first 5 lines of the email.' => '',
+        'To get the name of the ticket\'s customer user (if given).' => '',
+        'To get the article attribute' => '',
+        'Options of the current customer user data' => 'Šio kliento naudotojo duomenų parinktys',
+        'Ticket owner options' => 'Trikties savininko parinktys',
+        'Options of the ticket data' => 'Trikties duomenų parinktys',
+        'Options of ticket dynamic fields internal key values' => '',
+        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+        'To get the first 20 character of the subject (of the latest agent article).' =>
+            'Gauti pirmus 20 temos simbolių (paskutinio agento straipsnio).',
+        'To get the first 5 lines of the body (of the latest agent article).' =>
+            'Gauti pirmas 5 turinio eilutes (paskutinio agento straipsnio).',
+        'To get the first 20 character of the subject (of the latest customer article).' =>
+            'Gauti pirmus 20 temos simbolių (paskutinio kliento straipsnio).',
+        'To get the first 5 lines of the body (of the latest customer article).' =>
+            'Gauti pirmas 5 turinio eilutes (paskutinio kliento straipsnio).',
+        'Attributes of the current customer user data' => '',
+        'Attributes of the current ticket owner user data' => '',
+        'Attributes of the ticket data' => '',
+        'Ticket dynamic fields internal key values' => '',
+        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminSalutation.tt
+        'e. g.' => 'pvz.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
+        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
+        'Tag Reference' => '',
+        'You can use the following tags' => 'Galite naudoti šias žymeles',
+        'Ticket responsible options' => '',
+        'Options of the current user who requested this action' => 'Naudotojo prašiusio šio veiksmo parinktys',
+        'Config options' => 'Konfigūracijos parinktys',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/GeneralSpecificationsWidget.tt
         'You can select one or more groups to define access for different agents.' =>

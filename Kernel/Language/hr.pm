@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.218896618670118;
+    $Self->{Completeness}        = 0.218187712757335;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -228,16 +228,6 @@ sub Data {
         'Message body' => 'Tijelo poruke',
         'Add new notification language' => '',
         'Save Changes' => 'Spremi promjene',
-        'Tag Reference' => '',
-        'Notifications are sent to an agent.' => '',
-        'You can use the following tags' => 'Možete koristiti sljedeće oznake',
-        'To get the first 20 character of the appointment title.' => '',
-        'To get the appointment attribute' => '',
-        ' e. g.' => 'npr.',
-        'To get the calendar attribute' => '',
-        'Attributes of the recipient user for the notification' => '',
-        'Config options' => 'Konfiguracijske opcije',
-        'Example notification' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEventTransportEmailSettings.tt
         'Additional recipient email addresses' => '',
@@ -277,20 +267,6 @@ sub Data {
         'Queues ↔ Auto Responses' => '',
         'Response' => 'Odgovor',
         'Auto response from' => 'Automatski odgovor od',
-        'Reference' => 'Reference',
-        'To get the first 20 character of the subject.' => 'Da vidite prvih 20 slova predmeta',
-        'To get the first 5 lines of the email.' => 'Da vidite prvih 5 redaka poruke',
-        'To get the name of the ticket\'s customer user (if given).' => '',
-        'To get the article attribute' => 'Da vidite atribute članka',
-        'Options of the current customer user data' => 'Opcije podataka o trenutnom korisniku',
-        'Ticket owner options' => 'Opcije vlasnika kartice',
-        'Ticket responsible options' => 'Opcije odgovornog za karticu',
-        'Options of the current user who requested this action' => 'Opcije trenutnog korisnika koji je tražio ovu akciju',
-        'Options of the ticket data' => 'Opcije podataka o kartici',
-        'Options of ticket dynamic fields internal key values' => '',
-        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            '',
-        'Example response' => 'Primjer odgovora',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
         'Cloud Service Management' => '',
@@ -433,6 +409,7 @@ sub Data {
         'Toggle %s permission for %s' => 'Promijeni %s dozvole za %s',
         'Customer Default Groups:' => 'Zadane Grupe za Korisnika:',
         'No changes can be made to these groups.' => 'Na ovim grupama promjene nisu moguće.',
+        'Reference' => 'Reference',
         'ro' => '"ro"',
         'Read only access to the ticket in this group/queue.' => 'Pristup ograničen samo na čitanje za kartice u ovim grupama/redovima.',
         'rw' => '"rw"',
@@ -1444,24 +1421,6 @@ sub Data {
             '',
         'This field is required and must have less than 4000 characters.' =>
             '',
-        'Notifications are sent to an agent or a customer.' => 'Obavijest poslana operateru ili korisniku.',
-        'To get the first 20 character of the subject (of the latest agent article).' =>
-            'Vidjeti prvih 20 slova predmeta (posljednjeg članka operatera).',
-        'To get the first 5 lines of the body (of the latest agent article).' =>
-            '',
-        'To get the first 20 character of the subject (of the latest customer article).' =>
-            'Vidjeti prvih 20 slova predmeta (posljednjeg članka zaposlenika)',
-        'To get the first 5 lines of the body (of the latest customer article).' =>
-            'Vidjeti prvih 5 redaka poruke (posljednjeg članka zaposlenika).',
-        'Attributes of the current customer user data' => '',
-        'Attributes of the current ticket owner user data' => '',
-        'Attributes of the current ticket responsible user data' => '',
-        'Attributes of the current agent user who requested this action' =>
-            '',
-        'Attributes of the ticket data' => '',
-        'Ticket dynamic fields internal key values' => '',
-        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => '',
@@ -2080,8 +2039,6 @@ sub Data {
         'Edit Salutation' => 'Uredi zaglavlje/pozdrav',
         'Filter for Salutations' => '',
         'Filter for salutations' => '',
-        'e. g.' => 'npr.',
-        'Example salutation' => 'Primjer zaglavlja/pozdrava',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => '',
@@ -2141,7 +2098,6 @@ sub Data {
         'Edit Signature' => 'Uredi podnožje/potpis',
         'Filter for Signatures' => '',
         'Filter for signatures' => '',
-        'Example signature' => 'Primjer podnožja/potpisa',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
         'State Management' => 'Upravljanje statusima',
@@ -2313,18 +2269,6 @@ sub Data {
         'Delete this entry' => 'Obriši ovaj unos',
         'Do you really want to delete this template?' => 'Sigurno želite obrisati ovaj predložak?',
         'A standard template with this name already exists!' => 'Predložak sa tim imenom već postoji!',
-        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'Create type templates only supports this smart tags' => 'Predlošci tipa Napravi, podržavaju samo ove pametne oznake',
-        'Example template' => '',
-        'The current ticket state is' => 'Trenutni status kartice je',
-        'Your email address is' => 'Vaša adresa E-pošte je',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplateAttachment.tt
         'Manage Template-Attachment Relations' => '',
@@ -3315,6 +3259,61 @@ sub Data {
             '',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
+        'To get the appointment attribute' => '',
+        ' e. g.' => 'npr.',
+        'To get the first 20 character of the appointment title.' => '',
+        'To get the calendar attribute' => '',
+        'Attributes of the recipient user for the notification' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+        'To get the first 20 character of the subject.' => 'Da vidite prvih 20 slova predmeta',
+        'To get the first 5 lines of the email.' => 'Da vidite prvih 5 redaka poruke',
+        'To get the name of the ticket\'s customer user (if given).' => '',
+        'To get the article attribute' => 'Da vidite atribute članka',
+        'Options of the current customer user data' => 'Opcije podataka o trenutnom korisniku',
+        'Ticket owner options' => 'Opcije vlasnika kartice',
+        'Options of the ticket data' => 'Opcije podataka o kartici',
+        'Options of ticket dynamic fields internal key values' => '',
+        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+        'To get the first 20 character of the subject (of the latest agent article).' =>
+            'Vidjeti prvih 20 slova predmeta (posljednjeg članka operatera).',
+        'To get the first 5 lines of the body (of the latest agent article).' =>
+            '',
+        'To get the first 20 character of the subject (of the latest customer article).' =>
+            'Vidjeti prvih 20 slova predmeta (posljednjeg članka zaposlenika)',
+        'To get the first 5 lines of the body (of the latest customer article).' =>
+            'Vidjeti prvih 5 redaka poruke (posljednjeg članka zaposlenika).',
+        'Attributes of the current customer user data' => '',
+        'Attributes of the current ticket owner user data' => '',
+        'Attributes of the ticket data' => '',
+        'Ticket dynamic fields internal key values' => '',
+        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminSalutation.tt
+        'e. g.' => 'npr.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
+        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
+        'Tag Reference' => '',
+        'You can use the following tags' => 'Možete koristiti sljedeće oznake',
+        'Ticket responsible options' => 'Opcije odgovornog za karticu',
+        'Options of the current user who requested this action' => 'Opcije trenutnog korisnika koji je tražio ovu akciju',
+        'Config options' => 'Konfiguracijske opcije',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/GeneralSpecificationsWidget.tt
         'You can select one or more groups to define access for different agents.' =>

@@ -24,7 +24,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.55686782074098;
+    $Self->{Completeness}        = 0.556167936456476;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -223,16 +223,6 @@ sub Data {
         'Message body' => 'Badan Mesej',
         'Add new notification language' => 'Menambah bahasa pemberitahuan baru',
         'Save Changes' => 'Simpan Perubahan',
-        'Tag Reference' => 'Label Rujukan',
-        'Notifications are sent to an agent.' => '',
-        'You can use the following tags' => 'Tag berikut boleh digunakan',
-        'To get the first 20 character of the appointment title.' => '',
-        'To get the appointment attribute' => '',
-        ' e. g.' => 'cth.',
-        'To get the calendar attribute' => '',
-        'Attributes of the recipient user for the notification' => 'Sifat-sifat pengguna penerima bagi pemberitahuan',
-        'Config options' => 'tetapan tatarajah',
-        'Example notification' => 'Contoh pemberitahuan',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEventTransportEmailSettings.tt
         'Additional recipient email addresses' => 'Alamat e-mel penerima tambahan',
@@ -272,20 +262,6 @@ sub Data {
         'Queues ↔ Auto Responses' => '',
         'Response' => 'Tindak balas',
         'Auto response from' => 'Jawapan automatik',
-        'Reference' => 'Rujukan(en)',
-        'To get the first 20 character of the subject.' => '20 aksara pertama subjek',
-        'To get the first 5 lines of the email.' => 'Yang pertama lima baris mesej',
-        'To get the name of the ticket\'s customer user (if given).' => 'Untuk mendapatkan nama tiket pengguna pelanggan (jika diberikan).',
-        'To get the article attribute' => 'Atribut Seksyen',
-        'Options of the current customer user data' => 'Atribut pelanggan semasa',
-        'Ticket owner options' => 'Atribut memegang tiket',
-        'Ticket responsible options' => 'Atribut caj tiket',
-        'Options of the current user who requested this action' => 'Pilihan pengguna semasa yang meminta tindakan ini',
-        'Options of the ticket data' => 'Pilihan data tiket',
-        'Options of ticket dynamic fields internal key values' => 'Pilihan tiket medan dinamik nilai utama dalaman',
-        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            'Pilihan tiket medan dinamik memaparkan nilai , berguna untuk medan kotak pilihan dan medan pelbagai pilihan ',
-        'Example response' => 'balas daripada sampel',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
         'Cloud Service Management' => 'Awan Pengurusan Perkhidmatan',
@@ -428,6 +404,7 @@ sub Data {
         'Toggle %s permission for %s' => 'Toggle kebenaran %s untuk %s',
         'Customer Default Groups:' => 'Kumpulan standard:',
         'No changes can be made to these groups.' => 'Dalam kumpulan-kumpulan ini tidak boleh diubah suai.',
+        'Reference' => 'Rujukan(en)',
         'ro' => 'ro',
         'Read only access to the ticket in this group/queue.' => 'Baca sahaja akses kepada tiket dalam kumpulan ini / beratur.',
         'rw' => 'rw',
@@ -1439,24 +1416,6 @@ sub Data {
             'Memberitahu pengguna hanya sekali setiap hari kira-kira satu tiket menggunakan pengangkutan yang dipilih.',
         'This field is required and must have less than 4000 characters.' =>
             '',
-        'Notifications are sent to an agent or a customer.' => 'Pemberitahuan dihantar kepada ejen atau pelanggan.',
-        'To get the first 20 character of the subject (of the latest agent article).' =>
-            'Untuk mendapatkan pertama 20 watak subjek (artikel ejen terbaru).',
-        'To get the first 5 lines of the body (of the latest agent article).' =>
-            'Untuk mendapatkan 5 baris pertama badan (artikel ejen terbaru).',
-        'To get the first 20 character of the subject (of the latest customer article).' =>
-            'Untuk mendapatkan pertama 20 watak subjek (artikel pelanggan terbaru)',
-        'To get the first 5 lines of the body (of the latest customer article).' =>
-            'Untuk mendapatkan 5 baris pertama badan (pelanggan artikel yang terbaru).',
-        'Attributes of the current customer user data' => 'Sifat-sifat data pengguna semasa pelanggan',
-        'Attributes of the current ticket owner user data' => 'Sifat-sifat data pengguna pemilik tiket semasa',
-        'Attributes of the current ticket responsible user data' => 'Sifat-sifat data tiket semasa pengguna bertanggungjawab',
-        'Attributes of the current agent user who requested this action' =>
-            'Sifat-sifat pengguna ejen semasa yang memohon tindakan ini',
-        'Attributes of the ticket data' => 'Sifat-sifat data tiket',
-        'Ticket dynamic fields internal key values' => 'Tiket medan dinamik nilai utama dalaman',
-        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            'Tiket bidang dinamik memaparkan nilai, berguna untuk medan Turun ke bawah dan Pelbagai pilihan.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => '',
@@ -2075,8 +2034,6 @@ sub Data {
         'Edit Salutation' => 'Edit salam',
         'Filter for Salutations' => '',
         'Filter for salutations' => '',
-        'e. g.' => 'cth.',
-        'Example salutation' => 'salam contoh',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => '',
@@ -2136,7 +2093,6 @@ sub Data {
         'Edit Signature' => 'Edit Tandatangan',
         'Filter for Signatures' => '',
         'Filter for signatures' => '',
-        'Example signature' => 'tandatangan contoh',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
         'State Management' => 'Pengurusan Keadaan',
@@ -2308,18 +2264,6 @@ sub Data {
         'Delete this entry' => 'Padam entri ini',
         'Do you really want to delete this template?' => 'Adakah anda benar-benar mahu untuk memadam template ini?',
         'A standard template with this name already exists!' => 'Templat piawai dengan nama ini sudah wujud!',
-        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'Create type templates only supports this smart tags' => 'Cipta templat jenis hanya menyokong tanda pintar ini',
-        'Example template' => 'Contoh templat',
-        'The current ticket state is' => 'Keadaan tiket semasa',
-        'Your email address is' => 'Alamat e-mel anda adalah',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplateAttachment.tt
         'Manage Template-Attachment Relations' => '',
@@ -3310,6 +3254,61 @@ sub Data {
             'Ini adalah antara muka awam lalai bagi OTRS! Tidak terdapat pada parameter yang diberikan.',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
+        'To get the appointment attribute' => '',
+        ' e. g.' => 'cth.',
+        'To get the first 20 character of the appointment title.' => '',
+        'To get the calendar attribute' => '',
+        'Attributes of the recipient user for the notification' => 'Sifat-sifat pengguna penerima bagi pemberitahuan',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+        'To get the first 20 character of the subject.' => '20 aksara pertama subjek',
+        'To get the first 5 lines of the email.' => 'Yang pertama lima baris mesej',
+        'To get the name of the ticket\'s customer user (if given).' => 'Untuk mendapatkan nama tiket pengguna pelanggan (jika diberikan).',
+        'To get the article attribute' => 'Atribut Seksyen',
+        'Options of the current customer user data' => 'Atribut pelanggan semasa',
+        'Ticket owner options' => 'Atribut memegang tiket',
+        'Options of the ticket data' => 'Pilihan data tiket',
+        'Options of ticket dynamic fields internal key values' => 'Pilihan tiket medan dinamik nilai utama dalaman',
+        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            'Pilihan tiket medan dinamik memaparkan nilai , berguna untuk medan kotak pilihan dan medan pelbagai pilihan ',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+        'To get the first 20 character of the subject (of the latest agent article).' =>
+            'Untuk mendapatkan pertama 20 watak subjek (artikel ejen terbaru).',
+        'To get the first 5 lines of the body (of the latest agent article).' =>
+            'Untuk mendapatkan 5 baris pertama badan (artikel ejen terbaru).',
+        'To get the first 20 character of the subject (of the latest customer article).' =>
+            'Untuk mendapatkan pertama 20 watak subjek (artikel pelanggan terbaru)',
+        'To get the first 5 lines of the body (of the latest customer article).' =>
+            'Untuk mendapatkan 5 baris pertama badan (pelanggan artikel yang terbaru).',
+        'Attributes of the current customer user data' => 'Sifat-sifat data pengguna semasa pelanggan',
+        'Attributes of the current ticket owner user data' => 'Sifat-sifat data pengguna pemilik tiket semasa',
+        'Attributes of the ticket data' => 'Sifat-sifat data tiket',
+        'Ticket dynamic fields internal key values' => 'Tiket medan dinamik nilai utama dalaman',
+        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            'Tiket bidang dinamik memaparkan nilai, berguna untuk medan Turun ke bawah dan Pelbagai pilihan.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminSalutation.tt
+        'e. g.' => 'cth.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
+        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
+        'Tag Reference' => 'Label Rujukan',
+        'You can use the following tags' => 'Tag berikut boleh digunakan',
+        'Ticket responsible options' => 'Atribut caj tiket',
+        'Options of the current user who requested this action' => 'Pilihan pengguna semasa yang meminta tindakan ini',
+        'Config options' => 'tetapan tatarajah',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/GeneralSpecificationsWidget.tt
         'You can select one or more groups to define access for different agents.' =>

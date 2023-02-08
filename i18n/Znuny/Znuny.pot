@@ -634,46 +634,6 @@ msgstr ""
 msgid "Save Changes"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Tag Reference"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Notifications are sent to an agent."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "You can use the following tags"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "To get the first 20 character of the appointment title."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "To get the appointment attribute"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid " e. g."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "To get the calendar attribute"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Attributes of the recipient user for the notification"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Config options"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Example notification"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEventTransportEmailSettings.tt
 msgid "Additional recipient email addresses"
 msgstr ""
@@ -796,58 +756,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
 msgid "Auto response from"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
-msgid "Reference"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
-msgid "To get the first 20 character of the subject."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
-msgid "To get the first 5 lines of the email."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
-msgid "To get the name of the ticket's customer user (if given)."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
-msgid "To get the article attribute"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
-msgid "Options of the current customer user data"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
-msgid "Ticket owner options"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
-msgid "Ticket responsible options"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
-msgid "Options of the current user who requested this action"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
-msgid "Options of the ticket data"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
-msgid "Options of ticket dynamic fields internal key values"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
-msgid "Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
-msgid "Example response"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
@@ -1284,6 +1192,10 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
 msgid "No changes can be made to these groups."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
+msgid "Reference"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
@@ -4326,54 +4238,6 @@ msgstr ""
 msgid "This field is required and must have less than 4000 characters."
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
-msgid "Notifications are sent to an agent or a customer."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
-msgid "To get the first 20 character of the subject (of the latest agent article)."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
-msgid "To get the first 5 lines of the body (of the latest agent article)."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
-msgid "To get the first 20 character of the subject (of the latest customer article)."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
-msgid "To get the first 5 lines of the body (of the latest customer article)."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
-msgid "Attributes of the current customer user data"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
-msgid "Attributes of the current ticket owner user data"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
-msgid "Attributes of the current ticket responsible user data"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
-msgid "Attributes of the current agent user who requested this action"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
-msgid "Attributes of the ticket data"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
-msgid "Ticket dynamic fields internal key values"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
-msgid "Ticket dynamic fields display values, useful for Dropdown and Multiselect fields"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
 msgid "Use comma or semicolon to separate email addresses."
 msgstr ""
@@ -6246,14 +6110,6 @@ msgstr ""
 msgid "Filter for salutations"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSalutation.tt
-msgid "e. g."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSalutation.tt
-msgid "Example salutation"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
 msgid "Secure Mode Needs to be Enabled!"
 msgstr ""
@@ -6420,10 +6276,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSignature.tt
 msgid "Filter for signatures"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSignature.tt
-msgid "Example signature"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
@@ -6876,38 +6728,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplate.tt
 msgid "A standard template with this name already exists!"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplate.tt
-msgid "To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplate.tt
-msgid "To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplate.tt
-msgid "To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplate.tt
-msgid "To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplate.tt
-msgid "Create type templates only supports this smart tags"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplate.tt
-msgid "Example template"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplate.tt
-msgid "The current ticket state is"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplate.tt
-msgid "Your email address is"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplateAttachment.tt
@@ -9660,6 +9480,138 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/PublicDefault.tt
 msgid "You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
+msgid "To get the appointment attribute"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
+msgid " e. g."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
+msgid "To get the first 20 character of the appointment title."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
+msgid "To get the calendar attribute"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
+msgid "Attributes of the recipient user for the notification"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+msgid "To get the first 20 character of the subject."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+msgid "To get the first 5 lines of the email."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+msgid "To get the name of the ticket's customer user (if given)."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+msgid "To get the article attribute"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+msgid "Options of the current customer user data"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+msgid "Ticket owner options"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+msgid "Options of the ticket data"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+msgid "Options of ticket dynamic fields internal key values"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+msgid "Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+msgid "To get the first 20 character of the subject (of the latest agent article)."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+msgid "To get the first 5 lines of the body (of the latest agent article)."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+msgid "To get the first 20 character of the subject (of the latest customer article)."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+msgid "To get the first 5 lines of the body (of the latest customer article)."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+msgid "Attributes of the current customer user data"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+msgid "Attributes of the current ticket owner user data"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+msgid "Attributes of the ticket data"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+msgid "Ticket dynamic fields internal key values"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+msgid "Ticket dynamic fields display values, useful for Dropdown and Multiselect fields"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminSalutation.tt
+msgid "e. g."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminSalutation.tt
+msgid "Ticket responsible options"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
+msgid "To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
+msgid "To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
+msgid "To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
+msgid "To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
+msgid "Tag Reference"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
+msgid "You can use the following tags"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
+msgid "Options of the current user who requested this action"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
+msgid "Config options"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/GeneralSpecificationsWidget.tt

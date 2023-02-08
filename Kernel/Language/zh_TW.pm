@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.314188642614464;
+    $Self->{Completeness}        = 0.313502998865294;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -227,16 +227,6 @@ sub Data {
         'Message body' => '訊息內容',
         'Add new notification language' => '添加新通知語言',
         'Save Changes' => '保存更改',
-        'Tag Reference' => '',
-        'Notifications are sent to an agent.' => '',
-        'You can use the following tags' => '您可以使用以下的標記',
-        'To get the first 20 character of the appointment title.' => '',
-        'To get the appointment attribute' => '',
-        ' e. g.' => '例如',
-        'To get the calendar attribute' => '',
-        'Attributes of the recipient user for the notification' => '',
-        'Config options' => '系統配置數據',
-        'Example notification' => '通知範例',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEventTransportEmailSettings.tt
         'Additional recipient email addresses' => '',
@@ -276,20 +266,6 @@ sub Data {
         'Queues ↔ Auto Responses' => '',
         'Response' => '回復内容',
         'Auto response from' => '自動回復的發件人',
-        'Reference' => '相關参考',
-        'To get the first 20 character of the subject.' => '顯示主題的前20個字節',
-        'To get the first 5 lines of the email.' => '顯示郵件的前五行',
-        'To get the name of the ticket\'s customer user (if given).' => '',
-        'To get the article attribute' => '信件數據屬性',
-        'Options of the current customer user data' => '用戶資料屬性',
-        'Ticket owner options' => '工單所有者屬性',
-        'Ticket responsible options' => '工單負責人屬性',
-        'Options of the current user who requested this action' => '工單提交者的屬性',
-        'Options of the ticket data' => '工單數據屬性',
-        'Options of ticket dynamic fields internal key values' => '工單動態字段内部鍵值',
-        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            '動態字段顯示名稱，用於下拉選擇和複選框',
-        'Example response' => '這裡有一個範例',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
         'Cloud Service Management' => '雲端服務管理',
@@ -432,6 +408,7 @@ sub Data {
         'Toggle %s permission for %s' => '切換%s權限給%s',
         'Customer Default Groups:' => '用戶的默認組:',
         'No changes can be made to these groups.' => '不能更改默認組.',
+        'Reference' => '相關参考',
         'ro' => '唯讀',
         'Read only access to the ticket in this group/queue.' => '對於組/隊列中的工單具有 \'讀\' 的權限',
         'rw' => '可讀寫',
@@ -1443,24 +1420,6 @@ sub Data {
             '',
         'This field is required and must have less than 4000 characters.' =>
             '',
-        'Notifications are sent to an agent or a customer.' => '發送給服務人員或用戶的通知。',
-        'To get the first 20 character of the subject (of the latest agent article).' =>
-            '截取主題的前20個字符（最新的服務人員信件）',
-        'To get the first 5 lines of the body (of the latest agent article).' =>
-            '截取郵件正文内容前5行（最新的服務人員信件）',
-        'To get the first 20 character of the subject (of the latest customer article).' =>
-            '截取郵件主題的前20個字符（最新的用戶信件）',
-        'To get the first 5 lines of the body (of the latest customer article).' =>
-            '截取郵件正文内容前5行（最新的用戶信件）',
-        'Attributes of the current customer user data' => '',
-        'Attributes of the current ticket owner user data' => '',
-        'Attributes of the current ticket responsible user data' => '',
-        'Attributes of the current agent user who requested this action' =>
-            '',
-        'Attributes of the ticket data' => '',
-        'Ticket dynamic fields internal key values' => '',
-        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => '',
@@ -2079,8 +2038,6 @@ sub Data {
         'Edit Salutation' => '編輯回復抬頭',
         'Filter for Salutations' => '',
         'Filter for salutations' => '',
-        'e. g.' => '例如',
-        'Example salutation' => '這裡有一個範例',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => '',
@@ -2140,7 +2097,6 @@ sub Data {
         'Edit Signature' => '編輯回復簽名',
         'Filter for Signatures' => '',
         'Filter for signatures' => '',
-        'Example signature' => '簽名範例',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
         'State Management' => '工單狀態管理',
@@ -2312,18 +2268,6 @@ sub Data {
         'Delete this entry' => '刪除該條目',
         'Do you really want to delete this template?' => '你確定要删除這個模板嗎？',
         'A standard template with this name already exists!' => '',
-        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'Create type templates only supports this smart tags' => '',
-        'Example template' => '模板舉例',
-        'The current ticket state is' => '當前工單狀態是',
-        'Your email address is' => '您的郵件地址是',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplateAttachment.tt
         'Manage Template-Attachment Relations' => '',
@@ -3315,6 +3259,61 @@ sub Data {
             '',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
+        'To get the appointment attribute' => '',
+        ' e. g.' => '例如',
+        'To get the first 20 character of the appointment title.' => '',
+        'To get the calendar attribute' => '',
+        'Attributes of the recipient user for the notification' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+        'To get the first 20 character of the subject.' => '顯示主題的前20個字節',
+        'To get the first 5 lines of the email.' => '顯示郵件的前五行',
+        'To get the name of the ticket\'s customer user (if given).' => '',
+        'To get the article attribute' => '信件數據屬性',
+        'Options of the current customer user data' => '用戶資料屬性',
+        'Ticket owner options' => '工單所有者屬性',
+        'Options of the ticket data' => '工單數據屬性',
+        'Options of ticket dynamic fields internal key values' => '工單動態字段内部鍵值',
+        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            '動態字段顯示名稱，用於下拉選擇和複選框',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+        'To get the first 20 character of the subject (of the latest agent article).' =>
+            '截取主題的前20個字符（最新的服務人員信件）',
+        'To get the first 5 lines of the body (of the latest agent article).' =>
+            '截取郵件正文内容前5行（最新的服務人員信件）',
+        'To get the first 20 character of the subject (of the latest customer article).' =>
+            '截取郵件主題的前20個字符（最新的用戶信件）',
+        'To get the first 5 lines of the body (of the latest customer article).' =>
+            '截取郵件正文内容前5行（最新的用戶信件）',
+        'Attributes of the current customer user data' => '',
+        'Attributes of the current ticket owner user data' => '',
+        'Attributes of the ticket data' => '',
+        'Ticket dynamic fields internal key values' => '',
+        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminSalutation.tt
+        'e. g.' => '例如',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
+        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
+        'Tag Reference' => '',
+        'You can use the following tags' => '您可以使用以下的標記',
+        'Ticket responsible options' => '工單負責人屬性',
+        'Options of the current user who requested this action' => '工單提交者的屬性',
+        'Config options' => '系統配置數據',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/GeneralSpecificationsWidget.tt
         'You can select one or more groups to define access for different agents.' =>

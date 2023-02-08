@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.206115515288788;
+    $Self->{Completeness}        = 0.205543848273626;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -225,16 +225,6 @@ sub Data {
         'Message body' => '',
         'Add new notification language' => '',
         'Save Changes' => 'Guardar canvis',
-        'Tag Reference' => '',
-        'Notifications are sent to an agent.' => '',
-        'You can use the following tags' => 'Pot utilitzar les següents etiquetes',
-        'To get the first 20 character of the appointment title.' => '',
-        'To get the appointment attribute' => '',
-        ' e. g.' => ' p. ex.',
-        'To get the calendar attribute' => '',
-        'Attributes of the recipient user for the notification' => '',
-        'Config options' => 'Opcions de configuració',
-        'Example notification' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEventTransportEmailSettings.tt
         'Additional recipient email addresses' => '',
@@ -274,20 +264,6 @@ sub Data {
         'Queues ↔ Auto Responses' => '',
         'Response' => 'Resposta',
         'Auto response from' => 'Resposta automática de',
-        'Reference' => 'Referència',
-        'To get the first 20 character of the subject.' => 'Per a obtenir els primers 20 caràcters de l\'assumpte.',
-        'To get the first 5 lines of the email.' => 'Per a obtenir les primeres 5 línies del correu.',
-        'To get the name of the ticket\'s customer user (if given).' => '',
-        'To get the article attribute' => 'Per obtenir l\'atribut article',
-        'Options of the current customer user data' => 'Opcions de les dades dels usuaris actuals dels clients',
-        'Ticket owner options' => 'Opcions de propietari del tiquet',
-        'Ticket responsible options' => 'Opcions de responsable del tiquet',
-        'Options of the current user who requested this action' => 'Opcions de l\'usuari actual que va sol·licitar aquesta acció',
-        'Options of the ticket data' => 'Opcions de les dades del tiquet',
-        'Options of ticket dynamic fields internal key values' => '',
-        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            '',
-        'Example response' => 'Resposta d\'exemple',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
         'Cloud Service Management' => '',
@@ -430,6 +406,7 @@ sub Data {
         'Toggle %s permission for %s' => 'Canviar %s permisos per a %s',
         'Customer Default Groups:' => 'Grups per defecte del client',
         'No changes can be made to these groups.' => 'No es poden fer canvis a aquests grups.',
+        'Reference' => 'Referència',
         'ro' => 'ro',
         'Read only access to the ticket in this group/queue.' => 'Accés de només lectura als tiquets en aquest grup/cua.',
         'rw' => 'rw',
@@ -1441,24 +1418,6 @@ sub Data {
             '',
         'This field is required and must have less than 4000 characters.' =>
             '',
-        'Notifications are sent to an agent or a customer.' => 'Les notificacions se li envian a un agent o client',
-        'To get the first 20 character of the subject (of the latest agent article).' =>
-            'Per obtenir els primers 20 caràcters de l\'assumpte (de l\'article més recent de l\'agent).',
-        'To get the first 5 lines of the body (of the latest agent article).' =>
-            'Per obtenir les primeres 5 línies del cos (de l\'article més recent de l\'agent).',
-        'To get the first 20 character of the subject (of the latest customer article).' =>
-            'Per obtenir els primers 20 caràcters de l\'assumpte (de l\'article més recent del client).',
-        'To get the first 5 lines of the body (of the latest customer article).' =>
-            'Per obtenir les primeres 5 línies del cos (de l\'article més recent del client).',
-        'Attributes of the current customer user data' => '',
-        'Attributes of the current ticket owner user data' => '',
-        'Attributes of the current ticket responsible user data' => '',
-        'Attributes of the current agent user who requested this action' =>
-            '',
-        'Attributes of the ticket data' => '',
-        'Ticket dynamic fields internal key values' => '',
-        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => '',
@@ -2077,8 +2036,6 @@ sub Data {
         'Edit Salutation' => 'Editar salutació',
         'Filter for Salutations' => '',
         'Filter for salutations' => '',
-        'e. g.' => 'p. ex.',
-        'Example salutation' => 'Exemple salutació',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => '',
@@ -2138,7 +2095,6 @@ sub Data {
         'Edit Signature' => 'Editar signatura',
         'Filter for Signatures' => '',
         'Filter for signatures' => '',
-        'Example signature' => 'Exemple signatura',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
         'State Management' => 'Gestió d\'estat',
@@ -2310,18 +2266,6 @@ sub Data {
         'Delete this entry' => 'Eliminar aquesta entrada',
         'Do you really want to delete this template?' => '',
         'A standard template with this name already exists!' => '',
-        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'Create type templates only supports this smart tags' => '',
-        'Example template' => '',
-        'The current ticket state is' => 'L\'estat actual del tiquet és',
-        'Your email address is' => 'La vostra adreça de correu electrònic és',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplateAttachment.tt
         'Manage Template-Attachment Relations' => '',
@@ -3312,6 +3256,61 @@ sub Data {
             '',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
+        'To get the appointment attribute' => '',
+        ' e. g.' => ' p. ex.',
+        'To get the first 20 character of the appointment title.' => '',
+        'To get the calendar attribute' => '',
+        'Attributes of the recipient user for the notification' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+        'To get the first 20 character of the subject.' => 'Per a obtenir els primers 20 caràcters de l\'assumpte.',
+        'To get the first 5 lines of the email.' => 'Per a obtenir les primeres 5 línies del correu.',
+        'To get the name of the ticket\'s customer user (if given).' => '',
+        'To get the article attribute' => 'Per obtenir l\'atribut article',
+        'Options of the current customer user data' => 'Opcions de les dades dels usuaris actuals dels clients',
+        'Ticket owner options' => 'Opcions de propietari del tiquet',
+        'Options of the ticket data' => 'Opcions de les dades del tiquet',
+        'Options of ticket dynamic fields internal key values' => '',
+        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+        'To get the first 20 character of the subject (of the latest agent article).' =>
+            'Per obtenir els primers 20 caràcters de l\'assumpte (de l\'article més recent de l\'agent).',
+        'To get the first 5 lines of the body (of the latest agent article).' =>
+            'Per obtenir les primeres 5 línies del cos (de l\'article més recent de l\'agent).',
+        'To get the first 20 character of the subject (of the latest customer article).' =>
+            'Per obtenir els primers 20 caràcters de l\'assumpte (de l\'article més recent del client).',
+        'To get the first 5 lines of the body (of the latest customer article).' =>
+            'Per obtenir les primeres 5 línies del cos (de l\'article més recent del client).',
+        'Attributes of the current customer user data' => '',
+        'Attributes of the current ticket owner user data' => '',
+        'Attributes of the ticket data' => '',
+        'Ticket dynamic fields internal key values' => '',
+        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminSalutation.tt
+        'e. g.' => 'p. ex.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
+        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
+        'Tag Reference' => '',
+        'You can use the following tags' => 'Pot utilitzar les següents etiquetes',
+        'Ticket responsible options' => 'Opcions de responsable del tiquet',
+        'Options of the current user who requested this action' => 'Opcions de l\'usuari actual que va sol·licitar aquesta acció',
+        'Config options' => 'Opcions de configuració',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/GeneralSpecificationsWidget.tt
         'You can select one or more groups to define access for different agents.' =>

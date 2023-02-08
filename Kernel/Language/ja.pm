@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.709108558485682;
+    $Self->{Completeness}        = 0.708542713567839;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -227,16 +227,6 @@ sub Data {
         'Message body' => 'メッセージボディー',
         'Add new notification language' => '新規通知言語を追加',
         'Save Changes' => '変更を保存',
-        'Tag Reference' => 'タグリファレンス',
-        'Notifications are sent to an agent.' => '通知は担当者へ送信されます。',
-        'You can use the following tags' => '次のタグを使用できます',
-        'To get the first 20 character of the appointment title.' => 'アポイントの表題から最初の20文字を取得',
-        'To get the appointment attribute' => '予定の属性を取得すること',
-        ' e. g.' => '例',
-        'To get the calendar attribute' => 'カレンダーの属性を取得すること',
-        'Attributes of the recipient user for the notification' => '通知する受信者ユーザーの属性',
-        'Config options' => '設定オプション',
-        'Example notification' => '通知例',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEventTransportEmailSettings.tt
         'Additional recipient email addresses' => '追加の受信者のメールアドレス',
@@ -276,20 +266,6 @@ sub Data {
         'Queues ↔ Auto Responses' => '',
         'Response' => '応答',
         'Auto response from' => '自動応答差出人',
-        'Reference' => '用例',
-        'To get the first 20 character of the subject.' => '表題の最初の20文字を取得',
-        'To get the first 5 lines of the email.' => 'メールの最初の5行を取得',
-        'To get the name of the ticket\'s customer user (if given).' => 'チケットの顧客ユーザー名を取得(可能な場合)',
-        'To get the article attribute' => '記事の属性を取得',
-        'Options of the current customer user data' => '現在の顧客ユーザーデータのオプション',
-        'Ticket owner options' => 'チケット所有者オプション',
-        'Ticket responsible options' => 'チケット責任者オプション',
-        'Options of the current user who requested this action' => '操作を要求された現在のユーザーのオプション',
-        'Options of the ticket data' => 'チケットデータのオプション',
-        'Options of ticket dynamic fields internal key values' => 'チケットのダイナミック・フィールドの内部キー値のオプション',
-        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            'チケットのダイナミック・フィールドの表示値のオプション。ドロップダウンまたは複数選択領域で利用可能・',
-        'Example response' => '応答例',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
         'Cloud Service Management' => 'クラウドサービス管理',
@@ -432,6 +408,7 @@ sub Data {
         'Toggle %s permission for %s' => '%s の %s 権限を切り替え',
         'Customer Default Groups:' => '顧客の規定グループ:',
         'No changes can be made to these groups.' => '変更はこれらのグループに行うことができます。',
+        'Reference' => '用例',
         'ro' => '読取り',
         'Read only access to the ticket in this group/queue.' => 'このグループ／キューのチケットを読み取り専用にします。',
         'rw' => '読書き',
@@ -1445,24 +1422,6 @@ sub Data {
             '選択された通知方法を使って1つのチケットにつき1度だけユーザーに通知する。',
         'This field is required and must have less than 4000 characters.' =>
             '',
-        'Notifications are sent to an agent or a customer.' => '通知は担当者、顧客に送信されます。',
-        'To get the first 20 character of the subject (of the latest agent article).' =>
-            '表題の最初の20文字を取得 (最新の担当者記事)',
-        'To get the first 5 lines of the body (of the latest agent article).' =>
-            '本文から最初の5行を取得 (最新の担当者記事)',
-        'To get the first 20 character of the subject (of the latest customer article).' =>
-            '表題の最初の20文字を取得 (最新の顧客記事)',
-        'To get the first 5 lines of the body (of the latest customer article).' =>
-            '本文から最初の5行を取得 (最新の顧客記事)',
-        'Attributes of the current customer user data' => '現在の顧客ユーザの属性',
-        'Attributes of the current ticket owner user data' => '現在のチケット所有者の属性',
-        'Attributes of the current ticket responsible user data' => '現在の責任者の属性',
-        'Attributes of the current agent user who requested this action' =>
-            '現在操作を要求している担当者の属性',
-        'Attributes of the ticket data' => 'チケットデータの属性',
-        'Ticket dynamic fields internal key values' => 'チケットのダイナミック・フィールドの内部用キー値',
-        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            'チケットのダイナミック・フィールドの表示値。ドロップダウンまたは複数選択領域で利用可能',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => '',
@@ -2082,8 +2041,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Edit Salutation' => '挨拶文を編集',
         'Filter for Salutations' => '挨拶文でフィルター',
         'Filter for salutations' => '挨拶文でフィルター',
-        'e. g.' => '例',
-        'Example salutation' => '挨拶文の例',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => 'セキュアモードを有効にしてください。',
@@ -2143,7 +2100,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Edit Signature' => '署名を編集',
         'Filter for Signatures' => '署名でフィルター',
         'Filter for signatures' => '署名でフィルター',
-        'Example signature' => '署名の例',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
         'State Management' => 'ステータス管理',
@@ -2315,18 +2271,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Delete this entry' => 'この登録を削除',
         'Do you really want to delete this template?' => '本当にこのテンプレートを削除してよろしいですか？',
         'A standard template with this name already exists!' => '',
-        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'Create type templates only supports this smart tags' => '作成するタイプテンプレートはこのスマートタグのみをサポートします。',
-        'Example template' => 'テンプレート例',
-        'The current ticket state is' => '現在のチケットのステータスは',
-        'Your email address is' => 'あなたのメールアドレスは',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplateAttachment.tt
         'Manage Template-Attachment Relations' => '',
@@ -3317,6 +3261,61 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
+        'To get the appointment attribute' => '予定の属性を取得すること',
+        ' e. g.' => '例',
+        'To get the first 20 character of the appointment title.' => 'アポイントの表題から最初の20文字を取得',
+        'To get the calendar attribute' => 'カレンダーの属性を取得すること',
+        'Attributes of the recipient user for the notification' => '通知する受信者ユーザーの属性',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+        'To get the first 20 character of the subject.' => '表題の最初の20文字を取得',
+        'To get the first 5 lines of the email.' => 'メールの最初の5行を取得',
+        'To get the name of the ticket\'s customer user (if given).' => 'チケットの顧客ユーザー名を取得(可能な場合)',
+        'To get the article attribute' => '記事の属性を取得',
+        'Options of the current customer user data' => '現在の顧客ユーザーデータのオプション',
+        'Ticket owner options' => 'チケット所有者オプション',
+        'Options of the ticket data' => 'チケットデータのオプション',
+        'Options of ticket dynamic fields internal key values' => 'チケットのダイナミック・フィールドの内部キー値のオプション',
+        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            'チケットのダイナミック・フィールドの表示値のオプション。ドロップダウンまたは複数選択領域で利用可能・',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+        'To get the first 20 character of the subject (of the latest agent article).' =>
+            '表題の最初の20文字を取得 (最新の担当者記事)',
+        'To get the first 5 lines of the body (of the latest agent article).' =>
+            '本文から最初の5行を取得 (最新の担当者記事)',
+        'To get the first 20 character of the subject (of the latest customer article).' =>
+            '表題の最初の20文字を取得 (最新の顧客記事)',
+        'To get the first 5 lines of the body (of the latest customer article).' =>
+            '本文から最初の5行を取得 (最新の顧客記事)',
+        'Attributes of the current customer user data' => '現在の顧客ユーザの属性',
+        'Attributes of the current ticket owner user data' => '現在のチケット所有者の属性',
+        'Attributes of the ticket data' => 'チケットデータの属性',
+        'Ticket dynamic fields internal key values' => 'チケットのダイナミック・フィールドの内部用キー値',
+        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            'チケットのダイナミック・フィールドの表示値。ドロップダウンまたは複数選択領域で利用可能',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminSalutation.tt
+        'e. g.' => '例',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
+        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
+        'Tag Reference' => 'タグリファレンス',
+        'You can use the following tags' => '次のタグを使用できます',
+        'Ticket responsible options' => 'チケット責任者オプション',
+        'Options of the current user who requested this action' => '操作を要求された現在のユーザーのオプション',
+        'Config options' => '設定オプション',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/GeneralSpecificationsWidget.tt
         'You can select one or more groups to define access for different agents.' =>

@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.299951464164375;
+    $Self->{Completeness}        = 0.299076025287729;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -224,16 +224,6 @@ sub Data {
         'Message body' => 'Corpul mesajului',
         'Add new notification language' => 'Adăugați o nouă limbă de notificare',
         'Save Changes' => 'Salvare modificări',
-        'Tag Reference' => 'Referință pentru etichete',
-        'Notifications are sent to an agent.' => 'Notificările sunt trimise unui agent.',
-        'You can use the following tags' => 'Puteți folosi următoarele etichete',
-        'To get the first 20 character of the appointment title.' => 'Pentru a obține primele 20 de caractere al titlului programării.',
-        'To get the appointment attribute' => 'Pentru a obține atributul programării',
-        ' e. g.' => ' de ex.',
-        'To get the calendar attribute' => 'Pentru a obține atributul calendarului',
-        'Attributes of the recipient user for the notification' => 'Atributele destinatarului pentru notificare',
-        'Config options' => 'Opțiuni de configurare',
-        'Example notification' => 'Exemplu de notificare',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEventTransportEmailSettings.tt
         'Additional recipient email addresses' => 'Adrese de e-mail suplimentare destinatarului',
@@ -273,20 +263,6 @@ sub Data {
         'Queues ↔ Auto Responses' => '',
         'Response' => 'Răspuns',
         'Auto response from' => 'Răspuns automat de la',
-        'Reference' => 'Referință',
-        'To get the first 20 character of the subject.' => 'Pentru a lua primele 20 de caractere ale subiectului.',
-        'To get the first 5 lines of the email.' => 'Pentru a obține primele 5 rânduri ale e-mailului.',
-        'To get the name of the ticket\'s customer user (if given).' => 'Pentru a obține numele utilizatorului client al biletului (dacă este dat).',
-        'To get the article attribute' => 'Pentru a obține atributul articolului',
-        'Options of the current customer user data' => 'Opțiunile datelor ale utilizatorului client curent',
-        'Ticket owner options' => 'Opțiunile posesorului tichetului',
-        'Ticket responsible options' => 'Opțiunile reponsabilului tichetului',
-        'Options of the current user who requested this action' => 'Opțiunile utilizatorului curent care a cerut această acțiune',
-        'Options of the ticket data' => 'Opțiunile tichetului',
-        'Options of ticket dynamic fields internal key values' => 'Opțiuni ale valorilor cheie interne pentru câmpurile dinamice din tichet',
-        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            'Opțiunile de afișare al câmpurilor dinamice ale tichetului, utile pentru câmpurile Listă verticală și Selecție multiplă',
-        'Example response' => 'Exemplu de răspuns',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
         'Cloud Service Management' => 'Administrarea serviciilor Cloud',
@@ -429,6 +405,7 @@ sub Data {
         'Toggle %s permission for %s' => 'Comutați permisiunea %s pentru %s',
         'Customer Default Groups:' => 'Grupurile implicite pentru client:',
         'No changes can be made to these groups.' => 'Nu se pot face modificări la aceste grupuri.',
+        'Reference' => 'Referință',
         'ro' => 'doar în citire',
         'Read only access to the ticket in this group/queue.' => 'Tichetul poate fi doar citit în acest grup/coadă.',
         'rw' => 'citire, scriere',
@@ -1440,24 +1417,6 @@ sub Data {
             'Notifică utilizatorul o dată pe zi despre un tichet folosind mijlocul de transport ales.',
         'This field is required and must have less than 4000 characters.' =>
             '',
-        'Notifications are sent to an agent or a customer.' => 'Notificările sunt trimise către un agent sau un client.',
-        'To get the first 20 character of the subject (of the latest agent article).' =>
-            'Pentru a lua doar primele 20 de caractere ale subiectului (din ultimul articol al agentului).',
-        'To get the first 5 lines of the body (of the latest agent article).' =>
-            'Pentru a lua primele 5 linii din corpul mesajului (din ultimul articol al agentului).',
-        'To get the first 20 character of the subject (of the latest customer article).' =>
-            'Pentru a lua primele 20 de caractere ale subiectului (din ultimul articol al clientului).',
-        'To get the first 5 lines of the body (of the latest customer article).' =>
-            'Pentru a lua primele 5 linii din corpul mesajului (ultimul articol al clientului).',
-        'Attributes of the current customer user data' => 'Atributele datelor ale utilizatorului clientului curent',
-        'Attributes of the current ticket owner user data' => 'Atributele datelor ale utilizatorului proprietar al tichetului curent',
-        'Attributes of the current ticket responsible user data' => 'Atributele datelor utilizatorului responsabil al tichetului curent',
-        'Attributes of the current agent user who requested this action' =>
-            'Atributele utilizatorului agentului actual care a solicitat această acțiune',
-        'Attributes of the ticket data' => 'Atributele datelor tichetului',
-        'Ticket dynamic fields internal key values' => 'Valorile interne pentru câmpurile dinamice ale tichetului',
-        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            'Valorile afișate ale câmpurilor dinamice al unui tichet, util pentru câmpurile Listă verticală și Selecție multiplă',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => 'Utilizați virgula sau punct și virgulă pentru a separa adresele de e-mail.',
@@ -2076,8 +2035,6 @@ sub Data {
         'Edit Salutation' => '',
         'Filter for Salutations' => '',
         'Filter for salutations' => '',
-        'e. g.' => 'de ex.',
-        'Example salutation' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => '',
@@ -2137,7 +2094,6 @@ sub Data {
         'Edit Signature' => '',
         'Filter for Signatures' => '',
         'Filter for signatures' => '',
-        'Example signature' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
         'State Management' => 'Starea',
@@ -2309,18 +2265,6 @@ sub Data {
         'Delete this entry' => '',
         'Do you really want to delete this template?' => '',
         'A standard template with this name already exists!' => '',
-        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'Create type templates only supports this smart tags' => '',
-        'Example template' => 'Exemplu de șablon',
-        'The current ticket state is' => 'Starea curentă a tichetului este',
-        'Your email address is' => 'Adresa dvs. de e-mail este',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplateAttachment.tt
         'Manage Template-Attachment Relations' => '',
@@ -3311,6 +3255,61 @@ sub Data {
             '',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
+        'To get the appointment attribute' => 'Pentru a obține atributul programării',
+        ' e. g.' => ' de ex.',
+        'To get the first 20 character of the appointment title.' => 'Pentru a obține primele 20 de caractere al titlului programării.',
+        'To get the calendar attribute' => 'Pentru a obține atributul calendarului',
+        'Attributes of the recipient user for the notification' => 'Atributele destinatarului pentru notificare',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+        'To get the first 20 character of the subject.' => 'Pentru a lua primele 20 de caractere ale subiectului.',
+        'To get the first 5 lines of the email.' => 'Pentru a obține primele 5 rânduri ale e-mailului.',
+        'To get the name of the ticket\'s customer user (if given).' => 'Pentru a obține numele utilizatorului client al biletului (dacă este dat).',
+        'To get the article attribute' => 'Pentru a obține atributul articolului',
+        'Options of the current customer user data' => 'Opțiunile datelor ale utilizatorului client curent',
+        'Ticket owner options' => 'Opțiunile posesorului tichetului',
+        'Options of the ticket data' => 'Opțiunile tichetului',
+        'Options of ticket dynamic fields internal key values' => 'Opțiuni ale valorilor cheie interne pentru câmpurile dinamice din tichet',
+        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            'Opțiunile de afișare al câmpurilor dinamice ale tichetului, utile pentru câmpurile Listă verticală și Selecție multiplă',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+        'To get the first 20 character of the subject (of the latest agent article).' =>
+            'Pentru a lua doar primele 20 de caractere ale subiectului (din ultimul articol al agentului).',
+        'To get the first 5 lines of the body (of the latest agent article).' =>
+            'Pentru a lua primele 5 linii din corpul mesajului (din ultimul articol al agentului).',
+        'To get the first 20 character of the subject (of the latest customer article).' =>
+            'Pentru a lua primele 20 de caractere ale subiectului (din ultimul articol al clientului).',
+        'To get the first 5 lines of the body (of the latest customer article).' =>
+            'Pentru a lua primele 5 linii din corpul mesajului (ultimul articol al clientului).',
+        'Attributes of the current customer user data' => 'Atributele datelor ale utilizatorului clientului curent',
+        'Attributes of the current ticket owner user data' => 'Atributele datelor ale utilizatorului proprietar al tichetului curent',
+        'Attributes of the ticket data' => 'Atributele datelor tichetului',
+        'Ticket dynamic fields internal key values' => 'Valorile interne pentru câmpurile dinamice ale tichetului',
+        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            'Valorile afișate ale câmpurilor dinamice al unui tichet, util pentru câmpurile Listă verticală și Selecție multiplă',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminSalutation.tt
+        'e. g.' => 'de ex.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
+        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
+        'Tag Reference' => 'Referință pentru etichete',
+        'You can use the following tags' => 'Puteți folosi următoarele etichete',
+        'Ticket responsible options' => 'Opțiunile reponsabilului tichetului',
+        'Options of the current user who requested this action' => 'Opțiunile utilizatorului curent care a cerut această acțiune',
+        'Config options' => 'Opțiuni de configurare',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/GeneralSpecificationsWidget.tt
         'You can select one or more groups to define access for different agents.' =>
