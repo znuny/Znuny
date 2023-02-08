@@ -141,7 +141,7 @@ To find tickets in your system.
             GreaterThanEquals => '2001-01-01 01:01:01',
             SmallerThan       => '2002-02-02 02:02:02',
             SmallerThanEquals => '2002-02-02 02:02:02',
-        }
+        },
 
         # User ID for searching tickets by ticket flags (optional, defaults to UserID)
         TicketFlagUserID => 1,
@@ -149,7 +149,7 @@ To find tickets in your system.
         # search for ticket flags
         TicketFlag => {
             Seen => 1,
-        }
+        },
 
         # search for ticket flag that is absent, or a different value than the
         # one given:

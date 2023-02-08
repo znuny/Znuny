@@ -68,7 +68,7 @@ run all or some tests located in C<scripts/test/**/*.t> and print the result.
         SOPMFile               => ['ITSMCore.sopm'],            # optional, execute all test files which are defined in these sopm.
         Verbose                => 1,                            # optional (default 0), only show result details for all tests, not just failing
         SubmitURL              => $URL,                         # optional, send results to unit test result server
-        SubmitAuth             => '0abc86125f0fd37baae'         # optional authentication string for unit test result server
+        SubmitAuth             => $SubmitAuth,                  # optional authentication string for unit test result server
         SubmitResultAsExitCode => 1,                            # optional, specify if exit code should not indicate if tests were ok/not ok, but if submission was successful instead
         JobID                  => 12,                           # optional job ID for unit test submission to server
         Scenario               => 'Znuny 6 git',                # optional scenario identifier for unit test submission to server

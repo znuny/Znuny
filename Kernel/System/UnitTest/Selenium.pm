@@ -108,7 +108,7 @@ Then you can use the full API of L<Selenium::Remote::Driver> on this object.
         },
     );
 
-    my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
+    my $SeleniumObject = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 =cut
 
