@@ -25624,3 +25624,19 @@ msgstr "Definiert eine Zuordnung zwischen Variablen der Kundendaten (Schlüssel)
 msgid "This event module stores attributes from customer companies in ticket dynamic fields. Please see DynamicFieldFromCustomerCompany::Mapping setting for how to configure the mapping."
 msgstr "Dieses Eventmodul speichert Attribute des Kunden in dynamischen Ticketfeldern. Bitte schauen Sie sich die DynamicFieldFromCustomerCompany::Mapping-Einstellung für die Konfiguration des Mappings an."
 
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Default data to use on attribute for ticket search screen. Example: \"TicketLastChangeTimePointFormat=year;TicketLastChangeTimePointStart=Last;TicketLastChangeTimePoint=2;\"."
+msgstr "Standarddaten, die als Attribute für die Ticket-Suchmaske verwendet werden. Beispiel: \"TicketLastChangeTimePointFormat=year;TicketLastChangeTimePointStart=Last;TicketLastChangeTimePoint=2;\"."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Default data to use on attribute for ticket search screen. Example: \"TicketLastChangeTimeStartYear=2010;TicketLastChangeTimeStartMonth=10;TicketLastChangeTimeStartDay=4;TicketLastChangeTimeStopYear=2010;TicketLastChangeTimeMonth=11;TicketLastChangeTimeStopDay=3;\"."
+msgstr "Standarddaten, die als Attribute für die Ticket-Suchmaske verwendet werden. Beispiel: \"TicketLastChangeTimeStartYear=2010;TicketLastChangeTimeStartMonth=10;TicketLastChangeTimeStartDay=4;TicketLastChangeTimeStopYear=2010;TicketLastChangeTimeMonth=11;TicketLastChangeTimeStopDay=3;\"."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Default data to use on attribute for ticket search screen. Example: \"TicketPendingTimePointFormat=year;TicketPendingTimePointStart=Last;TicketPendingTimePoint=2;\"."
+msgstr "Standarddaten, die als Attribute für die Ticket-Suchmaske verwendet werden. Beispiel: \"TicketPendingTimePointFormat=year;TicketPendingTimePointStart=Last;TicketPendingTimePoint=2;\"."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Default data to use on attribute for ticket search screen. Example: \"TicketPendingTimeStartYear=2010;TicketPendingTimeStartMonth=10;TicketPendingTimeStartDay=4;TicketPendingTimeStopYear=2010;TicketPendingTimeMonth=11;TicketPendingTimeStopDay=3;\"."
+msgstr "Standarddaten, die als Attribute für die Ticket-Suchmaske verwendet werden. Beispiel: \"TicketPendingTimeStartYear=2010;TicketPendingTimeStartMonth=10;TicketPendingTimeStartDay=4;TicketPendingTimeStopYear=2010;TicketPendingTimeMonth=11;TicketPendingTimeStopDay=3;\"."
+
