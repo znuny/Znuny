@@ -86,11 +86,11 @@ To find tickets in your system.
         Locks   => ['unlock'],
         LockIDs => [1, 2, 3],
 
-        OwnerIDs => [1, 12, 455, 32]
+        OwnerIDs => [1, 12, 455, 32],
 
-        ResponsibleIDs => [1, 12, 455, 32]
+        ResponsibleIDs => [1, 12, 455, 32],
 
-        WatchUserIDs => [1, 12, 455, 32]
+        WatchUserIDs => [1, 12, 455, 32],
 
         # CustomerID (optional) as STRING or as ARRAYREF
         # The value will be treated as a SQL query expression.
