@@ -2871,6 +2871,14 @@
         </Value>
     </Setting>
 
+    <Setting Name="ICSParser::StartDate" Required="1" Valid="1">
+        <Description Translatable="1">Start date (YYYYMMDD) of the range to use when parsing ICS files. The used CPAN module iCal::Parser needs this to be able to parse ICS files with events in a year before the current one. The end date of the range is automatically set to 10 years in the future from the time of parsing/execution.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="\A20\d{2}\d{2}\d{2}\z">20100101</Item>
+        </Value>
+    </Setting>
+
     <!--
     UserMaxArticlesPerPage
     -->

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-02-06 09:08+0000\n"
+"POT-Creation-Date: 2023-02-13 15:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9582,10 +9582,6 @@ msgstr ""
 msgid "e. g."
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminSalutation.tt
-msgid "Ticket responsible options"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
 msgid "To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types."
 msgstr ""
@@ -9608,6 +9604,10 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
 msgid "You can use the following tags"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
+msgid "Ticket responsible options"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
@@ -20712,6 +20712,10 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Mapping of non-standard time zones to official ones."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Start date (YYYYMMDD) of the range to use when parsing ICS files. The used CPAN module iCal::Parser needs this to be able to parse ICS files with events in a year before the current one. The end date of the range is automatically set to 10 years in the future from the time of parsing/execution."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
