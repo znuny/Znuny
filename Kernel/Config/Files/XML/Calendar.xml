@@ -117,29 +117,6 @@
                         <Item Key="Prio">6000</Item>
                     </Hash>
                 </Item>
-<!--
-                <Item>
-                    <Hash>
-                        <Item Key="Group">
-                            <Array>
-                            </Array>
-                        </Item>
-                        <Item Key="GroupRo">
-                            <Array>
-                            </Array>
-                        </Item>
-                        <Item Key="Description" Translatable="1">Resource Overview (OTRS Business Solution™)</Item>
-                        <Item Key="Name" Translatable="1">Resource Overview (OTRS Business Solution™)</Item>
-                        <Item Key="Link">Action=AgentAppointmentCalendarOverview</Item>
-                        <Item Key="LinkOption">class="OTRSBusinessRequired"</Item>
-                        <Item Key="NavBar">Calendar</Item>
-                        <Item Key="Type"></Item>
-                        <Item Key="Block">ItemArea</Item>
-                        <Item Key="AccessKey"></Item>
-                        <Item Key="Prio">7000</Item>
-                    </Hash>
-                </Item>
--->
                 <Item>
                     <Hash>
                         <Item Key="Group">

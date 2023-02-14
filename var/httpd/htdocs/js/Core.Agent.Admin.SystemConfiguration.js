@@ -240,48 +240,17 @@ Core.Agent.Admin = Core.Agent.Admin || {};
     TargetNS.InitDialogReset = function($Object) {
         var DialogTemplate,
             $DialogObj,
-            URL,
-            Data,
             Name,
-            ModificationAllowed = $Object.attr("data-user-modification"),
-            OTRSBusinessIsInstalled = parseInt(Core.Config.Get('OTRSBusinessIsInstalled'), 10);
+            ModificationAllowed = $Object.attr("data-user-modification");
 
         Name = $Object.closest(".WidgetSimple").find(".Header h2").text();
         DialogTemplate = Core.Template.Render('SysConfig/DialogReset',{
             Name: Name,
-            ModificationAllowed: ModificationAllowed,
-            OTRSBusinessIsInstalled: OTRSBusinessIsInstalled
+            ModificationAllowed: ModificationAllowed
         });
         $DialogObj = $(DialogTemplate);
 
         Core.UI.Dialog.ShowContentDialog($DialogObj, Core.Language.Translate('Reset setting'), '150px', 'Center', true);
-
-
-        // Check how many users have changed it's value
-        if ($Object.attr("data-user-modification") == "1" && OTRSBusinessIsInstalled == "1") {
-            URL = Core.Config.Get('Baselink') + 'Action=AdminSystemConfiguration;Subaction=UserModificationsCount';
-            Data = {
-                Name: Name,
-            },
-
-            Core.AJAX.FunctionCall(
-                URL,
-                Data,
-                function(Response) {
-                    if (Response == "") {
-                        Response = 0;
-                    }
-
-                    $(".UserModificationCount")
-                        .html(Response)
-                        .parent()
-                        .removeClass("Hidden")
-                        .parent()
-                        .find("i")
-                        .addClass("Hidden");
-                }
-            );
-        }
 
         $("button#ResetConfirm").off("click").on("click", function() {
             var ResetOptions = $("#ResetOptions").val();
@@ -558,14 +527,6 @@ Core.Agent.Admin = Core.Agent.Admin || {};
             Core.SystemConfiguration.Update($(this), 1, 0);
             return false;
         });
-
-        if (parseInt(Core.Config.Get('OTRSBusinessIsInstalled'), 10) == "1") {
-            $(".UserModificationActive, .UserModificationNotActive").on('click', function () {
-                EnableModification($(this));
-                Core.SystemConfiguration.Update($(this), 0, 1);
-                return false;
-            });
-        }
     };
 
     /**

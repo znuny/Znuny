@@ -721,15 +721,8 @@ sub LoadDefaults {
     # agent interface notification module to check the admin user id
     # (don't work with user id 1 notification)
     $Self->{'Frontend::NotifyModule'} = {
-        '1100-OTRSBusiness' => {
-            Group  => 'admin',
-            Module => 'Kernel::Output::HTML::Notification::AgentOTRSBusiness',
-        },
         '2000-UID-Check' => {
             Module => 'Kernel::Output::HTML::Notification::UIDCheck',
-        },
-        '2500-AgentSessionLimit' => {
-          'Module' => 'Kernel::Output::HTML::Notification::AgentSessionLimit',
         },
         '5000-SystemConfigurationIsDirty-Check' => {
             Group  => 'admin',

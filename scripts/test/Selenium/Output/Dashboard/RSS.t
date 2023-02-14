@@ -36,7 +36,7 @@ $Selenium->RunTest(
 
         my $RandomRSSTitle = 'RSS' . $HelperObject->GetRandomID();
 
-        # Set URL config to xml content in ordr to prevent instability in case cloud services are
+        # Set URL config to xml content in order to prevent instability in case cloud services are
         # unavailable at the exact moment of this test run.
         $RSSConfig{DefaultValue}->{URL} = "
             <?xml version=\"1.0\" encoding=\"UTF-8\"?>
@@ -47,9 +47,9 @@ $Selenium->RunTest(
               xmlns:sy=\"http://purl.org/rss/1.0/modules/syndication/\"
               xmlns:slash=\"http://purl.org/rss/1.0/modules/slash/\"  >
               <channel>
-                  <title>Press Releases &#8211; otrs.com| OTRS Simple Service Management</title>
-                  <atom:link href=\"https://www.otrs.com/feed/?cat=112%2C254%2C111\" rel=\"self\" type=\"application/rss+xml\" />
-                  <link>https://www.otrs.com</link>
+                  <title>Some news</title>
+                  <atom:link href=\"https://www.znuny.com/feed/test\" rel=\"self\" type=\"application/rss+xml\" />
+                  <link>https://www.znuny.com</link>
                   <description>Simple service management</description>
                   <lastBuildDate>Fri, 26 Jan 2018 13:37:52 +0000</lastBuildDate>
                   <language>en-EN</language>
@@ -58,13 +58,13 @@ $Selenium->RunTest(
                   <generator>https://wordpress.org/?v=4.9.2</generator>
                   <item>
                       <title>$RandomRSSTitle</title>
-                      <link>https://www.otrs.com/$RandomRSSTitle</link>
+                      <link>https://www.znuny.com/$RandomRSSTitle</link>
                       <pubDate>Tue, 16 Jan 2018 09:00:07 +0000</pubDate>
-                      <dc:creator><![CDATA[Marketing OTRS]]></dc:creator>
+                      <dc:creator><![CDATA[Znuny GmbH]]></dc:creator>
                       <category><![CDATA[Release and Security Notes]]></category>
-                      <category><![CDATA[Release Notes: OTRS Business Solution™]]></category>
-                      <guid isPermaLink=\"false\">https://www.otrs.com/?p=61580</guid>
-                      <description><![CDATA[&#160; January 16, 2018 — OTRS, test]]></description>
+                      <category><![CDATA[Some news]]></category>
+                      <guid isPermaLink=\"false\">https://www.znuny.com/?p=61580</guid>
+                      <description><![CDATA[&#160; January 16, 2018 — Znuny, test]]></description>
                       <content:encoded><![CDATA[<div class=\"row box-space-md\"> <div class=\"col-lg-12 col-md-12 col-sm-12 column1\"></div> </div>]]></content:encoded>
                   </item>
               </channel>
@@ -101,7 +101,7 @@ $Selenium->RunTest(
         # Test if RSS feed is shown.
         $Self->True(
             $Selenium->execute_script(
-                "return \$('#Dashboard0410-RSS tbody a[href*=\"www.otrs.com/$RandomRSSTitle\"]').text().trim() === '$RandomRSSTitle'"
+                "return \$('#Dashboard0410-RSS tbody a[href*=\"www.znuny.com/$RandomRSSTitle\"]').text().trim() === '$RandomRSSTitle'"
             ),
             "RSS feed '$RandomRSSTitle' - found",
         );

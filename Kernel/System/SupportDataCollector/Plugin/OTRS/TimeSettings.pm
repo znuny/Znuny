@@ -91,20 +91,16 @@ sub Run {
         if ( defined $CalendarTimeZone ) {
             $Self->AddResultOk(
                 Identifier => "OTRSTimeZone::Calendar$Counter",
-
-             # Use of $LanguageObject->Translate() is not possible to avoid translated strings to be sent to OTRS Group.
-                Label => "OTRS time zone setting for calendar $Counter",
-                Value => $CalendarTimeZone,
+                Label      => "OTRS time zone setting for calendar $Counter",
+                Value      => $CalendarTimeZone,
             );
         }
         else {
             $Self->AddResultInformation(
                 Identifier => "OTRSTimeZone::Calendar$Counter",
-
-             # Use of $LanguageObject->Translate() is not possible to avoid translated strings to be sent to OTRS Group.
-                Label   => "OTRS time zone setting for calendar $Counter",
-                Value   => '',
-                Message => Translatable('Calendar time zone is not set.'),
+                Label      => "OTRS time zone setting for calendar $Counter",
+                Value      => '',
+                Message    => Translatable('Calendar time zone is not set.'),
             );
         }
     }

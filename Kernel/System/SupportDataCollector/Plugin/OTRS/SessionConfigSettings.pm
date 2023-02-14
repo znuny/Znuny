@@ -30,7 +30,6 @@ sub Run {
     my @Settings = qw(
         SessionMaxTime
         SessionMaxIdleTime
-        AgentSessionLimitPriorWarning
         AgentSessionLimit
         AgentSessionPerUserLimit
         CustomerSessionLimit

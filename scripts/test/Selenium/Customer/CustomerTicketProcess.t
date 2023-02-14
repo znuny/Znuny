@@ -397,23 +397,7 @@ $Selenium->RunTest(
         $Element->is_enabled();
         $Element->is_displayed();
 
-        my $OTRSBusinessIsInstalled = $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled();
-        my $OTRSSTORMIsInstalled    = $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSSTORMIsInstalled();
-        my $OTRSCONTROLIsInstalled  = $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSCONTROLIsInstalled();
-
-        my $FooterMessage;
-        if ($OTRSSTORMIsInstalled) {
-            $FooterMessage = 'STORM powered by OTRS';
-        }
-        elsif ($OTRSCONTROLIsInstalled) {
-            $FooterMessage = 'CONTROL powered by OTRS';
-        }
-        elsif ($OTRSBusinessIsInstalled) {
-            $FooterMessage = 'Powered by OTRS Business Solution';
-        }
-        else {
-            $FooterMessage = 'Powered by ' . $ConfigObject->Get('Product');
-        }
+        my $FooterMessage = 'Powered by ' . $ConfigObject->Get('Product');
 
         # Get secure disable banner.
         my $SecureDisableBanner = $ConfigObject->Get('Secure::DisableBanner');

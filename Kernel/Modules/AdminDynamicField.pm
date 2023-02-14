@@ -128,17 +128,6 @@ sub _ShowOverview {
         );
     }
 
-    my $OTRSBusinessIsInstalled = $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled();
-
-    # call all needed template blocks
-    $LayoutObject->Block(
-        Name => 'Main',
-        Data => {
-            %Param,
-            OTRSBusinessIsInstalled => $OTRSBusinessIsInstalled,
-        }
-    );
-
     my %FieldTypes;
     my %FieldDialogs;
 

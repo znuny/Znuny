@@ -29,6 +29,12 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     z-index: 3500;
 }
 
+@media only screen and (max-width: 1024px) {
+    #Overlay {
+        z-index: 9999;
+    }
+}
+
 /**
  * @subsection  Dialog
  */
@@ -36,7 +42,15 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     position: absolute;
     z-index: 6102;
     min-width: 150px;
-    background: #FFF;
+    overflow: hidden;
+    background: var(--white);
+    border-radius: var(--border-radius-sm);
+}
+
+@media only screen and (max-width: 1024px) {
+    .Dialog {
+        z-index: 999999;
+    }
 }
 
 .Dialog.Modal.Alert {
@@ -49,39 +63,65 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     left: 0px !important;
 }
 
+
+@media only screen and (max-width: 1024px) {
+    .Dialog.Fullsize {
+        height: auto;
+        top: 50px !important;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        max-width: calc(800px - var(--margin-xl));
+        width: calc(100% - var(--margin-xl));
+    }
+}
+
 .Dialog > .Header {
     cursor: move;
-    display: block;
+    display: flex;
+    flex-flow: row;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
     position: relative;
-    height: 25px;
-    background: #eee;
-    border-bottom: 1px solid #CCC;
+    height: auto;
+    background: var(--white-bg-header);
+    border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+    padding: var(--padding-md) var(--padding-lg);
 }
 
 .Dialog > .Header .Close {
-    display: block;
-    position: absolute;
-    height: 12px;
-    width: 12px;
-    right: 8px;
-    top: 7px;
-    color: #000;
+    height: 20px;
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--border-radius-xxs);
 }
 
-.RTL .Dialog > .Header .Close {
+.Dialog > .Header .Close i {
+    color: var(--black);
+}
+
+.Dialog > .Header .Close:hover {
+    background: var(--icon-hover-color-medium);
+}
+
+/*.RTL .Dialog > .Header .Close {
     right: auto;
     left: 8px;
 }
 
 .Dialog > .Header .Close:hover i {
     color: #E57633;
-}
+}*/
 
 .Dialog > .Header h1 {
-    padding: 5px 10px;
-    font-weight: normal;
-    font-size: 14px;
-    padding-top: 5px;
+    margin: 0;
+    padding: 0;
+    color: var(--black);
+    font-weight: var(--medium);
+    font-size: var(--font-size-md);
 }
 
 .Dialog > .Content {
@@ -89,14 +129,21 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     overflow-x: auto;
 }
 
+/*.Dialog.ui-draggable > .Content {
+    padding: 0;
+}*/
+
 .Dialog > .Content > .InnerContent {
-    padding: 10px 25px 10px 10px;
-    background: #FFF;
-    overflow-y: auto;
-    overflow-x: auto;
-    max-height: 200px;
+    background: var(--white);
+    /*overflow-y: auto;
+    overflow-x: auto;*/
     position: relative;
+    max-height: unset !important; /* overflow is done in .Content parent, so full height is necessary */
 }
+
+/*.Dialog > .Content .InnerContent:not(:only-child) {
+    padding: var(--padding-lg);
+}*/
 
 #AgentSplitSelection {
     min-width: 330px;
@@ -113,21 +160,29 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 .Dialog > .Content > .ContentFooter {
-    padding: 6px 0 5px;
-    background: #e5e5e5;
-    min-height: 20px;
-    border-top: 1px solid #CCC;
+    padding: var(--main-page-padding);
+    display: flex;
+    flex-flow: row;
+    justify-content: right;
+    /*border-top: var(--border-width) var(--border-solid) var(--border-color);*/
+}
+
+.Dialog > .Content > .ContentFooter button {
+    min-width: var(--btn-max-width-md);
+    max-width: var(--btn-max-width-md);
 }
 
 .Dialog > .Footer {
-    padding: 6px 0 5px;
-    display: block;
-    position: relative;
-    background: #eee;
-    border-top: 1px solid #CCC;
+    display: flex;
+    flex-flow: row;
+    justify-content: end;
+    padding: var(--padding-xl) 50px;
+    background: transparent;
 }
 
-.Dialog > .Footer.ContentFooter {
+.Dialog > .Footer.ContentFooter,
+.Footer:empty,
+.Footer.SaveButtons:empty {
     display: none;
 }
 
@@ -139,7 +194,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     display: block;
     font-size: 25px;
     text-align: center;
-    color: #ff505e;
+    color: var(--warning-color);
     margin-bottom: 10px;
 }
 
@@ -158,10 +213,233 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
  * subsection   Settings
  */
 
-.Dialog fieldset {
-    margin-bottom: 15px;
+/*******************************************************/
+/*               MODAL SETTINGS             */
+/*******************************************************/
+
+
+.Dialog.modal-sm {
+    max-width: 500px;
+    width: calc(100% - var(--margin-xl));
 }
 
+.Dialog.modal-md {
+    max-width: 750px;
+    width: calc(100% - var(--margin-xl));
+}
+
+.Dialog.modal-lg {
+    max-width: 850px;
+    width: calc(100% - var(--margin-xl));
+}
+
+.Dialog .Content {
+    display: flex;
+    flex-direction: column;
+    padding: var(--padding-lg);
+    gap: var(--gap-md);
+    max-height: 80vh !important;
+}
+
+
+
+/*.Dialog > .Content:has(.InnerContent):has(.ContentFooter) {
+    padding: 0;
+    gap: 0;
+    min-height: 150px;
+}*/
+
+.Dialog .Content:has(.CustomerUserAddressBook) {
+    padding: 0;
+}
+
+.Dialog .Content fieldset:not(#SearchAttributesHidden):not(.flex-row){
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm);
+    padding: 0;
+    min-width: unset;
+    /*overflow-x: hidden;*/
+    
+}
+
+.Dialog .Content fieldset .Field {
+    padding: 0;
+}
+
+.Dialog .Content .ContentFooter {
+    padding: 0;
+}
+/* end main styles modals - ED 22/09/29 */
+
+/*.Dialog .Content > .InnerContent + .ContentFooter {
+    padding: var(--padding-lg) 0;
+}*/
+
+/* Search Modals */
+.Dialog .Content .modal-search fieldset {
+    gap: var(--gap-md);
+}
+
+.Dialog .Content .modal-search fieldset .field-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm);
+}
+/* end Search Modals */
+
+
+/* modal-article-filter */
+fieldset.modal-article-filter .InputField_InputContainer {
+    width: 100%;
+}
+
+fieldset.modal-article-filter .field-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm);
+}
+
+/* end modal-article-filter*/
+
+
+.Dialog fieldset {
+    /*margin-bottom: 15px;*/
+    padding-bottom: 0;
+}
+
+.ticket-modal,
+.TableLike .ticket-modal {
+    display: flex;
+    flex-flow: row;
+    justify-content: start;
+    align-items: flex-start;
+    gap: var(--padding-xs);
+    font-size: 14px;
+    font-weight: var(--semi-bold);
+    color: var(--gray-dark);
+    letter-spacing: 0;
+    /*padding-bottom: var(--padding-xxl); - parent container has gap */
+}
+
+/*.ticket-modal */
+.modal-sm .Content > .ContentFooter button {
+    /*
+    max-width: unset;
+    min-width: 100%;
+    width: 100%;
+    */ /* Changed ED 22/09/29 */
+}
+
+.modal-col-wrapper {
+    padding: 0;
+    display: flex;
+    align-items: flex-start;
+}
+
+.modal-col-container {
+    flex: 1;
+    min-width: 100%;
+    display: flex;
+    gap: var(--padding-md);
+}
+
+.modal-col-container.modal-col-wrapper ul > li.Header {
+    background: var(--modal-header-bg);
+    border-bottom: 0;
+}
+
+.Content.modal-col-wrapper,
+.Content.modal-col-container {
+    gap: var(--gap-md);
+    padding: var(--padding-lg);
+    flex-flow: row;
+}
+
+/*ul#Users,
+ul#Groups,
+ul#Roles,
+ul#CustomerUsers,
+ul#Customers,
+ul#Group,
+ul#AlwaysGroups,
+ul#Service*/
+.Content.modal-col-wrapper.modal-col-container div > ul {
+    border-radius: var(--border-radius-sm);
+    background: var(--modal-header-bg);
+    overflow: hidden;
+}
+
+.Content.modal-col-wrapper.modal-col-container div > ul:not(:only-child):not(:last-child){
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.Content.modal-col-wrapper.modal-col-container div > ul:not(:only-child):last-child {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+/*ul#Users li,
+ul#Groups li,
+ul#Roles li,
+ul#CustomerUsers li,
+ul#Customers li,
+ul#Group li,
+ul#AlwaysGroups li,
+ul#Service li*/
+.Content.modal-col-wrapper.modal-col-container > div > ul > li {
+    font-weight: var(--normal);
+    letter-spacing: .1px;
+}
+
+/*ul#Users .Header,
+ul#Groups .Header,
+ul#Roles .Header,
+ul#CustomerUsers .Header,
+ul#Customers .Header,
+ul#Group .Header,
+ul#AlwaysGroups .Header,
+ul#Service .Header*/
+.Content.modal-col-wrapper.modal-col-container > div > ul > li.Header {
+    font-size: var(--font-size-sm);
+    font-weight: var(--semi-bold);
+    letter-spacing: .8px;
+    color: var(--table-text-color);
+    background: var(--gray-semi-light);
+}
+
+.modal-col1,
+.modal-col2 {
+    display: flex;
+    flex-flow: column;
+    border-radius: var(--border-radius-sm);
+    max-height: var(--modal-col-max-height);
+}
+
+.modal-col1 > .SaveButtons,
+.modal-col2 > .SaveButtons {
+    padding-top: var(--padding-sm);
+}
+
+.modal-col1 ul:first-child,
+.modal-col2 ul:first-child {
+    border-bottom: 0;
+    border-top-left-radius: var(--border-radius-sm);
+    border-top-right-radius: var(--border-radius-sm);
+    background: var(--modal-header-bg);
+}
+
+.modal-col1 ul:last-child,
+.modal-col2 ul:last-child {
+    cursor: grab;
+    overflow: auto;
+    border-top: 0;
+    border-bottom-left-radius: var(--border-radius-sm);
+    border-bottom-right-radius: var(--border-radius-sm);
+}
+
+/*
 .Dialog .WidgetSettingsForm fieldset,
 .Dialog fieldset.NoMargin {
     margin-bottom: 0px;
@@ -173,7 +451,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 .Dialog .Field.LayoutGrid .Tablelike {
     width: 98%;
-}
+}*/
 
 .Dialog .Field .FocusField {
     position: absolute;
@@ -189,34 +467,54 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     text-align: center;
 }
 
+/* Moved to ".modal-col1 ul:last-child"
 .Dialog .Field.LayoutGrid .AllocationList {
     max-height: 192px;
     overflow: auto;
-}
+}*/
 
-.Field.LayoutGrid .AllocationList.AvailableFields {
-    max-height: 155px;
-}
+/*.Field.LayoutGrid .AllocationList.AvailableFields {*/
+    /* This name train is now referred as
+    .modal-col1 ul:last-child, .modal-col2 ul:last-child
+}*/
 
 .Dialog .Field.LayoutGrid .AllocationList.OrderNumbers {
     list-style: decimal inside;
 }
 
-.FilterInputContainer {
-    width: 98%;
-    border-left: 1px solid #ccc;
-    border-right: 1px solid #ccc;
-    background-color: #eee;
+.FilterInputContainer,
+.LayoutGrid .FilterInputContainer {
+    overflow: visible;
+    padding: var(--padding-md) var(--padding-lg);
+    padding-top: 0;
+    background: var(--modal-header-bg);
+    border-left: var(--border-width) var(--border-solid) var(--border-color);
+    border-right: var(--border-width) var(--border-solid) var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: var(--gap-sm);
+}
+
+.FilterInputContainer > a {
+    display: none;
+}
+
+.FilterInputContainer i {
+    font-size: 14px;
+    color: var(--gray-semi-dark);
 }
 
 .FilterInputContainer input {
-    width: 95%;
-    display: block;
-    margin: 7px auto;
+    font-size: var(--font-size-sm);
+    color: var(--black);
+    background:  var(--white);
+    font-weight: var(--medium);
+    border-radius: var(--border-radius-sm);
+    max-height: var(--max-input-field-height);
 }
 
 #ContextSettingsDialogOverviewSmall {
-    width: 950px;
+    /*width: 950px;*/
     max-height: 600px;
 }
 
@@ -276,6 +574,13 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 .Dialog.Modal .ErrorScreen .WidgetSimple .Content {
     max-height: 200px;
     overflow: auto;
+}
+
+.activity-dialog-footer {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    align-items: flex-end;
 }
 
 .Dialog.Modal > .Content > .InnerContent > .FieldOverlay.CalendarEventsOverlay {

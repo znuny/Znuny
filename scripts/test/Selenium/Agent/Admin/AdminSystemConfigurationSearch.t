@@ -42,9 +42,8 @@ $Selenium->RunTest(
             "${ScriptAlias}index.pl?Action=AdminSystemConfiguration"
         );
 
-        # Search for CloudService::Admin::Module###100-SupportDataCollector(setting with : and # to test encoding).
-        $Selenium->find_element( '#SysConfigSearch', 'css' )
-            ->send_keys('CloudService::Admin::Module###100-SupportDataCollector');
+        # Search for Frontend::RichText::Settings###FontSizes (setting with : and # to test encoding).
+        $Selenium->find_element( '#SysConfigSearch', 'css' )->send_keys('Frontend::RichText::Settings###FontSizes');
         $Selenium->WaitFor(
             JavaScript => 'return $("ul.ui-autocomplete a:visible").length',
         );
@@ -70,7 +69,7 @@ $Selenium->RunTest(
         );
         $Self->Is(
             $SettingName,
-            'CloudService::Admin::Module###100-SupportDataCollector',
+            'Frontend::RichText::Settings###FontSizes',
             'Check if correct setting is listed.'
         );
     }

@@ -1536,21 +1536,6 @@ CREATE TABLE scheduler_recurrent_task (
     INDEX scheduler_recurrent_task_task_type_name (task_type, name)
 );
 # ----------------------------------------------------------
-#  create table cloud_service_config
-# ----------------------------------------------------------
-CREATE TABLE cloud_service_config (
-    id INTEGER NOT NULL AUTO_INCREMENT,
-    name VARCHAR (200) NOT NULL,
-    config LONGBLOB NOT NULL,
-    valid_id SMALLINT NOT NULL,
-    create_time DATETIME NOT NULL,
-    create_by INTEGER NOT NULL,
-    change_time DATETIME NOT NULL,
-    change_by INTEGER NOT NULL,
-    PRIMARY KEY(id),
-    UNIQUE INDEX cloud_service_config_name (name)
-);
-# ----------------------------------------------------------
 #  create table sysconfig_default
 # ----------------------------------------------------------
 CREATE TABLE sysconfig_default (

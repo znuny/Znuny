@@ -2667,21 +2667,6 @@ END IF;
 END$$;
 ;
 -- ----------------------------------------------------------
---  create table cloud_service_config
--- ----------------------------------------------------------
-CREATE TABLE cloud_service_config (
-    id serial NOT NULL,
-    name VARCHAR (200) NOT NULL,
-    config TEXT NOT NULL,
-    valid_id SMALLINT NOT NULL,
-    create_time timestamp(0) NOT NULL,
-    create_by INTEGER NOT NULL,
-    change_time timestamp(0) NOT NULL,
-    change_by INTEGER NOT NULL,
-    PRIMARY KEY(id),
-    CONSTRAINT cloud_service_config_name UNIQUE (name)
-);
--- ----------------------------------------------------------
 --  create table sysconfig_default
 -- ----------------------------------------------------------
 CREATE TABLE sysconfig_default (

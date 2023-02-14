@@ -31,50 +31,6 @@ Core.Agent.Admin = Core.Agent.Admin || {};
     */
     TargetNS.Init = function () {
 
-        // Bind event on SendUpdate button
-        $('#SendUpdate').on('click', function (Event) {
-            var TextClass = '';
-            Core.UI.Dialog.ShowContentDialog('<div class="Spacing Center"><span class="AJAXLoader W33pc" title='+ Core.Language.Translate("Sending Update...") + '></span></div>',Core.Language.Translate("Sending Update..."), '10px', 'Center', true, undefined, true);
-
-            Core.AJAX.FunctionCall(Core.Config.Get('CGIHandle'), 'Action=' + Core.Config.Get('Action') + ';Subaction=SendUpdate;', function (Response) {
-
-                var ResponseMessage = Core.Language.Translate('Support Data information was successfully sent.');
-
-                    // if the waiting dialog was canceled,
-                    // do not show the search dialog as well
-                    if (!$('.Dialog:visible').length) {
-                        return;
-                    }
-
-                if (Response === 0) {
-                    ResponseMessage = Core.Language.Translate('Was not possible to send Support Data information.');
-                    TextClass = 'Error';
-                }
-
-                Core.UI.Dialog.ShowContentDialog(
-                    '<div class="Spacing Center SendUpdateResultDialog"><span class="W50pc ' + TextClass + '" title="' + ResponseMessage + '">' + ResponseMessage + '</span></div>', Core.Language.Translate("Update Result"),
-                    '10px',
-                    'Center',
-                    true,
-                    [
-                        {
-                            Label: Core.Language.Translate('Close this dialog'),
-                            Class: 'Primary',
-                            Function: function () {
-                                Core.UI.Dialog.CloseDialog($('.SendUpdateResultDialog'));
-                            }
-                        }
-                    ],
-                    true
-                );
-
-            });
-
-            Event.preventDefault();
-            Event.stopPropagation();
-            return false;
-        });
-
         // Bind event on Generate Support bundle button
         $('#GenerateSupportBundle').on('click', function (Event) {
             Core.UI.Dialog.ShowContentDialog('<div class="Spacing Center LoadingSupportBundleDialog"><span class="AJAXLoader W75pc" title=' + Core.Language.Translate("Generating...") + '></span></div>', Core.Language.Translate("Generating..."), '10px', 'Center', true, undefined, true);

@@ -32,13 +32,6 @@ if ( $NumberOfPackagesInstalled > 8 ) {
     return 1;
 }
 
-# Make sure to enable cloud services.
-$HelperObject->ConfigSettingChange(
-    Valid => 1,
-    Key   => 'CloudServices::Disabled',
-    Value => 0,
-);
-
 my $RandomID = $HelperObject->GetRandomID();
 
 my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');

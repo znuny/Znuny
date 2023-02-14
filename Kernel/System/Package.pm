@@ -2871,8 +2871,7 @@ sub AnalyzePackageFrameworkRequirements {
 
 =head2 PackageUpgradeAll()
 
-Updates installed packages to their latest version. Also updates OTRS Business Solution™ if system
-    is entitled and there is an update.
+Updates installed packages to their latest version.
 
     my %Result = $PackageObject->PackageUpgradeAll(
         Force           => 1,     # optional 1 or 0, Upgrades packages even if validation fails.

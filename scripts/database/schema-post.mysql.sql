@@ -929,18 +929,6 @@ SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHER
 SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE pm_transition_action ADD CONSTRAINT FK_pm_transition_action_change_by_id FOREIGN KEY (change_by) REFERENCES users (id)', 'SELECT ''INFO: Foreign key constraint FK_pm_transition_action_change_by_id does already exist, skipping.''' );
 PREPARE FKStatement FROM @FKSQLStatement;
 EXECUTE FKStatement;
-SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHERE table_schema = DATABASE() AND table_name = 'cloud_service_config' AND constraint_name = 'FK_cloud_service_config_create_by_id');
-SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE cloud_service_config ADD CONSTRAINT FK_cloud_service_config_create_by_id FOREIGN KEY (create_by) REFERENCES users (id)', 'SELECT ''INFO: Foreign key constraint FK_cloud_service_config_create_by_id does already exist, skipping.''' );
-PREPARE FKStatement FROM @FKSQLStatement;
-EXECUTE FKStatement;
-SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHERE table_schema = DATABASE() AND table_name = 'cloud_service_config' AND constraint_name = 'FK_cloud_service_config_change_by_id');
-SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE cloud_service_config ADD CONSTRAINT FK_cloud_service_config_change_by_id FOREIGN KEY (change_by) REFERENCES users (id)', 'SELECT ''INFO: Foreign key constraint FK_cloud_service_config_change_by_id does already exist, skipping.''' );
-PREPARE FKStatement FROM @FKSQLStatement;
-EXECUTE FKStatement;
-SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHERE table_schema = DATABASE() AND table_name = 'cloud_service_config' AND constraint_name = 'FK_cloud_service_config_valid_id_id');
-SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE cloud_service_config ADD CONSTRAINT FK_cloud_service_config_valid_id_id FOREIGN KEY (valid_id) REFERENCES valid (id)', 'SELECT ''INFO: Foreign key constraint FK_cloud_service_config_valid_id_id does already exist, skipping.''' );
-PREPARE FKStatement FROM @FKSQLStatement;
-EXECUTE FKStatement;
 SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHERE table_schema = DATABASE() AND table_name = 'sysconfig_default' AND constraint_name = 'FK_sysconfig_default_create_by_id');
 SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE sysconfig_default ADD CONSTRAINT FK_sysconfig_default_create_by_id FOREIGN KEY (create_by) REFERENCES users (id)', 'SELECT ''INFO: Foreign key constraint FK_sysconfig_default_create_by_id does already exist, skipping.''' );
 PREPARE FKStatement FROM @FKSQLStatement;

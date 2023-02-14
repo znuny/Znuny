@@ -35,12 +35,10 @@ our @ObjectDependencies = (
     'Kernel::System::LastViews',
     'Kernel::System::Log',
     'Kernel::System::Main',
-    'Kernel::System::OTRSBusiness',
     'Kernel::System::State',
     'Kernel::System::Storable',
     'Kernel::System::SystemMaintenance',
     'Kernel::System::User',
-    'Kernel::System::VideoChat',
     'Kernel::System::Web::Request',
 );
 
@@ -724,11 +722,6 @@ sub Login {
     $Self->LoaderCreateJavaScriptTranslationData();
     $Self->LoaderCreateJavaScriptTemplateData();
 
-    my $OTRSBusinessObject = $Kernel::OM->Get('Kernel::System::OTRSBusiness');
-    $Param{OTRSBusinessIsInstalled} = $OTRSBusinessObject->OTRSBusinessIsInstalled();
-    $Param{OTRSSTORMIsInstalled}    = $OTRSBusinessObject->OTRSSTORMIsInstalled();
-    $Param{OTRSCONTROLIsInstalled}  = $OTRSBusinessObject->OTRSCONTROLIsInstalled();
-
     # we need the baselink for VerfifiedGet() of selenium tests
     $Self->AddJSData(
         Key   => 'Baselink',
@@ -1048,16 +1041,6 @@ sub Error {
 
     if ( !$Param{Message} ) {
         $Param{Message} = $Param{BackendMessage};
-
-        # Don't check for business package if the database was not yet configured (in the installer).
-        if (
-            $Kernel::OM->Get('Kernel::Config')->Get('SecureMode')
-            && $Kernel::OM->Get('Kernel::Config')->Get('DatabaseDSN')
-            && !$Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled()
-            )
-        {
-            $Param{ShowOTRSBusinessHint}++;
-        }
     }
 
     if ( $Param{BackendTraceback} ) {
@@ -1628,10 +1611,6 @@ sub Header {
         }
     }
 
-    if ( $ConfigObject->Get('SecureMode') ) {
-        $Param{OTRSBusinessIsInstalled} = $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled();
-    }
-
     # create & return output
     $Output .= $Self->Output(
         TemplateFile => "Header$Type",
@@ -1707,22 +1686,6 @@ sub Footer {
         }
     }
 
-    # get OTRS business object
-    my $OTRSBusinessObject = $Kernel::OM->Get('Kernel::System::OTRSBusiness');
-
-    # don't check for business package if the database was not yet configured (in the installer)
-    if ( $ConfigObject->Get('SecureMode') ) {
-        $Param{OTRSBusinessIsInstalled} = $OTRSBusinessObject->OTRSBusinessIsInstalled();
-        $Param{OTRSSTORMIsInstalled}    = $OTRSBusinessObject->OTRSSTORMIsInstalled();
-        $Param{OTRSCONTROLIsInstalled}  = $OTRSBusinessObject->OTRSCONTROLIsInstalled();
-    }
-
-    # Check if video chat is enabled.
-    if ( $Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::VideoChat', Silent => 1 ) ) {
-        $Param{VideoChatEnabled} = $Kernel::OM->Get('Kernel::System::VideoChat')->IsEnabled()
-            || $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'UnitTestMode' ) // 0;
-    }
-
     # Set an array with pending states.
     my @PendingStateIDs = $Kernel::OM->Get('Kernel::System::State')->StateGetStatesByType(
         StateType => [ 'pending reminder', 'pending auto' ],
@@ -1751,8 +1714,6 @@ sub Footer {
         CustomerInfoSet                => $ConfigObject->Get('Ticket::Frontend::CustomerInfoCompose'),
         IncludeUnknownTicketCustomers  => $ConfigObject->Get('Ticket::IncludeUnknownTicketCustomers'),
         InputFieldsActivated           => $ConfigObject->Get('ModernizeFormFields'),
-        OTRSBusinessIsInstalled        => $Param{OTRSBusinessIsInstalled},
-        VideoChatEnabled               => $Param{VideoChatEnabled},
         DatepickerShowWeek             => $ConfigObject->Get('Datepicker::ShowWeek') || 0,
         PendingStateIDs                => \@PendingStateIDs,
         CheckSearchStringsForStopWords => (
@@ -4002,11 +3963,6 @@ sub CustomerLogin {
     $Self->LoaderCreateJavaScriptTranslationData();
     $Self->LoaderCreateJavaScriptTemplateData();
 
-    my $OTRSBusinessObject = $Kernel::OM->Get('Kernel::System::OTRSBusiness');
-    $Param{OTRSBusinessIsInstalled} = $OTRSBusinessObject->OTRSBusinessIsInstalled();
-    $Param{OTRSSTORMIsInstalled}    = $OTRSBusinessObject->OTRSSTORMIsInstalled();
-    $Param{OTRSCONTROLIsInstalled}  = $OTRSBusinessObject->OTRSCONTROLIsInstalled();
-
     $Self->AddJSData(
         Key   => 'Baselink',
         Value => $Self->{Baselink},
@@ -4338,12 +4294,6 @@ sub CustomerFooter {
 
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-    # Check if video chat is enabled.
-    if ( $Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::VideoChat', Silent => 1 ) ) {
-        $Param{VideoChatEnabled} = $Kernel::OM->Get('Kernel::System::VideoChat')->IsEnabled()
-            || $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'UnitTestMode' ) // 0;
-    }
-
     # Check if customer user has permission for chat.
     my $CustomerChatPermission;
     if ( $Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::Chat', Silent => 1 ) ) {
@@ -4376,14 +4326,6 @@ sub CustomerFooter {
         }
     }
 
-    # don't check for business package if the database was not yet configured (in the installer)
-    if ( $ConfigObject->Get('SecureMode') ) {
-        my $OTRSBusinessObject = $Kernel::OM->Get('Kernel::System::OTRSBusiness');
-        $Param{OTRSBusinessIsInstalled} = $OTRSBusinessObject->OTRSBusinessIsInstalled();
-        $Param{OTRSSTORMIsInstalled}    = $OTRSBusinessObject->OTRSSTORMIsInstalled();
-        $Param{OTRSCONTROLIsInstalled}  = $OTRSBusinessObject->OTRSCONTROLIsInstalled();
-    }
-
     # AutoComplete-Config
     my $AutocompleteConfig = $ConfigObject->Get('AutoComplete::Customer');
 
@@ -4407,12 +4349,8 @@ sub CustomerFooter {
         CustomerPanelSessionName => $ConfigObject->Get('CustomerPanelSessionName'),
         UserLanguage             => $Self->{UserLanguage},
         CheckEmailAddresses      => $ConfigObject->Get('CheckEmailAddresses'),
-        OTRSBusinessIsInstalled  => $Param{OTRSBusinessIsInstalled},
-        OTRSSTORMIsInstalled     => $Param{OTRSSTORMIsInstalled},
-        OTRSCONTROLIsInstalled   => $Param{OTRSCONTROLIsInstalled},
         InputFieldsActivated     => $ConfigObject->Get('ModernizeCustomerFormFields'),
         Autocomplete             => $AutocompleteConfig,
-        VideoChatEnabled         => $Param{VideoChatEnabled},
         WebMaxFileUpload         => $ConfigObject->Get('WebMaxFileUpload'),
         CustomerChatPermission   => $CustomerChatPermission,
     );

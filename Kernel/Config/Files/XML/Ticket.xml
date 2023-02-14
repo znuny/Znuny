@@ -13869,13 +13869,6 @@ Thanks for your help!
                         <Item Key="Valid">1</Item>
                     </Hash>
                 </Item>
-                <Item Key="GetHelpLink">
-                    <Hash>
-                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::GetHelpLink</Item>
-                        <Item Key="Prio">100</Item>
-                        <Item Key="Valid">1</Item>
-                    </Hash>
-                </Item>
             </Hash>
         </Value>
     </Setting>

@@ -1,4 +1,6 @@
 # 7.0.0 2023-??-??
+ - 2023-02-01 Removed Business Solution code.
+ - 2023-02-01 Added additional IconClass for Notifications (Notify's).
  - 2023-01-26 Integrated Znuny4OTRS-AdminValidFilter into Framework. Filters invalid entries in the admin area.
  - 2023-01-25 Flattened customer menu to single level.
  - 2023-01-20 Dashboard Widget Expand - There are now dashboard widget filters that display the selected widget alone and if possible with a larger number of tickets. This way the focus is concentrated on one widget.

@@ -3716,54 +3716,6 @@ END;
 --
 ;
 BEGIN
-    EXECUTE IMMEDIATE 'ALTER TABLE cloud_service_config ADD CONSTRAINT FK_cloud_service_config_creafe FOREIGN KEY (create_by) REFERENCES users (id)';
-EXCEPTION
-  WHEN OTHERS THEN NULL;
-END;
-/
---
-;
-BEGIN
-    EXECUTE IMMEDIATE 'CREATE INDEX FK_cloud_service_config_crea30 ON cloud_service_config (create_by)';
-EXCEPTION
-  WHEN OTHERS THEN NULL;
-END;
-/
---
-;
-BEGIN
-    EXECUTE IMMEDIATE 'ALTER TABLE cloud_service_config ADD CONSTRAINT FK_cloud_service_config_chan63 FOREIGN KEY (change_by) REFERENCES users (id)';
-EXCEPTION
-  WHEN OTHERS THEN NULL;
-END;
-/
---
-;
-BEGIN
-    EXECUTE IMMEDIATE 'CREATE INDEX FK_cloud_service_config_chane1 ON cloud_service_config (change_by)';
-EXCEPTION
-  WHEN OTHERS THEN NULL;
-END;
-/
---
-;
-BEGIN
-    EXECUTE IMMEDIATE 'ALTER TABLE cloud_service_config ADD CONSTRAINT FK_cloud_service_config_vali9c FOREIGN KEY (valid_id) REFERENCES valid (id)';
-EXCEPTION
-  WHEN OTHERS THEN NULL;
-END;
-/
---
-;
-BEGIN
-    EXECUTE IMMEDIATE 'CREATE INDEX FK_cloud_service_config_valib2 ON cloud_service_config (valid_id)';
-EXCEPTION
-  WHEN OTHERS THEN NULL;
-END;
-/
---
-;
-BEGIN
     EXECUTE IMMEDIATE 'ALTER TABLE sysconfig_default ADD CONSTRAINT FK_sysconfig_default_create_53 FOREIGN KEY (create_by) REFERENCES users (id)';
 EXCEPTION
   WHEN OTHERS THEN NULL;

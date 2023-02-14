@@ -2559,39 +2559,6 @@ BEGIN
 IF NOT EXISTS (
     SELECT 1
     FROM pg_constraint
-    WHERE LOWER(conname) = LOWER('FK_cloud_service_config_create_by_id')
-    ) THEN
-    ALTER TABLE cloud_service_config ADD CONSTRAINT FK_cloud_service_config_create_by_id FOREIGN KEY (create_by) REFERENCES users (id);
-END IF;
-END$$;
-;
-DO $$
-BEGIN
-IF NOT EXISTS (
-    SELECT 1
-    FROM pg_constraint
-    WHERE LOWER(conname) = LOWER('FK_cloud_service_config_change_by_id')
-    ) THEN
-    ALTER TABLE cloud_service_config ADD CONSTRAINT FK_cloud_service_config_change_by_id FOREIGN KEY (change_by) REFERENCES users (id);
-END IF;
-END$$;
-;
-DO $$
-BEGIN
-IF NOT EXISTS (
-    SELECT 1
-    FROM pg_constraint
-    WHERE LOWER(conname) = LOWER('FK_cloud_service_config_valid_id_id')
-    ) THEN
-    ALTER TABLE cloud_service_config ADD CONSTRAINT FK_cloud_service_config_valid_id_id FOREIGN KEY (valid_id) REFERENCES valid (id);
-END IF;
-END$$;
-;
-DO $$
-BEGIN
-IF NOT EXISTS (
-    SELECT 1
-    FROM pg_constraint
     WHERE LOWER(conname) = LOWER('FK_sysconfig_default_create_by_id')
     ) THEN
     ALTER TABLE sysconfig_default ADD CONSTRAINT FK_sysconfig_default_create_by_id FOREIGN KEY (create_by) REFERENCES users (id);

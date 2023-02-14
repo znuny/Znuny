@@ -1003,10 +1003,6 @@ sub _Edit {
     # set once per day checked value
     $Param{OncePerDayChecked} = ( $Param{Data}->{OncePerDay} ? 'checked="checked"' : '' );
 
-    my $OTRSBusinessObject      = $Kernel::OM->Get('Kernel::System::OTRSBusiness');
-    my $OTRSBusinessIsInstalled = $OTRSBusinessObject->OTRSBusinessIsInstalled();
-
-    # Third option is enabled only when OTRSBusiness is installed in the system.
     $Param{VisibleForAgentStrg} = $LayoutObject->BuildSelection(
         Data => [
             {
@@ -1017,11 +1013,6 @@ sub _Edit {
                 Key   => '1',
                 Value => Translatable('Yes'),
             },
-            {
-                Key      => '2',
-                Value    => Translatable('Yes, but require at least one active notification method.'),
-                Disabled => $OTRSBusinessIsInstalled ? 0 : 1,
-            }
         ],
         Name       => 'VisibleForAgent',
         Sort       => 'NumericKey',
@@ -1127,20 +1118,7 @@ sub _Edit {
                         },
                     );
                 }
-                else {
-
-                    # This trasnport needs to be active before use it.
-                    $LayoutObject->Block(
-                        Name => 'TransportRowNotActive',
-                        Data => {
-                            Transport     => $Transport,
-                            TransportName => $RegisteredTransports{$Transport}->{Name},
-                        },
-                    );
-                }
-
             }
-
         }
     }
     else {

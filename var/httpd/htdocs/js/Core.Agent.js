@@ -248,10 +248,6 @@ Core.Agent = (function (TargetNS) {
                     return true;
                 }
 
-                if (!parseInt(Core.Config.Get('OTRSBusinessIsInstalled'), 10) && $Target.hasClass('OTRSBusinessRequired')) {
-                    return true;
-                }
-
                 // Workaround for Windows Phone IE
                 // In Windows Phone IE the event does not bubble up like in other browsers
                 // That means that a subnavigation in mobile mode is still collapsed/expanded,
@@ -709,11 +705,6 @@ Core.Agent = (function (TargetNS) {
         // Initialize pagination
         TargetNS.InitPagination();
 
-        // Initialize OTRSBusinessRequired dialog
-        if (!parseInt(Core.Config.Get('OTRSBusinessIsInstalled'), 10)) {
-            InitOTRSBusinessRequiredDialog();
-        }
-
         // Initialize ticket in new window
         if (parseInt(Core.Config.Get('NewTicketInNewWindow'), 10)) {
             InitTicketInNewWindow();
@@ -814,49 +805,6 @@ Core.Agent = (function (TargetNS) {
             });
         }
     }
-
-    /**
-     * @private
-     * @name InitOTRSBusinessRequiredDialog
-     * @memberof Core.Agent
-     * @function
-     * @description
-     *      Initialize OTRSBusiness upgrade dialog on all clicks coming from anchor with OTRSBusinessRequired class.
-     */
-    function InitOTRSBusinessRequiredDialog () {
-        $('body').on('click', 'a.OTRSBusinessRequired', function() {
-            TargetNS.ShowOTRSBusinessRequiredDialog();
-            return false;
-        });
-    }
-
-    /**
-     * @name ShowOTRSBusinessRequiredDialog
-     * @memberof Core.Agent
-     * @function
-     * @description
-     *      This function shows OTRSBusiness upgrade dialog.
-     */
-    TargetNS.ShowOTRSBusinessRequiredDialog = function() {
-        var OTRSBusinessLabel = '<strong>OTRS Business Solution</strong>™';
-
-        Core.UI.Dialog.ShowContentDialog(
-            '<div class="OTRSBusinessRequiredDialog">' + Core.Language.Translate('This feature is part of the %s. Please contact us at %s for an upgrade.', OTRSBusinessLabel, 'sales@otrs.com') + '<a class="Hidden" href="http://www.otrs.com/solutions/" target="_blank"><span></span></a></div>',
-            '',
-            '240px',
-            'Center',
-            true,
-            [
-                {
-                    Label: Core.Language.Translate('Find out more'),
-                    Class: 'Primary',
-                    Function: function () {
-                        $('.OTRSBusinessRequiredDialog').find('a span').trigger('click');
-                    }
-                }
-            ]
-        );
-    };
 
     /**
      * @private

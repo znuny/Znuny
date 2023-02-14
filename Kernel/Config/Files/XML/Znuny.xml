@@ -48,23 +48,6 @@
     <!--
         Repositories
     -->
-    <Setting Name="PackageRepositoryURLSchema" Required="1" Valid="1">
-        <Description Translatable="1">Access package repositories via HTTP or HTTPS.</Description>
-        <Navigation>Core::Repository</Navigation>
-        <Value>
-            <Item ValueType="Select" SelectedID="https">
-                <Item ValueType="Option" Value="https">https</Item>
-                <Item ValueType="Option" Value="http">http</Item>
-            </Item>
-        </Value>
-    </Setting>
-    <Setting Name="CloudServiceProxyURL" Required="1" Valid="1">
-        <Description Translatable="1">URL to the OTRS cloud service proxy service. The http or https prefix will be added, depending on SysConfig option 'PackageRepositoryURLSchema'.</Description>
-        <Navigation>Core::Repository</Navigation>
-        <Value>
-            <Item ValueType="String" ValueRegex="">addons.znuny.com/api/otrs_cloud_service/</Item>
-        </Value>
-    </Setting>
     <Setting Name="Frontend::Module###AdminSystemFiles" Required="1" Valid="1">
         <Description Translatable="1">Frontend module registration for the agent interface.</Description>
         <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
