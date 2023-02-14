@@ -1,4 +1,5 @@
 # 6.5.1 2023-??-??
+ - 2023-02-13 Added support for smart tags to process activity dialog article field.
  - 2023-01-25 Added Dashboard element filter: My owned tickets.
  - 2023-01-23 Added new event module to store customer company data in ticket dynamic fields: Ticket::EventModulePost DynamicFieldFromCustomerCompany.
  - 2023-01-23 Sort screens in AdminDynamicFieldScreenConfiguration by values (#327). Thanks to Emin Yazi (@eyazi), Efflux. [PR#327](https://github.com/znuny/Znuny/pull/327)

@@ -2771,8 +2771,9 @@ sub _RenderTitle {
 sub _RenderArticle {
     my ( $Self, %Param ) = @_;
 
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $LayoutObject            = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ConfigObject            = $Kernel::OM->Get('Kernel::Config');
+    my $TemplateGeneratorObject = $Kernel::OM->Get('Kernel::System::TemplateGenerator');
 
     for my $Needed (qw(FormID Ticket)) {
         if ( !$Param{$Needed} ) {
@@ -2860,6 +2861,34 @@ sub _RenderArticle {
         LabelBody => $Param{ActivityDialogField}->{Config}->{LabelBody}
             || $LayoutObject->{LanguageObject}->Translate("Text"),
         AttachmentList => $Param{AttachmentList},
+    );
+
+    $Data{Body} = $TemplateGeneratorObject->_Replace(
+        RichText => 1,
+        Text     => $Data{Body} || '',
+        Data     => {
+            %{ $Param{GetParam} },
+            %Data,
+        },
+        TicketData => {
+            %{ $Param{GetParam} },
+            %Data,
+        },
+        UserID => $Self->{UserID},
+    );
+
+    $Data{Subject} = $TemplateGeneratorObject->_Replace(
+        RichText => 0,                      # In this case rich-text support is not needed.
+        Text     => $Data{Subject} || '',
+        Data     => {
+            %{ $Param{GetParam} },
+            %Data,
+        },
+        TicketData => {
+            %{ $Param{GetParam} },
+            %Data,
+        },
+        UserID => $Self->{UserID},
     );
 
     # If field is required put in the necessary variables for
@@ -4739,8 +4768,9 @@ sub _StoreActivityDialog {
 
     my %TicketParam;
 
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $LayoutObject            = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ConfigObject            = $Kernel::OM->Get('Kernel::Config');
+    my $TemplateGeneratorObject = $Kernel::OM->Get('Kernel::System::TemplateGenerator');
 
     my $ActivityDialogEntityID = $Param{GetParam}->{ActivityDialogEntityID};
     if ( !$ActivityDialogEntityID ) {
@@ -5076,6 +5106,20 @@ sub _StoreActivityDialog {
                     $TicketParam{Title} = $Param{GetParam}->{Subject};
                 }
             }
+
+            $TicketParam{Title} = $TemplateGeneratorObject->_Replace(
+                RichText => 0,                           # In this case rich-text support is not needed.
+                Text     => $TicketParam{Title} || '',
+                Data     => {
+                    %{ $Param{GetParam} },
+                    %TicketParam,
+                },
+                TicketData => {
+                    %{ $Param{GetParam} },
+                    %TicketParam,
+                },
+                UserID => $Self->{UserID},
+            );
 
             # create a new ticket
             $TicketID = $TicketObject->TicketCreate(%TicketParam);
@@ -5533,6 +5577,32 @@ sub _StoreActivityDialog {
                     $HistoryType    = 'PhoneCallAgent';
                     $HistoryComment = '%%';
                 }
+
+                $Param{GetParam}->{Body} = $TemplateGeneratorObject->_Replace(
+                    RichText => 1,
+                    Text     => $Param{GetParam}->{Body} || '',
+                    Data     => {
+                        %{ $Param{GetParam} },
+                    },
+                    TicketData => {
+                        %{ $Param{GetParam} },
+                        TicketID => $TicketID,
+                    },
+                    UserID => $Self->{UserID},
+                );
+
+                $Param{GetParam}->{Subject} = $TemplateGeneratorObject->_Replace(
+                    RichText => 0,                                   # In this case rich-text support is not needed.
+                    Text     => $Param{GetParam}->{Subject} || '',
+                    Data     => {
+                        %{ $Param{GetParam} },
+                    },
+                    TicketData => {
+                        %{ $Param{GetParam} },
+                        TicketID => $TicketID,
+                    },
+                    UserID => $Self->{UserID},
+                );
 
                 my $From = "\"$Self->{UserFullname}\" <$Self->{UserEmail}>";
                 $ArticleID = $ArticleBackendObject->ArticleCreate(
