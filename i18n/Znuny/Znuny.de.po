@@ -25644,3 +25644,15 @@ msgstr "Standarddaten, die als Attribute für die Ticket-Suchmaske verwendet wer
 msgid "Default data to use on attribute for ticket search screen. Example: \"TicketPendingTimeStartYear=2010;TicketPendingTimeStartMonth=10;TicketPendingTimeStartDay=4;TicketPendingTimeStopYear=2010;TicketPendingTimeMonth=11;TicketPendingTimeStopDay=3;\"."
 msgstr "Standarddaten, die als Attribute für die Ticket-Suchmaske verwendet werden. Beispiel: \"TicketPendingTimeStartYear=2010;TicketPendingTimeStartMonth=10;TicketPendingTimeStartDay=4;TicketPendingTimeStopYear=2010;TicketPendingTimeMonth=11;TicketPendingTimeStopDay=3;\"."
 
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
+msgid "Views with multiple loaded JavaScript files"
+msgstr "Ansichten mit mehrfach geladenen JavaScript Dateien"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
+msgid "The following JavaScript files loaded multiple times:"
+msgstr "Die folgenden JavaScript Dateien werden merfach geladen:"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
+msgid "Files"
+msgstr "Dateien"
+

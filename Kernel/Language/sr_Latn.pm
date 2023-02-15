@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.922578555231616;
+    $Self->{Completeness}        = 0.922130484053748;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5389,6 +5389,11 @@ sub Data {
             'Pronađene su rezervne kopije prošlih konfiguracija u Kernel/Config/Backups, međutim mogu biti neophodne za rad instaliranih paketa.',
         'Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder.' =>
             'Rezervne kopije prošlih konfiguracija više nisu neophodne za rad instaliranih paketa, molimo uklonite ih iz Kernel/Config/Backups.',
+
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
+        'Views with multiple loaded JavaScript files' => '',
+        'The following JavaScript files loaded multiple times:' => '',
+        'Files' => '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
         'Package Installation Status' => 'Status instalacije paketa',
