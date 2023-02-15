@@ -34,7 +34,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.623765581997734;
+    $Self->{Completeness}        = 0.625384490853165;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -428,9 +428,9 @@ sub Data {
         'Back to search results' => 'Torna ai risultati della ricerca',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Le utenze cliente sono necessarie per avere una cronologia del cliente e per effettuare l\'accesso dal pannello clienti.',
-        'Customer Users ↔ Customers' => '',
-        'Customer Users ↔ Groups' => '',
-        'Customer Users ↔ Services' => '',
+        'Customer Users ↔ Customers' => 'Utenze clienti ↔ Clienti',
+        'Customer Users ↔ Groups' => 'Utenze clienti ↔ Gruppi',
+        'Customer Users ↔ Services' => 'Utenze clienti ↔ Servizi',
         'List (%s total)' => 'Elenco (% totale)',
         'Username' => 'Nome utente',
         'Email' => 'Email',
@@ -460,7 +460,7 @@ sub Data {
             'La tabella sopra mostra l\'accesso al cliente concesso all\'utenza cliente in base al contesto dell\'autorizzazione. La matrice tiene conto di tutti gli accessi ereditati (ad es. Gruppi cliente). Nota: la tabella non considera le modifiche apportate a questo modulo senza inviarlo.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
-        'Manage Customer User-Customer Relations' => 'Gestire le relazioni utenza cliente-cliente',
+        'Manage Customer User-Customer Relations' => 'Gestione associazioni utenze cliente ↔ cliente',
         'Select the customer user:customer relations.' => 'Seleziona le relazioni utenza cliente:cliente',
         'Change Customer Relations for Customer User' => 'Modifica le relazioni con il cliente per l\'utenza cliente',
         'Change Customer User Relations for Customer' => 'Modifica le relazioni utenza cliente per cliente',
@@ -2440,7 +2440,7 @@ sub Data {
         'Change search options' => 'Modifica le opzioni di ricerca',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserInformationCenter.tt
-        'Customer User Information Center' => 'Centro informazioni utenze clienti',
+        'Customer User Information Center' => 'Centro informazioni utenze dei clienti',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
         'The OTRS Daemon is a daemon process that performs asynchronous tasks, e.g. ticket escalation triggering, email sending, etc.' =>
@@ -8410,7 +8410,7 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketBulk.js
         ' ...and %s more' => '',
-        ' ...show less' => '',
+        ' ...show less' => ' ...mostra meno',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketFormDraft.js
         'Add new draft' => 'Aggiungi nuova bozza',
@@ -8543,7 +8543,18 @@ Please create a new ticket via the customer panel.
 Thanks for your help!
 
  Your Helpdesk Team
-' => '',
+' => '
+Gentile utente,
+
+sfortunatamente non siamo riusciti a riconoscere  un numero di ticket valido
+nell\'oggetto della mail, che quindi non può essere elaborata.
+
+Può creare un nuovo ticket dalla pagina web.
+
+Grazie per l\'aiuto.
+
+Il tuo helpdesk.
+',
         ' (work units)' => ' (unità di lavoro)',
         ' 2 minutes' => ' 2 minuti',
         ' 5 minutes' => ' 5 minuti',
@@ -8749,11 +8760,11 @@ Thanks for your help!
         'Customer Information Center.' => '',
         'Customer Ticket Print Module.' => '',
         'Customer User Administration' => 'Amministrazione utenze clienti',
-        'Customer User Information' => '',
-        'Customer User Information Center Search.' => '',
+        'Customer User Information' => 'Informazioni sull\'utente del cliente',
+        'Customer User Information Center Search.' => 'Cerca informazioni utenza del cliente',
         'Customer User Information Center search.' => '',
-        'Customer User Information Center.' => '',
-        'Customer User-Customer Relations' => '',
+        'Customer User Information Center.' => 'Centro informazioni utenze dei clienti',
+        'Customer User-Customer Relations' => 'Associazioni utenze clienti ↔ clienti',
         'Customer preferences.' => '',
         'Customer ticket overview' => '',
         'Customer ticket search.' => '',
@@ -8939,7 +8950,7 @@ Thanks for your help!
         'Macedonian' => '',
         'Mail Accounts' => 'Account di posta',
         'Malay' => 'Malese',
-        'Manage Customer User-Customer Relations.' => '',
+        'Manage Customer User-Customer Relations.' => 'Gestisce le associazioni utenze cliente ↔ cliente.',
         'Manage OAuth2 tokens and their configurations.' => '',
         'Manage OTRS Group cloud services.' => '',
         'Manage PGP keys for email encryption.' => 'Gestisci le chiavi PGP per la cifratura delle email.',
