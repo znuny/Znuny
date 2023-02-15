@@ -8661,7 +8661,6 @@ via the Preferences button after logging in.
                         <Item>Core.SystemConfiguration.VacationDays.js</Item>
                         <Item>Core.SystemConfiguration.VacationDaysOneTime.js</Item>
                         <Item>Core.SystemConfiguration.WorkingHours.js</Item>
-                        <Item>Core.Form.js</Item>
                         <Item>Core.Agent.Admin.SystemConfiguration.js</Item>
                     </Array>
                 </Item>
@@ -8744,7 +8743,6 @@ via the Preferences button after logging in.
                         <Item>Core.SystemConfiguration.VacationDays.js</Item>
                         <Item>Core.SystemConfiguration.VacationDaysOneTime.js</Item>
                         <Item>Core.SystemConfiguration.WorkingHours.js</Item>
-                        <Item>Core.Form.js</Item>
                         <Item>Core.Agent.Admin.SystemConfiguration.js</Item>
                     </Array>
                 </Item>

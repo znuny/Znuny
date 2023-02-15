@@ -1249,7 +1249,6 @@
                 <Item Key="JavaScript">
                     <Array>
                         <Item>Core.UI.AllocationList.js</Item>
-                        <Item>Core.UI.Table.js</Item>
                         <Item>Znuny.Agent.Admin.DynamicFieldScreenConfiguration.js</Item>
                     </Array>
                 </Item>
