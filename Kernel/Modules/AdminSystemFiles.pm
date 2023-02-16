@@ -771,8 +771,8 @@ sub FileDetailsExtended {
             Timeout => 15,
         );
 
-        #  URL => 'https://raw.githubusercontent.com/OTRS/otrs/rel-5_0/Kernel/GenericInterface/Event/Handler.pm',
-        my $URL      = "https://raw.githubusercontent.com/OTRS/otrs/" . $Version . "/" . $Param{Path};
+        #  URL => 'https://raw.githubusercontent.com/znuny/znuny/rel-6_5/Kernel/GenericInterface/Event/Handler.pm',
+        my $URL      = "https://raw.githubusercontent.com/znuny/znuny/" . $Version . "/" . $Param{Path};
         my %Response = $WebUserAgentObject->Request(
             URL                 => $URL,
             SkipSSLVerification => 1,
