@@ -250,6 +250,10 @@ sub _TasksGet {
             Message => 'Migrate notification events',
             Module  => 'scripts::Migration::Znuny::MigrateNotificationEvents',
         },
+        {
+            Message => 'Integrate Znuny-NoteToLinkedTicket',
+            Module  => 'scripts::Migration::Znuny::IntegrateZnunyNoteToLinkedTicket',
+        },
 
         # NOTE: UninstallMergedPackages has to be called only after
         # SysConfig settings of the merged packages have been migrated.

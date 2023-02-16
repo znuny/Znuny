@@ -6354,7 +6354,7 @@ sub _DefaultSettingAddBulk {
 
 Creates config backup files from '/Kernel/Config/Files/*'.
 
-    my $Success = $MigrateToZnunyObject->CreateZZZAAutoBackup();
+    my $Success = $SysConfigObject->CreateZZZAAutoBackup();
 
 Returns:
 
@@ -6392,7 +6392,7 @@ sub CreateZZZAAutoBackup {
 
 Deletes config backup.
 
-    my $Success = $MigrateToZnunyObject->DeleteZZZAAutoBackup();
+    my $Success = $SysConfigObject->DeleteZZZAAutoBackup();
 
 Returns:
 

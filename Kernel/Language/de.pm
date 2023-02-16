@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.997571636716853;
+    $Self->{Completeness}        = 0.99758337361044;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2770,6 +2770,13 @@ sub Data {
         'New Queue' => 'Neue Queue',
         'Move' => 'Verschieben',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
+        'Add note to linked %s%s%s' => 'Notiz zu verlinktem %s%s%s hinzufügen',
+        'Note to linked Ticket' => 'Notiz zu verlinktem Ticket',
+        'LinkList invalid.' => 'LinkList ungültig.',
+        'Note to origin Ticket' => 'Notiz zu Ursprungsticket',
+        'NoteToTicket invalid.' => 'Notiz ungültig.',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
         'No ticket data found.' => 'Keine Ticket-Daten gefunden.',
         'Open / Close ticket action menu' => 'Ticket-Aktionsmenü öffnen/schließen',
@@ -4657,6 +4664,10 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketNote.pm
         'Reply to note' => 'Auf Notiz antworten',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketNoteToLinkedTicket.pm
+        'Create notice for linked ticket' => 'Notiz für verlinktes Ticket erstellen',
+        'Transfer notice' => 'Notiz übergeben',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPhone.pm
         'Split this article' => 'Diesen Artikel teilen',
@@ -8000,6 +8011,50 @@ sub Data {
             'Definiert eine Zuordnung zwischen Variablen der Kundendaten (Schlüssel) und dynamischen Feldern eines Ticket (Werte). Somit können Sie Kundendaten eines Tickets in dynamische Felder speichern. Die dynamischen Felder müssen im System vorhanden sein und sollten für AgentTicketFreeText aktiviert werden, damit sie eingestellt / manuell durch den Agenten aktualisiert werden können. Sie dürfen nicht für AgentTicketPhone, AgentTicketEmail und AgentTicketCustomer aktiviert werden. Wenn dies der Fall ist, so haben sie Vorrang gegenüber den automatisch gesetzten Werten. Um dieses Mapping zu verwenden, müssen Sie auch die Ticket Einstellung Ticket::EventModulePost###4100-DynamicFieldFromCustomerCompany aktivieren.',
         'This event module stores attributes from customer companies in ticket dynamic fields. Please see DynamicFieldFromCustomerCompany::Mapping setting for how to configure the mapping.' =>
             'Dieses Eventmodul speichert Attribute des Kunden in dynamischen Ticketfeldern. Bitte schauen Sie sich die DynamicFieldFromCustomerCompany::Mapping-Einstellung für die Konfiguration des Mappings an.',
+        'Required permissions to use the NoteToLinkedTicket screen in the agent interface.' =>
+            'Benötigte Rechte, um den "Notiz übergeben"-Dialog im Agenten-Interface aufzurufen.',
+        'Sets the state of the selected linked ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            'Setzt den Status des ausgewählten verknüpften Tickets im NoteToLinkedTicket-Dialog des Agenten-Interface',
+        'Defines the default next state of a ticket after adding a note in the NoteToLinkedTicket screen of the agent interface.' =>
+            'Definiert den standardmäßigen nächsten Status des Tickets nach dieser Aktion in der "Notiz übergeben"-Aktion im Agenten-Interface.',
+        'Activates the selection if a note in NoteToLinkedTicket screen should be created in this origin ticket.' =>
+            'Aktiviert die Auswahl, ob eine Notiz in der "Notiz übergeben"-Aktion auch im Ursprungsticket erstellt werden soll.',
+        'Defines the default value if a note in NoteToLinkedTicket screen should be created in this origin ticket.' =>
+            'Definiert den Standardwert, ob eine Notiz in der "Notiz übergeben"-Aktion auch im Ursprungsticket erstellt werden soll.',
+        'Sets the default subject for notes added in the NoteToLinkedTicket screen of the agent interface.' =>
+            'Bestimmt den Standardbetreff für Notizen, die im "Notiz übergeben"-Dialog im Agenten-Interface hinzugefügt werden.',
+        'Sets the default body text for notes added in the NoteToLinkedTicket screen of the agent interface.' =>
+            'Setzt den Standardtext für Notizen in der "Notiz übergeben"-Aktion im Agenten-Interface.',
+        'Allows adding notes in the NoteToLinkedTicket screen of the agent interface.' =>
+            'Erlaubt im Agenten-Interface das Hinzufügen von Notizen im "Notiz übergeben"-Dialog.',
+        'Sets if a note in NoteToLinkedTicket screen must be filled in by the agent.' =>
+            'Bestimmt, ob die Notiz im "Notiz übergeben"-Dialog befüllt sein muss.',
+        'Defines the history type for the NoteToLinkedTicket screen, which will be used for ticket history in the agent interface.' =>
+            'Definiert den History-Typ für die Aktion "Notiz übergeben", welcher für die Ticket-Historie im Agenten-Interface benutzt wird.',
+        'Defines the history comment for the NoteToLinkedTicket screen, which will be used for ticket history in the agent interface.' =>
+            'Steuert den History-Kommentar für die "Notiz übergeben"-Aktion im Agenten-Interface.',
+        'Defines if the note in the NoteToLinkedTicket screen of the agent interface is visible for the customer by default.' =>
+            'Definiert, ob eine Notiz im "Notiz übergeben"-Dialog für den Kunden sichtbar sein soll.',
+        'Sets the ticket type in the NoteToLinkedTicket screen of the agent interface (Ticket::Type needs to be activated).' =>
+            'Setzt den Ticket-Typ in der "Notiz übergeben"-Aktion im Agenten-Interface. (Ticket::Type muss aktiviert werden).',
+        'Sets the service in the NoteToLinkedTicket screen of the agent interface (Ticket::Service needs to be activated).' =>
+            'Setzt den Service in der "Notiz übergeben"-Aktion im Agenten-Interface (Ticket::Service muss aktiviert sein).',
+        'Sets the queue in the NoteToLinkedTicket screen of a zoomed ticket in the agent interface.' =>
+            'Setzt die Queue in der "Notiz übergeben"-Aktion im Agenten-Interface.',
+        'Sets the ticket owner in the NoteToLinkedTicket screen of the agent interface.' =>
+            'Setzt den Ticket-Besitzer in der "Notiz übergeben"-Aktion im Agenten-Interface.',
+        'Sets the responsible agent of the ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            'Setzt den Verantwortlichen in der "Notiz übergeben"-Aktion im Agenten-Interface.',
+        'Sets the state of a ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            'Setzt den Status in der "Notiz übergeben"-Aktion im Agenten-Interface.',
+        'Defines the next state of a ticket after adding a note in the NoteToLinkedTicket screen of the agent interface.' =>
+            'Definiert den nächsten Status des Tickets nach dieser Aktion in der "Notiz übergeben"-Aktion im Agenten-Interface.',
+        'Shows the ticket priority options in the NoteToLinkedTicket screen of the agent interface.' =>
+            'Zeig die Ticket-Priorität-Option in der "Notiz übergeben"-Aktion im Agenten-Interface an.',
+        'Defines the default ticket priority in the NoteToLinkedTicket screen of the agent interface.' =>
+            'Definiert die standardmäßige nächste Priorität des Tickets nach dieser Aktion in der "Notiz übergeben"-Aktion im Agenten-Interface.',
+        'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
+            'Zeigt den Ticket-Titel in der "Notiz übergeben"-Aktion im Agenten-Interface an.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'ungültig-temporär',
@@ -8622,6 +8677,7 @@ Ihr Helpdesk-Team
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             'Ermöglicht die Benutzung der kleinenTicketübersicht (CustomerInfo => 1 - zeigt auch die Kundeninformation ).',
         'Always show RichText if available' => 'RichText immer verwenden, wenn verfügbar',
+        'An additional screen to add notes to a linked ticket.' => 'Ein zusätzlicher Dialog zum Hinzufügen von Notizen an ein verlinktes Ticket.',
         'Answer' => 'Beantworten',
         'Appointment Calendar overview page.' => 'Terminkalender-Übersichtsseite.',
         'Appointment Notifications' => 'Terminbenachrichtigungen',

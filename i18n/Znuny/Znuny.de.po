@@ -25628,6 +25628,126 @@ msgstr "Definiert eine Zuordnung zwischen Variablen der Kundendaten (Schlüssel)
 msgid "This event module stores attributes from customer companies in ticket dynamic fields. Please see DynamicFieldFromCustomerCompany::Mapping setting for how to configure the mapping."
 msgstr "Dieses Eventmodul speichert Attribute des Kunden in dynamischen Ticketfeldern. Bitte schauen Sie sich die DynamicFieldFromCustomerCompany::Mapping-Einstellung für die Konfiguration des Mappings an."
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
+msgid "Add note to linked %s%s%s"
+msgstr "Notiz zu verlinktem %s%s%s hinzufügen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
+msgid "Note to linked Ticket"
+msgstr "Notiz zu verlinktem Ticket"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
+msgid "LinkList invalid."
+msgstr "LinkList ungültig."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
+msgid "Note to origin Ticket"
+msgstr "Notiz zu Ursprungsticket"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
+msgid "NoteToTicket invalid."
+msgstr "Notiz ungültig."
+
+#. Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketNoteToLinkedTicket.pm
+msgid "Create notice for linked ticket"
+msgstr "Notiz für verlinktes Ticket erstellen"
+
+#. Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketNoteToLinkedTicket.pm
+msgid "Transfer notice"
+msgstr "Notiz übergeben"
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Required permissions to use the NoteToLinkedTicket screen in the agent interface."
+msgstr "Benötigte Rechte, um den \"Notiz übergeben\"-Dialog im Agenten-Interface aufzurufen."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Sets the state of the selected linked ticket in the NoteToLinkedTicket screen of the agent interface."
+msgstr "Setzt den Status des ausgewählten verknüpften Tickets im NoteToLinkedTicket-Dialog des Agenten-Interface"
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the default next state of a ticket after adding a note in the NoteToLinkedTicket screen of the agent interface."
+msgstr "Definiert den standardmäßigen nächsten Status des Tickets nach dieser Aktion in der \"Notiz übergeben\"-Aktion im Agenten-Interface."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Activates the selection if a note in NoteToLinkedTicket screen should be created in this origin ticket."
+msgstr "Aktiviert die Auswahl, ob eine Notiz in der \"Notiz übergeben\"-Aktion auch im Ursprungsticket erstellt werden soll."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the default value if a note in NoteToLinkedTicket screen should be created in this origin ticket."
+msgstr "Definiert den Standardwert, ob eine Notiz in der \"Notiz übergeben\"-Aktion auch im Ursprungsticket erstellt werden soll."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Sets the default subject for notes added in the NoteToLinkedTicket screen of the agent interface."
+msgstr "Bestimmt den Standardbetreff für Notizen, die im \"Notiz übergeben\"-Dialog im Agenten-Interface hinzugefügt werden."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Sets the default body text for notes added in the NoteToLinkedTicket screen of the agent interface."
+msgstr "Setzt den Standardtext für Notizen in der \"Notiz übergeben\"-Aktion im Agenten-Interface."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Allows adding notes in the NoteToLinkedTicket screen of the agent interface."
+msgstr "Erlaubt im Agenten-Interface das Hinzufügen von Notizen im \"Notiz übergeben\"-Dialog."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Sets if a note in NoteToLinkedTicket screen must be filled in by the agent."
+msgstr "Bestimmt, ob die Notiz im \"Notiz übergeben\"-Dialog befüllt sein muss."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the history type for the NoteToLinkedTicket screen, which will be used for ticket history in the agent interface."
+msgstr "Definiert den History-Typ für die Aktion \"Notiz übergeben\", welcher für die Ticket-Historie im Agenten-Interface benutzt wird."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the history comment for the NoteToLinkedTicket screen, which will be used for ticket history in the agent interface."
+msgstr "Steuert den History-Kommentar für die \"Notiz übergeben\"-Aktion im Agenten-Interface."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines if the note in the NoteToLinkedTicket screen of the agent interface is visible for the customer by default."
+msgstr "Definiert, ob eine Notiz im \"Notiz übergeben\"-Dialog für den Kunden sichtbar sein soll."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Sets the ticket type in the NoteToLinkedTicket screen of the agent interface (Ticket::Type needs to be activated)."
+msgstr "Setzt den Ticket-Typ in der \"Notiz übergeben\"-Aktion im Agenten-Interface. (Ticket::Type muss aktiviert werden)."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Sets the service in the NoteToLinkedTicket screen of the agent interface (Ticket::Service needs to be activated)."
+msgstr "Setzt den Service in der \"Notiz übergeben\"-Aktion im Agenten-Interface (Ticket::Service muss aktiviert sein)."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Sets the queue in the NoteToLinkedTicket screen of a zoomed ticket in the agent interface."
+msgstr "Setzt die Queue in der \"Notiz übergeben\"-Aktion im Agenten-Interface."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Sets the ticket owner in the NoteToLinkedTicket screen of the agent interface."
+msgstr "Setzt den Ticket-Besitzer in der \"Notiz übergeben\"-Aktion im Agenten-Interface."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Sets the responsible agent of the ticket in the NoteToLinkedTicket screen of the agent interface."
+msgstr "Setzt den Verantwortlichen in der \"Notiz übergeben\"-Aktion im Agenten-Interface."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Sets the state of a ticket in the NoteToLinkedTicket screen of the agent interface."
+msgstr "Setzt den Status in der \"Notiz übergeben\"-Aktion im Agenten-Interface."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the next state of a ticket after adding a note in the NoteToLinkedTicket screen of the agent interface."
+msgstr "Definiert den nächsten Status des Tickets nach dieser Aktion in der \"Notiz übergeben\"-Aktion im Agenten-Interface."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Shows the ticket priority options in the NoteToLinkedTicket screen of the agent interface."
+msgstr "Zeig die Ticket-Priorität-Option in der \"Notiz übergeben\"-Aktion im Agenten-Interface an."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the default ticket priority in the NoteToLinkedTicket screen of the agent interface."
+msgstr "Definiert die standardmäßige nächste Priorität des Tickets nach dieser Aktion in der \"Notiz übergeben\"-Aktion im Agenten-Interface."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Shows the title field in the NoteToLinkedTicket screen of the agent interface."
+msgstr "Zeigt den Ticket-Titel in der \"Notiz übergeben\"-Aktion im Agenten-Interface an."
+
+#. SysConfig
+msgid "An additional screen to add notes to a linked ticket."
+msgstr "Ein zusätzlicher Dialog zum Hinzufügen von Notizen an ein verlinktes Ticket."
+
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Default data to use on attribute for ticket search screen. Example: \"TicketLastChangeTimePointFormat=year;TicketLastChangeTimePointStart=Last;TicketLastChangeTimePoint=2;\"."
 msgstr "Standarddaten, die als Attribute für die Ticket-Suchmaske verwendet werden. Beispiel: \"TicketLastChangeTimePointFormat=year;TicketLastChangeTimePointStart=Last;TicketLastChangeTimePoint=2;\"."
