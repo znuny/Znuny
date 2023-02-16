@@ -11,12 +11,13 @@
  - 2023-01-10 Sector Nord AG: Fixed popup description long were cut off in Customer Interface. Thanks to Sector Nord AG (@jsinagowitz). [PR#331](https://github.com/znuny/Znuny/pull/331)
  - 2023-01-09 Integrated package Znuny4OTRS-UserMaxArticlesPerPage.
  - 2023-01-06 Fixed 'ACL misbehaviour in processes' - ActivityEntityID is missing in AgentTicketProcess.pm. [#316](https://github.com/znuny/Znuny/issues/316)
+ - 2023-01-05 Added missing group check to Kernel/System/Auth/Sync/LDAP.pm.
  - 2023-01-05 Fixed JavaScript error in edit-mode in AdminACL.
- - 2023-01-05 Changed JS alert() function to Core.UI.Dialog.ShowAlert().
- - 2023-01-04 Show PackageRequired- and ModuleRequired-information while package installation & update.
+ - 2023-01-05 Changed JS alert function to Core.UI.Dialog.ShowAlert.
+ - 2023-01-04 Show PackageRequired and ModuleRequired information while package installation and update.
  - 2023-01-04 Reworked information of LastViews.
  - 2023-01-03 Process activity dialog article fields with subject and body can now be pre-filled. The Body also support RichtText. Thanks to Berner Fachhochschule (bfh.ch) for sponsoring this feature.
- - 2022-12-29 Reenabled TicketID for reporting (Dynamic/TicketList).
+ - 2022-12-29 Re-enabled TicketID for reporting (Dynamic/TicketList).
  - 2022-12-19 Added check for maximum filename length to file uploads.
  - 2022-12-16 Added new function Kernel::System::Web::Request::GetParams() to get request parameters.
  - 2022-12-13 Fixed SQL injection in TicketSearch.pm (CVE-2022-4427). Thanks for hints to Tim Püttmanns, maxence.
