@@ -759,24 +759,22 @@ sub FileDetailsExtended {
     }
     elsif ( $Param{Type} eq 'Changed' ) {
 
+        # e.g. 6.4.2
         my $Version = $ConfigObject->Get('Version');
 
-        # please, do not delete this
-        # for development
-        #         $Version = "6.0.22";
-        #         $Version =~ s{\.}{_}smxg;
-        #         $Version = 'rel-' . $Version;
+        $Version =~ s{\.x\z}{}i;     # 6.4.x => 6.4 (latest)
+        $Version =~ s{\.}{_}smxg;    # 6.4.2 => 6_4_2
+        $Version = 'rel-' . $Version;    # 6_4_2 => rel-6_4_2
 
         my $WebUserAgentObject = Kernel::System::WebUserAgent->new(
             Timeout => 15,
         );
 
-        #  URL => 'https://raw.githubusercontent.com/znuny/znuny/rel-6_5/Kernel/GenericInterface/Event/Handler.pm',
+        #  e.g.: https://raw.githubusercontent.com/znuny/znuny/rel-6_5/Kernel/GenericInterface/Event/Handler.pm
         my $URL      = "https://raw.githubusercontent.com/znuny/znuny/" . $Version . "/" . $Param{Path};
         my %Response = $WebUserAgentObject->Request(
-            URL                 => $URL,
-            SkipSSLVerification => 1,
-            NoLog               => 1,
+            URL   => $URL,
+            NoLog => 1,
         );
 
         if ( $Response{Status} eq '200 OK' && $Response{Content} ) {
