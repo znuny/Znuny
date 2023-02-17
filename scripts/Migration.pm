@@ -218,10 +218,6 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Base::PerlModulesCheck',
         },
         {
-            Message => 'Check installed CPAN modules for known vulnerabilities',
-            Module  => 'scripts::Migration::Base::CPANAuditCheck',
-        },
-        {
             Message => 'Check if database has been backed up',
             Module  => 'scripts::Migration::Base::DatabaseBackupCheck',
         },
