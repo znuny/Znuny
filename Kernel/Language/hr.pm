@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.216851941356533;
+    $Self->{Completeness}        = 0.216817010309278;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2789,6 +2789,8 @@ sub Data {
         'First Response Time' => 'Vrijeme prvog odgovora',
         'Update Time' => 'Vrijeme ažuriranja',
         'Solution Time' => 'Vrijeme rješavanja',
+        'Impact' => '',
+        'CustomerID' => 'ID korisnika',
         'Move ticket to a different queue' => 'Premjesti karticu u drugi red',
         'Change queue' => 'Promjeni rep',
 
@@ -3034,7 +3036,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => 'npr 10*5155 ili 105658*',
-        'CustomerID' => 'ID korisnika',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => 'Tipovi',
         'Time Restrictions' => '',

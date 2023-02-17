@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.53922990172386;
+    $Self->{Completeness}        = 0.53930412371134;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2788,6 +2788,8 @@ sub Data {
         'First Response Time' => 'เวลาตอบสนองครั้งแรก',
         'Update Time' => 'เวลาการอัพเดต',
         'Solution Time' => 'เวลาการแก้ปัญหา',
+        'Impact' => 'ผลกระทบ',
+        'CustomerID' => 'ไอดีลูกค้า',
         'Move ticket to a different queue' => 'ย้ายตั๋วไปคิวอื่น',
         'Change queue' => 'เปลี่ยนคิว',
 
@@ -3033,7 +3035,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'โปรไฟล์',
         'e. g. 10*5155 or 105658*' => 'เช่น 10*5155 หรือ 105658*',
-        'CustomerID' => 'ไอดีลูกค้า',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => 'ประเภท',
         'Time Restrictions' => '',

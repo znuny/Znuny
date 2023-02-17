@@ -8555,7 +8555,7 @@ msgstr "Profil"
 msgid "e. g. 10*5155 or 105658*"
 msgstr "z. B. 10*5155 oder 105658*"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid "CustomerID"
 msgstr "Kundennummer"
 
@@ -25475,6 +25475,10 @@ msgstr "Meine zuletzt geänderten Tickets"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
 msgid "Access token scope"
 msgstr "Access-Token-Scope"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
+msgid "Impact"
+msgstr "Auswirkung"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
 msgid "Related Actions"

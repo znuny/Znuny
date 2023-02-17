@@ -165,7 +165,23 @@
 [% RenderBlockEnd("SolutionTime") %]
                             </td>
                         </tr>
-
+[% IF Data.IsITSMIncidentProblemManagementInstalled %]
+                        <tr>
+                            <td>
+                                <label>[% Translate("Criticality") | html %]</label>
+                                <div title="[% Data.Criticality | html %]">[% Translate(Data.Criticality) | html %]</div>
+                            </td>
+                            <td>
+                                <label>[% Translate("Impact") | html %]</label>
+                                <div title="[% Data.Impact | html %]">[% Translate(Data.Impact) | html %]</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>[% Translate("Priority") | html %]</label><div title="[% Translate(Data.Priority) | html %]">[% Translate(Data.Priority) | html %]</div>
+                            </td>
+                        </tr>
+[% END %]
 [% RenderBlockStart("DynamicFieldTableRow") %]
                         <tr class="[% Data.Class %]">
 [% RenderBlockStart("DynamicFieldTableRowRecord") %]

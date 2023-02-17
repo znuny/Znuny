@@ -8531,7 +8531,7 @@ msgstr "Maelezo mafupi"
 msgid "e. g. 10*5155 or 105658*"
 msgstr "Mfano 10*5155 au 105658"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid "CustomerID"
 msgstr "Kitambilisho cha mteja"
 
@@ -25386,6 +25386,10 @@ msgstr ""
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
 msgid "Access token scope"
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
+msgid "Impact"
+msgstr "Madhara"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
 msgid "Related Actions"

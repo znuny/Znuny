@@ -8532,7 +8532,7 @@ msgstr "Профил"
 msgid "e. g. 10*5155 or 105658*"
 msgstr "нпр. 10*5155 или 105658*"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid "CustomerID"
 msgstr "ID клијента"
 
@@ -25396,6 +25396,10 @@ msgstr ""
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
 msgid "Access token scope"
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
+msgid "Impact"
+msgstr "Утицај"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
 msgid "Related Actions"

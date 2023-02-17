@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.221524085709683;
+    $Self->{Completeness}        = 0.221488402061856;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2791,6 +2791,8 @@ sub Data {
         'First Response Time' => 'זמן המענה הראשוני',
         'Update Time' => 'זמן העדכון',
         'Solution Time' => 'זמן הפתרון',
+        'Impact' => '',
+        'CustomerID' => 'מספר זיהוי לקוח',
         'Move ticket to a different queue' => 'העבר פניה לתור אחר',
         'Change queue' => 'שנה תור',
 
@@ -3036,7 +3038,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'פרופיל',
         'e. g. 10*5155 or 105658*' => 'למשל 10*5155 או 105658*',
-        'CustomerID' => 'מספר זיהוי לקוח',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => 'סוגים',
         'Time Restrictions' => '',

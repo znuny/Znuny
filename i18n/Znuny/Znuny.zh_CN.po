@@ -8538,7 +8538,7 @@ msgstr "搜索条件"
 msgid "e. g. 10*5155 or 105658*"
 msgstr "例如: 10*5155 或 105658*"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid "CustomerID"
 msgstr "CustomerID"
 
@@ -25394,6 +25394,10 @@ msgstr ""
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
 msgid "Access token scope"
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
+msgid "Impact"
+msgstr "影响"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
 msgid "Related Actions"

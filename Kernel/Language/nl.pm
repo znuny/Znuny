@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D-%M-%Y';
     $Self->{DateInputFormat}     = '%D-%M-%Y';
     $Self->{DateInputFormatLong} = '%D-%M-%Y - %T';
-    $Self->{Completeness}        = 0.507974867085549;
+    $Self->{Completeness}        = 0.50805412371134;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2791,6 +2791,8 @@ sub Data {
         'First Response Time' => 'Eerste reactie',
         'Update Time' => 'Vervolg tijd',
         'Solution Time' => 'Oplossingstijd',
+        'Impact' => 'Impact',
+        'CustomerID' => 'Klantcode',
         'Move ticket to a different queue' => 'Verplaats naar nieuwe wachtrij',
         'Change queue' => 'Verplaats naar wachtrij',
 
@@ -3036,7 +3038,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Sjabloon',
         'e. g. 10*5155 or 105658*' => 'bijv. 2010*5155 of 20100802*',
-        'CustomerID' => 'Klantcode',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => 'Typen',
         'Time Restrictions' => '',

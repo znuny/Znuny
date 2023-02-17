@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.892379571451587;
+    $Self->{Completeness}        = 0.892235824742268;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2785,6 +2785,8 @@ sub Data {
         'First Response Time' => '첫 번째 응답 시간',
         'Update Time' => '업데이트 시간',
         'Solution Time' => '솔루션 시간',
+        'Impact' => '',
+        'CustomerID' => '고객 ID',
         'Move ticket to a different queue' => '티켓을 다른 대기열로 이동',
         'Change queue' => '대기열 변경',
 
@@ -3030,7 +3032,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => '프로필',
         'e. g. 10*5155 or 105658*' => '이자형. 지. 10 * 5155 또는 105658 *',
-        'CustomerID' => '고객 ID',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '티켓에서 전체 텍스트 검색 (예 : "John * n"또는 "Will *")',
         'Types' => '유형',
         'Time Restrictions' => '시간 제한',

@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y - %T';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.198646689221846;
+    $Self->{Completeness}        = 0.198775773195876;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2786,6 +2786,8 @@ sub Data {
         'First Response Time' => 'Време на първи отговор',
         'Update Time' => 'Време на ъпдейт на статуса',
         'Solution Time' => 'Време за решаване',
+        'Impact' => 'Влияние',
+        'CustomerID' => 'Потребителски индикатив',
         'Move ticket to a different queue' => '',
         'Change queue' => 'Промяна на опашката',
 
@@ -3031,7 +3033,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Профил',
         'e. g. 10*5155 or 105658*' => '',
-        'CustomerID' => 'Потребителски индикатив',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => '',
         'Time Restrictions' => '',

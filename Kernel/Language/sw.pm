@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.442564846141453;
+    $Self->{Completeness}        = 0.442654639175258;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2788,6 +2788,8 @@ sub Data {
         'First Response Time' => 'Muda wa kwanza wa majibu',
         'Update Time' => 'Muda wa kusasisha',
         'Solution Time' => 'Muda wa ufumbuzi',
+        'Impact' => 'Madhara',
+        'CustomerID' => 'Kitambilisho cha mteja',
         'Move ticket to a different queue' => 'Hamisha tiketi kwenye foleni nyingine',
         'Change queue' => 'Badili foleni',
 
@@ -3033,7 +3035,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Maelezo mafupi',
         'e. g. 10*5155 or 105658*' => 'Mfano 10*5155 au 105658',
-        'CustomerID' => 'Kitambilisho cha mteja',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => 'Aina',
         'Time Restrictions' => '',

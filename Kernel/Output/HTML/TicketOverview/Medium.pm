@@ -57,6 +57,9 @@ sub new {
         $Self->{StoredFilters} = $StoredFilters;
     }
 
+    $Self->{IsITSMIncidentProblemManagementInstalled}
+        = $Kernel::OM->Get('Kernel::System::Util')->IsITSMIncidentProblemManagementInstalled();
+
     return $Self;
 }
 
@@ -66,6 +69,8 @@ sub ActionRow {
     # get needed object
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    $Param{IsITSMIncidentProblemManagementInstalled} = $Self->{IsITSMIncidentProblemManagementInstalled};
 
     # check if bulk feature is enabled
     my $BulkFeature = 0;
@@ -216,6 +221,8 @@ sub Run {
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
+    $Param{IsITSMIncidentProblemManagementInstalled} = $Self->{IsITSMIncidentProblemManagementInstalled};
+
     # check if bulk feature is enabled
     my $BulkFeature = 0;
     if ( $Param{Bulk} && $ConfigObject->Get('Ticket::Frontend::BulkFeature') ) {
@@ -346,6 +353,8 @@ sub _Show {
     my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
     my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
+    $Param{IsITSMIncidentProblemManagementInstalled} = $Self->{IsITSMIncidentProblemManagementInstalled};
+
     # Get last customer article.
     my @Articles = $ArticleObject->ArticleList(
         TicketID   => $Param{TicketID},
@@ -385,9 +394,11 @@ sub _Show {
     }
 
     # Get ticket data.
+    my $LoadDynamicFields = $Self->{IsITSMIncidentProblemManagementInstalled} ? 1 : 0;
+
     my %Ticket = $TicketObject->TicketGet(
         TicketID      => $Param{TicketID},
-        DynamicFields => 0,
+        DynamicFields => $LoadDynamicFields,
     );
 
     %Article = ( %Article, %Ticket );
@@ -405,6 +416,13 @@ sub _Show {
 
     # show ticket create time in current view
     $Article{Created} = $Ticket{Created};
+
+    if ( $Self->{IsITSMIncidentProblemManagementInstalled} ) {
+
+        # set criticality and impact
+        $Article{Criticality} = $Article{DynamicField_ITSMCriticality} || '-';
+        $Article{Impact}      = $Article{DynamicField_ITSMImpact}      || '-';
+    }
 
     # user info
     my %UserInfo = $Kernel::OM->Get('Kernel::System::User')->GetUserData(
@@ -565,6 +583,7 @@ sub _Show {
         Data => {
             %Param,
             %Article,
+            IsITSMIncidentProblemManagementInstalled => $Self->{IsITSMIncidentProblemManagementInstalled},
         },
     );
 

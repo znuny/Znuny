@@ -1,4 +1,5 @@
 # 6.5.1 2023-??-??
+ - 2023-02-17 Moved code of ITSMIncidentProblemManagement to Znuny Framework that will only be executed if ITSM actually is installed.
  - 2023-02-17 Removed CPAN::Audit as a required Perl module.
  - 2023-02-16 Integration of Znuny-NoteToLinkedTicket into Framework.
  - 2023-02-13 Added support for smart tags to process activity dialog article field.

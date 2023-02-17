@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.704204929917835;
+    $Self->{Completeness}        = 0.704252577319588;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2791,6 +2791,8 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'First Response Time' => '初回応答期限',
         'Update Time' => '更新期限',
         'Solution Time' => '解決期限',
+        'Impact' => '影響度',
+        'CustomerID' => '顧客ID',
         'Move ticket to a different queue' => '別のキューへチケットを移転',
         'Change queue' => 'キュー変更',
 
@@ -3036,7 +3038,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'プロファイル',
         'e. g. 10*5155 or 105658*' => '例: 10*5155 または 105658*',
-        'CustomerID' => '顧客ID',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => 'チケットにおける全文検索（例えば、「John * n」または「Will *」）',
         'Types' => 'タイプ',
         'Time Restrictions' => '時間制限',

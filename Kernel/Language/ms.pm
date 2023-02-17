@@ -24,7 +24,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.552763009505397;
+    $Self->{Completeness}        = 0.552835051546392;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2784,6 +2784,8 @@ sub Data {
         'First Response Time' => 'Masa respon pertama',
         'Update Time' => 'Masa Kemas Kini',
         'Solution Time' => 'Masa Penyelasaian',
+        'Impact' => 'Kesan',
+        'CustomerID' => 'IDPelanggan',
         'Move ticket to a different queue' => 'Pindah tiket ke barisan baru',
         'Change queue' => 'Ubah barisan',
 
@@ -3029,7 +3031,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => 'contoj: 10*5155 atau 105658*',
-        'CustomerID' => 'IDPelanggan',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => 'Jenis',
         'Time Restrictions' => '',

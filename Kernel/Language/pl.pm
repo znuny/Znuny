@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.642500402771065;
+    $Self->{Completeness}        = 0.642557989690722;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2790,6 +2790,8 @@ sub Data {
         'First Response Time' => 'Czas pozostały do pierwszej odpowiedzi',
         'Update Time' => 'Czas pozostały do aktualizacji',
         'Solution Time' => 'Czas pozostały do rozwiązania',
+        'Impact' => 'Wpływ',
+        'CustomerID' => 'Identyfikator klienta',
         'Move ticket to a different queue' => 'Przenieś zgłoszenie do innej kolejki',
         'Change queue' => 'Zmień kolejkę',
 
@@ -3035,7 +3037,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => 'np. 10*5155 lub 105658*',
-        'CustomerID' => 'Identyfikator klienta',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => 'Typy zgłoszeń',
         'Time Restrictions' => '',

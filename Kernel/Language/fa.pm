@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.636056065732238;
+    $Self->{Completeness}        = 0.63611469072165;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2791,6 +2791,8 @@ sub Data {
         'First Response Time' => 'زمان اولین پاسخ',
         'Update Time' => 'زمان بروز رسانی',
         'Solution Time' => 'زمان ارائه راهکار',
+        'Impact' => 'اثر',
+        'CustomerID' => 'کد اشتراک',
         'Move ticket to a different queue' => 'انتقال درخواست یه صف درخواست دیگر',
         'Change queue' => 'تغییر لیست درخواست',
 
@@ -3036,7 +3038,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'مشخصات کاربری',
         'e. g. 10*5155 or 105658*' => 'به عنوان مثال 10*5155 یا 105658*',
-        'CustomerID' => 'کد اشتراک',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => 'انواع',
         'Time Restrictions' => '',

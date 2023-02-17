@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.921217979700338;
+    $Self->{Completeness}        = 0.921230670103093;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2791,6 +2791,8 @@ sub Data {
         'First Response Time' => 'Első válaszidő',
         'Update Time' => 'Frissítés ideje',
         'Solution Time' => 'Megoldás ideje',
+        'Impact' => 'Hatás',
+        'CustomerID' => 'Ügyfél-azonosító',
         'Move ticket to a different queue' => 'Jegy áthelyezése egy másik várólistába',
         'Change queue' => 'Várólista módosítása',
 
@@ -3036,7 +3038,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => 'például 10*5155 vagy 105658*',
-        'CustomerID' => 'Ügyfél-azonosító',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => 'Szabad-szavas keresés a jegyekben (például „Kata*n” vagy „Gerg*”)',
         'Types' => 'Típusok',
         'Time Restrictions' => 'Idő megkötések',

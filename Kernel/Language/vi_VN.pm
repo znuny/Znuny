@@ -24,7 +24,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.147575318189141;
+    $Self->{Completeness}        = 0.147712628865979;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2784,6 +2784,8 @@ sub Data {
         'First Response Time' => 'Lần phản hồi đầu tiên',
         'Update Time' => 'Thời gian cập nhật',
         'Solution Time' => 'Thời gian giải pháp',
+        'Impact' => 'Tác động',
+        'CustomerID' => 'Mã khách hàng',
         'Move ticket to a different queue' => '',
         'Change queue' => 'Thay đổi hàng đợi',
 
@@ -3029,7 +3031,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Hồ sơ',
         'e. g. 10*5155 or 105658*' => '',
-        'CustomerID' => 'Mã khách hàng',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => '',
         'Time Restrictions' => '',

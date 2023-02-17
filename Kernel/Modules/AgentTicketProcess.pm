@@ -55,6 +55,9 @@ sub new {
         Attachments        => 'Attachments',
     };
 
+    $Self->{IsITSMIncidentProblemManagementInstalled}
+        = $Kernel::OM->Get('Kernel::System::Util')->IsITSMIncidentProblemManagementInstalled();
+
     return $Self;
 }
 
@@ -718,6 +721,45 @@ sub _RenderAjax {
                 %{ $Param{GetParam} },
             );
 
+            # check if priority needs to be recalculated
+            if (
+                $Self->{IsITSMIncidentProblemManagementInstalled}
+                && (
+                    $Param{GetParam}->{ElementChanged} eq 'ServiceID'
+                    || $Param{GetParam}->{ElementChanged} eq 'DynamicField_ITSMImpact'
+                )
+                && $Param{GetParam}->{ServiceID}
+                && $Param{GetParam}->{DynamicField_ITSMImpact}
+                )
+            {
+
+                my %Service = $Kernel::OM->Get('Kernel::System::Service')->ServiceGet(
+                    ServiceID => $Param{GetParam}->{ServiceID},
+                    UserID    => $Self->{UserID},
+                );
+
+                # calculate priority from the CIP matrix
+                my $PriorityIDFromImpact = $Kernel::OM->Get('Kernel::System::ITSMCIPAllocate')->PriorityAllocationGet(
+                    Criticality => $Service{Criticality},
+                    Impact      => $Param{GetParam}->{DynamicField_ITSMImpact},
+                );
+
+                # add Priority to the JSONCollector
+                push(
+                    @JSONCollector,
+                    {
+                        Name        => $Self->{NameToID}{$CurrentField},
+                        Data        => $Data,
+                        SelectedID  => $PriorityIDFromImpact,
+                        Translation => 1,
+                        Max         => 100,
+                    },
+                );
+                $FieldsProcessed{ $Self->{NameToID}{$CurrentField} } = 1;
+
+                next DIALOGFIELD;
+            }
+
             # add Priority to the JSONCollector
             push(
                 @JSONCollector,
@@ -1103,6 +1145,24 @@ sub _GetParam {
                 ParamObject        => $ParamObject,
                 LayoutObject       => $LayoutObject,
             );
+
+            # set the criticality from the service
+            if (
+                $Self->{IsITSMIncidentProblemManagementInstalled}
+                && $DynamicFieldName eq 'ITSMCriticality'
+                && $ParamObject->GetParam( Param => 'ServiceID' )
+                )
+            {
+
+                # get service
+                my %Service = $Kernel::OM->Get('Kernel::System::Service')->ServiceGet(
+                    ServiceID => $ParamObject->GetParam( Param => 'ServiceID' ),
+                    UserID    => $Self->{UserID},
+                );
+
+                # set the criticality
+                $Value = $Service{Criticality};
+            }
 
             # If we got a submitted param, take it and next out
             if (

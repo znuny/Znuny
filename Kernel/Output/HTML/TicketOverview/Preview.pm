@@ -58,6 +58,9 @@ sub new {
         $Self->{StoredFilters} = $StoredFilters;
     }
 
+    $Self->{IsITSMIncidentProblemManagementInstalled}
+        = $Kernel::OM->Get('Kernel::System::Util')->IsITSMIncidentProblemManagementInstalled();
+
     return $Self;
 }
 
@@ -67,6 +70,8 @@ sub ActionRow {
     # get needed objects
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    $Param{IsITSMIncidentProblemManagementInstalled} = $Self->{IsITSMIncidentProblemManagementInstalled};
 
     # check if bulk feature is enabled
     my $BulkFeature = 0;
@@ -215,6 +220,8 @@ sub Run {
     # get needed objects
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    $Param{IsITSMIncidentProblemManagementInstalled} = $Self->{IsITSMIncidentProblemManagementInstalled};
 
     # check if bulk feature is enabled
     my $BulkFeature = 0;
@@ -370,6 +377,8 @@ sub _Show {
         );
     }
 
+    $Param{IsITSMIncidentProblemManagementInstalled} = $Self->{IsITSMIncidentProblemManagementInstalled};
+
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     my $PreviewArticleLimit = int $ConfigObject->Get('Ticket::Frontend::Overview::PreviewArticleLimit') || 5;
@@ -377,10 +386,20 @@ sub _Show {
     my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
     my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
+    # Get ticket data.
+    my $LoadDynamicFields = $Self->{IsITSMIncidentProblemManagementInstalled} ? 1 : 0;
+
     my %Ticket = $TicketObject->TicketGet(
         TicketID      => $Param{TicketID},
-        DynamicFields => 0,
+        DynamicFields => $LoadDynamicFields,
     );
+
+    if ( $Self->{IsITSMIncidentProblemManagementInstalled} ) {
+
+        # set criticality and impact
+        $Ticket{Criticality} = $Ticket{DynamicField_ITSMCriticality} || '-';
+        $Ticket{Impact}      = $Ticket{DynamicField_ITSMImpact}      || '-';
+    }
 
     # Get configured number of last articles.
     my @Articles = $ArticleObject->ArticleList(
@@ -591,6 +610,11 @@ sub _Show {
 
     my $AdditionalClasses = $Param{Config}->{TicketActionsPerTicket} ? 'ShowInlineActions' : '';
 
+    $Param{IsITSMIncidentProblemManagementInstalled} = $Self->{IsITSMIncidentProblemManagementInstalled};
+    my %AdditionalObjectData;
+    if ( $Self->{IsITSMIncidentProblemManagementInstalled} ) {
+        %AdditionalObjectData = %Ticket;
+    }
     $LayoutObject->Block(
         Name => 'DocumentContent',
         Data => {
@@ -599,6 +623,7 @@ sub _Show {
             Class             => 'ArticleCount' . $ArticleCount,
             AdditionalClasses => $AdditionalClasses,
             Created           => $Ticket{Created},                 # use value from ticket, not article
+            %AdditionalObjectData,
         },
     );
 

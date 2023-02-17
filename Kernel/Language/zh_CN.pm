@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.921217979700338;
+    $Self->{Completeness}        = 0.921230670103093;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2792,6 +2792,8 @@ sub Data {
         'First Response Time' => '首次响应时间',
         'Update Time' => '更新时间',
         'Solution Time' => '解决时间',
+        'Impact' => '影响',
+        'CustomerID' => 'CustomerID',
         'Move ticket to a different queue' => '将工单转移到另一个队列',
         'Change queue' => '更改队列',
 
@@ -3037,7 +3039,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => '搜索条件',
         'e. g. 10*5155 or 105658*' => '例如: 10*5155 或 105658*',
-        'CustomerID' => 'CustomerID',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '对工单进行全文搜索（例如 "John*n" 或 "Will*"）',
         'Types' => '类型',
         'Time Restrictions' => '时间限制',
