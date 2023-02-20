@@ -2,7 +2,7 @@
  - 2023-02-20 Removed maxlength for field short description in ActivityDialog (#335). Thanks to Sector Nord AG (@paulfolkers). [PR#335](https://github.com/znuny/Znuny/pull/335)
  - 2023-02-17 Moved code of ITSMIncidentProblemManagement to Znuny Framework that will only be executed if ITSM actually is installed.
  - 2023-02-17 Removed CPAN::Audit as a required Perl module.
- - 2023-02-16 Integration of Znuny-NoteToLinkedTicket into Framework.
+ - 2023-02-16 Integrated package Znuny-NoteToLinkedTicket.
  - 2023-02-13 Added support for smart tags to process activity dialog article field.
  - 2023-01-25 Added Dashboard element filter: My owned tickets.
  - 2023-01-23 Added new event module to store customer company data in ticket dynamic fields: Ticket::EventModulePost DynamicFieldFromCustomerCompany.
@@ -50,7 +50,7 @@
  - 2022-10-12 S/MIME certificates will now be reindexed during Znuny migration.
  - 2022-10-12 Increased size of column "subject" of table "smime_keys".
  - 2022-10-11 Added input field for OAuth2 token scope to admin dialog.
- - 2022-10-07 Integrate DashboardMyLastChangedTickets. Thanks to Renée Bäcker (@reneeb). [PR#177](https://github.com/znuny/Znuny/pull/177)
+ - 2022-10-07 Integrated DashboardMyLastChangedTickets. Thanks to Renée Bäcker (@reneeb). [PR#177](https://github.com/znuny/Znuny/pull/177)
  - 2022-10-07 Renamed changed settings from FrontendRichText::Path to Frontend::RichText::Path. Thanks to Emin Yazi (@eyazi), Efflux. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#304](https://github.com/znuny/Znuny/pull/304)
  - 2022-10-05 Improved usability - AgentTicketBulk - Set DynamicField_NAMEUsed checkbox to true if it is set before or if dynamic field is mandatory.
  - 2022-09-29 Fixed bug - hour 0 is not possible in the default settings for TimeWorkingHours. Thanks to Sector Nord AG (@LuBroering - Lukas Bröring). [PR#296](https://github.com/znuny/Znuny/pull/296)
