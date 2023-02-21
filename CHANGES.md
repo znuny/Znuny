@@ -1,4 +1,5 @@
 # 6.5.1 2023-??-??
+ - 2023-02-21 Fixed - Agent Calendar Import: Import of a calendar file does not work.
  - 2023-02-20 Removed maxlength for field short description in ActivityDialog (#335). Thanks to Sector Nord AG (@paulfolkers). [PR#335](https://github.com/znuny/Znuny/pull/335)
  - 2023-02-17 Moved code of ITSMIncidentProblemManagement to Znuny Framework that will only be executed if ITSM actually is installed.
  - 2023-02-17 Removed CPAN::Audit as a required Perl module.
