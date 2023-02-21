@@ -33,6 +33,7 @@
  - 2022-11-25 Moved code of ITSMCore to Znuny Framework that will only be executed if ITSM actually is installed.
  - 2022-11-24 Fixed handling of empty result for frontend autocompletion of dynamic field type WebserviceMultiselect.
  - 2022-11-24 SOAP::Lite: Data of elements with attribute 'xsi:type' now will be returned as a hash or array instead of an arbitrary object that Znuny cannot handle.
+ - 2022-09-20 Added config level check to SysConfig admin dialog. Thanks for hints to Tim Püttmanns, maxence.
  - 2022-09-16 Auto responses now will not be sent if the recipient would be a system address.
 
 # 6.4.5 2022-12-20
