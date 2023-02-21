@@ -71,6 +71,10 @@ Core.UI.RichTextEditor = (function (TargetNS) {
     function InitAutocompletion(Editor) {
         var AutocompletionSettings = {};
 
+        // CodeMirror does not load any other plugins, so the autocomplete plugin is not available then
+        if (Core.Config.Get('RichText.Type') == 'CodeMirror') {
+            return;
+        }
 
         function AutocompletionDataCallback(MatchInfo, Callback) {
             $.each(AutocompletionSettings.Triggers, function (Trigger) {
