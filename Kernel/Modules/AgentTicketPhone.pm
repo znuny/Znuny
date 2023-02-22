@@ -555,7 +555,7 @@ sub Run {
                 for my $UserLogin ( sort keys %List ) {
 
                     # Set right one if there is more than one customer user with the same email address.
-                    if ( $Phrase && $List{$UserLogin} =~ /$Phrase/ ) {
+                    if ( $Phrase && $List{$UserLogin} =~ m{\Q$Phrase\E} ) {
                         $CustomerKey = $UserLogin;
                     }
                 }
