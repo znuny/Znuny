@@ -8578,7 +8578,6 @@ via the Preferences button after logging in.
                     <Item Key="Group">
                         <Array>
                             <Item>admin</Item>
-                            <Item>users</Item>
                         </Array>
                     </Item>
                     <Item Key="Description" Translatable="1">Manage System Configuration Deployments.</Item>
