@@ -629,6 +629,8 @@ sub SaveFormDraft {
         FormID => $MetaParams{FormID},
     );
 
+    $FormData{FormID} = $MetaParams{FormID};
+
     # prepare data to add or update draft
     my %FormDraft = (
         FormData    => \%FormData,
