@@ -45,7 +45,6 @@ The following persons contributed to Znuny:
 * Jens Pfeifer <jp@znuny.com>
 * Johannes Hörburger <johannes.hoerburger@otrs.com>
 * Johannes Nickel <jn@znuny.com>
-* Kai Herlemann <43746520+KaiHerlemann@users.noreply.github.com>
 * Kai Herlemann <kh@znuny.com>
 * Kamil Furtek <kfurtek@dev.opgksoftware.com>
 * Keith Moore <tenareth@gmail.com>
