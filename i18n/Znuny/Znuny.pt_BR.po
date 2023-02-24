@@ -56,9 +56,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-07-01 07:05+0000\n"
-"PO-Revision-Date: 2023-02-15 07:12+0000\n"
+"PO-Revision-Date: 2023-02-24 07:49+0000\n"
 "Last-Translator: Marcos Silverio <marcos.aurelio@infracerta.com.br>\n"
-"Language-Team: Portuguese (Brazil) <https://translations.znuny.org/projects/znuny/znuny/pt_BR/>\n"
+"Language-Team: Portuguese (Brazil) <https://translations.znuny.org/projects/"
+"znuny/znuny/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2088,7 +2089,7 @@ msgstr "Campos dinâmicos"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldScreenConfiguration.tt
 msgid "Add dynamic field"
-msgstr ""
+msgstr "Adicionar campo dinâmico"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Create times"
@@ -3980,7 +3981,7 @@ msgstr "Gerenciar %s"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessInstalled.tt
 msgid "Downgrade to ((OTRS)) Community Edition"
-msgstr ""
+msgstr "Downgrade para ((OTRS)) Community Edition"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessInstalled.tt
 msgid "Read documentation"
@@ -15368,7 +15369,7 @@ msgstr "Delindo o campo e seus dados.  Isto pode levar um tempo…"
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "Remove this dynamic field"
-msgstr ""
+msgstr "Remover este campo dinâmico"
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
 msgid "Remove selection"
@@ -16438,11 +16439,11 @@ msgstr "Adiciona endereços de e-mail de clientes para destinatários na tela de
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Adds the one time vacation days for the indicated calendar."
-msgstr ""
+msgstr "Adiciona os feriados de data única para o calendário indicado."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Adds the one time vacation days."
-msgstr ""
+msgstr "Adiciona os feriados de data única."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Adds the permanent vacation days for the indicated calendar."
@@ -16694,7 +16695,7 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows generic agent to execute custom modules."
-msgstr ""
+msgstr "Permite o atendente genérico executar módulos customizados."
 
 #. SysConfig
 msgid "Allows having a medium format ticket overview (CustomerInfo => 1 - shows also the customer information)."
@@ -17494,15 +17495,15 @@ msgstr "Item de cliente (ícone) que mostra os tickets abertos deste cliente com
 
 #. SysConfig
 msgid "Customer preferences."
-msgstr ""
+msgstr "Preferências do cliente."
 
 #. SysConfig
 msgid "Customer ticket overview"
-msgstr ""
+msgstr "Visão geral de chamados do cliente"
 
 #. SysConfig
 msgid "Customer ticket search."
-msgstr ""
+msgstr "Busca de Chamados do Cliente"
 
 #. SysConfig
 msgid "Customer ticket zoom"
@@ -19310,7 +19311,7 @@ msgstr "Desativa o cabeçalho HTTP \"X-Frame-Options: SAMEORIGIN\" para que o OT
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Disable autocomplete in the login screen."
-msgstr ""
+msgstr "Desabilitar auto completar na tela de login."
 
 #. SysConfig
 msgid "Disable cloud services"
@@ -20034,7 +20035,7 @@ msgstr "Permite que usuários possam sobrescrever o caracter de separação de a
 
 #. SysConfig
 msgid "Global Search Module."
-msgstr ""
+msgstr "Módulo de Busca Global"
 
 #. SysConfig
 msgid "Go to dashboard!"
@@ -20058,7 +20059,7 @@ msgstr "Gráfico de Linhas"
 
 #. SysConfig
 msgid "Graph: Stacked Area Chart"
-msgstr ""
+msgstr "Gráfico de área empilhada"
 
 #. SysConfig
 msgid "Greek"
@@ -20830,7 +20831,7 @@ msgstr "Chamado <OTRS_TICKET> agrupado com <OTRS_MERGE_TO_TICKET>."
 
 #. SysConfig
 msgid "Minute"
-msgstr ""
+msgstr "Minuto"
 
 #. SysConfig
 msgid "Miscellaneous"
@@ -23702,7 +23703,7 @@ msgstr "estatísticas"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
 msgid "Import and export of configurations"
-msgstr ""
+msgstr "Importação ou exportação de configurações"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
 msgid "Upload a file in YAML format (as provided by the export) to import dynamic field configurations."
@@ -23710,15 +23711,15 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
 msgid "Overwrite existing configurations"
-msgstr ""
+msgstr "Sobrescrever configurações existentes"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
 msgid "Import configurations"
-msgstr ""
+msgstr "Importar configurações"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
 msgid "Export configurations"
-msgstr ""
+msgstr "Exportar configurações"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
 msgid "Dynamic fields ↔ Screens"
@@ -23762,7 +23763,7 @@ msgstr "Telas"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldScreenConfiguration.tt
 msgid "Default columns"
-msgstr ""
+msgstr "Colunas padrão"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldScreenConfiguration.tt
 msgid "You can assign elements by dragging and dropping them to the lists of available, disabled, assigned and required elements."
@@ -23910,7 +23911,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
 msgid "Dynamic field"
-msgstr ""
+msgstr "Campo dinâmico"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
 msgid "Restore values"
@@ -23978,7 +23979,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Disable SSL hostname certificate verification"
-msgstr ""
+msgstr "Desabilitar verificação de hostname no certificado SSL"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Disables hostname certificate verification. This is not recommended and should only be used in test environments."
@@ -23986,7 +23987,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Content type"
-msgstr ""
+msgstr "Tipo de conteúdo"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "The default content type added to HTTP header to use for POST and PUT requests."
@@ -24026,7 +24027,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt
 msgid "Disable SSL hostname verification"
-msgstr ""
+msgstr "Desabilitar verificação de hostname SSL"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt
 msgid "Disables (setting \"Yes\") or enables (setting \"No\", default) the SSL hostname verification."
@@ -24034,7 +24035,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportWebserviceSettings.tt
 msgid "Web service name"
-msgstr ""
+msgstr "Nome do web service"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportWebserviceSettings.tt
 msgid "Invoker"
@@ -24058,7 +24059,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Go to znuny.org"
-msgstr ""
+msgstr "Ir até znuny.org"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
 msgid "System file support"
@@ -24066,11 +24067,11 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
 msgid "Delete cache"
-msgstr ""
+msgstr "Apagar cache"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Package"
-msgstr ""
+msgstr "Pacote"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
 msgid "Powered by %s"
@@ -24078,11 +24079,11 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Header.tt
 msgid "Last viewed"
-msgstr ""
+msgstr "Última visualização"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
 msgid "Community"
-msgstr ""
+msgstr "Comunidade"
 
 #. Perl Module: Kernel/Modules/AdminDynamicFieldScreenConfiguration.pm
 msgid "Settings were saved."
@@ -24110,7 +24111,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminDynamicFieldWebservice.pm
 msgid "Dynamic field does not exist or is invalid."
-msgstr ""
+msgstr "Campo dinâmico não existe ou é inválido."
 
 #. Perl Module: Kernel/Modules/AdminDynamicFieldWebservice.pm
 msgid "Only dynamic fields for tickets are allowed."
@@ -24126,7 +24127,7 @@ msgstr "(Os arquivos onde apenas as permissões foram alteradas não serão exib
 
 #. Perl Module: Kernel/Output/HTML/Layout.pm
 msgid "Last Views"
-msgstr ""
+msgstr "Últimas Visualizações"
 
 #. SysConfig
 msgid "AJAX functions for notification event transport web service."
@@ -24138,7 +24139,7 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Access package repositories via HTTP or HTTPS."
-msgstr ""
+msgstr "Acessar repositórios de pacotes via HTTP ou HTTPS"
 
 #. SysConfig
 msgid "Activation of dynamic fields for screens."
@@ -24210,7 +24211,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Hide"
-msgstr ""
+msgstr "Esconder"
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "It might happen that a dynamic field of type WebserviceDropdown or WebserviceMultiselect will be set to a value fetched from a configured web service table but the web service record will not have a value set in the field that is configured as displayed value. Enable this setting to hide those dynamic fields in the ticket information widget of AgentTicketZoom so that they will not be shown as empty."
@@ -24238,7 +24239,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Manage system files."
-msgstr ""
+msgstr "Gerenciar arquivos do sistema."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Different fields can be omitted by separating them by ';'."
@@ -24258,7 +24259,7 @@ msgstr ""
 
 #. SysConfig
 msgid "News"
-msgstr ""
+msgstr "Notícias"
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Parameter name for additional recipients."
@@ -24350,15 +24351,15 @@ msgstr ""
 
 #. SysConfig
 msgid "Webservice (Multiselect)"
-msgstr ""
+msgstr "Webservice (Multi seleção)"
 
 #. SysConfig
 msgid "Webservice (Text)"
-msgstr ""
+msgstr "Webservice (Texto)"
 
 #. SysConfig
 msgid "Znuny.org - News"
-msgstr ""
+msgstr "Znuny.org - Notícias"
 
 #. Template: Config
 msgid "Invoker for search"
@@ -24386,7 +24387,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingXSLT.tt
 msgid "Keep XML attributes"
-msgstr ""
+msgstr "Manter atributos XML"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingXSLT.tt
 msgid "Only needed for content type XML."
@@ -24394,31 +24395,31 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
 msgid "Clear log entries"
-msgstr ""
+msgstr "Limpar entradas de log"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
 msgid "Authentication type"
-msgstr ""
+msgstr "Tipo de autenticação"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "OAuth2 token configuration"
-msgstr ""
+msgstr "Configuração do token OAuth2"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
 msgid "Manage OAuth2 tokens and their configurations"
-msgstr ""
+msgstr "Gerenciar tokens OAuth2 e suas configurações"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
 msgid "Add by template"
-msgstr ""
+msgstr "Adicionar via modelo"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
 msgid "Base configuration"
-msgstr ""
+msgstr "Configuração base"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
 msgid "An OAuth2 token configuration with this name already exists."
-msgstr ""
+msgstr "Uma configuração OAuth2 com este nome já existe."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
 msgid "Client ID"
@@ -24430,15 +24431,17 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
 msgid "This is the template that was used to create this OAuth2 token configuration."
-msgstr ""
+msgstr "Este é o modelo usado para criar a configuração do token OAuth2."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
 msgid "Expired token"
-msgstr ""
+msgstr "Token expirado"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
 msgid "Shows a notification for admins below the top menu if the OAuth2 token has expired."
 msgstr ""
+"Mostrar uma notificação para os administradores se o token OAuth2 estiver "
+"expirado."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
 msgid "Expired refresh token"
@@ -24450,63 +24453,66 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
 msgid "Add OAuth2 token configuration"
-msgstr ""
+msgstr "Adicionar configuração do token OAuth2"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
 msgid "Add a new OAuth2 token configuration based on the selected template."
-msgstr ""
+msgstr "Adicionar um novo token OAuth2 baseado no seguinte modelo."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
 msgid "Import and export"
-msgstr ""
+msgstr "Importar e exportar"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
 msgid "Upload a YAML file to import token configurations. See documentation on OAuth2 token management for further details."
 msgstr ""
+"Faça o upload de um arquivo YAML para importar configurações de token. "
+"Consulte a documentação sobre gerenciamento de token OAuth2 para obter mais "
+"detalhes."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
 msgid "Overwrite existing token configurations"
-msgstr ""
+msgstr "Substituir configurações de token existentes"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
 msgid "Import token configurations"
-msgstr ""
+msgstr "Importar configurações do token"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
 msgid "Export token configurations"
-msgstr ""
+msgstr "Exportar configurações do token"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
 msgid "OAuth2 token configurations"
-msgstr ""
+msgstr "Configurações do token OAuth2"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
 msgid "Token status"
-msgstr ""
+msgstr "Status do token"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
 msgid "Refresh token status"
-msgstr ""
+msgstr "Atualizar status do token"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
 msgid "Validity of token configuration"
-msgstr ""
+msgstr "Validade da configuração do token"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
 msgid "Last token request failed."
-msgstr ""
+msgstr "A última solicitação de token falhou."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
 msgid "Token has expired on %s."
-msgstr ""
+msgstr "Token expirou em %s."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
 msgid "Token is valid until %s."
-msgstr ""
+msgstr "Token é valido até %s."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
 msgid "No token was requested yet."
-msgstr ""
+msgstr "Nenhum token foi solicitado ainda."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
 msgid "Last (refresh) token request failed."
@@ -24538,15 +24544,15 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
 msgid "Request new token"
-msgstr ""
+msgstr "Solicitar novo token"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
 msgid "Delete this token and its configuration."
-msgstr ""
+msgstr "Apagar este token e suas configurações."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
 msgid "Scope"
-msgstr ""
+msgstr "Escopo"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
 msgid "Scope EntityID"
@@ -24578,7 +24584,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
 msgid "Add ticket attribute relations"
-msgstr ""
+msgstr "Adicionar relações de atributo de ticket"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
 msgid "Edit ticket attribute relations"
@@ -24586,11 +24592,11 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
 msgid "Import CSV or Excel file"
-msgstr ""
+msgstr "Importar arquivo CSV ou Excel"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
 msgid "Last update"
-msgstr ""
+msgstr "Última atualização"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
 msgid "Are you sure you want to delete entry '%s'?"
@@ -24598,7 +24604,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
 msgid "Download previously imported file"
-msgstr ""
+msgstr "Baixar o arquivo importado anteriormente"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
 msgid "The file needs to be in CSV (UTF-8) or Excel format. Both header columns need to contain the names of valid ticket attributes. The name of the uploaded file must be unique and must not be in use by another ticket attribute relations record."
@@ -24606,7 +24612,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
 msgid "Add missing possible dynamic field values"
-msgstr ""
+msgstr "Adicionar possíveis valores de campos dinâmicos ausentes"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
 msgid "Attribute values"
@@ -24626,7 +24632,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminDynamicFieldScreenConfiguration.pm
 msgid "Dynamic fields for screen %s"
-msgstr ""
+msgstr "Campo dinâmico para a tela %s"
 
 #. Perl Module: Kernel/Modules/AdminDynamicFieldScreenConfiguration.pm
 msgid "Default columns for screen %s"
@@ -24638,7 +24644,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketGeneric.tt
 msgid "My Owned Tickets"
-msgstr ""
+msgstr "Meus Chamados"
 
 #. Perl Module: Kernel/Modules/AgentTicketProcess.pm
 msgid "Could not set attachments for ticket with ID %s in activity dialog \"%s\"!"
@@ -24646,7 +24652,7 @@ msgstr ""
 
 #. Perl Module: Kernel/Output/HTML/Notification/OAuth2TokenManagementTokenExpired.pm
 msgid "OAuth2 token for \"%s\" has expired."
-msgstr ""
+msgstr "Token OAuth2 para \"%s\" foi expirado."
 
 #. Perl Module: Kernel/Output/HTML/Notification/OAuth2TokenManagementTokenExpired.pm
 msgid "OAuth2 refresh token for \"%s\" has expired."
@@ -24670,7 +24676,7 @@ msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.ProcessManagement.js
 msgid "Are you sure you want to overwrite the config parameters?"
-msgstr ""
+msgstr "Tem certeza que deseja sobrescrever os parâmetros de configuração?"
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Activates week number for datepickers."
@@ -24678,7 +24684,7 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Adds ticket attribute relations based on CSV/Excel data."
-msgstr ""
+msgstr "Adiciona relações de atributo de chamado com base em dados CSV/Excel."
 
 #. SysConfig
 msgid "AdminOAuth2TokenManagement"
@@ -24722,7 +24728,7 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Default format for export files."
-msgstr ""
+msgstr "Formato padrão para exportar aquivos."
 
 #. XML Definition: Kernel/Config/Files/XML/Calendar.xml
 msgid "Defines available groups for the appointment calendar screen."
@@ -24838,7 +24844,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Manage OAuth2 tokens and their configurations."
-msgstr ""
+msgstr "Gerenciar tokens OAuth2 e suas configurações"
 
 #. SysConfig
 msgid "Management of ticket attribute relations."
@@ -24858,11 +24864,11 @@ msgstr ""
 
 #. SysConfig
 msgid "OAuth2"
-msgstr ""
+msgstr "OAuth2"
 
 #. SysConfig
 msgid "OAuth2 token"
-msgstr ""
+msgstr "Token OAuth2"
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Quoting character for exported CSV files."
@@ -24950,11 +24956,11 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
 msgid "Did you know? You can help translating Znuny at %s."
-msgstr ""
+msgstr "Você sabia? É possível ajudar na tradução do Znuny em %s."
 
 #. Perl Module: Kernel/System/Calendar/Plugin/Ticket/Create.pm
 msgid "On the date"
-msgstr ""
+msgstr "Na data"
 
 #. XML Definition: Kernel/Config/Files/XML/Daemon.xml
 msgid "If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if &lt;$OTRSHome&gt;/var/run/ can not be used."
@@ -25034,7 +25040,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessUninstall.tt
 msgid "Go to Package Manager"
-msgstr ""
+msgstr "Ir para o Gerenciados de Pacotes"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
 msgid "Scope Entity ID"
@@ -25042,7 +25048,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
 msgid "Auto fill"
-msgstr ""
+msgstr "Auto preencher"
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Re-indexes S/MIME certificate folders. Note: S/MIME needs to be enabled in SysConfig."
@@ -25062,7 +25068,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
 msgid "Add all attachments"
-msgstr ""
+msgstr "Adicionar todos os anexos"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
 msgid "Add all attachments to invoker payload."
@@ -25146,15 +25152,15 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminGenericInterfaceTransportHTTPREST.pm
 msgid "Invalid password and/or key file (see above)."
-msgstr ""
+msgstr "Senha ou arquivo de chave inválido (veja acima)"
 
 #. Perl Module: Kernel/Modules/AdminGenericInterfaceTransportHTTPREST.pm
 msgid "Certificate is expired."
-msgstr ""
+msgstr "Certificado está expirado."
 
 #. Perl Module: Kernel/Modules/AdminGenericInterfaceTransportHTTPREST.pm
 msgid "Certificate file could not be parsed."
-msgstr ""
+msgstr "O arquivo de certificado não pode ser parseado."
 
 #. Perl Module: Kernel/Modules/AdminGenericInterfaceTransportHTTPREST.pm
 msgid "Please enter a time in seconds (at least 10 seconds)."
@@ -25190,23 +25196,23 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
 msgid "Remove mention"
-msgstr ""
+msgstr "Remover menção"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/MentionsTable.tt
 msgid "Mentions"
-msgstr ""
+msgstr "Menções"
 
 #. Perl Module: Kernel/Modules/AdminNotificationEvent.pm
 msgid "All users who are mentioned in a ticket"
-msgstr ""
+msgstr "Todos os usuários que são mencionados em um chamado"
 
 #. Perl Module: Kernel/Modules/AgentTicketMentionView.pm
 msgid "New mention"
-msgstr ""
+msgstr "Nova menção"
 
 #. Perl Module: Kernel/Modules/AgentTicketMentionView.pm
 msgid "My Mentions"
-msgstr ""
+msgstr "Minhas menções"
 
 #. Perl Module: Kernel/Modules/Mentions.pm
 msgid "%s users will be mentioned"
@@ -25214,15 +25220,15 @@ msgstr "%s usuários serão mencionados"
 
 #. Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
 msgid "Total mentions"
-msgstr ""
+msgstr "Total de menções"
 
 #. Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
 msgid "Total new mentions"
-msgstr ""
+msgstr "Total de novas menções"
 
 #. Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
 msgid "New mentions"
-msgstr ""
+msgstr "Novas menções"
 
 #. Perl Module: Kernel/System/Mention.pm
 msgid "LastMention"
@@ -25258,35 +25264,35 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Module to grant access to the mentioned agents of a ticket."
-msgstr ""
+msgstr "Módulo para conceder acesso aos referidos agentes de um ticket."
 
 #. XML Definition: scripts/database/initial_insert.xml
 msgid "Mention notification"
-msgstr ""
+msgstr "Notificação de menção"
 
 #. SysConfig
 msgid "Last Mentions"
-msgstr ""
+msgstr "Últimas Menções"
 
 #. SysConfig
 msgid "Mentioned in article"
-msgstr ""
+msgstr "Mencionado no artigo"
 
 #. SysConfig
 msgid "Mentioned in ticket"
-msgstr ""
+msgstr "Mencionado no chamado"
 
 #. SysConfig
 msgid "Mentions."
-msgstr ""
+msgstr "Menções."
 
 #. SysConfig
 msgid "Shows last mention of tickets."
-msgstr ""
+msgstr "Mostrar últimas menções do chamado."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice.tt
 msgid "Attributes"
-msgstr ""
+msgstr "Atributos"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice.tt
 msgid "Attributes for invoker execution (initially default values will be used)."
@@ -25294,7 +25300,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice.tt
 msgid "Attribute keys"
-msgstr ""
+msgstr "Atributos chave"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice.tt
 msgid "Custom attribute form for invoker execution."
@@ -25346,23 +25352,23 @@ msgstr ""
 
 #. Perl Module: Kernel/System/MailQueue.pm
 msgid "Error while validating Message data."
-msgstr ""
+msgstr "Erro ao validar dados da Mensagem"
 
 #. Perl Module: Kernel/System/MailQueue.pm
 msgid "Error while validating Sender email address."
-msgstr ""
+msgstr "Erro ao validar o endereço de e-mail do remetente."
 
 #. Perl Module: Kernel/System/MailQueue.pm
 msgid "Error while validating Recipient email address."
-msgstr ""
+msgstr "Erro ao validar o endereço de e-mail do destinatário."
 
 #. SysConfig
 msgid "Internal"
-msgstr ""
+msgstr "Interno"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
 msgid "Filter for Appointments"
-msgstr ""
+msgstr "Filtro para Compromissos"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
 msgid "URL for authorization code"
@@ -25378,7 +25384,7 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "These groups won't be selectable to be mentioned."
-msgstr ""
+msgstr "Esses grupos não serão selecionáveis para serem mencionados."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Limits number of users (per article) that will be marked as mentioned and be notified. Users (and users from mentioned groups) that exceed this limit will silently be ignored."
@@ -25390,11 +25396,11 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
 msgid "This message contains an event"
-msgstr ""
+msgstr "Esta mensagem contém um evento"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
 msgid "Show more information"
-msgstr ""
+msgstr "Mostrar mais informações"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/MIMEBase.tt
 msgid "Start: %s, End: %s"
@@ -25410,7 +25416,7 @@ msgstr ""
 
 #. Perl Module: Kernel/System/CalendarEvents.pm
 msgid "on"
-msgstr ""
+msgstr "em"
 
 #. Perl Module: Kernel/System/CalendarEvents.pm
 msgid "of year"
@@ -25418,7 +25424,7 @@ msgstr "do ano"
 
 #. Perl Module: Kernel/System/CalendarEvents.pm
 msgid "of month"
-msgstr ""
+msgstr "do mês"
 
 #. Perl Module: Kernel/System/CalendarEvents.pm
 msgid "all-day"
@@ -25442,7 +25448,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
 msgid "No tickets found."
-msgstr ""
+msgstr "Nenhum chamado encontrado."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "MyLastChangedTickets dashboard widget."
@@ -25450,7 +25456,7 @@ msgstr ""
 
 #. SysConfig
 msgid "My last changed tickets"
-msgstr ""
+msgstr "Meus últimos chamados alterados"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
 msgid "Access token scope"
@@ -25474,15 +25480,15 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Customers Users"
-msgstr ""
+msgstr "Usuários Clientes"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
 msgid "Agents  ↔ Groups"
-msgstr ""
+msgstr "Atendentes ↔ Grupos"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
 msgid "Customer ↔ Groups"
-msgstr ""
+msgstr "Clientes ↔ Grupos"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPriority.tt
 msgid "Configure Priority Visibility and Defaults"
@@ -25498,11 +25504,11 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Add a Generic Agent Job"
-msgstr ""
+msgstr "Adicionar um Job do Atendente Genérico"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Add an ACL"
-msgstr ""
+msgstr "Adicionar uma ACL"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
 msgid "Configure Working Hours"
@@ -25534,7 +25540,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Generic Agents"
-msgstr ""
+msgstr "Atendentes Genéricos"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminType.tt
 msgid "Configure Type Visibility and Defaults"
@@ -25542,7 +25548,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Generic Agent"
-msgstr ""
+msgstr "Atendente Genérico"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSLA.tt
 msgid "Minimum Time Between Incidents"
@@ -25758,5 +25764,4 @@ msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
 msgid "Files"
-msgstr ""
-
+msgstr "Arquivos"
