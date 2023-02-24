@@ -222,10 +222,10 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Base::DatabaseBackupCheck',
         },
 
-        {
-            Message => 'Upgrade database structure',
-            Module  => 'scripts::Migration::Znuny::UpgradeDatabaseStructure',
-        },
+#         {
+#             Message => 'Upgrade database structure',
+#             Module  => 'scripts::Migration::Znuny::UpgradeDatabaseStructure',
+#         },
         {
             Message => 'Rebuild configuration',
             Module  => 'scripts::Migration::Base::RebuildConfig',
