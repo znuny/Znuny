@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.867106958762887;
+    $Self->{Completeness}        = 0.885631443298969;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -494,12 +494,12 @@ sub Data {
         'Filter for dynamic fields' => 'Filtro para campos dinâmicos',
         'To add a new field, select the field type from one of the object\'s list, the object defines the boundary of the field and it can\'t be changed after the field creation.' =>
             'Para adicionar um novo campo, selecione o tipo de campo em uma das listas de objetos. O objeto define o domínio do campo e não pode ser alterado após a criação.',
-        'Import and export of configurations' => '',
+        'Import and export of configurations' => 'Importação ou exportação de configurações',
         'Upload a file in YAML format (as provided by the export) to import dynamic field configurations.' =>
             '',
-        'Overwrite existing configurations' => '',
-        'Import configurations' => '',
-        'Export configurations' => '',
+        'Overwrite existing configurations' => 'Sobrescrever configurações existentes',
+        'Import configurations' => 'Importar configurações',
+        'Export configurations' => 'Exportar configurações',
         'Process Management' => 'Gerenciamento de Processos',
         'Dynamic fields ↔ Screens' => '',
         'Dynamic Fields List' => 'Lista de Campos Dinâmicos',
@@ -599,8 +599,8 @@ sub Data {
         'Assignment of dynamic fields to screens' => '',
         'Overview' => 'Visão Geral',
         'Screens' => 'Telas',
-        'Default columns' => '',
-        'Add dynamic field' => '',
+        'Default columns' => 'Colunas padrão',
+        'Add dynamic field' => 'Adicionar campo dinâmico',
         'Filter' => 'Filtro',
         'You can assign elements by dragging and dropping them to the lists of available, disabled, assigned and required elements.' =>
             '',
@@ -632,10 +632,10 @@ sub Data {
         'This is the default term for the click search.' => '',
         'Initial default search term' => '',
         'This is the default search term when the mask is loaded.' => '',
-        'Attributes' => '',
+        'Attributes' => 'Atributos',
         'Attributes for invoker execution (initially default values will be used).' =>
             '',
-        'Attribute keys' => '',
+        'Attribute keys' => 'Atributos chave',
         'Custom attribute form for invoker execution.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
@@ -679,7 +679,7 @@ sub Data {
         'Input field width' => '',
         'Width of the input field (percentage).' => '',
         'Additional dynamic field storage' => '',
-        'Dynamic field' => '',
+        'Dynamic field' => 'Campo dinâmico',
         'Restore values' => '',
         'These dynamic fields are also filled with values from the same record.' =>
             '',
@@ -981,7 +981,7 @@ sub Data {
             'Gatilhos de eventos asíncronos são tratados pelo OTRS Scheduler Daemon em segundo plano (recomendado).',
         'Synchronous event triggers would be processed directly during the web request.' =>
             'Gatilhos (dispadores) de eventos síncronos precisam ser processados diretamente durante a requisição web.',
-        'Add all attachments' => '',
+        'Add all attachments' => 'Adicionar todos os anexos',
         'Add all attachments to invoker payload.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerEvent.tt
@@ -1051,7 +1051,7 @@ sub Data {
         'Force array for tags' => '',
         'Enter tags separated by space for which array representation should be forced.' =>
             '',
-        'Keep XML attributes' => '',
+        'Keep XML attributes' => 'Manter atributos XML',
         'Only needed for content type XML.' => '',
         'Data key regex filters (before mapping)' => 'Filtros de regex de chave de dados (antes do mapeamento)',
         'Data key regex filters (after mapping)' => 'Filtros de regex de chave de dados (após o mapeamento)',
@@ -1128,7 +1128,7 @@ sub Data {
             'URI que indica a localização específica para acessar um webservice.',
         'e.g https://www.otrs.com:10745/api/v1.0 (without trailing backslash)' =>
             'ex: https://www.otrs.com:10745/api/v1.0 (sem fuga da barra invertida)',
-        'Disable SSL hostname certificate verification' => '',
+        'Disable SSL hostname certificate verification' => 'Desabilitar verificação de hostname no certificado SSL',
         'Disables hostname certificate verification. This is not recommended and should only be used in test environments.' =>
             '',
         'Timeout' => 'Expiração',
@@ -1167,8 +1167,8 @@ sub Data {
         'JWT authentication: Additional header data' => '',
         'Additional header data for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3' =>
             '',
-        'OAuth2 token configuration' => '',
-        'Content type' => '',
+        'OAuth2 token configuration' => 'Configuração do token OAuth2',
+        'Content type' => 'Tipo de conteúdo',
         'The default content type added to HTTP header to use for POST and PUT requests.' =>
             '',
         'Use Proxy Options' => 'Usar Configurações de Proxy',
@@ -1269,7 +1269,7 @@ sub Data {
         'e.g utf-8, latin1, iso-8859-1, cp1250, Etc.' => 'ex.: utf-8, latin1, iso-8859-1, cp1250 etc.',
         'User' => 'Usuário',
         'Password' => 'Senha',
-        'Disable SSL hostname verification' => '',
+        'Disable SSL hostname verification' => 'Desabilitar verificação de hostname SSL',
         'Disables (setting "Yes") or enables (setting "No", default) the SSL hostname verification.' =>
             '',
         'Sort options' => 'Ordenar opções',
@@ -1354,7 +1354,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
         'System Log' => 'Eventos do Sistema',
-        'Clear log entries' => '',
+        'Clear log entries' => 'Limpar entradas de log',
         'Here you will find log information about your system.' => 'Aqui você vai encontrar informações sobre eventos do seu sistema.',
         'Hide this message' => 'Esconder esta mensagem',
         'Recent Log Entries' => 'Entradas Recentes de Log',
@@ -1376,7 +1376,7 @@ sub Data {
             'E-mail enviado pode ser configurado nas definições de Sendmail* em %s.',
         'System Configuration' => 'Configuração do Sistema',
         'Host' => 'Servidor',
-        'Authentication type' => '',
+        'Authentication type' => 'Tipo de autenticação',
         'Delete account' => 'Excluir conta',
         'Fetch mail' => 'Obter E-mails',
         'Do you really want to delete this mail account?' => 'Você realmente quer excluir esta conta de e-mail?',
@@ -1429,7 +1429,7 @@ sub Data {
             'Você pode utilizar OTRS-tags como <OTRS_TICKET_DynamicField_...> para inserir valores do chamado atual.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportWebserviceSettings.tt
-        'Web service name' => '',
+        'Web service name' => 'Nome do web service',
         'Invoker' => '',
         'Asynchronous event triggers will be handled as separate process by the scheduler daemon (recommended).' =>
             '',
@@ -1438,11 +1438,11 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
         'Queue Management' => 'Gerenciamento de Fila',
-        'Manage OAuth2 tokens and their configurations' => '',
-        'Add by template' => '',
-        'Base configuration' => '',
+        'Manage OAuth2 tokens and their configurations' => 'Gerenciar tokens OAuth2 e suas configurações',
+        'Add by template' => 'Adicionar via modelo',
+        'Base configuration' => 'Configuração base',
         'An OAuth2 token configuration with this name already exists.' =>
-            '',
+            'Uma configuração OAuth2 com este nome já existe.',
         'Client ID' => '',
         'Client secret' => '',
         'URL for authorization code' => '',
@@ -1451,33 +1451,33 @@ sub Data {
         'Access token scope' => '',
         'Template' => 'Modelo',
         'This is the template that was used to create this OAuth2 token configuration.' =>
-            '',
+            'Este é o modelo usado para criar a configuração do token OAuth2.',
         'Notifications' => 'Notificações',
-        'Expired token' => '',
+        'Expired token' => 'Token expirado',
         'Shows a notification for admins below the top menu if the OAuth2 token has expired.' =>
-            '',
+            'Mostrar uma notificação para os administradores se o token OAuth2 estiver expirado.',
         'Expired refresh token' => '',
         'Shows a notification for admins below the top menu if the OAuth2 refresh token has expired.' =>
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
-        'Add OAuth2 token configuration' => '',
+        'Add OAuth2 token configuration' => 'Adicionar configuração do token OAuth2',
         'Add a new OAuth2 token configuration based on the selected template.' =>
-            '',
-        'Import and export' => '',
+            'Adicionar um novo token OAuth2 baseado no seguinte modelo.',
+        'Import and export' => 'Importar e exportar',
         'Upload a YAML file to import token configurations. See documentation on OAuth2 token management for further details.' =>
-            '',
-        'Overwrite existing token configurations' => '',
-        'Import token configurations' => '',
-        'Export token configurations' => '',
-        'OAuth2 token configurations' => '',
-        'Token status' => '',
-        'Refresh token status' => '',
-        'Validity of token configuration' => '',
-        'Last token request failed.' => '',
-        'Token has expired on %s.' => '',
-        'Token is valid until %s.' => '',
-        'No token was requested yet.' => '',
+            'Faça o upload de um arquivo YAML para importar configurações de token. Consulte a documentação sobre gerenciamento de token OAuth2 para obter mais detalhes.',
+        'Overwrite existing token configurations' => 'Substituir configurações de token existentes',
+        'Import token configurations' => 'Importar configurações do token',
+        'Export token configurations' => 'Exportar configurações do token',
+        'OAuth2 token configurations' => 'Configurações do token OAuth2',
+        'Token status' => 'Status do token',
+        'Refresh token status' => 'Atualizar status do token',
+        'Validity of token configuration' => 'Validade da configuração do token',
+        'Last token request failed.' => 'A última solicitação de token falhou.',
+        'Token has expired on %s.' => 'Token expirou em %s.',
+        'Token is valid until %s.' => 'Token é valido até %s.',
+        'No token was requested yet.' => 'Nenhum token foi solicitado ainda.',
         'Last (refresh) token request failed.' => '',
         'Refresh token has expired on %s.' => '',
         'Refresh token has expired.' => '',
@@ -1485,12 +1485,12 @@ sub Data {
         'Refresh token is valid (without expiration date).' => '',
         'No refresh token was requested yet.' => '',
         'Refresh token request is not configured.' => '',
-        'Request new token' => '',
-        'Delete this token and its configuration.' => '',
+        'Request new token' => 'Solicitar novo token',
+        'Delete this token and its configuration.' => 'Apagar este token e suas configurações.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessInstalled.tt
         'Manage %s' => 'Gerenciar %s',
-        'Downgrade to ((OTRS)) Community Edition' => '',
+        'Downgrade to ((OTRS)) Community Edition' => 'Downgrade para ((OTRS)) Community Edition',
         'Read documentation' => 'Leia a documentação',
         '%s makes contact regularly with cloud.otrs.com to check on available updates and the validity of the underlying contract.' =>
             '%s faz contato regular com cloud.otrs.com para verificar as atualizações disponíveis e a validade do contrato subjacente.',
@@ -1546,7 +1546,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessUninstall.tt
         'Cancel downgrade and go back' => 'Cancelar downgrade e retornar',
-        'Go to Package Manager' => '',
+        'Go to Package Manager' => 'Ir para o Gerenciados de Pacotes',
         'Sorry, but currently you can\'t downgrade due to the following packages which depend on %s:' =>
             'Desculpe, mas atualmente você não pode efetuar desatualizar os seguintes pacotes que dependem de % s:',
         'Vendor' => 'Fornecedor',
@@ -1593,7 +1593,7 @@ sub Data {
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Você realmente quer reinstalar este pacote? Quaisquer alterações manuais serão perdidas.',
         'Go to updating instructions' => 'Vá para instruções de atualização',
-        'Go to znuny.org' => '',
+        'Go to znuny.org' => 'Ir até znuny.org',
         'package information' => 'informação do pacote',
         'Package installation requires a patch level update of Znuny.' =>
             'Pacote de Instalação requer atualização do OTRS',
@@ -1615,7 +1615,7 @@ sub Data {
             'No caso de você ter mais perguntas, teremos prazer em respondê-las.',
         'Install Package' => 'Instalar Pacote',
         'Update Package' => 'Atualizar Pacote',
-        'Package' => '',
+        'Package' => 'Pacote',
         'Required package %s is already installed.' => '',
         'Required Perl module %s is already installed.' => '',
         'Required package %s needs to get installed!' => '',
@@ -1733,7 +1733,7 @@ sub Data {
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'Alterações feitas aos Processos só afetam o sistema após a sincronização dos processos. Ao sincronizar os processos as alterações serão escritas nas configurações.',
         'Access Control Lists (ACL)' => 'Listas de Controle de Acesso (ACL)',
-        'Generic Agent' => '',
+        'Generic Agent' => 'Atendente Genérico',
         'Manage Process Widiget Groups' => '',
         'Processes' => 'Processos',
         'Process name' => 'Nome do Processo',
@@ -1748,7 +1748,7 @@ sub Data {
             'Por favor, note que alterar esta atividade afetará os seguintes processos',
         'Activity' => 'Atividade',
         'Activity Name' => 'Nome da Atividade',
-        'Scope' => '',
+        'Scope' => 'Escopo',
         'Scope Entity ID' => '',
         'This field is required for activities with a scope.' => '',
         'Activity Dialogs' => 'Janelas de Atividade',
@@ -1789,7 +1789,7 @@ sub Data {
         'Communication Channel' => 'Canal de Comunicação',
         'Is visible for customer' => 'Ficar visível para o Cliente',
         'Text Template' => 'Modelo de Texto',
-        'Auto fill' => '',
+        'Auto fill' => 'Auto preencher',
         'Display' => 'Exibir',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
@@ -2228,7 +2228,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
-        'Delete cache' => '',
+        'Delete cache' => 'Apagar cache',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles/Widget.tt
         'Permissions' => 'Permissões',
@@ -2278,16 +2278,16 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
         'Ticket attribute relations' => '',
-        'Add ticket attribute relations' => '',
+        'Add ticket attribute relations' => 'Adicionar relações de atributo de ticket',
         'Edit ticket attribute relations' => '',
-        'Import CSV or Excel file' => '',
+        'Import CSV or Excel file' => 'Importar arquivo CSV ou Excel',
         'Attribute' => 'Atributo',
-        'Last update' => '',
+        'Last update' => 'Última atualização',
         'Are you sure you want to delete entry \'%s\'?' => '',
-        'Download previously imported file' => '',
+        'Download previously imported file' => 'Baixar o arquivo importado anteriormente',
         'The file needs to be in CSV (UTF-8) or Excel format. Both header columns need to contain the names of valid ticket attributes. The name of the uploaded file must be unique and must not be in use by another ticket attribute relations record.' =>
             '',
-        'Add missing possible dynamic field values' => '',
+        'Add missing possible dynamic field values' => 'Adicionar possíveis valores de campos dinâmicos ausentes',
         'Attribute values' => '',
         'If a value is colored red, it is missing from the possible values list of the dynamic field configuration.' =>
             '',
@@ -2498,7 +2498,7 @@ sub Data {
         'New email ticket to %s' => 'Novo chamado via e-mail de %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
-        'No tickets found.' => '',
+        'No tickets found.' => 'Nenhum chamado encontrado.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardProductNotify.tt
         '%s %s is available!' => '%s %s está disponível!',
@@ -2528,7 +2528,7 @@ sub Data {
         'Assigned to customer user' => 'Atribuído ao usuário cliente.',
         'Accessible for customer user' => 'Acessível para o usuário cliente.',
         'My locked tickets' => 'Meus Chamados Bloqueados',
-        'My Owned Tickets' => '',
+        'My Owned Tickets' => 'Meus Chamados',
         'My watched tickets' => 'Meus Chamados Monitorados',
         'My responsibilities' => 'Minhas Responsabilidades',
         'Tickets in My Queues' => 'Chamados nas Minhas Filas',
@@ -2586,7 +2586,7 @@ sub Data {
         'This setting can currently not be saved.' => 'Esta configuração não pode ser salva no momento.',
         'This setting can currently not be saved' => 'Esta configuração não pode ser salva no momento',
         'Save this setting' => 'Salvar esta configuração',
-        'Did you know? You can help translating Znuny at %s.' => '',
+        'Did you know? You can help translating Znuny at %s.' => 'Você sabia? É possível ajudar na tradução do Znuny em %s.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences/SettingsList.tt
         'Reset to default' => 'Retornar ao padrão',
@@ -2797,7 +2797,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
         'Remove active filters for this screen.' => 'Remover filtros ativos para esta tela.',
-        'Remove mention' => '',
+        'Remove mention' => 'Remover menção',
         'Tickets per page' => 'Chamados por página',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
@@ -2905,8 +2905,8 @@ sub Data {
         'This message is being processed. Already tried to send %s time(s). Next try will be %s.' =>
             'Esta mensagem está sendo processada. Já foi(ram) feita(s) %s tentativa(s) de envio. Próxima tentativa será %s.',
         'This message contains events' => '',
-        'This message contains an event' => '',
-        'Show more information' => '',
+        'This message contains an event' => 'Esta mensagem contém um evento',
+        'Show more information' => 'Mostrar mais informações',
         'Start: %s, End: %s' => '',
         'Calendar events details' => '',
         'Calendar event details' => '',
@@ -2922,7 +2922,7 @@ sub Data {
         'Linked Objects' => 'Objetos Associados',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/MentionsTable.tt
-        'Mentions' => '',
+        'Mentions' => 'Menções',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
         'Archive' => 'Arquivar',
@@ -3098,7 +3098,7 @@ sub Data {
         'Personal preferences' => 'Preferências Pessoais',
         'Logout' => 'Sair',
         'You are logged in as' => 'Você está logado como',
-        'Last viewed' => '',
+        'Last viewed' => 'Última visualização',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript não habilitado ou não é suportado.',
@@ -3110,7 +3110,7 @@ sub Data {
         'Welcome to %s' => 'Bem-vindo a %s',
         'Phone' => 'Telefone',
         'Web site' => 'Website',
-        'Community' => '',
+        'Community' => 'Comunidade',
         'Next' => 'Próximo',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
@@ -3722,14 +3722,14 @@ sub Data {
         'System was not able to reset the setting!' => 'O sistema não conseguiu redefinir a definição!',
         'Settings were reset.' => 'As configurações foram redefinidas.',
         'Screens for dynamic field %s' => '',
-        'Dynamic fields for screen %s' => '',
+        'Dynamic fields for screen %s' => 'Campo dinâmico para a tela %s',
         'Default columns for screen %s' => '',
 
         # Perl Module: Kernel/Modules/AdminDynamicFieldWebservice.pm
         'Could not get config for dynamic field %s' => '',
         'The field must contain only ASCII letters and numbers.' => '',
         'Dynamic field is configured more than once.' => '',
-        'Dynamic field does not exist or is invalid.' => '',
+        'Dynamic field does not exist or is invalid.' => 'Campo dinâmico não existe ou é inválido.',
         'Only dynamic fields for tickets are allowed.' => '',
 
         # Perl Module: Kernel/Modules/AdminEmail.pm
@@ -3868,9 +3868,9 @@ sub Data {
         'Need valid Subaction!' => 'Necessita Subação válida!',
         'This field should be an integer.' => 'Este campo deveria ser um inteiro.',
         'Invalid key file and/or password (if needed, see below).' => '',
-        'Invalid password and/or key file (see above).' => '',
-        'Certificate is expired.' => '',
-        'Certificate file could not be parsed.' => '',
+        'Invalid password and/or key file (see above).' => 'Senha ou arquivo de chave inválido (veja acima)',
+        'Certificate is expired.' => 'Certificado está expirado.',
+        'Certificate file could not be parsed.' => 'O arquivo de certificado não pode ser parseado.',
         'Please enter a time in seconds (at least 10 seconds).' => '',
         'Please enter data in expected form (see explanation of field).' =>
             '',
@@ -3921,7 +3921,7 @@ sub Data {
         'Customer user of the ticket' => 'Usuário cliente do ticket',
         'All recipients of the first article' => 'Todos os destinatários do primeiro artigo',
         'All recipients of the last article' => 'Todos os destinatários do último artigo',
-        'All users who are mentioned in a ticket' => '',
+        'All users who are mentioned in a ticket' => 'Todos os usuários que são mencionados em um chamado',
         'Invisible to customer' => 'Não visível para o cliente',
         'Visible to customer' => 'Visível para o cliente',
 
@@ -4368,8 +4368,8 @@ sub Data {
         'My Locked Tickets' => 'Meus Chamados Bloqueados',
 
         # Perl Module: Kernel/Modules/AgentTicketMentionView.pm
-        'New mention' => '',
-        'My Mentions' => '',
+        'New mention' => 'Nova menção',
+        'My Mentions' => 'Minhas menções',
 
         # Perl Module: Kernel/Modules/AgentTicketMerge.pm
         'Can\'t merge ticket with itself!' => 'Não é possível mesclar um Ticket com ele mesmo.',
@@ -4816,7 +4816,7 @@ sub Data {
         'Show Tree Selection' => 'Mostrar Seleção de Árvore',
         'Split Quote' => 'Marca de citação',
         'Remove Quote' => 'Remover citação',
-        'Last Views' => '',
+        'Last Views' => 'Últimas Visualizações',
 
         # Perl Module: Kernel/Output/HTML/Layout/LinkObject.pm
         'Linked as' => 'Associado como',
@@ -4863,7 +4863,7 @@ sub Data {
         'OTRS Daemon is not running.' => 'OTRS Daemon não esta executando',
 
         # Perl Module: Kernel/Output/HTML/Notification/OAuth2TokenManagementTokenExpired.pm
-        'OAuth2 token for "%s" has expired.' => '',
+        'OAuth2 token for "%s" has expired.' => 'Token OAuth2 para "%s" foi expirado.',
         'OAuth2 refresh token for "%s" has expired.' => '',
 
         # Perl Module: Kernel/Output/HTML/Notification/OutofOfficeCheck.pm
@@ -4982,9 +4982,9 @@ sub Data {
         'Locked Tickets Total' => 'Total de Chamados Bloqueados',
 
         # Perl Module: Kernel/Output/HTML/ToolBar/TicketMention.pm
-        'Total mentions' => '',
-        'Total new mentions' => '',
-        'New mentions' => '',
+        'Total mentions' => 'Total de menções',
+        'Total new mentions' => 'Total de novas menções',
+        'New mentions' => 'Novas menções',
 
         # Perl Module: Kernel/Output/HTML/ToolBar/TicketOwner.pm
         'Owned Tickets New' => '',
@@ -5036,12 +5036,12 @@ sub Data {
         'Send unencrypted notification' => 'Enviar notificação não-encriptada',
 
         # Perl Module: Kernel/System/Calendar/Plugin/Ticket/Create.pm
-        'On the date' => '',
+        'On the date' => 'Na data',
 
         # Perl Module: Kernel/System/CalendarEvents.pm
-        'on' => '',
+        'on' => 'em',
         'of year' => 'do ano',
-        'of month' => '',
+        'of month' => 'do mês',
         'all-day' => '',
 
         # Perl Module: Kernel/System/Console/Command/Dev/Tools/Config2Docbook.pm
@@ -5077,9 +5077,9 @@ sub Data {
         'Maximum size is %s characters.' => 'O tamanho máximo é %s caracteres.',
 
         # Perl Module: Kernel/System/MailQueue.pm
-        'Error while validating Message data.' => '',
-        'Error while validating Sender email address.' => '',
-        'Error while validating Recipient email address.' => '',
+        'Error while validating Message data.' => 'Erro ao validar dados da Mensagem',
+        'Error while validating Sender email address.' => 'Erro ao validar o endereço de e-mail do remetente.',
+        'Error while validating Recipient email address.' => 'Erro ao validar o endereço de e-mail do destinatário.',
 
         # Perl Module: Kernel/System/Mention.pm
         'LastMention' => '',
@@ -5404,7 +5404,7 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
         'Views with multiple loaded JavaScript files' => '',
         'The following JavaScript files loaded multiple times:' => '',
-        'Files' => '',
+        'Files' => 'Arquivos',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
         'Package Installation Status' => 'Estado da Instalação do Pacote',
@@ -5812,7 +5812,7 @@ sub Data {
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
-        'Disable autocomplete in the login screen.' => '',
+        'Disable autocomplete in the login screen.' => 'Desabilitar auto completar na tela de login.',
         'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             'Desativa o cabeçalho HTTP "X-Frame-Options: SAMEORIGIN" para que o OTRS seja incluído como um IFrame em outras páginas web. Desativar este cabeçalho HTTP pode ser um problema de segurança! Só desative se você souber o que está fazendo.',
         'Disable HTTP header "Content-Security-Policy" to allow loading of external script contents. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
@@ -5976,7 +5976,7 @@ sub Data {
         'Maximum Number of a calendar shown in a dropdown.' => 'Número Máximo de calendários exibidos em um campo de seleção.',
         'Define the start day of the week for the date picker.' => 'Define o dia de início da semana para o selecionador de data.',
         'Adds the permanent vacation days.' => '',
-        'Adds the one time vacation days.' => '',
+        'Adds the one time vacation days.' => 'Adiciona os feriados de data única.',
         'Defines the hours and week days to count the working time.' => 'Define as horas e dias de semana para contabilizar o tempo de trabalho.',
         'Defines the name of the indicated calendar.' => 'Define o nome do calendário indicado.',
         'Defines the time zone of the indicated calendar, which can be assigned later to a specific queue.' =>
@@ -5985,7 +5985,7 @@ sub Data {
             'Define o dia de início da semana no selecionador de dias do calendário indicado.',
         'Adds the permanent vacation days for the indicated calendar.' =>
             '',
-        'Adds the one time vacation days for the indicated calendar.' => '',
+        'Adds the one time vacation days for the indicated calendar.' => 'Adiciona os feriados de data única para o calendário indicado.',
         'Defines the hours and week days of the indicated calendar, to count the working time.' =>
             'Define as horas e dias de semana do calendário indicado para contabilizar o tempo de trabalho.',
         'Defines the maximal size (in bytes) for file uploads via the browser. Warning: Setting this option to a value which is too low could cause many masks in your OTRS instance to stop working (probably any mask which takes input from the user).' =>
@@ -7612,7 +7612,7 @@ sub Data {
             '',
         'Set the limit of tickets that will be executed on a single genericagent job execution.' =>
             'Define o limite de tickets que serão executados em uma única execução de job do Agente Genérico.',
-        'Allows generic agent to execute custom modules.' => '',
+        'Allows generic agent to execute custom modules.' => 'Permite o atendente genérico executar módulos customizados.',
         'Unlock tickets whenever a note is added and the owner is out of office.' =>
             'Desbloqueia chamados sempre que uma nota for adicionada e o proprietário estiver fora do escritório.',
         'Include unknown customers in ticket filter.' => 'Incluir clientes desconhecidos no filtro de ticket.',
@@ -7841,7 +7841,7 @@ sub Data {
             'Define a fila padrão para tickets novos na interface de agente.',
 
         # XML Definition: Kernel/Config/Files/XML/Znuny.xml
-        'Access package repositories via HTTP or HTTPS.' => '',
+        'Access package repositories via HTTP or HTTPS.' => 'Acessar repositórios de pacotes via HTTP ou HTTPS',
         'URL to the OTRS cloud service proxy service. The http or https prefix will be added, depending on SysConfig option \'PackageRepositoryURLSchema\'.' =>
             '',
         'Enables/disables the Znuny package verification. If disabled, all packages are shown as verified. It\'s still recommended to use only verified packages.' =>
@@ -7915,7 +7915,7 @@ sub Data {
         'Frontend module registration for the admin interface.' => '',
         'The user\'s Mattermost username.' => '',
         'Loader module registration for the admin interface.' => '',
-        'Adds ticket attribute relations based on CSV/Excel data.' => '',
+        'Adds ticket attribute relations based on CSV/Excel data.' => 'Adiciona relações de atributo de chamado com base em dados CSV/Excel.',
         'Available/allowed actions for ticket attribute relations.' => '',
         'Always adds empty values to the ticket attribute relations so that it is not needed to add them to the CSV/Excel data.' =>
             '',
@@ -7934,7 +7934,7 @@ sub Data {
             '',
         'This configuration defines if a dynamic field has to be checked in the agent ticket bulk view to get set for each ticket. This prevents unwanted overwrite of dynamic field values with their default or even empty values.' =>
             '',
-        'Default format for export files.' => '',
+        'Default format for export files.' => 'Formato padrão para exportar aquivos.',
         'Separator for exported CSV files.' => '',
         'Quoting character for exported CSV files.' => '',
         'Handles changes to data of modules which use the DBCRUD base module.' =>
@@ -7997,7 +7997,7 @@ sub Data {
             '',
         'Defines which notifications about mentions should be sent.' => '',
         'Defines if the toolbar mention icon should count mentions.' => '',
-        'These groups won\'t be selectable to be mentioned.' => '',
+        'These groups won\'t be selectable to be mentioned.' => 'Esses grupos não serão selecionáveis para serem mencionados.',
         'Limits number of users (per article) that will be marked as mentioned and be notified. Users (and users from mentioned groups) that exceed this limit will silently be ignored.' =>
             '',
         'Frontend registration of triggers for mention plugin of CKEditor.' =>
@@ -8009,7 +8009,7 @@ sub Data {
             '',
         'Agent interface notification module to show the number of mentions.' =>
             '',
-        'Module to grant access to the mentioned agents of a ticket.' => '',
+        'Module to grant access to the mentioned agents of a ticket.' => 'Módulo para conceder acesso aos referidos agentes de um ticket.',
         'Mapping of non-standard time zones to official ones.' => '',
         'Start date (YYYYMMDD) of the range to use when parsing ICS files. The used CPAN module iCal::Parser needs this to be able to parse ICS files with events in a year before the current one. The end date of the range is automatically set to 10 years in the future from the time of parsing/execution.' =>
             '',
@@ -8173,7 +8173,7 @@ sub Data {
         'You will receive a notification each time a reminder time is reached for one of your appointments.' =>
             'Você receberá uma notificação toda vez que o tempo de lembrete para um de seus compromissos for atingido .',
         'Ticket email delivery failure notification' => 'Notificação de falha na entrega de ticket de e-mail',
-        'Mention notification' => '',
+        'Mention notification' => 'Notificação de menção',
 
         # JS File: var/httpd/htdocs/js/Core.AJAX.js
         'Error during AJAX communication. Status: %s, Error: %s' => 'Error durante comunicação AJAX. Status: %s, Erro: %s',
@@ -8204,7 +8204,7 @@ sub Data {
         'Deleting the field and its data. This may take a while...' => 'Delindo o campo e seus dados.  Isto pode levar um tempo…',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.GenericAgent.js
-        'Remove this dynamic field' => '',
+        'Remove this dynamic field' => 'Remover este campo dinâmico',
         'Remove selection' => 'Remover tradução',
         'Do you really want to delete this generic agent job?' => '',
         'Delete this Event Trigger' => 'Excluir este disparador de evento',
@@ -8315,7 +8315,7 @@ sub Data {
         'Customer interface does not support articles not visible for customers.' =>
             'A interface de cliente não permite artigos que não estejam visíveis ao cliente.',
         'Sorry, the only existing parameter can\'t be removed.' => 'Desculpe, o único parâmetro existente não pode ser removido.',
-        'Are you sure you want to overwrite the config parameters?' => '',
+        'Are you sure you want to overwrite the config parameters?' => 'Tem certeza que deseja sobrescrever os parâmetros de configuração?',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SMIME.js
         'Do you really want to delete this certificate?' => 'Você realmente quer excluir este certificado?',
@@ -8814,9 +8814,9 @@ Obrigado pela ajuda!
         'Customer User Information Center search.' => 'Pesquisa do Centro de Informações do Usuário Cliente.',
         'Customer User Information Center.' => 'Centro de Informações do Usuário Cliente.',
         'Customer User-Customer Relations' => '',
-        'Customer preferences.' => '',
-        'Customer ticket overview' => '',
-        'Customer ticket search.' => '',
+        'Customer preferences.' => 'Preferências do cliente.',
+        'Customer ticket overview' => 'Visão geral de chamados do cliente',
+        'Customer ticket search.' => 'Busca de Chamados do Cliente',
         'Customer ticket zoom' => '',
         'Customer user search' => 'Busca de usuário cliente',
         'CustomerID search' => '',
@@ -8923,13 +8923,13 @@ Obrigado pela ajuda!
         'German' => 'Alemão',
         'Gives customer users group based access to tickets from customer users of the same customer (ticket CustomerID is a CustomerID of the customer user).' =>
             'Permito o acesso baseado em grupos para usuários clientes a tickets de usuários clientes do mesmo cliente (ID de Cliente de ticjet é um ID de Cliente do usuário cliente).',
-        'Global Search Module.' => '',
+        'Global Search Module.' => 'Módulo de Busca Global',
         'Go to dashboard!' => 'Vá para o Painel de Controle',
         'Good PGP signature.' => '',
         'Google Authenticator' => 'Autenticador Google',
         'Graph: Bar Chart' => 'Gráfico de Barras',
         'Graph: Line Chart' => 'Gráfico de Linhas',
-        'Graph: Stacked Area Chart' => '',
+        'Graph: Stacked Area Chart' => 'Gráfico de área empilhada',
         'Greek' => 'Grego',
         'Hebrew' => 'Hebreu',
         'High Contrast' => 'Alto Contraste',
@@ -8947,7 +8947,7 @@ Obrigado pela ajuda!
         'Inline' => '',
         'Input' => 'Entrada',
         'Interface language' => 'Linguagem da Interface',
-        'Internal' => '',
+        'Internal' => 'Interno',
         'Internal communication channel.' => 'Canal de comunicação interna.',
         'International Workers\' Day' => 'Dia Internacional do Trabalho',
         'It was not possible to check the PGP signature, this may be caused by a missing public key or an unsupported algorithm.' =>
@@ -8959,7 +8959,7 @@ Obrigado pela ajuda!
         'Korean' => 'Coreano',
         'Language' => 'Idioma',
         'Large' => 'Grande',
-        'Last Mentions' => '',
+        'Last Mentions' => 'Últimas Menções',
         'Last Screen Overview' => 'Visão Geral da Última Tela',
         'Last customer subject' => 'Último assunto de cliente',
         'Last view - limit' => '',
@@ -9000,7 +9000,7 @@ Obrigado pela ajuda!
         'Mail Accounts' => 'Contas de E-mail',
         'Malay' => 'Malásio',
         'Manage Customer User-Customer Relations.' => '',
-        'Manage OAuth2 tokens and their configurations.' => '',
+        'Manage OAuth2 tokens and their configurations.' => 'Gerenciar tokens OAuth2 e suas configurações',
         'Manage OTRS Group cloud services.' => 'Gerenciar serviços de nuvem OTRS Group.',
         'Manage PGP keys for email encryption.' => 'Gerenciar chaves PGP para encriptação de e-mail.',
         'Manage POP3 or IMAP accounts to fetch email from.' => 'Gerenciar contas POP3 e IMAP para buscar e-mails.',
@@ -9009,7 +9009,7 @@ Obrigado pela ajuda!
         'Manage different calendars.' => 'Gerenciar calendário diferentes.',
         'Manage existing sessions.' => 'Gerenciar sessões existentes.',
         'Manage support data.' => 'Gerenciar dados de suporte.',
-        'Manage system files.' => '',
+        'Manage system files.' => 'Gerenciar arquivos do sistema.',
         'Manage tasks triggered by event or time based execution.' => 'Gerenciar tarefas disparadas por evento ou com execução baseada em tempo.',
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Marque como Spam',
@@ -9017,13 +9017,13 @@ Obrigado pela ajuda!
         'Mattermost Username' => '',
         'Max. number of articles per page in TicketZoom' => '',
         'Medium' => 'Médio',
-        'Mentioned in article' => '',
-        'Mentioned in ticket' => '',
-        'Mentions.' => '',
+        'Mentioned in article' => 'Mencionado no artigo',
+        'Mentioned in ticket' => 'Mencionado no chamado',
+        'Mentions.' => 'Menções.',
         'Merge this ticket and all articles into another ticket' => 'Agrupar esse ticket e todos artigos com um outro ticket',
         'Merged Ticket (%s/%s) to (%s/%s).' => 'Ticket Agrupado (%s/%s) com (%s/%s).',
         'Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>.' => 'Chamado <OTRS_TICKET> agrupado com <OTRS_MERGE_TO_TICKET>.',
-        'Minute' => '',
+        'Minute' => 'Minuto',
         'Miscellaneous' => 'Outros',
         'Module to filter and manipulate incoming messages. Get a 4 digit number to ticket free text, use regex in Match e. g. From => \'(.+?)@.+?\', and use () as [***] in Set =>.' =>
             '',
@@ -9031,7 +9031,7 @@ Obrigado pela ajuda!
         'My Queues' => 'Minhas Filas',
         'My Services' => 'Meus Serviços',
         'My Tickets.' => 'Meus Chamados.',
-        'My last changed tickets' => '',
+        'My last changed tickets' => 'Meus últimos chamados alterados',
         'NameX' => 'NomeX',
         'New Ticket' => 'Novo Chamado',
         'New Tickets' => 'Chamados Novos',
@@ -9039,7 +9039,7 @@ Obrigado pela ajuda!
         'New Year\'s Day' => 'Ano Novo',
         'New Year\'s Eve' => 'Véspera de Ano Novo',
         'New process ticket' => 'Novo chamado via processo',
-        'News' => '',
+        'News' => 'Notícias',
         'News about OTRS releases!' => 'Notícias sobre lançamentos OTRS!',
         'No public key found.' => '',
         'No valid OpenPGP data found.' => '',
@@ -9050,8 +9050,8 @@ Obrigado pela ajuda!
         'Notified about solution time escalation.' => 'Notificado sobre escalonamento de tempo de solução.',
         'Notified about update time escalation.' => 'Notificado sobre tempo de escalonamento de atualização.',
         'Number of displayed tickets' => 'Número de Chamados Exibidos',
-        'OAuth2' => '',
-        'OAuth2 token' => '',
+        'OAuth2' => 'OAuth2',
+        'OAuth2 token' => 'Token OAuth2',
         'OTRS Group Services' => 'Serviços do Grupo OTRS',
         'Open an external link!' => 'Abra um link externo!',
         'Open tickets (customer user)' => 'Chamados abertos (usuário cliente)',
@@ -9175,7 +9175,7 @@ Obrigado pela ajuda!
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             'Mostra uma visão prévia da visão geral de ticket (CustomerInfo => 1 - também mostra Informação de Cliente, CustomerInfoMaxSize tamanho máximo, em caracteres, da Informação de Cliente).',
         'Shows information on how to start OTRS Daemon' => 'Mostra informações de como inciar o Daemon OTRS',
-        'Shows last mention of tickets.' => '',
+        'Shows last mention of tickets.' => 'Mostrar últimas menções do chamado.',
         'Signature data.' => '',
         'Simple' => 'Simples',
         'Skin' => 'Tema',
@@ -9312,7 +9312,7 @@ Obrigado pela ajuda!
         'Your service selection of your preferred services. You also get notified about those services via email if enabled.' =>
             'Sua seleção de serviços favoritos. Você também é notificado sobre esses serviços via e-mail se ativado.',
         'Your username in Mattermost without the leading @' => '',
-        'Znuny.org - News' => '',
+        'Znuny.org - News' => 'Znuny.org - Notícias',
         'Zoom' => 'Detalhes',
         'all tickets' => '',
         'archived tickets' => '',
