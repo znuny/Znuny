@@ -1,4 +1,5 @@
 # 6.5.1 2023-??-??
+ - 2023-02-28 Fixed encoding of postmaster filter name in AdminPostMasterFilter.
  - 2023-02-28 Fixed encoding of profile name in AdminGenericAgent.
  - 2023-02-23 Fixed "Inline images in drafts will not display for more than 24 hours". [#309](https://github.com/znuny/Znuny/issues/309)
  - 2023-02-21 Fixed - Agent Calendar Import: Import of a calendar file does not work.
