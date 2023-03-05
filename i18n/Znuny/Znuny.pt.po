@@ -22,14 +22,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-07-01 07:05+0000\n"
-"PO-Revision-Date: 2018-09-20 13:03+0000\n"
-"Last-Translator: José Anjos <jose.anjos@regiaodeaveiro.pt>, 2019\n"
-"Language-Team: Portuguese (https://www.transifex.com/otrs/teams/23435/pt/)\n"
+"PO-Revision-Date: 2023-03-05 15:24+0000\n"
+"Last-Translator: Rúben Sardinha <ruben.sardinha@outlook.com>\n"
+"Language-Team: Portuguese <https://translations.znuny.org/projects/znuny/"
+"znuny/pt/>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Weblate 4.15.2\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "ACL Management"
@@ -15885,11 +15887,11 @@ msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.TicketBulk.js
 msgid " ...and %s more"
-msgstr ""
+msgstr " e %s mais"
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.TicketBulk.js
 msgid " ...show less"
-msgstr ""
+msgstr " ...mostrar menos"
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.TicketFormDraft.js
 msgid "Add new draft"
@@ -16169,6 +16171,17 @@ msgid ""
 "\n"
 " Your Helpdesk Team\n"
 msgstr ""
+"\n"
+"Caro Cliente,\n"
+"\n"
+"Infelizmente, não conseguimos detetar um número de ticket válido\n"
+"no título do seu email, por esse motivo, este email não foi processado.\n"
+"\n"
+"Por favor, crie um novo ticket através do painel de cliente.\n"
+"\n"
+"Obrigado pela sua ajuda!\n"
+"\n"
+"A sua equipa de Helpdesk\n"
 
 #. SysConfig
 msgid " (work units)"
@@ -25700,4 +25713,3 @@ msgstr ""
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
 msgid "Files"
 msgstr ""
-
