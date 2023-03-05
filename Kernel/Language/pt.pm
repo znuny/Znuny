@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.303157216494845;
+    $Self->{Completeness}        = 0.303640463917526;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8454,8 +8454,8 @@ sub Data {
         'Do you really want to continue?' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketBulk.js
-        ' ...and %s more' => '',
-        ' ...show less' => '',
+        ' ...and %s more' => ' e %s mais',
+        ' ...show less' => ' ...mostrar menos',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketFormDraft.js
         'Add new draft' => '',
@@ -8588,7 +8588,18 @@ Please create a new ticket via the customer panel.
 Thanks for your help!
 
  Your Helpdesk Team
-' => '',
+' => '
+Caro Cliente,
+
+Infelizmente, não conseguimos detetar um número de ticket válido
+no título do seu email, por esse motivo, este email não foi processado.
+
+Por favor, crie um novo ticket através do painel de cliente.
+
+Obrigado pela sua ajuda!
+
+A sua equipa de Helpdesk
+',
         ' (work units)' => ' (unidades de trabalho)',
         ' 2 minutes' => ' 2 minutos',
         ' 5 minutes' => ' 5 minutos',
