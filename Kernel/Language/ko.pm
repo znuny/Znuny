@@ -3916,7 +3916,7 @@ sub Data {
         'Customer user of the ticket' => '티켓의 고객 사용자',
         'All recipients of the first article' => '첫 번째 기사의 모든 수신자',
         'All recipients of the last article' => '마지막 기사의 모든 수신자',
-        'All users who are mentioned in a ticket' => '',
+        'All agents who are mentioned in the ticket' => '',
         'Invisible to customer' => '',
         'Visible to customer' => '',
 

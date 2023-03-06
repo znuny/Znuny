@@ -3922,7 +3922,7 @@ sub Data {
         'Customer user of the ticket' => 'A jegy ügyfél-felhasználója',
         'All recipients of the first article' => 'Az első bejegyzés összes címzettje',
         'All recipients of the last article' => 'Az utolsó bejegyzés összes címzettje',
-        'All users who are mentioned in a ticket' => '',
+        'All agents who are mentioned in the ticket' => '',
         'Invisible to customer' => 'Láthatatlan az ügyfélnek',
         'Visible to customer' => 'Látható az ügyfélnek',
 

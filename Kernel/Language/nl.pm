@@ -3922,7 +3922,7 @@ sub Data {
         'Customer user of the ticket' => 'Klantgebruiker van het ticket',
         'All recipients of the first article' => 'Alle ontvangers van het eerste artikel',
         'All recipients of the last article' => 'Alle ontvangers van het laatste artikel',
-        'All users who are mentioned in a ticket' => '',
+        'All agents who are mentioned in the ticket' => '',
         'Invisible to customer' => 'Onzichtbaar voor klant',
         'Visible to customer' => 'Zichtbaar voor klant',
 

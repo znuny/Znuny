@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.642557989690722;
+    $Self->{Completeness}        = 0.642396907216495;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3921,7 +3921,7 @@ sub Data {
         'Customer user of the ticket' => 'Użytkownik klienta w tym zgłoszeniu',
         'All recipients of the first article' => 'Wszyscy adresaci pierwszej wiadomości',
         'All recipients of the last article' => 'Wszyscy adresaci ostatniej wiadomości',
-        'All users who are mentioned in a ticket' => 'Wszyscy użytkownicy wspomniani w zgłoszeniu',
+        'All agents who are mentioned in the ticket' => '',
         'Invisible to customer' => '',
         'Visible to customer' => '',
 

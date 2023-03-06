@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-02-13 15:29+0000\n"
+"POT-Creation-Date: 2023-03-01 09:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -8186,10 +8186,6 @@ msgstr ""
 msgid "NoteToTicket invalid."
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
-msgid "Invalid time!"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid "No ticket data found."
 msgstr ""
@@ -10030,6 +10026,10 @@ msgstr ""
 msgid "Counter"
 msgstr ""
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Ticket/TimeUnits.tt
+msgid "Invalid time!"
+msgstr ""
+
 #. TT Template: Kernel/Output/HTML/Templates/Standard/Warning.tt
 msgid "Go back to the previous page"
 msgstr ""
@@ -11343,7 +11343,7 @@ msgid "All recipients of the last article"
 msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminNotificationEvent.pm
-msgid "All users who are mentioned in a ticket"
+msgid "All agents who are mentioned in the ticket"
 msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminNotificationEvent.pm

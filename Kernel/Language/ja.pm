@@ -3923,7 +3923,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Customer user of the ticket' => '',
         'All recipients of the first article' => '最初の記事の全ての受信者',
         'All recipients of the last article' => '最後の記事の全ての受信者',
-        'All users who are mentioned in a ticket' => '',
+        'All agents who are mentioned in the ticket' => '',
         'Invisible to customer' => '',
         'Visible to customer' => '',
 

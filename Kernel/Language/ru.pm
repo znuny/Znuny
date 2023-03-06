@@ -3928,7 +3928,7 @@ sub Data {
         'Customer user of the ticket' => 'Клиент заявки',
         'All recipients of the first article' => 'Все получатели первой заметки',
         'All recipients of the last article' => 'Все получатели последней заметки',
-        'All users who are mentioned in a ticket' => '',
+        'All agents who are mentioned in the ticket' => '',
         'Invisible to customer' => '',
         'Visible to customer' => '',
 

@@ -3916,7 +3916,7 @@ sub Data {
         'Customer user of the ticket' => 'Клијент корисник тикета',
         'All recipients of the first article' => 'Сви примаоци првог чланка',
         'All recipients of the last article' => 'Сви примаоци последњег чланка',
-        'All users who are mentioned in a ticket' => '',
+        'All agents who are mentioned in the ticket' => '',
         'Invisible to customer' => 'Невидљиво клијенту',
         'Visible to customer' => 'Видљиво клијенту',
 

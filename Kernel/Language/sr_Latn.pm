@@ -3922,7 +3922,7 @@ sub Data {
         'Customer user of the ticket' => 'Klijent korisnik tiketa',
         'All recipients of the first article' => 'Svi primaoci prvog članka',
         'All recipients of the last article' => 'Svi primaoci poslednjeg članka',
-        'All users who are mentioned in a ticket' => '',
+        'All agents who are mentioned in the ticket' => '',
         'Invisible to customer' => 'Nevidljivo klijentu',
         'Visible to customer' => 'Vidljivo klijentu',
 

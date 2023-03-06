@@ -25168,10 +25168,6 @@ msgstr ""
 msgid "Mentions"
 msgstr ""
 
-#. Perl Module: Kernel/Modules/AdminNotificationEvent.pm
-msgid "All users who are mentioned in a ticket"
-msgstr ""
-
 #. Perl Module: Kernel/Modules/AgentTicketMentionView.pm
 msgid "New mention"
 msgstr ""
@@ -25730,5 +25726,9 @@ msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
 msgid "Files"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminNotificationEvent.pm
+msgid "All agents who are mentioned in the ticket"
 msgstr ""
 

@@ -25208,10 +25208,6 @@ msgstr "Erwähnung entfernen"
 msgid "Mentions"
 msgstr "Erwähnungen"
 
-#. Perl Module: Kernel/Modules/AdminNotificationEvent.pm
-msgid "All users who are mentioned in a ticket"
-msgstr "Alle Benutzer, die in einem Ticket erwähnt werden."
-
 #. Perl Module: Kernel/Modules/AgentTicketMentionView.pm
 msgid "New mention"
 msgstr "Neue Erwähnung"
@@ -25779,4 +25775,8 @@ msgstr "Die folgenden JavaScript Dateien werden merfach geladen:"
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
 msgid "Files"
 msgstr "Dateien"
+
+#. Perl Module: Kernel/Modules/AdminNotificationEvent.pm
+msgid "All agents who are mentioned in the ticket"
+msgstr "Alle Agenten, die in dem Ticket erwähnt werden."
 

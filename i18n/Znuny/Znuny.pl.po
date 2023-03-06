@@ -25138,10 +25138,6 @@ msgstr "Usuń wzmiankę"
 msgid "Mentions"
 msgstr "Wzmianki"
 
-#. Perl Module: Kernel/Modules/AdminNotificationEvent.pm
-msgid "All users who are mentioned in a ticket"
-msgstr "Wszyscy użytkownicy wspomniani w zgłoszeniu"
-
 #. Perl Module: Kernel/Modules/AgentTicketMentionView.pm
 msgid "New mention"
 msgstr "Nowa wzmianka"
@@ -25700,5 +25696,9 @@ msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
 msgid "Files"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminNotificationEvent.pm
+msgid "All agents who are mentioned in the ticket"
 msgstr ""
 

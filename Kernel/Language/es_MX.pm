@@ -3916,7 +3916,7 @@ sub Data {
         'Customer user of the ticket' => 'Usuario del cliente del ticket',
         'All recipients of the first article' => 'Todos los destinatarios del primer artículo',
         'All recipients of the last article' => 'Todos los destinatarios del último artículo',
-        'All users who are mentioned in a ticket' => '',
+        'All agents who are mentioned in the ticket' => '',
         'Invisible to customer' => 'Invisible para el cliente',
         'Visible to customer' => 'Visible para el cliente',
 
