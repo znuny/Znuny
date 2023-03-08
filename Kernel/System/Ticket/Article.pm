@@ -746,7 +746,7 @@ Set the article flags to indicate if the article search index needs to be rebuil
 
     my $Success = $ArticleObject->ArticleSearchIndexRebuildFlagSet(
         ArticleIDs => [ 123, 234, 345 ]   # (Either 'ArticleIDs' or 'All' must be provided) The ArticleIDs to be updated.
-        All        => 1                   # (Either 'ArticleIDs' or 'All' must be provided) Set all articles to $Value. Default: 0,
+        All        => 1,                  # (Either 'ArticleIDs' or 'All' must be provided) Set all articles to $Value. Default: 0,
         Value      => 1, # 0/1 default 0
     );
 

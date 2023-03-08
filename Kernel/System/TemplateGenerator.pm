@@ -358,7 +358,7 @@ sub Sender {
 generate template
 
     my $Template = $TemplateGeneratorObject->Template(
-        TemplateID => 123
+        TemplateID => 123,
         TicketID   => 123,                  # Optional
         Data       => $ArticleHashRef,      # Optional
         UserID     => 123,
@@ -592,7 +592,7 @@ generate attributes
     my %Attributes = $TemplateGeneratorObject->Attributes(
         TicketID   => 123,
         ArticleID  => 123,
-        ResponseID => 123
+        ResponseID => 123,
         UserID     => 123,
         Action     => 'Forward', # Possible values are Reply and Forward, Reply is default.
     );

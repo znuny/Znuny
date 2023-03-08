@@ -84,7 +84,7 @@ Runs TransitionAction ArticleSend.
             Body        => 'the message text',                                     # required
             InReplyTo   => '<asdasdasd.12@example.com>',                           # not required but useful
             References  => '<asdasdasd.1@example.com> <asdasdasd.12@example.com>', # not required but useful
-            Charset     => 'iso-8859-15'
+            Charset     => 'iso-8859-15',
             MimeType    => 'text/plain',
             Loop        => 0, # 1|0 used for bulk emails
             HistoryType    => 'OwnerUpdate',                                       # Move|AddNote|PriorityUpdate|WebRequestCustomer|...

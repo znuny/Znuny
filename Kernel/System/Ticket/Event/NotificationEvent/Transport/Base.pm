@@ -38,7 +38,7 @@ send a notification using an specified transport
             UserLogin     => 'some login',
             UserTitle     => 'some title',
             UserFirstname => 'some first name',
-            UserLastname  => 'some last name'.
+            UserLastname  => 'some last name',
             # ...
         },
         Event                 => $Param{Event},
