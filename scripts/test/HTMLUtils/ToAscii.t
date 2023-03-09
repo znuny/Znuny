@@ -25,13 +25,13 @@ my @Tests = (
         Name   => 'ToAscii - simple'
     },
     {
-        Input  => '<b>Some Text</b><br/><a href="http://example.com">Some URL</a>',
+        Input => '<b>Some Text</b><br/><a href="http://example.com<script>alert(\'JavaScript\')</script>">Some URL</a>',
         Result => 'Some Text
 [1]Some URL
 
 [1] http://example.com
 ',
-        Name => 'ToAscii - simple'
+        Name => 'ToAscii - simple. JavaScript in href will be removed.'
     },
     {
         Input  => '<b>Some Text</b><br/>More Text',
