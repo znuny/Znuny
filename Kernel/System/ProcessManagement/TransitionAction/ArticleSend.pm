@@ -160,12 +160,11 @@ sub Run {
     # get from address for the mail
     $Param{Config}->{From} = $Self->FromGet(%Param);
 
-    # check for selected Attachments
-    if ( $Param{Config}->{Attachments} eq '1' ) {
+    # attachments
+    if ( $Param{Config}->{AttachmentsReuse} ) {
         $Param{Config}->{Attachment} = $Self->_GetAttachments(%Param);
     }
 
-    # get attachments for the mail
     if ( $Param{Config}->{Attachments} || $Param{Config}->{AttachmentIDs} ) {
         my @AttachmentIDs = split /\s*,\s*/, ( $Param{Config}->{AttachmentIDs} || '' );
 

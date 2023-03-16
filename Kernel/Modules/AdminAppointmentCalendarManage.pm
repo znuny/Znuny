@@ -42,7 +42,8 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $ParamObject     = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
 
     # get names of all parameters
     my @ParamNames = $ParamObject->GetParamNames();
@@ -64,7 +65,7 @@ sub Run {
             my @SafeParamArray;
             for my $Value (@ParamArray) {
                 if ( defined $Value ) {
-                    my %SafeValue = $Kernel::OM->Get('Kernel::System::HTMLUtils')->Safety(
+                    my %SafeValue = $HTMLUtilsObject->Safety(
                         String       => $Value,
                         NoApplet     => 1,
                         NoObject     => 1,
@@ -87,20 +88,20 @@ sub Run {
         }
 
         $GetParam{$Key} = $ParamObject->GetParam( Param => $Key );
-
-        my %SafeGetParam = $Kernel::OM->Get('Kernel::System::HTMLUtils')->Safety(
-            String       => $GetParam{$Key},
-            NoApplet     => 1,
-            NoObject     => 1,
-            NoEmbed      => 1,
-            NoSVG        => 1,
-            NoImg        => 1,
-            NoIntSrcLoad => 1,
-            NoExtSrcLoad => 1,
-            NoJavaScript => 1,
-        );
-
-        $GetParam{$Key} = $SafeGetParam{String};
+        if ( !ref $GetParam{$Key} ) {
+            my %SafeGetParam = $HTMLUtilsObject->Safety(
+                String       => $GetParam{$Key},
+                NoApplet     => 1,
+                NoObject     => 1,
+                NoEmbed      => 1,
+                NoSVG        => 1,
+                NoImg        => 1,
+                NoIntSrcLoad => 1,
+                NoExtSrcLoad => 1,
+                NoJavaScript => 1,
+            );
+            $GetParam{$Key} = $SafeGetParam{String};
+        }
     }
 
     my $LayoutObject   = $Kernel::OM->Get('Kernel::Output::HTML::Layout');

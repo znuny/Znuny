@@ -1,10 +1,10 @@
-<a href="https://www.znuny.org"><img align="center" src="https://github.com/znuny/Znuny/blob/rel-6_4/var/httpd/htdocs/skins/Agent/default/img/logo.png"></a>
+<a href="https://www.znuny.org"><img align="center" src="https://github.com/znuny/Znuny/blob/rel-6_5/var/httpd/htdocs/skins/Agent/default/img/logo.png"></a>
 
 <p align="center">
     <a href="https://download.znuny.org/releases/znuny-latest.tar.gz"><img src="https://img.shields.io/github/v/tag/znuny/Znuny?sort=semver&label=latest%20release&color=ff9b00"></a>
     <br>
     <a href="https://github.com/znuny/Znuny/actions"><img src="https://img.shields.io/github/actions/workflow/status/znuny/Znuny/ci.yaml?label=CI"></a>
-    <a href="https://github.com/znuny/Znuny/actions"><img src="https://badge.proxy.znuny.com/Znuny/rel-6_4"></a>
+    <a href="https://github.com/znuny/Znuny/actions"><img src="https://badge.proxy.znuny.com/Znuny/rel-6_5"></a>
     <a href="https://translations.znuny.org/engage/znuny/"><img src="https://translations.znuny.org/widgets/znuny/-/znuny/svg-badge.svg" alt="Translation status"></a>
     <br>
     <a href="https://github.com/znuny/Znuny/issues"><img src="https://img.shields.io/github/issues-raw/znuny/Znuny?"></a>

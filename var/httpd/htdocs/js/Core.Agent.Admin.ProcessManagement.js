@@ -1405,6 +1405,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                 $('.ArticleContainer').addClass('Hidden');
                 $('.ArticleContainer').prev('label').css('display', 'none');
 
+                $('#ArticleBodyContainer').addClass('Hidden');
+                $('#ArticleBodyContainer').prev('label').css('display', 'none');
+
                 $('#CommunicationChannelContainer').addClass('Hidden');
                 $('#CommunicationChannelContainer').prev('label').css('display', 'none');
 

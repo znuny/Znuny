@@ -1,13 +1,37 @@
-# 6.5.1 2023-??-??
+# 6.5.2 2023-??-??
+ - 2023-03-10 Fixed notification about empty subject for article drafts in AgentTicketCompose and AgentTicketEmailOutbound.
+
+# 6.5.1 2023-03-09
+ - 2023-02-28 Added options tickets-created-before-date and tickets-created-before-days to console command Admin::Article::StorageSwitch.
+ - 2023-02-28 Fixed encoding of postmaster filter name in AdminPostMasterFilter.
+ - 2023-02-28 Fixed encoding of profile name in AdminGenericAgent.
+ - 2023-02-23 Fixed "Inline images in drafts will not display for more than 24 hours". [#309](https://github.com/znuny/Znuny/issues/309)
+ - 2023-02-21 Fixed - Agent Calendar Import: Import of a calendar file does not work.
+ - 2023-02-20 Removed maxlength for field short description in ActivityDialog (#335). Thanks to Sector Nord AG (@paulfolkers). [PR#335](https://github.com/znuny/Znuny/pull/335)
+ - 2023-02-17 Moved code of ITSMIncidentProblemManagement to Znuny Framework that will only be executed if ITSM actually is installed.
+ - 2023-02-17 Removed CPAN::Audit as a required Perl module.
+ - 2023-02-16 Integrated package Znuny-NoteToLinkedTicket.
+ - 2023-02-13 Added support for smart tags to process activity dialog article field.
+ - 2023-01-25 Added Dashboard element filter: My owned tickets.
+ - 2023-01-23 Added new event module to store customer company data in ticket dynamic fields: Ticket::EventModulePost DynamicFieldFromCustomerCompany.
+ - 2023-01-23 Sort screens in AdminDynamicFieldScreenConfiguration by values (#327). Thanks to Emin Yazi (@eyazi), Efflux. [PR#327](https://github.com/znuny/Znuny/pull/327)
+ - 2023-01-20 Added SysConfig setting to configure format tags in rich text editor. Thanks to Daniel Sprenger (@sprengerdaniel). [PR#334](https://github.com/znuny/Znuny/pull/334)
+ - 2023-01-20 Fixed "NoPermission" screen to use "CustomerNoPermission" for ACL checking. Thanks to Sector Nord AG (@paulfolkers). [PR#333](https://github.com/znuny/Znuny/pull/333)
+ - 2023-01-20 Fixed reloading of the toolbar modules. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#317](https://github.com/znuny/Znuny/pull/317)
+ - 2023-01-20 Fixed hidden TicketOverview filters for Medium and Preview. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#301](https://github.com/znuny/Znuny/pull/301)
+ - 2023-01-20 Fixed uninitialized value warning in AdminSystemMaintenance. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#298](https://github.com/znuny/Znuny/pull/298)
+ - 2023-01-12 Fixed use of unavailable CKEditor autocomplete plugin when editor is in "CodeMirror" mode (e.g. web service XSLT configuration dialog).
+ - 2023-01-10 JavaScript code will now be removed from href attributes in function Kernel::System::HTMLUtils::ToAscii. Thanks for hints to Tim Püttmanns, maxence.
  - 2023-01-10 Sector Nord AG: Fixed popup description long were cut off in Customer Interface. Thanks to Sector Nord AG (@jsinagowitz). [PR#331](https://github.com/znuny/Znuny/pull/331)
  - 2023-01-09 Integrated package Znuny4OTRS-UserMaxArticlesPerPage.
  - 2023-01-06 Fixed 'ACL misbehaviour in processes' - ActivityEntityID is missing in AgentTicketProcess.pm. [#316](https://github.com/znuny/Znuny/issues/316)
+ - 2023-01-05 Added missing group check to Kernel/System/Auth/Sync/LDAP.pm.
  - 2023-01-05 Fixed JavaScript error in edit-mode in AdminACL.
- - 2023-01-05 Changed JS alert() function to Core.UI.Dialog.ShowAlert().
- - 2023-01-04 Show PackageRequired- and ModuleRequired-information while package installation & update.
+ - 2023-01-05 Changed JS alert function to Core.UI.Dialog.ShowAlert.
+ - 2023-01-04 Show PackageRequired and ModuleRequired information while package installation and update.
  - 2023-01-04 Reworked information of LastViews.
  - 2023-01-03 Process activity dialog article fields with subject and body can now be pre-filled. The Body also support RichtText. Thanks to Berner Fachhochschule (bfh.ch) for sponsoring this feature.
- - 2022-12-29 Reenabled TicketID for reporting (Dynamic/TicketList).
+ - 2022-12-29 Re-enabled TicketID for reporting (Dynamic/TicketList).
  - 2022-12-19 Added check for maximum filename length to file uploads.
  - 2022-12-16 Added new function Kernel::System::Web::Request::GetParams() to get request parameters.
  - 2022-12-13 Fixed SQL injection in TicketSearch.pm (CVE-2022-4427). Thanks for hints to Tim Püttmanns, maxence.
@@ -18,6 +42,7 @@
  - 2022-11-25 Moved code of ITSMCore to Znuny Framework that will only be executed if ITSM actually is installed.
  - 2022-11-24 Fixed handling of empty result for frontend autocompletion of dynamic field type WebserviceMultiselect.
  - 2022-11-24 SOAP::Lite: Data of elements with attribute 'xsi:type' now will be returned as a hash or array instead of an arbitrary object that Znuny cannot handle.
+ - 2022-09-20 Added config level check to SysConfig admin dialog. Thanks for hints to Tim Püttmanns, maxence.
  - 2022-09-16 Auto responses now will not be sent if the recipient would be a system address.
 
 # 6.4.5 2022-12-20
@@ -36,7 +61,7 @@
  - 2022-10-12 S/MIME certificates will now be reindexed during Znuny migration.
  - 2022-10-12 Increased size of column "subject" of table "smime_keys".
  - 2022-10-11 Added input field for OAuth2 token scope to admin dialog.
- - 2022-10-07 Integrate DashboardMyLastChangedTickets. Thanks to Renée Bäcker (@reneeb). [PR#177](https://github.com/znuny/Znuny/pull/177)
+ - 2022-10-07 Integrated DashboardMyLastChangedTickets. Thanks to Renée Bäcker (@reneeb). [PR#177](https://github.com/znuny/Znuny/pull/177)
  - 2022-10-07 Renamed changed settings from FrontendRichText::Path to Frontend::RichText::Path. Thanks to Emin Yazi (@eyazi), Efflux. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#304](https://github.com/znuny/Znuny/pull/304)
  - 2022-10-05 Improved usability - AgentTicketBulk - Set DynamicField_NAMEUsed checkbox to true if it is set before or if dynamic field is mandatory.
  - 2022-09-29 Fixed bug - hour 0 is not possible in the default settings for TimeWorkingHours. Thanks to Sector Nord AG (@LuBroering - Lukas Bröring). [PR#296](https://github.com/znuny/Znuny/pull/296)

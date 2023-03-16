@@ -12,6 +12,8 @@ package Kernel::Modules::AdminGenericAgent;
 use strict;
 use warnings;
 
+use URI::Escape;
+
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language qw(Translatable);
 
@@ -302,6 +304,7 @@ sub Run {
                     )
                 {
                     my $Profile = $Self->{Profile} || '';
+                    $Profile = uri_escape($Profile);    # See internal issue #477.
                     return $LayoutObject->Redirect( OP => "Action=$Self->{Action};Subaction=Update;Profile=$Profile" );
                 }
                 else {

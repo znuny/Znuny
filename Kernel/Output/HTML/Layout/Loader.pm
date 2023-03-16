@@ -199,6 +199,7 @@ sub LoaderCreateAgentJSCalls {
     my $JSHome   = $ConfigObject->Get('Home') . '/var/httpd/htdocs/js';
     my $DoMinify = $ConfigObject->Get('Loader::Enabled::JS');
 
+    my $ViewFileList = {};
     {
         my @FileList;
 
@@ -208,7 +209,12 @@ sub LoaderCreateAgentJSCalls {
         KEY:
         for my $Key ( sort keys %{$CommonJSList} ) {
             next KEY if $Key eq '100-CKEditor' && !$ConfigObject->Get('Frontend::RichText');
-            push @FileList, @{ $CommonJSList->{$Key} };
+            FILE:
+            for my $File ( @{ $CommonJSList->{$Key} } ) {
+                next FILE if $ViewFileList->{$File};
+                push @FileList, $File;
+                $ViewFileList->{$File} = 1;
+            }
         }
 
         # get toolbar module js
@@ -240,7 +246,12 @@ sub LoaderCreateAgentJSCalls {
         MODULE:
         for my $Module ( sort keys %{$Setting} ) {
             next MODULE if ref $Setting->{$Module}->{JavaScript} ne 'ARRAY';
-            @FileList = ( @FileList, @{ $Setting->{$Module}->{JavaScript} || [] } );
+            FILE:
+            for my $File ( @{ $Setting->{$Module}->{JavaScript} } ) {
+                next FILE if $ViewFileList->{$File};
+                push @FileList, $File;
+                $ViewFileList->{$File} = 1;
+            }
         }
 
         $Self->_HandleJSList(
@@ -695,6 +706,7 @@ sub LoaderCreateCustomerJSCalls {
     my $JSHome   = $ConfigObject->Get('Home') . '/var/httpd/htdocs/js';
     my $DoMinify = $ConfigObject->Get('Loader::Enabled::JS');
 
+    my $ViewFileList = {};
     {
         my $CommonJSList = $ConfigObject->Get('Loader::Customer::CommonJS');
 
@@ -703,7 +715,12 @@ sub LoaderCreateCustomerJSCalls {
         KEY:
         for my $Key ( sort keys %{$CommonJSList} ) {
             next KEY if $Key eq '100-CKEditor' && !$ConfigObject->Get('Frontend::RichText');
-            push @FileList, @{ $CommonJSList->{$Key} };
+            FILE:
+            for my $File ( @{ $CommonJSList->{$Key} } ) {
+                next FILE if $ViewFileList->{$File};
+                push @FileList, $File;
+                $ViewFileList->{$File} = 1;
+            }
         }
 
         $Self->_HandleJSList(
@@ -727,7 +744,12 @@ sub LoaderCreateCustomerJSCalls {
         MODULE:
         for my $Module ( sort keys %{$Setting} ) {
             next MODULE if ref $Setting->{$Module}->{JavaScript} ne 'ARRAY';
-            @FileList = ( @FileList, @{ $Setting->{$Module}->{JavaScript} || [] } );
+            FILE:
+            for my $File ( @{ $Setting->{$Module}->{JavaScript} } ) {
+                next FILE if $ViewFileList->{$File};
+                push @FileList, $File;
+                $ViewFileList->{$File} = 1;
+            }
         }
 
         $Self->_HandleJSList(
@@ -859,6 +881,7 @@ sub _HandleJSList {
             },
         );
     }
+
     return 1;
 }
 

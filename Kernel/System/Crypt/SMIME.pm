@@ -2898,7 +2898,7 @@ sub _FetchAttributesFromCert {
         # look for every attribute by filter
         FILTER:
         for my $Filter ( sort keys %Filters ) {
-            next FILTER if $Line !~ m{ \A $Filters{$Filter} \z }xms;
+            next FILTER if $Line !~ m{ \A $Filters{$Filter} \z }xmsi;
             my $Match = $1 || '';
 
             # email filter is allowed to match multiple times for alternate names (SubjectAltName)
