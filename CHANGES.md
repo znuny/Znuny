@@ -1,4 +1,7 @@
-# 6.5.1 2023-??-??
+# 6.5.2 2023-??-??
+ - 2023-03-10 Fixed notification about empty subject for article drafts in AgentTicketCompose and AgentTicketEmailOutbound.
+
+# 6.5.1 2023-03-09
  - 2023-02-28 Added options tickets-created-before-date and tickets-created-before-days to console command Admin::Article::StorageSwitch.
  - 2023-02-28 Fixed encoding of postmaster filter name in AdminPostMasterFilter.
  - 2023-02-28 Fixed encoding of profile name in AdminGenericAgent.
@@ -18,6 +21,7 @@
  - 2023-01-20 Fixed hidden TicketOverview filters for Medium and Preview. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#301](https://github.com/znuny/Znuny/pull/301)
  - 2023-01-20 Fixed uninitialized value warning in AdminSystemMaintenance. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#298](https://github.com/znuny/Znuny/pull/298)
  - 2023-01-12 Fixed use of unavailable CKEditor autocomplete plugin when editor is in "CodeMirror" mode (e.g. web service XSLT configuration dialog).
+ - 2023-01-10 JavaScript code will now be removed from href attributes in function Kernel::System::HTMLUtils::ToAscii. Thanks for hints to Tim Püttmanns, maxence.
  - 2023-01-10 Sector Nord AG: Fixed popup description long were cut off in Customer Interface. Thanks to Sector Nord AG (@jsinagowitz). [PR#331](https://github.com/znuny/Znuny/pull/331)
  - 2023-01-09 Integrated package Znuny4OTRS-UserMaxArticlesPerPage.
  - 2023-01-06 Fixed 'ACL misbehaviour in processes' - ActivityEntityID is missing in AgentTicketProcess.pm. [#316](https://github.com/znuny/Znuny/issues/316)

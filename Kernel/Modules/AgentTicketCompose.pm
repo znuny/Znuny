@@ -893,12 +893,18 @@ sub Run {
 
             # When a draft is loaded, inform a user that article subject will be empty
             # if contains only the ticket hook (if nothing is modified).
-            if ( $Error{LoadedFormDraft} ) {
-                $Output .= $LayoutObject->Notify(
-                    Data => $LayoutObject->{LanguageObject}->Translate(
-                        'Article subject will be empty if the subject contains only the ticket hook!'
-                    ),
+            if ( $Error{LoadedFormDraft} && IsStringWithData( $GetParam{Subject} ) ) {
+                my $CleanedSubject = $TicketObject->TicketSubjectClean(
+                    TicketNumber => $Ticket{TicketNumber},
+                    Subject      => $GetParam{Subject},
                 );
+                if ( !IsStringWithData($CleanedSubject) ) {
+                    $Output .= $LayoutObject->Notify(
+                        Data => $LayoutObject->{LanguageObject}->Translate(
+                            'Article subject will be empty if the subject contains only the ticket hook!'
+                        ),
+                    );
+                }
             }
 
             $GetParam{StandardResponse} = $GetParam{Body};
