@@ -1115,8 +1115,8 @@ Sets the value of a dynamic field.
     my $Result = $CommonObject->SetDynamicFieldValue(
         Name      => 'some name',           # the name of the dynamic field
         Value     => 'some value',          # String or Integer or DateTime format
-        TicketID  => 123
-        ArticleID => 123
+        TicketID  => 123,
+        ArticleID => 123,
         UserID    => 123,
     );
 

@@ -534,7 +534,7 @@ Create or replace draft using data from param object and upload cache.
 Specified params can be overwritten if necessary.
 
     my $FormDraftID = $ParamObject->SaveFormDraft(
-        UserID         => 1
+        UserID         => 1,
         ObjectType     => 'Ticket',
         ObjectID       => 123,
         OverrideParams => {               # optional, can contain strings and array references

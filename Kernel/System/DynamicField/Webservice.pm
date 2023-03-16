@@ -340,12 +340,12 @@ Executes search in configured dynamic field web-service.
     my $Results = [
         {
             'Key'  => 'Znuny3',
-            'ID'   => 'Znuny3'
+            'ID'   => 'Znuny3',
             'Name' => 'Znuny3'
         },
         {
             'Key'  => 'Rocks4',
-            'ID'   => 'Rocks4'
+            'ID'   => 'Rocks4',
             'Name' => 'Rocks4'
         }
         # ...

@@ -239,7 +239,7 @@ Returns:
                 'DynamicField_test' => 'bcd',
             },
         ],
-        RawData     => '...' # original content of uploaded file
+        RawData     => '...', # original content of uploaded file
         CreatedTime => '...',
         CreatedBy   => 2,
         ChangeTime  => '...',
@@ -497,7 +497,7 @@ Returns:
                     'DynamicField_test' => 'bcd',
                 },
             ],
-            RawData     => '..' # original content of uploaded file
+            RawData     => '...', # original content of uploaded file
             CreatedTime => '...',
             CreatedBy   => 2,
             ChangeTime  => '...',
@@ -515,7 +515,7 @@ Returns:
                     'DynamicField_test' => 'bcd',
                 },
             ],
-            RawData     => '..' # original content of uploaded file
+            RawData     => '...' # original content of uploaded file
             CreatedTime => '...',
             CreatedBy   => 2,
             ChangeTime  => '...',

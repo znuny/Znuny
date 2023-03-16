@@ -132,7 +132,7 @@ returns:
 
     %SystemAddress = (
         ID         => 1,
-        Name       => 'info@example.com'
+        Name       => 'info@example.com',
         Realname   => 'Hotline',
         QueueID    => 123,
         Comment    => 'some comment',

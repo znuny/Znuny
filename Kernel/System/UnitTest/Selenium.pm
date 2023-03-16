@@ -490,7 +490,7 @@ Exactly one condition (JavaScript or WindowCount) must be specified.
     my $Success = $SeleniumObject->WaitFor(
         AlertPresent   => 1,                                 # Wait until an alert, confirm or prompt dialog is present
         Callback       => sub { ... }                        # Wait until function returns true
-        ElementExists  => 'xpath-selector'                   # Wait until an element is present
+        ElementExists  => 'xpath-selector',                  # Wait until an element is present
         ElementExists  => ['css-selector', 'css'],
         ElementMissing => 'xpath-selector',                  # Wait until an element is not present
         ElementMissing => ['css-selector', 'css'],

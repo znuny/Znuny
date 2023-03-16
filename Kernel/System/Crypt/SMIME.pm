@@ -677,7 +677,7 @@ Search for public and private certificates within files using indexed values.
 
     my @Result = $CryptObject->Search(
         Search => 'some text to search',
-        SearchType => 'e-mail/hash/filename/id' # Default lookup by e-mail
+        SearchType => 'e-mail/hash/filename/id', # Default lookup by e-mail
         IndexedSearch => 1 # Required if want to search via indexed attributes.
     );
 
@@ -730,7 +730,7 @@ Returns a list of certificates searching using indexable attributes.
 
     my @Result = $CryptObject->CertificateSearch(
         Search => $Search,
-        SearchType => 'e-mail/hash/filename/id/fingerprint' # Default lookup by e-mail
+        SearchType => 'e-mail/hash/filename/id/fingerprint', # Default lookup by e-mail
         Valid  => 1
     );
 
@@ -786,7 +786,7 @@ Looks for a given "Search" in physical certificates, not recommended for indexed
 
     my @Result = $CryptObject->CertificateFileSearch(
         Search       => 'some text to search',
-        Valid        => 1 # Optional, default doesn't check if valid.
+        Valid        => 1, # Optional, default doesn't check if valid.
         Certificates => $Certificates # Optional, list of certificates to check.
     );
 
@@ -2498,7 +2498,7 @@ depending on the current OpenSSL hash algorithm.
     a result could be:
 
     $Result = {
-        Success => 1                # or 0 if fails
+        Success => 1,               # or 0 if fails
         Details => $Details         # a readable string log of all activities and errors found
     };
 
