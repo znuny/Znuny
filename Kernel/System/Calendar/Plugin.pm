@@ -128,7 +128,7 @@ run given plugin function with all existing params.
         PluginKey      => 'TicketLink',
         PluginFunction => 'Search',
         PluginData     => {
-            UserID    => 1
+            UserID    => 1,
             Search    => 'SearchTerm',      # (required) Search string
                                             # or
             ObjectID  => $TicketID          # (required) Object ID

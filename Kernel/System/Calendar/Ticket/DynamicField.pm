@@ -97,7 +97,7 @@ set ticket dynamic field value to supplied time value.
 
     my $Success = $TicketDynamicFieldObject->SetTime(
         Type     => 'DynamicField_TestDate',
-        Value    => '2016-01-01 00:00:00'
+        Value    => '2016-01-01 00:00:00',
         TicketID => 1,
     );
 

@@ -81,13 +81,13 @@ Example to restrict ticket actions:
         OwnerID          => 123,                      # Optional
         NewOwnerID       => 123,                      # Optional, OwnerID or NewOwnerID can be
                                                       #   used and they both refers to OwnerID
-        Owner            => 'some user login'         # Optional
+        Owner            => 'some user login',        # Optional
 
         ResponsibleID    => 123,                      # Optional
         NewResponsibleID => 123,                      # Optional, ResponsibleID or NewResposibleID
                                                       #   can be used and they both refers to
                                                       #     ResponsibleID
-        Responsible      => 'some user login'         # Optional
+        Responsible      => 'some user login',        # Optional
 
         ReturnType     => 'Action',                   # To match Possible, PossibleAdd or
                                                       #   PossibleNot key in ACL
@@ -999,13 +999,13 @@ static ticket data stored in the DB) with the required data to use as a basis to
         OwnerID          => 123,                      # Optional
         NewOwnerID       => 123,                      # Optional, OwnerID or NewOwnerID can be
                                                       #   used and they both refers to OwnerID
-        Owner            => 'some user login'         # Optional
+        Owner            => 'some user login',        # Optional
 
         ResponsibleID    => 123,                      # Optional
         NewResponsibleID => 123,                      # Optional, ResponsibleID or NewResposibleID
                                                       #   can be used and they both refers to
                                                       #     ResponsibleID
-        Responsible      => 'some user login'         # Optional
+        Responsible      => 'some user login',        # Optional
 
         UserID         => 123,                        # UserID => 1 is not affected by this function
         CustomerUserID => 'customer login',           # UserID or CustomerUserID are mandatory

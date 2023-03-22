@@ -28,7 +28,7 @@ performs user or customer user authorization
 
     my ( $UserID, $UserType ) = $CommonObject->Auth(
         Data => {
-            SessionID         => 'AValidSessionIDValue'     # the ID of the user session
+            SessionID         => 'AValidSessionIDValue',    # the ID of the user session
             UserLogin         => 'Agent1',                  # optional, provide UserLogin or CustomerUserLogin
             # or
             CustomerUserLogin => 'Customer1',               # optional, provide UserLogin or CustomerUserLogin

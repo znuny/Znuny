@@ -300,7 +300,7 @@ Extracts the effective value from a XML parsed setting.
             ...
         },
         DefaultValue   => 'Product 5',      # (optional)
-        Class          => 'My class'        # (optional)
+        Class          => 'My class',       # (optional)
         Item           => [                 # (optional) XML parsed item
             {
                 'ValueType' => 'VacationDaysOneTime',

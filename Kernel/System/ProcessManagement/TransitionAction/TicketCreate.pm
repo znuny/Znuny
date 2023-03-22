@@ -103,10 +103,10 @@ Runs TransitionAction TicketCreate.
             %DataPayload,                                               # some parameters depending of each communication channel
 
             # article optional:
-            TimeUnit => 123
+            TimeUnit => 123,
 
             # Attachment optional:
-            Attachments => '1'                                          #  optional, 1|0
+            Attachments => '1',                                         #  optional, 1|0
 
             # other:
             DynamicField_NameX => $Value,

@@ -135,7 +135,7 @@ Extracts the effective value from a XML parsed setting.
         Name           => 'SettingName',
         EffectiveValue => 'YAML content', # (optional)
         DefaultValue   => 'YAML content', # (optional)
-        Class          => 'My class'          # (optional)
+        Class          => 'My class',         # (optional)
         Item           => [                   # (optional) XML parsed item
             {
                 'ValueType' => 'YAML',
