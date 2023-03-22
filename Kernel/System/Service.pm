@@ -228,7 +228,7 @@ return a list of services with the complete list of attributes for each service
             Name       => 'MyService',
             NameShort  => 'MyService',
             ValidID    => 1,
-            Comment    => 'Some Comment'
+            Comment    => 'Some Comment',
             CreateTime => '2011-02-08 15:08:00',
             ChangeTime => '2011-06-11 17:22:00',
             CreateBy   => 1,
@@ -248,7 +248,7 @@ return a list of services with the complete list of attributes for each service
             Name       => 'MyService::MySubService',
             NameShort  => 'MySubService',
             ValidID    => 1,
-            Comment    => 'Some Comment'
+            Comment    => 'Some Comment',
             CreateTime => '2011-02-08 15:08:00',
             ChangeTime => '2011-06-11 17:22:00',
             CreateBy   => 1,

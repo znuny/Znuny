@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.626416315959858;
+    $Self->{Completeness}        = 0.621778350515464;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -224,16 +224,6 @@ sub Data {
         'Message body' => 'Badan Pesan',
         'Add new notification language' => 'Tambahkan pemberitahuan bahasa baru',
         'Save Changes' => 'Simpan pengubahan',
-        'Tag Reference' => 'Tandakan referensi',
-        'Notifications are sent to an agent.' => '',
-        'You can use the following tags' => 'Anda dapat menggunakan tag berikut ini',
-        'To get the first 20 character of the appointment title.' => '',
-        'To get the appointment attribute' => '',
-        ' e. g.' => 'Misalnya',
-        'To get the calendar attribute' => '',
-        'Attributes of the recipient user for the notification' => 'Atribut dari pengguna penerima untuk pemberitahuan',
-        'Config options' => 'Pilihan konfigurasi',
-        'Example notification' => 'Contoh pemberitahuan',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEventTransportEmailSettings.tt
         'Additional recipient email addresses' => 'Penambahan penerima alamat surat',
@@ -273,20 +263,6 @@ sub Data {
         'Queues ↔ Auto Responses' => '',
         'Response' => 'Respon',
         'Auto response from' => 'Respon otomatis dari',
-        'Reference' => 'Referensi',
-        'To get the first 20 character of the subject.' => 'Untuk mendapatkan 20 karakter pertama dari subjek',
-        'To get the first 5 lines of the email.' => 'untuk mendapatkan 5 baris pertama dari email.',
-        'To get the name of the ticket\'s customer user (if given).' => 'Untuk mendapatkan nama dari tiket pengguna pelanggan (jika diberikan).',
-        'To get the article attribute' => 'Untuk mendapatkan atribut artikel',
-        'Options of the current customer user data' => 'Pilihan dari data pelanggan pengguna saat ini',
-        'Ticket owner options' => 'Pilihan pemilik tiket',
-        'Ticket responsible options' => 'Pilihan penanggung jawab tiket',
-        'Options of the current user who requested this action' => 'Pilihan dari pengguna saat ini yang meminta tindakan ini.',
-        'Options of the ticket data' => 'Pilihan dari data tiket',
-        'Options of ticket dynamic fields internal key values' => 'Pilihan dari nilai kunci internal bidang tiket dinamis',
-        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            'Pilihan nilai tampilan dari bidang dinamis tiket, berguna untuk bidang Dropdown dan Multiselect',
-        'Example response' => 'Contoh respon',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
         'Cloud Service Management' => 'Manajemen layanan cloud',
@@ -429,6 +405,7 @@ sub Data {
         'Toggle %s permission for %s' => 'Aktifkan izin %s untuk %s',
         'Customer Default Groups:' => 'Grup default pelanggan:',
         'No changes can be made to these groups.' => 'Tidak ada pengubahan yang dapat di buat kepada grup-grup ini',
+        'Reference' => 'Referensi',
         'ro' => 'ro',
         'Read only access to the ticket in this group/queue.' => 'Akses Read only kepada tiket yang berada di grup/antrian ini',
         'rw' => 'rw',
@@ -1440,24 +1417,6 @@ sub Data {
             'Beritahu pengguna hanya sekali per hari untuk menggunakan satu tiket transportasi yang telah dipilih.',
         'This field is required and must have less than 4000 characters.' =>
             '',
-        'Notifications are sent to an agent or a customer.' => 'Pemberitahuan telah dikirim ke agen atau pelanggan',
-        'To get the first 20 character of the subject (of the latest agent article).' =>
-            'Untuk mendapatkan 20 karakter pertama dari subyek (artikel agen terbaru)',
-        'To get the first 5 lines of the body (of the latest agent article).' =>
-            'Untuk mendapatkan garis 5 pertama dari isi (Artikel agen terbaru)',
-        'To get the first 20 character of the subject (of the latest customer article).' =>
-            'Untuk mendapatkan 20 karakter pertama dari subyek (Artikel pelanggan terbaru).',
-        'To get the first 5 lines of the body (of the latest customer article).' =>
-            'Untuk mendapatkan 5 baris pertama dari isi (Artikel pelanggan terbaru).',
-        'Attributes of the current customer user data' => 'Atribut pelanggan pengguna data saat ini',
-        'Attributes of the current ticket owner user data' => 'Atribut dari pemilik tiket pengguna data saat ini',
-        'Attributes of the current ticket responsible user data' => 'Atribut tiket yang bertanggungjawab untuk pengguna data saat ini',
-        'Attributes of the current agent user who requested this action' =>
-            'Atribut pengguna agen saat ini yang meminta tindakan ',
-        'Attributes of the ticket data' => 'Atribut data tiket',
-        'Ticket dynamic fields internal key values' => 'Bidang tiket yang dinamis untuk nilai kunci internal ',
-        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            'Bidang dinamis tiket yang menampilkan nilai, berguna untuk Dropdown dan Multiselecet',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => '',
@@ -2077,8 +2036,6 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Edit Salutation' => 'Ubah Salutasi',
         'Filter for Salutations' => '',
         'Filter for salutations' => '',
-        'e. g.' => 'Contoh',
-        'Example salutation' => 'Contoh salutasi',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => '',
@@ -2138,7 +2095,6 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Edit Signature' => 'Ubah tandatangan',
         'Filter for Signatures' => '',
         'Filter for signatures' => '',
-        'Example signature' => 'Contoh tandatangan',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
         'State Management' => 'Manajemen pilihan',
@@ -2310,18 +2266,6 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Delete this entry' => 'Hapuskan entri ini',
         'Do you really want to delete this template?' => 'Apakah Anda benar-benar ingin menghapus template ini?',
         'A standard template with this name already exists!' => 'Template standar dengan nama ini sudah ada!',
-        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'Create type templates only supports this smart tags' => 'Membuat jenis template hanya mendukung smart tag ini',
-        'Example template' => 'Contoh template',
-        'The current ticket state is' => 'Pilihan tiket saat ini adalah',
-        'Your email address is' => 'Alamat email anda adalah',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplateAttachment.tt
         'Manage Template-Attachment Relations' => '',
@@ -2581,6 +2525,7 @@ bin/otrs.Daemon.pl status\').',
         'Assigned to customer user' => '',
         'Accessible for customer user' => '',
         'My locked tickets' => 'Tiket saya terkunci',
+        'My Owned Tickets' => '',
         'My watched tickets' => 'Tiket saya menonton',
         'My responsibilities' => 'Tanggung jawab saya',
         'Tickets in My Queues' => 'Tiket di Antrian saya',
@@ -2827,6 +2772,13 @@ bin/otrs.Daemon.pl status\').',
         'New Queue' => 'Queue baru',
         'Move' => 'Pindah',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
+        'Add note to linked %s%s%s' => '',
+        'Note to linked Ticket' => '',
+        'LinkList invalid.' => '',
+        'Note to origin Ticket' => '',
+        'NoteToTicket invalid.' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
         'No ticket data found.' => 'Tidak ada tiket ditemukan',
         'Open / Close ticket action menu' => 'Buka/tutup menu aksi tiket',
@@ -2835,6 +2787,8 @@ bin/otrs.Daemon.pl status\').',
         'First Response Time' => 'Waktu respon yang pertama',
         'Update Time' => 'Memperbaru waktu',
         'Solution Time' => 'Solusi waktu',
+        'Impact' => 'Dampak',
+        'CustomerID' => 'ID Pelanggan',
         'Move ticket to a different queue' => 'Pindahkan tiket ke queue yang berbeda',
         'Change queue' => 'Ubah queue',
 
@@ -3080,7 +3034,6 @@ bin/otrs.Daemon.pl status\').',
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => 'Contoh : 10*5155 atau 105658*',
-        'CustomerID' => 'ID Pelanggan',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => 'Jenis',
         'Time Restrictions' => '',
@@ -3312,6 +3265,61 @@ bin/otrs.Daemon.pl status\').',
             'Ini adalah antarmuka publik default OTRS! Tidak ada parameter tindakan yang diberikan.',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             'Anda bisa menginstal modul kustom publik (melalui manajer paket), misalnya FAQ modul, yang memiliki antarmuka publik.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
+        'To get the appointment attribute' => '',
+        ' e. g.' => 'Misalnya',
+        'To get the first 20 character of the appointment title.' => '',
+        'To get the calendar attribute' => '',
+        'Attributes of the recipient user for the notification' => 'Atribut dari pengguna penerima untuk pemberitahuan',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+        'To get the first 20 character of the subject.' => 'Untuk mendapatkan 20 karakter pertama dari subjek',
+        'To get the first 5 lines of the email.' => 'untuk mendapatkan 5 baris pertama dari email.',
+        'To get the name of the ticket\'s customer user (if given).' => 'Untuk mendapatkan nama dari tiket pengguna pelanggan (jika diberikan).',
+        'To get the article attribute' => 'Untuk mendapatkan atribut artikel',
+        'Options of the current customer user data' => 'Pilihan dari data pelanggan pengguna saat ini',
+        'Ticket owner options' => 'Pilihan pemilik tiket',
+        'Options of the ticket data' => 'Pilihan dari data tiket',
+        'Options of ticket dynamic fields internal key values' => 'Pilihan dari nilai kunci internal bidang tiket dinamis',
+        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            'Pilihan nilai tampilan dari bidang dinamis tiket, berguna untuk bidang Dropdown dan Multiselect',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+        'To get the first 20 character of the subject (of the latest agent article).' =>
+            'Untuk mendapatkan 20 karakter pertama dari subyek (artikel agen terbaru)',
+        'To get the first 5 lines of the body (of the latest agent article).' =>
+            'Untuk mendapatkan garis 5 pertama dari isi (Artikel agen terbaru)',
+        'To get the first 20 character of the subject (of the latest customer article).' =>
+            'Untuk mendapatkan 20 karakter pertama dari subyek (Artikel pelanggan terbaru).',
+        'To get the first 5 lines of the body (of the latest customer article).' =>
+            'Untuk mendapatkan 5 baris pertama dari isi (Artikel pelanggan terbaru).',
+        'Attributes of the current customer user data' => 'Atribut pelanggan pengguna data saat ini',
+        'Attributes of the current ticket owner user data' => 'Atribut dari pemilik tiket pengguna data saat ini',
+        'Attributes of the ticket data' => 'Atribut data tiket',
+        'Ticket dynamic fields internal key values' => 'Bidang tiket yang dinamis untuk nilai kunci internal ',
+        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            'Bidang dinamis tiket yang menampilkan nilai, berguna untuk Dropdown dan Multiselecet',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminSalutation.tt
+        'e. g.' => 'Contoh',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
+        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
+        'Tag Reference' => 'Tandakan referensi',
+        'You can use the following tags' => 'Anda dapat menggunakan tag berikut ini',
+        'Ticket responsible options' => 'Pilihan penanggung jawab tiket',
+        'Options of the current user who requested this action' => 'Pilihan dari pengguna saat ini yang meminta tindakan ini.',
+        'Config options' => 'Pilihan konfigurasi',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/GeneralSpecificationsWidget.tt
         'You can select one or more groups to define access for different agents.' =>
@@ -3910,7 +3918,7 @@ bin/otrs.Daemon.pl status\').',
         'Customer user of the ticket' => '',
         'All recipients of the first article' => '',
         'All recipients of the last article' => '',
-        'All users who are mentioned in a ticket' => '',
+        'All agents who are mentioned in the ticket' => '',
         'Invisible to customer' => '',
         'Visible to customer' => '',
 
@@ -4366,9 +4374,6 @@ bin/otrs.Daemon.pl status\').',
         # Perl Module: Kernel/Modules/AgentTicketMove.pm
         'You need move permissions!' => 'Anda perlu memindahkan permissions!',
 
-        # Perl Module: Kernel/Modules/AgentTicketOwnerView.pm
-        'My Owned Tickets' => '',
-
         # Perl Module: Kernel/Modules/AgentTicketPhone.pm
         'Chat is not active.' => 'Obrolan tidak diaktifkan',
         'No permission.' => 'Tidak ada permission.',
@@ -4662,6 +4667,10 @@ bin/otrs.Daemon.pl status\').',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketNote.pm
         'Reply to note' => 'Balas ke catatan',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketNoteToLinkedTicket.pm
+        'Create notice for linked ticket' => '',
+        'Transfer notice' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPhone.pm
         'Split this article' => 'Pisahkan artikel ini',
@@ -5389,6 +5398,11 @@ bin/otrs.Daemon.pl status\').',
         'Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder.' =>
             '',
 
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
+        'Views with multiple loaded JavaScript files' => '',
+        'The following JavaScript files loaded multiple times:' => '',
+        'Files' => '',
+
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
         'Package Installation Status' => 'Status Instalasi paket',
         'Some packages have locally modified files.' => 'Beberapa paket telah lokal memodifikasi file.',
@@ -5791,6 +5805,7 @@ bin/otrs.Daemon.pl status\').',
             'Mendefinisikan tinggi untuk orang kaya komponen editor teks. Masukkan nomor (piksel) atau nilai persen (relatif).',
         'Defines the selectable font sizes in the rich text editor.' => '',
         'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines the selectable format tags in the rich text editor.' => '',
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
@@ -6737,6 +6752,14 @@ bin/otrs.Daemon.pl status\').',
             'default data digunakan pada atribut untuk layar pencarian tiket. Contoh: "TicketCreateTimePointFormat=year;TicketCreateTimePointStart=Last;TicketCreateTimePoint=2;".',
         'Default data to use on attribute for ticket search screen. Example: "TicketCreateTimeStartYear=2010;TicketCreateTimeStartMonth=10;TicketCreateTimeStartDay=4;TicketCreateTimeStopYear=2010;TicketCreateTimeStopMonth=11;TicketCreateTimeStopDay=3;".' =>
             'default data digunakan pada atribut untuk layar pencarian tiket. Contoh: "TicketCreateTimeStartYear=2010;TicketCreateTimeStartMonth=10;TicketCreateTimeStartDay=4;TicketCreateTimeStopYear=2010;TicketCreateTimeStopMonth=11;TicketCreateTimeStopDay=3;".',
+        'Default data to use on attribute for ticket search screen. Example: "TicketLastChangeTimePointFormat=year;TicketLastChangeTimePointStart=Last;TicketLastChangeTimePoint=2;".' =>
+            '',
+        'Default data to use on attribute for ticket search screen. Example: "TicketLastChangeTimeStartYear=2010;TicketLastChangeTimeStartMonth=10;TicketLastChangeTimeStartDay=4;TicketLastChangeTimeStopYear=2010;TicketLastChangeTimeMonth=11;TicketLastChangeTimeStopDay=3;".' =>
+            '',
+        'Default data to use on attribute for ticket search screen. Example: "TicketPendingTimePointFormat=year;TicketPendingTimePointStart=Last;TicketPendingTimePoint=2;".' =>
+            '',
+        'Default data to use on attribute for ticket search screen. Example: "TicketPendingTimeStartYear=2010;TicketPendingTimeStartMonth=10;TicketPendingTimeStartDay=4;TicketPendingTimeStopYear=2010;TicketPendingTimeMonth=11;TicketPendingTimeStopDay=3;".' =>
+            '',
         'Defines the default ticket attribute for ticket sorting in the locked ticket view of the agent interface.' =>
             'Mendefinisikan atribut tiket default untuk tiket menyortir dalam pandangan tiket terkunci dari antarmuka agen.',
         'Defines the default ticket order in the ticket locked view of the agent interface. Up: oldest on top. Down: latest on top.' =>
@@ -7986,6 +8009,56 @@ bin/otrs.Daemon.pl status\').',
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
         'Mapping of non-standard time zones to official ones.' => '',
+        'Start date (YYYYMMDD) of the range to use when parsing ICS files. The used CPAN module iCal::Parser needs this to be able to parse ICS files with events in a year before the current one. The end date of the range is automatically set to 10 years in the future from the time of parsing/execution.' =>
+            '',
+        'Define a mapping between variables of the customer company data (keys) and dynamic fields of a ticket (values). The purpose is to store customer company data in ticket dynamic fields. The dynamic fields must be present in the system and should be enabled for AgentTicketFreeText, so that they can be set/updated manually by the agent. They mustn\'t be enabled for AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer. If they were, they would have precedence over the automatically set values. To use this mapping, you have to also activate the Ticket::EventModulePost###4100-DynamicFieldFromCustomerCompany setting.' =>
+            '',
+        'This event module stores attributes from customer companies in ticket dynamic fields. Please see DynamicFieldFromCustomerCompany::Mapping setting for how to configure the mapping.' =>
+            '',
+        'Required permissions to use the NoteToLinkedTicket screen in the agent interface.' =>
+            '',
+        'Sets the state of the selected linked ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Defines the default next state of a ticket after adding a note in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Activates the selection if a note in NoteToLinkedTicket screen should be created in this origin ticket.' =>
+            '',
+        'Defines the default value if a note in NoteToLinkedTicket screen should be created in this origin ticket.' =>
+            '',
+        'Sets the default subject for notes added in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets the default body text for notes added in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Allows adding notes in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets if a note in NoteToLinkedTicket screen must be filled in by the agent.' =>
+            '',
+        'Defines the history type for the NoteToLinkedTicket screen, which will be used for ticket history in the agent interface.' =>
+            '',
+        'Defines the history comment for the NoteToLinkedTicket screen, which will be used for ticket history in the agent interface.' =>
+            '',
+        'Defines if the note in the NoteToLinkedTicket screen of the agent interface is visible for the customer by default.' =>
+            '',
+        'Sets the ticket type in the NoteToLinkedTicket screen of the agent interface (Ticket::Type needs to be activated).' =>
+            '',
+        'Sets the service in the NoteToLinkedTicket screen of the agent interface (Ticket::Service needs to be activated).' =>
+            '',
+        'Sets the queue in the NoteToLinkedTicket screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Sets the ticket owner in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets the responsible agent of the ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets the state of a ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Defines the next state of a ticket after adding a note in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Shows the ticket priority options in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Defines the default ticket priority in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'tidak valid sementara',
@@ -8609,6 +8682,7 @@ Helpdesk Team Anda
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             'Memungkinkan memiliki gambaran format kecil tiket (CustomerInfo => 1 - menunjukkan juga informasi pelanggan).',
         'Always show RichText if available' => 'Selalu menampilkan Rich Text jika tersedia',
+        'An additional screen to add notes to a linked ticket.' => '',
         'Answer' => 'Jawab',
         'Appointment Calendar overview page.' => '',
         'Appointment Notifications' => '',

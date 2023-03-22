@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.927484622855293;
+    $Self->{Completeness}        = 0.921230670103093;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -230,16 +230,6 @@ sub Data {
         'Message body' => 'Üzenettörzs',
         'Add new notification language' => 'Új értesítési nyelv hozzáadása',
         'Save Changes' => 'Változtatások mentése',
-        'Tag Reference' => 'Címke hivatkozás',
-        'Notifications are sent to an agent.' => 'Az értesítések egy ügyintézőnek kerülnek elküldésre.',
-        'You can use the following tags' => 'A következő címkéket használhatja',
-        'To get the first 20 character of the appointment title.' => 'Az időpontcím első 20 karakterének lekéréséhez.',
-        'To get the appointment attribute' => 'Az időpont jellemzőjének lekéréséhez',
-        ' e. g.' => ' például',
-        'To get the calendar attribute' => 'A naptár jellemzőjének lekéréséhez',
-        'Attributes of the recipient user for the notification' => 'A címzett felhasználó jellemzői az értesítésnél',
-        'Config options' => 'Konfigurációs beállítások',
-        'Example notification' => 'Példa értesítés',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEventTransportEmailSettings.tt
         'Additional recipient email addresses' => 'További címzett e-mail címek',
@@ -279,20 +269,6 @@ sub Data {
         'Queues ↔ Auto Responses' => 'Várólisták ↔ Automatikus válaszok',
         'Response' => 'Válasz',
         'Auto response from' => 'Automatikus válasz feladója',
-        'Reference' => 'Hivatkozás',
-        'To get the first 20 character of the subject.' => 'A tárgy első 20 karakterének lekéréséhez.',
-        'To get the first 5 lines of the email.' => 'Az e-mail első 5 sorának lekéréséhez.',
-        'To get the name of the ticket\'s customer user (if given).' => 'A jegy ügyfél-felhasználója nevének lekéréséhez (ha meg van adva).',
-        'To get the article attribute' => 'A bejegyzés jellemzőjének lekéréséhez',
-        'Options of the current customer user data' => 'A jelenlegi ügyfél-felhasználó adatainak beállításai',
-        'Ticket owner options' => 'Jegytulajdonos beállításai',
-        'Ticket responsible options' => 'Jegyfelelős beállításai',
-        'Options of the current user who requested this action' => 'A jelenlegi felhasználó beállításai, aki ezt a műveletet kérte',
-        'Options of the ticket data' => 'A jegy adatainak beállításai',
-        'Options of ticket dynamic fields internal key values' => 'A jegy dinamikus mezői belső kulcs értékeinek beállításai',
-        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            'A jegy dinamikus mezői megjelenített értékeinek beállításai, legördülő és többválasztós mezőknél hasznos',
-        'Example response' => 'Példa válasz',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
         'Cloud Service Management' => 'Felhőszolgáltatás kezelés',
@@ -435,6 +411,7 @@ sub Data {
         'Toggle %s permission for %s' => 'A(z) %s jogosultság ki- vagy bekapcsolása ehhez: %s',
         'Customer Default Groups:' => 'Alapértelmezett ügyfélcsoportok:',
         'No changes can be made to these groups.' => 'Nem lehet változtatni ezeken a csoportokon.',
+        'Reference' => 'Hivatkozás',
         'ro' => 'csak olvasás',
         'Read only access to the ticket in this group/queue.' => 'Csak olvasható hozzáférés ebben a csoportban/várólistában lévő jegyekhez.',
         'rw' => 'írás, olvasás',
@@ -1446,24 +1423,6 @@ sub Data {
             'A felhasználó értesítése csak egyszer egy nap egy egyedüli jegyről egy kiválasztott átvitel használatával.',
         'This field is required and must have less than 4000 characters.' =>
             'Ez a mező kötelező, és rövidebbnek kell lennie 4000 karakternél.',
-        'Notifications are sent to an agent or a customer.' => 'Az értesítések ügyintézőnek vagy ügyfélnek kerülnek elküldésre.',
-        'To get the first 20 character of the subject (of the latest agent article).' =>
-            '(A legutóbbi ügyintéző bejegyzés) tárgya első 20 karakterének lekéréséhez.',
-        'To get the first 5 lines of the body (of the latest agent article).' =>
-            '(A legutóbbi ügyintéző bejegyzés) törzse első 5 sorának lekéréséhez.',
-        'To get the first 20 character of the subject (of the latest customer article).' =>
-            '(A legutóbbi ügyfél bejegyzés) tárgya első 20 karakterének lekéréséhez.',
-        'To get the first 5 lines of the body (of the latest customer article).' =>
-            '(A legutóbbi ügyfél bejegyzés) törzse első 5 sorának lekéréséhez.',
-        'Attributes of the current customer user data' => 'A jelenlegi ügyfél-felhasználó adatainak jellemzői',
-        'Attributes of the current ticket owner user data' => 'A jelenlegi jegytulajdonos felhasználóadatainak jellemzői',
-        'Attributes of the current ticket responsible user data' => 'A jelenlegi jegyfelelős felhasználóadatainak jellemzői',
-        'Attributes of the current agent user who requested this action' =>
-            'A jelenlegi ügyintéző-felhasználó jellemzői, aki ezt a műveletet kérte',
-        'Attributes of the ticket data' => 'A jegy adatainak jellemzői',
-        'Ticket dynamic fields internal key values' => 'A jegy dinamikus mezőinek belső kulcs értékei',
-        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            'A jegy dinamikus mezőinek megjelenített értékei, legördülő és többválasztós mezőknél hasznos',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => 'Használjon vesszőt vagy pontosvesszőt az e-mail címek elválasztásához.',
@@ -2082,8 +2041,6 @@ sub Data {
         'Edit Salutation' => 'Megszólítás szerkesztése',
         'Filter for Salutations' => 'Szűrő a megszólításokhoz',
         'Filter for salutations' => 'Szűrő a megszólításokhoz',
-        'e. g.' => 'például',
-        'Example salutation' => 'Példa megszólítás',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => 'A biztonsági módot engedélyezni szükséges!',
@@ -2143,7 +2100,6 @@ sub Data {
         'Edit Signature' => 'Aláírás szerkesztése',
         'Filter for Signatures' => 'Szűrő az aláírásokhoz',
         'Filter for signatures' => 'Szűrő az aláírásokhoz',
-        'Example signature' => 'Példa aláírás',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
         'State Management' => 'Állapot kezelés',
@@ -2315,18 +2271,6 @@ sub Data {
         'Delete this entry' => 'Bejegyzés törlése',
         'Do you really want to delete this template?' => 'Valóban törölni szeretné ezt a sablont?',
         'A standard template with this name already exists!' => 'Már létezik ilyen nevű szabványos sablon!',
-        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            'A jelenlegi vagy a legfrissebb ügyintézői bejegyzés tárgyának első 20 karakterének lekéréséhez (jelenlegi a válasznál és továbbításnál, a legfrissebb a jegyzet sablontípusnál). Ez a címke nem támogatott más sablontípusoknál.',
-        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            'A jelenlegi vagy a legfrissebb ügyintézői bejegyzés törzsének első 5 sorának lekéréséhez (jelenlegi a válasznál és továbbításnál, a legfrissebb a jegyzet sablontípusnál). Ez a címke nem támogatott más sablontípusoknál.',
-        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            'A jelenlegi vagy a legfrissebb bejegyzés tárgyának első 20 karakterének lekéréséhez (jelenlegi a válasznál és továbbításnál, a legfrissebb a jegyzet sablontípusnál). Ez a címke nem támogatott más sablontípusoknál.',
-        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            'A jelenlegi vagy a legfrissebb bejegyzés törzsének első 5 sorának lekéréséhez (jelenlegi a válasznál és továbbításnál, a legfrissebb a jegyzet sablontípusnál). Ez a címke nem támogatott más sablontípusoknál.',
-        'Create type templates only supports this smart tags' => 'Típussablonok létrehozása, amelyek csak ezeket az intelligens címkéket támogatják',
-        'Example template' => 'Példa sablon',
-        'The current ticket state is' => 'A jegy jelenlegi állapota',
-        'Your email address is' => 'Az e-mail címe',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplateAttachment.tt
         'Manage Template-Attachment Relations' => 'Sablon–Melléklet kapcsolatok kezelése',
@@ -2585,6 +2529,7 @@ sub Data {
         'Assigned to customer user' => 'Hozzárendelve az ügyfél-felhasználóhoz',
         'Accessible for customer user' => 'Hozzáférhető az ügyfél-felhasználónak',
         'My locked tickets' => 'Saját zárolt jegyek',
+        'My Owned Tickets' => '',
         'My watched tickets' => 'Saját megfigyelt jegyek',
         'My responsibilities' => 'Saját felelősségek',
         'Tickets in My Queues' => 'Jegyek a várólistáimban',
@@ -2831,6 +2776,13 @@ sub Data {
         'New Queue' => 'Új várólista',
         'Move' => 'Áthelyezés',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
+        'Add note to linked %s%s%s' => '',
+        'Note to linked Ticket' => '',
+        'LinkList invalid.' => '',
+        'Note to origin Ticket' => '',
+        'NoteToTicket invalid.' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
         'No ticket data found.' => 'Nem található jegyadat.',
         'Open / Close ticket action menu' => 'Jegyművelet menü megnyitása vagy bezárása',
@@ -2839,6 +2791,8 @@ sub Data {
         'First Response Time' => 'Első válaszidő',
         'Update Time' => 'Frissítés ideje',
         'Solution Time' => 'Megoldás ideje',
+        'Impact' => 'Hatás',
+        'CustomerID' => 'Ügyfél-azonosító',
         'Move ticket to a different queue' => 'Jegy áthelyezése egy másik várólistába',
         'Change queue' => 'Várólista módosítása',
 
@@ -3084,7 +3038,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Profil',
         'e. g. 10*5155 or 105658*' => 'például 10*5155 vagy 105658*',
-        'CustomerID' => 'Ügyfél-azonosító',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => 'Szabad-szavas keresés a jegyekben (például „Kata*n” vagy „Gerg*”)',
         'Types' => 'Típusok',
         'Time Restrictions' => 'Idő megkötések',
@@ -3316,6 +3269,61 @@ sub Data {
             'Ez az OTRS alapértelmezett nyilvános felülete! Nem került megadásra műveleti paraméter.',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             'Telepíthetne egy olyan egyéni nyilvános modult (a csomagkezelőn keresztül), amelynek van nyilvános felülete, mint például a GyIK modulnak.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
+        'To get the appointment attribute' => 'Az időpont jellemzőjének lekéréséhez',
+        ' e. g.' => ' például',
+        'To get the first 20 character of the appointment title.' => 'Az időpontcím első 20 karakterének lekéréséhez.',
+        'To get the calendar attribute' => 'A naptár jellemzőjének lekéréséhez',
+        'Attributes of the recipient user for the notification' => 'A címzett felhasználó jellemzői az értesítésnél',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+        'To get the first 20 character of the subject.' => 'A tárgy első 20 karakterének lekéréséhez.',
+        'To get the first 5 lines of the email.' => 'Az e-mail első 5 sorának lekéréséhez.',
+        'To get the name of the ticket\'s customer user (if given).' => 'A jegy ügyfél-felhasználója nevének lekéréséhez (ha meg van adva).',
+        'To get the article attribute' => 'A bejegyzés jellemzőjének lekéréséhez',
+        'Options of the current customer user data' => 'A jelenlegi ügyfél-felhasználó adatainak beállításai',
+        'Ticket owner options' => 'Jegytulajdonos beállításai',
+        'Options of the ticket data' => 'A jegy adatainak beállításai',
+        'Options of ticket dynamic fields internal key values' => 'A jegy dinamikus mezői belső kulcs értékeinek beállításai',
+        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            'A jegy dinamikus mezői megjelenített értékeinek beállításai, legördülő és többválasztós mezőknél hasznos',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+        'To get the first 20 character of the subject (of the latest agent article).' =>
+            '(A legutóbbi ügyintéző bejegyzés) tárgya első 20 karakterének lekéréséhez.',
+        'To get the first 5 lines of the body (of the latest agent article).' =>
+            '(A legutóbbi ügyintéző bejegyzés) törzse első 5 sorának lekéréséhez.',
+        'To get the first 20 character of the subject (of the latest customer article).' =>
+            '(A legutóbbi ügyfél bejegyzés) tárgya első 20 karakterének lekéréséhez.',
+        'To get the first 5 lines of the body (of the latest customer article).' =>
+            '(A legutóbbi ügyfél bejegyzés) törzse első 5 sorának lekéréséhez.',
+        'Attributes of the current customer user data' => 'A jelenlegi ügyfél-felhasználó adatainak jellemzői',
+        'Attributes of the current ticket owner user data' => 'A jelenlegi jegytulajdonos felhasználóadatainak jellemzői',
+        'Attributes of the ticket data' => 'A jegy adatainak jellemzői',
+        'Ticket dynamic fields internal key values' => 'A jegy dinamikus mezőinek belső kulcs értékei',
+        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            'A jegy dinamikus mezőinek megjelenített értékei, legördülő és többválasztós mezőknél hasznos',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminSalutation.tt
+        'e. g.' => 'például',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
+        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            'A jelenlegi vagy a legfrissebb ügyintézői bejegyzés tárgyának első 20 karakterének lekéréséhez (jelenlegi a válasznál és továbbításnál, a legfrissebb a jegyzet sablontípusnál). Ez a címke nem támogatott más sablontípusoknál.',
+        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            'A jelenlegi vagy a legfrissebb ügyintézői bejegyzés törzsének első 5 sorának lekéréséhez (jelenlegi a válasznál és továbbításnál, a legfrissebb a jegyzet sablontípusnál). Ez a címke nem támogatott más sablontípusoknál.',
+        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            'A jelenlegi vagy a legfrissebb bejegyzés tárgyának első 20 karakterének lekéréséhez (jelenlegi a válasznál és továbbításnál, a legfrissebb a jegyzet sablontípusnál). Ez a címke nem támogatott más sablontípusoknál.',
+        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            'A jelenlegi vagy a legfrissebb bejegyzés törzsének első 5 sorának lekéréséhez (jelenlegi a válasznál és továbbításnál, a legfrissebb a jegyzet sablontípusnál). Ez a címke nem támogatott más sablontípusoknál.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
+        'Tag Reference' => 'Címke hivatkozás',
+        'You can use the following tags' => 'A következő címkéket használhatja',
+        'Ticket responsible options' => 'Jegyfelelős beállításai',
+        'Options of the current user who requested this action' => 'A jelenlegi felhasználó beállításai, aki ezt a műveletet kérte',
+        'Config options' => 'Konfigurációs beállítások',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/GeneralSpecificationsWidget.tt
         'You can select one or more groups to define access for different agents.' =>
@@ -3914,7 +3922,7 @@ sub Data {
         'Customer user of the ticket' => 'A jegy ügyfél-felhasználója',
         'All recipients of the first article' => 'Az első bejegyzés összes címzettje',
         'All recipients of the last article' => 'Az utolsó bejegyzés összes címzettje',
-        'All users who are mentioned in a ticket' => '',
+        'All agents who are mentioned in the ticket' => '',
         'Invisible to customer' => 'Láthatatlan az ügyfélnek',
         'Visible to customer' => 'Látható az ügyfélnek',
 
@@ -4370,9 +4378,6 @@ sub Data {
         # Perl Module: Kernel/Modules/AgentTicketMove.pm
         'You need move permissions!' => 'Áthelyezés jogosultságokra van szüksége!',
 
-        # Perl Module: Kernel/Modules/AgentTicketOwnerView.pm
-        'My Owned Tickets' => '',
-
         # Perl Module: Kernel/Modules/AgentTicketPhone.pm
         'Chat is not active.' => 'A csevegés nem aktív.',
         'No permission.' => 'Nincs jogosultság.',
@@ -4666,6 +4671,10 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketNote.pm
         'Reply to note' => 'Válasz a jegyzetre',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketNoteToLinkedTicket.pm
+        'Create notice for linked ticket' => '',
+        'Transfer notice' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPhone.pm
         'Split this article' => 'Bejegyzés felosztása',
@@ -5393,6 +5402,11 @@ sub Data {
         'Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder.' =>
             'Az örökölt konfigurációs biztonsági mentés fájlok többé nem szükségesek a telepített csomagokhoz, távolítsa el azokat a Kernel/Config/Backups mappából.',
 
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
+        'Views with multiple loaded JavaScript files' => '',
+        'The following JavaScript files loaded multiple times:' => '',
+        'Files' => '',
+
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
         'Package Installation Status' => 'Csomagtelepítési állapot',
         'Some packages have locally modified files.' => 'Néhány csomag helyileg módosított fájlokkal rendelkezik.',
@@ -5795,6 +5809,7 @@ sub Data {
             'Meghatározza a RichText szerkesztő komponens magasságát. Szám (képpont) vagy százalék (relatív) értéket adjon meg.',
         'Defines the selectable font sizes in the rich text editor.' => '',
         'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines the selectable format tags in the rich text editor.' => '',
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
@@ -6741,6 +6756,14 @@ sub Data {
             'A jegykeresés képernyő jellemzőinél használt alapértelmezett adatok. Például: „TicketCreateTimePointFormat=year;TicketCreateTimePointStart=Last;TicketCreateTimePoint=2;”.',
         'Default data to use on attribute for ticket search screen. Example: "TicketCreateTimeStartYear=2010;TicketCreateTimeStartMonth=10;TicketCreateTimeStartDay=4;TicketCreateTimeStopYear=2010;TicketCreateTimeStopMonth=11;TicketCreateTimeStopDay=3;".' =>
             'A jegykeresés képernyő jellemzőinél használt alapértelmezett adatok. Például: „TicketCreateTimeStartYear=2010;TicketCreateTimeStartMonth=10;TicketCreateTimeStartDay=4;TicketCreateTimeStopYear=2010;TicketCreateTimeStopMonth=11;TicketCreateTimeStopDay=3;”.',
+        'Default data to use on attribute for ticket search screen. Example: "TicketLastChangeTimePointFormat=year;TicketLastChangeTimePointStart=Last;TicketLastChangeTimePoint=2;".' =>
+            '',
+        'Default data to use on attribute for ticket search screen. Example: "TicketLastChangeTimeStartYear=2010;TicketLastChangeTimeStartMonth=10;TicketLastChangeTimeStartDay=4;TicketLastChangeTimeStopYear=2010;TicketLastChangeTimeMonth=11;TicketLastChangeTimeStopDay=3;".' =>
+            '',
+        'Default data to use on attribute for ticket search screen. Example: "TicketPendingTimePointFormat=year;TicketPendingTimePointStart=Last;TicketPendingTimePoint=2;".' =>
+            '',
+        'Default data to use on attribute for ticket search screen. Example: "TicketPendingTimeStartYear=2010;TicketPendingTimeStartMonth=10;TicketPendingTimeStartDay=4;TicketPendingTimeStopYear=2010;TicketPendingTimeMonth=11;TicketPendingTimeStopDay=3;".' =>
+            '',
         'Defines the default ticket attribute for ticket sorting in the locked ticket view of the agent interface.' =>
             'Meghatározza az alapértelmezett jegyjellemzőt a jegyrendezéshez az ügyintézői felület zárolt jegy nézetében.',
         'Defines the default ticket order in the ticket locked view of the agent interface. Up: oldest on top. Down: latest on top.' =>
@@ -7989,6 +8012,56 @@ sub Data {
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
         'Mapping of non-standard time zones to official ones.' => '',
+        'Start date (YYYYMMDD) of the range to use when parsing ICS files. The used CPAN module iCal::Parser needs this to be able to parse ICS files with events in a year before the current one. The end date of the range is automatically set to 10 years in the future from the time of parsing/execution.' =>
+            '',
+        'Define a mapping between variables of the customer company data (keys) and dynamic fields of a ticket (values). The purpose is to store customer company data in ticket dynamic fields. The dynamic fields must be present in the system and should be enabled for AgentTicketFreeText, so that they can be set/updated manually by the agent. They mustn\'t be enabled for AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer. If they were, they would have precedence over the automatically set values. To use this mapping, you have to also activate the Ticket::EventModulePost###4100-DynamicFieldFromCustomerCompany setting.' =>
+            '',
+        'This event module stores attributes from customer companies in ticket dynamic fields. Please see DynamicFieldFromCustomerCompany::Mapping setting for how to configure the mapping.' =>
+            '',
+        'Required permissions to use the NoteToLinkedTicket screen in the agent interface.' =>
+            '',
+        'Sets the state of the selected linked ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Defines the default next state of a ticket after adding a note in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Activates the selection if a note in NoteToLinkedTicket screen should be created in this origin ticket.' =>
+            '',
+        'Defines the default value if a note in NoteToLinkedTicket screen should be created in this origin ticket.' =>
+            '',
+        'Sets the default subject for notes added in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets the default body text for notes added in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Allows adding notes in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets if a note in NoteToLinkedTicket screen must be filled in by the agent.' =>
+            '',
+        'Defines the history type for the NoteToLinkedTicket screen, which will be used for ticket history in the agent interface.' =>
+            '',
+        'Defines the history comment for the NoteToLinkedTicket screen, which will be used for ticket history in the agent interface.' =>
+            '',
+        'Defines if the note in the NoteToLinkedTicket screen of the agent interface is visible for the customer by default.' =>
+            '',
+        'Sets the ticket type in the NoteToLinkedTicket screen of the agent interface (Ticket::Type needs to be activated).' =>
+            '',
+        'Sets the service in the NoteToLinkedTicket screen of the agent interface (Ticket::Service needs to be activated).' =>
+            '',
+        'Sets the queue in the NoteToLinkedTicket screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Sets the ticket owner in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets the responsible agent of the ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets the state of a ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Defines the next state of a ticket after adding a note in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Shows the ticket priority options in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Defines the default ticket priority in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'átmenetileg érvénytelen',
@@ -8612,6 +8685,7 @@ Az Ön segélyszolgálat csapata
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             'Lehetővé teszi a kis formátumú jegyáttekintőt (CustomerInfo => 1 – megjeleníti az ügyfél-információkat is).',
         'Always show RichText if available' => 'Mindig RichText szöveget jelenítsen meg, ha elérhető',
+        'An additional screen to add notes to a linked ticket.' => '',
         'Answer' => 'Válasz',
         'Appointment Calendar overview page.' => 'Időpontnaptár áttekintő oldal.',
         'Appointment Notifications' => 'Időpont-értesítések',

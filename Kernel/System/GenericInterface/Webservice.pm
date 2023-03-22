@@ -137,9 +137,6 @@ sub WebserviceAdd {
         }
     }
 
-    # Check if web service is using an old configuration type and upgrade if necessary.
-    $Self->_WebserviceConfigUpgrade(%Param);
-
     # dump config as string
     my $Config = $Kernel::OM->Get('Kernel::System::YAML')->Dump( Data => $Param{Config} );
 
@@ -405,9 +402,6 @@ sub WebserviceUpdate {
         }
     }
 
-    # Check if web service is using an old configuration type and upgrade if necessary.
-    $Self->_WebserviceConfigUpgrade(%Param);
-
     # dump config as string
     my $Config = $Kernel::OM->Get('Kernel::System::YAML')->Dump( Data => $Param{Config} );
 
@@ -631,131 +625,6 @@ sub WebserviceConfigReplace {
     }
 
     return $Data;
-}
-
-=begin Internal:
-
-=head2 _WebserviceConfigUpgrade()
-
-Update version if webservice config (e.g. for API changes).
-
-    my $Config = $WebserviceObject->_WebserviceConfigUpgrade( Config => $Config );
-
-=cut
-
-sub _WebserviceConfigUpgrade {
-    my ( $Self, %Param ) = @_;
-
-    return if !IsHashRefWithData( $Param{Config} );
-
-    # Updates of SOAP and REST transport in OTRS 6:
-    #   Authentication, SSL and Proxy option changes, introduction of timeout param.
-    # Upgrade is considered necessary if the new (and now mandatory) parameter 'Timeout' isn't set.
-    if (
-        IsHashRefWithData( $Param{Config}->{Requester} )    # prevent creation of dummy elements
-        && IsStringWithData( $Param{Config}->{Requester}->{Transport}->{Type} )
-        && (
-            $Param{Config}->{Requester}->{Transport}->{Type} eq 'HTTP::REST'
-            || $Param{Config}->{Requester}->{Transport}->{Type} eq 'HTTP::SOAP'
-        )
-        && IsHashRefWithData( $Param{Config}->{Requester}->{Transport}->{Config} )
-        && !IsStringWithData( $Param{Config}->{Requester}->{Transport}->{Config}->{Timeout} )
-        )
-    {
-        my $RequesterTransportConfig = $Param{Config}->{Requester}->{Transport}->{Config};
-        my $RequesterTransportType   = $Param{Config}->{Requester}->{Transport}->{Type};
-
-        # set default timeout
-        if ( $RequesterTransportType eq 'HTTP::SOAP' ) {
-            $RequesterTransportConfig->{Timeout} = 60;
-        }
-        else {
-            $RequesterTransportConfig->{Timeout} = 300;
-        }
-
-        # set default SOAPAction scheme for SOAP
-        if (
-            $RequesterTransportType eq 'HTTP::SOAP'
-            && IsStringWithData( $RequesterTransportConfig->{SOAPAction} )
-            && $RequesterTransportConfig->{SOAPAction} eq 'Yes'
-            )
-        {
-            $RequesterTransportConfig->{SOAPActionScheme} = 'NameSpaceSeparatorOperation';
-        }
-
-        # convert auth settings
-        my $Authentication = delete $RequesterTransportConfig->{Authentication};
-        if (
-            IsHashRefWithData($Authentication)
-            && $Authentication->{Type}
-            && $Authentication->{Type} eq 'BasicAuth'
-            )
-        {
-            $RequesterTransportConfig->{Authentication} = {
-                AuthType          => $Authentication->{Type},
-                BasicAuthUser     => $Authentication->{User},
-                BasicAuthPassword => $Authentication->{Password},
-            };
-        }
-
-        # convert ssl settings
-        my $SSL  = delete $RequesterTransportConfig->{SSL};
-        my $X509 = delete $RequesterTransportConfig->{X509};
-        if (
-            $RequesterTransportType eq 'HTTP::SOAP'
-            && IsHashRefWithData($SSL)
-            && $SSL->{UseSSL}
-            && $SSL->{UseSSL} eq 'Yes'
-            )
-        {
-            $RequesterTransportConfig->{SSL} = {
-                UseSSL         => 'Yes',
-                SSLPassword    => $SSL->{SSLP12Password},
-                SSLCertificate => $SSL->{SSLP12Certificate},
-                SSLCADir       => $SSL->{SSLCADir},
-                SSLCAFile      => $SSL->{SSLCAFile},
-            };
-        }
-        elsif (
-            IsHashRefWithData($X509)
-            && $X509->{UseX509}
-            && $X509->{UseX509} eq 'Yes'
-            )
-        {
-            $RequesterTransportConfig->{SSL} = {
-                UseSSL         => 'Yes',
-                SSLKey         => $X509->{X509KeyFile},
-                SSLCertificate => $X509->{X509CertFile},
-                SSLCAFile      => $X509->{X509CAFile},
-            };
-        }
-        else {
-            $RequesterTransportConfig->{SSL}->{UseSSL} = 'No';
-        }
-
-        # convert proxy settings
-        if (
-            IsHashRefWithData($SSL)
-            && $SSL->{SSLProxy}
-            )
-        {
-            $RequesterTransportConfig->{Proxy} = {
-                UseProxy      => 'Yes',
-                ProxyHost     => $SSL->{SSLProxy},
-                ProxyUser     => $SSL->{SSLProxyUser},
-                ProxyPassword => $SSL->{SSLProxyPassword},
-                ProxyExclude  => 'No',
-            };
-        }
-        else {
-            $RequesterTransportConfig->{Proxy}->{UseProxy} = 'No';
-        }
-
-        # set updated config
-        $Param{Config}->{Requester}->{Transport}->{Config} = $RequesterTransportConfig;
-    }
-
-    return 1;
 }
 
 1;

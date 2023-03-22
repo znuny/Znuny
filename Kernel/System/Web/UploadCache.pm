@@ -62,7 +62,8 @@ create a new Form ID
 sub FormIDCreate {
     my ( $Self, %Param ) = @_;
 
-    return $Self->{Backend}->FormIDCreate(%Param);
+    $Self->{LastFormID} = $Self->{Backend}->FormIDCreate(%Param);
+    return $Self->{LastFormID};
 }
 
 =head2 FormIDRemove()

@@ -86,10 +86,25 @@ sub ToAscii {
     my $LinkList = '';
     my $Counter  = 0;
     $Param{String} =~ s{
-        <a\s.*?href=("|')(.+?)("|').*?>
+        <a\s.*?href=("|')(.*?)(\1).*?>
     }
     {
         my $Link = $2;
+
+        my %SafeLink = $Kernel::OM->Get('Kernel::System::HTMLUtils')->Safety(
+            String       => $Link,
+            NoApplet     => 1,
+            NoObject     => 1,
+            NoEmbed      => 1,
+            NoSVG        => 1,
+            NoImg        => 1,
+            NoIntSrcLoad => 1,
+            NoExtSrcLoad => 1,
+            NoJavaScript => 1,
+        );
+
+        $Link = $SafeLink{String} // '';
+
         $Counter++;
         $LinkList .= "[$Counter] $Link\n";
         "[$Counter]";

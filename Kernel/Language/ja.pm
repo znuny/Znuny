@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.709452897377792;
+    $Self->{Completeness}        = 0.704252577319588;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -227,16 +227,6 @@ sub Data {
         'Message body' => 'メッセージボディー',
         'Add new notification language' => '新規通知言語を追加',
         'Save Changes' => '変更を保存',
-        'Tag Reference' => 'タグリファレンス',
-        'Notifications are sent to an agent.' => '通知は担当者へ送信されます。',
-        'You can use the following tags' => '次のタグを使用できます',
-        'To get the first 20 character of the appointment title.' => 'アポイントの表題から最初の20文字を取得',
-        'To get the appointment attribute' => '予定の属性を取得すること',
-        ' e. g.' => '例',
-        'To get the calendar attribute' => 'カレンダーの属性を取得すること',
-        'Attributes of the recipient user for the notification' => '通知する受信者ユーザーの属性',
-        'Config options' => '設定オプション',
-        'Example notification' => '通知例',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEventTransportEmailSettings.tt
         'Additional recipient email addresses' => '追加の受信者のメールアドレス',
@@ -276,20 +266,6 @@ sub Data {
         'Queues ↔ Auto Responses' => '',
         'Response' => '応答',
         'Auto response from' => '自動応答差出人',
-        'Reference' => '用例',
-        'To get the first 20 character of the subject.' => '表題の最初の20文字を取得',
-        'To get the first 5 lines of the email.' => 'メールの最初の5行を取得',
-        'To get the name of the ticket\'s customer user (if given).' => 'チケットの顧客ユーザー名を取得(可能な場合)',
-        'To get the article attribute' => '記事の属性を取得',
-        'Options of the current customer user data' => '現在の顧客ユーザーデータのオプション',
-        'Ticket owner options' => 'チケット所有者オプション',
-        'Ticket responsible options' => 'チケット責任者オプション',
-        'Options of the current user who requested this action' => '操作を要求された現在のユーザーのオプション',
-        'Options of the ticket data' => 'チケットデータのオプション',
-        'Options of ticket dynamic fields internal key values' => 'チケットのダイナミック・フィールドの内部キー値のオプション',
-        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            'チケットのダイナミック・フィールドの表示値のオプション。ドロップダウンまたは複数選択領域で利用可能・',
-        'Example response' => '応答例',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
         'Cloud Service Management' => 'クラウドサービス管理',
@@ -432,6 +408,7 @@ sub Data {
         'Toggle %s permission for %s' => '%s の %s 権限を切り替え',
         'Customer Default Groups:' => '顧客の規定グループ:',
         'No changes can be made to these groups.' => '変更はこれらのグループに行うことができます。',
+        'Reference' => '用例',
         'ro' => '読取り',
         'Read only access to the ticket in this group/queue.' => 'このグループ／キューのチケットを読み取り専用にします。',
         'rw' => '読書き',
@@ -1445,24 +1422,6 @@ sub Data {
             '選択された通知方法を使って1つのチケットにつき1度だけユーザーに通知する。',
         'This field is required and must have less than 4000 characters.' =>
             '',
-        'Notifications are sent to an agent or a customer.' => '通知は担当者、顧客に送信されます。',
-        'To get the first 20 character of the subject (of the latest agent article).' =>
-            '表題の最初の20文字を取得 (最新の担当者記事)',
-        'To get the first 5 lines of the body (of the latest agent article).' =>
-            '本文から最初の5行を取得 (最新の担当者記事)',
-        'To get the first 20 character of the subject (of the latest customer article).' =>
-            '表題の最初の20文字を取得 (最新の顧客記事)',
-        'To get the first 5 lines of the body (of the latest customer article).' =>
-            '本文から最初の5行を取得 (最新の顧客記事)',
-        'Attributes of the current customer user data' => '現在の顧客ユーザの属性',
-        'Attributes of the current ticket owner user data' => '現在のチケット所有者の属性',
-        'Attributes of the current ticket responsible user data' => '現在の責任者の属性',
-        'Attributes of the current agent user who requested this action' =>
-            '現在操作を要求している担当者の属性',
-        'Attributes of the ticket data' => 'チケットデータの属性',
-        'Ticket dynamic fields internal key values' => 'チケットのダイナミック・フィールドの内部用キー値',
-        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            'チケットのダイナミック・フィールドの表示値。ドロップダウンまたは複数選択領域で利用可能',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => '',
@@ -2082,8 +2041,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Edit Salutation' => '挨拶文を編集',
         'Filter for Salutations' => '挨拶文でフィルター',
         'Filter for salutations' => '挨拶文でフィルター',
-        'e. g.' => '例',
-        'Example salutation' => '挨拶文の例',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => 'セキュアモードを有効にしてください。',
@@ -2143,7 +2100,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Edit Signature' => '署名を編集',
         'Filter for Signatures' => '署名でフィルター',
         'Filter for signatures' => '署名でフィルター',
-        'Example signature' => '署名の例',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
         'State Management' => 'ステータス管理',
@@ -2315,18 +2271,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Delete this entry' => 'この登録を削除',
         'Do you really want to delete this template?' => '本当にこのテンプレートを削除してよろしいですか？',
         'A standard template with this name already exists!' => '',
-        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'Create type templates only supports this smart tags' => '作成するタイプテンプレートはこのスマートタグのみをサポートします。',
-        'Example template' => 'テンプレート例',
-        'The current ticket state is' => '現在のチケットのステータスは',
-        'Your email address is' => 'あなたのメールアドレスは',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplateAttachment.tt
         'Manage Template-Attachment Relations' => '',
@@ -2585,6 +2529,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Assigned to customer user' => '顧客ユーザーに割り当てられた',
         'Accessible for customer user' => '顧客ユーザーにアクセス可能',
         'My locked tickets' => 'ロックチケット',
+        'My Owned Tickets' => '',
         'My watched tickets' => '監視チケット',
         'My responsibilities' => '責任チケット',
         'Tickets in My Queues' => '担当キュー内チケット',
@@ -2831,6 +2776,13 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'New Queue' => '新規キュー',
         'Move' => '移転',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
+        'Add note to linked %s%s%s' => '',
+        'Note to linked Ticket' => '',
+        'LinkList invalid.' => '',
+        'Note to origin Ticket' => '',
+        'NoteToTicket invalid.' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
         'No ticket data found.' => 'チケットデータがありません',
         'Open / Close ticket action menu' => 'チケットアクションメニューを開く/閉じる',
@@ -2839,6 +2791,8 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'First Response Time' => '初回応答期限',
         'Update Time' => '更新期限',
         'Solution Time' => '解決期限',
+        'Impact' => '影響度',
+        'CustomerID' => '顧客ID',
         'Move ticket to a different queue' => '別のキューへチケットを移転',
         'Change queue' => 'キュー変更',
 
@@ -3084,7 +3038,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'プロファイル',
         'e. g. 10*5155 or 105658*' => '例: 10*5155 または 105658*',
-        'CustomerID' => '顧客ID',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => 'チケットにおける全文検索（例えば、「John * n」または「Will *」）',
         'Types' => 'タイプ',
         'Time Restrictions' => '時間制限',
@@ -3316,6 +3269,61 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
+        'To get the appointment attribute' => '予定の属性を取得すること',
+        ' e. g.' => '例',
+        'To get the first 20 character of the appointment title.' => 'アポイントの表題から最初の20文字を取得',
+        'To get the calendar attribute' => 'カレンダーの属性を取得すること',
+        'Attributes of the recipient user for the notification' => '通知する受信者ユーザーの属性',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+        'To get the first 20 character of the subject.' => '表題の最初の20文字を取得',
+        'To get the first 5 lines of the email.' => 'メールの最初の5行を取得',
+        'To get the name of the ticket\'s customer user (if given).' => 'チケットの顧客ユーザー名を取得(可能な場合)',
+        'To get the article attribute' => '記事の属性を取得',
+        'Options of the current customer user data' => '現在の顧客ユーザーデータのオプション',
+        'Ticket owner options' => 'チケット所有者オプション',
+        'Options of the ticket data' => 'チケットデータのオプション',
+        'Options of ticket dynamic fields internal key values' => 'チケットのダイナミック・フィールドの内部キー値のオプション',
+        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            'チケットのダイナミック・フィールドの表示値のオプション。ドロップダウンまたは複数選択領域で利用可能・',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+        'To get the first 20 character of the subject (of the latest agent article).' =>
+            '表題の最初の20文字を取得 (最新の担当者記事)',
+        'To get the first 5 lines of the body (of the latest agent article).' =>
+            '本文から最初の5行を取得 (最新の担当者記事)',
+        'To get the first 20 character of the subject (of the latest customer article).' =>
+            '表題の最初の20文字を取得 (最新の顧客記事)',
+        'To get the first 5 lines of the body (of the latest customer article).' =>
+            '本文から最初の5行を取得 (最新の顧客記事)',
+        'Attributes of the current customer user data' => '現在の顧客ユーザの属性',
+        'Attributes of the current ticket owner user data' => '現在のチケット所有者の属性',
+        'Attributes of the ticket data' => 'チケットデータの属性',
+        'Ticket dynamic fields internal key values' => 'チケットのダイナミック・フィールドの内部用キー値',
+        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            'チケットのダイナミック・フィールドの表示値。ドロップダウンまたは複数選択領域で利用可能',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminSalutation.tt
+        'e. g.' => '例',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
+        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
+        'Tag Reference' => 'タグリファレンス',
+        'You can use the following tags' => '次のタグを使用できます',
+        'Ticket responsible options' => 'チケット責任者オプション',
+        'Options of the current user who requested this action' => '操作を要求された現在のユーザーのオプション',
+        'Config options' => '設定オプション',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/GeneralSpecificationsWidget.tt
         'You can select one or more groups to define access for different agents.' =>
@@ -3915,7 +3923,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Customer user of the ticket' => '',
         'All recipients of the first article' => '最初の記事の全ての受信者',
         'All recipients of the last article' => '最後の記事の全ての受信者',
-        'All users who are mentioned in a ticket' => '',
+        'All agents who are mentioned in the ticket' => '',
         'Invisible to customer' => '',
         'Visible to customer' => '',
 
@@ -4371,9 +4379,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         # Perl Module: Kernel/Modules/AgentTicketMove.pm
         'You need move permissions!' => 'move許可が必要です！',
 
-        # Perl Module: Kernel/Modules/AgentTicketOwnerView.pm
-        'My Owned Tickets' => '',
-
         # Perl Module: Kernel/Modules/AgentTicketPhone.pm
         'Chat is not active.' => 'チャットはアクティブではありません。',
         'No permission.' => '権限がありません！',
@@ -4667,6 +4672,10 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketNote.pm
         'Reply to note' => 'メモに返信',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketNoteToLinkedTicket.pm
+        'Create notice for linked ticket' => '',
+        'Transfer notice' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPhone.pm
         'Split this article' => 'この記事を分割',
@@ -5394,6 +5403,11 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder.' =>
             '',
 
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
+        'Views with multiple loaded JavaScript files' => '',
+        'The following JavaScript files loaded multiple times:' => '',
+        'Files' => '',
+
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
         'Package Installation Status' => 'パッケージの導入状態',
         'Some packages have locally modified files.' => 'いくつかのパッケージがローカルで修正されています。',
@@ -5796,6 +5810,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
         'Defines the selectable font sizes in the rich text editor.' => '',
         'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines the selectable format tags in the rich text editor.' => '',
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
@@ -6741,6 +6756,14 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Default data to use on attribute for ticket search screen. Example: "TicketCreateTimePointFormat=year;TicketCreateTimePointStart=Last;TicketCreateTimePoint=2;".' =>
             '',
         'Default data to use on attribute for ticket search screen. Example: "TicketCreateTimeStartYear=2010;TicketCreateTimeStartMonth=10;TicketCreateTimeStartDay=4;TicketCreateTimeStopYear=2010;TicketCreateTimeStopMonth=11;TicketCreateTimeStopDay=3;".' =>
+            '',
+        'Default data to use on attribute for ticket search screen. Example: "TicketLastChangeTimePointFormat=year;TicketLastChangeTimePointStart=Last;TicketLastChangeTimePoint=2;".' =>
+            '',
+        'Default data to use on attribute for ticket search screen. Example: "TicketLastChangeTimeStartYear=2010;TicketLastChangeTimeStartMonth=10;TicketLastChangeTimeStartDay=4;TicketLastChangeTimeStopYear=2010;TicketLastChangeTimeMonth=11;TicketLastChangeTimeStopDay=3;".' =>
+            '',
+        'Default data to use on attribute for ticket search screen. Example: "TicketPendingTimePointFormat=year;TicketPendingTimePointStart=Last;TicketPendingTimePoint=2;".' =>
+            '',
+        'Default data to use on attribute for ticket search screen. Example: "TicketPendingTimeStartYear=2010;TicketPendingTimeStartMonth=10;TicketPendingTimeStartDay=4;TicketPendingTimeStopYear=2010;TicketPendingTimeMonth=11;TicketPendingTimeStopDay=3;".' =>
             '',
         'Defines the default ticket attribute for ticket sorting in the locked ticket view of the agent interface.' =>
             '担当者インタフェースのロック済チケット・ビューで、チケット・ソートのためのデフォルトのチケット属性を定義します。',
@@ -7999,6 +8022,56 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
         'Mapping of non-standard time zones to official ones.' => '',
+        'Start date (YYYYMMDD) of the range to use when parsing ICS files. The used CPAN module iCal::Parser needs this to be able to parse ICS files with events in a year before the current one. The end date of the range is automatically set to 10 years in the future from the time of parsing/execution.' =>
+            '',
+        'Define a mapping between variables of the customer company data (keys) and dynamic fields of a ticket (values). The purpose is to store customer company data in ticket dynamic fields. The dynamic fields must be present in the system and should be enabled for AgentTicketFreeText, so that they can be set/updated manually by the agent. They mustn\'t be enabled for AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer. If they were, they would have precedence over the automatically set values. To use this mapping, you have to also activate the Ticket::EventModulePost###4100-DynamicFieldFromCustomerCompany setting.' =>
+            '',
+        'This event module stores attributes from customer companies in ticket dynamic fields. Please see DynamicFieldFromCustomerCompany::Mapping setting for how to configure the mapping.' =>
+            '',
+        'Required permissions to use the NoteToLinkedTicket screen in the agent interface.' =>
+            '',
+        'Sets the state of the selected linked ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Defines the default next state of a ticket after adding a note in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Activates the selection if a note in NoteToLinkedTicket screen should be created in this origin ticket.' =>
+            '',
+        'Defines the default value if a note in NoteToLinkedTicket screen should be created in this origin ticket.' =>
+            '',
+        'Sets the default subject for notes added in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets the default body text for notes added in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Allows adding notes in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets if a note in NoteToLinkedTicket screen must be filled in by the agent.' =>
+            '',
+        'Defines the history type for the NoteToLinkedTicket screen, which will be used for ticket history in the agent interface.' =>
+            '',
+        'Defines the history comment for the NoteToLinkedTicket screen, which will be used for ticket history in the agent interface.' =>
+            '',
+        'Defines if the note in the NoteToLinkedTicket screen of the agent interface is visible for the customer by default.' =>
+            '',
+        'Sets the ticket type in the NoteToLinkedTicket screen of the agent interface (Ticket::Type needs to be activated).' =>
+            '',
+        'Sets the service in the NoteToLinkedTicket screen of the agent interface (Ticket::Service needs to be activated).' =>
+            '',
+        'Sets the queue in the NoteToLinkedTicket screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Sets the ticket owner in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets the responsible agent of the ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets the state of a ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Defines the next state of a ticket after adding a note in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Shows the ticket priority options in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Defines the default ticket priority in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '無効-暫定',
@@ -8620,6 +8693,7 @@ Thanks for your help!
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             '小さいフォーマットでのチケット一覧の表示を許可します（CustomerInfo => 1 - 顧客情報も表示します)。',
         'Always show RichText if available' => '',
+        'An additional screen to add notes to a linked ticket.' => '',
         'Answer' => '回答',
         'Appointment Calendar overview page.' => '予約カレンダーの表示',
         'Appointment Notifications' => '予約の通知',

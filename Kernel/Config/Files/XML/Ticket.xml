@@ -2358,6 +2358,104 @@
             <Item ValueType="String"></Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###CreatedQueueIDs" Required="0" Valid="0">
+        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
+        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
+        <Value>
+            <Array></Array>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###CreatedUserIDs" Required="0" Valid="0">
+        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
+        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
+        <Value>
+            <Array></Array>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###CustomerUserID" Required="0" Valid="0">
+        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
+        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
+        <Value>
+            <Item ValueType="String"></Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###CustomerUserLoginRaw" Required="0" Valid="0">
+        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
+        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
+        <Value>
+            <Item ValueType="String"></Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###LockIDs" Required="0" Valid="0">
+        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
+        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
+        <Value>
+            <Array></Array>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_AttachmentName" Required="0" Valid="0">
+        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
+        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
+        <Value>
+            <Item ValueType="String"></Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###MIMEBase_Bcc" Required="0" Valid="0">
+        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
+        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
+        <Value>
+            <Item ValueType="String"></Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###OwnerIDs" Required="0" Valid="0">
+        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
+        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
+        <Value>
+            <Array></Array>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###PriorityIDs" Required="0" Valid="0">
+        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
+        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
+        <Value>
+            <Array></Array>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###TicketLastChangeTimePoint" Required="0" Valid="0">
+        <Description Translatable="1">Default data to use on attribute for ticket search screen. Example: "TicketLastChangeTimePointFormat=year;TicketLastChangeTimePointStart=Last;TicketLastChangeTimePoint=2;".</Description>
+        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
+        <Value>
+            <Item ValueType="String"></Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###TicketLastChangeTimeSlot" Required="0" Valid="0">
+        <Description Translatable="1">Default data to use on attribute for ticket search screen. Example: "TicketLastChangeTimeStartYear=2010;TicketLastChangeTimeStartMonth=10;TicketLastChangeTimeStartDay=4;TicketLastChangeTimeStopYear=2010;TicketLastChangeTimeMonth=11;TicketLastChangeTimeStopDay=3;".</Description>
+        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
+        <Value>
+            <Item ValueType="String"></Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###TicketPendingTimePoint" Required="0" Valid="0">
+        <Description Translatable="1">Default data to use on attribute for ticket search screen. Example: "TicketPendingTimePointFormat=year;TicketPendingTimePointStart=Last;TicketPendingTimePoint=2;".</Description>
+        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
+        <Value>
+            <Item ValueType="String"></Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###TicketPendingTimeSlot" Required="0" Valid="0">
+        <Description Translatable="1">Default data to use on attribute for ticket search screen. Example: "TicketPendingTimeStartYear=2010;TicketPendingTimeStartMonth=10;TicketPendingTimeStartDay=4;TicketPendingTimeStopYear=2010;TicketPendingTimeMonth=11;TicketPendingTimeStopDay=3;".</Description>
+        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
+        <Value>
+            <Item ValueType="String"></Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###TypeIDs" Required="0" Valid="0">
+        <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
+        <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
+        <Value>
+            <Array></Array>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketSearch###Defaults###SearchInArchive" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="0">
         <Description Translatable="1">Defines the default shown ticket search attribute for ticket search screen.</Description>
         <Navigation>Frontend::Agent::View::TicketSearch</Navigation>
@@ -7666,7 +7764,6 @@
             <Hash>
                 <Item Key="JavaScript">
                     <Array>
-                        <Item>Core.Agent.CustomerSearch.js</Item>
                         <Item>Core.Agent.CustomerSearchAutoComplete.js</Item>
                         <Item>Core.Agent.TicketAction.js</Item>
                         <Item>Core.Agent.TicketPhone.js</Item>
@@ -7809,7 +7906,6 @@
             <Hash>
                 <Item Key="JavaScript">
                     <Array>
-                        <Item>Core.Agent.CustomerSearch.js</Item>
                         <Item>Core.Agent.CustomerSearchAutoComplete.js</Item>
                         <Item>Core.Agent.TicketAction.js</Item>
                         <Item>Core.Agent.TicketEmail.js</Item>
@@ -8347,6 +8443,7 @@
                         <Item>Core.Agent.LinkObject.js</Item>
                         <Item>Core.Agent.TableFilters.js</Item>
                         <Item>Core.Agent.TicketFormDraft.js</Item>
+                        <Item>Core.Agent.TicketNoteToLinkedTicket.js</Item>
                     </Array>
                 </Item>
             </Hash>
@@ -8812,7 +8909,6 @@
             <Hash>
                 <Item Key="JavaScript">
                     <Array>
-                        <Item>Core.Agent.CustomerSearch.js</Item>
                         <Item>Core.Agent.CustomerSearchAutoComplete.js</Item>
                         <Item>Core.Agent.TicketAction.js</Item>
                         <Item>Core.Agent.TicketCompose.js</Item>
@@ -8884,7 +8980,6 @@
             <Hash>
                 <Item Key="JavaScript">
                     <Array>
-                        <Item>Core.Agent.CustomerSearch.js</Item>
                         <Item>Core.Agent.CustomerSearchAutoComplete.js</Item>
                         <Item>Core.Agent.TicketAction.js</Item>
                         <Item>Core.Agent.TicketForward.js</Item>
@@ -8922,7 +9017,6 @@
             <Hash>
                 <Item Key="JavaScript">
                     <Array>
-                        <Item>Core.Agent.CustomerSearch.js</Item>
                         <Item>Core.Agent.CustomerSearchAutoComplete.js</Item>
                         <Item>Core.Agent.TicketAction.js</Item>
                         <Item>Core.Agent.TicketEmailOutbound.js</Item>
@@ -8960,7 +9054,6 @@
             <Hash>
                 <Item Key="JavaScript">
                     <Array>
-                        <Item>Core.Agent.CustomerSearch.js</Item>
                         <Item>Core.Agent.CustomerSearchAutoComplete.js</Item>
                         <Item>Core.Agent.TicketAction.js</Item>
                         <Item>Core.Agent.TicketEmailResend.js</Item>
@@ -8997,7 +9090,6 @@
             <Hash>
                 <Item Key="JavaScript">
                     <Array>
-                        <Item>Core.Agent.CustomerSearch.js</Item>
                         <Item>Core.Agent.CustomerSearchAutoComplete.js</Item>
                         <Item>Core.Agent.TicketAction.js</Item>
                         <Item>Core.Agent.TicketSplit.js</Item>
@@ -10834,7 +10926,6 @@
                 <Item Key="JavaScript">
                     <Array>
                         <Item>Core.Customer.TicketZoom.js</Item>
-                        <Item>Core.UI.Popup.js</Item>
                     </Array>
                 </Item>
             </Hash>
@@ -13628,6 +13719,13 @@ Thanks for your help!
                         <Item Key="Valid">1</Item>
                     </Hash>
                 </Item>
+                <Item Key="AgentTicketNoteToLinkedTicket">
+                    <Hash>
+                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketNoteToLinkedTicket</Item>
+                        <Item Key="Prio">50</Item>
+                        <Item Key="Valid">1</Item>
+                    </Hash>
+                </Item>
             </Hash>
         </Value>
     </Setting>
@@ -13696,6 +13794,13 @@ Thanks for your help!
                     <Hash>
                         <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketNote</Item>
                         <Item Key="Prio">800</Item>
+                        <Item Key="Valid">1</Item>
+                    </Hash>
+                </Item>
+                <Item Key="AgentTicketNoteToLinkedTicket">
+                    <Hash>
+                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketNoteToLinkedTicket</Item>
+                        <Item Key="Prio">50</Item>
                         <Item Key="Valid">1</Item>
                     </Hash>
                 </Item>
@@ -13784,6 +13889,13 @@ Thanks for your help!
                         <Item Key="Valid">1</Item>
                     </Hash>
                 </Item>
+                <Item Key="AgentTicketNoteToLinkedTicket">
+                    <Hash>
+                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketNoteToLinkedTicket</Item>
+                        <Item Key="Prio">50</Item>
+                        <Item Key="Valid">1</Item>
+                    </Hash>
+                </Item>
             </Hash>
         </Value>
     </Setting>
@@ -13824,6 +13936,13 @@ Thanks for your help!
                     <Hash>
                         <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketCompose</Item>
                         <Item Key="Prio">100</Item>
+                        <Item Key="Valid">1</Item>
+                    </Hash>
+                </Item>
+                <Item Key="AgentTicketNoteToLinkedTicket">
+                    <Hash>
+                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketNoteToLinkedTicket</Item>
+                        <Item Key="Prio">50</Item>
                         <Item Key="Valid">1</Item>
                     </Hash>
                 </Item>

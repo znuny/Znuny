@@ -104,7 +104,7 @@ perform TicketCreate Operation. This will return the created ticket number.
 
                 PendingTime {       # optional
                     Year   => 2011,
-                    Month  => 12
+                    Month  => 12,
                     Day    => 03,
                     Hour   => 23,
                     Minute => 05,
@@ -180,8 +180,8 @@ perform TicketCreate Operation. This will return the created ticket number.
                     ExcludeMuteNotificationToUserID => [1, 2, 3]                   # optional
                     Attachment => [
                         {
-                            Content     => 'content'                                 # base64 encoded
-                            ContentType => 'some content type'
+                            Content     => 'content',                                # base64 encoded
+                            ContentType => 'some content type',
                             Filename    => 'some fine name'
                         },
                         # ...
@@ -206,16 +206,16 @@ perform TicketCreate Operation. This will return the created ticket number.
 
             Attachment => [
                 {
-                    Content     => 'content'                                 # base64 encoded
-                    ContentType => 'some content type'
+                    Content     => 'content',                                # base64 encoded
+                    ContentType => 'some content type',
                     Filename    => 'some fine name'
                 },
                 # ...
             ],
             #or
             #Attachment => {
-            #    Content     => 'content'
-            #    ContentType => 'some content type'
+            #    Content     => 'content',
+            #    ContentType => 'some content type',
             #    Filename    => 'some fine name'
             #},
         },
@@ -226,10 +226,10 @@ perform TicketCreate Operation. This will return the created ticket number.
         ErrorMessage    => '',                      # in case of error
         Data            => {                        # result data payload after Operation
             TicketID    => 123,                     # Ticket ID Znuny
-            TicketNumber => 2324454323322           # Ticket number in Znuny
+            TicketNumber => 2324454323322,          # Ticket number in Znuny
             ArticleID   => 43,                      # Article ID in Znuny
             Error => {                              # should not return errors
-                    ErrorCode    => 'Ticket.Create.ErrorCode'
+                    ErrorCode    => 'Ticket.Create.ErrorCode',
                     ErrorMessage => 'Error Description'
             },
 
@@ -261,7 +261,7 @@ perform TicketCreate Operation. This will return the created ticket number.
                     Responsible        => 'some_responsible_login',
                     ResponsibleID      => 123,
                     Age                => 3456,
-                    Created            => '2010-10-27 20:15:00'
+                    Created            => '2010-10-27 20:15:00',
                     CreateBy           => 123,
                     Changed            => '2010-10-27 20:15:15',
                     ChangeBy           => 123,

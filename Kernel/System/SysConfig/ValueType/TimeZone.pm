@@ -127,7 +127,7 @@ Extracts the effective value from a XML parsed setting.
         Name           => 'SettingName',
         EffectiveValue => 'UTC',            # (optional)
         DefaultValue   => 'UTC',            # (optional)
-        Class          => 'My class'        # (optional)
+        Class          => 'My class',       # (optional)
         RW             => 1,                # (optional) Allow editing. Default 0.
         Item           => [                 # (optional) XML parsed item
             {

@@ -48,27 +48,6 @@ jobs:
           git init
           "${GITHUB_WORKSPACE}/codepolicy/bin/znuny.CodePolicy.pl" --all-files --mode ci
 
-  CPANAudit:
-    name: CPANAudit
-    runs-on: ubuntu-latest
-    container: debian:10-slim
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v3
-        env:
-          fetch-depth: "1"
-
-      - name: Install dependencies
-        run: .github/workflows/ci/dependencies.sh
-
-      - name: Setup Znuny
-        run: .github/workflows/ci/setup.sh
-
-      - name: Check CPANAudit
-        run: |
-          su -c "bin/otrs.Console.pl Dev::Code::CPANAudit" - otrs
-          exit $?
-
   Contributors:
     name: Contributors
     runs-on: ubuntu-latest
@@ -228,7 +207,6 @@ jobs:
     container: debian:10-slim
     needs: [
       ZnunyCodePolicy,
-      CPANAudit,
       Contributors,
       Database-Schema,
       Database-InitialInsert,

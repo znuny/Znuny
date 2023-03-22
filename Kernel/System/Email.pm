@@ -702,6 +702,7 @@ Really send the mail
     );
 
     # or
+
     my $Result = $SendObject->SendExecute(
         From                   => $RealFrom,
         To                     => $To, # can be a string with comma separated mail addresses

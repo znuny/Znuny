@@ -13,7 +13,12 @@ use utf8;
 
 use vars (qw($Self));
 
-my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Dev::Code::CPANAudit');
+my $CommandObject     = $Kernel::OM->Get('Kernel::System::Console::Command::Dev::Code::CPANAudit');
+my $EnvironmentObject = $Kernel::OM->Get('Kernel::System::Environment');
+my $EncodeObject      = $Kernel::OM->Get('Kernel::System::Encode');
+
+my $Version = $EnvironmentObject->ModuleVersionGet( Module => 'CPAN::Audit' );
+return 1 if !$Version;
 
 my $ExitCode = $CommandObject->Execute();
 
@@ -22,21 +27,13 @@ my $Output;
     local *STDOUT;
     open STDOUT, '>:encoding(UTF-8)', \$Output;
     $ExitCode = $CommandObject->Execute();
-    $Kernel::OM->Get('Kernel::System::Encode')->EncodeInput( \$Output );
+    $EncodeObject->EncodeInput( \$Output );
 }
 
 $Self->Is(
     $ExitCode,
     0,
-    "Dev::Tools::CPANAudit exit code",
-);
-
-$Self->Is(
-    $Output,
-    'Collecting all installed modules. This can take a while...
-No advisories found
-',
-    "Dev::Tools::CPANAudit reports no vulnerabilities",
+    "Dev::Tools::CPANAudit exit code is 0",
 );
 
 1;

@@ -15,7 +15,7 @@ use warnings;
 our $ObjectManagerDisabled = 1;
 
 use Kernel::Language qw(Translatable);
-use Kernel::System::VariableCheck qw(IsArrayRefWithData);
+use Kernel::System::VariableCheck qw(:all);
 
 sub new {
     my ( $Type, %Param ) = @_;
@@ -48,6 +48,11 @@ sub Run {
             OverriddenInXML => 1,
             UserID          => $Self->{UserID},
         );
+
+        my $InvalidConfigLevelJSONResponse = $Self->_ReturnJSONOnInvalidConfigLevel(
+            Setting => \%Setting,
+        );
+        return $InvalidConfigLevelJSONResponse if defined $InvalidConfigLevelJSONResponse;
 
         my %Result;
 
@@ -126,6 +131,11 @@ sub Run {
             UserID          => $Self->{UserID},
         );
 
+        my $InvalidConfigLevelJSONResponse = $Self->_ReturnJSONOnInvalidConfigLevel(
+            Setting => \%Setting,
+        );
+        return $InvalidConfigLevelJSONResponse if defined $InvalidConfigLevelJSONResponse;
+
         my %LockStatus = $SysConfigObject->SettingLockCheck(
             DefaultID           => $Setting{DefaultID},
             ExclusiveLockGUID   => $Setting{ExclusiveLockGUID} || '1',
@@ -198,6 +208,11 @@ sub Run {
         my %Setting = $SysConfigObject->SettingGet(
             Name => $SettingName,
         );
+
+        my $InvalidConfigLevelJSONResponse = $Self->_ReturnJSONOnInvalidConfigLevel(
+            Setting => \%Setting,
+        );
+        return $InvalidConfigLevelJSONResponse if defined $InvalidConfigLevelJSONResponse;
 
         if ( grep { $_ eq 'reset-globally' } @Options ) {
 
@@ -343,6 +358,11 @@ sub Run {
         my %Setting = $SysConfigObject->SettingGet(
             Name => $SettingName,
         );
+
+        my $InvalidConfigLevelJSONResponse = $Self->_ReturnJSONOnInvalidConfigLevel(
+            Setting => \%Setting,
+        );
+        return $InvalidConfigLevelJSONResponse if defined $InvalidConfigLevelJSONResponse;
 
         # try to lock to the current user
         if (
@@ -534,6 +554,11 @@ sub Run {
             return $Self->_ReturnJSON( Response => \%Result );
         }
 
+        my $InvalidConfigLevelJSONResponse = $Self->_ReturnJSONOnInvalidConfigLevel(
+            Setting => \%Setting,
+        );
+        return $InvalidConfigLevelJSONResponse if defined $InvalidConfigLevelJSONResponse;
+
         my $Value = $Setting{XMLContentParsed}->{Value}->[0];
 
         %Result = $SysConfigObject->SettingAddItem(
@@ -584,6 +609,11 @@ sub Run {
             $Result{Error} = Translatable("Setting not found.");
             return $Self->_ReturnJSON( Response => \%Result );
         }
+
+        my $InvalidConfigLevelJSONResponse = $Self->_ReturnJSONOnInvalidConfigLevel(
+            Setting => \%Setting,
+        );
+        return $InvalidConfigLevelJSONResponse if defined $InvalidConfigLevelJSONResponse;
 
         my $Value = $Setting{XMLContentParsed}->{Value}->[0];
 
@@ -814,6 +844,55 @@ sub _CheckInvalidSettings {
     return 0 if !@InvalidSettings;
 
     return 1;
+}
+
+sub _ReturnJSONOnInvalidConfigLevel {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+    my $LogObject       = $Kernel::OM->Get('Kernel::System::Log');
+    my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
+
+    NEEDED:
+    for my $Needed (qw(Setting)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Need $Needed!",
+        );
+        return;
+    }
+
+    return if !IsHashRefWithData( $Param{Setting} );
+    return if !$Param{Setting}->{HasConfigLevel};
+
+    my $ConfigLevel = $ConfigObject->Get('ConfigLevel');
+    return if !defined $ConfigLevel;
+
+    return if $Param{Setting}->{HasConfigLevel} >= $ConfigLevel;
+
+    my %Response;
+
+    $Response{Data}->{Error} = $Kernel::OM->Get('Kernel::Language')->Translate(
+        "System was unable to update setting!",
+    );
+
+    $Response{Data}->{HTMLStrg} = $SysConfigObject->SettingRender(
+        Setting => $Param{Setting},
+
+        #         RW      => $UpdatedSetting{ExclusiveLockGUID} ? 1 : 0,
+        UserID => $Self->{UserID},
+    );
+
+    for my $Key (qw(IsModified IsDirty ExclusiveLockGUID IsValid UserModificationActive)) {
+        $Response{Data}->{SettingData}->{$Key} = $Param{Setting}->{$Key};
+    }
+
+    $Response{Data}->{DeploymentNeeded} = 0;
+    $Response{Data}->{SettingData}->{Invalid} = 1;
+
+    return $Self->_ReturnJSON( Response => \%Response );
 }
 
 1;

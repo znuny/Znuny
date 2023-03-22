@@ -126,7 +126,7 @@ sub Run {
 
     # show error screen if ACL prohibits this action
     if ( !$AclActionLookup{ $Self->{Action} } ) {
-        return $LayoutObject->NoPermission( WithHeader => 'yes' );
+        return $LayoutObject->CustomerNoPermission( WithHeader => 'yes' );
     }
 
     my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
