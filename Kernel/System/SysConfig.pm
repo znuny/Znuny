@@ -148,7 +148,7 @@ Returns:
         ChangeTime               => "2016-05-29 11:04:04",
         ChangeBy                 => 1,
         DefaultValue             => 'Old default value',
-        OverriddenFileName        => '/opt/otrs/Kernel/Config/Files/ZZZ.pm',
+        OverriddenFileName        => '/opt/znuny/Kernel/Config/Files/ZZZ.pm',
     );
 
 =cut

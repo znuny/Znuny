@@ -1182,22 +1182,22 @@ sub Data {
         'Client Certificate' => '클라이언트 인증서',
         'The full path and name of the SSL client certificate file (must be in PEM, DER or PKCS#12 format).' =>
             'SSL 클라이언트 인증서 파일의 전체 경로 및 이름 (PEM, DER 또는 PKCS # 12 형식이어야 함).',
-        'e.g. /opt/otrs/var/certificates/SOAP/certificate.pem' => '예 : /opt/otrs/var/certificates/SOAP/certificate.pem',
+        'e.g. /opt/znuny/var/certificates/SOAP/certificate.pem' => '예 : /opt/znuny/var/certificates/SOAP/certificate.pem',
         'Client Certificate Key' => '클라이언트 인증서 키',
         'The full path and name of the SSL client certificate key file (if not already included in certificate file).' =>
             'SSL 클라이언트 인증서 키 파일의 전체 경로 및 이름 (아직 인증서 파일에 포함되어 있지 않은 경우).',
-        'e.g. /opt/otrs/var/certificates/SOAP/key.pem' => '예 : /opt/otrs/var/certificates/SOAP/key.pem',
+        'e.g. /opt/znuny/var/certificates/SOAP/key.pem' => '예 : /opt/znuny/var/certificates/SOAP/key.pem',
         'Client Certificate Key Password' => '클라이언트 인증서 키 암호',
         'The password to open the SSL certificate if the key is encrypted.' =>
             '키가 암호화 된 경우 SSL 인증서를 여는 암호입니다.',
         'Certification Authority (CA) Certificate' => '인증 기관 (CA) 인증서',
         'The full path and name of the certification authority certificate file that validates SSL certificate.' =>
             'SSL 인증서의 유효성을 검사하는 인증 기관 인증서 파일의 전체 경로 및 이름입니다.',
-        'e.g. /opt/otrs/var/certificates/SOAP/CA/ca.pem' => '예 : /opt/otrs/var/certificates/SOAP/CA/ca.pem',
+        'e.g. /opt/znuny/var/certificates/SOAP/CA/ca.pem' => '예 : /opt/znuny/var/certificates/SOAP/CA/ca.pem',
         'Certification Authority (CA) Directory' => '인증 기관 (CA) 디렉토리',
         'The full path of the certification authority directory where the CA certificates are stored in the file system.' =>
             'CA 인증서가 파일 시스템에 저장되는 인증 기관 디렉토리의 전체 경로입니다.',
-        'e.g. /opt/otrs/var/certificates/SOAP/CA' => '예 : / opt / otrs / var / certificates / SOAP / CA',
+        'e.g. /opt/znuny/var/certificates/SOAP/CA' => '예 : / opt / otrs / var / certificates / SOAP / CA',
         'Controller mapping for Invoker' => '호출자에 대한 컨트롤러 매핑',
         'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
             '호출자가 요청을 보내야하는 컨트롤러. \':\'로 표시된 변수는 데이터 값으로 대체되고 요청과 함께 전달됩니다. (예 : / Ticket / : TicketID? UserLogin = : UserLogin & Password = : Password).',
@@ -2155,8 +2155,8 @@ sub Data {
         'Find out how to use the system configuration by reading the %s.' =>
             '%s를 읽음으로써 시스템 구성을 사용하는 방법을 알아보십시오.',
         'Search in all settings...' => '모든 설정에서 검색...',
-        'There are currently no settings available. Please make sure to run \'otrs.Console.pl Maint::Config::Rebuild\' before using the software.' =>
-            '현재 사용할 수있는 설정이 없습니다. 소프트웨어를 사용하기 전에 \'otrs.Console.pl Maint :: Config :: Rebuild\'를 실행하십시오. ',
+        'There are currently no settings available. Please make sure to run \'znuny.Console.pl Maint::Config::Rebuild\' before using the software.' =>
+            '현재 사용할 수있는 설정이 없습니다. 소프트웨어를 사용하기 전에 \'znuny.Console.pl Maint :: Config :: Rebuild\'를 실행하십시오. ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationDeployment.tt
         'Changes Deployment' => '변경 사항 배포',
@@ -2443,8 +2443,8 @@ sub Data {
             '.dist (확장자없이) \'%s\'파일이 있는지 확인하십시오. 이 cron 작업은 OTRS 데몬이 실행중인 경우 5 분마다 점검하고 필요한 경우 시작합니다.',
         'Execute \'%s start\' to make sure the cron jobs of the \'otrs\' user are active.' =>
             '\'%s start\'를 실행하여 \'otrs\'사용자의 cron 작업이 활성 상태인지 확인하십시오.',
-        'After 5 minutes, check that the OTRS Daemon is running in the system (\'bin/otrs.Daemon.pl status\').' =>
-            '5 분 후, OTRS 데몬이 시스템에서 실행 중인지 확인하십시오 ( \'bin / otrs.Daemon.pl status\').',
+        'After 5 minutes, check that the OTRS Daemon is running in the system (\'bin/znuny.Daemon.pl status\').' =>
+            '5 분 후, OTRS 데몬이 시스템에서 실행 중인지 확인하십시오 ( \'bin / znuny.Daemon.pl status\').',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboard.tt
         'Dashboard' => '현황판',
@@ -3941,8 +3941,8 @@ sub Data {
         'Need param Key to download!' => '다운로드하려면 param이 필요합니다!',
 
         # Perl Module: Kernel/Modules/AdminPackageManager.pm
-        'Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/otrs.Console.pl to install packages!' =>
-            '죄송합니다, Apache :: Reload는 Apache config 파일의 PerlModule 및 PerlInitHandler로 필요합니다. scripts / apache2-httpd.include.conf도 참조하십시오. 또는 명령 행 도구 bin / otrs.Console.pl을 사용하여 패키지를 설치할 수 있습니다!',
+        'Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/znuny.Console.pl to install packages!' =>
+            '죄송합니다, Apache :: Reload는 Apache config 파일의 PerlModule 및 PerlInitHandler로 필요합니다. scripts / apache2-httpd.include.conf도 참조하십시오. 또는 명령 행 도구 bin / znuny.Console.pl을 사용하여 패키지를 설치할 수 있습니다!',
         'No such package!' => '그런 패키지는 없습니다!',
         'No such file %s in package!' => '패키지에 %s 파일이 없습니다!',
         'No such file %s in local file system!' => '로컬 파일 시스템에 %s 파일이 없습니다!',
@@ -5225,8 +5225,8 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InvalidDefaultValues.pm
         'Invalid Default Values' => '잘못된 기본값',
-        'Tables with invalid default values were found. In order to fix it automatically, please run: bin/otrs.Console.pl Maint::Database::Check --repair' =>
-            '잘못된 기본값이있는 테이블을 찾았습니다. 자동으로 수정하려면 다음을 실행하십시오. bin / otrs.Console.pl Maint :: Database :: Check --repair',
+        'Tables with invalid default values were found. In order to fix it automatically, please run: bin/znuny.Console.pl Maint::Database::Check --repair' =>
+            '잘못된 기본값이있는 테이블을 찾았습니다. 자동으로 수정하려면 다음을 실행하십시오. bin / znuny.Console.pl Maint :: Database :: Check --repair',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/MaxAllowedPacket.pm
         'Maximum Query Size' => '최대 쿼리 크기',
@@ -5448,11 +5448,11 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
         'Orphaned Records In ticket_lock_index Table' => 'ticket_lock_index 테이블의 고아 레코드',
-        'Table ticket_lock_index contains orphaned records. Please run bin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            '표 ticket_lock_index에는 분리 된 레코드가 있습니다. bin / otrs.Console.pl "Maint :: Ticket :: QueueIndexCleanup"을 실행하여 StaticDB 색인을 정리하십시오.',
+        'Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            '표 ticket_lock_index에는 분리 된 레코드가 있습니다. bin / znuny.Console.pl "Maint :: Ticket :: QueueIndexCleanup"을 실행하여 StaticDB 색인을 정리하십시오.',
         'Orphaned Records In ticket_index Table' => 'ticket_index 테이블의 고아 레코드',
-        'Table ticket_index contains orphaned records. Please run bin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            '표 ticket_index에는 분리 된 레코드가 있습니다. bin / otrs.Console.pl "Maint :: Ticket :: QueueIndexCleanup"을 실행하여 StaticDB 색인을 정리하십시오.',
+        'Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            '표 ticket_index에는 분리 된 레코드가 있습니다. bin / znuny.Console.pl "Maint :: Ticket :: QueueIndexCleanup"을 실행하여 StaticDB 색인을 정리하십시오.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
         'Time Settings' => '시간 설정',
@@ -6536,8 +6536,8 @@ sub Data {
             '"AutoIncrement"가 TicketNumberGenerator로 선택된 경우 최소 티켓 카운터 크기를 설정합니다. 기본값은 5이며, 이는 카운터가 10000에서 시작 함을 의미합니다. ',
         'Enables the minimal ticket counter size (if "Date" was selected as TicketNumberGenerator).' =>
             '최소 티켓 카운터 크기를 활성화합니다 ( "Date"가 TicketNumberGenerator로 선택된 경우).',
-        'IndexAccelerator: to choose your backend TicketViewAccelerator module. "RuntimeDB" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). "StaticDB" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command "bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild" for initial index creation.' =>
-            'IndexAccelerator : 백엔드 TicketViewAccelerator 모듈을 선택합니다. "RuntimeDB"는 티켓 테이블에서 각 큐 뷰를 생성합니다 (성능상의 문제없이 최대 약 60,000 개의 티켓과 시스템의 6.000 개 티켓). "StaticDB"는보기와 같이 작동하는 별도의 티켓 색인 표를 사용하는 가장 강력한 모듈입니다 (80.000 개 이상의 티켓이 시스템에 저장되어있는 경우 권장). 초기 색인 작성은 "bin / otrs.Console.pl Maint :: Ticket :: QueueIndexRebuild"명령을 사용하십시오.',
+        'IndexAccelerator: to choose your backend TicketViewAccelerator module. "RuntimeDB" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). "StaticDB" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command "bin/znuny.Console.pl Maint::Ticket::QueueIndexRebuild" for initial index creation.' =>
+            'IndexAccelerator : 백엔드 TicketViewAccelerator 모듈을 선택합니다. "RuntimeDB"는 티켓 테이블에서 각 큐 뷰를 생성합니다 (성능상의 문제없이 최대 약 60,000 개의 티켓과 시스템의 6.000 개 티켓). "StaticDB"는보기와 같이 작동하는 별도의 티켓 색인 표를 사용하는 가장 강력한 모듈입니다 (80.000 개 이상의 티켓이 시스템에 저장되어있는 경우 권장). 초기 색인 작성은 "bin / znuny.Console.pl Maint :: Ticket :: QueueIndexRebuild"명령을 사용하십시오.',
         'Saves the attachments of articles. "DB" stores all data in the database (not recommended for storing big attachments). "FS" stores the data on the filesystem; this is faster but the webserver should run under the OTRS user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when "FS" is used.' =>
             '기사의 첨부 파일을 저장합니다. "DB"는 모든 데이터를 데이터베이스에 저장합니다 (큰 첨부 파일 저장에는 권장되지 않음). "FS"는 데이터를 파일 시스템에 저장합니다. 이것은 더 빠르지 만 웹 서버는 OTRS 사용자 하에서 실행되어야합니다. 데이터 손실없이 이미 생산중인 시스템에서도 모듈 간을 전환 할 수 있습니다. 참고 : "FS"를 사용하면 첨부 파일 이름을 검색 할 수 없습니다.',
         'Specifies whether all storage backends should be checked when looking for attachments. This is only required for installations where some attachments are in the file system, and others in the database.' =>
@@ -6581,7 +6581,7 @@ sub Data {
             '이 이벤트 모듈은 CustomerUser의 특성을 DynamicFields 티켓으로 저장합니다. 매핑을 구성하는 방법은 DynamicFieldFromCustomerUser::Mapping 설정을 참조하십시오.',
         'Overloads (redefines) existing functions in Kernel::System::Ticket. Used to easily add customizations.' =>
             'Kernel :: System :: Ticket의 기존 함수를 오버로드 (재정의)합니다. 쉽게 사용자 정의를 추가하는 데 사용됩니다.',
-        'Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild".' =>
+        'Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild".' =>
             '',
         'Defines whether to index archived tickets for fulltext searches.' =>
             '전체 텍스트 검색을 위해 보관된 티켓의 색인을 생성할지 여부를 정의합니다.',
@@ -6589,7 +6589,7 @@ sub Data {
             '필터를 실행하거나 정지 단어 목록을 적용하지 않고 기사 검색 색인에서 원본 기사 텍스트의 저장을 강제 실행합니다. 이렇게하면 검색 색인의 크기가 커지고 전체 텍스트 검색 속도가 느려질 수 있습니다.',
         'Display a warning and prevent search when using stop words within fulltext search.' =>
             '전체 텍스트 검색 내에서 중지 단어를 사용할 때 경고를 표시하고 검색을 차단합니다.',
-        'Basic fulltext index settings. Execute "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild" in order to generate a new index.' =>
+        'Basic fulltext index settings. Execute "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild" in order to generate a new index.' =>
             '',
         'Fulltext index regex filters to remove parts of the text.' => '전체 텍스트 색인 정규식 필터는 텍스트의 일부를 제거합니다.',
         'English stop words for fulltext index. These words will be removed from the search index.' =>
@@ -7294,8 +7294,8 @@ sub Data {
             '티켓의 표시 가능 잠금을 정의합니다. 참고 :이 설정을 변경할 때 새 값을 사용하려면 캐시를 삭제해야합니다. 기본값 : 잠금 해제, tmp_lock.',
         'Defines the valid state types for a ticket. If a ticket is in a state which have any state type from this setting, this ticket will be considered as open, otherwise as closed.' =>
             '',
-        'Defines the valid states for unlocked tickets. To unlock tickets the script "bin/otrs.Console.pl Maint::Ticket::UnlockTimeout" can be used.' =>
-            '잠금 해제 된 티켓의 유효한 상태를 정의합니다. 티켓의 잠금을 해제하려면 "bin / otrs.Console.pl Maint :: Ticket :: UnlockTimeout"스크립트를 사용할 수 있습니다.',
+        'Defines the valid states for unlocked tickets. To unlock tickets the script "bin/znuny.Console.pl Maint::Ticket::UnlockTimeout" can be used.' =>
+            '잠금 해제 된 티켓의 유효한 상태를 정의합니다. 티켓의 잠금을 해제하려면 "bin / znuny.Console.pl Maint :: Ticket :: UnlockTimeout"스크립트를 사용할 수 있습니다.',
         'Sends reminder notifications of unlocked ticket after reaching the reminder date (only sent to ticket owner).' =>
             '미리 알림 날짜에 도달 한 후 잠금 해제 된 티켓에 대한 미리 알림을 전송합니다 (티켓 소유자에게만 전송 됨).',
         'Disables sending reminder notifications to the responsible agent of a ticket (Ticket::Responsible needs to be enabled).' =>

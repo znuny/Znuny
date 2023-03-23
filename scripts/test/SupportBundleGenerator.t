@@ -81,7 +81,7 @@ else {
 }
 
 # create an ARCHIVE file on developer systems to continue working
-my $ArchiveGeneratorTool = $Home . '/bin/otrs.CheckSum.pl';
+my $ArchiveGeneratorTool = $Home . '/bin/znuny.CheckSum.pl';
 
 # if tool is not present we can't continue
 if ( !-e $ArchiveGeneratorTool ) {

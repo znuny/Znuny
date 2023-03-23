@@ -673,7 +673,7 @@
         <Description Translatable="1">If "file" was selected for LogModule, a logfile must be specified. If the file doesn't exist, it will be created by the system.</Description>
         <Navigation>Core::Log</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">/tmp/otrs.log</Item>
+            <Item ValueType="String" ValueRegex="">/tmp/znuny.log</Item>
         </Value>
     </Setting>
     <Setting Name="LogModule::LogFile::Date" Required="1" Valid="1">
@@ -2564,7 +2564,7 @@
         <Description Translatable="1">Specifies the text that should appear in the log file to denote a CGI script entry.</Description>
         <Navigation>Core::Log</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">OTRS-CGI</Item>
+            <Item ValueType="String" ValueRegex="">Znuny-CGI</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::Output::FilterText###AAAURL" Required="0" Valid="1">
@@ -2927,7 +2927,7 @@
         <Description Translatable="1">Sets the options for PGP binary.</Description>
         <Navigation>Core::Crypt::PGP</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">--homedir /opt/otrs/.gnupg/ --batch --no-tty --yes</Item>
+            <Item ValueType="String" ValueRegex="">--homedir /opt/znuny/.gnupg/ --batch --no-tty --yes</Item>
         </Value>
     </Setting>
     <Setting Name="PGP::Options::DigestPreference" Required="0" Valid="1">

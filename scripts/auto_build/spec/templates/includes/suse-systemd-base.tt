@@ -29,14 +29,14 @@ SuSE series: ap
 [% '#' %] delete old RPM_BUILD_ROOT
 rm -rf $RPM_BUILD_ROOT
 [% '#' %] set DESTROOT
-export DESTROOT="/opt/otrs/"
+export DESTROOT="/opt/znuny/"
 [% '#' %] create RPM_BUILD_ROOT DESTROOT
 mkdir -p $RPM_BUILD_ROOT/$DESTROOT/
 [% '#' %] copy files
 cp -R . $RPM_BUILD_ROOT/$DESTROOT
 [% '#' %] configure apache
 install -d -m 755 $RPM_BUILD_ROOT/etc/apache2/conf.d
-install -m 644 scripts/apache2-httpd.include.conf $RPM_BUILD_ROOT/etc/apache2/conf.d/zzz_otrs.conf
+install -m 644 scripts/apache2-httpd.include.conf $RPM_BUILD_ROOT/etc/apache2/conf.d/zzz_znuny.conf
 
 [% '#' %] set permission
 [% webgroup = 'www' %]
@@ -44,20 +44,20 @@ export OTRSUSER=otrs
 useradd $OTRSUSER || :
 useradd wwwrun || :
 groupadd www || :
-$RPM_BUILD_ROOT/opt/otrs/bin/otrs.SetPermissions.pl --web-group=www
+$RPM_BUILD_ROOT/opt/znuny/bin/znuny.SetPermissions.pl --web-group=www
 
 %pre
 [% '#' %] useradd
 export OTRSUSER=otrs
-echo -n "Check OTRS user ... "
+echo -n "Check Znuny user ... "
 if id $OTRSUSER >/dev/null 2>&1; then
     echo "$OTRSUSER exists."
     [% '#' %] update groups
     usermod -g www $OTRSUSER
     [% '#' %] update home dir
-    usermod -d /opt/otrs $OTRSUSER
+    usermod -d /opt/znuny $OTRSUSER
 else
-    useradd $OTRSUSER -d /opt/otrs/ -s /bin/bash -g www -c 'OTRS System User' && echo "$OTRSUSER added."
+    useradd $OTRSUSER -d /opt/znuny/ -s /bin/bash -g www -c 'Znuny System User' && echo "$OTRSUSER added."
 fi
 echo "Enable apache module mod_perl..."
 a2enmod perl
@@ -78,5 +78,5 @@ a2enmod headers
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%config /etc/apache2/conf.d/zzz_otrs.conf
+%config /etc/apache2/conf.d/zzz_znuny.conf
 [% INCLUDE 'includes/files.tt' -%]

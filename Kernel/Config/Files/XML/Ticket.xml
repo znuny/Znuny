@@ -202,7 +202,7 @@
         </Value>
     </Setting>
     <Setting Name="Ticket::IndexModule" Required="1" Valid="1">
-        <Description Translatable="1">IndexAccelerator: to choose your backend TicketViewAccelerator module. "RuntimeDB" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). "StaticDB" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command "bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild" for initial index creation.</Description>
+        <Description Translatable="1">IndexAccelerator: to choose your backend TicketViewAccelerator module. "RuntimeDB" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). "StaticDB" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command "bin/znuny.Console.pl Maint::Ticket::QueueIndexRebuild" for initial index creation.</Description>
         <Navigation>Core::Ticket</Navigation>
         <Value>
             <Item ValueType="PerlModule" ValueFilter="Kernel/System/Ticket/IndexAccelerator/*.pm">Kernel::System::Ticket::IndexAccelerator::RuntimeDB</Item>
@@ -418,7 +418,7 @@
         </Value>
     </Setting>
     <Setting Name="Ticket::SearchIndexModule" Required="1" Valid="1" ConfigLevel="200">
-        <Description Translatable="1">Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild".</Description>
+        <Description Translatable="1">Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild".</Description>
         <Navigation>Core::Ticket::FulltextSearch</Navigation>
         <Value>
             <Item ValueType="PerlModule" ValueFilter="Kernel/System/Ticket/ArticleSearchIndex/*.pm">Kernel::System::Ticket::ArticleSearchIndex::DB</Item>
@@ -446,7 +446,7 @@
         </Value>
     </Setting>
     <Setting Name="Ticket::SearchIndex::Attribute" Required="1" Valid="1" ConfigLevel="200">
-        <Description Translatable="1">Basic fulltext index settings. Execute "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild" in order to generate a new index.</Description>
+        <Description Translatable="1">Basic fulltext index settings. Execute "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild" in order to generate a new index.</Description>
         <Navigation>Core::Ticket::FulltextSearch</Navigation>
         <Value>
             <Hash>
@@ -4778,7 +4778,7 @@
         </Value>
     </Setting>
     <Setting Name="Ticket::UnlockStateType" Required="1" Valid="1">
-        <Description Translatable="1">Defines the valid states for unlocked tickets. To unlock tickets the script "bin/otrs.Console.pl Maint::Ticket::UnlockTimeout" can be used.</Description>
+        <Description Translatable="1">Defines the valid states for unlocked tickets. To unlock tickets the script "bin/znuny.Console.pl Maint::Ticket::UnlockTimeout" can be used.</Description>
         <Navigation>Core::Ticket</Navigation>
         <Value>
             <Array>

@@ -370,7 +370,7 @@ sub LoadDefaults {
 #    $Self->{'LogModule::SysLog::Charset'} = 'utf-8';
 
     # param for LogModule Kernel::System::Log::File (required!)
-    $Self->{'LogModule::LogFile'} = '/tmp/otrs.log';
+    $Self->{'LogModule::LogFile'} = '/tmp/znuny.log';
 
     # param if the date (yyyy-mm) should be added as suffix to
     # logfile [0|1]
@@ -881,7 +881,7 @@ sub LoadDefaults {
 #    $Self->{WebUploadCacheModule} = 'Kernel::System::Web::UploadCache::FS';
 
     # CGILogPrefix
-    $Self->{CGILogPrefix} = 'OTRS-CGI';
+    $Self->{CGILogPrefix} = 'Znuny-CGI';
 
     # --------------------------------------------------- #
     # Agent Web Interface
@@ -921,7 +921,7 @@ sub LoadDefaults {
     # directories                                         #
     # --------------------------------------------------- #
     # root directory
-    $Self->{Home} = '/opt/otrs';
+    $Self->{Home} = '/opt/znuny';
 
     # tmp dir
     $Self->{TempDir} = '<OTRS_CONFIG_Home>/var/tmp';
@@ -1088,7 +1088,7 @@ sub LoadDefaults {
     # Package::RepositoryList
     # (repository list)
 #    $Self->{'Package::RepositoryList'} = {
-#        'ftp://ftp.example.com/pub/otrs/misc/packages/' => '[Example] ftp://ftp.example.com/',
+#        'ftp://ftp.example.com/pub/znuny/misc/packages/' => '[Example] ftp://ftp.example.com/',
 #    };
 
     # Package::Timeout
@@ -1104,7 +1104,7 @@ sub LoadDefaults {
     # --------------------------------------------------- #
     $Self->{PGP}            = 0;
     $Self->{'PGP::Bin'}     = '/usr/bin/gpg';
-    $Self->{'PGP::Options'} = '--homedir /opt/otrs/.gnupg/ --batch --no-tty --yes';
+    $Self->{'PGP::Options'} = '--homedir /opt/znuny/.gnupg/ --batch --no-tty --yes';
 
 #    $Self->{'PGP::Options'} = '--batch --no-tty --yes';
 #    $Self->{'PGP::Key::Password'}->{'D2DF79FA'} = 1234;
@@ -1247,7 +1247,7 @@ You can log in via the following URL:
 
     # CustomerGroupSupport (0 = compat. to OTRS 1.1 or lower)
     # (if this is 1, the you need to set the group <-> customer user
-    # relations! http://host/otrs/index.pl?Action=AdminCustomerUserGroup
+    # relations! http://host/znuny/index.pl?Action=AdminCustomerUserGroup
     # otherway, each user is ro/rw in each group!)
     $Self->{CustomerGroupSupport} = 0;
 

@@ -1188,22 +1188,22 @@ sub Data {
         'Client Certificate' => 'Kliens tanúsítvány',
         'The full path and name of the SSL client certificate file (must be in PEM, DER or PKCS#12 format).' =>
             'Az SSL-kliens tanúsítványfájljának teljes elérési útja és neve (PEM, DER vagy PKCS#12 formátumban kell lennie).',
-        'e.g. /opt/otrs/var/certificates/SOAP/certificate.pem' => 'például /opt/otrs/var/certificates/SOAP/certificate.pem',
+        'e.g. /opt/znuny/var/certificates/SOAP/certificate.pem' => 'például /opt/znuny/var/certificates/SOAP/certificate.pem',
         'Client Certificate Key' => 'Kliens tanúsítvány kulcsa',
         'The full path and name of the SSL client certificate key file (if not already included in certificate file).' =>
             'Az SSL-kliens tanúsítvány kulcsfájljának teljes elérési útja és neve (ha még nem tartalmazza a tanúsítványfájl).',
-        'e.g. /opt/otrs/var/certificates/SOAP/key.pem' => 'például /opt/otrs/var/certificates/SOAP/key.pem',
+        'e.g. /opt/znuny/var/certificates/SOAP/key.pem' => 'például /opt/znuny/var/certificates/SOAP/key.pem',
         'Client Certificate Key Password' => 'Kliens tanúsítvány kulcsának jelszava',
         'The password to open the SSL certificate if the key is encrypted.' =>
             'A jelszó az SSL-tanúsítvány megnyitásához, ha a kulcs titkosított.',
         'Certification Authority (CA) Certificate' => 'Hitelesítés-szolgáltató (CA) tanúsítvány',
         'The full path and name of the certification authority certificate file that validates SSL certificate.' =>
             'A hitelesítés-szolgáltató tanúsítványfájljának teljes elérési útja és neve, amely hitelesíti az SSL tanúsítványt.',
-        'e.g. /opt/otrs/var/certificates/SOAP/CA/ca.pem' => 'például /opt/otrs/var/certificates/SOAP/CA/ca.pem',
+        'e.g. /opt/znuny/var/certificates/SOAP/CA/ca.pem' => 'például /opt/znuny/var/certificates/SOAP/CA/ca.pem',
         'Certification Authority (CA) Directory' => 'Hitelesítés-szolgáltató (CA) könyvtár',
         'The full path of the certification authority directory where the CA certificates are stored in the file system.' =>
             'A hitelesítés-szolgáltató könyvtárának teljes elérési útja, ahol a CA tanúsítványok tárolva vannak a fájlrendszeren.',
-        'e.g. /opt/otrs/var/certificates/SOAP/CA' => 'például /opt/otrs/var/certificates/SOAP/CA',
+        'e.g. /opt/znuny/var/certificates/SOAP/CA' => 'például /opt/znuny/var/certificates/SOAP/CA',
         'Controller mapping for Invoker' => 'Vezérlő leképezés a meghívóhoz',
         'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
             'Az a vezérlő, amelyhez a meghívónak kéréseket kell küldenie. A kettősponttal „:” megjelölt változók az adatok értékével lesznek helyettesítve és a kéréssel együtt kerülnek átadásra. (például /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).',
@@ -2161,8 +2161,8 @@ sub Data {
         'Find out how to use the system configuration by reading the %s.' =>
             'Ismerje meg, hogy hogyan kell használni a rendszert az %s elolvasásával.',
         'Search in all settings...' => 'Keresés az összes beállításban…',
-        'There are currently no settings available. Please make sure to run \'otrs.Console.pl Maint::Config::Rebuild\' before using the software.' =>
-            'Jelenleg nincsenek elérhető beállítások. Győződjön meg arról, hogy lefuttatta-e az „otrs.Console.pl Maint::Config::Rebuild” parancsot a szoftver használata előtt.',
+        'There are currently no settings available. Please make sure to run \'znuny.Console.pl Maint::Config::Rebuild\' before using the software.' =>
+            'Jelenleg nincsenek elérhető beállítások. Győződjön meg arról, hogy lefuttatta-e az „znuny.Console.pl Maint::Config::Rebuild” parancsot a szoftver használata előtt.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationDeployment.tt
         'Changes Deployment' => 'Változások üzembe állítása',
@@ -2449,8 +2449,8 @@ sub Data {
             'Győződjön meg arról, hogy a(z) „%s” fájl létezik-e (.dist kiterjesztés nélkül). Ez a cron-feladat 5 percenként fogja ellenőrizni, hogy az OTRS démon fut-e, és szükség szerint elindítja azt.',
         'Execute \'%s start\' to make sure the cron jobs of the \'otrs\' user are active.' =>
             'Hajtsa végre a(z) „%s start” parancsot, hogy megbizonyosodjon arról, hogy az „otrs” felhasználó cron-feladatai aktívak-e.',
-        'After 5 minutes, check that the OTRS Daemon is running in the system (\'bin/otrs.Daemon.pl status\').' =>
-            'Ellenőrizze 5 perc után, hogy az OTRS démon fut-e a rendszeren („bin/otrs.Daemon.pl status”).',
+        'After 5 minutes, check that the OTRS Daemon is running in the system (\'bin/znuny.Daemon.pl status\').' =>
+            'Ellenőrizze 5 perc után, hogy az OTRS démon fut-e a rendszeren („bin/znuny.Daemon.pl status”).',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboard.tt
         'Dashboard' => 'Vezérlőpult',
@@ -3947,8 +3947,8 @@ sub Data {
         'Need param Key to download!' => 'Kulcs paraméter szükséges a letöltéshez!',
 
         # Perl Module: Kernel/Modules/AdminPackageManager.pm
-        'Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/otrs.Console.pl to install packages!' =>
-            'Sajnáljuk, de az Apache::Reload modul PerlModule és PerlInitHandler beállításként szükséges az Apache beállítófájljában. Nézze meg a scripts/apache2-httpd.include.conf parancsfájlt is. Alternatívaként használhatja a bin/otrs.Console.pl parancssori eszközt is a csomagok telepítéséhez!',
+        'Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/znuny.Console.pl to install packages!' =>
+            'Sajnáljuk, de az Apache::Reload modul PerlModule és PerlInitHandler beállításként szükséges az Apache beállítófájljában. Nézze meg a scripts/apache2-httpd.include.conf parancsfájlt is. Alternatívaként használhatja a bin/znuny.Console.pl parancssori eszközt is a csomagok telepítéséhez!',
         'No such package!' => 'Nincs ilyen csomag!',
         'No such file %s in package!' => 'Nincs ilyen %s fájl a csomagban!',
         'No such file %s in local file system!' => 'Nincs ilyen %s fájl a helyi fájlrendszeren!',
@@ -5231,8 +5231,8 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InvalidDefaultValues.pm
         'Invalid Default Values' => 'Érvénytelen alapértelmezett értékek',
-        'Tables with invalid default values were found. In order to fix it automatically, please run: bin/otrs.Console.pl Maint::Database::Check --repair' =>
-            'Érvénytelen alapértelmezett értékekkel rendelkező táblák találhatók. Az automatikus javításukhoz futtassa a következő parancsot: bin/otrs.Console.pl Maint::Database::Check --repair',
+        'Tables with invalid default values were found. In order to fix it automatically, please run: bin/znuny.Console.pl Maint::Database::Check --repair' =>
+            'Érvénytelen alapértelmezett értékekkel rendelkező táblák találhatók. Az automatikus javításukhoz futtassa a következő parancsot: bin/znuny.Console.pl Maint::Database::Check --repair',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/MaxAllowedPacket.pm
         'Maximum Query Size' => 'Legnagyobb lekérdezési méret',
@@ -5454,11 +5454,11 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
         'Orphaned Records In ticket_lock_index Table' => 'Árva rekordok a ticket_lock_index táblában',
-        'Table ticket_lock_index contains orphaned records. Please run bin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            'A ticket_lock_index tábla árva rekordokat tartalmaz. Futtassa a bin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup" parancsot a StaticDB index tisztításához.',
+        'Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            'A ticket_lock_index tábla árva rekordokat tartalmaz. Futtassa a bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" parancsot a StaticDB index tisztításához.',
         'Orphaned Records In ticket_index Table' => 'Árva rekordok a ticket_index táblában',
-        'Table ticket_index contains orphaned records. Please run bin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            'A ticket_index tábla árva rekordokat tartalmaz. Futtassa a bin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup" parancsot a StaticDB index tisztításához.',
+        'Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            'A ticket_index tábla árva rekordokat tartalmaz. Futtassa a bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" parancsot a StaticDB index tisztításához.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
         'Time Settings' => 'Időbeállítások',
@@ -6542,8 +6542,8 @@ sub Data {
             'Beállítja a legkisebb jegyszámlálóméretet, ha „AutoIncrement” lett kiválasztva jegyszám-előállítóként. Alapértelmezetten 5, amely azt jelenti, hogy a számláló 10000-től indul.',
         'Enables the minimal ticket counter size (if "Date" was selected as TicketNumberGenerator).' =>
             'Engedélyezi a legkisebb jegyszámláló méretet (ha „Date” lett kiválasztva mint jegyszám-előállító).',
-        'IndexAccelerator: to choose your backend TicketViewAccelerator module. "RuntimeDB" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). "StaticDB" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command "bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild" for initial index creation.' =>
-            'IndexAccelerator: a TicketViewAccelerator háttérprogram modul választásához. A „RuntimeDB” minden egyes várólista nézetet valós időben állít elő a jegytáblából (nincs teljesítmény-probléma a rendszeren körülbelül 60.000 összes jegyig és 6.000 nyitott jegyig). A „StaticDB” a legerősebb modul, amely egy további jegyindex táblát használ, amely úgy működik mint egy nézet (javasolt, ha több mint 80.000 és 6.000 nyitott jegy van a rendszeren tárolva). Használja a „bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild” parancsot a kezdeti index létrehozásához.',
+        'IndexAccelerator: to choose your backend TicketViewAccelerator module. "RuntimeDB" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). "StaticDB" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command "bin/znuny.Console.pl Maint::Ticket::QueueIndexRebuild" for initial index creation.' =>
+            'IndexAccelerator: a TicketViewAccelerator háttérprogram modul választásához. A „RuntimeDB” minden egyes várólista nézetet valós időben állít elő a jegytáblából (nincs teljesítmény-probléma a rendszeren körülbelül 60.000 összes jegyig és 6.000 nyitott jegyig). A „StaticDB” a legerősebb modul, amely egy további jegyindex táblát használ, amely úgy működik mint egy nézet (javasolt, ha több mint 80.000 és 6.000 nyitott jegy van a rendszeren tárolva). Használja a „bin/znuny.Console.pl Maint::Ticket::QueueIndexRebuild” parancsot a kezdeti index létrehozásához.',
         'Saves the attachments of articles. "DB" stores all data in the database (not recommended for storing big attachments). "FS" stores the data on the filesystem; this is faster but the webserver should run under the OTRS user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when "FS" is used.' =>
             'Elmenti a bejegyzések mellékleteit. A „DB” minden adatot az adatbázisban tárol (nem ajánlott nagy mellékletek tárolásához). Az „FS” a fájlrendszeren tárolja az adatokat. Ez gyorsabb, de a webkiszolgálót az OTRS felhasználó alatt kell futtatni. Adatvesztés nélkül válthat át a modulok között még egy olyan rendszeren is, amely produktív használatban van. Megjegyzés: A mellékletnevek keresése nem támogatott „FS” használata esetén.',
         'Specifies whether all storage backends should be checked when looking for attachments. This is only required for installations where some attachments are in the file system, and others in the database.' =>
@@ -6587,16 +6587,16 @@ sub Data {
             'Ez az eseménymodul az ügyfél-felhasználó jellemzőit tárolja jegy típusú dinamikus mezőkként. Nézze meg a DynamicFieldFromCustomerUser::Mapping beállítást ahhoz, hogy hogyan kell beállítani a leképezést.',
         'Overloads (redefines) existing functions in Kernel::System::Ticket. Used to easily add customizations.' =>
             'Túlterheli (újra meghatározza) a Kernel::System::Ticket helyen meglévő függvényeket. Személyre szabások könnyű hozzáadásához használható.',
-        'Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild".' =>
-            'Segít kiterjeszteni a bejegyzések szabad-szavas keresését (feladó, címzett, másolat, tárgy és törzs keresés). Fel fogja darabolni az összes bejegyzést, és egy indexet fog felépíteni a bejegyzés létrehozása után, körülbelül 50%-kal növelve a szabad-szavas kereséseket. Egy kezdeti index létrehozásához használja a „bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild” parancsfájlt.',
+        'Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild".' =>
+            'Segít kiterjeszteni a bejegyzések szabad-szavas keresését (feladó, címzett, másolat, tárgy és törzs keresés). Fel fogja darabolni az összes bejegyzést, és egy indexet fog felépíteni a bejegyzés létrehozása után, körülbelül 50%-kal növelve a szabad-szavas kereséseket. Egy kezdeti index létrehozásához használja a „bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild” parancsfájlt.',
         'Defines whether to index archived tickets for fulltext searches.' =>
             'Meghatározza, hogy kell-e indexelni az archivált jegyeket a szabad-szavas keresésekhez.',
         'Force the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.' =>
             'Az eredeti bejegyzésszöveg tárolásának kényszerítése a bejegyzés keresési indexében anélkül, hogy szűrőket hajtana végre vagy a kiszűrendő szavak listáit alkalmazná. Ez meg fogja növelni a keresési index méretét, és ezért lelassíthatja a szabad-szavas kereséseket.',
         'Display a warning and prevent search when using stop words within fulltext search.' =>
             'Figyelmeztetés megjelenítése és a keresés megakadályozása, ha kiszűrendő szavakat használ a szabad-szavas keresésen belül.',
-        'Basic fulltext index settings. Execute "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild" in order to generate a new index.' =>
-            'Alapvető szabad-szavas index beállítások. Futtassa a „bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild” parancsfájlt egy új index előállítása érdekében.',
+        'Basic fulltext index settings. Execute "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild" in order to generate a new index.' =>
+            'Alapvető szabad-szavas index beállítások. Futtassa a „bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild” parancsfájlt egy új index előállítása érdekében.',
         'Fulltext index regex filters to remove parts of the text.' => 'Szabad-szavas index reguláris kifejezés szűrők a szöveg részeinek áthelyezéséhez.',
         'English stop words for fulltext index. These words will be removed from the search index.' =>
             'Angol kiszűrendő szavak a szabad-szavas indexnél. Ezek a szavak el lesznek távolítva a keresési indexből.',
@@ -7300,8 +7300,8 @@ sub Data {
             'Meghatározza egy jegy látható zárait. MEGJEGYZÉS: ha megváltoztatja ezt a beállítást, akkor győződjön meg arról, hogy törölte-e a gyorsítótárat annak érdekében, hogy használhassa az új értéket. Alapértelmezett: unlock, tmp_lock.',
         'Defines the valid state types for a ticket. If a ticket is in a state which have any state type from this setting, this ticket will be considered as open, otherwise as closed.' =>
             'Meghatározza egy jegy érvényes állapottípusait. Ha a jegy olyan állapotban van, amelynek van valamilyen állapottípusa ebből a beállításból, akkor a jegy nyitottként lesz figyelembe véve, egyébként lezártként.',
-        'Defines the valid states for unlocked tickets. To unlock tickets the script "bin/otrs.Console.pl Maint::Ticket::UnlockTimeout" can be used.' =>
-            'Meghatározza a zárolatlan jegyek érvényes állapotait. A jegyek feloldásához a „bin/otrs.Console.pl Maint::Ticket::UnlockTimeout” parancsfájl használható.',
+        'Defines the valid states for unlocked tickets. To unlock tickets the script "bin/znuny.Console.pl Maint::Ticket::UnlockTimeout" can be used.' =>
+            'Meghatározza a zárolatlan jegyek érvényes állapotait. A jegyek feloldásához a „bin/znuny.Console.pl Maint::Ticket::UnlockTimeout” parancsfájl használható.',
         'Sends reminder notifications of unlocked ticket after reaching the reminder date (only sent to ticket owner).' =>
             'Elküldi a feloldott jegy emlékeztető értesítéseit az emlékeztető dátum elérése után (csak a jegy tulajdonosának küldi).',
         'Disables sending reminder notifications to the responsible agent of a ticket (Ticket::Responsible needs to be enabled).' =>

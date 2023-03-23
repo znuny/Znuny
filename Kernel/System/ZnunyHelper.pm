@@ -3218,7 +3218,7 @@ sub _GeneralCatalogItemCreateIfNotExists {
 adds or updates a definition for a ConfigItemClass. You need to provide the configuration
 of the CMDB class in the following directory:
 
-/opt/otrs/scripts/cmdb_classes/Private_Endgeraete.config
+/opt/znuny/scripts/cmdb_classes/Private_Endgeraete.config
 
 The required general catalog item will be created automatically.
 
@@ -3370,7 +3370,7 @@ sub _ITSMConfigItemDefinitionCreate {
 add if not exists a definition for a ConfigItemClass. You need to provide the configuration
 of the CMDB class in the following directory:
 
-/opt/otrs/scripts/cmdb_classes/Private_Endgeraete.config
+/opt/znuny/scripts/cmdb_classes/Private_Endgeraete.config
 
 The required general catalog item will be created automatically.
 

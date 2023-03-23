@@ -1189,22 +1189,22 @@ sub Data {
         'Client Certificate' => '客户证书',
         'The full path and name of the SSL client certificate file (must be in PEM, DER or PKCS#12 format).' =>
             'SSL客户端证书文件的完整路径和名称（必须为PEM、DER或PKCS＃12格式）。',
-        'e.g. /opt/otrs/var/certificates/SOAP/certificate.pem' => '例如： /opt/otrs/var/certificates/SOAP/certificate.pem',
+        'e.g. /opt/znuny/var/certificates/SOAP/certificate.pem' => '例如： /opt/znuny/var/certificates/SOAP/certificate.pem',
         'Client Certificate Key' => '客户证书密钥',
         'The full path and name of the SSL client certificate key file (if not already included in certificate file).' =>
             'SSL客户端证书密钥文件的完整路径和名称（如果尚未包含在证书文件中）。',
-        'e.g. /opt/otrs/var/certificates/SOAP/key.pem' => '例如： /opt/otrs/var/certificates/SOAP/key.pem',
+        'e.g. /opt/znuny/var/certificates/SOAP/key.pem' => '例如： /opt/znuny/var/certificates/SOAP/key.pem',
         'Client Certificate Key Password' => '客户端证书密钥密码',
         'The password to open the SSL certificate if the key is encrypted.' =>
             '如果密钥被加密，则此密码用于打开SSL证书。',
         'Certification Authority (CA) Certificate' => '认证机构（CA）证书',
         'The full path and name of the certification authority certificate file that validates SSL certificate.' =>
             '用来验证SSL证书的认证机构证书文件的完整路径和名称。',
-        'e.g. /opt/otrs/var/certificates/SOAP/CA/ca.pem' => '例如：/opt/otrs/var/certificates/SOAP/CA/ca.pem',
+        'e.g. /opt/znuny/var/certificates/SOAP/CA/ca.pem' => '例如：/opt/znuny/var/certificates/SOAP/CA/ca.pem',
         'Certification Authority (CA) Directory' => '认证机构(CA)目录',
         'The full path of the certification authority directory where the CA certificates are stored in the file system.' =>
             '认证机构目录的完整路径，文件系统中存储CA证书的地方。',
-        'e.g. /opt/otrs/var/certificates/SOAP/CA' => '例如：/opt/otrs/var/certificates/SOAP/CA',
+        'e.g. /opt/znuny/var/certificates/SOAP/CA' => '例如：/opt/znuny/var/certificates/SOAP/CA',
         'Controller mapping for Invoker' => '调用程序的控制器映射',
         'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
             '控制器接受调用程序发送的请求。以“:“作为标记的变量将被数据值和其它传递参数替换。',
@@ -2162,8 +2162,8 @@ sub Data {
         'Find out how to use the system configuration by reading the %s.' =>
             '通过阅读%s来了解如何使用系统配置。',
         'Search in all settings...' => '在所有设置中搜索...',
-        'There are currently no settings available. Please make sure to run \'otrs.Console.pl Maint::Config::Rebuild\' before using the software.' =>
-            '目前没有可用的设置。 在使用软件之前，请确保运行 \'otrs.Console.pl Maint::Config::Rebuild\'。',
+        'There are currently no settings available. Please make sure to run \'znuny.Console.pl Maint::Config::Rebuild\' before using the software.' =>
+            '目前没有可用的设置。 在使用软件之前，请确保运行 \'znuny.Console.pl Maint::Config::Rebuild\'。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationDeployment.tt
         'Changes Deployment' => '更改部署',
@@ -2450,8 +2450,8 @@ sub Data {
             '确保存在文件“%s”（没有.dist扩展名）。这个CRON任务会每5分钟检查一次OTRS守护进程是否在运行，并在需要时启动它。',
         'Execute \'%s start\' to make sure the cron jobs of the \'otrs\' user are active.' =>
             '执行\'%s start\'确保\'otrs\'用户的cron任务是活动的。',
-        'After 5 minutes, check that the OTRS Daemon is running in the system (\'bin/otrs.Daemon.pl status\').' =>
-            '5分钟后，在系统中执行\'bin/otrs.Daemon.pl status\'，检查OTRS守护进程是否正常运行。',
+        'After 5 minutes, check that the OTRS Daemon is running in the system (\'bin/znuny.Daemon.pl status\').' =>
+            '5分钟后，在系统中执行\'bin/znuny.Daemon.pl status\'，检查OTRS守护进程是否正常运行。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboard.tt
         'Dashboard' => '仪表板',
@@ -3948,8 +3948,8 @@ sub Data {
         'Need param Key to download!' => '需要参数“密钥”才能下载！',
 
         # Perl Module: Kernel/Modules/AdminPackageManager.pm
-        'Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/otrs.Console.pl to install packages!' =>
-            '抱歉，在Apache配置文件中需要Apache::Reload作为PerlModule和PerlInitHandler。另请查看scripts/apache2-httpd.include.conf。或者您也可以使用命令行工具bin/otrs.Console.pl来安装软件包！',
+        'Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/znuny.Console.pl to install packages!' =>
+            '抱歉，在Apache配置文件中需要Apache::Reload作为PerlModule和PerlInitHandler。另请查看scripts/apache2-httpd.include.conf。或者您也可以使用命令行工具bin/znuny.Console.pl来安装软件包！',
         'No such package!' => '没有这个软件包！',
         'No such file %s in package!' => '软件包中没有%s 文件！',
         'No such file %s in local file system!' => '本地文件系统中没有%s 文件！',
@@ -5232,8 +5232,8 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InvalidDefaultValues.pm
         'Invalid Default Values' => '无效的默认值',
-        'Tables with invalid default values were found. In order to fix it automatically, please run: bin/otrs.Console.pl Maint::Database::Check --repair' =>
-            '找到具有无效的默认值的表。 为了自动修复它，请运行：bin/otrs.Console.pl Maint::Database::Check --repair',
+        'Tables with invalid default values were found. In order to fix it automatically, please run: bin/znuny.Console.pl Maint::Database::Check --repair' =>
+            '找到具有无效的默认值的表。 为了自动修复它，请运行：bin/znuny.Console.pl Maint::Database::Check --repair',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/MaxAllowedPacket.pm
         'Maximum Query Size' => '最大查询大小',
@@ -5455,11 +5455,11 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
         'Orphaned Records In ticket_lock_index Table' => 'ticket_lock_index 表中的孤儿记录',
-        'Table ticket_lock_index contains orphaned records. Please run bin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            'ticket_lock_index 表中包含孤儿记录。请运行bin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup"清理静态数据库的索引。',
+        'Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            'ticket_lock_index 表中包含孤儿记录。请运行bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup"清理静态数据库的索引。',
         'Orphaned Records In ticket_index Table' => 'ticket_index 表中的孤儿记录',
-        'Table ticket_index contains orphaned records. Please run bin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            'ticket_index表中包含孤儿记录，请运行bin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup"，清理静态数据库的索引。',
+        'Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            'ticket_index表中包含孤儿记录，请运行bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup"，清理静态数据库的索引。',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
         'Time Settings' => '时间设置',
@@ -6543,8 +6543,8 @@ sub Data {
             '设置最小的工单计数器大小（如果工单编号生成器选用“自动增量”）。默认是5（位数），意味着计数器从10000开始。',
         'Enables the minimal ticket counter size (if "Date" was selected as TicketNumberGenerator).' =>
             '启用最小的工单计数器大小（如果TicketNumberGenerator工单编号生成器选择为“日期”）。',
-        'IndexAccelerator: to choose your backend TicketViewAccelerator module. "RuntimeDB" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). "StaticDB" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command "bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild" for initial index creation.' =>
-            '索引加速器：选择您的后端工单视图加速器模块。“RuntimeDB（运行时数据库）”实时生成每个队列视图（工单总数不超过60000个且系统打开的工单不超过6000个时没有性能问题）。“StaticDB（静态数据库）是最强大的模块，它使用额外的类似于视图的工单索引表（工单总数超过80000且系统打开的工单超过6000时推荐使用），使用命令"bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild"来初始化索引。',
+        'IndexAccelerator: to choose your backend TicketViewAccelerator module. "RuntimeDB" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). "StaticDB" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command "bin/znuny.Console.pl Maint::Ticket::QueueIndexRebuild" for initial index creation.' =>
+            '索引加速器：选择您的后端工单视图加速器模块。“RuntimeDB（运行时数据库）”实时生成每个队列视图（工单总数不超过60000个且系统打开的工单不超过6000个时没有性能问题）。“StaticDB（静态数据库）是最强大的模块，它使用额外的类似于视图的工单索引表（工单总数超过80000且系统打开的工单超过6000时推荐使用），使用命令"bin/znuny.Console.pl Maint::Ticket::QueueIndexRebuild"来初始化索引。',
         'Saves the attachments of articles. "DB" stores all data in the database (not recommended for storing big attachments). "FS" stores the data on the filesystem; this is faster but the webserver should run under the OTRS user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when "FS" is used.' =>
             '保存信件的附件。“数据库”在数据库中存储所有数据（不推荐在存储大容量附件时使用）。“文件系统”在文件系统中保存数据；这个选项更快但WEB服务器要以OTRS用户运行。即使是在生产环境您也可以在这两种模式间切换，而不会丢失数据。备注：使用“文件系统”时不能搜索附件名。',
         'Specifies whether all storage backends should be checked when looking for attachments. This is only required for installations where some attachments are in the file system, and others in the database.' =>
@@ -6588,16 +6588,16 @@ sub Data {
             '这个事件模块将客户用户的属性存储为工单动态字段，如何配置这个映射请查看DynamicFieldFromCustomerUser::Mapping设置。',
         'Overloads (redefines) existing functions in Kernel::System::Ticket. Used to easily add customizations.' =>
             '重载（重定义）Kernel::System::Ticket中的函数，以便容易添加定制内容。',
-        'Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild".' =>
-            '帮助扩展信件全文搜索（发件人、收件人、抄送、主题和正文搜索）。它将在信件创建后条带化所有信件并建立索引，提升全文搜索50%的效率。可使用命令 "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild" 来创建初始索引。',
+        'Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild".' =>
+            '帮助扩展信件全文搜索（发件人、收件人、抄送、主题和正文搜索）。它将在信件创建后条带化所有信件并建立索引，提升全文搜索50%的效率。可使用命令 "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild" 来创建初始索引。',
         'Defines whether to index archived tickets for fulltext searches.' =>
             '定义全文搜索是否索引已归档的工单。',
         'Force the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.' =>
             '强制将原始信件文本存储在信件搜索索引中，而不执行过滤器或应用停用词列表。 这将增加搜索索引的大小，从而可能减慢全文搜索。',
         'Display a warning and prevent search when using stop words within fulltext search.' =>
             '在全文搜索使用了停止词时显示一个警告并阻止搜索。',
-        'Basic fulltext index settings. Execute "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild" in order to generate a new index.' =>
-            '基本的全文索引设置。执行 "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild" 以生成一个新索引。',
+        'Basic fulltext index settings. Execute "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild" in order to generate a new index.' =>
+            '基本的全文索引设置。执行 "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild" 以生成一个新索引。',
         'Fulltext index regex filters to remove parts of the text.' => '全文索引正则表达式过滤器用来删除部分文本。',
         'English stop words for fulltext index. These words will be removed from the search index.' =>
             '全文索引的英语停止词，这些词将从搜索索引中移除。',
@@ -7301,8 +7301,8 @@ sub Data {
             '定义工单能看到的锁定状态。注意：修改这个设置后，请确保删除缓存以便使用新值。默认：未锁定，临时锁定。',
         'Defines the valid state types for a ticket. If a ticket is in a state which have any state type from this setting, this ticket will be considered as open, otherwise as closed.' =>
             '定义工单的有效状态类型。如果一个工单处于此设置中任一状态类型的状态，则该工单将被视为打开，否则将被视为关闭。',
-        'Defines the valid states for unlocked tickets. To unlock tickets the script "bin/otrs.Console.pl Maint::Ticket::UnlockTimeout" can be used.' =>
-            '定义解锁的工单有效的状态。为解锁工单，可以使用脚本"bin/otrs.Console.pl Maint::Ticket::UnlockTimeout"。',
+        'Defines the valid states for unlocked tickets. To unlock tickets the script "bin/znuny.Console.pl Maint::Ticket::UnlockTimeout" can be used.' =>
+            '定义解锁的工单有效的状态。为解锁工单，可以使用脚本"bin/znuny.Console.pl Maint::Ticket::UnlockTimeout"。',
         'Sends reminder notifications of unlocked ticket after reaching the reminder date (only sent to ticket owner).' =>
             '在到达提醒时间后发送解锁工单的提醒通知（只发送给工单所有者）。',
         'Disables sending reminder notifications to the responsible agent of a ticket (Ticket::Responsible needs to be enabled).' =>

@@ -55,7 +55,7 @@ The values are taken from a backed up ZZZAAuto.pm which contains the old config.
 
     # changed 'Znuny4OTRSDatabaseBackend###Export###CSV###Separator' to 'DBCRUD###Export###CSV###Separator'
     my $Success = $SysConfigMigrationObject->MigrateSysConfigSettings(
-        FilePath  => '/opt/otrs/Kernel/Config/Files/ZZZAAuto.pm',
+        FilePath  => '/opt/znuny/Kernel/Config/Files/ZZZAAuto.pm',
         FileClass => 'Kernel::Config::Files::ZZZAAuto',
         Data      => {
             'Znuny4OTRSDatabaseBackend###Export###CSV###Separator' => {

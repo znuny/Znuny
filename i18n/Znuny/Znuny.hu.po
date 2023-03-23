@@ -3221,8 +3221,8 @@ msgid "The full path and name of the SSL client certificate file (must be in PEM
 msgstr "Az SSL-kliens tanúsítványfájljának teljes elérési útja és neve (PEM, DER vagy PKCS#12 formátumban kell lennie)."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "e.g. /opt/otrs/var/certificates/SOAP/certificate.pem"
-msgstr "például /opt/otrs/var/certificates/SOAP/certificate.pem"
+msgid "e.g. /opt/znuny/var/certificates/SOAP/certificate.pem"
+msgstr "például /opt/znuny/var/certificates/SOAP/certificate.pem"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Client Certificate Key"
@@ -3233,8 +3233,8 @@ msgid "The full path and name of the SSL client certificate key file (if not alr
 msgstr "Az SSL-kliens tanúsítvány kulcsfájljának teljes elérési útja és neve (ha még nem tartalmazza a tanúsítványfájl)."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "e.g. /opt/otrs/var/certificates/SOAP/key.pem"
-msgstr "például /opt/otrs/var/certificates/SOAP/key.pem"
+msgid "e.g. /opt/znuny/var/certificates/SOAP/key.pem"
+msgstr "például /opt/znuny/var/certificates/SOAP/key.pem"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Client Certificate Key Password"
@@ -3253,8 +3253,8 @@ msgid "The full path and name of the certification authority certificate file th
 msgstr "A hitelesítés-szolgáltató tanúsítványfájljának teljes elérési útja és neve, amely hitelesíti az SSL tanúsítványt."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "e.g. /opt/otrs/var/certificates/SOAP/CA/ca.pem"
-msgstr "például /opt/otrs/var/certificates/SOAP/CA/ca.pem"
+msgid "e.g. /opt/znuny/var/certificates/SOAP/CA/ca.pem"
+msgstr "például /opt/znuny/var/certificates/SOAP/CA/ca.pem"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Certification Authority (CA) Directory"
@@ -3265,8 +3265,8 @@ msgid "The full path of the certification authority directory where the CA certi
 msgstr "A hitelesítés-szolgáltató könyvtárának teljes elérési útja, ahol a CA tanúsítványok tárolva vannak a fájlrendszeren."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "e.g. /opt/otrs/var/certificates/SOAP/CA"
-msgstr "például /opt/otrs/var/certificates/SOAP/CA"
+msgid "e.g. /opt/znuny/var/certificates/SOAP/CA"
+msgstr "például /opt/znuny/var/certificates/SOAP/CA"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Controller mapping for Invoker"
@@ -6173,8 +6173,8 @@ msgid "Search in all settings..."
 msgstr "Keresés az összes beállításban…"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfiguration.tt
-msgid "There are currently no settings available. Please make sure to run 'otrs.Console.pl Maint::Config::Rebuild' before using the software."
-msgstr "Jelenleg nincsenek elérhető beállítások. Győződjön meg arról, hogy lefuttatta-e az „otrs.Console.pl Maint::Config::Rebuild” parancsot a szoftver használata előtt."
+msgid "There are currently no settings available. Please make sure to run 'znuny.Console.pl Maint::Config::Rebuild' before using the software."
+msgstr "Jelenleg nincsenek elérhető beállítások. Győződjön meg arról, hogy lefuttatta-e az „znuny.Console.pl Maint::Config::Rebuild” parancsot a szoftver használata előtt."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationDeployment.tt
 msgid "Changes Deployment"
@@ -6977,8 +6977,8 @@ msgid "Execute '%s start' to make sure the cron jobs of the 'otrs' user are acti
 msgstr "Hajtsa végre a(z) „%s start” parancsot, hogy megbizonyosodjon arról, hogy az „otrs” felhasználó cron-feladatai aktívak-e."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
-msgid "After 5 minutes, check that the OTRS Daemon is running in the system ('bin/otrs.Daemon.pl status')."
-msgstr "Ellenőrizze 5 perc után, hogy az OTRS démon fut-e a rendszeren („bin/otrs.Daemon.pl status”)."
+msgid "After 5 minutes, check that the OTRS Daemon is running in the system ('bin/znuny.Daemon.pl status')."
+msgstr "Ellenőrizze 5 perc után, hogy az OTRS démon fut-e a rendszeren („bin/znuny.Daemon.pl status”)."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboard.tt
 msgid "Dashboard"
@@ -10885,8 +10885,8 @@ msgid "Need param Key to download!"
 msgstr "Kulcs paraméter szükséges a letöltéshez!"
 
 #. Perl Module: Kernel/Modules/AdminPackageManager.pm
-msgid "Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/otrs.Console.pl to install packages!"
-msgstr "Sajnáljuk, de az Apache::Reload modul PerlModule és PerlInitHandler beállításként szükséges az Apache beállítófájljában. Nézze meg a scripts/apache2-httpd.include.conf parancsfájlt is. Alternatívaként használhatja a bin/otrs.Console.pl parancssori eszközt is a csomagok telepítéséhez!"
+msgid "Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/znuny.Console.pl to install packages!"
+msgstr "Sajnáljuk, de az Apache::Reload modul PerlModule és PerlInitHandler beállításként szükséges az Apache beállítófájljában. Nézze meg a scripts/apache2-httpd.include.conf parancsfájlt is. Alternatívaként használhatja a bin/znuny.Console.pl parancssori eszközt is a csomagok telepítéséhez!"
 
 #. Perl Module: Kernel/Modules/AdminPackageManager.pm
 msgid "No such package!"
@@ -14105,8 +14105,8 @@ msgid "Invalid Default Values"
 msgstr "Érvénytelen alapértelmezett értékek"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InvalidDefaultValues.pm
-msgid "Tables with invalid default values were found. In order to fix it automatically, please run: bin/otrs.Console.pl Maint::Database::Check --repair"
-msgstr "Érvénytelen alapértelmezett értékekkel rendelkező táblák találhatók. Az automatikus javításukhoz futtassa a következő parancsot: bin/otrs.Console.pl Maint::Database::Check --repair"
+msgid "Tables with invalid default values were found. In order to fix it automatically, please run: bin/znuny.Console.pl Maint::Database::Check --repair"
+msgstr "Érvénytelen alapértelmezett értékekkel rendelkező táblák találhatók. Az automatikus javításukhoz futtassa a következő parancsot: bin/znuny.Console.pl Maint::Database::Check --repair"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/MaxAllowedPacket.pm
 msgid "Maximum Query Size"
@@ -14561,16 +14561,16 @@ msgid "Orphaned Records In ticket_lock_index Table"
 msgstr "Árva rekordok a ticket_lock_index táblában"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
-msgid "Table ticket_lock_index contains orphaned records. Please run bin/otrs.Console.pl \"Maint::Ticket::QueueIndexCleanup\" to clean the StaticDB index."
-msgstr "A ticket_lock_index tábla árva rekordokat tartalmaz. Futtassa a bin/otrs.Console.pl \"Maint::Ticket::QueueIndexCleanup\" parancsot a StaticDB index tisztításához."
+msgid "Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl \"Maint::Ticket::QueueIndexCleanup\" to clean the StaticDB index."
+msgstr "A ticket_lock_index tábla árva rekordokat tartalmaz. Futtassa a bin/znuny.Console.pl \"Maint::Ticket::QueueIndexCleanup\" parancsot a StaticDB index tisztításához."
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
 msgid "Orphaned Records In ticket_index Table"
 msgstr "Árva rekordok a ticket_index táblában"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
-msgid "Table ticket_index contains orphaned records. Please run bin/otrs.Console.pl \"Maint::Ticket::QueueIndexCleanup\" to clean the StaticDB index."
-msgstr "A ticket_index tábla árva rekordokat tartalmaz. Futtassa a bin/otrs.Console.pl \"Maint::Ticket::QueueIndexCleanup\" parancsot a StaticDB index tisztításához."
+msgid "Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl \"Maint::Ticket::QueueIndexCleanup\" to clean the StaticDB index."
+msgstr "A ticket_index tábla árva rekordokat tartalmaz. Futtassa a bin/znuny.Console.pl \"Maint::Ticket::QueueIndexCleanup\" parancsot a StaticDB index tisztításához."
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
 msgid "Time Settings"
@@ -16823,8 +16823,8 @@ msgid "Based on global RichText setting"
 msgstr "Globális RichText beállítás alapján"
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Basic fulltext index settings. Execute \"bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild\" in order to generate a new index."
-msgstr "Alapvető szabad-szavas index beállítások. Futtassa a „bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild” parancsfájlt egy új index előállítása érdekében."
+msgid "Basic fulltext index settings. Execute \"bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild\" in order to generate a new index."
+msgstr "Alapvető szabad-szavas index beállítások. Futtassa a „bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild” parancsfájlt egy új index előállítása érdekében."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Blocks all the incoming emails that do not have a valid ticket number in subject with From: @example.com address."
@@ -19095,8 +19095,8 @@ msgid "Defines the valid state types for a ticket. If a ticket is in a state whi
 msgstr "Meghatározza egy jegy érvényes állapottípusait. Ha a jegy olyan állapotban van, amelynek van valamilyen állapottípusa ebből a beállításból, akkor a jegy nyitottként lesz figyelembe véve, egyébként lezártként."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Defines the valid states for unlocked tickets. To unlock tickets the script \"bin/otrs.Console.pl Maint::Ticket::UnlockTimeout\" can be used."
-msgstr "Meghatározza a zárolatlan jegyek érvényes állapotait. A jegyek feloldásához a „bin/otrs.Console.pl Maint::Ticket::UnlockTimeout” parancsfájl használható."
+msgid "Defines the valid states for unlocked tickets. To unlock tickets the script \"bin/znuny.Console.pl Maint::Ticket::UnlockTimeout\" can be used."
+msgstr "Meghatározza a zárolatlan jegyek érvényes állapotait. A jegyek feloldásához a „bin/znuny.Console.pl Maint::Ticket::UnlockTimeout” parancsfájl használható."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the viewable locks of a ticket. NOTE: When you change this setting, make sure to delete the cache in order to use the new value. Default: unlock, tmp_lock."
@@ -20023,8 +20023,8 @@ msgid "Hebrew"
 msgstr "Héber"
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use \"bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild\"."
-msgstr "Segít kiterjeszteni a bejegyzések szabad-szavas keresését (feladó, címzett, másolat, tárgy és törzs keresés). Fel fogja darabolni az összes bejegyzést, és egy indexet fog felépíteni a bejegyzés létrehozása után, körülbelül 50%-kal növelve a szabad-szavas kereséseket. Egy kezdeti index létrehozásához használja a „bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild” parancsfájlt."
+msgid "Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use \"bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild\"."
+msgstr "Segít kiterjeszteni a bejegyzések szabad-szavas keresését (feladó, címzett, másolat, tárgy és törzs keresés). Fel fogja darabolni az összes bejegyzést, és egy indexet fog felépíteni a bejegyzés létrehozása után, körülbelül 50%-kal növelve a szabad-szavas kereséseket. Egy kezdeti index létrehozásához használja a „bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild” parancsfájlt."
 
 #. SysConfig
 msgid "High Contrast"
@@ -20311,8 +20311,8 @@ msgid "Incoming Phone Call."
 msgstr "Bejövő telefonhívás."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "IndexAccelerator: to choose your backend TicketViewAccelerator module. \"RuntimeDB\" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). \"StaticDB\" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command \"bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild\" for initial index creation."
-msgstr "IndexAccelerator: a TicketViewAccelerator háttérprogram modul választásához. A „RuntimeDB” minden egyes várólista nézetet valós időben állít elő a jegytáblából (nincs teljesítmény-probléma a rendszeren körülbelül 60.000 összes jegyig és 6.000 nyitott jegyig). A „StaticDB” a legerősebb modul, amely egy további jegyindex táblát használ, amely úgy működik mint egy nézet (javasolt, ha több mint 80.000 és 6.000 nyitott jegy van a rendszeren tárolva). Használja a „bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild” parancsot a kezdeti index létrehozásához."
+msgid "IndexAccelerator: to choose your backend TicketViewAccelerator module. \"RuntimeDB\" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). \"StaticDB\" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command \"bin/znuny.Console.pl Maint::Ticket::QueueIndexRebuild\" for initial index creation."
+msgstr "IndexAccelerator: a TicketViewAccelerator háttérprogram modul választásához. A „RuntimeDB” minden egyes várólista nézetet valós időben állít elő a jegytáblából (nincs teljesítmény-probléma a rendszeren körülbelül 60.000 összes jegyig és 6.000 nyitott jegyig). A „StaticDB” a legerősebb modul, amely egy további jegyindex táblát használ, amely úgy működik mint egy nézet (javasolt, ha több mint 80.000 és 6.000 nyitott jegy van a rendszeren tárolva). Használja a „bin/znuny.Console.pl Maint::Ticket::QueueIndexRebuild” parancsot a kezdeti index létrehozásához."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Indicates if a bounce e-mail should always be treated as normal follow-up."

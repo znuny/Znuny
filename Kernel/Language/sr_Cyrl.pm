@@ -1182,22 +1182,22 @@ sub Data {
         'Client Certificate' => 'Клијентски сертификат',
         'The full path and name of the SSL client certificate file (must be in PEM, DER or PKCS#12 format).' =>
             'Цела путања и назив за датотеку SSL сертификата (мора бити у PEM, DER или PKCS#12 формату).',
-        'e.g. /opt/otrs/var/certificates/SOAP/certificate.pem' => 'нпр. /opt/otrs/var/certificates/SOAP/certificate.pem',
+        'e.g. /opt/znuny/var/certificates/SOAP/certificate.pem' => 'нпр. /opt/znuny/var/certificates/SOAP/certificate.pem',
         'Client Certificate Key' => 'Кључ клијентског сертификата',
         'The full path and name of the SSL client certificate key file (if not already included in certificate file).' =>
             'Цела путања и назив за датотеку кључа SSL сертификата (уколико није укључен у датотеку сертификата).',
-        'e.g. /opt/otrs/var/certificates/SOAP/key.pem' => 'нпр. /opt/otrs/var/certificates/SOAP/key.pem',
+        'e.g. /opt/znuny/var/certificates/SOAP/key.pem' => 'нпр. /opt/znuny/var/certificates/SOAP/key.pem',
         'Client Certificate Key Password' => 'Лозинка кључа клијентског сертификата',
         'The password to open the SSL certificate if the key is encrypted.' =>
             'Лозинка за отварање SSL сертификата уколико је кључ шифрован.',
         'Certification Authority (CA) Certificate' => 'Сертификат сертификационог тела (CA)',
         'The full path and name of the certification authority certificate file that validates SSL certificate.' =>
             'Цела путања и назив сертификационог тела које провера исправност SSL сертификата.',
-        'e.g. /opt/otrs/var/certificates/SOAP/CA/ca.pem' => 'нпр. /opt/otrs/var/certificates/SOAP/CA/ca.pem',
+        'e.g. /opt/znuny/var/certificates/SOAP/CA/ca.pem' => 'нпр. /opt/znuny/var/certificates/SOAP/CA/ca.pem',
         'Certification Authority (CA) Directory' => 'Директоријум сертификационог тела (CA)',
         'The full path of the certification authority directory where the CA certificates are stored in the file system.' =>
             'Цела путања директоријума сертификационог тела где се складиште CA сертификати у систему датотека.',
-        'e.g. /opt/otrs/var/certificates/SOAP/CA' => 'нпр. /opt/otrs/var/certificates/SOAP/CA',
+        'e.g. /opt/znuny/var/certificates/SOAP/CA' => 'нпр. /opt/znuny/var/certificates/SOAP/CA',
         'Controller mapping for Invoker' => 'Мапирање контролера за позиваоца',
         'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
             'Контролер коме ће позивалац прослеђивати захтеве. Променљиве обележене са \':\' ће бити замењене њиховим вредностима и прослеђене заједно са захтевом (нпр. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).',
@@ -2155,8 +2155,8 @@ sub Data {
         'Find out how to use the system configuration by reading the %s.' =>
             'Сазнајте како да користите системску конфигурацију читањем %s.',
         'Search in all settings...' => 'Претражите сва подешавања...',
-        'There are currently no settings available. Please make sure to run \'otrs.Console.pl Maint::Config::Rebuild\' before using the software.' =>
-            'Тренутно нема доступних подешавања. Молимо проверите да ли сте покренули скрипт \'otrs.Console.pl Maint::Config::Rebuild\' пре коришћења апликације.',
+        'There are currently no settings available. Please make sure to run \'znuny.Console.pl Maint::Config::Rebuild\' before using the software.' =>
+            'Тренутно нема доступних подешавања. Молимо проверите да ли сте покренули скрипт \'znuny.Console.pl Maint::Config::Rebuild\' пре коришћења апликације.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationDeployment.tt
         'Changes Deployment' => 'Распоред промена',
@@ -2443,8 +2443,8 @@ sub Data {
             'Осигурава да датотека \'%s\' постоји (без .dist екстензије). Овај крон посао ће проверавати сваких 5 минута да ли OTRS системски сервис ради и покреће га ако је потребно.',
         'Execute \'%s start\' to make sure the cron jobs of the \'otrs\' user are active.' =>
             'Извршите \'%s start\' да би били сигурни да су крон послови за OTRS корисника увек активни.',
-        'After 5 minutes, check that the OTRS Daemon is running in the system (\'bin/otrs.Daemon.pl status\').' =>
-            'После 5 минута, проверава да ли OTRS системски сервис функционише у систему (\'bin/otrs.Daemon.pl status\').',
+        'After 5 minutes, check that the OTRS Daemon is running in the system (\'bin/znuny.Daemon.pl status\').' =>
+            'После 5 минута, проверава да ли OTRS системски сервис функционише у систему (\'bin/znuny.Daemon.pl status\').',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboard.tt
         'Dashboard' => 'Командна табла',
@@ -3941,8 +3941,8 @@ sub Data {
         'Need param Key to download!' => 'Неопходан параметар Key за преузимање!',
 
         # Perl Module: Kernel/Modules/AdminPackageManager.pm
-        'Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/otrs.Console.pl to install packages!' =>
-            'Жао нам је, али Apache::Reload је неопходан као PerlModule и PerlInitHandler у конфигурацији Apache-а. Молимо погледајте scripts/apache2-httpd.include.conf. Алтернативно, можете користити конзолну алатку bin/otrs.Console.pl за инсталацију пакета!',
+        'Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/znuny.Console.pl to install packages!' =>
+            'Жао нам је, али Apache::Reload је неопходан као PerlModule и PerlInitHandler у конфигурацији Apache-а. Молимо погледајте scripts/apache2-httpd.include.conf. Алтернативно, можете користити конзолну алатку bin/znuny.Console.pl за инсталацију пакета!',
         'No such package!' => 'Нема таквог пакета!',
         'No such file %s in package!' => 'Нема такве датотеке %s у пакету!',
         'No such file %s in local file system!' => 'Нема такве датотеке %s у локалном систему!',
@@ -5225,8 +5225,8 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InvalidDefaultValues.pm
         'Invalid Default Values' => 'Неисправне подразумеване вредности',
-        'Tables with invalid default values were found. In order to fix it automatically, please run: bin/otrs.Console.pl Maint::Database::Check --repair' =>
-            'Пронађене су табеле са неисправним подразумеваним вредностима. Да бисте их аутоматски исправили, молимо покрените bin/otrs.Console.pl Maint::Database::Check --repair',
+        'Tables with invalid default values were found. In order to fix it automatically, please run: bin/znuny.Console.pl Maint::Database::Check --repair' =>
+            'Пронађене су табеле са неисправним подразумеваним вредностима. Да бисте их аутоматски исправили, молимо покрените bin/znuny.Console.pl Maint::Database::Check --repair',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/MaxAllowedPacket.pm
         'Maximum Query Size' => 'Максимална величина упита',
@@ -5448,11 +5448,11 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
         'Orphaned Records In ticket_lock_index Table' => 'Напуштени записи у ticket_lock_index табели',
-        'Table ticket_lock_index contains orphaned records. Please run bin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            'Табела ticket_lock_index садржи неповезане записе. Молимо да покренете bin/otrs.Console.pl Maint::Ticket::QueueIndexCleanup да би очистили StaticDB индекс.',
+        'Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            'Табела ticket_lock_index садржи неповезане записе. Молимо да покренете bin/znuny.Console.pl Maint::Ticket::QueueIndexCleanup да би очистили StaticDB индекс.',
         'Orphaned Records In ticket_index Table' => 'Напуштени записи у ticket_index табели',
-        'Table ticket_index contains orphaned records. Please run bin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            'Табела ticket_lindex садржи неповезане записе. Молимо да покренете bin/otrs.Console.pl Maint::Ticket::QueueIndexCleanup да би очистили StaticDB индекс.',
+        'Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            'Табела ticket_lindex садржи неповезане записе. Молимо да покренете bin/znuny.Console.pl Maint::Ticket::QueueIndexCleanup да би очистили StaticDB индекс.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
         'Time Settings' => 'Подешавања времена',
@@ -6536,8 +6536,8 @@ sub Data {
             'Дефинише минималну величину бројача тикета уколико је изабран "AutoIncrement" као TicketNumberGenerator. Подразумевано је 5, што значи да бројач почиње од 10000.',
         'Enables the minimal ticket counter size (if "Date" was selected as TicketNumberGenerator).' =>
             'Активира минималну величину бројача тикета (ако је изабран "Датум" као генератор броја тикета).',
-        'IndexAccelerator: to choose your backend TicketViewAccelerator module. "RuntimeDB" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). "StaticDB" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command "bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild" for initial index creation.' =>
-            'Убрзивач индексирања: за одабир TicketViewAccelerator модула. "RuntimeDB" генерише сваки преглед реда у ходу из табеле тикета (нема утицаја на перформансе до око 60.000 тикета укупно и 6.000 отворених тикета у систему). "StaticDB" је најмоћнији модул, користи додатну тикет индекс табелу која ради као преглед (препоручује се за више од 80.000 и 6.000 отворених тикета у систему). Коришћењем команде "bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild" можете креирати почетни индекс.',
+        'IndexAccelerator: to choose your backend TicketViewAccelerator module. "RuntimeDB" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). "StaticDB" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command "bin/znuny.Console.pl Maint::Ticket::QueueIndexRebuild" for initial index creation.' =>
+            'Убрзивач индексирања: за одабир TicketViewAccelerator модула. "RuntimeDB" генерише сваки преглед реда у ходу из табеле тикета (нема утицаја на перформансе до око 60.000 тикета укупно и 6.000 отворених тикета у систему). "StaticDB" је најмоћнији модул, користи додатну тикет индекс табелу која ради као преглед (препоручује се за више од 80.000 и 6.000 отворених тикета у систему). Коришћењем команде "bin/znuny.Console.pl Maint::Ticket::QueueIndexRebuild" можете креирати почетни индекс.',
         'Saves the attachments of articles. "DB" stores all data in the database (not recommended for storing big attachments). "FS" stores the data on the filesystem; this is faster but the webserver should run under the OTRS user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when "FS" is used.' =>
             'Чува прилоге у чланцима. „DB” снима све прилоге у бази података (није препоручљиво за чување великих прилога). „FS” снима прилоге у систему датотека; ово је бржа опција, али веб сервер мора бити покренут под „OTRS” системским корисником. Дозвољена је промена модула чак и на продукцијским системима без било каквог губитка података. Напомена: претрага прилога по називу није могућа када је „FS” у функцији.',
         'Specifies whether all storage backends should be checked when looking for attachments. This is only required for installations where some attachments are in the file system, and others in the database.' =>
@@ -6581,16 +6581,16 @@ sub Data {
             'Овај модул догађаја чува атрибуте корисника као динамичка поља тикета. Погледајте опцију DynamicFieldFromCustomerUser::Mapping за подешавање мапирања.',
         'Overloads (redefines) existing functions in Kernel::System::Ticket. Used to easily add customizations.' =>
             'Преоптерећује (редефинисано) постојеће фуцкције у Kernel::System::Ticket. Користи се за лако додавање прилагођавања.',
-        'Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild".' =>
-            'Омогућује проширену текстуалну претрагу ваших чланака (претрага по пољима From, To, Cc, Subject и Body). Сви постојећи чланци ће бити реиндексирани, нови додати у индекс претраге по креирању, тиме убрзавајући текстуалну претрагу за око 50%. За креирање почетног индекса користите "bin/otrs.Console.pl Maint::Ticket::FulltextIndexRebuild --rebuild".',
+        'Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild".' =>
+            'Омогућује проширену текстуалну претрагу ваших чланака (претрага по пољима From, To, Cc, Subject и Body). Сви постојећи чланци ће бити реиндексирани, нови додати у индекс претраге по креирању, тиме убрзавајући текстуалну претрагу за око 50%. За креирање почетног индекса користите "bin/znuny.Console.pl Maint::Ticket::FulltextIndexRebuild --rebuild".',
         'Defines whether to index archived tickets for fulltext searches.' =>
             'Дефинише да ли ће архивирани тикети бити индексирани за текстуалну претрагу.',
         'Force the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.' =>
             'Укључује спремање оригиналног текста чланка у индексу претраге, без извршавања филтера или уклањања зауставних речи. Ово ће увећати величину индекса претраге и може успорити текстуалну претрагу.',
         'Display a warning and prevent search when using stop words within fulltext search.' =>
             'Прикажи упозорење и онемогући претрагу ако су употребљене зауставне речи у претрази комплетног текста.',
-        'Basic fulltext index settings. Execute "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild" in order to generate a new index.' =>
-            'Основно подешавање индекса целог текста. Покрените "bin/otrs.Console.pl Maint::Ticket::FulltextIndexRebuild --rebuild" како би се генерисао нови индекс.',
+        'Basic fulltext index settings. Execute "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild" in order to generate a new index.' =>
+            'Основно подешавање индекса целог текста. Покрените "bin/znuny.Console.pl Maint::Ticket::FulltextIndexRebuild --rebuild" како би се генерисао нови индекс.',
         'Fulltext index regex filters to remove parts of the text.' => 'Текст индекс филтери (регуларни изрази) за уклањање делова текста.',
         'English stop words for fulltext index. These words will be removed from the search index.' =>
             'Енглеске зауставне речи за индекс претраге комплетног текста. Ове речи ће бити уклоњене из индекса претраге.',
@@ -7294,8 +7294,8 @@ sub Data {
             'Дефинише',
         'Defines the valid state types for a ticket. If a ticket is in a state which have any state type from this setting, this ticket will be considered as open, otherwise as closed.' =>
             'Дефинише исправне типове стања тикета. Ако је тикет у стању који садржи било који тип стања из овог подешавања, овај тикет ће се сматрати отвореним, у супротном као затворен.',
-        'Defines the valid states for unlocked tickets. To unlock tickets the script "bin/otrs.Console.pl Maint::Ticket::UnlockTimeout" can be used.' =>
-            'Одређује важеће статусе за откључане тикете. За откључавање тикета може се користити скрипт "bin/otrs.Console.pl Maint::Ticket::UnlockTimeout".',
+        'Defines the valid states for unlocked tickets. To unlock tickets the script "bin/znuny.Console.pl Maint::Ticket::UnlockTimeout" can be used.' =>
+            'Одређује важеће статусе за откључане тикете. За откључавање тикета може се користити скрипт "bin/znuny.Console.pl Maint::Ticket::UnlockTimeout".',
         'Sends reminder notifications of unlocked ticket after reaching the reminder date (only sent to ticket owner).' =>
             'Шаље обавештење за потсећање о откључаном тикету кад се достигне датум подсетника (шаље само власнику тикета).',
         'Disables sending reminder notifications to the responsible agent of a ticket (Ticket::Responsible needs to be enabled).' =>

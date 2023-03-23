@@ -8,4 +8,4 @@
 # --
 
 # check OTRS daemon status
-*/5 * * * *    $HOME/bin/otrs.Daemon.pl start >> /dev/null
+*/5 * * * *    $HOME/bin/znuny.Daemon.pl start >> /dev/null

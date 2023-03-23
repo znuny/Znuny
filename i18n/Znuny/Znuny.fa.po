@@ -3226,7 +3226,7 @@ msgid "The full path and name of the SSL client certificate file (must be in PEM
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "e.g. /opt/otrs/var/certificates/SOAP/certificate.pem"
+msgid "e.g. /opt/znuny/var/certificates/SOAP/certificate.pem"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
@@ -3238,7 +3238,7 @@ msgid "The full path and name of the SSL client certificate key file (if not alr
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "e.g. /opt/otrs/var/certificates/SOAP/key.pem"
+msgid "e.g. /opt/znuny/var/certificates/SOAP/key.pem"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
@@ -3258,8 +3258,8 @@ msgid "The full path and name of the certification authority certificate file th
 msgstr "مسیر کامل و نام فایل گواهی اقتدار صدور گواهینامه که تایید گواهینامه SSL."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "e.g. /opt/otrs/var/certificates/SOAP/CA/ca.pem"
-msgstr "به عنوان مثال /opt/otrs/var/certificates/SOAP/CA/ca.pem"
+msgid "e.g. /opt/znuny/var/certificates/SOAP/CA/ca.pem"
+msgstr "به عنوان مثال /opt/znuny/var/certificates/SOAP/CA/ca.pem"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Certification Authority (CA) Directory"
@@ -3270,7 +3270,7 @@ msgid "The full path of the certification authority directory where the CA certi
 msgstr "مسیر کامل دایرکتوری که در آن اقتدار صدور گواهینامه گواهی CA ها در سیستم فایل ذخیره می شود."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "e.g. /opt/otrs/var/certificates/SOAP/CA"
+msgid "e.g. /opt/znuny/var/certificates/SOAP/CA"
 msgstr "به عنوان مثال / انتخاب کردن / OTRS / ور / گواهی / SOAP / CA"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
@@ -6178,7 +6178,7 @@ msgid "Search in all settings..."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfiguration.tt
-msgid "There are currently no settings available. Please make sure to run 'otrs.Console.pl Maint::Config::Rebuild' before using the software."
+msgid "There are currently no settings available. Please make sure to run 'znuny.Console.pl Maint::Config::Rebuild' before using the software."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationDeployment.tt
@@ -6982,8 +6982,8 @@ msgid "Execute '%s start' to make sure the cron jobs of the 'otrs' user are acti
 msgstr "اعدام %s شروع به مطمئن شوید که به cron job از کاربر OTRS، فعال هستند."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
-msgid "After 5 minutes, check that the OTRS Daemon is running in the system ('bin/otrs.Daemon.pl status')."
-msgstr "پس از 5 دقیقه، بررسی کنید که OTRS دیمون در حال اجرا در سیستم ( 'وضعیت بن / otrs.Daemon.pl')."
+msgid "After 5 minutes, check that the OTRS Daemon is running in the system ('bin/znuny.Daemon.pl status')."
+msgstr "پس از 5 دقیقه، بررسی کنید که OTRS دیمون در حال اجرا در سیستم ( 'وضعیت بن / znuny.Daemon.pl')."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboard.tt
 msgid "Dashboard"
@@ -10890,8 +10890,8 @@ msgid "Need param Key to download!"
 msgstr "نیاز کلید param برای دانلود!"
 
 #. Perl Module: Kernel/Modules/AdminPackageManager.pm
-msgid "Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/otrs.Console.pl to install packages!"
-msgstr "با عرض پوزش، آپاچی :: بازنگری به عنوان PerlModule و PerlInitHandler در فایل پیکربندی آپاچی مورد نیاز است. همچنین نگاه اسکریپت / apache2 را-httpd.include.conf. متناوبا، شما می توانید از دستور ابزار خط بن / otrs.Console.pl برای نصب بستههای استفاده کنید!"
+msgid "Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/znuny.Console.pl to install packages!"
+msgstr "با عرض پوزش، آپاچی :: بازنگری به عنوان PerlModule و PerlInitHandler در فایل پیکربندی آپاچی مورد نیاز است. همچنین نگاه اسکریپت / apache2 را-httpd.include.conf. متناوبا، شما می توانید از دستور ابزار خط بن / znuny.Console.pl برای نصب بستههای استفاده کنید!"
 
 #. Perl Module: Kernel/Modules/AdminPackageManager.pm
 msgid "No such package!"
@@ -14110,7 +14110,7 @@ msgid "Invalid Default Values"
 msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InvalidDefaultValues.pm
-msgid "Tables with invalid default values were found. In order to fix it automatically, please run: bin/otrs.Console.pl Maint::Database::Check --repair"
+msgid "Tables with invalid default values were found. In order to fix it automatically, please run: bin/znuny.Console.pl Maint::Database::Check --repair"
 msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/MaxAllowedPacket.pm
@@ -14566,15 +14566,15 @@ msgid "Orphaned Records In ticket_lock_index Table"
 msgstr "سوابق یتیم در جدول ticket_lock_index"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
-msgid "Table ticket_lock_index contains orphaned records. Please run bin/otrs.Console.pl \"Maint::Ticket::QueueIndexCleanup\" to clean the StaticDB index."
-msgstr "ticket_lock_index جدول شامل سوابق یتیم. لطفا اجرا بن / otrs.Console.pl \\\\ \"سیستم maint :: بلیط :: QueueIndexCleanup \" برای تمیز کردن شاخص StaticDB."
+msgid "Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl \"Maint::Ticket::QueueIndexCleanup\" to clean the StaticDB index."
+msgstr "ticket_lock_index جدول شامل سوابق یتیم. لطفا اجرا بن / znuny.Console.pl \\\\ \"سیستم maint :: بلیط :: QueueIndexCleanup \" برای تمیز کردن شاخص StaticDB."
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
 msgid "Orphaned Records In ticket_index Table"
 msgstr "سوابق یتیم در جدول ticket_index"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
-msgid "Table ticket_index contains orphaned records. Please run bin/otrs.Console.pl \"Maint::Ticket::QueueIndexCleanup\" to clean the StaticDB index."
+msgid "Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl \"Maint::Ticket::QueueIndexCleanup\" to clean the StaticDB index."
 msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
@@ -16828,7 +16828,7 @@ msgid "Based on global RichText setting"
 msgstr "بر اساس تنظیم RichText جهانی"
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Basic fulltext index settings. Execute \"bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild\" in order to generate a new index."
+msgid "Basic fulltext index settings. Execute \"bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild\" in order to generate a new index."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
@@ -19101,8 +19101,8 @@ msgid "Defines the valid state types for a ticket. If a ticket is in a state whi
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Defines the valid states for unlocked tickets. To unlock tickets the script \"bin/otrs.Console.pl Maint::Ticket::UnlockTimeout\" can be used."
-msgstr "تعریف می کند که ایالات معتبر برای بلیط باز شده است. برای باز کردن قفل بلیط اسکریپت \\\\ \"بن / otrs.Console.pl سیستم maint :: بلیط :: UnlockTimeout \" می تواند استفاده شود."
+msgid "Defines the valid states for unlocked tickets. To unlock tickets the script \"bin/znuny.Console.pl Maint::Ticket::UnlockTimeout\" can be used."
+msgstr "تعریف می کند که ایالات معتبر برای بلیط باز شده است. برای باز کردن قفل بلیط اسکریپت \\\\ \"بن / znuny.Console.pl سیستم maint :: بلیط :: UnlockTimeout \" می تواند استفاده شود."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the viewable locks of a ticket. NOTE: When you change this setting, make sure to delete the cache in order to use the new value. Default: unlock, tmp_lock."
@@ -20030,7 +20030,7 @@ msgid "Hebrew"
 msgstr "عبری"
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use \"bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild\"."
+msgid "Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use \"bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild\"."
 msgstr ""
 
 #. SysConfig
@@ -20318,8 +20318,8 @@ msgid "Incoming Phone Call."
 msgstr "تماس تلفنی ورودی."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "IndexAccelerator: to choose your backend TicketViewAccelerator module. \"RuntimeDB\" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). \"StaticDB\" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command \"bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild\" for initial index creation."
-msgstr "IndexAccelerator: برای انتخاب ماژول باطن TicketViewAccelerator خود را. \\\\ \"RuntimeDB \" تولید هر نظر صف در پرواز از جدول بلیط (بدون مشکل در عملکرد تا حدود 60.000 بلیط در کل و 6.000 بلیط باز در سیستم). \\\\ \"StaticDB \" است که ماژول قدرتمند ترین، آن را با استفاده از یک جدول بلیط شاخص های اضافی است که مانند یک کار می کند (توصیه می شود اگر بیش از 80.000 و 6.000 بلیط باز در سیستم ذخیره می شود). استفاده از دستور \\\\ \"بن / otrs.Console.pl سیستم maint :: بلیط :: QueueIndexRebuild \" برای ایجاد شاخص اولیه."
+msgid "IndexAccelerator: to choose your backend TicketViewAccelerator module. \"RuntimeDB\" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). \"StaticDB\" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command \"bin/znuny.Console.pl Maint::Ticket::QueueIndexRebuild\" for initial index creation."
+msgstr "IndexAccelerator: برای انتخاب ماژول باطن TicketViewAccelerator خود را. \\\\ \"RuntimeDB \" تولید هر نظر صف در پرواز از جدول بلیط (بدون مشکل در عملکرد تا حدود 60.000 بلیط در کل و 6.000 بلیط باز در سیستم). \\\\ \"StaticDB \" است که ماژول قدرتمند ترین، آن را با استفاده از یک جدول بلیط شاخص های اضافی است که مانند یک کار می کند (توصیه می شود اگر بیش از 80.000 و 6.000 بلیط باز در سیستم ذخیره می شود). استفاده از دستور \\\\ \"بن / znuny.Console.pl سیستم maint :: بلیط :: QueueIndexRebuild \" برای ایجاد شاخص اولیه."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Indicates if a bounce e-mail should always be treated as normal follow-up."

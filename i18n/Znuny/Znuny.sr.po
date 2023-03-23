@@ -3225,8 +3225,8 @@ msgid "The full path and name of the SSL client certificate file (must be in PEM
 msgstr "Цела путања и назив за датотеку SSL сертификата (мора бити у PEM, DER или PKCS#12 формату)."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "e.g. /opt/otrs/var/certificates/SOAP/certificate.pem"
-msgstr "нпр. /opt/otrs/var/certificates/SOAP/certificate.pem"
+msgid "e.g. /opt/znuny/var/certificates/SOAP/certificate.pem"
+msgstr "нпр. /opt/znuny/var/certificates/SOAP/certificate.pem"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Client Certificate Key"
@@ -3237,8 +3237,8 @@ msgid "The full path and name of the SSL client certificate key file (if not alr
 msgstr "Цела путања и назив за датотеку кључа SSL сертификата (уколико није укључен у датотеку сертификата)."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "e.g. /opt/otrs/var/certificates/SOAP/key.pem"
-msgstr "нпр. /opt/otrs/var/certificates/SOAP/key.pem"
+msgid "e.g. /opt/znuny/var/certificates/SOAP/key.pem"
+msgstr "нпр. /opt/znuny/var/certificates/SOAP/key.pem"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Client Certificate Key Password"
@@ -3257,8 +3257,8 @@ msgid "The full path and name of the certification authority certificate file th
 msgstr "Цела путања и назив сертификационог тела које провера исправност SSL сертификата."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "e.g. /opt/otrs/var/certificates/SOAP/CA/ca.pem"
-msgstr "нпр. /opt/otrs/var/certificates/SOAP/CA/ca.pem"
+msgid "e.g. /opt/znuny/var/certificates/SOAP/CA/ca.pem"
+msgstr "нпр. /opt/znuny/var/certificates/SOAP/CA/ca.pem"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Certification Authority (CA) Directory"
@@ -3269,8 +3269,8 @@ msgid "The full path of the certification authority directory where the CA certi
 msgstr "Цела путања директоријума сертификационог тела где се складиште CA сертификати у систему датотека."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "e.g. /opt/otrs/var/certificates/SOAP/CA"
-msgstr "нпр. /opt/otrs/var/certificates/SOAP/CA"
+msgid "e.g. /opt/znuny/var/certificates/SOAP/CA"
+msgstr "нпр. /opt/znuny/var/certificates/SOAP/CA"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Controller mapping for Invoker"
@@ -6177,8 +6177,8 @@ msgid "Search in all settings..."
 msgstr "Претражите сва подешавања..."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfiguration.tt
-msgid "There are currently no settings available. Please make sure to run 'otrs.Console.pl Maint::Config::Rebuild' before using the software."
-msgstr "Тренутно нема доступних подешавања. Молимо проверите да ли сте покренули скрипт 'otrs.Console.pl Maint::Config::Rebuild' пре коришћења апликације."
+msgid "There are currently no settings available. Please make sure to run 'znuny.Console.pl Maint::Config::Rebuild' before using the software."
+msgstr "Тренутно нема доступних подешавања. Молимо проверите да ли сте покренули скрипт 'znuny.Console.pl Maint::Config::Rebuild' пре коришћења апликације."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationDeployment.tt
 msgid "Changes Deployment"
@@ -6981,8 +6981,8 @@ msgid "Execute '%s start' to make sure the cron jobs of the 'otrs' user are acti
 msgstr "Извршите '%s start' да би били сигурни да су крон послови за OTRS корисника увек активни."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
-msgid "After 5 minutes, check that the OTRS Daemon is running in the system ('bin/otrs.Daemon.pl status')."
-msgstr "После 5 минута, проверава да ли OTRS системски сервис функционише у систему ('bin/otrs.Daemon.pl status')."
+msgid "After 5 minutes, check that the OTRS Daemon is running in the system ('bin/znuny.Daemon.pl status')."
+msgstr "После 5 минута, проверава да ли OTRS системски сервис функционише у систему ('bin/znuny.Daemon.pl status')."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboard.tt
 msgid "Dashboard"
@@ -10889,8 +10889,8 @@ msgid "Need param Key to download!"
 msgstr "Неопходан параметар Key за преузимање!"
 
 #. Perl Module: Kernel/Modules/AdminPackageManager.pm
-msgid "Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/otrs.Console.pl to install packages!"
-msgstr "Жао нам је, али Apache::Reload је неопходан као PerlModule и PerlInitHandler у конфигурацији Apache-а. Молимо погледајте scripts/apache2-httpd.include.conf. Алтернативно, можете користити конзолну алатку bin/otrs.Console.pl за инсталацију пакета!"
+msgid "Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/znuny.Console.pl to install packages!"
+msgstr "Жао нам је, али Apache::Reload је неопходан као PerlModule и PerlInitHandler у конфигурацији Apache-а. Молимо погледајте scripts/apache2-httpd.include.conf. Алтернативно, можете користити конзолну алатку bin/znuny.Console.pl за инсталацију пакета!"
 
 #. Perl Module: Kernel/Modules/AdminPackageManager.pm
 msgid "No such package!"
@@ -14109,8 +14109,8 @@ msgid "Invalid Default Values"
 msgstr "Неисправне подразумеване вредности"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InvalidDefaultValues.pm
-msgid "Tables with invalid default values were found. In order to fix it automatically, please run: bin/otrs.Console.pl Maint::Database::Check --repair"
-msgstr "Пронађене су табеле са неисправним подразумеваним вредностима. Да бисте их аутоматски исправили, молимо покрените bin/otrs.Console.pl Maint::Database::Check --repair"
+msgid "Tables with invalid default values were found. In order to fix it automatically, please run: bin/znuny.Console.pl Maint::Database::Check --repair"
+msgstr "Пронађене су табеле са неисправним подразумеваним вредностима. Да бисте их аутоматски исправили, молимо покрените bin/znuny.Console.pl Maint::Database::Check --repair"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/MaxAllowedPacket.pm
 msgid "Maximum Query Size"
@@ -14565,16 +14565,16 @@ msgid "Orphaned Records In ticket_lock_index Table"
 msgstr "Напуштени записи у ticket_lock_index табели"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
-msgid "Table ticket_lock_index contains orphaned records. Please run bin/otrs.Console.pl \"Maint::Ticket::QueueIndexCleanup\" to clean the StaticDB index."
-msgstr "Табела ticket_lock_index садржи неповезане записе. Молимо да покренете bin/otrs.Console.pl Maint::Ticket::QueueIndexCleanup да би очистили StaticDB индекс."
+msgid "Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl \"Maint::Ticket::QueueIndexCleanup\" to clean the StaticDB index."
+msgstr "Табела ticket_lock_index садржи неповезане записе. Молимо да покренете bin/znuny.Console.pl Maint::Ticket::QueueIndexCleanup да би очистили StaticDB индекс."
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
 msgid "Orphaned Records In ticket_index Table"
 msgstr "Напуштени записи у ticket_index табели"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
-msgid "Table ticket_index contains orphaned records. Please run bin/otrs.Console.pl \"Maint::Ticket::QueueIndexCleanup\" to clean the StaticDB index."
-msgstr "Табела ticket_lindex садржи неповезане записе. Молимо да покренете bin/otrs.Console.pl Maint::Ticket::QueueIndexCleanup да би очистили StaticDB индекс."
+msgid "Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl \"Maint::Ticket::QueueIndexCleanup\" to clean the StaticDB index."
+msgstr "Табела ticket_lindex садржи неповезане записе. Молимо да покренете bin/znuny.Console.pl Maint::Ticket::QueueIndexCleanup да би очистили StaticDB индекс."
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
 msgid "Time Settings"
@@ -16827,8 +16827,8 @@ msgid "Based on global RichText setting"
 msgstr "Базирано на глобалним RichText поставкама"
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Basic fulltext index settings. Execute \"bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild\" in order to generate a new index."
-msgstr "Основно подешавање индекса целог текста. Покрените \"bin/otrs.Console.pl Maint::Ticket::FulltextIndexRebuild --rebuild\" како би се генерисао нови индекс."
+msgid "Basic fulltext index settings. Execute \"bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild\" in order to generate a new index."
+msgstr "Основно подешавање индекса целог текста. Покрените \"bin/znuny.Console.pl Maint::Ticket::FulltextIndexRebuild --rebuild\" како би се генерисао нови индекс."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Blocks all the incoming emails that do not have a valid ticket number in subject with From: @example.com address."
@@ -19100,8 +19100,8 @@ msgid "Defines the valid state types for a ticket. If a ticket is in a state whi
 msgstr "Дефинише исправне типове стања тикета. Ако је тикет у стању који садржи било који тип стања из овог подешавања, овај тикет ће се сматрати отвореним, у супротном као затворен."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Defines the valid states for unlocked tickets. To unlock tickets the script \"bin/otrs.Console.pl Maint::Ticket::UnlockTimeout\" can be used."
-msgstr "Одређује важеће статусе за откључане тикете. За откључавање тикета може се користити скрипт \"bin/otrs.Console.pl Maint::Ticket::UnlockTimeout\"."
+msgid "Defines the valid states for unlocked tickets. To unlock tickets the script \"bin/znuny.Console.pl Maint::Ticket::UnlockTimeout\" can be used."
+msgstr "Одређује важеће статусе за откључане тикете. За откључавање тикета може се користити скрипт \"bin/znuny.Console.pl Maint::Ticket::UnlockTimeout\"."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the viewable locks of a ticket. NOTE: When you change this setting, make sure to delete the cache in order to use the new value. Default: unlock, tmp_lock."
@@ -20029,8 +20029,8 @@ msgid "Hebrew"
 msgstr "Хебрејски"
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use \"bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild\"."
-msgstr "Омогућује проширену текстуалну претрагу ваших чланака (претрага по пољима From, To, Cc, Subject и Body). Сви постојећи чланци ће бити реиндексирани, нови додати у индекс претраге по креирању, тиме убрзавајући текстуалну претрагу за око 50%. За креирање почетног индекса користите \"bin/otrs.Console.pl Maint::Ticket::FulltextIndexRebuild --rebuild\"."
+msgid "Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use \"bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild\"."
+msgstr "Омогућује проширену текстуалну претрагу ваших чланака (претрага по пољима From, To, Cc, Subject и Body). Сви постојећи чланци ће бити реиндексирани, нови додати у индекс претраге по креирању, тиме убрзавајући текстуалну претрагу за око 50%. За креирање почетног индекса користите \"bin/znuny.Console.pl Maint::Ticket::FulltextIndexRebuild --rebuild\"."
 
 #. SysConfig
 msgid "High Contrast"
@@ -20317,8 +20317,8 @@ msgid "Incoming Phone Call."
 msgstr "Долазни позив."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "IndexAccelerator: to choose your backend TicketViewAccelerator module. \"RuntimeDB\" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). \"StaticDB\" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command \"bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild\" for initial index creation."
-msgstr "Убрзивач индексирања: за одабир TicketViewAccelerator модула. \"RuntimeDB\" генерише сваки преглед реда у ходу из табеле тикета (нема утицаја на перформансе до око 60.000 тикета укупно и 6.000 отворених тикета у систему). \"StaticDB\" је најмоћнији модул, користи додатну тикет индекс табелу која ради као преглед (препоручује се за више од 80.000 и 6.000 отворених тикета у систему). Коришћењем команде \"bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild\" можете креирати почетни индекс."
+msgid "IndexAccelerator: to choose your backend TicketViewAccelerator module. \"RuntimeDB\" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). \"StaticDB\" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command \"bin/znuny.Console.pl Maint::Ticket::QueueIndexRebuild\" for initial index creation."
+msgstr "Убрзивач индексирања: за одабир TicketViewAccelerator модула. \"RuntimeDB\" генерише сваки преглед реда у ходу из табеле тикета (нема утицаја на перформансе до око 60.000 тикета укупно и 6.000 отворених тикета у систему). \"StaticDB\" је најмоћнији модул, користи додатну тикет индекс табелу која ради као преглед (препоручује се за више од 80.000 и 6.000 отворених тикета у систему). Коришћењем команде \"bin/znuny.Console.pl Maint::Ticket::QueueIndexRebuild\" можете креирати почетни индекс."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Indicates if a bounce e-mail should always be treated as normal follow-up."

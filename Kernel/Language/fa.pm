@@ -1188,22 +1188,22 @@ sub Data {
         'Client Certificate' => '',
         'The full path and name of the SSL client certificate file (must be in PEM, DER or PKCS#12 format).' =>
             '',
-        'e.g. /opt/otrs/var/certificates/SOAP/certificate.pem' => '',
+        'e.g. /opt/znuny/var/certificates/SOAP/certificate.pem' => '',
         'Client Certificate Key' => '',
         'The full path and name of the SSL client certificate key file (if not already included in certificate file).' =>
             '',
-        'e.g. /opt/otrs/var/certificates/SOAP/key.pem' => '',
+        'e.g. /opt/znuny/var/certificates/SOAP/key.pem' => '',
         'Client Certificate Key Password' => '',
         'The password to open the SSL certificate if the key is encrypted.' =>
             '',
         'Certification Authority (CA) Certificate' => '',
         'The full path and name of the certification authority certificate file that validates SSL certificate.' =>
             'مسیر کامل و نام فایل گواهی اقتدار صدور گواهینامه که تایید گواهینامه SSL.',
-        'e.g. /opt/otrs/var/certificates/SOAP/CA/ca.pem' => 'به عنوان مثال /opt/otrs/var/certificates/SOAP/CA/ca.pem',
+        'e.g. /opt/znuny/var/certificates/SOAP/CA/ca.pem' => 'به عنوان مثال /opt/znuny/var/certificates/SOAP/CA/ca.pem',
         'Certification Authority (CA) Directory' => 'مجوز (CA) راهنمای',
         'The full path of the certification authority directory where the CA certificates are stored in the file system.' =>
             'مسیر کامل دایرکتوری که در آن اقتدار صدور گواهینامه گواهی CA ها در سیستم فایل ذخیره می شود.',
-        'e.g. /opt/otrs/var/certificates/SOAP/CA' => 'به عنوان مثال / انتخاب کردن / OTRS / ور / گواهی / SOAP / CA',
+        'e.g. /opt/znuny/var/certificates/SOAP/CA' => 'به عنوان مثال / انتخاب کردن / OTRS / ور / گواهی / SOAP / CA',
         'Controller mapping for Invoker' => ' برای  کنترل نگاشت Invoker',
         'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
             'کنترل که فراخواننده باید درخواست برای ارسال. متغیرهای مشخص شده توسط \':\' خواهد شد با مقدار داده جایگزین و سرانجام همراه با درخواست. (به عنوان مثال / درخواست /: TicketID صفحهی =: صفحهی و رمز عبور =: رمز عبور).',
@@ -2161,7 +2161,7 @@ sub Data {
         'Find out how to use the system configuration by reading the %s.' =>
             '',
         'Search in all settings...' => '',
-        'There are currently no settings available. Please make sure to run \'otrs.Console.pl Maint::Config::Rebuild\' before using the software.' =>
+        'There are currently no settings available. Please make sure to run \'znuny.Console.pl Maint::Config::Rebuild\' before using the software.' =>
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationDeployment.tt
@@ -2449,8 +2449,8 @@ sub Data {
             'مطمئن شوید که فایل \' %s \' وجود دارد (بدون .dist پسوند). این cron در هر 5 دقیقه اگر OTRS دیمون در حال اجرا است را بررسی کنید و شروع به آن در صورت نیاز.',
         'Execute \'%s start\' to make sure the cron jobs of the \'otrs\' user are active.' =>
             'اعدام %s شروع به مطمئن شوید که به cron job از کاربر OTRS، فعال هستند.',
-        'After 5 minutes, check that the OTRS Daemon is running in the system (\'bin/otrs.Daemon.pl status\').' =>
-            'پس از 5 دقیقه، بررسی کنید که OTRS دیمون در حال اجرا در سیستم ( \'وضعیت بن / otrs.Daemon.pl\').',
+        'After 5 minutes, check that the OTRS Daemon is running in the system (\'bin/znuny.Daemon.pl status\').' =>
+            'پس از 5 دقیقه، بررسی کنید که OTRS دیمون در حال اجرا در سیستم ( \'وضعیت بن / znuny.Daemon.pl\').',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboard.tt
         'Dashboard' => 'داشبورد',
@@ -3947,8 +3947,8 @@ sub Data {
         'Need param Key to download!' => 'نیاز کلید param برای دانلود!',
 
         # Perl Module: Kernel/Modules/AdminPackageManager.pm
-        'Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/otrs.Console.pl to install packages!' =>
-            'با عرض پوزش، آپاچی :: بازنگری به عنوان PerlModule و PerlInitHandler در فایل پیکربندی آپاچی مورد نیاز است. همچنین نگاه اسکریپت / apache2 را-httpd.include.conf. متناوبا، شما می توانید از دستور ابزار خط بن / otrs.Console.pl برای نصب بستههای استفاده کنید!',
+        'Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/znuny.Console.pl to install packages!' =>
+            'با عرض پوزش، آپاچی :: بازنگری به عنوان PerlModule و PerlInitHandler در فایل پیکربندی آپاچی مورد نیاز است. همچنین نگاه اسکریپت / apache2 را-httpd.include.conf. متناوبا، شما می توانید از دستور ابزار خط بن / znuny.Console.pl برای نصب بستههای استفاده کنید!',
         'No such package!' => 'بدون چنین بسته!',
         'No such file %s in package!' => 'بدون چنین فایل %s در بسته!',
         'No such file %s in local file system!' => 'بدون چنین فایلی  %s در فایل سیستم محلی!',
@@ -5231,7 +5231,7 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InvalidDefaultValues.pm
         'Invalid Default Values' => '',
-        'Tables with invalid default values were found. In order to fix it automatically, please run: bin/otrs.Console.pl Maint::Database::Check --repair' =>
+        'Tables with invalid default values were found. In order to fix it automatically, please run: bin/znuny.Console.pl Maint::Database::Check --repair' =>
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/MaxAllowedPacket.pm
@@ -5454,10 +5454,10 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
         'Orphaned Records In ticket_lock_index Table' => 'سوابق یتیم در جدول ticket_lock_index',
-        'Table ticket_lock_index contains orphaned records. Please run bin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            'ticket_lock_index جدول شامل سوابق یتیم. لطفا اجرا بن / otrs.Console.pl \ "سیستم maint :: بلیط :: QueueIndexCleanup " برای تمیز کردن شاخص StaticDB.',
+        'Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            'ticket_lock_index جدول شامل سوابق یتیم. لطفا اجرا بن / znuny.Console.pl \ "سیستم maint :: بلیط :: QueueIndexCleanup " برای تمیز کردن شاخص StaticDB.',
         'Orphaned Records In ticket_index Table' => 'سوابق یتیم در جدول ticket_index',
-        'Table ticket_index contains orphaned records. Please run bin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+        'Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
@@ -6542,8 +6542,8 @@ sub Data {
             'مجموعه حداقل اندازه بلیط ضد اگر \ "AUTOINCREMENT " به عنوان TicketNumberGenerator انتخاب شد. به طور پیش فرض 5 است، این به معنای ضد از 10،000 شروع می شود.',
         'Enables the minimal ticket counter size (if "Date" was selected as TicketNumberGenerator).' =>
             'حداقل اندازه بلیط ضد قادر می سازد (در صورت \ "تاریخ " به عنوان TicketNumberGenerator انتخاب شد).',
-        'IndexAccelerator: to choose your backend TicketViewAccelerator module. "RuntimeDB" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). "StaticDB" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command "bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild" for initial index creation.' =>
-            'IndexAccelerator: برای انتخاب ماژول باطن TicketViewAccelerator خود را. \ "RuntimeDB " تولید هر نظر صف در پرواز از جدول بلیط (بدون مشکل در عملکرد تا حدود 60.000 بلیط در کل و 6.000 بلیط باز در سیستم). \ "StaticDB " است که ماژول قدرتمند ترین، آن را با استفاده از یک جدول بلیط شاخص های اضافی است که مانند یک کار می کند (توصیه می شود اگر بیش از 80.000 و 6.000 بلیط باز در سیستم ذخیره می شود). استفاده از دستور \ "بن / otrs.Console.pl سیستم maint :: بلیط :: QueueIndexRebuild " برای ایجاد شاخص اولیه.',
+        'IndexAccelerator: to choose your backend TicketViewAccelerator module. "RuntimeDB" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). "StaticDB" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command "bin/znuny.Console.pl Maint::Ticket::QueueIndexRebuild" for initial index creation.' =>
+            'IndexAccelerator: برای انتخاب ماژول باطن TicketViewAccelerator خود را. \ "RuntimeDB " تولید هر نظر صف در پرواز از جدول بلیط (بدون مشکل در عملکرد تا حدود 60.000 بلیط در کل و 6.000 بلیط باز در سیستم). \ "StaticDB " است که ماژول قدرتمند ترین، آن را با استفاده از یک جدول بلیط شاخص های اضافی است که مانند یک کار می کند (توصیه می شود اگر بیش از 80.000 و 6.000 بلیط باز در سیستم ذخیره می شود). استفاده از دستور \ "بن / znuny.Console.pl سیستم maint :: بلیط :: QueueIndexRebuild " برای ایجاد شاخص اولیه.',
         'Saves the attachments of articles. "DB" stores all data in the database (not recommended for storing big attachments). "FS" stores the data on the filesystem; this is faster but the webserver should run under the OTRS user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when "FS" is used.' =>
             'موجب صرفه جویی در فایل پیوست مقالات. \ "DB " فروشگاه تمام اطلاعات در پایگاه داده (برای ذخیره سازی فایل پیوست بزرگ توصیه نمی شود). \ "FS " ذخیره اطلاعات در فایل سیستم. این است سریع تر اما وب سرور باید تحت کاربر OTRS اجرا کنید. شما می توانید بین ماژول حتی در یک سیستم است که در حال حاضر در تولید بدون از دست دادن داده ها تغییر دهید. توجه داشته باشید: جستجو برای نام دلبستگی پشتیبانی نمی که \ "FS " استفاده شده است.',
         'Specifies whether all storage backends should be checked when looking for attachments. This is only required for installations where some attachments are in the file system, and others in the database.' =>
@@ -6587,7 +6587,7 @@ sub Data {
             '',
         'Overloads (redefines) existing functions in Kernel::System::Ticket. Used to easily add customizations.' =>
             'اضافه بار (باز تعریف) توابع موجود در هسته :: :: سیستم بلیط. استفاده به راحتی سفارشی اضافه کنید.',
-        'Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild".' =>
+        'Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild".' =>
             '',
         'Defines whether to index archived tickets for fulltext searches.' =>
             '',
@@ -6595,7 +6595,7 @@ sub Data {
             '',
         'Display a warning and prevent search when using stop words within fulltext search.' =>
             'نمایش اخطار و جلوگیری از جستجو زمانی که با استفاده از کلمات در درون جستجوی متن هست.',
-        'Basic fulltext index settings. Execute "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild" in order to generate a new index.' =>
+        'Basic fulltext index settings. Execute "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild" in order to generate a new index.' =>
             '',
         'Fulltext index regex filters to remove parts of the text.' => 'متن فیلتر شاخص عبارت منظم به حذف بخش هایی از متن.',
         'English stop words for fulltext index. These words will be removed from the search index.' =>
@@ -7300,8 +7300,8 @@ sub Data {
             'تعریف می کند که قفل قابل مشاهده یک بلیط. توجه: وقتی که این تنظیم را تغییر دهید، مطمئن شوید که به حذف کش به منظور استفاده از ارزش های جدید است. به طور پیش فرض: باز کردن، tmp_lock.',
         'Defines the valid state types for a ticket. If a ticket is in a state which have any state type from this setting, this ticket will be considered as open, otherwise as closed.' =>
             '',
-        'Defines the valid states for unlocked tickets. To unlock tickets the script "bin/otrs.Console.pl Maint::Ticket::UnlockTimeout" can be used.' =>
-            'تعریف می کند که ایالات معتبر برای بلیط باز شده است. برای باز کردن قفل بلیط اسکریپت \ "بن / otrs.Console.pl سیستم maint :: بلیط :: UnlockTimeout " می تواند استفاده شود.',
+        'Defines the valid states for unlocked tickets. To unlock tickets the script "bin/znuny.Console.pl Maint::Ticket::UnlockTimeout" can be used.' =>
+            'تعریف می کند که ایالات معتبر برای بلیط باز شده است. برای باز کردن قفل بلیط اسکریپت \ "بن / znuny.Console.pl سیستم maint :: بلیط :: UnlockTimeout " می تواند استفاده شود.',
         'Sends reminder notifications of unlocked ticket after reaching the reminder date (only sent to ticket owner).' =>
             'می فرستد اطلاعیه یادآور بلیط قفل پس از رسیدن به تاریخ یادآوری (فقط به صاحب بلیط ارسال).',
         'Disables sending reminder notifications to the responsible agent of a ticket (Ticket::Responsible needs to be enabled).' =>

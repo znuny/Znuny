@@ -1182,22 +1182,22 @@ sub Data {
         'Client Certificate' => 'Client-Zertifikat',
         'The full path and name of the SSL client certificate file (must be in PEM, DER or PKCS#12 format).' =>
             'Der vollständige Pfad und Name der SSL-Client-Zertifikatsdatei (muss im PEM, DER oder PKCS#12-Format vorliegen).',
-        'e.g. /opt/otrs/var/certificates/SOAP/certificate.pem' => 'z.B. /opt/otrs/var/certificates/SOAP/certificate.pem',
+        'e.g. /opt/znuny/var/certificates/SOAP/certificate.pem' => 'z.B. /opt/znuny/var/certificates/SOAP/certificate.pem',
         'Client Certificate Key' => 'Client-Zertifikatschlüssel',
         'The full path and name of the SSL client certificate key file (if not already included in certificate file).' =>
             'Der vollständige Pfad und Name der SSL-Client-Zertifikats-Schlüsseldatei (sofern nicht bereits in der Client-Zertifikats-Datei enthalten).',
-        'e.g. /opt/otrs/var/certificates/SOAP/key.pem' => 'z.B. /opt/otrs/var/certificates/SOAP/key.pem',
+        'e.g. /opt/znuny/var/certificates/SOAP/key.pem' => 'z.B. /opt/znuny/var/certificates/SOAP/key.pem',
         'Client Certificate Key Password' => 'Passwort für Client-Zertifikatschlüssel',
         'The password to open the SSL certificate if the key is encrypted.' =>
             'Das Passwort für den Zugriff auf das SSL-Zertifikat falls der Schlüssel verschlüsselt ist.',
         'Certification Authority (CA) Certificate' => 'Zertifikat der Certification Authority (CA)',
         'The full path and name of the certification authority certificate file that validates SSL certificate.' =>
             'Voller Pfad und Dateiname der Datei der Certification Authority (CA), welche das Zertifikat signiert hat.',
-        'e.g. /opt/otrs/var/certificates/SOAP/CA/ca.pem' => 'z. B. /opt/otrs/var/certificates/SOAP/CA/ca.pem',
+        'e.g. /opt/znuny/var/certificates/SOAP/CA/ca.pem' => 'z. B. /opt/znuny/var/certificates/SOAP/CA/ca.pem',
         'Certification Authority (CA) Directory' => 'Verzeichnis mit Certification Autorities (CA)',
         'The full path of the certification authority directory where the CA certificates are stored in the file system.' =>
             'Voller Pfad und Dateiname des CA-Verzeichnisses, in dem CA-Zertifikate gespeichert sind.',
-        'e.g. /opt/otrs/var/certificates/SOAP/CA' => 'z. B. /opt/otrs/var/certificates/SOAP/CA',
+        'e.g. /opt/znuny/var/certificates/SOAP/CA' => 'z. B. /opt/znuny/var/certificates/SOAP/CA',
         'Controller mapping for Invoker' => 'Controller-Mapping für Invoker',
         'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
             'Der Controller, an den der Invoker Anfragen senden soll. Variablen, die mit einem \':\' markiert sind, werden durch den Datenwert ersetzt und mit der Anfrage übergeben. (z.B.: /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).',
@@ -2155,8 +2155,8 @@ sub Data {
         'Find out how to use the system configuration by reading the %s.' =>
             'Erfahren Sie mehr zur Nutzung der Systemkonfiguration im %s.',
         'Search in all settings...' => 'In allen Einstellungen suchen...',
-        'There are currently no settings available. Please make sure to run \'otrs.Console.pl Maint::Config::Rebuild\' before using the software.' =>
-            'Aktuell sind keine Einstellungen verfügbar. Bitte führen Sie \'otrs.Console.pl Maint::Config::Rebuild\' aus, bevor Sie die Software nutzen.',
+        'There are currently no settings available. Please make sure to run \'znuny.Console.pl Maint::Config::Rebuild\' before using the software.' =>
+            'Aktuell sind keine Einstellungen verfügbar. Bitte führen Sie \'znuny.Console.pl Maint::Config::Rebuild\' aus, bevor Sie die Software nutzen.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationDeployment.tt
         'Changes Deployment' => 'Inbetriebnahme von Änderungen',
@@ -2443,8 +2443,8 @@ sub Data {
             'Stellen Sie sicher, dass die Datei \'%s\' existiert (ohne die Endung .dist). Dieser Cronjob wird alle 5 Minuten prüfen, ob der OTRS Daemon läuft, und ihn ggf. starten.',
         'Execute \'%s start\' to make sure the cron jobs of the \'otrs\' user are active.' =>
             'Führen Sie \'%s start\' aus um sicherzustellen, dass die Cronjobs des \'otrs\'-Nutzers aktiv sind.',
-        'After 5 minutes, check that the OTRS Daemon is running in the system (\'bin/otrs.Daemon.pl status\').' =>
-            'Prüfen Sie nach 5 Minuten, ob der OTRS Daemon läuft (\'bin/otrs.Daemon.pl status\').',
+        'After 5 minutes, check that the OTRS Daemon is running in the system (\'bin/znuny.Daemon.pl status\').' =>
+            'Prüfen Sie nach 5 Minuten, ob der OTRS Daemon läuft (\'bin/znuny.Daemon.pl status\').',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboard.tt
         'Dashboard' => 'Übersicht',
@@ -3941,8 +3941,8 @@ sub Data {
         'Need param Key to download!' => 'Benötige Parameter "Key" zum herunterladen!',
 
         # Perl Module: Kernel/Modules/AdminPackageManager.pm
-        'Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/otrs.Console.pl to install packages!' =>
-            'Entschuldigung, Apache::Reload wird als Perl-Modul und PerlInitHandler in der Apache-Konfiguration benötigt (siehe auch scripts/apache2-httpd.include.conf). Alternativ können Sie Pakete auch mithilfe des Kommandozeilen-Tools bin/otrs.Console.pl installieren!',
+        'Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/znuny.Console.pl to install packages!' =>
+            'Entschuldigung, Apache::Reload wird als Perl-Modul und PerlInitHandler in der Apache-Konfiguration benötigt (siehe auch scripts/apache2-httpd.include.conf). Alternativ können Sie Pakete auch mithilfe des Kommandozeilen-Tools bin/znuny.Console.pl installieren!',
         'No such package!' => 'Kein solches Paket!',
         'No such file %s in package!' => 'Keine solche Datei %s im Paket!',
         'No such file %s in local file system!' => 'Datei %s existiert nicht im Dateisystem!',
@@ -5225,8 +5225,8 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InvalidDefaultValues.pm
         'Invalid Default Values' => 'Ungültige Standardwerte',
-        'Tables with invalid default values were found. In order to fix it automatically, please run: bin/otrs.Console.pl Maint::Database::Check --repair' =>
-            'Tabellen mit ungültigen Standardwerten wurden gefunden. Um diese automatisch zu reparieren, bitte folgendes Kommando ausführen: bin/otrs.Console.pl Maint::Database::Check --repair',
+        'Tables with invalid default values were found. In order to fix it automatically, please run: bin/znuny.Console.pl Maint::Database::Check --repair' =>
+            'Tabellen mit ungültigen Standardwerten wurden gefunden. Um diese automatisch zu reparieren, bitte folgendes Kommando ausführen: bin/znuny.Console.pl Maint::Database::Check --repair',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/MaxAllowedPacket.pm
         'Maximum Query Size' => 'Maximale Anfragegröße',
@@ -5448,10 +5448,10 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
         'Orphaned Records In ticket_lock_index Table' => 'Verwaiste Einträge in der Tabelle ticket_lock_index',
-        'Table ticket_lock_index contains orphaned records. Please run bin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
-            'Die Tabelle ticket_lock_index enthält verwaiste Einträge. Bitte führen Sie bin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup" aus, um den StaticDB-Index zu bereinigen.',
+        'Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+            'Die Tabelle ticket_lock_index enthält verwaiste Einträge. Bitte führen Sie bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" aus, um den StaticDB-Index zu bereinigen.',
         'Orphaned Records In ticket_index Table' => 'Verwaiste Einträge in der Tabelle ticket_index',
-        'Table ticket_index contains orphaned records. Please run bin/otrs.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
+        'Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl "Maint::Ticket::QueueIndexCleanup" to clean the StaticDB index.' =>
             'Die Tabelle ticket_index enthält verwaiste Einträge. Bitte führen Sie "Maint::Ticket::QueueIndexCleanup" aus, um sie zu entfernen.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
@@ -6536,8 +6536,8 @@ sub Data {
             'Legt die minimale Größe für den Ticketzähler fest, wenn "AutoIncrement" als TicketNumberGenerator gewählt wurde. Die Standardeinstellung ist 5, was bedeutet, dass der Zähler bei 10000 startet.',
         'Enables the minimal ticket counter size (if "Date" was selected as TicketNumberGenerator).' =>
             'Aktiviert die Minimalgröße für Ticketzähler (wenn "Datum" als TicketNumberGenerator ausgewählt ist).',
-        'IndexAccelerator: to choose your backend TicketViewAccelerator module. "RuntimeDB" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). "StaticDB" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command "bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild" for initial index creation.' =>
-            'IndexAccelerator: Auswahl des Backend-Moduls für TicketViewAccelerator. "RuntimeDB" generiert jede Queue-Ansicht dynamisch aus der Tickettabelle (keine Performance-Probleme bis zu etwa 60.000 Tickets insgesamt und 6.000 offenen Tickets im System). "StaticDB" ist das stärkste Modul, es benutzt zusätzliche Tabelle für den Ticket-Index, die wie eine Übersicht funktioniert (empfohlen bei mehr als 80.000 Tickets insgesamt und 6.000 offenen Tickets im System). Benutzen Sie das Kommando "bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild" für den initialen Indexaufbau.',
+        'IndexAccelerator: to choose your backend TicketViewAccelerator module. "RuntimeDB" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). "StaticDB" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command "bin/znuny.Console.pl Maint::Ticket::QueueIndexRebuild" for initial index creation.' =>
+            'IndexAccelerator: Auswahl des Backend-Moduls für TicketViewAccelerator. "RuntimeDB" generiert jede Queue-Ansicht dynamisch aus der Tickettabelle (keine Performance-Probleme bis zu etwa 60.000 Tickets insgesamt und 6.000 offenen Tickets im System). "StaticDB" ist das stärkste Modul, es benutzt zusätzliche Tabelle für den Ticket-Index, die wie eine Übersicht funktioniert (empfohlen bei mehr als 80.000 Tickets insgesamt und 6.000 offenen Tickets im System). Benutzen Sie das Kommando "bin/znuny.Console.pl Maint::Ticket::QueueIndexRebuild" für den initialen Indexaufbau.',
         'Saves the attachments of articles. "DB" stores all data in the database (not recommended for storing big attachments). "FS" stores the data on the filesystem; this is faster but the webserver should run under the OTRS user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when "FS" is used.' =>
             'Speicherung von Artikel-Anhängen. "DB" legt alle Daten in der Datenbank ab (nicht empfohlen für große Anhänge). "FS" legt alle Daten im Dateisystem ab; dies ist schneller, jedoch sollte der Webserver mit dem OTRS-Benutzer betrieben werden. Sie können im laufenden Betrieb ohne Datenverlust zwischen den Modulen wechseln. Bitte beachten Sie, dass das Suchen nach Anhängen für "FS" nicht unterstützt wird.',
         'Specifies whether all storage backends should be checked when looking for attachments. This is only required for installations where some attachments are in the file system, and others in the database.' =>
@@ -6581,16 +6581,16 @@ sub Data {
             'Dieses Eventmodul speichert Attribute des Kundenbenutzers als Werte von dynamischen Feldern. Bitte schauen sie sich die DynamicFieldFromCustomerUser::Mapping-Einstellung für die Konfiguration des Mappings an.',
         'Overloads (redefines) existing functions in Kernel::System::Ticket. Used to easily add customizations.' =>
             'Überlädt existierende Funktionen in Kernel::System::Ticket (redefining). Kann genutzt werden, um möglichst einfach Anpassungen vorzunehmen.',
-        'Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild".' =>
-            'Hilft beim Erweitern Ihres Artikel-Volltext-Suchindexes (Von-, An-, Cc-, Betreffs- und Text-Suche). Es erstellt einen Index nach Artikelerstellung, wodurch die Geschwindigkeit von Volltextsuchen um rund 50% steigt. Nutzen Sie "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild", um einen initialen Index zu erstellen.',
+        'Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild".' =>
+            'Hilft beim Erweitern Ihres Artikel-Volltext-Suchindexes (Von-, An-, Cc-, Betreffs- und Text-Suche). Es erstellt einen Index nach Artikelerstellung, wodurch die Geschwindigkeit von Volltextsuchen um rund 50% steigt. Nutzen Sie "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild", um einen initialen Index zu erstellen.',
         'Defines whether to index archived tickets for fulltext searches.' =>
             'Legt fest, ob archivierte Tickets im Index für Volltextsuchen berücksichtigt werden sollen.',
         'Force the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.' =>
             'Erzwingt die Speicherung der originalen Artikelinhalte im Artikel-Suchindex, ohne dabei Filter und Stopp-Worte anzuwenden. Dadurch wird die Größe des Suchindex erhöht, was Volltextsuchen verlangsamen kann.',
         'Display a warning and prevent search when using stop words within fulltext search.' =>
             'Zeigt eine Warnung an und verhindert die Suche, wenn Stop-Wörter in der Volltextsuche eingegeben werden.',
-        'Basic fulltext index settings. Execute "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild" in order to generate a new index.' =>
-            'Basis-Einstellungen für den Volltext-Index. Führen Sie "bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild" aus, um den Index neu zu erstellen.',
+        'Basic fulltext index settings. Execute "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild" in order to generate a new index.' =>
+            'Basis-Einstellungen für den Volltext-Index. Führen Sie "bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild" aus, um den Index neu zu erstellen.',
         'Fulltext index regex filters to remove parts of the text.' => 'Volltextindex-Regex-Filter, um Textteile zu entfernen.',
         'English stop words for fulltext index. These words will be removed from the search index.' =>
             'Englische Stopworte für den Volltext-Index. Diese Worte werden aus dem Index entfernt.',
@@ -7294,8 +7294,8 @@ sub Data {
             'Bestimmt die sichtbaren Sperrtypen eines Tickets. Hinweis: Bitte stellen Sie sicher, dass Sie bei Veränderung dieser Einstellung den Cache leeren.',
         'Defines the valid state types for a ticket. If a ticket is in a state which have any state type from this setting, this ticket will be considered as open, otherwise as closed.' =>
             'Definiert die gültigen Statustypen für ein Ticket. Wenn sich ein Ticket in einem Status befindet, der einen Statustyp aus dieser Einstellung hat, gilt dieses Ticket als offen, ansonsten als geschlossen.',
-        'Defines the valid states for unlocked tickets. To unlock tickets the script "bin/otrs.Console.pl Maint::Ticket::UnlockTimeout" can be used.' =>
-            'Bestimmt gültige Status für entsperrte Tickets. Um Tickets zu entsperren, kann das Script "bin/otrs.Console.pl Maint::Ticket::UnlockTimeout" genutzt werden.',
+        'Defines the valid states for unlocked tickets. To unlock tickets the script "bin/znuny.Console.pl Maint::Ticket::UnlockTimeout" can be used.' =>
+            'Bestimmt gültige Status für entsperrte Tickets. Um Tickets zu entsperren, kann das Script "bin/znuny.Console.pl Maint::Ticket::UnlockTimeout" genutzt werden.',
         'Sends reminder notifications of unlocked ticket after reaching the reminder date (only sent to ticket owner).' =>
             'Sendet eine Erinnerung eines Entsperrten Tickets nachdem das Erinnerungsdatum erreicht wurde. (Nur zum Besitzer des Tickets gesendet).',
         'Disables sending reminder notifications to the responsible agent of a ticket (Ticket::Responsible needs to be enabled).' =>

@@ -5,13 +5,13 @@ set -o pipefail
 
 a2dismod mpm_event mpm_worker
 a2enmod perl deflate filter headers mpm_prefork
-useradd -d /opt/otrs -c 'OTRS user' -g www-data -s /bin/bash -M otrs
+useradd -d /opt/znuny -c 'OTRS user' -g www-data -s /bin/bash -M otrs
 
 # link and create files
-ln -sf "$PWD" /opt/otrs
-ln -s /opt/otrs/scripts/apache2-httpd.include.conf /etc/apache2/sites-enabled/zzz_otrs.conf
+ln -sf "$PWD" /opt/znuny
+ln -s /opt/znuny/scripts/apache2-httpd.include.conf /etc/apache2/sites-enabled/zzz_znuny.conf
 cp Kernel/Config.pm.dist Kernel/Config.pm
-mkdir -p /opt/otrs/var/tmp
+mkdir -p /opt/znuny/var/tmp
 
 # start apache
 apachectl start
@@ -22,9 +22,9 @@ if [ "$DB" == "mysql" ]; then
 fi
 
 # run needed scripts
-/opt/otrs/bin/otrs.SetPermissions.pl
-su -c "bin/otrs.CheckSum.pl -a create" - otrs
-touch /opt/otrs/installed
+/opt/znuny/bin/znuny.SetPermissions.pl
+su -c "bin/znuny.CheckSum.pl -a create" - otrs
+touch /opt/znuny/installed
 
 # prepare Selenium tests
 if [[ "$GITHUB_JOB" =~ ^Selenium ]]; then
@@ -32,6 +32,6 @@ if [[ "$GITHUB_JOB" =~ ^Selenium ]]; then
 fi
 
 if [ "$DB" ]; then
-    su -c "bin/otrs.Console.pl Maint::Config::Rebuild" - otrs
-    su -c "bin/otrs.Console.pl Admin::Config::Update --setting-name CheckEmailAddresses --value 0" - otrs
+    su -c "bin/znuny.Console.pl Maint::Config::Rebuild" - otrs
+    su -c "bin/znuny.Console.pl Admin::Config::Update --setting-name CheckEmailAddresses --value 0" - otrs
 fi

@@ -4187,7 +4187,7 @@ sub _FileSystemCheck {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => "ERROR: Need write permissions for directory $Home$Filepath\n"
-                . " Try: $Home/bin/otrs.SetPermissions.pl!",
+                . " Try: $Home/bin/znuny.SetPermissions.pl!",
         );
 
         return;

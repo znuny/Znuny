@@ -80,7 +80,7 @@
                 [% ELSE %]
                     <p class="Center NoItemsInfo">
                         <i class="fa fa-exclamation-triangle"></i>
-                        [% Translate("There are currently no settings available. Please make sure to run 'otrs.Console.pl Maint::Config::Rebuild' before using the software.") | html %]
+                        [% Translate("There are currently no settings available. Please make sure to run 'znuny.Console.pl Maint::Config::Rebuild' before using the software.") | html %]
                     </p>
                 [% END %]
             </div>

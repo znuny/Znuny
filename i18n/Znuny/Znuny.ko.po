@@ -3221,8 +3221,8 @@ msgid "The full path and name of the SSL client certificate file (must be in PEM
 msgstr "SSL 클라이언트 인증서 파일의 전체 경로 및 이름 (PEM, DER 또는 PKCS # 12 형식이어야 함)."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "e.g. /opt/otrs/var/certificates/SOAP/certificate.pem"
-msgstr "예 : /opt/otrs/var/certificates/SOAP/certificate.pem"
+msgid "e.g. /opt/znuny/var/certificates/SOAP/certificate.pem"
+msgstr "예 : /opt/znuny/var/certificates/SOAP/certificate.pem"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Client Certificate Key"
@@ -3233,8 +3233,8 @@ msgid "The full path and name of the SSL client certificate key file (if not alr
 msgstr "SSL 클라이언트 인증서 키 파일의 전체 경로 및 이름 (아직 인증서 파일에 포함되어 있지 않은 경우)."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "e.g. /opt/otrs/var/certificates/SOAP/key.pem"
-msgstr "예 : /opt/otrs/var/certificates/SOAP/key.pem"
+msgid "e.g. /opt/znuny/var/certificates/SOAP/key.pem"
+msgstr "예 : /opt/znuny/var/certificates/SOAP/key.pem"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Client Certificate Key Password"
@@ -3253,8 +3253,8 @@ msgid "The full path and name of the certification authority certificate file th
 msgstr "SSL 인증서의 유효성을 검사하는 인증 기관 인증서 파일의 전체 경로 및 이름입니다."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "e.g. /opt/otrs/var/certificates/SOAP/CA/ca.pem"
-msgstr "예 : /opt/otrs/var/certificates/SOAP/CA/ca.pem"
+msgid "e.g. /opt/znuny/var/certificates/SOAP/CA/ca.pem"
+msgstr "예 : /opt/znuny/var/certificates/SOAP/CA/ca.pem"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Certification Authority (CA) Directory"
@@ -3265,7 +3265,7 @@ msgid "The full path of the certification authority directory where the CA certi
 msgstr "CA 인증서가 파일 시스템에 저장되는 인증 기관 디렉토리의 전체 경로입니다."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "e.g. /opt/otrs/var/certificates/SOAP/CA"
+msgid "e.g. /opt/znuny/var/certificates/SOAP/CA"
 msgstr "예 : / opt / otrs / var / certificates / SOAP / CA"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
@@ -6173,8 +6173,8 @@ msgid "Search in all settings..."
 msgstr "모든 설정에서 검색..."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfiguration.tt
-msgid "There are currently no settings available. Please make sure to run 'otrs.Console.pl Maint::Config::Rebuild' before using the software."
-msgstr "현재 사용할 수있는 설정이 없습니다. 소프트웨어를 사용하기 전에 'otrs.Console.pl Maint :: Config :: Rebuild'를 실행하십시오. "
+msgid "There are currently no settings available. Please make sure to run 'znuny.Console.pl Maint::Config::Rebuild' before using the software."
+msgstr "현재 사용할 수있는 설정이 없습니다. 소프트웨어를 사용하기 전에 'znuny.Console.pl Maint :: Config :: Rebuild'를 실행하십시오. "
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationDeployment.tt
 msgid "Changes Deployment"
@@ -6977,8 +6977,8 @@ msgid "Execute '%s start' to make sure the cron jobs of the 'otrs' user are acti
 msgstr "'%s start'를 실행하여 'otrs'사용자의 cron 작업이 활성 상태인지 확인하십시오."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
-msgid "After 5 minutes, check that the OTRS Daemon is running in the system ('bin/otrs.Daemon.pl status')."
-msgstr "5 분 후, OTRS 데몬이 시스템에서 실행 중인지 확인하십시오 ( 'bin / otrs.Daemon.pl status')."
+msgid "After 5 minutes, check that the OTRS Daemon is running in the system ('bin/znuny.Daemon.pl status')."
+msgstr "5 분 후, OTRS 데몬이 시스템에서 실행 중인지 확인하십시오 ( 'bin / znuny.Daemon.pl status')."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboard.tt
 msgid "Dashboard"
@@ -10885,8 +10885,8 @@ msgid "Need param Key to download!"
 msgstr "다운로드하려면 param이 필요합니다!"
 
 #. Perl Module: Kernel/Modules/AdminPackageManager.pm
-msgid "Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/otrs.Console.pl to install packages!"
-msgstr "죄송합니다, Apache :: Reload는 Apache config 파일의 PerlModule 및 PerlInitHandler로 필요합니다. scripts / apache2-httpd.include.conf도 참조하십시오. 또는 명령 행 도구 bin / otrs.Console.pl을 사용하여 패키지를 설치할 수 있습니다!"
+msgid "Sorry, Apache::Reload is needed as PerlModule and PerlInitHandler in Apache config file. See also scripts/apache2-httpd.include.conf. Alternatively, you can use the command line tool bin/znuny.Console.pl to install packages!"
+msgstr "죄송합니다, Apache :: Reload는 Apache config 파일의 PerlModule 및 PerlInitHandler로 필요합니다. scripts / apache2-httpd.include.conf도 참조하십시오. 또는 명령 행 도구 bin / znuny.Console.pl을 사용하여 패키지를 설치할 수 있습니다!"
 
 #. Perl Module: Kernel/Modules/AdminPackageManager.pm
 msgid "No such package!"
@@ -14105,8 +14105,8 @@ msgid "Invalid Default Values"
 msgstr "잘못된 기본값"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InvalidDefaultValues.pm
-msgid "Tables with invalid default values were found. In order to fix it automatically, please run: bin/otrs.Console.pl Maint::Database::Check --repair"
-msgstr "잘못된 기본값이있는 테이블을 찾았습니다. 자동으로 수정하려면 다음을 실행하십시오. bin / otrs.Console.pl Maint :: Database :: Check --repair"
+msgid "Tables with invalid default values were found. In order to fix it automatically, please run: bin/znuny.Console.pl Maint::Database::Check --repair"
+msgstr "잘못된 기본값이있는 테이블을 찾았습니다. 자동으로 수정하려면 다음을 실행하십시오. bin / znuny.Console.pl Maint :: Database :: Check --repair"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/MaxAllowedPacket.pm
 msgid "Maximum Query Size"
@@ -14561,16 +14561,16 @@ msgid "Orphaned Records In ticket_lock_index Table"
 msgstr "ticket_lock_index 테이블의 고아 레코드"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
-msgid "Table ticket_lock_index contains orphaned records. Please run bin/otrs.Console.pl \"Maint::Ticket::QueueIndexCleanup\" to clean the StaticDB index."
-msgstr "표 ticket_lock_index에는 분리 된 레코드가 있습니다. bin / otrs.Console.pl \"Maint :: Ticket :: QueueIndexCleanup\"을 실행하여 StaticDB 색인을 정리하십시오."
+msgid "Table ticket_lock_index contains orphaned records. Please run bin/znuny.Console.pl \"Maint::Ticket::QueueIndexCleanup\" to clean the StaticDB index."
+msgstr "표 ticket_lock_index에는 분리 된 레코드가 있습니다. bin / znuny.Console.pl \"Maint :: Ticket :: QueueIndexCleanup\"을 실행하여 StaticDB 색인을 정리하십시오."
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
 msgid "Orphaned Records In ticket_index Table"
 msgstr "ticket_index 테이블의 고아 레코드"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Ticket/StaticDBOrphanedRecords.pm
-msgid "Table ticket_index contains orphaned records. Please run bin/otrs.Console.pl \"Maint::Ticket::QueueIndexCleanup\" to clean the StaticDB index."
-msgstr "표 ticket_index에는 분리 된 레코드가 있습니다. bin / otrs.Console.pl \"Maint :: Ticket :: QueueIndexCleanup\"을 실행하여 StaticDB 색인을 정리하십시오."
+msgid "Table ticket_index contains orphaned records. Please run bin/znuny.Console.pl \"Maint::Ticket::QueueIndexCleanup\" to clean the StaticDB index."
+msgstr "표 ticket_index에는 분리 된 레코드가 있습니다. bin / znuny.Console.pl \"Maint :: Ticket :: QueueIndexCleanup\"을 실행하여 StaticDB 색인을 정리하십시오."
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
 msgid "Time Settings"
@@ -16823,7 +16823,7 @@ msgid "Based on global RichText setting"
 msgstr "전역 서식있는 텍스트 설정에 기반"
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Basic fulltext index settings. Execute \"bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild\" in order to generate a new index."
+msgid "Basic fulltext index settings. Execute \"bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild\" in order to generate a new index."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
@@ -19096,8 +19096,8 @@ msgid "Defines the valid state types for a ticket. If a ticket is in a state whi
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Defines the valid states for unlocked tickets. To unlock tickets the script \"bin/otrs.Console.pl Maint::Ticket::UnlockTimeout\" can be used."
-msgstr "잠금 해제 된 티켓의 유효한 상태를 정의합니다. 티켓의 잠금을 해제하려면 \"bin / otrs.Console.pl Maint :: Ticket :: UnlockTimeout\"스크립트를 사용할 수 있습니다."
+msgid "Defines the valid states for unlocked tickets. To unlock tickets the script \"bin/znuny.Console.pl Maint::Ticket::UnlockTimeout\" can be used."
+msgstr "잠금 해제 된 티켓의 유효한 상태를 정의합니다. 티켓의 잠금을 해제하려면 \"bin / znuny.Console.pl Maint :: Ticket :: UnlockTimeout\"스크립트를 사용할 수 있습니다."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the viewable locks of a ticket. NOTE: When you change this setting, make sure to delete the cache in order to use the new value. Default: unlock, tmp_lock."
@@ -20025,7 +20025,7 @@ msgid "Hebrew"
 msgstr "헤브라이 사람"
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use \"bin/otrs.Console.pl Maint::Ticket::FulltextIndex --rebuild\"."
+msgid "Helps to extend your articles full-text search (From, To, Cc, Subject and Body search). It will strip all articles and will build an index after article creation, increasing fulltext searches about 50%. To create an initial index use \"bin/znuny.Console.pl Maint::Ticket::FulltextIndex --rebuild\"."
 msgstr ""
 
 #. SysConfig
@@ -20313,8 +20313,8 @@ msgid "Incoming Phone Call."
 msgstr "수신 전화."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "IndexAccelerator: to choose your backend TicketViewAccelerator module. \"RuntimeDB\" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). \"StaticDB\" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command \"bin/otrs.Console.pl Maint::Ticket::QueueIndexRebuild\" for initial index creation."
-msgstr "IndexAccelerator : 백엔드 TicketViewAccelerator 모듈을 선택합니다. \"RuntimeDB\"는 티켓 테이블에서 각 큐 뷰를 생성합니다 (성능상의 문제없이 최대 약 60,000 개의 티켓과 시스템의 6.000 개 티켓). \"StaticDB\"는보기와 같이 작동하는 별도의 티켓 색인 표를 사용하는 가장 강력한 모듈입니다 (80.000 개 이상의 티켓이 시스템에 저장되어있는 경우 권장). 초기 색인 작성은 \"bin / otrs.Console.pl Maint :: Ticket :: QueueIndexRebuild\"명령을 사용하십시오."
+msgid "IndexAccelerator: to choose your backend TicketViewAccelerator module. \"RuntimeDB\" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). \"StaticDB\" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command \"bin/znuny.Console.pl Maint::Ticket::QueueIndexRebuild\" for initial index creation."
+msgstr "IndexAccelerator : 백엔드 TicketViewAccelerator 모듈을 선택합니다. \"RuntimeDB\"는 티켓 테이블에서 각 큐 뷰를 생성합니다 (성능상의 문제없이 최대 약 60,000 개의 티켓과 시스템의 6.000 개 티켓). \"StaticDB\"는보기와 같이 작동하는 별도의 티켓 색인 표를 사용하는 가장 강력한 모듈입니다 (80.000 개 이상의 티켓이 시스템에 저장되어있는 경우 권장). 초기 색인 작성은 \"bin / znuny.Console.pl Maint :: Ticket :: QueueIndexRebuild\"명령을 사용하십시오."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Indicates if a bounce e-mail should always be treated as normal follow-up."
