@@ -228,10 +228,14 @@
                             </div>
                         </fieldset>
                     </div>
-                    <div id="BottomActionRow" class="ActionRow ActionRow-full-width">
-                        <span>[% Translate("Output to") | html %]</span>
-                        <span>[% Data.ResultFormStrg %]</span>
-                        <button id="Submit" type="submit" value="[% Translate("Search") | html %]" class="btn-primary btn-main btn-width-md">[% Translate("Search") | html %]</button>
+                    <div id="BottomActionRow" class="ActionRow field-wrapper form-button-actions ActionRow-full-width">
+                        <div class="Field buttons-field">
+                            <div class="inner-output-field">
+                                <span>[% Translate("Output to") | html %]</span>
+                                <span>[% Data.ResultFormStrg %]</span>
+                            </div>
+                            <button id="Submit" type="submit" value="[% Translate("Search") | html %]" class="btn-primary btn-main btn-width-md">[% Translate("Search") | html %]</button>
+                        </div>
                     </div>
                 </form>
             </div>

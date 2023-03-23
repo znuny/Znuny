@@ -14,7 +14,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 @media screen,projection,tv,handheld {
 
-    html, 
+    html,
     body{
         display: flex;
         flex-flow: column;
@@ -31,11 +31,11 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         html.NoScroll body {
             overflow: hidden;
         }
-    
+
         html.NoScroll body {
             position: static;
         }
-    
+
         html.NoScroll #AppWrapper {
             overflow: hidden;
             width: 100%;
@@ -73,7 +73,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         #AppWrapper .LayoutPopup {
             margin-top: -48px;
         }
-    }    
+    }
 
     .RTL {
         text-align: right;
@@ -238,7 +238,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         display: none;
     }
 
-    /* edited by beatriz on 13/2/2023 - temporary fix 
+    /* edited by beatriz on 13/2/2023 - temporary fix
      - .Hidden class usage needs to be revised for the settings screens (accessed through the "settings" cogwheel in a widget) */
     .Dialog .Hidden {
         display: none; /* The "!important" rule can't be used here */
@@ -283,6 +283,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         color: var(--primary-color);
         text-decoration: none;
         font-size: var(--main-font-size);
+        cursor: pointer;
     }
 
     a:hover,
@@ -453,7 +454,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     /**
     * @subsection  Alerts colors
-    * @note        
+    * @note
     */
 
     .Info:not(i.fa):not(td) {
@@ -1376,7 +1377,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
             width: 100%;
         }
     }
-    
+
     iframe.FAQField {
         width: 100%;
         height: auto;
@@ -1396,7 +1397,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     @media only screen and (max-width: 1024px) {
         #SearchForm,
-        #AgentCustomerInformationCenterSearchForm, 
+        #AgentCustomerInformationCenterSearchForm,
         #AgentCustomerUserInformationCenterSearchForm,
         #AgentTicketCustomerIDSelection {
             min-width: unset;

@@ -332,10 +332,11 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     width: 100%;
     max-width: 800px;
     align-self: center;
+    gap: var(--gap-sm);
 }
 
 #BottomActionRow.ActionRow {
-    border-top: 0;
+    border: 0;
     border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
 }
 
@@ -385,13 +386,12 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 .MessageBox i,
-.MessageBox p {
+.MessageBox p,
+.MessageBox a {
     color: var(--black);
 }
 
-.MessageBox a {
-    display: none;
-}
+
 
 /**
  * @subsection  Filter

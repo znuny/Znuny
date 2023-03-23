@@ -228,11 +228,13 @@
                             </div>
                         </div>
                         <div class="field-wrapper">
-                            <label for="KeepAttributes">[% Translate("Keep XML attributes") | html %]</label>
-                            <div class="Field">
-                                <input id="KeepAttributes" class="KeepAttributes " type="checkbox" value="1" [% IF Data.KeepAttributes %]checked="checked"[% END %] name="KeepAttributes"/>
-                                <p class="FieldExplanation">[% Translate("Only needed for content type XML.") | html %]</p>
+                           <div class="CheckboxContainer">
+                                <div class="Field">
+                                    <input id="KeepAttributes" class="KeepAttributes " type="checkbox" value="1" [% IF Data.KeepAttributes %]checked="checked"[% END %] name="KeepAttributes"/>
+                                </div>
+                                <label for="KeepAttributes">[% Translate("Keep XML attributes") | html %]</label>
                             </div>
+                            <p class="FieldExplanation">[% Translate("Only needed for content type XML.") | html %]</p>
                         </div>
                     </fieldset>
                 </div>
@@ -258,36 +260,40 @@
                                 <input type="hidden" name="[% Data.Type | html %]ValueCounter" value="[% Data.ValueCounter | html %]" id="[% Data.Type | html %]ValueCounter" class="ValueCounter" />
 [% RenderBlockStart("ValueRow") %]
                                 <div class="ValueRow field-wrapper full-width">
-                                    <div class="field-wrapper">
-                                        <label class="Mandatory" for="[% Data.Type | html %]Key_[% Data.ValueCounter | html %]"><span class="Marker">*</span>[% Translate("Search") | html %]</label>
-                                        <input name="[% Data.Type | html %]Key_[% Data.ValueCounter | html %]" id="[% Data.Type | html %]Key_[% Data.ValueCounter | html %]" class="Validate_Required W20pc [% Data.KeyError | html %]" type="text" maxlength="100" value="[% Data.Key | html %]"/>
-                                        <div id="[% Data.Type | html %]Key_[% Data.ValueCounter | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                        <div id="[% Data.Type | html %]Key_[% Data.ValueCounter | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate(Data.KeyErrorStrg) | html %]</p></div>
-                                    </div>
+                                    <div class="single-row-inputs">
+                                        <div class="field-wrapper flex-column">
+                                            <label class="Mandatory" for="[% Data.Type | html %]Key_[% Data.ValueCounter | html %]"><span class="Marker">*</span>[% Translate("Search") | html %]</label>
+                                            <input name="[% Data.Type | html %]Key_[% Data.ValueCounter | html %]" id="[% Data.Type | html %]Key_[% Data.ValueCounter | html %]" class="Validate_Required W20pc [% Data.KeyError | html %]" type="text" maxlength="100" value="[% Data.Key | html %]"/>
+                                            <div id="[% Data.Type | html %]Key_[% Data.ValueCounter | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                            <div id="[% Data.Type | html %]Key_[% Data.ValueCounter | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate(Data.KeyErrorStrg) | html %]</p></div>
+                                        </div>
 
-                                    <div class="field-wrapper">
-                                        <label for="[% Data.Type | html %]Value_[% Data.ValueCounter | html %]">[% Translate("Replace") | html %]</label>
-                                        <input name="[% Data.Type | html %]Value_[% Data.ValueCounter | html %]" id="[% Data.Type | html %]Value_[% Data.ValueCounter | html %]" class="W20pc" type="text" maxlength="100" value="[% Data.Value | html %]"/>
-                                    </div>
+                                        <div class="field-wrapper flex-column">
+                                            <label for="[% Data.Type | html %]Value_[% Data.ValueCounter | html %]">[% Translate("Replace") | html %]</label>
+                                            <input name="[% Data.Type | html %]Value_[% Data.ValueCounter | html %]" id="[% Data.Type | html %]Value_[% Data.ValueCounter | html %]" class="W20pc" type="text" maxlength="100" value="[% Data.Value | html %]"/>
+                                        </div>
 
-                                    <a href="#" id="[% Data.Type | html %]RemoveValue_[% Data.ValueCounter | html %]" class="RemoveButton ValueRemove"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove regex") | html %]</span></a>
+                                        <a href="#" id="[% Data.Type | html %]RemoveValue_[% Data.ValueCounter | html %]" class="RemoveButton ValueRemove" style="align-self:end;margin-bottom:5px"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove regex") | html %]</span></a>
+                                    </div>
                                 </div>
 [% RenderBlockEnd("ValueRow") %]
 [% RenderBlockStart("ValueTemplate") %]
                                 <div class="[% Data.Type | html %]ValueTemplate Hidden  field-wrapper full-width">
-                                    <div class="field-wrapper">
-                                        <label class="Mandatory" for="[% Data.Type | html %]Key"><span class="Marker">*</span>[% Translate("Search") | html %]</label>
-                                        <input name="[% Data.Type | html %]Key_[% Data.ValueCounter | html %]" id="[% Data.Type | html %]Key" class="KeyTemplate W20pc" type="text" maxlength="100" value="[% Data.Key | html %]"/>
-                                        <div id="[% Data.Type | html %]KeyError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                        <div id="[% Data.Type | html %]KeyServerError" class="TooltipErrorMessage"><p>[% Translate(Data.KeyErrorStrg) | html %]</p></div>
-                                    </div>
+                                    <div class="single-row-inputs">
+                                        <div class="field-wrapper flex-column">
+                                            <label class="Mandatory" for="[% Data.Type | html %]Key"><span class="Marker">*</span>[% Translate("Search") | html %]</label>
+                                            <input name="[% Data.Type | html %]Key_[% Data.ValueCounter | html %]" id="[% Data.Type | html %]Key" class="KeyTemplate W20pc" type="text" maxlength="100" value="[% Data.Key | html %]"/>
+                                            <div id="[% Data.Type | html %]KeyError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                            <div id="[% Data.Type | html %]KeyServerError" class="TooltipErrorMessage"><p>[% Translate(Data.KeyErrorStrg) | html %]</p></div>
+                                        </div>
 
-                                    <div class="field-wrapper">
-                                        <label for="[% Data.Type | html %]Value">[% Translate("Replace") | html %]</label>
-                                        <input name="[% Data.Type | html %]Value_[% Data.ValueCounter | html %]" id="[% Data.Type | html %]Value" class="W20pc" type="text" maxlength="100" value="[% Data.Value | html %]"/>
-                                    </div>
+                                        <div class="field-wrapper flex-column">
+                                            <label for="[% Data.Type | html %]Value">[% Translate("Replace") | html %]</label>
+                                            <input name="[% Data.Type | html %]Value_[% Data.ValueCounter | html %]" id="[% Data.Type | html %]Value" class="W20pc" type="text" maxlength="100" value="[% Data.Value | html %]"/>
+                                        </div>
 
-                                    <a href="#" id="[% Data.Type | html %]RemoveValue_[% Data.ValueCounter | html %]" class="RemoveButton ValueRemove"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove regex") | html %]</span></a>
+                                        <a href="#" id="[% Data.Type | html %]RemoveValue_[% Data.ValueCounter | html %]" class="RemoveButton ValueRemove" style="align-self:end;margin-bottom:5px"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove regex") | html %]</span></a>
+                                    </div>
                                 </div>
 [% RenderBlockEnd("ValueTemplate") %]
                                 <input type="hidden" name="[% Data.Type | html %]DeletedValue" value="[% Data.DeletedString | html %]" id="[% Data.Type | html %]DeletedValue" class="[% Data.Type | html %]DeletedValue" />

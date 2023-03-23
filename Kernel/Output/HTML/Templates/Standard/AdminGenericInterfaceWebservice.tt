@@ -54,7 +54,7 @@
                                     </fieldset>
                                 </form>
                             </div>
-                            <div class="ContentFooter Center">
+                            <div class="ContentFooter SaveButtons">
                                 <button class="CallForAction btn-cancel-ghost btn-main btn-width-md" type="button" id="CancelCloneButtonAction" value="[% Translate("Cancel") | html %]"><span>[% Translate("Cancel") | html %]</span></button>
                                 <button class="Primary CallForAction btn-primary btn-main btn-width-md" type="button" id="CloneButtonAction" value="[% Translate("Clone") | html %]"><span>[% Translate("Clone") | html %]</span></button>
                             </div>
@@ -85,7 +85,7 @@
                                         <div class="field-wrapper">
                                             <label class="Mandatory" for="ConfigFile"><span class="Marker">*</span>[% Translate("Configuration File") | html %]</label>
                                             <div class="Field">
-                                                <input id="ConfigFile" class="Validate_Required" type="file" maxlength="250" value="" name="ConfigFile"/>
+                                                <input id="ConfigFile" class="Validate_Required full-width border padding-md" type="file" maxlength="250" value="" name="ConfigFile"/>
                                                 <div id="ConfigFileError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                                                 <div class="FieldExplanation">[% Translate("The file must be a valid web service configuration YAML file.") | html %]</div>
                                             </div>
@@ -101,7 +101,7 @@
                                     </fieldset>
                                 </form>
                             </div>
-                            <div class="ContentFooter Center">
+                            <div class="ContentFooter SaveButtons">
                                 <button class="CallForAction btn-main btn-cancel-ghost btn-width-md" type="button" id="CancelImportButtonAction" value="[% Translate("Cancel") | html %]"><span>[% Translate("Cancel") | html %]</span></button>
                                 <button class="Primary CallForAction btn-main btn-primary btn-width-md" type="submit" id="ImportButtonAction" value="[% Translate("Import") | html %]"><span>[% Translate("Import") | html %]</span></button>
                             </div>

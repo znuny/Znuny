@@ -137,7 +137,7 @@
                                     <a href="" id="RemoveKeyMapping[% Data.KeyIndex | html %]" class="RemoveButton KeyMapRemove" value="[% Translate("Remove key mapping") | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove key mapping") | html %]</span></a>
                                 </div>
                             </div>
-                            <div class="Content">
+                            <div class="Content" style="overflow:hidden">
                                 <fieldset class="TableLike FixedLabelSmall">
                                     <div class="field-wrapper">
                                         <label class="title">[% Translate("Key mapping") | html %]</label>

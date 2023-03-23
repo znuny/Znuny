@@ -52,19 +52,20 @@
         </div>
 [% RenderBlockEnd("ActionList") %]
 
-        <div class="WidgetSimple">
-            <div class="Header">
-                <h2>[% Translate("Hint") | html %]</h2>
-            </div>
-            <div class="Content">
-                <p class="FieldExplanation">
-                    [% Translate("Agents will be needed to handle tickets.") | html %]
-                </p>
-                <p>
-                    [% Translate("Attention") | html %]: [% Translate("Don't forget to add a new agent to groups and/or roles!") | html %]
-                </p>
-            </div>
-        </div>
+
+#        <div class="WidgetSimple">
+#            <div class="Header">
+#                <h2>[% Translate("Hint") | html %]</h2>
+#            </div>
+#            <div class="Content">
+#                <p class="FieldExplanation">
+#                    [% Translate("Agents will be needed to handle tickets.") | html %]
+#                </p>
+#                <p>
+#                    [% Translate("Attention") | html %]: [% Translate("Don't forget to add a new agent to groups and/or roles!") | html %]
+#                </p>
+#            </div>
+#        </div>
 
         <div class='WidgetSimple'>
             <div class='Header'>

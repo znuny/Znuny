@@ -216,16 +216,17 @@
                             </div>
 
                             <div class="field-wrapper">
-                                <label for="SSLNoHostnameVerification">[% Translate("Disable SSL hostname certificate verification") | html %]</label>
-                                <div class="Field">
-                                    <input type="checkbox" name="SSLNoHostnameVerification" id="SSLNoHostnameVerification" value="1" class="[% Data.SSLNoHostnameVerificationServerError | html %]" [% Data.SSLNoHostnameVerificationChecked | html %] />
-
-                                    <div id="SSLNoHostnameVerificationError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                    <div id="SSLNoHostnameVerificationServerError" class="TooltipErrorMessage"><p>[% Translate(Data.SSLNoHostnameVerificationServerErrorMessage) | html %]</p></div>
-                                    <p class="FieldExplanation W50pc">
-                                        [% Translate("Disables hostname certificate verification. This is not recommended and should only be used in test environments.") | html %]
-                                    </p>
+                                <div class="CheckboxContainer">
+                                    <div class="Field">
+                                        <input type="checkbox" name="SSLNoHostnameVerification" id="SSLNoHostnameVerification" value="1" class="[% Data.SSLNoHostnameVerificationServerError | html %]" [% Data.SSLNoHostnameVerificationChecked | html %] />
+                                    </div>
+                                    <label for="SSLNoHostnameVerification">[% Translate("Disable SSL hostname certificate verification") | html %]</label>
                                 </div>
+                                <div id="SSLNoHostnameVerificationError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                <div id="SSLNoHostnameVerificationServerError" class="TooltipErrorMessage"><p>[% Translate(Data.SSLNoHostnameVerificationServerErrorMessage) | html %]</p></div>
+                                <p class="FieldExplanation W50pc">
+                                    [% Translate("Disables hostname certificate verification. This is not recommended and should only be used in test environments.") | html %]
+                                </p>
                             </div>
 
                             <div class="field-wrapper">

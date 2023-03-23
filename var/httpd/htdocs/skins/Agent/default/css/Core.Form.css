@@ -21,7 +21,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         flex-flow: column;
         gap: var(--gap-md);
     }
-    
+
     /**
     * @subsection  Input focus
     * @note        Does not work in IE6, only partially in IE7 (no focus)
@@ -102,6 +102,10 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     input[readonly] {
         background: var(--disabled-input);
         color: var(--disabled-text);
+    }
+
+    input#ConfigFile {
+        border-radius: var(--border-radius-sm);
     }
 
     .outer-select-date {
@@ -976,7 +980,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         width: 100%;
     }
 
-    .ContentColumn .FieldExplanation, 
+    .ContentColumn .FieldExplanation,
     .ContentColumn .WidgetSimple .Content p.FieldExplanation {
         display: flex;
     }
@@ -996,7 +1000,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     .DataTable.DashboardUser p,
-    .ActionsSideBarComp .FieldExplanation, 
+    .ActionsSideBarComp .FieldExplanation,
     .ActionsSideBarComp .WidgetSimple .Content p {
         padding: 0;
     }
@@ -1093,8 +1097,8 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         transform: translateY(-50%);
     }
 
-    .CustomerContainerField .SpacingTopSmall input[type="text"], 
-    .CustomerContainerField .SpacingTopSmall input[type="password"], 
+    .CustomerContainerField .SpacingTopSmall input[type="text"],
+    .CustomerContainerField .SpacingTopSmall input[type="password"],
     .CustomerContainerField .SpacingTopSmall input[type="email"] {
         overflow: hidden;
         text-overflow: ellipsis;
@@ -1159,7 +1163,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         display: flex;
         flex-direction: column;
         gap: var(--gap-sm);
-    } 
+    }
 
     .outer-label-wrapper {
         display: flex;
@@ -1173,13 +1177,13 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         align-items: center;
         gap: var(--gap-xs);
     }
-    
+
     .label-wrapper label {
         display: flex;
         align-items: center;
         gap: var(--gap-xs);
     }
-    
+
     form label[for],
     form label,
     .TableLike label {
@@ -1497,7 +1501,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     .composeAnswer .Footer .CallForAction:first-child span{
         color: #696974;
         font-weight: var(--semi-bold);
-        
+
     }
 
     .RTL fieldset.TableLike.FixedLabel > .Field,
@@ -1649,7 +1653,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 
 
-    
+
 
     .field-wrapper:not(.Hidden) {
         display: flex;
@@ -1701,7 +1705,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         flex-direction: column;
         padding: var(--padding-lg) 0;
     }
-    
+
     div.dynamic-field-col.card-item {
         display: flex;
         flex-flow: row;

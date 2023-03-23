@@ -13,7 +13,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
      * @package     OTRS Framework - Skin "Default"
      * @section     TicketZoom
      */
-    
+
     /**
      * @section     Header
      */
@@ -27,28 +27,28 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         padding-bottom: var(--padding-sm);
         width: 100%;
     }
-    
+
     .RTL .TicketHeader h2 {
         padding: 10px 36px 15px 0px;
         float: right;
     }
-    
+
     #TicketOptions {
         position: relative;
         overflow: hidden;
         margin-left: auto;
     }
-    
+
     .RTL #TicketOptions {
         right: auto;
         left: 0px;
     }
-    
+
     #TicketOptions li {
         display: inline-block;
         margin-left: 5px;
     }
-    
+
     #TicketOptions .Print,
     #TicketOptions .ZoomExpand {
         color: #777;
@@ -58,31 +58,31 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     #TicketOptions .ZoomExpand {
         display: none;
     }
-    
+
     #TicketOptions .Print:hover,
     #TicketOptions .ZoomExpand:hover {
         color: #f92;
     }
-    
+
     #TicketOptions .ZoomExpand.ExpandAll .fa-minus {
         display: none;
     }
-    
+
     #TicketOptions .ZoomExpand.ExpandOne .fa-bars {
         display: none;
     }
-    
+
     .RTL #TicketOptions .ZoomExpandAll {
         margin: -2px 4px 0 0;
     }
-    
+
     .TicketZoom .Age {
         width: auto;
         padding: 0;
     }
-    
 
-    
+
+
     /* #FollowUp  {
         margin: 0 13px 8px;
         color: #6A6A6A;
@@ -93,9 +93,9 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         width: 77%;
         float: left;
     } */
-    
+
     #FollowUp.Visible {}
-    
+
     .JavaScriptAvailable #FollowUp #Messenger {
         /*height: 0;*/
         overflow: hidden;
@@ -103,37 +103,37 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         flex-direction: column;
         gap: var(--gap-md);
     }
-    
+
     #FollowUp.Visible #Messenger {
         height: auto;
         border-top: 1px solid #EEE;
     }
-    
+
     #Messenger #Subject {}
-    
+
     #Messenger textarea {
         display: block;
     }
-    
+
     #Messenger textarea:focus {
         border-color: #888;
     }
-    
+
     #Messenger fieldset {
     }
-    
+
     .Attachment {
         padding: 9px 0 4px 138px;
     }
-    
+
     .RTL .Attachment {
         padding: 9px 138px 4px 0;
     }
-    
+
     #Messenger .ActionRow {
         border: 0;
     }
-    
+
     /* #ReplyButton {
         bottom: -22px;
         height: 10px;
@@ -148,21 +148,21 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         -webkit-box-shadow: 0 0 3px #F6F9F9;
         box-shadow: 0 0 2px #F6F9F9;
     } */
-    
+
     .JavaScriptAvailable #ReplyButton {
         display: block;
         margin-top: 20px;
     }
-    
+
     #ReplyButton:hover {
         color: #555;
     }
-    
+
     .Visible #ReplyButton {
         display: none;
     }
 
-    
+
     /**
      * @subsection  Ticket Detail
      */
@@ -175,13 +175,13 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
      }
 
     /* Ticket Detail - Info */
-    
+
     .TicketZoom .ZoomForm .ZoomInfo {
         display: flex;
         flex-direction: column;
         gap: var(--gap-md);
     }
-    
+
     /* Metadata */
 
     .TicketZoom .ZoomForm .ZoomInfo .Metadata-wrapper {
@@ -200,11 +200,11 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
             gap: var(--gap-lg);
         }
     }
-    
+
     .TicketZoom .ZoomForm .ZoomInfo #Metadata li.Header {
         display: none;
     }
-    
+
     .TicketZoom .ZoomForm .ZoomInfo #Metadata li {
         position: relative;
         display: flex;
@@ -244,7 +244,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     @media only screen and (max-width: 1024px) {
         .TicketZoom .ZoomForm .ZoomInfo #Metadata li::after {
             top: -15px;
-        } 
+        }
     }
 
     .TicketZoom .ZoomForm .ZoomInfo #Metadata li .Key {
@@ -338,7 +338,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         display: flex;
         gap: var(--gap-md);
     }
-    
+
     .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper {
         display: flex;
         flex-direction: column;
@@ -361,11 +361,11 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         background-color: red;
     }
 
-    
+
 /**
 * @section     Messages List
 */
-    
+
     .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages {
         display: flex;
         flex-basis: 100%;
@@ -378,7 +378,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         gap: var(--gap-md);
         flex-basis: 100%;
     }
-    
+
     .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li {
         position: relative;
         display: flex;
@@ -435,24 +435,24 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         color: var(--primary-color);
         width: calc(100% - 50px);
     }
-    
+
     .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li .MessageHeader a .message-info h3 {
         color: var(--black);
         font-weight: var(--semi-bold);
     }
-    
+
     .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li .MessageHeader a .message-info .Age {
         position: absolute;
         top: var(--padding-lg);
         right: var(--padding-lg);
         color: var(--black);
     }
-    
+
     .RTL .MessageHeader .Age {
         left: 8px;
         right: auto;
     }
-    
+
     .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li .MessageBody {
         display: flex;
         justify-content: space-between;
@@ -460,21 +460,21 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         overflow: hidden;
         padding: 0 var(--padding-lg) var(--padding-lg) var(--padding-lg)
     }
-    
+
     .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li.Visible .MessageBody {
         height: auto;
     }
-    
+
     .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li .MessageBody .Details {
         display: flex;
         justify-content: center;
         width: 42px;
     }
-    
+
     .Details > div {
 
     }
-    
+
     .Details .Label {
         width: 65px;
         margin: 0 3px;
@@ -485,14 +485,14 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     .RTL .Details .Label {
         text-align: left;
     }
-    
+
     .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li .MessageBody .Details .Attachments {
         display: flex;
         flex-direction: column;
         justify-content: start;
         padding-top: 10px;
     }
-    
+
     .Details .Attachments .Label {
         text-indent: -9999px;
         text-align:left;
@@ -501,7 +501,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         text-indent: -9999px;
         text-align:right;
     }
-    
+
     .Details .Attachments div {
         display: inline;
         white-space: normal;
@@ -521,11 +521,11 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li .MessageBody .Details .Attachments div:nth-child(2) i {
         display: block;
     }
-    
+
     .DownloadAttachment a {
         color: #000;
     }
-    
+
     .TicketZoom .ZoomForm .main-content-wrapper .messages-wrapper #Messages ul li .MessageBody .MessageContent {
         display: flex;
         flex-basis: calc(100% - 63px);
@@ -541,11 +541,11 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     #NoArticles {
 
     }
-    
+
     #NoArticles li {
 
     }
-    
+
     .TicketZoom iframe {
         width: 100%;
         border: none;
@@ -569,9 +569,9 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
 /**
-* @section     Ticket Detail - Message Form 
+* @section     Ticket Detail - Message Form
 */
-    
+
     .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper {
         display: flex;
         flex-direction: column;
@@ -697,7 +697,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
 
-    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments .DownloadAttachment {
+    /* .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments .DownloadAttachment {
         display: flex;
         align-self: baseline;
     }
@@ -721,12 +721,56 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments .DownloadAttachment a .file-weight {
         font-size: var(--font-size-xs);
-    }
+    } */
 
     .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .MessageContent {
         padding: 0;
     }
 
-    
+
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments .DownloadAttachment {
+        display: flex;
+        width: auto;
+    }
+
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments .DownloadAttachment a {
+        display: flex;
+        flex: 1;
+        flex-direction: row;
+        justify-content: space-between;
+        border-radius: var(--border-radius-sm);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        transition: var(--main-transition);
+    }
+
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments .DownloadAttachment a:hover {
+        background: var(--table-td-even-bg);
+    }
+
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments .DownloadAttachment a .file-info {
+        display: flex;
+        flex-direction: column;
+        padding: var(--padding-sm) var(--padding-xs) var(--padding-sm) var(--padding-sm);
+        gap: var(--gap-sm);
+    }
+
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments .DownloadAttachment a .file-name {
+        color: var(--primary-color);
+    }
+
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments .DownloadAttachment a .file-weight {
+        color: var(--gray-semi-dark);
+    }
+
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments .DownloadAttachment a .file-icon {
+        display: flex;
+        padding: var(--padding-md);
+        align-items: center;
+    }
+
+    .TicketZoom .ZoomForm .main-content-wrapper .followup-wrapper .MessageBody .Details .Attachments .DownloadAttachment a .file-icon i {
+        color: var(--gray-semi-dark);
+        font-size: 16px;
+    }
+
 } /* end @media */
-    

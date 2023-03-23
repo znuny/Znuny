@@ -90,15 +90,14 @@
         <div class="WidgetSimple Hidden" id="WebserviceHistoryDetails">
             <div class="ControlRow"></div>
             <div class="LightRow Bottom">
-                <ul class="Actions">
-                    <li id="ExportButton">
-                        <span>[% Translate("Export web service configuration") | html %]</span>
+                <ul class="Actions flex-row">
+                    <li id="ExportButton" class="flex-row">
+                        <a>[% Translate("Export web service configuration") | html %]</a>
                     </li>
-                    <li id="RollbackButton">
-                        <span>[% Translate("Restore web service configuration") | html %]</span>
+                    <li id="RollbackButton" class="flex-row">
+                        <a>[% Translate("Restore web service configuration") | html %]</a>
                     </li>
                 </ul>
-                <div class="ClearLeft"></div>
             </div>
             <div class="Content ConfigCode">
                 <div class="code-container">

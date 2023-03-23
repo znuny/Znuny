@@ -72,12 +72,17 @@
                             <i class="fa fa-paperclip"></i>
                             <span class="DownloadAttachment" title="[% Attachment.Filename | html %][% IF Attachment.FilesizeRaw %] - [% Attachment.FilesizeRaw | Localize('Filesize') | html %][% END %]">
                                 <a href="[% Attachment.Link %]" [% Attachment.Target %] title="[% Translate(Attachment.Action) | html %]">
-                                    <span class="name">[% Attachment.Filename | html %]</span>
-                                    <span class="file-weight">
-                                        [% IF Attachment.FilesizeRaw %]
-                                            ([% Attachment.FilesizeRaw | Localize('Filesize') | html %])
-                                        [% END %]
-                                    </span>
+                                    <div class="file-info">
+                                        <span class="file-name">[% Attachment.Filename | html %]</span>
+                                        <span class="file-weight">
+                                            [% IF Attachment.FilesizeRaw %]
+                                                ([% Attachment.FilesizeRaw | Localize('Filesize') | html %])
+                                            [% END %]
+                                        </span>
+                                    </div>
+                                    <div class="file-icon">
+                                        <i class="fa fa-download"></i>
+                                    </div>
                                 </a>
                             </span>
                         </div>

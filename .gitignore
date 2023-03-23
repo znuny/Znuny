@@ -82,7 +82,6 @@ cover_db/
 # ITSM
 var/stats/*.xml.installed
 
-
 # FAQ
 FAQ.sopm
 i18n/FAQ/
