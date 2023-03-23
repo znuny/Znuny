@@ -131,4 +131,71 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 
+/**
+ * @subsection  Extensions for popup dialog
+ */
+
+ .FieldSetSeparator {
+    float: none;
+    clear: both;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 7px;
+    font-size: 12px;
+}
+
+.FieldContainer + .FieldSetSeparator {
+    padding-top: 10px;
+}
+
+.LayoutPopup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+}
+
+.FieldSeparator {
+    border-top: 1px dotted #ccc;
+    margin: 5px 0px;
+}
+
+.LayoutPopup .PopupHeader {
+    padding: var(--padding-xxl) var(--padding-lg) var(--padding-xl);
+    border-bottom: 0;
+    background-color: var(--white-bg-header);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.LayoutPopup .Content {
+    padding: 0 var(--padding-lg);
+}
+
+.PopupHeader > p > a {
+    color: #777777;
+    font-size: 11px;
+    outline: medium none;
+    padding: 5px 11px;
+    text-shadow: 0 1px 0 #EAEEEE;
+}
+.PopupHeader > p > a:hover {
+    color: #444444;
+}
+
+fieldset.TableLike > .Field,
+fieldset.TableLike > .Row > .Field {
+    display: flex;
+}
+
+.FieldExplanation {
+    color: var(--gray-md);
+}
+
+.PopupFooter {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 var(--padding-lg) var(--padding-lg);
+}
+
+
 } /* end @media */

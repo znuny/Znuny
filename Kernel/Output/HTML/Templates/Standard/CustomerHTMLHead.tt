@@ -6,6 +6,7 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+
 ## nofilter(TidyAll::Plugin::Znuny::TT::ScriptUsage)
 <head>
     <meta http-equiv="Content-type" content="text/html;charset=utf-8" />
@@ -32,24 +33,20 @@
         }(document, window));
     </script>
 [% END -%]
-
 [% RenderBlockStart("MetaLink") %]
     <link rel="[% Data.Rel | html %]" type="[% Data.Type | html %]" title="[% Data.Title | html %]" href="[% Data.Href %]" />
 [% RenderBlockEnd("MetaLink") %]
     <link rel="shortcut icon" href="[% Config("Frontend::ImagePath") %]icons/product.ico" type="image/ico" />
     <link rel="apple-touch-icon" href="[% Config("Frontend::ImagePath") %]icons/apple-touch-icon.png" />
-
 [% RenderBlockStart("CommonCSS") %]
     <link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Customer/[% Data.Skin | uri %]/[% Data.CSSDirectory | html %]/[% Data.Filename | html %]" />
 [% RenderBlockEnd("CommonCSS") %]
-
 [% RenderBlockStart("ModuleCSS") %]
     <link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Customer/[% Data.Skin | uri %]/[% Data.CSSDirectory | html %]/[% Data.Filename | html %]" />
 [% RenderBlockEnd("ModuleCSS") %]
 
     <link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/thirdparty/ui-theme/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" href="[% Config("Frontend::WebPath") %]skins/Customer/default/css/thirdparty/jstree-theme/default/style.css" />
-
 [% RenderBlockStart("HeaderLogoCSS") %]
     <style type="text/css">
         #Header #Logo {
@@ -74,13 +71,13 @@
           try {
             if (((!isIFrame && !isPopup) || (isIFrame && isPopup)) && (!localStorage.getItem("DesktopMode") || parseInt(localStorage.getItem("DesktopMode"), 10) <= 0)) {
               var ResponsiveCSS;
-  [% RenderBlockStart("ResponsiveCSS") %]
+[% RenderBlockStart("ResponsiveCSS") %]
               ResponsiveCSS = doc.createElement("link");
               ResponsiveCSS.setAttribute("rel", "stylesheet");
               ResponsiveCSS.setAttribute("type", "text/css");
               ResponsiveCSS.setAttribute("href", "[% Config("Frontend::WebPath") %]skins/Customer/[% Data.Skin | uri %]/[% Data.CSSDirectory %]/[% Data.Filename %]");
               doc.getElementsByTagName("head")[0].appendChild(ResponsiveCSS);
-  [% RenderBlockEnd("ResponsiveCSS") %]
+[% RenderBlockEnd("ResponsiveCSS") %]
             }
           }
           catch (Exception) {}
@@ -91,7 +88,6 @@
     <title>[% Data.TitleArea | html %] [% Config("ProductName") %]</title>
 
 [% INCLUDE "HTMLHeadBlockEvents.tt" %]
-
 [% RenderBlockStart("DynamicCSS") %]
     <style type="text/css">
         [% Data.CSS | html %]

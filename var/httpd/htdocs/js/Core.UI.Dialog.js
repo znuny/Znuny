@@ -1,13 +1,12 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
 // did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 // --
-//  TODO delete me
-// nofilter(TidyAll::Plugin::OTRS::Common::Origin)
+
 "use strict";
 
 var Core = Core || {};
@@ -213,6 +212,8 @@ Core.UI.Dialog = (function (TargetNS) {
      * @param {Boolean} Params.AllowAutoGrow - If true, the InnerContent of the dialog can resize until the max window height is reached, if false (default), InnerContent of small dialogs does not resize over 200px.
      * @param {Boolean} Params.HideHeader - Hide the header by setting this to true
      * @param {Boolean} Params.HideFooter - Hide the footer by setting this to true
+     * @param {Boolean} Params.Class - Optional class parameters for the dialog element.
+     * @param {Boolean} Params.ModalClass - Optional class parameters for the dialogmodal element.
      * @param {Object} Params.Buttons - Array of Hashes with the following properties (buttons are placed in a div "footer" of the dialog):
      * @param {String} Params.Buttons.Label - Text of the button.
      * @param {String} Params.Buttons.Type - 'Submit'|'Close' (default: none) Special type of the button - invokes a standard function.
@@ -225,26 +226,18 @@ Core.UI.Dialog = (function (TargetNS) {
 
         var $Dialog, $Content, $ButtonFooter, HTMLBackup, DialogCopy, DialogCopySelector,
             DialogHTML,
-            DialogClass = '',
-            FullsizeMode = false;
-
-        if (Params['HTML'] && isJQueryObject(Params['HTML']) && Params['HTML'].innerWidth() <= 450){
-            DialogClass = 'modal-sm';
-        }
-        if (Params['HTML'] && isJQueryObject(Params['HTML']) && Params['HTML'].innerWidth() <= 750){
-            DialogClass = 'modal-md';
-        }
-        if (Params['HTML'] && isJQueryObject(Params['HTML']) && Params['HTML'].innerWidth() <= 1000){
-            DialogClass = 'modal-lg';
-        }
+            DialogClass = Params.Class || '',
+            DialogModalClass = Params.ModalClass || 'modal-sm',
+            FullsizeMode = false,
+            InnerWidth;
 
         DialogHTML = '<div class="Dialog ' + DialogClass + '">';
         if (!Params.HideHeader) {
-            DialogHTML += '<div class="Header"><a class="Close" title="' + Core.Language.Translate('Close this dialog') + '" href="#"><i class="fa fa-times"></i></a></div>';
+            DialogHTML += '<div class="Header"><a class="Close icon-hover-md" title="' + Core.Language.Translate('Close this dialog') + '" href="#"><i class="fa fa-times"></i></a></div>';
         }
         DialogHTML += '<div class="Content"></div>';
         if (!Params.HideFooter) {
-            DialogHTML += '<div class="Footer"></div>';
+            DialogHTML += '<div class="Footer SaveButtons"></div>';
         }
         DialogHTML += '</div>';
 
@@ -404,7 +397,7 @@ Core.UI.Dialog = (function (TargetNS) {
                 Type: 'Close',
                 Function: Params.OnClose
             }];
-            $Content.append('<div class="Center Spacing"><button type="button" id="DialogButton1" class="CallForAction Close"><span>' + Core.Language.Translate('OK') + '</span></button></div>');
+            $Content.append('<div class="Center Spacing"><button type="button" id="DialogButton1" class="CallForAction Close btn-main btn-primary"><span>' + Core.Language.Translate('OK') + '</span></button></div>');
         }
         // Define different other types here...
         else if (Params.Type === 'Search') {
@@ -421,22 +414,19 @@ Core.UI.Dialog = (function (TargetNS) {
             $Content = $Dialog.find('.Content');
             // buttons are defined only in default type
             if (Params.Buttons) {
-                $Content.append('<div class="InnerContent"></div>').find('.InnerContent').append(Params.HTML);
-                $ButtonFooter = $('<div class="ContentFooter Center"></div>');
+                $Content.append('<div class="InnerContent scroll-bar-styled"></div>').find('.InnerContent').append(Params.HTML);
+                $ButtonFooter = $('<div class="ContentFooter SaveButtons"></div>');
                 $.each(Params.Buttons, function (Index, Value) {
                     var Classes = 'CallForAction';
-                    if (Value.Type === 'Close') {
-                        Classes += ' Close';
+                    if (Value.Type === 'Close' || Index == 1) {
+                        // add "btn-cancel-ghost" class
+                        Classes += ' Close btn-cancel-ghost';
                     }
                     if (Value.Class) {
                         Classes += ' ' + Value.Class;
                     }
-// ---
-// FORWWWARD
-// ---
-                    //added "btn-primary" & "btn-main" class
-                    $ButtonFooter.append('<button id="DialogButton' + (Index - 0 + 1) + '" class="' + Classes + ' btn-primary btn-main" type="button"><span>' + Value.Label + '</span></button> ');
-// ---
+                    // added "btn-primary" & "btn-main" class
+                    $ButtonFooter.append('<button id="DialogButton' + (Index - 0 + 1) + '" class="btn-primary btn-main ' + Classes + '" type="button"><span>' + Value.Label + '</span></button> ');
                 });
                 $ButtonFooter.appendTo($Content);
             }
@@ -454,6 +444,27 @@ Core.UI.Dialog = (function (TargetNS) {
 
         // Add Dialog to page
         $Dialog.appendTo('body');
+
+        // Get the inner width to define the class
+        if ($Dialog && isJQueryObject($Dialog)){
+            InnerWidth = $Dialog.innerWidth();
+        }
+
+        // default class is modal-sm
+        if  (InnerWidth >= 500){
+            DialogModalClass = 'modal-md';
+        }
+        if (InnerWidth >= 800){
+            DialogModalClass = 'modal-lg';
+        }
+        if (Params.DialogModalClass){
+            DialogModalClass = Params.DialogModalClass;
+        }
+
+        // add DialogModalClass to Dialog
+        if (DialogModalClass){
+            $Dialog.addClass(DialogModalClass);
+        }
 
         // Check if "ContentFooter" is used in Content
         if ($Dialog.find('.Content .ContentFooter').length) {
@@ -495,6 +506,11 @@ Core.UI.Dialog = (function (TargetNS) {
 
         // Check window height and adjust the scrollable height of InnerContent
         AdjustScrollableHeight(Params.AllowAutoGrow);
+
+        // add resize css attribute
+        $('.Dialog:visible .Content').css('resize', 'both');
+        $('.Dialog:visible .Content').css('max-height', 'fit-content');
+        $('.Dialog:visible .Content .InnerContent').css('max-height', 'fit-content');
 
         // Adjust dialog position on mobile devices
         if (FullsizeMode) {
@@ -607,10 +623,11 @@ Core.UI.Dialog = (function (TargetNS) {
      * @param {Boolean} Modal - If defined and set to true, an overlay is shown for a modal dialog.
      * @param {Array} Buttons - The button array.
      * @param {Boolean} AllowAutoGrow - If true, the InnerContent of the dialog can resize until the max window height is reached, if false (default), InnerContent of small dialogs does not resize over 200px.
+     * @param {Boolean} ModalClass - Optional class parameters for the dialogmodal element.
      * @description
      *      Shows a default dialog.
      */
-    TargetNS.ShowContentDialog = function (HTML, Title, PositionTop, PositionLeft, Modal, Buttons, AllowAutoGrow) {
+    TargetNS.ShowContentDialog = function (HTML, Title, PositionTop, PositionLeft, Modal, Buttons, AllowAutoGrow, ModalClass) {
         TargetNS.ShowDialog({
             HTML: HTML,
             Title: Title,
@@ -620,7 +637,8 @@ Core.UI.Dialog = (function (TargetNS) {
             PositionTop: PositionTop,
             PositionLeft: PositionLeft,
             Buttons: Buttons,
-            AllowAutoGrow: AllowAutoGrow
+            AllowAutoGrow: AllowAutoGrow,
+            ModalClass: ModalClass || ''
         });
     };
 

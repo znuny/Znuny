@@ -699,7 +699,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
             }
 
             // add event handler to radio button
-            if($(this).hasClass('CustomerTicketRadio')) {
+            if($(this).hasClass('RadioRound')) {
 
                 if (TicketCustomerIDs === 0) {
                     $(this).prop('checked', true);
@@ -732,7 +732,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
                     TargetNS.RemoveCustomerTicket($(this));
 
                     // clear CustomerHistory table if there are no selected customer users
-                    if ($('#TicketCustomerContent' + Field + ' .CustomerTicketRadio').length === 0) {
+                    if ($('#TicketCustomerContent' + Field + ' .RadioRound').length === 0) {
                         $('#CustomerTickets').empty();
                     }
                     return false;

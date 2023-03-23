@@ -210,6 +210,10 @@ div.Headline .Flag {
     gap: var(--gap-md);
 }
 
+.ticketDetails:empty {
+    display: none;
+}
+
 #ArticleItems .ItemActions {
     display: flex;
     flex-flow: row;
@@ -222,9 +226,7 @@ div.Headline .Flag {
     border: var(--border-width) var(--border-solid) var(--border-color);
 }
 
-#ArticleItems .ItemActions li .InputField_Container {
-    margin-left: 3px;
-}
+
 
 @media only screen and (min-width: 0px) and (max-width: 1024px) {
 
@@ -295,7 +297,7 @@ div.Headline .Flag {
 }
 
 body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
-   overflow-x: scroll;
+   overflow-x: auto;
 }
 
 .Outgoing .ArticleMailContentHTMLWrapper:before,
@@ -777,68 +779,7 @@ tbody td.Sender {
     opacity: 0.4;
 }
 
-.ArticleAttachments {
-    clear: both;
-    margin: 10px 0px -10px 75px;
-    overflow: hidden;
-}
 
-.Incoming .ArticleAttachments {
-    margin: 10px 105px -10px 0px;
-}
-
-.ArticleAttachments li {
-    float: left;
-    margin: 0px 10px 10px 0px;
-    background: #e8e8e8;
-    padding: 8px 45px 8px 12px;
-    font-size: 11px;
-    color: #777;
-    position: relative;
-}
-
-.ArticleAttachments li h5 {
-    font-size: 12px;
-    color: #000;
-    margin-bottom: 1px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.ArticleAttachments li div {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    width: 30px;
-    height: 100%;
-    box-sizing: border-box;
-    overflow: hidden;
-}
-
-.ArticleAttachments li div a {
-    height: 50%;
-    display: block;
-    background: #eee;
-    line-height: 250%;
-    text-align: center;
-    color: #aaa;
-    transition: all ease 0.3s;
-}
-
-.ArticleAttachments li div a:first-child:last-child {
-    height: 100%;
-    line-height: 450%;
-}
-
-.ArticleAttachments li div a:hover {
-    color: #333;
-}
-
-.ArticleAttachments li div a + a {
-    border-top: 1px solid #ccc;
-    margin-top: -1px;
-}
 
 .approval-container li:after {
     display: none;
@@ -947,8 +888,7 @@ tbody td.Sender {
     #ArticleItems .ArticleHTML,
     #ArticleItems .ArticleBody,
     .ArticleMailContent .ArticleMeta,
-    .ItemActions,
-    .ArticleAttachments {
+    .ItemActions {
         margin-left: 0px !important;
         margin-right: 0px !important;
     }
@@ -976,10 +916,6 @@ tbody td.Sender {
 
     #ArticleItems .ItemActions li .InputField_Container {
         opacity: 1;
-    }
-
-    .ArticleAttachments li {
-        float: none;
     }
 }
 

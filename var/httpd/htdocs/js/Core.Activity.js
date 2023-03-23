@@ -1,5 +1,5 @@
 // --
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (AGPL). If you
@@ -94,30 +94,49 @@ Core.Activity = (function (TargetNS) {
      * @name Add
      * @memberof Core.Activity
      * @function
-     * @param {String} Type - of the activity
-     * @param {String} Title - of the activity
-     * @param {String} Text - of the activity
-     * @param {String} State - of the activity
-     * @param {String} Link - of the activity
+     * @param {Object} Data
+     *      {String} Type  - of the activity
+     *      {String} Title - of the activity
+     *      {String} Text  - of the activity
+     *      {String} State - of the activity
+     *      {String} Link  - of the activity
      * @param {Function} Callback - function which should be executed at the end
      * @description
      *      Adds a new activity.
      * @example
-     *      Core.Activity.Add('Ticket','New Activity', 'This is my activity text.', 'new', 'index.pl?Action=AgentTicketZoom;TicketID=1');
+     *      Core.Activity.Add({Type: 'Ticket',Title: 'New Activity', Text: 'This is my activity text.', State: 'new', Link: 'index.pl?Action=AgentTicketZoom;TicketID=1'});
      */
 
-    TargetNS.Add = function (Type, Title, Text, State, Link, Callback) {
+    TargetNS.Add = function (Data, Callback) {
         var URL = Core.Config.Get('Baselink'),
             $Activity,
-            Data = {
-                Action:    'Activity',
-                Subaction: 'Add',
-                Type:      Type,
-                Title:     Title,
-                Text:      Text,
-                State:     State,
-                Link:      Link,
-            };
+            Validate,
+            Attributes = [
+                'Type',
+                'Title',
+                'Text',
+                'State',
+                'Link',
+            ];
+
+        Data.Action    = 'Activity';
+        Data.Subaction = 'Add';
+
+        $.each(Attributes, function(Index, Attribute) {
+            if (!Data[Attribute]) {
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An error occurred'),
+                    Core.Language.Translate('The activity could not be created. %s is needed.', Attribute)
+                );
+                Validate = 0;
+                return false;
+            }
+            Validate = 1;
+        });
+
+        if (!Validate){
+            return false;
+        }
 
         Core.AJAX.FunctionCall(URL, Data, function (Response) {
             if (!Response || !Response.Success || !Response.ActivityID) {
@@ -149,11 +168,11 @@ Core.Activity = (function (TargetNS) {
      * @function
      * @param {String} ActivityID - of the activity
      * @param {Object} Data
-     *      Type  - of the activity
-     *      Title - of the activity
-     *      Text  - of the activity
-     *      State - of the activity
-     *      Link  - of the activity
+     *      {String} Type  - of the activity
+     *      {String} Title - of the activity
+     *      {String} Text  - of the activity
+     *      {String} State - of the activity
+     *      {String} Link  - of the activity
      * @param {Function} Callback - function which should be executed at the end
      * @description
      *      Updates an activity.

@@ -8,6 +8,9 @@
 # --
 <!-- start Notify -->
 <div class="MessageBox [% Data.BoxClass %]">
+    <span>
+        <i class="[% Data.IconClass %]"></i>
+    </span>
     <p>
 [% RenderBlockStart("LinkStart") %]
         <a href="[% Data.LinkStart %]" class="[% Data.LinkClass | html %]">
@@ -22,6 +25,8 @@
         </a>
 [% RenderBlockEnd("LinkStop") %]
     </p>
-#    <a class="Close" title="[% Translate("Close this message") | html %]" href="">[% Translate("Close this message") | html %]</a>
+    <a class="Close icon-hover" title="[% Translate(" Close this message") | html %]" href="#">
+        <i class="fa fa-times"></i>
+    </a>
 </div>
 <!-- end Notify -->

@@ -8,29 +8,8 @@
 # --
 
 [% RenderBlockStart("Main") %]
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">[% Translate("Web Service Management") | html %]</h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('Web Service Management'),
-                Link => Env("Action"),
-            },
-        ]
-    %]
-
-    [% SWITCH Data.Action %]
-        [% CASE 'Add' %]
-            [% BreadcrumbPath.push({ Name => Translate("Add Web Service"),}) %]
-        [% CASE 'Change' %]
-            [% USE EditTitle = String(Translate("Edit Web Service")) %]
-            [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.WebserviceData.Name ), }) %]
-    [% END %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="Clear"></div>
-    <div class="SidebarColumn">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+    <div class="SidebarColumn ActionsSideBarComp">
 [% RenderBlockStart("ActionList") %]
         <div class="WidgetSimple">
             <div class="Header">
@@ -40,7 +19,7 @@
                 <ul class="ActionList">
 [% RenderBlockStart("ActionOverview") %]
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Nav=[% Data.Nav | uri %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Nav=[% Data.Nav | uri %]" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
                     </li>
 [% RenderBlockEnd("ActionOverview") %]
 [% RenderBlockStart("ActionAdd") %]
@@ -50,13 +29,13 @@
                             <input type="hidden" name="Subaction" value="Add"/>
                             <input type="hidden" name="Nav" value="[% Data.Nav | html %]"/>
 
-                            <button class="CallForAction Fullsize Center" type="submit"><span><i class="fa fa-plus-square"></i>[% Translate("Add Web Service") | html %]</span></button>
+                            <button class="CallForAction btn-main btn-primary-ghost" type="submit"><span><i class="fa fa-plus-square"></i>[% Translate("Add Web Service") | html %]</span></button>
                         </form>
                     </li>
 [% RenderBlockEnd("ActionAdd") %]
 [% RenderBlockStart("ActionClone") %]
                     <li>
-                        <button id="CloneButton" class="CallForAction Fullsize Center HideActionOnChange" type="submit"><span><i class="fa fa-copy"></i> [% Translate("Clone Web Service") | html %]</span></button>
+                        <button id="CloneButton" class="CallForAction btn-main btn-primary-ghost HideActionOnChange" type="submit"><span><i class="fa fa-copy"></i> [% Translate("Clone Web Service") | html %]</span></button>
                         <div class="Hidden" id="CloneDialogContainer">
                             <div id="CloneDialog" class="InnerContent GenericInterfaceDialog">
                                 <form id="CloneForm" action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" name="CloneForm" class="Validate PreventMultipleSubmits">
@@ -64,20 +43,20 @@
                                     <input type="hidden" name="Subaction" value="Clone"/>
                                     <input type="hidden" name="WebserviceID" value="[% Data.WebserviceID | html %]"/>
                                     <fieldset class="TableLike">
-                                        <div class="SpacingTop"></div>
-                                        <label class="Mandatory" for="CloneName"><span class="Marker">*</span>[% Translate("Name") | html %]:</label>
-                                        <div class="Field">
-                                            <input id="CloneName" class="CloneName W75pc Validate_Required" type="text" maxlength="250" value="" name="CloneName"/>
-                                            <div id="CloneNameError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                            <div class="FieldExplanation">[% Translate("The name must be unique.") | html %]</div>
+                                        <div class="field-wrapper">
+                                            <label class="Mandatory" for="CloneName"><span class="Marker">*</span>[% Translate("Name") | html %]</label>
+                                            <div class="Field">
+                                                <input id="CloneName" class="CloneName W75pc Validate_Required" type="text" maxlength="250" value="" name="CloneName"/>
+                                                <div id="CloneNameError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                                <div class="FieldExplanation">[% Translate("The name must be unique.") | html %]</div>
+                                            </div>
                                         </div>
-                                        <div class="Clear"></div>
                                     </fieldset>
                                 </form>
                             </div>
                             <div class="ContentFooter Center">
-                                <button class="Primary CallForAction" type="button" id="CloneButtonAction" value="[% Translate("Clone") | html %]"><span>[% Translate("Clone") | html %]</span></button>
-                                <button class="CallForAction" type="button" id="CancelCloneButtonAction" value="[% Translate("Cancel") | html %]"><span>[% Translate("Cancel") | html %]</span></button>
+                                <button class="CallForAction btn-cancel-ghost btn-main btn-width-md" type="button" id="CancelCloneButtonAction" value="[% Translate("Cancel") | html %]"><span>[% Translate("Cancel") | html %]</span></button>
+                                <button class="Primary CallForAction btn-primary btn-main btn-width-md" type="button" id="CloneButtonAction" value="[% Translate("Clone") | html %]"><span>[% Translate("Clone") | html %]</span></button>
                             </div>
                         </div>
                     </li>
@@ -90,40 +69,41 @@
                             <input type="hidden" name="WebserviceID" value="[% Data.WebserviceID | html %]"/>
                             <input type="hidden" name="Nav" value="[% Data.Nav | html %]"/>
 
-                            <button class="CallForAction Fullsize Center HideActionOnChange" type="submit"><span><i class="fa fa-download"></i> [% Translate("Export Web Service") | html %]</span></button>
+                            <button class="CallForAction btn-main btn-primary-ghost HideActionOnChange" type="submit"><span><i class="fa fa-download"></i> [% Translate("Export Web Service") | html %]</span></button>
                         </form>
                     </li>
 [% RenderBlockEnd("ActionExport") %]
 [% RenderBlockStart("ActionImport") %]
                     <li>
-                        <button id="ImportButton" class="CallForAction Fullsize Center" type="button"><span><i class="fa fa-upload"></i> [% Translate("Import web service") | html %]</span></button>
+                        <button id="ImportButton" class="CallForAction btn-main btn-primary-ghost" type="button"><span><i class="fa fa-upload"></i> [% Translate("Import web service") | html %]</span></button>
                         <div class="Hidden" id="ImportDialogContainer">
                             <div id="ImportDialog" class="InnerContent GenericInterfaceDialog">
                                 <form id="ImportForm" action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" name="ImportForm" class="Validate PreventMultipleSubmits">
                                     <input type="hidden" name="Action" value="[% Env("Action") %]"/>
                                     <input type="hidden" name="Subaction" value="Import"/>
                                     <fieldset class="TableLike">
-                                        <div class="SpacingTop"></div>
-                                        <label class="Mandatory" for="ConfigFile"><span class="Marker">*</span>[% Translate("Configuration File") | html %]:</label>
-                                        <div class="Field">
-                                            <input id="ConfigFile" class="Validate_Required" type="file" maxlength="250" value="" name="ConfigFile"/>
-                                            <div id="ConfigFileError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                            <div class="FieldExplanation">[% Translate("The file must be a valid web service configuration YAML file.") | html %]</div>
+                                        <div class="field-wrapper">
+                                            <label class="Mandatory" for="ConfigFile"><span class="Marker">*</span>[% Translate("Configuration File") | html %]</label>
+                                            <div class="Field">
+                                                <input id="ConfigFile" class="Validate_Required" type="file" maxlength="250" value="" name="ConfigFile"/>
+                                                <div id="ConfigFileError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                                <div class="FieldExplanation">[% Translate("The file must be a valid web service configuration YAML file.") | html %]</div>
+                                            </div>
                                         </div>
-                                        <div class="Clear"></div>
 
-                                        <label for="WebserviceName">[% Translate("Name") | html %]:</label>
-                                        <div class="Field">
-                                            <input id="WebserviceName" class="W100pc" type="text" maxlength="250" value="" name="WebserviceName" />
-                                            <div class="FieldExplanation">[% Translate("Here you can specify a name for the webservice. If this field is empty, the name of the configuration file is used as name.") | html %]</div>
+                                        <div class="field-wrapper">
+                                            <label for="WebserviceName">[% Translate("Name") | html %]</label>
+                                            <div class="Field">
+                                                <input id="WebserviceName" class="W100pc" type="text" maxlength="250" value="" name="WebserviceName" />
+                                                <div class="FieldExplanation">[% Translate("Here you can specify a name for the webservice. If this field is empty, the name of the configuration file is used as name.") | html %]</div>
+                                            </div>
                                         </div>
-                                        <div class="Clear"></div>
                                     </fieldset>
                                 </form>
                             </div>
                             <div class="ContentFooter Center">
-                                <button class="Primary CallForAction" type="submit" id="ImportButtonAction" value="[% Translate("Import") | html %]"><span>[% Translate("Import") | html %]</span></button>
-                                <button class="CallForAction" type="button" id="CancelImportButtonAction" value="[% Translate("Cancel") | html %]"><span>[% Translate("Cancel") | html %]</span></button>
+                                <button class="CallForAction btn-main btn-cancel-ghost btn-width-md" type="button" id="CancelImportButtonAction" value="[% Translate("Cancel") | html %]"><span>[% Translate("Cancel") | html %]</span></button>
+                                <button class="Primary CallForAction btn-main btn-primary btn-width-md" type="submit" id="ImportButtonAction" value="[% Translate("Import") | html %]"><span>[% Translate("Import") | html %]</span></button>
                             </div>
                         </div>
                     </li>
@@ -135,18 +115,18 @@
                             <input type="hidden" name="WebserviceID" value="[% Data.WebserviceID | html %]"/>
                             <input type="hidden" name="Nav" value="[% Data.Nav | html %]"/>
 
-                            <button class="CallForAction Fullsize Center HideActionOnChange" type="submit"><span><i class="fa fa-clock-o"></i> [% Translate("Configuration History") | html %]</span></button>
+                            <button class="CallForAction btn-main btn-primary-ghost HideActionOnChange" type="submit"><span><i class="fa fa-clock-o"></i> [% Translate("Configuration History") | html %]</span></button>
                         </form>
                     </li>
 [% RenderBlockEnd("ActionHistory") %]
 [% RenderBlockStart("ActionDelete") %]
                     <li>
-                        <button id="DeleteButton" class="CallForAction Fullsize Center" type="button"><span><i class="fa fa-trash-o"></i> [% Translate("Delete web service") | html %]</span></button>
+                        <button id="DeleteButton" class="CallForAction btn-main btn-primary-ghost" type="button"><span><i class="fa fa-trash-o"></i> [% Translate("Delete web service") | html %]</span></button>
                         <div class="Hidden" id="DeleteDialogContainer">
                             <div id ="DeleteDialog" class="InnerContent GenericInterfaceDialog">
-                                <span class="WarningDialog ">&nbsp;</span>
+                                <span class="WarningDialog ">
+                                </span>
                                 <p class="Center Warning">[% Translate("Do you really want to delete this web service?") | html %]</p>
-                                <div class="SpacingTop"></div>
                             </div>
                         </div>
                     </li>
@@ -157,13 +137,11 @@
                             <input type="hidden" name="Action" value="AdminGenericInterfaceDebugger"/>
                             <input type="hidden" name="WebserviceID" value="[% Data.WebserviceID | html %]"/>
                             <input type="hidden" name="Nav" value="[% Data.Nav | html %]"/>
-
-                            <button class="CallForAction Fullsize Center HideActionOnChange" type="submit"><span><i class="fa fa-bug"></i> [% Translate("Debugger") | html %]</span></button>
+                            <button  id='Debugger' class="CallForAction btn-main btn-primary-ghost HideActionOnChange" type="submit"><span><i class="fa fa-bug"></i> [% Translate("Debugger") | html %]</span></button>
                         </form>
                     </li>
 [% RenderBlockEnd("ActionDebugger") %]
                 </ul>
-
             </div>
         </div>
 [% RenderBlockEnd("ActionList") %]
@@ -183,7 +161,7 @@
                             <div id="ExampleWebServiceError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                             <div id="ExampleWebServiceServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
 
-                            <button class="CallForAction Fullsize Center SpacingTop" type="submit" value="[% Translate("Import Ready2Adopt web service") | html %]">
+                            <button class="CallForAction btn-main btn-primary-ghost SpacingTop" type="submit" value="[% Translate("Import Ready2Adopt web service") | html %]">
                                 <span><i class="fa fa-upload"></i>[% Translate("Import Ready2Adopt web service") | html %]</span>
                             </button>
                         </form>
@@ -209,18 +187,39 @@
         </div>
 [% RenderBlockEnd("Hint") %]
     </div>
+
     <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("Web Service Management") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('Web Service Management'),
+                    Link => Env("Action"),
+                },
+            ]
+        %]
+
+        [% SWITCH Data.Action %]
+            [% CASE 'Add' %]
+                [% BreadcrumbPath.push({ Name => Translate("Add Web Service"),}) %]
+            [% CASE 'Change' %]
+                [% USE EditTitle = String(Translate("Edit Web Service")) %]
+                [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.WebserviceData.Name ), }) %]
+        [% END %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
 [% RenderBlockStart("OverviewHeader") %]
         <div class="WidgetSimple">
-            <div class="Header">
+            <div class="Header filter-items">
                 <h2>[% Translate("List") | html %]</h2>
-                <a href="#" class="icon-hover" id="ValidFilter" title="[% Translate("Filter") | html %]">
-                    <i class="fa fa-filter"></i>
+                <a href="#" id="ValidFilter" title="[% Translate("Filter") | html %]">
+                    <span class="show-valid">Show Valid</span>
+                    <span class="show-all">Show All</span>
                 </a>
             </div>
 [% RenderBlockEnd("OverviewHeader") %]
 [% RenderBlockStart("OverviewResult") %]
-            <div class="Content ">
+            <div class="Content">
                 <table class="DataTable" id="WebserviceTable" summary="List of all registered Webservices">
                     <thead>
                         <tr>
@@ -240,7 +239,6 @@
                             </td>
                         </tr>
 [% RenderBlockEnd("NoDataFoundMsg") %]
-
 [% RenderBlockStart("OverviewResultRow") %]
                         <tr [% IF Data.Valid != "valid"%]class="Invalid"[% END %]>
                             <td>
@@ -272,43 +270,48 @@
                     <h2>[% Translate("General") | html %]</h2>
                 </div>
                 <div class="Content">
-                    <div class="LayoutGrid ColumnsWithSpacing">
+                    <div class="LayoutGrid ColumnsWithSpacing no-padding">
                         <div class="Size1of2">
                             <fieldset class="TableLike">
-                                <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Name") | html %]:</label>
-                                <div class="Field">
-                                    <input id="Name" class="W50pc [% Data.NameServerError | html %] Validate_Required HideTrigger" type="text" maxlength="250" value="[% Data.Name | html %]" name="Name"/>
-                                    <div id="NameError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                    <div id="NameServerError" class="TooltipErrorMessage"><p>[% Translate(Data.NameServerErrorMessage) | html %]</p></div>
+                                <div class="field-wrapper">
+                                    <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Name") | html %]</label>
+                                    <div class="Field">
+                                        <input id="Name" class="W50pc [% Data.NameServerError | html %] Validate_Required HideTrigger" type="text" maxlength="250" value="[% Data.Name | html %]" name="Name"/>
+                                        <div id="NameError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                        <div id="NameServerError" class="TooltipErrorMessage"><p>[% Translate(Data.NameServerErrorMessage) | html %]</p></div>
+                                    </div>
                                 </div>
-                                <div class="Clear"></div>
 
-                                <label for="Description">[% Translate("Description") | html %]:</label>
-                                <div class="Field">
-                                    <input id="Description" class="W50pc HideTrigger" type="text" maxlength="250" value="[% Data.Description | html %]" name="Description"/>
+                                <div class="field-wrapper">
+                                    <label for="Description">[% Translate("Description") | html %]</label>
+                                    <div class="Field">
+                                        <input id="Description" class="W50pc HideTrigger" type="text" maxlength="250" value="[% Data.Description | html %]" name="Description"/>
+                                    </div>
                                 </div>
-                                <div class="Clear"></div>
 
-                                <label for="RemoteSystem">[% Translate("Remote system") | html %]:</label>
-                                <div class="Field">
-                                    <input id="RemoteSystem" class="W50pc HideTrigger" type="text" maxlength="250" value="[% Data.RemoteSystem | html %]" name="RemoteSystem"/>
+                                <div class="field-wrapper">
+                                    <label for="RemoteSystem">[% Translate("Remote system") | html %]</label>
+                                    <div class="Field">
+                                        <input id="RemoteSystem" class="W50pc HideTrigger" type="text" maxlength="250" value="[% Data.RemoteSystem | html %]" name="RemoteSystem"/>
+                                    </div>
                                 </div>
-                                <div class="Clear"></div>
                             </fieldset>
                         </div>
                         <div class="Size1of2">
                             <fieldset class="TableLike">
-                                <label for="DebugThreshold">[% Translate("Debug threshold") | html %]:</label>
-                                <div class="Field">
-                                    [% Data.DebugThresholdStrg %]
+                                <div class="field-wrapper">
+                                    <label for="DebugThreshold">[% Translate("Debug threshold") | html %]</label>
+                                    <div class="Field">
+                                        [% Data.DebugThresholdStrg %]
+                                    </div>
                                 </div>
-                                <div class="Clear"></div>
 
-                                <label for="ValidID">[% Translate("Validity") | html %]:</label>
-                                <div class="Field">
-                                    [% Data.ValidtyStrg %]
+                                <div class="field-wrapper">
+                                    <label for="ValidID">[% Translate("Validity") | html %]</label>
+                                    <div class="Field">
+                                        [% Data.ValidtyStrg %]
+                                    </div>
                                 </div>
-                                <div class="Clear"></div>
                             </fieldset>
                         </div>
                     </div>
@@ -322,7 +325,7 @@
                     </div>
                     <h3>[% Translate(Data.Title) | html %]</h3>
                 </div>
-                <div class="Content">
+                <div class="Content padding">
 [% RenderBlockStart("DetailsCommunicationTypeExplanationProvider") %]
                     <p class="FieldExplanation">
                                 [% Translate("In provider mode, Znuny offers web services which are used by remote systems.") | html %]
@@ -333,24 +336,32 @@
                                 [% Translate("In requester mode, Znuny uses web services of remote systems.") | html %]
                     </p>
 [% RenderBlockEnd("DetailsCommunicationTypeExplanationRequester") %]
-                    <h4 class="SpacingTop SpacingBottom">[% Translate("Settings") | html %]</h4>
-                    <fieldset class="TableLike">
-                        <label for="[% Data.CommunicationType | html %]TransportList">[% Translate("Network transport") | html %]:</label>
-                        <div class="Field">
+
+                    <div class="field-wrapper">
+                        <h4 class="title">[% Translate("Settings") | html %]</h4>
+                    </div>
+                    <fieldset class="TableLike no-padding">
+                        <div class="field-wrapper">
+                            <label for="[% Data.CommunicationType | html %]TransportList">[% Translate("Network transport") | html %]</label>
+                            <div class="Field single-row-inputs">
+                                <div class="field-wrapper">
                                     [% Data.TransportsStrg %]
+                                </div>
 [% RenderBlockStart("DetailsTransportPropertiesButton") %]
-                            <button type="button" id="[% Data.CommunicationType | html %]TransportProperties" class="HideOnChange CallForAction Inline" value="Configure"><span>[% Translate("Configure") | html %]</span></button>
+                                <button type="button" id="[% Data.CommunicationType | html %]TransportProperties" class="HideOnChange CallForAction Inline btn-primary-ghost btn-main  btn-width-md" value="Configure"><span>[% Translate("Configure") | html %]</span></button>
 [% RenderBlockEnd("DetailsTransportPropertiesButton") %]
+                            </div>
                         </div>
                     </fieldset>
 
-                    <h4 class="SpacingTop SpacingBottom">[% Translate("Error Handling Modules") | html %]</h4>
+                    <div class="field-wrapper">
+                        <h4 class="title">[% Translate("Error Handling Modules") | html %]</h4>
+                        <p class="FieldExplanation">
+                            [% Translate("Error handling modules are used to react in case of errors during the communication. Those modules are executed in a specific order, which can be changed by drag and drop.") | html %]
+                        </p>
+                    </div>
 
-                    <p class="FieldExplanation">
-                                [% Translate("Error handling modules are used to react in case of errors during the communication. Those modules are executed in a specific order, which can be changed by drag and drop.") | html %]
-                    </p>
-
-                    <table class="DataTable ErrorHandlingPriority" id="[% Data.ActionsTitle | html %]Table" data-query-string="Action=AdminGenericInterfaceErrorHandlingDefault;Subaction=PriorityAction;CommunicationType=[% Data.CommunicationType | uri %];WebserviceID=[% Data.WebserviceID | uri %];[% Env('ChallengeTokenParam') | html %]">
+                    <table class="DataTable ErrorHandlingPriority TableList" id="[% Data.ActionsTitle | html %]Table" data-query-string="Action=AdminGenericInterfaceErrorHandlingDefault;Subaction=PriorityAction;CommunicationType=[% Data.CommunicationType | uri %];WebserviceID=[% Data.WebserviceID | uri %];[% Env('ChallengeTokenParam') | html %]">
                         <thead>
                             <tr>
                                 <th width="10px">[% Translate("#") | html %]</th>
@@ -383,28 +394,29 @@
                         </tbody>
                     </table>
 
-                    <fieldset class="TableLike HideOnChange SpacingTop">
-                        <label for="[% Data.CommunicationType | html %]ErrorHandling">[% Translate("Add error handling module") | html %]:</label>
-                        <div class="Field">
-                                    [% Data.ErrorHandlingStrg %]
+                    <fieldset class="TableLike HideOnChange no-padding">
+                        <div class="field-wrapper">
+                            <label for="[% Data.CommunicationType | html %]ErrorHandling">[% Translate("Add error handling module") | html %]</label>
+                            <div class="Field">
+                                        [% Data.ErrorHandlingStrg %]
+                            </div>
                         </div>
-                        <div class="Clear"></div>
                     </fieldset>
 
-                    <h4 class="SpacingTop SpacingBottom">[% Translate(Data.ActionsTitle) | html %]</h4>
-
+                    <div class="field-wrapper">
+                        <h4 class="title">[% Translate(Data.ActionsTitle) | html %]</h4>
 [% RenderBlockStart("DetailsCommunicationTypeActionsExplanationProvider") %]
-                    <p class="FieldExplanation">
+                        <p class="FieldExplanation">
                                 [% Translate("Operations are individual system functions which remote systems can request.") | html %]
-                    </p>
+                        </p>
 [% RenderBlockEnd("DetailsCommunicationTypeActionsExplanationProvider") %]
 [% RenderBlockStart("DetailsCommunicationTypeActionsExplanationRequester") %]
-                    <p class="FieldExplanation">
+                        <p class="FieldExplanation">
                                 [% Translate("Invokers prepare data for a request to a remote web service, and process its response data.") | html %]
-                    </p>
+                        </p>
 [% RenderBlockEnd("DetailsCommunicationTypeActionsExplanationRequester") %]
-
-                    <table class="DataTable" id="[% Data.ActionsTitle | html %]Table" summary="list of [% Data.ActionsTitle | html %]">
+                    </div>
+                    <table class="DataTable TableList" id="[% Data.ActionsTitle | html %]Table" summary="list of [% Data.ActionsTitle | html %]">
                         <thead>
                             <tr>
                                 <th>[% Translate("Name") | html %]</th>
@@ -420,17 +432,15 @@
                                 <td>
 [% RenderBlockStart("DetailsActionsRowLink") %]
                                     <a class="AsBlock HideLinkOnChange" href="[% Env("Baselink") %]Action=[% Data.Module | uri %];[% Data.ActionType | uri %]=[% Data.Name | uri %];Subaction=Change;WebserviceID=[% Data.WebserviceID | uri %];Nav=[% Data.Nav | uri %]">
-                                                [% Data.Name | html %]
+                                        [% Data.Name | html %]
                                     </a>
 [% RenderBlockEnd("DetailsActionsRowLink") %]
 [% RenderBlockStart("DetailsActionsRowDelete") %]
-                                    <a id="Delete[% Data.ActionType | html %][% Data.Name | html %]" class="TrashCan Delete[% Data.ActionType | html %]" href="#" title="[% Translate("Delete this action") | html %]">
-                                                [% Translate("Delete this action") | html %]
+
+                                    <a id="Delete[% Data.ActionType | html %][% Data.Name | html %]" class="TrashCan Delete[% Data.ActionType | html %] table-icon-hover-md" href="#" title="[% Translate("Delete this action") | html %]">
                                         <i class="fa fa-trash-o"></i>
                                     </a>
-                                    <span>
-                                                [% Data.Name | html %]
-                                    </span>
+#                                    <span>[% Data.Name | html %]</span>
 [% RenderBlockEnd("DetailsActionsRowDelete") %]
                                 </td>
                                 <td>[% Translate(Data.Description) | html %]</td>
@@ -442,29 +452,27 @@
 [% RenderBlockStart("DetailsActionsNoDataFoundMsg") %]
                             <tr>
                                 <td colspan="5">
-                                            [% Translate("No data found.") | html %]
+                                    [% Translate("No data found.") | html %]
                                 </td>
                             </tr>
 [% RenderBlockEnd("DetailsActionsNoDataFoundMsg") %]
                         </tbody>
                     </table>
 [% RenderBlockStart("DetailsActionsNoControllerFoundMsg") %]
-                    <div class="SpacingTop"></div>
                     <p class="Error">
-                                [% Translate("At least one %s has a controller that is either not active or not present, please check the controller registration or delete the %s", Data.ActionType, Data.ActionType) | html %]
+                        [% Translate("At least one %s has a controller that is either not active or not present, please check the controller registration or delete the %s", Data.ActionType, Data.ActionType) | html %]
                     </p>
 [% RenderBlockEnd("DetailsActionsNoControllerFoundMsg") %]
-                    <div class="SpacingTop"></div>
-                    <fieldset class="TableLike HideOnChange">
-                        <label for="[% Data.ActionType | html %]List">[% Translate("Add") | html %] [% Translate(Data.ActionType) | html %]:</label>
-                        <div class="Field">
-                                    [% Data.ControllersStrg %]
+                    <fieldset class="TableLike HideOnChange no-padding">
+                        <div class="field-wrapper">
+                            <label for="[% Data.ActionType | html %]List">[% Translate("Add") | html %] [% Translate(Data.ActionType) | html %]</label>
+                            <div class="Field">
+                                [% Data.ControllersStrg %]
+                            </div>
                         </div>
-                        <div class="Clear"></div>
                     </fieldset>
                 </div>
             </div>
-
 [% RenderBlockEnd("DetailsCommunicationType") %]
 
             <div class="WidgetSimple">
@@ -473,18 +481,19 @@
                 </div>
                 <div class="Content">
                     <fieldset class="TableLike">
-                        <div class="Field SpacingTop">
-                            [% IF Data.Action == 'Change' %]
-                                <button class="CallForAction Primary" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
-                                [% Translate("or") | html %]
-                                <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
-                            [% ELSE %]
-                                <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
-                            [% END %]
-                            [% Translate("or") | html %]
-                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %]"><span>[% Translate("Cancel") | html %]</span></a>
+                        <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
+                                <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="btn-cancel-ghost btn-main btn-width-md"><span>[% Translate("Cancel") | html %]</span></a>
+
+                                [% IF Data.Action == 'Change' %]
+                                    <button class="CallForAction Primary btn-primary-ghost btn-main  btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
+                                    <button class="CallForAction Primary btn-primary btn-main  btn-width-md" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                                [% ELSE %]
+                                    <button class="CallForAction Primary btn-primary btn-main  btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                                [% END %]
+
+                            </div>
                         </div>
-                        <div class="Clear"></div>
                     </fieldset>
                 </div>
             </div>
@@ -492,22 +501,20 @@
 
         <div class="Hidden" id="DeleteOperationDialogContainer">
             <div id ="DeleteOperationDialog" class="InnerContent GenericInterfaceDialog">
-                <span class="WarningDialog ">&nbsp;</span>
+                <span class="WarningDialog ">
+                </span>
                 <p class="Center Warning">[% Translate("Do you really want to delete this operation?") | html %]</p>
-                <div class="SpacingTop"></div>
             </div>
         </div>
 
         <div class="Hidden" id="DeleteInvokerDialogContainer">
             <div id ="DeleteInvokerDialog" class="InnerContent GenericInterfaceDialog">
-                <span class="WarningDialog ">&nbsp;</span>
+                <span class="WarningDialog ">
+                </span>
                 <p class="Center Warning">[% Translate("Do you really want to delete this invoker?") | html %]</p>
-                <div class="SpacingTop"></div>
             </div>
         </div>
-
 [% RenderBlockEnd("Details") %]
     </div>
-    <div class="Clear"></div>
 </div>
 [% RenderBlockEnd("Main") %]

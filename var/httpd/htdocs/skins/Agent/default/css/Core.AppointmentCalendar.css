@@ -14,10 +14,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 @media screen,projection,tv,handheld {
 
-    #EditAppointmentForm {
-        width: 560px;
-    }
-
     .InlineButton {
         background: transparent;
         cursor: pointer;
@@ -54,34 +50,10 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     .fc button {
-        background: #EEE;
-        border: 1px solid #CCC;
-        border-bottom: 1px solid #BBB;
-        display: inline-block;
-        transition: all ease-in 0.2s;
-        margin: 0;
-        padding: 3px 7px 6px;
-        line-height: 14px;
-        vertical-align: middle;
-        color: #333;
-        font-size: 11px;
-        text-shadow: 0 1px 0 #FFF;
         position: relative;
     }
 
-    #Datepicker {
-        position: absolute;
-        z-index: 100;
-    }
 
-    #DatepickerOverlay {
-        position: absolute;
-        z-index: 50;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-    }
 
     .AppointmentTooltip {
         position: absolute;
@@ -157,13 +129,16 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     .PluginContainer {
-        background-color: #F2F2F2;
-        border: 1px solid #CCC;
-        border-radius: 2px;
-        box-shadow: 1px 1px 5px #CCC inset;
-        padding: 2px 8px 4px;
-        position: relative;
-        margin-top: 5px;
+        display: flex;
+        width: 100%;
+        flex-direction: column-reverse;
+        gap: var(--gap-sm);
+    }
+
+    .PluginContainer div {
+        display: flex;
+        width: 100%;
+        gap: var(--gap-sm);
     }
 
     .PluginContainer:empty {
@@ -171,13 +146,18 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     .PluginContainer a {
-        line-height: 1em;
+
     }
 
     .PluginContainer a:first-child {
-        vertical-align: middle;
-        display: inline-block;
-        width: 96%;
+        display: flex;
+        border-radius: var(--border-radius-sm);
+        border: var(--border-width) var(--border-solid) var(--gray-ultra-light);
+        line-height: var(--input-line-height);
+        padding: 6px var(--padding-sm);
+        font-size: var(--font-size-sm);
+        flex: 1;
+        background: var(--gray-ultra-light);
     }
 
     .fc-agenda-view th.fc-resource-cell {
@@ -201,31 +181,14 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         border-bottom-right-radius: 0;
     }
 
-    .fc-state-hover,
-    .fc-state-down,
-    .fc-state-active,
-    .fc-state-disabled {
-        background-color: #E5E5E5 !important;
-        border-color: #999 !important;
-    }
-
-    .fc-state-down,
-    .fc-state-active {
-        box-shadow: 1px 1px 3px #B0B0B0 inset, -1px -1px 3px #B0B0B0 inset;
-    }
-
-    .fc-toolbar h2 {
-        font-weight: bold;
-        margin-top: 6px;
-    }
 
     .fc-view {
         background-color: #FDFDFD;
     }
 
-    /* .fc-view > table {
+    .fc-view > table {
         width: 100%;
-    } */
+    } 
 
     .fc-view table thead.fc-head {
         background: #EEEEEE;
@@ -271,7 +234,12 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     .fc .fc-today {
-        background-color: #FFF1AB;
+        background-color: var(--primary-color-calendar);
+    }
+
+    .CalendarWidget table .fc-widget-content {
+        padding: 0;
+        min-width: 20px;
     }
 
     .fc-widget-content .fc-sat,
@@ -297,9 +265,9 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     .FieldInline {
-        display: inline-block;
-        color: #000;
-        margin-left: 5px;
+        display: flex;
+        flex-direction: row;
+        gap: var(--gap-sm);
     }
 
     #ContextSettingsDialogResourceOverview {
@@ -472,12 +440,362 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         content: "9";
     }
 
+    /********************************* NEW STYLES *********************************/
+
+    .CalendarWidget > .Content {
+        z-index: unset;
+    }
+    
+    .CalendarWidget .Header {
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+    }
+    
+    .CalendarWidget .fc-toolbar.fc-header-toolbar {
+        margin: 0;
+        padding: var(--padding-xs) var(--padding-md);
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    /* .fc-toolbar .fc-left,
+    .fc-toolbar .fc-right,
+    .fc-toolbar .fc-center {
+        display: flex;
+    } */
+
+    .CalendarWidget .fc-toolbar.fc-header-toolbar .fc-left .fc-button-group {
+        display: flex;
+        margin: 0;
+    }
+
+    .CalendarWidget .fc-toolbar.fc-header-toolbar .fc-left .fc-button-group button {
+        display: flex;
+        padding: var(--padding-sm) var(--padding-md);
+        color: var(--main-font-color);
+        font-size: var(--main-font-size);
+        transition: var(--main-transition);
+        margin: 0;
+        float: none;
+        height: auto;
+        border: none;
+        background: transparent;
+        text-shadow: none;
+        box-shadow: none;
+    }
+
+    .CalendarWidget .fc-toolbar.fc-header-toolbar .fc-left .fc-button-group button:hover,
+    .CalendarWidget .fc-toolbar.fc-header-toolbar .fc-left .fc-button-group button.fc-state-hover {
+        background-color: var(--gray-semi-light);
+        border-radius: var(--border-radius-xxs);
+    }
+
+    .CalendarWidget .fc-toolbar.fc-header-toolbar .fc-left .fc-button-group button.fc-state-active {
+        position: relative;
+        pointer-events: none;
+    }
+
+    .CalendarWidget .fc-toolbar.fc-header-toolbar .fc-left .fc-button-group button.fc-state-active::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        background-color: var(--black);
+        height: 2px;
+        left: 0;
+        bottom: -6px;
+      }
+
+    .fc-toolbar h2 {
+        font-size: var(--font-size-md);
+        padding: var(--padding-sm);
+    }
+
+    .CalendarWidget .fc-toolbar.fc-header-toolbar .fc-right {
+        display: flex;
+        gap: var(--gap-md);
+        padding: var(--padding-xs) 0;
+    }
+
+    .CalendarWidget .fc-toolbar.fc-header-toolbar .fc-right .fc-button-group {
+        display: flex;
+        float: none;
+        gap: var(--gap-sm);
+        margin: 0;
+    }
+
+    .CalendarWidget .fc-toolbar.fc-header-toolbar .fc-right .fc-button-group button.fc-state-default {
+        padding: var(--padding-xs) var(--padding-md);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-xs);
+        height: auto;
+        background: transparent;
+        color: var(--black);
+        text-shadow: none;
+        box-shadow: none;
+        transition: var(--main-transition);
+    }
+
+    .CalendarWidget .fc-toolbar.fc-header-toolbar .fc-right .fc-button-group button.fc-state-default:hover {
+        background-color: var(--gray-semi-light);
+    }
+
+    .CalendarWidget .fc-toolbar.fc-header-toolbar .fc-right .fc-button-group button.fc-state-default.fc-today-button {
+        border-color: var(--primary-color);
+        background: var(--primary-color-calendar);
+    }
+
+    .CalendarWidget .fc-toolbar.fc-header-toolbar .fc-right .fc-button-group button.fc-state-default.fc-today-button:hover {
+        background: var(--primary-color);
+        color: var(--white);
+    }
+
+    .CalendarWidget .fc-toolbar.fc-header-toolbar .fc-right .fc-button-group button.fc-state-default.fc-state-disabled {
+        pointer-events: none;
+    }
+
+    .CalendarWidget .fc-toolbar.fc-header-toolbar .fc-right .fc-button-group button.fc-state-default.fc-prev-button,
+    .CalendarWidget .fc-toolbar.fc-header-toolbar .fc-right .fc-button-group button.fc-state-default.fc-next-button {
+        padding: var(--padding-xs);
+    }
+
+    .CalendarWidget .fc-toolbar.fc-header-toolbar .fc-right .fc-button-group button.fc-state-default .fc-icon {
+        margin: 0;
+    }
+
+    /* CALENDAR GRID */
+    .CalendarWidget .fc-view {
+        overflow: hidden;
+        border-radius: var(--border-radius-sm);
+    }
+
+    
+    .CalendarWidget .fc-view-container {
+        padding: var(--padding-md);
+    }
+
+    .CalendarWidget .fc-view-container .fc-head td,
+    .CalendarWidget .fc-view-container .fc-head th {
+        padding: 0;
+        vertical-align: top;
+    }
+
+    .CalendarWidget .fc-view-container .fc-head th span {
+        padding: 2px 0;
+        text-transform: uppercase;
+        font-size: 11px;
+        display: inline-block;
+    }
+
+    .CalendarWidget .fc-month-view th.fc-week-number {
+        width: 20px !important;
+        text-align: center;
+    }
+
+    .CalendarWidget .fc-agendaWeek-view th.fc-week-number,
+    .CalendarWidget .fc-agendaDay-view th.fc-week-number {
+        width: 51px !important;
+        text-align: center;
+    }
+
+    .CalendarWidget .fc-unthemed td.fc-today {
+        background: var(--primary-color-calendar) !important;
+    }
+
+
+    /* APPOINTMENTS */
+    .CalendarWidget .fc-event {
+        background-color: var(--primary-color) !important;
+        border: var(--border-width) var(--border-solid) var(--primary-color) !important;
+        color: var(--white) !important;
+        border-radius: 5px !important;
+        margin-left: 4px !important;
+        transition: var(--main-transition);
+    }
+
+    .CalendarWidget .fc-event:hover {
+        background-color: var(--primary-color-darker) !important;
+    }
+
+    .CalendarWidget .Icons i {
+        color: var(--white) !important;
+    }
+
+    .CalendarWidget .fc-event .fc-content {
+        display: flex;
+        padding: 0;
+        /* flex: 1;
+        justify-content: space-between;
+        flex-direction: row-reverse;
+        gap: var(--gap-sm); */
+    }
+
+    .CalendarWidget .fc-ltr .fc-timeline-event .fc-title {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    #Datepicker {
+        position: absolute;
+        z-index: 501;
+        right: 170px;
+        /*top: 27px !important;*/
+        left: initial !important;
+    }
+
+    #DatepickerOverlay {
+        position: absolute;
+        z-index: 500;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.25);
+    }
+
+    /* Calendar Datepicker */
+
+    .CalendarWidget .ui-widget.ui-widget-content {
+        max-width: 300px;
+        width: 100%;
+    }
+
+    .CalendarWidget .hasDatepicker .ui-datepicker .ui-state-default {
+        font-size: var(--font-size-sm);
+    }
+
+    .CalendarWidget .ui-datepicker th {
+        font-weight: var(--normal);
+    }
+
+    /* Calendar Tooltip */
+
+    .AppointmentTooltip {
+        padding: var(--padding-md);
+        border-radius: var(--border-radius-sm);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    .AppointmentTooltip > .Icons {
+        right: 15px;
+    }
+
+    .AppointmentTooltip fieldset {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-md);
+    }
+
+    .AppointmentTooltip fieldset legend {
+        display: flex;
+        text-align: left;
+        border: none;
+        padding: 0;
+        margin: 0;
+        margin-bottom: var(--margin-md);
+    }
+
+    .AppointmentTooltip fieldset.divider legend {
+        border-top: var(--border-width) var(--border-solid) var(--border-color);
+        padding-top: var(--padding-sm);
+    }
+
+    .AppointmentTooltip fieldset legend span {
+        display: flex;
+        text-align: left;
+        border: none;
+        padding: 0;
+        margin: 0;
+        text-indent: 0;
+        font-size: var(--font-size-md);
+    }
+
+    .AppointmentTooltip fieldset .item-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-xs);
+    }
+
+    .AppointmentTooltip fieldset .item-wrapper label {
+        display: flex;
+        padding: 0;
+        margin: 0;
+        color: var(--gray-semi-dark);
+    }
+
+    /* AGENT APPOINTMENT EDIT */
+
+    .InnerEditAppointmentForm {
+        /*max-height: 80vh !important;
+        max-width: 550px;*/
+        width: 100%;
+    }
+
+    .InnerEditAppointmentForm .TableLike .Field {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .EditAppointmentForm {
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .Dialog .Content .InnerContent .EditAppointmentForm fieldset.divider {
+        margin-top: var(--margin-lg);
+    }
+
+    .Dialog .Content .InnerContent .EditAppointmentForm fieldset.divider legend {
+        border-top: var(--border-width) var(--border-solid) var(--border-color);
+        padding-top: var(--padding-lg);
+    }
+
+    .Dialog .Content .InnerContent .EditAppointmentForm p.FieldExplanation {
+        padding: 0;
+    }
+
+    .Dialog .Content .InnerContent .EditAppointmentForm fieldset .Field {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        gap: var(--gap-xs);
+    }
+
+    .Dialog .Content .InnerContent .EditAppointmentForm fieldset .Field.link-wrapper {
+        flex-direction: column;
+    }
+
+    .notification-custom {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-sm);
+    }
+
+
+    /* Footer */
+    .Dialog > .Content > .ContentFooter.EditAppointmentFooter {
+        display: flex;
+        justify-content: flex-end;
+        gap: var(--gap-sm)
+    }
+
+    .Dialog > .Content > .ContentFooter.EditAppointmentFooter .btns-wrapper {
+        display: flex;
+        gap: var(--gap-sm)
+    }
+
+    .Dialog > .Content > .ContentFooter.EditAppointmentFooter .btns-wrapper .btn-cancel-ghost {
+        margin: 0;
+    }
+
+    .Dialog > .Content > .ContentFooter.EditAppointmentFooter button {
+        min-width: var(--btn-max-width-sm);
+        max-width: var(--btn-max-width-sm);
+    }
+
+
 } /* end @media */
 
 @media only screen and (min-width: 0px) and (max-width: 1024px) {
 
-    #ContextSettingsDialogResourceOverview,
-    #EditAppointmentForm {
+    #ContextSettingsDialogResourceOverview {
         width: auto;
     }
 

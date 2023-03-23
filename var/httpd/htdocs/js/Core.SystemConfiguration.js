@@ -184,7 +184,7 @@ var Core = Core || {};
         // and use 'All' as default.
         if ($('#Category option').length <= 2) {
             $('.SystemConfigurationCategories').hide();
-            $('.SystemConfigurationCategories').next('.CallForAction').hide();
+            $('.SystemConfigurationCategories').next('a').hide();
             $('#Category').val('All').trigger('change');
             Data["Category"] = 'All';
         }
@@ -247,7 +247,7 @@ var Core = Core || {};
                         Core.UI.InitStickyElement();
                     })
                     .on('hover_node.jstree', function (Node, Selected, Event) {  //eslint-disable-line no-unused-vars
-                        $('#ConfigTree #' + Core.App.EscapeSelector(Selected.node.id)).children('a').append('<span class="OpenNodeInNewWindow" title="' + Core.Language.Translate('Open this node in a new window') + '" data-node="' + Selected.node.id + '"><i class="fa fa-external-link"></i></span>').find('.OpenNodeInNewWindow').fadeIn();
+                        $('#ConfigTree #' + Core.App.EscapeSelector(Selected.node.id)).children('a').append('<span class="OpenNodeInNewWindow" style="display:inline-block" title="' + Core.Language.Translate('Open this node in a new window') + '" data-node="' + Selected.node.id + '"><i class="fa fa-external-link"></i></span>').find('.OpenNodeInNewWindow').fadeIn();
                     })
                     .on('dehover_node.jstree', function (Node, Selected, Event) {  //eslint-disable-line no-unused-vars
                         $('#ConfigTree #' + Core.App.EscapeSelector(Selected.node.id)).find('.OpenNodeInNewWindow').remove();

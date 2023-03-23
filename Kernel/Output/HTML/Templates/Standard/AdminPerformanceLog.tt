@@ -7,32 +7,8 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">[% Translate("Performance Log") | html %]</h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate("Performance Log"),
-                Link => Env("Action"),
-            },
-        ]
-    %]
-
-    [% IF Data.Minute %]
-        [% BreadcrumbPath.push({ Name => Translate("Range") _ ' (' _ Translate("last") _ ' ' _ Data.Age _ ')' }) %]
-    [% END %]
-
-    [% IF Data.Interface %]
-        [% BreadcrumbPath.push({ Name => Data.Interface, Link => Env("Action") _ ';Subaction=View;Interface=Agent;Minute=' _ Data.Minute, }) %]
-    [% END %]
-
-    [% IF Data.Module %]
-        [% BreadcrumbPath.push({ Name => Data.Module }) %]
-    [% END %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="SidebarColumn">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+    <div class="SidebarColumn ActionsSideBarComp">
 [% RenderBlockStart("ActionList") %]
         <div class="WidgetSimple">
             <div class="Header">
@@ -42,7 +18,7 @@
                 <ul class="ActionList">
 [% RenderBlockStart("ActionOverview") %]
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
                     </li>
 [% RenderBlockEnd("ActionOverview") %]
                 </ul>
@@ -63,16 +39,14 @@
                         <p class="FieldExplanation">
                             [% Translate("Just use this feature if you want to log each request.") | html %]
                         </p>
-                        <p class="FieldExplanation">
+                        <p class="FieldExplanation SpacingBottomMedium">
                             [% Translate("Activating this feature might affect your system performance!") | html %]
                         </p>
-                        <div class="Field SpacingTop">
-                            <button class="CallForAction Fullsize Center" type="submit" value="[% Translate("Disable it here!") | html %]">
+                        <div class="Field">
+                            <button class="CallForAction btn-main btn-primary-ghost" type="submit" value="[% Translate("Disable it here!") | html %]">
                                 <span><i class="fa fa-lock"></i> [% Translate("Disable it here!") | html %]</span>
                             </button>
                         </div>
-                        <div class="Clear"></div>
-
                     </fieldset>
                 </form>
 [% RenderBlockEnd("Enabled") %]
@@ -85,16 +59,14 @@
                         <p class="FieldExplanation">
                             [% Translate("Just use this feature if you want to log each request.") | html %]
                         </p>
-                        <p class="FieldExplanation">
+                        <p class="FieldExplanation SpacingBottomMedium">
                             [% Translate("Activating this feature might affect your system performance!") | html %]
                         </p>
-                        <div class="Field SpacingTop">
-                            <button class="CallForAction Fullsize Center" type="submit" value="[% Translate("Enable it here!") | html %]">
+                        <div class="Field">
+                            <button class="CallForAction btn-main btn-primary-ghost" type="submit" value="[% Translate("Enable it here!") | html %]">
                                 <span><i class="fa fa-unlock-alt"></i> [% Translate("Enable it here!") | html %]</span>
                             </button>
                         </div>
-                        <div class="Clear"></div>
-
                     </fieldset>
                 </form>
 [% RenderBlockEnd("Disabled") %]
@@ -107,13 +79,11 @@
                         <p class="Error">
                             [% Translate("The logfile is too large, you need to reset it") | html %] ([% Data.Size | html %]).
                         </p>
-                        <div class="Field SpacingTop">
+                        <div class="Field">
                             <button class="CallForAction" type="submit" value="[% Translate("Reset") | html %]">
                                 <span>[% Translate("Reset") | html %]</span>
                             </button>
                         </div>
-                        <div class="Clear"></div>
-
                     </fieldset>
                 </form>
 [% RenderBlockEnd("Reset") %]
@@ -121,17 +91,39 @@
         </div>
     </div>
 
-[% RenderBlockStart("Overview") %]
     <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("Performance Log") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate("Performance Log"),
+                    Link => Env("Action"),
+                },
+            ]
+        %]
+
+        [% IF Data.Minute %]
+            [% BreadcrumbPath.push({ Name => Translate("Range") _ ' (' _ Translate("last") _ ' ' _ Data.Age _ ')' }) %]
+        [% END %]
+
+        [% IF Data.Interface %]
+            [% BreadcrumbPath.push({ Name => Data.Interface, Link => Env("Action") _ ';Subaction=View;Interface=Agent;Minute=' _ Data.Minute, }) %]
+        [% END %]
+
+        [% IF Data.Module %]
+            [% BreadcrumbPath.push({ Name => Data.Module }) %]
+        [% END %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+[% RenderBlockStart("Overview") %]
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Overview") | html %]</h2>
             </div>
-
 [% RenderBlockStart("OverviewTable") %]
-            <h3 class="Spacing">[% Translate("Range") | html %] ([% Translate("last") | html %] [% Data.Age | html %])</h3>
-            <div class="Content">
 
+            <h3 class="no-margin padding-md">[% Translate("Range") | html %] ([% Translate("last") | html %] [% Data.Age | html %])</h3>
+            <div class="Content">
                 <table class="DataTable">
                     <thead>
                         <tr>
@@ -176,22 +168,21 @@
             </div>
 [% RenderBlockEnd("OverviewTable") %]
         </div>
-    </div>
 [% RenderBlockEnd("Overview") %]
-
 [% RenderBlockStart("View") %]
-    <div class="ContentColumn">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Range") | html %] ([% Translate("last") | html %] [% Data.Age | html %])</h2>
             </div>
             <div class="Content">
-                <p>
-                    <strong>[% Translate("Interface") | html %]:</strong> [% Data.Interface | html %],
-                    <strong>[% Translate("Module") | html %]:</strong> [% Data.Module | html %],
-                    <strong>[% Translate("Period") | html %]:</strong> [% Data.Period | html %] [% Translate("minutes") | html %]
-                </p>
-                <table class="DataTable SpacingTop AdminPerformanceLog">
+                <div class="padding-md">
+                    <p>
+                        <strong>[% Translate("Interface") | html %]:</strong> [% Data.Interface | html %],&nbsp;&nbsp;
+                        <strong>[% Translate("Module") | html %]:</strong> [% Data.Module | html %],&nbsp;&nbsp;
+                        <strong>[% Translate("Period") | html %]:</strong> [% Data.Period | html %] [% Translate("minutes") | html %]
+                    </p>
+                </div>
+                <table class="DataTable AdminPerformanceLog">
                     <thead>
                         <tr>
                             <th>[% Translate("Date") | html %]</th>
@@ -210,14 +201,17 @@
                             <td><em>[% Data.Min | html %]s</em></td>
                             <td><em>[% Data.Max | html %]s</em></td>
                             <td><em>[% Data.Average | html %]s</em></td>
-                            <td><div class="Progressbar" style="width:[% Data.Width | html %];">&nbsp;</div></td>
+                            <td>
+                                <div class="Progressbar">
+                                    <span style="width:[% Data.Width | html %];"></span>
+                                </div>
+                            </td>
                         </tr>
 [% RenderBlockEnd("ViewRow") %]
                     </tbody>
                 </table>
             </div>
         </div>
-    </div>
 [% RenderBlockEnd("View") %]
-    <div class="Clear"></div>
+    </div>
 </div>

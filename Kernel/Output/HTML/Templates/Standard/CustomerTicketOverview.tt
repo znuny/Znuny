@@ -1,35 +1,29 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-# TODO delete me
-## nofilter(TidyAll::Plugin::OTRS::Common::Origin)
+
 <!-- TODO move before the merge the JS in the JS file -->
-## nofilter(TidyAll::Plugin::OTRS::TT::ScriptUsage)
+## nofilter(TidyAll::Plugin::Znuny::TT::ScriptUsage)
 
 <div id="MainBox" class="TicketView ARIARoleMain [% Config("Ticket::Frontend::CustomerTicketOverviewSortable") %] ">
-# ---
-# Forwwward
-# ---
-# --- added a new <div> called ".ContentWrapper"
-    <div class="ContentWrapper flex-column"> <!-- START Content Wrapper -->
+    <div class="ContentWrapper flex-column">
         <h1 class="PageTitle">Tickets</h1>
-
         <div class="Content">
-            [% RenderBlockStart("Filled") %]
-            <div class="ActionRow">
+[% RenderBlockStart("Filled") %]
+            <div class="ActionRow ActionRow-full-width">
                 <ul class="Filter Tabs">
-                [% RenderBlockStart("FilterHeader") %]
+[% RenderBlockStart("FilterHeader") %]
                     <li>
                         <a class="[% Data.ClassA | html %]" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=[% Env("Subaction") %];Filter=[% Data.Filter | uri %];SortBy=[% Data.SortBy | uri %];OrderBy=[% Data.OrderBy | uri %][% Data.CustomerIDs %];">
                             [% Translate(Data.Name) | html %] ([% Data.Count | html %])
                         </a>
                     </li>
-                [% RenderBlockEnd("FilterHeader") %]
+[% RenderBlockEnd("FilterHeader") %]
                 [% IF Data.CustomerIDStrg %]
                     <li>
                         [% Data.CustomerIDStrg %]
@@ -37,7 +31,9 @@
                 [% END %]
                 </ul>
                 <div class="Tabs Pagination">
-                    [% Data.SiteNavBar %]
+                    <ul>
+                        <li class="page-links">[% Data.SiteNavBar %]</li>
+                    </ul>
                 </div>
             </div>
             <div class="Content outerTable">
@@ -59,30 +55,30 @@
                                     [% Translate("State") | html %]
                                 </a>
                             </th>
-                            [% RenderBlockStart("OverviewNavBarPageOwner") %]
+[% RenderBlockStart("OverviewNavBarPageOwner") %]
                                 <th class="Owner [% Data.OwnerSort | uri %]">
                                     <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=[% Env("Subaction") %];SortBy=Owner;OrderBy=[% Data.OrderBy | uri %];Filter=[% Data.Filter | uri %]">
                                         [% Translate("Owner") | html %]
                                     </a>
                                 </th>
-                            [% RenderBlockEnd("OverviewNavBarPageOwner") %]
-                            [% RenderBlockStart("OverviewNavBarPageQueue") %]
+[% RenderBlockEnd("OverviewNavBarPageOwner") %]
+[% RenderBlockStart("OverviewNavBarPageQueue") %]
                                 <th class="Queue [% Data.QueueSort | uri %]">
                                     <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=[% Env("Subaction") %];SortBy=Queue;OrderBy=[% Data.OrderBy | uri %];Filter=[% Data.Filter | uri %]">
                                         [% Translate("Queue") | html %]
                                     </a>
                                 </th>
-                            [% RenderBlockEnd("OverviewNavBarPageQueue") %]
-                            [% RenderBlockStart("OverviewNavBarPageDynamicField") %]
+[% RenderBlockEnd("OverviewNavBarPageQueue") %]
+[% RenderBlockStart("OverviewNavBarPageDynamicField") %]
                                 <th class="DynamicField Last [% Data.CSS | html %]">
-                                [% RenderBlockStart("OverviewNavBarPageDynamicFieldSortable") %]
+[% RenderBlockStart("OverviewNavBarPageDynamicFieldSortable") %]
                                     <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=[% Env("Subaction") %];SortBy=DynamicField_[% Data.DynamicFieldName | uri %];OrderBy=[% Data.OrderBy | uri %];Filter=[% Data.Filter | uri %]">[% Translate(Data.Label) | html %]</a>
-                                [% RenderBlockEnd("OverviewNavBarPageDynamicFieldSortable") %]
-                                [% RenderBlockStart("OverviewNavBarPageDynamicFieldNotSortable") %]
+[% RenderBlockEnd("OverviewNavBarPageDynamicFieldSortable") %]
+[% RenderBlockStart("OverviewNavBarPageDynamicFieldNotSortable") %]
                                     <span>[% Translate(Data.Label) | html %]</span>
-                                [% RenderBlockEnd("OverviewNavBarPageDynamicFieldNotSortable") %]
+[% RenderBlockEnd("OverviewNavBarPageDynamicFieldNotSortable") %]
                                 </th>
-                            [% RenderBlockEnd("OverviewNavBarPageDynamicField") %]
+[% RenderBlockEnd("OverviewNavBarPageDynamicField") %]
 
 # example of how to use fixed dynamic field blocks for customizations
 # Note: Field1 and Field2 are the names of the fields and had to be replaced with the actual
@@ -115,7 +111,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        [% RenderBlockStart("Record") %]
+[% RenderBlockStart("Record") %]
                         <tr class="MasterAction">
                             <td class="Ticket">
                                 <a href="[% Env("Baselink") %]Action=CustomerTicketZoom;TicketNumber=[% Data.TicketNumber | uri %]" class="MasterActionLink">[% Data.TicketNumber | html %]</a>
@@ -129,23 +125,21 @@
                             <td class="Status">
                                 <div class="pill StateID-[% Data.StateID| html %]">[% Translate(Data.State) | html %]</div>
                             </td>
-                            [% RenderBlockStart("RecordOwner") %]
+[% RenderBlockStart("RecordOwner") %]
                             <td class="Owner">[% Data.OwnerName | html %]</td>
-                            [% RenderBlockEnd("RecordOwner") %]
-
-                            [% RenderBlockStart("RecordQueue") %]
+[% RenderBlockEnd("RecordOwner") %]
+[% RenderBlockStart("RecordQueue") %]
                             <td class="Queue" title="[% Data.Queue | html %]">[% Data.Queue | truncate(20) | html %]</td>
-                            [% RenderBlockEnd("RecordQueue") %]
-
-                            [% RenderBlockStart("RecordDynamicField") %]
+[% RenderBlockEnd("RecordQueue") %]
+[% RenderBlockStart("RecordDynamicField") %]
                             <td>
                                 <div title="[% Data.Title | html %]">
-                                [% RenderBlockStart("RecordDynamicFieldLink") %]
+[% RenderBlockStart("RecordDynamicFieldLink") %]
                                     <a href="[% Data.Link | Interpolate %]" class="DynamicFieldLink">[% Data.Value %]</a>
-                                [% RenderBlockEnd("RecordDynamicFieldLink") %]
-                                [% RenderBlockStart("RecordDynamicFieldPlain") %]
+[% RenderBlockEnd("RecordDynamicFieldLink") %]
+[% RenderBlockStart("RecordDynamicFieldPlain") %]
                                     [% Data.Value %]
-                                [% RenderBlockEnd("RecordDynamicFieldPlain") %]
+[% RenderBlockEnd("RecordDynamicFieldPlain") %]
                                 </div>
                             </td>
 [% RenderBlockEnd("RecordDynamicField") %]
@@ -178,31 +172,29 @@
 #[% RenderBlockEnd("RecordDynamicField_Field2") %]
                             <td class="Age" title="[% Data.Created | Localize("TimeShort") | html %]">[% Data.CustomerAge | truncate(20) | html %]</td>
                         </tr>
-                        [% RenderBlockEnd("Record") %]
+[% RenderBlockEnd("Record") %]
                     </tbody>
                 </table>
             </div>
-        </div>
-    </div> <!-- END Content Wrapper -->
-# ---
-    [% RenderBlockStart("FilterFooter") %]
-    <div id="BottomActionRow" class="ActionRow BigButtons">
-        <ul class="Tabs Filter">
-            [% RenderBlockStart("FilterFooterItem") %]
-            <li class="[% Data.ClassLI | html %]">
-                <a class="[% Data.ClassA | html %]" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=[% Env("Subaction") %];Filter=[% Data.Filter | uri %];SortBy=[% Data.SortBy | uri %];OrderBy=[% Data.OrderBy | uri %][% Data.CustomerIDs %];">
-                    [% Translate(Data.Name) | html %] ([% Data.Count | html %])
-                </a>
-            </li>
-            [% RenderBlockEnd("FilterFooterItem") %]
-            <li class="Clear"></li>
-        </ul>
-        <div class="Tabs Pagination">
-            [% Data.SiteNavBar %]
-        </div>
-        <div class="Clear"></div>
-    </div>
-    [% RenderBlockEnd("FilterFooter") %]
+[% RenderBlockStart("FilterFooter") %]
+            <div id="BottomActionRow" class="ActionRow ActionRow-full-width">
+                <ul class="Tabs Filter">
+[% RenderBlockStart("FilterFooterItem") %]
+                    <li class="[% Data.ClassLI | html %]">
+                        <a class="[% Data.ClassA | html %]" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=[% Env("Subaction") %];Filter=[% Data.Filter | uri %];SortBy=[% Data.SortBy | uri %];OrderBy=[% Data.OrderBy | uri %][% Data.CustomerIDs %];">
+                            [% Translate(Data.Name) | html %] ([% Data.Count | html %])
+                        </a>
+                    </li>
+[% RenderBlockEnd("FilterFooterItem") %]
+                </ul>
+                <div class="Tabs Pagination">
+                    <ul>
+                        <li class="page-links">[% Data.SiteNavBar %]</li>
+                    </ul>
+                </div>
+            </div>
+[% RenderBlockEnd("FilterFooter") %]
+
     [% WRAPPER JSOnDocumentComplete %]
     <script type="text/javascript">
         $('#CustomerIDs').on('change.CustomerIDs', function (Event) {
@@ -224,26 +216,27 @@
         });
     </script>
     [% END %]
-    [% RenderBlockEnd("Filled") %]
 
-    [% RenderBlockStart("Empty") %]
-        <div class="Placeholder">
-            [% RenderBlockStart("EmptyDefault") %]
+[% RenderBlockEnd("Filled") %]
+[% RenderBlockStart("Empty") %]
+            <div class="Placeholder">
+[% RenderBlockStart("EmptyDefault") %]
                 <h2>[% Translate("Welcome!") | html %]</h2>
-                [% RenderBlockStart("EmptyDefaultButton") %]
+[% RenderBlockStart("EmptyDefaultButton") %]
                 <p>[% Translate("Please click the button below to create your first ticket.") | html %]</p>
-                <a class="Button" href="[% Env("Baselink") %]Action=CustomerTicketMessage">[% Translate("Create your first ticket") | html %]</a>
-                [% RenderBlockEnd("EmptyDefaultButton") %]
-            [% RenderBlockEnd("EmptyDefault") %]
-
-            [% RenderBlockStart("EmptyCustom") %]
+                <a class="btn-primary btn-main btn-width-lg" href="[% Env("Baselink") %]Action=CustomerTicketMessage">[% Translate("Create your first ticket") | html %]</a>
+[% RenderBlockEnd("EmptyDefaultButton") %]
+[% RenderBlockEnd("EmptyDefault") %]
+[% RenderBlockStart("EmptyCustom") %]
                 <h2>[% Translate(Data.Title) | html %]</h2>
                 <p>[% Translate(Data.Text) | html %]</p>
+[% RenderBlockStart("EmptyCustomButton") %]
+                <a class="btn-primary btn-main btn-width-lg" href="[% Env("Baselink") %]Action=CustomerTicketMessage">[% Translate(Data.Button) | html %]</a>
+[% RenderBlockEnd("EmptyCustomButton") %]
+[% RenderBlockEnd("EmptyCustom") %]
+            </div>
+[% RenderBlockEnd("Empty") %]
 
-                [% RenderBlockStart("EmptyCustomButton") %]
-                <a class="Button" href="[% Env("Baselink") %]Action=CustomerTicketMessage">[% Translate(Data.Button) | html %]</a>
-                [% RenderBlockEnd("EmptyCustomButton") %]
-            [% RenderBlockEnd("EmptyCustom") %]
         </div>
-    [% RenderBlockEnd("Empty") %]
+    </div>
 </div>

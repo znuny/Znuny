@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -14,7 +14,7 @@
         </span>
         <span class="textWrapper">
             <p class="activity-title">{{ Title }}</p>
-            <p class="activity-text">{{ Text }}</p>
+            <p class="activity-text">{{ Text | truncate(100) }}</p>
             <p class="activity-time">{{ CreateTime }}</p>
         </span>
         <span class="activity-delete icon-hover" data-activity-id="{{ ID }}">

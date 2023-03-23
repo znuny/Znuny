@@ -14,179 +14,465 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 @media screen,projection,tv,handheld {
 
-/**
- * @subsection  Extensions for ticket zoom
- */
+    /**
+    * @subsection  Extensions for ticket zoom
+    */
 
-.WidgetSimple > .Content.ProcessInfo {
-    padding: 10px 10px 5px 10px;
-    min-height: 0px;
-    overflow: hidden;
-}
+    .WidgetSimple > .Content.ProcessInfo {
+        padding: 10px 10px 5px 10px;
+        min-height: 0px;
+        overflow: hidden;
+    }
 
-.WidgetSimple > .Content.ProcessInfo fieldset .FieldContainer {
-    float: left;
-    width: 255px;
-    margin: 0px 10px 10px 0px;
-    background-color: #efefef;
-    border: 1px solid #ddd;
-    line-height: 150%;
-}
+    /*.WidgetSimple > .Content.ProcessInfo fieldset .FieldContainer {
+        float: left;
+        width: 255px;
+        margin: 0px 10px 10px 0px;
+        background-color: #efefef;
+        border: 1px solid #ddd;
+        line-height: 150%;
+    }
 
-.WidgetSimple > .Content.ProcessInfo fieldset .FieldContainer label {
-    color: #686868;
-    border-bottom: 1px solid #ccc;
-    text-shadow: 0px 1px 0px #FAFAFA;
-    padding: 2px 7px;
-    position: relative;
-    display: block;
-    font-size: 11px;
-}
+    .WidgetSimple > .Content.ProcessInfo fieldset .FieldContainer label {
+        color: #686868;
+        border-bottom: 1px solid #ccc;
+        text-shadow: 0px 1px 0px #FAFAFA;
+        padding: 2px 7px;
+        position: relative;
+        display: block;
+        font-size: 11px;
+    }
 
-.WidgetSimple > .Content.ProcessInfo fieldset .FieldContainer p {
-    background-color: #fff;
-    padding: 4px 7px 2px 7px;
-    font-size: 11px;
-}
+    .WidgetSimple > .Content.ProcessInfo fieldset .FieldContainer p {
+        background-color: #fff;
+        padding: 4px 7px 2px 7px;
+        font-size: 11px;
+    }
 
-.WidgetSimple > .Content.ProcessInfo fieldset .FieldContainer p.CutValue {
-    text-overflow: ellipsis;
-    height: 17px;
-    overflow: hidden;
-    display: block;
-    white-space: nowrap;
-}
+    .WidgetSimple > .Content.ProcessInfo fieldset .FieldContainer p.CutValue {
+        text-overflow: ellipsis;
+        height: 17px;
+        overflow: hidden;
+        display: block;
+        white-space: nowrap;
+    }*/
 
-.WidgetSimple > .Content.ProcessInfo fieldset .FieldContainer p.ValueLong {
-    display: none;
-}
+    .WidgetSimple > .Content.ProcessInfo fieldset .FieldContainer p.ValueLong {
+        display: none;
+    }
 
-.WidgetSimple > .Content.ProcessInfo fieldset .FieldContainer label .ShowFieldInfoOverlay {
-    display: block;
-    position: absolute;
-    right: 0px;
-    top: 2px;
-    color: #000;
-    font-size: 12px;
-    width: 19px;
-    height: 18px;
-    text-align: center;
-}
+    .WidgetSimple > .Content.ProcessInfo fieldset .FieldContainer label .ShowFieldInfoOverlay {
+        display: block;
+        position: absolute;
+        right: 0px;
+        top: 2px;
+        color: #000;
+        font-size: 12px;
+        width: 19px;
+        height: 18px;
+        text-align: center;
+    }
 
-.FieldSetSeparator {
-    float: none;
-    clear: both;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 7px;
-    font-size: 12px;
-}
+    /*.FieldSetSeparator {
+        float: none;
+        clear: both;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 7px;
+        font-size: 12px;
+    }*/
 
-.FieldContainer + .FieldSetSeparator {
-    padding-top: 10px;
-}
+    .FieldContainer + .FieldSetSeparator {
+        padding-top: 10px;
+    }
 
-.FieldSeparator {
-    border-top: 1px dotted #ccc;
-    margin: 5px 0px;
-}
+    .FieldSeparator {
+        border-top: 1px dotted #ccc;
+        margin: 5px 0px;
+    }
 
-.FieldOverlay {
-    width:550px;
-    line-height: 150%;
-    padding:5px;
-}
+    .FieldOverlay {
+        width:550px;
+        line-height: 150%;
+        padding:5px;
+    }
 
-#DynamicFieldsWidget .Actions strong {
-    display: inline-block;
-    padding: 5px 0px 5px 3px;
-}
+    /*#DynamicFieldsWidget .Actions strong {
+        display: inline-block;
+        padding: 5px 0px 5px 3px;
+    }*/
 
-#DynamicFieldsWidget .Actions li:first-child {
-    background: none;
-}
+    #DynamicFieldsWidget .Actions li:first-child {
+        background: none;
+    }
 
-#DynamicFieldsWidget .Actions li:first-child:after {
-    content: "";
-}
+    #DynamicFieldsWidget .Actions li:first-child:after {
+        content: "";
+    }
 
-/**
- * @subsection  Extensions for creation dialog
- */
+    /**
+    * @subsection  Extensions for creation dialog
+    */
 
-#ActivityContent {
-    border-top: 1px solid #ccc;
-    padding-top: 5px;
-    margin-top: 20px;
-    display: none;
-}
+    #ActivityContent {
+        border-top: 1px solid #ccc;
+        padding-top: 5px;
+        margin-top: 20px;
+        display: none;
+    }
 
-.SubmitInfo {
-    padding: 5px;
-    background: #eee;
-    border: 1px solid #ddd;
-    margin: 5px 10px 10px 10px;
-}
+    /*.SubmitInfo {
+        padding: 5px;
+        background: #eee;
+        border: 1px solid #ddd;
+        margin: 5px 10px 10px 10px;
+    }*/
 
-.FieldExplanationLong {
-    display: none;
-}
+    .FieldExplanationLong {
+        display: none;
+    }
 
-.FieldHelp {
-    display: block;
-}
+    .FieldHelp {
+        display: block;
+    }
 
-.Centered {
-    text-align: center;
-}
+    .Centered {
+        text-align: center;
+    }
 
-textarea {
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    padding: 5px;
-}
+    textarea {
+        color: var(--black);
+        line-height: 150%;
+        font-size: var(--font-size-sm);
+        font-weight: var(--medium);
+        /*font-family: Inter;*/
+        padding: var(--padding-md) var(--padding-lg);
+        min-width: 100%;
+    }
 
-.FieldHelpContainer {
-    position: relative;
-}
+    .FieldHelpContainer .FieldHelpTrigger {
+        cursor: default;
+        z-index: 1;
+        color: #bbb;
+    }
 
-.FieldHelpContainer:hover > span {
-    display: block;
-}
+    /******************************/
+    /*       'Help' icon/msg      */
+    /******************************/
+    .FieldHelpContainer {
+        margin: 0;
+        position: relative;
+        left: 4px;
+        transition: var(--main-transition);
+    }
 
-.FieldHelpContainer .FieldHelpTrigger {
-    cursor: default;
-    z-index: 1;
-    color: #bbb;
-}
+    .flex-row .FieldHelpContainer {
+        align-self: center;
+    }
 
-.FieldHelpContainer > span {
-    white-space: pre-line;
-    background: #444444;
-    color: #fff;
-    font-size: 12px;
-    left: 15px;
-    line-height: 110%;
-    padding: 10px;
-    position: absolute;
-    z-index: 2;
-    text-align: left;
-    text-shadow: 1px 1px 1px #000;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-    border-radius: 5px;
-    top: 5px;
-    width: 200px;
-    display: none;
-    -webkit-opacity: 0.8;
-    -moz-opacity: 0.8;
-    -ms-opacity: 0.8;
-    -o-opacity: 0.8;
-    opacity: 0.8;
-}
+    .FieldHelpContainer i {
+        color: var(--gray-semi-dark);
+        font-size: var(--font-size-md);
+    }
 
-.DescriptionLong {
-    white-space: pre-line;
-}
+    .FieldHelpContainer:hover,
+    .FieldHelpContainer i:hover {
+        cursor: pointer;
+    }
+
+    .FieldHelpContainer:hover span,
+    .FieldHelpContainer span:hover {
+        display: flex;
+        opacity: 1;
+    }
+
+    .FieldHelpContainer span {
+        display: none;
+        opacity: 0;
+        position: absolute;
+        background: var(--black);
+        border-radius: var(--border-radius-xxs);
+        color: var(--white);
+        padding: var(--padding-sm) var(--padding-md);
+        top: 26px;
+        left: -9px;
+        max-width: 200px;
+        min-width: 130px;
+        z-index: 100;
+        font-size: var(--font-size-xs);
+        font-weight: var(--normal);
+        /*font-family: Inter;*/
+        line-height: 14px;
+        letter-spacing: .1px;
+        transition: var(--main-transition);
+    }
+
+    .FieldHelpContainer span::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 18px;
+        top: -16px;
+        left: 0;
+    }
+
+    .FieldHelpContainer > span::after {
+        content: "";
+        position: absolute;
+        width: 9px;
+        height: 9px;
+        border-top: 1px solid;
+        border-left: 1px solid;
+        top: -5px;
+        left: 11px;
+        color: var(--black);
+        background: var(--black) !important;
+        transform: rotate(45deg);
+    }
+
+    .DescriptionLong {
+        white-space: pre-line;
+    }
+
+    /***********************************************************************/
+    /*    Moved from Core.Reset.Forwwward.css                              */
+    /***********************************************************************/
+
+
+    /*******************************************************/
+    /*                  NEW PROCESS TICKET                 */
+    /*******************************************************/
+
+    /* Top - Process Identifier */
+    form#NewProcessTicket {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    /* Modal Form */
+    .LayoutPopup #ActivityDialogContent .LayoutFixedSidebar {
+        gap: 0;
+    }
+
+    .LayoutPopup #ActivityDialogContent .LayoutFixedSidebar .SidebarColumn {
+        width: 0;
+    }
+    /* */
+
+    .MainBox #ActivityDialogContent .align-right button {
+        align-self: flex-end;
+    }
+
+    #NewProcessTicket .TableLike {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        padding: var(--padding-lg);
+        width: 100%;
+        z-index: 0;
+    }
+
+    @media only screen and (max-width: 1024px) {
+        #NewProcessTicket .TableLike {
+            padding: var(--padding-lg);
+        }
+    }
+
+    #NewProcessTicket .TableLike,
+    #NewProcessTicket + #AJAXLoader {
+        max-width: calc(100% - (var(--side-bar-width-desktop) + var(--gap-md)));
+    }
+
+    @media only screen and (max-width: 1024px) {
+        #NewProcessTicket .TableLike,
+        #NewProcessTicket + #AJAXLoader {
+            max-width: 100%;
+        }
+    }
+    
+
+    #NewProcessTicket.NewProcessTicketSmall .TableLike,
+    #NewProcessTicket.NewProcessTicketSmall + #AJAXLoader {
+        min-width: 100%;
+    }
+
+    #NewProcessTicket .TableLike > div {
+        width: 100%;
+        max-width: 800px;
+    }
+
+    @media only screen and (max-width: 1024px) {
+        #NewProcessTicket .TableLike > div {
+            max-width: 100%;
+            padding: 0 var(--padding-lg);
+        }
+    }
+
+    #NewProcessTicket .TableLike label {
+        display: flex;
+        width: auto;
+        line-height: normal;
+        text-align: unset;
+        padding: var(--padding-sm) 0;
+        margin: 0px;
+        font-size: var(--main-font-size);
+        box-sizing: border-box;
+        letter-spacing: .2px;
+        font-weight: var(--medium);
+    }
+
+    #NewProcessTicket .TableLike div.Field {
+        padding-bottom: var(--padding-lg);
+    }
+
+
+
+
+    #ActivityDialogContent div.ContentColumn {
+        position: relative;
+        background: var(--white);
+        padding: var(--padding-lg);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-sm);
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        top: -10px;
+        z-index: 1;
+    }
+
+    #ActivityDialogContent div.ContentColumn .LayoutPopup.ARIARoleMain {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+    }
+
+    @media only screen and (max-width: 1024px) {
+        #ActivityDialogContent div.ContentColumn .LayoutPopup.ARIARoleMain {
+            width: 100%;
+            padding: 0 var(--padding-lg);
+        }
+    }
+    
+
+    #ActivityDialogContent .ContentColumn .Content, 
+    #ActivityDialogContent .ContentColumn .TableLike {
+        padding: 0;
+    }
+
+    #ActivityDialogContent .ContentColumn .Content {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    @media only screen and (max-width: 1024px) {
+        #ActivityDialogContent .ContentColumn .Content {
+            width: 100%;
+        }
+    }
+
+    #ActivityDialogContent .ContentColumn .Content > fieldset,
+    #ActivityDialogContent .ContentColumn .Content + div {
+        width: 100%;
+        max-width: 800px;
+        box-sizing: border-box;
+        display: flex;
+        flex-flow: column;
+        border: 0;
+        gap: var(--gap-md-sm);
+    }
+
+    @media only screen and (max-width: 1024px) {
+        #ActivityDialogContent .ContentColumn .Content > fieldset,
+        #ActivityDialogContent .ContentColumn .Content + div {
+            max-width: 100%;
+        }
+    }
+
+    .LayoutPopup #ActivityDialogContent .ContentColumn .Content > fieldset,
+    .LayoutPopup #ActivityDialogContent .ContentColumn .Content + div {
+        max-width: 800px;
+        min-width: unset;
+        border: 0;
+    }
+
+    @media only screen and (max-width: 1024px) {
+        .LayoutPopup #ActivityDialogContent .ContentColumn .Content > fieldset,
+        .LayoutPopup #ActivityDialogContent .ContentColumn .Content + div {
+            width: 100%;
+            max-width: 100%;
+        }
+    }
+
+    #ActivityDialogContent .card-item {
+        background: 0;
+        border: 0;
+        padding: 0;
+        margin: 0;
+    }
+
+    #ActivityDialogContent .ContentColumn label{
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        width: auto;
+        text-align: left;
+        /*padding: var(--padding-sm) 0;*/
+        font-size: var(--label-font-size);
+        letter-spacing: .2px;
+        font-weight: var(--medium);
+        /*font-family: Inter;*/
+        text-transform: capitalize;
+    }
+
+    #ActivityDialogContent .Row_DynamicField_PreProcVacationStart > div > div:not(.TooltipErrorMessage),
+    #ActivityDialogContent .Row_DynamicField_PreProcVacationEnd > div > div:not(.TooltipErrorMessage) {
+        display: flex;
+        align-items: center;
+    }
+
+    #ActivityDialogContent .Row_DynamicField_PreProcVacationStart .Field > div label,
+    #ActivityDialogContent .Row_DynamicField_PreProcVacationEnd .Field > div label {
+        padding: 0;
+        /*flex-flow: row-reverse;*/
+        min-width: unset;
+        gap: 0;
+    }
+
+    #ActivityDialogContent .Row_DynamicField_PreProcVacationStart .Field > div ~ select,
+    #ActivityDialogContent .Row_DynamicField_PreProcVacationEnd .Field > div ~ select {
+        margin: 8px var(--margin-sm) 0 var(--margin-sm);
+    }
+
+    #ActivityDialogContent .Row_DynamicField_PreProcVacationStart .Field > div ~ select:hover,
+    #ActivityDialogContent .Row_DynamicField_PreProcVacationEnd .Field > div ~ select:hover {
+        cursor: pointer;
+    }
+
+    #ActivityDialogContent .Row_DynamicField_PreProcVacationStart .Field > div ~ select.Validate_DateDay,
+    #ActivityDialogContent .Row_DynamicField_PreProcVacationEnd .Field > div ~ select.Validate_DateDay {
+        margin-left: 0;
+    }
+
+    #ActivityDialogContent .Row_DynamicField_PreProcVacationStart .Field > div ~ select:last-child,
+    #ActivityDialogContent .Row_DynamicField_PreProcVacationEnd .Field > div ~ select:last-child{
+        margin-right: 0;
+    }
+
+    #ActivityDialogContent #LabelDynamicField_PreProcDaysRemaining,
+    #ActivityDialogContent #LabelDynamicField_PreProcRepresentationBy {
+        color: var(--gray-semi-dark);
+    }
+
+    /*#ActivityDialogContent .ContentColumn .TableLike > div {
+        width: 100%;
+        padding: 0;
+    }
+
+    #ActivityDialogContent .ContentColumn .TableLike div.Field {
+        width: 100%;
+        padding-bottom: var(--padding-lg);
+    }*/
+
 
 } /* end @media */

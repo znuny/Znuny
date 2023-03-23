@@ -12,19 +12,23 @@
         <input type="hidden" name="Action" value="[% Env("Action") %]"/>
         <input type="hidden" name="Subaction" value="Search"/>
         <fieldset class="TableLike">
-            <label>[% Translate("Text") | html %]:</label>
-            <div class="Field">
-                <input type="text" name="Search" value="[% Data.SearchTerm | html %]" class="W90pc" />
+            <div class="field-wrapper">
+                <label>[% Translate("Text") | html %]:</label>
+                <div class="Field">
+                    <input type="text" name="Search" value="[% Data.SearchTerm | html %]" class="W90pc" />
+                </div>
             </div>
-            <div class="Clear"></div>
-            <label>[% Translate("Category") | html %]:</label>
-            <div class="Field">
-                [% Data.CategoriesStrg %]
+            <div class="field-wrapper">
+                <label>[% Translate("Category") | html %]:</label>
+                <div class="Field">
+                    [% Data.CategoriesStrg %]
+                </div>
             </div>
-            <div class="Clear"></div>
         </fieldset>
     </form>
 </div>
-<div class="ContentFooter Center">
-    <button id="SearchFormSubmit" class="Primary CallForAction" value="[% Translate("Run search") | html %]"><span><i class="fa fa-search"></i> [% Translate("Run search") | html %]</span></button>
+<div class="ContentFooter Center main-search-component-btns">
+    <button id="Cancel" class="btn-main btn-width-md btn-cancel-ghost DontPrint" type="submit" value=" Cancel"><span>[% Translate("Cancel") | html %]</span></button>
+
+    <button id="SearchFormSubmit" class="Primary CallForAction btn-primary btn-main btn-width-md" value="[% Translate("Run search") | html %]"><span><i class="fa fa-search"></i> [% Translate("Run search") | html %]</span></button>
 </div>

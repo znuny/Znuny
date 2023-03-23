@@ -157,7 +157,7 @@ Core.Agent.Admin.DynamicFieldMultiselect = (function (TargetNS) {
         $('#DefaultValue').append($('<option>', { value: '' }).text('-'));
 
         // find all active possible values keys (this will omit all previously deleted keys)
-        $('.ValueRow > .DefaultValueKeyItem').each(function(){
+        $('.ValueRow .DefaultValueKeyItem').each(function(){
 
             // for each key:
             // Get the ID

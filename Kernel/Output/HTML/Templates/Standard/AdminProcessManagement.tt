@@ -7,20 +7,8 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">[% Translate("Process Management") | html %]</h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('Process Management'),
-                Link => Env("Action"),
-            },
-        ]
-    %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="SidebarColumn">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2><label for="Filter">[% Translate("Filter for Processes") | html %]</label></h2>
@@ -36,10 +24,10 @@
             <div class="Content">
                 <ul class="ActionList">
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ProcessNew" class="CallForAction Fullsize Center"><span><i class="fa fa-plus-square"></i> [% Translate("Create New Process") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ProcessNew" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-plus-square"></i> [% Translate("Create New Process") | html %]</span></a>
                     </li>
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ProcessSync" class="CallForAction Fullsize Center"><span><i class="fa fa-rocket"></i> [% Translate("Deploy All Processes") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ProcessSync" class="CallForAction btn-main btn-primary-ghost"><span> [% Translate("Deploy All Processes") | html %]</span></a>
                     </li>
                 </ul>
             </div>
@@ -53,7 +41,7 @@
                 <p class="FieldExplanation">
                     [% Translate("Here you can upload a configuration file to import a process to your system. The file needs to be in .yml format as exported by process management module.") | html %]
                 </p>
-                <ul class="ActionList SpacingTop">
+                <ul class="ActionList">
                     <li>
                         <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits">
                             <input type="hidden" name="Action" value="[% Env("Action") %]"/>
@@ -62,12 +50,12 @@
                             <input name="FileUpload" id="FileUpload" type="file" size="18" class="Fixed W100pc Validate_Required [% Data.FileUploadInvalid | html %]"/>
                             <div id="FileUploadError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                             <div id="FileUploadServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                            <fieldset class="SpacingTop">
+                            <fieldset class="flex-row">
                                 <input type="checkbox" id="OverwriteExistingEntitiesImport" name="OverwriteExistingEntities" value="1" checked="checked" />
                                 <label for="OverwriteExistingEntitiesImport">[% Translate("Overwrite existing entities") | html %]</label>
                             </fieldset>
-                            <button class="CallForAction Fullsize Center SpacingTop" type="submit" value="[% Translate("Upload process configuration") | html %]">
-                                <span><i class="fa fa-upload"></i>[% Translate("Import process configuration") | html %]</span>
+                            <button class="CallForAction btn-main btn-primary-ghost" type="submit" value="[% Translate("Upload process configuration") | html %]">
+                                <span>[% Translate("Import process configuration") | html %]</span>
                             </button>
                         </form>
                     </li>
@@ -83,7 +71,7 @@
                 <p class="FieldExplanation">
                     [% Translate("Here you can activate Ready2Adopt processes showcasing our best practices. Please note that some additional configuration may be required.") | html %]
                 </p>
-                <ul class="ActionList SpacingTop">
+                <ul class="ActionList">
                     <li>
                         <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits">
                             <input type="hidden" name="Action" value="[% Env("Action") %]"/>
@@ -92,12 +80,13 @@
                             [% Data.ExampleProcessList %]
                             <div id="ExampleProcessError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                             <div id="ExampleProcessServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                            <fieldset class="SpacingTop">
+
+                            <fieldset class="flex-row">
                                 <input type="checkbox" id="OverwriteExistingEntitiesExample" name="OverwriteExistingEntities" value="1" checked="checked" />
                                 <label for="OverwriteExistingEntitiesExample">[% Translate("Overwrite existing entities") | html %]</label>
                             </fieldset>
-                            <button class="CallForAction Fullsize Center SpacingTop" type="submit" value="[% Translate("Import Ready2Adopt process") | html %]">
-                                <span><i class="fa fa-upload"></i>[% Translate("Import Ready2Adopt process") | html %]</span>
+                            <button class="CallForAction btn-main btn-primary-ghost" type="submit" value="[% Translate("Import Ready2Adopt process") | html %]">
+                                <span>[% Translate("Import Ready2Adopt process") | html %]</span>
                             </button>
                         </form>
                     </li>
@@ -123,30 +112,30 @@
                 <h2>[% Translate('Related Actions') | html %]</h2>
             </div>
             <div class='Content'>
-                <ul class='ActionList SpacingTop'>
+                <ul class='ActionList'>
                     <li>
-                        <a href='[% Env("Baselink") %]Action=AdminACL' class='CallForAction Fullsize Center'>
+                        <a href='[% Env("Baselink") %]Action=AdminACL' class='CallForAction btn-main btn-primary-ghost'>
                             <span>
                                 [% Translate("Access Control Lists (ACL)") | html %]
                             </span>
                         </a>
                     </li>
                     <li>
-                        <a href='[% Env("Baselink") %]Action=AdminDynamicField' class='CallForAction Fullsize Center'>
+                        <a href='[% Env("Baselink") %]Action=AdminDynamicField' class='CallForAction btn-main btn-primary-ghost'>
                             <span>
                                 [% Translate('Dynamic Fields') | html %]
                             </span>
                         </a>
                     </li>
                     <li>
-                        <a href='[% Env("Baselink") %]Action=AdminGenericAgent' class='CallForAction Fullsize Center'>
+                        <a href='[% Env("Baselink") %]Action=AdminGenericAgent' class='CallForAction btn-main btn-primary-ghost'>
                             <span>
                                 [% Translate("Generic Agent") | html %]
                             </span>
                         </a>
                     </li>
                     <li>
-                        <a href="[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=View;Setting=Ticket%3A%3AFrontend%3A%3AAgentTicketZoom%23%23%23ProcessWidgetDynamicFieldGroups;ChallengeToken=KDtGaGclmu2ObuGcZSWayxkbvL5rOa5p;" class="CallForAction Fullsize Center">
+                        <a href="[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=View;Setting=Ticket%3A%3AFrontend%3A%3AAgentTicketZoom%23%23%23ProcessWidgetDynamicFieldGroups;ChallengeToken=KDtGaGclmu2ObuGcZSWayxkbvL5rOa5p;" class="CallForAction btn-main btn-primary-ghost">
                             <span>
                                 [% Translate("Manage Process Widiget Groups") | html %]
                             </span>
@@ -158,14 +147,27 @@
     </div>
 
     <div class="ContentColumn">
+    <h1 class="InvisibleText">[% Translate("Process Management") | html %]</h1>
+
+    [% BreadcrumbPath = [
+            {
+                Name => Translate('Process Management'),
+                Link => Env("Action"),
+            },
+        ]
+    %]
+
+    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
         <div class="WidgetSimple">
-            <div class="Header">
+            <div class="Header filter-items">
                 <h2>[% Translate("Processes") | html %]</h2>
-                <a href="#" class="icon-hover" id="ValidFilter" title="[% Translate("Filter") | html %]">
-                    <i class="fa fa-filter"></i>
+                <a href="#" id="ValidFilter" title="[% Translate("Filter") | html %]">
+                    <span class="show-valid">Show Valid</span>
+                    <span class="show-all">Show All</span>
                 </a>
             </div>
-            <div class="Content">
+            <div class="Content scroll-bar-styled">
                 <table class="DataTable" id="Processes">
                     <thead>
                         <tr>
@@ -188,17 +190,17 @@
                             <td title="[% Translate(Data.Description) | html %]">[% Translate(Data.Description) | truncate(80) | html %]</td>
                             <td>[% Translate(Data.State) | html %]</td>
                             <td class="Center">
-                                <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ProcessExport;ID=[% Data.ID | uri %]" title="[% Translate("Export Process Configuration") | html %]">
+                                <a class="table-icon-hover-md" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ProcessExport;ID=[% Data.ID | uri %]" title="[% Translate("Export Process Configuration") | html %]">
                                     <i class="fa fa-download"></i> <span class="InvisibleText">[% Translate("Export") | html %]</span>
                                 </a>
                             </td>
                             <td class="Center">
-                                <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ProcessCopy;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Copy Process") | html %]">
+                                <a class="table-icon-hover-md" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ProcessCopy;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Copy Process") | html %]">
                                     <i class="fa fa-copy"></i> <span class="InvisibleText">[% Translate("Copy") | html %]</span>
                                 </a>
                             </td>
                             <td class="Center">
-                                <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ProcessPrint;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]" class="AsPopup PopupType_ProcessOverview">
+                                <a class="table-icon-hover-md AsPopup PopupType_ProcessOverview" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ProcessPrint;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]">
                                     <i class="fa fa-print"></i> <span class="InvisibleText">[% Translate("Print") | html %]</span>
                                 </a>
                             </td>
@@ -219,5 +221,4 @@
             </div>
         </div>
     </div>
-    <div class="Clear"></div>
 </div>

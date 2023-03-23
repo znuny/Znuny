@@ -6,8 +6,8 @@
 // the enclosed file COPYING for license information (GPL). If you
 // did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 // --
-// todo delete me
-// nofilter(TidyAll::Plugin::OTRS::Common::Origin)
+// nofilter(TidyAll::Plugin::Znuny::JavaScript::ESLint)
+// nofilter(TidyAll::Plugin::Znuny::JavaScript::DebugCode)
 
 "use strict";
 
@@ -125,7 +125,7 @@ Core.Agent.Dashboard = (function (TargetNS) {
         Core.UI.DnD.Sortable(
             $('.SidebarColumn'),
             {
-                Handle: '.Header h2',
+                Handle: '.Header',
                 Items: '.CanDrag',
                 Placeholder: 'DropPlaceholder',
                 Tolerance: 'pointer',
@@ -150,7 +150,7 @@ Core.Agent.Dashboard = (function (TargetNS) {
         Core.UI.DnD.Sortable(
             $('.ContentColumn'),
             {
-                Handle: '.Header h2',
+                Handle: '.Header',
                 Items: '.CanDrag',
                 Placeholder: 'DropPlaceholder',
                 Tolerance: 'pointer',
@@ -174,6 +174,8 @@ Core.Agent.Dashboard = (function (TargetNS) {
 
         TargetNS.InitDashboardWidgetSettings();
         TargetNS.InitDashboardWidgetExpand();
+
+        TargetNS.InitDashboardWidgetBinding();
 
         Core.Agent.TableFilters.SetAllocationList();
 
@@ -526,7 +528,10 @@ Core.Agent.Dashboard = (function (TargetNS) {
         var WidgetRefresh = Core.Config.Get('CanRefresh-' + WidgetName);
         if (typeof WidgetRefresh !== 'undefined') {
             $('#Dashboard' + Core.App.EscapeSelector(WidgetRefresh.Name) + '_toggle').on('click', function() {
+
                 $('#Dashboard' + Core.App.EscapeSelector(WidgetRefresh.Name) + '-box').addClass('Loading');
+                $('#Dashboard' + Core.App.EscapeSelector(WidgetRefresh.Name) + '-box').find('.FilterCount').text($(this).attr('data-filter-count'));
+
                 Core.AJAX.ContentUpdate($('#Dashboard' + Core.App.EscapeSelector(WidgetRefresh.Name)), Core.Config.Get('Baselink') + 'Action=' + Core.Config.Get('Action') +';Subaction=Element;Name=' + WidgetRefresh.Name, function () {
                     $('#Dashboard' + Core.App.EscapeSelector(WidgetRefresh.Name) + '-box').removeClass('Loading');
                 });
@@ -799,6 +804,19 @@ Core.Agent.Dashboard = (function (TargetNS) {
      *      Initializes preferences for widget containers
      */
     function InitWidgetContainerPref (Params) {
+
+        var WidgetContainer = Core.Config.Get('WidgetContainer' + Params.NameForm),
+            FilterSelected,
+            FilterCount = 0;
+
+        if (WidgetContainer && typeof WidgetContainer['FilterSelected'] !== 'undefined' && WidgetContainer['FilterSelected'] != 'undefined' && typeof WidgetContainer['Filter'] !== 'undefined' && WidgetContainer['Filter'] !== 'undefined'){
+            FilterSelected = WidgetContainer['FilterSelected'] || 'All';
+            if(WidgetContainer.Filter[FilterSelected] && WidgetContainer.Filter[FilterSelected].Count){
+                FilterCount = WidgetContainer.Filter[FilterSelected].Count;
+            }
+            $('#Dashboard' + Core.App.EscapeSelector(Params.Name) + '-box').find('.FilterCount').text(FilterCount);
+        }
+
         TargetNS.RegisterUpdatePreferences($('#Dashboard' + Core.App.EscapeSelector(Params.Name) + '_submit'), 'Dashboard' + Core.App.EscapeSelector(Params.Name),$('#Dashboard' + Core.App.EscapeSelector(Params.NameForm) + '_setting_form'));
         Core.UI.RegisterToggleTwoContainer($('#Dashboard' + Core.App.EscapeSelector(Params.Name) + '-toggle'), $('#Dashboard' + Core.App.EscapeSelector(Params.Name) + '-setting'), $('#Dashboard' + Core.App.EscapeSelector(Params.Name)));
         Core.UI.RegisterToggleTwoContainer($('#Dashboard' + Core.App.EscapeSelector(Params.Name) + '_cancel'), $('#Dashboard' + Core.App.EscapeSelector(Params.Name) + '-setting'), $('#Dashboard' + Core.App.EscapeSelector(Params.Name)));
@@ -901,10 +919,31 @@ Core.Agent.Dashboard = (function (TargetNS) {
             WidgetName,
             WidgetTitle;
 
+
         function LoadInactiveWidgetList() {
 
             $InactiveList = $('ul.dropdown-search-menu');
             $InactiveList.empty();
+
+            // Forwwward
+            $('.SettingsWidget').find('.search-wrapper').append('<i class="fa fa-caret-down"></i>');
+            $( '.search-wrapper' ).delegate( '*', 'focus blur', function() {
+                var elem = $( this );
+                var arrowIcon = $('.search-wrapper .fa');
+                setTimeout(function() {
+                    arrowIcon.toggleClass( "animate", elem.is( ":focus" ) );
+                }, 0 );
+            });
+
+                // $('.dropdown-search-menu .dropdown-item').on('click', function() {
+                //     console.log("test");
+                //     $('body').addClass('test');
+
+                //     $(".search-wrapper .FilterAvailableWidgets").focus();
+                // });
+
+            // Forwwward
+
 
             // load inactive widgets
             $('.SettingsWidget').find('input[type="checkbox"][name=Backend]').each(function() {
@@ -1032,13 +1071,15 @@ Core.Agent.Dashboard = (function (TargetNS) {
         // Initialize remove filter event
         WidgetContainer = Core.Config.Get('WidgetContainer' + Value.NameForm);
         if (typeof WidgetContainer !== 'undefined') {
+
+            DashboardTicketWidgetFilter(WidgetContainer);
+
             if (WidgetContainer.FilterActive) {
                 DashboardTicketWidgetRemoveFilter(WidgetContainer);
             }
             else {
                 $('#Dashboard' + Core.App.EscapeSelector(WidgetContainer.Name) + '-box').find('.RemoveFilters').remove();
             }
-            DashboardTicketWidgetFilter(WidgetContainer);
         }
 
         // Reinitialize events for Customer Users table on update.
@@ -1341,7 +1382,9 @@ Core.Agent.Dashboard = (function (TargetNS) {
 
             var $TriggerObj = $(this),
                 $ColumnSettingsContainer = $TriggerObj.next('.ColumnSettingsContainer'),
-                FilterName;
+                FilterName               = $ColumnSettingsContainer.find('select').attr('name');
+
+            Core.UI.InputFields.InitSelect($('#' + FilterName), {Force: true});
 
             if ($TriggerObj.hasClass('Active')) {
 
@@ -1387,30 +1430,26 @@ Core.Agent.Dashboard = (function (TargetNS) {
                                 });
                         }
 
-                        // refresh filter dropdown
-                        FilterName = $ColumnSettingsContainer
-                            .find('select')
-                            .attr('name');
-
                         if ($TriggerObj.closest('th').hasClass('CustomerID') || $TriggerObj.closest('th').hasClass('CustomerUserID') || $TriggerObj.closest('th').hasClass('Responsible') || $TriggerObj.closest('th').hasClass('Owner')) {
 
                             if (!$TriggerObj.parent().find('.SelectedValue').length) {
                                 Core.AJAX.FormUpdate($TriggerObj.parents('form'), 'AJAXFilterUpdate', FilterName, [ FilterName ], function() {
 
-                                    var AutoCompleteValue = $ColumnSettingsContainer
-                                            .find('select')
-                                            .val(),
-                                        AutoCompleteText  = $ColumnSettingsContainer
-                                            .find('select')
-                                            .find('option:selected')
-                                            .text();
+                                    // #136 - todo this autocomplete has been disabled for now
+                                    //var AutoCompleteValue = $ColumnSettingsContainer
+                                    //        .find('select')
+                                    //        .val(),
+                                    //    AutoCompleteText  = $ColumnSettingsContainer
+                                    //        .find('select')
+                                    //        .find('option:selected')
+                                    //        .text();
 
-                                    if (AutoCompleteValue !== 'DeleteFilter') {
+                                    // if (AutoCompleteValue !== 'DeleteFilter') {
 
-                                        $ColumnSettingsContainer
-                                            .find('select')
-                                            .after('<span class="SelectedValue Hidden"><span title="' + AutoCompleteText + ' (' + AutoCompleteValue + ')">' + AutoCompleteText + ' (' + AutoCompleteValue + ')</span></span>');
-                                    }
+                                    //     $ColumnSettingsContainer
+                                    //         .find('select')
+                                    //         .after('<span class="SelectedValue Hidden"><span title="' + AutoCompleteText + ' (' + AutoCompleteValue + ')">' + AutoCompleteText + ' (' + AutoCompleteValue + ')</span></span>');
+                                    // }
                                 });
                             }
                         }
@@ -1452,6 +1491,8 @@ Core.Agent.Dashboard = (function (TargetNS) {
                 }
 
                 $('#Dashboard' + Core.App.EscapeSelector(WidgetRefreshData.Name) + '-box').addClass('Loading');
+                $('#Dashboard' + Core.App.EscapeSelector(WidgetRefreshData.Name) + '-box').find('.FilterCount').text($(this).attr('data-filter-count'));
+
                 Core.AJAX.ContentUpdate($('#Dashboard' + Core.App.EscapeSelector(WidgetRefreshData.Name)), Core.Config.Get('Baselink') + 'Action=' + Core.Config.Get('Action') + ';Subaction=Element;Name=' + WidgetRefreshData.Name + ';AdditionalFilter=' + AdditionalFilter + ';Filter=' + Filter + ';CustomerID=' + WidgetRefreshData.CustomerID + ';CustomerUserID=' + WidgetRefreshData.CustomerUserID + ';SortBy=' + SortBy + ';OrderBy=' + OrderBy, function () {
                     $('#Dashboard' + Core.App.EscapeSelector(WidgetRefreshData.Name) + '-box').removeClass('Loading');
                 });
@@ -1469,17 +1510,25 @@ Core.Agent.Dashboard = (function (TargetNS) {
      * @description
      *      Initializes the dashboard widget remove filter event.
      */
-    function DashboardTicketWidgetRemoveFilter (WidgetRemoveFilter) {
-        if (!$('#Dashboard' + Core.App.EscapeSelector(WidgetRemoveFilter.Name) + '-box').find('.ActionMenu').find('.RemoveFilters').length) {
+    function DashboardTicketWidgetRemoveFilter(WidgetRemoveFilter) {
+
+        var $DashboardRemoveFilters = '<div class="WidgetAction RemoveFilters"><a href="#" id="Dashboard' + WidgetRemoveFilter.Name + '-remove-filters" title=' + Core.Language.Translate("Remove active filters for this widget.") + '">'+ Core.Language.Translate("Clear all filters") + '</a></div>';
+
+        if (!$('#Dashboard' + Core.App.EscapeSelector(WidgetRemoveFilter.Name) + '-box').find('.HeaderFilter').find('.RemoveFilters').length) {
+
             $('#Dashboard' + Core.App.EscapeSelector(WidgetRemoveFilter.Name) + '-box')
-                .find('.ActionMenu')
-                .prepend('<div class="WidgetAction RemoveFilters"><a href="#" id="Dashboard' + WidgetRemoveFilter.Name + '-remove-filters" title=' + Core.Language.Translate("Remove active filters for this widget.") + '"><i class="fa fa-trash-o"></i></a></div>')
+                .find('.HeaderFilter')
+                .append($DashboardRemoveFilters)
                 .find('.RemoveFilters')
-                .on('click', function() {
+                .on('click', function () {
 
                     // get active filter
                     var Filter = $('#Dashboard' + Core.App.EscapeSelector(WidgetRemoveFilter.Name) + '-box').find('.Tab.Actions li.Selected a').attr('data-filter'),
                     AdditionalFilter = $('#Dashboard' + Core.App.EscapeSelector(WidgetRemoveFilter.Name) + '-box').find('.Tab.Actions li.AdditionalFilter.Selected a').attr('data-filter') || '';
+
+                    // add FilterCount of current selected dropdown filter
+                    $('#Dashboard' + Core.App.EscapeSelector(WidgetRemoveFilter.Name) + '-box').find('.FilterCount').text($(this).attr('data-filter-count'));
+
                     $('#Dashboard' + Core.App.EscapeSelector(WidgetRemoveFilter.Name) + '-box').addClass('Loading');
                     Core.AJAX.ContentUpdate($('#Dashboard' + Core.App.EscapeSelector(WidgetRemoveFilter.Name)), Core.Config.Get('Baselink') + 'Action=' + Core.Config.Get('Action') + ';Subaction=Element;Name=' + WidgetRemoveFilter.Name + ';AdditionalFilter=' + AdditionalFilter + ';Filter=' + Filter + ';CustomerID=' + WidgetRemoveFilter.CustomerID + ';CustomerUserID=' + WidgetRemoveFilter.CustomerUserID + ';RemoveFilters=1', function () {
                         $('#Dashboard' + Core.App.EscapeSelector(WidgetRemoveFilter.Name) + '-box').removeClass('Loading');
@@ -1500,22 +1549,41 @@ Core.Agent.Dashboard = (function (TargetNS) {
      *      Initializes the dashboard widget filter event.
      */
     function DashboardTicketWidgetFilter (WidgetFilterData) {
-        $('#Dashboard' + Core.App.EscapeSelector(WidgetFilterData.Name) + '-box').find('.Tab.Actions li a').off('click').on('click', function() {
+
+        // move DashboardActions to the <div class="Header"> after <h2>
+        var $DashboardActions = $('#Dashboard' + Core.App.EscapeSelector(WidgetFilterData.Name)).find('.DashboardActions').detach();
+
+        // created $FilterContainer var, added it to Header and prepended $DashboardActions to it
+        if($('#Dashboard' + Core.App.EscapeSelector(WidgetFilterData.Name) + '-box').find('.HeaderFilter').length) {
+            $('#Dashboard' + Core.App.EscapeSelector(WidgetFilterData.Name) + '-box').find('.HeaderFilter').detach();
+        }
+        var $FilterContainer = "<div class='HeaderFilter'></div>";
+        $('#Dashboard' + Core.App.EscapeSelector(WidgetFilterData.Name) + '-box').find('h2').after($FilterContainer);
+        $('#Dashboard' + Core.App.EscapeSelector(WidgetFilterData.Name) + '-box').find('.HeaderFilter').prepend($DashboardActions);
+
+        // additional click event for dropdown-menu to show/hide
+        $('#Dashboard' + Core.App.EscapeSelector(WidgetFilterData.Name) + '-box').find('.DashboardActions').off('click.DashboardActions').on('click.DashboardActions', function() {
+            $(this).find('.Tab.Actions').toggle();
+        });
+
+        $('#Dashboard' + Core.App.EscapeSelector(WidgetFilterData.Name) + '-box').find('.Tab.Actions li a').off('click.TabAction').on('click.TabAction', function() {
                 var Filter, AdditionalFilter = '',
                 CustomerID, CustomerUserID;
 
                 if ($(this).parent().hasClass('AdditionalFilter')) {
-                     Filter           = $(this).parent().siblings('li.Selected:not(.AdditionalFilter)').find('a').attr('data-filter');
-                     AdditionalFilter = $(this).attr('data-filter');
+                    Filter           = $(this).parent().siblings('li.Selected:not(.AdditionalFilter)').find('a').attr('data-filter');
+                    AdditionalFilter = $(this).attr('data-filter');
                 }
                 else {
-                     Filter           = $(this).attr('data-filter');
-                     AdditionalFilter = $(this).parent().siblings('li.AdditionalFilter.Selected').find('a').attr('data-filter') || '';
+                    Filter           = $(this).attr('data-filter');
+                    AdditionalFilter = $(this).parent().siblings('li.AdditionalFilter.Selected').find('a').attr('data-filter') || '';
                 }
 
-                CustomerID = $('input[name=CustomerID]').val() || '';
+                CustomerID     = $('input[name=CustomerID]').val() || '';
                 CustomerUserID = $('input[name=CustomerUserID]').val() || '';
 
+                // add FilterCount of current selected dropdown filter
+                $('#Dashboard' + Core.App.EscapeSelector(WidgetFilterData.Name) + '-box').find('.FilterCount').text($(this).attr('data-filter-count'));
                 $('#Dashboard' + Core.App.EscapeSelector(WidgetFilterData.Name) + '-box').addClass('Loading');
                 Core.AJAX.ContentUpdate($('#Dashboard' + Core.App.EscapeSelector(WidgetFilterData.Name)), Core.Config.Get('Baselink') + 'Action=' + Core.Config.Get('Action') + ';Subaction=Element;Name=' + WidgetFilterData.Name + ';AdditionalFilter=' + AdditionalFilter + ';Filter=' + Filter + ';CustomerID=' + encodeURIComponent(CustomerID) + ';CustomerUserID=' + encodeURIComponent(CustomerUserID) + ';SortBy=' + WidgetFilterData.SortBy + ';OrderBy=' + WidgetFilterData.OrderBy + ';SortingColumn=' + WidgetFilterData.SortingColumn + ';TabAction=1', function () {
                     $('#Dashboard' + Core.App.EscapeSelector(WidgetFilterData.Name) + '-box').removeClass('Loading');
@@ -1539,9 +1607,10 @@ Core.Agent.Dashboard = (function (TargetNS) {
             UserDashboardWidgetExpand = $(this).attr('data-widget-name');
 
             if (UserDashboardWidgetExpand == 'All'){
-                Core.Agent.PreferencesUpdate('UserDashboardWidgetExpand', UserDashboardWidgetExpand);
-                Core.App.InternalRedirect({
-                    Action: 'AgentDashboard',
+                Core.Agent.PreferencesUpdate('UserDashboardWidgetExpand', UserDashboardWidgetExpand, function() {
+                    Core.App.InternalRedirect({
+                        Action: 'AgentDashboard',
+                    });
                 });
                 return;
             }
@@ -1582,6 +1651,22 @@ Core.Agent.Dashboard = (function (TargetNS) {
 
         $('.ContentColumn').find('.WidgetSimple').addClass('Hidden');
         $('.ContentColumn').find('#' + WidgetSelector).removeClass('Hidden');
+    }
+
+    /**
+     * @name InitDashboardWidgetBinding
+     * @memberof Core.Agent.Dashboard
+     * @function
+     * @description
+     *      Initializes the dashboard widget click event.
+     */
+    TargetNS.InitDashboardWidgetBinding = function () {
+
+        // additional click event for ActionMenuList to show/hide
+        $('.WidgetSimple').find('.ActionMenu').off('click.ActionMenu').on('click.ActionMenu', function() {
+            $(this).find('.ActionMenuList').toggle();
+        });
+
     }
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');

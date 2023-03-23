@@ -56,28 +56,34 @@ Core.Agent = (function (TargetNS) {
      */
     function InitAvatarFlyout() {
 
-        var Timeout,
+        var Timeout = {},
+            ID,
             TimeoutDuration = 700;
 
-        // init the avatar toggle
-        $('#ToolBar .UserAvatar > a').off('click.UserAvatar').on('click.UserAvatar', function() {
-            $(this).next('div').fadeToggle('fast');
-            $(this).toggleClass('Active');
-            return false;
-        });
+        $.each($('#HeaderToolBar > li'), function () {
 
-        $('#ToolBar .UserAvatar > div').off('mouseenter.UserAvatar').on('mouseenter.UserAvatar', function() {
-            if (Timeout && $(this).css('opacity') == 1) {
-                clearTimeout(Timeout);
-            }
-        });
+            ID = $(this).attr('id');
 
-        $('#ToolBar .UserAvatar > div').off('mouseleave.UserAvatar').on('mouseleave.UserAvatar', function() {
-            Timeout = setTimeout(function() {
-                $('#ToolBar .UserAvatar > div').fadeOut('fast');
-                $('#ToolBar .UserAvatar > div').prev('a').removeClass('Active');
-            }, TimeoutDuration);
-        });
+            // init the HeaderToolBar li toggle
+            $(this).find('a').off('click.HeaderToolBar').on('click.HeaderToolBar', function() {
+                $(this).next('div').fadeToggle('fast');
+                $(this).toggleClass('Active');
+            });
+
+            $(this).find('div').first().off('mouseenter.HeaderToolBar').on('mouseenter.HeaderToolBar', function() {
+                if (Timeout[ID] && $(this).css('opacity') == 1) {
+                    clearTimeout(Timeout[ID]);
+                }
+            });
+
+            $(this).find('div').first().off('mouseleave.HeaderToolBar').on('mouseleave.HeaderToolBar', function() {
+                var $Content = $(this);
+                Timeout[ID] = setTimeout(function() {
+                    $Content.fadeOut('fast');
+                    $Content.prev('a').removeClass('Active');
+                }, TimeoutDuration);
+            });
+        })
     }
 
     /**

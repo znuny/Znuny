@@ -300,7 +300,7 @@
 [% Data.ArticleTree %]
             </div>
 [% RenderBlockStart("HintNoArticles") %]
-            <div class="WidgetSimple">
+            <div class="WidgetSimple has-no-articles">
                 <div class="Content">
                     <p>[% Translate("This item has no articles yet.") | html %]</p>
                 </div>

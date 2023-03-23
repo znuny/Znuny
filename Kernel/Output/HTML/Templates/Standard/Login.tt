@@ -143,32 +143,33 @@ X-OTRS-Login: [% Env("Baselink") %]
                             <input type="hidden" name="TimeZoneOffset" id="TimeZoneOffset" value=""/>
                             <fieldset>
                                 <div>
-                                    <label for="User" class="InvisibleText Mandatory">
+                                    <label for="User" class="Mandatory">
                                         <span class="Marker">*</span> [% Translate("Username") | html %]
                                     </label>
                                     <input autocorrect="off" autocomplete="[% Data.UserNameAutocomplete %]" placeholder="[% Translate("Username") | html %]" autocapitalize="off" type="text" id="User" name="User" value="[% Data.User | html %]" class="W75pc Validate_Required" />
                                     <div id="UserError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
                                 </div>
                                 <div>
-                                    <label for="Password" class="InvisibleText Mandatory">
+                                    <label for="Password" class="Mandatory">
                                         <span class="Marker">*</span> [% Translate("Password") | html %]
                                     </label>
                                     <input type="password" autocomplete="[% Data.PasswordAutocomplete %]" placeholder="[% Translate("Password") | html %]" id="Password" name="Password" class="W75pc Validate_Required" />
                                     <div id="PasswordError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
                                 </div>
-                                <div class="Clear"></div>
+
 [% RenderBlockStart("AuthTwoFactor") %]
-                                <label for="TwoFactorToken" class="InvisibleText [% Data.MandatoryClass | html %]">
+                                <div>
+                                    <label for="TwoFactorToken" class="[% Data.MandatoryClass | html %]">
 [% RenderBlockStart("AuthTwoFactorMandatory") %]
-                                    <span class="Marker">*</span>
+                                        <span class="Marker">*</span>
 [% RenderBlockEnd("AuthTwoFactorMandatory") %]
                                         [% Translate("2 Factor Token") | html %]
-                                </label>
-                                <div>
+                                    </label>
+
                                     <input type="text" placeholder="[% Translate("2 Factor Token") | html %]" id="TwoFactorToken" name="TwoFactorToken" class="W75pc [% Data.ValidateRequired | html %]" autocomplete="one-time-code"/>
                                     <div id="TwoFactorTokenError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
                                 </div>
-                                <div class="Clear"></div>
+
 [% RenderBlockEnd("AuthTwoFactor") %]
 
 <!--
@@ -177,13 +178,12 @@ X-OTRS-Login: [% Env("Baselink") %]
 #                                    <input type="checkbox" id="Remember" name="Remember" title="Remember my login on this computer" readonly="readonly" />
 #                                    <label for="Remember">Remember my login on this computer</label>
 #                                </div>
-#                                <div class="Clear"></div>
                                 -->
 
                                 <div class="Field">
-                                    <button type="submit" id="LoginButton" class="Primary CallForAction Fullsize Center btn-main btn-primary" value="[% Translate("Login") | html %]" disabled="disabled"><span>[% Translate("Login") | html %]</span></button>
+                                    <button type="submit" id="LoginButton" class="btn-main btn-primary" value="[% Translate("Login") | html %]" disabled="disabled"><span>[% Translate("Login") | html %]</span></button>
                                 </div>
-                                <div class="Clear"></div>
+
                             </fieldset>
                         </form>
                     </div>
@@ -205,20 +205,20 @@ X-OTRS-Login: [% Env("Baselink") %]
                             <input type="hidden" name="Lang" value="[% Env("UserLanguage") | html %]"/>
 
                             <fieldset>
-                                <label class="InvisibleText" for="PasswordUser" class="Mandatory">
-                                    <span class="Marker">*</span>
-                                        [% Translate("Username") | html %]:
-                                </label>
                                 <div>
+                                    <label class="" for="PasswordUser" class="Mandatory">
+#                                       <span class="Marker">*</span>
+                                        [% Translate("Username") | html %]
+                                    </label>
                                     <input placeholder="[% Translate("Username") | html %]" type="text" id="PasswordUser" name="User" value="" class="W75pc Validate_Required" readonly="readonly"/>
                                     <div id="PasswordUserError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
                                 </div>
-                                <div class="Clear"></div>
+
 
                                 <div>
-                                    <button type="submit" Class="Primary CallForAction Fullsize Center" value="[% Translate("Request New Password") | html %]" disabled="disabled"><span>[% Translate("Request New Password") | html %]</span></button>
+                                    <button type="submit" Class="Primary CallForAction Fullsize Center btn-main btn-primary" value="[% Translate("Request New Password") | html %]" disabled="disabled"><span>[% Translate("Request New Password") | html %]</span></button>
                                 </div>
-                                <div class="Clear"></div>
+
                             </fieldset>
                         </form>
                     </div>

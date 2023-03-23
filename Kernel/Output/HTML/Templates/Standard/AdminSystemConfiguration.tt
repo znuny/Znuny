@@ -12,28 +12,9 @@
     SET DocumentationLink      = "<a href='https://doc.otrs.com/doc/manual/admin/" _ Data.ManualVersion _ ".0/en/html/configuration.html#sysconfig' target='_blank'>" _ DocumentationLinkText.html() _ "</a>";
 %]
 
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
 
-    <h1 class="InvisibleText">[% Translate("System configuration") | html %]</h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('System Configuration'),
-                Link => 'AdminSystemConfiguration',
-            },
-        ]
-    %]
-
-    [% FOREACH Item IN Data.Path %]
-        [% BreadcrumbPath.push({ Name => Item.Name, Link => 'AdminSystemConfigurationGroup;RootNavigation=' _ Item.Value }) %]
-    [% END %]
-
-    [% FOREACH Item IN Data.Parameters %]
-        [% BreadcrumbPath.push({ Name => Item.Name, Link => 'AdminSystemConfiguration;Subaction=' _ Item.Value }) %]
-    [% END %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-    <div class="SidebarColumn">
+    <div class="SidebarColumn ActionsSideBarComp">
         [% INCLUDE "SystemConfiguration/Sidebar/Actions.tt" %]
         [% IF Data.SettingCount %]
         [% INCLUDE "SystemConfiguration/Sidebar/Navigation.tt" %]
@@ -43,24 +24,49 @@
     </div>
 
     <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("System configuration") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('System Configuration'),
+                    Link => 'AdminSystemConfiguration',
+                },
+            ]
+        %]
+
+        [% FOREACH Item IN Data.Path %]
+            [% BreadcrumbPath.push({ Name => Item.Name, Link => 'AdminSystemConfigurationGroup;RootNavigation=' _ Item.Value }) %]
+        [% END %]
+
+        [% FOREACH Item IN Data.Parameters %]
+            [% BreadcrumbPath.push({ Name => Item.Name, Link => 'AdminSystemConfiguration;Subaction=' _ Item.Value }) %]
+        [% END %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
         <div class="WidgetSimple">
             <div class="Content">
                 [% IF Data.SettingCount %]
                 <ul class="GettingStarted">
                     <li>
-                        <i class="fa fa-code-fork"></i>
+                        <span class="Icons">
+                            <i class="fa fa-code-fork"></i>
+                        </span>
                         <p>
                             [% Translate("Navigate through the available settings by using the tree in the navigation box on the left side.") | html %]
                         </p>
                     </li>
                     <li>
-                        <i class="fa fa-search"></i>
+                        <span class="Icons">
+                            <i class="fa fa-search"></i>
+                        </span>
                         <p>
                             [% Translate("Find certain settings by using the search field below or from search icon from the top navigation.") | html %]
                         </p>
                     </li>
                     <li>
-                        <i class="fa fa-lightbulb-o"></i>
+                        <span class="Icons">
+                            <i class="fa fa-lightbulb-o"></i>
+                        </span>
                         <p>
                             [% Translate("Find out how to use the system configuration by reading the %s.") | html | ReplacePlaceholders(DocumentationLink) %]
                         </p>
@@ -70,11 +76,9 @@
                     <input type="hidden" name="Action" value="AdminSystemConfiguration"/>
                     <input type="hidden" name="Subaction" value="Search"/>
                     <input type="hidden" name="Category" value="All"/>
-                    <span>
+                    <span class="TableFilterContainer">
+                        <i class="fa fa-search"></i>
                         <input type="text" autofocus autocomplete="off" placeholder="[% Translate("Search in all settings...") | html %]" name="Search" id="SysConfigSearch" value="[% Data.Search | html %]" title="[% Translate("Search") | html %]" />
-                        <button type="submit" title="[% Translate("Search") | html %]" value="[% Translate("Search") | html %]">
-                            <span><i class="fa fa-search"></i></span>
-                        </button>
                     </span>
                 </form>
                 [% ELSE %]
@@ -86,5 +90,4 @@
             </div>
         </div>
     </div>
-    <div class="Clear"></div>
 </div>

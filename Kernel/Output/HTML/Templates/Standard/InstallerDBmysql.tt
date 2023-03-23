@@ -42,7 +42,6 @@
                         <input type="text" id="DBHost" name="DBHost" value="[% Config("DatabaseHost") %]" class="W50pc" />
                     </div>
                     <div class="Clear"></div>
-
 [% RenderBlockStart("DatabaseMySQLUseExisting") %]
                     <label for="DBName">[% Translate("Database name") | html %]:</label>
                     <div class="Field">
@@ -76,7 +75,6 @@
 
                     <div class="Clear"></div>
                 </fieldset>
-
 [% RenderBlockStart("DatabaseMySQLCreate") %]
                 <fieldset class="TableLike Hidden HideMe">
                     <h4>

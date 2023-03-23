@@ -1,69 +1,73 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-# TODO delete me
-## nofilter(TidyAll::Plugin::OTRS::Common::Origin)
 
 [% RenderBlockStart("OverviewNavBar") %]
 <div class="OverviewBox ARIARoleMain [% Data.View | html %]">
-    <h1>[% Translate(Data.TitleName) | html %]: [% IF Env("Action") == 'AgentTicketQueue' %][% Data.TitleValue | html %][% ELSE %][% Translate(Data.TitleValue) | html %][% END %]</h1>
+    <h1>[% Translate(Data.TitleName) | html %]:
+        <div class="overview-breadcrumb">
+            [% IF Env("Action") == 'AgentTicketQueue' %]
+                [% Data.TitleValue %]
+            [% ELSE %]
+                [% Translate(Data.TitleValue) | html %]
+            [% END %]
+        </div>
+    </h1>
 
     [% Data.DataInTheMiddle %]
 
     <div class="OverviewControl" id="OverviewControl">
         <div>
             <div class="ControlRow">
-                [% RenderBlockStart("OverviewNavBarFilter") %]
+[% RenderBlockStart("OverviewNavBarFilter") %]
                 <ul class="Tabs">
-                    [% RenderBlockStart("OverviewNavBarFilterItem") %]
-                        [% RenderBlockStart("OverviewNavBarFilterItemSelected") %]
+[% RenderBlockStart("OverviewNavBarFilterItem") %]
+[% RenderBlockStart("OverviewNavBarFilterItemSelected") %]
                             <li class="Active [% Data.CSS | html %]">
                                 <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkFilter %]Filter=[% Data.Filter | uri %]">[% Translate(Data.Name) | html %]<span>[% Data.Count | html %]</span></a>
                             </li>
-                        [% RenderBlockEnd("OverviewNavBarFilterItemSelected") %]
-
-                        [% RenderBlockStart("OverviewNavBarFilterItemSelectedNot") %]
+[% RenderBlockEnd("OverviewNavBarFilterItemSelected") %]
+[% RenderBlockStart("OverviewNavBarFilterItemSelectedNot") %]
                             <li class="[% Data.CSS | html %]">
                                 <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkFilter %]Filter=[% Data.Filter | uri %]">[% Translate(Data.Name) | html %]<span>[% Data.Count | html %]</span></a>
                             </li>
-                        [% RenderBlockEnd("OverviewNavBarFilterItemSelectedNot") %]
-
-                        [% RenderBlockStart("OverviewNavBarFilterItemSplit") %]
+[% RenderBlockEnd("OverviewNavBarFilterItemSelectedNot") %]
+[% RenderBlockStart("OverviewNavBarFilterItemSplit") %]
                             -
-                        [% RenderBlockEnd("OverviewNavBarFilterItemSplit") %]
-                    [% RenderBlockEnd("OverviewNavBarFilterItem") %]
+[% RenderBlockEnd("OverviewNavBarFilterItemSplit") %]
+[% RenderBlockEnd("OverviewNavBarFilterItem") %]
                 </ul>
-                [% RenderBlockEnd("OverviewNavBarFilter") %]
-
-                [% RenderBlockStart("OverviewNavBarPageBack") %]
+[% RenderBlockEnd("OverviewNavBarFilter") %]
+[% RenderBlockStart("OverviewNavBarPageBack") %]
                     <ul class="Tabs">
                         <li>
                             <a name="OverviewControl" id="TicketSearch" href="[% Env("Baselink") %]Action=[% Env("Action") %];[% Data.LinkBack %]">[% Translate("Change search options") | html %] [% Data.ProfileName | html %]</a>
                         </li>
                     </ul>
-                [% RenderBlockEnd("OverviewNavBarPageBack") %]
-
-
-                [% RenderBlockStart("ContextSettings") %]
+[% RenderBlockEnd("OverviewNavBarPageBack") %]
+[% RenderBlockStart("ContextSettings") %]
                     <ul class="ContextFunctions">
-
-                    [% RenderBlockStart("DocumentActionRowRemoveColumnFilters") %]
+[% RenderBlockStart("DocumentActionRowRemoveColumnFilters") %]
                         <li class="[% Data.CSS | html %]">
                             <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Filter=[% Data.Filter %];View=[% Data.View %];[% Data.LinkFilter %];DeleteFilters=DeleteFilters" title="[% Translate("Remove active filters for this screen.") | html %]">
-# ---
-# Forwwward
-# ---
-# - replaced <i> trash can icon with "Clear all filters"
-                                Clear all filters
-# ---
+                                [% Translate("Clear all filters") | html %]
                             </a>
                         </li>
-                    [% RenderBlockEnd("DocumentActionRowRemoveColumnFilters") %]
+[% RenderBlockEnd("DocumentActionRowRemoveColumnFilters") %]
+
+                        [% IF Env('Action') == 'AgentTicketMentionView' %]
+                            <li class="RemoveMention ContextSettings">
+                                <a href="#" id="RemoveMention" class="icon-hover" title="[% Translate("Remove mention") | html %]">
+                                    <i class="fa fa-eye-slash"></i>
+                                    <span>[% Translate("Remove mention") | html %]</span>
+                                </a>
+                            </li>
+                        [% END %]
 
                         <li class="ContextSettings">
                             <a class="icon-hover" href="#" id="ShowContextSettingsDialog" title="[% Translate("Settings") | html %]">
@@ -86,10 +90,10 @@
                                         [% Data.PageShownString %]
                                     </div>
                                 </span>
-                                <!--<div class="Clear"></div>-->
+
 
                                 <span class="ticket-modal modal-col-wrapper">
-                                [% RenderBlockStart("FilterColumnSettings") %]
+[% RenderBlockStart("FilterColumnSettings") %]
                                     <input type="hidden" class="ColumnsEnabledJSON" value="[% Data.ColumnsEnabled | html %]" />
                                     <input type="hidden" class="ColumnsAvailableJSON" value="[% Data.ColumnsAvailable | html %]" />
                                     <input type="hidden" name="Group" value="[% Data.GroupName | html %]"/>
@@ -115,68 +119,54 @@
                                             <ul class="AllocationList Tablelike AssignedFields OrderNumbers SettingsOverview scroll-bar-styled" id="AssignedFields-Dashboard[% Data.Name | html %]"></ul>
                                         </div>
                                     </div>
-                                    <!--<div class="Clear"></div>-->
 
-                                [% RenderBlockEnd("FilterColumnSettings") %]
+[% RenderBlockEnd("FilterColumnSettings") %]
                                 </span>
 
                             </fieldset>
                         </form>
                     </div>
-
-                [% RenderBlockEnd("ContextSettings") %]
+[% RenderBlockEnd("ContextSettings") %]
             </div>
-
 
             <div class="ActionRow">
                 <div class="OverviewActions">
                     [% Data.ActionRow %]
-
                     <div>
-                    [% RenderBlockStart("OverviewNavBarPageNavBar") %]
+[% RenderBlockStart("OverviewNavBarPageNavBar") %]
                         <span class="Pagination">
                             <ul>
                                 <li>
                                     <span>[% Data.ResultLong %]</span>
                                 </li>
-
-                                <li class="page-links">
-                                    [% Data.SiteNavBarLong %]
-                                </li>
+                                <li class="page-links">[% Data.SiteNavBarLong %]</li>
                             </ul>
                         </span>
-                    [% RenderBlockEnd("OverviewNavBarPageNavBar") %]
+[% RenderBlockEnd("OverviewNavBarPageNavBar") %]
 
                         <ul class="OverviewZoom">
-                        [% RenderBlockStart("OverviewNavBarViewMode") %]
-
-                            [% RenderBlockStart("OverviewNavBarViewModeSelected") %]
+[% RenderBlockStart("OverviewNavBarViewMode") %]
+[% RenderBlockStart("OverviewNavBarViewModeSelected") %]
                                 <li class="Active">
                                     <a class="[% Data.Name | html %]" name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];Filter=[% Data.Filter | uri %];View=[% Data.View | uri %];[% Data.LinkFilter %]" title="[% Translate(Data.Name) | html %]">
                                         [% Translate(Data.NameShort) | html %]
                                     </a>
                                 </li>
-                            [% RenderBlockEnd("OverviewNavBarViewModeSelected") %]
-
-                            [% RenderBlockStart("OverviewNavBarViewModeNotSelected") %]
+[% RenderBlockEnd("OverviewNavBarViewModeSelected") %]
+[% RenderBlockStart("OverviewNavBarViewModeNotSelected") %]
                                 <li>
                                     <a class="[% Data.Name | html %]" name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];Filter=[% Data.Filter | uri %];View=[% Data.View | uri %];[% Data.LinkFilter %]" title="[% Translate(Data.Name) | html %]">
                                         [% Translate(Data.NameShort) | html %]
                                     </a>
                                 </li>
-                            [% RenderBlockEnd("OverviewNavBarViewModeNotSelected") %]
-
-                        [% RenderBlockEnd("OverviewNavBarViewMode") %]
+[% RenderBlockEnd("OverviewNavBarViewModeNotSelected") %]
+[% RenderBlockEnd("OverviewNavBarViewMode") %]
                         </ul>
                     </div>
-
-                    <!--<div class="ClearLeft"></div>-->
                 </div>
-# sort order bar if needed
                 [% Data.SortOrderBar %]
             </div>
         </div>
     </div>
 </div>
-
 [% RenderBlockEnd("OverviewNavBar") %]

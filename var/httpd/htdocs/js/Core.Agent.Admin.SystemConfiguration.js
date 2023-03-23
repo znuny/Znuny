@@ -62,6 +62,11 @@ Core.Agent.Admin = Core.Agent.Admin || {};
                     }
                 });
 
+                // close dialog on "cancel" button click
+                $('.ContentFooter #Cancel').on('click', function () {
+                    Core.UI.Dialog.CloseDialog($('.Dialog:visible'));
+                });
+
                 $('#SearchFormSubmit').off('click.StartSearch').on('click.StartSearch', function() {
 
                     if (!$('.AdminSystemConfigurationSearchForm input[name=Search]').val()) {
@@ -115,7 +120,7 @@ Core.Agent.Admin = Core.Agent.Admin || {};
                     if (Response && parseInt(Response, 10) === -1) {
                         $DialogObj.find('.Overlay.Preparing').fadeOut();
                         $DialogObj.find('#DeploymentComment').fadeIn();
-                        $DialogFooterObj.find('.ButtonsRegular').fadeIn();
+                        $DialogFooterObj.find('.ButtonsRegular').fadeIn().css('display', 'flex');
                     }
                     else {
 
@@ -439,7 +444,7 @@ Core.Agent.Admin = Core.Agent.Admin || {};
                 OriginalPadding = parseInt($WidgetObj.find('.Content').css('padding-bottom'), 10);
 
             if ($WidgetObj.hasClass('MenuExpanded')) {
-                $WidgetObj.find('.WidgetMenu').slideUp('fast')
+                //$WidgetObj.find('.WidgetMenu').slideUp('fast')
                 $WidgetObj.removeClass('MenuExpanded');
 
                 if ($DefaultObj.length) {
@@ -450,7 +455,7 @@ Core.Agent.Admin = Core.Agent.Admin || {};
                 }
             }
             else {
-                $WidgetObj.find('.WidgetMenu').slideDown('fast');
+                //$WidgetObj.find('.WidgetMenu').slideDown('fast');
                 $WidgetObj.addClass('MenuExpanded');
 
                 if ($DefaultObj.length) {

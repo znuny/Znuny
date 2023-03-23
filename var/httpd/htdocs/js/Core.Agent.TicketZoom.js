@@ -392,19 +392,20 @@ Core.Agent.TicketZoom = (function (TargetNS) {
             $('#SetArticleFilter').on('click', function () {
                 Core.UI.Dialog.ShowContentDialog($('#ArticleFilterDialog'), Core.Language.Translate("Article filter"), '20px', 'Center', true, [
                     {
+                        Label: Core.Language.Translate("Reset"),
+                        Function: function () {
+                            $('#CommunicationChannelFilter').val('').trigger('redraw.InputField');
+                            $('#ArticleSenderTypeFilter').val('').trigger('redraw.InputField');
+                        },
+                        Class: 'btn-cancel-ghost align-left-auto'
+                    },
+                    {
                         Label: Core.Language.Translate("Apply"),
                         Function: function () {
                             var Data = Core.AJAX.SerializeForm($('#ArticleFilterDialogForm'));
                             Core.AJAX.FunctionCall(Core.Config.Get('CGIHandle'), Data, function () {
                                 location.reload();
                             }, 'text');
-                        }
-                    },
-                    {
-                        Label: Core.Language.Translate("Reset"),
-                        Function: function () {
-                            $('#CommunicationChannelFilter').val('').trigger('redraw.InputField');
-                            $('#ArticleSenderTypeFilter').val('').trigger('redraw.InputField');
                         }
                     }
                 ]);

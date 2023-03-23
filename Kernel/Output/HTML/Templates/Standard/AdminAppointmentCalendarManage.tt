@@ -7,30 +7,8 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-
-    <h1 class="InvisibleText">[% Translate("Calendar Management") | html %]</h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('Calendar Management'),
-                Link => Env("Action"),
-            },
-        ]
-    %]
-
-    [% SWITCH Data.Action %]
-        [% CASE 'New' %]
-            [% BreadcrumbPath.push({ Name => Translate("Add Calendar"),}) %]
-        [% CASE 'Update' %]
-            [% USE EditTitle = String(Translate("Edit Calendar")) %]
-            [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.Name ) }) %]
-    [% END %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="SidebarColumn">
-
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
@@ -38,52 +16,64 @@
             <div class="Content">
 
                 <ul class="ActionList">
-[% IF Env("Subaction") == "Overview" %]
-[% IF Data.ModulePermissions.AgentAppointmentCalendarOverview %]
-                    <li>
-                        <a id="Back" href="[% Env("Baselink") %]Action=AgentAppointmentCalendarOverview" class="CallForAction Fullsize Center" title="[% Translate("Go to overview") | html %]">
-                            <span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span>
-                        </a>
-                    </li>
-[% END %]
-[% ELSIF Env("Subaction") != "" %]
-                    <li>
-                        <a id="Back" href="[% Env("Baselink") %]Action=AdminAppointmentCalendarManage" class="CallForAction Fullsize Center" title="[% Translate("Go to overview") | html %]">
-                            <span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span>
-                        </a>
-                    </li>
-[% ELSE %]
-[% IF Data.ModulePermissions.AgentAppointmentCalendarOverview %]
-                    <li>
-                        <a id="Overview" href="[% Env("Baselink") %]Action=AgentAppointmentCalendarOverview" class="CallForAction Fullsize Center" title="[% Translate("Calendar Overview") | html %]">
-                            <span><i class="fa fa-calendar"></i>[% Translate("Calendar Overview") | html %]</span>
-                        </a>
-                    </li>
-[% END %]
-[% END %]
+                    [% IF Env("Subaction") == "Overview" %]
+                        [% IF Data.ModulePermissions.AgentAppointmentCalendarOverview %]
+                        <li>
+                            <a id="Back" href="[% Env("Baselink") %]Action=AgentAppointmentCalendarOverview" class="CallForAction btn-main btn-primary-ghost" title="[% Translate("Go to overview") | html %]">
+                                <span>
+                                    <i class="fa fa-caret-left"></i>
+                                    [% Translate("Go to overview") | html %]
+                                </span>
+                            </a>
+                        </li>
+                        [% END %]
+                        [% ELSIF Env("Subaction") != "" %]
+                        <li>
+                            <a id="Back" href="[% Env("Baselink") %]Action=AdminAppointmentCalendarManage" class="CallForAction btn-main btn-primary-ghost" title="[% Translate("Go to overview") | html %]">
+                                <span>
+                                    <i class="fa fa-caret-left"></i>
+                                    [% Translate("Go to overview") | html %]
+                                </span>
+                            </a>
+                        </li>
+                        [% ELSE %]
+                        [% IF Data.ModulePermissions.AgentAppointmentCalendarOverview %]
+                        <li>
+                            <a id="Overview" href="[% Env("Baselink") %]Action=AgentAppointmentCalendarOverview" class="CallForAction btn-main btn-primary-ghost" title="[% Translate("Calendar Overview") | html %]">
+                                <span>
+                                    [% Translate("Calendar Overview") | html %]
+                                </span>
+                            </a>
+                        </li>
+                        [% END %]
+                    [% END %]
 [% RenderBlockStart("MainActions") %]
-                    <li>
-                        <a id="Add" href="[% Env("Baselink") %]Action=AdminAppointmentCalendarManage;Subaction=New" class="CallForAction Fullsize Center" title="[% Translate("Add new Calendar") | html %]">
-                            <span><i class="fa fa-plus-square"></i>[% Translate("Add Calendar") | html %]</span>
-                        </a>
-                    </li>
-[% IF Data.ModulePermissions.AdminAppointmentImport %]
-                    <li>
-[% IF Data.ValidCount %]
-                        <a id="ImportAppointments" href="[% Env("Baselink") %]Action=AdminAppointmentImport" class="CallForAction Fullsize Center" title="[% Translate("Import Appointments") | html %]">
-[% ELSE %]
-                        <a id="ImportAppointments" class="CallForAction Fullsize Center Disabled" title="[% Translate("Import Appointments") | html %]">
-[% END %]
-                            <span><i class="fa fa-upload"></i>[% Translate("Import Appointments") | html %]</span>
-                        </a>
-                    </li>
-[% END %]
+                        <li>
+                            <a id="Add" href="[% Env("Baselink") %]Action=AdminAppointmentCalendarManage;Subaction=New" class="CallForAction btn-main btn-primary-ghost" title="[% Translate("Add new Calendar") | html %]">
+                                <span>
+                                    [% Translate("Add Calendar") | html %]
+                                </span>
+                            </a>
+                        </li>
+                        [% IF Data.ModulePermissions.AdminAppointmentImport %]
+                            <li>
+                                [% IF Data.ValidCount %]
+                                <a id="ImportAppointments" href="[% Env("Baselink") %]Action=AdminAppointmentImport" class="CallForAction btn-main btn-primary-ghost" title="[% Translate("Import Appointments") | html %]">
+                                [% ELSE %]
+                                <a id="ImportAppointments" class="CallForAction btn-main btn-primary-ghost Disabled" title="[% Translate("Import Appointments") | html %]">
+                                [% END %]
+                                    <span>
+                                        [% Translate("Import Appointments") | html %]
+                                    </span>
+                                </a>
+                            </li>
+                        [% END %]
 [% RenderBlockEnd("MainActions") %]
                 </ul>
             </div>
         </div>
 [% RenderBlockStart("ActionImport") %]
-        <div class="WidgetSimple">
+        <div class="WidgetSimple WidgetCalendarImport">
             <div class="Header">
                 <h2>[% Translate("Calendar Import") | html %]</h2>
             </div>
@@ -104,8 +94,10 @@
                                 <input type="checkbox" id="OverwriteExistingEntitiesImport" name="OverwriteExistingEntities" value="1" checked="checked" />
                                 <label for="OverwriteExistingEntitiesImport">[% Translate("Overwrite existing entities") | html %]</label>
                             </fieldset>
-                            <button class="CallForAction Fullsize Center SpacingTop" type="submit" value="[% Translate("Upload calendar configuration") | html %]">
-                                <span><i class="fa fa-upload"></i>[% Translate("Import Calendar") | html %]</span>
+                            <button class="CallForAction btn-main btn-primary-ghost SpacingTop" type="submit" value="[% Translate("Upload calendar configuration") | html %]">
+                                <span>
+                                    [% Translate("Import Calendar") | html %]
+                                </span>
                             </button>
                         </form>
                     </li>
@@ -148,13 +140,33 @@
     </div>
 
     <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("Calendar Management") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('Calendar Management'),
+                    Link => Env("Action"),
+                },
+            ]
+        %]
+
+        [% SWITCH Data.Action %]
+            [% CASE 'New' %]
+                [% BreadcrumbPath.push({ Name => Translate("Add Calendar"),}) %]
+            [% CASE 'Update' %]
+                [% USE EditTitle = String(Translate("Edit Calendar")) %]
+                [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.Name ) }) %]
+        [% END %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
 
 [% RenderBlockStart("Overview") %]
         <div class="WidgetSimple">
-            <div class="Header">
+            <div class="Header filter-items">
                 <h2>[% Translate(Data.Title) | html %]</h2>
-                <a href="#" class="icon-hover" id="ValidFilter" title="[% Translate("Filter") | html %]">
-                    <i class="fa fa-filter"></i>
+                <a href="#" id="ValidFilter" title="[% Translate("Filter") | html %]">
+                    <span class="show-valid">Show Valid</span>
+                    <span class="show-all">Show All</span>
                 </a>
             </div>
             <div class="Content">
@@ -190,7 +202,7 @@
                             <td>[% Data.ChangeTime | html %]</td>
                             <td>[% Data.CreateTime | html %]</td>
                             <td class="Center">
-                                <a class="ExportLink" href="[% Env("Baselink") %]Action=AdminAppointmentCalendarManage;Subaction=CalendarExport;CalendarID=[% Data.CalendarID | uri %]" title="[% Translate("Export calendar") | html %]">
+                                <a class="ExportLink table-icon-hover-md" href="[% Env("Baselink") %]Action=AdminAppointmentCalendarManage;Subaction=CalendarExport;CalendarID=[% Data.CalendarID | uri %]" title="[% Translate("Export calendar") | html %]">
                                     <i class="fa fa-download"></i>
                                     <span class="InvisibleText">[% Translate("Export calendar") | html %]</span>
                                 </a>
@@ -199,13 +211,13 @@
 # Use ampersands (&) instead of semicolons (;) for URL parameter delimiter. This has better compatibility with different
 #   calendar implementations and will prevent them from re-encoding the query string and essentially strip the data.
 #   Please see bug#12667 for more information.
-                                <a class="DownloadLink" href="[% Config("HttpType") %]://[% Config("FQDN") %]/[% Config("ScriptAlias") %]public.pl?Action=PublicCalendar&CalendarID=[% Data.CalendarID | uri %]&User=[% Env("UserLogin") | uri %]&Token=[% Data.AccessToken | uri %]" title="[% Translate("Download calendar") | html %]">
+                                <a class="DownloadLink table-icon-hover-md" href="[% Config("HttpType") %]://[% Config("FQDN") %]/[% Config("ScriptAlias") %]public.pl?Action=PublicCalendar&CalendarID=[% Data.CalendarID | uri %]&User=[% Env("UserLogin") | uri %]&Token=[% Data.AccessToken | uri %]" title="[% Translate("Download calendar") | html %]">
                                     <i class="fa fa-cloud-download"></i>
                                     <span class="InvisibleText">[% Translate("Download calendar") | html %]</span>
                                 </a>
                             </td>
                             <td class="Center">
-                                <button class="InlineButton CopyToClipboard" data-clipboard-text="[% Config("HttpType") %]://[% Config("FQDN") %]/[% Config("ScriptAlias") %]public.pl?Action=PublicCalendar&CalendarID=[% Data.CalendarID | uri %]&User=[% Env("UserLogin") | uri %]&Token=[% Data.AccessToken | uri %]" title="[% Translate("Copy public calendar URL") | html %]">
+                                <button class="InlineButton CopyToClipboard table-icon-hover-md" data-clipboard-text="[% Config("HttpType") %]://[% Config("FQDN") %]/[% Config("ScriptAlias") %]public.pl?Action=PublicCalendar&CalendarID=[% Data.CalendarID | uri %]&User=[% Env("UserLogin") | uri %]&Token=[% Data.AccessToken | uri %]" title="[% Translate("Copy public calendar URL") | html %]">
                                     <i class="fa fa-clipboard"></i>
                                     <span class="InvisibleText">[% Translate("Copy public calendar URL") | html %]</span>
                                 </button>
@@ -244,57 +256,61 @@
                 </div>
                 <div class="Content">
                     <fieldset class="TableLike">
-                        <legend><span>[% Translate("Calendar") | html %]</span></legend>
-                        <label for="CalendarName" class="Mandatory">
-                            <span class="Marker">*</span>
-                            [% Translate("Calendar name") | html %]:
-                        </label>
-                        <div class="Field">
-                            <input type="text" id="CalendarName" name="CalendarName" value="[% Data.CalendarName | html %]"
-                                class="Validate_Required W50pc [% Data.CalendarNameInvalid | html %]" />
-                            <div id="CalendarNameError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-[% IF Data.CalendarNameExists %]
-                            <div id="CalendarNameServerError" class="TooltipErrorMessage"><p>[% Translate("Calendar with same name already exists.") | html %]</p></div>
-[% ELSE %]
-                            <div id="CalendarNameServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-[% END %]
-                        </div>
-                        <div class="Clear"></div>
+                        <legend>
+                            <span>[% Translate("Calendar") | html %]</span>
+                        </legend>
 
-                        <label for="Color" class="Mandatory">
-                            <span class="Marker">*</span>
-                            [% Translate("Color") | html %]:
-                        </label>
-                        <div class="Field">
-                            <input type="text" id="Color" name="Color" value="[% Data.Color | html %]" class="Validate_Required W50pc" />
-                            <div id="ColorError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                        <div class="field-wrapper">
+                            <label for="CalendarName" class="Mandatory">
+                                <span class="Marker">*</span>
+                                [% Translate("Calendar name") | html %]
+                            </label>
+                            <div class="Field">
+                                <input type="text" id="CalendarName" name="CalendarName" value="[% Data.CalendarName | html %]"
+                                    class="Validate_Required W50pc [% Data.CalendarNameInvalid | html %]" />
+                                <div id="CalendarNameError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                [% IF Data.CalendarNameExists %]
+                                <div id="CalendarNameServerError" class="TooltipErrorMessage"><p>[% Translate("Calendar with same name already exists.") | html %]</p></div>
+                                [% ELSE %]
+                                <div id="CalendarNameServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                [% END %]
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 
-                        <label for="GroupID" class="Mandatory">
-                            <span class="Marker">*</span>
-                            [% Translate("Permission group") | html %]:
-                        </label>
-                        <div class="Field">
-                            [% Data.GroupID %]
+                        <div class="field-wrapper">
+                            [% Data.ColorPicker %]
                         </div>
-                        <div class="Clear"></div>
 
-                        <label for="ValidID" class="Mandatory">
-                            <span class="Marker">*</span>
-                            [% Translate("Validity") | html %]:
-                        </label>
-                        <div class="Field">
-                            [% Data.ValidID %]
+                        <div class="field-wrapper">
+                            <label for="GroupID" class="Mandatory">
+                                <span class="Marker">*</span>
+                                [% Translate("Permission group") | html %]
+                            </label>
+                            <div class="Field">
+                                [% Data.GroupID %]
+                            </div>
                         </div>
-                        <div class="Clear"></div>
+
+                        <div class="field-wrapper">
+                            <label for="ValidID" class="Mandatory">
+                                <span class="Marker">*</span>
+                                [% Translate("Validity") | html %]
+                            </label>
+                            <div class="Field">
+                                [% Data.ValidID %]
+                            </div>
+                        </div>
                     </fieldset>
                 </div>
             </div>
-            <div class="WidgetSimple [% Data.WidgetStatus | html %]">
+
+            <div class="WidgetSimple WidgetTicketAppointments [% Data.WidgetStatus | html %]">
                 <div class="Header">
                     <div class="WidgetAction Toggle">
-                        <a href="#" title="[% Translate("Show or hide the content") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+                        <a href="#" title="[% Translate("Show or hide the content") | html %]">
+                            <i class="fa fa-caret-right"></i
+                            ><i class="fa fa-caret-down"></i>
+                        </a>
                     </div>
                     <h2>[% Translate("Ticket Appointments") | html %]</h2>
                 </div>
@@ -302,109 +318,130 @@
 [% RenderBlockStart("TicketAppointmentRule") %]
                     <fieldset id="Rule_[% Data.RuleID | html %]" class="TableLike SpacingTop">
                         <legend>
-                            <span>
+                            <div>
                                 [% Translate("Rule") | html %] <span class="RuleNumber">[% Data.RuleNumber | html %]</span>
-                                <a class="RemoveButton" title="[% Translate("Remove this entry") | html %]" href="#">
-                                    <i class="fa fa-minus-square-o"></i>
-                                    <span class="InvisibleText">[% Translate("Remove") | html %]</span>
-                                </a>
-                            </span>
-                        </legend>
-                        <label for="StartDate_[% Data.RuleID | html %]">
-                            [% Translate("Start date") | html %]:
-                        </label>
-                        <div class="Field">
-                            [% Data.StartDateStrg %]
-                        </div>
-                        <label for="EndDate_[% Data.RuleID | html %]">
-                            [% Translate("End date") | html %]:
-                        </label>
-                        <div class="Field">
-                            [% Data.EndDateStrg %]
-                        </div>
-                        <div class="Field SpacingTop">
-                            <p class="FieldExplanation">
-                                [% Translate("Use options below to narrow down for which tickets appointments will be automatically created.") | html %]
-                            </p>
-                        </div>
-                        <label for="QueueID_[% Data.RuleID | html %]" class="Mandatory">
-                            <span class="Marker">*</span>
-                            [% Translate("Queues") | html %]:
-                        </label>
-                        <div class="Field">
-                            [% Data.QueueIDStrg %]
-                            <div id="QueueID_[% Data.RuleID | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                            <div id="QueueID_[% Data.RuleID | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate("Please select a valid queue.") | html %]</p></div>
-                        </div>
-                        <div class="Clear"></div>
-                        <label for="SearchParams_[% Data.RuleID | html %]">
-                            [% Translate("Search attributes") | html %]:
-                        </label>
-                        <div class="Field SearchParamsContainer">
-                            [% Data.SearchParamsStrg %]
-                            <a class="AddButton" title="[% Translate("Add entry") | html %]" href="#">
-                                <i class="fa fa-plus-square-o"></i>
-                                <span class="InvisibleText">[% Translate("Add") | html %]</span>
-                            </a>
-[% RenderBlockStart("TicketAppointmentRuleSearchParam") %]
-                            <div class="Field SpacingTopSmall">
-                                <label for="SearchParam_[% Data.RuleID | html %]_[% Data.ParamName | html %]" class="Mandatory">
-                                    <span class="Marker">*</span>
-                                    [% Translate(Config("AppointmentCalendar::TicketAppointmentSearchParam").${Data.ParamName}) | html %]:
-                                </label>
-                                [% IF Data.ParamStrg %]
-                                [% Data.ParamStrg %]
-                                [% ELSE %]
-                                <input id="SearchParam_[% Data.RuleID | html %]_[% Data.ParamName | html %]" name="SearchParam_[% Data.RuleID | html %]_[% Data.ParamName | html %]" data-param="[% Data.ParamName | html %]" type="text" class="SearchParam Validate_Required W25pc" value="[% Data.ParamValue | html %]"/>
-                                [% END %]
-                                <div id="SearchParam_[% Data.RuleID | html %]_[% Data.ParamName | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                <a class="RemoveButton" title="[% Translate("Remove this entry") | html %]" href="#">
+                                <a class="RemoveButton icon-hover-md" title="[% Translate("Remove this entry") | html %]" href="#">
                                     <i class="fa fa-minus-square-o"></i>
                                     <span class="InvisibleText">[% Translate("Remove") | html %]</span>
                                 </a>
                             </div>
-                            <div class="Clear"></div>
-[% RenderBlockEnd("TicketAppointmentRuleSearchParam") %]
+                        </legend>
+
+                        <div class="field-wrapper">
+                            <label for="StartDate_[% Data.RuleID | html %]">
+                                [% Translate("Start date") | html %]
+                            </label>
+                            <div class="Field">
+                                [% Data.StartDateStrg %]
+                            </div>
                         </div>
-                        <div class="Clear"></div>
+
+                        <div class="field-wrapper">
+                            <label for="EndDate_[% Data.RuleID | html %]">
+                                [% Translate("End date") | html %]
+                            </label>
+                            <div class="Field">
+                                [% Data.EndDateStrg %]
+                            </div>
+
+                            <div class="Field SpacingTop">
+                                <p class="FieldExplanation">
+                                    [% Translate("Use options below to narrow down for which tickets appointments will be automatically created.") | html %]
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="QueueID_[% Data.RuleID | html %]" class="Mandatory">
+                                <span class="Marker">*</span>
+                                [% Translate("Queues") | html %]
+                            </label>
+                            <div class="Field">
+                                [% Data.QueueIDStrg %]
+                                <div id="QueueID_[% Data.RuleID | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                <div id="QueueID_[% Data.RuleID | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate("Please select a valid queue.") | html %]</p></div>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="SearchParams_[% Data.RuleID | html %]">
+                                [% Translate("Search attributes") | html %]
+                            </label>
+                            <div class="Field SearchParamsContainer">
+                                <div class="top-container-wrapper">
+                                    [% Data.SearchParamsStrg %]
+                                    <a class="AddButton icon-hover-md" title="[% Translate("Add entry") | html %]" href="#">
+                                        <i class="fa fa-plus-square-o"></i>
+                                        <span class="InvisibleText">[% Translate("Add") | html %]</span>
+                                    </a>
+                                </div>
+[% RenderBlockStart("TicketAppointmentRuleSearchParam") %]
+                                <div class="Field">
+                                    <label for="SearchParam_[% Data.RuleID | html %]_[% Data.ParamName | html %]" class="Mandatory">
+                                        <span class="Marker">*</span>
+                                        [% Translate(Config("AppointmentCalendar::TicketAppointmentSearchParam").${Data.ParamName}) | html %]
+                                    </label>
+                                    [% IF Data.ParamStrg %]
+                                    [% Data.ParamStrg %]
+                                    [% ELSE %]
+                                    <input id="SearchParam_[% Data.RuleID | html %]_[% Data.ParamName | html %]" name="SearchParam_[% Data.RuleID | html %]_[% Data.ParamName | html %]" data-param="[% Data.ParamName | html %]" type="text" class="SearchParam Validate_Required W25pc" value="[% Data.ParamValue | html %]"/>
+                                    [% END %]
+                                    <div id="SearchParam_[% Data.RuleID | html %]_[% Data.ParamName | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                    <a class="RemoveButton icon-hover-md" title="[% Translate("Remove this entry") | html %]" href="#">
+                                        <i class="fa fa-minus-square-o"></i>
+                                        <span class="InvisibleText">[% Translate("Remove") | html %]</span>
+                                    </a>
+                                </div>
+[% RenderBlockEnd("TicketAppointmentRuleSearchParam") %]
+                            </div>
+                        </div>
                     </fieldset>
 [% RenderBlockEnd("TicketAppointmentRule") %]
+
                     <fieldset class="TableLike SpacingTop">
                         <div class="Field">
                             <p class="FieldExplanation">
                                 [% Translate("Define rules for creating automatic appointments in this calendar based on ticket data.") | html %]
                             </p>
-                            <a id="AddRuleButton" class="CallForAction" title="[% Translate("Add entry") | html %]" href="#">
+                            <a id="AddRuleButton" class="btn-main btn-primary-ghost btn-width-md" title="[% Translate("Add entry") | html %]" href="#">
                                 <span>
                                     <i class="fa fa-plus-square"></i>
-                                    [% Translate("Add Rule") | html %]
+                                    <span>[% Translate("Add Rule") | html %]</span>
                                 </span>
                             </a>
                         </div>
-                        <div class="Clear"></div>
                     </fieldset>
                 </div>
             </div>
-            <div class="WidgetSimple">
+
+            <div class="WidgetSimple WidgetSubmit">
                 <div class="Header">
                     <h2>[% Translate("Submit") | html %]</h2>
                 </div>
                 <div class="Content">
                     <fieldset class="TableLike ">
-                        <div class="Field">
-                            [% IF Data.Subaction == 'Update' %]
-                            <button class="CallForAction Primary" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
-                            [% Translate("or") | html %]
-                            <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
-                            [% ELSE %]
-                                <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
-                            [% END %]
-                            [% Translate("or") | html %]
-                            <a href="[% Env("Baselink") %]Action=AdminAppointmentCalendarManage" title="[% Translate("Cancel") | html %]">
-                                <span>[% Translate("Cancel") | html %]</span>
-                            </a>
+                        <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
+                                <a href="[% Env("Baselink") %]Action=AdminAppointmentCalendarManage" title="[% Translate("Cancel") | html %]" class="btn-cancel-ghost btn-main btn-width-md">
+                                    <span>[% Translate("Cancel") | html %]</span>
+                                </a>
+
+                                [% IF Data.Subaction == 'Update' %]
+                                <button class="btn-primary-ghost btn-main btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]">
+                                    <span>[% Translate("Save and finish") | html %]</span>
+                                </button>
+
+                                <button class="btn-primary btn-main btn-width-md" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]">
+                                    <span>[% Translate("Save") | html %]</span>
+                                </button>
+                                [% ELSE %]
+
+                                <button class="btn-primary btn-main btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]">
+                                    <span>[% Translate("Save") | html %]</span>
+                                </button>
+                                [% END %]
+                            </div>
                         </div>
-                        <div class="Clear"></div>
                     </fieldset>
                 </div>
             </div>

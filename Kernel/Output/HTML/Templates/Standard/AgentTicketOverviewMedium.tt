@@ -6,12 +6,13 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+
 [% RenderBlockStart("DocumentActionRow") %]
 <ul class="Actions">
 [% RenderBlockStart("DocumentActionRowBulk") %]
     <li class="AlwaysPresent">
         <span>
-            <input type="checkbox" title="[% Translate("Select all") | html %]" id="SelectAllTickets" autocomplete="off" />
+            <input type="checkbox" title="[% Translate(" Select all") | html %]" id="SelectAllTickets" autocomplete="off" />
             <label class="InvisibleText" for="SelectAllTickets">[% Translate("Select all") | html %]</label>
         </span>
     </li>
@@ -27,23 +28,20 @@
 [% RenderBlockEnd("DocumentActionRowHTML") %]
 </ul>
 [% RenderBlockEnd("DocumentActionRow") %]
-
 [% RenderBlockStart("DocumentHeader") %]
 <ul id="TicketOverviewMedium" class="Overview OverviewMedium">
 [% RenderBlockEnd("DocumentHeader") %]
-
 [% RenderBlockStart("NoTicketFound") %]
-    <li id="EmptyMessageMedium">
+    <li id="EmptyMessageMedium" class="EmptyMessage">
         [% Translate("No ticket data found.") | html %]
     </li>
 [% RenderBlockEnd("NoTicketFound") %]
-
 [% RenderBlockStart("DocumentContent") %]
-    <li id="TicketID_[% Data.TicketID | html %]" class="MasterAction">
+    <li id="TicketID_[% Data.TicketID | html %]" class="MasterAction border-hover">
         <div class="Content">
 [% RenderBlockStart("InlineActionRow") %]
             <ul class="Actions InlineActions">
-                <li class="ResponsiveActionMenu"><a href="#" id="ResponsiveActionMenu[% Data.TicketID | html %]" title="[% Translate("Open / Close ticket action menu") | html %]"><i class="fa fa-bars"></i></a></li>
+                <li class="ResponsiveActionMenu"><a href="#" id="ResponsiveActionMenu[% Data.TicketID | html %]" title="[% Translate(" Open / Close ticket action menu") | html %]"><i class="fa fa-bars"></i></a></li>
 [% RenderBlockStart("InlineActionRowItem") %]
                 <li><a id="[% Data.ID | html %][% Data.TicketID | html %]" class="[% Data.Class | html %]" href="[% Data.Link | Interpolate | html %]" title="[% Translate(Data.Description) | html %]">[% Translate(Data.Name) | html %]</a></li>
 [% RenderBlockEnd("InlineActionRowItem") %]
@@ -52,40 +50,102 @@
 [% RenderBlockEnd("InlineActionRowItemHTML") %]
             </ul>
 [% RenderBlockEnd("InlineActionRow") %]
+            <span>
 [% RenderBlockStart("Bulk") %]
-            <div class="Checkbox">
-                <input class="Checkbox" type="checkbox" name="TicketID" title="[% Translate("Select this ticket") | html %]" value="[% Data.TicketID | html %]" autocomplete="off" />
-            </div>
+                <div class="Checkbox">
+                    <input class="Checkbox" type="checkbox" name="TicketID" title="[% Translate(" Select this ticket") | html %]" value="[% Data.TicketID | html %]" autocomplete="off" />
+                </div>
 [% RenderBlockEnd("Bulk") %]
+                <h2>
+                    <a href="[% Env("Baselink") %]Action=AgentTicketZoom;TicketID=[% Data.TicketID | uri %]" class="MasterActionLink">[% Config("Ticket::Hook") %][% Config("Ticket::HookDivider") %][% Data.TicketNumber %] &ndash; [% Data.Title | html %]</a>
+                </h2>
+            </span>
+            <span>
+                <span class="flag-container">
 [% RenderBlockStart("Meta") %]
 [% RenderBlockStart("MetaIcon") %]
-            <div class="[% Data.Class | html %]" title="[% Translate(Data.Title) | html %]">
-                <span class="[% Data.ClassSpan | html %]">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <em>[% Translate(Data.Title) | html %]</em>
-                </span>
-            </div>
+                    <div class="[% Data.Class | html %]" title="[% Translate(Data.Title) | html %]">
+                        <span class="[% Data.ClassSpan | html %]">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <em>[% Translate(Data.Title) | html %]</em>
+                        </span>
+                    </div>
 [% RenderBlockEnd("MetaIcon") %]
 [% RenderBlockEnd("Meta") %]
-            <h2>
-                <a href="[% Env("Baselink") %]Action=AgentTicketZoom;TicketID=[% Data.TicketID | uri %]" class="MasterActionLink">[% Config("Ticket::Hook") %][% Config("Ticket::HookDivider") %][% Data.TicketNumber %] &ndash; [% Data.Title | html %]</a>
-            </h2>
 [% RenderBlockStart("MenuItem") %]
-            <a href="[% Env("Baselink") %][% Data.Link %]" [% Data.LinkParam %] title="[% Translate(Data.Description) | html %]">[% Translate(Data.Name) | html %]</a>
+                    <a href="[% Env("Baselink") %][% Data.Link %]" [% Data.LinkParam %] title="[% Translate(Data.Description) | html %]">[% Translate(Data.Name) | html %]</a>
 [% RenderBlockEnd("MenuItem") %]
-            <table class="Infos">
-                <tbody>
-                    <tr>
-                        <td>
-                            <label>[% Translate("Sender") | html %]</label><div title="[% Data.ArticleFields.Sender.Value | html %]">[% Data.ArticleFields.Sender.Realname | truncate(36) | html %]</div>
-                        </td>
-                        <td>
-                            <label>[% Translate("Age") | html %]</label>[% Data.Age | html %]
-                        </td>
-                        <td>
-                            <label>[% Translate("Queue") | html %]</label><div title="[% Data.Queue | html %]">[% Data.Queue | html %]</div>
-                        </td>
+                </span>
+                <table class="Infos">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label>[% Translate("Sender") | html %]</label>
+                                <div title="[% Data.ArticleFields.Sender.Value | html %]">[% Data.ArticleFields.Sender.Realname | truncate(36) | html %]</div>
+                            </td>
+                            <td>
+                                <label>[% Translate("Created") | html %]</label>[% Data.Created | Localize("TimeLong") %]
+                            </td>
+                            <td>
+                                <label>[% Translate("Subject") | html %]</label>
+                                <div title="[% Data.ArticleFields.Subject.Value | html %]">[% Data.ArticleFields.Subject.Value | truncate(36) | html %]</div>
+                            </td>
+# example of how to use fixed dynamic field blocks for customizations
+# Note: Field1 is the name of the field and had to be replaced with the actual
+# field name
+#[% RenderBlockStart("DynamicField_Field1") %]
+# <td>
+# <label>[% Translate(Data.Label) | html %]</label>
+#[% RenderBlockStart("DynamicField_Field1Link") %]
+# <div title="[% Data.Title | html %]"><a href="[% Data.Link | Interpolate %]" target="_blank" class="DynamicFieldLink">[% Data.Value %]</a></div>
+#[% RenderBlockEnd("DynamicField_Field1Link") %]
+#[% RenderBlockStart("DynamicField_Field1Plain") %]
+# <div title="[% Data.Title | html %]"><span>[% Data.Value %]</span></div>
+#[% RenderBlockEnd("DynamicField_Field1Plain") %]
+# </td>
+#[% RenderBlockEnd("DynamicField_Field1") %]
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>[% Translate("Age") | html %]</label>[% Data.Age | html %]
+                            </td>
+                            <td>
+                                <label>[% Translate("State") | html %]</label><span title="[% Translate(Data.State) | html %]" class="[% Data.PillClass | html %]">[% Translate(Data.State) | html %]</span>
+                            </td>
+[% RenderBlockStart("OwnerResponsible") %]
+                            [% IF Config('Ticket::Responsible') %]
+                            <td>
+                                <label>[% Translate("Owner") | html %] / [% Translate("Responsible") | html %]</label>
+                                <div title="[% Data.OwnerFullname | html %] ([% Data.Owner | html %]) / [% Data.ResponsibleFullname | html %] ([% Data.Responsible | html %])">[% Data.OwnerFullname | html %] / [% Data.ResponsibleFullname | html %]</div>
+                            </td>
+                            [% ELSE %]
+                            <td>
+                                <label>[% Translate("Owner") | html %]</label>
+                                <div title="[% Data.OwnerFullname | html %] ([% Data.Owner | html %])">[% Data.OwnerFullname | html %]</div>
+                            </td>
+                            [% END %]
+[% RenderBlockEnd("OwnerResponsible") %]
+                        </tr>
+# example of how to use fixed dynamic field blocks for customizations
+# Note: Field2 is the name of the field and had to be replaced with the actual
+# field name
+#[% RenderBlockStart("DynamicField_Field2") %]
+# <td>
+# <label>[% Translate(Data.Label) | html %]</label>
+#[% RenderBlockStart("DynamicField_Field2Link") %]
+# <div title="[% Data.Title | html %]"><a href="[% Data.Link | Interpolate %]" target="_blank" class="DynamicFieldLink">[% Data.Value %]</a></div>
+#[% RenderBlockEnd("DynamicField_Field2Link") %]
+#[% RenderBlockStart("DynamicField_Field2Plain") %]
+# <div title="[% Data.Title | html %]"><span>[% Data.Value %]</span></div>
+#[% RenderBlockEnd("DynamicField_Field2Plain") %]
+# </td>
+#[% RenderBlockEnd("DynamicField_Field2") %]
+                        <tr>
+                            <td>
+                                <label>[% Translate("Queue") | html %]</label>
+                                <div title="[% Data.Queue | html %]">[% Data.Queue | html %]</div>
+                            </td>
 [% IF !Data.IsITSMIncidentProblemManagementInstalled %]
                         <td>
 [% RenderBlockStart("CustomerIDRW") %]
@@ -97,201 +157,156 @@
                             <br /><div title="[% Data.CustomerName | html %]">[% Data.CustomerName | html %]</div>
                         </td>
 [% END %]
-# example of how to use fixed dynamic field blocks for customizations
-# Note: Field1 is the name of the field and had to be replaced with the actual
-# field name
-#[% RenderBlockStart("DynamicField_Field1") %]
-#                        <td>
-#                            <label>[% Translate(Data.Label) | html %]</label>
-#[% RenderBlockStart("DynamicField_Field1Link") %]
-#                            <div title="[% Data.Title | html %]"><a href="[% Data.Link | Interpolate %]" target="_blank" class="DynamicFieldLink">[% Data.Value %]</a></div>
-#[% RenderBlockEnd("DynamicField_Field1Link") %]
-#[% RenderBlockStart("DynamicField_Field1Plain") %]
-#                            <div title="[% Data.Title | html %]"><span>[% Data.Value %]</span></div>
-#[% RenderBlockEnd("DynamicField_Field1Plain") %]
-#                        </td>
-#[% RenderBlockEnd("DynamicField_Field1") %]
-                        <td>
-                            <label>[% Translate("First Response Time") | html %]</label>
-[% RenderBlockStart("FirstResponseTime") %]
-                            <div title="[% Translate("Service Time") | html %]: [% Data.FirstResponseTimeWorkingTime | html %]" class="[% Data.FirstResponseTimeClass | html %]">[% Data.FirstResponseTimeHuman | html %] / [% Data.FirstResponseTimeDestinationDate | Localize("TimeShort") %]</div>
-[% RenderBlockEnd("FirstResponseTime") %]
-                        </td>
-[% IF Data.IsITSMIncidentProblemManagementInstalled %]
-                        <td>
-                            <label>[% Translate("Update Time") | html %]</label>
-[% RenderBlockStart("UpdateTime") %]
-                            <div title="[% Translate("Service Time") | html %]: [% Data.UpdateTimeWorkingTime | html %]" class="[% Data.UpdateTimeClass | html %]">[% Data.UpdateTimeHuman | html %] / [% Data.UpdateTimeDestinationDate | Localize("TimeShort") %]</div>
-[% RenderBlockEnd("UpdateTime") %]
-                        </td>
-                        <td>
-                            <label>[% Translate("Solution Time") | html %]</label>
-[% RenderBlockStart("SolutionTime") %]
-                            <div title="[% Translate("Service Time") | html %]: [% Data.SolutionTimeWorkingTime | html %]" class="[% Data.SolutionTimeClass | html %]">[% Data.SolutionTimeHuman | html %] / [% Data.SolutionTimeDestinationDate | Localize("TimeShort") %]</div>
-[% RenderBlockEnd("SolutionTime") %]
-                        </td>
-[% END %]
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>[% Translate("Created") | html %]</label>[% Data.Created | Localize("TimeLong") %]
-                        </td>
-                        <td>
-                            <label>[% Translate("State") | html %]</label><div title="[% Translate(Data.State) | html %]" class="[% Data.PillClass | html %]">[% Translate(Data.State) | html %]</div>
-                        </td>
-                        <td>
+                            <td>
 [% RenderBlockStart("Type") %]
-                            <label>[% Translate("Type") | html %]</label><div title="[% Data.Type | html %]">[% Data.Type | html %]</div>
+                                <label>[% Translate("Type") | html %]</label>
+                                <div title="[% Data.Type | html %]">[% Data.Type | html %]</div>
 [% RenderBlockEnd("Type") %]
-                        </td>
+                            </td>
 [% IF Data.IsITSMIncidentProblemManagementInstalled %]
-                        <td>
-                            <label>[% Translate("Criticality") | html %]</label>
-                            <div title="[% Data.Criticality | html %]">[% Translate(Data.Criticality) | html %]</div>
-                        </td>
-                        <td>
-                            <label>[% Translate("Impact") | html %]</label>
-                            <div title="[% Data.Impact | html %]">[% Translate(Data.Impact) | html %]</div>
-                        </td>
-                        <td>
-                            <label>[% Translate("Priority") | html %]</label><div title="[% Translate(Data.Priority) | html %]">[% Translate(Data.Priority) | html %]</div>
-                        </td>
+                            <td>
+                                <label>[% Translate("Criticality") | html %]</label>
+                                <div title="[% Data.Criticality | html %]">[% Translate(Data.Criticality) | html %]</div>
+                            </td>
+                            <td>
+                                <label>[% Translate("Impact") | html %]</label>
+                                <div title="[% Data.Impact | html %]">[% Translate(Data.Impact) | html %]</div>
+                            </td>
+                            <td>
+                                <label>[% Translate("Priority") | html %]</label><div title="[% Translate(Data.Priority) | html %]">[% Translate(Data.Priority) | html %]</div>
+                            </td>
 [% END %]
-# example of how to use fixed dynamic field blocks for customizations
-# Note: Field2 is the name of the field and had to be replaced with the actual
-# field name
-#[% RenderBlockStart("DynamicField_Field2") %]
-#                        <td>
-#                            <label>[% Translate(Data.Label) | html %]</label>
-#[% RenderBlockStart("DynamicField_Field2Link") %]
-#                            <div title="[% Data.Title | html %]"><a href="[% Data.Link | Interpolate %]" target="_blank" class="DynamicFieldLink">[% Data.Value %]</a></div>
-#[% RenderBlockEnd("DynamicField_Field2Link") %]
-#[% RenderBlockStart("DynamicField_Field2Plain") %]
-#                            <div title="[% Data.Title | html %]"><span>[% Data.Value %]</span></div>
-#[% RenderBlockEnd("DynamicField_Field2Plain") %]
-#                        </td>
-#[% RenderBlockEnd("DynamicField_Field2") %]
-[% IF !Data.IsITSMIncidentProblemManagementInstalled %]
-                        <td>
-                            <label>[% Translate("Update Time") | html %]</label>
-[% RenderBlockStart("UpdateTime") %]
-                            <div title="[% Translate("Service Time") | html %]: [% Data.UpdateTimeWorkingTime | html %]" class="[% Data.UpdateTimeClass | html %]">[% Data.UpdateTimeHuman | html %] / [% Data.UpdateTimeDestinationDate | Localize("TimeShort") %]</div>
-[% RenderBlockEnd("UpdateTime") %]
-                        </td>
-[% END %]
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>[% Translate("Subject") | html %]</label><div title="[% Data.ArticleFields.Subject.Value | html %]">[% Data.ArticleFields.Subject.Value | truncate(36) | html %]</div>
-                        </td>
-[% RenderBlockStart("OwnerResponsible") %]
-[% IF Config('Ticket::Responsible') %]
-                        <td>
-                            <label>[% Translate("Owner") | html %] / [% Translate("Responsible") | html %]</label><div title="[% Data.OwnerFullname | html %] ([% Data.Owner | html %]) / [% Data.ResponsibleFullname | html %] ([% Data.Responsible | html %])">[% Data.OwnerFullname | html %] / [% Data.ResponsibleFullname | html %]</div>
-                        </td>
-[% ELSE %]
-                        <td>
-                            <label>[% Translate("Owner") | html %]</label><div title="[% Data.OwnerFullname | html %] ([% Data.Owner | html %])">[% Data.OwnerFullname | html %]</div>
-                        </td>
-[% END %]
-[% RenderBlockEnd("OwnerResponsible") %]
-                        <td>
-                            <label>[% Translate("Lock") | html %]</label><div title="[% Translate(Data.Lock) | html %]">[% Translate(Data.Lock) | html %]</div>
-                        </td>
-                        <td>
-[% RenderBlockStart("Service") %]
-                            <label>[% Translate("Service") | html %]</label><div title="[% Data.Service | html %]">[% Data.Service | html %]</div>
-[% RenderBlockEnd("Service") %]
-[% RenderBlockStart("SLA") %]
-                            <label>[% Translate("Service Level Agreement") | html %]</label><div title="[% Data.SLA | html %]">[% Data.SLA | html %]</div>
-[% RenderBlockEnd("SLA") %]
-                        </td>
+                            <td>
+                                <label>[% Translate("Lock") | html %]</label>
+                                <div title="[% Translate(Data.Lock) | html %]">[% Translate(Data.Lock) | html %]</div>
+                            </td>
+                        </tr>
+                        <tr>
 [% IF Data.IsITSMIncidentProblemManagementInstalled %]
-                        <td>
+                            <td>
 [% RenderBlockStart("CustomerIDRW") %]
-                            <label>[% Translate("CustomerID") | html %]</label><a href="[% Config("CustomerDBLink") %]" class="AsPopup PopupType_TicketAction" [% Config("CustomerDBLinkTarget") %]>[% Data.CustomerID | html %]</a>
+                                <label>[% Translate("CustomerID") | html %]</label><a href="[% Config("CustomerDBLink") %]" class="AsPopup PopupType_TicketAction" [% Config("CustomerDBLinkTarget") %]>[% Data.CustomerID | html %]</a>
 [% RenderBlockEnd("CustomerIDRW") %]
 [% RenderBlockStart("CustomerIDRO") %]
-                            <label>[% Translate("CustomerID") | html %]</label>[% Data.CustomerID | html %]
+                                <label>[% Translate("CustomerID") | html %]</label>[% Data.CustomerID | html %]
 [% RenderBlockEnd("CustomerIDRO") %]
-                            <br /><div title="[% Data.CustomerName | html %]">[% Data.CustomerName | html %]</div>
-                        </td>
+                                <br /><div title="[% Data.CustomerName | html %]">[% Data.CustomerName | html %]</div>
+                            </td>
 [% END %]
+[% IF !Data.IsITSMIncidentProblemManagementInstalled %]
+                            <td>
+                                <label>[% Translate("Update Time") | html %]</label>
+[% RenderBlockStart("UpdateTime") %]
+                                <div title="[% Translate("Service Time") | html %]: [% Data.UpdateTimeWorkingTime | html %]" class="[% Data.UpdateTimeClass | html %]">[% Data.UpdateTimeHuman | html %] / [% Data.UpdateTimeDestinationDate | Localize("TimeShort") %]</div>
+[% RenderBlockEnd("UpdateTime") %]
+                            </td>
+[% END %]
+                            <td>
+[% RenderBlockStart("Service") %]
+                                <label>[% Translate("Service") | html %]</label>
+                                <div title="[% Data.Service | html %]">[% Data.Service | html %]</div>
+[% RenderBlockEnd("Service") %]
+[% RenderBlockStart("SLA") %]
+                                <label>[% Translate("Service Level Agreement") | html %]</label>
+                                <div title="[% Data.SLA | html %]">[% Data.SLA | html %]</div>
+[% RenderBlockEnd("SLA") %]
+                            </td>
+                        </tr>
 # example of how to use fixed dynamic field blocks for customizations
 # Note: Field3 is the name of the field and had to be replaced with the actual
 # field name
 #[% RenderBlockStart("DynamicField_Field3") %]
-#                        <td>
-#                            <label>[% Translate(Data.Label) | html %]</label>
+# <td>
+# <label>[% Translate(Data.Label) | html %]</label>
 #[% RenderBlockStart("DynamicField_Field3Link") %]
-#                            <div title="[% Data.Title | html %]"><a href="[% Data.Link | Interpolate %]" target="_blank" class="DynamicFieldLink">[% Data.Value %]</a></div>
+# <div title="[% Data.Title | html %]"><a href="[% Data.Link | Interpolate %]" target="_blank" class="DynamicFieldLink">[% Data.Value %]</a></div>
 #[% RenderBlockEnd("DynamicField_Field3Link") %]
 #[% RenderBlockStart("DynamicField_Field3Plain") %]
-#                            <div title="[% Data.Title | html %]"><span>[% Data.Value %]</span></div>
+# <div title="[% Data.Title | html %]"><span>[% Data.Value %]</span></div>
 #[% RenderBlockEnd("DynamicField_Field3Plain") %]
-#                        </td>
+# </td>
 #[% RenderBlockEnd("DynamicField_Field3") %]
+                        <tr>
 [% IF !Data.IsITSMIncidentProblemManagementInstalled %]
-                        <td>
-                            <label>[% Translate("Solution Time") | html %]</label>
+                            <td>
+                                <label>[% Translate("Solution Time") | html %]</label>
 [% RenderBlockStart("SolutionTime") %]
-                            <div title="[% Translate("Service Time") | html %]: [% Data.SolutionTimeWorkingTime | html %]" class="[% Data.SolutionTimeClass | html %]">[% Data.SolutionTimeHuman | html %] / [% Data.SolutionTimeDestinationDate | Localize("TimeShort") %]</div>
+                                <div title="[% Translate("Service Time") | html %]: [% Data.SolutionTimeWorkingTime | html %]" class="[% Data.SolutionTimeClass | html %]">[% Data.SolutionTimeHuman | html %] / [% Data.SolutionTimeDestinationDate | Localize("TimeShort") %]</div>
 [% RenderBlockEnd("SolutionTime") %]
-                        </td>
+                            </td>
 [% END %]
-                    </tr>
-                </tbody>
-            </table>
-
+                            <td></td>
+                            <td>
+                                <label>[% Translate("First Response Time") | html %]</label>
+[% RenderBlockStart("FirstResponseTime") %]
+                                <div title="[% Translate(" Service Time") | html %]: [% Data.FirstResponseTimeWorkingTime | html %]" class="[% Data.FirstResponseTimeClass | html %]">[% Data.FirstResponseTimeHuman | html %] / [% Data.FirstResponseTimeDestinationDate | Localize("TimeShort") %]</div>
+[% RenderBlockEnd("FirstResponseTime") %]
+                            </td>
+[% IF Data.IsITSMIncidentProblemManagementInstalled %]
+                            <td>
+                                <label>[% Translate("Update Time") | html %]</label>
+[% RenderBlockStart("UpdateTime") %]
+                                <div title="[% Translate("Service Time") | html %]: [% Data.UpdateTimeWorkingTime | html %]" class="[% Data.UpdateTimeClass | html %]">[% Data.UpdateTimeHuman | html %] / [% Data.UpdateTimeDestinationDate | Localize("TimeShort") %]</div>
+[% RenderBlockEnd("UpdateTime") %]
+                            </td>
+                            <td>
+                                <label>[% Translate("Solution Time") | html %]</label>
+[% RenderBlockStart("SolutionTime") %]
+                                <div title="[% Translate("Service Time") | html %]: [% Data.SolutionTimeWorkingTime | html %]" class="[% Data.SolutionTimeClass | html %]">[% Data.SolutionTimeHuman | html %] / [% Data.SolutionTimeDestinationDate | Localize("TimeShort") %]</div>
+[% RenderBlockEnd("SolutionTime") %]
+                            </td>
+[% END %]
+                        </tr>
+                    </tbody>
+                </table>
+            </span>
 [% RenderBlockStart("DynamicFieldTable") %]
             <div class="SpacingTop Center DynamicFieldSeparator"></div>
-            <table class="Infos">
-                <tbody>
+            <span>
+                <span class="flag-container"></span>
+                <table class="Infos">
+                    <tbody>
 [% RenderBlockStart("DynamicFieldTableRow") %]
-                    <tr>
+                        <tr>
 [% RenderBlockStart("DynamicFieldTableRowRecord") %]
-                        <td>
-                            <label>[% Translate(Data.Label) | html %]</label>
+                            <td>
+                                <label>[% Translate(Data.Label) | html %]</label>
 [% RenderBlockStart("DynamicFieldTableRowRecordLink") %]
-                            <div title="[% Data.Title | html %]"><a href="[% Data.Link | Interpolate %]" target="_blank" class="DynamicFieldLink">[% Data.Value %]</a></div>
+                                <div title="[% Data.Title | html %]"><a href="[% Data.Link | Interpolate %]" target="_blank" class="DynamicFieldLink">[% Data.Value %]</a></div>
 [% RenderBlockEnd("DynamicFieldTableRowRecordLink") %]
 [% RenderBlockStart("DynamicFieldTableRowRecordPlain") %]
-                            <div title="[% Data.Title | html %]"><span>[% Data.Value %]</span></div>
+                                <div title="[% Data.Title | html %]"><span>[% Data.Value %]</span></div>
 [% RenderBlockEnd("DynamicFieldTableRowRecordPlain") %]
-                        </td>
+                            </td>
 [% RenderBlockEnd("DynamicFieldTableRowRecord") %]
-                    </tr>
+                        </tr>
 [% RenderBlockEnd("DynamicFieldTableRow") %]
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </span>
 [% RenderBlockEnd("DynamicFieldTable") %]
         </div>
     </li>
-
 [% RenderBlockEnd("DocumentContent") %]
-
 [% RenderBlockStart("DocumentFooter") %]
 </ul>
-
 <form name="bulk" action="">
-    <input type="hidden" name="TicketID" value=""/>
+    <input type="hidden" name="TicketID" value="" />
 </form>
-
 <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" name="matrix">
-    <input type="hidden" name="Action" value="AgentTicketBulk"/>
+    <input type="hidden" name="Action" value="AgentTicketBulk" />
 [% RenderBlockStart("DocumentFooterBulkItem") %]
-    <input type="hidden" name="TicketID" value=""/>
+    <input type="hidden" name="TicketID" value="" />
 [% RenderBlockEnd("DocumentFooterBulkItem") %]
-    <input type="hidden" name="TicketID" value=""/>
+    <input type="hidden" name="TicketID" value="" />
 </form>
 [% RenderBlockEnd("DocumentFooter") %]
-
 [% RenderBlockStart("DocumentMenuItemMoveForm") %]
 <li class="[% Data.Class | html %]">
-    <form title="[% Translate("Move ticket to a different queue") | html %]" action="[% Env("CGIHandle") | html %]" method="post">
-        <input type="hidden" name="Action" value="AgentTicketMove"/>
-        <input type="hidden" name="QueueID" value="[% Data.QueueID | html %]"/>
-        <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]"/>
+    <form title="[% Translate(" Move ticket to a different queue") | html %]" action="[% Env("CGIHandle") | html %]" method="post">
+        <input type="hidden" name="Action" value="AgentTicketMove" />
+        <input type="hidden" name="QueueID" value="[% Data.QueueID | html %]" />
+        <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]" />
         <label for="DestQueueID" class="InvisibleText">[% Translate("Change queue") | html %]:</label>
         [% Data.MoveQueuesStrg %]
     </form>

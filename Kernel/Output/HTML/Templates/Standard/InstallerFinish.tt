@@ -20,7 +20,6 @@
 
             <div class="Content">
                 <fieldset class="TableLike">
-
 [% RenderBlockStart("Restart") %]
                     <p>
                         [% Translate("To be able to use Znuny you have to enter the following line in your command line (Terminal/Shell) as root.") | html %]

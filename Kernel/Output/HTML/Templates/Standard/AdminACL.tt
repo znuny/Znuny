@@ -7,20 +7,8 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst">
-    <h1 class="InvisibleText">[% Translate("ACL Management") | html %]</h1>
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate('ACL Management'),
-                Link => Env("Action"),
-            },
-        ]
-    %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="SidebarColumn">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
@@ -28,13 +16,13 @@
             <div class="Content">
                 <ul class="ActionList">
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ACLNew" class="CallForAction Fullsize Center Create"><span><i class="fa fa-plus-square"></i>[% Translate("Create New ACL") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ACLNew" class="CallForAction Create btn-main btn-primary-ghost"><span><i class="fa fa-plus-square"></i>[% Translate("Create New ACL") | html %]</span></a>
                     </li>
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ACLDeploy" class="CallForAction Fullsize Center"><span><i class="fa fa-rocket"></i>[% Translate("Deploy ACLs") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ACLDeploy" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-rocket"></i>[% Translate("Deploy ACLs") | html %]</span></a>
                     </li>
                     <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ACLExport" class="CallForAction Fullsize Center"><span><i class="fa fa-download"></i>[% Translate("Export ACLs") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ACLExport" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-download"></i>[% Translate("Export ACLs") | html %]</span></a>
                     </li>
                 </ul>
             </div>
@@ -62,14 +50,14 @@
                             <input type="hidden" name="Action" value="[% Env("Action") %]"/>
                             <input type="hidden" name="Subaction" value="ACLImport"/>
                             <input type="hidden" name="FormID" value="[% Data.FormID | html %]"/>
-                            <input name="FileUpload" id="FileUpload" type="file" size="18" class="Fixed W100pc Validate_Required [% Data.FileUploadInvalid | html %]"/>
+                            <input name="FileUpload" id="FileUpload" type="file" size="18" class="Fixed Validate_Required [% Data.FileUploadInvalid | html %]"/>
                             <div id="FileUploadError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                             <div id="FileUploadServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                             <fieldset class="Separated">
                                 <input type="checkbox" id="OverwriteExistingEntities" name="OverwriteExistingEntities" value="1" />
                                 <label for="OverwriteExistingEntities">[% Translate("Overwrite existing ACLs?") | html %]</label>
                             </fieldset>
-                            <button class="CallForAction Fullsize Center" type="submit" value="[% Translate("Upload ACL configuration") | html %]">
+                            <button class="CallForAction btn-main btn-primary-ghost" type="submit" value="[% Translate("Upload ACL configuration") | html %]">
                                 <span><i class="fa fa-upload"></i>[% Translate("Import ACL configuration(s)") | html %]</span>
                             </button>
                         </form>
@@ -94,23 +82,37 @@
     </div>
 
     <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("ACL Management") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('ACL Management'),
+                    Link => Env("Action"),
+                },
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
         <div class="WidgetSimple">
-            <div class="Header">
+            <div class="Header filter-items">
                 <h2>[% Translate("ACLs") | html %]</h2>
-                <a href="#" class="icon-hover" id="ValidFilter" title="[% Translate("Filter") | html %]">
-                    <i class="fa fa-filter"></i>
+                <a href="#" id="ValidFilter" title="[% Translate("Filter") | html %]">
+                    <span class="show-valid">Show Valid</span>
+                    <span class="show-all">Show All</span>
                 </a>
             </div>
             <div class="Content">
-                <p class="ACLNote">[% Translate("Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.") | html %]</p>
+                <p class="ACLNote Notice">
+                    <i class="fa fa-info-circle"></i>
+                    [% Translate("Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.") | html %]</p>
                 <table class="DataTable" id="ACLs">
                     <thead>
                         <tr>
                             <th>[% Translate("ACL name") | html %]</th>
                             <th>[% Translate("Comment") | html %]</th>
                             <th>[% Translate("Validity") | html %]</th>
-                            <th class="Center W10pc">[% Translate("Export") | html %]</th>
-                            <th class="Center W10pc">[% Translate("Copy") | html %]</th>
+                            <th class="Center">[% Translate("Export") | html %]</th>
+                            <th class="Center">[% Translate("Copy") | html %]</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -119,8 +121,8 @@
                             <td><a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ACLEdit;ID=[% Data.ID | uri %]">[% Data.Name | html %]</a></td>
                             <td>[% Data.Comment | html %]</td>
                             <td>[% Translate(Data.ValidID) | html %]</td>
-                            <td class="Center"><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ACLExport;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]"><i class="fa fa-download"></i><span class="InvisibleText">[% Translate("Export") | html %]</span></a></td>
-                            <td class="Center"><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ACLCopy;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]"><i class="fa fa-copy"></i><span class="InvisibleText">[% Translate("Copy") | html %]</span></a></td>
+                            <td class="Center"><a class="table-icon-hover-md" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ACLExport;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]"><i class="fa fa-download"></i><span class="InvisibleText">[% Translate("Export") | html %]</span></a></td>
+                            <td class="Center"><a class="table-icon-hover-md" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ACLCopy;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]"><i class="fa fa-copy"></i><span class="InvisibleText">[% Translate("Copy") | html %]</span></a></td>
                         </tr>
 [% RenderBlockEnd("ACLRow") %]
 [% RenderBlockStart("ACLNoDataRow") %]
@@ -130,6 +132,7 @@
                             </td>
                         </tr>
 [% RenderBlockEnd("ACLNoDataRow") %]
+
                         <tr class="FilterMessage Hidden">
                             <td colspan="5">[% Translate("No matches found.") | html %]</td>
                         </tr>
@@ -139,5 +142,4 @@
 
         </div>
     </div>
-    <div class="Clear"></div>
 </div>

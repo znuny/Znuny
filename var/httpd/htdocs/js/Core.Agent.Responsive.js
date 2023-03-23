@@ -1,6 +1,6 @@
 // --
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+// Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -32,47 +32,19 @@ Core.Agent.Responsive = (function (TargetNS) {
             });
         }
 
-        $('.Dashboard .WidgetSimple .Header').off('click.Responsive').on('click.Responsive', function() {
-            $(this).find('.ActionMenu').fadeToggle();
-        });
-
         // hide graphs as they're not properly supported on mobile devices
         $('.D3GraphMessage, .D3GraphCanvas').closest('.WidgetSimple').hide();
 
         // Add trigger icon for pagination
         $('span.Pagination a:first-child').parent().closest('.WidgetSimple').each(function() {
             if (!$(this).find('.ShowPagination').length) {
-                $(this).find('.WidgetAction.Close').after('<div class="WidgetAction ShowPagination"><a title="Close" href=""><i class="fa fa-angle-double-right"></i></a></div>');
+                $(this).find('.wrapper-widget-close').after('<li><div class="WidgetAction ShowPagination"><a title="Close" href=""><span class="iconWrapper"><i class="fa fa-angle-right"></i></span><span class="textWrapper">Pagination</span></a></div></li>');
             }
         });
 
         $('.WidgetAction.ShowPagination').off('click.Responsive').on('click.Responsive', function() {
             $(this).closest('.WidgetSimple').find('.Pagination').toggleClass('AsBlock');
             return false;
-        });
-
-        // expand toolbar on click on the header
-        $('#Header').off().on('click', function() {
-
-            var TargetHeight = '70px',
-                TargetFade = 'out';
-
-            if (parseInt($('#ToolBar').height(), 10) > 0) {
-                TargetHeight = '0px';
-                TargetFade = 'in';
-            }
-            $('#ToolBar').animate({
-                height: TargetHeight,
-                easing: 'easeOutQuart'
-            }, 'fast');
-
-            // fade sidebar handles in/out
-            if (TargetFade === 'in') {
-                $('.ResponsiveHandle').fadeIn();
-            }
-            else {
-                $('.ResponsiveHandle').fadeOut();
-            }
         });
 
         // wrap sidebar modules with an additional container
@@ -97,7 +69,7 @@ Core.Agent.Responsive = (function (TargetNS) {
 
         // add handles for navigation and sidebar
         if (!$('#ResponsiveSidebarHandle').length) {
-            $('.SidebarColumn').closest('.ResponsiveSidebarContainer').before('<span class="ResponsiveHandle" id="ResponsiveSidebarHandle"><i class="fa fa-caret-square-o-left"></i></span>');
+            $('.SidebarColumn').closest('.ResponsiveSidebarContainer').before('<span class="ResponsiveHandle" id="ResponsiveSidebarHandle"><i class="fa fa-sign-out"></i></span>');
         }
         if (!$('#ResponsiveNavigationHandle').length) {
             $('#NavigationContainer').closest('.ResponsiveSidebarContainer').before('<span class="ResponsiveHandle" id="ResponsiveNavigationHandle"><i class="fa fa-navicon"></i></span>');
@@ -112,12 +84,12 @@ Core.Agent.Responsive = (function (TargetNS) {
                 $('#NavigationContainer').closest('.ResponsiveSidebarContainer').fadeIn();
                 $('html').addClass('NoScroll');
                 $('#NavigationContainer').animate({
-                    'left': '0px'
+                    'left': '0'
                 });
             }
             else {
                 $('#ResponsiveSidebarHandle').animate({
-                    'right': '0px'
+                    'right': '20px'
                 });
                 $('#NavigationContainer').closest('.ResponsiveSidebarContainer').fadeOut();
                 $('html').removeClass('NoScroll');
@@ -137,12 +109,12 @@ Core.Agent.Responsive = (function (TargetNS) {
                 $('.SidebarColumn').closest('.ResponsiveSidebarContainer').fadeIn();
                 $('html').addClass('NoScroll');
                 $('.SidebarColumn').animate({
-                    'right': '0px'
+                    'right': '0'
                 });
             }
             else {
                 $('#ResponsiveNavigationHandle').animate({
-                    'left': '0px'
+                    'left': '20px'
                 });
                 $('.SidebarColumn').closest('.ResponsiveSidebarContainer').fadeOut();
                 $('html').removeClass('NoScroll');
@@ -167,14 +139,10 @@ Core.Agent.Responsive = (function (TargetNS) {
         // initially hide navigation container
         $('#NavigationContainer').css('left', '-280px');
 
-// FORWWWARD CHANGES
 
-        // move toolbar to navigation container
-        //$('#ToolBar').detach().prependTo('body');
-        $('#ToolBar').detach().prependTo('#NavigationContainer');
+        $('#HeaderToolBar').detach().prependTo('#NavigationContainer');
         $('.InnerSidebarColumn').detach().insertAfter('.WidgetActions');
         $('#Logo').detach().prependTo('#Header');
-        // FORWWWARD
         $('.NotificationIcon').click(function() {
             $('body').toggleClass("ShowNotificationList");
         });
@@ -203,14 +171,10 @@ Core.Agent.Responsive = (function (TargetNS) {
 
         $('#OptionCustomer').closest('.Field').show().prev('label').show();
 
-// FORWWWARD CHANGES
-
         // reset navigation container position
-        //$('#NavigationContainer').css('left', '10px');
+        $('#NavigationContainer').detach().prependTo('#Header');
 
         // re-add toolbar to header
-        //$('#ToolBar').detach().prependTo('#Header');
-        $('#NavigationContainer').detach().prependTo('#Header');
         $('#Logo').detach().prependTo('#NavigationContainer');
 
         // reset field widths
@@ -223,19 +187,25 @@ Core.Agent.Responsive = (function (TargetNS) {
         // re-expand widgets in preferences screen
         $('.PreferencesScreen .WidgetSimple').removeClass('Collapsed').addClass('Expanded');
 
-        // toggle .toolbar-row view
-        $(".btn-toggle").on("click", function() {
-            $(".toolbar-row-wrapper").toggleClass("hide");
-
-            if ($(".toolbar-row-wrapper").hasClass("hide")) {
-                $(".btn-toggle i").css("margin", "2px 0 0 0");
-                $(".btn-toggle i").css("transform", "rotate(180deg)");
-            } else {
-                $(".btn-toggle i").css("margin", "0 0 2px 0");
-                $(".btn-toggle i").css("transform", "rotate(0deg)");
-            }
-        });
     });
+
+    // MOBILE - Show Actions Menu
+
+    //open
+    $('.mobile-action-option').on('click', function() {
+        $('body').addClass('has-options-overlay-opened');
+        $('html').addClass('NoScroll');
+        $(this).closest('.ItemActions, .ActionRow').addClass('active');
+    });
+
+    //close
+    $('.Actions-close, .btn-collapse').on('click', function() {
+        $('body').removeClass('has-options-overlay-opened');
+        $('html').removeClass('NoScroll');
+        $(this).closest('.ItemActions, .ActionRow').removeClass('active');
+    });
+
+
 
     return TargetNS;
 
