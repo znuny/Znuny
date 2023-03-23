@@ -7362,29 +7362,6 @@ via the Preferences button after logging in.
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="DashboardBackend###0410-RSS" Required="0" Valid="0">
-        <Description Translatable="1">Defines the parameters for the dashboard backend. "Limit" defines the number of entries displayed by default. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.</Description>
-        <Navigation>Frontend::Agent::View::Dashboard</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Module">Kernel::Output::HTML::Dashboard::RSS</Item>
-                <Item Key="Title" Translatable="1">Custom RSS Feed</Item>
-                <Item Key="Description" Translatable="1">Custom RSS feed.</Item>
-                <Item Key="URL">https://www.otrs.com/en/rss.xml</Item>
-                <Item Key="URL_de">https://www.otrs.com/de/rss.xml</Item>
-                <Item Key="URL_es">https://www.otrs.com/es/rss.xml</Item>
-                <Item Key="URL_nl">https://www.otrs.com/nl/rss.xml</Item>
-                <Item Key="URL_ru">https://www.otrs.com/ru/rss.xml</Item>
-                <Item Key="URL_zh">https://www.otrs.com/cn/rss.xml</Item>
-                <Item Key="Block">ContentSmall</Item>
-                <Item Key="Limit">6</Item>
-                <Item Key="Group"></Item>
-                <Item Key="Default">1</Item>
-                <Item Key="CacheTTL">360</Item>
-                <Item Key="Mandatory">0</Item>
-            </Hash>
-        </Value>
-    </Setting>
     <Setting Name="DashboardBackend###0442-RSS" Required="0" Valid="1">
         <Description Translatable="1">Defines the parameters for the dashboard backend. "Limit" defines the number of entries displayed by default. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.</Description>
         <Navigation>Frontend::Agent::View::Dashboard</Navigation>
@@ -7706,9 +7683,12 @@ via the Preferences button after logging in.
         <Value>
             <Array>
                 <Item>Core.Color.css</Item>
+                <Item>Core.Vars.css</Item>
                 <Item>Core.Reset.css</Item>
+                <Item>Core.Reset.Forwwward.css</Item>
                 <Item>Core.Default.css</Item>
                 <Item>Core.Header.css</Item>
+                <Item>Core.Overview.css</Item>
                 <Item>Core.OverviewControl.css</Item>
                 <Item>Core.OverviewSmall.css</Item>
                 <Item>Core.OverviewMedium.css</Item>
@@ -7726,6 +7706,9 @@ via the Preferences button after logging in.
                 <Item>Core.InputFields.css</Item>
                 <Item>Core.Print.css</Item>
                 <Item>Core.Animations.css</Item>
+                <Item>Core.Components.css</Item>
+                <Item>Core.FlexboxModel.css</Item>
+                <Item>Core.Typography.css</Item>
             </Array>
         </Value>
     </Setting>
@@ -7827,7 +7810,9 @@ via the Preferences button after logging in.
         <Value>
             <Array>
                 <Item>Core.Color.css</Item>
+                <Item>Core.Vars.css</Item>
                 <Item>Core.Reset.css</Item>
+                <Item>Core.Reset.Forwwward.css</Item>
                 <Item>Core.Default.css</Item>
                 <Item>Core.Form.css</Item>
                 <Item>Core.Dialog.css</Item>
@@ -7839,6 +7824,9 @@ via the Preferences button after logging in.
                 <Item>Core.InputFields.css</Item>
                 <Item>Core.Print.css</Item>
                 <Item>Core.Animations.css</Item>
+                <Item>Core.FlexboxModel.css</Item>
+                <Item>Core.PageLayout.css</Item>
+                <Item>Core.Components.css</Item>
             </Array>
         </Value>
     </Setting>

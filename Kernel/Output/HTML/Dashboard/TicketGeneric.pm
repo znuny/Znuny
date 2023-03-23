@@ -251,7 +251,8 @@ sub new {
 
     $Self->{PrefKeyShown}   = 'UserDashboardPref' . $Self->{Name} . '-Shown';
     $Self->{PrefKeyColumns} = 'UserDashboardPref' . $Self->{Name} . '-Columns';
-    $Self->{PageShown}      = $Param{PageShown} || $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{ $Self->{PrefKeyShown} }
+    $Self->{PageShown}      = $Param{PageShown}
+        || $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{ $Self->{PrefKeyShown} }
         || $Self->{Config}->{Limit};
 
     $Self->{StartHit} = int( $ParamObject->GetParam( Param => 'StartHit' ) || 1 );
@@ -927,7 +928,7 @@ sub Run {
     }
 
     for my $Filter ( sort keys %Filter ) {
-        $Filter{$Filter}->{Summary} = $Summary->{$Filter} || 0;
+        $Filter{$Filter}->{Count} = $Summary->{$Filter} || 0;
     }
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
@@ -1369,36 +1370,38 @@ sub Run {
 
                 if ( $HeaderColumn eq 'CustomerID' ) {
 
-                    # send data to JS
-                    $LayoutObject->AddJSData(
-                        Key   => 'CustomerIDAutocomplete',
-                        Value => {
-                            QueryDelay          => 100,
-                            MaxResultsDisplayed => 20,
-                            MinQueryLength      => 2,
-                        },
-                    );
-                    $LayoutObject->Block(
-                        Name => 'ContentLargeTicketGenericHeaderColumnFilterLinkCustomerIDSearch',
-                        Data => {},
-                    );
+                    # #136 - todo this autocomplete has been disabled for now
+                    #                     # send data to JS
+                    #                     $LayoutObject->AddJSData(
+                    #                         Key   => 'CustomerIDAutocomplete',
+                    #                         Value => {
+                    #                             QueryDelay          => 100,
+                    #                             MaxResultsDisplayed => 20,
+                    #                             MinQueryLength      => 2,
+                    #                         },
+                    #                     );
+                    #                     $LayoutObject->Block(
+                    #                         Name => 'ContentLargeTicketGenericHeaderColumnFilterLinkCustomerIDSearch',
+                    #                         Data => {},
+                    #                     );
                 }
 
                 elsif ( $HeaderColumn eq 'Responsible' || $HeaderColumn eq 'Owner' ) {
 
-                    # send data to JS
-                    $LayoutObject->AddJSData(
-                        Key   => 'UserAutocomplete',
-                        Value => {
-                            QueryDelay          => 100,
-                            MaxResultsDisplayed => 20,
-                            MinQueryLength      => 2,
-                        },
-                    );
-                    $LayoutObject->Block(
-                        Name => 'ContentLargeTicketGenericHeaderColumnFilterLinkUserSearch',
-                        Data => {},
-                    );
+                    #136 - todo this autocomplete has been disabled for now
+                    #                     # send data to JS
+                    #                     $LayoutObject->AddJSData(
+                    #                         Key   => 'UserAutocomplete',
+                    #                         Value => {
+                    #                             QueryDelay          => 100,
+                    #                             MaxResultsDisplayed => 20,
+                    #                             MinQueryLength      => 2,
+                    #                         },
+                    #                     );
+                    #                     $LayoutObject->Block(
+                    #                         Name => 'ContentLargeTicketGenericHeaderColumnFilterLinkUserSearch',
+                    #                         Data => {},
+                    #                     );
                 }
             }
 
@@ -1443,19 +1446,21 @@ sub Run {
 
                 if ( $HeaderColumn eq 'CustomerUserID' ) {
 
-                    # send data to JS
-                    $LayoutObject->AddJSData(
-                        Key   => 'CustomerUserAutocomplete',
-                        Value => {
-                            QueryDelay          => 100,
-                            MaxResultsDisplayed => 20,
-                            MinQueryLength      => 2,
-                        },
-                    );
-                    $LayoutObject->Block(
-                        Name => 'ContentLargeTicketGenericHeaderColumnFilterLinkCustomerUserSearch',
-                        Data => {},
-                    );
+                    #136 - todo this autocomplete has been disabled for now
+                    #                     # send data to JS
+                    #                     $LayoutObject->AddJSData(
+                    #                         Key   => 'CustomerUserAutocomplete',
+                    #                         Value => {
+                    #                             QueryDelay          => 100,
+                    #                             MaxResultsDisplayed => 20,
+                    #                             MinQueryLength      => 2,
+                    #                         },
+                    #                     );
+
+                  #                     $LayoutObject->Block(
+                  #                         Name => 'ContentLargeTicketGenericHeaderColumnFilterLinkCustomerUserSearch',
+                  #                         Data => {},
+                  #                     );
                 }
             }
 
@@ -2096,6 +2101,8 @@ sub Run {
             CustomerID     => $Param{CustomerID},
             CustomerUserID => $Param{CustomerUserID},
             FilterActive   => $FilterActive,
+            Filter         => \%Filter,
+            FilterSelected => $Self->{Filter},
             SortBy         => $Self->{SortBy} || 'Age',
             OrderBy        => $TicketSearch{OrderBy},
             SortingColumn  => $Param{SortingColumn},
@@ -2160,10 +2167,11 @@ sub _InitialColumnFilter {
     my $ColumnFilterHTML = $LayoutObject->BuildSelection(
         Name        => 'ColumnFilter' . $Param{ColumnName} . $Self->{Name},
         Data        => $Data,
-        Class       => $Class,
+        Class       => $Class . ' Modernize',
         Translation => $TranslationOption,
         SelectedID  => '',
     );
+
     return $ColumnFilterHTML;
 }
 

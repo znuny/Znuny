@@ -246,13 +246,11 @@
                 <Item Key="CSS">
                     <Array>
                         <Item>Core.AppointmentCalendar.Manage.css</Item>
-                        <Item>thirdparty/spectrum-1.8.1/spectrum.css</Item>
                     </Array>
                 </Item>
                 <Item Key="JavaScript">
                     <Array>
                         <Item>thirdparty/clipboardjs-1.7.1/clipboard.min.js</Item>
-                        <Item>thirdparty/spectrum-1.8.1/spectrum.js</Item>
                         <Item>Core.Agent.Admin.AppointmentCalendar.Manage.js</Item>
                     </Array>
                 </Item>
@@ -353,15 +351,6 @@
                 <Item>#000000</Item>
                 <Item>#1E1E1E</Item>
                 <Item>#3A3A3A</Item>
-                <Item>#545453</Item>
-                <Item>#6E6E6E</Item>
-                <Item>#878687</Item>
-                <Item>#888787</Item>
-                <Item>#A09FA0</Item>
-                <Item>#B8B8B8</Item>
-                <Item>#D0D0D0</Item>
-                <Item>#E8E8E8</Item>
-                <Item>#FFFFFF</Item>
                 <Item>#891100</Item>
                 <Item>#894800</Item>
                 <Item>#888501</Item>
@@ -389,15 +378,6 @@
                 <Item>#FF726E</Item>
                 <Item>#FFCE6E</Item>
                 <Item>#FFFB6D</Item>
-                <Item>#CEFA6E</Item>
-                <Item>#68F96E</Item>
-                <Item>#68FDFF</Item>
-                <Item>#68FBD0</Item>
-                <Item>#6ACFFF</Item>
-                <Item>#6E76FF</Item>
-                <Item>#D278FF</Item>
-                <Item>#FF7AFF</Item>
-                <Item>#FF7FD3</Item>
             </Array>
         </Value>
     </Setting>

@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -87,7 +87,7 @@ sub SendNotification {
     my %Notification = %{ $Param{Notification} };
 
     my $Type = 'Ticket';
-    if ( $ActivityObject->{EventTypeMap} ) {
+    if ( $ActivityObject->{EventTypeMap} && $Param{Event} && $ActivityObject->{EventTypeMap}->{ $Param{Event} } ) {
         $Type = $ActivityObject->{EventTypeMap}->{ $Param{Event} };
     }
 
@@ -95,7 +95,7 @@ sub SendNotification {
         TicketID => $Param{TicketID},
     );
 
-    my $ActivitID = $ActivityObject->DataAdd(
+    my $ActivitID = $ActivityObject->Add(
         Type     => $Type,
         Title    => $Notification{Subject},
         Text     => $Notification{Body},

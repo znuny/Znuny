@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -43,7 +43,7 @@ sub Run {
     my %GetParams = $Self->_GetParams();
 
     if ( $GetParams{Subaction} eq "Add" ) {
-        $Data{ActivityID} = $ActivityObject->DataAdd(
+        $Data{ActivityID} = $ActivityObject->Add(
             %GetParams,
             UserID   => $Self->{UserID},
             CreateBy => $Self->{UserID},
@@ -85,6 +85,7 @@ sub Run {
     elsif ( $GetParams{Subaction} eq "MarkAsSeenAll" ) {
         my @Activities = $ActivityObject->DataListGet(
             %Param,
+            UserID => $Self->{UserID},
         );
 
         $Data{Success} = 1;

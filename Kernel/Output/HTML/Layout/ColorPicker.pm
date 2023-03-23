@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -66,8 +66,9 @@ returns:
 sub ColorPicker {
     my ( $Self, %Param ) = @_;
 
-    my $LogObject  = $Kernel::OM->Get('Kernel::System::Log');
-    my $JSONObject = $Kernel::OM->Get('Kernel::System::JSON');
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+    my $JSONObject   = $Kernel::OM->Get('Kernel::System::JSON');
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     NEEDED:
     for my $Needed (qw(Type Name ID)) {
@@ -84,7 +85,7 @@ sub ColorPicker {
     $Param{Label} //= 'Color';
     $Param{Value} //= $Param{Color} // '#FF8A25';
 
-    my @TemplateAttributes = ( 'Type', 'Name', 'ID', 'Class', 'Label' );
+    my @TemplateAttributes = ( 'Type', 'Name', 'ID', 'Class', 'Label', 'Color' );
     my %ColorPickerConfig  = (
         backgroundColor => 'rgb(245, 245, 245)',
         borderColor     => 'rgb(201, 201, 201)',
@@ -92,6 +93,13 @@ sub ColorPicker {
         mode            => 'HV',
         value           => '#ff9b00',
     );
+
+    my $Config = $ConfigObject->Get('ColorPicker');
+
+    # get color palette
+    if ( $Config->{Palette} && !$Param{Palette} ) {
+        $ColorPickerConfig{palette} = $Config->{Palette};
+    }
 
     ATTRIBUTE:
     for my $Attribute ( sort keys %Param ) {

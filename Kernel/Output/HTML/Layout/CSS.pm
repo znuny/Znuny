@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -53,7 +53,7 @@ sub CreateDynamicCSS {
         next CSSFILEPATH if $CSSFilePath =~ m{/Base\.pm$};
 
         ( my $CSSModule = $CSSFilePath ) =~ s{\A.*\/(.+?).pm\z}{$1};
-        $CSSModule = ~s{\/}{::}g;
+        $CSSModule =~ s{\/}{::}g;
         $CSSModule = "Kernel::Output::CSS::$CSSModule";
 
         my $CSSObject = $Kernel::OM->Get($CSSModule);

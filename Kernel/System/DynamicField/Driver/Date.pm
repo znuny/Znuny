@@ -727,21 +727,21 @@ sub SearchFieldRender {
     my $FieldClass = 'DynamicFieldDateTime';
 
     # set as checked if necessary
-    my $FieldChecked = ( defined $Value->{$FieldName} && $Value->{$FieldName} == 1 ? 'checked="checked"' : '' );
+    $Param{FieldChecked} = ( defined $Value->{$FieldName} && $Value->{$FieldName} == 1 ? 'checked="checked"' : '' );
 
-    my $HTMLString = <<"EOF";
+    my $HTMLString;
+    if ( !$Param{ConfirmationCheckboxes} ) {
+        $HTMLString = <<"EOF";
     <input type="hidden" id="$FieldName" name="$FieldName" value="1"/>
 EOF
-
-    if ( $Param{ConfirmationCheckboxes} ) {
-        $HTMLString = <<"EOF";
-    <input type="checkbox" id="$FieldName" name="$FieldName" value="1" $FieldChecked/>
-EOF
     }
+
+    $HTMLString .= '<div class="outer-select-date">';
 
     # build HTML for TimePoint
     if ( $Param{Type} eq 'TimePoint' ) {
 
+        $HTMLString .= '<div>';
         $HTMLString .= $Param{LayoutObject}->BuildSelection(
             Data => {
                 'Before' => Translatable('more than ... ago'),
@@ -754,12 +754,12 @@ EOF
             Name           => $FieldName . 'Start',
             SelectedID     => $Value->{Start}->{ $FieldName . 'Start' } || 'Last',
         );
-        $HTMLString .= ' ' . $Param{LayoutObject}->BuildSelection(
+        $HTMLString .= $Param{LayoutObject}->BuildSelection(
             Data       => [ 1 .. 59 ],
             Name       => $FieldName . 'Value',
             SelectedID => $Value->{Value}->{ $FieldName . 'Value' } || 1,
         );
-        $HTMLString .= ' ' . $Param{LayoutObject}->BuildSelection(
+        $HTMLString .= $Param{LayoutObject}->BuildSelection(
             Data => {
                 minute => Translatable('minute(s)'),
                 hour   => Translatable('hour(s)'),
@@ -771,6 +771,7 @@ EOF
             Name       => $FieldName . 'Format',
             SelectedID => $Value->{Format}->{ $FieldName . 'Format' } || Translatable('day'),
         );
+        $HTMLString .= '</div></div>';
 
         my $AdditionalText;
         if ( $Param{UseLabelHints} ) {
@@ -829,6 +830,7 @@ EOF
         %YearsPeriodRange,
         OverrideTimeZone => 1,
     );
+    $HTMLString .= '</div>';
 
     my $AdditionalText;
     if ( $Param{UseLabelHints} ) {

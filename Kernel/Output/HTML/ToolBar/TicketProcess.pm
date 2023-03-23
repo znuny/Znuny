@@ -47,6 +47,7 @@ sub Run {
 
     my $ProcessList = $ProcessObject->ProcessList(
         ProcessState => ['Active'],
+        Interface    => ['AgentInterface'],
         Silent       => 1,
     );
 

@@ -781,7 +781,7 @@ sub MaskAgentZoom {
         TemplateTypes => 1,
     );
 
-    # get cofig object
+    # get config object
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     # generate shown articles
@@ -1733,11 +1733,11 @@ sub MaskAgentZoom {
             }
         }
 
-        $LayoutObject->Block(
-            Name => 'ProcessWidgetDynamicFieldGroups',
-        );
-
         if ( $#RemainingFieldsWidget + 1 ) {
+
+            $LayoutObject->Block(
+                Name => 'ProcessWidgetDynamicFieldGroups',
+            );
 
             $LayoutObject->Block(
                 Name => 'ProcessWidgetDynamicFieldGroupSeparator',

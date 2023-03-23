@@ -284,16 +284,6 @@ sub Run {
             }
         }
 
-        # add ToolBarSearch
-        my %ToolBarSearchParam;
-        my @ParamNames = $ParamObject->GetParamNames();
-        KEY:
-        for my $Key (@ParamNames) {
-
-            next KEY if $Key !~ m{^ToolBarSearch(.*)}sm;
-            $ToolBarSearchParam{$Key} = $ParamObject->GetParam( Param => $Key );
-        }
-
         # get array params
         for my $Key (
             qw(StateIDs States StateTypeIDs QueueIDs Queues PriorityIDs Priorities OwnerIDs
@@ -307,6 +297,20 @@ sub Run {
             if (@Array) {
                 $GetParam{$Key} = \@Array;
             }
+        }
+
+        # add ToolBarSearch
+        my %ToolBarSearchParam;
+        my @ParamNames = $ParamObject->GetParamNames();
+        KEY:
+        for my $Key (@ParamNames) {
+            next KEY if $Key !~ m{^ToolBarSearch(.*)}sm;
+            $ToolBarSearchParam{$Key} = $ParamObject->GetParam( Param => $Key );
+        }
+
+        if ( %ToolBarSearchParam && $ToolBarSearchParam{ToolBarSearchBackend} =~ m{^ToolBarSearchBackend(.*)}xms ) {
+            my $Key = $1;
+            $GetParam{$Key} = $ToolBarSearchParam{ToolBarSearchTerm};
         }
 
         # get Dynamic fields from param object

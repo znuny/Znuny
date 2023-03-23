@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -27,6 +27,49 @@ Kernel::System::Activity - to manage the activity
 All functions to manage the activity.
 
 =head1 PUBLIC INTERFACE
+
+=head2 Add()
+
+Creates data attributes.
+
+    my $CreatedID = $ActivityObject->Add(
+        ID               => '...',
+        Type             => '...',
+        Title            => '...',
+        Text             => '...',
+        State            => '...',
+        Link             => '...',
+        CreateTime       => '...',
+        CreateBy         => '...',
+        UserID           => 1,
+    );
+
+Returns:
+
+    my $CreatedID = 1;
+
+=cut
+
+sub Add {
+    my ( $Self, %Param ) = @_;
+
+    my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
+
+    my $Title = $HTMLUtilsObject->ToAscii( String => $Param{Title} );
+    my $Text  = $HTMLUtilsObject->ToAscii( String => $Param{Text} );
+
+    my $ActivitID = $Self->DataAdd(
+        Type     => $Param{Type},
+        Title    => $Title,
+        Text     => $Text,
+        State    => $Param{State},
+        Link     => $Param{Link},
+        CreateBy => $Param{CreateBy},
+        UserID   => $Param{UserID},
+    );
+
+    return $ActivitID;
+}
 
 =head2 GetLink()
 

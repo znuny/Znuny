@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -44,18 +44,17 @@ sub _CreateActivityTable {
     my @XMLStrings = (
         '<TableCreate Name="activity">
             <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
+            <Column Name="user_id" Required="true" Type="INTEGER"/>
             <Column Name="activity_type" Required="true" Size="200" Type="VARCHAR"/>
             <Column Name="activity_title" Required="true" Size="255" Type="VARCHAR"/>
             <Column Name="activity_text" Required="false" Type="LONGBLOB" />
-            <Column Name="activity_state" Required="false" Type="INTEGER"/>
+            <Column Name="activity_state" Required="false" Size="255" Type="VARCHAR"/>
             <Column Name="activity_link" Required="false" Size="255" Type="VARCHAR"/>
             <Column Name="create_time" Required="true" Type="DATE"/>
             <Column Name="create_by" Required="true" Type="INTEGER"/>
-            <Column Name="change_time" Required="true" Type="DATE"/>
-            <Column Name="change_by" Required="true" Type="INTEGER"/>
             <ForeignKey ForeignTable="users">
+                <Reference Local="user_id" Foreign="id"/>
                 <Reference Local="create_by" Foreign="id"/>
-                <Reference Local="change_by" Foreign="id"/>
             </ForeignKey>
         </TableCreate>',
     );

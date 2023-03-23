@@ -937,29 +937,15 @@ sub LoadDefaults {
     # CommonCSS                                           #
     # --------------------------------------------------- #
 
-    # Customer Common CSS
-    $Self->{'Loader::Customer::CommonCSS'}->{'000-Framework'} = [
-        'Core.Color.css',
-        'Core.Reset.css',
-        'Core.Default.css',
-        'Core.Form.css',
-        'Core.Dialog.css',
-        'Core.Tooltip.css',
-        'Core.Login.css',
-        'Core.Control.css',
-        'Core.Table.css',
-        'Core.TicketZoom.css',
-        'Core.InputFields.css',
-        'Core.Print.css',
-        'Core.Animations.css',
-    ];
-
     # Agent Common CSS
     $Self->{'Loader::Agent::CommonCSS'}->{'000-Framework'} = [
         'Core.Color.css',
+        'Core.Vars.css',
         'Core.Reset.css',
+        'Core.Reset.Forwwward.css',
         'Core.Default.css',
         'Core.Header.css',
+        'Core.Overview.css',
         'Core.OverviewControl.css',
         'Core.OverviewSmall.css',
         'Core.OverviewMedium.css',
@@ -977,6 +963,31 @@ sub LoadDefaults {
         'Core.InputFields.css',
         'Core.Print.css',
         'Core.Animations.css',
+        'Core.Components.css',
+        'Core.FlexboxModel.css',
+        'Core.Typography.css',
+    ];
+
+    # Customer Common CSS
+    $Self->{'Loader::Customer::CommonCSS'}->{'000-Framework'} = [
+        'Core.Color.css',
+        'Core.Vars.css',
+        'Core.Reset.css',
+        'Core.Reset.Forwwward.css',
+        'Core.Default.css',
+        'Core.Form.css',
+        'Core.Dialog.css',
+        'Core.Tooltip.css',
+        'Core.Login.css',
+        'Core.Control.css',
+        'Core.Table.css',
+        'Core.TicketZoom.css',
+        'Core.InputFields.css',
+        'Core.Print.css',
+        'Core.Animations.css',
+        'Core.FlexboxModel.css',
+        'Core.PageLayout.css',
+        'Core.Components.css'
     ];
 
     # --------------------------------------------------- #

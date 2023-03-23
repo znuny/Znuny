@@ -1063,15 +1063,6 @@ sub _Mask {
             ActivityEntityID => $Param{$ActivityEntityIDField},
         );
 
-        # output process information in the sidebar
-        $LayoutObject->Block(
-            Name => 'ProcessData',
-            Data => {
-                Process  => $ProcessData->{Name}  || '',
-                Activity => $ActivityData->{Name} || '',
-            },
-        );
-
         # output the process widget the the main screen
         $LayoutObject->Block(
             Name => 'ProcessWidget',
@@ -1083,7 +1074,7 @@ sub _Mask {
         # get next activity dialogs
         my $NextActivityDialogs;
         if ( $Param{$ActivityEntityIDField} ) {
-            $NextActivityDialogs = $ActivityData;
+            $NextActivityDialogs = $Kernel::OM->Get('Kernel::System::Storable')->Clone( Data => $ActivityData );
         }
 
         if ( IsHashRefWithData($NextActivityDialogs) ) {
@@ -1155,6 +1146,15 @@ sub _Mask {
 
             $LayoutObject->Block(
                 Name => 'NextActivities',
+            );
+
+            # output process information in the sidebar
+            $LayoutObject->Block(
+                Name => 'ProcessData',
+                Data => {
+                    Process  => $ProcessData->{Name}  || '',
+                    Activity => $ActivityData->{Name} || '',
+                },
             );
 
             for my $NextActivityDialogKey ( sort { $a <=> $b } keys %{$NextActivityDialogs} ) {
@@ -1302,25 +1302,6 @@ sub _Mask {
         );
     }
 
-    # get params
-    my $ZoomExpand = $ParamObject->GetParam( Param => 'ZoomExpand' );
-    if ( !defined $ZoomExpand ) {
-        $ZoomExpand = $ConfigObject->Get('Ticket::Frontend::CustomerTicketZoom')->{CustomerZoomExpand} || '';
-    }
-
-    # Expand option
-    my $ExpandOption = ( $ZoomExpand ? 'One'              : 'All' );
-    my $ExpandText   = ( $ZoomExpand ? 'Show one article' : 'Show all articles' );
-    $LayoutObject->Block(
-        Name => 'Expand',
-        Data => {
-            ZoomExpand   => !$ZoomExpand,
-            ExpandOption => $ExpandOption,
-            ExpandText   => $ExpandText,
-            %Param,
-        },
-    );
-
     my %Ticket = $TicketObject->TicketGet(
         TicketID => $Self->{TicketID},
         UserID   => $Self->{UserID},
@@ -1334,12 +1315,6 @@ sub _Mask {
 
     for my $ArticleTmp (@ArticleBox) {
         my %Article = %$ArticleTmp;
-
-        # check if article should be expanded (visible)
-        if ( $SelectedArticleID eq $Article{ArticleID} || $ZoomExpand ) {
-            $Article{Class} = 'Visible';
-            $ShownArticles++;
-        }
 
         # Calculate difference between article create time and now in seconds.
         my $ArticleCreateTimeObject = $Kernel::OM->Create(
@@ -1392,12 +1367,10 @@ sub _Mask {
             Class                  => $Article{Class},
             UserID                 => $Self->{UserID},
             ShowBrowserLinkMessage => $Self->{ShowBrowserLinkMessage},
-            ArticleExpanded        => $SelectedArticleID eq $Article{ArticleID} || $ZoomExpand,
             ArticleAge             => $Article{Age},
         );
     }
 
-    # TODO: Refactor
     # if there are no viewable articles show NoArticles message
     if ( !@ArticleBox ) {
         $Param{NoArticles} = 1;
@@ -1485,6 +1458,8 @@ sub _Mask {
         if ( !$Param{Subject} ) {
             $Param{Subject} = "Re: " . ( $Param{Title} // '' );
         }
+
+        $Param{ArticleID} = $SelectedArticleID;
         $LayoutObject->Block(
             Name => 'FollowUp',
             Data => \%Param,

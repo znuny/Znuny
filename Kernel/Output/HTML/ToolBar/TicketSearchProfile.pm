@@ -43,9 +43,11 @@ sub Run {
         $HTMLSearchProfiles
             .= '<a href="'
             . $LayoutObject->{Baselink}
-            . 'Action=AgentTicketSearch;Subaction=Search;Profile='
-            . $SearchProfile . '" class="ToolBarSearchProfile">'
-            . $SearchProfile . '</a>';
+            . 'Action=AgentTicketSearch;Subaction=Search;TakeLastSearch=1;SaveProfile=1;Profile='
+            . $SearchProfile . '" class="ToolBarSearchProfile dropdown-item">'
+            . '<i class="fa fa-search"></i>'
+            . '<span>' . $SearchProfile . '</span>'
+            . '</a>';
         $HTMLSearchProfiles .= '</li>';
     }
     $HTMLSearchProfiles .= '</ul>';
