@@ -20,7 +20,7 @@
 
 echo "auto_build.sh - build Znuny release files"
 echo "Copyright (C) 2001-2021 OTRS AG, https://otrs.com/";
-echo "Copyright (C) 2012-2021 Znuny GmbH, https://znuny.com/";
+echo "Copyright (C) 2021 Znuny GmbH, https://znuny.org/";
 
 PATH_TO_CVS_SRC=$1
 PRODUCT="Znuny"
