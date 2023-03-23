@@ -19,8 +19,12 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject          = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject          = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
+        my $UserObject            = $Kernel::OM->Get('Kernel::System::User');
+        my $CacheObject           = $Kernel::OM->Get('Kernel::System::Cache');
+        my $DBObject              = $Kernel::OM->Get('Kernel::System::DB');
 
         # create test user and login
         my $TestUserLogin = $HelperObject->TestUserCreate(
@@ -34,7 +38,7 @@ $Selenium->RunTest(
         );
 
         # get test user ID
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -43,7 +47,7 @@ $Selenium->RunTest(
         my $TestCompanyName = "Company" . $HelperObject->GetRandomID();
         my @CustomerCompany
             = ( 'Selenium Street', 'Selenium ZIP', 'Selenium City', 'Selenium Country', 'Selenium URL' );
-        my $CustomerCompanyID = $Kernel::OM->Get('Kernel::System::CustomerCompany')->CustomerCompanyAdd(
+        my $CustomerCompanyID = $CustomerCompanyObject->CustomerCompanyAdd(
             CustomerID             => $TestCustomerID,
             CustomerCompanyName    => $TestCompanyName,
             CustomerCompanyStreet  => $CustomerCompany[0],
@@ -61,7 +65,7 @@ $Selenium->RunTest(
         );
 
         # get script alias
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # navigate to AgentCustomerInformationCenter screen
         $Selenium->VerifiedGet(
@@ -104,7 +108,7 @@ $Selenium->RunTest(
         }
 
         # delete test customer company
-        my $Success = $Kernel::OM->Get('Kernel::System::DB')->Do(
+        my $Success = $DBObject->Do(
             SQL  => "DELETE FROM customer_company WHERE customer_id = ?",
             Bind => [ \$CustomerCompanyID ],
         );
@@ -114,7 +118,7 @@ $Selenium->RunTest(
         );
 
         # make sure the cache is correct
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'CustomerCompany',
         );
 

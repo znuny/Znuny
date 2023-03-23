@@ -20,6 +20,11 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
+        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
 
         # Create test user.
         my $TestUserLogin = $HelperObject->TestUserCreate(
@@ -27,11 +32,9 @@ $Selenium->RunTest(
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
-
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
         # Create test ticket.
         my $TicketID = $TicketObject->TicketCreate(
@@ -46,11 +49,9 @@ $Selenium->RunTest(
             UserID       => $TestUserID,
         );
 
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
         # Import sample email.
         my $Location   = $Selenium->{Home} . '/scripts/test/sample/PostMaster/PostMaster-Test26.box';
-        my $ContentRef = $Kernel::OM->Get('Kernel::System::Main')->FileRead(
+        my $ContentRef = $MainObject->FileRead(
             Location => $Location,
             Mode     => 'binmode',
             Result   => 'ARRAY',
@@ -167,7 +168,7 @@ $Selenium->RunTest(
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Ticket',
         );
     }

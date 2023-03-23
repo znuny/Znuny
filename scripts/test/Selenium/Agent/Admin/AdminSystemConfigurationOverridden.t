@@ -21,6 +21,8 @@ $Selenium->RunTest(
 
         my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
+        my $CommandObject   = $Kernel::OM->Get('Kernel::System::Console::Command::Maint::Config::Rebuild');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
 
         my $TicketHookValue = 'abc';
 
@@ -40,8 +42,7 @@ $Selenium->RunTest(
         );
 
         # Rebuild system configuration.
-        my $CommandObject = $Kernel::OM->Get('Kernel::System::Console::Command::Maint::Config::Rebuild');
-        my $ExitCode      = $CommandObject->Execute('--cleanup');
+        my $ExitCode = $CommandObject->Execute('--cleanup');
 
         # Create test user and login.
         my $TestUserLogin = $HelperObject->TestUserCreate(
@@ -54,7 +55,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminSysConfig screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminSystemConfiguration;");
@@ -70,8 +71,10 @@ $Selenium->RunTest(
         $Selenium->WaitFor(
             JavaScript => 'return typeof($) === "function" && !$("#AJAXLoaderSysConfigSearch:visible").length'
         );
+
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("li.ui-menu-item:visible").length' );
-        $Selenium->find_element( "button[type='submit']", "css" )->click();
+        $Selenium->find_element( "#SysConfigSearch", "css" )->VerifiedSubmit();
+
         $Selenium->WaitFor(
             JavaScript => 'return typeof($) === "function" && $(".fa-exclamation-triangle").length',
         );
@@ -147,94 +150,6 @@ $Selenium->RunTest(
             $CSSPathOverridden,
             'Make sure that Frontend::CSSPath is not overridden.'
         );
-
-        if ( $Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled() ) {
-
-            # Navigate to AgentPreferences screen.
-            $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentPreferences;Subaction=Group;Group=Advanced");
-
-            # Wait until page is loaded with jstree content in sidebar.
-            $Selenium->WaitFor(
-                JavaScript => 'return typeof($) === "function" && $("#ConfigTree > ul:visible").length',
-            );
-
-            # Expand navigation.
-            $Selenium->WaitFor(
-                JavaScript => 'return $("#ConfigTree li#Frontend > i").length;',
-            );
-            $Selenium->execute_script("\$('#ConfigTree li#Frontend > i').trigger('click')");
-
-            $Selenium->WaitFor(
-                JavaScript =>
-                    'return $("#ConfigTree li#Frontend\\\\:\\\\:Agent > i").length;',
-            );
-            $Selenium->execute_script("\$('#ConfigTree li#Frontend\\\\:\\\\:Agent > i').trigger('click')");
-
-            $Selenium->WaitFor(
-                JavaScript =>
-                    'return $("#ConfigTree li#Frontend\\\\:\\\\:Agent\\\\:\\\\:View > i").length;',
-            );
-            $Selenium->execute_script(
-                "\$('#ConfigTree li#Frontend\\\\:\\\\:Agent\\\\:\\\\:View > i').trigger('click')"
-            );
-
-            $Selenium->WaitFor(
-                JavaScript =>
-                    'return $("a#Frontend\\\\:\\\\:Agent\\\\:\\\\:View\\\\:\\\\:TicketEscalation_anchor").length;',
-            );
-            $Selenium->execute_script(
-                "\$('a#Frontend\\\\:\\\\:Agent\\\\:\\\\:View\\\\:\\\\:TicketEscalation_anchor').trigger('click')"
-            );
-
-            # Wait for AJAX.
-            $Selenium->WaitFor(
-                JavaScript =>
-                    'return !$(".AJAXLoader:visible").length && $("#Ticket\\\\:\\\\:Frontend\\\\:\\\\:AgentTicketEscalationView\\\\#\\\\#\\\\#Order\\\\:\\\\:Default").length',
-            );
-
-            # Update setting and save.
-            $Selenium->InputFieldValueSet(
-                Element =>
-                    '#Ticket\\\\:\\\\:Frontend\\\\:\\\\:AgentTicketEscalationView\\\\#\\\\#\\\\#Order\\\\:\\\\:Default',
-                Value => 'Down',
-            );
-
-            $Selenium->execute_script("\$('.SettingsList li:nth-child(1) .SettingUpdateBox .Update').trigger('click')");
-
-            # Wait for AJAX.
-            $Selenium->WaitFor(
-                JavaScript =>
-                    'return typeof($) === "function" && $(".SettingsList li:nth-child(1) .SettingUpdateBox .Update").length',
-            );
-
-            # Search for setting in the System Configuration.
-            $Selenium->VerifiedGet(
-                "${ScriptAlias}index.pl?Action=AdminSystemConfiguration;Subaction=Search;;Category=All;Search=Ticket::Frontend::AgentTicketEscalationView%23%23%23Order::Default"
-            );
-
-            my $ModificationAllowed = $Selenium->execute_script(
-                'return typeof($) === "function" && !$(".fa-exclamation-triangle").length',
-            );
-
-            $Self->True(
-                $ModificationAllowed,
-                'Make sure modification is still possible.'
-            );
-
-            # Search for overridden setting in the System Configuration.
-            $Selenium->VerifiedGet(
-                "${ScriptAlias}index.pl?Action=AdminSystemConfiguration;Subaction=Search;;Category=All;Search=Ticket::Frontend::AgentTicketQueue%23%23%23QueueSort"
-            );
-
-            my $ModificationNotAllowed = $Selenium->execute_script(
-                'return typeof($) === "function" && $(".fa-exclamation-triangle").length === 1',
-            );
-
-            $Self->True(
-                $ModificationNotAllowed,
-                'Make sure modification is not possible.'
-            );
-        }
     }
 );
 

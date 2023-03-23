@@ -18,7 +18,11 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+        my $UserObject    = $Kernel::OM->Get('Kernel::System::User');
+        my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
         # Enable ToolBar FulltextSearch..
         my %TicketSearchFulltext = (
@@ -31,7 +35,7 @@ $Selenium->RunTest(
 
         $HelperObject->ConfigSettingChange(
             Valid => 1,
-            Key   => 'Frontend::ToolBarModule###12-Ticket::TicketSearchFulltext',
+            Key   => 'Frontend::ToolBarModule###220-Ticket::TicketSearchFulltext',
             Value => \%TicketSearchFulltext,
         );
 
@@ -42,9 +46,16 @@ $Selenium->RunTest(
             Value => 0,
         );
 
-        my $TestUserLogin = $HelperObject->TestUserCreate(
+        # create test user and login
+        my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
             Groups => [ 'admin', 'users' ],
-        ) || die "Did not get test user";
+        );
+
+        $UserObject->SetPreferences(
+            UserID => $TestUserID,
+            Key    => 'UserToolBar',
+            Value  => 1,
+        );
 
         $Selenium->Login(
             Type     => 'Agent',
@@ -52,15 +63,8 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
-        # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
-            UserLogin => $TestUserLogin,
-        );
-
-        my $TicketObject         = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $ArticleObject        = $Kernel::OM->Get('Kernel::System::Ticket::Article');
         my $ArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Internal' );
 
         my $RandomID = $HelperObject->GetRandomID();

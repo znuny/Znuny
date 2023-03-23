@@ -41,16 +41,11 @@ my $CheckBreadcrumb = sub {
     my %Param = @_;
 
     my $BreadcrumbText = $Param{BreadcrumbText} || '';
-    my $Count          = 1;
-
     for my $BreadcrumbText ( 'Package Manager', "$BreadcrumbText Test" ) {
-        $Self->Is(
-            $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-            $BreadcrumbText,
-            "Breadcrumb text '$BreadcrumbText' is found on screen"
+        $Selenium->ElementExists(
+            Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+            SelectorType => 'css',
         );
-
-        $Count++;
     }
 };
 
@@ -61,7 +56,7 @@ my $NavigateToAdminPackageManager = sub {
 
     # Go back to overview.
     # Navigate to AdminPackageManager screen.
-    my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+    my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
     $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminPackageManager");
     $Selenium->WaitFor(
         Time => 120,

@@ -104,6 +104,7 @@ for my $Directory ( sort @DirectoriesToSearch ) {
             next OPERATION if $1 eq 'Kernel::System::Calendar::Appointment' && $SkipCalendar;
             next OPERATION if $1 eq 'Kernel::System::Calendar::Team'        && $SkipTeam;
             next OPERATION if $1 eq 'Kernel::System::GeneralCatalog'        && $SkipITSM;
+            next OPERATION if $1 eq 'Kernel::System::OTRSBusiness';
 
             # load object
             my $Object = $Kernel::OM->Get("$1");

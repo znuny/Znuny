@@ -20,6 +20,9 @@ $Selenium->RunTest(
     sub {
 
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
+        my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
+        my $GroupObject  = $Kernel::OM->Get('Kernel::System::Group');
 
         my ( $TestUserLogin, $UserID ) = $HelperObject->TestUserCreate(
             Groups => ['admin'],
@@ -34,7 +37,7 @@ $Selenium->RunTest(
         my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Group' );
+        $CacheObject->CleanUp( Type => 'Group' );
 
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminGroup");
 
@@ -73,16 +76,12 @@ $Selenium->RunTest(
         $Selenium->find_element( "#ValidID", 'css' );
 
         # Check breadcrumb on Add screen.
-        my $Count = 1;
         my $IsLinkedBreadcrumbText;
         for my $BreadcrumbText ( 'Group Management', 'Add Group' ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Check client side validation.
@@ -208,15 +207,11 @@ $Selenium->RunTest(
         );
 
         # Check breadcrumb on Edit screen.
-        $Count = 1;
         for my $BreadcrumbText ( 'Group Management', 'Edit Group: ' . $GroupName ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Set test group to invalid.
@@ -387,8 +382,7 @@ $Selenium->RunTest(
         # Since there are no tickets that rely on our test group, we can remove them again
         # from the DB.
         if ($GroupName) {
-            my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
-            my $GroupID  = $Kernel::OM->Get('Kernel::System::Group')->GroupLookup(
+            my $GroupID = $GroupObject->GroupLookup(
                 Group => $GroupName,
             );
 
@@ -414,7 +408,7 @@ $Selenium->RunTest(
         }
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Group' );
+        $CacheObject->CleanUp( Type => 'Group' );
     }
 );
 

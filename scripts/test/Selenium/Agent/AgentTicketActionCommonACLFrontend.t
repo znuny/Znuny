@@ -15,16 +15,19 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 $Selenium->RunTest(
     sub {
-        my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ACLObject       = $Kernel::OM->Get('Kernel::System::ACL::DB::ACL');
-        my $TicketObject    = $Kernel::OM->Get('Kernel::System::Ticket');
-        my $TypeObject      = $Kernel::OM->Get('Kernel::System::Type');
-        my $PriorityObject  = $Kernel::OM->Get('Kernel::System::Priority');
-        my $QueueObject     = $Kernel::OM->Get('Kernel::System::Queue');
-        my $ServiceObject   = $Kernel::OM->Get('Kernel::System::Service');
-        my $SLAObject       = $Kernel::OM->Get('Kernel::System::SLA');
-        my $CacheObject     = $Kernel::OM->Get('Kernel::System::Cache');
-        my $IsITSMInstalled = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
+        my $HelperObject   = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ACLObject      = $Kernel::OM->Get('Kernel::System::ACL::DB::ACL');
+        my $TicketObject   = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $TypeObject     = $Kernel::OM->Get('Kernel::System::Type');
+        my $PriorityObject = $Kernel::OM->Get('Kernel::System::Priority');
+        my $QueueObject    = $Kernel::OM->Get('Kernel::System::Queue');
+        my $ServiceObject  = $Kernel::OM->Get('Kernel::System::Service');
+        my $SLAObject      = $Kernel::OM->Get('Kernel::System::SLA');
+        my $CacheObject    = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
+        my $UtilObject     = $Kernel::OM->Get('Kernel::System::Util');
+
+        my $IsITSMInstalled = $UtilObject->IsITSMInstalled();
 
         $HelperObject->ConfigSettingChange(
             Valid => 1,
@@ -248,7 +251,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         my @Tests = (
             {

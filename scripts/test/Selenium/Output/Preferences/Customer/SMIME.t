@@ -21,7 +21,6 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get helper object
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
         # enable SMIME in config

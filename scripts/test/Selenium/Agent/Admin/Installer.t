@@ -35,6 +35,8 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
+        my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
 
         # Parse the TestDatabase hash from configuration to variables.
         my $TestDatabase = $ConfigObject->Get('TestDatabase');
@@ -249,10 +251,10 @@ $Selenium->RunTest(
                 "$Home/scripts/database/initial_insert.xml",
             );
 
-            my @Tables = $Kernel::OM->Get('Kernel::System::DB')->ListTables();
+            my @Tables = $DBObject->ListTables();
 
             # Count number of table elements in OTRS schema for comparison.
-            my $XMLString = $Kernel::OM->Get('Kernel::System::Main')->FileRead(
+            my $XMLString = $MainObject->FileRead(
                 Location => $DatabaseXMLFiles[0],
             );
             my $TableCount = () = ( ${$XMLString} =~ /<Table/g );

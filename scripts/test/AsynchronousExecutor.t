@@ -14,8 +14,12 @@ use utf8;
 
 use vars (qw($Self));
 
-my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-my $Home         = $Kernel::OM->Get('Kernel::Config')->Get('Home');
+my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $SchedulerDBObject = $Kernel::OM->Get('Kernel::System::Daemon::SchedulerDB');
+my $TaskWorkerObject  = $Kernel::OM->Get('Kernel::System::Daemon::DaemonModules::SchedulerTaskWorker');
+my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
+
+my $Home = $ConfigObject->Get('Home');
 
 my $Daemon = $Home . '/bin/znuny.Daemon.pl';
 
@@ -42,9 +46,6 @@ if ( $PreviousDaemonStatus =~ m{Daemon running}i ) {
     print 'Sleeping ' . $SleepTime . "s\n";
     sleep $SleepTime;
 }
-
-my $SchedulerDBObject = $Kernel::OM->Get('Kernel::System::Daemon::SchedulerDB');
-my $TaskWorkerObject  = $Kernel::OM->Get('Kernel::System::Daemon::DaemonModules::SchedulerTaskWorker');
 
 my $RunTasks = sub {
 

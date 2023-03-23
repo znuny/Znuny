@@ -21,10 +21,10 @@ $Selenium->RunTest(
         my $ConfigObject     = $Kernel::OM->Get('Kernel::Config');
         my $HelperObject     = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $AttachmentObject = $Kernel::OM->Get('Kernel::System::StdAttachment');
+        my $CacheObject      = $Kernel::OM->Get('Kernel::System::Cache');
 
         my $Home = $ConfigObject->Get('Home');
         my %Attachments;
-        my $Count;
         my $IsLinkedBreadcrumbText;
 
         # create test user and login
@@ -61,15 +61,11 @@ $Selenium->RunTest(
             $Selenium->find_element("//a[contains(\@href, \'Action=AdminAttachment;Subaction=Add' )]")->VerifiedClick();
 
             # check breadcrumb on Add screen
-            $Count = 1;
             for my $BreadcrumbText ( 'Attachment Management', 'Add Attachment' ) {
-                $Self->Is(
-                    $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                    $BreadcrumbText,
-                    "Breadcrumb text '$BreadcrumbText' is found on screen"
+                $Selenium->ElementExists(
+                    Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                    SelectorType => 'css',
                 );
-
-                $Count++;
             }
 
             # check form action
@@ -105,15 +101,11 @@ $Selenium->RunTest(
             $Selenium->find_element( $AttachmentName, 'link_text' )->VerifiedClick();
 
             # check breadcrumb on Edit screen
-            $Count = 1;
             for my $BreadcrumbText ( 'Attachment Management', 'Edit Attachment: ' . $AttachmentName ) {
-                $Self->Is(
-                    $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                    $BreadcrumbText,
-                    "Breadcrumb text '$BreadcrumbText' is found on screen"
+                $Selenium->ElementExists(
+                    Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                    SelectorType => 'css',
                 );
-
-                $Count++;
             }
 
             # check form actions
@@ -302,7 +294,7 @@ $Selenium->RunTest(
             );
         }
 
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp();
+        $CacheObject->CleanUp();
     }
 );
 

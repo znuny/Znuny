@@ -20,22 +20,26 @@ my $CheckBreadcrumb = sub {
     my %Param = @_;
 
     my $BreadcrumbText = $Param{BreadcrumbText} || '';
-    my $Count          = 1;
 
     for my $BreadcrumbText ( 'System Email Addresses Management', $BreadcrumbText ) {
-        $Self->Is(
-            $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-            $BreadcrumbText,
-            "Breadcrumb text '$BreadcrumbText' is found on screen"
+        $Selenium->ElementExists(
+            Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+            SelectorType => 'css',
         );
-        $Count++;
     }
 };
 
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject        = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $UserObject          = $Kernel::OM->Get('Kernel::System::User');
+        my $QueueObject         = $Kernel::OM->Get('Kernel::System::Queue');
+        my $ConfigObject        = $Kernel::OM->Get('Kernel::Config');
+        my $SystemAddressObject = $Kernel::OM->Get('Kernel::System::SystemAddress');
+        my $AutoResponseObject  = $Kernel::OM->Get('Kernel::System::AutoResponse');
+        my $CacheObject         = $Kernel::OM->Get('Kernel::System::Cache');
+        my $DBObject            = $Kernel::OM->Get('Kernel::System::DB');
 
         # Disable check email address.
         $HelperObject->ConfigSettingChange(
@@ -50,12 +54,11 @@ $Selenium->RunTest(
         ) || die "Did not get test user";
 
         # Get test user ID.
-        my $UserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $UserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
         # Add test Queue.
-        my $QueueObject   = $Kernel::OM->Get('Kernel::System::Queue');
         my $QueueRandomID = "queue" . $HelperObject->GetRandomID();
         my $QueueID       = $QueueObject->QueueAdd(
             Name            => $QueueRandomID,
@@ -79,7 +82,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminSystemAddress screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminSystemAddress");
@@ -96,7 +99,7 @@ $Selenium->RunTest(
         );
 
         # Click 'Add system address'.
-        $Selenium->find_element("//a[contains(\@href, \'Action=AdminSystemAddress;Subaction=Add')]")->VerifiedClick();
+        $Selenium->find_element("//a[contains(\@href, 'Action=AdminSystemAddress;Subaction=Add')]")->VerifiedClick();
 
         # Check add new SystemAddress screen.
         for my $ID (
@@ -174,7 +177,7 @@ $Selenium->RunTest(
         );
 
         # Get created system address ID.
-        my %SysAddList = $Kernel::OM->Get('Kernel::System::SystemAddress')->SystemAddressList(
+        my %SysAddList = $SystemAddressObject->SystemAddressList(
             Valid => 1,
         );
         %SysAddList = reverse %SysAddList;
@@ -335,7 +338,6 @@ $Selenium->RunTest(
 
         # Check if is possible to set address used by auto responce to invalid, see bug#14243.
         # Set system address to valid.
-        my $SystemAddressObject = $Kernel::OM->Get('Kernel::System::SystemAddress');
         $SystemAddressObject->SystemAddressUpdate(
             ID       => $SysAddList{$SysAddRandom},
             Name     => $SysAddRandom,
@@ -346,7 +348,6 @@ $Selenium->RunTest(
             UserID   => 1,
         );
 
-        my $AutoResponseObject   = $Kernel::OM->Get('Kernel::System::AutoResponse');
         my $AutoResponseNameRand = 'SystemAddress' . $HelperObject->GetRandomID();
 
         # Add auto response.
@@ -520,8 +521,6 @@ $Selenium->RunTest(
             "AutoResponseID $AutoResponseID is set to invalid",
         );
 
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
-
         # Delete auto response.
         $Success = $DBObject->Do(
             SQL => "DELETE FROM auto_response WHERE id = $AutoResponseID",
@@ -546,8 +545,6 @@ $Selenium->RunTest(
             $Success,
             "QueueID $QueueRandomID is deleted",
         );
-
-        my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
         # Make sure cache is correct.
         for my $Cache (qw(Queue SystemAddress)) {

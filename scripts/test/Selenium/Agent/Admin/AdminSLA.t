@@ -13,14 +13,15 @@ use utf8;
 
 use vars (qw($Self));
 
-my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
-my $Selenium     = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
+my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 $Selenium->RunTest(
     sub {
 
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $SLAObject    = $Kernel::OM->Get('Kernel::System::SLA');
 
         my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
@@ -77,15 +78,11 @@ $Selenium->RunTest(
         );
 
         # Check breadcrumb on Add screen.
-        my $Count = 1;
         for my $BreadcrumbText ( 'SLA Management', 'Add SLA' ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Create test SLA.
@@ -122,15 +119,11 @@ $Selenium->RunTest(
         );
 
         # Check breadcrumb on Edit screen.
-        $Count = 1;
         for my $BreadcrumbText ( 'SLA Management', 'Edit SLA: ' . $SLARandomID ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Remove test SLA comment and set it to invalid.
@@ -180,7 +173,7 @@ $Selenium->RunTest(
         );
 
         # Since there are no tickets that rely on our test SLA we can remove it from DB.
-        my $SLAID = $Kernel::OM->Get('Kernel::System::SLA')->SLALookup(
+        my $SLAID = $SLAObject->SLALookup(
             Name => $SLARandomID,
         );
         if ($SLARandomID) {

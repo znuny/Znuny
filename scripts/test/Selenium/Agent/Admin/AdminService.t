@@ -18,7 +18,17 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+        my $DBObject      = $Kernel::OM->Get('Kernel::System::DB');
+        my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
+        my $CacheObject   = $Kernel::OM->Get('Kernel::System::Cache');
+
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'Ticket::Service',
+            Value => 1,
+        );
 
         # Create test user and login.
         my $TestUserLogin = $HelperObject->TestUserCreate(
@@ -31,7 +41,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Navigate to AdminService screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminService");
@@ -80,15 +90,11 @@ $Selenium->RunTest(
         }
 
         # Check breadcrumb on Add screen.
-        my $Count = 1;
         for my $BreadcrumbText ( 'Service Management', 'Add Service' ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Create first test Service.
@@ -137,18 +143,12 @@ $Selenium->RunTest(
         );
 
         # Check breadcrumb on Edit screen.
-        $Count = 1;
         for my $BreadcrumbText ( 'Service Management', 'Edit Service: ' . $ServiceRandomID2 ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
-
-        my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
 
         # Get test Services IDs.
         my @ServiceIDs;
@@ -260,7 +260,6 @@ $Selenium->RunTest(
         );
 
         # Since there are no tickets that rely on our test Services we can remove them from DB.
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
         for my $ServiceID (@ServiceIDs) {
             my $Success = $DBObject->Do(
                 SQL => "DELETE FROM service_preferences WHERE service_id = $ServiceID",
@@ -279,7 +278,7 @@ $Selenium->RunTest(
         }
 
         # Make sure cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Service'
         );
     }

@@ -19,7 +19,9 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
+        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
         # Do not check RichText.
         $HelperObject->ConfigSettingChange(
@@ -34,8 +36,6 @@ $Selenium->RunTest(
             Key   => 'Ticket::Type',
             Value => 1
         );
-
-        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
         my @DynamicFields = (
             {
@@ -252,7 +252,7 @@ $Selenium->RunTest(
         sleep 1;
 
         # Get test user ID.
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 

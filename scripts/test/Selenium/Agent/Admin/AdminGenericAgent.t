@@ -13,15 +13,24 @@ use utf8;
 
 use vars (qw($Self));
 
-my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-my $Selenium     = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
+my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $TimeObject         = $Kernel::OM->Get('Kernel::System::Time');
 
         my $RandomID = $HelperObject->GetRandomID();
+
+        my $SystemTime = $TimeObject->SystemTime();
+        my ( $Sec, $Min, $Hour, $Day, $Month, $Year, $WeekDay ) = $TimeObject->SystemTime2Date(
+            SystemTime => $SystemTime,
+        );
 
         # set generic agent run limit
         $HelperObject->ConfigSettingChange(
@@ -43,7 +52,7 @@ $Selenium->RunTest(
         ) || die "Did not get test user";
 
         # get test user ID
-        my $UserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $UserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -54,7 +63,7 @@ $Selenium->RunTest(
             Password => $TestUserLogin,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # navigate to AdminGenericAgent screen
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminGenericAgent");
@@ -71,8 +80,6 @@ $Selenium->RunTest(
 
             return 1;
         }
-
-        my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
         # create test dynamic field of type date
         my $DynamicFieldName = 'Test' . $RandomID;
@@ -118,9 +125,6 @@ $Selenium->RunTest(
             "Dynamic field $CheckboxDynamicFieldName - ID $CheckboxDynamicFieldID - created",
         );
 
-        # get ticket object
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
-
         # create test tickets
         my $TestTicketTitle = "Test Ticket $RandomID Generic Agent";
         my @TicketNumbers;
@@ -153,9 +157,7 @@ $Selenium->RunTest(
         }
 
         # check overview AdminGenericAgent
-        $Selenium->find_element( "table",             'css' );
-        $Selenium->find_element( "table thead tr th", 'css' );
-        $Selenium->find_element( "table tbody tr td", 'css' );
+        $Selenium->find_element( "table#GenericAgentJobs", 'css' );
 
         # check breadcrumb on Overview screen
         $Self->True(
@@ -167,16 +169,12 @@ $Selenium->RunTest(
         $Selenium->find_element("//a[contains(\@href, \'Subaction=Update' )]")->VerifiedClick();
 
         # check breadcrumb on Add job screen
-        my $Count = 1;
         my $IsLinkedBreadcrumbText;
         for my $BreadcrumbText ( 'Generic Agent Job Management', 'Add Job' ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         my $Element = $Selenium->find_element( "#Profile", 'css' );
@@ -337,8 +335,7 @@ $Selenium->RunTest(
             "Dynamic field '$DynamicFieldName' is added",
         );
 
-        $Selenium->find_element( "#DynamicField_${DynamicFieldName}Year", 'css' )->send_keys('2015');
-
+        $Selenium->find_element( "#DynamicField_${DynamicFieldName}Year", 'css' )->send_keys($Year);
         $Selenium->find_element( "#DynamicField_${DynamicFieldName}Used", 'css' )->click();
 
         # save job
@@ -392,15 +389,11 @@ $Selenium->RunTest(
         $Selenium->find_element( $GenericAgentJob, 'link_text' )->VerifiedClick();
 
         # check breadcrumb on Edit job screen
-        $Count = 1;
         for my $BreadcrumbText ( 'Generic Agent Job Management', 'Edit Job: ' . $GenericAgentJob ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # toggle Execute Ticket Commands widget
@@ -444,15 +437,11 @@ $Selenium->RunTest(
         $Selenium->find_element("//a[contains(\@href, \'Subaction=Run;Profile=$GenericAgentJob' )]")->VerifiedClick();
 
         # check breadcrumb on Run job screen
-        $Count = 1;
         for my $BreadcrumbText ( 'Generic Agent Job Management', 'Run Job: ' . $GenericAgentJob ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # check if test job show expected result

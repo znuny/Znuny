@@ -20,7 +20,6 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        # get needed objects
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
         my $JSONObject   = $Kernel::OM->Get('Kernel::System::JSON');
@@ -55,6 +54,13 @@ $Selenium->RunTest(
             Valid => 1,
             Key   => 'SMIME::PrivatePath',
             Value => $PrivatePath,
+        );
+
+        # enable PerformanceLog
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'PerformanceLog',
+            Value => 1
         );
 
         # create test user and login

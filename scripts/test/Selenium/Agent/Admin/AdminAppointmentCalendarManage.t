@@ -25,6 +25,9 @@ $Selenium->RunTest(
     sub {
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $GroupObject  = $Kernel::OM->Get('Kernel::System::Group');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $QueueObject  = $Kernel::OM->Get('Kernel::System::Queue');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
 
         my $RandomID = $HelperObject->GetRandomID();
 
@@ -41,7 +44,7 @@ $Selenium->RunTest(
         );
 
         # Create test queue.
-        my $QueueID = $Kernel::OM->Get('Kernel::System::Queue')->QueueAdd(
+        my $QueueID = $QueueObject->QueueAdd(
             Name            => "Queue$RandomID",
             ValidID         => 1,
             GroupID         => $GroupID,
@@ -56,7 +59,7 @@ $Selenium->RunTest(
             'Test queue created',
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Change resolution (desktop mode).
         $Selenium->set_window_size( 768, 1050 );
@@ -328,7 +331,7 @@ $Selenium->RunTest(
 
         # Make sure cache is correct.
         for my $Cache (qw(Calendar Queue)) {
-            $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => $Cache );
+            $CacheObject->CleanUp( Type => $Cache );
         }
     },
 );

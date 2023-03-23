@@ -20,6 +20,8 @@ $Selenium->RunTest(
 
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
+        my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
 
         $HelperObject->ConfigSettingChange(
             Valid => 1,
@@ -93,15 +95,11 @@ $Selenium->RunTest(
         );
 
         # Check breadcrumb on Add screen.
-        my $Count = 1;
         for my $BreadcrumbText ( 'Type Management', 'Add Type' ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Check form action.
@@ -140,15 +138,11 @@ $Selenium->RunTest(
         $Selenium->find_element( $TypeRandomID, 'link_text' )->VerifiedClick();
 
         # Check breadcrumb on Edit screen.
-        $Count = 1;
         for my $BreadcrumbText ( 'Type Management', 'Edit Type: ' . $TypeRandomID ) {
-            $Self->Is(
-                $Selenium->execute_script("return \$('.BreadCrumb li:eq($Count)').text().trim()"),
-                $BreadcrumbText,
-                "Breadcrumb text '$BreadcrumbText' is found on screen"
+            $Selenium->ElementExists(
+                Selector     => ".BreadCrumb>li>[title='$BreadcrumbText']",
+                SelectorType => 'css',
             );
-
-            $Count++;
         }
 
         # Check form actions.
@@ -278,7 +272,6 @@ $Selenium->RunTest(
         # Since there are no tickets that rely on our test types, we can remove them again
         # from the DB.
         if ($TypeRandomID) {
-            my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
             $TypeRandomID = $DBObject->Quote($TypeRandomID);
             my $Success = $DBObject->Do(
                 SQL  => "DELETE FROM ticket_type WHERE name = ?",
@@ -291,7 +284,7 @@ $Selenium->RunTest(
         }
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        $CacheObject->CleanUp(
             Type => 'Type',
         );
 

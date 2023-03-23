@@ -22,8 +22,11 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 $Selenium->RunTest(
     sub {
 
-        my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+        my $CacheObject        = $Kernel::OM->Get('Kernel::System::Cache');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $HelperObject       = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
 
         # Change "Move" action to be a link instead of dropdown, since there is an issue to click
         # on the "Customer" action (dropdown can be on top is some cases).
@@ -39,7 +42,7 @@ $Selenium->RunTest(
             Groups   => [ 'admin', 'users' ],
         ) || die "Did not get test user";
 
-        my $TestUserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $TestUserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -74,10 +77,10 @@ $Selenium->RunTest(
         );
 
         # the footer is in the way some times
-        sleep(1);
+        sleep 1;
 
         # Close dialog.
-        $Selenium->find_element( '#DialogButton2', 'css' )->click();
+        $Selenium->find_element( '#DialogButton1', 'css' )->click();
 
         # Wait until modal dialog has closed.
         $Selenium->WaitFor(
@@ -159,7 +162,7 @@ JAVASCRIPT
         );
 
         # Close the dialog.
-        $Selenium->find_element( '#DialogButton2', 'css' )->click();
+        $Selenium->find_element( '#DialogButton1', 'css' )->click();
         $Selenium->WaitFor(
             JavaScript => 'return typeof($) === "function" && !$(".Dialog.Modal").length;'
         );
@@ -183,7 +186,7 @@ JAVASCRIPT
         );
 
         # Now we close the dialog manually.
-        $Selenium->find_element( '#DialogButton2', 'css' )->click();
+        $Selenium->find_element( '#DialogButton1', 'css' )->click();
         $Selenium->WaitFor(
             JavaScript => 'return typeof($) === "function" && !$(".Dialog.Modal").length;'
         );
@@ -217,7 +220,7 @@ JAVASCRIPT
         my $TestCustomerUser = $HelperObject->TestCustomerUserCreate(
         ) || die "Did not get test customer user";
 
-        my %TestCustomerUserID = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserDataGet(
+        my %TestCustomerUserID = $CustomerUserObject->CustomerUserDataGet(
             User => $TestCustomerUser,
         );
 
@@ -295,7 +298,7 @@ JAVASCRIPT
             "ConnectionReEstablished dialog visible"
         );
 
-        $Selenium->find_element( '#DialogButton2', 'css' )->click();
+        $Selenium->find_element( '#DialogButton1', 'css' )->click();
 
         # Wait until modal dialog has closed.
         $Selenium->WaitFor(
@@ -325,7 +328,7 @@ JAVASCRIPT
         );
 
         # Make sure the cache is correct.
-        $Kernel::OM->Get('Kernel::System::Cache')->CleanUp( Type => 'Ticket' );
+        $CacheObject->CleanUp( Type => 'Ticket' );
     }
 );
 

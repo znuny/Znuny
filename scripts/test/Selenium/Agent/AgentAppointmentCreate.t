@@ -19,18 +19,22 @@ $Selenium->RunTest(
     sub {
         my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $AppointmentObject = $Kernel::OM->Get('Kernel::System::Calendar::Appointment');
+        my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
+        my $GroupObject       = $Kernel::OM->Get('Kernel::System::Group');
+        my $UserObject        = $Kernel::OM->Get('Kernel::System::User');
+        my $CalendarObject    = $Kernel::OM->Get('Kernel::System::Calendar');
 
         my $RandomID = $HelperObject->GetRandomID();
 
         # Create test group.
         my $GroupName = "test-calendar-group-$RandomID";
-        my $GroupID   = $Kernel::OM->Get('Kernel::System::Group')->GroupAdd(
+        my $GroupID   = $GroupObject->GroupAdd(
             Name    => $GroupName,
             ValidID => 1,
             UserID  => 1,
         );
 
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Get current system time.
         my $StartTimeObject = $Kernel::OM->Create(
@@ -57,7 +61,7 @@ $Selenium->RunTest(
         ) || die "Did not get test user";
 
         # Get UserID.
-        my $UserID = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
+        my $UserID = $UserObject->UserLookup(
             UserLogin => $TestUserLogin,
         );
 
@@ -69,7 +73,7 @@ $Selenium->RunTest(
         );
 
         # Create a few test calendars.
-        my %Calendar1 = $Kernel::OM->Get('Kernel::System::Calendar')->CalendarCreate(
+        my %Calendar1 = $CalendarObject->CalendarCreate(
             CalendarName => "My Calendar $RandomID",
             Color        => '#3A87AD',
             GroupID      => $GroupID,

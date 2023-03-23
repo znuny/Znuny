@@ -19,10 +19,12 @@ $Selenium->RunTest(
     sub {
         my $HelperObject    = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
-        my $ScriptAlias     = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+        my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
         # Load sample XML file.
-        my $Directory = $Kernel::OM->Get('Kernel::Config')->Get('Home')
+        my $Directory = $ConfigObject->Get('Home')
             . '/scripts/test/sample/SysConfig/XML/AdminSystemConfiguration/Deployment';
 
         my $XMLLoaded = $SysConfigObject->ConfigurationXML2DB(
