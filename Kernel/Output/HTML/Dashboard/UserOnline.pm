@@ -251,47 +251,6 @@ sub Run {
     my $Count      = 0;
     my $Limit      = $LayoutObject->{ $Self->{PrefKey} } || $Self->{Config}->{Limit};
 
-    # Check if agent has permission to start chats with the listed users
-    my $EnableChat               = 1;
-    my $ChatStartingAgentsGroup  = $ConfigObject->Get('ChatEngine::PermissionGroup::ChatStartingAgents') || 'users';
-    my $ChatReceivingAgentsGroup = $ConfigObject->Get('ChatEngine::PermissionGroup::ChatReceivingAgents') || 'users';
-
-    my $ChatStartingAgentsGroupPermission = $Kernel::OM->Get('Kernel::System::Group')->PermissionCheck(
-        UserID    => $Self->{UserID},
-        GroupName => $ChatStartingAgentsGroup,
-        Type      => 'rw',
-    );
-
-    if ( !$ConfigObject->Get('ChatEngine::Active') || !$ChatStartingAgentsGroupPermission ) {
-        $EnableChat = 0;
-    }
-    if ( $EnableChat && $Self->{Filter} eq 'Agent' && !$ConfigObject->Get('ChatEngine::ChatDirection::AgentToAgent') ) {
-        $EnableChat = 0;
-    }
-    if (
-        $EnableChat
-        && $Self->{Filter} eq 'Customer'
-        && !$ConfigObject->Get('ChatEngine::ChatDirection::AgentToCustomer')
-        )
-    {
-        $EnableChat = 0;
-    }
-
-    my $VideoChatEnabled               = 0;
-    my $VideoChatAgentsGroup           = $ConfigObject->Get('ChatEngine::PermissionGroup::VideoChatAgents') || 'users';
-    my $VideoChatAgentsGroupPermission = $Kernel::OM->Get('Kernel::System::Group')->PermissionCheck(
-        UserID    => $Self->{UserID},
-        GroupName => $VideoChatAgentsGroup,
-        Type      => 'rw',
-    );
-
-    # Enable the video chat feature if system is entitled and agent is a member of configured group.
-    if ( $ConfigObject->Get('ChatEngine::Active') && $VideoChatAgentsGroupPermission ) {
-        if ( $Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::VideoChat', Silent => 1 ) ) {
-            $VideoChatEnabled = $Kernel::OM->Get('Kernel::System::VideoChat')->IsEnabled();
-        }
-    }
-
     # Online thresholds for agents and customers (default 5 min).
     my $OnlineThreshold = (
         $Self->{Filter} eq 'Agent'
@@ -316,100 +275,23 @@ sub Run {
         next USERID if $Count < $Self->{StartHit};
         last USERID if $Count >= ( $Self->{StartHit} + $Self->{PageShown} );
 
-        my $UserData           = $OnlineData{$UserID};
-        my $AgentEnableChat    = 0;
-        my $CustomerEnableChat = 0;
-        my $ChatAccess         = 0;
-        my $VideoChatAvailable = 0;
-        my $VideoChatSupport   = 0;
+        my $UserData = $OnlineData{$UserID};
 
         # Set Default status to active, because a offline user is not visible in the list.
         my $UserState            = Translatable('Active');
         my $UserStateDescription = $UserActiveDescription;
 
-        # We also need to check if the receiving agent has chat permissions.
-        if ( $EnableChat && $Self->{Filter} eq 'Agent' ) {
-
-            my %UserGroups = $Kernel::OM->Get('Kernel::System::Group')->PermissionUserGet(
-                UserID => $UserData->{UserID},
-                Type   => 'rw',
-            );
-
-            my %UserGroupsReverse = reverse %UserGroups;
-            $ChatAccess = $UserGroupsReverse{$ChatReceivingAgentsGroup} ? 1 : 0;
-
-            my %User = $Kernel::OM->Get('Kernel::System::User')->GetUserData(
-                UserID => $UserID,
-            );
-            $VideoChatSupport = $User{VideoChatHasWebRTC};
-
-            # Check agents availability.
-            if ($ChatAccess) {
-                my $AgentChatAvailability = $Kernel::OM->Get('Kernel::System::Chat')->AgentAvailabilityGet(
-                    UserID   => $UserID,
-                    External => 0,
-                );
-
-                if ( $AgentChatAvailability == 3 ) {
-                    $UserState            = Translatable('Active');
-                    $AgentEnableChat      = 1;
-                    $UserStateDescription = $UserActiveDescription;
-                    $VideoChatAvailable   = 1;
-                }
-                elsif ( $AgentChatAvailability == 2 ) {
-                    $UserState            = Translatable('Away');
-                    $AgentEnableChat      = 1;
-                    $UserStateDescription = $UserAwayDescription;
-                }
-                elsif ( $AgentChatAvailability == 1 ) {
-                    $UserState            = Translatable('Unavailable');
-                    $UserStateDescription = $UserUnavailableDescription;
-                }
-            }
-        }
-        elsif ($EnableChat) {
-            $ChatAccess = 1;
-
-            my $CustomerChatAvailability = $Kernel::OM->Get('Kernel::System::Chat')->CustomerAvailabilityGet(
-                UserID => $UserData->{UserID},
-            );
-
-            my %CustomerUser = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserDataGet(
-                User => $UserID,
-            );
-            $VideoChatSupport = 1 if $CustomerUser{VideoChatHasWebRTC};
-
-            if ( $CustomerChatAvailability == 3 ) {
-                $UserState            = Translatable('Active');
-                $CustomerEnableChat   = 1;
-                $UserStateDescription = $UserActiveDescription;
-                $VideoChatAvailable   = 1;
-            }
-            elsif ( $CustomerChatAvailability == 2 ) {
-                $UserState            = Translatable('Away');
-                $CustomerEnableChat   = 1;
-                $UserStateDescription = $UserAwayDescription;
-            }
-        }
-        else {
-            if ( $UserData->{UserLastRequest} + ( 60 * $OnlineThreshold ) < $SystemTime ) {
-                $UserState            = Translatable('Away');
-                $UserStateDescription = $UserAwayDescription;
-            }
+        if ( $UserData->{UserLastRequest} + ( 60 * $OnlineThreshold ) < $SystemTime ) {
+            $UserState            = Translatable('Away');
+            $UserStateDescription = $UserAwayDescription;
         }
 
         $LayoutObject->Block(
             Name => 'ContentSmallUserOnlineRow',
             Data => {
                 %{$UserData},
-                ChatAccess           => $ChatAccess,
-                AgentEnableChat      => $AgentEnableChat,
-                CustomerEnableChat   => $CustomerEnableChat,
                 UserState            => $UserState,
                 UserStateDescription => $UserStateDescription,
-                VideoChatEnabled     => $VideoChatEnabled,
-                VideoChatAvailable   => $VideoChatAvailable,
-                VideoChatSupport     => $VideoChatSupport,
             },
         );
 

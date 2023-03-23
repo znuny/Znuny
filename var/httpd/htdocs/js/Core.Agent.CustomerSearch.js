@@ -277,8 +277,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
             if (
                 Core.Config.Get('Action') === 'AgentTicketPhone' ||
                 Core.Config.Get('Action') === 'AgentTicketEmail' ||
-                Core.Config.Get('Action') === 'AgentTicketCustomer' ||
-                Core.Config.Get('Action') === 'AgentChatAppend'
+                Core.Config.Get('Action') === 'AgentTicketCustomer'
                 )
             {
                 CustomerHistoryEvents();

@@ -5546,7 +5546,7 @@ sub _GenericAgentCreateIfNotExists {
 Adds article action menu items.
 
     my %ArticleActions = (
-        Internal => [ # Channel name (Internal, Phone, Email, Chat or Invalid)
+        Internal => [ # Channel name (Internal, Phone, Email or Invalid)
             {
                 Key      => 'ZnunyMarkTicketSeenUnseen',
                 Module   => 'Kernel::Output::HTML::ArticleAction::MyMenuItem',
@@ -5609,7 +5609,7 @@ sub _ArticleActionsAdd {
 Removes article action menu items.
 
     my %ArticleActions = (
-        Internal => [ # Channel name (Internal, Phone, Email, Chat or Invalid)
+        Internal => [ # Channel name (Internal, Phone, Email or Invalid)
             {
                 Module   => 'Kernel::Output::HTML::ArticleAction::MyMenuItem',
                 Priority => 999,

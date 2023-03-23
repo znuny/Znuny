@@ -31,11 +31,6 @@ if ( !$ConfigObject->Get('PGP') ) {
     $SkipCryptPGP = 1;
 }
 
-my $SkipChat;
-if ( !$ConfigObject->Get('ChatEngine::Active') ) {
-    $SkipChat = 1;
-}
-
 my $SkipCalendar;
 if ( !$Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::Calendar', Silent => 1 ) ) {
     $SkipCalendar = 1;
@@ -105,9 +100,6 @@ for my $Directory ( sort @DirectoriesToSearch ) {
             # skip crypt object if it is not configured
             next OPERATION if $1 eq 'Kernel::System::Crypt::SMIME'          && $SkipCryptSMIME;
             next OPERATION if $1 eq 'Kernel::System::Crypt::PGP'            && $SkipCryptPGP;
-            next OPERATION if $1 eq 'Kernel::System::Chat'                  && $SkipChat;
-            next OPERATION if $1 eq 'Kernel::System::ChatChannel'           && $SkipChat;
-            next OPERATION if $1 eq 'Kernel::System::VideoChat'             && $SkipChat;
             next OPERATION if $1 eq 'Kernel::System::Calendar'              && $SkipCalendar;
             next OPERATION if $1 eq 'Kernel::System::Calendar::Appointment' && $SkipCalendar;
             next OPERATION if $1 eq 'Kernel::System::Calendar::Team'        && $SkipTeam;
