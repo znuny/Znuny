@@ -22,7 +22,7 @@ our @ObjectDependencies = (
 );
 
 sub GetDisplayPath {
-    return Translatable('OTRS') . '/' . Translatable('Articles Per Communication Channel');
+    return Translatable('Znuny') . '/' . Translatable('Articles Per Communication Channel');
 }
 
 sub Run {

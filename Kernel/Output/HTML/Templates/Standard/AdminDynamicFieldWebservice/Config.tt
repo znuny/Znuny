@@ -5,196 +5,209 @@
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
-<label class="Mandatory" for="Webservice"><span class="Marker">*</span> [% Translate("Web service") | html %]:</label>
-<div class="Field">
-    [% Data.WebserviceOption %]
-    <div id="WebserviceError" class="TooltipErrorMessage"><p>[% Translate("This field is required, and the value should be alphabetic and numeric characters only.") | html %]</p></div>
-    <div id="WebserviceServerError" class="TooltipErrorMessage"><p>[% Translate(Data.WebserviceServerErrorMessage) | html %]</p></div>
-    <p class="FieldExplanation">
-        [% Translate("Web service which will be used for this dynamic field.") | html %]
-    </p>
-</div>
-<div class="Clear"></div>
-<label class="Mandatory" for="InvokerSearch"><span class="Marker">*</span> [% Translate("Invoker to search for records") | html %]:</label>
-<div class="Field">
-    [% Data.InvokerSearchOption %]
-     <div id="InvokerSearchError" class="TooltipErrorMessage"><p>[% Translate("This field is required, and the value should be alphabetic and numeric characters only.") | html %]</p></div>
-    <div id="InvokerSearchServerError" class="TooltipErrorMessage"><p>[% Translate(Data.WebserviceServerErrorMessage) | html %]</p></div>
-    <p class="FieldExplanation">
-        [% Translate("Invoker which will be used for this dynamic field. Searches for the search term(s) and returns an array as result. Note: The invoker needs to be enabled in the web service you specified above.") | html %]
-    </p>
-</div>
-<div class="Clear"></div>
 
-<label class="Mandatory" for="InvokerGet"><span class="Marker">*</span> [% Translate("Invoker to get a record") | html %]:</label>
-<div class="Field">
-    [% Data.InvokerGetOption %]
-     <div id="InvokerGetError" class="TooltipErrorMessage"><p>[% Translate("This field is required, and the value should be alphabetic and numeric characters only.") | html %]</p></div>
-    <div id="InvokerGetServerError" class="TooltipErrorMessage"><p>[% Translate(Data.WebserviceServerErrorMessage) | html %]</p></div>
-    <p class="FieldExplanation">
-        [% Translate("Invoker which will be used for this dynamic field. Returns a hash of the record that will be found when searching for its identifier in the field configured in 'key for stored value' below. Note: The invoker needs to be enabled in the web service you specified above.") | html %]
-    </p>
+<div class="field-wrapper">
+    <label class="Mandatory" for="Webservice"><span class="Marker">*</span> [% Translate("Web service") | html %]</label>
+    <div class="Field">
+        [% Data.WebserviceOption %]
+        <div id="WebserviceError" class="TooltipErrorMessage"><p>[% Translate("This field is required, and the value should be alphabetic and numeric characters only.") | html %]</p></div>
+        <div id="WebserviceServerError" class="TooltipErrorMessage"><p>[% Translate(Data.WebserviceServerErrorMessage) | html %]</p></div>
+        <p class="FieldExplanation">
+            [% Translate("Web service which will be used for this dynamic field.") | html %]
+        </p>
+    </div>
 </div>
-<div class="Clear"></div>
-
-<label class="Mandatory" for="Backend"><span class="Marker">*</span> [% Translate("Backend") | html %]:</label>
-<div class="Field">
-    [% Data.BackendOption %]
-     <div id="BackendError" class="TooltipErrorMessage"><p>[% Translate("This field is required, and the value should be alphabetic and numeric characters only.") | html %]</p></div>
-    <div id="BackendServerError" class="TooltipErrorMessage"><p>[% Translate(Data.WebserviceServerErrorMessage) | html %]</p></div>
-    <p class="FieldExplanation">
-        [% Translate("Backend which will be used for this dynamic field.") | html %]
-        <br/>
-        [% Translate("Backend documentation") | html %]:
-        <br/>
-        <textarea id="BackendDocumentation" rows="5" cols="53">[% Data.BackendDocumentation %]</textarea>
-    </p>
+<div class="field-wrapper">
+    <label class="Mandatory" for="InvokerSearch"><span class="Marker">*</span> [% Translate("Invoker to search for records") | html %]</label>
+    <div class="Field">
+        [% Data.InvokerSearchOption %]
+        <div id="InvokerSearchError" class="TooltipErrorMessage"><p>[% Translate("This field is required, and the value should be alphabetic and numeric characters only.") | html %]</p></div>
+        <div id="InvokerSearchServerError" class="TooltipErrorMessage"><p>[% Translate(Data.WebserviceServerErrorMessage) | html %]</p></div>
+        <p class="FieldExplanation">
+            [% Translate("Invoker which will be used for this dynamic field. Searches for the search term(s) and returns an array as result. Note: The invoker needs to be enabled in the web service you specified above.") | html %]
+        </p>
+    </div>
 </div>
-<div class="Clear"></div>
-
-<label for="SearchKeys">[% Translate("Key for search") | html %]:</label>
-<div class="Field">
-    <input id="SearchKeys" class="W50pc [% Data.SearchKeysServerError | html %]" type="text" maxlength="200" value="[% Data.SearchKeys | html %]" name="SearchKeys"/>
-    <div id="SearchKeysServerError" class="TooltipErrorMessage"><p>[% Translate(Data.SearchKeysServerErrorMessage) | html %]</p></div>
-    <p class="FieldExplanation">[% Translate("The keys (separated by comma) that will be searched when using the autocomplete while entering a value for the dynamic field.") | html %]</p>
+<div class="field-wrapper">
+    <label class="Mandatory" for="InvokerGet"><span class="Marker">*</span> [% Translate("Invoker to get a record") | html %]</label>
+    <div class="Field">
+        [% Data.InvokerGetOption %]
+        <div id="InvokerGetError" class="TooltipErrorMessage"><p>[% Translate("This field is required, and the value should be alphabetic and numeric characters only.") | html %]</p></div>
+        <div id="InvokerGetServerError" class="TooltipErrorMessage"><p>[% Translate(Data.WebserviceServerErrorMessage) | html %]</p></div>
+        <p class="FieldExplanation">
+            [% Translate("Invoker which will be used for this dynamic field. Returns a hash of the record that will be found when searching for its identifier in the field configured in 'key for stored value' below. Note: The invoker needs to be enabled in the web service you specified above.") | html %]
+        </p>
+    </div>
 </div>
-<div class="Clear"></div>
-
-<label class="Mandatory" for="StoredValue"><span class="Marker">*</span> [% Translate("Key for stored value") | html %]:</label>
-<div class="Field">
-    <input id="StoredValue" class="W50pc [% Data.StoredValueServerError | html %] Validate_Required" type="text" maxlength="200" value="[% Data.StoredValue | html %]" name="StoredValue"/>
-    <div id="StoredValueError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-    <div id="StoredValueServerError" class="TooltipErrorMessage"><p>[% Translate(Data.StoredValueServerErrorMessage) | html %]</p></div>
-    <p class="FieldExplanation">[% Translate("The key whose value will be stored in the dynamic field.") | html %]</p>
+<div class="field-wrapper">
+    <label class="Mandatory" for="Backend"><span class="Marker">*</span> [% Translate("Backend") | html %]</label>
+    <div class="Field">
+        [% Data.BackendOption %]
+        <div id="BackendError" class="TooltipErrorMessage"><p>[% Translate("This field is required, and the value should be alphabetic and numeric characters only.") | html %]</p></div>
+        <div id="BackendServerError" class="TooltipErrorMessage"><p>[% Translate(Data.WebserviceServerErrorMessage) | html %]</p></div>
+        <p class="FieldExplanation field-wrapper">
+            [% Translate("Backend which will be used for this dynamic field.") | html %]
+            <br/>
+            [% Translate("Backend documentation") | html %]:
+            <br/>
+            <textarea id="BackendDocumentation" rows="5" cols="53">[% Data.BackendDocumentation %]</textarea>
+        </p>
+    </div>
 </div>
-<div class="Clear"></div>
-
-<label for="DisplayedValues">[% Translate("Key to display") | html %]:</label>
-<div class="Field">
-    <input id="DisplayedValues" class="W50pc [% Data.DisplayedValuesServerError | html %]" type="text" maxlength="2000" value="[% Data.DisplayedValues | html %]" name="DisplayedValues"/>
-    <div id="DisplayedValuesServerError" class="TooltipErrorMessage"><p>[% Translate(Data.DisplayedValuesServerErrorMessage) | html %]</p></div>
-    <p class="FieldExplanation">[% Translate("The keys (separated by comma) that will be shown when the value of the dynamic field is being displayed. This also affects the value displayed in the autocomplete field when entering a value. If this field is left empty, the stored value from above will be displayed.") | html %]</p>
+<div class="field-wrapper">
+    <label for="SearchKeys">[% Translate("Key for search") | html %]</label>
+    <div class="Field">
+        <input id="SearchKeys" class="W50pc [% Data.SearchKeysServerError | html %]" type="text" maxlength="200" value="[% Data.SearchKeys | html %]" name="SearchKeys"/>
+        <div id="SearchKeysServerError" class="TooltipErrorMessage"><p>[% Translate(Data.SearchKeysServerErrorMessage) | html %]</p></div>
+        <p class="FieldExplanation">[% Translate("The keys (separated by comma) that will be searched when using the autocomplete while entering a value for the dynamic field.") | html %]</p>
+    </div>
 </div>
-<div class="Clear"></div>
-
+<div class="field-wrapper">
+    <label class="Mandatory" for="StoredValue"><span class="Marker">*</span> [% Translate("Key for stored value") | html %]</label>
+    <div class="Field">
+        <input id="StoredValue" class="W50pc [% Data.StoredValueServerError | html %] Validate_Required" type="text" maxlength="200" value="[% Data.StoredValue | html %]" name="StoredValue"/>
+        <div id="StoredValueError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+        <div id="StoredValueServerError" class="TooltipErrorMessage"><p>[% Translate(Data.StoredValueServerErrorMessage) | html %]</p></div>
+        <p class="FieldExplanation">[% Translate("The key whose value will be stored in the dynamic field.") | html %]</p>
+    </div>
+</div>
+<div class="field-wrapper">
+    <label for="DisplayedValues">[% Translate("Key to display") | html %]</label>
+    <div class="Field">
+        <input id="DisplayedValues" class="W50pc [% Data.DisplayedValuesServerError | html %]" type="text" maxlength="2000" value="[% Data.DisplayedValues | html %]" name="DisplayedValues"/>
+        <div id="DisplayedValuesServerError" class="TooltipErrorMessage"><p>[% Translate(Data.DisplayedValuesServerErrorMessage) | html %]</p></div>
+        <p class="FieldExplanation">[% Translate("The keys (separated by comma) that will be shown when the value of the dynamic field is being displayed. This also affects the value displayed in the autocomplete field when entering a value. If this field is left empty, the stored value from above will be displayed.") | html %]</p>
+    </div>
+</div>
 [% RenderBlockStart("TemplateType") %]
-<label for="TemplateType"></span> [% Translate("Template Type") | html %]:</label>
-<div class="Field">
-    [% Data.TemplateTypeOption %]
-    <div id="TemplateTypeServerError" class="TooltipErrorMessage"><p>[% Translate(Data.TemplateTypeServerErrorMessage) | html %]</p></div>
-    <p class="FieldExplanation">[% Translate("This configuration determines how the values of the dynamic field are output in templates or masks.") | html %]</p>
+<div class="field-wrapper">
+    <label for="TemplateType"></span> [% Translate("Template Type") | html %]</label>
+    <div class="Field">
+        [% Data.TemplateTypeOption %]
+        <div id="TemplateTypeServerError" class="TooltipErrorMessage"><p>[% Translate(Data.TemplateTypeServerErrorMessage) | html %]</p></div>
+        <p class="FieldExplanation">[% Translate("This configuration determines how the values of the dynamic field are output in templates or masks.") | html %]</p>
+    </div>
 </div>
-<div class="Clear"></div>
 [% RenderBlockEnd("TemplateType") %]
 
-
-<label for="DisplayedValuesSeparator">[% Translate("Separator to display between multi-key values") | html %]:</label>
-<div class="Field">
-    <input id="DisplayedValuesSeparator" class="W50pc [% Data.DisplayedValuesSeparatorServerError | html %]" type="text" maxlength="200" value="[% Data.DisplayedValuesSeparator | html %]" name="DisplayedValuesSeparator"/>
-    <div id="DisplayedValuesSeparatorServerError" class="TooltipErrorMessage"><p>[% Translate(Data.DisplayedValuesSeparatorServerErrorMessage) | html %]</p></div>
-    <p class="FieldExplanation">[% Translate("The separator to show between the values if there's more than one key configured to be displayed above. If left empty, a single space will be used as separator. Use <space> to add spaces.") | html %]</p>
+<div class="field-wrapper">
+    <label for="DisplayedValuesSeparator">[% Translate("Separator to display between multi-key values") | html %]</label>
+    <div class="Field">
+        <input id="DisplayedValuesSeparator" class="W50pc [% Data.DisplayedValuesSeparatorServerError | html %]" type="text" maxlength="200" value="[% Data.DisplayedValuesSeparator | html %]" name="DisplayedValuesSeparator"/>
+        <div id="DisplayedValuesSeparatorServerError" class="TooltipErrorMessage"><p>[% Translate(Data.DisplayedValuesSeparatorServerErrorMessage) | html %]</p></div>
+        <p class="FieldExplanation">[% Translate("The separator to show between the values if there's more than one key configured to be displayed above. If left empty, a single space will be used as separator. Use <space> to add spaces.") | html %]</p>
+    </div>
 </div>
-<div class="Clear"></div>
 
-<label for="Limit">[% Translate("Limit") | html %]:</label>
-<div class="Field">
-    <input id="Limit" class="W50pc [% Data.LimitServerError | html %]" type="text" maxlength="3" value="[% Data.Limit | html %]" name="Limit"/>
-    <div id="LimitServerError" class="TooltipErrorMessage"><p>[% Translate(Data.LimitServerErrorMessage) | html %]</p></div>
-    <p class="FieldExplanation">[% Translate("Maximum number of results for web service queries, e.g. for autocomplete selection list.") | html %]</p>
+<div class="field-wrapper">
+    <label for="Limit">[% Translate("Limit") | html %]</label>
+    <div class="Field">
+        <input id="Limit" class="W50pc [% Data.LimitServerError | html %]" type="text" maxlength="3" value="[% Data.Limit | html %]" name="Limit"/>
+        <div id="LimitServerError" class="TooltipErrorMessage"><p>[% Translate(Data.LimitServerErrorMessage) | html %]</p></div>
+        <p class="FieldExplanation">[% Translate("Maximum number of results for web service queries, e.g. for autocomplete selection list.") | html %]</p>
+    </div>
 </div>
-<div class="Clear"></div>
 
-<label for="AutocompleteMinLength">[% Translate("Autocomplete min. input length") | html %]:</label>
-<div class="Field">
-    <input id="AutocompleteMinLength" class="W50pc [% Data.AutocompleteMinLengthServerError | html %]" type="text" maxlength="2" value="[% Data.AutocompleteMinLength | html %]" name="AutocompleteMinLength"/>
-    <div id="AutocompleteMinLengthServerError" class="TooltipErrorMessage"><p>[% Translate(Data.AutocompleteMinLengthServerErrorMessage) | html %]</p></div>
-    <p class="FieldExplanation">[% Translate("Minimum length of input for autocomplete field to trigger search.") | html %]</p>
+<div class="field-wrapper">
+    <label for="AutocompleteMinLength">[% Translate("Autocomplete min. input length") | html %]</label>
+    <div class="Field">
+        <input id="AutocompleteMinLength" class="W50pc [% Data.AutocompleteMinLengthServerError | html %]" type="text" maxlength="2" value="[% Data.AutocompleteMinLength | html %]" name="AutocompleteMinLength"/>
+        <div id="AutocompleteMinLengthServerError" class="TooltipErrorMessage"><p>[% Translate(Data.AutocompleteMinLengthServerErrorMessage) | html %]</p></div>
+        <p class="FieldExplanation">[% Translate("Minimum length of input for autocomplete field to trigger search.") | html %]</p>
+    </div>
 </div>
-<div class="Clear"></div>
 
-<label for="QueryDelay">[% Translate("Query delay") | html %]:</label>
-<div class="Field">
-    <input id="QueryDelay" class="W50pc [% Data.QueryDelayServerError | html %]" type="text" maxlength="6" value="[% Data.QueryDelay | html %]" name="QueryDelay"/>
-    <div id="QueryDelayServerError" class="TooltipErrorMessage"><p>[% Translate(Data.QueryDelayServerErrorMessage) | html %]</p></div>
-    <p class="FieldExplanation">[% Translate("Delay (in milliseconds) until the AJAX request will be sent.") | html %]</p>
+<div class="field-wrapper">
+    <label for="QueryDelay">[% Translate("Query delay") | html %]</label>
+    <div class="Field">
+        <input id="QueryDelay" class="W50pc [% Data.QueryDelayServerError | html %]" type="text" maxlength="6" value="[% Data.QueryDelay | html %]" name="QueryDelay"/>
+        <div id="QueryDelayServerError" class="TooltipErrorMessage"><p>[% Translate(Data.QueryDelayServerErrorMessage) | html %]</p></div>
+        <p class="FieldExplanation">[% Translate("Delay (in milliseconds) until the AJAX request will be sent.") | html %]</p>
+    </div>
 </div>
-<div class="Clear"></div>
 
-<label for="AutocompletionForSearchFields">[% Translate("Autocompletion for search fields") | html %]:</label>
-<div class="Field">
-    [% Data.AutocompletionForSearchFieldsSelection %]
-    <p class="FieldExplanation">[% Translate("Use autocompletion for search fields instead of a static selection of values that are currently selected in OTRS (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch.") | html %]</p>
+<div class="field-wrapper">
+    <label for="AutocompletionForSearchFields">[% Translate("Autocompletion for search fields") | html %]</label>
+    <div class="Field">
+        [% Data.AutocompletionForSearchFieldsSelection %]
+        <p class="FieldExplanation">[% Translate("Use autocompletion for search fields instead of a static selection of values that are currently selected in Znuny (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch.") | html %]</p>
+    </div>
 </div>
-<div class="Clear"></div>
 
-<label for="InputFieldWidth">[% Translate("Input field width") | html %]:</label>
-<div class="Field">
-    [% Data.InputFieldWidthSelection %]
-    <p class="FieldExplanation">[% Translate("Width of the input field (percentage).") | html %]</p>
+<div class="field-wrapper">
+    <label for="InputFieldWidth">[% Translate("Input field width") | html %]</label>
+    <div class="Field">
+        [% Data.InputFieldWidthSelection %]
+        <p class="FieldExplanation">[% Translate("Width of the input field (percentage).") | html %]</p>
+    </div>
 </div>
-<div class="Clear"></div>
-
 [% RenderBlockStart("AdditionalDFStorage") %]
-<label>[% Translate("Additional dynamic field storage") | html %]:</label>
-<div class="Field ValueInsert AdditionalDFStorageRow" data-formelement-restore-destination='AdditionalDFStorage'  data-formelement-add-destination="AdditionalDFStorage">
+<div class="field-wrapper">
+    <label>[% Translate("Additional dynamic field storage") | html %]</label>
+    <div class="Field ValueInsert AdditionalDFStorageRow" data-formelement-restore-destination='AdditionalDFStorage'  data-formelement-add-destination="AdditionalDFStorage">
 [% RenderBlockStart("AdditionalDFStorageValueCounter") %]
-    <input type="hidden" name="AdditionalDFStorageValueCounter" data-formelement-add-counter="AdditionalDFStorageCounter" value="[% Data.AdditionalDFStorageValueCounter | html %]" id="AdditionalDFStorageValueCounter" class="ValueCounter" />
+        <input type="hidden" name="AdditionalDFStorageValueCounter" data-formelement-add-counter="AdditionalDFStorageCounter" value="[% Data.AdditionalDFStorageValueCounter | html %]" id="AdditionalDFStorageValueCounter" class="ValueCounter" />
 [% RenderBlockEnd("AdditionalDFStorageValueCounter") %]
 [% RenderBlockStart("AdditionalDFStorageRow") %]
-    <div class="ValueRow" data-formelement-remove-destination="AdditionalDFStorageRow_[% Data.AdditionalDFStorageValueCounter | html %]" >
+        <div class="ValueRow full-width" data-formelement-remove-destination="AdditionalDFStorageRow_[% Data.AdditionalDFStorageValueCounter | html %]" >
 
-        <label class="Mandatory" for="DynamicField_[% Data.AdditionalDFStorageValueCounter | html %]"><span class="Marker">*</span>[% Translate("Dynamic field") | html %]:</label>
-        [% Data.DynamicFieldSelection %]
-        <div id="DynamicField_[% Data.AdditionalDFStorageValueCounter | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-        <div id="DynamicField_[% Data.AdditionalDFStorageValueCounter | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate(Data.DynamicFieldErrorMessage) | html %]</p></div>
+            <label class="Mandatory" for="DynamicField_[% Data.AdditionalDFStorageValueCounter | html %]"><span class="Marker">*</span>[% Translate("Dynamic field") | html %]</label>
+            [% Data.DynamicFieldSelection %]
+            <div id="DynamicField_[% Data.AdditionalDFStorageValueCounter | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+            <div id="DynamicField_[% Data.AdditionalDFStorageValueCounter | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate(Data.DynamicFieldErrorMessage) | html %]</p></div>
 
-        <label class="Mandatory" for="Key_[% Data.AdditionalDFStorageValueCounter | html %]"><span class="Marker">*</span>[% Translate("Key") | html %]:</label>
-        <input name="Key_[% Data.AdditionalDFStorageValueCounter | html %]" id="Key_[% Data.AdditionalDFStorageValueCounter | html %]" class="DefaultValueItem Validate_Required DataTable VariableWidth [% Data.KeyError | html %]" type="text" maxlength="100" value="[% Data.Key | html %]"/>
-        <div id="Key_[% Data.AdditionalDFStorageValueCounter | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-        <div id="Key_[% Data.AdditionalDFStorageValueCounter | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate(Data.KeyErrorMessage) | html %]</p></div>
+            <label class="Mandatory" for="Key_[% Data.AdditionalDFStorageValueCounter | html %]"><span class="Marker">*</span>[% Translate("Key") | html %]</label>
+            <input name="Key_[% Data.AdditionalDFStorageValueCounter | html %]" id="Key_[% Data.AdditionalDFStorageValueCounter | html %]" class="DefaultValueItem Validate_Required DataTable VariableWidth [% Data.KeyError | html %]" type="text" maxlength="100" value="[% Data.Key | html %]"/>
+            <div id="Key_[% Data.AdditionalDFStorageValueCounter | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+            <div id="Key_[% Data.AdditionalDFStorageValueCounter | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate(Data.KeyErrorMessage) | html %]</p></div>
 
-        [% Data.TypeOption %]
+            [% Data.TypeOption %]
 
-        <a href="#" id="RemoveValue_[% Data.AdditionalDFStorageValueCounter | html %]" class="RemoveButton ValueRemove" data-formelement-remove='AdditionalDFStorage'  data-formelement-remove-destination-name="AdditionalDFStorageRow_[% Data.AdditionalDFStorageValueCounter | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove value") | html %]</span></a>
-        <div class="SpacingTopMini" ></div>
-    </div>
+            <a href="#" id="RemoveValue_[% Data.AdditionalDFStorageValueCounter | html %]" class="RemoveButton ValueRemove" data-formelement-remove='AdditionalDFStorage'  data-formelement-remove-destination-name="AdditionalDFStorageRow_[% Data.AdditionalDFStorageValueCounter | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove value") | html %]</span></a>
+            <div class="SpacingTopMini" ></div>
+        </div>
 [% RenderBlockEnd("AdditionalDFStorageRow") %]
 [% RenderBlockStart("AdditionalDFStorageTemplate") %]
-    <div class="ValueTemplate Hidden" data-formelement-add-source="AdditionalDFStorageTemplate">
+        <div class="ValueTemplate field-wrapper full-width Hidden" data-formelement-add-source="AdditionalDFStorageTemplate">
 
-        <label class="Mandatory" for="DynamicField"><span class="Marker">*</span>[% Translate("Dynamic field") | html %]:</label>
-        [% Data.DynamicFieldSelectionTemplate %]
-        <div id="DynamicFieldError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-        <div id="DynamicFieldServerError" class="TooltipErrorMessage"><p>[% Translate(Data.DynamicFieldErrorMessage) | html %]</p></div>
+            <div class="field-wrapper">
+                <label class="Mandatory" for="DynamicField"><span class="Marker">*</span>[% Translate("Dynamic field") | html %]</label>
+                [% Data.DynamicFieldSelectionTemplate %]
+                <div id="DynamicFieldError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                <div id="DynamicFieldServerError" class="TooltipErrorMessage"><p>[% Translate(Data.DynamicFieldErrorMessage) | html %]</p></div>
+            </div>
 
-        <label class="Mandatory" for="Key"><span class="Marker">*</span>[% Translate("Key") | html %]:</label>
-        <input name="Key" id="Key" class="DefaultValueItem DataTable VariableWidth" type="text" maxlength="100" value=""/>
-        <div id="KeyError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-        <div id="KeyServerError" class="TooltipErrorMessage"><p>[% Translate(Data.KeyErrorMessage) | html %]</p></div>
+            <div class="field-wrapper">
+                <label class="Mandatory" for="Key"><span class="Marker">*</span>[% Translate("Key") | html %]</label>
+                <input name="Key" id="Key" class="DefaultValueItem DataTable VariableWidth" type="text" maxlength="100" value=""/>
+                <div id="KeyError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                <div id="KeyServerError" class="TooltipErrorMessage"><p>[% Translate(Data.KeyErrorMessage) | html %]</p></div>
+            </div>
 
-        [% Data.TypeOption %]
+            [% Data.TypeOption %]
 
-        <a href="#" id="RemoveValue" class="RemoveButton ValueRemove" data-formelement-remove='AdditionalDFStorage' data-formelement-remove-destination-name="AdditionalDFStorageRow"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove value") | html %]</span></a>
-        <div class="SpacingTopMini" ></div>
-    </div>
+            <a href="#" id="RemoveValue" class="RemoveButton ValueRemove" data-formelement-remove='AdditionalDFStorage' data-formelement-remove-destination-name="AdditionalDFStorageRow"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove value") | html %]</span></a>
+            <div class="SpacingTopMini" ></div>
+        </div>
 [% RenderBlockEnd("AdditionalDFStorageTemplate") %]
+    </div>
 </div>
-<div class="Clear"></div>
 
-<label for="AddValue">[% Translate("Add dynamic field") | html %]:</label>
-<div class="Field">
+<div class="field-wrapper">
+    <label for="AddValue">[% Translate("Add dynamic field") | html %]</label>
+    <div class="Field">
 
-    <a href="#" class="AddValue" id="AddValue" class="AddButton"
-        data-formelement-add='AdditionalDFStorage'
-        data-formelement-add-destination-name="AdditionalDFStorage"
-        data-formelement-add-source-name="AdditionalDFStorageTemplate"
-        data-formelement-add-counter-name="AdditionalDFStorageCounter"
-        data-formelement-add-method='append'><i class="fa fa-plus-square-o"></i><span class="InvisibleText">[% Translate("Add Value") | html %]</span></a>
-    <a href="#" id="Restore" class="Restore"
-    data-formelement-restore
-    data-formelement-restore-destination-name='AdditionalDFStorage'
-    ><i class="fa fa-undo"></i><span class="InvisibleText">[% Translate("Restore values") | html %]</span></a>
-    <p class="FieldExplanation">[% Translate("These dynamic fields are also filled with values from the same record.") | html %]</p>
+        <a href="#" class="AddValue AddButton" id="AddValue"
+            data-formelement-add='AdditionalDFStorage'
+            data-formelement-add-destination-name="AdditionalDFStorage"
+            data-formelement-add-source-name="AdditionalDFStorageTemplate"
+            data-formelement-add-counter-name="AdditionalDFStorageCounter"
+            data-formelement-add-method='append'><i class="fa fa-plus-square-o"></i><span class="InvisibleText">[% Translate("Add Value") | html %]</span></a>
+        <a href="#" id="Restore" class="Restore icon-hover"
+        data-formelement-restore
+        data-formelement-restore-destination-name='AdditionalDFStorage'
+        ><i class="fa fa-undo"></i><span class="InvisibleText">[% Translate("Restore values") | html %]</span></a>
+        <p class="FieldExplanation">[% Translate("These dynamic fields are also filled with values from the same record.") | html %]</p>
+    </div>
 </div>
-<div class="Clear SpacingBottom"></div>
 [% RenderBlockEnd("AdditionalDFStorage") %]

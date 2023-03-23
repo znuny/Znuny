@@ -565,7 +565,7 @@ sub Run {
             return $LayoutObject->ErrorScreen(
                 Message =>
                     Translatable(
-                    'System Configuration could not be imported due to an unknown error, please check OTRS logs for more information.'
+                    'System Configuration could not be imported due to an unknown error, please check Znuny logs for more information.'
                     ),
             );
         }

@@ -87,7 +87,7 @@
                     <div class="Field">
                         <input type="text" id="OTRSDBUser" name="OTRSDBUser" value="[% Config("DatabaseUser") %]" class="W50pc" autocomplete="off" />
                         <p class="FieldExplanation">
-                            [% Translate("A new database user with limited permissions will be created for this OTRS system.") | html %]
+                            [% Translate("A new database user with limited permissions will be created for this Znuny system.") | html %]
                         </p>
                     </div>
                     <div class="Clear"></div>

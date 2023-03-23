@@ -30,11 +30,11 @@
                     <div class="Field">
                         <div>
                             <input type="radio" id="DBInstallTypeCreateDB" name="DBInstallType" checked value="CreateDB" />
-                            <label for="DBInstallTypeCreateDB">[% Translate("Create a new database for OTRS") | html %]</label>
+                            <label for="DBInstallTypeCreateDB">[% Translate("Create a new database for Znuny") | html %]</label>
                         </div>
                         <div>
                             <input type="radio" id="DBInstallTypeUseDB" name="DBInstallType" value="UseDB" />
-                            <label for="DBInstallTypeUseDB">[% Translate("Use an existing database for OTRS") | html %]</label>
+                            <label for="DBInstallTypeUseDB">[% Translate("Use an existing database for Znuny") | html %]</label>
                         </div>
                     </div>
                     <div class="Clear"></div>

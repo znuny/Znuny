@@ -325,12 +325,12 @@
                 <div class="Content">
 [% RenderBlockStart("DetailsCommunicationTypeExplanationProvider") %]
                     <p class="FieldExplanation">
-                                [% Translate("In provider mode, OTRS offers web services which are used by remote systems.") | html %]
+                                [% Translate("In provider mode, Znuny offers web services which are used by remote systems.") | html %]
                     </p>
 [% RenderBlockEnd("DetailsCommunicationTypeExplanationProvider") %]
 [% RenderBlockStart("DetailsCommunicationTypeExplanationRequester") %]
                     <p class="FieldExplanation">
-                                [% Translate("In requester mode, OTRS uses web services of remote systems.") | html %]
+                                [% Translate("In requester mode, Znuny uses web services of remote systems.") | html %]
                     </p>
 [% RenderBlockEnd("DetailsCommunicationTypeExplanationRequester") %]
                     <h4 class="SpacingTop SpacingBottom">[% Translate("Settings") | html %]</h4>

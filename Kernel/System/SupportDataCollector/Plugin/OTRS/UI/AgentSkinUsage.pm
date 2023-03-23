@@ -23,7 +23,7 @@ our @ObjectDependencies = (
 );
 
 sub GetDisplayPath {
-    return Translatable('OTRS') . '/' . Translatable('UI - Agent Skin Usage');
+    return Translatable('Znuny') . '/' . Translatable('UI - Agent Skin Usage');
 }
 
 sub Run {

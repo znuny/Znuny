@@ -24,7 +24,7 @@ our @ObjectDependencies = (
 );
 
 sub GetDisplayPath {
-    return Translatable('OTRS') . '/' . Translatable('Time Settings');
+    return Translatable('Znuny') . '/' . Translatable('Time Settings');
 }
 
 sub Run {
@@ -46,16 +46,16 @@ sub Run {
     if ( defined $OTRSTimeZone ) {
         $Self->AddResultOk(
             Identifier => 'OTRSTimeZone',
-            Label      => Translatable('OTRS time zone'),
+            Label      => Translatable('Znuny time zone'),
             Value      => $OTRSTimeZone,
         );
     }
     else {
         $Self->AddResultProblem(
             Identifier => 'OTRSTimeZone',
-            Label      => Translatable('OTRS time zone'),
+            Label      => Translatable('Znuny time zone'),
             Value      => '',
-            Message    => Translatable('OTRS time zone is not set.'),
+            Message    => Translatable('Znuny time zone is not set.'),
         );
     }
 

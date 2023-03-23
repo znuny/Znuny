@@ -194,7 +194,7 @@ sub Run {
         if ($DontKnowSettings) {
             $Output .= $LayoutObject->Notify(
                 Info => $LayoutObject->{LanguageObject}->Translate(
-                    "Some imported settings are not present in the current state of the configuration or it was not possible to update them. Please check the OTRS log for more information."
+                    "Some imported settings are not present in the current state of the configuration or it was not possible to update them. Please check the Znuny log for more information."
                 ),
                 Link => $LayoutObject->{Baselink} . 'Action=AdminLog',
             );

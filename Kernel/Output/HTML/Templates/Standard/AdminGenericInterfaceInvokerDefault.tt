@@ -6,35 +6,9 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst AdminGenericInterfaceInvokerDefault">
-    <h1 class="InvisibleText">[% Translate("GenericInterface Web Service Management") | html %]</h1>
 
-    [% USE BreadcrumbLink = String("AdminGenericInterfaceWebservice") %]
-
-    [% BreadcrumbPath = [
-            {
-                Name => Translate( 'Web Service Management' ),
-                Link => BreadcrumbLink,
-            },
-            {
-                Name => Data.WebserviceName,
-                Link => BreadcrumbLink.copy.append( ";Subaction=Change;WebserviceID=", Data.WebserviceID ),
-            },
-        ]
-    %]
-
-    [% SWITCH Data.Mode %]
-        [% CASE 'Add' %]
-            [% BreadcrumbPath.push({ Name => Translate("Add Invoker"),}) %]
-        [% CASE 'Change' %]
-            [% USE EditTitle = String(Translate("Edit Invoker")) %]
-            [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.Invoker ), }) %]
-    [% END %]
-
-    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
-    <div class="Clear"></div>
-    <div class="SidebarColumn">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst AdminGenericInterfaceInvokerDefault ActionsSideBar">
+    <div class="SidebarColumn ActionsSideBarComp">
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
@@ -42,28 +16,53 @@
             <div class="Content">
                 <ul class="ActionList">
                     <li>
-                        <a href="[% Env("Baselink") %]Action=AdminGenericInterfaceWebservice;Subaction=Change;WebserviceID=[% Data.WebserviceID | uri %]" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i> [% Translate("Go back to web service") | html %]</span></a>
+                        <a href="[% Env("Baselink") %]Action=AdminGenericInterfaceWebservice;Subaction=Change;WebserviceID=[% Data.WebserviceID | uri %]" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i> [% Translate("Go back to web service") | html %]</span></a>
                     </li>
                     [% IF Data.Mode == 'Change' %]
-                        <li>
-                            <button class="CallForAction Fullsize Center" type="button" id="DeleteButton"><span> <i class="fa fa-trash-o"></i> [% Translate("Delete") | html %]</span></button>
-                            <div class="Hidden" id="DeleteDialogContainer">
-                                <span class="WarningDialog ">&nbsp;</span>
-                                <p id="DeleteDialog" class="Center Warning">
-                                    [% Translate("Do you really want to delete this invoker?") | html %]
-                                </p>
-                                <p class="Center Warning">
-                                    [% Translate("All configuration data will be lost.") | html %]
-                                </p>
-                                <div class="SpacingTop"></div>
-                            </div>
-                        </li>
+                    <li>
+                        <button class="CallForAction btn-main btn-primary-ghost" type="button" id="DeleteButton"><span> <i class="fa fa-trash-o"></i> [% Translate("Delete") | html %]</span></button>
+                        <div class="Hidden" id="DeleteDialogContainer">
+                            <span class="WarningDialog ">
+                            </span>
+                            <p id="DeleteDialog" class="Center Warning">
+                                [% Translate("Do you really want to delete this invoker?") | html %]
+                            </p>
+                            <p class="Center Warning">
+                                [% Translate("All configuration data will be lost.") | html %]
+                            </p>
+                        </div>
+                    </li>
                     [% END %]
-                    </ul>
+                </ul>
             </div>
         </div>
     </div>
     <div class="ContentColumn">
+
+        <h1 class="InvisibleText">[% Translate("GenericInterface Web Service Management") | html %]</h1>
+        [% USE BreadcrumbLink = String("AdminGenericInterfaceWebservice") %]
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate( 'Web Service Management' ),
+                    Link => BreadcrumbLink,
+                },
+                {
+                    Name => Data.WebserviceName,
+                    Link => BreadcrumbLink.copy.append( ";Subaction=Change;WebserviceID=", Data.WebserviceID ),
+                },
+            ]
+        %]
+
+        [% SWITCH Data.Mode %]
+            [% CASE 'Add' %]
+                [% BreadcrumbPath.push({ Name => Translate("Add Invoker"),}) %]
+            [% CASE 'Change' %]
+                [% USE EditTitle = String(Translate("Edit Invoker")) %]
+                [% BreadcrumbPath.push({ Name => EditTitle.append( ': ', Data.Invoker ), }) %]
+        [% END %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
 
         <div class="WidgetSimple">
             <div class="Header">
@@ -80,169 +79,192 @@
                     [% END %]
 
                     <fieldset class="TableLike">
-                        <label for="Invoker" class="Mandatory">
-                            <span class="Marker">*</span>
-                            [% Translate("Name") | html %]:
-                        </label>
-                        <div class="Field">
-                            <input type="text" class="W50pc RegisterChange Validate_Required [% Data.InvokerServerError | html %]" maxlength="200" id="Invoker" name="Invoker" value="[% Data.NewInvoker | html %]" />
-                            <input type="hidden" id="OldInvoker" name="OldInvoker" value="[% Data.Invoker | html %]" />
-                            <p class="FieldExplanation">
-                                [% Translate("The name is typically used to call up an operation of a remote web service.") | html %]
-                            </p>
-                            <div id="InvokerError" class="TooltipErrorMessage">
-                                [% Translate("This field is required.") | html %] [% Translate("Please provide a unique name for this web service.") | html %]
+                        <div class="field-wrapper">
+                            <label for="Invoker" class="Mandatory">
+                                <span class="Marker">*</span>
+                                [% Translate("Name") | html %]
+                            </label>
+                            <div class="Field">
+                                <input type="text" class="RegisterChange Validate_Required [% Data.InvokerServerError | html %]" maxlength="200" id="Invoker" name="Invoker" value="[% Data.NewInvoker | html %]" />
+                                <input type="hidden" id="OldInvoker" name="OldInvoker" value="[% Data.Invoker | html %]" />
+                                <p class="FieldExplanation">
+                                    [% Translate("The name is typically used to call up an operation of a remote web service.") | html %]
+                                </p>
+                                <div id="InvokerError" class="TooltipErrorMessage">
+                                    [% Translate("This field is required.") | html %] [% Translate("Please provide a unique name for this web service.") | html %]
+                                </div>
+                                <div id="InvokerServerError" class="TooltipErrorMessage">
+                                    [% Translate("The name you entered already exists.") | html %]
+                                </div>
                             </div>
-                            <div id="InvokerServerError" class="TooltipErrorMessage">
-                                [% Translate("The name you entered already exists.") | html %]
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="Description">
+                                [% Translate("Description") | html %]
+                            </label>
+                            <div class="Field">
+                                <input type="text" class="RegisterChange" maxlength="200" id="Description" name="Description" value="[% Data.Description | html %]" />
                             </div>
                         </div>
-                        <div class="Clear"></div>
 
-                        <label for="Description">
-                            [% Translate("Description") | html %]:
-                        </label>
-                        <div class="Field">
-                            <input type="text" class="W50pc RegisterChange" maxlength="200" id="Description" name="Description" value="[% Data.Description | html %]" />
+                        <div class="field-wrapper">
+                            <label for="InvokerTypeDisplay">[% Translate("Invoker backend") | html %]</label>
+                            <div class="Field">
+                                <input type="text" readonly="readonly" id="InvokerTypeDisplay" value="[% Data.InvokerType | html %]" />
+                                <p class="FieldExplanation">
+                                    [% Translate("This Znuny invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data.") | html %]
+                                </p>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 
-                        <label for="InvokerTypeDisplay">[% Translate("Invoker backend") | html %]:</label>
-                        <div class="Field">
-                            <input type="text" readonly="readonly" class="W50pc" id="InvokerTypeDisplay" value="[% Data.InvokerType | html %]" />
-                            <p class="FieldExplanation">
-                                [% Translate("This OTRS invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data.") | html %]
-                            </p>
-                        </div>
-                        <div class="Clear"></div>
-
-                        <label for="MappingOutbound">[% Translate("Mapping for outgoing request data") | html %]:</label>
-                        <div class="Field">
-                            [% Data.MappingOutboundStrg %]
+                        <div class="field-wrapper">
+                            <label for="MappingOutbound">[% Translate("Mapping for outgoing request data") | html %]</label>
+                            <div class="Field single-row-inputs">
+                                <div class="field-wrapper">
+                                    [% Data.MappingOutboundStrg %]
+                                </div>
 [% RenderBlockStart("MappingOutboundConfigureButton") %]
-                            <input type="hidden" id="MappingOutboundConfigDialog" value="[% Data.MappingOutboundConfigDialog | html %]" />
-                            <button type="button" class="HideOnChange CallForAction InLine" id="MappingOutboundConfigureButton" value="[% Translate("Configure") | html %]"><span>[% Translate("Configure") | html %]</span></button>
+                                <input type="hidden" id="MappingOutboundConfigDialog" value="[% Data.MappingOutboundConfigDialog | html %]" />
+                                <button type="button" class="HideOnChange CallForAction InLine btn-main btn-primary-ghost btn-width-md" id="MappingOutboundConfigureButton" value="[% Translate("Configure") | html %]"><span>[% Translate("Configure") | html %]</span></button>
 [% RenderBlockEnd("MappingOutboundConfigureButton") %]
-                            <p class="FieldExplanation">
-                                [% Translate("The data from the invoker of OTRS will be processed by this mapping, to transform it to the kind of data the remote system expects.") | html %]
-                            </p>
+                                <p class="FieldExplanation">
+                                    [% Translate("The data from the invoker of Znuny will be processed by this mapping, to transform it to the kind of data the remote system expects.") | html %]
+                                </p>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 
-                        <label for="MappingInbound">[% Translate("Mapping for incoming response data") | html %]:</label>
-                        <div class="Field">
-                            [% Data.MappingInboundStrg %]
+                        <div class="field-wrapper">
+                            <label for="MappingInbound">[% Translate("Mapping for incoming response data") | html %]</label>
+                            <div class="Field single-row-inputs">
+                                <div class="field-wrapper">
+                                    [% Data.MappingInboundStrg %]
+                                </div>
 [% RenderBlockStart("MappingInboundConfigureButton") %]
-                            <input type="hidden" id="MappingInboundConfigDialog" value="[% Data.MappingInboundConfigDialog | html %]" />
-                            <button type="button" class="HideOnChange CallForAction InLine" id="MappingInboundConfigureButton" value="[% Translate("Configure") | html %]"><span>[% Translate("Configure") | html %]</span></button>
+                                <input type="hidden" id="MappingInboundConfigDialog" value="[% Data.MappingInboundConfigDialog | html %]" />
+                                <button type="button" class="HideOnChange CallForAction InLine btn-main btn-primary-ghost btn-width-md" id="MappingInboundConfigureButton" value="[% Translate("Configure") | html %]"><span>[% Translate("Configure") | html %]</span></button>
 [% RenderBlockEnd("MappingInboundConfigureButton") %]
-                            <p class="FieldExplanation">
-                                [% Translate("The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTRS expects.") | html %]
-                            </p>
+                                <p class="FieldExplanation">
+                                    [% Translate("The response data will be processed by this mapping, to transform it to the kind of data the invoker of Znuny expects.") | html %]
+                                </p>
+                            </div>
                         </div>
-                        <div class="Clear"></div>
 
                         [% IF Data.Mode == 'Change' %]
-                            <label for="EventsTable">[% Translate("Event Triggers") | html %]:</label>
-                            <div class="Field W50pc">
-                                <table class="DataTable W50pc" id="EventsTable" summary="List of all configured events">
-                                    <thead>
-                                        <tr>
-                                            <th class="Center">[% Translate("Event") | html %]</th>
-                                            <th class="Center">[% Translate("Asynchronous") | html %]</th>
-                                            <th class="Center">[% Translate("Condition") | html %]</th>
-                                            <th class="Center">[% Translate("Edit") | html %]</th>
-                                            <th class="Center">[% Translate("Delete") | html %]</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                            <div class="field-wrapper">
+                                <label for="EventsTable">[% Translate("Event Triggers") | html %]</label>
+                                <div class="Field">
+                                    <table class="DataTable" id="EventsTable" summary="List of all configured events">
+                                        <thead>
+                                            <tr>
+                                                <th class="Center">[% Translate("Event") | html %]</th>
+                                                <th class="Center">[% Translate("Asynchronous") | html %]</th>
+                                                <th class="Center">[% Translate("Condition") | html %]</th>
+                                                <th class="Center">[% Translate("Edit") | html %]</th>
+                                                <th class="Center">[% Translate("Delete") | html %]</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 [% RenderBlockStart("NoDataFoundMsg") %]
-                                        <tr>
-                                            <td colspan="5">
-                                                [% Translate("No data found.") | html %]
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td colspan="5">
+                                                    [% Translate("No data found.") | html %]
+                                                </td>
+                                            </tr>
 [% RenderBlockEnd("NoDataFoundMsg") %]
-
 [% RenderBlockStart("EventRow") %]
-                                        <tr>
-                                            <td class="AsBlock">[% Data.Event | html %]</td>
-                                            <td class="Center">[% Translate(Data.Asynchronous) | html %]</td>
-                                            <td class="Center">[% Translate(Data.Condition) | html %]</td>
-                                            <td class="Center">
-                                                <a class="Pencil EditEvent HideOnChange" href="[% Env("Baselink") %]Action=AdminGenericInterfaceInvokerEvent;Subaction=Change;WebserviceID=[% Data.WebserviceID | html %];Invoker=[% Data.Invoker | html %];Event=[% Data.Event | html %]" title="[% Translate("Edit this event") | html %]">
-                                                    [% Translate("Edit this event") | html %]
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                            <td class="Center">
-                                                <a id="DeleteEvent[% Data.Event | html %]" class="TrashCan DeleteEvent HideOnChange" href="#" title="[% Translate("Delete this event") | html %]">
-                                                    [% Translate("Delete this event") | html %]
-                                                    <i class="fa fa-trash-o"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td class="AsBlock">[% Data.Event | html %]</td>
+                                                <td class="Center">[% Translate(Data.Asynchronous) | html %]</td>
+                                                <td class="Center">[% Translate(Data.Condition) | html %]</td>
+                                                <td class="Center">
+                                                    <a class="Pencil EditEvent HideOnChange table-icon-hover-md" href="[% Env("Baselink") %]Action=AdminGenericInterfaceInvokerEvent;Subaction=Change;WebserviceID=[% Data.WebserviceID | html %];Invoker=[% Data.Invoker | html %];Event=[% Data.Event | html %]" title="[% Translate("Edit this event") | html %]">
+                                                        [% Translate("Edit this event") | html %]
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                <td class="Center">
+                                                    <a id="DeleteEvent[% Data.Event | html %]" class="TrashCan DeleteEvent HideOnChange table-icon-hover-md" href="#" title="[% Translate("Delete this event") | html %]">
+                                                        [% Translate("Delete this event") | html %]
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
 [% RenderBlockEnd("EventRow") %]
-                                    </tbody>
-                                </table>
-                                <p class="FieldExplanation">
-                                    [% Translate("This invoker will be triggered by the configured events.") | html %]
-                                </p>
+                                        </tbody>
+                                    </table>
+                                    <p class="FieldExplanation">
+                                        [% Translate("This invoker will be triggered by the configured events.") | html %]
+                                    </p>
+                                </div>
                             </div>
 
                             <div class="Hidden" id="DeleteEventDialogContainer">
                                 <div id ="DeleteEventDialog" class="InnerContent GenericInterfaceDialog">
-                                    <span class="WarningDialog ">&nbsp;</span>
+                                    <span class="WarningDialog ">
+                                    </span>
                                     <p class="Center Warning">[% Translate("Do you really want to delete this event trigger?") | html %]</p>
-                                    <div class="SpacingTop"></div>
                                 </div>
                             </div>
 
-                            <div class="SpacingTop"></div>
-                            <label for="EventType">[% Translate("Add Event Trigger") | html %]:</label>
-                            <div class="Field">
-                                [% Data.EventTypeStrg %]
+                            <div class="field-wrapper">
+                                <label for="EventType">[% Translate("Add Event Trigger") | html %]</label>
+                                <div class="Field">
+                                    <div class="single-row-inputs full-width">
+                                        <div class="field-wrapper">
+                                            [% Data.EventTypeStrg %]
+                                        </div>
+                                        <div class="field-wrapper">
 [% RenderBlockStart("EventAdd") %]
-                                [% Data.EventStrg %]
+                                            [% Data.EventStrg %]
 [% RenderBlockEnd("EventAdd") %]
-                                <input type="checkbox" id="Asynchronous" checked="checked" class="GenericInterfaceSpacing" name="Asynchronous"/><label for="Asynchronous">[% Translate("Asynchronous") | html %]</label>
-                                <button type="button" id="AddEvent" class="Add GenericInterfaceSpacing HideOnChange" name="AddEvent" value="[% Translate("Add Event") | html %]">[% Translate("Add Event") | html %]</button>
-                                <p class="FieldExplanation">
-                                    [% Translate("To add a new event select the event object and event name and click on the \"+\" button") | html %].
-                                </p>
-                                <p class="FieldExplanation">
-                                    [% Translate("Asynchronous event triggers are handled by the OTRS Scheduler Daemon in background (recommended).") | html %]
-                                    <br/>
-                                    [% Translate("Synchronous event triggers would be processed directly during the web request.") | html %]
-                                </p>
+                                        </div>
+                                        <div class="field-wrapper">
+                                            <div class="CheckboxContainer">
+                                                <input type="checkbox" id="Asynchronous" checked="checked" name="Asynchronous"/>
+                                                <label for="Asynchronous">[% Translate("Asynchronous") | html %]</label>
+                                            </div>
+                                            <button type="button" id="AddEvent" class="Add GenericInterfaceSpacing HideOnChange icon-hover" title="[% Translate("Add Event") | html %]" name="AddEvent" value="[% Translate("Add Event") | html %]">
+                                                <i class="fa fa-plus-circle"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <p class="FieldExplanation">
+                                        [% Translate("To add a new event select the event object and event name and click on the \"+\" button") | html %].
+                                    </p>
+                                    <p class="FieldExplanation">
+                                        [% Translate("Asynchronous event triggers are handled by the Znuny Scheduler Daemon in background (recommended).") | html %]
+                                        <br/>
+                                        [% Translate("Synchronous event triggers would be processed directly during the web request.") | html %]
+                                    </p>
+                                </div>
                             </div>
-                            <div class="Clear"></div>
+
                         [% END %]
 
-                        <label for="GetAllArticleAttachments">[% Translate("Add all attachments") | html %]:</label>
-                        <div class="Field">
-                            [% Data.GetAllArticleAttachmentsStrg %]
-                            <p class="FieldExplanation">
-                                [% Translate("Add all attachments to invoker payload.") | html %]
-                            </p>
+                        <div class="field-wrapper">
+                            <label for="GetAllArticleAttachments">[% Translate("Add all attachments") | html %]</label>
+                            <div class="Field">
+                                [% Data.GetAllArticleAttachmentsStrg %]
+                                <p class="FieldExplanation">
+                                    [% Translate("Add all attachments to invoker payload.") | html %]
+                                </p>
+                            </div>
                         </div>
 
-                        <div class="Field SpacingTop">
-                            [% IF Data.Mode == 'Change' %]
-                                <button class="CallForAction Primary" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
-                                [% Translate("or") | html %]
-                                <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
-                            [% ELSE %]
-                                <button class="CallForAction Primary" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
-                            [% END %]
-                            [% Translate("or") | html %]
-                            <a href="[% Env("Baselink") %]Action=AdminGenericInterfaceWebservice;Subaction=Change;WebserviceID=[% Data.WebserviceID | uri %]"><span>[% Translate("Cancel") | html %]</span></a>
+                        <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
+                                <a class="btn-cancel-ghost btn-main btn-width-md" href="[% Env("Baselink") %]Action=AdminGenericInterfaceWebservice;Subaction=Change;WebserviceID=[% Data.WebserviceID | uri %]"><span>[% Translate("Cancel") | html %]</span></a>
+                                [% IF Data.Mode == 'Change' %]
+                                    <button class="CallForAction Primary btn-primary-ghost btn-main  btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
+                                    <button class="CallForAction Primary btn-primary btn-main  btn-width-md" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                                [% ELSE %]
+                                    <button class="CallForAction Primary btn-primary btn-main  btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                                [% END %]
+                            </div>
                         </div>
-                        <div class="Clear"></div>
-
                     </fieldset>
                 </form>
             </div>
         </div>
     </div>
-    <div class="Clear"></div>
 </div>

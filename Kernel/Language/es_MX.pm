@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.739368556701031;
+    $Self->{Completeness}        = 0.736285525446133;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -35,7 +35,6 @@ sub Data {
     $Self->{Translation} = {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
-        'ACL Management' => 'Administración de ACLs',
         'Actions' => 'Acciones',
         'Create New ACL' => 'Crear Nueva ACL',
         'Deploy ACLs' => 'Implementar ACL',
@@ -54,7 +53,9 @@ sub Data {
             'Para crear una nueva ACL puede importar ACLs que hayan sido exportadas en otro sistema, o bien crear una completamente nueva.',
         'Changes to the ACLs here only affect the behavior of the system, if you deploy the ACL data afterwards. By deploying the ACL data, the newly made changes will be written to the configuration.' =>
             'Los cambios a estas ACL únicamente afectan el comportamiento del sistema, si despliega los datos de las ACL después. Al desplegar los datos de las ACL, los nuevos cambios realizados se escribirán en la configuración.',
+        'ACL Management' => 'Administración de ACLs',
         'ACLs' => 'ACLs',
+        'Filter' => 'Filtro',
         'Please note: This table represents the execution order of the ACLs. If you need to change the order in which ACLs are executed, please change the names of the affected ACLs.' =>
             'Por favor, observe: Esta tabla representa el orden de ejecución de las ACLs. Si requiere cambiar el orden en que se ejecutan las ACLs, cambie los nombres de las ACLs que necesite.',
         'ACL name' => 'Nombre de la ACL',
@@ -66,8 +67,6 @@ sub Data {
         'No matches found.' => 'No se encontraron coincidencias.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
-        'Edit ACL %s' => 'Editar ACL %s',
-        'Edit ACL' => 'Editar ACL',
         'Go to overview' => 'Ir a la vista general',
         'Delete ACL' => 'Eliminar ACL',
         'Delete Invalid ACL' => 'Eliminar ACL Inválida',
@@ -78,16 +77,16 @@ sub Data {
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             'Configure lo que quiere cambiar si los criterios corresponden entre si. Tenga en cuenta que \'Possible\' es una lista blanca, \'PossibleNot\' una lista negra.',
         'Check the official %sdocumentation%s.' => 'Verificar la %sdocumentación%s oficial.',
+        'Edit ACL %s' => 'Editar ACL %s',
+        'Edit ACL' => 'Editar ACL',
         'Show or hide the content' => 'Ocultar o mostrar el contenido',
         'Edit ACL Information' => 'Editar Información de ACL',
         'Name' => 'Nombre',
         'Stop after match' => 'Detener al coincidir',
         'Edit ACL Structure' => 'Editar Estructura de ACL',
-        'Save ACL' => 'Guardar ACL',
-        'Save' => 'Guardar',
-        'or' => 'o',
-        'Save and finish' => 'Guardar y terminar',
         'Cancel' => 'Cancelar',
+        'Save' => 'Guardar',
+        'Save and finish' => 'Guardar y terminar',
         'Do you really want to delete this ACL?' => '¿Realmente desea eliminar esta ACL?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLNew.tt
@@ -95,11 +94,9 @@ sub Data {
             'Ingrese los datos del formulario para crear una nueva ALC. Una vez creada la ACL, usted podrá añadir elementos de configuración en modo de edición.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentCalendarManage.tt
-        'Calendar Management' => 'Gestión de Calendarios',
-        'Add Calendar' => 'Añadir Calendario',
-        'Edit Calendar' => 'Editar Calendario',
         'Calendar Overview' => 'Resumen de Calendarios',
         'Add new Calendar' => 'Añadir un nuevo Calendario',
+        'Add Calendar' => 'Añadir Calendario',
         'Import Appointments' => 'Importar Citas',
         'Calendar Import' => 'Importar Calendario',
         'Here you can upload a configuration file to import a calendar to your system. The file needs to be in .yml format as exported by calendar management module.' =>
@@ -118,6 +115,8 @@ sub Data {
         'Create: users can create and delete appointments in the calendar.' =>
             'Crear: usuarios que pueden crear y borrar citas en el calendario.',
         'Read/write: users can manage the calendar itself.' => 'Lectura/escritura (RW): usuario que pueden gestionar el calendario en sí.',
+        'Calendar Management' => 'Gestión de Calendarios',
+        'Edit Calendar' => 'Editar Calendario',
         'Group' => 'Grupo',
         'Changed' => 'Modificado',
         'Created' => 'Creado',
@@ -129,7 +128,6 @@ sub Data {
         'Calendar' => 'Calendario',
         'Calendar name' => 'Nombre del calendario',
         'Calendar with same name already exists.' => 'Ya existe un calendario con el mismo nombre.',
-        'Color' => 'Color',
         'Permission group' => 'Grupo de permiso',
         'Ticket Appointments' => 'Citas de Ticket',
         'Rule' => 'Regla',
@@ -150,11 +148,11 @@ sub Data {
         'Submit' => 'Enviar',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentImport.tt
-        'Appointment Import' => 'Importar Cita',
         'Go back' => 'Regresar',
         'Uploaded file must be in valid iCal format (.ics).' => 'El archivo cargado tiene que estar en un formato iCal válido (.ics).',
         'If desired Calendar is not listed here, please make sure that you have at least \'create\' permissions.' =>
             'Si el Calendario deseado no aparece en la lista, por favor asegúrese de que tenga al menos el permiso de "crear".',
+        'Appointment Import' => 'Importar Cita',
         'Upload' => 'Subir',
         'Update existing appointments?' => '¿Actualizar las citas existentes?',
         'All existing appointments in the calendar with same UniqueID will be overwritten.' =>
@@ -163,9 +161,7 @@ sub Data {
         'Import appointments' => 'Importar citas',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-        'Appointment Notification Management' => 'Gestión de Notificación de Cita',
         'Add Notification' => 'Agregar Notificación',
-        'Edit Notification' => 'Modificar Notificación',
         'Export Notifications' => 'Exportar Notificaciones',
         'Filter for Notifications' => 'Filtro para Notificaciones',
         'Filter for notifications' => 'Filtro para notificaciones',
@@ -174,6 +170,8 @@ sub Data {
         'Overwrite existing notifications?' => '¿Sobrescribir las notificaciones existentes?',
         'Upload Notification configuration' => 'Cargar Configuración de Notificación',
         'Import Notification configuration' => 'Importar Configuración de Notificación',
+        'Appointment Notification Management' => 'Gestión de Notificación de Cita',
+        'Edit Notification' => 'Modificar Notificación',
         'List' => 'Listar',
         'Delete' => 'Eliminar',
         'Delete this notification' => 'Eliminar esta notificación',
@@ -212,7 +210,6 @@ sub Data {
         'This is the default value for assigned recipient agents who didn\'t make a choice for this notification in their preferences yet. If the box is enabled, the notification will be sent to such agents.' =>
             'Este es el valor predeterminado para los agentes destinatarios asignados que aún no han elegido esta notificación en sus preferencias. Si la casilla está habilitada, la notificación se enviará a dichos agentes.',
         'This feature is currently not available.' => 'Esta funcionalidad no está disponible por el momento.',
-        'Please activate this transport in order to use it.' => 'Por favor habilite este transporte para poder usarlo.',
         'No data found' => 'No se encontraron datos',
         'No notification method found.' => 'Método de notificación no encontrado.',
         'Notification Text' => 'Texto de Notificación',
@@ -240,14 +237,14 @@ sub Data {
         'If encryption key/certificate is missing' => 'Si la llave o certificado de cifrado no se encuentran',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
-        'Attachment Management' => 'Administración de Archivos Adjuntos',
         'Add Attachment' => 'Adjuntar Archivo',
-        'Edit Attachment' => 'Modificar Archivo Adjunto',
         'Filter for Attachments' => 'Filtro para Archivos Adjuntos',
         'Filter for attachments' => 'Filtro para archivos adjuntos',
         'Related Actions' => '',
         'Templates' => 'Plantillas',
         'Templates ↔ Attachments' => 'Plantillas ↔ Archivos adjuntos',
+        'Attachment Management' => 'Administración de Archivos Adjuntos',
+        'Edit Attachment' => 'Modificar Archivo Adjunto',
         'Filename' => 'Nombre del archivo',
         'Download file' => 'Descargar archivo',
         'Delete this attachment' => 'Eliminar este archivo adjunto',
@@ -255,57 +252,29 @@ sub Data {
         'Attachment' => 'Archivo Adjunto',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
-        'Auto Response Management' => 'Administración de Respuestas Automáticas',
         'Add Auto Response' => 'Agregar Respuesta Automática',
-        'Edit Auto Response' => 'Modificar Respuesta Automática',
         'Filter for Auto Responses' => 'Filtro para Respuestas Automáticas',
         'Filter for auto responses' => 'Filtro para respuestas automáticas',
         'Queues ↔ Auto Responses' => 'Filas ↔ Respuestas Automáticas',
+        'Auto Response Management' => 'Administración de Respuestas Automáticas',
+        'Edit Auto Response' => 'Modificar Respuesta Automática',
         'Response' => 'Respuesta',
         'Auto response from' => 'Respuesta automática de',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
-        'Cloud Service Management' => 'Gestión de Servicio en la Nube',
-        'Support Data Collector' => 'Recolector de Datos de Soporte',
-        'Support data collector' => 'Recolector de datos de soporte',
-        'Hint' => 'Pista',
-        'Currently support data is only shown in this system.' => 'Actualmente los datos de soporte sólo son mostrados en este sistema.',
-        'It is highly recommended to send this data to OTRS Group in order to get better support.' =>
-            'Se recomienda ampliamente que envié estos datos al Grupo OTRS con el fin de obtener un mejor soporte.',
-        'Configuration' => 'Configuración',
-        'Send support data' => 'Enviar datos de soporte',
-        'This will allow the system to send additional support data information to OTRS Group.' =>
-            'Esto permitirá al sistema enviar información de datos adicionales de soporte al Grupo OTRS.',
-        'Update' => 'Actualizar',
-        'System Registration' => 'Registro del Sistema',
-        'To enable data sending, please register your system with OTRS Group or update your system registration information (make sure to activate the \'send support data\' option.)' =>
-            'Para habilitar el envío de datos, registre su sistema con Grupo OTRS o actualice la información de registro de su sistema ( asegúrese de activar la opción \'enviar datos de soporte\'.)',
-        'Register this System' => 'Registrar este Sistema',
-        'System Registration is disabled for your system. Please check your configuration.' =>
-            'El Registro no está disponible para su sistema. Por favor revise su configuración.',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServices.tt
-        'System registration is a service of OTRS Group, which provides a lot of advantages!' =>
-            '!El registro del sistema es un servicio del Grupo OTRS, el cual provee innumerables ventajas!',
-        'Please note that the use of OTRS cloud services requires the system to be registered.' =>
-            'Por favor tenga en cuenta que el uso de servicios en la nube de OTRS requiere que el sistema esté registrado.',
-        'Here you can configure available cloud services that communicate securely with %s.' =>
-            'Aquí puede configurar los servicios en la nube disponibles que se comunican de forma segura con %s.',
-        'Available Cloud Services' => 'Servicios Disponibles en la Nube',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLog.tt
-        'Communication Log' => 'Bitácora de Comunicación',
         'Time Range' => 'Rango de Tiempo',
         'Show only communication logs created in specific time range.' =>
             'Mostrar sólo los registros de comunicación creados en un rango de tiempo específico.',
         'Filter for Communications' => 'Filtro para Comunicaciones',
         'Filter for communications' => 'Filtro para comunicaciones',
+        'Hint' => 'Pista',
         'In this screen you can see an overview about incoming and outgoing communications.' =>
             'En esta pantalla puede ver una descripción general de las comunicaciones de entrada y salida.',
         'You can change the sort and order of the columns by clicking on the column header.' =>
             'Puede cambiar el orden de las columnas haciendo clic en el encabezado de la columna.',
         'If you click on the different entries, you will get redirected to a detailed screen about the message.' =>
             'Si hace clic en las diferentes entradas, será redirigido a una pantalla detallada acerca del mensaje.',
+        'Communication Log' => 'Bitácora de Comunicación',
         'Status for: %s' => 'Estado para: %s',
         'Failing accounts' => 'Cuentas con fallos',
         'Some account problems' => 'Algunos problemas con las cuentas',
@@ -328,12 +297,12 @@ sub Data {
         '%s s' => '%s s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogAccounts.tt
-        'Account Status' => 'Estado de la Cuenta',
         'Back to overview' => 'Regresar a la vista general',
         'Filter for Accounts' => 'Filtro para Cuentas',
         'Filter for accounts' => 'Filtro para cuentas',
         'You can change the sort and order of those columns by clicking on the column header.' =>
             'Puede cambiar el orden de esas columnas haciendo clic en el encabezado de la columna.',
+        'Account Status' => 'Estado de la Cuenta',
         'Account status for: %s' => 'Estado de la cuenta para: %s',
         'Status' => 'Estado',
         'Account' => 'Cuenta',
@@ -356,24 +325,24 @@ sub Data {
         'No log entries found.' => 'No se encontraron entradas en el registro.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogZoom.tt
-        'Detail view for %s communication started at %s' => 'Vista detallada para %s la comunicación iniciada a las %s',
         'Filter for Log Entries' => 'Filtro para entradas del registro',
         'Filter for log entries' => 'Filtrar para las entradas del registro',
         'Show only entries with specific priority and higher:' => 'Mostrar sólo entradas con un prioridad en específico y más alta:',
+        'Detail view for %s communication started at %s' => 'Vista detallada para %s la comunicación iniciada a las %s',
         'Communication Log Overview (%s)' => 'Resumen del registro de comunicación (%s)',
         'No communication objects found.' => 'No se encontraron objetos de comunicación.',
         'Communication Log Details' => 'Detalles de la Bitácora de Comunicación',
         'Please select an entry from the list.' => 'Por favor seleccione una entrada de la lista.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
-        'Customer Management' => 'Gestión de Clientes',
-        'Add Customer' => 'Agregar Cliente',
-        'Edit Customer' => 'Editar Cliente',
         'Search' => 'Buscar',
         'Wildcards like \'*\' are allowed.' => 'Están permitidos comodines como \'*\'.',
+        'Add Customer' => 'Agregar Cliente',
         'Select' => 'Seleccionar',
         'Customer Users' => 'Usuarios de Cliente',
         'Customers ↔ Groups' => 'Clientes ↔ Grupos',
+        'Customer Management' => 'Gestión de Clientes',
+        'Edit Customer' => 'Editar Cliente',
         'List (only %s shown - more available)' => 'Lista (sólo el %s es mostrado - más disponible)',
         'total' => 'total',
         'Please enter a search term to look for customers.' => 'Por favor, introduzca un parámetro de búsqueda para clientes.',
@@ -382,7 +351,6 @@ sub Data {
         'This customer backend is read only!' => '¡Este backend de clientes es sólo de lectura!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
-        'Manage Customer-Group Relations' => 'Gestionar Relaciones Cliente-Grupo',
         'Notice' => 'Aviso',
         'This feature is disabled!' => '¡Esta funcionalidad está deshabilitada!',
         'Just use this feature if you want to define group permissions for customers.' =>
@@ -398,6 +366,7 @@ sub Data {
             'Si nada es seleccionado, no habrá permisos para este grupo (los tickets no estarán disponibles para el cliente).',
         'Customers' => 'Clientes',
         'Groups' => 'Grupos',
+        'Manage Customer-Group Relations' => 'Gestionar Relaciones Cliente-Grupo',
         'Search Results' => 'Resultados de la búsqueda',
         'Change Group Relations for Customer' => 'Modificar las Relaciones de Grupo para los Clientes',
         'Change Customer Relations for Group' => 'Modificar las Relaciones de Cliente para los Grupos',
@@ -413,15 +382,15 @@ sub Data {
             'Acceso completo de lectura y escritura a los tickets de este grupo/fila.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
-        'Customer User Management' => 'Gestión de Usuarios del Cliente',
-        'Add Customer User' => 'Agregar Usuario del Cliente',
-        'Edit Customer User' => 'Editar Usuario del Cliente',
         'Back to search results' => 'Regresar a los resultados de búsqueda',
+        'Add Customer User' => 'Agregar Usuario del Cliente',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Los usuarios del cliente necesitan tener un historial de cliente e iniciar sesión por medio del panel de cliente.',
         'Customer Users ↔ Customers' => 'Usuarios del Cliente ↔ Clientes',
         'Customer Users ↔ Groups' => 'Usuarios del Cliente ↔ Grupos',
         'Customer Users ↔ Services' => 'Usuarios del Cliente ↔ Servicios',
+        'Customer User Management' => 'Gestión de Usuarios del Cliente',
+        'Edit Customer User' => 'Editar Usuario del Cliente',
         'List (%s total)' => 'Lista (%s total)',
         'Username' => 'Nombre de Usuario',
         'Email' => 'Correo Electrónico',
@@ -451,8 +420,8 @@ sub Data {
             'La tabla de arriba muestra el acceso otorgado para los usuarios del cliente por contexto de permiso. La matriz tiene en cuenta todos los accesos heredados (por ejemplo, a través de grupos de clientes). Nota: La tabla no considera los cambios realizados en este formulario sin enviarlo.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
-        'Manage Customer User-Customer Relations' => 'Gestionar Relaciones Cliente Usuario-Cliente',
         'Select the customer user:customer relations.' => 'Seleccionar las relaciones cliente usuario:cliente.',
+        'Manage Customer User-Customer Relations' => 'Gestionar Relaciones Cliente Usuario-Cliente',
         'Change Customer Relations for Customer User' => 'Cambiar la Relaciones Cliente para Usuario Cliente',
         'Change Customer User Relations for Customer' => 'Cambiar la Relaciones Usuario Cliente para el Cliente',
         'Toggle active state for all' => 'Habilitar estado activo para todos',
@@ -460,7 +429,6 @@ sub Data {
         'Toggle active state for %s' => 'Habilitar estado activo para %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
-        'Manage Customer User-Group Relations' => 'Gestionar Relaciones Usuario de Cliente-Grupo',
         'Just use this feature if you want to define group permissions for customer users.' =>
             'Utiliza esta función si buscas definir permisos de grupo para los usuarios de los clientes.',
         'Edit Customer User Default Groups' => 'Editar Grupos Predeterminados del Usuario del Cliente',
@@ -472,18 +440,18 @@ sub Data {
         'Select the customer user - group permissions.' => 'Selecciona los permisos usuario de cliente-grupo.',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer user).' =>
             'Si nada se selecciona, no habrá permisos para este grupo (los tickets no estarán disponibles para los usuarios del cliente).',
+        'Manage Customer User-Group Relations' => 'Gestionar Relaciones Usuario de Cliente-Grupo',
         'Customer User Default Groups:' => 'Grupos predeterminados para los usuarios de cliente:',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-        'Manage Customer User-Service Relations' => 'Administrar las relaciones Usuarios de Cliente-Servicios',
         'Edit default services' => 'Editar los servicios predeterminados',
         'Filter for Services' => 'Filtro para Servicios',
         'Filter for services' => 'Filtro para servicios',
         'Services' => 'Servicios',
         'Service Level Agreements' => 'Acuerdos de Nivel de Servicio',
+        'Manage Customer User-Service Relations' => 'Administrar las relaciones Usuarios de Cliente-Servicios',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
-        'Dynamic Fields Management' => 'Gestión de Campos Dinámicos',
         'Add new field for object' => 'Agregar nuevo campo para el objeto',
         'Filter for Dynamic Fields' => 'Filtro para Campos Dinámcos',
         'Filter for dynamic fields' => 'Filtro para campos dinámicos',
@@ -497,6 +465,7 @@ sub Data {
         'Export configurations' => '',
         'Process Management' => 'Gestión de Procesos',
         'Dynamic fields ↔ Screens' => '',
+        'Dynamic Fields Management' => 'Gestión de Campos Dinámicos',
         'Dynamic Fields List' => 'Lista de Campos Dinámicos',
         'Dynamic fields per page' => 'Campos dinámicos por página',
         'Label' => 'Etiqueta',
@@ -505,8 +474,8 @@ sub Data {
         'Delete this field' => 'Eliminar este campo',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
-        'Dynamic Fields' => 'Campos Dinámicos',
         'Go back to overview' => 'Regresar al resumen',
+        'Dynamic Fields' => 'Campos Dinámicos',
         'General' => 'General',
         'This field is required, and the value should be alphabetic and numeric characters only.' =>
             'Este campo es obligatorio, y el valor debe ser sólo de caracteres alfabéticos y numéricos.',
@@ -533,11 +502,11 @@ sub Data {
         'This is the default value for this field.' => 'Este es el valor predeterminado para este campo.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldConfigurationImportExport.tt
-        'Dynamic field configurations: %s' => '',
         'Select the dynamic fields you want to import and click on \'Import\'.' =>
             '',
         'Select the dynamic fields whose configuration you want to export and click on \'Export\' to generate a YAML file.' =>
             '',
+        'Dynamic field configurations: %s' => '',
         'Dynamic fields' => 'Campos Dinámicos',
         'For the following dynamic fields a configuration cannot be imported because of an invalid backend.' =>
             '',
@@ -596,7 +565,6 @@ sub Data {
         'Screens' => '',
         'Default columns' => '',
         'Add dynamic field' => 'Agregar campo dinámico',
-        'Filter' => 'Filtro',
         'You can assign elements by dragging and dropping them to the lists of available, disabled, assigned and required elements.' =>
             '',
         'Filter available elements' => '',
@@ -669,7 +637,7 @@ sub Data {
         'Delay (in milliseconds) until the AJAX request will be sent.' =>
             '',
         'Autocompletion for search fields' => '',
-        'Use autocompletion for search fields instead of a static selection of values that are currently selected in OTRS (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch.' =>
+        'Use autocompletion for search fields instead of a static selection of values that are currently selected in Znuny (in tickets, articles, etc.). This increases performance if many thousands of values of the dynamic field have been selected. This setting does not affect the search field displayed in AgentTicketSearch and CustomerTicketSearch.' =>
             '',
         'Input field width' => '',
         'Width of the input field (percentage).' => '',
@@ -694,9 +662,9 @@ sub Data {
         'StoredValue' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminEmail.tt
-        'Admin Message' => 'Mensaje del Administrador',
         'With this module, administrators can send messages to agents, group or role members.' =>
             'Con este módulo, los administradores pueden enviar mensajes a los agentes, a los miembros de un grupo o agentes con algún tipo de rol.',
+        'Admin Message' => 'Mensaje del Administrador',
         'Create Administrative Message' => 'Crear un Mensaje Administrativo',
         'Your message was sent to' => 'Su mensaje fue enviado a',
         'From' => 'De',
@@ -709,14 +677,14 @@ sub Data {
         'Send' => 'Enviar',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
-        'Generic Agent Job Management' => 'Gestión de Tareas para el Agente Genérico',
-        'Edit Job' => 'Editar tarea',
         'Add Job' => 'Agregar Tarea',
-        'Run Job' => 'Ejecutar Tarea',
         'Filter for Jobs' => 'Filtro para Tareas',
         'Filter for jobs' => 'Filtro para tareas',
+        'Generic Agent Job Management' => 'Gestión de Tareas para el Agente Genérico',
+        'Edit Job' => 'Editar tarea',
+        'Run Job' => 'Ejecutar Tarea',
         'Last run' => 'Última ejecución',
-        'Run Now!' => '¡Ejecutar ahora!',
+        'Run' => 'Ejecutar',
         'Delete this task' => 'Eliminar esta tarea',
         'Run this task' => 'Ejecutar esta tarea',
         'Job Settings' => 'Configuraciones de la Tarea',
@@ -835,13 +803,13 @@ sub Data {
         'Age' => 'Antigüedad',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceDebugger.tt
-        'GenericInterface Web Service Management' => 'Gestión de la Interfaz Genérica de Servicios Web',
-        'Web Service Management' => 'Gestión de Servicios Web',
-        'Debugger' => 'Depurador',
         'Go back to web service' => 'Regresar al servicio web',
         'Clear' => 'Limpiar',
         'Do you really want to clear the debug log of this web service?' =>
             '¿Está usted seguro que desea limpiar el registro de depuración de este servicio web?',
+        'GenericInterface Web Service Management' => 'Gestión de la Interfaz Genérica de Servicios Web',
+        'Web Service Management' => 'Gestión de Servicios Web',
+        'Debugger' => 'Depurador',
         'Request List' => 'Lista de solicitudes',
         'Time' => 'Tiempo',
         'Communication ID' => 'ID de comunicación',
@@ -855,17 +823,17 @@ sub Data {
         'Refresh' => 'Refrescar',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceErrorHandlingDefault.tt
-        'Add ErrorHandling' => 'Agregar Manejo de Errores',
-        'Edit ErrorHandling' => 'Editar manejo de errores',
         'Do you really want to delete this error handling module?' => '¿Realmente quiere remover este módulo de manejo de errores?',
         'All configuration data will be lost.' => 'Todos los datos de la configuración se perderán.',
+        'Add ErrorHandling' => 'Agregar Manejo de Errores',
+        'Edit ErrorHandling' => 'Editar manejo de errores',
         'General options' => 'Opciones generales',
         'The name can be used to distinguish different error handling configurations.' =>
             'El nombre se puede usar para distinguir diferentes configuraciones de manejo de errores.',
         'Please provide a unique name for this web service.' => 'Por favor ingrese un nombre único para este servicio web.',
         'Error handling module backend' => 'Módulo para el manejo de errores de backend',
-        'This OTRS error handling backend module will be called internally to process the error handling mechanism.' =>
-            'Este módulo de manejo de errores de backend de OTRS será llamado internamente para procesar el mecanismo de manejo de errores.',
+        'This Znuny error handling backend module will be called internally to process the error handling mechanism.' =>
+            'Este módulo de manejo de errores de backend de Znuny será llamado internamente para procesar el mecanismo de manejo de errores.',
         'Processing options' => 'Procesando opciones',
         'Configure filters to control error handling module execution.' =>
             'Configure filtros para controlar la ejecución del módulo de manejo de errores.',
@@ -949,22 +917,22 @@ sub Data {
             'Nota: Es posible que no se alcance el período de reintento máximo si también se configura un recuento de reintento máximo y se alcanzó antes.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+        'Do you really want to delete this invoker?' => 'Realmente desea eliminar este invocador?',
         'Add Invoker' => 'Agregar Invocador',
         'Edit Invoker' => 'Editar Invocador',
-        'Do you really want to delete this invoker?' => 'Realmente desea eliminar este invocador?',
         'Invoker Details' => 'Detalles del invocador',
         'The name is typically used to call up an operation of a remote web service.' =>
             'El nombre se usa normalmente para llamar una operación de un servicio web remoto.',
         'Invoker backend' => 'Backend del invocador',
-        'This OTRS invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data.' =>
-            'Se llamará a este módulo del backend del invocador OTRS para preparar los datos a enviar al sistema remoto, y para procesar los datos de la respuesta.',
+        'This Znuny invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data.' =>
+            'Se llamará a este módulo del backend del invocador Znuny para preparar los datos a enviar al sistema remoto, y para procesar los datos de la respuesta.',
         'Mapping for outgoing request data' => 'Mapeo para los datos de la solicitud saliente',
         'Configure' => 'Configurar',
-        'The data from the invoker of OTRS will be processed by this mapping, to transform it to the kind of data the remote system expects.' =>
-            'Los datos del invocador de OTRS serán procesador por este mapeo, para transformarlos al tipo de datos que el sistema remoto espera.',
+        'The data from the invoker of Znuny will be processed by this mapping, to transform it to the kind of data the remote system expects.' =>
+            'Los datos del invocador de Znuny serán procesador por este mapeo, para transformarlos al tipo de datos que el sistema remoto espera.',
         'Mapping for incoming response data' => 'Mapeo para los datos de la respuesta entrante',
-        'The response data will be processed by this mapping, to transform it to the kind of data the invoker of OTRS expects.' =>
-            'Los datos de la respuesta serán procesados por este mapeo, para transformarlos al tipo de datos que el invocador de OTRS espera.',
+        'The response data will be processed by this mapping, to transform it to the kind of data the invoker of Znuny expects.' =>
+            'Los datos de la respuesta serán procesados por este mapeo, para transformarlos al tipo de datos que el invocador de Znuny espera.',
         'Asynchronous' => 'Asíncrono',
         'Condition' => 'Condición',
         'Edit this event' => 'Editar este evento',
@@ -972,8 +940,8 @@ sub Data {
         'Add Event' => 'Agregar Evento',
         'To add a new event select the event object and event name and click on the "+" button' =>
             'Para añadir un nuevo evento debe seleccionar el objeto evento y el nombre del evento y después pulsar el botón "+"',
-        'Asynchronous event triggers are handled by the OTRS Scheduler Daemon in background (recommended).' =>
-            'Los disparadores de evento asíncronos son manejados por el Daemon Planificador de OTRS en segundo plano (recomendado).',
+        'Asynchronous event triggers are handled by the Znuny Scheduler Daemon in background (recommended).' =>
+            'Los disparadores de evento asíncronos son manejados por el Daemon Planificador de Znuny en segundo plano (recomendado).',
         'Synchronous event triggers would be processed directly during the web request.' =>
             'Los disparadores de eventos asíncronos serían procesados directamente durante la solicitud web.',
         'Add all attachments' => '',
@@ -1010,11 +978,11 @@ sub Data {
         'Remove key mapping' => 'Remover mapeo de llave',
         'Key mapping' => 'Mapeo de llave',
         'Map key' => 'Mapear llave',
-        'matching the' => 'que coincide con',
+        'matching' => '',
         'to new key' => 'a nueva llave',
         'Value mapping' => 'Mapeo de valor',
         'Map value' => 'Mapear valor',
-        'to new value' => 'a nuevo valor',
+        'new value' => '',
         'Remove value mapping' => 'Remover mapeo de valores',
         'New value map' => 'Nuevo mapeo de valor',
         'Add value mapping' => 'Agregar mapeo de valor',
@@ -1077,18 +1045,18 @@ sub Data {
             'Las expresiones regulares definidas aquí se aplicarán después del mapeo XSLT.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceOperationDefault.tt
+        'Do you really want to delete this operation?' => '¿Está seguro de eliminar esta operación?',
         'Add Operation' => 'Agregar Operación',
         'Edit Operation' => 'Editar Operación',
-        'Do you really want to delete this operation?' => '¿Está seguro de eliminar esta operación?',
         'Operation Details' => 'Detalles de la Operación',
         'The name is typically used to call up this web service operation from a remote system.' =>
             'El nombre generalmente se usa para llamar ésta operación de servicio web desde un sistema remoto.',
         'Operation backend' => 'Backend de operación',
-        'This OTRS operation backend module will be called internally to process the request, generating data for the response.' =>
-            'Este módulo de backend de operación de OTRS se llamará internamente para procesar la solicitud, generando datos para la respuesta.',
+        'This Znuny operation backend module will be called internally to process the request, generating data for the response.' =>
+            'Este módulo de backend de operación de Znuny se llamará internamente para procesar la solicitud, generando datos para la respuesta.',
         'Mapping for incoming request data' => 'Mapeo de datos de solicitud entrantes',
-        'The request data will be processed by this mapping, to transform it to the kind of data OTRS expects.' =>
-            'Los datos de la solicitud serán procesados por este mapeo, para transformarlos en el tipo de datos que OTRS espera.',
+        'The request data will be processed by this mapping, to transform it to the kind of data Znuny expects.' =>
+            'Los datos de la solicitud serán procesados por este mapeo, para transformarlos en el tipo de datos que Znuny espera.',
         'Mapping for outgoing response data' => 'Mapeo de datos de respuesta salientes',
         'The response data will be processed by this mapping, to transform it to the kind of data the remote system expects.' =>
             'Los datos de respuesta serán procesados por este mapeo, para transformarlos en el tipo de datos que el sistema remoto espera.',
@@ -1111,18 +1079,19 @@ sub Data {
             '',
         'Maximum message length' => 'Longitud máxima del mensaje',
         'This field should be an integer number.' => 'Este campo debe ser un número entero.',
-        'Here you can specify the maximum size (in bytes) of REST messages that OTRS will process.' =>
-            'Aquí puede especificar el tamaño máximo (en bytes) de mensajes REST que procesará OTRS.',
+        'Here you can specify the maximum size (in bytes) of REST messages that Znuny will process.' =>
+            'Aquí puede especificar el tamaño máximo (en bytes) de mensajes REST que procesará Znuny.',
         'Send Keep-Alive' => 'Enviar Keep-Alive',
         'This configuration defines if incoming connections should get closed or kept alive.' =>
             'Esta configuración define si las conexiones entrantes deben quedar cerradas o mantenerse activas.',
         'Additional response headers' => 'Encabezados adicionales de respuesta',
+        'Header' => 'Encabezado',
         'Add response header' => 'Agregar encabezado de respuesta',
         'Endpoint' => 'Punto final',
         'URI to indicate specific location for accessing a web service.' =>
             'URI para indicar la ubicación específica para acceder a un servicio web.',
-        'e.g https://www.otrs.com:10745/api/v1.0 (without trailing backslash)' =>
-            'ej. https://www.otrs.com:10745/api/v1.0 (sin la barra invertida)',
+        'e.g https://www.example.com:10745/api/v1.0 (without trailing backslash)' =>
+            'ej. https://www.example.com:10745/api/v1.0 (sin la barra invertida)',
         'Disable SSL hostname certificate verification' => '',
         'Disables hostname certificate verification. This is not recommended and should only be used in test environments.' =>
             '',
@@ -1210,7 +1179,7 @@ sub Data {
         'Add request header' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPSOAP.tt
-        'e.g. https://local.otrs.com:8000/Webservice/Example' => 'p.e. https://local.otrs.com:8000/Webservice/Example',
+        'e.g. https://example.com:8000/Webservice/Example' => 'p.e. https://example.com:8000/Webservice/Example',
         'Set SOAPAction' => 'Establecer acción SOAP',
         'Set to "Yes" in order to send a filled SOAPAction header.' => 'Establecer a "Sí" para enviar un encabezado de acción SOAP completo.',
         'Set to "No" in order to send an empty SOAPAction header.' => 'Establecer a "No" para enviar un encabezado de acción SOAP vacío.',
@@ -1230,8 +1199,8 @@ sub Data {
         'Text to be used to as SOAPAction.' => 'Texto para ser utilizado como acción de SOAP.',
         'Namespace' => 'Espacio de nombres',
         'URI to give SOAP methods a context, reducing ambiguities.' => 'URI para dar un contexto a los métodos SOAP, reduciendo las ambigüedades.',
-        'e.g urn:otrs-com:soap:functions or http://www.otrs.com/GenericInterface/actions' =>
-            'ejemplo urn:otrs-com:soap:functions o http://www.otrs.com/GenericInterface/actions',
+        'e.g urn:example-com:soap:functions or http://www.example.com/GenericInterface/actions' =>
+            'ejemplo urn:example-com:soap:functions o http://www.example.com/GenericInterface/actions',
         'Omit namespace prefix' => '',
         'Omits the namespace prefix (e. g. namesp1:) in root tag of SOAP message.' =>
             '',
@@ -1251,13 +1220,13 @@ sub Data {
         'Select how SOAP response function wrapper should be constructed.' =>
             'Seleccione cómo el contenedor de la función de respuesta SOAP debe ser construido.',
         'Response name free text' => 'Texto libre nombre de respuesta',
-        'Here you can specify the maximum size (in bytes) of SOAP messages that OTRS will process.' =>
-            'Aquí puede especificar el tamaño máximo (en bytes) de mensajes SOAP que procesará OTRS.',
+        'Here you can specify the maximum size (in bytes) of SOAP messages that Znuny will process.' =>
+            'Aquí puede especificar el tamaño máximo (en bytes) de mensajes SOAP que procesará Znuny.',
         'Fixed namespace prefix' => '',
         'Use a fixed namespace prefix (e. g. myns:) for the root tag of a SOAP message.' =>
             '',
         'Suffix for response tag' => '',
-        'Usually OTRS expects a response tag like "&lt;Operation&gt;Response". This setting can change the "Response" part, e. g. to "Result".' =>
+        'Usually Znuny expects a response tag like "&lt;Operation&gt;Response". This setting can change the "Response" part, e. g. to "Result".' =>
             '',
         'Encoding' => 'Codificación',
         'The character encoding for the SOAP message contents.' => 'La codificación de caracteres para el contenidos del mensaje SOAP.',
@@ -1275,7 +1244,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceWebservice.tt
         'Add Web Service' => 'Añadir un Servicio Web',
-        'Edit Web Service' => 'Editar un Servicio Web',
         'Clone Web Service' => 'Clonar un Servicio Web',
         'The name must be unique.' => 'El nombre debe ser único.',
         'Clone' => 'Clon',
@@ -1296,14 +1264,15 @@ sub Data {
             'Después de salvar su configuración Ud. será redireccionado de nuevo a la pantalla de edición.',
         'If you want to return to overview please click the "Go to overview" button.' =>
             'Si desea volver al resumen por favor presione el botón "Volver a resumen".',
+        'Edit Web Service' => 'Editar un Servicio Web',
         'Remote system' => 'Sistema remoto',
         'Provider transport' => 'Transporte de aprovicionameinto',
         'Requester transport' => 'Transporte de requerimiento',
         'Debug threshold' => 'Alncanse de Depuración',
-        'In provider mode, OTRS offers web services which are used by remote systems.' =>
-            'En modo proveedor, OTRS ofrece servicios web los cuales son usados por sistemas remotos.',
-        'In requester mode, OTRS uses web services of remote systems.' =>
-            'En modo solicitante, OTRS usa servicios web de sistemas remotos.',
+        'In provider mode, Znuny offers web services which are used by remote systems.' =>
+            'En modo proveedor, Znuny ofrece servicios web los cuales son usados por sistemas remotos.',
+        'In requester mode, Znuny uses web services of remote systems.' =>
+            'En modo solicitante, Znuny usa servicios web de sistemas remotos.',
         'Network transport' => 'Transporte de Red',
         'Error Handling Modules' => 'Módulos de manejo de errores',
         'Error handling modules are used to react in case of errors during the communication. Those modules are executed in a specific order, which can be changed by drag and drop.' =>
@@ -1321,10 +1290,10 @@ sub Data {
             'Al menos un % s tiene un controlador que no está activo o no está presente, verifique el registro del controlador o elimine el % s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceWebserviceHistory.tt
-        'History' => 'Historial',
         'Go back to Web Service' => 'Regresar al Web Service',
         'Here you can view older versions of the current web service\'s configuration, export or even restore them.' =>
             'Aquí puede ver versiones anteriores de la configuración del servicio web actual, exportarlas o incluso restaurarlas.',
+        'History' => 'Historial',
         'Configuration History List' => 'Lista del Historial de Configuración',
         'Version' => 'Versión',
         'Create time' => 'Hora de creación',
@@ -1336,9 +1305,7 @@ sub Data {
         'Your current web service configuration will be overwritten.' => 'Su configuración actual del servicio web va a ser sobrescrita.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
-        'Group Management' => 'Administración de grupos',
         'Add Group' => 'Añadir Grupo',
-        'Edit Group' => 'Modificar Grupo',
         'The admin group is to get in the admin area and the stats group to get stats area.' =>
             'El grupo admin es para usar el área de administración y el grupo stats para usar el área estadisticas.',
         'Create new groups to handle access permissions for different groups of agent (e. g. purchasing department, support department, sales department, ...). ' =>
@@ -1346,21 +1313,20 @@ sub Data {
         'It\'s useful for ASP solutions. ' => 'Es útil para soluciones ASP. ',
         'Agents ↔ Groups' => 'Agentes ↔ Grupos',
         'Roles ↔ Groups' => 'Roles ↔ Grupos',
+        'Group Management' => 'Administración de grupos',
+        'Edit Group' => 'Modificar Grupo',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
-        'System Log' => 'Log del Sistema',
         'Clear log entries' => '',
         'Here you will find log information about your system.' => 'Aquí puede encontrar información de registros sobre su sistema.',
         'Hide this message' => 'Ocultar este mensaje',
+        'System Log' => 'Log del Sistema',
         'Recent Log Entries' => 'Registros de eventos recientes',
         'Facility' => 'Instalación',
         'Message' => 'Mensaje',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
-        'Mail Account Management' => 'Administración de Cuentas de Correo',
         'Add Mail Account' => 'Agregar Dirección de Correo',
-        'Edit Mail Account for host' => 'Editar Cuenta de Correo para el host',
-        'and user account' => 'y agregar cuenta de usuario',
         'Filter for Mail Accounts' => 'Filtro para Cuentas de Correo',
         'Filter for mail accounts' => 'Filtro para cuentas de correo',
         'All incoming emails with one account will be dispatched in the selected queue.' =>
@@ -1370,10 +1336,13 @@ sub Data {
         'Outgoing email can be configured via the Sendmail* settings in %s.' =>
             'El correo saliente se puede configurar a través de la configuración de Sendmail * en % s.',
         'System Configuration' => 'Configuración del Sistema',
+        'Mail Account Management' => 'Administración de Cuentas de Correo',
+        'Edit Mail Account for host' => 'Editar Cuenta de Correo para el host',
+        'and user account' => 'y agregar cuenta de usuario',
         'Host' => 'Host',
         'Authentication type' => '',
-        'Delete account' => 'Eliminar cuenta',
         'Fetch mail' => 'Obtener correo',
+        'Delete account' => 'Eliminar cuenta',
         'Do you really want to delete this mail account?' => '¿Realmente desea borrar esta cuenta de correo?',
         'Example: mail.example.com' => 'Ejemplo: correo.ejemplo.com',
         'IMAP Folder' => 'Carpeta IMAP',
@@ -1385,20 +1354,20 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
         'Administration Overview' => 'Vista General de Administración',
-        'Filter for Items' => 'Filtro para elementos',
         'Favorites' => 'Favoritos',
         'You can add favorites by moving your cursor over items on the right side and clicking the star icon.' =>
             'Puede agregar favoritos moviendo el cursos sobre el elemento por el lado derecho y haciendo clic en el ícono de estrella.',
         'Links' => 'Vínculos',
         'View the admin manual on Github' => '',
+        'Filter for Items' => 'Filtro para elementos',
         'No Matches' => 'No hay coincidencias',
         'Sorry, your search didn\'t match any items.' => 'Lo sentimos, su búsqueda no coincide con ningún elemento.',
         'Set as favorite' => 'Fijar como favorito',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
-        'Ticket Notification Management' => 'Gestión de Notificaciones de Tickets',
         'Here you can upload a configuration file to import Ticket Notifications to your system. The file needs to be in .yml format as exported by the Ticket Notification module.' =>
             'Aquí puede cargar un archivo de configuración para importar Notificaciones de Ticket a su sistema. El archivo debe estar en formato .yml tal como lo exportó el módulo de Notificación de Ticket.',
+        'Ticket Notification Management' => 'Gestión de Notificaciones de Tickets',
         'Here you can choose which events will trigger this notification. An additional ticket filter can be applied below to only send for ticket with certain criteria.' =>
             'Aquí puede elegir qué eventos activarán esta notificación. A continuación se puede aplicar un filtro de ticket adicional para enviar sólo a un ticket con ciertos criterios.',
         'Ticket Filter' => 'Filtro de Ticket',
@@ -1420,8 +1389,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => 'Utilice coma o punto y coma para separar las direcciones de correo.',
-        'You can use OTRS-tags like <OTRS_TICKET_DynamicField_...> to insert values from the current ticket.' =>
-            'Puede usar los OTRS-tags como <OTRS_TICKET_DynamicField_...> para insertar los valores desde su Ticket actual.',
+        'You can use Znuny-tags like <OTRS_TICKET_DynamicField_...> to insert values from the current ticket.' =>
+            'Puede usar los Znuny-tags como <OTRS_TICKET_DynamicField_...> para insertar los valores desde su Ticket actual.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportWebserviceSettings.tt
         'Web service name' => '',
@@ -1483,95 +1452,21 @@ sub Data {
         'Request new token' => '',
         'Delete this token and its configuration.' => '',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessInstalled.tt
-        'Manage %s' => 'Administrar %s',
-        'Downgrade to ((OTRS)) Community Edition' => '',
-        'Read documentation' => '',
-        '%s makes contact regularly with cloud.otrs.com to check on available updates and the validity of the underlying contract.' =>
-            '',
-        'Unauthorized Usage Detected' => 'Detectado Uso No Autorizado',
-        'This system uses the %s without a proper license! Please make contact with %s to renew or activate your contract!' =>
-            '',
-        '%s not Correctly Installed' => '',
-        'Your %s is not correctly installed. Please reinstall it with the button below.' =>
-            '',
-        'Reinstall %s' => '',
-        'Your %s is not correctly installed, and there is also an update available.' =>
-            '',
-        'You can either reinstall your current version or perform an update with the buttons below (update recommended).' =>
-            '',
-        'Update %s' => '',
-        '%s Not Yet Available' => '',
-        '%s will be available soon.' => '',
-        '%s Update Available' => '',
-        'An update for your %s is available! Please update at your earliest!' =>
-            '',
-        '%s Correctly Deployed' => '',
-        'Congratulations, your %s is correctly installed and up to date!' =>
-            '',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessNotInstalled.tt
-        'Upgrade to %s' => 'Actualizar a %s',
-        'Go to the OTRS customer portal' => 'Ir al portal de clientes de OTRS',
-        '%s will be available soon. Please check again in a few days.' =>
-            '',
-        'Please have a look at %s for more information.' => '',
-        'Your ((OTRS)) Community Edition is the base for all future actions. Please register first before you continue with the upgrade process of %s!' =>
-            '',
-        'Before you can benefit from %s, please contact %s to get your %s contract.' =>
-            '',
-        'Connection to cloud.otrs.com via HTTPS couldn\'t be established. Please make sure that your OTRS can connect to cloud.otrs.com via port 443.' =>
-            '',
-        'Package installation requires patch level update of OTRS.' => '',
-        'Please visit our customer portal and file a request.' => 'Visite nuestro portal de clientes y genere una solicitud.',
-        'Everything else will be done as part of your contract.' => '',
-        'Your installed OTRS version is %s.' => '',
-        'To install this package, you need to update to OTRS %s or higher.' =>
-            '',
-        'To install this package, the Maximum OTRS Version is %s.' => '',
-        'To install this package, the required Framework version is %s.' =>
-            '',
-        'Why should I keep OTRS up to date?' => '',
-        'You will receive updates about relevant security issues.' => 'Recibirá actualizaciones acerca de problemas de seguridad relevantes.',
-        'You will receive updates for all other relevant OTRS issues' => '',
-        'With your existing contract you can only use a small part of the %s.' =>
-            '',
-        'If you would like to take full advantage of the %s get your contract upgraded now! Contact %s.' =>
-            '',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessUninstall.tt
-        'Cancel downgrade and go back' => '',
-        'Go to Package Manager' => '',
-        'Sorry, but currently you can\'t downgrade due to the following packages which depend on %s:' =>
-            '',
-        'Vendor' => 'Vendedor',
-        'Please uninstall the packages first using the package manager and try again.' =>
-            '',
-        'You are about to downgrade to ((OTRS)) Community Edition and will lose the following features and all data related to these:' =>
-            '',
-        'Chat' => 'Chat',
-        'Report Generator' => 'Generador de Reportes',
-        'Timeline view in ticket zoom' => '',
-        'DynamicField ContactWithData' => '',
-        'DynamicField Database' => '',
-        'SLA Selection Dialog' => '',
-        'Ticket Attachment View' => '',
-        'The %s skin' => '',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminPGP.tt
-        'PGP Management' => 'Administración PGP',
-        'Add PGP Key' => 'Agregar Llave PGP',
         'PGP support is disabled' => 'Soporte PGP deshabilitado',
-        'To be able to use PGP in OTRS, you have to enable it first.' => 'Para poder utilizar PGP en OTRS, es necesario habilitarlo primero.',
+        'To be able to use PGP in Znuny, you have to enable it first.' =>
+            'Para poder utilizar PGP en Znuny, es necesario habilitarlo primero.',
         'Enable PGP support' => 'Habilitar soporte para PGP',
         'Faulty PGP configuration' => 'Configuration PGP erronea',
         'PGP support is enabled, but the relevant configuration contains errors. Please check the configuration using the button below.' =>
             'El soporte para PGP está habilitado pero la configuración relevante contiene errores. Favor de validar la configuración utilizando el siguiente botón.',
         'Configure it here!' => '¡Configúrelo aquí!',
         'Check PGP configuration' => 'Revisar configuración de PGP',
+        'Add PGP Key' => 'Agregar Llave PGP',
         'In this way you can directly edit the keyring configured in SysConfig.' =>
             'De esta forma puede editar directamente el anillo de Claves configurado en Sysconfig.',
         'Introduction to PGP' => 'Introducción a PGP',
+        'PGP Management' => 'Administración PGP',
         'Identifier' => 'Identificador',
         'Bit' => 'Bit',
         'Fingerprint' => 'Huella',
@@ -1584,6 +1479,7 @@ sub Data {
         'Uninstall Package' => 'Desinstalar Paquete',
         'Uninstall package' => 'Desinstalar paquete',
         'Do you really want to uninstall this package?' => '¿Está seguro de que desea desinstalar este paquete?',
+        'or' => 'o',
         'Reinstall package' => 'Reinstalar paquete',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             '¿Está seguro de que desea reinstalar este paquete? Cualquier cambio manual se perderá.',
@@ -1600,6 +1496,7 @@ sub Data {
             'Este paquete sólo se puede instalar en la versión Znuny %s o anterior.',
         'This package can only be installed on Znuny version %s.' => '',
         'Why should I keep Znuny up to date?' => '¿Por qué debo mantener Znuny actualizado?',
+        'You will receive updates about relevant security issues.' => 'Recibirá actualizaciones acerca de problemas de seguridad relevantes.',
         'You will receive updates for all other relevant Znuny issues.' =>
             'Recibirá actualizaciones de todos los demás problemas relevantes de Znuny.',
         'How can I do a patch level update if I don’t have a contract?' =>
@@ -1608,6 +1505,7 @@ sub Data {
             'Encuentre toda la información relevante dentro de las instrucciones de actualización en %s.',
         'In case you would have further questions we would be glad to answer them.' =>
             'En caso de que tenga más preguntas, estaremos encantados de responderlas.',
+        'Please visit our customer portal and file a request.' => 'Visite nuestro portal de clientes y genere una solicitud.',
         'Install Package' => 'Instalar Paquete',
         'Update Package' => 'Actualizar Paquete',
         'Package' => '',
@@ -1620,9 +1518,11 @@ sub Data {
         'Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Asegúrese de que su base de datos acepte paquetes de más de %s MB (actualmente sólo acepta paquetes de hasta %s MB). Modifique el valor de la configuración max_allowed_packet de su base de datos para evitar errores.',
         'Install' => 'Instalar',
+        'Update' => 'Actualizar',
         'Update repository information' => 'Actualizar la información del repositorio',
         'Update all installed packages' => 'Actualizar todos los paquetes instalados',
         'Online Repository' => 'Repositorio Online',
+        'Vendor' => 'Vendedor',
         'Action' => 'Acción',
         'Module documentation' => 'Módulo de Documentación',
         'Local Repository' => 'Repositorio Local',
@@ -1630,9 +1530,9 @@ sub Data {
         'Package not correctly deployed! Please reinstall the package.' =>
             'El paquete no fue desplegado correctamente. Por favor, reinstale el paquete.',
         'Reinstall' => 'Reinstalar',
-        'Package Information' => 'Información del Paquete',
         'Download package' => 'Descargar paquete',
         'Rebuild package' => 'Reconstruir paquete',
+        'Package Information' => 'Información del Paquete',
         'Metadata' => 'Metadatos',
         'Change Log' => 'Registro de Cambios',
         'Date' => 'Fecha',
@@ -1648,9 +1548,6 @@ sub Data {
         'File differences for file %s' => 'Diferencias de archivo para %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminPerformanceLog.tt
-        'Performance Log' => 'Log de rendimiento',
-        'Range' => 'Rango',
-        'last' => 'último',
         'This feature is enabled!' => '¡Esta característica está habilitada!',
         'Just use this feature if you want to log each request.' => 'Use esta característica sólo si desea registrar cada petición.',
         'Activating this feature might affect your system performance!' =>
@@ -1658,6 +1555,9 @@ sub Data {
         'Disable it here!' => '¡Deshabilítelo aquí!',
         'Logfile too large!' => '¡Archivo de log muy grande!',
         'The logfile is too large, you need to reset it' => 'El archivo de registros es muy grande, necesita restablecerlo',
+        'Performance Log' => 'Log de rendimiento',
+        'Range' => 'Rango',
+        'last' => 'último',
         'Interface' => 'Interfase',
         'Requests' => 'Solicitudes',
         'Min Response' => 'Respuesta Mínima',
@@ -1670,9 +1570,7 @@ sub Data {
         'Average' => 'Promedio',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminPostMasterFilter.tt
-        'PostMaster Filter Management' => 'Administración del filtro maestro',
         'Add PostMaster Filter' => 'Añadir Filtro de Administración de Correo',
-        'Edit PostMaster Filter' => 'Modificar Filtro de Administración de Correo',
         'Filter for PostMaster Filters' => 'Filtro para Filtros de PostMaster',
         'Filter for PostMaster filters' => 'Filtro apra filtros de PostMaster',
         'To dispatch or filter incoming emails based on email headers. Matching using Regular Expressions is also possible.' =>
@@ -1683,6 +1581,8 @@ sub Data {
             'Si utiliza Expresiones Regulares, también puede utilizar el valor de coincidencia en () como [***] en la acción de \'Establecer\'.',
         'You can also use named captures %s and use the names in the \'Set\' action %s (e.g. Regexp: %s, Set action: %s). A matched EMAILADDRESS has the name \'%s\'.' =>
             'También puede usar capturas con nombre %s y usar los nombres en la acción \'Establecer\' %s (por ejemplo, Regexp: %s, Set action: %s). Una EMAILADDRESS coincidente tiene el nombre \'%s\'.',
+        'PostMaster Filter Management' => 'Administración del filtro maestro',
+        'Edit PostMaster Filter' => 'Modificar Filtro de Administración de Correo',
         'Delete this filter' => 'Eliminar este filtro',
         'Do you really want to delete this postmaster filter?' => '¿Realmente quieres eliminar este filtro postmaster?',
         'A postmaster filter with this name already exists!' => '¡Ya existe un filtro de postmaster con este nombre!',
@@ -1697,15 +1597,15 @@ sub Data {
         'Set email header' => 'Establecer encabezado del Email',
         'with value' => 'con el valor',
         'The field needs to be a literal word.' => 'El campo tiene que ser una palabra literal.',
-        'Header' => 'Encabezado',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminPriority.tt
-        'Priority Management' => 'Administración de Prioridades',
         'Add Priority' => 'Añadir Prioridad',
-        'Edit Priority' => 'Modificar Prioridad',
         'Filter for Priorities' => 'Filtro para Prioridades',
         'Filter for priorities' => 'Filtro para prioridades',
         'Configure Priority Visibility and Defaults' => '',
+        'Priority Management' => 'Administración de Prioridades',
+        'Edit Priority' => 'Modificar Prioridad',
+        'Color' => 'Color',
         'This priority is present in a SysConfig setting, confirmation for updating settings to point to the new priority is needed!' =>
             'Esta prioridad está presente en una configuración de SysConfig, ¡se necesita confirmación para actualizar la configuración y definir la nueva prioridad!',
         'This priority is used in the following config settings:' => 'Esta prioridad se usa en los siguientes parámetros de configuración:',
@@ -1737,8 +1637,6 @@ sub Data {
         'Copy Process' => 'Copiar Proceso',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
-        'Cancel & close' => 'Cancelar y cerrar',
-        'Go Back' => 'Regresar',
         'Please note, that changing this activity will affect the following processes' =>
             'Tenga en cuenta, que el cambio de esta actividad afectará a los siguientes procesos',
         'Activity' => 'Actividad',
@@ -1751,12 +1649,13 @@ sub Data {
             'Puede asignar Diálogos de la Actividad a esta Actividad arrastrándolos con el mouse de la lista izquierda a la lista de la derecha .',
         'Ordering the elements within the list is also possible by drag \'n\' drop.' =>
             'También es posible ordenar los elementos de la lista arrastrando y soltando los elementos .',
+        'Available Activity Dialogs' => 'Diálogos de Actividad Disponibles',
         'Filter available Activity Dialogs' => 'Filtros disponibles en Diálogos de la Actividad ',
         'Also show global %s' => '',
-        'Available Activity Dialogs' => 'Diálogos de Actividad Disponibles',
         'Name: %s, EntityID: %s' => 'Nombre: %s, ID de Entidad: %s',
         'Create New Activity Dialog' => 'Crear un nuevo Diálogo para la Actividad',
         'Assigned Activity Dialogs' => 'Diálogos de Actividad Asignados',
+        'Filter Assigned Activity Dialogs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
         'Please note that changing this activity dialog will affect the following activities' =>
@@ -1778,9 +1677,10 @@ sub Data {
         'Submit Button Text' => 'Texto del Botón Enviar',
         'You can assign Fields to this Activity Dialog by dragging the elements with the mouse from the left list to the right list.' =>
             '',
-        'Filter available fields' => 'Filtrar campos disponibles',
         'Available Fields' => 'Campos Disponibles',
+        'Filter available fields' => 'Filtrar campos disponibles',
         'Assigned Fields' => 'Campos Asignados',
+        ' Filter assigned fields' => '',
         'Communication Channel' => 'Canal de Comunicacion',
         'Is visible for customer' => 'Visible para el cliente',
         'Text Template' => 'Plantilla de texto',
@@ -1793,10 +1693,11 @@ sub Data {
         'Transition Actions' => 'Acciones de Transición',
         'You can assign Transition Actions to this Transition by dragging the elements with the mouse from the left list to the right list.' =>
             'Puede asignar Acciones esta Transición arrastrando con el mouse elementos de la lista izquierda a la lista de la derecha .',
-        'Filter available Transition Actions' => 'Filtro para Acciones de Transición disponible',
         'Available Transition Actions' => 'Acciones de Transición Disponibles',
+        'Filter available Transition Actions' => 'Filtro para Acciones de Transición disponible',
         'Create New Transition Action' => 'Crear Nueva Acción de Transición',
         'Assigned Transition Actions' => 'Acción de Transición Asignada',
+        'Filter assigned Transition Actions' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessAccordion.tt
         'Activities' => 'Actividades',
@@ -1809,7 +1710,6 @@ sub Data {
         'Filter Transition Actions...' => 'Filtrar Acciones de Transición...',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
-        'Edit Process' => 'Editar Proceso',
         'Print process information' => 'Imprimir información del proceso',
         'Delete Process' => 'Eliminar Proceso',
         'Delete Inactive Process' => 'Eliminar Proceso Inactivo',
@@ -1824,6 +1724,7 @@ sub Data {
             '',
         'Actions can be assigned to a Transition by dropping the Action Element onto the label of a Transition.' =>
             '',
+        'Edit Process' => 'Editar Proceso',
         'Edit Process Information' => 'Editar Información del Proceso',
         'Process Name' => 'Nombre del Proceso',
         'The selected state does not exist.' => 'El estado seleccionado no existe.',
@@ -1849,7 +1750,6 @@ sub Data {
             'En esta pantalla, puede crear un nuevo proceso. Con el fin de hacer que el nuevo proceso esté a disposición de los usuarios, por favor asegúrese de ajustar su estado a \'Activa\' y sincronizar después de completar su trabajo.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessPrint.tt
-        'cancel & close' => 'cancelar y cerrar',
         'Start Activity' => 'Iniciar Actividad',
         'Contains %s dialog(s)' => 'Contiene %s diálogo(s)',
         'Assigned dialogs' => 'Diálogos Asignados',
@@ -1859,6 +1759,7 @@ sub Data {
         'Condition linking' => 'Vinculación de Condiciones',
         'Transitions are not being used in this process.' => 'Las Acciones de transición no están siendo usadas en este proceso.',
         'Module name' => 'Nombre del Módulo',
+        'Configuration' => 'Configuración',
         'Transition actions are not being used in this process.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementTransition.tt
@@ -1881,7 +1782,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
         'Add Queue' => 'Agregar Fila',
-        'Edit Queue' => 'Modificar Fila',
         'Filter for Queues' => 'Filtro para Filas',
         'Filter for queues' => 'Filtro para filas',
         'Email Addresses' => 'Direcciones de Correo',
@@ -1891,10 +1791,14 @@ sub Data {
         'Templates ↔ Queues' => 'Plantillas ↔ Filas',
         'Configure Working Hours' => '',
         'Configure Queue Related Settings' => '',
+        'Edit Queue' => 'Modificar Fila',
         'A queue with this name already exists!' => '¡Ya existe una fila con este nombre!',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             'Esta fila está presente en una configuración del SysConfig, ¡se necesita confirmación para actualizar la configuración para apuntar a la nueva fila!',
         'Sub-queue of' => 'Subfila de',
+        'Follow up Option' => 'Opción de seguimiento',
+        'Specifies if follow up to closed tickets would re-open the ticket, be rejected or lead to a new ticket.' =>
+            'Especifica si seguimiento a tickets cerrados: reabrirá dichos tickets, se rechazará o generará un ticket nuevo.',
         'Unlock timeout' => 'Tiempo para desbloqueo automático',
         '0 = no unlock' => '0 = sin desbloqueo',
         'hours' => 'horas',
@@ -1909,9 +1813,6 @@ sub Data {
             'Si se añade un artículo, tal como un seguimiento, vía correo electrónico o interfaz del cliente, el tiempo para escalada por actualización se reinicia. Si no se ha contactado al cliente, ya sea por medio de una nota externa o por teléfono agregados a un ticket antes de que el tiempo definido aquí expire, el ticket escala.',
         'If the ticket is not set to closed before the time defined here expires, the ticket is escalated.' =>
             'Si el ticket no se cierra antes de que el tiempo definido aquí termine, dicho ticket escalará.',
-        'Follow up Option' => 'Opción de seguimiento',
-        'Specifies if follow up to closed tickets would re-open the ticket, be rejected or lead to a new ticket.' =>
-            'Especifica si seguimiento a tickets cerrados: reabrirá dichos tickets, se rechazará o generará un ticket nuevo.',
         'Ticket lock after a follow up' => 'Bloquear un ticket después del seguimiento',
         'If a ticket is closed and the customer sends a follow up the ticket will be locked to the old owner.' =>
             'Si un ticket está cerrado y el cliente le da seguimiento, el ticket se bloqueará para el antigüo propietario.',
@@ -1927,34 +1828,34 @@ sub Data {
         'This queue is used in the following config settings:' => 'Esta fila se usa en los siguientes parámetros de configuración:',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueueAutoResponse.tt
-        'Manage Queue-Auto Response Relations' => 'Administrar Relaciones Fila-Auto Respuesta',
-        'Change Auto Response Relations for Queue' => 'Modificar Relaciones de Auto Respuesta para las Filas',
         'This filter allow you to show queues without auto responses' => 'Este filtro le permite mostrar las filas sin respuestas automáticas',
         'Queues without Auto Responses' => 'Filas sin Auto Respuestas',
         'This filter allow you to show all queues' => 'Este filtro le permite mostrar todas las filas',
         'Show All Queues' => 'Mostrar todas las Filas',
         'Auto Responses' => 'Respuestas Automáticas',
+        'Manage Queue-Auto Response Relations' => 'Administrar Relaciones Fila-Auto Respuesta',
+        'Change Auto Response Relations for Queue' => 'Modificar Relaciones de Auto Respuesta para las Filas',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueueTemplates.tt
-        'Manage Template-Queue Relations' => 'Administrar Relaciones Plantilla-Fila',
         'Filter for Templates' => 'Filtrar por Plantillas',
         'Filter for templates' => 'Filtro para plantillas',
+        'Manage Template-Queue Relations' => 'Administrar Relaciones Plantilla-Fila',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRole.tt
-        'Role Management' => 'Gestión de Roles',
         'Add Role' => 'Añadir Rol',
-        'Edit Role' => 'Modificar Rol',
         'Filter for Roles' => 'Filtro para Roles',
         'Filter for roles' => 'Filtro por roles',
         'Create a role and put groups in it. Then add the role to the users.' =>
             'Cree un rol y coloque grupos en el mismo. Luego añada el rol a los usuarios.',
         'Agents ↔ Roles' => 'Agentes ↔ Roles',
+        'Role Management' => 'Gestión de Roles',
+        'Edit Role' => 'Modificar Rol',
         'There are no roles defined. Please use the \'Add\' button to create a new role.' =>
             'No hay roles definidos. Por favor, use el botón \'Añadir\' para crear un rol nuevo.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRoleGroup.tt
-        'Manage Role-Group Relations' => 'Administrar Relaciones Rol-Grupo',
         'Roles' => 'Roles',
+        'Manage Role-Group Relations' => 'Administrar Relaciones Rol-Grupo',
         'Select the role:group permissions.' => 'Seleccionar los permisos rol:grupo.',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the role).' =>
             'Si nada se selecciona, no habrá permisos para este grupo y los tickets no estarán disponibles para el rol.',
@@ -1973,34 +1874,33 @@ sub Data {
             'Permiso para cambiar la prioridad del ticket en este grupo/fila.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRoleUser.tt
-        'Manage Agent-Role Relations' => 'Administrar Relaciones Agente-Rol',
         'Add Agent' => 'Añadir Agente',
         'Filter for Agents' => 'Filtro para Agentes',
         'Filter for agents' => 'Filtro para agenters',
         'Agents' => 'Agentes',
+        'Manage Agent-Role Relations' => 'Administrar Relaciones Agente-Rol',
         'Manage Role-Agent Relations' => 'Administrar Relaciones Rol-Agente',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSLA.tt
-        'SLA Management' => 'Administración de SLA',
-        'Edit SLA' => 'Modificar SLA',
         'Add SLA' => 'Añadir SLA',
         'Filter for SLAs' => 'Filtrar por SLAs',
         'Configure SLA Visibility and Defaults' => '',
+        'SLA Management' => 'Administración de SLA',
+        'Edit SLA' => 'Modificar SLA',
         'Please write only numbers!' => '¡Por favor, escriba sólo números!',
         'Minimum Time Between Incidents' => 'Tiempo Mínimo Entre Incidentes',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
-        'S/MIME Management' => 'Gestion S/MIME',
-        'Add Certificate' => 'Añadir Certificado',
-        'Add Private Key' => 'Añadir Clave Privada',
         'SMIME support is disabled' => 'Soporte SMIME deshabitado',
-        'To be able to use SMIME in OTRS, you have to enable it first.' =>
+        'To be able to use SMIME in Znuny, you have to enable it first.' =>
             '',
         'Enable SMIME support' => '',
         'Faulty SMIME configuration' => '',
         'SMIME support is enabled, but the relevant configuration contains errors. Please check the configuration using the button below.' =>
             '',
         'Check SMIME configuration' => '',
+        'Add Certificate' => 'Añadir Certificado',
+        'Add Private Key' => 'Añadir Clave Privada',
         'Filter for Certificates' => 'Filtrar por Certificados',
         'Filter for certificates' => 'Filtro para certificados',
         'To show certificate details click on a certificate icon.' => 'Para mostrar los detalles de certificado hacer click en un ícono de certificado.',
@@ -2011,6 +1911,7 @@ sub Data {
         'See also' => 'Vea también',
         'In this way you can directly edit the certification and private keys in file system.' =>
             'De esta forma Ud. puede editar directamente la certificación y claves privadas en el sistema de archivos.',
+        'S/MIME Management' => 'Gestion S/MIME',
         'Hash' => 'De esta forma Ud. puede editar directamente la certificación y claves privadas en el sistema de archivos.',
         'Create' => 'Crear',
         'Handle related certificates' => 'Maneje certificados relacionados',
@@ -2026,15 +1927,16 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIMECertRead.tt
         'S/MIME Certificate' => 'Certificado S/MIME',
-        'Close this dialog' => 'Cerrar este diálogo',
+        'Close' => 'Cerrar',
         'Certificate Details' => 'Detalles del Certificado',
+        'Close this dialog' => 'Cerrar este diálogo',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSalutation.tt
-        'Salutation Management' => 'Gestión de Saludos',
         'Add Salutation' => 'Agregar Saludo',
-        'Edit Salutation' => 'Modificar Saludo',
         'Filter for Salutations' => 'Filtrar Saludos',
         'Filter for salutations' => 'Filtrar saludos',
+        'Salutation Management' => 'Gestión de Saludos',
+        'Edit Salutation' => 'Modificar Saludo',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => '',
@@ -2044,13 +1946,13 @@ sub Data {
             'Si el modo seguro no está activo aún, hágalo a través de la Configuración del Sistema, porque su aplicación ya se está ejecutando.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSelectBox.tt
-        'SQL Box' => 'Consola SQL',
         'Filter for Results' => 'Filtrar por Resultados',
         'Filter for results' => 'Filtrar por resultados',
         'Here you can enter SQL to send it directly to the application database. It is not possible to change the content of the tables, only select queries are allowed.' =>
             'Aquí puede introducir una consulta SQL para enviarla directamente a la base de datos de la aplicación. No es posible cambiar el contenido de las tablas, sólo consultas SELECT están permitidas.',
         'Here you can enter SQL to send it directly to the application database.' =>
             'Aquí puede introducir SQL para ejecutarse directamente en la base de datos de la aplicación.',
+        'SQL Box' => 'Consola SQL',
         'Options' => 'Opciones',
         'Only select queries are allowed.' => 'Solo están permitidas las consultas select.',
         'The syntax of your SQL query has a mistake. Please check it.' =>
@@ -2063,18 +1965,16 @@ sub Data {
         'Query is executed.' => 'Se ejecuta la consulta.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
-        'Service Management' => 'Administración de Servicios',
         'Add Service' => 'Añadir Servicio',
-        'Edit Service' => 'Modificar Servicio',
         'Configure Service Visibility and Defaults' => '',
+        'Service Management' => 'Administración de Servicios',
+        'Edit Service' => 'Modificar Servicio',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             'La longitud máxima del nombre del servicio es de 200 caracteres (con Sub-servicio).',
         'Sub-service of' => 'Subservicio de',
         'Criticality' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
-        'Session Management' => 'Administración de Sesiones',
-        'Detail Session View for %s (%s)' => 'Vista detallada de sesión para %s (%s)',
         'All sessions' => 'Todas las sesiones',
         'Agent sessions' => 'Sesiones de agente',
         'Customer sessions' => 'Sesiones de cliente',
@@ -2084,27 +1984,29 @@ sub Data {
         'Kill this session' => 'Terminar esta sesión',
         'Filter for Sessions' => 'Filtro por Sesiones',
         'Filter for sessions' => 'Filtrar por sesiones',
+        'Session Management' => 'Administración de Sesiones',
+        'Detail Session View for %s (%s)' => 'Vista detallada de sesión para %s (%s)',
         'Session' => 'Sesión',
         'Kill' => 'Terminar',
         'Detail View for SessionID: %s - %s' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSignature.tt
-        'Signature Management' => 'Administración de Firmas',
         'Add Signature' => 'Añadir Firma',
-        'Edit Signature' => 'Modificar Firma',
         'Filter for Signatures' => 'Filtrar por Firmas',
         'Filter for signatures' => 'Filtrar por firmas',
+        'Signature Management' => 'Administración de Firmas',
+        'Edit Signature' => 'Modificar Firma',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
-        'State Management' => 'Administración de Estados',
         'Add State' => 'Añadir Estado',
-        'Edit State' => 'Modificar Estado',
         'Filter for States' => 'Filtrar por Estados',
         'Filter for states' => 'Filtrar por estados',
         'Attention' => 'Atención',
         'Please also update the states in SysConfig where needed.' => 'Actualice también los estados en SysConfig donde sea necesario.',
         'Configure State Visibility and Defaults' => '',
         'Configure State Type Visibility and Defaults' => '',
+        'State Management' => 'Administración de Estados',
+        'Edit State' => 'Modificar Estado',
         'This state is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             'Este estado está presente en una configuración del SysConfig, ¡se necesita confirmación para actualizar la configuración para apuntar al nuevo tipo!',
         'State type' => 'Tipo de Estado',
@@ -2113,10 +2015,6 @@ sub Data {
         'This state is used in the following config settings:' => 'Este estado se usa en los siguientes parámetros de configuración:',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSupportDataCollector.tt
-        'Cloud services are currently disabled.' => 'Los servicios en la nube se encuentran deshabitados actualmente.',
-        'Sending support data to OTRS Group is not possible!' => '¡El envío de información de soporte al Grupo de OTRS no fue posible!',
-        'Enable Cloud Services' => 'Habilitar los servicios en la nube',
-        'Enable cloud services' => 'Habilitar servicios en la nube',
         'A support bundle (including: system registration information, support data, a list of installed packages and all locally modified source code files) can be generated by pressing this button:' =>
             'Un paquete de soporte (incluyendo : información de registro del sistema, los datos de soporte, una lista de los paquetes instalados y todos los archivos de código fuente modificados localmente) puede generarse presionando este botón:',
         'Generate Support Bundle' => 'Generar Paquete de Soporte',
@@ -2125,17 +2023,18 @@ sub Data {
             'Un archivo que contiene el paquete de soporte se descargará en el sistema local.',
         'Support Data' => 'Datos de Soporte',
         'Error: Support data could not be collected (%s).' => 'Error: Los datos de soporte no han podido ser recolectados (%s).',
+        'Support Data Collector' => 'Recolector de Datos de Soporte',
         'Details' => 'Detalles',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
-        'System Email Addresses Management' => 'Administración de Direcciones de Correo del sistema',
-        'Add System Email Address' => 'Agregar Dirección de Correo Electrónico del Sistema',
-        'Edit System Email Address' => 'Modificar Dirección de Correo Electrónico del Sistema',
         'Add System Address' => 'Agrega Dirección del Sistema',
         'Filter for System Addresses' => 'Filtrar por Dirección del Sistema',
         'Filter for system addresses' => 'Filtrar por dirección del sistema',
         'All incoming email with this address in To or Cc will be dispatched to the selected queue.' =>
             'Todos los correos electrónicos entrantes con esta dirección en Para o Cc serán enviados a la fila seleccionada.',
+        'System Email Addresses Management' => 'Administración de Direcciones de Correo del sistema',
+        'Add System Email Address' => 'Agregar Dirección de Correo Electrónico del Sistema',
+        'Edit System Email Address' => 'Modificar Dirección de Correo Electrónico del Sistema',
         'Email address' => 'Dirección de correo electrónico',
         'Display name' => 'Nombre mostrado',
         'This email address is already used as system email address.' => 'Esta dirección de correo ya se utiliza como dirección de correo del sistema.',
@@ -2159,7 +2058,6 @@ sub Data {
             'Actualmente no hay configuraciones disponibles. Asegúrese de ejecutar \'znuny.Console.pl Maint::Config::Rebuild\' antes de usar el software.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationDeployment.tt
-        'Changes Deployment' => 'Desplegar Cambios',
         'Help' => 'Ayuda',
         'This is an overview of all settings which will be part of the deployment if you start it now. You can compare each setting to its former state by clicking the icon on the top right.' =>
             'Esta es una descripción general de todas las configuraciones que formarán parte de la implementación si la inicia ahora. Puede comparar cada configuración con su estado anterior haciendo clic en el icono en la esquina superior derecha.',
@@ -2172,6 +2070,7 @@ sub Data {
         'Please review the changed settings and deploy afterwards.' => 'Revise la configuración modificada e impleméntela después.',
         'An empty list of changes means that there are no differences between the restored and the current state of the affected settings.' =>
             'Una lista vacía de cambios significa que no hay diferencias entre el estado restaurado y el estado actual de la configuración afectada.',
+        'Changes Deployment' => 'Desplegar Cambios',
         'Changes Overview' => 'Resumen de Cambios',
         'There are %s changed settings which will be deployed in this run.' =>
             'Hay %s cambios en la configuración que se implementarán en esta ejecución.',
@@ -2198,7 +2097,6 @@ sub Data {
         'Import system configuration' => 'Importar configuración del sistema',
         'Download current configuration settings of your system in a .yml file.' =>
             'Descargue la configuración actual de su sistema en un archivo .yml.',
-        'Include user settings' => '',
         'Export current configuration' => 'Exportar configuración actual',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationSearch.tt
@@ -2217,9 +2115,9 @@ sub Data {
         'Run search' => 'Ejecutar la búsqueda',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
+        'Go back to Deployment Details' => 'Regrese a Detalles de implementación',
         'View a custom List of Settings' => 'Ver una lista personalizada de configuraciones',
         'View single Setting: %s' => 'Ver únicamente una configuración: %s',
-        'Go back to Deployment Details' => 'Regrese a Detalles de implementación',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
@@ -2229,7 +2127,6 @@ sub Data {
         'Permissions' => 'Permisos',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemMaintenance.tt
-        'System Maintenance Management' => 'Gestión de Mantenimiento del Sistema',
         'Schedule New System Maintenance' => 'Programas Nuevo Mantenimiento del Sistema',
         'Filter for System Maintenances' => '',
         'Filter for system maintenances' => '',
@@ -2237,6 +2134,7 @@ sub Data {
             '',
         'Some time before this system maintenance starts the users will receive a notification on each screen announcing about this fact.' =>
             '',
+        'System Maintenance Management' => 'Gestión de Mantenimiento del Sistema',
         'Stop date' => 'Fecha de Finalización',
         'Delete System Maintenance' => 'Eliminar Mantenimiento del Sisema',
 
@@ -2255,12 +2153,12 @@ sub Data {
         'Kill all Sessions, except for your own' => 'Matar todas las Sesiones, excepto su propia sesión',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplate.tt
-        'Template Management' => 'Gestión de Plantillas',
         'Add Template' => 'Agregar Plantilla',
-        'Edit Template' => 'Editar Plantilla',
         'A template is a default text which helps your agents to write faster tickets, answers or forwards.' =>
             'Una plantilla es el texto por defecto que ayuda a sus agentes a escribir mas rápido los tickets, respuestas o reenvios.',
         'Don\'t forget to add new templates to queues.' => 'No olvide agregar las plantillas nuevas a las filas de espera.',
+        'Template Management' => 'Gestión de Plantillas',
+        'Edit Template' => 'Editar Plantilla',
         'Attachments' => 'Archivos Adjuntos',
         'Delete this entry' => 'Eliminar esta entrada',
         'Do you really want to delete this template?' => '¿Realmente desea eliminar esta plantilla?',
@@ -2272,10 +2170,10 @@ sub Data {
         'Link %s to selected %s' => 'Vínculo %s a %s seleccionados(as)',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTicketAttributeRelations.tt
+        'Import CSV or Excel file' => '',
         'Ticket attribute relations' => '',
         'Add ticket attribute relations' => '',
         'Edit ticket attribute relations' => '',
-        'Import CSV or Excel file' => '',
         'Attribute' => 'Atributo',
         'Last update' => '',
         'Are you sure you want to delete entry \'%s\'?' => '',
@@ -2288,23 +2186,23 @@ sub Data {
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminType.tt
-        'Type Management' => 'Administración de Tipos',
         'Add Type' => 'Añadir Tipo',
-        'Edit Type' => 'Modificar Tipo',
         'Filter for Types' => 'Filtro para Tipos',
         'Filter for types' => 'Filtro para tipos',
         'Configure Type Visibility and Defaults' => '',
+        'Type Management' => 'Administración de Tipos',
+        'Edit Type' => 'Modificar Tipo',
         'A type with this name already exists!' => '¡Ya existe un tipo con este nombre!',
         'This type is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!' =>
             'Este tipo está presente en una configuración del SysConfig, ¡se necesita confirmación para actualizar la configuración para apuntar al nuevo tipo!',
         'This type is used in the following config settings:' => 'Este tipo se usa en los siguientes parámetros de configuración:',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminUser.tt
-        'Agent Management' => 'Gestión de Agentes',
-        'Edit Agent' => 'Modificar Agente',
         'Edit personal preferences for this agent' => 'Preferencias Personales',
         'Agents will be needed to handle tickets.' => 'Los agentes se requieren para que se encarguen de los tickets.',
         'Don\'t forget to add a new agent to groups and/or roles!' => '¡Recuerde añadir a los agentes nuevos a grupos y/o roles!',
+        'Agent Management' => 'Gestión de Agentes',
+        'Edit Agent' => 'Modificar Agente',
         'Please enter a search term to look for agents.' => 'Por favor, introduzca un parámetro de búsqueda para buscar agentes.',
         'Last login' => 'Último inicio de sesión',
         'Switch to agent' => 'Cambiar a agente',
@@ -2404,9 +2302,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerTableView.tt
         'Note: Customer is invalid!' => 'Nota: ¡El cliente es inválido!',
-        'Start chat' => 'Iniciar chat',
-        'Video call' => 'Video llamada',
-        'Audio call' => 'Audio llamada',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
         'Customer User Address Book' => 'Libreta de Direcciones del Usuario del Cliente',
@@ -2434,16 +2329,16 @@ sub Data {
         'Customer User Information Center' => 'Centro de Información de Usuario del Cliente',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
-        'The OTRS Daemon is a daemon process that performs asynchronous tasks, e.g. ticket escalation triggering, email sending, etc.' =>
-            'El Servicio OTRS es un proceso de servicio que efectúa tareas asíncronas, por ejemplo disparo de escalada de tickets, envío de emails, etc.',
-        'A running OTRS Daemon is mandatory for correct system operation.' =>
-            'Es indispensable que el Daemon OTRS esté ejecutándose para que el sistema opere correctamente.',
-        'Starting the OTRS Daemon' => 'Iniciando el Daemon OTRS',
-        'Make sure that the file \'%s\' exists (without .dist extension). This cron job will check every 5 minutes if the OTRS Daemon is running and start it if needed.' =>
+        'The Znuny Daemon is a daemon process that performs asynchronous tasks, e.g. ticket escalation triggering, email sending, etc.' =>
+            'El Servicio Znuny es un proceso de servicio que efectúa tareas asíncronas, por ejemplo disparo de escalada de tickets, envío de emails, etc.',
+        'A running Znuny Daemon is mandatory for correct system operation.' =>
+            'Es indispensable que el Daemon Znuny esté ejecutándose para que el sistema opere correctamente.',
+        'Starting the Znuny Daemon' => 'Iniciando el Daemon Znuny',
+        'Make sure that the file \'%s\' exists (without .dist extension). This cron job will check every 5 minutes if the Znuny Daemon is running and start it if needed.' =>
             '',
         'Execute \'%s start\' to make sure the cron jobs of the \'otrs\' user are active.' =>
             '',
-        'After 5 minutes, check that the OTRS Daemon is running in the system (\'bin/znuny.Daemon.pl status\').' =>
+        'After 5 minutes, check that the Znuny Daemon is running in the system (\'bin/znuny.Daemon.pl status\').' =>
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboard.tt
@@ -2461,11 +2356,23 @@ sub Data {
         'in' => 'en',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCommon.tt
-        'Save settings' => 'Grabar configuración',
-        'Close this widget' => '',
+        'No Data Available.' => 'Los Datos no están disponibles.',
+        ' Show or hide the content' => '',
+        'Search inactive widgets' => '',
+        'Active Widgets' => '',
+        ' Save changes' => '',
+        ' Save' => '',
+        'Save changes' => '',
+        ' Settings' => '',
+        ' Refresh' => '',
+        ' Close this widget' => '',
+        'Hide' => '',
+        ' Cancel' => '',
         'more' => 'más',
         'Available Columns' => 'Columnas Disponibles',
+        ' Filter available fields' => '',
         'Visible Columns (order by drag & drop)' => 'Columnas Visibles (ordenar arrastrando y soltando)',
+        ' Submit' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardCustomerIDList.tt
         'Change Customer Relations' => '',
@@ -2495,12 +2402,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardMyLastChangedTickets.tt
         'No tickets found.' => '',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardProductNotify.tt
-        '%s %s is available!' => '%s %s está disponible!',
-        'Please update now.' => 'Por favor, actualice ahora.',
-        'Release Note' => 'Notas del Lanzamiento',
-        'Level' => 'Nivel',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardRSSOverview.tt
         'Posted %s ago.' => 'Enviado hace %s.',
 
@@ -2520,6 +2421,7 @@ sub Data {
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentDashboardTicketGeneric.tt
+        'Show' => 'Mostrar',
         'Assigned to customer user' => 'Asignado al usuario del cliente',
         'Accessible for customer user' => 'Accesible para el usuario del cliente',
         'My locked tickets' => 'Mis tickets bloqueados',
@@ -2545,6 +2447,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentLinkObject.tt
         'Manage links for %s' => '',
+        'Close and Back' => '',
         'Create new links' => '',
         'Manage existing links' => '',
         'Link with' => 'Enlazar con',
@@ -2552,14 +2455,7 @@ sub Data {
         'There are currently no links. Please click \'Create new Links\' on the top to link this item to other objects.' =>
             '',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentOTRSBusinessBlockScreen.tt
-        'Unauthorized usage of %s detected' => 'Uso no autorizado de %s detectado',
-        'If you decide to downgrade to ((OTRS)) Community Edition, you will lose all database tables and data related to %s.' =>
-            '',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
-        'Edit your preferences' => 'Modificar mis preferencias',
-        'Personal Preferences' => 'Preferencias Personales',
         'Preferences' => 'Preferencias',
         'Please note: you\'re currently editing the preferences of %s.' =>
             'Tenga en cuenta: actualmente está editando las preferencias de %s.',
@@ -2572,6 +2468,8 @@ sub Data {
         'Filter settings...' => 'Configuración de filtros...',
         'Filter for settings' => 'Filtro para configuraciones',
         'Save all settings' => 'Guardar todas las configuraciones',
+        'Edit your preferences' => 'Modificar mis preferencias',
+        'Personal Preferences' => 'Preferencias Personales',
         'Avatars have been disabled by the system administrator. You\'ll see your initials instead.' =>
             '',
         'You can change your avatar image by registering with your email address %s at %s. Please note that it can take some time until your new avatar becomes available because of caching.' =>
@@ -2580,15 +2478,13 @@ sub Data {
         'End' => 'Fin',
         'This setting can currently not be saved.' => '',
         'This setting can currently not be saved' => '',
+        'Save setting' => '',
         'Save this setting' => 'Guardar este parámetro',
         'Did you know? You can help translating Znuny at %s.' => '',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences/SettingsList.tt
-        'Reset to default' => '',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferencesOverview.tt
-        'Choose from the groups on the right to find the settings you\'d wish to change.' =>
-            'Elija entre los grupos a la derecha para encontrar la configuración que desea cambiar.',
+        'Choose from the groups on the left to find the settings you\'d wish to change.' =>
+            '',
         'Did you know?' => '¿Sabía qué?',
         'You can change your avatar by registering with your email address %s on %s' =>
             '',
@@ -2599,9 +2495,9 @@ sub Data {
         'Split' => 'Separar',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
+        'Read more about statistics in Znuny' => '',
         'Statistics Management' => '',
         'Add Statistics' => '',
-        'Read more about statistics in OTRS' => '',
         'Dynamic Matrix' => 'Matriz Dinámica',
         'Each cell contains a singular data point.' => 'Cada celda contiene un punto único de datos.',
         'Dynamic List' => 'Lista Dinámica',
@@ -2612,8 +2508,8 @@ sub Data {
         'Create Statistic' => 'Crear Estádística',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsEdit.tt
-        'Edit Statistics' => '',
         'Run now' => 'Ejecutar ahora',
+        'Edit Statistics' => '',
         'Statistics Preview' => 'Vista Previa de Estadísticas',
         'Save Statistic' => '',
 
@@ -2623,7 +2519,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsOverview.tt
         'Statistics' => 'Estadísticas',
-        'Run' => 'Ejecutar',
         'Edit statistic "%s".' => 'Editar estadística "%s".',
         'Export statistic "%s"' => 'Exportar estadística "%s"',
         'Export statistic %s' => 'Exportar estadística %s',
@@ -2631,8 +2526,6 @@ sub Data {
         'Delete statistic %s' => 'Eliminar estadística %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
-        'Statistics Overview' => '',
-        'View Statistics' => '',
         'Statistics Information' => 'Información de Estadísticas',
         'Created by' => 'Creado por',
         'Changed by' => 'Modificado por',
@@ -2640,6 +2533,8 @@ sub Data {
         'Sum columns' => 'Sumar columnas',
         'Show as dashboard widget' => 'Mostrar como widget en el panel principal',
         'Cache' => 'Caché',
+        'Statistics Overview' => '',
+        'View Statistics' => '',
         'This statistic contains configuration errors and can currently not be used.' =>
             'Esta estadísticas contiene errores de configuración y no puede ser utilizada en este momento.',
 
@@ -2651,33 +2546,37 @@ sub Data {
         'Set Pending Time for %s%s%s' => '',
         'Change Priority of %s%s%s' => '',
         'Change Responsible of %s%s%s' => '',
-        'All fields marked with an asterisk (*) are mandatory.' => 'Todos los campos marcados con un asterisco (*) son obligatorios.',
         'The ticket has been locked' => 'El ticket ha sido bloqueado',
-        'Undo & close' => 'Deshacer cambios y cerrar',
         'Ticket Settings' => 'Configuraciones de Ticket',
-        'Queue invalid.' => 'Fila Inválida.',
         'Service invalid.' => 'Servicio inválido.',
         'SLA invalid.' => '',
+        'Team Data' => '',
+        'Queue invalid.' => 'Fila Inválida.',
         'New Owner' => 'Propietario nuevo',
         'Please set a new owner!' => '¡Por favor, defina un propietario nuevo!',
         'Owner invalid.' => '',
         'New Responsible' => 'Nuevo Responsable',
         'Please set a new responsible!' => '',
         'Responsible invalid.' => '',
+        'Ticket Data' => '',
         'Next state' => 'Siguiente estado',
         'State invalid.' => '',
         'For all pending* states.' => 'Para todos los estados pendientes*.',
+        'Dynamic Info' => '',
         'Add Article' => 'Añadir Artículo',
-        'Create an Article' => 'Crear un Artículo',
+        'Inform' => '',
         'Inform agents' => 'Informar a los agentes',
         'Inform involved agents' => 'Informar a los agentes involucrados',
         'Here you can select additional agents which should receive a notification regarding the new article.' =>
             'Aquí puede seleccionar agentes adicionales que deben recibir una notificación sobre el nuevo artículo.',
         'Text will also be received by' => '',
+        'Communications' => '',
+        'Create an Article' => 'Crear un Artículo',
         'Setting a template will overwrite any text or attachment.' => 'Establecer una plantilla sobrescribirá cualquier texto o adjunto.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
         'Bounce %s%s%s' => '',
+        'cancel' => '',
         'Bounce to' => 'Rebotar a',
         'You need a email address.' => 'Se requiere una dirección de correo electrónico.',
         'Need a valid email address or don\'t use a local email address.' =>
@@ -2700,20 +2599,23 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
         'Compose Answer for %s%s%s' => '',
+        'Date Invalid!' => '¡Fecha Inválida!',
+        ' Select one or more recipients from the customer user address book.' =>
+            '',
+        'Customer user address book' => 'Libreta de direcciones del usuario del cliente',
         'This address is registered as system address and cannot be used: %s' =>
             'Esta dirección está registrada como una dirección del sistema y no puede ser usada: %s',
         'Please include at least one recipient' => 'Incluya al menos un destinatario',
-        'Select one or more recipients from the customer user address book.' =>
-            'Seleccione uno o mas destinatarios de la libreta de direcciones del usuario del cliente.',
-        'Customer user address book' => 'Libreta de direcciones del usuario del cliente',
         'Remove Ticket Customer' => 'Eliminar al cliente del ticket',
         'Please remove this entry and enter a new one with the correct value.' =>
             'Elimine esta entrada e introduzca una nueva con el valor correcto.',
         'This address already exists on the address list.' => 'Esta dirección ya existe en la lista de direcciones.',
+        ' Cc' => '',
         'Remove Cc' => 'Eliminar Copia para',
         'Bcc' => 'Copia Oculta',
+        ' Bcc' => '',
         'Remove Bcc' => 'Eliminar Copia oculta',
-        'Date Invalid!' => '¡Fecha Inválida!',
+        ' Send mail' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
         'Change Customer of %s%s%s' => '',
@@ -2722,19 +2624,29 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
         'Create New Email Ticket' => 'Crear un Ticket nuevo de Correo Electrónico',
+        ' Example Template' => '',
         'Example Template' => 'Plantilla de Ejemplo',
-        'From queue' => 'De la fila',
         'To customer user' => 'Al usuario del cliente',
+        ' To' => '',
         'Please include at least one customer user for the ticket.' => 'Por favor, incluya en el ticket al menos un usuario del cliente.',
-        'Select this customer as the main customer.' => 'Seleccionar a este cliente como el cliente principal.',
+        ' Select this customer as the main customer.' => '',
+        ' To customer user' => '',
         'Remove Ticket Customer User' => 'Eliminar del Ticket al Usuario del Cliente',
+        'From queue' => 'De la fila',
+        ' Get all' => '',
         'Get all' => 'Obtener todos',
+        ' Message body' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
         'Outbound Email for %s%s%s' => '',
+        'Select one or more recipients from the customer user address book.' =>
+            'Seleccione uno o mas destinatarios de la libreta de direcciones del usuario del cliente.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => '',
+        'All fields marked with an asterisk (*) are mandatory.' => 'Todos los campos marcados con un asterisco (*) son obligatorios.',
+        'Cancel & close' => 'Cancelar y cerrar',
+        'Undo & close' => 'Deshacer cambios y cerrar',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
         'Ticket %s: first response time is over (%s/%s)!' => '',
@@ -2749,18 +2661,19 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
         'History of %s%s%s' => '',
+        'Start typing to filter...' => '',
         'Filter for history items' => '',
-        'Expand/collapse all' => '',
+        'Expand/Collapse all' => '',
         'CreateTime' => '',
         'Article' => 'Artículo',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMerge.tt
         'Merge %s%s%s' => '',
         'Merge Settings' => 'Unir Configuraciones',
-        'You need to use a ticket number!' => '¡Necesita usar un número de ticket!',
-        'A valid ticket number is required.' => 'Se requiere un número de ticket válido.',
         'Try typing part of the ticket number or title in order to search by it.' =>
             '',
+        'You need to use a ticket number!' => '¡Necesita usar un número de ticket!',
+        'A valid ticket number is required.' => 'Se requiere un número de ticket válido.',
         'Limit the search to tickets with same Customer ID (%s).' => '',
         'Inform Sender' => '',
         'Need a valid email address.' => 'Se require una dirección de correo electrónica válida.',
@@ -2768,48 +2681,53 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
         'Move %s%s%s' => '',
         'New Queue' => 'Fila nueva',
+        'Communication' => 'Comunicación',
         'Move' => 'Mover',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
         'Add note to linked %s%s%s' => '',
+        'Notes' => '',
         'Note to linked Ticket' => '',
         'LinkList invalid.' => '',
         'Note to origin Ticket' => '',
         'NoteToTicket invalid.' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
+        ' Select all' => '',
         'No ticket data found.' => 'No se encontraron datos de ticket.',
-        'Open / Close ticket action menu' => 'Abrir / Cerrar el Menú de accion del ticket',
-        'Select this ticket' => 'Seleccionar este ticket',
+        ' Open / Close ticket action menu' => '',
+        ' Select this ticket' => '',
         'Sender' => 'Emisor',
-        'First Response Time' => 'Tiempo para Primera Respuesta',
-        'Update Time' => 'Tiempo para Actualización',
-        'Solution Time' => 'Tiempo para Solución',
         'Impact' => 'Impacto',
         'CustomerID' => 'Identificador del cliente',
-        'Move ticket to a different queue' => 'Mover ticket a una fila diferente',
+        'Update Time' => 'Tiempo para Actualización',
+        'Solution Time' => 'Tiempo para Solución',
+        'First Response Time' => 'Tiempo para Primera Respuesta',
+        ' Service Time' => '',
+        ' Move ticket to a different queue' => '',
         'Change queue' => 'Modificar fila',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewNavBar.tt
         'Remove active filters for this screen.' => 'Eliminar los filtros activos para esta pantalla.',
+        'Clear all filters' => '',
         'Remove mention' => '',
         'Tickets per page' => 'Tickets por página',
+        'Filter assigned fields' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewPreview.tt
+        ' Missing channel' => '',
         'Missing channel' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewSmall.tt
         'Reset overview' => 'Restablecer la vista general',
-        'Column Filters Form' => 'Formulario de filtros de columna',
+        ' Column Filters Form' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhone.tt
         'Split Into New Phone Ticket' => 'Dividir En Nuevo Ticket Telefónico',
-        'Save Chat Into New Phone Ticket' => 'Guardar Chat En Nuevo Ticket Telefónico',
         'Create New Phone Ticket' => 'Crear un Ticket Telefónico Nuevo',
         'Please include at least one customer for the ticket.' => 'Por favor, Incluya al menos un cliente para el ticket.',
+        'Select this customer as the main customer.' => 'Seleccionar a este cliente como el cliente principal.',
         'To queue' => 'Para la fila de espera',
-        'Chat protocol' => 'Protocolo de Chat',
-        'The chat will be appended as a separate article.' => 'El chat se agregará como un artículo separado.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhoneCommon.tt
         'Phone Call for %s%s%s' => '',
@@ -2821,6 +2739,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcess.tt
         'Create New Process Ticket' => 'Crear Nuevo Ticket de Proceso',
+        ' Loading' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcessSmall.tt
         'Enroll Ticket into a Process' => 'Registrar Ticket en un Proceso',
@@ -2864,11 +2783,11 @@ sub Data {
         'Save as default' => 'Guardar como predeterminado',
         'Drafts' => 'Borradores',
         'by' => 'por',
+        'Move ticket to a different queue' => 'Mover ticket a una fila diferente',
         'Change Queue' => 'Cambiar Fila',
         'There are no dialogs available at this point in the process.' =>
             'No hay diálogos disponibles en este punto del proceso.',
         'This item has no articles yet.' => 'Este ítem todavía no tiene ningún artículo.',
-        'Ticket Timeline View' => 'Vista de Linea Temporal del Ticket',
         'Article Overview - %s Article(s)' => 'Resumen del Artículo - %s Artículo(s)',
         'Page %s' => '',
         'Add Filter' => 'Añadir Filtro',
@@ -2884,11 +2803,6 @@ sub Data {
         'Internal message' => 'Mensaje interno',
         'Sending of this message has failed.' => 'Ha fallado el envío de este mensaje.',
         'Resize' => 'Cambiar el tamaño',
-        'Mark this article as read' => 'Marcar este artículo como leído',
-        'Show Full Text' => 'Mostrar Texto Completo',
-        'Full Article Text' => 'Texto Completo del Artículo',
-        'No more events found. Please try changing the filter settings.' =>
-            'No se encontraron más eventos. Por favor, pruebe cambiando las configuraciones del filtro.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/ArticleRender/Chat.tt
         '#%s' => '',
@@ -2931,10 +2845,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
         'Preview of this article is not possible because %s channel is missing in the system.' =>
             'La vista previa de este artículo no es posible porque falta el canal %s en el sistema.',
-        'This feature is part of the %s. Please contact us at %s for an upgrade.' =>
-            '',
-        'Please re-install %s package in order to display this article.' =>
-            'Vuelva a instalar el paquete %s para mostrar este artículo.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AttachmentBlocker.tt
         'To protect your privacy, remote content was blocked.' => 'Para proteger su privacidad, el contenido remoto fue bloqueado.',
@@ -2942,7 +2852,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => 'Inicio',
-        'Back to admin overview' => 'Volver a la vista general de administrador',
+        'Back' => 'Atrás',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => '',
@@ -2950,11 +2860,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Link.tt
         'Remove entry' => 'Eliminar entrada',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/CloudServicesDisabled.tt
-        'This Feature Requires Cloud Services' => 'Esta Característica Requiere Servicios en la Nube',
-        'You can' => 'Usted puede',
-        'go back to the previous page' => 'regresar a la página anterior',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerAccept.tt
         'Dear Customer,' => 'Estimado Cliente,',
@@ -2984,6 +2889,11 @@ sub Data {
         'The connection has been re-established after a temporary connection loss. Due to this, elements on this page could have stopped to work correctly. In order to be able to use all elements correctly again, it is strongly recommended to reload this page.' =>
             'Esta conexión ha sido re-establecida después de la pérdida de conexión. Dado a eso los elementos de esta página pudieron haber dejado de trabajar correctamente. Para usar todos los elementos correctamente de nuevo es muy recomendable que reinicies esta página.',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerHeader.tt
+        'Edit personal preferences' => 'Modificar preferencias presonales',
+        'Personal preferences' => 'Preferencias personales',
+        'Logout' => 'Cerrar Sesión',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
         'JavaScript Not Available' => 'JavaScript No Disponible',
         'In order to experience this software, you\'ll need to enable JavaScript in your browser.' =>
@@ -3003,9 +2913,6 @@ sub Data {
         '2 Factor Token' => '',
         'Your 2 Factor Token' => '',
         'Log In' => 'Iniciar sesión',
-        'Not yet registered?' => '¿Aún no se ha registrado?',
-        'Sign up now' => 'Inscríbase ahora',
-        'Back' => 'Atrás',
         'Request New Password' => 'Solicite una Contraseña Nueva',
         'Your User Name' => 'Su Nombre de Usuario',
         'A new password will be sent to your email address.' => 'Una contraseña nueva se enviará a su dirección de correo electrónico.',
@@ -3015,14 +2922,14 @@ sub Data {
         'Your First Name' => 'Su Nombre',
         'Your Last Name' => 'Su Apellido',
         'Your email address (this will become your username)' => 'Su dirección de email (esta será su nombre de usuario)',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerNavigationBar.tt
-        'Incoming Chat Requests' => 'Petición de Chat Entrante',
-        'Edit personal preferences' => 'Modificar preferencias presonales',
-        'Logout %s' => 'Cerrar Sesión %s',
+        'Not yet registered?' => '¿Aún no se ha registrado?',
+        'Sign up now' => 'Inscríbase ahora',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
-        'Service level agreement' => 'Acuerdo de nivel de servicio',
+        'New Ticket' => 'Nuevo Ticket',
+        ' Service level agreement' => '',
+        'Dymanic Info' => '',
+        ' Subject' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketOverview.tt
         'Welcome!' => '¡Bienvenido!',
@@ -3032,9 +2939,8 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => 'Perfil',
         'e. g. 10*5155 or 105658*' => 'Por ejemplo: 10*5155 ó 105658*',
-        'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '',
         'Types' => 'Tipos',
-        'Time Restrictions' => '',
+        'Limitation' => '',
         'No time settings' => 'Sin ajustes de tiempo',
         'All' => 'Todo',
         'Specific date' => 'Fecha específica',
@@ -3043,20 +2949,19 @@ sub Data {
         'Only tickets created between' => 'Únicamente tickets creados entre',
         'Ticket Archive System' => '',
         'Save Search as Template?' => '¿Guardar Búsqueda como Plantilla?',
-        'Save as Template?' => '¿Guardar como Plantilla?',
         'Save as Template' => 'Guardar como Plantilla',
+        'Save as Template?' => '¿Guardar como Plantilla?',
         'Template Name' => 'Nombre de la Plantilla',
         'Pick a profile name' => 'Seleccione un nombre para el perfil',
         'Output to' => 'Salida a',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearchResultShort.tt
+        'Remove this Search Term.' => 'Quitar este Término de Búsqueda.',
         'of' => 'de',
         'Page' => 'Página',
-        'Search Results for' => 'Buscar Resultados para',
-        'Remove this Search Term.' => 'Quitar este Término de Búsqueda.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketZoom.tt
-        'Start a chat from this ticket' => 'Iniciar un chat de este ticket',
+        'Ticket Details' => '',
         'Next Steps' => 'Pasos Siguientes',
         'Reply' => 'Responder',
 
@@ -3089,11 +2994,18 @@ sub Data {
             'Tenga en cuenta que este borrador está desactualizado porque el ticket se modificó desde que se creó este borrador.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Header.tt
-        'View notifications' => '',
-        'Personal preferences' => 'Preferencias personales',
-        'Logout' => 'Cerrar Sesión',
-        'You are logged in as' => 'Ud. inició sesión como',
         'Last viewed' => '',
+        'You are logged in as' => 'Ud. inició sesión como',
+        'Delete all activities' => '',
+        'Delete all' => '',
+        'Mark all activities as seen' => '',
+        'Seen all' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/HeaderToolbar.tt
+        'Overviews' => '',
+        'Personal views' => '',
+        'Last Views' => '',
+        'Search tools' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
         'JavaScript not available' => 'JavaScript no disponible',
@@ -3142,8 +3054,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
         'Install Type' => 'Tipo de Instalación',
-        'Create a new database for OTRS' => 'Crear una nueva base de datos para OTRS',
-        'Use an existing database for OTRS' => 'Usar una base de datos existente para OTRS',
+        'Create a new database for Znuny' => 'Crear una nueva base de datos para Znuny',
+        'Use an existing database for Znuny' => 'Usar una base de datos existente para Znuny',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBmssql.tt
         'If you have set a root password for your database, it must be entered here. If not, leave this field empty.' =>
@@ -3154,8 +3066,8 @@ sub Data {
         'Database check successful.' => 'Verificación satisfactoria de la base de datos',
         'Database User' => 'Usuario de la Base de Datos',
         'New' => 'Nuevo',
-        'A new database user with limited permissions will be created for this OTRS system.' =>
-            'Un usuario nuevo, con permisos limitados, se creará en este sistema OTRS, para la base de datos.',
+        'A new database user with limited permissions will be created for this Znuny system.' =>
+            'Un usuario nuevo, con permisos limitados, se creará en este sistema Znuny, para la base de datos.',
         'Repeat Password' => 'Repetir Contraseña',
         'Generated password' => 'Generar contraseña',
         'Database' => 'Base de Datos',
@@ -3168,10 +3080,10 @@ sub Data {
         'Port' => 'Puerto',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerFinish.tt
-        'To be able to use OTRS you have to enter the following line in your command line (Terminal/Shell) as root.' =>
-            'Para poder utilizar OTRS debe escribir la siguiente línea en la consola de sistema (Terminal/Shell) como usuario root',
+        'To be able to use Znuny you have to enter the following line in your command line (Terminal/Shell) as root.' =>
+            'Para poder utilizar Znuny debe escribir la siguiente línea en la consola de sistema (Terminal/Shell) como usuario root',
         'Restart your webserver' => 'Reinicie su servidor web',
-        'After doing so your OTRS is up and running.' => 'Después de hacer esto, su OTRS estará activo y ejecutándose',
+        'After doing so your Znuny is up and running.' => 'Después de hacer esto, su Znuny estará activo y ejecutándose',
         'Start page' => 'Página de inicio',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerLicense.tt
@@ -3218,8 +3130,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MobileNotAvailableWidget.tt
         'Feature not Available' => 'Característica no disponible',
-        'Sorry, but this feature of OTRS is currently not available for mobile devices. If you\'d like to use it, you can either switch to desktop mode or use your regular desktop device.' =>
-            'Lo sentimos, pero OTRS no tiene disponible esta característica para dispositivos móviles. Si aún desea usar la dicha característica, puede hacerlo en el modo escritorio o puede usar una laptop o equipo de escritorio.',
+        'Sorry, but this feature of Znuny is currently not available for mobile devices. If you\'d like to use it, you can either switch to desktop mode or use your regular desktop device.' =>
+            'Lo sentimos, pero Znuny no tiene disponible esta característica para dispositivos móviles. Si aún desea usar la dicha característica, puede hacerlo en el modo escritorio o puede usar una laptop o equipo de escritorio.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Motd.tt
         'Message of the Day' => 'Mensaje del día',
@@ -3232,6 +3144,9 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => 'Alerta',
         'Powered by' => 'Impulsado por',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Notify.tt
+        ' Close this message' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Pagination.tt
         'Show first page' => 'Mostrar la primera página',
@@ -3259,7 +3174,7 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/PublicDefault.tt
         'Welcome' => 'Bienvenido',
-        'This is the default public interface of OTRS! There was no action parameter given.' =>
+        'This is the default public interface of Znuny! There was no action parameter given.' =>
             '',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             '',
@@ -3403,12 +3318,6 @@ sub Data {
         'Enable' => 'Habilitar',
         'Reset this setting to its default state' => 'Restablezca esta configuración a su estado predeterminado',
         'Reset setting' => 'Restablecer configuración',
-        'Allow users to adapt this setting from within their personal preferences' =>
-            '',
-        'Allow users to update' => '',
-        'Do not longer allow users to adapt this setting from within their personal preferences' =>
-            '',
-        'Forbid users to update' => '',
         'Show user specific changes for this setting' => '',
         'Show user settings' => '',
         'Copy a direct link to this setting to your clipboard' => 'Copie un enlace directo a esta configuración en su portapapeles',
@@ -3458,7 +3367,7 @@ sub Data {
         'Navigation' => 'Navegación',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Test.tt
-        'OTRS Test Page' => 'Página de Prueba de OTRS',
+        'Znuny Test Page' => 'Página de Prueba de Znuny',
         'Unlock' => 'Desbloquear',
         'Welcome %s %s' => 'Bienvenido %s %s',
         'Counter' => 'Contador',
@@ -3468,9 +3377,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Warning.tt
         'Go back to the previous page' => 'Regresar a la página anterior',
-
-        # JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/AppointmentCalendar/CalendarSettingsDialog.html.tmpl
-        'Show' => 'Mostrar',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/FormDraftAddDialog.html.tmpl
         'Draft title' => 'Título del borrador',
@@ -3487,8 +3393,8 @@ sub Data {
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/AjaxDnDUpload/UploadContainer.html.tmpl
         'Click to select a file for upload.' => 'Haga clic para seleccionar un archivo para cargar.',
-        'Click to select files or just drop them here.' => 'Haga clic para seleccionar archivos o simplemente colóquelos aquí.',
-        'Click to select a file or just drop it here.' => 'Haga clic para seleccionar o simplemente colóquelos aquí.',
+        'Select files or drop them here' => '',
+        'Select a file or drop it here' => '',
         'Uploading...' => 'Cargando...',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/PackageManager/InformationDialog.html.tmpl
@@ -3512,12 +3418,6 @@ sub Data {
         'Try again' => 'Intenta de nuevo',
 
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DialogReset.html.tmpl
-        'Reset options' => 'Restaurar opciones',
-        'Reset setting on global level.' => 'Restaurar configuración a nivel global.',
-        'Reset globally' => 'Restaurar globalmente',
-        'Remove all user changes.' => 'Eliminar todos los cambios de usuarios.',
-        'Reset locally' => 'Restaurar localmente',
-        'user(s) have modified this setting.' => 'El/los usuario(s) han modificado esta configuración.',
         'Do you really want to reset this setting to it\'s default value?' =>
             '¿Realmente desea restablecer esta configuración a su valor predeterminado?',
 
@@ -3544,8 +3444,8 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminACL.pm
         'ACL information from database is not in sync with the system configuration, please deploy all ACLs.' =>
             'La información de las ACL en la base de datos no está sincronizada con la configuración del sistema, por favor, despliegue todas las ACLs.',
-        'ACLs could not be Imported due to a unknown error, please check OTRS logs for more information' =>
-            'Las ACL no se pueden importar debido a un error desconocido, compruebe los registros de OTRS para obtener más información',
+        'ACLs could not be Imported due to a unknown error, please check Znuny logs for more information' =>
+            'Las ACL no se pueden importar debido a un error desconocido, compruebe los registros de Znuny para obtener más información',
         'The following ACLs have been added successfully: %s' => '',
         'The following ACLs have been updated successfully: %s' => '',
         'There where errors adding/updating the following ACLs: %s. Please check the log file for more information.' =>
@@ -3600,8 +3500,8 @@ sub Data {
         'Unknown Notification %s!' => '¡Notificación %s Desconocida!',
         '%s (copy)' => '%s (copia)',
         'There was an error creating the Notification' => 'Se produjo un error al crear la Notificación',
-        'Notifications could not be Imported due to a unknown error, please check OTRS logs for more information' =>
-            'Las notificaciones no se pudieron importarse debido a un error desconocido, favor, compruebe los registros de OTRS para más información',
+        'Notifications could not be Imported due to a unknown error, please check Znuny logs for more information' =>
+            'Las notificaciones no se pudieron importarse debido a un error desconocido, favor, compruebe los registros de Znuny para más información',
         'The following Notifications have been added successfully: %s' =>
             '',
         'The following Notifications have been updated successfully: %s' =>
@@ -3614,7 +3514,6 @@ sub Data {
             'Agentes con (al menos) permisos de lectura para la cita (calendario)',
         'All agents with write permission for the appointment (calendar)' =>
             'Todos los agentes con permisos de escritura para la cita (calendario)',
-        'Yes, but require at least one active notification method.' => 'Sí, pero requiere al menos un método de notificación activo.',
 
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '¡Respuesta Automática agregada!',
@@ -3881,12 +3780,12 @@ sub Data {
         'Could not load %s.' => 'No se pudo cargar %s.',
         'Could not read %s!' => '¡No se pudo leer %s!',
         'Need a file to import!' => '¡Se requiere el archivo para importar!',
-        'The imported file has not valid YAML content! Please check OTRS log for details' =>
+        'The imported file has not valid YAML content! Please check Znuny log for details' =>
             '',
         'Web service "%s" deleted!' => '¡Web service "%s" eliminado!',
-        'OTRS as provider' => 'OTRS como proveedor',
+        'Znuny as provider' => 'Znuny como proveedor',
         'Operations' => 'Operaciones',
-        'OTRS as requester' => 'OTRS como solicitante',
+        'Znuny as requester' => 'Znuny como solicitante',
         'Invokers' => 'Invocadores',
 
         # Perl Module: Kernel/Modules/AdminGenericInterfaceWebserviceHistory.pm
@@ -3923,16 +3822,6 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminOAuth2TokenManagement.pm
         'Authorization code parameters not found.' => '',
 
-        # Perl Module: Kernel/Modules/AdminOTRSBusiness.pm
-        'Your system was successfully upgraded to %s.' => 'Su sistema fue actualizado satisfactoriamente a %s.',
-        'There was a problem during the upgrade to %s.' => 'Hubo un problema al actualizar a %s.',
-        '%s was correctly reinstalled.' => '%s fue reinstalado correctamente.',
-        'There was a problem reinstalling %s.' => 'Hubo un problema al reinstalar %s.',
-        'Your %s was successfully updated.' => 'Su %s ha sido actualizada correctamente.',
-        'There was a problem during the upgrade of %s.' => 'Hubo un problema durante la actualización de %s.',
-        '%s was correctly uninstalled.' => '%s fue desinstalado correctamente.',
-        'There was a problem uninstalling %s.' => 'Hubo un problema durante la desinstalación de %s.',
-
         # Perl Module: Kernel/Modules/AdminPGP.pm
         'PGP environment is not working. Please check log for more info!' =>
             'El entorno de PGP no funciona. ¡Por favor compruebe los registros para más información!',
@@ -3967,9 +3856,6 @@ sub Data {
         'Repository List' => 'Lista de Repositorios',
         'No packages found in selected repository. Please check log for more info!' =>
             'No se encontraron paquetes en el repositorio seleccionado. Por favor, ¡consulte la bitácora para obtener más información!',
-        'Can\'t connect to OTRS Feature Add-on list server!' => '¡No se pudo conectar con el servidor de la lista Complementos de OTRS!',
-        'Can\'t get OTRS Feature Add-on list from server!' => '¡No se puede obtener la lista Complementos de OTRS desde el servidor!',
-        'Can\'t get OTRS Feature Add-on from server!' => '¡No se puede obtener el Complemento de OTRS desde el servidor!',
 
         # Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
         'No such filter: %s' => 'No existe el filtro: %s',
@@ -4132,13 +4018,13 @@ sub Data {
         'You currently don\'t have any favourite settings.' => 'Actualmente no tienes ninguna configuración favorita.',
         'The following settings could not be found: %s' => 'La siguiente configuración no se pudo encontrar: %s',
         'Import not allowed!' => '¡No se permite Importar!',
-        'System Configuration could not be imported due to an unknown error, please check OTRS logs for more information.' =>
-            'La configuración del sistema no se pudo importar debido a un error desconocido, consulte la bitácora de OTRS para obtener más información.',
+        'System Configuration could not be imported due to an unknown error, please check Znuny logs for more information.' =>
+            'La configuración del sistema no se pudo importar debido a un error desconocido, consulte la bitácora de Znuny para obtener más información.',
         'Category Search' => 'Buscar Categoría',
 
         # Perl Module: Kernel/Modules/AdminSystemConfigurationDeployment.pm
-        'Some imported settings are not present in the current state of the configuration or it was not possible to update them. Please check the OTRS log for more information.' =>
-            'Algunas configuraciones importadas no están presentes en el estado actual de la configuración o no fue posible actualizarlas. Consulte la bitácora de OTRS para obtener más información.',
+        'Some imported settings are not present in the current state of the configuration or it was not possible to update them. Please check the Znuny log for more information.' =>
+            'Algunas configuraciones importadas no están presentes en el estado actual de la configuración o no fue posible actualizarlas. Consulte la bitácora de Znuny para obtener más información.',
 
         # Perl Module: Kernel/Modules/AdminSystemConfigurationGroup.pm
         'You need to enable the setting before locking!' => '¡Debe habilitar la configuración antes de bloquear!',
@@ -4257,10 +4143,6 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentPreferences.pm
         'Param Group is required!' => '¡Se requiere Grupo de parámetros!',
-        'Updated user preferences' => '',
-        'System was unable to deploy your changes.' => '',
-        'Setting not found!' => '',
-        'System was unable to reset the setting!' => '',
 
         # Perl Module: Kernel/Modules/AgentSplitSelection.pm
         'Process ticket' => 'Ticket de proceso',
@@ -4372,12 +4254,6 @@ sub Data {
         # Perl Module: Kernel/Modules/AgentTicketMove.pm
         'You need move permissions!' => '',
 
-        # Perl Module: Kernel/Modules/AgentTicketPhone.pm
-        'Chat is not active.' => '',
-        'No permission.' => '',
-        '%s has left the chat.' => '%s ha dejado la conversación.',
-        'This chat has been closed and will be removed in %s hours.' => 'Esta conversación ha sido cerrada y será eliminada en %s horas.',
-
         # Perl Module: Kernel/Modules/AgentTicketPhoneCommon.pm
         'Ticket locked.' => 'Ticket bloqueado.',
 
@@ -4487,51 +4363,6 @@ sub Data {
         'Feature is not active' => '',
 
         # Perl Module: Kernel/Modules/AgentTicketZoom.pm
-        'Link Deleted' => 'Enlace Eliminado',
-        'Ticket Locked' => 'Ticket Bloqueado',
-        'Pending Time Set' => '',
-        'Dynamic Field Updated' => 'Campo Dinámico Actualizado',
-        'Outgoing Email (internal)' => '',
-        'Ticket Created' => 'Ticket Creado',
-        'Type Updated' => '',
-        'Escalation Update Time In Effect' => '',
-        'Escalation Update Time Stopped' => '',
-        'Escalation First Response Time Stopped' => '',
-        'Customer Updated' => 'Cliente Actualizado',
-        'Internal Chat' => 'Chat Interno',
-        'Automatic Follow-Up Sent' => '',
-        'Note Added' => 'Nota Agregada',
-        'Note Added (Customer)' => 'Nota Agregada (Cliente)',
-        'SMS Added' => '',
-        'SMS Added (Customer)' => '',
-        'State Updated' => 'Estado Actualizado',
-        'Outgoing Answer' => '',
-        'Service Updated' => '',
-        'Link Added' => 'Enlace Agregado',
-        'Incoming Customer Email' => '',
-        'Incoming Web Request' => '',
-        'Priority Updated' => '',
-        'Ticket Unlocked' => 'Ticket Desbloqueado',
-        'Outgoing Email' => 'Correo Saliente',
-        'Title Updated' => '',
-        'Ticket Merged' => 'Ticket Fucionado',
-        'Outgoing Phone Call' => '',
-        'Forwarded Message' => '',
-        'Removed User Subscription' => '',
-        'Time Accounted' => '',
-        'Incoming Phone Call' => '',
-        'System Request.' => '',
-        'Incoming Follow-Up' => '',
-        'Automatic Reply Sent' => '',
-        'Automatic Reject Sent' => '',
-        'Escalation Solution Time In Effect' => '',
-        'Escalation Solution Time Stopped' => '',
-        'Escalation Response Time In Effect' => '',
-        'Escalation Response Time Stopped' => '',
-        'SLA Updated' => 'SLA Actualizado',
-        'External Chat' => 'Chat Externo',
-        'Queue Changed' => 'Fila Modificada',
-        'Notification Was Sent' => '',
         'This ticket does not exist, or you don\'t have permissions to access it in its current state.' =>
             '',
         'Missing FormDraftID!' => '',
@@ -4550,7 +4381,6 @@ sub Data {
             '',
         'Show one article' => 'Mostrar un artículo',
         'Show all articles' => 'Mostrar todos los artículos',
-        'Show Ticket Timeline View' => 'Mostrar Vista de Linea Temporal del Ticket',
 
         # Perl Module: Kernel/Modules/AjaxAttachment.pm
         'Got no FormID.' => 'No se tiene FormID.',
@@ -4597,7 +4427,7 @@ sub Data {
         'Configure "Home" in Kernel/Config.pm first!' => '',
         'File "%s/Kernel/Config.pm" not found!' => '',
         'Directory "%s" not found!' => '',
-        'Install OTRS' => 'Instalar OTRS',
+        'Install Znuny' => 'Instalar Znuny',
         'Intro' => 'Introducción',
         'Kernel/Config.pm isn\'t writable!' => '',
         'If you want to use the installer, set the Kernel/Config.pm writable for the webserver user!' =>
@@ -4614,7 +4444,7 @@ sub Data {
         'Unknown database type "%s".' => '',
         'Please go back.' => '',
         'Create Database' => 'Crear Base de Datos',
-        'Install OTRS - Error' => '',
+        'Install Znuny - Error' => '',
         'File "%s/%s.xml" not found!' => '',
         'Contact your Admin!' => '',
         'System Settings' => 'Configuración del sistema',
@@ -4648,6 +4478,9 @@ sub Data {
         'Need config Package::RepositoryAccessRegExp' => '',
         'Authentication failed from %s!' => '',
 
+        # Perl Module: Kernel/Output/HTML/Article/Chat.pm
+        'Chat' => 'Chat',
+
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketBounce.pm
         'Bounce Article to a different mail address' => 'Rebotar el artículo a una dirección de correo diferente',
         'Bounce' => 'Rebotar',
@@ -4680,18 +4513,12 @@ sub Data {
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPrint.pm
         'Print this article' => 'Imprimir este artículo',
 
-        # Perl Module: Kernel/Output/HTML/ArticleAction/GetHelpLink.pm
-        'Contact us at sales@otrs.com' => '',
-        'Get Help' => 'Obten Ayuda',
-
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Marcar',
         'Unmark' => 'Desmarcar',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/ReinstallPackageLink.pm
-        'Upgrade to OTRS Business Solution™' => '',
         'Re-install Package' => '',
-        'Upgrade' => 'Actualizar',
         'Re-install' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleCheck/PGP.pm
@@ -4749,25 +4576,12 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/Dashboard/CustomerUserList.pm
         'Shown customer users' => 'Los clientes mostrados',
-        'Offline' => '',
-        'User is currently offline.' => '',
-        'User is currently active.' => '',
-        'Away' => 'Ausente',
-        'User was inactive for a while.' => '',
 
         # Perl Module: Kernel/Output/HTML/Dashboard/EventsTicketCalendar.pm
         'The start time of a ticket has been set after the end time!' => '',
 
         # Perl Module: Kernel/Output/HTML/Dashboard/MyLastChangedTickets.pm
         'Shown Tickets' => 'Tickets Mostrados',
-
-        # Perl Module: Kernel/Output/HTML/Dashboard/News.pm
-        'Can\'t connect to OTRS News server!' => '',
-        'Can\'t get OTRS News from server!' => '',
-
-        # Perl Module: Kernel/Output/HTML/Dashboard/ProductNotify.pm
-        'Can\'t connect to Product News server!' => '',
-        'Can\'t get Product News from server!' => '',
 
         # Perl Module: Kernel/Output/HTML/Dashboard/RSS.pm
         'Can\'t connect to %s!' => '',
@@ -4782,8 +4596,11 @@ sub Data {
         '7 Day Stats' => 'Estadísticas Semanales',
 
         # Perl Module: Kernel/Output/HTML/Dashboard/UserOnline.pm
+        'User is currently offline.' => '',
+        'User is currently active.' => '',
+        'User was inactive for a while.' => '',
         'User set their status to unavailable.' => '',
-        'Unavailable' => 'No disponible',
+        'Away' => 'Ausente',
 
         # Perl Module: Kernel/Output/HTML/Layout.pm
         'Standard' => 'Estándar',
@@ -4811,7 +4628,6 @@ sub Data {
         'Show Tree Selection' => 'Mostrar el árbol de selección',
         'Split Quote' => 'Dividir Cita',
         'Remove Quote' => 'Eliminar Cita',
-        'Last Views' => '',
 
         # Perl Module: Kernel/Output/HTML/Layout/LinkObject.pm
         'Linked as' => 'Enlazado como',
@@ -4828,13 +4644,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/LinkObject/Ticket.pm
         'Archive search' => 'Archivar la búsqueda',
-
-        # Perl Module: Kernel/Output/HTML/Notification/AgentOTRSBusiness.pm
-        'Please verify your license data!' => '',
-        'The license for your %s is about to expire. Please make contact with %s to renew your contract!' =>
-            'La licencia de su %s esta por expirar. ¡Por favor, debe contactase con %s para renovar su contrato!',
-        'An update for your %s is available, but there is a conflict with your framework version! Please update your framework first!' =>
-            'Una actualización de su %s está disponible, pero existe un conflicto con la versión del framework! Por favor actualice su framework primero!',
 
         # Perl Module: Kernel/Output/HTML/Notification/AgentOnline.pm
         'Online Agent: %s' => 'Agente Conectado: %s',
@@ -4855,7 +4664,7 @@ sub Data {
             '',
 
         # Perl Module: Kernel/Output/HTML/Notification/DaemonCheck.pm
-        'OTRS Daemon is not running.' => 'El Daemon OTRS no está en ejecución.',
+        'Znuny Daemon is not running.' => 'El Daemon Znuny no está en ejecución.',
 
         # Perl Module: Kernel/Output/HTML/Notification/OAuth2TokenManagementTokenExpired.pm
         'OAuth2 token for "%s" has expired.' => '',
@@ -5008,11 +4817,6 @@ sub Data {
             'Actualmente no es posible iniciar sesión debido a un mantenimiento programado del sistema.',
 
         # Perl Module: Kernel/System/AuthSession.pm
-        'You have exceeded the number of concurrent agents - contact sales@otrs.com.' =>
-            'Ha superado el número máximo de agentes concurrentes - póngase en contacto con sales@otrs.com.',
-        'Please note that the session limit is almost reached.' => 'Tenga en cuenta que el límite de sesión casi se ha alcanzado.',
-        'Login rejected! You have exceeded the maximum number of concurrent Agents! Contact sales@otrs.com immediately!' =>
-            '',
         'Session limit reached! Please try again later.' => '¡Límite de sesiones alcanzado! Por favor intente más tarde.',
         'Session per user limit reached!' => '',
 
@@ -5102,14 +4906,6 @@ sub Data {
         # Perl Module: Kernel/System/ProcessManagement/DB/Process/State.pm
         'Inactive' => 'Inactivo',
         'FadeAway' => 'FadeAway',
-
-        # Perl Module: Kernel/System/Registration.pm
-        'Can\'t contact registration server. Please try again later.' => 'No es posible contactar con el servidor de registro. Por favor, inténtelo de nuevo más tarde.',
-        'No content received from registration server. Please try again later.' =>
-            'No se ha recibido ningún contenido del servidor de registro. Por favor, inténtelo de nuevo más tarde.',
-        'Can\'t get Token from sever' => 'No se puede obtener el Token desde el servidor',
-        'Username and password do not match. Please try again.' => 'El nombre de usuario y contraseña no coinciden. Por favor intente de nuevo.',
-        'Problems processing server result. Please try again later.' => 'Problemas al procesar el resultado del servidor. Por favor, inténtelo de nuevo más tarde.',
 
         # Perl Module: Kernel/System/Stats.pm
         'Sum' => 'Suma',
@@ -5273,13 +5069,13 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskPartitionOTRS.pm
         'Operating System' => 'Sistema Operativo',
-        'OTRS Disk Partition' => 'Partición en disco para OTRS',
+        'Znuny Disk Partition' => 'Partición en disco para Znuny',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskSpace.pm
         'Disk Usage' => 'Uso del disco',
-        'The partition where OTRS is located is almost full.' => 'La partición donde se encuentra localizado OTRS está casi llena.',
-        'The partition where OTRS is located has no disk space problems.' =>
-            'La partición donde se encuentra OTRS no tiene problemas de espacioen disco.',
+        'The partition where Znuny is located is almost full.' => 'La partición donde se encuentra localizado Znuny está casi llena.',
+        'The partition where Znuny is located has no disk space problems.' =>
+            'La partición donde se encuentra Znuny no tiene problemas de espacioen disco.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/DiskSpacePartitions.pm
         'Disk Partitions Usage' => 'Uso de las particiones en disco',
@@ -5319,7 +5115,7 @@ sub Data {
         'There should be no more than 200 MB swap space used.' => 'No deben de usarse más de 200 MB del swap.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/ArticleSearchIndexStatus.pm
-        'OTRS' => 'OTRS',
+        'Znuny' => '',
         'Article Search Index Status' => 'Estado del Índice de Búsqueda de Artículos',
         'Indexed Articles' => 'Artículos Indexados',
 
@@ -5386,7 +5182,7 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/FileSystemWritable.pm
         'File System Writable' => 'Sistema de Archivo con permisos de Escritura',
-        'The file system on your OTRS partition is not writable.' => 'El sistema de archivos en su partición OTRS no se puede escribir.',
+        'The file system on your Znuny partition is not writable.' => 'El sistema de archivos en su partición Znuny no se puede escribir.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/LegacyConfigBackups.pm
         'Legacy Configuration Backups' => 'Respaldos de Configuración Anteriores',
@@ -5417,7 +5213,7 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SpoolMails.pm
         'Spooled Emails' => 'Correos electrónicos en espera de ser enviados',
-        'There are emails in var/spool that OTRS could not process.' => 'Se encuentran correos electrónicos en var/spool los cuales no pueden ser procesados por OTRS.',
+        'There are emails in var/spool that Znuny could not process.' => 'Se encuentran correos electrónicos en var/spool los cuales no pueden ser procesados por Znuny.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/SystemID.pm
         'Your SystemID setting is invalid, it should only contain digits.' =>
@@ -5457,8 +5253,8 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/TimeSettings.pm
         'Time Settings' => 'Ajustes de hora',
         'Server time zone' => 'Zona horaria del servidor',
-        'OTRS time zone' => 'Zona horaria OTRS',
-        'OTRS time zone is not set.' => 'La zona horaria OTRS no está establecida.',
+        'Znuny time zone' => 'Zona horaria Znuny',
+        'Znuny time zone is not set.' => 'La zona horaria Znuny no está establecida.',
         'User default time zone' => 'Zona horaria predeterminada por el usuario',
         'User default time zone is not set.' => 'Zona horaria predeterminada por el usuario no está establecida.',
         'Calendar time zone is not set.' => 'La zona horaria del calendario no está establecida.',
@@ -5475,7 +5271,7 @@ sub Data {
         'Agents using favourites for the admin overview' => 'Agentes que usan favoritos para la vista general del administrador',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/Version.pm
-        'OTRS Version' => 'Versión de OTRS',
+        'Znuny Version' => 'Versión de Znuny',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/LoadedModules.pm
         'Webserver' => 'Servidor Web',
@@ -5483,7 +5279,7 @@ sub Data {
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/MPMModel.pm
         'MPM model' => 'Modelo MPM',
-        'OTRS requires apache to be run with the \'prefork\' MPM model.' =>
+        'Znuny requires apache to be run with the \'prefork\' MPM model.' =>
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/Apache/Performance.pm
@@ -5616,8 +5412,8 @@ sub Data {
             '',
         'Define which columns are shown in the linked appointment widget (LinkObject::ViewMode = "complex"). Possible settings: 0 = Disabled, 1 = Available, 2 = Enabled by default.' =>
             'Define cuales columnas serán mostradas en widget de citas vinculadas (LinkObject::ViewMode = "compleja"). Posibles ajustes: 0 = Deshabitada, 1 = Habilitada, 2 = Habilitada por omisión.',
-        'OTRS doesn\'t support recurring Appointments without end date or number of iterations. During import process, it might happen that ICS file contains such Appointments. Instead, system creates all Appointments in the past, plus Appointments for the next N months (120 months/10 years by default).' =>
-            'OTRS no admite Citas recurrentes sin fecha de finalización o número de iteraciones. Durante el proceso de importación, puede suceder que el archivo ICS contenga tales citas. En su lugar, el sistema crea todas las Citas en el pasado, más las Citas para los próximos N meses (120 meses/10 años por defecto).',
+        'Znuny doesn\'t support recurring Appointments without end date or number of iterations. During import process, it might happen that ICS file contains such Appointments. Instead, system creates all Appointments in the past, plus Appointments for the next N months (120 months/10 years by default).' =>
+            'Znuny no admite Citas recurrentes sin fecha de finalización o número de iteraciones. Durante el proceso de importación, puede suceder que el archivo ICS contenga tales citas. En su lugar, el sistema crea todas las Citas en el pasado, más las Citas para los próximos N meses (120 meses/10 años por defecto).',
         'Defines the ticket appointment type backend for ticket escalation time.' =>
             'Define el tipo de backend de cita de ticket para el tiempo de escalamiento de ticket.',
         'Defines the ticket appointment type backend for ticket pending time.' =>
@@ -5653,20 +5449,14 @@ sub Data {
         'Triggers add or update of automatic calendar appointments based on certain ticket times.' =>
             'Dispara la acción de añadir o actualizar citas automáticas de calendarios basadas en ciertos tiempos de tickets.',
 
-        # XML Definition: Kernel/Config/Files/XML/CloudServices.xml
-        'Defines if the communication between this system and OTRS Group servers that provide cloud services is possible. If set to \'Disable cloud services\', some functionality will be lost such as system registration, support data sending, upgrading to and use of OTRS Business Solution™, OTRS Verify™, OTRS News and product News dashboard widgets, among others.' =>
-            '',
-        'Cloud service admin module registration for the transport layer.' =>
-            'Módulo de registro de administración de servicios en la nube para la capa de transporte.',
-
         # XML Definition: Kernel/Config/Files/XML/Daemon.xml
-        'Defines the module to display a notification in the agent interface if the OTRS Daemon is not running.' =>
-            'Define el módulo para mostrar una notificación en la interfaz del agente si el Daemon de OTRS no se está ejecutando.',
+        'Defines the module to display a notification in the agent interface if the Znuny Daemon is not running.' =>
+            'Define el módulo para mostrar una notificación en la interfaz del agente si el Daemon de Znuny no se está ejecutando.',
         'List of CSS files to always be loaded for the agent interface.' =>
             'Lista de archivos CSS que siempre se cargarán para la interfaz del agente.',
         'List of JS files to always be loaded for the agent interface.' =>
             'Lista de archivos JS que siempre se cargarán para la interfaz del agente.',
-        'Type of daemon log rotation to use: Choose \'OTRS\' to let OTRS system to handle the file rotation, or choose \'External\' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration.' =>
+        'Type of daemon log rotation to use: Choose \'OTRS\' to let Znuny system to handle the file rotation, or choose \'External\' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration.' =>
             '',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if &lt;$OTRSHome&gt;/var/run/ can not be used.' =>
             '',
@@ -5727,7 +5517,7 @@ sub Data {
         'Delete expired ticket draft entries.' => 'Eliminar entradas de borrador de ticket vencidas.',
 
         # XML Definition: Kernel/Config/Files/XML/Framework.xml
-        'Disables the web installer (http://yourhost.example.com/otrs/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
+        'Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
             '',
         'Enables or disables the debug mode over frontend interface.' => 'Habilita o deshabilita el modo de depuración en la interfaz de la parte frontal.',
         'Delivers extended debugging information in the frontend in case any AJAX errors occur, if enabled.' =>
@@ -5740,13 +5530,13 @@ sub Data {
             'Controla si el administrador está permitido para importar una configuración de sistema guardada en SysConfig.',
         'Defines the name of the application, shown in the web interface, tabs and title bar of the web browser.' =>
             'Define el nombre de la aplicación, mostrado en la interfaz web, lengüetas (tabs) y en la barra de título del explorador web.',
-        'Defines the system identifier. Every ticket number and http session string contains this ID. This ensures that only tickets which belong to your system will be processed as follow-ups (useful when communicating between two instances of OTRS).' =>
-            'Define el identificador del sistema. Cada número de ticket y cadena sesión de http contiene este identificador. Esto asegura que sólo los tickets que pertenecen a su sistema serán procesados como seguimiento (útil cuando se comunica entre dos instancias de OTRS).',
+        'Defines the system identifier. Every ticket number and http session string contains this ID. This ensures that only tickets which belong to your system will be processed as follow-ups (useful when communicating between two instances of Znuny).' =>
+            'Define el identificador del sistema. Cada número de ticket y cadena sesión de http contiene este identificador. Esto asegura que sólo los tickets que pertenecen a su sistema serán procesados como seguimiento (útil cuando se comunica entre dos instancias de Znuny).',
         'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             'Define el nombre del dominio totalmente calificado del sistema. Esta configuración es usada como la variable OTRS_CONFIG_FQDN, misma que se encuentra en todos los tipos de mensajes usados en la aplicación, para construir vínculos a los tickets del sistema.',
-        'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the OTRS Daemon).' =>
+        'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             '',
-        'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the OTRS Daemon).' =>
+        'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             '',
         'Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server\'s settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, OTRS_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             'Define el tipo de protocolo, utilizado por el servidor web, para servir la aplicación. Si se utilizará el protocolo https en lugar de http simple, debe especificarse aquí. Como esto no tiene ningún efecto en la configuración o el comportamiento del servidor web, no cambiará el método de acceso a la aplicación y, si es incorrecto, no le impedirá iniciar sesión en la aplicación. Esta configuración solo se usa como una variable, OTRS_CONFIG_HttpType, que se encuentra en todas las formas de mensajería utilizadas por la aplicación, para crear enlaces a los tickets dentro de su sistema.',
@@ -5764,7 +5554,7 @@ sub Data {
             'Define todos los idiomas disponibles para la aplicación. Especifique sólo los nombres en inglés de los idiomas aquí.',
         'Defines all the languages that are available to the application. Specify only native names of languages here.' =>
             'Define todos los idiomas que están disponibles para la aplicación. Especifique solo nombres nativos de idiomas aquí.',
-        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.otrs.com/doc/.' =>
+        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.' =>
             '',
         'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
             'Es posible configurar diferentes pieles, por ejemplo: para diferenciar entre agentes y clientes, para usarse una base por-dominio en la aplicación. Al definir una expresión regular, puede configurarse un par Llave/Contenido para coincidir con el dominio. El valor en "Key" debe coincidir con el dominio, y "Content" tiene que ser una piel válida en el sistema. Por favor, verifique las entradas de ejemplo para la forma de expresión regular correcta.',
@@ -5808,8 +5598,8 @@ sub Data {
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
         'Disable autocomplete in the login screen.' => 'Deshabilitar el autocompletado en la pantalla de acceso.',
-        'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow OTRS to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
-            'Deshabilite el encabezado HTTP "X-Frame-Options: SAMEORIGIN" para permitir que OTRS se incluya como un IFrame en otros sitios web. ¡Deshabilitar este encabezado HTTP puede ser un problema de seguridad! ¡Sólo deshabilítelo si sabe lo que está haciendo!',
+        'Disable HTTP header "X-Frame-Options: SAMEORIGIN" to allow Znuny to be included as an IFrame in other websites. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
+            'Deshabilite el encabezado HTTP "X-Frame-Options: SAMEORIGIN" para permitir que Znuny se incluya como un IFrame en otros sitios web. ¡Deshabilitar este encabezado HTTP puede ser un problema de seguridad! ¡Sólo deshabilítelo si sabe lo que está haciendo!',
         'Disable HTTP header "Content-Security-Policy" to allow loading of external script contents. Disabling this HTTP header can be a security issue! Only disable it, if you know what you are doing!' =>
             'Deshabilite el encabezado HTTP "Content-Security-Policy" para permitir la carga de contenido de script externo. ¡Deshabilitar este encabezado HTTP puede ser un problema de seguridad! ¡Sólo deshabilítelo si sabe lo que está haciendo!',
         'Automated line break in text messages after x number of chars.' =>
@@ -5852,8 +5642,8 @@ sub Data {
             'Si "SysLog" se eligió como LogModule, puede especificarse el juego de caracteres que debe usarse para el inicio de sesión.',
         'If "file" was selected for LogModule, a logfile must be specified. If the file doesn\'t exist, it will be created by the system.' =>
             'Si "File" se eligió como LogModule, puede especificarse el archivo log. Si dicho archivo no existe, será creado por el sistema.',
-        'Adds a suffix with the actual year and month to the OTRS log file. A logfile for every month will be created.' =>
-            'Añade un sufijo con el año y mes actuales al archivo log de OTRS. Se generará un archivo log distinto para cada mes.',
+        'Adds a suffix with the actual year and month to the Znuny log file. A logfile for every month will be created.' =>
+            'Añade un sufijo con el año y mes actuales al archivo log de Znuny. Se generará un archivo log distinto para cada mes.',
         'Set the minimum log level. If you select \'error\', just errors are logged. With \'debug\' you get all logging messages. The order of log levels is: \'debug\', \'info\', \'notice\' and \'error\'.' =>
             '',
         'Defines the module to send emails. "DoNotSendEmail" doesn\'t send emails at all. Any of the "SMTP" mechanisms use a specified (external) mailserver. "Sendmail" directly uses the sendmail binary of your operating system. "Test" doesn\'t send emails, but writes them to $OTRS_HOME/var/tmp/CacheFileStorable/EmailTest/ for testing purposes.' =>
@@ -5900,12 +5690,8 @@ sub Data {
             '',
         'Defines the module to generate code for periodic page reloads.' =>
             '',
-        'Defines the module to display a notification in different interfaces on different occasions for OTRS Business Solution™.' =>
-            '',
         'Defines the module to display a notification in the agent interface, if the system is used by the admin user (normally you shouldn\'t work as admin).' =>
             'Define el módulo para desplegar una notificación, en la interfaz del agente, si el sistema está siendo usado por el usuario adminstrador (normalmente no es recomendable trabajar como administrador).',
-        'Defines the module to display a notification in the agent interface, if the agent session limit prior warning is reached.' =>
-            'Define el módulo para mostrar una notificación en la interfaz del agente, si se alcanza el límite de la sesión del agente previo a la advertencia.',
         'Defines the module that shows all the currently logged in agents in the agent interface.' =>
             'Define el módulo que muestra, en la interfaz del agente, una lista de todos los agentes con sesión activa.',
         'Defines the module that shows all the currently logged in customers in the agent interface.' =>
@@ -5926,8 +5712,8 @@ sub Data {
             '',
         'Defines the module used to store the session data. With "DB" the frontend server can be splitted from the db server. "FS" is faster.' =>
             'Define el módulo usado para almacenar los datos de sesión. Con "DB" el servidor frontend puede separarse del servidor de la base de datos. "FS" es más rápido.',
-        'Defines the name of the session key. E.g. Session, SessionID or OTRS.' =>
-            'Define el nombre de las llaves de sesión. Por ejemplo: Sesión, SesiónID u OTRS.',
+        'Defines the name of the session key. E.g. Session, SessionID or Znuny.' =>
+            'Define el nombre de las llaves de sesión. Por ejemplo: Sesión, SesiónID u Znuny.',
         'Defines the name of the key for customer sessions.' => 'Define el nombre de la llave para las sesiones de los clientes.',
         'Turns on the remote ip address check. It should not be enabled if the application is used, for example, via a proxy farm or a dialup connection, because the remote ip address is mostly different for the requests.' =>
             '',
@@ -5942,8 +5728,6 @@ sub Data {
             'Hace que la gestión de sesiones utilice cookies html. Si las cookies html están deshabilitadas o si el explorador del cliente las tiene deshabilitadas, el sistema trabajará normalmente y agregará el identificador de sesión a los vínculos.',
         'Stores cookies after the browser has been closed.' => 'Guarda las cookies después de que el explorador se cerró.',
         'Protection against CSRF (Cross Site Request Forgery) exploits (for more info see https://en.wikipedia.org/wiki/Cross-site_request_forgery).' =>
-            '',
-        'Sets the maximum number of active agents within the timespan defined in SessionMaxIdleTime before a prior warning will be visible for the logged in agents.' =>
             '',
         'Sets the maximum number of active agents within the timespan defined in SessionMaxIdleTime.' =>
             '',
@@ -5962,10 +5746,10 @@ sub Data {
         'Defines the period of time (in minutes) before customer is marked as "away" due to inactivity (e.g. in the "Logged-In Users" widget or for the chat).' =>
             '',
         'This setting is deprecated. Set OTRSTimeZone instead.' => '',
-        'Sets the time zone being used internally by OTRS to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.' =>
+        'Sets the time zone being used internally by Znuny to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.' =>
             '',
-        'Sets the time zone that will be assigned to newly created users and will be used for users that haven\'t yet set a time zone. This is the time zone being used as default to convert date and time between the OTRS time zone and the user\'s time zone.' =>
-            'Establece la zona horaria que se asignará a los usuarios recién creados y que se utilizará para los usuarios que aún no han establecido una zona horaria. Esta es la zona horaria que se utiliza de forma predeterminada para convertir la fecha y la hora entre la zona horaria de OTRS y la zona horaria del usuario.',
+        'Sets the time zone that will be assigned to newly created users and will be used for users that haven\'t yet set a time zone. This is the time zone being used as default to convert date and time between the Znuny time zone and the user\'s time zone.' =>
+            'Establece la zona horaria que se asignará a los usuarios recién creados y que se utilizará para los usuarios que aún no han establecido una zona horaria. Esta es la zona horaria que se utiliza de forma predeterminada para convertir la fecha y la hora entre la zona horaria de Znuny y la zona horaria del usuario.',
         'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) OTRSTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
             '',
         'Maximum Number of a calendar shown in a dropdown.' => 'Número máximo de un calendario que se muestra en un desplegable.',
@@ -5983,7 +5767,7 @@ sub Data {
         'Adds the one time vacation days for the indicated calendar.' => 'Agregue los días de vacaciones al calendario indicado.',
         'Defines the hours and week days of the indicated calendar, to count the working time.' =>
             'Define las horas y los días de la semana del calendario indicado, para contar el tiempo de trabajo.',
-        'Defines the maximal size (in bytes) for file uploads via the browser. Warning: Setting this option to a value which is too low could cause many masks in your OTRS instance to stop working (probably any mask which takes input from the user).' =>
+        'Defines the maximal size (in bytes) for file uploads via the browser. Warning: Setting this option to a value which is too low could cause many masks in your Znuny instance to stop working (probably any mask which takes input from the user).' =>
             '',
         'Selects the module to handle uploads via the web interface. "DB" stores all uploads in the database, "FS" uses the file system.' =>
             'Selecciona el módulo para manejar las cargas de archivos en la interfaz web. "DB" almacena todos en la base de datos, mientras que "FS" usa el sistema de archivos.',
@@ -6051,7 +5835,7 @@ sub Data {
             'Define la ruta y el archivo TTF para manejar el tipo de letra cursiva monoespaciado, en los documentos PDF.',
         'Defines the path and TTF-File to handle bold italic monospaced font in PDF documents.' =>
             'Define la ruta y el archivo TTF para manejar el tipo de letra negrita cursiva monoespaciado, en los documentos PDF.',
-        'Enables PGP support. When PGP support is enabled for signing and encrypting mail, it is HIGHLY recommended that the web server runs as the OTRS user. Otherwise, there will be problems with the privileges when accessing .gnupg folder.' =>
+        'Enables PGP support. When PGP support is enabled for signing and encrypting mail, it is HIGHLY recommended that the web server runs as the Znuny user. Otherwise, there will be problems with the privileges when accessing .gnupg folder.' =>
             '',
         'Defines the path to PGP binary.' => 'Define la ruta al PGP binario.',
         'Sets the options for PGP binary.' => 'Define las opciones para PGP binario.',
@@ -6070,9 +5854,9 @@ sub Data {
             'Especifica el directorio donde se guardan los certificados privados SSL.',
         'Cache time in seconds for the SSL certificate attributes.' => 'Tiempo de caché en segundos para los atributos de certificado SSL.',
         'Enables fetch S/MIME from CustomerUser backend support.' => 'Habilita la obtención de S/MIME del soporte de backend del cliente del usuario.',
-        'Specifies the name that should be used by the application when sending notifications. The sender name is used to build the complete display name for the notification master (i.e. "OTRS Notifications" otrs@your.example.com).' =>
+        'Specifies the name that should be used by the application when sending notifications. The sender name is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com).' =>
             '',
-        'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "OTRS Notifications" otrs@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
+        'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
             '',
         'Defines the subject for notification mails sent to agents, with token about new requested password.' =>
             'Define el asunto para las notificaciones electrónicas enviadas a los agentes, con token sobre una contraseña nueva solicitada.',
@@ -6194,8 +5978,8 @@ sub Data {
             'Si "LDAP" se eligió como Customer::AuthModule, puede especificarse la BaseDN.',
         'If "LDAP" was selected for Customer::AuthModule, the user identifier must be specified.' =>
             'Si "LDAP" se eligió como Customer::AuthModule, puede especificarse el identificador de usuario.',
-        'If "LDAP" was selected for Customer::Authmodule, you can check if the user is allowed to authenticate because he is in a posixGroup, e.g. user needs to be in a group xyz to use OTRS. Specify the group, who may access the system.' =>
-            'Si "LDAP" se eligió como Customer::AuthModule, puede verificarse si al usuario se le permite autenticarse por estar en un GrupoPosix, por ejemplo: el usuario tiene que estar en el grupo xyz para usar OTRS. Especifique el grupo que puede acceder al sistema.',
+        'If "LDAP" was selected for Customer::Authmodule, you can check if the user is allowed to authenticate because he is in a posixGroup, e.g. user needs to be in a group xyz to use Znuny. Specify the group, who may access the system.' =>
+            'Si "LDAP" se eligió como Customer::AuthModule, puede verificarse si al usuario se le permite autenticarse por estar en un GrupoPosix, por ejemplo: el usuario tiene que estar en el grupo xyz para usar Znuny. Especifique el grupo que puede acceder al sistema.',
         'If "LDAP" was selected for Customer::AuthModule, you can specify access attributes here.' =>
             'Si "LDAP" se eligió como Customer::AuthModule, pueden especificarse aquí atributos de acceso.',
         'If "LDAP" was selected for Customer::AuthModule, user attributes can be specified. For LDAP posixGroups use UID, for non LDAP posixGroups use full user DN.' =>
@@ -6249,7 +6033,7 @@ sub Data {
         'Activates the available themes on the system. Value 1 means active, 0 means inactive.' =>
             'Activa los temas disponibles en el sistema. Valor 1 significa activo, 0 es inactivo.',
         'Defines the default value for the action parameter.' => '',
-        'Defines the shown links in the footer area of the customer and public interface of this OTRS system. The value in "Key" is the external URL, the value in "Content" is the shown label.' =>
+        'Defines the shown links in the footer area of the customer and public interface of this Znuny system. The value in "Key" is the external URL, the value in "Content" is the shown label.' =>
             '',
         'Defines the default value for the action parameter for the public frontend. The action parameter is used in the scripts of the system.' =>
             'Define el valor por defecto para el parámetro Acción de la interfaz pública. Dicho parámetro se usa en los scripts del sistema.',
@@ -6276,16 +6060,14 @@ sub Data {
             'Muestra todos los identificadores de usuario de los clientes en un campo de selección múltiple (no es útil si se tienen muchos identificadores de usuario de los clientes).',
         'Defines the default maximum number of X-axis attributes for the time scale.' =>
             'Define el número máximo por defecto de atributos para el eje X, en la escala de tiempo.',
-        'OTRS can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>
-            'OTRS puede utilizar una o más bases de datos espejo de sólo lectura para operaciones costosas como la búsqueda de texto completo o la generación de estadísticas. Aquí puede especificar el DSN para la primera base de datos espejo.',
+        'Znuny can use one or more readonly mirror databases for expensive operations like fulltext search or statistics generation. Here you can specify the DSN for the first mirror database.' =>
+            'Znuny puede utilizar una o más bases de datos espejo de sólo lectura para operaciones costosas como la búsqueda de texto completo o la generación de estadísticas. Aquí puede especificar el DSN para la primera base de datos espejo.',
         'Specify the username to authenticate for the first mirror database.' =>
             '',
         'Specify the password to authenticate for the first mirror database.' =>
             '',
         'Configure any additional readonly mirror databases that you want to use.' =>
             'Configura base de datos espejo de solo lectura adicional que quieras utilizar.',
-        'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" defines the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
-            '',
         'Defines the parameters for the dashboard backend. "Limit" defines the number of entries displayed by default. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
         'Defines the parameters for the dashboard backend. "Group" is used to restrict access to the plugin (e. g. Group: admin;group1;group2;). "Default" indicates if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTL" indicates the cache expiration period in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
@@ -6296,23 +6078,25 @@ sub Data {
             '',
         'Defines a filter to process the text in the articles, in order to highlight predefined keywords.' =>
             'Define un filtro para procesar el texto de los artículos, con la finalidad de resaltar las palabras llave predefinidas.',
-        'Defines a filter for html output to add links behind CVE numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
-            'Define un filtro para salida html para añadir vínculos a los números CVE. El elemento Imagen permite dos tipos de entrada: un nombre de imagen (por ejemplo: faq.png). En este caso, se usa la ruta de imágenes de OTRS. La otra posibilidad es insertar el vínculo a la imagen.',
-        'Defines a filter for html output to add links behind bugtraq numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
-            'Define un filtro para salida html para añadir vínculos a los números bugtraq. El elemento Imagen permite dos tipos de entrada: un nombre de imagen (por ejemplo: faq.png). En este caso, se usa la ruta de imágenes de OTRS. La otra posibilidad es insertar el vínculo a la imagen.',
-        'Defines a filter for html output to add links behind MSBulletin numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
-            'Define un filtro para salida html para añadir vínculos a los números MSBulletin. El elemento Imagen permite dos tipos de entrada: un nombre de imagen (por ejemplo: faq.png). En este caso, se usa la ruta de imágenes de OTRS. La otra posibilidad es insertar el vínculo a la imagen.',
-        'Define a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
-            'Define un filtro para la salida html para añadir vínculos a ciertas cadenas. El elemento Imagen permite dos tipos de entrada: un nombre de imagen (por ejemplo: faq.png). En este caso, se usa la ruta de imágenes de OTRS. La otra posibilidad es insertar el vínculo a la imagen.',
-        'Defines a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the OTRS image path will be used. The second possiblity is to insert the link to the image.' =>
-            'Define un filtro para salida html para añadir vínculos a una cadena definida. El elemento Imagen permite dos tipos de entrada: un nombre de imagen (por ejemplo: faq.png). En este caso, se usa la ruta de imágenes de OTRS. La otra posibilidad es insertar el vínculo a la imagen.',
-        'If enabled, the OTRS version tag will be removed from the Webinterface, the HTTP headers and the X-Headers of outgoing mails. NOTE: If you change this option, please make sure to delete the cache.' =>
-            'Si está habilitado, la etiqueta de versión OTRS se eliminará de la interfaz web, los encabezados HTTP y los X-Headers de los correos salientes. NOTA: Si cambia esta opción, asegúrese de eliminar el caché.',
-        'If enabled, OTRS will deliver all CSS files in minified form.' =>
-            'Si está habilitado, OTRS entregará todos los archivos CSS en forma minimizada.',
-        'If enabled, OTRS will deliver all JavaScript files in minified form.' =>
-            'Si se habilita, OTRS entregará todos los archivos JavaScript en forma reducida (minified).',
+        'Defines a filter for html output to add links behind CVE numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image.' =>
+            'Define un filtro para salida html para añadir vínculos a los números CVE. El elemento Imagen permite dos tipos de entrada: un nombre de imagen (por ejemplo: faq.png). En este caso, se usa la ruta de imágenes de Znuny. La otra posibilidad es insertar el vínculo a la imagen.',
+        'Defines a filter for html output to add links behind bugtraq numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image.' =>
+            'Define un filtro para salida html para añadir vínculos a los números bugtraq. El elemento Imagen permite dos tipos de entrada: un nombre de imagen (por ejemplo: faq.png). En este caso, se usa la ruta de imágenes de Znuny. La otra posibilidad es insertar el vínculo a la imagen.',
+        'Defines a filter for html output to add links behind MSBulletin numbers. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image.' =>
+            'Define un filtro para salida html para añadir vínculos a los números MSBulletin. El elemento Imagen permite dos tipos de entrada: un nombre de imagen (por ejemplo: faq.png). En este caso, se usa la ruta de imágenes de Znuny. La otra posibilidad es insertar el vínculo a la imagen.',
+        'Define a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image.' =>
+            'Define un filtro para la salida html para añadir vínculos a ciertas cadenas. El elemento Imagen permite dos tipos de entrada: un nombre de imagen (por ejemplo: faq.png). En este caso, se usa la ruta de imágenes de Znuny. La otra posibilidad es insertar el vínculo a la imagen.',
+        'Defines a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image.' =>
+            'Define un filtro para salida html para añadir vínculos a una cadena definida. El elemento Imagen permite dos tipos de entrada: un nombre de imagen (por ejemplo: faq.png). En este caso, se usa la ruta de imágenes de Znuny. La otra posibilidad es insertar el vínculo a la imagen.',
+        'If enabled, the Znuny version tag will be removed from the Webinterface, the HTTP headers and the X-Headers of outgoing mails. NOTE: If you change this option, please make sure to delete the cache.' =>
+            'Si está habilitado, la etiqueta de versión Znuny se eliminará de la interfaz web, los encabezados HTTP y los X-Headers de los correos salientes. NOTA: Si cambia esta opción, asegúrese de eliminar el caché.',
+        'If enabled, Znuny will deliver all CSS files in minified form.' =>
+            'Si está habilitado, Znuny entregará todos los archivos CSS en forma minimizada.',
+        'If enabled, Znuny will deliver all JavaScript files in minified form.' =>
+            'Si se habilita, Znuny entregará todos los archivos JavaScript en forma reducida (minified).',
         'List of responsive CSS files to always be loaded for the agent interface.' =>
+            '',
+        'List of JS files to always be loaded for the admin interface.' =>
             '',
         'List of CSS files to always be loaded for the customer interface.' =>
             'Lista de archivos CSS que siempre se cargarán para la interfaz del cliente.',
@@ -6376,8 +6160,6 @@ sub Data {
         'Sets the default message for the login screen on Agent and Customer interface, it\'s shown when a running system maintenance period is active.' =>
             '',
         'Sets the default error message for the login screen on Agent and Customer interface, it\'s shown when a running system maintenance period is active.' =>
-            '',
-        'Specify the channel to be used to fetch OTRS Business Solution™ updates. Warning: Development releases might not be complete, your system might experience unrecoverable errors and on extreme cases could become unresponsive!' =>
             '',
         'Use new type of select and autocomplete fields in agent interface, where applicable (InputFields).' =>
             '',
@@ -6538,8 +6320,8 @@ sub Data {
             'Habilita el tamaño mínimo del contador de tickets (si se seleccionó "Fecha" como TicketNumberGenerator).',
         'IndexAccelerator: to choose your backend TicketViewAccelerator module. "RuntimeDB" generates each queue view on the fly from ticket table (no performance problems up to approx. 60.000 tickets in total and 6.000 open tickets in the system). "StaticDB" is the most powerful module, it uses an extra ticket-index table that works like a view (recommended if more than 80.000 and 6.000 open tickets are stored in the system). Use the command "bin/znuny.Console.pl Maint::Ticket::QueueIndexRebuild" for initial index creation.' =>
             '',
-        'Saves the attachments of articles. "DB" stores all data in the database (not recommended for storing big attachments). "FS" stores the data on the filesystem; this is faster but the webserver should run under the OTRS user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when "FS" is used.' =>
-            'Guarda los archivos adjuntos de los artículos. "DB" almacena todos los datos en la base de datos (no se recomienda para almacenar archivos adjuntos grandes). "FS" almacena los datos en el sistema de archivos; esto es más rápido, pero el servidor web debe ejecutarse bajo el usuario OTRS. Puede alternar entre los módulos incluso en un sistema que ya está en producción sin ninguna pérdida de datos. Nota: la búsqueda de nombres de archivos adjuntos no se admite cuando se utiliza "FS".',
+        'Saves the attachments of articles. "DB" stores all data in the database (not recommended for storing big attachments). "FS" stores the data on the filesystem; this is faster but the webserver should run under the Znuny user. You can switch between the modules even on a system that is already in production without any loss of data. Note: Searching for attachment names is not supported when "FS" is used.' =>
+            'Guarda los archivos adjuntos de los artículos. "DB" almacena todos los datos en la base de datos (no se recomienda para almacenar archivos adjuntos grandes). "FS" almacena los datos en el sistema de archivos; esto es más rápido, pero el servidor web debe ejecutarse bajo el usuario Znuny. Puede alternar entre los módulos incluso en un sistema que ya está en producción sin ninguna pérdida de datos. Nota: la búsqueda de nombres de archivos adjuntos no se admite cuando se utiliza "FS".',
         'Specifies whether all storage backends should be checked when looking for attachments. This is only required for installations where some attachments are in the file system, and others in the database.' =>
             '',
         'Specifies the directory to store the data in, if "FS" was selected for ArticleStorage.' =>
@@ -7321,11 +7103,11 @@ sub Data {
             '',
         'Agent interface notification module to see the number of tickets in My Services. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             '',
-        'Agent interface module to access search profiles via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
-            '',
         'Agent interface module to access fulltext search via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             '',
         'Agent interface module to access CIC search via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
+            '',
+        'Agent interface module to access search profiles via nav bar. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
             '',
         'Module to generate html OpenSearch profile for short ticket search in the agent interface.' =>
             'Módulo para generar perfil OpenSearch html para búsqueda simple de tickets en la interfaz del agente.',
@@ -7564,7 +7346,7 @@ sub Data {
             'Define la lista de posibles estados siguientes para los tickets de los clientes, en la interfaz del cliente.',
         'Shows the enabled ticket attributes in the customer interface (0 = Disabled and 1 = Enabled).' =>
             '',
-        'Shows all the articles of the ticket (expanded) in the customer zoom view.' =>
+        'Defines the length of the article preview in the customer interface.' =>
             '',
         'Defines the displayed style of the From field in notes that are visible for customers. A default agent name can be defined in Ticket::Frontend::CustomerTicketZoom###DefaultAgentName setting.' =>
             '',
@@ -7679,7 +7461,8 @@ sub Data {
             '',
         'Module to check if a incoming e-mail message is bounce.' => 'Módulo para comprobar si un mensaje de correo electrónico entrante es rebotado.',
         'Module used to detect if attachments are present.' => 'Módulo usado para detectar si hay archivos adjuntos presentes.',
-        'Executes follow-up checks on OTRS Header \'X-OTRS-Bounce\'.' => 'Ejecuta comprobaciones de seguimiento en el encabezado OTRS \'X-OTRS-Bounce\'.',
+        'Executes follow-up checks on Znuny Header \'X-OTRS-Bounce\'.' =>
+            'Ejecuta comprobaciones de seguimiento en el encabezado Znuny \'X-OTRS-Bounce\'.',
         'Checks if an E-Mail is a followup to an existing ticket by searching the subject for a valid ticket number.' =>
             'Comprueba si un E-Mail es un seguimiento a un ticket existente buscando en el asunto en un número de ticket válido.',
         'Executes follow-up checks on In-Reply-To or References headers for mails that don\'t have a ticket number in the subject.' =>
@@ -7788,8 +7571,8 @@ sub Data {
             '',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
             '',
-        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.otrs.com/doc/), chapter "Ticket Event Module".' =>
-            'Configura un ajuste predeterminado de TicketDynamicField. "Nombre" define el campo dinámico que debe utilizarse, "Valor" es el dato que se configurará y "Evento" define el evento de disparo. Consulte el manual del desarrollador (https://doc.otrs.com/doc/), capítulo "Ticket Event Module".',
+        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
+            'Configura un ajuste predeterminado de TicketDynamicField. "Nombre" define el campo dinámico que debe utilizarse, "Valor" es el dato que se configurará y "Evento" define el evento de disparo. Consulte el manual del desarrollador (https://doc.znuny.org/manual/developer/), capítulo "Ticket Event Module".',
         'Defines the list of types for templates.' => 'Define la lista de tipos de plantillas.',
         'List of default Standard Templates which are assigned automatically to new Queues upon creation.' =>
             'Lista de Plantillas Estándar predeterminadas que se asignan automáticamente a nuevas Filas al ser creadas.',
@@ -7828,7 +7611,6 @@ sub Data {
         'Defines available article actions for Internal articles.' => '',
         'Defines available article actions for Phone articles.' => '',
         'Defines available article actions for Email articles.' => '',
-        'Defines available article actions for Chat articles.' => '',
         'Defines available article actions for invalid articles.' => '',
         'Disables the redirection to the last screen overview / dashboard after a ticket is closed.' =>
             '',
@@ -7836,9 +7618,6 @@ sub Data {
             '',
 
         # XML Definition: Kernel/Config/Files/XML/Znuny.xml
-        'Access package repositories via HTTP or HTTPS.' => '',
-        'URL to the OTRS cloud service proxy service. The http or https prefix will be added, depending on SysConfig option \'PackageRepositoryURLSchema\'.' =>
-            '',
         'Enables/disables the Znuny package verification. If disabled, all packages are shown as verified. It\'s still recommended to use only verified packages.' =>
             '',
         'Screens for which it is possible to enable or disable dynamic fields.' =>
@@ -8005,6 +7784,10 @@ sub Data {
         'Agent interface notification module to show the number of mentions.' =>
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
+        'Assignment between event and type.' => '',
+        'Defines the link type for each activity.' => '',
+        'List of colors in hexadecimal RGB which will be available for selection. Make sure the colors are dark enough so white text can be overlayed on them.' =>
+            '',
         'Mapping of non-standard time zones to official ones.' => '',
         'Start date (YYYYMMDD) of the range to use when parsing ICS files. The used CPAN module iCal::Parser needs this to be able to parse ICS files with events in a year before the current one. The end date of the range is automatically set to 10 years in the future from the time of parsing/execution.' =>
             '',
@@ -8174,6 +7957,16 @@ sub Data {
         'Error during AJAX communication. Status: %s, Error: %s' => 'Error durante la comunicación AJAX. Estado: %s, Error: %s',
         'This window must be called from compose window.' => 'Esta ventana debe llamarse desde la ventana de redacción.',
 
+        # JS File: var/httpd/htdocs/js/Core.Activity.js
+        'An error occurred' => '',
+        'The activity could not be created. %s is needed.' => '',
+        'The activity could not be created.' => '',
+        'The activity could not be updated.' => '',
+        'The activity could not be deleted.' => '',
+        'The activity could not be marked as new.' => '',
+        'The activity could not be marked as seen.' => '',
+        'The activities could not be marked as seen.' => '',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.ACL.js
         'Add all' => 'Agregar todo',
         'An item with this name is already present.' => 'Ya esta presente un item con el mismo nombre.',
@@ -8181,8 +7974,6 @@ sub Data {
             'Este ítem todavía contiene sub ítems. Está seguro que desea eliminarlo incluyendo sus sub items?',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.AppointmentCalendar.Manage.js
-        'More' => 'Más',
-        'Less' => 'Menos',
         'Press Ctrl+C (Cmd+C) to copy to clipboard' => 'Presione Ctrl + C (Cmd + C) para copiar al portapapeles',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.Attachment.js
@@ -8273,8 +8064,8 @@ sub Data {
         'Currently not possible' => 'ACtualmente no es possible',
         'This is currently disabled because of an ongoing package upgrade.' =>
             'Esto está actualmente deshabilitado debido a una actualización de paquete en curso.',
-        'This option is currently disabled because the OTRS Daemon is not running.' =>
-            'Esta opción se encuentra actualmente deshabilitada debido a que el Demonio de OTRS no está en ejecución.',
+        'This option is currently disabled because the Znuny Daemon is not running.' =>
+            'Esta opción se encuentra actualmente deshabilitada debido a que el Demonio de Znuny no está en ejecución.',
         'Are you sure you want to update all installed packages?' => '¿Estás seguro de que deseas actualizar todos los paquetes instalados?',
         'No response from get package upgrade run status.' => 'No hay respuesta del estado de ejecución de actualización del paquete.',
 
@@ -8316,10 +8107,6 @@ sub Data {
         'Do you really want to delete this certificate?' => '¿Realmente quiere eliminar este certificado?',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SupportDataCollector.js
-        'Sending Update...' => 'Enviando Actualización...',
-        'Support Data information was successfully sent.' => 'Información de Datos de Soporte fue enviada satisfactoriamente.',
-        'Was not possible to send Support Data information.' => 'No fue posible enviar los Datos de Soporte.',
-        'Update Result' => 'Actualizar Resultado',
         'Generating...' => 'Generando...',
         'It was not possible to generate the Support Bundle.' => 'No fue posible generar el Paquete de Soporte.',
         'Generate Result' => 'Generar Resultado',
@@ -8399,9 +8186,10 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.CustomerUserAddressBook.js
         'Please enter at least one search value or * to find anything.' =>
             'Introduzca al menos un valor a buscar, o * para buscar todo.',
+        'Insert selected customer user(s) into the "%s:" field.' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Daemon.js
-        'Information about the OTRS Daemon' => 'Información acerca del Daemon de OTRS',
+        'Information about the Znuny Daemon' => 'Información acerca del Daemon de Znuny',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => 'Compruebe que los campos marcados en rojo tienen datos válidos.',
@@ -8469,7 +8257,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.js
         'Slide the navigation bar' => 'Deslice la barra de navegación',
         'Please turn off Compatibility Mode in Internet Explorer!' => '¡Por favor apague el Modo Compatibilidad en Internet Explorer!',
-        'Find out more' => 'Descubra más',
 
         # JS File: var/httpd/htdocs/js/Core.App.Responsive.js
         'Switch to mobile mode' => 'Cambiar a modo móvil',
@@ -8563,9 +8350,6 @@ sub Data {
         'This is %s' => 'Esto es %s',
         'Complex %s with %s arguments' => '%s Complejos con argumentos %s',
 
-        # JS File: var/httpd/htdocs/js/thirdparty/nvd3-1.7.1/models/OTRSLineChart.js
-        'No Data Available.' => 'Los Datos no están disponibles.',
-
         # JS File: var/httpd/htdocs/js/thirdparty/nvd3-1.7.1/models/OTRSMultiBarChart.js
         'Grouped' => 'Agrupado',
         'Stacked' => 'Apilado',
@@ -8630,6 +8414,9 @@ Tu Equipo de Soporte
         'AJAX interface for the web service dynamic field backends.' => '',
         'AccountedTime' => 'AccountedTime',
         'Activation of dynamic fields for screens.' => '',
+        'Activity LinkTarget' => '',
+        'Activity Notification' => '',
+        'Activity.' => '',
         'ActivityID' => 'ID de la Actividad',
         'Add a note to this ticket' => 'Agregar una nota a este tieckt',
         'Add an inbound phone call to this ticket' => 'Añadir una llamada telefónica entrante a este ticket',
@@ -8731,14 +8518,11 @@ Tu Equipo de Soporte
             '',
         'Choose which notifications you\'d like to receive.' => '',
         'Christmas Eve' => 'Noche buena',
-        'Close' => 'Cerrar',
         'Close this ticket' => 'Cerrar este ticket',
         'Closed tickets (customer user)' => 'Tickets cerrados (usuario del cliente)',
         'Closed tickets (customer)' => 'Tickets Cerrados (cliente)',
-        'Cloud Services' => 'Servicios en la Nube',
         'Column ticket filters for Ticket Overviews type "Small".' => '',
         'Comment2' => 'Comentario2',
-        'Communication' => 'Comunicación',
         'Communication & Notifications' => 'Comunicación y Notificaciones',
         'Communication Log GUI' => 'Registro de comunicación en la GUI',
         'Communication log limit per page for Communication Log Overview.' =>
@@ -8751,11 +8535,10 @@ Tu Equipo de Soporte
         'Compose' => 'Redactar',
         'Configure Processes.' => 'Configurar Procesos.',
         'Configure and manage ACLs.' => 'Configurar y manejar ACLs.',
-        'Configure sending of support data to OTRS Group for improved support.' =>
-            '',
         'Configure which screen should be shown after a new ticket has been created.' =>
             '',
         'Create New process ticket.' => '',
+        'Create Process Ticket' => '',
         'Create Ticket' => 'Crear Ticket',
         'Create a new calendar appointment linked to this ticket' => 'Crear una nueva cita de calendario vinculada a este ticket',
         'Create a unit test file' => '',
@@ -8794,8 +8577,6 @@ Tu Equipo de Soporte
             '',
         'Creates a unit test file for this ticket.' => '',
         'Croatian' => 'Croata',
-        'Custom RSS Feed' => 'Feed RSS personalizado',
-        'Custom RSS feed.' => '',
         'Customer Administration' => 'Administración de Clientes',
         'Customer Companies' => 'Compañías de los Clientes',
         'Customer IDs' => '',
@@ -8829,14 +8610,11 @@ Tu Equipo de Soporte
         'Define the sla comment 2.' => 'Definir el comentario 2 de sla.',
         'Delete this ticket' => 'Eliminar este ticket',
         'Deleted link to ticket "%s".' => 'Eliminado enlace al ticket "%s".',
-        'Deploy and manage OTRS Business Solution™.' => '',
         'Detached' => 'Separado',
         'Determines the strings that will be shown as recipient (To:) of the phone ticket and as sender (From:) of the email ticket in the agent interface. For Queue as NewQueueSelectionType "<Queue>" shows the names of the queues and for SystemAddress "<Realname> <<Email>>" shows the name and email of the recipient.' =>
             '',
         'Determines the strings that will be shown as recipient (To:) of the ticket in the customer interface. For Queue as CustomerPanelSelectionType, "<Queue>" shows the names of the queues, and for SystemAddress, "<Realname> <<Email>>" shows the name and email of the recipient.' =>
             '',
-        'Development' => 'Desarrollo',
-        'Disable cloud services' => 'Deshabilitar servicios en la nube',
         'Display communication log entries.' => 'Mostrar las entradas del registro de comunicaciones.',
         'Down' => 'Abajo',
         'Dropdown' => 'Desplegable',
@@ -8996,7 +8774,6 @@ Tu Equipo de Soporte
         'Malay' => 'Malayo',
         'Manage Customer User-Customer Relations.' => '',
         'Manage OAuth2 tokens and their configurations.' => '',
-        'Manage OTRS Group cloud services.' => 'Gestionar los servicios en la nube de OTRS Group.',
         'Manage PGP keys for email encryption.' => 'Gestionar las llaves PGP para encriptación de correos electrónicos.',
         'Manage POP3 or IMAP accounts to fetch email from.' => 'Gestionar las cuentas POP3 o IMAP de las que se extraen correos.',
         'Manage S/MIME certificates for email encryption.' => 'Gestionar certificados S/MIME para encriptación de correos electrónicos.',
@@ -9025,17 +8802,14 @@ Tu Equipo de Soporte
         'Multiselect' => 'Selección múltiple',
         'My Queues' => 'Mis Filas',
         'My Services' => 'Mis Servicios',
-        'My Tickets.' => '',
         'My last changed tickets' => '',
         'NameX' => '',
-        'New Ticket' => 'Nuevo Ticket',
         'New Tickets' => 'Nuevos tickets',
         'New Window' => 'Nueva Ventana',
         'New Year\'s Day' => 'Año nuevo',
         'New Year\'s Eve' => 'Víspera de año nuevo',
         'New process ticket' => 'Nuevo ticket de Proceso',
         'News' => '',
-        'News about OTRS releases!' => '¡Noticias sobre lanzamientos de OTRS!',
         'No public key found.' => 'No se encontró llave pública.',
         'No valid OpenPGP data found.' => 'No se encontraron datos válidos de OpenPGP.',
         'None' => 'Ninguno',
@@ -9047,7 +8821,7 @@ Tu Equipo de Soporte
         'Number of displayed tickets' => 'Número de tíckets desplegados',
         'OAuth2' => '',
         'OAuth2 token' => '',
-        'OTRS Group Services' => 'Servicios del Grupo OTRS',
+        'OTRS' => 'OTRS',
         'Open an external link!' => '',
         'Open tickets (customer user)' => 'Tickets Abiertos (usuario del cliente)',
         'Open tickets (customer)' => 'Tickets Abiertos (Cliente)',
@@ -9097,7 +8871,6 @@ Tu Equipo de Soporte
         'Process Ticket.' => '',
         'ProcessID' => 'ID del Proceso',
         'Processes & Automation' => 'Procesos y Automatización',
-        'Product News' => 'Noticias de Productos',
         'Provides a matrix overview of the tickets per state per queue' =>
             '',
         'Provides customer users access to tickets even if the tickets are not assigned to a customer user of the same customer ID(s), based on permission groups.' =>
@@ -9118,14 +8891,14 @@ Tu Equipo de Soporte
         'Running Process Tickets' => 'Procesos de Tickets en Ejecución',
         'Russian' => 'Ruso',
         'S/MIME Certificates' => 'Certificados S/MIME',
-        'SMS' => 'SMS',
         'Schedule a maintenance period.' => '',
         'Screen after new ticket' => 'Pantalla posterior a nuevo ticket',
         'Search Customer' => 'Búsqueda de cliente',
         'Search Ticket.' => '',
         'Search Tickets.' => '',
         'Search User' => 'Buscar Usuario',
-        'Search.' => '',
+        'Search tickets.' => '',
+        'SearchTemplate' => '',
         'Second Christmas Day' => 'Segundo día de navidad',
         'Second Queue' => 'Segunda Fila de Espera',
         'Seconds' => '',
@@ -9169,7 +8942,7 @@ Tu Equipo de Soporte
         'Show the ticket history' => 'Mostrar el historial del ticket',
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             'Muestra una vista previa de la vista de resumen de los tickets (CustomerInfo => 1 - muestra también la información del cliente y CustomerInfoMaxSize define el tamaño máximo, en caracteres, de dicha información).',
-        'Shows information on how to start OTRS Daemon' => 'Muestra información sobre cómo iniciar el Daemon de OTRS',
+        'Shows information on how to start OTRS Daemon' => '',
         'Shows last mention of tickets.' => '',
         'Signature data.' => 'Datos de firma.',
         'Simple' => '',
@@ -9188,7 +8961,6 @@ Tu Equipo de Soporte
         'Spanish' => 'Español',
         'Spanish (Colombia)' => 'Español (Colombia)',
         'Spanish (Mexico)' => 'Español (México)',
-        'Stable' => 'Estable.',
         'Started response time escalation.' => 'Comenzó la escalada de tiempo de respuesta.',
         'Started solution time escalation.' => 'Inició la escalada de tiempo de solución.',
         'Started update time escalation.' => 'Comenzó la escalada de tiempo de actualización.',
@@ -9225,8 +8997,7 @@ Tu Equipo de Soporte
             '',
         'This is the default orange - black skin.' => '',
         'This key is not certified with a trusted signature!' => '¡Esta llave no está certificada con una firma de confianza!',
-        'This module is part of the admin area of OTRS.' => 'Este módulo es parte del área de administración del OTRS.',
-        'This will allow the system to send text messages via SMS.' => 'Esto permitirá al sistema enviar mensajes de texto a través de SMS.',
+        'This module is part of the admin area of OTRS.' => '',
         'Ticket Close.' => 'Cerrar Ticket.',
         'Ticket Compose Bounce Email.' => 'Componer Rebote de Correo Electrónico de Ticket.',
         'Ticket Compose email Answer.' => 'Componer Respuesta de Correo Electrónico de Ticket.',
@@ -9249,6 +9020,7 @@ Tu Equipo de Soporte
         'Ticket Priority.' => '',
         'Ticket Queue Overview' => 'Vista general por fila',
         'Ticket Responsible.' => '',
+        'Ticket Search' => '',
         'Ticket Watcher' => '',
         'Ticket Zoom' => '',
         'Ticket Zoom.' => '',
@@ -9322,6 +9094,8 @@ Tu Equipo de Soporte
         'normal' => 'normal',
         'not archived tickets' => '',
         'notice' => 'Aviso',
+        'open in current tab' => '',
+        'open in new tab' => '',
         'pending' => 'pendiente',
         'phone' => 'teléfono',
         'responsible' => 'responsable',
@@ -9355,6 +9129,7 @@ Tu Equipo de Soporte
         'All occurrences',
         'All-day',
         'An Error Occurred',
+        'An error occurred',
         'An error occurred during communication.',
         'An error occurred! Please check the browser error log for more details!',
         'An item with this name is already present.',
@@ -9385,12 +9160,11 @@ Tu Equipo de Soporte
         'Cannot proceed',
         'Clear',
         'Clear all',
+        'Clear all filters',
         'Clear debug log',
         'Clear search',
         'Click to delete this attachment.',
         'Click to select a file for upload.',
-        'Click to select a file or just drop it here.',
-        'Click to select files or just drop them here.',
         'Clone web service',
         'Close preview',
         'Close this dialog',
@@ -9467,7 +9241,6 @@ Tu Equipo de Soporte
         'Feb',
         'February',
         'Filters',
-        'Find out more',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
         'Fr',
@@ -9481,7 +9254,8 @@ Tu Equipo de Soporte
         'Hide EntityIDs',
         'If you now leave this page, all open popup windows will be closed, too!',
         'Import web service',
-        'Information about the OTRS Daemon',
+        'Information about the Znuny Daemon',
+        'Insert selected customer user(s) into the "%s:" field.',
         'Invalid date (need a future date)!',
         'Invalid date (need a past date)!',
         'Invalid date!',
@@ -9499,7 +9273,6 @@ Tu Equipo de Soporte
         'June',
         'Just this occurrence',
         'Keys with values can\'t be renamed. Please remove this key/value pair instead and re-add it afterwards.',
-        'Less',
         'Loading, please wait...',
         'Loading...',
         'Location',
@@ -9514,7 +9287,6 @@ Tu Equipo de Soporte
         'Mon',
         'Monday',
         'Month',
-        'More',
         'Name',
         'Namespace %s could not be initialized, because %s could not be found.',
         'Next',
@@ -9563,7 +9335,6 @@ Tu Equipo de Soporte
         'Remove',
         'Remove Entity from canvas',
         'Remove active filters for this widget.',
-        'Remove all user changes.',
         'Remove from favourites',
         'Remove selection',
         'Remove the Transition from this Process',
@@ -9574,12 +9345,8 @@ Tu Equipo de Soporte
         'Request Details',
         'Request Details for Communication ID',
         'Reset',
-        'Reset globally',
-        'Reset locally',
         'Reset option is required!',
-        'Reset options',
         'Reset setting',
-        'Reset setting on global level.',
         'Resource',
         'Resources',
         'Restore default settings',
@@ -9598,8 +9365,9 @@ Tu Equipo de Soporte
         'Searching for linkable objects. This may take a while...',
         'Select a customer ID to assign to this ticket',
         'Select a customer ID to assign to this ticket.',
+        'Select a file or drop it here',
         'Select all',
-        'Sending Update...',
+        'Select files or drop them here',
         'Sep',
         'September',
         'Setting a template will overwrite any text or attachment.',
@@ -9625,11 +9393,17 @@ Tu Equipo de Soporte
         'Sun',
         'Sunday',
         'Support Bundle',
-        'Support Data information was successfully sent.',
         'Switch to desktop mode',
         'Switch to mobile mode',
         'Team',
         'Th',
+        'The activities could not be marked as seen.',
+        'The activity could not be created.',
+        'The activity could not be created. %s is needed.',
+        'The activity could not be deleted.',
+        'The activity could not be marked as new.',
+        'The activity could not be marked as seen.',
+        'The activity could not be updated.',
         'The browser you are using is too old.',
         'The deployment is already running.',
         'The following files are not allowed to be uploaded: %s',
@@ -9650,14 +9424,13 @@ Tu Equipo de Soporte
         'This address already exists on the address list.',
         'This element has children elements and can currently not be removed.',
         'This event is already attached to the job, Please use a different one.',
-        'This feature is part of the %s. Please contact us at %s for an upgrade.',
         'This field can have no more than 250 characters.',
         'This field is required.',
         'This is %s',
         'This is a repeating appointment',
         'This is currently disabled because of an ongoing package upgrade.',
         'This item still contains sub items. Are you sure you want to remove this item including its sub items?',
-        'This option is currently disabled because the OTRS Daemon is not running.',
+        'This option is currently disabled because the Znuny Daemon is not running.',
         'This software runs with a huge lists of browsers, please upgrade to one of these.',
         'This window must be called from compose window.',
         'Thu',
@@ -9676,7 +9449,6 @@ Tu Equipo de Soporte
         'Unknown',
         'Unlock setting.',
         'Update All Packages',
-        'Update Result',
         'Update all packages',
         'Update manually',
         'Upload information',
@@ -9684,7 +9456,6 @@ Tu Equipo de Soporte
         'Use options below to narrow down for which tickets appointments will be automatically created.',
         'WARNING: When you change the name of the group \'admin\', before making the appropriate changes in the SysConfig, you will be locked out of the administrations panel! If this happens, please rename the group back to admin per SQL statement.',
         'Warning',
-        'Was not possible to send Support Data information.',
         'We',
         'Wed',
         'Wednesday',
@@ -9703,9 +9474,7 @@ Tu Equipo de Soporte
         'more',
         'no',
         'none',
-        'or',
         'sorting is disabled',
-        'user(s) have modified this setting.',
         'week',
         'yes',
     ];

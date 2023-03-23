@@ -161,7 +161,7 @@ sub Run {
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
     # Print intro form.
-    my $Title = $LayoutObject->{LanguageObject}->Translate('Install OTRS');
+    my $Title = $LayoutObject->{LanguageObject}->Translate('Install Znuny');
     if ( $Self->{Subaction} eq 'Intro' ) {
         my $Output =
             $LayoutObject->Header(
@@ -606,7 +606,7 @@ sub Run {
         if ($ReConfigure) {
             my $Output =
                 $LayoutObject->Header(
-                Title => Translatable('Install OTRS - Error')
+                Title => Translatable('Install Znuny - Error')
                 );
             $Output .= $LayoutObject->Warning(
                 Message => Translatable('Kernel/Config.pm isn\'t writable!'),

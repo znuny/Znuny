@@ -41,7 +41,7 @@
                     <h3><span class="Warning">[% Translate("SMIME support is disabled") | html %]<span></h3>
                     <fieldset>
                         <p class="FieldExplanation">
-                            [% Translate("To be able to use SMIME in OTRS, you have to enable it first.") | html %]
+                            [% Translate("To be able to use SMIME in Znuny, you have to enable it first.") | html %]
                         </p>
                         <div class="Field">
                             <button class="CallForAction Fullsize Center" type="submit" value="[% Translate("Enable it here!") | html %]">
