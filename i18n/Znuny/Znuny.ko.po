@@ -3512,7 +3512,7 @@ msgstr "CA 인증서가 파일 시스템에 저장되는 인증 기관 디렉토
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "e.g. /opt/znuny/var/certificates/SOAP/CA"
-msgstr "예 : / opt / otrs / var / certificates / SOAP / CA"
+msgstr "예 : / opt / znuny / var / certificates / SOAP / CA"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Controller mapping for Invoker"
