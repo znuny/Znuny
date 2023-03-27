@@ -1,4 +1,4 @@
-export OTRSUSER=otrs
+export ZNUNYSUSER=znuny
 
 [% '#' %] note
 HOST=`hostname -f`

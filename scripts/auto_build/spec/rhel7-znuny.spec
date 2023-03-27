@@ -63,29 +63,29 @@ install -m 644 scripts/apache2-httpd.include.conf $RPM_BUILD_ROOT/etc/httpd/conf
 
 # set permission
 
-export OTRSUSER=otrs
-useradd $OTRSUSER || :
+export ZNUNYUSER=znuny
+useradd $ZNUNYUSER || :
 useradd apache || :
 groupadd apache || :
 $RPM_BUILD_ROOT/opt/znuny/bin/znuny.SetPermissions.pl --web-group=apache
 
 %pre
 # useradd
-export OTRSUSER=otrs
+export ZNUNYUSER=znuny
 echo -n "Check Znuny user ... "
-if id $OTRSUSER >/dev/null 2>&1; then
-    echo "$OTRSUSER exists."
+if id $ZNUNYUSER >/dev/null 2>&1; then
+    echo "$ZNUNYUSER exists."
     # update groups
-    usermod -g apache $OTRSUSER
+    usermod -g apache $ZNUNYUSER
     # update home dir
-    usermod -d /opt/znuny $OTRSUSER
+    usermod -d /opt/znuny $ZNUNYUSER
 else
-    useradd $OTRSUSER -d /opt/znuny/ -s /bin/bash -g apache -c 'Znuny System User' && echo "$OTRSUSER added."
+    useradd $ZNUNYUSER -d /opt/znuny/ -s /bin/bash -g apache -c 'Znuny System User' && echo "$ZNUNYUSER added."
 fi
 
 
 %post
-export OTRSUSER=otrs
+export ZNUNYUSER=znuny
 
 # note
 HOST=`hostname -f`
@@ -111,9 +111,9 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %config /etc/httpd/conf.d/zzz_znuny.conf
 
-%defattr(-, otrs, apache, -)
+%defattr(-, znuny, apache, -)
 %config(noreplace) /opt/znuny/Kernel/Config.pm
-%attr(-, otrs, root,) %config(noreplace) /opt/znuny/.procmailrc
+%attr(-, znuny, root,) %config(noreplace) /opt/znuny/.procmailrc
 %config(noreplace) /opt/znuny/.fetchmailrc
 %config(noreplace) /opt/znuny/.mailfilter
 

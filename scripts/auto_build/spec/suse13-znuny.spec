@@ -65,24 +65,24 @@ install -m 644 scripts/apache2-httpd.include.conf $RPM_BUILD_ROOT/etc/apache2/co
 
 # set permission
 
-export OTRSUSER=otrs
-useradd $OTRSUSER || :
+export ZNUNYUSER=znuny
+useradd $ZNUNYUSER || :
 useradd wwwrun || :
 groupadd www || :
 $RPM_BUILD_ROOT/opt/znuny/bin/znuny.SetPermissions.pl --web-group=www
 
 %pre
 # useradd
-export OTRSUSER=otrs
+export ZNUNYUSER=znuny
 echo -n "Check Znuny user ... "
-if id $OTRSUSER >/dev/null 2>&1; then
-    echo "$OTRSUSER exists."
+if id $ZNUNYUSER >/dev/null 2>&1; then
+    echo "$ZNUNYUSER exists."
     # update groups
-    usermod -g www $OTRSUSER
+    usermod -g www $ZNUNYUSER
     # update home dir
-    usermod -d /opt/znuny $OTRSUSER
+    usermod -d /opt/znuny $ZNUNYUSER
 else
-    useradd $OTRSUSER -d /opt/znuny/ -s /bin/bash -g www -c 'Znuny System User' && echo "$OTRSUSER added."
+    useradd $ZNUNYUSER -d /opt/znuny/ -s /bin/bash -g www -c 'Znuny System User' && echo "$ZNUNYUSER added."
 fi
 echo "Enable apache module mod_perl..."
 a2enmod perl
@@ -96,7 +96,7 @@ echo "Enable apache module mod_headers..."
 a2enmod headers
 
 %post
-export OTRSUSER=otrs
+export ZNUNYUSER=znuny
 
 # note
 HOST=`hostname -f`
@@ -122,9 +122,9 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %config /etc/apache2/conf.d/zzz_znuny.conf
 
-%defattr(-, otrs, www, -)
+%defattr(-, znuny, www, -)
 %config(noreplace) /opt/znuny/Kernel/Config.pm
-%attr(-, otrs, root,) %config(noreplace) /opt/znuny/.procmailrc
+%attr(-, znuny, root,) %config(noreplace) /opt/znuny/.procmailrc
 %config(noreplace) /opt/znuny/.fetchmailrc
 %config(noreplace) /opt/znuny/.mailfilter
 
