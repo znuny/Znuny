@@ -22,15 +22,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-07-01 07:05+0000\n"
-"PO-Revision-Date: 2023-01-04 15:16+0000\n"
+"PO-Revision-Date: 2023-03-29 08:46+0000\n"
 "Last-Translator: Daniel Lisiecki <lisiecki.daniel@gmail.com>\n"
-"Language-Team: Polish <https://translations.znuny.org/projects/znuny/znuny/pl/>\n"
+"Language-Team: Polish <https://translations.znuny.org/projects/znuny/znuny/"
+"pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
-"X-Generator: Weblate 4.14.1\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && ("
+"n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && "
+"n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"X-Generator: Weblate 4.16.4\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "ACL Management"
@@ -2111,7 +2114,7 @@ msgstr "Zgłoszenie zmieniono pomiędzy"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Last close times"
-msgstr ""
+msgstr "Ostatnie czasy zamknięcia"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "No last close time settings."
@@ -6147,7 +6150,7 @@ msgstr "Wyświetlana nazwa"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
 msgid "This email address is already used as system email address."
-msgstr ""
+msgstr "Ten adres email jest już używany jako adres systemowy."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
 msgid "The display name and email address will be shown on mail you send."
@@ -6155,11 +6158,13 @@ msgstr "Wyświetlana nazwa oraz adres e-mail będą umieszczane w wysyłanej poc
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
 msgid "This system address cannot be set to invalid."
-msgstr ""
+msgstr "Ten adres systemowy nie może być ustawiony jako nieaktualny."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
 msgid "This system address cannot be set to invalid, because it is used in one or more queue(s) or auto response(s)."
 msgstr ""
+"Ten adres systemowy nie może być ustawiony jako nieaktualny, ponieważ jest "
+"używany w konfiguracji kolejek lub automatycznych odpowiedzi."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfiguration.tt
 msgid "online administrator documentation"
@@ -6175,7 +6180,9 @@ msgstr "Poruszaj się wśród dostępnych ustawień, używając drzewa w obszarz
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfiguration.tt
 msgid "Find certain settings by using the search field below or from search icon from the top navigation."
-msgstr "Znajdź określone ustawienia używając poniższego pola wyszukiwania, lub przy pomocy ikony wyszukiwania w menu nawigacyjnym."
+msgstr ""
+"Znajdź ustawienia używając pola wyszukiwania, lub przy pomocy ikony "
+"wyszukiwania w menu nawigacyjnym."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfiguration.tt
 msgid "Find out how to use the system configuration by reading the %s."
@@ -6183,7 +6190,7 @@ msgstr "Przeczytaj \"%s\" i dowiedz się jak używać konfiguracji systemu."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfiguration.tt
 msgid "Search in all settings..."
-msgstr ""
+msgstr "Szukaj we wszystkich ustawieniach..."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfiguration.tt
 msgid "There are currently no settings available. Please make sure to run 'otrs.Console.pl Maint::Config::Rebuild' before using the software."
@@ -9416,6 +9423,7 @@ msgstr "Przywróć ustawienie"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
 msgid "Allow users to adapt this setting from within their personal preferences"
 msgstr ""
+"Pozwól użytkownikom dostosować to ustawienie w ich osobistych ustawieniach"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
 msgid "Allow users to update"
@@ -16560,7 +16568,7 @@ msgstr "Wszystkie nowe zgłoszenia, nie podjęto jeszcze prac w związku z nimi"
 
 #. SysConfig
 msgid "All open tickets, these tickets have already been worked on."
-msgstr ""
+msgstr "Wszystkie otwarte zgłoszenia, nad którymi już pracowano."
 
 #. SysConfig
 msgid "All tickets with a reminder set where the reminder date has been reached"
@@ -16581,22 +16589,35 @@ msgstr "Pozwala na dodawanie notatek w oknie dodawania notatek interfejsu agenta
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows adding notes in the ticket owner screen of a zoomed ticket in the agent interface. Can be overwritten by Ticket::Frontend::NeedAccountedTime."
 msgstr ""
+"Umożliwia dodawanie notatek na ekranie \"Właściciel\" w interfejsie agenta w "
+"otwartym zgłoszeniu. Może być nadpisane przez "
+"Ticket::Frontend::NeedAccountedTime."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows adding notes in the ticket pending screen of a zoomed ticket in the agent interface. Can be overwritten by Ticket::Frontend::NeedAccountedTime."
 msgstr ""
+"Pozwala na dodawanie notatek w ekranie \"Oczekujące\" w interfejsie agenta w "
+"otwartym zgłoszeniu. Może być nadpisane przez "
+"Ticket::Frontend::NeedAccountedTime."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows adding notes in the ticket priority screen of a zoomed ticket in the agent interface. Can be overwritten by Ticket::Frontend::NeedAccountedTime."
 msgstr ""
+"Umożliwia dodawanie notatek na ekranie \"Priorytet\" w interfejsie agenta w "
+"otwartym zgłoszeniu. Może być nadpisane przez "
+"Ticket::Frontend::NeedAccountedTime."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows adding notes in the ticket responsible screen of the agent interface. Can be overwritten by Ticket::Frontend::NeedAccountedTime."
 msgstr ""
+"Pozwala na dodawanie notatek w ekranie \"Odpowiedzialny\" w interfejsie "
+"agenta w otwartym zgłoszeniu. Może być nadpisane przez "
+"Ticket::Frontend::NeedAccountedTime."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Allows agents to exchange the axis of a stat if they generate one."
 msgstr ""
+"Umożliwia agentom zamianę osi statystyki podczas generowania statystyki."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Allows agents to generate individual-related stats."
@@ -16609,6 +16630,8 @@ msgstr "Pozwala na wybranie pomiędzy tym czy załączniki w zgłoszeniach będ�
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows choosing the next compose state for customer tickets in the customer interface."
 msgstr ""
+"Umożliwia wybór następnego statusu tworzenia zgłoszenia w interfejsie "
+"klienta."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows customers to change the ticket priority in the customer interface."
@@ -16625,6 +16648,8 @@ msgstr "Pozwala klientom na ustawienie priorytetu w interfejsie klienta."
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows customers to set the ticket queue in the customer interface. If this is not enabled, QueueDefault should be configured."
 msgstr ""
+"Umożliwia klientom ustawienie kolejki zgłoszenia w interfejsie klienta. "
+"Jeśli nie jest to aktywowane, należy skonfigurować QueueDefault."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows customers to set the ticket service in the customer interface."
@@ -16633,6 +16658,8 @@ msgstr "Pozwala klientom na ustawienie serwisu złoszenia w interfejsie klienta.
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows customers to set the ticket type in the customer interface. If this is not enabled, TicketTypeDefault should be configured."
 msgstr ""
+"Umożliwia klientom ustawienie typu zgłoszenia w interfejsie klienta. Jeśli "
+"nie jest to aktywowane, należy skonfigurować TicketTypeDefault."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows default services to be selected also for non existing customers."
@@ -16641,30 +16668,46 @@ msgstr "Pozwala na wybranie domyślnych serwisów dla nieistniejącyh klientów.
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows defining services and SLAs for tickets (e. g. email, desktop, network, ...), and escalation attributes for SLAs (if ticket service/SLA feature is enabled)."
 msgstr ""
+"Umożliwia definiowanie usług i umów SLA dla zgłoszeń (na przykład: e-mail, "
+"desktop, sieć, ...) oraz atrybutów eskalacji dla umów SLA (jeśli ustawienie "
+"usługa/SLA zgłoszenia jest aktywne)."
 
 #. SysConfig
 msgid "Allows extended search conditions in ticket search of the agent interface. With this feature you can search e. g. ticket title with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
 msgstr ""
+"Umożliwia rozszerzone warunki wyszukiwania zgłoszeń w interfejsie agenta. "
+"Dzięki tej funkcji można np. wyszukiwać tytuły zgłoszeń z warunkami typu \""
+"(key1&&key2)\" lub \"(key1||key2)\"."
 
 #. SysConfig
 msgid "Allows extended search conditions in ticket search of the customer interface. With this feature you can search e. g. ticket title with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
 msgstr ""
+"Umożliwia rozszerzone warunki wyszukiwania zgłoszeń w interfejsie klienta. "
+"Dzięki tej funkcji można np. wyszukiwać tytuły zgłoszeń z warunkami typu \""
+"(key1&&key2)\" lub \"(key1||key2)\"."
 
 #. SysConfig
 msgid "Allows extended search conditions in ticket search of the generic agent interface. With this feature you can search e. g. ticket title with this kind of conditions like \"(*key1*&&*key2*)\" or \"(*key1*||*key2*)\"."
 msgstr ""
+"Umożliwia rozszerzenie warunków wyszukiwania w agencie automatycznym. Dzięki "
+"temu można np. wyszukiwać tytuły zgłoszeń z warunkami typu \"(*key1*&&*key2*)"
+"\" lub \"(*key1*||*key2*)\"."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows generic agent to execute custom command line scripts."
 msgstr ""
+"Umożliwia Agentowi automatycznemu wykonywanie własnych skryptów z linii "
+"poleceń."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows generic agent to execute custom modules."
-msgstr ""
+msgstr "Umożliwia Agentowi automatycznemu wykonywanie własnych modułów."
 
 #. SysConfig
 msgid "Allows having a medium format ticket overview (CustomerInfo => 1 - shows also the customer information)."
 msgstr ""
+"Włącza przegląd listy zgłoszeń z niektórymi informacjami o zgłoszeniach ("
+"Klient => 1 - pokazuje również informacje o kliencie)."
 
 #. SysConfig
 msgid "Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information)."
@@ -24929,6 +24972,8 @@ msgstr ""
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows having a medium format ticket overview (CustomerInfo =&gt; 1 - shows also the customer information)."
 msgstr ""
+"Umożliwia przegląd listy zgłoszeń w średnim formacie (CustomerInfo =&gt; 1 - "
+"pokazuje również informacje o kliencie)."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Shows a preview of the ticket overview (CustomerInfo =&gt; 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info)."
@@ -24937,6 +24982,9 @@ msgstr ""
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows extended search conditions in ticket search of the agent interface. With this feature you can search e. g. ticket title with this kind of conditions like \"(*key1*&amp;&amp;*key2*)\" or \"(*key1*||*key2*)\"."
 msgstr ""
+"Włącza zaawansowane warunki wyszukiwania zgłoszeń w interfejsie agenta. "
+"Dzięki tej funkcji można na przykład wyszukać tytuł zgłoszenia z warunkami "
+"takimi jak \"(*key1*&amp;&amp;*key2*)\" lub \"(*key1*|*key2*)\"."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Determines the strings that will be shown as recipient (To:) of the phone ticket and as sender (From:) of the email ticket in the agent interface. For Queue as NewQueueSelectionType \"&lt;Queue&gt;\" shows the names of the queues and for SystemAddress \"&lt;Realname&gt; &lt;&lt;Email&gt;&gt;\" shows the name and email of the recipient."
@@ -24949,10 +24997,16 @@ msgstr ""
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows extended search conditions in ticket search of the customer interface. With this feature you can search e. g. ticket title with this kind of conditions like \"(*key1*&amp;&amp;*key2*)\" or \"(*key1*||*key2*)\"."
 msgstr ""
+"Włącza zaawansowane warunki wyszukiwania zgłoszeń w interfejsie klienta. "
+"Dzięki tej funkcji możesz na przykład wyszukać tytuł zgłoszenia z warunkami "
+"takimi jak \"(*key1*&amp;&amp;*key2*)\" lub \"(*key1*||*key2*)\"."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows extended search conditions in ticket search of the generic agent interface. With this feature you can search e. g. ticket title with this kind of conditions like \"(*key1*&amp;&amp;*key2*)\" or \"(*key1*||*key2*)\"."
 msgstr ""
+"Włącza zaawansowane warunki wyszukiwania zgłoszeń w agencie automatycznym. "
+"Dzięki tej funkcji można na przykład wyszukać tytuł zgłoszenia z warunkami "
+"takimi jak \"(*key1*&amp;&amp;*key2*)\" lub \"(*key1*|*key2*)\"."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Filter for debugging ACLs. Note: More ticket attributes can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;."
@@ -25548,11 +25602,11 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
 msgid "Add note to linked %s%s%s"
-msgstr ""
+msgstr "Dodaj notatkę do połączonego %s%s%s"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
 msgid "Note to linked Ticket"
-msgstr ""
+msgstr "Notatka do połączonego Zgłoszenia"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
 msgid "LinkList invalid."
@@ -25560,23 +25614,25 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
 msgid "Note to origin Ticket"
-msgstr ""
+msgstr "Notatka do bieżącego Zgłoszenia"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
 msgid "NoteToTicket invalid."
-msgstr ""
+msgstr "Notatka nieprawidłowa."
 
 #. Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketNoteToLinkedTicket.pm
 msgid "Create notice for linked ticket"
-msgstr ""
+msgstr "Utwórz notatkę w połączonym Zgłoszeniu"
 
 #. Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketNoteToLinkedTicket.pm
 msgid "Transfer notice"
-msgstr ""
+msgstr "Przekaż notatkę"
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Required permissions to use the NoteToLinkedTicket screen in the agent interface."
 msgstr ""
+"Wymagane uprawnienia w interfejsie agenta do korzystania z funkcji "
+"Przekazania notatki."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Sets the state of the selected linked ticket in the NoteToLinkedTicket screen of the agent interface."
@@ -25605,6 +25661,8 @@ msgstr ""
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Allows adding notes in the NoteToLinkedTicket screen of the agent interface."
 msgstr ""
+"Umożliwia dodawanie notatek w interfejsie agenta w dialogu \"Przekaż "
+"notatkę\"."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Sets if a note in NoteToLinkedTicket screen must be filled in by the agent."
@@ -25696,9 +25754,8 @@ msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
 msgid "Files"
-msgstr ""
+msgstr "Pliki"
 
 #. Perl Module: Kernel/Modules/AdminNotificationEvent.pm
 msgid "All agents who are mentioned in the ticket"
-msgstr ""
-
+msgstr "Wszyscy agenci wspomniani w zgłoszeniu"
