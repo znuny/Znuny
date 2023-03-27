@@ -533,30 +533,20 @@ sub SystemAddressLookup {
 
     my $Key;
     my $Value;
-    my $ReturnData;
     if ( $Param{SystemAddressID} || $Param{ID} ) {
         $Key        = 'System address ID';
         $Value      = $Param{SystemAddressID} || $Param{ID};
-        $ReturnData = $SystemAddresses{$Value};
+        return $SystemAddresses{$Value};
     }
     elsif ( $Param{SystemAddress} || $Param{Name} ) {
         $Key   = 'System address';
         $Value = $Param{SystemAddress} || $Param{Name};
 
         my %SystemAddressesReverse = reverse %SystemAddresses;
-        $ReturnData = $SystemAddressesReverse{$Value};
+        return $SystemAddressesReverse{$Value};
     }
 
-    # check if data exists
-    if ( !defined $ReturnData ) {
-        $LogObject->Log(
-            Priority => 'error',
-            Message  => "No $Key for $Value found!",
-        );
-        return;
-    }
-
-    return $ReturnData;
+    return;
 }
 
 =head2 NameExistsCheck()
