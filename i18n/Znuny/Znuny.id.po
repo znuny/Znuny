@@ -6988,7 +6988,7 @@ msgid "Make sure that the file '%s' exists (without .dist extension). This cron 
 msgstr "Pastikan fail tersebut %s ada (tanpa .dist tambahan). Tugas cron ini akan memeriksa setiap 5 menit jika Znuny Daemon berjalan dan memulainya jika diperlukan."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
-msgid "Execute '%s start' to make sure the cron jobs of the 'otrs' user are active."
+msgid "Execute '%s start' to make sure the cron jobs of the 'znuny' user are active."
 msgstr "Mengeksekusi '%s start' untuk memastikan pekerjaan cron dari pengguna Znuny 'yang aktif."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt

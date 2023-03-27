@@ -6990,8 +6990,8 @@ msgid "Make sure that the file '%s' exists (without .dist extension). This cron 
 msgstr "ตรวจสอบให้แน่ใจว่าไฟล์ '%s' มีอยู่ (โดยไม่มีนามสกุล .dist) งาน cron นี้จะตรวจสอบทุกๆ 5 นาทีถ้าZnuny Daemonกำลังทำงานอยู่และเริ่มต้นมันถ้าจำเป็น"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
-msgid "Execute '%s start' to make sure the cron jobs of the 'otrs' user are active."
-msgstr "ดำเนิน '%sการเริ่มต้น' เพื่อให้แน่ใจว่างาน cron ของผู้ใช้ 'otrs' มีการใช้งาน"
+msgid "Execute '%s start' to make sure the cron jobs of the 'znuny' user are active."
+msgstr "ดำเนิน '%sการเริ่มต้น' เพื่อให้แน่ใจว่างาน cron ของผู้ใช้ 'znuny' มีการใช้งาน"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
 msgid "After 5 minutes, check that the Znuny Daemon is running in the system ('bin/znuny.Daemon.pl status')."

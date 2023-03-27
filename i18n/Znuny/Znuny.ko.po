@@ -6987,8 +6987,8 @@ msgid "Make sure that the file '%s' exists (without .dist extension). This cron 
 msgstr ".dist (확장자없이) '%s'파일이 있는지 확인하십시오. 이 cron 작업은 Znuny 데몬이 실행중인 경우 5 분마다 점검하고 필요한 경우 시작합니다."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
-msgid "Execute '%s start' to make sure the cron jobs of the 'otrs' user are active."
-msgstr "'%s start'를 실행하여 'otrs'사용자의 cron 작업이 활성 상태인지 확인하십시오."
+msgid "Execute '%s start' to make sure the cron jobs of the 'znuny' user are active."
+msgstr "'%s start'를 실행하여 'znuny'사용자의 cron 작업이 활성 상태인지 확인하십시오."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
 msgid "After 5 minutes, check that the Znuny Daemon is running in the system ('bin/znuny.Daemon.pl status')."

@@ -2341,8 +2341,8 @@ sub Data {
         'Starting the Znuny Daemon' => 'Iniciado o Znuny Daemon',
         'Make sure that the file \'%s\' exists (without .dist extension). This cron job will check every 5 minutes if the Znuny Daemon is running and start it if needed.' =>
             'Certifique-se de que existe o arquivo \'%s\' (sem a extensão .dist). Essa tarefa do cron irá verificar a cada 5 minutos se o Znuny Daemon está em execução e irá iniciá-lo se necessário.',
-        'Execute \'%s start\' to make sure the cron jobs of the \'otrs\' user are active.' =>
-            'Execute \'%s start\' para certificar-se de que as tarefas do cron do usuário \'otrs\' estão ativos.',
+        'Execute \'%s start\' to make sure the cron jobs of the \'znuny\' user are active.' =>
+            'Execute \'%s start\' para certificar-se de que as tarefas do cron do usuário \'znuny\' estão ativos.',
         'After 5 minutes, check that the Znuny Daemon is running in the system (\'bin/znuny.Daemon.pl status\').' =>
             'Após 5 minutos, verifique se o Znuny Daemon está em execução no sistema (\'bin/znuny.Daemon.pl status\').',
 

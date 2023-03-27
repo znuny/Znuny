@@ -6988,7 +6988,7 @@ msgid "Make sure that the file '%s' exists (without .dist extension). This cron 
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
-msgid "Execute '%s start' to make sure the cron jobs of the 'otrs' user are active."
+msgid "Execute '%s start' to make sure the cron jobs of the 'znuny' user are active."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt

@@ -1166,7 +1166,7 @@ sub Data {
         'Certification Authority (CA) Directory' => '인증 기관 (CA) 디렉토리',
         'The full path of the certification authority directory where the CA certificates are stored in the file system.' =>
             'CA 인증서가 파일 시스템에 저장되는 인증 기관 디렉토리의 전체 경로입니다.',
-        'e.g. /opt/znuny/var/certificates/SOAP/CA' => '예 : / opt / otrs / var / certificates / SOAP / CA',
+        'e.g. /opt/znuny/var/certificates/SOAP/CA' => '예 : / opt / znuny / var / certificates / SOAP / CA',
         'Controller mapping for Invoker' => '호출자에 대한 컨트롤러 매핑',
         'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
             '호출자가 요청을 보내야하는 컨트롤러. \':\'로 표시된 변수는 데이터 값으로 대체되고 요청과 함께 전달됩니다. (예 : / Ticket / : TicketID? UserLogin = : UserLogin & Password = : Password).',
@@ -2336,8 +2336,8 @@ sub Data {
         'Starting the Znuny Daemon' => 'Znuny Daemon 시작',
         'Make sure that the file \'%s\' exists (without .dist extension). This cron job will check every 5 minutes if the Znuny Daemon is running and start it if needed.' =>
             '.dist (확장자없이) \'%s\'파일이 있는지 확인하십시오. 이 cron 작업은 Znuny 데몬이 실행중인 경우 5 분마다 점검하고 필요한 경우 시작합니다.',
-        'Execute \'%s start\' to make sure the cron jobs of the \'otrs\' user are active.' =>
-            '\'%s start\'를 실행하여 \'otrs\'사용자의 cron 작업이 활성 상태인지 확인하십시오.',
+        'Execute \'%s start\' to make sure the cron jobs of the \'znuny\' user are active.' =>
+            '\'%s start\'를 실행하여 \'znuny\'사용자의 cron 작업이 활성 상태인지 확인하십시오.',
         'After 5 minutes, check that the Znuny Daemon is running in the system (\'bin/znuny.Daemon.pl status\').' =>
             '5 분 후, Znuny 데몬이 시스템에서 실행 중인지 확인하십시오 ( \'bin / znuny.Daemon.pl status\').',
 

@@ -6987,7 +6987,7 @@ msgid "Make sure that the file '%s' exists (without .dist extension). This cron 
 msgstr "Győződjön meg arról, hogy a(z) „%s” fájl létezik-e (.dist kiterjesztés nélkül). Ez a cron-feladat 5 percenként fogja ellenőrizni, hogy az Znuny démon fut-e, és szükség szerint elindítja azt."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
-msgid "Execute '%s start' to make sure the cron jobs of the 'otrs' user are active."
+msgid "Execute '%s start' to make sure the cron jobs of the 'znuny' user are active."
 msgstr "Hajtsa végre a(z) „%s start” parancsot, hogy megbizonyosodjon arról, hogy az „otrs” felhasználó cron-feladatai aktívak-e."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt

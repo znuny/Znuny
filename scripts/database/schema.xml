@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<database Name="otrs">
+<database Name="znuny">
 
 <!-- acl - all acls from the editor -->
 <Table Name="acl">

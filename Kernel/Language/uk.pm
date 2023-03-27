@@ -2337,8 +2337,8 @@ sub Data {
         'Starting the Znuny Daemon' => 'Запуск Znuny демона.',
         'Make sure that the file \'%s\' exists (without .dist extension). This cron job will check every 5 minutes if the Znuny Daemon is running and start it if needed.' =>
             'Переконайтесь в тому, що файл \'%s\' існує (без розширення .dist). Це заплановане завдання буде перевіряти кожні 5 хвилин чи запущений демон Znuny та запустить його за потреби.',
-        'Execute \'%s start\' to make sure the cron jobs of the \'otrs\' user are active.' =>
-            'Виконайте \'%s start\' щоб впевнитись в тому, заплановані завдання користувача \'otrs\' активні.',
+        'Execute \'%s start\' to make sure the cron jobs of the \'znuny\' user are active.' =>
+            'Виконайте \'%s start\' щоб впевнитись в тому, заплановані завдання користувача \'znuny\' активні.',
         'After 5 minutes, check that the Znuny Daemon is running in the system (\'bin/znuny.Daemon.pl status\').' =>
             'Після 5 хвилин, переконайтеся, що Znuny демон працює в системі (\'bin/znuny.Daemon.pl status\').',
 

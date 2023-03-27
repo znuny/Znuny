@@ -2343,8 +2343,8 @@ sub Data {
         'Starting the Znuny Daemon' => '正在启动Znuny守护进程',
         'Make sure that the file \'%s\' exists (without .dist extension). This cron job will check every 5 minutes if the Znuny Daemon is running and start it if needed.' =>
             '确保存在文件“%s”（没有.dist扩展名）。这个CRON任务会每5分钟检查一次Znuny守护进程是否在运行，并在需要时启动它。',
-        'Execute \'%s start\' to make sure the cron jobs of the \'otrs\' user are active.' =>
-            '执行\'%s start\'确保\'otrs\'用户的cron任务是活动的。',
+        'Execute \'%s start\' to make sure the cron jobs of the \'znuny\' user are active.' =>
+            '执行\'%s start\'确保\'znuny\'用户的cron任务是活动的。',
         'After 5 minutes, check that the Znuny Daemon is running in the system (\'bin/znuny.Daemon.pl status\').' =>
             '5分钟后，在系统中执行\'bin/znuny.Daemon.pl status\'，检查Znuny守护进程是否正常运行。',
 

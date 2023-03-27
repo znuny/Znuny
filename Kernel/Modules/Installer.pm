@@ -331,7 +331,7 @@ sub Run {
                     Item                => Translatable('Configure MySQL'),
                     Step                => $StepCounter,
                     InstallType         => $DBInstallType,
-                    DefaultDBUser       => $DBInstallType eq 'CreateDB' ? 'root' : 'otrs',
+                    DefaultDBUser       => $DBInstallType eq 'CreateDB' ? 'root' : 'znuny',
                     PasswordExplanation => $PasswordExplanation,
                 },
             );
@@ -374,7 +374,7 @@ sub Run {
                     Item          => Translatable('Database'),
                     Step          => $StepCounter,
                     InstallType   => $DBInstallType,
-                    DefaultDBUser => $DBInstallType eq 'CreateDB' ? 'postgres' : 'otrs',
+                    DefaultDBUser => $DBInstallType eq 'CreateDB' ? 'postgres' : 'znuny',
                 },
             );
             if ( $DBInstallType eq 'CreateDB' ) {

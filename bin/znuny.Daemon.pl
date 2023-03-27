@@ -61,7 +61,7 @@ local $Kernel::OM = Kernel::System::ObjectManager->new(
 # Don't allow to run these scripts as root.
 if ( $> == 0 ) {    # $EFFECTIVE_USER_ID
     print STDERR
-        "Error: You cannot run znuny.Daemon.pl as root. Please run it as the 'otrs' user or with the help of su:\n";
+        "Error: You cannot run znuny.Daemon.pl as root. Please run it as the 'znuny' user or with the help of su:\n";
     print STDERR "  su -c \"bin/znuny.Daemon.pl ...\" -s /bin/bash otrs\n";
     exit 1;
 }

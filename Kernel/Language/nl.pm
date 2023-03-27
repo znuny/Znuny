@@ -2342,8 +2342,8 @@ sub Data {
         'Starting the Znuny Daemon' => 'De Znuny Daemon wordt opgestart',
         'Make sure that the file \'%s\' exists (without .dist extension). This cron job will check every 5 minutes if the Znuny Daemon is running and start it if needed.' =>
             'Zorg er voor dat het bestand \'%s\' bestaat (zonder .dist extensie). Deze cron taak controleert elke 5 minuten of de Znuny Daemon loopt en start hem als het nodig is.',
-        'Execute \'%s start\' to make sure the cron jobs of the \'otrs\' user are active.' =>
-            'Voer \'%s start\' uit om ervoor te zorgen dat de cron jobs van de gebruiker \'otrs\' actief zijn.',
+        'Execute \'%s start\' to make sure the cron jobs of the \'znuny\' user are active.' =>
+            'Voer \'%s start\' uit om ervoor te zorgen dat de cron jobs van de gebruiker \'znuny\' actief zijn.',
         'After 5 minutes, check that the Znuny Daemon is running in the system (\'bin/znuny.Daemon.pl status\').' =>
             'Controleer na 5 minuten of de Znuny Daemon draait in het systeem (\'bin/znuny.Daemon.pl status\').',
 

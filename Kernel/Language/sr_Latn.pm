@@ -2342,7 +2342,7 @@ sub Data {
         'Starting the Znuny Daemon' => 'Pokretanje Znuny sistemskog servisa',
         'Make sure that the file \'%s\' exists (without .dist extension). This cron job will check every 5 minutes if the Znuny Daemon is running and start it if needed.' =>
             'Osigurava da datoteka \'%s\' postoji (bez .dist ekstenzije). Ovaj kron posao će proveravati svakih 5 minuta da li Znuny sistemski servis radi i pokreće ga ako je potrebno.',
-        'Execute \'%s start\' to make sure the cron jobs of the \'otrs\' user are active.' =>
+        'Execute \'%s start\' to make sure the cron jobs of the \'znuny\' user are active.' =>
             'Izvršite \'%s start\' da bi bili sigurni da su kron poslovi za Znuny korisnika uvek aktivni.',
         'After 5 minutes, check that the Znuny Daemon is running in the system (\'bin/znuny.Daemon.pl status\').' =>
             'Posle 5 minuta, proverava da li Znuny sistemski servis funkcioniše u sistemu (\'bin/znuny.Daemon.pl status\').',

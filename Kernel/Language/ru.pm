@@ -2348,8 +2348,8 @@ sub Data {
         'Starting the Znuny Daemon' => 'Запуск Планировщика Znuny',
         'Make sure that the file \'%s\' exists (without .dist extension). This cron job will check every 5 minutes if the Znuny Daemon is running and start it if needed.' =>
             'Убедитесь, что файл  \'%s\' существует (без расширения .dist). Это задание cron будет каждые 5 минут проверять, что Планировщик Znuny запущен и запускает его при необходимости.',
-        'Execute \'%s start\' to make sure the cron jobs of the \'otrs\' user are active.' =>
-            'Выполните команду  \'%s start\' чтобы убедиться, что cron от имени пользователя \'otrs\' запущен.',
+        'Execute \'%s start\' to make sure the cron jobs of the \'znuny\' user are active.' =>
+            'Выполните команду  \'%s start\' чтобы убедиться, что cron от имени пользователя \'znuny\' запущен.',
         'After 5 minutes, check that the Znuny Daemon is running in the system (\'bin/znuny.Daemon.pl status\').' =>
             'По истечении 5 минут проверьте, что Планировщик Znuny работает (\'bin/znuny.Daemon.pl status\').',
 

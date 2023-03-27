@@ -2339,8 +2339,8 @@ sub Data {
         'Starting the Znuny Daemon' => 'เริ่มต้น Znuny Daemon',
         'Make sure that the file \'%s\' exists (without .dist extension). This cron job will check every 5 minutes if the Znuny Daemon is running and start it if needed.' =>
             'ตรวจสอบให้แน่ใจว่าไฟล์ \'%s\' มีอยู่ (โดยไม่มีนามสกุล .dist) งาน cron นี้จะตรวจสอบทุกๆ 5 นาทีถ้าZnuny Daemonกำลังทำงานอยู่และเริ่มต้นมันถ้าจำเป็น',
-        'Execute \'%s start\' to make sure the cron jobs of the \'otrs\' user are active.' =>
-            'ดำเนิน \'%sการเริ่มต้น\' เพื่อให้แน่ใจว่างาน cron ของผู้ใช้ \'otrs\' มีการใช้งาน',
+        'Execute \'%s start\' to make sure the cron jobs of the \'znuny\' user are active.' =>
+            'ดำเนิน \'%sการเริ่มต้น\' เพื่อให้แน่ใจว่างาน cron ของผู้ใช้ \'znuny\' มีการใช้งาน',
         'After 5 minutes, check that the Znuny Daemon is running in the system (\'bin/znuny.Daemon.pl status\').' =>
             'หลังจาก 5 นาทีตรวจสอบดูว่า Znuny Daemonกำลังทำงานในระบบ (\'bin / znuny.Daemon.pl status\')',
 

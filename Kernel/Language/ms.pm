@@ -2335,8 +2335,8 @@ sub Data {
         'Starting the Znuny Daemon' => 'Memulakan Znuny Daemon',
         'Make sure that the file \'%s\' exists (without .dist extension). This cron job will check every 5 minutes if the Znuny Daemon is running and start it if needed.' =>
             'Pastikan fail \'%s\' wujud (tanpa sambungan .dist). Tugas cron ini akan memeriksa setiap 5 minit jika Znuny Daemon sedang berjalan dan memulakan apabila diperlukan.',
-        'Execute \'%s start\' to make sure the cron jobs of the \'otrs\' user are active.' =>
-            'Jalankan \'%s mula\' untuk memastikan tugas cron pengguna \'otrs\' aktif.',
+        'Execute \'%s start\' to make sure the cron jobs of the \'znuny\' user are active.' =>
+            'Jalankan \'%s mula\' untuk memastikan tugas cron pengguna \'znuny\' aktif.',
         'After 5 minutes, check that the Znuny Daemon is running in the system (\'bin/znuny.Daemon.pl status\').' =>
             'Selepas 5 minit, periksa Znuny Deamon yang berjalan di dalam sistem (\'bin/znuny.Daemon.pl status\').',
 

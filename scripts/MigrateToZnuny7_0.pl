@@ -74,7 +74,7 @@ EOF
     if ( $> == 0 ) {    # $EFFECTIVE_USER_ID
         die "
 Cannot run this script as root.
-Please run it as the 'otrs' user or with the help of su:
+Please run it as the 'znuny' user or with the help of su:
     su -c \"$0\" -s /bin/bash otrs
 ";
     }

@@ -2338,8 +2338,8 @@ sub Data {
         'Starting the Znuny Daemon' => 'Starter Znuny tjeneste',
         'Make sure that the file \'%s\' exists (without .dist extension). This cron job will check every 5 minutes if the Znuny Daemon is running and start it if needed.' =>
             'Kontroller at filen \'%s\' eksisterer (uden .dist filendelsen). Dette cron job  checker hvert 5. minut om Znuny tjenesten kører og starter den om nødvendigt.',
-        'Execute \'%s start\' to make sure the cron jobs of the \'otrs\' user are active.' =>
-            'Kør \'%s start\' for at sikre at \'otrs\' brugerens cron job er aktive.',
+        'Execute \'%s start\' to make sure the cron jobs of the \'znuny\' user are active.' =>
+            'Kør \'%s start\' for at sikre at \'znuny\' brugerens cron job er aktive.',
         'After 5 minutes, check that the Znuny Daemon is running in the system (\'bin/znuny.Daemon.pl status\').' =>
             'Check at Znuny tjenesten kører efter 5 minutter (\'bin/znuny.Daemon.pl status\').',
 

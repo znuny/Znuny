@@ -2336,7 +2336,7 @@ sub Data {
         'Starting the Znuny Daemon' => 'Покретање Znuny системског сервиса',
         'Make sure that the file \'%s\' exists (without .dist extension). This cron job will check every 5 minutes if the Znuny Daemon is running and start it if needed.' =>
             'Осигурава да датотека \'%s\' постоји (без .dist екстензије). Овај крон посао ће проверавати сваких 5 минута да ли Znuny системски сервис ради и покреће га ако је потребно.',
-        'Execute \'%s start\' to make sure the cron jobs of the \'otrs\' user are active.' =>
+        'Execute \'%s start\' to make sure the cron jobs of the \'znuny\' user are active.' =>
             'Извршите \'%s start\' да би били сигурни да су крон послови за Znuny корисника увек активни.',
         'After 5 minutes, check that the Znuny Daemon is running in the system (\'bin/znuny.Daemon.pl status\').' =>
             'После 5 минута, проверава да ли Znuny системски сервис функционише у систему (\'bin/znuny.Daemon.pl status\').',

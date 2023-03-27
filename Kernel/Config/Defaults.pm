@@ -118,11 +118,11 @@ sub LoadDefaults {
 
     # Database
     # (The database name.)
-    $Self->{Database} = 'otrs';
+    $Self->{Database} = 'znuny';
 
     # DatabaseUser
     # (The database user.)
-    $Self->{DatabaseUser} = 'otrs';
+    $Self->{DatabaseUser} = 'znuny';
 
     # DatabasePw
     # (The password of database user.)

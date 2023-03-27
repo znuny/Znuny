@@ -34,8 +34,8 @@ use Getopt::Long();
 my $OTRSDirectory       = dirname($RealBin);
 my $OTRSDirectoryLength = length($OTRSDirectory);
 
-my $OtrsUser = 'otrs';    # default: otrs
-my $WebGroup = '';        # Try to find a default from predefined group list, take the first match.
+my $OtrsUser = 'znuny';    # default: otrs
+my $WebGroup = '';         # Try to find a default from predefined group list, take the first match.
 
 WEBGROUP:
 for my $GroupCheck (qw(wwwrun apache www-data www _www)) {
@@ -58,7 +58,7 @@ Usage:
  znuny.SetPermissions.pl [--otrs-user=<OTRS_USER>] [--web-group=<WEB_GROUP>] [--admin-group=<ADMIN_GROUP>] [--skip-article-dir] [--skip-regex="REGEX"] [--dry-run]
 
 Options:
- [--otrs-user=<OTRS_USER>]     - OTRS user, defaults to 'otrs'.
+ [--otrs-user=<OTRS_USER>]     - OTRS user, defaults to 'znuny'.
  [--web-group=<WEB_GROUP>]     - Web server group ('_www', 'www-data' or similar), try to find a default.
  [--admin-group=<ADMIN_GROUP>] - Admin group, defaults to 'root'.
  [--skip-article-dir]          - Skip var/article as it might take too long on some systems.

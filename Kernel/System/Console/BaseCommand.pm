@@ -390,7 +390,7 @@ sub Execute {
     # Don't allow to run these scripts as root.
     if ( !$ParsedGlobalOptions->{'allow-root'} && $> == 0 ) {    # $EFFECTIVE_USER_ID
         $Self->PrintError(
-            "You cannot run znuny.Console.pl as root. Please run it as the 'otrs' user or with the help of su:"
+            "You cannot run znuny.Console.pl as root. Please run it as the 'znuny' user or with the help of su:"
         );
         $Self->Print("  <yellow>su -c \"bin/znuny.Console.pl MyCommand\" -s /bin/bash otrs</yellow>\n");
         return $Self->ExitCodeError();

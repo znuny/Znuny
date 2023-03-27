@@ -2342,7 +2342,7 @@ sub Data {
         'Starting the Znuny Daemon' => 'Az Znuny démon indítása',
         'Make sure that the file \'%s\' exists (without .dist extension). This cron job will check every 5 minutes if the Znuny Daemon is running and start it if needed.' =>
             'Győződjön meg arról, hogy a(z) „%s” fájl létezik-e (.dist kiterjesztés nélkül). Ez a cron-feladat 5 percenként fogja ellenőrizni, hogy az Znuny démon fut-e, és szükség szerint elindítja azt.',
-        'Execute \'%s start\' to make sure the cron jobs of the \'otrs\' user are active.' =>
+        'Execute \'%s start\' to make sure the cron jobs of the \'znuny\' user are active.' =>
             'Hajtsa végre a(z) „%s start” parancsot, hogy megbizonyosodjon arról, hogy az „otrs” felhasználó cron-feladatai aktívak-e.',
         'After 5 minutes, check that the Znuny Daemon is running in the system (\'bin/znuny.Daemon.pl status\').' =>
             'Ellenőrizze 5 perc után, hogy az Znuny démon fut-e a rendszeren („bin/znuny.Daemon.pl status”).',

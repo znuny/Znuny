@@ -2343,7 +2343,7 @@ sub Data {
         'Starting the Znuny Daemon' => '',
         'Make sure that the file \'%s\' exists (without .dist extension). This cron job will check every 5 minutes if the Znuny Daemon is running and start it if needed.' =>
             '',
-        'Execute \'%s start\' to make sure the cron jobs of the \'otrs\' user are active.' =>
+        'Execute \'%s start\' to make sure the cron jobs of the \'znuny\' user are active.' =>
             '',
         'After 5 minutes, check that the Znuny Daemon is running in the system (\'bin/znuny.Daemon.pl status\').' =>
             '',

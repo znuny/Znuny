@@ -71,7 +71,7 @@ returns:
                         "#1 SMP Debian 3.2.46-1",
                         "i686",
                       ],
-        User         => "otrs",
+        User         => "znuny",
     );
 
 =cut

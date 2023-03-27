@@ -6987,8 +6987,8 @@ msgid "Make sure that the file '%s' exists (without .dist extension). This cron 
 msgstr "Kontroller at filen '%s' eksisterer (uden .dist filendelsen). Dette cron job  checker hvert 5. minut om Znuny tjenesten kører og starter den om nødvendigt."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
-msgid "Execute '%s start' to make sure the cron jobs of the 'otrs' user are active."
-msgstr "Kør '%s start' for at sikre at 'otrs' brugerens cron job er aktive."
+msgid "Execute '%s start' to make sure the cron jobs of the 'znuny' user are active."
+msgstr "Kør '%s start' for at sikre at 'znuny' brugerens cron job er aktive."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentDaemonInfo.tt
 msgid "After 5 minutes, check that the Znuny Daemon is running in the system ('bin/znuny.Daemon.pl status')."

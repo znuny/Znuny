@@ -2342,7 +2342,7 @@ sub Data {
         'Starting the Znuny Daemon' => 'شروع Znuny دیمون',
         'Make sure that the file \'%s\' exists (without .dist extension). This cron job will check every 5 minutes if the Znuny Daemon is running and start it if needed.' =>
             'مطمئن شوید که فایل \' %s \' وجود دارد (بدون .dist پسوند). این cron در هر 5 دقیقه اگر Znuny دیمون در حال اجرا است را بررسی کنید و شروع به آن در صورت نیاز.',
-        'Execute \'%s start\' to make sure the cron jobs of the \'otrs\' user are active.' =>
+        'Execute \'%s start\' to make sure the cron jobs of the \'znuny\' user are active.' =>
             'اعدام %s شروع به مطمئن شوید که به cron job از کاربر Znuny، فعال هستند.',
         'After 5 minutes, check that the Znuny Daemon is running in the system (\'bin/znuny.Daemon.pl status\').' =>
             'پس از 5 دقیقه، بررسی کنید که Znuny دیمون در حال اجرا در سیستم ( \'وضعیت بن / znuny.Daemon.pl\').',
