@@ -31,11 +31,11 @@ use File::Find();
 use File::stat();
 use Getopt::Long();
 
-my $OTRSDirectory       = dirname($RealBin);
-my $OTRSDirectoryLength = length($OTRSDirectory);
+my $FrameworkDirectory       = dirname($RealBin);
+my $FrameworkDirectoryLength = length($FrameworkDirectory);
 
-my $OtrsUser = 'znuny';    # default: otrs
-my $WebGroup = '';         # Try to find a default from predefined group list, take the first match.
+my $ZnunyUser = 'znuny';    # default: znuny
+my $WebGroup = '';          # Try to find a default from predefined group list, take the first match.
 
 WEBGROUP:
 for my $GroupCheck (qw(wwwrun apache www-data www _www)) {
@@ -47,22 +47,22 @@ for my $GroupCheck (qw(wwwrun apache www-data www _www)) {
 }
 
 my $AdminGroup = 'root';    # default: root
-my ( $Help, $DryRun, $SkipArticleDir, @SkipRegex, $OtrsUserID, $WebGroupID, $AdminGroupID );
+my ( $Help, $DryRun, $SkipArticleDir, @SkipRegex, $ZnunyUserID, $WebGroupID, $AdminGroupID );
 
 sub PrintUsage {
     print <<EOF;
 
-Set OTRS file permissions.
+Set Znuny file permissions.
 
 Usage:
- znuny.SetPermissions.pl [--otrs-user=<OTRS_USER>] [--web-group=<WEB_GROUP>] [--admin-group=<ADMIN_GROUP>] [--skip-article-dir] [--skip-regex="REGEX"] [--dry-run]
+ znuny.SetPermissions.pl [--znuny-user=<ZNUNY_USER>] [--web-group=<WEB_GROUP>] [--admin-group=<ADMIN_GROUP>] [--skip-article-dir] [--skip-regex="REGEX"] [--dry-run]
 
 Options:
- [--otrs-user=<OTRS_USER>]     - OTRS user, defaults to 'znuny'.
+ [--znuny-user=<ZNUNY_USER>]   - Znuny user, defaults to 'znuny'.
  [--web-group=<WEB_GROUP>]     - Web server group ('_www', 'www-data' or similar), try to find a default.
  [--admin-group=<ADMIN_GROUP>] - Admin group, defaults to 'root'.
  [--skip-article-dir]          - Skip var/article as it might take too long on some systems.
- [--skip-regex="REGEX"]        - Add another skip regex like "^/var/my/directory". Paths start with / but are relative to the OTRS directory. --skip-regex can be specified multiple times.
+ [--skip-regex="REGEX"]        - Add another skip regex like "^/var/my/directory". Paths start with / but are relative to the Znuny directory. --skip-regex can be specified multiple times.
  [--dry-run]                   - Only report, don't change.
  [--help]                      - Display help for this command.
 
@@ -103,7 +103,7 @@ my $ExitStatus = 0;
 sub Run {
     Getopt::Long::GetOptions(
         'help'             => \$Help,
-        'otrs-user=s'      => \$OtrsUser,
+        'znuny-user=s'     => \$ZnunyUser,
         'web-group=s'      => \$WebGroup,
         'admin-group=s'    => \$AdminGroup,
         'dry-run'          => \$DryRun,
@@ -122,9 +122,9 @@ sub Run {
     }
 
     # check params
-    $OtrsUserID = getpwnam $OtrsUser;
-    if ( !$OtrsUser || !defined $OtrsUserID ) {
-        print STDERR "ERROR: --otrs-user is missing or invalid.\n";
+    $ZnunyUserID = getpwnam $ZnunyUser;
+    if ( !$ZnunyUser || !defined $ZnunyUserID ) {
+        print STDERR "ERROR: --znuny-user is missing or invalid.\n";
         exit 1;
     }
     $WebGroupID = getgrnam $WebGroup;
@@ -144,14 +144,14 @@ sub Run {
         push @IgnoreFiles, qr{$Regex}smx;
     }
 
-    print "Setting permissions on $OTRSDirectory\n";
+    print "Setting permissions on $FrameworkDirectory\n";
     File::Find::find(
         {
             wanted   => \&SetPermissions,
             no_chdir => 1,
             follow   => 1,
         },
-        $OTRSDirectory,
+        $FrameworkDirectory,
     );
     exit $ExitStatus;
 }
@@ -164,14 +164,14 @@ sub SetPermissions {
     # If the link is a dangling symbolic link, then fullname will be set to undef.
     return if !defined $File;
 
-    # Make sure it is inside the OTRS directory to avoid following symlinks outside
-    if ( substr( $File, 0, $OTRSDirectoryLength ) ne $OTRSDirectory ) {
+    # Make sure it is inside the Znuny directory to avoid following symlinks outside
+    if ( substr( $File, 0, $FrameworkDirectoryLength ) ne $FrameworkDirectory ) {
         $File::Find::prune = 1;    # don't descend into subdirectories
         return;
     }
 
-    # Now get a canonical relative filename under the OTRS directory
-    my $RelativeFile = substr( $File, $OTRSDirectoryLength ) || '/';
+    # Now get a canonical relative filename under the Znuny directory
+    my $RelativeFile = substr( $File, $FrameworkDirectoryLength ) || '/';
 
     for my $IgnoreRegex (@IgnoreFiles) {
         if ( $RelativeFile =~ $IgnoreRegex ) {
@@ -191,11 +191,11 @@ sub SetFilePermissions {
     my ( $File, $RelativeFile ) = @_;
 
     ## no critic (ProhibitLeadingZeros)
-    # Writable by default, owner OTRS and group webserver.
-    my ( $TargetPermission, $TargetUserID, $TargetGroupID ) = ( 0660, $OtrsUserID, $WebGroupID );
+    # Writable by default, owner Znuny and group webserver.
+    my ( $TargetPermission, $TargetUserID, $TargetGroupID ) = ( 0660, $ZnunyUserID, $WebGroupID );
     if ( -d $File ) {
 
-        # SETGID for all directories so that both OTRS and the web server can write to the files.
+        # SETGID for all directories so that both Znuny and the web server can write to the files.
         # Other users should be able to read and cd to the directories.
         $TargetPermission = 02775;
     }

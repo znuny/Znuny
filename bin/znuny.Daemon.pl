@@ -50,7 +50,7 @@ local $SIG{__WARN__} = sub {
     warn $Message;
 };
 
-print STDOUT "\nManage the OTRS daemon process.\n\n";
+print STDOUT "\nManage the Znuny daemon process.\n\n";
 
 local $Kernel::OM = Kernel::System::ObjectManager->new(
     'Kernel::System::Log' => {
@@ -62,7 +62,7 @@ local $Kernel::OM = Kernel::System::ObjectManager->new(
 if ( $> == 0 ) {    # $EFFECTIVE_USER_ID
     print STDERR
         "Error: You cannot run znuny.Daemon.pl as root. Please run it as the 'znuny' user or with the help of su:\n";
-    print STDERR "  su -c \"bin/znuny.Daemon.pl ...\" -s /bin/bash otrs\n";
+    print STDERR "  su -c \"bin/znuny.Daemon.pl ...\" -s /bin/bash znuny\n";
     exit 1;
 }
 
@@ -516,9 +516,9 @@ sub _LogFilesSet {
 
     my $SystemTime = $Kernel::OM->Create('Kernel::System::DateTime')->ToEpoch();
 
-    # get log rotation type and backup old logs if logs should be rotated by OTRS
-    my $RotationType = lc $ConfigObject->Get('Daemon::Log::RotationType') || 'otrs';
-    if ( $RotationType eq 'otrs' ) {
+    # get log rotation type and backup old logs if logs should be rotated by Znuny
+    my $RotationType = lc $ConfigObject->Get('Daemon::Log::RotationType') || 'znuny';
+    if ( $RotationType eq 'znuny' ) {
         use File::Copy qw(move);
         if ( -e "$FileStdOut.log" ) {
             move( "$FileStdOut.log", "$FileStdOut-$SystemTime.log" );
@@ -539,9 +539,9 @@ sub _LogFilesSet {
         open STDERR, '>>', "$FileStdErr.log";
     }
 
-    return 1 if $RotationType ne 'otrs';
+    return 1 if $RotationType ne 'znuny';
 
-    # remove not needed log files if OTRS rotation is enabled
+    # remove not needed log files if Znuny rotation is enabled
     my $DaysToKeep     = $ConfigObject->Get('Daemon::Log::DaysToKeep') || 1;
     my $DaysToKeepTime = $SystemTime - $DaysToKeep * 24 * 60 * 60;
 
@@ -573,9 +573,9 @@ sub _LogFilesSet {
 sub _LogFilesCleanup {
     my %Param = @_;
 
-    # skip cleanup if OTRS log rotation is not enabled
-    my $RotationType = lc $Kernel::OM->Get('Kernel::Config')->Get('Daemon::Log::RotationType') || 'otrs';
-    return 1 if $RotationType ne 'otrs';
+    # skip cleanup if Znuny log rotation is not enabled
+    my $RotationType = lc $Kernel::OM->Get('Kernel::Config')->Get('Daemon::Log::RotationType') || 'znuny';
+    return 1 if $RotationType ne 'znuny';
 
     my @LogFiles = glob "$LogDir/*.log";
 

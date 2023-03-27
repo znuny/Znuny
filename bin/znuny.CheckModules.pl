@@ -124,12 +124,12 @@ GetOptions(
 
 # check needed params
 if ($Help) {
-    print "\nReturn all required and optional packages of OTRS.\n\n";
+    print "\nReturn all required and optional packages of Znuny.\n\n";
     print "Usage:\n";
     print " znuny.CheckModules.pl [-list|all]\n\n";
     print "Options:\n";
     printf " %-22s - %s", '[-list]', 'Return an install command with all required packages.' . "\n";
-    printf " %-22s - %s", '[-all]',  'Return all required, optional and bundled packages of OTRS.' . "\n\n";
+    printf " %-22s - %s", '[-all]',  'Return all required, optional and bundled packages of Znuny.' . "\n\n";
     exit 1;
 }
 
@@ -611,7 +611,7 @@ my @NeededModules = (
     {
         Module    => 'Template',
         Required  => 1,
-        Comment   => 'Template::Toolkit, the rendering engine of OTRS.',
+        Comment   => 'Template::Toolkit, the rendering engine of Znuny.',
         InstTypes => {
             aptget => 'libtemplate-perl',
             emerge => 'dev-perl/Template-Toolkit',
