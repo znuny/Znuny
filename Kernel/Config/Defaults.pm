@@ -94,7 +94,7 @@ sub LoadDefaults {
     # ScriptAlias
     # Prefix to index.pl used as ScriptAlias in web config
     # (Used when emailing links to agents).
-    $Self->{ScriptAlias} = 'otrs/';
+    $Self->{ScriptAlias} = 'znuny/';
 
     # AdminEmail
     # (Email of the system admin.)

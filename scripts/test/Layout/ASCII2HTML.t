@@ -98,10 +98,10 @@ ak@example.com<br/>
 <br/>
 <a href="ftp://ftp.example.org" target="_blank" title="ftp://ftp.example.org">ftp.example.org</a><br/>
 <br/>
-<a href="https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl" target="_blank" title="https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl">https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=/[..]</a><br/>
+<a href="https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl" target="_blank" title="https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl">https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=[..]</a><br/>
 <br/>
-lkj <a href="https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl" target="_blank" title="https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl">https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=/[..]</a> lk<br/>
-lkj <a href="https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl" target="_blank" title="https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl">https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=/[..]</a><br/>
+lkj <a href="https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl" target="_blank" title="https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl">https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=[..]</a> lk<br/>
+lkj <a href="https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl" target="_blank" title="https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=/home/tr/CVSUpdate().pl">https://portal.example.com/znuny/index.pl?Action=AgentFileManager&Location=[..]</a><br/>
 lk<br/>
 END_RESULT
 
