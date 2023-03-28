@@ -367,7 +367,15 @@ sub RemoveSessionByUser {
             SessionID => $SessionID,
         );
 
-        next SESSIONID if $SessionData{UserLogin} ne $Param{UserLogin};
+        # next SESSIONID if $SessionData{UserLogin} ne $Param{UserLogin};
+
+        if ( 
+            defined $SessionData{UserLogin}
+            && ( $SessionData{UserLogin} ne $Param{UserLogin} )
+            )
+        {
+            next SESSIONID;
+        }
 
         $Self->{Backend}->RemoveSessionID(
             SessionID => $SessionID,
