@@ -35,7 +35,7 @@ my $FrameworkDirectory       = dirname($RealBin);
 my $FrameworkDirectoryLength = length($FrameworkDirectory);
 
 my $ZnunyUser = 'znuny';    # default: znuny
-my $WebGroup = '';          # Try to find a default from predefined group list, take the first match.
+my $WebGroup  = '';         # Try to find a default from predefined group list, take the first match.
 
 WEBGROUP:
 for my $GroupCheck (qw(wwwrun apache www-data www _www)) {

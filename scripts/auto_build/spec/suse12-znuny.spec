@@ -122,9 +122,9 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %config /etc/apache2/conf.d/zzz_znuny.conf
 
-%defattr(-, otrs, www, -)
+%defattr(-, znuny, www, -)
 %config(noreplace) /opt/znuny/Kernel/Config.pm
-%attr(-, otrs, root,) %config(noreplace) /opt/znuny/.procmailrc
+%attr(-, znuny, root,) %config(noreplace) /opt/znuny/.procmailrc
 %config(noreplace) /opt/znuny/.fetchmailrc
 %config(noreplace) /opt/znuny/.mailfilter
 
