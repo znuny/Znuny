@@ -94,7 +94,7 @@ set ticket pending time to supplied time value.
 
     my $Success = $TicketPendingTimeObject->SetTime(
         Type     => 'PendingTime',
-        Value    => '2016-01-01 00:00:00'
+        Value    => '2016-01-01 00:00:00',
         TicketID => 1,
     );
 

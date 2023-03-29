@@ -12,6 +12,8 @@ package Kernel::Modules::AdminPostMasterFilter;
 use strict;
 use warnings;
 
+use URI::Escape;
+
 our $ObjectManagerDisabled = 1;
 
 sub new {
@@ -197,7 +199,8 @@ sub Run {
             && ( $ParamObject->GetParam( Param => 'ContinueAfterSave' ) eq '1' )
             )
         {
-            return $LayoutObject->Redirect( OP => "Action=$Self->{Action};Subaction=Update;Name=$Name" );
+            my $URIEscapedName = uri_escape($Name);    # See internal issue #478.
+            return $LayoutObject->Redirect( OP => "Action=$Self->{Action};Subaction=Update;Name=$URIEscapedName" );
         }
         else {
 

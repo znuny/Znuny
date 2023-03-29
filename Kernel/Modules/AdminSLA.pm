@@ -35,6 +35,8 @@ sub Run {
     my $SLAObject    = $Kernel::OM->Get('Kernel::System::SLA');
     my %Error        = ();
 
+    $Param{IsITSMInstalled} = $Self->{IsITSMInstalled};
+
     # ------------------------------------------------------------ #
     # sla edit
     # ------------------------------------------------------------ #
@@ -319,8 +321,6 @@ sub Run {
             );
         }
 
-        $Param{IsITSMInstalled} = $Self->{IsITSMInstalled};
-
         # generate output
         $Output .= $LayoutObject->Output(
             TemplateFile => 'AdminSLA',
@@ -336,6 +336,8 @@ sub _MaskNew {
     my ( $Self, %Param ) = @_;
 
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
+
+    $Param{IsITSMInstalled} = $Self->{IsITSMInstalled};
 
     # get params
     my %SLAData;
@@ -540,8 +542,6 @@ sub _MaskNew {
             }
         }
     }
-
-    $Param{IsITSMInstalled} = $Self->{IsITSMInstalled};
 
     # get output back
     return $LayoutObject->Output(

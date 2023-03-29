@@ -94,7 +94,7 @@ creates the label HTML to be used in edit masks.
     my $LabelHTML = $BackendObject->EditLabelRender(
         DynamicFieldConfig => $DynamicFieldConfig,      # complete config of the DynamicField
         FieldName          => 'TheField',               # the value to be set on the 'for' attribute
-        AdditionalText     => 'Between'                 # other text to be placed next to FieldName
+        AdditionalText     => 'Between',                # other text to be placed next to FieldName
         Mandatory          => 1,                        # 0 or 1,
     );
 

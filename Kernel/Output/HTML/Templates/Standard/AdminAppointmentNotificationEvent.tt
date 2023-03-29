@@ -586,78 +586,8 @@
 
         </form>
 
-        <div class="WidgetSimple SpacingTop Collapsed">
-            <div class="Header">
-                <div class="WidgetAction Toggle">
-                    <a href="#" title="[% Translate("Toggle this widget") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
-                </div>
-                <h2>[% Translate("Tag Reference") | html %]</h2>
-            </div>
+        [% INCLUDE "SmartTags/Default.tt" %]
 
-            <div class="Content">
-
-                <p>[% Translate("Notifications are sent to an agent.") | html %]</p>
-
-                <p>[% Translate("You can use the following tags") | html %]:</p>
-
-                <dl>
-                    <dt><code>&lt;OTRS_APPOINTMENT_TITLE[20]&gt;</code></dt>
-                    <dd>
-                        [% Translate("To get the first 20 character of the appointment title.") | html %]
-                    </dd>
-
-                    <dt><code>&lt;OTRS_APPOINTMENT_*&gt;</code></dt>
-                    <dd>
-                        [% Translate("To get the appointment attribute") | html %]
-                        ([% Translate(" e. g.") | html %] <code>&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;, &lt;OTRS_APPOINTMENT_STARTTIME&gt;, &lt;OTRS_APPOINTMENT_DESCRIPTION&gt;</code>).
-                    </dd>
-
-                    <dt><code>&lt;OTRS_CALENDAR_*&gt;</code></dt>
-                    <dd>
-                        [% Translate("To get the calendar attribute") | html %]
-                        ([% Translate(" e. g.") | html %] <code>&lt;OTRS_CALENDAR_CALENDARID&gt;, &lt;OTRS_CALENDAR_CALENDARNAME&gt;, &lt;OTRS_CALENDAR_COLOR&gt;</code>).
-                    </dd>
-
-                    <dt><code>&lt;OTRS_*&gt;</code> [% Translate("or") | html %] <code>&lt;OTRS_NOTIFICATION_RECIPIENT_*&gt;</code></dt>
-                    <dd>
-                        [% Translate("Attributes of the recipient user for the notification") | html %]
-                        ([% Translate(" e. g.") | html %] <code>&lt;OTRS_UserFullname&gt;</code> [% Translate("or") | html %] <code>&lt;OTRS_NOTIFICATION_RECIPIENT_UserFullname&gt;</code>).
-                    </dd>
-
-                    <dt><code>&lt;OTRS_CONFIG_*&gt;</code></dt>
-                    <dd>
-                        [% Translate("Config options") | html %]
-                        ([% Translate(" e. g.") | html %] <code>&lt;OTRS_CONFIG_HttpType&gt;</code>).
-                    </dd>
-                </dl>
-
-                <p class="SpacingTop">
-                    [% Translate("Example notification") | html %]:
-                </p>
-                <label for="SubjectExample">[% Translate("Subject") | html %]</label>:
-                <input type="text" name="SubjectExample" id="SubjectExample" value="Reminder: &lt;OTRS_APPOINTMENT_TITLE&gt;" size="80" maxlength="80" readonly />
-                <br/>
-                <label for="ResponseExample">[% Translate("Text") | html %]</label>:
-                <br/>
-                <textarea rows="12" cols="70" name="ResponseExample" id="ResponseExample" readonly>
-Hi &lt;OTRS_NOTIFICATION_RECIPIENT_UserFirstname&gt;,
-
-appointment &quot;&lt;OTRS_APPOINTMENT_TITLE&gt;&quot; has reached its notification time.
-
-Description: &lt;OTRS_APPOINTMENT_DESCRIPTION&gt;
-Location: &lt;OTRS_APPOINTMENT_LOCATION&gt;
-Calendar: &lt;OTRS_CALENDAR_CALENDARNAME&gt;
-Start date: &lt;OTRS_APPOINTMENT_STARTTIME&gt;
-End date: &lt;OTRS_APPOINTMENT_ENDTIME&gt;
-All-day: &lt;OTRS_APPOINTMENT_ALLDAY&gt;
-Repeat: &lt;OTRS_APPOINTMENT_RECURRING&gt;
-
-&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;
-
--- &lt;OTRS_CONFIG_NotificationSenderName&gt;
-                </textarea>
-            </div>
-        </div>
 [% RenderBlockEnd("OverviewUpdate") %]
 
     </div>
