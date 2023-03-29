@@ -42,7 +42,7 @@
             <div class="Content">
                 <ul class="ActionList">
                     <li>
-                        <a href="https://doc.znuny.org/doc/manual/admin/[% Data.ManualVersion | uri %].0/en/html/index.html" target="_blank" class="CallForAction btn-main btn-primary-ghost"><span>[% Translate("View the admin manual on Github") | html %]</span></a>
+                        <a href="https://doc.znuny.org/znuny/admin" target="_blank" class="CallForAction btn-main btn-primary-ghost"><span>[% Translate("View the admin manual on Github") | html %]</span></a>
                     </li>
                 </ul>
             </div>

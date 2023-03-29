@@ -24,7 +24,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://doc.otrs.com/doc/manual/admin/[% Data.ManualVersion | uri %].0/en/html/statistics-module.html" target="_blank" class="CallForAction Fullsize Center">
+                        <a href="https://doc.znuny.org/znuny/admin/statistics" target="_blank" class="CallForAction Fullsize Center">
                             <span>
                                 [% Translate("Read more about statistics in Znuny") | html %]
                             </span>

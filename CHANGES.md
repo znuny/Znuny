@@ -1,4 +1,5 @@
-# 7.0.0 2023-??-??
+# 7.0.1 2023-03-29
+ - 2023-03-29 Redesigned GUI for agents and customers.
  - 2023-02-01 Removed Business Solution code.
  - 2023-02-01 Added additional IconClass for Notifications (Notify's).
  - 2023-01-26 Integrated Znuny4OTRS-AdminValidFilter into Framework. Filters invalid entries in the admin area.
