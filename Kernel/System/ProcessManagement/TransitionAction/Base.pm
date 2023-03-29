@@ -130,7 +130,7 @@ Returns an array ref with attachments.
         TransitionEntityID       => 'T123',
         TransitionActionEntityID => 'TA123',
         Config                   => {
-            Attachments => '1'
+            Attachments => '1',
             ...
         }
     );
@@ -263,7 +263,7 @@ this ticket id instead of the normal ticket id.
             TicketID
         },
         Config => {
-            ForeignTicketID     => 1
+            ForeignTicketID     => 1,
             # or
             ForeignTicketNumber => 123456789,
         },

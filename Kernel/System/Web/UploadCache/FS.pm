@@ -12,12 +12,14 @@ package Kernel::System::Web::UploadCache::FS;
 use strict;
 use warnings;
 
+use Kernel::System::VariableCheck qw(:all);
 use File::Basename;
 
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Log',
     'Kernel::System::Main',
+    'Kernel::System::FormDraft',
 );
 
 sub new {
@@ -422,6 +424,41 @@ sub FormIDCleanUp {
     # get main object
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
+    # check for draft dependency within cache
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $FormDraftTTL = $ConfigObject->Get('FormDraftTTL');
+
+    my %DraftForms;
+    my $FormDraftObject = $Kernel::OM->Get('Kernel::System::FormDraft');
+    for my $ObjectType ( sort keys %{$FormDraftTTL} ) {
+        my $FormDraftList = $FormDraftObject->FormDraftListGet(
+            ObjectType => $ObjectType,
+            UserID     => 1,
+        );
+
+        DRAFT:
+        for my $FormDraft ( @{$FormDraftList} ) {
+            my $FormDraftConfig = $FormDraftObject->FormDraftGet(
+                FormDraftID => $FormDraft->{FormDraftID},
+                UserID      => 1,
+            );
+
+            my $FormID = $FormDraftConfig->{FormData}->{FormID};
+
+            # if TTL configuration is missing, use the default
+            next DRAFT if !$FormDraftTTL->{$ObjectType};
+
+            # check for draft form configuration
+            next DRAFT if !IsHashRefWithData($FormDraftConfig);
+            next DRAFT if !$FormID;
+
+            # form draft TTL config for specific object type is given in minutes
+            my $CurrentTile = time() - ( $FormDraftTTL->{$ObjectType} * 60 );
+
+            $DraftForms{$FormID} = $CurrentTile;
+        }
+    }
+
     my $RetentionTime = int( time() - 86400 );        # remove subdirs older than 24h
     my @List          = $MainObject->DirectoryRead(
         Directory => $Self->{TempDir},
@@ -431,6 +468,7 @@ sub FormIDCleanUp {
     SUBDIR:
     for my $Subdir (@List) {
         my $SubdirTime = $Subdir;
+        ( my $Filename ) = $Subdir =~ /[^\/]+$/g;
 
         if ( $SubdirTime =~ /^.*\/\d+\..+$/ ) {
             $SubdirTime =~ s/^.*\/(\d+?)\..+$/$1/;
@@ -444,7 +482,12 @@ sub FormIDCleanUp {
             next SUBDIR;
         }
 
-        if ( $RetentionTime > $SubdirTime ) {
+        if (
+            ( $DraftForms{$Filename} && $DraftForms{$Filename} > $SubdirTime )
+            ||
+            ( !$DraftForms{$Filename} && $RetentionTime > $SubdirTime )
+            )
+        {
             my @Sublist = $MainObject->DirectoryRead(
                 Directory => $Subdir,
                 Filter    => "*",

@@ -34,15 +34,15 @@ sub Configure {
     );
     $Self->AddOption(
         Name        => 'directory',
-        Description => "Run all test files in the specified directory.",
+        Description => "Run all test files in the specified directory (can be specified several times).",
         Required    => 0,
         HasValue    => 1,
         Multiple    => 1,
         ValueRegex  => qr/.+/smx,
     );
     $Self->AddOption(
-        Name        => 'exclude-directory',
-        Description => "All test files in the specified directory will be excluded.",
+        Name        => 'installed-package',
+        Description => "Run all test files in the specified package (can be specified several times).",
         Required    => 0,
         HasValue    => 1,
         Multiple    => 1,
@@ -50,7 +50,15 @@ sub Configure {
     );
     $Self->AddOption(
         Name        => 'sopm-file',
-        Description => "Run all test files contained in the given SOPM file.",
+        Description => "Run all test files contained in the given SOPM file (can be specified several times).",
+        Required    => 0,
+        HasValue    => 1,
+        Multiple    => 1,
+        ValueRegex  => qr/.+/smx,
+    );
+    $Self->AddOption(
+        Name        => 'exclude-directory',
+        Description => "All test files in the specified directory will be excluded (can be specified several times).",
         Required    => 0,
         HasValue    => 1,
         Multiple    => 1,
@@ -165,6 +173,7 @@ sub Run {
     my $FunctionResult = $Kernel::OM->Get('Kernel::System::UnitTest')->Run(
         Tests                  => $Self->GetOption('test'),
         Directory              => $Self->GetOption('directory') || $DefaultDirectory,
+        Package                => $Self->GetOption('installed-package'),
         ExcludeDirectory       => $Self->GetOption('exclude-directory'),
         SOPMFile               => $Self->GetOption('sopm-file'),
         JobID                  => $Self->GetOption('job-id'),

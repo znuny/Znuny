@@ -409,7 +409,7 @@ The HTTP code is set accordingly
 - C<500> for content syntax errors
 
     my $Result = $TransportObject->ProviderGenerateResponse(
-        Success => 1
+        Success => 1,
         Data    => { # data payload for response, optional
             ...
         },

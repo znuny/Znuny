@@ -548,13 +548,13 @@ Returns:
     my %Configs = (
         'Ticket::Frontend::AgentTicketStatusView###DefaultColumns' => {
             Title                     => 2,
-            CustomerUserID            => 1
+            CustomerUserID            => 1,
             DynamicField_DropdownTest => 1,
             DynamicField_Anotherone   => 2,
         },
         'DashboardBackend###0100-TicketPendingReminder' => {
             Title                     => 2,
-            CustomerUserID            => 1
+            CustomerUserID            => 1,
             DynamicField_DropdownTest => 1,
             DynamicField_Anotherone   => 2,
         },
@@ -621,13 +621,13 @@ This function enables the given Attributes for the requested DefaultColumns.
     my %Configs = (
         'Ticket::Frontend::AgentTicketStatusView###DefaultColumns' => {
             Title                     => 2,
-            CustomerUserID            => 1
+            CustomerUserID            => 1,
             DynamicField_DropdownTest => 1,
             DynamicField_Anotherone   => 2,
         },
         'DashboardBackend###0100-TicketPendingReminder' => {
             Title                     => 2,
-            CustomerUserID            => 1
+            CustomerUserID            => 1,
             DynamicField_DropdownTest => 1,
             DynamicField_Anotherone   => 2,
         },
@@ -769,13 +769,13 @@ This function disables the given Attributes for the requested DefaultColumns.
     my %Configs = (
         'Ticket::Frontend::AgentTicketStatusView###DefaultColumns' => {
             Title                     => 2,
-            CustomerUserID            => 1
+            CustomerUserID            => 1,
             DynamicField_DropdownTest => 1,
             DynamicField_Anotherone   => 2,
         },
         'DashboardBackend###0100-TicketPendingReminder' => {
             Title                     => 2,
-            CustomerUserID            => 1
+            CustomerUserID            => 1,
             DynamicField_DropdownTest => 1,
             DynamicField_Anotherone   => 2,
         },

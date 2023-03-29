@@ -233,8 +233,8 @@ sub TokenGet {
 Register the system;
 
     my $Success = $RegistrationObject->Register(
-        Token       => '8a85ad4c-e5ff-4b91-a4b3-0b9ea8e2a3dc'
-        OTRSID      => 'myname@example.com'
+        Token       => '8a85ad4c-e5ff-4b91-a4b3-0b9ea8e2a3dc',
+        OTRSID      => 'myname@example.com',
         Type        => 'production',
         Description => 'Main ticketing system',  # optional
     );

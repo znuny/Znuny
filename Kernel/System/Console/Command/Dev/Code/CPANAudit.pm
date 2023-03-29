@@ -6,19 +6,22 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-
+## nofilter(TidyAll::Plugin::Znuny::Perl::Require)
 package Kernel::System::Console::Command::Dev::Code::CPANAudit;
 
 use strict;
 use warnings;
+use Kernel::System::VariableCheck qw(:all);
 
-use CPAN::Audit;
 use File::Basename;
 use FindBin qw($Bin);
 
 use parent qw(Kernel::System::Console::BaseCommand);
 
-our @ObjectDependencies = ();
+our @ObjectDependencies = (
+    'Kernel::System::Environment',
+    'Kernel::System::Log',
+);
 
 sub Configure {
     my ( $Self, %Param ) = @_;
@@ -30,6 +33,17 @@ sub Configure {
 
 sub Run {
     my ( $Self, %Param ) = @_;
+
+    my $EnvironmentObject = $Kernel::OM->Get('Kernel::System::Environment');
+    my $LogObject         = $Kernel::OM->Get('Kernel::System::Log');
+
+    my $Version = $EnvironmentObject->ModuleVersionGet( Module => 'CPAN::Audit' );
+    if ( !$Version ) {
+        $Self->Print("Module CPAN::Audit is not installed.\n");
+        return $Self->ExitCodeOk();
+    }
+
+    require CPAN::Audit;
 
     my $Audit = CPAN::Audit->new(
         no_color    => 1,
@@ -56,7 +70,44 @@ sub Run {
 
     # Workaround for CPAN::Audit::Installed. It does not use the passed param(s), but @ARGV instead.
     local @ARGV = @PathsToScan;
-    return $Audit->command('installed') == 0 ? $Self->ExitCodeOk() : $Self->ExitCodeError();
+
+    my $Result = $Audit->command('installed');
+
+    if ( IsHashRefWithData($Result) ) {
+        my $ModuleCounter;
+        my $AdvisoryCounter;
+        my $String;
+        for my $Module ( sort keys %{ $Result->{dists} } ) {
+            $ModuleCounter++;
+            my $Count = scalar @{ $Result->{dists}->{$Module}->{advisories} };
+            my $Version
+                = $Result->{dists}->{$Module}->{version} ? " (version $Result->{dists}->{$Module}->{version})" : '';
+
+            $String .= "$Module$Version has $Count advisories:\n";
+
+            for my $Advisory ( @{ $Result->{dists}->{$Module}->{advisories} } ) {
+                $AdvisoryCounter++;
+                $String .= "\t* $Advisory->{id}\n\t  $Advisory->{description}";
+
+                $String .= "\n\t  Affected versions: $Advisory->{affected_versions}" if $Advisory->{affected_versions};
+                $String .= "\n\t  Fixed versions: $Advisory->{fixed_versions}"       if $Advisory->{fixed_versions};
+                $String .= "\n";
+
+                if ( IsArrayRefWithData( $Advisory->{cves} ) ) {
+                    my $CVEString = join ' ', @{ $Advisory->{cves} };
+                    $String .= "\n\t  CVEs: $CVEString\n";
+                }
+
+                $String .= "\n";
+            }
+        }
+
+        $String .= "\nTotal $AdvisoryCounter advisories found in $ModuleCounter modules.\n";
+        $Self->Print($String);
+    }
+
+    # return everytime exit code 0
+    return $Self->ExitCodeOk();
 }
 
 1;

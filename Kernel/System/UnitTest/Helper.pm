@@ -193,7 +193,7 @@ the login name of the new user, the password is the same.
 
     my $TestUserLogin = $HelperObject->TestUserCreate(
         Groups    => ['admin', 'users'],         # optional, list of groups to add this user to (rw rights)
-        Language  => 'de'                        # optional, defaults to 'en' if not set
+        Language  => 'de',                       # optional, defaults to 'en' if not set
         KeepValid => 1,                          # optional, defaults to 0
     );
 
@@ -206,7 +206,7 @@ To get UserLogin and UserID:
 
     my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate(
         Groups    => ['admin', 'users'],
-        Language  => 'de'
+        Language  => 'de',
         KeepValid => 1,
     );
 

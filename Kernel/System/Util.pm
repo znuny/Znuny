@@ -75,6 +75,31 @@ sub IsITSMInstalled {
     return $Self->{ITSMInstalled};
 }
 
+=head2 IsITSMIncidentProblemManagementInstalled()
+
+Checks if ITSMIncidentProblemManagement is installed.
+
+    my $IsITSMIncidentProblemManagementInstalled = $UtilObject->IsITSMIncidentProblemManagementInstalled();
+
+    Returns 1 if ITSMIncidentProblemManagement is installed and 0 otherwise.
+
+=cut
+
+sub IsITSMIncidentProblemManagementInstalled {
+    my ( $Self, %Param ) = @_;
+
+    # Use cached result because it won't change within the process.
+    return $Self->{ITSMIncidentProblemManagementInstalled} if defined $Self->{ITSMIncidentProblemManagementInstalled};
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    # Just use some arbitrary SysConfig option to check if IncidentProblemManagement is present.
+    $Self->{ITSMIncidentProblemManagementInstalled}
+        = $ConfigObject->Get('Frontend::Module')->{AgentITSMIncidentProblemManagement} ? 1 : 0;
+
+    return $Self->{ITSMIncidentProblemManagementInstalled};
+}
+
 =head2 IsFrontendContext()
 
 Checks if current code is being executed in frontend context, e.g. agent frontend.

@@ -531,6 +531,7 @@ sub LoadDefaults {
 #    $Self->{'AuthSyncModule::LDAP::Host'} = 'ldap.example.com';
 #    $Self->{'AuthSyncModule::LDAP::BaseDN'} = 'dc=example,dc=com';
 #    $Self->{'AuthSyncModule::LDAP::UID'} = 'uid';
+#    $Self->{'AuthSyncModule::LDAP::GroupDN'} = 'cn=otrsallow,ou=posixGroups,dc=example,dc=com';
 
     # The following is valid but would only be necessary if the
     # anonymous user do NOT have permission to read from the LDAP tree
@@ -1750,7 +1751,7 @@ via the Preferences button after logging in.
         NavBarName => 'Admin',
         Title      => '',
     };
-    $Self->{'Loader::Module::Admin'}->{'000-Defaults'} = {
+    $Self->{'Loader::Module::Admin'}->{'001-Framework'} = {
         CSS => [
             'Core.Agent.Admin.css',
         ],
@@ -1808,7 +1809,7 @@ via the Preferences button after logging in.
         NavBarName => 'Admin',
         Title      => 'System Log',
     };
-    $Self->{'Loader::Module::AdminLog'}->{'000-Defaults'} = {
+    $Self->{'Loader::Module::AdminLog'}->{'001-Framework'} = {
         JavaScript => [
           'Core.Agent.Admin.Log.js'
         ],
@@ -1833,7 +1834,7 @@ via the Preferences button after logging in.
         Title        => 'System Configuration',
         NavBarName   => 'Admin',
     };
-    $Self->{'Loader::Module::AdminSystemConfiguration'}->{'000-Defaults'} = {
+    $Self->{'Loader::Module::AdminSystemConfiguration'}->{'001-Framework'} = {
         CSS => [
             'Core.Agent.Admin.SystemConfiguration.css',
         ],

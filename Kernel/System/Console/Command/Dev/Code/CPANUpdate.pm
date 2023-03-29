@@ -230,10 +230,6 @@ sub InstallModule {
 sub LoadModuleConfig {
     return (
         {
-            Module             => 'CPAN::Audit',
-            UpdateInStableMode => 1,
-        },
-        {
             Module             => 'Mozilla::CA',
             UpdateInStableMode => 1,
         },

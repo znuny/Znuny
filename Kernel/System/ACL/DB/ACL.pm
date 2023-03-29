@@ -69,7 +69,7 @@ add new ACL
 returns the id of the created ACL if success or undef otherwise
 
     my $ID = $ACL->ACLAdd(
-        Name           => 'NameOfACL'           # mandatory
+        Name           => 'NameOfACL',          # mandatory
         Comment        => 'Comment',            # optional
         Description    => 'Description',        # optional
         StopAfterMatch => 1,                    # optional
@@ -816,8 +816,8 @@ sub ACLsNeedSyncReset {
 gets a complete ACL information dump from the DB
 
     my $ACLDump = $ACLObject->ACLDump(
-        ResultType  => 'SCALAR'                     # 'SCALAR' || 'HASH' || 'FILE'
-        Location    => '/opt/otrs/var/myfile.txt'   # mandatory for ResultType = 'FILE'
+        ResultType  => 'SCALAR',                    # 'SCALAR' || 'HASH' || 'FILE'
+        Location    => '/opt/otrs/var/myfile.txt',  # mandatory for ResultType = 'FILE'
         UserID      => 1,
     );
 

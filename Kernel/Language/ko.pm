@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '';
     $Self->{DateInputFormat}     = '';
     $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.898510844933636;
+    $Self->{Completeness}        = 0.892235824742268;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -224,16 +224,6 @@ sub Data {
         'Message body' => '메시지 본문',
         'Add new notification language' => '새 알림 언어 추가',
         'Save Changes' => '변경 저장',
-        'Tag Reference' => '태그 참조',
-        'Notifications are sent to an agent.' => '통지는 에이전트로 전송됩니다.',
-        'You can use the following tags' => '다음 태그를 사용할 수 있습니다.',
-        'To get the first 20 character of the appointment title.' => '약속 제목의 처음 20자를 얻습니다.',
-        'To get the appointment attribute' => '약속 특성을 얻으려면',
-        ' e. g.' => 'e. g.',
-        'To get the calendar attribute' => '달력 속성을 가져 오려면',
-        'Attributes of the recipient user for the notification' => '알림에 대한 수신자 사용자의 속성',
-        'Config options' => '구성 옵션',
-        'Example notification' => '알림 예',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEventTransportEmailSettings.tt
         'Additional recipient email addresses' => '추가받는 사람 전자 메일 주소',
@@ -273,20 +263,6 @@ sub Data {
         'Queues ↔ Auto Responses' => '',
         'Response' => '응답',
         'Auto response from' => '님의 자동 응답',
-        'Reference' => '참고',
-        'To get the first 20 character of the subject.' => '주제의 처음 20자를 얻습니다.',
-        'To get the first 5 lines of the email.' => '전자 메일의 처음 5 줄을 가져옵니다.',
-        'To get the name of the ticket\'s customer user (if given).' => '티켓의 고객 사용자 이름을 알려주는 것입니다 (주어진 경우).',
-        'To get the article attribute' => '기사 속성을 얻으려면',
-        'Options of the current customer user data' => '현재 고객 사용자 데이터의 옵션',
-        'Ticket owner options' => '티켓 소유자 옵션',
-        'Ticket responsible options' => '티켓 책임 옵션',
-        'Options of the current user who requested this action' => '이 작업을 요청한 현재 사용자의 옵션',
-        'Options of the ticket data' => '티켓 데이터의 옵션',
-        'Options of ticket dynamic fields internal key values' => '티켓 동적 필드 내부 키 값의 옵션',
-        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            '티켓 동적 필드의 옵션은 드롭 다운 및 다중선택 필드에 유용한 값을 표시합니다.',
-        'Example response' => '응답 예',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCloudServiceSupportDataCollector.tt
         'Cloud Service Management' => '클라우드 서비스 관리',
@@ -429,6 +405,7 @@ sub Data {
         'Toggle %s permission for %s' => '%s에 대한 %s 권한을 토글합니다.',
         'Customer Default Groups:' => '고객 기본 그룹 :',
         'No changes can be made to these groups.' => '이 그룹은 변경할 수 없습니다.',
+        'Reference' => '참고',
         'ro' => 'ro',
         'Read only access to the ticket in this group/queue.' => '이 그룹/대기열에 있는 티켓에 대한 읽기 전용 액세스.',
         'rw' => 'rw',
@@ -1440,24 +1417,6 @@ sub Data {
             '선택한 전송을 사용하는 단일 티켓에 대해 하루에 한 번 사용자에게 알립니다.',
         'This field is required and must have less than 4000 characters.' =>
             '이 필드는 필수이며 4000 자 미만이어야합니다.',
-        'Notifications are sent to an agent or a customer.' => '통지는 상담원 또는 고객에게 전송됩니다.',
-        'To get the first 20 character of the subject (of the latest agent article).' =>
-            '(최신 에이전트 기사의) 제목의 처음 20자를 가져옵니다.',
-        'To get the first 5 lines of the body (of the latest agent article).' =>
-            '(최신 에이전트 기사의) 본문의 처음 5 줄을 가져 오려면.',
-        'To get the first 20 character of the subject (of the latest customer article).' =>
-            '(최신 고객 기사의) 제목의 처음 20자를 얻으려면.',
-        'To get the first 5 lines of the body (of the latest customer article).' =>
-            '(최신 고객 기사의) 본문의 첫 번째 5 줄을 가져옵니다.',
-        'Attributes of the current customer user data' => '현재 고객 사용자 데이터의 속성',
-        'Attributes of the current ticket owner user data' => '현재 티켓 소유자 사용자 데이터의 속성',
-        'Attributes of the current ticket responsible user data' => '현재 티켓 책임 사용자 데이터의 속성',
-        'Attributes of the current agent user who requested this action' =>
-            '이 작업을 요청한 현재 상담원 사용자의 속성',
-        'Attributes of the ticket data' => '티켓 데이터의 속성',
-        'Ticket dynamic fields internal key values' => '동적 필드 내부 키 값 티켓 ',
-        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
-            '티켓 동적 필드는 드롭 다운 및 Multiselect 필드에 유용한 값을 표시합니다. ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => '',
@@ -2076,8 +2035,6 @@ sub Data {
         'Edit Salutation' => '인사말 편집',
         'Filter for Salutations' => '인사말 필터링',
         'Filter for salutations' => '인사말 필터링',
-        'e. g.' => '예를들면',
-        'Example salutation' => '예시 인사말',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => '보안 모드가 활성화되어야 합니다!',
@@ -2137,7 +2094,6 @@ sub Data {
         'Edit Signature' => '시그니처 편집',
         'Filter for Signatures' => '시그니처 필터링',
         'Filter for signatures' => '시그니처 필터링',
-        'Example signature' => '서명의 예',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
         'State Management' => '주 관리',
@@ -2309,18 +2265,6 @@ sub Data {
         'Delete this entry' => '이 항목 삭제',
         'Do you really want to delete this template?' => '이 템플릿을 정말로 삭제 하시겠습니까?',
         'A standard template with this name already exists!' => '이 이름을 가진 표준 템플릿이 이미 존재합니다!',
-        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
-            '',
-        'Create type templates only supports this smart tags' => '만들기 유형 템플릿은 이 스마트 태그만 지원합니다.',
-        'Example template' => '템플릿 예제',
-        'The current ticket state is' => '현재 티켓 상태는 다음과 같습니다.',
-        'Your email address is' => '귀하의 이메일 주소 : ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplateAttachment.tt
         'Manage Template-Attachment Relations' => '',
@@ -2579,6 +2523,7 @@ sub Data {
         'Assigned to customer user' => '고객 사용자에게 할당 됨',
         'Accessible for customer user' => '고객 사용자가 엑세스 가능',
         'My locked tickets' => '내 잠긴 티켓',
+        'My Owned Tickets' => '',
         'My watched tickets' => '내가 본 티켓',
         'My responsibilities' => '내 책임',
         'Tickets in My Queues' => '내 대기열의 티켓',
@@ -2825,6 +2770,13 @@ sub Data {
         'New Queue' => '새로운 대기열',
         'Move' => '이동',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
+        'Add note to linked %s%s%s' => '',
+        'Note to linked Ticket' => '',
+        'LinkList invalid.' => '',
+        'Note to origin Ticket' => '',
+        'NoteToTicket invalid.' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
         'No ticket data found.' => '티켓이 없습니다.',
         'Open / Close ticket action menu' => '티켓 열기 / 닫기 액션 메뉴',
@@ -2833,6 +2785,8 @@ sub Data {
         'First Response Time' => '첫 번째 응답 시간',
         'Update Time' => '업데이트 시간',
         'Solution Time' => '솔루션 시간',
+        'Impact' => '',
+        'CustomerID' => '고객 ID',
         'Move ticket to a different queue' => '티켓을 다른 대기열로 이동',
         'Change queue' => '대기열 변경',
 
@@ -3078,7 +3032,6 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketSearch.tt
         'Profile' => '프로필',
         'e. g. 10*5155 or 105658*' => '이자형. 지. 10 * 5155 또는 105658 *',
-        'CustomerID' => '고객 ID',
         'Fulltext Search in Tickets (e. g. "John*n" or "Will*")' => '티켓에서 전체 텍스트 검색 (예 : "John * n"또는 "Will *")',
         'Types' => '유형',
         'Time Restrictions' => '시간 제한',
@@ -3310,6 +3263,61 @@ sub Data {
             '이것은 OTRS의 기본 공용 인터페이스입니다! 주어진 행동 매개 변수가 없습니다.',
         'You could install a custom public module (via the package manager), for example the FAQ module, which has a public interface.' =>
             '공용 인터페이스가있는 FAQ 모듈과 같이 (패키지 관리자)를 통해 사용자 정의 공용 모듈을 설치할 수 있습니다.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAppointmentNotificationEvent.tt
+        'To get the appointment attribute' => '약속 특성을 얻으려면',
+        ' e. g.' => 'e. g.',
+        'To get the first 20 character of the appointment title.' => '약속 제목의 처음 20자를 얻습니다.',
+        'To get the calendar attribute' => '달력 속성을 가져 오려면',
+        'Attributes of the recipient user for the notification' => '알림에 대한 수신자 사용자의 속성',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminAutoResponse.tt
+        'To get the first 20 character of the subject.' => '주제의 처음 20자를 얻습니다.',
+        'To get the first 5 lines of the email.' => '전자 메일의 처음 5 줄을 가져옵니다.',
+        'To get the name of the ticket\'s customer user (if given).' => '티켓의 고객 사용자 이름을 알려주는 것입니다 (주어진 경우).',
+        'To get the article attribute' => '기사 속성을 얻으려면',
+        'Options of the current customer user data' => '현재 고객 사용자 데이터의 옵션',
+        'Ticket owner options' => '티켓 소유자 옵션',
+        'Options of the ticket data' => '티켓 데이터의 옵션',
+        'Options of ticket dynamic fields internal key values' => '티켓 동적 필드 내부 키 값의 옵션',
+        'Options of ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            '티켓 동적 필드의 옵션은 드롭 다운 및 다중선택 필드에 유용한 값을 표시합니다.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminNotificationEvent.tt
+        'To get the first 20 character of the subject (of the latest agent article).' =>
+            '(최신 에이전트 기사의) 제목의 처음 20자를 가져옵니다.',
+        'To get the first 5 lines of the body (of the latest agent article).' =>
+            '(최신 에이전트 기사의) 본문의 처음 5 줄을 가져 오려면.',
+        'To get the first 20 character of the subject (of the latest customer article).' =>
+            '(최신 고객 기사의) 제목의 처음 20자를 얻으려면.',
+        'To get the first 5 lines of the body (of the latest customer article).' =>
+            '(최신 고객 기사의) 본문의 첫 번째 5 줄을 가져옵니다.',
+        'Attributes of the current customer user data' => '현재 고객 사용자 데이터의 속성',
+        'Attributes of the current ticket owner user data' => '현재 티켓 소유자 사용자 데이터의 속성',
+        'Attributes of the ticket data' => '티켓 데이터의 속성',
+        'Ticket dynamic fields internal key values' => '동적 필드 내부 키 값 티켓 ',
+        'Ticket dynamic fields display values, useful for Dropdown and Multiselect fields' =>
+            '티켓 동적 필드는 드롭 다운 및 Multiselect 필드에 유용한 값을 표시합니다. ',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminSalutation.tt
+        'e. g.' => '예를들면',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/AdminTemplate.tt
+        'To get the first 20 characters of the subject of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest agent article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 20 characters of the subject of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+        'To get the first 5 lines of the body of the current/latest article (current for Answer and Forward, latest for Note template type). This tag is not supported for other template types.' =>
+            '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/SmartTags/Default.tt
+        'Tag Reference' => '태그 참조',
+        'You can use the following tags' => '다음 태그를 사용할 수 있습니다.',
+        'Ticket responsible options' => '티켓 책임 옵션',
+        'Options of the current user who requested this action' => '이 작업을 요청한 현재 사용자의 옵션',
+        'Config options' => '구성 옵션',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Statistics/GeneralSpecificationsWidget.tt
         'You can select one or more groups to define access for different agents.' =>
@@ -3908,7 +3916,7 @@ sub Data {
         'Customer user of the ticket' => '티켓의 고객 사용자',
         'All recipients of the first article' => '첫 번째 기사의 모든 수신자',
         'All recipients of the last article' => '마지막 기사의 모든 수신자',
-        'All users who are mentioned in a ticket' => '',
+        'All agents who are mentioned in the ticket' => '',
         'Invisible to customer' => '',
         'Visible to customer' => '',
 
@@ -4364,9 +4372,6 @@ sub Data {
         # Perl Module: Kernel/Modules/AgentTicketMove.pm
         'You need move permissions!' => '이동할 권한이 없습니다.',
 
-        # Perl Module: Kernel/Modules/AgentTicketOwnerView.pm
-        'My Owned Tickets' => '',
-
         # Perl Module: Kernel/Modules/AgentTicketPhone.pm
         'Chat is not active.' => '채팅이 Active 되지 않음',
         'No permission.' => '권한 없음',
@@ -4660,6 +4665,10 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketNote.pm
         'Reply to note' => '메모에 회신',
+
+        # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketNoteToLinkedTicket.pm
+        'Create notice for linked ticket' => '',
+        'Transfer notice' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/AgentTicketPhone.pm
         'Split this article' => '이 기사 분할',
@@ -5387,6 +5396,11 @@ sub Data {
         'Legacy configuration backup files are no longer needed for the installed packages, please remove them from Kernel/Config/Backups folder.' =>
             '',
 
+        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/MultipleJSFileLoad.pm
+        'Views with multiple loaded JavaScript files' => '',
+        'The following JavaScript files loaded multiple times:' => '',
+        'Files' => '',
+
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OTRS/PackageDeployment.pm
         'Package Installation Status' => '패키지 설치 상태',
         'Some packages have locally modified files.' => '일부 패키지에는 로컬로 수정된 파일이 있습니다.',
@@ -5789,6 +5803,7 @@ sub Data {
             '서식있는 텍스트 편집기 구성 요소의 높이를 정의합니다. 숫자 (픽셀) 또는 퍼센트 값 (상대)을 입력하십시오.',
         'Defines the selectable font sizes in the rich text editor.' => '',
         'Defines the selectable fonts in the rich text editor.' => '',
+        'Defines the selectable format tags in the rich text editor.' => '',
         'Defines additional plugins for use in the rich text editor.' => '',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             '',
@@ -6735,6 +6750,14 @@ sub Data {
             '티켓 검색 화면의 속성에 사용할 기본 데이터입니다. 예 : "TicketCreateTimePointFormat = year; TicketCreateTimePointStart = 마지막; TicketCreateTimePoint = 2;".',
         'Default data to use on attribute for ticket search screen. Example: "TicketCreateTimeStartYear=2010;TicketCreateTimeStartMonth=10;TicketCreateTimeStartDay=4;TicketCreateTimeStopYear=2010;TicketCreateTimeStopMonth=11;TicketCreateTimeStopDay=3;".' =>
             '티켓 검색 화면의 속성에 사용할 기본 데이터입니다. 예 : "TicketCreateTimeStartYear = 2010, TicketCreateTimeStartMonth = 10, TicketCreateTimeStopDay = 4, TicketCreateTimeStopYear = 2010, TicketCreateTimeStopMonth = 11, TicketCreateTimeStopDay = 3; ',
+        'Default data to use on attribute for ticket search screen. Example: "TicketLastChangeTimePointFormat=year;TicketLastChangeTimePointStart=Last;TicketLastChangeTimePoint=2;".' =>
+            '',
+        'Default data to use on attribute for ticket search screen. Example: "TicketLastChangeTimeStartYear=2010;TicketLastChangeTimeStartMonth=10;TicketLastChangeTimeStartDay=4;TicketLastChangeTimeStopYear=2010;TicketLastChangeTimeMonth=11;TicketLastChangeTimeStopDay=3;".' =>
+            '',
+        'Default data to use on attribute for ticket search screen. Example: "TicketPendingTimePointFormat=year;TicketPendingTimePointStart=Last;TicketPendingTimePoint=2;".' =>
+            '',
+        'Default data to use on attribute for ticket search screen. Example: "TicketPendingTimeStartYear=2010;TicketPendingTimeStartMonth=10;TicketPendingTimeStartDay=4;TicketPendingTimeStopYear=2010;TicketPendingTimeMonth=11;TicketPendingTimeStopDay=3;".' =>
+            '',
         'Defines the default ticket attribute for ticket sorting in the locked ticket view of the agent interface.' =>
             '에이전트 인터페이스의 잠긴 티켓 보기에서 티켓 정렬에 대한 기본 티켓 속성을 정의합니다.',
         'Defines the default ticket order in the ticket locked view of the agent interface. Up: oldest on top. Down: latest on top.' =>
@@ -7983,6 +8006,56 @@ sub Data {
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
         'Mapping of non-standard time zones to official ones.' => '',
+        'Start date (YYYYMMDD) of the range to use when parsing ICS files. The used CPAN module iCal::Parser needs this to be able to parse ICS files with events in a year before the current one. The end date of the range is automatically set to 10 years in the future from the time of parsing/execution.' =>
+            '',
+        'Define a mapping between variables of the customer company data (keys) and dynamic fields of a ticket (values). The purpose is to store customer company data in ticket dynamic fields. The dynamic fields must be present in the system and should be enabled for AgentTicketFreeText, so that they can be set/updated manually by the agent. They mustn\'t be enabled for AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer. If they were, they would have precedence over the automatically set values. To use this mapping, you have to also activate the Ticket::EventModulePost###4100-DynamicFieldFromCustomerCompany setting.' =>
+            '',
+        'This event module stores attributes from customer companies in ticket dynamic fields. Please see DynamicFieldFromCustomerCompany::Mapping setting for how to configure the mapping.' =>
+            '',
+        'Required permissions to use the NoteToLinkedTicket screen in the agent interface.' =>
+            '',
+        'Sets the state of the selected linked ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Defines the default next state of a ticket after adding a note in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Activates the selection if a note in NoteToLinkedTicket screen should be created in this origin ticket.' =>
+            '',
+        'Defines the default value if a note in NoteToLinkedTicket screen should be created in this origin ticket.' =>
+            '',
+        'Sets the default subject for notes added in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets the default body text for notes added in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Allows adding notes in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets if a note in NoteToLinkedTicket screen must be filled in by the agent.' =>
+            '',
+        'Defines the history type for the NoteToLinkedTicket screen, which will be used for ticket history in the agent interface.' =>
+            '',
+        'Defines the history comment for the NoteToLinkedTicket screen, which will be used for ticket history in the agent interface.' =>
+            '',
+        'Defines if the note in the NoteToLinkedTicket screen of the agent interface is visible for the customer by default.' =>
+            '',
+        'Sets the ticket type in the NoteToLinkedTicket screen of the agent interface (Ticket::Type needs to be activated).' =>
+            '',
+        'Sets the service in the NoteToLinkedTicket screen of the agent interface (Ticket::Service needs to be activated).' =>
+            '',
+        'Sets the queue in the NoteToLinkedTicket screen of a zoomed ticket in the agent interface.' =>
+            '',
+        'Sets the ticket owner in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets the responsible agent of the ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Sets the state of a ticket in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Defines the next state of a ticket after adding a note in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Shows the ticket priority options in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Defines the default ticket priority in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
+        'Shows the title field in the NoteToLinkedTicket screen of the agent interface.' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '유효하지 않은 일시적',
@@ -8606,6 +8679,7 @@ Thanks for your help!
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             '작은 형식의 티켓 개요를 가질 수 있습니다 (CustomerInfo => 1 - 고객 정보 표시).',
         'Always show RichText if available' => '가능한 경우 리치 텍스트 표시',
+        'An additional screen to add notes to a linked ticket.' => '',
         'Answer' => '응답',
         'Appointment Calendar overview page.' => '약속 일정 개요 페이지.',
         'Appointment Notifications' => '약속 알림',

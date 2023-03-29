@@ -108,7 +108,7 @@ Then you can use the full API of L<Selenium::Remote::Driver> on this object.
         },
     );
 
-    my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
+    my $SeleniumObject = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 =cut
 
@@ -490,7 +490,7 @@ Exactly one condition (JavaScript or WindowCount) must be specified.
     my $Success = $SeleniumObject->WaitFor(
         AlertPresent   => 1,                                 # Wait until an alert, confirm or prompt dialog is present
         Callback       => sub { ... }                        # Wait until function returns true
-        ElementExists  => 'xpath-selector'                   # Wait until an element is present
+        ElementExists  => 'xpath-selector',                  # Wait until an element is present
         ElementExists  => ['css-selector', 'css'],
         ElementMissing => 'xpath-selector',                  # Wait until an element is not present
         ElementMissing => ['css-selector', 'css'],

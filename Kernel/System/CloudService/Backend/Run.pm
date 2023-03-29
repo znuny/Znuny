@@ -444,7 +444,7 @@ Returns:
 
     $OperationResult {
         Success      => 1,
-        ErrorMessage => 'a message'         # optional
+        ErrorMessage => 'a message',        # optional
         InstanceName => 'AnyName',
         Operation    => "Test",
         Data         => {
